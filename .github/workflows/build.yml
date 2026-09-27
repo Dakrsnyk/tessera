@@ -1,0 +1,119 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Show toolchain
+        run: xcodebuild -version
+
+      - name: Build for the simulator
+        id: sim
+        run: |
+          set -o pipefail
+          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/sim CODE_SIGNING_ALLOWED=NO build 2>&1 | tee sim.log | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" sim.log
+
+      - name: Build for iPhone (unsigned)
+        id: device
+        if: steps.sim.outcome == 'success'
+        run: |
+          set -o pipefail
+          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            -sdk iphoneos -destination 'generic/platform=iOS' \
+            -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build 2>&1 | tee device.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" device.log
+
+      - name: Package IPA
+        if: steps.device.outcome == 'success'
+        run: |
+          APP=build/device/Build/Products/Debug-iphoneos/Tessera.app
+          # Ad-hoc signature carrying the entitlements, so sideloading tools keep the App Group.
+          codesign --force --sign - --entitlements Config/TesseraWidgets.entitlements "$APP/PlugIns/TesseraWidgets.appex"
+          codesign --force --sign - --entitlements Config/Tessera.entitlements "$APP"
+          mkdir -p Payload
+          cp -R "$APP" Payload/
+          zip -qry Tessera.ipa Payload
+          ls -lh Tessera.ipa
+
+      - name: Screenshots
+        id: shots
+        if: steps.sim.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -x
+          APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          DEVICE=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for k,v in d.items() if 'iOS' in k for x in v if x['name'].startswith('iPhone 16 Pro') or x['name'].startswith('iPhone 16')))")
+          xcrun simctl boot "$DEVICE"
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
+          xcrun simctl install "$DEVICE" "$APP"
+          mkdir -p shots
+          for screen in onboarding home explore editor mywidgets paywall settings gallery-small gallery-medium gallery-large gallery-lock content; do
+            for scheme in light dark; do
+              xcrun simctl ui "$DEVICE" appearance $scheme
+              xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera || true
+              xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $screen
+              sleep 4
+              xcrun simctl io "$DEVICE" screenshot "shots/$screen-$scheme.png"
+            done
+          done
+
+      - name: Publish build report
+        if: always()
+        run: |
+          mkdir -p report
+          {
+            echo "run: ${{ github.run_number }}"
+            echo "commit: ${{ github.sha }}"
+            echo "simulator: ${{ steps.sim.outcome }}"
+            echo "device: ${{ steps.device.outcome }}"
+            echo "screenshots: ${{ steps.shots.outcome }}"
+            echo "---- errors ----"
+            grep -hE "error:" sim.log device.log 2>/dev/null | sort -u | head -200 || true
+            echo "---- last lines ----"
+            tail -40 sim.log 2>/dev/null || true
+          } > report/report.txt
+          [ -d shots ] && cp shots/*.png report/ 2>/dev/null || true
+          [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
+          cd report
+          git init -q
+          git checkout -q -b ci-report
+          git config user.name "ci"
+          git config user.email "ci@users.noreply.github.com"
+          git add -A
+          git commit -qm "Build ${{ github.run_number }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-report
+
+      - name: Publish test build
+        if: steps.device.outcome == 'success'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Version de test ${{ github.run_number }}
+          make_latest: true
+          body: |
+            Version de test de Tessera (build ${{ github.run_number }}).
+            Installe `Tessera.ipa` sur ton iPhone avec Sideloadly (voir le README).
+          files: Tessera.ipa
