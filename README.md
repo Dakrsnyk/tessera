@@ -109,11 +109,15 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Store** : 8 packs installés d'une touche (Bien démarrer, Étudiant, Sportif, Entrepreneur, Budget serré, Voyageur, Investisseur, Minimal).
 
+**Écrans d'accueil** (Store) : 12 écrans complets dessinés comme sur un vrai iPhone : fond d'écran (dessiné par l'app), vrais widgets Tessera, icônes et dock assortis, et l'écran verrouillé qui va avec. Crème, Aurore, Graphite, Néon, Topographie, Minuit, Études, Jade, Dune, Pastel, Bureau, Corail (4 gratuits). On les filtre (#minimal, #sombre, #pastel, #sport…), on les met en favoris, on ajoute tous leurs widgets d'une touche et on enregistre le fond d'écran dans Photos.
+
+**Styles de l'app** : 10 ambiances pour l'app elle-même (Tessera, Océan, Corail, Lavande, Sable, Graphite, Forêt, Rose, Minuit, Néon), chacune en clair, en sombre ou automatique. Choisies au premier lancement, modifiables dans Réglages › Apparence. Les widgets gardent leurs propres styles.
+
 **Résumés intelligents** : calculés sur l'iPhone à partir des données de l'utilisateur. Avec Apple Intelligence (iOS 26), le texte est reformulé ; chaque nombre de la reformulation est vérifié par rapport aux données, sinon le texte calculé est gardé. Aucune donnée n'est inventée.
 
 **Sources de données** : Open Food Facts (ODbL) et une base intégrée d'aliments courants, Open-Meteo, CoinGecko, SEC EDGAR (chiffres officiels, domaine public), Frankfurter (taux de la BCE), Finnhub (cours des actions, clé facultative). Les écrans de placements sont informatifs et ne donnent aucun conseil financier ; les valeurs nutritionnelles sont indicatives.
 
-**12 styles** (4 gratuits, 8 Premium), couleurs d'accent, fonds (couleur, dégradé, photo), polices, alignement et affichage des détails.
+**12 styles de widgets** (4 gratuits, 8 Premium), couleurs d'accent, fonds (couleur, dégradé, photo), polices, alignement et affichage des détails.
 
 **Gratuit** : 30 widgets, 4 styles, 8 couleurs, 5 widgets enregistrés, 3 habitudes.
 **Premium** : tout, sans limite. Mensuel, annuel (essai 7 jours) ou à vie.
