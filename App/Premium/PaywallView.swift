@@ -18,12 +18,12 @@ struct PaywallView: View {
                     hero
                     showcase
                     perks
-                    comparison
                     if model.isPremium {
                         activeState
                     } else {
                         plans
                     }
+                    comparison
                     legal
                 }
                 .padding(.horizontal, 20)

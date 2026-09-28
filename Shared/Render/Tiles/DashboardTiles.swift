@@ -135,7 +135,7 @@ enum DashboardTiles {
             tile.caption = open.first.map { "Ensuite : \($0.title)" } ?? "Rien d'urgent, profites-en"
             tile.rows = [eventRow(context), workoutRow(context), caloriesRow(context)].compactMap { $0 } + [waterRow(context)]
             tile.buttons = [
-                TileButton(title: "Focus 25", symbol: "timer", action: .startFocus(25), isProminent: true),
+                TileButton(title: "25 min", symbol: "timer", action: .startFocus(25), isProminent: true),
                 TileButton(title: "Eau", symbol: "drop.fill", action: .addWater),
             ]
             return tile

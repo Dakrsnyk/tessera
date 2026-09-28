@@ -83,6 +83,17 @@ enum CarTiles {
         } else {
             tile.caption = "au compteur"
         }
+        var rows: [TileRow] = []
+        if let month = CarMath.kmThisMonth(state, at: now) {
+            rows.append(TileRow(id: "month", title: "Ce mois-ci", value: "\(TF.int(month)) km", symbol: "calendar"))
+        }
+        if let service = CarMath.serviceStatus(state, at: now).first, let left = service.kmLeft {
+            rows.append(TileRow(id: "service", title: service.item.name, value: "dans \(TF.int(left)) km", symbol: "wrench.and.screwdriver"))
+        }
+        if let consumption = CarMath.consumption(state) {
+            rows.append(TileRow(id: "fuel", title: "Consommation", value: "\(TF.decimal(consumption, 1)) L/100", symbol: "fuelpump"))
+        }
+        tile.rows = rows
         tile.inline = "\(TF.int(odometer)) km"
         return tile
     }
@@ -125,7 +136,7 @@ enum CarTiles {
         tile.caption = next.title
         tile.rows = upcoming.prefix(5).map { item -> TileRow in
             let left = DateMath.daysBetween(now, item.date)
-            return TileRow(id: item.id.uuidString, title: item.title, value: "\(left) j", detail: Fmt.format(item.date, template: "dMMMMyyyy"), symbol: item.symbol, isHighlighted: left <= 14)
+            return TileRow(id: item.id.uuidString, title: item.title, value: "\(left) j", detail: Fmt.firstOfMonth(Fmt.format(item.date, template: "dMMMMyyyy"), item.date), symbol: item.symbol, isHighlighted: left <= 14)
         }
         tile.compactRows = true
         tile.inline = "\(next.title) dans \(days) j"

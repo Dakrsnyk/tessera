@@ -18,6 +18,7 @@ enum ScreenshotMode {
     static func apply(model: AppModel, router: Router) -> Action {
         guard let screen else { return .none }
         seed(model)
+        model.seedDemoCaches(SampleData.domains(now: Date()))
         // The offer is captured as a free user sees it; every other screen with Premium unlocked.
         model.setDebugPremium(screen != "paywall")
         switch screen {
@@ -71,7 +72,6 @@ enum ScreenshotMode {
         model.update(\.productivity) { $0 = data.productivity }
         model.update(\.life) { $0 = data.life }
         model.update(\.following) { $0 = data.following }
-        model.seedDemoCaches(data)
     }
 }
 

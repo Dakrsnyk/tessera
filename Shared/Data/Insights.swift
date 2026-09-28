@@ -225,7 +225,7 @@ enum InsightEngine {
         let eaten = NutritionMath.totals(nutrition, on: now).kcal
         if eaten > 0 {
             let left = kcal(nutrition.goals.kcal - eaten)
-            facts.append("Calories restantes : \(left)")
+            facts.append("Calories restantes : \(left) kcal")
             parts.append("\(left) kcal restantes")
         }
         let text: String

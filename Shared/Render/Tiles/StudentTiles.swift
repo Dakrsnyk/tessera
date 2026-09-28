@@ -30,12 +30,18 @@ enum StudentTiles {
         let course = state.course(next.slot.courseID)
         let ongoing = next.start <= now
         var tile = Tile(title: ongoing ? "Cours actuel" : "Prochain cours", symbol: "book.closed")
-        tile.value = ongoing ? "En cours" : TF.time(next.start, context)
-        tile.caption = course?.name ?? "Cours"
         var detail: [String] = []
         if !next.slot.room.isEmpty { detail.append("Salle \(next.slot.room)") }
-        detail.append(ongoing ? "fin à \(TF.time(next.end, context))" : TF.relativeTime(next.start, from: now))
-        tile.detail = detail.joined(separator: " · ")
+        if ongoing {
+            // The course in progress is the headline; when it ends is the caption.
+            tile.value = course?.name ?? "Cours"
+            tile.caption = "En cours · fin à \(TF.time(next.end, context))"
+        } else {
+            tile.value = TF.time(next.start, context)
+            tile.caption = course?.name ?? "Cours"
+            detail.append(TF.relativeTime(next.start, from: now))
+        }
+        tile.detail = detail.isEmpty ? nil : detail.joined(separator: " · ")
         if ongoing {
             tile.visual = .timer(next.start, next.end)
         }

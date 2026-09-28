@@ -379,7 +379,7 @@ enum SampleData {
         state.deadlines = [
             CarDeadline(title: "Pneus d'hiver", date: winter < now ? Holidays.make(year + 1, 12, 1) : winter, symbol: "snowflake"),
             CarDeadline(title: "Immatriculation", date: day(64, 0, from: now), symbol: "doc.text.fill"),
-            CarDeadline(title: "Renouvellement assurance", date: day(142, 0, from: now), symbol: "shield.fill"),
+            CarDeadline(title: "Assurance auto", date: day(142, 0, from: now), symbol: "shield.fill"),
         ]
         state.insuranceMonthly = 95
         state.loanMonthly = 320

@@ -42,6 +42,7 @@ struct TasksWidgetView: View {
                                 .foregroundStyle(task.isDone ? s.secondary : s.primary)
                                 .strikethrough(task.isDone, color: s.secondary)
                                 .lineLimit(1)
+                                .minimumScaleFactor(0.8)
                             Spacer(minLength: 0)
                         }
                         .contentShape(Rectangle())

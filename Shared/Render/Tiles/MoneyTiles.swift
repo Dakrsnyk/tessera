@@ -77,7 +77,7 @@ enum MoneyTiles {
         tile.caption = "\(next.bill.name) · \(TF.relativeDay(next.due, from: now))"
         tile.detail = "30 prochains jours : \(TF.money(total, currency))"
         tile.rows = upcoming.prefix(6).map { item in
-            TileRow(id: item.bill.id.uuidString, title: item.bill.name, value: TF.money(item.bill.amount, currency, decimals: 2), detail: "\(Fmt.shortDay(item.due)) · \(TF.relativeDay(item.due, from: now))", symbol: item.bill.symbol, isHighlighted: item.days <= 2)
+            TileRow(id: item.bill.id.uuidString, title: item.bill.name, value: TF.money(item.bill.amount, currency, decimals: 2), detail: item.days <= 7 ? TF.relativeDay(item.due, from: now).capitalizedFirst : Fmt.shortDay(item.due), symbol: item.bill.symbol, isHighlighted: item.days <= 2)
         }
         tile.compactRows = true
         tile.inline = "\(next.bill.name) \(TF.relativeDay(next.due, from: now))"

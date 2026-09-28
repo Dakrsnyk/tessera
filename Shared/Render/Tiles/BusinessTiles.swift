@@ -84,7 +84,7 @@ enum BusinessTiles {
         tile.caption = k.averageBasket.map { "panier moyen \(TF.money($0, currency, decimals: 2))" } ?? "aucune commande ce mois-ci"
         tile.rows = [
             TileRow(id: "orders", title: "Commandes", value: Fmt.number(k.orders), symbol: "bag"),
-            TileRow(id: "basket", title: "Panier moyen", value: k.averageBasket.map { TF.money($0, currency, decimals: 2) } ?? "—", symbol: "cart"),
+            TileRow(id: "basket", title: "Panier moyen", value: k.averageBasket.map { TF.money($0, currency) } ?? "—", symbol: "cart"),
             TileRow(id: "customers", title: "Nouveaux clients", value: Fmt.number(k.newCustomers), symbol: "person.badge.plus"),
             TileRow(id: "conversion", title: "Conversion", value: k.conversion.map { Fmt.percent($0, decimals: 1) } ?? "—", symbol: "arrow.triangle.turn.up.right.diamond"),
         ]
@@ -116,7 +116,7 @@ enum BusinessTiles {
         var tile = Tile(title: "Ventes du jour", symbol: "cart")
         tile.value = TF.money(values.today, currency)
         let weekday = Fmt.weekday(now).lowercased()
-        tile.caption = "contre \(TF.money(values.lastWeek, currency)) \(weekday) dernier à la même heure"
+        tile.caption = "contre \(TF.money(values.lastWeek, currency)) \(weekday) dernier, même heure"
         if let change = Stats.change(from: values.lastWeek, to: values.today) {
             tile.detail = Fmt.signedPercent(change * 100)
             tile.trend = change >= 0

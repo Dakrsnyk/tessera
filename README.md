@@ -16,6 +16,7 @@ Chaque modification poussée sur `main` est compilée automatiquement sur un Mac
 | `[check]` | Vérifications statiques et compilation simulateur seulement (le plus rapide) |
 | `[place]` | Compilation simulateur et test d'ajout des widgets à l'écran d'accueil et à l'écran verrouillé |
 | `[qa]` | Tous les tests automatiques, puis les captures d'écran de toutes les pages et de la galerie de widgets |
+| `[release]` | En plus : compilation dans la configuration App Store et vérification que le déblocage de test en est absent |
 
 Le rapport (erreurs, résultats des tests, captures) est publié sur la branche `ci-report`.
 Le fichier à installer est publié dans **Releases** (colonne de droite du dépôt) : `Tessera.ipa`.
@@ -82,22 +83,39 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 ## 4. Ce que contient l'app
 
-**15 widgets réels** (WidgetKit), chacun en plusieurs tailles, certains aussi sur l'écran verrouillé :
+**Des espaces (mini-apps)** qui alimentent les widgets : Productivité, Habitudes, Nutrition, Fitness, Budget, Placements, Mon entreprise, Sociétés cotées, Études, Voyage, Auto, Ma vie. Ce qu'on y note s'affiche aussitôt dans les widgets.
+
+**103 widgets** (30 gratuits, 73 Premium), chacun en plusieurs tailles, beaucoup aussi sur l'écran verrouillé. Dans la galerie d'iOS, ils apparaissent sous forme de 15 widgets d'origine et de 15 widgets thématiques (Nutrition, Fitness, Budget…). On choisit ensuite le widget précis avec « Modifier le widget ».
 
 | Catégorie | Gratuits | Premium |
 |---|---|---|
-| Temps | Horloge, Calendrier, Progression (jour/semaine/mois/année), Compte à rebours (avant/depuis) | Fuseaux horaires, L'année en points |
-| Productivité | Tâches (cochables depuis l'écran d'accueil), Habitudes (validables d'une touche), Note | Focus (minuteur en direct), À venir (calendrier) |
-| Météo | Météo (actuelle, heure par heure, 5 jours) | |
-| Finances | | Crypto (cours + courbe 7 jours), Flux d'argent (revenus/dépenses au fil du jour) |
-| Bien-être | Hydratation (+1 verre depuis le widget) | |
+| Temps | Horloge, Calendrier, Progression, Compte à rebours, Anniversaire, Ma semaine, Prochain jour férié, Phase de lune | Fuseaux horaires, L'année en points, Mon âge |
+| Météo | Météo, Soleil | Pluie, Vent et UV, Météo détaillée, Semaine météo |
+| Productivité | Tâches, Note, Top 3 du jour, Compteur | Focus, À venir, Projet, Échéance, Travail profond |
+| Habitudes | Habitudes, Hydratation, Série | Semaine d'habitudes, Taux de réussite |
+| Nutrition | Calories restantes | Macros, Protéines restantes, Repas du jour, Semaine nutrition, Série de suivi, Ajout rapide, Prochain repas |
+| Fitness | Séance du jour, Régularité | Prochaine série, Repos, Volume, Records, Calories brûlées, Mois d'entraînement |
+| Budget | Reste du mois, Objectif d'épargne | Flux d'argent, Dépenses par catégorie, Factures, Valeur nette, Abonnements, Dépense rapide |
+| Placements | Liste de suivi | Crypto, Portefeuille, Répartition, Plus forte variation, Marché crypto |
+| Mon entreprise | Objectif du mois | Ventes sur 30 jours, Bénéfice, Indicateurs, MRR et ARR, Ventes du jour, Tableau de bord |
+| Sociétés cotées | | Fiche entreprise, Revenus trimestriels, Action, Comparateur |
+| Études | Prochain cours, Prochain examen, Session | Devoirs, Moyenne, Fiche de révision, Heures d'étude, Horaire du jour |
+| Voyage | Départ en voyage, Heure sur place | Vol, Hôtel, Météo à destination, Devise, Avancement, Prochaine activité |
+| Auto | Prochain entretien | Coût, Kilométrage, Carburant, Échéances |
+| Tableaux de bord | | Ma journée, Maintenant, Ce matin, Fitness, Argent, Études, 4 résumés « intelligents » |
 
-**12 styles** (4 gratuits : Minimal, Clair, Sombre, Monochrome ; 8 Premium : Verre, Aurore, Élégant, Digital, Rétro, Futuriste, Typo, Couleur), couleurs d'accent, fonds (couleur, dégradé, photo), polices, alignement et affichage des détails.
+**Interactif depuis l'écran d'accueil** : cocher une tâche ou une priorité, valider une habitude, ajouter un verre d'eau, noter un aliment favori ou une dépense rapide, valider une série et passer le repos, compter (+1/−1), lancer un Focus, réviser une fiche.
 
-**Fonctionnement** : on crée un design dans l'éditeur (aperçu en direct, rendu identique au vrai widget), puis on l'ajoute à l'écran d'accueil et on le choisit via « Modifier le widget ».
+**Store** : 8 packs installés d'une touche (Bien démarrer, Étudiant, Sportif, Entrepreneur, Budget serré, Voyageur, Investisseur, Minimal).
 
-**Gratuit** : 9 widgets, 4 styles, 8 couleurs, 5 widgets enregistrés, 3 habitudes.
-**Premium** : tout, sans limite. Mensuel, annuel (essai 7 jours) ou à vie. Un design Premium peut être essayé dans l'éditeur ; il est demandé à l'enregistrement.
+**Résumés intelligents** : calculés sur l'iPhone à partir des données de l'utilisateur. Avec Apple Intelligence (iOS 26), le texte est reformulé ; chaque nombre de la reformulation est vérifié par rapport aux données, sinon le texte calculé est gardé. Aucune donnée n'est inventée.
+
+**Sources de données** : Open Food Facts (ODbL) et une base intégrée d'aliments courants, Open-Meteo, CoinGecko, SEC EDGAR (chiffres officiels, domaine public), Frankfurter (taux de la BCE), Finnhub (cours des actions, clé facultative). Les écrans de placements sont informatifs et ne donnent aucun conseil financier ; les valeurs nutritionnelles sont indicatives.
+
+**12 styles** (4 gratuits, 8 Premium), couleurs d'accent, fonds (couleur, dégradé, photo), polices, alignement et affichage des détails.
+
+**Gratuit** : 30 widgets, 4 styles, 8 couleurs, 5 widgets enregistrés, 3 habitudes.
+**Premium** : tout, sans limite. Mensuel, annuel (essai 7 jours) ou à vie.
 
 ### Architecture
 
@@ -127,8 +145,13 @@ Config/    Info.plist, entitlements, configuration StoreKit locale
 - [ ] Aucune permission demandée au lancement
 
 **Navigation**
-- [ ] Onglets Accueil, Explorer, Mes widgets, Réglages
+- [ ] Onglets Accueil, Espaces, Store, Mes widgets, Réglages
 - [ ] Recherche (loupe de l'accueil → Explorer), filtres Gratuits/Premium, catégories, styles
+
+**Espaces (V2)**
+- [ ] Chaque espace : ajouter, modifier, supprimer des éléments ; les widgets de l'espace changent aussitôt
+- [ ] Nutrition : recherche (base intégrée et Open Food Facts), scan d'un code-barres, aliment personnalisé, objectifs
+- [ ] Store : installer un pack, puis l'ajouter depuis « Mes widgets »
 
 **Éditeur**
 - [ ] L'aperçu change en direct (style, couleur, fond, police, titre, détails, alignement)

@@ -204,10 +204,15 @@ struct TileView: View {
         }
     }
 
+    private var mediumRowLimit: Int {
+        if !tile.buttons.isEmpty { return 2 }
+        return tile.rows.contains { $0.detail != nil && $0.progress != nil } ? 3 : 4
+    }
+
     @ViewBuilder private var mediumPanel: some View {
         if !tile.rows.isEmpty {
             VStack(alignment: .leading, spacing: 0) {
-                TileRowsView(rows: Array(tile.rows.prefix(tile.buttons.isEmpty ? 4 : 2)), context: context, compact: false)
+                TileRowsView(rows: Array(tile.rows.prefix(mediumRowLimit)), context: context, compact: false)
                 Spacer(minLength: 0)
                 if !tile.buttons.isEmpty {
                     TileButtonsRow(buttons: Array(tile.buttons.prefix(2)), context: context)
@@ -307,8 +312,8 @@ struct TileRowsView: View {
                         .font(s.text(compact ? 12 : 13, row.isHighlighted ? .semibold : .regular))
                         .foregroundStyle(row.isDone == true ? s.secondary : s.primary)
                         .strikethrough(row.isDone == true, color: s.secondary)
-                        // Short lists in small widgets have room for a second line.
-                        .lineLimit(compact && rows.count <= 3 ? 2 : 1)
+                        // Short lists have room for a second line.
+                        .lineLimit(rows.count <= 3 ? 2 : 1)
                         .minimumScaleFactor(0.8)
                     if let detail = row.detail, !compact {
                         Text(detail)
@@ -378,19 +383,23 @@ struct TileButtonLabel: View {
     let button: TileButton
     let style: ResolvedStyle
     var expands = true
+    var iconOnly = false
 
     var body: some View {
         HStack(spacing: 4) {
             Image(systemName: button.symbol)
                 .font(.system(size: 11, weight: .bold))
-            Text(button.title)
-                .font(style.text(12, .semibold))
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
+            if !iconOnly {
+                Text(button.title)
+                    .font(style.text(12, .semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
         }
         .foregroundStyle(button.isProminent ? style.onAccent : style.primary)
-        .padding(.horizontal, 8)
+        .padding(.horizontal, iconOnly ? 11 : 8)
         .frame(maxWidth: expands ? .infinity : nil, minHeight: 30)
+        .accessibilityLabel(Text(button.title))
         .background(button.isProminent ? style.accent : style.panel, in: Capsule())
     }
 }
@@ -399,11 +408,15 @@ struct TileButtonsRow: View {
     let buttons: [TileButton]
     let context: RenderContext
 
+    /// Two buttons don't fit side by side with text in a small widget.
+    private var isTight: Bool { context.isSmall && buttons.count > 1 }
+
     var body: some View {
         HStack(spacing: 6) {
             ForEach(Array(buttons.enumerated()), id: \.offset) { pair in
+                let iconOnly = isTight && !pair.element.isProminent
                 TileActionButton(action: pair.element.action, isEnabled: context.isInteractive) {
-                    TileButtonLabel(button: pair.element, style: context.style)
+                    TileButtonLabel(button: pair.element, style: context.style, expands: !iconOnly, iconOnly: iconOnly)
                 }
             }
         }
@@ -649,27 +662,27 @@ struct HabitGrid: View {
     var body: some View {
         let symbols = DateMath.weekdaySymbols()
         VStack(spacing: 6) {
-            HStack(spacing: 4) {
+            HStack(spacing: 3) {
                 Text("").frame(maxWidth: .infinity, alignment: .leading)
                 ForEach(0..<7, id: \.self) { index in
                     Text(index < symbols.count ? symbols[index] : "")
                         .font(style.text(9, .medium))
                         .foregroundStyle(style.secondary)
-                        .frame(width: 16)
+                        .frame(width: 13)
                 }
             }
             ForEach(Array(rows.prefix(6).enumerated()), id: \.offset) { pair in
                 let color = Color(hex: colors[safe: pair.offset] ?? "7FA33A")
-                HStack(spacing: 4) {
+                HStack(spacing: 3) {
                     Text(names[safe: pair.offset] ?? "")
                         .font(style.text(11))
                         .foregroundStyle(style.primary)
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     ForEach(Array(pair.element.prefix(7).enumerated()), id: \.offset) { day in
-                        RoundedRectangle(cornerRadius: 4, style: .continuous)
+                        RoundedRectangle(cornerRadius: 3.5, style: .continuous)
                             .fill(day.element == true ? color : style.track.opacity(day.element == nil ? 0.45 : 1))
-                            .frame(width: 16, height: 16)
+                            .frame(width: 13, height: 13)
                     }
                 }
             }
@@ -754,7 +767,10 @@ struct TileAccessoryView: View {
                 Image(systemName: tile.symbol)
             } currentValueLabel: {
                 Text(tile.shortValue ?? tile.value)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .padding(.horizontal, 3)
             }
             .gaugeStyle(.accessoryCircular)
             .widgetAccentable()
@@ -780,6 +796,7 @@ struct TileAccessoryView: View {
             Label(tile.title, systemImage: tile.symbol)
                 .font(.headline)
                 .lineLimit(1)
+                .minimumScaleFactor(0.75)
                 .widgetAccentable()
             if let timer = tile.timer {
                 Text(timerInterval: timer, countsDown: true)

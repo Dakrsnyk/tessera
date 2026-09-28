@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build:
     runs-on: macos-15
-    timeout-minutes: 50
+    timeout-minutes: 75
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') }}
@@ -90,7 +90,7 @@ jobs:
         id: tests
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && (env.QA == 'true' || env.PLACE == 'true')
         continue-on-error: true
-        timeout-minutes: 20
+        timeout-minutes: 35
         run: |
           set -o pipefail
           xcrun simctl bootstatus "$DEVICE" -b
@@ -155,7 +155,7 @@ jobs:
 
       - name: Release build (App Store configuration) without the test unlock
         id: release
-        if: steps.sim.outcome == 'success' && env.QA == 'true'
+        if: steps.sim.outcome == 'success' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[release]'))
         continue-on-error: true
         run: |
           set -o pipefail

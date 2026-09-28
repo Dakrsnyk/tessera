@@ -93,7 +93,7 @@ enum FitnessTiles {
             }
             tile.buttons = [
                 TileButton(title: "Passer", symbol: "forward.fill", action: .skipRest),
-                TileButton(title: "Série faite", symbol: "checkmark", action: .completeSet, isProminent: true),
+                TileButton(title: "Fait", symbol: "checkmark", action: .completeSet, isProminent: true),
             ]
             tile.inline = "Repos jusqu'à \(Fmt.time(rest, uses24Hour: true))"
         } else {
@@ -121,7 +121,7 @@ enum FitnessTiles {
         tile.unit = "kg"
         tile.caption = "soulevés cette semaine"
         if let change = Stats.change(from: lastWeek, to: total) {
-            tile.detail = "À ce jour la semaine dernière : \(TF.int(lastWeek)) kg (\(Fmt.signedPercent(change * 100)))"
+            tile.detail = "Sem. dernière : \(TF.int(lastWeek)) kg (\(Fmt.signedPercent(change * 100, decimals: 0)))"
         }
         tile.visual = .bars(days, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now))
         tile.inline = "\(TF.int(total)) kg cette semaine"

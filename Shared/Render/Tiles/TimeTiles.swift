@@ -104,7 +104,7 @@ enum TimeTiles {
         tile.value = Fmt.percent(illumination)
         tile.unit = "éclairée"
         tile.caption = MoonPhase.name(at: now)
-        tile.detail = "Prochaine pleine lune \(TF.relativeDay(full, from: now)) · \(Fmt.shortDay(full))"
+        tile.detail = "Pleine lune \(TF.relativeDay(full, from: now))"
         tile.visual = .symbol(MoonPhase.symbol(at: now))
         tile.rows = [
             TileRow(id: "full", title: "Pleine lune", value: Fmt.shortDay(full), symbol: "moonphase.full.moon"),

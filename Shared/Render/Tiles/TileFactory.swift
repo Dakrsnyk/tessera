@@ -86,7 +86,8 @@ enum TF {
         let seconds = date.timeIntervalSince(now)
         if seconds <= 0 { return "maintenant" }
         if seconds < 3600 { return "dans \(max(1, Int(seconds / 60))) min" }
-        if seconds < 86_400 { return "dans \(Fmt.hours(seconds / 3600))" }
+        // Non-breaking spaces keep "4 h 18" on one line.
+        if seconds < 86_400 { return "dans \(Fmt.hours(seconds / 3600))".replacingOccurrences(of: " ", with: "\u{00A0}") }
         return relativeDay(date, from: now)
     }
 

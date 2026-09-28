@@ -49,7 +49,7 @@ enum Fmt {
     }
 
     /// French writes the first day of a month "1er".
-    private static func firstOfMonth(_ text: String, _ date: Date) -> String {
+    static func firstOfMonth(_ text: String, _ date: Date) -> String {
         guard DateMath.calendar.component(.day, from: date) == 1 else { return text }
         return text.replacingOccurrences(of: " 1 ", with: " 1er ")
     }
@@ -96,14 +96,15 @@ enum Fmt {
         let formatter = NumberFormatter()
         formatter.locale = locale
         formatter.numberStyle = .percent
+        formatter.roundingMode = .halfUp
         formatter.minimumFractionDigits = decimals
         formatter.maximumFractionDigits = decimals
         return formatter.string(from: NSNumber(value: fraction)) ?? "\(Int(fraction * 100)) %"
     }
 
-    static func signedPercent(_ value: Double) -> String {
+    static func signedPercent(_ value: Double, decimals: Int = 1) -> String {
         let sign = value < 0 ? "−" : "+"
-        return sign + String(format: "%.1f", abs(value)).replacingOccurrences(of: ".", with: ",") + " %"
+        return sign + String(format: "%.\(decimals)f", abs(value)).replacingOccurrences(of: ".", with: ",") + " %"
     }
 
     static func number(_ value: Int) -> String {
