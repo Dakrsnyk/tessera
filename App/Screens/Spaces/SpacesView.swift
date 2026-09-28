@@ -142,12 +142,17 @@ struct SpaceView: View {
 
     var body: some View {
         List {
+            // The strip lives in the header, which isn't clipped like a list row,
+            // so the widgets scroll all the way to the screen edges.
             Section {
-                widgetStrip
-                    .listRowInsets(EdgeInsets(top: 12, leading: 0, bottom: 12, trailing: 0))
-                    .listRowBackground(Color.clear)
             } header: {
-                Text("Widgets de l'espace")
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Widgets de l'espace")
+                    widgetStrip
+                        .padding(.horizontal, -20)
+                        .foregroundStyle(Color.primary)
+                        .textCase(nil)
+                }
             } footer: {
                 Text("Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.")
             }
