@@ -156,6 +156,10 @@ jobs:
             grep -hE "error:" sim.log device.log 2>/dev/null | sort -u | head -200 || true
             echo "---- tests ----"
             grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -120 || true
+            echo "---- widget extension bundle ----"
+            ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex 2>/dev/null || true
+            ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex/Metadata.appintents 2>/dev/null || true
+            grep -E "ExtractAppIntentsMetadata \(in target" sim.log 2>/dev/null | head -5 || true
             echo "---- last lines ----"
             tail -40 sim.log 2>/dev/null || true
           } > report/report.txt
