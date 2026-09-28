@@ -367,8 +367,8 @@ struct MarketingCustomize: View {
             title: "À ton image.",
             subtitle: "Styles, couleurs, photos, polices.",
             floating: [
-                (MKWidget(.caloriesLeft, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 92, y: 868)),
-                (MKWidget(.caloriesLeft, .systemSmall, .dark), 150, CGPoint(x: 348, y: 868)),
+                (MKWidget(.caloriesLeft, .systemSmall, .retro, "F2A33A"), 128, CGPoint(x: 71, y: 432)),
+                (MKWidget(.caloriesLeft, .systemSmall, .dark), 128, CGPoint(x: 369, y: 432)),
             ]
         )
     }
@@ -382,7 +382,7 @@ struct MarketingNutrition: View {
             title: "Nutrition,\nsimplifiée.",
             subtitle: "Scanne. Note. Suis tes macros.",
             floating: [
-                (MKWidget(.caloriesLeft, .systemSmall, .aurora), 150, CGPoint(x: 92, y: 868)),
+                (MKWidget(.caloriesLeft, .systemSmall, .aurora), 150, CGPoint(x: 348, y: 868)),
             ]
         )
     }
@@ -410,7 +410,7 @@ struct MarketingMoney: View {
             title: "Tes finances.\nTon entreprise.",
             subtitle: "Budget, ventes, bénéfice, MRR.",
             floating: [
-                (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 92, y: 868)),
+                (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 348, y: 868)),
             ]
         )
     }
