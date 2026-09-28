@@ -62,6 +62,12 @@ struct RootView: View {
                 .sheet(isPresented: $router.isAddGuidePresented) {
                     AddToHomeScreenGuide(designName: router.lastSavedName)
                 }
+                .sheet(isPresented: $router.isProfilePresented) {
+                    // Rebuilt when the style changes, like the tabs.
+                    ProfileView()
+                        .id(model.settings.appStyle)
+                        .appStyle(model.settings)
+                }
                 .fullScreenCover(isPresented: $showsOnboarding) {
                     OnboardingView {
                         model.completeOnboarding()
@@ -151,10 +157,6 @@ struct MainTabView: View {
                 .id(style)
                 .tabItem { Label("Mes widgets", systemImage: "rectangle.stack") }
                 .tag(Router.Tab.mine)
-            SettingsView()
-                .id(style)
-                .tabItem { Label("Réglages", systemImage: "gearshape") }
-                .tag(Router.Tab.settings)
         }
     }
 }

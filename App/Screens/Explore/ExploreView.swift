@@ -111,10 +111,23 @@ struct ExploreView: View {
 
     // MARK: Shelves (default view)
 
+    /// The Store front: from complete screens to single widgets, every size, style and color.
     private var shelves: some View {
-        VStack(alignment: .leading, spacing: 30) {
+        LazyVStack(alignment: .leading, spacing: 32) {
+            featuresCarousel
             setupsShelf
+            showcaseShelf(title: "Widgets moyens", subtitle: "Deux fois plus de place, pour tout voir d'un coup d'œil.", items: StoreShowcase.mediums)
             packsShelf
+            ForEach(StoreShowcase.collectionsTop) { collection in
+                showcaseShelf(title: collection.title, subtitle: collection.subtitle, symbol: collection.symbol, items: collection.items)
+            }
+            showcaseShelf(title: "Un widget, 12 styles", subtitle: "Le même compte à rebours, dans chaque style.", items: StoreShowcase.allStyles)
+            showcaseShelf(title: "Grands formats", subtitle: "Ta semaine, ton mois ou ta journée entière.", items: StoreShowcase.larges, height: 250)
+            ForEach(StoreShowcase.collectionsBottom) { collection in
+                showcaseShelf(title: collection.title, subtitle: collection.subtitle, symbol: collection.symbol, items: collection.items)
+            }
+            lockScreenShelf
+            showcaseShelf(title: "Toutes les couleurs", subtitle: "Choisis la tienne, ou n'importe quelle autre avec Premium.", items: StoreShowcase.allColors)
             shelf(title: "Nouveautés", templates: TemplateCatalog.newest)
             stylesShelf
             ForEach(WidgetCategory.allCases) { category in
@@ -126,14 +139,94 @@ struct ExploreView: View {
         }
     }
 
+    private func shelfHeader(title: String, subtitle: String?, symbol: String? = nil, seeAll: (() -> Void)? = nil) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(alignment: .firstTextBaseline, spacing: 7) {
+                if let symbol {
+                    Image(systemName: symbol)
+                        .font(.headline)
+                        .foregroundStyle(Color.accentColor)
+                }
+                SectionHeader(title: title, actionTitle: seeAll == nil ? nil : "Tout voir", action: seeAll)
+            }
+            if let subtitle {
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.horizontal, 20)
+    }
+
+    /// Template shelves: every fourth widget (and those with no small size) shown medium.
     private func shelf(title: String, templates: [WidgetTemplate], seeAll: (() -> Void)? = nil) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: title, actionTitle: seeAll == nil ? nil : "Tout voir", action: seeAll)
-                .padding(.horizontal, 20)
+            shelfHeader(title: title, subtitle: nil, seeAll: seeAll)
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 14) {
-                    ForEach(templates) { template in
-                        templateButton(template, width: 150)
+                LazyHStack(alignment: .top, spacing: 14) {
+                    ForEach(Array(templates.enumerated()), id: \.element.id) { pair in
+                        let template = pair.element
+                        let canBeMedium = template.kind.families.contains(.systemMedium)
+                        let family: WidgetFamily? = pair.offset % 4 == 0 && canBeMedium ? .systemMedium : nil
+                        templateButton(template, width: 150, family: family)
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+        }
+    }
+
+    private func showcaseShelf(title: String, subtitle: String?, symbol: String? = nil, items: [ShowcaseItem], height: CGFloat = 150) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            shelfHeader(title: title, subtitle: subtitle, symbol: symbol)
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(alignment: .top, spacing: 14) {
+                    ForEach(items) { item in
+                        Button {
+                            router.openEditor(item.widget.makeDesign(), isNew: true)
+                        } label: {
+                            ShowcaseCard(item: item, height: height, isPremiumUser: model.isPremium)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+        }
+    }
+
+    /// Big cards, one per page, each with a medium widget.
+    private var featuresCarousel: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 12) {
+                ForEach(StoreShowcase.features) { feature in
+                    Button {
+                        router.openEditor(feature.widget.makeDesign(), isNew: true)
+                    } label: {
+                        StoreFeatureCard(feature: feature, isPremiumUser: model.isPremium)
+                    }
+                    .buttonStyle(.plain)
+                    .containerRelativeFrame(.horizontal)
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .contentMargins(.horizontal, 20, for: .scrollContent)
+        .scrollTargetBehavior(.viewAligned)
+    }
+
+    private var lockScreenShelf: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            shelfHeader(title: "Écran verrouillé", subtitle: "Sous l'heure, d'un coup d'œil, sans déverrouiller.", symbol: "lock.fill")
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(alignment: .top, spacing: 14) {
+                    ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
+                        Button {
+                            router.openEditor(pair.element.widget.makeDesign(), isNew: true)
+                        } label: {
+                            LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -145,10 +238,9 @@ struct ExploreView: View {
     private var setupsShelf: some View {
         let favorites = SetupFavorites.ids(favoritesRaw)
         return VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Écrans d'accueil", actionTitle: "Tout voir") {
+            shelfHeader(title: "Écrans d'accueil", subtitle: "Fond, widgets et écran verrouillé assortis.") {
                 router.showsAllSetups = true
             }
-            .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 14) {
                     ForEach(HomeSetupCatalog.all) { setup in
@@ -174,8 +266,7 @@ struct ExploreView: View {
 
     private var packsShelf: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Packs")
-                .padding(.horizontal, 20)
+            shelfHeader(title: "Packs", subtitle: "Six widgets assortis, ajoutés d'une touche.")
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 14) {
                     ForEach(PackCatalog.all) { pack in
@@ -194,8 +285,7 @@ struct ExploreView: View {
 
     private var stylesShelf: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Styles")
-                .padding(.horizontal, 20)
+            shelfHeader(title: "Styles", subtitle: "Touche un style pour voir tous ses widgets.")
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(ThemeCatalog.all) { theme in
@@ -238,11 +328,11 @@ struct ExploreView: View {
         }
     }
 
-    private func templateButton(_ template: WidgetTemplate, width: CGFloat?) -> some View {
+    private func templateButton(_ template: WidgetTemplate, width: CGFloat?, family: WidgetFamily? = nil) -> some View {
         Button {
             router.openEditor(template.makeDesign(), isNew: true)
         } label: {
-            TemplateCard(template: template, width: width, isPremiumUser: model.isPremium)
+            TemplateCard(template: template, width: width, isPremiumUser: model.isPremium, family: family)
         }
         .buttonStyle(.plain)
     }

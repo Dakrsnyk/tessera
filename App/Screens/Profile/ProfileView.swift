@@ -3,10 +3,14 @@ import SwiftUI
 import UserNotifications
 import WidgetKit
 
-struct SettingsView: View {
+/// The profile: who the user is, their numbers, and every setting of the app.
+/// Opened from the avatar at the top right of the Home tab.
+struct ProfileView: View {
     @Environment(AppModel.self) private var model
-    @Environment(Router.self) private var router
     @Environment(PremiumStore.self) private var premium
+    @Environment(\.dismiss) private var dismiss
+    @State private var showsPaywall = false
+    @State private var showsAddGuide = false
     @State private var restoreMessage: String?
     @State private var showsManageSubscriptions = false
     @State private var confirmReset = false
@@ -18,7 +22,38 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    header
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+
                 Group {
+                Section {
+                    LabeledContent("Prénom") {
+                        TextField("Facultatif", text: settingBinding(\.profileName))
+                            .multilineTextAlignment(.trailing)
+                            .textContentType(.givenName)
+                            .submitLabel(.done)
+                    }
+                    birthdayRow
+                    Picker("Jours fériés", selection: Binding(
+                        get: { model.life.holidayRegion },
+                        set: { value in model.update(\.life) { $0.holidayRegion = value } }
+                    )) {
+                        ForEach(HolidayRegion.allCases) { Text($0.title).tag($0) }
+                    }
+                    NavigationLink {
+                        WeatherLocationView()
+                    } label: {
+                        LabeledContent("Ville (météo)", value: model.settings.weatherLocation?.name ?? "Aucune")
+                    }
+                } header: {
+                    Text("Mon profil")
+                } footer: {
+                    Text("Ton prénom et ton anniversaire restent sur ton iPhone. Ils servent au message d'accueil et aux widgets « Ma vie ».")
+                }
+
                 premiumSection
 
                 Section {
@@ -44,11 +79,6 @@ struct SettingsView: View {
                     }
                     Picker("Devise (crypto)", selection: settingBinding(\.cryptoCurrency)) {
                         ForEach(AppSettings.cryptoCurrencies, id: \.self) { Text($0.uppercased()).tag($0) }
-                    }
-                    NavigationLink {
-                        WeatherLocationView()
-                    } label: {
-                        LabeledContent("Ville (météo)", value: model.settings.weatherLocation?.name ?? "Aucune")
                     }
                 }
 
@@ -77,13 +107,17 @@ struct SettingsView: View {
 
                 Section("Aide") {
                     Button {
-                        router.lastSavedName = nil
-                        router.isAddGuidePresented = true
+                        showsAddGuide = true
                     } label: {
                         Label("Ajouter un widget à l'écran d'accueil", systemImage: "plus.square.on.square")
                     }
                     Button {
-                        model.updateSettings { $0.hasCompletedOnboarding = false }
+                        // The presentation covers the whole app: close the profile first.
+                        dismiss()
+                        Task { @MainActor in
+                            try? await Task.sleep(for: .milliseconds(500))
+                            model.updateSettings { $0.hasCompletedOnboarding = false }
+                        }
                     } label: {
                         Label("Revoir la présentation", systemImage: "play.rectangle")
                     }
@@ -149,7 +183,15 @@ struct SettingsView: View {
                 .listRowBackground(Color.cardFill)
             }
             .styledList()
-            .navigationTitle("Réglages")
+            .navigationTitle("Profil")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("OK") { dismiss() }
+                }
+            }
+            .sheet(isPresented: $showsPaywall) { PaywallView() }
+            .sheet(isPresented: $showsAddGuide) { AddToHomeScreenGuide(designName: nil) }
             .task(id: scenePhase) { await refreshNotificationStatus() }
             .manageSubscriptionsSheet(isPresented: $showsManageSubscriptions)
             .alert("Restauration", isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {
@@ -161,6 +203,60 @@ struct SettingsView: View {
                 Button("Tout effacer", role: .destructive) { model.resetAllData() }
             } message: {
                 Text("Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.")
+            }
+        }
+    }
+
+    private var header: some View {
+        let name = model.settings.profileName.trimmed
+        return VStack(spacing: 14) {
+            ProfileAvatar(name: name, size: 78)
+            VStack(spacing: 3) {
+                Text(name.isEmpty ? "Ton profil" : name)
+                    .font(.title2.weight(.bold))
+                    .foregroundStyle(.primary)
+                Label(model.isPremium ? "Tessera Premium" : "Version gratuite", systemImage: model.isPremium ? "sparkles" : "person")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(model.isPremium ? Color.premiumInk : Color.secondary)
+            }
+            HStack(spacing: 10) {
+                stat(model.designs.count, model.designs.count > 1 ? "widgets" : "widget")
+                stat(model.content.habits.count, model.content.habits.count > 1 ? "habitudes" : "habitude")
+                stat(Space.allCases.filter { model.hasData(in: $0) }.count, "espaces actifs")
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 8)
+        .padding(.bottom, 4)
+    }
+
+    private func stat(_ value: Int, _ label: String) -> some View {
+        VStack(spacing: 2) {
+            Text("\(value)")
+                .font(.title3.weight(.bold))
+                .monospacedDigit()
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 12)
+        .background(Color.cardFill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+    }
+
+    @ViewBuilder private var birthdayRow: some View {
+        if let birthday = model.life.birthday {
+            DatePicker("Anniversaire", selection: Binding(
+                get: { birthday },
+                set: { value in model.update(\.life) { $0.birthday = value } }
+            ), in: ...Date(), displayedComponents: .date)
+        } else {
+            Button {
+                model.update(\.life) { $0.birthday = Calendar.current.date(byAdding: .year, value: -25, to: Date()) }
+            } label: {
+                Label("Ajouter mon anniversaire", systemImage: "gift")
             }
         }
     }
@@ -183,7 +279,7 @@ struct SettingsView: View {
                 }
             } else {
                 Button {
-                    router.isPaywallPresented = true
+                    showsPaywall = true
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "sparkles")
@@ -250,5 +346,32 @@ struct SettingsView: View {
             get: { model.settings[keyPath: keyPath] },
             set: { value in model.updateSettings { $0[keyPath: keyPath] = value } }
         )
+    }
+}
+
+/// Initials on the accent color, or a person symbol before a name is set.
+struct ProfileAvatar: View {
+    let name: String
+    var size: CGFloat = 32
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(LinearGradient(colors: [Color.accentColor, Color.accentColor.opacity(0.72)], startPoint: .topLeading, endPoint: .bottomTrailing))
+            if initials.isEmpty {
+                Image(systemName: "person.fill")
+                    .font(.system(size: size * 0.46, weight: .semibold))
+            } else {
+                Text(initials)
+                    .font(.system(size: size * 0.4, weight: .semibold, design: .rounded))
+            }
+        }
+        .foregroundStyle(Color.onAccent)
+        .frame(width: size, height: size)
+        .accessibilityHidden(true)
+    }
+
+    private var initials: String {
+        name.split(separator: " ").prefix(2).compactMap { $0.first.map(String.init) }.joined().uppercased()
     }
 }

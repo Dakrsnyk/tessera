@@ -41,6 +41,14 @@ struct HomeView: View {
                     }
                     .accessibilityLabel(Text("Créer un widget"))
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        router.isProfilePresented = true
+                    } label: {
+                        ProfileAvatar(name: model.settings.profileName.trimmed, size: 32)
+                    }
+                    .accessibilityLabel(Text("Profil et réglages"))
+                }
             }
         }
     }
@@ -50,9 +58,14 @@ struct HomeView: View {
             Text(Fmt.longDay(Date()))
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.secondary)
-            Text(greeting)
+            Text(greetingWithName)
                 .font(.title2.weight(.semibold))
         }
+    }
+
+    private var greetingWithName: String {
+        let first = model.settings.profileName.trimmed.split(separator: " ").first.map(String.init) ?? ""
+        return first.isEmpty ? greeting : "\(greeting) \(first)"
     }
 
     private var greeting: String {

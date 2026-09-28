@@ -170,6 +170,7 @@ jobs:
           shoot gallery-circular-1 gallery-circular-1 top light
           for screen in home spaces gallery-small-1; do shoot $screen $screen top dark; done
           for screen in home store space-nutrition space-budget; do shoot $screen-end $screen bottom light; done
+          for screen in store spaces; do shoot $screen-mid $screen center light; done
           # Home Screen setups (Store) and app styles.
           for scheme in light dark; do
             shoot onboarding onboarding top $scheme

@@ -18,7 +18,7 @@ enum ContentScreen: String, Identifiable {
 @Observable
 final class Router {
     enum Tab: Hashable {
-        case home, spaces, explore, mine, settings
+        case home, spaces, explore, mine
     }
 
     var tab: Tab = .home
@@ -26,6 +26,8 @@ final class Router {
     var isPaywallPresented = false
     var content: ContentScreen?
     var isAddGuidePresented = false
+    /// The profile page (with every setting), opened from the Home tab.
+    var isProfilePresented = false
     /// Set when a new widget is saved, so the guide opens once the editor has closed.
     var showsAddGuideAfterEditor = false
     var lastSavedName: String?
@@ -58,6 +60,7 @@ final class Router {
     func handle(_ link: DeepLink, model: AppModel) {
         editor = nil
         isPaywallPresented = false
+        isProfilePresented = false
         content = nil
         switch link {
         case let .design(id):

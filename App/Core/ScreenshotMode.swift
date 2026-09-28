@@ -38,7 +38,7 @@ enum ScreenshotMode {
         case "editor": router.openEditor(TemplateCatalog.design("countdown-holidays"), isNew: true)
         case "mywidgets": router.tab = .mine
         case "paywall": router.isPaywallPresented = true
-        case "settings": router.tab = .settings
+        case "settings", "profile": router.isProfilePresented = true
         case "content": router.content = .money
         case "spaces": router.tab = .spaces
         case "store": router.tab = .explore

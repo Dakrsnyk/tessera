@@ -184,13 +184,24 @@ struct EmptyStateView: View {
 /// Tappable preview of a catalog template.
 struct TemplateCard: View {
     let template: WidgetTemplate
+    /// The width of a small widget: a medium one is as tall and about twice as wide.
     var width: CGFloat?
     var isPremiumUser: Bool
+    /// Small by default, medium for widgets that have no small size.
+    var family: WidgetFamily?
+
+    private var resolvedFamily: WidgetFamily {
+        family ?? (template.kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium)
+    }
+
+    private var cardWidth: CGFloat? {
+        width.map { $0 * resolvedFamily.aspectRatio }
+    }
 
     var body: some View {
         let design = template.makeDesign()
         VStack(alignment: .leading, spacing: 8) {
-            WidgetPreview(design: design, family: .systemSmall, payload: SamplePayload.make(for: design), width: width)
+            WidgetPreview(design: design, family: resolvedFamily, payload: SamplePayload.make(for: design), width: cardWidth)
             HStack(spacing: 6) {
                 VStack(alignment: .leading, spacing: 1) {
                     Text(template.name)
@@ -209,7 +220,7 @@ struct TemplateCard: View {
                 }
             }
         }
-        .frame(width: width)
+        .frame(width: cardWidth)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityHint(Text("Ouvre l'éditeur"))
@@ -263,5 +274,45 @@ enum Haptics {
 
     static func success() {
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+    }
+}
+
+/// Lays out widgets side by side at the same height, filling the width: each child gets a width
+/// proportional to its aspect ratio (1 for a small widget, about 2.14 for a medium one).
+struct EqualHeightRow: Layout {
+    var ratios: [CGFloat]
+    var spacing: CGFloat = 10
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let width = proposal.width ?? 340
+        return CGSize(width: width, height: height(for: width, count: subviews.count))
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let height = height(for: bounds.width, count: subviews.count)
+        var x = bounds.minX
+        for (index, subview) in subviews.enumerated() {
+            let width = ratio(at: index) * height
+            subview.place(at: CGPoint(x: x, y: bounds.minY), anchor: .topLeading, proposal: ProposedViewSize(width: width, height: height))
+            x += width + spacing
+        }
+    }
+
+    private func ratio(at index: Int) -> CGFloat {
+        index < ratios.count ? ratios[index] : 1
+    }
+
+    private func height(for width: CGFloat, count: Int) -> CGFloat {
+        guard count > 0 else { return 0 }
+        let total = (0..<count).reduce(CGFloat(0)) { $0 + ratio(at: $1) }
+        return max(0, (width - spacing * CGFloat(count - 1)) / max(total, 0.01))
+    }
+}
+
+extension WidgetFamily {
+    /// Width over height of a Home Screen widget of this size.
+    var aspectRatio: CGFloat {
+        let size = WidgetMetrics.size(self)
+        return size.width / size.height
     }
 }

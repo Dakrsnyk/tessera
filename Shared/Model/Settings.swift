@@ -72,11 +72,13 @@ struct AppSettings: Codable, Hashable {
     var appearance: AppearanceMode = .system
     /// Set once the style has been picked (at the first launch, or once after an update).
     var hasChosenStyle = false
+    /// First name shown on the profile and in the greeting. Optional, stays on the device.
+    var profileName = ""
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
         case hasCompletedOnboarding, hydrationReminders
-        case appStyle, appearance, hasChosenStyle
+        case appStyle, appearance, hasChosenStyle, profileName
     }
 
     init() {}
@@ -93,6 +95,7 @@ struct AppSettings: Codable, Hashable {
         appStyle = (try? c.decodeIfPresent(AppStyleID.self, forKey: .appStyle)) ?? .tessera
         appearance = (try? c.decodeIfPresent(AppearanceMode.self, forKey: .appearance)) ?? .system
         hasChosenStyle = (try? c.decodeIfPresent(Bool.self, forKey: .hasChosenStyle)) ?? false
+        profileName = (try? c.decodeIfPresent(String.self, forKey: .profileName)) ?? ""
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

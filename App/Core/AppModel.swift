@@ -399,6 +399,7 @@ final class AppModel {
         fresh.appStyle = settings.appStyle
         fresh.appearance = settings.appearance
         fresh.hasChosenStyle = settings.hasChosenStyle
+        fresh.profileName = settings.profileName
         settings = fresh
         store.designs = designs
         store.content = content

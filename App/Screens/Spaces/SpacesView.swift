@@ -10,17 +10,16 @@ struct SpacesView: View {
         @Bindable var router = router
         NavigationStack(path: $router.spacePath) {
             ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
+                LazyVStack(alignment: .leading, spacing: 16) {
                     Text("Chaque espace alimente ses widgets. Ce que tu notes ici s'affiche tout de suite sur ton écran d'accueil.")
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
-                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
-                        ForEach(Space.allCases) { space in
-                            NavigationLink(value: space) {
-                                SpaceCard(space: space, summary: summary(for: space), widgetCount: SpaceCatalog.kinds(in: space).count)
-                            }
-                            .buttonStyle(.plain)
+                        .padding(.bottom, 2)
+                    ForEach(Space.allCases) { space in
+                        NavigationLink(value: space) {
+                            SpaceSection(space: space, summary: summary(for: space))
                         }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -81,6 +80,85 @@ struct SpacesView: View {
     }
 }
 
+/// A space in the list: its title, a live summary and a few of its widgets, full width.
+struct SpaceSection: View {
+    let space: Space
+    let summary: String
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let examples = SpaceCatalog.examples(for: space)
+        let usesOwnData = model.hasData(in: space)
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 12) {
+                Image(systemName: space.symbol)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 42, height: 42)
+                    .background(Color(hex: space.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(space.title)
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(Color.primary)
+                    Text(summary)
+                        .font(.subheadline)
+                        .foregroundStyle(Color.secondary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+            EqualHeightRow(ratios: examples.map { $0.family.aspectRatio }, spacing: 10) {
+                ForEach(Array(examples.enumerated()), id: \.offset) { pair in
+                    let design = pair.element.design
+                    WidgetPreview(
+                        design: design, family: pair.element.family,
+                        payload: usesOwnData ? model.payload(for: design) : SamplePayload.make(for: design)
+                    )
+                }
+            }
+            HStack(spacing: 6) {
+                Text(space.subtitle)
+                    .lineLimit(1)
+                Spacer(minLength: 4)
+                Text(Fmt.plural(SpaceCatalog.kinds(in: space).count, "widget", "widgets"))
+                    .fontWeight(.semibold)
+                if !usesOwnData {
+                    Text("· exemple")
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(Color.secondary)
+        }
+        .card(padding: 14)
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text("\(space.title), \(summary)"))
+    }
+}
+
+extension AppModel {
+    /// Whether the user has entered anything in a space yet (otherwise its widgets show example data).
+    func hasData(in space: Space) -> Bool {
+        switch space {
+        case .productivity: !content.tasks.isEmpty || !productivity.priorities.isEmpty || !productivity.projects.isEmpty
+        case .habits: !content.habits.isEmpty
+        case .nutrition: !nutrition.entries.isEmpty
+        case .fitness: !fitness.routines.isEmpty
+        case .budget: !budget.expenses.isEmpty
+        case .investing: !portfolio.holdings.isEmpty
+        case .business: !business.sales.isEmpty
+        case .markets: !companies.isEmpty
+        case .student: !student.courses.isEmpty
+        case .travel: !travel.trips.isEmpty
+        case .car: !car.fills.isEmpty
+        case .life: life.birthday != nil
+        }
+    }
+}
+
 struct SpaceCard: View {
     let space: Space
     let summary: String
@@ -121,7 +199,35 @@ struct SpaceCard: View {
     }
 }
 
+struct SpaceExample {
+    let design: WidgetDesign
+    let family: WidgetFamily
+}
+
 enum SpaceCatalog {
+    /// A few widgets of a space, small and medium, shown in the list of spaces.
+    static func examples(for space: Space) -> [SpaceExample] {
+        let picks: [(WidgetKind, WidgetFamily)]
+        switch space {
+        case .productivity: picks = [(.priorities, .systemSmall), (.tasks, .systemMedium)]
+        case .habits: picks = [(.habits, .systemMedium), (.hydration, .systemSmall)]
+        case .nutrition: picks = [(.caloriesLeft, .systemSmall), (.macros, .systemSmall), (.nextMeal, .systemSmall)]
+        case .fitness: picks = [(.todaysWorkout, .systemMedium), (.trainingStreak, .systemSmall)]
+        case .budget: picks = [(.budgetLeft, .systemSmall), (.spendingByCategory, .systemMedium)]
+        case .investing: picks = [(.portfolio, .systemMedium), (.allocation, .systemSmall)]
+        case .business: picks = [(.revenueToday, .systemSmall), (.revenueGoal, .systemSmall), (.mrr, .systemSmall)]
+        case .markets: picks = [(.companySnapshot, .systemSmall), (.companyCompare, .systemMedium)]
+        case .student: picks = [(.nextClass, .systemSmall), (.timetable, .systemMedium)]
+        case .travel: picks = [(.flight, .systemMedium), (.tripCountdown, .systemSmall)]
+        case .car: picks = [(.nextService, .systemSmall), (.carCost, .systemMedium)]
+        case .life: picks = [(.birthday, .systemSmall), (.ageProgress, .systemSmall), (.holiday, .systemSmall)]
+        }
+        return picks.map { kind, family in
+            SpaceExample(design: TemplateCatalog.template(for: kind)?.makeDesign() ?? WidgetDesign.starter(for: kind), family: family)
+        }
+    }
+
+
     /// The widgets fed by a space.
     static func kinds(in space: Space) -> [WidgetKind] {
         var kinds = WidgetKind.allCases.filter { $0.space == space }
