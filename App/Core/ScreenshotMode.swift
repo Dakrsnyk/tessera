@@ -1,7 +1,7 @@
-#if DEBUG
 import SwiftUI
 import WidgetKit
 
+#if DEBUG
 /// Test-build helper: `-screenshotScreen <name>` opens a given screen with demo content,
 /// so the CI can capture every screen and every widget for visual review.
 enum ScreenshotMode {
@@ -18,6 +18,8 @@ enum ScreenshotMode {
     static func apply(model: AppModel, router: Router) -> Action {
         guard let screen else { return .none }
         seed(model)
+        // The offer is captured as a free user sees it; every other screen with Premium unlocked.
+        model.setDebugPremium(screen != "paywall")
         switch screen {
         case "onboarding": return .onboarding
         case "home": router.tab = .home
@@ -68,6 +70,8 @@ enum ScreenshotMode {
         model.update(\.car) { $0 = data.car }
         model.update(\.productivity) { $0 = data.productivity }
         model.update(\.life) { $0 = data.life }
+        model.update(\.following) { $0 = data.following }
+        model.seedDemoCaches(data)
     }
 }
 
@@ -127,9 +131,9 @@ struct WidgetGalleryView: View {
                 }
             }
             .padding(8)
-            .background(family.isAccessory ? Color(hex: "1F2A44") : Color.screenFill)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
-        .ignoresSafeArea(edges: .bottom)
+        .background((family.isAccessory ? Color(hex: "1F2A44") : Color.screenFill).ignoresSafeArea())
     }
 
     private var kinds: [WidgetKind] {

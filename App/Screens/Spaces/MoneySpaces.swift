@@ -31,13 +31,13 @@ struct PortfolioSpaceSections: View {
                     HStack {
                         Circle().fill(Color(hex: position.holding.kind.colorHex)).frame(width: 9, height: 9)
                         VStack(alignment: .leading, spacing: 1) {
-                            Text(position.holding.name).foregroundStyle(.primary)
-                            Text("\(TF.decimal(position.holding.quantity, position.holding.quantity < 10 ? 4 : 0)) · \(position.holding.kind.title)")
+                            Text(position.holding.name).foregroundStyle(Color.primary)
+                            Text("\(TF.quantity(position.holding.quantity)) · \(position.holding.kind.title)")
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(Color.secondary)
                         }
                         Spacer()
-                        Text(TF.money(position.value, currency)).monospacedDigit().foregroundStyle(.secondary)
+                        Text(TF.money(position.value, currency)).monospacedDigit().foregroundStyle(Color.secondary)
                     }
                 }
             }
@@ -68,10 +68,10 @@ struct PortfolioSpaceSections: View {
                     }
                 } label: {
                     HStack {
-                        Text("\(coin.name) (\(coin.symbol))").foregroundStyle(.primary)
+                        Text("\(coin.name) (\(coin.symbol))").foregroundStyle(Color.primary)
                         Spacer()
                         if let quote = model.quotes.first(where: { $0.id == coin.id }) {
-                            Text(Fmt.price(quote.price, currency: model.settings.cryptoCurrency.uppercased())).foregroundStyle(.secondary).monospacedDigit()
+                            Text(Fmt.price(quote.price, currency: model.settings.cryptoCurrency.uppercased())).foregroundStyle(Color.secondary).monospacedDigit()
                         }
                         Image(systemName: followed ? "checkmark.circle.fill" : "circle").foregroundStyle(.tint)
                     }
@@ -192,7 +192,7 @@ struct BusinessSpaceSections: View {
                         Text(Fmt.shortDay(sale.date))
                         Text("\(Fmt.plural(sale.orders, "commande", "commandes"))\(sale.note.isEmpty ? "" : " · \(sale.note)")")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color.secondary)
                     }
                     Spacer()
                     Text(TF.money(sale.amount, currency, decimals: 2)).monospacedDigit()
@@ -299,11 +299,13 @@ struct MarketsSpaceSections: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 1) {
                             Text(ref.name)
-                            Text(ref.ticker).font(.caption).foregroundStyle(.secondary)
+                            Text(ref.ticker).font(.caption).foregroundStyle(Color.secondary)
                         }
                         Spacer()
                         if let revenue = model.companies[ref.cik]?.latestRevenue {
-                            Text(BigNumber.compact(revenue.value)).foregroundStyle(.secondary).monospacedDigit()
+                            Text(BigNumber.compact(revenue.value)).foregroundStyle(Color.secondary).monospacedDigit()
+                        } else {
+                            Text("—").foregroundStyle(Color.secondary)
                         }
                     }
                 }
@@ -346,8 +348,8 @@ struct MarketsSpaceSections: View {
                 } label: {
                     HStack {
                         VStack(alignment: .leading, spacing: 1) {
-                            Text(ref.name).foregroundStyle(.primary)
-                            Text(ref.ticker).font(.caption).foregroundStyle(.secondary)
+                            Text(ref.name).foregroundStyle(Color.primary)
+                            Text(ref.ticker).font(.caption).foregroundStyle(Color.secondary)
                         }
                         Spacer()
                         Image(systemName: followed ? "checkmark.circle.fill" : "plus.circle").foregroundStyle(.tint)

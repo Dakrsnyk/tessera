@@ -234,7 +234,8 @@ enum DashboardTiles {
         tile.caption = "reste ce mois · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency))/jour"
         var rows = [TileRow(id: "today", title: "Dépensé aujourd'hui", value: TF.money(BudgetMath.spentToday(state, at: now), currency, decimals: 2), symbol: "cart")]
         if let bill = BudgetMath.upcomingBills(state, at: now, within: 31).first {
-            rows.append(TileRow(id: "bill", title: bill.bill.name, value: TF.money(bill.bill.amount, currency), detail: TF.relativeDay(bill.due, from: now), symbol: bill.bill.symbol))
+            let cents = bill.bill.amount.rounded() == bill.bill.amount ? 0 : 2
+            rows.append(TileRow(id: "bill", title: bill.bill.name, value: TF.money(bill.bill.amount, currency, decimals: cents), detail: TF.relativeDay(bill.due, from: now), symbol: bill.bill.symbol))
         }
         if let goal = state.goals.first {
             rows.append(TileRow(id: "goal", title: goal.name, value: Fmt.percent(goal.progress), symbol: "banknote", progress: goal.progress))

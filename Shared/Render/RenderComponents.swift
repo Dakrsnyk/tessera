@@ -30,6 +30,7 @@ struct WLabel: View {
             .tracking(style.uppercaseLabels ? 0.6 : 0)
             .foregroundStyle(color ?? style.secondary)
             .lineLimit(1)
+            .minimumScaleFactor(0.75)
     }
 }
 

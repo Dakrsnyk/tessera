@@ -106,7 +106,7 @@ enum CarTiles {
         let month = BudgetMath.monthInterval(now)
         tile.rows = [TileRow(id: "month", title: "Ce mois-ci", value: TF.money(CarMath.fuelSpent(state, in: month), currency), symbol: "calendar")]
         tile.rows += state.fills.sorted { $0.date > $1.date }.prefix(3).map { fill in
-            TileRow(id: fill.id.uuidString, title: Fmt.shortDay(fill.date), value: "\(TF.decimal(fill.liters, 1)) L · \(TF.money(fill.total, currency, decimals: 2))", symbol: "fuelpump.fill")
+            TileRow(id: fill.id.uuidString, title: Fmt.shortDay(fill.date), value: TF.money(fill.total, currency, decimals: 2), detail: "\(TF.decimal(fill.liters, 1)) L", symbol: "fuelpump.fill")
         }
         let summary = "\(tile.value) \(tile.unit ?? "")"
         tile.inline = summary

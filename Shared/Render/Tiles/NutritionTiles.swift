@@ -19,11 +19,15 @@ enum NutritionTiles {
         }
     }
 
-    static func macroRows(_ totals: NutritionTotals, goals: NutritionGoals) -> [TileRow] {
-        [
-            TileRow(id: "p", title: "Protéines", value: "\(TF.int(totals.protein)) / \(TF.int(goals.protein)) g", colorHex: "E5484D", progress: totals.protein / max(1, goals.protein)),
-            TileRow(id: "c", title: "Glucides", value: "\(TF.int(totals.carbs)) / \(TF.int(goals.carbs)) g", colorHex: "F2A33A", progress: totals.carbs / max(1, goals.carbs)),
-            TileRow(id: "f", title: "Lipides", value: "\(TF.int(totals.fat)) / \(TF.int(goals.fat)) g", colorHex: "3366FF", progress: totals.fat / max(1, goals.fat)),
+    /// `compact` drops the unit so the macro names stay readable in small widgets.
+    static func macroRows(_ totals: NutritionTotals, goals: NutritionGoals, compact: Bool = false) -> [TileRow] {
+        func value(_ eaten: Double, _ goal: Double) -> String {
+            compact ? "\(TF.int(eaten))/\(TF.int(goal))" : "\(TF.int(eaten)) / \(TF.int(goal)) g"
+        }
+        return [
+            TileRow(id: "p", title: "Protéines", value: value(totals.protein, goals.protein), colorHex: "E5484D", progress: totals.protein / max(1, goals.protein)),
+            TileRow(id: "c", title: "Glucides", value: value(totals.carbs, goals.carbs), colorHex: "F2A33A", progress: totals.carbs / max(1, goals.carbs)),
+            TileRow(id: "f", title: "Lipides", value: value(totals.fat, goals.fat), colorHex: "3366FF", progress: totals.fat / max(1, goals.fat)),
         ]
     }
 
@@ -51,7 +55,7 @@ enum NutritionTiles {
         tile.value = TF.int(totals.kcal)
         tile.unit = "kcal"
         tile.caption = "sur \(TF.int(state.goals.kcal)) · fibres \(TF.int(totals.fiber)) g"
-        tile.rows = macroRows(totals, goals: state.goals)
+        tile.rows = macroRows(totals, goals: state.goals, compact: compact)
         tile.compactRows = true
         tile.visual = .segments([
             TileSegment(label: "Protéines", value: totals.protein * 4, colorHex: "E5484D"),
@@ -87,7 +91,7 @@ enum NutritionTiles {
         tile.rows = MealType.allCases.map { meal -> TileRow in
             let items = entries.filter { $0.meal == meal }
             let kcal = items.reduce(0) { $0 + $1.totals.kcal }
-            let names = items.map { TF.shortName($0.food.name) }.joined(separator: ", ")
+            let names = items.map(\.food.name).joined(separator: ", ")
             return TileRow(id: meal.rawValue, title: meal.title, value: items.isEmpty ? "—" : "\(TF.int(kcal)) kcal", detail: names.isEmpty ? nil : names, symbol: meal.symbol, isHighlighted: meal == MealType.current(at: now))
         }
         tile.compactRows = true
@@ -142,7 +146,7 @@ enum NutritionTiles {
         tile.unit = "kcal"
         tile.caption = "aujourd'hui · touche pour ajouter"
         tile.buttons = foods.map { food in
-            TileButton(title: TF.shortName(food.name), symbol: "plus", action: .logFood(food.id))
+            TileButton(title: TF.shortName(food.name, words: 1), symbol: "plus", action: .logFood(food.id))
         }
         tile.rows = foods.map { food -> TileRow in
             let serving = food.nutrients(grams: food.servingGrams)

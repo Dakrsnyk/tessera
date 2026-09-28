@@ -90,7 +90,7 @@ enum TemplateCatalog {
         WidgetTemplate(id: "habits-dark", name: "Mes habitudes", kind: .habits, themeID: .dark, accentHex: "7FA33A", isFeatured: true),
         WidgetTemplate(id: "habits-retro", name: "Routine rétro", kind: .habits, themeID: .retro, accentHex: "F2A33A"),
         WidgetTemplate(id: "focus-minimal", name: "Pomodoro", kind: .focus, themeID: .minimal, accentHex: "FF6B57", isFeatured: true),
-        WidgetTemplate(id: "focus-futuristic", name: "Deep work", kind: .focus, themeID: .futuristic, accentHex: "3366FF"),
+        WidgetTemplate(id: "focus-futuristic", name: "Travail profond", kind: .focus, themeID: .futuristic, accentHex: "3366FF"),
         WidgetTemplate(id: "upnext-minimal", name: "Prochain rendez-vous", kind: .upNext, themeID: .minimal, accentHex: "3366FF"),
         WidgetTemplate(id: "upnext-elegant", name: "Agenda élégant", kind: .upNext, themeID: .elegant, accentHex: "2F8F7A"),
         WidgetTemplate(id: "note-quote", name: "Citation", kind: .note, themeID: .typography, accentHex: "FF6B57", font: .serif,

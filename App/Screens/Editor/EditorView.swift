@@ -119,19 +119,24 @@ struct EditorView: View {
 
     private var styleSection: some View {
         EditorSection(title: "Style", detail: design.theme.tagline) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(ThemeCatalog.all) { theme in
-                        Button {
-                            withAnimation(.easeInOut(duration: 0.2)) { design.themeID = theme.id }
-                            Haptics.tap()
-                        } label: {
-                            ThemeSwatch(theme: theme, accentHex: design.accentHex, isSelected: design.themeID == theme.id, showsLock: theme.isPremium && !model.isPremium)
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(ThemeCatalog.all) { theme in
+                            Button {
+                                withAnimation(.easeInOut(duration: 0.2)) { design.themeID = theme.id }
+                                Haptics.tap()
+                            } label: {
+                                ThemeSwatch(theme: theme, accentHex: design.accentHex, isSelected: design.themeID == theme.id, showsLock: theme.isPremium && !model.isPremium)
+                            }
+                            .buttonStyle(.plain)
+                            .id(theme.id)
                         }
-                        .buttonStyle(.plain)
                     }
+                    .padding(.vertical, 2)
                 }
-                .padding(.vertical, 2)
+                // Opens on the design's current style, even when it is far in the list.
+                .onAppear { proxy.scrollTo(design.themeID, anchor: .center) }
             }
         }
     }
@@ -443,7 +448,7 @@ struct PreviewStage: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         ForEach(design.kind.families, id: \.self) { item in
-                            FilterChip(title: item.shortTitle, symbol: item.isAccessory ? "lock" : nil, isSelected: family == item) {
+                            FilterChip(title: item.shortTitle, symbol: item.isAccessory ? "lock.iphone" : nil, isSelected: family == item) {
                                 family = item
                             }
                         }

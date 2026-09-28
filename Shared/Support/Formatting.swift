@@ -40,12 +40,18 @@ enum Fmt {
 
     /// "samedi 27 septembre"
     static func longDay(_ date: Date) -> String {
-        format(date, template: "EEEEdMMMM").capitalizedFirst
+        firstOfMonth(format(date, template: "EEEEdMMMM"), date).capitalizedFirst
     }
 
     /// "sam. 27 sept."
     static func shortDay(_ date: Date) -> String {
-        format(date, template: "EEEdMMM").capitalizedFirst
+        firstOfMonth(format(date, template: "EEEdMMM"), date).capitalizedFirst
+    }
+
+    /// French writes the first day of a month "1er".
+    private static func firstOfMonth(_ text: String, _ date: Date) -> String {
+        guard DateMath.calendar.component(.day, from: date) == 1 else { return text }
+        return text.replacingOccurrences(of: " 1 ", with: " 1er ")
     }
 
     static func weekday(_ date: Date) -> String {

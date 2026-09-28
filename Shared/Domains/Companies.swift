@@ -219,6 +219,7 @@ enum BigNumber {
         formatter.maximumFractionDigits = abs(number) >= 100 ? 0 : 1
         let text = formatter.string(from: NSNumber(value: number)) ?? "\(number)"
         let symbol = currency == "USD" ? "$ US" : currency == "EUR" ? "€" : "$"
-        return "\(text)\(suffix) \(symbol)".replacingOccurrences(of: "  ", with: " ")
+        // "416 G$ US", "12,4 M€", but "950 $ US".
+        return suffix.isEmpty ? "\(text) \(symbol)" : "\(text)\(suffix)\(symbol)"
     }
 }

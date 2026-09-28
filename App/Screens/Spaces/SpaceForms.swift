@@ -31,6 +31,18 @@ struct SheetForm<Content: View>: View {
     }
 }
 
+/// Units next to number fields: a currency code ("CAD") is shown as its symbol ("$").
+enum UnitText {
+    static func display(_ unit: String) -> String {
+        guard unit.count == 3, unit.allSatisfy({ $0.isUppercase && $0.isLetter }) else { return unit }
+        let formatter = NumberFormatter()
+        formatter.locale = Fmt.locale
+        formatter.numberStyle = .currency
+        formatter.currencyCode = unit
+        return formatter.currencySymbol ?? unit
+    }
+}
+
 /// A labelled number field (amounts, weights, distances…).
 struct NumberRow: View {
     let title: String
@@ -41,12 +53,12 @@ struct NumberRow: View {
         HStack {
             Text(title)
             Spacer()
-            TextField("0", value: $value, format: .number)
+            TextField("0", value: $value, format: .number.locale(Fmt.locale))
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: 120)
             if let unit {
-                Text(unit).foregroundStyle(.secondary)
+                Text(UnitText.display(unit)).foregroundStyle(Color.secondary)
             }
         }
     }
@@ -61,12 +73,12 @@ struct IntRow: View {
         HStack {
             Text(title)
             Spacer()
-            TextField("0", value: $value, format: .number)
+            TextField("0", value: $value, format: .number.locale(Fmt.locale))
                 .keyboardType(.numberPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: 100)
             if let unit {
-                Text(unit).foregroundStyle(.secondary)
+                Text(UnitText.display(unit)).foregroundStyle(Color.secondary)
             }
         }
     }
@@ -89,7 +101,7 @@ struct ValueRow: View {
             Text(title)
             Spacer()
             Text(value)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.secondary)
                 .monospacedDigit()
         }
     }
@@ -101,7 +113,7 @@ struct HintRow: View {
     var body: some View {
         Text(text)
             .font(.footnote)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(Color.secondary)
     }
 }
 

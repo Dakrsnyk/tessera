@@ -176,18 +176,18 @@ enum NutritionMath {
         return count
     }
 
-    /// Calories suggested for the next meal: what's left, split across the main meals still ahead.
+    /// Calories suggested for the next meal: what's left, split across the main meals still ahead
+    /// that have nothing logged yet.
     static func nextMealBudget(_ state: NutritionState, at date: Date) -> (meal: MealType, kcal: Double, protein: Double)? {
-        guard let meal = MealType.next(after: date) else { return nil }
+        guard let first = MealType.next(after: date) else { return nil }
+        let logged = Set(entries(state, on: date).map(\.meal))
+        let mainMeals: [MealType] = [.breakfast, .lunch, .dinner]
+        let ahead = mainMeals.drop(while: { $0 != first }).filter { !logged.contains($0) }
+        guard let meal = ahead.first else { return nil }
         let today = totals(state, on: date)
         let remainingKcal = max(0, state.goals.kcal - today.kcal)
         let remainingProtein = max(0, state.goals.protein - today.protein)
-        let mealsLeft: Double
-        switch meal {
-        case .breakfast: mealsLeft = 3
-        case .lunch: mealsLeft = 2
-        default: mealsLeft = 1
-        }
+        let mealsLeft = Double(ahead.count)
         return (meal, remainingKcal / mealsLeft, remainingProtein / mealsLeft)
     }
 }

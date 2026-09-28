@@ -150,7 +150,7 @@ final class PremiumStore {
         guard isTrialEligible, let offer = product.subscription?.introductoryOffer, offer.paymentMode == .freeTrial else { return nil }
         let period = offer.period
         switch period.unit {
-        case .day: return "\(period.value) jours gratuits"
+        case .day: return period.value == 1 ? "1 jour gratuit" : "\(period.value) jours gratuits"
         case .week: return period.value == 1 ? "7 jours gratuits" : "\(period.value) semaines gratuites"
         case .month: return "\(period.value) mois gratuit\(period.value > 1 ? "s" : "")"
         case .year: return "1 an gratuit"

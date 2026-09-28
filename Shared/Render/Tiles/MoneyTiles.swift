@@ -153,7 +153,7 @@ enum MoneyTiles {
         tile.value = TF.money(today, currency, decimals: 2)
         tile.caption = "dépensé aujourd'hui"
         tile.buttons = state.quickExpenses.prefix(3).map { quick in
-            TileButton(title: "\(quick.name) \(TF.money(quick.amount, currency, decimals: quick.amount.rounded() == quick.amount ? 0 : 2))", symbol: quick.symbol, action: .quickExpense(quick.id.uuidString))
+            TileButton(title: quick.name, symbol: quick.symbol, action: .quickExpense(quick.id.uuidString))
         }
         tile.rows = state.quickExpenses.prefix(4).map { quick in
             TileRow(id: quick.id.uuidString, title: quick.name, value: TF.money(quick.amount, currency, decimals: 2), symbol: "plus.circle.fill", action: .quickExpense(quick.id.uuidString))
@@ -166,7 +166,7 @@ enum MoneyTiles {
 
     static func portfolio(_ data: DomainData, currency: String) -> Tile {
         let positions = PortfolioMath.positions(data.portfolio, prices: data.prices)
-        guard !positions.isEmpty else { return .empty("Portefeuille", symbol: "chart.line.uptrend.xyaxis", message: "Ajoute tes placements dans Tessera, espace Portefeuille.") }
+        guard !positions.isEmpty else { return .empty("Portefeuille", symbol: "chart.line.uptrend.xyaxis", message: "Ajoute tes placements dans Tessera, espace Placements.") }
         let summary = PortfolioMath.summary(positions)
         var tile = Tile(title: "Portefeuille", symbol: "chart.line.uptrend.xyaxis")
         tile.value = TF.money(summary.value, currency)
@@ -197,7 +197,7 @@ enum MoneyTiles {
         let parts = PortfolioMath.allocation(positions)
         let total = parts.reduce(0) { $0 + $1.value }
         guard let largest = parts.max(by: { $0.value < $1.value }), total > 0 else {
-            return .empty("Répartition", symbol: "chart.pie", message: "Ajoute tes placements dans Tessera, espace Portefeuille.")
+            return .empty("Répartition", symbol: "chart.pie", message: "Ajoute tes placements dans Tessera, espace Placements.")
         }
         var tile = Tile(title: "Répartition", symbol: "chart.pie")
         tile.value = Fmt.percent(largest.value / total)

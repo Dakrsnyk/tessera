@@ -43,7 +43,7 @@ struct TileView: View {
         }
     }
 
-    @ViewBuilder private func valueText(_ size: CGFloat) -> some View {
+    @ViewBuilder private func valueText(_ size: CGFloat, showsUnit: Bool = true) -> some View {
         if let timer = tile.timer {
             Text(timerInterval: timer, countsDown: true)
                 .font(s.number(size))
@@ -58,7 +58,7 @@ struct TileView: View {
                     .foregroundStyle(valueColor)
                     .lineLimit(1)
                     .minimumScaleFactor(0.45)
-                if let unit = tile.unit {
+                if showsUnit, let unit = tile.unit {
                     Text(unit)
                         .font(s.text(max(11, size * 0.38), .medium))
                         .foregroundStyle(s.secondary)
@@ -93,12 +93,18 @@ struct TileView: View {
             Text(footnote)
                 .font(s.text(9))
                 .foregroundStyle(s.secondary.opacity(0.8))
-                .lineLimit(1)
+                .lineLimit(2)
+                .minimumScaleFactor(0.9)
         }
     }
 
     private var isRing: Bool {
         if case .ring = tile.visual { return true }
+        return false
+    }
+
+    private var isSegments: Bool {
+        if case .segments = tile.visual { return true }
         return false
     }
 
@@ -117,7 +123,7 @@ struct TileView: View {
                 ZStack {
                     RingView(progress: progress, lineWidth: 9, color: s.accent, track: s.track)
                     VStack(spacing: 0) {
-                        valueText(24)
+                        valueText(24, showsUnit: false)
                         if let unit = tile.unit, tile.timer == nil {
                             Text(unit).font(s.text(10, .medium)).foregroundStyle(s.secondary).lineLimit(1)
                         }
@@ -129,8 +135,9 @@ struct TileView: View {
                     Text(caption)
                         .font(s.text(11))
                         .foregroundStyle(s.secondary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.85)
+                        .multilineTextAlignment(.center)
                 }
                 Spacer(minLength: 0)
             }
@@ -170,9 +177,15 @@ struct TileView: View {
     // MARK: Medium
 
     private var medium: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            header
+            mediumBody
+        }
+    }
+
+    private var mediumBody: some View {
         HStack(alignment: .top, spacing: 14) {
             VStack(alignment: .leading, spacing: 3) {
-                header
                 Spacer(minLength: 2)
                 if !hasValue {
                     captionText(lines: 5)
@@ -186,7 +199,7 @@ struct TileView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 
             mediumPanel
-                .frame(width: 168)
+                .frame(width: tile.rows.isEmpty ? 168 : 184)
                 .frame(maxHeight: .infinity)
         }
     }
@@ -229,8 +242,9 @@ struct TileView: View {
                 detailText
             }
             if hasVisual {
-                TileVisualView(visual: tile.visual, context: context, compact: false)
-                    .frame(height: tile.rows.isEmpty ? 150 : 86)
+                TileVisualView(visual: tile.visual, context: context, compact: !tile.rows.isEmpty && isSegments)
+                    .frame(height: tile.rows.isEmpty ? 150 : (isSegments ? 14 : 86))
+                    .clipped()
             }
             if !tile.rows.isEmpty {
                 TileRowsView(rows: Array(tile.rows.prefix(hasVisual ? 5 : 8)), context: context, compact: false)
@@ -293,7 +307,9 @@ struct TileRowsView: View {
                         .font(s.text(compact ? 12 : 13, row.isHighlighted ? .semibold : .regular))
                         .foregroundStyle(row.isDone == true ? s.secondary : s.primary)
                         .strikethrough(row.isDone == true, color: s.secondary)
-                        .lineLimit(1)
+                        // Short lists in small widgets have room for a second line.
+                        .lineLimit(compact && rows.count <= 3 ? 2 : 1)
+                        .minimumScaleFactor(0.8)
                     if let detail = row.detail, !compact {
                         Text(detail)
                             .font(s.text(10))
@@ -308,6 +324,7 @@ struct TileRowsView: View {
                         .foregroundStyle(row.isHighlighted ? s.accent : s.secondary)
                         .lineLimit(1)
                         .fixedSize()
+                        .layoutPriority(1)
                 }
             }
             if let progress = row.progress {
@@ -481,13 +498,15 @@ struct BarsChart: View {
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
             if !labels.isEmpty {
-                HStack(spacing: 4) {
+                HStack(spacing: values.count > 14 ? 2 : 4) {
                     ForEach(Array(labels.enumerated()), id: \.offset) { pair in
-                        Text(pair.element)
+                        let shown = labels.count <= 8 || pair.offset % 3 == 0 || pair.offset == highlight
+                        Text(shown ? pair.element : " ")
                             .font(style.text(9, pair.offset == highlight ? .bold : .regular))
                             .foregroundStyle(pair.offset == highlight ? style.primary : style.secondary)
-                            .frame(maxWidth: .infinity)
                             .lineLimit(1)
+                            .fixedSize()
+                            .frame(maxWidth: .infinity)
                     }
                 }
             }
@@ -715,6 +734,9 @@ struct SunArc: View {
 struct TileAccessoryView: View {
     let tile: Tile
     let family: WidgetFamily
+    /// False in app previews (see `TimerRing`).
+    var isLive = true
+    var now = Date()
 
     var body: some View {
         switch family {
@@ -726,14 +748,7 @@ struct TileAccessoryView: View {
 
     @ViewBuilder private var circular: some View {
         if let timer = tile.timer {
-            ProgressView(timerInterval: timer, countsDown: true) {
-                Image(systemName: tile.symbol)
-            } currentValueLabel: {
-                Text(timerInterval: timer, countsDown: true)
-                    .font(.system(size: 11, weight: .semibold).monospacedDigit())
-            }
-            .progressViewStyle(.circular)
-            .widgetAccentable()
+            TimerRing(range: timer, symbol: tile.symbol, isLive: isLive, now: now)
         } else if let gauge = tile.gauge {
             Gauge(value: min(1, max(0, gauge))) {
                 Image(systemName: tile.symbol)
@@ -779,6 +794,7 @@ struct TileAccessoryView: View {
                 Text(caption)
                     .font(.caption)
                     .lineLimit(tile.empty == nil && !tile.value.isEmpty ? 1 : 3)
+                    .minimumScaleFactor(0.75)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -786,5 +802,38 @@ struct TileAccessoryView: View {
 
     private var inline: some View {
         Label(tile.inline ?? "\(tile.title) · \(tile.value)\(tile.unit.map { " " + $0 } ?? "")", systemImage: tile.symbol)
+    }
+}
+
+/// Circular countdown for the Lock Screen. WidgetKit animates `ProgressView(timerInterval:)`, but inside
+/// the app the circular style is drawn as a spinner, so previews show a gauge set at the current time.
+struct TimerRing: View {
+    let range: ClosedRange<Date>
+    let symbol: String
+    let isLive: Bool
+    var now = Date()
+
+    var body: some View {
+        if isLive {
+            ProgressView(timerInterval: range, countsDown: true) {
+                Image(systemName: symbol)
+            } currentValueLabel: {
+                Text(timerInterval: range, countsDown: true)
+                    .font(.system(size: 11, weight: .semibold).monospacedDigit())
+            }
+            .progressViewStyle(.circular)
+            .widgetAccentable()
+        } else {
+            let total = max(1, range.upperBound.timeIntervalSince(range.lowerBound))
+            let left = min(max(0, range.upperBound.timeIntervalSince(now)), total)
+            Gauge(value: left / total) {
+                Image(systemName: symbol)
+            } currentValueLabel: {
+                Text(timerInterval: range, countsDown: true)
+                    .font(.system(size: 11, weight: .semibold).monospacedDigit())
+            }
+            .gaugeStyle(.accessoryCircularCapacity)
+            .widgetAccentable()
+        }
     }
 }

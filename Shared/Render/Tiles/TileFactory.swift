@@ -40,6 +40,16 @@ enum TF {
         return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
     }
 
+    /// "1,2" / "0,08" / "150": up to 4 decimals, without trailing zeros.
+    static func quantity(_ value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = Fmt.locale
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 4
+        return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
+    }
+
     static func money(_ value: Double, _ currency: String, decimals: Int = 0) -> String {
         Fmt.money(value, currency: currency, decimals: decimals)
     }
@@ -57,6 +67,17 @@ enum TF {
         case -1: return "hier"
         case 2...: return "dans \(days) jours"
         default: return "il y a \(-days) jours"
+        }
+    }
+
+    /// "Auj." / "Demain" / "3 j" / "En retard", for narrow rows.
+    static func shortRelativeDay(_ date: Date, from now: Date) -> String {
+        let days = DateMath.daysBetween(now, date)
+        switch days {
+        case 0: return "Auj."
+        case 1: return "Demain"
+        case 2...: return "\(days) j"
+        default: return "En retard"
         }
     }
 

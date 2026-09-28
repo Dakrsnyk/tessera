@@ -234,8 +234,20 @@ struct ResolvedStyle {
         self.track = secondary.opacity(0.25)
         self.panel = panel
         let onDark = darkSurface ?? false
-        self.positive = onDark ? Color(hex: "5BD68A") : Color(hex: "1E9E57")
-        self.negative = onDark ? Color(hex: "FF7A7A") : Color(hex: "D6364B")
+        // On colorful gradients and photos, green and red text is hard to read: the sign carries the meaning.
+        let colorful: Bool = {
+            switch design.background {
+            case .theme:
+                if case .gradient = theme.background { return true }
+                return false
+            case .color:
+                return false
+            default:
+                return true
+            }
+        }()
+        self.positive = colorful ? primary : (onDark ? Color(hex: "5BD68A") : Color(hex: "1E9E57"))
+        self.negative = colorful ? primary : (onDark ? Color(hex: "FF7A7A") : Color(hex: "D6364B"))
         switch design.font {
         case .theme: self.fontDesign = theme.fontDesign
         case .standard: self.fontDesign = .default

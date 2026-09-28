@@ -48,7 +48,9 @@ struct TasksWidgetView: View {
                     }
                 }
                 if visible.count > limit {
-                    Text("+ \(visible.count - limit) autre\(visible.count - limit > 1 ? "s" : "")")
+                    let hidden = visible.dropFirst(limit)
+                    let hiddenOpen = hidden.filter { !$0.isDone }.count
+                    Text(hiddenOpen > 0 ? "+ \(hiddenOpen) à faire" : "+ \(Fmt.plural(hidden.count, "terminée", "terminées"))")
                         .font(s.text(11))
                         .foregroundStyle(s.secondary)
                 }

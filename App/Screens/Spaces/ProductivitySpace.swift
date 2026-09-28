@@ -16,7 +16,7 @@ struct ProductivitySpaceSections: View {
                     model.update(\.productivity) { $0.togglePriority(item.id) }
                 } label: {
                     Label {
-                        Text(item.title).strikethrough(done).foregroundStyle(done ? .secondary : .primary)
+                        Text(item.title).strikethrough(done).foregroundStyle(done ? Color.secondary : Color.primary)
                     } icon: {
                         Image(systemName: done ? "checkmark.circle.fill" : "circle")
                     }
@@ -65,9 +65,9 @@ struct ProductivitySpaceSections: View {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
                             Circle().fill(Color(hex: project.colorHex)).frame(width: 10, height: 10)
-                            Text(project.name).foregroundStyle(.primary)
+                            Text(project.name).foregroundStyle(Color.primary)
                             Spacer()
-                            Text(Fmt.percent(project.progress)).foregroundStyle(.secondary).monospacedDigit()
+                            Text(Fmt.percent(project.progress)).foregroundStyle(Color.secondary).monospacedDigit()
                         }
                         ProgressView(value: project.progress).tint(Color(hex: project.colorHex))
                     }
@@ -111,13 +111,13 @@ struct ProductivitySpaceSections: View {
                         editingCounter = counter
                     } label: {
                         Label(counter.name, systemImage: counter.symbol)
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(Color.primary)
                     }
                     .buttonStyle(.plain)
                     Spacer()
                     Text("\(counter.value(on: Date()))\(counter.goal.map { " / \($0)" } ?? "")")
                         .monospacedDigit()
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.secondary)
                     Button {
                         Haptics.tap()
                         model.update(\.productivity) { $0.stepCounter(counter.id, by: 1) }
@@ -143,7 +143,7 @@ struct ProductivitySpaceSections: View {
             Text("Cafés, pompes, pages lues… Le widget Compteur ajoute d'une touche.")
         }
 
-        Section("Deep work") {
+        Section("Travail profond") {
             Stepper(value: Binding(
                 get: { model.productivity.weeklyFocusGoalHours },
                 set: { hours in model.update(\.productivity) { $0.weeklyFocusGoalHours = hours } }

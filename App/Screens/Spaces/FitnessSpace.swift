@@ -11,10 +11,10 @@ struct FitnessSpaceSections: View {
         Section {
             if let active, let exercise = active.currentExercise {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(active.routineName).font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                    Text(active.routineName).font(.caption.weight(.semibold)).foregroundStyle(Color.secondary)
                     Text(exercise.name).font(.title3.weight(.semibold))
                     Text("Série \(active.setIndex + 1)/\(exercise.sets) · \(FitnessTiles.setText(exercise))")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.secondary)
                     if let rest = active.restEndsAt, rest > now {
                         HStack {
                             Image(systemName: "timer")
@@ -60,10 +60,10 @@ struct FitnessSpaceSections: View {
                     editingRoutine = routine
                 } label: {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(routine.name).foregroundStyle(.primary)
+                        Text(routine.name).foregroundStyle(Color.primary)
                         Text("\(Fmt.plural(routine.exercises.count, "exercice", "exercices")) · \(weekdays(routine.weekdays))")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color.secondary)
                     }
                 }
             }

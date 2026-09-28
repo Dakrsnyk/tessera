@@ -17,7 +17,7 @@ struct AccessoryWidgetView: View {
         case .upNext: upNext
         case .crypto: crypto
         case .clock, .calendar, .worldClock, .yearDots, .habits, .note, .moneyFlow: fallback
-        default: TileAccessoryView(tile: TileFactory.make(context), family: family)
+        default: TileAccessoryView(tile: TileFactory.make(context), family: family, isLive: context.isInteractive, now: context.date)
         }
     }
 
@@ -165,14 +165,7 @@ struct AccessoryWidgetView: View {
             let start = session.startDate ?? end.addingTimeInterval(-Double(session.lastDurationMinutes) * 60)
             let range = start...max(end, start.addingTimeInterval(1))
             if family == .accessoryCircular {
-                ProgressView(timerInterval: range, countsDown: true) {
-                    Image(systemName: "timer")
-                } currentValueLabel: {
-                    Text(timerInterval: range, countsDown: true)
-                        .font(.system(size: 11, weight: .semibold).monospacedDigit())
-                }
-                .progressViewStyle(.circular)
-                .widgetAccentable()
+                TimerRing(range: range, symbol: "timer", isLive: context.isInteractive, now: context.date)
             } else {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Focus").font(.headline).widgetAccentable()

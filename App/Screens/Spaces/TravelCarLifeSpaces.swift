@@ -46,10 +46,10 @@ struct TravelSpaceSections: View {
             ForEach(state.trips.sorted { $0.start < $1.start }) { trip in
                 Button { editingTrip = trip } label: {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(trip.destination).foregroundStyle(.primary)
+                        Text(trip.destination).foregroundStyle(Color.primary)
                         Text("\(Fmt.format(trip.start, template: "dMMM")) – \(Fmt.format(trip.end, template: "dMMMyyyy")) · \(trip.currencyCode)")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color.secondary)
                     }
                 }
             }
@@ -298,8 +298,8 @@ struct CarSpaceSections: View {
             if let consumption = CarMath.consumption(state) {
                 ValueRow(title: "Consommation", value: "\(TF.decimal(consumption, 1)) L/100 km", symbol: "fuelpump")
             }
-            ValueRow(title: "Coût par mois", value: TF.money(cost.total, currency), symbol: "car.side")
-            Button { showsFill = true } label: { Label("Noter un plein", systemImage: "fuelpump.fill").font(.headline) }
+            ValueRow(title: "Coût par mois", value: TF.money(cost.total, currency), symbol: "car.fill")
+            Button { showsFill = true } label: { Label("Noter un plein", systemImage: "fuelpump.fill") }
             Button { showsReading = true } label: { Label("Noter le kilométrage", systemImage: "speedometer") }
         } header: {
             Text("Ma voiture")
@@ -314,7 +314,7 @@ struct CarSpaceSections: View {
                 Button { editingService = status.item } label: {
                     VStack(alignment: .leading, spacing: 5) {
                         HStack {
-                            Text(status.item.name).foregroundStyle(.primary)
+                            Text(status.item.name).foregroundStyle(Color.primary)
                             Spacer()
                             Text(Self.remaining(status))
                                 .foregroundStyle(status.used >= 1 ? Color.red : Color.secondary)

@@ -52,11 +52,14 @@ enum SamplePayload {
                 TaskItem(title: "Lire 20 pages"),
             ]
         case .habits:
-            let week = DateMath.week(containing: now).map(DateMath.dayKey)
+            // Today and the days before it, never days still ahead.
+            let recent = (0..<7).map { offset in
+                DateMath.dayKey(DateMath.calendar.date(byAdding: .day, value: -offset, to: now) ?? now)
+            }
             payload.content.habits = [
-                Habit(name: "Méditer", symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: Array(week.prefix(4))),
-                Habit(name: "Sport", symbol: "figure.run", colorHex: "FF6B57", completedDays: [week[0], week[2]]),
-                Habit(name: "Lecture", symbol: "book.fill", colorHex: "2F8F7A", completedDays: Array(week.prefix(3))),
+                Habit(name: "Méditer", symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: Array(recent.prefix(4))),
+                Habit(name: "Sport", symbol: "figure.run", colorHex: "FF6B57", completedDays: [recent[0], recent[2]]),
+                Habit(name: "Lecture", symbol: "book.fill", colorHex: "2F8F7A", completedDays: Array(recent.prefix(3))),
             ]
         case .hydration:
             payload.content.hydration.add(5, on: now)

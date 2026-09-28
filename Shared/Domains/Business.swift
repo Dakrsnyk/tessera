@@ -155,11 +155,12 @@ enum BusinessMath {
         return Recurring(mrr: latest.mrr, subscribers: latest.subscribers, growth: previous.flatMap { Stats.change(from: $0.mrr, to: latest.mrr) })
     }
 
-    /// Today's revenue compared with the same weekday last week.
+    /// Today's revenue so far compared with the same weekday last week, up to the same time.
     static func todayVersusLastWeek(_ state: BusinessState, at date: Date) -> (today: Double, lastWeek: Double) {
         let lastWeekDay = DateMath.calendar.date(byAdding: .day, value: -7, to: date) ?? date
-        let start = DateMath.startOfDay(lastWeekDay)
-        let elapsed = date.timeIntervalSince(DateMath.startOfDay(date))
-        return (revenue(state, .day, at: date), revenue(state, in: DateInterval(start: start, duration: max(1, elapsed))))
+        let elapsed = max(1, date.timeIntervalSince(DateMath.startOfDay(date)))
+        let today = revenue(state, in: DateInterval(start: DateMath.startOfDay(date), duration: elapsed))
+        let lastWeek = revenue(state, in: DateInterval(start: DateMath.startOfDay(lastWeekDay), duration: elapsed))
+        return (today, lastWeek)
     }
 }

@@ -334,7 +334,7 @@ struct PackSheet: View {
                         }
                     }
                     if let installed {
-                        Label(installed == pack.kinds.count ? "Pack ajouté à Mes widgets" : "\(installed) widgets ajoutés (limite de la version gratuite)", systemImage: "checkmark.circle.fill")
+                        Label(installed == pack.kinds.count ? "Pack ajouté à Mes widgets" : "\(Fmt.plural(installed, "widget ajouté", "widgets ajoutés")) (limite de la version gratuite)", systemImage: "checkmark.circle.fill")
                             .foregroundStyle(.green)
                             .font(.subheadline.weight(.semibold))
                     }

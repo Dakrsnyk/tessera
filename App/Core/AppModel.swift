@@ -99,6 +99,19 @@ final class AppModel {
     }
 
     /// Everything a widget of any kind may show, from the data in memory (used by previews).
+    #if DEBUG
+    /// Screenshot mode: demo market, company and travel data, so review captures don't depend on the network.
+    func seedDemoCaches(_ data: DomainData) {
+        prices = data.prices
+        quotes = data.quotes
+        global = data.global
+        companies = Dictionary(data.companies.map { ($0.ref.cik, $0) }, uniquingKeysWith: { first, _ in first })
+        stocks = data.stocks
+        fx = data.fx
+        tripWeather = data.tripWeather
+    }
+    #endif
+
     var domains: DomainData {
         var data = DomainData()
         data.nutrition = nutrition

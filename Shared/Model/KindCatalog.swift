@@ -14,9 +14,9 @@ enum Space: String, CaseIterable, Identifiable, Codable {
         case .nutrition: "Nutrition"
         case .fitness: "Fitness"
         case .budget: "Budget"
-        case .investing: "Portefeuille"
-        case .business: "Business"
-        case .markets: "Entreprises"
+        case .investing: "Placements"
+        case .business: "Mon entreprise"
+        case .markets: "Sociétés cotées"
         case .student: "Études"
         case .travel: "Voyage"
         case .car: "Auto"
@@ -147,7 +147,7 @@ enum KindCatalog {
         KindInfo(kind: .priorities, title: "Top 3 du jour", summary: "Tes trois priorités du jour, cochées depuis l'écran d'accueil.", category: .productivity, symbol: "3.circle", isPremium: false, families: SM + [rect], keywords: ["priorités", "important", "objectifs", "today"], space: .productivity, isNew: true, isInteractive: true),
         KindInfo(kind: .project, title: "Projet", summary: "L'avancement d'un projet, ses tâches restantes et son échéance.", category: .productivity, symbol: "folder.fill", isPremium: true, families: SML, keywords: ["projet", "avancement", "deadline"], space: .productivity, isNew: true, isInteractive: true),
         KindInfo(kind: .deadline, title: "Échéance", summary: "Le temps qu'il reste avant une échéance, à la seconde près.", category: .productivity, symbol: "flag.checkered", isPremium: true, families: SM + [circ, rect], keywords: ["deadline", "rendu", "date limite"], space: .productivity, isNew: true),
-        KindInfo(kind: .deepWork, title: "Deep work", summary: "Tes heures de concentration de la semaine, par rapport à ton objectif.", category: .productivity, symbol: "brain.head.profile", isPremium: true, families: SML, keywords: ["concentration", "focus", "heures", "travail profond"], space: .productivity, isNew: true),
+        KindInfo(kind: .deepWork, title: "Travail profond", summary: "Tes heures de concentration de la semaine, par rapport à ton objectif.", category: .productivity, symbol: "brain.head.profile", isPremium: true, families: SML, keywords: ["concentration", "focus", "heures", "travail profond"], space: .productivity, isNew: true),
         KindInfo(kind: .counter, title: "Compteur", summary: "Compte n'importe quoi d'une touche : cafés, pompes, pages…", category: .productivity, symbol: "plusminus.circle", isPremium: false, families: SM + [circ], keywords: ["compteur", "tally", "comptage", "clic"], space: .productivity, isNew: true, isInteractive: true),
     ]
 

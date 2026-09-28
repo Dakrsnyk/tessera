@@ -76,7 +76,7 @@ enum WeatherTiles {
         tile.detail = weather.locationName
         tile.inline = tile.caption
         tile.gauge = top / 100
-        tile.shortValue = "\(Int(top))%"
+        tile.shortValue = Fmt.percent(top / 100)
         tile.footnote = "Probabilité de précipitations · Open-Meteo.com"
         return tile
     }

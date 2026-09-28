@@ -104,14 +104,14 @@ enum TimeTiles {
         tile.value = Fmt.percent(illumination)
         tile.unit = "éclairée"
         tile.caption = MoonPhase.name(at: now)
-        tile.detail = "Pleine lune \(TF.relativeDay(full, from: now)) · \(Fmt.shortDay(full))"
+        tile.detail = "Prochaine pleine lune \(TF.relativeDay(full, from: now)) · \(Fmt.shortDay(full))"
         tile.visual = .symbol(MoonPhase.symbol(at: now))
         tile.rows = [
             TileRow(id: "full", title: "Pleine lune", value: Fmt.shortDay(full), symbol: "moonphase.full.moon"),
             TileRow(id: "new", title: "Nouvelle lune", value: Fmt.shortDay(new), symbol: "moonphase.new.moon"),
-        ]
+        ].sorted { ($0.id == "full" ? full : new) < ($1.id == "full" ? full : new) }
         tile.gauge = illumination
-        tile.shortValue = "\(Int((illumination * 100).rounded()))%"
+        tile.shortValue = Fmt.percent(illumination)
         tile.inline = "\(MoonPhase.name(at: now)) · \(Fmt.percent(illumination))"
         return tile
     }

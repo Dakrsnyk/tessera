@@ -205,8 +205,18 @@ enum MoonPhase {
         (1 - cos(2 * Double.pi * phase(at: date))) / 2
     }
 
+    /// 0, 2, 4, 6 are the main phases (new, first quarter, full, last quarter), named only within a day
+    /// of the exact moment; the others cover the days in between.
     private static func index(_ phase: Double) -> Int {
-        Int((phase * 8).rounded()) % 8
+        let oneDay = 1 / synodicMonth
+        let main: [(target: Double, index: Int)] = [(0, 0), (0.25, 2), (0.5, 4), (0.75, 6), (1, 0)]
+        if let hit = main.first(where: { abs(phase - $0.target) <= oneDay }) { return hit.index }
+        switch phase {
+        case ..<0.25: return 1
+        case ..<0.5: return 3
+        case ..<0.75: return 5
+        default: return 7
+        }
     }
 
     static func name(at date: Date) -> String {

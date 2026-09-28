@@ -13,7 +13,7 @@ struct SpacesView: View {
                 VStack(alignment: .leading, spacing: 18) {
                     Text("Chaque espace alimente ses widgets. Ce que tu notes ici s'affiche tout de suite sur ton écran d'accueil.")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.secondary)
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
                         ForEach(Space.allCases) { space in
                             NavigationLink(value: space) {
@@ -97,7 +97,7 @@ struct SpaceCard: View {
                 Spacer()
                 Text("\(widgetCount)")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.secondary)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
                     .background(Color.screenFill, in: Capsule())
@@ -106,10 +106,10 @@ struct SpaceCard: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(space.title)
                     .font(.headline)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Color.primary)
                 Text(summary)
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.secondary)
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -184,6 +184,8 @@ struct SpaceView: View {
             }
             .padding(.horizontal, 20)
         }
+        // Widgets scroll to the screen edge instead of being cut at the row's inset.
+        .scrollClipDisabled()
     }
 
     @ViewBuilder private var content: some View {

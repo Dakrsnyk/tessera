@@ -19,6 +19,13 @@ enum FitnessTiles {
         }
     }
 
+    /// "4 × 8 · 60 kg" or "3 × 12".
+    static func setsText(_ exercise: ExerciseTemplate) -> String {
+        let base = "\(exercise.sets) × \(exercise.reps)"
+        guard exercise.weight > 0 else { return base }
+        return "\(base) · \(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg"
+    }
+
     static func setText(_ exercise: ExerciseTemplate) -> String {
         exercise.weight > 0 ? "\(exercise.reps) × \(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg" : "\(exercise.reps) répétitions"
     }
@@ -44,7 +51,7 @@ enum FitnessTiles {
         tile.rows = exercises.enumerated().map { pair -> TileRow in
             let isCurrent = active.map { $0.exerciseIndex == pair.offset } ?? false
             let isDone = active.map { $0.exerciseIndex > pair.offset } ?? doneToday
-            return TileRow(id: "\(pair.offset)", title: pair.element.name, value: "\(pair.element.sets) × \(setText(pair.element))", isDone: isDone, isHighlighted: isCurrent)
+            return TileRow(id: "\(pair.offset)", title: pair.element.name, value: setsText(pair.element), isDone: isDone, isHighlighted: isCurrent)
         }
         tile.buttons = doneToday ? [] : [TileButton(title: active == nil ? "Commencer" : "Série faite", symbol: active == nil ? "play.fill" : "checkmark", action: .completeSet, isProminent: true)]
         tile.inline = "\(tile.value) · \(totalSets) séries"
@@ -107,13 +114,14 @@ enum FitnessTiles {
         let days = FitnessMath.weeklyVolume(state, weekOf: now)
         let total = days.reduce(0, +)
         let lastWeekDate = DateMath.calendar.date(byAdding: .day, value: -7, to: now) ?? now
-        let lastWeek = FitnessMath.weeklyVolume(state, weekOf: lastWeekDate).reduce(0, +)
+        // Same days of last week, so a Monday isn't compared with a whole week.
+        let lastWeek = FitnessMath.weeklyVolume(state, weekOf: lastWeekDate).prefix(TF.todayIndex(now) + 1).reduce(0, +)
         var tile = Tile(title: "Volume", symbol: "scalemass")
         tile.value = TF.int(total)
         tile.unit = "kg"
         tile.caption = "soulevés cette semaine"
         if let change = Stats.change(from: lastWeek, to: total) {
-            tile.detail = "Semaine dernière : \(TF.int(lastWeek)) kg (\(Fmt.signedPercent(change * 100)))"
+            tile.detail = "À ce jour la semaine dernière : \(TF.int(lastWeek)) kg (\(Fmt.signedPercent(change * 100)))"
         }
         tile.visual = .bars(days, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now))
         tile.inline = "\(TF.int(total)) kg cette semaine"

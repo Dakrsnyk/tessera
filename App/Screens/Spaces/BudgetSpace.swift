@@ -22,7 +22,7 @@ struct BudgetSpaceSections: View {
                     .monospacedDigit()
                 Text("restent ce mois-ci, soit \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.secondary)
                 ProgressView(value: min(1, BudgetMath.spentThisMonth(state, at: now) / max(1, state.monthlyBudget)))
                     .tint(Color(hex: "2F8F7A"))
             }
@@ -53,7 +53,7 @@ struct BudgetSpaceSections: View {
                         .frame(width: 22)
                     VStack(alignment: .leading, spacing: 1) {
                         Text(expense.note.isEmpty ? (category?.name ?? "Dépense") : expense.note)
-                        Text(Fmt.shortDay(expense.date)).font(.caption).foregroundStyle(.secondary)
+                        Text(Fmt.shortDay(expense.date)).font(.caption).foregroundStyle(Color.secondary)
                     }
                     Spacer()
                     Text(TF.money(expense.amount, currency, decimals: 2)).monospacedDigit()
@@ -100,11 +100,11 @@ struct BudgetSpaceSections: View {
                     HStack {
                         Image(systemName: item.bill.symbol).frame(width: 22).foregroundStyle(.tint)
                         VStack(alignment: .leading, spacing: 1) {
-                            Text(item.bill.name).foregroundStyle(.primary)
-                            Text("\(item.bill.isSubscription ? "Abonnement · " : "")\(Fmt.shortDay(item.due))").font(.caption).foregroundStyle(.secondary)
+                            Text(item.bill.name).foregroundStyle(Color.primary)
+                            Text("\(item.bill.isSubscription ? "Abonnement · " : "")\(Fmt.shortDay(item.due))").font(.caption).foregroundStyle(Color.secondary)
                         }
                         Spacer()
-                        Text(TF.money(item.bill.amount, currency, decimals: 2)).foregroundStyle(.secondary).monospacedDigit()
+                        Text(TF.money(item.bill.amount, currency, decimals: 2)).foregroundStyle(Color.secondary).monospacedDigit()
                     }
                 }
             }
@@ -125,9 +125,9 @@ struct BudgetSpaceSections: View {
                 } label: {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
-                            Text(goal.name).foregroundStyle(.primary)
+                            Text(goal.name).foregroundStyle(Color.primary)
                             Spacer()
-                            Text("\(TF.money(goal.saved, currency)) / \(TF.money(goal.target, currency))").foregroundStyle(.secondary).monospacedDigit()
+                            Text("\(TF.money(goal.saved, currency)) / \(TF.money(goal.target, currency))").foregroundStyle(Color.secondary).monospacedDigit()
                         }
                         ProgressView(value: goal.progress)
                     }

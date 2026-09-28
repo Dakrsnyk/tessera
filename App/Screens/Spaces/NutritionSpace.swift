@@ -17,11 +17,11 @@ struct NutritionSpaceSections: View {
                     Text(TF.int(max(0, state.goals.kcal - totals.kcal)))
                         .font(.system(size: 34, weight: .semibold, design: .rounded))
                         .monospacedDigit()
-                    Text("kcal restantes").foregroundStyle(.secondary)
+                    Text("kcal restantes").foregroundStyle(Color.secondary)
                     Spacer()
                     Text("\(TF.int(totals.kcal)) / \(TF.int(state.goals.kcal))")
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.secondary)
                         .monospacedDigit()
                 }
                 ProgressView(value: min(1, totals.kcal / max(1, state.goals.kcal)))
@@ -31,7 +31,7 @@ struct NutritionSpaceSections: View {
                         Circle().fill(Color(hex: row.colorHex ?? "999999")).frame(width: 8, height: 8)
                         Text(row.title).font(.subheadline)
                         Spacer()
-                        Text(row.value ?? "").font(.subheadline).foregroundStyle(.secondary).monospacedDigit()
+                        Text(row.value ?? "").font(.subheadline).foregroundStyle(Color.secondary).monospacedDigit()
                     }
                 }
             }
@@ -60,10 +60,10 @@ struct NutritionSpaceSections: View {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(entry.food.displayName).lineLimit(1)
-                                Text("\(TF.int(entry.grams)) g").font(.caption).foregroundStyle(.secondary)
+                                Text("\(TF.int(entry.grams)) g").font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
-                            Text("\(TF.int(entry.totals.kcal)) kcal").foregroundStyle(.secondary).monospacedDigit()
+                            Text("\(TF.int(entry.totals.kcal)) kcal").foregroundStyle(Color.secondary).monospacedDigit()
                         }
                         .swipeActions {
                             Button(role: .destructive) {
@@ -178,7 +178,7 @@ struct FoodSearchView: View {
                 if !query.trimmed.isEmpty {
                     Section {
                         if isSearching {
-                            HStack { ProgressView(); Text("Recherche sur Open Food Facts…").foregroundStyle(.secondary) }
+                            HStack { ProgressView(); Text("Recherche sur Open Food Facts…").foregroundStyle(Color.secondary) }
                         } else if let searchError {
                             HintRow(text: searchError)
                         } else if online.isEmpty {
@@ -233,10 +233,10 @@ struct FoodSearchView: View {
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(food.displayName).foregroundStyle(.primary).lineLimit(1)
+                    Text(food.displayName).foregroundStyle(Color.primary).lineLimit(1)
                     Text("\(TF.int(food.kcal)) kcal / 100 g · P \(TF.int(food.protein)) · G \(TF.int(food.carbs)) · L \(TF.int(food.fat))")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.secondary)
                 }
                 Spacer()
                 Image(systemName: "plus.circle").foregroundStyle(.tint)

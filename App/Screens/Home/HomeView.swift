@@ -173,6 +173,8 @@ struct HomeView: View {
                                 Text(category.title)
                                     .font(.subheadline.weight(.semibold))
                                     .foregroundStyle(.primary)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.75)
                                 Text(Fmt.plural(WidgetKind.kinds(in: category).count, "widget", "widgets"))
                                     .font(.caption)
                                     .foregroundStyle(.secondary)

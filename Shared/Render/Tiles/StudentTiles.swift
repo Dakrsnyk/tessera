@@ -28,8 +28,8 @@ enum StudentTiles {
             return .empty("Prochain cours", symbol: "book.closed", message: hint)
         }
         let course = state.course(next.slot.courseID)
-        var tile = Tile(title: "Prochain cours", symbol: "book.closed")
         let ongoing = next.start <= now
+        var tile = Tile(title: ongoing ? "Cours actuel" : "Prochain cours", symbol: "book.closed")
         tile.value = ongoing ? "En cours" : TF.time(next.start, context)
         tile.caption = course?.name ?? "Cours"
         var detail: [String] = []
@@ -85,7 +85,7 @@ enum StudentTiles {
         tile.rows = open.prefix(5).map { item in
             TileRow(
                 id: item.id.uuidString, title: item.title,
-                value: TF.relativeDay(item.due, from: now).capitalizedFirst,
+                value: TF.shortRelativeDay(item.due, from: now),
                 colorHex: state.course(item.courseID)?.colorHex,
                 isDone: false, action: .toggleAssignment(item.id.uuidString),
                 isHighlighted: DateMath.daysBetween(now, item.due) <= 1
@@ -93,7 +93,7 @@ enum StudentTiles {
         }
         tile.compactRows = true
         tile.shortValue = Fmt.number(open.count)
-        tile.inline = "\(open.count) devoirs à rendre"
+        tile.inline = Fmt.plural(open.count, "devoir à rendre", "devoirs à rendre")
         return tile
     }
 

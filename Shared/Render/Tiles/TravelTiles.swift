@@ -64,9 +64,14 @@ enum TravelTiles {
         if !flight.gate.isEmpty { parts.append("Porte \(flight.gate)") }
         if !flight.seat.isEmpty { parts.append("Siège \(flight.seat)") }
         tile.detail = parts.isEmpty ? TF.relativeTime(flight.departure, from: now) : parts.joined(separator: " · ")
-        var rows = [TileRow(id: "dep", title: "Départ", value: TF.time(flight.departure, context), detail: flight.from, symbol: "airplane.departure")]
+        // Local times: an outbound flight lands in the trip's time zone, a return flight leaves from it.
+        let trip = TravelMath.currentTrip(state, at: now)
+        let outbound = trip.map { flight.departure < $0.end.addingTimeInterval(-86_400) } ?? true
+        let departureZone: TimeZone = outbound ? .current : (trip?.timeZone ?? .current)
+        let arrivalZone: TimeZone = outbound ? (trip?.timeZone ?? .current) : .current
+        var rows = [TileRow(id: "dep", title: "Départ", value: TF.time(flight.departure, context, zone: departureZone), detail: flight.from, symbol: "airplane.departure")]
         if let arrival = flight.arrival {
-            rows.append(TileRow(id: "arr", title: "Arrivée", value: TF.time(arrival, context), detail: flight.to, symbol: "airplane.arrival"))
+            rows.append(TileRow(id: "arr", title: "Arrivée", value: TF.time(arrival, context, zone: arrivalZone), detail: flight.to, symbol: "airplane.arrival"))
         }
         if !flight.gate.isEmpty { rows.append(TileRow(id: "gate", title: "Porte", value: flight.gate, symbol: "door.left.hand.open")) }
         if !flight.seat.isEmpty { rows.append(TileRow(id: "seat", title: "Siège", value: flight.seat, symbol: "carseat.right")) }
@@ -162,7 +167,7 @@ enum TravelTiles {
             TileRow(id: "ten", title: Fmt.money(10, currency: foreign), value: Fmt.money(10 / rate, currency: home), symbol: "equal"),
         ]
         tile.detail = "1 \(home) = \(TF.decimal(rate, 4)) \(foreign)"
-        tile.footnote = "Taux de référence BCE du \(rates.day) · Frankfurter"
+        tile.footnote = "Taux de référence BCE · \(Fmt.format(rates.fetchedAt, template: "dMMMM")) · Frankfurter"
         tile.inline = "1 \(home) = \(TF.decimal(rate, 3)) \(foreign)"
         return tile
     }

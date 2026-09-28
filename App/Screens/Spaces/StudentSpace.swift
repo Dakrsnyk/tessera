@@ -21,10 +21,10 @@ struct StudentSpaceSections: View {
                 } label: {
                     HStack {
                         Circle().fill(Color(hex: course.colorHex)).frame(width: 10, height: 10)
-                        Text(course.name).foregroundStyle(.primary)
+                        Text(course.name).foregroundStyle(Color.primary)
                         Spacer()
                         if let average = StudentMath.courseAverage(state, course: course.id) {
-                            Text("\(TF.decimal(average, 1)) %").foregroundStyle(.secondary).monospacedDigit()
+                            Text("\(TF.decimal(average, 1)) %").foregroundStyle(Color.secondary).monospacedDigit()
                         }
                     }
                 }
@@ -49,10 +49,10 @@ struct StudentSpaceSections: View {
                     HStack {
                         Circle().fill(Color(hex: state.course(slot.courseID)?.colorHex ?? "999999")).frame(width: 8, height: 8)
                         VStack(alignment: .leading, spacing: 1) {
-                            Text(StudentTiles.courseName(state, slot.courseID)).foregroundStyle(.primary)
+                            Text(StudentTiles.courseName(state, slot.courseID)).foregroundStyle(Color.primary)
                             Text("\(weekdayNames[safe: slot.weekday - 1] ?? "") · \(minuteText(slot.startMinute))–\(minuteText(slot.endMinute))\(slot.room.isEmpty ? "" : " · \(slot.room)")")
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(Color.secondary)
                         }
                     }
                 }
@@ -97,7 +97,7 @@ struct StudentSpaceSections: View {
                     Button { editingAssignment = item } label: {
                         VStack(alignment: .leading, spacing: 1) {
                             Text(item.title).strikethrough(item.isDone).foregroundStyle(item.isDone ? .secondary : .primary)
-                            Text(TF.relativeDay(item.due, from: now).capitalizedFirst).font(.caption).foregroundStyle(.secondary)
+                            Text(TF.relativeDay(item.due, from: now).capitalizedFirst).font(.caption).foregroundStyle(Color.secondary)
                         }
                     }
                     .buttonStyle(.plain)

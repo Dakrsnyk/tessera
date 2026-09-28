@@ -88,7 +88,7 @@ enum ProductivityTiles {
         let minutes = ProductivityMath.focusMinutes(state, weekOf: now)
         let goal = max(0.5, state.weeklyFocusGoalHours)
         let hours = minutes / 60
-        var tile = Tile(title: "Deep work", symbol: "brain.head.profile")
+        var tile = Tile(title: "Travail profond", symbol: "brain.head.profile")
         tile.value = Fmt.hours(hours)
         tile.caption = "sur \(Fmt.hours(goal)) · \(Fmt.percent(min(9.99, hours / goal)))"
         let today = ProductivityMath.focusByDay(state, weekOf: now)
@@ -118,8 +118,8 @@ enum ProductivityTiles {
         }
         let step = max(1, counter.step)
         tile.buttons = [
-            TileButton(title: "−\(step)", symbol: "minus", action: .counter(counter.id.uuidString, -1)),
-            TileButton(title: "+\(step)", symbol: "plus", action: .counter(counter.id.uuidString, 1), isProminent: true),
+            TileButton(title: "\(step)", symbol: "minus", action: .counter(counter.id.uuidString, -1)),
+            TileButton(title: "\(step)", symbol: "plus", action: .counter(counter.id.uuidString, 1), isProminent: true),
         ]
         tile.shortValue = Fmt.number(value)
         tile.inline = "\(counter.name) : \(Fmt.number(value))"

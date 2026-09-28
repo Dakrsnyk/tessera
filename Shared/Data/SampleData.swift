@@ -27,7 +27,7 @@ enum SampleData {
             let date = startHour.addingTimeInterval(Double(offset) * 3600)
             let hour = DateMath.calendar.component(.hour, from: date)
             let isDay = hour >= 7 && hour < 19
-            let temperature = 12 + shift + 7 * sin(Double(hour - 9) / 24 * 2 * Double.pi)
+            let temperature = 14 + shift + 5 * sin(Double(hour - 9) / 24 * 2 * Double.pi)
             var forecast = HourForecast(date: date, temperature: temperature, code: rain[offset] > 40 ? 61 : (offset < 4 ? 1 : 3), isDay: isDay)
             forecast.precipitationProbability = rain[offset]
             forecast.uvIndex = isDay ? max(0, 6 - abs(Double(hour - 13))) : 0
@@ -35,7 +35,7 @@ enum SampleData {
         }
         let codes = [1, 3, 61, 0, 2, 80, 1]
         let days = (0..<7).map { (offset: Int) -> DayForecast in
-            var forecast = DayForecast(date: day(offset, 0, from: now), code: codes[offset], high: 19 + shift + Double(offset % 3), low: 9 + shift + Double(offset % 2))
+            var forecast = DayForecast(date: day(offset, 0, from: now), code: codes[offset], high: 20 + shift + Double(offset % 3), low: 10 + shift + Double(offset % 2))
             forecast.sunrise = day(offset, 6, 52 + offset, from: now)
             forecast.sunset = day(offset, 18, 41 - 2 * offset, from: now)
             forecast.precipitationProbability = [10, 30, 80, 5, 20, 60, 10][offset]
@@ -44,7 +44,7 @@ enum SampleData {
         }
         var snapshot = WeatherSnapshot(
             locationName: name, latitude: 45.5, longitude: -73.57, fetchedAt: now,
-            temperature: 18 + shift, apparentTemperature: 17 + shift, code: 1, isDay: true, windSpeed: 14,
+            temperature: 15 + shift, apparentTemperature: 14 + shift, code: 1, isDay: true, windSpeed: 14,
             high: 20 + shift, low: 10 + shift, hourly: hours, daily: days
         )
         snapshot.humidity = 62
@@ -240,7 +240,7 @@ enum SampleData {
         state.name = "Atelier Nova"
         state.monthlyGoal = 12_000
         for offset in 0..<62 {
-            let date = day(-offset, 14, from: now)
+            let date = day(-offset, 8, from: now)
             let wave = sin(Double(offset) / 4) * 120
             let amount = 420 + wave + Double((offset * 37) % 150) - Double(offset) * 2
             let orders = 4 + (offset * 7) % 5

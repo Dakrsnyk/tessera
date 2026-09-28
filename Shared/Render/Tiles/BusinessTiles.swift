@@ -1,7 +1,7 @@
 import Foundation
 
 enum BusinessTiles {
-    static let hint = "Note tes ventes dans Tessera, espace Business."
+    static let hint = "Note tes ventes dans Tessera, espace Mon entreprise."
 
     static func make(_ context: RenderContext) -> Tile {
         let now = context.date
@@ -95,7 +95,7 @@ enum BusinessTiles {
 
     static func mrr(_ state: BusinessState, currency: String) -> Tile {
         guard let recurring = BusinessMath.recurring(state) else {
-            return .empty("MRR", symbol: "arrow.triangle.2.circlepath", message: "Ajoute ton revenu récurrent mensuel dans Tessera, espace Business.")
+            return .empty("MRR", symbol: "arrow.triangle.2.circlepath", message: "Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise.")
         }
         var tile = Tile(title: "Revenu récurrent", symbol: "arrow.triangle.2.circlepath")
         tile.value = TF.money(recurring.mrr, currency)
@@ -106,7 +106,7 @@ enum BusinessTiles {
             tile.trend = growth >= 0
         }
         let history = state.subscriptions.sorted { $0.month < $1.month }.suffix(12)
-        tile.visual = .bars(history.map(\.mrr), labels: history.map { String(Fmt.format($0.month, template: "MMM").prefix(3)) }, highlight: history.count - 1)
+        tile.visual = .bars(history.map(\.mrr), labels: history.map { Fmt.format($0.month, template: "MMM") }, highlight: history.count - 1)
         tile.inline = "MRR \(TF.money(recurring.mrr, currency))"
         return tile
     }
@@ -205,7 +205,7 @@ enum BusinessTiles {
         guard let company = data.companies.first ?? data.following.followed.first.map({ ref in
             CompanyFinancials(ref: ref, annualRevenue: [], quarterlyRevenue: [], annualNetIncome: [], sharesOutstanding: nil, fetchedAt: Date())
         }) else {
-            return .empty("Action", symbol: "chart.line.uptrend.xyaxis.circle", message: "Suis une entreprise dans Tessera, espace Entreprises.")
+            return .empty("Action", symbol: "chart.line.uptrend.xyaxis.circle", message: "Suis une entreprise dans Tessera, espace Sociétés cotées.")
         }
         var tile = Tile(title: company.ref.name, symbol: "chart.line.uptrend.xyaxis.circle")
         if let quote = data.stocks[company.ref.ticker] {
@@ -218,9 +218,9 @@ enum BusinessTiles {
             tile.footnote = "Cours : Finnhub · \(MoneyTiles.disclaimer)"
         } else {
             tile.value = company.ref.ticker
-            tile.caption = "Cours en direct indisponible"
+            tile.caption = "Cours non disponible pour le moment"
             tile.detail = company.latestRevenue.map { "Revenus \($0.label) : \(BigNumber.compact($0.value))" }
-            tile.footnote = "Ajoute une clé Finnhub (voir le README) pour le cours en direct."
+            tile.footnote = source
         }
         tile.inline = "\(company.ref.ticker) \(tile.value)"
         return tile

@@ -55,13 +55,15 @@ struct WidgetPreview: View {
 
     @ViewBuilder private var canvas: some View {
         let size = WidgetMetrics.size(family)
+        // Lock Screen previews get an inner margin that stays inside the widget's own size.
+        let inset: CGFloat = family.isAccessory && family != .accessoryInline ? 6 : 0
         let widget = WidgetCanvas(design: design, family: family, date: date, payload: payload, isPremium: true, isInteractive: false)
-            .frame(width: size.width, height: size.height)
+            .frame(width: size.width - inset * 2, height: size.height - inset * 2)
         if family.isAccessory {
             widget
                 .foregroundStyle(.white)
                 .environment(\.colorScheme, .dark)
-                .padding(family == .accessoryInline ? 0 : 6)
+                .padding(inset)
                 .background {
                     if family == .accessoryCircular {
                         Circle().fill(.white.opacity(0.16))
@@ -188,7 +190,8 @@ struct TemplateCard: View {
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.primary)
                         .lineLimit(1)
-                    Text(template.kind.title)
+                    // The kind is only worth repeating when the template has its own name.
+                    Text(template.name == template.kind.title ? template.kind.category.title : template.kind.title)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)

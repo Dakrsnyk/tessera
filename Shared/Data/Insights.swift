@@ -82,34 +82,39 @@ struct InsightCache: Codable, Hashable {
 
 /// Deterministic analyses. They never guess: when data is missing they say so.
 enum InsightEngine {
+    /// "1 122": calories with the thousands separator used everywhere else in the app.
+    private static func kcal(_ value: Double) -> String {
+        Fmt.number(Int(value.rounded()))
+    }
+
     static func nutrition(_ state: NutritionState, now: Date) -> Insight {
         let today = NutritionMath.totals(state, on: now)
         let goals = state.goals
         let left = goals.kcal - today.kcal
         let proteinLeft = goals.protein - today.protein
         var facts = [
-            "Objectif : \(Int(goals.kcal)) kcal",
-            "Mangé aujourd'hui : \(Int(today.kcal.rounded())) kcal",
+            "Objectif : \(kcal(goals.kcal)) kcal",
+            "Mangé aujourd'hui : \(kcal(today.kcal)) kcal",
             "Protéines : \(Int(today.protein.rounded())) g sur \(Int(goals.protein)) g",
         ]
         var text: String
         if today.kcal == 0 {
-            text = "Rien de noté aujourd'hui. Ton objectif est de \(Int(goals.kcal)) kcal."
+            text = "Rien de noté aujourd'hui. Ton objectif est de \(kcal(goals.kcal)) kcal."
         } else if left >= 0 {
-            text = "Il te reste \(Int(left.rounded())) kcal aujourd'hui"
+            text = "Il te reste \(kcal(left)) kcal aujourd'hui"
             if proteinLeft > 0 {
                 text += " et \(Int(proteinLeft.rounded())) g de protéines à trouver."
             } else {
                 text += ", et ton objectif de protéines est atteint."
             }
         } else {
-            text = "Tu as dépassé ton objectif de \(Int((-left).rounded())) kcal aujourd'hui."
+            text = "Tu as dépassé ton objectif de \(kcal(-left)) kcal aujourd'hui."
         }
-        facts.append("Reste : \(Int(left.rounded())) kcal")
+        facts.append("Reste : \(kcal(left)) kcal")
         facts.append("Protéines restantes : \(Int(max(0, proteinLeft).rounded())) g")
         var points: [String] = []
         if let average = NutritionMath.average(state, days: 7, until: now) {
-            let line = "Moyenne sur 7 jours : \(Int(average.rounded())) kcal"
+            let line = "Moyenne sur 7 jours : \(kcal(average)) kcal"
             facts.append(line)
             points.append(line)
         }
@@ -184,7 +189,7 @@ enum InsightEngine {
         var points = ["\(openTasks) tâche\(openTasks > 1 ? "s" : "") à faire", "\(doneToday) faite\(doneToday > 1 ? "s" : "") aujourd'hui"]
         let best = content.habits.max { $0.streak(asOf: now) < $1.streak(asOf: now) }
         if let best, best.streak(asOf: now) > 1 {
-            let line = "\(best.name) : série de \(best.streak(asOf: now)) jours"
+            let line = "\(best.name) · série de \(best.streak(asOf: now)) j"
             facts.append(line)
             points.append(line)
         }
@@ -219,7 +224,7 @@ enum InsightEngine {
         let nutrition = payload.domains.nutrition
         let eaten = NutritionMath.totals(nutrition, on: now).kcal
         if eaten > 0 {
-            let left = Int((nutrition.goals.kcal - eaten).rounded())
+            let left = kcal(nutrition.goals.kcal - eaten)
             facts.append("Calories restantes : \(left)")
             parts.append("\(left) kcal restantes")
         }

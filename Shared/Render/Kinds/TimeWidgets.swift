@@ -300,8 +300,9 @@ enum ProgressText {
             let hours = minutes / 60
             return hours > 0 ? "\(hours) h \(minutes % 60) min restantes" : "\(minutes) min restantes"
         }
-        let days = max(0, DateMath.daysBetween(date, interval.end))
-        return days <= 1 ? "Dernier jour" : "\(Fmt.number(days)) jours restants"
+        // Days after today, as in "L'année en points".
+        let days = max(0, DateMath.daysBetween(date, interval.end) - 1)
+        return days == 0 ? "Dernier jour" : Fmt.plural(days, "jour restant", "jours restants")
     }
 
     /// Segment count and how many are elapsed, for the segmented bar.
