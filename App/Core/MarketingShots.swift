@@ -45,8 +45,18 @@ struct MarketingView: View {
 
 enum MK {
     static let canvas = CGSize(width: 440, height: 956)
-    /// The phone's screen, in iPhone 16 Pro points.
-    static let screen = CGSize(width: 402, height: 874)
+    /// The phone's screen, in 6.9" iPhone points (the real screens are captured on that iPhone).
+    static let screen = CGSize(width: 440, height: 956)
+
+    /// Every widget is drawn at 9:41, like the status bars.
+    static let now: Date = Calendar.current.date(bySettingHour: 9, minute: 41, second: 0, of: Date()) ?? Date()
+
+    /// Where the real app screen goes. The CI renders each scene twice, with this area white then
+    /// black, and swaps in a full-resolution capture of the real screen (difference matting keeps the
+    /// shadows and edges of anything drawn over it).
+    static var placeholder: Color {
+        UserDefaults.standard.string(forKey: "marketingScreen") == "black" ? .black : .white
+    }
 
     static let jade = Color(hex: "2F8F7A")
     static let jadeLight = Color(hex: "6CCBB0")
@@ -60,6 +70,10 @@ enum MK {
 
     static func design(_ kind: WidgetKind, _ theme: ThemeID, _ accent: String = Palette.defaultAccent) -> WidgetDesign {
         WidgetDesign(kind: kind, themeID: theme, accentHex: accent)
+    }
+
+    static func payload(_ design: WidgetDesign) -> WidgetPayload {
+        SamplePayload.make(for: design, now: now)
     }
 }
 
@@ -127,10 +141,12 @@ struct MarketingBrand: View {
 /// A plain iPhone: dark titanium frame, Dynamic Island, the screen drawn at iPhone 16 Pro size.
 struct MarketingPhone<Screen: View>: View {
     var width: CGFloat
+    var showsIsland: Bool
     let screen: Screen
 
-    init(width: CGFloat = 340, @ViewBuilder screen: () -> Screen) {
+    init(width: CGFloat = 340, showsIsland: Bool = true, @ViewBuilder screen: () -> Screen) {
         self.width = width
+        self.showsIsland = showsIsland
         self.screen = screen()
     }
 
@@ -157,10 +173,12 @@ struct MarketingPhone<Screen: View>: View {
                 .frame(width: screenWidth, height: screenHeight)
                 .clipShape(RoundedRectangle(cornerRadius: outerRadius - bezel, style: .continuous))
                 .padding(bezel)
-            Capsule()
-                .fill(Color.black)
-                .frame(width: 124 * scale, height: 36 * scale)
-                .padding(.top, bezel + 11 * scale)
+            if showsIsland {
+                Capsule()
+                    .fill(Color.black)
+                    .frame(width: 126 * scale, height: 37 * scale)
+                    .padding(.top, bezel + 11 * scale)
+            }
         }
         .frame(width: width, height: screenHeight + bezel * 2)
         .shadow(color: .black.opacity(0.26), radius: 38, x: 0, y: 24)
@@ -188,25 +206,6 @@ struct MarketingStatusBar: View {
         .padding(.top, 19)
         .frame(width: MK.screen.width, height: 54, alignment: .top)
         .foregroundStyle(light ? Color.white : Color.black)
-    }
-}
-
-/// A real app screen inside the phone: the status bar area stays clear, as on a device.
-struct MarketingAppScreen<Content: View>: View {
-    let content: Content
-
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
-
-    var body: some View {
-        ZStack(alignment: .top) {
-            Color.screenFill
-            content
-                .safeAreaInset(edge: .top, spacing: 0) { Color.clear.frame(height: 50) }
-            MarketingStatusBar()
-        }
-        .frame(width: MK.screen.width, height: MK.screen.height)
     }
 }
 
@@ -243,7 +242,7 @@ struct MarketingHomeScreen: View {
                     HStack(alignment: .top, spacing: 24) {
                         ForEach(row.element) { item in
                             VStack(spacing: 6) {
-                                WidgetPreview(design: item.design, family: item.family, payload: SamplePayload.make(for: item.design), width: WidgetMetrics.size(item.family).width)
+                                WidgetPreview(design: item.design, family: item.family, payload: MK.payload(item.design), width: WidgetMetrics.size(item.family).width, date: MK.now)
                                 Text("Tessera")
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundStyle(Color.white.opacity(0.92))
@@ -277,33 +276,25 @@ struct MarketingFloating: View {
     let width: CGFloat
 
     var body: some View {
-        WidgetPreview(design: item.design, family: item.family, payload: SamplePayload.make(for: item.design), width: width)
+        WidgetPreview(design: item.design, family: item.family, payload: MK.payload(item.design), width: width, date: MK.now)
             .shadow(color: .black.opacity(0.22), radius: 26, x: 0, y: 16)
     }
 }
 
 /// Title at the top, the phone below it bleeding off the bottom edge, optional floating widgets.
-struct MarketingFeature<Screen: View>: View {
+/// The phone's screen is the placeholder the real capture replaces.
+struct MarketingFeature: View {
     let eyebrow: String
     let title: String
     var subtitle: String?
     var floating: [(item: MKWidget, width: CGFloat, center: CGPoint)] = []
-    let screen: Screen
-
-    init(eyebrow: String, title: String, subtitle: String? = nil, floating: [(item: MKWidget, width: CGFloat, center: CGPoint)] = [], @ViewBuilder screen: () -> Screen) {
-        self.eyebrow = eyebrow
-        self.title = title
-        self.subtitle = subtitle
-        self.floating = floating
-        self.screen = screen()
-    }
 
     var body: some View {
         ZStack(alignment: .top) {
             MarketingBackground()
             MarketingTitle(eyebrow: eyebrow, title: title, subtitle: subtitle)
                 .padding(.top, 72)
-            MarketingPhone { screen }
+            MarketingPhone(showsIsland: false) { MK.placeholder }
                 .padding(.top, 292)
         }
         .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .top)
@@ -379,11 +370,7 @@ struct MarketingCustomize: View {
                 (MKWidget(.caloriesLeft, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 92, y: 812)),
                 (MKWidget(.caloriesLeft, .systemSmall, .dark), 150, CGPoint(x: 352, y: 700)),
             ]
-        ) {
-            MarketingAppScreen {
-                EditorView(request: EditorRequest(design: TemplateCatalog.design("calories-glass"), isNew: true))
-            }
-        }
+        )
     }
 }
 
@@ -397,11 +384,7 @@ struct MarketingNutrition: View {
             floating: [
                 (MKWidget(.caloriesLeft, .systemSmall, .aurora), 150, CGPoint(x: 92, y: 818)),
             ]
-        ) {
-            MarketingAppScreen {
-                NavigationStack { SpaceView(space: .nutrition) }
-            }
-        }
+        )
     }
 }
 
@@ -415,11 +398,7 @@ struct MarketingFitness: View {
             floating: [
                 (MKWidget(.restTimer, .systemSmall, .dark, "FF6B57"), 150, CGPoint(x: 350, y: 818)),
             ]
-        ) {
-            MarketingAppScreen {
-                NavigationStack { SpaceView(space: .fitness) }
-            }
-        }
+        )
     }
 }
 
@@ -428,16 +407,12 @@ struct MarketingMoney: View {
     var body: some View {
         MarketingFeature(
             eyebrow: "Budget · Entreprise",
-            title: "Tes finances.\nTon business.",
+            title: "Tes finances.\nTon entreprise.",
             subtitle: "Budget, ventes, bénéfice, MRR.",
             floating: [
                 (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 92, y: 818)),
             ]
-        ) {
-            MarketingAppScreen {
-                NavigationStack { SpaceView(space: .business) }
-            }
-        }
+        )
     }
 }
 
@@ -451,11 +426,7 @@ struct MarketingProductivity: View {
             floating: [
                 (MKWidget(.priorities, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 350, y: 818)),
             ]
-        ) {
-            MarketingAppScreen {
-                NavigationStack { SpaceView(space: .productivity) }
-            }
-        }
+        )
     }
 }
 
@@ -466,11 +437,7 @@ struct MarketingSpaces: View {
             eyebrow: "Espaces",
             title: "Toute ta vie,\nau même endroit.",
             subtitle: "Nutrition, sport, études, voyage, auto…"
-        ) {
-            MarketingAppScreen {
-                SpacesView()
-            }
-        }
+        )
     }
 }
 
@@ -482,13 +449,9 @@ struct MarketingPremium: View {
             title: "Tout Tessera,\nsans limite.",
             subtitle: "Tous les widgets, styles et packs.",
             floating: [
-                (MKWidget(.worldClock, .systemSmall, .futuristic, "3366FF"), 150, CGPoint(x: 92, y: 818)),
+                (MKWidget(.yearDots, .systemSmall, .glass, "8C6CFF"), 150, CGPoint(x: 92, y: 818)),
             ]
-        ) {
-            MarketingAppScreen {
-                ExploreView()
-            }
-        }
+        )
     }
 }
 
@@ -516,7 +479,7 @@ struct MarketingFinale: View {
                 }
                 HStack(spacing: 18) {
                     ForEach(Array(lockWidgets.enumerated()), id: \.offset) { pair in
-                        WidgetPreview(design: pair.element, family: .accessoryCircular, payload: SamplePayload.make(for: pair.element), width: 76)
+                        WidgetPreview(design: pair.element, family: .accessoryCircular, payload: MK.payload(pair.element), width: 76, date: MK.now)
                     }
                 }
             }
