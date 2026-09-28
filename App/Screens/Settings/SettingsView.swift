@@ -117,6 +117,13 @@ struct SettingsView: View {
                     LabeledContent("Version", value: WidgetDiagnostics.appVersion)
                     LabeledContent("Module des widgets", value: WidgetDiagnostics.isExtensionInstalled ? "Installé" : "Absent")
                     LabeledContent("Espace partagé", value: WidgetDiagnostics.sharedSpaceText)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Groupes accordés")
+                        Text(WidgetDiagnostics.groupsText)
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .textSelection(.enabled)
+                    }
                     LabeledContent("Widgets lancés par iOS", value: WidgetDiagnostics.lastLaunchText)
                 } header: {
                     Text("Développeur")

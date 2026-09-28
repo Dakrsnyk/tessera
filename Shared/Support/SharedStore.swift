@@ -18,7 +18,10 @@ enum AppGroup {
         if fileManager.containerURL(forSecurityApplicationGroupIdentifier: declared) != nil {
             return declared
         }
-        let granted = ProvisioningProfile.appGroups()
+        var granted = ProvisioningProfile.appGroups()
+        #if DEBUG
+        granted = SignedEntitlements.appGroups + granted
+        #endif
         let usable = granted.filter { fileManager.containerURL(forSecurityApplicationGroupIdentifier: $0) != nil }
         return usable.first { $0.localizedCaseInsensitiveContains("tessera") } ?? usable.first ?? declared
     }()

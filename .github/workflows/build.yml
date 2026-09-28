@@ -86,9 +86,10 @@ jobs:
         if: steps.device.outcome == 'success'
         run: |
           APP=build/device/Build/Products/Debug-iphoneos/Tessera.app
-          # Ad-hoc signature carrying the entitlements, so sideloading tools keep the App Group.
-          codesign --force --sign - --entitlements Config/TesseraWidgets.entitlements "$APP/PlugIns/TesseraWidgets.appex"
-          codesign --force --sign - --entitlements Config/Tessera.entitlements "$APP"
+          # Signed without the App Group: a free Apple ID can't be granted ours, and a signature that
+          # still claims it can keep iOS from starting the widget extension after Sideloadly re-signs.
+          codesign --force --sign - "$APP/PlugIns/TesseraWidgets.appex"
+          codesign --force --sign - "$APP"
           mkdir -p Payload
           cp -R "$APP" Payload/
           zip -qry Tessera.ipa Payload
