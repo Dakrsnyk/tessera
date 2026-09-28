@@ -51,6 +51,8 @@ struct HomeView: View {
                 }
             }
         }
+        // Backgrounds come from the current style: rebuilt when it changes.
+        .id(model.settings.appStyle)
     }
 
     private var header: some View {

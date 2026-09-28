@@ -71,6 +71,8 @@ struct ExploreView: View {
             .onAppear(perform: consumeSearchRequest)
             .onChange(of: router.exploreSearchRequested) { _, _ in consumeSearchRequest() }
         }
+        // Backgrounds come from the current style: rebuilt when it changes.
+        .id(model.settings.appStyle)
     }
 
     private func consumeSearchRequest() {
@@ -488,7 +490,9 @@ struct PackSheet: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.roundedRectangle(radius: 14))
                 .padding(.horizontal, 20)
+                .padding(.top, 10)
                 .padding(.bottom, 8)
+                .background(Color.screenFill.opacity(0.96))
             }
             .navigationTitle(pack.name)
             .navigationBarTitleDisplayMode(.inline)

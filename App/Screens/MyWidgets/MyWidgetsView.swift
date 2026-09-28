@@ -78,6 +78,8 @@ struct MyWidgetsView: View {
                 Text("Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut.")
             }
         }
+        // Backgrounds come from the current style: rebuilt when it changes.
+        .id(model.settings.appStyle)
     }
 
     private var limitBanner: some View {

@@ -599,7 +599,9 @@ struct HomeSetupSheet: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.roundedRectangle(radius: 14))
                 .padding(.horizontal, 20)
+                .padding(.top, 10)
                 .padding(.bottom, 8)
+                .background(Color.screenFill.opacity(0.96))
             }
             .navigationTitle(setup.name)
             .navigationBarTitleDisplayMode(.inline)

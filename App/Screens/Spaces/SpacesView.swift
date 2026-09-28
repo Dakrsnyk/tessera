@@ -32,6 +32,8 @@ struct SpacesView: View {
                 SpaceView(space: space)
             }
         }
+        // Backgrounds come from the current style: rebuilt when it changes.
+        .id(model.settings.appStyle)
     }
 
     /// One live figure per space, so the grid doubles as a dashboard.

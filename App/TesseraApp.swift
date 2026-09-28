@@ -133,28 +133,23 @@ struct RootView: View {
 }
 
 struct MainTabView: View {
-    @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
 
     var body: some View {
         @Bindable var router = router
-        // Backgrounds come from the current style: each tab is rebuilt when it changes.
-        let style = model.settings.appStyle
+        // Each tab rebuilds its own content when the style changes (an `.id` here, shared by
+        // every tab, would make the tab bar show the wrong page).
         TabView(selection: $router.tab) {
             HomeView()
-                .id(style)
                 .tabItem { Label("Accueil", systemImage: "square.grid.2x2") }
                 .tag(Router.Tab.home)
             SpacesView()
-                .id(style)
                 .tabItem { Label("Espaces", systemImage: "square.stack.3d.up") }
                 .tag(Router.Tab.spaces)
             ExploreView()
-                .id(style)
                 .tabItem { Label("Store", systemImage: "bag") }
                 .tag(Router.Tab.explore)
             MyWidgetsView()
-                .id(style)
                 .tabItem { Label("Mes widgets", systemImage: "rectangle.stack") }
                 .tag(Router.Tab.mine)
         }
