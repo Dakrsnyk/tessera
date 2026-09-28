@@ -13,6 +13,7 @@ struct TesseraWidgetsBundle: WidgetBundle {
     }
 
     var body: some Widget {
+        QuickWidget()
         TimeWidgets().body
         CalendarWidgets().body
         ProductivityWidgets().body
