@@ -106,6 +106,11 @@ jobs:
                       ext = os.path.splitext(item["exportedFileName"])[1] or ".png"
                       shutil.copy(os.path.join("testexport", item["exportedFileName"]), os.path.join("testshots", name + ext))
           PY
+          # What the widget extension logged while the system rendered it, and any crash report.
+          xcrun simctl spawn "$DEVICE" log show --last 25m --style compact \
+            --predicate 'process BEGINSWITH "TesseraWidgets" OR eventMessage CONTAINS[c] "com.dakrsnyk.tessera.widgets"' \
+            2>&1 | tail -600 > testshots/widget-log.txt || true
+          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -40 -exec cp {} testshots/ \; 2>/dev/null || true
           ls testshots
           grep -q "TEST SUCCEEDED" test.log
 

@@ -146,6 +146,9 @@ final class WidgetPlacementUITests: XCTestCase {
         }
         pause(4)
         snapshot("home-8-result", tree: true)
+        // The first render of a new widget can take a while on a busy simulator.
+        pause(30)
+        snapshot("home-9-rendered", tree: true)
     }
 
     // MARK: Lock Screen
@@ -213,5 +216,7 @@ final class WidgetPlacementUITests: XCTestCase {
             pause(3)
         }
         snapshot("lock-10-lock-screen")
+        pause(25)
+        snapshot("lock-11-rendered", tree: true)
     }
 }
