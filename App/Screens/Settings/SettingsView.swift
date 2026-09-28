@@ -1,5 +1,6 @@
 import StoreKit
 import SwiftUI
+import UserNotifications
 import WidgetKit
 
 struct SettingsView: View {
@@ -10,6 +11,9 @@ struct SettingsView: View {
     @State private var showsManageSubscriptions = false
     @State private var confirmReset = false
     @State private var copiedEmail = false
+    @State private var notificationStatus = "—"
+    @Environment(\.openURL) private var openURL
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         NavigationStack {
@@ -32,6 +36,21 @@ struct SettingsView: View {
                     } label: {
                         LabeledContent("Ville (météo)", value: model.settings.weatherLocation?.name ?? "Aucune")
                     }
+                }
+
+                Section {
+                    LabeledContent("Autorisation", value: notificationStatus)
+                    NavigationLink { HydrationView() } label: { Text("Rappels d'hydratation") }
+                    NavigationLink { HabitsView() } label: { Text("Rappels d'habitudes") }
+                    if notificationStatus == "Refusée" {
+                        Button("Ouvrir les réglages de l'iPhone") {
+                            if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                        }
+                    }
+                } header: {
+                    Text("Notifications")
+                } footer: {
+                    Text("Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.")
                 }
 
                 Section("Tes données") {
@@ -107,6 +126,7 @@ struct SettingsView: View {
                 #endif
             }
             .navigationTitle("Réglages")
+            .task(id: scenePhase) { await refreshNotificationStatus() }
             .manageSubscriptionsSheet(isPresented: $showsManageSubscriptions)
             .alert("Restauration", isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {
                 Button("OK", role: .cancel) {}
@@ -180,6 +200,16 @@ struct SettingsView: View {
             }
             return "Abonnement actif"
         default: return "Merci pour ton soutien"
+        }
+    }
+
+    private func refreshNotificationStatus() async {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        switch settings.authorizationStatus {
+        case .authorized, .provisional, .ephemeral: notificationStatus = "Autorisée"
+        case .denied: notificationStatus = "Refusée"
+        case .notDetermined: notificationStatus = "Pas encore demandée"
+        @unknown default: notificationStatus = "—"
         }
     }
 
