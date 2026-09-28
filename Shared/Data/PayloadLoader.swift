@@ -82,8 +82,13 @@ enum SamplePayload {
             ))
         case .crypto:
             let coin = CryptoService.info(coinID)
-            let base = samplePrices[coin.id] ?? 100
-            let line = (0..<56).map { index in base * (1 + sin(Double(index) / 5) * 0.022 + Double(index) * 0.00055) }
+            let base: Double = samplePrices[coin.id] ?? 100
+            let line: [Double] = (0..<56).map { (index: Int) -> Double in
+                let step = Double(index)
+                let wave = sin(step / 5) * 0.022
+                let drift = step * 0.00055
+                return base * (1 + wave + drift)
+            }
             payload.crypto = .ready(CoinSnapshot(
                 id: coin.id, symbol: coin.symbol, name: coin.name, currency: "USD",
                 price: line.last ?? base, change24h: 2.4, sparkline: line, fetchedAt: now
