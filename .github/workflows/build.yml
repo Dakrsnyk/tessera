@@ -172,7 +172,12 @@ jobs:
           set -x
           APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
           xcrun simctl list devices | grep -E "Booted|$DEVICE"
-          xcrun simctl bootstatus "$DEVICE" -b
+          # A simulator sometimes never finishes booting: give up after 4 minutes and boot it again.
+          if ! perl -e 'alarm 240; exec @ARGV' xcrun simctl bootstatus "$DEVICE" -b; then
+            xcrun simctl shutdown "$DEVICE"
+            xcrun simctl boot "$DEVICE"
+            perl -e 'alarm 240; exec @ARGV' xcrun simctl bootstatus "$DEVICE" -b
+          fi
           xcrun simctl ui "$DEVICE" appearance light
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
           xcrun simctl install "$DEVICE" "$APP"
