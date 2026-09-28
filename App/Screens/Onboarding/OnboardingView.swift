@@ -2,13 +2,32 @@ import SwiftUI
 import WidgetKit
 
 struct OnboardingView: View {
+    /// Only the style step (installs from before the styles existed).
+    var styleOnly = false
     let onFinish: () -> Void
     @Environment(Router.self) private var router
     @State private var page = 0
+    @State private var showsStyleStep = true
 
     private let pageCount = 4
 
     var body: some View {
+        if showsStyleStep {
+            StyleStep(isLast: styleOnly) {
+                if styleOnly {
+                    onFinish()
+                } else {
+                    withAnimation(.easeInOut(duration: 0.3)) { showsStyleStep = false }
+                }
+            }
+            .transition(.opacity)
+        } else {
+            pages
+                .transition(.opacity)
+        }
+    }
+
+    private var pages: some View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
@@ -67,6 +86,7 @@ struct OnboardingView: View {
                 } label: {
                     Text(page < pageCount - 1 ? "Continuer" : "Commencer")
                         .font(.headline)
+                        .foregroundStyle(Color.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 52)
                 }
                 .buttonStyle(.borderedProminent)
@@ -89,6 +109,58 @@ struct OnboardingView: View {
             .padding(.bottom, 16)
         }
         .background(Color.screenFill.ignoresSafeArea())
+    }
+}
+
+/// First step: the look of the app. Everything on this screen changes as soon as a style is picked.
+private struct StyleStep: View {
+    let isLast: Bool
+    let onContinue: () -> Void
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let style = AppStyle.style(model.settings.appStyle)
+        ScrollView {
+            VStack(spacing: 22) {
+                VStack(spacing: 10) {
+                    TesseraMark(size: 40)
+                    Text(isLast ? "Nouveau : les styles" : "Bienvenue dans Tessera")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Text("Choisis ton style")
+                        .font(.largeTitle.weight(.bold))
+                    Text("Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 12)
+                }
+                .padding(.top, 20)
+                StylePreviewPair(style: style, height: 206)
+                    .padding(.horizontal, 30)
+                    .animation(.easeInOut(duration: 0.2), value: style.id)
+                AppStyleGrid()
+                AppearancePicker()
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 12)
+        }
+        .scrollBounceBehavior(.basedOnSize)
+        .safeAreaInset(edge: .bottom) {
+            Button(action: onContinue) {
+                Text(isLast ? "C'est parti" : "Continuer")
+                    .font(.headline)
+                    .foregroundStyle(Color.onAccent)
+                    .frame(maxWidth: .infinity, minHeight: 52)
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.roundedRectangle(radius: 16))
+            .padding(.horizontal, 24)
+            .padding(.top, 10)
+            .padding(.bottom, 16)
+            .background(style.screen)
+        }
+        .background(style.screen.ignoresSafeArea())
     }
 }
 

@@ -17,6 +17,49 @@ struct WeatherLocation: Codable, Hashable {
     var longitude: Double
 }
 
+/// The look of the app itself (not of the widgets): an accent and matching backgrounds.
+enum AppStyleID: String, Codable, CaseIterable, Identifiable {
+    case tessera, ocean, coral, lavender, sand, graphite, forest, rose, midnight, neon
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .tessera: "Tessera"
+        case .ocean: "Océan"
+        case .coral: "Corail"
+        case .lavender: "Lavande"
+        case .sand: "Sable"
+        case .graphite: "Graphite"
+        case .forest: "Forêt"
+        case .rose: "Rose"
+        case .midnight: "Minuit"
+        case .neon: "Néon"
+        }
+    }
+}
+
+/// Light, dark, or whatever the iPhone is set to.
+enum AppearanceMode: String, Codable, CaseIterable, Identifiable {
+    case system, light, dark
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .system: "Auto"
+        case .light: "Clair"
+        case .dark: "Sombre"
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .system: "circle.lefthalf.filled"
+        case .light: "sun.max.fill"
+        case .dark: "moon.fill"
+        }
+    }
+}
+
 struct AppSettings: Codable, Hashable {
     var temperatureUnit: TemperatureUnit = .celsius
     var uses24HourClock = true
@@ -25,10 +68,15 @@ struct AppSettings: Codable, Hashable {
     var weatherLocation: WeatherLocation?
     var hasCompletedOnboarding = false
     var hydrationReminders = false
+    var appStyle: AppStyleID = .tessera
+    var appearance: AppearanceMode = .system
+    /// Set once the style has been picked (at the first launch, or once after an update).
+    var hasChosenStyle = false
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
         case hasCompletedOnboarding, hydrationReminders
+        case appStyle, appearance, hasChosenStyle
     }
 
     init() {}
@@ -42,6 +90,9 @@ struct AppSettings: Codable, Hashable {
         weatherLocation = try? c.decodeIfPresent(WeatherLocation.self, forKey: .weatherLocation)
         hasCompletedOnboarding = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedOnboarding)) ?? false
         hydrationReminders = (try? c.decodeIfPresent(Bool.self, forKey: .hydrationReminders)) ?? false
+        appStyle = (try? c.decodeIfPresent(AppStyleID.self, forKey: .appStyle)) ?? .tessera
+        appearance = (try? c.decodeIfPresent(AppearanceMode.self, forKey: .appearance)) ?? .system
+        hasChosenStyle = (try? c.decodeIfPresent(Bool.self, forKey: .hasChosenStyle)) ?? false
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

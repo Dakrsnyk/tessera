@@ -61,6 +61,7 @@ struct TasksView: View {
                 }
             }
         }
+        .styledList()
         .navigationTitle("Tâches")
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

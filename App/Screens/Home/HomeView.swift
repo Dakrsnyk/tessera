@@ -112,6 +112,7 @@ struct HomeView: View {
                     } label: {
                         Label("Parcourir les widgets", systemImage: "square.grid.2x2")
                             .frame(maxWidth: .infinity, minHeight: 44)
+                            .foregroundStyle(Color.onAccent)
                     }
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.roundedRectangle(radius: 12))
@@ -291,7 +292,7 @@ struct TodayPanel: View {
                 } label: {
                     Image(systemName: "plus")
                         .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color.onAccent)
                         .frame(width: 32, height: 32)
                         .background(Color.accentColor, in: Circle())
                 }

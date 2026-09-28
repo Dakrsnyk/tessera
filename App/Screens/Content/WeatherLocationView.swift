@@ -61,6 +61,7 @@ struct WeatherLocationView: View {
                 }
             }
         }
+        .styledList()
         .navigationTitle("Ville pour la météo")
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Chercher une ville")
         .onSubmit(of: .search) { search() }
@@ -125,6 +126,7 @@ struct CalendarAccessView: View {
                 CalendarAccessRow()
             }
         }
+        .styledList()
         .navigationTitle("Calendrier")
     }
 }

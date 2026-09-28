@@ -55,6 +55,7 @@ final class AppModel {
         designs = store.designs
         content = store.content
         settings = store.settings
+        AppStyle.current = AppStyle.style(settings.appStyle)
         premium = store.premium
         weather = WeatherService.cached.map { cache -> WeatherResult in
             guard let location = settings.weatherLocation, cache.matches(location) else { return .needsLocation }
@@ -202,8 +203,14 @@ final class AppModel {
     /// Adds one design per widget of a pack, within the free limit. Returns how many were added.
     @discardableResult
     func install(_ pack: WidgetPack) -> Int {
+        install(designs: pack.designs())
+    }
+
+    /// Saves each design as a new widget, within the free limit. Returns how many were added.
+    @discardableResult
+    func install(designs: [WidgetDesign]) -> Int {
         var added = 0
-        for design in pack.designs() {
+        for design in designs {
             guard canCreateDesign else { break }
             save(design)
             added += 1
@@ -233,6 +240,8 @@ final class AppModel {
         let before = settings
         change(&settings)
         store.settings = settings
+        // Before any view reads the new settings, so rebuilt screens draw with the new style.
+        AppStyle.current = AppStyle.style(settings.appStyle)
         if before.weatherLocation != settings.weatherLocation {
             weather = settings.weatherLocation == nil ? .needsLocation : .unavailable(nil)
             Task { await refreshWeather(force: true) }
@@ -361,7 +370,20 @@ final class AppModel {
     // MARK: Onboarding
 
     func completeOnboarding() {
-        updateSettings { $0.hasCompletedOnboarding = true }
+        updateSettings {
+            $0.hasCompletedOnboarding = true
+            $0.hasChosenStyle = true
+        }
+    }
+
+    func setStyle(_ style: AppStyleID) {
+        guard style != settings.appStyle else { return }
+        updateSettings { $0.appStyle = style }
+    }
+
+    func setAppearance(_ mode: AppearanceMode) {
+        guard mode != settings.appearance else { return }
+        updateSettings { $0.appearance = mode }
     }
 
     /// Erases everything the user created. Premium status is kept (it belongs to the App Store account).
@@ -373,6 +395,10 @@ final class AppModel {
         content = ContentState()
         var fresh = AppSettings()
         fresh.hasCompletedOnboarding = true
+        // The look of the app is a preference, not data: it stays.
+        fresh.appStyle = settings.appStyle
+        fresh.appearance = settings.appearance
+        fresh.hasChosenStyle = settings.hasChosenStyle
         settings = fresh
         store.designs = designs
         store.content = content

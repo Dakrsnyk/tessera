@@ -56,6 +56,7 @@ struct HabitsView: View {
                 }
             }
         }
+        .styledList()
         .navigationTitle("Habitudes")
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -193,6 +194,7 @@ struct HabitEditor: View {
                     }
                 }
             }
+            .styledList()
             .navigationTitle(isNew ? "Nouvelle habitude" : "Habitude")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

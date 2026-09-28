@@ -25,6 +25,9 @@ struct WidgetPreview: View {
     let payload: WidgetPayload
     var width: CGFloat?
     var date = Date()
+    /// Lock Screen widgets take the color of the clock: white, or dark on a light wallpaper.
+    var lockInk: Color = .white
+    var lockInkIsDark = false
 
     var body: some View {
         let size = WidgetMetrics.size(family)
@@ -61,16 +64,18 @@ struct WidgetPreview: View {
             .frame(width: size.width - inset * 2, height: size.height - inset * 2)
         if family.isAccessory {
             widget
-                .foregroundStyle(.white)
-                .environment(\.colorScheme, .dark)
+                .foregroundStyle(lockInk)
+                .tint(lockInk)
+                .environment(\.colorScheme, lockInkIsDark ? .light : .dark)
                 .padding(inset)
                 .background {
                     if family == .accessoryCircular {
-                        Circle().fill(.white.opacity(0.16))
+                        Circle().fill(lockInk.opacity(lockInkIsDark ? 0.1 : 0.16))
                     } else if family == .accessoryRectangular {
-                        RoundedRectangle(cornerRadius: 14, style: .continuous).fill(.white.opacity(0.16))
+                        RoundedRectangle(cornerRadius: 14, style: .continuous).fill(lockInk.opacity(lockInkIsDark ? 0.1 : 0.16))
                     }
                 }
+                .fontDesign(nil)
         } else {
             widget
                 .background(DesignBackground(design: design))
@@ -79,6 +84,8 @@ struct WidgetPreview: View {
                     RoundedRectangle(cornerRadius: WidgetMetrics.cornerRadius, style: .continuous)
                         .strokeBorder(Color.primary.opacity(0.06), lineWidth: 1)
                 }
+                // Widgets use the system font unless their own style says otherwise, whatever the app style.
+                .fontDesign(nil)
         }
     }
 }
@@ -103,8 +110,6 @@ struct PremiumBadge: View {
 extension Color {
     static let premiumFill = Color(light: "F6E7B8", dark: "4A3B12")
     static let premiumInk = Color(light: "7A5500", dark: "F2D27A")
-    static let cardFill = Color(uiColor: .secondarySystemGroupedBackground)
-    static let screenFill = Color(uiColor: .systemGroupedBackground)
 }
 
 struct CardBackground: ViewModifier {
@@ -162,7 +167,9 @@ struct EmptyStateView: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
             if let actionTitle, let action {
-                Button(actionTitle, action: action)
+                Button(action: action) {
+                    Text(actionTitle).foregroundStyle(Color.onAccent)
+                }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
                     .padding(.top, 4)

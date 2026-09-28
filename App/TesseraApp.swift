@@ -38,6 +38,7 @@ struct RootView: View {
     @Environment(Router.self) private var router
     @State private var showsLaunch = true
     @State private var showsOnboarding = false
+    @State private var showsStylePicker = false
     @State private var galleryMode: String?
 
     var body: some View {
@@ -66,6 +67,15 @@ struct RootView: View {
                         model.completeOnboarding()
                         showsOnboarding = false
                     }
+                    .appStyle(model.settings)
+                }
+                // Installs from before the styles existed: the style picker alone, once.
+                .fullScreenCover(isPresented: $showsStylePicker) {
+                    OnboardingView(styleOnly: true) {
+                        model.updateSettings { $0.hasChosenStyle = true }
+                        showsStylePicker = false
+                    }
+                    .appStyle(model.settings)
                 }
 
             #if DEBUG
@@ -73,6 +83,8 @@ struct RootView: View {
                 Group {
                     if galleryMode.hasPrefix("marketing") {
                         MarketingView(scene: galleryMode)
+                    } else if galleryMode.hasPrefix("gallery-setups") {
+                        SetupGalleryView(mode: galleryMode)
                     } else {
                         WidgetGalleryView(mode: galleryMode)
                     }
@@ -87,6 +99,7 @@ struct RootView: View {
                     .zIndex(1)
             }
         }
+        .appStyle(model.settings)
         .onChange(of: model.settings.hasCompletedOnboarding) { _, done in
             if !done && !showsLaunch { showsOnboarding = true }
         }
@@ -106,30 +119,40 @@ struct RootView: View {
             withAnimation(.easeOut(duration: 0.35)) { showsLaunch = false }
             if !model.settings.hasCompletedOnboarding {
                 showsOnboarding = true
+            } else if !model.settings.hasChosenStyle {
+                showsStylePicker = true
             }
         }
     }
 }
 
 struct MainTabView: View {
+    @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
 
     var body: some View {
         @Bindable var router = router
+        // Backgrounds come from the current style: each tab is rebuilt when it changes.
+        let style = model.settings.appStyle
         TabView(selection: $router.tab) {
             HomeView()
+                .id(style)
                 .tabItem { Label("Accueil", systemImage: "square.grid.2x2") }
                 .tag(Router.Tab.home)
             SpacesView()
+                .id(style)
                 .tabItem { Label("Espaces", systemImage: "square.stack.3d.up") }
                 .tag(Router.Tab.spaces)
             ExploreView()
+                .id(style)
                 .tabItem { Label("Store", systemImage: "bag") }
                 .tag(Router.Tab.explore)
             MyWidgetsView()
+                .id(style)
                 .tabItem { Label("Mes widgets", systemImage: "rectangle.stack") }
                 .tag(Router.Tab.mine)
             SettingsView()
+                .id(style)
                 .tabItem { Label("Réglages", systemImage: "gearshape") }
                 .tag(Router.Tab.settings)
         }

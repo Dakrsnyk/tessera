@@ -270,6 +270,7 @@ struct CalendarAccessRow: View {
                         if isRequesting { ProgressView() }
                         Text("Autoriser l'accès au calendrier")
                     }
+                    .foregroundStyle(Color.onAccent)
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(isRequesting)
@@ -313,6 +314,7 @@ struct CityPickerView: View {
             }
             .tint(.primary)
         }
+        .styledList()
         .searchable(text: $query, prompt: "Chercher une ville")
         .navigationTitle("Ajouter une ville")
         .navigationBarTitleDisplayMode(.inline)

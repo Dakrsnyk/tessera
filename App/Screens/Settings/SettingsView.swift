@@ -18,7 +18,21 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Group {
                 premiumSection
+
+                Section {
+                    VStack(alignment: .leading, spacing: 16) {
+                        AppStyleGrid(swatchSize: 48)
+                        AppearancePicker()
+                    }
+                    .padding(.vertical, 8)
+                } header: {
+                    Text("Apparence")
+                } footer: {
+                    let style = AppStyle.style(model.settings.appStyle)
+                    Text("\(style.name) — \(style.tagline). Tes widgets gardent chacun leur propre style.")
+                }
 
                 Section("Préférences") {
                     Picker("Température", selection: settingBinding(\.temperatureUnit)) {
@@ -131,7 +145,10 @@ struct SettingsView: View {
                     Text("Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.")
                 }
                 #endif
+                }
+                .listRowBackground(Color.cardFill)
             }
+            .styledList()
             .navigationTitle("Réglages")
             .task(id: scenePhase) { await refreshNotificationStatus() }
             .manageSubscriptionsSheet(isPresented: $showsManageSubscriptions)

@@ -153,10 +153,10 @@ jobs:
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
           xcrun simctl install "$DEVICE" "$APP"
           mkdir -p shots
-          shoot() { # name screen scroll scheme
+          shoot() { # name screen scroll scheme [extra launch arguments]
             xcrun simctl ui "$DEVICE" appearance $4
             xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null || true
-            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $2 -screenshotScroll $3
+            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $2 -screenshotScroll $3 "${@:5}"
             sleep 5
             xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$1-$4.jpg"
           }
@@ -170,6 +170,25 @@ jobs:
           shoot gallery-circular-1 gallery-circular-1 top light
           for screen in home spaces gallery-small-1; do shoot $screen $screen top dark; done
           for screen in home store space-nutrition space-budget; do shoot $screen-end $screen bottom light; done
+          # Home Screen setups (Store) and app styles.
+          for scheme in light dark; do
+            shoot onboarding onboarding top $scheme
+            shoot setups setups top $scheme
+          done
+          shoot setups-free setups-free top light
+          shoot setups-end setups bottom light
+          for setup in aurore creme neon; do shoot setup-$setup setup-$setup top light; done
+          shoot gallery-setups-home gallery-setups-home top light
+          shoot gallery-setups-lock gallery-setups-lock top light
+          i=0
+          for style in tessera ocean coral lavender sand graphite forest rose midnight neon; do
+            if [ $((i % 2)) -eq 0 ]; then scheme=light; else scheme=dark; fi
+            shoot style-$style home top $scheme -screenshotStyle $style
+            i=$((i + 1))
+          done
+          shoot style-graphite-settings settings top dark -screenshotStyle graphite
+          shoot style-sand-settings settings top dark -screenshotStyle sand
+          shoot style-neon-store store top dark -screenshotStyle neon
 
       - name: App Store screenshots
         id: marketing
@@ -232,7 +251,7 @@ jobs:
           APP=build/release/Build/Products/Release-iphonesimulator/Tessera.app
           FOUND=0
           for bin in "$APP/Tessera" "$APP/PlugIns/TesseraWidgets.appex/TesseraWidgets"; do
-            if strings -a "$bin" | grep -E "DebugPremium|debugPremiumDisabled|ScreenshotMode|WidgetGalleryView|MarketingView"; then FOUND=1; fi
+            if strings -a "$bin" | grep -E "DebugPremium|debugPremiumDisabled|ScreenshotMode|WidgetGalleryView|SetupGalleryView|MarketingView"; then FOUND=1; fi
           done
           echo "test unlock found in Release binaries: $FOUND" | tee release-check.txt
           [ "$FOUND" = "0" ]

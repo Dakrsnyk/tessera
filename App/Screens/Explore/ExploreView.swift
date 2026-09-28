@@ -9,6 +9,8 @@ struct ExploreView: View {
     @State private var themeFilter: ThemeID?
     @State private var isSearchPresented = false
     @State private var openedPack: WidgetPack?
+    @State private var openedSetup: HomeSetup?
+    @AppStorage(SetupFavorites.key) private var favoritesRaw = ""
 
     enum AccessFilter: String, CaseIterable, Identifiable {
         case all, free, premium
@@ -52,12 +54,18 @@ struct ExploreView: View {
                     }
                 }
                 .padding(.bottom, 32)
+                .sheet(item: $openedSetup) { setup in
+                    HomeSetupSheet(setup: setup)
+                }
             }
             .background(Color.screenFill)
             .screenshotScroll()
             .navigationTitle("Store")
             .sheet(item: $openedPack) { pack in
                 PackSheet(pack: pack)
+            }
+            .navigationDestination(isPresented: $router.showsAllSetups) {
+                HomeSetupsView()
             }
             .searchable(text: $query, isPresented: $isSearchPresented, prompt: "Météo, tâches, bitcoin…")
             .onAppear(perform: consumeSearchRequest)
@@ -69,6 +77,10 @@ struct ExploreView: View {
         if router.exploreSearchRequested {
             router.exploreSearchRequested = false
             isSearchPresented = true
+        }
+        if !router.showsAllSetups, let id = router.openedSetupID {
+            router.openedSetupID = nil
+            openedSetup = HomeSetupCatalog.setup(id)
         }
     }
 
@@ -101,6 +113,7 @@ struct ExploreView: View {
 
     private var shelves: some View {
         VStack(alignment: .leading, spacing: 30) {
+            setupsShelf
             packsShelf
             shelf(title: "Nouveautés", templates: TemplateCatalog.newest)
             stylesShelf
@@ -124,6 +137,37 @@ struct ExploreView: View {
                     }
                 }
                 .padding(.horizontal, 20)
+            }
+        }
+    }
+
+    /// Complete Home Screens, drawn as on a real iPhone.
+    private var setupsShelf: some View {
+        let favorites = SetupFavorites.ids(favoritesRaw)
+        return VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "Écrans d'accueil", actionTitle: "Tout voir") {
+                router.showsAllSetups = true
+            }
+            .padding(.horizontal, 20)
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(alignment: .top, spacing: 14) {
+                    ForEach(HomeSetupCatalog.all) { setup in
+                        SetupCard(
+                            setup: setup,
+                            showsPages: false,
+                            isFavorite: favorites.contains(setup.id),
+                            isPremiumUser: model.isPremium,
+                            onFavorite: {
+                                Haptics.tap()
+                                favoritesRaw = SetupFavorites.toggled(setup.id, in: favoritesRaw)
+                            },
+                            onOpen: { openedSetup = setup }
+                        )
+                        .frame(width: 150)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 6)
             }
         }
     }
@@ -217,7 +261,7 @@ struct FilterChip: View {
                 Text(title)
             }
             .font(.subheadline.weight(.medium))
-            .foregroundStyle(isSelected ? Color.white : Color.primary)
+            .foregroundStyle(isSelected ? Color.onAccent : Color.primary)
             .padding(.horizontal, 14)
             .frame(minHeight: 36)
             .background(isSelected ? Color.accentColor : Color.cardFill, in: Capsule())
@@ -348,6 +392,7 @@ struct PackSheet: View {
                 } label: {
                     Text(installed == nil ? (pack.isPremium && !model.isPremium ? "Débloquer avec Premium" : "Ajouter le pack") : "Voir comment l'ajouter à l'écran")
                         .font(.headline)
+                        .foregroundStyle(Color.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
                 }
                 .buttonStyle(.borderedProminent)

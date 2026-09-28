@@ -196,6 +196,7 @@ struct FoodSearchView: View {
                     }
                 }
             }
+            .styledList()
             .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Pomme, poulet, yogourt…")
             .onSubmit(of: .search) { Task { await searchOnline() } }
             .onChange(of: query) { _, _ in

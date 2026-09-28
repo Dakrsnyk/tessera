@@ -242,9 +242,10 @@ struct PaywallView: View {
             Task { await buy(product) }
         } label: {
             HStack {
-                if store.purchasingID != nil { ProgressView().tint(.white) }
+                if store.purchasingID != nil { ProgressView().tint(Color.onAccent) }
                 Text(isTrial ? "Essayer gratuitement" : "Continuer")
                     .font(.headline)
+                    .foregroundStyle(Color.onAccent)
             }
             .frame(maxWidth: .infinity, minHeight: 52)
         }

@@ -157,7 +157,9 @@ struct SpaceView: View {
                 Text("Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.")
             }
             content
+                .listRowBackground(Color.cardFill)
         }
+        .styledList()
         .navigationTitle(space.title)
         .navigationBarTitleDisplayMode(.large)
         .screenshotScroll()

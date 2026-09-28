@@ -403,6 +403,7 @@ struct CompanyDetailView: View {
                 HintRow(text: "Source : SEC EDGAR (données XBRL des dépôts 10-K et 10-Q). À titre informatif, pas un conseil d'investissement.")
             }
         }
+        .styledList()
         .navigationTitle(ref.ticker)
         .task { await model.refreshCompany(ref) }
     }

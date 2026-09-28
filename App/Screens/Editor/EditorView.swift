@@ -99,7 +99,9 @@ struct EditorView: View {
                     .foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)
-            Button("Débloquer") { showsPaywall = true }
+            Button { showsPaywall = true } label: {
+                Text("Débloquer").foregroundStyle(Color.onAccent)
+            }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
         }
@@ -243,7 +245,7 @@ struct EditorView: View {
                                     Image(systemName: "lock.fill").font(.system(size: 9, weight: .bold))
                                 }
                             }
-                            .foregroundStyle(design.font == font ? Color.white : Color.primary)
+                            .foregroundStyle(design.font == font ? Color.onAccent : Color.primary)
                             .padding(.horizontal, 14)
                             .frame(minHeight: 36)
                             .background(design.font == font ? Color.accentColor : Color.screenFill, in: Capsule())
@@ -302,6 +304,7 @@ struct EditorView: View {
             Button(action: save) {
                 Text(needsPremium ? "Débloquer et enregistrer" : (isNew ? "Enregistrer le widget" : "Enregistrer"))
                     .font(.headline)
+                    .foregroundStyle(hasChanges ? Color.onAccent : Color.secondary)
                     .frame(maxWidth: .infinity, minHeight: 50)
             }
             .buttonStyle(.borderedProminent)

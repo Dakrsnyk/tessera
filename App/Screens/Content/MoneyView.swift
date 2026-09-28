@@ -48,6 +48,7 @@ struct MoneyView: View {
                 }
             }
         }
+        .styledList()
         .navigationTitle("Revenus et dépenses")
         .sheet(item: $editing) { item in
             MoneyItemEditor(item: item, isNew: !money.items.contains { $0.id == item.id })
@@ -150,6 +151,7 @@ struct MoneyItemEditor: View {
                     }
                 }
             }
+            .styledList()
             .navigationTitle(isNew ? (item.isIncome ? "Nouveau revenu" : "Nouvelle dépense") : item.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

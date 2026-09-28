@@ -468,6 +468,7 @@
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Tessera enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -509,6 +510,7 @@
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Tessera enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

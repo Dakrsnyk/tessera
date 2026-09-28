@@ -44,7 +44,7 @@ struct HydrationView: View {
                         } label: {
                             Label("Un verre", systemImage: "plus")
                                 .font(.headline)
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color.onAccent)
                                 .frame(width: 150, height: 56)
                                 .background(Color.accentColor, in: Capsule())
                         }
@@ -86,6 +86,7 @@ struct HydrationView: View {
                 }
             }
         }
+        .styledList()
         .navigationTitle("Hydratation")
     }
 

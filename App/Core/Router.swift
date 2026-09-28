@@ -31,6 +31,9 @@ final class Router {
     var lastSavedName: String?
     var exploreCategory: WidgetCategory?
     var exploreSearchRequested = false
+    /// Store: the full list of Home Screen setups, and a setup to open (used by test captures).
+    var showsAllSetups = false
+    var openedSetupID: String?
     /// Navigation inside the Espaces tab.
     var spacePath: [Space] = []
 

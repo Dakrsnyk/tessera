@@ -12,7 +12,9 @@ struct SheetForm<Content: View>: View {
         NavigationStack {
             Form {
                 content()
+                    .listRowBackground(Color.cardFill)
             }
+            .styledList()
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -132,7 +134,7 @@ struct WeekdayPicker: View {
                     Text(day - 1 < symbols.count ? symbols[day - 1] : "\(day)")
                         .font(.caption.weight(.semibold))
                         .frame(maxWidth: .infinity, minHeight: 34)
-                        .foregroundStyle(isOn ? Color.white : Color.primary)
+                        .foregroundStyle(isOn ? Color.onAccent : Color.primary)
                         .background(isOn ? Color.accentColor : Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
                 }
                 .buttonStyle(.plain)

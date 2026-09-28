@@ -20,9 +20,19 @@ enum ScreenshotMode {
         seed(model)
         model.seedDemoCaches(SampleData.domains(now: Date()))
         // The offer is captured as a free user sees it; every other screen with Premium unlocked.
-        model.setDebugPremium(screen != "paywall")
+        model.setDebugPremium(screen != "paywall" && screen != "setups-free")
+        // `-screenshotStyle ocean -screenshotAppearance dark`: the app style to capture with (default otherwise).
+        let defaults = UserDefaults.standard
+        model.updateSettings {
+            $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(rawValue:)) ?? .tessera
+            $0.appearance = defaults.string(forKey: "screenshotAppearance").flatMap(AppearanceMode.init(rawValue:)) ?? .system
+            $0.hasChosenStyle = true
+        }
         switch screen {
         case "onboarding": return .onboarding
+        case "setups", "setups-free":
+            router.tab = .explore
+            router.showsAllSetups = true
         case "home": router.tab = .home
         case "explore": router.tab = .explore
         case "editor": router.openEditor(TemplateCatalog.design("countdown-holidays"), isNew: true)
@@ -37,6 +47,10 @@ enum ScreenshotMode {
             if screen.hasPrefix("gallery") || screen.hasPrefix("marketing") { return .gallery(screen) }
             if screen.hasPrefix("space-"), let space = Space(rawValue: String(screen.dropFirst(6))) {
                 router.openSpace(space)
+            }
+            if screen.hasPrefix("setup-") {
+                router.tab = .explore
+                router.openedSetupID = String(screen.dropFirst(6))
             }
         }
         return .none
@@ -72,6 +86,27 @@ enum ScreenshotMode {
         model.update(\.productivity) { $0 = data.productivity }
         model.update(\.life) { $0 = data.life }
         model.update(\.following) { $0 = data.following }
+    }
+}
+
+/// Every Home Screen setup, one page of each (gallery-setups-home or gallery-setups-lock), for visual QA.
+struct SetupGalleryView: View {
+    let mode: String
+
+    var body: some View {
+        let page: SetupPage = mode.hasSuffix("lock") ? .lock : .home
+        GeometryReader { geo in
+            let spacing: CGFloat = 6
+            let width = (geo.size.width - 12 - spacing * 3) / 4
+            LazyVGrid(columns: Array(repeating: GridItem(.fixed(width), spacing: spacing), count: 4), spacing: spacing) {
+                ForEach(HomeSetupCatalog.all) { setup in
+                    SetupScreenshot(setup: setup, page: page)
+                }
+            }
+            .padding(6)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        }
+        .background(Color.black.ignoresSafeArea())
     }
 }
 
