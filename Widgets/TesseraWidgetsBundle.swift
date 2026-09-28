@@ -8,6 +8,7 @@ import WidgetKit
 struct TesseraWidgetsBundle: WidgetBundle {
     init() {
         WidgetLog.logger.log("extension launched")
+        NSLog("TesseraWidgets: extension launched")
     }
 
     var body: some Widget {
