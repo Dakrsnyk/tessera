@@ -17,6 +17,7 @@ Chaque modification poussée sur `main` est compilée automatiquement sur un Mac
 | `[place]` | Compilation simulateur et test d'ajout des widgets à l'écran d'accueil et à l'écran verrouillé |
 | `[qa]` | Tous les tests automatiques, puis les captures d'écran de toutes les pages et de la galerie de widgets |
 | `[release]` | En plus : compilation dans la configuration App Store et vérification que le déblocage de test en est absent |
+| `[marketing]` | Rend les 10 captures App Store (iPhone 6,9 pouces, 1320 × 2868) : scènes dessinées par l'app, vrais écrans capturés à part |
 
 Le rapport (erreurs, résultats des tests, captures) est publié sur la branche `ci-report`.
 Le fichier à installer est publié dans **Releases** (colonne de droite du dépôt) : `Tessera.ipa`.
