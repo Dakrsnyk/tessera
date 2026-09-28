@@ -396,7 +396,7 @@ struct MarketingFitness: View {
             title: "Chaque série\ncompte.",
             subtitle: "Séance, repos et records.",
             floating: [
-                (MKWidget(.restTimer, .systemSmall, .dark, "FF6B57"), 150, CGPoint(x: 350, y: 818)),
+                (MKWidget(.nextSet, .systemSmall, .dark, "FF6B57"), 150, CGPoint(x: 350, y: 818)),
             ]
         )
     }
