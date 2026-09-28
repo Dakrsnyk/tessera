@@ -55,7 +55,7 @@ jobs:
           set -o pipefail
           xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -sdk iphoneos -destination 'generic/platform=iOS' \
-            -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build 2>&1 | tee device.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
+            -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_DEBUG_DYLIB=NO build 2>&1 | tee device.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" device.log
 
       - name: Package IPA
@@ -81,14 +81,19 @@ jobs:
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
           xcrun simctl install "$DEVICE" "$APP"
           mkdir -p shots
+          shoot() { # name screen scroll scheme
+            xcrun simctl ui "$DEVICE" appearance $4
+            xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null || true
+            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $2 -screenshotScroll $3
+            sleep 5
+            xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$1-$4.jpg"
+          }
           for screen in onboarding home explore editor mywidgets paywall settings content gallery-small gallery-medium gallery-large gallery-lock; do
-            for scheme in light dark; do
-              xcrun simctl ui "$DEVICE" appearance $scheme
-              xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null || true
-              xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $screen
-              sleep 5
-              xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$screen-$scheme.jpg"
-            done
+            for scheme in light dark; do shoot $screen $screen top $scheme; done
+          done
+          for screen in home editor paywall explore; do
+            shoot $screen-mid $screen center light
+            shoot $screen-end $screen bottom light
           done
 
       - name: Publish build report

@@ -23,6 +23,7 @@ struct HomeView: View {
                 .padding(.bottom, 32)
             }
             .background(Color.screenFill)
+            .screenshotScroll()
             .navigationTitle("Tessera")
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {

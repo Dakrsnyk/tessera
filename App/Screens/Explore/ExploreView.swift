@@ -53,6 +53,7 @@ struct ExploreView: View {
                 .padding(.bottom, 32)
             }
             .background(Color.screenFill)
+            .screenshotScroll()
             .navigationTitle("Explorer")
             .searchable(text: $query, isPresented: $isSearchPresented, prompt: "Météo, tâches, bitcoin…")
             .onAppear(perform: consumeSearchRequest)

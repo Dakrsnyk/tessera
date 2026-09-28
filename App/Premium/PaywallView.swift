@@ -30,6 +30,7 @@ struct PaywallView: View {
                 .padding(.bottom, 24)
             }
             .background(Color.screenFill)
+            .screenshotScroll()
             .safeAreaInset(edge: .bottom) {
                 if !model.isPremium { purchaseBar }
             }
@@ -227,6 +228,7 @@ struct PaywallView: View {
             }
             .disabled(store.isRestoring)
         }
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, 20)
         .padding(.top, 10)
         .padding(.bottom, 6)

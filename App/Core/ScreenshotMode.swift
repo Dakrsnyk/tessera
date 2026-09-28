@@ -97,3 +97,19 @@ struct WidgetGalleryView: View {
     }
 }
 #endif
+
+extension View {
+    /// Test builds: `-screenshotScroll center|bottom` opens long screens scrolled, for review captures.
+    @ViewBuilder
+    func screenshotScroll() -> some View {
+        #if DEBUG
+        switch UserDefaults.standard.string(forKey: "screenshotScroll") {
+        case "center": defaultScrollAnchor(.center)
+        case "bottom": defaultScrollAnchor(.bottom)
+        default: self
+        }
+        #else
+        self
+        #endif
+    }
+}

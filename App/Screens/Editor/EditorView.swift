@@ -50,6 +50,7 @@ struct EditorView: View {
                 .padding(.bottom, 24)
             }
             .scrollDismissesKeyboard(.interactively)
+            .screenshotScroll()
             .background(Color.screenFill)
             .safeAreaInset(edge: .bottom) { saveBar }
             .navigationTitle(isNew ? "Nouveau widget" : "Modifier")
