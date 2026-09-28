@@ -17,8 +17,11 @@ final class WidgetPlacementUITests: XCTestCase {
         Thread.sleep(forTimeInterval: seconds)
     }
 
+    /// Only the Lock Screen test looks inside PosterBoard: querying it while it has no window fails the test.
+    private var searchesPosterBoard = false
+
     private var systemApps: [XCUIApplication] {
-        [springboard, posterBoard].filter { $0.state != .notRunning && $0.state != .unknown }
+        searchesPosterBoard ? [springboard, posterBoard] : [springboard]
     }
 
     private func snapshot(_ name: String, tree: Bool = false) {
@@ -148,6 +151,7 @@ final class WidgetPlacementUITests: XCTestCase {
     // MARK: Lock Screen
 
     func testAddWidgetToLockScreen() throws {
+        searchesPosterBoard = true
         launchTesseraOnce()
         let lock = NSSelectorFromString("pressLockButton")
         guard XCUIDevice.shared.responds(to: lock) else {
@@ -192,13 +196,22 @@ final class WidgetPlacementUITests: XCTestCase {
         pause(2.5)
         snapshot("lock-7-added", tree: true)
 
+        // Close the widget page, then the widget list, then save the Lock Screen.
+        tap(["Close", "Fermer"], timeout: 2)
+        pause(1.5)
         if !tap(["Close", "Fermer"], timeout: 2) {
-            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45))
-                .press(forDuration: 0.1, thenDragTo: springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.95)))
+            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.12)).tap()
         }
         pause(1.5)
+        snapshot("lock-8-editor-with-widget", tree: true)
         tap(["Done", "OK", "Terminé"], timeout: 3)
-        pause(2.5)
-        snapshot("lock-8-result", tree: true)
+        pause(3)
+        snapshot("lock-9-result", tree: true)
+        // Back on the wallpaper gallery: a tap on the current wallpaper returns to the Lock Screen.
+        if element(["Customize", "Personnaliser"], timeout: 2) != nil {
+            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45)).tap()
+            pause(3)
+        }
+        snapshot("lock-10-lock-screen")
     }
 }
