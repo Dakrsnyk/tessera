@@ -32,7 +32,12 @@ enum ScreenshotMode {
         case "onboarding": return .onboarding
         case "setups", "setups-free":
             router.tab = .explore
-            router.showsAllSetups = true
+            // Pushed once the Store tab is on screen: switching tab and pushing in the same
+            // instant leaves the tab bar on the Store with the previous page still shown.
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(900))
+                router.showsAllSetups = true
+            }
         case "home": router.tab = .home
         case "explore": router.tab = .explore
         case "editor": router.openEditor(TemplateCatalog.design("countdown-holidays"), isNew: true)
