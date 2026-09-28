@@ -28,6 +28,7 @@ jobs:
         run: xcodebuild -version
 
       - name: Boot a simulator early
+        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[shots]')
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
@@ -71,9 +72,10 @@ jobs:
           zip -qry Tessera.ipa Payload
           ls -lh Tessera.ipa
 
+      # Screenshots cost macOS minutes: only when asked (manual run, or "[shots]" in the commit message).
       - name: Screenshots
         id: shots
-        if: steps.sim.outcome == 'success' && env.DEVICE != ''
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[shots]'))
         continue-on-error: true
         timeout-minutes: 15
         run: |

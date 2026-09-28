@@ -11,6 +11,6 @@ enum PremiumConfiguration {
 
     /// Required by Apple on the paywall. Replace with your hosted pages before submitting.
     static let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
-    static let privacyURL = URL(string: "https://github.com/Dakrsnyk/tessera/blob/main/PRIVACY.md")!
+    static let privacyURL = URL(string: "https://claude.ai/artifact/M2hUyRzRz9zxoSMJ4PJ5X8")!
     static let supportEmail = "support@exemple.com"
 }

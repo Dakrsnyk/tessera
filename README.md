@@ -7,7 +7,7 @@ SwiftUI + WidgetKit + App Intents + StoreKit 2, iOS 17 minimum, sans aucune dép
 
 ## 1. Tester l'app sur ton iPhone sans Mac
 
-Chaque modification poussée sur `main` est compilée automatiquement sur un Mac de GitHub.
+Chaque modification poussée sur `main` est compilée automatiquement sur un Mac de GitHub. Les captures d'écran de contrôle ne sont faites que sur demande (lancement manuel, ou `[shots]` dans le message de commit) pour économiser les minutes Mac du dépôt privé.
 Le fichier à installer est publié dans **Releases** (colonne de droite du dépôt) : `Tessera.ipa`.
 
 ### Première installation (PC Windows)
@@ -56,7 +56,7 @@ Dans les versions de test (Debug), Réglages > **Développeur** > « Premium (mo
 | **Abonnements** : groupe « Tessera Premium » avec `com.dakrsnyk.tessera.premium.monthly` (1 mois) et `…premium.yearly` (1 an, essai gratuit 1 semaine) | App Store Connect > Abonnements | Avant la soumission |
 | **Achat unique** : `com.dakrsnyk.tessera.premium.lifetime` (non consommable) | App Store Connect > Achats intégrés | Avant la soumission |
 | Adresse de support | `App/Premium/PremiumConfiguration.swift` (`supportEmail`) | Avant la soumission |
-| Politique de confidentialité | `PRIVACY.md` (lien déjà dans l'app) ; à héberger ailleurs si tu préfères | Avant la soumission |
+| Politique de confidentialité | Page « Confidentialité Tessera » (lien déjà dans l'app) : la rendre publique via son menu Partager | Avant la soumission |
 | **Clé Open-Meteo** (usage commercial) | Réglage `OPEN_METEO_API_KEY` du projet | Dès que l'app est vendue : l'API gratuite est réservée à l'usage non commercial |
 | Clé CoinGecko (facultative) | Réglage `COINGECKO_API_KEY` | Si la limite gratuite est atteinte |
 | Captures d'écran App Store | App Store Connect | Avant la soumission |
