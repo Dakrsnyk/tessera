@@ -119,6 +119,17 @@ enum TemplateCatalog {
 
     static var featured: [WidgetTemplate] { all.filter(\.isFeatured) }
 
+    static func template(_ id: String) -> WidgetTemplate? {
+        all.first { $0.id == id }
+    }
+
+    /// A design from a known template, used by illustrations.
+    static func design(_ id: String, theme: ThemeID? = nil) -> WidgetDesign {
+        var design = template(id)?.makeDesign() ?? WidgetDesign.starter(for: .clock)
+        if let theme { design.themeID = theme }
+        return design
+    }
+
     static var newest: [WidgetTemplate] { all.filter { $0.kind.isNew } }
 
     static func templates(for kind: WidgetKind) -> [WidgetTemplate] {

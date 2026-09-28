@@ -1,0 +1,16 @@
+import Foundation
+
+/// Everything to fill in when the app is set up in App Store Connect.
+/// Product IDs must match the ones created there (and in Config/Tessera.storekit for local testing).
+enum PremiumConfiguration {
+    static let monthlyID = "com.dakrsnyk.tessera.premium.monthly"
+    static let yearlyID = "com.dakrsnyk.tessera.premium.yearly"
+    static let lifetimeID = "com.dakrsnyk.tessera.premium.lifetime"
+
+    static var allProductIDs: [String] { [yearlyID, monthlyID, lifetimeID] }
+
+    /// Required by Apple on the paywall. Replace with your hosted pages before submitting.
+    static let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
+    static let privacyURL = URL(string: "https://github.com/Dakrsnyk/tessera/blob/main/PRIVACY.md")!
+    static let supportEmail = "support@exemple.com"
+}

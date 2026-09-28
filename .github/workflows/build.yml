@@ -26,6 +26,19 @@ jobs:
       - name: Show toolchain
         run: xcodebuild -version
 
+      - name: Boot a simulator early
+        continue-on-error: true
+        run: |
+          DEVICE=$(xcrun simctl list devices available -j | python3 -c "
+          import json, sys
+          devices = json.load(sys.stdin)['devices']
+          phones = [d for runtime, items in devices.items() if 'iOS' in runtime for d in items if d['name'].startswith('iPhone')]
+          preferred = [d for d in phones if d['name'] == 'iPhone 16 Pro'] or [d for d in phones if 'Pro' in d['name']] or phones
+          print(preferred[-1]['udid'])
+          ")
+          echo "DEVICE=$DEVICE" >> "$GITHUB_ENV"
+          xcrun simctl boot "$DEVICE" || true
+
       - name: Build for the simulator
         id: sim
         run: |
@@ -59,24 +72,22 @@ jobs:
 
       - name: Screenshots
         id: shots
-        if: steps.sim.outcome == 'success'
+        if: steps.sim.outcome == 'success' && env.DEVICE != ''
         continue-on-error: true
+        timeout-minutes: 15
         run: |
-          set -x
           APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
-          DEVICE=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for k,v in d.items() if 'iOS' in k for x in v if x['name'].startswith('iPhone 16 Pro') or x['name'].startswith('iPhone 16')))")
-          xcrun simctl boot "$DEVICE"
           xcrun simctl bootstatus "$DEVICE" -b
-          xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
+          xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
           xcrun simctl install "$DEVICE" "$APP"
           mkdir -p shots
-          for screen in onboarding home explore editor mywidgets paywall settings gallery-small gallery-medium gallery-large gallery-lock content; do
+          for screen in onboarding home explore editor mywidgets paywall settings content gallery-small gallery-medium gallery-large gallery-lock; do
             for scheme in light dark; do
               xcrun simctl ui "$DEVICE" appearance $scheme
-              xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera || true
+              xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null || true
               xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $screen
-              sleep 4
-              xcrun simctl io "$DEVICE" screenshot "shots/$screen-$scheme.png"
+              sleep 5
+              xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$screen-$scheme.jpg"
             done
           done
 
@@ -95,7 +106,7 @@ jobs:
             echo "---- last lines ----"
             tail -40 sim.log 2>/dev/null || true
           } > report/report.txt
-          [ -d shots ] && cp shots/*.png report/ 2>/dev/null || true
+          [ -d shots ] && cp shots/*.jpg report/ 2>/dev/null || true
           [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
           cd report
           git init -q

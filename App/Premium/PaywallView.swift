@@ -1,0 +1,320 @@
+import StoreKit
+import SwiftUI
+import WidgetKit
+
+struct PaywallView: View {
+    @Environment(AppModel.self) private var model
+    @Environment(PremiumStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
+    @State private var selectedID = PremiumConfiguration.yearlyID
+    @State private var message: String?
+    @State private var didPurchase = false
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 28) {
+                    hero
+                    showcase
+                    perks
+                    comparison
+                    if model.isPremium {
+                        activeState
+                    } else {
+                        plans
+                    }
+                    legal
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 24)
+            }
+            .background(Color.screenFill)
+            .safeAreaInset(edge: .bottom) {
+                if !model.isPremium { purchaseBar }
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.subheadline.weight(.semibold))
+                    }
+                    .accessibilityLabel(Text("Fermer"))
+                }
+            }
+            .alert("Achat", isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {
+                Button("OK", role: .cancel) {
+                    if didPurchase { dismiss() }
+                }
+            } message: {
+                Text(message ?? "")
+            }
+            .task {
+                if store.products.isEmpty { await store.loadProducts() }
+            }
+        }
+    }
+
+    // MARK: Sections
+
+    private var hero: some View {
+        VStack(spacing: 12) {
+            TesseraMark(size: 56)
+            Text("Tessera Premium")
+                .font(.largeTitle.weight(.bold))
+            Text("Tous les widgets, tous les styles, sans limite.")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .padding(.top, 8)
+    }
+
+    private var showcase: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 12) {
+                ForEach(["focus-futuristic", "money-net", "world-futuristic", "dots-glass", "calendar-elegant"], id: \.self) { id in
+                    if let template = TemplateCatalog.template(id) {
+                        WidgetPreview(design: template.makeDesign(), family: .systemSmall, payload: SamplePayload.make(for: template.kind), width: 130)
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+        .padding(.horizontal, -20)
+        .accessibilityHidden(true)
+    }
+
+    private var perks: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            PerkRow(symbol: "timer", title: "Focus en direct", detail: "Un minuteur qui défile sur ton écran d'accueil")
+            PerkRow(symbol: "dollarsign.arrow.circlepath", title: "Flux d'argent", detail: "Tes revenus et dépenses, calculés au fil du jour")
+            PerkRow(symbol: "globe", title: "Fuseaux, crypto, agenda, l'année en points", detail: "Six widgets en plus")
+            PerkRow(symbol: "paintpalette", title: "8 styles en plus", detail: "Verre, Aurore, Élégant, Digital, Rétro, Futuriste…")
+            PerkRow(symbol: "photo", title: "Fonds photo, couleurs libres", detail: "Et les polices Serif et Mono")
+        }
+        .card(padding: 20)
+    }
+
+    private var comparison: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text("")
+                Spacer()
+                Text("Gratuit").frame(width: 72)
+                Text("Premium").frame(width: 72).foregroundStyle(Color.premiumInk)
+            }
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(.secondary)
+            .padding(.bottom, 8)
+            comparisonRow("Widgets", free: "\(WidgetKind.allCases.filter { !$0.isPremium }.count)", premium: "\(WidgetKind.allCases.count)")
+            comparisonRow("Styles", free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
+            comparisonRow("Widgets enregistrés", free: "\(AppModel.freeDesignLimit)", premium: "∞")
+            comparisonRow("Habitudes", free: "\(AppModel.freeHabitLimit)", premium: "∞")
+            comparisonRow("Couleurs", free: "\(Palette.freeAccents.count)", premium: "∞")
+            comparisonRow("Fonds et polices", free: "—", premium: "✓")
+        }
+        .card(padding: 18)
+    }
+
+    private func comparisonRow(_ title: String, free: String, premium: String) -> some View {
+        VStack(spacing: 0) {
+            Divider()
+            HStack {
+                Text(title).font(.subheadline)
+                Spacer()
+                Text(free).frame(width: 72).foregroundStyle(.secondary)
+                Text(premium).frame(width: 72).fontWeight(.semibold)
+            }
+            .font(.subheadline.monospacedDigit())
+            .padding(.vertical, 10)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text("\(title) : gratuit \(free), Premium \(premium)"))
+    }
+
+    @ViewBuilder private var plans: some View {
+        switch store.loadState {
+        case .idle, .loading:
+            ProgressView("Chargement des offres…")
+                .frame(maxWidth: .infinity, minHeight: 120)
+        case let .failed(reason):
+            VStack(spacing: 10) {
+                Image(systemName: "wifi.exclamationmark")
+                    .font(.title2)
+                    .foregroundStyle(.secondary)
+                Text(reason)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                Button("Réessayer") { Task { await store.loadProducts() } }
+                    .buttonStyle(.bordered)
+            }
+            .frame(maxWidth: .infinity)
+            .card()
+        case .loaded:
+            VStack(spacing: 10) {
+                ForEach(store.products, id: \.id) { product in
+                    PlanCard(
+                        product: product,
+                        isSelected: selectedID == product.id,
+                        badge: badge(for: product),
+                        subtitle: subtitle(for: product)
+                    ) {
+                        selectedID = product.id
+                    }
+                }
+            }
+        }
+    }
+
+    private func badge(for product: Product) -> String? {
+        if product.id == PremiumConfiguration.yearlyID {
+            if let trial = store.trialDescription(for: product) { return trial }
+            if let savings = store.yearlySavingsPercent { return "−\(savings) %" }
+        }
+        if product.id == PremiumConfiguration.lifetimeID { return "Paiement unique" }
+        return nil
+    }
+
+    private func subtitle(for product: Product) -> String {
+        switch product.id {
+        case PremiumConfiguration.yearlyID:
+            if let monthly = store.monthlyEquivalent(of: product) { return "\(product.displayPrice) par an, soit \(monthly) par mois" }
+            return "\(product.displayPrice) par an"
+        case PremiumConfiguration.monthlyID:
+            return "\(product.displayPrice) par mois"
+        default:
+            return "\(product.displayPrice), une seule fois"
+        }
+    }
+
+    private var activeState: some View {
+        VStack(spacing: 8) {
+            Image(systemName: "checkmark.seal.fill")
+                .font(.largeTitle)
+                .foregroundStyle(Color.accentColor)
+            Text("Tu profites de Premium")
+                .font(.headline)
+            Text("Merci ! Tous les widgets et tous les styles sont débloqués.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .card(padding: 20)
+    }
+
+    private var purchaseBar: some View {
+        let product = store.products.first { $0.id == selectedID }
+        let isTrial = product.flatMap { store.trialDescription(for: $0) } != nil
+        return VStack(spacing: 8) {
+            Button {
+                guard let product else { return }
+                Task { await buy(product) }
+            } label: {
+                HStack {
+                    if store.purchasingID != nil { ProgressView().tint(.white) }
+                    Text(isTrial ? "Essayer gratuitement" : "Continuer")
+                        .font(.headline)
+                }
+                .frame(maxWidth: .infinity, minHeight: 52)
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.roundedRectangle(radius: 16))
+            .disabled(product == nil || store.purchasingID != nil)
+
+            Button {
+                Task {
+                    let found = await store.restore()
+                    didPurchase = found
+                    message = found ? "Ton accès Premium est rétabli." : "Aucun achat Premium trouvé pour ce compte Apple."
+                }
+            } label: {
+                Text(store.isRestoring ? "Restauration…" : "Restaurer mes achats")
+                    .font(.footnote.weight(.medium))
+            }
+            .disabled(store.isRestoring)
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 10)
+        .padding(.bottom, 6)
+        .background(.bar)
+    }
+
+    private var legal: some View {
+        VStack(spacing: 10) {
+            Text("L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. Si tu profites d'un essai gratuit, il prend fin dès l'achat d'un abonnement.")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            HStack(spacing: 16) {
+                Button("Conditions") { openURL(PremiumConfiguration.termsURL) }
+                Button("Confidentialité") { openURL(PremiumConfiguration.privacyURL) }
+            }
+            .font(.caption.weight(.medium))
+        }
+    }
+
+    private func buy(_ product: Product) async {
+        switch await store.purchase(product) {
+        case .success:
+            Haptics.success()
+            didPurchase = true
+            message = "Bienvenue dans Tessera Premium !"
+        case .pending:
+            message = "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé."
+        case .cancelled:
+            break
+        case let .failed(reason):
+            message = reason
+        }
+    }
+}
+
+private struct PlanCard: View {
+    let product: Product
+    let isSelected: Bool
+    let badge: String?
+    let subtitle: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 14) {
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .font(.title3)
+                    .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack(spacing: 8) {
+                        Text(product.displayName)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                        if let badge {
+                            Text(badge)
+                                .font(.caption2.weight(.bold))
+                                .foregroundStyle(Color.premiumInk)
+                                .padding(.horizontal, 7)
+                                .padding(.vertical, 3)
+                                .background(Color.premiumFill, in: Capsule())
+                        }
+                    }
+                    Text(subtitle)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer(minLength: 0)
+            }
+            .padding(16)
+            .background(Color.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .strokeBorder(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+}
