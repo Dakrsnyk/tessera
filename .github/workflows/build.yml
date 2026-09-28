@@ -93,7 +93,16 @@ jobs:
           mkdir -p Payload
           cp -R "$APP" Payload/
           zip -qry Tessera.ipa Payload
-          ls -lh Tessera.ipa
+          # Diagnostic variant: the widget extension without its App Intents metadata. If its
+          # « Mon widget » shows up in the widget gallery while the normal build shows nothing,
+          # the system rejects the metadata; if neither shows up, the extension isn't started.
+          mkdir -p diagnostic/Payload
+          cp -R "$APP" diagnostic/Payload/
+          rm -rf diagnostic/Payload/Tessera.app/PlugIns/TesseraWidgets.appex/Metadata.appintents
+          codesign --force --sign - diagnostic/Payload/Tessera.app/PlugIns/TesseraWidgets.appex
+          codesign --force --sign - diagnostic/Payload/Tessera.app
+          (cd diagnostic && zip -qry ../Tessera-diagnostic.ipa Payload)
+          ls -lh Tessera.ipa Tessera-diagnostic.ipa
 
       - name: Tests (logic and widget placement)
         id: tests
@@ -278,4 +287,6 @@ jobs:
           body: |
             Version de test de Tessera (build ${{ github.run_number }}).
             Installe `Tessera.ipa` sur ton iPhone avec Sideloadly (voir le README).
-          files: Tessera.ipa
+          files: |
+            Tessera.ipa
+            Tessera-diagnostic.ipa
