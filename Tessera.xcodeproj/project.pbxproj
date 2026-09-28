@@ -18,6 +18,20 @@
 			remoteGlobalIDString = A10000000000000000000071;
 			remoteInfo = TesseraWidgets;
 		};
+		A10000000000000000000021 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000090 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000000000000000000070;
+			remoteInfo = Tessera;
+		};
+		A10000000000000000000022 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000090 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000000000000000000070;
+			remoteInfo = Tessera;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +51,8 @@
 /* Begin PBXFileReference section */
 		A10000000000000000000001 /* Tessera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tessera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000000000000000000002 /* TesseraWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TesseraWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000003 /* TesseraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesseraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000004 /* TesseraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesseraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -53,6 +69,16 @@
 		A10000000000000000000042 /* Widgets */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000043 /* Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000044 /* UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -72,6 +98,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A10000000000000000000052 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000053 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,6 +121,8 @@
 				A10000000000000000000040 /* App */,
 				A10000000000000000000041 /* Shared */,
 				A10000000000000000000042 /* Widgets */,
+				A10000000000000000000043 /* Tests */,
+				A10000000000000000000044 /* UITests */,
 				A10000000000000000000061 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +132,8 @@
 			children = (
 				A10000000000000000000001 /* Tessera.app */,
 				A10000000000000000000002 /* TesseraWidgets.appex */,
+				A10000000000000000000003 /* TesseraTests.xctest */,
+				A10000000000000000000004 /* TesseraUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +189,52 @@
 			productReference = A10000000000000000000002 /* TesseraWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		A10000000000000000000072 /* TesseraTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A100000000000000000000B3 /* Build configuration list for PBXNativeTarget "TesseraTests" */;
+			buildPhases = (
+				A10000000000000000000084 /* Sources */,
+				A10000000000000000000052 /* Frameworks */,
+				A10000000000000000000086 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A100000000000000000000A1 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A10000000000000000000043 /* Tests */,
+			);
+			name = TesseraTests;
+			packageProductDependencies = (
+			);
+			productName = TesseraTests;
+			productReference = A10000000000000000000003 /* TesseraTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A10000000000000000000073 /* TesseraUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A100000000000000000000B4 /* Build configuration list for PBXNativeTarget "TesseraUITests" */;
+			buildPhases = (
+				A10000000000000000000085 /* Sources */,
+				A10000000000000000000053 /* Frameworks */,
+				A10000000000000000000087 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A100000000000000000000A2 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A10000000000000000000044 /* UITests */,
+			);
+			name = TesseraUITests;
+			packageProductDependencies = (
+			);
+			productName = TesseraUITests;
+			productReference = A10000000000000000000004 /* TesseraUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,6 +250,14 @@
 					};
 					A10000000000000000000071 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					A10000000000000000000072 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A10000000000000000000070;
+					};
+					A10000000000000000000073 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A10000000000000000000070;
 					};
 				};
 			};
@@ -180,6 +278,8 @@
 			targets = (
 				A10000000000000000000070 /* Tessera */,
 				A10000000000000000000071 /* TesseraWidgets */,
+				A10000000000000000000072 /* TesseraTests */,
+				A10000000000000000000073 /* TesseraUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -193,6 +293,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A10000000000000000000083 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000086 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000087 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -216,6 +330,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A10000000000000000000084 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000085 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -223,6 +351,16 @@
 			isa = PBXTargetDependency;
 			target = A10000000000000000000071 /* TesseraWidgets */;
 			targetProxy = A10000000000000000000020 /* PBXContainerItemProxy */;
+		};
+		A100000000000000000000A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000070 /* Tessera */;
+			targetProxy = A10000000000000000000021 /* PBXContainerItemProxy */;
+		};
+		A100000000000000000000A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000070 /* Tessera */;
+			targetProxy = A10000000000000000000022 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -428,6 +566,76 @@
 			};
 			name = Release;
 		};
+		A100000000000000000000C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tessera.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tessera";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dakrsnyk.tessera.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A100000000000000000000C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tessera.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tessera";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dakrsnyk.tessera.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		A100000000000000000000C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				TEST_TARGET_NAME = Tessera;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dakrsnyk.tessera.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A100000000000000000000C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				TEST_TARGET_NAME = Tessera;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dakrsnyk.tessera.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -454,6 +662,24 @@
 			buildConfigurations = (
 				A100000000000000000000C0 /* Debug */,
 				A100000000000000000000C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A100000000000000000000B3 /* Build configuration list for PBXNativeTarget "TesseraTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A100000000000000000000C6 /* Debug */,
+				A100000000000000000000C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A100000000000000000000B4 /* Build configuration list for PBXNativeTarget "TesseraUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A100000000000000000000C8 /* Debug */,
+				A100000000000000000000C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

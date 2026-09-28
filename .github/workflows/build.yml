@@ -16,7 +16,10 @@ concurrency:
 jobs:
   build:
     runs-on: macos-15
-    timeout-minutes: 45
+    timeout-minutes: 50
+    env:
+      # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
+      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +31,7 @@ jobs:
         run: xcodebuild -version
 
       - name: Boot a simulator early
-        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[shots]')
+        if: env.QA == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
@@ -72,10 +75,36 @@ jobs:
           zip -qry Tessera.ipa Payload
           ls -lh Tessera.ipa
 
-      # Screenshots cost macOS minutes: only when asked (manual run, or "[shots]" in the commit message).
+      - name: Tests (logic and widget placement)
+        id: tests
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.QA == 'true'
+        continue-on-error: true
+        timeout-minutes: 20
+        run: |
+          set -o pipefail
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
+          mkdir -p testexport testshots
+          xcrun xcresulttool export attachments --path TestResults.xcresult --output-path testexport || true
+          python3 - <<'PY'
+          import json, os, shutil
+          manifest = os.path.join("testexport", "manifest.json")
+          if os.path.exists(manifest):
+              for test in json.load(open(manifest)):
+                  for item in test.get("attachments", []):
+                      name = item.get("suggestedHumanReadableName") or item["exportedFileName"]
+                      name = name.split("_0_")[0].replace(" ", "-")
+                      ext = os.path.splitext(item["exportedFileName"])[1] or ".png"
+                      shutil.copy(os.path.join("testexport", item["exportedFileName"]), os.path.join("testshots", name + ext))
+          PY
+          ls testshots
+          grep -q "TEST SUCCEEDED" test.log
+
       - name: Screenshots
         id: shots
-        if: steps.sim.outcome == 'success' && env.DEVICE != '' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[shots]'))
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.QA == 'true'
         continue-on-error: true
         timeout-minutes: 15
         run: |
@@ -108,13 +137,17 @@ jobs:
             echo "commit: ${{ github.sha }}"
             echo "simulator: ${{ steps.sim.outcome }}"
             echo "device: ${{ steps.device.outcome }}"
+            echo "tests: ${{ steps.tests.outcome }}"
             echo "screenshots: ${{ steps.shots.outcome }}"
             echo "---- errors ----"
             grep -hE "error:" sim.log device.log 2>/dev/null | sort -u | head -200 || true
+            echo "---- tests ----"
+            grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -120 || true
             echo "---- last lines ----"
             tail -40 sim.log 2>/dev/null || true
           } > report/report.txt
           [ -d shots ] && cp shots/*.jpg report/ 2>/dev/null || true
+          [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
           cd report
           git init -q
