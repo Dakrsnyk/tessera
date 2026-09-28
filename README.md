@@ -22,7 +22,9 @@ Le fichier à installer est publié dans **Releases** (colonne de droite du dép
    - Réglages > Général > **VPN et gestion de l'appareil** : touche ton identifiant et **Faire confiance**.
 7. Ouvre Tessera.
 
-Avec un identifiant Apple gratuit, l'app expire au bout de **7 jours** : relance simplement Sideloadly avec le même fichier.
+Avec un identifiant Apple gratuit, l'app expire au bout de **7 jours** : relance simplement Sideloadly avec le même fichier. Un compte gratuit est aussi limité à 3 apps installées de cette façon.
+
+Cette version de test contient, dans Réglages, une section **Développeur** avec l'interrupteur « Premium (mode test) » : il débloque tout sans achat, pour vérifier les deux modes. Elle n'existe pas dans la version App Store.
 
 ### Si les widgets n'affichent pas tes données
 
