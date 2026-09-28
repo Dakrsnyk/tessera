@@ -8,15 +8,16 @@ import WidgetKit
 struct TesseraWidgetsBundle: WidgetBundle {
     init() {
         WidgetLog.logger.log("extension launched")
-        NSLog("TesseraWidgets: extension launched")
     }
 
     var body: some Widget {
-        DiagnosticWidget()
         TimeWidgets().body
         CalendarWidgets().body
         ProductivityWidgets().body
         DataWidgets().body
+        LifeGroups().body
+        DomainGroups().body
+        MoreGroups().body
     }
 }
 
@@ -52,5 +53,35 @@ struct DataWidgets: WidgetBundle {
         CryptoWidget()
         MoneyFlowWidget()
         HydrationWidget()
+    }
+}
+
+struct LifeGroups: WidgetBundle {
+    var body: some Widget {
+        DashboardsGroupWidget()
+        DatesGroupWidget()
+        SkyGroupWidget()
+        FocusGroupWidget()
+        HabitsGroupWidget()
+    }
+}
+
+struct DomainGroups: WidgetBundle {
+    var body: some Widget {
+        NutritionGroupWidget()
+        FitnessGroupWidget()
+        BudgetGroupWidget()
+        InvestingGroupWidget()
+        BusinessGroupWidget()
+    }
+}
+
+struct MoreGroups: WidgetBundle {
+    var body: some Widget {
+        StudentGroupWidget()
+        TravelGroupWidget()
+        CarGroupWidget()
+        CompaniesGroupWidget()
+        InsightsGroupWidget()
     }
 }

@@ -22,6 +22,8 @@ jobs:
       QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') }}
       # [place] only builds for the simulator and runs the widget placement tests (cheapest check).
       PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
+      # [check] only compiles for the simulator (fastest way to find compile errors).
+      CHECK: ${{ contains(github.event.head_commit.message, '[check]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,6 +33,10 @@ jobs:
 
       - name: Show toolchain
         run: xcodebuild -version
+
+      - name: Static checks (initializers, widget catalog, Release safety)
+        id: static
+        run: python3 scripts/check_swift.py
 
       - name: Boot a simulator early
         if: env.QA == 'true' || env.PLACE == 'true'
@@ -48,16 +54,17 @@ jobs:
 
       - name: Build for the simulator
         id: sim
+        if: steps.static.outcome == 'success'
         run: |
           set -o pipefail
           xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
-            -derivedDataPath build/sim CODE_SIGNING_ALLOWED=NO build 2>&1 | tee sim.log | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
+            -derivedDataPath build/sim -continueBuildingAfterErrors ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build-for-testing 2>&1 | tee sim.log | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" sim.log
 
       - name: Build for iPhone (unsigned)
         id: device
-        if: steps.sim.outcome == 'success' && env.PLACE != 'true'
+        if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true'
         run: |
           set -o pipefail
           xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
@@ -89,7 +96,7 @@ jobs:
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
-            $ONLY CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
+            $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
           mkdir -p testexport testshots
           xcrun xcresulttool export attachments --path TestResults.xcresult --output-path testexport || true
           python3 - <<'PY'
@@ -133,13 +140,16 @@ jobs:
             sleep 5
             xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$1-$4.jpg"
           }
-          for screen in onboarding home explore editor mywidgets paywall settings content gallery-small gallery-medium gallery-large gallery-lock; do
-            for scheme in light dark; do shoot $screen $screen top $scheme; done
+          for screen in home spaces store editor-v2 paywall settings mywidgets space-nutrition space-fitness space-budget space-business space-student space-travel space-car space-productivity space-investing space-markets space-life; do
+            shoot $screen $screen top light
           done
-          for screen in home editor paywall explore; do
-            shoot $screen-mid $screen center light
-            shoot $screen-end $screen bottom light
-          done
+          for page in 1 2 3 4 5 6; do shoot gallery-small-$page gallery-small-$page top light; done
+          for page in 1 2 3 4 5 6 7 8; do shoot gallery-medium-$page gallery-medium-$page top light; done
+          for page in 1 2 3 4 5; do shoot gallery-large-$page gallery-large-$page top light; done
+          for page in 1 2; do shoot gallery-lock-$page gallery-lock-$page top light; done
+          shoot gallery-circular-1 gallery-circular-1 top light
+          for screen in home spaces gallery-small-1; do shoot $screen $screen top dark; done
+          for screen in home store space-nutrition space-budget; do shoot $screen-end $screen bottom light; done
 
       - name: Publish build report
         if: always()
@@ -148,12 +158,14 @@ jobs:
           {
             echo "run: ${{ github.run_number }}"
             echo "commit: ${{ github.sha }}"
+            echo "static: ${{ steps.static.outcome }}"
             echo "simulator: ${{ steps.sim.outcome }}"
             echo "device: ${{ steps.device.outcome }}"
             echo "tests: ${{ steps.tests.outcome }}"
             echo "screenshots: ${{ steps.shots.outcome }}"
             echo "---- errors ----"
-            grep -hE "error:" sim.log device.log 2>/dev/null | sort -u | head -200 || true
+            python3 scripts/check_swift.py 2>&1 | tail -40 || true
+            grep -hE "error:" sim.log device.log 2>/dev/null | sort -u | head -500 || true
             echo "---- tests ----"
             grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -120 || true
             echo "---- widget extension bundle ----"

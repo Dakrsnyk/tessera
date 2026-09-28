@@ -16,10 +16,31 @@ final class AppModel {
     private(set) var settings = AppSettings()
     private(set) var premium = PremiumState()
 
+    // Mini-apps (V2). Written through to the shared store by `update(_:_:)`.
+    var nutrition = NutritionState()
+    var fitness = FitnessState()
+    var budget = BudgetState()
+    var business = BusinessState()
+    var portfolio = PortfolioState()
+    var following = MarketsState()
+    var student = StudentState()
+    var travel = TravelState()
+    var car = CarState()
+    var productivity = ProductivityState()
+    var life = LifeState()
+
     // Live data used by previews, refreshed on demand.
     private(set) var weather: WeatherResult = .needsLocation
     private(set) var crypto: [String: CryptoResult] = [:]
     private(set) var events: EventsResult = .needsAccess
+    private(set) var prices = PriceBook()
+    private(set) var quotes: [CoinQuote] = []
+    private(set) var global: MarketGlobal?
+    private(set) var companies: [Int: CompanyFinancials] = [:]
+    private(set) var stocks: [String: StockQuote] = [:]
+    private(set) var fx: FXRates?
+    private(set) var tripWeather: WeatherSnapshot?
+    private(set) var insights = InsightCache()
 
     @ObservationIgnored private let store: SharedStore
     @ObservationIgnored private var reloadTask: Task<Void, Never>?
@@ -40,9 +61,75 @@ final class AppModel {
             return .ready(cache)
         } ?? (settings.weatherLocation == nil ? .needsLocation : .unavailable(nil))
         events = CalendarService.upcoming()
+        nutrition = store.state(NutritionState.self)
+        fitness = store.state(FitnessState.self)
+        budget = store.state(BudgetState.self)
+        business = store.state(BusinessState.self)
+        portfolio = store.state(PortfolioState.self)
+        following = store.state(MarketsState.self)
+        student = store.state(StudentState.self)
+        travel = store.state(TravelState.self)
+        car = store.state(CarState.self)
+        productivity = store.state(ProductivityState.self)
+        life = store.state(LifeState.self)
+        insights = InsightCache.load()
+        let cache = MarketService.cache
+        quotes = portfolio.watchlist.compactMap { cache.quotes[$0] }
+        global = cache.global
+        stocks = cache.stocks
+        fx = FXService.cached(base: settings.currencyCode)
+        if let trip = TravelMath.currentTrip(travel, at: Date()), let location = trip.location {
+            let stored = store.read(WeatherSnapshot.self, from: .tripWeather)
+            tripWeather = (stored?.matches(location) ?? false) ? stored : nil
+        }
+        for ref in following.followed {
+            if let cached = CompanyService.cached(ref.cik) { companies[ref.cik] = cached }
+        }
     }
 
-    var isPremium: Bool { premium.isPremium() }
+    // MARK: Mini-apps
+
+    /// Changes one mini-app's data, saves it for the widgets and refreshes them.
+    func update<T: StoredState>(_ keyPath: ReferenceWritableKeyPath<AppModel, T>, _ change: (inout T) -> Void) {
+        var value = self[keyPath: keyPath]
+        change(&value)
+        self[keyPath: keyPath] = value
+        store.save(value)
+        scheduleWidgetReload()
+    }
+
+    /// Everything a widget of any kind may show, from the data in memory (used by previews).
+    var domains: DomainData {
+        var data = DomainData()
+        data.nutrition = nutrition
+        data.fitness = fitness
+        data.budget = budget
+        data.business = business
+        data.portfolio = portfolio
+        data.prices = prices
+        data.quotes = quotes
+        data.global = global
+        data.following = following
+        data.companies = following.followed.compactMap { companies[$0.cik] }
+        data.stocks = stocks
+        data.student = student
+        data.travel = travel
+        data.tripWeather = tripWeather
+        data.fx = fx
+        data.car = car
+        data.productivity = productivity
+        data.life = life
+        data.insights = insights
+        return data
+    }
+
+    /// Bumped when the Premium status can change without `premium` changing (test builds).
+    var premiumRevision = 0
+
+    var isPremium: Bool {
+        _ = premiumRevision
+        return premium.isPremium()
+    }
 
     // MARK: Designs
 
@@ -97,6 +184,18 @@ final class AppModel {
         }
         save(copy)
         return copy
+    }
+
+    /// Adds one design per widget of a pack, within the free limit. Returns how many were added.
+    @discardableResult
+    func install(_ pack: WidgetPack) -> Int {
+        var added = 0
+        for design in pack.designs() {
+            guard canCreateDesign else { break }
+            save(design)
+            added += 1
+        }
+        return added
     }
 
     func toggleFavorite(_ design: WidgetDesign) {
@@ -171,16 +270,66 @@ final class AppModel {
         payload.weather = weather
         payload.crypto = crypto[design.options.coinID] ?? CryptoService.cached(design.options.coinID, currency: settings.cryptoCurrency).map { CryptoResult.ready($0) } ?? .unavailable(nil)
         payload.events = events
+        var data = domains
+        if design.kind == .marketOverview {
+            data.quotes = ["bitcoin", "ethereum", "solana"].compactMap { id in MarketService.cache.quotes[id] }
+        }
+        if [.companySnapshot, .companyRevenue, .companyStock, .companyCompare].contains(design.kind) {
+            data.companies = CompanyTargets.refs(for: design, following: following).compactMap { companies[$0.cik] }
+        }
+        payload.domains = data
         return payload
     }
 
     /// Loads whatever network data a design needs for its preview.
     func prepare(_ design: WidgetDesign) async {
-        switch design.kind {
-        case .weather: await refreshWeather()
-        case .crypto: await refreshCrypto(design.options.coinID)
-        case .upNext: refreshEvents()
-        default: break
+        let needs = DataNeeds.needs(for: design.kind)
+        if needs.contains(.weather) { await refreshWeather() }
+        if needs.contains(.crypto) { await refreshCrypto(design.options.coinID) }
+        if needs.contains(.events) { refreshEvents() }
+        if needs.contains(.portfolio) || needs.contains(.quotes) || needs.contains(.global) { await refreshMarkets() }
+        if needs.contains(.companies) {
+            for ref in CompanyTargets.refs(for: design, following: following) {
+                await refreshCompany(ref)
+            }
+        }
+        if needs.contains(.fx) { await refreshFX() }
+        if needs.contains(.tripWeather) { await refreshTripWeather() }
+    }
+
+    func refreshMarkets() async {
+        prices = await MarketService.priceBook(for: portfolio, allowNetwork: true)
+        quotes = await MarketService.coinQuotes(portfolio.watchlist, allowNetwork: true)
+        global = await MarketService.global(allowNetwork: true)
+        stocks = MarketService.cache.stocks
+    }
+
+    func refreshCompany(_ ref: CompanyRef) async {
+        if let financials = await CompanyService.financials(ref, allowNetwork: true) {
+            companies[ref.cik] = financials
+        }
+    }
+
+    func refreshFX() async {
+        fx = await FXService.rates(base: settings.currencyCode, allowNetwork: true)
+    }
+
+    func refreshTripWeather() async {
+        guard let trip = TravelMath.currentTrip(travel, at: Date()) else { return }
+        tripWeather = await TripWeatherService.load(for: trip, allowNetwork: true)
+    }
+
+    /// Asks the on-device model (when available) to phrase the analysis widgets.
+    func refreshInsights() async {
+        var payload = WidgetPayload()
+        payload.settings = settings
+        payload.content = content
+        payload.weather = weather
+        payload.events = events
+        payload.domains = domains
+        if await AIPhraser.refresh(payload: payload) {
+            insights = InsightCache.load()
+            scheduleWidgetReload()
         }
     }
 
@@ -217,6 +366,21 @@ final class AppModel {
         store.settings = settings
         store.remove(.weather)
         store.remove(.crypto)
+        for file in [StoreFile.nutrition, .fitness, .budget, .business, .portfolio, .following, .student, .travel, .car, .productivity, .life, .markets, .companies, .fx, .tripWeather, .insights] {
+            store.remove(file)
+        }
+        nutrition = NutritionState()
+        fitness = FitnessState()
+        budget = BudgetState()
+        business = BusinessState()
+        portfolio = PortfolioState()
+        following = MarketsState()
+        student = StudentState()
+        travel = TravelState()
+        car = CarState()
+        productivity = ProductivityState()
+        life = LifeState()
+        insights = InsightCache()
         weather = .needsLocation
         crypto = [:]
         NotificationScheduler.cancelAll()

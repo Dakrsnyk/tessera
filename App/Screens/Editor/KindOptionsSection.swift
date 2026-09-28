@@ -204,6 +204,8 @@ struct KindOptionsSection: View {
             }
         case .calendar, .yearDots:
             EmptyView()
+        default:
+            SpaceOptionsSection(design: $design)
         }
     }
 

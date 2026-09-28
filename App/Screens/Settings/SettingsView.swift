@@ -109,19 +109,15 @@ struct SettingsView: View {
 
                 #if DEBUG
                 Section {
-                    Toggle("Premium (mode test)", isOn: Binding(
-                        get: { model.premium.testerOverride },
-                        set: { value in
-                            var state = model.premium
-                            state.testerOverride = value
-                            model.updatePremium(state)
-                        }
+                    Toggle("Premium débloqué (mode test)", isOn: Binding(
+                        get: { model.isDebugPremiumOn },
+                        set: { model.setDebugPremium($0) }
                     ))
                     Button("Recharger les widgets") { WidgetCenter.shared.reloadAllTimelines() }
                 } header: {
                     Text("Développeur")
                 } footer: {
-                    Text("Visible uniquement dans les versions de test. Permet de vérifier l'app en mode Premium sans achat.")
+                    Text("Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.")
                 }
                 #endif
             }
@@ -191,7 +187,9 @@ struct SettingsView: View {
     }
 
     private var premiumDetail: String {
-        if model.premium.testerOverride && !model.premium.isActive { return "Mode test" }
+        #if DEBUG
+        if model.isDebugPremiumOn && !model.premium.hasPurchase() { return "Débloqué en mode test" }
+        #endif
         switch model.premium.productID ?? "" {
         case PremiumConfiguration.lifetimeID: return "Accès à vie"
         case PremiumConfiguration.yearlyID, PremiumConfiguration.monthlyID:

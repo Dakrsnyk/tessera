@@ -55,16 +55,21 @@ struct PremiumState: Codable, Hashable {
     var productID: String?
     var expirationDate: Date?
     var verifiedAt: Date?
-    /// Debug builds only: lets a tester switch Premium on without a purchase.
-    var testerOverride = false
 
     /// Offline tolerance after an expiration date, so a renewal that hasn't synced yet doesn't lock the user out.
     static let gracePeriod: TimeInterval = 3 * 86_400
 
-    func isPremium(at date: Date = Date()) -> Bool {
-        if testerOverride { return true }
+    /// Whether a real purchase is active (StoreKit), whatever the build.
+    func hasPurchase(at date: Date = Date()) -> Bool {
         guard isActive else { return false }
         guard let expirationDate else { return true }
         return expirationDate.addingTimeInterval(Self.gracePeriod) > date
+    }
+
+    func isPremium(at date: Date = Date()) -> Bool {
+        #if DEBUG
+        if DebugPremium.isUnlocked { return true }
+        #endif
+        return hasPurchase(at: date)
     }
 }

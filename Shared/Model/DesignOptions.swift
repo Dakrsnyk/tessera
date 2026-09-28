@@ -54,12 +54,14 @@ struct DesignOptions: Codable, Hashable {
     var moneyMode: MoneyMode = .net
     var showsCompletedTasks: Bool = true
     var clockShowsDate: Bool = true
+    /// The item a mini-app widget follows (a habit, a counter, a project, a goal, a company…), nil for the default one.
+    var targetID: String?
 
     init() {}
 
     enum CodingKeys: String, CodingKey {
         case progressUnit, countdownTitle, countdownDate, countdownMode, countdownReminder
-        case cities, noteTitle, noteText, coinID, moneyMode, showsCompletedTasks, clockShowsDate
+        case cities, noteTitle, noteText, coinID, moneyMode, showsCompletedTasks, clockShowsDate, targetID
     }
 
     init(from decoder: Decoder) throws {
@@ -77,5 +79,6 @@ struct DesignOptions: Codable, Hashable {
         moneyMode = (try? c.decodeIfPresent(MoneyMode.self, forKey: .moneyMode)) ?? d.moneyMode
         showsCompletedTasks = (try? c.decodeIfPresent(Bool.self, forKey: .showsCompletedTasks)) ?? d.showsCompletedTasks
         clockShowsDate = (try? c.decodeIfPresent(Bool.self, forKey: .clockShowsDate)) ?? d.clockShowsDate
+        targetID = (try? c.decodeIfPresent(String.self, forKey: .targetID)) ?? nil
     }
 }

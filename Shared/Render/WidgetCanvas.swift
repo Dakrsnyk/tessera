@@ -75,6 +75,7 @@ struct KindContentView: View {
         case .crypto: CryptoWidgetView(context: context)
         case .moneyFlow: MoneyFlowWidgetView(context: context)
         case .hydration: HydrationWidgetView(context: context)
+        default: TileView(tile: TileFactory.make(context), context: context)
         }
     }
 }
@@ -129,8 +130,14 @@ enum WidgetLinks {
             if case .needsLocation = payload.weather { return DeepLink.weatherLocation.url }
         case .upNext:
             if case .needsAccess = payload.events { return DeepLink.calendarAccess.url }
+        case .sunCycle, .rainNext, .windUV, .weatherDetails, .weeklyForecast, .myDay, .morning, .now:
+            if case .needsLocation = payload.weather { return DeepLink.weatherLocation.url }
         default:
             break
+        }
+        // Mini-app widgets open their space, where the data behind them is entered.
+        if let space = design.kind.space {
+            return DeepLink.space(space.rawValue).url
         }
         return isSaved ? DeepLink.design(design.id).url : DeepLink.explore.url
     }

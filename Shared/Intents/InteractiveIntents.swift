@@ -93,6 +93,8 @@ struct StartFocusIntent: AppIntent {
         SharedStore.shared.updateContent {
             $0.focus = FocusSession(startDate: now, endDate: end, lastDurationMinutes: minutes)
         }
+        let planned = minutes
+        SharedStore.shared.update(ProductivityState.self) { $0.logFocusStart(at: now, minutes: planned) }
         await FocusNotifier.schedule(end: end, minutes: minutes)
         WidgetCenter.shared.reloadAllTimelines()
         return .result()
@@ -110,6 +112,7 @@ struct StopFocusIntent: AppIntent {
             $0.focus.startDate = nil
             $0.focus.endDate = nil
         }
+        SharedStore.shared.update(ProductivityState.self) { $0.logFocusStop(at: Date()) }
         FocusNotifier.cancel()
         WidgetCenter.shared.reloadAllTimelines()
         return .result()

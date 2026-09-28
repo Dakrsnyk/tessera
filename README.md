@@ -1,13 +1,23 @@
 # Tessera
 
-Application iOS de widgets personnalisables : temps, productivité, météo, finances et bien-être.
+Application iOS de widgets personnalisables, organisée en **espaces** (mini-apps) : nutrition, sport, budget, business, placements, études, voyage, auto, productivité, habitudes, météo, ma journée.
+Chaque espace contient les données, et ses widgets les affichent sur l'écran d'accueil et l'écran verrouillé.
 SwiftUI + WidgetKit + App Intents + StoreKit 2, iOS 17 minimum, sans aucune dépendance externe.
 
 ---
 
 ## 1. Tester l'app sur ton iPhone sans Mac
 
-Chaque modification poussée sur `main` est compilée automatiquement sur un Mac de GitHub. Les captures d'écran de contrôle ne sont faites que sur demande (lancement manuel, ou `[shots]` dans le message de commit) pour économiser les minutes Mac du dépôt privé.
+Chaque modification poussée sur `main` est compilée automatiquement sur un Mac de GitHub. Pour économiser les minutes Mac du dépôt privé, le message de commit choisit ce qui est fait :
+
+| Dans le message | Ce qui est fait |
+|---|---|
+| (rien) | Vérifications statiques, compilation simulateur et iPhone, publication de `Tessera.ipa` |
+| `[check]` | Vérifications statiques et compilation simulateur seulement (le plus rapide) |
+| `[place]` | Compilation simulateur et test d'ajout des widgets à l'écran d'accueil et à l'écran verrouillé |
+| `[qa]` | Tous les tests automatiques, puis les captures d'écran de toutes les pages et de la galerie de widgets |
+
+Le rapport (erreurs, résultats des tests, captures) est publié sur la branche `ci-report`.
 Le fichier à installer est publié dans **Releases** (colonne de droite du dépôt) : `Tessera.ipa`.
 
 ### Première installation (PC Windows)
@@ -24,7 +34,7 @@ Le fichier à installer est publié dans **Releases** (colonne de droite du dép
 
 Avec un identifiant Apple gratuit, l'app expire au bout de **7 jours** : relance simplement Sideloadly avec le même fichier. Un compte gratuit est aussi limité à 3 apps installées de cette façon.
 
-Cette version de test contient, dans Réglages, une section **Développeur** avec l'interrupteur « Premium (mode test) » : il débloque tout sans achat, pour vérifier les deux modes. Elle n'existe pas dans la version App Store.
+Cette version de test débloque automatiquement tout le Premium, sans achat. Réglages > **Développeur** > « Premium débloqué (mode test) » permet de le couper pour vérifier la version gratuite. Ce code est compilé uniquement dans les versions de test (`#if DEBUG`) : il n'existe pas dans la version App Store, qui passe toujours par StoreKit. La vérification statique du dépôt refuse toute référence à ce mode hors d'un bloc `#if DEBUG`.
 
 ### Si les widgets n'affichent pas tes données
 
@@ -40,7 +50,9 @@ Les widgets lisent les données de l'app dans un espace partagé (App Group). Av
 
 Les achats fonctionnent en local grâce à `Config/Tessera.storekit` (déjà relié au schéma : *Product > Scheme > Edit Scheme > Run > Options > StoreKit Configuration*).
 
-Dans les versions de test (Debug), Réglages > **Développeur** > « Premium (mode test) » permet de vérifier l'app en mode Premium sans achat.
+Dans les versions de test (Debug), le Premium est débloqué d'office ; Réglages > **Développeur** > « Premium débloqué (mode test) » le coupe. En Release (Archive pour l'App Store), seul StoreKit décide.
+
+Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS 26), lié en mode faible : l'app reste compatible iOS 17 et affiche le texte calculé quand le modèle n'est pas disponible.
 
 ---
 
@@ -59,6 +71,9 @@ Dans les versions de test (Debug), Réglages > **Développeur** > « Premium (mo
 | Politique de confidentialité | Page « Confidentialité Tessera » (lien déjà dans l'app) : la rendre publique via son menu Partager | Avant la soumission |
 | **Clé Open-Meteo** (usage commercial) | Réglage `OPEN_METEO_API_KEY` du projet | Dès que l'app est vendue : l'API gratuite est réservée à l'usage non commercial |
 | Clé CoinGecko (facultative) | Réglage `COINGECKO_API_KEY` | Si la limite gratuite est atteinte |
+| Clé **Finnhub** (facultative) | Réglage `FINNHUB_API_KEY` (compte gratuit sur finnhub.io) | Pour le cours en direct des actions ; sans clé, le prix saisi à la main est utilisé |
+| Contact SEC EDGAR | `Shared/Domains/Companies.swift` (`supportEmail`) | Avant la soumission : la SEC exige une adresse de contact réelle dans l'en-tête des requêtes |
+| Licences des données | Page « À propos » / fiche App Store | Mentionner Open Food Facts (ODbL), Open-Meteo, CoinGecko, SEC EDGAR, Frankfurter (BCE) |
 | Captures d'écran App Store | App Store Connect | Avant la soumission |
 
 Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfiguration.swift`. S'ils changent, mets aussi à jour `Config/Tessera.storekit`.

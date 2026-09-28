@@ -1,163 +1,134 @@
 import Foundation
 import WidgetKit
 
+/// Families of widgets, used by the Store, the gallery and the Spaces.
 enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
+    case dashboards
     case time
-    case productivity
     case weather
-    case finance
+    case productivity
     case wellbeing
+    case nutrition
+    case fitness
+    case finance
+    case investing
+    case business
+    case markets
+    case student
+    case travel
+    case car
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
+        case .dashboards: "Tableaux de bord"
         case .time: "Temps"
-        case .productivity: "Productivité"
         case .weather: "Météo"
-        case .finance: "Finances"
-        case .wellbeing: "Bien-être"
+        case .productivity: "Productivité"
+        case .wellbeing: "Habitudes"
+        case .nutrition: "Nutrition"
+        case .fitness: "Fitness"
+        case .finance: "Budget"
+        case .investing: "Investissement"
+        case .business: "Business"
+        case .markets: "Entreprises"
+        case .student: "Études"
+        case .travel: "Voyage"
+        case .car: "Auto"
         }
     }
 
     var symbol: String {
         switch self {
+        case .dashboards: "rectangle.3.group"
         case .time: "clock"
-        case .productivity: "checklist"
         case .weather: "cloud.sun"
-        case .finance: "chart.line.uptrend.xyaxis"
+        case .productivity: "checklist"
         case .wellbeing: "leaf"
+        case .nutrition: "fork.knife"
+        case .fitness: "dumbbell"
+        case .finance: "creditcard"
+        case .investing: "chart.pie"
+        case .business: "briefcase"
+        case .markets: "building.columns"
+        case .student: "graduationcap"
+        case .travel: "airplane"
+        case .car: "car"
+        }
+    }
+
+    var colorHex: String {
+        switch self {
+        case .dashboards: "5B6CFF"
+        case .time: "2F8F7A"
+        case .weather: "3A8DDE"
+        case .productivity: "6B7280"
+        case .wellbeing: "7FA33A"
+        case .nutrition: "F08A24"
+        case .fitness: "E5484D"
+        case .finance: "2F8F7A"
+        case .investing: "8C6CFF"
+        case .business: "C28A12"
+        case .markets: "3366FF"
+        case .student: "D6409F"
+        case .travel: "12A4B5"
+        case .car: "4B5563"
         }
     }
 }
 
-/// Every widget type the app can render. The raw value is persisted, never rename it.
+/// Every widget type the app can render. The raw value is persisted: never rename one.
 enum WidgetKind: String, CaseIterable, Codable, Identifiable {
-    case clock
-    case calendar
-    case worldClock
-    case progress
-    case countdown
-    case yearDots
-    case tasks
-    case habits
-    case focus
-    case upNext
-    case note
-    case weather
-    case crypto
-    case moneyFlow
-    case hydration
+    // Temps
+    case clock, calendar, worldClock, progress, countdown, yearDots
+    case ageProgress, birthday, weekView, holiday, moonPhase
+    // Météo
+    case weather, sunCycle, rainNext, windUV, weatherDetails, weeklyForecast
+    // Productivité
+    case tasks, habits, focus, upNext, note
+    case priorities, project, deadline, deepWork, counter
+    // Habitudes et bien-être
+    case hydration, habitStreak, habitWeek, habitRate
+    // Nutrition
+    case caloriesLeft, macros, proteinLeft, mealsToday, nutritionWeek, nutritionStreak, quickFood, nextMeal
+    // Fitness
+    case todaysWorkout, nextSet, restTimer, weeklyVolume, personalRecords, trainingStreak, caloriesBurned, workoutMonth
+    // Budget
+    case moneyFlow, budgetLeft, spendingByCategory, billsUpcoming, savingsGoal, netWorth, subscriptions, quickExpense
+    // Investissement
+    case crypto, portfolio, allocation, topMover, watchlist, marketOverview
+    // Business
+    case revenueGoal, revenueTrend, profit, businessKPIs, mrr, revenueToday, businessDashboard
+    // Entreprises
+    case companySnapshot, companyRevenue, companyStock, companyCompare
+    // Études
+    case nextClass, nextExam, assignments, gradeAverage, semesterProgress, flashcard, studyHours, timetable
+    // Voyage
+    case tripCountdown, flight, hotel, destinationWeather, localTime, currency, tripProgress, nextActivity
+    // Auto
+    case carCost, nextService, mileage, fuelStats, carDeadlines
+    // Tableaux de bord
+    case myDay, now, morning, fitnessDashboard, moneyDashboard, studentDashboard
+    case aiSummary, aiNutrition, aiFinance, aiProductivity
 
     var id: String { rawValue }
 
-    /// The identifier registered with WidgetKit.
+    /// The identifier registered with WidgetKit for the 15 original widgets.
     var widgetKindID: String { "tessera.\(rawValue)" }
 
-    var title: String {
-        switch self {
-        case .clock: "Horloge"
-        case .calendar: "Calendrier"
-        case .worldClock: "Fuseaux horaires"
-        case .progress: "Progression"
-        case .countdown: "Compte à rebours"
-        case .yearDots: "L'année en points"
-        case .tasks: "Tâches"
-        case .habits: "Habitudes"
-        case .focus: "Focus"
-        case .upNext: "À venir"
-        case .note: "Note"
-        case .weather: "Météo"
-        case .crypto: "Crypto"
-        case .moneyFlow: "Flux d'argent"
-        case .hydration: "Hydratation"
-        }
-    }
-
-    var summary: String {
-        switch self {
-        case .clock: "L'heure et la date, sans rien de plus."
-        case .calendar: "Le mois en un coup d'œil, aujourd'hui mis en avant."
-        case .worldClock: "L'heure de tes villes, avec le décalage horaire."
-        case .progress: "Où en est ta journée, ta semaine, ton mois ou ton année."
-        case .countdown: "Les jours avant un événement, ou depuis un moment important."
-        case .yearDots: "Chaque jour de l'année est un point. Regarde-la avancer."
-        case .tasks: "Ta liste du jour, que tu coches directement sur l'écran d'accueil."
-        case .habits: "Tes habitudes de la semaine, validées d'une touche."
-        case .focus: "Un minuteur de concentration qui défile en direct."
-        case .upNext: "Tes prochains rendez-vous, tirés de ton calendrier."
-        case .note: "Un mot, un rappel ou une citation, toujours sous les yeux."
-        case .weather: "La température et les prévisions de ta ville."
-        case .crypto: "Le cours d'une crypto et sa courbe sur 7 jours."
-        case .moneyFlow: "Ce que tu gagnes et dépenses, calculé au fil du jour."
-        case .hydration: "Tes verres d'eau de la journée, ajoutés d'une touche."
-        }
-    }
-
-    var category: WidgetCategory {
-        switch self {
-        case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots: .time
-        case .tasks, .habits, .focus, .upNext, .note: .productivity
-        case .weather: .weather
-        case .crypto, .moneyFlow: .finance
-        case .hydration: .wellbeing
-        }
-    }
-
-    var symbol: String {
-        switch self {
-        case .clock: "clock"
-        case .calendar: "calendar"
-        case .worldClock: "globe"
-        case .progress: "chart.bar.fill"
-        case .countdown: "hourglass"
-        case .yearDots: "circle.grid.3x3.fill"
-        case .tasks: "checklist"
-        case .habits: "repeat"
-        case .focus: "timer"
-        case .upNext: "calendar.badge.clock"
-        case .note: "note.text"
-        case .weather: "cloud.sun.fill"
-        case .crypto: "bitcoinsign.circle"
-        case .moneyFlow: "dollarsign.arrow.circlepath"
-        case .hydration: "drop.fill"
-        }
-    }
-
-    var isPremium: Bool {
-        switch self {
-        case .worldClock, .yearDots, .focus, .upNext, .crypto, .moneyFlow: true
-        default: false
-        }
-    }
-
-    /// Shown in the "Nouveautés" shelf.
-    var isNew: Bool {
-        switch self {
-        case .moneyFlow, .yearDots, .focus: true
-        default: false
-        }
-    }
-
-    var families: [WidgetFamily] {
-        switch self {
-        case .clock: [.systemSmall, .systemMedium]
-        case .calendar: [.systemSmall, .systemMedium, .systemLarge]
-        case .worldClock: [.systemSmall, .systemMedium]
-        case .progress: [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
-        case .countdown: [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
-        case .yearDots: [.systemSmall, .systemMedium, .systemLarge]
-        case .tasks: [.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular]
-        case .habits: [.systemSmall, .systemMedium, .systemLarge]
-        case .focus: [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular]
-        case .upNext: [.systemSmall, .systemMedium, .systemLarge, .accessoryRectangular]
-        case .note: [.systemSmall, .systemMedium, .systemLarge]
-        case .weather: [.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline]
-        case .crypto: [.systemSmall, .systemMedium, .accessoryRectangular]
-        case .moneyFlow: [.systemSmall, .systemMedium, .systemLarge]
-        case .hydration: [.systemSmall, .systemMedium, .accessoryCircular]
-        }
-    }
+    var info: KindInfo { KindCatalog.info(self) }
+    var title: String { info.title }
+    var summary: String { info.summary }
+    var category: WidgetCategory { info.category }
+    var symbol: String { info.symbol }
+    var isPremium: Bool { info.isPremium }
+    var isNew: Bool { info.isNew }
+    var isInteractive: Bool { info.isInteractive }
+    var families: [WidgetFamily] { info.families }
+    var keywords: [String] { info.keywords }
+    /// The mini-app where the data behind this widget is entered, if any.
+    var space: Space? { info.space }
 
     var homeFamilies: [WidgetFamily] {
         families.filter { $0 == .systemSmall || $0 == .systemMedium || $0 == .systemLarge }
@@ -167,30 +138,11 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
         families.contains { $0 == .accessoryCircular || $0 == .accessoryRectangular || $0 == .accessoryInline }
     }
 
-    /// Words that should match this widget in search, beyond its title.
-    var keywords: [String] {
-        switch self {
-        case .clock: ["heure", "time", "minimal", "date"]
-        case .calendar: ["mois", "date", "jour", "agenda"]
-        case .worldClock: ["monde", "fuseau", "voyage", "ville", "heure"]
-        case .progress: ["année", "mois", "semaine", "journée", "pourcentage"]
-        case .countdown: ["jours", "days until", "days since", "événement", "anniversaire", "depuis"]
-        case .yearDots: ["année", "points", "jours", "calendrier"]
-        case .tasks: ["todo", "to-do", "liste", "à faire"]
-        case .habits: ["routine", "streak", "objectif", "série"]
-        case .focus: ["pomodoro", "minuteur", "timer", "concentration", "travail"]
-        case .upNext: ["événements", "agenda", "rendez-vous", "réunion"]
-        case .note: ["citation", "mémo", "texte", "rappel"]
-        case .weather: ["température", "pluie", "prévisions", "soleil"]
-        case .crypto: ["bitcoin", "ethereum", "btc", "marché", "cours"]
-        case .moneyFlow: ["argent", "revenus", "dépenses", "budget", "salaire", "loyer"]
-        case .hydration: ["eau", "boire", "verres", "santé"]
-        }
-    }
-
     static func kinds(in category: WidgetCategory) -> [WidgetKind] {
         allCases.filter { $0.category == category }
     }
+
+    static var freeKinds: [WidgetKind] { allCases.filter { !$0.isPremium } }
 }
 
 extension WidgetFamily {

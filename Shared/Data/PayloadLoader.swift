@@ -7,6 +7,7 @@ struct WidgetPayload: Hashable {
     var weather: WeatherResult = .needsLocation
     var crypto: CryptoResult = .unavailable(nil)
     var events: EventsResult = .ready([])
+    var domains = DomainData()
 }
 
 enum PayloadLoader {
@@ -15,18 +16,20 @@ enum PayloadLoader {
         var payload = WidgetPayload()
         let store = SharedStore.shared
         payload.settings = store.settings
-        switch design.kind {
-        case .tasks, .habits, .focus, .hydration, .moneyFlow:
+        let needs = DataNeeds.needs(for: design.kind)
+        if needs.contains(.content) {
             payload.content = store.content
-        case .weather:
-            payload.weather = await WeatherService.load(allowNetwork: allowNetwork, now: now)
-        case .crypto:
-            payload.crypto = await CryptoService.load(coinID: design.options.coinID, allowNetwork: allowNetwork, now: now)
-        case .upNext:
-            payload.events = CalendarService.upcoming(from: now)
-        case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .note:
-            break
         }
+        if needs.contains(.weather) {
+            payload.weather = await WeatherService.load(allowNetwork: allowNetwork, now: now)
+        }
+        if needs.contains(.crypto) {
+            payload.crypto = await CryptoService.load(coinID: design.options.coinID, allowNetwork: allowNetwork, now: now)
+        }
+        if needs.contains(.events) {
+            payload.events = CalendarService.upcoming(from: now)
+        }
+        await loadDomains(for: design, needs: needs, into: &payload, allowNetwork: allowNetwork, now: now)
         return payload
     }
 }
@@ -69,17 +72,7 @@ enum SamplePayload {
                 startDate: DateMath.calendar.date(byAdding: .day, value: -12, to: now) ?? now
             )
         case .weather:
-            let hours = (0..<8).map { offset in
-                HourForecast(date: now.addingTimeInterval(Double(offset) * 3600), temperature: 17 + Double(offset % 3), code: offset < 4 ? 1 : 3, isDay: true)
-            }
-            let days = (0..<6).map { offset in
-                DayForecast(date: DateMath.calendar.date(byAdding: .day, value: offset, to: now) ?? now, code: [1, 3, 61, 0, 2, 80][offset], high: 19 + Double(offset % 3), low: 9 + Double(offset % 2))
-            }
-            payload.weather = .ready(WeatherSnapshot(
-                locationName: "Montréal", latitude: 45.5, longitude: -73.57, fetchedAt: now,
-                temperature: 18, apparentTemperature: 17, code: 1, isDay: true, windSpeed: 12,
-                high: 20, low: 10, hourly: hours, daily: days
-            ))
+            payload.weather = .ready(SampleData.weather(now: now))
         case .crypto:
             let coin = CryptoService.info(coinID)
             let base: Double = samplePrices[coin.id] ?? 100
@@ -100,7 +93,7 @@ enum SamplePayload {
                 EventSnapshot(id: "3", title: "Dîner avec Léa", start: now.addingTimeInterval(8 * 3_600), end: now.addingTimeInterval(10 * 3_600), isAllDay: false, colorHex: "2F8F7A"),
             ])
         default:
-            break
+            SampleData.fill(&payload, for: kind, now: now)
         }
         return payload
     }

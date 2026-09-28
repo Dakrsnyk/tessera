@@ -8,6 +8,7 @@ struct ExploreView: View {
     @State private var access: AccessFilter = .all
     @State private var themeFilter: ThemeID?
     @State private var isSearchPresented = false
+    @State private var openedPack: WidgetPack?
 
     enum AccessFilter: String, CaseIterable, Identifiable {
         case all, free, premium
@@ -54,7 +55,10 @@ struct ExploreView: View {
             }
             .background(Color.screenFill)
             .screenshotScroll()
-            .navigationTitle("Explorer")
+            .navigationTitle("Store")
+            .sheet(item: $openedPack) { pack in
+                PackSheet(pack: pack)
+            }
             .searchable(text: $query, isPresented: $isSearchPresented, prompt: "Météo, tâches, bitcoin…")
             .onAppear(perform: consumeSearchRequest)
             .onChange(of: router.exploreSearchRequested) { _, _ in consumeSearchRequest() }
@@ -97,6 +101,7 @@ struct ExploreView: View {
 
     private var shelves: some View {
         VStack(alignment: .leading, spacing: 30) {
+            packsShelf
             shelf(title: "Nouveautés", templates: TemplateCatalog.newest)
             stylesShelf
             ForEach(WidgetCategory.allCases) { category in
@@ -116,6 +121,26 @@ struct ExploreView: View {
                 HStack(alignment: .top, spacing: 14) {
                     ForEach(templates) { template in
                         templateButton(template, width: 150)
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+        }
+    }
+
+    private var packsShelf: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "Packs")
+                .padding(.horizontal, 20)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 14) {
+                    ForEach(PackCatalog.all) { pack in
+                        Button {
+                            openedPack = pack
+                        } label: {
+                            PackCard(pack: pack, isPremiumUser: model.isPremium)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -245,5 +270,114 @@ struct ThemeSwatch: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text("Style \(theme.name)\(showsLock ? ", Premium" : "")"))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+}
+
+/// A pack in the Store: three of its widgets stacked, its name and what it contains.
+struct PackCard: View {
+    let pack: WidgetPack
+    let isPremiumUser: Bool
+
+    var body: some View {
+        let designs = pack.designs()
+        VStack(alignment: .leading, spacing: 10) {
+            ZStack(alignment: .topLeading) {
+                ForEach(Array(designs.prefix(3).enumerated().reversed()), id: \.offset) { pair in
+                    WidgetPreview(design: pair.element, family: .systemSmall, payload: SamplePayload.make(for: pair.element), width: 104)
+                        .rotationEffect(.degrees(Double(pair.offset - 1) * 6))
+                        .offset(x: CGFloat(pair.offset) * 34, y: CGFloat(pair.offset) * 4)
+                        .shadow(color: .black.opacity(0.12), radius: 6, y: 3)
+                }
+            }
+            .frame(width: 190, height: 124, alignment: .topLeading)
+            .padding(.top, 6)
+            HStack(spacing: 6) {
+                Image(systemName: pack.symbol).foregroundStyle(Color(hex: pack.accentHex))
+                Text(pack.name).font(.subheadline.weight(.semibold))
+                Spacer(minLength: 0)
+                if pack.isPremium && !isPremiumUser { PremiumBadge(compact: true) }
+            }
+            Text(pack.tagline)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(width: 200, alignment: .leading)
+        .card(padding: 12)
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text("Pack \(pack.name), \(pack.kinds.count) widgets"))
+    }
+}
+
+struct PackSheet: View {
+    let pack: WidgetPack
+    @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
+    @Environment(\.dismiss) private var dismiss
+    @State private var installed: Int?
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text(pack.tagline)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 16) {
+                        ForEach(pack.designs()) { design in
+                            VStack(alignment: .leading, spacing: 6) {
+                                WidgetPreview(design: design, family: .systemSmall, payload: model.payload(for: design))
+                                Text(design.kind.title).font(.caption.weight(.semibold)).lineLimit(1)
+                            }
+                        }
+                    }
+                    if let installed {
+                        Label(installed == pack.kinds.count ? "Pack ajouté à Mes widgets" : "\(installed) widgets ajoutés (limite de la version gratuite)", systemImage: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
+                            .font(.subheadline.weight(.semibold))
+                    }
+                }
+                .padding(20)
+            }
+            .background(Color.screenFill)
+            .safeAreaInset(edge: .bottom) {
+                Button {
+                    install()
+                } label: {
+                    Text(installed == nil ? (pack.isPremium && !model.isPremium ? "Débloquer avec Premium" : "Ajouter le pack") : "Voir comment l'ajouter à l'écran")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.roundedRectangle(radius: 14))
+                .padding(.horizontal, 20)
+                .padding(.bottom, 8)
+            }
+            .navigationTitle(pack.name)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Fermer") { dismiss() }
+                }
+            }
+        }
+    }
+
+    private func install() {
+        if installed != nil {
+            dismiss()
+            router.lastSavedName = pack.name
+            router.isAddGuidePresented = true
+            return
+        }
+        if pack.isPremium && !model.isPremium {
+            dismiss()
+            router.isPaywallPresented = true
+            return
+        }
+        installed = model.install(pack)
+        Haptics.success()
     }
 }

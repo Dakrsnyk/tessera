@@ -202,7 +202,7 @@ struct AddStepRow: View {
 private struct PremiumIllustration: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            PerkRow(symbol: "square.grid.3x3.fill", title: "Les 15 widgets", detail: "Focus en direct, flux d'argent, crypto, fuseaux horaires…")
+            PerkRow(symbol: "square.grid.3x3.fill", title: "Plus de 100 widgets", detail: "Nutrition, sport, budget, business, études, voyage, auto…")
             PerkRow(symbol: "paintpalette.fill", title: "12 styles", detail: "Verre, Aurore, Élégant, Rétro, Futuriste et plus")
             PerkRow(symbol: "photo.fill", title: "Fonds photo et couleurs libres", detail: "Et les polices Serif et Mono")
             PerkRow(symbol: "infinity", title: "Sans limite", detail: "Autant de widgets et d'habitudes que tu veux")

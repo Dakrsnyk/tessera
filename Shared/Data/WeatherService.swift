@@ -5,6 +5,8 @@ struct HourForecast: Codable, Hashable {
     var temperature: Double
     var code: Int
     var isDay: Bool
+    var precipitationProbability: Int? = nil
+    var uvIndex: Double? = nil
 }
 
 struct DayForecast: Codable, Hashable {
@@ -12,6 +14,10 @@ struct DayForecast: Codable, Hashable {
     var code: Int
     var high: Double
     var low: Double
+    var sunrise: Date? = nil
+    var sunset: Date? = nil
+    var precipitationProbability: Int? = nil
+    var uvMax: Double? = nil
 }
 
 struct WeatherSnapshot: Codable, Hashable {
@@ -28,6 +34,20 @@ struct WeatherSnapshot: Codable, Hashable {
     var low: Double
     var hourly: [HourForecast]
     var daily: [DayForecast]
+    var humidity: Double? = nil
+    var pressure: Double? = nil
+    var windDirection: Double? = nil
+    var windGusts: Double? = nil
+
+    /// Today's forecast (the first day whose date is today), falling back to the first day.
+    func day(for date: Date) -> DayForecast? {
+        daily.first { DateMath.isSameDay($0.date, date) } ?? daily.first
+    }
+
+    /// UV index right now, from the hourly forecast.
+    func uvIndex(at date: Date) -> Double? {
+        hourly.min { abs($0.date.timeIntervalSince(date)) < abs($1.date.timeIntervalSince(date)) }?.uvIndex
+    }
 
     func matches(_ location: WeatherLocation) -> Bool {
         abs(latitude - location.latitude) < 0.01 && abs(longitude - location.longitude) < 0.01
@@ -95,9 +115,9 @@ enum WeatherService {
         var items = [
             URLQueryItem(name: "latitude", value: String(format: "%.4f", location.latitude)),
             URLQueryItem(name: "longitude", value: String(format: "%.4f", location.longitude)),
-            URLQueryItem(name: "current", value: "temperature_2m,apparent_temperature,is_day,weather_code,wind_speed_10m"),
-            URLQueryItem(name: "hourly", value: "temperature_2m,weather_code,is_day"),
-            URLQueryItem(name: "daily", value: "weather_code,temperature_2m_max,temperature_2m_min"),
+            URLQueryItem(name: "current", value: "temperature_2m,apparent_temperature,is_day,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,relative_humidity_2m,pressure_msl"),
+            URLQueryItem(name: "hourly", value: "temperature_2m,weather_code,is_day,precipitation_probability,uv_index"),
+            URLQueryItem(name: "daily", value: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max,uv_index_max"),
             URLQueryItem(name: "timezone", value: "auto"),
             URLQueryItem(name: "forecast_days", value: "7"),
         ]
@@ -124,6 +144,10 @@ private struct OpenMeteoResponse: Decodable {
         let is_day: Int
         let weather_code: Int
         let wind_speed_10m: Double
+        let wind_direction_10m: Double?
+        let wind_gusts_10m: Double?
+        let relative_humidity_2m: Double?
+        let pressure_msl: Double?
     }
 
     struct Hourly: Decodable {
@@ -131,6 +155,8 @@ private struct OpenMeteoResponse: Decodable {
         let temperature_2m: [Double?]
         let weather_code: [Int?]
         let is_day: [Int?]
+        let precipitation_probability: [Int?]?
+        let uv_index: [Double?]?
     }
 
     struct Daily: Decodable {
@@ -138,6 +164,10 @@ private struct OpenMeteoResponse: Decodable {
         let weather_code: [Int?]
         let temperature_2m_max: [Double?]
         let temperature_2m_min: [Double?]
+        let sunrise: [String?]?
+        let sunset: [String?]?
+        let precipitation_probability_max: [Int?]?
+        let uv_index_max: [Double?]?
     }
 
     let utc_offset_seconds: Int
@@ -162,7 +192,10 @@ private struct OpenMeteoResponse: Decodable {
                   index < hourly.temperature_2m.count, let temperature = hourly.temperature_2m[index],
                   index < hourly.weather_code.count, let code = hourly.weather_code[index] else { continue }
             let isDay = index < hourly.is_day.count ? (hourly.is_day[index] ?? 1) == 1 : true
-            hours.append(HourForecast(date: date, temperature: temperature, code: code, isDay: isDay))
+            var hour = HourForecast(date: date, temperature: temperature, code: code, isDay: isDay)
+            hour.precipitationProbability = hourly.precipitation_probability?[safe: index] ?? nil
+            hour.uvIndex = hourly.uv_index?[safe: index] ?? nil
+            hours.append(hour)
         }
 
         var days: [DayForecast] = []
@@ -171,11 +204,16 @@ private struct OpenMeteoResponse: Decodable {
                   index < daily.weather_code.count, let code = daily.weather_code[index],
                   index < daily.temperature_2m_max.count, let high = daily.temperature_2m_max[index],
                   index < daily.temperature_2m_min.count, let low = daily.temperature_2m_min[index] else { continue }
-            days.append(DayForecast(date: date, code: code, high: high, low: low))
+            var day = DayForecast(date: date, code: code, high: high, low: low)
+            if let stamp = daily.sunrise?[safe: index] ?? nil { day.sunrise = hourFormatter.date(from: stamp) }
+            if let stamp = daily.sunset?[safe: index] ?? nil { day.sunset = hourFormatter.date(from: stamp) }
+            day.precipitationProbability = daily.precipitation_probability_max?[safe: index] ?? nil
+            day.uvMax = daily.uv_index_max?[safe: index] ?? nil
+            days.append(day)
         }
         guard let today = days.first else { throw WeatherError.decoding }
 
-        return WeatherSnapshot(
+        var snapshot = WeatherSnapshot(
             locationName: location.name,
             latitude: location.latitude,
             longitude: location.longitude,
@@ -190,6 +228,11 @@ private struct OpenMeteoResponse: Decodable {
             hourly: hours,
             daily: days
         )
+        snapshot.humidity = current.relative_humidity_2m
+        snapshot.pressure = current.pressure_msl
+        snapshot.windDirection = current.wind_direction_10m
+        snapshot.windGusts = current.wind_gusts_10m
+        return snapshot
     }
 }
 

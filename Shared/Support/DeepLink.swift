@@ -11,6 +11,9 @@ enum DeepLink: Equatable {
     case weatherLocation
     case calendarAccess
     case explore
+    /// A mini-app space (Nutrition, Fitness, Budget…), by its raw value.
+    case space(String)
+    case store
 
     static let scheme = "tessera"
 
@@ -29,6 +32,10 @@ enum DeepLink: Equatable {
         case .weatherLocation: components.host = "weather"
         case .calendarAccess: components.host = "calendar"
         case .explore: components.host = "explore"
+        case let .space(id):
+            components.host = "space"
+            components.path = "/\(id)"
+        case .store: components.host = "store"
         }
         return components.url ?? URL(string: "tessera://explore")!
     }
@@ -47,6 +54,11 @@ enum DeepLink: Equatable {
         case "weather": self = .weatherLocation
         case "calendar": self = .calendarAccess
         case "explore": self = .explore
+        case "space":
+            let id = url.lastPathComponent
+            guard !id.isEmpty, id != "/" else { return nil }
+            self = .space(id)
+        case "store": self = .store
         default: return nil
         }
     }

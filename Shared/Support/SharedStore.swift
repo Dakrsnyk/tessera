@@ -28,6 +28,16 @@ enum AppGroup {
 
 enum StoreFile: String {
     case designs, content, settings, premium, weather, crypto
+    // Mini-apps (V2), one file each so a widget writing one domain never touches another.
+    case nutrition, fitness, budget, business, portfolio, following, student, travel, car, productivity, life
+    // Caches filled from the network.
+    case markets, companies, fx, tripWeather, insights
+}
+
+/// A mini-app's saved data. Each type lives in its own file of the shared container.
+protocol StoredState: Codable {
+    static var file: StoreFile { get }
+    init()
 }
 
 /// Small JSON file store. Each domain lives in its own file so the widget refreshing a cache
@@ -101,6 +111,21 @@ final class SharedStore {
         var value = content
         change(&value)
         content = value
+    }
+
+    func state<T: StoredState>(_ type: T.Type) -> T {
+        read(T.self, from: T.file) ?? T()
+    }
+
+    func save<T: StoredState>(_ value: T) {
+        write(value, to: T.file)
+    }
+
+    /// Read-modify-write of a mini-app's data (used by widget buttons and the app).
+    func update<T: StoredState>(_ type: T.Type, _ change: (inout T) -> Void) {
+        var value = state(T.self)
+        change(&value)
+        write(value, to: T.file)
     }
 
     func design(id: UUID) -> WidgetDesign? {

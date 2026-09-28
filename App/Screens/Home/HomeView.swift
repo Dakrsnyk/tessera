@@ -11,6 +11,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 30) {
                     header
                     TodayPanel()
+                    spacesStrip
                     myWidgets
                     featured
                     categories
@@ -60,6 +61,37 @@ struct HomeView: View {
         case 5..<12: return "Bonjour"
         case 12..<18: return "Bon après-midi"
         default: return "Bonsoir"
+        }
+    }
+
+    private var spacesStrip: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "Mes espaces", actionTitle: "Tout voir") { router.tab = .spaces }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(Space.allCases) { space in
+                        Button {
+                            router.openSpace(space)
+                        } label: {
+                            VStack(spacing: 6) {
+                                Image(systemName: space.symbol)
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundStyle(.white)
+                                    .frame(width: 48, height: 48)
+                                    .background(Color(hex: space.colorHex), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                Text(space.title)
+                                    .font(.caption2.weight(.medium))
+                                    .foregroundStyle(.primary)
+                                    .lineLimit(1)
+                            }
+                            .frame(width: 68)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+            .padding(.horizontal, -20)
         }
     }
 
@@ -309,7 +341,7 @@ struct PremiumBanner: View {
                     Text("Tessera Premium")
                         .font(.headline)
                         .foregroundStyle(.primary)
-                    Text("Tous les widgets, 12 styles, fonds photo.")
+                    Text("Plus de 70 widgets en plus, 12 styles, fonds photo.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

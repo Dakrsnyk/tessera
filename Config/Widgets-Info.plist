@@ -8,6 +8,8 @@
 	<string>$(OPEN_METEO_API_KEY)</string>
 	<key>CoinGeckoAPIKey</key>
 	<string>$(COINGECKO_API_KEY)</string>
+	<key>FinnhubAPIKey</key>
+	<string>$(FINNHUB_API_KEY)</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

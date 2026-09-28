@@ -24,6 +24,7 @@ struct TesseraApp: App {
                     if phase == .active {
                         model.reloadFromDisk()
                         Task { await premium.refreshEntitlements() }
+                        Task { await model.refreshInsights() }
                     } else if phase == .background {
                         WidgetCenter.shared.reloadAllTimelines()
                     }
@@ -113,8 +114,11 @@ struct MainTabView: View {
             HomeView()
                 .tabItem { Label("Accueil", systemImage: "square.grid.2x2") }
                 .tag(Router.Tab.home)
+            SpacesView()
+                .tabItem { Label("Espaces", systemImage: "square.stack.3d.up") }
+                .tag(Router.Tab.spaces)
             ExploreView()
-                .tabItem { Label("Explorer", systemImage: "sparkle.magnifyingglass") }
+                .tabItem { Label("Store", systemImage: "bag") }
                 .tag(Router.Tab.explore)
             MyWidgetsView()
                 .tabItem { Label("Mes widgets", systemImage: "rectangle.stack") }

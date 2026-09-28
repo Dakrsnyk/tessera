@@ -91,9 +91,9 @@ struct PaywallView: View {
 
     private var perks: some View {
         VStack(alignment: .leading, spacing: 16) {
-            PerkRow(symbol: "timer", title: "Focus en direct", detail: "Un minuteur qui défile sur ton écran d'accueil")
-            PerkRow(symbol: "dollarsign.arrow.circlepath", title: "Flux d'argent", detail: "Tes revenus et dépenses, calculés au fil du jour")
-            PerkRow(symbol: "globe", title: "Fuseaux, crypto, agenda, l'année en points", detail: "Six widgets en plus")
+            PerkRow(symbol: "square.stack.3d.up.fill", title: "Tous les widgets des espaces", detail: "Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…")
+            PerkRow(symbol: "wand.and.stars", title: "Widgets intelligents", detail: "« Maintenant » change selon le moment, et les analyses résument ta journée")
+            PerkRow(symbol: "bag.fill", title: "Tous les packs", detail: "Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…")
             PerkRow(symbol: "paintpalette", title: "8 styles en plus", detail: "Verre, Aurore, Élégant, Digital, Rétro, Futuriste…")
             PerkRow(symbol: "photo", title: "Fonds photo, couleurs libres", detail: "Et les polices Serif et Mono")
         }

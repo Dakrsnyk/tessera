@@ -387,6 +387,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FINNHUB_API_KEY = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -429,6 +430,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FINNHUB_API_KEY = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -447,6 +449,11 @@
 		A100000000000000000000C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					FoundationModels,
+				);
 				ENABLE_DEBUG_DYLIB = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -459,6 +466,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Tessera;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -482,6 +490,11 @@
 		A100000000000000000000C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					FoundationModels,
+				);
 				ENABLE_DEBUG_DYLIB = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -494,6 +507,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Tessera;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

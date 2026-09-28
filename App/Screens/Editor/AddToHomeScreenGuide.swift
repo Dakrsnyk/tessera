@@ -26,8 +26,8 @@ struct AddToHomeScreenGuide: View {
                         if target == 0 {
                             AddStepRow(number: 1, symbol: "hand.tap", text: "Appuie longuement sur un espace vide de l'écran d'accueil")
                             AddStepRow(number: 2, symbol: "plus", text: "Touche « Modifier » en haut, puis « Ajouter un widget »")
-                            AddStepRow(number: 3, symbol: "magnifyingglass", text: "Cherche « Tessera », choisis le type et la taille")
-                            AddStepRow(number: 4, symbol: "slider.horizontal.3", text: "Une fois ajouté, touche le widget pendant que les icônes bougent et choisis ton design")
+                            AddStepRow(number: 3, symbol: "magnifyingglass", text: "Cherche « Tessera » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille")
+                            AddStepRow(number: 4, symbol: "slider.horizontal.3", text: "Une fois ajouté, touche le widget pendant que les icônes bougent et choisis ton design, ou un modèle du catalogue")
                         } else {
                             AddStepRow(number: 1, symbol: "lock", text: "Sur l'écran verrouillé, appuie longuement puis touche « Personnaliser »")
                             AddStepRow(number: 2, symbol: "rectangle.dashed", text: "Choisis « Écran verrouillé » et touche la zone des widgets")

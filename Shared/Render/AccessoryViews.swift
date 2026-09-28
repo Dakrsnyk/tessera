@@ -16,7 +16,8 @@ struct AccessoryWidgetView: View {
         case .hydration: hydration
         case .upNext: upNext
         case .crypto: crypto
-        default: fallback
+        case .clock, .calendar, .worldClock, .yearDots, .habits, .note, .moneyFlow: fallback
+        default: TileAccessoryView(tile: TileFactory.make(context), family: family)
         }
     }
 

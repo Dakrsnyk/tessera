@@ -55,7 +55,10 @@ struct WidgetTemplate: Identifiable, Hashable {
 }
 
 enum TemplateCatalog {
-    static let all: [WidgetTemplate] = [
+    static let all: [WidgetTemplate] = handmade + showcase + generated
+
+    /// The 15 original widgets, one or more looks each.
+    static let handmade: [WidgetTemplate] = [
         // Temps
         WidgetTemplate(id: "clock-minimal", name: "Heure", kind: .clock, themeID: .minimal, accentHex: "2F8F7A", isFeatured: true),
         WidgetTemplate(id: "clock-typo", name: "Heure typo", kind: .clock, themeID: .typography, accentHex: "FF6B57", alignment: .center),
@@ -117,6 +120,55 @@ enum TemplateCatalog {
         WidgetTemplate(id: "water-colorful", name: "Hydratation couleur", kind: .hydration, themeID: .colorful, accentHex: "3366FF"),
     ]
 
+    /// Hand-picked looks for the V2 widgets, shown in "Nouveautés".
+    static let showcase: [WidgetTemplate] = [
+        WidgetTemplate(id: "now-colorful", name: "Maintenant", kind: .now, themeID: .colorful, accentHex: "8C6CFF", isFeatured: true),
+        WidgetTemplate(id: "calories-glass", name: "Calories", kind: .caloriesLeft, themeID: .glass, accentHex: "FF6B57", isFeatured: true),
+        WidgetTemplate(id: "nextset-dark", name: "Prochaine série", kind: .nextSet, themeID: .dark, accentHex: "FF6B57", isFeatured: true),
+        WidgetTemplate(id: "revenue-elegant", name: "Objectif du mois", kind: .revenueGoal, themeID: .elegant, accentHex: "F2A33A", isFeatured: true),
+        WidgetTemplate(id: "trip-aurora", name: "Départ", kind: .tripCountdown, themeID: .aurora, accentHex: "3366FF", isFeatured: true),
+        WidgetTemplate(id: "flashcard-retro", name: "Fiche du jour", kind: .flashcard, themeID: .retro, accentHex: "F2A33A"),
+        WidgetTemplate(id: "budget-light", name: "Reste du mois", kind: .budgetLeft, themeID: .light, accentHex: "2F8F7A", isFeatured: true),
+        WidgetTemplate(id: "myday-glass", name: "Ma journée", kind: .myDay, themeID: .glass, accentHex: "8C6CFF"),
+        WidgetTemplate(id: "ai-typo", name: "Résumé intelligent", kind: .aiSummary, themeID: .typography, accentHex: "8C6CFF"),
+        WidgetTemplate(id: "moon-futuristic", name: "Lune", kind: .moonPhase, themeID: .futuristic, accentHex: "3366FF"),
+        WidgetTemplate(id: "company-futuristic", name: "Fiche entreprise", kind: .companySnapshot, themeID: .futuristic, accentHex: "3366FF"),
+        WidgetTemplate(id: "streak-dark", name: "Série", kind: .habitStreak, themeID: .dark, accentHex: "F2A33A"),
+    ]
+
+    /// One default look for every V2 widget that has no hand-picked template.
+    static let generated: [WidgetTemplate] = {
+        let covered = Set((handmade + showcase).map(\.kind))
+        return WidgetKind.allCases.filter { !covered.contains($0) }.map { kind in
+            WidgetTemplate(id: "auto-\(kind.rawValue)", name: kind.title, kind: kind, themeID: autoTheme(kind.category), accentHex: autoAccent(kind.category))
+        }
+    }()
+
+    private static func autoTheme(_ category: WidgetCategory) -> ThemeID {
+        switch category {
+        case .fitness, .investing, .markets: .dark
+        case .finance, .student, .travel: .light
+        default: .minimal
+        }
+    }
+
+    private static func autoAccent(_ category: WidgetCategory) -> String {
+        switch category {
+        case .time, .finance: "2F8F7A"
+        case .weather, .productivity, .markets, .travel: "3366FF"
+        case .wellbeing: "7FA33A"
+        case .nutrition, .fitness: "FF6B57"
+        case .investing, .dashboards: "8C6CFF"
+        case .business: "F2A33A"
+        case .student: "F2588F"
+        case .car: "6B7280"
+        }
+    }
+
+    static func template(for kind: WidgetKind) -> WidgetTemplate? {
+        all.first { $0.kind == kind }
+    }
+
     static var featured: [WidgetTemplate] { all.filter(\.isFeatured) }
 
     static func template(_ id: String) -> WidgetTemplate? {
@@ -130,7 +182,7 @@ enum TemplateCatalog {
         return design
     }
 
-    static var newest: [WidgetTemplate] { all.filter { $0.kind.isNew } }
+    static var newest: [WidgetTemplate] { showcase }
 
     static func templates(for kind: WidgetKind) -> [WidgetTemplate] {
         all.filter { $0.kind == kind }

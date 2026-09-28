@@ -18,7 +18,7 @@ enum ContentScreen: String, Identifiable {
 @Observable
 final class Router {
     enum Tab: Hashable {
-        case home, explore, mine, settings
+        case home, spaces, explore, mine, settings
     }
 
     var tab: Tab = .home
@@ -31,6 +31,15 @@ final class Router {
     var lastSavedName: String?
     var exploreCategory: WidgetCategory?
     var exploreSearchRequested = false
+    /// Navigation inside the Espaces tab.
+    var spacePath: [Space] = []
+
+    func openSpace(_ space: Space) {
+        editor = nil
+        content = nil
+        tab = .spaces
+        spacePath = [space]
+    }
 
     func openEditor(_ design: WidgetDesign, isNew: Bool) {
         content = nil
@@ -62,7 +71,13 @@ final class Router {
         case .money: content = .money
         case .weatherLocation: content = .weather
         case .calendarAccess: content = .calendar
-        case .explore: tab = .explore
+        case .explore, .store: tab = .explore
+        case let .space(id):
+            if let space = Space(rawValue: id) {
+                openSpace(space)
+            } else {
+                tab = .spaces
+            }
         }
     }
 }
