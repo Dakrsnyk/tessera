@@ -367,8 +367,8 @@ struct MarketingCustomize: View {
             title: "À ton image.",
             subtitle: "Styles, couleurs, photos, polices.",
             floating: [
-                (MKWidget(.caloriesLeft, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 92, y: 812)),
-                (MKWidget(.caloriesLeft, .systemSmall, .dark), 150, CGPoint(x: 352, y: 700)),
+                (MKWidget(.caloriesLeft, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 92, y: 868)),
+                (MKWidget(.caloriesLeft, .systemSmall, .dark), 150, CGPoint(x: 348, y: 868)),
             ]
         )
     }
@@ -382,7 +382,7 @@ struct MarketingNutrition: View {
             title: "Nutrition,\nsimplifiée.",
             subtitle: "Scanne. Note. Suis tes macros.",
             floating: [
-                (MKWidget(.caloriesLeft, .systemSmall, .aurora), 150, CGPoint(x: 92, y: 818)),
+                (MKWidget(.caloriesLeft, .systemSmall, .aurora), 150, CGPoint(x: 92, y: 868)),
             ]
         )
     }
@@ -396,7 +396,7 @@ struct MarketingFitness: View {
             title: "Chaque série\ncompte.",
             subtitle: "Séance, repos et records.",
             floating: [
-                (MKWidget(.nextSet, .systemSmall, .dark, "FF6B57"), 150, CGPoint(x: 350, y: 818)),
+                (MKWidget(.nextSet, .systemSmall, .dark, "FF6B57"), 150, CGPoint(x: 348, y: 868)),
             ]
         )
     }
@@ -410,7 +410,7 @@ struct MarketingMoney: View {
             title: "Tes finances.\nTon entreprise.",
             subtitle: "Budget, ventes, bénéfice, MRR.",
             floating: [
-                (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 92, y: 818)),
+                (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 92, y: 868)),
             ]
         )
     }
@@ -424,7 +424,7 @@ struct MarketingProductivity: View {
             title: "Ta journée,\nbien en main.",
             subtitle: "Top 3, tâches, échéances, focus.",
             floating: [
-                (MKWidget(.priorities, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 350, y: 818)),
+                (MKWidget(.priorities, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 348, y: 868)),
             ]
         )
     }
@@ -449,7 +449,7 @@ struct MarketingPremium: View {
             title: "Tout Tessera,\nsans limite.",
             subtitle: "Tous les widgets, styles et packs.",
             floating: [
-                (MKWidget(.yearDots, .systemSmall, .glass, "8C6CFF"), 150, CGPoint(x: 92, y: 818)),
+                (MKWidget(.yearDots, .systemSmall, .glass, "8C6CFF"), 150, CGPoint(x: 92, y: 868)),
             ]
         )
     }
