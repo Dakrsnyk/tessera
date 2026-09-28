@@ -70,8 +70,14 @@ struct RootView: View {
 
             #if DEBUG
             if let galleryMode {
-                WidgetGalleryView(mode: galleryMode)
-                    .zIndex(2)
+                Group {
+                    if galleryMode.hasPrefix("marketing") {
+                        MarketingView(scene: galleryMode)
+                    } else {
+                        WidgetGalleryView(mode: galleryMode)
+                    }
+                }
+                .zIndex(2)
             }
             #endif
 

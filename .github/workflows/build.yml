@@ -24,6 +24,8 @@ jobs:
       PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
       # [check] only compiles for the simulator (fastest way to find compile errors).
       CHECK: ${{ contains(github.event.head_commit.message, '[check]') }}
+      # [marketing] renders the App Store screenshots on a 6.9" iPhone (1320 x 2868).
+      MARKETING: ${{ contains(github.event.head_commit.message, '[marketing]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -39,16 +41,21 @@ jobs:
         run: python3 scripts/check_swift.py
 
       - name: Boot a simulator early
-        if: env.QA == 'true' || env.PLACE == 'true'
+        if: env.QA == 'true' || env.PLACE == 'true' || env.MARKETING == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
-          import json, sys
+          import json, os, sys
           devices = json.load(sys.stdin)['devices']
           phones = [d for runtime, items in devices.items() if 'iOS' in runtime for d in items if d['name'].startswith('iPhone')]
-          preferred = [d for d in phones if d['name'] == 'iPhone 16 Pro'] or [d for d in phones if 'Pro' in d['name']] or phones
-          print(preferred[-1]['udid'])
+          if os.environ.get('MARKETING') == 'true':
+              names = ['iPhone 17 Pro Max', 'iPhone 16 Pro Max', 'iPhone Air']
+              preferred = [d for name in names for d in phones if d['name'] == name]
+          else:
+              preferred = [d for d in phones if d['name'] == 'iPhone 16 Pro'] or [d for d in phones if 'Pro' in d['name']]
+          print((preferred or phones)[0 if os.environ.get('MARKETING') == 'true' else -1]['udid'])
           ")
+          echo "Simulator: $(xcrun simctl list devices | grep $DEVICE)"
           echo "DEVICE=$DEVICE" >> "$GITHUB_ENV"
           xcrun simctl boot "$DEVICE" || true
 
@@ -66,7 +73,7 @@ jobs:
 
       - name: Build for iPhone (unsigned)
         id: device
-        if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true'
+        if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true' && env.MARKETING != 'true'
         run: |
           set -o pipefail
           xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
@@ -153,6 +160,28 @@ jobs:
           for screen in home spaces gallery-small-1; do shoot $screen $screen top dark; done
           for screen in home store space-nutrition space-budget; do shoot $screen-end $screen bottom light; done
 
+      - name: App Store screenshots
+        id: marketing
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.MARKETING == 'true'
+        continue-on-error: true
+        timeout-minutes: 15
+        run: |
+          APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl ui "$DEVICE" appearance light
+          xcrun simctl install "$DEVICE" "$APP"
+          mkdir -p marketing
+          # The first launch saves the demo data every scene reads.
+          xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen home
+          sleep 8
+          for n in 01 02 03 04 05 06 07 08 09 10; do
+            xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null || true
+            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen marketing-$n
+            sleep 7
+            xcrun simctl io "$DEVICE" screenshot --type=png "marketing/$n.png"
+          done
+          sips -g pixelWidth -g pixelHeight marketing/01.png || true
+
       - name: Release build (App Store configuration) without the test unlock
         id: release
         if: steps.sim.outcome == 'success' && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[release]'))
@@ -167,7 +196,7 @@ jobs:
           APP=build/release/Build/Products/Release-iphonesimulator/Tessera.app
           FOUND=0
           for bin in "$APP/Tessera" "$APP/PlugIns/TesseraWidgets.appex/TesseraWidgets"; do
-            if strings -a "$bin" | grep -E "DebugPremium|debugPremiumDisabled|ScreenshotMode|WidgetGalleryView"; then FOUND=1; fi
+            if strings -a "$bin" | grep -E "DebugPremium|debugPremiumDisabled|ScreenshotMode|WidgetGalleryView|MarketingView"; then FOUND=1; fi
           done
           echo "test unlock found in Release binaries: $FOUND" | tee release-check.txt
           [ "$FOUND" = "0" ]
@@ -185,6 +214,7 @@ jobs:
             echo "tests: ${{ steps.tests.outcome }}"
             echo "screenshots: ${{ steps.shots.outcome }}"
             echo "release: ${{ steps.release.outcome }}"
+            echo "marketing: ${{ steps.marketing.outcome }}"
             cat release-check.txt 2>/dev/null || true
             echo "---- errors ----"
             python3 scripts/check_swift.py 2>&1 | tail -40 || true
@@ -199,6 +229,7 @@ jobs:
             tail -40 sim.log 2>/dev/null || true
           } > report/report.txt
           [ -d shots ] && cp shots/*.jpg report/ 2>/dev/null || true
+          [ -d marketing ] && mkdir -p report/marketing && cp marketing/*.png report/marketing/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
           cd report

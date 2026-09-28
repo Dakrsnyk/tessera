@@ -34,7 +34,7 @@ enum ScreenshotMode {
         case "store": router.tab = .explore
         case "editor-v2": router.openEditor(TemplateCatalog.design("calories-glass"), isNew: true)
         default:
-            if screen.hasPrefix("gallery") { return .gallery(screen) }
+            if screen.hasPrefix("gallery") || screen.hasPrefix("marketing") { return .gallery(screen) }
             if screen.hasPrefix("space-"), let space = Space(rawValue: String(screen.dropFirst(6))) {
                 router.openSpace(space)
             }
