@@ -119,7 +119,7 @@ struct CardBackground: ViewModifier {
         content
             .padding(padding)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 }
 
@@ -168,7 +168,7 @@ struct EmptyStateView: View {
                 .multilineTextAlignment(.center)
             if let actionTitle, let action {
                 Button(action: action) {
-                    Text(actionTitle).foregroundStyle(Color.onAccent)
+                    Text(actionTitle).foregroundStyle(.onAccent)
                 }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)

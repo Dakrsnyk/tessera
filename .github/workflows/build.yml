@@ -173,6 +173,7 @@ jobs:
           for screen in store spaces; do shoot $screen-mid $screen center light; done
           # Home Screen setups (Store) and app styles.
           for scheme in light dark; do
+            shoot launch launch top $scheme
             shoot onboarding onboarding top $scheme
             shoot setups setups top $scheme
           done

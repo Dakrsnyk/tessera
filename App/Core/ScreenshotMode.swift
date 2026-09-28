@@ -173,7 +173,7 @@ struct WidgetGalleryView: View {
             .padding(8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
-        .background((family.isAccessory ? Color(hex: "1F2A44") : Color.screenFill).ignoresSafeArea())
+        .background(family.isAccessory ? AnyShapeStyle(Color(hex: "1F2A44")) : AnyShapeStyle(.screenFill))
     }
 
     private var kinds: [WidgetKind] {

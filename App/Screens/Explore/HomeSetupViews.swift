@@ -502,7 +502,7 @@ struct HomeSetupsView: View {
             }
             .padding(.bottom, 32)
         }
-        .background(Color.screenFill)
+        .background(.screenFill)
         .navigationTitle("Écrans d'accueil")
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $opened) { setup in
@@ -574,7 +574,7 @@ struct HomeSetupSheet: View {
                                     .foregroundStyle(.secondary)
                                     .padding(.horizontal, 9)
                                     .padding(.vertical, 5)
-                                    .background(Color.cardFill, in: Capsule())
+                                    .background(.cardFill, in: Capsule())
                             }
                         }
                     }
@@ -588,12 +588,12 @@ struct HomeSetupSheet: View {
                 }
                 .padding(20)
             }
-            .background(Color.screenFill)
+            .background(.screenFill)
             .safeAreaInset(edge: .bottom) {
                 Button(action: install) {
                     Text(buttonTitle)
                         .font(.headline)
-                        .foregroundStyle(Color.onAccent)
+                        .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
                 }
                 .buttonStyle(.borderedProminent)
@@ -601,7 +601,7 @@ struct HomeSetupSheet: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
                 .padding(.bottom, 8)
-                .background(Color.screenFill.opacity(0.96))
+                .background(AppFill.screenFill.opacity(0.96))
             }
             .navigationTitle(setup.name)
             .navigationBarTitleDisplayMode(.inline)

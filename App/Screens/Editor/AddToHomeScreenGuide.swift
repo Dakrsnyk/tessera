@@ -47,7 +47,7 @@ struct AddToHomeScreenGuide: View {
                 }
                 .padding(20)
             }
-            .background(Color.screenFill)
+            .background(.screenFill)
             .navigationTitle("Ajouter un widget")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

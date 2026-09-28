@@ -39,8 +39,8 @@ struct AppStyleSwatch: View {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 17, weight: .semibold))
                         .symbolRenderingMode(.palette)
-                        .foregroundStyle(Color.onAccent, Color.accentColor)
-                        .background(Circle().fill(Color.screenFill).padding(1))
+                        .foregroundStyle(.onAccent, Color.accentColor)
+                        .background(Circle().fill(.screenFill).padding(1))
                         .offset(x: 5, y: -5)
                 }
             }
@@ -66,7 +66,7 @@ struct AppStyleGrid: View {
             ForEach(AppStyle.all) { style in
                 Button {
                     Haptics.tap()
-                    withAnimation(.easeInOut(duration: 0.2)) { model.setStyle(style.id) }
+                    withAnimation(.easeInOut(duration: 0.35)) { model.setStyle(style.id) }
                 } label: {
                     AppStyleSwatch(style: style, isSelected: model.settings.appStyle == style.id, size: swatchSize)
                 }
@@ -81,7 +81,9 @@ struct AppearancePicker: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        Picker("Mode", selection: Binding(get: { model.settings.appearance }, set: { model.setAppearance($0) })) {
+        Picker("Mode", selection: Binding(get: { model.settings.appearance }, set: { mode in
+            withAnimation(.easeInOut(duration: 0.35)) { model.setAppearance(mode) }
+        })) {
             ForEach(AppearanceMode.allCases) { mode in
                 Text(mode.title).tag(mode)
             }

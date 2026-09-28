@@ -51,7 +51,7 @@ struct EditorView: View {
             }
             .scrollDismissesKeyboard(.interactively)
             .screenshotScroll()
-            .background(Color.screenFill)
+            .background(.screenFill)
             .safeAreaInset(edge: .bottom) { saveBar }
             .navigationTitle(isNew ? "Nouveau widget" : "Modifier")
             .navigationBarTitleDisplayMode(.inline)
@@ -100,7 +100,7 @@ struct EditorView: View {
             }
             Spacer(minLength: 0)
             Button { showsPaywall = true } label: {
-                Text("Débloquer").foregroundStyle(Color.onAccent)
+                Text("Débloquer").foregroundStyle(.onAccent)
             }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
@@ -115,7 +115,7 @@ struct EditorView: View {
                 .textInputAutocapitalization(.sentences)
                 .submitLabel(.done)
                 .padding(12)
-                .background(Color.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
     }
 
@@ -222,7 +222,7 @@ struct EditorView: View {
                         }
                         .font(.subheadline.weight(.medium))
                         .padding(12)
-                        .background(Color.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
@@ -245,10 +245,10 @@ struct EditorView: View {
                                     Image(systemName: "lock.fill").font(.system(size: 9, weight: .bold))
                                 }
                             }
-                            .foregroundStyle(design.font == font ? Color.onAccent : Color.primary)
+                            .foregroundStyle(design.font == font ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
                             .padding(.horizontal, 14)
                             .frame(minHeight: 36)
-                            .background(design.font == font ? Color.accentColor : Color.screenFill, in: Capsule())
+                            .background(design.font == font ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.screenFill), in: Capsule())
                         }
                         .buttonStyle(.plain)
                     }
@@ -304,7 +304,7 @@ struct EditorView: View {
             Button(action: save) {
                 Text(needsPremium ? "Débloquer et enregistrer" : (isNew ? "Enregistrer le widget" : "Enregistrer"))
                     .font(.headline)
-                    .foregroundStyle(hasChanges ? Color.onAccent : Color.secondary)
+                    .foregroundStyle(hasChanges ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.secondary))
                     .frame(maxWidth: .infinity, minHeight: 50)
             }
             .buttonStyle(.borderedProminent)

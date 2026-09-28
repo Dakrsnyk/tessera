@@ -44,7 +44,7 @@ struct HydrationView: View {
                         } label: {
                             Label("Un verre", systemImage: "plus")
                                 .font(.headline)
-                                .foregroundStyle(Color.onAccent)
+                                .foregroundStyle(.onAccent)
                                 .frame(width: 150, height: 56)
                                 .background(Color.accentColor, in: Capsule())
                         }

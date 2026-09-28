@@ -86,7 +86,7 @@ struct OnboardingView: View {
                 } label: {
                     Text(page < pageCount - 1 ? "Continuer" : "Commencer")
                         .font(.headline)
-                        .foregroundStyle(Color.onAccent)
+                        .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 52)
                 }
                 .buttonStyle(.borderedProminent)
@@ -108,7 +108,7 @@ struct OnboardingView: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 16)
         }
-        .background(Color.screenFill.ignoresSafeArea())
+        .background(.screenFill)
     }
 }
 
@@ -150,7 +150,7 @@ private struct StyleStep: View {
             Button(action: onContinue) {
                 Text(isLast ? "C'est parti" : "Continuer")
                     .font(.headline)
-                    .foregroundStyle(Color.onAccent)
+                    .foregroundStyle(.onAccent)
                     .frame(maxWidth: .infinity, minHeight: 52)
             }
             .buttonStyle(.borderedProminent)
@@ -224,7 +224,7 @@ private struct StylesIllustration: View {
                         .font(.footnote.weight(.semibold))
                         .padding(.horizontal, 12)
                         .padding(.vertical, 7)
-                        .background(Color.cardFill, in: Capsule())
+                        .background(.cardFill, in: Capsule())
                 }
             }
         }

@@ -23,7 +23,7 @@ struct HomeView: View {
                 .padding(.top, 4)
                 .padding(.bottom, 32)
             }
-            .background(Color.screenFill)
+            .background(.screenFill)
             .screenshotScroll()
             .navigationTitle("Tessera")
             .toolbar {
@@ -51,8 +51,6 @@ struct HomeView: View {
                 }
             }
         }
-        // Backgrounds come from the current style: rebuilt when it changes.
-        .id(model.settings.appStyle)
     }
 
     private var header: some View {
@@ -127,7 +125,7 @@ struct HomeView: View {
                     } label: {
                         Label("Parcourir les widgets", systemImage: "square.grid.2x2")
                             .frame(maxWidth: .infinity, minHeight: 44)
-                            .foregroundStyle(Color.onAccent)
+                            .foregroundStyle(.onAccent)
                     }
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.roundedRectangle(radius: 12))
@@ -223,7 +221,7 @@ struct TodayPanel: View {
                 Divider().padding(.leading, 56)
                 waterRow
             }
-            .background(Color.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         }
     }
 
@@ -307,7 +305,7 @@ struct TodayPanel: View {
                 } label: {
                     Image(systemName: "plus")
                         .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(Color.onAccent)
+                        .foregroundStyle(.onAccent)
                         .frame(width: 32, height: 32)
                         .background(Color.accentColor, in: Circle())
                 }

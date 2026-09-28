@@ -180,7 +180,7 @@ struct ProfileView: View {
                 }
                 #endif
                 }
-                .listRowBackground(Color.cardFill)
+                .listRowBackground(Rectangle().fill(.cardFill))
             }
             .styledList()
             .navigationTitle("Profil")
@@ -243,7 +243,7 @@ struct ProfileView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(Color.cardFill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .background(.cardFill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
     @ViewBuilder private var birthdayRow: some View {
@@ -366,7 +366,7 @@ struct ProfileAvatar: View {
                     .font(.system(size: size * 0.4, weight: .semibold, design: .rounded))
             }
         }
-        .foregroundStyle(Color.onAccent)
+        .foregroundStyle(.onAccent)
         .frame(width: size, height: size)
         .accessibilityHidden(true)
     }

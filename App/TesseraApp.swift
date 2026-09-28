@@ -37,6 +37,8 @@ struct RootView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     @State private var showsLaunch = true
+    /// The app grows into place as the launch mark lifts away.
+    @State private var revealed = false
     @State private var showsOnboarding = false
     @State private var showsStylePicker = false
     @State private var galleryMode: String?
@@ -45,6 +47,8 @@ struct RootView: View {
         @Bindable var router = router
         ZStack {
             MainTabView()
+                .scaleEffect(revealed ? 1 : 0.94)
+                .opacity(revealed ? 1 : 0)
                 .sheet(item: $router.editor, onDismiss: {
                     if router.showsAddGuideAfterEditor {
                         router.showsAddGuideAfterEditor = false
@@ -63,9 +67,7 @@ struct RootView: View {
                     AddToHomeScreenGuide(designName: router.lastSavedName)
                 }
                 .sheet(isPresented: $router.isProfilePresented) {
-                    // Rebuilt when the style changes, like the tabs.
                     ProfileView()
-                        .id(model.settings.appStyle)
                         .appStyle(model.settings)
                 }
                 .fullScreenCover(isPresented: $showsOnboarding) {
@@ -101,7 +103,7 @@ struct RootView: View {
 
             if showsLaunch {
                 LaunchView()
-                    .transition(.opacity)
+                    .transition(.asymmetric(insertion: .identity, removal: .opacity.combined(with: .scale(scale: 1.15))))
                     .zIndex(1)
             }
         }
@@ -112,7 +114,9 @@ struct RootView: View {
         .task {
             #if DEBUG
             if ScreenshotMode.isActive {
-                showsLaunch = false
+                // `-screenshotScreen launch` keeps the launch mark on screen.
+                showsLaunch = ScreenshotMode.screen == "launch"
+                revealed = true
                 switch ScreenshotMode.apply(model: model, router: router) {
                 case .onboarding: showsOnboarding = true
                 case let .gallery(mode): galleryMode = mode
@@ -121,8 +125,11 @@ struct RootView: View {
                 return
             }
             #endif
-            try? await Task.sleep(for: .milliseconds(900))
-            withAnimation(.easeOut(duration: 0.35)) { showsLaunch = false }
+            try? await Task.sleep(for: .milliseconds(1_150))
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.86)) {
+                showsLaunch = false
+                revealed = true
+            }
             if !model.settings.hasCompletedOnboarding {
                 showsOnboarding = true
             } else if !model.settings.hasChosenStyle {
@@ -137,19 +144,22 @@ struct MainTabView: View {
 
     var body: some View {
         @Bindable var router = router
-        // Each tab rebuilds its own content when the style changes (an `.id` here, shared by
-        // every tab, would make the tab bar show the wrong page).
+        // Styles repaint in place (see `AppFill`): no tab is ever rebuilt.
         TabView(selection: $router.tab) {
             HomeView()
+                .pageEntrance(.home)
                 .tabItem { Label("Accueil", systemImage: "square.grid.2x2") }
                 .tag(Router.Tab.home)
             SpacesView()
+                .pageEntrance(.spaces)
                 .tabItem { Label("Espaces", systemImage: "square.stack.3d.up") }
                 .tag(Router.Tab.spaces)
             ExploreView()
+                .pageEntrance(.explore)
                 .tabItem { Label("Store", systemImage: "bag") }
                 .tag(Router.Tab.explore)
             MyWidgetsView()
+                .pageEntrance(.mine)
                 .tabItem { Label("Mes widgets", systemImage: "rectangle.stack") }
                 .tag(Router.Tab.mine)
         }
@@ -179,5 +189,36 @@ struct ContentScreenView: View {
                 }
             }
         }
+    }
+}
+
+/// Opening a tab: its page fades in and rises into place. The page is hidden as it is left,
+/// so it is ready to come back in without a flash.
+struct PageEntrance: ViewModifier {
+    let tab: Router.Tab
+    @Environment(Router.self) private var router
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var visible = true
+
+    func body(content: Content) -> some View {
+        content
+            .opacity(visible ? 1 : 0)
+            .offset(y: visible || reduceMotion ? 0 : 16)
+            .scaleEffect(visible || reduceMotion ? 1 : 0.985, anchor: .top)
+            .onChange(of: router.tab) { old, new in
+                if old == tab && new != tab {
+                    var transaction = Transaction()
+                    transaction.disablesAnimations = true
+                    withTransaction(transaction) { visible = false }
+                } else if new == tab && old != tab {
+                    withAnimation(.spring(response: 0.42, dampingFraction: 0.86)) { visible = true }
+                }
+            }
+    }
+}
+
+extension View {
+    func pageEntrance(_ tab: Router.Tab) -> some View {
+        modifier(PageEntrance(tab: tab))
     }
 }

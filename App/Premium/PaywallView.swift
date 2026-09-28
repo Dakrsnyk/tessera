@@ -29,7 +29,7 @@ struct PaywallView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 24)
             }
-            .background(Color.screenFill)
+            .background(.screenFill)
             .screenshotScroll()
             .safeAreaInset(edge: .bottom) {
                 if !model.isPremium { purchaseBar }
@@ -242,10 +242,10 @@ struct PaywallView: View {
             Task { await buy(product) }
         } label: {
             HStack {
-                if store.purchasingID != nil { ProgressView().tint(Color.onAccent) }
+                if store.purchasingID != nil { ProgressView().tint(AppFill.onAccent) }
                 Text(isTrial ? "Essayer gratuitement" : "Continuer")
                     .font(.headline)
-                    .foregroundStyle(Color.onAccent)
+                    .foregroundStyle(.onAccent)
             }
             .frame(maxWidth: .infinity, minHeight: 52)
         }
@@ -318,7 +318,7 @@ private struct PlanCard: View {
                 Spacer(minLength: 0)
             }
             .padding(16)
-            .background(Color.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             .overlay {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .strokeBorder(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)

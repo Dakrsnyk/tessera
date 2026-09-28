@@ -58,7 +58,7 @@ struct ExploreView: View {
                     HomeSetupSheet(setup: setup)
                 }
             }
-            .background(Color.screenFill)
+            .background(.screenFill)
             .screenshotScroll()
             .navigationTitle("Store")
             .sheet(item: $openedPack) { pack in
@@ -71,8 +71,6 @@ struct ExploreView: View {
             .onAppear(perform: consumeSearchRequest)
             .onChange(of: router.exploreSearchRequested) { _, _ in consumeSearchRequest() }
         }
-        // Backgrounds come from the current style: rebuilt when it changes.
-        .id(model.settings.appStyle)
     }
 
     private func consumeSearchRequest() {
@@ -353,10 +351,10 @@ struct FilterChip: View {
                 Text(title)
             }
             .font(.subheadline.weight(.medium))
-            .foregroundStyle(isSelected ? Color.onAccent : Color.primary)
+            .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
             .padding(.horizontal, 14)
             .frame(minHeight: 36)
-            .background(isSelected ? Color.accentColor : Color.cardFill, in: Capsule())
+            .background(isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.cardFill), in: Capsule())
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
@@ -477,14 +475,14 @@ struct PackSheet: View {
                 }
                 .padding(20)
             }
-            .background(Color.screenFill)
+            .background(.screenFill)
             .safeAreaInset(edge: .bottom) {
                 Button {
                     install()
                 } label: {
                     Text(installed == nil ? (pack.isPremium && !model.isPremium ? "Débloquer avec Premium" : "Ajouter le pack") : "Voir comment l'ajouter à l'écran")
                         .font(.headline)
-                        .foregroundStyle(Color.onAccent)
+                        .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
                 }
                 .buttonStyle(.borderedProminent)
@@ -492,7 +490,7 @@ struct PackSheet: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
                 .padding(.bottom, 8)
-                .background(Color.screenFill.opacity(0.96))
+                .background(AppFill.screenFill.opacity(0.96))
             }
             .navigationTitle(pack.name)
             .navigationBarTitleDisplayMode(.inline)

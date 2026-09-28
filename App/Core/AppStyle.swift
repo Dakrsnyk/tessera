@@ -48,8 +48,7 @@ struct AppStyle: Identifiable {
         all.first { $0.id == id } ?? all[0]
     }
 
-    /// The style every screen draws with. Updated by the model before any view reads the new settings,
-    /// and each tab is rebuilt when it changes (see `MainTabView`).
+    /// The saved style, used before the first view applies the settings (launch screen).
     static var current: AppStyle = style(SharedStore.shared.settings.appStyle)
 }
 
@@ -63,18 +62,57 @@ extension AppearanceMode {
     }
 }
 
-extension Color {
-    static var screenFill: Color { AppStyle.current.screen }
-    static var cardFill: Color { AppStyle.current.card }
+extension AppStyle: Equatable {
+    static func == (lhs: AppStyle, rhs: AppStyle) -> Bool { lhs.id == rhs.id }
+}
+
+private struct AppStyleKey: EnvironmentKey {
+    static let defaultValue: AppStyle = AppStyle.current
+}
+
+extension EnvironmentValues {
+    /// The app style in use. Every fill below reads it, so a new style repaints the whole app at once.
+    var appStyle: AppStyle {
+        get { self[AppStyleKey.self] }
+        set { self[AppStyleKey.self] = newValue }
+    }
+}
+
+/// The style's backgrounds, resolved where they are drawn: they follow the style and light or dark
+/// mode instantly, without rebuilding any screen.
+struct AppFill: ShapeStyle {
+    enum Kind {
+        case screen, card, onAccent
+    }
+
+    let kind: Kind
+
+    func resolve(in environment: EnvironmentValues) -> Color {
+        let style = environment.appStyle
+        let dark = environment.colorScheme == .dark
+        switch kind {
+        case .screen: return Color(hex: dark ? style.screenDark : style.screenLight)
+        case .card: return Color(hex: dark ? style.cardDark : "FFFFFF")
+        case .onAccent: return Color(hex: dark ? style.inkOnDarkAccent : "FFFFFF")
+        }
+    }
+}
+
+extension ShapeStyle where Self == AppFill {
+    /// Screen background (behind cards and lists).
+    static var screenFill: AppFill { AppFill(kind: .screen) }
+    /// Cards and list rows.
+    static var cardFill: AppFill { AppFill(kind: .card) }
     /// Text and symbols drawn on an accent-colored fill.
-    static var onAccent: Color { AppStyle.current.onAccent }
+    static var onAccent: AppFill { AppFill(kind: .onAccent) }
 }
 
 extension View {
-    /// Applies the chosen style: accent, font and light or dark mode.
+    /// Applies the chosen style: accent, backgrounds, font and light or dark mode.
     func appStyle(_ settings: AppSettings) -> some View {
         let style = AppStyle.style(settings.appStyle)
         return self
+            .environment(\.appStyle, style)
             .tint(style.accent)
             .accentColor(style.accent)
             .fontDesign(style.fontDesign)
@@ -84,6 +122,6 @@ extension View {
     /// Lists and forms on the style's background instead of the system gray.
     func styledList() -> some View {
         scrollContentBackground(.hidden)
-            .background(Color.screenFill)
+            .background(.screenFill)
     }
 }

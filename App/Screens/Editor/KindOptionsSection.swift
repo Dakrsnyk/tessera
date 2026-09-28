@@ -65,7 +65,7 @@ struct KindOptionsSection: View {
                 VStack(alignment: .leading, spacing: 12) {
                     TextField("Nom de l'événement", text: $design.options.countdownTitle)
                         .padding(12)
-                        .background(Color.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     Picker("Mode", selection: $design.options.countdownMode) {
                         ForEach(CountdownMode.allCases) { Text($0.title).tag($0) }
                     }
@@ -128,11 +128,11 @@ struct KindOptionsSection: View {
                 VStack(spacing: 12) {
                     TextField("Titre (facultatif)", text: $design.options.noteTitle)
                         .padding(12)
-                        .background(Color.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     TextField("Ta note", text: $design.options.noteText, axis: .vertical)
                         .lineLimit(3...8)
                         .padding(12)
-                        .background(Color.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                         .onChange(of: design.options.noteText) { _, text in
                             if text.count > 180 { design.options.noteText = String(text.prefix(180)) }
                         }
@@ -270,7 +270,7 @@ struct CalendarAccessRow: View {
                         if isRequesting { ProgressView() }
                         Text("Autoriser l'accès au calendrier")
                     }
-                    .foregroundStyle(Color.onAccent)
+                    .foregroundStyle(.onAccent)
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(isRequesting)

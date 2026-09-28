@@ -25,15 +25,13 @@ struct SpacesView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 32)
             }
-            .background(Color.screenFill)
+            .background(.screenFill)
             .screenshotScroll()
             .navigationTitle("Espaces")
             .navigationDestination(for: Space.self) { space in
                 SpaceView(space: space)
             }
         }
-        // Backgrounds come from the current style: rebuilt when it changes.
-        .id(model.settings.appStyle)
     }
 
     /// One live figure per space, so the grid doubles as a dashboard.
@@ -180,7 +178,7 @@ struct SpaceCard: View {
                     .foregroundStyle(Color.secondary)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
-                    .background(Color.screenFill, in: Capsule())
+                    .background(.screenFill, in: Capsule())
                     .accessibilityLabel(Text("\(widgetCount) widgets"))
             }
             VStack(alignment: .leading, spacing: 2) {
@@ -265,7 +263,7 @@ struct SpaceView: View {
                 Text("Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.")
             }
             content
-                .listRowBackground(Color.cardFill)
+                .listRowBackground(Rectangle().fill(.cardFill))
         }
         .styledList()
         .navigationTitle(space.title)
