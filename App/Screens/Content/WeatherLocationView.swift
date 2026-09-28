@@ -54,8 +54,9 @@ struct WeatherLocationView: View {
                         Button {
                             select(location)
                         } label: {
-                            Text(location.name).foregroundStyle(.primary)
+                            Text(location.name)
                         }
+                        .tint(.primary)
                     }
                 }
             }

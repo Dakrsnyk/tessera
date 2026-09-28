@@ -309,6 +309,7 @@ struct CityPickerView: View {
                     }
                 }
             }
+            .tint(.primary)
         }
         .searchable(text: $query, prompt: "Chercher une ville")
         .navigationTitle("Ajouter une ville")

@@ -152,6 +152,7 @@ struct SettingsView: View {
                         }
                     }
                 }
+                .tint(.primary)
             }
             Button {
                 Task {

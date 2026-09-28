@@ -28,6 +28,7 @@ struct WidgetCanvas: View {
             AccessoryWidgetView(context: context)
         } else {
             KindContentView(context: context)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(Self.padding(for: family))
                 .environment(\.colorScheme, colorScheme(for: design))
         }

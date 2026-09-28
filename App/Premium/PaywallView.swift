@@ -211,21 +211,9 @@ struct PaywallView: View {
         let product = store.products.first { $0.id == selectedID }
         let isTrial = product.flatMap { store.trialDescription(for: $0) } != nil
         return VStack(spacing: 8) {
-            Button {
-                guard let product else { return }
-                Task { await buy(product) }
-            } label: {
-                HStack {
-                    if store.purchasingID != nil { ProgressView().tint(.white) }
-                    Text(isTrial ? "Essayer gratuitement" : "Continuer")
-                        .font(.headline)
-                }
-                .frame(maxWidth: .infinity, minHeight: 52)
+            if store.loadState == .loaded {
+                purchaseButton(product: product, isTrial: isTrial)
             }
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 16))
-            .disabled(product == nil || store.purchasingID != nil)
-
             Button {
                 Task {
                     let found = await store.restore()
@@ -235,6 +223,7 @@ struct PaywallView: View {
             } label: {
                 Text(store.isRestoring ? "Restauration…" : "Restaurer mes achats")
                     .font(.footnote.weight(.medium))
+                    .frame(minHeight: 32)
             }
             .disabled(store.isRestoring)
         }
@@ -242,6 +231,23 @@ struct PaywallView: View {
         .padding(.top, 10)
         .padding(.bottom, 6)
         .background(.bar)
+    }
+
+    private func purchaseButton(product: Product?, isTrial: Bool) -> some View {
+        Button {
+            guard let product else { return }
+            Task { await buy(product) }
+        } label: {
+            HStack {
+                if store.purchasingID != nil { ProgressView().tint(.white) }
+                Text(isTrial ? "Essayer gratuitement" : "Continuer")
+                    .font(.headline)
+            }
+            .frame(maxWidth: .infinity, minHeight: 52)
+        }
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.roundedRectangle(radius: 16))
+        .disabled(product == nil || store.purchasingID != nil)
     }
 
     private var legal: some View {

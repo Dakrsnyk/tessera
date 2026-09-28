@@ -100,7 +100,7 @@ struct WeatherWidgetView: View {
                     .foregroundStyle(s.secondary)
             }
         }
-        .frame(maxHeight: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
     }
 
     private func hourly(_ w: WeatherSnapshot, count: Int) -> some View {

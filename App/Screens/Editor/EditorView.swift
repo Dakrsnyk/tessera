@@ -137,7 +137,7 @@ struct EditorView: View {
 
     private var colorSection: some View {
         EditorSection(title: "Couleur", detail: Palette.name(for: design.accentHex)) {
-            HStack(spacing: 10) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 6)], spacing: 6) {
                 ForEach(Palette.freeAccents) { swatch in
                     ColorDot(hex: swatch.hex, isSelected: design.accentHex == swatch.hex) {
                         design.accentHex = swatch.hex
@@ -150,6 +150,7 @@ struct EditorView: View {
                     set: { design.accentHex = $0.hexString }
                 ), supportsOpacity: false)
                 .labelsHidden()
+                .frame(minWidth: 44, minHeight: 44)
                 .overlay(alignment: .topTrailing) {
                     if !model.isPremium {
                         Image(systemName: "lock.fill")

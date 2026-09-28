@@ -54,7 +54,9 @@ struct WidgetPreview: View {
     }
 
     @ViewBuilder private var canvas: some View {
+        let size = WidgetMetrics.size(family)
         let widget = WidgetCanvas(design: design, family: family, date: date, payload: payload, isPremium: true, isInteractive: false)
+            .frame(width: size.width, height: size.height)
         if family.isAccessory {
             widget
                 .foregroundStyle(.white)

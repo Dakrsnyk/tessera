@@ -75,7 +75,11 @@ struct OnboardingView: View {
                 if page == pageCount - 1 {
                     Button("Voir les offres Premium") {
                         onFinish()
-                        router.isPaywallPresented = true
+                        // Wait for the onboarding cover to finish closing before presenting the sheet.
+                        Task { @MainActor in
+                            try? await Task.sleep(for: .milliseconds(600))
+                            router.isPaywallPresented = true
+                        }
                     }
                     .font(.subheadline.weight(.semibold))
                     .frame(minHeight: 44)

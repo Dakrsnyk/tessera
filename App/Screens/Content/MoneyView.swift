@@ -80,6 +80,7 @@ struct MoneyView: View {
                         }
                     }
                 }
+                .tint(.primary)
             }
             .onDelete { offsets in
                 let ids = offsets.map { items[$0].id }

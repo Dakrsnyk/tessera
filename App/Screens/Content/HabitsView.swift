@@ -163,7 +163,7 @@ struct HabitEditor: View {
                     .padding(.vertical, 6)
                 }
                 Section("Couleur") {
-                    HStack(spacing: 4) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 4)], spacing: 4) {
                         ForEach(Palette.freeAccents) { swatch in
                             ColorDot(hex: swatch.hex, isSelected: habit.colorHex == swatch.hex, size: 26) {
                                 habit.colorHex = swatch.hex
