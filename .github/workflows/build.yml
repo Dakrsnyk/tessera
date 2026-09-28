@@ -166,11 +166,15 @@ jobs:
         continue-on-error: true
         timeout-minutes: 15
         run: |
+          set +e
+          mkdir -p marketing
+          exec > >(tee marketing/log.txt) 2>&1
+          set -x
           APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          xcrun simctl list devices | grep -E "Booted|$DEVICE"
           xcrun simctl bootstatus "$DEVICE" -b
           xcrun simctl ui "$DEVICE" appearance light
           xcrun simctl install "$DEVICE" "$APP"
-          mkdir -p marketing
           # The first launch saves the demo data every scene reads.
           xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen home
           sleep 8
@@ -229,7 +233,7 @@ jobs:
             tail -40 sim.log 2>/dev/null || true
           } > report/report.txt
           [ -d shots ] && cp shots/*.jpg report/ 2>/dev/null || true
-          [ -d marketing ] && mkdir -p report/marketing && cp marketing/*.png report/marketing/ 2>/dev/null || true
+          [ -d marketing ] && mkdir -p report/marketing && cp marketing/* report/marketing/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
           cd report
