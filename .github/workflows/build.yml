@@ -108,8 +108,9 @@ jobs:
           PY
           # What the widget extension logged while the system rendered it, and any crash report.
           xcrun simctl spawn "$DEVICE" log show --last 25m --style compact \
-            --predicate 'process BEGINSWITH "TesseraWidgets" OR eventMessage CONTAINS[c] "com.dakrsnyk.tessera.widgets"' \
-            2>&1 | tail -600 > testshots/widget-log.txt || true
+            --predicate 'subsystem == "com.dakrsnyk.tessera.widgets" OR eventMessage CONTAINS[c] "watchdog" OR (eventMessage CONTAINS "com.dakrsnyk.tessera.widgets" AND (eventMessage CONTAINS[c] "launch" OR eventMessage CONTAINS[c] "exit" OR eventMessage CONTAINS[c] "timeline" OR eventMessage CONTAINS[c] "error"))' \
+            2>&1 | tail -4000 > testshots/widget-log.txt || true
+          grep -E "com.dakrsnyk.tessera.widgets:timeline|watchdog" testshots/widget-log.txt | tail -300 > testshots/widget-summary.txt || true
           find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -40 -exec cp {} testshots/ \; 2>/dev/null || true
           ls testshots
           grep -q "TEST SUCCEEDED" test.log

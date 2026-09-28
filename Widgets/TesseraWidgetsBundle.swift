@@ -6,6 +6,10 @@ import WidgetKit
 
 @main
 struct TesseraWidgetsBundle: WidgetBundle {
+    init() {
+        WidgetLog.logger.log("extension launched")
+    }
+
     var body: some Widget {
         TimeWidgets().body
         CalendarWidgets().body

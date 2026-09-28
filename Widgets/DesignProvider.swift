@@ -20,6 +20,8 @@ struct DesignProvider: AppIntentTimelineProvider {
 
     func snapshot(for configuration: DesignWidgetIntent, in context: Context) async -> DesignEntry {
         let now = Date()
+        WidgetLog.logger.log("snapshot start \(kind.rawValue, privacy: .public) preview=\(context.isPreview)")
+        defer { WidgetLog.logger.log("snapshot done \(kind.rawValue, privacy: .public) in \(Date().timeIntervalSince(now), format: .fixed(precision: 3))s") }
         let (design, isSaved) = resolveDesign(configuration)
         if context.isPreview && !isSaved {
             // The widget gallery shows each kind at its best, with example content.
@@ -31,6 +33,8 @@ struct DesignProvider: AppIntentTimelineProvider {
 
     func timeline(for configuration: DesignWidgetIntent, in context: Context) async -> Timeline<DesignEntry> {
         let now = Date()
+        WidgetLog.logger.log("timeline start \(kind.rawValue, privacy: .public) family=\(String(describing: context.family), privacy: .public)")
+        defer { WidgetLog.logger.log("timeline done \(kind.rawValue, privacy: .public) in \(Date().timeIntervalSince(now), format: .fixed(precision: 3))s") }
         let (design, isSaved) = resolveDesign(configuration)
         let payload = await PayloadLoader.load(for: design, allowNetwork: true, now: now)
         let isPremium = SharedStore.shared.premium.isPremium(at: now)

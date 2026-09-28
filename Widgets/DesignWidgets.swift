@@ -6,6 +6,7 @@ struct DesignWidgetEntryView: View {
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
+        let _ = WidgetLog.logger.log("render \(entry.design.kind.rawValue, privacy: .public) \(String(describing: family), privacy: .public) at \(entry.date.timeIntervalSince1970, format: .fixed(precision: 0))")
         let shown = WidgetCanvas.displayedDesign(entry.design, isPremium: entry.isPremium, isPreview: false)
         WidgetCanvas(
             design: shown,
