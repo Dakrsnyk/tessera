@@ -220,7 +220,8 @@ enum NutritionCalculator {
     }
 
     static func goals(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal) -> NutritionGoals {
-        let base = 10 * weightKg + 6.25 * heightCm - 5 * Double(age) + (sex == .male ? 5 : -161)
+        let sexOffset: Double = sex == .male ? 5 : -161
+        let base: Double = 10 * weightKg + 6.25 * heightCm - 5 * Double(age) + sexOffset
         let kcal = max(1_400, (base * activity.rawValue * (1 + goal.rawValue)).rounded())
         let protein = (weightKg * (goal == .gain ? 2.0 : 1.6)).rounded()
         let fat = (kcal * 0.28 / 9).rounded()

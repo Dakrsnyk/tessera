@@ -316,7 +316,7 @@ struct CarSpaceSections: View {
                         HStack {
                             Text(status.item.name).foregroundStyle(.primary)
                             Spacer()
-                            Text(status.kmLeft.map { "\(TF.int($0)) km" } ?? status.daysLeft.map { "\($0) j" } ?? "—")
+                            Text(Self.remaining(status))
                                 .foregroundStyle(status.used >= 1 ? Color.red : Color.secondary)
                                 .monospacedDigit()
                         }
@@ -388,6 +388,12 @@ struct CarSpaceSections: View {
                     }
             }
         }
+    }
+
+    private static func remaining(_ status: CarMath.ServiceStatus) -> String {
+        if let km = status.kmLeft { return "\(TF.int(km)) km" }
+        if let days = status.daysLeft { return "\(days) j" }
+        return "—"
     }
 
     private func carBinding(_ keyPath: WritableKeyPath<CarState, Double>) -> Binding<Double> {

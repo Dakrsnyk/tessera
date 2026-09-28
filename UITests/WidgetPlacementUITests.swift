@@ -95,7 +95,7 @@ final class WidgetPlacementUITests: XCTestCase {
     /// Flicks the widget pages of the gallery until the preview of one of `names` is on screen.
     /// The system labels each preview "Tessera, <widget name>". `height` is where the previews are, from 0 to 1.
     private func swipeToWidget(_ names: [String], height: CGFloat, maxSwipes: Int, prefix: String) -> XCUIElement? {
-        let wanted = NSPredicate(format: "label IN %@", names.map { "Tessera, \($0)" })
+        let wanted = NSPredicate(format: "label IN %@", names.map { "Tessera, \($0)" } as NSArray)
         for step in 0...maxSwipes {
             for app in systemApps {
                 let preview = app.buttons.matching(wanted).firstMatch

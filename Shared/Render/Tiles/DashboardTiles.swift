@@ -117,7 +117,14 @@ enum DashboardTiles {
                 tile.caption = Fmt.longDay(date)
             }
             let priorities = prioritiesRows(context)
-            tile.rows = [eventRow(context)].compactMap { $0 } + (priorities.isEmpty ? [tasksRow(context)].compactMap { $0 } : priorities)
+            var rows: [TileRow] = []
+            if let event = eventRow(context) { rows.append(event) }
+            if priorities.isEmpty {
+                if let tasks = tasksRow(context) { rows.append(tasks) }
+            } else {
+                rows.append(contentsOf: priorities)
+            }
+            tile.rows = rows
             tile.detail = eventRow(context).map { "\($0.title) à \($0.value ?? "")" }
             return tile
         case .day:
@@ -175,7 +182,11 @@ enum DashboardTiles {
             tile.value = Fmt.format(now, template: "EEEEd").capitalizedFirst
             tile.caption = "Bonne journée"
         }
-        tile.rows = [eventRow(context)].compactMap { $0 } + prioritiesRows(context) + [budgetRow(context)].compactMap { $0 }
+        var rows: [TileRow] = []
+        if let event = eventRow(context) { rows.append(event) }
+        rows.append(contentsOf: prioritiesRows(context))
+        if let budget = budgetRow(context) { rows.append(budget) }
+        tile.rows = rows
         if tile.rows.count < 3, let tasks = tasksRow(context) { tile.rows.append(tasks) }
         return tile
     }

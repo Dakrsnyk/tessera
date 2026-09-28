@@ -282,7 +282,9 @@ enum SampleData {
         let quarterly = (0..<8).map { index -> FinancialPeriod in
             let quarter = index % 4 + 1
             let qYear = year - 1 + index / 4
-            let value = base * pow(1 + growth, 3 + Double(index) / 4) / 4 * (1 + 0.06 * sin(Double(index)))
+            let trend: Double = pow(1 + growth, 3 + Double(index) / 4)
+            let wobble: Double = 1 + 0.06 * sin(Double(index))
+            let value: Double = base * trend / 4 * wobble
             return FinancialPeriod(label: "T\(quarter) \(qYear)", end: Holidays.make(qYear, quarter * 3, 28), value: value)
         }
         return CompanyFinancials(ref: ref, annualRevenue: annual, quarterlyRevenue: quarterly, annualNetIncome: income, sharesOutstanding: 2.4e9, fetchedAt: now)

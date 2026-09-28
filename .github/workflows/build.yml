@@ -153,6 +153,25 @@ jobs:
           for screen in home spaces gallery-small-1; do shoot $screen $screen top dark; done
           for screen in home store space-nutrition space-budget; do shoot $screen-end $screen bottom light; done
 
+      - name: Release build (App Store configuration) without the test unlock
+        id: release
+        if: steps.sim.outcome == 'success' && env.QA == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Release \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/release ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build 2>&1 | tee release.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" release.log
+          # Proof that the test unlock is not in the App Store build: neither its code nor its settings key.
+          APP=build/release/Build/Products/Release-iphonesimulator/Tessera.app
+          FOUND=0
+          for bin in "$APP/Tessera" "$APP/PlugIns/TesseraWidgets.appex/TesseraWidgets"; do
+            if strings -a "$bin" | grep -E "DebugPremium|debugPremiumDisabled|ScreenshotMode|WidgetGalleryView"; then FOUND=1; fi
+          done
+          echo "test unlock found in Release binaries: $FOUND" | tee release-check.txt
+          [ "$FOUND" = "0" ]
+
       - name: Publish build report
         if: always()
         run: |
@@ -165,9 +184,11 @@ jobs:
             echo "device: ${{ steps.device.outcome }}"
             echo "tests: ${{ steps.tests.outcome }}"
             echo "screenshots: ${{ steps.shots.outcome }}"
+            echo "release: ${{ steps.release.outcome }}"
+            cat release-check.txt 2>/dev/null || true
             echo "---- errors ----"
             python3 scripts/check_swift.py 2>&1 | tail -40 || true
-            grep -hE "error:" sim.log device.log 2>/dev/null | sort -u | head -500 || true
+            grep -hE "error:" sim.log device.log release.log 2>/dev/null | sort -u | head -500 || true
             echo "---- tests ----"
             grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -120 || true
             echo "---- widget extension bundle ----"
