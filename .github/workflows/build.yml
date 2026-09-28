@@ -78,7 +78,8 @@ jobs:
           set -o pipefail
           xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -sdk iphoneos -destination 'generic/platform=iOS' \
-            -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_DEBUG_DYLIB=NO build 2>&1 | tee device.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
+            -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_DEBUG_DYLIB=NO \
+            CURRENT_PROJECT_VERSION=${{ github.run_number }} build 2>&1 | tee device.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" device.log
 
       - name: Package IPA

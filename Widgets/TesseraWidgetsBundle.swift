@@ -8,6 +8,8 @@ import WidgetKit
 struct TesseraWidgetsBundle: WidgetBundle {
     init() {
         WidgetLog.logger.log("extension launched")
+        // Lets the app's Réglages > Développeur show that iOS really runs the widgets.
+        UserDefaults(suiteName: AppGroup.identifier)?.set(Date(), forKey: WidgetDiagnostics.lastLaunchKey)
     }
 
     var body: some Widget {
