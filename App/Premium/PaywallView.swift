@@ -78,7 +78,8 @@ struct PaywallView: View {
             HStack(spacing: 12) {
                 ForEach(["focus-futuristic", "money-net", "world-futuristic", "dots-glass", "calendar-elegant"], id: \.self) { id in
                     if let template = TemplateCatalog.template(id) {
-                        WidgetPreview(design: template.makeDesign(), family: .systemSmall, payload: SamplePayload.make(for: template.kind), width: 130)
+                        let design = template.makeDesign()
+                        WidgetPreview(design: design, family: .systemSmall, payload: SamplePayload.make(for: design), width: 130)
                     }
                 }
             }

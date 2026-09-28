@@ -23,7 +23,7 @@ struct DesignProvider: AppIntentTimelineProvider {
         let (design, isSaved) = resolveDesign(configuration)
         if context.isPreview && !isSaved {
             // The widget gallery shows each kind at its best, with example content.
-            return DesignEntry(date: now, design: design, isSaved: false, payload: SamplePayload.make(for: design.kind, now: now), isPremium: true)
+            return DesignEntry(date: now, design: design, isSaved: false, payload: SamplePayload.make(for: design, now: now), isPremium: true)
         }
         let payload = await PayloadLoader.load(for: design, allowNetwork: true, now: now)
         return DesignEntry(date: now, design: design, isSaved: isSaved, payload: payload, isPremium: SharedStore.shared.premium.isPremium(at: now))

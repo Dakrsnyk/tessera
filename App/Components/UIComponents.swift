@@ -181,7 +181,7 @@ struct TemplateCard: View {
     var body: some View {
         let design = template.makeDesign()
         VStack(alignment: .leading, spacing: 8) {
-            WidgetPreview(design: design, family: .systemSmall, payload: SamplePayload.make(for: template.kind), width: width)
+            WidgetPreview(design: design, family: .systemSmall, payload: SamplePayload.make(for: design), width: width)
             HStack(spacing: 6) {
                 VStack(alignment: .leading, spacing: 1) {
                     Text(template.name)

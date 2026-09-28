@@ -33,7 +33,12 @@ enum PayloadLoader {
 
 /// Example data used only for the system widget gallery and placeholders, never on the Home Screen.
 enum SamplePayload {
-    static func make(for kind: WidgetKind, now: Date = Date()) -> WidgetPayload {
+    /// Example data matching a design (for instance the right coin for a crypto widget).
+    static func make(for design: WidgetDesign, now: Date = Date()) -> WidgetPayload {
+        make(for: design.kind, coinID: design.options.coinID, now: now)
+    }
+
+    static func make(for kind: WidgetKind, coinID: String = "bitcoin", now: Date = Date()) -> WidgetPayload {
         var payload = WidgetPayload()
         switch kind {
         case .tasks:
@@ -76,10 +81,11 @@ enum SamplePayload {
                 high: 20, low: 10, hourly: hours, daily: days
             ))
         case .crypto:
-            let base = 64_000.0
-            let line = (0..<56).map { index in base + sin(Double(index) / 5) * 1_400 + Double(index) * 35 }
+            let coin = CryptoService.info(coinID)
+            let base = samplePrices[coin.id] ?? 100
+            let line = (0..<56).map { index in base * (1 + sin(Double(index) / 5) * 0.022 + Double(index) * 0.00055) }
             payload.crypto = .ready(CoinSnapshot(
-                id: "bitcoin", symbol: "BTC", name: "Bitcoin", currency: "USD",
+                id: coin.id, symbol: coin.symbol, name: coin.name, currency: "USD",
                 price: line.last ?? base, change24h: 2.4, sparkline: line, fetchedAt: now
             ))
         case .upNext:
@@ -93,4 +99,9 @@ enum SamplePayload {
         }
         return payload
     }
+
+    private static let samplePrices: [String: Double] = [
+        "bitcoin": 64_000, "ethereum": 3_200, "solana": 150, "ripple": 0.55,
+        "cardano": 0.45, "dogecoin": 0.12, "litecoin": 70, "polkadot": 6,
+    ]
 }
