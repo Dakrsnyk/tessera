@@ -3,11 +3,25 @@ import UIKit
 
 /// Resolves the shared container used by the app and the widget extension.
 enum AppGroup {
-    /// Read from Info.plist (set by the APP_GROUP_ID build setting) so the identifier lives in one place.
-    static var identifier: String {
+    /// Declared in Info.plist (set by the APP_GROUP_ID build setting) so the identifier lives in one place.
+    static var declaredIdentifier: String {
         (Bundle.main.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String)?.trimmed.nonEmpty
             ?? "group.com.dakrsnyk.tessera"
     }
+
+    /// The group actually granted to this install. Sideloading tools re-sign the app with a group
+    /// of their own (their developer account can't use ours): it is read from the provisioning
+    /// profile they embed, the same way in the app and in the widget extension.
+    static let identifier: String = {
+        let declared = declaredIdentifier
+        let fileManager = FileManager.default
+        if fileManager.containerURL(forSecurityApplicationGroupIdentifier: declared) != nil {
+            return declared
+        }
+        let granted = ProvisioningProfile.appGroups()
+        let usable = granted.filter { fileManager.containerURL(forSecurityApplicationGroupIdentifier: $0) != nil }
+        return usable.first { $0.localizedCaseInsensitiveContains("tessera") } ?? usable.first ?? declared
+    }()
 
     /// Falls back to the app's own Application Support folder when the group isn't provisioned,
     /// so the app still works (widgets then show their default content).
@@ -23,6 +37,25 @@ enum AppGroup {
 
     static var isShared: Bool {
         FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: identifier) != nil
+    }
+}
+
+/// Reads the provisioning profile embedded in the running bundle (the app, or the widget extension).
+enum ProvisioningProfile {
+    static func appGroups() -> [String] {
+        guard let entitlements = entitlements() else { return [] }
+        return entitlements["com.apple.security.application-groups"] as? [String] ?? []
+    }
+
+    static func entitlements() -> [String: Any]? {
+        guard let url = Bundle.main.url(forResource: "embedded", withExtension: "mobileprovision"),
+              let data = try? Data(contentsOf: url),
+              let start = data.range(of: Data("<?xml".utf8)),
+              let end = data.range(of: Data("</plist>".utf8), in: start.lowerBound..<data.endIndex)
+        else { return nil }
+        let plistData = data.subdata(in: start.lowerBound..<end.upperBound)
+        let plist = try? PropertyListSerialization.propertyList(from: plistData, format: nil) as? [String: Any]
+        return plist?["Entitlements"] as? [String: Any]
     }
 }
 

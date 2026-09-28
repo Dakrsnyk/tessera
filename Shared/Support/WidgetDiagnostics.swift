@@ -15,8 +15,17 @@ enum WidgetDiagnostics {
     }
 
     static var lastLaunchText: String {
+        // Without a shared container the extension can't tell the app it ran.
+        guard AppGroup.isShared else { return "Inconnu" }
         guard let date = lastLaunch else { return "Jamais" }
         return Fmt.format(date, template: "dMMMHHmm")
+    }
+
+    static var sharedSpaceText: String {
+        guard AppGroup.isShared else {
+            return ProvisioningProfile.appGroups().isEmpty ? "Inactif (aucun groupe)" : "Inactif"
+        }
+        return AppGroup.identifier == AppGroup.declaredIdentifier ? "Actif" : "Actif (groupe de l'installation)"
     }
 
     static var appVersion: String {

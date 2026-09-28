@@ -116,7 +116,7 @@ struct SettingsView: View {
                     Button("Recharger les widgets") { WidgetCenter.shared.reloadAllTimelines() }
                     LabeledContent("Version", value: WidgetDiagnostics.appVersion)
                     LabeledContent("Module des widgets", value: WidgetDiagnostics.isExtensionInstalled ? "Installé" : "Absent")
-                    LabeledContent("Espace partagé", value: AppGroup.isShared ? "Actif" : "Inactif")
+                    LabeledContent("Espace partagé", value: WidgetDiagnostics.sharedSpaceText)
                     LabeledContent("Widgets lancés par iOS", value: WidgetDiagnostics.lastLaunchText)
                 } header: {
                     Text("Développeur")
