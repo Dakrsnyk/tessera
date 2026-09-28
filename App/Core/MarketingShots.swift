@@ -410,7 +410,7 @@ struct MarketingMoney: View {
             title: "Tes finances.\nTon entreprise.",
             subtitle: "Budget, ventes, bénéfice, MRR.",
             floating: [
-                (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 348, y: 868)),
+                (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 336, y: 868)),
             ]
         )
     }
