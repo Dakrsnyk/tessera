@@ -1,9 +1,11 @@
 import XCTest
 
 /// Places Tessera widgets the way a person would, on a simulated iPhone, and keeps a
-/// screenshot of every step. Springboard labels are matched in English and French.
+/// screenshot (and the accessibility tree) of every step. Labels are matched in English and French.
 final class WidgetPlacementUITests: XCTestCase {
     private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+    /// The Lock Screen editor runs in its own process, not in SpringBoard.
+    private let posterBoard = XCUIApplication(bundleIdentifier: "com.apple.PosterBoard")
 
     override func setUp() {
         continueAfterFailure = true
@@ -11,91 +13,136 @@ final class WidgetPlacementUITests: XCTestCase {
 
     // MARK: Helpers
 
-    private func snapshot(_ name: String) {
-        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
-        attachment.name = name
-        attachment.lifetime = .keepAlways
-        add(attachment)
+    private func pause(_ seconds: TimeInterval) {
+        Thread.sleep(forTimeInterval: seconds)
     }
 
-    private func button(_ labels: [String], in app: XCUIApplication, timeout: TimeInterval = 4) -> XCUIElement? {
+    private var systemApps: [XCUIApplication] {
+        [springboard, posterBoard].filter { $0.state != .notRunning && $0.state != .unknown }
+    }
+
+    private func snapshot(_ name: String, tree: Bool = false) {
+        let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        shot.name = name
+        shot.lifetime = .keepAlways
+        add(shot)
+        guard tree else { return }
+        for app in systemApps {
+            let text = XCTAttachment(string: app.debugDescription)
+            text.name = "\(name)-tree-\(app == posterBoard ? "posterboard" : "springboard")"
+            text.lifetime = .keepAlways
+            add(text)
+        }
+    }
+
+    /// Finds an element by exact label first, then by partial label, in SpringBoard and PosterBoard.
+    private func element(
+        _ labels: [String],
+        types: [XCUIElement.ElementType] = [.button, .menuItem, .cell],
+        timeout: TimeInterval = 4
+    ) -> XCUIElement? {
         let deadline = Date().addingTimeInterval(timeout)
         repeat {
-            for label in labels {
-                let exact = app.buttons[label]
-                if exact.exists { return exact }
-                let partial = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", label)).firstMatch
-                if partial.exists { return partial }
+            for app in systemApps {
+                for type in types {
+                    for label in labels {
+                        let exact = app.descendants(matching: type)
+                            .matching(NSPredicate(format: "label ==[c] %@ OR identifier ==[c] %@", label, label))
+                            .firstMatch
+                        if exact.exists { return exact }
+                    }
+                }
             }
-            Thread.sleep(forTimeInterval: 0.4)
+            for app in systemApps {
+                for type in types {
+                    for label in labels {
+                        let partial = app.descendants(matching: type)
+                            .matching(NSPredicate(format: "label CONTAINS[c] %@ AND NOT (label CONTAINS[c] 'No Results') AND NOT (label CONTAINS[c] 'Aucun')", label))
+                            .firstMatch
+                        if partial.exists { return partial }
+                    }
+                }
+            }
+            pause(0.4)
         } while Date() < deadline
         return nil
     }
 
+    /// Taps the first matching element; when nothing matches, taps `fallback` (a point on screen) if given.
+    @discardableResult
+    private func tap(
+        _ labels: [String],
+        types: [XCUIElement.ElementType] = [.button, .menuItem, .cell],
+        timeout: TimeInterval = 4,
+        fallback: CGVector? = nil
+    ) -> Bool {
+        if let found = element(labels, types: types, timeout: timeout) {
+            found.tap()
+            return true
+        }
+        if let fallback {
+            springboard.coordinate(withNormalizedOffset: fallback).tap()
+        }
+        return false
+    }
+
+    /// Launching the app once registers its widget extension with the system.
     private func launchTesseraOnce() {
         let app = XCUIApplication()
         app.launchArguments = ["-screenshotScreen", "home"]
         app.launch()
-        Thread.sleep(forTimeInterval: 3)
+        pause(3)
         XCUIDevice.shared.press(.home)
-        Thread.sleep(forTimeInterval: 2)
-    }
-
-    private func searchTessera() {
-        let field = springboard.searchFields.firstMatch
-        if field.waitForExistence(timeout: 4) {
-            field.tap()
-            field.typeText("Tessera")
-            Thread.sleep(forTimeInterval: 2)
-        }
+        pause(2)
     }
 
     // MARK: Home Screen
 
     func testAddWidgetToHomeScreen() throws {
         launchTesseraOnce()
-        springboard.swipeLeft()
-        Thread.sleep(forTimeInterval: 1)
-        snapshot("home-1-empty-page")
+        // A second press brings back the first page; its lower half is empty on a fresh simulator.
+        XCUIDevice.shared.press(.home)
+        pause(1.5)
+        snapshot("home-1-home-screen")
 
-        springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45)).press(forDuration: 1.6)
-        Thread.sleep(forTimeInterval: 1)
-        snapshot("home-2-edit-mode")
+        springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.62)).press(forDuration: 1.8)
+        pause(1.5)
+        snapshot("home-2-edit-mode", tree: true)
 
-        if let edit = button(["Edit", "Modifier"], in: springboard) {
-            edit.tap()
-            Thread.sleep(forTimeInterval: 1)
+        // iOS 18 and later: "Edit" then "Add Widget". iOS 17: a "+" button labelled "Add Widget".
+        if element(["Add Widget", "Ajouter un widget"], timeout: 1) == nil {
+            tap(["Edit", "Modifier"], fallback: CGVector(dx: 0.1, dy: 0.04))
+            pause(1.2)
         }
-        snapshot("home-3-edit-menu")
+        snapshot("home-3-edit-menu", tree: true)
 
-        let add = button(["Add Widget", "Ajouter un widget"], in: springboard)
-        XCTAssertNotNil(add, "The Add Widget button was not found")
-        add?.tap()
-        Thread.sleep(forTimeInterval: 2)
-        snapshot("home-4-gallery")
+        XCTAssertTrue(tap(["Add Widget", "Ajouter un widget", "Ajouter des widgets"]), "The Add Widget button was not found")
+        pause(2.5)
+        snapshot("home-4-gallery", tree: true)
 
-        searchTessera()
-        snapshot("home-5-search")
+        let field = springboard.searchFields.firstMatch
+        if field.waitForExistence(timeout: 4) {
+            field.tap()
+            field.typeText("Tessera")
+            pause(2)
+        }
+        snapshot("home-5-search", tree: true)
 
-        let result = springboard.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Tessera")).firstMatch
-        XCTAssertTrue(result.waitForExistence(timeout: 5), "Tessera is not listed in the widget gallery")
-        result.tap()
-        Thread.sleep(forTimeInterval: 2)
-        snapshot("home-6-tessera-widgets")
+        let listed = tap(["Tessera"], types: [.cell, .button, .staticText, .other], timeout: 5)
+        XCTAssertTrue(listed, "Tessera is not listed in the widget gallery")
+        pause(2.5)
+        snapshot("home-6-tessera-widgets", tree: true)
 
-        let addThis = button(["Add Widget", "Ajouter le widget", "Ajouter un widget"], in: springboard)
-        XCTAssertNotNil(addThis, "The button to add the Tessera widget was not found")
-        addThis?.tap()
-        Thread.sleep(forTimeInterval: 2)
+        let added = tap(["Add Widget", "Ajouter le widget", "Ajouter un widget"], types: [.button])
+        XCTAssertTrue(added, "The button that adds the Tessera widget was not found")
+        pause(2.5)
         snapshot("home-7-added")
 
-        if let done = button(["Done", "OK", "Terminé"], in: springboard) {
-            done.tap()
-        } else {
+        if !tap(["Done", "OK", "Terminé"], timeout: 2) {
             XCUIDevice.shared.press(.home)
         }
-        Thread.sleep(forTimeInterval: 3)
-        snapshot("home-8-result")
+        pause(4)
+        snapshot("home-8-result", tree: true)
     }
 
     // MARK: Lock Screen
@@ -107,64 +154,51 @@ final class WidgetPlacementUITests: XCTestCase {
             throw XCTSkip("This simulator cannot lock the screen from a test")
         }
         _ = XCUIDevice.shared.perform(lock)
-        Thread.sleep(forTimeInterval: 2)
+        pause(2)
         XCUIDevice.shared.press(.home)
-        Thread.sleep(forTimeInterval: 2)
+        pause(2)
         snapshot("lock-1-lock-screen")
 
         springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).press(forDuration: 1.8)
-        Thread.sleep(forTimeInterval: 2)
-        snapshot("lock-2-long-press")
+        pause(2)
+        snapshot("lock-2-wallpapers", tree: true)
 
-        if let customize = button(["Customize", "Personnaliser"], in: springboard, timeout: 5) {
-            customize.tap()
-            Thread.sleep(forTimeInterval: 2)
-        }
-        snapshot("lock-3-customize")
+        tap(["Customize", "Personnaliser"], timeout: 4, fallback: CGVector(dx: 0.5, dy: 0.93))
+        pause(2.5)
+        snapshot("lock-3-choose-screen", tree: true)
 
-        if let lockScreen = button(["Lock Screen", "Écran verrouillé"], in: springboard, timeout: 3) {
-            lockScreen.tap()
-            Thread.sleep(forTimeInterval: 2)
-        }
-        snapshot("lock-4-editor")
+        // Since iOS 17 the system asks which screen to customize: the Lock Screen is on the left.
+        tap(["Lock Screen", "Écran verrouillé", "Écran de verrouillage"], types: [.button, .cell, .other, .staticText], timeout: 3, fallback: CGVector(dx: 0.28, dy: 0.5))
+        pause(2.5)
+        snapshot("lock-4-editor", tree: true)
 
-        if let addWidgets = button(["Add Widgets", "Ajouter des widgets", "Add Widget"], in: springboard, timeout: 4) {
-            addWidgets.tap()
-        } else {
-            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.42)).tap()
-        }
-        Thread.sleep(forTimeInterval: 2)
-        snapshot("lock-5-widget-sheet")
+        tap(["Add Widgets", "Ajouter des widgets", "Add Widget", "Ajouter un widget"], types: [.button, .other], timeout: 3, fallback: CGVector(dx: 0.5, dy: 0.32))
+        pause(2.5)
+        snapshot("lock-5-widget-sheet", tree: true)
 
-        let tessera = springboard.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "Tessera")).firstMatch
-        let tesseraText = springboard.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Tessera")).firstMatch
-        if !tessera.exists && !tesseraText.exists {
-            springboard.swipeUp()
-            Thread.sleep(forTimeInterval: 1)
+        var offered = tap(["Tessera"], types: [.cell, .button, .staticText, .other], timeout: 3)
+        if !offered {
+            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.85))
+                .press(forDuration: 0.1, thenDragTo: springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45)))
+            pause(1.5)
+            offered = tap(["Tessera"], types: [.cell, .button, .staticText, .other], timeout: 3)
         }
-        let found = tessera.exists ? tessera : tesseraText
-        XCTAssertTrue(found.waitForExistence(timeout: 4), "Tessera is not offered for the Lock Screen")
-        found.tap()
-        Thread.sleep(forTimeInterval: 2)
-        snapshot("lock-6-tessera-widgets")
+        XCTAssertTrue(offered, "Tessera is not offered for the Lock Screen")
+        pause(2.5)
+        snapshot("lock-6-tessera-widgets", tree: true)
 
-        let firstWidget = springboard.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "Progression")).firstMatch
-        if firstWidget.exists {
-            firstWidget.tap()
-        } else {
-            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.7)).tap()
-        }
-        Thread.sleep(forTimeInterval: 2)
-        snapshot("lock-7-added")
+        let names = ["Progression", "Compte à rebours", "Météo", "Tâches", "Focus", "Hydratation", "À venir", "Crypto"]
+        tap(names, types: [.button, .cell, .other], timeout: 3, fallback: CGVector(dx: 0.3, dy: 0.72))
+        pause(2.5)
+        snapshot("lock-7-added", tree: true)
 
-        if let done = button(["Done", "OK", "Terminé"], in: springboard, timeout: 3) {
-            done.tap()
-            Thread.sleep(forTimeInterval: 2)
+        if !tap(["Close", "Fermer"], timeout: 2) {
+            springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45))
+                .press(forDuration: 0.1, thenDragTo: springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.95)))
         }
-        if let done = button(["Done", "OK", "Terminé"], in: springboard, timeout: 2) {
-            done.tap()
-            Thread.sleep(forTimeInterval: 2)
-        }
-        snapshot("lock-8-result")
+        pause(1.5)
+        tap(["Done", "OK", "Terminé"], timeout: 3)
+        pause(2.5)
+        snapshot("lock-8-result", tree: true)
     }
 }

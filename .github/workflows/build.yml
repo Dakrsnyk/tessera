@@ -20,6 +20,8 @@ jobs:
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') }}
+      # [place] only builds for the simulator and runs the widget placement tests (cheapest check).
+      PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,7 +33,7 @@ jobs:
         run: xcodebuild -version
 
       - name: Boot a simulator early
-        if: env.QA == 'true'
+        if: env.QA == 'true' || env.PLACE == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
@@ -55,7 +57,7 @@ jobs:
 
       - name: Build for iPhone (unsigned)
         id: device
-        if: steps.sim.outcome == 'success'
+        if: steps.sim.outcome == 'success' && env.PLACE != 'true'
         run: |
           set -o pipefail
           xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
@@ -77,15 +79,17 @@ jobs:
 
       - name: Tests (logic and widget placement)
         id: tests
-        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.QA == 'true'
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && (env.QA == 'true' || env.PLACE == 'true')
         continue-on-error: true
         timeout-minutes: 20
         run: |
           set -o pipefail
           xcrun simctl bootstatus "$DEVICE" -b
+          ONLY=""
+          if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
-            CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
+            $ONLY CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
           mkdir -p testexport testshots
           xcrun xcresulttool export attachments --path TestResults.xcresult --output-path testexport || true
           python3 - <<'PY'
@@ -95,6 +99,9 @@ jobs:
               for test in json.load(open(manifest)):
                   for item in test.get("attachments", []):
                       name = item.get("suggestedHumanReadableName") or item["exportedFileName"]
+                      # Skip the automatic recordings and event images: large and not useful here.
+                      if item["exportedFileName"].endswith(".mp4") or name.startswith(("Screen Recording", "Synthesized Event", "UI Snapshot")):
+                          continue
                       name = name.split("_0_")[0].replace(" ", "-")
                       ext = os.path.splitext(item["exportedFileName"])[1] or ".png"
                       shutil.copy(os.path.join("testexport", item["exportedFileName"]), os.path.join("testshots", name + ext))
