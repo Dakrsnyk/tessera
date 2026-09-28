@@ -12,6 +12,7 @@ struct TesseraWidgetsBundle: WidgetBundle {
     }
 
     var body: some Widget {
+        DiagnosticWidget()
         TimeWidgets().body
         CalendarWidgets().body
         ProductivityWidgets().body
