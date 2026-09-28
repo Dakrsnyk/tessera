@@ -4,7 +4,7 @@ import WidgetKit
 
 /// App Store screenshots drawn by the app itself, so they show the real screens and widgets.
 /// Each scene is laid out on a 440 × 956 pt canvas: a 6.9" iPhone captures it at 1320 × 2868 px.
-/// Mode: `-screenshotScreen marketing-<01…10>`.
+/// Mode: `-screenshotScreen marketing-<01…10>` (the CI renders them with `[marketing]` in a commit message).
 struct MarketingView: View {
     let scene: String
 
