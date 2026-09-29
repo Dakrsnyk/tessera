@@ -120,6 +120,10 @@ struct MyInfoSection: View {
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 12) {
+                        // Interests skipped: the invitation stays first, next to what was entered in the spaces.
+                        if model.profile.interests.isEmpty {
+                            promptCard
+                        }
                         ForEach(topics) { topic in
                             Button {
                                 editing = topic
@@ -164,6 +168,31 @@ struct MyInfoSection: View {
             .buttonBorderShape(.roundedRectangle(radius: 12))
         }
         .card()
+    }
+
+    private var promptCard: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label("Personnalise Tessera", systemImage: "sparkles")
+                .font(.headline)
+            Text("Dis ce qui t'intéresse : tes widgets reprendront tes objectifs, sans que tu aies à les répéter.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 0)
+            Button {
+                editsInterests = true
+            } label: {
+                Text("Choisir mes centres d'intérêt")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.onAccent)
+                    .frame(maxWidth: .infinity, minHeight: 40)
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.roundedRectangle(radius: 12))
+        }
+        .padding(14)
+        .frame(width: 250, height: InfoCard.height, alignment: .topLeading)
+        .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 
     private var addCard: some View {

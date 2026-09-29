@@ -30,6 +30,10 @@ enum ScreenshotMode {
             $0.hasCompletedProfileSetup = true
         }
         // The first launch starts with nothing about the user (a topic page, with the interest that leads to it).
+        // Every other capture shows « Mes informations » filled in, whatever an earlier capture left.
+        if !screen.hasPrefix("onboarding"), model.profile.interests.isEmpty {
+            model.update(\.profile) { $0 = .sample }
+        }
         if screen.hasPrefix("onboarding") {
             let topic = ProfileTopic(rawValue: String(screen.dropFirst("onboarding-".count)))
             model.update(\.profile) { profile in

@@ -106,7 +106,11 @@ final class ProfileUITests: XCTestCase {
         tapButton("onboarding-skip")
         // No interest chosen: the interests step ends the first launch.
         tapButton("onboarding-skip")
-        XCTAssertTrue(app.buttons["Choisir mes centres d'intérêt"].waitForExistence(timeout: 10), "L'accueil doit inviter à compléter, sans valeurs inventées")
+        XCTAssertTrue(app.buttons["Choisir mes centres d'intérêt"].waitForExistence(timeout: 10), "L'accueil doit inviter à compléter")
+        // No target and no money value given: no card makes one up (the age of « Ma vie » may show under Sport).
+        for topic in ["nutrition", "money"] {
+            XCTAssertFalse(app.buttons["info-\(topic)"].exists, "Carte \(topic) sans aucune information donnée")
+        }
         snapshot("home-skipped")
     }
 

@@ -150,7 +150,7 @@ jobs:
         id: shots
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.QA == 'true'
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 22
         run: |
           APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
           xcrun simctl bootstatus "$DEVICE" -b
