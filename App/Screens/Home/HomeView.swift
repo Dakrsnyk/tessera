@@ -1,20 +1,21 @@
 import SwiftUI
 import WidgetKit
 
+/// Home: the greeting, the person's widgets as they sit on a Home Screen, the categories to create
+/// from, and a taste of the Store.
 struct HomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    @State private var storeShelf: StoreShelf = .new
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
                     header
-                    TodayPanel()
-                    spacesStrip
                     myWidgets
-                    featured
-                    categories
+                    createStrip
+                    storeSample
                     if !model.isPremium {
                         PremiumBanner { router.isPaywallPresented = true }
                     }
@@ -34,12 +35,6 @@ struct HomeView: View {
                         Image(systemName: "magnifyingglass")
                     }
                     .accessibilityLabel(Text("Rechercher un widget"))
-                    Button {
-                        router.openExplore()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                    .accessibilityLabel(Text("Créer un widget"))
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -77,36 +72,12 @@ struct HomeView: View {
         }
     }
 
-    private var spacesStrip: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Créer", actionTitle: "Tout voir") { router.tab = .spaces }
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(Space.allCases) { space in
-                        Button {
-                            router.openSpace(space)
-                        } label: {
-                            VStack(spacing: 6) {
-                                Image(systemName: space.symbol)
-                                    .font(.system(size: 18, weight: .semibold))
-                                    .foregroundStyle(.white)
-                                    .frame(width: 48, height: 48)
-                                    .background(Color(hex: space.colorHex), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-                                Text(space.title)
-                                    .font(.caption2.weight(.medium))
-                                    .foregroundStyle(.primary)
-                                    .lineLimit(1)
-                            }
-                            .frame(width: 68)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 20)
-            }
-            .padding(.horizontal, -20)
-        }
-    }
+    // MARK: Mes widgets
+
+    private static let wallpaper = LinearGradient(
+        colors: [Color(hex: "22324F"), Color(hex: "4A3F5E"), Color(hex: "92596A")],
+        startPoint: .topLeading, endPoint: .bottomTrailing
+    )
 
     @ViewBuilder private var myWidgets: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -117,13 +88,13 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Crée ton premier widget")
                         .font(.headline)
-                    Text("Choisis un modèle, personnalise-le, puis ajoute-le à ton écran d'accueil.")
+                    Text("Choisis une catégorie, personnalise ton widget, puis ajoute-le à ton écran d'accueil.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     Button {
-                        router.openExplore()
+                        router.tab = .spaces
                     } label: {
-                        Label("Parcourir les widgets", systemImage: "square.grid.2x2")
+                        Label("Créer un widget", systemImage: "plus.square.on.square")
                             .frame(maxWidth: .infinity, minHeight: 44)
                             .foregroundStyle(.onAccent)
                     }
@@ -132,30 +103,159 @@ struct HomeView: View {
                 }
                 .card()
             } else {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 14) {
-                        ForEach(model.recentDesigns.prefix(8)) { design in
-                            Button {
-                                router.openEditor(design, isNew: false)
-                            } label: {
-                                DesignCard(design: design, payload: model.payload(for: design), width: 150, isPremiumUser: model.isPremium)
+                VStack(spacing: 14) {
+                    ForEach(Array(homeRows.enumerated()), id: \.offset) { pair in
+                        HStack(spacing: 14) {
+                            ForEach(pair.element) { design in
+                                Button {
+                                    router.openEditor(design, isNew: false)
+                                } label: {
+                                    WidgetPreview(design: design, family: design.displayFormat.family, payload: model.payload(for: design))
+                                }
+                                .buttonStyle(.plain)
+                                .frame(maxWidth: .infinity)
                             }
-                            .buttonStyle(.plain)
+                            // A small widget alone on its row keeps its size, like on the Home Screen.
+                            if pair.element.count == 1, pair.element[0].displayFormat == .small {
+                                Color.clear.frame(maxWidth: .infinity, maxHeight: 1)
+                            }
                         }
                     }
-                    .padding(.horizontal, 20)
                 }
-                .padding(.horizontal, -20)
+                .padding(14)
+                .background(Self.wallpaper, in: RoundedRectangle(cornerRadius: 28, style: .continuous))
+                Text("Tes widgets comme sur ton écran d'accueil · touche-en un pour le modifier")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
             }
         }
     }
 
-    private var featured: some View {
+    /// The latest widgets laid out like a Home Screen: two small ones side by side, a medium one across,
+    /// a large one over two rows; three rows at most.
+    private var homeRows: [[WidgetDesign]] {
+        var rows: [[WidgetDesign]] = []
+        var used = 0
+        var waitingSmall: Int?
+        for design in model.recentDesigns {
+            switch design.displayFormat {
+            case .small:
+                if let index = waitingSmall {
+                    rows[index].append(design)
+                    waitingSmall = nil
+                } else if used < 3 {
+                    rows.append([design])
+                    waitingSmall = rows.count - 1
+                    used += 1
+                }
+            case .medium:
+                if used < 3 {
+                    rows.append([design])
+                    used += 1
+                }
+            case .large:
+                if used + 2 <= 3 {
+                    rows.append([design])
+                    used += 2
+                }
+            }
+            if used >= 3 && waitingSmall == nil { break }
+        }
+        return rows
+    }
+
+    // MARK: Créer
+
+    /// Every category, on two rows that scroll together.
+    private static let createRows: [[Space]] = [
+        [.nutrition, .fitness, .budget, .travel, .productivity, .business],
+        [.habits, .student, .investing, .car, .markets, .life],
+    ]
+
+    private var createStrip: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Sélection", actionTitle: "Explorer") { router.openExplore() }
+            SectionHeader(title: "Créer", actionTitle: "Tout voir") { router.tab = .spaces }
+            ScrollView(.horizontal, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 10) {
+                    ForEach(Self.createRows, id: \.self) { row in
+                        HStack(spacing: 10) {
+                            ForEach(row) { space in
+                                CreatePill(space: space) {
+                                    // Opens that category's widget creator in the Créer tab.
+                                    router.requestedCreator = space
+                                    router.tab = .spaces
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+            .padding(.horizontal, -20)
+        }
+    }
+
+    // MARK: Store
+
+    private enum StoreShelf: String, CaseIterable, Identifiable {
+        case new = "Nouveautés"
+        case popular = "Populaires"
+        case free = "Gratuits"
+        var id: String { rawValue }
+    }
+
+    /// A few Store widgets of the chosen shelf, one per kind.
+    private var shelfTemplates: [WidgetTemplate] {
+        let source: [WidgetTemplate]
+        switch storeShelf {
+        case .new: source = TemplateCatalog.all.filter { $0.kind.isNew }
+        case .popular: source = TemplateCatalog.featured
+        case .free: source = TemplateCatalog.all.filter { !$0.isPremium }
+        }
+        var seen = Set<WidgetKind>()
+        let picked = source.filter { seen.insert($0.kind).inserted }
+        return Array((picked.isEmpty ? TemplateCatalog.featured : picked).prefix(10))
+    }
+
+    private var storeSample: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Button {
+                router.openExplore()
+            } label: {
+                HStack(spacing: 4) {
+                    Text("Store")
+                        .font(.title3.weight(.semibold))
+                    Image(systemName: "chevron.right")
+                        .font(.subheadline.weight(.bold))
+                }
+                .foregroundStyle(Color.primary)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityAddTraits(.isHeader)
+            .accessibilityHint(Text("Ouvre le Store"))
+            HStack(spacing: 8) {
+                ForEach(StoreShelf.allCases) { shelf in
+                    let isOn = storeShelf == shelf
+                    Button {
+                        withAnimation(.snappy) { storeShelf = shelf }
+                    } label: {
+                        Text(shelf.rawValue)
+                            .font(.subheadline.weight(.semibold))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .foregroundStyle(isOn ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(Color.primary))
+                            .background(isOn ? AnyShapeStyle(Color.primary) : AnyShapeStyle(AppFill.cardFill), in: Capsule())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityAddTraits(isOn ? .isSelected : [])
+                }
+            }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 14) {
-                    ForEach(TemplateCatalog.featured) { template in
+                    ForEach(shelfTemplates) { template in
                         Button {
                             router.openEditor(template.makeDesign(), isNew: true)
                         } label: {
@@ -167,178 +267,37 @@ struct HomeView: View {
                 .padding(.horizontal, 20)
             }
             .padding(.horizontal, -20)
-        }
-    }
-
-    private var categories: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Catégories")
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
-                ForEach(WidgetCategory.allCases) { category in
-                    Button {
-                        router.openExplore(category: category)
-                    } label: {
-                        HStack(spacing: 12) {
-                            Image(systemName: category.symbol)
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundStyle(Color.accentColor)
-                                .frame(width: 26)
-                            VStack(alignment: .leading, spacing: 1) {
-                                Text(category.title)
-                                    .font(.subheadline.weight(.semibold))
-                                    .foregroundStyle(.primary)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.75)
-                                Text(Fmt.plural(WidgetKind.kinds(in: category).count, "widget", "widgets"))
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer(minLength: 0)
-                        }
-                        .card(padding: 14)
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
+            .id(storeShelf)
+            .transition(.opacity)
         }
     }
 }
 
-// MARK: - Today
-
-/// Daily check-in: tasks, habits and water, without leaving the home screen.
-struct TodayPanel: View {
-    @Environment(AppModel.self) private var model
-    @Environment(Router.self) private var router
+/// A category to create from: its colour and symbol, and its name.
+private struct CreatePill: View {
+    let space: Space
+    let action: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Aujourd'hui")
-            VStack(spacing: 0) {
-                tasksRow
-                Divider().padding(.leading, 56)
-                habitsRow
-                Divider().padding(.leading, 56)
-                waterRow
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Image(systemName: space.symbol)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 30, height: 30)
+                    .background(Color(hex: space.colorHex), in: Circle())
+                Text(space.title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.primary)
+                    .lineLimit(1)
             }
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-        }
-    }
-
-    private var tasksRow: some View {
-        let tasks = model.content.tasks
-        let done = tasks.filter(\.isDone).count
-        return Button {
-            router.content = .tasks
-        } label: {
-            TodayRow(symbol: "checklist", title: "Tâches", detail: tasks.isEmpty ? "Ajoute ta première tâche" : "\(done) sur \(tasks.count) terminées") {
-                if !tasks.isEmpty {
-                    RingView(progress: Double(done) / Double(max(1, tasks.count)), lineWidth: 4, color: .accentColor, track: Color.secondary.opacity(0.2))
-                        .frame(width: 28, height: 28)
-                }
-            }
+            .padding(.leading, 6)
+            .padding(.trailing, 14)
+            .padding(.vertical, 6)
+            .background(.cardFill, in: Capsule())
         }
         .buttonStyle(.plain)
-    }
-
-    private var habitsRow: some View {
-        let habits = model.content.habits
-        return HStack(spacing: 0) {
-            Button {
-                router.content = .habits
-            } label: {
-                TodayRow(symbol: "repeat", title: "Habitudes", detail: habits.isEmpty ? "Crée ta première habitude" : "\(habits.filter { $0.isDone(on: Date()) }.count) sur \(habits.count) aujourd'hui") {
-                    EmptyView()
-                }
-            }
-            .buttonStyle(.plain)
-            if !habits.isEmpty {
-                HStack(spacing: 6) {
-                    ForEach(habits.prefix(4)) { habit in
-                        let done = habit.isDone(on: Date())
-                        Button {
-                            Haptics.tap()
-                            model.updateContent { $0.toggleHabit(habit.id) }
-                        } label: {
-                            Image(systemName: habit.symbol)
-                                .font(.system(size: 13, weight: .semibold))
-                                .foregroundStyle(done ? .white : Color(hex: habit.colorHex))
-                                .frame(width: 32, height: 32)
-                                .background {
-                                    Circle().fill(done ? Color(hex: habit.colorHex) : Color(hex: habit.colorHex).opacity(0.14))
-                                }
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(Text("\(habit.name), \(done ? "fait" : "à faire")"))
-                    }
-                }
-                .padding(.trailing, 14)
-            }
-        }
-    }
-
-    private var waterRow: some View {
-        let state = model.content.hydration
-        let count = state.glasses(on: Date())
-        return HStack(spacing: 0) {
-            Button {
-                router.content = .hydration
-            } label: {
-                TodayRow(symbol: "drop.fill", title: "Eau", detail: "\(count) sur \(state.goal) verres") { EmptyView() }
-            }
-            .buttonStyle(.plain)
-            HStack(spacing: 6) {
-                Button {
-                    model.updateContent { $0.hydration.add(-1, on: Date()) }
-                } label: {
-                    Image(systemName: "minus")
-                        .font(.system(size: 13, weight: .bold))
-                        .frame(width: 32, height: 32)
-                        .background(Color.secondary.opacity(0.14), in: Circle())
-                }
-                .buttonStyle(.plain)
-                .disabled(count == 0)
-                .accessibilityLabel(Text("Retirer un verre"))
-                Button {
-                    Haptics.tap()
-                    model.updateContent { $0.hydration.add(1, on: Date()) }
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(.onAccent)
-                        .frame(width: 32, height: 32)
-                        .background(Color.accentColor, in: Circle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(Text("Ajouter un verre"))
-            }
-            .padding(.trailing, 14)
-        }
-    }
-}
-
-private struct TodayRow<Trailing: View>: View {
-    let symbol: String
-    let title: String
-    let detail: String
-    @ViewBuilder let trailing: () -> Trailing
-
-    var body: some View {
-        HStack(spacing: 14) {
-            Image(systemName: symbol)
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(Color.accentColor)
-                .frame(width: 28, height: 28)
-            VStack(alignment: .leading, spacing: 1) {
-                Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
-                Text(detail).font(.caption).foregroundStyle(.secondary).lineLimit(1)
-            }
-            Spacer(minLength: 8)
-            trailing()
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
-        .contentShape(Rectangle())
+        .accessibilityLabel(Text("Créer un widget \(space.title)"))
     }
 }
 

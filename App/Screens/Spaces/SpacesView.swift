@@ -45,6 +45,13 @@ struct SpacesView: View {
                     creating = space
                 }
             }
+            // A category tapped on the Home tab while this tab was already loaded.
+            .onChange(of: router.requestedCreator) { _, space in
+                if let space {
+                    router.requestedCreator = nil
+                    creating = space
+                }
+            }
         }
     }
 
