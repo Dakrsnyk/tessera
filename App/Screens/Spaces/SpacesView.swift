@@ -219,6 +219,34 @@ struct SpaceExample {
 }
 
 enum SpaceCatalog {
+    /// What the space creator selects first for each size: the key widget in small, two widgets that
+    /// complete each other in medium, a dashboard of the space in large (one of them takes a whole row).
+    static func preset(for space: Space, format: WidgetFormat) -> [WidgetKind] {
+        let pair: (medium: [WidgetKind], large: [WidgetKind])
+        switch space {
+        case .productivity: pair = ([.priorities, .deadline], [.priorities, .deadline, .tasks])
+        case .habits: pair = ([.habitStreak, .hydration], [.habitStreak, .hydration, .habits])
+        case .nutrition: pair = ([.caloriesLeft, .macros], [.caloriesLeft, .macros, .mealsToday])
+        case .fitness: pair = ([.nextSet, .trainingStreak], [.nextSet, .trainingStreak, .todaysWorkout])
+        case .budget: pair = ([.budgetLeft, .savingsGoal], [.budgetLeft, .savingsGoal, .spendingByCategory])
+        case .investing: pair = ([.portfolio, .allocation], [.allocation, .topMover, .portfolio])
+        case .business: pair = ([.revenueToday, .revenueGoal], [.revenueToday, .revenueGoal, .revenueTrend])
+        case .markets: pair = ([.companySnapshot, .companyStock], [.companySnapshot, .companyStock, .companyRevenue])
+        case .student: pair = ([.nextClass, .nextExam], [.nextClass, .nextExam, .timetable])
+        case .travel: pair = ([.tripCountdown, .localTime], [.tripCountdown, .localTime, .flight])
+        case .car: pair = ([.nextService, .mileage], [.nextService, .mileage, .carCost])
+        case .life: pair = ([.birthday, .holiday], [.birthday, .holiday, .ageProgress])
+        }
+        let available = kinds(in: space)
+        switch format {
+        case .small:
+            let small = available.filter { $0.families.contains(.systemSmall) }
+            return [small.first(where: { !$0.isPremium }) ?? small.first ?? available.first ?? .note]
+        case .medium: return pair.medium.filter { available.contains($0) }
+        case .large: return pair.large.filter { available.contains($0) }
+        }
+    }
+
     /// A few widgets of a space, small and medium, shown in the list of spaces.
     static func examples(for space: Space) -> [SpaceExample] {
         let picks: [(WidgetKind, WidgetFamily)]

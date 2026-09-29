@@ -231,13 +231,17 @@ struct TemplateCard: View {
 struct DesignCard: View {
     let design: WidgetDesign
     let payload: WidgetPayload
+    /// The width of a small widget: a medium or large one is shown at its own size, at the same height.
     var width: CGFloat?
     let isPremiumUser: Bool
+
+    private var family: WidgetFamily { design.displayFormat.family }
+    private var cardWidth: CGFloat? { width.map { $0 * family.aspectRatio } }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ZStack(alignment: .topTrailing) {
-                WidgetPreview(design: design, family: .systemSmall, payload: payload, width: width)
+                WidgetPreview(design: design, family: family, payload: payload, width: cardWidth)
                 if design.isFavorite {
                     Image(systemName: "heart.fill")
                         .font(.caption)
@@ -252,9 +256,10 @@ struct DesignCard: View {
                     Text(design.name)
                         .font(.subheadline.weight(.semibold))
                         .lineLimit(1)
-                    Text(design.kind.title)
+                    Text("\(design.kindTitle) · \(design.displayFormat.title)")
                         .font(.caption)
                         .foregroundStyle(.secondary)
+                        .lineLimit(1)
                 }
                 Spacer(minLength: 0)
                 if design.usesPremiumFeatures && !isPremiumUser {
@@ -262,7 +267,7 @@ struct DesignCard: View {
                 }
             }
         }
-        .frame(width: width)
+        .frame(width: cardWidth)
         .contentShape(Rectangle())
     }
 }

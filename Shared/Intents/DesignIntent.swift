@@ -18,7 +18,7 @@ struct DesignEntity: AppEntity {
     init(design: WidgetDesign) {
         id = design.id.uuidString
         name = design.name
-        kindTitle = design.kind.title
+        kindTitle = design.kindTitle
     }
 
     /// A catalog widget with its default look, usable without creating a design first.

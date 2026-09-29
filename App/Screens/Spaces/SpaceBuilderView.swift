@@ -3,32 +3,34 @@ import WidgetKit
 
 /// Creating widgets from a space: pick one or several of its widgets, give them a style and a color,
 /// save. They join « Mes widgets » (with a short flight to the tab). The space's data stays one tap away.
+/// Creating widgets from a space: pick a size, one or several of its widgets, a style and a color, save.
+/// Small shows one piece of information; medium shows a widget's medium layout or two widgets side by side;
+/// large shows a widget's large layout or up to four widgets, like a dashboard of the space.
+/// They join « Mes widgets » (with a short flight to the tab). The space's data stays one tap away.
 struct SpaceBuilderView: View {
     let space: Space
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
 
+    @State private var format: WidgetFormat = .small
     /// Selected widgets, in the order they were picked.
     @State private var selection: [WidgetKind]
     @State private var themeID: ThemeID
     @State private var accentHex: String
     /// The widget being edited when only one is selected (name and options).
     @State private var single: WidgetDesign
-    @State private var family: WidgetFamily
     @State private var showsPaywall = false
     @State private var previewFrame: CGRect = .zero
 
     init(space: Space) {
         self.space = space
-        let kinds = SpaceCatalog.kinds(in: space)
-        let first = kinds.first(where: { !$0.isPremium }) ?? kinds.first ?? .note
+        let first = SpaceCatalog.preset(for: space, format: .small).first ?? .note
         let base = Self.design(for: first)
         _selection = State(initialValue: [first])
         _themeID = State(initialValue: base.themeID)
         _accentHex = State(initialValue: base.accentHex)
         _single = State(initialValue: base)
-        _family = State(initialValue: first.homeFamilies.first ?? .systemSmall)
     }
 
     private var kinds: [WidgetKind] { SpaceCatalog.kinds(in: space) }
@@ -50,11 +52,52 @@ struct SpaceBuilderView: View {
         return design
     }
 
-    /// What « Enregistrer » saves: one widget per selected kind.
-    private var designs: [WidgetDesign] { selection.map(styled) }
+    private var plan: Composer.Plan {
+        format == .small ? .invalid("") : Composer.plan(selection, format: format)
+    }
+
+    /// The medium or large widget built from the selection, or nil while the selection doesn't fit.
+    private var composed: WidgetDesign? {
+        switch plan {
+        case let .single(kind):
+            var design = styled(kind)
+            design.format = format
+            return design
+        case let .combo(slots):
+            var options = DesignOptions()
+            options.parts = slots.map { slot in
+                ComboPart(kind: slot.kind, options: Self.design(for: slot.kind).options, name: slot.kind.title, size: slot.size)
+            }
+            return WidgetDesign(
+                name: slots.map(\.kind.title).joined(separator: " + "),
+                kind: slots[0].kind, themeID: themeID, accentHex: accentHex,
+                options: options, format: format
+            )
+        case .invalid:
+            return nil
+        }
+    }
+
+    /// What « Enregistrer » saves: one small widget per selected kind, or the one medium or large widget.
+    private var designs: [WidgetDesign] {
+        if format == .small {
+            return selection.map { kind in
+                var design = styled(kind)
+                design.format = .small
+                return design
+            }
+        }
+        return composed.map { [$0] } ?? []
+    }
 
     private var needsPremium: Bool { !model.isPremium && designs.contains(where: \.usesPremiumFeatures) }
-    private var exceedsFreeLimit: Bool { !model.isPremium && model.designs.count + selection.count > AppModel.freeDesignLimit }
+    private var exceedsFreeLimit: Bool { !model.isPremium && model.designs.count + designs.count > AppModel.freeDesignLimit }
+    /// The name and the options of a widget are edited when one widget is shown on its own.
+    private var editsSingle: Bool {
+        if format == .small { return selection.count == 1 }
+        if case .single = plan { return true }
+        return false
+    }
 
     private func payload(_ design: WidgetDesign) -> WidgetPayload {
         usesOwnData ? model.payload(for: design) : SamplePayload.make(for: design)
@@ -65,14 +108,15 @@ struct SpaceBuilderView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
                     header
+                    formatPicker
                     preview
                         .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
                     if needsPremium { premiumNotice }
                     widgetsSection
-                    if selection.count == 1 { nameSection }
+                    if editsSingle { nameSection }
                     styleSection
                     colorSection
-                    if selection.count == 1 { KindOptionsSection(design: $single) }
+                    if editsSingle { KindOptionsSection(design: $single) }
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 24)
@@ -105,8 +149,11 @@ struct SpaceBuilderView: View {
             }
             #if DEBUG
             .onAppear {
-                // Test captures: several widgets selected.
-                if UserDefaults.standard.bool(forKey: "screenshotCreatorMulti") {
+                // Test captures: several widgets selected, or a size chosen.
+                let defaults = UserDefaults.standard
+                if let raw = defaults.string(forKey: "screenshotCreatorFormat"), let size = WidgetFormat(rawValue: raw) {
+                    setFormat(size)
+                } else if defaults.bool(forKey: "screenshotCreatorMulti") {
                     selection = Array(kinds.prefix(3))
                 }
             }
@@ -126,7 +173,7 @@ struct SpaceBuilderView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text("Crée ton widget")
                     .font(.title3.weight(.semibold))
-                Text("Choisis un ou plusieurs widgets, puis leur style.")
+                Text("Choisis une taille, tes widgets, puis leur style.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -134,30 +181,86 @@ struct SpaceBuilderView: View {
         .padding(.top, 8)
     }
 
+    private var formatPicker: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Picker("Taille", selection: Binding(get: { format }, set: { setFormat($0) })) {
+                ForEach(WidgetFormat.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            Text(formatHint)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var formatHint: String {
+        switch format {
+        case .small: "L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets."
+        case .medium: "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte."
+        case .large: "Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis."
+        }
+    }
+
+    /// The widget as it will look on the Home Screen, at its real proportions.
     @ViewBuilder private var preview: some View {
-        if selection.count == 1, let design = designs.first {
-            PreviewStage(design: design, family: $family, payload: payload(design))
-        } else {
-            ZStack {
-                LinearGradient(
-                    colors: [Color(light: "DCE3EA", dark: "1B1F26"), Color(light: "C9D3DD", dark: "11141A")],
-                    startPoint: .topLeading, endPoint: .bottomTrailing
-                )
+        ZStack {
+            LinearGradient(
+                colors: [Color(light: "DCE3EA", dark: "1B1F26"), Color(light: "C9D3DD", dark: "11141A")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+            previewContent
+                .padding(20)
+                .animation(.spring(response: 0.35, dampingFraction: 0.85), value: selection)
+                .animation(.spring(response: 0.35, dampingFraction: 0.85), value: format)
+        }
+        .frame(maxWidth: .infinity)
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .padding(.top, 4)
+    }
+
+    @ViewBuilder private var previewContent: some View {
+        if format == .small {
+            if selection.count == 1, let design = designs.first {
+                WidgetPreview(design: design, family: .systemSmall, payload: payload(design), width: 170)
+            } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(selection) { kind in
                             let design = styled(kind)
-                            let family: WidgetFamily = kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium
-                            WidgetPreview(design: design, family: family, payload: payload(design), width: 128 * family.aspectRatio)
+                            WidgetPreview(design: design, family: .systemSmall, payload: payload(design), width: 128)
                                 .transition(.scale(scale: 0.8).combined(with: .opacity))
                         }
                     }
-                    .padding(20)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-            .padding(.top, 8)
+        } else if let design = composed {
+            VStack(spacing: 10) {
+                WidgetPreview(design: design, family: format.family, payload: payload(design))
+                    .frame(maxWidth: 364)
+                    .transition(.scale(scale: 0.92).combined(with: .opacity))
+                if design.isCombo {
+                    Text("Réunit : \(design.options.parts.map(\.name).joined(separator: " · "))")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+            }
+        } else {
+            // Empty frame at the real size, with what to pick.
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .strokeBorder(Color.secondary.opacity(0.45), style: StrokeStyle(lineWidth: 1.5, dash: [6, 5]))
+                .aspectRatio(format.family.aspectRatio, contentMode: .fit)
+                .frame(maxWidth: 364)
+                .overlay {
+                    if case let .invalid(message) = plan {
+                        Text(message)
+                            .font(.footnote.weight(.medium))
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(18)
+                    }
+                }
         }
     }
 
@@ -185,7 +288,7 @@ struct SpaceBuilderView: View {
     }
 
     private var widgetsSection: some View {
-        EditorSection(title: "Widgets", detail: Fmt.plural(selection.count, "sélectionné", "sélectionnés")) {
+        EditorSection(title: "Widgets", detail: widgetsDetail) {
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], alignment: .leading, spacing: 14) {
                 ForEach(kinds) { kind in
                     kindCell(kind)
@@ -194,8 +297,24 @@ struct SpaceBuilderView: View {
         }
     }
 
+    /// Whether a widget can take part in a widget of this size (on its own, or combined).
+    private static func fits(_ kind: WidgetKind, _ format: WidgetFormat) -> Bool {
+        switch format {
+        case .small: kind.families.contains(.systemSmall)
+        case .medium: kind.families.contains(.systemSmall) || kind.families.contains(.systemMedium)
+        case .large: kind.homeFamilies.isEmpty == false
+        }
+    }
+
+    private var widgetsDetail: String {
+        let count = Fmt.plural(selection.count, "sélectionné", "sélectionnés")
+        return format == .small ? count : "\(count) · \(Composer.maxCount(for: format)) au plus"
+    }
+
     private func kindCell(_ kind: WidgetKind) -> some View {
         let isSelected = selection.contains(kind)
+        let order = (selection.firstIndex(of: kind) ?? 0) + 1
+        let isAvailable = Self.fits(kind, format)
         let design = styled(kind)
         let family: WidgetFamily = kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium
         return Button {
@@ -209,7 +328,8 @@ struct SpaceBuilderView: View {
                                 .strokeBorder(isSelected ? Color.accentColor : .clear, lineWidth: 3)
                         }
                         .scaleEffect(isSelected ? 0.96 : 1)
-                    Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    // Order matters for medium and large widgets: it is the order they are laid out in.
+                    Image(systemName: isSelected ? (format == .small ? "checkmark.circle.fill" : "\(order).circle.fill") : "circle")
                         .font(.system(size: 20, weight: .semibold))
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(Color.white), isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(Color.clear))
@@ -232,6 +352,8 @@ struct SpaceBuilderView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .disabled(!isAvailable)
+        .opacity(isAvailable ? 1 : 0.35)
         .animation(.spring(response: 0.3, dampingFraction: 0.75), value: isSelected)
         .accessibilityLabel(Text(kind.title))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
@@ -301,6 +423,7 @@ struct SpaceBuilderView: View {
             }
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.roundedRectangle(radius: 14))
+            .disabled(designs.isEmpty)
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
         }
@@ -309,6 +432,7 @@ struct SpaceBuilderView: View {
 
     private var saveTitle: String {
         if needsPremium { return "Débloquer et enregistrer" }
+        if format != .small { return "Enregistrer le widget \(format.title.lowercased())" }
         return selection.count == 1 ? "Enregistrer le widget" : "Enregistrer les \(selection.count) widgets"
     }
 
@@ -321,13 +445,29 @@ struct SpaceBuilderView: View {
                 guard selection.count > 1 else { return }
                 selection.remove(at: index)
             } else {
+                // Full: the oldest choice makes room for the new one.
+                if selection.count >= Composer.maxCount(for: format) { selection.removeFirst() }
                 selection.append(kind)
             }
-            // Back to one widget: edit that one (name, options, size).
-            if selection.count == 1, let only = selection.first, single.kind != only {
-                single = Self.design(for: only)
-                family = only.homeFamilies.first ?? .systemSmall
-            }
+            syncSingle()
+        }
+    }
+
+    private func setFormat(_ newFormat: WidgetFormat) {
+        guard newFormat != format else { return }
+        Haptics.tap()
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+            format = newFormat
+            let preset = SpaceCatalog.preset(for: space, format: newFormat)
+            if !preset.isEmpty { selection = preset }
+            syncSingle()
+        }
+    }
+
+    /// Back to one widget: edit that one (name and options).
+    private func syncSingle() {
+        if selection.count == 1, let only = selection.first, single.kind != only {
+            single = Self.design(for: only)
         }
     }
 
@@ -337,6 +477,7 @@ struct SpaceBuilderView: View {
             return
         }
         let saved = designs
+        guard !saved.isEmpty else { return }
         model.install(designs: saved)
         Haptics.success()
         router.saveFlight = SaveFlight(designs: saved, source: previewFrame)

@@ -57,6 +57,10 @@ enum ScreenshotMode {
                 router.tab = .spaces
                 router.requestedCreator = space
             }
+            if screen == "mywidgets-fusion" {
+                router.tab = .mine
+                router.startsFusion = true
+            }
             if screen == "mywidgets-select" {
                 router.tab = .mine
                 router.startsSelection = true
@@ -79,6 +83,15 @@ enum ScreenshotMode {
         for id in ["progress-year", "tasks-minimal", "weather-aurora", "habits-dark", "countdown-holidays", "money-net"] {
             model.save(TemplateCatalog.design(id))
         }
+        // Widgets made in a space at each size, and merged ones.
+        var mediumMeals = TemplateCatalog.template(for: .mealsToday)?.makeDesign() ?? WidgetDesign(kind: .mealsToday)
+        mediumMeals.format = .medium
+        model.save(mediumMeals)
+        if let merged = Fusion.merge([WidgetDesign(kind: .caloriesLeft, themeID: .aurora, format: .small), WidgetDesign(kind: .macros, format: .small)]) {
+            model.save(merged)
+        }
+        let dashboard = [WidgetKind.nextSet, .trainingStreak, .personalRecords, .caloriesBurned].map { WidgetDesign(kind: $0, themeID: .dark, accentHex: "FF6B57", format: .small) }
+        if let merged = Fusion.merge(dashboard) { model.save(merged) }
         let sample = SampleData.content(now: Date())
         let money = SamplePayload.make(for: .moneyFlow).content.money
         model.updateContent {

@@ -16,7 +16,9 @@ enum PayloadLoader {
         var payload = WidgetPayload()
         let store = SharedStore.shared
         payload.settings = store.settings
-        let needs = DataNeeds.needs(for: design.kind)
+        // A combined widget loads what each of its widgets needs.
+        let needs = design.dataNeeds
+        let parts = design.partDesigns
         if needs.contains(.content) {
             payload.content = store.content
         }
@@ -24,12 +26,14 @@ enum PayloadLoader {
             payload.weather = await WeatherService.load(allowNetwork: allowNetwork, now: now)
         }
         if needs.contains(.crypto) {
-            payload.crypto = await CryptoService.load(coinID: design.options.coinID, allowNetwork: allowNetwork, now: now)
+            let coinID = (parts.first { DataNeeds.needs(for: $0.kind).contains(.crypto) } ?? design).options.coinID
+            payload.crypto = await CryptoService.load(coinID: coinID, allowNetwork: allowNetwork, now: now)
         }
         if needs.contains(.events) {
             payload.events = CalendarService.upcoming(from: now)
         }
-        await loadDomains(for: design, needs: needs, into: &payload, allowNetwork: allowNetwork, now: now)
+        let companies = parts.first { DataNeeds.needs(for: $0.kind).contains(.companies) } ?? design
+        await loadDomains(for: companies, needs: needs, into: &payload, allowNetwork: allowNetwork, now: now)
         return payload
     }
 }

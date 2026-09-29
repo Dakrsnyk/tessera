@@ -54,7 +54,7 @@ struct QuickProvider: TimelineProvider {
     /// The most recently used or edited design that fits the size.
     static func pick(for family: WidgetFamily) -> (WidgetDesign, Bool) {
         let saved = SharedStore.shared.designs
-            .filter { $0.kind.families.contains(family) }
+            .filter { $0.families.contains(family) }
             .sorted { ($0.lastUsedAt ?? $0.updatedAt) > ($1.lastUsedAt ?? $1.updatedAt) }
         if let design = saved.first {
             return (design, true)

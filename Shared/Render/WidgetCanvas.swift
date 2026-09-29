@@ -22,10 +22,21 @@ struct WidgetCanvas: View {
             design: design, style: style, family: family, date: date,
             payload: payload, isInteractive: isInteractive
         )
-        if design.kind.isPremium && !isPremium {
+        if design.usesPremiumKind && !isPremium {
             PremiumLockedView(context: context)
         } else if family.isAccessory {
-            AccessoryWidgetView(context: context)
+            // A combined widget shows its first widget on the Lock Screen.
+            if design.isCombo, let first = design.partDesigns.first {
+                AccessoryWidgetView(context: RenderContext(
+                    design: first, style: style, family: family, date: date, payload: payload, isInteractive: isInteractive
+                ))
+            } else {
+                AccessoryWidgetView(context: context)
+            }
+        } else if design.isCombo {
+            ComboWidgetView(context: context)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .environment(\.colorScheme, colorScheme(for: design))
         } else {
             KindContentView(context: context)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -120,7 +131,7 @@ struct PremiumLockedView: View {
 enum WidgetLinks {
     /// Where a tap on the widget should take the user.
     static func url(for design: WidgetDesign, payload: WidgetPayload, isPremium: Bool, isSaved: Bool) -> URL {
-        if design.kind.isPremium && !isPremium { return DeepLink.premium.url }
+        if design.usesPremiumKind && !isPremium { return DeepLink.premium.url }
         switch design.kind {
         case .tasks: return DeepLink.tasks.url
         case .habits: return DeepLink.habits.url
@@ -140,5 +151,47 @@ enum WidgetLinks {
             return DeepLink.space(space.rawValue).url
         }
         return isSaved ? DeepLink.design(design.id).url : DeepLink.explore.url
+    }
+}
+
+/// A combined widget: its widgets side by side (two small in a row) or stacked (medium rows), each drawn
+/// exactly as on its own at that size, separated by a hairline. A combined large shown in a medium
+/// widget keeps its first row; any combined widget shown small keeps its first widget.
+struct ComboWidgetView: View {
+    let context: RenderContext
+
+    var body: some View {
+        let parts = context.options.parts
+        let rows = ComboLayout.rows(parts) ?? [Array(parts.prefix(2))]
+        let shown: [[ComboPart]] = context.isSmall ? [Array(parts.prefix(1))] : (context.isLarge ? rows : Array(rows.prefix(1)))
+        VStack(spacing: 0) {
+            ForEach(Array(shown.enumerated()), id: \.offset) { rowIndex, row in
+                if rowIndex > 0 {
+                    divider.frame(height: 1).padding(.horizontal, 14)
+                }
+                HStack(spacing: 0) {
+                    ForEach(Array(row.enumerated()), id: \.offset) { index, part in
+                        if index > 0 {
+                            divider.frame(width: 1).padding(.vertical, 14)
+                        }
+                        partView(part, family: context.isSmall || row.count > 1 ? .systemSmall : .systemMedium)
+                    }
+                }
+            }
+        }
+    }
+
+    private var divider: some View {
+        Rectangle().fill(context.style.secondary.opacity(0.22))
+    }
+
+    private func partView(_ part: ComboPart, family: WidgetFamily) -> some View {
+        let sub = RenderContext(
+            design: context.design.design(for: part), style: context.style, family: family,
+            date: context.date, payload: context.payload, isInteractive: context.isInteractive
+        )
+        return KindContentView(context: sub)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(14)
     }
 }

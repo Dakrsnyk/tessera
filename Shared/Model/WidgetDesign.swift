@@ -68,6 +68,9 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
     var createdAt: Date
     var updatedAt: Date
     var lastUsedAt: Date?
+    /// The size the widget was created for (small, medium or large). Nil for widgets made before sizes
+    /// were chosen: they show at their smallest size.
+    var format: WidgetFormat?
 
     init(
         id: UUID = UUID(),
@@ -81,7 +84,8 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         showsDetails: Bool = true,
         alignment: ContentAlignment = .leading,
         options: DesignOptions = DesignOptions(),
-        isFavorite: Bool = false
+        isFavorite: Bool = false,
+        format: WidgetFormat? = nil
     ) {
         self.id = id
         self.name = name ?? kind.title
@@ -95,6 +99,7 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         self.alignment = alignment
         self.options = options
         self.isFavorite = isFavorite
+        self.format = format
         self.createdAt = Date()
         self.updatedAt = Date()
         self.lastUsedAt = nil
@@ -102,7 +107,7 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
 
     enum CodingKeys: String, CodingKey {
         case id, name, kind, themeID, accentHex, background, font, showsTitle, showsDetails
-        case alignment, options, isFavorite, createdAt, updatedAt, lastUsedAt
+        case alignment, options, isFavorite, createdAt, updatedAt, lastUsedAt, format
     }
 
     init(from decoder: Decoder) throws {
@@ -122,6 +127,7 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         createdAt = (try? c.decodeIfPresent(Date.self, forKey: .createdAt)) ?? Date()
         updatedAt = (try? c.decodeIfPresent(Date.self, forKey: .updatedAt)) ?? Date()
         lastUsedAt = try? c.decodeIfPresent(Date.self, forKey: .lastUsedAt)
+        format = try? c.decodeIfPresent(WidgetFormat.self, forKey: .format)
     }
 
     var theme: WidgetTheme { ThemeCatalog.theme(themeID) }
@@ -129,7 +135,10 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
     /// The Premium features this design relies on, used to explain what a save would unlock.
     var premiumFeatures: [String] {
         var features: [String] = []
-        if kind.isPremium { features.append("Widget \(kind.title)") }
+        // A combined widget needs Premium as soon as one of the widgets inside does.
+        for part in partDesigns where part.kind.isPremium {
+            features.append("Widget \(part.kind.title)")
+        }
         if theme.isPremium { features.append("Style \(theme.name)") }
         if background.isPremium { features.append("Fond \(background.title.lowercased())") }
         if font.isPremium { features.append("Police \(font.title)") }

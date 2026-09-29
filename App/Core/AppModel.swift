@@ -299,6 +299,19 @@ final class AppModel {
 
     /// Data for a preview inside the app: the user's real content and the latest fetched data.
     func payload(for design: WidgetDesign) -> WidgetPayload {
+        // A combined widget: the data of its first widget, plus what the others follow (coin, companies, markets).
+        if design.isCombo, let first = design.partDesigns.first {
+            var merged = payload(for: first)
+            for part in design.partDesigns.dropFirst() {
+                let other = payload(for: part)
+                if part.kind == .crypto { merged.crypto = other.crypto }
+                if part.kind == .marketOverview { merged.domains.quotes = other.domains.quotes }
+                for company in other.domains.companies where !merged.domains.companies.contains(where: { $0.ref.cik == company.ref.cik }) {
+                    merged.domains.companies.append(company)
+                }
+            }
+            return merged
+        }
         var payload = WidgetPayload()
         payload.settings = settings
         payload.content = content
@@ -318,6 +331,10 @@ final class AppModel {
 
     /// Loads whatever network data a design needs for its preview.
     func prepare(_ design: WidgetDesign) async {
+        if design.isCombo {
+            for part in design.partDesigns { await prepare(part) }
+            return
+        }
         let needs = DataNeeds.needs(for: design.kind)
         if needs.contains(.weather) { await refreshWeather() }
         if needs.contains(.crypto) { await refreshCrypto(design.options.coinID) }

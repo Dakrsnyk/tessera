@@ -22,7 +22,7 @@ struct EditorView: View {
 
     init(request: EditorRequest) {
         _design = State(initialValue: request.design)
-        _family = State(initialValue: request.design.kind.homeFamilies.first ?? .systemSmall)
+        _family = State(initialValue: request.design.displayFormat.family)
         _backgroundTab = State(initialValue: BackgroundKind(request.design.background))
         isNew = request.isNew
         original = request.design
@@ -43,7 +43,8 @@ struct EditorView: View {
                     backgroundSection
                     fontSection
                     displaySection
-                    KindOptionsSection(design: $design)
+                    // A combined widget keeps the options of each widget inside it.
+                    if !design.isCombo { KindOptionsSection(design: $design) }
                     if !isNew { deleteButton }
                 }
                 .padding(.horizontal, 20)
@@ -447,10 +448,10 @@ struct PreviewStage: View {
             .frame(maxWidth: .infinity)
             .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
 
-            if design.kind.families.count > 1 {
+            if design.families.count > 1 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        ForEach(design.kind.families, id: \.self) { item in
+                        ForEach(design.families, id: \.self) { item in
                             FilterChip(title: item.shortTitle, symbol: item.isAccessory ? "lock.iphone" : nil, isSelected: family == item) {
                                 family = item
                             }
@@ -460,8 +461,8 @@ struct PreviewStage: View {
             }
         }
         .padding(.top, 8)
-        .onChange(of: design.kind) { _, kind in
-            if !kind.families.contains(family) { family = kind.families.first ?? .systemSmall }
+        .onChange(of: design.kind) { _, _ in
+            if !design.families.contains(family) { family = design.families.first ?? .systemSmall }
         }
     }
 

@@ -56,8 +56,8 @@ struct SaveFlightOverlay: View {
     }
 
     private func tile(_ design: WidgetDesign) -> some View {
-        let family: WidgetFamily = design.kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium
-        let height: CGFloat = isGroup ? 104 : 150
+        let family = design.displayFormat.family
+        let height: CGFloat = isGroup ? 104 : (family == .systemLarge ? 220 : 150)
         return WidgetPreview(design: design, family: family, payload: model.payload(for: design), width: height * family.aspectRatio)
             .shadow(color: .black.opacity(0.22), radius: 16, y: 8)
     }

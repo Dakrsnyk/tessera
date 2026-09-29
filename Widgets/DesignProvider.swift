@@ -75,6 +75,11 @@ enum TimelinePlanner {
 
     static func plan(for design: WidgetDesign, payload: WidgetPayload, now: Date) -> Plan {
         let midnight = DateMath.nextMidnight(after: now)
+        if design.isCombo {
+            // Every moment one of the widgets inside changes, and a refresh within half an hour.
+            let dates = Array(Set(design.partDesigns.flatMap { plan(for: $0, payload: payload, now: now).dates })).sorted().prefix(60)
+            return Plan(dates: dates.isEmpty ? [now] : Array(dates), policy: .after(min(now.addingTimeInterval(30 * 60), midnight.addingTimeInterval(60))))
+        }
         switch design.kind {
         case .clock, .worldClock:
             let start = DateMath.calendar.dateInterval(of: .minute, for: now)?.start ?? now
