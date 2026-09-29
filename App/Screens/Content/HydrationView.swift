@@ -58,7 +58,7 @@ struct HydrationView: View {
             Section {
                 Stepper(value: Binding(
                     get: { state.goal },
-                    set: { goal in model.updateContent { $0.hydration.goal = goal } }
+                    set: { goal in model.setHydrationGoal(goal) }
                 ), in: 1...20) {
                     Text("Objectif : \(state.goal) verres par jour")
                 }

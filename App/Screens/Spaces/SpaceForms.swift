@@ -68,6 +68,27 @@ struct NumberRow: View {
     }
 }
 
+/// A number field that can stay empty: nothing typed means the value isn't known (never a made-up 0).
+struct OptionalNumberRow: View {
+    let title: String
+    @Binding var value: Double?
+    var unit: String?
+
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            TextField("À renseigner", value: $value, format: .number.locale(Fmt.locale))
+                .keyboardType(.decimalPad)
+                .multilineTextAlignment(.trailing)
+                .frame(maxWidth: 130)
+            if let unit {
+                Text(UnitText.display(unit)).foregroundStyle(Color.secondary)
+            }
+        }
+    }
+}
+
 struct IntRow: View {
     let title: String
     @Binding var value: Int

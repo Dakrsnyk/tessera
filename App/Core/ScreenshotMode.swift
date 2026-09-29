@@ -27,9 +27,11 @@ enum ScreenshotMode {
             $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(rawValue:)) ?? .tessera
             $0.appearance = defaults.string(forKey: "screenshotAppearance").flatMap(AppearanceMode.init(rawValue:)) ?? .system
             $0.hasChosenStyle = true
+            $0.hasCompletedProfileSetup = true
         }
         switch screen {
         case "onboarding": return .onboarding
+        case "home-info": router.tab = .home
         case "setups", "setups-free":
             router.tab = .explore
             // Pushed once the Store tab is on screen: switching tab and pushing in the same
@@ -50,6 +52,9 @@ enum ScreenshotMode {
         case "editor-v2": router.openEditor(TemplateCatalog.design("calories-glass"), isNew: true)
         default:
             if screen.hasPrefix("gallery") || screen.hasPrefix("marketing") { return .gallery(screen) }
+            // Steps of the first launch (the flow picks the step itself, see `OnboardingView`).
+            if screen.hasPrefix("onboarding-") { return .onboarding }
+            if screen == "scan-food" { router.handle(.scanFood, model: model) }
             if screen.hasPrefix("space-"), let space = Space(rawValue: String(screen.dropFirst(6))) {
                 router.openSpace(space)
             }
@@ -101,6 +106,8 @@ enum ScreenshotMode {
             $0.money = money
         }
         let data = SampleData.domains(now: Date())
+        // « Mes informations » filled in, as after the first launch.
+        model.update(\.profile) { $0 = .sample }
         model.update(\.nutrition) { $0 = data.nutrition }
         model.update(\.fitness) { $0 = data.fitness }
         model.update(\.budget) { $0 = data.budget }

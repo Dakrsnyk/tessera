@@ -26,6 +26,8 @@ final class Router {
     var isPaywallPresented = false
     var content: ContentScreen?
     var isAddGuidePresented = false
+    /// The food scanner, opened from a Nutrition widget.
+    var isFoodScanPresented = false
     /// The profile page (with every setting), opened from the Home tab.
     var isProfilePresented = false
     /// Widgets just created in a space, flying to « Mes widgets ».
@@ -67,6 +69,7 @@ final class Router {
         editor = nil
         isPaywallPresented = false
         isProfilePresented = false
+        isFoodScanPresented = false
         content = nil
         switch link {
         case let .design(id):
@@ -84,6 +87,7 @@ final class Router {
         case .weatherLocation: content = .weather
         case .calendarAccess: content = .calendar
         case .explore, .store: tab = .explore
+        case .scanFood: isFoodScanPresented = true
         case let .space(id):
             if let space = Space(rawValue: id) {
                 openSpace(space)

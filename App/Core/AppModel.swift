@@ -28,6 +28,8 @@ final class AppModel {
     var car = CarState()
     var productivity = ProductivityState()
     var life = LifeState()
+    /// « Mes informations »: written through `update(\.profile)` or the setters below.
+    var profile = UserProfile()
 
     // Live data used by previews, refreshed on demand.
     private(set) var weather: WeatherResult = .needsLocation
@@ -73,6 +75,8 @@ final class AppModel {
         car = store.state(CarState.self)
         productivity = store.state(ProductivityState.self)
         life = store.state(LifeState.self)
+        profile = store.state(UserProfile.self)
+        migrateProfile()
         insights = InsightCache.load()
         let cache = MarketService.cache
         quotes = portfolio.watchlist.compactMap { cache.quotes[$0] }
@@ -134,6 +138,7 @@ final class AppModel {
         data.productivity = productivity
         data.life = life
         data.insights = insights
+        data.apply(profile)
         return data
     }
 
@@ -403,6 +408,7 @@ final class AppModel {
         updateSettings {
             $0.hasCompletedOnboarding = true
             $0.hasChosenStyle = true
+            $0.hasCompletedProfileSetup = true
         }
     }
 
@@ -430,6 +436,7 @@ final class AppModel {
         fresh.appearance = settings.appearance
         fresh.hasChosenStyle = settings.hasChosenStyle
         fresh.profileName = settings.profileName
+        fresh.hasCompletedProfileSetup = settings.hasCompletedProfileSetup
         settings = fresh
         store.designs = designs
         store.content = content
@@ -439,6 +446,12 @@ final class AppModel {
         for file in [StoreFile.nutrition, .fitness, .budget, .business, .portfolio, .following, .student, .travel, .car, .productivity, .life, .markets, .companies, .fx, .tripWeather, .insights] {
             store.remove(file)
         }
+        // « Mes informations » start over too; the name stays, like the first name.
+        var freshProfile = UserProfile()
+        freshProfile.lastName = profile.lastName
+        freshProfile.migrated = true
+        profile = freshProfile
+        store.save(profile)
         nutrition = NutritionState()
         fitness = FitnessState()
         budget = BudgetState()
@@ -455,5 +468,154 @@ final class AppModel {
         crypto = [:]
         NotificationScheduler.cancelAll()
         scheduleWidgetReload()
+    }
+}
+
+// MARK: - « Mes informations »
+
+extension AppModel {
+    /// Installs from before « Mes informations »: a value already changed in a space counts as given,
+    /// and the body weight moves to the profile, its only home from now on.
+    fileprivate func migrateProfile() {
+        guard !profile.migrated else { return }
+        var migrated = profile
+        let nutritionDefaults = NutritionGoals()
+        if nutrition.goals.kcal != nutritionDefaults.kcal { migrated.provided.insert(.kcalTarget) }
+        if nutrition.goals.protein != nutritionDefaults.protein { migrated.provided.insert(.proteinTarget) }
+        if nutrition.goals.carbs != nutritionDefaults.carbs { migrated.provided.insert(.carbsTarget) }
+        if nutrition.goals.fat != nutritionDefaults.fat { migrated.provided.insert(.fatTarget) }
+        if fitness.weeklyGoal != FitnessState().weeklyGoal { migrated.provided.insert(.weeklyWorkouts) }
+        if budget.monthlyBudget != BudgetState().monthlyBudget { migrated.provided.insert(.monthlyBudget) }
+        if business.name != BusinessState().name { migrated.provided.insert(.businessName) }
+        if business.monthlyGoal != BusinessState().monthlyGoal { migrated.provided.insert(.businessGoal) }
+        if productivity.weeklyFocusGoalHours != ProductivityState().weeklyFocusGoalHours { migrated.provided.insert(.focusGoal) }
+        if content.hydration.goal != HydrationState().goal { migrated.provided.insert(.hydrationGoal) }
+        if car.name != CarState().name { migrated.provided.insert(.carName) }
+        if migrated.weightKg == nil, fitness.bodyWeightKg != FitnessState().bodyWeightKg {
+            migrated.weightKg = fitness.bodyWeightKg
+        }
+        migrated.migrated = true
+        profile = migrated
+        store.save(profile)
+    }
+
+    /// The user cleared a value: it is unknown again (the space keeps its default, never shown as theirs).
+    func forget(_ fact: ProvidedFact) {
+        guard profile.provided.contains(fact) else { return }
+        update(\.profile) { $0.provided.remove(fact) }
+    }
+
+    /// Today's odometer reading (replaces one already noted today). Clearing the field changes nothing.
+    func setOdometer(_ kilometres: Double?) {
+        guard let kilometres, kilometres > 0 else { return }
+        let now = Date()
+        update(\.car) { state in
+            state.readings.removeAll { DateMath.isSameDay($0.date, now) }
+            state.readings.append(OdometerReading(date: now, km: kilometres))
+        }
+    }
+
+    /// The odometer as shown in « Mes informations »: today's reading while it is being typed, else the latest.
+    var odometer: Double? {
+        todayOdometerReading ?? CarMath.odometer(car)
+    }
+
+    private var todayOdometerReading: Double? {
+        car.readings.last { DateMath.isSameDay($0.date, Date()) }?.km
+    }
+
+    private func markProvided(_ facts: ProvidedFact...) {
+        guard !Set(facts).isSubset(of: profile.provided) else { return }
+        update(\.profile) { $0.provided.formUnion(facts) }
+    }
+
+    /// The daily nutrition targets, kept by the Nutrition space. Nil leaves a target as it was.
+    func setNutritionTargets(kcal: Double? = nil, protein: Double? = nil, carbs: Double? = nil, fat: Double? = nil) {
+        update(\.nutrition) { state in
+            if let kcal { state.goals.kcal = max(0, kcal) }
+            if let protein { state.goals.protein = max(0, protein) }
+            if let carbs { state.goals.carbs = max(0, carbs) }
+            if let fat { state.goals.fat = max(0, fat) }
+        }
+        var facts: [ProvidedFact] = []
+        if kcal != nil { facts.append(.kcalTarget) }
+        if protein != nil { facts.append(.proteinTarget) }
+        if carbs != nil { facts.append(.carbsTarget) }
+        if fat != nil { facts.append(.fatTarget) }
+        if !facts.isEmpty { update(\.profile) { $0.provided.formUnion(facts) } }
+    }
+
+    func setNutritionGoals(_ goals: NutritionGoals) {
+        update(\.nutrition) { $0.goals = goals }
+        markProvided(.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget)
+    }
+
+    func setWeeklyWorkouts(_ count: Int) {
+        update(\.fitness) { $0.weeklyGoal = min(7, max(1, count)) }
+        markProvided(.weeklyWorkouts)
+    }
+
+    func setMonthlyBudget(_ amount: Double) {
+        update(\.budget) { $0.monthlyBudget = max(0, amount) }
+        markProvided(.monthlyBudget)
+    }
+
+    func setBusinessName(_ name: String) {
+        update(\.business) { $0.name = name }
+        markProvided(.businessName)
+    }
+
+    func setBusinessGoal(_ amount: Double) {
+        update(\.business) { $0.monthlyGoal = max(0, amount) }
+        markProvided(.businessGoal)
+    }
+
+    func setFocusGoal(_ hours: Double) {
+        update(\.productivity) { $0.weeklyFocusGoalHours = max(0.5, hours) }
+        markProvided(.focusGoal)
+    }
+
+    func setHydrationGoal(_ glasses: Int) {
+        updateContent { $0.hydration.goal = min(20, max(1, glasses)) }
+        markProvided(.hydrationGoal)
+    }
+
+    func setCarName(_ name: String) {
+        update(\.car) { $0.name = name }
+        markProvided(.carName)
+    }
+
+    /// The body weight: the profile is its only home, every space and widget reads it from there.
+    func setWeight(_ kilograms: Double?) {
+        update(\.profile) { $0.weightKg = kilograms.flatMap { $0 > 0 ? $0 : nil } }
+    }
+
+    /// The age, kept as a birth year unless the birthday of « Ma vie » is set.
+    var age: Int? { profile.age(birthday: life.birthday) }
+
+    func setAge(_ years: Int?) {
+        update(\.profile) { profile in
+            profile.birthYear = years.flatMap { $0 > 0 && $0 < 120 ? DateMath.calendar.component(.year, from: Date()) - $0 : nil }
+        }
+    }
+
+    /// Nutrition targets from the profile (Mifflin-St Jeor), when age, height, weight and sex are known.
+    func calculatedNutritionGoals(activity: NutritionCalculator.Activity) -> NutritionGoals? {
+        guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.sex else { return nil }
+        return NutritionCalculator.goals(
+            sex: sex.calculatorSex, age: age, heightCm: height, weightKg: weight,
+            activity: activity, goal: (profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim ?? .maintain).calculatorGoal
+        )
+    }
+
+    /// The activity level that goes with the workouts per week, when the user gave them.
+    var activityFromWorkouts: NutritionCalculator.Activity? {
+        guard profile.knows(.weeklyWorkouts) else { return nil }
+        switch fitness.weeklyGoal {
+        case ...1: return .sedentary
+        case 2...3: return .light
+        case 4...5: return .moderate
+        default: return .active
+        }
     }
 }

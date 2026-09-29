@@ -66,6 +66,8 @@ enum StoreFile: String {
     case designs, content, settings, premium, weather, crypto
     // Mini-apps (V2), one file each so a widget writing one domain never touches another.
     case nutrition, fitness, budget, business, portfolio, following, student, travel, car, productivity, life
+    // « Mes informations »: what the user said about themselves.
+    case profile
     // Caches filled from the network.
     case markets, companies, fx, tripWeather, insights
 }

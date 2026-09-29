@@ -22,7 +22,7 @@ struct BudgetSpaceSections: View {
                     .tint(Color(hex: "2F8F7A"))
             }
             .padding(.vertical, 4)
-            NumberRow(title: "Budget du mois", value: Binding(get: { state.monthlyBudget }, set: { value in model.update(\.budget) { $0.monthlyBudget = max(0, value) } }), unit: currency)
+            NumberRow(title: "Budget du mois", value: Binding(get: { state.monthlyBudget }, set: { value in model.setMonthlyBudget(value) }), unit: currency)
             Button {
                 sheets?.open { ExpenseEditor() }
             } label: {

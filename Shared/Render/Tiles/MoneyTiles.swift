@@ -9,7 +9,7 @@ enum MoneyTiles {
         let currency = context.settings.currencyCode
         let target = context.options.targetID
         switch context.design.kind {
-        case .budgetLeft: return budgetLeft(data.budget, now: now, currency: currency)
+        case .budgetLeft: return budgetLeft(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget))
         case .spendingByCategory: return byCategory(data.budget, now: now, currency: currency)
         case .billsUpcoming: return bills(data.budget, now: now, currency: currency)
         case .savingsGoal: return savings(data.budget, target: target, now: now, currency: currency)
@@ -27,8 +27,21 @@ enum MoneyTiles {
 
     // MARK: Budget
 
-    static func budgetLeft(_ state: BudgetState, now: Date, currency: String) -> Tile {
+    static func budgetLeft(_ state: BudgetState, now: Date, currency: String, knowsBudget: Bool = true) -> Tile {
         let spent = BudgetMath.spentThisMonth(state, at: now)
+        guard knowsBudget else {
+            // No budget given: what was spent, never a remainder of a made-up budget.
+            var tile = Tile(title: "Dépenses du mois", symbol: "creditcard")
+            tile.value = TF.money(spent, currency)
+            tile.caption = "dépensés ce mois-ci"
+            tile.detail = "Budget mensuel à définir dans Tessera"
+            tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now)).prefix(4).map { item in
+                TileRow(id: item.name, title: item.name, value: TF.money(item.amount, currency), colorHex: item.colorHex)
+            }
+            tile.shortValue = TF.money(spent, currency)
+            tile.inline = "Dépensé \(TF.money(spent, currency))"
+            return tile
+        }
         let remaining = BudgetMath.remaining(state, at: now)
         let budget = max(1, state.monthlyBudget)
         var tile = Tile(title: "Reste du mois", symbol: "creditcard")

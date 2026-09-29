@@ -14,6 +14,8 @@ enum DeepLink: Equatable {
     /// A mini-app space (Nutrition, Fitness, Budget…), by its raw value.
     case space(String)
     case store
+    /// The barcode scanner of the Nutrition space, opened from a Nutrition widget.
+    case scanFood
 
     static let scheme = "tessera"
 
@@ -36,6 +38,7 @@ enum DeepLink: Equatable {
             components.host = "space"
             components.path = "/\(id)"
         case .store: components.host = "store"
+        case .scanFood: components.host = "scan-food"
         }
         return components.url ?? URL(string: "tessera://explore")!
     }
@@ -59,6 +62,7 @@ enum DeepLink: Equatable {
             guard !id.isEmpty, id != "/" else { return nil }
             self = .space(id)
         case "store": self = .store
+        case "scan-food": self = .scanFood
         default: return nil
         }
     }

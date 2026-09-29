@@ -36,7 +36,29 @@ struct ProfileView: View {
                             .textContentType(.givenName)
                             .submitLabel(.done)
                     }
+                    LabeledContent("Nom") {
+                        TextField("Facultatif", text: Binding(
+                            get: { model.profile.lastName },
+                            set: { name in model.update(\.profile) { $0.lastName = name } }
+                        ))
+                        .multilineTextAlignment(.trailing)
+                        .textContentType(.familyName)
+                        .submitLabel(.done)
+                    }
                     birthdayRow
+                    NavigationLink {
+                        ScrollView {
+                            InterestGrid(selection: Binding(
+                                get: { model.profile.interests },
+                                set: { interests in model.update(\.profile) { $0.interests = interests } }
+                            ))
+                            .padding(20)
+                        }
+                        .background(.screenFill)
+                        .navigationTitle("Centres d'intérêt")
+                    } label: {
+                        LabeledContent("Centres d'intérêt", value: model.profile.interests.isEmpty ? "Aucun" : Fmt.plural(model.profile.interests.count, "choisi", "choisis"))
+                    }
                     Picker("Jours fériés", selection: Binding(
                         get: { model.life.holidayRegion },
                         set: { value in model.update(\.life) { $0.holidayRegion = value } }
@@ -51,7 +73,7 @@ struct ProfileView: View {
                 } header: {
                     Text("Mon profil")
                 } footer: {
-                    Text("Ton prénom et ton anniversaire restent sur ton iPhone. Ils servent au message d'accueil et aux widgets « Ma vie ».")
+                    Text("Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil.")
                 }
 
                 premiumSection

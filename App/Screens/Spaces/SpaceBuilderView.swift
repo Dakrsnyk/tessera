@@ -18,8 +18,11 @@ struct SpaceBuilderView: View {
     @State private var selection: [WidgetKind]
     @State private var themeID: ThemeID
     @State private var accentHex: String
-    /// The widget being edited when only one is selected (name and options).
-    @State private var single: WidgetDesign
+    /// The name and content settings of each widget, whatever the size: kept per widget so they
+    /// survive a change of size or selection.
+    @State private var configured: [WidgetKind: WidgetDesign] = [:]
+    /// The name of a combined widget, when the user changed it.
+    @State private var comboName: String?
     @State private var showsPaywall = false
     @State private var previewFrame: CGRect = .zero
     /// Test builds: the size or selection asked for by a capture is applied once, not again on coming
@@ -33,7 +36,6 @@ struct SpaceBuilderView: View {
         _selection = State(initialValue: [first])
         _themeID = State(initialValue: base.themeID)
         _accentHex = State(initialValue: base.accentHex)
-        _single = State(initialValue: base)
     }
 
     private var kinds: [WidgetKind] { SpaceCatalog.kinds(in: space) }
@@ -47,9 +49,18 @@ struct SpaceBuilderView: View {
         return design
     }
 
+    /// A widget's own settings (name, content), as the user left them.
+    private func base(_ kind: WidgetKind) -> WidgetDesign {
+        configured[kind] ?? Self.design(for: kind)
+    }
+
+    private func binding(_ kind: WidgetKind) -> Binding<WidgetDesign> {
+        Binding(get: { base(kind) }, set: { configured[kind] = $0 })
+    }
+
     /// A widget of this space in the chosen style.
     private func styled(_ kind: WidgetKind) -> WidgetDesign {
-        var design = selection == [kind] && single.kind == kind ? single : Self.design(for: kind)
+        var design = base(kind)
         design.themeID = themeID
         design.accentHex = accentHex
         return design
@@ -69,10 +80,11 @@ struct SpaceBuilderView: View {
         case let .combo(slots):
             var options = DesignOptions()
             options.parts = slots.map { slot in
-                ComboPart(kind: slot.kind, options: Self.design(for: slot.kind).options, name: slot.kind.title, size: slot.size)
+                let part = base(slot.kind)
+                return ComboPart(kind: slot.kind, options: part.options, name: part.name, size: slot.size)
             }
             return WidgetDesign(
-                name: slots.map(\.kind.title).joined(separator: " + "),
+                name: comboName?.trimmed.nonEmpty ?? slots.map { base($0.kind).name }.joined(separator: " + "),
                 kind: slots[0].kind, themeID: themeID, accentHex: accentHex,
                 options: options, format: format
             )
@@ -95,11 +107,11 @@ struct SpaceBuilderView: View {
 
     private var needsPremium: Bool { !model.isPremium && designs.contains(where: \.usesPremiumFeatures) }
     private var exceedsFreeLimit: Bool { !model.isPremium && model.designs.count + designs.count > AppModel.freeDesignLimit }
-    /// The name and the options of a widget are edited when one widget is shown on its own.
-    private var editsSingle: Bool {
-        if format == .small { return selection.count == 1 }
-        if case .single = plan { return true }
-        return false
+    /// The widget shown on its own, whose name and content are edited in place.
+    private var singleKind: WidgetKind? {
+        if format == .small { return selection.count == 1 ? selection.first : nil }
+        if case let .single(kind) = plan { return kind }
+        return nil
     }
 
     private func payload(_ design: WidgetDesign) -> WidgetPayload {
@@ -116,10 +128,14 @@ struct SpaceBuilderView: View {
                         .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
                     if needsPremium { premiumNotice }
                     widgetsSection
-                    if editsSingle { nameSection }
+                    if let kind = singleKind {
+                        nameSection(binding(kind))
+                    } else if !selection.isEmpty {
+                        contentSection
+                    }
                     styleSection
                     colorSection
-                    if editsSingle { KindOptionsSection(design: $single) }
+                    if let kind = singleKind { KindOptionsSection(design: binding(kind)) }
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 24)
@@ -363,9 +379,63 @@ struct SpaceBuilderView: View {
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
-    private var nameSection: some View {
+    /// Several widgets (small ones, or combined into a medium or large one): each keeps its own name and
+    /// content, set on its own page; a combined widget also gets its name.
+    private var contentSection: some View {
+        EditorSection(title: "Contenu", detail: "Règle chaque widget") {
+            VStack(spacing: 0) {
+                if composed != nil {
+                    TextField("Nom du widget", text: Binding(
+                        get: { comboName ?? composed?.name ?? "" },
+                        set: { comboName = $0 }
+                    ))
+                    .textInputAutocapitalization(.sentences)
+                    .submitLabel(.done)
+                    .padding(12)
+                    .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .padding(.bottom, 8)
+                    .accessibilityIdentifier("combo-name")
+                }
+                ForEach(Array(selection.enumerated()), id: \.element) { pair in
+                    if pair.offset > 0 { Divider() }
+                    NavigationLink {
+                        PartSettingsView(design: binding(pair.element), style: (themeID, accentHex), usesOwnData: usesOwnData)
+                    } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: pair.element.symbol)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundStyle(Color.accentColor)
+                                .frame(width: 24)
+                            VStack(alignment: .leading, spacing: 1) {
+                                Text(base(pair.element).name)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(Color.primary)
+                                    .lineLimit(1)
+                                Text(pair.element.title)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Text("Régler")
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.tertiary)
+                        }
+                        .frame(minHeight: 48)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("part-\(pair.element.rawValue)")
+                }
+            }
+        }
+    }
+
+    private func nameSection(_ design: Binding<WidgetDesign>) -> some View {
         EditorSection(title: "Nom") {
-            TextField("Nom du widget", text: $single.name)
+            TextField("Nom du widget", text: design.name)
                 .textInputAutocapitalization(.sentences)
                 .submitLabel(.done)
                 .padding(12)
@@ -453,7 +523,6 @@ struct SpaceBuilderView: View {
                 if selection.count >= Composer.maxCount(for: format) { selection.removeFirst() }
                 selection.append(kind)
             }
-            syncSingle()
         }
     }
 
@@ -464,14 +533,7 @@ struct SpaceBuilderView: View {
             format = newFormat
             let preset = SpaceCatalog.preset(for: space, format: newFormat)
             if !preset.isEmpty { selection = preset }
-            syncSingle()
-        }
-    }
-
-    /// Back to one widget: edit that one (name and options).
-    private func syncSingle() {
-        if selection.count == 1, let only = selection.first, single.kind != only {
-            single = Self.design(for: only)
+            comboName = nil
         }
     }
 
@@ -486,5 +548,49 @@ struct SpaceBuilderView: View {
         Haptics.success()
         router.saveFlight = SaveFlight(designs: saved, source: previewFrame)
         dismiss()
+    }
+}
+
+/// One widget of a creation made of several: its name and content settings, with its preview.
+private struct PartSettingsView: View {
+    @Binding var design: WidgetDesign
+    let style: (ThemeID, String)
+    let usesOwnData: Bool
+    @Environment(AppModel.self) private var model
+
+    private var styled: WidgetDesign {
+        var styled = design
+        styled.themeID = style.0
+        styled.accentHex = style.1
+        return styled
+    }
+
+    var body: some View {
+        let family: WidgetFamily = design.kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium
+        ScrollView {
+            VStack(alignment: .leading, spacing: 22) {
+                WidgetPreview(
+                    design: styled, family: family,
+                    payload: usesOwnData ? model.payload(for: styled) : SamplePayload.make(for: styled),
+                    width: family == .systemSmall ? 170 : 330
+                )
+                .frame(maxWidth: .infinity)
+                .padding(.top, 8)
+                EditorSection(title: "Nom") {
+                    TextField("Nom du widget", text: $design.name)
+                        .textInputAutocapitalization(.sentences)
+                        .submitLabel(.done)
+                        .padding(12)
+                        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                }
+                KindOptionsSection(design: $design)
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 24)
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .background(.screenFill)
+        .navigationTitle(design.kind.title)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

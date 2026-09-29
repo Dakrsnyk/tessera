@@ -15,6 +15,9 @@ enum TileAction: Hashable {
     case startFocus(Int)
     case toggleHabit(String)
     case addWater
+    /// Opens the app on the barcode scanner. Widgets can't use the camera: this is a link, which works
+    /// on medium and large widgets (see `RenderContext.allowsLinks`).
+    case scanFood
 }
 
 struct TileButton: Hashable {
@@ -86,6 +89,8 @@ struct Tile: Hashable {
     var visual: TileVisual = .none
     var rows: [TileRow] = []
     var buttons: [TileButton] = []
+    /// A small button at the top right of medium and large widgets (the Nutrition scanner).
+    var headerButton: TileButton? = nil
     /// When set, the value is a live countdown to the end of this range.
     var timer: ClosedRange<Date>? = nil
     var empty: TileEmpty? = nil

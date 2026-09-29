@@ -281,7 +281,7 @@ struct CarSpaceSections: View {
         let state = model.car
         let cost = CarMath.monthlyCost(state, at: now)
         Section {
-            TextField("Nom de la voiture", text: Binding(get: { state.name }, set: { name in model.update(\.car) { $0.name = name } }))
+            TextField("Nom de la voiture", text: Binding(get: { state.name }, set: { name in model.setCarName(name) }))
             if let odometer = CarMath.odometer(state) {
                 ValueRow(title: "Compteur", value: "\(TF.int(odometer)) km", symbol: "gauge.with.dots.needle.33percent")
             }

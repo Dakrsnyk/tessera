@@ -41,6 +41,8 @@ struct RootView: View {
     @State private var revealed = false
     @State private var showsOnboarding = false
     @State private var showsStylePicker = false
+    /// Installs from before « Mes informations »: the questions about the user, once.
+    @State private var showsPersonalization = false
     @State private var galleryMode: String?
 
     var body: some View {
@@ -63,6 +65,10 @@ struct RootView: View {
                 .sheet(item: $router.content) { screen in
                     ContentScreenView(screen: screen)
                 }
+                .sheet(isPresented: $router.isFoodScanPresented) {
+                    // From a Nutrition widget: straight to the camera, with the search as the fallback.
+                    FoodSearchView(startsWithScanner: true)
+                }
                 .sheet(isPresented: $router.isAddGuidePresented) {
                     AddToHomeScreenGuide(designName: router.lastSavedName)
                 }
@@ -74,6 +80,13 @@ struct RootView: View {
                     OnboardingView {
                         model.completeOnboarding()
                         showsOnboarding = false
+                    }
+                    .appStyle(model.settings)
+                }
+                .fullScreenCover(isPresented: $showsPersonalization) {
+                    OnboardingView(personalizationOnly: true) {
+                        model.updateSettings { $0.hasCompletedProfileSetup = true }
+                        showsPersonalization = false
                     }
                     .appStyle(model.settings)
                 }
@@ -140,6 +153,8 @@ struct RootView: View {
                 showsOnboarding = true
             } else if !model.settings.hasChosenStyle {
                 showsStylePicker = true
+            } else if !model.settings.hasCompletedProfileSetup {
+                showsPersonalization = true
             }
         }
     }

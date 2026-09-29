@@ -6,13 +6,15 @@ import WidgetKit
 struct HomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
-    @State private var storeShelf: StoreShelf = .new
+    /// The Store shelf picked on Home; by default « Pour toi » once interests are known.
+    @State private var chosenShelf: StoreShelf?
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
                     header
+                    MyInfoSection()
                     myWidgets
                     createStrip
                     storeSample
@@ -169,18 +171,25 @@ struct HomeView: View {
 
     // MARK: Créer
 
-    /// Every category, on two rows that scroll together.
-    private static let createRows: [[Space]] = [
-        [.nutrition, .fitness, .budget, .travel, .productivity, .business],
-        [.habits, .student, .investing, .car, .markets, .life],
-    ]
+    /// Every category, on two rows that scroll together: the user's interests first.
+    private static let defaultOrder: [Space] = [.nutrition, .habits, .fitness, .student, .budget, .investing, .travel, .car, .productivity, .markets, .business, .life]
+
+    private var createRows: [[Space]] {
+        let preferred = model.profile.preferredSpaces
+        let order = preferred + Self.defaultOrder.filter { !preferred.contains($0) }
+        // Alternating between the rows keeps the first choices at the start of both.
+        return [
+            order.enumerated().filter { $0.offset.isMultiple(of: 2) }.map(\.element),
+            order.enumerated().filter { !$0.offset.isMultiple(of: 2) }.map(\.element),
+        ]
+    }
 
     private var createStrip: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionHeader(title: "Créer", actionTitle: "Tout voir") { router.tab = .spaces }
             ScrollView(.horizontal, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 10) {
-                    ForEach(Self.createRows, id: \.self) { row in
+                    ForEach(createRows, id: \.self) { row in
                         HStack(spacing: 10) {
                             ForEach(row) { space in
                                 CreatePill(space: space) {
@@ -201,16 +210,31 @@ struct HomeView: View {
     // MARK: Store
 
     private enum StoreShelf: String, CaseIterable, Identifiable {
+        case forYou = "Pour toi"
         case new = "Nouveautés"
         case popular = "Populaires"
         case free = "Gratuits"
         var id: String { rawValue }
     }
 
+    private var preferredCategories: [WidgetCategory] { model.profile.preferredCategories }
+
+    private var shelves: [StoreShelf] {
+        preferredCategories.isEmpty ? StoreShelf.allCases.filter { $0 != .forYou } : StoreShelf.allCases
+    }
+
+    private var storeShelf: StoreShelf {
+        if let chosenShelf, shelves.contains(chosenShelf) { return chosenShelf }
+        return shelves[0]
+    }
+
     /// A few Store widgets of the chosen shelf, one per kind.
     private var shelfTemplates: [WidgetTemplate] {
         let source: [WidgetTemplate]
         switch storeShelf {
+        case .forYou:
+            // The user's interests, in the order they were picked.
+            source = preferredCategories.flatMap { category in TemplateCatalog.all.filter { $0.kind.category == category } }
         case .new: source = TemplateCatalog.all.filter { $0.kind.isNew }
         case .popular: source = TemplateCatalog.featured
         case .free: source = TemplateCatalog.all.filter { !$0.isPremium }
@@ -237,23 +261,27 @@ struct HomeView: View {
             .buttonStyle(.plain)
             .accessibilityAddTraits(.isHeader)
             .accessibilityHint(Text("Ouvre le Store"))
-            HStack(spacing: 8) {
-                ForEach(StoreShelf.allCases) { shelf in
-                    let isOn = storeShelf == shelf
-                    Button {
-                        withAnimation(.snappy) { storeShelf = shelf }
-                    } label: {
-                        Text(shelf.rawValue)
-                            .font(.subheadline.weight(.semibold))
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .foregroundStyle(isOn ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(Color.primary))
-                            .background(isOn ? AnyShapeStyle(Color.primary) : AnyShapeStyle(AppFill.cardFill), in: Capsule())
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(shelves) { shelf in
+                        let isOn = storeShelf == shelf
+                        Button {
+                            withAnimation(.snappy) { chosenShelf = shelf }
+                        } label: {
+                            Text(shelf.rawValue)
+                                .font(.subheadline.weight(.semibold))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .foregroundStyle(isOn ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(Color.primary))
+                                .background(isOn ? AnyShapeStyle(Color.primary) : AnyShapeStyle(AppFill.cardFill), in: Capsule())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityAddTraits(isOn ? .isSelected : [])
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityAddTraits(isOn ? .isSelected : [])
                 }
+                .padding(.horizontal, 20)
             }
+            .padding(.horizontal, -20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 14) {
                     ForEach(shelfTemplates) { template in

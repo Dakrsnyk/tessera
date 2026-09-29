@@ -114,6 +114,10 @@ struct ExploreView: View {
     /// The Store front: from complete screens to single widgets, every size, style and color.
     private var shelves: some View {
         LazyVStack(alignment: .leading, spacing: 32) {
+            // The user's interests first; every other shelf stays below.
+            if !forYou.isEmpty {
+                shelf(title: "Pour toi", templates: forYou)
+            }
             featuresCarousel
             setupsShelf
             showcaseShelf(title: "Widgets moyens", subtitle: "Deux fois plus de place, pour tout voir d'un coup d'œil.", items: StoreShowcase.mediums)
@@ -137,6 +141,16 @@ struct ExploreView: View {
                 }
             }
         }
+    }
+
+    /// Widgets of the categories the user is interested in, one per kind.
+    private var forYou: [WidgetTemplate] {
+        var seen = Set<WidgetKind>()
+        return model.profile.preferredCategories
+            .flatMap { category in TemplateCatalog.all.filter { $0.kind.category == category } }
+            .filter { seen.insert($0.kind).inserted }
+            .prefix(14)
+            .map { $0 }
     }
 
     private func shelfHeader(title: String, subtitle: String?, symbol: String? = nil, seeAll: (() -> Void)? = nil) -> some View {

@@ -74,11 +74,13 @@ struct AppSettings: Codable, Hashable {
     var hasChosenStyle = false
     /// First name shown on the profile and in the greeting. Optional, stays on the device.
     var profileName = ""
+    /// The questions about the user (interests, then a page per topic) have been answered or skipped.
+    var hasCompletedProfileSetup = false
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
         case hasCompletedOnboarding, hydrationReminders
-        case appStyle, appearance, hasChosenStyle, profileName
+        case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup
     }
 
     init() {}
@@ -96,6 +98,7 @@ struct AppSettings: Codable, Hashable {
         appearance = (try? c.decodeIfPresent(AppearanceMode.self, forKey: .appearance)) ?? .system
         hasChosenStyle = (try? c.decodeIfPresent(Bool.self, forKey: .hasChosenStyle)) ?? false
         profileName = (try? c.decodeIfPresent(String.self, forKey: .profileName)) ?? ""
+        hasCompletedProfileSetup = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedProfileSetup)) ?? false
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

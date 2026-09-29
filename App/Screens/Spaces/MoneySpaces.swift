@@ -159,8 +159,8 @@ struct BusinessSpaceSections: View {
         let now = Date()
         let state = model.business
         Section {
-            TextField("Nom de l'entreprise", text: Binding(get: { state.name }, set: { name in model.update(\.business) { $0.name = name } }))
-            NumberRow(title: "Objectif du mois", value: Binding(get: { state.monthlyGoal }, set: { goal in model.update(\.business) { $0.monthlyGoal = max(0, goal) } }), unit: currency)
+            TextField("Nom de l'entreprise", text: Binding(get: { state.name }, set: { name in model.setBusinessName(name) }))
+            NumberRow(title: "Objectif du mois", value: Binding(get: { state.monthlyGoal }, set: { goal in model.setBusinessGoal(goal) }), unit: currency)
             ValueRow(title: "Aujourd'hui", value: TF.money(BusinessMath.revenue(state, .day, at: now), currency), symbol: "sun.max")
             ValueRow(title: "Cette semaine", value: TF.money(BusinessMath.revenue(state, .week, at: now), currency), symbol: "calendar")
             ValueRow(title: "Ce mois-ci", value: TF.money(BusinessMath.revenue(state, .month, at: now), currency), symbol: "chart.bar")

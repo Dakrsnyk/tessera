@@ -3,36 +3,94 @@ import Foundation
 enum NutritionTiles {
     static let hint = "Note ton premier repas dans Tessera, espace Nutrition."
 
+    /// Nutrition widgets that open the scanner from their medium and large sizes.
+    static let scanKinds: Set<WidgetKind> = [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nextMeal, .nutritionWeek, .nutritionStreak]
+
+    /// Which daily targets the user actually gave (« Mes informations »). The others are never shown as theirs.
+    struct Targets {
+        var kcal: Bool
+        var protein: Bool
+        var carbs: Bool
+        var fat: Bool
+
+        init(_ domains: DomainData) {
+            kcal = domains.knows(.kcalTarget)
+            protein = domains.knows(.proteinTarget)
+            carbs = domains.knows(.carbsTarget)
+            fat = domains.knows(.fatTarget)
+        }
+
+        init(_ profile: UserProfile) {
+            kcal = profile.knows(.kcalTarget)
+            protein = profile.knows(.proteinTarget)
+            carbs = profile.knows(.carbsTarget)
+            fat = profile.knows(.fatTarget)
+        }
+
+        init(all: Bool) {
+            kcal = all
+            protein = all
+            carbs = all
+            fat = all
+        }
+    }
+
+    static let targetHint = "Objectif à définir dans Tessera"
+
     static func make(_ context: RenderContext) -> Tile {
         let now = context.date
         let state = context.payload.domains.nutrition
+        let known = Targets(context.payload.domains)
+        var tile: Tile
         switch context.design.kind {
-        case .caloriesLeft: return caloriesLeft(state, now: now)
-        case .macros: return macros(state, now: now, compact: context.isSmall)
-        case .proteinLeft: return proteinLeft(state, now: now)
-        case .mealsToday: return mealsToday(state, now: now)
-        case .nutritionWeek: return week(state, now: now)
-        case .nutritionStreak: return streak(state, now: now)
-        case .quickFood: return quickFood(state, now: now)
-        case .nextMeal: return nextMeal(state, now: now)
-        default: return TileFactory.placeholder(context.design.kind)
+        case .caloriesLeft: tile = caloriesLeft(state, now: now, known: known)
+        case .macros: tile = macros(state, now: now, compact: context.isSmall, known: known)
+        case .proteinLeft: tile = proteinLeft(state, now: now, known: known.protein)
+        case .mealsToday: tile = mealsToday(state, now: now)
+        case .nutritionWeek: tile = week(state, now: now, knowsGoal: known.kcal)
+        case .nutritionStreak: tile = streak(state, now: now)
+        case .quickFood: tile = quickFood(state, now: now)
+        case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty("Prochain repas", symbol: "clock.badge.checkmark", message: "Donne ton objectif calorique dans Tessera pour savoir ce qu'il te reste par repas.")
+        default: tile = TileFactory.placeholder(context.design.kind)
         }
+        // Adding a food in two taps: the widget opens the app right on the camera.
+        if scanKinds.contains(context.design.kind) {
+            tile.headerButton = TileButton(title: "Scanner", symbol: "barcode.viewfinder", action: .scanFood)
+        }
+        return tile
     }
 
-    /// `compact` drops the unit so the macro names stay readable in small widgets.
-    static func macroRows(_ totals: NutritionTotals, goals: NutritionGoals, compact: Bool = false) -> [TileRow] {
-        func value(_ eaten: Double, _ goal: Double) -> String {
-            compact ? "\(TF.int(eaten))/\(TF.int(goal))" : "\(TF.int(eaten)) / \(TF.int(goal)) g"
+    /// `compact` drops the unit so the macro names stay readable in small widgets. A macro without a target
+    /// shows what was eaten, with no bar.
+    static func macroRows(_ totals: NutritionTotals, goals: NutritionGoals, compact: Bool = false, known: Targets = Targets(all: true)) -> [TileRow] {
+        func value(_ eaten: Double, _ goal: Double, _ knowsGoal: Bool) -> String {
+            guard knowsGoal else { return compact ? TF.int(eaten) : "\(TF.int(eaten)) g" }
+            return compact ? "\(TF.int(eaten))/\(TF.int(goal))" : "\(TF.int(eaten)) / \(TF.int(goal)) g"
+        }
+        func progress(_ eaten: Double, _ goal: Double, _ knowsGoal: Bool) -> Double? {
+            knowsGoal ? eaten / max(1, goal) : nil
         }
         return [
-            TileRow(id: "p", title: "Protéines", value: value(totals.protein, goals.protein), colorHex: "E5484D", progress: totals.protein / max(1, goals.protein)),
-            TileRow(id: "c", title: "Glucides", value: value(totals.carbs, goals.carbs), colorHex: "F2A33A", progress: totals.carbs / max(1, goals.carbs)),
-            TileRow(id: "f", title: "Lipides", value: value(totals.fat, goals.fat), colorHex: "3366FF", progress: totals.fat / max(1, goals.fat)),
+            TileRow(id: "p", title: "Protéines", value: value(totals.protein, goals.protein, known.protein), colorHex: "E5484D", progress: progress(totals.protein, goals.protein, known.protein)),
+            TileRow(id: "c", title: "Glucides", value: value(totals.carbs, goals.carbs, known.carbs), colorHex: "F2A33A", progress: progress(totals.carbs, goals.carbs, known.carbs)),
+            TileRow(id: "f", title: "Lipides", value: value(totals.fat, goals.fat, known.fat), colorHex: "3366FF", progress: progress(totals.fat, goals.fat, known.fat)),
         ]
     }
 
-    static func caloriesLeft(_ state: NutritionState, now: Date) -> Tile {
+    static func caloriesLeft(_ state: NutritionState, now: Date, known: Targets = Targets(all: true)) -> Tile {
         let totals = NutritionMath.totals(state, on: now)
+        guard known.kcal else {
+            // No target given: what was eaten, never a remainder computed from a made-up goal.
+            var tile = Tile(title: "Calories", symbol: "flame")
+            tile.value = TF.int(totals.kcal)
+            tile.unit = "kcal"
+            tile.caption = "mangées aujourd'hui"
+            tile.detail = targetHint
+            tile.rows = macroRows(totals, goals: state.goals, known: known)
+            tile.shortValue = TF.int(totals.kcal)
+            tile.inline = "\(TF.int(totals.kcal)) kcal aujourd'hui"
+            return tile
+        }
         let goal = max(1, state.goals.kcal)
         let left = goal - totals.kcal
         var tile = Tile(title: "Calories", symbol: "flame")
@@ -42,20 +100,20 @@ enum NutritionTiles {
         tile.trend = left >= 0 ? nil : false
         tile.detail = "Mangé : \(TF.int(totals.kcal)) kcal"
         tile.visual = .ring(totals.kcal / goal)
-        tile.rows = macroRows(totals, goals: state.goals)
+        tile.rows = macroRows(totals, goals: state.goals, known: known)
         tile.gauge = totals.kcal / goal
         tile.shortValue = TF.int(left)
         tile.inline = left >= 0 ? "\(TF.int(left)) kcal restantes" : "+\(TF.int(-left)) kcal"
         return tile
     }
 
-    static func macros(_ state: NutritionState, now: Date, compact: Bool) -> Tile {
+    static func macros(_ state: NutritionState, now: Date, compact: Bool, known: Targets = Targets(all: true)) -> Tile {
         let totals = NutritionMath.totals(state, on: now)
         var tile = Tile(title: "Macros", symbol: "chart.bar.xaxis")
         tile.value = TF.int(totals.kcal)
         tile.unit = "kcal"
-        tile.caption = "sur \(TF.int(state.goals.kcal)) · fibres \(TF.int(totals.fiber)) g"
-        tile.rows = macroRows(totals, goals: state.goals, compact: compact)
+        tile.caption = known.kcal ? "sur \(TF.int(state.goals.kcal)) · fibres \(TF.int(totals.fiber)) g" : "aujourd'hui · fibres \(TF.int(totals.fiber)) g"
+        tile.rows = macroRows(totals, goals: state.goals, compact: compact, known: known)
         tile.compactRows = true
         tile.visual = .segments([
             TileSegment(label: "Protéines", value: totals.protein * 4, colorHex: "E5484D"),
@@ -66,8 +124,18 @@ enum NutritionTiles {
         return tile
     }
 
-    static func proteinLeft(_ state: NutritionState, now: Date) -> Tile {
+    static func proteinLeft(_ state: NutritionState, now: Date, known: Bool = true) -> Tile {
         let totals = NutritionMath.totals(state, on: now)
+        guard known else {
+            var tile = Tile(title: "Protéines", symbol: "bolt.heart")
+            tile.value = TF.int(totals.protein)
+            tile.unit = "g"
+            tile.caption = "mangées aujourd'hui"
+            tile.detail = targetHint
+            tile.shortValue = TF.int(totals.protein)
+            tile.inline = "\(TF.int(totals.protein)) g de protéines aujourd'hui"
+            return tile
+        }
         let goal = max(1, state.goals.protein)
         let left = max(0, goal - totals.protein)
         var tile = Tile(title: "Protéines", symbol: "bolt.heart")
@@ -99,14 +167,14 @@ enum NutritionTiles {
         return tile
     }
 
-    static func week(_ state: NutritionState, now: Date) -> Tile {
+    static func week(_ state: NutritionState, now: Date, knowsGoal: Bool = true) -> Tile {
         let days = NutritionMath.dailyCalories(state, days: 7, until: now)
         guard days.contains(where: { $0 > 0 }) else { return .empty("Semaine nutrition", symbol: "chart.bar", message: hint) }
         var tile = Tile(title: "7 derniers jours", symbol: "chart.bar")
         let average = NutritionMath.average(state, days: 7, until: now) ?? 0
         tile.value = TF.int(average)
         tile.unit = "kcal/j"
-        tile.caption = "moyenne · objectif \(TF.int(state.goals.kcal))"
+        tile.caption = knowsGoal ? "moyenne · objectif \(TF.int(state.goals.kcal))" : "moyenne par jour"
         if let month = NutritionMath.average(state, days: 30, until: now) {
             tile.detail = "Sur 30 jours : \(TF.int(month)) kcal/j"
         }

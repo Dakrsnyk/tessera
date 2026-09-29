@@ -186,9 +186,12 @@ struct ComboWidgetView: View {
     }
 
     private func partView(_ part: ComboPart, family: WidgetFamily) -> some View {
+        // The widget as a whole can hold links (medium, large): its first nutrition widget gets the scanner.
+        let scanKind = context.options.parts.first { NutritionTiles.scanKinds.contains($0.kind) }?.kind
         let sub = RenderContext(
             design: context.design.design(for: part), style: context.style, family: family,
-            date: context.date, payload: context.payload, isInteractive: context.isInteractive
+            date: context.date, payload: context.payload, isInteractive: context.isInteractive,
+            linksAllowed: context.allowsLinks && part.kind == scanKind
         )
         return KindContentView(context: sub)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

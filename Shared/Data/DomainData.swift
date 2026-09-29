@@ -21,6 +21,14 @@ struct DomainData: Hashable {
     var productivity = ProductivityState()
     var life = LifeState()
     var insights = InsightCache()
+    /// « Mes informations ». Nil for example data, which counts every value as given.
+    var profile: UserProfile?
+
+    /// Takes the facts whose only home is the profile into the spaces that use them.
+    mutating func apply(_ profile: UserProfile) {
+        self.profile = profile
+        if let weight = profile.weightKg { fitness.bodyWeightKg = weight }
+    }
 }
 
 enum DataNeed: Hashable {
@@ -112,6 +120,9 @@ extension PayloadLoader {
         if needs.contains(.productivity) { data.productivity = store.state(ProductivityState.self) }
         if needs.contains(.life) { data.life = store.state(LifeState.self) }
         if needs.contains(.insights) { data.insights = InsightCache.load() }
+        if !needs.isDisjoint(with: [.nutrition, .fitness, .budget, .business, .productivity, .content, .car]) {
+            data.apply(store.state(UserProfile.self))
+        }
         if needs.contains(.portfolio) || needs.contains(.quotes) {
             data.portfolio = store.state(PortfolioState.self)
             data.prices = await MarketService.priceBook(for: data.portfolio, allowNetwork: allowNetwork)

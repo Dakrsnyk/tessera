@@ -135,7 +135,7 @@ struct ProductivitySpaceSections: View {
         Section("Travail profond") {
             Stepper(value: Binding(
                 get: { model.productivity.weeklyFocusGoalHours },
-                set: { hours in model.update(\.productivity) { $0.weeklyFocusGoalHours = hours } }
+                set: { hours in model.setFocusGoal(hours) }
             ), in: 1...60, step: 1) {
                 ValueRow(title: "Objectif par semaine", value: Fmt.hours(model.productivity.weeklyFocusGoalHours))
             }

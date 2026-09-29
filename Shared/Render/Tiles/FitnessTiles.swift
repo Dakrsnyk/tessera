@@ -6,14 +6,20 @@ enum FitnessTiles {
     static func make(_ context: RenderContext) -> Tile {
         let now = context.date
         let state = context.payload.domains.fitness
+        let domains = context.payload.domains
         switch context.design.kind {
         case .todaysWorkout: return todaysWorkout(state, now: now)
         case .nextSet: return nextSet(state, now: now)
         case .restTimer: return restTimer(state, now: now)
         case .weeklyVolume: return weeklyVolume(state, now: now)
         case .personalRecords: return records(state)
-        case .trainingStreak: return streak(state, now: now)
-        case .caloriesBurned: return calories(state, now: now)
+        case .trainingStreak: return streak(state, now: now, knowsGoal: domains.knows(.weeklyWorkouts))
+        case .caloriesBurned:
+            // The estimate needs the user's weight: without it, no number is made up.
+            guard domains.knowsWeight else {
+                return .empty("Calories brûlées", symbol: "flame", message: "Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.")
+            }
+            return calories(state, now: now)
         case .workoutMonth: return month(state, now: now)
         default: return TileFactory.placeholder(context.design.kind)
         }
@@ -142,19 +148,28 @@ enum FitnessTiles {
         return tile
     }
 
-    static func streak(_ state: FitnessState, now: Date) -> Tile {
+    static func streak(_ state: FitnessState, now: Date, knowsGoal: Bool = true) -> Tile {
         let count = FitnessMath.workouts(inWeekOf: now, state)
         let goal = max(1, state.weeklyGoal)
         let streak = FitnessMath.weekStreak(state, until: now)
         let trained = Set(FitnessMath.sessions(state).map { DateMath.dayKey($0.start) })
         var tile = Tile(title: "Régularité", symbol: "flame.fill")
-        tile.value = "\(count)/\(goal)"
-        tile.caption = "séances cette semaine"
-        tile.detail = streak > 0 ? "Série : \(Fmt.plural(streak, "semaine", "semaines"))" : "Objectif : \(goal) par semaine"
         tile.visual = .week(DateMath.week(containing: now).map { day -> Bool? in
             if trained.contains(DateMath.dayKey(day)) { return true }
             return day > now ? nil : false
         })
+        guard knowsGoal else {
+            // No weekly goal given: the sessions done, without a target the user never set.
+            tile.value = Fmt.number(count)
+            tile.caption = count > 1 ? "séances cette semaine" : "séance cette semaine"
+            tile.detail = "Objectif à définir dans Tessera"
+            tile.shortValue = Fmt.number(count)
+            tile.inline = "\(Fmt.plural(count, "séance", "séances")) cette semaine"
+            return tile
+        }
+        tile.value = "\(count)/\(goal)"
+        tile.caption = "séances cette semaine"
+        tile.detail = streak > 0 ? "Série : \(Fmt.plural(streak, "semaine", "semaines"))" : "Objectif : \(goal) par semaine"
         tile.gauge = Double(count) / Double(goal)
         tile.shortValue = "\(count)/\(goal)"
         tile.inline = "\(count)/\(goal) séances · série \(streak)"

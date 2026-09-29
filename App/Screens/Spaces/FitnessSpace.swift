@@ -75,10 +75,11 @@ struct FitnessSpaceSections: View {
         }
 
         Section {
-            Stepper(value: Binding(get: { state.weeklyGoal }, set: { goal in model.update(\.fitness) { $0.weeklyGoal = goal } }), in: 1...7) {
+            Stepper(value: Binding(get: { state.weeklyGoal }, set: { goal in model.setWeeklyWorkouts(goal) }), in: 1...7) {
                 ValueRow(title: "Objectif", value: "\(state.weeklyGoal) séances / semaine")
             }
-            NumberRow(title: "Poids", value: Binding(get: { state.bodyWeightKg }, set: { weight in model.update(\.fitness) { $0.bodyWeightKg = weight } }), unit: "kg")
+            // The weight lives in « Mes informations »: changing it here changes it everywhere.
+            OptionalNumberRow(title: "Poids", value: Binding(get: { model.profile.weightKg }, set: { model.setWeight($0) }), unit: "kg")
             ValueRow(title: "Cette semaine", value: "\(FitnessMath.workouts(inWeekOf: now, state)) séances", symbol: "flame.fill")
             ValueRow(title: "Volume", value: "\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg", symbol: "scalemass")
             if let best = FitnessMath.records(state).first {

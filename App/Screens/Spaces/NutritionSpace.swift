@@ -10,22 +10,27 @@ struct NutritionSpaceSections: View {
         let now = Date()
         let state = model.nutrition
         let totals = NutritionMath.totals(state, on: now)
+        let known = NutritionTiles.Targets(model.profile)
         Section {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .firstTextBaseline) {
-                    Text(TF.int(max(0, state.goals.kcal - totals.kcal)))
+                    Text(TF.int(known.kcal ? max(0, state.goals.kcal - totals.kcal) : totals.kcal))
                         .font(.system(size: 34, weight: .semibold, design: .rounded))
                         .monospacedDigit()
-                    Text("kcal restantes").foregroundStyle(Color.secondary)
+                    Text(known.kcal ? "kcal restantes" : "kcal mangées").foregroundStyle(Color.secondary)
                     Spacer()
-                    Text("\(TF.int(totals.kcal)) / \(TF.int(state.goals.kcal))")
-                        .font(.footnote)
-                        .foregroundStyle(Color.secondary)
-                        .monospacedDigit()
+                    if known.kcal {
+                        Text("\(TF.int(totals.kcal)) / \(TF.int(state.goals.kcal))")
+                            .font(.footnote)
+                            .foregroundStyle(Color.secondary)
+                            .monospacedDigit()
+                    }
                 }
-                ProgressView(value: min(1, totals.kcal / max(1, state.goals.kcal)))
-                    .tint(Color(hex: "FF6B57"))
-                ForEach(NutritionTiles.macroRows(totals, goals: state.goals)) { row in
+                if known.kcal {
+                    ProgressView(value: min(1, totals.kcal / max(1, state.goals.kcal)))
+                        .tint(Color(hex: "FF6B57"))
+                }
+                ForEach(NutritionTiles.macroRows(totals, goals: state.goals, known: known)) { row in
                     HStack {
                         Circle().fill(Color(hex: row.colorHex ?? "999999")).frame(width: 8, height: 8)
                         Text(row.title).font(.subheadline)
@@ -35,6 +40,13 @@ struct NutritionSpaceSections: View {
                 }
             }
             .padding(.vertical, 4)
+            if DataScannerViewController.isSupported {
+                Button {
+                    sheets?.open { FoodSearchView(startsWithScanner: true) }
+                } label: {
+                    Label("Scanner un code-barres", systemImage: "barcode.viewfinder")
+                }
+            }
             Button {
                 sheets?.open { FoodSearchView() }
             } label: {
@@ -94,7 +106,7 @@ struct NutritionSpaceSections: View {
             Button {
                 sheets?.open { NutritionGoalsEditor(goals: model.nutrition.goals) }
             } label: {
-                ValueRow(title: "Objectifs du jour", value: "\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g prot.", symbol: "target")
+                ValueRow(title: "Objectifs du jour", value: known.kcal ? "\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g prot." : "À définir", symbol: "target")
             }
             .tint(.primary)
             if let average = NutritionMath.average(state, days: 7, until: now) {
@@ -122,6 +134,8 @@ struct NutritionSpaceSections: View {
 // MARK: - Food search
 
 struct FoodSearchView: View {
+    /// Opens the camera at once (from a Nutrition widget). Without a camera, the search is shown.
+    var startsWithScanner = false
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @State private var query = ""
@@ -133,6 +147,7 @@ struct FoodSearchView: View {
     @State private var showsCustom = false
     @State private var scannedCode: String?
     @State private var createdFood: FoodItem?
+    @State private var didOfferScanner = false
 
     private var local: [FoodItem] {
         let recent = model.nutrition.favorites + model.nutrition.recentFoods + model.nutrition.customFoods
@@ -200,6 +215,12 @@ struct FoodSearchView: View {
             }
             .navigationTitle("Ajouter un aliment")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                if startsWithScanner && !didOfferScanner {
+                    didOfferScanner = true
+                    showsScanner = DataScannerViewController.isSupported && DataScannerViewController.isAvailable
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Fermer") { dismiss() }
@@ -211,11 +232,33 @@ struct FoodSearchView: View {
             // The quantity sheet opens once the scanner or the new food has closed:
             // a sheet asked for while another one is still closing would not open.
             .sheet(isPresented: $showsScanner, onDismiss: lookupScanned) {
-                BarcodeScannerView { code in
-                    scannedCode = code
-                    showsScanner = false
+                NavigationStack {
+                    BarcodeScannerView { code in
+                        scannedCode = code
+                        showsScanner = false
+                    }
+                    .ignoresSafeArea(edges: .bottom)
+                    .navigationTitle("Scanner un aliment")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Annuler") { showsScanner = false }
+                        }
+                    }
+                    .safeAreaInset(edge: .bottom) {
+                        // No barcode, or a product the database doesn't know: the search is one tap away.
+                        Button {
+                            showsScanner = false
+                        } label: {
+                            Label("Chercher ou créer l'aliment", systemImage: "magnifyingglass")
+                                .font(.subheadline.weight(.semibold))
+                                .padding(.horizontal, 16)
+                                .frame(minHeight: 44)
+                                .background(.regularMaterial, in: Capsule())
+                        }
+                        .padding(.bottom, 12)
+                    }
                 }
-                .ignoresSafeArea()
             }
             .sheet(isPresented: $showsCustom, onDismiss: logCreatedFood) {
                 CustomFoodEditor { food in
@@ -368,6 +411,7 @@ struct NutritionGoalsEditor: View {
     @State private var weight: Double = 65
     @State private var activity: NutritionCalculator.Activity = .light
     @State private var goal: NutritionCalculator.Goal = .maintain
+    @State private var usedCalculator = false
 
     var body: some View {
         SheetForm(title: "Objectifs", onSave: save) {
@@ -394,18 +438,45 @@ struct NutritionGoalsEditor: View {
                 }
                 Button("Calculer mes objectifs") {
                     goals = NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight, activity: activity, goal: goal)
+                    usedCalculator = true
                 }
             } header: {
                 Text("Calculateur")
             } footer: {
-                Text("Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical.")
+                Text("Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés.")
             }
         }
+        .onAppear(perform: prefill)
+    }
+
+    /// The calculator starts from what the user already gave in « Mes informations ».
+    private func prefill() {
+        let profile = model.profile
+        if let known = profile.sex?.calculatorSex { sex = known }
+        if let known = model.age { age = min(90, max(16, known)) }
+        if let known = profile.heightCm { height = known }
+        if let known = profile.weightKg { weight = known }
+        if let known = model.activityFromWorkouts { activity = known }
+        if let aim = profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim { goal = aim.calculatorGoal }
     }
 
     private func save() {
-        let saved = goals
-        model.update(\.nutrition) { $0.goals = saved }
+        model.setNutritionGoals(goals)
+        // Values used for a calculation are the user's own: every widget gets them.
+        guard usedCalculator else { return }
+        let chosenSex: BodySex = sex == .male ? .male : .female
+        let aim: NutritionAim = switch goal {
+        case .lose: .lose
+        case .maintain: .maintain
+        case .gain: .gain
+        }
+        model.update(\.profile) { profile in
+            profile.sex = chosenSex
+            profile.heightCm = height
+            profile.weightKg = weight
+            profile.nutritionAim = aim
+        }
+        if model.life.birthday == nil { model.setAge(age) }
     }
 }
 

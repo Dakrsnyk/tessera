@@ -8,7 +8,7 @@ enum BusinessTiles {
         let data = context.payload.domains
         let currency = context.settings.currencyCode
         switch context.design.kind {
-        case .revenueGoal: return goal(data.business, now: now, currency: currency)
+        case .revenueGoal: return goal(data.business, now: now, currency: currency, knowsGoal: data.knows(.businessGoal))
         case .revenueTrend: return trend(data.business, now: now, currency: currency)
         case .profit: return profit(data.business, now: now, currency: currency)
         case .businessKPIs: return kpis(data.business, now: now, currency: currency)
@@ -25,8 +25,17 @@ enum BusinessTiles {
 
     // MARK: Business
 
-    static func goal(_ state: BusinessState, now: Date, currency: String) -> Tile {
+    static func goal(_ state: BusinessState, now: Date, currency: String, knowsGoal: Bool = true) -> Tile {
         let revenue = BusinessMath.revenue(state, .month, at: now)
+        guard knowsGoal else {
+            var tile = Tile(title: "Chiffre du mois", symbol: "target")
+            tile.value = TF.money(revenue, currency)
+            tile.caption = "ce mois-ci"
+            tile.detail = "Objectif mensuel à définir dans Tessera"
+            tile.shortValue = TF.money(revenue, currency)
+            tile.inline = "CA \(TF.money(revenue, currency))"
+            return tile
+        }
         let goal = max(1, state.monthlyGoal)
         let progress = revenue / goal
         let daysLeft = BudgetMath.daysLeftInMonth(now)

@@ -10,6 +10,11 @@ struct RenderContext {
     var payload: WidgetPayload
     /// False in app previews, where tapping must not change the user's data.
     var isInteractive: Bool
+    /// Set by combined widgets: only one of their widgets shows the buttons that open the app.
+    var linksAllowed: Bool? = nil
+
+    /// Buttons that open the app are links, which iOS only allows on medium and large widgets.
+    var allowsLinks: Bool { linksAllowed ?? (family == .systemMedium || family == .systemLarge || family == .systemExtraLarge) }
 
     var isSmall: Bool { family == .systemSmall }
     var isMedium: Bool { family == .systemMedium }

@@ -103,7 +103,7 @@ struct KindOptionsSection: View {
                 VStack(spacing: 0) {
                     Stepper(value: Binding(
                         get: { model.content.hydration.goal },
-                        set: { goal in model.updateContent { $0.hydration.goal = goal } }
+                        set: { goal in model.setHydrationGoal(goal) }
                     ), in: 1...20) {
                         Text("Objectif : \(model.content.hydration.goal) verres")
                     }

@@ -17,7 +17,8 @@ struct SpacesView: View {
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
                         .padding(.bottom, 2)
-                    ForEach(Space.allCases) { space in
+                    // The user's interests first, every other space below.
+                    ForEach(orderedSpaces) { space in
                         // A space opens its widget creator; its data stays in « Mes données » there.
                         Button {
                             creating = space
@@ -55,6 +56,11 @@ struct SpacesView: View {
         }
     }
 
+    private var orderedSpaces: [Space] {
+        let preferred = model.profile.preferredSpaces
+        return preferred + Space.allCases.filter { !preferred.contains($0) }
+    }
+
     /// One live figure per space, so the grid doubles as a dashboard.
     private func summary(for space: Space) -> String {
         let now = Date()
@@ -68,10 +74,16 @@ struct SpacesView: View {
             return habits.isEmpty ? "Crée une habitude" : "\(habits.filter { $0.isDone(on: now) }.count)/\(habits.count) aujourd'hui"
         case .nutrition:
             let eaten = NutritionMath.totals(model.nutrition, on: now).kcal
-            return model.nutrition.entries.isEmpty ? "Note ton premier repas" : "\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes"
+            if model.nutrition.entries.isEmpty { return "Note ton premier repas" }
+            return model.profile.knows(.kcalTarget) ? "\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes" : "\(TF.int(eaten)) kcal aujourd'hui"
         case .fitness:
-            return model.fitness.routines.isEmpty ? "Crée ta séance" : "\(FitnessMath.workouts(inWeekOf: now, model.fitness))/\(model.fitness.weeklyGoal) séances"
+            if model.fitness.routines.isEmpty { return "Crée ta séance" }
+            let done = FitnessMath.workouts(inWeekOf: now, model.fitness)
+            return model.profile.knows(.weeklyWorkouts) ? "\(done)/\(model.fitness.weeklyGoal) séances" : Fmt.plural(done, "séance cette semaine", "séances cette semaine")
         case .budget:
+            guard model.profile.knows(.monthlyBudget) else {
+                return "Dépensé \(TF.money(BudgetMath.spentThisMonth(model.budget, at: now), currency)) ce mois-ci"
+            }
             return "Reste \(TF.money(BudgetMath.remaining(model.budget, at: now), currency))"
         case .investing:
             return model.portfolio.holdings.isEmpty ? "Ajoute tes placements" : Fmt.plural(model.portfolio.holdings.count, "placement", "placements")

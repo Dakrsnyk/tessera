@@ -24,13 +24,21 @@ struct TileView: View {
     // MARK: Pieces
 
     @ViewBuilder private var header: some View {
-        if s.showsTitle {
+        let button = context.allowsLinks ? tile.headerButton : nil
+        if s.showsTitle || button != nil {
             HStack(spacing: 5) {
-                Image(systemName: tile.symbol)
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(s.accent)
-                WLabel(text: tile.title, style: s)
+                if s.showsTitle {
+                    Image(systemName: tile.symbol)
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(s.accent)
+                    WLabel(text: tile.title, style: s)
+                }
                 Spacer(minLength: 0)
+                if let button {
+                    TileActionButton(action: button.action, isEnabled: context.isInteractive) {
+                        TileHeaderButtonLabel(button: button, style: s, iconOnly: context.isSmall)
+                    }
+                }
             }
         }
     }
@@ -375,6 +383,12 @@ struct TileActionButton<Label: View>: View {
             IntentButton(intent: ToggleHabitIntent(habitID: UUID(uuidString: id) ?? UUID()), isEnabled: isEnabled, label: label)
         case .addWater:
             IntentButton(intent: AddWaterIntent(glasses: 1), isEnabled: isEnabled, label: label)
+        case .scanFood:
+            if isEnabled {
+                Link(destination: DeepLink.scanFood.url) { label() }
+            } else {
+                label()
+            }
         }
     }
 }
@@ -401,6 +415,30 @@ struct TileButtonLabel: View {
         .frame(maxWidth: expands ? .infinity : nil, minHeight: 30)
         .accessibilityLabel(Text(button.title))
         .background(button.isProminent ? style.accent : style.panel, in: Capsule())
+    }
+}
+
+/// The compact pill at the top right of a widget.
+struct TileHeaderButtonLabel: View {
+    let button: TileButton
+    let style: ResolvedStyle
+    var iconOnly = false
+
+    var body: some View {
+        HStack(spacing: 3) {
+            Image(systemName: button.symbol)
+                .font(.system(size: 10, weight: .bold))
+            if !iconOnly {
+                Text(button.title)
+                    .font(style.text(11, .semibold))
+                    .lineLimit(1)
+            }
+        }
+        .foregroundStyle(style.onAccent)
+        .padding(.horizontal, iconOnly ? 7 : 9)
+        .frame(minHeight: 24)
+        .background(style.accent, in: Capsule())
+        .accessibilityLabel(Text(button.title))
     }
 }
 
