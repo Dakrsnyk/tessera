@@ -134,8 +134,9 @@ struct HomeView: View {
     }
 
     /// The latest widgets laid out like a Home Screen: two small ones side by side, a medium one across,
-    /// a large one over two rows; three rows at most.
+    /// a large one over two rows; two rows at most, so « Créer » stays close below.
     private var homeRows: [[WidgetDesign]] {
+        let maxRows = 2
         var rows: [[WidgetDesign]] = []
         var used = 0
         var waitingSmall: Int?
@@ -145,23 +146,23 @@ struct HomeView: View {
                 if let index = waitingSmall {
                     rows[index].append(design)
                     waitingSmall = nil
-                } else if used < 3 {
+                } else if used < maxRows {
                     rows.append([design])
                     waitingSmall = rows.count - 1
                     used += 1
                 }
             case .medium:
-                if used < 3 {
+                if used < maxRows {
                     rows.append([design])
                     used += 1
                 }
             case .large:
-                if used + 2 <= 3 {
+                if used + 2 <= maxRows {
                     rows.append([design])
                     used += 2
                 }
             }
-            if used >= 3 && waitingSmall == nil { break }
+            if used >= maxRows && waitingSmall == nil { break }
         }
         return rows
     }
