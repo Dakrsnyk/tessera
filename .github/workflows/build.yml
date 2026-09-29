@@ -23,6 +23,8 @@ jobs:
       QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') }}
       # [place] only builds for the simulator and runs the widget placement tests (cheapest check).
       PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
+      # [unit] builds (IPA included) and runs the logic tests only, without the UI tests or screenshots.
+      UNIT: ${{ contains(github.event.head_commit.message, '[unit]') }}
       # [check] only compiles for the simulator (fastest way to find compile errors).
       CHECK: ${{ contains(github.event.head_commit.message, '[check]') }}
       # [marketing] renders the App Store screenshots on a 6.9" iPhone (1320 x 2868).
@@ -42,7 +44,7 @@ jobs:
         run: python3 scripts/check_swift.py
 
       - name: Boot a simulator early
-        if: env.QA == 'true' || env.PLACE == 'true' || env.MARKETING == 'true'
+        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
@@ -107,7 +109,7 @@ jobs:
 
       - name: Tests (logic and widget placement)
         id: tests
-        if: steps.sim.outcome == 'success' && env.DEVICE != '' && (env.QA == 'true' || env.PLACE == 'true')
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && (env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true')
         continue-on-error: true
         timeout-minutes: 35
         run: |
@@ -115,6 +117,7 @@ jobs:
           xcrun simctl bootstatus "$DEVICE" -b
           ONLY=""
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
+          if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
             $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true

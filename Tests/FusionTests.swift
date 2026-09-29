@@ -43,6 +43,9 @@ final class FusionTests: XCTestCase {
         XCTAssertNil(Fusion.result(for: [small(.caloriesLeft), small(.budgetLeft)]), "Two categories")
         XCTAssertNil(Fusion.result(for: [small(.caloriesLeft), small(.macros), small(.proteinLeft)]), "Three small ones leave a hole")
         XCTAssertNil(Fusion.result(for: [small(.caloriesLeft), small(.caloriesLeft)]), "The same content twice")
+        var later = small(.countdown)
+        later.options.countdownDate = later.options.countdownDate.addingTimeInterval(30 * 86_400)
+        XCTAssertNotNil(Fusion.result(for: [small(.countdown), later]), "Two countdowns to different dates are two contents")
         XCTAssertNil(Fusion.result(for: [WidgetDesign(kind: .mealsToday, format: .large), small(.caloriesLeft)]), "A large widget is already full")
         let five = [small(.caloriesLeft), small(.macros), small(.proteinLeft), small(.nextMeal), small(.quickFood)]
         XCTAssertNil(Fusion.result(for: five), "More than a large widget holds")

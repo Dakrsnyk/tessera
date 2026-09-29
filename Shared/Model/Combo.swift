@@ -116,7 +116,7 @@ enum Fusion {
         }
         guard Set(parts.map { category(of: $0.kind) }).count == 1 else { return nil }
         // Each widget brings its own information: the same content twice isn't worth a merge.
-        let contents = parts.map { ContentKey(kind: $0.kind, options: $0.options) }
+        let contents = parts.map { contentKey($0.kind, $0.options) }
         guard Set(contents).count == contents.count else { return nil }
         guard let format = ComboLayout.format(parts) else { return nil }
         return Result(parts: parts, format: format)
@@ -142,9 +142,22 @@ enum Fusion {
         )
     }
 
-    private struct ContentKey: Hashable {
-        let kind: WidgetKind
-        let options: DesignOptions
+    /// What a widget shows: its kind, and only the options that kind uses. Every widget carries all the
+    /// options (a countdown date set when it was made, say), and those it doesn't use don't make it different.
+    static func contentKey(_ kind: WidgetKind, _ options: DesignOptions) -> String {
+        let detail: String
+        switch kind {
+        case .clock: detail = "\(options.clockShowsDate)"
+        case .worldClock: detail = options.cities.joined(separator: ",")
+        case .progress: detail = options.progressUnit.rawValue
+        case .countdown: detail = "\(options.countdownTitle)|\(DateMath.dayKey(options.countdownDate))|\(options.countdownMode.rawValue)"
+        case .tasks: detail = "\(options.showsCompletedTasks)"
+        case .note: detail = "\(options.noteTitle)|\(options.noteText)"
+        case .crypto: detail = options.coinID
+        case .moneyFlow: detail = options.moneyMode.rawValue
+        default: detail = options.targetID ?? ""
+        }
+        return "\(kind.rawValue)|\(detail)"
     }
 }
 
