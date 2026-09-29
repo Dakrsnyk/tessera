@@ -159,7 +159,7 @@ struct MyWidgetsView: View {
     }
 
     private var selectionTitle: String {
-        selectedIDs.isEmpty ? "Sélectionne des widgets" : Fmt.plural(selectedIDs.count, "widget sélectionné", "widgets sélectionnés")
+        selectedIDs.isEmpty ? "Sélection" : Fmt.plural(selectedIDs.count, "sélectionné", "sélectionnés")
     }
 
     private var selectionBar: some View {
