@@ -7,28 +7,35 @@ struct SpacesView: View {
     @Environment(Router.self) private var router
     /// The space whose widget creator is open.
     @State private var creating: Space?
+    /// Nil shows every space.
+    @State private var universe: SpaceUniverse?
 
     var body: some View {
         @Bindable var router = router
         NavigationStack(path: $router.spacePath) {
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 16) {
-                    Text("Choisis une catégorie pour créer ton propre widget. Ce que tu notes dans « Mes données » s'affiche tout de suite dessus.")
+                VStack(alignment: .leading, spacing: 14) {
+                    Text("Choisis un univers, puis la taille de ton widget.")
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
-                        .padding(.bottom, 2)
-                    // The user's interests first, every other space below.
-                    ForEach(orderedSpaces) { space in
-                        // A space opens its widget creator; its data stays in « Mes données » there.
-                        Button {
-                            creating = space
-                        } label: {
-                            SpaceSection(space: space, summary: summary(for: space))
+                        .padding(.horizontal, 20)
+                    universeFilter
+                    LazyVStack(spacing: 14) {
+                        // The user's interests first, every other space below.
+                        ForEach(shownSpaces) { space in
+                            // A space opens its widget creator; its data stays in « Mes données » there.
+                            Button {
+                                creating = space
+                            } label: {
+                                ImmersiveSpaceCard(space: space, summary: summary(for: space))
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("space-card-\(space.rawValue)")
                         }
-                        .buttonStyle(.plain)
                     }
+                    .padding(.horizontal, 20)
+                    .animation(.spring(response: 0.38, dampingFraction: 0.86), value: universe)
                 }
-                .padding(.horizontal, 20)
                 .padding(.bottom, 32)
             }
             .background(.screenFill)
@@ -54,6 +61,38 @@ struct SpacesView: View {
                 }
             }
         }
+    }
+
+    private var shownSpaces: [Space] {
+        orderedSpaces.filter { universe == nil || $0.universe == universe }
+    }
+
+    private var universeFilter: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                filterChip("Tout", isOn: universe == nil) { universe = nil }
+                ForEach(SpaceUniverse.allCases) { item in
+                    filterChip(item.title, isOn: universe == item) { universe = item }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    private func filterChip(_ title: String, isOn: Bool, action: @escaping () -> Void) -> some View {
+        Button {
+            Haptics.tap()
+            action()
+        } label: {
+            Text(title)
+                .font(.subheadline.weight(.semibold))
+                .padding(.horizontal, 14)
+                .frame(minHeight: 36)
+                .foregroundStyle(isOn ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(Color.primary))
+                .background(isOn ? AnyShapeStyle(Color.primary) : AnyShapeStyle(AppFill.cardFill), in: Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 
     private var orderedSpaces: [Space] {
@@ -113,36 +152,74 @@ struct SpacesView: View {
     }
 }
 
-/// A space in the list: its title, a live summary and a few of its widgets, full width.
-struct SpaceSection: View {
+/// The families of spaces the Créer tab filters by.
+enum SpaceUniverse: String, CaseIterable, Identifiable {
+    case health, money, organisation, life
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .health: "Santé"
+        case .money: "Argent"
+        case .organisation: "Organisation"
+        case .life: "Vie"
+        }
+    }
+}
+
+extension Space {
+    var universe: SpaceUniverse {
+        switch self {
+        case .fitness, .nutrition, .habits: .health
+        case .budget, .investing, .business, .markets: .money
+        case .productivity, .student: .organisation
+        case .travel, .car, .life: .life
+        }
+    }
+}
+
+/// A space in the Créer tab: its colour as a deep backdrop, its live figure, and a few of its widgets
+/// sitting on it as on a wallpaper.
+struct ImmersiveSpaceCard: View {
     let space: Space
     let summary: String
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        let examples = SpaceCatalog.examples(for: space)
+        let examples = Array(SpaceCatalog.examples(for: space).prefix(2))
         let usesOwnData = model.hasData(in: space)
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 12) {
+        let color = Color(hex: space.colorHex)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 8) {
                 Image(systemName: space.symbol)
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(.white)
-                    .frame(width: 42, height: 42)
-                    .background(Color(hex: space.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(space.title)
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(Color.primary)
-                    Text(summary)
-                        .font(.subheadline)
-                        .foregroundStyle(Color.secondary)
-                        .lineLimit(1)
+                    .frame(width: 32, height: 32)
+                    .background(.white.opacity(0.2), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                Text(Fmt.plural(SpaceCatalog.kinds(in: space).count, "widget", "widgets"))
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.white.opacity(0.9))
+                if !usesOwnData {
+                    Text("· exemple")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.75))
                 }
                 Spacer(minLength: 0)
                 Image(systemName: "chevron.right")
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(.tertiary)
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 34, height: 34)
+                    .background(.white.opacity(0.2), in: Circle())
             }
+            Text(space.title)
+                .font(.system(size: 28, weight: .bold))
+                .foregroundStyle(.white)
+                .padding(.top, 12)
+            Text(summary)
+                .font(.subheadline)
+                .foregroundStyle(.white.opacity(0.9))
+                .lineLimit(1)
             EqualHeightRow(ratios: examples.map { $0.family.aspectRatio }, spacing: 10) {
                 ForEach(Array(examples.enumerated()), id: \.offset) { pair in
                     let design = pair.element.design
@@ -150,25 +227,25 @@ struct SpaceSection: View {
                         design: design, family: pair.element.family,
                         payload: usesOwnData ? model.payload(for: design) : SamplePayload.make(for: design)
                     )
+                    .shadow(color: .black.opacity(0.25), radius: 10, y: 5)
                 }
             }
-            HStack(spacing: 6) {
-                Text(space.subtitle)
-                    .lineLimit(1)
-                Spacer(minLength: 4)
-                Text(Fmt.plural(SpaceCatalog.kinds(in: space).count, "widget", "widgets"))
-                    .fontWeight(.semibold)
-                if !usesOwnData {
-                    Text("· exemple")
-                }
-            }
-            .font(.caption)
-            .foregroundStyle(Color.secondary)
+            .padding(.top, 16)
         }
-        .card(padding: 14)
-        .contentShape(Rectangle())
+        .padding(18)
+        .background {
+            // The space's colour, bright at the top right and deepening towards the widgets.
+            ZStack {
+                color
+                RadialGradient(colors: [.white.opacity(0.22), .clear], center: .topTrailing, startRadius: 0, endRadius: 280)
+                LinearGradient(colors: [.black.opacity(0.08), .black.opacity(0.62)], startPoint: .top, endPoint: .bottom)
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .accessibilityElement(children: .combine)
         .accessibilityLabel(Text("\(space.title), \(summary)"))
+        .accessibilityHint(Text("Crée un widget de cet espace"))
     }
 }
 

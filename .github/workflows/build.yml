@@ -23,6 +23,8 @@ jobs:
       QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') }}
       # [place] only builds for the simulator and runs the widget placement tests (cheapest check).
       PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
+      # [shots] builds (IPA included) and takes the screenshots, without the tests.
+      SHOTSONLY: ${{ contains(github.event.head_commit.message, '[shots]') }}
       # [unit] builds (IPA included) and runs the logic tests only, without the UI tests or screenshots.
       UNIT: ${{ contains(github.event.head_commit.message, '[unit]') }}
       # [check] only compiles for the simulator (fastest way to find compile errors).
@@ -109,7 +111,7 @@ jobs:
 
       - name: Tests (logic and widget placement)
         id: tests
-        if: steps.sim.outcome == 'success' && env.DEVICE != '' && (env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true')
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.SHOTSONLY != 'true' && (env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true')
         continue-on-error: true
         timeout-minutes: 35
         run: |
