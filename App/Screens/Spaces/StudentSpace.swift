@@ -2,12 +2,7 @@ import SwiftUI
 
 struct StudentSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var editingCourse: Course?
-    @State private var editingSlot: ClassSlot?
-    @State private var editingExam: Exam?
-    @State private var editingAssignment: Assignment?
-    @State private var editingGrade: Grade?
-    @State private var editingCard: Flashcard?
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     private let weekdayNames = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 
@@ -17,7 +12,7 @@ struct StudentSpaceSections: View {
         Section {
             ForEach(state.courses) { course in
                 Button {
-                    editingCourse = course
+                    sheets?.open { CourseEditor(course: course) }
                 } label: {
                     HStack {
                         Circle().fill(Color(hex: course.colorHex)).frame(width: 10, height: 10)
@@ -30,21 +25,15 @@ struct StudentSpaceSections: View {
                 }
             }
             .onDelete { offsets in model.update(\.student) { $0.courses.remove(atOffsets: offsets) } }
-            Button { editingCourse = Course(name: "") } label: { Label("Nouveau cours", systemImage: "plus") }
+            Button { sheets?.open { CourseEditor(course: Course(name: "")) } } label: { Label("Nouveau cours", systemImage: "plus") }
         } header: {
             Text("Cours")
         }
-        .sheet(item: $editingCourse) { CourseEditor(course: $0) }
-        .sheet(item: $editingSlot) { SlotEditor(slot: $0) }
-        .sheet(item: $editingExam) { ExamEditor(exam: $0) }
-        .sheet(item: $editingAssignment) { AssignmentEditor(assignment: $0) }
-        .sheet(item: $editingGrade) { GradeEditor(grade: $0) }
-        .sheet(item: $editingCard) { CardEditor(card: $0) }
 
         Section("Horaire") {
             ForEach(state.slots.sorted { ($0.weekday, $0.startMinute) < ($1.weekday, $1.startMinute) }) { slot in
                 Button {
-                    editingSlot = slot
+                    sheets?.open { SlotEditor(slot: slot) }
                 } label: {
                     HStack {
                         Circle().fill(Color(hex: state.course(slot.courseID)?.colorHex ?? "999999")).frame(width: 8, height: 8)
@@ -63,7 +52,7 @@ struct StudentSpaceSections: View {
                 model.update(\.student) { $0.slots.removeAll { ids.contains($0.id) } }
             }
             Button {
-                editingSlot = ClassSlot(courseID: state.courses.first?.id, weekday: FitnessMath.isoWeekday(now), startMinute: 8 * 60 + 30, endMinute: 10 * 60 + 20)
+                sheets?.open { SlotEditor(slot: ClassSlot(courseID: state.courses.first?.id, weekday: FitnessMath.isoWeekday(now), startMinute: 8 * 60 + 30, endMinute: 10 * 60 + 20)) }
             } label: {
                 Label("Ajouter un cours à l'horaire", systemImage: "plus")
             }
@@ -72,7 +61,7 @@ struct StudentSpaceSections: View {
 
         Section("Examens") {
             ForEach(state.exams.sorted { $0.date < $1.date }) { exam in
-                Button { editingExam = exam } label: {
+                Button { sheets?.open { ExamEditor(exam: exam) } } label: {
                     ValueRow(title: exam.title, value: exam.date < now ? "passé" : "J-\(DateMath.daysBetween(now, exam.date))", symbol: "pencil.and.list.clipboard", colorHex: state.course(exam.courseID)?.colorHex)
                 }
                 .tint(.primary)
@@ -82,7 +71,7 @@ struct StudentSpaceSections: View {
                 let ids = offsets.map { sorted[$0].id }
                 model.update(\.student) { $0.exams.removeAll { ids.contains($0.id) } }
             }
-            Button { editingExam = Exam(courseID: state.courses.first?.id, title: "", date: now.addingTimeInterval(7 * 86_400)) } label: { Label("Nouvel examen", systemImage: "plus") }
+            Button { sheets?.open { ExamEditor(exam: Exam(courseID: state.courses.first?.id, title: "", date: now.addingTimeInterval(7 * 86_400))) } } label: { Label("Nouvel examen", systemImage: "plus") }
         }
 
         Section("Devoirs") {
@@ -94,7 +83,7 @@ struct StudentSpaceSections: View {
                         Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle").foregroundStyle(.tint)
                     }
                     .buttonStyle(.plain)
-                    Button { editingAssignment = item } label: {
+                    Button { sheets?.open { AssignmentEditor(assignment: item) } } label: {
                         VStack(alignment: .leading, spacing: 1) {
                             Text(item.title).strikethrough(item.isDone).foregroundStyle(item.isDone ? .secondary : .primary)
                             Text(TF.relativeDay(item.due, from: now).capitalizedFirst).font(.caption).foregroundStyle(Color.secondary)
@@ -108,7 +97,7 @@ struct StudentSpaceSections: View {
                 let ids = offsets.map { sorted[$0].id }
                 model.update(\.student) { $0.assignments.removeAll { ids.contains($0.id) } }
             }
-            Button { editingAssignment = Assignment(courseID: state.courses.first?.id, title: "", due: now.addingTimeInterval(3 * 86_400)) } label: { Label("Nouveau devoir", systemImage: "plus") }
+            Button { sheets?.open { AssignmentEditor(assignment: Assignment(courseID: state.courses.first?.id, title: "", due: now.addingTimeInterval(3 * 86_400))) } } label: { Label("Nouveau devoir", systemImage: "plus") }
         }
 
         Section {
@@ -116,13 +105,13 @@ struct StudentSpaceSections: View {
                 ValueRow(title: "Moyenne générale", value: "\(TF.decimal(overall, 1)) %", symbol: "graduationcap")
             }
             ForEach(state.grades) { grade in
-                Button { editingGrade = grade } label: {
+                Button { sheets?.open { GradeEditor(grade: grade) } } label: {
                     ValueRow(title: "\(StudentTiles.courseName(state, grade.courseID)) · \(grade.title)", value: "\(TF.decimal(grade.score, 1))/\(TF.decimal(grade.maxScore, 0)) (\(TF.int(grade.weight)) %)")
                 }
                 .tint(.primary)
             }
             .onDelete { offsets in model.update(\.student) { $0.grades.remove(atOffsets: offsets) } }
-            Button { editingGrade = Grade(courseID: state.courses.first?.id, title: "", score: 0) } label: { Label("Nouvelle note", systemImage: "plus") }
+            Button { sheets?.open { GradeEditor(grade: Grade(courseID: state.courses.first?.id, title: "", score: 0)) } } label: { Label("Nouvelle note", systemImage: "plus") }
                 .disabled(state.courses.isEmpty)
         } header: {
             Text("Notes")
@@ -133,13 +122,13 @@ struct StudentSpaceSections: View {
         Section {
             ValueRow(title: "À réviser maintenant", value: "\(StudentMath.dueCount(state, at: now))", symbol: "rectangle.on.rectangle.angled")
             ForEach(state.cards) { card in
-                Button { editingCard = card } label: {
+                Button { sheets?.open { CardEditor(card: card) } } label: {
                     ValueRow(title: card.front, value: "boîte \(card.box)")
                 }
                 .tint(.primary)
             }
             .onDelete { offsets in model.update(\.student) { $0.cards.remove(atOffsets: offsets) } }
-            Button { editingCard = Flashcard(front: "", back: "") } label: { Label("Nouvelle fiche", systemImage: "plus") }
+            Button { sheets?.open { CardEditor(card: Flashcard(front: "", back: "")) } } label: { Label("Nouvelle fiche", systemImage: "plus") }
         } header: {
             Text("Fiches de révision")
         } footer: {

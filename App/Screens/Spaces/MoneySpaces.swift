@@ -4,7 +4,7 @@ import SwiftUI
 
 struct PortfolioSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var editing: Holding?
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     private var currency: String { model.settings.currencyCode }
 
@@ -26,7 +26,7 @@ struct PortfolioSpaceSections: View {
             }
             ForEach(positions.sorted { $0.value > $1.value }, id: \.holding.id) { position in
                 Button {
-                    editing = position.holding
+                    sheets?.open { HoldingEditor(holding: position.holding) }
                 } label: {
                     HStack {
                         Circle().fill(Color(hex: position.holding.kind.colorHex)).frame(width: 9, height: 9)
@@ -47,7 +47,7 @@ struct PortfolioSpaceSections: View {
                 model.update(\.portfolio) { $0.holdings.removeAll { ids.contains($0.id) } }
             }
             Button {
-                editing = Holding(kind: .etf, name: "", symbol: "", quantity: 0, costBasis: 0)
+                sheets?.open { HoldingEditor(holding: Holding(kind: .etf, name: "", symbol: "", quantity: 0, costBasis: 0)) }
             } label: {
                 Label("Ajouter un placement", systemImage: "plus")
             }
@@ -56,7 +56,6 @@ struct PortfolioSpaceSections: View {
         } footer: {
             Text("À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.")
         }
-        .sheet(item: $editing) { HoldingEditor(holding: $0) }
         .task { await model.refreshMarkets() }
 
         Section {
@@ -152,9 +151,7 @@ struct HoldingEditor: View {
 
 struct BusinessSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var showsSale = false
-    @State private var showsCost = false
-    @State private var showsMRR = false
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     private var currency: String { model.settings.currencyCode }
 
@@ -173,14 +170,11 @@ struct BusinessSpaceSections: View {
         } header: {
             Text("Chiffre d'affaires")
         }
-        .sheet(isPresented: $showsSale) { SaleEditor() }
-        .sheet(isPresented: $showsCost) { BusinessCostEditor() }
-        .sheet(isPresented: $showsMRR) { MRREditor() }
 
         Section {
-            Button { showsSale = true } label: { Label("Noter une vente", systemImage: "plus.circle.fill").font(.headline) }
-            Button { showsCost = true } label: { Label("Noter une dépense", systemImage: "minus.circle") }
-            Button { showsMRR = true } label: { Label("Mettre à jour le MRR", systemImage: "arrow.triangle.2.circlepath") }
+            Button { sheets?.open { SaleEditor() } } label: { Label("Noter une vente", systemImage: "plus.circle.fill").font(.headline) }
+            Button { sheets?.open { BusinessCostEditor() } } label: { Label("Noter une dépense", systemImage: "minus.circle") }
+            Button { sheets?.open { MRREditor() } } label: { Label("Mettre à jour le MRR", systemImage: "arrow.triangle.2.circlepath") }
         } footer: {
             Text("Saisie manuelle : pour un export Shopify, Stripe ou autre, note le total du jour.")
         }

@@ -113,6 +113,7 @@ struct EditorView: View {
     private var nameSection: some View {
         EditorSection(title: "Nom") {
             TextField("Nom du widget", text: $design.name)
+                .accessibilityIdentifier("widget-name")
                 .textInputAutocapitalization(.sentences)
                 .submitLabel(.done)
                 .padding(12)

@@ -192,7 +192,7 @@ enum OpenFoodFacts {
                 fat: value("fat_100g") ?? 0,
                 fiber: value("fiber_100g") ?? 0,
                 servingGrams: serving > 0 ? serving : 100,
-                servingName: serving_size?.trimmed.nonEmpty ?? "\(Int(serving)) g",
+                servingName: serving_size?.trimmed.nonEmpty ?? "\(Int(safely: serving)) g",
                 source: .openFoodFacts,
                 barcode: code
             )

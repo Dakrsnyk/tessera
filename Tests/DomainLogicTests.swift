@@ -255,4 +255,17 @@ final class DomainLogicTests: XCTestCase {
         DebugPremium.setUnlocked(previous)
         #endif
     }
+
+    /// Figures typed in the spaces can be anything: none of them may stop the app when shown.
+    func testEnteredExtremesNeverStopTheApp() {
+        XCTAssertEqual(TF.int(.nan), "0")
+        XCTAssertEqual(TF.int(.infinity), "0")
+        XCTAssertFalse(TF.int(1e30).isEmpty)
+        XCTAssertEqual(Int(safely: 41.6.rounded()), 42)
+        var state = NutritionState()
+        let food = FoodItem(id: "custom.test", name: "Test", brand: nil, kcal: 1e300, protein: 1e300, carbs: 0, fat: 0, fiber: 0,
+                            servingGrams: 100, servingName: "100 g", source: .custom, barcode: nil)
+        state.log(food, grams: 1e10, meal: .lunch)
+        XCTAssertFalse(InsightEngine.nutrition(state, now: Date()).facts.isEmpty)
+    }
 }

@@ -133,3 +133,15 @@ extension String {
         trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
+
+extension Int {
+    /// The whole number nearest to a value that may have none (NaN, infinite, or beyond what an Int holds):
+    /// entered figures can be anything, and `Int(_:)` would stop the app on them.
+    init(safely value: Double) {
+        guard value.isFinite else {
+            self = 0
+            return
+        }
+        self = Int(Swift.min(Swift.max(value, -9e15), 9e15))
+    }
+}

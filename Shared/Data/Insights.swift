@@ -84,7 +84,7 @@ struct InsightCache: Codable, Hashable {
 enum InsightEngine {
     /// "1 122": calories with the thousands separator used everywhere else in the app.
     private static func kcal(_ value: Double) -> String {
-        Fmt.number(Int(value.rounded()))
+        Fmt.number(Int(safely: value.rounded()))
     }
 
     static func nutrition(_ state: NutritionState, now: Date) -> Insight {
@@ -95,7 +95,7 @@ enum InsightEngine {
         var facts = [
             "Objectif : \(kcal(goals.kcal)) kcal",
             "Mangé aujourd'hui : \(kcal(today.kcal)) kcal",
-            "Protéines : \(Int(today.protein.rounded())) g sur \(Int(goals.protein)) g",
+            "Protéines : \(Int(safely: today.protein.rounded())) g sur \(Int(safely: goals.protein)) g",
         ]
         var text: String
         if today.kcal == 0 {
@@ -103,7 +103,7 @@ enum InsightEngine {
         } else if left >= 0 {
             text = "Il te reste \(kcal(left)) kcal aujourd'hui"
             if proteinLeft > 0 {
-                text += " et \(Int(proteinLeft.rounded())) g de protéines à trouver."
+                text += " et \(Int(safely: proteinLeft.rounded())) g de protéines à trouver."
             } else {
                 text += ", et ton objectif de protéines est atteint."
             }
@@ -111,7 +111,7 @@ enum InsightEngine {
             text = "Tu as dépassé ton objectif de \(kcal(-left)) kcal aujourd'hui."
         }
         facts.append("Reste : \(kcal(left)) kcal")
-        facts.append("Protéines restantes : \(Int(max(0, proteinLeft).rounded())) g")
+        facts.append("Protéines restantes : \(Int(safely: max(0, proteinLeft).rounded())) g")
         var points: [String] = []
         if let average = NutritionMath.average(state, days: 7, until: now) {
             let line = "Moyenne sur 7 jours : \(kcal(average)) kcal"
@@ -177,7 +177,7 @@ enum InsightEngine {
         ]
         var text = "\(focusText) de concentration cette semaine"
         if goal > 0 {
-            let percent = Int((focus / goal * 100).rounded())
+            let percent = Int(safely: (focus / goal * 100).rounded())
             facts.append("Progression : \(percent) %")
             text += ", \(percent) % de ton objectif."
         } else {
@@ -252,7 +252,7 @@ enum InsightEngine {
 extension Fmt {
     /// "3 h 20" / "45 min"
     static func hours(_ hours: Double) -> String {
-        let minutes = Int((hours * 60).rounded())
+        let minutes = Int(safely: (hours * 60).rounded())
         if minutes < 60 { return "\(minutes) min" }
         let h = minutes / 60
         let m = minutes % 60

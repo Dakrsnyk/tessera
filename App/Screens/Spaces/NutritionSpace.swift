@@ -4,8 +4,7 @@ import VisionKit
 
 struct NutritionSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var showsFoodSearch = false
-    @State private var showsGoals = false
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     var body: some View {
         let now = Date()
@@ -37,19 +36,13 @@ struct NutritionSpaceSections: View {
             }
             .padding(.vertical, 4)
             Button {
-                showsFoodSearch = true
+                sheets?.open { FoodSearchView() }
             } label: {
                 Label("Ajouter un aliment", systemImage: "plus.circle.fill")
                     .font(.headline)
             }
         } header: {
             Text("Aujourd'hui")
-        }
-        .sheet(isPresented: $showsFoodSearch) {
-            FoodSearchView()
-        }
-        .sheet(isPresented: $showsGoals) {
-            NutritionGoalsEditor(goals: state.goals)
         }
 
         ForEach(MealType.allCases) { meal in
@@ -99,7 +92,7 @@ struct NutritionSpaceSections: View {
 
         Section {
             Button {
-                showsGoals = true
+                sheets?.open { NutritionGoalsEditor(goals: model.nutrition.goals) }
             } label: {
                 ValueRow(title: "Objectifs du jour", value: "\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g prot.", symbol: "target")
             }
@@ -138,6 +131,8 @@ struct FoodSearchView: View {
     @State private var selected: FoodItem?
     @State private var showsScanner = false
     @State private var showsCustom = false
+    @State private var scannedCode: String?
+    @State private var createdFood: FoodItem?
 
     private var local: [FoodItem] {
         let recent = model.nutrition.favorites + model.nutrition.recentFoods + model.nutrition.customFoods
@@ -213,16 +208,18 @@ struct FoodSearchView: View {
             .sheet(item: $selected) { food in
                 FoodLogSheet(food: food) { dismiss() }
             }
-            .sheet(isPresented: $showsScanner) {
+            // The quantity sheet opens once the scanner or the new food has closed:
+            // a sheet asked for while another one is still closing would not open.
+            .sheet(isPresented: $showsScanner, onDismiss: lookupScanned) {
                 BarcodeScannerView { code in
+                    scannedCode = code
                     showsScanner = false
-                    Task { await lookup(code) }
                 }
                 .ignoresSafeArea()
             }
-            .sheet(isPresented: $showsCustom) {
+            .sheet(isPresented: $showsCustom, onDismiss: logCreatedFood) {
                 CustomFoodEditor { food in
-                    selected = food
+                    createdFood = food
                 }
             }
         }
@@ -243,6 +240,7 @@ struct FoodSearchView: View {
                 Image(systemName: "plus.circle").foregroundStyle(.tint)
             }
         }
+        .accessibilityIdentifier("food-row")
     }
 
     private func searchOnline() async {
@@ -256,6 +254,18 @@ struct FoodSearchView: View {
         } catch {
             searchError = "Open Food Facts ne répond pas. Réessaie dans un instant."
         }
+    }
+
+    private func lookupScanned() {
+        guard let code = scannedCode else { return }
+        scannedCode = nil
+        Task { await lookup(code) }
+    }
+
+    private func logCreatedFood() {
+        guard let food = createdFood else { return }
+        createdFood = nil
+        selected = food
     }
 
     private func lookup(_ code: String) async {
@@ -273,7 +283,8 @@ struct FoodSearchView: View {
 /// Grams and meal for a food, then saves the entry.
 struct FoodLogSheet: View {
     let food: FoodItem
-    var onDone: () -> Void = {}
+    /// Closes the food search too, when logging from it: one motion instead of two sheets closing in turn.
+    var onDone: (() -> Void)?
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @State private var grams: Double = 100
@@ -281,7 +292,7 @@ struct FoodLogSheet: View {
 
     var body: some View {
         let totals = food.nutrients(grams: grams)
-        SheetForm(title: food.name, canSave: grams > 0, onSave: save) {
+        SheetForm(title: food.name, canSave: grams > 0, dismissesOnSave: onDone == nil, onSave: save) {
             Section {
                 NumberRow(title: "Quantité", value: $grams, unit: "g")
                 if !food.servingName.isEmpty {
@@ -309,7 +320,7 @@ struct FoodLogSheet: View {
         let chosen = meal
         model.update(\.nutrition) { $0.log(food, grams: amount, meal: chosen) }
         Haptics.success()
-        onDone()
+        onDone?()
     }
 }
 

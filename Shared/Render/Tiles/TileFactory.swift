@@ -28,7 +28,7 @@ enum TileFactory {
 /// Formatting shortcuts shared by the tile builders.
 enum TF {
     static func int(_ value: Double) -> String {
-        Fmt.number(Int(value.rounded()))
+        Fmt.number(Int(safely: value.rounded()))
     }
 
     static func decimal(_ value: Double, _ digits: Int = 1) -> String {

@@ -34,17 +34,14 @@ enum DestinationSearch {
 
 struct TravelSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var editingTrip: Trip?
-    @State private var editingFlight: Flight?
-    @State private var editingStay: Stay?
-    @State private var editingActivity: TripActivity?
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     var body: some View {
         let now = Date()
         let state = model.travel
         Section {
             ForEach(state.trips.sorted { $0.start < $1.start }) { trip in
-                Button { editingTrip = trip } label: {
+                Button { sheets?.open { TripEditor(trip: trip) } } label: {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(trip.destination).foregroundStyle(Color.primary)
                         Text("\(Fmt.format(trip.start, template: "dMMM")) – \(Fmt.format(trip.end, template: "dMMMyyyy")) · \(trip.currencyCode)")
@@ -59,21 +56,17 @@ struct TravelSpaceSections: View {
                 model.update(\.travel) { $0.trips.removeAll { ids.contains($0.id) } }
             }
             Button {
-                editingTrip = Trip(destination: "", start: now.addingTimeInterval(30 * 86_400), end: now.addingTimeInterval(37 * 86_400))
+                sheets?.open { TripEditor(trip: Trip(destination: "", start: now.addingTimeInterval(30 * 86_400), end: now.addingTimeInterval(37 * 86_400))) }
             } label: {
                 Label("Nouveau voyage", systemImage: "plus")
             }
         } header: {
             Text("Voyages")
         }
-        .sheet(item: $editingTrip) { TripEditor(trip: $0) }
-        .sheet(item: $editingFlight) { FlightEditor(flight: $0) }
-        .sheet(item: $editingStay) { StayEditor(stay: $0) }
-        .sheet(item: $editingActivity) { ActivityEditor(activity: $0) }
 
         Section("Vols") {
             ForEach(state.flights.sorted { $0.departure < $1.departure }) { flight in
-                Button { editingFlight = flight } label: {
+                Button { sheets?.open { FlightEditor(flight: flight) } } label: {
                     ValueRow(title: "\(flight.number) · \(flight.from) → \(flight.to)", value: Fmt.format(flight.departure, template: "dMMMHHmm"), symbol: "airplane")
                 }
                 .tint(.primary)
@@ -85,7 +78,7 @@ struct TravelSpaceSections: View {
             }
             Button {
                 let start = TravelMath.currentTrip(state, at: now)?.start ?? now.addingTimeInterval(7 * 86_400)
-                editingFlight = Flight(number: "", from: "", to: "", departure: start)
+                sheets?.open { FlightEditor(flight: Flight(number: "", from: "", to: "", departure: start)) }
             } label: {
                 Label("Nouveau vol", systemImage: "plus")
             }
@@ -93,7 +86,7 @@ struct TravelSpaceSections: View {
 
         Section("Hébergement") {
             ForEach(state.stays.sorted { $0.checkIn < $1.checkIn }) { stay in
-                Button { editingStay = stay } label: {
+                Button { sheets?.open { StayEditor(stay: stay) } } label: {
                     ValueRow(title: stay.name, value: "\(Fmt.format(stay.checkIn, template: "dMMM")) – \(Fmt.format(stay.checkOut, template: "dMMM"))", symbol: "bed.double.fill")
                 }
                 .tint(.primary)
@@ -105,7 +98,7 @@ struct TravelSpaceSections: View {
             }
             Button {
                 let trip = TravelMath.currentTrip(state, at: now)
-                editingStay = Stay(name: "", checkIn: trip?.start ?? now, checkOut: trip?.end ?? now.addingTimeInterval(3 * 86_400))
+                sheets?.open { StayEditor(stay: Stay(name: "", checkIn: trip?.start ?? now, checkOut: trip?.end ?? now.addingTimeInterval(3 * 86_400))) }
             } label: {
                 Label("Nouvel hébergement", systemImage: "plus")
             }
@@ -113,7 +106,7 @@ struct TravelSpaceSections: View {
 
         Section("Activités") {
             ForEach(state.activities.sorted { $0.date < $1.date }) { activity in
-                Button { editingActivity = activity } label: {
+                Button { sheets?.open { ActivityEditor(activity: activity) } } label: {
                     ValueRow(title: activity.title, value: Fmt.format(activity.date, template: "dMMMHHmm"), symbol: "mappin.and.ellipse")
                 }
                 .tint(.primary)
@@ -124,7 +117,7 @@ struct TravelSpaceSections: View {
                 model.update(\.travel) { $0.activities.removeAll { ids.contains($0.id) } }
             }
             Button {
-                editingActivity = TripActivity(title: "", date: TravelMath.currentTrip(state, at: now)?.start ?? now)
+                sheets?.open { ActivityEditor(activity: TripActivity(title: "", date: TravelMath.currentTrip(state, at: now)?.start ?? now)) }
             } label: {
                 Label("Nouvelle activité", systemImage: "plus")
             }
@@ -279,10 +272,7 @@ struct ActivityEditor: View {
 
 struct CarSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var showsFill = false
-    @State private var showsReading = false
-    @State private var editingService: ServiceItem?
-    @State private var editingDeadline: CarDeadline?
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     private var currency: String { model.settings.currencyCode }
 
@@ -299,19 +289,15 @@ struct CarSpaceSections: View {
                 ValueRow(title: "Consommation", value: "\(TF.decimal(consumption, 1)) L/100 km", symbol: "fuelpump")
             }
             ValueRow(title: "Coût par mois", value: TF.money(cost.total, currency), symbol: "car.fill")
-            Button { showsFill = true } label: { Label("Noter un plein", systemImage: "fuelpump.fill") }
-            Button { showsReading = true } label: { Label("Noter le kilométrage", systemImage: "speedometer") }
+            Button { sheets?.open { FuelEditor() } } label: { Label("Noter un plein", systemImage: "fuelpump.fill") }
+            Button { sheets?.open { OdometerEditor() } } label: { Label("Noter le kilométrage", systemImage: "speedometer") }
         } header: {
             Text("Ma voiture")
         }
-        .sheet(isPresented: $showsFill) { FuelEditor() }
-        .sheet(isPresented: $showsReading) { OdometerEditor() }
-        .sheet(item: $editingService) { ServiceEditor(service: $0) }
-        .sheet(item: $editingDeadline) { CarDeadlineEditor(deadline: $0) }
 
         Section("Entretien") {
             ForEach(CarMath.serviceStatus(state, at: now), id: \.item.id) { status in
-                Button { editingService = status.item } label: {
+                Button { sheets?.open { ServiceEditor(service: status.item) } } label: {
                     VStack(alignment: .leading, spacing: 5) {
                         HStack {
                             Text(status.item.name).foregroundStyle(Color.primary)
@@ -339,7 +325,7 @@ struct CarSpaceSections: View {
                 }
             }
             Button {
-                editingService = ServiceItem(name: "", intervalKm: 8_000, intervalMonths: 6, lastKm: CarMath.odometer(state), lastDate: now)
+                sheets?.open { ServiceEditor(service: ServiceItem(name: "", intervalKm: 8_000, intervalMonths: 6, lastKm: CarMath.odometer(state), lastDate: now)) }
             } label: {
                 Label("Nouvel entretien", systemImage: "plus")
             }
@@ -347,7 +333,7 @@ struct CarSpaceSections: View {
 
         Section("Échéances") {
             ForEach(state.deadlines.sorted { $0.date < $1.date }) { deadline in
-                Button { editingDeadline = deadline } label: {
+                Button { sheets?.open { CarDeadlineEditor(deadline: deadline) } } label: {
                     ValueRow(title: deadline.title, value: Fmt.format(deadline.date, template: "dMMMyyyy"), symbol: deadline.symbol)
                 }
                 .tint(.primary)
@@ -358,7 +344,7 @@ struct CarSpaceSections: View {
                 model.update(\.car) { $0.deadlines.removeAll { ids.contains($0.id) } }
             }
             Button {
-                editingDeadline = CarDeadline(title: "", date: now.addingTimeInterval(60 * 86_400))
+                sheets?.open { CarDeadlineEditor(deadline: CarDeadline(title: "", date: now.addingTimeInterval(60 * 86_400))) }
             } label: {
                 Label("Nouvelle échéance", systemImage: "plus")
             }

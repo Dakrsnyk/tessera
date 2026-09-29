@@ -2,12 +2,7 @@ import SwiftUI
 
 struct BudgetSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var showsExpense = false
-    @State private var editingQuick: QuickExpense?
-    @State private var editingBill: Bill?
-    @State private var editingGoal: SavingsGoal?
-    @State private var editingAccount: Account?
-    @State private var editingCategory: BudgetCategory?
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     private var currency: String { model.settings.currencyCode }
 
@@ -29,19 +24,13 @@ struct BudgetSpaceSections: View {
             .padding(.vertical, 4)
             NumberRow(title: "Budget du mois", value: Binding(get: { state.monthlyBudget }, set: { value in model.update(\.budget) { $0.monthlyBudget = max(0, value) } }), unit: currency)
             Button {
-                showsExpense = true
+                sheets?.open { ExpenseEditor() }
             } label: {
                 Label("Noter une dépense", systemImage: "plus.circle.fill").font(.headline)
             }
         } header: {
             Text(Fmt.monthYear(now))
         }
-        .sheet(isPresented: $showsExpense) { ExpenseEditor() }
-        .sheet(item: $editingQuick) { QuickExpenseEditor(quick: $0) }
-        .sheet(item: $editingBill) { BillEditor(bill: $0) }
-        .sheet(item: $editingGoal) { GoalEditor(goal: $0) }
-        .sheet(item: $editingAccount) { AccountEditor(account: $0) }
-        .sheet(item: $editingCategory) { CategoryEditor(category: $0) }
 
         Section("Dépenses du mois") {
             let expenses = BudgetMath.expenses(state, in: month).sorted { $0.date > $1.date }
@@ -74,7 +63,7 @@ struct BudgetSpaceSections: View {
         Section {
             ForEach(state.quickExpenses) { quick in
                 Button {
-                    editingQuick = quick
+                    sheets?.open { QuickExpenseEditor(quick: quick) }
                 } label: {
                     ValueRow(title: quick.name, value: TF.money(quick.amount, currency, decimals: 2), symbol: quick.symbol)
                 }
@@ -82,7 +71,7 @@ struct BudgetSpaceSections: View {
             }
             .onDelete { offsets in model.update(\.budget) { $0.quickExpenses.remove(atOffsets: offsets) } }
             Button {
-                editingQuick = QuickExpense(name: "", amount: 5, categoryID: BudgetState.fixedID(2))
+                sheets?.open { QuickExpenseEditor(quick: QuickExpense(name: "", amount: 5, categoryID: BudgetState.fixedID(2))) }
             } label: {
                 Label("Nouvelle dépense rapide", systemImage: "plus")
             }
@@ -95,7 +84,7 @@ struct BudgetSpaceSections: View {
         Section("Factures et abonnements") {
             ForEach(BudgetMath.upcomingBills(state, at: now, within: 400)) { item in
                 Button {
-                    editingBill = item.bill
+                    sheets?.open { BillEditor(bill: item.bill) }
                 } label: {
                     HStack {
                         Image(systemName: item.bill.symbol).frame(width: 22).foregroundStyle(.tint)
@@ -109,7 +98,7 @@ struct BudgetSpaceSections: View {
                 }
             }
             Button {
-                editingBill = Bill(name: "", amount: 0, anchorDate: Date())
+                sheets?.open { BillEditor(bill: Bill(name: "", amount: 0, anchorDate: Date())) }
             } label: {
                 Label("Nouvelle facture", systemImage: "plus")
             }
@@ -121,7 +110,7 @@ struct BudgetSpaceSections: View {
         Section("Épargne") {
             ForEach(state.goals) { goal in
                 Button {
-                    editingGoal = goal
+                    sheets?.open { GoalEditor(goal: goal) }
                 } label: {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
@@ -135,7 +124,7 @@ struct BudgetSpaceSections: View {
             }
             .onDelete { offsets in model.update(\.budget) { $0.goals.remove(atOffsets: offsets) } }
             Button {
-                editingGoal = SavingsGoal(name: "", target: 1_000, saved: 0, deadline: nil)
+                sheets?.open { GoalEditor(goal: SavingsGoal(name: "", target: 1_000, saved: 0, deadline: nil)) }
             } label: {
                 Label("Nouvel objectif", systemImage: "plus")
             }
@@ -144,7 +133,7 @@ struct BudgetSpaceSections: View {
         Section {
             ForEach(state.accounts) { account in
                 Button {
-                    editingAccount = account
+                    sheets?.open { AccountEditor(account: account) }
                 } label: {
                     ValueRow(title: account.name, value: (account.isLiability ? "−" : "") + TF.money(account.balance, currency), symbol: account.isLiability ? "creditcard" : "building.columns")
                 }
@@ -152,7 +141,7 @@ struct BudgetSpaceSections: View {
             }
             .onDelete { offsets in model.update(\.budget) { $0.accounts.remove(atOffsets: offsets) } }
             Button {
-                editingAccount = Account(name: "", balance: 0)
+                sheets?.open { AccountEditor(account: Account(name: "", balance: 0)) }
             } label: {
                 Label("Nouveau compte ou dette", systemImage: "plus")
             }
@@ -168,14 +157,14 @@ struct BudgetSpaceSections: View {
         Section("Catégories") {
             ForEach(state.categories) { category in
                 Button {
-                    editingCategory = category
+                    sheets?.open { CategoryEditor(category: category) }
                 } label: {
                     ValueRow(title: category.name, value: category.monthlyLimit > 0 ? "\(TF.money(category.monthlyLimit, currency)) / mois" : "Sans limite", symbol: category.symbol, colorHex: category.colorHex)
                 }
                 .tint(.primary)
             }
             Button {
-                editingCategory = BudgetCategory(name: "", symbol: "tag", colorHex: "3366FF")
+                sheets?.open { CategoryEditor(category: BudgetCategory(name: "", symbol: "tag", colorHex: "3366FF")) }
             } label: {
                 Label("Nouvelle catégorie", systemImage: "plus")
             }

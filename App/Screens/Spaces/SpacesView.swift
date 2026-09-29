@@ -285,6 +285,9 @@ enum SpaceCatalog {
 /// A space: its widgets at the top, then everything needed to feed them.
 struct SpaceView: View {
     let space: Space
+    /// Opened from the widget editor or the space creator: only the data, so going back returns to the
+    /// widget being made exactly as it was (the widget strip would open another editor over it).
+    var isEmbedded = false
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
 
@@ -292,22 +295,25 @@ struct SpaceView: View {
         List {
             // The strip lives in the header, which isn't clipped like a list row,
             // so the widgets scroll all the way to the screen edges.
-            Section {
-            } header: {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Widgets de l'espace")
-                    widgetStrip
-                        .padding(.horizontal, -20)
-                        .foregroundStyle(Color.primary)
-                        .textCase(nil)
+            if !isEmbedded {
+                Section {
+                } header: {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Widgets de l'espace")
+                        widgetStrip
+                            .padding(.horizontal, -20)
+                            .foregroundStyle(Color.primary)
+                            .textCase(nil)
+                    }
+                } footer: {
+                    Text("Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.")
                 }
-            } footer: {
-                Text("Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.")
             }
             content
                 .listRowBackground(Rectangle().fill(.cardFill))
         }
         .styledList()
+        .hostsSpaceSheets()
         .navigationTitle(space.title)
         .navigationBarTitleDisplayMode(.large)
         .screenshotScroll()

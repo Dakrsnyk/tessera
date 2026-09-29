@@ -2,7 +2,7 @@ import SwiftUI
 
 struct FitnessSpaceSections: View {
     @Environment(AppModel.self) private var model
-    @State private var editingRoutine: Routine?
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     var body: some View {
         let now = Date()
@@ -50,14 +50,11 @@ struct FitnessSpaceSections: View {
         } header: {
             Text("Séance")
         }
-        .sheet(item: $editingRoutine) { routine in
-            RoutineEditor(routine: routine)
-        }
 
         Section("Mes séances") {
             ForEach(state.routines) { routine in
                 Button {
-                    editingRoutine = routine
+                    sheets?.open { RoutineEditor(routine: routine) }
                 } label: {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(routine.name).foregroundStyle(Color.primary)
@@ -71,7 +68,7 @@ struct FitnessSpaceSections: View {
                 model.update(\.fitness) { $0.routines.remove(atOffsets: offsets) }
             }
             Button {
-                editingRoutine = Routine(name: "", exercises: [ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0)])
+                sheets?.open { RoutineEditor(routine: Routine(name: "", exercises: [ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0)])) }
             } label: {
                 Label("Nouvelle séance", systemImage: "plus")
             }
@@ -109,6 +106,7 @@ struct RoutineEditor: View {
         SheetForm(title: routine.name.isEmpty ? "Nouvelle séance" : routine.name, canSave: !routine.name.trimmed.isEmpty, onSave: save) {
             Section {
                 TextField("Nom (haut du corps, jambes…)", text: $routine.name)
+                    .accessibilityIdentifier("routine-name")
                 WeekdayPicker(selection: $routine.weekdays)
             } footer: {
                 Text("Les jours choisis décident de la séance proposée chaque jour.")
@@ -116,6 +114,7 @@ struct RoutineEditor: View {
             ForEach($routine.exercises) { $exercise in
                 Section {
                     TextField("Exercice", text: $exercise.name)
+                        .accessibilityIdentifier("exercise-name")
                     Stepper("Séries : \(exercise.sets)", value: $exercise.sets, in: 1...12)
                     Stepper("Répétitions : \(exercise.reps)", value: $exercise.reps, in: 1...50)
                     NumberRow(title: "Charge", value: $exercise.weight, unit: "kg")

@@ -22,6 +22,9 @@ struct SpaceBuilderView: View {
     @State private var single: WidgetDesign
     @State private var showsPaywall = false
     @State private var previewFrame: CGRect = .zero
+    /// Test builds: the size or selection asked for by a capture is applied once, not again on coming
+    /// back from « Mes données ».
+    @State private var appliedCaptureOptions = false
 
     init(space: Space) {
         self.space = space
@@ -131,15 +134,14 @@ struct SpaceBuilderView: View {
                     Button("Annuler") { dismiss() }
                 }
                 ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        dismiss()
-                        Task { @MainActor in
-                            try? await Task.sleep(for: .milliseconds(350))
-                            router.openSpace(space)
-                        }
+                    // The data opens on top of the creator: back returns to the widget as it was,
+                    // now showing what was just entered.
+                    NavigationLink {
+                        SpaceView(space: space, isEmbedded: true)
                     } label: {
                         Label("Mes données", systemImage: "square.and.pencil")
                     }
+                    .accessibilityIdentifier("space-data")
                     .accessibilityLabel(Text("Mes données de l'espace \(space.title)"))
                 }
             }
@@ -150,6 +152,8 @@ struct SpaceBuilderView: View {
             #if DEBUG
             .onAppear {
                 // Test captures: several widgets selected, or a size chosen.
+                guard !appliedCaptureOptions else { return }
+                appliedCaptureOptions = true
                 let defaults = UserDefaults.standard
                 if let raw = defaults.string(forKey: "screenshotCreatorFormat"), let size = WidgetFormat(rawValue: raw) {
                     setFormat(size)

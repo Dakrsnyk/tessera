@@ -4,6 +4,8 @@ import SwiftUI
 struct SheetForm<Content: View>: View {
     let title: String
     var canSave = true
+    /// False when saving closes a parent sheet (which takes this one with it, in one motion).
+    var dismissesOnSave = true
     let onSave: () -> Void
     @ViewBuilder let content: () -> Content
     @Environment(\.dismiss) private var dismiss
@@ -24,7 +26,7 @@ struct SheetForm<Content: View>: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Enregistrer") {
                         onSave()
-                        dismiss()
+                        if dismissesOnSave { dismiss() }
                     }
                     .disabled(!canSave)
                 }

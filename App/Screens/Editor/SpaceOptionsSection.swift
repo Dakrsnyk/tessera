@@ -55,7 +55,7 @@ struct SpaceOptionsSection: View {
                 }
                 if let space = kind.space ?? fallbackSpace(kind) {
                     NavigationLink {
-                        SpaceView(space: space)
+                        SpaceView(space: space, isEmbedded: true)
                     } label: {
                         HStack {
                             Label("Données de l'espace \(space.title)", systemImage: space.symbol)
@@ -70,6 +70,7 @@ struct SpaceOptionsSection: View {
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
+                    .accessibilityIdentifier("space-data")
                 }
                 if let note = note(for: kind) {
                     Text(note)

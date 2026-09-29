@@ -3,9 +3,7 @@ import SwiftUI
 struct ProductivitySpaceSections: View {
     @Environment(AppModel.self) private var model
     @State private var newPriority = ""
-    @State private var editingProject: Project?
-    @State private var editingDeadline: Deadline?
-    @State private var editingCounter: CounterItem?
+    @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     var body: some View {
         Section {
@@ -39,15 +37,6 @@ struct ProductivitySpaceSections: View {
         } footer: {
             Text("Les cases se décochent chaque matin. Coche-les depuis le widget.")
         }
-        .sheet(item: $editingProject) { project in
-            ProjectEditor(project: project)
-        }
-        .sheet(item: $editingDeadline) { deadline in
-            DeadlineEditor(deadline: deadline)
-        }
-        .sheet(item: $editingCounter) { counter in
-            CounterEditor(counter: counter)
-        }
 
         Section("Tâches") {
             NavigationLink {
@@ -60,7 +49,7 @@ struct ProductivitySpaceSections: View {
         Section("Projets") {
             ForEach(model.productivity.projects) { project in
                 Button {
-                    editingProject = project
+                    sheets?.open { ProjectEditor(project: project) }
                 } label: {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
@@ -77,7 +66,7 @@ struct ProductivitySpaceSections: View {
                 model.update(\.productivity) { $0.projects.remove(atOffsets: offsets) }
             }
             Button {
-                editingProject = Project(name: "")
+                sheets?.open { ProjectEditor(project: Project(name: "")) }
             } label: {
                 Label("Nouveau projet", systemImage: "plus")
             }
@@ -86,7 +75,7 @@ struct ProductivitySpaceSections: View {
         Section("Échéances") {
             ForEach(model.productivity.deadlines.sorted { $0.date < $1.date }) { deadline in
                 Button {
-                    editingDeadline = deadline
+                    sheets?.open { DeadlineEditor(deadline: deadline) }
                 } label: {
                     ValueRow(title: deadline.title, value: Fmt.format(deadline.date, template: "dMMMHHmm"), symbol: "flag.checkered")
                 }
@@ -98,7 +87,7 @@ struct ProductivitySpaceSections: View {
                 model.update(\.productivity) { $0.deadlines.removeAll { ids.contains($0.id) } }
             }
             Button {
-                editingDeadline = Deadline(title: "", date: Date().addingTimeInterval(3 * 86_400))
+                sheets?.open { DeadlineEditor(deadline: Deadline(title: "", date: Date().addingTimeInterval(3 * 86_400))) }
             } label: {
                 Label("Nouvelle échéance", systemImage: "plus")
             }
@@ -108,7 +97,7 @@ struct ProductivitySpaceSections: View {
             ForEach(model.productivity.counters) { counter in
                 HStack {
                     Button {
-                        editingCounter = counter
+                        sheets?.open { CounterEditor(counter: counter) }
                     } label: {
                         Label(counter.name, systemImage: counter.symbol)
                             .foregroundStyle(Color.primary)
@@ -133,7 +122,7 @@ struct ProductivitySpaceSections: View {
                 model.update(\.productivity) { $0.counters.remove(atOffsets: offsets) }
             }
             Button {
-                editingCounter = CounterItem(name: "")
+                sheets?.open { CounterEditor(counter: CounterItem(name: "")) }
             } label: {
                 Label("Nouveau compteur", systemImage: "plus")
             }
