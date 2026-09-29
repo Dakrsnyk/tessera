@@ -28,6 +28,8 @@ final class Router {
     var isAddGuidePresented = false
     /// The profile page (with every setting), opened from the Home tab.
     var isProfilePresented = false
+    /// Widgets just created in a space, flying to « Mes widgets ».
+    var saveFlight: SaveFlight?
     /// Set when a new widget is saved, so the guide opens once the editor has closed.
     var showsAddGuideAfterEditor = false
     var lastSavedName: String?

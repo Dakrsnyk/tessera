@@ -186,6 +186,19 @@ final class AppModel {
         scheduleWidgetReload()
     }
 
+    /// Deletes several widgets at once, with a single save and a single widget refresh.
+    func delete(_ designsToDelete: [WidgetDesign]) {
+        let ids = Set(designsToDelete.map(\.id))
+        guard !ids.isEmpty else { return }
+        for design in designs where ids.contains(design.id) {
+            if case let .photo(name) = design.background { ImageStore.delete(named: name) }
+            NotificationScheduler.cancelCountdownReminder(for: design.id)
+        }
+        designs.removeAll { ids.contains($0.id) }
+        store.designs = designs
+        scheduleWidgetReload()
+    }
+
     func duplicate(_ design: WidgetDesign) -> WidgetDesign? {
         guard canCreateDesign else { return nil }
         var copy = design

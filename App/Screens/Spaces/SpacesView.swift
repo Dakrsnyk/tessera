@@ -5,18 +5,23 @@ import WidgetKit
 struct SpacesView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    /// The space whose widget creator is open.
+    @State private var creating: Space?
 
     var body: some View {
         @Bindable var router = router
         NavigationStack(path: $router.spacePath) {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 16) {
-                    Text("Chaque espace alimente ses widgets. Ce que tu notes ici s'affiche tout de suite sur ton écran d'accueil.")
+                    Text("Touche un espace pour créer ton propre widget. Ce que tu notes dans « Mes données » s'affiche tout de suite dessus.")
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
                         .padding(.bottom, 2)
                     ForEach(Space.allCases) { space in
-                        NavigationLink(value: space) {
+                        // A space opens its widget creator; its data stays in « Mes données » there.
+                        Button {
+                            creating = space
+                        } label: {
                             SpaceSection(space: space, summary: summary(for: space))
                         }
                         .buttonStyle(.plain)
@@ -30,6 +35,9 @@ struct SpacesView: View {
             .navigationTitle("Espaces")
             .navigationDestination(for: Space.self) { space in
                 SpaceView(space: space)
+            }
+            .sheet(item: $creating) { space in
+                SpaceBuilderView(space: space)
             }
         }
     }

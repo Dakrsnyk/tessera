@@ -101,6 +101,12 @@ struct RootView: View {
             }
             #endif
 
+            if let flight = router.saveFlight {
+                SaveFlightOverlay(flight: flight) { router.saveFlight = nil }
+                    .id(flight.id)
+                    .zIndex(3)
+            }
+
             if showsLaunch {
                 LaunchView()
                     .transition(.asymmetric(insertion: .identity, removal: .opacity.combined(with: .scale(scale: 1.15))))
