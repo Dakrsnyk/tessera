@@ -79,7 +79,7 @@ struct HomeView: View {
 
     private var spacesStrip: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Mes espaces", actionTitle: "Tout voir") { router.tab = .spaces }
+            SectionHeader(title: "Créer", actionTitle: "Tout voir") { router.tab = .spaces }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(Space.allCases) { space in

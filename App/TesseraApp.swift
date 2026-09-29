@@ -158,7 +158,7 @@ struct MainTabView: View {
                 .tag(Router.Tab.home)
             SpacesView()
                 .pageEntrance(.spaces)
-                .tabItem { Label("Espaces", systemImage: "square.stack.3d.up") }
+                .tabItem { Label("Créer", systemImage: "plus.square.on.square") }
                 .tag(Router.Tab.spaces)
             ExploreView()
                 .pageEntrance(.explore)

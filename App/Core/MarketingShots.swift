@@ -434,7 +434,7 @@ struct MarketingProductivity: View {
 struct MarketingSpaces: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Espaces",
+            eyebrow: "Créer",
             title: "Toute ta vie,\nau même endroit.",
             subtitle: "Nutrition, sport, études, voyage, auto…"
         )

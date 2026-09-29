@@ -13,7 +13,7 @@ struct SpacesView: View {
         NavigationStack(path: $router.spacePath) {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 16) {
-                    Text("Touche un espace pour créer ton propre widget. Ce que tu notes dans « Mes données » s'affiche tout de suite dessus.")
+                    Text("Choisis une catégorie pour créer ton propre widget. Ce que tu notes dans « Mes données » s'affiche tout de suite dessus.")
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
                         .padding(.bottom, 2)
@@ -32,7 +32,7 @@ struct SpacesView: View {
             }
             .background(.screenFill)
             .screenshotScroll()
-            .navigationTitle("Espaces")
+            .navigationTitle("Créer")
             .navigationDestination(for: Space.self) { space in
                 SpaceView(space: space)
             }
