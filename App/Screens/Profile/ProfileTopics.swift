@@ -224,7 +224,7 @@ struct TopicForm: View {
     }
 
     private var ageBinding: Binding<Double?> {
-        Binding(get: { model.age.map(Double.init) }, set: { model.setAge($0.map { Int(safely: $0) }) })
+        Binding(get: { model.age.map { Double($0) } }, set: { model.setAge($0.map { Int(safely: $0) }) })
     }
 
     private var heightBinding: Binding<Double?> {
@@ -438,7 +438,7 @@ struct TopicForm: View {
                 )
                 ProfileNumberField(
                     title: "Clients", unit: "",
-                    value: Binding(get: { model.profile.businessClients.map(Double.init) }, set: { value in model.update(\.profile) { $0.businessClients = value.map { Int(safely: $0) } } }),
+                    value: Binding(get: { model.profile.businessClients.map { Double($0) } }, set: { value in model.update(\.profile) { $0.businessClients = value.map { Int(safely: $0) } } }),
                     decimals: false, identifier: "business-clients"
                 )
             }

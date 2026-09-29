@@ -201,6 +201,14 @@ jobs:
           shoot creator-nutrition-medium creator-nutrition top light -screenshotCreatorFormat medium
           shoot creator-nutrition-large creator-nutrition top light -screenshotCreatorFormat large
           shoot creator-fitness-large creator-fitness center light -screenshotCreatorFormat large
+          # First launch (personal steps), « Mes informations », the scanner fallback, per-widget settings.
+          for step in identity interests sport nutrition money productivity; do
+            shoot onboarding-$step onboarding-$step top light
+          done
+          shoot onboarding-sport-dark onboarding-sport top dark
+          shoot home-info-dark home top dark
+          shoot scan-food scan-food top light
+          shoot creator-nutrition-content creator-nutrition center light -screenshotCreatorFormat medium
           shoot style-graphite-settings settings top dark -screenshotStyle graphite
           shoot style-sand-settings settings top dark -screenshotStyle sand
           shoot style-neon-store store top dark -screenshotStyle neon

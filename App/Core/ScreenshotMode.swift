@@ -29,6 +29,15 @@ enum ScreenshotMode {
             $0.hasChosenStyle = true
             $0.hasCompletedProfileSetup = true
         }
+        // The first launch starts with nothing about the user (a topic page, with the interest that leads to it).
+        if screen.hasPrefix("onboarding") {
+            let topic = ProfileTopic(rawValue: String(screen.dropFirst("onboarding-".count)))
+            model.update(\.profile) { profile in
+                profile = UserProfile()
+                profile.migrated = true
+                profile.interests = Interest.allCases.filter { topic != nil && $0.topic == topic }
+            }
+        }
         switch screen {
         case "onboarding": return .onboarding
         case "home-info": router.tab = .home

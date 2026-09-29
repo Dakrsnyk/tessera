@@ -111,6 +111,12 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Écrans d'accueil** (Store) : 12 écrans complets dessinés comme sur un vrai iPhone : fond d'écran (dessiné par l'app), vrais widgets Tessera, icônes et dock assortis, et l'écran verrouillé qui va avec. Crème, Aurore, Graphite, Néon, Topographie, Minuit, Études, Jade, Dune, Pastel, Bureau, Corail (4 gratuits). On les filtre (#minimal, #sombre, #pastel, #sport…), on les met en favoris, on ajoute tous leurs widgets d'une touche et on enregistre le fond d'écran dans Photos.
 
+**Premier lancement personnalisé** : style de l'app, prénom et nom, centres d'intérêt (Sport, Nutrition, Finance, Budget, Business, Études, Productivité, Voyage, Automobile, Météo, Design, Bien-être), puis seulement les questions utiles pour ces thèmes. Tout est facultatif et chaque étape peut être passée.
+
+**Mes informations** (accueil) : poids, taille, âge, objectifs sportifs et nutritionnels, revenu, budget, épargne, activité, rythme de travail… Chaque information a un seul endroit où elle est gardée et tous les widgets la reprennent : changer son poids ici change les calories brûlées partout. Ce qui n'a pas été renseigné n'est jamais inventé : les widgets affichent un état neutre (« Objectif à définir ») et l'accueil propose de compléter. Les centres d'intérêt mettent en avant les catégories, espaces et widgets correspondants, sans cacher les autres.
+
+**Scanner depuis le widget Nutrition** : les widgets Nutrition moyens et grands ont un bouton « Scanner » qui ouvre l'app directement sur la caméra (un widget ne peut pas l'ouvrir lui-même). Sans caméra, ou si le produit est inconnu, la recherche et l'aliment perso prennent le relais.
+
 **Styles de l'app** : 10 ambiances pour l'app elle-même (Tessera, Océan, Corail, Lavande, Sable, Graphite, Forêt, Rose, Minuit, Néon), chacune en clair, en sombre ou automatique. Choisies au premier lancement, modifiables dans Réglages › Apparence. Les widgets gardent leurs propres styles.
 
 **Résumés intelligents** : calculés sur l'iPhone à partir des données de l'utilisateur. Avec Apple Intelligence (iOS 26), le texte est reformulé ; chaque nombre de la reformulation est vérifié par rapport aux données, sinon le texte calculé est gardé. Aucune donnée n'est inventée.
