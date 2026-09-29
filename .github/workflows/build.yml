@@ -189,6 +189,10 @@ jobs:
             shoot style-$style home top $scheme -screenshotStyle $style
             i=$((i + 1))
           done
+          shoot creator-nutrition creator-nutrition top light
+          shoot creator-fitness-multi creator-fitness top light -screenshotCreatorMulti YES
+          shoot creator-budget-dark creator-budget top dark
+          shoot mywidgets-select mywidgets-select top light
           shoot style-graphite-settings settings top dark -screenshotStyle graphite
           shoot style-sand-settings settings top dark -screenshotStyle sand
           shoot style-neon-store store top dark -screenshotStyle neon

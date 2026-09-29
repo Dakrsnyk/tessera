@@ -53,6 +53,14 @@ enum ScreenshotMode {
             if screen.hasPrefix("space-"), let space = Space(rawValue: String(screen.dropFirst(6))) {
                 router.openSpace(space)
             }
+            if screen.hasPrefix("creator-"), let space = Space(rawValue: String(screen.dropFirst(8))) {
+                router.tab = .spaces
+                router.requestedCreator = space
+            }
+            if screen == "mywidgets-select" {
+                router.tab = .mine
+                router.startsSelection = true
+            }
             if screen.hasPrefix("setup-") {
                 router.tab = .explore
                 router.openedSetupID = String(screen.dropFirst(6))

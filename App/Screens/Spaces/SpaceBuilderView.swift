@@ -103,6 +103,14 @@ struct SpaceBuilderView: View {
             .task(id: selection) {
                 for design in designs { await model.prepare(design) }
             }
+            #if DEBUG
+            .onAppear {
+                // Test captures: several widgets selected.
+                if UserDefaults.standard.bool(forKey: "screenshotCreatorMulti") {
+                    selection = Array(kinds.prefix(3))
+                }
+            }
+            #endif
         }
     }
 

@@ -120,6 +120,13 @@ struct MyWidgetsView: View {
             .onChange(of: model.designs.isEmpty) { _, isEmpty in
                 if isEmpty { endSelection() }
             }
+            .onAppear {
+                if router.startsSelection {
+                    router.startsSelection = false
+                    isSelecting = true
+                    selectedIDs = Set(model.recentDesigns.prefix(2).map(\.id))
+                }
+            }
             .confirmationDialog(
                 "Supprimer « \(pendingDeletion?.name ?? "") » ?",
                 isPresented: Binding(get: { pendingDeletion != nil }, set: { if !$0 { pendingDeletion = nil } }),

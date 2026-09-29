@@ -30,6 +30,9 @@ final class Router {
     var isProfilePresented = false
     /// Widgets just created in a space, flying to « Mes widgets ».
     var saveFlight: SaveFlight?
+    /// Test captures: a space creator to open, and Mes widgets in selection mode.
+    var requestedCreator: Space?
+    var startsSelection = false
     /// Set when a new widget is saved, so the guide opens once the editor has closed.
     var showsAddGuideAfterEditor = false
     var lastSavedName: String?

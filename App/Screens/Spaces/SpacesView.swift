@@ -39,6 +39,12 @@ struct SpacesView: View {
             .sheet(item: $creating) { space in
                 SpaceBuilderView(space: space)
             }
+            .onAppear {
+                if let space = router.requestedCreator {
+                    router.requestedCreator = nil
+                    creating = space
+                }
+            }
         }
     }
 
