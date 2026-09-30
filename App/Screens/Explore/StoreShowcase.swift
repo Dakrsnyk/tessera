@@ -10,23 +10,19 @@ struct ShowcaseItem: Identifiable {
     var id: String { "\(widget.kind.rawValue)-\(widget.theme.rawValue)-\(widget.accent)-\(title)" }
 }
 
-/// A large card at the top of the Store: a promise and the widget that keeps it.
-struct StoreFeature: Identifiable {
-    let id: String
-    let eyebrow: String
-    let title: String
-    let subtitle: String
-    let colors: [String]
-    let widget: SetupWidget
-}
-
-/// A themed shelf mixing small and medium widgets.
+/// A themed set of widgets, shown as a colored tile in the Store and as a page of its own.
 struct StoreCollection: Identifiable {
     let id: String
     let title: String
     let subtitle: String
     let symbol: String
+    let colorHex: String
+    /// The interests it speaks to, to show it first to the people who have them.
+    var categories: [WidgetCategory] = []
     let items: [ShowcaseItem]
+
+    /// The widget shown on the tile: the first small one.
+    var cover: ShowcaseItem { items.first { $0.widget.family == .systemSmall } ?? items[0] }
 }
 
 enum StoreShowcase {
@@ -38,68 +34,6 @@ enum StoreShowcase {
             subtitle: ThemeCatalog.theme(theme).name
         )
     }
-
-    static let features: [StoreFeature] = [
-        StoreFeature(
-            id: "now", eyebrow: "À la une", title: "Le bon widget au bon moment",
-            subtitle: "Météo le matin, tâches la journée, bilan le soir.", colors: ["1C2566", "2A6F9B", "3FB5A3"],
-            widget: SetupWidget(kind: .now, family: .systemMedium, theme: .glass, accent: "3366FF")
-        ),
-        StoreFeature(
-            id: "money", eyebrow: "Budget", title: "Ton argent, enfin clair",
-            subtitle: "Reste du mois, dépenses, épargne et factures.", colors: ["E4533D", "D13F72"],
-            widget: SetupWidget(kind: .moneyDashboard, family: .systemMedium, theme: .light, accent: "FF6B57")
-        ),
-        StoreFeature(
-            id: "fitness", eyebrow: "Sport", title: "Chaque série compte",
-            subtitle: "Ta séance, tes records et ta régularité.", colors: ["2B2B30", "0E0E10"],
-            widget: SetupWidget(kind: .fitnessDashboard, family: .systemMedium, theme: .dark, accent: "FF6B57")
-        ),
-        StoreFeature(
-            id: "student", eyebrow: "Études", title: "Réussis ta session",
-            subtitle: "Cours, examens et devoirs au même endroit.", colors: ["8A4B24", "D4532A"],
-            widget: SetupWidget(kind: .studentDashboard, family: .systemMedium, theme: .retro, accent: "F2A33A")
-        ),
-        StoreFeature(
-            id: "world", eyebrow: "Voyage", title: "Le monde à ton heure",
-            subtitle: "Fuseaux horaires, décalage et heure sur place.", colors: ["070B1F", "171046", "3A1C7A"],
-            widget: SetupWidget(kind: .worldClock, family: .systemMedium, theme: .futuristic, accent: "3366FF", template: "world-futuristic")
-        ),
-        StoreFeature(
-            id: "habits", eyebrow: "Habitudes", title: "Tiens tes bonnes résolutions",
-            subtitle: "Coche tes habitudes sans ouvrir l'app.", colors: ["2F8F7A", "16302A"],
-            widget: SetupWidget(kind: .habits, family: .systemMedium, theme: .minimal, accent: "2F8F7A")
-        ),
-    ]
-
-    static let mediums: [ShowcaseItem] = [
-        item(.now, .systemMedium, .colorful, "8C6CFF"),
-        item(.weather, .systemMedium, .aurora, "3366FF"),
-        item(.calendar, .systemMedium, .elegant, "F2A33A"),
-        item(.tasks, .systemMedium, .light, "2F8F7A"),
-        item(.spendingByCategory, .systemMedium, .light, "FF6B57"),
-        item(.portfolio, .systemMedium, .futuristic, "3366FF"),
-        item(.todaysWorkout, .systemMedium, .dark, "F2A33A"),
-        item(.worldClock, .systemMedium, .minimal, "3366FF", "world-minimal"),
-        item(.progress, .systemMedium, .retro, "F2A33A", "progress-month-retro"),
-        item(.weeklyForecast, .systemMedium, .glass, "8C6CFF"),
-        item(.mealsToday, .systemMedium, .light, "F2A33A"),
-        item(.timetable, .systemMedium, .typography, "F2588F"),
-        item(.businessKPIs, .systemMedium, .elegant, "F2A33A"),
-        item(.upNext, .systemMedium, .digital, "2F8F7A"),
-    ]
-
-    static let larges: [ShowcaseItem] = [
-        item(.calendar, .systemLarge, .typography, "FF6B57"),
-        item(.myDay, .systemLarge, .glass, "8C6CFF"),
-        item(.weeklyForecast, .systemLarge, .aurora, "3366FF"),
-        item(.habitWeek, .systemLarge, .light, "8C6CFF"),
-        item(.spendingByCategory, .systemLarge, .dark, "F2A33A"),
-        item(.yearDots, .systemLarge, .monochrome, "6B7280"),
-        item(.mealsToday, .systemLarge, .retro, "F2A33A"),
-        item(.weeklyVolume, .systemLarge, .futuristic, "3366FF"),
-        item(.tasks, .systemLarge, .minimal, "2F8F7A"),
-    ]
 
     static let lockScreen: [ShowcaseItem] = [
         item(.weather, .accessoryRectangular, .minimal, "3366FF"),
@@ -140,57 +74,148 @@ enum StoreShowcase {
         }
     }
 
-    static let collectionsTop: [StoreCollection] = [
-        StoreCollection(id: "sport", title: "Pour les sportifs", subtitle: "Séance, séries, repos et calories.", symbol: "figure.strengthtraining.traditional", items: [
-            item(.nextSet, .systemMedium, .dark, "FF6B57"),
+    static let collections: [StoreCollection] = [
+        StoreCollection(id: "sport", title: "Pour les sportifs", subtitle: "Séance, séries, repos et calories.",
+                        symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", categories: [.fitness, .nutrition], items: [
+            item(.nextSet, .systemSmall, .dark, "FF6B57"),
+            item(.todaysWorkout, .systemMedium, .dark, "FF6B57"),
             item(.restTimer, .systemSmall, .dark, "FF6B57"),
             item(.personalRecords, .systemSmall, .retro, "F2A33A"),
-            item(.caloriesLeft, .systemSmall, .colorful, "2F8F7A"),
             item(.weeklyVolume, .systemMedium, .futuristic, "3366FF"),
+            item(.caloriesLeft, .systemSmall, .colorful, "2F8F7A"),
             item(.proteinLeft, .systemSmall, .glass, "8C6CFF"),
+            item(.workoutMonth, .systemLarge, .dark, "FF6B57"),
+            item(.trainingStreak, .systemSmall, .colorful, "FF6B57"),
+            item(.caloriesBurned, .systemSmall, .light, "FF6B57"),
         ]),
-        StoreCollection(id: "study", title: "Pour étudier", subtitle: "Cours, examens, devoirs et révisions.", symbol: "graduationcap.fill", items: [
-            item(.timetable, .systemMedium, .retro, "D4532A"),
+        StoreCollection(id: "study", title: "Pour étudier", subtitle: "Cours, examens, devoirs et révisions.",
+                        symbol: "graduationcap.fill", colorHex: "D6409F", categories: [.student], items: [
             item(.nextExam, .systemSmall, .light, "3366FF"),
+            item(.timetable, .systemMedium, .retro, "F2A33A"),
             item(.flashcard, .systemSmall, .retro, "F2A33A", "flashcard-retro"),
             item(.assignments, .systemSmall, .minimal, "F2588F"),
             item(.studyHours, .systemMedium, .light, "8C6CFF"),
             item(.gradeAverage, .systemSmall, .typography, "3366FF"),
+            item(.semesterProgress, .systemSmall, .colorful, "F2588F"),
+            item(.nextClass, .systemSmall, .minimal, "3366FF"),
+            item(.timetable, .systemLarge, .minimal, "F2588F"),
         ]),
-        StoreCollection(id: "business", title: "Pour entreprendre", subtitle: "Ventes, objectifs, bénéfice et MRR.", symbol: "briefcase.fill", items: [
-            item(.businessDashboard, .systemMedium, .elegant, "F2A33A"),
+        StoreCollection(id: "money", title: "Budget serré", subtitle: "Reste du mois, factures, épargne et abonnements.",
+                        symbol: "creditcard.fill", colorHex: "2F8F7A", categories: [.finance, .investing], items: [
+            item(.budgetLeft, .systemSmall, .light, "2F8F7A"),
+            item(.spendingByCategory, .systemMedium, .light, "FF6B57"),
+            item(.savingsGoal, .systemSmall, .colorful, "2F8F7A"),
+            item(.quickExpense, .systemSmall, .colorful, "FF6B57"),
+            item(.billsUpcoming, .systemMedium, .dark, "F2A33A"),
+            item(.subscriptions, .systemSmall, .minimal, "8C6CFF"),
+            item(.netWorth, .systemSmall, .elegant, "F2A33A"),
+            item(.moneyFlow, .systemLarge, .light, "2F8F7A", "money-net"),
+        ]),
+        StoreCollection(id: "business", title: "Pour entreprendre", subtitle: "Ventes, objectifs, bénéfice et MRR.",
+                        symbol: "briefcase.fill", colorHex: "C28A12", categories: [.business, .markets], items: [
             item(.revenueGoal, .systemSmall, .elegant, "F2A33A"),
+            item(.businessDashboard, .systemMedium, .elegant, "F2A33A"),
             item(.profit, .systemSmall, .dark, "2F8F7A"),
             item(.mrr, .systemSmall, .futuristic, "3366FF"),
             item(.revenueTrend, .systemMedium, .light, "2F8F7A"),
             item(.revenueToday, .systemSmall, .colorful, "F2A33A"),
+            item(.companySnapshot, .systemSmall, .futuristic, "3366FF", "company-futuristic"),
+            item(.businessKPIs, .systemLarge, .elegant, "F2A33A"),
         ]),
-    ]
-
-    static let collectionsBottom: [StoreCollection] = [
-        StoreCollection(id: "minimal", title: "Minimal et noir", subtitle: "L'essentiel, sans une couleur de trop.", symbol: "circle.lefthalf.filled", items: [
+        StoreCollection(id: "travel", title: "En voyage", subtitle: "Départ, vol, hôtel et heure sur place.",
+                        symbol: "airplane", colorHex: "12A4B5", categories: [.travel], items: [
+            item(.tripCountdown, .systemSmall, .aurora, "3366FF", "trip-aurora"),
+            item(.flight, .systemMedium, .light, "3366FF"),
+            item(.localTime, .systemSmall, .minimal, "2F8F7A"),
+            item(.currency, .systemSmall, .glass, "8C6CFF"),
+            item(.hotel, .systemSmall, .retro, "F2A33A"),
+            item(.destinationWeather, .systemSmall, .aurora, "3366FF"),
+            item(.nextActivity, .systemMedium, .light, "F2A33A"),
+            item(.tripProgress, .systemSmall, .colorful, "3366FF"),
+        ]),
+        StoreCollection(id: "calm", title: "Bien-être", subtitle: "Habitudes, eau, soleil et lune.",
+                        symbol: "leaf.fill", colorHex: "7FA33A", categories: [.wellbeing, .weather], items: [
+            item(.hydration, .systemSmall, .aurora, "3366FF"),
+            item(.habits, .systemMedium, .glass, "8C6CFF"),
+            item(.habitRate, .systemSmall, .glass, "F2588F"),
+            item(.moonPhase, .systemSmall, .elegant, "F2A33A"),
+            item(.sunCycle, .systemMedium, .light, "F2A33A"),
+            item(.habitStreak, .systemSmall, .colorful, "7FA33A"),
+            item(.habitWeek, .systemLarge, .light, "8C6CFF"),
+        ]),
+        StoreCollection(id: "minimal", title: "Minimal et noir", subtitle: "L'essentiel, sans une couleur de trop.",
+                        symbol: "circle.lefthalf.filled", colorHex: "3A3A3F", categories: [.time, .productivity], items: [
             item(.clock, .systemSmall, .monochrome, "6B7280"),
             item(.progress, .systemMedium, .monochrome, "6B7280", "progress-day"),
             item(.calendar, .systemSmall, .monochrome, "6B7280"),
-            item(.weekView, .systemMedium, .monochrome, "6B7280"),
             item(.moonPhase, .systemSmall, .monochrome, "6B7280"),
+            item(.weekView, .systemMedium, .monochrome, "6B7280"),
+            item(.countdown, .systemSmall, .monochrome, "6B7280", "countdown-since"),
+            item(.tasks, .systemSmall, .monochrome, "6B7280"),
+            item(.yearDots, .systemLarge, .monochrome, "6B7280"),
         ]),
-        StoreCollection(id: "vivid", title: "Couleurs vives", subtitle: "Ta couleur en plein fond.", symbol: "paintpalette.fill", items: [
-            item(.now, .systemMedium, .colorful, "FF6B57"),
+        StoreCollection(id: "vivid", title: "Couleurs vives", subtitle: "Ta couleur en plein fond.",
+                        symbol: "sparkles", colorHex: "F2588F", items: [
             item(.weather, .systemSmall, .colorful, "3366FF"),
+            item(.now, .systemMedium, .colorful, "FF6B57"),
             item(.hydration, .systemSmall, .colorful, "8C6CFF"),
             item(.habitStreak, .systemSmall, .colorful, "F2588F"),
             item(.budgetLeft, .systemMedium, .colorful, "F2A33A"),
             item(.trainingStreak, .systemSmall, .colorful, "7FA33A"),
+            item(.caloriesLeft, .systemSmall, .colorful, "2F8F7A"),
         ]),
-        StoreCollection(id: "calm", title: "Bien-être", subtitle: "Habitudes, eau, soleil et lune.", symbol: "leaf.fill", items: [
-            item(.habits, .systemMedium, .glass, "8C6CFF"),
-            item(.hydration, .systemSmall, .aurora, "3366FF"),
-            item(.habitRate, .systemSmall, .glass, "F2588F"),
-            item(.sunCycle, .systemMedium, .light, "F2A33A"),
-            item(.moonPhase, .systemSmall, .elegant, "F2A33A"),
+        StoreCollection(id: "mediums", title: "Widgets moyens", subtitle: "Deux fois plus de place, pour tout voir d'un coup d'œil.",
+                        symbol: "rectangle.fill", colorHex: "3366FF", items: [
+            item(.now, .systemMedium, .colorful, "8C6CFF"),
+            item(.weather, .systemMedium, .aurora, "3366FF"),
+            item(.calendar, .systemMedium, .elegant, "F2A33A"),
+            item(.tasks, .systemMedium, .light, "2F8F7A"),
+            item(.spendingByCategory, .systemMedium, .light, "FF6B57"),
+            item(.portfolio, .systemMedium, .futuristic, "3366FF"),
+            item(.todaysWorkout, .systemMedium, .dark, "F2A33A"),
+            item(.worldClock, .systemMedium, .minimal, "3366FF", "world-minimal"),
+            item(.progress, .systemMedium, .retro, "F2A33A", "progress-month-retro"),
+            item(.weeklyForecast, .systemMedium, .glass, "8C6CFF"),
+            item(.mealsToday, .systemMedium, .light, "F2A33A"),
+            item(.timetable, .systemMedium, .typography, "F2588F"),
+            item(.businessKPIs, .systemMedium, .elegant, "F2A33A"),
+            item(.upNext, .systemMedium, .digital, "2F8F7A"),
         ]),
+        StoreCollection(id: "larges", title: "Grands formats", subtitle: "Ta semaine, ton mois ou ta journée entière.",
+                        symbol: "square.fill", colorHex: "5B6CFF", items: [
+            item(.calendar, .systemLarge, .typography, "FF6B57"),
+            item(.myDay, .systemLarge, .glass, "8C6CFF"),
+            item(.weeklyForecast, .systemLarge, .aurora, "3366FF"),
+            item(.habitWeek, .systemLarge, .light, "8C6CFF"),
+            item(.spendingByCategory, .systemLarge, .dark, "F2A33A"),
+            item(.yearDots, .systemLarge, .monochrome, "6B7280"),
+            item(.mealsToday, .systemLarge, .retro, "F2A33A"),
+            item(.weeklyVolume, .systemLarge, .futuristic, "3366FF"),
+            item(.tasks, .systemLarge, .minimal, "2F8F7A"),
+        ]),
+        StoreCollection(id: "styles", title: "Un widget, 12 styles", subtitle: "Le même compte à rebours, dans chaque style.",
+                        symbol: "paintbrush.fill", colorHex: "8C6CFF", items: allStyles),
+        StoreCollection(id: "colors", title: "Toutes les couleurs", subtitle: "Choisis la tienne, ou n'importe quelle autre avec Premium.",
+                        symbol: "eyedropper.halffull", colorHex: "F2A33A", items: allColors),
     ]
+
+    static func collection(_ id: String) -> StoreCollection? {
+        collections.first { $0.id == id }
+    }
+
+    /// The collections that match the person's interests first, the others after, each group in catalog order.
+    static func collections(preferring categories: [WidgetCategory]) -> [StoreCollection] {
+        func rank(_ collection: StoreCollection) -> Int {
+            collection.categories.compactMap { categories.firstIndex(of: $0) }.min() ?? Int.max
+        }
+        return collections.enumerated()
+            .sorted { lhs, rhs in
+                let left = rank(lhs.element)
+                let right = rank(rhs.element)
+                return left == right ? lhs.offset < rhs.offset : left < right
+            }
+            .map(\.element)
+    }
 }
 
 // MARK: - Views
@@ -269,53 +294,5 @@ struct LockShowcaseCard: View {
         .frame(width: width)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-    }
-}
-
-/// A large promise card with a medium widget, one per page.
-struct StoreFeatureCard: View {
-    let feature: StoreFeature
-    let isPremiumUser: Bool
-
-    var body: some View {
-        let design = feature.widget.makeDesign()
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(feature.eyebrow.uppercased())
-                        .font(.caption.weight(.bold))
-                        .tracking(1.2)
-                        .foregroundStyle(Color.white.opacity(0.75))
-                    Text(feature.title)
-                        .font(.title2.weight(.bold))
-                        .foregroundStyle(.white)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.8)
-                    Text(feature.subtitle)
-                        .font(.subheadline)
-                        .foregroundStyle(Color.white.opacity(0.82))
-                        .lineLimit(2)
-                }
-                .frame(minHeight: 100, alignment: .topLeading)
-                Spacer(minLength: 8)
-                if design.usesPremiumFeatures && !isPremiumUser {
-                    PremiumBadge()
-                }
-            }
-            Spacer(minLength: 14)
-            WidgetPreview(design: design, family: feature.widget.family, payload: SamplePayload.make(for: design))
-                .shadow(color: .black.opacity(0.25), radius: 14, y: 8)
-        }
-        .padding(16)
-        .background {
-            ZStack {
-                LinearGradient(colors: feature.colors.map { Color(hex: $0) }, startPoint: .topLeading, endPoint: .bottomTrailing)
-                RadialGradient(colors: [Color.white.opacity(0.18), .clear], center: .topTrailing, startRadius: 0, endRadius: 260)
-            }
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-        .accessibilityHint(Text("Ouvre l'éditeur"))
     }
 }

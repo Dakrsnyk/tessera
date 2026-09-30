@@ -214,6 +214,13 @@ jobs:
           shoot style-graphite-settings settings top dark -screenshotStyle graphite
           shoot style-sand-settings settings top dark -screenshotStyle sand
           shoot style-neon-store store top dark -screenshotStyle neon
+          # The Store as a magazine, slice by slice, its pages, and Mes widgets as a carousel.
+          for slice in 0.12 0.24 0.36 0.48 0.6 0.72 0.84; do shoot store-at-$slice store $slice light; done
+          shoot store-dark store top dark
+          shoot store-at-0.3-dark store 0.3 dark
+          for page in combos packs collections collection-sport category-fitness; do shoot store-$page store-$page top light; done
+          shoot store-combos-end store-combos bottom light
+          shoot mywidgets-dark mywidgets top dark
 
       - name: App Store screenshots
         id: marketing

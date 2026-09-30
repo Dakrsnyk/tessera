@@ -1,6 +1,8 @@
 import SwiftUI
 import WidgetKit
 
+/// The Store, laid out like a magazine: this week's Home Screen on the cover, then complete screens,
+/// combinations, packs, collections and single widgets, each under a clear heading.
 struct ExploreView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -22,242 +24,134 @@ struct ExploreView: View {
             case .premium: "Premium"
             }
         }
+
+        func allows(isPremium: Bool) -> Bool {
+            switch self {
+            case .all: true
+            case .free: !isPremium
+            case .premium: isPremium
+            }
+        }
     }
 
     private var isFiltering: Bool {
         !query.trimmed.isEmpty || access != .all || themeFilter != nil || router.exploreCategory != nil
     }
 
-    private var results: [WidgetTemplate] {
-        TemplateCatalog.search(query).filter { template in
-            switch access {
-            case .all: break
-            case .free: if template.isPremium { return false }
-            case .premium: if !template.isPremium { return false }
-            }
-            if let themeFilter, template.themeID != themeFilter { return false }
-            if let category = router.exploreCategory, template.kind.category != category { return false }
-            return true
-        }
-    }
-
     var body: some View {
         @Bindable var router = router
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 26) {
-                    filters
-                    if isFiltering {
-                        resultsGrid
-                    } else {
-                        shelves
+        NavigationStack(path: $router.storePath) {
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Color.clear.frame(height: 0).id(Self.top)
+                        if isFiltering {
+                            filtered
+                        } else {
+                            magazine
+                        }
+                    }
+                    .padding(.bottom, 36)
+                    .sheet(item: $openedSetup) { setup in
+                        HomeSetupSheet(setup: setup)
                     }
                 }
-                .padding(.bottom, 32)
-                .sheet(item: $openedSetup) { setup in
-                    HomeSetupSheet(setup: setup)
+                .onChange(of: isFiltering) { _, _ in
+                    proxy.scrollTo(Self.top, anchor: .top)
                 }
             }
             .background(.screenFill)
             .screenshotScroll()
             .navigationTitle("Store")
+            .navigationDestination(for: StorePage.self) { page in
+                destination(page)
+            }
             .sheet(item: $openedPack) { pack in
                 PackSheet(pack: pack)
             }
-            .navigationDestination(isPresented: $router.showsAllSetups) {
-                HomeSetupsView()
-            }
-            .searchable(text: $query, isPresented: $isSearchPresented, prompt: "Météo, tâches, bitcoin…")
-            .onAppear(perform: consumeSearchRequest)
-            .onChange(of: router.exploreSearchRequested) { _, _ in consumeSearchRequest() }
+            .searchable(text: $query, isPresented: $isSearchPresented, prompt: "Écrans, packs, météo, bitcoin…")
+            .onAppear(perform: consumeRequests)
+            .onChange(of: router.exploreSearchRequested) { _, _ in consumeRequests() }
+            .onChange(of: router.openedSetupID) { _, _ in consumeRequests() }
         }
     }
 
-    private func consumeSearchRequest() {
+    private static let top = "store-top"
+
+    @ViewBuilder private func destination(_ page: StorePage) -> some View {
+        switch page {
+        case .setups: HomeSetupsView()
+        case .combos: StoreCombosView()
+        case .packs: StorePacksView()
+        case .collections: StoreCollectionsView()
+        case let .collection(id):
+            if let collection = StoreShowcase.collection(id) {
+                StoreCollectionView(collection: collection)
+            }
+        }
+    }
+
+    private func consumeRequests() {
         if router.exploreSearchRequested {
             router.exploreSearchRequested = false
             isSearchPresented = true
         }
-        if !router.showsAllSetups, let id = router.openedSetupID {
+        if router.storePath.isEmpty, let id = router.openedSetupID {
             router.openedSetupID = nil
             openedSetup = HomeSetupCatalog.setup(id)
         }
     }
 
-    // MARK: Filters
+    private var interests: [WidgetCategory] { model.profile.preferredCategories }
 
-    private var filters: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                ForEach(AccessFilter.allCases) { filter in
-                    FilterChip(title: filter.title, isSelected: access == filter) { access = filter }
-                }
-                Divider().frame(height: 22)
-                ForEach(WidgetCategory.allCases) { category in
-                    FilterChip(title: category.title, symbol: category.symbol, isSelected: router.exploreCategory == category) {
-                        router.exploreCategory = router.exploreCategory == category ? nil : category
-                    }
-                }
-                if let themeFilter {
-                    FilterChip(title: ThemeCatalog.theme(themeFilter).name, symbol: "xmark", isSelected: true) {
-                        self.themeFilter = nil
-                    }
-                }
-            }
-            .padding(.horizontal, 20)
-        }
-        .padding(.top, 4)
-    }
+    // MARK: - Magazine
 
-    // MARK: Shelves (default view)
-
-    /// The Store front: from complete screens to single widgets, every size, style and color.
-    private var shelves: some View {
-        LazyVStack(alignment: .leading, spacing: 32) {
-            // The user's interests first; every other shelf stays below.
-            if !forYou.isEmpty {
-                shelf(title: "Pour toi", templates: forYou)
-            }
-            featuresCarousel
-            setupsShelf
-            showcaseShelf(title: "Widgets moyens", subtitle: "Deux fois plus de place, pour tout voir d'un coup d'œil.", items: StoreShowcase.mediums)
-            packsShelf
-            ForEach(StoreShowcase.collectionsTop) { collection in
-                showcaseShelf(title: collection.title, subtitle: collection.subtitle, symbol: collection.symbol, items: collection.items)
-            }
-            showcaseShelf(title: "Un widget, 12 styles", subtitle: "Le même compte à rebours, dans chaque style.", items: StoreShowcase.allStyles)
-            showcaseShelf(title: "Grands formats", subtitle: "Ta semaine, ton mois ou ta journée entière.", items: StoreShowcase.larges, height: 250)
-            ForEach(StoreShowcase.collectionsBottom) { collection in
-                showcaseShelf(title: collection.title, subtitle: collection.subtitle, symbol: collection.symbol, items: collection.items)
-            }
-            lockScreenShelf
-            showcaseShelf(title: "Toutes les couleurs", subtitle: "Choisis la tienne, ou n'importe quelle autre avec Premium.", items: StoreShowcase.allColors)
-            shelf(title: "Nouveautés", templates: TemplateCatalog.newest)
-            stylesShelf
-            ForEach(WidgetCategory.allCases) { category in
-                let templates = TemplateCatalog.all.filter { $0.kind.category == category }
-                shelf(title: category.title, templates: templates) {
-                    router.exploreCategory = category
-                }
-            }
-        }
-    }
-
-    /// Widgets of the categories the user is interested in, one per kind.
-    private var forYou: [WidgetTemplate] {
-        var seen = Set<WidgetKind>()
-        return model.profile.preferredCategories
-            .flatMap { category in TemplateCatalog.all.filter { $0.kind.category == category } }
-            .filter { seen.insert($0.kind).inserted }
-            .prefix(14)
-            .map { $0 }
-    }
-
-    private func shelfHeader(title: String, subtitle: String?, symbol: String? = nil, seeAll: (() -> Void)? = nil) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
-            HStack(alignment: .firstTextBaseline, spacing: 7) {
-                if let symbol {
-                    Image(systemName: symbol)
-                        .font(.headline)
-                        .foregroundStyle(Color.accentColor)
-                }
-                SectionHeader(title: title, actionTitle: seeAll == nil ? nil : "Tout voir", action: seeAll)
-            }
-            if let subtitle {
-                Text(subtitle)
-                    .font(.subheadline)
+    private var magazine: some View {
+        let weekly = HomeSetupCatalog.weekly()
+        return LazyVStack(alignment: .leading, spacing: 38) {
+            VStack(alignment: .leading, spacing: 14) {
+                Text(Fmt.longDay(Date()).uppercased())
+                    .font(.caption.weight(.bold))
+                    .tracking(1.1)
                     .foregroundStyle(.secondary)
-            }
-        }
-        .padding(.horizontal, 20)
-    }
-
-    /// Template shelves: every fourth widget (and those with no small size) shown medium.
-    private func shelf(title: String, templates: [WidgetTemplate], seeAll: (() -> Void)? = nil) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            shelfHeader(title: title, subtitle: nil, seeAll: seeAll)
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: .top, spacing: 14) {
-                    ForEach(Array(templates.enumerated()), id: \.element.id) { pair in
-                        let template = pair.element
-                        let canBeMedium = template.kind.families.contains(.systemMedium)
-                        let family: WidgetFamily? = pair.offset % 4 == 0 && canBeMedium ? .systemMedium : nil
-                        templateButton(template, width: 150, family: family)
-                    }
-                }
-                .padding(.horizontal, 20)
-            }
-        }
-    }
-
-    private func showcaseShelf(title: String, subtitle: String?, symbol: String? = nil, items: [ShowcaseItem], height: CGFloat = 150) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            shelfHeader(title: title, subtitle: subtitle, symbol: symbol)
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: .top, spacing: 14) {
-                    ForEach(items) { item in
-                        Button {
-                            router.openEditor(item.widget.makeDesign(), isNew: true)
-                        } label: {
-                            ShowcaseCard(item: item, height: height, isPremiumUser: model.isPremium)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 20)
-            }
-        }
-    }
-
-    /// Big cards, one per page, each with a medium widget.
-    private var featuresCarousel: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 12) {
-                ForEach(StoreShowcase.features) { feature in
-                    Button {
-                        router.openEditor(feature.widget.makeDesign(), isNew: true)
-                    } label: {
-                        StoreFeatureCard(feature: feature, isPremiumUser: model.isPremium)
-                    }
-                    .buttonStyle(.plain)
-                    .containerRelativeFrame(.horizontal)
+                    .padding(.horizontal, 20)
+                WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
+                    openedSetup = weekly
                 }
             }
-            .scrollTargetLayout()
-        }
-        .contentMargins(.horizontal, 20, for: .scrollContent)
-        .scrollTargetBehavior(.viewAligned)
-    }
-
-    private var lockScreenShelf: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            shelfHeader(title: "Écran verrouillé", subtitle: "Sous l'heure, d'un coup d'œil, sans déverrouiller.", symbol: "lock.fill")
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: .top, spacing: 14) {
-                    ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
-                        Button {
-                            router.openEditor(pair.element.widget.makeDesign(), isNew: true)
-                        } label: {
-                            LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 20)
+            setupsSection(excluding: weekly.id)
+            if !forYou.isEmpty {
+                forYouSection
+            }
+            combosSection
+            packsSection
+            collectionsSection
+            Group {
+                essentialsSection
+                lockScreenSection
+                stylesSection
+                newestSection
+                categoriesSection
             }
         }
+        .padding(.top, 2)
     }
 
     /// Complete Home Screens, drawn as on a real iPhone.
-    private var setupsShelf: some View {
+    private func setupsSection(excluding weeklyID: String) -> some View {
         let favorites = SetupFavorites.ids(favoritesRaw)
-        return VStack(alignment: .leading, spacing: 12) {
-            shelfHeader(title: "Écrans d'accueil", subtitle: "Fond, widgets et écran verrouillé assortis.") {
-                router.showsAllSetups = true
+        let setups = HomeSetupCatalog.all.filter { $0.id != weeklyID }
+        return VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(
+                eyebrow: "Clé en main",
+                title: "Écrans d'accueil",
+                subtitle: "Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches."
+            ) {
+                router.storePath.append(.setups)
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 14) {
-                    ForEach(HomeSetupCatalog.all) { setup in
+                    ForEach(setups) { setup in
                         SetupCard(
                             setup: setup,
                             showsPages: false,
@@ -278,12 +172,79 @@ struct ExploreView: View {
         }
     }
 
-    private var packsShelf: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            shelfHeader(title: "Packs", subtitle: "Six widgets assortis, ajoutés d'une touche.")
+    /// Widgets of the categories the person is interested in, one per kind.
+    private var forYou: [WidgetTemplate] {
+        var seen = Set<WidgetKind>()
+        return interests
+            .flatMap { category in TemplateCatalog.all.filter { $0.kind.category == category } }
+            .filter { seen.insert($0.kind).inserted }
+            .prefix(14)
+            .map { $0 }
+    }
+
+    private var forYouSection: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(eyebrow: "Selon tes centres d'intérêt", title: "Pour toi")
+            templateShelf(forYou)
+        }
+    }
+
+    /// Two small widgets in a medium one, up to four in a large one.
+    private var combosSection: some View {
+        let combos = StoreRanking.combos(StoreComboCatalog.all, preferring: interests)
+        let mediums = combos.filter { $0.format == .medium }
+        let larges = combos.filter { $0.format == .large }
+        return VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(
+                eyebrow: "Plusieurs en un",
+                title: "Combinaisons",
+                subtitle: "\(StoreComboCatalog.all.count) widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand."
+            ) {
+                router.storePath.append(.combos)
+            }
+            comboShelf(mediums, height: 140)
+            comboShelf(larges, height: 250)
+        }
+    }
+
+    private func comboShelf(_ combos: [StoreCombo], height: CGFloat) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(alignment: .top, spacing: 14) {
+                ForEach(combos) { combo in
+                    Button {
+                        router.openEditor(combo.makeDesign(), isNew: true)
+                    } label: {
+                        ComboCard(combo: combo, height: height, isPremiumUser: model.isPremium)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    /// The pack of the week, big, then every other pack.
+    private var packsSection: some View {
+        let featured = StoreEdition.pack()
+        let others = StoreRanking.packs(preferring: interests).filter { $0.id != featured.id }
+        return VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(
+                eyebrow: "Six widgets assortis",
+                title: "Packs",
+                subtitle: "Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets."
+            ) {
+                router.storePath.append(.packs)
+            }
+            Button {
+                openedPack = featured
+            } label: {
+                PackFeature(pack: featured, isPremiumUser: model.isPremium)
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 14) {
-                    ForEach(PackCatalog.all) { pack in
+                LazyHStack(alignment: .top, spacing: 16) {
+                    ForEach(others) { pack in
                         Button {
                             openedPack = pack
                         } label: {
@@ -297,9 +258,63 @@ struct ExploreView: View {
         }
     }
 
-    private var stylesShelf: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            shelfHeader(title: "Styles", subtitle: "Touche un style pour voir tous ses widgets.")
+    private var collectionsSection: some View {
+        let collections = Array(StoreShowcase.collections(preferring: interests).prefix(4))
+        return VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(
+                eyebrow: "Sélections",
+                title: "Collections",
+                subtitle: "Des widgets réunis autour d'un thème, d'une taille ou d'un style."
+            ) {
+                router.storePath.append(.collections)
+            }
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+                ForEach(collections) { collection in
+                    Button {
+                        router.storePath.append(.collection(collection.id))
+                    } label: {
+                        CollectionTile(collection: collection)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    /// Chosen by the team: there are no download counts to rank by.
+    private var essentialsSection: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(eyebrow: "Notre sélection", title: "Incontournables", subtitle: "Les widgets à essayer en premier.")
+            EssentialsList(templates: Array(TemplateCatalog.featured.prefix(6)), isPremiumUser: model.isPremium) { template in
+                router.openEditor(template.makeDesign(), isNew: true)
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    private var lockScreenSection: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(eyebrow: "Sous l'heure", title: "Écran verrouillé", subtitle: "D'un coup d'œil, sans déverrouiller ton iPhone.")
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(alignment: .top, spacing: 14) {
+                    ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
+                        Button {
+                            router.openEditor(pair.element.widget.makeDesign(), isNew: true)
+                        } label: {
+                            LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+        }
+    }
+
+    private var stylesSection: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(eyebrow: "12 styles", title: "Styles", subtitle: "Touche un style pour voir tous ses widgets.")
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(ThemeCatalog.all) { theme in
@@ -316,29 +331,188 @@ struct ExploreView: View {
         }
     }
 
-    // MARK: Results
+    private var newestSection: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(eyebrow: "Vient d'arriver", title: "Nouveautés")
+            templateShelf(TemplateCatalog.newest)
+        }
+    }
 
-    @ViewBuilder private var resultsGrid: some View {
-        let items = results
-        if items.isEmpty {
-            EmptyStateView(
-                symbol: "magnifyingglass",
-                title: "Aucun résultat",
-                message: "Essaie un autre mot, ou retire un filtre.",
-                actionTitle: "Tout afficher"
-            ) {
-                query = ""
-                access = .all
-                themeFilter = nil
-                router.exploreCategory = nil
+    private var categoriesSection: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            MagazineHeader(eyebrow: "Tout le catalogue", title: "Catégories")
+            CategoryIndex(categories: interests + WidgetCategory.allCases.filter { !interests.contains($0) }) { category in
+                router.exploreCategory = category
             }
-        } else {
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], alignment: .leading, spacing: 20) {
-                ForEach(items) { template in
-                    templateButton(template, width: nil)
+            .padding(.horizontal, 20)
+        }
+    }
+
+    /// Template shelves: every fourth widget (and those with no small size) shown medium.
+    private func templateShelf(_ templates: [WidgetTemplate]) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(alignment: .top, spacing: 14) {
+                ForEach(Array(templates.enumerated()), id: \.element.id) { pair in
+                    let template = pair.element
+                    let canBeMedium = template.kind.families.contains(.systemMedium)
+                    let family: WidgetFamily? = pair.offset % 4 == 0 && canBeMedium ? .systemMedium : nil
+                    templateButton(template, width: 150, family: family)
                 }
             }
             .padding(.horizontal, 20)
+        }
+    }
+
+    // MARK: - Search and filters
+
+    private var filters: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(AccessFilter.allCases) { filter in
+                    FilterChip(title: filter.title, isSelected: access == filter) { access = filter }
+                }
+                Divider().frame(height: 22)
+                if let themeFilter {
+                    FilterChip(title: ThemeCatalog.theme(themeFilter).name, symbol: "xmark", isSelected: true) {
+                        self.themeFilter = nil
+                    }
+                }
+                ForEach(WidgetCategory.allCases) { category in
+                    FilterChip(title: category.title, symbol: category.symbol, isSelected: router.exploreCategory == category) {
+                        router.exploreCategory = router.exploreCategory == category ? nil : category
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+        .padding(.top, 4)
+    }
+
+    private var folded: String {
+        query.trimmed.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Fmt.locale)
+    }
+
+    private func matches(_ texts: [String]) -> Bool {
+        let q = folded
+        guard !q.isEmpty else { return true }
+        return texts.joined(separator: " ")
+            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Fmt.locale)
+            .contains(q)
+    }
+
+    private var templateResults: [WidgetTemplate] {
+        TemplateCatalog.search(query).filter { template in
+            guard access.allows(isPremium: template.isPremium) else { return false }
+            if let themeFilter, template.themeID != themeFilter { return false }
+            if let category = router.exploreCategory, template.kind.category != category { return false }
+            return true
+        }
+    }
+
+    private var comboResults: [StoreCombo] {
+        StoreComboCatalog.all.filter { combo in
+            guard access.allows(isPremium: combo.isPremium) else { return false }
+            if let themeFilter, combo.theme != themeFilter { return false }
+            if let category = router.exploreCategory, combo.category != category { return false }
+            return matches([combo.name, combo.tagline, combo.category.title] + combo.parts.map(\.kind.title))
+        }
+    }
+
+    private var packResults: [WidgetPack] {
+        PackCatalog.all.filter { pack in
+            guard access.allows(isPremium: pack.isPremium) else { return false }
+            if let themeFilter, pack.themeID != themeFilter { return false }
+            if let category = router.exploreCategory, !pack.kinds.contains(where: { $0.category == category }) { return false }
+            return matches([pack.name, pack.tagline] + pack.kinds.map(\.title))
+        }
+    }
+
+    /// Screens are found by words only: they mix categories and styles.
+    private var setupResults: [HomeSetup] {
+        guard !folded.isEmpty, themeFilter == nil, router.exploreCategory == nil else { return [] }
+        return HomeSetupCatalog.all.filter { setup in
+            access.allows(isPremium: setup.isPremium) && matches([setup.name, setup.tagline] + setup.tags.map(\.title))
+        }
+    }
+
+    @ViewBuilder private var filtered: some View {
+        let templates = templateResults
+        let combos = comboResults
+        let packs = packResults
+        let setups = setupResults
+        VStack(alignment: .leading, spacing: 30) {
+            filters
+            if templates.isEmpty && combos.isEmpty && packs.isEmpty && setups.isEmpty {
+                EmptyStateView(
+                    symbol: "magnifyingglass",
+                    title: "Aucun résultat",
+                    message: "Essaie un autre mot, ou retire un filtre.",
+                    actionTitle: "Tout afficher"
+                ) {
+                    query = ""
+                    access = .all
+                    themeFilter = nil
+                    router.exploreCategory = nil
+                }
+            } else {
+                if !setups.isEmpty {
+                    VStack(alignment: .leading, spacing: 14) {
+                        MagazineHeader(title: "Écrans d'accueil", subtitle: Fmt.plural(setups.count, "écran", "écrans"))
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHStack(alignment: .top, spacing: 14) {
+                                ForEach(setups) { setup in
+                                    SetupCard(
+                                        setup: setup,
+                                        showsPages: false,
+                                        isFavorite: SetupFavorites.ids(favoritesRaw).contains(setup.id),
+                                        isPremiumUser: model.isPremium,
+                                        onFavorite: { favoritesRaw = SetupFavorites.toggled(setup.id, in: favoritesRaw) },
+                                        onOpen: { openedSetup = setup }
+                                    )
+                                    .frame(width: 150)
+                                }
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 6)
+                        }
+                    }
+                }
+                if !combos.isEmpty {
+                    VStack(alignment: .leading, spacing: 14) {
+                        MagazineHeader(title: "Combinaisons", subtitle: Fmt.plural(combos.count, "combinaison", "combinaisons"))
+                        comboShelf(combos, height: 140)
+                    }
+                }
+                if !packs.isEmpty {
+                    VStack(alignment: .leading, spacing: 14) {
+                        MagazineHeader(title: "Packs", subtitle: Fmt.plural(packs.count, "pack", "packs"))
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHStack(alignment: .top, spacing: 16) {
+                                ForEach(packs) { pack in
+                                    Button {
+                                        openedPack = pack
+                                    } label: {
+                                        PackCard(pack: pack, isPremiumUser: model.isPremium)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                            .padding(.horizontal, 20)
+                        }
+                    }
+                }
+                if !templates.isEmpty {
+                    VStack(alignment: .leading, spacing: 14) {
+                        MagazineHeader(title: "Widgets", subtitle: Fmt.plural(templates.count, "widget", "widgets"))
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], alignment: .leading, spacing: 20) {
+                            ForEach(templates) { template in
+                                templateButton(template, width: nil)
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                    }
+                }
+            }
         }
     }
 
@@ -421,44 +595,6 @@ struct ThemeSwatch: View {
     }
 }
 
-/// A pack in the Store: three of its widgets stacked, its name and what it contains.
-struct PackCard: View {
-    let pack: WidgetPack
-    let isPremiumUser: Bool
-
-    var body: some View {
-        let designs = pack.designs()
-        VStack(alignment: .leading, spacing: 10) {
-            ZStack(alignment: .topLeading) {
-                ForEach(Array(designs.prefix(3).enumerated().reversed()), id: \.offset) { pair in
-                    WidgetPreview(design: pair.element, family: .systemSmall, payload: SamplePayload.make(for: pair.element), width: 104)
-                        .rotationEffect(.degrees(Double(pair.offset - 1) * 6))
-                        .offset(x: CGFloat(pair.offset) * 34, y: CGFloat(pair.offset) * 4)
-                        .shadow(color: .black.opacity(0.12), radius: 6, y: 3)
-                }
-            }
-            .frame(width: 190, height: 124, alignment: .topLeading)
-            .padding(.top, 6)
-            HStack(spacing: 6) {
-                Image(systemName: pack.symbol).foregroundStyle(Color(hex: pack.accentHex))
-                Text(pack.name).font(.subheadline.weight(.semibold))
-                Spacer(minLength: 0)
-                if pack.isPremium && !isPremiumUser { PremiumBadge(compact: true) }
-            }
-            Text(pack.tagline)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(width: 200, alignment: .leading)
-        .card(padding: 12)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("Pack \(pack.name), \(pack.kinds.count) widgets"))
-    }
-}
-
 struct PackSheet: View {
     let pack: WidgetPack
     @Environment(AppModel.self) private var model
@@ -474,11 +610,18 @@ struct PackSheet: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 16) {
-                        ForEach(pack.designs()) { design in
+                        ForEach(pack.smallDesigns()) { design in
                             VStack(alignment: .leading, spacing: 6) {
                                 WidgetPreview(design: design, family: .systemSmall, payload: model.payload(for: design))
                                 Text(design.kind.title).font(.caption.weight(.semibold)).lineLimit(1)
                             }
+                        }
+                    }
+                    // Widgets that exist only in medium or large, across the width.
+                    ForEach(pack.designs().filter { !$0.kind.families.contains(.systemSmall) }) { design in
+                        VStack(alignment: .leading, spacing: 6) {
+                            WidgetPreview(design: design, family: .systemMedium, payload: model.payload(for: design))
+                            Text(design.kind.title).font(.caption.weight(.semibold)).lineLimit(1)
                         }
                     }
                     if let installed {

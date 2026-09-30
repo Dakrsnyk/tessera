@@ -147,10 +147,11 @@ enum SetupIconStyle {
 
 enum SetupWallpaper: String, CaseIterable {
     case midnight, cream, aurora, topography, synthwave, dunes, jade, pastel, graphite, paper, bureau, bauhaus
+    case ocean, forest, sunset, terrazzo, nebula, seventies
 
     var isLight: Bool {
         switch self {
-        case .cream, .topography, .dunes, .pastel, .paper, .bauhaus: true
+        case .cream, .topography, .dunes, .pastel, .paper, .bauhaus, .terrazzo, .seventies: true
         default: false
         }
     }
@@ -164,6 +165,8 @@ enum SetupWallpaper: String, CaseIterable {
         case .pastel: "4A2E40"
         case .paper: "1E2A44"
         case .bauhaus: "3A1F1A"
+        case .terrazzo: "3A2E2A"
+        case .seventies: "4A2616"
         default: "1C1C1E"
         }
     }
@@ -182,6 +185,12 @@ enum SetupWallpaper: String, CaseIterable {
         case .paper: "Papier pointillé"
         case .bureau: "Art déco"
         case .bauhaus: "Formes"
+        case .ocean: "Océan"
+        case .forest: "Forêt de pins"
+        case .sunset: "Crépuscule"
+        case .terrazzo: "Terrazzo"
+        case .nebula: "Nébuleuse"
+        case .seventies: "Arcs seventies"
         }
     }
 }
@@ -355,9 +364,85 @@ enum HomeSetupCatalog {
             dock: [.phone, .mail, .web, .camera],
             lock: SetupLock(widgets: [rectangular(.budgetLeft), rectangular(.billsUpcoming)], clockDesign: .rounded, clockWeight: .bold)
         ),
+        HomeSetup(
+            id: "ocean", name: "Océan", tagline: "L'eau, le ciel et tes habitudes, en bleu profond.",
+            tags: [.dark, .wellbeing], wallpaper: .ocean, icons: .glass,
+            rows: [
+                .widgets([small(.hydration, .glass, "3366FF"), small(.weather, .glass, "3366FF")]),
+                .widgets([medium(.habitWeek, .glass, "3366FF")]),
+                .widgetAndApps(small(.moonPhase, .glass, "3366FF"), [.health, .music, .podcasts, .weather], widgetFirst: true),
+            ],
+            dock: [.phone, .messages, .web, .camera],
+            lock: SetupLock(widgets: [circular(.hydration), circular(.moonPhase), rectangular(.weather)], clockDesign: .rounded, clockWeight: .medium)
+        ),
+        HomeSetup(
+            id: "foret", name: "Forêt", tagline: "Ton mois d'entraînement, à l'ombre des pins.",
+            tags: [.dark, .fitness], wallpaper: .forest,
+            icons: .solid(background: "1E3326", symbol: "A8D08D"),
+            rows: [
+                .widgets([medium(.workoutMonth, .dark, "7FA33A")]),
+                .widgets([small(.trainingStreak, .dark, "7FA33A"), small(.caloriesBurned, .dark, "7FA33A")]),
+                .widgetAndApps(small(.weather, .dark, "7FA33A"), [.fitness, .health, .maps, .music], widgetFirst: false),
+            ],
+            dock: [.phone, .messages, .web, .camera],
+            lock: SetupLock(widgets: [circular(.trainingStreak), circular(.weather), rectangular(.nextSet)], clockWeight: .bold)
+        ),
+        HomeSetup(
+            id: "crepuscule", name: "Crépuscule", tagline: "Le coucher du soleil, la semaine et ce qui t'attend.",
+            tags: [.colorful, .dark, .travel], wallpaper: .sunset, icons: .glass,
+            rows: [
+                .widgets([small(.sunCycle, .glass, "F2588F"), small(.countdown, .glass, "F2588F", "countdown-holidays")]),
+                .widgets([medium(.weeklyForecast, .glass, "F2588F")]),
+                .widgetAndApps(small(.note, .glass, "F2588F", "note-quote"), [.photos, .camera, .maps, .music], widgetFirst: true),
+            ],
+            dock: [.phone, .messages, .web, .mail],
+            lock: SetupLock(widgets: [rectangular(.sunCycle), circular(.countdown, "countdown-holidays"), circular(.weather)], clockDesign: .rounded)
+        ),
+        HomeSetup(
+            id: "terrazzo", name: "Terrazzo", tagline: "Tâches, priorités et focus sur des éclats de couleur.",
+            tags: [.light, .colorful, .productivity], wallpaper: .terrazzo,
+            icons: .solid(background: "FFFFFF", symbol: "E4533D"),
+            rows: [
+                .widgets([medium(.tasks, .light, "FF6B57")]),
+                .widgets([small(.priorities, .light, "FF6B57"), small(.focus, .colorful, "FF6B57")]),
+                .widgetAndApps(small(.counter, .light, "FF6B57"), [.notes, .calendar, .reminders, .files], widgetFirst: true),
+            ],
+            dock: [.phone, .messages, .web, .mail],
+            lock: SetupLock(widgets: [rectangular(.tasks), circular(.focus), circular(.counter)], clockDesign: .rounded, clockWeight: .bold)
+        ),
+        HomeSetup(
+            id: "nebuleuse", name: "Nébuleuse", tagline: "Portefeuille, crypto et marché, sous les étoiles.",
+            tags: [.dark, .money, .colorful], wallpaper: .nebula, icons: .tinted("B69CFF"),
+            rows: [
+                .widgets([small(.crypto, .futuristic, "8C6CFF"), small(.topMover, .futuristic, "8C6CFF")]),
+                .widgets([medium(.portfolio, .futuristic, "8C6CFF")]),
+                .widgetAndApps(small(.marketOverview, .futuristic, "8C6CFF"), [.web, .wallet, .notes, .settings], widgetFirst: false),
+            ],
+            dock: [.phone, .messages, .mail, .music],
+            lock: SetupLock(widgets: [rectangular(.portfolio), rectangular(.crypto)], clockDesign: .monospaced, clockWeight: .light)
+        ),
+        HomeSetup(
+            id: "seventies", name: "Seventies", tagline: "Cours, fiches et heures d'étude, en arcs rétro.",
+            tags: [.light, .study, .colorful], wallpaper: .seventies,
+            icons: .solid(background: "FFF3E0", symbol: "C0602A"),
+            rows: [
+                .widgets([small(.nextClass, .retro, "F2A33A"), small(.flashcard, .retro, "F2A33A", "flashcard-retro")]),
+                .widgets([medium(.studyHours, .retro, "F2A33A")]),
+                .widgetAndApps(small(.gradeAverage, .retro, "F2A33A"), [.books, .notes, .calendar, .files], widgetFirst: true),
+            ],
+            dock: [.phone, .messages, .web, .music],
+            lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.nextClass), circular(.nextExam), circular(.semesterProgress)],
+                            clockDesign: .rounded, clockWeight: .heavy)
+        ),
     ]
 
     static func setup(_ id: String) -> HomeSetup? {
         all.first { $0.id == id }
+    }
+
+    /// The setup put forward in the Store this week: the same all week, a different one each week.
+    static func weekly(now: Date = Date()) -> HomeSetup {
+        let week = Calendar(identifier: .iso8601).component(.weekOfYear, from: now)
+        return all[week % all.count]
     }
 }

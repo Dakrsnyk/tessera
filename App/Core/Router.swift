@@ -8,6 +8,12 @@ struct EditorRequest: Identifiable {
     var isNew: Bool
 }
 
+/// Pages of the Store, pushed from its sections.
+enum StorePage: Hashable {
+    case setups, combos, packs, collections
+    case collection(String)
+}
+
 enum ContentScreen: String, Identifiable {
     case tasks, habits, hydration, money, weather, calendar
     var id: String { rawValue }
@@ -41,8 +47,8 @@ final class Router {
     var lastSavedName: String?
     var exploreCategory: WidgetCategory?
     var exploreSearchRequested = false
-    /// Store: the full list of Home Screen setups, and a setup to open (used by test captures).
-    var showsAllSetups = false
+    /// Store: the pages pushed on top of it, and a setup to open (used by test captures).
+    var storePath: [StorePage] = []
     var openedSetupID: String?
     /// Navigation inside the Espaces tab.
     var spacePath: [Space] = []

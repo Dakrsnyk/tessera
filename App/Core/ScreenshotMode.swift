@@ -51,7 +51,7 @@ enum ScreenshotMode {
             // instant leaves the tab bar on the Store with the previous page still shown.
             Task { @MainActor in
                 try? await Task.sleep(for: .milliseconds(900))
-                router.showsAllSetups = true
+                router.storePath = [.setups]
             }
         case "home": router.tab = .home
         case "explore": router.tab = .explore
@@ -82,6 +82,26 @@ enum ScreenshotMode {
             if screen == "mywidgets-select" {
                 router.tab = .mine
                 router.startsSelection = true
+            }
+            if screen.hasPrefix("store-") {
+                router.tab = .explore
+                let name = String(screen.dropFirst(6))
+                let page: StorePage? = switch name {
+                case "combos": .combos
+                case "packs": .packs
+                case "collections": .collections
+                default: name.hasPrefix("collection-") ? .collection(String(name.dropFirst(11))) : nil
+                }
+                if name.hasPrefix("category-") {
+                    router.exploreCategory = WidgetCategory(rawValue: String(name.dropFirst(9)))
+                }
+                if let page {
+                    // Pushed once the Store tab is on screen (see "setups").
+                    Task { @MainActor in
+                        try? await Task.sleep(for: .milliseconds(900))
+                        router.storePath = [page]
+                    }
+                }
             }
             if screen.hasPrefix("setup-") {
                 router.tab = .explore
@@ -237,6 +257,9 @@ extension View {
         switch UserDefaults.standard.string(forKey: "screenshotScroll") {
         case "center": defaultScrollAnchor(.center)
         case "bottom": defaultScrollAnchor(.bottom)
+        case let value?:
+            // A fraction of the page, for long pages shot in several slices ("0.3").
+            if let fraction = Double(value) { defaultScrollAnchor(UnitPoint(x: 0, y: fraction)) } else { self }
         default: self
         }
         #else

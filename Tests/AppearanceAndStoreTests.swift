@@ -54,13 +54,77 @@ final class AppearanceAndStoreTests: XCTestCase {
     }
 
     func testStoreShelvesUseSupportedSizes() {
-        var items = StoreShowcase.mediums + StoreShowcase.larges + StoreShowcase.lockScreen + StoreShowcase.allStyles + StoreShowcase.allColors
-        items += (StoreShowcase.collectionsTop + StoreShowcase.collectionsBottom).flatMap(\.items)
-        let widgets = items.map(\.widget) + StoreShowcase.features.map(\.widget)
-        for widget in widgets {
+        let items = StoreShowcase.lockScreen + StoreShowcase.allStyles + StoreShowcase.allColors + StoreShowcase.collections.flatMap(\.items)
+        for widget in items.map(\.widget) {
             XCTAssertTrue(widget.kind.families.contains(widget.family), "\(widget.kind) has no \(widget.family) size")
         }
         XCTAssertEqual(StoreShowcase.allStyles.count, ThemeCatalog.all.count)
+    }
+
+    func testCollectionsAreDistinctAndFilled() {
+        let ids = StoreShowcase.collections.map(\.id)
+        XCTAssertEqual(Set(ids).count, ids.count)
+        XCTAssertGreaterThanOrEqual(ids.count, 10)
+        for collection in StoreShowcase.collections {
+            XCTAssertGreaterThanOrEqual(collection.items.count, 5, collection.id)
+            XCTAssertEqual(StoreShowcase.collection(collection.id)?.id, collection.id)
+        }
+        // Someone into sport sees the sport collection first.
+        XCTAssertEqual(StoreShowcase.collections(preferring: [.fitness]).first?.id, "sport")
+        XCTAssertEqual(StoreShowcase.collections(preferring: []).map(\.id), ids)
+    }
+
+    /// Every combination follows the rules of merging widgets: one category, whole rows, sizes the widgets have.
+    func testCombinationsFollowTheMergeRules() {
+        let ids = StoreComboCatalog.all.map(\.id)
+        XCTAssertEqual(Set(ids).count, ids.count)
+        XCTAssertGreaterThanOrEqual(StoreComboCatalog.mediums.count, 20)
+        XCTAssertGreaterThanOrEqual(StoreComboCatalog.larges.count, 12)
+        for combo in StoreComboCatalog.all {
+            let design = combo.makeDesign()
+            XCTAssertTrue(design.isCombo, combo.id)
+            XCTAssertEqual(Set(combo.parts.map { Fusion.category(of: $0.kind) }).count, 1, "\(combo.id) mixes categories")
+            XCTAssertNotNil(ComboLayout.format(combo.comboParts), "\(combo.id) doesn't fill whole rows")
+            for part in combo.parts {
+                let family: WidgetFamily = part.size == .medium ? .systemMedium : .systemSmall
+                XCTAssertTrue(part.kind.families.contains(family), "\(combo.id): \(part.kind) has no \(family) size")
+            }
+        }
+        XCTAssertTrue(StoreComboCatalog.mediums.allSatisfy { $0.format == .medium })
+        XCTAssertTrue(StoreComboCatalog.larges.allSatisfy { $0.format == .large })
+        XCTAssertTrue(StoreComboCatalog.all.contains { !$0.isPremium }, "Some combinations stay free")
+    }
+
+    /// The example of a combination fills every part, not only the first one.
+    func testCombinationSampleShowsEveryPart() throws {
+        let now = Date(timeIntervalSince1970: 1_790_000_000)
+        let combo = try XCTUnwrap(StoreComboCatalog.combo("eau-serie"))
+        let payload = SamplePayload.make(for: combo.makeDesign(), now: now)
+        XCTAssertEqual(payload.content.hydration, SamplePayload.make(for: .hydration, now: now).content.hydration)
+        XCTAssertNotEqual(payload.domains, DomainData(), "The second widget brings its example data")
+        XCTAssertEqual(SamplePayload.make(for: .hydration, now: now).domains, DomainData())
+    }
+
+    func testPacksAreDistinctAndShowable() {
+        let ids = PackCatalog.all.map(\.id)
+        XCTAssertEqual(Set(ids).count, ids.count)
+        XCTAssertGreaterThanOrEqual(ids.count, 20)
+        for pack in PackCatalog.all {
+            XCTAssertEqual(Set(pack.kinds).count, pack.kinds.count, "\(pack.id) repeats a widget")
+            XCTAssertGreaterThanOrEqual(pack.smallDesigns().count, 3, "\(pack.id) needs three small widgets for its card")
+        }
+        XCTAssertTrue(PackCatalog.all.contains { !$0.isPremium }, "Some packs stay free")
+    }
+
+    func testThisWeeksEditionIsStableAllWeek() throws {
+        let calendar = Calendar(identifier: .iso8601)
+        let monday = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 9, day: 28, hour: 9)))
+        let sunday = try XCTUnwrap(calendar.date(byAdding: .day, value: 6, to: monday))
+        let nextMonday = try XCTUnwrap(calendar.date(byAdding: .day, value: 7, to: monday))
+        XCTAssertEqual(HomeSetupCatalog.weekly(now: monday).id, HomeSetupCatalog.weekly(now: sunday).id)
+        XCTAssertNotEqual(HomeSetupCatalog.weekly(now: monday).id, HomeSetupCatalog.weekly(now: nextMonday).id)
+        XCTAssertEqual(StoreEdition.pack(now: monday).id, StoreEdition.pack(now: sunday).id)
+        XCTAssertNotEqual(StoreEdition.pack(now: monday).id, StoreEdition.pack(now: nextMonday).id)
     }
 
     func testSpaceExamplesUseSupportedSizes() {

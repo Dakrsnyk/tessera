@@ -42,8 +42,32 @@ enum PayloadLoader {
 enum SamplePayload {
     /// Example data matching a design (for instance the right coin for a crypto widget).
     static func make(for design: WidgetDesign, now: Date = Date()) -> WidgetPayload {
-        make(for: design.kind, coinID: design.options.coinID, now: now)
+        guard design.isCombo, let lead = design.partDesigns.first else {
+            return make(for: design.kind, coinID: design.options.coinID, now: now)
+        }
+        // A combined widget: the sample of its first widget, completed with what each other widget shows.
+        var payload = make(for: lead.kind, coinID: lead.options.coinID, now: now)
+        var hasDomains = !ownSamples.contains(lead.kind)
+        for part in design.partDesigns.dropFirst() {
+            let other = make(for: part.kind, coinID: part.options.coinID, now: now)
+            if case .ready = other.weather { payload.weather = other.weather }
+            if case let .ready(events) = other.events, !events.isEmpty { payload.events = other.events }
+            if case .ready = other.crypto { payload.crypto = other.crypto }
+            if !hasDomains, !ownSamples.contains(part.kind) {
+                payload.domains = other.domains
+                hasDomains = true
+            }
+            if payload.content.tasks.isEmpty { payload.content.tasks = other.content.tasks }
+            if payload.content.habits.isEmpty { payload.content.habits = other.content.habits }
+            if payload.content.hydration == HydrationState() { payload.content.hydration = other.content.hydration }
+            if payload.content.focus == FocusSession() { payload.content.focus = other.content.focus }
+            if payload.content.money == MoneyState() { payload.content.money = other.content.money }
+        }
+        return payload
     }
+
+    /// Kinds with a sample of their own below; every other kind gets the full sample data of the spaces.
+    private static let ownSamples: Set<WidgetKind> = [.tasks, .habits, .hydration, .focus, .moneyFlow, .weather, .crypto, .upNext]
 
     static func make(for kind: WidgetKind, coinID: String = "bitcoin", now: Date = Date()) -> WidgetPayload {
         var payload = WidgetPayload()

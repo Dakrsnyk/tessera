@@ -4,7 +4,9 @@ import WidgetKit
 struct MyWidgetsView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
-    @State private var showsFavoritesOnly = false
+    /// The carousel: which widgets it shows, and the one in the middle.
+    @State private var filter: WidgetShelfFilter = .all
+    @State private var centeredID: UUID?
     @State private var pendingDeletion: WidgetDesign?
     /// Selection mode: several widgets picked, then deleted or merged together.
     @State private var isSelecting = false
@@ -27,7 +29,12 @@ struct MyWidgetsView: View {
     private var allShownSelected: Bool { !designs.isEmpty && designs.allSatisfy { selectedIDs.contains($0.id) } }
 
     private var designs: [WidgetDesign] {
-        showsFavoritesOnly ? model.favoriteDesigns : model.recentDesigns
+        model.recentDesigns.filter(filter.allows)
+    }
+
+    /// The widget in the middle of the carousel.
+    private var current: WidgetDesign? {
+        designs.first { $0.id == centeredID } ?? designs.first
     }
 
     private struct CardRow: Identifiable {
@@ -64,43 +71,18 @@ struct MyWidgetsView: View {
                         EmptyStateView(
                             symbol: "rectangle.stack.badge.plus",
                             title: "Aucun widget pour l'instant",
-                            message: "Choisis un modèle dans Explorer, personnalise-le et enregistre-le. Il apparaîtra ici.",
-                            actionTitle: "Explorer les widgets"
+                            message: "Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.",
+                            actionTitle: "Ouvrir le Store"
                         ) { router.openExplore() }
+                        .padding(20)
+                    } else if isSelecting {
+                        selectionGrid
+                            .padding(20)
                     } else {
-                        Picker("Afficher", selection: $showsFavoritesOnly) {
-                            Text("Tous").tag(false)
-                            Text("Favoris").tag(true)
-                        }
-                        .pickerStyle(.segmented)
-                        .id("top")
-
-                        if !model.isPremium {
-                            limitBanner
-                        }
-
-                        if designs.isEmpty {
-                            EmptyStateView(symbol: "heart", title: "Aucun favori", message: "Maintiens un widget appuyé et choisis « Favori ».")
-                        } else {
-                            LazyVStack(spacing: 20) {
-                                ForEach(rows) { row in
-                                    HStack(alignment: .top, spacing: 14) {
-                                        ForEach(row.designs) { design in
-                                            card(design)
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                                .opacity(fusionRun?.hides(design.id) == true ? 0 : 1)
-                                                .transition(.scale(scale: 0.8).combined(with: .opacity))
-                                        }
-                                        if row.designs.count == 1 && row.designs[0].displayFormat == .small {
-                                            Color.clear.frame(maxWidth: .infinity, maxHeight: 1)
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        carousel
                     }
                 }
-                .padding(20)
+                .id("top")
             }
             .onChange(of: fusionRun?.isDone) { _, done in
                 if done == true { withAnimation(.easeInOut(duration: 0.3)) { proxy.scrollTo("top", anchor: .top) } }
@@ -191,6 +173,17 @@ struct MyWidgetsView: View {
             .onChange(of: model.designs.isEmpty) { _, isEmpty in
                 if isEmpty { endSelection() }
             }
+            .onChange(of: filter) { _, _ in
+                centeredID = designs.first?.id
+            }
+            .onChange(of: designs.map(\.id)) { _, ids in
+                // A filter left empty (last favorite removed, last widget of a category deleted) shows everything again.
+                if ids.isEmpty, filter != .all {
+                    filter = .all
+                } else if let centeredID, !ids.contains(centeredID) {
+                    self.centeredID = ids.first
+                }
+            }
             .onAppear {
                 if router.startsFusion {
                     router.startsFusion = false
@@ -224,6 +217,120 @@ struct MyWidgetsView: View {
                 }
             } message: {
                 Text("Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut.")
+            }
+        }
+    }
+
+    // MARK: Carousel
+
+    private var carousel: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text("\(Fmt.plural(designs.count, "widget", "widgets")) · glisse pour les faire tourner")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .contentTransition(.numericText())
+                .padding(.horizontal, 20)
+            WidgetCarousel(
+                designs: designs,
+                centeredID: $centeredID,
+                payload: { model.payload(for: $0) },
+                onOpen: { router.openEditor($0, isNew: false) }
+            ) { design in
+                menuItems(design)
+            }
+            .padding(.top, 4)
+            if let current {
+                VStack(spacing: 3) {
+                    Text(current.name)
+                        .font(.title3.weight(.bold))
+                        .lineLimit(1)
+                    Text(currentDetails(current))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 20)
+                .animation(nil, value: current.id)
+                actions(for: current)
+                    .padding(.horizontal, 12)
+            }
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Trouver un widget")
+                    .font(.headline)
+                    .padding(.horizontal, 20)
+                CategoryStrip(designs: model.recentDesigns, filter: $filter)
+            }
+            .padding(.top, 6)
+            if !model.isPremium {
+                limitBanner
+                    .padding(.horizontal, 20)
+            }
+        }
+        .padding(.top, 4)
+        .padding(.bottom, 24)
+        .onAppear {
+            if centeredID == nil { centeredID = designs.first?.id }
+        }
+    }
+
+    /// « Nutrition · Moyen · 2 sur 8 »
+    private func currentDetails(_ design: WidgetDesign) -> String {
+        var parts = [design.isCombo ? design.kindTitle : design.kind.category.title, design.displayFormat.title]
+        if let index = designs.firstIndex(where: { $0.id == design.id }) {
+            parts.append("\(index + 1) sur \(designs.count)")
+        }
+        return parts.joined(separator: " · ")
+    }
+
+    private func actions(for design: WidgetDesign) -> some View {
+        HStack(alignment: .top, spacing: 4) {
+            CarouselAction(title: "Modifier", symbol: "slider.horizontal.3", isProminent: true, identifier: "carousel-edit") {
+                router.openEditor(design, isNew: false)
+            }
+            CarouselAction(title: "Dupliquer", symbol: "plus.square.on.square", identifier: "carousel-duplicate") {
+                duplicate(design)
+            }
+            CarouselAction(title: "Favori", symbol: design.isFavorite ? "heart.fill" : "heart", identifier: "carousel-favorite") {
+                Haptics.tap()
+                model.toggleFavorite(design)
+            }
+            .accessibilityLabel(Text(design.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"))
+            CarouselAction(title: "Ajouter à l'écran", symbol: "apps.iphone.badge.plus", identifier: "carousel-place") {
+                router.lastSavedName = design.name
+                router.isAddGuidePresented = true
+            }
+            .accessibilityLabel(Text("Ajouter à l'écran d'accueil"))
+        }
+    }
+
+    private func duplicate(_ design: WidgetDesign) {
+        guard let copy = model.duplicate(design) else {
+            router.isPaywallPresented = true
+            return
+        }
+        Haptics.success()
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+            centeredID = copy.id
+        }
+    }
+
+    // MARK: Selection grid
+
+    private var selectionGrid: some View {
+        LazyVStack(spacing: 20) {
+            ForEach(rows) { row in
+                HStack(alignment: .top, spacing: 14) {
+                    ForEach(row.designs) { design in
+                        card(design)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .opacity(fusionRun?.hides(design.id) == true ? 0 : 1)
+                            .transition(.scale(scale: 0.8).combined(with: .opacity))
+                    }
+                    if row.designs.count == 1 && row.designs[0].displayFormat == .small {
+                        Color.clear.frame(maxWidth: .infinity, maxHeight: 1)
+                    }
+                }
             }
         }
     }
@@ -394,28 +501,30 @@ struct MyWidgetsView: View {
             DesignCard(design: design, payload: model.payload(for: design), width: nil, isPremiumUser: model.isPremium)
         }
         .buttonStyle(.plain)
-        .contextMenu {
-            Button {
-                router.openEditor(design, isNew: false)
-            } label: {
-                Label("Modifier", systemImage: "slider.horizontal.3")
-            }
-            Button {
-                if model.duplicate(design) == nil { router.isPaywallPresented = true }
-            } label: {
-                Label("Dupliquer", systemImage: "plus.square.on.square")
-            }
-            Button {
-                model.toggleFavorite(design)
-            } label: {
-                Label(design.isFavorite ? "Retirer des favoris" : "Favori", systemImage: design.isFavorite ? "heart.slash" : "heart")
-            }
-            Divider()
-            Button(role: .destructive) {
-                pendingDeletion = design
-            } label: {
-                Label("Supprimer", systemImage: "trash")
-            }
+        .contextMenu { menuItems(design) }
+    }
+
+    @ViewBuilder private func menuItems(_ design: WidgetDesign) -> some View {
+        Button {
+            router.openEditor(design, isNew: false)
+        } label: {
+            Label("Modifier", systemImage: "slider.horizontal.3")
+        }
+        Button {
+            duplicate(design)
+        } label: {
+            Label("Dupliquer", systemImage: "plus.square.on.square")
+        }
+        Button {
+            model.toggleFavorite(design)
+        } label: {
+            Label(design.isFavorite ? "Retirer des favoris" : "Favori", systemImage: design.isFavorite ? "heart.slash" : "heart")
+        }
+        Divider()
+        Button(role: .destructive) {
+            pendingDeletion = design
+        } label: {
+            Label("Supprimer", systemImage: "trash")
         }
     }
 }

@@ -20,6 +20,12 @@ struct SetupWallpaperView: View {
             case .paper: PaperWallpaper()
             case .bureau: BureauWallpaper()
             case .bauhaus: BauhausWallpaper()
+            case .ocean: OceanWallpaper()
+            case .forest: ForestWallpaper()
+            case .sunset: SunsetWallpaper()
+            case .terrazzo: TerrazzoWallpaper()
+            case .nebula: NebulaWallpaper()
+            case .seventies: SeventiesWallpaper()
             }
         }
         .frame(width: W, height: H)
@@ -453,6 +459,252 @@ private struct BauhausWallpaper: View {
                         context.fill(Path(ellipseIn: rect), with: .color(hex("2F3A56")))
                     }
                 }
+            }
+        }
+    }
+}
+
+/// A band of waves or hills: a sine line, filled down to the bottom of the screen.
+private struct WaveLayer {
+    let base: Double
+    let amplitude: Double
+    let frequency: Double
+    let phase: Double
+    let color: String
+
+    func ridge(width: CGFloat) -> Path {
+        var path = Path()
+        for step in stride(from: CGFloat(0), through: width, by: 4) {
+            let t = Double(step / width)
+            let main: Double = amplitude * sin(t * frequency * 2 * Double.pi + phase)
+            let ripple: Double = amplitude * 0.25 * sin(t * frequency * 5 * Double.pi + phase * 1.6)
+            let point = CGPoint(x: step, y: CGFloat(base + main + ripple))
+            if step == 0 { path.move(to: point) } else { path.addLine(to: point) }
+        }
+        return path
+    }
+
+    func fill(width: CGFloat, height: CGFloat) -> Path {
+        var path = ridge(width: width)
+        path.addLine(to: CGPoint(x: width, y: height))
+        path.addLine(to: CGPoint(x: 0, y: height))
+        path.closeSubpath()
+        return path
+    }
+}
+
+private struct OceanWallpaper: View {
+    private let waves = [
+        WaveLayer(base: 560, amplitude: 12, frequency: 2.2, phase: 0.3, color: "1B7FA8"),
+        WaveLayer(base: 632, amplitude: 14, frequency: 1.8, phase: 1.9, color: "146A93"),
+        WaveLayer(base: 708, amplitude: 16, frequency: 2.6, phase: 3.1, color: "0E557A"),
+        WaveLayer(base: 790, amplitude: 18, frequency: 1.5, phase: 0.8, color: "093F5E"),
+    ]
+
+    var body: some View {
+        ZStack {
+            LinearGradient(colors: [hex("06223F"), hex("0A3D66"), hex("0D5C7E"), hex("0A2E4A")], startPoint: .top, endPoint: .bottom)
+            RadialGradient(colors: [hex("7FD6FF").opacity(0.35), .clear], center: UnitPoint(x: 0.7, y: 0.18), startRadius: 0, endRadius: 360)
+            // Light falling from the surface.
+            Canvas { context, size in
+                let depth = size.height * 0.62
+                for index in 0..<7 {
+                    let x = CGFloat(30 + index * 60)
+                    var ray = Path()
+                    ray.move(to: CGPoint(x: x, y: 0))
+                    ray.addLine(to: CGPoint(x: x + 26, y: 0))
+                    ray.addLine(to: CGPoint(x: x - 40, y: depth))
+                    ray.addLine(to: CGPoint(x: x - 96, y: depth))
+                    ray.closeSubpath()
+                    context.fill(ray, with: .linearGradient(
+                        Gradient(colors: [Color.white.opacity(0.11), Color.white.opacity(0)]),
+                        startPoint: CGPoint(x: x, y: 0), endPoint: CGPoint(x: x, y: depth)
+                    ))
+                }
+            }
+            .blur(radius: 6)
+            // Bubbles rising.
+            Canvas { context, size in
+                var random = SeededRandom(state: 29)
+                for _ in 0..<26 {
+                    let x = CGFloat(random.next()) * size.width
+                    let y = 260 + CGFloat(random.next()) * 300
+                    let radius = CGFloat(2 + random.next() * 6)
+                    context.stroke(Path(ellipseIn: CGRect(x: x - radius, y: y - radius, width: radius * 2, height: radius * 2)),
+                                   with: .color(.white.opacity(0.28)), lineWidth: 1)
+                }
+            }
+            Canvas { context, size in
+                for wave in waves {
+                    context.fill(wave.fill(width: size.width, height: size.height), with: .color(hex(wave.color).opacity(0.92)))
+                    context.stroke(wave.ridge(width: size.width), with: .color(.white.opacity(0.2)), lineWidth: 1.4)
+                }
+            }
+        }
+    }
+}
+
+private struct ForestWallpaper: View {
+    private struct PineRow {
+        let base: CGFloat
+        let height: CGFloat
+        let spacing: CGFloat
+        let seed: UInt64
+        let color: String
+    }
+
+    private let rows = [
+        PineRow(base: 640, height: 110, spacing: 30, seed: 3, color: "3C6A55"),
+        PineRow(base: 705, height: 140, spacing: 38, seed: 5, color: "285342"),
+        PineRow(base: 785, height: 180, spacing: 48, seed: 8, color: "173A2D"),
+        PineRow(base: 880, height: 230, spacing: 64, seed: 13, color: "0B2018"),
+    ]
+
+    var body: some View {
+        ZStack {
+            LinearGradient(colors: [hex("0B1F1A"), hex("17372D"), hex("3E6B57"), hex("A9C6A2")], startPoint: .top, endPoint: UnitPoint(x: 0.5, y: 0.74))
+            Stars(seed: 17, count: 70, maxY: 0.42, brightness: 0.55)
+            Circle()
+                .fill(hex("F4EFD8"))
+                .frame(width: 58, height: 58)
+                .shadow(color: hex("F4EFD8").opacity(0.6), radius: 22)
+                .position(x: W * 0.28, y: H * 0.43)
+            Canvas { context, size in
+                for row in rows {
+                    var random = SeededRandom(state: row.seed)
+                    var x = -CGFloat(random.next()) * row.spacing
+                    while x < size.width + row.spacing {
+                        let height = row.height * CGFloat(0.72 + random.next() * 0.5)
+                        let width = height * 0.46
+                        var tree = Path()
+                        // Two tiers make a fir.
+                        for tier in 0..<2 {
+                            let top = row.base - height + CGFloat(tier) * height * 0.32
+                            let bottom = row.base - CGFloat(1 - tier) * height * 0.3
+                            let half = width / 2 * (tier == 0 ? 0.72 : 1)
+                            tree.move(to: CGPoint(x: x, y: top))
+                            tree.addLine(to: CGPoint(x: x + half, y: bottom))
+                            tree.addLine(to: CGPoint(x: x - half, y: bottom))
+                            tree.closeSubpath()
+                        }
+                        context.fill(tree, with: .color(hex(row.color)))
+                        x += row.spacing * CGFloat(0.7 + random.next() * 0.6)
+                    }
+                    context.fill(Path(CGRect(x: 0, y: row.base - 2, width: size.width, height: size.height - row.base + 2)), with: .color(hex(row.color)))
+                }
+            }
+        }
+    }
+}
+
+private struct SunsetWallpaper: View {
+    private let hills = [
+        WaveLayer(base: 655, amplitude: 22, frequency: 0.9, phase: 0.6, color: "A2456A"),
+        WaveLayer(base: 725, amplitude: 26, frequency: 0.7, phase: 2.4, color: "6E2A55"),
+        WaveLayer(base: 805, amplitude: 22, frequency: 1.1, phase: 4.2, color: "3A1839"),
+    ]
+
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [hex("241845"), hex("5B2C6F"), hex("C4506E"), hex("F28A5B"), hex("FBCB86")],
+                startPoint: .top, endPoint: UnitPoint(x: 0.5, y: 0.74)
+            )
+            Stars(seed: 41, count: 60, maxY: 0.3, brightness: 0.6)
+            Circle()
+                .fill(LinearGradient(colors: [hex("FFE9A8"), hex("FFB067")], startPoint: .top, endPoint: .bottom))
+                .frame(width: 150, height: 150)
+                .shadow(color: hex("FFB067").opacity(0.8), radius: 40)
+                .position(x: W * 0.5, y: 640)
+            Canvas { context, size in
+                for hill in hills {
+                    context.fill(hill.fill(width: size.width, height: size.height), with: .color(hex(hill.color)))
+                }
+            }
+        }
+    }
+}
+
+private struct TerrazzoWallpaper: View {
+    private static let colors = ["E4533D", "F2A33A", "2F8F7A", "3366FF", "F2588F", "2F3A56", "C9B79C", "E4533D"]
+
+    var body: some View {
+        ZStack {
+            hex("F4EEE6")
+            RadialGradient(colors: [Color.white.opacity(0.7), .clear], center: UnitPoint(x: 0.3, y: 0.2), startRadius: 0, endRadius: 420)
+            Canvas { context, size in
+                var random = SeededRandom(state: 61)
+                for index in 0..<78 {
+                    let center = CGPoint(x: CGFloat(random.next()) * size.width, y: CGFloat(random.next()) * size.height)
+                    let radius = CGFloat(5 + pow(random.next(), 2) * 30)
+                    let corners = 5 + index % 3
+                    let turn = random.next() * 2 * Double.pi
+                    var chip = Path()
+                    for corner in 0..<corners {
+                        let angle = turn + Double(corner) / Double(corners) * 2 * Double.pi
+                        let reach = radius * CGFloat(0.6 + random.next() * 0.4)
+                        let point = CGPoint(x: center.x + reach * CGFloat(cos(angle)), y: center.y + reach * CGFloat(sin(angle)))
+                        if corner == 0 { chip.move(to: point) } else { chip.addLine(to: point) }
+                    }
+                    chip.closeSubpath()
+                    let color = hex(Self.colors[index % Self.colors.count])
+                    context.fill(chip, with: .color(color.opacity(0.85)))
+                }
+            }
+        }
+    }
+}
+
+private struct NebulaWallpaper: View {
+    var body: some View {
+        ZStack {
+            hex("07051A")
+            RadialGradient(colors: [hex("6B2FD6").opacity(0.75), .clear], center: UnitPoint(x: 0.25, y: 0.48), startRadius: 0, endRadius: 300)
+            RadialGradient(colors: [hex("D6409F").opacity(0.6), .clear], center: UnitPoint(x: 0.78, y: 0.62), startRadius: 0, endRadius: 280)
+            RadialGradient(colors: [hex("1E6FD9").opacity(0.5), .clear], center: UnitPoint(x: 0.55, y: 0.3), startRadius: 0, endRadius: 320)
+            Ellipse()
+                .fill(hex("B58CFF").opacity(0.25))
+                .frame(width: 360, height: 140)
+                .rotationEffect(.degrees(-24))
+                .blur(radius: 40)
+                .position(x: W * 0.5, y: H * 0.55)
+            Stars(seed: 23, count: 240)
+            // A ringed planet.
+            ZStack {
+                Circle()
+                    .fill(LinearGradient(colors: [hex("F2B8FF"), hex("7A4BD6")], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .frame(width: 84, height: 84)
+                Ellipse()
+                    .stroke(hex("F6D9FF").opacity(0.75), lineWidth: 3)
+                    .frame(width: 150, height: 34)
+            }
+            .rotationEffect(.degrees(-18))
+            .shadow(color: hex("B58CFF").opacity(0.6), radius: 24)
+            .position(x: W * 0.72, y: H * 0.74)
+        }
+    }
+}
+
+private struct SeventiesWallpaper: View {
+    private static let bands = ["7A3B1E", "C0602A", "E8913A", "F2C14E", "EBDDB5"]
+
+    var body: some View {
+        ZStack {
+            hex("FBEFD9")
+            rainbow(center: CGPoint(x: W * 0.18, y: H + 10), outer: 430, width: 38)
+            rainbow(center: CGPoint(x: W + 20, y: H * 0.34), outer: 190, width: 22)
+                .opacity(0.9)
+        }
+    }
+
+    private func rainbow(center: CGPoint, outer: CGFloat, width: CGFloat) -> some View {
+        Canvas { context, _ in
+            for (index, color) in Self.bands.enumerated() {
+                let radius = outer - CGFloat(index) * width - width / 2
+                guard radius > 0 else { continue }
+                var arc = Path()
+                arc.addArc(center: center, radius: radius, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
+                context.stroke(arc, with: .color(hex(color)), style: StrokeStyle(lineWidth: width, lineCap: .butt))
             }
         }
     }
