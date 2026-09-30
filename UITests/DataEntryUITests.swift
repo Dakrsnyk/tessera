@@ -175,7 +175,9 @@ final class DataEntryUITests: XCTestCase {
         let name = app.textFields["widget-name"]
         XCTAssertTrue(name.waitForExistence(timeout: 15), "Éditeur absent")
         name.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
-        name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 40) + "Mon widget test")
+        // Return closes the keyboard: dragging on a field still being edited moves its cursor
+        // instead of scrolling the Studio's settings.
+        name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 40) + "Mon widget test\n")
 
         tap(app.buttons["space-data"], "Données de l'espace")
         logFood()
