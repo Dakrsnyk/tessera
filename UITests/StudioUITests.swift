@@ -31,33 +31,30 @@ final class StudioUITests: XCTestCase {
         let button = app.buttons[identifier].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(identifier) » introuvable", file: file, line: line)
         var swipes = 0
-        while !button.isHittable && swipes < 8 {
-            app.swipeUp(velocity: .slow)
+        while !button.isHittable && swipes < 12 {
+            // A short drag without momentum over the settings, under the fixed preview.
+            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.72))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.55))
+            start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
             swipes += 1
         }
         button.tap()
     }
 
-    /// The sections are in a horizontal bar: it is scrolled toward the section until it can be tapped.
+    private static let sections = ["content", "themes", "style", "colors", "background", "border", "depth", "shape", "text", "icons", "layout", "chart", "density", "myStyles"]
+
+    /// The sections are in a horizontal bar that centers the section chosen: going one section at a
+    /// time, the next one is always on screen.
     private func section(_ name: String, file: StaticString = #filePath, line: UInt = #line) {
-        let button = app.buttons["studio-\(name)"].firstMatch
-        XCTAssertTrue(button.waitForExistence(timeout: 8), "Section « \(name) » introuvable", file: file, line: line)
-        let bar = app.scrollViews.containing(.button, identifier: "studio-content").firstMatch
-        let width = app.windows.firstMatch.frame.width
-        // Offscreen, the button has no hit point at all: its frame says which way to scroll.
-        var swipes = 0
-        while swipes < 10 {
-            let frame = button.frame
-            if frame.minX < 8 {
-                bar.swipeRight(velocity: .slow)
-            } else if frame.maxX > width - 8 {
-                bar.swipeLeft(velocity: .slow)
-            } else {
-                break
-            }
-            swipes += 1
+        guard let target = Self.sections.firstIndex(of: name) else { return XCTFail("Section \(name)", file: file, line: line) }
+        XCTAssertTrue(app.buttons["studio-\(name)"].waitForExistence(timeout: 8), "Section « \(name) » introuvable", file: file, line: line)
+        var index = Self.sections.firstIndex { app.buttons["studio-\($0)"].isSelected } ?? 0
+        while index != target {
+            index += target > index ? 1 : -1
+            let identifier = "studio-\(Self.sections[index])"
+            app.buttons[identifier].firstMatch.tap()
+            XCTAssertTrue(waitForSelection(identifier), "La section \(Self.sections[index]) ne s'ouvre pas", file: file, line: line)
         }
-        button.tap()
     }
 
     func testTheStudioChangesTheWidgetAndKeepsItAll() {

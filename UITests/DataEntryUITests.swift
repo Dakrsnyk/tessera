@@ -33,14 +33,22 @@ final class DataEntryUITests: XCTestCase {
         element.exists && element.isHittable
     }
 
+    /// A short drag without momentum: a fast swipe can carry a short list well past the element
+    /// (the Studio's settings sit under a fixed preview).
+    private func scrollDownOnce() {
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.62))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.42))
+        start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
+    }
+
     /// Waits for the element, scrolling down to it when it is further down (lists only build the rows
     /// on screen). Only ever scrolls down: a swipe down at the top of a sheet would close it.
     @discardableResult
     private func reveal(_ element: XCUIElement, _ what: String, file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
         _ = element.waitForExistence(timeout: 6)
         var swipes = 0
-        while !isReachable(element) && swipes < 12 {
-            app.swipeUp()
+        while !isReachable(element) && swipes < 20 {
+            scrollDownOnce()
             swipes += 1
             _ = element.waitForExistence(timeout: 1)
         }
