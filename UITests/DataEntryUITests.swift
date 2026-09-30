@@ -179,7 +179,15 @@ final class DataEntryUITests: XCTestCase {
         // instead of scrolling the Studio's settings.
         name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 40) + "Mon widget test\n")
 
-        tap(app.buttons["space-data"], "Données de l'espace")
+        // Above the Studio's save bar: a tap under it would save the widget instead.
+        let spaceData = reveal(app.buttons["space-data"], "Données de l'espace")
+        let height = app.frame.height.isFinite && app.frame.height > 200 ? app.frame.height : 874
+        var extra = 0
+        while spaceData.frame.maxY > height - 160 && extra < 5 {
+            scrollDownOnce()
+            extra += 1
+        }
+        spaceData.tap()
         logFood()
         goBack()
 
