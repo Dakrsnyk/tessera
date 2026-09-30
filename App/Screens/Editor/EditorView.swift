@@ -16,6 +16,7 @@ struct EditorView: View {
     @State private var isImportingPhoto = false
     @State private var backgroundTab: BackgroundKind
     @State private var didSave = false
+    @State private var previewFrame: CGRect = .zero
 
     private let isNew: Bool
     private let original: WidgetDesign
@@ -35,9 +36,15 @@ struct EditorView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
-                    PreviewStage(design: design, family: $family, payload: model.payload(for: design))
+                    // Example data until the person gives their own, then their widget for real.
+                    PreviewStage(design: design, family: $family, payload: model.previewPayload(for: design), isExample: !model.hasOwnData(for: design))
+                        .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
                     if needsPremium { premiumNotice }
                     nameSection
+                    // What the widget needs from the person, asked here and shared with every widget.
+                    if !design.dataItems.isEmpty {
+                        WidgetDataSection(items: design.dataItems)
+                    }
                     styleSection
                     colorSection
                     backgroundSection
@@ -331,6 +338,8 @@ struct EditorView: View {
         if isNew {
             router.lastSavedName = design.name
             router.showsAddGuideAfterEditor = true
+            // The new widget glides into « Mes widgets » as the editor closes.
+            router.saveFlight = SaveFlight(designs: [design], source: previewFrame)
         }
         dismiss()
     }
@@ -432,6 +441,8 @@ struct PreviewStage: View {
     let design: WidgetDesign
     @Binding var family: WidgetFamily
     let payload: WidgetPayload
+    /// Shown with example data: marked as such, never mistaken for the person's own.
+    var isExample = false
 
     var body: some View {
         VStack(spacing: 14) {
@@ -448,6 +459,18 @@ struct PreviewStage: View {
             }
             .frame(maxWidth: .infinity)
             .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+            .overlay(alignment: .topLeading) {
+                if isExample { ExampleBadge().padding(12) }
+            }
+
+            if isExample {
+                Text("Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity)
+            }
 
             if design.families.count > 1 {
                 ScrollView(.horizontal, showsIndicators: false) {

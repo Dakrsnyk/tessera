@@ -47,6 +47,10 @@ enum DashboardTiles {
         let nutrition = context.payload.domains.nutrition
         guard !nutrition.entries.isEmpty else { return nil }
         let eaten = NutritionMath.totals(nutrition, on: context.date).kcal
+        // Without the person's own target, only what was eaten: never a default goal.
+        guard context.payload.domains.knows(.kcalTarget) else {
+            return TileRow(id: "kcal", title: "Mangé aujourd'hui", value: "\(TF.int(eaten)) kcal", symbol: "flame")
+        }
         let left = nutrition.goals.kcal - eaten
         return TileRow(id: "kcal", title: left >= 0 ? "Calories restantes" : "Calories en trop", value: "\(TF.int(abs(left))) kcal", symbol: "flame", progress: eaten / max(1, nutrition.goals.kcal))
     }
@@ -54,6 +58,9 @@ enum DashboardTiles {
     static func waterRow(_ context: RenderContext) -> TileRow {
         let hydration = context.payload.content.hydration
         let glasses = hydration.glasses(on: context.date)
+        guard context.payload.domains.knows(.hydrationGoal) else {
+            return TileRow(id: "water", title: "Eau", value: glasses > 1 ? "\(glasses) verres" : "\(glasses) verre", symbol: "drop.fill")
+        }
         return TileRow(id: "water", title: "Eau", value: "\(glasses)/\(hydration.goal) verres", symbol: "drop.fill", progress: Double(glasses) / Double(max(1, hydration.goal)))
     }
 
@@ -66,7 +73,12 @@ enum DashboardTiles {
 
     static func budgetRow(_ context: RenderContext) -> TileRow? {
         let budget = context.payload.domains.budget
-        guard !budget.expenses.isEmpty || budget.monthlyBudget > 0 else { return nil }
+        let knowsBudget = context.payload.domains.knows(.monthlyBudget)
+        guard !budget.expenses.isEmpty || knowsBudget else { return nil }
+        guard knowsBudget else {
+            let spent = BudgetMath.spentToday(budget, at: context.date)
+            return TileRow(id: "budget", title: "Dépensé aujourd'hui", value: TF.money(spent, context.settings.currencyCode), symbol: "creditcard")
+        }
         let perDay = BudgetMath.perDayLeft(budget, at: context.date)
         return TileRow(id: "budget", title: "Budget du jour", value: TF.money(perDay, context.settings.currencyCode), symbol: "creditcard")
     }

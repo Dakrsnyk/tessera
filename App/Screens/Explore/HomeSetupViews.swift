@@ -551,6 +551,8 @@ struct HomeSetupSheet: View {
     @State private var page: SetupPage = .home
     @State private var installed: Int?
     @State private var wallpaperState: WallpaperState = .idle
+    @State private var configures = false
+    @State private var designs: [WidgetDesign] = []
 
     enum WallpaperState {
         case idle, saving, saved, denied, failed
@@ -605,6 +607,9 @@ struct HomeSetupSheet: View {
             }
             .navigationTitle(setup.name)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $configures) {
+                WidgetSetupFlow(title: setup.name, designs: designs) { dismiss() }
+            }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Fermer") { dismiss() }
@@ -736,8 +741,9 @@ struct HomeSetupSheet: View {
             router.isPaywallPresented = true
             return
         }
-        installed = model.install(designs: setup.designs())
-        Haptics.success()
+        // Each widget in turn, with the data it needs, then all of them saved together.
+        designs = setup.designs()
+        configures = true
     }
 
     private func saveWallpaper() {

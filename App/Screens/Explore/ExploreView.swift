@@ -73,6 +73,7 @@ struct ExploreView: View {
             .onAppear(perform: consumeRequests)
             .onChange(of: router.exploreSearchRequested) { _, _ in consumeRequests() }
             .onChange(of: router.openedSetupID) { _, _ in consumeRequests() }
+            .onChange(of: router.openedPackID) { _, _ in consumeRequests() }
         }
     }
 
@@ -99,6 +100,10 @@ struct ExploreView: View {
         if router.storePath.isEmpty, let id = router.openedSetupID {
             router.openedSetupID = nil
             openedSetup = HomeSetupCatalog.setup(id)
+        }
+        if let id = router.openedPackID {
+            router.openedPackID = nil
+            openedPack = PackCatalog.pack(id)
         }
     }
 
@@ -619,7 +624,10 @@ struct PackSheet: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
-    @State private var installed: Int?
+    @State private var designs: [WidgetDesign] = []
+    @State private var configures = false
+
+    private var needsPremium: Bool { pack.isPremium && !model.isPremium }
 
     var body: some View {
         NavigationStack {
@@ -628,25 +636,20 @@ struct PackSheet: View {
                     Text(pack.tagline)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
+                    let smalls = designs.filter { $0.kind.families.contains(.systemSmall) }
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 16) {
-                        ForEach(pack.smallDesigns()) { design in
-                            VStack(alignment: .leading, spacing: 6) {
-                                WidgetPreview(design: design, family: .systemSmall, payload: model.payload(for: design))
-                                Text(design.kind.title).font(.caption.weight(.semibold)).lineLimit(1)
-                            }
+                        ForEach(smalls) { design in
+                            packItem(design, family: .systemSmall)
                         }
                     }
                     // Widgets that exist only in medium or large, across the width.
-                    ForEach(pack.designs().filter { !$0.kind.families.contains(.systemSmall) }) { design in
-                        VStack(alignment: .leading, spacing: 6) {
-                            WidgetPreview(design: design, family: .systemMedium, payload: model.payload(for: design))
-                            Text(design.kind.title).font(.caption.weight(.semibold)).lineLimit(1)
-                        }
+                    ForEach(designs.filter { !$0.kind.families.contains(.systemSmall) }) { design in
+                        packItem(design, family: .systemMedium)
                     }
-                    if let installed {
-                        Label(installed == pack.kinds.count ? "Pack ajouté à Mes widgets" : "\(Fmt.plural(installed, "widget ajouté", "widgets ajoutés")) (limite de la version gratuite)", systemImage: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
-                            .font(.subheadline.weight(.semibold))
+                    if designs.contains(where: { !model.hasOwnData(for: $0) }) {
+                        Label("Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes widget par widget à l'étape suivante.", systemImage: "sparkles")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
                     }
                 }
                 .padding(20)
@@ -654,9 +657,14 @@ struct PackSheet: View {
             .background(.screenFill)
             .safeAreaInset(edge: .bottom) {
                 Button {
-                    install()
+                    if needsPremium {
+                        dismiss()
+                        router.isPaywallPresented = true
+                    } else {
+                        configures = true
+                    }
                 } label: {
-                    Text(installed == nil ? (pack.isPremium && !model.isPremium ? "Débloquer avec Premium" : "Ajouter le pack") : "Voir comment l'ajouter à l'écran")
+                    Text(needsPremium ? "Débloquer avec Premium" : "Configurer et ajouter")
                         .font(.headline)
                         .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
@@ -667,30 +675,39 @@ struct PackSheet: View {
                 .padding(.top, 10)
                 .padding(.bottom, 8)
                 .background(AppFill.screenFill.opacity(0.96))
+                .accessibilityIdentifier("pack-configure")
             }
             .navigationTitle(pack.name)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $configures) {
+                WidgetSetupFlow(title: pack.name, designs: designs) { dismiss() }
+            }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Fermer") { dismiss() }
                 }
             }
         }
+        .onAppear {
+            if designs.isEmpty { designs = pack.designs() }
+            // Test captures: straight to the step-by-step setup.
+            if router.startsPackSetup {
+                router.startsPackSetup = false
+                configures = true
+            }
+        }
     }
 
-    private func install() {
-        if installed != nil {
-            dismiss()
-            router.lastSavedName = pack.name
-            router.isAddGuidePresented = true
-            return
+    /// A widget of the pack: the person's data when they gave it, marked example data otherwise.
+    private func packItem(_ design: WidgetDesign, family: WidgetFamily) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            WidgetPreview(design: design, family: family, payload: model.previewPayload(for: design))
+                .overlay(alignment: .topTrailing) {
+                    if !model.hasOwnData(for: design) {
+                        ExampleBadge().scaleEffect(0.85).padding(6)
+                    }
+                }
+            Text(design.kind.title).font(.caption.weight(.semibold)).lineLimit(1)
         }
-        if pack.isPremium && !model.isPremium {
-            dismiss()
-            router.isPaywallPresented = true
-            return
-        }
-        installed = model.install(pack)
-        Haptics.success()
     }
 }

@@ -152,7 +152,7 @@ jobs:
         id: shots
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.QA == 'true'
         continue-on-error: true
-        timeout-minutes: 22
+        timeout-minutes: 26
         run: |
           APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
           xcrun simctl bootstatus "$DEVICE" -b
@@ -221,6 +221,18 @@ jobs:
           for page in combos packs collections collection-sport category-fitness; do shoot store-$page store-$page top light; done
           shoot store-combos-end store-combos bottom light
           shoot mywidgets-dark mywidgets top dark
+          # Home as a dashboard (« Mon Quotidien »), « Mes informations », and a pack set widget by widget.
+          shoot home-mid home center light
+          shoot info info top light
+          shoot info-dark info top dark
+          for area in nutrition fitness student; do shoot info-$area info-$area top light; done
+          shoot pack-gym-setup pack-gym-setup top light
+          # A new person (these clear the demo data, so they come last).
+          shoot home-fresh home-fresh top light
+          shoot editor-fresh editor-fresh top light
+          shoot editor-fresh-data editor-fresh center light
+          shoot pack-nutrition-setup-fresh pack-nutrition-setup-fresh top light
+          shoot info-fresh info-fresh top light
 
       - name: App Store screenshots
         id: marketing

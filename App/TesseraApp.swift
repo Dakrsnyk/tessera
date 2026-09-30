@@ -54,7 +54,12 @@ struct RootView: View {
                 .sheet(item: $router.editor, onDismiss: {
                     if router.showsAddGuideAfterEditor {
                         router.showsAddGuideAfterEditor = false
-                        router.isAddGuidePresented = true
+                        // After the widget's flight into « Mes widgets », so the guide doesn't hide it.
+                        let delay = router.saveFlight == nil ? 0 : 1.4
+                        Task { @MainActor in
+                            try? await Task.sleep(for: .seconds(delay))
+                            router.isAddGuidePresented = true
+                        }
                     }
                 }) { request in
                     EditorView(request: request)

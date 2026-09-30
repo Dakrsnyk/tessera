@@ -18,6 +18,10 @@ enum ScreenshotMode {
     static func apply(model: AppModel, router: Router) -> Action {
         guard let screen else { return .none }
         seed(model)
+        // A capture of a new person (`…-fresh`) clears the demo data: the next captures bring it back.
+        if !screen.hasSuffix("-fresh"), model.fitness.routines.isEmpty, model.student.courses.isEmpty {
+            restoreDemoData(model)
+        }
         model.seedDemoCaches(SampleData.domains(now: Date()))
         // The offer is captured as a free user sees it; every other screen with Premium unlocked.
         model.setDebugPremium(screen != "paywall" && screen != "setups-free")
@@ -83,6 +87,42 @@ enum ScreenshotMode {
                 router.tab = .mine
                 router.startsSelection = true
             }
+            // « Mes informations » and one of its areas, pushed on Home.
+            if screen == "info" || screen.hasPrefix("info-") {
+                router.tab = .home
+                let area = InfoArea(rawValue: String(screen.dropFirst(5)))
+                Task { @MainActor in
+                    try? await Task.sleep(for: .milliseconds(700))
+                    router.homePath = area.map { [.info, .infoArea($0)] } ?? [.info]
+                }
+            }
+            // Home as a new person sees it: interests chosen, nothing entered yet.
+            if screen.hasSuffix("-fresh") {
+                model.update(\.profile) { profile in
+                    profile = UserProfile()
+                    profile.migrated = true
+                    profile.interests = [.nutrition, .sport, .budget]
+                }
+                model.update(\.nutrition) { $0 = NutritionState() }
+                model.update(\.fitness) { $0 = FitnessState() }
+                model.update(\.budget) { $0 = BudgetState() }
+                model.update(\.student) { $0 = StudentState() }
+                model.update(\.productivity) { $0 = ProductivityState() }
+                model.update(\.travel) { $0 = TravelState() }
+                model.update(\.car) { $0 = CarState() }
+                model.updateContent { $0 = ContentState() }
+                if screen == "home-fresh" { router.tab = .home }
+                if screen == "editor-fresh" { router.openEditor(TemplateCatalog.design("calories-glass"), isNew: true) }
+            }
+            if screen.hasPrefix("pack-") {
+                router.tab = .explore
+                let id = String(String(screen.dropFirst(5)).split(separator: "-").first ?? "")
+                router.startsPackSetup = screen.contains("-setup")
+                Task { @MainActor in
+                    try? await Task.sleep(for: .milliseconds(900))
+                    router.openedPackID = id
+                }
+            }
             if screen.hasPrefix("store-") {
                 router.tab = .explore
                 let name = String(screen.dropFirst(6))
@@ -130,6 +170,12 @@ enum ScreenshotMode {
         }
         let dashboard = [WidgetKind.nextSet, .trainingStreak, .personalRecords, .caloriesBurned].map { WidgetDesign(kind: $0, themeID: .dark, accentHex: "FF6B57", format: .small) }
         if let merged = Fusion.merge(dashboard) { model.save(merged) }
+        restoreDemoData(model)
+    }
+
+    /// The demo person's data in every space, and « Mes informations » filled in as after the first launch.
+    @MainActor
+    private static func restoreDemoData(_ model: AppModel) {
         let sample = SampleData.content(now: Date())
         let money = SamplePayload.make(for: .moneyFlow).content.money
         model.updateContent {

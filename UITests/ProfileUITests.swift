@@ -81,23 +81,27 @@ final class ProfileUITests: XCTestCase {
         // Everything else can be skipped: the last page ends the first launch.
         tapButton("onboarding-skip")
 
-        let sport = app.buttons["info-sport"]
-        XCTAssertTrue(sport.waitForExistence(timeout: 10), "« Mes informations » absent de l'accueil")
-        XCTAssertTrue(sport.label.contains("80 kg"), "Poids absent : \(sport.label)")
-        XCTAssertTrue(sport.label.contains("Prise de masse"))
-        XCTAssertTrue(sport.label.contains("À compléter"), "La taille et l'âge manquent")
-        XCTAssertTrue(label(of: "info-nutrition").contains("Calories"))
+        let info = app.buttons["home-info"]
+        XCTAssertTrue(info.waitForExistence(timeout: 10), "« Mes informations » absent de l'accueil")
         XCTAssertTrue(app.staticTexts["Bonjour Mathys"].exists || app.staticTexts["Bon après-midi Mathys"].exists || app.staticTexts["Bonsoir Mathys"].exists)
         snapshot("home-after-onboarding")
+        tapButton("home-info")
+        let fitness = app.buttons["area-fitness"]
+        XCTAssertTrue(fitness.waitForExistence(timeout: 8), "Le thème Fitness manque dans Mes informations")
+        XCTAssertTrue(fitness.label.contains("80 kg"), "Poids absent : \(fitness.label)")
+        XCTAssertTrue(label(of: "area-nutrition").contains("kcal"), "Objectif calorique absent")
+        snapshot("info-after-onboarding")
 
         // Changed once, changed everywhere.
-        sport.tap()
-        let weight = app.textFields["profile-weight"]
+        fitness.tap()
+        let weight = app.textFields["data-weight"]
         XCTAssertTrue(weight.waitForExistence(timeout: 8))
         weight.tap()
         weight.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 4) + "78")
-        tapButton("OK")
-        XCTAssertTrue(label(of: "info-sport").contains("78 kg"))
+        let back = app.navigationBars.buttons.allElementsBoundByIndex.first { $0.isHittable && $0.frame.minX < 60 }
+        XCTAssertNotNil(back)
+        back?.tap()
+        XCTAssertTrue(label(of: "area-fitness").contains("78 kg"))
     }
 
     func testSkippingEverythingShowsNothingMadeUp() {
@@ -107,10 +111,9 @@ final class ProfileUITests: XCTestCase {
         // No interest chosen: the interests step ends the first launch.
         tapButton("onboarding-skip")
         XCTAssertTrue(app.buttons["Choisir mes centres d'intérêt"].waitForExistence(timeout: 10), "L'accueil doit inviter à compléter")
-        // No target and no money value given: no card makes one up (the age of « Ma vie » may show under Sport).
-        for topic in ["nutrition", "money"] {
-            XCTAssertFalse(app.buttons["info-\(topic)"].exists, "Carte \(topic) sans aucune information donnée")
-        }
+        // No target and no budget given: « Mon Quotidien » never makes one up.
+        XCTAssertFalse(app.staticTexts["kcal restantes"].exists, "Calories restantes sans objectif donné")
+        XCTAssertFalse(app.staticTexts["à dépenser par jour d'ici la fin du mois"].exists, "Budget du jour sans budget donné")
         snapshot("home-skipped")
     }
 
@@ -118,11 +121,56 @@ final class ProfileUITests: XCTestCase {
 
     func testMesInformationsShowTheUsersValues() {
         launch(["-screenshotScreen", "home"])
-        let sport = app.buttons["info-sport"]
-        XCTAssertTrue(sport.waitForExistence(timeout: 12))
-        XCTAssertTrue(sport.label.contains("78 kg"), sport.label)
-        XCTAssertTrue(label(of: "info-nutrition").contains("kcal"))
+        let info = app.buttons["home-info"]
+        XCTAssertTrue(info.waitForExistence(timeout: 12))
+        info.tap()
+        let fitness = app.buttons["area-fitness"]
+        XCTAssertTrue(fitness.waitForExistence(timeout: 8))
+        XCTAssertTrue(fitness.label.contains("78 kg"), fitness.label)
+        XCTAssertTrue(label(of: "area-nutrition").contains("kcal"))
         snapshot("home-info")
+    }
+
+    func testMonQuotidienShowsTheDayFromTheUsersData() {
+        launch(["-screenshotScreen", "home"])
+        XCTAssertTrue(app.otherElements["daily-section"].waitForExistence(timeout: 12), "« Mon Quotidien » absent de l'accueil")
+        // The demo person gave a calorie target: what's left today is shown, from their own meals.
+        XCTAssertTrue(app.staticTexts["kcal restantes"].waitForExistence(timeout: 5) || app.staticTexts["kcal en trop"].exists)
+        XCTAssertFalse(app.buttons["Créer un widget Nutrition"].exists, "La section Créer ne doit plus être sur l'accueil")
+        snapshot("home-daily")
+    }
+
+    // MARK: Widgets from the Store
+
+    func testTheEditorAsksForWhatTheWidgetNeeds() {
+        launch(["-screenshotScreen", "editor-fresh"])
+        XCTAssertTrue(app.otherElements["data-kcalTarget"].waitForExistence(timeout: 12), "L'éditeur doit demander l'objectif calorique")
+        let example = app.staticTexts["Aperçu avec des données d'exemple"]
+        XCTAssertTrue(example.exists, "Sans données, l'aperçu montre un exemple, identifié comme tel")
+        snapshot("editor-fresh")
+        let kcal = app.textFields["data-kcal"]
+        kcal.tap()
+        kcal.typeText("2500")
+        XCTAssertTrue(waitForDisappearance(example), "Une fois l'objectif donné, l'aperçu montre les vraies données")
+        snapshot("editor-own-data")
+    }
+
+    func testAPackIsSetWidgetByWidget() {
+        launch(["-screenshotScreen", "pack-gym-setup"])
+        let step = app.staticTexts["setup-step"]
+        XCTAssertTrue(step.waitForExistence(timeout: 15), "La configuration du pack ne s'est pas ouverte")
+        XCTAssertEqual(step.label, "Widget 1 sur 6")
+        snapshot("pack-step-1")
+        for index in 2...6 {
+            tapButton("setup-next")
+            XCTAssertTrue(app.staticTexts["Widget \(index) sur 6"].waitForExistence(timeout: 5))
+        }
+        tapButton("setup-next")
+        XCTAssertTrue(app.otherElements["setup-summary"].waitForExistence(timeout: 5) || app.staticTexts["Résumé"].exists)
+        snapshot("pack-summary")
+        tapButton("setup-next")
+        XCTAssertTrue(waitForDisappearance(step), "Le pack doit se fermer une fois enregistré")
+        XCTAssertEqual(app.state, .runningForeground)
     }
 
     // MARK: Scanner

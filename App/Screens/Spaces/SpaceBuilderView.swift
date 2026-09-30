@@ -114,9 +114,12 @@ struct SpaceBuilderView: View {
         return nil
     }
 
+    /// Each widget shows the person's data once they gave what it needs, marked example data before.
     private func payload(_ design: WidgetDesign) -> WidgetPayload {
-        usesOwnData ? model.payload(for: design) : SamplePayload.make(for: design)
+        model.previewPayload(for: design)
     }
+
+    private var showsExample: Bool { designs.contains { !model.hasOwnData(for: $0) } }
 
     var body: some View {
         NavigationStack {
@@ -132,6 +135,10 @@ struct SpaceBuilderView: View {
                         nameSection(binding(kind))
                     } else if !selection.isEmpty {
                         contentSection
+                    }
+                    // What these widgets need, asked here: given once, shared by every widget.
+                    if !designs.dataItems.isEmpty {
+                        WidgetDataSection(items: designs.dataItems)
                     }
                     styleSection
                     colorSection
@@ -236,6 +243,9 @@ struct SpaceBuilderView: View {
         }
         .frame(maxWidth: .infinity)
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(alignment: .topLeading) {
+            if showsExample { ExampleBadge().padding(12) }
+        }
         .padding(.top, 4)
     }
 
@@ -571,7 +581,7 @@ private struct PartSettingsView: View {
             VStack(alignment: .leading, spacing: 22) {
                 WidgetPreview(
                     design: styled, family: family,
-                    payload: usesOwnData ? model.payload(for: styled) : SamplePayload.make(for: styled),
+                    payload: model.previewPayload(for: styled),
                     width: family == .systemSmall ? 170 : 330
                 )
                 .frame(maxWidth: .infinity)

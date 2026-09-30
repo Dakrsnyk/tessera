@@ -1,8 +1,8 @@
 import SwiftUI
 import WidgetKit
 
-/// Home: the greeting, the person's widgets as they sit on a Home Screen, the categories to create
-/// from, and a taste of the Store.
+/// Home: the greeting, « Mon Quotidien » (the figures of the day), « Mes informations », the person's
+/// widgets as they sit on a Home Screen, and a taste of the Store.
 struct HomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -10,13 +10,14 @@ struct HomeView: View {
     @State private var chosenShelf: StoreShelf?
 
     var body: some View {
-        NavigationStack {
+        @Bindable var router = router
+        NavigationStack(path: $router.homePath) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 30) {
                     header
-                    MyInfoSection()
+                    DailySection()
+                    MyInfoCard()
                     myWidgets
-                    createStrip
                     storeSample
                     if !model.isPremium {
                         PremiumBanner { router.isPaywallPresented = true }
@@ -29,6 +30,18 @@ struct HomeView: View {
             .background(.screenFill)
             .screenshotScroll()
             .navigationTitle("Tessera")
+            .navigationDestination(for: HomeRoute.self) { route in
+                switch route {
+                case let .space(space): SpaceView(space: space, isEmbedded: true)
+                case .info: MyInfoView()
+                case let .infoArea(area): InfoAreaView(area: area)
+                }
+            }
+            .task {
+                // « Mon Quotidien » shows the weather and today's events when they are available.
+                model.refreshEvents()
+                await model.refreshWeather()
+            }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button {
@@ -136,7 +149,7 @@ struct HomeView: View {
     }
 
     /// The latest widgets laid out like a Home Screen: two small ones side by side, a medium one across,
-    /// a large one over two rows; two rows at most, so « Créer » stays close below.
+    /// a large one over two rows; two rows at most, so the Store stays close below.
     private var homeRows: [[WidgetDesign]] {
         let maxRows = 2
         var rows: [[WidgetDesign]] = []
@@ -167,44 +180,6 @@ struct HomeView: View {
             if used >= maxRows && waitingSmall == nil { break }
         }
         return rows
-    }
-
-    // MARK: Créer
-
-    /// Every category, on two rows that scroll together: the user's interests first.
-    private static let defaultOrder: [Space] = [.nutrition, .habits, .fitness, .student, .budget, .investing, .travel, .car, .productivity, .markets, .business, .life]
-
-    private var createRows: [[Space]] {
-        let preferred = model.profile.preferredSpaces
-        let order = preferred + Self.defaultOrder.filter { !preferred.contains($0) }
-        // Alternating between the rows keeps the first choices at the start of both.
-        return [
-            order.enumerated().filter { $0.offset.isMultiple(of: 2) }.map(\.element),
-            order.enumerated().filter { !$0.offset.isMultiple(of: 2) }.map(\.element),
-        ]
-    }
-
-    private var createStrip: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Créer", actionTitle: "Tout voir") { router.tab = .spaces }
-            ScrollView(.horizontal, showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 10) {
-                    ForEach(createRows, id: \.self) { row in
-                        HStack(spacing: 10) {
-                            ForEach(row) { space in
-                                CreatePill(space: space) {
-                                    // Opens that category's widget creator in the Créer tab.
-                                    router.requestedCreator = space
-                                    router.tab = .spaces
-                                }
-                            }
-                        }
-                    }
-                }
-                .padding(.horizontal, 20)
-            }
-            .padding(.horizontal, -20)
-        }
     }
 
     // MARK: Store
@@ -299,34 +274,6 @@ struct HomeView: View {
             .id(storeShelf)
             .transition(.opacity)
         }
-    }
-}
-
-/// A category to create from: its colour and symbol, and its name.
-private struct CreatePill: View {
-    let space: Space
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 8) {
-                Image(systemName: space.symbol)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: 30, height: 30)
-                    .background(Color(hex: space.colorHex), in: Circle())
-                Text(space.title)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.primary)
-                    .lineLimit(1)
-            }
-            .padding(.leading, 6)
-            .padding(.trailing, 14)
-            .padding(.vertical, 6)
-            .background(.cardFill, in: Capsule())
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text("Créer un widget \(space.title)"))
     }
 }
 

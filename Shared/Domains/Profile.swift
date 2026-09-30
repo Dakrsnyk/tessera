@@ -282,6 +282,8 @@ struct UserProfile: Codable, Hashable {
     // Sport (the workouts per week are `FitnessState.weeklyGoal`).
     var fitnessGoal: FitnessGoal?
     var fitnessLevel: FitnessLevel?
+    /// Steps a day, for « Mon Quotidien » (the steps come from the iPhone's motion sensor).
+    var stepGoal: Int?
 
     // Nutrition (the daily targets are `NutritionState.goals`).
     var nutritionAim: NutritionAim?
@@ -307,7 +309,7 @@ struct UserProfile: Codable, Hashable {
     var migrated = false
 
     enum CodingKeys: String, CodingKey {
-        case lastName, interests, skippedTopics, birthYear, heightCm, weightKg, sex, fitnessGoal, fitnessLevel
+        case lastName, interests, skippedTopics, birthYear, heightCm, weightKg, sex, fitnessGoal, fitnessLevel, stepGoal
         case nutritionAim, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
         case businessClients, studyField, weeklyStudyHours, provided, migrated
     }
@@ -326,6 +328,7 @@ struct UserProfile: Codable, Hashable {
         sex = c.optional(.sex)
         fitnessGoal = c.optional(.fitnessGoal)
         fitnessLevel = c.optional(.fitnessLevel)
+        stepGoal = c.optional(.stepGoal)
         nutritionAim = c.optional(.nutritionAim)
         monthlyIncome = c.optional(.monthlyIncome)
         monthlySavingsGoal = c.optional(.monthlySavingsGoal)
@@ -378,6 +381,7 @@ struct UserProfile: Codable, Hashable {
         profile.sex = .male
         profile.fitnessGoal = .bulk
         profile.fitnessLevel = .intermediate
+        profile.stepGoal = 10_000
         profile.nutritionAim = .gain
         profile.monthlyIncome = 3_000
         profile.monthlySavingsGoal = 400

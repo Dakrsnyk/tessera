@@ -50,6 +50,11 @@ final class Router {
     /// Store: the pages pushed on top of it, and a setup to open (used by test captures).
     var storePath: [StorePage] = []
     var openedSetupID: String?
+    /// Test captures: a pack to open in the Store, and its step-by-step setup.
+    var openedPackID: String?
+    var startsPackSetup = false
+    /// Pages pushed on Home (« Mon Quotidien » and « Mes informations »).
+    var homePath: [HomeRoute] = []
     /// Navigation inside the Espaces tab.
     var spacePath: [Space] = []
 
