@@ -111,7 +111,7 @@ struct RootView: View {
                         MarketingView(scene: galleryMode)
                     } else if galleryMode.hasPrefix("gallery-setups") {
                         SetupGalleryView(mode: galleryMode)
-                    } else if ["gallery-styles", "gallery-presets", "gallery-layouts", "gallery-charts", "gallery-looks"].contains(where: galleryMode.hasPrefix) {
+                    } else if ["gallery-styles", "gallery-presets", "gallery-layouts", "gallery-charts", "gallery-looks", "gallery-palettes", "gallery-recolor"].contains(where: galleryMode.hasPrefix) {
                         StudioGalleryView(mode: galleryMode)
                     } else {
                         WidgetGalleryView(mode: galleryMode)

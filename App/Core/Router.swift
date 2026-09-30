@@ -4,10 +4,23 @@ import SwiftUI
 
 struct EditorRequest: Identifiable {
     let id = UUID()
-    var design: WidgetDesign
+    /// The widgets edited together (several when a creation or a pack makes several at once).
+    var designs: [WidgetDesign]
     var isNew: Bool
     /// The Studio section to open on (a `StudioSection` raw value), the content by default.
     var section: String? = nil
+
+    init(design: WidgetDesign, isNew: Bool, section: String? = nil) {
+        self.init(designs: [design], isNew: isNew, section: section)
+    }
+
+    init(designs: [WidgetDesign], isNew: Bool, section: String? = nil) {
+        self.designs = designs
+        self.isNew = isNew
+        self.section = section
+    }
+
+    var design: WidgetDesign { designs[0] }
 }
 
 /// Pages of the Store, pushed from its sections.

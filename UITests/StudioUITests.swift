@@ -1,7 +1,7 @@
 import XCTest
 
-/// The Widget Studio as a person uses it: a theme, a border, a layout, a saved look, then the widget
-/// saved and reopened with everything kept.
+/// The Widget Studio as a person uses it: a theme, a palette undone and redone, the main color, a border,
+/// a saved look, then the widget saved and reopened with everything kept.
 final class StudioUITests: XCTestCase {
     private var app: XCUIApplication!
 
@@ -41,7 +41,7 @@ final class StudioUITests: XCTestCase {
         button.tap()
     }
 
-    private static let sections = ["content", "themes", "style", "colors", "background", "border", "depth", "shape", "text", "icons", "layout", "chart", "density", "myStyles"]
+    private static let sections = ["content", "style", "colors", "background", "border", "chart", "density", "myStyles"]
 
     /// The sections are in a horizontal bar that centers the section chosen: going one section at a
     /// time, the next one is always on screen.
@@ -64,18 +64,30 @@ final class StudioUITests: XCTestCase {
         name.tap()
         name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 30) + "Studio test\n")
 
-        section("themes")
+        section("style")
         tapButton("preset-midnight")
         snapshot("theme")
+
+        // A palette changes every color; the arrows take it back and bring it again.
+        section("colors")
+        tapButton("palette-ocean")
+        XCTAssertTrue(waitForSelection("palette-ocean"), "La palette choisie n'est pas sélectionnée")
+        snapshot("palette")
+        tapButton("studio-undo")
+        XCTAssertTrue(waitForSelection("palette-ocean", selected: false), "Retour en arrière n'a pas annulé la palette")
+        tapButton("studio-redo")
+        XCTAssertTrue(waitForSelection("palette-ocean"), "Retour en avant n'a pas rétabli la palette")
+        // The main color repaints the whole widget, palette included.
+        tapButton("main-FF6B57")
+        XCTAssertTrue(waitForSelection("main-FF6B57"), "La couleur principale n'est pas sélectionnée")
+        XCTAssertTrue(waitForSelection("palette-ocean", selected: false), "La couleur principale remplace la palette")
+        snapshot("main-color")
+        tapButton("studio-undo")
+        XCTAssertTrue(waitForSelection("palette-ocean"), "Retour en arrière rend la palette")
 
         section("border")
         tapButton("border-dashed")
         XCTAssertTrue(waitForSelection("border-dashed"), "La bordure choisie n'est pas sélectionnée")
-
-        section("layout")
-        tapButton("layout-minimal")
-        XCTAssertTrue(waitForSelection("layout-minimal"), "La disposition choisie n'est pas sélectionnée")
-        snapshot("layout")
 
         section("myStyles")
         let styleName = app.textFields["style-name"]
@@ -99,12 +111,12 @@ final class StudioUITests: XCTestCase {
         edit.tap()
         XCTAssertTrue(app.textFields["widget-name"].waitForExistence(timeout: 10))
         XCTAssertEqual(app.textFields["widget-name"].value as? String, "Studio test")
+        section("colors")
+        XCTAssertTrue(app.buttons["palette-ocean"].waitForExistence(timeout: 5))
+        XCTAssertTrue(waitForSelection("palette-ocean"), "La palette est gardée")
         section("border")
         XCTAssertTrue(app.buttons["border-dashed"].waitForExistence(timeout: 5))
         XCTAssertTrue(waitForSelection("border-dashed"), "La bordure est gardée")
-        section("layout")
-        XCTAssertTrue(app.buttons["layout-minimal"].waitForExistence(timeout: 5))
-        XCTAssertTrue(waitForSelection("layout-minimal"), "La disposition est gardée")
         section("myStyles")
         XCTAssertTrue(app.buttons["style-apply-Nuit test"].waitForExistence(timeout: 5), "Mes styles sont gardés")
         snapshot("reopened")
@@ -113,16 +125,49 @@ final class StudioUITests: XCTestCase {
     func testEverySectionOpens() {
         launch(["-screenshotScreen", "studio-content"])
         XCTAssertTrue(app.textFields["widget-name"].waitForExistence(timeout: 15))
-        for name in ["themes", "style", "colors", "background", "border", "depth", "shape", "text", "icons", "layout", "chart", "density", "myStyles", "content"] {
+        for name in ["style", "colors", "background", "border", "chart", "density", "myStyles", "content"] {
             section(name)
             XCTAssertTrue(app.buttons["studio-\(name)"].isSelected, "La section \(name) ne s'ouvre pas")
             XCTAssertEqual(app.state, .runningForeground, "Section \(name)")
         }
+        // Only what the person asked to keep: no shape, text, icons, layout or depth sections.
+        for gone in ["themes", "depth", "shape", "text", "icons", "layout"] {
+            XCTAssertFalse(app.buttons["studio-\(gone)"].exists, "La section \(gone) ne devrait plus exister")
+        }
     }
 
-    /// Waits for a choice to show as selected (the state is updated with an animation).
-    private func waitForSelection(_ identifier: String, timeout: TimeInterval = 4) -> Bool {
-        let predicate = NSPredicate(format: "isSelected == true")
+    /// Widgets made together (a creation, a pack) are edited one after the other and share their look.
+    func testWidgetsMadeTogetherShareTheirLook() {
+        launch(["-screenshotScreen", "studio-multi"])
+        let first = app.buttons["studio-widget-1"]
+        let second = app.buttons["studio-widget-2"]
+        XCTAssertTrue(second.waitForExistence(timeout: 15), "Le Studio n'a pas ouvert les widgets créés ensemble")
+        XCTAssertTrue(app.buttons["studio-share-look"].isSelected, "Des widgets créés ensemble partagent leur style")
+        tapButton("palette-neon")
+        XCTAssertTrue(waitForSelection("palette-neon"), "La palette choisie n'est pas sélectionnée")
+        second.tap()
+        XCTAssertTrue(waitForSelection("studio-widget-2"), "Le deuxième widget ne s'ouvre pas")
+        XCTAssertTrue(waitForSelection("palette-neon"), "La palette est passée au deuxième widget")
+        snapshot("multi")
+        // Undone for all of them at once.
+        tapButton("studio-undo")
+        XCTAssertTrue(waitForSelection("palette-neon", selected: false), "Retour en arrière n'a pas annulé la palette")
+        first.tap()
+        XCTAssertTrue(waitForSelection("studio-widget-1"))
+        XCTAssertTrue(waitForSelection("palette-neon", selected: false), "Retour en arrière vaut pour tous les widgets")
+        XCTAssertTrue(app.buttons["Enregistrer les 3 widgets"].exists, "Les widgets s'enregistrent ensemble")
+    }
+
+    /// A widget without a chart has no « Graphique » section.
+    func testTheChartSectionOnlyShowsWithAChart() {
+        launch(["-screenshotScreen", "studio-note"])
+        XCTAssertTrue(app.buttons["studio-colors"].waitForExistence(timeout: 15))
+        XCTAssertFalse(app.buttons["studio-chart"].exists, "Une note n'a pas de graphique")
+    }
+
+    /// Waits for a choice to show as selected, or not (the state is updated with an animation).
+    private func waitForSelection(_ identifier: String, selected: Bool = true, timeout: TimeInterval = 4) -> Bool {
+        let predicate = NSPredicate(format: "isSelected == %@", NSNumber(value: selected))
         let expectation = XCTNSPredicateExpectation(predicate: predicate, object: app.buttons[identifier].firstMatch)
         return XCTWaiter().wait(for: [expectation], timeout: timeout) == .completed
     }

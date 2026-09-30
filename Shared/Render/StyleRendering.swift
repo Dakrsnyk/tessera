@@ -294,8 +294,31 @@ extension ResolvedStyle {
     /// The tile without the parts the person hid, with the colors they picked for its lines.
     func filtered(_ tile: Tile) -> Tile {
         let o = options
-        guard !o.hidden.isEmpty || !o.rowColors.isEmpty else { return tile }
+        guard !o.hidden.isEmpty || !o.rowColors.isEmpty || !series.isEmpty else { return tile }
         var t = tile
+        // A palette or the main color gives the lines and parts their colors, in turn.
+        if !series.isEmpty {
+            var index = 0
+            t.rows = t.rows.map { row in
+                guard row.colorHex != nil else { return row }
+                var copy = row
+                copy.colorHex = seriesColor(at: index)
+                index += 1
+                return copy
+            }
+            switch t.visual {
+            case let .segments(segments):
+                t.visual = .segments(segments.enumerated().map { pair in
+                    var copy = pair.element
+                    copy.colorHex = seriesColor(at: pair.offset)
+                    return copy
+                })
+            case let .grid(names, rows, colors):
+                t.visual = .grid(names: names, rows: rows, colors: colors.indices.map { seriesColor(at: $0) })
+            default:
+                break
+            }
+        }
         if o.isHidden("value") {
             t.value = ""
             t.unit = nil
@@ -330,6 +353,13 @@ extension ResolvedStyle {
                 })
         }
         return t
+    }
+}
+
+extension ResolvedStyle {
+    /// The color of the n-th line or part when a palette or the main color colors them.
+    func seriesColor(at index: Int) -> String {
+        series.isEmpty ? "" : series[index % series.count]
     }
 }
 

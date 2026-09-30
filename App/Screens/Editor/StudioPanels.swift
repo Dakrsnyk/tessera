@@ -87,7 +87,7 @@ struct StudioElementsPanel: View {
                 StudioGroup(title: "Lignes", detail: "\(lines.count)") {
                     VStack(spacing: 10) {
                         ForEach(lines) { row in
-                            line(id: row.id, key: "row:\(row.id)", title: row.title, colorHex: row.colorHex, colored: row.colorHex != nil || row.progress != nil)
+                            line(id: row.id, key: "row:\(row.id)", title: row.title, colorHex: shownColor(of: row, in: tile.rows), colored: row.colorHex != nil || row.progress != nil)
                         }
                     }
                 }
@@ -97,7 +97,9 @@ struct StudioElementsPanel: View {
                     VStack(spacing: 10) {
                         ForEach(Array(segments.enumerated()), id: \.offset) { pair in
                             let segment = pair.element
-                            line(id: "seg:\(segment.label)", key: "seg:\(segment.label)", title: segment.label, colorHex: segment.colorHex, colored: true)
+                            let series = ResolvedStyle(design: design)
+                            line(id: "seg:\(segment.label)", key: "seg:\(segment.label)", title: segment.label,
+                                 colorHex: series.series.isEmpty ? segment.colorHex : series.seriesColor(at: pair.offset), colored: true)
                         }
                     }
                 }
@@ -122,6 +124,15 @@ struct StudioElementsPanel: View {
         }
     }
 
+    /// The color a line is drawn in: its own, or the palette's (or main color's) when they color the lines.
+    private func shownColor(of row: TileRow, in lines: [TileRow]) -> String? {
+        guard row.colorHex != nil else { return nil }
+        let style = ResolvedStyle(design: design)
+        guard !style.series.isEmpty else { return row.colorHex }
+        let colored = lines.filter { $0.colorHex != nil }
+        return style.seriesColor(at: colored.firstIndex { $0.id == row.id } ?? 0)
+    }
+
     /// A toggle that is on while the part is shown.
     private func shown(_ part: String) -> Binding<Bool> {
         Binding(
@@ -133,30 +144,63 @@ struct StudioElementsPanel: View {
     }
 }
 
-// MARK: - Thèmes
+// MARK: - Thème & style
 
-struct StudioThemesPanel: View {
+/// Complete themes (every setting at once) and styles (the composition), in one section.
+struct StudioLookPanel: View {
     @Binding var design: WidgetDesign
     let input: StudioInput
     @Environment(AppModel.self) private var model
+    @State private var tab: LookTab = .themes
+
+    enum LookTab: String, CaseIterable, Identifiable {
+        case themes, styles
+        var id: String { rawValue }
+        var title: String { self == .themes ? "Thèmes" : "Styles" }
+    }
 
     var body: some View {
-        StudioNote(text: "Un thème règle tout d'un coup : style, couleurs, fond, bordure, ombre, texte. C'est un point de départ : chaque réglage reste modifiable.", symbol: "sparkles")
-        StudioPreviewGrid(
-            options: StylePreset.all,
-            input: input,
-            variant: { $0.applied(to: design) },
-            title: \.name,
-            subtitle: { $0.summary },
-            isSelected: { preset in
-                let applied = preset.applied(to: design)
-                return applied.themeID == design.themeID && applied.accentHex == design.accentHex
-                    && applied.background == design.background && applied.style.look == design.style.look
-            },
-            showsLock: { $0.isPremium && !model.isPremium },
-            identifier: { "preset-\($0.id)" },
-            select: { design = $0.applied(to: design) }
-        )
+        Picker("Thème ou style", selection: $tab) {
+            ForEach(LookTab.allCases) { Text($0.title).tag($0) }
+        }
+        .pickerStyle(.segmented)
+        .accessibilityIdentifier("look-tabs")
+        switch tab {
+        case .themes:
+            StudioNote(text: "Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget.", symbol: "sparkles")
+            StudioPreviewGrid(
+                options: StylePreset.all,
+                input: input,
+                variant: { $0.applied(to: design) },
+                title: \.name,
+                subtitle: { $0.summary },
+                isSelected: { preset in
+                    let applied = preset.applied(to: design)
+                    return applied.themeID == design.themeID && applied.accentHex == design.accentHex
+                        && applied.background == design.background && applied.style.look == design.style.look
+                },
+                showsLock: { $0.isPremium && !model.isPremium },
+                identifier: { "preset-\($0.id)" },
+                select: { design = $0.applied(to: design) }
+            )
+        case .styles:
+            StudioNote(text: "Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent.", symbol: "swatchpalette")
+            StudioPreviewGrid(
+                options: ThemeCatalog.all,
+                input: input,
+                variant: { theme in
+                    var copy = design
+                    copy.themeID = theme.id
+                    return copy
+                },
+                title: \.name,
+                subtitle: { $0.isPremium ? nil : "Gratuit" },
+                isSelected: { $0.id == design.themeID },
+                showsLock: { $0.isPremium && !model.isPremium },
+                identifier: { "theme-\($0.id.rawValue)" },
+                select: { design.themeID = $0.id }
+            )
+        }
         Button {
             withAnimation {
                 let hidden = design.style.hidden
@@ -172,33 +216,6 @@ struct StudioThemesPanel: View {
     }
 }
 
-// MARK: - Style
-
-struct StudioStylesPanel: View {
-    @Binding var design: WidgetDesign
-    let input: StudioInput
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        StudioNote(text: "Chaque style change l'apparence et la composition : disposition, formes, bordure, texture. Tes propres réglages passent toujours avant.", symbol: "swatchpalette")
-        StudioPreviewGrid(
-            options: ThemeCatalog.all,
-            input: input,
-            variant: { theme in
-                var copy = design
-                copy.themeID = theme.id
-                return copy
-            },
-            title: \.name,
-            subtitle: { $0.isPremium ? nil : "Gratuit" },
-            isSelected: { $0.id == design.themeID },
-            showsLock: { $0.isPremium && !model.isPremium },
-            identifier: { "theme-\($0.id.rawValue)" },
-            select: { design.themeID = $0.id }
-        )
-    }
-}
-
 // MARK: - Couleurs
 
 struct StudioColorsPanel: View {
@@ -208,17 +225,59 @@ struct StudioColorsPanel: View {
 
     private var style: ResolvedStyle { ResolvedStyle(design: design) }
 
+    /// Whether the colors are the style's own (no main color, palette or color picked one by one).
+    private var usesStyleColors: Bool {
+        let s = design.style
+        return !s.recolor && s.seriesHexes.isEmpty && s.panelHex == nil && s.textHex == nil && s.secondaryHex == nil
+            && s.numberHex == nil && s.iconHex == nil && s.chartHex == nil && s.rowColors.isEmpty
+    }
+
     var body: some View {
-        StudioGroup(title: "Palettes", isPremium: !model.isPremium) {
+        StudioGroup(title: "Couleur principale", detail: design.style.recolor ? Palette.name(for: design.accentHex) : "Couleurs du style") {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 6)], spacing: 6) {
+                    ForEach(Palette.freeAccents) { swatch in
+                        ColorDot(hex: swatch.hex, isSelected: design.style.recolor && design.accentHex == swatch.hex) {
+                            design = design.recolored(to: swatch.hex)
+                            Haptics.tap()
+                        }
+                        .accessibilityLabel(Text(swatch.name))
+                        .accessibilityIdentifier("main-\(swatch.hex)")
+                    }
+                    ColorPicker("Couleur personnalisée", selection: Binding(
+                        get: { Color(hex: design.accentHex) },
+                        set: { design = design.recolored(to: $0.hexString) }
+                    ), supportsOpacity: false)
+                    .labelsHidden()
+                    .frame(minWidth: 44, minHeight: 44)
+                }
+                if !usesStyleColors {
+                    Button {
+                        Haptics.tap()
+                        withAnimation { design = design.withStyleColors() }
+                    } label: {
+                        Label("Revenir aux couleurs du style", systemImage: "arrow.uturn.backward")
+                            .font(.subheadline.weight(.medium))
+                    }
+                    .accessibilityIdentifier("colors-reset")
+                }
+            }
+        }
+        StudioGroup(title: "Palettes", detail: "Tout change d'un coup", isPremium: !model.isPremium) {
             FlowLayout(spacing: 8) {
                 ForEach(ColorPalette.all) { palette in
+                    let isOn = palette.matches(design)
                     Button {
                         Haptics.tap()
                         withAnimation { design = palette.applied(to: design) }
                     } label: {
                         HStack(spacing: 6) {
                             HStack(spacing: -4) {
-                                ForEach(Array([palette.accent, palette.chart, palette.icon].enumerated()), id: \.offset) { _, hex in
+                                ForEach(Array(palette.swatches.enumerated()), id: \.offset) { _, hex in
                                     Circle().fill(Color(hex: hex)).frame(width: 14, height: 14)
                                         .overlay { Circle().strokeBorder(Color.primary.opacity(0.15), lineWidth: 1) }
                                 }
@@ -228,29 +287,13 @@ struct StudioColorsPanel: View {
                         .font(.subheadline.weight(.medium))
                         .padding(.horizontal, 10)
                         .frame(minHeight: 36)
-                        .background(palette.matches(design) ? AnyShapeStyle(Color.accentColor.opacity(0.18)) : AnyShapeStyle(.screenFill), in: Capsule())
-                        .overlay { Capsule().strokeBorder(palette.matches(design) ? Color.accentColor : .clear, lineWidth: 1.5) }
+                        .background(isOn ? AnyShapeStyle(Color.accentColor.opacity(0.18)) : AnyShapeStyle(.screenFill), in: Capsule())
+                        .overlay { Capsule().strokeBorder(isOn ? Color.accentColor : .clear, lineWidth: 1.5) }
                     }
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("palette-\(palette.id)")
+                    .accessibilityAddTraits(isOn ? [.isButton, .isSelected] : .isButton)
                 }
-            }
-        }
-        StudioGroup(title: "Couleur principale", detail: Palette.name(for: design.accentHex)) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 6)], spacing: 6) {
-                ForEach(Palette.freeAccents) { swatch in
-                    ColorDot(hex: swatch.hex, isSelected: design.accentHex == swatch.hex) {
-                        design.accentHex = swatch.hex
-                        Haptics.tap()
-                    }
-                    .accessibilityLabel(Text(swatch.name))
-                }
-                ColorPicker("Couleur personnalisée", selection: Binding(
-                    get: { Color(hex: design.accentHex) },
-                    set: { design.accentHex = $0.hexString }
-                ), supportsOpacity: false)
-                .labelsHidden()
-                .frame(minWidth: 44, minHeight: 44)
             }
         }
         StudioGroup(title: "Chaque couleur", isPremium: !model.isPremium) {
@@ -264,6 +307,8 @@ struct StudioColorsPanel: View {
                 StudioColorRow(title: "Icônes", hex: $design.style.iconHex, fallback: style.icon)
                 Divider()
                 StudioColorRow(title: "Graphiques", hex: $design.style.chartHex, fallback: style.chart)
+                Divider()
+                StudioColorRow(title: "Cartes et surfaces", hex: $design.style.panelHex, fallback: style.panel)
             }
         }
         StudioGroup(title: "Hausse et baisse", isPremium: !model.isPremium) {
@@ -274,7 +319,7 @@ struct StudioColorsPanel: View {
             }
         }
         if input.tile.map({ !$0.rows.isEmpty }) == true {
-            StudioNote(text: "La couleur de chaque ligne (protéines, glucides, catégories…) se règle dans Contenu.")
+            StudioNote(text: "La couleur de chaque ligne (protéines, glucides, catégories…) se règle aussi dans Contenu.")
         }
     }
 }
@@ -300,219 +345,6 @@ struct StudioBorderPanel: View {
     }
 }
 
-// MARK: - Profondeur
-
-struct StudioDepthPanel: View {
-    @Binding var design: WidgetDesign
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        StudioGroup(title: "Ombre et profondeur", detail: design.effectiveStyle.depth.summary, isPremium: !model.isPremium) {
-            VStack(alignment: .leading, spacing: 14) {
-                StudioChoices(options: DepthKind.allCases, selection: $design.style.depth, title: \.title, identifier: { "depth-\($0.rawValue)" })
-                if design.effectiveStyle.depth != .none && design.effectiveStyle.depth != .embossed {
-                    StudioSlider(title: "Intensité", value: $design.style.shadowOpacity, range: 0.05...0.8)
-                    StudioSlider(title: "Rayon", value: $design.style.shadowRadius, range: 1...20, step: 1, format: { "\(Int($0)) pt" })
-                    if design.effectiveStyle.depth != .glow {
-                        StudioSlider(title: "Distance", value: $design.style.shadowOffset, range: 0...10, step: 0.5, format: { String(format: "%.1f pt", $0) })
-                    }
-                    StudioColorRow(title: "Couleur", hex: $design.style.shadowHex, fallback: ResolvedStyle(design: design).shadowColor)
-                }
-            }
-        }
-        StudioNote(text: "iOS dessine le bord du widget et n'y autorise pas d'ombre : l'ombre, la lueur et le relief s'appliquent aux chiffres, graphiques et cartes à l'intérieur.")
-    }
-}
-
-// MARK: - Forme
-
-struct StudioShapePanel: View {
-    @Binding var design: WidgetDesign
-    let input: StudioInput
-
-    var body: some View {
-        StudioPreviewGrid(
-            options: ShapeKind.allCases,
-            input: input,
-            variant: { shape in
-                var copy = design
-                copy.style.shape = shape
-                return copy
-            },
-            title: \.title,
-            isSelected: { $0 == design.style.shape },
-            identifier: { "shape-\($0.rawValue)" },
-            select: { design.style.shape = $0 }
-        )
-        StudioNote(text: "iOS impose l'arrondi extérieur du widget. La forme choisie s'applique aux cartes, barres, boutons et au panneau intérieur.")
-    }
-}
-
-// MARK: - Texte
-
-struct StudioTextPanel: View {
-    @Binding var design: WidgetDesign
-
-    var body: some View {
-        StudioGroup(title: "Styles de texte") {
-            FlowLayout(spacing: 8) {
-                ForEach(TypePreset.all) { preset in
-                    Button {
-                        Haptics.tap()
-                        withAnimation {
-                            design.font = preset.font
-                            design.style.numberWeight = preset.numberWeight
-                            design.style.titleWeight = preset.titleWeight
-                            design.style.valueScale = preset.valueScale
-                            design.style.titleCase = preset.titleCase
-                            design.style.tracking = preset.tracking
-                        }
-                    } label: {
-                        Text(preset.name)
-                            .font(.system(.subheadline, design: fontDesign(preset.font)).weight(preset.numberWeight.fontWeight))
-                            .padding(.horizontal, 12)
-                            .frame(minHeight: 36)
-                            .background(.screenFill, in: Capsule())
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
-        StudioGroup(title: "Police") {
-            VStack(alignment: .leading, spacing: 8) {
-                StudioChoices(options: FontChoice.allCases, selection: $design.font, title: \.title)
-                StudioNote(text: "Seules les polices système d'iOS s'affichent toujours correctement dans un widget : standard, arrondie, serif et mono.")
-            }
-        }
-        StudioGroup(title: "Tailles") {
-            VStack(spacing: 12) {
-                StudioSlider(title: "Chiffres", value: $design.style.valueScale, range: 0.7...1.5)
-                StudioSlider(title: "Titre", value: $design.style.titleScale, range: 0.8...1.5)
-                StudioSlider(title: "Texte", value: $design.style.textScale, range: 0.85...1.25)
-            }
-        }
-        StudioGroup(title: "Graisse et casse") {
-            VStack(spacing: 10) {
-                weightPicker("Chiffres", selection: $design.style.numberWeight)
-                Divider()
-                weightPicker("Titres", selection: $design.style.titleWeight)
-                Divider()
-                HStack {
-                    Text("Titres en")
-                    Spacer()
-                    Picker("Casse", selection: $design.style.titleCase) {
-                        ForEach(TitleCase.allCases) { Text($0.title).tag($0) }
-                    }
-                }
-                Divider()
-                StudioSlider(title: "Espacement des lettres", value: $design.style.tracking, range: -0.5...3, step: 0.1, format: { String(format: "%.1f", $0) })
-                Divider()
-                Toggle("Chiffres à largeur fixe", isOn: $design.style.monospacedNumbers)
-                Divider()
-                HStack {
-                    Text("Alignement")
-                    Spacer()
-                    Picker("Alignement", selection: $design.alignment) {
-                        ForEach(ContentAlignment.allCases) { Text($0.title).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
-                    .frame(width: 190)
-                }
-            }
-            .font(.subheadline)
-        }
-    }
-
-    private func weightPicker(_ title: String, selection: Binding<WeightChoice?>) -> some View {
-        HStack {
-            Text(title)
-            Spacer()
-            Picker(title, selection: selection) {
-                Text("Style").tag(WeightChoice?.none)
-                ForEach(WeightChoice.allCases) { Text($0.title).tag(WeightChoice?.some($0)) }
-            }
-        }
-    }
-
-    private func fontDesign(_ font: FontChoice) -> Font.Design {
-        switch font {
-        case .theme: design.theme.fontDesign
-        case .standard: .default
-        case .rounded: .rounded
-        case .serif: .serif
-        case .mono: .monospaced
-        }
-    }
-}
-
-// MARK: - Icônes
-
-struct StudioIconsPanel: View {
-    @Binding var design: WidgetDesign
-
-    var body: some View {
-        StudioGroup(title: "Icônes") {
-            VStack(alignment: .leading, spacing: 14) {
-                Toggle("Afficher les icônes", isOn: Binding(
-                    get: { !design.style.hidden.contains("icon") },
-                    set: { if $0 { design.style.hidden.remove("icon") } else { design.style.hidden.insert("icon") } }
-                ))
-                .font(.subheadline)
-                Text("Cadre").font(.subheadline.weight(.semibold))
-                StudioChoices(options: IconStyle.allCases, selection: $design.style.iconStyle, title: \.title, identifier: { "icon-\($0.rawValue)" })
-                Text("Famille").font(.subheadline.weight(.semibold))
-                StudioChoices(options: IconFamily.allCases, selection: $design.style.iconFamily, title: \.title, symbol: { family in
-                    switch family {
-                    case .theme: nil
-                    case .filled: "heart.fill"
-                    case .outlined: "heart"
-                    case .circled: "heart.circle.fill"
-                    case .squared: "heart.square.fill"
-                    }
-                })
-                Text("Position").font(.subheadline.weight(.semibold))
-                Picker("Position", selection: $design.style.iconPosition) {
-                    ForEach(IconPosition.allCases) { Text($0.title).tag($0) }
-                }
-                .pickerStyle(.segmented)
-                StudioSlider(title: "Taille", value: $design.style.iconScale, range: 0.7...1.6)
-                StudioColorRow(title: "Couleur", hex: $design.style.iconHex, fallback: ResolvedStyle(design: design).icon)
-            }
-        }
-    }
-}
-
-// MARK: - Disposition
-
-struct StudioLayoutPanel: View {
-    @Binding var design: WidgetDesign
-    let input: StudioInput
-
-    var body: some View {
-        if input.tile == nil {
-            StudioNote(text: design.isCombo
-                ? "Un widget combiné garde la disposition de chacun de ses widgets. Les couleurs, le fond, la bordure et le texte s'appliquent à tous."
-                : "Ce widget a sa propre mise en page (\(design.kind.title)). Les dispositions s'appliquent aux widgets de données ; le reste du Studio s'applique à celui-ci.")
-        } else {
-            StudioPreviewGrid(
-                options: LayoutKind.allCases,
-                input: input,
-                variant: { layout in
-                    var copy = design
-                    copy.style.layout = layout
-                    return copy
-                },
-                title: \.title,
-                subtitle: { $0 == .auto ? "Prévue" : nil },
-                isSelected: { $0 == design.effectiveStyle.layout },
-                identifier: { "layout-\($0.rawValue)" },
-                select: { design.style.layout = $0 }
-            )
-            StudioNote(text: design.effectiveStyle.layout.summary, symbol: design.effectiveStyle.layout.symbol)
-        }
-    }
-}
-
 // MARK: - Graphique
 
 struct StudioChartPanel: View {
@@ -523,9 +355,7 @@ struct StudioChartPanel: View {
     private var family: ChartFamily { input.tile?.visual.chartFamily ?? .none }
 
     var body: some View {
-        if family == .none {
-            StudioNote(text: "Ce widget n'a pas de graphique à transformer. L'épaisseur, le remplissage et la couleur s'appliquent à ses anneaux et barres.")
-        } else {
+        if family != .none {
             StudioPreviewGrid(
                 options: ChartKind.options(for: family),
                 input: input,

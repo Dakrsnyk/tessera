@@ -4,7 +4,7 @@ import WidgetKit
 #if DEBUG
 /// Review captures of the Widget Studio: every style, theme, layout, chart and shape side by side.
 /// Modes: gallery-styles-<page>, gallery-presets-<page>, gallery-layouts-<small|medium|large>,
-/// gallery-charts, gallery-looks.
+/// gallery-charts, gallery-looks, gallery-palettes, gallery-recolor-<page> (every style in a main color).
 struct StudioGalleryView: View {
     let mode: String
 
@@ -51,6 +51,19 @@ struct StudioGalleryView: View {
                 design.style.layout = layout
                 return Item(id: index, title: layout.title, design: design)
             }
+        case "palettes":
+            return ColorPalette.all.enumerated().map { index, palette in
+                let design = WidgetDesign(kind: Self.kinds[index % Self.kinds.count], themeID: .modern, format: .small)
+                return Item(id: index, title: palette.name, design: palette.applied(to: design))
+            }
+        case "recolor":
+            // Every style, repainted by a main color (a different one on each, to see them all).
+            let all = ThemeCatalog.all.enumerated().map { index, theme in
+                let main = Palette.freeAccents[index % Palette.freeAccents.count]
+                let design = WidgetDesign(kind: Self.kinds[index % Self.kinds.count], themeID: theme.id, format: .small).recolored(to: main.hex)
+                return Item(id: index, title: "\(theme.name) · \(main.name)", design: design)
+            }
+            return Array(all.dropFirst((page - 1) * 15).prefix(15))
         case "charts":
             var result: [Item] = []
             for kind in ChartKind.options(for: .series) {

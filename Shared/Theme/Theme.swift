@@ -26,6 +26,28 @@ enum ThemeColor {
         case let .accentFaded(opacity): Color(hex: accent).opacity(opacity)
         }
     }
+
+    /// The color, repainted in the hue of `recolor` when the main color tints the whole style.
+    func resolve(accent: String, recolor: String?, surface: Bool = false) -> Color {
+        guard let recolor else { return resolve(accent: accent) }
+        switch self {
+        case let .fixed(hex, opacity):
+            return Color(hex: ColorMath.recolor(hex, to: recolor, surface: surface)).opacity(opacity)
+        case let .adaptive(light, dark):
+            return Color(light: ColorMath.recolor(light, to: recolor, surface: surface), dark: ColorMath.recolor(dark, to: recolor, surface: surface))
+        case .accent, .accentFaded:
+            return resolve(accent: accent)
+        }
+    }
+
+    /// Whether the color is a gray, a white or a black (which a main color only tints).
+    var isNeutral: Bool {
+        switch self {
+        case let .fixed(hex, _): ColorMath.hsl(hex).s < 0.14
+        case let .adaptive(light, _): ColorMath.hsl(light).s < 0.14
+        case .accent, .accentFaded: false
+        }
+    }
 }
 
 enum ThemeBackground {
@@ -490,38 +512,49 @@ struct ResolvedStyle {
     var isDarkSurface: Bool
     var shadowColor: Color
     var borderColor: Color
+    /// Colors given in turn to lines and parts of a whole (a palette's, or the main color's shades).
+    /// Empty: each line keeps its own color.
+    var series: [String]
 
     init(design: WidgetDesign) {
         let theme = design.theme
         let accentHex = design.accentHex
         let options = design.effectiveStyle
-        var primary = theme.primary.resolve(accent: accentHex)
-        var secondary = theme.secondary.resolve(accent: accentHex)
-        var tint = theme.tint.resolve(accent: accentHex)
-        var panel = theme.panel.resolve(accent: accentHex)
+        // With « Couleur principale », every color of the style takes the main color's hue.
+        let recolor: String? = options.recolor ? accentHex : nil
+        func ink(_ hex: String) -> String { recolor.map { ColorMath.recolor(hex, to: $0) } ?? hex }
+        var primary = theme.primary.resolve(accent: accentHex, recolor: recolor)
+        var secondary = theme.secondary.resolve(accent: accentHex, recolor: recolor)
+        var tint = theme.tint.resolve(accent: accentHex, recolor: recolor)
+        var panel = theme.panel.resolve(accent: accentHex, recolor: recolor, surface: true)
         var darkSurface = theme.isDarkSurface
         var tintHex: String? = {
             switch theme.tint {
-            case let .fixed(hex, _): return hex
+            case let .fixed(hex, _): return recolor == nil ? hex : ink(hex)
             case .accent, .accentFaded: return accentHex
             case .adaptive: return nil
             }
         }()
+        // A style's own highlight color (pink, gold, fluo…) becomes the main color itself.
+        if recolor != nil, case let .fixed(_, opacity) = theme.tint, !theme.tint.isNeutral {
+            tint = Color(hex: accentHex).opacity(opacity)
+            tintHex = accentHex
+        }
         var neutral = [ThemeID.minimal, .light, .dark, .typography, .modern, .card, .compact, .magazine].contains(theme.id)
 
         // Themes filled with the accent must keep readable text on light accents.
         if theme.background.followsAccent, ColorMath.isLight(Self.surfaceHex(theme.background, accentHex: accentHex)) {
-            primary = Color(hex: "16171A")
-            secondary = Color(hex: "16171A").opacity(0.7)
+            primary = Color(hex: ink("16171A"))
+            secondary = Color(hex: ink("16171A")).opacity(0.7)
             tint = primary
-            tintHex = "16171A"
+            tintHex = ink("16171A")
             panel = Color.black.opacity(0.08)
             darkSurface = false
         }
 
         func readable(on light: Bool) {
-            primary = Color(hex: light ? "16171A" : "FFFFFF")
-            secondary = light ? Color(hex: "16171A").opacity(0.6) : Color.white.opacity(0.7)
+            primary = Color(hex: ink(light ? "16171A" : "FFFFFF"))
+            secondary = light ? Color(hex: ink("16171A")).opacity(0.6) : Color(hex: ink("FFFFFF")).opacity(0.7)
             panel = light ? Color.black.opacity(0.06) : Color.white.opacity(0.12)
             darkSurface = !light
             neutral = false
@@ -543,7 +576,7 @@ struct ResolvedStyle {
             break
         case let .color(hex):
             readable(on: ColorMath.isLight(hex))
-            if case .fixed = theme.tint {} else {
+            if case .fixed = theme.tint, recolor == nil {} else {
                 tint = Color(hex: accentHex)
                 tintHex = accentHex
             }
@@ -572,6 +605,7 @@ struct ResolvedStyle {
             if options.secondaryHex == nil { secondary = Color(hex: hex).opacity(0.62) }
         }
         if let hex = options.secondaryHex { secondary = Color(hex: hex) }
+        if let hex = options.panelHex { panel = Color(hex: hex) }
 
         self.primary = primary
         self.secondary = secondary
@@ -629,9 +663,19 @@ struct ResolvedStyle {
         self.onAccent = (tintHex.map(ColorMath.isLight) ?? false) ? Color(hex: "16171A") : .white
         self.prefersMulticolorSymbols = neutral && options.iconHex == nil
         self.options = options
-        self.shadowColor = options.shadowHex.map { Color(hex: $0) } ?? (options.depth == .glow ? (options.chartHex.map { Color(hex: $0) } ?? tint) : .black)
-        let border = options.borderHex.map { Color(hex: $0) } ?? ((options.border == .glow || options.border == .gradient) ? (options.chartHex.map { Color(hex: $0) } ?? tint) : primary)
+        // The style's own border and shadow colors follow the main color too; the person's stay as picked.
+        let shadowHex = design.style.shadowHex == nil ? options.shadowHex.map(ink) : options.shadowHex
+        let borderHex = design.style.borderHex == nil ? options.borderHex.map(ink) : options.borderHex
+        self.shadowColor = shadowHex.map { Color(hex: $0) } ?? (options.depth == .glow ? (options.chartHex.map { Color(hex: $0) } ?? tint) : .black)
+        let border = borderHex.map { Color(hex: $0) } ?? ((options.border == .glow || options.border == .gradient) ? (options.chartHex.map { Color(hex: $0) } ?? tint) : primary)
         self.borderColor = border.opacity(options.borderOpacity)
+        if !options.seriesHexes.isEmpty {
+            self.series = options.seriesHexes
+        } else if options.recolor {
+            self.series = ColorMath.series(from: accentHex)
+        } else {
+            self.series = []
+        }
     }
 
     /// The color the text sits on, for backgrounds made of the accent.
@@ -765,12 +809,18 @@ struct DesignBackground: View {
         }
     }
 
+    /// The main color, when it tints the whole style.
+    private var recolor: String? { design.effectiveStyle.recolor ? design.accentHex : nil }
+
     @ViewBuilder private var themeBackground: some View {
         switch design.theme.background {
         case let .solid(color):
-            color.resolve(accent: design.accentHex)
+            color.resolve(accent: design.accentHex, recolor: recolor, surface: true)
         case let .gradient(hexes):
-            LinearGradient(colors: hexes.map { Color(hex: $0) }, startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(
+                colors: hexes.map { hex in Color(hex: recolor.map { ColorMath.recolor(hex, to: $0, surface: true) } ?? hex) },
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
         case .accentFill:
             LinearGradient(
                 colors: [Color(hex: design.accentHex), Color(hex: ColorMath.shade(design.accentHex, -0.12))],
@@ -782,7 +832,7 @@ struct DesignBackground: View {
                 startPoint: .topLeading, endPoint: .bottomTrailing
             )
         case let .glass(tint):
-            GlassSurface(tintHex: tint ?? design.accentHex)
+            GlassSurface(tintHex: recolor == nil ? (tint ?? design.accentHex) : design.accentHex)
         }
     }
 }

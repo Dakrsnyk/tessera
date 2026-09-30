@@ -608,7 +608,8 @@ struct HomeSetupSheet: View {
             .navigationTitle(setup.name)
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $configures) {
-                WidgetSetupFlow(title: setup.name, designs: designs) { dismiss() }
+                // Selection, then editing as in the Studio: every widget of the set, one after the other.
+                WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -741,7 +742,7 @@ struct HomeSetupSheet: View {
             router.isPaywallPresented = true
             return
         }
-        // Each widget in turn, with the data it needs, then all of them saved together.
+        // The Studio, with every widget of the setup: styled, given its data, then saved together.
         designs = setup.designs()
         configures = true
     }

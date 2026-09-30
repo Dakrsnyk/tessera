@@ -396,6 +396,12 @@ struct StyleOptions: Codable, Hashable {
     var negativeHex: String?
     /// Colors of individual lines (macros, categories…), by line id, or "seg:<label>" for parts of a whole.
     var rowColors: [String: String] = [:]
+    /// The fill of inner surfaces (cards, list rows, chips), set by a palette.
+    var panelHex: String?
+    /// Colors given in turn to the lines and parts of a whole, set by a palette.
+    var seriesHexes: [String] = []
+    /// The main color tints the whole style: background, surfaces, text, charts and lines take its hue.
+    var recolor: Bool = false
 
     // Background.
     var gradient: GradientSpec?
@@ -453,7 +459,7 @@ struct StyleOptions: Codable, Hashable {
     var isDefault: Bool { self == StyleOptions() }
 
     enum CodingKeys: String, CodingKey {
-        case textHex, secondaryHex, numberHex, iconHex, chartHex, positiveHex, negativeHex, rowColors
+        case textHex, secondaryHex, numberHex, iconHex, chartHex, positiveHex, negativeHex, rowColors, panelHex, seriesHexes, recolor
         case gradient, texture, textureOpacity, veil, border, borderHex, borderWidth, borderOpacity
         case depth, shadowHex, shadowRadius, shadowOpacity, shadowOffset, shape
         case valueScale, titleScale, textScale, numberWeight, titleWeight, tracking, titleCase, monospacedNumbers
@@ -474,6 +480,9 @@ struct StyleOptions: Codable, Hashable {
         positiveHex = optional(.positiveHex, String.self)
         negativeHex = optional(.negativeHex, String.self)
         rowColors = value(.rowColors, d.rowColors)
+        panelHex = optional(.panelHex, String.self)
+        seriesHexes = value(.seriesHexes, d.seriesHexes)
+        recolor = value(.recolor, d.recolor)
         gradient = optional(.gradient, GradientSpec.self)
         texture = value(.texture, d.texture)
         textureOpacity = value(.textureOpacity, d.textureOpacity)
@@ -523,6 +532,9 @@ struct StyleOptions: Codable, Hashable {
         r.positiveHex = positiveHex ?? base.positiveHex
         r.negativeHex = negativeHex ?? base.negativeHex
         r.rowColors = base.rowColors.merging(rowColors) { _, mine in mine }
+        r.panelHex = panelHex ?? base.panelHex
+        r.seriesHexes = seriesHexes.isEmpty ? base.seriesHexes : seriesHexes
+        r.recolor = recolor || base.recolor
         r.gradient = gradient ?? base.gradient
         r.texture = pick(texture, base.texture, d.texture)
         r.textureOpacity = pick(textureOpacity, base.textureOpacity, d.textureOpacity)
@@ -562,8 +574,8 @@ struct StyleOptions: Codable, Hashable {
     /// Settings that need Premium: the person's own colors, the advanced backgrounds, borders and depth.
     var premiumFeatures: [String] {
         var features: [String] = []
-        let colors = [textHex, secondaryHex, numberHex, iconHex, chartHex, positiveHex, negativeHex, borderHex, shadowHex]
-        if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty { features.append("Couleurs personnalisées") }
+        let colors = [textHex, secondaryHex, numberHex, iconHex, chartHex, positiveHex, negativeHex, borderHex, shadowHex, panelHex]
+        if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append("Couleurs personnalisées") }
         if gradient != nil { features.append("Dégradé personnalisé") }
         if texture != .none { features.append("Texture") }
         if border != .none { features.append("Bordure") }
@@ -584,6 +596,8 @@ struct StyleOptions: Codable, Hashable {
         copy.borderHex = nil
         copy.shadowHex = nil
         copy.rowColors = [:]
+        copy.panelHex = nil
+        copy.seriesHexes = []
         copy.gradient = nil
         copy.texture = .none
         copy.border = .none

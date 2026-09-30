@@ -652,7 +652,7 @@ struct PackSheet: View {
                         packItem(design, family: .systemMedium)
                     }
                     if designs.contains(where: { !model.hasOwnData(for: $0) }) {
-                        Label("Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes widget par widget à l'étape suivante.", systemImage: "sparkles")
+                        Label("Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.", systemImage: "sparkles")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
@@ -669,7 +669,7 @@ struct PackSheet: View {
                         configures = true
                     }
                 } label: {
-                    Text(needsPremium ? "Débloquer avec Premium" : "Configurer et ajouter")
+                    Text(needsPremium ? "Débloquer avec Premium" : "Personnaliser et ajouter")
                         .font(.headline)
                         .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
@@ -685,7 +685,8 @@ struct PackSheet: View {
             .navigationTitle(pack.name)
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $configures) {
-                WidgetSetupFlow(title: pack.name, designs: designs) { dismiss() }
+                // Selection, then editing as in the Studio: every widget of the set, one after the other.
+                WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

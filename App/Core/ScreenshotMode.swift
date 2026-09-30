@@ -183,10 +183,25 @@ enum ScreenshotMode {
                 if screen == "editor-fresh" { router.openEditor(TemplateCatalog.design("calories-glass"), isNew: true) }
             }
             // The Widget Studio, open on one of its sections, on a widget with lines, parts and a chart.
-            if screen.hasPrefix("studio-") {
+            if screen == "studio-multi" {
+                // Several widgets made together, opened in the Studio as a creation does.
+                let designs = [WidgetKind.caloriesLeft, .macros, .proteinLeft].map { kind in
+                    WidgetDesign(kind: kind, themeID: .modern, accentHex: "2F8F7A", format: .small)
+                }
+                router.editor = EditorRequest(designs: designs, isNew: true, section: "colors")
+            } else if screen.hasPrefix("studio-") {
                 let section = String(screen.dropFirst(7))
-                let kind: WidgetKind = section == "chart" ? .nutritionWeek : .macros
-                let design = WidgetDesign(kind: kind, themeID: .modern, accentHex: "2F8F7A", format: .medium)
+                // « studio-note »: a widget without a chart; « studio-main-… »: the colors with a main color picked.
+                let kind: WidgetKind = section == "chart" ? .nutritionWeek : (section == "note" ? .note : .macros)
+                var design = WidgetDesign(kind: kind, themeID: .modern, accentHex: "2F8F7A", format: .medium)
+                if section.hasPrefix("main-") {
+                    let theme = ThemeID(rawValue: String(section.dropFirst(5))) ?? .neon
+                    design.themeID = theme
+                    design = design.recolored(to: "3366FF")
+                }
+                if section.hasPrefix("palette-") {
+                    design = ColorPalette.palette(String(section.dropFirst(8)))?.applied(to: design) ?? design
+                }
                 if section == "myStyles" {
                     for saved in model.savedStyles { model.deleteStyle(saved.id) }
                     var looks = design
@@ -194,7 +209,8 @@ enum ScreenshotMode {
                     model.saveStyle(named: "Océan du matin", from: looks)
                     model.saveStyle(named: "Mon thème", from: StylePreset.preset("midnight")?.applied(to: design) ?? design)
                 }
-                router.openEditor(design, isNew: true, section: section)
+                let opened = section.hasPrefix("main-") || section.hasPrefix("palette-") ? "colors" : section
+                router.openEditor(design, isNew: true, section: opened)
             }
             if screen.hasPrefix("pack-") {
                 router.tab = .explore

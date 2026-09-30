@@ -1,45 +1,38 @@
 import SwiftUI
 import WidgetKit
 
-/// Creating widgets from a space: pick one or several of its widgets, give them a style and a color,
-/// save. They join « Mes widgets » (with a short flight to the tab). The space's data stays one tap away.
-/// Creating widgets from a space: pick a size, one or several of its widgets, a style and a color, save.
+/// Creating widgets from a space, first step: pick a size and one or several of its widgets.
 /// Small shows one piece of information; medium shows a widget's medium layout or two widgets side by side;
 /// large shows a widget's large layout or up to four widgets, like a dashboard of the space.
-/// They join « Mes widgets » (with a short flight to the tab). The space's data stays one tap away.
+/// « Personnaliser » then opens them in the Widget Studio, where they are styled and saved.
+/// The space's data stays one tap away.
 struct SpaceBuilderView: View {
     let space: Space
     @Environment(AppModel.self) private var model
-    @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
 
     @State private var format: WidgetFormat = .small
     /// Selected widgets, in the order they were picked.
     @State private var selection: [WidgetKind]
-    @State private var themeID: ThemeID
-    @State private var accentHex: String
-    /// The name and content settings of each widget, whatever the size: kept per widget so they
-    /// survive a change of size or selection.
-    @State private var configured: [WidgetKind: WidgetDesign] = [:]
-    /// The name of a combined widget, when the user changed it.
-    @State private var comboName: String?
-    @State private var showsPaywall = false
-    @State private var previewFrame: CGRect = .zero
+    /// The Studio, pushed over the selection.
+    @State private var customizes = false
     /// Test builds: the size or selection asked for by a capture is applied once, not again on coming
     /// back from « Mes données ».
     @State private var appliedCaptureOptions = false
+    /// The look every widget of the creation starts with (the space's first widget's), so they match.
+    private let themeID: ThemeID
+    private let accentHex: String
 
     init(space: Space) {
         self.space = space
         let first = SpaceCatalog.preset(for: space, format: .small).first ?? .note
         let base = Self.design(for: first)
         _selection = State(initialValue: [first])
-        _themeID = State(initialValue: base.themeID)
-        _accentHex = State(initialValue: base.accentHex)
+        themeID = base.themeID
+        accentHex = base.accentHex
     }
 
     private var kinds: [WidgetKind] { SpaceCatalog.kinds(in: space) }
-    private var usesOwnData: Bool { model.hasData(in: space) }
 
     private static func design(for kind: WidgetKind) -> WidgetDesign {
         var design = TemplateCatalog.template(for: kind)?.makeDesign() ?? WidgetDesign.starter(for: kind)
@@ -49,18 +42,9 @@ struct SpaceBuilderView: View {
         return design
     }
 
-    /// A widget's own settings (name, content), as the user left them.
-    private func base(_ kind: WidgetKind) -> WidgetDesign {
-        configured[kind] ?? Self.design(for: kind)
-    }
-
-    private func binding(_ kind: WidgetKind) -> Binding<WidgetDesign> {
-        Binding(get: { base(kind) }, set: { configured[kind] = $0 })
-    }
-
-    /// A widget of this space in the chosen style.
+    /// A widget of this space in the creation's look.
     private func styled(_ kind: WidgetKind) -> WidgetDesign {
-        var design = base(kind)
+        var design = Self.design(for: kind)
         design.themeID = themeID
         design.accentHex = accentHex
         return design
@@ -80,11 +64,11 @@ struct SpaceBuilderView: View {
         case let .combo(slots):
             var options = DesignOptions()
             options.parts = slots.map { slot in
-                let part = base(slot.kind)
+                let part = Self.design(for: slot.kind)
                 return ComboPart(kind: slot.kind, options: part.options, name: part.name, size: slot.size)
             }
             return WidgetDesign(
-                name: comboName?.trimmed.nonEmpty ?? slots.map { base($0.kind).name }.joined(separator: " + "),
+                name: slots.map { Self.design(for: $0.kind).name }.joined(separator: " + "),
                 kind: slots[0].kind, themeID: themeID, accentHex: accentHex,
                 options: options, format: format
             )
@@ -93,7 +77,7 @@ struct SpaceBuilderView: View {
         }
     }
 
-    /// What « Enregistrer » saves: one small widget per selected kind, or the one medium or large widget.
+    /// What the Studio opens with: one small widget per selected kind, or the one medium or large widget.
     private var designs: [WidgetDesign] {
         if format == .small {
             return selection.map { kind in
@@ -103,15 +87,6 @@ struct SpaceBuilderView: View {
             }
         }
         return composed.map { [$0] } ?? []
-    }
-
-    private var needsPremium: Bool { !model.isPremium && designs.contains(where: \.usesPremiumFeatures) }
-    private var exceedsFreeLimit: Bool { !model.isPremium && model.designs.count + designs.count > AppModel.freeDesignLimit }
-    /// The widget shown on its own, whose name and content are edited in place.
-    private var singleKind: WidgetKind? {
-        if format == .small { return selection.count == 1 ? selection.first : nil }
-        if case let .single(kind) = plan { return kind }
-        return nil
     }
 
     /// Each widget shows the person's data once they gave what it needs, marked example data before.
@@ -128,28 +103,14 @@ struct SpaceBuilderView: View {
                     header
                     formatPicker
                     preview
-                        .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
-                    if needsPremium { premiumNotice }
                     widgetsSection
-                    if let kind = singleKind {
-                        nameSection(binding(kind))
-                    } else if !selection.isEmpty {
-                        contentSection
-                    }
-                    // What these widgets need, asked here: given once, shared by every widget.
-                    if !designs.dataItems.isEmpty {
-                        WidgetDataSection(items: designs.dataItems)
-                    }
-                    styleSection
-                    colorSection
-                    if let kind = singleKind { KindOptionsSection(design: binding(kind)) }
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 24)
             }
             .scrollDismissesKeyboard(.interactively)
             .background(.screenFill)
-            .safeAreaInset(edge: .bottom) { saveBar }
+            .safeAreaInset(edge: .bottom) { continueBar }
             .navigationTitle(space.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -168,13 +129,16 @@ struct SpaceBuilderView: View {
                     .accessibilityLabel(Text("Mes données de l'espace \(space.title)"))
                 }
             }
-            .sheet(isPresented: $showsPaywall) { PaywallView() }
+            // Selection, then editing as in the Studio: the same Studio as « Mes widgets ».
+            .navigationDestination(isPresented: $customizes) {
+                WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
+            }
             .task(id: selection) {
                 for design in designs { await model.prepare(design) }
             }
             #if DEBUG
             .onAppear {
-                // Test captures: several widgets selected, or a size chosen.
+                // Test captures: several widgets selected, or a size chosen, or the Studio already open.
                 guard !appliedCaptureOptions else { return }
                 appliedCaptureOptions = true
                 let defaults = UserDefaults.standard
@@ -183,6 +147,7 @@ struct SpaceBuilderView: View {
                 } else if defaults.bool(forKey: "screenshotCreatorMulti") {
                     selection = Array(kinds.prefix(3))
                 }
+                if defaults.bool(forKey: "screenshotCreatorStudio") { customizes = true }
             }
             #endif
         }
@@ -200,9 +165,10 @@ struct SpaceBuilderView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text("Crée ton widget")
                     .font(.title3.weight(.semibold))
-                Text("Choisis une taille, tes widgets, puis leur style.")
+                Text("Choisis une taille et tes widgets, puis personnalise-les dans le Studio.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .padding(.top, 8)
@@ -294,29 +260,6 @@ struct SpaceBuilderView: View {
         }
     }
 
-    private var premiumNotice: some View {
-        HStack(alignment: .top, spacing: 12) {
-            Image(systemName: "sparkles")
-                .foregroundStyle(Color.premiumInk)
-                .font(.headline)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(selection.count > 1 ? "Ces widgets utilisent Premium" : "Ce widget utilise Premium")
-                    .font(.subheadline.weight(.semibold))
-                Text(Array(Set(designs.flatMap(\.premiumFeatures))).sorted().joined(separator: " · "))
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-            Spacer(minLength: 0)
-            Button { showsPaywall = true } label: {
-                Text("Débloquer").foregroundStyle(.onAccent)
-            }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.small)
-        }
-        .padding(14)
-        .background(Color.premiumFill.opacity(0.55), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-    }
-
     private var widgetsSection: some View {
         EditorSection(title: "Widgets", detail: widgetsDetail) {
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], alignment: .leading, spacing: 14) {
@@ -389,118 +332,14 @@ struct SpaceBuilderView: View {
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
-    /// Several widgets (small ones, or combined into a medium or large one): each keeps its own name and
-    /// content, set on its own page; a combined widget also gets its name.
-    private var contentSection: some View {
-        EditorSection(title: "Contenu", detail: "Règle chaque widget") {
-            VStack(spacing: 0) {
-                if composed != nil {
-                    TextField("Nom du widget", text: Binding(
-                        get: { comboName ?? composed?.name ?? "" },
-                        set: { comboName = $0 }
-                    ))
-                    .textInputAutocapitalization(.sentences)
-                    .submitLabel(.done)
-                    .padding(12)
-                    .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-                    .padding(.bottom, 8)
-                    .accessibilityIdentifier("combo-name")
-                }
-                ForEach(Array(selection.enumerated()), id: \.element) { pair in
-                    if pair.offset > 0 { Divider() }
-                    NavigationLink {
-                        PartSettingsView(design: binding(pair.element), style: (themeID, accentHex), usesOwnData: usesOwnData)
-                    } label: {
-                        HStack(spacing: 10) {
-                            Image(systemName: pair.element.symbol)
-                                .font(.system(size: 13, weight: .semibold))
-                                .foregroundStyle(Color.accentColor)
-                                .frame(width: 24)
-                            VStack(alignment: .leading, spacing: 1) {
-                                Text(base(pair.element).name)
-                                    .font(.subheadline.weight(.semibold))
-                                    .foregroundStyle(Color.primary)
-                                    .lineLimit(1)
-                                Text(pair.element.title)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            Text("Régler")
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                            Image(systemName: "chevron.right")
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(.tertiary)
-                        }
-                        .frame(minHeight: 48)
-                        .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("part-\(pair.element.rawValue)")
-                }
-            }
-        }
-    }
-
-    private func nameSection(_ design: Binding<WidgetDesign>) -> some View {
-        EditorSection(title: "Nom") {
-            TextField("Nom du widget", text: design.name)
-                .textInputAutocapitalization(.sentences)
-                .submitLabel(.done)
-                .padding(12)
-                .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-        }
-    }
-
-    private var styleSection: some View {
-        EditorSection(title: "Style", detail: ThemeCatalog.theme(themeID).tagline) {
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        ForEach(ThemeCatalog.all) { theme in
-                            Button {
-                                withAnimation(.easeInOut(duration: 0.2)) { themeID = theme.id }
-                                Haptics.tap()
-                            } label: {
-                                ThemeSwatch(theme: theme, accentHex: accentHex, isSelected: themeID == theme.id, showsLock: theme.isPremium && !model.isPremium)
-                            }
-                            .buttonStyle(.plain)
-                            .id(theme.id)
-                        }
-                    }
-                    .padding(.vertical, 2)
-                }
-                .onAppear { proxy.scrollTo(themeID, anchor: .center) }
-            }
-        }
-    }
-
-    private var colorSection: some View {
-        EditorSection(title: "Couleur", detail: Palette.name(for: accentHex)) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 6)], spacing: 6) {
-                ForEach(Palette.freeAccents) { swatch in
-                    ColorDot(hex: swatch.hex, isSelected: accentHex == swatch.hex) {
-                        accentHex = swatch.hex
-                        Haptics.tap()
-                    }
-                    .accessibilityLabel(Text(swatch.name))
-                }
-                ColorPicker("Couleur personnalisée", selection: Binding(
-                    get: { Color(hex: accentHex) },
-                    set: { accentHex = $0.hexString }
-                ), supportsOpacity: false)
-                .labelsHidden()
-                .frame(minWidth: 44, minHeight: 44)
-            }
-        }
-    }
-
-    private var saveBar: some View {
+    private var continueBar: some View {
         VStack(spacing: 0) {
             Divider()
-            Button(action: save) {
-                Text(saveTitle)
+            Button {
+                Haptics.tap()
+                customizes = true
+            } label: {
+                Label(continueTitle, systemImage: "paintbrush.pointed")
                     .font(.headline)
                     .foregroundStyle(.onAccent)
                     .frame(maxWidth: .infinity, minHeight: 50)
@@ -510,14 +349,14 @@ struct SpaceBuilderView: View {
             .disabled(designs.isEmpty)
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
+            .accessibilityIdentifier("creator-continue")
         }
         .background(.bar)
     }
 
-    private var saveTitle: String {
-        if needsPremium { return "Débloquer et enregistrer" }
-        if format != .small { return "Enregistrer le widget \(format.title.lowercased())" }
-        return selection.count == 1 ? "Enregistrer le widget" : "Enregistrer les \(selection.count) widgets"
+    private var continueTitle: String {
+        if format == .small && selection.count > 1 { return "Personnaliser les \(selection.count) widgets" }
+        return "Personnaliser le widget"
     }
 
     // MARK: Actions
@@ -543,64 +382,6 @@ struct SpaceBuilderView: View {
             format = newFormat
             let preset = SpaceCatalog.preset(for: space, format: newFormat)
             if !preset.isEmpty { selection = preset }
-            comboName = nil
         }
-    }
-
-    private func save() {
-        if needsPremium || exceedsFreeLimit {
-            showsPaywall = true
-            return
-        }
-        let saved = designs
-        guard !saved.isEmpty else { return }
-        model.install(designs: saved)
-        Haptics.success()
-        router.saveFlight = SaveFlight(designs: saved, source: previewFrame)
-        dismiss()
-    }
-}
-
-/// One widget of a creation made of several: its name and content settings, with its preview.
-private struct PartSettingsView: View {
-    @Binding var design: WidgetDesign
-    let style: (ThemeID, String)
-    let usesOwnData: Bool
-    @Environment(AppModel.self) private var model
-
-    private var styled: WidgetDesign {
-        var styled = design
-        styled.themeID = style.0
-        styled.accentHex = style.1
-        return styled
-    }
-
-    var body: some View {
-        let family: WidgetFamily = design.kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium
-        ScrollView {
-            VStack(alignment: .leading, spacing: 22) {
-                WidgetPreview(
-                    design: styled, family: family,
-                    payload: model.previewPayload(for: styled),
-                    width: family == .systemSmall ? 170 : 330
-                )
-                .frame(maxWidth: .infinity)
-                .padding(.top, 8)
-                EditorSection(title: "Nom") {
-                    TextField("Nom du widget", text: $design.name)
-                        .textInputAutocapitalization(.sentences)
-                        .submitLabel(.done)
-                        .padding(12)
-                        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-                }
-                KindOptionsSection(design: $design)
-            }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 24)
-        }
-        .scrollDismissesKeyboard(.interactively)
-        .background(.screenFill)
-        .navigationTitle(design.kind.title)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }

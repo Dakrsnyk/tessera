@@ -130,7 +130,7 @@ jobs:
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
           if [ "$APPS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/DataEntryUITests -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
-          if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds"; fi
+          if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:TesseraUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:TesseraUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:TesseraUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
             $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
@@ -206,12 +206,22 @@ jobs:
           }
           # The Widget Studio: each section, then every style, theme, layout and chart side by side.
           studio_shots() {
-            for section in content themes style colors background border depth shape text icons layout chart density myStyles; do
+            for section in content style colors background border chart density myStyles note multi; do
               shoot studio-$section studio-$section top light
             done
             shoot studio-colors-end studio-colors bottom light
             shoot studio-content-end studio-content bottom light
             shoot studio-background-dark studio-background top dark
+            # The main color repainting a style, and palettes changing every color.
+            for theme in neon minimal luxury paper; do shoot studio-main-$theme studio-main-$theme top light; done
+            shoot studio-main-minimal-dark studio-main-minimal top dark
+            for palette in ocean coral sunset; do shoot studio-palette-$palette studio-palette-$palette top light; done
+            shoot gallery-palettes gallery-palettes top light
+            for page in 1 2 3; do shoot gallery-recolor-$page gallery-recolor-$page top light; done
+            shoot gallery-recolor-1-dark gallery-recolor-1 top dark
+            # Créer: the selection, then the Studio with the widgets chosen.
+            shoot creator-studio creator-fitness top light -screenshotCreatorMulti YES -screenshotCreatorStudio YES
+            shoot creator-studio-medium creator-nutrition top light -screenshotCreatorFormat medium -screenshotCreatorStudio YES
             for page in 1 2 3; do shoot gallery-styles-$page gallery-styles-$page top light; done
             shoot gallery-styles-1-dark gallery-styles-1 top dark
             for page in 1 2; do shoot gallery-presets-$page gallery-presets-$page top light; done

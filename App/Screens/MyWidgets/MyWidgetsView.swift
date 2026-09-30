@@ -309,7 +309,7 @@ struct MyWidgetsView: View {
             return
         }
         Haptics.success()
-        router.openEditor(copy, isNew: false, section: StudioSection.themes.rawValue)
+        router.openEditor(copy, isNew: false, section: StudioSection.style.rawValue)
     }
 
     private func duplicate(_ design: WidgetDesign) {

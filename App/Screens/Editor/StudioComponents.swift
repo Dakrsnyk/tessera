@@ -3,22 +3,25 @@ import WidgetKit
 
 /// The Widget Studio's sections, in the order a widget is usually made.
 enum StudioSection: String, CaseIterable, Identifiable {
-    case content, themes, style, colors, background, border, depth, shape, text, icons, layout, chart, density, myStyles
+    case content, style, colors, background, border, chart, density, myStyles
     var id: String { rawValue }
+
+    /// Also accepts the names of sections from before they were merged (« Thèmes » is now in « Thème & style »).
+    init?(name: String) {
+        if name == "themes" {
+            self = .style
+        } else {
+            self.init(rawValue: name)
+        }
+    }
 
     var title: String {
         switch self {
         case .content: "Contenu"
-        case .themes: "Thèmes"
-        case .style: "Style"
+        case .style: "Thème & style"
         case .colors: "Couleurs"
         case .background: "Fond"
         case .border: "Bordure"
-        case .depth: "Profondeur"
-        case .shape: "Forme"
-        case .text: "Texte"
-        case .icons: "Icônes"
-        case .layout: "Disposition"
         case .chart: "Graphique"
         case .density: "Densité"
         case .myStyles: "Mes styles"
@@ -28,16 +31,10 @@ enum StudioSection: String, CaseIterable, Identifiable {
     var symbol: String {
         switch self {
         case .content: "square.text.square"
-        case .themes: "sparkles"
-        case .style: "swatchpalette"
+        case .style: "sparkles"
         case .colors: "paintpalette"
         case .background: "photo"
         case .border: "square.dashed"
-        case .depth: "shadow"
-        case .shape: "square.on.circle"
-        case .text: "textformat"
-        case .icons: "star.circle"
-        case .layout: "rectangle.3.group"
         case .chart: "chart.bar.xaxis"
         case .density: "rectangle.compress.vertical"
         case .myStyles: "bookmark"
@@ -47,13 +44,14 @@ enum StudioSection: String, CaseIterable, Identifiable {
 
 /// The row of sections under the preview.
 struct StudioSectionBar: View {
+    let sections: [StudioSection]
     @Binding var selection: StudioSection
 
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 6) {
-                    ForEach(StudioSection.allCases) { section in
+                    ForEach(sections) { section in
                         let isSelected = section == selection
                         Button {
                             Haptics.tap()
@@ -194,44 +192,6 @@ struct StudioColorRow: View {
             .labelsHidden()
             .frame(minWidth: 44, minHeight: 44)
         }
-    }
-}
-
-/// A predefined set of colors applied at once (accent, charts, icons).
-struct ColorPalette: Identifiable, Hashable {
-    let id: String
-    let name: String
-    let accent: String
-    let chart: String
-    let icon: String
-    var number: String?
-
-    static let all: [ColorPalette] = [
-        ColorPalette(id: "jade", name: "Jade", accent: "2F8F7A", chart: "2F8F7A", icon: "5BB89F"),
-        ColorPalette(id: "ocean", name: "Océan", accent: "1E7FD8", chart: "22B8CF", icon: "1E7FD8"),
-        ColorPalette(id: "coral", name: "Corail", accent: "FF6B57", chart: "FF9A62", icon: "FF6B57"),
-        ColorPalette(id: "lavender", name: "Lavande", accent: "8C6CFF", chart: "B69CFF", icon: "8C6CFF"),
-        ColorPalette(id: "forest", name: "Forêt", accent: "3F7D4E", chart: "7FA33A", icon: "3F7D4E"),
-        ColorPalette(id: "sand", name: "Sable", accent: "B07A45", chart: "D9A066", icon: "B07A45"),
-        ColorPalette(id: "neon", name: "Néon", accent: "FF2DAA", chart: "00F0FF", icon: "FF2DAA"),
-        ColorPalette(id: "candy", name: "Bonbon", accent: "F2588F", chart: "FFB547", icon: "5AC8FA"),
-        ColorPalette(id: "gold", name: "Or", accent: "C9A227", chart: "E6C35C", icon: "C9A227"),
-        ColorPalette(id: "mono", name: "Graphite", accent: "4B5563", chart: "9CA3AF", icon: "4B5563"),
-        ColorPalette(id: "sunset", name: "Couchant", accent: "F45B69", chart: "F7A072", icon: "8E3BA8"),
-        ColorPalette(id: "mint", name: "Menthe", accent: "2DBE8D", chart: "7CE0C3", icon: "2DBE8D"),
-    ]
-
-    func applied(to design: WidgetDesign) -> WidgetDesign {
-        var copy = design
-        copy.accentHex = accent
-        copy.style.chartHex = chart
-        copy.style.iconHex = icon
-        copy.style.numberHex = number
-        return copy
-    }
-
-    func matches(_ design: WidgetDesign) -> Bool {
-        design.accentHex == accent && design.style.chartHex == chart && design.style.iconHex == icon
     }
 }
 

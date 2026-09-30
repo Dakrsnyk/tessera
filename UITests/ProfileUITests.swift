@@ -162,21 +162,28 @@ final class ProfileUITests: XCTestCase {
         snapshot("editor-own-data")
     }
 
-    func testAPackIsSetWidgetByWidget() {
+    /// A pack opens in the Studio with all its widgets: each one can be chosen, then all are saved together.
+    func testAPackOpensInTheStudio() {
         launch(["-screenshotScreen", "pack-gym-setup"])
-        let step = app.staticTexts["setup-step"]
-        XCTAssertTrue(step.waitForExistence(timeout: 15), "La configuration du pack ne s'est pas ouverte")
-        XCTAssertEqual(step.label, "Widget 1 sur 6")
-        snapshot("pack-step-1")
+        let first = app.buttons["studio-widget-1"]
+        XCTAssertTrue(first.waitForExistence(timeout: 15), "Le pack ne s'est pas ouvert dans le Studio")
+        XCTAssertTrue(first.isSelected, "Le premier widget du pack est celui qu'on règle d'abord")
+        snapshot("pack-studio")
         for index in 2...6 {
-            tapButton("setup-next")
-            XCTAssertTrue(app.staticTexts["Widget \(index) sur 6"].waitForExistence(timeout: 5))
+            let chip = app.buttons["studio-widget-\(index)"]
+            XCTAssertTrue(chip.waitForExistence(timeout: 5), "Widget \(index) du pack absent")
+            var swipes = 0
+            while !chip.isHittable && swipes < 4 {
+                first.swipeLeft()
+                swipes += 1
+            }
+            chip.tap()
+            let selected = expectation(for: NSPredicate(format: "isSelected == true"), evaluatedWith: chip)
+            XCTAssertEqual(XCTWaiter.wait(for: [selected], timeout: 4), .completed, "Le widget \(index) ne s'ouvre pas")
         }
-        tapButton("setup-next")
-        XCTAssertTrue(app.otherElements["setup-summary"].waitForExistence(timeout: 5) || app.staticTexts["Résumé"].exists)
-        snapshot("pack-summary")
-        tapButton("setup-next")
-        XCTAssertTrue(waitForDisappearance(step), "Le pack doit se fermer une fois enregistré")
+        snapshot("pack-studio-last")
+        tapButton("Enregistrer les 6 widgets")
+        XCTAssertTrue(waitForDisappearance(first), "Le pack doit se fermer une fois enregistré")
         XCTAssertEqual(app.state, .runningForeground)
     }
 
@@ -205,11 +212,18 @@ final class ProfileUITests: XCTestCase {
 
     func testEachWidgetOfACombinedWidgetCanBeSet() {
         launch(["-screenshotScreen", "creator-nutrition", "-screenshotCreatorFormat", "medium"])
+        // First the selection, then the Studio.
+        let next = app.buttons["creator-continue"]
+        XCTAssertTrue(next.waitForExistence(timeout: 15), "Le créateur n'a pas de bouton pour passer au Studio")
+        XCTAssertTrue(app.segmentedControls.buttons["Moyen"].isSelected)
+        next.tap()
         let part = app.buttons["part-caloriesLeft"]
-        XCTAssertTrue(part.waitForExistence(timeout: 15), "Réglages par widget absents du format Moyen")
+        XCTAssertTrue(part.waitForExistence(timeout: 10), "Réglages par widget absents du Studio")
         var swipes = 0
-        while !part.isHittable && swipes < 6 {
-            app.swipeUp()
+        while !part.isHittable && swipes < 8 {
+            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.78))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.58))
+            start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
             swipes += 1
         }
         part.tap()
@@ -218,10 +232,18 @@ final class ProfileUITests: XCTestCase {
         name.tap()
         name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 30) + "Mes calories")
         snapshot("part-settings")
-        let back = app.navigationBars.buttons.allElementsBoundByIndex.first { $0.isHittable && $0.frame.minX < 60 && $0.label != "Annuler" }
-        XCTAssertNotNil(back)
-        back?.tap()
+        goBack()
         XCTAssertTrue(label(of: "part-caloriesLeft").contains("Mes calories"))
+        snapshot("creator-studio")
+        // Back to the selection: the size chosen is kept.
+        goBack()
+        XCTAssertTrue(app.segmentedControls.buttons["Moyen"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.segmentedControls.buttons["Moyen"].isSelected, "Le format choisi est gardé")
+    }
+
+    private func goBack() {
+        let back = app.navigationBars.buttons.allElementsBoundByIndex.first { $0.isHittable && $0.frame.minX < 60 && $0.label != "Annuler" }
+        XCTAssertNotNil(back, "Bouton retour absent")
+        back?.tap()
     }
 }
