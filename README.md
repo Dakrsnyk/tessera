@@ -58,6 +58,8 @@ Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS
 
 ---
 
+**Optimisation, même en Debug** : la configuration Debug est compilée optimisée (`-O`). Non optimisée, l'interface SwiftUI de Tessera dépasse la pile de 1 Mo du fil principal de l'iPhone et l'app plante au lancement sur un vrai téléphone (le simulateur a 8 Mo et ne le montre pas). Pour que les tests le voient, l'app Debug est liée avec une pile de 1 Mo, comme sur l'iPhone. Le mode CI `[stack]` compare les deux compilations.
+
 ## 3. Ce que tu dois configurer toi-même
 
 | Élément | Où | Quand |

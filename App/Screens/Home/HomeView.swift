@@ -134,7 +134,10 @@ struct HomeView: View {
                                 Button {
                                     router.openEditor(design, isNew: false)
                                 } label: {
-                                    WidgetPreview(design: design, family: design.displayFormat.family, payload: model.payload(for: design))
+                                    // A fixed width, not a GeometryReader: measuring here re-lays out the whole Home
+                                    // inside the update, deep enough to overflow the iPhone's main-thread stack.
+                                    WidgetPreview(design: design, family: design.displayFormat.family, payload: model.payload(for: design),
+                                                  width: Self.previewWidth(for: design.displayFormat))
                                 }
                                 .buttonStyle(.plain)
                                 .frame(maxWidth: .infinity)
@@ -155,6 +158,13 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
             }
         }
+    }
+
+    /// The width of a preview on Home: the screen minus the page margins (20) and the wallpaper's
+    /// padding (14) on each side; two small widgets share a row with 14 between them.
+    private static func previewWidth(for format: WidgetFormat) -> CGFloat {
+        let available = max(200, UIScreen.main.bounds.width - 68)
+        return format == .small ? (available - 14) / 2 : available
     }
 
     /// The latest widgets laid out like a Home Screen: two small ones side by side, a medium one across,
