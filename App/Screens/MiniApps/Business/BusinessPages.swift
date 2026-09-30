@@ -148,13 +148,14 @@ struct BusinessResultsPage: View {
     var body: some View {
         let state = model.business
         let now = Date()
-        let months = BusinessMath.months(state, count: 6, at: now)
+        // From the first month with something noted: no empty months before the data starts.
+        let months = Array(BusinessMath.months(state, count: 6, at: now).drop(while: { $0.revenue == 0 && $0.costs == 0 }))
         let year = BusinessMath.interval(.year, containing: now)
         let revenue = BusinessMath.revenue(state, in: year)
         let costs = BusinessMath.costs(state, in: year)
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Six derniers mois")
+                MiniSectionTitle(title: months.count >= 6 ? "Six derniers mois" : "Par mois")
                 Chart {
                     ForEach(bars(months)) { bar in
                         BarMark(x: .value("Mois", bar.month, unit: .month), y: .value("Montant", bar.value))

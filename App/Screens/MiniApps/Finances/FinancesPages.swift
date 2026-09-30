@@ -434,11 +434,12 @@ struct FinancesTrendsPage: View {
     var body: some View {
         let state = model.budget
         let now = Date()
-        let months = BudgetMath.months(state, count: 6, at: now)
+        // From the first month with something noted: no empty months before the data starts.
+        let months = Array(BudgetMath.months(state, count: 6, at: now).drop(while: { $0.spent == 0 && $0.earned == 0 }))
         let past = months.dropLast().filter { $0.spent > 0 || $0.earned > 0 }
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Six derniers mois")
+                MiniSectionTitle(title: months.count >= 6 ? "Six derniers mois" : "Par mois")
                 Chart(bars(months)) { bar in
                     BarMark(x: .value("Mois", bar.month, unit: .month), y: .value("Montant", bar.value))
                         .foregroundStyle(by: .value("Type", bar.series))
