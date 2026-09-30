@@ -30,11 +30,15 @@ final class StudioUITests: XCTestCase {
     private func tapButton(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) {
         let button = app.buttons[identifier].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(identifier) » introuvable", file: file, line: line)
+        let height = app.frame.height > 200 ? app.frame.height : 874
+        // Reachable: on screen and not under the save bar at the bottom (the toolbar arrows are at the top).
+        func reachable() -> Bool {
+            button.isHittable && (button.frame.maxY < height - 125 || button.frame.maxY < 140)
+        }
         var swipes = 0
-        while !button.isHittable && swipes < 12 {
+        while !reachable() && swipes < 12 {
             // A short drag without momentum over the settings, under the fixed preview: up to reach
             // what is below, down to come back to what scrolled away above.
-            let height = app.frame.height > 200 ? app.frame.height : 874
             let isAbove = button.frame.midY < height * 0.5
             let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: isAbove ? 0.55 : 0.72))
             let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: isAbove ? 0.72 : 0.55))
@@ -101,7 +105,8 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(app.buttons["style-apply-Nuit test"].waitForExistence(timeout: 5), "Le style enregistré apparaît dans Mes styles")
         snapshot("my-styles")
 
-        tapButton("Enregistrer le widget")
+        // The save bar stays at the bottom, always in reach.
+        app.buttons["Enregistrer le widget"].firstMatch.tap()
         XCTAssertTrue(waitForDisappearance(name), "Le Studio se ferme une fois le widget enregistré")
         XCTAssertEqual(app.state, .runningForeground)
 

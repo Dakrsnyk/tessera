@@ -609,7 +609,9 @@ struct HomeSetupSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $configures) {
                 // Selection, then editing as in the Studio: every widget of the set, one after the other.
-                WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
+                if !designs.isEmpty {
+                    WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

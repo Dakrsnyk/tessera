@@ -20,7 +20,8 @@ struct EditorRequest: Identifiable {
         self.section = section
     }
 
-    var design: WidgetDesign { designs[0] }
+    /// The first widget (a blank note if the list is empty, which a caller should never ask for).
+    var design: WidgetDesign { designs.first ?? WidgetDesign.starter(for: .note) }
 }
 
 /// Pages of the Store, pushed from its sections.

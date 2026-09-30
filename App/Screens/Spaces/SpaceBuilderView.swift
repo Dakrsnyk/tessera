@@ -130,8 +130,12 @@ struct SpaceBuilderView: View {
                 }
             }
             // Selection, then editing as in the Studio: the same Studio as « Mes widgets ».
+            // (The destination is built with every update, even hidden: only with widgets to show.)
             .navigationDestination(isPresented: $customizes) {
-                WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
+                let designs = self.designs
+                if !designs.isEmpty {
+                    WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
+                }
             }
             .task(id: selection) {
                 for design in designs { await model.prepare(design) }
@@ -147,7 +151,13 @@ struct SpaceBuilderView: View {
                 } else if defaults.bool(forKey: "screenshotCreatorMulti") {
                     selection = Array(kinds.prefix(3))
                 }
-                if defaults.bool(forKey: "screenshotCreatorStudio") { customizes = true }
+                if defaults.bool(forKey: "screenshotCreatorStudio") {
+                    // Once the creator is on screen and its size applied.
+                    Task { @MainActor in
+                        try? await Task.sleep(for: .milliseconds(900))
+                        customizes = true
+                    }
+                }
             }
             #endif
         }

@@ -63,7 +63,9 @@ struct WidgetStudio: View {
     private let originals: [WidgetDesign]
 
     init(request: EditorRequest, isPushed: Bool, onClose: @escaping () -> Void) {
-        let designs = request.designs
+        // SwiftUI builds a navigation destination before it is shown, sometimes before the widgets
+        // are ready: never an empty list.
+        let designs = request.designs.isEmpty ? [request.design] : request.designs
         _designs = State(initialValue: designs)
         _family = State(initialValue: request.design.displayFormat.family)
         _backgroundTab = State(initialValue: BackgroundKind(request.design.background))

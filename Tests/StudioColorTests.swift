@@ -76,8 +76,9 @@ final class StudioColorTests: XCTestCase {
         XCTAssertEqual(after.series.first, "3366FF")
         // Nothing of the look is lost: only colors change.
         XCTAssertEqual(design.themeID, .neon)
-        let free = WidgetDesign(kind: .macros, themeID: .minimal, format: .medium).recolored(to: "3366FF")
-        XCTAssertFalse(free.usesPremiumFeatures, "Une couleur principale gratuite ne rend pas le widget Premium")
+        let plain = WidgetDesign(kind: .macros, themeID: .minimal, format: .medium)
+        XCTAssertEqual(plain.recolored(to: "3366FF").premiumFeatures, plain.premiumFeatures,
+                       "Une couleur principale gratuite n'ajoute rien de Premium")
     }
 
     func testTheMainColorReplacesAPaletteAndItsBackground() {
