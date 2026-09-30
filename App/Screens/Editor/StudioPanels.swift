@@ -647,47 +647,58 @@ struct StudioMyStylesPanel: View {
     private func savedRow(_ saved: SavedStyle) -> some View {
         let preview = saved.applied(to: design)
         let isApplied = saved.matches(design)
-        return HStack(spacing: 12) {
-            WidgetPreview(design: preview, family: input.family, payload: input.payload, width: input.family == .systemMedium ? 110 : 64)
-                .allowsHitTesting(false)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(saved.name).font(.subheadline.weight(.semibold)).lineLimit(1)
-                Text("\(ThemeCatalog.theme(saved.themeID).name) · \(saved.style.look.isDefault ? "réglages du style" : "personnalisé")")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                HStack(spacing: 8) {
-                    Button(isApplied ? "Appliqué" : "Appliquer") {
-                        Haptics.tap()
-                        withAnimation { design = saved.applied(to: design) }
+        return VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 12) {
+                WidgetPreview(design: preview, family: input.family, payload: input.payload, width: input.family == .systemMedium ? 110 : 64)
+                    .allowsHitTesting(false)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(saved.name).font(.subheadline.weight(.semibold)).lineLimit(1)
+                    Text("\(ThemeCatalog.theme(saved.themeID).name) · \(saved.style.look.isDefault ? "réglages du style" : "personnalisé")")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                }
+                Spacer(minLength: 0)
+                Menu {
+                    Button("Renommer", systemImage: "pencil") {
+                        renameText = saved.name
+                        renaming = saved
+                    }
+                    Button("Supprimer", systemImage: "trash", role: .destructive) {
+                        withAnimation { model.deleteStyle(saved.id) }
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .font(.title3)
+                        .foregroundStyle(.secondary)
+                        .frame(minWidth: 44, minHeight: 44)
+                }
+                .accessibilityLabel(Text("Options de \(saved.name)"))
+            }
+            HStack(spacing: 8) {
+                Button {
+                    Haptics.tap()
+                    withAnimation { design = saved.applied(to: design) }
+                } label: {
+                    Label(isApplied ? "Appliqué" : "Appliquer", systemImage: isApplied ? "checkmark" : "paintbrush")
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .disabled(isApplied)
+                .accessibilityIdentifier("style-apply-\(saved.name)")
+                if !model.designs.isEmpty {
+                    Button {
+                        applying = saved
+                    } label: {
+                        Label("D'autres widgets", systemImage: "square.stack")
+                            .lineLimit(1)
+                            .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
-                    .controlSize(.small)
-                    .disabled(isApplied)
-                    .accessibilityIdentifier("style-apply-\(saved.name)")
-                    if !model.designs.isEmpty {
-                        Button("Autres widgets…") { applying = saved }
-                            .buttonStyle(.bordered)
-                            .controlSize(.small)
-                    }
                 }
             }
-            Spacer(minLength: 0)
-            Menu {
-                Button("Renommer", systemImage: "pencil") {
-                    renameText = saved.name
-                    renaming = saved
-                }
-                Button("Supprimer", systemImage: "trash", role: .destructive) {
-                    withAnimation { model.deleteStyle(saved.id) }
-                }
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
-                    .frame(minWidth: 44, minHeight: 44)
-            }
-            .accessibilityLabel(Text("Options de \(saved.name)"))
+            .font(.subheadline.weight(.medium))
         }
     }
 }
