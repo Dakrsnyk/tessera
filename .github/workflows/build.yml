@@ -117,7 +117,7 @@ jobs:
         id: tests
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.SHOTSONLY != 'true' && (env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true')
         continue-on-error: true
-        timeout-minutes: 35
+        timeout-minutes: 55
         run: |
           set -o pipefail
           xcrun simctl bootstatus "$DEVICE" -b

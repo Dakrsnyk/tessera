@@ -138,11 +138,15 @@ struct WeatherAppView: View {
                     }
                     .chartYScale(domain: .automatic(includesZero: false))
                     .chartXAxis {
-                        AxisMarks(values: .stride(by: .hour, count: 6)) { _ in
-                            AxisValueLabel(format: .dateTime.hour(.twoDigits(amPM: .omitted)))
+                        AxisMarks(values: .stride(by: .hour, count: 6)) { value in
+                            AxisGridLine()
+                            AxisValueLabel {
+                                if let date = value.as(Date.self) {
+                                    Text("\(Fmt.format(date, template: "HH")) h")
+                                }
+                            }
                         }
                     }
-                    .environment(\.locale, Fmt.locale)
                     .frame(height: 110)
                 }
                 .card(padding: 14)
