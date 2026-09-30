@@ -154,6 +154,12 @@ struct BusinessResultsPage: View {
         let revenue = BusinessMath.revenue(state, in: year)
         let costs = BusinessMath.costs(state, in: year)
         MiniAppScroll {
+            if months.isEmpty {
+                Text("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .card(padding: 14)
+            } else {
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: months.count >= 6 ? "Six derniers mois" : "Par mois")
                 Chart {
@@ -179,6 +185,7 @@ struct BusinessResultsPage: View {
                 .card()
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("results-chart")
+            }
             }
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: "Depuis le 1er janvier")

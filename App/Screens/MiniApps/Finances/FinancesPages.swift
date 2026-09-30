@@ -438,6 +438,12 @@ struct FinancesTrendsPage: View {
         let months = Array(BudgetMath.months(state, count: 6, at: now).drop(while: { $0.spent == 0 && $0.earned == 0 }))
         let past = months.dropLast().filter { $0.spent > 0 || $0.earned > 0 }
         MiniAppScroll {
+            if months.isEmpty {
+                Text("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .card(padding: 14)
+            } else {
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: months.count >= 6 ? "Six derniers mois" : "Par mois")
                 Chart(bars(months)) { bar in
@@ -456,6 +462,7 @@ struct FinancesTrendsPage: View {
                 .card()
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("trends-chart")
+            }
             }
             if !past.isEmpty {
                 let spent = past.reduce(0) { $0 + $1.spent } / Double(past.count)
