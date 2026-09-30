@@ -34,10 +34,10 @@ final class DataEntryUITests: XCTestCase {
     }
 
     /// A short drag without momentum: a fast swipe can carry a short list well past the element
-    /// (the Studio's settings sit under a fixed preview).
+    /// (the Studio's settings sit under a fixed preview). It starts mid-screen, above the keyboard.
     private func scrollDownOnce() {
-        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.62))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.42))
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.34))
         start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
     }
 

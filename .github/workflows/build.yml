@@ -166,7 +166,7 @@ jobs:
             xcrun simctl ui "$DEVICE" appearance $4
             xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null || true
             xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $2 -screenshotScroll $3 "${@:5}"
-            sleep 5
+            sleep ${WAIT:-5}
             xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$1-$4.jpg"
           }
           # The Widget Studio: each section, then every style, theme, layout and chart side by side.
@@ -248,13 +248,13 @@ jobs:
           shoot info info top light
           shoot info-dark info top dark
           for area in nutrition fitness student; do shoot info-$area info-$area top light; done
-          shoot pack-gym-setup pack-gym-setup top light
+          WAIT=10 shoot pack-gym-setup pack-gym-setup top light
           studio_shots
           # A new person (these clear the demo data, so they come last).
           shoot home-fresh home-fresh top light
           shoot editor-fresh editor-fresh top light
           shoot editor-fresh-data editor-fresh center light
-          shoot pack-nutrition-setup-fresh pack-nutrition-setup-fresh top light
+          WAIT=10 shoot pack-nutrition-setup-fresh pack-nutrition-setup-fresh top light
           shoot info-fresh info-fresh top light
 
       - name: App Store screenshots
