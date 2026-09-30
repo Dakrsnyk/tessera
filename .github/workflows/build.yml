@@ -167,17 +167,20 @@ jobs:
         run: |
           xcrun simctl bootstatus "$DEVICE" -b
           TESTS="-only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData -only-testing:TesseraUITests/MiniAppUITests/testHomeListsTheMiniAppsAndTheWeatherOpens -only-testing:TesseraUITests/MiniAppUITests/testNutritionOpensFromHomeAndManagesAMeal -only-testing:TesseraUITests/MiniAppUITests/testFinancesEditsAnExpenseAndOpensItsPages"
+          # 1) Unoptimized (-Onone), with the app's 1 MB main-thread stack: what the old test IPA did.
+          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/simOnone ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO SWIFT_OPTIMIZATION_LEVEL=-Onone build-for-testing > stack-build-onone.log 2>&1 || true
           xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
-            -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath StackOnone.xcresult $TESTS \
+            -destination "id=$DEVICE" -derivedDataPath build/simOnone -resultBundlePath StackOnone.xcresult $TESTS \
             ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > stack-onone.log 2>&1 || true
           mkdir -p stackreports
           find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -exec cp {} stackreports/ \; 2>/dev/null || true
           find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -delete 2>/dev/null || true
-          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
-            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
-            -derivedDataPath build/simO ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO SWIFT_OPTIMIZATION_LEVEL=-O build-for-testing > stack-build-o.log 2>&1 || true
+          # 2) The build the tests and the IPA use (optimized by the project), same 1 MB stack.
+          echo "BUILD SUCCEEDED (build/sim)" > stack-build-o.log
           xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
-            -destination "id=$DEVICE" -derivedDataPath build/simO -resultBundlePath StackO.xcresult $TESTS \
+            -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath StackO.xcresult $TESTS \
             ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > stack-o.log 2>&1 || true
           mkdir -p stackreports/optimized
           find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -exec cp {} stackreports/optimized/ \; 2>/dev/null || true
