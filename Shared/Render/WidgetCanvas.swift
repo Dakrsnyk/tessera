@@ -36,12 +36,29 @@ struct WidgetCanvas: View {
         } else if design.isCombo {
             ComboWidgetView(context: context)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .overlay { StyleBorder(style: style) }
                 .environment(\.colorScheme, colorScheme(for: design))
         } else {
-            KindContentView(context: context)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(Self.padding(for: family))
+            framed(KindContentView(context: context).frame(maxWidth: .infinity, maxHeight: .infinity), style: style)
+                .overlay { StyleBorder(style: style) }
                 .environment(\.colorScheme, colorScheme(for: design))
+        }
+    }
+
+    /// The content with the density's margins, on an inner card when the shape is « Panneau ».
+    @ViewBuilder private func framed<Content: View>(_ content: Content, style: ResolvedStyle) -> some View {
+        let large = family == .systemLarge || family == .systemExtraLarge
+        if style.isPanel {
+            content
+                .padding(style.padding(for: large) - 5)
+                .background {
+                    ContainerRelativeShape()
+                        .fill(style.panel)
+                        .styleDepth(style)
+                }
+                .padding(7)
+        } else {
+            content.padding(style.padding(for: large))
         }
     }
 
@@ -53,7 +70,13 @@ struct WidgetCanvas: View {
     private func colorScheme(for design: WidgetDesign) -> ColorScheme {
         switch design.background {
         case let .color(hex): return ColorMath.isLight(hex) ? .light : .dark
-        case .gradient, .photo: return .dark
+        case .gradient:
+            if let spec = design.effectiveStyle.gradient {
+                return ColorMath.isLight(ColorMath.mix(spec.startHex, spec.endHex, 0.5 * spec.intensity)) ? .light : .dark
+            }
+            return .dark
+        case .photo: return .dark
+        case .glass: return ColorMath.luminance(ColorMath.shade(design.accentHex, -0.1)) > 0.5 ? .light : .dark
         case .theme: break
         }
         switch design.theme.isDarkSurface {

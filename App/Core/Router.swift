@@ -6,6 +6,8 @@ struct EditorRequest: Identifiable {
     let id = UUID()
     var design: WidgetDesign
     var isNew: Bool
+    /// The Studio section to open on (a `StudioSection` raw value), the content by default.
+    var section: String? = nil
 }
 
 /// Pages of the Store, pushed from its sections.
@@ -65,9 +67,9 @@ final class Router {
         spacePath = [space]
     }
 
-    func openEditor(_ design: WidgetDesign, isNew: Bool) {
+    func openEditor(_ design: WidgetDesign, isNew: Bool, section: String? = nil) {
         content = nil
-        editor = EditorRequest(design: design, isNew: isNew)
+        editor = EditorRequest(design: design, isNew: isNew, section: section)
     }
 
     func openExplore(category: WidgetCategory? = nil, search: Bool = false) {

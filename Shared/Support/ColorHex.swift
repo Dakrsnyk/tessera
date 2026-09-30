@@ -55,6 +55,18 @@ enum ColorMath {
         luminance(hex) > 0.42
     }
 
+    /// The color between `from` (t = 0) and `to` (t = 1).
+    static func mix(_ from: String, _ to: String, _ t: Double) -> String {
+        let a = UIColor(Color(hex: from)), b = UIColor(Color(hex: to))
+        var r1: CGFloat = 0, g1: CGFloat = 0, b1: CGFloat = 0, a1: CGFloat = 0
+        var r2: CGFloat = 0, g2: CGFloat = 0, b2: CGFloat = 0, a2: CGFloat = 0
+        a.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+        b.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+        let k = CGFloat(min(max(t, 0), 1))
+        let clamp = { (v: CGFloat) in Int((min(max(v, 0), 1) * 255).rounded()) }
+        return String(format: "%02X%02X%02X", clamp(r1 + (r2 - r1) * k), clamp(g1 + (g2 - g1) * k), clamp(b1 + (b2 - b1) * k))
+    }
+
     /// Mixes a hex color toward black (negative amount) or white (positive amount).
     static func shade(_ hex: String, _ amount: Double) -> String {
         let color = UIColor(Color(hex: hex))

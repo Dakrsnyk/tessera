@@ -81,7 +81,7 @@ struct WeatherWidgetView: View {
             WeatherSymbol(code: w.code, isDay: w.isDay, style: s, size: tempSize * 0.5)
             Text(Fmt.temperature(w.temperature, unit: unit))
                 .font(s.number(tempSize))
-                .foregroundStyle(s.primary)
+                .foregroundStyle(s.numberColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
             if s.showsDetails {
@@ -194,7 +194,7 @@ struct CryptoWidgetView: View {
                 Spacer(minLength: 0)
                 Text(Fmt.price(coin.price, currency: coin.currency))
                     .font(s.number(24))
-                    .foregroundStyle(s.primary)
+                    .foregroundStyle(s.numberColor)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                 if s.showsDetails {
@@ -214,7 +214,7 @@ struct CryptoWidgetView: View {
                         .foregroundStyle(s.secondary)
                     Text(Fmt.price(coin.price, currency: coin.currency))
                         .font(s.number(30))
-                        .foregroundStyle(s.primary)
+                        .foregroundStyle(s.numberColor)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                     if isStale { staleLabel(coin) }
@@ -421,11 +421,11 @@ struct HydrationWidgetView: View {
                     }
                 }
                 ZStack {
-                    RingView(progress: progress, lineWidth: 8, color: s.accent, track: s.track)
+                    RingView(progress: progress, lineWidth: 8, color: s.chart, track: s.track)
                     VStack(spacing: -2) {
                         Text("\(count)")
                             .font(s.number(26))
-                            .foregroundStyle(s.primary)
+                            .foregroundStyle(s.numberColor)
                         Text("/ \(goal)")
                             .font(s.text(11))
                             .foregroundStyle(s.secondary)
@@ -437,10 +437,10 @@ struct HydrationWidgetView: View {
         } else {
             HStack(spacing: 16) {
                 ZStack {
-                    RingView(progress: progress, lineWidth: 9, color: s.accent, track: s.track)
+                    RingView(progress: progress, lineWidth: 9, color: s.chart, track: s.track)
                     Image(systemName: count >= goal ? "checkmark" : "drop.fill")
                         .font(.system(size: 24, weight: .semibold))
-                        .foregroundStyle(s.accent)
+                        .foregroundStyle(s.icon)
                 }
                 .frame(width: 96, height: 96)
                 VStack(alignment: .leading, spacing: 6) {
@@ -448,7 +448,7 @@ struct HydrationWidgetView: View {
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
                         Text("\(count)")
                             .font(s.number(34))
-                            .foregroundStyle(s.primary)
+                            .foregroundStyle(s.numberColor)
                         Text("sur \(goal) verres")
                             .font(s.text(13))
                             .foregroundStyle(s.secondary)

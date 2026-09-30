@@ -78,6 +78,8 @@ struct WidgetPreview: View {
                 .fontDesign(nil)
         } else {
             widget
+                // Borders and inner cards follow the widget's outline, as on the Home Screen.
+                .containerShape(RoundedRectangle(cornerRadius: WidgetMetrics.cornerRadius, style: .continuous))
                 .background(DesignBackground(design: design))
                 .clipShape(RoundedRectangle(cornerRadius: WidgetMetrics.cornerRadius, style: .continuous))
                 .overlay {

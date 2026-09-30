@@ -20,7 +20,9 @@ jobs:
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
-      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') }}
+      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') }}
+      # [studio] runs the logic tests and the Studio UI tests, then only the Widget Studio captures.
+      STUDIO: ${{ contains(github.event.head_commit.message, '[studio]') }}
       # [place] only builds for the simulator and runs the widget placement tests (cheapest check).
       PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
       # [shots] builds (IPA included) and takes the screenshots, without the tests.
@@ -120,6 +122,7 @@ jobs:
           ONLY=""
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
+          if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
             $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
@@ -152,7 +155,7 @@ jobs:
         id: shots
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.QA == 'true'
         continue-on-error: true
-        timeout-minutes: 26
+        timeout-minutes: 32
         run: |
           APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
           xcrun simctl bootstatus "$DEVICE" -b
@@ -166,6 +169,25 @@ jobs:
             sleep 5
             xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$1-$4.jpg"
           }
+          # The Widget Studio: each section, then every style, theme, layout and chart side by side.
+          studio_shots() {
+            for section in content themes style colors background border depth shape text icons layout chart density myStyles; do
+              shoot studio-$section studio-$section top light
+            done
+            shoot studio-colors-end studio-colors bottom light
+            shoot studio-content-end studio-content bottom light
+            shoot studio-background-dark studio-background top dark
+            for page in 1 2 3; do shoot gallery-styles-$page gallery-styles-$page top light; done
+            shoot gallery-styles-1-dark gallery-styles-1 top dark
+            for page in 1 2; do shoot gallery-presets-$page gallery-presets-$page top light; done
+            for size in small medium large; do shoot gallery-layouts-$size gallery-layouts-$size top light; done
+            shoot gallery-charts gallery-charts top light
+            shoot gallery-looks gallery-looks top light
+          }
+          if [ "$STUDIO" = "true" ]; then
+            studio_shots
+            exit 0
+          fi
           for screen in home spaces store editor-v2 paywall settings mywidgets space-nutrition space-fitness space-budget space-business space-student space-travel space-car space-productivity space-investing space-markets space-life; do
             shoot $screen $screen top light
           done
@@ -227,6 +249,7 @@ jobs:
           shoot info-dark info top dark
           for area in nutrition fitness student; do shoot info-$area info-$area top light; done
           shoot pack-gym-setup pack-gym-setup top light
+          studio_shots
           # A new person (these clear the demo data, so they come last).
           shoot home-fresh home-fresh top light
           shoot editor-fresh editor-fresh top light

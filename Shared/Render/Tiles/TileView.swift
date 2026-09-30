@@ -2,38 +2,76 @@ import AppIntents
 import SwiftUI
 import WidgetKit
 
-/// Lays out a `Tile` for every widget size, with the design's theme, colors and font.
+/// Lays out a `Tile` for every widget size, with the design's theme, colors, font and Studio settings.
+/// "Auto" keeps each widget's own arrangement; the other layouts rearrange the same content.
 struct TileView: View {
     let tile: Tile
     let context: RenderContext
 
+    init(tile: Tile, context: RenderContext) {
+        // The parts the person hid are gone before anything is laid out.
+        self.tile = context.style.filtered(tile)
+        self.context = context
+    }
+
     private var s: ResolvedStyle { context.style }
+    private var sp: CGFloat { s.spacing }
 
     var body: some View {
         if let empty = tile.empty {
             WidgetMessage(symbol: empty.symbol, title: empty.title, message: context.isSmall ? nil : empty.message, style: s)
-        } else if context.isLarge {
-            large
-        } else if context.isMedium {
-            medium
         } else {
-            small
+            switch effectiveLayout {
+            case .auto:
+                if context.isLarge {
+                    large
+                } else if context.isMedium {
+                    medium
+                } else {
+                    small
+                }
+            case .vertical: verticalLayout
+            case .horizontal: horizontalLayout
+            case .minimal: minimalLayout
+            case .centered: centeredLayout
+            case .split: splitLayout
+            case .data: dataLayout
+            case .list: listLayout
+            case .progress: progressLayout
+            case .graph: graphLayout
+            case .cards: cardsLayout
+            }
+        }
+    }
+
+    /// The chosen layout, or the closest one that has what it needs.
+    private var effectiveLayout: LayoutKind {
+        switch s.options.layout {
+        case .progress: progressFraction == nil ? .vertical : .progress
+        case .graph: hasVisual || !tile.rows.isEmpty ? .graph : .vertical
+        case .list: tile.rows.isEmpty ? .vertical : .list
+        case let layout: layout
         }
     }
 
     // MARK: Pieces
+
+    private var showsIcon: Bool { !s.options.isHidden("icon") && s.iconStyle != .none }
 
     @ViewBuilder private var header: some View {
         let button = context.allowsLinks ? tile.headerButton : nil
         if s.showsTitle || button != nil {
             HStack(spacing: 5) {
                 if s.showsTitle {
-                    Image(systemName: tile.symbol)
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(s.accent)
+                    if showsIcon && s.options.iconPosition == .leading {
+                        StyledIcon(symbol: tile.symbol, style: s)
+                    }
                     WLabel(text: tile.title, style: s)
                 }
                 Spacer(minLength: 0)
+                if s.showsTitle && showsIcon && s.options.iconPosition == .trailing {
+                    StyledIcon(symbol: tile.symbol, style: s)
+                }
                 if let button {
                     TileActionButton(action: button.action, isEnabled: context.isInteractive) {
                         TileHeaderButtonLabel(button: button, style: s, iconOnly: context.isSmall)
@@ -43,38 +81,55 @@ struct TileView: View {
         }
     }
 
+    /// The icon above the title, when the person placed it on top.
+    @ViewBuilder private var topIcon: some View {
+        if s.showsTitle && showsIcon && s.options.iconPosition == .top {
+            StyledIcon(symbol: tile.symbol, style: s, size: 15)
+        }
+    }
+
+    @ViewBuilder private var headerBlock: some View {
+        VStack(alignment: s.horizontalAlignment, spacing: 4 * sp) {
+            topIcon
+            header
+        }
+    }
+
     private var valueColor: Color {
         switch tile.trend {
         case .some(true): s.positive
         case .some(false): s.negative
-        case .none: s.primary
+        case .none: s.numberColor
         }
     }
 
     @ViewBuilder private func valueText(_ size: CGFloat, showsUnit: Bool = true) -> some View {
-        if let timer = tile.timer {
-            Text(timerInterval: timer, countsDown: true)
-                .font(s.number(size))
-                .foregroundStyle(valueColor)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-                .multilineTextAlignment(s.textAlignment)
-        } else {
-            HStack(alignment: .firstTextBaseline, spacing: 3) {
-                Text(tile.value)
+        Group {
+            if let timer = tile.timer {
+                Text(timerInterval: timer, countsDown: true)
                     .font(s.number(size))
                     .foregroundStyle(valueColor)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.45)
-                if showsUnit, let unit = tile.unit {
-                    Text(unit)
-                        .font(s.text(max(11, size * 0.38), .medium))
-                        .foregroundStyle(s.secondary)
+                    .minimumScaleFactor(0.5)
+                    .multilineTextAlignment(s.textAlignment)
+            } else {
+                HStack(alignment: .firstTextBaseline, spacing: 3) {
+                    Text(tile.value)
+                        .font(s.number(size))
+                        .foregroundStyle(valueColor)
                         .lineLimit(1)
-                        .fixedSize()
+                        .minimumScaleFactor(0.45)
+                    if showsUnit, let unit = tile.unit {
+                        Text(unit)
+                            .font(s.text(max(11, size * 0.38), .medium))
+                            .foregroundStyle(s.secondary)
+                            .lineLimit(1)
+                            .fixedSize()
+                    }
                 }
             }
         }
+        .styleDepth(s)
     }
 
     @ViewBuilder private func captionText(lines: Int) -> some View {
@@ -121,15 +176,49 @@ struct TileView: View {
         return true
     }
 
-    // MARK: Small
+    private var hasValue: Bool {
+        !tile.value.isEmpty || tile.timer != nil
+    }
+
+    /// How far along the widget is, from its ring, its bar or its first line with a progress.
+    private var progressFraction: Double? {
+        tile.visual.progressValue ?? tile.rows.first(where: { $0.progress != nil })?.progress
+    }
+
+    private func rows(_ limit: Int) -> [TileRow] {
+        Array(tile.rows.prefix(max(0, limit + s.rowDelta)))
+    }
+
+    private func visual(compact: Bool) -> some View {
+        TileVisualView(visual: tile.visual, context: context, compact: compact)
+            .styleDepth(s)
+    }
+
+    /// A card inside the widget, with the shape and depth of the style.
+    private func card<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        content()
+            .padding(8 * sp)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .background(s.panel, in: RoundedRectangle(cornerRadius: s.radius(12), style: .continuous))
+            .styleDepth(s)
+    }
+
+    @ViewBuilder private func buttonsRow(_ limit: Int) -> some View {
+        if !tile.buttons.isEmpty {
+            TileButtonsRow(buttons: Array(tile.buttons.prefix(limit)), context: context)
+        }
+    }
+
+    // MARK: Auto: small
 
     @ViewBuilder private var small: some View {
-        if isRing, case let .ring(progress) = tile.visual {
-            VStack(spacing: 6) {
-                header
+        if isRing, case let .ring(progress) = tile.visual, s.options.chart == .auto {
+            VStack(spacing: 6 * sp) {
+                headerBlock
                 Spacer(minLength: 0)
                 ZStack {
-                    RingView(progress: progress, lineWidth: 9, color: s.accent, track: s.track)
+                    RingView(progress: progress, lineWidth: 9 * CGFloat(s.options.chartThickness), color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                        .styleDepth(s)
                     VStack(spacing: 0) {
                         valueText(24, showsUnit: false)
                         if let unit = tile.unit, tile.timer == nil {
@@ -151,15 +240,15 @@ struct TileView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else if tile.compactRows && !tile.rows.isEmpty {
-            VStack(alignment: .leading, spacing: 6) {
-                header
-                TileRowsView(rows: Array(tile.rows.prefix(4)), context: context, compact: true)
+            VStack(alignment: .leading, spacing: 6 * sp) {
+                headerBlock
+                TileRowsView(rows: rows(4), context: context, compact: true)
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         } else {
-            VStack(alignment: s.horizontalAlignment, spacing: 3) {
-                header
+            VStack(alignment: s.horizontalAlignment, spacing: 3 * sp) {
+                headerBlock
                 Spacer(minLength: 2)
                 if hasValue {
                     valueText(tile.value.count > 7 ? 26 : 34)
@@ -169,8 +258,8 @@ struct TileView: View {
                     TileButtonsRow(buttons: Array(tile.buttons.prefix(2)), context: context)
                         .padding(.top, 6)
                 } else if hasVisual {
-                    TileVisualView(visual: tile.visual, context: context, compact: true)
-                        .frame(height: 26)
+                    visual(compact: true)
+                        .frame(height: isRing ? 44 : 26)
                         .padding(.top, 6)
                 }
             }
@@ -178,22 +267,18 @@ struct TileView: View {
         }
     }
 
-    private var hasValue: Bool {
-        !tile.value.isEmpty || tile.timer != nil
-    }
-
-    // MARK: Medium
+    // MARK: Auto: medium
 
     private var medium: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            header
+        VStack(alignment: .leading, spacing: 4 * sp) {
+            headerBlock
             mediumBody
         }
     }
 
     private var mediumBody: some View {
-        HStack(alignment: .top, spacing: 14) {
-            VStack(alignment: .leading, spacing: 3) {
+        HStack(alignment: .top, spacing: 14 * sp) {
+            VStack(alignment: .leading, spacing: 3 * sp) {
                 Spacer(minLength: 2)
                 if !hasValue {
                     captionText(lines: 5)
@@ -220,7 +305,7 @@ struct TileView: View {
     @ViewBuilder private var mediumPanel: some View {
         if !tile.rows.isEmpty {
             VStack(alignment: .leading, spacing: 0) {
-                TileRowsView(rows: Array(tile.rows.prefix(mediumRowLimit)), context: context, compact: false)
+                TileRowsView(rows: rows(mediumRowLimit), context: context, compact: false)
                 Spacer(minLength: 0)
                 if !tile.buttons.isEmpty {
                     TileButtonsRow(buttons: Array(tile.buttons.prefix(2)), context: context)
@@ -230,24 +315,24 @@ struct TileView: View {
             VStack(spacing: 8) {
                 Spacer(minLength: 0)
                 if hasVisual {
-                    TileVisualView(visual: tile.visual, context: context, compact: true)
+                    visual(compact: true)
                         .frame(height: 44)
                 }
                 TileButtonsColumn(buttons: Array(tile.buttons.prefix(3)), context: context)
             }
         } else if hasVisual {
-            TileVisualView(visual: tile.visual, context: context, compact: false)
+            visual(compact: false)
         } else {
             Color.clear
         }
     }
 
-    // MARK: Large
+    // MARK: Auto: large
 
     private var large: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            header
-            VStack(alignment: .leading, spacing: 3) {
+        VStack(alignment: .leading, spacing: 10 * sp) {
+            headerBlock
+            VStack(alignment: .leading, spacing: 3 * sp) {
                 if hasValue {
                     valueText(40)
                 }
@@ -255,12 +340,12 @@ struct TileView: View {
                 detailText
             }
             if hasVisual {
-                TileVisualView(visual: tile.visual, context: context, compact: !tile.rows.isEmpty && isSegments)
-                    .frame(height: tile.rows.isEmpty ? 150 : (isSegments ? 14 : 86))
+                visual(compact: !tile.rows.isEmpty && isSegments && s.options.chart == .auto)
+                    .frame(height: tile.rows.isEmpty ? 150 : (isSegments && s.options.chart == .auto ? 14 : 86))
                     .clipped()
             }
             if !tile.rows.isEmpty {
-                TileRowsView(rows: Array(tile.rows.prefix(hasVisual ? 5 : 8)), context: context, compact: false)
+                TileRowsView(rows: rows(hasVisual ? 5 : 8), context: context, compact: false)
             }
             Spacer(minLength: 0)
             if !tile.buttons.isEmpty {
@@ -269,6 +354,385 @@ struct TileView: View {
             footnoteText
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    // MARK: Vertical: title, value, then the chart below
+
+    private var verticalLayout: some View {
+        let valueSize: CGFloat = context.isSmall ? 30 : (context.isLarge ? 46 : 34)
+        let chartHeight: CGFloat = context.isSmall ? 30 : (context.isLarge ? 120 : 42)
+        return VStack(alignment: s.horizontalAlignment, spacing: 5 * sp) {
+            headerBlock
+            if hasValue { valueText(tile.value.count > 7 ? valueSize * 0.8 : valueSize) }
+            captionText(lines: context.isSmall ? 2 : 3)
+            if !context.isSmall { detailText }
+            if hasVisual && (tile.buttons.isEmpty || !context.isSmall) {
+                visual(compact: context.isSmall)
+                    .frame(height: chartHeight)
+                    .frame(maxWidth: .infinity)
+            }
+            if context.isLarge && !tile.rows.isEmpty {
+                TileRowsView(rows: rows(hasVisual ? 4 : 7), context: context, compact: false)
+            } else if context.isMedium && !hasVisual && !tile.rows.isEmpty {
+                TileRowsView(rows: rows(2), context: context, compact: true)
+            }
+            Spacer(minLength: 0)
+            buttonsRow(context.isSmall ? 2 : 3)
+            if context.isLarge { footnoteText }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: s.alignment == .center ? .top : .topLeading)
+    }
+
+    // MARK: Horizontal: icon | value | progress
+
+    private var horizontalLayout: some View {
+        VStack(alignment: .leading, spacing: 8 * sp) {
+            if s.showsTitle { WLabel(text: tile.title, style: s) }
+            Spacer(minLength: 0)
+            HStack(alignment: .center, spacing: 10 * sp) {
+                if showsIcon && !context.isSmall {
+                    StyledIcon(symbol: tile.symbol, style: s, size: context.isLarge ? 20 : 16)
+                }
+                VStack(alignment: .leading, spacing: 2) {
+                    if hasValue { valueText(context.isSmall ? 24 : (context.isLarge ? 38 : 30)) }
+                    captionText(lines: context.isSmall ? 2 : 2)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                if let progress = progressFraction {
+                    miniProgress(progress)
+                        .frame(width: context.isSmall ? 46 : 60, height: context.isSmall ? 46 : 60)
+                } else if let values = tile.visual.seriesValues {
+                    SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 2, showsEndDot: true)
+                        .frame(width: context.isSmall ? 50 : 96, height: context.isSmall ? 30 : 44)
+                        .styleDepth(s)
+                }
+            }
+            if context.isLarge {
+                if hasVisual && progressFraction == nil && tile.visual.seriesValues == nil {
+                    visual(compact: false).frame(height: 110)
+                }
+                if !tile.rows.isEmpty {
+                    TileRowsView(rows: rows(5), context: context, compact: false)
+                }
+            } else if context.isMedium && !tile.rows.isEmpty && tile.buttons.isEmpty {
+                TileRowsView(rows: rows(1), context: context, compact: true)
+            }
+            Spacer(minLength: 0)
+            if !context.isSmall { buttonsRow(3) }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    /// A small ring (or the chosen progress chart) next to the value.
+    @ViewBuilder private func miniProgress(_ progress: Double) -> some View {
+        switch s.options.chart {
+        case .pie: ProgressPieChart(progress: progress, style: s)
+        case .gauge: GaugeArcChart(progress: progress, style: s, lineWidth: 6 * CGFloat(s.options.chartThickness))
+        default:
+            ZStack {
+                RingView(progress: progress, lineWidth: 6 * CGFloat(s.options.chartThickness), color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                if s.options.chartValues {
+                    Text(Fmt.percent(progress)).font(s.text(10, .semibold).monospacedDigit()).foregroundStyle(s.primary)
+                }
+            }
+            .styleDepth(s)
+        }
+    }
+
+    // MARK: Minimal: one big value
+
+    private var minimalLayout: some View {
+        let size: CGFloat = context.isSmall ? 46 : (context.isLarge ? 84 : 58)
+        return VStack(alignment: s.horizontalAlignment, spacing: 4 * sp) {
+            if s.showsTitle { WLabel(text: tile.title, style: s) }
+            Spacer(minLength: 0)
+            if hasValue {
+                valueText(size)
+                    .minimumScaleFactor(0.4)
+            } else {
+                captionText(lines: 4)
+            }
+            if hasValue && !context.isSmall {
+                captionText(lines: 1)
+            }
+            if context.isLarge { Spacer(minLength: 0) }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: s.alignment == .center ? .center : .bottomLeading)
+    }
+
+    // MARK: Focus: icon and value at the center
+
+    private var centeredLayout: some View {
+        VStack(spacing: 5 * sp) {
+            Spacer(minLength: 0)
+            if showsIcon {
+                StyledIcon(symbol: tile.symbol, style: s, size: context.isSmall ? 16 : 20)
+            }
+            if hasValue { valueText(context.isSmall ? 30 : (context.isLarge ? 52 : 38)) }
+            if s.showsTitle { WLabel(text: tile.title, style: s) }
+            if !context.isSmall {
+                captionText(lines: 2)
+            }
+            if context.isLarge, let progress = progressFraction {
+                BarView(progress: progress, color: s.chart, track: s.track, height: 8 * CGFloat(s.options.chartThickness), radius: s.radius(4))
+                    .frame(maxWidth: 200)
+                    .padding(.top, 8)
+            }
+            Spacer(minLength: 0)
+        }
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    // MARK: Two columns
+
+    private var splitLayout: some View {
+        HStack(alignment: .top, spacing: 10 * sp) {
+            VStack(alignment: .leading, spacing: 3 * sp) {
+                headerBlock
+                Spacer(minLength: 0)
+                if hasValue { valueText(context.isSmall ? 22 : (context.isLarge ? 36 : 30)) }
+                captionText(lines: context.isLarge ? 4 : 2)
+                if context.isLarge { detailText }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            Rectangle()
+                .fill(s.secondary.opacity(0.25))
+                .frame(width: 1)
+            VStack(alignment: .leading, spacing: 6 * sp) {
+                if !tile.rows.isEmpty {
+                    TileRowsView(rows: rows(context.isSmall ? 3 : (context.isLarge ? 9 : 4)), context: context, compact: !context.isLarge)
+                } else if hasVisual {
+                    visual(compact: context.isSmall)
+                } else if let detail = tile.detail {
+                    Text(detail).font(s.text(11)).foregroundStyle(s.secondary)
+                }
+                Spacer(minLength: 0)
+                if !context.isSmall { buttonsRow(2) }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+    }
+
+    // MARK: Data: several statistics
+
+    private struct Stat: Identifiable {
+        let id: String
+        let label: String
+        let value: String
+        var color: Color?
+    }
+
+    private var stats: [Stat] {
+        var result: [Stat] = []
+        if hasValue && tile.timer == nil {
+            result.append(Stat(id: "value", label: tile.caption ?? tile.title, value: [tile.value, tile.unit].compactMap { $0 }.joined(separator: " "), color: valueColor))
+        }
+        for row in tile.rows {
+            let value = row.value ?? row.progress.map { Fmt.percent($0) } ?? row.detail
+            if let value {
+                result.append(Stat(id: row.id, label: row.title, value: value, color: row.colorHex.map { Color(hex: $0) }))
+            }
+        }
+        if result.count < 2, let detail = tile.detail {
+            result.append(Stat(id: "detail", label: "Détail", value: detail))
+        }
+        return result
+    }
+
+    private var dataLayout: some View {
+        let columns = context.isSmall ? 1 : (context.isLarge ? 2 : 3)
+        let limit = max(1, (context.isSmall ? 2 : (context.isLarge ? 8 : 3)) + (context.isSmall ? 0 : s.rowDelta))
+        let shown = Array(stats.prefix(limit))
+        let chunks = stride(from: 0, to: shown.count, by: columns).map { Array(shown[$0..<min($0 + columns, shown.count)]) }
+        return VStack(alignment: .leading, spacing: 8 * sp) {
+            headerBlock
+            if context.isSmall { Spacer(minLength: 0) }
+            Grid(alignment: .leading, horizontalSpacing: 12 * sp, verticalSpacing: 10 * sp) {
+                ForEach(Array(chunks.enumerated()), id: \.offset) { chunk in
+                    GridRow {
+                        ForEach(chunk.element) { stat in
+                            VStack(alignment: .leading, spacing: 1) {
+                                Text(s.labelText(stat.label))
+                                    .font(s.label(9))
+                                    .tracking(s.labelTracking * 0.6)
+                                    .foregroundStyle(s.secondary)
+                                    .lineLimit(1)
+                                Text(stat.value)
+                                    .font(s.number(stat.id == "value" ? (context.isSmall ? 26 : 22) : (context.isSmall ? 17 : 18)))
+                                    .foregroundStyle(stat.color ?? s.numberColor)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.5)
+                                    .styleDepth(s)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                    if chunk.offset < chunks.count - 1 {
+                        Rectangle().fill(s.secondary.opacity(0.18)).frame(height: 1).gridCellUnsizedAxes(.horizontal)
+                    }
+                }
+            }
+            if !context.isSmall, hasVisual {
+                visual(compact: context.isMedium)
+                    .frame(maxHeight: context.isLarge ? 110 : 30)
+            }
+            Spacer(minLength: 0)
+            if context.isLarge { buttonsRow(3) }
+            if context.isLarge { footnoteText }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    // MARK: List: the lines first
+
+    private var listLayout: some View {
+        VStack(alignment: .leading, spacing: 7 * sp) {
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                headerBlock
+                Spacer(minLength: 4)
+                if hasValue && tile.timer == nil {
+                    Text([tile.value, tile.unit].compactMap { $0 }.joined(separator: " "))
+                        .font(s.number(context.isSmall ? 15 : 18))
+                        .foregroundStyle(valueColor)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                        .fixedSize()
+                }
+            }
+            TileRowsView(rows: rows(context.isSmall ? 4 : (context.isLarge ? 10 : 4)), context: context, compact: context.isSmall)
+            Spacer(minLength: 0)
+            if !context.isSmall { buttonsRow(3) }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    // MARK: Progress: a big bar
+
+    private var progressLayout: some View {
+        let progress = progressFraction ?? 0
+        let height: CGFloat = (context.isSmall ? 12 : (context.isLarge ? 22 : 16)) * CGFloat(s.options.chartThickness)
+        return VStack(alignment: .leading, spacing: 6 * sp) {
+            headerBlock
+            Spacer(minLength: 0)
+            HStack(alignment: .firstTextBaseline) {
+                if hasValue { valueText(context.isSmall ? 24 : (context.isLarge ? 40 : 32)) }
+                Spacer(minLength: 4)
+                Text(Fmt.percent(progress))
+                    .font(s.text(context.isSmall ? 12 : 14, .bold).monospacedDigit())
+                    .foregroundStyle(s.chart)
+            }
+            BarView(progress: progress, color: s.chart, track: s.options.chartFill ? s.track : s.track.opacity(0.4), height: height, radius: s.radius(height / 2))
+                .styleDepth(s)
+            captionText(lines: context.isSmall ? 1 : 2)
+            if context.isLarge {
+                let withProgress = tile.rows.filter { $0.progress != nil }
+                if !withProgress.isEmpty {
+                    TileRowsView(rows: Array(withProgress.prefix(4 + s.rowDelta)), context: context, compact: false)
+                        .padding(.top, 6)
+                } else if !tile.rows.isEmpty {
+                    TileRowsView(rows: rows(4), context: context, compact: false)
+                        .padding(.top, 6)
+                }
+                Spacer(minLength: 0)
+            }
+            if !context.isSmall { buttonsRow(3) }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    // MARK: Graph: the value and a large chart
+
+    private var graphLayout: some View {
+        VStack(alignment: .leading, spacing: 6 * sp) {
+            headerBlock
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                if hasValue { valueText(context.isSmall ? 22 : (context.isLarge ? 36 : 26)) }
+                if !context.isSmall {
+                    captionText(lines: 1)
+                }
+            }
+            if hasVisual {
+                visual(compact: context.isSmall)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                TileRowsView(rows: rows(context.isLarge ? 8 : 3), context: context, compact: !context.isLarge)
+                Spacer(minLength: 0)
+            }
+            if context.isLarge, hasVisual, !tile.rows.isEmpty {
+                TileRowsView(rows: rows(3), context: context, compact: true)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    // MARK: Cards: each information on its own card
+
+    private var cardsLayout: some View {
+        let others = Array(stats.filter { $0.id != "value" }.prefix(max(0, (context.isLarge ? 4 : (context.isMedium ? 2 : 1)) + (context.isSmall ? 0 : s.rowDelta / 2))))
+        return VStack(alignment: .leading, spacing: 6 * sp) {
+            if !context.isSmall { headerBlock }
+            if context.isMedium {
+                HStack(spacing: 6 * sp) {
+                    mainCard.frame(maxWidth: .infinity)
+                    ForEach(others) { statCard($0) }
+                    if others.isEmpty && hasVisual {
+                        card { visual(compact: true) }
+                    }
+                }
+            } else {
+                mainCard
+                if context.isLarge && hasVisual {
+                    card { visual(compact: false) }
+                        .frame(maxHeight: 110)
+                }
+                if !others.isEmpty {
+                    let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
+                    ForEach(Array(pairs.enumerated()), id: \.offset) { pair in
+                        HStack(spacing: 6 * sp) {
+                            ForEach(pair.element) { statCard($0) }
+                        }
+                    }
+                } else if context.isSmall && hasVisual {
+                    card { visual(compact: true) }
+                }
+            }
+            if context.isLarge { buttonsRow(3) }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    private var mainCard: some View {
+        card {
+            VStack(alignment: .leading, spacing: 2) {
+                if context.isSmall {
+                    HStack(spacing: 4) {
+                        if showsIcon { StyledIcon(symbol: tile.symbol, style: s, size: 10) }
+                        if s.showsTitle { WLabel(text: tile.title, style: s) }
+                    }
+                }
+                Spacer(minLength: 0)
+                if hasValue { valueText(context.isSmall ? 26 : (context.isLarge ? 34 : 24)) }
+                captionText(lines: 1)
+            }
+        }
+    }
+
+    private func statCard(_ stat: Stat) -> some View {
+        card {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(stat.label)
+                    .font(s.text(10, .medium))
+                    .foregroundStyle(s.secondary)
+                    .lineLimit(1)
+                Spacer(minLength: 0)
+                Text(stat.value)
+                    .font(s.number(context.isSmall ? 15 : 16))
+                    .foregroundStyle(stat.color ?? s.numberColor)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+            }
+        }
     }
 }
 
@@ -282,7 +746,7 @@ struct TileRowsView: View {
     private var s: ResolvedStyle { context.style }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: compact ? 5 : 7) {
+        VStack(alignment: .leading, spacing: (compact ? 5 : 7) * s.spacing) {
             ForEach(rows) { row in
                 rowView(row)
             }
@@ -300,18 +764,19 @@ struct TileRowsView: View {
     }
 
     private func rowContent(_ row: TileRow) -> some View {
-        let color = row.colorHex.map { Color(hex: $0) } ?? s.accent
+        let rowColor = row.colorHex.map { Color(hex: $0) }
+        let color = rowColor ?? s.icon
         return VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 7) {
                 if let done = row.isDone {
                     Image(systemName: done ? "checkmark.circle.fill" : "circle")
                         .font(.system(size: compact ? 13 : 15, weight: .medium))
-                        .foregroundStyle(done ? color : s.secondary)
-                } else if let symbol = row.symbol {
-                    Image(systemName: symbol)
-                        .font(.system(size: compact ? 10 : 12, weight: .semibold))
+                        .foregroundStyle(done ? (rowColor ?? s.accent) : s.secondary)
+                } else if let symbol = row.symbol, !s.options.isHidden("icon") {
+                    Image(systemName: s.symbol(symbol))
+                        .font(.system(size: (compact ? 10 : 12) * CGFloat(s.options.iconScale), weight: .semibold))
                         .foregroundStyle(color)
-                        .frame(width: compact ? 14 : 18)
+                        .frame(width: (compact ? 14 : 18) * CGFloat(s.options.iconScale))
                 } else if row.colorHex != nil {
                     Circle().fill(color).frame(width: 7, height: 7)
                 }
@@ -323,7 +788,7 @@ struct TileRowsView: View {
                         // Short lists have room for a second line.
                         .lineLimit(rows.count <= 3 ? 2 : 1)
                         .minimumScaleFactor(0.8)
-                    if let detail = row.detail, !compact {
+                    if let detail = row.detail, !compact, s.showsDetails {
                         Text(detail)
                             .font(s.text(10))
                             .foregroundStyle(s.secondary)
@@ -341,7 +806,8 @@ struct TileRowsView: View {
                 }
             }
             if let progress = row.progress {
-                BarView(progress: progress, color: color, track: s.track, height: compact ? 3 : 4)
+                let height = (compact ? 3 : 4) * CGFloat(s.options.chartThickness)
+                BarView(progress: progress, color: rowColor ?? s.chart, track: s.track, height: height, radius: s.radius(height / 2))
             }
         }
         .contentShape(Rectangle())
@@ -401,7 +867,7 @@ struct TileButtonLabel: View {
 
     var body: some View {
         HStack(spacing: 4) {
-            Image(systemName: button.symbol)
+            Image(systemName: style.symbol(button.symbol))
                 .font(.system(size: 11, weight: .bold))
             if !iconOnly {
                 Text(button.title)
@@ -414,7 +880,7 @@ struct TileButtonLabel: View {
         .padding(.horizontal, iconOnly ? 11 : 8)
         .frame(maxWidth: expands ? .infinity : nil, minHeight: 30)
         .accessibilityLabel(Text(button.title))
-        .background(button.isProminent ? style.accent : style.panel, in: Capsule())
+        .background(button.isProminent ? style.accent : style.panel, in: RoundedRectangle(cornerRadius: style.radius(15), style: .continuous))
     }
 }
 
@@ -426,7 +892,7 @@ struct TileHeaderButtonLabel: View {
 
     var body: some View {
         HStack(spacing: 3) {
-            Image(systemName: button.symbol)
+            Image(systemName: style.symbol(button.symbol))
                 .font(.system(size: 10, weight: .bold))
             if !iconOnly {
                 Text(button.title)
@@ -437,7 +903,7 @@ struct TileHeaderButtonLabel: View {
         .foregroundStyle(style.onAccent)
         .padding(.horizontal, iconOnly ? 7 : 9)
         .frame(minHeight: 24)
-        .background(style.accent, in: Capsule())
+        .background(style.accent, in: RoundedRectangle(cornerRadius: style.radius(12), style: .continuous))
         .accessibilityLabel(Text(button.title))
     }
 }
@@ -484,18 +950,36 @@ struct TileVisualView: View {
     let compact: Bool
 
     private var s: ResolvedStyle { context.style }
+    private var thickness: CGFloat { CGFloat(s.options.chartThickness) }
 
     var body: some View {
+        let kind = s.options.chart
+        if kind != .auto && ChartKind.options(for: visual.chartFamily).contains(kind) {
+            chosen(kind)
+        } else {
+            original
+        }
+    }
+
+    // MARK: The widget's own chart
+
+    @ViewBuilder private var original: some View {
         switch visual {
         case .none:
             EmptyView()
         case let .ring(progress):
-            RingView(progress: progress, lineWidth: compact ? 5 : 10, color: s.accent, track: s.track)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            ZStack {
+                RingView(progress: progress, lineWidth: (compact ? 5 : 10) * thickness, color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                if s.options.chartValues && !compact {
+                    Text(Fmt.percent(progress)).font(s.number(18)).foregroundStyle(s.numberColor)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         case let .bar(progress):
             VStack {
                 Spacer(minLength: 0)
-                BarView(progress: progress, color: s.accent, track: s.track, height: compact ? 6 : 10)
+                let height = (compact ? 6 : 10) * thickness
+                BarView(progress: progress, color: s.chart, track: s.track, height: height, radius: s.radius(height / 2))
             }
         case let .bars(values, labels, highlight):
             BarsChart(values: values, labels: compact ? [] : labels, highlight: highlight, style: s)
@@ -510,7 +994,7 @@ struct TileVisualView: View {
         case let .grid(names, rows, colors):
             HabitGrid(names: names, rows: rows, colors: colors, style: s)
         case let .symbol(name):
-            Image(systemName: name)
+            Image(systemName: s.symbol(name))
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(s.primary)
@@ -521,8 +1005,97 @@ struct TileVisualView: View {
             VStack {
                 Spacer(minLength: 0)
                 ProgressView(timerInterval: start...max(end, start.addingTimeInterval(1)), countsDown: true, label: { EmptyView() }, currentValueLabel: { EmptyView() })
-                    .tint(s.accent)
+                    .tint(s.chart)
             }
+        }
+    }
+
+    // MARK: The chart the person picked
+
+    @ViewBuilder private func chosen(_ kind: ChartKind) -> some View {
+        switch visual.chartFamily {
+        case .series:
+            let values = visual.seriesValues ?? []
+            series(kind, values: values)
+        case .progress:
+            progress(kind, value: visual.progressValue ?? 0)
+        case .segments:
+            if case let .segments(segments) = visual {
+                parts(kind, segments: segments)
+            }
+        case .none:
+            original
+        }
+    }
+
+    @ViewBuilder private func series(_ kind: ChartKind, values: [Double]) -> some View {
+        let showsValues = s.options.chartValues && !compact
+        switch kind {
+        case .line:
+            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: showsValues, showsEndValue: showsValues)
+        case .area:
+            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.5 : 0.25, lineWidth: 1.5 * thickness, showsEndValue: showsValues)
+        case .bars:
+            BarsChart(values: values, labels: [], highlight: values.indices.last, style: s, showsValues: showsValues)
+        case .histogram:
+            BarsChart(values: values, labels: [], highlight: values.indices.last, style: s, showsValues: showsValues, spacing: 1, corner: 0.5)
+        case .dots:
+            SeriesDotsChart(values: values, style: s, dotSize: (compact ? 4 : 6) * thickness)
+        case .sparkline:
+            SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 1.4 * thickness, showsEndDot: true, showsEndValue: showsValues)
+        case .evolution:
+            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: true, showsChange: !compact)
+        case .comparison:
+            let last = values.last ?? 0
+            let previous = values.dropLast()
+            let average = previous.isEmpty ? last : previous.reduce(0, +) / Double(previous.count)
+            ComparisonChart(current: last, reference: average, currentLabel: "Dernier", referenceLabel: "Moyenne", style: s)
+        default:
+            original
+        }
+    }
+
+    @ViewBuilder private func progress(_ kind: ChartKind, value: Double) -> some View {
+        let showsValues = s.options.chartValues && !compact
+        switch kind {
+        case .ring:
+            ZStack {
+                RingView(progress: value, lineWidth: (compact ? 5 : 10) * thickness, color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                if showsValues {
+                    Text(Fmt.percent(value)).font(s.number(18)).foregroundStyle(s.numberColor)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        case .pie:
+            ProgressPieChart(progress: value, style: s, showsValue: showsValues)
+        case .gauge:
+            GaugeArcChart(progress: value, style: s, lineWidth: (compact ? 5 : 10) * thickness, showsValue: showsValues)
+        case .progress:
+            VStack(alignment: .leading, spacing: 4) {
+                Spacer(minLength: 0)
+                if showsValues {
+                    Text(Fmt.percent(value)).font(s.text(12, .bold).monospacedDigit()).foregroundStyle(s.chart)
+                }
+                let height = (compact ? 8 : 14) * thickness
+                BarView(progress: value, color: s.chart, track: s.options.chartFill ? s.track : s.track.opacity(0.4), height: height, radius: s.radius(height / 2))
+            }
+        case .comparison:
+            ComparisonChart(current: value, reference: 1, currentLabel: "Actuel", referenceLabel: "Objectif", style: s, asPercent: true)
+        default:
+            original
+        }
+    }
+
+    @ViewBuilder private func parts(_ kind: ChartKind, segments: [TileSegment]) -> some View {
+        switch kind {
+        case .ring:
+            SegmentsRoundChart(segments: segments, style: s, hole: 0.62, showsLegend: !compact)
+        case .pie:
+            SegmentsRoundChart(segments: segments, style: s, hole: 0, showsLegend: !compact)
+        case .bars:
+            SegmentsBarsChart(segments: segments, style: s)
+        default:
+            SegmentsChart(segments: segments, showsLegend: !compact, style: s)
         }
     }
 }
@@ -532,24 +1105,39 @@ struct BarsChart: View {
     let labels: [String]
     let highlight: Int?
     let style: ResolvedStyle
+    var showsValues = false
+    var spacing: CGFloat?
+    var corner: CGFloat?
 
     var body: some View {
         let top = max(values.max() ?? 0, 0.000_1)
+        let gap = spacing ?? (values.count > 14 ? 2 : 4) / CGFloat(style.options.chartThickness)
+        let radius = corner ?? style.radius(values.count > 14 ? 1.5 : 3)
+        let labelled = showsValues && values.count <= 10
         VStack(spacing: 4) {
             GeometryReader { geo in
-                HStack(alignment: .bottom, spacing: values.count > 14 ? 2 : 4) {
+                HStack(alignment: .bottom, spacing: gap) {
                     ForEach(Array(values.enumerated()), id: \.offset) { pair in
                         let ratio = max(0, pair.element) / top
-                        RoundedRectangle(cornerRadius: values.count > 14 ? 1.5 : 3, style: .continuous)
-                            .fill(pair.offset == highlight ? style.accent : style.accent.opacity(0.35))
-                            .frame(height: max(3, geo.size.height * CGFloat(ratio)))
-                            .frame(maxWidth: .infinity)
+                        let isHighlight = pair.offset == highlight
+                        VStack(spacing: 2) {
+                            if labelled {
+                                Text(ChartText.short(pair.element))
+                                    .font(style.text(8, isHighlight ? .bold : .medium).monospacedDigit())
+                                    .foregroundStyle(isHighlight ? style.primary : style.secondary)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.6)
+                            }
+                            bar(isHighlight: isHighlight, radius: radius)
+                                .frame(height: max(3, (geo.size.height - (labelled ? 12 : 0)) * CGFloat(ratio)))
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
             if !labels.isEmpty {
-                HStack(spacing: values.count > 14 ? 2 : 4) {
+                HStack(spacing: gap) {
                     ForEach(Array(labels.enumerated()), id: \.offset) { pair in
                         let shown = labels.count <= 8 || pair.offset % 3 == 0 || pair.offset == highlight
                         Text(shown ? pair.element : " ")
@@ -563,6 +1151,15 @@ struct BarsChart: View {
             }
         }
     }
+
+    @ViewBuilder private func bar(isHighlight: Bool, radius: CGFloat) -> some View {
+        let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
+        if style.options.chartFill || isHighlight {
+            shape.fill(isHighlight ? style.chart : style.chart.opacity(0.35))
+        } else {
+            shape.strokeBorder(style.chart.opacity(0.7), lineWidth: 1)
+        }
+    }
 }
 
 struct LineChart: View {
@@ -571,10 +1168,12 @@ struct LineChart: View {
 
     var body: some View {
         ZStack {
-            SparklineShape(values: values, closed: true)
-                .fill(LinearGradient(colors: [style.accent.opacity(0.28), style.accent.opacity(0.02)], startPoint: .top, endPoint: .bottom))
+            if style.options.chartFill {
+                SparklineShape(values: values, closed: true)
+                    .fill(LinearGradient(colors: [style.chart.opacity(0.28), style.chart.opacity(0.02)], startPoint: .top, endPoint: .bottom))
+            }
             SparklineShape(values: values)
-                .stroke(style.accent, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                .stroke(style.chart, style: StrokeStyle(lineWidth: 2 * CGFloat(style.options.chartThickness), lineCap: .round, lineJoin: .round))
         }
     }
 }
@@ -596,9 +1195,9 @@ struct SegmentsChart: View {
                     }
                     Spacer(minLength: 0)
                 }
-                .clipShape(Capsule())
+                .clipShape(RoundedRectangle(cornerRadius: style.radius(5 * CGFloat(style.options.chartThickness)), style: .continuous))
             }
-            .frame(height: 10)
+            .frame(height: 10 * CGFloat(style.options.chartThickness))
             if showsLegend {
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(Array(segments.prefix(5).enumerated()), id: \.offset) { pair in
@@ -632,7 +1231,8 @@ struct WeekStrip: View {
             ForEach(Array(days.prefix(7).enumerated()), id: \.offset) { pair in
                 VStack(spacing: 3) {
                     ZStack {
-                        Circle().fill(pair.element == true ? style.accent : style.track.opacity(pair.element == nil ? 0.5 : 1))
+                        RoundedRectangle(cornerRadius: style.options.shape == .square ? 3 : 999, style: .continuous)
+                            .fill(pair.element == true ? style.chart : style.track.opacity(pair.element == nil ? 0.5 : 1))
                         if pair.element == true {
                             Image(systemName: "checkmark")
                                 .font(.system(size: 8, weight: .heavy))
@@ -672,7 +1272,7 @@ struct MonthDots: View {
                             ZStack {
                                 if day >= 1 && day <= days {
                                     Circle()
-                                        .fill(marked.contains(day) ? style.accent : style.track)
+                                        .fill(marked.contains(day) ? style.chart : style.track)
                                         .padding(size * 0.2)
                                     if day == today {
                                         Circle()
@@ -718,7 +1318,7 @@ struct HabitGrid: View {
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     ForEach(Array(pair.element.prefix(7).enumerated()), id: \.offset) { day in
-                        RoundedRectangle(cornerRadius: 3.5, style: .continuous)
+                        RoundedRectangle(cornerRadius: style.radius(3.5), style: .continuous)
                             .fill(day.element == true ? color : style.track.opacity(day.element == nil ? 0.45 : 1))
                             .frame(width: 13, height: 13)
                     }
@@ -759,9 +1359,9 @@ struct SunArc: View {
                     if let progress {
                         let angle = Double.pi * (1 - min(1, max(0, progress)))
                         Circle()
-                            .fill(style.accent)
+                            .fill(style.chart)
                             .frame(width: compact ? 10 : 14, height: compact ? 10 : 14)
-                            .shadow(color: style.accent.opacity(0.6), radius: 6)
+                            .shadow(color: style.chart.opacity(0.6), radius: 6)
                             .position(x: center.x + radiusX * CGFloat(cos(angle)), y: center.y - radiusY * CGFloat(sin(angle)))
                     }
                 }

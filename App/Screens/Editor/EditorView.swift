@@ -17,6 +17,7 @@ struct EditorView: View {
     @State private var backgroundTab: BackgroundKind
     @State private var didSave = false
     @State private var previewFrame: CGRect = .zero
+    @State private var section: StudioSection
 
     private let isNew: Bool
     private let original: WidgetDesign
@@ -25,6 +26,7 @@ struct EditorView: View {
         _design = State(initialValue: request.design)
         _family = State(initialValue: request.design.displayFormat.family)
         _backgroundTab = State(initialValue: BackgroundKind(request.design.background))
+        _section = State(initialValue: request.section.flatMap(StudioSection.init(rawValue:)) ?? .content)
         isNew = request.isNew
         original = request.design
     }
@@ -34,34 +36,30 @@ struct EditorView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 22) {
-                    // Example data until the person gives their own, then their widget for real.
-                    PreviewStage(design: design, family: $family, payload: model.previewPayload(for: design), isExample: !model.hasOwnData(for: design))
-                        .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
-                    if needsPremium { premiumNotice }
-                    nameSection
-                    // What the widget needs from the person, asked here and shared with every widget.
-                    if !design.dataItems.isEmpty {
-                        WidgetDataSection(items: design.dataItems)
+            VStack(spacing: 0) {
+                // Always in view: every change shows at once.
+                StudioStage(design: design, family: $family, payload: payload, isExample: !model.hasOwnData(for: design))
+                    .padding(.horizontal, 20)
+                    .padding(.top, 6)
+                    .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
+                StudioSectionBar(selection: $section)
+                Divider()
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        if needsPremium { premiumNotice }
+                        sectionContent
                     }
-                    styleSection
-                    colorSection
-                    backgroundSection
-                    fontSection
-                    displaySection
-                    // A combined widget keeps the options of each widget inside it.
-                    if !design.isCombo { KindOptionsSection(design: $design) }
-                    if !isNew { deleteButton }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 14)
+                    .padding(.bottom, 24)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 24)
+                .id(section)
+                .scrollDismissesKeyboard(.interactively)
+                .screenshotScroll()
             }
-            .scrollDismissesKeyboard(.interactively)
-            .screenshotScroll()
             .background(.screenFill)
             .safeAreaInset(edge: .bottom) { saveBar }
-            .navigationTitle(isNew ? "Nouveau widget" : "Modifier")
+            .navigationTitle(isNew ? "Nouveau widget" : "Studio")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -89,6 +87,75 @@ struct EditorView: View {
         .interactiveDismissDisabled(hasChanges && !isNew)
         .onDisappear {
             if !didSave { discardUnsavedPhoto() }
+        }
+    }
+
+    // MARK: Studio
+
+    private var payload: WidgetPayload { model.previewPayload(for: design) }
+
+    /// The size used for the small previews: the one shown, or the widget's own on the Lock Screen.
+    private var gridFamily: WidgetFamily {
+        family.isAccessory ? design.displayFormat.family : family
+    }
+
+    private var studioInput: StudioInput {
+        let payload = self.payload
+        var tile: Tile?
+        if design.kind.usesTileLayout && !design.isCombo {
+            let context = RenderContext(design: design, style: ResolvedStyle(design: design), family: gridFamily, date: Date(), payload: payload, isInteractive: false)
+            let made = TileFactory.make(context)
+            tile = made.empty == nil ? made : nil
+        }
+        return StudioInput(payload: payload, family: gridFamily, tile: tile)
+    }
+
+    @ViewBuilder private var sectionContent: some View {
+        switch section {
+        case .content:
+            if !model.hasOwnData(for: design) && !design.dataItems.isEmpty {
+                Text("Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            nameSection
+            // What the widget needs from the person, asked here and shared with every widget.
+            if !design.dataItems.isEmpty {
+                WidgetDataSection(items: design.dataItems)
+            }
+            // A combined widget keeps the options of each widget inside it.
+            if !design.isCombo { KindOptionsSection(design: $design) }
+            StudioElementsPanel(design: $design, tile: studioInput.tile)
+            if !isNew { deleteButton }
+        case .themes:
+            StudioThemesPanel(design: $design, input: studioInput)
+        case .style:
+            StudioStylesPanel(design: $design, input: studioInput)
+        case .colors:
+            StudioColorsPanel(design: $design, input: studioInput)
+        case .background:
+            backgroundSection
+            textureSection
+            StudioNote(text: "iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Tessera propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Tessera.")
+        case .border:
+            StudioBorderPanel(design: $design)
+        case .depth:
+            StudioDepthPanel(design: $design)
+        case .shape:
+            StudioShapePanel(design: $design, input: studioInput)
+        case .text:
+            StudioTextPanel(design: $design)
+        case .icons:
+            StudioIconsPanel(design: $design)
+        case .layout:
+            StudioLayoutPanel(design: $design, input: studioInput)
+        case .chart:
+            StudioChartPanel(design: $design, input: studioInput)
+        case .density:
+            StudioDensityPanel(design: $design, input: studioInput)
+        case .myStyles:
+            StudioMyStylesPanel(design: $design, input: studioInput)
         }
     }
 
@@ -128,68 +195,14 @@ struct EditorView: View {
         }
     }
 
-    private var styleSection: some View {
-        EditorSection(title: "Style", detail: design.theme.tagline) {
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        ForEach(ThemeCatalog.all) { theme in
-                            Button {
-                                withAnimation(.easeInOut(duration: 0.2)) { design.themeID = theme.id }
-                                Haptics.tap()
-                            } label: {
-                                ThemeSwatch(theme: theme, accentHex: design.accentHex, isSelected: design.themeID == theme.id, showsLock: theme.isPremium && !model.isPremium)
-                            }
-                            .buttonStyle(.plain)
-                            .id(theme.id)
-                        }
-                    }
-                    .padding(.vertical, 2)
-                }
-                // Opens on the design's current style, even when it is far in the list.
-                .onAppear { proxy.scrollTo(design.themeID, anchor: .center) }
-            }
-        }
-    }
-
-    private var colorSection: some View {
-        EditorSection(title: "Couleur", detail: Palette.name(for: design.accentHex)) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 6)], spacing: 6) {
-                ForEach(Palette.freeAccents) { swatch in
-                    ColorDot(hex: swatch.hex, isSelected: design.accentHex == swatch.hex) {
-                        design.accentHex = swatch.hex
-                        Haptics.tap()
-                    }
-                    .accessibilityLabel(Text(swatch.name))
-                }
-                ColorPicker("Couleur personnalisée", selection: Binding(
-                    get: { Color(hex: design.accentHex) },
-                    set: { design.accentHex = $0.hexString }
-                ), supportsOpacity: false)
-                .labelsHidden()
-                .frame(minWidth: 44, minHeight: 44)
-                .overlay(alignment: .topTrailing) {
-                    if !model.isPremium {
-                        Image(systemName: "lock.fill")
-                            .font(.system(size: 8, weight: .bold))
-                            .foregroundStyle(Color.premiumInk)
-                            .padding(3)
-                            .background(Color.premiumFill, in: Circle())
-                            .offset(x: 6, y: -6)
-                            .allowsHitTesting(false)
-                    }
-                }
-            }
-        }
-    }
-
     private var backgroundSection: some View {
         EditorSection(title: "Fond", isPremium: !model.isPremium) {
             VStack(alignment: .leading, spacing: 14) {
                 Picker("Fond", selection: $backgroundTab) {
-                    Text("Thème").tag(BackgroundKind.theme)
+                    Text("Style").tag(BackgroundKind.theme)
                     Text("Couleur").tag(BackgroundKind.color)
                     Text("Dégradé").tag(BackgroundKind.gradient)
+                    Text("Verre").tag(BackgroundKind.glass)
                     Text("Photo").tag(BackgroundKind.photo)
                 }
                 .pickerStyle(.segmented)
@@ -199,6 +212,7 @@ struct EditorView: View {
                     case .color:
                         if case .color = design.background {} else { design.background = .color(Palette.backgrounds[0].hex) }
                     case .gradient: design.background = .gradient
+                    case .glass: design.background = .glass
                     case .photo: break
                     }
                 }
@@ -213,12 +227,22 @@ struct EditorView: View {
                             .accessibilityLabel(Text(swatch.name))
                         }
                     }
+                    ColorPicker("Autre couleur", selection: Binding(
+                        get: {
+                            if case let .color(hex) = design.background { return Color(hex: hex) }
+                            return Color(hex: Palette.backgrounds[0].hex)
+                        },
+                        set: { design.background = .color($0.hexString) }
+                    ), supportsOpacity: false)
+                    .font(.subheadline)
                 case .gradient:
-                    Text("Le dégradé suit la couleur choisie plus haut.")
+                    gradientSettings
+                case .glass:
+                    Text("Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 case .theme:
-                    Text("Le fond du style choisi.")
+                    Text("Le fond du style choisi, clair ou sombre selon le style.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 case .photo:
@@ -234,66 +258,85 @@ struct EditorView: View {
                         .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
                     .buttonStyle(.plain)
+                    if case .photo = design.background {
+                        StudioSlider(title: "Voile pour la lisibilité", value: Binding(
+                            get: { design.style.veil ?? 0.28 },
+                            set: { design.style.veil = $0 }
+                        ), range: 0...0.75)
+                    }
+                    StudioNote(text: "La photo est réduite pour tenir dans la mémoire limitée des widgets.")
                 }
             }
         }
     }
 
-    private var fontSection: some View {
-        EditorSection(title: "Police") {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(FontChoice.allCases) { font in
-                        Button {
-                            design.font = font
-                        } label: {
-                            HStack(spacing: 4) {
-                                Text(font.title)
-                                    .font(.system(.subheadline, design: fontDesign(font)).weight(.medium))
-                                if font.isPremium && !model.isPremium {
-                                    Image(systemName: "lock.fill").font(.system(size: 9, weight: .bold))
-                                }
-                            }
-                            .foregroundStyle(design.font == font ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
-                            .padding(.horizontal, 14)
-                            .frame(minHeight: 36)
-                            .background(design.font == font ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.screenFill), in: Capsule())
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
+    /// Automatic (from the main color) or the person's own: two colors, a direction and an intensity.
+    @ViewBuilder private var gradientSettings: some View {
+        Toggle("Mon propre dégradé", isOn: Binding(
+            get: { design.style.gradient != nil },
+            set: { isOn in
+                design.style.gradient = isOn
+                    ? GradientSpec(startHex: ColorMath.shade(design.accentHex, 0.18), endHex: ColorMath.shade(design.accentHex, -0.45))
+                    : nil
             }
-        }
-    }
-
-    private func fontDesign(_ font: FontChoice) -> Font.Design {
-        switch font {
-        case .theme: design.theme.fontDesign
-        case .standard: .default
-        case .rounded: .rounded
-        case .serif: .serif
-        case .mono: .monospaced
-        }
-    }
-
-    private var displaySection: some View {
-        EditorSection(title: "Affichage") {
-            VStack(spacing: 12) {
-                Toggle("Titre", isOn: $design.showsTitle)
-                Divider()
-                Toggle("Détails", isOn: $design.showsDetails)
-                Divider()
-                HStack {
-                    Text("Alignement")
-                    Spacer()
-                    Picker("Alignement", selection: $design.alignment) {
-                        ForEach(ContentAlignment.allCases) { Text($0.title).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
-                    .frame(width: 190)
-                }
+        ))
+        .font(.subheadline)
+        if let spec = design.style.gradient {
+            HStack(spacing: 16) {
+                ColorPicker("Couleur 1", selection: Binding(
+                    get: { Color(hex: spec.startHex) },
+                    set: { design.style.gradient?.startHex = $0.hexString }
+                ), supportsOpacity: false)
+                ColorPicker("Couleur 2", selection: Binding(
+                    get: { Color(hex: spec.endHex) },
+                    set: { design.style.gradient?.endHex = $0.hexString }
+                ), supportsOpacity: false)
             }
             .font(.subheadline)
+            StudioChoices(
+                options: GradientDirection.allCases,
+                selection: Binding(get: { spec.direction }, set: { design.style.gradient?.direction = $0 }),
+                title: \.title,
+                symbol: { $0.symbol }
+            )
+            StudioSlider(title: "Intensité", value: Binding(
+                get: { spec.intensity },
+                set: { design.style.gradient?.intensity = $0 }
+            ), range: 0.1...1)
+            FlowLayout(spacing: 8) {
+                ForEach(Array(Self.gradientIdeas.enumerated()), id: \.offset) { _, idea in
+                    Button {
+                        withAnimation { design.style.gradient = GradientSpec(startHex: idea.0, endHex: idea.1, direction: spec.direction, intensity: 1) }
+                    } label: {
+                        LinearGradient(colors: [Color(hex: idea.0), Color(hex: idea.1)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                            .frame(width: 44, height: 30)
+                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text("Dégradé"))
+                }
+            }
+        } else {
+            Text("Le dégradé suit la couleur principale.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private static let gradientIdeas: [(String, String)] = [
+        ("FF9A62", "8E3BA8"), ("0B8FAC", "063A6B"), ("1B2250", "05060F"), ("F6D365", "FDA085"),
+        ("84FAB0", "8FD3F4"), ("A18CD1", "FBC2EB"), ("434343", "000000"), ("F5F7FA", "C3CFE2"),
+        ("FF5F6D", "FFC371"), ("11998E", "38EF7D"),
+    ]
+
+    private var textureSection: some View {
+        EditorSection(title: "Texture", isPremium: !model.isPremium) {
+            VStack(alignment: .leading, spacing: 12) {
+                StudioChoices(options: TextureKind.allCases, selection: $design.style.texture, title: \.title, identifier: { "texture-\($0.rawValue)" })
+                if design.effectiveStyle.texture != .none {
+                    StudioSlider(title: "Intensité", value: $design.style.textureOpacity, range: 0.1...1)
+                }
+            }
         }
     }
 
@@ -374,13 +417,14 @@ struct EditorView: View {
 }
 
 enum BackgroundKind: Hashable {
-    case theme, color, gradient, photo
+    case theme, color, gradient, glass, photo
 
     init(_ style: BackgroundStyle) {
         switch style {
         case .theme: self = .theme
         case .color: self = .color
         case .gradient: self = .gradient
+        case .glass: self = .glass
         case .photo: self = .photo
         }
     }
@@ -433,73 +477,5 @@ struct ColorDot: View {
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
-    }
-}
-
-/// The live preview at the top of the editor, with a size switcher.
-struct PreviewStage: View {
-    let design: WidgetDesign
-    @Binding var family: WidgetFamily
-    let payload: WidgetPayload
-    /// Shown with example data: marked as such, never mistaken for the person's own.
-    var isExample = false
-
-    var body: some View {
-        VStack(spacing: 14) {
-            ZStack {
-                LinearGradient(
-                    colors: family.isAccessory
-                        ? [Color(hex: "1F2A44"), Color(hex: "3B2F5C")]
-                        : [Color(light: "DCE3EA", dark: "1B1F26"), Color(light: "C9D3DD", dark: "11141A")],
-                    startPoint: .topLeading, endPoint: .bottomTrailing
-                )
-                preview
-                    .padding(20)
-                    .animation(.easeInOut(duration: 0.2), value: family)
-            }
-            .frame(maxWidth: .infinity)
-            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-            .overlay(alignment: .topLeading) {
-                if isExample { ExampleBadge().padding(12) }
-            }
-
-            if isExample {
-                Text("Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity)
-            }
-
-            if design.families.count > 1 {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
-                        ForEach(design.families, id: \.self) { item in
-                            FilterChip(title: item.shortTitle, symbol: item.isAccessory ? "lock.iphone" : nil, isSelected: family == item) {
-                                family = item
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        .padding(.top, 8)
-        .onChange(of: design.kind) { _, _ in
-            if !design.families.contains(family) { family = design.families.first ?? .systemSmall }
-        }
-    }
-
-    @ViewBuilder private var preview: some View {
-        switch family {
-        case .systemSmall:
-            WidgetPreview(design: design, family: family, payload: payload, width: 170)
-        case .accessoryCircular, .accessoryRectangular, .accessoryInline:
-            WidgetPreview(design: design, family: family, payload: payload, width: WidgetMetrics.size(family).width * 1.4)
-                .padding(.vertical, 24)
-        default:
-            WidgetPreview(design: design, family: family, payload: payload)
-                .frame(maxWidth: 364)
-        }
     }
 }

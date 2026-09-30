@@ -30,9 +30,9 @@ struct WLabel: View {
     var color: Color?
 
     var body: some View {
-        Text(style.uppercaseLabels ? text.uppercased() : text)
-            .font(style.text(11, .semibold))
-            .tracking(style.uppercaseLabels ? 0.6 : 0)
+        Text(style.labelText(text))
+            .font(style.label(11))
+            .tracking(style.labelTracking)
             .foregroundStyle(color ?? style.secondary)
             .lineLimit(1)
             .minimumScaleFactor(0.75)
@@ -62,12 +62,15 @@ struct BarView: View {
     let color: Color
     let track: Color
     var height: CGFloat = 6
+    /// Corner radius; by default a capsule.
+    var radius: CGFloat? = nil
 
     var body: some View {
+        let corner = min(radius ?? height / 2, height / 2)
         GeometryReader { geo in
             ZStack(alignment: .leading) {
-                Capsule().fill(track)
-                Capsule()
+                RoundedRectangle(cornerRadius: corner, style: .continuous).fill(track)
+                RoundedRectangle(cornerRadius: corner, style: .continuous)
                     .fill(color)
                     .frame(width: max(height, geo.size.width * min(1, max(0, progress))))
             }
@@ -155,9 +158,9 @@ struct WidgetMessage: View {
 
     var body: some View {
         VStack(spacing: 6) {
-            Image(systemName: symbol)
+            Image(systemName: style.symbol(symbol))
                 .font(.system(size: 22, weight: .medium))
-                .foregroundStyle(style.accent)
+                .foregroundStyle(style.icon)
             Text(title)
                 .font(style.text(14, .semibold))
                 .foregroundStyle(style.primary)

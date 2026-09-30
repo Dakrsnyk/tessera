@@ -227,7 +227,7 @@ def check_kinds():
 # ---------------------------------------------------------------- 4. release safety
 
 def check_release_safety():
-    guarded = ["DebugPremium", "isDebugPremiumOn", "setDebugPremium", "ScreenshotMode", "WidgetGalleryView", "SetupGalleryView", "MarketingView", "SignedEntitlements"]
+    guarded = ["DebugPremium", "isDebugPremiumOn", "setDebugPremium", "ScreenshotMode", "WidgetGalleryView", "SetupGalleryView", "MarketingView", "SignedEntitlements", "StudioGalleryView"]
     for path, text in FILES.items():
         depth_stack = []
         for number, line in enumerate(text.splitlines(), 1):

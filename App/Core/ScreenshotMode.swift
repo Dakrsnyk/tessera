@@ -114,6 +114,20 @@ enum ScreenshotMode {
                 if screen == "home-fresh" { router.tab = .home }
                 if screen == "editor-fresh" { router.openEditor(TemplateCatalog.design("calories-glass"), isNew: true) }
             }
+            // The Widget Studio, open on one of its sections, on a widget with lines, parts and a chart.
+            if screen.hasPrefix("studio-") {
+                let section = String(screen.dropFirst(7))
+                let kind: WidgetKind = section == "chart" ? .nutritionWeek : .macros
+                let design = WidgetDesign(kind: kind, themeID: .modern, accentHex: "2F8F7A", format: .medium)
+                if section == "myStyles" {
+                    for saved in model.savedStyles { model.deleteStyle(saved.id) }
+                    var looks = design
+                    looks = StylePreset.preset("ocean")?.applied(to: looks) ?? looks
+                    model.saveStyle(named: "Océan du matin", from: looks)
+                    model.saveStyle(named: "Mon thème", from: StylePreset.preset("midnight")?.applied(to: design) ?? design)
+                }
+                router.openEditor(design, isNew: true, section: section)
+            }
             if screen.hasPrefix("pack-") {
                 router.tab = .explore
                 let id = String(String(screen.dropFirst(5)).split(separator: "-").first ?? "")

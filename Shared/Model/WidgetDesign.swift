@@ -5,10 +5,13 @@ enum BackgroundStyle: Codable, Hashable {
     case theme
     /// A flat color picked by the user.
     case color(String)
-    /// A soft gradient built from the accent color.
+    /// A soft gradient built from the accent color, or the person's own (`StyleOptions.gradient`).
     case gradient
     /// A photo stored in the shared container, identified by file name.
     case photo(String)
+    /// Frosted glass tinted with the accent. Widgets can't blur the wallpaper behind them:
+    /// the frost, the tint and the reflections are drawn.
+    case glass
 
     var isPremium: Bool { self != .theme }
 
@@ -18,6 +21,7 @@ enum BackgroundStyle: Codable, Hashable {
         case .color: "Couleur"
         case .gradient: "Dégradé"
         case .photo: "Photo"
+        case .glass: "Verre"
         }
     }
 }
@@ -71,6 +75,9 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
     /// The size the widget was created for (small, medium or large). Nil for widgets made before sizes
     /// were chosen: they show at their smallest size.
     var format: WidgetFormat?
+    /// Everything the Studio changes beyond the style (theme): colors, border, depth, shapes, text,
+    /// icons, layout, chart, density and hidden parts. Left at its defaults, the style decides.
+    var style: StyleOptions
 
     init(
         id: UUID = UUID(),
@@ -85,7 +92,8 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         alignment: ContentAlignment = .leading,
         options: DesignOptions = DesignOptions(),
         isFavorite: Bool = false,
-        format: WidgetFormat? = nil
+        format: WidgetFormat? = nil,
+        style: StyleOptions = StyleOptions()
     ) {
         self.id = id
         self.name = name ?? kind.title
@@ -100,6 +108,7 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         self.options = options
         self.isFavorite = isFavorite
         self.format = format
+        self.style = style
         self.createdAt = Date()
         self.updatedAt = Date()
         self.lastUsedAt = nil
@@ -107,7 +116,7 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
 
     enum CodingKeys: String, CodingKey {
         case id, name, kind, themeID, accentHex, background, font, showsTitle, showsDetails
-        case alignment, options, isFavorite, createdAt, updatedAt, lastUsedAt, format
+        case alignment, options, isFavorite, createdAt, updatedAt, lastUsedAt, format, style
     }
 
     init(from decoder: Decoder) throws {
@@ -128,9 +137,13 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         updatedAt = (try? c.decodeIfPresent(Date.self, forKey: .updatedAt)) ?? Date()
         lastUsedAt = try? c.decodeIfPresent(Date.self, forKey: .lastUsedAt)
         format = try? c.decodeIfPresent(WidgetFormat.self, forKey: .format)
+        style = (try? c.decodeIfPresent(StyleOptions.self, forKey: .style)) ?? StyleOptions()
     }
 
     var theme: WidgetTheme { ThemeCatalog.theme(themeID) }
+
+    /// The style actually drawn: the person's settings over the style's own starting values.
+    var effectiveStyle: StyleOptions { style.over(theme.preset) }
 
     /// The Premium features this design relies on, used to explain what a save would unlock.
     var premiumFeatures: [String] {
@@ -143,6 +156,7 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         if background.isPremium { features.append("Fond \(background.title.lowercased())") }
         if font.isPremium { features.append("Police \(font.title)") }
         if !Palette.freeAccents.contains(where: { $0.hex == accentHex }) { features.append("Couleur personnalisée") }
+        for feature in style.premiumFeatures where !features.contains(feature) { features.append(feature) }
         return features
     }
 
@@ -155,6 +169,7 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         if background.isPremium { copy.background = .theme }
         if font.isPremium { copy.font = .theme }
         if !Palette.freeAccents.contains(where: { $0.hex == accentHex }) { copy.accentHex = Palette.defaultAccent }
+        copy.style = style.withoutPremium()
         return copy
     }
 

@@ -30,6 +30,8 @@ final class AppModel {
     var life = LifeState()
     /// « Mes informations »: written through `update(\.profile)` or the setters below.
     var profile = UserProfile()
+    /// Looks saved by the person (« Mes styles »), newest first.
+    private(set) var savedStyles: [SavedStyle] = []
 
     // Live data used by previews, refreshed on demand.
     private(set) var weather: WeatherResult = .needsLocation
@@ -76,6 +78,7 @@ final class AppModel {
         productivity = store.state(ProductivityState.self)
         life = store.state(LifeState.self)
         profile = store.state(UserProfile.self)
+        savedStyles = store.state(StyleLibrary.self).styles
         migrateProfile()
         insights = InsightCache.load()
         let cache = MarketService.cache
@@ -204,11 +207,12 @@ final class AppModel {
         scheduleWidgetReload()
     }
 
-    func duplicate(_ design: WidgetDesign) -> WidgetDesign? {
+    /// A copy with the same content and look. A variant is the same copy, meant to be restyled.
+    func duplicate(_ design: WidgetDesign, asVariant: Bool = false) -> WidgetDesign? {
         guard canCreateDesign else { return nil }
         var copy = design
         copy.id = UUID()
-        copy.name = "\(design.name) (copie)"
+        copy.name = asVariant ? "\(design.name) (variante)" : "\(design.name) (copie)"
         copy.createdAt = Date()
         copy.isFavorite = false
         if case let .photo(name) = design.background, let image = ImageStore.image(named: name), let newName = ImageStore.save(image) {
@@ -240,6 +244,47 @@ final class AppModel {
         guard let index = designs.firstIndex(where: { $0.id == design.id }) else { return }
         designs[index].isFavorite.toggle()
         store.designs = designs
+    }
+
+    // MARK: Personal styles (« Mes styles »)
+
+    /// Saves a widget's look under a name, to give other widgets the same identity.
+    @discardableResult
+    func saveStyle(named name: String, from design: WidgetDesign) -> SavedStyle {
+        let trimmed = name.trimmed
+        let style = SavedStyle(name: trimmed.isEmpty ? "Mon thème" : trimmed, design: design)
+        savedStyles.insert(style, at: 0)
+        store.save(StyleLibrary(styles: savedStyles))
+        return style
+    }
+
+    func renameStyle(_ id: UUID, to name: String) {
+        guard let index = savedStyles.firstIndex(where: { $0.id == id }), !name.trimmed.isEmpty else { return }
+        savedStyles[index].name = name.trimmed
+        store.save(StyleLibrary(styles: savedStyles))
+    }
+
+    func deleteStyle(_ id: UUID) {
+        savedStyles.removeAll { $0.id == id }
+        store.save(StyleLibrary(styles: savedStyles))
+    }
+
+    /// Gives saved widgets a saved look, their content untouched. Returns how many changed.
+    @discardableResult
+    func apply(_ style: SavedStyle, to ids: Set<UUID>) -> Int {
+        var changed = 0
+        for index in designs.indices where ids.contains(designs[index].id) {
+            let restyled = style.applied(to: designs[index])
+            guard restyled != designs[index] else { continue }
+            designs[index] = restyled
+            designs[index].updatedAt = Date()
+            changed += 1
+        }
+        if changed > 0 {
+            store.designs = designs
+            scheduleWidgetReload()
+        }
+        return changed
     }
 
     // MARK: Content

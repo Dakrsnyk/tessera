@@ -68,6 +68,8 @@ enum StoreFile: String {
     case nutrition, fitness, budget, business, portfolio, following, student, travel, car, productivity, life
     // « Mes informations »: what the user said about themselves.
     case profile
+    // « Mes styles »: looks saved by the user to reuse on several widgets.
+    case styles
     // Caches filled from the network.
     case markets, companies, fx, tripWeather, insights
 }

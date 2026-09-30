@@ -24,7 +24,7 @@ struct ClockWidgetView: View {
                         .foregroundStyle(s.secondary)
                 }
                 if s.showsDetails {
-                    BarView(progress: dayProgress, color: s.accent, track: s.track, height: 4)
+                    BarView(progress: dayProgress, color: s.chart, track: s.track, height: 4)
                         .padding(.top, 8)
                 }
             }
@@ -45,10 +45,10 @@ struct ClockWidgetView: View {
                 if s.showsDetails {
                     VStack(spacing: 6) {
                         ZStack {
-                            RingView(progress: dayProgress, lineWidth: 7, color: s.accent, track: s.track)
+                            RingView(progress: dayProgress, lineWidth: 7, color: s.chart, track: s.track)
                             Text(Fmt.percent(dayProgress))
                                 .font(s.number(15))
-                                .foregroundStyle(s.primary)
+                                .foregroundStyle(s.numberColor)
                         }
                         .frame(width: 74, height: 74)
                         Text("de la journée")
@@ -139,7 +139,7 @@ struct CalendarWidgetView: View {
                     WLabel(text: Fmt.weekday(date), style: s, color: s.accent)
                     Text("\(DateMath.calendar.component(.day, from: date))")
                         .font(s.number(58))
-                        .foregroundStyle(s.primary)
+                        .foregroundStyle(s.numberColor)
                         .minimumScaleFactor(0.6)
                     Spacer(minLength: 0)
                     Text(Fmt.monthYear(date))
@@ -236,12 +236,12 @@ struct WorldClockWidgetView: View {
             HStack(spacing: 4) {
                 Image(systemName: WorldCities.isDaytime(in: zone, at: context.date) ? "sun.max.fill" : "moon.fill")
                     .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(s.accent)
+                    .foregroundStyle(s.icon)
                 WLabel(text: WorldCities.name(for: id), style: s)
             }
             Text(Fmt.time(context.date, uses24Hour: context.settings.uses24HourClock, timeZone: zone))
                 .font(s.number(30))
-                .foregroundStyle(s.primary)
+                .foregroundStyle(s.numberColor)
                 .minimumScaleFactor(0.6)
                 .lineLimit(1)
             if s.showsDetails {
@@ -258,7 +258,7 @@ struct WorldClockWidgetView: View {
         return VStack(spacing: 6) {
             Image(systemName: WorldCities.isDaytime(in: zone, at: context.date) ? "sun.max.fill" : "moon.fill")
                 .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(s.accent)
+                .foregroundStyle(s.icon)
             Text(WorldCities.name(for: id))
                 .font(s.text(12, .semibold))
                 .foregroundStyle(s.secondary)
@@ -266,7 +266,7 @@ struct WorldClockWidgetView: View {
                 .minimumScaleFactor(0.7)
             Text(Fmt.time(context.date, uses24Hour: context.settings.uses24HourClock, timeZone: zone))
                 .font(s.number(24))
-                .foregroundStyle(s.primary)
+                .foregroundStyle(s.numberColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
             if s.showsDetails {
@@ -363,10 +363,10 @@ struct ProgressWidgetView: View {
                 Spacer(minLength: 0)
                 Text(Fmt.percent(value))
                     .font(s.number(44))
-                    .foregroundStyle(s.primary)
+                    .foregroundStyle(s.numberColor)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
-                BarView(progress: value, color: s.accent, track: s.track, height: 6)
+                BarView(progress: value, color: s.chart, track: s.track, height: 6)
                 if s.showsDetails {
                     Text(ProgressText.remaining(unit, at: context.date))
                         .font(s.text(11))
@@ -385,7 +385,7 @@ struct ProgressWidgetView: View {
                         if s.showsTitle { WLabel(text: ProgressText.title(unit, at: context.date), style: s) }
                         Text(Fmt.percent(value))
                             .font(s.number(46))
-                            .foregroundStyle(s.primary)
+                            .foregroundStyle(s.numberColor)
                             .lineLimit(1)
                     }
                     Spacer()
@@ -505,7 +505,7 @@ struct CountdownWidgetView: View {
                             .foregroundStyle(s.secondary)
                     }
                     if s.showsDetails, options.countdownMode == .until, !info.isPast {
-                        BarView(progress: elapsedFraction, color: s.accent, track: s.track, height: 5)
+                        BarView(progress: elapsedFraction, color: s.chart, track: s.track, height: 5)
                             .padding(.top, 4)
                     }
                 }
@@ -529,11 +529,11 @@ struct CountdownWidgetView: View {
         if info.isToday {
             Image(systemName: "sparkles")
                 .font(.system(size: size * 0.7, weight: .semibold))
-                .foregroundStyle(s.accent)
+                .foregroundStyle(s.icon)
         } else {
             Text(Fmt.number(info.days))
                 .font(s.number(size))
-                .foregroundStyle(s.primary)
+                .foregroundStyle(s.numberColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
         }
@@ -592,7 +592,7 @@ struct YearDotsWidgetView: View {
                     WLabel(text: Fmt.format(date, template: "yyyy"), style: s)
                     Text(Fmt.percent(Double(day) / Double(total)))
                         .font(s.number(34))
-                        .foregroundStyle(s.primary)
+                        .foregroundStyle(s.numberColor)
                     Spacer(minLength: 0)
                     if s.showsDetails {
                         Text("Jour \(day)")

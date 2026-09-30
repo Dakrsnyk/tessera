@@ -188,7 +188,7 @@ struct FocusWidgetView: View {
                 Spacer(minLength: 0)
                 Text(timerInterval: range, countsDown: true)
                     .font(s.number(context.isSmall ? 40 : 52))
-                    .foregroundStyle(s.primary)
+                    .foregroundStyle(s.numberColor)
                     .multilineTextAlignment(s.textAlignment)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)

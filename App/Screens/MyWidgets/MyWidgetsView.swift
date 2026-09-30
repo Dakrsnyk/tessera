@@ -302,6 +302,16 @@ struct MyWidgetsView: View {
         }
     }
 
+    /// The same widget, same data, opened in the Studio to give it another look.
+    private func makeVariant(of design: WidgetDesign) {
+        guard let copy = model.duplicate(design, asVariant: true) else {
+            router.isPaywallPresented = true
+            return
+        }
+        Haptics.success()
+        router.openEditor(copy, isNew: false, section: StudioSection.themes.rawValue)
+    }
+
     private func duplicate(_ design: WidgetDesign) {
         guard let copy = model.duplicate(design) else {
             router.isPaywallPresented = true
@@ -512,6 +522,11 @@ struct MyWidgetsView: View {
             duplicate(design)
         } label: {
             Label("Dupliquer", systemImage: "plus.square.on.square")
+        }
+        Button {
+            makeVariant(of: design)
+        } label: {
+            Label("Créer une variante", systemImage: "wand.and.stars")
         }
         Button {
             model.toggleFavorite(design)
