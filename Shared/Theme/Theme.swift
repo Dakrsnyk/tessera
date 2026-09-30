@@ -557,7 +557,7 @@ struct ResolvedStyle {
                 onColorful()
             }
         case .glass:
-            let light = ColorMath.luminance(ColorMath.shade(accentHex, -0.1)) > 0.5
+            let light = GlassSurface.isLight(accentHex)
             readable(on: light)
             tint = light ? Color(hex: "16171A") : .white
             tintHex = light ? "16171A" : "FFFFFF"
@@ -637,7 +637,8 @@ struct ResolvedStyle {
     /// The color the text sits on, for backgrounds made of the accent.
     private static func surfaceHex(_ background: ThemeBackground, accentHex: String) -> String {
         switch background {
-        case .glass: ColorMath.shade(accentHex, -0.1)
+        // Glass is darkened by its tint: only very pale tints need dark text.
+        case .glass: GlassSurface.isLight(accentHex) ? "FFFFFF" : "000000"
         default: accentHex
         }
     }
@@ -808,10 +809,17 @@ struct CustomGradient: View {
 struct GlassSurface: View {
     let tintHex: String
 
+    /// Whether the glass is pale enough to need dark text.
+    static func isLight(_ tintHex: String) -> Bool {
+        ColorMath.luminance(tintHex) > 0.55
+    }
+
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color(hex: ColorMath.shade(tintHex, 0.12)), Color(hex: ColorMath.shade(tintHex, -0.32))],
+                colors: Self.isLight(tintHex)
+                    ? [Color(hex: ColorMath.shade(tintHex, 0.2)), Color(hex: ColorMath.shade(tintHex, -0.15))]
+                    : [Color(hex: ColorMath.shade(tintHex, -0.05)), Color(hex: ColorMath.shade(tintHex, -0.48))],
                 startPoint: .topLeading, endPoint: .bottomTrailing
             )
             GeometryReader { geo in
@@ -829,7 +837,7 @@ struct GlassSurface: View {
                         .position(x: geo.size.width * 0.9, y: geo.size.height * 0.95)
                 }
             }
-            LinearGradient(colors: [Color.white.opacity(0.26), Color.white.opacity(0.04)], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [Color.white.opacity(0.2), Color.white.opacity(0.02)], startPoint: .top, endPoint: .bottom)
             LinearGradient(
                 stops: [
                     .init(color: .clear, location: 0.2),

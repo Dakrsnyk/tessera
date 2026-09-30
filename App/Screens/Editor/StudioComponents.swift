@@ -291,19 +291,19 @@ struct StudioStage: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            ZStack {
-                LinearGradient(
-                    colors: family.isAccessory
-                        ? [Color(hex: "1F2A44"), Color(hex: "3B2F5C")]
-                        : [Color(light: "DCE3EA", dark: "1B1F26"), Color(light: "C9D3DD", dark: "11141A")],
-                    startPoint: .topLeading, endPoint: .bottomTrailing
-                )
-                preview
-                    .padding(.vertical, 14)
-                    .animation(.easeInOut(duration: 0.25), value: design)
-                    .animation(.easeInOut(duration: 0.2), value: family)
-            }
-            .frame(maxWidth: .infinity)
+            preview
+                .padding(.vertical, 12)
+                .animation(.easeInOut(duration: 0.25), value: design)
+                .animation(.easeInOut(duration: 0.2), value: family)
+                .frame(maxWidth: .infinity)
+                .background {
+                    LinearGradient(
+                        colors: family.isAccessory
+                            ? [Color(hex: "1F2A44"), Color(hex: "3B2F5C")]
+                            : [Color(light: "DCE3EA", dark: "1B1F26"), Color(light: "C9D3DD", dark: "11141A")],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    )
+                }
             .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
             .overlay(alignment: .topLeading) {
                 if isExample { ExampleBadge().padding(10) }

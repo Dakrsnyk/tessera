@@ -144,7 +144,7 @@ final class StudioTests: XCTestCase {
     }
 
     func testPremiumSettingsWaitForPremiumOnTheHomeScreen() {
-        var design = WidgetDesign(kind: .macros, format: .medium)
+        var design = WidgetDesign(kind: .caloriesLeft, format: .medium)
         design.style.layout = .cards
         design.style.iconStyle = .circle
         design.style.density = .compact

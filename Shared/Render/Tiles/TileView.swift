@@ -50,8 +50,20 @@ struct TileView: View {
         case .progress: progressFraction == nil ? .vertical : .progress
         case .graph: hasVisual || !tile.rows.isEmpty ? .graph : .vertical
         case .list: tile.rows.isEmpty ? .vertical : .list
+        // Two columns of lines don't fit in a small widget: its chart can, its lines can't.
+        case .split: context.isSmall && !(hasVisual && tile.rows.isEmpty) ? .vertical : .split
         case let layout: layout
         }
+    }
+
+    /// The person picked a chart: it is shown where the widget would otherwise show its lines.
+    private var prefersChosenChart: Bool {
+        s.options.chart != .auto && hasVisual && ChartKind.options(for: tile.visual.chartFamily).contains(s.options.chart)
+    }
+
+    /// Round charts need more room than a strip.
+    private var chosenChartIsRound: Bool {
+        prefersChosenChart && [.ring, .pie, .gauge].contains(s.options.chart)
     }
 
     // MARK: Pieces
@@ -239,7 +251,7 @@ struct TileView: View {
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        } else if tile.compactRows && !tile.rows.isEmpty {
+        } else if tile.compactRows && !tile.rows.isEmpty && !prefersChosenChart {
             VStack(alignment: .leading, spacing: 6 * sp) {
                 headerBlock
                 TileRowsView(rows: rows(4), context: context, compact: true)
@@ -259,7 +271,7 @@ struct TileView: View {
                         .padding(.top, 6)
                 } else if hasVisual {
                     visual(compact: true)
-                        .frame(height: isRing ? 44 : 26)
+                        .frame(height: chosenChartIsRound ? 64 : (isRing ? 44 : 26))
                         .padding(.top, 6)
                 }
             }
@@ -303,7 +315,9 @@ struct TileView: View {
     }
 
     @ViewBuilder private var mediumPanel: some View {
-        if !tile.rows.isEmpty {
+        if prefersChosenChart && tile.buttons.isEmpty {
+            visual(compact: false)
+        } else if !tile.rows.isEmpty {
             VStack(alignment: .leading, spacing: 0) {
                 TileRowsView(rows: rows(mediumRowLimit), context: context, compact: false)
                 Spacer(minLength: 0)
@@ -652,7 +666,17 @@ struct TileView: View {
                     captionText(lines: 1)
                 }
             }
-            if hasVisual {
+            if let progress = tile.visual.progressValue, s.options.chart == .auto {
+                // A single value as a large ring.
+                ZStack {
+                    RingView(progress: progress, lineWidth: (context.isSmall ? 8 : 12) * CGFloat(s.options.chartThickness), color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                    Text(Fmt.percent(progress))
+                        .font(s.number(context.isSmall ? 15 : 20))
+                        .foregroundStyle(s.numberColor)
+                }
+                .styleDepth(s)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if hasVisual {
                 visual(compact: context.isSmall)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {

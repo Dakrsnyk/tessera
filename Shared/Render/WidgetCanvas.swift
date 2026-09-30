@@ -76,7 +76,7 @@ struct WidgetCanvas: View {
             }
             return .dark
         case .photo: return .dark
-        case .glass: return ColorMath.luminance(ColorMath.shade(design.accentHex, -0.1)) > 0.5 ? .light : .dark
+        case .glass: return GlassSurface.isLight(design.accentHex) ? .light : .dark
         case .theme: break
         }
         switch design.theme.isDarkSurface {

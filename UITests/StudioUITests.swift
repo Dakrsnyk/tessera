@@ -38,10 +38,23 @@ final class StudioUITests: XCTestCase {
         button.tap()
     }
 
-    /// The sections are in a horizontal bar: the tap scrolls it to the section by itself.
+    /// The sections are in a horizontal bar: it is scrolled toward the section until it can be tapped.
     private func section(_ name: String, file: StaticString = #filePath, line: UInt = #line) {
         let button = app.buttons["studio-\(name)"].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Section « \(name) » introuvable", file: file, line: line)
+        let bar = app.scrollViews.containing(.button, identifier: "studio-content").firstMatch
+        let width = app.windows.firstMatch.frame.width
+        var swipes = 0
+        while !button.isHittable && swipes < 8 {
+            if button.frame.midX < 0 {
+                bar.swipeRight(velocity: .slow)
+            } else if button.frame.midX > width {
+                bar.swipeLeft(velocity: .slow)
+            } else {
+                break
+            }
+            swipes += 1
+        }
         button.tap()
     }
 
