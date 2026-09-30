@@ -172,11 +172,7 @@ final class ProfileUITests: XCTestCase {
         for index in 2...6 {
             let chip = app.buttons["studio-widget-\(index)"]
             XCTAssertTrue(chip.waitForExistence(timeout: 5), "Widget \(index) du pack absent")
-            var swipes = 0
-            while !chip.isHittable && swipes < 4 {
-                first.swipeLeft()
-                swipes += 1
-            }
+            // The row of widgets scrolls sideways: the tap brings the chip into view first.
             chip.tap()
             let selected = expectation(for: NSPredicate(format: "isSelected == true"), evaluatedWith: chip)
             XCTAssertEqual(XCTWaiter.wait(for: [selected], timeout: 4), .completed, "Le widget \(index) ne s'ouvre pas")

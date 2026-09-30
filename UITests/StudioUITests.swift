@@ -32,9 +32,12 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(identifier) » introuvable", file: file, line: line)
         var swipes = 0
         while !button.isHittable && swipes < 12 {
-            // A short drag without momentum over the settings, under the fixed preview.
-            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.72))
-            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.55))
+            // A short drag without momentum over the settings, under the fixed preview: up to reach
+            // what is below, down to come back to what scrolled away above.
+            let height = app.frame.height > 200 ? app.frame.height : 874
+            let isAbove = button.frame.midY < height * 0.5
+            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: isAbove ? 0.55 : 0.72))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: isAbove ? 0.72 : 0.55))
             start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
             swipes += 1
         }
