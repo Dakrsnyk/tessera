@@ -5,6 +5,9 @@ enum HomeRoute: Hashable {
     case space(Space)
     case info
     case infoArea(InfoArea)
+    /// A mini-app (Nutrition, Fitness…), and one of its detailed pages.
+    case app(MiniApp)
+    case page(MiniAppPage)
 }
 
 /// « Mon Quotidien »: the figures of the day as a dashboard of tiles, only for what the person
@@ -163,6 +166,7 @@ private struct NutritionDayTile: View {
     var body: some View {
         let accent = Color(hex: "F08A24")
         VStack(alignment: .leading, spacing: 12) {
+            NavigationLink(value: HomeRoute.app(.nutrition)) {
             HStack(alignment: .center, spacing: 14) {
                 ZStack {
                     RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 10, color: accent, track: accent.opacity(0.16))
@@ -203,6 +207,10 @@ private struct NutritionDayTile: View {
                     macro("Lipides", nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, "3366FF")
                 }
             }
+            .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("daily-nutrition-open")
             HStack(spacing: 8) {
                 Button {
                     router.isFoodScanPresented = true
@@ -215,7 +223,7 @@ private struct NutritionDayTile: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("daily-scan")
-                NavigationLink(value: HomeRoute.space(.nutrition)) {
+                NavigationLink(value: HomeRoute.app(.nutrition)) {
                     Text(mealsText)
                         .font(.subheadline.weight(.bold))
                         .foregroundStyle(Color(hex: "CF6414"))

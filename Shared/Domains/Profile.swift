@@ -277,6 +277,8 @@ struct UserProfile: Codable, Hashable {
     var birthYear: Int?
     var heightCm: Double?
     var weightKg: Double?
+    /// Every weight given, one per day (the last one of the day wins): Nutrition and Fitness draw it.
+    var weightLog: [ValuePoint] = []
     var sex: BodySex?
 
     // Sport (the workouts per week are `FitnessState.weeklyGoal`).
@@ -309,7 +311,7 @@ struct UserProfile: Codable, Hashable {
     var migrated = false
 
     enum CodingKeys: String, CodingKey {
-        case lastName, interests, skippedTopics, birthYear, heightCm, weightKg, sex, fitnessGoal, fitnessLevel, stepGoal
+        case lastName, interests, skippedTopics, birthYear, heightCm, weightKg, weightLog, sex, fitnessGoal, fitnessLevel, stepGoal
         case nutritionAim, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
         case businessClients, studyField, weeklyStudyHours, provided, migrated
     }
@@ -325,6 +327,7 @@ struct UserProfile: Codable, Hashable {
         birthYear = c.optional(.birthYear)
         heightCm = c.optional(.heightCm)
         weightKg = c.optional(.weightKg)
+        weightLog = c.value(.weightLog, [])
         sex = c.optional(.sex)
         fitnessGoal = c.optional(.fitnessGoal)
         fitnessLevel = c.optional(.fitnessLevel)
@@ -343,6 +346,23 @@ struct UserProfile: Codable, Hashable {
     }
 
     func knows(_ fact: ProvidedFact) -> Bool { provided.contains(fact) }
+
+    /// Sets the weight and keeps it in the history (one value a day).
+    mutating func recordWeight(_ kilograms: Double?, at date: Date = Date()) {
+        weightKg = kilograms.flatMap { $0 > 0 ? $0 : nil }
+        guard let weightKg else { return }
+        weightLog.removeAll { DateMath.isSameDay($0.date, date) }
+        weightLog.append(ValuePoint(date: date, value: weightKg))
+        weightLog.sort { $0.date < $1.date }
+        if weightLog.count > 730 { weightLog.removeFirst(weightLog.count - 730) }
+    }
+
+    /// The weights of a period, oldest first; the current weight counts for today when nothing was logged.
+    func weights(from start: Date, to end: Date) -> [ValuePoint] {
+        var points = weightLog.filter { $0.date >= DateMath.startOfDay(start) && $0.date <= end }
+        if points.isEmpty, let weightKg, weightLog.isEmpty { points = [ValuePoint(date: end, value: weightKg)] }
+        return points
+    }
 
     /// Age in whole years, from the birthday when known (exact), else from the birth year.
     func age(birthday: Date?, now: Date = Date()) -> Int? {
@@ -378,6 +398,15 @@ struct UserProfile: Codable, Hashable {
         profile.birthYear = DateMath.calendar.component(.year, from: Date()) - 27
         profile.heightCm = 175
         profile.weightKg = 78
+        // Ten weeks of weigh-ins, slowly going up (the goal is to gain muscle).
+        for week in 0..<10 {
+            // Whole days (noon), so the sample is the same after saving and reading back.
+            let day = DateMath.calendar.date(byAdding: .day, value: -7 * (9 - week), to: DateMath.startOfDay(Date())) ?? Date()
+            let date = day.addingTimeInterval(12 * 3600)
+            let value = 76.4 + Double(week) * 0.18 + (week % 3 == 1 ? 0.2 : 0)
+            profile.weightLog.append(ValuePoint(date: date, value: (value * 10).rounded() / 10))
+        }
+        profile.weightLog[profile.weightLog.count - 1].value = 78
         profile.sex = .male
         profile.fitnessGoal = .bulk
         profile.fitnessLevel = .intermediate

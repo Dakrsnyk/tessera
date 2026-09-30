@@ -13,6 +13,12 @@ final class ProfileUITests: XCTestCase {
         app?.terminate()
     }
 
+    /// Text shown by the Nutrition card of « Mon Quotidien » (its figures sit inside the link to the mini-app).
+    private func nutritionShows(_ text: String) -> Bool {
+        let link = app.buttons["daily-nutrition-open"]
+        return app.staticTexts[text].exists || (link.exists && link.label.contains(text))
+    }
+
     private func launch(_ arguments: [String]) {
         app = XCUIApplication()
         app.launchArguments = arguments
@@ -112,7 +118,7 @@ final class ProfileUITests: XCTestCase {
         tapButton("onboarding-skip")
         XCTAssertTrue(app.buttons["Choisir mes centres d'intérêt"].waitForExistence(timeout: 10), "L'accueil doit inviter à compléter")
         // No target and no budget given: « Mon Quotidien » never makes one up.
-        XCTAssertFalse(app.staticTexts["kcal restantes"].exists, "Calories restantes sans objectif donné")
+        XCTAssertFalse(nutritionShows("kcal restantes"), "Calories restantes sans objectif donné")
         XCTAssertFalse(app.staticTexts["à dépenser par jour d'ici la fin du mois"].exists, "Budget du jour sans budget donné")
         snapshot("home-skipped")
     }
@@ -135,7 +141,8 @@ final class ProfileUITests: XCTestCase {
         launch(["-screenshotScreen", "home"])
         XCTAssertTrue(app.otherElements["daily-section"].waitForExistence(timeout: 12), "« Mon Quotidien » absent de l'accueil")
         // The demo person gave a calorie target: what's left today is shown, from their own meals.
-        XCTAssertTrue(app.staticTexts["kcal restantes"].waitForExistence(timeout: 5) || app.staticTexts["kcal en trop"].exists)
+        XCTAssertTrue(app.buttons["daily-nutrition-open"].waitForExistence(timeout: 5), "La carte Nutrition doit ouvrir la mini-app")
+        XCTAssertTrue(nutritionShows("kcal restantes") || nutritionShows("kcal en trop"), app.buttons["daily-nutrition-open"].label)
         XCTAssertFalse(app.buttons["Créer un widget Nutrition"].exists, "La section Créer ne doit plus être sur l'accueil")
         snapshot("home-daily")
     }

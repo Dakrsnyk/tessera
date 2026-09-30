@@ -87,6 +87,25 @@ enum ScreenshotMode {
                 router.tab = .mine
                 router.startsSelection = true
             }
+            // A mini-app on Home, and one of its pages: app-nutrition, app-nutrition-history…
+            if screen.hasPrefix("app-") {
+                let parts = screen.dropFirst(4).split(separator: "-").map(String.init)
+                if let app = parts.first.flatMap(MiniApp.init(rawValue:)) {
+                    let page: MiniAppPage? = switch parts.dropFirst().first ?? "" {
+                    case "meal": .nutritionMeal(.breakfast, Date())
+                    case "history": .nutritionHistory
+                    case "ideas": .nutritionIdeas
+                    case "nutrients": .nutritionNutrients(Date())
+                    case "saved": .nutritionSavedMeals
+                    default: nil
+                    }
+                    router.tab = .home
+                    Task { @MainActor in
+                        try? await Task.sleep(for: .milliseconds(700))
+                        router.openApp(app, page: page)
+                    }
+                }
+            }
             // « Mes informations » and one of its areas, pushed on Home.
             if screen == "info" || screen.hasPrefix("info-") {
                 router.tab = .home

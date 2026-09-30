@@ -632,7 +632,7 @@ extension AppModel {
 
     /// The body weight: the profile is its only home, every space and widget reads it from there.
     func setWeight(_ kilograms: Double?) {
-        update(\.profile) { $0.weightKg = kilograms.flatMap { $0 > 0 ? $0 : nil } }
+        update(\.profile) { $0.recordWeight(kilograms) }
     }
 
     /// The age, kept as a birth year unless the birthday of « Ma vie » is set.

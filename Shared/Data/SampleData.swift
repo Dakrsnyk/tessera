@@ -128,11 +128,36 @@ enum SampleData {
         for (id, grams, meal, hour) in today {
             if let food = foods.item(id) { state.log(food, grams: grams, meal: meal, at: day(0, hour, 10, from: now)) }
         }
-        let typicalDay = FoodItem(id: "sample.day", name: "Journée", brand: nil, kcal: 100, protein: 6, carbs: 12, fat: 3.3, fiber: 1.3, servingGrams: 100, servingName: "", source: .custom, barcode: nil)
-        let totals: [Double] = [2150, 1980, 2320, 2090, 2410, 1870, 2230, 2050, 2190, 1960, 2280, 2120, 2010]
-        for (offset, kcal) in totals.enumerated() {
-            let date = SampleData.day(-(offset + 1), 13, from: now)
-            state.entries.append(FoodEntry(date: date, meal: .lunch, food: typicalDay, grams: kcal))
+        // Earlier days: real meals from a few usual menus, two days left untracked.
+        let menus: [[(String, Double, MealType)]] = [
+            [("builtin.greekyogurt", 175, .breakfast), ("builtin.granola", 50, .breakfast), ("builtin.blueberries", 100, .breakfast),
+             ("builtin.chickenwrap", 250, .lunch), ("builtin.apple", 180, .snack),
+             ("builtin.salmon", 150, .dinner), ("builtin.rice", 200, .dinner), ("builtin.greenbeans", 120, .dinner)],
+            [("builtin.egg", 100, .breakfast), ("builtin.wholebread", 70, .breakfast), ("builtin.orangejuice", 250, .breakfast),
+             ("builtin.poke", 400, .lunch), ("builtin.proteinbar", 60, .snack),
+             ("builtin.spaghetti", 380, .dinner), ("builtin.caesar", 120, .dinner)],
+            [("builtin.oats", 60, .breakfast), ("builtin.milk2", 250, .breakfast), ("builtin.banana", 120, .breakfast),
+             ("builtin.sandwich", 150, .lunch), ("builtin.soup", 250, .lunch), ("builtin.almonds", 28, .snack),
+             ("builtin.chicken", 160, .dinner), ("builtin.sweetpotato", 200, .dinner), ("builtin.broccoli", 120, .dinner)],
+            [("builtin.bagel", 100, .breakfast), ("builtin.creamcheese", 30, .breakfast), ("builtin.latte", 350, .breakfast),
+             ("builtin.burrito", 280, .lunch), ("builtin.greekyogurt", 175, .snack),
+             ("builtin.stirfry", 350, .dinner), ("builtin.ricenoodles", 175, .dinner)],
+        ]
+        let hours: [MealType: Int] = [.breakfast: 8, .lunch: 12, .snack: 15, .dinner: 19]
+        for offset in 1...45 where offset != 6 && offset != 17 {
+            for (id, grams, meal) in menus[offset % menus.count] {
+                guard let food = foods.item(id) else { continue }
+                // A little variety from one week to the next.
+                let factor = 0.9 + Double((offset * 7) % 5) * 0.05
+                let date = SampleData.day(-offset, hours[meal] ?? 12, from: now)
+                state.entries.append(FoodEntry(date: date, meal: meal, food: food, grams: (grams * factor).rounded()))
+            }
+        }
+        if let oats = foods.item("builtin.oats"), let milk = foods.item("builtin.milk2"), let whey = foods.item("builtin.whey"), let banana = foods.item("builtin.banana") {
+            state.savedMeals = [SavedMeal(name: "Déjeuner protéiné", items: [
+                SavedMeal.Item(food: oats, grams: 60), SavedMeal.Item(food: milk, grams: 250),
+                SavedMeal.Item(food: whey, grams: 30), SavedMeal.Item(food: banana, grams: 120),
+            ])]
         }
         state.entries.sort { $0.date < $1.date }
         state.favorites = ["builtin.greekyogurt", "builtin.banana", "builtin.latte", "builtin.whey"].compactMap { foods.item($0) }

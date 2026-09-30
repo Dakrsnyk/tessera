@@ -20,9 +20,11 @@ jobs:
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
-      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') }}
+      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') }}
       # [studio] runs the logic tests and the Studio UI tests, then only the Widget Studio captures.
       STUDIO: ${{ contains(github.event.head_commit.message, '[studio]') }}
+      # [apps] runs the logic tests and the mini-app UI tests, then only the mini-app captures.
+      APPS: ${{ contains(github.event.head_commit.message, '[apps]') }}
       # [place] only builds for the simulator and runs the widget placement tests (cheapest check).
       PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
       # [shots] builds (IPA included) and takes the screenshots, without the tests.
@@ -122,6 +124,7 @@ jobs:
           ONLY=""
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
+          if [ "$APPS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/DataEntryUITests -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
           if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
@@ -184,8 +187,22 @@ jobs:
             shoot gallery-charts gallery-charts top light
             shoot gallery-looks gallery-looks top light
           }
+          # The mini-apps opened from Home: each dashboard, then its pages.
+          app_shots() {
+            for screen in app-nutrition app-nutrition-meal app-nutrition-history app-nutrition-ideas app-nutrition-nutrients app-nutrition-saved; do
+              WAIT=7 shoot $screen $screen top light
+            done
+            WAIT=7 shoot app-nutrition-end app-nutrition bottom light
+            WAIT=7 shoot app-nutrition-history-end app-nutrition-history bottom light
+            WAIT=7 shoot app-nutrition-dark app-nutrition top dark
+          }
           if [ "$STUDIO" = "true" ]; then
             studio_shots
+            exit 0
+          fi
+          if [ "$APPS" = "true" ]; then
+            app_shots
+            WAIT=7 shoot app-nutrition-fresh app-nutrition-fresh top light
             exit 0
           fi
           for screen in home spaces store editor-v2 paywall settings mywidgets space-nutrition space-fitness space-budget space-business space-student space-travel space-car space-productivity space-investing space-markets space-life; do
@@ -250,12 +267,14 @@ jobs:
           for area in nutrition fitness student; do shoot info-$area info-$area top light; done
           WAIT=10 shoot pack-gym-setup pack-gym-setup top light
           studio_shots
+          app_shots
           # A new person (these clear the demo data, so they come last).
           shoot home-fresh home-fresh top light
           shoot editor-fresh editor-fresh top light
           shoot editor-fresh-data editor-fresh center light
           WAIT=10 shoot pack-nutrition-setup-fresh pack-nutrition-setup-fresh top light
           shoot info-fresh info-fresh top light
+          WAIT=7 shoot app-nutrition-fresh app-nutrition-fresh top light
 
       - name: App Store screenshots
         id: marketing

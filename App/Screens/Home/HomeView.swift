@@ -32,9 +32,17 @@ struct HomeView: View {
             .navigationTitle("Tessera")
             .navigationDestination(for: HomeRoute.self) { route in
                 switch route {
-                case let .space(space): SpaceView(space: space, isEmbedded: true)
+                case let .space(space):
+                    // A space with its mini-app opens the mini-app; the others show their data.
+                    if let app = MiniApp(space: space), app.isBuilt {
+                        MiniAppView(app: app)
+                    } else {
+                        SpaceView(space: space, isEmbedded: true)
+                    }
                 case .info: MyInfoView()
                 case let .infoArea(area): InfoAreaView(area: area)
+                case let .app(app): MiniAppView(app: app)
+                case let .page(page): MiniAppPageView(page: page)
                 }
             }
             .task {

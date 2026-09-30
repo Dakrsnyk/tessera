@@ -67,6 +67,16 @@ final class Router {
         spacePath = [space]
     }
 
+    /// Opens a mini-app on Home, over « Mon Quotidien », with an optional page on top.
+    func openApp(_ app: MiniApp, page: MiniAppPage? = nil) {
+        editor = nil
+        content = nil
+        tab = .home
+        var path: [HomeRoute] = [.app(app)]
+        if let page { path.append(.page(page)) }
+        homePath = path
+    }
+
     func openEditor(_ design: WidgetDesign, isNew: Bool, section: String? = nil) {
         content = nil
         editor = EditorRequest(design: design, isNew: isNew, section: section)
@@ -102,7 +112,10 @@ final class Router {
         case .explore, .store: tab = .explore
         case .scanFood: isFoodScanPresented = true
         case let .space(id):
-            if let space = Space(rawValue: id) {
+            if let space = Space(rawValue: id), let app = MiniApp(space: space), app.isBuilt {
+                // A widget opens its mini-app: the loop widget → iPhone → mini-app.
+                openApp(app)
+            } else if let space = Space(rawValue: id) {
                 openSpace(space)
             } else {
                 tab = .spaces

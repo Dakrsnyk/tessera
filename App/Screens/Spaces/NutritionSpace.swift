@@ -136,7 +136,12 @@ struct NutritionSpaceSections: View {
 struct FoodSearchView: View {
     /// Opens the camera at once (from a Nutrition widget). Without a camera, the search is shown.
     var startsWithScanner = false
+    /// The meal the food goes to (chosen from a meal of the Nutrition mini-app), else the current one.
+    var presetMeal: MealType? = nil
+    /// The day the food is added to (today, or a day browsed in the mini-app).
+    var day: Date = Date()
     @Environment(AppModel.self) private var model
+    @State private var category: FoodCategory?
     @Environment(\.dismiss) private var dismiss
     @State private var query = ""
     @State private var online: [FoodItem] = []
@@ -150,6 +155,9 @@ struct FoodSearchView: View {
     @State private var didOfferScanner = false
 
     private var local: [FoodItem] {
+        if let category, query.trimmed.isEmpty {
+            return FoodDatabase.foods(in: category)
+        }
         let recent = model.nutrition.favorites + model.nutrition.recentFoods + model.nutrition.customFoods
         var seen = Set<String>()
         let mine = recent.filter { seen.insert($0.id).inserted }
@@ -158,6 +166,14 @@ struct FoodSearchView: View {
         let builtin = FoodDatabase.search(query).filter { !seen.contains($0.id) }
         return filteredMine + builtin
     }
+
+    /// Saved meals, offered first when nothing is typed: a whole meal in one tap.
+    private var savedMeals: [SavedMeal] {
+        let q = FoodDatabase.normalized(query)
+        return model.nutrition.savedMeals.filter { q.isEmpty || FoodDatabase.normalized($0.name).contains(q) }
+    }
+
+    @State private var loggedMeal: SavedMeal?
 
     var body: some View {
         NavigationStack {
@@ -180,8 +196,47 @@ struct FoodSearchView: View {
                         .buttonStyle(.bordered)
                     }
                 }
-                Section(query.trimmed.isEmpty ? "Suggestions" : "Résultats") {
-                    ForEach(local.prefix(60)) { food in
+                if query.trimmed.isEmpty {
+                    Section {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 8) {
+                                FilterChip(title: "Pour toi", isSelected: category == nil) { category = nil }
+                                ForEach(FoodCategory.allCases) { item in
+                                    FilterChip(title: item.title, symbol: item.symbol, isSelected: category == item) {
+                                        category = category == item ? nil : item
+                                    }
+                                }
+                            }
+                            .padding(.vertical, 2)
+                        }
+                        .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                    }
+                    .listRowBackground(Color.clear)
+                }
+                if category == nil, !savedMeals.isEmpty {
+                    Section("Mes repas") {
+                        ForEach(savedMeals) { saved in
+                            Button {
+                                loggedMeal = saved
+                            } label: {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(saved.name).foregroundStyle(Color.primary).lineLimit(1)
+                                        Text(saved.items.map(\.food.name).joined(separator: ", "))
+                                            .font(.caption)
+                                            .foregroundStyle(Color.secondary)
+                                            .lineLimit(1)
+                                    }
+                                    Spacer()
+                                    Text("\(TF.int(saved.totals.kcal)) kcal").font(.subheadline).foregroundStyle(Color.secondary).monospacedDigit()
+                                    Image(systemName: "plus.circle").foregroundStyle(.tint)
+                                }
+                            }
+                        }
+                    }
+                }
+                Section(category.map(\.title) ?? (query.trimmed.isEmpty ? "Suggestions" : "Résultats")) {
+                    ForEach(local.prefix(80)) { food in
                         foodRow(food)
                     }
                 }
@@ -227,7 +282,10 @@ struct FoodSearchView: View {
                 }
             }
             .sheet(item: $selected) { food in
-                FoodLogSheet(food: food) { dismiss() }
+                FoodLogSheet(food: food, presetMeal: presetMeal, day: day) { dismiss() }
+            }
+            .sheet(item: $loggedMeal) { saved in
+                SavedMealLogSheet(saved: saved, presetMeal: presetMeal, day: day) { dismiss() }
             }
             // The quantity sheet opens once the scanner or the new food has closed:
             // a sheet asked for while another one is still closing would not open.
@@ -275,9 +333,10 @@ struct FoodSearchView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(food.displayName).foregroundStyle(Color.primary).lineLimit(1)
-                    Text("\(TF.int(food.kcal)) kcal / 100 g · P \(TF.int(food.protein)) · G \(TF.int(food.carbs)) · L \(TF.int(food.fat))")
+                    Text(FoodText.summary(food))
                         .font(.caption)
                         .foregroundStyle(Color.secondary)
+                        .lineLimit(1)
                 }
                 Spacer()
                 Image(systemName: "plus.circle").foregroundStyle(.tint)
@@ -323,9 +382,12 @@ struct FoodSearchView: View {
     }
 }
 
-/// Grams and meal for a food, then saves the entry.
+/// A food's nutrition, then the quantity and the meal, then it's added: the scanner and the search
+/// both end here.
 struct FoodLogSheet: View {
     let food: FoodItem
+    var presetMeal: MealType? = nil
+    var day: Date = Date()
     /// Closes the food search too, when logging from it: one motion instead of two sheets closing in turn.
     var onDone: (() -> Void)?
     @Environment(AppModel.self) private var model
@@ -335,16 +397,36 @@ struct FoodLogSheet: View {
 
     var body: some View {
         let totals = food.nutrients(grams: grams)
+        let known = NutritionTiles.Targets(model.profile)
+        let left = model.nutrition.goals.kcal - NutritionMath.totals(model.nutrition, on: day).kcal - totals.kcal
         SheetForm(title: food.name, canSave: grams > 0, dismissesOnSave: onDone == nil, onSave: save) {
             Section {
+                VStack(alignment: .leading, spacing: 4) {
+                    if let brand = food.brand, !brand.isEmpty {
+                        Text(brand).font(.subheadline.weight(.semibold)).foregroundStyle(Color.secondary)
+                    }
+                    Text("Pour 100 g : \(TF.int(food.kcal)) kcal · protéines \(TF.decimal(food.protein, 1)) g · glucides \(TF.decimal(food.carbs, 1)) g · lipides \(TF.decimal(food.fat, 1)) g")
+                        .font(.footnote)
+                        .foregroundStyle(Color.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            Section {
                 NumberRow(title: "Quantité", value: $grams, unit: "g")
-                if !food.servingName.isEmpty {
-                    Button("Portion : \(food.servingName) (\(TF.int(food.servingGrams)) g)") {
-                        grams = food.servingGrams
+                    .accessibilityIdentifier("food-grams")
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(portions) { portion in
+                            FilterChip(title: portion.title, isSelected: abs(grams - portion.grams) < 0.5) { grams = portion.grams }
+                        }
                     }
                 }
                 Picker("Repas", selection: $meal) {
                     ForEach(MealType.allCases) { Text($0.title).tag($0) }
+                }
+            } footer: {
+                if known.kcal {
+                    Text(left >= 0 ? "Après ajout, il te restera \(TF.int(left)) kcal." : "Après ajout, tu dépasseras ton objectif de \(TF.int(-left)) kcal.")
                 }
             }
             Section("Apport") {
@@ -353,17 +435,97 @@ struct FoodLogSheet: View {
                 ValueRow(title: "Glucides", value: "\(TF.decimal(totals.carbs, 1)) g")
                 ValueRow(title: "Lipides", value: "\(TF.decimal(totals.fat, 1)) g")
                 ValueRow(title: "Fibres", value: "\(TF.decimal(totals.fiber, 1)) g")
+                if let sugars = totals.sugars { ValueRow(title: "Sucres", value: "\(TF.decimal(sugars, 1)) g") }
+                if let saturated = totals.saturatedFat { ValueRow(title: "Gras saturés", value: "\(TF.decimal(saturated, 1)) g") }
+                if let sodium = totals.sodiumMg { ValueRow(title: "Sodium", value: "\(TF.int(sodium)) mg") }
+                if let cholesterol = totals.cholesterolMg { ValueRow(title: "Cholestérol", value: "\(TF.int(cholesterol)) mg") }
             }
         }
-        .onAppear { grams = food.servingGrams > 0 ? food.servingGrams : 100 }
+        .onAppear {
+            grams = food.servingGrams > 0 ? food.servingGrams : 100
+            meal = presetMeal ?? .current()
+        }
+    }
+
+    private struct Portion: Identifiable {
+        let title: String
+        let grams: Double
+        var id: String { title }
+    }
+
+    /// Quick quantities: half, one or two usual portions, and 100 g.
+    private var portions: [Portion] {
+        let serving = food.servingGrams > 0 ? food.servingGrams : 100
+        var list = [
+            Portion(title: "½ portion", grams: (serving / 2).rounded()),
+            Portion(title: food.servingName.isEmpty ? "1 portion" : food.servingName, grams: serving),
+            Portion(title: "2 portions", grams: serving * 2),
+        ]
+        if abs(serving - 100) > 1 { list.append(Portion(title: "100 g", grams: 100)) }
+        return list
     }
 
     private func save() {
         let amount = grams
         let chosen = meal
-        model.update(\.nutrition) { $0.log(food, grams: amount, meal: chosen) }
+        let date = NutritionMath.entryDate(for: chosen, on: day)
+        model.update(\.nutrition) { $0.log(food, grams: amount, meal: chosen, at: date) }
         Haptics.success()
         onDone?()
+    }
+}
+
+/// A saved meal logged in one go, into the meal chosen.
+struct SavedMealLogSheet: View {
+    let saved: SavedMeal
+    var presetMeal: MealType? = nil
+    var day: Date = Date()
+    var onDone: (() -> Void)?
+    @Environment(AppModel.self) private var model
+    @State private var meal: MealType = .current()
+
+    var body: some View {
+        let totals = saved.totals
+        SheetForm(title: saved.name, dismissesOnSave: onDone == nil, onSave: save) {
+            Section {
+                Picker("Repas", selection: $meal) {
+                    ForEach(MealType.allCases) { Text($0.title).tag($0) }
+                }
+            }
+            Section("Aliments") {
+                ForEach(Array(saved.items.enumerated()), id: \.offset) { _, item in
+                    ValueRow(title: item.food.name, value: "\(TF.int(item.grams)) g")
+                }
+            }
+            Section("Apport") {
+                ValueRow(title: "Calories", value: "\(TF.int(totals.kcal)) kcal")
+                ValueRow(title: "Protéines", value: "\(TF.decimal(totals.protein, 1)) g")
+                ValueRow(title: "Glucides", value: "\(TF.decimal(totals.carbs, 1)) g")
+                ValueRow(title: "Lipides", value: "\(TF.decimal(totals.fat, 1)) g")
+            }
+        }
+        .onAppear { meal = presetMeal ?? .current() }
+    }
+
+    private func save() {
+        let chosen = meal
+        let items = saved.items
+        let target = day
+        model.update(\.nutrition) { $0.log(items, meal: chosen, on: target) }
+        Haptics.success()
+        onDone?()
+    }
+}
+
+enum FoodText {
+    /// "165 kcal / 100 g · P 31 · G 0 · L 4": the line under a food in lists.
+    static func summary(_ food: FoodItem) -> String {
+        "\(TF.int(food.kcal)) kcal / 100 g · P \(TF.int(food.protein)) · G \(TF.int(food.carbs)) · L \(TF.int(food.fat))"
+    }
+
+    /// "1 portion · 120 g · 198 kcal"
+    static func portion(_ food: FoodItem, grams: Double) -> String {
+        "\(TF.int(grams)) g · \(TF.int(food.nutrients(grams: grams).kcal)) kcal"
     }
 }
 
@@ -473,7 +635,7 @@ struct NutritionGoalsEditor: View {
         model.update(\.profile) { profile in
             profile.sex = chosenSex
             profile.heightCm = height
-            profile.weightKg = weight
+            if profile.weightKg != weight { profile.recordWeight(weight) }
             profile.nutritionAim = aim
         }
         if model.life.birthday == nil { model.setAge(age) }
