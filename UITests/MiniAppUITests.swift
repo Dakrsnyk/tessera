@@ -75,6 +75,14 @@ final class MiniAppUITests: XCTestCase {
 
     private var entryRows: XCUIElementQuery { app.buttons.matching(identifier: "entry-row") }
 
+    /// The « Fermer » of the sheet on top (the screen below can expose one too).
+    private func closeSheet(file: StaticString = #filePath, line: UInt = #line) {
+        let buttons = app.buttons.matching(NSPredicate(format: "label == %@", "Fermer"))
+        let close = buttons.allElementsBoundByIndex.first { $0.isHittable }
+        XCTAssertNotNil(close, "Bouton Fermer introuvable", file: file, line: line)
+        close?.tap()
+    }
+
     /// Any element whose label contains a text (list rows merge their texts into one label).
     private func element(containing text: String) -> XCUIElement {
         app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
@@ -147,7 +155,7 @@ final class MiniAppUITests: XCTestCase {
         app.buttons.matching(identifier: "exercise-info").firstMatch.tap()
         XCTAssertTrue(app.otherElements["exercise-demo"].waitForExistence(timeout: 8), "Fiche d'exercice absente")
         snapshot("fitness-exercise-sheet")
-        app.buttons["Fermer"].tap()
+        closeSheet()
         XCTAssertTrue(element(containing: "Développé couché (barre)").waitForExistence(timeout: 5), "Retour à la recherche")
 
         // The exercise page: add it to a session of the program.
@@ -174,7 +182,7 @@ final class MiniAppUITests: XCTestCase {
         if info.waitForExistence(timeout: 3) {
             info.tap()
             XCTAssertTrue(app.otherElements["exercise-demo"].waitForExistence(timeout: 8), "Fiche d'exercice absente")
-            app.buttons["Fermer"].tap()
+            closeSheet()
             XCTAssertTrue(done.waitForExistence(timeout: 5), "Retour à la séance, au même endroit")
         }
         XCTAssertEqual(app.state, .runningForeground)
