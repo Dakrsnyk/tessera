@@ -249,7 +249,6 @@ struct StudioPreviewTile: View {
     var body: some View {
         VStack(spacing: 6) {
             WidgetPreview(design: design, family: family, payload: payload, width: width)
-                .allowsHitTesting(false)
                 .padding(3)
                 .overlay {
                     RoundedRectangle(cornerRadius: WidgetMetrics.cornerRadius * width / WidgetMetrics.size(family).width + 3, style: .continuous)
@@ -279,6 +278,8 @@ struct StudioPreviewTile: View {
                 }
             }
         }
+        // The whole tile, preview included, is what the finger taps.
+        .contentShape(Rectangle())
     }
 }
 

@@ -683,7 +683,7 @@ struct StylePreset: Identifiable, Hashable {
             $0.titleCase = .lower
             $0.numberWeight = .regular
         },
-        make("glass", "Glass", "Verre dépoli et reflets", theme: .liquidGlass, accent: "7FA7FF"),
+        make("glass", "Glass", "Verre dépoli et reflets", theme: .liquidGlass, accent: "5B7FE0"),
         make("monochrome", "Monochrome", "Gris doux, chiffres noirs", theme: .light, accent: "3A3A3C", background: .color("E9E9EB")) {
             $0.shape = .panel
             $0.chartHex = "3A3A3C"

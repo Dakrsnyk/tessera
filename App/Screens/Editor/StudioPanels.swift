@@ -713,12 +713,13 @@ struct ApplyStyleSheet: View {
                                     .foregroundStyle(selection.contains(design.id) ? Color.accentColor : .secondary)
                                 let family = design.displayFormat.family
                                 WidgetPreview(design: style.applied(to: design), family: family, payload: model.previewPayload(for: design), width: family == .systemSmall ? 52 : 100)
-                                    .allowsHitTesting(false)
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(design.name).font(.subheadline.weight(.medium)).foregroundStyle(.primary)
                                     Text(design.kindTitle).font(.caption).foregroundStyle(.secondary)
                                 }
+                                Spacer(minLength: 0)
                             }
+                            .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
                     }

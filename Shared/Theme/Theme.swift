@@ -826,7 +826,7 @@ struct GlassSurface: View {
                 let size = max(geo.size.width, geo.size.height)
                 ZStack {
                     Circle()
-                        .fill(Color(hex: ColorMath.shade(tintHex, Self.isLight(tintHex) ? 0.55 : 0.3)).opacity(0.45))
+                        .fill(Color(hex: ColorMath.shade(tintHex, Self.isLight(tintHex) ? 0.55 : 0.2)).opacity(0.35))
                         .frame(width: size * 0.7, height: size * 0.7)
                         .blur(radius: size * 0.16)
                         .position(x: geo.size.width * 0.18, y: geo.size.height * 0.12)
@@ -837,7 +837,7 @@ struct GlassSurface: View {
                         .position(x: geo.size.width * 0.9, y: geo.size.height * 0.95)
                 }
             }
-            LinearGradient(colors: [Color.white.opacity(0.2), Color.white.opacity(0.02)], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [Color.white.opacity(0.14), Color.white.opacity(0.02)], startPoint: .top, endPoint: .bottom)
             LinearGradient(
                 stops: [
                     .init(color: .clear, location: 0.2),

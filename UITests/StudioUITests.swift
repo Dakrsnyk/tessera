@@ -73,11 +73,11 @@ final class StudioUITests: XCTestCase {
 
         section("border")
         tapButton("border-dashed")
-        XCTAssertTrue(app.buttons["border-dashed"].isSelected)
+        XCTAssertTrue(waitForSelection("border-dashed"), "La bordure choisie n'est pas sélectionnée")
 
         section("layout")
-        tapButton("layout-cards")
-        XCTAssertTrue(app.buttons["layout-cards"].isSelected)
+        tapButton("layout-minimal")
+        XCTAssertTrue(waitForSelection("layout-minimal"), "La disposition choisie n'est pas sélectionnée")
         snapshot("layout")
 
         section("myStyles")
@@ -104,10 +104,10 @@ final class StudioUITests: XCTestCase {
         XCTAssertEqual(app.textFields["widget-name"].value as? String, "Studio test")
         section("border")
         XCTAssertTrue(app.buttons["border-dashed"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["border-dashed"].isSelected, "La bordure est gardée")
+        XCTAssertTrue(waitForSelection("border-dashed"), "La bordure est gardée")
         section("layout")
-        XCTAssertTrue(app.buttons["layout-cards"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["layout-cards"].isSelected, "La disposition est gardée")
+        XCTAssertTrue(app.buttons["layout-minimal"].waitForExistence(timeout: 5))
+        XCTAssertTrue(waitForSelection("layout-minimal"), "La disposition est gardée")
         section("myStyles")
         XCTAssertTrue(app.buttons["style-apply-Nuit test"].waitForExistence(timeout: 5), "Mes styles sont gardés")
         snapshot("reopened")
@@ -121,6 +121,13 @@ final class StudioUITests: XCTestCase {
             XCTAssertTrue(app.buttons["studio-\(name)"].isSelected, "La section \(name) ne s'ouvre pas")
             XCTAssertEqual(app.state, .runningForeground, "Section \(name)")
         }
+    }
+
+    /// Waits for a choice to show as selected (the state is updated with an animation).
+    private func waitForSelection(_ identifier: String, timeout: TimeInterval = 4) -> Bool {
+        let predicate = NSPredicate(format: "isSelected == true")
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: app.buttons[identifier].firstMatch)
+        return XCTWaiter().wait(for: [expectation], timeout: timeout) == .completed
     }
 
     private func waitForDisappearance(_ element: XCUIElement, timeout: TimeInterval = 8) -> Bool {
