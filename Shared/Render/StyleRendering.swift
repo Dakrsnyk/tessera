@@ -248,7 +248,7 @@ struct TexturePattern: Shape {
                 x += step
             }
         case .grain, .noise, .paper:
-            var generator = SeededRandom(seed: kind == .paper ? 7 : (kind == .noise ? 13 : 3))
+            var generator = TextureRandom(seed: kind == .paper ? 7 : (kind == .noise ? 13 : 3))
             let area = rect.width * rect.height
             let count = Int(area / (kind == .noise ? 22 : 38))
             let size: CGFloat = kind == .noise ? 1.4 : 1
@@ -277,7 +277,7 @@ struct TexturePattern: Shape {
 }
 
 /// The same "random" pattern every time, so a texture never flickers between refreshes.
-struct SeededRandom {
+struct TextureRandom {
     private var state: UInt64
 
     init(seed: UInt64) { state = seed &* 2_862_933_555_777_941_757 &+ 3_037_000_493 }

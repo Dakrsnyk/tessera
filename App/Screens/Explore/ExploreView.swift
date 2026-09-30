@@ -103,7 +103,12 @@ struct ExploreView: View {
         }
         if let id = router.openedPackID {
             router.openedPackID = nil
-            openedPack = PackCatalog.pack(id)
+            // Presented once the Store is on screen: a sheet asked for while the tab is still
+            // switching can be dropped.
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(400))
+                openedPack = PackCatalog.pack(id)
+            }
         }
     }
 

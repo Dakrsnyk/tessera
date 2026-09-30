@@ -131,9 +131,21 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Sources de données** : Open Food Facts (ODbL) et une base intégrée d'aliments courants, Open-Meteo, CoinGecko, SEC EDGAR (chiffres officiels, domaine public), Frankfurter (taux de la BCE), Finnhub (cours des actions, clé facultative). Les écrans de placements sont informatifs et ne donnent aucun conseil financier ; les valeurs nutritionnelles sont indicatives.
 
-**12 styles de widgets** (4 gratuits, 8 Premium), couleurs d'accent, fonds (couleur, dégradé, photo), polices, alignement et affichage des détails.
+**Widget Studio** : l'éditeur de widget, avec l'aperçu toujours visible en haut qui change à chaque réglage, et 14 sections :
+- **Contenu** : nom, données du widget, options, et chaque élément affiché ou masqué (titre, icône, valeur, légende, graphique, boutons, chaque ligne, chaque part d'une répartition), avec la couleur de chaque ligne (protéines, glucides, lipides, catégories…).
+- **Thèmes** : 16 thèmes complets (Midnight, Pure White, Ocean, Forest, Sunset, Cyber, Luxury, Minimal Black, Glass, Monochrome, Sakura, Sable, Arctique, Hacker, Stade, Cockpit) qui règlent tout d'un coup ; chaque réglage reste ensuite modifiable.
+- **Style** : 37 styles (les 12 d'origine, inchangés, et 25 nouveaux : Moderne, Carte, Doux, Compact, Liquid Glass, Premium, Dégradé, Néon, Éditorial, Magazine, Tableau de bord, Audacieux, Data, Luxe, Sport, Business, Terminal, Plan, Pastel, Papier, Brutaliste, Carbone, Vapor, Ardoise, Brume). Les nouveaux changent aussi la composition : disposition, formes, bordure, profondeur, texture, icônes.
+- **Couleurs** : 12 palettes, la couleur principale (nuancier ou sélecteur), puis texte, texte secondaire, chiffres, icônes, graphiques, positif et négatif.
+- **Fond** : style, couleur (nuancier ou sélecteur), dégradé automatique ou personnel (2 couleurs, direction, intensité, idées), verre, photo avec voile réglable, et texture (grain, papier, points, grille, lignes, rayures, bruit).
+- **Bordure** (pleine, tirets, points, double, lumineuse, dégradé ; épaisseur, opacité, couleur), **Profondeur** (légère, forte, lueur, flottant, relief ; intensité, rayon, distance, couleur), **Forme** (arrondi, doux, carré, capsule, panneau).
+- **Texte** : 8 styles typographiques, police, tailles (chiffres, titre, texte), graisses, casse des titres, espacement des lettres, chiffres à largeur fixe, alignement.
+- **Icônes** : présence, cadre (simple, pastille, carré, contour), famille (pleines, traits, rondes, carrées), position, taille, couleur.
+- **Disposition** (11 : Auto, Vertical, Horizontal, Minimal, Focus, Deux colonnes, Données, Liste, Progression, Graphique, Cartes), **Graphique** (ligne, aire, barres, histogramme, points, sparkline, évolution, comparaison, anneau, cercle, jauge, barre ; épaisseur, remplissage, valeurs, couleur) et **Densité** (aéré, équilibré, dense).
+- **Mes styles** : enregistrer le look d'un widget sous un nom (« Mon thème »), l'appliquer à ce widget ou à plusieurs widgets d'un coup, le renommer, le supprimer.
 
-**Gratuit** : 30 widgets, 4 styles, 8 couleurs, 5 widgets enregistrés, 3 habitudes.
+Tout est enregistré avec le widget : on peut le modifier plus tard, le dupliquer ou « Créer une variante » (Mes widgets), changer ses données sans perdre le design et l'inverse. Ce qu'iOS ne permet pas n'est pas promis : un widget ne peut pas être vraiment transparent (le Verre et les dégradés sont dessinés), iOS dessine lui-même le contour du widget (bordures et ombres s'appliquent à l'intérieur), l'écran verrouillé est d'une seule teinte, et seules les polices système s'affichent dans les widgets. Les dispositions et graphiques s'appliquent aux widgets de données ; l'horloge, le calendrier, la météo et les autres widgets d'origine gardent leur mise en page et prennent tout le reste du look.
+
+**Gratuit** : 30 widgets, 8 styles, 8 couleurs, dispositions, formes, texte, icônes et densité, 5 widgets enregistrés, 3 habitudes. Les couleurs personnalisées, dégradés personnels, textures, bordures et ombres sont Premium (on peut les essayer dans le Studio).
 **Premium** : tout, sans limite. Mensuel, annuel (essai 7 jours) ou à vie.
 
 ### Architecture
