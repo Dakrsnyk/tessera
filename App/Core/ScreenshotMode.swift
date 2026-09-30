@@ -118,6 +118,15 @@ enum ScreenshotMode {
                     case "studies-assignments": .studiesAssignments
                     case "studies-grades": .studiesGrades
                     case "studies-revision": .studiesRevision
+                    case "finances-transactions": .financesTransactions
+                    case "finances-categories": .financesCategories
+                    case "finances-bills": .financesBills
+                    case "finances-savings": .financesSavings
+                    case "finances-trends": .financesTrends
+                    case "business-sales": .businessSales
+                    case "business-results": .businessResults
+                    case "business-recurring": .businessRecurring
+                    case "business-metrics": .businessMetrics
                     default: nil
                     }
                     // A workout under way, two sets done, for the session page.

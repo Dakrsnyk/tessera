@@ -16,7 +16,7 @@ struct StudiesTimetablePage: View {
                 EmptyStateView(symbol: "calendar.day.timeline.left", title: "Ton horaire",
                                message: state.courses.isEmpty ? "Ajoute d'abord un cours, puis ses plages de la semaine." : "Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accueil et dans ton planning.",
                                actionTitle: state.courses.isEmpty ? "Ajouter un cours" : "Ajouter une plage") {
-                    sheet = state.courses.isEmpty ? .course(Course(name: "")) : .slot(Studies.newSlot(state))
+                    sheet = state.courses.isEmpty ? StudiesSheet.course(Course(name: "")) : StudiesSheet.slot(Studies.newSlot(state))
                 }
                 .tint(Color(hex: Studies.accentHex))
             } else {

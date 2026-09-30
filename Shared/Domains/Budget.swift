@@ -78,6 +78,14 @@ struct Account: Codable, Hashable, Identifiable {
     var isLiability = false
 }
 
+/// Money coming in: a pay, a freelance job, a refund…
+struct IncomeEntry: Codable, Hashable, Identifiable {
+    var id = UUID()
+    var amount: Double
+    var label: String = "Salaire"
+    var date = Date()
+}
+
 struct ValuePoint: Codable, Hashable {
     var date: Date
     var value: Double
@@ -92,9 +100,10 @@ struct BudgetState: Codable, Hashable {
     var goals: [SavingsGoal] = []
     var accounts: [Account] = []
     var netWorthHistory: [ValuePoint] = []
+    var incomes: [IncomeEntry] = []
 
     enum CodingKeys: String, CodingKey {
-        case monthlyBudget, categories, expenses, quickExpenses, bills, goals, accounts, netWorthHistory
+        case monthlyBudget, categories, expenses, quickExpenses, bills, goals, accounts, netWorthHistory, incomes
     }
 
     init() {}
@@ -109,6 +118,7 @@ struct BudgetState: Codable, Hashable {
         goals = c.value(.goals, [])
         accounts = c.value(.accounts, [])
         netWorthHistory = c.value(.netWorthHistory, [])
+        incomes = c.value(.incomes, [])
     }
 
     static let defaultCategories: [BudgetCategory] = [
@@ -134,6 +144,27 @@ struct BudgetState: Codable, Hashable {
         expenses.append(expense)
         let cutoff = expense.date.addingTimeInterval(-400 * 86_400)
         expenses.removeAll { $0.date < cutoff }
+    }
+
+    mutating func addIncome(_ income: IncomeEntry) {
+        incomes.append(income)
+        let cutoff = income.date.addingTimeInterval(-800 * 86_400)
+        incomes.removeAll { $0.date < cutoff }
+    }
+
+    /// Replaces an expense (same id) or adds it.
+    mutating func save(_ expense: Expense) {
+        if let index = expenses.firstIndex(where: { $0.id == expense.id }) { expenses[index] = expense } else { add(expense) }
+    }
+
+    mutating func save(_ income: IncomeEntry) {
+        if let index = incomes.firstIndex(where: { $0.id == income.id }) { incomes[index] = income } else { addIncome(income) }
+    }
+
+    /// Adds a payment to a savings goal.
+    mutating func deposit(_ amount: Double, toGoal id: UUID) {
+        guard amount > 0, let index = goals.firstIndex(where: { $0.id == id }) else { return }
+        goals[index].saved += amount
     }
 
     /// Records today's net worth so the widget can draw its trend (one point per day).
@@ -229,5 +260,85 @@ enum BudgetMath {
         return names.map { name -> (name: String, current: Double, previous: Double) in
             (name, now.first { $0.name == name }?.amount ?? 0, before.first { $0.name == name }?.amount ?? 0)
         }
+    }
+
+    // MARK: Mini-app
+
+    static func incomes(_ state: BudgetState, in interval: DateInterval) -> [IncomeEntry] {
+        state.incomes.filter { interval.contains($0.date) }
+    }
+
+    static func earned(_ state: BudgetState, in interval: DateInterval) -> Double {
+        incomes(state, in: interval).reduce(0) { $0 + $1.amount }
+    }
+
+    static func spent(_ state: BudgetState, in interval: DateInterval) -> Double {
+        expenses(state, in: interval).reduce(0) { $0 + $1.amount }
+    }
+
+    /// One month: what came in and what went out.
+    struct MonthSummary: Hashable, Identifiable {
+        let start: Date
+        let spent: Double
+        let earned: Double
+        var id: Date { start }
+        var balance: Double { earned - spent }
+    }
+
+    /// The last `count` months, oldest first, the current month (so far) last.
+    static func months(_ state: BudgetState, count: Int, at date: Date) -> [MonthSummary] {
+        let current = monthInterval(date).start
+        return (0..<count).reversed().compactMap { back in
+            guard let start = DateMath.calendar.date(byAdding: .month, value: -back, to: current) else { return nil }
+            let interval = monthInterval(start)
+            return MonthSummary(start: start, spent: spent(state, in: interval), earned: earned(state, in: interval))
+        }
+    }
+
+    /// Spending of this month so far and of last month up to the same day.
+    static func monthToDate(_ state: BudgetState, at date: Date) -> (current: Double, previous: Double) {
+        let month = monthInterval(date)
+        let elapsed = max(1, date.timeIntervalSince(month.start))
+        let previousStart = DateMath.calendar.date(byAdding: .month, value: -1, to: month.start) ?? month.start
+        let previousEnd = min(previousStart.addingTimeInterval(elapsed), month.start)
+        return (spent(state, in: DateInterval(start: month.start, end: max(month.start, date))),
+                spent(state, in: DateInterval(start: previousStart, end: previousEnd)))
+    }
+
+    /// A category this month: what was spent against its limit.
+    struct CategoryStatus: Hashable, Identifiable {
+        let category: BudgetCategory
+        let spent: Double
+        var id: UUID { category.id }
+        var limit: Double { category.monthlyLimit }
+        /// Spent over the limit, nil without a limit.
+        var ratio: Double? { limit > 0 ? spent / limit : nil }
+        var isOver: Bool { limit > 0 && spent > limit }
+    }
+
+    /// Every category with a limit or some spending this month, the biggest spending first.
+    static func categoryStatus(_ state: BudgetState, at date: Date) -> [CategoryStatus] {
+        let month = monthInterval(date)
+        return state.categories.map { category in
+            CategoryStatus(category: category, spent: expenses(state, in: month).filter { $0.categoryID == category.id }.reduce(0) { $0 + $1.amount })
+        }
+        .filter { $0.spent > 0 || $0.limit > 0 }
+        .sorted { $0.spent > $1.spent }
+    }
+
+    /// What to put aside each month to reach a goal by its date; nil without a date or once reached.
+    static func monthlyToReach(_ goal: SavingsGoal, at date: Date) -> Double? {
+        guard let deadline = goal.deadline, goal.saved < goal.target else { return nil }
+        let months = max(1, DateMath.calendar.dateComponents([.month], from: date, to: deadline).month ?? 0)
+        return (goal.target - goal.saved) / Double(months)
+    }
+
+    /// The bills due in the next days, and their total.
+    static func billsTotal(_ state: BudgetState, at date: Date, within days: Int) -> Double {
+        upcomingBills(state, at: date, within: days).reduce(0) { $0 + $1.bill.amount }
+    }
+
+    static func billsMonthly(_ state: BudgetState) -> Double {
+        state.bills.reduce(0) { $0 + $1.monthlyCost }
     }
 }

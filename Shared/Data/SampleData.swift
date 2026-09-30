@@ -231,6 +231,34 @@ enum SampleData {
         for (index, amount) in [52.0, 12.5, 30.0, 8.75, 44.0].enumerated() {
             state.add(Expense(amount: amount, categoryID: cat([1, 2, 4, 3, 1][index]), note: "", date: day(-7 - index % 3, 13, from: now)))
         }
+        // The five months before, for the evolution: groceries, restaurants, transport, outings, home.
+        let calendar = DateMath.calendar
+        let monthStart = calendar.dateInterval(of: .month, for: now)?.start ?? now
+        for back in 1...5 {
+            guard let start = calendar.date(byAdding: .month, value: -back, to: monthStart) else { continue }
+            let past: [(Double, Int, String, Int)] = [
+                (92 + Double(back * 7), 1, "Épicerie", 2), (118 - Double(back * 5), 1, "Costco", 9), (84 + Double(back * 3), 1, "IGA", 16), (101, 1, "Marché", 24),
+                (24 + Double(back * 4), 2, "Resto", 5), (46 - Double(back * 2), 2, "Brunch", 13), (31, 2, "Pizza", 21),
+                (90, 3, "Passe mensuelle", 1), (22 + Double(back), 3, "Taxi", 18),
+                (38 + Double(back * 6), 4, "Spectacle", 11), (19, 4, "Cinéma", 26),
+                (Double(40 + back * 13), 5, "Quincaillerie", 7), (27.5, 6, "Divers", 20),
+            ]
+            for item in past {
+                let date = start.addingTimeInterval(TimeInterval(item.3 - 1) * 86_400 + 13 * 3_600)
+                state.add(Expense(amount: item.0, categoryID: cat(item.1), note: item.2, date: date))
+            }
+        }
+        // The pay, twice a month, and a freelance job now and then.
+        for back in 0...5 {
+            guard let start = calendar.date(byAdding: .month, value: -back, to: monthStart) else { continue }
+            for payDay in [1, 15] {
+                let date = start.addingTimeInterval(TimeInterval(payDay - 1) * 86_400 + 9 * 3_600)
+                if date <= now { state.addIncome(IncomeEntry(amount: 1_500, label: "Salaire", date: date)) }
+            }
+            if back % 2 == 1 {
+                state.addIncome(IncomeEntry(amount: 350 + Double(back * 40), label: "Contrat de design", date: start.addingTimeInterval(19 * 86_400 + 15 * 3_600)))
+            }
+        }
         state.quickExpenses = [
             QuickExpense(name: "Café", amount: 4.5, categoryID: cat(2), symbol: "cup.and.saucer.fill"),
             QuickExpense(name: "Bus", amount: 3.75, categoryID: cat(3), symbol: "bus.fill"),
@@ -285,6 +313,15 @@ enum SampleData {
         state.subscriptions = mrr.enumerated().map { pair in
             SubscriptionSnapshot(month: DateMath.calendar.date(byAdding: .month, value: pair.offset - 5, to: now) ?? now, mrr: pair.element, subscribers: 70 + pair.offset * 8)
         }
+        state.pinnedKPIs = [.revenue, .profit, .orders, .averageBasket, .conversion, .mrr]
+        var followers = CustomMetric(name: "Abonnés Instagram", target: 5_000)
+        var quotes = CustomMetric(name: "Devis envoyés", unit: "devis")
+        for week in 0..<8 {
+            let date = day(-7 * (7 - week), 18, from: now)
+            followers.record(Double(3_120 + week * 145 + (week % 3) * 40), at: date)
+            quotes.record(Double(4 + (week * 3) % 5), at: date)
+        }
+        state.metrics = [followers, quotes]
         return state
     }
 

@@ -178,28 +178,86 @@ extension BudgetMath.UpcomingBill: Identifiable {
 
 struct ExpenseEditor: View {
     @Environment(AppModel.self) private var model
-    @State private var amount: Double = 0
-    @State private var categoryID: UUID? = BudgetState.fixedID(1)
-    @State private var note = ""
-    @State private var date = Date()
+    @Environment(\.dismiss) private var dismiss
+    @State private var expense: Expense
+    private let isNew: Bool
+
+    /// A new expense, or an existing one to change or delete.
+    init(expense: Expense? = nil, categoryID: UUID? = nil) {
+        _expense = State(initialValue: expense ?? Expense(amount: 0, categoryID: categoryID ?? BudgetState.fixedID(1)))
+        isNew = expense == nil
+    }
 
     var body: some View {
-        SheetForm(title: "Dépense", canSave: amount > 0, onSave: save) {
-            NumberRow(title: "Montant", value: $amount, unit: model.settings.currencyCode)
-            Picker("Catégorie", selection: $categoryID) {
-                ForEach(model.budget.categories) { category in
-                    Label(category.name, systemImage: category.symbol).tag(Optional(category.id))
+        SheetForm(title: isNew ? "Dépense" : "Modifier la dépense", canSave: expense.amount > 0, onSave: save) {
+            Section {
+                NumberRow(title: "Montant", value: $expense.amount, unit: model.settings.currencyCode)
+                    .accessibilityIdentifier("expense-amount")
+                Picker("Catégorie", selection: $expense.categoryID) {
+                    ForEach(model.budget.categories) { category in
+                        Label(category.name, systemImage: category.symbol).tag(Optional(category.id))
+                    }
+                }
+                TextField("Note (facultatif)", text: $expense.note)
+                DatePicker("Date", selection: $expense.date, displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+            }
+            if !isNew {
+                Section {
+                    Button("Supprimer la dépense", role: .destructive) {
+                        let id = expense.id
+                        model.update(\.budget) { $0.expenses.removeAll { $0.id == id } }
+                        dismiss()
+                    }
                 }
             }
-            TextField("Note (facultatif)", text: $note)
-            DatePicker("Date", selection: $date, displayedComponents: .date)
-                .environment(\.locale, Fmt.locale)
         }
     }
 
     private func save() {
-        let expense = Expense(amount: amount, categoryID: categoryID, note: note.trimmed, date: date)
-        model.update(\.budget) { $0.add(expense) }
+        var saved = expense
+        saved.note = saved.note.trimmed
+        model.update(\.budget) { $0.save(saved) }
+        Haptics.success()
+    }
+}
+
+/// Money coming in: a pay, a contract, a refund.
+struct IncomeEditor: View {
+    @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
+    @State private var income: IncomeEntry
+    private let isNew: Bool
+
+    init(income: IncomeEntry? = nil) {
+        _income = State(initialValue: income ?? IncomeEntry(amount: 0))
+        isNew = income == nil
+    }
+
+    var body: some View {
+        SheetForm(title: isNew ? "Revenu" : "Modifier le revenu", canSave: income.amount > 0, onSave: save) {
+            Section {
+                NumberRow(title: "Montant", value: $income.amount, unit: model.settings.currencyCode)
+                TextField("Source (salaire, contrat, remboursement…)", text: $income.label)
+                DatePicker("Date", selection: $income.date, displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+            }
+            if !isNew {
+                Section {
+                    Button("Supprimer le revenu", role: .destructive) {
+                        let id = income.id
+                        model.update(\.budget) { $0.incomes.removeAll { $0.id == id } }
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+
+    private func save() {
+        var saved = income
+        saved.label = saved.label.trimmed.isEmpty ? "Revenu" : saved.label.trimmed
+        model.update(\.budget) { $0.save(saved) }
         Haptics.success()
     }
 }

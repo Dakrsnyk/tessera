@@ -254,4 +254,70 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(timer.waitForExistence(timeout: 8))
         XCTAssertEqual(app.state, .runningForeground)
     }
+
+    // MARK: Finances
+
+    func testFinancesEditsAnExpenseAndOpensItsPages() {
+        launch(["-screenshotScreen", "app-finances"])
+        let hero = app.otherElements["finances-hero"]
+        XCTAssertTrue(hero.waitForExistence(timeout: 12), "Mini-app Finances absente")
+        snapshot("finances")
+
+        // An expense of the month: open it, change it, then delete it.
+        tap(app.buttons["finances-transactions"], "Opérations")
+        XCTAssertTrue(app.navigationBars["Opérations"].waitForExistence(timeout: 8), "Page des opérations absente")
+        let rows = app.buttons.matching(identifier: "expense-row")
+        XCTAssertTrue(rows.firstMatch.waitForExistence(timeout: 8), "Aucune dépense du mois")
+        let before = rows.count
+        rows.firstMatch.tap()
+        let delete = app.buttons["Supprimer la dépense"]
+        XCTAssertTrue(delete.waitForExistence(timeout: 8), "La dépense doit s'ouvrir pour être modifiée")
+        snapshot("finances-expense")
+        delete.tap()
+        XCTAssertTrue(waitForDisappearance(delete), "La fiche de la dépense est restée ouverte")
+        let fewer = expectation(for: NSPredicate(format: "count == %d", before - 1), evaluatedWith: rows)
+        XCTAssertEqual(XCTWaiter().wait(for: [fewer], timeout: 5), .completed, "La dépense supprimée doit disparaître")
+        goBack()
+        XCTAssertTrue(hero.waitForExistence(timeout: 8))
+
+        for (identifier, title) in [("finances-categories", "Catégories"), ("finances-bills", "Factures"), ("finances-trends", "Évolution")] {
+            tap(app.buttons[identifier], title)
+            XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
+            snapshot(identifier)
+            goBack()
+            XCTAssertTrue(hero.waitForExistence(timeout: 8), "Retour depuis \(title)")
+        }
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    // MARK: Business
+
+    func testBusinessComparesPeriodsAndLetsMeChooseIndicators() {
+        launch(["-screenshotScreen", "app-business"])
+        let hero = app.otherElements["business-hero"]
+        XCTAssertTrue(hero.waitForExistence(timeout: 12), "Mini-app Business absente")
+        snapshot("business")
+
+        // Another period: the figures follow.
+        app.segmentedControls["business-period"].buttons["Semaine"].tap()
+        XCTAssertTrue(element(containing: "la semaine dernière").waitForExistence(timeout: 5), "La comparaison doit suivre la période")
+
+        // Choose an indicator: it appears on the dashboard.
+        tap(app.buttons["business-choose-kpis"], "Choisir mes indicateurs")
+        let visitors = app.buttons["kpi-visitors"]
+        XCTAssertTrue(visitors.waitForExistence(timeout: 8), "Liste des indicateurs absente")
+        visitors.tap()
+        app.buttons["OK"].tap()
+        XCTAssertTrue(element(containing: "Visiteurs").waitForExistence(timeout: 8), "L'indicateur choisi doit apparaître")
+        snapshot("business-kpis")
+
+        for (identifier, title) in [("business-sales", "Ventes et dépenses"), ("business-results", "Résultats")] {
+            tap(app.buttons[identifier], title)
+            XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
+            snapshot(identifier)
+            goBack()
+            XCTAssertTrue(hero.waitForExistence(timeout: 8), "Retour depuis \(title)")
+        }
+        XCTAssertEqual(app.state, .runningForeground)
+    }
 }

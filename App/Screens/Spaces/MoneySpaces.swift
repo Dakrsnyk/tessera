@@ -208,42 +208,79 @@ struct BusinessSpaceSections: View {
 
 struct SaleEditor: View {
     @Environment(AppModel.self) private var model
-    @State private var sale = SalesEntry(amount: 0)
+    @Environment(\.dismiss) private var dismiss
+    @State private var sale: SalesEntry
+    private let isNew: Bool
+
+    /// A new sale, or an existing one to change or delete.
+    init(sale: SalesEntry? = nil) {
+        _sale = State(initialValue: sale ?? SalesEntry(amount: 0))
+        isNew = sale == nil
+    }
 
     var body: some View {
-        SheetForm(title: "Vente", canSave: sale.amount > 0, onSave: save) {
-            NumberRow(title: "Montant", value: $sale.amount, unit: model.settings.currencyCode)
-            DatePicker("Date", selection: $sale.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
-            IntRow(title: "Commandes", value: $sale.orders)
-            IntRow(title: "Nouveaux clients", value: $sale.newCustomers)
-            IntRow(title: "Visiteurs", value: $sale.visitors)
-            TextField("Note (facultatif)", text: $sale.note)
+        SheetForm(title: isNew ? "Vente" : "Modifier la vente", canSave: sale.amount > 0, onSave: save) {
+            Section {
+                NumberRow(title: "Montant", value: $sale.amount, unit: model.settings.currencyCode)
+                DatePicker("Date", selection: $sale.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+                IntRow(title: "Commandes", value: $sale.orders)
+                IntRow(title: "Nouveaux clients", value: $sale.newCustomers)
+                IntRow(title: "Visiteurs", value: $sale.visitors)
+                TextField("Note (facultatif)", text: $sale.note)
+            }
+            if !isNew {
+                Section {
+                    Button("Supprimer la vente", role: .destructive) {
+                        let id = sale.id
+                        model.update(\.business) { $0.sales.removeAll { $0.id == id } }
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 
     private func save() {
         let saved = sale
-        model.update(\.business) { $0.sales.append(saved) }
+        model.update(\.business) { $0.save(saved) }
         Haptics.success()
     }
 }
 
 struct BusinessCostEditor: View {
     @Environment(AppModel.self) private var model
-    @State private var cost = BusinessExpense(amount: 0, label: "")
+    @Environment(\.dismiss) private var dismiss
+    @State private var cost: BusinessExpense
+    private let isNew: Bool
+
+    init(cost: BusinessExpense? = nil) {
+        _cost = State(initialValue: cost ?? BusinessExpense(amount: 0, label: ""))
+        isNew = cost == nil
+    }
 
     var body: some View {
-        SheetForm(title: "Dépense", canSave: cost.amount > 0, onSave: save) {
-            NumberRow(title: "Montant", value: $cost.amount, unit: model.settings.currencyCode)
-            TextField("Libellé (publicité, matériel…)", text: $cost.label)
-            DatePicker("Date", selection: $cost.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+        SheetForm(title: isNew ? "Dépense" : "Modifier la dépense", canSave: cost.amount > 0, onSave: save) {
+            Section {
+                NumberRow(title: "Montant", value: $cost.amount, unit: model.settings.currencyCode)
+                TextField("Libellé (publicité, matériel…)", text: $cost.label)
+                DatePicker("Date", selection: $cost.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+            }
+            if !isNew {
+                Section {
+                    Button("Supprimer la dépense", role: .destructive) {
+                        let id = cost.id
+                        model.update(\.business) { $0.expenses.removeAll { $0.id == id } }
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 
     private func save() {
         var saved = cost
         saved.label = saved.label.trimmed.isEmpty ? "Dépense" : saved.label.trimmed
-        model.update(\.business) { $0.expenses.append(saved) }
+        model.update(\.business) { $0.save(saved) }
     }
 }
 

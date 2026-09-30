@@ -68,7 +68,7 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
     /// Built as a full mini-app. The others still open their space's data until they are.
     var isBuilt: Bool {
         switch self {
-        case .nutrition, .fitness, .planning, .studies: true
+        case .nutrition, .fitness, .planning, .studies, .finances, .business: true
         default: false
         }
     }
@@ -109,6 +109,15 @@ enum MiniAppPage: Hashable {
     case studiesAssignments
     case studiesGrades
     case studiesRevision
+    case financesTransactions
+    case financesCategories
+    case financesBills
+    case financesSavings
+    case financesTrends
+    case businessSales
+    case businessResults
+    case businessRecurring
+    case businessMetrics
 }
 
 /// A mini-app, or its space's data while it isn't built yet.
@@ -125,6 +134,10 @@ struct MiniAppView: View {
             PlanningAppView()
         case .studies:
             StudiesAppView()
+        case .finances:
+            FinancesAppView()
+        case .business:
+            BusinessAppView()
         default:
             if let space = app.space {
                 SpaceView(space: space, isEmbedded: true)
@@ -172,6 +185,15 @@ struct MiniAppPageView: View {
         case .studiesAssignments: StudiesAssignmentsPage()
         case .studiesGrades: StudiesGradesPage()
         case .studiesRevision: StudiesRevisionPage()
+        case .financesTransactions: FinancesTransactionsPage()
+        case .financesCategories: FinancesCategoriesPage()
+        case .financesBills: FinancesBillsPage()
+        case .financesSavings: FinancesSavingsPage()
+        case .financesTrends: FinancesTrendsPage()
+        case .businessSales: BusinessSalesPage()
+        case .businessResults: BusinessResultsPage()
+        case .businessRecurring: BusinessRecurringPage()
+        case .businessMetrics: BusinessMetricsPage()
         }
     }
 }

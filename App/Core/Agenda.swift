@@ -31,6 +31,7 @@ struct AgendaItem: Identifiable, Hashable {
 
 /// Gathers a day from every source, in the order of the day. The calendar events are read once by
 /// the screen (EventKit) and passed in.
+@MainActor
 enum Agenda {
     static func items(on day: Date, model: AppModel, events: [EventSnapshot], includeDone: Bool = true) -> [AgendaItem] {
         var items: [AgendaItem] = []

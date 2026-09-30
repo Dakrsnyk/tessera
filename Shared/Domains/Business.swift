@@ -25,14 +25,101 @@ struct SubscriptionSnapshot: Codable, Hashable, Identifiable {
     var subscribers: Int
 }
 
+/// The indicators Tessera computes from the sales, costs and recurring revenue; the person picks
+/// the ones shown on the dashboard.
+enum BusinessKPI: String, Codable, CaseIterable, Identifiable {
+    case revenue, costs, profit, margin, orders, averageBasket, newCustomers, visitors, conversion, mrr, subscribers
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .revenue: "Chiffre d'affaires"
+        case .costs: "Dépenses"
+        case .profit: "Bénéfice"
+        case .margin: "Marge"
+        case .orders: "Commandes"
+        case .averageBasket: "Panier moyen"
+        case .newCustomers: "Nouveaux clients"
+        case .visitors: "Visiteurs"
+        case .conversion: "Conversion"
+        case .mrr: "MRR"
+        case .subscribers: "Abonnés"
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .revenue: "chart.bar.fill"
+        case .costs: "minus.circle.fill"
+        case .profit: "banknote.fill"
+        case .margin: "percent"
+        case .orders: "shippingbox.fill"
+        case .averageBasket: "cart.fill"
+        case .newCustomers: "person.badge.plus"
+        case .visitors: "eye.fill"
+        case .conversion: "arrow.triangle.turn.up.right.diamond.fill"
+        case .mrr: "arrow.triangle.2.circlepath"
+        case .subscribers: "person.3.fill"
+        }
+    }
+
+    enum Unit { case money, percent, count }
+
+    var unit: Unit {
+        switch self {
+        case .revenue, .costs, .profit, .averageBasket, .mrr: .money
+        case .margin, .conversion: .percent
+        case .orders, .newCustomers, .visitors, .subscribers: .count
+        }
+    }
+
+    /// Up is good, except for costs.
+    var higherIsBetter: Bool { self != .costs }
+
+    /// Read from the latest monthly snapshot, not summed over a period.
+    var isSnapshot: Bool { self == .mrr || self == .subscribers }
+}
+
+/// An indicator the person follows by hand (followers, NPS, quotes sent…).
+struct CustomMetric: Codable, Hashable, Identifiable {
+    var id = UUID()
+    var name: String
+    var unit: String = ""
+    var target: Double?
+    var higherIsBetter = true
+    var values: [ValuePoint] = []
+
+    var sortedValues: [ValuePoint] { values.sorted { $0.date < $1.date } }
+    var latest: ValuePoint? { values.max { $0.date < $1.date } }
+
+    /// One value a day: a new one the same day replaces it.
+    mutating func record(_ value: Double, at date: Date = Date()) {
+        values.removeAll { DateMath.isSameDay($0.date, date) }
+        values.append(ValuePoint(date: date, value: value))
+        values.sort { $0.date < $1.date }
+        if values.count > 400 { values.removeFirst(values.count - 400) }
+    }
+
+    /// The change since the value before the latest one.
+    var change: Double? {
+        let sorted = sortedValues
+        guard sorted.count >= 2 else { return nil }
+        return Stats.change(from: sorted[sorted.count - 2].value, to: sorted[sorted.count - 1].value)
+    }
+}
+
 struct BusinessState: Codable, Hashable {
     var name = "Mon entreprise"
     var monthlyGoal: Double = 10_000
     var sales: [SalesEntry] = []
     var expenses: [BusinessExpense] = []
     var subscriptions: [SubscriptionSnapshot] = []
+    var pinnedKPIs: [BusinessKPI] = BusinessState.defaultKPIs
+    var metrics: [CustomMetric] = []
 
-    enum CodingKeys: String, CodingKey { case name, monthlyGoal, sales, expenses, subscriptions }
+    static let defaultKPIs: [BusinessKPI] = [.revenue, .profit, .orders, .averageBasket]
+
+    enum CodingKeys: String, CodingKey { case name, monthlyGoal, sales, expenses, subscriptions, pinnedKPIs, metrics }
 
     init() {}
 
@@ -43,6 +130,20 @@ struct BusinessState: Codable, Hashable {
         sales = c.value(.sales, [])
         expenses = c.value(.expenses, [])
         subscriptions = c.value(.subscriptions, [])
+        pinnedKPIs = c.value(.pinnedKPIs, BusinessState.defaultKPIs)
+        metrics = c.value(.metrics, [])
+    }
+
+    mutating func togglePinned(_ kpi: BusinessKPI) {
+        if let index = pinnedKPIs.firstIndex(of: kpi) { pinnedKPIs.remove(at: index) } else { pinnedKPIs.append(kpi) }
+    }
+
+    mutating func save(_ sale: SalesEntry) {
+        if let index = sales.firstIndex(where: { $0.id == sale.id }) { sales[index] = sale } else { sales.append(sale) }
+    }
+
+    mutating func save(_ cost: BusinessExpense) {
+        if let index = expenses.firstIndex(where: { $0.id == cost.id }) { expenses[index] = cost } else { expenses.append(cost) }
     }
 }
 
@@ -162,5 +263,115 @@ enum BusinessMath {
         let today = revenue(state, in: DateInterval(start: DateMath.startOfDay(date), duration: elapsed))
         let lastWeek = revenue(state, in: DateInterval(start: DateMath.startOfDay(lastWeekDay), duration: elapsed))
         return (today, lastWeek)
+    }
+
+    // MARK: Mini-app
+
+    /// The value of an indicator over a period; nil when the data to compute it is missing (a margin
+    /// without revenue, a conversion without visitors, a MRR never entered).
+    static func value(_ kpi: BusinessKPI, _ state: BusinessState, in interval: DateInterval) -> Double? {
+        let entries = sales(state, in: interval)
+        let revenue = entries.reduce(0) { $0 + $1.amount }
+        let orders = entries.reduce(0) { $0 + $1.orders }
+        switch kpi {
+        case .revenue: return revenue
+        case .costs: return costs(state, in: interval)
+        case .profit: return revenue - costs(state, in: interval)
+        case .margin: return revenue > 0 ? (revenue - costs(state, in: interval)) / revenue : nil
+        case .orders: return Double(orders)
+        case .averageBasket: return orders > 0 ? revenue / Double(orders) : nil
+        case .newCustomers: return Double(entries.reduce(0) { $0 + $1.newCustomers })
+        case .visitors:
+            let visitors = entries.reduce(0) { $0 + $1.visitors }
+            return visitors > 0 ? Double(visitors) : nil
+        case .conversion:
+            let visitors = entries.reduce(0) { $0 + $1.visitors }
+            return visitors > 0 ? Double(orders) / Double(visitors) : nil
+        case .mrr, .subscribers:
+            let snapshots = state.subscriptions.filter { $0.month < interval.end }.sorted { $0.month < $1.month }
+            guard let latest = snapshots.last else { return nil }
+            return kpi == .mrr ? latest.mrr : Double(latest.subscribers)
+        }
+    }
+
+    /// An indicator for this period so far, against the previous period up to the same point.
+    struct Comparison: Hashable {
+        let current: Double?
+        let previous: Double?
+        var change: Double? {
+            guard let current, let previous else { return nil }
+            return Stats.change(from: previous, to: current)
+        }
+    }
+
+    static func compare(_ kpi: BusinessKPI, _ state: BusinessState, _ period: Period, at date: Date) -> Comparison {
+        let start = interval(period, containing: date).start
+        let soFar = DateInterval(start: start, duration: max(1, date.timeIntervalSince(start)))
+        let previous = previousInterval(period, containing: date)
+        if kpi.isSnapshot {
+            // A monthly figure: this month against the month before.
+            let before = DateMath.calendar.date(byAdding: .month, value: -1, to: date) ?? date
+            return Comparison(current: value(kpi, state, in: soFar), previous: value(kpi, state, in: DateInterval(start: .distantPast, end: interval(.month, containing: before).end)))
+        }
+        return Comparison(current: value(kpi, state, in: soFar), previous: value(kpi, state, in: previous))
+    }
+
+    /// Revenue added up day by day (months for a year) for this period and the previous one, to
+    /// draw them one over the other.
+    struct CumulativePoint: Hashable, Identifiable {
+        let index: Int
+        let current: Double?
+        let previous: Double
+        var id: Int { index }
+    }
+
+    static func cumulative(_ state: BusinessState, _ period: Period, at date: Date) -> [CumulativePoint] {
+        let calendar = DateMath.calendar
+        let current = interval(period, containing: date)
+        let component: Calendar.Component
+        let step: Calendar.Component
+        switch period {
+        case .day, .week: component = .weekOfYear; step = .day
+        case .month: component = .month; step = .day
+        case .year: component = .year; step = .month
+        }
+        let base = period == .day ? interval(.week, containing: date) : current
+        guard let previousStart = calendar.date(byAdding: component, value: -1, to: base.start) else { return [] }
+        let count = period == .year ? 12 : (calendar.dateComponents([.day], from: base.start, to: base.end).day ?? 7)
+        var points: [CumulativePoint] = []
+        var runningCurrent = 0.0
+        var runningPrevious = 0.0
+        for index in 0..<count {
+            guard let slotStart = calendar.date(byAdding: step, value: index, to: base.start),
+                  let slotEnd = calendar.date(byAdding: step, value: index + 1, to: base.start),
+                  let previousSlotStart = calendar.date(byAdding: step, value: index, to: previousStart),
+                  let previousSlotEnd = calendar.date(byAdding: step, value: index + 1, to: previousStart) else { continue }
+            runningPrevious += revenue(state, in: DateInterval(start: previousSlotStart, end: previousSlotEnd))
+            if slotStart <= date {
+                runningCurrent += revenue(state, in: DateInterval(start: slotStart, end: slotEnd))
+                points.append(CumulativePoint(index: index + 1, current: runningCurrent, previous: runningPrevious))
+            } else {
+                points.append(CumulativePoint(index: index + 1, current: nil, previous: runningPrevious))
+            }
+        }
+        return points
+    }
+
+    /// Revenue, costs and profit of the last months, oldest first.
+    struct MonthResult: Hashable, Identifiable {
+        let start: Date
+        let revenue: Double
+        let costs: Double
+        var id: Date { start }
+        var profit: Double { revenue - costs }
+    }
+
+    static func months(_ state: BusinessState, count: Int, at date: Date) -> [MonthResult] {
+        let current = interval(.month, containing: date).start
+        return (0..<count).reversed().compactMap { back in
+            guard let start = DateMath.calendar.date(byAdding: .month, value: -back, to: current) else { return nil }
+            let month = interval(.month, containing: start)
+            return MonthResult(start: start, revenue: revenue(state, in: month), costs: costs(state, in: month))
+        }
     }
 }

@@ -212,6 +212,15 @@ jobs:
             WAIT=7 shoot app-studies-end app-studies bottom light
             WAIT=7 shoot app-studies-course-end app-studies-course bottom light
             WAIT=7 shoot app-studies-revision-end app-studies-revision bottom light
+            for screen in app-finances app-finances-transactions app-finances-categories app-finances-bills app-finances-savings app-finances-trends; do
+              WAIT=7 shoot $screen $screen top light
+            done
+            WAIT=7 shoot app-finances-end app-finances bottom light
+            WAIT=7 shoot app-finances-dark app-finances top dark
+            for screen in app-business app-business-sales app-business-results app-business-recurring app-business-metrics; do
+              WAIT=7 shoot $screen $screen top light
+            done
+            WAIT=7 shoot app-business-end app-business bottom light
           }
           if [ "$STUDIO" = "true" ]; then
             studio_shots
