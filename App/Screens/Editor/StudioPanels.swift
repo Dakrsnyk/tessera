@@ -691,8 +691,9 @@ struct StudioMyStylesPanel: View {
                     Button {
                         applying = saved
                     } label: {
-                        Label("D'autres widgets", systemImage: "square.stack")
+                        Label("Autres widgets", systemImage: "square.stack")
                             .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
