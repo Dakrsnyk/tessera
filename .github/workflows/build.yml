@@ -35,6 +35,9 @@ jobs:
       CHECK: ${{ contains(github.event.head_commit.message, '[check]') }}
       # [marketing] renders the App Store screenshots on a 6.9" iPhone (1320 x 2868).
       MARKETING: ${{ contains(github.event.head_commit.message, '[marketing]') }}
+      # [stack] runs the Home and mini-app UI tests with the iPhone's 1 MB main-thread stack, first
+      # unoptimized (like the old test IPA), then optimized (like the IPA now), and reports both.
+      STACK: ${{ contains(github.event.head_commit.message, '[stack]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -85,9 +88,11 @@ jobs:
         if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true' && env.MARKETING != 'true'
         run: |
           set -o pipefail
+          # Optimized (-O) like an App Store build: an unoptimized SwiftUI app can overflow the iPhone's
+          # 1 MB main-thread stack (the simulator has 8 MB), and crash at launch on the device only.
           xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -sdk iphoneos -destination 'generic/platform=iOS' \
-            -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_DEBUG_DYLIB=NO \
+            -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_DEBUG_DYLIB=NO SWIFT_OPTIMIZATION_LEVEL=-O \
             CURRENT_PROJECT_VERSION=${{ github.run_number }} build 2>&1 | tee device.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" device.log
 
@@ -153,6 +158,30 @@ jobs:
           find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -40 -exec cp {} testshots/ \; 2>/dev/null || true
           ls testshots
           grep -q "TEST SUCCEEDED" test.log
+
+      - name: Stack check
+        id: stack
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.STACK == 'true'
+        continue-on-error: true
+        timeout-minutes: 45
+        run: |
+          xcrun simctl bootstatus "$DEVICE" -b
+          TESTS="-only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData -only-testing:TesseraUITests/MiniAppUITests/testHomeListsTheMiniAppsAndTheWeatherOpens -only-testing:TesseraUITests/MiniAppUITests/testNutritionOpensFromHomeAndManagesAMeal -only-testing:TesseraUITests/MiniAppUITests/testFinancesEditsAnExpenseAndOpensItsPages"
+          xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath StackOnone.xcresult $TESTS \
+            ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > stack-onone.log 2>&1 || true
+          mkdir -p stackreports
+          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -exec cp {} stackreports/ \; 2>/dev/null || true
+          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -delete 2>/dev/null || true
+          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/simO ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO SWIFT_OPTIMIZATION_LEVEL=-O build-for-testing > stack-build-o.log 2>&1 || true
+          xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            -destination "id=$DEVICE" -derivedDataPath build/simO -resultBundlePath StackO.xcresult $TESTS \
+            ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > stack-o.log 2>&1 || true
+          mkdir -p stackreports/optimized
+          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -exec cp {} stackreports/optimized/ \; 2>/dev/null || true
+          ls -R stackreports
 
       - name: Screenshots
         id: shots
@@ -400,6 +429,13 @@ jobs:
             grep -hE "error:" sim.log device.log release.log 2>/dev/null | sort -u | head -500 || true
             echo "---- tests ----"
             grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -400 || true
+            if [ -f stack-onone.log ]; then
+              echo "---- stack check: unoptimized, 1 MB stack ----"
+              grep -hE "Test Case .*(passed|failed)|crash|Crash|TEST (SUCCEEDED|FAILED)|EXC_|stack" stack-onone.log | head -40 || true
+              echo "---- stack check: optimized (-O), 1 MB stack ----"
+              grep -hE "BUILD (SUCCEEDED|FAILED)|error:" stack-build-o.log | head -10 || true
+              grep -hE "Test Case .*(passed|failed)|crash|Crash|TEST (SUCCEEDED|FAILED)|EXC_|stack" stack-o.log | head -40 || true
+            fi
             echo "---- widget extension bundle ----"
             ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex 2>/dev/null || true
             ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex/Metadata.appintents 2>/dev/null || true
@@ -410,6 +446,7 @@ jobs:
           [ -d shots ] && cp shots/*.jpg report/ 2>/dev/null || true
           [ -d marketing ] && mkdir -p report/marketing && cp marketing/* report/marketing/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
+          [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
           [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
           cd report
           git init -q
