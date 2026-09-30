@@ -16,6 +16,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 30) {
                     header
                     DailySection()
+                    MiniAppsRow()
                     MyInfoCard()
                     myWidgets
                     storeSample

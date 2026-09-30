@@ -320,4 +320,69 @@ final class MiniAppUITests: XCTestCase {
         }
         XCTAssertEqual(app.state, .runningForeground)
     }
+
+    // MARK: Travel, Auto, Weather
+
+    func testTravelChecksTheListAndOpensTheProgram() {
+        launch(["-screenshotScreen", "app-travel"])
+        let hero = app.otherElements["travel-hero"]
+        XCTAssertTrue(hero.waitForExistence(timeout: 12), "Mini-app Voyage absente")
+        snapshot("travel")
+
+        tap(app.buttons["travel-checklist"], "À ne pas oublier")
+        let items = app.buttons.matching(identifier: "checklist-item")
+        XCTAssertTrue(items.firstMatch.waitForExistence(timeout: 8), "Liste absente")
+        let field = app.textFields["checklist-add"]
+        field.tap()
+        field.typeText("Maillot de bain\n")
+        XCTAssertTrue(element(containing: "Maillot de bain").waitForExistence(timeout: 5), "L'élément ajouté doit apparaître")
+        snapshot("travel-checklist")
+        goBack()
+        XCTAssertTrue(hero.waitForExistence(timeout: 8))
+
+        for (identifier, title) in [("travel-budget", "Budget · Lisbonne"), ("travel-program", "Programme")] {
+            tap(app.buttons[identifier], title)
+            XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
+            snapshot(identifier)
+            goBack()
+            XCTAssertTrue(hero.waitForExistence(timeout: 8), "Retour depuis \(title)")
+        }
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    func testCarShowsTheRangeAndItsPages() {
+        launch(["-screenshotScreen", "app-car"])
+        let hero = app.otherElements["car-hero"]
+        XCTAssertTrue(hero.waitForExistence(timeout: 12), "Mini-app Auto absente")
+        XCTAssertTrue(element(containing: "Autonomie estimée").exists, "Avec la taille du réservoir, l'autonomie s'affiche")
+        snapshot("car")
+        for (identifier, title) in [("car-fuel", "Carburant"), ("car-mileage", "Kilométrage")] {
+            tap(app.buttons[identifier], title)
+            XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
+            snapshot(identifier)
+            if identifier == "car-fuel" {
+                app.buttons.matching(identifier: "fuel-row").firstMatch.tap()
+                XCTAssertTrue(app.buttons["Supprimer le plein"].waitForExistence(timeout: 8), "Un plein doit s'ouvrir pour être modifié")
+                app.buttons["Annuler"].tap()
+            }
+            goBack()
+            XCTAssertTrue(hero.waitForExistence(timeout: 8), "Retour depuis \(title)")
+        }
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    func testHomeListsTheMiniAppsAndTheWeatherOpens() {
+        launch(["-screenshotScreen", "home"])
+        reveal(app.buttons["mini-apps-all"], "« Mes mini-apps » sur l'accueil")
+        let chips = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "mini-app-"))
+        XCTAssertGreaterThanOrEqual(chips.count, 3, "Les mini-apps avec des données doivent être proposées")
+        snapshot("home-mini-apps")
+        tap(app.buttons["mini-apps-all"], "Toutes les mini-apps")
+        let weather = app.buttons["all-apps-weather"]
+        XCTAssertTrue(weather.waitForExistence(timeout: 8), "La liste de toutes les mini-apps doit s'ouvrir")
+        weather.tap()
+        XCTAssertTrue(app.navigationBars["Météo"].waitForExistence(timeout: 10), "La météo détaillée doit s'ouvrir")
+        snapshot("weather")
+        XCTAssertEqual(app.state, .runningForeground)
+    }
 }

@@ -94,7 +94,7 @@ private struct DailyTileView: View {
         case let .nutrition(nutrition): NutritionDayTile(nutrition: nutrition)
         case let .workout(workout): WorkoutDayTile(workout: workout)
         case let .classes(title, items): TimedListTile(title: title, symbol: "graduationcap.fill", colorHex: "D6409F", items: items, space: .student)
-        case let .agenda(title, items): TimedListTile(title: title, symbol: "calendar", colorHex: "3366FF", items: items, space: nil)
+        case let .agenda(title, items): TimedListTile(title: title, symbol: "calendar", colorHex: "3366FF", items: items, space: .productivity)
         case let .habits(done, items): HabitsDayTile(done: done, items: items)
         case let .water(glasses, goal): WaterDayTile(glasses: glasses, goal: goal)
         case let .steps(steps, goal): StepsDayTile(steps: steps, goal: goal)
@@ -515,7 +515,7 @@ private struct WeatherDayTile: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        DayCard(title: weather.locationName, symbol: "location.fill", colorHex: "3A8DDE") {
+        DayCard(title: weather.locationName, symbol: "location.fill", colorHex: "3A8DDE", route: .app(.weather)) {
             HStack(spacing: 8) {
                 Image(systemName: WeatherCode.symbol(weather.code, isDay: weather.isDay))
                     .symbolRenderingMode(.multicolor)
@@ -553,24 +553,38 @@ private struct RemindersDayTile: View {
         DayCard(title: "À ne pas oublier", symbol: "bell.fill", colorHex: "4B5563") {
             VStack(alignment: .leading, spacing: 7) {
                 ForEach(items) { item in
-                    HStack(spacing: 10) {
-                        Image(systemName: item.symbol)
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundStyle(Color(hex: item.colorHex))
-                            .frame(width: 20)
-                        Text(item.title)
-                            .font(.subheadline.weight(.semibold))
-                            .lineLimit(1)
-                        Spacer(minLength: 8)
-                        Text(item.when)
-                            .font(.caption)
-                            .foregroundStyle(item.when == "En retard" ? Color.red : .secondary)
-                            .lineLimit(1)
+                    if let route = item.route {
+                        NavigationLink(value: route) { row(item) }
+                            .buttonStyle(.plain)
+                    } else {
+                        row(item)
                     }
                 }
             }
         }
         .accessibilityIdentifier("daily-reminders")
+    }
+
+    private func row(_ item: DailyBrief.Reminder) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: item.symbol)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(Color(hex: item.colorHex))
+                .frame(width: 20)
+            Text(item.title)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.primary)
+                .lineLimit(1)
+            Spacer(minLength: 8)
+            Text(item.when)
+                .font(.caption)
+                .foregroundStyle(item.when == "En retard" ? Color.red : .secondary)
+                .lineLimit(1)
+            if item.route != nil {
+                Image(systemName: "chevron.right").font(.caption2.weight(.bold)).foregroundStyle(.tertiary)
+            }
+        }
+        .contentShape(Rectangle())
     }
 }
 

@@ -94,6 +94,8 @@ enum DailyBrief {
         var symbol: String
         var colorHex: String
         var date: Date
+        /// Where a tap leads: the mini-app (or its page) holding it.
+        var route: HomeRoute? = nil
     }
 
     struct Check: Equatable, Identifiable {
@@ -367,28 +369,28 @@ enum DailyBrief {
         }
         var reminders: [Reminder] = []
         for exam in input.student.exams where within(exam.date, days: 1) && exam.date > now {
-            reminders.append(Reminder(id: exam.id.uuidString, title: "Examen : \(exam.title)", when: when(exam.date, withTime: true), symbol: "pencil.and.list.clipboard", colorHex: "D6409F", date: exam.date))
+            reminders.append(Reminder(id: exam.id.uuidString, title: "Examen : \(exam.title)", when: when(exam.date, withTime: true), symbol: "pencil.and.list.clipboard", colorHex: "D6409F", date: exam.date, route: .page(.studiesExams)))
         }
         for work in input.student.assignments where !work.isDone && work.due < todayStart.addingTimeInterval(3 * 86_400) {
-            reminders.append(Reminder(id: work.id.uuidString, title: work.title, when: when(work.due, withTime: false), symbol: "doc.text", colorHex: "D6409F", date: work.due))
+            reminders.append(Reminder(id: work.id.uuidString, title: work.title, when: when(work.due, withTime: false), symbol: "doc.text", colorHex: "D6409F", date: work.due, route: .page(.studiesAssignments)))
         }
         for deadline in input.productivity.deadlines where within(deadline.date, days: 2) && deadline.date > now {
-            reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: true), symbol: "flag.fill", colorHex: "6B7280", date: deadline.date))
+            reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: true), symbol: "flag.fill", colorHex: "6B7280", date: deadline.date, route: .app(.planning)))
         }
         for upcoming in BudgetMath.upcomingBills(input.budget, at: now, within: 3) {
-            reminders.append(Reminder(id: upcoming.bill.id.uuidString, title: upcoming.bill.name, when: "\(when(upcoming.due, withTime: false)) · \(TF.money(upcoming.bill.amount, input.currency))", symbol: "doc.text.fill", colorHex: "2F8F7A", date: upcoming.due))
+            reminders.append(Reminder(id: upcoming.bill.id.uuidString, title: upcoming.bill.name, when: "\(when(upcoming.due, withTime: false)) · \(TF.money(upcoming.bill.amount, input.currency))", symbol: "doc.text.fill", colorHex: "2F8F7A", date: upcoming.due, route: .page(.financesBills)))
         }
         for deadline in input.car.deadlines where within(deadline.date, days: 7) {
-            reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: false), symbol: "car.fill", colorHex: "4B5563", date: deadline.date))
+            reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: false), symbol: "car.fill", colorHex: "4B5563", date: deadline.date, route: .page(.carDeadlines)))
         }
         for trip in input.travel.trips where within(trip.start, days: 3) {
-            reminders.append(Reminder(id: trip.id.uuidString, title: "Départ pour \(trip.destination)", when: when(trip.start, withTime: false), symbol: "airplane", colorHex: "12A4B5", date: trip.start))
+            reminders.append(Reminder(id: trip.id.uuidString, title: "Départ pour \(trip.destination)", when: when(trip.start, withTime: false), symbol: "airplane", colorHex: "12A4B5", date: trip.start, route: .app(.travel)))
         }
         var result = Array(reminders.sorted { $0.date < $1.date }.prefix(4))
         let open = input.content.tasks.filter { !$0.isDone }
         if !open.isEmpty && result.count < 4 {
             let names = open.prefix(2).map(\.title).joined(separator: ", ")
-            result.append(Reminder(id: "tasks", title: Fmt.plural(open.count, "tâche à faire", "tâches à faire"), when: names, symbol: "checklist", colorHex: "6B7280", date: .distantFuture))
+            result.append(Reminder(id: "tasks", title: Fmt.plural(open.count, "tâche à faire", "tâches à faire"), when: names, symbol: "checklist", colorHex: "6B7280", date: .distantFuture, route: .page(.planningTasks)))
         }
         return result
     }

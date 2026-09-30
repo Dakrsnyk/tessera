@@ -418,12 +418,31 @@ enum SampleData {
             TripActivity(title: "Pastéis de Belém", date: day(base + 2, 15, from: now), place: "Belém"),
         ]
         state.sampleAmount = 100
+        let trip = state.trips[0]
+        state.trips[0].budget = 3_200
+        state.expenses = [
+            TripExpense(tripID: trip.id, amount: 1_180, currencyCode: "CAD", kind: .transport, label: "Billets d'avion", date: day(-40, 20, from: now)),
+            TripExpense(tripID: trip.id, amount: 896, currencyCode: "EUR", kind: .lodging, label: "Hôtel Alfama", date: day(-30, 20, from: now)),
+        ]
+        if ongoing {
+            state.expenses += [
+                TripExpense(tripID: trip.id, amount: 42.5, currencyCode: "EUR", kind: .food, label: "Souper à Alfama", date: day(-2, 21, from: now)),
+                TripExpense(tripID: trip.id, amount: 18, currencyCode: "EUR", kind: .transport, label: "Carte Viva Viagem", date: day(-2, 10, from: now)),
+                TripExpense(tripID: trip.id, amount: 15, currencyCode: "EUR", kind: .activities, label: "Château Saint-Georges", date: day(-1, 15, from: now)),
+                TripExpense(tripID: trip.id, amount: 31.8, currencyCode: "EUR", kind: .food, label: "Marché de Campo de Ourique", date: day(-1, 13, from: now)),
+            ]
+        }
+        state.addEssentials(to: trip.id, abroad: true)
+        for index in state.checklist.indices where index % 3 != 2 {
+            state.checklist[index].isDone = ongoing || index < 3
+        }
         return state
     }
 
     static func car(now: Date) -> CarState {
         var state = CarState()
         state.name = "Civic 2019"
+        state.tankLiters = 47
         var odometer = 61_200.0
         for index in 0..<10 {
             let date = day(-95 + index * 10, 17, from: now)

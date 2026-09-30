@@ -392,15 +392,36 @@ struct CarSpaceSections: View {
 
 struct FuelEditor: View {
     @Environment(AppModel.self) private var model
-    @State private var fill = FuelFill(liters: 0, total: 0, odometer: 0)
+    @Environment(\.dismiss) private var dismiss
+    @State private var fill: FuelFill
+    private let isNew: Bool
+
+    /// A new fill-up, or an existing one to change or delete.
+    init(fill: FuelFill? = nil) {
+        _fill = State(initialValue: fill ?? FuelFill(liters: 0, total: 0, odometer: 0))
+        isNew = fill == nil
+    }
 
     var body: some View {
-        SheetForm(title: "Plein", canSave: fill.liters > 0 && fill.total > 0 && fill.odometer > 0, onSave: save) {
-            NumberRow(title: "Litres", value: $fill.liters, unit: "L")
-            NumberRow(title: "Total payé", value: $fill.total, unit: model.settings.currencyCode)
-            NumberRow(title: "Compteur", value: $fill.odometer, unit: "km")
-            Toggle("Plein complet", isOn: $fill.isFull)
-            DatePicker("Date", selection: $fill.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+        SheetForm(title: isNew ? "Plein" : "Modifier le plein", canSave: fill.liters > 0 && fill.total > 0 && fill.odometer > 0, onSave: save) {
+            Section {
+                NumberRow(title: "Litres", value: $fill.liters, unit: "L")
+                NumberRow(title: "Total payé", value: $fill.total, unit: model.settings.currencyCode)
+                NumberRow(title: "Compteur", value: $fill.odometer, unit: "km")
+                Toggle("Plein complet", isOn: $fill.isFull)
+                DatePicker("Date", selection: $fill.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+            } footer: {
+                Text("Un plein complet permet de calculer la consommation exacte et l'autonomie.")
+            }
+            if !isNew {
+                Section {
+                    Button("Supprimer le plein", role: .destructive) {
+                        let id = fill.id
+                        model.update(\.car) { $0.fills.removeAll { $0.id == id } }
+                        dismiss()
+                    }
+                }
+            }
         }
         .onAppear {
             if fill.odometer == 0, let odometer = CarMath.odometer(model.car) { fill.odometer = odometer }
@@ -409,7 +430,7 @@ struct FuelEditor: View {
 
     private func save() {
         let saved = fill
-        model.update(\.car) { $0.fills.append(saved) }
+        model.update(\.car) { $0.save(saved) }
         Haptics.success()
     }
 }

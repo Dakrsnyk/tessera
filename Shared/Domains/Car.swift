@@ -46,9 +46,11 @@ struct CarState: Codable, Hashable {
     var otherMonthly: Double = 0
     /// Maintenance budget per year (tires, repairs…), spread over the months.
     var maintenanceYearly: Double = 0
+    /// Tank size in litres, for the range.
+    var tankLiters: Double?
 
     enum CodingKeys: String, CodingKey {
-        case name, fills, readings, services, deadlines, insuranceMonthly, loanMonthly, parkingMonthly, otherMonthly, maintenanceYearly
+        case name, fills, readings, services, deadlines, insuranceMonthly, loanMonthly, parkingMonthly, otherMonthly, maintenanceYearly, tankLiters
     }
 
     init() {}
@@ -65,6 +67,11 @@ struct CarState: Codable, Hashable {
         parkingMonthly = c.value(.parkingMonthly, 0)
         otherMonthly = c.value(.otherMonthly, 0)
         maintenanceYearly = c.value(.maintenanceYearly, 0)
+        tankLiters = c.optional(.tankLiters)
+    }
+
+    mutating func save(_ fill: FuelFill) {
+        if let index = fills.firstIndex(where: { $0.id == fill.id }) { fills[index] = fill } else { fills.append(fill) }
     }
 
     mutating func markServiceDone(_ id: UUID, km: Double, at date: Date = Date()) {
@@ -172,5 +179,69 @@ enum CarMath {
     static func upcomingDeadlines(_ state: CarState, at date: Date) -> [CarDeadline] {
         let today = DateMath.startOfDay(date)
         return state.deadlines.filter { $0.date >= today }.sorted { $0.date < $1.date }
+    }
+
+    // MARK: Mini-app
+
+    /// What the tank still holds and how far it goes, estimated since the last full tank from the
+    /// average consumption. Nil without a tank size, a full tank or a consumption.
+    struct FuelRange: Hashable {
+        let liters: Double
+        let km: Double
+        let share: Double
+        let since: FuelFill
+    }
+
+    static func range(_ state: CarState) -> FuelRange? {
+        guard let tank = state.tankLiters, tank > 0, let perHundred = consumption(state),
+              let lastFull = state.fills.filter(\.isFull).max(by: { $0.odometer < $1.odometer }),
+              let current = odometer(state) else { return nil }
+        // Partial fill-ups since the last full tank add fuel back.
+        let added = state.fills.filter { !$0.isFull && $0.odometer > lastFull.odometer }.reduce(0) { $0 + $1.liters }
+        let used = max(0, current - lastFull.odometer) * perHundred / 100
+        let liters = min(tank, max(0, tank - used + added))
+        return FuelRange(liters: liters, km: liters / perHundred * 100, share: liters / tank, since: lastFull)
+    }
+
+    struct MonthDistance: Hashable, Identifiable {
+        let start: Date
+        let km: Double
+        var id: Date { start }
+    }
+
+    /// Kilometres driven each month, oldest first, from the odometer values known.
+    static func kmByMonth(_ state: CarState, count: Int, at date: Date) -> [MonthDistance] {
+        let points = odometerPoints(state)
+        guard !points.isEmpty, let current = DateMath.calendar.dateInterval(of: .month, for: date)?.start else { return [] }
+        return (0..<count).reversed().compactMap { back in
+            guard let start = DateMath.calendar.date(byAdding: .month, value: -back, to: current),
+                  let end = DateMath.calendar.date(byAdding: .month, value: 1, to: start) else { return nil }
+            let before = points.last(where: { $0.date < start })
+            let inside = points.filter { $0.date >= start && $0.date < end }
+            guard let last = inside.last, let base = before ?? inside.first else { return MonthDistance(start: start, km: 0) }
+            return MonthDistance(start: start, km: max(0, last.km - base.km))
+        }
+    }
+
+    /// Consumption between two full tanks, for each full tank after the first.
+    struct FillConsumption: Hashable, Identifiable {
+        let fill: FuelFill
+        let perHundred: Double
+        var id: UUID { fill.id }
+    }
+
+    static func consumptionByFill(_ state: CarState) -> [FillConsumption] {
+        let sorted = state.fills.sorted { $0.odometer < $1.odometer }
+        var result: [FillConsumption] = []
+        var lastFullIndex: Int?
+        for (index, fill) in sorted.enumerated() where fill.isFull {
+            if let previous = lastFullIndex {
+                let distance = fill.odometer - sorted[previous].odometer
+                let liters = sorted[(previous + 1)...index].reduce(0) { $0 + $1.liters }
+                if distance > 0 { result.append(FillConsumption(fill: fill, perHundred: liters / distance * 100)) }
+            }
+            lastFullIndex = index
+        }
+        return result
     }
 }

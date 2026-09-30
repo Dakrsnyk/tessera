@@ -92,6 +92,9 @@ enum ScreenshotMode {
                 let parts = screen.dropFirst(4).split(separator: "-").map(String.init)
                 if let app = parts.first.flatMap(MiniApp.init(rawValue:)) {
                     let name = "\(app.rawValue)-\(parts.dropFirst().first ?? "")"
+                    // Travel is captured during the trip, the richest moment of the mini-app.
+                    if app == .travel { model.update(\.travel) { $0 = SampleData.travel(now: Date(), ongoing: true) } }
+                    let tripID = model.travel.trips.first?.id
                     let page: MiniAppPage? = switch name {
                     case "nutrition-meal": .nutritionMeal(.breakfast, Date())
                     case "nutrition-history": .nutritionHistory
@@ -127,6 +130,14 @@ enum ScreenshotMode {
                     case "business-results": .businessResults
                     case "business-recurring": .businessRecurring
                     case "business-metrics": .businessMetrics
+                    case "travel-program": tripID.map { .travelProgram($0) }
+                    case "travel-budget": tripID.map { .travelBudget($0) }
+                    case "travel-checklist": tripID.map { .travelChecklist($0) }
+                    case "car-fuel": .carFuel
+                    case "car-mileage": .carMileage
+                    case "car-maintenance": .carMaintenance
+                    case "car-deadlines": .carDeadlines
+                    case "car-costs": .carCosts
                     default: nil
                     }
                     // A workout under way, two sets done, for the session page.

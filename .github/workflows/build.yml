@@ -221,6 +221,18 @@ jobs:
               WAIT=7 shoot $screen $screen top light
             done
             WAIT=7 shoot app-business-end app-business bottom light
+            for screen in app-travel app-travel-program app-travel-budget app-travel-checklist; do
+              WAIT=8 shoot $screen $screen top light
+            done
+            WAIT=8 shoot app-travel-end app-travel bottom light
+            for screen in app-car app-car-fuel app-car-mileage app-car-maintenance app-car-deadlines app-car-costs; do
+              WAIT=7 shoot $screen $screen top light
+            done
+            WAIT=7 shoot app-car-end app-car bottom light
+            WAIT=10 shoot app-weather app-weather top light
+            WAIT=10 shoot app-weather-end app-weather bottom light
+            WAIT=10 shoot app-weather-dark app-weather top dark
+            WAIT=8 shoot home-apps home 0.3 light
           }
           if [ "$STUDIO" = "true" ]; then
             studio_shots

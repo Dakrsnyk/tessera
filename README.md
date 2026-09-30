@@ -84,7 +84,20 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 ## 4. Ce que contient l'app
 
-**Des espaces (mini-apps)** qui alimentent les widgets : Productivité, Habitudes, Nutrition, Fitness, Budget, Placements, Mon entreprise, Sociétés cotées, Études, Voyage, Auto, Ma vie. Ce qu'on y note s'affiche aussitôt dans les widgets.
+**Des espaces** (onglet Créer) qui alimentent les widgets : Productivité, Habitudes, Nutrition, Fitness, Budget, Placements, Mon entreprise, Sociétés cotées, Études, Voyage, Auto, Ma vie. Ce qu'on y note s'affiche aussitôt dans les widgets.
+
+**Neuf mini-apps, ouvertes depuis l'accueil** (Accueil → carte de « Mon Quotidien » ou « Mes mini-apps » → mini-app → sections). Elles lisent et écrivent les mêmes données que les espaces, les widgets et « Mes informations » : rien n'est dupliqué. Chacune a un tableau de bord (ce qui compte maintenant, une action principale), puis ses sections à une touche ; le retour ramène toujours là où on était. Sans données, un écran court explique quoi noter, sans grands écrans vides.
+- **Nutrition** : calories, macros et tous les nutriments connus (jamais inventés), repas modifiables (quantité, repas, suppression), repas enregistrés et repas précédents à reprendre, 207 aliments courants plus Open Food Facts, scanner, idées selon ce qui reste vraiment, historique (jour, hier, 7 jours, 30 jours, période) avec le poids.
+- **Fitness** : séance du jour, programme (séries, répétitions, charge, repos, tempo, notes), bibliothèque de 163 exercices (recherche par nom, synonymes, muscle ou matériel, filtres, favoris, récents, « Mes exercices »), fiche ⓘ avec démonstration schématique animée et technique, « Ajouter à ma séance », séance en direct avec ⓘ sans perdre sa place, historique, progression par exercice, activité du jour (podomètre de l'iPhone).
+- **Planning** : aujourd'hui en une ligne du temps (calendrier, cours, examens, devoirs, tâches, échéances, séances), Top 3, tâches avec priorité, échéance, heure et répétition, semaine, mois, projets, habitudes et séries, concentration.
+- **Études** : cours en cours ou prochain, devoirs à cocher, examens (compte à rebours, temps révisé), notes et moyennes, ce qu'il faut sur le reste pour atteindre un objectif, horaire en grille, chrono d'étude, fiches de révision.
+- **Finances** : reste du mois et par jour, revenus et dépenses (modifiables), catégories et limites, factures et abonnements, épargne et comptes, évolution sur 6 mois et comparaison avec le mois dernier à la même date. Aucune connexion bancaire, aucun conseil financier.
+- **Business** : chiffre d'affaires comparé à la période précédente arrêtée au même moment (jour, semaine, mois, année), indicateurs choisis par la personne (bénéfice, marge, panier moyen, conversion, MRR…), indicateurs suivis à la main (abonnés, devis…), résultats par mois, revenu récurrent.
+- **Voyage** : compte à rebours ou jour du voyage, heure et météo sur place, prochain vol, hébergement et activité, programme jour par jour, budget dans toutes les devises (taux de la BCE ; un montant sans taux est affiché à part, jamais deviné), liste « À ne pas oublier ».
+- **Auto** : compteur, kilomètres du mois, autonomie estimée (taille du réservoir et consommation depuis le dernier plein complet), consommation et prix au litre, pleins modifiables, entretiens, échéances, coût réel par mois.
+- **Météo** : maintenant, les prochaines heures (température et pluie), les jours à venir, vent, humidité, pression, UV, soleil, et la météo du voyage en cours.
+
+« Mes mini-apps » sur l'accueil propose celles qui ont des données ou touchent un centre d'intérêt, les plus ouvertes d'abord, avec un chiffre du moment ; les autres sont dans « Toutes ».
 
 **103 widgets** (30 gratuits, 73 Premium), chacun en plusieurs tailles, beaucoup aussi sur l'écran verrouillé. Dans la galerie d'iOS, ils apparaissent sous forme de 15 widgets d'origine et de 15 widgets thématiques (Nutrition, Fitness, Budget…). On choisit ensuite le widget précis avec « Modifier le widget ».
 
@@ -129,7 +142,7 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Résumés intelligents** : calculés sur l'iPhone à partir des données de l'utilisateur. Avec Apple Intelligence (iOS 26), le texte est reformulé ; chaque nombre de la reformulation est vérifié par rapport aux données, sinon le texte calculé est gardé. Aucune donnée n'est inventée.
 
-**Sources de données** : Open Food Facts (ODbL) et une base intégrée d'aliments courants, Open-Meteo, CoinGecko, SEC EDGAR (chiffres officiels, domaine public), Frankfurter (taux de la BCE), Finnhub (cours des actions, clé facultative). Les écrans de placements sont informatifs et ne donnent aucun conseil financier ; les valeurs nutritionnelles sont indicatives.
+**Sources de données** : Open Food Facts (ODbL) et une base intégrée d'aliments courants, Open-Meteo (CC BY 4.0, cité dans la mini-app Météo), CoinGecko, SEC EDGAR (chiffres officiels, domaine public), Frankfurter (taux de la BCE), Finnhub (cours des actions, clé facultative). Les écrans de placements sont informatifs et ne donnent aucun conseil financier ; les valeurs nutritionnelles sont indicatives.
 
 **Widget Studio** : l'éditeur de widget, avec l'aperçu toujours visible en haut qui change à chaque réglage, et 14 sections :
 - **Contenu** : nom, données du widget, options, et chaque élément affiché ou masqué (titre, icône, valeur, légende, graphique, boutons, chaque ligne, chaque part d'une répartition), avec la couleur de chaque ligne (protéines, glucides, lipides, catégories…).
@@ -178,6 +191,12 @@ Config/    Info.plist, entitlements, configuration StoreKit locale
 **Navigation**
 - [ ] Onglets Accueil, Espaces, Store, Mes widgets, Réglages
 - [ ] Recherche (loupe de l'accueil → Explorer), filtres Gratuits/Premium, catégories, styles
+
+**Mini-apps**
+- [ ] Chaque carte de « Mon Quotidien » ouvre sa mini-app ; le bouton retour revient à l'accueil
+- [ ] Chaque mini-app : ajouter, modifier, supprimer ; la carte de l'accueil et les widgets changent aussitôt
+- [ ] Fitness : ⓘ pendant une séance, puis retour à la même série
+- [ ] Voyage : une dépense en devise étrangère est convertie (ou affichée à part sans taux)
 
 **Espaces (V2)**
 - [ ] Chaque espace : ajouter, modifier, supprimer des éléments ; les widgets de l'espace changent aussitôt

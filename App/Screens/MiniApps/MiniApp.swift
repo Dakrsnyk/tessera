@@ -65,13 +65,8 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         }
     }
 
-    /// Built as a full mini-app. The others still open their space's data until they are.
-    var isBuilt: Bool {
-        switch self {
-        case .nutrition, .fitness, .planning, .studies, .finances, .business: true
-        default: false
-        }
-    }
+    /// Every mini-app is built; kept so a new one can open its space's data until it is.
+    var isBuilt: Bool { true }
 
     init?(space: Space) {
         guard let app = MiniApp.allCases.first(where: { $0.space == space }) else { return nil }
@@ -118,6 +113,14 @@ enum MiniAppPage: Hashable {
     case businessResults
     case businessRecurring
     case businessMetrics
+    case travelProgram(UUID)
+    case travelBudget(UUID)
+    case travelChecklist(UUID)
+    case carFuel
+    case carMileage
+    case carMaintenance
+    case carDeadlines
+    case carCosts
 }
 
 /// A mini-app, or its space's data while it isn't built yet.
@@ -125,6 +128,12 @@ struct MiniAppView: View {
     let app: MiniApp
 
     var body: some View {
+        content
+            .onAppear { MiniAppUsage.record(app) }
+    }
+
+    @ViewBuilder
+    private var content: some View {
         switch app {
         case .nutrition:
             NutritionAppView()
@@ -138,12 +147,12 @@ struct MiniAppView: View {
             FinancesAppView()
         case .business:
             BusinessAppView()
-        default:
-            if let space = app.space {
-                SpaceView(space: space, isEmbedded: true)
-            } else {
-                ContentUnavailableView(app.title, systemImage: app.symbol)
-            }
+        case .travel:
+            TravelAppView()
+        case .car:
+            CarAppView()
+        case .weather:
+            WeatherAppView()
         }
     }
 }
@@ -194,6 +203,14 @@ struct MiniAppPageView: View {
         case .businessResults: BusinessResultsPage()
         case .businessRecurring: BusinessRecurringPage()
         case .businessMetrics: BusinessMetricsPage()
+        case let .travelProgram(id): TravelProgramPage(tripID: id)
+        case let .travelBudget(id): TravelBudgetPage(tripID: id)
+        case let .travelChecklist(id): TravelChecklistPage(tripID: id)
+        case .carFuel: CarFuelPage()
+        case .carMileage: CarMileagePage()
+        case .carMaintenance: CarMaintenancePage()
+        case .carDeadlines: CarDeadlinesPage()
+        case .carCosts: CarCostsPage()
         }
     }
 }
