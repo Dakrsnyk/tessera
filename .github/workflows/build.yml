@@ -53,7 +53,7 @@ jobs:
         run: python3 scripts/check_swift.py
 
       - name: Boot a simulator early
-        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true'
+        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true' || env.STACK == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
