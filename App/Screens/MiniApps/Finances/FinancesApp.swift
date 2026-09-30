@@ -125,7 +125,7 @@ struct FinancesAppView: View {
             Text(heroDetail(state: state, spent: spent, now: now))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            if comparison.previous > 0 {
+            if comparison.previous > 0, abs(comparison.current - comparison.previous) >= 1 {
                 let difference = comparison.current - comparison.previous
                 Label("\(TF.money(abs(difference), currency)) de \(difference > 0 ? "plus" : "moins") que le mois dernier à la même date",
                       systemImage: difference > 0 ? "arrow.up.right" : "arrow.down.right")
@@ -141,6 +141,7 @@ struct FinancesAppView: View {
     private func heroDetail(state: BudgetState, spent: Double, now: Date) -> String {
         let days = BudgetMath.daysLeftInMonth(now)
         let dayText = Fmt.plural(days, "jour", "jours")
+        if days <= 1 { return "\(TF.money(spent, currency)) dépensés · dernier jour du mois" }
         guard BudgetMath.remaining(state, at: now) > 0 else { return "\(TF.money(spent, currency)) dépensés · \(dayText) avant la fin du mois" }
         return "\(TF.money(spent, currency)) dépensés · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour pendant \(dayText)"
     }

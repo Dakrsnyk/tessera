@@ -60,6 +60,16 @@ enum BusinessPeriod: String, CaseIterable, Identifiable {
         }
     }
 
+    /// « par rapport au mois dernier… »
+    var comparisonText: String {
+        switch self {
+        case .day: "par rapport à hier à la même heure"
+        case .week: "par rapport à la semaine dernière à la même date"
+        case .month: "par rapport au mois dernier à la même date"
+        case .year: "par rapport à l'an dernier à la même date"
+        }
+    }
+
     var math: BusinessMath.Period {
         switch self {
         case .day: .day
@@ -168,7 +178,7 @@ struct BusinessAppView: View {
                 .monospacedDigit()
                 .contentTransition(.numericText())
             if let change {
-                Label("\(change.text) par rapport à \(period.previousText)", systemImage: (comparison.change ?? 0) >= 0 ? "arrow.up.right" : "arrow.down.right")
+                Label("\(change.text) \(period.comparisonText)", systemImage: (comparison.change ?? 0) >= 0 ? "arrow.up.right" : "arrow.down.right")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(Color(hex: change.hex))
             } else if let previous = comparison.previous, previous == 0 {
