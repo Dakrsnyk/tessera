@@ -220,8 +220,8 @@ jobs:
             for page in 1 2 3; do shoot gallery-recolor-$page gallery-recolor-$page top light; done
             shoot gallery-recolor-1-dark gallery-recolor-1 top dark
             # Créer: the selection, then the Studio with the widgets chosen.
-            shoot creator-studio creator-fitness top light -screenshotCreatorMulti YES -screenshotCreatorStudio YES
-            shoot creator-studio-medium creator-nutrition top light -screenshotCreatorFormat medium -screenshotCreatorStudio YES
+            WAIT=9 shoot creator-studio creator-fitness top light -screenshotCreatorMulti YES -screenshotCreatorStudio YES
+            WAIT=9 shoot creator-studio-medium creator-nutrition top light -screenshotCreatorFormat medium -screenshotCreatorStudio YES
             for page in 1 2 3; do shoot gallery-styles-$page gallery-styles-$page top light; done
             shoot gallery-styles-1-dark gallery-styles-1 top dark
             for page in 1 2; do shoot gallery-presets-$page gallery-presets-$page top light; done

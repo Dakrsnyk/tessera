@@ -232,8 +232,15 @@ struct StudioColorsPanel: View {
             && s.numberHex == nil && s.iconHex == nil && s.chartHex == nil && s.rowColors.isEmpty
     }
 
+    /// What colors the widget now: the main color, a palette, colors picked one by one, or the style.
+    private var colorsDetail: String {
+        if design.style.recolor { return Palette.name(for: design.accentHex) }
+        if let palette = ColorPalette.all.first(where: { $0.matches(design) }) { return "Palette \(palette.name)" }
+        return usesStyleColors ? "Couleurs du style" : "Personnalisées"
+    }
+
     var body: some View {
-        StudioGroup(title: "Couleur principale", detail: design.style.recolor ? Palette.name(for: design.accentHex) : "Couleurs du style") {
+        StudioGroup(title: "Couleur principale", detail: colorsDetail) {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.")
                     .font(.footnote)

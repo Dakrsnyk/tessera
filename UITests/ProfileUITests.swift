@@ -172,7 +172,15 @@ final class ProfileUITests: XCTestCase {
         for index in 2...6 {
             let chip = app.buttons["studio-widget-\(index)"]
             XCTAssertTrue(chip.waitForExistence(timeout: 5), "Widget \(index) du pack absent")
-            // The row of widgets scrolls sideways: the tap brings the chip into view first.
+            // The row of widgets scrolls sideways: a short drag from the chip just chosen brings the next one.
+            let previous = app.buttons["studio-widget-\(index - 1)"]
+            var drags = 0
+            while !chip.isHittable && drags < 6 {
+                let start = previous.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+                let end = previous.coordinate(withNormalizedOffset: CGVector(dx: -0.4, dy: 0.5))
+                start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
+                drags += 1
+            }
             chip.tap()
             let selected = expectation(for: NSPredicate(format: "isSelected == true"), evaluatedWith: chip)
             XCTAssertEqual(XCTWaiter.wait(for: [selected], timeout: 4), .completed, "Le widget \(index) ne s'ouvre pas")
