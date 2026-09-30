@@ -10,6 +10,20 @@ final class StepCounter {
 
     private let pedometer = CMPedometer()
     private(set) var stepsToday: Int?
+
+    /// A day of activity from the motion sensor.
+    struct Day: Identifiable, Hashable {
+        var date: Date
+        var steps: Int
+        /// Metres, when the iPhone measures it.
+        var distance: Double?
+        var floors: Int?
+        var id: Date { date }
+    }
+
+    private(set) var today: Day?
+    /// The last seven days, today last.
+    private(set) var week: [Day] = []
     /// Bumped after the access prompt, so views asking `status` read it again.
     private(set) var revision = 0
 
@@ -39,5 +53,35 @@ final class StepCounter {
         }
         stepsToday = steps
         revision += 1
+    }
+
+    /// Reads today in detail and the last seven days (the Fitness mini-app's activity).
+    func refreshWeek() async {
+        guard status == .allowed else { return }
+        var days: [Day] = []
+        for offset in (0..<7).reversed() {
+            let start = DateMath.startOfDay(DateMath.calendar.date(byAdding: .day, value: -offset, to: Date()) ?? Date())
+            let end = offset == 0 ? Date() : (DateMath.calendar.date(byAdding: .day, value: 1, to: start) ?? Date())
+            let day: Day = await withCheckedContinuation { continuation in
+                pedometer.queryPedometerData(from: start, to: end) { data, _ in
+                    continuation.resume(returning: Day(
+                        date: start,
+                        steps: data?.numberOfSteps.intValue ?? 0,
+                        distance: data?.distance?.doubleValue,
+                        floors: data?.floorsAscended?.intValue
+                    ))
+                }
+            }
+            days.append(day)
+        }
+        week = days
+        today = days.last
+        stepsToday = days.last?.steps
+        revision += 1
+    }
+
+    /// Active calories estimated from the steps (about 0,04 kcal per step for 70 kg), clearly an estimate.
+    static func estimatedCalories(steps: Int, weightKg: Double?) -> Double {
+        Double(steps) * 0.04 * ((weightKg ?? 70) / 70)
     }
 }

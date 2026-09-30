@@ -65,10 +65,13 @@ enum SampleData {
     static func content(now: Date) -> ContentState {
         var content = ContentState()
         content.tasks = [
-            TaskItem(title: "Appeler le garage"),
-            TaskItem(title: "Envoyer la facture"),
-            TaskItem(title: "Courir 5 km", isDone: true, completedAt: now),
-            TaskItem(title: "Lire 20 pages"),
+            TaskItem(title: "Appeler le garage", priority: .medium, due: DateMath.startOfDay(now)),
+            TaskItem(title: "Envoyer la facture", priority: .high, due: day(0, 11, from: now), hasTime: true),
+            TaskItem(title: "Courir 5 km", isDone: true, completedAt: now, due: DateMath.startOfDay(now)),
+            TaskItem(title: "Lire 20 pages", due: DateMath.startOfDay(now), repeats: .daily),
+            TaskItem(title: "Payer le loyer", priority: .high, due: day(-1, 0, from: now)),
+            TaskItem(title: "Réserver le resto pour samedi", priority: .low, due: day(2, 0, from: now)),
+            TaskItem(title: "Trier les photos de vacances"),
         ]
         func keys(_ offsets: [Int]) -> [String] { offsets.map { DateMath.dayKey(day(-$0, from: now)) } }
         content.habits = [

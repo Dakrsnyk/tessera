@@ -395,7 +395,7 @@ private struct HabitsDayTile: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        DayCard(title: "Habitudes", symbol: "repeat", colorHex: "5C8424", route: .space(.habits)) {
+        DayCard(title: "Habitudes", symbol: "repeat", colorHex: "5C8424", route: .page(.planningHabits)) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text("\(done)")
                     .font(.title.weight(.bold))
@@ -460,7 +460,7 @@ private struct StepsDayTile: View {
     let goal: Int?
 
     var body: some View {
-        DayCard(title: "Pas", symbol: "figure.walk", colorHex: "12A4B5", route: .infoArea(.fitness)) {
+        DayCard(title: "Pas", symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text(Fmt.number(steps))
                     .font(.title2.weight(.bold))

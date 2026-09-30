@@ -39,6 +39,30 @@ enum CalendarService {
         }
     }
 
+    /// Every event between two dates (all-day ones first each day), for the Planning mini-app.
+    static func events(from start: Date, to end: Date) -> [EventSnapshot] {
+        guard hasAccess, end > start else { return [] }
+        let store = EKEventStore()
+        let predicate = store.predicateForEvents(withStart: start, end: end, calendars: nil)
+        return store.events(matching: predicate)
+            .sorted { lhs, rhs in
+                if !DateMath.isSameDay(lhs.startDate, rhs.startDate) { return lhs.startDate < rhs.startDate }
+                if lhs.isAllDay != rhs.isAllDay { return lhs.isAllDay }
+                return lhs.startDate < rhs.startDate
+            }
+            .map { event in
+                EventSnapshot(
+                    id: event.eventIdentifier ?? UUID().uuidString,
+                    title: event.title?.trimmed.nonEmpty ?? "Sans titre",
+                    start: event.startDate,
+                    end: event.endDate,
+                    isAllDay: event.isAllDay,
+                    colorHex: event.calendar.map { Color.hexFromCG($0.cgColor) } ?? "3366FF",
+                    location: event.location?.trimmed.nonEmpty
+                )
+            }
+    }
+
     static func upcoming(from now: Date = Date(), hours: Int = 48, limit: Int = 8) -> EventsResult {
         guard hasAccess else { return .needsAccess }
         let store = EKEventStore()

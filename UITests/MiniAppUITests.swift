@@ -75,6 +75,11 @@ final class MiniAppUITests: XCTestCase {
 
     private var entryRows: XCUIElementQuery { app.buttons.matching(identifier: "entry-row") }
 
+    /// Any element whose label contains a text (list rows merge their texts into one label).
+    private func element(containing text: String) -> XCUIElement {
+        app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
+    }
+
     // MARK: Nutrition
 
     func testNutritionOpensFromHomeAndManagesAMeal() {
@@ -119,6 +124,134 @@ final class MiniAppUITests: XCTestCase {
             goBack()
             XCTAssertTrue(app.otherElements["nutrition-hero"].waitForExistence(timeout: 8), "Retour depuis \(title)")
         }
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    // MARK: Fitness
+
+    func testTheLibraryFindsExercisesAndShowsTheirSheet() {
+        launch(["-screenshotScreen", "app-fitness"])
+        XCTAssertTrue(app.otherElements["fitness-today"].waitForExistence(timeout: 12), "Mini-app Fitness absente")
+        snapshot("fitness")
+        tap(app.buttons["fitness-library"], "Bibliothèque d'exercices")
+        XCTAssertTrue(app.navigationBars["Exercices"].waitForExistence(timeout: 8), "Bibliothèque absente")
+        let search = app.searchFields.firstMatch
+        XCTAssertTrue(search.waitForExistence(timeout: 5))
+        search.tap()
+        search.typeText("développé")
+        XCTAssertTrue(element(containing: "Développé couché (barre)").waitForExistence(timeout: 5), "La recherche doit proposer les développés")
+        XCTAssertTrue(element(containing: "Développé militaire (barre)").exists)
+        snapshot("fitness-search")
+
+        // The ⓘ sheet, then back to the list exactly as it was.
+        app.buttons.matching(identifier: "exercise-info").firstMatch.tap()
+        XCTAssertTrue(app.otherElements["exercise-demo"].waitForExistence(timeout: 8), "Fiche d'exercice absente")
+        snapshot("fitness-exercise-sheet")
+        app.buttons["Fermer"].tap()
+        XCTAssertTrue(element(containing: "Développé couché (barre)").waitForExistence(timeout: 5), "Retour à la recherche")
+
+        // The exercise page: add it to a session of the program.
+        app.buttons.matching(identifier: "exercise-row").firstMatch.tap()
+        tap(app.buttons["exercise-add"], "Ajouter à ma séance")
+        XCTAssertTrue(saveButton.waitForExistence(timeout: 8), "Feuille d'ajout absente")
+        saveButton.tap()
+        XCTAssertTrue(app.buttons["exercise-add"].waitForExistence(timeout: 8))
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    func testASessionKeepsItsPlaceWhenTheSheetOpens() {
+        launch(["-screenshotScreen", "app-fitness-session"])
+        let done = app.buttons["session-set-done"]
+        XCTAssertTrue(done.waitForExistence(timeout: 12), "Séance en cours absente")
+        snapshot("fitness-session")
+        let before = app.staticTexts.matching(NSPredicate(format: "label ENDSWITH %@", "séries")).firstMatch.label
+        done.tap()
+        XCTAssertTrue(done.waitForExistence(timeout: 5))
+        let after = app.staticTexts.matching(NSPredicate(format: "label ENDSWITH %@", "séries")).firstMatch.label
+        XCTAssertNotEqual(before, after, "La série faite doit compter")
+
+        let info = app.buttons["session-info"]
+        if info.waitForExistence(timeout: 3) {
+            info.tap()
+            XCTAssertTrue(app.otherElements["exercise-demo"].waitForExistence(timeout: 8), "Fiche d'exercice absente")
+            app.buttons["Fermer"].tap()
+            XCTAssertTrue(done.waitForExistence(timeout: 5), "Retour à la séance, au même endroit")
+        }
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    // MARK: Planning
+
+    func testPlanningAddsATaskToTodayAndOpensItsPages() {
+        launch(["-screenshotScreen", "app-planning"])
+        XCTAssertTrue(app.otherElements["planning-today"].waitForExistence(timeout: 12), "Mini-app Planning absente")
+        snapshot("planning")
+
+        tap(app.buttons["planning-new-task"], "Nouvelle tâche")
+        let title = app.textFields["task-title"]
+        XCTAssertTrue(title.waitForExistence(timeout: 8), "Formulaire de tâche absent")
+        title.tap()
+        title.typeText("Rappeler Léa")
+        saveButton.tap()
+        XCTAssertTrue(waitForDisappearance(title), "Le formulaire est resté ouvert")
+        XCTAssertTrue(element(containing: "Rappeler Léa").waitForExistence(timeout: 8), "La tâche du jour doit apparaître dans la journée")
+        snapshot("planning-task-added")
+
+        for (identifier, title) in [("planning-tasks", "Tâches"), ("planning-week", "Semaine"), ("planning-habits", "Habitudes")] {
+            tap(app.buttons[identifier], title)
+            XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
+            snapshot(identifier)
+            goBack()
+            XCTAssertTrue(app.otherElements["planning-today"].waitForExistence(timeout: 8), "Retour depuis \(title)")
+        }
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    // MARK: Studies
+
+    func testStudiesChecksHomeworkTimesStudyAndOpensItsPages() {
+        launch(["-screenshotScreen", "app-studies"])
+        let timer = app.otherElements["studies-timer"]
+        XCTAssertTrue(timer.waitForExistence(timeout: 12), "Mini-app Études absente")
+        snapshot("studies")
+
+        // Homework handed in leaves the list right away.
+        let toggles = app.buttons.matching(identifier: "assignment-toggle")
+        reveal(toggles.firstMatch, "Devoir à rendre")
+        let before = toggles.count
+        toggles.firstMatch.tap()
+        let fewer = expectation(for: NSPredicate(format: "count == %d", before - 1), evaluatedWith: toggles)
+        XCTAssertEqual(XCTWaiter().wait(for: [fewer], timeout: 5), .completed, "Le devoir rendu doit quitter « À rendre »")
+
+        // The study timer starts, then stops (too short to count).
+        tap(app.buttons["studies-timer-start"], "Démarrer le chrono")
+        let noCourse = app.buttons["Sans cours précis"]
+        XCTAssertTrue(noCourse.waitForExistence(timeout: 5), "Choix du cours absent")
+        noCourse.tap()
+        tap(app.buttons["studies-timer-stop"], "Terminer le chrono")
+        XCTAssertTrue(element(containing: "Moins d'une minute").waitForExistence(timeout: 5), "Le chrono doit s'arrêter")
+
+        for (identifier, title) in [("studies-timetable", "Horaire"), ("studies-grades", "Notes"), ("studies-revision", "Révisions")] {
+            tap(app.buttons[identifier], title)
+            XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
+            snapshot(identifier)
+            if identifier == "studies-revision" {
+                tap(app.buttons["card-reveal"], "Voir la réponse")
+                tap(app.buttons["card-known"], "Je savais")
+            }
+            goBack()
+            XCTAssertTrue(timer.waitForExistence(timeout: 8), "Retour depuis \(title)")
+        }
+
+        // A course, from the list of courses.
+        tap(app.buttons["studies-courses"], "Cours")
+        XCTAssertTrue(app.navigationBars["Cours"].waitForExistence(timeout: 8), "Liste des cours absente")
+        app.buttons.matching(identifier: "course-row").firstMatch.tap()
+        XCTAssertTrue(app.buttons["course-menu"].waitForExistence(timeout: 8), "Page du cours absente")
+        snapshot("studies-course")
+        goBack()
+        goBack()
+        XCTAssertTrue(timer.waitForExistence(timeout: 8))
         XCTAssertEqual(app.state, .runningForeground)
     }
 }

@@ -68,7 +68,7 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
     /// Built as a full mini-app. The others still open their space's data until they are.
     var isBuilt: Bool {
         switch self {
-        case .nutrition: true
+        case .nutrition, .fitness, .planning, .studies: true
         default: false
         }
     }
@@ -88,6 +88,27 @@ enum MiniAppPage: Hashable {
     case nutritionIdeas
     case nutritionHistory
     case nutritionSavedMeals
+    case fitnessSession
+    case fitnessProgram
+    case fitnessLibrary
+    case fitnessExercise(String)
+    case fitnessHistory
+    case fitnessSessionDetail(UUID)
+    case fitnessProgress
+    case fitnessActivity
+    case planningTasks
+    case planningWeek
+    case planningMonth
+    case planningProjects
+    case planningHabits
+    case planningFocus
+    case studiesTimetable
+    case studiesCourses
+    case studiesCourse(UUID)
+    case studiesExams
+    case studiesAssignments
+    case studiesGrades
+    case studiesRevision
 }
 
 /// A mini-app, or its space's data while it isn't built yet.
@@ -98,6 +119,12 @@ struct MiniAppView: View {
         switch app {
         case .nutrition:
             NutritionAppView()
+        case .fitness:
+            FitnessAppView()
+        case .planning:
+            PlanningAppView()
+        case .studies:
+            StudiesAppView()
         default:
             if let space = app.space {
                 SpaceView(space: space, isEmbedded: true)
@@ -119,6 +146,32 @@ struct MiniAppPageView: View {
         case .nutritionIdeas: NutritionIdeasPage()
         case .nutritionHistory: NutritionHistoryPage()
         case .nutritionSavedMeals: NutritionSavedMealsPage()
+        case .fitnessSession: FitnessSessionPage()
+        case .fitnessProgram: FitnessProgramPage()
+        case .fitnessLibrary: ExerciseLibraryPage()
+        case let .fitnessExercise(id):
+            if let exercise = ExerciseLibrary.info(id) {
+                ExerciseDetailView(exercise: exercise)
+            } else {
+                ContentUnavailableView("Exercice introuvable", systemImage: "dumbbell")
+            }
+        case .fitnessHistory: FitnessHistoryPage()
+        case let .fitnessSessionDetail(id): FitnessSessionDetailPage(sessionID: id)
+        case .fitnessProgress: FitnessProgressPage()
+        case .fitnessActivity: FitnessActivityPage()
+        case .planningTasks: PlanningTasksPage()
+        case .planningWeek: PlanningWeekPage()
+        case .planningMonth: PlanningMonthPage()
+        case .planningProjects: PlanningProjectsPage()
+        case .planningHabits: PlanningHabitsPage()
+        case .planningFocus: PlanningFocusPage()
+        case .studiesTimetable: StudiesTimetablePage()
+        case .studiesCourses: StudiesCoursesPage()
+        case let .studiesCourse(id): StudiesCoursePage(courseID: id)
+        case .studiesExams: StudiesExamsPage()
+        case .studiesAssignments: StudiesAssignmentsPage()
+        case .studiesGrades: StudiesGradesPage()
+        case .studiesRevision: StudiesRevisionPage()
         }
     }
 }

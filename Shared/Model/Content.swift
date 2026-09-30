@@ -1,11 +1,113 @@
 import Foundation
 
+enum TaskPriority: Int, Codable, CaseIterable, Identifiable, Comparable {
+    case none = 0, low, medium, high
+    var id: Int { rawValue }
+
+    var title: String {
+        switch self {
+        case .none: "Aucune"
+        case .low: "Basse"
+        case .medium: "Moyenne"
+        case .high: "Haute"
+        }
+    }
+
+    var colorHex: String? {
+        switch self {
+        case .none: nil
+        case .low: "3A8DDE"
+        case .medium: "F2A33A"
+        case .high: "E5484D"
+        }
+    }
+
+    static func < (lhs: TaskPriority, rhs: TaskPriority) -> Bool { lhs.rawValue < rhs.rawValue }
+}
+
+enum TaskRepeat: String, Codable, CaseIterable, Identifiable {
+    case never, daily, weekdays, weekly, monthly
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .never: "Jamais"
+        case .daily: "Chaque jour"
+        case .weekdays: "En semaine"
+        case .weekly: "Chaque semaine"
+        case .monthly: "Chaque mois"
+        }
+    }
+
+    /// The next date after a due date (weekdays skip Saturday and Sunday).
+    func next(after date: Date) -> Date? {
+        let calendar = DateMath.calendar
+        switch self {
+        case .never: return nil
+        case .daily: return calendar.date(byAdding: .day, value: 1, to: date)
+        case .weekly: return calendar.date(byAdding: .weekOfYear, value: 1, to: date)
+        case .monthly: return calendar.date(byAdding: .month, value: 1, to: date)
+        case .weekdays:
+            var next = calendar.date(byAdding: .day, value: 1, to: date) ?? date
+            while calendar.isDateInWeekend(next) { next = calendar.date(byAdding: .day, value: 1, to: next) ?? next }
+            return next
+        }
+    }
+}
+
 struct TaskItem: Codable, Identifiable, Hashable {
     var id = UUID()
     var title: String
     var isDone = false
     var createdAt = Date()
     var completedAt: Date?
+    var priority: TaskPriority = .none
+    /// The day (and time, when `hasTime`) it is due.
+    var due: Date?
+    var hasTime = false
+    var repeats: TaskRepeat = .never
+    var notes = ""
+
+    init(id: UUID = UUID(), title: String, isDone: Bool = false, createdAt: Date = Date(), completedAt: Date? = nil,
+         priority: TaskPriority = .none, due: Date? = nil, hasTime: Bool = false, repeats: TaskRepeat = .never, notes: String = "") {
+        self.id = id
+        self.title = title
+        self.isDone = isDone
+        self.createdAt = createdAt
+        self.completedAt = completedAt
+        self.priority = priority
+        self.due = due
+        self.hasTime = hasTime
+        self.repeats = repeats
+        self.notes = notes
+    }
+
+    enum CodingKeys: String, CodingKey { case id, title, isDone, createdAt, completedAt, priority, due, hasTime, repeats, notes }
+
+    /// Tolerant: tasks saved before priorities, due dates and repeats keep working.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        title = c.value(.title, "")
+        isDone = c.value(.isDone, false)
+        createdAt = c.value(.createdAt, Date())
+        completedAt = c.optional(.completedAt)
+        priority = c.value(.priority, .none)
+        due = c.optional(.due)
+        hasTime = c.value(.hasTime, false)
+        repeats = c.value(.repeats, .never)
+        notes = c.value(.notes, "")
+    }
+
+    func isOverdue(at now: Date = Date()) -> Bool {
+        guard !isDone, let due else { return false }
+        return hasTime ? due < now : DateMath.startOfDay(due) < DateMath.startOfDay(now)
+    }
+
+    func isDue(on day: Date) -> Bool {
+        guard let due else { return false }
+        return DateMath.isSameDay(due, day)
+    }
 }
 
 struct Habit: Codable, Identifiable, Hashable {
@@ -145,10 +247,23 @@ struct ContentState: Codable, Hashable {
         money = (try? c.decodeIfPresent(MoneyState.self, forKey: .money)) ?? MoneyState()
     }
 
-    mutating func toggleTask(_ id: UUID) {
+    mutating func toggleTask(_ id: UUID, at now: Date = Date()) {
         guard let index = tasks.firstIndex(where: { $0.id == id }) else { return }
         tasks[index].isDone.toggle()
-        tasks[index].completedAt = tasks[index].isDone ? Date() : nil
+        tasks[index].completedAt = tasks[index].isDone ? now : nil
+        // A repeating task comes back for its next date once done.
+        let task = tasks[index]
+        guard task.repeats != .never, let next = task.repeats.next(after: task.due ?? now) else { return }
+        let isNext = { (other: TaskItem) in
+            !other.isDone && other.title == task.title && other.repeats == task.repeats && other.due.map { DateMath.isSameDay($0, next) } == true
+        }
+        if task.isDone {
+            guard !tasks.contains(where: isNext) else { return }
+            tasks.append(TaskItem(title: task.title, createdAt: now, priority: task.priority, due: next, hasTime: task.hasTime, repeats: task.repeats, notes: task.notes))
+        } else if let copy = tasks.lastIndex(where: isNext) {
+            // Unchecked by mistake: the next one it had created goes away.
+            tasks.remove(at: copy)
+        }
     }
 
     mutating func toggleHabit(_ id: UUID, on date: Date = Date()) {

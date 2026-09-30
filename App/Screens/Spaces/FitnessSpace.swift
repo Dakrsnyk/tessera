@@ -102,6 +102,8 @@ struct FitnessSpaceSections: View {
 struct RoutineEditor: View {
     @Environment(AppModel.self) private var model
     @State var routine: Routine
+    @State private var picking = false
+    @State private var info: ExerciseInfo?
 
     var body: some View {
         SheetForm(title: routine.name.isEmpty ? "Nouvelle séance" : routine.name, canSave: !routine.name.trimmed.isEmpty, onSave: save) {
@@ -114,15 +116,45 @@ struct RoutineEditor: View {
             }
             ForEach($routine.exercises) { $exercise in
                 Section {
-                    TextField("Exercice", text: $exercise.name)
-                        .accessibilityIdentifier("exercise-name")
+                    HStack {
+                        TextField("Exercice", text: $exercise.name)
+                            .accessibilityIdentifier("exercise-name")
+                        if let known = exercise.info {
+                            Button {
+                                info = known
+                            } label: {
+                                Image(systemName: "info.circle")
+                            }
+                            .buttonStyle(.borderless)
+                            .accessibilityLabel(Text("Fiche de l'exercice"))
+                        }
+                    }
+                    // Suggestions from the library while the name is typed.
+                    if exercise.info == nil, exercise.name.trimmed.count >= 2 {
+                        ForEach(ExerciseLibrary.search(exercise.name).prefix(3)) { suggestion in
+                            Button {
+                                exercise.name = suggestion.name
+                                exercise.exerciseID = suggestion.id
+                            } label: {
+                                Label(suggestion.name, systemImage: "sparkle.magnifyingglass")
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
                     Stepper("Séries : \(exercise.sets)", value: $exercise.sets, in: 1...12)
                     Stepper("Répétitions : \(exercise.reps)", value: $exercise.reps, in: 1...50)
                     NumberRow(title: "Charge", value: $exercise.weight, unit: "kg")
                     Stepper("Repos : \(exercise.restSeconds) s", value: $exercise.restSeconds, in: 15...600, step: 15)
+                    TextField("Tempo (ex. 3-1-1-0)", text: $exercise.tempo)
+                    TextField("Notes", text: $exercise.notes)
                 }
             }
             Section {
+                Button {
+                    picking = true
+                } label: {
+                    Label("Choisir dans la bibliothèque", systemImage: "books.vertical")
+                }
                 Button {
                     routine.exercises.append(ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0))
                 } label: {
@@ -135,6 +167,21 @@ struct RoutineEditor: View {
                 }
             }
         }
+        .sheet(isPresented: $picking) {
+            NavigationStack {
+                ExerciseLibraryPage { picked in
+                    routine.exercises.removeAll { $0.name.trimmed.isEmpty }
+                    routine.exercises.append(ExerciseTemplate(name: picked.name, sets: 3, reps: 10, weight: 0, exerciseID: picked.id))
+                    picking = false
+                }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Fermer") { picking = false }
+                    }
+                }
+            }
+        }
+        .sheet(item: $info) { ExerciseInfoSheet(exercise: $0) }
     }
 
     private func save() {

@@ -77,9 +77,12 @@ struct StudentState: Codable, Hashable {
     var weeklyStudyGoalHours: Double = 10
     /// Whether the flashcard widget currently shows the answer.
     var isCardRevealed = false
+    /// A study timer under way (kept when the app closes).
+    var timerStart: Date?
+    var timerCourseID: UUID?
 
     enum CodingKeys: String, CodingKey {
-        case courses, slots, exams, assignments, grades, cards, sessions, semesterStart, semesterEnd, weeklyStudyGoalHours, isCardRevealed
+        case courses, slots, exams, assignments, grades, cards, sessions, semesterStart, semesterEnd, weeklyStudyGoalHours, isCardRevealed, timerStart, timerCourseID
     }
 
     init() {}
@@ -97,6 +100,8 @@ struct StudentState: Codable, Hashable {
         semesterEnd = c.optional(.semesterEnd)
         weeklyStudyGoalHours = c.value(.weeklyStudyGoalHours, 10)
         isCardRevealed = c.value(.isCardRevealed, false)
+        timerStart = c.optional(.timerStart)
+        timerCourseID = c.optional(.timerCourseID)
     }
 
     func course(_ id: UUID?) -> Course? {
@@ -124,6 +129,36 @@ struct StudentState: Codable, Hashable {
         sessions.append(StudySession(date: date, minutes: minutes, courseID: courseID))
         let cutoff = date.addingTimeInterval(-200 * 86_400)
         sessions.removeAll { $0.date < cutoff }
+    }
+
+    mutating func startTimer(courseID: UUID?, at date: Date = Date()) {
+        timerStart = date
+        timerCourseID = courseID
+    }
+
+    /// Stops the timer and logs the time studied (a minute at least, four hours at most). Returns
+    /// the minutes logged, 0 when too short to count.
+    @discardableResult
+    mutating func stopTimer(at date: Date = Date()) -> Int {
+        defer {
+            timerStart = nil
+            timerCourseID = nil
+        }
+        guard let start = timerStart else { return 0 }
+        let minutes = min(240, Int(date.timeIntervalSince(start) / 60))
+        guard minutes >= 1 else { return 0 }
+        logStudy(minutes: minutes, courseID: timerCourseID, at: date)
+        return minutes
+    }
+
+    /// Removes a course with its place in the timetable; its grades, exams and homework stay, without a course.
+    mutating func deleteCourse(_ id: UUID) {
+        courses.removeAll { $0.id == id }
+        slots.removeAll { $0.courseID == id }
+        for index in grades.indices where grades[index].courseID == id { grades[index].courseID = nil }
+        for index in exams.indices where exams[index].courseID == id { exams[index].courseID = nil }
+        for index in assignments.indices where assignments[index].courseID == id { assignments[index].courseID = nil }
+        for index in sessions.indices where sessions[index].courseID == id { sessions[index].courseID = nil }
     }
 }
 
@@ -207,5 +242,95 @@ enum StudentMath {
 
     static func dueCount(_ state: StudentState, at date: Date) -> Int {
         state.cards.filter { $0.due <= date }.count
+    }
+
+    // MARK: Mini-app
+
+    static func upcomingExams(_ state: StudentState, at date: Date) -> [Exam] {
+        state.exams.filter { $0.date > date }.sorted { $0.date < $1.date }
+    }
+
+    static func pastExams(_ state: StudentState, at date: Date) -> [Exam] {
+        state.exams.filter { $0.date <= date }.sorted { $0.date > $1.date }
+    }
+
+    /// Homework still to do, split into late, due within seven days and later.
+    struct AssignmentGroups: Hashable {
+        var late: [Assignment] = []
+        var thisWeek: [Assignment] = []
+        var later: [Assignment] = []
+        var isEmpty: Bool { late.isEmpty && thisWeek.isEmpty && later.isEmpty }
+    }
+
+    static func assignmentGroups(_ state: StudentState, at date: Date) -> AssignmentGroups {
+        var groups = AssignmentGroups()
+        let week = date.addingTimeInterval(7 * 86_400)
+        for assignment in openAssignments(state) {
+            if assignment.due < date { groups.late.append(assignment) } else if assignment.due <= week { groups.thisWeek.append(assignment) } else { groups.later.append(assignment) }
+        }
+        return groups
+    }
+
+    /// Minutes studied in a period, all courses together.
+    static func studyMinutes(_ state: StudentState, from start: Date, to end: Date) -> Int {
+        state.sessions.filter { $0.date >= start && $0.date < end }.reduce(0) { $0 + $1.minutes }
+    }
+
+    /// Minutes studied in a period for one course (nil: time logged without a course).
+    static func studyMinutes(_ state: StudentState, course: UUID?, from start: Date, to end: Date) -> Int {
+        state.sessions.filter { $0.courseID == course && $0.date >= start && $0.date < end }.reduce(0) { $0 + $1.minutes }
+    }
+
+    struct StudyWeek: Hashable, Identifiable {
+        let start: Date
+        let minutes: Int
+        var id: Date { start }
+    }
+
+    /// Minutes studied each week, oldest first, the current week last.
+    static func studyByWeek(_ state: StudentState, weeks: Int, at date: Date) -> [StudyWeek] {
+        let monday = DateMath.week(containing: date).first ?? DateMath.startOfDay(date)
+        return (0..<weeks).reversed().compactMap { back in
+            guard let start = DateMath.calendar.date(byAdding: .day, value: -7 * back, to: monday),
+                  let end = DateMath.calendar.date(byAdding: .day, value: 7, to: start) else { return nil }
+            return StudyWeek(start: start, minutes: studyMinutes(state, from: start, to: end))
+        }
+    }
+
+    /// Minutes of class a week for a course, from the timetable.
+    static func weeklyClassMinutes(_ state: StudentState, course: UUID) -> Int {
+        state.slots.filter { $0.courseID == course }.reduce(0) { $0 + max(0, $1.endMinute - $1.startMinute) }
+    }
+
+    /// Share of the course's grade already evaluated (sum of the weights, up to 100 %).
+    static func evaluatedWeight(_ state: StudentState, course: UUID?) -> Double {
+        min(100, state.grades.filter { $0.courseID == course }.reduce(0) { $0 + $1.weight })
+    }
+
+    /// The average (in percent) needed on what is left of a course to finish at `target` percent.
+    /// Nil when nothing is left to evaluate; the value can be above 100 (then out of reach) or below 0.
+    static func neededAverage(_ state: StudentState, course: UUID?, target: Double) -> Double? {
+        let grades = state.grades.filter { $0.courseID == course }
+        let done = grades.reduce(0) { $0 + $1.weight }
+        let left = 100 - done
+        guard left > 0.5 else { return nil }
+        let earned = grades.reduce(0) { $0 + $1.ratio * $1.weight * 100 }
+        return (target * 100 - earned) / left
+    }
+
+    struct Deck: Hashable, Identifiable {
+        let name: String
+        let total: Int
+        let due: Int
+        var id: String { name }
+    }
+
+    /// The decks of flashcards, with the cards to review now.
+    static func decks(_ state: StudentState, at date: Date) -> [Deck] {
+        let names = Array(Set(state.cards.map(\.deck))).sorted { $0.localizedCompare($1) == .orderedAscending }
+        return names.map { name in
+            let cards = state.cards.filter { $0.deck == name }
+            return Deck(name: name, total: cards.count, due: cards.filter { $0.due <= date }.count)
+        }
     }
 }

@@ -91,13 +91,42 @@ enum ScreenshotMode {
             if screen.hasPrefix("app-") {
                 let parts = screen.dropFirst(4).split(separator: "-").map(String.init)
                 if let app = parts.first.flatMap(MiniApp.init(rawValue:)) {
-                    let page: MiniAppPage? = switch parts.dropFirst().first ?? "" {
-                    case "meal": .nutritionMeal(.breakfast, Date())
-                    case "history": .nutritionHistory
-                    case "ideas": .nutritionIdeas
-                    case "nutrients": .nutritionNutrients(Date())
-                    case "saved": .nutritionSavedMeals
+                    let name = "\(app.rawValue)-\(parts.dropFirst().first ?? "")"
+                    let page: MiniAppPage? = switch name {
+                    case "nutrition-meal": .nutritionMeal(.breakfast, Date())
+                    case "nutrition-history": .nutritionHistory
+                    case "nutrition-ideas": .nutritionIdeas
+                    case "nutrition-nutrients": .nutritionNutrients(Date())
+                    case "nutrition-saved": .nutritionSavedMeals
+                    case "fitness-session": .fitnessSession
+                    case "fitness-program": .fitnessProgram
+                    case "fitness-library": .fitnessLibrary
+                    case "fitness-exercise": .fitnessExercise("bench-press")
+                    case "fitness-history": .fitnessHistory
+                    case "fitness-progress": .fitnessProgress
+                    case "fitness-activity": .fitnessActivity
+                    case "planning-tasks": .planningTasks
+                    case "planning-week": .planningWeek
+                    case "planning-month": .planningMonth
+                    case "planning-projects": .planningProjects
+                    case "planning-habits": .planningHabits
+                    case "planning-focus": .planningFocus
+                    case "studies-timetable": .studiesTimetable
+                    case "studies-courses": .studiesCourses
+                    case "studies-course": model.student.courses.first.map { .studiesCourse($0.id) }
+                    case "studies-exams": .studiesExams
+                    case "studies-assignments": .studiesAssignments
+                    case "studies-grades": .studiesGrades
+                    case "studies-revision": .studiesRevision
                     default: nil
+                    }
+                    // A workout under way, two sets done, for the session page.
+                    if name == "fitness-session", let routine = model.fitness.routines.first {
+                        model.update(\.fitness) { state in
+                            state.startSession(routine, at: Date().addingTimeInterval(-600))
+                            state.completeNextSet(at: Date().addingTimeInterval(-400))
+                            state.completeNextSet(at: Date().addingTimeInterval(-60))
+                        }
                     }
                     router.tab = .home
                     Task { @MainActor in

@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build:
     runs-on: macos-15
-    timeout-minutes: 75
+    timeout-minutes: 110
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
@@ -158,7 +158,7 @@ jobs:
         id: shots
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.QA == 'true'
         continue-on-error: true
-        timeout-minutes: 32
+        timeout-minutes: 45
         run: |
           APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
           xcrun simctl bootstatus "$DEVICE" -b
@@ -195,6 +195,23 @@ jobs:
             WAIT=7 shoot app-nutrition-end app-nutrition bottom light
             WAIT=7 shoot app-nutrition-history-end app-nutrition-history bottom light
             WAIT=7 shoot app-nutrition-dark app-nutrition top dark
+            for screen in app-fitness app-fitness-session app-fitness-program app-fitness-library app-fitness-exercise app-fitness-history app-fitness-progress app-fitness-activity; do
+              WAIT=7 shoot $screen $screen top light
+            done
+            WAIT=7 shoot app-fitness-end app-fitness bottom light
+            WAIT=7 shoot app-fitness-exercise-end app-fitness-exercise bottom light
+            WAIT=7 shoot app-fitness-session-end app-fitness-session bottom light
+            for screen in app-planning app-planning-tasks app-planning-week app-planning-month app-planning-projects app-planning-habits app-planning-focus; do
+              WAIT=7 shoot $screen $screen top light
+            done
+            WAIT=7 shoot app-planning-end app-planning bottom light
+            WAIT=7 shoot app-planning-dark app-planning top dark
+            for screen in app-studies app-studies-timetable app-studies-courses app-studies-course app-studies-exams app-studies-assignments app-studies-grades app-studies-revision; do
+              WAIT=7 shoot $screen $screen top light
+            done
+            WAIT=7 shoot app-studies-end app-studies bottom light
+            WAIT=7 shoot app-studies-course-end app-studies-course bottom light
+            WAIT=7 shoot app-studies-revision-end app-studies-revision bottom light
           }
           if [ "$STUDIO" = "true" ]; then
             studio_shots
