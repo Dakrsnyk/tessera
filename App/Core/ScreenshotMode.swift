@@ -35,7 +35,7 @@ enum ScreenshotMode {
         }
         // The first launch starts with nothing about the user (a topic page, with the interest that leads to it).
         // Every other capture shows « Mes informations » filled in, whatever an earlier capture left.
-        if !screen.hasPrefix("onboarding"), model.profile.interests.isEmpty {
+        if !screen.hasPrefix("onboarding"), !screen.hasSuffix("-fresh"), model.profile != .sample {
             model.update(\.profile) { $0 = .sample }
         }
         if screen.hasPrefix("onboarding") {
@@ -118,10 +118,7 @@ enum ScreenshotMode {
                 router.tab = .explore
                 let id = String(String(screen.dropFirst(5)).split(separator: "-").first ?? "")
                 router.startsPackSetup = screen.contains("-setup")
-                Task { @MainActor in
-                    try? await Task.sleep(for: .milliseconds(900))
-                    router.openedPackID = id
-                }
+                router.openedPackID = id
             }
             if screen.hasPrefix("store-") {
                 router.tab = .explore

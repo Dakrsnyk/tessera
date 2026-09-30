@@ -49,7 +49,6 @@ struct WidgetSetupFlow: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showsPaywall) { PaywallView() }
-        .accessibilityIdentifier("setup-flow")
     }
 
     // MARK: Progress
