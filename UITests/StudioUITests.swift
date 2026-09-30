@@ -44,11 +44,13 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Section « \(name) » introuvable", file: file, line: line)
         let bar = app.scrollViews.containing(.button, identifier: "studio-content").firstMatch
         let width = app.windows.firstMatch.frame.width
+        // Offscreen, the button has no hit point at all: its frame says which way to scroll.
         var swipes = 0
-        while !button.isHittable && swipes < 8 {
-            if button.frame.midX < 0 {
+        while swipes < 10 {
+            let frame = button.frame
+            if frame.minX < 8 {
                 bar.swipeRight(velocity: .slow)
-            } else if button.frame.midX > width {
+            } else if frame.maxX > width - 8 {
                 bar.swipeLeft(velocity: .slow)
             } else {
                 break
