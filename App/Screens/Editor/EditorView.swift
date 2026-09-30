@@ -88,9 +88,15 @@ struct WidgetStudio: View {
         return designs.count > 1 ? "Nouveaux widgets" : "Nouveau widget"
     }
 
+    // The body is split in parts so each is type-checked on its own.
     var body: some View {
         let input = studioInput
         let sections = Self.sections(for: input)
+        observed(dialogs(screen(input, sections: sections)), sections: sections)
+            .interactiveDismissDisabled(hasChanges && !isNew)
+    }
+
+    private func screen(_ input: StudioInput, sections: [StudioSection]) -> some View {
         VStack(spacing: 0) {
             // Always in view: every change shows at once.
             StudioStage(design: design, family: $family, payload: payload, isExample: !model.hasOwnData(for: design))
@@ -100,58 +106,80 @@ struct WidgetStudio: View {
             if designs.count > 1 { widgetSwitcher }
             StudioSectionBar(sections: sections, selection: $section)
             Divider()
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    if needsPremium { premiumNotice }
-                    sectionContent(input)
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 14)
-                .padding(.bottom, 24)
-            }
-            .id("\(section.rawValue)-\(index)")
-            .scrollDismissesKeyboard(.interactively)
-            .screenshotScroll()
+            settings(input)
         }
         .background(.screenFill)
         .safeAreaInset(edge: .bottom) { saveBar }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
-        .confirmationDialog("Abandonner les modifications ?", isPresented: $confirmDiscard, titleVisibility: .visible) {
-            Button("Abandonner", role: .destructive) { onClose() }
-        }
-        .confirmationDialog("Supprimer ce widget ?", isPresented: $confirmDelete, titleVisibility: .visible) {
-            Button("Supprimer", role: .destructive) {
-                // The saved version: its own photo goes with it.
-                model.delete(originals.first { $0.id == design.id } ?? design)
-                onClose()
+    }
+
+    private func settings(_ input: StudioInput) -> some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 18) {
+                if needsPremium { premiumNotice }
+                sectionContent(input)
             }
-        } message: {
-            Text("Les widgets qui l'affichent reviendront au modèle par défaut.")
+            .padding(.horizontal, 20)
+            .padding(.top, 14)
+            .padding(.bottom, 24)
         }
-        .sheet(isPresented: $showsPaywall) { PaywallView() }
-        .task(id: design.kind) { await model.prepare(design) }
-        .task(id: design.options.coinID) { if design.kind == .crypto { await model.prepare(design) } }
-        .task {
-            for other in designs.dropFirst() { await model.prepare(other) }
-        }
-        .onChange(of: photoItem) { _, item in importPhoto(item) }
-        .onChange(of: designs) { old, new in record(from: old, to: new) }
-        .onChange(of: design.background) { _, background in backgroundTab = BackgroundKind(background) }
-        .onChange(of: index) { _, _ in
-            family = design.displayFormat.family
-            backgroundTab = BackgroundKind(design.background)
-        }
-        .onChange(of: sections) { _, shown in
-            if !shown.contains(section) { section = .content }
-        }
-        .onChange(of: sharesLook) { _, shares in
-            guard shares else { return }
-            let lead = design
-            withAnimation { designs = designs.map { $0.id == lead.id ? $0 : $0.withLook(of: lead) } }
-        }
-        .interactiveDismissDisabled(hasChanges && !isNew)
+        .id("\(section.rawValue)-\(index)")
+        .scrollDismissesKeyboard(.interactively)
+        .screenshotScroll()
+    }
+
+    private func dialogs<Content: View>(_ content: Content) -> some View {
+        content
+            .confirmationDialog("Abandonner les modifications ?", isPresented: $confirmDiscard, titleVisibility: .visible) {
+                Button("Abandonner", role: .destructive) { onClose() }
+            }
+            .confirmationDialog("Supprimer ce widget ?", isPresented: $confirmDelete, titleVisibility: .visible) {
+                Button("Supprimer", role: .destructive, action: deleteDesign)
+            } message: {
+                Text("Les widgets qui l'affichent reviendront au modèle par défaut.")
+            }
+            .sheet(isPresented: $showsPaywall) { PaywallView() }
+    }
+
+    private func observed<Content: View>(_ content: Content, sections: [StudioSection]) -> some View {
+        content
+            .task(id: design.kind) { await model.prepare(design) }
+            .task(id: design.options.coinID) { if design.kind == .crypto { await model.prepare(design) } }
+            .task { await prepareOthers() }
+            .onChange(of: photoItem) { _, item in importPhoto(item) }
+            .onChange(of: designs) { old, new in record(from: old, to: new) }
+            .onChange(of: design.background) { _, background in backgroundTab = BackgroundKind(background) }
+            .onChange(of: index) { _, _ in showCurrent() }
+            .onChange(of: sections) { _, shown in
+                if !shown.contains(section) { section = .content }
+            }
+            .onChange(of: sharesLook) { _, shares in
+                if shares { shareLook() }
+            }
+    }
+
+    private func prepareOthers() async {
+        for other in designs.dropFirst() { await model.prepare(other) }
+    }
+
+    /// Another widget of the set chosen: its size and background are shown.
+    private func showCurrent() {
+        family = design.displayFormat.family
+        backgroundTab = BackgroundKind(design.background)
+    }
+
+    /// « Même style » turned on: every widget takes the look of the one being edited.
+    private func shareLook() {
+        let lead = design
+        withAnimation { designs = designs.map { $0.id == lead.id ? $0 : $0.withLook(of: lead) } }
+    }
+
+    private func deleteDesign() {
+        // The saved version: its own photo goes with it.
+        model.delete(originals.first { $0.id == design.id } ?? design)
+        onClose()
     }
 
     /// « Graphique » only for widgets that draw one.
