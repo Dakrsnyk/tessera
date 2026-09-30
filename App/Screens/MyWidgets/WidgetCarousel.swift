@@ -24,14 +24,15 @@ struct WidgetCarousel<Menu: View>: View {
     let onOpen: (WidgetDesign) -> Void
     @ViewBuilder let menu: (WidgetDesign) -> Menu
 
-    static var stageHeight: CGFloat { 300 }
+    static var stageHeight: CGFloat { 250 }
 
     var body: some View {
         GeometryReader { geo in
-            let pageWidth = min(geo.size.width * 0.66, 330)
+            let pageWidth = min(geo.size.width * 0.6, 300)
             let margin = max(0, (geo.size.width - pageWidth) / 2)
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 0) {
+                // Pages overlap a little so the neighbors peek in on each side.
+                LazyHStack(spacing: -pageWidth * 0.08) {
                     ForEach(designs) { design in
                         page(design, width: pageWidth)
                             .frame(width: pageWidth, height: Self.stageHeight)
@@ -99,18 +100,17 @@ struct CarouselAction: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 7) {
+            VStack(spacing: 6) {
                 Image(systemName: symbol)
-                    .font(.system(size: 19, weight: .semibold))
+                    .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(isProminent ? AnyShapeStyle(.onAccent) : AnyShapeStyle(Color.accentColor))
-                    .frame(width: 54, height: 54)
+                    .frame(width: 50, height: 50)
                     .background(isProminent ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.cardFill), in: Circle())
                 Text(title)
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.primary)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
             }
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
@@ -161,9 +161,9 @@ struct CategoryStrip: View {
                     } label: {
                         VStack(spacing: 6) {
                             Image(systemName: option.symbol)
-                                .font(.system(size: 19, weight: .semibold))
+                                .font(.system(size: 18, weight: .semibold))
                                 .foregroundStyle(isSelected ? Color.white : color)
-                                .frame(width: 54, height: 54)
+                                .frame(width: 50, height: 50)
                                 .background(isSelected ? AnyShapeStyle(color) : AnyShapeStyle(.cardFill), in: Circle())
                                 .overlay(alignment: .topTrailing) {
                                     Text("\(option.count)")

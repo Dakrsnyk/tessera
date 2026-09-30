@@ -209,7 +209,8 @@ struct PackCard: View {
                     Text(pack.name)
                         .font(.subheadline.weight(.semibold))
                         .lineLimit(1)
-                    Text("\(pack.kinds.count) widgets · \(ThemeCatalog.theme(pack.themeID).name)")
+                    // In a shelf, the style only (every pack holds six widgets, as the heading says).
+                    Text(width == nil ? "\(pack.kinds.count) widgets · \(ThemeCatalog.theme(pack.themeID).name)" : "Style \(ThemeCatalog.theme(pack.themeID).name)")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)

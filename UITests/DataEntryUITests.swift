@@ -92,6 +92,10 @@ final class DataEntryUITests: XCTestCase {
             tap(app.buttons["Commencer la séance"], "Commencer la séance")
         }
         tap(setDone, "Série faite")
+        // Some days the session holds a single set left: the next one starts again.
+        if !setDone.waitForExistence(timeout: 3) {
+            tap(app.buttons["Commencer la séance"], "Commencer la séance (2e)")
+        }
         tap(setDone, "Série faite (2e)")
         assertRunning("après deux séries")
         snapshot("workout-sets")

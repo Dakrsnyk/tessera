@@ -102,7 +102,11 @@ struct ExploreView: View {
         }
     }
 
-    private var interests: [WidgetCategory] { model.profile.preferredCategories }
+    /// The person's categories, each once, in the order of their interests.
+    private var interests: [WidgetCategory] {
+        var seen = Set<WidgetCategory>()
+        return model.profile.preferredCategories.filter { seen.insert($0).inserted }
+    }
 
     // MARK: - Magazine
 
@@ -286,11 +290,20 @@ struct ExploreView: View {
     private var essentialsSection: some View {
         VStack(alignment: .leading, spacing: 14) {
             MagazineHeader(eyebrow: "Notre sélection", title: "Incontournables", subtitle: "Les widgets à essayer en premier.")
-            EssentialsList(templates: Array(TemplateCatalog.featured.prefix(6)), isPremiumUser: model.isPremium) { template in
+            EssentialsList(templates: essentials, isPremiumUser: model.isPremium) { template in
                 router.openEditor(template.makeDesign(), isNew: true)
             }
             .padding(.horizontal, 20)
         }
+    }
+
+    /// Six chosen widgets from six different categories.
+    private var essentials: [WidgetTemplate] {
+        var seen = Set<WidgetCategory>()
+        let small = TemplateCatalog.featured.filter { $0.kind.families.contains(.systemSmall) }
+        let varied = small.filter { seen.insert($0.kind.category).inserted }
+        let rest = small.filter { template in !varied.contains { $0.id == template.id } }
+        return Array((varied + rest).prefix(6))
     }
 
     private var lockScreenSection: some View {
@@ -372,14 +385,20 @@ struct ExploreView: View {
                     FilterChip(title: filter.title, isSelected: access == filter) { access = filter }
                 }
                 Divider().frame(height: 22)
+                // What is filtered comes first, with a cross to remove it.
                 if let themeFilter {
                     FilterChip(title: ThemeCatalog.theme(themeFilter).name, symbol: "xmark", isSelected: true) {
                         self.themeFilter = nil
                     }
                 }
-                ForEach(WidgetCategory.allCases) { category in
-                    FilterChip(title: category.title, symbol: category.symbol, isSelected: router.exploreCategory == category) {
-                        router.exploreCategory = router.exploreCategory == category ? nil : category
+                if let category = router.exploreCategory {
+                    FilterChip(title: category.title, symbol: "xmark", isSelected: true) {
+                        router.exploreCategory = nil
+                    }
+                }
+                ForEach(WidgetCategory.allCases.filter { $0 != router.exploreCategory }) { category in
+                    FilterChip(title: category.title, symbol: category.symbol, isSelected: false) {
+                        router.exploreCategory = category
                     }
                 }
             }

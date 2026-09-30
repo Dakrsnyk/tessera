@@ -224,7 +224,7 @@ struct MyWidgetsView: View {
     // MARK: Carousel
 
     private var carousel: some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: 14) {
             Text("\(Fmt.plural(designs.count, "widget", "widgets")) · glisse pour les faire tourner")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
@@ -238,7 +238,6 @@ struct MyWidgetsView: View {
             ) { design in
                 menuItems(design)
             }
-            .padding(.top, 4)
             if let current {
                 VStack(spacing: 3) {
                     Text(current.name)
@@ -255,19 +254,18 @@ struct MyWidgetsView: View {
                 actions(for: current)
                     .padding(.horizontal, 12)
             }
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text("Trouver un widget")
                     .font(.headline)
                     .padding(.horizontal, 20)
                 CategoryStrip(designs: model.recentDesigns, filter: $filter)
             }
-            .padding(.top, 6)
+            .padding(.top, 2)
             if !model.isPremium {
                 limitBanner
                     .padding(.horizontal, 20)
             }
         }
-        .padding(.top, 4)
         .padding(.bottom, 24)
         .onAppear {
             if centeredID == nil { centeredID = designs.first?.id }
