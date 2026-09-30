@@ -517,8 +517,7 @@ private struct WeatherDayTile: View {
     var body: some View {
         DayCard(title: weather.locationName, symbol: "location.fill", colorHex: "3A8DDE", route: .app(.weather)) {
             HStack(spacing: 8) {
-                Image(systemName: WeatherCode.symbol(weather.code, isDay: weather.isDay))
-                    .symbolRenderingMode(.multicolor)
+                WeatherGlyph(code: weather.code, isDay: weather.isDay)
                     .font(.title2)
                 Text(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit))
                     .font(.title.weight(.semibold))

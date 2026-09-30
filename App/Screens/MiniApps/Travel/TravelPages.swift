@@ -150,6 +150,7 @@ struct TravelBudgetPage: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $sheet) { $0.editor }
+        .task { await model.refreshFX() }
     }
 
     private func summary(trip: Trip, spending: TravelMath.Spending) -> some View {

@@ -127,7 +127,7 @@ struct CarAppView: View {
                     }
                     ProgressView(value: range.share)
                         .tint(range.share < 0.2 ? Color(hex: Car.alertHex) : Color(hex: Car.fuelHex))
-                    Text("Environ \(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \(Fmt.shortDay(range.since.date)).")
+                    Text("Environ \(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \(Fmt.format(range.since.date, template: "dMMMM"))")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)

@@ -276,15 +276,16 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Opérations"].waitForExistence(timeout: 8), "Page des opérations absente")
         let rows = app.buttons.matching(identifier: "expense-row")
         XCTAssertTrue(rows.firstMatch.waitForExistence(timeout: 8), "Aucune dépense du mois")
-        let before = rows.count
+        // The list loads its rows as they appear: the first one is followed, not the count.
+        let first = rows.firstMatch.label
         rows.firstMatch.tap()
         let delete = app.buttons["Supprimer la dépense"]
         XCTAssertTrue(delete.waitForExistence(timeout: 8), "La dépense doit s'ouvrir pour être modifiée")
         snapshot("finances-expense")
         delete.tap()
         XCTAssertTrue(waitForDisappearance(delete), "La fiche de la dépense est restée ouverte")
-        let fewer = expectation(for: NSPredicate(format: "count == %d", before - 1), evaluatedWith: rows)
-        XCTAssertEqual(XCTWaiter().wait(for: [fewer], timeout: 5), .completed, "La dépense supprimée doit disparaître")
+        let gone = expectation(for: NSPredicate(format: "label != %@", first), evaluatedWith: rows.firstMatch)
+        XCTAssertEqual(XCTWaiter().wait(for: [gone], timeout: 5), .completed, "La dépense supprimée doit disparaître")
         goBack()
         XCTAssertTrue(hero.waitForExistence(timeout: 8))
 

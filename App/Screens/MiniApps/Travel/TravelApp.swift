@@ -72,7 +72,10 @@ struct TravelAppView: View {
         }
         .navigationTitle("Voyage")
         .navigationBarTitleDisplayMode(.large)
-        .task { await model.refreshTripWeather() }
+        .task {
+            await model.refreshTripWeather()
+            await model.refreshFX()
+        }
         .sheet(item: $sheet) { $0.editor }
     }
 
@@ -284,7 +287,7 @@ struct TripHero: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Météo").font(.caption).foregroundStyle(.secondary)
                         HStack(spacing: 6) {
-                            Image(systemName: WeatherCode.symbol(weather.code, isDay: weather.isDay)).symbolRenderingMode(.multicolor)
+                            WeatherGlyph(code: weather.code, isDay: weather.isDay)
                             Text(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit)).font(.title3.weight(.semibold))
                         }
                         Text(WeatherCode.description(weather.code)).font(.caption).foregroundStyle(.secondary).lineLimit(1)

@@ -80,8 +80,7 @@ struct WeatherAppView: View {
                 Text(Fmt.temperature(weather.temperature, unit: unit))
                     .font(.system(size: 64, weight: .semibold, design: .rounded))
                     .monospacedDigit()
-                Image(systemName: WeatherCode.symbol(weather.code, isDay: weather.isDay))
-                    .symbolRenderingMode(.multicolor)
+                WeatherGlyph(code: weather.code, isDay: weather.isDay)
                     .font(.system(size: 44))
             }
             Text(WeatherCode.description(weather.code)).font(.title3.weight(.semibold))
@@ -116,8 +115,7 @@ struct WeatherAppView: View {
                                     Text(DateMath.calendar.isDate(hour.date, equalTo: now, toGranularity: .hour) ? "Maint." : Fmt.format(hour.date, template: "HH"))
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(.secondary)
-                                    Image(systemName: WeatherCode.symbol(hour.code, isDay: hour.isDay))
-                                        .symbolRenderingMode(.multicolor)
+                                    WeatherGlyph(code: hour.code, isDay: hour.isDay)
                                         .font(.title3)
                                         .frame(height: 24)
                                     Text(Fmt.temperature(hour.temperature, unit: unit)).font(.subheadline.weight(.semibold)).monospacedDigit()
@@ -141,9 +139,10 @@ struct WeatherAppView: View {
                     .chartYScale(domain: .automatic(includesZero: false))
                     .chartXAxis {
                         AxisMarks(values: .stride(by: .hour, count: 6)) { _ in
-                            AxisValueLabel(format: .dateTime.hour())
+                            AxisValueLabel(format: .dateTime.hour(.twoDigits(amPM: .omitted)))
                         }
                     }
+                    .environment(\.locale, Fmt.locale)
                     .frame(height: 110)
                 }
                 .card(padding: 14)
@@ -274,8 +273,7 @@ struct DayRow: View {
                 .frame(width: 92, alignment: .leading)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
-            Image(systemName: WeatherCode.symbol(day.code))
-                .symbolRenderingMode(.multicolor)
+            WeatherGlyph(code: day.code)
                 .frame(width: 26)
             Text((day.precipitationProbability ?? 0) >= 20 ? "\(day.precipitationProbability ?? 0) %" : "")
                 .font(.caption2.weight(.semibold))
@@ -298,5 +296,30 @@ struct DayRow: View {
             Text(Fmt.temperature(day.high, unit: unit)).font(.subheadline.weight(.semibold)).monospacedDigit().frame(width: 38, alignment: .trailing)
         }
         .padding(.vertical, 10)
+    }
+}
+
+/// A weather symbol readable on light cards too (the multicolor clouds are white): grey clouds, a
+/// yellow sun or moon, blue rain and snow.
+struct WeatherGlyph: View {
+    let code: Int
+    var isDay = true
+
+    private static let cloud = Color(hex: "8A9BB0")
+    private static let sun = Color(hex: "F2B233")
+    private static let water = Color(hex: "3A8DDE")
+
+    var body: some View {
+        let name = WeatherCode.symbol(code, isDay: isDay)
+        let image = Image(systemName: name)
+        if name.hasPrefix("sun") || name.hasPrefix("moon") {
+            image.symbolRenderingMode(.monochrome).foregroundStyle(Self.sun)
+        } else if name.contains("sun") || name.contains("moon") {
+            image.symbolRenderingMode(.palette).foregroundStyle(Self.cloud, Self.sun)
+        } else if name.contains("rain") || name.contains("drizzle") || name.contains("snow") || name.contains("bolt") {
+            image.symbolRenderingMode(.palette).foregroundStyle(Self.cloud, Self.water)
+        } else {
+            image.symbolRenderingMode(.monochrome).foregroundStyle(Self.cloud)
+        }
     }
 }
