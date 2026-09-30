@@ -107,9 +107,11 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Interactif depuis l'écran d'accueil** : cocher une tâche ou une priorité, valider une habitude, ajouter un verre d'eau, noter un aliment favori ou une dépense rapide, valider une série et passer le repos, compter (+1/−1), lancer un Focus, réviser une fiche.
 
-**Store** : 8 packs installés d'une touche (Bien démarrer, Étudiant, Sportif, Entrepreneur, Budget serré, Voyageur, Investisseur, Minimal).
+**Store** : une page épurée façon magazine. En couverture, l'écran d'accueil de la semaine ; puis les écrans d'accueil, 40 combinaisons (plusieurs widgets d'une même catégorie réunis dans un moyen ou un grand), 20 packs de six widgets (dont le pack de la semaine), 12 collections, les Incontournables, l'écran verrouillé, les styles, les nouveautés et l'index des catégories. La recherche trouve aussi les écrans, les packs et les combinaisons. Ce qui touche les centres d'intérêt de la personne passe en premier ; l'ordre des Incontournables est éditorial (l'app ne compte pas les téléchargements).
 
-**Écrans d'accueil** (Store) : 12 écrans complets dessinés comme sur un vrai iPhone : fond d'écran (dessiné par l'app), vrais widgets Tessera, icônes et dock assortis, et l'écran verrouillé qui va avec. Crème, Aurore, Graphite, Néon, Topographie, Minuit, Études, Jade, Dune, Pastel, Bureau, Corail (4 gratuits). On les filtre (#minimal, #sombre, #pastel, #sport…), on les met en favoris, on ajoute tous leurs widgets d'une touche et on enregistre le fond d'écran dans Photos.
+**Mes widgets** : un carrousel qu'on fait tourner du doigt, le widget du milieu en grand avec Modifier, Dupliquer, Favori et Ajouter à l'écran. En bas, les catégories des widgets enregistrés (plus Tous et Favoris) filtrent le carrousel. « Sélectionner » repasse en grille pour supprimer ou fusionner plusieurs widgets.
+
+**Écrans d'accueil** (Store) : 18 écrans complets dessinés comme sur un vrai iPhone : fond d'écran (dessiné par l'app), vrais widgets Tessera, icônes et dock assortis, et l'écran verrouillé qui va avec. Crème, Aurore, Graphite, Néon, Topographie, Minuit, Études, Jade, Dune, Pastel, Bureau, Corail, Océan, Forêt, Crépuscule, Terrazzo, Nébuleuse, Seventies. On les filtre (#minimal, #sombre, #pastel, #sport…), on les met en favoris, on ajoute tous leurs widgets d'une touche et on enregistre le fond d'écran dans Photos.
 
 **Premier lancement personnalisé** : style de l'app, prénom et nom, centres d'intérêt (Sport, Nutrition, Finance, Budget, Business, Études, Productivité, Voyage, Automobile, Météo, Design, Bien-être), puis seulement les questions utiles pour ces thèmes. Tout est facultatif et chaque étape peut être passée.
 
