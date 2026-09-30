@@ -605,7 +605,8 @@ struct TileView: View {
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 headerBlock
                 Spacer(minLength: 4)
-                if hasValue && tile.timer == nil {
+                // A small widget keeps its width for the title and the lines.
+                if hasValue && tile.timer == nil && !context.isSmall {
                     Text([tile.value, tile.unit].compactMap { $0 }.joined(separator: " "))
                         .font(s.number(context.isSmall ? 15 : 18))
                         .foregroundStyle(valueColor)
