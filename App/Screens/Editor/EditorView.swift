@@ -216,27 +216,39 @@ struct WidgetStudio: View {
 
     /// Widgets made together: which one is being edited, and whether they share their look.
     private var widgetSwitcher: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                ForEach(Array(designs.enumerated()), id: \.element.id) { pair in
-                    FilterChip(title: "\(pair.offset + 1) · \(pair.element.name)", isSelected: pair.offset == index) {
-                        Haptics.tap()
-                        withAnimation(.easeInOut(duration: 0.2)) { index = pair.offset }
-                    }
-                    .accessibilityIdentifier("studio-widget-\(pair.offset + 1)")
-                    .accessibilityLabel(Text("Widget \(pair.offset + 1) sur \(designs.count) : \(pair.element.name)"))
-                }
-                Rectangle().fill(Color.secondary.opacity(0.3)).frame(width: 1, height: 24)
-                FilterChip(title: "Même style", symbol: sharesLook ? "link" : "link.badge.plus", isSelected: sharesLook) {
-                    Haptics.tap()
-                    sharesLook.toggle()
-                }
-                .accessibilityIdentifier("studio-share-look")
-                .accessibilityHint(Text("Le thème, les couleurs, le fond et la bordure vont à tous les widgets"))
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                switcherChips
+                    .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
+            // The widget being edited stays in view, with the next one beside it.
+            .onChange(of: index) { _, current in
+                guard designs.indices.contains(current) else { return }
+                withAnimation { proxy.scrollTo(designs[current].id, anchor: .center) }
+            }
         }
         .padding(.top, 8)
+    }
+
+    private var switcherChips: some View {
+        HStack(spacing: 8) {
+            ForEach(Array(designs.enumerated()), id: \.element.id) { pair in
+                FilterChip(title: "\(pair.offset + 1) · \(pair.element.name)", isSelected: pair.offset == index) {
+                    Haptics.tap()
+                    withAnimation(.easeInOut(duration: 0.2)) { index = pair.offset }
+                }
+                .id(pair.element.id)
+                .accessibilityIdentifier("studio-widget-\(pair.offset + 1)")
+                .accessibilityLabel(Text("Widget \(pair.offset + 1) sur \(designs.count) : \(pair.element.name)"))
+            }
+            Rectangle().fill(Color.secondary.opacity(0.3)).frame(width: 1, height: 24)
+            FilterChip(title: "Même style", symbol: sharesLook ? "link" : "link.badge.plus", isSelected: sharesLook) {
+                Haptics.tap()
+                sharesLook.toggle()
+            }
+            .accessibilityIdentifier("studio-share-look")
+            .accessibilityHint(Text("Le thème, les couleurs, le fond et la bordure vont à tous les widgets"))
+        }
     }
 
     // MARK: Studio

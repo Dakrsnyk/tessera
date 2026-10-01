@@ -173,11 +173,14 @@ final class ProfileUITests: XCTestCase {
             let chip = app.buttons["studio-widget-\(index)"]
             XCTAssertTrue(chip.waitForExistence(timeout: 5), "Widget \(index) du pack absent")
             // The row of widgets scrolls sideways: a short drag from the chip just chosen brings the next one.
-            let previous = app.buttons["studio-widget-\(index - 1)"]
+            // (Its frame is known even off screen: no hit test on an element that isn't visible.)
+            let width = app.frame.width > 100 ? app.frame.width : 402
+            let row = chip.frame.midY
             var drags = 0
-            while !chip.isHittable && drags < 6 {
-                let start = previous.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-                let end = previous.coordinate(withNormalizedOffset: CGVector(dx: -0.4, dy: 0.5))
+            while chip.frame.midX > width - 40 && drags < 6 {
+                let origin = app.coordinate(withNormalizedOffset: .zero)
+                let start = origin.withOffset(CGVector(dx: width * 0.75, dy: row))
+                let end = origin.withOffset(CGVector(dx: width * 0.35, dy: row))
                 start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
                 drags += 1
             }
