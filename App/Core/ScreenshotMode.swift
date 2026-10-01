@@ -110,7 +110,7 @@ enum ScreenshotMode {
                     case "fitness-session": .fitnessSession
                     case "fitness-program": .fitnessProgram
                     case "fitness-library": .fitnessLibrary
-                    case "fitness-exercise": .fitnessExercise("bench-press")
+                    case "fitness-exercise": .fitnessExercise(parts.count > 2 ? parts.dropFirst(2).joined(separator: "-") : "bench-press")
                     case "fitness-history": .fitnessHistory
                     case "fitness-progress": .fitnessProgress
                     case "fitness-activity": .fitnessActivity

@@ -19,7 +19,9 @@ struct HomeView: View {
             }
             .background(.screenFill)
             .screenshotScroll()
+            // « Tessera » centered at the top, between the search (left) and the profile (right).
             .navigationTitle("Tessera")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: HomeRoute.self) { route in
                 switch route {
                 case let .space(space):
@@ -41,13 +43,18 @@ struct HomeView: View {
                 await model.refreshWeather()
             }
             .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button {
                         router.openExplore(search: true)
                     } label: {
                         Image(systemName: "magnifyingglass")
                     }
                     .accessibilityLabel(Text("Rechercher un widget"))
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Tessera")
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .accessibilityAddTraits(.isHeader)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

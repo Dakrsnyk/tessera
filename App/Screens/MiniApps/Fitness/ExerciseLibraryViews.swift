@@ -250,15 +250,19 @@ struct ExerciseDetailView: View {
         let history = FitnessMath.history(of: exercise, model.fitness)
         let isFavorite = model.fitness.favoriteExercises.contains(exercise.id)
         MiniAppScroll {
-            VStack(spacing: 6) {
+            VStack(spacing: 8) {
                 ExerciseDemoView(exercise: exercise, colorHex: accentHex)
-                    .frame(height: 190)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
-                    .background(Color.secondary.opacity(0.06), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-                Text(exercise.pattern == .generic ? "Schéma général : suis les étapes ci-dessous" : "Démonstration schématique")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 6) {
+                    Circle().fill(Color(hex: accentHex)).frame(width: 7, height: 7)
+                    Text("Muscles principaux")
+                    Circle().fill(Color(hex: accentHex).opacity(0.45)).frame(width: 7, height: 7)
+                        .padding(.leading, 6)
+                    Text("secondaires")
+                }
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("exercise-demo")

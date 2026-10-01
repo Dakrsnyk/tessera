@@ -20,7 +20,9 @@ jobs:
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
-      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') }}
+      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') || contains(github.event.head_commit.message, '[demos]') }}
+      # [demos] runs the logic tests and the exercise sheet UI tests, then the demonstrations of every exercise.
+      DEMOS: ${{ contains(github.event.head_commit.message, '[demos]') }}
       # [studio] runs the logic tests and the Studio UI tests, then only the Widget Studio captures.
       STUDIO: ${{ contains(github.event.head_commit.message, '[studio]') }}
       # [apps] runs the logic tests and the mini-app UI tests, then only the mini-app captures.
@@ -130,6 +132,7 @@ jobs:
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
           if [ "$APPS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/DataEntryUITests -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
+          if [ "$DEMOS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests/testTheLibraryFindsExercisesAndShowsTheirSheet -only-testing:TesseraUITests/MiniAppUITests/testASessionKeepsItsPlaceWhenTheSheetOpens -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
           if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:TesseraUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:TesseraUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:TesseraUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testFirstLaunchAsksOnlyWhatMattersAndFillsMesInformations -only-testing:TesseraUITests/ProfileUITests/testSkippingEverythingShowsNothingMadeUp -only-testing:TesseraUITests/ProfileUITests/testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
@@ -297,6 +300,20 @@ jobs:
           if [ "$STUDIO" = "true" ]; then
             brand_shots
             tutorial_shots
+            exit 0
+          fi
+          if [ "$DEMOS" = "true" ]; then
+            # Every exercise: start, middle and end of the movement, as the app draws them.
+            WAIT=10 shoot gallery-demos-1 gallery-demos-1 top light
+            for page in $(seq 2 21); do WAIT=6 shoot gallery-demos-$page gallery-demos-$page top light; done
+            for page in 1 3 9; do WAIT=6 shoot gallery-demos-$page-v1 gallery-demos-$page-v1 top light; done
+            WAIT=6 shoot gallery-demos-1-dark gallery-demos-1 top dark
+            # The exercise sheet, animated, on the three exercises reported.
+            for id in incline-bench pec-deck leg-extension; do WAIT=8 shoot app-fitness-exercise-$id app-fitness-exercise-$id top light; done
+            WAIT=8 shoot app-fitness-exercise-pec-deck app-fitness-exercise-pec-deck top dark
+            # The Home header: search on the left, Tessera in the middle, the profile on the right.
+            WAIT=8 shoot home home top light
+            WAIT=8 shoot home home top dark
             exit 0
           fi
           if [ "$APPS" = "true" ]; then

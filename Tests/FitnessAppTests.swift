@@ -27,13 +27,8 @@ final class FitnessAppTests: XCTestCase {
             XCTAssertFalse(exercise.primary.isEmpty, exercise.id)
             XCTAssertFalse(exercise.equipment.isEmpty, exercise.id)
         }
-        // Every movement has a pose at the start, the middle and the end of a repetition.
-        for pattern in MovementPattern.allCases {
-            for t in [0.0, 0.25, 0.5, 0.99] {
-                let pose = DemoPoses.pose(pattern, t: t)
-                XCTAssertTrue(pose.hip.x.isFinite && pose.hip.y.isFinite, "\(pattern)")
-            }
-        }
+        // Every exercise has its own demonstration (see ExerciseDemoTests).
+        XCTAssertTrue(all.allSatisfy { ExerciseDemos.demo(for: $0.id) != nil })
     }
 
     func testTheSearchUnderstandsWhatPeopleType() {

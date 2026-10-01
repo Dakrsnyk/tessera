@@ -154,6 +154,13 @@ final class MiniAppUITests: XCTestCase {
         // The ⓘ sheet, then back to the list exactly as it was.
         app.buttons.matching(identifier: "exercise-info").firstMatch.tap()
         XCTAssertTrue(app.otherElements["exercise-demo"].waitForExistence(timeout: 8), "Fiche d'exercice absente")
+        // The demonstration names the phase of the movement, and offers other angles.
+        XCTAssertTrue(app.staticTexts["exercise-demo-phase"].waitForExistence(timeout: 5), "Les phases du mouvement doivent être nommées")
+        let angle = app.buttons["exercise-demo-view-1"]
+        if angle.waitForExistence(timeout: 3) {
+            angle.tap()
+            XCTAssertTrue(angle.isSelected, "L'angle choisi est sélectionné")
+        }
         snapshot("fitness-exercise-sheet")
         closeSheet()
         XCTAssertTrue(element(containing: "Développé couché (barre)").waitForExistence(timeout: 5), "Retour à la recherche")

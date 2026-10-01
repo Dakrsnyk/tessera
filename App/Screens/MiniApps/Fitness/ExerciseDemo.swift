@@ -1,441 +1,543 @@
 import SwiftUI
 
-/// A schematic figure doing the movement, drawn by the app: no outside video, so nothing to license,
-/// and something to see for every exercise. Poses are in body units (y up, x toward where the figure
-/// faces), joints found by two-bone inverse kinematics from the hands and feet.
+// MARK: - The demonstration of an exercise
+
+/// A figure doing the exercise on the equipment it needs (bench at the right incline, machine, cable,
+/// bar...), drawn by the app from `ExerciseDemos.json`: 3D positions sampled over one repetition,
+/// interpolated, seen from a chosen angle. No outside video, so nothing to license, and the same
+/// clean style as the rest of Tessera. The phases of the movement are named under the figure.
 struct ExerciseDemoView: View {
     let exercise: ExerciseInfo
     var colorHex = "E5484D"
-    /// Seconds for one repetition.
-    var period: Double = 2.6
+    var height: CGFloat = 236
+
+    @State private var viewIndex = 0
+    @State private var paused = false
+    @State private var pausedAt: Double = 0
+    @State private var startedAt = Date()
+    @Environment(\.colorScheme) private var scheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
-        TimelineView(.animation) { timeline in
-            let seconds = timeline.date.timeIntervalSinceReferenceDate
-            let t = (seconds.truncatingRemainder(dividingBy: period)) / period
-            Canvas { context, size in
-                DemoRenderer.draw(DemoPoses.pose(exercise.pattern, t: t), pattern: exercise.pattern, equipment: exercise.equipment,
-                                  in: &context, size: size, accent: Color(hex: colorHex))
+        if let demo = ExerciseDemos.demo(for: exercise.id) {
+            content(demo)
+        } else {
+            Text("Démonstration indisponible")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, minHeight: 120)
+        }
+    }
+
+    private func content(_ demo: DemoModel) -> some View {
+        let palette = DemoPalette(scheme: scheme, accentHex: colorHex)
+        return VStack(spacing: 10) {
+            TimelineView(.animation(minimumInterval: nil, paused: isPaused)) { timeline in
+                let seconds = time(at: timeline.date, demo: demo)
+                let phase = demo.phase(at: seconds)
+                VStack(spacing: 10) {
+                    Canvas { context, size in
+                        DemoRenderer.draw(demo, p: phase.p, view: min(viewIndex, demo.views.count - 1),
+                                          in: &context, size: size, palette: palette)
+                    }
+                    .frame(height: height)
+                    .background(palette.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .overlay(alignment: .topTrailing) {
+                        Image(systemName: isPaused ? "play.fill" : "pause.fill")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.secondary)
+                            .padding(8)
+                            .background(.thinMaterial, in: Circle())
+                            .padding(10)
+                            .opacity(isPaused ? 1 : 0.55)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture { togglePause(demo) }
+                    .accessibilityElement()
+                    .accessibilityLabel(Text("Démonstration animée de \(exercise.name)"))
+                    .accessibilityValue(Text(phase.label.map { demo.labels.indices.contains($0) ? demo.labels[$0] : "" } ?? ""))
+                    .accessibilityHint(Text(isPaused ? "Touchez deux fois pour lancer l'animation" : "Touchez deux fois pour mettre en pause"))
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityIdentifier("exercise-demo-canvas")
+
+                    PhaseStrip(labels: demo.labels, current: phase.label, accent: Color(hex: colorHex))
+                }
+            }
+            if demo.views.count > 1 {
+                ViewPicker(names: demo.views.map(\.name), selection: $viewIndex)
             }
         }
-        .accessibilityLabel(Text("Démonstration animée de \(exercise.name)"))
-    }
-}
-
-struct DemoPose {
-    /// Seen from the front (arms out to the sides) instead of from the side.
-    var front = false
-    var hip: CGPoint
-    /// Degrees: 0 upright, 90 leaning forward flat, -90 lying with the head behind.
-    var torso: Double
-    var hand: CGPoint
-    var farHand: CGPoint
-    var foot: CGPoint
-    var farFoot: CGPoint
-    /// Elbows bend behind the arm line (true) or in front of it.
-    var elbowsBack = true
-    var kneesForward = true
-    /// 0 flat feet, 1 on tiptoe.
-    var tiptoe: Double = 0
-    /// Shoulders lifted (shrugs).
-    var shrug: Double = 0
-
-    static func mix(_ a: DemoPose, _ b: DemoPose, _ t: Double) -> DemoPose {
-        func m(_ x: CGFloat, _ y: CGFloat) -> CGFloat { x + (y - x) * t }
-        func p(_ x: CGPoint, _ y: CGPoint) -> CGPoint { CGPoint(x: m(x.x, y.x), y: m(x.y, y.y)) }
-        var pose = a
-        pose.hip = p(a.hip, b.hip)
-        pose.torso = a.torso + (b.torso - a.torso) * t
-        pose.hand = p(a.hand, b.hand)
-        pose.farHand = p(a.farHand, b.farHand)
-        pose.foot = p(a.foot, b.foot)
-        pose.farFoot = p(a.farFoot, b.farFoot)
-        pose.tiptoe = a.tiptoe + (b.tiptoe - a.tiptoe) * t
-        pose.shrug = a.shrug + (b.shrug - a.shrug) * t
-        return pose
-    }
-}
-
-/// Body proportions, in units (about 1/10 of the figure's height with arms up).
-enum DemoBody {
-    static let torso: CGFloat = 2.6
-    static let upperArm: CGFloat = 1.5
-    static let forearm: CGFloat = 1.4
-    static let thigh: CGFloat = 2.1
-    static let shin: CGFloat = 2.1
-    static let neck: CGFloat = 0.75
-    static let head: CGFloat = 0.45
-    static let shoulderHalf: CGFloat = 0.75
-    static let hipHalf: CGFloat = 0.38
-}
-
-enum DemoPoses {
-    private static func pt(_ x: CGFloat, _ y: CGFloat) -> CGPoint { CGPoint(x: x, y: y) }
-
-    private static let stand = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.2, 3.85), farHand: pt(0, 3.85), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-
-    /// Out and back: ease in, pause a little at each end.
-    private static func pingPong(_ t: Double) -> Double {
-        let x = t < 0.5 ? t * 2 : (1 - t) * 2
-        let held = min(1, max(0, (x - 0.08) / 0.84))
-        return held * held * (3 - 2 * held)
+        .onAppear { startedAt = Date() }
     }
 
-    static func pose(_ pattern: MovementPattern, t: Double) -> DemoPose {
-        let k = pingPong(t)
-        switch pattern {
-        case .squat:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.8, 6.1), farHand: pt(0.7, 6.1), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(-1.0, 2.35), torso: 35, hand: pt(1.3, 4.0), farHand: pt(1.2, 4.0), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            return .mix(a, b, k)
-        case .hinge:
-            let a = DemoPose(hip: pt(0, 4.05), torso: 0, hand: pt(0.2, 3.9), farHand: pt(0.1, 3.9), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(-0.75, 3.65), torso: 75, hand: pt(1.75, 1.45), farHand: pt(1.65, 1.45), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            return .mix(a, b, k)
-        case .lunge:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.2, 3.85), farHand: pt(0, 3.85), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(0, 2.45), torso: 0, hand: pt(0.25, 2.25), farHand: pt(0.05, 2.25), foot: pt(1.75, 0), farFoot: pt(-1.7, 0.05), tiptoe: 0)
-            return .mix(a, b, k)
-        case .benchPress, .lyingExtension, .fly, .pullover:
-            let base = DemoPose(hip: pt(1.0, 1.95), torso: -90, hand: pt(-1.5, 4.75), farHand: pt(-1.6, 4.75), foot: pt(2.7, 0), farFoot: pt(2.4, 0))
-            var a = base
-            var b = base
-            switch pattern {
-            case .benchPress:
-                b.hand = pt(-1.2, 2.55); b.farHand = pt(-1.3, 2.55)
-            case .lyingExtension:
-                b.hand = pt(-2.75, 3.05); b.farHand = pt(-2.85, 3.05); b.elbowsBack = false; a.elbowsBack = false
-            case .fly:
-                b.hand = pt(-1.9, 2.35); b.farHand = pt(-1.3, 2.35)
-            default:
-                b.hand = pt(-4.3, 2.4); b.farHand = pt(-4.35, 2.4)
-            }
-            return .mix(a, b, k)
-        case .pushUp, .mountainClimber:
-            let a = DemoPose(hip: pt(-0.47, 1.73), torso: 65.7, hand: pt(1.9, 0), farHand: pt(1.8, 0), foot: pt(-4.3, 0), farFoot: pt(-4.4, 0))
-            if pattern == .mountainClimber {
-                var near = a
-                near.foot = pt(-1.2, 0.5)
-                var far = a
-                far.farFoot = pt(-1.3, 0.5)
-                return .mix(near, far, t < 0.5 ? t * 2 : (1 - t) * 2)
-            }
-            let b = DemoPose(hip: pt(-0.14, 0.56), torso: 82.4, hand: pt(1.9, 0), farHand: pt(1.8, 0), foot: pt(-4.3, 0), farFoot: pt(-4.4, 0))
-            return .mix(a, b, k)
-        case .plank:
-            let a = DemoPose(hip: pt(-0.7, 0.9), torso: 77.6, hand: pt(3.1, 0.05), farHand: pt(3.0, 0.05), foot: pt(-4.8, 0), farFoot: pt(-4.9, 0))
-            var b = a
-            b.hip = pt(-0.7, 1.0)
-            return .mix(a, b, k)
-        case .dip:
-            let a = DemoPose(hip: pt(-0.15, 4.25), torso: 10, hand: pt(0.35, 3.9), farHand: pt(0.25, 3.9), foot: pt(-1.3, 1.3), farFoot: pt(-1.4, 1.3))
-            let b = DemoPose(hip: pt(-0.4, 2.7), torso: 16, hand: pt(0.35, 3.9), farHand: pt(0.25, 3.9), foot: pt(-1.6, 0.2), farFoot: pt(-1.7, 0.2))
-            return .mix(a, b, k)
-        case .verticalPush:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.5, 6.8), farHand: pt(0.4, 6.8), foot: pt(0.3, 0), farFoot: pt(-0.1, 0), elbowsBack: false)
-            let b = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.15, 9.5), farHand: pt(0.05, 9.5), foot: pt(0.3, 0), farFoot: pt(-0.1, 0), elbowsBack: false)
-            return .mix(a, b, k)
-        case .horizontalPull:
-            let a = DemoPose(hip: pt(-0.6, 3.8), torso: 70, hand: pt(1.75, 1.9), farHand: pt(1.65, 1.9), foot: pt(0.2, 0), farFoot: pt(-0.2, 0))
-            let b = DemoPose(hip: pt(-0.6, 3.8), torso: 70, hand: pt(0.95, 3.65), farHand: pt(0.85, 3.65), foot: pt(0.2, 0), farFoot: pt(-0.2, 0))
-            return .mix(a, b, k)
-        case .seatedRow:
-            let a = DemoPose(hip: pt(-1.2, 1.55), torso: 8, hand: pt(1.75, 3.55), farHand: pt(1.65, 3.55), foot: pt(2.4, 0.9), farFoot: pt(2.3, 0.9))
-            let b = DemoPose(hip: pt(-1.2, 1.55), torso: -4, hand: pt(-0.45, 3.2), farHand: pt(-0.55, 3.2), foot: pt(2.4, 0.9), farFoot: pt(2.3, 0.9))
-            return .mix(a, b, k)
-        case .verticalPull:
-            let a = DemoPose(hip: pt(0, 3.95), torso: 0, hand: pt(0.3, 9.4), farHand: pt(0.2, 9.4), foot: pt(-1.2, 1.2), farFoot: pt(-1.3, 1.2), elbowsBack: false)
-            let b = DemoPose(hip: pt(-0.05, 6.3), torso: 4, hand: pt(0.3, 9.4), farHand: pt(0.2, 9.4), foot: pt(-1.35, 3.6), farFoot: pt(-1.45, 3.6), elbowsBack: false)
-            return .mix(a, b, k)
-        case .curl:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.35, 3.9), farHand: pt(0.25, 3.9), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.55, 6.25), farHand: pt(0.45, 6.25), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            return .mix(a, b, k)
-        case .tricepsExtension:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 12, hand: pt(1.4, 5.35), farHand: pt(1.3, 5.35), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(0, 4.1), torso: 12, hand: pt(0.75, 3.9), farHand: pt(0.65, 3.9), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            return .mix(a, b, k)
-        case .overheadExtension:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.1, 9.5), farHand: pt(0, 9.5), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(-0.75, 7.25), farHand: pt(-0.85, 7.25), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            return .mix(a, b, k)
-        case .frontRaise:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.35, 3.9), farHand: pt(0.25, 3.9), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(2.85, 6.7), farHand: pt(2.75, 6.7), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            return .mix(a, b, k)
-        case .uprightRow:
-            let a = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.35, 3.9), farHand: pt(0.25, 3.9), foot: pt(0.3, 0), farFoot: pt(-0.1, 0), elbowsBack: false)
-            let b = DemoPose(hip: pt(0, 4.1), torso: 0, hand: pt(0.45, 6.0), farHand: pt(0.35, 6.0), foot: pt(0.3, 0), farFoot: pt(-0.1, 0), elbowsBack: false)
-            return .mix(a, b, k)
-        case .lateralRaise:
-            let a = DemoPose(front: true, hip: pt(0, 4.1), torso: 0, hand: pt(1.05, 3.9), farHand: pt(-1.05, 3.9), foot: pt(0.45, 0), farFoot: pt(-0.45, 0))
-            let b = DemoPose(front: true, hip: pt(0, 4.1), torso: 0, hand: pt(3.5, 6.45), farHand: pt(-3.5, 6.45), foot: pt(0.45, 0), farFoot: pt(-0.45, 0))
-            return .mix(a, b, k)
-        case .shrug:
-            let a = DemoPose(front: true, hip: pt(0, 4.1), torso: 0, hand: pt(1.0, 3.9), farHand: pt(-1.0, 3.9), foot: pt(0.45, 0), farFoot: pt(-0.45, 0))
-            var b = a
-            b.shrug = 0.45
-            b.hand = pt(1.0, 4.35)
-            b.farHand = pt(-1.0, 4.35)
-            return .mix(a, b, k)
-        case .armCircles:
-            // Straight arms turning around the shoulders.
-            let angle = t * 2 * .pi - .pi / 2
-            let shoulderY: CGFloat = 4.1 + DemoBody.torso
-            let reach: CGFloat = DemoBody.upperArm + DemoBody.forearm - 0.05
-            let dx = reach * CGFloat(cos(angle))
-            let dy = reach * CGFloat(sin(angle))
-            return DemoPose(front: true, hip: pt(0, 4.1), torso: 0,
-                            hand: pt(DemoBody.shoulderHalf + abs(dx), shoulderY + dy),
-                            farHand: pt(-DemoBody.shoulderHalf - abs(dx), shoulderY + dy),
-                            foot: pt(0.45, 0), farFoot: pt(-0.45, 0))
-        case .carry:
-            var near = stand
-            near.foot = pt(0.9, 0)
-            near.farFoot = pt(-0.7, 0)
-            var far = stand
-            far.foot = pt(-0.7, 0)
-            far.farFoot = pt(0.9, 0)
-            return .mix(near, far, pingPong(t))
-        case .run:
-            let s = sin(t * 2 * .pi)
-            var pose = stand
-            pose.hip = pt(0, 3.95 + 0.12 * abs(s))
-            pose.torso = 8
-            pose.foot = pt(1.2 * s, 0.25 + max(0, s) * 1.1)
-            pose.farFoot = pt(-1.2 * s, 0.25 + max(0, -s) * 1.1)
-            pose.hand = pt(0.3 - 1.0 * s, 5.3 + 0.2 * s)
-            pose.farHand = pt(0.3 + 1.0 * s, 5.3 - 0.2 * s)
-            pose.elbowsBack = false
-            return pose
-        case .cycle:
-            let angle = t * 2 * .pi
-            var pose = DemoPose(hip: pt(-0.7, 3.65), torso: 30, hand: pt(1.95, 5.1), farHand: pt(1.85, 5.1), foot: .zero, farFoot: .zero)
-            pose.foot = pt(0.55 + 0.9 * CGFloat(cos(angle)), 1.25 + 0.9 * CGFloat(sin(angle)))
-            pose.farFoot = pt(0.55 - 0.9 * CGFloat(cos(angle)), 1.25 - 0.9 * CGFloat(sin(angle)))
-            return pose
-        case .rowing:
-            let a = DemoPose(hip: pt(-0.3, 0.65), torso: 28, hand: pt(2.35, 2.25), farHand: pt(2.25, 2.25), foot: pt(1.95, 0.6), farFoot: pt(1.85, 0.6))
-            let b = DemoPose(hip: pt(-2.1, 0.65), torso: -22, hand: pt(-1.3, 2.95), farHand: pt(-1.4, 2.95), foot: pt(1.95, 0.6), farFoot: pt(1.85, 0.6))
-            return .mix(a, b, k)
-        case .jump:
-            let a = DemoPose(hip: pt(-0.5, 3.1), torso: 25, hand: pt(-0.4, 3.4), farHand: pt(-0.5, 3.4), foot: pt(0.3, 0), farFoot: pt(-0.1, 0))
-            let b = DemoPose(hip: pt(0, 5.3), torso: 0, hand: pt(0.4, 9.5), farHand: pt(0.3, 9.5), foot: pt(0.3, 1.2), farFoot: pt(-0.1, 1.2), elbowsBack: false, tiptoe: 1)
-            return .mix(a, b, k)
-        case .crunch:
-            let a = DemoPose(hip: pt(0.5, 0.3), torso: -90, hand: pt(-2.55, 0.95), farHand: pt(-2.65, 0.95), foot: pt(2.3, 0), farFoot: pt(2.2, 0), elbowsBack: false)
-            let b = DemoPose(hip: pt(0.5, 0.3), torso: -58, hand: pt(-1.75, 2.45), farHand: pt(-1.85, 2.45), foot: pt(2.3, 0), farFoot: pt(2.2, 0), elbowsBack: false)
-            return .mix(a, b, k)
-        case .legRaise:
-            let a = DemoPose(hip: pt(0.9, 0.3), torso: -90, hand: pt(0.4, 0.2), farHand: pt(0.3, 0.2), foot: pt(5.05, 0.35), farFoot: pt(5.0, 0.35))
-            let b = DemoPose(hip: pt(0.9, 0.3), torso: -90, hand: pt(0.4, 0.2), farHand: pt(0.3, 0.2), foot: pt(1.1, 4.45), farFoot: pt(1.05, 4.45))
-            return .mix(a, b, k)
-        case .bridge:
-            let a = DemoPose(hip: pt(0.55, 0.3), torso: -90, hand: pt(0.1, 0.15), farHand: pt(0.0, 0.15), foot: pt(2.2, 0), farFoot: pt(2.1, 0))
-            let b = DemoPose(hip: pt(0.35, 1.7), torso: -122, hand: pt(0.1, 0.15), farHand: pt(0.0, 0.15), foot: pt(2.2, 0), farFoot: pt(2.1, 0))
-            return .mix(a, b, k)
-        case .legKickback:
-            let a = DemoPose(hip: pt(-1.0, 2.3), torso: 90, hand: pt(1.75, 0.02), farHand: pt(1.65, 0.02), foot: pt(-3.0, 0.1), farFoot: pt(-3.1, 0.1), kneesForward: false)
-            var b = a
-            b.foot = pt(-5.15, 2.6)
-            b.kneesForward = true
-            return .mix(a, b, k)
-        case .calfRaise:
-            var b = stand
-            b.hip = pt(0, 4.55)
-            b.tiptoe = 1
-            b.foot = pt(0.3, 0.45)
-            b.farFoot = pt(-0.1, 0.45)
-            return .mix(stand, b, k)
-        case .legPress:
-            let a = DemoPose(hip: pt(-1.4, 1.6), torso: -32, hand: pt(-0.6, 1.9), farHand: pt(-0.7, 1.9), foot: pt(0.8, 3.2), farFoot: pt(0.7, 3.2))
-            let b = DemoPose(hip: pt(-1.4, 1.6), torso: -32, hand: pt(-0.6, 1.9), farHand: pt(-0.7, 1.9), foot: pt(2.45, 4.45), farFoot: pt(2.35, 4.45))
-            return .mix(a, b, k)
-        case .legExtension, .legCurl:
-            let bent = DemoPose(hip: pt(-0.7, 2.25), torso: -6, hand: pt(-0.4, 2.0), farHand: pt(-0.5, 2.0), foot: pt(1.55, 0.2), farFoot: pt(1.45, 0.2))
-            var straight = bent
-            straight.foot = pt(3.5, 2.5)
-            straight.farFoot = pt(3.4, 2.5)
-            return pattern == .legExtension ? .mix(bent, straight, k) : .mix(straight, bent, k)
-        case .rotation:
-            let a = DemoPose(hip: pt(0, 0.3), torso: -35, hand: pt(0.55, 2.7), farHand: pt(0.45, 2.7), foot: pt(2.1, 0.5), farFoot: pt(2.0, 0.5), elbowsBack: false)
-            let b = DemoPose(hip: pt(0, 0.3), torso: -30, hand: pt(-0.7, 1.1), farHand: pt(-0.8, 1.1), foot: pt(2.1, 0.5), farFoot: pt(2.0, 0.5), elbowsBack: false)
-            return .mix(a, b, k)
-        case .superman:
-            let a = DemoPose(hip: pt(0, 0.4), torso: 90, hand: pt(5.25, 0.45), farHand: pt(5.2, 0.45), foot: pt(-4.15, 0.3), farFoot: pt(-4.2, 0.3))
-            let b = DemoPose(hip: pt(0, 0.4), torso: 80, hand: pt(5.0, 1.45), farHand: pt(4.95, 1.45), foot: pt(-4.05, 1.0), farFoot: pt(-4.1, 1.0))
-            return .mix(a, b, k)
-        case .stretchFold:
-            let a = DemoPose(hip: pt(-1.3, 0.35), torso: 8, hand: pt(-0.9, 0.6), farHand: pt(-1.0, 0.6), foot: pt(2.85, 0.3), farFoot: pt(2.75, 0.3))
-            let b = DemoPose(hip: pt(-1.3, 0.35), torso: 68, hand: pt(2.6, 0.55), farHand: pt(2.5, 0.55), foot: pt(2.85, 0.3), farFoot: pt(2.75, 0.3))
-            return .mix(a, b, min(1, k * 1.2))
-        case .stretchStand:
-            var b = stand
-            b.foot = pt(-0.55, 2.9)
-            b.kneesForward = true
-            b.hand = pt(-0.6, 3.05)
-            return .mix(stand, b, min(1, k * 1.2))
-        case .generic:
-            var b = stand
-            b.hand = pt(0.9, 5.2)
-            b.farHand = pt(0.8, 5.2)
-            b.elbowsBack = false
-            return .mix(stand, b, k * 0.6)
+    @State private var playingDespiteReduceMotion = false
+
+    private var isPaused: Bool { paused || (reduceMotion && !playingDespiteReduceMotion) }
+
+    private func time(at date: Date, demo: DemoModel) -> Double {
+        if isPaused { return pausedAt }
+        return pausedAt + date.timeIntervalSince(startedAt)
+    }
+
+    private func togglePause(_ demo: DemoModel) {
+        if isPaused {
+            startedAt = Date()
+            paused = false
+            playingDespiteReduceMotion = true
+        } else {
+            pausedAt += Date().timeIntervalSince(startedAt)
+            paused = true
+            playingDespiteReduceMotion = false
         }
+    }
+}
+
+/// The phases of the repetition, the current one highlighted: « Départ → Descente → … ».
+private struct PhaseStrip: View {
+    let labels: [String]
+    let current: Int?
+    let accent: Color
+
+    var body: some View {
+        if labels.isEmpty {
+            Text("Mouvement continu")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.secondary)
+        } else {
+            VStack(spacing: 6) {
+                HStack(spacing: 4) {
+                    ForEach(labels.indices, id: \.self) { index in
+                        Capsule()
+                            .fill(index == current ? accent : Color.secondary.opacity(0.22))
+                            .frame(height: 4)
+                    }
+                }
+                Text(labels[min(max(current ?? 0, 0), labels.count - 1)])
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .contentTransition(.opacity)
+                    .accessibilityIdentifier("exercise-demo-phase")
+            }
+            .padding(.horizontal, 4)
+        }
+    }
+}
+
+/// « Profil · 3/4 · Face »: the angles offered for this exercise.
+private struct ViewPicker: View {
+    let names: [String]
+    @Binding var selection: Int
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "video")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            ForEach(Array(names.enumerated()), id: \.offset) { index, name in
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) { selection = index }
+                } label: {
+                    Text(name)
+                        .font(.caption.weight(.semibold))
+                        .padding(.horizontal, 11)
+                        .padding(.vertical, 6)
+                        .foregroundStyle(selection == index ? Color(uiColor: .systemBackground) : .primary)
+                        .background(selection == index ? Color.primary : Color.secondary.opacity(0.12), in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text("Vue \(name)"))
+                .accessibilityAddTraits(selection == index ? .isSelected : [])
+                .accessibilityIdentifier("exercise-demo-view-\(index)")
+            }
+        }
+    }
+}
+
+// MARK: - Data
+
+struct DemoFile: Decodable {
+    let version: Int
+    let demos: [String: DemoData]
+}
+
+struct DemoData: Decodable {
+    struct ViewSpec: Decodable {
+        let name: String
+        let yaw: Double
+        let pitch: Double
+        let box: [Double]
+    }
+
+    let id: String
+    let loop: Bool
+    let n: Int
+    let timeline: [[Double]]
+    let labels: [String]
+    let views: [ViewSpec]
+    let `static`: String
+    let dynamic: String
+    let points: [Int]
+    let prims: [[Int]]
+    let shoulders: [Int]
+    let marks: [Double]
+}
+
+/// The demonstrations of the library, loaded once, each prepared when first shown.
+enum ExerciseDemos {
+    private static let file: DemoFile? = {
+        guard let url = Bundle.main.url(forResource: "ExerciseDemos", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else { return nil }
+        return try? JSONDecoder().decode(DemoFile.self, from: data)
+    }()
+
+    private static var cache: [String: DemoModel] = [:]
+    private static let lock = NSLock()
+
+    static var ids: [String] { file.map { Array($0.demos.keys) } ?? [] }
+
+    static func demo(for id: String) -> DemoModel? {
+        lock.lock()
+        defer { lock.unlock() }
+        if let model = cache[id] { return model }
+        guard let data = file?.demos[id], let model = DemoModel(data) else { return nil }
+        cache[id] = model
+        return model
+    }
+}
+
+typealias Vec3 = SIMD3<Double>
+
+struct DemoPrim {
+    enum Kind: Int { case line = 0, poly = 1, disc = 2, ball = 3 }
+    let kind: Kind
+    let role: Int
+    let width: Double
+    let bias: Double
+    let side: Int
+    let cull: Bool
+    let shade: Bool
+    let indices: [Int]
+}
+
+struct DemoSegment {
+    let duration: Double
+    let from: Double
+    let to: Double
+    let label: Int
+    let eased: Bool
+}
+
+/// One demonstration, ready to play: static points, the dynamic ones per sample, what to draw.
+final class DemoModel {
+    let id: String
+    let loop: Bool
+    let samples: Int
+    let staticPoints: [Vec3]
+    let dynamicPoints: [[Vec3]]
+    let prims: [DemoPrim]
+    let views: [DemoData.ViewSpec]
+    let labels: [String]
+    let segments: [DemoSegment]
+    let shoulders: [Int]
+    let marks: [Double]
+    let duration: Double
+
+    init?(_ data: DemoData) {
+        guard data.points.count == 2, data.n > 1, !data.views.isEmpty else { return nil }
+        let staticCount = data.points[0]
+        let dynamicCount = data.points[1]
+        let s = Self.decode(data.static)
+        let d = Self.decode(data.dynamic)
+        guard s.count >= staticCount * 3, d.count >= data.n * dynamicCount * 3 else { return nil }
+        staticPoints = (0..<staticCount).map { Vec3(s[$0 * 3], s[$0 * 3 + 1], s[$0 * 3 + 2]) }
+        var frames: [[Vec3]] = []
+        frames.reserveCapacity(data.n)
+        for f in 0..<data.n {
+            var frame: [Vec3] = []
+            frame.reserveCapacity(dynamicCount)
+            for i in 0..<dynamicCount {
+                let k = (f * dynamicCount + i) * 3
+                frame.append(Vec3(d[k], d[k + 1], d[k + 2]))
+            }
+            frames.append(frame)
+        }
+        dynamicPoints = frames
+        id = data.id
+        loop = data.loop
+        samples = data.n
+        views = data.views
+        labels = data.labels
+        shoulders = data.shoulders
+        marks = data.marks
+        prims = data.prims.compactMap { raw in
+            guard raw.count >= 7, let kind = DemoPrim.Kind(rawValue: raw[0]) else { return nil }
+            return DemoPrim(kind: kind, role: raw[1], width: Double(raw[2]) / 1000, bias: Double(raw[3]) / 1000,
+                            side: raw[4], cull: raw[5] & 1 != 0, shade: raw[5] & 2 != 0, indices: Array(raw[6...]))
+        }
+        let segs: [DemoSegment] = data.timeline.compactMap { seg in
+            guard seg.count >= 4 else { return nil }
+            return DemoSegment(duration: seg[0], from: seg[1], to: seg[2], label: Int(seg[3]),
+                               eased: seg.count > 4 ? seg[4] != 0 : !data.loop)
+        }
+        segments = segs
+        duration = max(0.1, segs.reduce(0.0) { $0 + $1.duration })
+    }
+
+    private static func decode(_ base64: String) -> [Double] {
+        guard !base64.isEmpty, let data = Data(base64Encoded: base64) else { return [] }
+        return data.withUnsafeBytes { raw -> [Double] in
+            let values = raw.bindMemory(to: Int16.self)
+            return values.map { Double(Int16(littleEndian: $0)) / 1000 }
+        }
+    }
+
+    /// Where the movement is (0 start … 1 end) and its phase (an index in `labels`), t seconds into the loop.
+    func phase(at seconds: Double) -> (p: Double, label: Int?) {
+        var t = seconds.truncatingRemainder(dividingBy: duration)
+        if t < 0 { t += duration }
+        for segment in segments {
+            if t <= segment.duration || segment.duration == 0 {
+                let local = segment.duration > 0 ? t / segment.duration : 1
+                let s = segment.eased ? local * local * (3 - 2 * local) : local
+                return (segment.from + (segment.to - segment.from) * s, label(segment.label))
+            }
+            t -= segment.duration
+        }
+        let last = segments.last
+        return (last?.to ?? 0, label(last?.label ?? -1))
+    }
+
+    private func label(_ index: Int) -> Int? {
+        labels.indices.contains(index) ? index : nil
+    }
+
+    /// Every point at phase p: the dynamic ones interpolated between samples (Catmull-Rom).
+    func points(at p: Double) -> [Vec3] {
+        guard let first = dynamicPoints.first, !first.isEmpty else { return staticPoints }
+        let n = samples
+        let i: Int
+        let f: Double
+        let indices: [Int]
+        if loop {
+            var u = p.truncatingRemainder(dividingBy: 1) * Double(n)
+            if u < 0 { u += Double(n) }
+            i = Int(u.rounded(.down)) % n
+            f = u - u.rounded(.down)
+            indices = [(i - 1 + n) % n, i, (i + 1) % n, (i + 2) % n]
+        } else {
+            let u = min(max(p, 0), 1) * Double(n - 1)
+            i = min(Int(u.rounded(.down)), n - 2)
+            f = u - Double(i)
+            indices = [max(i - 1, 0), i, i + 1, min(i + 2, n - 1)]
+        }
+        let p0 = dynamicPoints[indices[0]], p1 = dynamicPoints[indices[1]]
+        let p2 = dynamicPoints[indices[2]], p3 = dynamicPoints[indices[3]]
+        let f2 = f * f
+        let f3 = f2 * f
+        var out = staticPoints
+        out.reserveCapacity(staticPoints.count + first.count)
+        for k in 0..<first.count {
+            let a = p0[k], b = p1[k], c = p2[k], d = p3[k]
+            let t1 = (c - a) * f
+            let t2 = (2 * a - 5 * b + 4 * c - d) * f2
+            let t3 = (3 * b - a - 3 * c + d) * f3
+            out.append(0.5 * (2 * b + t1 + t2 + t3))
+        }
+        return out
+    }
+}
+
+// MARK: - Drawing
+
+struct DemoPalette {
+    let background: Color
+    private let rgb: [Int: SIMD3<Double>]
+    let backgroundRGB: SIMD3<Double>
+
+    static let roleNames = ["ink", "muscle", "muscle2", "frame", "pad", "load", "cable", "floor", "mark", "metal"]
+
+    init(scheme: ColorScheme, accentHex: String) {
+        let dark = scheme == .dark
+        let bg = dark ? "1A1B1E" : "F3F3F5"
+        let accent = Self.parse(accentHex)
+        let base = Self.parse(bg)
+        let hexes: [String] = dark
+            ? ["F1F2F4", "", "", "5A606B", "6B717C", "A3A9B4", "7C838F", "26282C", "34373E", "7B828E"]
+            : ["1E2127", "", "", "B3B8C2", "808692", "4C525E", "8E95A1", "E4E5E9", "CDD0D6", "8A909C"]
+        var table: [Int: SIMD3<Double>] = [:]
+        for (index, hex) in hexes.enumerated() where !hex.isEmpty {
+            table[index] = Self.parse(hex)
+        }
+        let muscle = dark ? accent + (SIMD3(255, 255, 255) - accent) * 0.12 : accent
+        table[1] = muscle
+        table[2] = muscle + (base - muscle) * 0.5
+        rgb = table
+        backgroundRGB = base
+        background = Self.color(base)
+    }
+
+    func role(_ index: Int) -> SIMD3<Double> { rgb[index] ?? SIMD3(128, 128, 128) }
+
+    static func parse(_ hex: String) -> SIMD3<Double> {
+        let clean = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+        let value = UInt32(clean.prefix(6), radix: 16) ?? 0
+        return SIMD3(Double((value >> 16) & 0xFF), Double((value >> 8) & 0xFF), Double(value & 0xFF))
+    }
+
+    static func color(_ c: SIMD3<Double>) -> Color {
+        Color(.sRGB, red: min(max(c.x, 0), 255) / 255, green: min(max(c.y, 0), 255) / 255,
+              blue: min(max(c.z, 0), 255) / 255, opacity: 1)
     }
 }
 
 enum DemoRenderer {
-    /// Two bones from a root toward a target: the middle joint and the reached end.
-    static func limb(from root: CGPoint, to target: CGPoint, _ a: CGFloat, _ b: CGFloat, bendPositive: Bool) -> (CGPoint, CGPoint) {
-        var dx = target.x - root.x
-        var dy = target.y - root.y
-        var d = max(hypot(dx, dy), 0.0001)
-        let reach = (a + b) * 0.999
-        if d > reach {
-            dx *= reach / d
-            dy *= reach / d
-            d = reach
-        }
-        d = max(d, abs(a - b) + 0.001)
-        let base = atan2(dy, dx)
-        let cosine = min(1, max(-1, (a * a + d * d - b * b) / (2 * a * d)))
-        let offset = acos(cosine)
-        let angle = base + (bendPositive ? offset : -offset)
-        return (CGPoint(x: root.x + a * cos(angle), y: root.y + a * sin(angle)), CGPoint(x: root.x + dx, y: root.y + dy))
+    private struct Item {
+        let depth: Double
+        let order: Int
+        let prim: DemoPrim
+        let color: SIMD3<Double>
+        let screen: [CGPoint]
     }
 
-    static func draw(_ pose: DemoPose, pattern: MovementPattern, equipment: [Equipment], in context: inout GraphicsContext, size: CGSize, accent: Color) {
-        let unit = size.height / 10.6
-        let groundY = size.height - unit * 0.35
-        func screen(_ p: CGPoint) -> CGPoint { CGPoint(x: size.width / 2 + p.x * unit, y: groundY - p.y * unit) }
-        let ink = Color.primary
-        let width = unit * 0.34
-
-        func line(_ points: [CGPoint], _ color: Color, _ lineWidth: CGFloat) {
-            var path = Path()
-            guard let first = points.first else { return }
-            path.move(to: screen(first))
-            for point in points.dropFirst() { path.addLine(to: screen(point)) }
-            context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round))
-        }
-
-        // The ground.
-        line([CGPoint(x: -6.4, y: 0), CGPoint(x: 6.4, y: 0)], Color.secondary.opacity(0.35), unit * 0.08)
-
-        let theta = pose.torso * .pi / 180
-        let up = CGPoint(x: sin(theta), y: cos(theta))
-        let neckBase = CGPoint(x: pose.hip.x + up.x * DemoBody.torso, y: pose.hip.y + up.y * DemoBody.torso + pose.shrug)
-        let head = CGPoint(x: neckBase.x + up.x * DemoBody.neck, y: neckBase.y + up.y * DemoBody.neck)
-
-        // Props behind the figure.
-        drawProps(pattern: pattern, equipment: equipment, pose: pose, context: &context, screen: screen, unit: unit)
-
-        func arm(from shoulder: CGPoint, to hand: CGPoint, color: Color) {
-            let (elbow, end) = limb(from: shoulder, to: hand, DemoBody.upperArm, DemoBody.forearm, bendPositive: !pose.elbowsBack)
-            line([shoulder, elbow, end], color, width)
-            drawWeight(at: end, equipment: equipment, pattern: pattern, context: &context, screen: screen, unit: unit, accent: accent)
-        }
-
-        func leg(from hip: CGPoint, to foot: CGPoint, color: Color, mirrored: Bool = false) {
-            let (knee, ankle) = limb(from: hip, to: foot, DemoBody.thigh, DemoBody.shin, bendPositive: mirrored ? !pose.kneesForward : pose.kneesForward)
-            let toeDirection: CGPoint = pose.front ? CGPoint(x: 0, y: 0) : CGPoint(x: 0.55 * (1 - pose.tiptoe * 0.4), y: -0.45 * pose.tiptoe)
-            let toe = CGPoint(x: ankle.x + (pose.front ? (mirrored ? -0.25 : 0.25) : toeDirection.x), y: ankle.y + toeDirection.y)
-            line([hip, knee, ankle, toe], color, width)
-        }
-
-        if pose.front {
-            let shoulderY = neckBase.y
-            let rightShoulder = CGPoint(x: neckBase.x + DemoBody.shoulderHalf, y: shoulderY)
-            let leftShoulder = CGPoint(x: neckBase.x - DemoBody.shoulderHalf, y: shoulderY)
-            let rightHip = CGPoint(x: pose.hip.x + DemoBody.hipHalf, y: pose.hip.y)
-            let leftHip = CGPoint(x: pose.hip.x - DemoBody.hipHalf, y: pose.hip.y)
-            leg(from: rightHip, to: pose.foot, color: ink)
-            leg(from: leftHip, to: pose.farFoot, color: ink, mirrored: true)
-            line([leftHip, rightHip, rightShoulder, leftShoulder, leftHip], ink, width)
-            arm(from: rightShoulder, to: pose.hand, color: ink)
-            // The other arm bends the other way when seen from the front.
-            let (elbow, end) = limb(from: leftShoulder, to: pose.farHand, DemoBody.upperArm, DemoBody.forearm, bendPositive: pose.elbowsBack)
-            line([leftShoulder, elbow, end], ink, width)
-            drawWeight(at: end, equipment: equipment, pattern: pattern, context: &context, screen: screen, unit: unit, accent: accent)
-        } else {
-            let far = ink.opacity(0.32)
-            leg(from: pose.hip, to: pose.farFoot, color: far)
-            arm(from: neckBase, to: pose.farHand, color: far)
-            leg(from: pose.hip, to: pose.foot, color: ink)
-            line([pose.hip, neckBase], ink, width * 1.15)
-            arm(from: neckBase, to: pose.hand, color: ink)
-        }
-        let headCenter = screen(head)
-        let radius = DemoBody.head * unit
-        context.fill(Path(ellipseIn: CGRect(x: headCenter.x - radius, y: headCenter.y - radius, width: radius * 2, height: radius * 2)), with: .color(ink))
+    static func basis(yaw: Double, pitch: Double) -> (Vec3, Vec3, Vec3) {
+        let y = yaw * .pi / 180
+        let p = pitch * .pi / 180
+        let r = Vec3(cos(y), 0, -sin(y))
+        let b = Vec3(sin(y), 0, cos(y))
+        let u = Vec3(0, 1, 0)
+        let u2 = u * cos(p) - b * sin(p)
+        let b2 = b * cos(p) + u * sin(p)
+        return (r, u2, b2)
     }
 
-    private static func drawWeight(at hand: CGPoint, equipment: [Equipment], pattern: MovementPattern, context: inout GraphicsContext,
-                                   screen: (CGPoint) -> CGPoint, unit: CGFloat, accent: Color) {
-        let point = screen(hand)
-        if equipment.contains(.barbell) {
-            let r = unit * 0.62
-            context.fill(Path(ellipseIn: CGRect(x: point.x - r, y: point.y - r, width: r * 2, height: r * 2)), with: .color(accent.opacity(0.85)))
-        } else if equipment.contains(.dumbbells) {
-            let rect = CGRect(x: point.x - unit * 0.42, y: point.y - unit * 0.17, width: unit * 0.84, height: unit * 0.34)
-            context.fill(Path(roundedRect: rect, cornerRadius: unit * 0.12), with: .color(accent.opacity(0.9)))
-        } else if equipment.contains(.kettlebell) {
-            let r = unit * 0.36
-            context.fill(Path(ellipseIn: CGRect(x: point.x - r, y: point.y, width: r * 2, height: r * 2)), with: .color(accent.opacity(0.9)))
-        } else if equipment.contains(.band) {
-            var path = Path()
-            path.addEllipse(in: CGRect(x: point.x - unit * 0.2, y: point.y - unit * 0.2, width: unit * 0.4, height: unit * 0.4))
-            context.stroke(path, with: .color(accent), lineWidth: unit * 0.1)
+    static func draw(_ demo: DemoModel, p: Double, view index: Int, in context: inout GraphicsContext, size: CGSize,
+                     palette: DemoPalette) {
+        let spec = demo.views[max(0, index)]
+        let (R, U, B) = basis(yaw: spec.yaw, pitch: spec.pitch)
+        let points = demo.points(at: p)
+        let projected = points.map { Vec3(($0 * R).sum(), ($0 * U).sum(), -($0 * B).sum()) }
+        guard spec.box.count == 4 else { return }
+        let margin = 14.0
+        let width = Double(size.width)
+        let height = Double(size.height)
+        let w = max(spec.box[2] - spec.box[0], 0.01)
+        let h = max(spec.box[3] - spec.box[1], 0.01)
+        let scale: Double = min((width - 2 * margin) / w, (height - 2 * margin) / h, (height - 2 * margin) / 1.75)
+        let cx = (spec.box[0] + spec.box[2]) / 2
+        let cy = (spec.box[1] + spec.box[3]) / 2
+        func screen(_ v: Vec3) -> CGPoint {
+            CGPoint(x: width / 2 + (v.x - cx) * scale, y: height / 2 - (v.y - cy) * scale)
         }
-    }
 
-    private static func drawProps(pattern: MovementPattern, equipment: [Equipment], pose: DemoPose, context: inout GraphicsContext,
-                                  screen: (CGPoint) -> CGPoint, unit: CGFloat) {
-        let prop = Color.secondary.opacity(0.4)
-        func bar(_ a: CGPoint, _ b: CGPoint, _ width: CGFloat) {
-            var path = Path()
-            path.move(to: screen(a))
-            path.addLine(to: screen(b))
-            context.stroke(path, with: .color(prop), style: StrokeStyle(lineWidth: unit * width, lineCap: .round))
+        // Which side of the body is farther from the camera (the left if positive): drawn lighter.
+        var sideFactor = 0.0
+        if demo.shoulders.count == 2, demo.shoulders.allSatisfy({ projected.indices.contains($0) }) {
+            sideFactor = min(1, max(-1, (projected[demo.shoulders[1]].z - projected[demo.shoulders[0]].z) / 0.35))
         }
-        switch pattern {
-        case .benchPress, .lyingExtension, .fly, .pullover:
-            bar(CGPoint(x: -3.0, y: 1.4), CGPoint(x: 1.7, y: 1.4), 0.5)
-            bar(CGPoint(x: -2.4, y: 1.3), CGPoint(x: -2.4, y: 0), 0.2)
-            bar(CGPoint(x: 1.1, y: 1.3), CGPoint(x: 1.1, y: 0), 0.2)
-        case .verticalPull where equipment.contains(.pullUpBar):
-            bar(CGPoint(x: -1.6, y: 9.4), CGPoint(x: 2.0, y: 9.4), 0.22)
-        case .verticalPull, .tricepsExtension:
-            if equipment.contains(.cable) {
-                bar(CGPoint(x: pose.hand.x, y: pose.hand.y), CGPoint(x: pose.hand.x + 0.6, y: 10.2), 0.07)
+        let light = normalizedSafe(Vec3(0.35, 1.0, 0.45))
+        let white = SIMD3<Double>(255, 255, 255)
+        var items: [Item] = []
+        items.reserveCapacity(demo.prims.count + 16)
+        for (order, prim) in demo.prims.enumerated() {
+            guard prim.indices.allSatisfy({ projected.indices.contains($0) }) else { continue }
+            let proj = prim.indices.map { projected[$0] }
+            var depth = proj.reduce(0) { $0 + $1.z } / Double(proj.count) + prim.bias
+            if prim.kind == .disc { depth = proj[0].z + prim.bias }
+            if prim.cull {
+                var area = 0.0
+                for k in 0..<proj.count {
+                    let a = proj[k], b = proj[(k + 1) % proj.count]
+                    area += a.x * b.y - b.x * a.y
+                }
+                if area <= 2e-6 { continue }
             }
-        case .seatedRow:
-            bar(CGPoint(x: -2.3, y: 1.1), CGPoint(x: -0.2, y: 1.1), 0.4)
-            bar(CGPoint(x: 2.75, y: 0.3), CGPoint(x: 2.75, y: 1.6), 0.25)
-            bar(pose.hand, CGPoint(x: 3.8, y: 3.4), 0.07)
-        case .dip:
-            bar(CGPoint(x: -0.4, y: 3.75), CGPoint(x: 1.3, y: 3.75), 0.2)
-            bar(CGPoint(x: 1.1, y: 3.7), CGPoint(x: 1.1, y: 0), 0.16)
-        case .legPress:
-            bar(CGPoint(x: -2.6, y: 0.9), CGPoint(x: -0.8, y: 1.4), 0.4)
-            bar(CGPoint(x: pose.foot.x + 0.35, y: pose.foot.y + 0.9), CGPoint(x: pose.foot.x + 0.35, y: pose.foot.y - 1.0), 0.25)
-        case .legExtension, .legCurl:
-            bar(CGPoint(x: -1.8, y: 2.0), CGPoint(x: 1.0, y: 2.0), 0.45)
-            bar(CGPoint(x: -1.6, y: 2.0), CGPoint(x: -1.8, y: 4.4), 0.35)
-            bar(CGPoint(x: -0.2, y: 1.9), CGPoint(x: -0.2, y: 0), 0.2)
-        case .cycle:
-            bar(CGPoint(x: -0.9, y: 3.4), CGPoint(x: 0.55, y: 1.25), 0.2)
-            bar(CGPoint(x: 0.55, y: 1.25), CGPoint(x: 1.9, y: 4.9), 0.2)
-            var wheel = Path()
-            let center = screen(CGPoint(x: 0.55, y: 1.25))
-            wheel.addEllipse(in: CGRect(x: center.x - unit * 1.1, y: center.y - unit * 1.1, width: unit * 2.2, height: unit * 2.2))
-            context.stroke(wheel, with: .color(prop), lineWidth: unit * 0.1)
-        case .rowing:
-            bar(CGPoint(x: -3.2, y: 0.35), CGPoint(x: 2.6, y: 0.35), 0.25)
-            bar(pose.hand, CGPoint(x: 2.9, y: 1.2), 0.07)
-        default:
-            break
+            var color = palette.role(prim.role)
+            if prim.shade, prim.indices.count >= 3 {
+                let w0 = points[prim.indices[0]], w1 = points[prim.indices[1]], w2 = points[prim.indices[2]]
+                let normal = normalizedSafe(cross3(w1 - w0, w2 - w0))
+                let lit = (normal * light).sum()
+                color = lit > 0 ? color + (white - color) * (0.22 * lit) : color * (1 - 0.16 * -lit)
+            }
+            var fade = 0.0
+            if prim.side == 1 { fade = max(0, -sideFactor) * 0.55 }
+            if prim.side == 2 { fade = max(0, sideFactor) * 0.55 }
+            if fade > 0 { color = color + (palette.backgroundRGB - color) * fade }
+            items.append(Item(depth: depth, order: order, prim: prim, color: color, screen: proj.map(screen)))
+        }
+        // Floor marks scrolling under a figure that travels (walking, running, rowing on water...).
+        if demo.marks.count >= 8 {
+            let travel = demo.marks[0], spacing = max(demo.marks[1], 0.05)
+            let x0 = demo.marks[2], x1 = demo.marks[3], z0 = demo.marks[4], z1 = demo.marks[5]
+            let my = demo.marks[6], bias = demo.marks[7]
+            let slope = demo.marks.count > 8 ? demo.marks[8] : 0
+            var offset = (p * travel).truncatingRemainder(dividingBy: spacing)
+            if offset < 0 { offset += spacing }
+            var x = (x0 / spacing).rounded(.up) * spacing - offset
+            let markRole = DemoPrim(kind: .line, role: 8, width: 0.03, bias: 0, side: 0, cull: false, shade: false, indices: [])
+            while x <= x1 + 1e-9 {
+                if x >= x0 - 1e-9 {
+                    let y = my + slope * x
+                    let a = Vec3(x, y, z0), b = Vec3(x, y, z1)
+                    let pa = Vec3((a * R).sum(), (a * U).sum(), -(a * B).sum())
+                    let pb = Vec3((b * R).sum(), (b * U).sum(), -(b * B).sum())
+                    items.append(Item(depth: (pa.z + pb.z) / 2 + bias, order: -1, prim: markRole,
+                                      color: palette.role(8), screen: [screen(pa), screen(pb)]))
+                }
+                x += spacing
+            }
+        }
+        items.sort { $0.depth != $1.depth ? $0.depth > $1.depth : $0.order < $1.order }
+
+        for item in items {
+            let color = DemoPalette.color(item.color)
+            switch item.prim.kind {
+            case .line:
+                var path = Path()
+                path.addLines(item.screen)
+                context.stroke(path, with: .color(color),
+                               style: StrokeStyle(lineWidth: CGFloat(item.prim.width * scale), lineCap: .round, lineJoin: .round))
+            case .poly:
+                var path = Path()
+                path.addLines(item.screen)
+                path.closeSubpath()
+                context.fill(path, with: .color(color))
+                if item.prim.width > 0 {
+                    context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: CGFloat(item.prim.width * scale), lineJoin: .round))
+                }
+            case .ball:
+                let c = item.screen[0]
+                let r = CGFloat(item.prim.width * scale)
+                context.fill(Path(ellipseIn: CGRect(x: c.x - r, y: c.y - r, width: 2 * r, height: 2 * r)), with: .color(color))
+            case .disc:
+                guard item.prim.indices.count >= 2 else { continue }
+                let axis = points[item.prim.indices[1]] - points[item.prim.indices[0]]
+                let half = (axis * axis).sum().squareRoot()
+                let n = half > 1e-9 ? axis / half : Vec3(0, 0, 1)
+                let nr = (n * R).sum(), nu = (n * U).sum(), nb = (n * B).sum()
+                let r = item.prim.width
+                let minor = r * abs(nb) + half * max(0, 1 - nb * nb).squareRoot()
+                let angle = atan2(-nu, nr)
+                let ring = max(0.016, min(0.03, r * 0.16)) * scale
+                let rx = max(minor * scale - ring / 2, 0.5)
+                let ry = max(r * scale - ring / 2, 0.5)
+                let c = item.screen[0]
+                let transform = CGAffineTransform(translationX: c.x, y: c.y).rotated(by: CGFloat(angle))
+                let oval = CGRect(x: -rx, y: -ry, width: 2 * rx, height: 2 * ry)
+                let path = Path(ellipseIn: oval).applying(transform)
+                context.fill(path, with: .color(color.opacity(0.38)))
+                context.stroke(path, with: .color(color), lineWidth: CGFloat(ring))
+            }
         }
     }
+
+    private static func cross3(_ a: Vec3, _ b: Vec3) -> Vec3 {
+        Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x)
+    }
+}
+
+private func normalizedSafe(_ v: Vec3) -> Vec3 {
+    let length = (v * v).sum().squareRoot()
+    return length > 1e-12 ? v / length : v
 }
