@@ -13,12 +13,14 @@ struct SpacesView: View {
     var body: some View {
         @Bindable var router = router
         NavigationStack(path: $router.spacePath) {
+            ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
                     Text("Choisis un univers, puis la taille de ton widget.")
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
                         .padding(.horizontal, 20)
+                        .id("spaces-top")
                     universeFilter
                     LazyVStack(spacing: 14) {
                         // The user's interests first, every other space below.
@@ -31,12 +33,17 @@ struct SpacesView: View {
                             }
                             .buttonStyle(.plain)
                             .accessibilityIdentifier("space-card-\(space.rawValue)")
+                            .tutorialTarget(.createSpace, when: space == shownSpaces.first)
                         }
                     }
                     .padding(.horizontal, 20)
                     .animation(.spring(response: 0.38, dampingFraction: 0.86), value: universe)
                 }
                 .padding(.bottom, 32)
+            }
+            .onChange(of: router.tutorialStep) { _, step in
+                if step == .create { withAnimation { proxy.scrollTo("spaces-top", anchor: .top) } }
+            }
             }
             .background(.screenFill)
             .screenshotScroll()

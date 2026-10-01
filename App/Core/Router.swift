@@ -73,6 +73,22 @@ final class Router {
     var homePath: [HomeRoute] = []
     /// Navigation inside the Espaces tab.
     var spacePath: [Space] = []
+    /// The tutorial step on screen (after the first questions, or from Réglages › Aide).
+    var tutorialStep: TutorialStep?
+
+    /// Starts the tutorial from the beginning, on Home, with nothing open over it.
+    func startTutorial() {
+        editor = nil
+        content = nil
+        isPaywallPresented = false
+        isProfilePresented = false
+        isAddGuidePresented = false
+        homePath = []
+        spacePath = []
+        storePath = []
+        tab = .home
+        tutorialStep = .welcome
+    }
 
     func openSpace(_ space: Space) {
         editor = nil

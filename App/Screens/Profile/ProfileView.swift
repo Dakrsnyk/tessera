@@ -8,6 +8,7 @@ import WidgetKit
 struct ProfileView: View {
     @Environment(AppModel.self) private var model
     @Environment(PremiumStore.self) private var premium
+    @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
     @State private var showsPaywall = false
     @State private var showsAddGuide = false
@@ -134,15 +135,16 @@ struct ProfileView: View {
                         Label("Ajouter un widget à l'écran d'accueil", systemImage: "plus.square.on.square")
                     }
                     Button {
-                        // The presentation covers the whole app: close the profile first.
+                        // The tutorial covers the whole app: close the profile first.
                         dismiss()
                         Task { @MainActor in
                             try? await Task.sleep(for: .milliseconds(500))
-                            model.updateSettings { $0.hasCompletedOnboarding = false }
+                            router.startTutorial()
                         }
                     } label: {
-                        Label("Revoir la présentation", systemImage: "play.rectangle")
+                        Label("Revoir le tutoriel", systemImage: "graduationcap")
                     }
+                    .accessibilityIdentifier("settings-tutorial")
                     Button {
                         UIPasteboard.general.string = PremiumConfiguration.supportEmail
                         copiedEmail = true

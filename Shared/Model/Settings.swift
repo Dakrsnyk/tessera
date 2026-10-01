@@ -76,11 +76,13 @@ struct AppSettings: Codable, Hashable {
     var profileName = ""
     /// The questions about the user (interests, then a page per topic) have been answered or skipped.
     var hasCompletedProfileSetup = false
+    /// The step-by-step tutorial shown after the first questions has been seen (or skipped).
+    var hasSeenTutorial = false
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
         case hasCompletedOnboarding, hydrationReminders
-        case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup
+        case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
     }
 
     init() {}
@@ -99,6 +101,8 @@ struct AppSettings: Codable, Hashable {
         hasChosenStyle = (try? c.decodeIfPresent(Bool.self, forKey: .hasChosenStyle)) ?? false
         profileName = (try? c.decodeIfPresent(String.self, forKey: .profileName)) ?? ""
         hasCompletedProfileSetup = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedProfileSetup)) ?? false
+        // Installs from before the tutorial: those who already know the app aren't shown it (Réglages has it).
+        hasSeenTutorial = (try? c.decodeIfPresent(Bool.self, forKey: .hasSeenTutorial)) ?? hasCompletedOnboarding
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

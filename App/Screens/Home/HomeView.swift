@@ -12,21 +12,10 @@ struct HomeView: View {
     var body: some View {
         @Bindable var router = router
         NavigationStack(path: $router.homePath) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 30) {
-                    header
-                    DailySection()
-                    MiniAppsRow()
-                    MyInfoCard()
-                    myWidgets
-                    storeSample
-                    if !model.isPremium {
-                        PremiumBanner { router.isPaywallPresented = true }
-                    }
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 4)
-                .padding(.bottom, 32)
+            ScrollViewReader { proxy in
+                scrollContent
+                    // The tutorial brings what it talks about near the top, above its card.
+                    .onChange(of: router.tutorialStep) { _, step in bringIntoView(step, proxy: proxy) }
             }
             .background(.screenFill)
             .screenshotScroll()
@@ -65,9 +54,47 @@ struct HomeView: View {
                         router.isProfilePresented = true
                     } label: {
                         ProfileAvatar(name: model.settings.profileName.trimmed, size: 32)
+                            .tutorialTarget(.profile)
                     }
                     .accessibilityLabel(Text("Profil et réglages"))
                 }
+            }
+        }
+    }
+
+    private var scrollContent: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 30) {
+                header
+                    .id("home-top")
+                DailySection()
+                    .id(TutorialTarget.daily.rawValue)
+                    .tutorialTarget(.daily)
+                MiniAppsRow()
+                    .id(TutorialTarget.miniApps.rawValue)
+                    .tutorialTarget(.miniApps)
+                MyInfoCard()
+                    .id(TutorialTarget.info.rawValue)
+                    .tutorialTarget(.info)
+                myWidgets
+                storeSample
+                if !model.isPremium {
+                    PremiumBanner { router.isPaywallPresented = true }
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 4)
+            .padding(.bottom, 32)
+        }
+    }
+
+    private func bringIntoView(_ step: TutorialStep?, proxy: ScrollViewProxy) {
+        guard let step, step.tab == .home else { return }
+        withAnimation(.easeInOut(duration: 0.35)) {
+            if let target = step.target, target == .miniApps || target == .info {
+                proxy.scrollTo(target.rawValue, anchor: UnitPoint(x: 0.5, y: 0.04))
+            } else {
+                proxy.scrollTo("home-top", anchor: .top)
             }
         }
     }

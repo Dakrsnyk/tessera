@@ -130,6 +130,8 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Premier lancement personnalisé** : style de l'app, prénom et nom, centres d'intérêt (Sport, Nutrition, Finance, Budget, Business, Études, Productivité, Voyage, Automobile, Météo, Design, Bien-être), puis seulement les questions utiles pour ces thèmes. Tout est facultatif et chaque étape peut être passée.
 
+**Tutoriel** : juste après ces questions, un petit tour de l'app en 10 étapes, sur l'app elle-même : l'onglet concerné s'ouvre, la partie expliquée s'éclaire et le reste s'assombrit (Mon Quotidien, mini-apps, Mes informations, Créer, le Studio en miniature à essayer, le Store, Mes widgets, l'ajout sur l'écran d'accueil, puis les Réglages). Chaque étape peut être passée, on peut sauter directement à une étape avec la barre de progression, ou quitter avec la croix. Il se revoit dans Réglages › Aide › Revoir le tutoriel. Les installations d'avant le tutoriel ne le voient pas d'office.
+
 **Accueil** : un tableau de bord. « Mon Quotidien » réunit ce qui compte aujourd'hui, uniquement à partir de ce que la personne a renseigné : calories et macros (avec le bouton Scanner), séance du jour (Commencer, Série faite), cours et examens du jour, agenda, habitudes, eau, pas (capteur de mouvement de l'iPhone, sur autorisation), budget du jour, météo, « À ne pas oublier » (examens, devoirs, échéances, factures, voiture, départ). L'ordre suit le moment : météo et premier cours le matin, séance et tâches la journée, calories restantes et habitudes le soir. Rien n'est affiché sans données : au plus deux invitations discrètes. Puis « Mes informations », Mes widgets et un aperçu du Store.
 
 **Mes informations** : le centre de toutes les données, par thème (Nutrition, Fitness, Études, Budget…) : objectifs, programme, horaire, factures, voyage, voiture, ville, calendrier… Chaque information a un seul endroit où elle est gardée et tous les widgets, « Mon Quotidien » et les statistiques la reprennent : un objectif de 2 500 kcal donné une fois sert partout. Chaque widget sait ce dont il a besoin : l'éditeur, Créer et la configuration des packs demandent exactement ces informations, au moment de créer le widget. Ce qui n'a pas été renseigné n'est jamais inventé : les widgets affichent un état neutre (« Objectif à définir »).
@@ -186,7 +188,8 @@ Config/    Info.plist, entitlements, configuration StoreKit locale
 ## 5. Checklist de test
 
 **Premier lancement**
-- [ ] Animation du logo, puis présentation en 4 pages ; « Passer » fonctionne
+- [ ] Animation du logo, style de l'app, puis les questions ; « Passer » fonctionne
+- [ ] Le tutoriel suit les questions : chaque étape montre son onglet et éclaire la bonne partie ; « Passer l'étape », la barre de progression et la croix fonctionnent ; Réglages › Aide › Revoir le tutoriel le relance
 - [ ] Aucune permission demandée au lancement
 
 **Navigation**

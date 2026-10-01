@@ -130,7 +130,7 @@ jobs:
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
           if [ "$APPS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/DataEntryUITests -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
-          if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:TesseraUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:TesseraUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:TesseraUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood"; fi
+          if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:TesseraUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:TesseraUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:TesseraUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testFirstLaunchAsksOnlyWhatMattersAndFillsMesInformations -only-testing:TesseraUITests/ProfileUITests/testSkippingEverythingShowsNothingMadeUp -only-testing:TesseraUITests/ProfileUITests/testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
             $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
@@ -229,6 +229,14 @@ jobs:
             shoot gallery-charts gallery-charts top light
             shoot gallery-looks gallery-looks top light
           }
+          # The tutorial after the first questions: each step, on the app itself.
+          tutorial_shots() {
+            for step in welcome daily miniApps info create studio store mine homeScreen finish; do
+              WAIT=6 shoot tutorial-$step tutorial-$step top light
+            done
+            WAIT=6 shoot tutorial-daily-dark tutorial-daily top dark
+            WAIT=6 shoot tutorial-store-dark tutorial-store top dark
+          }
           # The mini-apps opened from Home: each dashboard, then its pages.
           app_shots() {
             for screen in app-nutrition app-nutrition-meal app-nutrition-history app-nutrition-ideas app-nutrition-nutrients app-nutrition-saved; do
@@ -277,6 +285,7 @@ jobs:
             WAIT=8 shoot home-apps home 0.3 light
           }
           if [ "$STUDIO" = "true" ]; then
+            tutorial_shots
             studio_shots
             exit 0
           fi
@@ -347,6 +356,7 @@ jobs:
           for area in nutrition fitness student; do shoot info-$area info-$area top light; done
           WAIT=10 shoot pack-gym-setup pack-gym-setup top light
           studio_shots
+          tutorial_shots
           app_shots
           # A new person (these clear the demo data, so they come last).
           shoot home-fresh home-fresh top light

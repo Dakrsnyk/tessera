@@ -59,6 +59,9 @@ struct ExploreView: View {
                 .onChange(of: isFiltering) { _, _ in
                     proxy.scrollTo(Self.top, anchor: .top)
                 }
+                .onChange(of: router.tutorialStep) { _, step in
+                    if step == .store { withAnimation { proxy.scrollTo(Self.top, anchor: .top) } }
+                }
             }
             .background(.screenFill)
             .screenshotScroll()
@@ -132,6 +135,7 @@ struct ExploreView: View {
                 WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
                     openedSetup = weekly
                 }
+                .tutorialTarget(.storeHero)
             }
             setupsSection(excluding: weekly.id)
             if !forYou.isEmpty {

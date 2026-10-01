@@ -87,6 +87,27 @@ final class ProfileUITests: XCTestCase {
         // Everything else can be skipped: the last page ends the first launch.
         tapButton("onboarding-skip")
 
+        // Then the tour of the app, step by step, on the app itself.
+        let step = app.staticTexts["tutorial-step"]
+        XCTAssertTrue(step.waitForExistence(timeout: 10), "Le tutoriel doit suivre les premières questions")
+        XCTAssertEqual(step.label, "Étape 1 sur 10")
+        XCTAssertTrue(app.staticTexts["Bienvenue, Mathys !"].exists, "Le tutoriel accueille par le prénom")
+        snapshot("tutorial-welcome")
+        for number in 2...10 {
+            app.buttons["tutorial-next"].tap()
+            XCTAssertTrue(waitForLabel(step, "Étape \(number) sur 10"), "Étape \(number) du tutoriel absente")
+            if number == 2 { snapshot("tutorial-daily") }
+            if number == 6 {
+                // The Studio in miniature works: a color repaints the widget, the arrow takes it back.
+                app.buttons["tutorial-color-FF6B57"].tap()
+                let bravo = app.descendants(matching: .any).matching(identifier: "tutorial-bravo").firstMatch
+                XCTAssertTrue(bravo.waitForExistence(timeout: 4), "Essayer une couleur doit être salué")
+                snapshot("tutorial-studio")
+            }
+        }
+        app.buttons["tutorial-next"].tap()
+        XCTAssertTrue(waitForDisappearance(step), "« Terminer » ferme le tutoriel")
+
         let info = app.buttons["home-info"]
         XCTAssertTrue(info.waitForExistence(timeout: 10), "« Mes informations » absent de l'accueil")
         XCTAssertTrue(app.staticTexts["Bonjour Mathys"].exists || app.staticTexts["Bon après-midi Mathys"].exists || app.staticTexts["Bonsoir Mathys"].exists)
@@ -116,11 +137,43 @@ final class ProfileUITests: XCTestCase {
         tapButton("onboarding-skip")
         // No interest chosen: the interests step ends the first launch.
         tapButton("onboarding-skip")
+        // The tour can be skipped as a whole, from its first step.
+        let skipAll = app.buttons["tutorial-skip-all"]
+        XCTAssertTrue(skipAll.waitForExistence(timeout: 10), "Le tutoriel doit suivre les premières questions")
+        skipAll.tap()
+        XCTAssertTrue(waitForDisappearance(skipAll), "« Passer le tutoriel » le ferme")
         XCTAssertTrue(app.buttons["Choisir mes centres d'intérêt"].waitForExistence(timeout: 10), "L'accueil doit inviter à compléter")
         // No target and no budget given: « Mon Quotidien » never makes one up.
         XCTAssertFalse(nutritionShows("kcal restantes"), "Calories restantes sans objectif donné")
         XCTAssertFalse(app.staticTexts["à dépenser par jour d'ici la fin du mois"].exists, "Budget du jour sans budget donné")
         snapshot("home-skipped")
+    }
+
+    /// The tutorial again from Réglages: each step can be skipped, several at once, or the whole tour left.
+    func testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped() {
+        launch(["-screenshotScreen", "settings"])
+        tapButton("settings-tutorial")
+        let step = app.staticTexts["tutorial-step"]
+        XCTAssertTrue(step.waitForExistence(timeout: 10), "Réglages doit relancer le tutoriel")
+        XCTAssertEqual(step.label, "Étape 1 sur 10")
+        app.buttons["tutorial-next"].tap()
+        XCTAssertTrue(waitForLabel(step, "Étape 2 sur 10"))
+        XCTAssertTrue(app.navigationBars["Tessera"].exists || app.staticTexts["Mon Quotidien"].exists, "L'étape montre l'accueil")
+        app.buttons["tutorial-skip"].tap()
+        XCTAssertTrue(waitForLabel(step, "Étape 3 sur 10"), "« Passer l'étape » mène à la suivante")
+        // Straight to the Store: several steps skipped at once.
+        app.buttons["Aller à l'étape 7 : Le Store"].tap()
+        XCTAssertTrue(waitForLabel(step, "Étape 7 sur 10"))
+        XCTAssertTrue(app.tabBars.buttons["Store"].isSelected || app.navigationBars["Store"].waitForExistence(timeout: 5), "L'étape montre le Store")
+        snapshot("tutorial-store")
+        app.buttons["tutorial-close"].tap()
+        XCTAssertTrue(waitForDisappearance(step), "La croix quitte le tutoriel")
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    private func waitForLabel(_ element: XCUIElement, _ label: String, timeout: TimeInterval = 6) -> Bool {
+        let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: "label == %@", label), object: element)
+        return XCTWaiter().wait(for: [expectation], timeout: timeout) == .completed
     }
 
     // MARK: Home

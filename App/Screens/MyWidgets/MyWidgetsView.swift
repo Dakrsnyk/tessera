@@ -75,17 +75,22 @@ struct MyWidgetsView: View {
                             actionTitle: "Ouvrir le Store"
                         ) { router.openExplore() }
                         .padding(20)
+                        .tutorialTarget(.myWidgets)
                     } else if isSelecting {
                         selectionGrid
                             .padding(20)
                     } else {
                         carousel
+                            .tutorialTarget(.myWidgets)
                     }
                 }
                 .id("top")
             }
             .onChange(of: fusionRun?.isDone) { _, done in
                 if done == true { withAnimation(.easeInOut(duration: 0.3)) { proxy.scrollTo("top", anchor: .top) } }
+            }
+            .onChange(of: router.tutorialStep) { _, step in
+                if step == .mine { withAnimation { proxy.scrollTo("top", anchor: .top) } }
             }
             }
             .background(.screenFill)

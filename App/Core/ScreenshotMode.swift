@@ -32,6 +32,8 @@ enum ScreenshotMode {
             $0.appearance = defaults.string(forKey: "screenshotAppearance").flatMap(AppearanceMode.init(rawValue:)) ?? .system
             $0.hasChosenStyle = true
             $0.hasCompletedProfileSetup = true
+            // The tour follows the first questions; every other capture starts without it.
+            $0.hasSeenTutorial = !screen.hasPrefix("onboarding")
         }
         // The first launch starts with nothing about the user (a topic page, with the interest that leads to it).
         // Every other capture shows « Mes informations » filled in, whatever an earlier capture left.
@@ -72,6 +74,10 @@ enum ScreenshotMode {
             // Steps of the first launch (the flow picks the step itself, see `OnboardingView`).
             if screen.hasPrefix("onboarding-") { return .onboarding }
             if screen == "scan-food" { router.handle(.scanFood, model: model) }
+            // `tutorial-store`: the tutorial open on one of its steps (it shows its tab itself).
+            if screen.hasPrefix("tutorial-"), let step = TutorialStep(rawValue: String(screen.dropFirst(9))) {
+                router.tutorialStep = step
+            }
             if screen.hasPrefix("space-"), let space = Space(rawValue: String(screen.dropFirst(6))) {
                 router.openSpace(space)
             }

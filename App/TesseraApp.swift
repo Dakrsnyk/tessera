@@ -85,6 +85,8 @@ struct RootView: View {
                     OnboardingView {
                         model.completeOnboarding()
                         showsOnboarding = false
+                        // Then the tour of the app, once the questions have slid away.
+                        startTutorialIfNeeded(after: 0.75)
                     }
                     .appStyle(model.settings)
                 }
@@ -120,6 +122,12 @@ struct RootView: View {
                 .zIndex(2)
             }
             #endif
+
+            if let step = router.tutorialStep {
+                TutorialOverlay(step: step)
+                    .transition(.opacity)
+                    .zIndex(2.5)
+            }
 
             if let flight = router.saveFlight {
                 SaveFlightOverlay(flight: flight) { router.saveFlight = nil }
@@ -162,7 +170,19 @@ struct RootView: View {
                 showsStylePicker = true
             } else if !model.settings.hasCompletedProfileSetup {
                 showsPersonalization = true
+            } else {
+                // Left during the tour: it starts again, until it is finished or skipped.
+                startTutorialIfNeeded(after: 0.3)
             }
+        }
+        .animation(.easeInOut(duration: 0.25), value: router.tutorialStep == nil)
+    }
+
+    private func startTutorialIfNeeded(after delay: Double) {
+        guard !model.settings.hasSeenTutorial else { return }
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(delay))
+            if router.tutorialStep == nil { router.startTutorial() }
         }
     }
 }
