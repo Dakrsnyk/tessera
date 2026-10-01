@@ -231,7 +231,9 @@ jobs:
           }
           # The tutorial after the first questions: each step, on the app itself.
           tutorial_shots() {
-            for step in welcome daily miniApps info create studio store mine homeScreen finish; do
+            # The first launch after the install takes longer.
+            WAIT=12 shoot tutorial-welcome tutorial-welcome top light
+            for step in daily miniApps info create studio store mine homeScreen finish; do
               WAIT=6 shoot tutorial-$step tutorial-$step top light
             done
             WAIT=6 shoot tutorial-daily-dark tutorial-daily top dark

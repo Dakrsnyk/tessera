@@ -195,6 +195,8 @@ struct TutorialOverlay: View {
                     Button("Passer le tutoriel") { finish() }
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                         .accessibilityIdentifier("tutorial-skip-all")
                 case .finish:
                     EmptyView()
@@ -202,13 +204,18 @@ struct TutorialOverlay: View {
                     Button("Passer l'étape") { advance() }
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                         .accessibilityIdentifier("tutorial-skip")
                 }
                 Spacer(minLength: 0)
                 Button(action: step == .finish ? finish : advance) {
+                    // On one line, whatever the length of the button beside it.
                     Text(primaryTitle)
                         .font(.headline)
                         .foregroundStyle(.onAccent)
+                        .lineLimit(1)
+                        .fixedSize()
                         .padding(.horizontal, 22)
                         .frame(minHeight: 46)
                 }

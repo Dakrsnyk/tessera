@@ -152,7 +152,15 @@ final class ProfileUITests: XCTestCase {
     /// The tutorial again from Réglages: each step can be skipped, several at once, or the whole tour left.
     func testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped() {
         launch(["-screenshotScreen", "settings"])
-        tapButton("settings-tutorial")
+        // In « Aide », near the end of the settings list: rows further down are made as it scrolls.
+        let replay = app.buttons["settings-tutorial"]
+        XCTAssertTrue(app.navigationBars.buttons["OK"].firstMatch.waitForExistence(timeout: 12) || app.staticTexts["Mon profil"].exists, "Réglages absents")
+        var swipes = 0
+        while !(replay.exists && replay.isHittable) && swipes < 12 {
+            app.swipeUp()
+            swipes += 1
+        }
+        replay.tap()
         let step = app.staticTexts["tutorial-step"]
         XCTAssertTrue(step.waitForExistence(timeout: 10), "Réglages doit relancer le tutoriel")
         XCTAssertEqual(step.label, "Étape 1 sur 10")
