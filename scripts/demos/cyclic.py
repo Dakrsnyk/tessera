@@ -29,7 +29,7 @@ def foot_path(phase, stance, stride, lift, ground=0.0, ahead=0.0, kick=0.0):
 
 
 def walk_cycle(p, s, stride=0.68, arms="swing", lean=3.0, bounce=0.025, stance=0.6, lift=0.11, ground=0.0,
-               incline=0.0, run=False, hip=None):
+               incline=0.0, run=False, hip=None, ahead=0.04):
     """One cycle of walking (two steps). stride: length of one step (the ground travels 2*stride per
     cycle). Arms: 'swing', 'carry' (hanging with loads), 'run' (bent, pumping), 'none'."""
     cycle = 2 * stride
@@ -43,7 +43,7 @@ def walk_cycle(p, s, stride=0.68, arms="swing", lean=3.0, bounce=0.025, stance=0
     body = upright(hip_y + dy, lean, pelvis_x=0.0, head=-lean * 0.5 + 2,
                    twist=6.0 * math.sin(2 * math.pi * p) * (1.6 if run else 1.0))
     for side, offset in ((1, 0.0), (-1, 0.5)):
-        x, y, contact, t = foot_path(p + offset, stance, cycle * 0.5, lift, ground, ahead=0.04, kick=0.22 if run else 0.0)
+        x, y, contact, t = foot_path(p + offset, stance, cycle * 0.5, lift, ground, ahead=ahead, kick=0.22 if run else 0.0)
         ankle = vec(x, y + incline * x, side * 0.1)
         slope = math.degrees(math.atan(incline))
         if contact:

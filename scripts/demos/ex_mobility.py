@@ -174,8 +174,7 @@ def thoracic_rotation(p, s):
     from ex_legs import plant_quadruped
     floor(s, -0.8, 1.1, -0.7, 0.7)
     k = smooth(p)
-    body = quadruped(head=-12)
-    body = __import__("ex_legs").quadruped(head=lerp(-5.0, -20.0, k), twist=lerp(-25.0, 55.0, k))
+    body = __import__("ex_legs").quadruped(head=lerp(-5.0, -20.0, k), twist=lerp(15.0, -45.0, k), shoulder_y=0.64)
     plant_quadruped(body, skip={("arm", 1)})
     # Right hand behind the head, the elbow pointing out.
     hand = body.head - body.head_frame.f * 0.08 + body.head_frame.u * 0.0
@@ -282,17 +281,23 @@ def triceps_stretch(p, s):
     k = smooth(p)
     body = upright(0.945, 0.0, pelvis_x=0.0, head=lerp(0.0, 6.0, k))
     stance(body, 0.0, half_width=0.14)
-    sh = body.shoulder[1]
-    hang = sh + vec(0.02, -0.62, 0.05)
-    behind = body.neck - body.chest.f * 0.12 - Y * 0.1
-    body.arm(1, lerp(hang, behind, k), unit(lerp(-X, Y + X * 0.2, k)))
+    # The right arm rises in front up overhead, then the elbow bends and the hand drops behind the
+    # head; the left hand gently pushes the right elbow back.
+    a = math.radians(lerp(-86.0, 98.0, smooth(min(1.0, k * 1.4))))
+    upper = unit(X * math.cos(a) + Y * math.sin(a) + body.chest.r * 0.08)
+    flex = lerp(4.0, 150.0, smooth(max(0.0, (k - 0.45) / 0.55)))
+    body.arm_dirs(1, upper, rotate(upper, body.chest.r, flex))
     elbow = body.elbow[1]
-    hang_l = body.shoulder[-1] + vec(0.02, -0.62, -0.05)
-    body.arm(-1, lerp(hang_l, elbow + X * 0.03 + Y * 0.02, k), unit(-Y + X * 0.4 - Z * 0.2))
+    hang_l = body.shoulder[-1] + vec(0.02, -0.6, -0.05)
+    grab = smooth(max(0.0, (k - 0.55) / 0.45))
+    target = lerp(hang_l, elbow + X * 0.04 - body.chest.r * 0.03, grab)
+    d = target - body.shoulder[-1]
+    target = body.shoulder[-1] + unit(d) * min(float(np.linalg.norm(d)), 0.62)
+    body.arm(-1, target, unit(-Y + X * 0.6 - Z * 0.2))
     show(s, body)
 
 
-@demo("shoulder-stretch", views=[FRONT(8), ABOVE(90, 60)], labels=STRETCH, timing=(0.8, 1.2, 3.0, 1.0),
+@demo("shoulder-stretch", views=[View("Dessus", 70, 72), THREE_QUARTER(55, 30)], labels=STRETCH, timing=(0.8, 1.2, 3.0, 1.0),
       muscles=(["shoulders"], []))
 def shoulder_stretch(p, s):
     floor(s, -0.7, 0.7, -0.7, 0.7)
@@ -301,7 +306,7 @@ def shoulder_stretch(p, s):
     stance(body, 0.0, half_width=0.14)
     sh = body.shoulder[1]
     hang = sh + vec(0.02, -0.62, 0.05)
-    across = sh + unit(vec(0.25, -0.05, -1.0)) * 0.62
+    across = sh + unit(vec(0.6, -0.03, -1.0)) * 0.62      # across in front of the chest, not through it
     grip = lerp(hang, across, k)
     body.arm(1, grip, unit(-Y + X * 0.3))
     elbow_r = body.elbow[1]

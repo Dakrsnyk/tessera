@@ -15,6 +15,11 @@ from poses import (feet_flat, on_backrest, placed, plank_on_toes, seated_upright
 PRESS_UP = ("Charge aux épaules", "Poussée vers le haut", "Bras tendus au-dessus", "Descente contrôlée")
 
 
+def smooth(t):
+    t = min(1.0, max(0.0, t))
+    return t * t * (3 - 2 * t)
+
+
 def shoulder_mid(body):
     return (body.shoulder[1] + body.shoulder[-1]) / 2
 
@@ -39,8 +44,14 @@ def ohp(p, s):
     rack[2] = 0.0
     top = overhead(body, grip_half, forward=-0.02)
     top[2] = 0.0
+    # The bar rises straight in front of the face (the head moves back), then once past the
+    # forehead it comes back over the crown to finish above the middle of the feet.
     bar = lerp(rack, top, p)
-    bar[0] = lerp(rack[0], top[0], min(1.0, p * 1.25))
+    clear = body.head[1] + Body.HEAD + 0.02
+    if bar[1] <= clear:
+        bar[0] = rack[0]
+    else:
+        bar[0] = lerp(rack[0], top[0], smooth(min(1.0, (bar[1] - clear) / max(top[1] - clear, 1e-6))))
     for side in (1, -1):
         body.arm(side, bar + Z * side * grip_half, unit(-Y + X * 0.7 + body.chest.r * side * 0.4))
     barbell(s, bar, Z, plate_r=0.2)
@@ -172,14 +183,14 @@ def pike_push_up(p, s):
 def handstand_push_up(p, s):
     floor(s, -0.55, 0.8)
     wall_x = -0.32
-    s.poly([vec(wall_x, 0.0, -0.8), vec(wall_x, 2.5, -0.8), vec(wall_x, 2.5, 0.8), vec(wall_x, 0.0, 0.8)], "floor", 0.0, bias=20.0)
+    s.box(vec(wall_x - 0.04, 1.25, 0.0), X * 0.04, Y * 1.25, Z * 0.8, "floor", stroke=0.0, bias=20.0)   # the wall, visible from the side
     s.slab(vec(0.05, 0.03, 0), vec(0.45, 0.03, 0), Y, 0.5, 0.03, "pad", solid="le tapis")
     # Upside down: head toward the floor, heels on the wall.
     lean = 8.0
     u = vec(math.sin(math.radians(lean)), -math.cos(math.radians(lean)), 0.0)
     f = vec(-u[1], u[0], 0.0)
     hands = 0.03
-    top_sh = hands + 0.6
+    top_sh = hands + 0.625     # arms locked out
     bottom_sh = hands + 0.27
     sh_y = lerp(top_sh, bottom_sh, p)
     body = placed(Frame(vec(0, 0, 0), f, u), "shoulders", vec(0.1, sh_y, 0.0), head=-25)

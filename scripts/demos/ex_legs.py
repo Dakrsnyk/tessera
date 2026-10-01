@@ -114,16 +114,24 @@ def front_bar(b):
 
 
 @demo("front-squat", views=[PROFILE(), THREE_QUARTER(35, 12)],
-      labels=("Barre sur l'avant des épaules", "Descente, buste droit", "Cuisses parallèles", "Remontée"), timing=(0.6, 1.6, 0.4, 1.3))
+      labels=("Barre sur l'avant des épaules, coudes hauts", "Descente, buste droit", "Cuisses parallèles", "Remontée"), timing=(0.6, 1.6, 0.4, 1.3))
 def front_squat(p, s):
     floor(s, -0.9, 0.9)
-    body = squat_body(p, 2.0, 22.0, 0.5, load_point=front_bar)
-    bar = front_bar(body)
+
+    def rack(b):
+        # On the front of the shoulders, at the height of the collarbones.
+        return shoulder_mid(b) + b.chest.f * 0.1 + b.chest.u * 0.035
+
+    body = squat_body(p, 2.0, 22.0, 0.5, load_point=rack)
+    bar = rack(body)
     bar[2] = 0.0
+    # Arms crossed: elbows high and forward (upper arms level), each hand holding the bar on the
+    # opposite shoulder.
     for side in (1, -1):
         sh = body.shoulder[side]
-        grip = bar + Z * side * 0.24 - body.chest.f * 0.0 + Y * 0.0
-        body.arm(side, grip, unit(X * 1.0 + Y * 0.3 + Z * side * 0.3))
+        elbow = sh + unit(body.chest.f * 0.95 + body.chest.u * 0.12 - body.chest.r * side * 0.28) * Body.UPPER
+        hand = bar - body.chest.r * side * 0.17 + body.chest.u * 0.02
+        body.arm_via(side, hand, elbow)
     barbell(s, bar, Z)
     show(s, body)
 
@@ -314,7 +322,7 @@ def lift_from_floor(p, lean_floor, bar_top, half, toe_out, grip_half, ahead=0.02
     """A deadlift: the bar rises from the floor along a vertical line over the middle of the feet;
     knees extend first, then the hips. Hips are found so the straight arms reach the bar."""
     k = smooth(p)
-    bar_y = lerp(0.225, bar_top, k)
+    bar_y = lerp(0.235, bar_top, k)
     lean = lean_floor * (1 - smooth(min(1.0, p * 1.05)) ** 1.6)
 
     def make(hip_y, px):
@@ -338,7 +346,7 @@ def lift_from_floor(p, lean_floor, bar_top, half, toe_out, grip_half, ahead=0.02
       timing=(0.7, 1.5, 0.6, 1.6))
 def deadlift(p, s):
     floor(s, -0.9, 0.9)
-    body, bar = lift_from_floor(p, 50.0, 0.84, 0.15, 8.0, 0.25)
+    body, bar = lift_from_floor(p, 60.0, 0.84, 0.15, 8.0, 0.25)
     barbell(s, bar, Z)
     show(s, body)
 
@@ -367,7 +375,7 @@ def rdl_like(p, s, load, lean_bottom=72.0, hip_drop=0.06):
       timing=(0.6, 1.7, 0.4, 1.3))
 def rdl(p, s):
     floor(s, -0.9, 0.9)
-    body = rdl_like(p, s, "bar", hip_drop=0.09)
+    body = rdl_like(p, s, "bar", lean_bottom=64.0, hip_drop=0.12)
     bar = (body.grip[1] + body.grip[-1]) / 2
     barbell(s, bar, Z)
     show(s, body)
@@ -378,7 +386,7 @@ def rdl(p, s):
       timing=(0.6, 1.7, 0.4, 1.3))
 def db_rdl(p, s):
     floor(s, -0.9, 0.9)
-    body = rdl_like(p, s, "dumbbells", lean_bottom=70.0, hip_drop=0.09)
+    body = rdl_like(p, s, "dumbbells", lean_bottom=64.0, hip_drop=0.12)
     for side in (1, -1):
         dumbbell(s, body.grip[side], Z, side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
     show(s, body)
@@ -600,7 +608,7 @@ def lying_leg_curl(p, s):
         body.arm(side, vec(0.62, top - 0.08, side * 0.24), unit(Y * 0.3 + X * 0.3 + Z * side))
     knee = body.knee[1]
     shin_dir = unit(body.ankle[1] - knee)
-    back_of_leg = rotate(shin_dir, Z, 90)
+    back_of_leg = rotate(shin_dir, Z, -90)      # the back of the ankles (prone: facing up)
     roll_at = knee + shin_dir * 0.37 + back_of_leg * (Body.W_SHIN / 2 + 0.05)
     roller(s, vec(roll_at[0], roll_at[1], 0.0), half=0.2)
     pivot = vec(knee[0], knee[1], -0.27)
@@ -736,7 +744,8 @@ def glute_bridge(p, s):
     contact = vec(-0.6, Body.W_TORSO / 2 + 0.02, 0.0)
     body = bridge_body(p, contact, 0.3, 30.0, 0.0, head=lerp(32.0, 52.0, p), reach=0.53)
     for side in (1, -1):
-        body.arm(side, vec(body.pelvis.o[0] - 0.12, 0.03, side * 0.3), unit(Y + Z * side * 0.2))
+        # Arms long on the floor beside the body, palms down.
+        body.arm(side, vec(body.shoulder[side][0] + 0.56, 0.04, side * 0.3), unit(Z * side + Y * 0.2))
     show(s, body)
 
 
@@ -748,7 +757,8 @@ def single_leg_bridge(p, s):
     contact = vec(-0.6, Body.W_TORSO / 2 + 0.02, 0.0)
     body = bridge_body(p, contact, 0.3, 28.0, 0.0, single=True, head=lerp(32.0, 52.0, p), reach=0.53)
     for side in (1, -1):
-        body.arm(side, vec(body.pelvis.o[0] - 0.12, 0.03, side * 0.3), unit(Y + Z * side * 0.2))
+        # Arms long on the floor beside the body, palms down.
+        body.arm(side, vec(body.shoulder[side][0] + 0.56, 0.04, side * 0.3), unit(Z * side + Y * 0.2))
     show(s, body)
 
 
@@ -760,11 +770,17 @@ def all_fours(hip_y=0.6, hands_x=0.62, knees_x=0.0, head=-10):
     return body
 
 
-def quadruped(head=-12, twist=0.0, spine=0.0, pelvis_tilt=0.0):
+def quadruped(head=-12, twist=0.0, spine=0.0, pelvis_tilt=0.0, shoulder_y=0.66):
+    """On all fours: knees under the hips, the back rising slightly toward the shoulders so the arms
+    are straight with the hands under the shoulders."""
     pelvis_pt = vec(0.0, Body.W_SHIN / 2 + 0.01 + Body.THIGH, 0.0)
-    frame = Frame(pelvis_pt, -Y, X)
-    if pelvis_tilt:
-        frame = frame.pitched(pelvis_tilt)
+
+    def mid_y(tilt):
+        b = Body(Frame(pelvis_pt, -Y, X).pitched(tilt), head=head)
+        return float((b.shoulder[1][1] + b.shoulder[-1][1]) / 2)
+
+    base = solve(mid_y, -45.0, 10.0, shoulder_y)
+    frame = Frame(pelvis_pt, -Y, X).pitched(base + pelvis_tilt)
     body = Body(frame, head=head, twist=twist, spine=spine)
     return body
 
@@ -819,10 +835,9 @@ def cable_kickback(p, s):
     floor(s, -1.0, 1.0)
     body = upright(0.94, 18.0, pelvis_x=-0.05, head=-10)
     body.foot_on_floor(-1, (0.05, -0.1), 0.0, pole=X)
-    angle = lerp(-6.0, 32.0, p)        # hip extension, from a bit in front to behind
+    angle = lerp(-3.0, 42.0, p)        # hip extension: the foot leaves the floor and goes back and up
     d = unit(vec(-math.sin(math.radians(angle)), -math.cos(math.radians(angle)), 0.0))
-    d = rotate(d, Z, 18.0)
-    body.leg_dirs(1, d, rotate(d, Z, -8))
+    body.leg_dirs(1, d, rotate(d, Z, -6))
     body.foot_relaxed(1, plantar=10)
     col_x = 0.62
     for side in (1, -1):
@@ -830,7 +845,7 @@ def cable_kickback(p, s):
     pul = vec(col_x - 0.13, 0.12, 0.0)
     ankle = body.ankle[1]
     col = Column(s, col_x, 0.0, height=2.1, depth=0.24, width=0.4)
-    a0 = unit(rotate(vec(math.sin(math.radians(6)), -math.cos(math.radians(6)), 0.0), Z, 18.0))
+    a0 = unit(vec(math.sin(math.radians(3)), -math.cos(math.radians(3)), 0.0))
     start_ankle = body.hip[1] + a0 * 0.86
     col.frame(lift=np.linalg.norm(ankle - pul) - np.linalg.norm(start_ankle - pul))
     s.disc(pul, Z, 0.045, "frame")
@@ -1009,7 +1024,7 @@ def single_calf(p, s):
     body.stand_foot(1, toe, 0.0, raise_deg)
     body.leg(1, ankle, pole=X)
     # The other foot hooked behind the working ankle.
-    body.leg(-1, ankle + vec(-0.14, 0.06, -0.08), pole=X)
+    body.leg(-1, ankle + vec(-0.2, 0.2, -0.08), pole=X)     # free foot off the floor, behind
     body.foot_relaxed(-1, plantar=30)
     g = body.shoulder[1] - Y * 0.62 + X * 0.02
     body.arm(1, g, unit(-X))

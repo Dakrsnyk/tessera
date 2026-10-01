@@ -29,6 +29,11 @@ def curl_grip(body, side, angle, elbow_forward=0.0, half=None, out=0.0):
     return grip
 
 
+def curl_elbow(body, side, elbow_forward=0.0, out=0.0):
+    """Where the elbow stays during a curl: under the shoulder, against the side."""
+    return body.shoulder[side] + unit(-Y + X * elbow_forward + body.chest.r * side * out) * Body.UPPER
+
+
 def curl_body(p, s, lean=0.0):
     body = upright(0.945, lean, shoulder_x=0.0, head=0)
     stance(body, 0.0, half_width=0.14)
@@ -46,7 +51,7 @@ def bb_curl(p, s):
     angle, fwd = curl_angles(p)
     for side in (1, -1):
         g = curl_grip(body, side, angle, fwd, out=0.12)
-        body.arm(side, vec(g[0], g[1], side * 0.22), unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, vec(g[0], g[1], side * 0.22), curl_elbow(body, side, fwd, 0.12))
     bar = (body.grip[1] + body.grip[-1]) / 2
     barbell(s, bar, Z, plate_r=0.14)
     show(s, body)
@@ -59,7 +64,7 @@ def ez_curl(p, s):
     angle, fwd = curl_angles(p)
     for side in (1, -1):
         g = curl_grip(body, side, angle, fwd, out=0.05)
-        body.arm(side, vec(g[0], g[1], side * 0.17), unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, vec(g[0], g[1], side * 0.17), curl_elbow(body, side, fwd, 0.05))
     bar = (body.grip[1] + body.grip[-1]) / 2
     fore = unit(body.grip[1] - body.elbow[1])
     ez_bar(s, bar, Z, forward=rotate(fore, Z, 90))
@@ -75,7 +80,7 @@ def reverse_curl(p, s):
     angle, fwd = curl_angles(p, top=130.0)
     for side in (1, -1):
         g = curl_grip(body, side, angle, fwd, out=0.1)
-        body.arm(side, vec(g[0], g[1], side * 0.2), unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, vec(g[0], g[1], side * 0.2), curl_elbow(body, side, fwd, 0.1))
     bar = (body.grip[1] + body.grip[-1]) / 2
     barbell(s, bar, Z, plate_r=0.12)
     show(s, body)
@@ -90,7 +95,7 @@ def db_curl(p, s):
     angle, fwd = curl_angles(p)
     for side in (1, -1):
         g = curl_grip(body, side, angle, fwd, out=0.15)
-        body.arm(side, g, unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, g, curl_elbow(body, side, fwd, 0.15))
         dumbbell(s, g, body.chest.r, side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
     show(s, body)
 
@@ -104,7 +109,7 @@ def hammer_curl(p, s):
     angle, fwd = curl_angles(p, top=135.0)
     for side in (1, -1):
         g = curl_grip(body, side, angle, fwd, out=0.1)
-        body.arm(side, g, unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, g, curl_elbow(body, side, fwd, 0.1))
         fore = unit(g - body.elbow[side])
         axis = rotate(fore, body.chest.r, 90)   # thumb up: the handle across the forearm, front to back
         dumbbell(s, g, axis, side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
@@ -126,7 +131,7 @@ def incline_curl(p, s):
         elbow = sh + upper * Body.UPPER
         fore = rotate(upper, body.chest.r, angle)
         grip = elbow + fore * Body.LOWER
-        body.arm(side, grip, unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, grip, elbow)
         dumbbell(s, grip, body.chest.r, side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
     show(s, body)
 
@@ -149,7 +154,7 @@ def preacher_curl(p, s):
         start = rotate(upper, body.chest.r, 18)
         fore = rotate(upper, body.chest.r, lerp(18.0, 118.0, p))
         grip = elbow + fore * Body.LOWER
-        body.arm(side, grip, unit(rotate(upper, Z, -90)))
+        body.arm_via(side, grip, elbow)
     sh = body.shoulder[1]
     upper = unit(X * 0.72 - Y * 0.7)
     normal = rotate(upper, Z, 90)        # up and forward: the pad's top surface, under the arms
@@ -173,7 +178,7 @@ def cable_curl(p, s):
     angle, fwd = curl_angles(p, top=135.0)
     for side in (1, -1):
         g = curl_grip(body, side, angle, fwd, out=0.08)
-        body.arm(side, vec(g[0], g[1], side * 0.18), unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, vec(g[0], g[1], side * 0.18), curl_elbow(body, side, fwd, 0.08))
     bar = (body.grip[1] + body.grip[-1]) / 2
     pul = vec(0.72, 0.16, 0.0)
     g0 = curl_grip(body, 1, 6.0, 0.0, out=0.08)
@@ -211,7 +216,7 @@ def concentration_curl(p, s):
     angle = lerp(178.0, 40.0, p)    # between upper arm and forearm
     fore = rotate(upper, axis, 180.0 - angle)
     grip = elbow + fore * Body.LOWER
-    body.arm(1, grip, unit(toward))
+    body.arm_via(1, grip, elbow)       # the elbow stays braced against the inner thigh
     dumbbell(s, grip, body.chest.r, side=SIDE_RIGHT)
     # The other hand on the other thigh.
     body.arm(-1, lerp(body.hip[-1], body.knee[-1], 0.75) + Y * 0.07, unit(-Y + X * 0.2 - body.chest.r))
@@ -227,7 +232,7 @@ def band_curl(p, s):
     angle, fwd = curl_angles(p)
     for side in (1, -1):
         g = curl_grip(body, side, angle, fwd, out=0.12)
-        body.arm(side, g, unit(-X + body.chest.r * side * 0.1))
+        body.arm_via(side, g, curl_elbow(body, side, fwd, 0.12))
         foot = body.ankle[side] + X * 0.06 - Y * 0.07
         s.line([foot, g], 0.02, "load", side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
         s.line([g - body.chest.r * 0.05, g + body.chest.r * 0.05], 0.035, "load", side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
@@ -246,7 +251,7 @@ def pushdown_body(p, s, top_angle=95.0, lean=10.0):
         elbow = sh + upper * Body.UPPER
         fore = rotate(upper, body.chest.r, angle)
         grip = elbow + fore * Body.LOWER
-        body.arm(side, grip, unit(-X + body.chest.r * side * 0.05))
+        body.arm_via(side, grip, elbow)      # elbows stay pinned at the sides
     return body
 
 
@@ -259,7 +264,7 @@ def pushdown(p, s):
     bar = (body.grip[1] + body.grip[-1]) / 2
     for side in (1, -1):
         g = body.grip[side]
-        body.arm(side, vec(g[0], g[1], side * 0.14), unit(-X + body.chest.r * side * 0.05))
+        body.arm_via(side, vec(g[0], g[1], side * 0.14), body.elbow[side])
     bar = vec(body.grip[1][0], body.grip[1][1], 0.0)
     pul = vec(0.55, 2.1, 0.0)
     col = Column(s, 0.75, 0.0, height=2.25, depth=0.24, width=0.36)
@@ -279,8 +284,9 @@ def rope_pushdown(p, s):
     body = pushdown_body(p, s)
     for side in (1, -1):
         g = body.grip[side]
-        z = side * lerp(0.07, 0.2, p)
-        body.arm(side, vec(g[0], g[1], z), unit(-X + body.chest.r * side * 0.05))
+        # Neutral grip on the two rope ends, pulled apart beside the thighs at the bottom.
+        z = side * lerp(0.07, 0.27, p ** 1.5)
+        body.arm_via(side, vec(g[0] - 0.02 * p, g[1], z), body.elbow[side])
     pul = vec(0.55, 2.1, 0.0)
     knot = vec(lerp(body.grip[1][0], body.grip[1][0] + 0.04, p), max(body.grip[1][1], body.grip[-1][1]) + lerp(0.12, 0.2, p), 0.0)
     col = Column(s, 0.75, 0.0, height=2.25, depth=0.24, width=0.36)
@@ -311,7 +317,7 @@ def overhead_extension(p, s):
         fore = rotate(upper, body.chest.r, angle)
         grip = elbow + fore * Body.LOWER
         grip = grip - body.chest.r * side * (abs(np.dot(grip - mid, body.chest.r)) - 0.04)
-        body.arm(side, grip, unit(Y + X * 0.4))
+        body.arm_via(side, grip, elbow)      # elbows stay high, pointing up
     g = (body.grip[1] + body.grip[-1]) / 2
     fore = unit(g - (body.elbow[1] + body.elbow[-1]) / 2)
     axis = unit(rotate(fore, Z, 0))
@@ -335,9 +341,9 @@ def skull_crusher(p, s):
         sh = body.shoulder[side]
         upper = unit(Y - X * 0.2)          # arms slightly tilted toward the head
         elbow = sh + upper * Body.UPPER
-        fore = rotate(upper, body.chest.r, -angle) if False else rotate(upper, Z, angle)
+        fore = rotate(upper, Z, angle)     # only the forearm hinges, toward the forehead
         grip = elbow + fore * Body.LOWER
-        body.arm(side, vec(grip[0], grip[1], side * 0.15), unit(X * 0.3 + Y * 0.0 + body.chest.r * side * 0.1 - X))
+        body.arm_via(side, vec(grip[0], grip[1], side * 0.15), elbow)
     bar = vec(body.grip[1][0], body.grip[1][1], 0.0)
     ez_bar(s, bar, Z, forward=Y)
     show(s, body)
@@ -361,7 +367,8 @@ def bench_dips(p, s):
     top = 0.43
     bench_across(s, -0.25, top)
     hands = vec(-0.13, top + 0.02, 0.0)
-    sh = vec(-0.08, lerp(top + 0.6, top + 0.33, p), 0.0)
+    # From arms locked out to elbows at 90°, the hips dropping below the bench.
+    sh = vec(-0.08, lerp(top + 0.625, top + 0.44, p), 0.0)
     body = placed(posture(vec(0, 0, 0), 0.0, -4.0), "shoulders", sh, head=0)
     for side in (1, -1):
         body.arm(side, hands + Z * side * 0.21, unit(-X + Z * side * 0.1))
@@ -383,7 +390,7 @@ def kickback(p, s):
         elbow = sh + upper * Body.UPPER
         fore = rotate(upper, body.chest.r, angle)
         grip = elbow + fore * Body.LOWER
-        body.arm(side, grip, unit(Y + X * 0.0))
+        body.arm_via(side, grip, elbow)
         dumbbell(s, grip, rotate(fore, body.chest.r, 90), side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
     show(s, body)
 
@@ -399,7 +406,7 @@ def wrist_curl(p, s):
     flat_bench(s, -0.6, 0.35, top)
     body = seated_upright(top, -0.05, lean=30.0, head=20)
     feet_flat(body, (0.42, 0.17), (0.42, -0.17))
-    wrist_angle = lerp(-45.0, 40.0, p)
+    wrist_angle = lerp(-60.0, 50.0, p)
     for side in (1, -1):
         knee = body.knee[side]
         thigh = unit(knee - body.hip[side])
@@ -411,7 +418,7 @@ def wrist_curl(p, s):
         body.grip[side] = body.grip[side]
     # Hands: from the wrists to the bar, turned by the wrist.
     hand_dir = rotate(unit(body.grip[1] - body.elbow[1]), Z, wrist_angle)
-    bar = vec(body.grip[1][0], body.grip[1][1], 0.0) + hand_dir * 0.08
+    bar = vec(body.grip[1][0], body.grip[1][1], 0.0) + hand_dir * 0.1
     for side in (1, -1):
         w = body.grip[side]
         s.line([w, vec(bar[0], bar[1], w[2])], 0.05, "muscle", side=SIDE_RIGHT if side == 1 else SIDE_LEFT)

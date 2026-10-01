@@ -48,8 +48,8 @@ def hanging_body(shoulder_target, lean=-6.0, knees=40.0, **args):
 def pull_up_like(p, s, grip_half, poles, bar_y=2.3, lean_top=-14.0, chin=True):
     pull_station(s, bar_y)
     top = vec(-0.04, bar_y - math.sqrt(0.628 ** 2 - max(0.0, grip_half - Body.SH_HALF) ** 2 - 0.04 ** 2), 0.0)
-    # At the top the chin passes the bar: shoulders about 18 cm under it, a little behind.
-    high = vec(-0.12, bar_y - 0.2, 0.0)
+    # At the top the chin clears the bar: shoulders about 10 cm under it, a little behind.
+    high = vec(-0.14, bar_y - 0.1, 0.0)
     sh = lerp(top, high, p)
     body = hanging_body(sh, lean=lerp(-4.0, lean_top, p), knees=lerp(35.0, 50.0, p), head=lerp(0.0, -12.0, p))
     for side in (1, -1):
@@ -100,7 +100,7 @@ def assisted_pull_up(p, s):
     grip_half = 0.4
     # Kneeling on a pad that rises with the person (the counterweight pushes it up).
     top = vec(-0.04, handle_y - math.sqrt(0.628 ** 2 - (grip_half - Body.SH_HALF) ** 2 - 0.04 ** 2), 0.0)
-    high = vec(-0.11, handle_y - 0.18, 0.0)
+    high = vec(-0.13, handle_y - 0.11, 0.0)
     sh = lerp(top, high, p)
     frame = posture(vec(0, 0, 0), 0.0, -5.0)
     body = placed(frame, "shoulders", sh, head=lerp(0.0, -10.0, p))
@@ -315,10 +315,12 @@ def inverted_row(p, s):
         b = make(theta)
         return shoulder_mid(b)[1]
 
-    t_low = solve(gap, 5.0, 60.0, bar_y - 0.6)
+    t_low = solve(gap, 5.0, 60.0, bar_y - 0.56)
     t_high = solve(gap, 5.0, 60.0, bar_y - 0.12)
     body = make(lerp(t_low, t_high, p))
-    bar_x = shoulder_mid(make(t_low))[0] + 0.02
+    # The bar is over the lower chest at the top (the head passes beyond it).
+    top_b = make(t_high)
+    bar_x = (shoulder_mid(top_b) - top_b.chest.u * 0.12)[0]
     for side in (1, -1):
         body.arm(side, vec(bar_x, bar_y, 0.0) + body.chest.r * side * 0.3, unit(-body.chest.u * 0.5 + body.chest.r * side * 0.8 - Y * 0.6))
     s.segs(vec(bar_x, bar_y, -0.7), vec(bar_x, bar_y, 0.7), 0.032, "metal", parts=6)

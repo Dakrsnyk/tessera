@@ -303,6 +303,12 @@ class Body:
         self.shortfall[("arm", side)] = short
         return g
 
+    def arm_via(self, side, target, elbow_hint):
+        """Arm to target with the elbow placed as close as possible to elbow_hint."""
+        target = np.asarray(target, dtype=float)
+        pole = np.asarray(elbow_hint, dtype=float) - (self.shoulder[side] + target) / 2
+        return self.arm(side, target, unit(pole))
+
     def arms(self, right, left, pole_right, pole_left=None):
         if pole_left is None:
             pole_left = self.mirror_dir(pole_right)

@@ -302,7 +302,7 @@ def knee_push_up(p, s):
       labels=("Mains sur le banc, bras tendus", "Descente", "Poitrine près du banc", "Poussée"), timing=(0.6, 1.4, 0.4, 1.1))
 def incline_push_up(p, s):
     floor(s, -0.3, 2.0)
-    body = push_up_body(p, BENCH_TOP + 0.62, BENCH_TOP + 0.13, hands_y=BENCH_TOP + 0.025)
+    body = push_up_body(p, BENCH_TOP + 0.62, BENCH_TOP + 0.18, hands_y=BENCH_TOP + 0.025)     # chest stops at the edge
     hx = body.grip[1][0]
     bench_across(s, hx + 0.04, BENCH_TOP)
     show(s, body)
@@ -350,7 +350,7 @@ def diamond_push_up(p, s):
 
 # --- Flyes ------------------------------------------------------------------------------------------
 
-@demo("db-fly", views=[THREE_QUARTER(55, 22), View("Face", 90, 14)],
+@demo("db-fly", views=[THREE_QUARTER(55, 22), View("Face", 90, 42)],
       labels=("Bras au-dessus de la poitrine", "Ouverture en arc", "Étirement des pecs", "Fermeture"),
       timing=(0.7, 1.8, 0.4, 1.4))
 def db_fly(p, s):
@@ -431,7 +431,7 @@ def pec_deck(p, s):
 def dips_body(p, lean_top, lean_bottom, drop, elbows_out, bar_y=1.12, bar_half=0.27):
     lean = lerp(lean_top, lean_bottom, p)
     frame = posture(vec(0, 0, 0), 0.0, lean)
-    top_sh = vec(0.0, bar_y + 0.61, 0.0)
+    top_sh = vec(0.0, bar_y + 0.635, 0.0)     # arms locked out at the top
     sh = top_sh - Y * drop * p + X * 0.06 * p * (lean_bottom / 30.0)
     body = placed(frame, "shoulders", sh, head=4 + lean * 0.2)
     for side in (1, -1):

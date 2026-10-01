@@ -95,7 +95,7 @@ def high_knees(p, s):
             body.leg_dirs(side, thigh, shin)
             body.foot_relaxed(side, plantar=25)
     for side, offset in ((1, 0.5), (-1, 0.0)):
-        a = math.sin(2 * math.pi * (p + offset) + math.pi / 2)
+        a = math.cos(2 * math.pi * (p + offset - 0.3))     # forward as the opposite knee peaks
         sh = body.shoulder[side]
         upper = unit(-Y + X * 0.6 * a)
         elbow = sh + upper * Body.UPPER
@@ -107,7 +107,7 @@ def high_knees(p, s):
 
 def pedal_legs(body, crank, p, radius=0.17, half=0.11):
     for side, offset in ((1, 0.0), (-1, 0.5)):
-        a = 2 * math.pi * (p + offset)
+        a = -2 * math.pi * (p + offset)     # forward pedalling: top, front, bottom, back
         pedal = crank + vec(radius * math.cos(a), radius * math.sin(a), side * half)
         ankle = pedal + vec(-0.07, 0.07, 0.0)
         body.leg(side, ankle, pole=X)
@@ -117,7 +117,7 @@ def pedal_legs(body, crank, p, radius=0.17, half=0.11):
 
 def crank_parts(s, crank, p, radius=0.17, half=0.11):
     for side, offset in ((1, 0.0), (-1, 0.5)):
-        a = 2 * math.pi * (p + offset)
+        a = -2 * math.pi * (p + offset)     # forward pedalling: top, front, bottom, back
         pedal = crank + vec(radius * math.cos(a), radius * math.sin(a), side * half)
         sd = SIDE_RIGHT if side == 1 else SIDE_LEFT
         s.line([crank + Z * side * 0.06, pedal - Z * side * 0.03], 0.025, "metal", side=sd)
@@ -247,7 +247,7 @@ def elliptical(p, s):
     center = vec(0.0, 0.3, 0.0)
     body = upright(1.14, 6.0, pelvis_x=-0.02, head=0)
     for side, offset in ((1, 0.0), (-1, 0.5)):
-        a = 2 * math.pi * (p + offset)
+        a = -2 * math.pi * (p + offset)    # forward stride
         pedal = center + vec(0.24 * math.cos(a), 0.1 * math.sin(a), side * 0.12)
         sd = SIDE_RIGHT if side == 1 else SIDE_LEFT
         s.line([pedal - X * 0.17, pedal + X * 0.17], 0.045, "load", side=sd)
@@ -299,7 +299,7 @@ def stair_climber(p, s):
       muscles=(["calves"], ["shoulders", "quads"]))
 def jump_rope(p, s):
     floor(s, -1.0, 1.0)
-    angle = 2 * math.pi * p - math.pi / 2         # the rope under the feet at p = 0
+    angle = -2 * math.pi * p - math.pi / 2        # under the feet at p = 0, then behind, overhead, in front
     hop = 0.06 * max(0.0, math.sin(2 * math.pi * p + math.pi * 0.0)) if False else 0.06 * (0.5 - 0.5 * math.cos(2 * math.pi * p)) * 0
     air = 0.06 * math.sin(math.pi * ((p + 0.25) % 1.0)) ** 2 if ((p + 0.25) % 1.0) < 0.5 else 0.0
     # In the air while the rope passes under the feet.
@@ -474,7 +474,7 @@ def hiit(p, s):
                 body.leg_dirs(side, unit(lerp(vec(0, -1, 0), vec(1, 0.05, 0), up)), unit(lerp(vec(0, -1, 0), vec(-0.15, -1, 0), up)))
                 body.foot_relaxed(side, plantar=25)
         for side, offset in ((1, 0.5), (-1, 0.0)):
-            a = math.sin(2 * math.pi * (t + offset) + math.pi / 2)
+            a = math.cos(2 * math.pi * (t + offset - 0.3))
             sh = body.shoulder[side]
             upper = unit(-Y + X * 0.6 * a)
             elbow = sh + upper * Body.UPPER

@@ -338,11 +338,12 @@ def battle_ropes(p, s):
 
 # --- Sled push, bear crawl ------------------------------------------------------------------------------
 
-@demo("sled-push", views=[PROFILE(), THREE_QUARTER(35, 12)], mode="loop", timing=1.2, samples=24, labels=(),
-      travel=(1.2, 0.3, -1.4, 1.6, -0.5, 0.5, 0.0, 40.0))
+@demo("sled-push", views=[PROFILE(), THREE_QUARTER(35, 12)], mode="loop", timing=1.1, samples=24, labels=(),
+      travel=(0.88, 0.22, -1.4, 1.6, -0.5, 0.5, 0.0, 40.0))
 def sled_push(p, s):
     floor(s, -1.4, 1.6)
-    body = walk_cycle(p, s, stride=0.6, arms="none", lean=46.0, bounce=0.012, stance=0.62, lift=0.1, hip=0.86)
+    # Leaning into the sled: the feet push behind the hips, the free knee drives forward.
+    body = walk_cycle(p, s, stride=0.44, arms="none", lean=46.0, bounce=0.012, stance=0.62, lift=0.12, hip=0.83, ahead=-0.15)
     sh = mid(body)
     # The sled ahead: a base with plates and two upright poles, the hands on the poles.
     base_x = sh[0] + 0.52

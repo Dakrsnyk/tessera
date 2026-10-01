@@ -94,13 +94,13 @@ def cable_crunch(p, s):
         body.leg_dirs(side, unit(k - body.hip[side]), -X)
         body.foot_relaxed(side, plantar=60)
     # Hands hold the rope beside the head; the rope follows the head down.
-    pul = vec(0.55, 2.05, 0.0)
+    pul = vec(0.78, 2.05, 0.0)
     knot = body.head + body.head_frame.u * 0.05 + body.chest.f * 0.12
     for side in (1, -1):
         g = body.head + body.head_frame.r * side * 0.1 + body.chest.f * 0.06
         body.arm(side, g, unit(body.chest.r * side - body.chest.u * 0.3 + body.chest.f * 0.6))
         s.line([knot, g], 0.022, "load", side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
-    col = Column(s, 0.72, 0.0, height=2.2, depth=0.24, width=0.4)
+    col = Column(s, 0.95, 0.0, height=2.2, depth=0.24, width=0.4)
     col.frame(lift=p * 0.35)
     s.disc(pul, Z, 0.045, "frame")
     cable(s, pul, knot)
@@ -267,7 +267,7 @@ def leg_raise(p, s):
     for side in (1, -1):
         body.leg_dirs(side, d, d)
         body.foot_relaxed(side, plantar=10)
-        body.arm(side, vec(body.pelvis.o[0] - 0.2, 0.03, side * 0.24), unit(Y + Z * side * 0.1))
+        body.arm(side, vec(body.shoulder[side][0] + 0.56 * (1 if body.pelvis.o[0] > body.shoulder[side][0] else -1), 0.04, side * 0.26), unit(Z * side + Y * 0.2))
     show(s, body)
 
 
@@ -369,7 +369,7 @@ def woodchop(p, s):
     show(s, body)
 
 
-@demo("pallof-press", views=[ABOVE(90, 60), View("Face", 90, 10)],
+@demo("pallof-press", views=[PROFILE(), View("Dessus", 0, 62)],
       labels=("Poignée contre le sternum", "Bras tendus devant", "Résiste à la rotation", "Retour à la poitrine"),
       timing=(0.6, 1.0, 1.0, 1.0))
 def pallof_press(p, s):
@@ -396,15 +396,31 @@ def mountain_climber(p, s):
     theta = 18.5
     body = plank_on_toes(theta, toe_x=-0.05, head=-10)
     hands_x = ((body.shoulder[1] + body.shoulder[-1]) / 2)[0]
-    for side, phase in ((1, 0.0), (-1, 0.5)):
-        t = (p + phase) % 1.0
-        drive = math.sin(math.pi * t) ** 2 if t < 1.0 else 0.0
+    # The legs swap together: one knee under the chest while the other leg is long behind, then a
+    # quick switch with both feet off the floor.
+    t = p % 1.0
+    if t < 0.4:
+        d = 1.0
+    elif t < 0.5:
+        d = 1.0 - smooth((t - 0.4) / 0.1)
+    elif t < 0.9:
+        d = 0.0
+    else:
+        d = smooth((t - 0.9) / 0.1)
+    switching = (0.4 < t < 0.5) or (t > 0.9)
+    for side in (1, -1):
+        drive = d if side == 1 else 1.0 - d
         hip = body.hip[side]
         foot_back = body.ankle[side]
-        tuck = vec(hip[0] - 0.04, 0.16, hip[2])
-        ankle = lerp(foot_back, tuck, drive) + Y * 0.06 * math.sin(math.pi * drive)
-        body.leg(side, ankle, pole=unit(X - Y * 0.4))
-        body.foot_toward(side, ankle + unit(-Y * 0.9 + X * 0.3) * 0.17 if drive > 0.05 else ankle + body.pelvis.f * 0.165 - body.pelvis.u * 0.06)
+        # The knee drives under the chest, the foot coming in under the hips on the ball of the foot;
+        # the body stays in a plank (hips level, hands planted).
+        tuck = vec(hip[0] + 0.04, 0.17, hip[2])
+        hop = 0.1 * math.sin(math.pi * drive) if switching else 0.0
+        ankle = lerp(foot_back, tuck, drive) + Y * hop
+        body.leg(side, ankle, pole=unit(X + Y * 0.25))
+        toe_tuck = ankle + unit(vec(0.35, -0.94, 0.0)) * 0.17
+        toe_back = ankle + body.pelvis.f * 0.165 - body.pelvis.u * 0.06
+        body.foot_toward(side, lerp(toe_back, toe_tuck, smooth(drive)))
         body.arm(side, vec(hands_x, 0.025, side * 0.26), unit(-body.chest.u + body.chest.r * side * 0.4))
     show(s, body)
 

@@ -12,6 +12,22 @@ extension ExerciseLibrary {
     }
 
     private static let techniques: [String: ExerciseTechnique] = [
+        // Chest and legs: variants whose setup differs from their family
+        "pec-deck": t("Assis sur la machine, dos plaqué contre le dossier, poignées à hauteur des épaules, bras ouverts sur les côtés, coudes légèrement fléchis.",
+                      ["Rapproche les poignées devant la poitrine en arc de cercle.", "Serre les pectoraux une seconde, mains jointes.", "Ouvre lentement jusqu'à sentir l'étirement, sans dépasser la ligne des épaules."],
+                      "Des bras ouverts à la ligne des épaules jusqu'aux mains jointes devant la poitrine.", "Expire en fermant, inspire en ouvrant.",
+                      ["Règle le siège pour avoir les poignées à hauteur des épaules.", "Garde la même flexion des coudes du début à la fin."],
+                      ["Décoller le dos du dossier.", "Pousser avec les bras en pliant les coudes.", "Laisser les charges claquer en ouvrant."]),
+        "cable-fly": t("Debout entre les deux poulies hautes, une poignée dans chaque main, un pied en avant, buste légèrement penché, bras ouverts, coudes un peu fléchis.",
+                       ["Amène les mains l'une vers l'autre devant le bas de la poitrine en arc de cercle.", "Serre les pectoraux mains jointes.", "Reviens lentement bras ouverts."],
+                       "Des bras ouverts dans la ligne des épaules aux mains jointes.", "Expire en fermant, inspire en ouvrant.",
+                       ["Coudes fixes, le mouvement vient des épaules.", "Buste stable."],
+                       ["Transformer l'écarté en développé.", "Se laisser tirer vers l'arrière par les câbles."]),
+        "front-squat": t("Debout, barre posée sur l'avant des épaules contre les clavicules, bras croisés devant (ou prise olympique), coudes hauts, pieds largeur d'épaules.",
+                         ["Descends en gardant le buste bien droit et les coudes hauts.", "Genoux dans l'axe des pieds jusqu'aux cuisses parallèles.", "Remonte en poussant dans tout le pied."],
+                         "Au moins jusqu'aux cuisses parallèles, buste droit.", "Inspire et gaine en haut, expire en remontant.",
+                         ["Coudes hauts pour que la barre ne glisse pas.", "Regard droit devant."],
+                         ["Coudes qui tombent.", "Buste qui part en avant.", "Talons qui décollent."]),
         // Back and shoulders
         "dead-hang": t("Suspendu à la barre, mains largeur d'épaules, bras tendus, pieds décollés du sol.",
                        ["Abaisse légèrement les épaules pour les engager.", "Tiens la suspension en respirant calmement.", "Repose les pieds au sol avant de lâcher."],
