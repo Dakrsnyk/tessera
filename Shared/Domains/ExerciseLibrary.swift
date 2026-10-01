@@ -157,7 +157,8 @@ struct ExerciseInfo: Identifiable, Hashable {
     /// Advice specific to this exercise, added to the technique of its movement.
     let cues: [String]
 
-    var technique: ExerciseTechnique { ExerciseTechnique.technique(for: pattern) }
+    /// Its own technique when its movement differs from its family's, the family's otherwise.
+    var technique: ExerciseTechnique { ExerciseLibrary.technique(for: id) ?? ExerciseTechnique.technique(for: pattern) }
 
     /// "Pectoraux · Barre, banc"
     var summary: String {
@@ -686,7 +687,7 @@ enum ExerciseLibrary {
           aka: ["dips banc"], cues: ["Mains sur le banc derrière toi, fesses près du banc."]),
         x("kickback", "Kickback triceps", [.triceps], [], [.dumbbells], .strength, .beginner, .tricepsExtension,
           aka: ["kick back"], cues: ["Buste penché, bras collé au corps, tends l'avant-bras vers l'arrière."]),
-        x("wrist-curl", "Flexion des poignets", [.forearms], [], [.dumbbells, .barbell], .strength, .beginner, .curl,
+        x("wrist-curl", "Flexion des poignets", [.forearms], [], [.barbell, .dumbbells, .bench], .strength, .beginner, .curl,
           aka: ["poignets", "wrist curl"], cues: ["Avant-bras posés sur les cuisses, seuls les poignets bougent."]),
         x("reverse-curl", "Curl inversé (pronation)", [.forearms], [.biceps], [.barbell], .strength, .beginner, .curl, aka: ["curl pronation", "reverse curl"]),
         x("dead-hang", "Suspension à la barre", [.forearms], [.back], [.pullUpBar], .strength, .beginner, .verticalPull,

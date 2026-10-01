@@ -338,12 +338,17 @@ final class DemoModel {
         let f3 = f2 * f
         var out = staticPoints
         out.reserveCapacity(staticPoints.count + first.count)
+        // Catmull-Rom weights for the four samples, so each point is a plain weighted sum.
+        let w0: Double = 0.5 * (-f + 2 * f2 - f3)
+        let w1: Double = 0.5 * (2 - 5 * f2 + 3 * f3)
+        let w2: Double = 0.5 * (f + 4 * f2 - 3 * f3)
+        let w3: Double = 0.5 * (f3 - f2)
         for k in 0..<first.count {
-            let a = p0[k], b = p1[k], c = p2[k], d = p3[k]
-            let t1 = (c - a) * f
-            let t2 = (2 * a - 5 * b + 4 * c - d) * f2
-            let t3 = (3 * b - a - 3 * c + d) * f3
-            out.append(0.5 * (2 * b + t1 + t2 + t3))
+            var point: Vec3 = p0[k] * w0
+            point += p1[k] * w1
+            point += p2[k] * w2
+            point += p3[k] * w3
+            out.append(point)
         }
         return out
     }
@@ -370,7 +375,8 @@ struct DemoPalette {
         for (index, hex) in hexes.enumerated() where !hex.isEmpty {
             table[index] = Self.parse(hex)
         }
-        let muscle = dark ? accent + (SIMD3(255, 255, 255) - accent) * 0.12 : accent
+        let toWhite: SIMD3<Double> = SIMD3<Double>(255, 255, 255) - accent
+        let muscle: SIMD3<Double> = dark ? accent + toWhite * 0.12 : accent
         table[1] = muscle
         table[2] = muscle + (base - muscle) * 0.5
         rgb = table

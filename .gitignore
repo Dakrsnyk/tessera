@@ -6,3 +6,7 @@ xcuserdata/
 Payload/
 *.ipa
 Config/Secrets.xcconfig
+
+# Exercise demonstration tool outputs
+scripts/demos/out/
+__pycache__/
