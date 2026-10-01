@@ -124,7 +124,7 @@ def cat_cow(p, s):
     from ex_legs import plant_quadruped
     floor(s, -0.8, 1.1)
     k = smooth(p)
-    body = quadruped(spine=lerp(28.0, -22.0, k), pelvis_tilt=lerp(-14.0, 12.0, k), head=lerp(30.0, -32.0, k))
+    body = quadruped(spine=lerp(42.0, -30.0, k), pelvis_tilt=lerp(-18.0, 14.0, k), head=lerp(34.0, -34.0, k))
     plant_quadruped(body)
     show(s, body)
 
@@ -234,7 +234,7 @@ def hip_flexor_stretch(p, s):
     mat(s, -0.75, -0.0)
     k = smooth(p)
     # The hips glide forward and down: the front shin leans forward, the rear hip opens.
-    body = half_kneeling(0.5, lerp(0.0, 10.0, k), -0.1, lean=lerp(3.0, -4.0, k))
+    body = half_kneeling(0.5, lerp(0.0, 20.0, k), -0.05, lean=lerp(3.0, -6.0, k))
     hands_on_hips(body)
     show(s, body)
 
@@ -247,9 +247,9 @@ def calf_stretch(p, s):
     wall(s, wall_x)
     k = smooth(p)
     lean = lerp(8.0, 22.0, k)
-    body = upright(lerp(0.85, 0.82, k), lean, pelvis_x=lerp(-0.02, 0.06, k), head=-4)
+    body = upright(lerp(0.855, 0.825, k), lean, pelvis_x=lerp(-0.02, 0.06, k), head=-4)
     body.foot_on_floor(1, (0.25, 0.12), 0.0, pole=X)
-    body.foot_on_floor(-1, (-0.43, -0.12), 0.0, pole=X)
+    body.foot_on_floor(-1, (-0.42, -0.12), 0.0, pole=X)     # rear leg straight, heel down
     for side in (1, -1):
         body.arm(side, vec(wall_x - 0.02, 1.38, side * 0.22), unit(-Y - X * 0.4 + Z * side * 0.3))
     show(s, body)

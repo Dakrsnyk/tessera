@@ -360,7 +360,7 @@ def sled_push(p, s):
 
 
 @demo("bear-crawl", views=[PROFILE(), THREE_QUARTER(35, 14)], mode="loop", timing=1.6, samples=24, labels=(),
-      travel=(0.7, 0.35, -1.0, 1.6, -0.45, 0.45, 0.0, 40.0))
+      travel=(0.504, 0.252, -1.0, 1.6, -0.45, 0.45, 0.0, 40.0))
 def bear_crawl(p, s):
     floor(s, -1.0, 1.6)
     hip_y = 0.6
@@ -377,8 +377,9 @@ def bear_crawl(p, s):
         else:
             x = lerp(-0.18, 0.18, smooth((t - 0.5) / 0.5))
             lift = 0.08 * math.sin(math.pi * (t - 0.5) / 0.5)
-        ankle = vec(body.hip[side][0] - 0.08 + x, 0.12 + lift, side * 0.13)
-        body.leg(side, ankle, pole=unit(X - Y * 0.6))
+        # Knees under the hips, hovering just above the floor; shins back, on the balls of the feet.
+        ankle = vec(body.hip[side][0] - 0.42 + x * 0.7, 0.13 + lift, side * 0.13)
+        body.leg(side, ankle, pole=unit(-Y + X * 0.35))
         body.toe[side] = ankle + vec(0.07, -0.1, 0.0)
     for side, offset in ((1, 0.5), (-1, 0.0)):
         t = (p + offset) % 1.0
@@ -389,7 +390,7 @@ def bear_crawl(p, s):
             x = lerp(-0.18, 0.18, smooth((t - 0.5) / 0.5))
             lift = 0.08 * math.sin(math.pi * (t - 0.5) / 0.5)
         sh = body.shoulder[side]
-        hand = vec(sh[0] + 0.05 + x, 0.04 + lift, side * 0.22)
+        hand = vec(sh[0] + 0.05 + x * 0.7, 0.04 + lift, side * 0.22)
         d = hand - sh
         dist = float(np.linalg.norm(d))
         if dist > 0.625:

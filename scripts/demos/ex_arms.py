@@ -395,6 +395,9 @@ def kickback(p, s):
     show(s, body)
 
 
+WRIST_LEAN = 52.0
+
+
 # --- Forearms and grip --------------------------------------------------------------------------------------
 
 @demo("wrist-curl", views=[PROFILE(), THREE_QUARTER(35, 14)],
@@ -404,18 +407,17 @@ def wrist_curl(p, s):
     floor(s, -0.8, 1.0)
     top = 0.43
     flat_bench(s, -0.6, 0.35, top)
-    body = seated_upright(top, -0.05, lean=30.0, head=20)
-    feet_flat(body, (0.42, 0.17), (0.42, -0.17))
+    body = seated_upright(top, -0.05, lean=WRIST_LEAN, head=20)
+    feet_flat(body, (0.42, 0.17), (0.42, -0.17), pole=unit(X + Y * 0.6))
     wrist_angle = lerp(-60.0, 50.0, p)
     for side in (1, -1):
         knee = body.knee[side]
         thigh = unit(knee - body.hip[side])
         thigh_top = knee + Y * (Body.W_THIGH / 2 + Body.W_LOWER / 2)
-        wrist = thigh_top + thigh * 0.04 + X * 0.02
-        elbow = wrist - thigh * 0.27
-        sh = body.shoulder[side]
-        body.arm(side, wrist, unit(-Y + X * 0.0 - body.chest.r * side * 0.0 + body.chest.f))
-        body.grip[side] = body.grip[side]
+        # Forearm lying along the thigh, the wrist just past the knee.
+        wrist = thigh_top + thigh * 0.11
+        elbow = wrist - thigh * Body.LOWER
+        body.arm_via(side, wrist, elbow)
     # Hands: from the wrists to the bar, turned by the wrist.
     hand_dir = rotate(unit(body.grip[1] - body.elbow[1]), Z, wrist_angle)
     bar = vec(body.grip[1][0], body.grip[1][1], 0.0) + hand_dir * 0.1

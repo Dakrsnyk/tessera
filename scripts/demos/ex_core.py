@@ -330,7 +330,7 @@ def hollow_hold(p, s):
 
 # --- Rotation and anti-rotation --------------------------------------------------------------------------
 
-@demo("russian-twist", views=[View("Face", 90, 18), THREE_QUARTER(45, 20)], mode="loop", timing=2.6, samples=24, labels=())
+@demo("russian-twist", views=[THREE_QUARTER(45, 20), View("Face", 90, 40)], mode="loop", timing=2.6, samples=24, labels=())
 def russian_twist(p, s):
     floor(s, -0.8, 0.9, -0.8, 0.8)
     a = math.sin(2 * math.pi * p)
@@ -369,7 +369,7 @@ def woodchop(p, s):
     show(s, body)
 
 
-@demo("pallof-press", views=[PROFILE(), View("Dessus", 0, 62)],
+@demo("pallof-press", views=[PROFILE(), THREE_QUARTER(-35, 16)],
       labels=("Poignée contre le sternum", "Bras tendus devant", "Résiste à la rotation", "Retour à la poitrine"),
       timing=(0.6, 1.0, 1.0, 1.0))
 def pallof_press(p, s):
@@ -439,14 +439,14 @@ def back_extension(p, s):
     ankle = vec(-0.05, 0.3, 0.0)
     hip_pt = ankle + d * (Body.SHIN + Body.THIGH)
     pelvis_frame = Frame(hip_pt, n, d)
-    flex = lerp(0.0, 70.0, p)
+    flex = lerp(0.0, 85.0, p)
     body = Body(pelvis_frame.pitched(flex), head=-8)
     for side in (1, -1):
         body.leg_dirs(side, -d, -d)
         body.toe[side] = body.ankle[side] + n * 0.165 - d * 0.06
         cross = body.chest.at(u=0.3, f=0.1, r=-side * 0.06)
         body.arm(side, cross, unit(body.chest.r * side + body.chest.f * 0.3))
-    pad = hip_pt + n * (Body.W_THIGH / 2 + 0.004) - d * 0.06
+    pad = hip_pt + n * (Body.W_THIGH / 2 + 0.004) - d * 0.11     # under the upper thighs, below the hip crease
     s.slab(pad - d * 0.2, pad + d * 0.05, -n, 0.4, 0.08, "pad", solid="l'appui")
     roller(s, body.ankle[1] - n * (Body.W_SHIN / 2 + 0.05) + d * 0.03 - Z * body.ankle[1][2], half=0.18)
     plate = ankle + n * 0.06 - d * 0.1

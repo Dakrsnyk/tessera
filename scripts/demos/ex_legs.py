@@ -424,9 +424,8 @@ def single_leg_rdl(p, s):
     body.foot_on_floor(-1, (0.0, -0.1), 0.0, pole=X)
     # The free (right) leg goes back in line with the torso.
     back_dir = unit(-body.pelvis.u * 1.0)
-    rest = unit(-Y + X * 0.08)
-    d = unit(lerp(rest, back_dir, smooth(p)))
-    knee_bend = lerp(25.0, 4.0, p)
+    d = rotate(back_dir, Z, -6.0)      # the free leg rises in line with the torso, like a lever
+    knee_bend = lerp(30.0, 4.0, p)
     body.leg_dirs(1, d, rotate(d, Z, -knee_bend))
     body.foot_relaxed(1, plantar=lerp(20.0, 0.0, p))
     g = hanging_grip(body, 0.03)
@@ -776,10 +775,10 @@ def quadruped(head=-12, twist=0.0, spine=0.0, pelvis_tilt=0.0, shoulder_y=0.66):
     pelvis_pt = vec(0.0, Body.W_SHIN / 2 + 0.01 + Body.THIGH, 0.0)
 
     def mid_y(tilt):
-        b = Body(Frame(pelvis_pt, -Y, X).pitched(tilt), head=head)
+        b = Body(Frame(pelvis_pt, -Y, X).pitched(tilt + pelvis_tilt), head=head, spine=spine)
         return float((b.shoulder[1][1] + b.shoulder[-1][1]) / 2)
 
-    base = solve(mid_y, -45.0, 10.0, shoulder_y)
+    base = solve(mid_y, -60.0, 30.0, shoulder_y)
     frame = Frame(pelvis_pt, -Y, X).pitched(base + pelvis_tilt)
     body = Body(frame, head=head, twist=twist, spine=spine)
     return body

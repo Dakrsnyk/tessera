@@ -487,9 +487,9 @@ def face_pull(p, s):
         start = far + Z * side * 0.05
         end = body.head + X * 0.05 + Z * side * 0.22 - Y * 0.02
         grip = lerp(start, end, p)
-        body.arm(side, grip, unit(Y * 0.2 + body.chest.r * side * 1.0 - X * 0.3))
-        cable(s, pul, grip)
-        s.ball(grip, 0.025, "load", side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
+        body.arm(side, grip, unit(Y * 0.7 + body.chest.r * side * 1.0 - X * 0.3))     # elbows high and out
+        cable(s, pul, body.grip[side])
+        s.ball(body.grip[side], 0.025, "load", side=SIDE_RIGHT if side == 1 else SIDE_LEFT)
     s0 = far
     lift = np.linalg.norm((body.head + X * 0.05) - pul) * p - 0.0
     col = Column(s, 1.3, 0.0, height=2.2)
