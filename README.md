@@ -142,6 +142,8 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Scanner depuis le widget Nutrition** : les widgets Nutrition moyens et grands ont un bouton « Scanner » qui ouvre l'app directement sur la caméra (un widget ne peut pas l'ouvrir lui-même). Sans caméra, ou si le produit est inconnu, la recherche et l'aliment perso prennent le relais.
 
+**Icône et logo** : le « T en creux » : trois tuiles (rouge, orange, charbon) dont l'espace dessine un T, sur crème. L'icône a ses versions claire, sombre et teintée (iOS 18) ; le même logo s'anime au lancement (les tuiles glissent en place) et apparaît dans l'app (premier lancement, Premium, écrans d'accueil du Store).
+
 **Styles de l'app** : 10 ambiances pour l'app elle-même (Tessera, Océan, Corail, Lavande, Sable, Graphite, Forêt, Rose, Minuit, Néon), chacune en clair, en sombre ou automatique. Choisies au premier lancement, modifiables dans Réglages › Apparence. Les widgets gardent leurs propres styles.
 
 **Résumés intelligents** : calculés sur l'iPhone à partir des données de l'utilisateur. Avec Apple Intelligence (iOS 26), le texte est reformulé ; chaque nombre de la reformulation est vérifié par rapport aux données, sinon le texte calculé est gardé. Aucune donnée n'est inventée.

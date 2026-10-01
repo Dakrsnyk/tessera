@@ -239,6 +239,14 @@ jobs:
             WAIT=6 shoot tutorial-daily-dark tutorial-daily top dark
             WAIT=6 shoot tutorial-store-dark tutorial-store top dark
           }
+          # The app's mark (« T en creux ») where it appears: launch, first launch, Premium, Home Screen setups.
+          brand_shots() {
+            shoot brand-launch launch top light
+            shoot brand-launch-dark launch top dark
+            shoot brand-onboarding onboarding top light
+            shoot brand-paywall paywall top light
+            for setup in aurore creme neon; do shoot brand-setup-$setup setup-$setup top light; done
+          }
           # The mini-apps opened from Home: each dashboard, then its pages.
           app_shots() {
             for screen in app-nutrition app-nutrition-meal app-nutrition-history app-nutrition-ideas app-nutrition-nutrients app-nutrition-saved; do
@@ -287,8 +295,8 @@ jobs:
             WAIT=8 shoot home-apps home 0.3 light
           }
           if [ "$STUDIO" = "true" ]; then
+            brand_shots
             tutorial_shots
-            studio_shots
             exit 0
           fi
           if [ "$APPS" = "true" ]; then

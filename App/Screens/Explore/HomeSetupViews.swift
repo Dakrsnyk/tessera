@@ -116,8 +116,25 @@ struct SetupAppIcon: View {
     var size: CGFloat = 62
 
     var body: some View {
+        if app == .tessera, case .solid = style {
+            tesseraIcon
+        } else if app == .tessera, case .gradient = style {
+            tesseraIcon
+        } else {
+            styledIcon
+        }
+    }
+
+    /// Tessera's own icon, as iOS shows it on a Home Screen with colored icons.
+    private var tesseraIcon: some View {
+        TesseraMark(size: size)
+            .shadow(color: .black.opacity(0.1), radius: 3, y: 1)
+            .frame(width: size, height: size)
+    }
+
+    private var styledIcon: some View {
         let shape = RoundedRectangle(cornerRadius: size * 0.225, style: .continuous)
-        ZStack {
+        return ZStack {
             switch style {
             case .glass:
                 shape.fill(Color.white.opacity(0.2))
@@ -133,7 +150,8 @@ struct SetupAppIcon: View {
                     .shadow(color: .black.opacity(0.1), radius: 3, y: 1)
             }
             if app == .tessera {
-                TesseraMark(size: size * 0.56)
+                // Glass and tinted Home Screens: the T made of the tint, as iOS draws tinted icons.
+                TesseraMark(size: size, tint: symbolColor)
             } else {
                 Image(systemName: app.symbol)
                     .font(.system(size: size * 0.42, weight: .medium))
