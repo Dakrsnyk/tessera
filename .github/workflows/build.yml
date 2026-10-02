@@ -20,9 +20,13 @@ jobs:
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
-      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') || contains(github.event.head_commit.message, '[demos]') }}
+      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') || contains(github.event.head_commit.message, '[demos]') || contains(github.event.head_commit.message, '[daily]') }}
       # [demos] runs the logic tests and the exercise sheet UI tests, then the demonstrations of every exercise.
       DEMOS: ${{ contains(github.event.head_commit.message, '[demos]') }}
+      # [daily] runs the logic tests and the UI tests of Mon Quotidien, Créer, the Studio and the first launch,
+      # then the captures of the swipeable cards, the settings inside a mini-app, the Lock Screen category,
+      # the gender choices, Thème / Style, and the rating link.
+      DAILY: ${{ contains(github.event.head_commit.message, '[daily]') }}
       # [studio] runs the logic tests and the Studio UI tests, then only the Widget Studio captures.
       STUDIO: ${{ contains(github.event.head_commit.message, '[studio]') }}
       # [apps] runs the logic tests and the mini-app UI tests, then only the mini-app captures.
@@ -132,6 +136,7 @@ jobs:
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
           if [ "$APPS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/DataEntryUITests -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
+          if [ "$DAILY" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/ProfileUITests"; fi
           if [ "$DEMOS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests/testTheLibraryFindsExercisesAndShowsTheirSheet -only-testing:TesseraUITests/MiniAppUITests/testASessionKeepsItsPlaceWhenTheSheetOpens -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
           if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:TesseraUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:TesseraUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:TesseraUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testFirstLaunchAsksOnlyWhatMattersAndFillsMesInformations -only-testing:TesseraUITests/ProfileUITests/testSkippingEverythingShowsNothingMadeUp -only-testing:TesseraUITests/ProfileUITests/testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
@@ -209,7 +214,7 @@ jobs:
           }
           # The Widget Studio: each section, then every style, theme, layout and chart side by side.
           studio_shots() {
-            for section in content style colors background border chart density myStyles note multi; do
+            for section in content theme style colors background border chart density myStyles note multi; do
               shoot studio-$section studio-$section top light
             done
             shoot studio-colors-end studio-colors bottom light
@@ -300,6 +305,22 @@ jobs:
           if [ "$STUDIO" = "true" ]; then
             brand_shots
             tutorial_shots
+            exit 0
+          fi
+          if [ "$DAILY" = "true" ]; then
+            for look in light dark; do
+              WAIT=8 shoot home home top $look
+              WAIT=8 shoot home-pages home-pages top $look
+              WAIT=8 shoot app-nutrition-settings app-nutrition bottom $look
+              WAIT=8 shoot app-fitness-settings app-fitness bottom $look
+              WAIT=7 shoot spaces-lock spaces-lock top $look
+            done
+            WAIT=7 shoot spaces-lock-end spaces-lock bottom light
+            WAIT=7 shoot creator-fitness creator-fitness top light
+            WAIT=8 shoot onboarding-sport onboarding-sport bottom light
+            WAIT=8 shoot studio-theme studio-theme top light
+            WAIT=8 shoot studio-style studio-style top light
+            WAIT=7 shoot settings-end settings bottom light
             exit 0
           fi
           if [ "$DEMOS" = "true" ]; then

@@ -124,7 +124,9 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
     var symbol: String { info.symbol }
     var isPremium: Bool { info.isPremium }
     var isNew: Bool { info.isNew }
-    var isInteractive: Bool { info.isInteractive }
+    /// Whether the widget does something without opening the app (a button, a toggle) or right into
+    /// an action (the Nutrition scanner). Shown with a badge in the creation screens.
+    var isInteractive: Bool { info.isInteractive || NutritionTiles.scanKinds.contains(self) }
     var families: [WidgetFamily] { info.families }
     var keywords: [String] { info.keywords }
     /// The mini-app where the data behind this widget is entered, if any.

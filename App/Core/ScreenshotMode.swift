@@ -59,7 +59,18 @@ enum ScreenshotMode {
                 try? await Task.sleep(for: .milliseconds(900))
                 router.storePath = [.setups]
             }
-        case "home": router.tab = .home
+        case "home":
+            router.tab = .home
+            model.updateSettings { $0.dailyCardPages = [:] }
+        case "home-pages":
+            // « Mon Quotidien » with every card swiped to its second view.
+            router.tab = .home
+            model.updateSettings { settings in
+                for card in ["nutrition", "workout", "water", "steps", "weather"] { settings.dailyCardPages[card] = 1 }
+            }
+        case "spaces-lock":
+            router.tab = .spaces
+            router.showsLockScreenCreator = true
         case "explore": router.tab = .explore
         case "editor": router.openEditor(TemplateCatalog.design("countdown-holidays"), isNew: true)
         case "mywidgets": router.tab = .mine

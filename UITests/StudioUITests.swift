@@ -48,7 +48,7 @@ final class StudioUITests: XCTestCase {
         button.tap()
     }
 
-    private static let sections = ["content", "style", "colors", "background", "border", "chart", "density", "myStyles"]
+    private static let sections = ["content", "theme", "style", "colors", "background", "border", "chart", "density", "myStyles"]
 
     /// The sections are in a horizontal bar that centers the section chosen: going one section at a
     /// time, the next one is always on screen.
@@ -71,7 +71,7 @@ final class StudioUITests: XCTestCase {
         name.tap()
         name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 30) + "Studio test\n")
 
-        section("style")
+        section("theme")
         tapButton("preset-midnight")
         snapshot("theme")
 
@@ -133,7 +133,7 @@ final class StudioUITests: XCTestCase {
     func testEverySectionOpens() {
         launch(["-screenshotScreen", "studio-content"])
         XCTAssertTrue(app.textFields["widget-name"].waitForExistence(timeout: 15))
-        for name in ["style", "colors", "background", "border", "chart", "density", "myStyles", "content"] {
+        for name in ["theme", "style", "colors", "background", "border", "chart", "density", "myStyles", "content"] {
             section(name)
             XCTAssertTrue(app.buttons["studio-\(name)"].isSelected, "La section \(name) ne s'ouvre pas")
             XCTAssertEqual(app.state, .runningForeground, "Section \(name)")

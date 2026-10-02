@@ -72,6 +72,7 @@ struct CarAppView: View {
             maintenance(state: state, now: now)
             deadlines(state: state, now: now)
             more(state: state, now: now)
+            MiniAppSettingsSection(app: .car)
         }
         .navigationTitle(state.name.isEmpty ? "Auto" : state.name)
         .navigationBarTitleDisplayMode(.large)

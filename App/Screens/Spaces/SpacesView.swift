@@ -9,6 +9,8 @@ struct SpacesView: View {
     @State private var creating: Space?
     /// Nil shows every space.
     @State private var universe: SpaceUniverse?
+    /// The « Écran verrouillé » category: Lock Screen widgets instead of the spaces.
+    @State private var showsLockScreen = false
 
     var body: some View {
         @Bindable var router = router
@@ -22,22 +24,27 @@ struct SpacesView: View {
                         .padding(.horizontal, 20)
                         .id("spaces-top")
                     universeFilter
-                    LazyVStack(spacing: 14) {
-                        // The user's interests first, every other space below.
-                        ForEach(shownSpaces) { space in
-                            // A space opens its widget creator; its data stays in « Mes données » there.
-                            Button {
-                                creating = space
-                            } label: {
-                                ImmersiveSpaceCard(space: space, summary: summary(for: space))
+                    if showsLockScreen {
+                        LockScreenCreator()
+                            .transition(.opacity)
+                    } else {
+                        LazyVStack(spacing: 14) {
+                            // The user's interests first, every other space below.
+                            ForEach(shownSpaces) { space in
+                                // A space opens its widget creator; its data stays in « Mes données » there.
+                                Button {
+                                    creating = space
+                                } label: {
+                                    ImmersiveSpaceCard(space: space, summary: summary(for: space))
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityIdentifier("space-card-\(space.rawValue)")
+                                .tutorialTarget(.createSpace, when: space == shownSpaces.first)
                             }
-                            .buttonStyle(.plain)
-                            .accessibilityIdentifier("space-card-\(space.rawValue)")
-                            .tutorialTarget(.createSpace, when: space == shownSpaces.first)
                         }
+                        .padding(.horizontal, 20)
+                        .animation(.spring(response: 0.38, dampingFraction: 0.86), value: universe)
                     }
-                    .padding(.horizontal, 20)
-                    .animation(.spring(response: 0.38, dampingFraction: 0.86), value: universe)
                 }
                 .padding(.bottom, 32)
             }
@@ -55,6 +62,10 @@ struct SpacesView: View {
                 SpaceBuilderView(space: space)
             }
             .onAppear {
+                if router.showsLockScreenCreator {
+                    router.showsLockScreenCreator = false
+                    showsLockScreen = true
+                }
                 if let space = router.requestedCreator {
                     router.requestedCreator = nil
                     creating = space
@@ -77,21 +88,37 @@ struct SpacesView: View {
     private var universeFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                filterChip("Tout", isOn: universe == nil) { universe = nil }
-                ForEach(SpaceUniverse.allCases) { item in
-                    filterChip(item.title, isOn: universe == item) { universe = item }
+                filterChip("Tout", isOn: universe == nil && !showsLockScreen) {
+                    universe = nil
+                    showsLockScreen = false
                 }
+                ForEach(SpaceUniverse.allCases) { item in
+                    filterChip(item.title, isOn: universe == item && !showsLockScreen) {
+                        universe = item
+                        showsLockScreen = false
+                    }
+                }
+                filterChip("Écran verrouillé", symbol: "lock.fill", isOn: showsLockScreen) {
+                    withAnimation(.snappy) { showsLockScreen = true }
+                }
+                .accessibilityIdentifier("create-lockscreen")
             }
             .padding(.horizontal, 20)
         }
     }
 
-    private func filterChip(_ title: String, isOn: Bool, action: @escaping () -> Void) -> some View {
+    private func filterChip(_ title: String, symbol: String? = nil, isOn: Bool, action: @escaping () -> Void) -> some View {
         Button {
             Haptics.tap()
             action()
         } label: {
-            Text(title)
+            HStack(spacing: 5) {
+                if let symbol {
+                    Image(systemName: symbol)
+                        .font(.caption.weight(.bold))
+                }
+                Text(title)
+            }
                 .font(.subheadline.weight(.semibold))
                 .padding(.horizontal, 14)
                 .frame(minHeight: 36)

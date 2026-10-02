@@ -466,8 +466,29 @@ extension NutritionMath {
 
 /// Estimates daily needs (Mifflin-St Jeor) to suggest a starting goal the user can adjust.
 enum NutritionCalculator {
-    enum Sex: String, CaseIterable, Identifiable { case female, male; var id: String { rawValue } }
-    enum Activity: Double, CaseIterable, Identifiable {
+    /// The reference used by the formula. `neutral` averages the two (for non-binary people or when the
+    /// user prefers not to say): the result sits between the female and male estimates.
+    enum Sex: String, Codable, CaseIterable, Identifiable {
+        case female, male, neutral
+        var id: String { rawValue }
+
+        var offset: Double {
+            switch self {
+            case .female: -161
+            case .male: 5
+            case .neutral: -78
+            }
+        }
+
+        var title: String {
+            switch self {
+            case .female: "Femme"
+            case .male: "Homme"
+            case .neutral: "Moyenne des deux"
+            }
+        }
+    }
+    enum Activity: Double, Codable, CaseIterable, Identifiable {
         case sedentary = 1.2, light = 1.375, moderate = 1.55, active = 1.725
         var id: Double { rawValue }
         var title: String {
@@ -492,8 +513,7 @@ enum NutritionCalculator {
     }
 
     static func goals(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal) -> NutritionGoals {
-        let sexOffset: Double = sex == .male ? 5 : -161
-        let base: Double = 10 * weightKg + 6.25 * heightCm - 5 * Double(age) + sexOffset
+        let base: Double = 10 * weightKg + 6.25 * heightCm - 5 * Double(age) + sex.offset
         let kcal = max(1_400, (base * activity.rawValue * (1 + goal.rawValue)).rounded())
         let protein = (weightKg * (goal == .gain ? 2.0 : 1.6)).rounded()
         let fat = (kcal * 0.28 / 9).rounded()

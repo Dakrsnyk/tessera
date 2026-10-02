@@ -1,0 +1,31 @@
+import Foundation
+
+/// When to ask for a rating: at the 10th opening of the app, once per major version.
+/// Apple decides whether the request is shown (at most three times a year) and never says whether
+/// the user rated, so Tessera only remembers that it asked.
+enum ReviewPrompt {
+    static let opensBeforeAsking = 10
+    /// Coming back to the app within this time is the same opening.
+    static let minimumGap: TimeInterval = 4 * 3600
+
+    /// Counts an opening, unless the previous one was too recent.
+    static func countOpen(_ settings: inout AppSettings, at date: Date = Date()) {
+        if let last = settings.lastCountedOpen, date.timeIntervalSince(last) < minimumGap { return }
+        settings.openCount += 1
+        settings.lastCountedOpen = date
+    }
+
+    static func shouldAsk(_ settings: AppSettings, version: String = currentMajorVersion) -> Bool {
+        settings.openCount >= opensBeforeAsking && settings.reviewRequestedVersion != version
+    }
+
+    static func markAsked(_ settings: inout AppSettings, version: String = currentMajorVersion) {
+        settings.reviewRequestedVersion = version
+    }
+
+    /// "1" for 1.4.2.
+    static var currentMajorVersion: String {
+        let full = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1"
+        return full.split(separator: ".").first.map(String.init) ?? full
+    }
+}

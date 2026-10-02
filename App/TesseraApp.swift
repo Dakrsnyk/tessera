@@ -23,6 +23,9 @@ struct TesseraApp: App {
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active {
                         model.reloadFromDisk()
+                        model.countOpen()
+                        // A set validated from the Lock Screen while the app was closed.
+                        Task { await WorkoutLiveActivity.sync(model.fitness) }
                         Task { await premium.refreshEntitlements() }
                         Task { await model.refreshInsights() }
                     } else if phase == .background {

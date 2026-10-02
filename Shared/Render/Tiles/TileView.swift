@@ -1454,7 +1454,28 @@ struct TileAccessoryView: View {
         }
     }
 
+    /// The main action (« Série faite »…), usable right from the Lock Screen (iOS 17 interactive widgets).
+    private var lockAction: TileButton? {
+        tile.buttons.first(where: \.isProminent) ?? tile.buttons.first
+    }
+
     private var rectangular: some View {
+        HStack(alignment: .center, spacing: 6) {
+            rectangularText
+            if let button = lockAction, button.action != .scanFood {
+                TileActionButton(action: button.action, isEnabled: isLive) {
+                    Image(systemName: button.symbol)
+                        .font(.system(size: 15, weight: .bold))
+                        .frame(width: 34, height: 34)
+                        .background(Circle().fill(.white.opacity(0.22)))
+                        .widgetAccentable()
+                        .accessibilityLabel(Text(button.title))
+                }
+            }
+        }
+    }
+
+    private var rectangularText: some View {
         VStack(alignment: .leading, spacing: 1) {
             Label(tile.title, systemImage: tile.symbol)
                 .font(.headline)

@@ -24,6 +24,7 @@ struct FitnessAppView: View {
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            MiniAppSettingsSection(app: .fitness)
         }
         .navigationTitle("Fitness")
         .navigationBarTitleDisplayMode(.large)

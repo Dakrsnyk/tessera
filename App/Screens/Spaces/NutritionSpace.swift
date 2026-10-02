@@ -585,9 +585,8 @@ struct NutritionGoalsEditor: View {
                 NumberRow(title: "Fibres", value: $goals.fiber, unit: "g")
             }
             Section {
-                Picker("Sexe", selection: $sex) {
-                    Text("Femme").tag(NutritionCalculator.Sex.female)
-                    Text("Homme").tag(NutritionCalculator.Sex.male)
+                Picker("Référence", selection: $sex) {
+                    ForEach(NutritionCalculator.Sex.allCases) { Text($0.title).tag($0) }
                 }
                 Stepper("Âge : \(age) ans", value: $age, in: 16...90)
                 NumberRow(title: "Taille", value: $height, unit: "cm")
@@ -614,7 +613,7 @@ struct NutritionGoalsEditor: View {
     /// The calculator starts from what the user already gave in « Mes informations ».
     private func prefill() {
         let profile = model.profile
-        if let known = profile.sex?.calculatorSex { sex = known }
+        if let known = profile.calculatorSex { sex = known }
         if let known = model.age { age = min(90, max(16, known)) }
         if let known = profile.heightCm { height = known }
         if let known = profile.weightKg { weight = known }
@@ -623,17 +622,25 @@ struct NutritionGoalsEditor: View {
     }
 
     private func save() {
-        model.setNutritionGoals(goals)
+        model.setNutritionGoals(goals, calculatedWith: usedCalculator ? activity : nil)
         // Values used for a calculation are the user's own: every widget gets them.
         guard usedCalculator else { return }
-        let chosenSex: BodySex = sex == .male ? .male : .female
         let aim: NutritionAim = switch goal {
         case .lose: .lose
         case .maintain: .maintain
         case .gain: .gain
         }
         model.update(\.profile) { profile in
-            profile.sex = chosenSex
+            // The gender stays the user's own words; only the formula's reference changes.
+            if let current = profile.sex, !current.isBinary {
+                profile.calculationSex = sex == .neutral ? nil : sex
+            } else {
+                switch sex {
+                case .female: profile.sex = .female
+                case .male: profile.sex = .male
+                case .neutral: if profile.sex == nil { profile.sex = .undisclosed }
+                }
+            }
             profile.heightCm = height
             if profile.weightKg != weight { profile.recordWeight(weight) }
             profile.nutritionAim = aim

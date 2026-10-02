@@ -144,63 +144,59 @@ struct StudioElementsPanel: View {
     }
 }
 
-// MARK: - Thème & style
+// MARK: - Thème
 
-/// Complete themes (every setting at once) and styles (the composition), in one section.
-struct StudioLookPanel: View {
+/// Complete themes: every setting at once (style, colors, background and border).
+struct StudioThemePanel: View {
     @Binding var design: WidgetDesign
     let input: StudioInput
     @Environment(AppModel.self) private var model
-    @State private var tab: LookTab = .themes
-
-    enum LookTab: String, CaseIterable, Identifiable {
-        case themes, styles
-        var id: String { rawValue }
-        var title: String { self == .themes ? "Thèmes" : "Styles" }
-    }
 
     var body: some View {
-        Picker("Thème ou style", selection: $tab) {
-            ForEach(LookTab.allCases) { Text($0.title).tag($0) }
-        }
-        .pickerStyle(.segmented)
-        .accessibilityIdentifier("look-tabs")
-        switch tab {
-        case .themes:
-            StudioNote(text: "Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget.", symbol: "sparkles")
-            StudioPreviewGrid(
-                options: StylePreset.all,
-                input: input,
-                variant: { $0.applied(to: design) },
-                title: \.name,
-                subtitle: { $0.summary },
-                isSelected: { preset in
-                    let applied = preset.applied(to: design)
-                    return applied.themeID == design.themeID && applied.accentHex == design.accentHex
-                        && applied.background == design.background && applied.style.look == design.style.look
-                },
-                showsLock: { $0.isPremium && !model.isPremium },
-                identifier: { "preset-\($0.id)" },
-                select: { design = $0.applied(to: design) }
-            )
-        case .styles:
-            StudioNote(text: "Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent.", symbol: "swatchpalette")
-            StudioPreviewGrid(
-                options: ThemeCatalog.all,
-                input: input,
-                variant: { theme in
-                    var copy = design
-                    copy.themeID = theme.id
-                    return copy
-                },
-                title: \.name,
-                subtitle: { $0.isPremium ? nil : "Gratuit" },
-                isSelected: { $0.id == design.themeID },
-                showsLock: { $0.isPremium && !model.isPremium },
-                identifier: { "theme-\($0.id.rawValue)" },
-                select: { design.themeID = $0.id }
-            )
-        }
+        StudioNote(text: "Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget.", symbol: "sparkles")
+        StudioPreviewGrid(
+            options: StylePreset.all,
+            input: input,
+            variant: { $0.applied(to: design) },
+            title: \.name,
+            subtitle: { $0.summary },
+            isSelected: { preset in
+                let applied = preset.applied(to: design)
+                return applied.themeID == design.themeID && applied.accentHex == design.accentHex
+                    && applied.background == design.background && applied.style.look == design.style.look
+            },
+            showsLock: { $0.isPremium && !model.isPremium },
+            identifier: { "preset-\($0.id)" },
+            select: { design = $0.applied(to: design) }
+        )
+    }
+}
+
+// MARK: - Style
+
+/// Styles: the look and the composition (layout, shapes, text, icons, depth); the colors stay.
+struct StudioStylePanel: View {
+    @Binding var design: WidgetDesign
+    let input: StudioInput
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        StudioNote(text: "Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent.", symbol: "swatchpalette")
+        StudioPreviewGrid(
+            options: ThemeCatalog.all,
+            input: input,
+            variant: { theme in
+                var copy = design
+                copy.themeID = theme.id
+                return copy
+            },
+            title: \.name,
+            subtitle: { $0.isPremium ? nil : "Gratuit" },
+            isSelected: { $0.id == design.themeID },
+            showsLock: { $0.isPremium && !model.isPremium },
+            identifier: { "theme-\($0.id.rawValue)" },
+            select: { design.themeID = $0.id }
+        )
         Button {
             withAnimation {
                 let hidden = design.style.hidden

@@ -8,7 +8,9 @@ private func refreshWidgets() {
     WidgetCenter.shared.reloadAllTimelines()
 }
 
-struct CompleteSetIntent: AppIntent {
+/// A Live Activity intent: from a widget, the Lock Screen or the Live Activity, it runs in the app's
+/// process, so it can start the workout's Live Activity and update its rest countdown.
+struct CompleteSetIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Valider la série"
     static var isDiscoverable = false
 
@@ -17,11 +19,12 @@ struct CompleteSetIntent: AppIntent {
     func perform() async throws -> some IntentResult {
         SharedStore.shared.update(FitnessState.self) { $0.completeNextSet(at: Date()) }
         refreshWidgets()
+        await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
         return .result()
     }
 }
 
-struct SkipRestIntent: AppIntent {
+struct SkipRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Passer le repos"
     static var isDiscoverable = false
 
@@ -30,6 +33,7 @@ struct SkipRestIntent: AppIntent {
     func perform() async throws -> some IntentResult {
         SharedStore.shared.update(FitnessState.self) { $0.skipRest() }
         refreshWidgets()
+        await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
         return .result()
     }
 }

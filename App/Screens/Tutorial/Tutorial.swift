@@ -88,7 +88,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         case .create:
             "Choisis un univers, la taille et tes widgets, puis « Personnaliser » les ouvre dans le Studio."
         case .studio:
-            "Thème & style, couleur principale, palettes, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :"
+            "Thème, style, couleur principale, palettes, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :"
         case .store:
             "Des widgets prêts à l'emploi, des packs et des écrans d'accueil complets. Tout s'ouvre dans le Studio pour être personnalisé."
         case .mine:

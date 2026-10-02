@@ -387,6 +387,56 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertEqual(app.state, .runningForeground)
     }
 
+    /// Nutrition: the settings at the bottom change the same data as « Mes informations », and the
+    /// gender stays visible after a choice, so a wrong tap can be fixed.
+    func testNutritionSettingsAreEditedInPlaceAndTheGenderCanBeChanged() {
+        launch(["-screenshotScreen", "app-nutrition"])
+        tap(app.buttons["miniapp-settings-edit"], "Modifier mes paramètres")
+        let female = app.buttons["gender-female"]
+        tap(female, "Genre Femme")
+        let nonBinary = app.buttons["gender-nonBinary"]
+        reveal(nonBinary, "Genre Non binaire")
+        XCTAssertTrue(female.exists, "Les choix de genre restent affichés après un choix")
+        nonBinary.tap()
+        XCTAssertTrue(nonBinary.isSelected || (nonBinary.value as? String) == "1" || app.buttons["gender-reference-neutral"].waitForExistence(timeout: 4),
+                      "Le nouveau choix est pris")
+        XCTAssertTrue(app.buttons["gender-reference-neutral"].waitForExistence(timeout: 4), "Une référence de calcul est proposée")
+        snapshot("nutrition-settings")
+        tap(female, "Genre Femme")
+        XCTAssertFalse(app.buttons["gender-reference-neutral"].exists, "Femme n'a pas besoin de référence")
+    }
+
+    /// « Mon Quotidien »: a swipe changes what a card shows.
+    func testAMonQuotidienCardShowsAnotherViewWhenSwiped() {
+        launch(["-screenshotScreen", "home"])
+        let pager = app.descendants(matching: .any)["daily-pager-nutrition"]
+        XCTAssertTrue(pager.waitForExistence(timeout: 12), "La carte Nutrition doit pouvoir changer de vue")
+        let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
+        XCTAssertTrue(dots.exists)
+        XCTAssertTrue(dots.label.contains("Vue 1 sur 3"), dots.label)
+        pager.swipeLeft()
+        XCTAssertTrue(app.descendants(matching: .any)["daily-nutrition-meals"].waitForExistence(timeout: 4), "Le glissement montre les repas")
+        XCTAssertTrue(dots.label.contains("Vue 2 sur 3"), dots.label)
+        snapshot("daily-swiped")
+        // Kept for the next launch.
+        app.terminate()
+        app.launchArguments = ["-screenshotScreen", "home-info"]
+        app.launch()
+        XCTAssertTrue(app.descendants(matching: .any)["daily-nutrition-meals"].waitForExistence(timeout: 12), "La vue choisie est gardée")
+    }
+
+    /// Créer: the Lock Screen category lists its widgets, marks the interactive ones and shows the live workout.
+    func testTheLockScreenCategoryShowsItsWidgets() {
+        launch(["-screenshotScreen", "spaces"])
+        tap(app.buttons["create-lockscreen"], "Écran verrouillé")
+        XCTAssertTrue(app.descendants(matching: .any)["lock-creator"].waitForExistence(timeout: 6))
+        XCTAssertTrue(app.descendants(matching: .any)["lock-workout-preview"].waitForExistence(timeout: 4), "La séance en direct est présentée")
+        snapshot("lock-creator")
+        tap(app.switches["lock-interactive-filter"], "Filtre interactifs")
+        reveal(app.buttons["lock-nextSet"], "Prochaine série (écran verrouillé)")
+        XCTAssertFalse(app.buttons["lock-weather"].exists, "Le filtre ne garde que les widgets interactifs")
+    }
+
     func testHomeListsTheMiniAppsAndTheWeatherOpens() {
         launch(["-screenshotScreen", "home"])
         reveal(app.buttons["mini-apps-all"], "« Mes mini-apps » sur l'accueil")

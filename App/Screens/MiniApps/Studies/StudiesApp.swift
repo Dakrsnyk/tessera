@@ -92,6 +92,7 @@ struct StudiesAppView: View {
                 semester(state: state, now: now)
             }
             more(state: state, now: now)
+            MiniAppSettingsSection(app: .studies)
         }
         .navigationTitle("Études")
         .navigationBarTitleDisplayMode(.large)

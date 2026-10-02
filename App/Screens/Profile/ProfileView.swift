@@ -19,6 +19,7 @@ struct ProfileView: View {
     @State private var notificationStatus = "—"
     @Environment(\.openURL) private var openURL
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.requestReview) private var requestReview
 
     var body: some View {
         NavigationStack {
@@ -145,6 +146,12 @@ struct ProfileView: View {
                         Label("Revoir le tutoriel", systemImage: "graduationcap")
                     }
                     .accessibilityIdentifier("settings-tutorial")
+                    Button {
+                        rate()
+                    } label: {
+                        Label("Noter Tessera", systemImage: "star")
+                    }
+                    .accessibilityIdentifier("settings-rate")
                     Button {
                         UIPasteboard.general.string = PremiumConfiguration.supportEmail
                         copiedEmail = true
@@ -283,6 +290,16 @@ struct ProfileView: View {
                 Label("Ajouter mon anniversaire", systemImage: "gift")
             }
         }
+    }
+
+    /// The App Store's review page when the app is published, else Apple's rating prompt.
+    private func rate() {
+        if let id = PremiumConfiguration.appStoreID, let url = URL(string: "https://apps.apple.com/app/id\(id)?action=write-review") {
+            openURL(url)
+        } else {
+            requestReview()
+        }
+        model.updateSettings { ReviewPrompt.markAsked(&$0) }
     }
 
     @ViewBuilder private var premiumSection: some View {

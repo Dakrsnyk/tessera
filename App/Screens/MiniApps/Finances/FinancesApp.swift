@@ -88,6 +88,7 @@ struct FinancesAppView: View {
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            MiniAppSettingsSection(app: .finances)
         }
         .navigationTitle("Finances")
         .navigationBarTitleDisplayMode(.large)

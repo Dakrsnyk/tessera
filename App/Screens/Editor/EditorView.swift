@@ -293,8 +293,10 @@ struct WidgetStudio: View {
             }
             StudioElementsPanel(design: edited, tile: input.tile)
             if !isNew && designs.count == 1 { deleteButton }
+        case .theme:
+            StudioThemePanel(design: edited, input: input)
         case .style:
-            StudioLookPanel(design: edited, input: input)
+            StudioStylePanel(design: edited, input: input)
         case .colors:
             StudioColorsPanel(design: edited, input: input)
         case .background:

@@ -19,6 +19,8 @@ struct SpaceBuilderView: View {
     /// Test builds: the size or selection asked for by a capture is applied once, not again on coming
     /// back from « Mes données ».
     @State private var appliedCaptureOptions = false
+    /// Only the widgets usable without opening the app.
+    @State private var onlyInteractive = false
     /// The look every widget of the creation starts with (the space's first widget's), so they match.
     private let themeID: ThemeID
     private let accentHex: String
@@ -272,11 +274,26 @@ struct SpaceBuilderView: View {
 
     private var widgetsSection: some View {
         EditorSection(title: "Widgets", detail: widgetsDetail) {
+            if kinds.contains(where: \.isInteractive) {
+                Toggle(isOn: $onlyInteractive.animation(.snappy)) {
+                    HStack(spacing: 6) {
+                        InteractiveBadge()
+                        Text("Seulement les widgets interactifs")
+                            .font(.subheadline)
+                    }
+                }
+                .tint(.accentColor)
+                .accessibilityIdentifier("builder-interactive-filter")
+            }
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], alignment: .leading, spacing: 14) {
-                ForEach(kinds) { kind in
+                ForEach(kinds.filter { !onlyInteractive || $0.isInteractive || selection.contains($0) }) { kind in
                     kindCell(kind)
                 }
             }
+            Text("\(Image(systemName: "hand.tap.fill")) Interactif : s'utilise depuis l'écran d'accueil, sans ouvrir l'app (valider, cocher, ajouter, scanner).")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -325,6 +342,9 @@ struct SpaceBuilderView: View {
                         .foregroundStyle(isSelected ? .primary : .secondary)
                         .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
+                    if kind.isInteractive {
+                        InteractiveBadge()
+                    }
                     if kind.isPremium && !model.isPremium {
                         Image(systemName: "lock.fill")
                             .font(.system(size: 9, weight: .bold))

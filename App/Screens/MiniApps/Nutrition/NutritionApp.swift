@@ -47,6 +47,7 @@ struct NutritionAppView: View {
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            MiniAppSettingsSection(app: .nutrition)
         }
         .navigationTitle("Nutrition")
         .navigationBarTitleDisplayMode(.large)

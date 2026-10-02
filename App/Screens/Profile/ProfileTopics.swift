@@ -184,6 +184,53 @@ struct ProfileTextField: View {
     }
 }
 
+// MARK: - Gender
+
+/// The gender, always visible with the current choice highlighted, so a wrong tap can be fixed.
+/// Tapping the chosen answer again clears it. Non-binary answers pick the reference used by the
+/// calorie formula (the average by default).
+struct GenderPicker: View {
+    @Environment(AppModel.self) private var model
+
+    private var profile: UserProfile { model.profile }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Genre")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.secondary)
+            FlowLayout {
+                ForEach(BodySex.allCases) { sex in
+                    ChoiceChip(title: sex.title, isSelected: profile.sex == sex) {
+                        model.update(\.profile) { $0.sex = $0.sex == sex ? nil : sex }
+                    }
+                    .accessibilityIdentifier("gender-\(sex.rawValue)")
+                }
+            }
+            if profile.sex == .other {
+                ProfileTextField(placeholder: "Précise si tu veux (facultatif)", text: Binding(
+                    get: { model.profile.genderDetail },
+                    set: { value in model.update(\.profile) { $0.genderDetail = value } }
+                ), identifier: "gender-detail")
+            }
+            if let sex = profile.sex, !sex.isBinary {
+                Text("Pour estimer tes calories, Tessera utilise :")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                FlowLayout {
+                    ForEach([NutritionCalculator.Sex.neutral, .female, .male]) { reference in
+                        ChoiceChip(title: reference.title, isSelected: (profile.calculationSex ?? .neutral) == reference) {
+                            model.update(\.profile) { $0.calculationSex = reference == .neutral ? nil : reference }
+                        }
+                        .accessibilityIdentifier("gender-reference-\(reference.rawValue)")
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
 // MARK: - A topic's questions
 
 struct TopicForm: View {
@@ -193,6 +240,7 @@ struct TopicForm: View {
     @State private var newTask = ""
     @State private var newHabit = ""
     @State private var showsCityPicker = false
+    @State private var asksBody = false
 
     var body: some View {
         VStack(spacing: 12) {
@@ -207,6 +255,9 @@ struct TopicForm: View {
             case .weather: weather
             case .wellbeing: wellbeing
             }
+        }
+        .onAppear {
+            if model.age == nil || profile.heightCm == nil || profile.weightKg == nil { asksBody = true }
         }
     }
 
@@ -236,18 +287,12 @@ struct TopicForm: View {
     }
 
     /// Age, height and weight side by side (also used by the nutrition calculation).
-    private func bodyFields(only missing: Bool = false) -> some View {
+    private func bodyFields() -> some View {
         HStack(spacing: 8) {
-            if !missing || model.age == nil {
-                ProfileNumberField(title: "Âge", unit: "ans", value: ageBinding, decimals: false, identifier: "profile-age")
-                    .disabled(model.life.birthday != nil)
-            }
-            if !missing || profile.heightCm == nil {
-                ProfileNumberField(title: "Taille", unit: "cm", value: heightBinding, decimals: false, identifier: "profile-height")
-            }
-            if !missing || profile.weightKg == nil {
-                ProfileNumberField(title: "Poids", unit: "kg", value: weightBinding, identifier: "profile-weight")
-            }
+            ProfileNumberField(title: "Âge", unit: "ans", value: ageBinding, decimals: false, identifier: "profile-age")
+                .disabled(model.life.birthday != nil)
+            ProfileNumberField(title: "Taille", unit: "cm", value: heightBinding, decimals: false, identifier: "profile-height")
+            ProfileNumberField(title: "Poids", unit: "kg", value: weightBinding, identifier: "profile-weight")
         }
     }
 
@@ -288,7 +333,10 @@ struct TopicForm: View {
             }
         }
         QuestionCard(title: "Toi", detail: model.life.birthday != nil ? "L'âge vient de ton anniversaire (Ma vie)." : "Le poids sert aussi à estimer les calories brûlées.") {
-            bodyFields()
+            VStack(alignment: .leading, spacing: 10) {
+                bodyFields()
+                GenderPicker()
+            }
         }
     }
 
@@ -339,16 +387,12 @@ struct TopicForm: View {
         let result = activity.flatMap { model.calculatedNutritionGoals(activity: $0) }
         return QuestionCard(title: "Calculer pour moi", detail: "Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.") {
             VStack(alignment: .leading, spacing: 10) {
-                if model.age == nil || profile.heightCm == nil || profile.weightKg == nil {
-                    bodyFields(only: true)
+                // Shown when something was missing as the card appeared, and kept while the user types
+                // (a field never disappears under their fingers).
+                if asksBody {
+                    bodyFields()
                 }
-                if profile.sex == nil {
-                    FlowLayout {
-                        ForEach(BodySex.allCases) { sex in
-                            ChoiceChip(title: sex.title, isSelected: false) { toggle(\.sex, sex) }
-                        }
-                    }
-                }
+                GenderPicker()
                 if model.activityFromWorkouts == nil {
                     FlowLayout {
                         ForEach(NutritionCalculator.Activity.allCases) { level in
@@ -359,7 +403,7 @@ struct TopicForm: View {
                     }
                 }
                 Button {
-                    if let result { model.setNutritionGoals(result) }
+                    if let result, let activity { model.setNutritionGoals(result, calculatedWith: activity) }
                 } label: {
                     Label("Calculer mes objectifs", systemImage: "wand.and.stars")
                         .font(.subheadline.weight(.semibold))

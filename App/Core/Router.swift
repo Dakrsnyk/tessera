@@ -58,6 +58,8 @@ final class Router {
     var requestedCreator: Space?
     var startsSelection = false
     var startsFusion = false
+    /// Créer opened on its « Écran verrouillé » category.
+    var showsLockScreenCreator = false
     /// Set when a new widget is saved, so the guide opens once the editor has closed.
     var showsAddGuideAfterEditor = false
     var lastSavedName: String?

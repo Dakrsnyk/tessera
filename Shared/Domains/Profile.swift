@@ -240,21 +240,29 @@ enum NutritionAim: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+/// The user's gender as they describe it. It can be changed at any time.
 enum BodySex: String, Codable, CaseIterable, Identifiable {
-    case female, male
+    case female, male, nonBinary, other, undisclosed
     var id: String { rawValue }
 
     var title: String {
         switch self {
         case .female: "Femme"
         case .male: "Homme"
+        case .nonBinary: "Non binaire"
+        case .other: "Autre"
+        case .undisclosed: "Je préfère ne pas répondre"
         }
     }
+
+    /// Whether the calorie formula can use it directly (else the user's chosen reference, or the average).
+    var isBinary: Bool { self == .female || self == .male }
 
     var calculatorSex: NutritionCalculator.Sex {
         switch self {
         case .female: .female
         case .male: .male
+        case .nonBinary, .other, .undisclosed: .neutral
         }
     }
 }
@@ -280,6 +288,10 @@ struct UserProfile: Codable, Hashable {
     /// Every weight given, one per day (the last one of the day wins): Nutrition and Fitness draw it.
     var weightLog: [ValuePoint] = []
     var sex: BodySex?
+    /// Free words when the user chose « Autre » (optional).
+    var genderDetail = ""
+    /// For non-binary answers: the reference the calorie formula uses (nil = the average of both).
+    var calculationSex: NutritionCalculator.Sex?
 
     // Sport (the workouts per week are `FitnessState.weeklyGoal`).
     var fitnessGoal: FitnessGoal?
@@ -289,6 +301,9 @@ struct UserProfile: Codable, Hashable {
 
     // Nutrition (the daily targets are `NutritionState.goals`).
     var nutritionAim: NutritionAim?
+    /// Set when the daily targets come from « Calculer pour moi » (with this activity): they then follow
+    /// the weight, the age, the height, the aim… Typing a target by hand clears it.
+    var calculatedActivity: NutritionCalculator.Activity?
 
     // Money (the monthly budget is `BudgetState.monthlyBudget`).
     var monthlyIncome: Double?
@@ -311,8 +326,9 @@ struct UserProfile: Codable, Hashable {
     var migrated = false
 
     enum CodingKeys: String, CodingKey {
-        case lastName, interests, skippedTopics, birthYear, heightCm, weightKg, weightLog, sex, fitnessGoal, fitnessLevel, stepGoal
-        case nutritionAim, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
+        case lastName, interests, skippedTopics, birthYear, heightCm, weightKg, weightLog, sex, genderDetail, calculationSex
+        case fitnessGoal, fitnessLevel, stepGoal
+        case nutritionAim, calculatedActivity, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
         case businessClients, studyField, weeklyStudyHours, provided, migrated
     }
 
@@ -329,10 +345,13 @@ struct UserProfile: Codable, Hashable {
         weightKg = c.optional(.weightKg)
         weightLog = c.value(.weightLog, [])
         sex = c.optional(.sex)
+        genderDetail = c.value(.genderDetail, "")
+        calculationSex = c.optional(.calculationSex)
         fitnessGoal = c.optional(.fitnessGoal)
         fitnessLevel = c.optional(.fitnessLevel)
         stepGoal = c.optional(.stepGoal)
         nutritionAim = c.optional(.nutritionAim)
+        calculatedActivity = c.optional(.calculatedActivity)
         monthlyIncome = c.optional(.monthlyIncome)
         monthlySavingsGoal = c.optional(.monthlySavingsGoal)
         mainExpenses = c.value(.mainExpenses, [])
@@ -346,6 +365,12 @@ struct UserProfile: Codable, Hashable {
     }
 
     func knows(_ fact: ProvidedFact) -> Bool { provided.contains(fact) }
+
+    /// The reference for the calorie formula: the gender itself when binary, else the chosen reference or the average.
+    var calculatorSex: NutritionCalculator.Sex? {
+        guard let sex else { return nil }
+        return sex.isBinary ? sex.calculatorSex : (calculationSex ?? .neutral)
+    }
 
     /// Sets the weight and keeps it in the history (one value a day).
     mutating func recordWeight(_ kilograms: Double?, at date: Date = Date()) {

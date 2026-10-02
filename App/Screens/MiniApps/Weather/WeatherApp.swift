@@ -37,6 +37,7 @@ struct WeatherAppView: View {
             Text("Données météo : Open-Meteo.com (CC BY 4.0).")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
+            MiniAppSettingsSection(app: .weather)
         }
         .navigationTitle("Météo")
         .navigationBarTitleDisplayMode(.large)

@@ -217,6 +217,9 @@ struct TemplateCard: View {
                         .lineLimit(1)
                 }
                 Spacer(minLength: 0)
+                if template.kind.isInteractive {
+                    InteractiveBadge()
+                }
                 if template.isPremium && !isPremiumUser {
                     PremiumBadge(compact: true)
                 }
@@ -321,5 +324,27 @@ extension WidgetFamily {
     var aspectRatio: CGFloat {
         let size = WidgetMetrics.size(self)
         return size.width / size.height
+    }
+}
+
+/// Marks a widget that can be used without opening the app (a button, a toggle, the scanner).
+struct InteractiveBadge: View {
+    var showsText = false
+
+    var body: some View {
+        HStack(spacing: 3) {
+            Image(systemName: "hand.tap.fill")
+                .font(.system(size: 9, weight: .bold))
+            if showsText {
+                Text("Interactif")
+                    .font(.system(size: 10, weight: .bold))
+            }
+        }
+        .foregroundStyle(Color(light: "1E5BD6", dark: "8DB4FF"))
+        .padding(.horizontal, showsText ? 7 : 5)
+        .padding(.vertical, 3)
+        .background(Color(light: "E3EDFF", dark: "1D2C4A"), in: Capsule())
+        .accessibilityElement()
+        .accessibilityLabel(Text("Interactif"))
     }
 }

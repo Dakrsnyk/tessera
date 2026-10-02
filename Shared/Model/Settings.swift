@@ -78,11 +78,19 @@ struct AppSettings: Codable, Hashable {
     var hasCompletedProfileSetup = false
     /// The step-by-step tutorial shown after the first questions has been seen (or skipped).
     var hasSeenTutorial = false
+    /// Opens of the app (at most one every few hours), for the rating request.
+    var openCount = 0
+    var lastCountedOpen: Date?
+    /// The major version for which Tessera already asked for a rating (asked once per major version).
+    var reviewRequestedVersion: String?
+    /// The view chosen on each « Mon Quotidien » card (swiped left or right), by card.
+    var dailyCardPages: [String: Int] = [:]
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
         case hasCompletedOnboarding, hydrationReminders
         case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
+        case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
     }
 
     init() {}
@@ -103,6 +111,10 @@ struct AppSettings: Codable, Hashable {
         hasCompletedProfileSetup = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedProfileSetup)) ?? false
         // Installs from before the tutorial: those who already know the app aren't shown it (Réglages has it).
         hasSeenTutorial = (try? c.decodeIfPresent(Bool.self, forKey: .hasSeenTutorial)) ?? hasCompletedOnboarding
+        openCount = (try? c.decodeIfPresent(Int.self, forKey: .openCount)) ?? 0
+        lastCountedOpen = try? c.decodeIfPresent(Date.self, forKey: .lastCountedOpen)
+        reviewRequestedVersion = try? c.decodeIfPresent(String.self, forKey: .reviewRequestedVersion)
+        dailyCardPages = (try? c.decodeIfPresent([String: Int].self, forKey: .dailyCardPages)) ?? [:]
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

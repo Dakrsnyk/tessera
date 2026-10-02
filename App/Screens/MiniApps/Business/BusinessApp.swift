@@ -141,6 +141,7 @@ struct BusinessAppView: View {
             metrics(state: state)
             curve(state: state, now: now)
             more(state: state)
+            MiniAppSettingsSection(app: .business)
         }
         .navigationTitle(state.name.isEmpty ? "Business" : state.name)
         .navigationBarTitleDisplayMode(.large)

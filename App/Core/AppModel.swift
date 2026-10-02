@@ -103,6 +103,14 @@ final class AppModel {
         change(&value)
         self[keyPath: keyPath] = value
         store.save(value)
+        // Targets calculated from the body follow it (a new weight, a new aim, more workouts…).
+        if T.self == UserProfile.self || T.self == FitnessState.self || T.self == LifeState.self {
+            followCalculatedNutritionGoals()
+        }
+        // The workout on the Lock Screen follows the session (started, set done, rest, finished).
+        if let fitness = value as? FitnessState {
+            Task { await WorkoutLiveActivity.sync(fitness) }
+        }
         scheduleWidgetReload()
     }
 
@@ -298,6 +306,14 @@ final class AppModel {
     var canAddHabit: Bool { isPremium || content.habits.count < Self.freeHabitLimit }
 
     // MARK: Settings
+
+    /// An opening of the app, for the rating request (not counted in review captures).
+    func countOpen(at date: Date = Date()) {
+        #if DEBUG
+        if ScreenshotMode.isActive { return }
+        #endif
+        updateSettings { ReviewPrompt.countOpen(&$0, at: date) }
+    }
 
     func updateSettings(_ change: (inout AppSettings) -> Void) {
         let before = settings
@@ -588,12 +604,34 @@ extension AppModel {
         if protein != nil { facts.append(.proteinTarget) }
         if carbs != nil { facts.append(.carbsTarget) }
         if fat != nil { facts.append(.fatTarget) }
-        if !facts.isEmpty { update(\.profile) { $0.provided.formUnion(facts) } }
+        // A target typed by hand is the user's own: it no longer follows the calculation.
+        if !facts.isEmpty { update(\.profile) { $0.provided.formUnion(facts); $0.calculatedActivity = nil } }
     }
 
-    func setNutritionGoals(_ goals: NutritionGoals) {
+    /// Targets the user set or accepted. `calculatedWith` is the activity of « Calculer pour moi »:
+    /// such targets are then recalculated whenever the body data they come from changes.
+    func setNutritionGoals(_ goals: NutritionGoals, calculatedWith activity: NutritionCalculator.Activity? = nil) {
         update(\.nutrition) { $0.goals = goals }
         markProvided(.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget)
+        if profile.calculatedActivity != activity {
+            update(\.profile) { $0.calculatedActivity = activity }
+        }
+    }
+
+    /// Recalculates targets that came from the calculator, when what they depend on changed.
+    func followCalculatedNutritionGoals() {
+        guard let stored = profile.calculatedActivity else { return }
+        let activity = activityFromWorkouts ?? stored
+        guard let fresh = calculatedNutritionGoals(activity: activity) else { return }
+        let current = nutrition.goals
+        guard fresh.kcal != current.kcal || fresh.protein != current.protein || fresh.carbs != current.carbs || fresh.fat != current.fat else { return }
+        var goals = current
+        goals.kcal = fresh.kcal
+        goals.protein = fresh.protein
+        goals.carbs = fresh.carbs
+        goals.fat = fresh.fat
+        nutrition.goals = goals
+        store.save(nutrition)
     }
 
     func setWeeklyWorkouts(_ count: Int) {
@@ -647,9 +685,9 @@ extension AppModel {
 
     /// Nutrition targets from the profile (Mifflin-St Jeor), when age, height, weight and sex are known.
     func calculatedNutritionGoals(activity: NutritionCalculator.Activity) -> NutritionGoals? {
-        guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.sex else { return nil }
+        guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.calculatorSex else { return nil }
         return NutritionCalculator.goals(
-            sex: sex.calculatorSex, age: age, heightCm: height, weightKg: weight,
+            sex: sex, age: age, heightCm: height, weightKg: weight,
             activity: activity, goal: (profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim ?? .maintain).calculatorGoal
         )
     }

@@ -91,15 +91,34 @@ private struct DailyTileView: View {
 
     var body: some View {
         switch tile {
-        case let .nutrition(nutrition): NutritionDayTile(nutrition: nutrition)
-        case let .workout(workout): WorkoutDayTile(workout: workout)
+        case let .nutrition(nutrition):
+            DailyPager(id: "nutrition", titles: ["Aujourd'hui", "Repas", "7 jours"], accentHex: "F08A24") { page in
+                switch page {
+                case 1: NutritionMealsTile(nutrition: nutrition)
+                case 2: NutritionWeekTile(nutrition: nutrition)
+                default: NutritionDayTile(nutrition: nutrition)
+                }
+            }
+        case let .workout(workout):
+            DailyPager(id: "workout", titles: ["Séance", "Semaine"], accentHex: "E5484D") { page in
+                if page == 1 { WorkoutWeekTile() } else { WorkoutDayTile(workout: workout) }
+            }
         case let .classes(title, items): TimedListTile(title: title, symbol: "graduationcap.fill", colorHex: "D6409F", items: items, space: .student)
         case let .agenda(title, items): TimedListTile(title: title, symbol: "calendar", colorHex: "3366FF", items: items, space: .productivity)
         case let .habits(done, items): HabitsDayTile(done: done, items: items)
-        case let .water(glasses, goal): WaterDayTile(glasses: glasses, goal: goal)
-        case let .steps(steps, goal): StepsDayTile(steps: steps, goal: goal)
+        case let .water(glasses, goal):
+            DailyPager(id: "water", titles: ["Aujourd'hui", "7 jours"], accentHex: "3A8DDE") { page in
+                if page == 1 { WaterWeekTile(goal: goal) } else { WaterDayTile(glasses: glasses, goal: goal) }
+            }
+        case let .steps(steps, goal):
+            DailyPager(id: "steps", titles: ["Aujourd'hui", "7 jours"], accentHex: "12A4B5") { page in
+                if page == 1 { StepsWeekTile(goal: goal) } else { StepsDayTile(steps: steps, goal: goal) }
+            }
         case let .budget(spent, perDay): BudgetDayTile(spent: spent, perDayLeft: perDay)
-        case let .weather(snapshot): WeatherDayTile(weather: snapshot)
+        case let .weather(snapshot):
+            DailyPager(id: "weather", titles: ["Maintenant", "Prochaines heures"], accentHex: "3A8DDE") { page in
+                if page == 1 { WeatherHoursTile(weather: snapshot) } else { WeatherDayTile(weather: snapshot) }
+            }
         case let .reminders(items): RemindersDayTile(items: items)
         case let .priorities(items): PrioritiesDayTile(items: items)
         case let .invite(area): InviteDayTile(area: area)
@@ -666,5 +685,172 @@ private struct InviteDayTile: View {
         case .productivity: "Ajoute tes tâches ou ton top 3 du jour."
         default: area.items.first?.purpose ?? ""
         }
+    }
+}
+
+// MARK: - Other views of the cards (swiped left or right)
+
+private struct NutritionMealsTile: View {
+    let nutrition: DailyBrief.Nutrition
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let state = model.nutrition
+        DayCard(title: "Repas du jour", symbol: "fork.knife", colorHex: "F08A24", route: .app(.nutrition)) {
+            VStack(spacing: 6) {
+                ForEach(MealType.allCases) { meal in
+                    let kcal = NutritionMath.totals(of: meal, state, on: Date()).kcal
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(meal.title)
+                            .font(.subheadline.weight(kcal > 0 ? .semibold : .regular))
+                        Spacer()
+                        Text(kcal > 0 ? "\(TF.int(kcal)) kcal" : "—")
+                            .font(.subheadline)
+                            .monospacedDigit()
+                            .foregroundStyle(kcal > 0 ? .primary : .secondary)
+                    }
+                }
+                Divider()
+                HStack {
+                    Text("Total").font(.subheadline.weight(.bold))
+                    Spacer()
+                    Text(nutrition.knowsKcal ? "\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal)) kcal" : "\(TF.int(nutrition.eaten.kcal)) kcal")
+                        .font(.subheadline.weight(.bold))
+                        .monospacedDigit()
+                }
+            }
+        }
+        .accessibilityIdentifier("daily-nutrition-meals")
+    }
+}
+
+private struct NutritionWeekTile: View {
+    let nutrition: DailyBrief.Nutrition
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let days = NutritionMath.dailyCalories(model.nutrition, days: 7, until: Date())
+        let logged = days.filter { $0 > 0 }
+        DayCard(title: "Calories · 7 jours", symbol: "chart.bar.fill", colorHex: "F08A24", route: .page(.nutritionHistory)) {
+            DailyWeekBars(values: days, goal: nutrition.knowsKcal ? nutrition.goals.kcal : nil, colorHex: "F08A24")
+            Text(logged.isEmpty ? "Rien noté cette semaine" : "Moyenne : \(TF.int(logged.reduce(0, +) / Double(logged.count))) kcal par jour noté")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .accessibilityIdentifier("daily-nutrition-week")
+    }
+}
+
+private struct WorkoutWeekTile: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let state = model.fitness
+        let now = Date()
+        let week = DateMath.calendar.dateInterval(of: .weekOfYear, for: now)
+        let done = FitnessMath.sessions(state).filter { session in
+            session.isFinished && (week?.contains(session.start) ?? false)
+        }
+        let goal = state.weeklyGoal
+        DayCard(title: "Cette semaine", symbol: "calendar", colorHex: "E5484D", isDark: true, route: .space(.fitness)) {
+            HStack(alignment: .firstTextBaseline, spacing: 2) {
+                Text("\(done.count)")
+                    .font(.title.weight(.bold))
+                Text("/\(goal) séances")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.white.opacity(0.7))
+            }
+            HStack(spacing: 4) {
+                ForEach(0..<7, id: \.self) { offset in
+                    let day = week.flatMap { DateMath.calendar.date(byAdding: .day, value: offset, to: $0.start) } ?? now
+                    let trained = done.contains { DateMath.isSameDay($0.start, day) }
+                    Circle()
+                        .fill(trained ? Color(hex: "FF8A8D") : Color.white.opacity(DateMath.isSameDay(day, now) ? 0.45 : 0.18))
+                        .frame(width: 12, height: 12)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            Text(done.count >= goal ? "Objectif de la semaine atteint" : "Encore \(Fmt.plural(goal - done.count, "séance", "séances"))")
+                .font(.caption)
+                .foregroundStyle(.white.opacity(0.75))
+        }
+        .accessibilityIdentifier("daily-workout-week")
+    }
+}
+
+private struct WaterWeekTile: View {
+    let goal: Int?
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let hydration = model.content.hydration
+        let values = (0..<7).reversed().map { offset in
+            Double(hydration.glasses(on: DateMath.calendar.date(byAdding: .day, value: -offset, to: Date()) ?? Date()))
+        }
+        DayCard(title: "Eau · 7 jours", symbol: "drop.fill", colorHex: "3A8DDE") {
+            DailyWeekBars(values: values, goal: goal.map(Double.init), colorHex: "3A8DDE", height: 44)
+            if let goal {
+                let reached = values.filter { $0 >= Double(goal) }.count
+                Text("Objectif atteint \(Fmt.plural(reached, "jour", "jours")) sur 7")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .accessibilityIdentifier("daily-water-week")
+    }
+}
+
+private struct StepsWeekTile: View {
+    let goal: Int?
+    private var counter: StepCounter { .shared }
+
+    var body: some View {
+        let days = counter.week.suffix(7)
+        let values = days.map { Double($0.steps) }
+        DayCard(title: "Pas · 7 jours", symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
+            if values.isEmpty {
+                Text("La semaine apparaîtra ici.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } else {
+                DailyWeekBars(values: Array(values), goal: goal.map(Double.init), colorHex: "12A4B5", height: 44)
+                Text("Moyenne : \(Fmt.number(Int(values.reduce(0, +) / Double(values.count)))) pas")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .task { await counter.refreshWeek() }
+        .accessibilityIdentifier("daily-steps-week")
+    }
+}
+
+private struct WeatherHoursTile: View {
+    let weather: WeatherSnapshot
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let now = Date()
+        let hours = weather.hourly.filter { $0.date > now }.prefix(5)
+        DayCard(title: "Prochaines heures", symbol: "clock", colorHex: "3A8DDE", route: .app(.weather)) {
+            HStack(alignment: .top, spacing: 4) {
+                ForEach(Array(hours), id: \.date) { hour in
+                    VStack(spacing: 4) {
+                        Text(Fmt.time(hour.date, uses24Hour: model.settings.uses24HourClock))
+                            .font(.system(size: 10, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+                        WeatherGlyph(code: hour.code, isDay: hour.isDay)
+                            .font(.callout)
+                        Text(Fmt.temperature(hour.temperature, unit: model.settings.temperatureUnit))
+                            .font(.caption.weight(.semibold))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+        }
+        .accessibilityIdentifier("daily-weather-hours")
     }
 }

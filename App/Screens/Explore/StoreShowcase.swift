@@ -286,6 +286,9 @@ struct LockShowcaseCard: View {
                     .font(.subheadline.weight(.semibold))
                     .lineLimit(1)
                 Spacer(minLength: 0)
+                if design.kind.isInteractive {
+                    InteractiveBadge()
+                }
                 if design.kind.isPremium && !isPremiumUser {
                     PremiumBadge(compact: true)
                 }

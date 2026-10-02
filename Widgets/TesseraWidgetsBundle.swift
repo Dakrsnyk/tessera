@@ -21,6 +21,7 @@ struct TesseraWidgetsBundle: WidgetBundle {
         LifeGroups().body
         DomainGroups().body
         MoreGroups().body
+        WorkoutLiveActivityWidget()
     }
 }
 
