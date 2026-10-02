@@ -9,7 +9,8 @@ final class ExerciseDemoTests: XCTestCase {
             let demo = try XCTUnwrap(ExerciseDemos.demo(for: exercise.id), exercise.id)
             XCTAssertFalse(demo.views.isEmpty, exercise.id)
             XCTAssertFalse(demo.prims.isEmpty, exercise.id)
-            XCTAssertGreaterThan(demo.duration, 0.9, exercise.id)
+            // A loop (a stride, a skip) can be short; a repetition takes at least a second.
+            XCTAssertGreaterThan(demo.duration, demo.loop ? 0.4 : 0.9, exercise.id)
             XCTAssertLessThan(demo.duration, 16, exercise.id)
             for view in demo.views {
                 XCTAssertEqual(view.box.count, 4, exercise.id)

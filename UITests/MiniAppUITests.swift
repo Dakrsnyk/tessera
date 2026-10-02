@@ -422,7 +422,9 @@ final class MiniAppUITests: XCTestCase {
         app.terminate()
         app.launchArguments = ["-screenshotScreen", "home-info"]
         app.launch()
-        XCTAssertTrue(app.descendants(matching: .any)["daily-nutrition-meals"].waitForExistence(timeout: 12), "La vue choisie est gardée")
+        let kept = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
+        XCTAssertTrue(kept.waitForExistence(timeout: 12))
+        XCTAssertTrue(kept.label.contains("Vue 2 sur 3"), "La vue choisie est gardée : \(kept.label)")
     }
 
     /// Créer: the Lock Screen category lists its widgets, marks the interactive ones and shows the live workout.
@@ -433,7 +435,12 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["lock-workout-preview"].waitForExistence(timeout: 4), "La séance en direct est présentée")
         snapshot("lock-creator")
         tap(app.switches["lock-interactive-filter"], "Filtre interactifs")
-        reveal(app.buttons["lock-nextSet"], "Prochaine série (écran verrouillé)")
+        var drags = 0
+        while !app.buttons["lock-nextSet"].exists && drags < 10 {
+            scrollDownOnce()
+            drags += 1
+        }
+        XCTAssertTrue(app.buttons["lock-nextSet"].exists, "Prochaine série (écran verrouillé) absente")
         XCTAssertFalse(app.buttons["lock-weather"].exists, "Le filtre ne garde que les widgets interactifs")
     }
 

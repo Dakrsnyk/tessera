@@ -81,7 +81,6 @@ struct MiniAppSettingsSection: View {
         let profile = model.profile
         switch app {
         case .nutrition:
-            if let weight = profile.weightKg { rows.append(("Poids", "\(TF.decimal(weight)) kg")) }
             if let height = profile.heightCm { rows.append(("Taille", "\(TF.int(height)) cm")) }
             if let aim = profile.nutritionAim { rows.append(("Objectif", aim.title)) }
             if profile.calculatedActivity != nil { rows.append(("Calcul", "Suit ton poids et ton activité")) }
@@ -95,7 +94,7 @@ struct MiniAppSettingsSection: View {
         default:
             break
         }
-        for item in app.settingsItems {
+        for item in app.settingsItems where !rows.contains(where: { $0.0 == item.title }) {
             if let value = model.summary(item) { rows.append((item.title, value)) }
         }
         return rows

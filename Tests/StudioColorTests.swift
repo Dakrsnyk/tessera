@@ -189,7 +189,8 @@ final class StudioColorTests: XCTestCase {
     }
 
     func testOldSectionNamesStillOpen() {
-        XCTAssertEqual(StudioSection(name: "themes"), .style)
+        XCTAssertEqual(StudioSection(name: "themes"), .theme)
+        XCTAssertEqual(StudioSection(name: "style"), .style)
         XCTAssertEqual(StudioSection(name: "colors"), .colors)
         XCTAssertNil(StudioSection(name: "layout"))
         XCTAssertFalse(StudioSection.allCases.map(\.rawValue).contains("depth"))

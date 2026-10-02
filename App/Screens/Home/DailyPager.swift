@@ -12,35 +12,47 @@ struct DailyPager<Content: View>: View {
     @ViewBuilder let content: (Int) -> Content
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var direction: CGFloat = 1
-    @State private var drag: CGFloat = 0
+    /// The page on screen, driven by the paging scroll view.
+    @State private var position: Int?
 
     private var count: Int { titles.count }
-    private var page: Int { min(max(0, model.settings.dailyCardPages[id] ?? 0), count - 1) }
+    private var saved: Int { min(max(0, model.settings.dailyCardPages[id] ?? 0), count - 1) }
+    private var page: Int { position ?? saved }
 
     var body: some View {
         VStack(spacing: 7) {
-            content(page)
-                .id(page)
-                .transition(transition)
-                .offset(x: reduceMotion ? 0 : drag * 0.25)
-                .frame(maxHeight: .infinity, alignment: .top)
-                .contentShape(Rectangle())
-                .simultaneousGesture(swipe)
+            // A horizontal paging scroll view: the system tells a sideways swipe from Home's vertical
+            // scroll, and taps on the card's buttons still work.
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 0) {
+                    ForEach(0..<count, id: \.self) { index in
+                        content(index)
+                            .frame(maxHeight: .infinity, alignment: .top)
+                            .containerRelativeFrame(.horizontal)
+                            .id(index)
+                    }
+                }
+                .scrollTargetLayout()
+            }
+            .scrollTargetBehavior(.paging)
+            .scrollPosition(id: $position)
+            .scrollClipDisabled(false)
+            .accessibilityIdentifier("daily-pager-\(id)")
             dots
         }
         .accessibilityElement(children: .contain)
         .accessibilityAction(named: Text("Vue suivante")) { go(by: 1) }
         .accessibilityAction(named: Text("Vue précédente")) { go(by: -1) }
-        .accessibilityIdentifier("daily-pager-\(id)")
-    }
-
-    private var transition: AnyTransition {
-        if reduceMotion { return .opacity }
-        return .asymmetric(
-            insertion: .offset(x: 40 * direction).combined(with: .opacity),
-            removal: .offset(x: -40 * direction).combined(with: .opacity)
-        )
+        .onAppear { if position == nil { position = saved } }
+        .onChange(of: position) { _, new in
+            guard let new, new != model.settings.dailyCardPages[id] ?? 0 else { return }
+            Haptics.tap()
+            model.updateSettings { $0.dailyCardPages[id] = new }
+        }
+        .onChange(of: model.settings.dailyCardPages[id]) { _, value in
+            let target = min(max(0, value ?? 0), count - 1)
+            if position != target { position = target }
+        }
     }
 
     private var dots: some View {
@@ -57,28 +69,11 @@ struct DailyPager<Content: View>: View {
         .accessibilityIdentifier("daily-pager-\(id)-dots")
     }
 
-    private var swipe: some Gesture {
-        DragGesture(minimumDistance: 24)
-            .onChanged { value in
-                // Only a clearly horizontal movement: the vertical scroll of Home keeps working.
-                guard abs(value.translation.width) > abs(value.translation.height) * 1.6 else { return }
-                drag = value.translation.width
-            }
-            .onEnded { value in
-                let horizontal = abs(value.translation.width) > abs(value.translation.height) * 1.6
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) { drag = 0 }
-                guard horizontal, abs(value.translation.width) > 44 else { return }
-                go(by: value.translation.width < 0 ? 1 : -1)
-            }
-    }
-
     private func go(by delta: Int) {
         guard count > 1 else { return }
         let next = (page + delta + count) % count
-        direction = delta > 0 ? 1 : -1
-        Haptics.tap()
         withAnimation(reduceMotion ? .easeInOut(duration: 0.2) : .spring(response: 0.38, dampingFraction: 0.86)) {
-            model.updateSettings { $0.dailyCardPages[id] = next }
+            position = next
         }
     }
 }

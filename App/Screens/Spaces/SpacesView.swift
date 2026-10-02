@@ -92,16 +92,16 @@ struct SpacesView: View {
                     universe = nil
                     showsLockScreen = false
                 }
+                filterChip("Écran verrouillé", symbol: "lock.fill", isOn: showsLockScreen) {
+                    withAnimation(.snappy) { showsLockScreen = true }
+                }
+                .accessibilityIdentifier("create-lockscreen")
                 ForEach(SpaceUniverse.allCases) { item in
                     filterChip(item.title, isOn: universe == item && !showsLockScreen) {
                         universe = item
                         showsLockScreen = false
                     }
                 }
-                filterChip("Écran verrouillé", symbol: "lock.fill", isOn: showsLockScreen) {
-                    withAnimation(.snappy) { showsLockScreen = true }
-                }
-                .accessibilityIdentifier("create-lockscreen")
             }
             .padding(.horizontal, 20)
         }
