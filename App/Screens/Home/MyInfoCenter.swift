@@ -270,7 +270,7 @@ struct InfoAreaView: View {
                         .foregroundStyle(.white)
                         .frame(width: 44, height: 44)
                         .background(Color(hex: area.colorHex), in: RoundedRectangle(cornerRadius: 13, style: .continuous))
-                    Text(users.isEmpty ? tr("Ce que tu renseignes ici servira à tes widgets \(area.title.lowercasedFirst) et à « Mon Quotidien ».") : tr("Utilisé par \(Fmt.plural(users.count, tr("de tes widgets"), tr("de tes widgets"))) : \(users.prefix(3).map(\.name).joined(separator: )", ")).")
+                    Text(users.isEmpty ? tr("Ce que tu renseignes ici servira à tes widgets \(area.title.lowercasedFirst) et à « Mon Quotidien ».") : tr("Utilisé par \(Fmt.plural(users.count, tr("de tes widgets"), tr("de tes widgets"))) : \(users.prefix(3).map(\.name).joined(separator: ", "))."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)

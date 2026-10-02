@@ -311,7 +311,7 @@ private struct WorkoutDayTile: View {
                 Text(exercise)
                     .font(.headline)
                     .lineLimit(1)
-                Text(tr("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("poids du corps)"))")
+                Text(tr("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("poids du corps"))"))
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.75))
                 if let restEndsAt, restEndsAt > Date() {
@@ -329,7 +329,7 @@ private struct WorkoutDayTile: View {
                 Text(workout.name)
                     .font(.title3.weight(.bold))
                     .lineLimit(1)
-                Label(tr("Faite · \(Fmt.plural(sets, tr("série"), tr("sér)ies")))", systemImage: "checkmark.circle.fill")
+                Label(tr("Faite · \(Fmt.plural(sets, tr("série"), tr("séries")))"), systemImage: "checkmark.circle.fill")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(Color(hex: "7FD6A8"))
                 if volume > 0 {
@@ -770,7 +770,7 @@ private struct WorkoutWeekTile: View {
                         .frame(maxWidth: .infinity)
                 }
             }
-            Text(done.count >= goal ? tr("Objectif de la semaine atteint") : tr("Encore \(Fmt.plural(goal - done.count, tr("séance"), tr("séan)ces")))")
+            Text(done.count >= goal ? tr("Objectif de la semaine atteint") : tr("Encore \(Fmt.plural(goal - done.count, tr("séance"), tr("séances")))"))
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.75))
         }
@@ -791,7 +791,7 @@ private struct WaterWeekTile: View {
             DailyWeekBars(values: values, goal: goal.map(Double.init), colorHex: "3A8DDE", height: 44)
             if let goal {
                 let reached = values.filter { $0 >= Double(goal) }.count
-                Text(tr("Objectif atteint \(Fmt.plural(reached, tr("jour"), tr("jours")))) sur 7")
+                Text(tr("Objectif atteint \(Fmt.plural(reached, tr("jour"), tr("jours"))) sur 7"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

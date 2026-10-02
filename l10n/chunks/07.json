@@ -1,0 +1,1803 @@
+[
+ {
+  "key": "Profil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:217: .navigationTitle(tr(\"Profil\"))"
+  ]
+ },
+ {
+  "key": "Restauration",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:228: .alert(tr(\"Restauration\"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {"
+  ]
+ },
+ {
+  "key": "Effacer toutes tes données ?",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:233: .confirmationDialog(tr(\"Effacer toutes tes données ?\"), isPresented: $confirmReset, titleVisibility: .visible) {"
+  ]
+ },
+ {
+  "key": "Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:236: Text(tr(\"Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.\"))"
+  ]
+ },
+ {
+  "key": "Ton profil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:246: Text(name.isEmpty ? tr(\"Ton profil\") : name)"
+  ]
+ },
+ {
+  "key": "Version gratuite",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:249: Label(model.isPremium ? tr(\"Tessera Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+  ]
+ },
+ {
+  "key": "espaces actifs",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:256: stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr(\"espaces actifs\"))"
+  ]
+ },
+ {
+  "key": "Ajouter mon anniversaire",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:290: Label(tr(\"Ajouter mon anniversaire\"), systemImage: \"gift\")"
+  ]
+ },
+ {
+  "key": "Premium actif",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:314: Text(tr(\"Premium actif\")).font(.headline)"
+  ]
+ },
+ {
+  "key": "Gérer l'abonnement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:319: Button(tr(\"Gérer l'abonnement\")) { showsManageSubscriptions = true }"
+  ]
+ },
+ {
+  "key": "Passer à Premium",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:331: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
+  ]
+ },
+ {
+  "key": "Tous les widgets et tous les styles",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:332: Text(tr(\"Tous les widgets et tous les styles\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "Restaurer les achats",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:345: Text(tr(\"Restaurer les achats\"))"
+  ]
+ },
+ {
+  "key": "Débloqué en mode test",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:356: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
+  ]
+ },
+ {
+  "key": "Accès à vie",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:359: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
+  ]
+ },
+ {
+  "key": "Renouvellement le %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:362: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
+  ]
+ },
+ {
+  "key": "Abonnement actif",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:364: return tr(\"Abonnement actif\")"
+  ]
+ },
+ {
+  "key": "Merci pour ton soutien",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:365: default: return tr(\"Merci pour ton soutien\")"
+  ]
+ },
+ {
+  "key": "Autorisée",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:372: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
+  ]
+ },
+ {
+  "key": "Pas encore demandée",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:374: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
+  ]
+ },
+ {
+  "key": "restent ce mois-ci, soit %@ par jour",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:18: Text(tr(\"restent ce mois-ci, soit \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour\"))"
+  ]
+ },
+ {
+  "key": "Noter une dépense",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:29: Label(tr(\"Noter une dépense\"), systemImage: \"plus.circle.fill\").font(.headline)",
+   "App/Screens/Spaces/MoneySpaces.swift:176: Button { sheets?.open { BusinessCostEditor() } } label: { Label(tr(\"Noter une dépense\"), systemImage: \"minus.circle\") }"
+  ]
+ },
+ {
+  "key": "Dépenses du mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:35: Section(tr(\"Dépenses du mois\")) {",
+   "Shared/Render/Tiles/MoneyTiles.swift:34: var tile = Tile(title: tr(\"Dépenses du mois\"), symbol: \"creditcard\")"
+  ]
+ },
+ {
+  "key": "Aucune dépense notée ce mois-ci.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:59: HintRow(text: tr(\"Aucune dépense notée ce mois-ci.\"))"
+  ]
+ },
+ {
+  "key": "Nouvelle dépense rapide",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:76: Label(tr(\"Nouvelle dépense rapide\"), systemImage: \"plus\")"
+  ]
+ },
+ {
+  "key": "Dépenses rapides",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:79: Text(tr(\"Dépenses rapides\"))"
+  ]
+ },
+ {
+  "key": "Café, bus, lunch… Le widget Dépense rapide les note d'une touche.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:81: Text(tr(\"Café, bus, lunch… Le widget Dépense rapide les note d'une touche.\"))"
+  ]
+ },
+ {
+  "key": "Valeur nette",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:149: ValueRow(title: tr(\"Valeur nette\"), value: TF.money(BudgetMath.netWorth(state), currency), symbol: \"sum\")",
+   "Shared/Model/KindCatalog.swift:197: KindInfo(kind: .netWorth, title: tr(\"Valeur nette\"), summary: tr(\"Ce que tu possèdes moins ce que tu dois, et son évolution.\"), category: .finance, symbol: \"building.columns\", isPremiu"
+  ]
+ },
+ {
+  "key": "Sans limite",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:162: ValueRow(title: category.name, value: category.monthlyLimit > 0 ? tr(\"\\(TF.money(category.monthlyLimit, currency)) / mois\") : tr(\"Sans limite\"), symbol: category.symbol, colorHex"
+  ]
+ },
+ {
+  "key": "Catégorie",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:196: Picker(tr(\"Catégorie\"), selection: $expense.categoryID) {",
+   "App/Screens/Spaces/BudgetSpace.swift:275: Picker(tr(\"Catégorie\"), selection: $quick.categoryID) {"
+  ]
+ },
+ {
+  "key": "Modifier le revenu",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:238: SheetForm(title: isNew ? tr(\"Revenu\") : tr(\"Modifier le revenu\"), canSave: income.amount > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Source (salaire, contrat, remboursement…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:241: TextField(tr(\"Source (salaire, contrat, remboursement…)\"), text: $income.label)"
+  ]
+ },
+ {
+  "key": "Supprimer le revenu",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:247: Button(tr(\"Supprimer le revenu\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Dépense rapide",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:272: SheetForm(title: tr(\"Dépense rapide\"), canSave: !quick.name.trimmed.isEmpty && quick.amount > 0, onSave: save) {",
+   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: true"
+  ]
+ },
+ {
+  "key": "Nom (café, bus…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:273: TextField(tr(\"Nom (café, bus…)\"), text: $quick.name)"
+  ]
+ },
+ {
+  "key": "Facture",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:304: SheetForm(title: tr(\"Facture\"), canSave: !bill.name.trimmed.isEmpty && bill.amount > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Nom (loyer, Hydro, Netflix…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:305: TextField(tr(\"Nom (loyer, Hydro, Netflix…)\"), text: $bill.name)"
+  ]
+ },
+ {
+  "key": "Prochaine échéance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:310: DatePicker(tr(\"Prochaine échéance\"), selection: $bill.anchorDate, displayedComponents: .date)"
+  ]
+ },
+ {
+  "key": "C'est un abonnement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:312: Toggle(tr(\"C'est un abonnement\"), isOn: $bill.isSubscription)"
+  ]
+ },
+ {
+  "key": "Objectif d'épargne",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:336: SheetForm(title: tr(\"Objectif d'épargne\"), canSave: !goal.name.trimmed.isEmpty && goal.target > 0, onSave: save) {",
+   "Shared/Model/KindCatalog.swift:196: KindInfo(kind: .savingsGoal, title: tr(\"Objectif d'épargne\"), summary: tr(\"Où tu en es de ton objectif d'épargne.\"), category: .finance, symbol: \"banknote\", isPremium: false, families:"
+  ]
+ },
+ {
+  "key": "Nom (voyage, fonds d'urgence…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:338: TextField(tr(\"Nom (voyage, fonds d'urgence…)\"), text: $goal.name)"
+  ]
+ },
+ {
+  "key": "Déjà épargné",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:340: NumberRow(title: tr(\"Déjà épargné\"), value: $goal.saved, unit: model.settings.currencyCode)"
+  ]
+ },
+ {
+  "key": "Date limite",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:341: Toggle(tr(\"Date limite\"), isOn: Binding(get: { goal.deadline != nil }, set: { goal.deadline = $0 ? (goal.deadline ?? Date().addingTimeInterval(180 * 86_400)) : nil }))"
+  ]
+ },
+ {
+  "key": "Pour le",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:343: DatePicker(tr(\"Pour le\"), selection: Binding(get: { goal.deadline ?? Date() }, set: { goal.deadline = $0 }), displayedComponents: .date)"
+  ]
+ },
+ {
+  "key": "Ajouter un versement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:347: Section(tr(\"Ajouter un versement\")) {"
+  ]
+ },
+ {
+  "key": "Ajouter au montant épargné",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:349: Button(tr(\"Ajouter au montant épargné\")) {"
+  ]
+ },
+ {
+  "key": "Compte",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:376: SheetForm(title: tr(\"Compte\"), canSave: !account.name.trimmed.isEmpty, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Nom (compte chèque, CELI, prêt auto…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:377: TextField(tr(\"Nom (compte chèque, CELI, prêt auto…)\"), text: $account.name)"
+  ]
+ },
+ {
+  "key": "C'est une dette",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:379: Toggle(tr(\"C'est une dette\"), isOn: $account.isLiability)"
+  ]
+ },
+ {
+  "key": "Limite par mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:410: NumberRow(title: tr(\"Limite par mois\"), value: $category.monthlyLimit, unit: model.settings.currencyCode)"
+  ]
+ },
+ {
+  "key": "Série %@/%@ · %@",
+  "placeholders": 3,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:16: Text(tr(\"Série \\(active.setIndex + 1)/\\(exercise.sets) · \\(FitnessTiles.setText(exercise))\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:111: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
+  ]
+ },
+ {
+  "key": "Repos : ",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:21: Text(tr(\"Repos : \"))"
+  ]
+ },
+ {
+  "key": "Prochaine séance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:41: ValueRow(title: routine.name, value: state.isScheduled(now) ? tr(\"Prévue aujourd'hui\") : tr(\"Prochaine séance\"), symbol: \"figure.strengthtraining.traditional\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:44: var tile = Tile(title: planned ? tr(\"Séance du jour\") : tr(\"Prochaine séance\"), symbol: \"figure.strengthtraining.traditional\")"
+  ]
+ },
+ {
+  "key": "Prévue aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:41: ValueRow(title: routine.name, value: state.isScheduled(now) ? tr(\"Prévue aujourd'hui\") : tr(\"Prochaine séance\"), symbol: \"figure.strengthtraining.traditional\")"
+  ]
+ },
+ {
+  "key": "Commencer la séance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:45: Label(tr(\"Commencer la séance\"), systemImage: \"play.fill\").font(.headline)"
+  ]
+ },
+ {
+  "key": "Crée ta première séance : ses exercices, séries, charges et temps de repos. Le widget Prochaine série la suit ensuite depuis l'écran d'accueil.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:48: HintRow(text: tr(\"Crée ta première séance : ses exercices, séries, charges et temps de repos. Le widget Prochaine série la suit ensuite depuis l'écran d'accueil.\"))"
+  ]
+ },
+ {
+  "key": "%@ séances",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:83: ValueRow(title: tr(\"Cette semaine\"), value: tr(\"\\(FitnessMath.workouts(inWeekOf: now, state)) séances\"), symbol: \"flame.fill\")"
+  ]
+ },
+ {
+  "key": "%@ · %@ kg",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:86: ValueRow(title: tr(\"Meilleur record\"), value: tr(\"\\(best.exercise) · \\(TF.int(best.weight)) kg\"), symbol: \"trophy.fill\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:32: return tr(\"\\(base) · \\(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg\")"
+  ]
+ },
+ {
+  "key": "Meilleur record",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:86: ValueRow(title: tr(\"Meilleur record\"), value: tr(\"\\(best.exercise) · \\(TF.int(best.weight)) kg\"), symbol: \"trophy.fill\")"
+  ]
+ },
+ {
+  "key": "Suivi",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:89: Text(tr(\"Suivi\"))",
+   "App/Screens/Spaces/ProductivitySpace.swift:298: Section(tr(\"Suivi\")) {"
+  ]
+ },
+ {
+  "key": "Le poids sert à estimer les calories brûlées. Estimation indicative.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:91: Text(tr(\"Le poids sert à estimer les calories brûlées. Estimation indicative.\"))"
+  ]
+ },
+ {
+  "key": "à la demande",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:96: guard !days.isEmpty else { return tr(\"à la demande\") }"
+  ]
+ },
+ {
+  "key": "Nom (haut du corps, jambes…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:111: TextField(tr(\"Nom (haut du corps, jambes…)\"), text: $routine.name)"
+  ]
+ },
+ {
+  "key": "Les jours choisis décident de la séance proposée chaque jour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:115: Text(tr(\"Les jours choisis décident de la séance proposée chaque jour.\"))"
+  ]
+ },
+ {
+  "key": "Exercice",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:120: TextField(tr(\"Exercice\"), text: $exercise.name)"
+  ]
+ },
+ {
+  "key": "Choisir dans la bibliothèque",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:156: Label(tr(\"Choisir dans la bibliothèque\"), systemImage: \"books.vertical\")"
+  ]
+ },
+ {
+  "key": "Retirer le dernier exercice",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/FitnessSpace.swift:164: Button(tr(\"Retirer le dernier exercice\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Seulement les widgets interactifs",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:39: Text(tr(\"Seulement les widgets interactifs\"))",
+   "App/Screens/Spaces/SpaceBuilderView.swift:281: Text(tr(\"Seulement les widgets interactifs\"))"
+  ]
+ },
+ {
+  "key": "Sous l'heure, sans déverrouiller",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:76: Label(tr(\"Sous l'heure, sans déverrouiller\"), systemImage: \"lock.fill\")"
+  ]
+ },
+ {
+  "key": "Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués %@ s'utilisent directement : valider une série, cocher une habitude, ajouter un verre…",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:78: Text(\"Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués \\(Image(systemName: \"hand.tap.fill\")) s'utilisent directement : valid"
+  ]
+ },
+ {
+  "key": "Comment l'ajouter",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:85: Label(tr(\"Comment l'ajouter\"), systemImage: \"questionmark.circle\")"
+  ]
+ },
+ {
+  "key": "Haut du corps",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:97: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
+   "Shared/Data/SampleData.swift:174: let upper = Routine(name: tr(\"Haut du corps\"), exercises: ["
+  ]
+ },
+ {
+  "key": "8 × 60 kg",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:99: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),"
+  ]
+ },
+ {
+  "key": "Développé couché",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:99: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
+   "Shared/Data/SampleData.swift:175: ExerciseTemplate(name: tr(\"Développé couché\"), sets: 4, reps: 8, weight: 60, restSeconds: 120),"
+  ]
+ },
+ {
+  "key": "Pendant une séance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:104: Text(tr(\"Pendant une séance\"))"
+  ]
+ },
+ {
+  "key": "Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans déverrouiller.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:108: Text(tr(\"Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et"
+  ]
+ },
+ {
+  "key": "Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:129: (\"hand.tap\", tr(\"Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».\")),"
+  ]
+ },
+ {
+  "key": "Choisis « Écran verrouillé », puis touche la zone sous l'heure.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:130: (\"lock.iphone\", tr(\"Choisis « Écran verrouillé », puis touche la zone sous l'heure.\")),"
+  ]
+ },
+ {
+  "key": "Dans la liste, choisis Tessera, puis le widget voulu.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:131: (\"plus.circle\", tr(\"Dans la liste, choisis Tessera, puis le widget voulu.\")),"
+  ]
+ },
+ {
+  "key": "Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:132: (\"slider.horizontal.3\", tr(\"Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.\")),"
+  ]
+ },
+ {
+  "key": "Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/LockScreenCreator.swift:155: Text(tr(\"Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines ac"
+  ]
+ },
+ {
+  "key": "Ajoute tes actions, ETF, cryptos et liquidités. Les cryptos se mettent à jour en direct (CoinGecko). Pour les actions et ETF, indique le dernier prix connu.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:16: HintRow(text: tr(\"Ajoute tes actions, ETF, cryptos et liquidités. Les cryptos se mettent à jour en direct (CoinGecko). Pour les actions et ETF, indique le dernier prix connu.\"))"
+  ]
+ },
+ {
+  "key": "%@ au total",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:22: Text(tr(\"\\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0)) au total\"))"
+  ]
+ },
+ {
+  "key": "Ajouter un placement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:52: Label(tr(\"Ajouter un placement\"), systemImage: \"plus\")"
+  ]
+ },
+ {
+  "key": "Mon portefeuille",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:55: Text(tr(\"Mon portefeuille\"))"
+  ]
+ },
+ {
+  "key": "À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:57: Text(tr(\"À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.\"))"
+  ]
+ },
+ {
+  "key": "Liste de suivi",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:80: Text(tr(\"Liste de suivi\"))",
+   "Shared/Model/KindCatalog.swift:209: KindInfo(kind: .watchlist, title: tr(\"Liste de suivi\"), summary: tr(\"Plusieurs cryptos suivies en direct, en une liste.\"), category: .investing, symbol: \"list.star\", isPremium: false, "
+  ]
+ },
+ {
+  "key": "Cours fournis par CoinGecko.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:82: Text(tr(\"Cours fournis par CoinGecko.\"))"
+  ]
+ },
+ {
+  "key": "Placement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:92: SheetForm(title: tr(\"Placement\"), canSave: !holding.name.trimmed.isEmpty && holding.quantity > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Symbole (XEQT, AAPL…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:105: TextField(tr(\"Symbole (XEQT, AAPL…)\"), text: $holding.symbol)"
+  ]
+ },
+ {
+  "key": "Prix payé au total",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:113: NumberRow(title: tr(\"Prix payé au total\"), value: $holding.costBasis, unit: model.settings.currencyCode)"
+  ]
+ },
+ {
+  "key": "Dernier prix connu",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:116: NumberRow(title: tr(\"Dernier prix connu\"), value: Binding(get: { holding.manualPrice ?? 0 }, set: { holding.manualPrice = $0 > 0 ? $0 : nil }), unit: model.settings.currencyCode)"
+  ]
+ },
+ {
+  "key": "Le prix se met à jour automatiquement.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:119: Text(holding.kind == .crypto ? tr(\"Le prix se met à jour automatiquement.\") : tr(\"Mets le prix à jour quand tu veux : il sert à calculer la valeur.\"))"
+  ]
+ },
+ {
+  "key": "Mets le prix à jour quand tu veux : il sert à calculer la valeur.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:119: Text(holding.kind == .crypto ? tr(\"Le prix se met à jour automatiquement.\") : tr(\"Mets le prix à jour quand tu veux : il sert à calculer la valeur.\"))"
+  ]
+ },
+ {
+  "key": "Cette année",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:167: ValueRow(title: tr(\"Cette année\"), value: TF.money(BusinessMath.revenue(state, .year, at: now), currency), symbol: \"chart.line.uptrend.xyaxis\")"
+  ]
+ },
+ {
+  "key": "Bénéfice du mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:169: ValueRow(title: tr(\"Bénéfice du mois\"), value: \"\\(TF.money(profit.profit, currency))\\(profit.margin.map { \" · \\(Fmt.percent($0))\" } ?? \"\")\", symbol: \"banknote\")",
+   "Shared/Render/Tiles/BusinessTiles.swift:76: var tile = Tile(title: tr(\"Bénéfice du mois\"), symbol: \"banknote.fill\")"
+  ]
+ },
+ {
+  "key": "Saisie manuelle : pour un export Shopify, Stripe ou autre, note le total du jour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:179: Text(tr(\"Saisie manuelle : pour un export Shopify, Stripe ou autre, note le total du jour.\"))"
+  ]
+ },
+ {
+  "key": "Dernières ventes",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:182: Section(tr(\"Dernières ventes\")) {"
+  ]
+ },
+ {
+  "key": "Modifier la vente",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:222: SheetForm(title: isNew ? tr(\"Vente\") : tr(\"Modifier la vente\"), canSave: sale.amount > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Commandes",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:226: IntRow(title: tr(\"Commandes\"), value: $sale.orders)",
+   "Shared/Domains/Business.swift:40: case .orders: tr(\"Commandes\")"
+  ]
+ },
+ {
+  "key": "Nouveaux clients",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:227: IntRow(title: tr(\"Nouveaux clients\"), value: $sale.newCustomers)",
+   "Shared/Domains/Business.swift:42: case .newCustomers: tr(\"Nouveaux clients\")"
+  ]
+ },
+ {
+  "key": "Visiteurs",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:228: IntRow(title: tr(\"Visiteurs\"), value: $sale.visitors)",
+   "Shared/Domains/Business.swift:43: case .visitors: tr(\"Visiteurs\")"
+  ]
+ },
+ {
+  "key": "Supprimer la vente",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:233: Button(tr(\"Supprimer la vente\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Libellé (publicité, matériel…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:265: TextField(tr(\"Libellé (publicité, matériel…)\"), text: $cost.label)"
+  ]
+ },
+ {
+  "key": "Chiffres officiels déposés à la SEC (EDGAR, domaine public) : revenus, bénéfice, marge, croissance. Sociétés cotées aux États-Unis.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:349: Text(tr(\"Chiffres officiels déposés à la SEC (EDGAR, domaine public) : revenus, bénéfice, marge, croissance. Sociétés cotées aux États-Unis.\"))"
+  ]
+ },
+ {
+  "key": "Ajouter une entreprise",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:357: Section(tr(\"Ajouter une entreprise\")) {"
+  ]
+ },
+ {
+  "key": "Nom ou symbole (Tesla, NVDA…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:359: TextField(tr(\"Nom ou symbole (Tesla, NVDA…)\"), text: $query)"
+  ]
+ },
+ {
+  "key": "Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:400: message = results.isEmpty ? tr(\"Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles.\") : nil"
+  ]
+ },
+ {
+  "key": "La SEC ne répond pas. Réessaie dans un instant.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:402: message = tr(\"La SEC ne répond pas. Réessaie dans un instant.\")"
+  ]
+ },
+ {
+  "key": "Revenus annuels",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:414: Section(tr(\"Revenus annuels\")) {",
+   "Shared/Render/Tiles/BusinessTiles.swift:244: var tile = Tile(title: tr(\"Revenus annuels\"), symbol: \"chart.bar.doc.horizontal\")"
+  ]
+ },
+ {
+  "key": "Bénéfice net",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:419: Section(tr(\"Bénéfice net\")) {",
+   "Shared/Render/Tiles/BusinessTiles.swift:176: rows.append(TileRow(id: \"income\", title: tr(\"Bénéfice net\"), value: BigNumber.compact(income.value), detail: income.label, symbol: \"banknote\"))"
+  ]
+ },
+ {
+  "key": "Indicateurs",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:424: Section(tr(\"Indicateurs\")) {",
+   "Shared/Model/KindCatalog.swift:219: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremi"
+  ]
+ },
+ {
+  "key": "Marge nette",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:425: if let margin = company.netMargin { ValueRow(title: tr(\"Marge nette\"), value: Fmt.percent(margin, decimals: 1)) }",
+   "Shared/Render/Tiles/BusinessTiles.swift:179: rows.append(TileRow(id: \"margin\", title: tr(\"Marge nette\"), value: Fmt.percent(margin, decimals: 1), symbol: \"percent\"))"
+  ]
+ },
+ {
+  "key": "Croissance des revenus",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:426: if let growth = company.revenueGrowth { ValueRow(title: tr(\"Croissance des revenus\"), value: Fmt.signedPercent(growth * 100)) }"
+  ]
+ },
+ {
+  "key": "%@ milliards",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:427: if let shares = company.sharesOutstanding { ValueRow(title: tr(\"Actions en circulation\"), value: tr(\"\\(TF.decimal(shares / 1_000_000_000, 2)) milliards\")) }"
+  ]
+ },
+ {
+  "key": "Actions en circulation",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:427: if let shares = company.sharesOutstanding { ValueRow(title: tr(\"Actions en circulation\"), value: tr(\"\\(TF.decimal(shares / 1_000_000_000, 2)) milliards\")) }"
+  ]
+ },
+ {
+  "key": "Mis à jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:428: ValueRow(title: tr(\"Mis à jour\"), value: Fmt.shortDay(company.fetchedAt))"
+  ]
+ },
+ {
+  "key": "Chargement des états financiers…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:431: HintRow(text: tr(\"Chargement des états financiers…\"))"
+  ]
+ },
+ {
+  "key": "Source : SEC EDGAR (données XBRL des dépôts 10-K et 10-Q). À titre informatif, pas un conseil d'investissement.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/MoneySpaces.swift:434: HintRow(text: tr(\"Source : SEC EDGAR (données XBRL des dépôts 10-K et 10-Q). À titre informatif, pas un conseil d'investissement.\"))"
+  ]
+ },
+ {
+  "key": "Scanner un code-barres",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:47: Label(tr(\"Scanner un code-barres\"), systemImage: \"barcode.viewfinder\")"
+  ]
+ },
+ {
+  "key": "Glisse un aliment vers la gauche pour l'ajouter aux favoris. Le widget Ajout rapide les propose d'une touche.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:99: HintRow(text: tr(\"Glisse un aliment vers la gauche pour l'ajouter aux favoris. Le widget Ajout rapide les propose d'une touche.\"))"
+  ]
+ },
+ {
+  "key": "%@ kcal · %@ g prot.",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:109: ValueRow(title: tr(\"Objectifs du jour\"), value: known.kcal ? tr(\"\\(TF.int(state.goals.kcal)) kcal · \\(TF.int(state.goals.protein)) g prot.\") : tr(\"À définir\"), symbol: \"target"
+  ]
+ },
+ {
+  "key": "Objectifs du jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:109: ValueRow(title: tr(\"Objectifs du jour\"), value: known.kcal ? tr(\"\\(TF.int(state.goals.kcal)) kcal · \\(TF.int(state.goals.protein)) g prot.\") : tr(\"À définir\"), symbol: \"target"
+  ]
+ },
+ {
+  "key": "Moyenne sur 7 jours",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:113: ValueRow(title: tr(\"Moyenne sur 7 jours\"), value: tr(\"\\(TF.int(average)) kcal\"), symbol: \"chart.bar\")"
+  ]
+ },
+ {
+  "key": "Série de suivi",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:115: ValueRow(title: tr(\"Série de suivi\"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr(\"jour\"), tr(\"jours\")), symbol: \"flame.fill\")",
+   "Shared/Model/KindCatalog.swift:171: KindInfo(kind: .nutritionStreak, title: tr(\"Série de suivi\"), summary: tr(\"Les jours d'affilée où tu as noté ce que tu manges.\"), category: .nutrition, symbol: \"flame.fill\", isPremium:"
+  ]
+ },
+ {
+  "key": "Aliment perso",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:194: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
+   "App/Screens/Spaces/NutritionSpace.swift:544: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Suggestions",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:238: Section(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\"))) {"
+  ]
+ },
+ {
+  "key": "Recherche sur Open Food Facts…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:246: HStack { ProgressView(); Text(tr(\"Recherche sur Open Food Facts…\")).foregroundStyle(Color.secondary) }"
+  ]
+ },
+ {
+  "key": "Chercher « %@ » dans les produits emballés",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:250: Button(tr(\"Chercher « \\(query.trimmed) » dans les produits emballés\")) {"
+  ]
+ },
+ {
+  "key": "Produits emballés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:258: Text(tr(\"Produits emballés\"))"
+  ]
+ },
+ {
+  "key": "Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:260: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
+  ]
+ },
+ {
+  "key": "Pomme, poulet, yogourt…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:265: .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr(\"Pomme, poulet, yogourt…\"))"
+  ]
+ },
+ {
+  "key": "Scanner un aliment",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:299: .navigationTitle(tr(\"Scanner un aliment\"))"
+  ]
+ },
+ {
+  "key": "Chercher ou créer l'aliment",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:311: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
+  ]
+ },
+ {
+  "key": "Aucun produit trouvé pour « %@ ».",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:355: if online.isEmpty { searchError = tr(\"Aucun produit trouvé pour « \\(text) ».\") }"
+  ]
+ },
+ {
+  "key": "Open Food Facts ne répond pas. Réessaie dans un instant.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:357: searchError = tr(\"Open Food Facts ne répond pas. Réessaie dans un instant.\")"
+  ]
+ },
+ {
+  "key": "Produit %@ introuvable. Crée-le comme aliment perso.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:380: searchError = tr(\"Produit \\(code) introuvable. Crée-le comme aliment perso.\")"
+  ]
+ },
+ {
+  "key": "Pour 100 g : %@ kcal · protéines %@ g · glucides %@ g · lipides %@ g",
+  "placeholders": 4,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:408: Text(tr(\"Pour 100 g : \\(TF.int(food.kcal)) kcal · protéines \\(TF.decimal(food.protein, 1)) g · glucides \\(TF.decimal(food.carbs, 1)) g · lipides \\(TF.decimal(food.fat, 1)) g\")"
+  ]
+ },
+ {
+  "key": "Après ajout, il te restera %@ kcal.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:429: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
+  ]
+ },
+ {
+  "key": "Après ajout, tu dépasseras ton objectif de %@ kcal.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:429: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
+  ]
+ },
+ {
+  "key": "%@ mg",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:440: if let sodium = totals.sodiumMg { ValueRow(title: tr(\"Sodium\"), value: tr(\"\\(TF.int(sodium)) mg\")) }",
+   "App/Screens/Spaces/NutritionSpace.swift:441: if let cholesterol = totals.cholesterolMg { ValueRow(title: tr(\"Cholestérol\"), value: tr(\"\\(TF.int(cholesterol)) mg\")) }"
+  ]
+ },
+ {
+  "key": "½ portion",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:460: Portion(title: tr(\"½ portion\"), grams: (serving / 2).rounded()),"
+  ]
+ },
+ {
+  "key": "1 portion",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:461: Portion(title: food.servingName.isEmpty ? tr(\"1 portion\") : food.servingName, grams: serving),",
+   "Shared/Domains/FoodDatabase.swift:129: f(\"chicken\", tr(\"Poitrine de poulet cuite\"), 165, 31, 0, 3.6, 0, 120, tr(\"1 portion\"), s: 0, sf: 1, na: 74, chol: 85),"
+  ]
+ },
+ {
+  "key": "2 portions",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:462: Portion(title: tr(\"2 portions\"), grams: serving * 2),"
+  ]
+ },
+ {
+  "key": "%@ kcal / 100 g · P %@ · G %@ · L %@",
+  "placeholders": 4,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:523: tr(\"\\(TF.int(food.kcal)) kcal / 100 g · P \\(TF.int(food.protein)) · G \\(TF.int(food.carbs)) · L \\(TF.int(food.fat))\")"
+  ]
+ },
+ {
+  "key": "%@ g · %@ kcal",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:528: tr(\"\\(TF.int(grams)) g · \\(TF.int(food.nutrients(grams: grams).kcal)) kcal\")"
+  ]
+ },
+ {
+  "key": "Portion",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:547: NumberRow(title: tr(\"Portion\"), value: $serving, unit: \"g\")"
+  ]
+ },
+ {
+  "key": "Pour 100 g",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:549: Section(tr(\"Pour 100 g\")) {"
+  ]
+ },
+ {
+  "key": "Référence",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:588: Picker(tr(\"Référence\"), selection: $sex) {"
+  ]
+ },
+ {
+  "key": "Âge : %@ ans",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:591: Stepper(tr(\"Âge : \\(age) ans\"), value: $age, in: 16...90)"
+  ]
+ },
+ {
+  "key": "But",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:597: Picker(tr(\"But\"), selection: $goal) {"
+  ]
+ },
+ {
+  "key": "Calculateur",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:605: Text(tr(\"Calculateur\"))"
+  ]
+ },
+ {
+  "key": "Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:607: Text(tr(\"Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés.\"))"
+  ]
+ },
+ {
+  "key": "Nouvelle priorité",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:28: TextField(tr(\"Nouvelle priorité\"), text: $newPriority)"
+  ]
+ },
+ {
+  "key": "Les cases se décochent chaque matin. Coche-les depuis le widget.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:38: Text(tr(\"Les cases se décochent chaque matin. Coche-les depuis le widget.\"))"
+  ]
+ },
+ {
+  "key": "Mes tâches",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:45: ValueRow(title: tr(\"Mes tâches\"), value: tr(\"\\(model.content.tasks.filter { !$0.isDone }.count) à faire\"), symbol: \"checklist\")"
+  ]
+ },
+ {
+  "key": "Ajouter à %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:118: .accessibilityLabel(Text(tr(\"Ajouter à \\(counter.name)\")))"
+  ]
+ },
+ {
+  "key": "Cafés, pompes, pages lues… Le widget Compteur ajoute d'une touche.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:132: Text(tr(\"Cafés, pompes, pages lues… Le widget Compteur ajoute d'une touche.\"))"
+  ]
+ },
+ {
+  "key": "Travail profond",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:135: Section(tr(\"Travail profond\")) {",
+   "Shared/Model/KindCatalog.swift:150: KindInfo(kind: .deepWork, title: tr(\"Travail profond\"), summary: tr(\"Tes heures de concentration de la semaine, par rapport à ton objectif.\"), category: .productivity, symbol: \"brain.h"
+  ]
+ },
+ {
+  "key": "Objectif par semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:140: ValueRow(title: tr(\"Objectif par semaine\"), value: Fmt.hours(model.productivity.weeklyFocusGoalHours))"
+  ]
+ },
+ {
+  "key": "Chaque session lancée depuis le widget Focus compte ici.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:143: HintRow(text: tr(\"Chaque session lancée depuis le widget Focus compte ici.\"))"
+  ]
+ },
+ {
+  "key": "Nom du projet",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:169: TextField(tr(\"Nom du projet\"), text: $project.name)"
+  ]
+ },
+ {
+  "key": "Titre (rendu, dossier, examen…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:230: TextField(tr(\"Titre (rendu, dossier, examen…)\"), text: $deadline.title)"
+  ]
+ },
+ {
+  "key": "Date et heure",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:231: DatePicker(tr(\"Date et heure\"), selection: $deadline.date)",
+   "App/Screens/Spaces/StudentSpace.swift:235: DatePicker(tr(\"Date et heure\"), selection: $exam.date).environment(\\.locale, Fmt.locale)"
+  ]
+ },
+ {
+  "key": "Nom (cafés, pompes…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:258: TextField(tr(\"Nom (cafés, pompes…)\"), text: $counter.name)"
+  ]
+ },
+ {
+  "key": "Remettre à zéro chaque jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:274: Toggle(tr(\"Remettre à zéro chaque jour\"), isOn: $counter.resetsDaily)"
+  ]
+ },
+ {
+  "key": "Mes habitudes",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:302: ValueRow(title: tr(\"Mes habitudes\"), value: \"\\(model.content.habits.count)\", symbol: \"repeat\")",
+   "Shared/Model/Templates.swift:90: WidgetTemplate(id: \"habits-dark\", name: tr(\"Mes habitudes\"), kind: .habits, themeID: .dark, accentHex: \"7FA33A\", isFeatured: true),"
+  ]
+ },
+ {
+  "key": "%@/%@ verres",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:307: ValueRow(title: tr(\"Hydratation\"), value: tr(\"\\(model.content.hydration.glasses(on: Date()))/\\(model.content.hydration.goal) verres\"), symbol: \"drop.fill\")",
+   "Shared/Render/Tiles/DashboardTiles.swift:64: return TileRow(id: \"water\", title: tr(\"Eau\"), value: tr(\"\\(glasses)/\\(hydration.goal) verres\"), symbol: \"drop.fill\", progress: Double(glasses) / Double(max(1, hydration.goal))"
+  ]
+ },
+ {
+  "key": "Crée une habitude pour suivre ta série.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/ProductivitySpace.swift:316: HintRow(text: tr(\"Crée une habitude pour suivre ta série.\"))"
+  ]
+ },
+ {
+  "key": "Mes données de l'espace %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:131: .accessibilityLabel(Text(tr(\"Mes données de l'espace \\(space.title)\")))"
+  ]
+ },
+ {
+  "key": "Crée ton widget",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:178: Text(tr(\"Crée ton widget\"))"
+  ]
+ },
+ {
+  "key": "Choisis une taille et tes widgets, puis personnalise-les dans le Studio.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:180: Text(tr(\"Choisis une taille et tes widgets, puis personnalise-les dans le Studio.\"))"
+  ]
+ },
+ {
+  "key": "L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:204: case .small: tr(\"L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.\")"
+  ]
+ },
+ {
+  "key": "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:205: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")"
+  ]
+ },
+ {
+  "key": "Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:206: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")"
+  ]
+ },
+ {
+  "key": "Réunit : %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:251: Text(tr(\"Réunit : \\(design.options.parts.map(\\.name).joined(separator: \" · \"))\"))"
+  ]
+ },
+ {
+  "key": "%@ · %@ au plus",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:311: return format == .small ? count : tr(\"\\(count) · \\(Composer.maxCount(for: format)) au plus\")"
+  ]
+ },
+ {
+  "key": "Personnaliser les %@ widgets",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:388: if format == .small && selection.count > 1 { return tr(\"Personnaliser les \\(selection.count) widgets\") }"
+  ]
+ },
+ {
+  "key": "Personnaliser le widget",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpaceBuilderView.swift:389: return tr(\"Personnaliser le widget\")"
+  ]
+ },
+ {
+  "key": "Choisis un univers, puis la taille de ton widget.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:21: Text(tr(\"Choisis un univers, puis la taille de ton widget.\"))"
+  ]
+ },
+ {
+  "key": "Tout",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:91: filterChip(tr(\"Tout\"), isOn: universe == nil && !showsLockScreen) {"
+  ]
+ },
+ {
+  "key": "Aucune tâche en attente",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:144: return open == 0 ? tr(\"Aucune tâche en attente\") : Fmt.plural(open, tr(\"tâche à faire\"), tr(\"tâches à faire\"))"
+  ]
+ },
+ {
+  "key": "%@/%@ aujourd'hui",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:147: return habits.isEmpty ? tr(\"Crée une habitude\") : tr(\"\\(habits.filter { $0.isDone(on: now) }.count)/\\(habits.count) aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "Crée une habitude",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:147: return habits.isEmpty ? tr(\"Crée une habitude\") : tr(\"\\(habits.filter { $0.isDone(on: now) }.count)/\\(habits.count) aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "Note ton premier repas",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:150: if model.nutrition.entries.isEmpty { return tr(\"Note ton premier repas\") }"
+  ]
+ },
+ {
+  "key": "%@ kcal restantes",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:151: return model.profile.knows(.kcalTarget) ? tr(\"\\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes\") : tr(\"\\(TF.int(eaten)) kcal aujourd'hui\")",
+   "Shared/Data/Insights.swift:229: parts.append(tr(\"\\(left) kcal restantes\"))"
+  ]
+ },
+ {
+  "key": "Crée ta séance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:153: if model.fitness.routines.isEmpty { return tr(\"Crée ta séance\") }"
+  ]
+ },
+ {
+  "key": "%@/%@ séances",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:155: return model.profile.knows(.weeklyWorkouts) ? tr(\"\\(done)/\\(model.fitness.weeklyGoal) séances\") : Fmt.plural(done, tr(\"séance cette semaine\"), tr(\"séances cette semaine\"))"
+  ]
+ },
+ {
+  "key": "séance cette semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:155: return model.profile.knows(.weeklyWorkouts) ? tr(\"\\(done)/\\(model.fitness.weeklyGoal) séances\") : Fmt.plural(done, tr(\"séance cette semaine\"), tr(\"séances cette semaine\"))",
+   "Shared/Render/Tiles/FitnessTiles.swift:164: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")"
+  ]
+ },
+ {
+  "key": "séances cette semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:155: return model.profile.knows(.weeklyWorkouts) ? tr(\"\\(done)/\\(model.fitness.weeklyGoal) séances\") : Fmt.plural(done, tr(\"séance cette semaine\"), tr(\"séances cette semaine\"))",
+   "Shared/Render/Tiles/FitnessTiles.swift:164: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")"
+  ]
+ },
+ {
+  "key": "Dépensé %@ ce mois-ci",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:158: return tr(\"Dépensé \\(TF.money(BudgetMath.spentThisMonth(model.budget, at: now), currency)) ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "Reste %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:160: return tr(\"Reste \\(TF.money(BudgetMath.remaining(model.budget, at: now), currency))\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:58: tile.inline = tr(\"Reste \\(TF.money(remaining, currency))\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes placements",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:162: return model.portfolio.holdings.isEmpty ? tr(\"Ajoute tes placements\") : Fmt.plural(model.portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
+  ]
+ },
+ {
+  "key": "%@ ce mois-ci",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:164: return model.business.sales.isEmpty ? tr(\"Note ta première vente\") : tr(\"\\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois-ci\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:80: tile.inline = tr(\"\\(TF.money(total, currency)) ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "Note ta première vente",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:164: return model.business.sales.isEmpty ? tr(\"Note ta première vente\") : tr(\"\\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "entreprise suivie",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:166: return Fmt.plural(model.following.followed.count, tr(\"entreprise suivie\"), tr(\"entreprises suivies\"))"
+  ]
+ },
+ {
+  "key": "entreprises suivies",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:166: return Fmt.plural(model.following.followed.count, tr(\"entreprise suivie\"), tr(\"entreprises suivies\"))"
+  ]
+ },
+ {
+  "key": "Examen dans %@ j",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:168: if let exam = StudentMath.nextExam(model.student, at: now) { return tr(\"Examen dans \\(DateMath.daysBetween(now, exam.date)) j\") }"
+  ]
+ },
+ {
+  "key": "Ajoute tes cours",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:169: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\"), tr(\"cours\"))"
+  ]
+ },
+ {
+  "key": "%@ dans %@ j",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:172: return TravelMath.isOngoing(trip, at: now) ? tr(\"En voyage à \\(trip.destination)\") : tr(\"\\(trip.destination) dans \\(DateMath.daysBetween(now, trip.start)) j\")",
+   "Shared/Render/Tiles/CarTiles.swift:142: tile.inline = tr(\"\\(next.title) dans \\(days) j\")"
+  ]
+ },
+ {
+  "key": "En voyage à %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:172: return TravelMath.isOngoing(trip, at: now) ? tr(\"En voyage à \\(trip.destination)\") : tr(\"\\(trip.destination) dans \\(DateMath.daysBetween(now, trip.start)) j\")"
+  ]
+ },
+ {
+  "key": "Prépare ton prochain voyage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:174: return tr(\"Prépare ton prochain voyage\")"
+  ]
+ },
+ {
+  "key": "%@ dans %@ km",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:177: return tr(\"\\(status.item.name) dans \\(TF.int(km)) km\")"
+  ]
+ },
+ {
+  "key": "Note ton premier plein",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:179: return model.car.fills.isEmpty ? tr(\"Note ton premier plein\") : model.car.name"
+  ]
+ },
+ {
+  "key": "Anniversaire dans %@ j",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:182: return tr(\"Anniversaire dans \\(DateMath.daysBetween(now, LifeMath.nextBirthday(birthday: birthday, after: now).date)) j\")",
+   "Shared/Render/Tiles/TimeTiles.swift:60: tile.inline = tr(\"Anniversaire dans \\(days) j\")"
+  ]
+ },
+ {
+  "key": "Anniversaire et jours fériés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:184: return tr(\"Anniversaire et jours fériés\")"
+  ]
+ },
+ {
+  "key": "Argent",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:198: case .money: tr(\"Argent\")",
+   "Shared/Render/Tiles/DashboardTiles.swift:243: var tile = Tile(title: tr(\"Argent\"), symbol: \"dollarsign.circle\")"
+  ]
+ },
+ {
+  "key": "Organisation",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:199: case .organisation: tr(\"Organisation\")"
+  ]
+ },
+ {
+  "key": "Vie",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:200: case .life: tr(\"Vie\")"
+  ]
+ },
+ {
+  "key": "· exemple",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:238: Text(tr(\"· exemple\"))"
+  ]
+ },
+ {
+  "key": "Crée un widget de cet espace",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:282: .accessibilityHint(Text(tr(\"Crée un widget de cet espace\")))"
+  ]
+ },
+ {
+  "key": "%@ widgets",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:326: .accessibilityLabel(Text(tr(\"\\(widgetCount) widgets\")))"
+  ]
+ },
+ {
+  "key": "Widgets de l'espace",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:432: Text(tr(\"Widgets de l'espace\"))"
+  ]
+ },
+ {
+  "key": "Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/SpacesView.swift:439: Text(tr(\"Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.\"))"
+  ]
+ },
+ {
+  "key": "Ajouter un cours à l'horaire",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:57: Label(tr(\"Ajouter un cours à l'horaire\"), systemImage: \"plus\")"
+  ]
+ },
+ {
+  "key": "La moyenne de chaque cours est pondérée par le poids des évaluations, la moyenne générale par les crédits.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:119: Text(tr(\"La moyenne de chaque cours est pondérée par le poids des évaluations, la moyenne générale par les crédits.\"))"
+  ]
+ },
+ {
+  "key": "À réviser maintenant",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:123: ValueRow(title: tr(\"À réviser maintenant\"), value: \"\\(StudentMath.dueCount(state, at: now))\", symbol: \"rectangle.on.rectangle.angled\")"
+  ]
+ },
+ {
+  "key": "Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours. Révise-les depuis le widget.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:135: Text(tr(\"Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours. Révise-les depuis le widget.\"))"
+  ]
+ },
+ {
+  "key": "Temps d'étude",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:138: Section(tr(\"Temps d'étude\")) {"
+  ]
+ },
+ {
+  "key": "Nom du cours",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:173: TextField(tr(\"Nom du cours\"), text: $course.name)"
+  ]
+ },
+ {
+  "key": "Enseignant (facultatif)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:174: TextField(tr(\"Enseignant (facultatif)\"), text: $course.teacher)"
+  ]
+ },
+ {
+  "key": "Crédits",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:175: NumberRow(title: tr(\"Crédits\"), value: $course.credits)"
+  ]
+ },
+ {
+  "key": "Salle (facultatif)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:215: TextField(tr(\"Salle (facultatif)\"), text: $slot.room)",
+   "App/Screens/Spaces/StudentSpace.swift:236: TextField(tr(\"Salle (facultatif)\"), text: $exam.room)"
+  ]
+ },
+ {
+  "key": "Examen",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:232: SheetForm(title: tr(\"Examen\"), canSave: !exam.title.trimmed.isEmpty, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Titre (intra, final…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:233: TextField(tr(\"Titre (intra, final…)\"), text: $exam.title)"
+  ]
+ },
+ {
+  "key": "Devoir",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:254: SheetForm(title: tr(\"Devoir\"), canSave: !assignment.title.trimmed.isEmpty, onSave: save) {",
+   "Shared/Intents/SpaceIntents.swift:205: @Parameter(title: \"Devoir\")"
+  ]
+ },
+ {
+  "key": "À rendre le",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:257: DatePicker(tr(\"À rendre le\"), selection: $assignment.due).environment(\\.locale, Fmt.locale)"
+  ]
+ },
+ {
+  "key": "Rendu",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:258: Toggle(tr(\"Rendu\"), isOn: $assignment.isDone)"
+  ]
+ },
+ {
+  "key": "Note",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:276: SheetForm(title: tr(\"Note\"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {",
+   "Shared/Model/KindCatalog.swift:146: KindInfo(kind: .note, title: tr(\"Note\"), summary: tr(\"Un mot, un rappel ou une citation, toujours sous les yeux.\"), category: .productivity, symbol: \"note.text\", isPremium: false, fami"
+  ]
+ },
+ {
+  "key": "Évaluation (quiz, examen…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:278: TextField(tr(\"Évaluation (quiz, examen…)\"), text: $grade.title)"
+  ]
+ },
+ {
+  "key": "Note obtenue",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:279: NumberRow(title: tr(\"Note obtenue\"), value: $grade.score)"
+  ]
+ },
+ {
+  "key": "Sur",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:280: NumberRow(title: tr(\"Sur\"), value: $grade.maxScore)"
+  ]
+ },
+ {
+  "key": "Poids dans le cours",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:281: NumberRow(title: tr(\"Poids dans le cours\"), value: $grade.weight, unit: \"%\")"
+  ]
+ },
+ {
+  "key": "Fiche",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:299: SheetForm(title: tr(\"Fiche\"), canSave: !card.front.trimmed.isEmpty && !card.back.trimmed.isEmpty, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Paquet (biologie, anglais…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:300: TextField(tr(\"Paquet (biologie, anglais…)\"), text: $card.deck)"
+  ]
+ },
+ {
+  "key": "Question ou mot",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:301: TextField(tr(\"Question ou mot\"), text: $card.front, axis: .vertical)"
+  ]
+ },
+ {
+  "key": "Réponse",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:302: TextField(tr(\"Réponse\"), text: $card.back, axis: .vertical)",
+   "Shared/Render/Tiles/StudentTiles.swift:164: tile.buttons = [TileButton(title: tr(\"Réponse\"), symbol: \"eye\", action: .revealCard, isProminent: true)]"
+  ]
+ },
+ {
+  "key": "Vols",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:67: Section(tr(\"Vols\")) {"
+  ]
+ },
+ {
+  "key": "Nouveau vol",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:83: Label(tr(\"Nouveau vol\"), systemImage: \"plus\")"
+  ]
+ },
+ {
+  "key": "Nouvel hébergement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:103: Label(tr(\"Nouvel hébergement\"), systemImage: \"plus\")"
+  ]
+ },
+ {
+  "key": "Activités",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:107: Section(tr(\"Activités\")) {",
+   "Shared/Domains/Travel.swift:60: case .activities: tr(\"Activités\")"
+  ]
+ },
+ {
+  "key": "Nouvelle activité",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:122: Label(tr(\"Nouvelle activité\"), systemImage: \"plus\")"
+  ]
+ },
+ {
+  "key": "Montant à convertir",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:127: NumberRow(title: tr(\"Montant à convertir\"), value: Binding(get: { state.sampleAmount }, set: { amount in model.update(\\.travel) { $0.sampleAmount = max(1, amount) } }), u"
+  ]
+ },
+ {
+  "key": "Taux de référence de la Banque centrale européenne, mis à jour chaque jour ouvrable (Frankfurter).",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:131: Text(tr(\"Taux de référence de la Banque centrale européenne, mis à jour chaque jour ouvrable (Frankfurter).\"))"
+  ]
+ },
+ {
+  "key": "Destination",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:145: TextField(tr(\"Destination\"), text: $trip.destination)"
+  ]
+ },
+ {
+  "key": "Chercher la ville (météo et fuseau)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:147: TextField(tr(\"Chercher la ville (météo et fuseau)\"), text: $query)"
+  ]
+ },
+ {
+  "key": "Ville trouvée : météo et heure locale activées",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:163: Label(tr(\"Ville trouvée : météo et heure locale activées\"), systemImage: \"checkmark.circle.fill\")"
+  ]
+ },
+ {
+  "key": "Départ",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:169: DatePicker(tr(\"Départ\"), selection: $trip.start).environment(\\.locale, Fmt.locale)",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:236: DatePicker(tr(\"Départ\"), selection: $stay.checkOut).environment(\\.locale, Fmt.locale)"
+  ]
+ },
+ {
+  "key": "Devise sur place",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:171: Picker(tr(\"Devise sur place\"), selection: $trip.currencyCode) {"
+  ]
+ },
+ {
+  "key": "Fuseau horaire",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:174: Picker(tr(\"Fuseau horaire\"), selection: $trip.timeZoneID) {"
+  ]
+ },
+ {
+  "key": "Numéro de vol (AC 870…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:206: TextField(tr(\"Numéro de vol (AC 870…)\"), text: $flight.number).textInputAutocapitalization(.characters)"
+  ]
+ }
+]

@@ -52,7 +52,7 @@ enum FitnessTiles {
             tile.caption = tr("Séance faite aujourd'hui")
             tile.visual = .bar(1)
         } else {
-            tile.caption = tr("\(Fmt.plural(exercises.count, tr("exercice"), tr("exercices"))) · \(totalSets)) séries"
+            tile.caption = tr("\(Fmt.plural(exercises.count, tr("exercice"), tr("exercices"))) · \(totalSets) séries")
         }
         tile.rows = exercises.enumerated().map { pair -> TileRow in
             let isCurrent = active.map { $0.exerciseIndex == pair.offset } ?? false
@@ -78,7 +78,7 @@ enum FitnessTiles {
             tile.visual = .timer(min(start, now), rest)
             tile.detail = tr("Repos jusqu'à \(Fmt.time(rest, uses24Hour: true))")
         } else if active == nil {
-            tile.detail = tr("Touche pour démarrer « \(state.routine(for: now)?.name ?? tr("ta séance"))) »"
+            tile.detail = tr("Touche pour démarrer « \(state.routine(for: now)?.name ?? tr("ta séance")) »")
         }
         tile.buttons = [TileButton(title: tr("Série faite"), symbol: "checkmark", action: .completeSet, isProminent: true)]
         tile.inline = "\(exercise.name) : \(setText(exercise))"
@@ -164,12 +164,12 @@ enum FitnessTiles {
             tile.caption = count > 1 ? tr("séances cette semaine") : tr("séance cette semaine")
             tile.detail = tr("Objectif à définir dans Tessera")
             tile.shortValue = Fmt.number(count)
-            tile.inline = tr("\(Fmt.plural(count, tr("séance"), tr("séances"))) cette )semaine"
+            tile.inline = tr("\(Fmt.plural(count, tr("séance"), tr("séances"))) cette semaine")
             return tile
         }
         tile.value = "\(count)/\(goal)"
         tile.caption = tr("séances cette semaine")
-        tile.detail = streak > 0 ? tr("Série : \(Fmt.plural(streak, tr("semaine"), tr("semai)nes")))" : tr("Objectif : \(goal) par semaine")
+        tile.detail = streak > 0 ? tr("Série : \(Fmt.plural(streak, tr("semaine"), tr("semaines")))") : tr("Objectif : \(goal) par semaine")
         tile.gauge = Double(count) / Double(goal)
         tile.shortValue = "\(count)/\(goal)"
         tile.inline = tr("\(count)/\(goal) séances · série \(streak)")

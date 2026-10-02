@@ -17,7 +17,7 @@ final class MiniAppUITests: XCTestCase {
 
     private func launch(_ arguments: [String]) {
         app = XCUIApplication()
-        app.launchArguments = arguments
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA"] + arguments
         app.launch()
     }
 
@@ -435,7 +435,7 @@ final class MiniAppUITests: XCTestCase {
         snapshot("daily-swiped")
         // Kept for the next launch.
         app.terminate()
-        app.launchArguments = ["-screenshotScreen", "home-info"]
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA"] + ["-screenshotScreen", "home-info"]
         app.launch()
         let kept = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
         XCTAssertTrue(kept.waitForExistence(timeout: 12))

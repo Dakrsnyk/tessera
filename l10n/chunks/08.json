@@ -1,0 +1,2521 @@
+[
+ {
+  "key": "Départ (YUL)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:207: TextField(tr(\"Départ (YUL)\"), text: $flight.from).textInputAutocapitalization(.characters)"
+  ]
+ },
+ {
+  "key": "Arrivée (CDG)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:208: TextField(tr(\"Arrivée (CDG)\"), text: $flight.to).textInputAutocapitalization(.characters)"
+  ]
+ },
+ {
+  "key": "Décollage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:209: DatePicker(tr(\"Décollage\"), selection: $flight.departure).environment(\\.locale, Fmt.locale)"
+  ]
+ },
+ {
+  "key": "Atterrissage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:210: DatePicker(tr(\"Atterrissage\"), selection: Binding(get: { flight.arrival ?? flight.departure.addingTimeInterval(7 * 3600) }, set: { flight.arrival = $0 }))"
+  ]
+ },
+ {
+  "key": "Terminal",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:212: TextField(tr(\"Terminal\"), text: $flight.terminal)",
+   "Shared/Theme/Theme.swift:368: id: .terminal, name: tr(\"Terminal\"), tagline: tr(\"Ta couleur sur noir, lignes d'écran\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Porte",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:213: TextField(tr(\"Porte\"), text: $flight.gate)",
+   "Shared/Render/Tiles/TravelTiles.swift:76: if !flight.gate.isEmpty { rows.append(TileRow(id: \"gate\", title: tr(\"Porte\"), value: flight.gate, symbol: \"door.left.hand.open\")) }"
+  ]
+ },
+ {
+  "key": "Siège",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:214: TextField(tr(\"Siège\"), text: $flight.seat)",
+   "Shared/Render/Tiles/TravelTiles.swift:77: if !flight.seat.isEmpty { rows.append(TileRow(id: \"seat\", title: tr(\"Siège\"), value: flight.seat, symbol: \"carseat.right\")) }"
+  ]
+ },
+ {
+  "key": "Adresse",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:234: TextField(tr(\"Adresse\"), text: $stay.address)"
+  ]
+ },
+ {
+  "key": "Arrivée",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:235: DatePicker(tr(\"Arrivée\"), selection: $stay.checkIn).environment(\\.locale, Fmt.locale)",
+   "Shared/Render/Tiles/TravelTiles.swift:74: rows.append(TileRow(id: \"arr\", title: tr(\"Arrivée\"), value: TF.time(arrival, context, zone: arrivalZone), detail: flight.to, symbol: \"airplane.arrival\"))"
+  ]
+ },
+ {
+  "key": "Numéro de réservation",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:237: TextField(tr(\"Numéro de réservation\"), text: $stay.confirmation)"
+  ]
+ },
+ {
+  "key": "Activité (visite, restaurant…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:256: TextField(tr(\"Activité (visite, restaurant…)\"), text: $activity.title)"
+  ]
+ },
+ {
+  "key": "%@ L/100 km",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:289: ValueRow(title: tr(\"Consommation\"), value: tr(\"\\(TF.decimal(consumption, 1)) L/100 km\"), symbol: \"fuelpump\")"
+  ]
+ },
+ {
+  "key": "Coût par mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:291: ValueRow(title: tr(\"Coût par mois\"), value: TF.money(cost.total, currency), symbol: \"car.fill\")"
+  ]
+ },
+ {
+  "key": "Fait",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:317: Label(tr(\"Fait\"), systemImage: \"checkmark\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:102: TileButton(title: tr(\"Fait\"), symbol: \"checkmark\", action: .completeSet, isProminent: true),"
+  ]
+ },
+ {
+  "key": "Coûts fixes",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:360: Text(tr(\"Coûts fixes\"))"
+  ]
+ },
+ {
+  "key": "Le coût mensuel ajoute la moyenne de tes pleins des trois derniers mois.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:362: Text(tr(\"Le coût mensuel ajoute la moyenne de tes pleins des trois derniers mois.\"))"
+  ]
+ },
+ {
+  "key": "Derniers pleins",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:365: Section(tr(\"Derniers pleins\")) {"
+  ]
+ },
+ {
+  "key": "Modifier le plein",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:406: SheetForm(title: isNew ? tr(\"Plein\") : tr(\"Modifier le plein\"), canSave: fill.liters > 0 && fill.total > 0 && fill.odometer > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Litres",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:408: NumberRow(title: tr(\"Litres\"), value: $fill.liters, unit: \"L\")"
+  ]
+ },
+ {
+  "key": "Total payé",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:409: NumberRow(title: tr(\"Total payé\"), value: $fill.total, unit: model.settings.currencyCode)"
+  ]
+ },
+ {
+  "key": "Plein complet",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:411: Toggle(tr(\"Plein complet\"), isOn: $fill.isFull)"
+  ]
+ },
+ {
+  "key": "Un plein complet permet de calculer la consommation exacte et l'autonomie.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:414: Text(tr(\"Un plein complet permet de calculer la consommation exacte et l'autonomie.\"))"
+  ]
+ },
+ {
+  "key": "Supprimer le plein",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:418: Button(tr(\"Supprimer le plein\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Nom (vidange, pneus…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:461: TextField(tr(\"Nom (vidange, pneus…)\"), text: $service.name)"
+  ]
+ },
+ {
+  "key": "Tous les",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:462: NumberRow(title: tr(\"Tous les\"), value: Binding(get: { service.intervalKm ?? 0 }, set: { service.intervalKm = $0 > 0 ? $0 : nil }), unit: tr(\"km\"))"
+  ]
+ },
+ {
+  "key": "mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:463: IntRow(title: tr(\"ou tous les\"), value: Binding(get: { service.intervalMonths ?? 0 }, set: { service.intervalMonths = $0 > 0 ? $0 : nil }), unit: tr(\"mois\"))",
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")"
+  ]
+ },
+ {
+  "key": "ou tous les",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:463: IntRow(title: tr(\"ou tous les\"), value: Binding(get: { service.intervalMonths ?? 0 }, set: { service.intervalMonths = $0 > 0 ? $0 : nil }), unit: tr(\"mois\"))"
+  ]
+ },
+ {
+  "key": "Dernier au compteur",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:464: NumberRow(title: tr(\"Dernier au compteur\"), value: Binding(get: { service.lastKm ?? 0 }, set: { service.lastKm = $0 > 0 ? $0 : nil }), unit: tr(\"km\"))"
+  ]
+ },
+ {
+  "key": "Dernière fois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:465: DatePicker(tr(\"Dernière fois\"), selection: Binding(get: { service.lastDate ?? Date() }, set: { service.lastDate = $0 }), displayedComponents: .date)"
+  ]
+ },
+ {
+  "key": "Coût habituel",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:467: NumberRow(title: tr(\"Coût habituel\"), value: $service.cost, unit: model.settings.currencyCode)"
+  ]
+ },
+ {
+  "key": "Titre (assurance, immatriculation…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:486: TextField(tr(\"Titre (assurance, immatriculation…)\"), text: $deadline.title)"
+  ]
+ },
+ {
+  "key": "Afficher mon anniversaire",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:512: Toggle(tr(\"Afficher mon anniversaire\"), isOn: Binding("
+  ]
+ },
+ {
+  "key": "Prochain anniversaire",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:521: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
+  ]
+ },
+ {
+  "key": "dans %@ j",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:521: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
+  ]
+ },
+ {
+  "key": "Ta date de naissance reste sur ton iPhone.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:526: Text(tr(\"Ta date de naissance reste sur ton iPhone.\"))"
+  ]
+ },
+ {
+  "key": "Région",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:530: Picker(tr(\"Région\"), selection: Binding(get: { life.holidayRegion }, set: { region in model.update(\\.life) { $0.holidayRegion = region } })) {"
+  ]
+ },
+ {
+  "key": "Lune",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:538: Section(tr(\"Lune\")) {",
+   "Shared/Model/Templates.swift:134: WidgetTemplate(id: \"moon-futuristic\", name: tr(\"Lune\"), kind: .moonPhase, themeID: .futuristic, accentHex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Pleine lune",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:540: ValueRow(title: tr(\"Pleine lune\"), value: Fmt.shortDay(MoonPhase.next(0.5, after: now)), symbol: \"moonphase.full.moon\")",
+   "Shared/Domains/Life.swift:224: tr(\"Pleine lune\"), tr(\"Lune gibbeuse décroissante\"), tr(\"Dernier quartier\"), tr(\"Dernier croissant\")][index(phase(at: date))]"
+  ]
+ },
+ {
+  "key": "Accueil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:54: case .daily, .miniApps, .info: tr(\"Accueil\")",
+   "App/TesseraApp.swift:204: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
+  ]
+ },
+ {
+  "key": "Bienvenue !",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:65: case .welcome: name.isEmpty ? tr(\"Bienvenue !\") : tr(\"Bienvenue, \\(name) !\")"
+  ]
+ },
+ {
+  "key": "Bienvenue, %@ !",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:65: case .welcome: name.isEmpty ? tr(\"Bienvenue !\") : tr(\"Bienvenue, \\(name) !\")"
+  ]
+ },
+ {
+  "key": "Tes mini-apps",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:67: case .miniApps: tr(\"Tes mini-apps\")"
+  ]
+ },
+ {
+  "key": "Le Studio",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:70: case .studio: tr(\"Le Studio\")"
+  ]
+ },
+ {
+  "key": "Le Store",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:71: case .store: tr(\"Le Store\")"
+  ]
+ },
+ {
+  "key": "Sur ton écran d'accueil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:73: case .homeScreen: tr(\"Sur ton écran d'accueil\")"
+  ]
+ },
+ {
+  "key": "À toi de jouer !",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:74: case .finish: tr(\"À toi de jouer !\")"
+  ]
+ },
+ {
+  "key": "Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:81: tr(\"Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.\")"
+  ]
+ },
+ {
+  "key": "Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:83: tr(\"Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.\")"
+  ]
+ },
+ {
+  "key": "Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:85: tr(\"Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes.\")"
+  ]
+ },
+ {
+  "key": "Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps et à tous tes widgets.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:87: tr(\"Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps et à tous tes widgets.\")"
+  ]
+ },
+ {
+  "key": "Choisis un univers, la taille et tes widgets, puis « Personnaliser » les ouvre dans le Studio.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:89: tr(\"Choisis un univers, la taille et tes widgets, puis « Personnaliser » les ouvre dans le Studio.\")"
+  ]
+ },
+ {
+  "key": "Thème, style, couleur principale, palettes, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:91: tr(\"Thème, style, couleur principale, palettes, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :\")"
+  ]
+ },
+ {
+  "key": "Des widgets prêts à l'emploi, des packs et des écrans d'accueil complets. Tout s'ouvre dans le Studio pour être personnalisé.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:93: tr(\"Des widgets prêts à l'emploi, des packs et des écrans d'accueil complets. Tout s'ouvre dans le Studio pour être personnalisé.\")"
+  ]
+ },
+ {
+  "key": "Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les ou réunis-en plusieurs en un seul.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:95: tr(\"Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les ou réunis-en plusieurs en un seul.\")"
+  ]
+ },
+ {
+  "key": "Tes widgets t'attendent dans la galerie de widgets d'iOS :",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:97: tr(\"Tes widgets t'attendent dans la galerie de widgets d'iOS :\")"
+  ]
+ },
+ {
+  "key": "Ton profil et les Réglages sont ici, en haut à droite. Tu pourras y revoir ce tutoriel quand tu veux.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:99: tr(\"Ton profil et les Réglages sont ici, en haut à droite. Tu pourras y revoir ce tutoriel quand tu veux.\")"
+  ]
+ },
+ {
+  "key": "Quitter le tutoriel",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:150: .accessibilityLabel(Text(tr(\"Quitter le tutoriel\")))"
+  ]
+ },
+ {
+  "key": "Touche « Modifier », puis « Ajouter un widget »",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:162: AddStepRow(number: 2, symbol: \"plus\", text: tr(\"Touche « Modifier », puis « Ajouter un widget »\"))"
+  ]
+ },
+ {
+  "key": "Cherche « Tessera », choisis la taille, puis ton widget",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:163: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Cherche « Tessera », choisis la taille, puis ton widget\"))"
+  ]
+ },
+ {
+  "key": "Aller à l'étape %@ : %@",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:184: .accessibilityLabel(Text(tr(\"Aller à l'étape \\(item.number) : \\(item.title(name: firstName))\")))"
+  ]
+ },
+ {
+  "key": "Passer le tutoriel",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:195: Button(tr(\"Passer le tutoriel\")) { finish() }"
+  ]
+ },
+ {
+  "key": "Passer l'étape",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:204: Button(tr(\"Passer l'étape\")) { advance() }"
+  ]
+ },
+ {
+  "key": "Terminer",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:232: case .finish: tr(\"Terminer\")"
+  ]
+ },
+ {
+  "key": "Suivant",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:233: default: tr(\"Suivant\")"
+  ]
+ },
+ {
+  "key": "Bravo !",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/TutorialOverlay.swift:297: Label(tr(\"Bravo !\"), systemImage: \"checkmark.circle.fill\")",
+   "App/Screens/Tutorial/TutorialOverlay.swift:302: .accessibilityLabel(Text(tr(\"Bravo !\")))"
+  ]
+ },
+ {
+  "key": "\n\nRésume ces faits pour le widget « %@ ».",
+  "placeholders": 1,
+  "uses": [
+   "App/Services/AIPhraser.swift:23: let prompt = tr(\"Faits :\\n\") + insight.facts.map { \"- \" + $0 }.joined(separator: \"\\n\") + tr(\"\\n\\nRésume ces faits pour le widget « \\(insight.title) ».\")"
+  ]
+ },
+ {
+  "key": "Faits :\n",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/AIPhraser.swift:23: let prompt = tr(\"Faits :\\n\") + insight.facts.map { \"- \" + $0 }.joined(separator: \"\\n\") + tr(\"\\n\\nRésume ces faits pour le widget « \\(insight.title) ».\")"
+  ]
+ },
+ {
+  "key": "L'accès à la position est refusé. Tu peux l'autoriser dans Réglages, ou chercher ta ville.",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/LocationService.swift:11: case .denied: tr(\"L'accès à la position est refusé. Tu peux l'autoriser dans Réglages, ou chercher ta ville.\")"
+  ]
+ },
+ {
+  "key": "Ta position n'a pas pu être trouvée. Réessaie ou cherche ta ville.",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/LocationService.swift:12: case .unavailable: tr(\"Ta position n'a pas pu être trouvée. Réessaie ou cherche ta ville.\")"
+  ]
+ },
+ {
+  "key": "Aucune ville trouvée.",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/LocationService.swift:13: case .notFound: tr(\"Aucune ville trouvée.\")"
+  ]
+ },
+ {
+  "key": "Ma position",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/LocationService.swift:52: name: placemark?.locality ?? placemark?.name ?? tr(\"Ma position\"),"
+  ]
+ },
+ {
+  "key": "C'est le moment de valider ton habitude du jour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/NotificationScheduler.swift:35: content.body = tr(\"C'est le moment de valider ton habitude du jour.\")"
+  ]
+ },
+ {
+  "key": "Un verre d'eau ?",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/NotificationScheduler.swift:58: content.title = tr(\"Un verre d'eau ?\")"
+  ]
+ },
+ {
+  "key": "Ajoute-le d'une touche depuis ton widget.",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/NotificationScheduler.swift:59: content.body = tr(\"Ajoute-le d'une touche depuis ton widget.\")"
+  ]
+ },
+ {
+  "key": "C'est le grand jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/NotificationScheduler.swift:80: content.title = design.options.countdownTitle.trimmed.isEmpty ? tr(\"C'est le grand jour\") : design.options.countdownTitle"
+  ]
+ },
+ {
+  "key": "Le jour J est arrivé.",
+  "placeholders": 0,
+  "uses": [
+   "App/Services/NotificationScheduler.swift:81: content.body = tr(\"Le jour J est arrivé.\")"
+  ]
+ },
+ {
+  "key": "Sans titre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CalendarService.swift:56: title: event.title?.trimmed.nonEmpty ?? tr(\"Sans titre\"),",
+   "Shared/Data/CalendarService.swift:81: title: event.title?.trimmed.nonEmpty ?? tr(\"Sans titre\"),"
+  ]
+ },
+ {
+  "key": "Bitcoin",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:35: CoinInfo(id: \"bitcoin\", symbol: \"BTC\", name: tr(\"Bitcoin\")),",
+   "Shared/Data/SampleData.swift:98: CoinQuote(id: \"bitcoin\", symbol: \"BTC\", name: tr(\"Bitcoin\"), price: 64_210, change24h: 2.4),"
+  ]
+ },
+ {
+  "key": "Ethereum",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:36: CoinInfo(id: \"ethereum\", symbol: \"ETH\", name: tr(\"Ethereum\")),",
+   "Shared/Data/SampleData.swift:99: CoinQuote(id: \"ethereum\", symbol: \"ETH\", name: tr(\"Ethereum\"), price: 3_180, change24h: -1.2),"
+  ]
+ },
+ {
+  "key": "Solana",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:37: CoinInfo(id: \"solana\", symbol: \"SOL\", name: tr(\"Solana\")),",
+   "Shared/Data/SampleData.swift:100: CoinQuote(id: \"solana\", symbol: \"SOL\", name: tr(\"Solana\"), price: 148, change24h: 5.6),"
+  ]
+ },
+ {
+  "key": "XRP",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:38: CoinInfo(id: \"ripple\", symbol: \"XRP\", name: tr(\"XRP\")),"
+  ]
+ },
+ {
+  "key": "Cardano",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:39: CoinInfo(id: \"cardano\", symbol: \"ADA\", name: tr(\"Cardano\")),"
+  ]
+ },
+ {
+  "key": "Dogecoin",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:40: CoinInfo(id: \"dogecoin\", symbol: \"DOGE\", name: tr(\"Dogecoin\")),"
+  ]
+ },
+ {
+  "key": "Litecoin",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:41: CoinInfo(id: \"litecoin\", symbol: \"LTC\", name: tr(\"Litecoin\")),"
+  ]
+ },
+ {
+  "key": "Polkadot",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/CryptoService.swift:42: CoinInfo(id: \"polkadot\", symbol: \"DOT\", name: tr(\"Polkadot\")),"
+  ]
+ },
+ {
+  "key": "Objectif : %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:96: tr(\"Objectif : \\(kcal(goals.kcal)) kcal\"),"
+  ]
+ },
+ {
+  "key": "Mangé aujourd'hui : %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:97: tr(\"Mangé aujourd'hui : \\(kcal(today.kcal)) kcal\"),"
+  ]
+ },
+ {
+  "key": "Protéines : %@ g sur %@ g",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:98: tr(\"Protéines : \\(Int(safely: today.protein.rounded())) g sur \\(Int(safely: goals.protein)) g\"),"
+  ]
+ },
+ {
+  "key": "Rien de noté aujourd'hui. Ton objectif est de %@ kcal.",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:102: text = tr(\"Rien de noté aujourd'hui. Ton objectif est de \\(kcal(goals.kcal)) kcal.\")"
+  ]
+ },
+ {
+  "key": "Il te reste %@ kcal aujourd'hui",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:104: text = tr(\"Il te reste \\(kcal(left)) kcal aujourd'hui\")"
+  ]
+ },
+ {
+  "key": " et %@ g de protéines à trouver.",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:106: text += tr(\" et \\(Int(safely: proteinLeft.rounded())) g de protéines à trouver.\")"
+  ]
+ },
+ {
+  "key": ", et ton objectif de protéines est atteint.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:108: text += tr(\", et ton objectif de protéines est atteint.\")"
+  ]
+ },
+ {
+  "key": "Tu as dépassé ton objectif de %@ kcal aujourd'hui.",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:111: text = tr(\"Tu as dépassé ton objectif de \\(kcal(-left)) kcal aujourd'hui.\")"
+  ]
+ },
+ {
+  "key": "Reste : %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:113: facts.append(tr(\"Reste : \\(kcal(left)) kcal\"))"
+  ]
+ },
+ {
+  "key": "Protéines restantes : %@ g",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:114: facts.append(tr(\"Protéines restantes : \\(Int(safely: max(0, proteinLeft).rounded())) g\"))"
+  ]
+ },
+ {
+  "key": "Moyenne sur 7 jours : %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:117: let line = tr(\"Moyenne sur 7 jours : \\(kcal(average)) kcal\")"
+  ]
+ },
+ {
+  "key": "Suivi %@ jours d'affilée",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:123: let line = tr(\"Suivi \\(streak) jours d'affilée\")"
+  ]
+ },
+ {
+  "key": "Budget du mois : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:136: tr(\"Budget du mois : \\(money(state.monthlyBudget))\"),"
+  ]
+ },
+ {
+  "key": "Dépensé : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:137: tr(\"Dépensé : \\(money(spent))\"),"
+  ]
+ },
+ {
+  "key": "Reste : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:138: tr(\"Reste : \\(money(remaining))\"),"
+  ]
+ },
+ {
+  "key": "Par jour : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:139: tr(\"Par jour : \\(money(perDay))\"),"
+  ]
+ },
+ {
+  "key": "Il te reste %@ ce mois-ci, soit %@ par jour.",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:142: ? tr(\"Il te reste \\(money(remaining)) ce mois-ci, soit \\(money(perDay)) par jour.\")"
+  ]
+ },
+ {
+  "key": "Tu as dépassé ton budget du mois de %@.",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:143: : tr(\"Tu as dépassé ton budget du mois de \\(money(-remaining)).\")"
+  ]
+ },
+ {
+  "key": "%@ : %@ cette semaine contre %@ la semaine dernière",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Data/Insights.swift:149: let line = tr(\"\\(biggest.name) : \\(money(biggest.current)) cette semaine contre \\(money(biggest.previous)) la semaine dernière\")"
+  ]
+ },
+ {
+  "key": " Plus forte hausse : %@ (%@ de plus).",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:153: ? tr(\" Plus forte hausse : \\(biggest.name.lowercased()) (\\(money(delta)) de plus).\")"
+  ]
+ },
+ {
+  "key": " Belle baisse en %@ (%@ de moins).",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:154: : tr(\" Belle baisse en \\(biggest.name.lowercased()) (\\(money(-delta)) de moins).\")"
+  ]
+ },
+ {
+  "key": "%@ : %@ dans %@ j",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Data/Insights.swift:157: let line = tr(\"\\(bill.bill.name) : \\(money(bill.bill.amount)) dans \\(bill.days) j\")"
+  ]
+ },
+ {
+  "key": "Focus cette semaine : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:172: tr(\"Focus cette semaine : \\(focusText)\"),"
+  ]
+ },
+ {
+  "key": "Objectif : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:173: tr(\"Objectif : \\(Fmt.hours(goal))\"),"
+  ]
+ },
+ {
+  "key": "Tâches ouvertes : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:174: tr(\"Tâches ouvertes : \\(openTasks)\"),"
+  ]
+ },
+ {
+  "key": "Tâches faites aujourd'hui : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:175: tr(\"Tâches faites aujourd'hui : \\(doneToday)\"),"
+  ]
+ },
+ {
+  "key": "Habitudes faites aujourd'hui : %@ sur %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:176: tr(\"Habitudes faites aujourd'hui : \\(habitsDone) sur \\(content.habits.count)\"),"
+  ]
+ },
+ {
+  "key": "%@ de concentration cette semaine",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:178: var text = tr(\"\\(focusText) de concentration cette semaine\")"
+  ]
+ },
+ {
+  "key": "Progression : %@ %%",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:181: facts.append(tr(\"Progression : \\(percent) %\"))"
+  ]
+ },
+ {
+  "key": ", %@ %% de ton objectif.",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:182: text += tr(\", \\(percent) % de ton objectif.\")"
+  ]
+ },
+ {
+  "key": " Habitudes du jour : %@ sur %@.",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:187: text += tr(\" Habitudes du jour : \\(habitsDone) sur \\(content.habits.count).\")"
+  ]
+ },
+ {
+  "key": "%@ faite%@ aujourd'hui",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(openTasks) tâche\\(openTasks > 1 ? \"s\" : \"\") à faire\"), tr(\"\\(doneToday) faite\\(doneToday > 1 ? \"s\" : \"\") aujourd'hui\")]"
+  ]
+ },
+ {
+  "key": "%@ tâche%@ à faire",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(openTasks) tâche\\(openTasks > 1 ? \"s\" : \"\") à faire\"), tr(\"\\(doneToday) faite\\(doneToday > 1 ? \"s\" : \"\") aujourd'hui\")]",
+   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(open) tâche\\(open > 1 ? \"s\" : \"\") à faire\"))"
+  ]
+ },
+ {
+  "key": "%@ · série de %@ j",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:192: let line = tr(\"\\(best.name) · série de \\(best.streak(asOf: now)) j\")"
+  ]
+ },
+ {
+  "key": "%@ et %@ à %@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Data/Insights.swift:207: parts.append(tr(\"\\(Fmt.temperature(weather.temperature, unit: settings.temperatureUnit)) et \\(WeatherCode.description(weather.code).lowercased()) à \\(weather.locationName)\"))"
+  ]
+ },
+ {
+  "key": "toute la journée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:210: let time = next.isAllDay ? tr(\"toute la journée\") : \"à \\(Fmt.time(next.start, uses24Hour: settings.uses24HourClock))\""
+  ]
+ },
+ {
+  "key": "Prochain : %@ %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:211: facts.append(tr(\"Prochain : \\(next.title) \\(time)\"))"
+  ]
+ },
+ {
+  "key": "Tâches : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:216: facts.append(tr(\"Tâches : \\(open)\"))"
+  ]
+ },
+ {
+  "key": "toutes tes tâches sont faites",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(open) tâche\\(open > 1 ? \"s\" : \"\") à faire\"))"
+  ]
+ },
+ {
+  "key": "Priorités : %@ sur %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Data/Insights.swift:222: facts.append(tr(\"Priorités : \\(done) sur \\(priorities.count)\"))"
+  ]
+ },
+ {
+  "key": "Calories restantes : %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Data/Insights.swift:228: facts.append(tr(\"Calories restantes : \\(left) kcal\"))"
+  ]
+ },
+ {
+  "key": "Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:233: text = tr(\"Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.\")"
+  ]
+ },
+ {
+  "key": "Ma journée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:239: return Insight(title: tr(\"Ma journée\"), symbol: \"sparkles\", text: text, facts: facts, points: Array(facts.prefix(5)))",
+   "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .myDay, title: tr(\"Ma journée\"), summary: tr(\"L'heure, la météo, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.\"), category: .dashboards, symbol"
+  ]
+ },
+ {
+  "key": "Appeler le garage",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:77: TaskItem(title: tr(\"Appeler le garage\")),",
+   "Shared/Data/SampleData.swift:68: TaskItem(title: tr(\"Appeler le garage\"), priority: .medium, due: DateMath.startOfDay(now)),"
+  ]
+ },
+ {
+  "key": "Envoyer la facture",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:78: TaskItem(title: tr(\"Envoyer la facture\")),",
+   "Shared/Data/SampleData.swift:69: TaskItem(title: tr(\"Envoyer la facture\"), priority: .high, due: day(0, 11, from: now), hasTime: true),"
+  ]
+ },
+ {
+  "key": "Courir 5 km",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:79: TaskItem(title: tr(\"Courir 5 km\"), isDone: true, completedAt: now),",
+   "Shared/Data/SampleData.swift:70: TaskItem(title: tr(\"Courir 5 km\"), isDone: true, completedAt: now, due: DateMath.startOfDay(now)),"
+  ]
+ },
+ {
+  "key": "Lire 20 pages",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:80: TaskItem(title: tr(\"Lire 20 pages\")),",
+   "Shared/Data/SampleData.swift:71: TaskItem(title: tr(\"Lire 20 pages\"), due: DateMath.startOfDay(now), repeats: .daily),"
+  ]
+ },
+ {
+  "key": "Méditer",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:88: Habit(name: tr(\"Méditer\"), symbol: \"brain.head.profile\", colorHex: \"8C6CFF\", completedDays: Array(recent.prefix(4))),",
+   "Shared/Data/SampleData.swift:78: Habit(name: tr(\"Méditer\"), symbol: \"brain.head.profile\", colorHex: \"8C6CFF\", completedDays: keys(Array(0...11) + [13, 14, 16, 17, 18, 20, 22, 23, 25])),"
+  ]
+ },
+ {
+  "key": "Lecture",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:90: Habit(name: tr(\"Lecture\"), symbol: \"book.fill\", colorHex: \"2F8F7A\", completedDays: Array(recent.prefix(3))),",
+   "Shared/Data/SampleData.swift:80: Habit(name: tr(\"Lecture\"), symbol: \"book.fill\", colorHex: \"2F8F7A\", completedDays: keys([0, 1, 2, 3, 5, 6, 7, 9, 10, 12, 14, 15, 17, 19, 21, 22, 24, 26, 28])),"
+  ]
+ },
+ {
+  "key": "Salaire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:99: MoneyItem(name: tr(\"Salaire\"), amount: 3_600, period: .month, isIncome: true),",
+   "Shared/Data/SampleData.swift:256: if date <= now { state.addIncome(IncomeEntry(amount: 1_500, label: tr(\"Salaire\"), date: date)) }"
+  ]
+ },
+ {
+  "key": "Loyer",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:100: MoneyItem(name: tr(\"Loyer\"), amount: 1_250, period: .month, isIncome: false),",
+   "Shared/Data/SampleData.swift:268: Bill(name: tr(\"Loyer\"), amount: 1_250, anchorDate: day(3, 0, from: now), symbol: \"house.fill\"),"
+  ]
+ },
+ {
+  "key": "Réunion d'équipe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:122: EventSnapshot(id: \"1\", title: tr(\"Réunion d'équipe\"), start: now.addingTimeInterval(3_600), end: now.addingTimeInterval(5_400), isAllDay: false, colorHex: \"3366FF\"),",
+   "Shared/Data/SampleData.swift:59: EventSnapshot(id: \"1\", title: tr(\"Réunion d'équipe\"), start: now.addingTimeInterval(3_600), end: now.addingTimeInterval(5_400), isAllDay: false, colorHex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Dentiste",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:123: EventSnapshot(id: \"2\", title: tr(\"Dentiste\"), start: now.addingTimeInterval(4 * 3_600), end: now.addingTimeInterval(5 * 3_600), isAllDay: false, colorHex: \"FF6B57\"),",
+   "Shared/Data/SampleData.swift:60: EventSnapshot(id: \"2\", title: tr(\"Dentiste\"), start: now.addingTimeInterval(4 * 3_600), end: now.addingTimeInterval(5 * 3_600), isAllDay: false, colorHex: \"FF6B57\"),"
+  ]
+ },
+ {
+  "key": "Dîner avec Léa",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/PayloadLoader.swift:124: EventSnapshot(id: \"3\", title: tr(\"Dîner avec Léa\"), start: now.addingTimeInterval(8 * 3_600), end: now.addingTimeInterval(10 * 3_600), isAllDay: false, colorHex: \"2F8F7A\"),"
+  ]
+ },
+ {
+  "key": "Souper avec Léa",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:61: EventSnapshot(id: \"3\", title: tr(\"Souper avec Léa\"), start: now.addingTimeInterval(8 * 3_600), end: now.addingTimeInterval(10 * 3_600), isAllDay: false, colorHex: \"2F8F7A\"),"
+  ]
+ },
+ {
+  "key": "Payer le loyer",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:72: TaskItem(title: tr(\"Payer le loyer\"), priority: .high, due: day(-1, 0, from: now)),"
+  ]
+ },
+ {
+  "key": "Réserver le resto pour samedi",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:73: TaskItem(title: tr(\"Réserver le resto pour samedi\"), priority: .low, due: day(2, 0, from: now)),"
+  ]
+ },
+ {
+  "key": "Trier les photos de vacances",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:74: TaskItem(title: tr(\"Trier les photos de vacances\")),"
+  ]
+ },
+ {
+  "key": "Pas d'écran au lit",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:81: Habit(name: tr(\"Pas d'écran au lit\"), symbol: \"moon.zzz.fill\", colorHex: \"3366FF\", completedDays: keys([0, 2, 3, 6, 9, 10, 13, 17, 20, 24])),"
+  ]
+ },
+ {
+  "key": "Exemple Inc.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:103: let example = CompanyRef(cik: 1, ticker: \"EXMP\", name: tr(\"Exemple Inc.\"))",
+   "Shared/Data/SampleData.swift:332: Holding(kind: .stock, name: tr(\"Exemple Inc.\"), symbol: \"EXMP\", quantity: 15, costBasis: 2_450, manualPrice: 186.4),"
+  ]
+ },
+ {
+  "key": "Démo Corp",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:105: data.following.followed = [example, CompanyRef(cik: 2, ticker: \"DEMO\", name: tr(\"Démo Corp\")), CompanyRef(cik: 3, ticker: \"TEST\", name: tr(\"Test Industries\"))]",
+   "Shared/Data/SampleData.swift:108: company(CompanyRef(cik: 2, ticker: \"DEMO\", name: tr(\"Démo Corp\")), base: 54e9, growth: 0.06, margin: 0.14, now: now),"
+  ]
+ },
+ {
+  "key": "Test Industries",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:105: data.following.followed = [example, CompanyRef(cik: 2, ticker: \"DEMO\", name: tr(\"Démo Corp\")), CompanyRef(cik: 3, ticker: \"TEST\", name: tr(\"Test Industries\"))]",
+   "Shared/Data/SampleData.swift:109: company(CompanyRef(cik: 3, ticker: \"TEST\", name: tr(\"Test Industries\")), base: 31e9, growth: 0.19, margin: 0.09, now: now),"
+  ]
+ },
+ {
+  "key": "Lisbonne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:114: data.tripWeather = weather(now: now, name: tr(\"Lisbonne\"), shift: 6)",
+   "Shared/Data/SampleData.swift:411: state.trips = [Trip(destination: tr(\"Lisbonne\"), start: start, end: end, timeZoneID: \"Europe/Lisbon\", currencyCode: \"EUR\", latitude: 38.72, longitude: -9.14)]"
+  ]
+ },
+ {
+  "key": "Déjeuner protéiné",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:160: state.savedMeals = [SavedMeal(name: tr(\"Déjeuner protéiné\"), items: ["
+  ]
+ },
+ {
+  "key": "Tractions",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:176: ExerciseTemplate(name: tr(\"Tractions\"), sets: 4, reps: 8, weight: 0, restSeconds: 90),"
+  ]
+ },
+ {
+  "key": "Développé militaire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:177: ExerciseTemplate(name: tr(\"Développé militaire\"), sets: 3, reps: 10, weight: 35, restSeconds: 90),"
+  ]
+ },
+ {
+  "key": "Rowing haltère",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:178: ExerciseTemplate(name: tr(\"Rowing haltère\"), sets: 3, reps: 10, weight: 24, restSeconds: 75),"
+  ]
+ },
+ {
+  "key": "Bas du corps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:180: let lower = Routine(name: tr(\"Bas du corps\"), exercises: ["
+  ]
+ },
+ {
+  "key": "Squat",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:181: ExerciseTemplate(name: tr(\"Squat\"), sets: 4, reps: 6, weight: 80, restSeconds: 150),"
+  ]
+ },
+ {
+  "key": "Soulevé de terre roumain",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:182: ExerciseTemplate(name: tr(\"Soulevé de terre roumain\"), sets: 3, reps: 8, weight: 70, restSeconds: 120),",
+   "Shared/Domains/ExerciseLibrary.swift:723: x(\"rdl\", tr(\"Soulevé de terre roumain\"), [.hamstrings], [.glutes, .lowerBack], [.barbell], .strength, .intermediate, .hinge,"
+  ]
+ },
+ {
+  "key": "Fentes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:183: ExerciseTemplate(name: tr(\"Fentes\"), sets: 3, reps: 10, weight: 20, restSeconds: 90),"
+  ]
+ },
+ {
+  "key": "Full body",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:185: let full = Routine(name: tr(\"Full body\"), exercises: [",
+   "Shared/Domains/ExerciseLibrary.swift:51: case .fullBody: tr(\"Full body\")"
+  ]
+ },
+ {
+  "key": "Soulevé de terre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:186: ExerciseTemplate(name: tr(\"Soulevé de terre\"), sets: 3, reps: 5, weight: 100, restSeconds: 180),",
+   "Shared/Domains/ExerciseLibrary.swift:719: x(\"deadlift\", tr(\"Soulevé de terre\"), [.lowerBack, .hamstrings, .glutes], [.quads, .traps, .forearms], [.barbell], .strength, .intermediate, .hinge,"
+  ]
+ },
+ {
+  "key": "Pompes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:187: ExerciseTemplate(name: tr(\"Pompes\"), sets: 3, reps: 15, weight: 0, restSeconds: 60),",
+   "Shared/Data/SampleData.swift:490: CounterItem(name: tr(\"Pompes\"), symbol: \"figure.strengthtraining.functional\", colorHex: \"E5484D\", step: 10, goal: 100, resetsDaily: true, total: 40, dayKey: today),"
+  ]
+ },
+ {
+  "key": "Bus",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:221: (86.40, 1, \"IGA\"), (4.50, 2, tr(\"Café\")), (32.00, 4, tr(\"Cinéma\")), (112.75, 1, tr(\"Costco\")), (3.75, 3, tr(\"Bus\")),",
+   "Shared/Data/SampleData.swift:264: QuickExpense(name: tr(\"Bus\"), amount: 3.75, categoryID: cat(3), symbol: \"bus.fill\"),"
+  ]
+ },
+ {
+  "key": "Café",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:221: (86.40, 1, \"IGA\"), (4.50, 2, tr(\"Café\")), (32.00, 4, tr(\"Cinéma\")), (112.75, 1, tr(\"Costco\")), (3.75, 3, tr(\"Bus\")),",
+   "Shared/Data/SampleData.swift:263: QuickExpense(name: tr(\"Café\"), amount: 4.5, categoryID: cat(2), symbol: \"cup.and.saucer.fill\"),"
+  ]
+ },
+ {
+  "key": "Cinéma",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:221: (86.40, 1, \"IGA\"), (4.50, 2, tr(\"Café\")), (32.00, 4, tr(\"Cinéma\")), (112.75, 1, tr(\"Costco\")), (3.75, 3, tr(\"Bus\")),",
+   "Shared/Data/SampleData.swift:243: (38 + Double(back * 6), 4, tr(\"Spectacle\"), 11), (19, 4, tr(\"Cinéma\"), 26),"
+  ]
+ },
+ {
+  "key": "Costco",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:221: (86.40, 1, \"IGA\"), (4.50, 2, tr(\"Café\")), (32.00, 4, tr(\"Cinéma\")), (112.75, 1, tr(\"Costco\")), (3.75, 3, tr(\"Bus\")),",
+   "Shared/Data/SampleData.swift:240: (92 + Double(back * 7), 1, tr(\"Épicerie\"), 2), (118 - Double(back * 5), 1, tr(\"Costco\"), 9), (84 + Double(back * 3), 1, \"IGA\", 16), (101, 1, tr(\"Marché\"), 24),"
+  ]
+ },
+ {
+  "key": "Lunch",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:222: (18.90, 2, tr(\"Lunch\")), (64.20, 5, tr(\"Quincaillerie\")), (41.30, 1, tr(\"Marché\")), (27.00, 2, tr(\"Pizza\")), (90.00, 3, tr(\"Passe mensuelle\")),",
+   "Shared/Data/SampleData.swift:265: QuickExpense(name: tr(\"Lunch\"), amount: 15, categoryID: cat(2), symbol: \"takeoutbag.and.cup.and.straw.fill\"),"
+  ]
+ },
+ {
+  "key": "Marché",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:222: (18.90, 2, tr(\"Lunch\")), (64.20, 5, tr(\"Quincaillerie\")), (41.30, 1, tr(\"Marché\")), (27.00, 2, tr(\"Pizza\")), (90.00, 3, tr(\"Passe mensuelle\")),",
+   "Shared/Data/SampleData.swift:240: (92 + Double(back * 7), 1, tr(\"Épicerie\"), 2), (118 - Double(back * 5), 1, tr(\"Costco\"), 9), (84 + Double(back * 3), 1, \"IGA\", 16), (101, 1, tr(\"Marché\"), 24),"
+  ]
+ },
+ {
+  "key": "Passe mensuelle",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:222: (18.90, 2, tr(\"Lunch\")), (64.20, 5, tr(\"Quincaillerie\")), (41.30, 1, tr(\"Marché\")), (27.00, 2, tr(\"Pizza\")), (90.00, 3, tr(\"Passe mensuelle\")),",
+   "Shared/Data/SampleData.swift:242: (90, 3, tr(\"Passe mensuelle\"), 1), (22 + Double(back), 3, tr(\"Taxi\"), 18),"
+  ]
+ },
+ {
+  "key": "Pizza",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:222: (18.90, 2, tr(\"Lunch\")), (64.20, 5, tr(\"Quincaillerie\")), (41.30, 1, tr(\"Marché\")), (27.00, 2, tr(\"Pizza\")), (90.00, 3, tr(\"Passe mensuelle\")),",
+   "Shared/Data/SampleData.swift:241: (24 + Double(back * 4), 2, tr(\"Resto\"), 5), (46 - Double(back * 2), 2, tr(\"Brunch\"), 13), (31, 2, tr(\"Pizza\"), 21),"
+  ]
+ },
+ {
+  "key": "Quincaillerie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:222: (18.90, 2, tr(\"Lunch\")), (64.20, 5, tr(\"Quincaillerie\")), (41.30, 1, tr(\"Marché\")), (27.00, 2, tr(\"Pizza\")), (90.00, 3, tr(\"Passe mensuelle\")),",
+   "Shared/Data/SampleData.swift:244: (Double(40 + back * 13), 5, tr(\"Quincaillerie\"), 7), (27.5, 6, tr(\"Divers\"), 20),"
+  ]
+ },
+ {
+  "key": "App",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:223: (15.00, 4, tr(\"Musée\")), (58.60, 1, tr(\"Épicerie\")), (22.40, 2, tr(\"Resto\")), (35.00, 6, tr(\"Cadeau\")), (9.99, 6, tr(\"App\")),"
+  ]
+ },
+ {
+  "key": "Cadeau",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:223: (15.00, 4, tr(\"Musée\")), (58.60, 1, tr(\"Épicerie\")), (22.40, 2, tr(\"Resto\")), (35.00, 6, tr(\"Cadeau\")), (9.99, 6, tr(\"App\")),"
+  ]
+ },
+ {
+  "key": "Musée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:223: (15.00, 4, tr(\"Musée\")), (58.60, 1, tr(\"Épicerie\")), (22.40, 2, tr(\"Resto\")), (35.00, 6, tr(\"Cadeau\")), (9.99, 6, tr(\"App\")),"
+  ]
+ },
+ {
+  "key": "Resto",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:223: (15.00, 4, tr(\"Musée\")), (58.60, 1, tr(\"Épicerie\")), (22.40, 2, tr(\"Resto\")), (35.00, 6, tr(\"Cadeau\")), (9.99, 6, tr(\"App\")),",
+   "Shared/Data/SampleData.swift:241: (24 + Double(back * 4), 2, tr(\"Resto\"), 5), (46 - Double(back * 2), 2, tr(\"Brunch\"), 13), (31, 2, tr(\"Pizza\"), 21),"
+  ]
+ },
+ {
+  "key": "Brunch",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:241: (24 + Double(back * 4), 2, tr(\"Resto\"), 5), (46 - Double(back * 2), 2, tr(\"Brunch\"), 13), (31, 2, tr(\"Pizza\"), 21),"
+  ]
+ },
+ {
+  "key": "Taxi",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:242: (90, 3, tr(\"Passe mensuelle\"), 1), (22 + Double(back), 3, tr(\"Taxi\"), 18),"
+  ]
+ },
+ {
+  "key": "Spectacle",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:243: (38 + Double(back * 6), 4, tr(\"Spectacle\"), 11), (19, 4, tr(\"Cinéma\"), 26),"
+  ]
+ },
+ {
+  "key": "Divers",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:244: (Double(40 + back * 13), 5, tr(\"Quincaillerie\"), 7), (27.5, 6, tr(\"Divers\"), 20),"
+  ]
+ },
+ {
+  "key": "Contrat de design",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:259: state.addIncome(IncomeEntry(amount: 350 + Double(back * 40), label: tr(\"Contrat de design\"), date: start.addingTimeInterval(19 * 86_400 + 15 * 3_600)))"
+  ]
+ },
+ {
+  "key": "Hydro",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:269: Bill(name: tr(\"Hydro\"), amount: 86, anchorDate: day(9, 0, from: now), symbol: \"bolt.fill\"),"
+  ]
+ },
+ {
+  "key": "Internet",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:270: Bill(name: tr(\"Internet\"), amount: 70, anchorDate: day(12, 0, from: now), symbol: \"wifi\"),"
+  ]
+ },
+ {
+  "key": "Netflix",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:271: Bill(name: tr(\"Netflix\"), amount: 16.99, anchorDate: day(5, 0, from: now), isSubscription: true, symbol: \"play.tv.fill\"),"
+  ]
+ },
+ {
+  "key": "Spotify",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:272: Bill(name: tr(\"Spotify\"), amount: 11.99, anchorDate: day(15, 0, from: now), isSubscription: true, symbol: \"music.note\"),"
+  ]
+ },
+ {
+  "key": "Voyage au Japon",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:277: SavingsGoal(name: tr(\"Voyage au Japon\"), target: 5_000, saved: 2_150, deadline: day(240, 0, from: now)),"
+  ]
+ },
+ {
+  "key": "Fonds d'urgence",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:278: SavingsGoal(name: tr(\"Fonds d'urgence\"), target: 10_000, saved: 6_400, deadline: nil),"
+  ]
+ },
+ {
+  "key": "Compte chèque",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:281: Account(name: tr(\"Compte chèque\"), balance: 2_350),"
+  ]
+ },
+ {
+  "key": "CELI",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:283: Account(name: tr(\"CELI\"), balance: 12_500),"
+  ]
+ },
+ {
+  "key": "Carte de crédit",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:284: Account(name: tr(\"Carte de crédit\"), balance: 850, isLiability: true),"
+  ]
+ },
+ {
+  "key": "Prêt auto",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:285: Account(name: tr(\"Prêt auto\"), balance: 9_800, isLiability: true),"
+  ]
+ },
+ {
+  "key": "Atelier Nova",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:296: state.name = tr(\"Atelier Nova\")"
+  ]
+ },
+ {
+  "key": "Publicité",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:306: BusinessExpense(date: day(-2, from: now), amount: 900, label: tr(\"Publicité\")),"
+  ]
+ },
+ {
+  "key": "Matériel",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:307: BusinessExpense(date: day(-6, from: now), amount: 620, label: tr(\"Matériel\")),"
+  ]
+ },
+ {
+  "key": "Frais de paiement",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:309: BusinessExpense(date: day(-12, from: now), amount: 310, label: tr(\"Frais de paiement\")),"
+  ]
+ },
+ {
+  "key": "Sous-traitance",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:310: BusinessExpense(date: day(-15, from: now), amount: 1_450, label: tr(\"Sous-traitance\")),"
+  ]
+ },
+ {
+  "key": "Abonnés Instagram",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:317: var followers = CustomMetric(name: tr(\"Abonnés Instagram\"), target: 5_000)"
+  ]
+ },
+ {
+  "key": "Devis envoyés",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:318: var quotes = CustomMetric(name: tr(\"Devis envoyés\"), unit: tr(\"devis\"))"
+  ]
+ },
+ {
+  "key": "devis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:318: var quotes = CustomMetric(name: tr(\"Devis envoyés\"), unit: tr(\"devis\"))"
+  ]
+ },
+ {
+  "key": "iShares Core Equity",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:331: Holding(kind: .etf, name: tr(\"iShares Core Equity\"), symbol: \"XEQT\", quantity: 120, costBasis: 3_300, manualPrice: 32.4),"
+  ]
+ },
+ {
+  "key": "Liquidités",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:335: Holding(kind: .cash, name: tr(\"Liquidités\"), symbol: \"CAD\", quantity: 1_500, costBasis: 1_500),",
+   "Shared/Domains/Portfolio.swift:12: case .cash: tr(\"Liquidités\")"
+  ]
+ },
+ {
+  "key": "Mathématiques",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:360: let math = Course(name: tr(\"Mathématiques\"), colorHex: \"3366FF\", teacher: tr(\"Mme Tremblay\"), credits: 3)"
+  ]
+ },
+ {
+  "key": "Mme Tremblay",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:360: let math = Course(name: tr(\"Mathématiques\"), colorHex: \"3366FF\", teacher: tr(\"Mme Tremblay\"), credits: 3)"
+  ]
+ },
+ {
+  "key": "Biologie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:361: let bio = Course(name: tr(\"Biologie\"), colorHex: \"D6409F\", teacher: tr(\"M. Gagnon\"), credits: 3)",
+   "Shared/Data/SampleData.swift:391: Flashcard(deck: tr(\"Biologie\"), front: tr(\"Mitochondrie\"), back: tr(\"Organite qui produit l'énergie de la cellule (ATP).\"), box: 2, due: now.addingTimeInterval(-600)),"
+  ]
+ },
+ {
+  "key": "M. Gagnon",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:361: let bio = Course(name: tr(\"Biologie\"), colorHex: \"D6409F\", teacher: tr(\"M. Gagnon\"), credits: 3)"
+  ]
+ },
+ {
+  "key": "Histoire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:362: let history = Course(name: tr(\"Histoire\"), colorHex: \"F2A33A\", teacher: tr(\"Mme Roy\"), credits: 2)",
+   "Shared/Data/SampleData.swift:393: Flashcard(deck: tr(\"Histoire\"), front: \"1867\", back: tr(\"Confédération canadienne.\"), box: 3, due: day(2, 0, from: now)),"
+  ]
+ },
+ {
+  "key": "Mme Roy",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:362: let history = Course(name: tr(\"Histoire\"), colorHex: \"F2A33A\", teacher: tr(\"Mme Roy\"), credits: 2)"
+  ]
+ },
+ {
+  "key": "Anglais",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:363: let english = Course(name: tr(\"Anglais\"), colorHex: \"1E9E75\", teacher: tr(\"M. Smith\"), credits: 2)",
+   "Shared/Data/SampleData.swift:394: Flashcard(deck: tr(\"Anglais\"), front: tr(\"To overcome\"), back: tr(\"Surmonter\"), box: 1, due: now.addingTimeInterval(-60)),"
+  ]
+ },
+ {
+  "key": "M. Smith",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:363: let english = Course(name: tr(\"Anglais\"), colorHex: \"1E9E75\", teacher: tr(\"M. Smith\"), credits: 2)"
+  ]
+ },
+ {
+  "key": "Labo 3",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:367: slots.append(ClassSlot(courseID: [math, bio, history, english, math][weekday - 1].id, weekday: weekday, startMinute: 8 * 60 + 30, endMinute: 10 * 60 + 20, room: [\"B-204\", tr(\"Labo 3\"), \"",
+   "Shared/Data/SampleData.swift:368: slots.append(ClassSlot(courseID: [bio, english, math, history, bio][weekday - 1].id, weekday: weekday, startMinute: 13 * 60, endMinute: 14 * 60 + 50, room: [tr(\"Labo 3\"), \"C-015\", \"B-204"
+  ]
+ },
+ {
+  "key": "Labo 1",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:368: slots.append(ClassSlot(courseID: [bio, english, math, history, bio][weekday - 1].id, weekday: weekday, startMinute: 13 * 60, endMinute: 14 * 60 + 50, room: [tr(\"Labo 3\"), \"C-015\", \"B-204",
+   "Shared/Data/SampleData.swift:385: Grade(courseID: bio.id, title: tr(\"Labo 1\"), score: 88, maxScore: 100, weight: 15),"
+  ]
+ },
+ {
+  "key": "Gymnase",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:373: Exam(courseID: bio.id, title: tr(\"Intra de biologie\"), date: day(6, 9, from: now), room: tr(\"Gymnase\")),"
+  ]
+ },
+ {
+  "key": "Intra de biologie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:373: Exam(courseID: bio.id, title: tr(\"Intra de biologie\"), date: day(6, 9, from: now), room: tr(\"Gymnase\")),"
+  ]
+ },
+ {
+  "key": "Examen final de maths",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:374: Exam(courseID: math.id, title: tr(\"Examen final de maths\"), date: day(21, 13, 30, from: now), room: \"B-204\"),"
+  ]
+ },
+ {
+  "key": "Rapport de labo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:377: Assignment(courseID: bio.id, title: tr(\"Rapport de labo\"), due: day(2, 23, 59, from: now)),"
+  ]
+ },
+ {
+  "key": "Dissertation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:378: Assignment(courseID: history.id, title: tr(\"Dissertation\"), due: day(5, 17, from: now)),"
+  ]
+ },
+ {
+  "key": "Exercices ch. 4",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:379: Assignment(courseID: math.id, title: tr(\"Exercices ch. 4\"), due: day(1, 9, from: now), isDone: true),"
+  ]
+ },
+ {
+  "key": "Oral en équipe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:380: Assignment(courseID: english.id, title: tr(\"Oral en équipe\"), due: day(9, 10, from: now)),"
+  ]
+ },
+ {
+  "key": "Quiz 1",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:383: Grade(courseID: math.id, title: tr(\"Quiz 1\"), score: 17, maxScore: 20, weight: 10),"
+  ]
+ },
+ {
+  "key": "Devoir 1",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:384: Grade(courseID: math.id, title: tr(\"Devoir 1\"), score: 82, maxScore: 100, weight: 15),"
+  ]
+ },
+ {
+  "key": "Quiz",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:386: Grade(courseID: bio.id, title: tr(\"Quiz\"), score: 7, maxScore: 10, weight: 10),"
+  ]
+ },
+ {
+  "key": "Exposé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:387: Grade(courseID: history.id, title: tr(\"Exposé\"), score: 91, maxScore: 100, weight: 20),"
+  ]
+ },
+ {
+  "key": "Rédaction",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:388: Grade(courseID: english.id, title: tr(\"Rédaction\"), score: 76, maxScore: 100, weight: 20),"
+  ]
+ },
+ {
+  "key": "Mitochondrie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:391: Flashcard(deck: tr(\"Biologie\"), front: tr(\"Mitochondrie\"), back: tr(\"Organite qui produit l'énergie de la cellule (ATP).\"), box: 2, due: now.addingTimeInterval(-600)),"
+  ]
+ },
+ {
+  "key": "Organite qui produit l'énergie de la cellule (ATP).",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:391: Flashcard(deck: tr(\"Biologie\"), front: tr(\"Mitochondrie\"), back: tr(\"Organite qui produit l'énergie de la cellule (ATP).\"), box: 2, due: now.addingTimeInterval(-600)),"
+  ]
+ },
+ {
+  "key": "Photosynthèse",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:392: Flashcard(deck: tr(\"Biologie\"), front: tr(\"Photosynthèse\"), back: tr(\"Production de glucose à partir de CO₂, d'eau et de lumière.\"), box: 1, due: now.addingTimeInterval(-300)),"
+  ]
+ },
+ {
+  "key": "Production de glucose à partir de CO₂, d'eau et de lumière.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:392: Flashcard(deck: tr(\"Biologie\"), front: tr(\"Photosynthèse\"), back: tr(\"Production de glucose à partir de CO₂, d'eau et de lumière.\"), box: 1, due: now.addingTimeInterval(-300)),"
+  ]
+ },
+ {
+  "key": "Confédération canadienne.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:393: Flashcard(deck: tr(\"Histoire\"), front: \"1867\", back: tr(\"Confédération canadienne.\"), box: 3, due: day(2, 0, from: now)),"
+  ]
+ },
+ {
+  "key": "Surmonter",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:394: Flashcard(deck: tr(\"Anglais\"), front: tr(\"To overcome\"), back: tr(\"Surmonter\"), box: 1, due: now.addingTimeInterval(-60)),"
+  ]
+ },
+ {
+  "key": "To overcome",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:394: Flashcard(deck: tr(\"Anglais\"), front: tr(\"To overcome\"), back: tr(\"Surmonter\"), box: 1, due: now.addingTimeInterval(-60)),"
+  ]
+ },
+ {
+  "key": "TP 258",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:412: state.flights = [Flight(number: tr(\"TP 258\"), from: \"YUL\", to: \"LIS\", departure: start, arrival: start.addingTimeInterval(6.5 * 3600), terminal: \"A\", gate: \"52\", seat: \"23C\")]"
+  ]
+ },
+ {
+  "key": "Hôtel Alfama",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:413: state.stays = [Stay(name: tr(\"Hôtel Alfama\"), address: tr(\"Rua de São Miguel 12, Lisbonne\"), checkIn: day(startOffset + 1, 15, from: now), checkOut: day(startOffset + 9, 11, from: now), ",
+   "Shared/Data/SampleData.swift:425: TripExpense(tripID: trip.id, amount: 896, currencyCode: \"EUR\", kind: .lodging, label: tr(\"Hôtel Alfama\"), date: day(-30, 20, from: now)),"
+  ]
+ },
+ {
+  "key": "Rua de São Miguel 12, Lisbonne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:413: state.stays = [Stay(name: tr(\"Hôtel Alfama\"), address: tr(\"Rua de São Miguel 12, Lisbonne\"), checkIn: day(startOffset + 1, 15, from: now), checkOut: day(startOffset + 9, 11, from: now), "
+  ]
+ },
+ {
+  "key": "Alfama",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:416: TripActivity(title: tr(\"Château Saint-Georges\"), date: day(base, ongoing ? 15 : 10, from: now), place: tr(\"Alfama\")),"
+  ]
+ },
+ {
+  "key": "Château Saint-Georges",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:416: TripActivity(title: tr(\"Château Saint-Georges\"), date: day(base, ongoing ? 15 : 10, from: now), place: tr(\"Alfama\")),",
+   "Shared/Data/SampleData.swift:431: TripExpense(tripID: trip.id, amount: 15, currencyCode: \"EUR\", kind: .activities, label: tr(\"Château Saint-Georges\"), date: day(-1, 15, from: now)),"
+  ]
+ },
+ {
+  "key": "Martim Moniz",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:417: TripActivity(title: tr(\"Tram 28\"), date: day(base + 1, 11, from: now), place: tr(\"Martim Moniz\")),"
+  ]
+ },
+ {
+  "key": "Tram 28",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:417: TripActivity(title: tr(\"Tram 28\"), date: day(base + 1, 11, from: now), place: tr(\"Martim Moniz\")),"
+  ]
+ },
+ {
+  "key": "Belém",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:418: TripActivity(title: tr(\"Pastéis de Belém\"), date: day(base + 2, 15, from: now), place: tr(\"Belém\")),"
+  ]
+ },
+ {
+  "key": "Pastéis de Belém",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:418: TripActivity(title: tr(\"Pastéis de Belém\"), date: day(base + 2, 15, from: now), place: tr(\"Belém\")),"
+  ]
+ },
+ {
+  "key": "Billets d'avion",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:424: TripExpense(tripID: trip.id, amount: 1_180, currencyCode: \"CAD\", kind: .transport, label: tr(\"Billets d'avion\"), date: day(-40, 20, from: now)),"
+  ]
+ },
+ {
+  "key": "Souper à Alfama",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:429: TripExpense(tripID: trip.id, amount: 42.5, currencyCode: \"EUR\", kind: .food, label: tr(\"Souper à Alfama\"), date: day(-2, 21, from: now)),"
+  ]
+ },
+ {
+  "key": "Carte Viva Viagem",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:430: TripExpense(tripID: trip.id, amount: 18, currencyCode: \"EUR\", kind: .transport, label: tr(\"Carte Viva Viagem\"), date: day(-2, 10, from: now)),"
+  ]
+ },
+ {
+  "key": "Marché de Campo de Ourique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:432: TripExpense(tripID: trip.id, amount: 31.8, currencyCode: \"EUR\", kind: .food, label: tr(\"Marché de Campo de Ourique\"), date: day(-1, 13, from: now)),"
+  ]
+ },
+ {
+  "key": "Civic 2019",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:444: state.name = tr(\"Civic 2019\")"
+  ]
+ },
+ {
+  "key": "Vidange d'huile",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:457: ServiceItem(name: tr(\"Vidange d'huile\"), intervalKm: 8_000, intervalMonths: 6, lastKm: current - 6_400, lastDate: DateMath.calendar.date(byAdding: .month, value: -4, to: now), cost: 90),"
+  ]
+ },
+ {
+  "key": "Rotation des pneus",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:458: ServiceItem(name: tr(\"Rotation des pneus\"), intervalKm: 10_000, intervalMonths: nil, lastKm: current - 3_100, lastDate: nil, cost: 40),"
+  ]
+ },
+ {
+  "key": "Plaquettes de frein",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:459: ServiceItem(name: tr(\"Plaquettes de frein\"), intervalKm: 40_000, intervalMonths: nil, lastKm: current - 21_000, lastDate: nil, cost: 320),"
+  ]
+ },
+ {
+  "key": "Pneus d'hiver",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:464: CarDeadline(title: tr(\"Pneus d'hiver\"), date: winter < now ? Holidays.make(year + 1, 12, 1) : winter, symbol: \"snowflake\"),"
+  ]
+ },
+ {
+  "key": "Immatriculation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:465: CarDeadline(title: tr(\"Immatriculation\"), date: day(64, 0, from: now), symbol: \"doc.text.fill\"),"
+  ]
+ },
+ {
+  "key": "Assurance auto",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:466: CarDeadline(title: tr(\"Assurance auto\"), date: day(142, 0, from: now), symbol: \"shield.fill\"),"
+  ]
+ },
+ {
+  "key": "Finir la présentation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:479: PriorityItem(title: tr(\"Finir la présentation\"), doneDayKey: today),"
+  ]
+ },
+ {
+  "key": "Appeler le comptable",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:480: PriorityItem(title: tr(\"Appeler le comptable\")),"
+  ]
+ },
+ {
+  "key": "30 minutes de sport",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:481: PriorityItem(title: tr(\"30 minutes de sport\")),"
+  ]
+ },
+ {
+  "key": "Annonce",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
+  ]
+ },
+ {
+  "key": "Maquettes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
+  ]
+ },
+ {
+  "key": "Mise en ligne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
+  ]
+ },
+ {
+  "key": "Nom de domaine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
+  ]
+ },
+ {
+  "key": "Paiement en ligne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
+  ]
+ },
+ {
+  "key": "Tests",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
+  ]
+ },
+ {
+  "key": "Textes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
+  ]
+ },
+ {
+  "key": "Lancement du site",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:484: state.projects = [Project(name: tr(\"Lancement du site\"), colorHex: \"3366FF\", deadline: day(12, 17, from: now), tasks: tasks.enumerated().map { pair in"
+  ]
+ },
+ {
+  "key": "Rendu du rapport",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:487: state.deadlines = [Deadline(title: tr(\"Rendu du rapport\"), date: day(2, 17, from: now))]"
+  ]
+ },
+ {
+  "key": "Cafés",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/SampleData.swift:489: CounterItem(name: tr(\"Cafés\"), symbol: \"cup.and.saucer.fill\", colorHex: \"B7791F\", step: 1, goal: 3, resetsDaily: true, total: 2, dayKey: today),"
+  ]
+ },
+ {
+  "key": "Le service météo n'a pas répondu.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:74: case .badResponse: tr(\"Le service météo n'a pas répondu.\")"
+  ]
+ },
+ {
+  "key": "Les données météo sont illisibles.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:75: case .decoding: tr(\"Les données météo sont illisibles.\")"
+  ]
+ },
+ {
+  "key": "Ciel dégagé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:243: case 0: tr(\"Ciel dégagé\")"
+  ]
+ },
+ {
+  "key": "Plutôt dégagé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:244: case 1: tr(\"Plutôt dégagé\")"
+  ]
+ },
+ {
+  "key": "Partiellement nuageux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:245: case 2: tr(\"Partiellement nuageux\")"
+  ]
+ },
+ {
+  "key": "Couvert",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:246: case 3: tr(\"Couvert\")"
+  ]
+ },
+ {
+  "key": "Brouillard",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:247: case 45, 48: tr(\"Brouillard\")"
+  ]
+ },
+ {
+  "key": "Bruine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:248: case 51, 53, 55: tr(\"Bruine\")"
+  ]
+ },
+ {
+  "key": "Bruine verglaçante",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:249: case 56, 57: tr(\"Bruine verglaçante\")"
+  ]
+ },
+ {
+  "key": "Pluie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:250: case 61, 63: tr(\"Pluie\")",
+   "Shared/Model/KindCatalog.swift:133: KindInfo(kind: .rainNext, title: tr(\"Pluie\"), summary: tr(\"Le risque de pluie heure par heure pour les 12 prochaines heures.\"), category: .weather, symbol: \"cloud.rain.fill\", isPremium"
+  ]
+ },
+ {
+  "key": "Forte pluie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:251: case 65: tr(\"Forte pluie\")"
+  ]
+ },
+ {
+  "key": "Pluie verglaçante",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:252: case 66, 67: tr(\"Pluie verglaçante\")"
+  ]
+ },
+ {
+  "key": "Neige",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:253: case 71, 73: tr(\"Neige\")"
+  ]
+ },
+ {
+  "key": "Forte neige",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:254: case 75: tr(\"Forte neige\")"
+  ]
+ },
+ {
+  "key": "Grains de neige",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:255: case 77: tr(\"Grains de neige\")"
+  ]
+ },
+ {
+  "key": "Averses",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:256: case 80, 81: tr(\"Averses\")"
+  ]
+ },
+ {
+  "key": "Violentes averses",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:257: case 82: tr(\"Violentes averses\")"
+  ]
+ },
+ {
+  "key": "Averses de neige",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:258: case 85, 86: tr(\"Averses de neige\")"
+  ]
+ },
+ {
+  "key": "Orage",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:259: case 95: tr(\"Orage\")"
+  ]
+ },
+ {
+  "key": "Orage et grêle",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/WeatherService.swift:260: case 96, 99: tr(\"Orage et grêle\")"
+  ]
+ },
+ {
+  "key": "Annuel",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:31: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
+  ]
+ },
+ {
+  "key": "Mensuel",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:31: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
+  ]
+ },
+ {
+  "key": "Restos",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:126: BudgetCategory(id: BudgetState.fixedID(2), name: tr(\"Restos\"), symbol: \"fork.knife\", colorHex: \"F06A3C\", monthlyLimit: 200),"
+  ]
+ },
+ {
+  "key": "Sorties",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:128: BudgetCategory(id: BudgetState.fixedID(4), name: tr(\"Sorties\"), symbol: \"ticket\", colorHex: \"8C6CFF\", monthlyLimit: 150),"
+  ]
+ },
+ {
+  "key": "Maison",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:129: BudgetCategory(id: BudgetState.fixedID(5), name: tr(\"Maison\"), symbol: \"house\", colorHex: \"B7791F\", monthlyLimit: 150),"
+  ]
+ },
+ {
+  "key": "Autre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:130: BudgetCategory(id: BudgetState.fixedID(6), name: tr(\"Autre\"), symbol: \"square.grid.2x2\", colorHex: \"64748B\", monthlyLimit: 0),",
+   "Shared/Domains/ExerciseLibrary.swift:89: case .other: tr(\"Autre\")"
+  ]
+ },
+ {
+  "key": "Sans catégorie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:213: var name: String { category?.name ?? tr(\"Sans catégorie\") }"
+  ]
+ },
+ {
+  "key": "Marge",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Business.swift:39: case .margin: tr(\"Marge\")"
+  ]
+ },
+ {
+  "key": "Panier moyen",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Business.swift:41: case .averageBasket: tr(\"Panier moyen\")",
+   "Shared/Render/Tiles/BusinessTiles.swift:96: TileRow(id: \"basket\", title: tr(\"Panier moyen\"), value: k.averageBasket.map { TF.money($0, currency) } ?? \"—\", symbol: \"cart\"),"
+  ]
+ },
+ {
+  "key": "Conversion",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Business.swift:44: case .conversion: tr(\"Conversion\")",
+   "Shared/Render/Tiles/BusinessTiles.swift:98: TileRow(id: \"conversion\", title: tr(\"Conversion\"), value: k.conversion.map { Fmt.percent($0, decimals: 1) } ?? \"—\", symbol: \"arrow.triangle.turn.up.right.diamond\"),"
+  ]
+ },
+ {
+  "key": "Tessera/1.0 (%@)",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Domains/Companies.swift:6: static var userAgent: String { tr(\"Tessera/1.0 (\\(supportEmail))\") }"
+  ]
+ },
+ {
+  "key": "Apple Inc.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Companies.swift:48: CompanyRef(cik: 320193, ticker: \"AAPL\", name: tr(\"Apple Inc.\")),"
+  ]
+ },
+ {
+  "key": "NVIDIA Corp",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Companies.swift:49: CompanyRef(cik: 1045810, ticker: \"NVDA\", name: tr(\"NVIDIA Corp\")),"
+  ]
+ },
+ {
+  "key": "Tesla, Inc.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Companies.swift:50: CompanyRef(cik: 1318605, ticker: \"TSLA\", name: tr(\"Tesla, Inc.\")),"
+  ]
+ },
+ {
+  "key": "Revenues",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Companies.swift:139: for tag in [\"RevenueFromContractWithCustomerExcludingAssessedTax\", tr(\"Revenues\"), \"SalesRevenueNet\", \"RevenueFromContractWithCustomerIncludingAssessedTax\"] {"
+  ]
+ },
+ {
+  "key": "$ US",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Companies.swift:221: let symbol = currency == \"USD\" ? tr(\"$ US\") : currency == \"EUR\" ? \"€\" : \"$\""
+  ]
+ },
+ {
+  "key": "Pectoraux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:12: case .chest: tr(\"Pectoraux\")",
+   "Shared/Domains/ExerciseLibrary.swift:39: case .chest: tr(\"Pectoraux\")"
+  ]
+ },
+ {
+  "key": "Dos",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:13: case .back: tr(\"Dos\")",
+   "Shared/Domains/ExerciseLibrary.swift:40: case .back: tr(\"Dos\")"
+  ]
+ },
+ {
+  "key": "Trapèzes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:14: case .traps: tr(\"Trapèzes\")"
+  ]
+ },
+ {
+  "key": "Lombaires",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:15: case .lowerBack: tr(\"Lombaires\")",
+   "Shared/Domains/ExerciseLibrary.swift:50: case .lowerBack: tr(\"Lombaires\")"
+  ]
+ },
+ {
+  "key": "Épaules",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:16: case .shoulders: tr(\"Épaules\")",
+   "Shared/Domains/ExerciseLibrary.swift:41: case .shoulders: tr(\"Épaules\")"
+  ]
+ },
+ {
+  "key": "Biceps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:17: case .biceps: tr(\"Biceps\")",
+   "Shared/Domains/ExerciseLibrary.swift:42: case .biceps: tr(\"Biceps\")"
+  ]
+ },
+ {
+  "key": "Triceps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:18: case .triceps: tr(\"Triceps\")",
+   "Shared/Domains/ExerciseLibrary.swift:43: case .triceps: tr(\"Triceps\")"
+  ]
+ },
+ {
+  "key": "Avant-bras",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:19: case .forearms: tr(\"Avant-bras\")",
+   "Shared/Domains/ExerciseLibrary.swift:44: case .forearms: tr(\"Avant-bras\")"
+  ]
+ },
+ {
+  "key": "Quadriceps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:20: case .quads: tr(\"Quadriceps\")",
+   "Shared/Domains/ExerciseLibrary.swift:45: case .quads: tr(\"Quadriceps\")"
+  ]
+ },
+ {
+  "key": "Ischio-jambiers",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:21: case .hamstrings: tr(\"Ischio-jambiers\")",
+   "Shared/Domains/ExerciseLibrary.swift:46: case .hamstrings: tr(\"Ischio-jambiers\")"
+  ]
+ },
+ {
+  "key": "Fessiers",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:22: case .glutes: tr(\"Fessiers\")",
+   "Shared/Domains/ExerciseLibrary.swift:47: case .glutes: tr(\"Fessiers\")"
+  ]
+ },
+ {
+  "key": "Mollets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:23: case .calves: tr(\"Mollets\")",
+   "Shared/Domains/ExerciseLibrary.swift:48: case .calves: tr(\"Mollets\")"
+  ]
+ },
+ {
+  "key": "Abdominaux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:24: case .abs: tr(\"Abdominaux\")",
+   "Shared/Domains/ExerciseLibrary.swift:49: case .abs: tr(\"Abdominaux\")"
+  ]
+ },
+ {
+  "key": "Obliques",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:25: case .obliques: tr(\"Obliques\")"
+  ]
+ },
+ {
+  "key": "Corps entier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:26: case .fullBody: tr(\"Corps entier\")"
+  ]
+ },
+ {
+  "key": "Cardio",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:27: case .heart: tr(\"Cardio\")",
+   "Shared/Domains/ExerciseLibrary.swift:116: case .cardio: tr(\"Cardio\")"
+  ]
+ },
+ {
+  "key": "Poids du corps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:80: case .bodyweight: tr(\"Poids du corps\")"
+  ]
+ },
+ {
+  "key": "Haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:81: case .dumbbells: tr(\"Haltères\")"
+  ]
+ },
+ {
+  "key": "Barre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:82: case .barbell: tr(\"Barre\")",
+   "Shared/Model/WidgetStyle.swift:89: case .progress: tr(\"Barre\")"
+  ]
+ },
+ {
+  "key": "Machine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:83: case .machine: tr(\"Machine\")"
+  ]
+ },
+ {
+  "key": "Poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:84: case .cable: tr(\"Poulie\")"
+  ]
+ },
+ {
+  "key": "Kettlebell",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:85: case .kettlebell: tr(\"Kettlebell\")"
+  ]
+ },
+ {
+  "key": "Élastique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:86: case .band: tr(\"Élastique\")"
+  ]
+ },
+ {
+  "key": "Banc",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:87: case .bench: tr(\"Banc\")"
+  ]
+ },
+ {
+  "key": "Barre de traction",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:88: case .pullUpBar: tr(\"Barre de traction\")"
+  ]
+ },
+ {
+  "key": "Musculation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:115: case .strength: tr(\"Musculation\")"
+  ]
+ },
+ {
+  "key": "Mobilité",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:117: case .mobility: tr(\"Mobilité\")"
+  ]
+ },
+ {
+  "key": "Étirement",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:118: case .stretching: tr(\"Étirement\")"
+  ]
+ },
+ {
+  "key": "Débutant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:129: case .beginner: tr(\"Débutant\")",
+   "Shared/Domains/Profile.swift:215: case .beginner: tr(\"Débutant\")"
+  ]
+ },
+ {
+  "key": "Intermédiaire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:130: case .intermediate: tr(\"Intermédiaire\")",
+   "Shared/Domains/Profile.swift:216: case .intermediate: tr(\"Intermédiaire\")"
+  ]
+ },
+ {
+  "key": "Avancé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:131: case .advanced: tr(\"Avancé\")",
+   "Shared/Domains/Profile.swift:217: case .advanced: tr(\"Avancé\")"
+  ]
+ },
+ {
+  "key": "Allongé sur le banc, yeux sous la charge, pieds à plat au sol, omoplates serrées et abaissées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:185: start: tr(\"Allongé sur le banc, yeux sous la charge, pieds à plat au sol, omoplates serrées et abaissées.\"),"
+  ]
+ },
+ {
+  "key": "Descends lentement vers le bas de la poitrine, coudes à environ 45° du corps.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:186: steps: [tr(\"Saisis la charge un peu plus large que les épaules.\"), tr(\"Descends lentement vers le bas de la poitrine, coudes à environ 45° du corps.\"), tr(\"Pousse jusqu'aux bras "
+  ]
+ },
+ {
+  "key": "Pousse jusqu'aux bras tendus, sans verrouiller brutalement les coudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:186: steps: [tr(\"Saisis la charge un peu plus large que les épaules.\"), tr(\"Descends lentement vers le bas de la poitrine, coudes à environ 45° du corps.\"), tr(\"Pousse jusqu'aux bras "
+  ]
+ },
+ {
+  "key": "Saisis la charge un peu plus large que les épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:186: steps: [tr(\"Saisis la charge un peu plus large que les épaules.\"), tr(\"Descends lentement vers le bas de la poitrine, coudes à environ 45° du corps.\"), tr(\"Pousse jusqu'aux bras "
+  ]
+ },
+ {
+  "key": "Descends jusqu'à effleurer la poitrine, sans rebond.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:187: range: tr(\"Descends jusqu'à effleurer la poitrine, sans rebond.\"),"
+  ]
+ },
+ {
+  "key": "Inspire en descendant, expire en poussant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:188: breathing: tr(\"Inspire en descendant, expire en poussant.\"),",
+   "Shared/Domains/ExerciseLibrary.swift:287: breathing: tr(\"Inspire en descendant, expire en poussant.\"),"
+  ]
+ },
+ {
+  "key": "Garde les fesses sur le banc et les pieds ancrés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:189: tips: [tr(\"Garde les fesses sur le banc et les pieds ancrés.\"), tr(\"Poignets droits, au-dessus des coudes.\")],"
+  ]
+ },
+ {
+  "key": "Poignets droits, au-dessus des coudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:189: tips: [tr(\"Garde les fesses sur le banc et les pieds ancrés.\"), tr(\"Poignets droits, au-dessus des coudes.\")],"
+  ]
+ },
+ {
+  "key": "Charger lourd sans pareur ni sécurités.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:190: mistakes: [tr(\"Coudes écartés à 90°, qui chargent les épaules.\"), tr(\"Rebondir sur la poitrine.\"), tr(\"Décoller les fesses du banc.\"), tr(\"Charger lourd sans pareur ni sécurités."
+  ]
+ },
+ {
+  "key": "Coudes écartés à 90°, qui chargent les épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:190: mistakes: [tr(\"Coudes écartés à 90°, qui chargent les épaules.\"), tr(\"Rebondir sur la poitrine.\"), tr(\"Décoller les fesses du banc.\"), tr(\"Charger lourd sans pareur ni sécurités."
+  ]
+ },
+ {
+  "key": "Décoller les fesses du banc.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:190: mistakes: [tr(\"Coudes écartés à 90°, qui chargent les épaules.\"), tr(\"Rebondir sur la poitrine.\"), tr(\"Décoller les fesses du banc.\"), tr(\"Charger lourd sans pareur ni sécurités."
+  ]
+ },
+ {
+  "key": "Rebondir sur la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:190: mistakes: [tr(\"Coudes écartés à 90°, qui chargent les épaules.\"), tr(\"Rebondir sur la poitrine.\"), tr(\"Décoller les fesses du banc.\"), tr(\"Charger lourd sans pareur ni sécurités."
+  ]
+ },
+ {
+  "key": "Mains au sol un peu plus larges que les épaules, corps gainé en ligne droite des talons à la tête.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:194: start: tr(\"Mains au sol un peu plus larges que les épaules, corps gainé en ligne droite des talons à la tête.\"),"
+  ]
+ },
+ {
+  "key": "Descends la poitrine vers le sol, coudes à environ 45° du corps.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:195: steps: [tr(\"Descends la poitrine vers le sol, coudes à environ 45° du corps.\"), tr(\"Pousse le sol pour remonter jusqu'aux bras tendus.\")],"
+  ]
+ },
+ {
+  "key": "Pousse le sol pour remonter jusqu'aux bras tendus.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:195: steps: [tr(\"Descends la poitrine vers le sol, coudes à environ 45° du corps.\"), tr(\"Pousse le sol pour remonter jusqu'aux bras tendus.\")],"
+  ]
+ },
+ {
+  "key": "La poitrine arrive à quelques centimètres du sol.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:196: range: tr(\"La poitrine arrive à quelques centimètres du sol.\"),"
+  ]
+ },
+ {
+  "key": "Inspire en descendant, expire en remontant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:197: breathing: tr(\"Inspire en descendant, expire en remontant.\"),",
+   "Shared/Domains/ExerciseLibrary.swift:206: breathing: tr(\"Inspire en descendant, expire en remontant.\"),"
+  ]
+ },
+ {
+  "key": "Regarde le sol un peu devant tes mains.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:198: tips: [tr(\"Serre les fessiers et le ventre tout le long.\"), tr(\"Regarde le sol un peu devant tes mains.\")],"
+  ]
+ },
+ {
+  "key": "Serre les fessiers et le ventre tout le long.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:198: tips: [tr(\"Serre les fessiers et le ventre tout le long.\"), tr(\"Regarde le sol un peu devant tes mains.\")],"
+  ]
+ },
+ {
+  "key": "Amplitude trop courte.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:199: mistakes: [tr(\"Hanches qui s'affaissent ou montent trop.\"), tr(\"Tête qui avance avant le buste.\"), tr(\"Amplitude trop courte.\")]",
+   "Shared/Domains/ExerciseLibrary.swift:334: mistakes: [\"Rebondir.\", tr(\"Amplitude trop courte.\")]"
+  ]
+ },
+ {
+  "key": "Hanches qui s'affaissent ou montent trop.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:199: mistakes: [tr(\"Hanches qui s'affaissent ou montent trop.\"), tr(\"Tête qui avance avant le buste.\"), tr(\"Amplitude trop courte.\")]"
+  ]
+ },
+ {
+  "key": "Tête qui avance avant le buste.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:199: mistakes: [tr(\"Hanches qui s'affaissent ou montent trop.\"), tr(\"Tête qui avance avant le buste.\"), tr(\"Amplitude trop courte.\")]"
+  ]
+ },
+ {
+  "key": "En appui sur les barres (ou les mains sur un banc derrière toi), bras tendus, épaules basses.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:203: start: tr(\"En appui sur les barres (ou les mains sur un banc derrière toi), bras tendus, épaules basses.\"),"
+  ]
+ }
+]

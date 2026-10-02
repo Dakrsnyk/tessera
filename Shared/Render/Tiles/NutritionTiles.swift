@@ -199,7 +199,7 @@ enum NutritionTiles {
         })
         tile.gauge = min(1, Double(streak) / 30)
         tile.shortValue = Fmt.number(streak)
-        tile.inline = tr("Suivi : \(Fmt.plural(streak, tr("jour"), tr("jo)urs")))"
+        tile.inline = tr("Suivi : \(Fmt.plural(streak, tr("jour"), tr("jours")))")
         return tile
     }
 

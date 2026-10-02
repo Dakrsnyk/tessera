@@ -115,7 +115,7 @@ final class WidgetPlacementUITests: XCTestCase {
     /// Launching the app once registers its widget extension with the system.
     private func launchTesseraOnce() {
         let app = XCUIApplication()
-        app.launchArguments = ["-screenshotScreen", "home"]
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA"] + ["-screenshotScreen", "home"]
         app.launch()
         pause(3)
         XCUIDevice.shared.press(.home)

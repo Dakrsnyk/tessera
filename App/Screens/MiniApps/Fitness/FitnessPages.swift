@@ -64,7 +64,7 @@ struct FitnessProgramPage: View {
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
                                 .lineLimit(2)
-                            Text(tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · environ \(FitnessPlan.minutes(routin)e)) min")
+                            Text(tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · environ \(FitnessPlan.minutes(routine)) min"))
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
                         }
@@ -136,7 +136,7 @@ struct FitnessHistoryPage: View {
                                     Spacer()
                                     Text(Fmt.shortDay(session.start)).font(.subheadline).foregroundStyle(Color.secondary)
                                 }
-                                Text(tr("\(TF.int(session.duration / 60)) min · \(Fmt.plural(session.sets.count, tr("série"), tr("séries"))) · \(TF.int(session.volu)me)) kg")
+                                Text(tr("\(TF.int(session.duration / 60)) min · \(Fmt.plural(session.sets.count, tr("série"), tr("séries"))) · \(TF.int(session.volume)) kg"))
                                     .font(.caption)
                                     .foregroundStyle(Color.secondary)
                             }

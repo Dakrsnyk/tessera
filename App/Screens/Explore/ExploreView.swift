@@ -623,7 +623,7 @@ struct ThemeSwatch: View {
                 .foregroundStyle(isSelected ? .primary : .secondary)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(tr("Style \(theme.name)\(showsLock ? tr(", Premium") : )"")"))
+        .accessibilityLabel(Text(tr("Style \(theme.name)\(showsLock ? tr(", Premium") : "")")))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

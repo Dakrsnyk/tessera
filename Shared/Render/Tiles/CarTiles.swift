@@ -59,7 +59,7 @@ enum CarTiles {
             tile.value = "—"
         }
         if let days = first.daysLeft, first.kmLeft != nil {
-            tile.caption = days >= 0 ? tr("ou \(Fmt.plural(days, tr("jour"), tr("jo)urs")))" : tr("date dépassée")
+            tile.caption = days >= 0 ? tr("ou \(Fmt.plural(days, tr("jour"), tr("jours")))") : tr("date dépassée")
         } else {
             tile.caption = tr("avant le prochain entretien")
         }

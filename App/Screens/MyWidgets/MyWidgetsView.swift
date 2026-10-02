@@ -230,7 +230,7 @@ struct MyWidgetsView: View {
 
     private var carousel: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text(tr("\(Fmt.plural(designs.count, tr("widget"), tr("widgets"))) · glisse pour les faire )tourner")
+            Text(tr("\(Fmt.plural(designs.count, tr("widget"), tr("widgets"))) · glisse pour les faire tourner"))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .contentTransition(.numericText())

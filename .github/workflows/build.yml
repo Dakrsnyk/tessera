@@ -141,7 +141,7 @@ jobs:
           if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:TesseraUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:TesseraUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:TesseraUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testFirstLaunchAsksOnlyWhatMattersAndFillsMesInformations -only-testing:TesseraUITests/ProfileUITests/testSkippingEverythingShowsNothingMadeUp -only-testing:TesseraUITests/ProfileUITests/testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped"; fi
           xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
-            $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
+            -testLanguage fr -testRegion CA $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
           mkdir -p testexport testshots
           xcrun xcresulttool export attachments --path TestResults.xcresult --output-path testexport || true
           python3 - <<'PY'
@@ -208,7 +208,7 @@ jobs:
           shoot() { # name screen scroll scheme [extra launch arguments]
             xcrun simctl ui "$DEVICE" appearance $4
             xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null || true
-            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen $2 -screenshotScroll $3 "${@:5}"
+            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -AppleLanguages "(${SHOT_LANG:-fr})" -AppleLocale "${SHOT_LOCALE:-fr_CA}" -screenshotScreen $2 -screenshotScroll $3 "${@:5}"
             sleep ${WAIT:-5}
             xcrun simctl io "$DEVICE" screenshot --type=jpeg "shots/$1-$4.jpg"
           }

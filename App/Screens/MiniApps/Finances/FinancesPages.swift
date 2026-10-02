@@ -468,7 +468,7 @@ struct FinancesTrendsPage: View {
                 let spent = past.reduce(0) { $0 + $1.spent } / Double(past.count)
                 let earned = past.reduce(0) { $0 + $1.earned } / Double(past.count)
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: tr("Moyenne par mois"), detail: tr("sur \(Fmt.plural(past.count, tr("mois complet"), tr("mois compl)ets")))")
+                    MiniSectionTitle(title: tr("Moyenne par mois"), detail: tr("sur \(Fmt.plural(past.count, tr("mois complet"), tr("mois complets")))"))
                     HStack(spacing: 10) {
                         MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency))
                         if earned > 0 {

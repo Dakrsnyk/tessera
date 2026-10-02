@@ -78,7 +78,7 @@ struct WeeklySetupHero: View {
                         .foregroundStyle(ink.opacity(0.88))
                         .fixedSize(horizontal: false, vertical: true)
                     Spacer(minLength: 12)
-                    Text(tr("\(Fmt.plural(setup.widgets.count, tr("widget"), tr("widgets"))) · fond d'écran )assorti")
+                    Text(tr("\(Fmt.plural(setup.widgets.count, tr("widget"), tr("widgets"))) · fond d'écran assorti"))
                         .font(.caption.weight(.medium))
                         .foregroundStyle(ink.opacity(0.85))
                         .fixedSize(horizontal: false, vertical: true)

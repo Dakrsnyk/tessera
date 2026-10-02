@@ -262,11 +262,18 @@
 				};
 			};
 			buildConfigurationList = A100000000000000000000B2 /* Build configuration list for PBXProject "Tessera" */;
-			developmentRegion = fr;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				fr,
 				en,
+				es,
+				de,
+				it,
+				"pt-BR",
+				ja,
+				"zh-Hans",
+				ko,
 				Base,
 			);
 			mainGroup = A10000000000000000000060;

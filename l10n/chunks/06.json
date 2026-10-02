@@ -1,0 +1,1966 @@
+[
+ {
+  "key": "Ajouter un examen",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:331: return section(tr(\"Examens\"), add: tr(\"Ajouter un examen\"), onAdd: { sheet = .exam(Studies.newExam(state, course: course.id)) }) {"
+  ]
+ },
+ {
+  "key": "Ajouter un devoir",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:343: return section(tr(\"Devoirs à rendre\"), add: tr(\"Ajouter un devoir\"), onAdd: { sheet = .assignment(Studies.newAssignment(state, course: course.id)) }) {"
+  ]
+ },
+ {
+  "key": "Devoirs à rendre",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:343: return section(tr(\"Devoirs à rendre\"), add: tr(\"Ajouter un devoir\"), onAdd: { sheet = .assignment(Studies.newAssignment(state, course: course.id)) }) {"
+  ]
+ },
+ {
+  "key": "Ajouter une note",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:353: return section(tr(\"Notes\"), add: tr(\"Ajouter une note\"), onAdd: { sheet = .grade(Studies.newGrade(state, course: course.id)) }) {"
+  ]
+ },
+ {
+  "key": "%@/%@ · compte pour %@ %%",
+  "placeholders": 3,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:358: detail: tr(\"\\(TF.decimal(grade.score, 1))/\\(TF.decimal(grade.maxScore, 0)) · compte pour \\(TF.int(grade.weight)) %\"),"
+  ]
+ },
+ {
+  "key": "Nouvel examen",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:401: MiniActionButton(title: tr(\"Nouvel examen\"), symbol: \"plus\", colorHex: Studies.accentHex) {",
+   "App/Screens/Profile/DataItemViews.swift:209: buttons(add: tr(\"Nouvel examen\"), space: model.isFilled(.exams) ? .student : nil) {"
+  ]
+ },
+ {
+  "key": "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:406: Text(tr(\"Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.\"))"
+  ]
+ },
+ {
+  "key": "Prochain examen %@ : lance le chrono d'étude dans « Révisions » pour suivre le temps passé sur ce cours.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:414: Label(tr(\"Prochain examen \\(TF.relativeDay(first.date, from: now)) : lance le chrono d'étude dans « Révisions » pour suivre le temps passé sur ce cours.\"), systemImage"
+  ]
+ },
+ {
+  "key": "Passés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:420: list(tr(\"Passés\"), past, state: state, now: now)"
+  ]
+ },
+ {
+  "key": "Nouveau devoir",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:465: Button { sheet = .assignment(Studies.newAssignment(state)) } label: { Label(tr(\"Nouveau devoir\"), systemImage: \"plus\") }",
+   "App/Screens/Profile/DataItemViews.swift:214: buttons(add: tr(\"Nouveau devoir\"), space: model.isFilled(.assignments) ? .student : nil) {"
+  ]
+ },
+ {
+  "key": "Rendus",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:471: section(tr(\"Rendus\"), Array(done.prefix(20)), state: state, now: now)"
+  ]
+ },
+ {
+  "key": "Moyenne générale",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:507: Text(tr(\"Moyenne générale\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)",
+   "App/Screens/Spaces/StudentSpace.swift:105: ValueRow(title: tr(\"Moyenne générale\"), value: \"\\(TF.decimal(overall, 1)) %\", symbol: \"graduationcap\")"
+  ]
+ },
+ {
+  "key": "Pondérée par les crédits de chaque cours.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:512: Text(tr(\"Pondérée par les crédits de chaque cours.\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "Nouvelle note",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:519: MiniActionButton(title: tr(\"Nouvelle note\"), symbol: \"plus\", colorHex: Studies.accentHex) {",
+   "App/Screens/Profile/DataItemViews.swift:219: buttons(add: tr(\"Nouvelle note\"), space: model.isFilled(.grades) ? .student : nil) {"
+  ]
+ },
+ {
+  "key": "Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:524: Text(tr(\"Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale.\"))"
+  ]
+ },
+ {
+  "key": "Par cours",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:532: MiniSectionTitle(title: tr(\"Par cours\"))"
+  ]
+ },
+ {
+  "key": "Toutes les notes",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:548: MiniSectionTitle(title: tr(\"Toutes les notes\"), detail: \"\\(state.grades.count)\")"
+  ]
+ },
+ {
+  "key": "%@ %% de la note finale évalué",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:585: Text(tr(\"\\(TF.int(evaluated)) % de la note finale évalué\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "+%@ min",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:640: Button(tr(\"+\\(minutes) min\")) {",
+   "App/Screens/Spaces/StudentSpace.swift:142: Button(tr(\"+\\(minutes) min\")) {"
+  ]
+ },
+ {
+  "key": "Objectif : %@ par semaine",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:650: Text(tr(\"Objectif : \\(Fmt.hours(state.weeklyStudyGoalHours)) par semaine\")).font(.subheadline)",
+   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
+  ]
+ },
+ {
+  "key": "6 dernières semaines",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:662: MiniSectionTitle(title: tr(\"6 dernières semaines\"))"
+  ]
+ },
+ {
+  "key": "%@ à réviser",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:682: MiniSectionTitle(title: tr(\"Fiches\"), detail: state.cards.isEmpty ? nil : tr(\"\\(StudentMath.dueCount(state, at: now)) à réviser\"))",
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:697: detail: deck.due > 0 ? tr(\"\\(deck.due) à réviser\") : tr(\"à jour\"), value: \"\\(deck.total)\", showsChevron: false)"
+  ]
+ },
+ {
+  "key": "Tout est révisé pour l'instant.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:686: Label(tr(\"Tout est révisé pour l'instant.\"), systemImage: \"checkmark.seal.fill\")"
+  ]
+ },
+ {
+  "key": "boîte %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:706: Text(tr(\"boîte \\(card.box)\")).font(.caption).foregroundStyle(.secondary)",
+   "App/Screens/Spaces/StudentSpace.swift:126: ValueRow(title: card.front, value: tr(\"boîte \\(card.box)\"))"
+  ]
+ },
+ {
+  "key": "Nouvelle fiche",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:718: Label(tr(\"Nouvelle fiche\"), systemImage: \"plus.circle.fill\")",
+   "App/Screens/Profile/DataItemViews.swift:224: buttons(add: tr(\"Nouvelle fiche\"), space: model.isFilled(.flashcards) ? .student : nil) {"
+  ]
+ },
+ {
+  "key": "Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:728: Text(tr(\"Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes.\"))"
+  ]
+ },
+ {
+  "key": "À revoir",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:741: MiniActionButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", colorHex: \"E5484D\", isProminent: false) { grade(false) }",
+   "Shared/Render/Tiles/StudentTiles.swift:159: TileButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", action: .gradeCard(false)),"
+  ]
+ },
+ {
+  "key": "Je savais",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:742: MiniActionButton(title: tr(\"Je savais\"), symbol: \"checkmark\", colorHex: \"1E9E75\") { grade(true) }",
+   "Shared/Intents/SpaceIntents.swift:182: @Parameter(title: \"Je savais\")"
+  ]
+ },
+ {
+  "key": "Voir la réponse",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:746: MiniActionButton(title: tr(\"Voir la réponse\"), symbol: \"eye\", colorHex: \"8C6CFF\", isProminent: false) {"
+  ]
+ },
+ {
+  "key": "Ton prochain voyage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:86: Text(tr(\"Ton prochain voyage\")).font(.title3.weight(.bold))"
+  ]
+ },
+ {
+  "key": "Ajoute un voyage : compte à rebours, heure et météo sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:87: Text(tr(\"Ajoute un voyage : compte à rebours, heure et météo sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit.\"))"
+  ]
+ },
+ {
+  "key": "Nouveau voyage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:91: MiniActionButton(title: tr(\"Nouveau voyage\"), symbol: \"plus\", colorHex: accentHex) { sheet = .trip(Travel.newTrip()) }",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:248: MiniRow(symbol: \"plus\", colorHex: accentHex, title: tr(\"Nouveau voyage\"), showsChevron: false)"
+  ]
+ },
+ {
+  "key": "Vol %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:110: MiniRow(symbol: \"airplane\", colorHex: accentHex, title: tr(\"Vol \\(flight.number)\"),",
+   "Shared/Domains/Travel.swift:249: items.append(ProgramItem(id: \"flight-\\(flight.id)\", kind: .flight, date: flight.departure, title: tr(\"Vol \\(flight.number)\"), detail: flightDetail(flight)))"
+  ]
+ },
+ {
+  "key": "Arrivée %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:116: detail: stay.checkIn > now ? tr(\"Arrivée \\(Fmt.format(stay.checkIn, template: \"EEEdMMMHHmm\"))\") : tr(\"Départ \\(Fmt.format(stay.checkOut, template: \"EEEdMMMHHmm\"))\"),"
+  ]
+ },
+ {
+  "key": "Départ %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:116: detail: stay.checkIn > now ? tr(\"Arrivée \\(Fmt.format(stay.checkIn, template: \"EEEdMMMHHmm\"))\") : tr(\"Départ \\(Fmt.format(stay.checkOut, template: \"EEEdMMMHHmm\"))\"),"
+  ]
+ },
+ {
+  "key": "liste à préparer",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:166: Text(tr(\"liste à préparer\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "%@ à préparer",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:169: Text(done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "tout est prêt",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:169: Text(done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "Taux de référence de la BCE du %@ (Frankfurter).",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:202: Text(tr(\"Taux de référence de la BCE du \\(rates.day) (Frankfurter).\")).font(.caption2).foregroundStyle(.tertiary)"
+  ]
+ },
+ {
+  "key": "Vols, hébergements et activités, jour par jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:214: detail: tr(\"Vols, hébergements et activités, jour par jour\"),"
+  ]
+ },
+ {
+  "key": "Modifier le voyage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:221: MiniRow(symbol: \"pencil\", colorHex: \"8A8A8E\", title: tr(\"Modifier le voyage\"), detail: \"\\(trip.destination) · \\(Travel.dates(trip))\", showsChevron: false)"
+  ]
+ },
+ {
+  "key": "Mes voyages",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:235: MiniSectionTitle(title: tr(\"Mes voyages\"))"
+  ]
+ },
+ {
+  "key": "EN VOYAGE",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:270: Text(ongoing ? tr(\"EN VOYAGE\") : tr(\"PROCHAIN VOYAGE\"))"
+  ]
+ },
+ {
+  "key": "PROCHAIN VOYAGE",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:270: Text(ongoing ? tr(\"EN VOYAGE\") : tr(\"PROCHAIN VOYAGE\"))"
+  ]
+ },
+ {
+  "key": "Heure locale",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:280: Text(tr(\"Heure locale\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "Jour %@ sur %@",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:310: return tr(\"Jour \\(day.day) sur \\(day.total)\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:176: Text(tr(\"Jour \\(day) sur \\(total)\"))"
+  ]
+ },
+ {
+  "key": "Départ aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:314: case ..<1: return tr(\"Départ aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "Départ demain",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:315: case 1: return tr(\"Départ demain\")"
+  ]
+ },
+ {
+  "key": "Départ dans %@ jours",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:316: default: return tr(\"Départ dans \\(days) jours\")"
+  ]
+ },
+ {
+  "key": "%@ h de moins qu'ici",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:322: return hours > 0 ? tr(\"\\(value) h de plus qu'ici\") : tr(\"\\(value) h de moins qu'ici\")"
+  ]
+ },
+ {
+  "key": "%@ h de plus qu'ici",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:322: return hours > 0 ? tr(\"\\(value) h de plus qu'ici\") : tr(\"\\(value) h de moins qu'ici\")"
+  ]
+ },
+ {
+  "key": "Dépense de voyage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:337: SheetForm(title: isNew ? tr(\"Dépense de voyage\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Modifier la dépense",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:337: SheetForm(title: isNew ? tr(\"Dépense de voyage\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {",
+   "App/Screens/Spaces/BudgetSpace.swift:192: SheetForm(title: isNew ? tr(\"Dépense\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Note (facultatif)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:347: TextField(tr(\"Note (facultatif)\"), text: $expense.label)",
+   "App/Screens/Spaces/BudgetSpace.swift:201: TextField(tr(\"Note (facultatif)\"), text: $expense.note)"
+  ]
+ },
+ {
+  "key": "Supprimer la dépense",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:352: Button(tr(\"Supprimer la dépense\"), role: .destructive) {",
+   "App/Screens/Spaces/BudgetSpace.swift:207: Button(tr(\"Supprimer la dépense\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Vol",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:19: addButton(tr(\"Vol\"), symbol: \"airplane\") { sheet = .flight(Flight(number: \"\", from: \"\", to: \"\", departure: trip.start)) }",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:205: SheetForm(title: tr(\"Vol\"), canSave: !flight.number.trimmed.isEmpty, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Hébergement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:20: addButton(tr(\"Hébergement\"), symbol: \"bed.double.fill\") { sheet = .stay(Stay(name: \"\", checkIn: trip.start, checkOut: trip.end)) }",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:87: Section(tr(\"Hébergement\")) {"
+  ]
+ },
+ {
+  "key": "Rien au programme pour l'instant. Ajoute tes vols, ton hébergement et ce que tu veux faire : tout se range ici jour par jour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:24: Text(tr(\"Rien au programme pour l'instant. Ajoute tes vols, ton hébergement et ce que tu veux faire : tout se range ici jour par jour.\"))"
+  ]
+ },
+ {
+  "key": "Voyage introuvable",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:35: ContentUnavailableView(tr(\"Voyage introuvable\"), systemImage: \"airplane\")",
+   "App/Screens/MiniApps/Travel/TravelPages.swift:148: ContentUnavailableView(tr(\"Voyage introuvable\"), systemImage: \"airplane\")"
+  ]
+ },
+ {
+  "key": "Ajouter : %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:53: .accessibilityLabel(Text(tr(\"Ajouter : \\(title)\")))"
+  ]
+ },
+ {
+  "key": "Jour %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:63: Text(tr(\"Jour \\(number)\")).font(.caption.weight(.semibold)).foregroundStyle(Color(hex: Travel.accentHex))",
+   "Shared/Render/Kinds/TimeWidgets.swift:598: Text(tr(\"Jour \\(day)\"))"
+  ]
+ },
+ {
+  "key": "Budget · %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:146: .navigationTitle(tr(\"Budget · \\(trip.destination)\"))"
+  ]
+ },
+ {
+  "key": "Dépensé",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:158: Text(tr(\"Dépensé\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "Dépassé de %@ sur %@",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:162: Text(spending.total > budget ? tr(\"Dépassé de \\(TF.money(spending.total - budget, currency)) sur \\(TF.money(budget, currency))\") : tr(\"Il reste \\(TF.money(budget - spend"
+  ]
+ },
+ {
+  "key": "Il reste %@ sur %@",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:162: Text(spending.total > budget ? tr(\"Dépassé de \\(TF.money(spending.total - budget, currency)) sur \\(TF.money(budget, currency))\") : tr(\"Il reste \\(TF.money(budget - spend"
+  ]
+ },
+ {
+  "key": "Soit %@ par jour jusqu'au retour",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:167: Text(tr(\"Soit \\(TF.money((budget - spending.total) / Double(max(1, days.total - days.day + 1)), currency)) par jour jusqu'au retour\"))"
+  ]
+ },
+ {
+  "key": "Budget du voyage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:173: Text(tr(\"Budget du voyage\")).font(.subheadline)"
+  ]
+ },
+ {
+  "key": "Non converti (taux indisponible) : %@.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:185: Text(tr(\"Non converti (taux indisponible) : \\(spending.unconverted.map { Fmt.money($0.value, currency: $0.key) }.sorted().joined(separator: \", \")).\"))"
+  ]
+ },
+ {
+  "key": "Montants en %@ convertis au taux de référence de la BCE.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:189: Text(tr(\"Montants en \\(trip.currencyCode) convertis au taux de référence de la BCE.\")).font(.caption2).foregroundStyle(.tertiary)"
+  ]
+ },
+ {
+  "key": "Par type",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:210: MiniSectionTitle(title: tr(\"Par type\"))"
+  ]
+ },
+ {
+  "key": "Ajouter (maillot, cadeaux…)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:248: TextField(tr(\"Ajouter (maillot, cadeaux…)\"), text: $newItem)"
+  ]
+ },
+ {
+  "key": "%@ sur %@ prêts",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:277: Text(tr(\"\\(items.filter(\\.isDone).count) sur \\(items.count) prêts\"))"
+  ]
+ },
+ {
+  "key": "Ajouter l'essentiel à emporter",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:285: Label(tr(\"Ajouter l'essentiel à emporter\"), systemImage: \"sparkles\")"
+  ]
+ },
+ {
+  "key": "Ajoute les incontournables (passeport, chargeur, assurance…) sans doublon ; retire ceux qui ne te servent pas en glissant.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelPages.swift:289: Text(tr(\"Ajoute les incontournables (passeport, chargeur, assurance…) sans doublon ; retire ceux qui ne te servent pas en glissant.\"))"
+  ]
+ },
+ {
+  "key": "Pas de connexion : dernière météo reçue %@.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:20: Label(tr(\"Pas de connexion : dernière météo reçue \\(updatedText(snapshot.fetchedAt)).\"), systemImage: \"wifi.slash\")"
+  ]
+ },
+ {
+  "key": "Le service météo ne répond pas pour l'instant. Réessaie dans un moment.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:25: EmptyStateView(symbol: \"cloud.sun\", title: tr(\"Météo indisponible\"), message: tr(\"Le service météo ne répond pas pour l'instant. Réessaie dans un moment.\"), actionTitle: "
+  ]
+ },
+ {
+  "key": "Météo indisponible",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:25: EmptyStateView(symbol: \"cloud.sun\", title: tr(\"Météo indisponible\"), message: tr(\"Le service météo ne répond pas pour l'instant. Réessaie dans un moment.\"), actionTitle: ",
+   "Shared/Render/Kinds/DataWidgets.swift:33: WidgetMessage(symbol: \"wifi.slash\", title: tr(\"Météo indisponible\"), message: tr(\"Nouvel essai dans quelques minutes\"), style: s)"
+  ]
+ },
+ {
+  "key": "Choisir ma ville",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:31: EmptyStateView(symbol: \"location.circle\", title: tr(\"Ta ville\"), message: tr(\"Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets.",
+   "App/Screens/Profile/DataItemViews.swift:302: action(model.settings.weatherLocation?.name ?? tr(\"Choisir ma ville\"), symbol: \"location.fill\", prominent: !model.isFilled(.city)) {"
+  ]
+ },
+ {
+  "key": "Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:31: EmptyStateView(symbol: \"location.circle\", title: tr(\"Ta ville\"), message: tr(\"Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets."
+  ]
+ },
+ {
+  "key": "Ta ville",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:31: EmptyStateView(symbol: \"location.circle\", title: tr(\"Ta ville\"), message: tr(\"Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets.",
+   "App/Screens/Profile/ProfileTopics.swift:576: QuestionCard(title: tr(\"Ta ville\"), detail: tr(\"Pour la météo de tes widgets. Tu peux la changer quand tu veux.\")) {"
+  ]
+ },
+ {
+  "key": "Données météo : Open-Meteo.com (CC BY 4.0).",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:37: Text(tr(\"Données météo : Open-Meteo.com (CC BY 4.0).\"))"
+  ]
+ },
+ {
+  "key": "Changer de ville",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:47: .accessibilityLabel(Text(tr(\"Changer de ville\")))"
+  ]
+ },
+ {
+  "key": "Ressenti %@ · Max %@ · Min %@",
+  "placeholders": 3,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:88: Text(tr(\"Ressenti \\(Fmt.temperature(weather.apparentTemperature, unit: unit)) · Max \\(Fmt.temperature(weather.high, unit: unit)) · Min \\(Fmt.temperature(weather.low, unit"
+  ]
+ },
+ {
+  "key": "Pluie probable vers %@ (%@ %%)",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:92: Label(tr(\"Pluie probable vers \\(Fmt.time(rain.date, uses24Hour: true)) (\\(rain.precipitationProbability ?? 0) %)\"), systemImage: \"umbrella.fill\")"
+  ]
+ },
+ {
+  "key": "%@ prochains jours",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:180: MiniSectionTitle(title: tr(\"\\(days.count) prochains jours\"))"
+  ]
+ },
+ {
+  "key": "%@ km/h",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:203: MiniStat(title: tr(\"Vent\"), value: tr(\"\\(TF.int(weather.windSpeed)) km/h\"), detail: windDetail(weather))",
+   "Shared/Render/Tiles/WeatherTiles.swift:116: var wind = tr(\"\\(Int(weather.windSpeed.rounded())) km/h\")"
+  ]
+ },
+ {
+  "key": "Vent",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:203: MiniStat(title: tr(\"Vent\"), value: tr(\"\\(TF.int(weather.windSpeed)) km/h\"), detail: windDetail(weather))",
+   "Shared/Render/Tiles/WeatherTiles.swift:118: rows.append(TileRow(id: \"wind\", title: tr(\"Vent\"), value: wind, symbol: \"wind\"))"
+  ]
+ },
+ {
+  "key": "Humidité",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:204: MiniStat(title: tr(\"Humidité\"), value: weather.humidity.map { \"\\(TF.int($0)) %\" } ?? \"–\")",
+   "Shared/Render/Tiles/WeatherTiles.swift:114: rows.append(TileRow(id: \"humidity\", title: tr(\"Humidité\"), value: \"\\(Int(humidity.rounded())) %\", symbol: \"humidity.fill\"))"
+  ]
+ },
+ {
+  "key": "Indice UV",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:207: MiniStat(title: tr(\"Indice UV\"), value: weather.uvIndex(at: now).map { TF.int($0) } ?? \"–\", detail: uvDetail(weather, today: today, now: now))",
+   "Shared/Render/Tiles/WeatherTiles.swift:96: TileRow(id: \"uv\", title: tr(\"Indice UV\"), value: \"\\(Int(uv.rounded())) · \\(TF.uvLevel(uv))\", symbol: \"sun.max.fill\", progress: min(1, uv / 11)),"
+  ]
+ },
+ {
+  "key": "%@ hPa",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:208: MiniStat(title: tr(\"Pression\"), value: weather.pressure.map { tr(\"\\(TF.int($0)) hPa\") } ?? \"–\")",
+   "Shared/Render/Tiles/WeatherTiles.swift:126: rows.append(TileRow(id: \"pressure\", title: tr(\"Pression\"), value: tr(\"\\(Int(pressure.rounded())) hPa\"), symbol: \"gauge.medium\"))"
+  ]
+ },
+ {
+  "key": "Pression",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:208: MiniStat(title: tr(\"Pression\"), value: weather.pressure.map { tr(\"\\(TF.int($0)) hPa\") } ?? \"–\")",
+   "Shared/Render/Tiles/WeatherTiles.swift:126: rows.append(TileRow(id: \"pressure\", title: tr(\"Pression\"), value: tr(\"\\(Int(pressure.rounded())) hPa\"), symbol: \"gauge.medium\"))"
+  ]
+ },
+ {
+  "key": "Lever du soleil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:212: MiniStat(title: tr(\"Lever du soleil\"), value: Fmt.time(sunrise, uses24Hour: true))"
+  ]
+ },
+ {
+  "key": "Coucher du soleil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:213: MiniStat(title: tr(\"Coucher du soleil\"), value: Fmt.time(sunset, uses24Hour: true),"
+  ]
+ },
+ {
+  "key": "%@ de jour",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:214: detail: tr(\"\\(Fmt.hours(sunset.timeIntervalSince(sunrise) / 3_600)) de jour\"))"
+  ]
+ },
+ {
+  "key": "Mis à jour %@.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:220: Text(tr(\"Mis à jour \\(updatedText(weather.fetchedAt)).\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "du %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:230: if let direction = weather.windDirection { parts.append(tr(\"du \\(TF.compass(direction))\")) }"
+  ]
+ },
+ {
+  "key": "rafales %@ km/h",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:231: if let gusts = weather.windGusts { parts.append(tr(\"rafales \\(TF.int(gusts)) km/h\")) }"
+  ]
+ },
+ {
+  "key": "%@ · max %@",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:238: return tr(\"\\(TF.uvLevel(uv)) · max \\(TF.int(highest))\")"
+  ]
+ },
+ {
+  "key": "%@ maintenant",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Weather/WeatherApp.swift:249: MiniSectionTitle(title: \"À \\(trip.destination)\", detail: tr(\"\\(Fmt.temperature(weather.temperature, unit: unit)) maintenant\"))"
+  ]
+ },
+ {
+  "key": "Un widget %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:44: Text(tr(\"Un widget \\(format.title.lowercased())\"))"
+  ]
+ },
+ {
+  "key": "Un vrai widget %@ pour ton écran d'accueil : dans la galerie de widgets, choisis la taille %@.",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:46: Text(tr(\"Un vrai widget \\(format.title.lowercased()) pour ton écran d'accueil : dans la galerie de widgets, choisis la taille \\(format.title).\"))"
+  ]
+ },
+ {
+  "key": "Contient",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:51: EditorSection(title: tr(\"Contient\"), detail: Fmt.plural(merged.options.parts.count, tr(\"widget\"), tr(\"widgets\"))) {"
+  ]
+ },
+ {
+  "key": "Ligne entière",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:63: Text(part.size == .small ? tr(\"Moitié de ligne\") : tr(\"Ligne entière\"))"
+  ]
+ },
+ {
+  "key": "Moitié de ligne",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:63: Text(part.size == .small ? tr(\"Moitié de ligne\") : tr(\"Ligne entière\"))"
+  ]
+ },
+ {
+  "key": "Garder aussi les widgets d'origine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:70: Toggle(tr(\"Garder aussi les widgets d'origine\"), isOn: $keepsOriginals)"
+  ]
+ },
+ {
+  "key": "Aucune information n'est perdue : chaque widget garde tout son contenu. Le widget fusionné reste personnalisable dans l'éditeur (style, couleur, fond, police).",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:72: Text(tr(\"Aucune information n'est perdue : chaque widget garde tout son contenu. Le widget fusionné reste personnalisable dans l'éditeur (style, couleur, fond, police).\"))"
+  ]
+ },
+ {
+  "key": "Fusionner",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/FusionViews.swift:85: Label(tr(\"Fusionner\"), systemImage: \"arrow.triangle.merge\")",
+   "App/Screens/MyWidgets/FusionViews.swift:96: .navigationTitle(tr(\"Fusionner\"))"
+  ]
+ },
+ {
+  "key": "Aucun widget pour l'instant",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:73: title: tr(\"Aucun widget pour l'instant\"),"
+  ]
+ },
+ {
+  "key": "Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:74: message: tr(\"Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.\"),"
+  ]
+ },
+ {
+  "key": "Ouvrir le Store",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:75: actionTitle: tr(\"Ouvrir le Store\")"
+  ]
+ },
+ {
+  "key": "Tout désélectionner",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:102: Button(allShownSelected ? tr(\"Tout désélectionner\") : tr(\"Tout sélectionner\")) {"
+  ]
+ },
+ {
+  "key": "Tout sélectionner",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:102: Button(allShownSelected ? tr(\"Tout désélectionner\") : tr(\"Tout sélectionner\")) {"
+  ]
+ },
+ {
+  "key": "Sélectionner",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:121: Button(tr(\"Sélectionner\")) {"
+  ]
+ },
+ {
+  "key": "Comment ajouter un widget",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:133: .accessibilityLabel(Text(tr(\"Comment ajouter un widget\")))"
+  ]
+ },
+ {
+  "key": "Supprimer ces %@ widgets ?",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:148: selectedIDs.count == 1 ? tr(\"Supprimer ce widget ?\") : tr(\"Supprimer ces \\(selectedIDs.count) widgets ?\"),"
+  ]
+ },
+ {
+  "key": "Supprimer le widget",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:152: Button(selectedIDs.count == 1 ? tr(\"Supprimer le widget\") : tr(\"Supprimer les \\(selectedIDs.count) widgets\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Supprimer les %@ widgets",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:152: Button(selectedIDs.count == 1 ? tr(\"Supprimer le widget\") : tr(\"Supprimer les \\(selectedIDs.count) widgets\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Les widgets qui les affichent sur ton écran d'accueil reviendront au modèle par défaut.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:160: Text(tr(\"Les widgets qui les affichent sur ton écran d'accueil reviendront au modèle par défaut.\"))"
+  ]
+ },
+ {
+  "key": "Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:224: Text(tr(\"Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut.\"))"
+  ]
+ },
+ {
+  "key": "%@ · glisse pour les faire )tourner",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:233: Text(tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) · glisse pour les faire )tourner\")"
+  ]
+ },
+ {
+  "key": "Trouver un widget",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:263: Text(tr(\"Trouver un widget\"))"
+  ]
+ },
+ {
+  "key": "Modifier",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:291: CarouselAction(title: tr(\"Modifier\"), symbol: \"slider.horizontal.3\", isProminent: true, identifier: \"carousel-edit\") {",
+   "App/Screens/MyWidgets/MyWidgetsView.swift:524: Label(tr(\"Modifier\"), systemImage: \"slider.horizontal.3\")"
+  ]
+ },
+ {
+  "key": "Dupliquer",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:294: CarouselAction(title: tr(\"Dupliquer\"), symbol: \"plus.square.on.square\", identifier: \"carousel-duplicate\") {",
+   "App/Screens/MyWidgets/MyWidgetsView.swift:529: Label(tr(\"Dupliquer\"), systemImage: \"plus.square.on.square\")"
+  ]
+ },
+ {
+  "key": "Ajouter à l'écran",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:302: CarouselAction(title: tr(\"Ajouter à l'écran\"), symbol: \"apps.iphone.badge.plus\", identifier: \"carousel-place\") {"
+  ]
+ },
+ {
+  "key": "Ajouter à l'écran d'accueil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:306: .accessibilityLabel(Text(tr(\"Ajouter à l'écran d'accueil\")))"
+  ]
+ },
+ {
+  "key": "%@ sur %@ widgets gratuits",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:356: Text(tr(\"\\(min(used, limit)) sur \\(limit) widgets gratuits\"))"
+  ]
+ },
+ {
+  "key": "Illimité",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:360: Button(tr(\"Illimité\")) { router.isPaywallPresented = true }"
+  ]
+ },
+ {
+  "key": "Sélection",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:368: selectedIDs.isEmpty ? tr(\"Sélection\") : Fmt.plural(selectedIDs.count, tr(\"sélectionné\"), tr(\"sélectionnés\"))"
+  ]
+ },
+ {
+  "key": "sélectionné",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:368: selectedIDs.isEmpty ? tr(\"Sélection\") : Fmt.plural(selectedIDs.count, tr(\"sélectionné\"), tr(\"sélectionnés\"))",
+   "App/Screens/MyWidgets/MyWidgetsView.swift:376: Text(selectedIDs.isEmpty ? tr(\"Touche les widgets à supprimer ou à fusionner\") : Fmt.plural(selectedIDs.count, tr(\"sélectionné\"), tr(\"sélectionnés\")))"
+  ]
+ },
+ {
+  "key": "sélectionnés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:368: selectedIDs.isEmpty ? tr(\"Sélection\") : Fmt.plural(selectedIDs.count, tr(\"sélectionné\"), tr(\"sélectionnés\"))",
+   "App/Screens/MyWidgets/MyWidgetsView.swift:376: Text(selectedIDs.isEmpty ? tr(\"Touche les widgets à supprimer ou à fusionner\") : Fmt.plural(selectedIDs.count, tr(\"sélectionné\"), tr(\"sélectionnés\")))"
+  ]
+ },
+ {
+  "key": "Touche les widgets à supprimer ou à fusionner",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:376: Text(selectedIDs.isEmpty ? tr(\"Touche les widgets à supprimer ou à fusionner\") : Fmt.plural(selectedIDs.count, tr(\"sélectionné\"), tr(\"sélectionnés\")))"
+  ]
+ },
+ {
+  "key": "Fusion en widget %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:382: Label(tr(\"Fusion en widget \\(fusion.format.title.lowercased())\"), systemImage: \"arrow.triangle.merge\")"
+  ]
+ },
+ {
+  "key": "Créer une variante",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/MyWidgetsView.swift:534: Label(tr(\"Créer une variante\"), systemImage: \"wand.and.stars\")"
+  ]
+ },
+ {
+  "key": "Amène ce widget au centre",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MyWidgets/WidgetCarousel.swift:88: .accessibilityHint(Text(isCentered ? tr(\"Ouvre l'éditeur\") : tr(\"Amène ce widget au centre\")))"
+  ]
+ },
+ {
+  "key": "C'est parti",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:99: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))",
+   "App/Screens/Onboarding/OnboardingView.swift:300: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
+  ]
+ },
+ {
+  "key": "Retour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:127: .accessibilityLabel(Text(tr(\"Retour\")))",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:170: DatePicker(tr(\"Retour\"), selection: $trip.end).environment(\\.locale, Fmt.locale)"
+  ]
+ },
+ {
+  "key": "Étape %@ sur %@",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:137: .accessibilityLabel(Text(tr(\"Étape \\(position + 1) sur \\(personal.count)\")))",
+   "App/Screens/Tutorial/TutorialOverlay.swift:137: .accessibilityLabel(Text(tr(\"Étape \\(step.number) sur \\(TutorialStep.allCases.count)\")))"
+  ]
+ },
+ {
+  "key": "Passer",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:138: Button(tr(\"Passer\"), action: skip)",
+   "Shared/Live/WorkoutLiveActivity.swift:123: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipRestIntent())"
+  ]
+ },
+ {
+  "key": "Comment veux-tu qu'on t'appelle ?",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:171: title: tr(\"Comment veux-tu qu'on t'appelle ?\"),"
+  ]
+ },
+ {
+  "key": "Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:172: message: tr(\"Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.\")"
+  ]
+ },
+ {
+  "key": "Prénom",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:176: placeholder: tr(\"Prénom\"),",
+   "App/Screens/Profile/ProfileView.swift:35: LabeledContent(tr(\"Prénom\")) {"
+  ]
+ },
+ {
+  "key": "Nom (facultatif)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:183: placeholder: tr(\"Nom (facultatif)\"),"
+  ]
+ },
+ {
+  "key": "Bonjour %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:194: Text(tr(\"Bonjour \\(first.split(separator: \" \").first.map(String.init) ?? first)\"))"
+  ]
+ },
+ {
+  "key": "Qu'est-ce qui t'intéresse ?",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:213: title: tr(\"Qu'est-ce qui t'intéresse ?\"),"
+  ]
+ },
+ {
+  "key": "Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:214: message: tr(\"Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.\")"
+  ]
+ },
+ {
+  "key": "Tout est facultatif : laisse vide ce que tu préfères ne pas dire.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:232: Text(tr(\"Tout est facultatif : laisse vide ce que tu préfères ne pas dire.\"))"
+  ]
+ },
+ {
+  "key": "Bienvenue dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:276: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Tessera\"))"
+  ]
+ },
+ {
+  "key": "Nouveau : les styles",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:276: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Tessera\"))"
+  ]
+ },
+ {
+  "key": "Choisis ton style",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:279: Text(tr(\"Choisis ton style\"))"
+  ]
+ },
+ {
+  "key": "Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:281: Text(tr(\"Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.\"))"
+  ]
+ },
+ {
+  "key": "Étape %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:331: Text(tr(\"Étape \\(number)\"))",
+   "App/Screens/Spaces/LockScreenCreator.swift:145: Text(tr(\"Étape \\(index + 1)\"))"
+  ]
+ },
+ {
+  "key": "à renseigner",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:25: Text(missing == 0 ? tr(\"Tout est renseigné\") : Fmt.plural(missing, tr(\"à renseigner\"), tr(\"à renseigner\")))",
+   "App/Screens/Profile/DataItemViews.swift:25: Text(missing == 0 ? tr(\"Tout est renseigné\") : Fmt.plural(missing, tr(\"à renseigner\"), tr(\"à renseigner\")))"
+  ]
+ },
+ {
+  "key": "Renseignées une fois, elles servent à tous tes widgets et à « Mon Quotidien ».",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:29: Text(tr(\"Renseignées une fois, elles servent à tous tes widgets et à « Mon Quotidien ».\"))"
+  ]
+ },
+ {
+  "key": "Renseigné",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:76: .accessibilityLabel(Text(tr(\"Renseigné\")))"
+  ]
+ },
+ {
+  "key": "À renseigner",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:78: Text(tr(\"À renseigner\"))",
+   "App/Screens/Spaces/SpaceForms.swift:81: TextField(tr(\"À renseigner\"), value: $value, format: .number.locale(Fmt.locale))"
+  ]
+ },
+ {
+  "key": "Calculer pour moi",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:112: action(tr(\"Calculer pour moi\"), symbol: \"wand.and.stars\") { sheets?.open { TopicEditorSheet(topic: .nutrition) } }",
+   "App/Screens/Profile/ProfileTopics.swift:388: return QuestionCard(title: tr(\"Calculer pour moi\"), detail: tr(\"Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.\")) {"
+  ]
+ },
+ {
+  "key": "Chercher",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:123: action(tr(\"Chercher\"), symbol: \"magnifyingglass\") { sheets?.open { FoodSearchView() } }",
+   "App/Screens/Spaces/MoneySpaces.swift:366: Button(tr(\"Chercher\")) { Task { await search() } }"
+  ]
+ },
+ {
+  "key": "Ex. : méditer, lire, marcher",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:153: quickAdd(tr(\"Ex. : méditer, lire, marcher\"), identifier: \"data-new-habit\") {",
+   "App/Screens/Profile/ProfileTopics.swift:619: quickAdd(placeholder: tr(\"Ex. : méditer, lire, marcher\"), text: $newHabit, identifier: \"first-habit\") {"
+  ]
+ },
+ {
+  "key": "Ex. : appeler le garage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:170: quickAdd(tr(\"Ex. : appeler le garage\"), identifier: \"data-new-task\") {",
+   "App/Screens/Profile/ProfileTopics.swift:512: quickAdd(placeholder: tr(\"Ex. : appeler le garage\"), text: $newTask, identifier: \"first-task\") {"
+  ]
+ },
+ {
+  "key": "Choisir mon top 3 du jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:176: link(model.isFilled(.priorities) ? tr(\"Voir mon top 3\") : tr(\"Choisir mon top 3 du jour\")) { SpaceView(space: .productivity, isEmbedded: true) }"
+  ]
+ },
+ {
+  "key": "Voir mon top 3",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:176: link(model.isFilled(.priorities) ? tr(\"Voir mon top 3\") : tr(\"Choisir mon top 3 du jour\")) { SpaceView(space: .productivity, isEmbedded: true) }"
+  ]
+ },
+ {
+  "key": "Nouveau compteur",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:186: buttons(add: tr(\"Nouveau compteur\"), space: model.isFilled(.counters) ? .productivity : nil) {",
+   "App/Screens/Spaces/ProductivitySpace.swift:127: Label(tr(\"Nouveau compteur\"), systemImage: \"plus\")"
+  ]
+ },
+ {
+  "key": "h par semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:191: title: tr(\"Concentration\"), unit: tr(\"h par semaine\"),",
+   "App/Screens/Profile/ProfileTopics.swift:545: ProfileNumberField(title: tr(\"Étude personnelle\"), unit: tr(\"h par semaine\"), value: profileBinding(\\.weeklyStudyHours), identifier: \"study-hours\")"
+  ]
+ },
+ {
+  "key": "Ajouter un horaire",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:202: action(tr(\"Ajouter un horaire\"), symbol: \"clock\") {"
+  ]
+ },
+ {
+  "key": "Nouveau compte",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:247: buttons(add: tr(\"Nouveau compte\"), space: model.isFilled(.accounts) ? .budget : nil) {"
+  ]
+ },
+ {
+  "key": "Ajouter mon salaire et mes dépenses fixes",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:251: link(model.isFilled(.moneyFlow) ? tr(\"Gérer mes revenus et dépenses\") : tr(\"Ajouter mon salaire et mes dépenses fixes\")) { MoneyView() }"
+  ]
+ },
+ {
+  "key": "Gérer mes revenus et dépenses",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:251: link(model.isFilled(.moneyFlow) ? tr(\"Gérer mes revenus et dépenses\") : tr(\"Ajouter mon salaire et mes dépenses fixes\")) { MoneyView() }"
+  ]
+ },
+ {
+  "key": "Chaque mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:254: title: tr(\"Chaque mois\"), unit: UnitText.display(model.settings.currencyCode),",
+   "App/Screens/Profile/ProfileTopics.swift:426: QuestionCard(title: tr(\"Chaque mois\")) {"
+  ]
+ },
+ {
+  "key": "Noter une vente",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:262: action(tr(\"Noter une vente\"), symbol: \"plus\", prominent: true) { sheets?.open { SaleEditor() } }",
+   "App/Screens/Spaces/MoneySpaces.swift:175: Button { sheets?.open { SaleEditor() } } label: { Label(tr(\"Noter une vente\"), systemImage: \"plus.circle.fill\").font(.headline) }"
+  ]
+ },
+ {
+  "key": "Nouveau placement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:264: buttons(add: tr(\"Nouveau placement\"), space: model.isFilled(.holdings) ? .investing : nil) {"
+  ]
+ },
+ {
+  "key": "Choisir les entreprises suivies",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:268: link(tr(\"Choisir les entreprises suivies\")) { SpaceView(space: .markets, isEmbedded: true) }"
+  ]
+ },
+ {
+  "key": "Marque et modèle",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:276: placeholder: tr(\"Marque et modèle\"),",
+   "App/Screens/Profile/ProfileTopics.swift:554: placeholder: tr(\"Marque et modèle\"),"
+  ]
+ },
+ {
+  "key": "Date de naissance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:293: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:517: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: "
+  ]
+ },
+ {
+  "key": "Ajouter ma date de naissance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:297: action(tr(\"Ajouter ma date de naissance\"), symbol: \"plus\") {"
+  ]
+ },
+ {
+  "key": "%@ pas aujourd'hui",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:331: Label(stepCounter.stepsToday.map { tr(\"\\(Fmt.number($0)) pas aujourd'hui\") } ?? tr(\"Accès autorisé\"), systemImage: \"checkmark.circle.fill\")"
+  ]
+ },
+ {
+  "key": "L'accès aux mouvements est désactivé : Réglages › Tessera › Mouvements et forme.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:339: Text(tr(\"L'accès aux mouvements est désactivé : Réglages › Tessera › Mouvements et forme.\"))"
+  ]
+ },
+ {
+  "key": "Exemple",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:447: Label(tr(\"Exemple\"), systemImage: \"sparkles\")"
+  ]
+ },
+ {
+  "key": "Aperçu avec des données d'exemple",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/DataItemViews.swift:453: .accessibilityLabel(Text(tr(\"Aperçu avec des données d'exemple\")))"
+  ]
+ },
+ {
+  "key": "Genre",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:199: Text(tr(\"Genre\"))"
+  ]
+ },
+ {
+  "key": "Précise si tu veux (facultatif)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:211: ProfileTextField(placeholder: tr(\"Précise si tu veux (facultatif)\"), text: Binding("
+  ]
+ },
+ {
+  "key": "Pour estimer tes calories, Tessera utilise :",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:217: Text(tr(\"Pour estimer tes calories, Tessera utilise :\"))"
+  ]
+ },
+ {
+  "key": "ans",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:292: ProfileNumberField(title: tr(\"Âge\"), unit: tr(\"ans\"), value: ageBinding, decimals: false, identifier: \"profile-age\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")"
+  ]
+ },
+ {
+  "key": "cm",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")",
+   "App/Screens/Spaces/NutritionSpace.swift:592: NumberRow(title: tr(\"Taille\"), value: $height, unit: tr(\"cm\"))"
+  ]
+ },
+ {
+  "key": "Ton objectif",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:302: QuestionCard(title: tr(\"Ton objectif\")) {",
+   "App/Screens/Profile/ProfileTopics.swift:364: QuestionCard(title: tr(\"Ton objectif\")) {"
+  ]
+ },
+ {
+  "key": "Ton niveau",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:309: QuestionCard(title: tr(\"Ton niveau\")) {"
+  ]
+ },
+ {
+  "key": "Le widget Régularité suit cet objectif.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:316: QuestionCard(title: tr(\"Séances par semaine\"), detail: tr(\"Le widget Régularité suit cet objectif.\")) {"
+  ]
+ },
+ {
+  "key": "L'âge vient de ton anniversaire (Ma vie).",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:335: QuestionCard(title: tr(\"Toi\"), detail: model.life.birthday != nil ? tr(\"L'âge vient de ton anniversaire (Ma vie).\") : tr(\"Le poids sert aussi à estimer les calories brûlées.\")"
+  ]
+ },
+ {
+  "key": "Le poids sert aussi à estimer les calories brûlées.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:335: QuestionCard(title: tr(\"Toi\"), detail: model.life.birthday != nil ? tr(\"L'âge vient de ton anniversaire (Ma vie).\") : tr(\"Le poids sert aussi à estimer les calories brûlées.\")"
+  ]
+ },
+ {
+  "key": "Toi",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:335: QuestionCard(title: tr(\"Toi\"), detail: model.life.birthday != nil ? tr(\"L'âge vient de ton anniversaire (Ma vie).\") : tr(\"Le poids sert aussi à estimer les calories brûlées.\")"
+  ]
+ },
+ {
+  "key": "Laisse vide ce que tu ne sais pas : Tessera peut le calculer.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:371: QuestionCard(title: tr(\"Par jour\"), detail: tr(\"Laisse vide ce que tu ne sais pas : Tessera peut le calculer.\")) {"
+  ]
+ },
+ {
+  "key": "Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:388: return QuestionCard(title: tr(\"Calculer pour moi\"), detail: tr(\"Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.\")) {"
+  ]
+ },
+ {
+  "key": "Calculer mes objectifs",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:408: Label(tr(\"Calculer mes objectifs\"), systemImage: \"wand.and.stars\")",
+   "App/Screens/Spaces/NutritionSpace.swift:600: Button(tr(\"Calculer mes objectifs\")) {"
+  ]
+ },
+ {
+  "key": "Logement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voy"
+  ]
+ },
+ {
+  "key": "Loisirs",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voy"
+  ]
+ },
+ {
+  "key": "Restaurants",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voy"
+  ]
+ },
+ {
+  "key": "Shopping",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voy"
+  ]
+ },
+ {
+  "key": "Transport",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voy",
+   "Shared/Domains/Budget.swift:127: BudgetCategory(id: BudgetState.fixedID(3), name: tr(\"Transport\"), symbol: \"bus\", colorHex: \"3366FF\", monthlyLimit: 150),"
+  ]
+ },
+ {
+  "key": "Voyages",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voy",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:64: Text(tr(\"Voyages\"))"
+  ]
+ },
+ {
+  "key": "Épicerie",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voy",
+   "Shared/Data/PayloadLoader.swift:101: MoneyItem(name: tr(\"Épicerie\"), amount: 110, period: .week, isIncome: false),"
+  ]
+ },
+ {
+  "key": "Tes principales dépenses",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:442: QuestionCard(title: tr(\"Tes principales dépenses\")) {"
+  ]
+ },
+ {
+  "key": "Ton activité",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:461: QuestionCard(title: tr(\"Ton activité\")) {"
+  ]
+ },
+ {
+  "key": "Nom ou activité",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:463: placeholder: tr(\"Nom ou activité\"),"
+  ]
+ },
+ {
+  "key": "Le chiffre d'affaires, les dépenses et le bénéfice viennent des ventes que tu notes.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:473: QuestionCard(title: tr(\"Chaque mois\"), detail: tr(\"Le chiffre d'affaires, les dépenses et le bénéfice viennent des ventes que tu notes.\")) {"
+  ]
+ },
+ {
+  "key": "Objectif de CA",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:476: title: tr(\"Objectif de CA\"), unit: currencySymbol,"
+  ]
+ },
+ {
+  "key": "Ton objectif du moment",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:495: QuestionCard(title: tr(\"Ton objectif du moment\")) {"
+  ]
+ },
+ {
+  "key": "Finir mon projet, lire plus…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:496: ProfileTextField(placeholder: tr(\"Finir mon projet, lire plus…\"), text: profileBinding(\\.mainGoal), identifier: \"productivity-goal\")"
+  ]
+ },
+ {
+  "key": "Ton rythme",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:498: QuestionCard(title: tr(\"Ton rythme\")) {",
+   "App/Screens/Profile/ProfileTopics.swift:544: QuestionCard(title: tr(\"Ton rythme\"), detail: tr(\"Tes cours, examens et notes s'ajoutent dans Créer › Études.\")) {"
+  ]
+ },
+ {
+  "key": "Travail / étude",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:500: ProfileNumberField(title: tr(\"Travail / étude\"), unit: tr(\"h par jour\"), value: profileBinding(\\.dailyWorkHours), identifier: \"work-hours\")"
+  ]
+ },
+ {
+  "key": "h par jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:500: ProfileNumberField(title: tr(\"Travail / étude\"), unit: tr(\"h par jour\"), value: profileBinding(\\.dailyWorkHours), identifier: \"work-hours\")"
+  ]
+ },
+ {
+  "key": "h / sem.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:502: title: tr(\"Concentration\"), unit: tr(\"h / sem.\"),"
+  ]
+ },
+ {
+  "key": "Une tâche pour commencer",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:511: QuestionCard(title: tr(\"Une tâche pour commencer\"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr(\"tâche à faire\")"
+  ]
+ },
+ {
+  "key": "Ce que tu étudies",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:541: QuestionCard(title: tr(\"Ce que tu étudies\")) {"
+  ]
+ },
+ {
+  "key": "Filière, niveau…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:542: ProfileTextField(placeholder: tr(\"Filière, niveau…\"), text: profileBinding(\\.studyField), identifier: \"study-field\")"
+  ]
+ },
+ {
+  "key": "Tes cours, examens et notes s'ajoutent dans Créer › Études.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:544: QuestionCard(title: tr(\"Ton rythme\"), detail: tr(\"Tes cours, examens et notes s'ajoutent dans Créer › Études.\")) {"
+  ]
+ },
+ {
+  "key": "Étude personnelle",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:545: ProfileNumberField(title: tr(\"Étude personnelle\"), unit: tr(\"h par semaine\"), value: profileBinding(\\.weeklyStudyHours), identifier: \"study-hours\")"
+  ]
+ },
+ {
+  "key": "Kilométrage actuel",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:564: QuestionCard(title: tr(\"Kilométrage actuel\"), detail: tr(\"Les pleins et les entretiens le mettent ensuite à jour.\")) {"
+  ]
+ },
+ {
+  "key": "Les pleins et les entretiens le mettent ensuite à jour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:564: QuestionCard(title: tr(\"Kilométrage actuel\"), detail: tr(\"Les pleins et les entretiens le mettent ensuite à jour.\")) {"
+  ]
+ },
+ {
+  "key": "Pour la météo de tes widgets. Tu peux la changer quand tu veux.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:576: QuestionCard(title: tr(\"Ta ville\"), detail: tr(\"Pour la météo de tes widgets. Tu peux la changer quand tu veux.\")) {"
+  ]
+ },
+ {
+  "key": "Le widget Hydratation suit cet objectif.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:608: QuestionCard(title: tr(\"Verres d'eau par jour\"), detail: tr(\"Le widget Hydratation suit cet objectif.\")) {"
+  ]
+ },
+ {
+  "key": "Verres d'eau par jour",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:608: QuestionCard(title: tr(\"Verres d'eau par jour\"), detail: tr(\"Le widget Hydratation suit cet objectif.\")) {"
+  ]
+ },
+ {
+  "key": "Une habitude à suivre",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:618: QuestionCard(title: tr(\"Une habitude à suivre\"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr(\"habitude suivie\"), tr(\"habitudes suivi"
+  ]
+ },
+ {
+  "key": "habitude suivie",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:618: QuestionCard(title: tr(\"Une habitude à suivre\"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr(\"habitude suivie\"), tr(\"habitudes suivi"
+  ]
+ },
+ {
+  "key": "habitudes suivies",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:618: QuestionCard(title: tr(\"Une habitude à suivre\"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr(\"habitude suivie\"), tr(\"habitudes suivi"
+  ]
+ },
+ {
+  "key": "Tessera met ces thèmes en avant, sans jamais cacher les autres.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:718: Text(tr(\"Tessera met ces thèmes en avant, sans jamais cacher les autres.\"))"
+  ]
+ },
+ {
+  "key": "Centres d'intérêt",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:729: .navigationTitle(tr(\"Centres d'intérêt\"))",
+   "App/Screens/Profile/ProfileView.swift:60: .navigationTitle(tr(\"Centres d'intérêt\"))"
+  ]
+ },
+ {
+  "key": "Facultatif",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:36: TextField(tr(\"Facultatif\"), text: settingBinding(\\.profileName))",
+   "App/Screens/Profile/ProfileView.swift:42: TextField(tr(\"Facultatif\"), text: Binding("
+  ]
+ },
+ {
+  "key": "Aucun",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:62: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))",
+   "App/Screens/Spaces/StudentSpace.swift:195: Text(tr(\"Aucun\")).tag(UUID?.none)"
+  ]
+ },
+ {
+  "key": "choisi",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:62: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
+  ]
+ },
+ {
+  "key": "choisis",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:62: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
+  ]
+ },
+ {
+  "key": "Jours fériés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:64: Picker(tr(\"Jours fériés\"), selection: Binding(",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:529: Section(tr(\"Jours fériés\")) {"
+  ]
+ },
+ {
+  "key": "Aucune",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:73: LabeledContent(tr(\"Ville (météo)\"), value: model.settings.weatherLocation?.name ?? tr(\"Aucune\"))",
+   "Shared/Model/Content.swift:9: case .none: tr(\"Aucune\")"
+  ]
+ },
+ {
+  "key": "Ville (météo)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:73: LabeledContent(tr(\"Ville (météo)\"), value: model.settings.weatherLocation?.name ?? tr(\"Aucune\"))"
+  ]
+ },
+ {
+  "key": "Mon profil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:76: Text(tr(\"Mon profil\"))"
+  ]
+ },
+ {
+  "key": "Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:78: Text(tr(\"Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », su"
+  ]
+ },
+ {
+  "key": "Apparence",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:90: Text(tr(\"Apparence\"))"
+  ]
+ },
+ {
+  "key": "%@ — %@. Tes widgets gardent chacun leur propre style.",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:93: Text(tr(\"\\(style.name) — \\(style.tagline). Tes widgets gardent chacun leur propre style.\"))"
+  ]
+ },
+ {
+  "key": "Préférences",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:96: Section(tr(\"Préférences\")) {"
+  ]
+ },
+ {
+  "key": "Température",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:97: Picker(tr(\"Température\"), selection: settingBinding(\\.temperatureUnit)) {"
+  ]
+ },
+ {
+  "key": "Heure sur 24 h",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:100: Toggle(tr(\"Heure sur 24 h\"), isOn: settingBinding(\\.uses24HourClock))"
+  ]
+ },
+ {
+  "key": "Devise (flux d'argent)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:101: Picker(tr(\"Devise (flux d'argent)\"), selection: settingBinding(\\.currencyCode)) {"
+  ]
+ },
+ {
+  "key": "Devise (crypto)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:104: Picker(tr(\"Devise (crypto)\"), selection: settingBinding(\\.cryptoCurrency)) {"
+  ]
+ },
+ {
+  "key": "Autorisation",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:110: LabeledContent(tr(\"Autorisation\"), value: notificationStatus)"
+  ]
+ },
+ {
+  "key": "Rappels d'hydratation",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:111: NavigationLink { HydrationView() } label: { Text(tr(\"Rappels d'hydratation\")) }"
+  ]
+ },
+ {
+  "key": "Rappels d'habitudes",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:112: NavigationLink { HabitsView() } label: { Text(tr(\"Rappels d'habitudes\")) }"
+  ]
+ },
+ {
+  "key": "Refusée",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:113: if notificationStatus == tr(\"Refusée\") {",
+   "App/Screens/Profile/ProfileView.swift:373: case .denied: notificationStatus = tr(\"Refusée\")"
+  ]
+ },
+ {
+  "key": "Ouvrir les réglages de l'iPhone",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:114: Button(tr(\"Ouvrir les réglages de l'iPhone\")) {"
+  ]
+ },
+ {
+  "key": "Notifications",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:119: Text(tr(\"Notifications\"))"
+  ]
+ },
+ {
+  "key": "Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:121: Text(tr(\"Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
+  ]
+ },
+ {
+  "key": "Aide",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:132: Section(tr(\"Aide\")) {"
+  ]
+ },
+ {
+  "key": "Ajouter un widget à l'écran d'accueil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:136: Label(tr(\"Ajouter un widget à l'écran d'accueil\"), systemImage: \"plus.square.on.square\")"
+  ]
+ },
+ {
+  "key": "Revoir le tutoriel",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:146: Label(tr(\"Revoir le tutoriel\"), systemImage: \"graduationcap\")"
+  ]
+ },
+ {
+  "key": "Noter Tessera",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:152: Label(tr(\"Noter Tessera\"), systemImage: \"star\")"
+  ]
+ },
+ {
+  "key": "Copiée",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:160: Text(copiedEmail ? tr(\"Copiée\") : PremiumConfiguration.supportEmail)"
+  ]
+ },
+ {
+  "key": "Contacter le support",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:162: Label(tr(\"Contacter le support\"), systemImage: \"envelope\")"
+  ]
+ },
+ {
+  "key": "Conditions d'utilisation",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:172: Label(tr(\"Conditions d'utilisation\"), systemImage: \"doc.text\")"
+  ]
+ },
+ {
+  "key": "À propos",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:175: Text(tr(\"À propos\"))"
+  ]
+ },
+ {
+  "key": "Tessera %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:178: Text(tr(\"Tessera \\(appVersion)\"))"
+  ]
+ },
+ {
+  "key": "Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:179: Text(tr(\"Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko.\"))"
+  ]
+ },
+ {
+  "key": "Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:180: Text(tr(\"Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.\"))"
+  ]
+ },
+ {
+  "key": "Effacer toutes mes données",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:186: Button(tr(\"Effacer toutes mes données\"), role: .destructive) { confirmReset = true }"
+  ]
+ },
+ {
+  "key": "Premium débloqué (mode test)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:191: Toggle(tr(\"Premium débloqué (mode test)\"), isOn: Binding("
+  ]
+ },
+ {
+  "key": "Recharger les widgets",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:195: Button(tr(\"Recharger les widgets\")) { WidgetCenter.shared.reloadAllTimelines() }"
+  ]
+ },
+ {
+  "key": "Version",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:196: LabeledContent(tr(\"Version\"), value: WidgetDiagnostics.appVersion)"
+  ]
+ },
+ {
+  "key": "Absent",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:197: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+  ]
+ },
+ {
+  "key": "Installé",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:197: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+  ]
+ },
+ {
+  "key": "Module des widgets",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:197: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+  ]
+ },
+ {
+  "key": "Espace partagé",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:198: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
+  ]
+ },
+ {
+  "key": "Groupes accordés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:200: Text(tr(\"Groupes accordés\"))"
+  ]
+ },
+ {
+  "key": "Widgets lancés par iOS",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:206: LabeledContent(tr(\"Widgets lancés par iOS\"), value: WidgetDiagnostics.lastLaunchText)"
+  ]
+ },
+ {
+  "key": "Développeur",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:208: Text(tr(\"Développeur\"))"
+  ]
+ },
+ {
+  "key": "Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:210: Text(tr(\"Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul"
+  ]
+ }
+]

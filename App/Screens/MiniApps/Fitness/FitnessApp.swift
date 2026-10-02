@@ -56,7 +56,7 @@ struct FitnessAppView: View {
             } else if let doneToday {
                 header(tr("Séance faite"), symbol: "checkmark.seal.fill")
                 Text(doneToday.routineName).font(.title2.weight(.bold))
-                Text(tr("\(Fmt.plural(doneToday.sets.count, tr("série"), tr("séries"))) · \(TF.int(doneToday.duration / 60)) min · \(TF.int(doneToday.volume)) kg s)oulevés")
+                Text(tr("\(Fmt.plural(doneToday.sets.count, tr("série"), tr("séries"))) · \(TF.int(doneToday.duration / 60)) min · \(TF.int(doneToday.volume)) kg soulevés"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 NavigationLink(value: HomeRoute.page(.fitnessSessionDetail(doneToday.id))) {
@@ -114,7 +114,7 @@ struct FitnessAppView: View {
     private func routineSummary(_ routine: Routine) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(routine.name).font(.title2.weight(.bold))
-            Text(tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · \(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr("série"), tr("séries"))) · environ \(FitnessPlan.minute)s(routine)) min")
+            Text(tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · \(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr("série"), tr("séries"))) · environ \(FitnessPlan.minutes(routine)) min"))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             ForEach(routine.exercises.prefix(4)) { exercise in

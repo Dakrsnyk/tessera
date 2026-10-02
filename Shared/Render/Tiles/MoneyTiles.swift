@@ -149,7 +149,7 @@ enum MoneyTiles {
         var tile = Tile(title: tr("Abonnements"), symbol: "repeat.circle")
         tile.value = TF.money(monthly, currency, decimals: 2)
         tile.unit = "/mois"
-        tile.caption = tr("\(Fmt.plural(subs.count, tr("abonnement"), tr("abonnements"))) · \(TF.money(monthly * 12, curren)cy))/an"
+        tile.caption = tr("\(Fmt.plural(subs.count, tr("abonnement"), tr("abonnements"))) · \(TF.money(monthly * 12, currency))/an")
         tile.rows = subs.sorted { $0.monthlyCost > $1.monthlyCost }.prefix(6).map { bill in
             TileRow(id: bill.id.uuidString, title: bill.name, value: TF.money(bill.monthlyCost, currency, decimals: 2), symbol: bill.symbol)
         }

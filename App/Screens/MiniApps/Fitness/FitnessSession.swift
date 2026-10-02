@@ -293,7 +293,7 @@ struct FitnessSessionPage: View {
                         model.update(\.fitness) { $0.startSession(routine, at: Date()) }
                     } label: {
                         MiniRow(symbol: "play.fill", colorHex: accentHex, title: routine.name,
-                                detail: tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · environ \(FitnessPlan.minutes(routin)e)) min")
+                                detail: tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · environ \(FitnessPlan.minutes(routine)) min"))
                     }
                     .buttonStyle(.plain)
                     if index < state.routines.count - 1 { MiniDivider() }

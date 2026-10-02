@@ -1,0 +1,1399 @@
+[
+ {
+  "key": "Léger buste vers l'avant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:378: tips: [tr(\"Mène avec les coudes.\"), tr(\"Léger buste vers l'avant.\")],"
+  ]
+ },
+ {
+  "key": "Mène avec les coudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:378: tips: [tr(\"Mène avec les coudes.\"), tr(\"Léger buste vers l'avant.\")],"
+  ]
+ },
+ {
+  "key": "Charge trop lourde.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:379: mistakes: [tr(\"Hausser les épaules.\"), tr(\"Donner de l'élan.\"), tr(\"Charge trop lourde.\")]",
+   "Shared/Domains/ExerciseTechniques.swift:41: [tr(\"Tirer avec le dos en se penchant en arrière.\"), tr(\"Coudes qui tombent le long du corps.\"), tr(\"Charge trop lourde.\")]),"
+  ]
+ },
+ {
+  "key": "Debout, charge devant les cuisses, bras presque tendus.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:383: start: tr(\"Debout, charge devant les cuisses, bras presque tendus.\"),"
+  ]
+ },
+ {
+  "key": "Lève les bras devant toi jusqu'à hauteur des épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:384: steps: [tr(\"Lève les bras devant toi jusqu'à hauteur des épaules.\"), tr(\"Redescends lentement.\")],"
+  ]
+ },
+ {
+  "key": "Buste immobile.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:387: tips: [tr(\"Buste immobile.\")],"
+  ]
+ },
+ {
+  "key": "Monter au-dessus des épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:388: mistakes: [tr(\"Balancer le buste.\"), tr(\"Monter au-dessus des épaules.\")]"
+  ]
+ },
+ {
+  "key": "Bras presque tendus devant la poitrine, coudes légèrement fléchis (allongé, assis ou à la poulie).",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:392: start: tr(\"Bras presque tendus devant la poitrine, coudes légèrement fléchis (allongé, assis ou à la poulie).\"),"
+  ]
+ },
+ {
+  "key": "Ouvre les bras en arc de cercle jusqu'à l'étirement des pectoraux (ou de l'arrière des épaules pour l'oiseau).",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:393: steps: [tr(\"Ouvre les bras en arc de cercle jusqu'à l'étirement des pectoraux (ou de l'arrière des épaules pour l'oiseau).\"), tr(\"Referme en gardant l'angle des coudes.\")],"
+  ]
+ },
+ {
+  "key": "Referme en gardant l'angle des coudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:393: steps: [tr(\"Ouvre les bras en arc de cercle jusqu'à l'étirement des pectoraux (ou de l'arrière des épaules pour l'oiseau).\"), tr(\"Referme en gardant l'angle des coudes.\")],"
+  ]
+ },
+ {
+  "key": "Inspire en ouvrant, expire en refermant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:395: breathing: tr(\"Inspire en ouvrant, expire en refermant.\"),"
+  ]
+ },
+ {
+  "key": "Imagine serrer un gros tronc d'arbre.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:396: tips: [tr(\"Imagine serrer un gros tronc d'arbre.\")],"
+  ]
+ },
+ {
+  "key": "Descendre trop bas.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:397: mistakes: [tr(\"Plier et tendre les coudes pendant le mouvement.\"), tr(\"Descendre trop bas.\")]",
+   "Shared/Domains/ExerciseTechniques.swift:92: [tr(\"Descendre trop bas.\"), tr(\"Épaules qui montent vers les oreilles.\")]),"
+  ]
+ },
+ {
+  "key": "Plier et tendre les coudes pendant le mouvement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:397: mistakes: [tr(\"Plier et tendre les coudes pendant le mouvement.\"), tr(\"Descendre trop bas.\")]"
+  ]
+ },
+ {
+  "key": "Debout, charge devant les cuisses, mains largeur d'épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:401: start: tr(\"Debout, charge devant les cuisses, mains largeur d'épaules.\"),"
+  ]
+ },
+ {
+  "key": "Monte la charge le long du corps jusqu'au bas de la poitrine, coudes vers l'extérieur.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:402: steps: [tr(\"Monte la charge le long du corps jusqu'au bas de la poitrine, coudes vers l'extérieur.\"), tr(\"Redescends lentement.\")],"
+  ]
+ },
+ {
+  "key": "Jusqu'aux coudes à hauteur des épaules, pas plus haut.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:403: range: tr(\"Jusqu'aux coudes à hauteur des épaules, pas plus haut.\"),"
+  ]
+ },
+ {
+  "key": "Une prise plus large ménage les épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:405: tips: [tr(\"Une prise plus large ménage les épaules.\")],"
+  ]
+ },
+ {
+  "key": "Monter les coudes au-dessus des épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:406: mistakes: [tr(\"Monter les coudes au-dessus des épaules.\"), tr(\"Prise trop serrée.\")]"
+  ]
+ },
+ {
+  "key": "Prise trop serrée.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:406: mistakes: [tr(\"Monter les coudes au-dessus des épaules.\"), tr(\"Prise trop serrée.\")]"
+  ]
+ },
+ {
+  "key": "Debout, charge en main, bras tendus.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:410: start: tr(\"Debout, charge en main, bras tendus.\"),"
+  ]
+ },
+ {
+  "key": "Hausse les épaules vers les oreilles.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:411: steps: [tr(\"Hausse les épaules vers les oreilles.\"), tr(\"Tiens une seconde.\"), tr(\"Redescends lentement.\")],"
+  ]
+ },
+ {
+  "key": "Le plus haut possible, sans plier les bras.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:412: range: tr(\"Le plus haut possible, sans plier les bras.\"),"
+  ]
+ },
+ {
+  "key": "Expire en montant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:413: breathing: tr(\"Expire en montant.\"),",
+   "Shared/Domains/ExerciseLibrary.swift:458: breathing: tr(\"Expire en montant.\"),"
+  ]
+ },
+ {
+  "key": "Mouvement vertical, sans rouler les épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:414: tips: [tr(\"Mouvement vertical, sans rouler les épaules.\")],"
+  ]
+ },
+ {
+  "key": "Plier les bras.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:415: mistakes: [tr(\"Rouler les épaules.\"), tr(\"Plier les bras.\")]"
+  ]
+ },
+ {
+  "key": "Rouler les épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:415: mistakes: [tr(\"Rouler les épaules.\"), tr(\"Plier les bras.\")]"
+  ]
+ },
+ {
+  "key": "Allongé sur le dos, genoux pliés, pieds au sol, mains aux tempes ou croisées sur la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:419: start: tr(\"Allongé sur le dos, genoux pliés, pieds au sol, mains aux tempes ou croisées sur la poitrine.\"),"
+  ]
+ },
+ {
+  "key": "Enroule le haut du dos pour décoller les omoplates.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:420: steps: [tr(\"Enroule le haut du dos pour décoller les omoplates.\"), tr(\"Redescends lentement.\")],"
+  ]
+ },
+ {
+  "key": "Les omoplates décollent, le bas du dos reste au sol.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:421: range: tr(\"Les omoplates décollent, le bas du dos reste au sol.\"),"
+  ]
+ },
+ {
+  "key": "Regarde vers le haut, pas vers les genoux.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:423: tips: [tr(\"Regarde vers le haut, pas vers les genoux.\")],"
+  ]
+ },
+ {
+  "key": "Tirer sur la nuque.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:424: mistakes: [tr(\"Tirer sur la nuque.\"), tr(\"Donner de l'élan.\")]"
+  ]
+ },
+ {
+  "key": "En appui sur les avant-bras et la pointe des pieds, coudes sous les épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:428: start: tr(\"En appui sur les avant-bras et la pointe des pieds, coudes sous les épaules.\"),"
+  ]
+ },
+ {
+  "key": "Gaine le ventre et serre les fessiers.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:429: steps: [tr(\"Gaine le ventre et serre les fessiers.\"), tr(\"Garde le corps aligné de la tête aux talons.\"), tr(\"Tiens la position le temps voulu.\")],",
+   "Shared/Domains/ExerciseTechniques.swift:65: [tr(\"Gaine le ventre et serre les fessiers.\"), tr(\"Fais les deux côtés.\")],"
+  ]
+ },
+ {
+  "key": "Garde le corps aligné de la tête aux talons.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:429: steps: [tr(\"Gaine le ventre et serre les fessiers.\"), tr(\"Garde le corps aligné de la tête aux talons.\"), tr(\"Tiens la position le temps voulu.\")],"
+  ]
+ },
+ {
+  "key": "Tiens la position le temps voulu.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:429: steps: [tr(\"Gaine le ventre et serre les fessiers.\"), tr(\"Garde le corps aligné de la tête aux talons.\"), tr(\"Tiens la position le temps voulu.\")],"
+  ]
+ },
+ {
+  "key": "Position fixe.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:430: range: tr(\"Position fixe.\"),"
+  ]
+ },
+ {
+  "key": "Respire calmement, sans bloquer.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:431: breathing: tr(\"Respire calmement, sans bloquer.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:34: tr(\"Bras tendus tout le long : on ne tire pas.\"), tr(\"Respire calmement, sans bloquer.\"),"
+  ]
+ },
+ {
+  "key": "Pousse le sol avec les avant-bras.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:432: tips: [tr(\"Pousse le sol avec les avant-bras.\")],"
+  ]
+ },
+ {
+  "key": "Hanches trop hautes ou affaissées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:433: mistakes: [tr(\"Hanches trop hautes ou affaissées.\"), tr(\"Retenir sa respiration.\")]"
+  ]
+ },
+ {
+  "key": "Retenir sa respiration.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:433: mistakes: [tr(\"Hanches trop hautes ou affaissées.\"), tr(\"Retenir sa respiration.\")]",
+   "Shared/Domains/ExerciseTechniques.swift:194: [tr(\"Creuser le bas du dos.\"), tr(\"Retenir sa respiration.\")]),"
+  ]
+ },
+ {
+  "key": "Allongé sur le dos (ou suspendu à une barre), jambes tendues.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:437: start: tr(\"Allongé sur le dos (ou suspendu à une barre), jambes tendues.\"),"
+  ]
+ },
+ {
+  "key": "Lève les jambes en gardant le bas du dos plaqué (ou jusqu'aux hanches à 90° suspendu).",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:438: steps: [tr(\"Lève les jambes en gardant le bas du dos plaqué (ou jusqu'aux hanches à 90° suspendu).\"), tr(\"Redescends lentement sans toucher le sol.\")],"
+  ]
+ },
+ {
+  "key": "Redescends lentement sans toucher le sol.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:438: steps: [tr(\"Lève les jambes en gardant le bas du dos plaqué (ou jusqu'aux hanches à 90° suspendu).\"), tr(\"Redescends lentement sans toucher le sol.\")],"
+  ]
+ },
+ {
+  "key": "Jusqu'aux jambes verticales allongé.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:439: range: tr(\"Jusqu'aux jambes verticales allongé.\"),"
+  ]
+ },
+ {
+  "key": "Mains sous les fesses si le dos se cambre.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:441: tips: [tr(\"Mains sous les fesses si le dos se cambre.\")],"
+  ]
+ },
+ {
+  "key": "Creuser le bas du dos.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:442: mistakes: [tr(\"Creuser le bas du dos.\"), tr(\"Balancer les jambes.\")]",
+   "Shared/Domains/ExerciseTechniques.swift:194: [tr(\"Creuser le bas du dos.\"), tr(\"Retenir sa respiration.\")]),"
+  ]
+ },
+ {
+  "key": "Assis, genoux pliés, buste incliné en arrière (ou debout face à la poulie).",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:446: start: tr(\"Assis, genoux pliés, buste incliné en arrière (ou debout face à la poulie).\"),"
+  ]
+ },
+ {
+  "key": "Reviens au centre puis tourne de l'autre côté.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:447: steps: [tr(\"Tourne le buste d'un côté.\"), tr(\"Reviens au centre puis tourne de l'autre côté.\")],"
+  ]
+ },
+ {
+  "key": "Tourne le buste d'un côté.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:447: steps: [tr(\"Tourne le buste d'un côté.\"), tr(\"Reviens au centre puis tourne de l'autre côté.\")],"
+  ]
+ },
+ {
+  "key": "Rotation contrôlée, sans forcer.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:448: range: tr(\"Rotation contrôlée, sans forcer.\"),"
+  ]
+ },
+ {
+  "key": "Expire à chaque rotation.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:449: breathing: tr(\"Expire à chaque rotation.\"),"
+  ]
+ },
+ {
+  "key": "C'est le buste qui tourne, pas seulement les bras.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:450: tips: [tr(\"C'est le buste qui tourne, pas seulement les bras.\")],"
+  ]
+ },
+ {
+  "key": "Aller trop vite.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:451: mistakes: [tr(\"Arrondir le dos.\"), tr(\"Aller trop vite.\")]",
+   "Shared/Domains/ExerciseLibrary.swift:523: mistakes: [tr(\"Aller trop vite.\"), tr(\"Forcer dans la douleur.\")]"
+  ]
+ },
+ {
+  "key": "Arrondir le dos.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:451: mistakes: [tr(\"Arrondir le dos.\"), tr(\"Aller trop vite.\")]",
+   "Shared/Domains/ExerciseTechniques.swift:285: [tr(\"Atterrir jambes tendues.\"), tr(\"Arrondir le dos.\")]),"
+  ]
+ },
+ {
+  "key": "Allongé sur le ventre, bras tendus devant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:455: start: tr(\"Allongé sur le ventre, bras tendus devant.\"),"
+  ]
+ },
+ {
+  "key": "Décolle doucement les bras, la poitrine et les jambes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:456: steps: [tr(\"Décolle doucement les bras, la poitrine et les jambes.\"), tr(\"Tiens deux secondes.\"), tr(\"Redescends lentement.\")],"
+  ]
+ },
+ {
+  "key": "Tiens deux secondes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:456: steps: [tr(\"Décolle doucement les bras, la poitrine et les jambes.\"), tr(\"Tiens deux secondes.\"), tr(\"Redescends lentement.\")],"
+  ]
+ },
+ {
+  "key": "Quelques centimètres suffisent.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:457: range: tr(\"Quelques centimètres suffisent.\"),"
+  ]
+ },
+ {
+  "key": "Regard vers le sol, nuque longue.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:459: tips: [tr(\"Regard vers le sol, nuque longue.\")],"
+  ]
+ },
+ {
+  "key": "Lever la tête vers l'avant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:460: mistakes: [tr(\"Lever la tête vers l'avant.\"), tr(\"Monter trop haut en forçant.\")]"
+  ]
+ },
+ {
+  "key": "Monter trop haut en forçant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:460: mistakes: [tr(\"Lever la tête vers l'avant.\"), tr(\"Monter trop haut en forçant.\")]"
+  ]
+ },
+ {
+  "key": "En position de pompe, bras tendus, corps gainé.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:464: start: tr(\"En position de pompe, bras tendus, corps gainé.\"),"
+  ]
+ },
+ {
+  "key": "Change de jambe rapidement, comme si tu courais.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:465: steps: [tr(\"Ramène un genou vers la poitrine.\"), tr(\"Change de jambe rapidement, comme si tu courais.\")],"
+  ]
+ },
+ {
+  "key": "Ramène un genou vers la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:465: steps: [tr(\"Ramène un genou vers la poitrine.\"), tr(\"Change de jambe rapidement, comme si tu courais.\")],"
+  ]
+ },
+ {
+  "key": "Le genou vient sous la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:466: range: tr(\"Le genou vient sous la poitrine.\"),"
+  ]
+ },
+ {
+  "key": "Respire en rythme.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:467: breathing: tr(\"Respire en rythme.\"),",
+   "Shared/Domains/ExerciseLibrary.swift:512: breathing: tr(\"Respire en rythme.\"),"
+  ]
+ },
+ {
+  "key": "Épaules au-dessus des mains.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:468: tips: [tr(\"Épaules au-dessus des mains.\")],"
+  ]
+ },
+ {
+  "key": "Hanches qui montent.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:469: mistakes: [tr(\"Hanches qui montent.\"), tr(\"Rebondir sur les pieds.\")]"
+  ]
+ },
+ {
+  "key": "Rebondir sur les pieds.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:469: mistakes: [tr(\"Hanches qui montent.\"), tr(\"Rebondir sur les pieds.\")]"
+  ]
+ },
+ {
+  "key": "Debout, une charge lourde dans chaque main.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:473: start: tr(\"Debout, une charge lourde dans chaque main.\"),"
+  ]
+ },
+ {
+  "key": "Garde le buste droit et les épaules basses.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:474: steps: [tr(\"Marche à petits pas contrôlés.\"), tr(\"Garde le buste droit et les épaules basses.\")],"
+  ]
+ },
+ {
+  "key": "Marche à petits pas contrôlés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:474: steps: [tr(\"Marche à petits pas contrôlés.\"), tr(\"Garde le buste droit et les épaules basses.\")],"
+  ]
+ },
+ {
+  "key": "Sur la distance ou le temps choisi.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:475: range: tr(\"Sur la distance ou le temps choisi.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:243: tr(\"Sur la distance ou le temps choisi.\"), tr(\"Respire en rythme.\"),"
+  ]
+ },
+ {
+  "key": "Respire régulièrement, sans bloquer.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:476: breathing: tr(\"Respire régulièrement, sans bloquer.\"),"
+  ]
+ },
+ {
+  "key": "Serre fort les poignées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:477: tips: [tr(\"Serre fort les poignées.\")],"
+  ]
+ },
+ {
+  "key": "Se pencher d'un côté.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:478: mistakes: [tr(\"Se pencher d'un côté.\"), tr(\"Hausser les épaules.\")]"
+  ]
+ },
+ {
+  "key": "Debout, buste droit, regard devant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:482: start: tr(\"Debout, buste droit, regard devant.\"),"
+  ]
+ },
+ {
+  "key": "Accélère progressivement si tu veux.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:483: steps: [tr(\"Commence à allure facile quelques minutes.\"), tr(\"Garde une foulée souple et régulière.\"), tr(\"Accélère progressivement si tu veux.\")],"
+  ]
+ },
+ {
+  "key": "Commence à allure facile quelques minutes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:483: steps: [tr(\"Commence à allure facile quelques minutes.\"), tr(\"Garde une foulée souple et régulière.\"), tr(\"Accélère progressivement si tu veux.\")],"
+  ]
+ },
+ {
+  "key": "Garde une foulée souple et régulière.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:483: steps: [tr(\"Commence à allure facile quelques minutes.\"), tr(\"Garde une foulée souple et régulière.\"), tr(\"Accélère progressivement si tu veux.\")],"
+  ]
+ },
+ {
+  "key": "Sur la durée ou la distance prévue.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:484: range: tr(\"Sur la durée ou la distance prévue.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:253: tr(\"Sur la durée ou la distance prévue.\"), tr(\"Respire régulièrement.\"),"
+  ]
+ },
+ {
+  "key": "Respire régulièrement ; en endurance, tu dois pouvoir parler.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:485: breathing: tr(\"Respire régulièrement ; en endurance, tu dois pouvoir parler.\"),"
+  ]
+ },
+ {
+  "key": "Bras détendus, coudes à 90°.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:486: tips: [tr(\"Bras détendus, coudes à 90°.\")],",
+   "Shared/Domains/ExerciseTechniques.swift:254: [tr(\"Reste au centre du tapis.\"), tr(\"Bras détendus, coudes à 90°.\")],"
+  ]
+ },
+ {
+  "key": "Partir trop vite.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:487: mistakes: [tr(\"Partir trop vite.\"), tr(\"Talonner lourdement.\")]"
+  ]
+ },
+ {
+  "key": "Talonner lourdement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:487: mistakes: [tr(\"Partir trop vite.\"), tr(\"Talonner lourdement.\")]"
+  ]
+ },
+ {
+  "key": "Assis sur le vélo, selle réglée pour une jambe presque tendue en bas.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:491: start: tr(\"Assis sur le vélo, selle réglée pour une jambe presque tendue en bas.\"),"
+  ]
+ },
+ {
+  "key": "Ajuste la résistance selon ta séance.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:492: steps: [tr(\"Pédale à cadence régulière.\"), tr(\"Ajuste la résistance selon ta séance.\")],"
+  ]
+ },
+ {
+  "key": "Pédale à cadence régulière.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:492: steps: [tr(\"Pédale à cadence régulière.\"), tr(\"Ajuste la résistance selon ta séance.\")],"
+  ]
+ },
+ {
+  "key": "Sur la durée prévue.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:493: range: tr(\"Sur la durée prévue.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:258: tr(\"Sur la durée prévue.\"), tr(\"Respire régulièrement ; tu dois pouvoir parler.\"),"
+  ]
+ },
+ {
+  "key": "Respire régulièrement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:494: breathing: tr(\"Respire régulièrement.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:253: tr(\"Sur la durée ou la distance prévue.\"), tr(\"Respire régulièrement.\"),"
+  ]
+ },
+ {
+  "key": "Haut du corps détendu.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:495: tips: [tr(\"Haut du corps détendu.\")],"
+  ]
+ },
+ {
+  "key": "Résistance trop forte qui te fait balancer.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:496: mistakes: [tr(\"Selle trop basse.\"), tr(\"Résistance trop forte qui te fait balancer.\")]"
+  ]
+ },
+ {
+  "key": "Selle trop basse.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:496: mistakes: [tr(\"Selle trop basse.\"), tr(\"Résistance trop forte qui te fait balancer.\")]"
+  ]
+ },
+ {
+  "key": "Assis, pieds sanglés, bras tendus, tibias verticaux.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:500: start: tr(\"Assis, pieds sanglés, bras tendus, tibias verticaux.\"),"
+  ]
+ },
+ {
+  "key": "Bascule légèrement le buste en arrière puis tire la poignée sous les côtes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:501: steps: [tr(\"Pousse d'abord avec les jambes.\"), tr(\"Bascule légèrement le buste en arrière puis tire la poignée sous les côtes.\"), tr(\"Reviens dans l'ordre inverse : bras, buste, "
+  ]
+ },
+ {
+  "key": "Pousse d'abord avec les jambes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:501: steps: [tr(\"Pousse d'abord avec les jambes.\"), tr(\"Bascule légèrement le buste en arrière puis tire la poignée sous les côtes.\"), tr(\"Reviens dans l'ordre inverse : bras, buste, "
+  ]
+ },
+ {
+  "key": "Reviens dans l'ordre inverse : bras, buste, jambes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:501: steps: [tr(\"Pousse d'abord avec les jambes.\"), tr(\"Bascule légèrement le buste en arrière puis tire la poignée sous les côtes.\"), tr(\"Reviens dans l'ordre inverse : bras, buste, "
+  ]
+ },
+ {
+  "key": "Du tassé en avant jusqu'aux jambes tendues.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:502: range: tr(\"Du tassé en avant jusqu'aux jambes tendues.\"),"
+  ]
+ },
+ {
+  "key": "Les jambes font l'essentiel du travail.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:504: tips: [tr(\"Les jambes font l'essentiel du travail.\")],"
+  ]
+ },
+ {
+  "key": "Tirer avec les bras en premier.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:505: mistakes: [tr(\"Tirer avec les bras en premier.\"), tr(\"Dos rond.\")]"
+  ]
+ },
+ {
+  "key": "Debout, pieds largeur de hanches, genoux souples.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:509: start: tr(\"Debout, pieds largeur de hanches, genoux souples.\"),"
+  ]
+ },
+ {
+  "key": "Enchaîne à ton rythme.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:510: steps: [tr(\"Saute en poussant dans le sol.\"), tr(\"Reçois-toi sur l'avant du pied, genoux fléchis.\"), tr(\"Enchaîne à ton rythme.\")],",
+   "Shared/Domains/ExerciseTechniques.swift:282: [tr(\"Saute en écartant les pieds et lève les bras au-dessus de la tête.\"), tr(\"Saute pour revenir pieds joints, bras le long du corps.\"), tr(\"Enchaîne à ton rythme.\")],"
+  ]
+ },
+ {
+  "key": "Reçois-toi sur l'avant du pied, genoux fléchis.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:510: steps: [tr(\"Saute en poussant dans le sol.\"), tr(\"Reçois-toi sur l'avant du pied, genoux fléchis.\"), tr(\"Enchaîne à ton rythme.\")],"
+  ]
+ },
+ {
+  "key": "Saute en poussant dans le sol.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:510: steps: [tr(\"Saute en poussant dans le sol.\"), tr(\"Reçois-toi sur l'avant du pied, genoux fléchis.\"), tr(\"Enchaîne à ton rythme.\")],"
+  ]
+ },
+ {
+  "key": "Hauteur confortable.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:511: range: tr(\"Hauteur confortable.\"),"
+  ]
+ },
+ {
+  "key": "Atterrissage silencieux.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:513: tips: [tr(\"Atterrissage silencieux.\")],"
+  ]
+ },
+ {
+  "key": "Atterrir jambes tendues.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:514: mistakes: [tr(\"Genoux qui rentrent à la réception.\"), tr(\"Atterrir jambes tendues.\")]",
+   "Shared/Domains/ExerciseTechniques.swift:210: [tr(\"Hanches qui s'affaissent en planche.\"), tr(\"Atterrir jambes tendues.\")]),"
+  ]
+ },
+ {
+  "key": "Genoux qui rentrent à la réception.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:514: mistakes: [tr(\"Genoux qui rentrent à la réception.\"), tr(\"Atterrir jambes tendues.\")]",
+   "Shared/Domains/ExerciseTechniques.swift:290: [tr(\"Redescendre en sautant en arrière.\"), tr(\"Genoux qui rentrent à la réception.\")]),"
+  ]
+ },
+ {
+  "key": "Debout, stable, bras le long du corps.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:518: start: tr(\"Debout, stable, bras le long du corps.\"),"
+  ]
+ },
+ {
+  "key": "Change de sens après 8 à 12 tours.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:519: steps: [tr(\"Fais de grands cercles lents avec les bras.\"), tr(\"Change de sens après 8 à 12 tours.\")],"
+  ]
+ },
+ {
+  "key": "Fais de grands cercles lents avec les bras.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:519: steps: [tr(\"Fais de grands cercles lents avec les bras.\"), tr(\"Change de sens après 8 à 12 tours.\")],"
+  ]
+ },
+ {
+  "key": "Toute l'amplitude confortable.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:520: range: tr(\"Toute l'amplitude confortable.\"),",
+   "Shared/Domains/ExerciseLibrary.swift:547: range: tr(\"Toute l'amplitude confortable.\"),"
+  ]
+ },
+ {
+  "key": "Respire calmement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:521: breathing: tr(\"Respire calmement.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:309: tr(\"Toute l'amplitude confortable, sans plier les coudes.\"), tr(\"Respire calmement.\"),"
+  ]
+ },
+ {
+  "key": "Mouvements lents et contrôlés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:522: tips: [tr(\"Mouvements lents et contrôlés.\")],"
+  ]
+ },
+ {
+  "key": "Forcer dans la douleur.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:523: mistakes: [tr(\"Aller trop vite.\"), tr(\"Forcer dans la douleur.\")]",
+   "Shared/Domains/ExerciseLibrary.swift:550: mistakes: [tr(\"Donner de l'élan.\"), tr(\"Forcer dans la douleur.\")]"
+  ]
+ },
+ {
+  "key": "Assis ou debout, jambes tendues sans verrouiller les genoux.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:527: start: tr(\"Assis ou debout, jambes tendues sans verrouiller les genoux.\"),"
+  ]
+ },
+ {
+  "key": "Penche-toi vers l'avant depuis les hanches.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:528: steps: [tr(\"Penche-toi vers l'avant depuis les hanches.\"), tr(\"Tiens 20 à 40 secondes en respirant lentement.\"), tr(\"Remonte doucement.\")],"
+  ]
+ },
+ {
+  "key": "Remonte doucement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:528: steps: [tr(\"Penche-toi vers l'avant depuis les hanches.\"), tr(\"Tiens 20 à 40 secondes en respirant lentement.\"), tr(\"Remonte doucement.\")],"
+  ]
+ },
+ {
+  "key": "Tiens 20 à 40 secondes en respirant lentement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:528: steps: [tr(\"Penche-toi vers l'avant depuis les hanches.\"), tr(\"Tiens 20 à 40 secondes en respirant lentement.\"), tr(\"Remonte doucement.\")],"
+  ]
+ },
+ {
+  "key": "Jusqu'à une tension agréable, jamais une douleur.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:529: range: tr(\"Jusqu'à une tension agréable, jamais une douleur.\"),",
+   "Shared/Domains/ExerciseLibrary.swift:538: range: tr(\"Jusqu'à une tension agréable, jamais une douleur.\"),"
+  ]
+ },
+ {
+  "key": "Respire lentement ; relâche un peu plus à chaque expiration.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:530: breathing: tr(\"Respire lentement ; relâche un peu plus à chaque expiration.\"),"
+  ]
+ },
+ {
+  "key": "Dos le plus long possible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:531: tips: [tr(\"Dos le plus long possible.\")],"
+  ]
+ },
+ {
+  "key": "Faire des rebonds.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:532: mistakes: [tr(\"Forcer jusqu'à la douleur.\"), tr(\"Faire des rebonds.\")]",
+   "Shared/Domains/ExerciseLibrary.swift:541: mistakes: [tr(\"Forcer jusqu'à la douleur.\"), tr(\"Faire des rebonds.\")]"
+  ]
+ },
+ {
+  "key": "Forcer jusqu'à la douleur.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:532: mistakes: [tr(\"Forcer jusqu'à la douleur.\"), tr(\"Faire des rebonds.\")]",
+   "Shared/Domains/ExerciseLibrary.swift:541: mistakes: [tr(\"Forcer jusqu'à la douleur.\"), tr(\"Faire des rebonds.\")]"
+  ]
+ },
+ {
+  "key": "Debout, en appui stable (un mur peut aider).",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:536: start: tr(\"Debout, en appui stable (un mur peut aider).\"),"
+  ]
+ },
+ {
+  "key": "Mets-toi en position d'étirement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:537: steps: [tr(\"Mets-toi en position d'étirement.\"), tr(\"Tiens 20 à 40 secondes.\"), tr(\"Relâche doucement et change de côté.\")],"
+  ]
+ },
+ {
+  "key": "Relâche doucement et change de côté.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:537: steps: [tr(\"Mets-toi en position d'étirement.\"), tr(\"Tiens 20 à 40 secondes.\"), tr(\"Relâche doucement et change de côté.\")],"
+  ]
+ },
+ {
+  "key": "Tiens 20 à 40 secondes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:537: steps: [tr(\"Mets-toi en position d'étirement.\"), tr(\"Tiens 20 à 40 secondes.\"), tr(\"Relâche doucement et change de côté.\")],"
+  ]
+ },
+ {
+  "key": "Respire lentement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:539: breathing: tr(\"Respire lentement.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:339: tr(\"Le plus bas confortable, talons au sol.\"), tr(\"Respire lentement.\"),"
+  ]
+ },
+ {
+  "key": "Épaules détendues.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:540: tips: [tr(\"Épaules détendues.\")],"
+  ]
+ },
+ {
+  "key": "Installe-toi dans une position stable et confortable.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:545: start: tr(\"Installe-toi dans une position stable et confortable.\"),"
+  ]
+ },
+ {
+  "key": "Fais le mouvement lentement et sous contrôle.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:546: steps: [tr(\"Fais le mouvement lentement et sous contrôle.\"), tr(\"Reviens à la position de départ.\")],"
+  ]
+ },
+ {
+  "key": "Reviens à la position de départ.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:546: steps: [tr(\"Fais le mouvement lentement et sous contrôle.\"), tr(\"Reviens à la position de départ.\")],"
+  ]
+ },
+ {
+  "key": "Expire pendant l'effort, inspire en revenant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:548: breathing: tr(\"Expire pendant l'effort, inspire en revenant.\"),"
+  ]
+ },
+ {
+  "key": "La qualité avant la charge.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:549: tips: [tr(\"La qualité avant la charge.\")],"
+  ]
+ },
+ {
+  "key": "Développé couché (barre)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:578: x(\"bench-press\", tr(\"Développé couché (barre)\"), [.chest], [.triceps, .shoulders], [.barbell, .bench], .strength, .intermediate, .benchPress,"
+  ]
+ },
+ {
+  "key": "Barre au-dessus des épaules en haut, au bas des pectoraux en bas.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:579: aka: [\"developpe couche\", \"bench press\", \"bench\"], cues: [tr(\"Barre au-dessus des épaules en haut, au bas des pectoraux en bas.\")]),"
+  ]
+ },
+ {
+  "key": "Développé couché haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:580: x(\"db-bench\", tr(\"Développé couché haltères\"), [.chest], [.triceps, .shoulders], [.dumbbells, .bench], .strength, .beginner, .benchPress,"
+  ]
+ },
+ {
+  "key": "Les haltères descendent sur les côtés de la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:581: aka: [\"developpe couche\", \"dumbbell bench\"], cues: [tr(\"Les haltères descendent sur les côtés de la poitrine.\")]),"
+  ]
+ },
+ {
+  "key": "Développé incliné (barre)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:582: x(\"incline-bench\", tr(\"Développé incliné (barre)\"), [.chest], [.shoulders, .triceps], [.barbell, .bench], .strength, .intermediate, .benchPress,"
+  ]
+ },
+ {
+  "key": "Banc incliné à 30-45° : la barre descend vers le haut de la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:583: aka: [\"developpe incline\", \"incline bench\"], cues: [tr(\"Banc incliné à 30-45° : la barre descend vers le haut de la poitrine.\")]),"
+  ]
+ },
+ {
+  "key": "Développé incliné haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:584: x(\"incline-db\", tr(\"Développé incliné haltères\"), [.chest], [.shoulders, .triceps], [.dumbbells, .bench], .strength, .beginner, .benchPress,"
+  ]
+ },
+ {
+  "key": "Banc à 30-45°, haltères au niveau du haut de la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:585: aka: [\"developpe incline\"], cues: [tr(\"Banc à 30-45°, haltères au niveau du haut de la poitrine.\")]),"
+  ]
+ },
+ {
+  "key": "Développé décliné",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:586: x(\"decline-bench\", tr(\"Développé décliné\"), [.chest], [.triceps], [.barbell, .bench], .strength, .intermediate, .benchPress, aka: [\"developpe decline\"]),"
+  ]
+ },
+ {
+  "key": "Développé à la machine (chest press)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:587: x(\"machine-chest-press\", tr(\"Développé à la machine (chest press)\"), [.chest], [.triceps, .shoulders], [.machine], .strength, .beginner, .benchPress,"
+  ]
+ },
+ {
+  "key": "Règle le siège pour que les poignées arrivent au milieu de la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:588: aka: [\"chest press\", \"presse pectoraux\"], cues: [tr(\"Règle le siège pour que les poignées arrivent au milieu de la poitrine.\")]),"
+  ]
+ },
+ {
+  "key": "Développé couché prise serrée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:589: x(\"close-grip-bench\", tr(\"Développé couché prise serrée\"), [.triceps], [.chest, .shoulders], [.barbell, .bench], .strength, .intermediate, .benchPress,"
+  ]
+ },
+ {
+  "key": "Mains largeur d'épaules, coudes près du corps.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:590: aka: [\"developpe serre\", \"close grip\"], cues: [tr(\"Mains largeur d'épaules, coudes près du corps.\")]),"
+  ]
+ },
+ {
+  "key": "Pompes sur les genoux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:592: x(\"knee-push-up\", tr(\"Pompes sur les genoux\"), [.chest], [.triceps, .shoulders], [.bodyweight], .strength, .beginner, .pushUp,"
+  ]
+ },
+ {
+  "key": "Genoux au sol, corps aligné des genoux à la tête.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:593: aka: [\"pompe genoux\"], cues: [tr(\"Genoux au sol, corps aligné des genoux à la tête.\")]),"
+  ]
+ },
+ {
+  "key": "Pompes inclinées (mains surélevées)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:594: x(\"incline-push-up\", tr(\"Pompes inclinées (mains surélevées)\"), [.chest], [.triceps, .shoulders], [.bodyweight, .bench], .strength, .beginner, .pushUp,"
+  ]
+ },
+ {
+  "key": "Plus les mains sont hautes, plus c'est facile.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:595: aka: [\"pompe inclinee\"], cues: [tr(\"Plus les mains sont hautes, plus c'est facile.\")]),"
+  ]
+ },
+ {
+  "key": "Pompes déclinées (pieds surélevés)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:596: x(\"decline-push-up\", tr(\"Pompes déclinées (pieds surélevés)\"), [.chest], [.shoulders, .triceps], [.bodyweight, .bench], .strength, .intermediate, .pushUp,"
+  ]
+ },
+ {
+  "key": "Pompes diamant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:598: x(\"diamond-push-up\", tr(\"Pompes diamant\"), [.triceps], [.chest], [.bodyweight], .strength, .intermediate, .pushUp,"
+  ]
+ },
+ {
+  "key": "Pouces et index se touchent sous la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:599: aka: [\"pompe diamant\", \"pompes serrees\"], cues: [tr(\"Pouces et index se touchent sous la poitrine.\")]),"
+  ]
+ },
+ {
+  "key": "Écarté couché haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:600: x(\"db-fly\", tr(\"Écarté couché haltères\"), [.chest], [.shoulders], [.dumbbells, .bench], .strength, .intermediate, .fly, aka: [\"ecarte\", \"fly\", \"ecartes\"]),"
+  ]
+ },
+ {
+  "key": "Écarté à la poulie (vis-à-vis)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:601: x(\"cable-fly\", tr(\"Écarté à la poulie (vis-à-vis)\"), [.chest], [.shoulders], [.cable], .strength, .intermediate, .fly,"
+  ]
+ },
+ {
+  "key": "Un pied en avant pour la stabilité ; les mains se rejoignent devant la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:602: aka: [\"ecarte poulie\", \"cable crossover\", \"vis a vis\"], cues: [tr(\"Un pied en avant pour la stabilité ; les mains se rejoignent devant la poitrine.\")]),"
+  ]
+ },
+ {
+  "key": "Pec deck (butterfly)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:603: x(\"pec-deck\", tr(\"Pec deck (butterfly)\"), [.chest], [.shoulders], [.machine], .strength, .beginner, .fly, aka: [\"butterfly\", \"pec deck\", \"ecarte machine\"]),"
+  ]
+ },
+ {
+  "key": "Dips (pectoraux)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:604: x(\"chest-dips\", tr(\"Dips (pectoraux)\"), [.chest], [.triceps, .shoulders], [.bodyweight], .strength, .intermediate, .dip,"
+  ]
+ },
+ {
+  "key": "Buste légèrement penché vers l'avant, coudes un peu écartés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:605: aka: [\"dips\"], cues: [tr(\"Buste légèrement penché vers l'avant, coudes un peu écartés.\")]),"
+  ]
+ },
+ {
+  "key": "Tractions (pronation)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:609: x(\"pull-up\", tr(\"Tractions (pronation)\"), [.back], [.biceps, .forearms], [.pullUpBar], .strength, .intermediate, .verticalPull,"
+  ]
+ },
+ {
+  "key": "Tractions supination (chin-up)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:611: x(\"chin-up\", tr(\"Tractions supination (chin-up)\"), [.back], [.biceps], [.pullUpBar], .strength, .intermediate, .verticalPull,"
+  ]
+ },
+ {
+  "key": "Paumes vers toi, mains largeur d'épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:612: aka: [\"traction supination\", \"chin up\"], cues: [tr(\"Paumes vers toi, mains largeur d'épaules.\")]),"
+  ]
+ },
+ {
+  "key": "Tractions assistées",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:613: x(\"assisted-pull-up\", tr(\"Tractions assistées\"), [.back], [.biceps], [.band, .machine], .strength, .beginner, .verticalPull,"
+  ]
+ },
+ {
+  "key": "L'élastique ou la machine allège une partie du poids du corps.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:614: aka: [\"traction assistee\"], cues: [tr(\"L'élastique ou la machine allège une partie du poids du corps.\")]),"
+  ]
+ },
+ {
+  "key": "Tirage vertical (poulie haute)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:615: x(\"lat-pulldown\", tr(\"Tirage vertical (poulie haute)\"), [.back], [.biceps], [.cable], .strength, .beginner, .verticalPull,"
+  ]
+ },
+ {
+  "key": "Tire la barre vers le haut de la poitrine, pas derrière la nuque.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:616: aka: [\"tirage poitrine\", \"lat pulldown\", \"tirage vertical\"], cues: [tr(\"Tire la barre vers le haut de la poitrine, pas derrière la nuque.\")]),"
+  ]
+ },
+ {
+  "key": "Tirage vertical prise serrée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:617: x(\"close-pulldown\", tr(\"Tirage vertical prise serrée\"), [.back], [.biceps], [.cable], .strength, .beginner, .verticalPull, aka: [\"tirage serre\"]),"
+  ]
+ },
+ {
+  "key": "Rowing barre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:618: x(\"barbell-row\", tr(\"Rowing barre\"), [.back], [.biceps, .lowerBack], [.barbell], .strength, .intermediate, .horizontalPull,"
+  ]
+ },
+ {
+  "key": "Rowing haltère (un bras)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:620: x(\"db-row\", tr(\"Rowing haltère (un bras)\"), [.back], [.biceps], [.dumbbells, .bench], .strength, .beginner, .horizontalPull,"
+  ]
+ },
+ {
+  "key": "Genou et main en appui sur le banc, dos plat.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:621: aka: [\"rowing haltere\", \"one arm row\"], cues: [tr(\"Genou et main en appui sur le banc, dos plat.\")]),"
+  ]
+ },
+ {
+  "key": "Rowing T-bar",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:622: x(\"t-bar-row\", tr(\"Rowing T-bar\"), [.back], [.biceps, .lowerBack], [.barbell], .strength, .intermediate, .horizontalPull, aka: [\"t bar\"]),"
+  ]
+ },
+ {
+  "key": "Rowing inversé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:623: x(\"inverted-row\", tr(\"Rowing inversé\"), [.back], [.biceps], [.bodyweight], .strength, .beginner, .horizontalPull,"
+  ]
+ },
+ {
+  "key": "Sous une barre basse, corps gainé, tire la poitrine vers la barre.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:624: aka: [\"australian pull up\", \"traction horizontale\"], cues: [tr(\"Sous une barre basse, corps gainé, tire la poitrine vers la barre.\")]),"
+  ]
+ },
+ {
+  "key": "Tirage horizontal à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:625: x(\"seated-cable-row\", tr(\"Tirage horizontal à la poulie\"), [.back], [.biceps], [.cable], .strength, .beginner, .seatedRow,"
+  ]
+ },
+ {
+  "key": "Rowing à la machine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:627: x(\"machine-row\", tr(\"Rowing à la machine\"), [.back], [.biceps], [.machine], .strength, .beginner, .seatedRow, aka: [\"rowing machine assis\"]),"
+  ]
+ },
+ {
+  "key": "Pull-over à la poulie bras tendus",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:628: x(\"straight-arm-pulldown\", tr(\"Pull-over à la poulie bras tendus\"), [.back], [.triceps], [.cable], .strength, .intermediate, .pullover,"
+  ]
+ },
+ {
+  "key": "Pull-over haltère",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:630: x(\"db-pullover\", tr(\"Pull-over haltère\"), [.back, .chest], [.triceps], [.dumbbells, .bench], .strength, .intermediate, .pullover, aka: [\"pullover\"]),"
+  ]
+ },
+ {
+  "key": "Face pull",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:631: x(\"face-pull\", tr(\"Face pull\"), [.shoulders], [.back, .traps], [.cable], .strength, .beginner, .seatedRow,"
+  ]
+ },
+ {
+  "key": "Corde à hauteur des yeux, tire vers le visage en ouvrant les coudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:632: aka: [\"face pull\", \"tirage visage\"], cues: [tr(\"Corde à hauteur des yeux, tire vers le visage en ouvrant les coudes.\")]),"
+  ]
+ },
+ {
+  "key": "Élastique écarté (pull-apart)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:633: x(\"band-pull-apart\", tr(\"Élastique écarté (pull-apart)\"), [.shoulders], [.back], [.band], .strength, .beginner, .lateralRaise,"
+  ]
+ },
+ {
+  "key": "Bras tendus devant toi, écarte l'élastique jusqu'à la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:634: aka: [\"pull apart\", \"elastique\"], cues: [tr(\"Bras tendus devant toi, écarte l'élastique jusqu'à la poitrine.\")]),"
+  ]
+ },
+ {
+  "key": "Haussements d'épaules (barre)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:635: x(\"bb-shrug\", tr(\"Haussements d'épaules (barre)\"), [.traps], [.forearms], [.barbell], .strength, .beginner, .shrug, aka: [\"shrug\", \"haussement\"]),"
+  ]
+ },
+ {
+  "key": "Haussements d'épaules haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:636: x(\"db-shrug\", tr(\"Haussements d'épaules haltères\"), [.traps], [.forearms], [.dumbbells], .strength, .beginner, .shrug, aka: [\"shrug\"]),"
+  ]
+ },
+ {
+  "key": "Développé militaire (barre)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:640: x(\"ohp\", tr(\"Développé militaire (barre)\"), [.shoulders], [.triceps, .traps], [.barbell], .strength, .intermediate, .verticalPush,"
+  ]
+ },
+ {
+  "key": "Développé épaules haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:642: x(\"db-shoulder-press\", tr(\"Développé épaules haltères\"), [.shoulders], [.triceps], [.dumbbells, .bench], .strength, .beginner, .verticalPush,"
+  ]
+ },
+ {
+  "key": "Assis, dos contre le dossier, haltères à hauteur des oreilles au départ.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:643: aka: [\"developpe epaules\", \"shoulder press\"], cues: [tr(\"Assis, dos contre le dossier, haltères à hauteur des oreilles au départ.\")]),"
+  ]
+ },
+ {
+  "key": "Développé Arnold",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:644: x(\"arnold-press\", tr(\"Développé Arnold\"), [.shoulders], [.triceps], [.dumbbells], .strength, .intermediate, .verticalPush,"
+  ]
+ },
+ {
+  "key": "Paumes vers toi en bas, tourne-les vers l'avant en poussant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:645: aka: [\"arnold\"], cues: [tr(\"Paumes vers toi en bas, tourne-les vers l'avant en poussant.\")]),"
+  ]
+ },
+ {
+  "key": "Développé épaules à la machine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:646: x(\"machine-shoulder-press\", tr(\"Développé épaules à la machine\"), [.shoulders], [.triceps], [.machine], .strength, .beginner, .verticalPush, aka: [\"presse epaules\"]),"
+  ]
+ },
+ {
+  "key": "Développé kettlebell",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:647: x(\"kb-press\", tr(\"Développé kettlebell\"), [.shoulders], [.triceps, .abs], [.kettlebell], .strength, .intermediate, .verticalPush, aka: [\"press kettlebell\"]),"
+  ]
+ },
+ {
+  "key": "Pompes piquées (pike)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:648: x(\"pike-push-up\", tr(\"Pompes piquées (pike)\"), [.shoulders], [.triceps], [.bodyweight], .strength, .intermediate, .pushUp,"
+  ]
+ },
+ {
+  "key": "Hanches hautes, tête vers le sol entre les mains.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:649: aka: [\"pike push up\"], cues: [tr(\"Hanches hautes, tête vers le sol entre les mains.\")]),"
+  ]
+ },
+ {
+  "key": "Pompes en équilibre (handstand)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:650: x(\"handstand-push-up\", tr(\"Pompes en équilibre (handstand)\"), [.shoulders], [.triceps, .traps], [.bodyweight], .strength, .advanced, .verticalPush,"
+  ]
+ }
+]

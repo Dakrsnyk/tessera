@@ -53,7 +53,7 @@ enum WidgetDiagnostics {
         #endif
         let profile = ProvisioningProfile.appGroups()
         let hasProfile = ProvisioningProfile.entitlements() != nil
-        return tr("signature : \(signed.isEmpty ? tr("aucun") : signed.joined(separator: ", ")) · profil : \(hasProfile ? (profile.isEmpty ? tr("aucun") : profile.joined(separator: ", ")) : tr)("absent"))"
+        return tr("signature : \(signed.isEmpty ? tr("aucun") : signed.joined(separator: ", ")) · profil : \(hasProfile ? (profile.isEmpty ? tr("aucun") : profile.joined(separator: ", ")) : tr("absent"))")
     }
 
     static var sharedSpaceText: String {

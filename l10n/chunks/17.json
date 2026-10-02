@@ -1,0 +1,2941 @@
+[
+ {
+  "key": "Départ, vol, hôtel, météo, heure et devise sur place.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:47: WidgetPack(id: \"traveler\", name: tr(\"Voyageur\"), tagline: tr(\"Départ, vol, hôtel, météo, heure et devise sur place.\"), symbol: \"airplane\","
+  ]
+ },
+ {
+  "key": "Voyageur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:47: WidgetPack(id: \"traveler\", name: tr(\"Voyageur\"), tagline: tr(\"Départ, vol, hôtel, météo, heure et devise sur place.\"), symbol: \"airplane\","
+  ]
+ },
+ {
+  "key": "Investisseur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:49: WidgetPack(id: \"investor\", name: tr(\"Investisseur\"), tagline: tr(\"Portefeuille, répartition, cours et chiffres officiels.\"), symbol: \"chart.line.uptrend.xyaxis\","
+  ]
+ },
+ {
+  "key": "Portefeuille, répartition, cours et chiffres officiels.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:49: WidgetPack(id: \"investor\", name: tr(\"Investisseur\"), tagline: tr(\"Portefeuille, répartition, cours et chiffres officiels.\"), symbol: \"chart.line.uptrend.xyaxis\","
+  ]
+ },
+ {
+  "key": "L'essentiel en noir et blanc, sans rien de plus.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:51: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\","
+  ]
+ },
+ {
+  "key": "Minimal",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:51: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\",",
+   "Shared/Model/WidgetStyle.swift:15: case .minimal: tr(\"Minimal\")"
+  ]
+ },
+ {
+  "key": "Heure, météo, tâches, habitudes et dates, gratuitement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:53: WidgetPack(id: \"essentials\", name: tr(\"L'essentiel\"), tagline: tr(\"Heure, météo, tâches, habitudes et dates, gratuitement.\"), symbol: \"star.fill\","
+  ]
+ },
+ {
+  "key": "L'essentiel",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:53: WidgetPack(id: \"essentials\", name: tr(\"L'essentiel\"), tagline: tr(\"Heure, météo, tâches, habitudes et dates, gratuitement.\"), symbol: \"star.fill\","
+  ]
+ },
+ {
+  "key": "Calories, macros, protéines, repas et semaine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:55: WidgetPack(id: \"nutrition\", name: tr(\"Nutrition complète\"), tagline: tr(\"Calories, macros, protéines, repas et semaine.\"), symbol: \"fork.knife\","
+  ]
+ },
+ {
+  "key": "Bonnes habitudes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:57: WidgetPack(id: \"habits\", name: tr(\"Bonnes habitudes\"), tagline: tr(\"Routine, eau, séries, taux de réussite et rythme du jour.\"), symbol: \"leaf.fill\","
+  ]
+ },
+ {
+  "key": "Routine, eau, séries, taux de réussite et rythme du jour.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:57: WidgetPack(id: \"habits\", name: tr(\"Bonnes habitudes\"), tagline: tr(\"Routine, eau, séries, taux de réussite et rythme du jour.\"), symbol: \"leaf.fill\","
+  ]
+ },
+ {
+  "key": "Focus, travail profond, priorités et échéances.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:59: WidgetPack(id: \"focus\", name: tr(\"Concentration\"), tagline: tr(\"Focus, travail profond, priorités et échéances.\"), symbol: \"scope\","
+  ]
+ },
+ {
+  "key": "Météo, détails, pluie, vent, soleil et lune.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:61: WidgetPack(id: \"weather\", name: tr(\"Tout le ciel\"), tagline: tr(\"Météo, détails, pluie, vent, soleil et lune.\"), symbol: \"cloud.sun.fill\","
+  ]
+ },
+ {
+  "key": "Anniversaires, comptes à rebours et jours fériés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:63: WidgetPack(id: \"dates\", name: tr(\"Dates importantes\"), tagline: tr(\"Anniversaires, comptes à rebours et jours fériés.\"), symbol: \"gift.fill\","
+  ]
+ },
+ {
+  "key": "Dates importantes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:63: WidgetPack(id: \"dates\", name: tr(\"Dates importantes\"), tagline: tr(\"Anniversaires, comptes à rebours et jours fériés.\"), symbol: \"gift.fill\","
+  ]
+ },
+ {
+  "key": "Coût, entretien, kilométrage et carburant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:65: WidgetPack(id: \"car\", name: tr(\"Ma voiture\"), tagline: tr(\"Coût, entretien, kilométrage et carburant.\"), symbol: \"car.fill\","
+  ]
+ },
+ {
+  "key": "Séance, volume, records et mois d'entraînement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:67: WidgetPack(id: \"gym\", name: tr(\"Salle de sport\"), tagline: tr(\"Séance, volume, records et mois d'entraînement.\"), symbol: \"dumbbell.fill\","
+  ]
+ },
+ {
+  "key": "Serif et reflets dorés pour l'agenda et la journée.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:69: WidgetPack(id: \"elegant\", name: tr(\"Élégance\"), tagline: tr(\"Serif et reflets dorés pour l'agenda et la journée.\"), symbol: \"crown.fill\","
+  ]
+ },
+ {
+  "key": "Élégance",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:69: WidgetPack(id: \"elegant\", name: tr(\"Élégance\"), tagline: tr(\"Serif et reflets dorés pour l'agenda et la journée.\"), symbol: \"crown.fill\","
+  ]
+ },
+ {
+  "key": "Heure, fuseaux, focus et crypto en cyan électrique.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:71: WidgetPack(id: \"neon\", name: tr(\"Néon\"), tagline: tr(\"Heure, fuseaux, focus et crypto en cyan électrique.\"), symbol: \"bolt.fill\","
+  ]
+ },
+ {
+  "key": "Papier chaud et typo ronde, pour tous les jours.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:73: WidgetPack(id: \"retro\", name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde, pour tous les jours.\"), symbol: \"camera.macro\","
+  ]
+ },
+ {
+  "key": "Rétro",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:73: WidgetPack(id: \"retro\", name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde, pour tous les jours.\"), symbol: \"camera.macro\",",
+   "Shared/Theme/Theme.swift:165: id: .retro, name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Ta couleur en plein fond, sur six widgets.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:75: WidgetPack(id: \"vivid\", name: tr(\"Couleurs vives\"), tagline: tr(\"Ta couleur en plein fond, sur six widgets.\"), symbol: \"paintpalette.fill\","
+  ]
+ },
+ {
+  "key": "Bonne soirée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:77: WidgetPack(id: \"evening\", name: tr(\"Bonne soirée\"), tagline: tr(\"La lune, la journée qui s'achève et tes habitudes.\"), symbol: \"moon.stars.fill\","
+  ]
+ },
+ {
+  "key": "La lune, la journée qui s'achève et tes habitudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:77: WidgetPack(id: \"evening\", name: tr(\"Bonne soirée\"), tagline: tr(\"La lune, la journée qui s'achève et tes habitudes.\"), symbol: \"moon.stars.fill\","
+  ]
+ },
+ {
+  "key": "Bitcoin, marché, portefeuille et plus forte variation.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:79: WidgetPack(id: \"crypto\", name: tr(\"Crypto\"), tagline: tr(\"Bitcoin, marché, portefeuille et plus forte variation.\"), symbol: \"bitcoinsign.circle.fill\","
+  ]
+ },
+ {
+  "key": "Celsius (°C)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Settings.swift:7: var title: String { self == .celsius ? tr(\"Celsius (°C)\") : tr(\"Fahrenheit (°F)\") }"
+  ]
+ },
+ {
+  "key": "Fahrenheit (°F)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Settings.swift:7: var title: String { self == .celsius ? tr(\"Celsius (°C)\") : tr(\"Fahrenheit (°F)\") }"
+  ]
+ },
+ {
+  "key": "Lavande",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Settings.swift:30: case .lavender: tr(\"Lavande\")",
+   "Shared/Model/StyleColors.swift:78: make(\"lavender\", tr(\"Lavande\"), background: [\"F4F0FF\"], panel: \"E4DAFF\", text: \"241A4A\", secondary: \"7A6EA3\","
+  ]
+ },
+ {
+  "key": "Sable",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Settings.swift:31: case .sand: tr(\"Sable\")",
+   "Shared/Model/StyleColors.swift:84: make(\"sand\", tr(\"Sable\"), background: [\"F5EDE1\"], panel: \"E9DAC3\", text: \"3A2A1A\", secondary: \"8C7358\","
+  ]
+ },
+ {
+  "key": "Rose",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Settings.swift:34: case .rose: tr(\"Rose\")",
+   "Shared/Theme/Palette.swift:19: AccentSwatch(name: tr(\"Rose\"), hex: \"F2588F\"),"
+  ]
+ },
+ {
+  "key": "Bonbon",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/StyleColors.swift:91: make(\"candy\", tr(\"Bonbon\"), background: [\"FFF0F6\"], panel: \"FFDDEA\", text: \"4A1830\", secondary: \"9A6A80\","
+  ]
+ },
+ {
+  "key": "Or",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/StyleColors.swift:94: make(\"gold\", tr(\"Or\"), background: [\"1A1712\", \"070605\"], panel: \"2A241A\", text: \"F5E7C1\", secondary: \"A8946A\","
+  ]
+ },
+ {
+  "key": "Couchant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/StyleColors.swift:100: make(\"sunset\", tr(\"Couchant\"), background: [\"E8604C\", \"6A2C8E\"], panel: \"FFFFFF2E\", text: \"FFFFFF\", secondary: \"FFE6DA\","
+  ]
+ },
+ {
+  "key": "Menthe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/StyleColors.swift:103: make(\"mint\", tr(\"Menthe\"), background: [\"ECFAF4\"], panel: \"D2F2E4\", text: \"0F3327\", secondary: \"5B8577\",",
+   "Shared/Theme/Palette.swift:32: AccentSwatch(name: tr(\"Menthe\"), hex: \"CFEBDD\"),"
+  ]
+ },
+ {
+  "key": "Cerise",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/StyleColors.swift:109: make(\"cherry\", tr(\"Cerise\"), background: [\"2A0A12\"], panel: \"3D1420\", text: \"FFE8EC\", secondary: \"C99AA5\","
+  ]
+ },
+ {
+  "key": "Heure typo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:64: WidgetTemplate(id: \"clock-typo\", name: tr(\"Heure typo\"), kind: .clock, themeID: .typography, accentHex: \"FF6B57\", alignment: .center),"
+  ]
+ },
+ {
+  "key": "Réveil digital",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:65: WidgetTemplate(id: \"clock-digital\", name: tr(\"Réveil digital\"), kind: .clock, themeID: .digital, accentHex: \"2F8F7A\"),"
+  ]
+ },
+ {
+  "key": "Calendrier élégant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:67: WidgetTemplate(id: \"calendar-elegant\", name: tr(\"Calendrier élégant\"), kind: .calendar, themeID: .elegant, accentHex: \"2F8F7A\"),"
+  ]
+ },
+ {
+  "key": "Tour du monde",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:68: WidgetTemplate(id: \"world-futuristic\", name: tr(\"Tour du monde\"), kind: .worldClock, themeID: .futuristic, accentHex: \"3366FF\","
+  ]
+ },
+ {
+  "key": "Mes villes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:70: WidgetTemplate(id: \"world-minimal\", name: tr(\"Mes villes\"), kind: .worldClock, themeID: .minimal, accentHex: \"3366FF\","
+  ]
+ },
+ {
+  "key": "L'année avance",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:72: WidgetTemplate(id: \"progress-year\", name: tr(\"L'année avance\"), kind: .progress, themeID: .dark, accentHex: \"F2A33A\", isFeatured: true,"
+  ]
+ },
+ {
+  "key": "Mois rétro",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:76: WidgetTemplate(id: \"progress-month-retro\", name: tr(\"Mois rétro\"), kind: .progress, themeID: .retro, accentHex: \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Mon anniversaire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:81: configure: .countdown(tr(\"Mon anniversaire\"), days: 120, mode: .until)),"
+  ]
+ },
+ {
+  "key": "Sans cigarette",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:83: configure: .countdown(tr(\"Sans cigarette\"), days: -30, mode: .since)),"
+  ]
+ },
+ {
+  "key": "365 points",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:84: WidgetTemplate(id: \"dots-year\", name: tr(\"365 points\"), kind: .yearDots, themeID: .dark, accentHex: \"FF6B57\", isFeatured: true),"
+  ]
+ },
+ {
+  "key": "Année de verre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:85: WidgetTemplate(id: \"dots-glass\", name: tr(\"Année de verre\"), kind: .yearDots, themeID: .glass, accentHex: \"8C6CFF\"),"
+  ]
+ },
+ {
+  "key": "Liste claire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:89: WidgetTemplate(id: \"tasks-light\", name: tr(\"Liste claire\"), kind: .tasks, themeID: .light, accentHex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Routine rétro",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:91: WidgetTemplate(id: \"habits-retro\", name: tr(\"Routine rétro\"), kind: .habits, themeID: .retro, accentHex: \"F2A33A\"),"
+  ]
+ },
+ {
+  "key": "Pomodoro",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:92: WidgetTemplate(id: \"focus-minimal\", name: tr(\"Pomodoro\"), kind: .focus, themeID: .minimal, accentHex: \"FF6B57\", isFeatured: true),"
+  ]
+ },
+ {
+  "key": "Prochain rendez-vous",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:94: WidgetTemplate(id: \"upnext-minimal\", name: tr(\"Prochain rendez-vous\"), kind: .upNext, themeID: .minimal, accentHex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Agenda élégant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:95: WidgetTemplate(id: \"upnext-elegant\", name: tr(\"Agenda élégant\"), kind: .upNext, themeID: .elegant, accentHex: \"2F8F7A\"),"
+  ]
+ },
+ {
+  "key": "Citation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:96: WidgetTemplate(id: \"note-quote\", name: tr(\"Citation\"), kind: .note, themeID: .typography, accentHex: \"FF6B57\", font: .serif,"
+  ]
+ },
+ {
+  "key": "Ce qui se mesure s'améliore.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:97: configure: .note(title: \"\", text: tr(\"Ce qui se mesure s'améliore.\"))),"
+  ]
+ },
+ {
+  "key": "Pense-bête",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:98: WidgetTemplate(id: \"note-reminder\", name: tr(\"Pense-bête\"), kind: .note, themeID: .minimal, accentHex: \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Rappeler maman dimanche.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:99: configure: .note(title: tr(\"À ne pas oublier\"), text: tr(\"Rappeler maman dimanche.\"))),"
+  ]
+ },
+ {
+  "key": "Ciel aurore",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:103: WidgetTemplate(id: \"weather-aurora\", name: tr(\"Ciel aurore\"), kind: .weather, themeID: .aurora, accentHex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Météo verre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:104: WidgetTemplate(id: \"weather-glass\", name: tr(\"Météo verre\"), kind: .weather, themeID: .glass, accentHex: \"8C6CFF\"),"
+  ]
+ },
+ {
+  "key": "Ce que je gagne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:113: WidgetTemplate(id: \"money-income\", name: tr(\"Ce que je gagne\"), kind: .moneyFlow, themeID: .light, accentHex: \"2F8F7A\","
+  ]
+ },
+ {
+  "key": "Ce que je dépense",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:115: WidgetTemplate(id: \"money-expense\", name: tr(\"Ce que je dépense\"), kind: .moneyFlow, themeID: .minimal, accentHex: \"FF6B57\","
+  ]
+ },
+ {
+  "key": "Verres d'eau",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:119: WidgetTemplate(id: \"water-minimal\", name: tr(\"Verres d'eau\"), kind: .hydration, themeID: .minimal, accentHex: \"3366FF\", isFeatured: true),"
+  ]
+ },
+ {
+  "key": "Hydratation couleur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:120: WidgetTemplate(id: \"water-colorful\", name: tr(\"Hydratation couleur\"), kind: .hydration, themeID: .colorful, accentHex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Fiche du jour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Templates.swift:130: WidgetTemplate(id: \"flashcard-retro\", name: tr(\"Fiche du jour\"), kind: .flashcard, themeID: .retro, accentHex: \"F2A33A\"),"
+  ]
+ },
+ {
+  "key": "Standard",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:36: case .standard: tr(\"Standard\")"
+  ]
+ },
+ {
+  "key": "Arrondie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:37: case .rounded: tr(\"Arrondie\")"
+  ]
+ },
+ {
+  "key": "Serif",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:38: case .serif: tr(\"Serif\")"
+  ]
+ },
+ {
+  "key": "Mono",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:39: case .mono: tr(\"Mono\")"
+  ]
+ },
+ {
+  "key": "À gauche",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:52: case .leading: tr(\"À gauche\")",
+   "Shared/Model/WidgetStyle.swift:254: case .leading: tr(\"À gauche\")"
+  ]
+ },
+ {
+  "key": "Centré",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:53: case .center: tr(\"Centré\")"
+  ]
+ },
+ {
+  "key": "Widget %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:153: features.append(tr(\"Widget \\(part.kind.title)\"))"
+  ]
+ },
+ {
+  "key": "Fond %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:156: if background.isPremium { features.append(tr(\"Fond \\(background.title.lowercased())\")) }"
+  ]
+ },
+ {
+  "key": "Police %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Model/WidgetDesign.swift:157: if font.isPremium { features.append(tr(\"Police \\(font.title)\")) }"
+  ]
+ },
+ {
+  "key": "Dates et lune",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:39: case .dates: tr(\"Dates et lune\")"
+  ]
+ },
+ {
+  "key": "Météo avancée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:40: case .sky: tr(\"Météo avancée\")"
+  ]
+ },
+ {
+  "key": "Priorités et projets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:41: case .focus: tr(\"Priorités et projets\")"
+  ]
+ },
+ {
+  "key": "Suivi d'habitudes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:42: case .habitsPlus: tr(\"Suivi d'habitudes\")"
+  ]
+ },
+ {
+  "key": "Tableaux de bord",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:52: case .dashboards: tr(\"Tableaux de bord\")",
+   "Shared/Model/WidgetKind.swift:25: case .dashboards: tr(\"Tableaux de bord\")"
+  ]
+ },
+ {
+  "key": "Analyses",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:53: case .insights: tr(\"Analyses\")"
+  ]
+ },
+ {
+  "key": "Anniversaire, jours fériés, lune et semaine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:59: case .dates: tr(\"Anniversaire, jours fériés, lune et semaine.\")"
+  ]
+ },
+ {
+  "key": "Soleil, pluie, vent, UV et prévisions de la semaine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:60: case .sky: tr(\"Soleil, pluie, vent, UV et prévisions de la semaine.\")"
+  ]
+ },
+ {
+  "key": "Top 3, compteurs, projets, échéances et deep work.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:61: case .focus: tr(\"Top 3, compteurs, projets, échéances et deep work.\")"
+  ]
+ },
+ {
+  "key": "Séries, semaine et taux de réussite de tes habitudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:62: case .habitsPlus: tr(\"Séries, semaine et taux de réussite de tes habitudes.\")"
+  ]
+ },
+ {
+  "key": "Calories, macros, repas et ajout rapide.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:63: case .nutrition: tr(\"Calories, macros, repas et ajout rapide.\")"
+  ]
+ },
+ {
+  "key": "Séance du jour, séries, repos, volume et records.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:64: case .fitness: tr(\"Séance du jour, séries, repos, volume et records.\")"
+  ]
+ },
+ {
+  "key": "Reste du mois, factures, épargne et dépenses rapides.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:65: case .budget: tr(\"Reste du mois, factures, épargne et dépenses rapides.\")"
+  ]
+ },
+ {
+  "key": "Portefeuille, répartition et cours suivis.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:66: case .investing: tr(\"Portefeuille, répartition et cours suivis.\")"
+  ]
+ },
+ {
+  "key": "Chiffres officiels des sociétés cotées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:68: case .companies: tr(\"Chiffres officiels des sociétés cotées.\")"
+  ]
+ },
+ {
+  "key": "Cours, examens, devoirs, moyenne et fiches.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:69: case .student: tr(\"Cours, examens, devoirs, moyenne et fiches.\")"
+  ]
+ },
+ {
+  "key": "Départ, vol, hôtel, météo et devise sur place.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:70: case .travel: tr(\"Départ, vol, hôtel, météo et devise sur place.\")"
+  ]
+ },
+ {
+  "key": "Entretien, coût, kilométrage et carburant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:71: case .car: tr(\"Entretien, coût, kilométrage et carburant.\")"
+  ]
+ },
+ {
+  "key": "Plusieurs espaces réunis, selon le moment de la journée.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:72: case .dashboards: tr(\"Plusieurs espaces réunis, selon le moment de la journée.\")"
+  ]
+ },
+ {
+  "key": "Ta journée et tes tendances résumées à partir de tes données.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:73: case .insights: tr(\"Ta journée et tes tendances résumées à partir de tes données.\")"
+  ]
+ },
+ {
+  "key": "Temps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetKind.swift:26: case .time: tr(\"Temps\")"
+  ]
+ },
+ {
+  "key": "Très grand",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetKind.swift:156: case .systemExtraLarge: tr(\"Très grand\")"
+  ]
+ },
+ {
+  "key": "Rond",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetKind.swift:157: case .accessoryCircular: tr(\"Rond\")"
+  ]
+ },
+ {
+  "key": "Rectangle",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetKind.swift:158: case .accessoryRectangular: tr(\"Rectangle\")"
+  ]
+ },
+ {
+  "key": "En ligne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetKind.swift:159: case .accessoryInline: tr(\"En ligne\")"
+  ]
+ },
+ {
+  "key": "Vertical",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:13: case .vertical: tr(\"Vertical\")"
+  ]
+ },
+ {
+  "key": "Horizontal",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:14: case .horizontal: tr(\"Horizontal\")"
+  ]
+ },
+ {
+  "key": "Deux colonnes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:17: case .split: tr(\"Deux colonnes\")"
+  ]
+ },
+ {
+  "key": "Données",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:18: case .data: tr(\"Données\")"
+  ]
+ },
+ {
+  "key": "Liste",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:19: case .list: tr(\"Liste\")"
+  ]
+ },
+ {
+  "key": "La disposition prévue pour ce widget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:44: case .auto: tr(\"La disposition prévue pour ce widget.\")"
+  ]
+ },
+ {
+  "key": "Titre, valeur, puis le graphique en dessous.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:45: case .vertical: tr(\"Titre, valeur, puis le graphique en dessous.\")"
+  ]
+ },
+ {
+  "key": "Icône, valeur et progression sur une ligne.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:46: case .horizontal: tr(\"Icône, valeur et progression sur une ligne.\")"
+  ]
+ },
+ {
+  "key": "Une seule information, très grande.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:47: case .minimal: tr(\"Une seule information, très grande.\")"
+  ]
+ },
+ {
+  "key": "L'icône et la valeur au centre, comme un cadran.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:48: case .centered: tr(\"L'icône et la valeur au centre, comme un cadran.\")"
+  ]
+ },
+ {
+  "key": "La valeur d'un côté, le détail de l'autre.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:49: case .split: tr(\"La valeur d'un côté, le détail de l'autre.\")"
+  ]
+ },
+ {
+  "key": "Plusieurs statistiques, bien alignées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:50: case .data: tr(\"Plusieurs statistiques, bien alignées.\")"
+  ]
+ },
+ {
+  "key": "Les lignes d'abord, la valeur en en-tête.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:51: case .list: tr(\"Les lignes d'abord, la valeur en en-tête.\")"
+  ]
+ },
+ {
+  "key": "Une grande barre de progression.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:52: case .progress: tr(\"Une grande barre de progression.\")"
+  ]
+ },
+ {
+  "key": "La valeur et un grand graphique.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:53: case .graph: tr(\"La valeur et un grand graphique.\")"
+  ]
+ },
+ {
+  "key": "Chaque information sur sa petite carte.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:54: case .cards: tr(\"Chaque information sur sa petite carte.\")"
+  ]
+ },
+ {
+  "key": "Ligne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:78: case .line: tr(\"Ligne\")"
+  ]
+ },
+ {
+  "key": "Aire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:79: case .area: tr(\"Aire\")"
+  ]
+ },
+ {
+  "key": "Barres",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:80: case .bars: tr(\"Barres\")"
+  ]
+ },
+ {
+  "key": "Histogramme",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:81: case .histogram: tr(\"Histogramme\")"
+  ]
+ },
+ {
+  "key": "Points",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:82: case .dots: tr(\"Points\")",
+   "Shared/Model/WidgetStyle.swift:152: case .dotted: tr(\"Points\")"
+  ]
+ },
+ {
+  "key": "Sparkline",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:83: case .sparkline: tr(\"Sparkline\")"
+  ]
+ },
+ {
+  "key": "Comparaison",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:85: case .comparison: tr(\"Comparaison\")"
+  ]
+ },
+ {
+  "key": "Anneau",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:86: case .ring: tr(\"Anneau\")"
+  ]
+ },
+ {
+  "key": "Cercle",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:87: case .pie: tr(\"Cercle\")"
+  ]
+ },
+ {
+  "key": "Jauge",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:88: case .gauge: tr(\"Jauge\")"
+  ]
+ },
+ {
+  "key": "Aéré",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:128: case .compact: tr(\"Aéré\")"
+  ]
+ },
+ {
+  "key": "Équilibré",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:129: case .balanced: tr(\"Équilibré\")"
+  ]
+ },
+ {
+  "key": "Dense",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:130: case .dense: tr(\"Dense\")"
+  ]
+ },
+ {
+  "key": "Peu d'informations, très lisible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:136: case .compact: tr(\"Peu d'informations, très lisible.\")"
+  ]
+ },
+ {
+  "key": "Équilibre entre informations et espace.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:137: case .balanced: tr(\"Équilibre entre informations et espace.\")"
+  ]
+ },
+ {
+  "key": "Plus d'informations dans le même widget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:138: case .dense: tr(\"Plus d'informations dans le même widget.\")"
+  ]
+ },
+ {
+  "key": "Pleine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:150: case .solid: tr(\"Pleine\")"
+  ]
+ },
+ {
+  "key": "Tirets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:151: case .dashed: tr(\"Tirets\")"
+  ]
+ },
+ {
+  "key": "Double",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:153: case .double: tr(\"Double\")"
+  ]
+ },
+ {
+  "key": "Lumineuse",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:154: case .glow: tr(\"Lumineuse\")"
+  ]
+ },
+ {
+  "key": "Légère",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:167: case .soft: tr(\"Légère\")"
+  ]
+ },
+ {
+  "key": "Forte",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:168: case .strong: tr(\"Forte\")"
+  ]
+ },
+ {
+  "key": "Lueur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:169: case .glow: tr(\"Lueur\")"
+  ]
+ },
+ {
+  "key": "Flottant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:170: case .floating: tr(\"Flottant\")"
+  ]
+ },
+ {
+  "key": "Relief",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:171: case .embossed: tr(\"Relief\")"
+  ]
+ },
+ {
+  "key": "Tout est à plat.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:177: case .none: tr(\"Tout est à plat.\")"
+  ]
+ },
+ {
+  "key": "Une ombre douce sous les chiffres et les cartes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:178: case .soft: tr(\"Une ombre douce sous les chiffres et les cartes.\")"
+  ]
+ },
+ {
+  "key": "Une ombre marquée, plus de contraste.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:179: case .strong: tr(\"Une ombre marquée, plus de contraste.\")"
+  ]
+ },
+ {
+  "key": "Les chiffres et les graphiques brillent.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:180: case .glow: tr(\"Les chiffres et les graphiques brillent.\")"
+  ]
+ },
+ {
+  "key": "Le contenu semble flotter au-dessus du fond.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:181: case .floating: tr(\"Le contenu semble flotter au-dessus du fond.\")"
+  ]
+ },
+ {
+  "key": "Un léger relief, comme gravé.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:182: case .embossed: tr(\"Un léger relief, comme gravé.\")"
+  ]
+ },
+ {
+  "key": "Arrondi",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:195: case .rounded: tr(\"Arrondi\")",
+   "Shared/Model/WidgetStyle.swift:350: TypePreset(id: \"friendly\", name: tr(\"Arrondi\"), font: .rounded, numberWeight: .bold, titleWeight: .semibold, valueScale: 1, titleCase: .normal, tracking: 0),"
+  ]
+ },
+ {
+  "key": "Doux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:196: case .soft: tr(\"Doux\")",
+   "Shared/Theme/Theme.swift:228: id: .soft, name: tr(\"Doux\"), tagline: tr(\"Formes rondes, tons tendres\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Carré",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:197: case .square: tr(\"Carré\")",
+   "Shared/Model/WidgetStyle.swift:225: case .square: tr(\"Carré\")"
+  ]
+ },
+ {
+  "key": "Capsule",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:198: case .capsule: tr(\"Capsule\")"
+  ]
+ },
+ {
+  "key": "Panneau",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:199: case .panel: tr(\"Panneau\")"
+  ]
+ },
+ {
+  "key": "Les formes prévues par le style.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:205: case .theme: tr(\"Les formes prévues par le style.\")"
+  ]
+ },
+ {
+  "key": "Coins arrondis classiques.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:206: case .rounded: tr(\"Coins arrondis classiques.\")"
+  ]
+ },
+ {
+  "key": "Coins très arrondis, forme douce.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:207: case .soft: tr(\"Coins très arrondis, forme douce.\")"
+  ]
+ },
+ {
+  "key": "Coins nets, presque carrés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:208: case .square: tr(\"Coins nets, presque carrés.\")"
+  ]
+ },
+ {
+  "key": "Barres, cartes et boutons en capsule.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:209: case .capsule: tr(\"Barres, cartes et boutons en capsule.\")"
+  ]
+ },
+ {
+  "key": "Le contenu posé sur une carte intérieure.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:210: case .panel: tr(\"Le contenu posé sur une carte intérieure.\")"
+  ]
+ },
+ {
+  "key": "Simple",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:223: case .plain: tr(\"Simple\")"
+  ]
+ },
+ {
+  "key": "Pastille",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:224: case .circle: tr(\"Pastille\")"
+  ]
+ },
+ {
+  "key": "Contour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:226: case .outline: tr(\"Contour\")"
+  ]
+ },
+ {
+  "key": "Pleines",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:240: case .filled: tr(\"Pleines\")"
+  ]
+ },
+ {
+  "key": "Traits",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:241: case .outlined: tr(\"Traits\")"
+  ]
+ },
+ {
+  "key": "Rondes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:242: case .circled: tr(\"Rondes\")"
+  ]
+ },
+ {
+  "key": "Carrées",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:243: case .squared: tr(\"Carrées\")"
+  ]
+ },
+ {
+  "key": "À droite",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:255: case .trailing: tr(\"À droite\")"
+  ]
+ },
+ {
+  "key": "En haut",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:256: case .top: tr(\"En haut\")"
+  ]
+ },
+ {
+  "key": "MAJUSCULES",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:268: case .upper: tr(\"MAJUSCULES\")"
+  ]
+ },
+ {
+  "key": "Normal",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:269: case .normal: tr(\"Normal\")",
+   "Shared/Model/WidgetStyle.swift:282: case .regular: tr(\"Normal\")"
+  ]
+ },
+ {
+  "key": "minuscules",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:270: case .lower: tr(\"minuscules\")"
+  ]
+ },
+ {
+  "key": "Demi-gras",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:284: case .semibold: tr(\"Demi-gras\")"
+  ]
+ },
+ {
+  "key": "Gras",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:285: case .bold: tr(\"Gras\")"
+  ]
+ },
+ {
+  "key": "Épais",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:286: case .heavy: tr(\"Épais\")"
+  ]
+ },
+ {
+  "key": "Noir",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:287: case .black: tr(\"Noir\")",
+   "Shared/Theme/Palette.swift:35: AccentSwatch(name: tr(\"Noir\"), hex: \"000000\"),"
+  ]
+ },
+ {
+  "key": "Vers le bas",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:298: case .down: tr(\"Vers le bas\")"
+  ]
+ },
+ {
+  "key": "En diagonale",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:299: case .diagonal: tr(\"En diagonale\")"
+  ]
+ },
+ {
+  "key": "De gauche à droite",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:300: case .across: tr(\"De gauche à droite\")"
+  ]
+ },
+ {
+  "key": "Vers le haut",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:301: case .up: tr(\"Vers le haut\")"
+  ]
+ },
+ {
+  "key": "Depuis le centre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:302: case .radial: tr(\"Depuis le centre\")"
+  ]
+ },
+ {
+  "key": "Grain",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:324: case .grain: tr(\"Grain\")"
+  ]
+ },
+ {
+  "key": "Papier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:325: case .paper: tr(\"Papier\")",
+   "Shared/Theme/Theme.swift:399: id: .paper, name: tr(\"Papier\"), tagline: tr(\"Papier crème et encre\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Grille",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:327: case .grid: tr(\"Grille\")"
+  ]
+ },
+ {
+  "key": "Rayures",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:329: case .diagonal: tr(\"Rayures\")"
+  ]
+ },
+ {
+  "key": "Bruit",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:330: case .noise: tr(\"Bruit\")"
+  ]
+ },
+ {
+  "key": "Système",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:347: TypePreset(id: \"system\", name: tr(\"Système\"), font: .standard, numberWeight: .semibold, titleWeight: .semibold, valueScale: 1, titleCase: .upper, tracking: 0),"
+  ]
+ },
+ {
+  "key": "Affiche",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:348: TypePreset(id: \"display\", name: tr(\"Affiche\"), font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),"
+  ]
+ },
+ {
+  "key": "Léger",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:349: TypePreset(id: \"light\", name: tr(\"Léger\"), font: .standard, numberWeight: .light, titleWeight: .regular, valueScale: 1.1, titleCase: .normal, tracking: 0),"
+  ]
+ },
+ {
+  "key": "Éditorial",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:351: TypePreset(id: \"editorial\", name: tr(\"Éditorial\"), font: .serif, numberWeight: .regular, titleWeight: .medium, valueScale: 1.1, titleCase: .upper, tracking: 1.2),",
+   "Shared/Theme/Theme.swift:289: id: .editorial, name: tr(\"Éditorial\"), tagline: tr(\"Serif, papier et capitales\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Classique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:352: TypePreset(id: \"classic\", name: tr(\"Classique\"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),"
+  ]
+ },
+ {
+  "key": "Code",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:353: TypePreset(id: \"code\", name: tr(\"Code\"), font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),"
+  ]
+ },
+ {
+  "key": "Technique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:354: TypePreset(id: \"tech\", name: tr(\"Technique\"), font: .mono, numberWeight: .light, titleWeight: .regular, valueScale: 1, titleCase: .upper, tracking: 1.5),"
+  ]
+ },
+ {
+  "key": "Couleurs personnalisées",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:578: if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append(tr(\"Couleurs personnalisées\")) }"
+  ]
+ },
+ {
+  "key": "Dégradé personnalisé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:579: if gradient != nil { features.append(tr(\"Dégradé personnalisé\")) }"
+  ]
+ },
+ {
+  "key": "Ombre et profondeur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:582: if depth != .none { features.append(tr(\"Ombre et profondeur\")) }"
+  ]
+ },
+ {
+  "key": "Bleu nuit, chiffres fins, lueur discrète",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:660: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Midnight",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:660: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Blanc pur, noir net, rien de trop",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:666: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
+  ]
+ },
+ {
+  "key": "Pure White",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:666: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
+  ]
+ },
+ {
+  "key": "Du turquoise au bleu profond",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:672: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Ocean",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:672: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Forest",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:677: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
+  ]
+ },
+ {
+  "key": "Vert forêt, texture papier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:677: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
+  ]
+ },
+ {
+  "key": "Orange, rose et violet du soir",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:683: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Sunset",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:683: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Cyber",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:688: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
+  ]
+ },
+ {
+  "key": "Magenta et cyan, bord lumineux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:688: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
+  ]
+ },
+ {
+  "key": "Luxury",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:694: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),"
+  ]
+ },
+ {
+  "key": "Noir profond et or",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:694: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),",
+   "Shared/Theme/Theme.swift:338: id: .luxury, name: tr(\"Luxe\"), tagline: tr(\"Noir profond et or\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Minimal Black",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:695: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
+  ]
+ },
+ {
+  "key": "Noir total, une seule couleur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:695: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
+  ]
+ },
+ {
+  "key": "Glass",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:700: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
+  ]
+ },
+ {
+  "key": "Verre dépoli et reflets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:700: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
+  ]
+ },
+ {
+  "key": "Gris doux, chiffres noirs",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:701: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {"
+  ]
+ },
+ {
+  "key": "Monochrome",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:701: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {",
+   "Shared/Theme/Theme.swift:125: id: .monochrome, name: tr(\"Monochrome\"), tagline: tr(\"Noir, blanc, rien d'autre\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Rose poudré et prune",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:705: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
+  ]
+ },
+ {
+  "key": "Sakura",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:705: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
+  ]
+ },
+ {
+  "key": "Beige chaud, serif élégant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:710: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {"
+  ]
+ },
+ {
+  "key": "Arctique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:714: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Bleu glacier et blanc",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:714: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+  ]
+ },
+ {
+  "key": "Hacker",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:719: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
+  ]
+ },
+ {
+  "key": "Vert sur noir, lignes de balayage",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:719: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
+  ]
+ },
+ {
+  "key": "Noir et jaune fluo, gros chiffres",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:722: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
+  ]
+ },
+ {
+  "key": "Stade",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:722: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
+  ]
+ },
+ {
+  "key": "Cockpit",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:723: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
+  ]
+ },
+ {
+  "key": "Petites cartes sur ardoise",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:723: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
+  ]
+ },
+ {
+  "key": "Canada",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:11: WorldCity(id: \"America/Toronto\", name: tr(\"Toronto\"), country: tr(\"Canada\")),",
+   "Shared/Model/WorldCities.swift:12: WorldCity(id: \"America/Montreal\", name: tr(\"Montréal\"), country: tr(\"Canada\")),"
+  ]
+ },
+ {
+  "key": "Toronto",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:11: WorldCity(id: \"America/Toronto\", name: tr(\"Toronto\"), country: tr(\"Canada\")),"
+  ]
+ },
+ {
+  "key": "Vancouver",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:13: WorldCity(id: \"America/Vancouver\", name: tr(\"Vancouver\"), country: tr(\"Canada\")),"
+  ]
+ },
+ {
+  "key": "Halifax",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:14: WorldCity(id: \"America/Halifax\", name: tr(\"Halifax\"), country: tr(\"Canada\")),"
+  ]
+ },
+ {
+  "key": "New York",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:15: WorldCity(id: \"America/New_York\", name: tr(\"New York\"), country: tr(\"États-Unis\")),"
+  ]
+ },
+ {
+  "key": "Chicago",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:16: WorldCity(id: \"America/Chicago\", name: tr(\"Chicago\"), country: tr(\"États-Unis\")),"
+  ]
+ },
+ {
+  "key": "Denver",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:17: WorldCity(id: \"America/Denver\", name: tr(\"Denver\"), country: tr(\"États-Unis\")),"
+  ]
+ },
+ {
+  "key": "Los Angeles",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:18: WorldCity(id: \"America/Los_Angeles\", name: tr(\"Los Angeles\"), country: tr(\"États-Unis\")),"
+  ]
+ },
+ {
+  "key": "Mexico",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:19: WorldCity(id: \"America/Mexico_City\", name: tr(\"Mexico\"), country: tr(\"Mexique\")),"
+  ]
+ },
+ {
+  "key": "Mexique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:19: WorldCity(id: \"America/Mexico_City\", name: tr(\"Mexico\"), country: tr(\"Mexique\")),"
+  ]
+ },
+ {
+  "key": "Brésil",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:20: WorldCity(id: \"America/Sao_Paulo\", name: tr(\"São Paulo\"), country: tr(\"Brésil\")),"
+  ]
+ },
+ {
+  "key": "São Paulo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:20: WorldCity(id: \"America/Sao_Paulo\", name: tr(\"São Paulo\"), country: tr(\"Brésil\")),"
+  ]
+ },
+ {
+  "key": "Argentine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:21: WorldCity(id: \"America/Argentina/Buenos_Aires\", name: tr(\"Buenos Aires\"), country: tr(\"Argentine\")),"
+  ]
+ },
+ {
+  "key": "Buenos Aires",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:21: WorldCity(id: \"America/Argentina/Buenos_Aires\", name: tr(\"Buenos Aires\"), country: tr(\"Argentine\")),"
+  ]
+ },
+ {
+  "key": "Honolulu",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:22: WorldCity(id: \"Pacific/Honolulu\", name: tr(\"Honolulu\"), country: tr(\"États-Unis\")),"
+  ]
+ },
+ {
+  "key": "Londres",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:23: WorldCity(id: \"Europe/London\", name: tr(\"Londres\"), country: tr(\"Royaume-Uni\")),"
+  ]
+ },
+ {
+  "key": "Royaume-Uni",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:23: WorldCity(id: \"Europe/London\", name: tr(\"Londres\"), country: tr(\"Royaume-Uni\")),"
+  ]
+ },
+ {
+  "key": "Paris",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:24: WorldCity(id: \"Europe/Paris\", name: tr(\"Paris\"), country: tr(\"France\")),"
+  ]
+ },
+ {
+  "key": "Belgique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:25: WorldCity(id: \"Europe/Brussels\", name: tr(\"Bruxelles\"), country: tr(\"Belgique\")),"
+  ]
+ },
+ {
+  "key": "Bruxelles",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:25: WorldCity(id: \"Europe/Brussels\", name: tr(\"Bruxelles\"), country: tr(\"Belgique\")),"
+  ]
+ },
+ {
+  "key": "Suisse",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:26: WorldCity(id: \"Europe/Zurich\", name: tr(\"Zurich\"), country: tr(\"Suisse\")),"
+  ]
+ },
+ {
+  "key": "Zurich",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:26: WorldCity(id: \"Europe/Zurich\", name: tr(\"Zurich\"), country: tr(\"Suisse\")),"
+  ]
+ },
+ {
+  "key": "Espagne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:27: WorldCity(id: \"Europe/Madrid\", name: tr(\"Madrid\"), country: tr(\"Espagne\")),"
+  ]
+ },
+ {
+  "key": "Madrid",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:27: WorldCity(id: \"Europe/Madrid\", name: tr(\"Madrid\"), country: tr(\"Espagne\")),"
+  ]
+ },
+ {
+  "key": "Portugal",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:28: WorldCity(id: \"Europe/Lisbon\", name: tr(\"Lisbonne\"), country: tr(\"Portugal\")),"
+  ]
+ },
+ {
+  "key": "Italie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:29: WorldCity(id: \"Europe/Rome\", name: tr(\"Rome\"), country: tr(\"Italie\")),"
+  ]
+ },
+ {
+  "key": "Rome",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:29: WorldCity(id: \"Europe/Rome\", name: tr(\"Rome\"), country: tr(\"Italie\")),"
+  ]
+ },
+ {
+  "key": "Allemagne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:30: WorldCity(id: \"Europe/Berlin\", name: tr(\"Berlin\"), country: tr(\"Allemagne\")),"
+  ]
+ },
+ {
+  "key": "Berlin",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:30: WorldCity(id: \"Europe/Berlin\", name: tr(\"Berlin\"), country: tr(\"Allemagne\")),"
+  ]
+ },
+ {
+  "key": "Athènes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:31: WorldCity(id: \"Europe/Athens\", name: tr(\"Athènes\"), country: tr(\"Grèce\")),"
+  ]
+ },
+ {
+  "key": "Grèce",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:31: WorldCity(id: \"Europe/Athens\", name: tr(\"Athènes\"), country: tr(\"Grèce\")),"
+  ]
+ },
+ {
+  "key": "Istanbul",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:32: WorldCity(id: \"Europe/Istanbul\", name: tr(\"Istanbul\"), country: tr(\"Turquie\")),"
+  ]
+ },
+ {
+  "key": "Turquie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:32: WorldCity(id: \"Europe/Istanbul\", name: tr(\"Istanbul\"), country: tr(\"Turquie\")),"
+  ]
+ },
+ {
+  "key": "Moscou",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:33: WorldCity(id: \"Europe/Moscow\", name: tr(\"Moscou\"), country: tr(\"Russie\")),"
+  ]
+ },
+ {
+  "key": "Russie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:33: WorldCity(id: \"Europe/Moscow\", name: tr(\"Moscou\"), country: tr(\"Russie\")),"
+  ]
+ },
+ {
+  "key": "Casablanca",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:34: WorldCity(id: \"Africa/Casablanca\", name: tr(\"Casablanca\"), country: tr(\"Maroc\")),"
+  ]
+ },
+ {
+  "key": "Maroc",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:34: WorldCity(id: \"Africa/Casablanca\", name: tr(\"Casablanca\"), country: tr(\"Maroc\")),"
+  ]
+ },
+ {
+  "key": "Alger",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:35: WorldCity(id: \"Africa/Algiers\", name: tr(\"Alger\"), country: tr(\"Algérie\")),"
+  ]
+ },
+ {
+  "key": "Algérie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:35: WorldCity(id: \"Africa/Algiers\", name: tr(\"Alger\"), country: tr(\"Algérie\")),"
+  ]
+ },
+ {
+  "key": "Tunis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:36: WorldCity(id: \"Africa/Tunis\", name: tr(\"Tunis\"), country: tr(\"Tunisie\")),"
+  ]
+ },
+ {
+  "key": "Tunisie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:36: WorldCity(id: \"Africa/Tunis\", name: tr(\"Tunis\"), country: tr(\"Tunisie\")),"
+  ]
+ },
+ {
+  "key": "Dakar",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:37: WorldCity(id: \"Africa/Dakar\", name: tr(\"Dakar\"), country: tr(\"Sénégal\")),"
+  ]
+ },
+ {
+  "key": "Sénégal",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:37: WorldCity(id: \"Africa/Dakar\", name: tr(\"Dakar\"), country: tr(\"Sénégal\")),"
+  ]
+ },
+ {
+  "key": "Abidjan",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:38: WorldCity(id: \"Africa/Abidjan\", name: tr(\"Abidjan\"), country: tr(\"Côte d'Ivoire\")),"
+  ]
+ },
+ {
+  "key": "Côte d'Ivoire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:38: WorldCity(id: \"Africa/Abidjan\", name: tr(\"Abidjan\"), country: tr(\"Côte d'Ivoire\")),"
+  ]
+ },
+ {
+  "key": "Le Caire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:39: WorldCity(id: \"Africa/Cairo\", name: tr(\"Le Caire\"), country: tr(\"Égypte\")),"
+  ]
+ },
+ {
+  "key": "Égypte",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:39: WorldCity(id: \"Africa/Cairo\", name: tr(\"Le Caire\"), country: tr(\"Égypte\")),"
+  ]
+ },
+ {
+  "key": "Afrique du Sud",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:40: WorldCity(id: \"Africa/Johannesburg\", name: tr(\"Johannesburg\"), country: tr(\"Afrique du Sud\")),"
+  ]
+ },
+ {
+  "key": "Johannesburg",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:40: WorldCity(id: \"Africa/Johannesburg\", name: tr(\"Johannesburg\"), country: tr(\"Afrique du Sud\")),"
+  ]
+ },
+ {
+  "key": "Dubaï",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:41: WorldCity(id: \"Asia/Dubai\", name: tr(\"Dubaï\"), country: tr(\"Émirats arabes unis\")),"
+  ]
+ },
+ {
+  "key": "Émirats arabes unis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:41: WorldCity(id: \"Asia/Dubai\", name: tr(\"Dubaï\"), country: tr(\"Émirats arabes unis\")),"
+  ]
+ },
+ {
+  "key": "Inde",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:42: WorldCity(id: \"Asia/Kolkata\", name: tr(\"Mumbai\"), country: tr(\"Inde\")),"
+  ]
+ },
+ {
+  "key": "Mumbai",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:42: WorldCity(id: \"Asia/Kolkata\", name: tr(\"Mumbai\"), country: tr(\"Inde\")),"
+  ]
+ },
+ {
+  "key": "Bangkok",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:43: WorldCity(id: \"Asia/Bangkok\", name: tr(\"Bangkok\"), country: tr(\"Thaïlande\")),"
+  ]
+ },
+ {
+  "key": "Thaïlande",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:43: WorldCity(id: \"Asia/Bangkok\", name: tr(\"Bangkok\"), country: tr(\"Thaïlande\")),"
+  ]
+ },
+ {
+  "key": "Singapour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:44: WorldCity(id: \"Asia/Singapore\", name: tr(\"Singapour\"), country: tr(\"Singapour\")),",
+   "Shared/Model/WorldCities.swift:44: WorldCity(id: \"Asia/Singapore\", name: tr(\"Singapour\"), country: tr(\"Singapour\")),"
+  ]
+ },
+ {
+  "key": "Chine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:45: WorldCity(id: \"Asia/Hong_Kong\", name: tr(\"Hong Kong\"), country: tr(\"Chine\")),",
+   "Shared/Model/WorldCities.swift:46: WorldCity(id: \"Asia/Shanghai\", name: tr(\"Shanghai\"), country: tr(\"Chine\")),"
+  ]
+ },
+ {
+  "key": "Hong Kong",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:45: WorldCity(id: \"Asia/Hong_Kong\", name: tr(\"Hong Kong\"), country: tr(\"Chine\")),"
+  ]
+ },
+ {
+  "key": "Shanghai",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:46: WorldCity(id: \"Asia/Shanghai\", name: tr(\"Shanghai\"), country: tr(\"Chine\")),"
+  ]
+ },
+ {
+  "key": "Corée du Sud",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:47: WorldCity(id: \"Asia/Seoul\", name: tr(\"Séoul\"), country: tr(\"Corée du Sud\")),"
+  ]
+ },
+ {
+  "key": "Séoul",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:47: WorldCity(id: \"Asia/Seoul\", name: tr(\"Séoul\"), country: tr(\"Corée du Sud\")),"
+  ]
+ },
+ {
+  "key": "Japon",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:48: WorldCity(id: \"Asia/Tokyo\", name: tr(\"Tokyo\"), country: tr(\"Japon\")),"
+  ]
+ },
+ {
+  "key": "Tokyo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:48: WorldCity(id: \"Asia/Tokyo\", name: tr(\"Tokyo\"), country: tr(\"Japon\")),"
+  ]
+ },
+ {
+  "key": "Australie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:49: WorldCity(id: \"Australia/Sydney\", name: tr(\"Sydney\"), country: tr(\"Australie\")),"
+  ]
+ },
+ {
+  "key": "Sydney",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:49: WorldCity(id: \"Australia/Sydney\", name: tr(\"Sydney\"), country: tr(\"Australie\")),"
+  ]
+ },
+ {
+  "key": "Auckland",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:50: WorldCity(id: \"Pacific/Auckland\", name: tr(\"Auckland\"), country: tr(\"Nouvelle-Zélande\")),"
+  ]
+ },
+ {
+  "key": "Nouvelle-Zélande",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:50: WorldCity(id: \"Pacific/Auckland\", name: tr(\"Auckland\"), country: tr(\"Nouvelle-Zélande\")),"
+  ]
+ },
+ {
+  "key": "La Réunion",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:51: WorldCity(id: \"Indian/Reunion\", name: tr(\"La Réunion\"), country: tr(\"France\")),"
+  ]
+ },
+ {
+  "key": "Martinique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:52: WorldCity(id: \"America/Martinique\", name: tr(\"Martinique\"), country: tr(\"France\")),"
+  ]
+ },
+ {
+  "key": "Même heure",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WorldCities.swift:63: guard delta != 0 else { return tr(\"Même heure\") }"
+  ]
+ },
+ {
+  "key": "JOUR",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:57: case .day: tr(\"JOUR\")"
+  ]
+ },
+ {
+  "key": "MOIS",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:59: case .month: tr(\"MOIS\")"
+  ]
+ },
+ {
+  "key": "AN",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:60: case .year: tr(\"AN\")"
+  ]
+ },
+ {
+  "key": "C'est aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:93: Text(info.isToday ? tr(\"C'est aujourd'hui\") : \"\\(Fmt.number(info.days)) \\(info.caption)\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:421: caption = delta == 0 ? tr(\"C'est aujourd'hui\") : delta > 0 ? (abs(delta) > 1 ? tr(\"jours restants\") : tr(\"jour restant\")) : tr(\"jours passés\")"
+  ]
+ },
+ {
+  "key": "%@ · aujourd'hui",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:99: Text(info.isToday ? tr(\"\\(title) · aujourd'hui\") : \"\\(title) · \\(Fmt.number(info.days)) j\")"
+  ]
+ },
+ {
+  "key": "Tout est fait",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:148: Text(open.isEmpty ? tr(\"Tout est fait\") : tr(\"\\(open.count) à faire\"))",
+   "Shared/Render/Kinds/ProductivityWidgets.swift:32: WidgetMessage(symbol: \"checkmark.circle\", title: tr(\"Tout est fait\"), message: context.isSmall ? nil : tr(\"Belle journée.\"), style: s)"
+  ]
+ },
+ {
+  "key": "Lance une session depuis l'écran d'accueil",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:185: Text(tr(\"Lance une session depuis l'écran d'accueil\"))"
+  ]
+ },
+ {
+  "key": "Toute la journée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:218: Text(event.isAllDay ? tr(\"Toute la journée\") : Fmt.time(event.start, uses24Hour: context.settings.uses24HourClock))",
+   "Shared/Render/Kinds/ProductivityWidgets.swift:271: if event.isAllDay { return tr(\"Toute la journée\") }"
+  ]
+ },
+ {
+  "key": "Rien de prévu",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:227: Text(tr(\"Rien de prévu\")).font(.caption)",
+   "Shared/Render/Kinds/ProductivityWidgets.swift:254: Text(tr(\"Rien de prévu\"))"
+  ]
+ },
+ {
+  "key": " sur 24 h",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/AccessoryViews.swift:252: Text(Fmt.signedPercent(coin.change24h) + tr(\" sur 24 h\")).font(.caption)",
+   "Shared/Render/Tiles/MoneyTiles.swift:199: detail: position.change24h.map { Fmt.signedPercent($0) + tr(\" sur 24 h\") },"
+  ]
+ },
+ {
+  "key": "Choisis ta ville",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:31: WidgetMessage(symbol: \"location.circle\", title: tr(\"Choisis ta ville\"), message: tr(\"Touche pour la définir dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Touche pour la définir dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:31: WidgetMessage(symbol: \"location.circle\", title: tr(\"Choisis ta ville\"), message: tr(\"Touche pour la définir dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Nouvel essai dans quelques minutes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:33: WidgetMessage(symbol: \"wifi.slash\", title: tr(\"Météo indisponible\"), message: tr(\"Nouvel essai dans quelques minutes\"), style: s)",
+   "Shared/Render/Kinds/DataWidgets.swift:182: WidgetMessage(symbol: \"wifi.slash\", title: tr(\"Cours indisponible\"), message: tr(\"Nouvel essai dans quelques minutes\"), style: s)"
+  ]
+ },
+ {
+  "key": "Mis à jour à %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:98: Text(tr(\"Mis à jour à \\(Fmt.time(w.fetchedAt, uses24Hour: context.settings.uses24HourClock))\"))"
+  ]
+ },
+ {
+  "key": "Cours indisponible",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:182: WidgetMessage(symbol: \"wifi.slash\", title: tr(\"Cours indisponible\"), message: tr(\"Nouvel essai dans quelques minutes\"), style: s)"
+  ]
+ },
+ {
+  "key": "Cours de %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:266: Text(tr(\"Cours de \\(Fmt.time(coin.fetchedAt, uses24Hour: context.settings.uses24HourClock))\"))"
+  ]
+ },
+ {
+  "key": "Ajoute tes revenus et dépenses dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:288: WidgetMessage(symbol: \"dollarsign.circle\", title: tr(\"Aucun montant\"), message: tr(\"Ajoute tes revenus et dépenses dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Aucun montant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:288: WidgetMessage(symbol: \"dollarsign.circle\", title: tr(\"Aucun montant\"), message: tr(\"Ajoute tes revenus et dépenses dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "%@ / jour · %@ / mois",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:320: Text(tr(\"\\(Fmt.money(abs(summary.perDay(mode)), currency: currency)) / jour · \\(Fmt.money(abs(summary.perDay(mode)) * MoneySummary.daysPerMonth, currency: currency, decimals: 0)"
+  ]
+ },
+ {
+  "key": "Depuis le %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:332: Text(tr(\"Depuis le \\(Fmt.format(summary.startDate, template: \"dMMMMyyyy\"))\"))"
+  ]
+ },
+ {
+  "key": "Total gagné",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:345: case .income: tr(\"Total gagné\")"
+  ]
+ },
+ {
+  "key": "Total dépensé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:346: case .expense: tr(\"Total dépensé\")"
+  ]
+ },
+ {
+  "key": "Détail",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:366: WLabel(text: mode == .net ? tr(\"Chaque mois\") : tr(\"Détail\"), style: s)",
+   "Shared/Render/Tiles/TileView.swift:552: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
+  ]
+ },
+ {
+  "key": "Il te reste",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:373: row(tr(\"Il te reste\"), Fmt.signedMoney(summary.perDayNet * month, currency: currency, decimals: 0), summary.perDayNet >= 0 ? s.positive : s.negative, bold: true)"
+  ]
+ },
+ {
+  "key": "Part épargnée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/DataWidgets.swift:375: row(tr(\"Part épargnée\"), Fmt.percent(summary.perDayNet / summary.perDayIncome), s.primary)"
+  ]
+ },
+ {
+  "key": "Ajoute-les dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Aucune tâche",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Belle journée.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:32: WidgetMessage(symbol: \"checkmark.circle\", title: tr(\"Tout est fait\"), message: context.isSmall ? nil : tr(\"Belle journée.\"), style: s)"
+  ]
+ },
+ {
+  "key": "+ %@ à faire",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:54: Text(hiddenOpen > 0 ? tr(\"+ \\(hiddenOpen) à faire\") : \"+ \\(Fmt.plural(hidden.count, tr(\"terminée\"), tr(\"terminées\")))\")"
+  ]
+ },
+ {
+  "key": "terminée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:54: Text(hiddenOpen > 0 ? tr(\"+ \\(hiddenOpen) à faire\") : \"+ \\(Fmt.plural(hidden.count, tr(\"terminée\"), tr(\"terminées\")))\")"
+  ]
+ },
+ {
+  "key": "terminées",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:54: Text(hiddenOpen > 0 ? tr(\"+ \\(hiddenOpen) à faire\") : \"+ \\(Fmt.plural(hidden.count, tr(\"terminée\"), tr(\"terminées\")))\")"
+  ]
+ },
+ {
+  "key": "Aucune habitude",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:88: WidgetMessage(symbol: \"repeat\", title: tr(\"Aucune habitude\"), message: tr(\"Crée-les dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Crée-les dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:88: WidgetMessage(symbol: \"repeat\", title: tr(\"Aucune habitude\"), message: tr(\"Crée-les dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "fait",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:128: .accessibilityLabel(Text(\"\\(habit.name), \\(done ? tr(\"fait\") : tr(\"à faire\"))\"))"
+  ]
+ },
+ {
+  "key": "à faire",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:128: .accessibilityLabel(Text(\"\\(habit.name), \\(done ? tr(\"fait\") : tr(\"à faire\"))\"))"
+  ]
+ },
+ {
+  "key": "Série de %@ j",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:144: Text(streak > 0 ? tr(\"Série de \\(streak) j\") : tr(\"Pas encore de série\"))"
+  ]
+ },
+ {
+  "key": "Fin à %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:183: Text(tr(\"Fin à \\(Fmt.time(end, uses24Hour: context.settings.uses24HourClock))\"))"
+  ]
+ },
+ {
+  "key": "Prêt à te concentrer ?",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:210: Text(finished ? tr(\"Session terminée\") : tr(\"Prêt à te concentrer ?\"))"
+  ]
+ },
+ {
+  "key": "Lance une session, le minuteur défile ici.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:215: Text(finished ? tr(\"Prends une vraie pause avant la suivante.\") : tr(\"Lance une session, le minuteur défile ici.\"))"
+  ]
+ },
+ {
+  "key": "Prends une vraie pause avant la suivante.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:215: Text(finished ? tr(\"Prends une vraie pause avant la suivante.\") : tr(\"Lance une session, le minuteur défile ici.\"))"
+  ]
+ },
+ {
+  "key": "Accès au calendrier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:248: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Touche pour l'autoriser dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:248: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "pour les prochaines 48 h",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:257: Text(tr(\"pour les prochaines 48 h\"))"
+  ]
+ },
+ {
+  "key": "Dans",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:305: Text(tr(\"Dans\"))"
+  ]
+ },
+ {
+  "key": "Écris ta note dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/ProductivityWidgets.swift:379: Text(text.isEmpty ? tr(\"Écris ta note dans Tessera\") : text)"
+  ]
+ },
+ {
+  "key": "de la journée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:54: Text(tr(\"de la journée\"))"
+  ]
+ },
+ {
+  "key": "Semaine %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:149: Text(tr(\"Semaine \\(DateMath.calendar.component(.weekOfYear, from: date))\"))",
+   "Shared/Render/Kinds/TimeWidgets.swift:290: case .week: tr(\"Semaine \\(DateMath.calendar.component(.weekOfYear, from: date))\")"
+  ]
+ },
+ {
+  "key": "Aucune ville",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:211: WidgetMessage(symbol: \"globe\", title: tr(\"Aucune ville\"), message: tr(\"Choisis tes villes dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "Choisis tes villes dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:211: WidgetMessage(symbol: \"globe\", title: tr(\"Aucune ville\"), message: tr(\"Choisis tes villes dans Tessera\"), style: s)"
+  ]
+ },
+ {
+  "key": "%@ h %@ min restantes",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:301: return hours > 0 ? tr(\"\\(hours) h \\(minutes % 60) min restantes\") : tr(\"\\(minutes) min restantes\")"
+  ]
+ },
+ {
+  "key": "%@ min restantes",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:301: return hours > 0 ? tr(\"\\(hours) h \\(minutes % 60) min restantes\") : tr(\"\\(minutes) min restantes\")"
+  ]
+ },
+ {
+  "key": "Dernier jour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:305: return days == 0 ? tr(\"Dernier jour\") : Fmt.plural(days, tr(\"jour restant\"), tr(\"jours restants\"))"
+  ]
+ },
+ {
+  "key": "jour restant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:305: return days == 0 ? tr(\"Dernier jour\") : Fmt.plural(days, tr(\"jour restant\"), tr(\"jours restants\"))",
+   "Shared/Render/Kinds/TimeWidgets.swift:421: caption = delta == 0 ? tr(\"C'est aujourd'hui\") : delta > 0 ? (abs(delta) > 1 ? tr(\"jours restants\") : tr(\"jour restant\")) : tr(\"jours passés\")"
+  ]
+ },
+ {
+  "key": "jours restants",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:305: return days == 0 ? tr(\"Dernier jour\") : Fmt.plural(days, tr(\"jour restant\"), tr(\"jours restants\"))",
+   "Shared/Render/Kinds/TimeWidgets.swift:421: caption = delta == 0 ? tr(\"C'est aujourd'hui\") : delta > 0 ? (abs(delta) > 1 ? tr(\"jours restants\") : tr(\"jour restant\")) : tr(\"jours passés\")"
+  ]
+ },
+ {
+  "key": "jours passés",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:421: caption = delta == 0 ? tr(\"C'est aujourd'hui\") : delta > 0 ? (abs(delta) > 1 ? tr(\"jours restants\") : tr(\"jour restant\")) : tr(\"jours passés\")"
+  ]
+ },
+ {
+  "key": "jour depuis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:427: caption = delta == 0 ? tr(\"C'est aujourd'hui\") : (delta > 1 ? tr(\"jours depuis\") : tr(\"jour depuis\"))"
+  ]
+ },
+ {
+  "key": "jours depuis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:427: caption = delta == 0 ? tr(\"C'est aujourd'hui\") : (delta > 1 ? tr(\"jours depuis\") : tr(\"jour depuis\"))"
+  ]
+ },
+ {
+  "key": "%@ et %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:445: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")"
+  ]
+ },
+ {
+  "key": "an",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:440: : Fmt.plural(years, tr(\"an\"), tr(\"ans\"))"
+  ]
+ },
+ {
+  "key": "semaine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:445: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:446: : Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))"
+  ]
+ },
+ {
+  "key": "semaines",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:445: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:446: : Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))"
+  ]
+ },
+ {
+  "key": " de l'année",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:627: Text(Fmt.percent(Double(day) / Double(total)) + tr(\" de l'année\"))"
+  ]
+ },
+ {
+  "key": "row:%@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/StyleRendering.swift:339: .filter { !o.isHidden(tr(\"row:\\($0.id)\")) }"
+  ]
+ },
+ {
+  "key": "seg:%@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/StyleRendering.swift:348: .filter { !o.isHidden(tr(\"seg:\\($0.label)\")) }",
+   "Shared/Render/StyleRendering.swift:351: if let hex = o.rowColors[tr(\"seg:\\(segment.label)\")] { copy.colorHex = hex }"
+  ]
+ },
+ {
+  "key": "Note tes ventes dans Tessera, espace Mon entreprise.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:4: static let hint = tr(\"Note tes ventes dans Tessera, espace Mon entreprise.\")"
+  ]
+ },
+ {
+  "key": "Chiffre du mois",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:31: var tile = Tile(title: tr(\"Chiffre du mois\"), symbol: \"target\")"
+  ]
+ },
+ {
+  "key": "Objectif mensuel à définir dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:34: tile.detail = tr(\"Objectif mensuel à définir dans Tessera\")"
+  ]
+ },
+ {
+  "key": "sur %@ · %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:44: tile.caption = tr(\"sur \\(TF.money(goal, currency)) · \\(Fmt.percent(progress))\")",
+   "Shared/Render/Tiles/ProductivityTiles.swift:93: tile.caption = tr(\"sur \\(Fmt.hours(goal)) · \\(Fmt.percent(min(9.99, hours / goal)))\")"
+  ]
+ },
+ {
+  "key": "%@ par jour sur %@ %@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:46: tile.detail = missing > 0 ? tr(\"\\(TF.money(missing / Double(daysLeft), currency)) par jour sur \\(daysLeft) \\(TF.days(daysLeft))\") : tr(\"Objectif dépassé\")"
+  ]
+ },
+ {
+  "key": "Objectif dépassé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:46: tile.detail = missing > 0 ? tr(\"\\(TF.money(missing / Double(daysLeft), currency)) par jour sur \\(daysLeft) \\(TF.days(daysLeft))\") : tr(\"Objectif dépassé\")"
+  ]
+ },
+ {
+  "key": "CA %@ · %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:50: tile.inline = tr(\"CA \\(TF.money(revenue, currency)) · \\(Fmt.percent(progress))\")"
+  ]
+ },
+ {
+  "key": "Semaine %@ · mois %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:61: var caption = tr(\"Semaine \\(TF.money(week, currency)) · mois \\(TF.money(month, currency))\")"
+  ]
+ },
+ {
+  "key": "Année : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:69: tile.detail = tr(\"Année : \\(TF.money(year, currency))\")"
+  ]
+ },
+ {
+  "key": "pas encore de ventes ce mois-ci",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:79: tile.caption = result.margin.map { tr(\"marge \\(Fmt.percent($0))\") } ?? tr(\"pas encore de ventes ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "Bénéfice %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:84: tile.inline = tr(\"Bénéfice \\(TF.money(result.profit, currency))\")"
+  ]
+ },
+ {
+  "key": "Indicateurs du mois",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:90: var tile = Tile(title: tr(\"Indicateurs du mois\"), symbol: \"square.grid.2x2\")"
+  ]
+ },
+ {
+  "key": "aucune commande ce mois-ci",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:93: tile.caption = k.averageBasket.map { tr(\"panier moyen \\(TF.money($0, currency, decimals: 2))\") } ?? tr(\"aucune commande ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "panier moyen %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:93: tile.caption = k.averageBasket.map { tr(\"panier moyen \\(TF.money($0, currency, decimals: 2))\") } ?? tr(\"aucune commande ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "%@ commandes ce mois-ci",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:101: tile.inline = tr(\"\\(k.orders) commandes ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:107: return .empty(\"MRR\", symbol: \"arrow.triangle.2.circlepath\", message: tr(\"Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise.\"))"
+  ]
+ },
+ {
+  "key": "ARR %@ · %@ abonnés",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:112: tile.caption = tr(\"ARR \\(TF.money(recurring.arr, currency)) · \\(Fmt.number(recurring.subscribers)) abonnés\")"
+  ]
+ },
+ {
+  "key": "contre %@ %@ dernier, même heure",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:128: tile.caption = tr(\"contre \\(TF.money(values.lastWeek, currency)) \\(weekday) dernier, même heure\")"
+  ]
+ },
+ {
+  "key": "ce mois-ci · %@ de l'objectif",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:147: tile.caption = tr(\"ce mois-ci · \\(Fmt.percent(progress)) de l'objectif\")"
+  ]
+ },
+ {
+  "key": "panier %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:152: TileRow(id: \"orders\", title: tr(\"Commandes\"), value: Fmt.number(k.orders), detail: k.averageBasket.map { tr(\"panier \\(TF.money($0, currency))\") }, symbol: \"bag\"),"
+  ]
+ },
+ {
+  "key": "Source : états financiers déposés à la SEC (EDGAR)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:164: static let source = tr(\"Source : états financiers déposés à la SEC (EDGAR)\")"
+  ]
+ },
+ {
+  "key": "Les chiffres officiels s'affichent dès que la connexion est disponible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:165: static let offline = tr(\"Les chiffres officiels s'affichent dès que la connexion est disponible.\")"
+  ]
+ },
+ {
+  "key": "revenus %@ · %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:173: tile.caption = tr(\"revenus \\(revenue.label) · \\(company.ref.ticker)\")"
+  ]
+ },
+ {
+  "key": "Croissance",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:182: rows.append(TileRow(id: \"growth\", title: tr(\"Croissance\"), value: Fmt.signedPercent(growth * 100), symbol: \"arrow.up.right\"))"
+  ]
+ },
+ {
+  "key": "%@ sur un an",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:183: tile.detail = tr(\"\\(Fmt.signedPercent(growth * 100)) sur un an\")",
+   "Shared/Render/Tiles/BusinessTiles.swift:249: let growth = company.revenueGrowth.map { tr(\"\\(Fmt.signedPercent($0 * 100)) sur un an\") }"
+  ]
+ },
+ {
+  "key": "revenus %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:200: tile.caption = tr(\"revenus \\(last.label)\")"
+  ]
+ },
+ {
+  "key": "%@ sur un an (%@)",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:204: tile.detail = tr(\"\\(Fmt.signedPercent(change * 100)) sur un an (\\(yearAgo.label))\")"
+  ]
+ },
+ {
+  "key": "Suis une entreprise dans Tessera, espace Sociétés cotées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:217: return .empty(tr(\"Action\"), symbol: \"chart.line.uptrend.xyaxis.circle\", message: tr(\"Suis une entreprise dans Tessera, espace Sociétés cotées.\"))"
+  ]
+ },
+ {
+  "key": "%@ · %@ aujourd'hui",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:222: tile.caption = tr(\"\\(company.ref.ticker) · \\(Fmt.signedPercent(quote.changePercent)) aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "Capitalisation ≈ %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:225: tile.detail = tr(\"Capitalisation ≈ \\(BigNumber.compact(quote.price * shares))\")"
+  ]
+ },
+ {
+  "key": "Cours : Finnhub · %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:227: tile.footnote = tr(\"Cours : Finnhub · \\(MoneyTiles.disclaimer)\")"
+  ]
+ },
+ {
+  "key": "Cours non disponible pour le moment",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:230: tile.caption = tr(\"Cours non disponible pour le moment\")"
+  ]
+ },
+ {
+  "key": "Revenus %@ : %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/BusinessTiles.swift:231: tile.detail = company.latestRevenue.map { tr(\"Revenus \\($0.label) : \\(BigNumber.compact($0.value))\") }"
+  ]
+ },
+ {
+  "key": "Ajoute ta voiture et tes pleins dans Tessera, espace Auto.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:4: static let hint = tr(\"Ajoute ta voiture et tes pleins dans Tessera, espace Auto.\")"
+  ]
+ },
+ {
+  "key": "coût estimé, tout compris",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:26: tile.caption = tr(\"coût estimé, tout compris\")"
+  ]
+ },
+ {
+  "key": "Carburant : %@/km",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:28: tile.detail = tr(\"Carburant : \\(TF.money(perKm, currency, decimals: 2))/km\")"
+  ]
+ },
+ {
+  "key": "Assurance, prêt, stationnement",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:31: TileRow(id: \"fixed\", title: tr(\"Assurance, prêt, stationnement\"), value: TF.money(cost.fixed, currency), symbol: \"doc.text\", progress: cost.fixed / cost.total),"
+  ]
+ },
+ {
+  "key": "Fixes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:36: TileSegment(label: tr(\"Fixes\"), value: cost.fixed, colorHex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Voiture %@/mois",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:40: tile.inline = tr(\"Voiture \\(TF.money(cost.total, currency))/mois\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes entretiens (vidange, pneus…) dans Tessera, espace Auto.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:47: return .empty(tr(\"Entretien\"), symbol: \"wrench.and.screwdriver\", message: tr(\"Ajoute tes entretiens (vidange, pneus…) dans Tessera, espace Auto.\"))"
+  ]
+ },
+ {
+  "key": "date dépassée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jo)urs\")))\" : tr(\"date dépassée\")"
+  ]
+ },
+ {
+  "key": "jo)urs",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jo)urs\")))\" : tr(\"date dépassée\")",
+   "Shared/Render/Tiles/NutritionTiles.swift:202: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jo)urs\")))\""
+  ]
+ },
+ {
+  "key": "ou %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jo)urs\")))\" : tr(\"date dépassée\")"
+  ]
+ },
+ {
+  "key": "avant le prochain entretien",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:64: tile.caption = tr(\"avant le prochain entretien\")"
+  ]
+ },
+ {
+  "key": "%@ km en %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:82: tile.caption = tr(\"\\(TF.int(month)) km en \\(Fmt.month(now).lowercased())\")"
+  ]
+ },
+ {
+  "key": "au compteur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:84: tile.caption = tr(\"au compteur\")"
+  ]
+ },
+ {
+  "key": "Note tes pleins dans Tessera, espace Auto.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:102: guard !state.fills.isEmpty else { return .empty(tr(\"Carburant\"), symbol: \"fuelpump\", message: tr(\"Note tes pleins dans Tessera, espace Auto.\")) }"
+  ]
+ },
+ {
+  "key": "L/100 km",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:106: tile.unit = tr(\"L/100 km\")",
+   "Shared/Render/Tiles/CarTiles.swift:109: tile.unit = tr(\"L/100 km\")"
+  ]
+ },
+ {
+  "key": "dernier plein à %@/L",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:112: tile.caption = tr(\"dernier plein à \\(TF.money(price, currency, decimals: 3))/L\")"
+  ]
+ },
+ {
+  "key": "%@ aux 100 km",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:115: tile.detail = tr(\"\\(TF.money(perKm * 100, currency, decimals: 2)) aux 100 km\")"
+  ]
+ },
+ {
+  "key": "Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/CarTiles.swift:130: return .empty(tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\", message: tr(\"Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.\"))"
+  ]
+ },
+ {
+  "key": "Toutes les tâches sont faites",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:36: return TileRow(id: \"tasks\", title: open.first?.title ?? tr(\"Toutes les tâches sont faites\"), value: tr(\"\\(open.count) à faire\"), symbol: \"checklist\")"
+  ]
+ },
+ {
+  "key": "Mangé aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:52: return TileRow(id: \"kcal\", title: tr(\"Mangé aujourd'hui\"), value: tr(\"\\(TF.int(eaten)) kcal\"), symbol: \"flame\")"
+  ]
+ },
+ {
+  "key": "Calories en trop",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:55: return TileRow(id: \"kcal\", title: left >= 0 ? tr(\"Calories restantes\") : tr(\"Calories en trop\"), value: tr(\"\\(TF.int(abs(left))) kcal\"), symbol: \"flame\", progress: eaten / max"
+  ]
+ },
+ {
+  "key": "%@ verre",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:62: return TileRow(id: \"water\", title: tr(\"Eau\"), value: glasses > 1 ? tr(\"\\(glasses) verres\") : tr(\"\\(glasses) verre\"), symbol: \"drop.fill\")"
+  ]
+ },
+ {
+  "key": "%@ verres",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:62: return TileRow(id: \"water\", title: tr(\"Eau\"), value: glasses > 1 ? tr(\"\\(glasses) verres\") : tr(\"\\(glasses) verre\"), symbol: \"drop.fill\")"
+  ]
+ },
+ {
+  "key": "Dépensé aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:80: return TileRow(id: \"budget\", title: tr(\"Dépensé aujourd'hui\"), value: TF.money(spent, context.settings.currencyCode), symbol: \"creditcard\")",
+   "Shared/Render/Tiles/DashboardTiles.swift:164: rows.append(TileRow(id: \"spent\", title: tr(\"Dépensé aujourd'hui\"), value: TF.money(spent, context.settings.currencyCode), symbol: \"creditcard\"))"
+  ]
+ },
+ {
+  "key": "Budget du jour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:83: return TileRow(id: \"budget\", title: tr(\"Budget du jour\"), value: TF.money(perDay, context.settings.currencyCode), symbol: \"creditcard\")"
+  ]
+ }
+]

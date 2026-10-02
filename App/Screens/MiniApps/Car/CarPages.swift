@@ -57,7 +57,7 @@ struct CarFuelPage: View {
                             if index > 0 { MiniDivider() }
                             Button { sheet = .fuel(fill) } label: {
                                 MiniRow(symbol: fill.isFull ? "fuelpump.fill" : "fuelpump", colorHex: Car.fuelHex, title: Fmt.shortDay(fill.date),
-                                        detail: tr("\(TF.decimal(fill.liters, 1)) L · \(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \(Fmt.number(Int(fill.odometer))) km\(fill.isFull ? "" : tr(" · partiel)"))",
+                                        detail: tr("\(TF.decimal(fill.liters, 1)) L · \(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \(Fmt.number(Int(fill.odometer))) km\(fill.isFull ? "" : tr(" · partiel"))"),
                                         value: TF.money(fill.total, currency, decimals: 2), showsChevron: false)
                             }
                             .buttonStyle(.plain)

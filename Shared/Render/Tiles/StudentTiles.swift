@@ -49,7 +49,7 @@ enum StudentTiles {
         tile.rows = later.prefix(3).map { item in
             TileRow(id: item.slot.id.uuidString, title: courseName(state, item.slot.courseID), value: TF.time(item.start, context), detail: item.slot.room.isEmpty ? nil : tr("Salle \(item.slot.room)"), colorHex: state.course(item.slot.courseID)?.colorHex)
         }
-        tile.inline = ongoing ? tr("\(course?.name ?? tr("Cours")) en co)urs" : "\(course?.name ?? tr("Cours")) à \(TF.time(next.start, context))"
+        tile.inline = ongoing ? tr("\(course?.name ?? tr("Cours")) en cours") : "\(course?.name ?? tr("Cours")) à \(TF.time(next.start, context))"
         tile.shortValue = TF.time(next.start, context)
         return tile
     }

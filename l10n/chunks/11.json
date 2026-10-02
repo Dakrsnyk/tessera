@@ -1,0 +1,1424 @@
+[
+ {
+  "key": "Contre un mur, descends la tête vers le sol sous contrôle.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:651: aka: [\"hspu\", \"handstand\"], cues: [tr(\"Contre un mur, descends la tête vers le sol sous contrôle.\")]),"
+  ]
+ },
+ {
+  "key": "Élévations latérales",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:652: x(\"lateral-raise\", tr(\"Élévations latérales\"), [.shoulders], [.traps], [.dumbbells], .strength, .beginner, .lateralRaise,"
+  ]
+ },
+ {
+  "key": "Élévations latérales à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:654: x(\"cable-lateral\", tr(\"Élévations latérales à la poulie\"), [.shoulders], [.traps], [.cable], .strength, .intermediate, .lateralRaise, aka: [\"elevation laterale poulie\"]),"
+  ]
+ },
+ {
+  "key": "Élévations frontales",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:655: x(\"front-raise\", tr(\"Élévations frontales\"), [.shoulders], [.chest], [.dumbbells], .strength, .beginner, .frontRaise, aka: [\"elevation frontale\", \"front raise\"]),"
+  ]
+ },
+ {
+  "key": "Oiseau (buste penché)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:656: x(\"rear-delt-fly\", tr(\"Oiseau (buste penché)\"), [.shoulders], [.back, .traps], [.dumbbells], .strength, .beginner, .horizontalPull,"
+  ]
+ },
+ {
+  "key": "Buste penché, ouvre les bras sur les côtés : c'est l'arrière de l'épaule qui travaille.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:657: aka: [\"oiseau\", \"rear delt\", \"elevation buste penche\"], cues: [tr(\"Buste penché, ouvre les bras sur les côtés : c'est l'arrière de l'épaule qui travaille.\")]),"
+  ]
+ },
+ {
+  "key": "Oiseau à la machine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:658: x(\"reverse-pec-deck\", tr(\"Oiseau à la machine\"), [.shoulders], [.back], [.machine], .strength, .beginner, .seatedRow, aka: [\"reverse pec deck\", \"oiseau machine\"]),"
+  ]
+ },
+ {
+  "key": "Rowing menton",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:659: x(\"upright-row\", tr(\"Rowing menton\"), [.shoulders], [.traps], [.barbell], .strength, .intermediate, .uprightRow, aka: [\"upright row\", \"tirage menton\"]),"
+  ]
+ },
+ {
+  "key": "Curl barre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:663: x(\"bb-curl\", tr(\"Curl barre\"), [.biceps], [.forearms], [.barbell], .strength, .beginner, .curl, aka: [\"curl\", \"biceps curl\"]),"
+  ]
+ },
+ {
+  "key": "Curl barre EZ",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:664: x(\"ez-curl\", tr(\"Curl barre EZ\"), [.biceps], [.forearms], [.barbell], .strength, .beginner, .curl, aka: [\"curl ez\"]),"
+  ]
+ },
+ {
+  "key": "Curl haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:665: x(\"db-curl\", tr(\"Curl haltères\"), [.biceps], [.forearms], [.dumbbells], .strength, .beginner, .curl,"
+  ]
+ },
+ {
+  "key": "En alterné ou les deux bras ensemble, paumes vers le haut.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:666: aka: [\"curl\", \"curl alterne\"], cues: [tr(\"En alterné ou les deux bras ensemble, paumes vers le haut.\")]),"
+  ]
+ },
+ {
+  "key": "Curl marteau",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:667: x(\"hammer-curl\", tr(\"Curl marteau\"), [.biceps], [.forearms], [.dumbbells], .strength, .beginner, .curl,"
+  ]
+ },
+ {
+  "key": "Paumes face à face tout le long du mouvement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:668: aka: [\"hammer\", \"curl prise neutre\"], cues: [tr(\"Paumes face à face tout le long du mouvement.\")]),"
+  ]
+ },
+ {
+  "key": "Curl incliné",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:669: x(\"incline-curl\", tr(\"Curl incliné\"), [.biceps], [], [.dumbbells, .bench], .strength, .intermediate, .curl, aka: [\"curl incline\"]),"
+  ]
+ },
+ {
+  "key": "Curl au pupitre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:670: x(\"preacher-curl\", tr(\"Curl au pupitre\"), [.biceps], [.forearms], [.barbell, .machine], .strength, .intermediate, .curl,"
+  ]
+ },
+ {
+  "key": "Bras bien posés sur le pupitre ; ne tends pas brutalement en bas.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:671: aka: [\"larry scott\", \"preacher\"], cues: [tr(\"Bras bien posés sur le pupitre ; ne tends pas brutalement en bas.\")]),"
+  ]
+ },
+ {
+  "key": "Curl à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:672: x(\"cable-curl\", tr(\"Curl à la poulie\"), [.biceps], [.forearms], [.cable], .strength, .beginner, .curl, aka: [\"curl poulie\"]),"
+  ]
+ },
+ {
+  "key": "Curl concentration",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:673: x(\"concentration-curl\", tr(\"Curl concentration\"), [.biceps], [], [.dumbbells, .bench], .strength, .beginner, .curl,"
+  ]
+ },
+ {
+  "key": "Assis, coude appuyé contre l'intérieur de la cuisse.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:674: aka: [\"curl concentre\"], cues: [tr(\"Assis, coude appuyé contre l'intérieur de la cuisse.\")]),"
+  ]
+ },
+ {
+  "key": "Curl élastique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:675: x(\"band-curl\", tr(\"Curl élastique\"), [.biceps], [.forearms], [.band], .strength, .beginner, .curl, aka: [\"curl elastique\"]),"
+  ]
+ },
+ {
+  "key": "Extension triceps à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:676: x(\"pushdown\", tr(\"Extension triceps à la poulie\"), [.triceps], [], [.cable], .strength, .beginner, .tricepsExtension,"
+  ]
+ },
+ {
+  "key": "Extension triceps à la corde",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:678: x(\"rope-pushdown\", tr(\"Extension triceps à la corde\"), [.triceps], [], [.cable], .strength, .beginner, .tricepsExtension,"
+  ]
+ },
+ {
+  "key": "Écarte les bouts de la corde en bas du mouvement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:679: aka: [\"corde triceps\"], cues: [tr(\"Écarte les bouts de la corde en bas du mouvement.\")]),"
+  ]
+ },
+ {
+  "key": "Extension triceps au-dessus de la tête",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:680: x(\"overhead-extension\", tr(\"Extension triceps au-dessus de la tête\"), [.triceps], [], [.dumbbells], .strength, .beginner, .overheadExtension,"
+  ]
+ },
+ {
+  "key": "Barre au front",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:682: x(\"skull-crusher\", tr(\"Barre au front\"), [.triceps], [], [.barbell, .bench], .strength, .intermediate, .lyingExtension,"
+  ]
+ },
+ {
+  "key": "Dips (triceps)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:684: x(\"triceps-dips\", tr(\"Dips (triceps)\"), [.triceps], [.chest, .shoulders], [.bodyweight], .strength, .intermediate, .dip,"
+  ]
+ },
+ {
+  "key": "Buste droit, coudes serrés vers l'arrière.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:685: aka: [\"dips triceps\"], cues: [tr(\"Buste droit, coudes serrés vers l'arrière.\")]),"
+  ]
+ },
+ {
+  "key": "Dips sur banc",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:686: x(\"bench-dips\", tr(\"Dips sur banc\"), [.triceps], [.shoulders], [.bodyweight, .bench], .strength, .beginner, .dip,"
+  ]
+ },
+ {
+  "key": "Mains sur le banc derrière toi, fesses près du banc.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:687: aka: [\"dips banc\"], cues: [tr(\"Mains sur le banc derrière toi, fesses près du banc.\")]),"
+  ]
+ },
+ {
+  "key": "Kickback triceps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:688: x(\"kickback\", tr(\"Kickback triceps\"), [.triceps], [], [.dumbbells], .strength, .beginner, .tricepsExtension,"
+  ]
+ },
+ {
+  "key": "Buste penché, bras collé au corps, tends l'avant-bras vers l'arrière.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:689: aka: [\"kick back\"], cues: [tr(\"Buste penché, bras collé au corps, tends l'avant-bras vers l'arrière.\")]),"
+  ]
+ },
+ {
+  "key": "Flexion des poignets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:690: x(\"wrist-curl\", tr(\"Flexion des poignets\"), [.forearms], [], [.barbell, .dumbbells, .bench], .strength, .beginner, .curl,"
+  ]
+ },
+ {
+  "key": "Avant-bras posés sur les cuisses, seuls les poignets bougent.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:691: aka: [\"poignets\", \"wrist curl\"], cues: [tr(\"Avant-bras posés sur les cuisses, seuls les poignets bougent.\")]),"
+  ]
+ },
+ {
+  "key": "Curl inversé (pronation)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:692: x(\"reverse-curl\", tr(\"Curl inversé (pronation)\"), [.forearms], [.biceps], [.barbell], .strength, .beginner, .curl, aka: [\"curl pronation\", \"reverse curl\"]),"
+  ]
+ },
+ {
+  "key": "Suspension à la barre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:693: x(\"dead-hang\", tr(\"Suspension à la barre\"), [.forearms], [.back], [.pullUpBar], .strength, .beginner, .verticalPull,"
+  ]
+ },
+ {
+  "key": "Reste suspendu bras tendus, épaules légèrement engagées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:694: aka: [\"suspension\", \"dead hang\"], cues: [tr(\"Reste suspendu bras tendus, épaules légèrement engagées.\")]),"
+  ]
+ },
+ {
+  "key": "Marche du fermier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:695: x(\"farmer-walk\", tr(\"Marche du fermier\"), [.forearms, .traps], [.fullBody], [.dumbbells, .kettlebell], .strength, .beginner, .carry,"
+  ]
+ },
+ {
+  "key": "Squat (barre)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:700: x(\"back-squat\", tr(\"Squat (barre)\"), [.quads], [.glutes, .hamstrings, .lowerBack], [.barbell], .strength, .intermediate, .squat,"
+  ]
+ },
+ {
+  "key": "Barre sur le haut des trapèzes, mains serrées sur la barre.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:701: aka: [\"squat\", \"back squat\", \"flexion\"], cues: [tr(\"Barre sur le haut des trapèzes, mains serrées sur la barre.\")]),"
+  ]
+ },
+ {
+  "key": "Squat avant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:702: x(\"front-squat\", tr(\"Squat avant\"), [.quads], [.glutes, .abs], [.barbell], .strength, .advanced, .squat,"
+  ]
+ },
+ {
+  "key": "Barre sur l'avant des épaules, coudes hauts, buste droit.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:703: aka: [\"front squat\"], cues: [tr(\"Barre sur l'avant des épaules, coudes hauts, buste droit.\")]),"
+  ]
+ },
+ {
+  "key": "Squat gobelet",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:704: x(\"goblet-squat\", tr(\"Squat gobelet\"), [.quads], [.glutes], [.kettlebell, .dumbbells], .strength, .beginner, .squat,"
+  ]
+ },
+ {
+  "key": "Charge tenue contre la poitrine, coudes entre les genoux en bas.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:705: aka: [\"goblet squat\"], cues: [tr(\"Charge tenue contre la poitrine, coudes entre les genoux en bas.\")]),"
+  ]
+ },
+ {
+  "key": "Squat au poids du corps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:706: x(\"air-squat\", tr(\"Squat au poids du corps\"), [.quads], [.glutes], [.bodyweight], .strength, .beginner, .squat, aka: [\"squat\", \"air squat\"]),"
+  ]
+ },
+ {
+  "key": "Hack squat",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:707: x(\"hack-squat\", tr(\"Hack squat\"), [.quads], [.glutes], [.machine], .strength, .intermediate, .squat, aka: [\"hack\"]),"
+  ]
+ },
+ {
+  "key": "Chaise contre le mur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:708: x(\"wall-sit\", tr(\"Chaise contre le mur\"), [.quads], [.glutes], [.bodyweight], .strength, .beginner, .squat,"
+  ]
+ },
+ {
+  "key": "Dos au mur, cuisses parallèles au sol ; tiens la position.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:709: aka: [\"chaise\", \"wall sit\"], cues: [tr(\"Dos au mur, cuisses parallèles au sol ; tiens la position.\")]),"
+  ]
+ },
+ {
+  "key": "Presse à cuisses",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:710: x(\"leg-press\", tr(\"Presse à cuisses\"), [.quads], [.glutes], [.machine], .strength, .beginner, .legPress, aka: [\"presse\", \"leg press\"]),"
+  ]
+ },
+ {
+  "key": "Leg extension",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:711: x(\"leg-extension\", tr(\"Leg extension\"), [.quads], [], [.machine], .strength, .beginner, .legExtension, aka: [\"extension jambes\", \"leg extension\"]),"
+  ]
+ },
+ {
+  "key": "Squat bulgare",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:712: x(\"bulgarian-split\", tr(\"Squat bulgare\"), [.quads], [.glutes], [.dumbbells, .bench], .strength, .intermediate, .lunge,"
+  ]
+ },
+ {
+  "key": "Pied arrière posé sur le banc, l'essentiel du poids sur la jambe avant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:713: aka: [\"bulgarian split squat\", \"fente bulgare\"], cues: [tr(\"Pied arrière posé sur le banc, l'essentiel du poids sur la jambe avant.\")]),"
+  ]
+ },
+ {
+  "key": "Fentes avant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:714: x(\"lunge\", tr(\"Fentes avant\"), [.quads], [.glutes, .hamstrings], [.bodyweight, .dumbbells], .strength, .beginner, .lunge, aka: [\"fente\", \"lunge\"]),"
+  ]
+ },
+ {
+  "key": "Fentes arrière",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:715: x(\"reverse-lunge\", tr(\"Fentes arrière\"), [.quads], [.glutes], [.bodyweight, .dumbbells], .strength, .beginner, .lunge, aka: [\"fente arriere\"]),"
+  ]
+ },
+ {
+  "key": "Fentes marchées",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:716: x(\"walking-lunge\", tr(\"Fentes marchées\"), [.quads], [.glutes, .hamstrings], [.bodyweight, .dumbbells], .strength, .intermediate, .lunge, aka: [\"fente marchee\"]),"
+  ]
+ },
+ {
+  "key": "Montées sur banc",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:717: x(\"step-up\", tr(\"Montées sur banc\"), [.quads], [.glutes], [.bench, .dumbbells], .strength, .beginner, .lunge,"
+  ]
+ },
+ {
+  "key": "Pose tout le pied sur le banc et monte en poussant sur cette jambe.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:718: aka: [\"step up\"], cues: [tr(\"Pose tout le pied sur le banc et monte en poussant sur cette jambe.\")]),"
+  ]
+ },
+ {
+  "key": "Barre au-dessus du milieu du pied, tibias près de la barre au départ.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:720: aka: [\"souleve de terre\", \"deadlift\", \"sdt\"], cues: [tr(\"Barre au-dessus du milieu du pied, tibias près de la barre au départ.\")]),"
+  ]
+ },
+ {
+  "key": "Soulevé de terre sumo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:721: x(\"sumo-deadlift\", tr(\"Soulevé de terre sumo\"), [.glutes, .quads], [.hamstrings, .lowerBack], [.barbell], .strength, .intermediate, .hinge,"
+  ]
+ },
+ {
+  "key": "Pieds très écartés, mains entre les jambes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:722: aka: [\"sumo\"], cues: [tr(\"Pieds très écartés, mains entre les jambes.\")]),"
+  ]
+ },
+ {
+  "key": "Soulevé de terre roumain haltères",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:725: x(\"db-rdl\", tr(\"Soulevé de terre roumain haltères\"), [.hamstrings], [.glutes, .lowerBack], [.dumbbells], .strength, .beginner, .hinge, aka: [\"rdl haltere\"]),"
+  ]
+ },
+ {
+  "key": "Soulevé de terre sur une jambe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:726: x(\"single-leg-rdl\", tr(\"Soulevé de terre sur une jambe\"), [.hamstrings], [.glutes], [.dumbbells, .kettlebell], .strength, .intermediate, .hinge,"
+  ]
+ },
+ {
+  "key": "La jambe libre part vers l'arrière, bassin face au sol.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:727: aka: [\"rdl une jambe\"], cues: [tr(\"La jambe libre part vers l'arrière, bassin face au sol.\")]),"
+  ]
+ },
+ {
+  "key": "Good morning",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:728: x(\"good-morning\", tr(\"Good morning\"), [.hamstrings], [.lowerBack, .glutes], [.barbell], .strength, .intermediate, .hinge, aka: [\"good morning\"]),"
+  ]
+ },
+ {
+  "key": "Leg curl allongé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:729: x(\"lying-leg-curl\", tr(\"Leg curl allongé\"), [.hamstrings], [.calves], [.machine], .strength, .beginner, .legCurl, aka: [\"leg curl\", \"ischio machine\"]),"
+  ]
+ },
+ {
+  "key": "Leg curl assis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:730: x(\"seated-leg-curl\", tr(\"Leg curl assis\"), [.hamstrings], [], [.machine], .strength, .beginner, .legCurl, aka: [\"leg curl assis\"]),"
+  ]
+ },
+ {
+  "key": "Nordic curl",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:731: x(\"nordic-curl\", tr(\"Nordic curl\"), [.hamstrings], [], [.bodyweight], .strength, .advanced, .legCurl,"
+  ]
+ },
+ {
+  "key": "Chevilles bloquées, descends le buste vers l'avant le plus lentement possible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:732: aka: [\"nordic\"], cues: [tr(\"Chevilles bloquées, descends le buste vers l'avant le plus lentement possible.\")]),"
+  ]
+ },
+ {
+  "key": "Kettlebell swing",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:733: x(\"kb-swing\", tr(\"Kettlebell swing\"), [.glutes, .hamstrings], [.lowerBack, .shoulders], [.kettlebell], .strength, .intermediate, .hinge,"
+  ]
+ },
+ {
+  "key": "La force vient des hanches : les bras ne font que tenir la kettlebell.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:734: aka: [\"swing\"], cues: [tr(\"La force vient des hanches : les bras ne font que tenir la kettlebell.\")]),"
+  ]
+ },
+ {
+  "key": "Hip thrust (barre)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:735: x(\"hip-thrust\", tr(\"Hip thrust (barre)\"), [.glutes], [.hamstrings], [.barbell, .bench], .strength, .intermediate, .bridge,"
+  ]
+ },
+ {
+  "key": "Haut du dos sur le banc, barre sur les hanches avec une protection.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:736: aka: [\"hip thrust\", \"releve de bassin\"], cues: [tr(\"Haut du dos sur le banc, barre sur les hanches avec une protection.\")]),"
+  ]
+ },
+ {
+  "key": "Pont fessier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:737: x(\"glute-bridge\", tr(\"Pont fessier\"), [.glutes], [.hamstrings], [.bodyweight], .strength, .beginner, .bridge, aka: [\"pont\", \"glute bridge\"]),"
+  ]
+ },
+ {
+  "key": "Pont fessier sur une jambe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:738: x(\"single-leg-bridge\", tr(\"Pont fessier sur une jambe\"), [.glutes], [.hamstrings], [.bodyweight], .strength, .intermediate, .bridge, aka: [\"pont une jambe\"]),"
+  ]
+ },
+ {
+  "key": "Kickback fessier à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:739: x(\"cable-kickback\", tr(\"Kickback fessier à la poulie\"), [.glutes], [.hamstrings], [.cable], .strength, .beginner, .legKickback, aka: [\"kickback fessier\"]),"
+  ]
+ },
+ {
+  "key": "Donkey kick",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:740: x(\"donkey-kick\", tr(\"Donkey kick\"), [.glutes], [.hamstrings], [.bodyweight], .strength, .beginner, .legKickback, aka: [\"donkey kick\", \"ruade\"]),"
+  ]
+ },
+ {
+  "key": "Abduction à la machine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:741: x(\"hip-abduction\", tr(\"Abduction à la machine\"), [.glutes], [], [.machine], .strength, .beginner, .generic,"
+  ]
+ },
+ {
+  "key": "Assis, écarte les jambes contre la résistance, reviens lentement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:742: aka: [\"abducteurs\", \"abduction\"], cues: [tr(\"Assis, écarte les jambes contre la résistance, reviens lentement.\")]),"
+  ]
+ },
+ {
+  "key": "Adduction à la machine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:743: x(\"hip-adduction\", tr(\"Adduction à la machine\"), [.quads], [], [.machine], .strength, .beginner, .generic,"
+  ]
+ },
+ {
+  "key": "Assis, resserre les jambes contre la résistance, reviens lentement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:744: aka: [\"adducteurs\", \"adduction\"], cues: [tr(\"Assis, resserre les jambes contre la résistance, reviens lentement.\")]),"
+  ]
+ },
+ {
+  "key": "Fire hydrant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:745: x(\"fire-hydrant\", tr(\"Fire hydrant\"), [.glutes], [], [.bodyweight], .strength, .beginner, .generic,"
+  ]
+ },
+ {
+  "key": "À quatre pattes, lève le genou plié sur le côté, sans tourner le bassin.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:746: aka: [\"fire hydrant\"], cues: [tr(\"À quatre pattes, lève le genou plié sur le côté, sans tourner le bassin.\")]),"
+  ]
+ },
+ {
+  "key": "Pull-through à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:747: x(\"cable-pull-through\", tr(\"Pull-through à la poulie\"), [.glutes], [.hamstrings], [.cable], .strength, .beginner, .hinge, aka: [\"pull through\"]),"
+  ]
+ },
+ {
+  "key": "Mollets debout",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:748: x(\"standing-calf\", tr(\"Mollets debout\"), [.calves], [], [.machine, .bodyweight], .strength, .beginner, .calfRaise, aka: [\"mollets\", \"calf raise\"]),"
+  ]
+ },
+ {
+  "key": "Mollets assis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:749: x(\"seated-calf\", tr(\"Mollets assis\"), [.calves], [], [.machine], .strength, .beginner, .calfRaise, aka: [\"mollets assis\"]),"
+  ]
+ },
+ {
+  "key": "Mollets sur une jambe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:750: x(\"single-calf\", tr(\"Mollets sur une jambe\"), [.calves], [], [.dumbbells, .bodyweight], .strength, .beginner, .calfRaise, aka: [\"mollet une jambe\"]),"
+  ]
+ },
+ {
+  "key": "Crunch",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:754: x(\"crunch\", tr(\"Crunch\"), [.abs], [], [.bodyweight], .strength, .beginner, .crunch, aka: [\"abdos\", \"crunch\"]),"
+  ]
+ },
+ {
+  "key": "Redressements assis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:755: x(\"sit-up\", tr(\"Redressements assis\"), [.abs], [], [.bodyweight], .strength, .beginner, .crunch, aka: [\"sit up\", \"redressement\"]),"
+  ]
+ },
+ {
+  "key": "Crunch vélo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:756: x(\"bicycle-crunch\", tr(\"Crunch vélo\"), [.obliques], [.abs], [.bodyweight], .strength, .beginner, .crunch,"
+  ]
+ },
+ {
+  "key": "Coude vers le genou opposé, en alternant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:757: aka: [\"bicycle\"], cues: [tr(\"Coude vers le genou opposé, en alternant.\")]),"
+  ]
+ },
+ {
+  "key": "Crunch à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:758: x(\"cable-crunch\", tr(\"Crunch à la poulie\"), [.abs], [], [.cable], .strength, .intermediate, .crunch,"
+  ]
+ },
+ {
+  "key": "À genoux, enroule le buste vers le sol, hanches fixes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:759: aka: [\"crunch poulie\"], cues: [tr(\"À genoux, enroule le buste vers le sol, hanches fixes.\")]),"
+  ]
+ },
+ {
+  "key": "Planche (gainage)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:760: x(\"plank\", tr(\"Planche (gainage)\"), [.abs], [.lowerBack, .shoulders], [.bodyweight], .strength, .beginner, .plank, aka: [\"gainage\", \"plank\", \"planche\"]),"
+  ]
+ },
+ {
+  "key": "Planche latérale",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:761: x(\"side-plank\", tr(\"Planche latérale\"), [.obliques], [.abs, .shoulders], [.bodyweight], .strength, .beginner, .plank,"
+  ]
+ },
+ {
+  "key": "Sur un avant-bras, corps de profil et aligné, hanches hautes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:762: aka: [\"gainage lateral\", \"side plank\"], cues: [tr(\"Sur un avant-bras, corps de profil et aligné, hanches hautes.\")]),"
+  ]
+ },
+ {
+  "key": "Relevés de jambes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:763: x(\"leg-raise\", tr(\"Relevés de jambes\"), [.abs], [], [.bodyweight], .strength, .beginner, .legRaise, aka: [\"releve de jambes\", \"leg raise\"]),"
+  ]
+ },
+ {
+  "key": "Relevés de jambes suspendu",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:764: x(\"hanging-leg-raise\", tr(\"Relevés de jambes suspendu\"), [.abs], [.forearms], [.pullUpBar], .strength, .advanced, .legRaise,"
+  ]
+ },
+ {
+  "key": "Dead bug",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:766: x(\"dead-bug\", tr(\"Dead bug\"), [.abs], [], [.bodyweight], .strength, .beginner, .legRaise,"
+  ]
+ },
+ {
+  "key": "Dos plaqué, tends un bras et la jambe opposée en alternant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:767: aka: [\"dead bug\"], cues: [tr(\"Dos plaqué, tends un bras et la jambe opposée en alternant.\")]),"
+  ]
+ },
+ {
+  "key": "Hollow hold",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:768: x(\"hollow-hold\", tr(\"Hollow hold\"), [.abs], [], [.bodyweight], .strength, .intermediate, .legRaise,"
+  ]
+ },
+ {
+  "key": "Bras et jambes tendus au-dessus du sol, bas du dos plaqué ; tiens.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:769: aka: [\"hollow\"], cues: [tr(\"Bras et jambes tendus au-dessus du sol, bas du dos plaqué ; tiens.\")]),"
+  ]
+ },
+ {
+  "key": "Russian twist",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:770: x(\"russian-twist\", tr(\"Russian twist\"), [.obliques], [.abs], [.bodyweight, .other], .strength, .beginner, .rotation, aka: [\"twist\", \"russian twist\"]),"
+  ]
+ },
+ {
+  "key": "Bûcheron à la poulie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:771: x(\"woodchop\", tr(\"Bûcheron à la poulie\"), [.obliques], [.abs, .shoulders], [.cable], .strength, .intermediate, .rotation, aka: [\"woodchop\", \"bucheron\"]),"
+  ]
+ },
+ {
+  "key": "Pallof press",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:772: x(\"pallof-press\", tr(\"Pallof press\"), [.obliques], [.abs], [.cable, .band], .strength, .beginner, .frontRaise,"
+  ]
+ },
+ {
+  "key": "De profil à la poulie, pousse les mains devant toi sans laisser le buste tourner.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:773: aka: [\"pallof\"], cues: [tr(\"De profil à la poulie, pousse les mains devant toi sans laisser le buste tourner.\")]),"
+  ]
+ },
+ {
+  "key": "Mountain climbers",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:774: x(\"mountain-climber\", tr(\"Mountain climbers\"), [.abs], [.shoulders, .heart], [.bodyweight], .cardio, .beginner, .mountainClimber, aka: [\"mountain climber\", \"grimpeur\"]),"
+  ]
+ },
+ {
+  "key": "Roulette abdominale",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:775: x(\"ab-wheel\", tr(\"Roulette abdominale\"), [.abs], [.lowerBack, .shoulders], [.other], .strength, .advanced, .plank,"
+  ]
+ },
+ {
+  "key": "Roule vers l'avant sans creuser le dos, reviens en contractant les abdos.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:776: aka: [\"ab wheel\", \"roue abdominale\"], cues: [tr(\"Roule vers l'avant sans creuser le dos, reviens en contractant les abdos.\")]),"
+  ]
+ },
+ {
+  "key": "Extensions lombaires",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:777: x(\"back-extension\", tr(\"Extensions lombaires\"), [.lowerBack], [.glutes, .hamstrings], [.bench, .machine], .strength, .beginner, .hinge,"
+  ]
+ },
+ {
+  "key": "Banc à 45°, descends le buste puis remonte jusqu'à l'alignement, sans cambrer.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:778: aka: [\"hyperextension\", \"lombaires\"], cues: [tr(\"Banc à 45°, descends le buste puis remonte jusqu'à l'alignement, sans cambrer.\")]),"
+  ]
+ },
+ {
+  "key": "Superman",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:779: x(\"superman\", tr(\"Superman\"), [.lowerBack], [.glutes], [.bodyweight], .strength, .beginner, .superman, aka: [\"superman\"]),"
+  ]
+ },
+ {
+  "key": "Bird dog",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:780: x(\"bird-dog\", tr(\"Bird dog\"), [.lowerBack], [.abs, .glutes], [.bodyweight], .strength, .beginner, .legKickback,"
+  ]
+ },
+ {
+  "key": "À quatre pattes, tends un bras et la jambe opposée, dos plat.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:781: aka: [\"bird dog\"], cues: [tr(\"À quatre pattes, tends un bras et la jambe opposée, dos plat.\")]),"
+  ]
+ },
+ {
+  "key": "Burpees",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:785: x(\"burpee\", tr(\"Burpees\"), [.fullBody], [.heart], [.bodyweight], .cardio, .intermediate, .jump, aka: [\"burpee\"]),"
+  ]
+ },
+ {
+  "key": "Thruster",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:786: x(\"thruster\", tr(\"Thruster\"), [.fullBody], [.quads, .shoulders], [.barbell, .dumbbells], .strength, .intermediate, .squat,"
+  ]
+ },
+ {
+  "key": "Enchaîne un squat avant et un développé au-dessus de la tête en un mouvement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:787: aka: [\"thruster\"], cues: [tr(\"Enchaîne un squat avant et un développé au-dessus de la tête en un mouvement.\")]),"
+  ]
+ },
+ {
+  "key": "Épaulé (power clean)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:788: x(\"power-clean\", tr(\"Épaulé (power clean)\"), [.fullBody], [.traps, .hamstrings], [.barbell], .strength, .advanced, .hinge,"
+  ]
+ },
+ {
+  "key": "Explosion des hanches, la barre monte près du corps jusqu'aux épaules. Apprends-le avec un coach.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:789: aka: [\"clean\", \"epaule\"], cues: [tr(\"Explosion des hanches, la barre monte près du corps jusqu'aux épaules. Apprends-le avec un coach.\")]),"
+  ]
+ },
+ {
+  "key": "Épaulé kettlebell",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:790: x(\"kb-clean\", tr(\"Épaulé kettlebell\"), [.fullBody], [.shoulders], [.kettlebell], .strength, .intermediate, .hinge, aka: [\"clean kettlebell\"]),"
+  ]
+ },
+ {
+  "key": "Turkish get-up",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:791: x(\"turkish-get-up\", tr(\"Turkish get-up\"), [.fullBody], [.shoulders, .abs], [.kettlebell], .strength, .advanced, .generic,"
+  ]
+ },
+ {
+  "key": "Du sol à debout, bras tendu vers le plafond avec la charge, étape par étape.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:792: aka: [\"get up\"], cues: [tr(\"Du sol à debout, bras tendu vers le plafond avec la charge, étape par étape.\")]),"
+  ]
+ },
+ {
+  "key": "Wall ball",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:793: x(\"wall-ball\", tr(\"Wall ball\"), [.fullBody], [.quads, .shoulders], [.other], .strength, .intermediate, .squat,"
+  ]
+ },
+ {
+  "key": "Squat avec un médecine-ball, puis lance-le contre le mur en te relevant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:794: aka: [\"wall ball\"], cues: [tr(\"Squat avec un médecine-ball, puis lance-le contre le mur en te relevant.\")]),"
+  ]
+ },
+ {
+  "key": "Cordes ondulatoires",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:795: x(\"battle-ropes\", tr(\"Cordes ondulatoires\"), [.fullBody], [.shoulders, .heart], [.other], .cardio, .intermediate, .generic,"
+  ]
+ },
+ {
+  "key": "Genoux fléchis, fais onduler les cordes en alternant les bras.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:796: aka: [\"battle rope\", \"cordes\"], cues: [tr(\"Genoux fléchis, fais onduler les cordes en alternant les bras.\")]),"
+  ]
+ },
+ {
+  "key": "Poussée de traîneau",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:797: x(\"sled-push\", tr(\"Poussée de traîneau\"), [.fullBody], [.quads, .heart], [.other], .cardio, .intermediate, .run, aka: [\"traineau\", \"sled\"]),"
+  ]
+ },
+ {
+  "key": "Marche de l'ours",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:798: x(\"bear-crawl\", tr(\"Marche de l'ours\"), [.fullBody], [.shoulders, .abs], [.bodyweight], .strength, .beginner, .mountainClimber,"
+  ]
+ },
+ {
+  "key": "À quatre pattes, genoux juste au-dessus du sol, avance main et pied opposés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:799: aka: [\"bear crawl\"], cues: [tr(\"À quatre pattes, genoux juste au-dessus du sol, avance main et pied opposés.\")]),"
+  ]
+ },
+ {
+  "key": "Course à pied",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:803: x(\"running\", tr(\"Course à pied\"), [.heart], [.quads, .calves], [.bodyweight], .cardio, .beginner, .run, aka: [\"course\", \"running\", \"jogging\", \"footing\"]),"
+  ]
+ },
+ {
+  "key": "Tapis de course",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:804: x(\"treadmill\", tr(\"Tapis de course\"), [.heart], [.quads, .calves], [.machine], .cardio, .beginner, .run, aka: [\"tapis\", \"treadmill\"]),"
+  ]
+ },
+ {
+  "key": "Marche rapide",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:805: x(\"walking\", tr(\"Marche rapide\"), [.heart], [.calves], [.bodyweight], .cardio, .beginner, .run, aka: [\"marche\", \"walking\"]),"
+  ]
+ },
+ {
+  "key": "Marche inclinée sur tapis",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:806: x(\"incline-walk\", tr(\"Marche inclinée sur tapis\"), [.heart], [.glutes, .calves], [.machine], .cardio, .beginner, .run, aka: [\"marche inclinee\"]),"
+  ]
+ },
+ {
+  "key": "Montées de genoux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:807: x(\"high-knees\", tr(\"Montées de genoux\"), [.heart], [.quads], [.bodyweight], .cardio, .beginner, .run, aka: [\"high knees\", \"genoux hauts\"]),"
+  ]
+ },
+ {
+  "key": "Vélo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:808: x(\"cycling\", tr(\"Vélo\"), [.heart], [.quads], [.machine, .other], .cardio, .beginner, .cycle, aka: [\"velo\", \"bike\", \"cyclisme\"]),"
+  ]
+ },
+ {
+  "key": "Vélo d'intérieur (spinning)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:809: x(\"spinning\", tr(\"Vélo d'intérieur (spinning)\"), [.heart], [.quads], [.machine], .cardio, .intermediate, .cycle, aka: [\"spinning\", \"velo interieur\"]),"
+  ]
+ },
+ {
+  "key": "Rameur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:810: x(\"rowing-machine\", tr(\"Rameur\"), [.heart], [.back, .quads], [.machine], .cardio, .beginner, .rowing, aka: [\"rameur\", \"rowing machine\", \"ergometre\"]),"
+  ]
+ },
+ {
+  "key": "Vélo elliptique",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:811: x(\"elliptical\", tr(\"Vélo elliptique\"), [.heart], [.quads, .glutes], [.machine], .cardio, .beginner, .run, aka: [\"elliptique\"]),"
+  ]
+ },
+ {
+  "key": "Escaliers (stepper)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:812: x(\"stair-climber\", tr(\"Escaliers (stepper)\"), [.heart], [.glutes, .quads], [.machine], .cardio, .intermediate, .lunge, aka: [\"stepper\", \"escalier\"]),"
+  ]
+ },
+ {
+  "key": "Corde à sauter",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:813: x(\"jump-rope\", tr(\"Corde à sauter\"), [.heart], [.calves], [.other], .cardio, .beginner, .jump, aka: [\"corde\", \"jump rope\"]),"
+  ]
+ },
+ {
+  "key": "Jumping jacks",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:814: x(\"jumping-jacks\", tr(\"Jumping jacks\"), [.heart], [.calves, .shoulders], [.bodyweight], .cardio, .beginner, .jump, aka: [\"jumping jack\"]),"
+  ]
+ },
+ {
+  "key": "Squat sauté",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:815: x(\"jump-squat\", tr(\"Squat sauté\"), [.quads], [.glutes, .calves, .heart], [.bodyweight], .cardio, .intermediate, .jump, aka: [\"jump squat\"]),"
+  ]
+ },
+ {
+  "key": "Box jump",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:816: x(\"box-jump\", tr(\"Box jump\"), [.quads], [.glutes, .calves], [.other], .cardio, .intermediate, .jump,"
+  ]
+ },
+ {
+  "key": "Saute sur la boîte à deux pieds, descends en marchant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:817: aka: [\"saut sur boite\"], cues: [tr(\"Saute sur la boîte à deux pieds, descends en marchant.\")]),"
+  ]
+ },
+ {
+  "key": "Circuit HIIT",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:818: x(\"hiit\", tr(\"Circuit HIIT\"), [.fullBody], [.heart], [.bodyweight], .cardio, .intermediate, .jump, aka: [\"hiit\", \"fractionne\", \"circuit\"]),"
+  ]
+ },
+ {
+  "key": "Natation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:819: x(\"swimming\", tr(\"Natation\"), [.fullBody], [.heart], [.other], .cardio, .intermediate, .generic, aka: [\"nage\", \"piscine\"]),"
+  ]
+ },
+ {
+  "key": "Boxe (sac de frappe)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:820: x(\"boxing\", tr(\"Boxe (sac de frappe)\"), [.fullBody], [.shoulders, .heart], [.other], .cardio, .intermediate, .generic, aka: [\"boxe\", \"sac\"]),"
+  ]
+ },
+ {
+  "key": "Cercles de bras",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:824: x(\"arm-circles\", tr(\"Cercles de bras\"), [.shoulders], [], [.bodyweight], .mobility, .beginner, .armCircles, aka: [\"moulinets\", \"cercles\"]),"
+  ]
+ },
+ {
+  "key": "Passages d'épaules au bâton",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:825: x(\"shoulder-dislocates\", tr(\"Passages d'épaules au bâton\"), [.shoulders], [.chest], [.band, .other], .mobility, .beginner, .armCircles,"
+  ]
+ },
+ {
+  "key": "Prise large, passe le bâton de l'avant vers l'arrière bras tendus.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:826: aka: [\"passage epaules\", \"dislocates\"], cues: [tr(\"Prise large, passe le bâton de l'avant vers l'arrière bras tendus.\")]),"
+  ]
+ },
+ {
+  "key": "Cercles de hanches",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:827: x(\"hip-circles\", tr(\"Cercles de hanches\"), [.glutes], [.lowerBack], [.bodyweight], .mobility, .beginner, .generic, aka: [\"hanches\"]),"
+  ]
+ },
+ {
+  "key": "Chat-vache",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:828: x(\"cat-cow\", tr(\"Chat-vache\"), [.lowerBack], [.back], [.bodyweight], .mobility, .beginner, .generic,"
+  ]
+ },
+ {
+  "key": "À quatre pattes, arrondis puis creuse doucement le dos au rythme de la respiration.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:829: aka: [\"chat vache\", \"cat cow\"], cues: [tr(\"À quatre pattes, arrondis puis creuse doucement le dos au rythme de la respiration.\")]),"
+  ]
+ },
+ {
+  "key": "Fente avec rotation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:830: x(\"worlds-greatest\", tr(\"Fente avec rotation\"), [.fullBody], [.hamstrings, .back], [.bodyweight], .mobility, .beginner, .lunge,"
+  ]
+ },
+ {
+  "key": "En fente, main au sol, ouvre l'autre bras vers le plafond.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:831: aka: [\"world greatest stretch\"], cues: [tr(\"En fente, main au sol, ouvre l'autre bras vers le plafond.\")]),"
+  ]
+ },
+ {
+  "key": "Mobilité des chevilles",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:832: x(\"ankle-mobility\", tr(\"Mobilité des chevilles\"), [.calves], [], [.bodyweight], .mobility, .beginner, .lunge,"
+  ]
+ },
+ {
+  "key": "Face au mur, avance le genou vers le mur sans décoller le talon.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:833: aka: [\"cheville\", \"genou au mur\"], cues: [tr(\"Face au mur, avance le genou vers le mur sans décoller le talon.\")]),"
+  ]
+ },
+ {
+  "key": "Rotations thoraciques",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:834: x(\"thoracic-rotation\", tr(\"Rotations thoraciques\"), [.back], [.obliques], [.bodyweight], .mobility, .beginner, .rotation, aka: [\"rotation thoracique\"]),"
+  ]
+ },
+ {
+  "key": "Squat profond tenu",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:835: x(\"deep-squat-hold\", tr(\"Squat profond tenu\"), [.quads], [.glutes], [.bodyweight], .mobility, .beginner, .squat,"
+  ]
+ },
+ {
+  "key": "Descends le plus bas confortable, talons au sol ; respire et tiens.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:836: aka: [\"squat profond\"], cues: [tr(\"Descends le plus bas confortable, talons au sol ; respire et tiens.\")]),"
+  ]
+ },
+ {
+  "key": "Étirement des ischio-jambiers",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:840: x(\"hamstring-stretch\", tr(\"Étirement des ischio-jambiers\"), [.hamstrings], [.lowerBack], [.bodyweight], .stretching, .beginner, .stretchFold, aka: [\"etirement ischio\"]),"
+  ]
+ },
+ {
+  "key": "Étirement des quadriceps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:841: x(\"quad-stretch\", tr(\"Étirement des quadriceps\"), [.quads], [], [.bodyweight], .stretching, .beginner, .stretchStand,"
+  ]
+ },
+ {
+  "key": "Debout, attrape la cheville derrière toi, genoux côte à côte.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:842: aka: [\"etirement quadriceps\"], cues: [tr(\"Debout, attrape la cheville derrière toi, genoux côte à côte.\")]),"
+  ]
+ },
+ {
+  "key": "Étirement des fléchisseurs de hanche",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:843: x(\"hip-flexor-stretch\", tr(\"Étirement des fléchisseurs de hanche\"), [.quads], [.glutes], [.bodyweight], .stretching, .beginner, .lunge,"
+  ]
+ },
+ {
+  "key": "En fente, genou arrière au sol, avance doucement le bassin.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:844: aka: [\"psoas\", \"flechisseurs\"], cues: [tr(\"En fente, genou arrière au sol, avance doucement le bassin.\")]),"
+  ]
+ },
+ {
+  "key": "Étirement des mollets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:845: x(\"calf-stretch\", tr(\"Étirement des mollets\"), [.calves], [], [.bodyweight], .stretching, .beginner, .stretchStand,"
+  ]
+ },
+ {
+  "key": "Mains au mur, jambe arrière tendue, talon au sol.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:846: aka: [\"etirement mollets\"], cues: [tr(\"Mains au mur, jambe arrière tendue, talon au sol.\")]),"
+  ]
+ },
+ {
+  "key": "Étirement des pectoraux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:847: x(\"chest-stretch\", tr(\"Étirement des pectoraux\"), [.chest], [.shoulders], [.bodyweight], .stretching, .beginner, .stretchStand,"
+  ]
+ },
+ {
+  "key": "Avant-bras contre un encadrement de porte, avance doucement le buste.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:848: aka: [\"etirement pectoraux\"], cues: [tr(\"Avant-bras contre un encadrement de porte, avance doucement le buste.\")]),"
+  ]
+ },
+ {
+  "key": "Étirement des triceps",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:849: x(\"triceps-stretch\", tr(\"Étirement des triceps\"), [.triceps], [.shoulders], [.bodyweight], .stretching, .beginner, .stretchStand,"
+  ]
+ },
+ {
+  "key": "Main derrière la tête, pousse doucement le coude avec l'autre main.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:850: aka: [\"etirement triceps\"], cues: [tr(\"Main derrière la tête, pousse doucement le coude avec l'autre main.\")]),"
+  ]
+ },
+ {
+  "key": "Étirement des épaules (bras croisé)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:851: x(\"shoulder-stretch\", tr(\"Étirement des épaules (bras croisé)\"), [.shoulders], [], [.bodyweight], .stretching, .beginner, .stretchStand,"
+  ]
+ },
+ {
+  "key": "Ramène le bras tendu contre la poitrine avec l'autre bras.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:852: aka: [\"etirement epaules\"], cues: [tr(\"Ramène le bras tendu contre la poitrine avec l'autre bras.\")]),"
+  ]
+ },
+ {
+  "key": "Posture de l'enfant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:853: x(\"childs-pose\", tr(\"Posture de l'enfant\"), [.lowerBack], [.back], [.bodyweight], .stretching, .beginner, .stretchFold,"
+  ]
+ },
+ {
+  "key": "À genoux, fesses vers les talons, bras allongés devant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:854: aka: [\"enfant\", \"child pose\"], cues: [tr(\"À genoux, fesses vers les talons, bras allongés devant.\")]),"
+  ]
+ },
+ {
+  "key": "Posture du pigeon",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:855: x(\"pigeon\", tr(\"Posture du pigeon\"), [.glutes], [.lowerBack], [.bodyweight], .stretching, .intermediate, .stretchFold,"
+  ]
+ },
+ {
+  "key": "Jambe avant pliée devant toi, jambe arrière allongée, buste qui descend doucement.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:856: aka: [\"pigeon\"], cues: [tr(\"Jambe avant pliée devant toi, jambe arrière allongée, buste qui descend doucement.\")]),"
+  ]
+ },
+ {
+  "key": "Posture du cobra",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:857: x(\"cobra\", tr(\"Posture du cobra\"), [.abs], [.lowerBack], [.bodyweight], .stretching, .beginner, .superman,"
+  ]
+ },
+ {
+  "key": "Allongé sur le ventre, pousse doucement sur les mains, hanches au sol.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseLibrary.swift:858: aka: [\"cobra\"], cues: [tr(\"Allongé sur le ventre, pousse doucement sur les mains, hanches au sol.\")]),"
+  ]
+ },
+ {
+  "key": "Assis sur la machine, dos plaqué contre le dossier, poignées à hauteur des épaules, bras ouverts sur les côtés, coudes légèrement fléchis.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:16: \"pec-deck\": t(tr(\"Assis sur la machine, dos plaqué contre le dossier, poignées à hauteur des épaules, bras ouverts sur les côtés, coudes légèrement fléchis.\"),"
+  ]
+ },
+ {
+  "key": "Ouvre lentement jusqu'à sentir l'étirement, sans dépasser la ligne des épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:17: [tr(\"Rapproche les poignées devant la poitrine en arc de cercle.\"), tr(\"Serre les pectoraux une seconde, mains jointes.\"), tr(\"Ouvre lentement jusqu'à sentir l'étirement, sans "
+  ]
+ },
+ {
+  "key": "Rapproche les poignées devant la poitrine en arc de cercle.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:17: [tr(\"Rapproche les poignées devant la poitrine en arc de cercle.\"), tr(\"Serre les pectoraux une seconde, mains jointes.\"), tr(\"Ouvre lentement jusqu'à sentir l'étirement, sans "
+  ]
+ },
+ {
+  "key": "Serre les pectoraux une seconde, mains jointes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:17: [tr(\"Rapproche les poignées devant la poitrine en arc de cercle.\"), tr(\"Serre les pectoraux une seconde, mains jointes.\"), tr(\"Ouvre lentement jusqu'à sentir l'étirement, sans "
+  ]
+ },
+ {
+  "key": "Des bras ouverts à la ligne des épaules jusqu'aux mains jointes devant la poitrine.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:18: tr(\"Des bras ouverts à la ligne des épaules jusqu'aux mains jointes devant la poitrine.\"), tr(\"Expire en fermant, inspire en ouvrant.\"),"
+  ]
+ },
+ {
+  "key": "Expire en fermant, inspire en ouvrant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:18: tr(\"Des bras ouverts à la ligne des épaules jusqu'aux mains jointes devant la poitrine.\"), tr(\"Expire en fermant, inspire en ouvrant.\"),",
+   "Shared/Domains/ExerciseTechniques.swift:23: tr(\"Des bras ouverts dans la ligne des épaules aux mains jointes.\"), tr(\"Expire en fermant, inspire en ouvrant.\"),"
+  ]
+ },
+ {
+  "key": "Garde la même flexion des coudes du début à la fin.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:19: [tr(\"Règle le siège pour avoir les poignées à hauteur des épaules.\"), tr(\"Garde la même flexion des coudes du début à la fin.\")],"
+  ]
+ },
+ {
+  "key": "Règle le siège pour avoir les poignées à hauteur des épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:19: [tr(\"Règle le siège pour avoir les poignées à hauteur des épaules.\"), tr(\"Garde la même flexion des coudes du début à la fin.\")],"
+  ]
+ },
+ {
+  "key": "Décoller le dos du dossier.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:20: [tr(\"Décoller le dos du dossier.\"), tr(\"Pousser avec les bras en pliant les coudes.\"), tr(\"Laisser les charges claquer en ouvrant.\")]),"
+  ]
+ },
+ {
+  "key": "Laisser les charges claquer en ouvrant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:20: [tr(\"Décoller le dos du dossier.\"), tr(\"Pousser avec les bras en pliant les coudes.\"), tr(\"Laisser les charges claquer en ouvrant.\")]),"
+  ]
+ },
+ {
+  "key": "Pousser avec les bras en pliant les coudes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:20: [tr(\"Décoller le dos du dossier.\"), tr(\"Pousser avec les bras en pliant les coudes.\"), tr(\"Laisser les charges claquer en ouvrant.\")]),"
+  ]
+ },
+ {
+  "key": "Debout entre les deux poulies hautes, une poignée dans chaque main, un pied en avant, buste légèrement penché, bras ouverts, coudes un peu fléchis.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:21: \"cable-fly\": t(tr(\"Debout entre les deux poulies hautes, une poignée dans chaque main, un pied en avant, buste légèrement penché, bras ouverts, coudes un peu fléchis.\"),"
+  ]
+ },
+ {
+  "key": "Amène les mains l'une vers l'autre devant le bas de la poitrine en arc de cercle.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:22: [tr(\"Amène les mains l'une vers l'autre devant le bas de la poitrine en arc de cercle.\"), tr(\"Serre les pectoraux mains jointes.\"), tr(\"Reviens lentement bras ouverts.\")],"
+  ]
+ },
+ {
+  "key": "Reviens lentement bras ouverts.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:22: [tr(\"Amène les mains l'une vers l'autre devant le bas de la poitrine en arc de cercle.\"), tr(\"Serre les pectoraux mains jointes.\"), tr(\"Reviens lentement bras ouverts.\")],"
+  ]
+ },
+ {
+  "key": "Serre les pectoraux mains jointes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:22: [tr(\"Amène les mains l'une vers l'autre devant le bas de la poitrine en arc de cercle.\"), tr(\"Serre les pectoraux mains jointes.\"), tr(\"Reviens lentement bras ouverts.\")],"
+  ]
+ },
+ {
+  "key": "Des bras ouverts dans la ligne des épaules aux mains jointes.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:23: tr(\"Des bras ouverts dans la ligne des épaules aux mains jointes.\"), tr(\"Expire en fermant, inspire en ouvrant.\"),"
+  ]
+ },
+ {
+  "key": "Buste stable.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:24: [tr(\"Coudes fixes, le mouvement vient des épaules.\"), tr(\"Buste stable.\")],"
+  ]
+ },
+ {
+  "key": "Coudes fixes, le mouvement vient des épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:24: [tr(\"Coudes fixes, le mouvement vient des épaules.\"), tr(\"Buste stable.\")],"
+  ]
+ },
+ {
+  "key": "Se laisser tirer vers l'arrière par les câbles.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:25: [tr(\"Transformer l'écarté en développé.\"), tr(\"Se laisser tirer vers l'arrière par les câbles.\")]),"
+  ]
+ },
+ {
+  "key": "Transformer l'écarté en développé.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:25: [tr(\"Transformer l'écarté en développé.\"), tr(\"Se laisser tirer vers l'arrière par les câbles.\")]),"
+  ]
+ },
+ {
+  "key": "Debout, barre posée sur l'avant des épaules contre les clavicules, bras croisés devant (ou prise olympique), coudes hauts, pieds largeur d'épaules.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:26: \"front-squat\": t(tr(\"Debout, barre posée sur l'avant des épaules contre les clavicules, bras croisés devant (ou prise olympique), coudes hauts, pieds largeur d'épaules.\"),"
+  ]
+ },
+ {
+  "key": "Descends en gardant le buste bien droit et les coudes hauts.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:27: [tr(\"Descends en gardant le buste bien droit et les coudes hauts.\"), tr(\"Genoux dans l'axe des pieds jusqu'aux cuisses parallèles.\"), tr(\"Remonte en poussant dans tout le pied."
+  ]
+ },
+ {
+  "key": "Genoux dans l'axe des pieds jusqu'aux cuisses parallèles.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:27: [tr(\"Descends en gardant le buste bien droit et les coudes hauts.\"), tr(\"Genoux dans l'axe des pieds jusqu'aux cuisses parallèles.\"), tr(\"Remonte en poussant dans tout le pied."
+  ]
+ },
+ {
+  "key": "Au moins jusqu'aux cuisses parallèles, buste droit.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:28: tr(\"Au moins jusqu'aux cuisses parallèles, buste droit.\"), tr(\"Inspire et gaine en haut, expire en remontant.\"),"
+  ]
+ },
+ {
+  "key": "Coudes hauts pour que la barre ne glisse pas.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ExerciseTechniques.swift:29: [tr(\"Coudes hauts pour que la barre ne glisse pas.\"), tr(\"Regard droit devant.\")],"
+  ]
+ }
+]

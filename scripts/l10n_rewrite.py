@@ -205,9 +205,11 @@ def process(path, write):
             report.append({"file": path, "line": ln, "verdict": verdict, "reason": reason, "text": lit.text,
                            "key": lit.key, "scope": scopes[lit.start], "code": line_text.strip()[:160]})
     if write and edits:
+        # Insert at the original offsets, last first, so nested literals keep their places.
+        insertions = sorted([(start, "tr(") for start, _ in edits] + [(end, ")") for _, end in edits], reverse=True)
         out = source
-        for start, end in sorted(edits, reverse=True):
-            out = out[:start] + "tr(" + out[start:end] + ")" + out[end:]
+        for position, text in insertions:
+            out = out[:position] + text + out[position:]
         open(path, "w", encoding="utf8").write(out)
     return report
 

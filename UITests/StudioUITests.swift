@@ -15,7 +15,7 @@ final class StudioUITests: XCTestCase {
 
     private func launch(_ arguments: [String]) {
         app = XCUIApplication()
-        app.launchArguments = arguments
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA"] + arguments
         app.launch()
     }
 

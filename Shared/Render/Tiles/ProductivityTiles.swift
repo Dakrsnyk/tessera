@@ -153,7 +153,7 @@ enum ProductivityTiles {
             }
             tile.visual = .month(days: days, offset: offset, marked: marked, today: DateMath.calendar.component(.day, from: now))
             let best = bestStreak(habit, until: now)
-            tile.detail = tr("Record : \(Fmt.plural(best, tr("jour"), tr("jo)urs")))"
+            tile.detail = tr("Record : \(Fmt.plural(best, tr("jour"), tr("jours")))")
         }
         if !habit.isDone(on: now) && !context.isSmall {
             tile.buttons = [TileButton(title: tr("Fait"), symbol: "checkmark", action: .toggleHabit(habit.id.uuidString), isProminent: true)]

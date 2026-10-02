@@ -1,0 +1,2278 @@
+[
+ {
+  "key": "Faite",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:90: return TileRow(id: \"workout\", title: routine.name, value: done ? tr(\"Faite\") : tr(\"Prévue\"), symbol: \"figure.strengthtraining.traditional\", isDone: done)"
+  ]
+ },
+ {
+  "key": "Prévue",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:90: return TileRow(id: \"workout\", title: routine.name, value: done ? tr(\"Faite\") : tr(\"Prévue\"), symbol: \"figure.strengthtraining.traditional\", isDone: done)"
+  ]
+ },
+ {
+  "key": "%@ de la journée écoulée",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:100: tile.detail = tr(\"\\(Fmt.percent(DateMath.progress(of: .day, at: now))) de la journée écoulée\")"
+  ]
+ },
+ {
+  "key": "tâche",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:146: tile.unit = open.count > 1 ? tr(\"tâches\") : tr(\"tâche\")"
+  ]
+ },
+ {
+  "key": "tâches",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:146: tile.unit = open.count > 1 ? tr(\"tâches\") : tr(\"tâche\")"
+  ]
+ },
+ {
+  "key": "Ensuite : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:147: tile.caption = open.first.map { tr(\"Ensuite : \\($0.title)\") } ?? tr(\"Rien d'urgent, profites-en\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:97: tile.caption = tr(\"Ensuite : \\(next.name)\")"
+  ]
+ },
+ {
+  "key": "Rien d'urgent, profites-en",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:147: tile.caption = open.first.map { tr(\"Ensuite : \\($0.title)\") } ?? tr(\"Rien d'urgent, profites-en\")"
+  ]
+ },
+ {
+  "key": "25 min",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:150: TileButton(title: tr(\"25 min\"), symbol: \"timer\", action: .startFocus(25), isProminent: true),",
+   "Shared/Render/Tiles/ProductivityTiles.swift:98: tile.buttons = [TileButton(title: tr(\"25 min\"), symbol: \"play.fill\", action: .startFocus(25), isProminent: true)]"
+  ]
+ },
+ {
+  "key": "Ce soir",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:155: var tile = Tile(title: tr(\"Ce soir\"), symbol: \"moon.stars\")"
+  ]
+ },
+ {
+  "key": "tâche faite",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:158: tile.unit = done > 1 ? tr(\"tâches faites\") : tr(\"tâche faite\")"
+  ]
+ },
+ {
+  "key": "tâches faites",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:158: tile.unit = done > 1 ? tr(\"tâches faites\") : tr(\"tâche faite\")"
+  ]
+ },
+ {
+  "key": "Le bilan de ta journée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:159: tile.caption = tr(\"Le bilan de ta journée\")"
+  ]
+ },
+ {
+  "key": "Rien de prévu tôt demain",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:175: tile.caption = tr(\"Rien de prévu tôt demain\")"
+  ]
+ },
+ {
+  "key": "Bonne nuit",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:177: tile.detail = tr(\"Bonne nuit\")"
+  ]
+ },
+ {
+  "key": "Prends un parapluie (%@ %% de pluie)",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:191: tile.detail = tr(\"Prends un parapluie (\\(rain) % de pluie)\")"
+  ]
+ },
+ {
+  "key": "Bonne journée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:195: tile.caption = tr(\"Bonne journée\")"
+  ]
+ },
+ {
+  "key": "séances cette semaine · série %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:213: tile.caption = tr(\"séances cette semaine · série \\(FitnessMath.weekStreak(state, until: now))\")"
+  ]
+ },
+ {
+  "key": "Prochaine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:219: rows.append(TileRow(id: \"routine\", title: routine.name, value: state.isScheduled(now) ? tr(\"Aujourd'hui\") : tr(\"Prochaine\"), symbol: \"figure.strengthtraining.traditional\"))"
+  ]
+ },
+ {
+  "key": "reste ce mois · %@/jour",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:246: tile.caption = tr(\"reste ce mois · \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency))/jour\")"
+  ]
+ },
+ {
+  "key": "Pas de cours prévu",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:273: tile.caption = tr(\"Pas de cours prévu\")"
+  ]
+ },
+ {
+  "key": "Étude cette semaine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:283: rows.append(TileRow(id: \"study\", title: tr(\"Étude cette semaine\"), value: Fmt.minutes(minutes), symbol: \"clock\", progress: minutes / 60 / max(0.5, state.weeklyStudyGoalHours)"
+  ]
+ },
+ {
+  "key": "Calculé à partir de tes données, sur ton iPhone",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/DashboardTiles.swift:302: tile.footnote = tr(\"Calculé à partir de tes données, sur ton iPhone\")"
+  ]
+ },
+ {
+  "key": "Crée ta première séance dans Tessera, espace Fitness.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:4: static let hint = tr(\"Crée ta première séance dans Tessera, espace Fitness.\")"
+  ]
+ },
+ {
+  "key": "Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:20: return .empty(tr(\"Calories brûlées\"), symbol: \"flame\", message: tr(\"Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.\"))"
+  ]
+ },
+ {
+  "key": "En cours · %@/%@ séries",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:49: tile.caption = tr(\"En cours · \\(active.sets.count)/\\(active.totalSets) séries\")"
+  ]
+ },
+ {
+  "key": "Séance faite aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:52: tile.caption = tr(\"Séance faite aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "%@ · %@) séries",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:55: tile.caption = tr(\"\\(Fmt.plural(exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(totalSets)) séries\""
+  ]
+ },
+ {
+  "key": "%@ · %@ séries",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:63: tile.inline = tr(\"\\(tile.value) · \\(totalSets) séries\")"
+  ]
+ },
+ {
+  "key": "%@ · série %@/%@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:75: tile.caption = tr(\"\\(exercise.name) · série \\(setNumber)/\\(exercise.sets)\")"
+  ]
+ },
+ {
+  "key": "Repos jusqu'à %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:79: tile.detail = tr(\"Repos jusqu'à \\(Fmt.time(rest, uses24Hour: true))\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:104: tile.inline = tr(\"Repos jusqu'à \\(Fmt.time(rest, uses24Hour: true))\")"
+  ]
+ },
+ {
+  "key": "Touche pour démarrer « %@) »",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\"))) »\""
+  ]
+ },
+ {
+  "key": "ta séance",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\"))) »\""
+  ]
+ },
+ {
+  "key": "Valide une série pour lancer le repos",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:110: tile.caption = tr(\"Valide une série pour lancer le repos\")"
+  ]
+ },
+ {
+  "key": "Repos : prêt",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:113: tile.inline = tr(\"Repos : prêt\")"
+  ]
+ },
+ {
+  "key": "soulevés cette semaine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:128: tile.caption = tr(\"soulevés cette semaine\")"
+  ]
+ },
+ {
+  "key": "Sem. dernière : %@ kg (%@)",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:130: tile.detail = tr(\"Sem. dernière : \\(TF.int(lastWeek)) kg (\\(Fmt.signedPercent(change * 100, decimals: 0)))\")"
+  ]
+ },
+ {
+  "key": "%@ kg cette semaine",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:133: tile.inline = tr(\"\\(TF.int(total)) kg cette semaine\")"
+  ]
+ },
+ {
+  "key": "Tes records apparaîtront après ta première séance.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:139: guard let best = records.first else { return .empty(tr(\"Records\"), symbol: \"trophy.fill\", message: tr(\"Tes records apparaîtront après ta première séance.\")) }"
+  ]
+ },
+ {
+  "key": "%@ · %@ rép.",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:142: tile.caption = tr(\"\\(best.exercise) · \\(best.reps) rép.\")"
+  ]
+ },
+ {
+  "key": "1RM estimé : %@ kg",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:143: tile.detail = tr(\"1RM estimé : \\(TF.int(best.oneRepMax)) kg\")"
+  ]
+ },
+ {
+  "key": "%@ : %@ kg",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:147: tile.inline = tr(\"\\(best.exercise) : \\(TF.int(best.weight)) kg\")"
+  ]
+ },
+ {
+  "key": "Objectif à définir dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:165: tile.detail = tr(\"Objectif à définir dans Tessera\")",
+   "Shared/Render/Tiles/NutritionTiles.swift:38: static let targetHint = tr(\"Objectif à définir dans Tessera\")"
+  ]
+ },
+ {
+  "key": "%@ cette )semaine",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:167: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette )semaine\""
+  ]
+ },
+ {
+  "key": "Série : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
+  ]
+ },
+ {
+  "key": "semai)nes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
+  ]
+ },
+ {
+  "key": "%@/%@ séances · série %@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:175: tile.inline = tr(\"\\(count)/\\(goal) séances · série \\(streak)\")"
+  ]
+ },
+ {
+  "key": "estimées aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:185: tile.caption = tr(\"estimées aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "Semaine : %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:186: tile.detail = tr(\"Semaine : \\(TF.int(week.reduce(0, +))) kcal\")"
+  ]
+ },
+ {
+  "key": "Estimation selon la durée des séances et ton poids",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:188: tile.footnote = tr(\"Estimation selon la durée des séances et ton poids\")"
+  ]
+ },
+ {
+  "key": "%@ kcal brûlées",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:189: tile.inline = tr(\"\\(TF.int(today)) kcal brûlées\")"
+  ]
+ },
+ {
+  "key": "%@ séances en %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:208: tile.inline = tr(\"\\(trained.count) séances en \\(Fmt.month(now).lowercased())\")"
+  ]
+ },
+ {
+  "key": "dépensés ce mois-ci",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:36: tile.caption = tr(\"dépensés ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "Budget mensuel à définir dans Tessera",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:37: tile.detail = tr(\"Budget mensuel à définir dans Tessera\")"
+  ]
+ },
+ {
+  "key": "Dépensé %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:42: tile.inline = tr(\"Dépensé \\(TF.money(spent, currency))\")"
+  ]
+ },
+ {
+  "key": "au-dessus du budget",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:50: tile.caption = remaining >= 0 ? tr(\"soit \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour\") : tr(\"au-dessus du budget\")"
+  ]
+ },
+ {
+  "key": "soit %@ par jour",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:50: tile.caption = remaining >= 0 ? tr(\"soit \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour\") : tr(\"au-dessus du budget\")"
+  ]
+ },
+ {
+  "key": "Dépensé : %@ sur %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:51: tile.detail = tr(\"Dépensé : \\(TF.money(spent, currency)) sur \\(TF.money(budget, currency))\")"
+  ]
+ },
+ {
+  "key": "Note tes dépenses dans Tessera, espace Budget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:64: guard !items.isEmpty else { return .empty(tr(\"Dépenses\"), symbol: \"chart.bar.doc.horizontal\", message: tr(\"Note tes dépenses dans Tessera, espace Budget.\")) }"
+  ]
+ },
+ {
+  "key": "%@ · %@ catégories",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:68: tile.caption = tr(\"\\(Fmt.month(now)) · \\(items.count) catégories\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes factures dans Tessera, espace Budget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:86: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Tessera, espace Budget.\")) }"
+  ]
+ },
+ {
+  "key": "30 prochains jours : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:91: tile.detail = tr(\"30 prochains jours : \\(TF.money(total, currency))\")"
+  ]
+ },
+ {
+  "key": "Crée un objectif d'épargne dans Tessera, espace Budget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:102: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Tessera, espace Budget.\"))"
+  ]
+ },
+ {
+  "key": "%@ par mois jusqu'au %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:110: tile.detail = tr(\"\\(TF.money(left / Double(months), currency)) par mois jusqu'au \\(Fmt.format(deadline, template: \"dMMMMyyyy\"))\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes comptes et tes dettes dans Tessera, espace Budget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:125: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Tessera, espace Budget.\")) }"
+  ]
+ },
+ {
+  "key": "%@ sur 30 jours",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:132: tile.caption = tr(\"\\(Fmt.signedMoney(change, currency: currency, decimals: 0)) sur 30 jours\")"
+  ]
+ },
+ {
+  "key": "actifs moins dettes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:135: tile.caption = tr(\"actifs moins dettes\")"
+  ]
+ },
+ {
+  "key": "Actifs %@ · Dettes %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:139: tile.detail = tr(\"Actifs \\(TF.money(assets, currency)) · Dettes \\(TF.money(debts, currency))\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes abonnements dans Tessera, espace Budget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:147: guard !subs.isEmpty else { return .empty(tr(\"Abonnements\"), symbol: \"repeat.circle\", message: tr(\"Ajoute tes abonnements dans Tessera, espace Budget.\")) }"
+  ]
+ },
+ {
+  "key": "%@ · %@)/an",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, curren)cy))/an\""
+  ]
+ },
+ {
+  "key": "abonnement",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, curren)cy))/an\""
+  ]
+ },
+ {
+  "key": "abonnements",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, curren)cy))/an\""
+  ]
+ },
+ {
+  "key": "Abonnements %@/mois",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:156: tile.inline = tr(\"Abonnements \\(TF.money(monthly, currency))/mois\")"
+  ]
+ },
+ {
+  "key": "Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:163: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.\"))"
+  ]
+ },
+ {
+  "key": "dépensé aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:167: tile.caption = tr(\"dépensé aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "Reste du mois : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:174: tile.detail = tr(\"Reste du mois : \\(TF.money(BudgetMath.remaining(state, at: now), currency))\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes placements dans Tessera, espace Placements.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:182: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Tessera, espace Placements.\")) }",
+   "Shared/Render/Tiles/MoneyTiles.swift:213: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Tessera, espace Placements.\"))"
+  ]
+ },
+ {
+  "key": "%@%@ au total",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:187: tile.caption = tr(\"\\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0))\\(percent) au total\")"
+  ]
+ },
+ {
+  "key": "Aujourd'hui : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:190: tile.detail = tr(\"Aujourd'hui : \\(Fmt.signedMoney(summary.dayChange, currency: currency, decimals: 0))\")",
+   "Shared/Render/Tiles/ProductivityTiles.swift:97: tile.detail = tr(\"Aujourd'hui : \\(Fmt.minutes(todayMinutes))\")"
+  ]
+ },
+ {
+  "key": "Portefeuille %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:204: tile.inline = tr(\"Portefeuille \\(TF.money(summary.value, currency))\")"
+  ]
+ },
+ {
+  "key": "en %@ · total %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:217: tile.caption = tr(\"en \\(largest.kind.title.lowercased()) · total \\(TF.money(total, currency))\")"
+  ]
+ },
+ {
+  "key": "Les variations apparaissent pour les placements cotés en direct.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:226: return .empty(tr(\"Plus forte variation\"), symbol: \"arrow.up.arrow.down\", message: tr(\"Les variations apparaissent pour les placements cotés en direct.\"))"
+  ]
+ },
+ {
+  "key": "%@ sur 24 h",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:231: tile.caption = tr(\"\\(mover.holding.name) sur 24 h\")"
+  ]
+ },
+ {
+  "key": "Ta position : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:232: tile.detail = tr(\"Ta position : \\(TF.money(mover.value, currency))\")"
+  ]
+ },
+ {
+  "key": "Les cours s'affichent dès que la connexion est disponible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:239: return .empty(tr(\"Liste de suivi\"), symbol: \"list.star\", message: tr(\"Les cours s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")"
+  ]
+ },
+ {
+  "key": "Cours : CoinGecko",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:250: tile.footnote = tr(\"Cours : CoinGecko\")"
+  ]
+ },
+ {
+  "key": "Les données du marché s'affichent dès que la connexion est disponible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:257: return .empty(tr(\"Marché crypto\"), symbol: \"globe.americas\", message: tr(\"Les données du marché s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")"
+  ]
+ },
+ {
+  "key": "capitalisation · %@ sur 24 h",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:261: tile.caption = tr(\"capitalisation · \\(Fmt.signedPercent(global.change24h)) sur 24 h\")"
+  ]
+ },
+ {
+  "key": "Dominance BTC",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:264: TileRow(id: \"btc\", title: tr(\"Dominance BTC\"), value: Fmt.percent(global.bitcoinDominance / 100, decimals: 1), progress: global.bitcoinDominance / 100),"
+  ]
+ },
+ {
+  "key": "Dominance ETH",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:265: TileRow(id: \"eth\", title: tr(\"Dominance ETH\"), value: Fmt.percent(global.ethereumDominance / 100, decimals: 1), progress: global.ethereumDominance / 100),"
+  ]
+ },
+ {
+  "key": "CoinGecko · %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:271: tile.footnote = tr(\"CoinGecko · \\(disclaimer)\")"
+  ]
+ },
+ {
+  "key": "Marché %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:272: tile.inline = tr(\"Marché \\(Fmt.signedPercent(global.change24h))\")"
+  ]
+ },
+ {
+  "key": "Note ton premier repas dans Tessera, espace Nutrition.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:4: static let hint = tr(\"Note ton premier repas dans Tessera, espace Nutrition.\")"
+  ]
+ },
+ {
+  "key": "Donne ton objectif calorique dans Tessera pour savoir ce qu'il te reste par repas.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Te"
+  ]
+ },
+ {
+  "key": "mangées aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:87: tile.caption = tr(\"mangées aujourd'hui\")",
+   "Shared/Render/Tiles/NutritionTiles.swift:133: tile.caption = tr(\"mangées aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "au-dessus de l'objectif",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:99: tile.caption = left >= 0 ? tr(\"restantes sur \\(TF.int(goal))\") : tr(\"au-dessus de l'objectif\")"
+  ]
+ },
+ {
+  "key": "restantes sur %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:99: tile.caption = left >= 0 ? tr(\"restantes sur \\(TF.int(goal))\") : tr(\"au-dessus de l'objectif\")"
+  ]
+ },
+ {
+  "key": "Mangé : %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:101: tile.detail = tr(\"Mangé : \\(TF.int(totals.kcal)) kcal\")"
+  ]
+ },
+ {
+  "key": "+%@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:106: tile.inline = left >= 0 ? tr(\"\\(TF.int(left)) kcal restantes\") : tr(\"+\\(TF.int(-left)) kcal\")"
+  ]
+ },
+ {
+  "key": "aujourd'hui · fibres %@ g",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:115: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal)) · fibres \\(TF.int(totals.fiber)) g\") : tr(\"aujourd'hui · fibres \\(TF.int(totals.fiber)) g\")"
+  ]
+ },
+ {
+  "key": "sur %@ · fibres %@ g",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:115: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal)) · fibres \\(TF.int(totals.fiber)) g\") : tr(\"aujourd'hui · fibres \\(TF.int(totals.fiber)) g\")"
+  ]
+ },
+ {
+  "key": "%@ g de protéines aujourd'hui",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:136: tile.inline = tr(\"\\(TF.int(totals.protein)) g de protéines aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "à trouver sur %@ g",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:144: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
+  ]
+ },
+ {
+  "key": "%@ g de protéines restantes",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:148: tile.inline = tr(\"\\(TF.int(left)) g de protéines restantes\")"
+  ]
+ },
+ {
+  "key": "Rien de noté pour l'instant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:158: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+  ]
+ },
+ {
+  "key": "aliment noté",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:158: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+  ]
+ },
+ {
+  "key": "aliments notés",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:158: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+  ]
+ },
+ {
+  "key": "moyenne par jour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:177: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
+  ]
+ },
+ {
+  "key": "moyenne · objectif %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:177: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
+  ]
+ },
+ {
+  "key": "Sur 30 jours : %@ kcal/j",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:179: tile.detail = tr(\"Sur 30 jours : \\(TF.int(month)) kcal/j\")"
+  ]
+ },
+ {
+  "key": "note un repas pour continuer",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:196: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
+  ]
+ },
+ {
+  "key": "repas noté aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:196: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
+  ]
+ },
+ {
+  "key": "Suivi : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:202: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jo)urs\")))\""
+  ]
+ },
+ {
+  "key": "Ajoute des favoris dans Tessera, espace Nutrition.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:209: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))"
+  ]
+ },
+ {
+  "key": "aujourd'hui · touche pour ajouter",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:215: tile.caption = tr(\"aujourd'hui · touche pour ajouter\")"
+  ]
+ },
+ {
+  "key": "pour le %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:231: tile.caption = tr(\"pour le \\(budget.meal.title.lowercased())\")"
+  ]
+ },
+ {
+  "key": "dont %@ g de protéines",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:232: tile.detail = tr(\"dont \\(TF.int(budget.protein)) g de protéines\")"
+  ]
+ },
+ {
+  "key": "%@ : %@ kcal",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:234: tile.inline = tr(\"\\(budget.meal.title) : \\(TF.int(budget.kcal)) kcal\")"
+  ]
+ },
+ {
+  "key": "restantes pour la soirée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:239: tile.caption = tr(\"restantes pour la soirée\")"
+  ]
+ },
+ {
+  "key": "Choisis tes trois priorités dans Tessera, espace Productivité.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:25: return .empty(tr(\"Top 3 du jour\"), symbol: \"3.circle\", message: tr(\"Choisis tes trois priorités dans Tessera, espace Productivité.\"))"
+  ]
+ },
+ {
+  "key": "Journée gagnée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:30: tile.caption = done == items.count ? tr(\"Journée gagnée\") : tr(\"priorités faites\")"
+  ]
+ },
+ {
+  "key": "priorités faites",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:30: tile.caption = done == items.count ? tr(\"Journée gagnée\") : tr(\"priorités faites\")"
+  ]
+ },
+ {
+  "key": "Priorités %@/%@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:37: tile.inline = tr(\"Priorités \\(done)/\\(items.count)\")"
+  ]
+ },
+ {
+  "key": "Crée un projet et ses tâches dans Tessera, espace Productivité.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:44: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Tessera, espace Productivité.\"))"
+  ]
+ },
+ {
+  "key": "%@ tâche%@ restante%@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : tr(\"\\(remaining) tâche\\(remaining > 1 ? \"s\" : \"\") restante\\(remaining > 1 ? \"s\" : \"\")\")"
+  ]
+ },
+ {
+  "key": "Ajoute une échéance dans Tessera, espace Productivité.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:68: return .empty(tr(\"Échéance\"), symbol: \"flag.checkered\", message: tr(\"Ajoute une échéance dans Tessera, espace Productivité.\"))"
+  ]
+ },
+ {
+  "key": "avant %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:74: tile.caption = tr(\"avant \\(TF.time(deadline.date, context))\")",
+   "Shared/Render/Tiles/TravelTiles.swift:39: tile.caption = days == 0 ? tr(\"c'est le départ !\") : tr(\"avant \\(trip.destination)\")"
+  ]
+ },
+ {
+  "key": "Dernière ligne droite",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:81: tile.detail = seconds < 3600 ? tr(\"Dernière ligne droite\") : nil"
+  ]
+ },
+ {
+  "key": "Focus %@ cette semaine",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:101: tile.inline = tr(\"Focus \\(Fmt.hours(hours)) cette semaine\")"
+  ]
+ },
+ {
+  "key": "Crée un compteur dans Tessera, espace Productivité.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:107: return .empty(tr(\"Compteur\"), symbol: \"plusminus.circle\", message: tr(\"Crée un compteur dans Tessera, espace Productivité.\"))"
+  ]
+ },
+ {
+  "key": "encore %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:115: tile.caption = value >= goal ? tr(\"Objectif atteint\") : tr(\"encore \\(Fmt.number(goal - value))\")"
+  ]
+ },
+ {
+  "key": "au total",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:117: tile.caption = counter.resetsDaily ? tr(\"aujourd'hui\") : tr(\"au total\")"
+  ]
+ },
+ {
+  "key": "Crée une habitude dans Tessera pour suivre ta série.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:136: return .empty(tr(\"Série\"), symbol: \"flame.fill\", message: tr(\"Crée une habitude dans Tessera pour suivre ta série.\"))"
+  ]
+ },
+ {
+  "key": "fait aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:142: tile.caption = habit.isDone(on: now) ? tr(\"fait aujourd'hui\") : tr(\"pas encore fait aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "pas encore fait aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:142: tile.caption = habit.isDone(on: now) ? tr(\"fait aujourd'hui\") : tr(\"pas encore fait aujourd'hui\")"
+  ]
+ },
+ {
+  "key": "Record : %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:156: tile.detail = tr(\"Record : \\(Fmt.plural(best, tr(\"jour\"), tr(\"jo)urs\")))\""
+  ]
+ },
+ {
+  "key": "Crée tes habitudes dans Tessera.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:186: return .empty(tr(\"Semaine d'habitudes\"), symbol: \"square.grid.3x3.fill\", message: tr(\"Crée tes habitudes dans Tessera.\"))",
+   "Shared/Render/Tiles/ProductivityTiles.swift:206: return .empty(tr(\"Taux de réussite\"), symbol: \"percent\", message: tr(\"Crée tes habitudes dans Tessera.\"))"
+  ]
+ },
+ {
+  "key": "validations cette semaine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:198: tile.caption = tr(\"validations cette semaine\")"
+  ]
+ },
+ {
+  "key": "Habitudes : %@ cette semaine",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:200: tile.inline = tr(\"Habitudes : \\(done) cette semaine\")"
+  ]
+ },
+ {
+  "key": "des habitudes tenues en %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:224: tile.caption = tr(\"des habitudes tenues en \\(Fmt.month(now).lowercased())\")"
+  ]
+ },
+ {
+  "key": "Habitudes : %@ ce mois-ci",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:229: tile.inline = tr(\"Habitudes : \\(Fmt.percent(rate)) ce mois-ci\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes cours dans Tessera, espace Études.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:4: static let hint = tr(\"Ajoute tes cours dans Tessera, espace Études.\")"
+  ]
+ },
+ {
+  "key": "Cours actuel",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:32: var tile = Tile(title: ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\"), symbol: \"book.closed\")"
+  ]
+ },
+ {
+  "key": "En cours · fin à %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:38: tile.caption = tr(\"En cours · fin à \\(TF.time(next.end, context))\")"
+  ]
+ },
+ {
+  "key": "%@ en co)urs",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:52: tile.inline = ongoing ? tr(\"\\(course?.name ?? tr(\"Cours\")) en co)urs\" : \"\\(course?.name ?? tr(\"Cours\")) à \\(TF.time(next.start, context))\""
+  ]
+ },
+ {
+  "key": "Ajoute tes examens dans Tessera, espace Études.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:60: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))"
+  ]
+ },
+ {
+  "key": "Ajoute tes travaux à rendre dans Tessera, espace Études.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:81: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Tessera, espace Études.\"))"
+  ]
+ },
+ {
+  "key": "à rendre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:85: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")",
+   "Shared/Render/Tiles/StudentTiles.swift:85: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")"
+  ]
+ },
+ {
+  "key": "Tout est rendu",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:89: tile.caption = tr(\"Tout est rendu\")"
+  ]
+ },
+ {
+  "key": "Ajoute tes notes dans Tessera, espace Études.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:108: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Tessera, espace Études.\"))"
+  ]
+ },
+ {
+  "key": "moyenne générale pondérée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:113: tile.caption = tr(\"moyenne générale pondérée\")"
+  ]
+ },
+ {
+  "key": "Moyenne %@ %%",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:120: tile.inline = tr(\"Moyenne \\(TF.decimal(overall, 1)) %\")"
+  ]
+ },
+ {
+  "key": "Indique les dates de ta session dans Tessera, espace Études.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:126: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Tessera, espace Études.\"))"
+  ]
+ },
+ {
+  "key": "%@ %@ restants",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:131: tile.caption = tr(\"\\(left) \\(TF.days(left)) restants\")",
+   "Shared/Render/Tiles/TravelTiles.swift:185: tile.caption = left == 0 ? tr(\"dernier jour\") : tr(\"\\(left) \\(TF.days(left)) restants\")"
+  ]
+ },
+ {
+  "key": "Fin le %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:132: tile.detail = tr(\"Fin le \\(Fmt.format(end, template: \"dMMMM\"))\")"
+  ]
+ },
+ {
+  "key": "Session %@ · %@ j",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:136: tile.inline = tr(\"Session \\(Fmt.percent(progress)) · \\(left) j\")"
+  ]
+ },
+ {
+  "key": "Crée tes fiches de révision dans Tessera, espace Études.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:142: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))"
+  ]
+ },
+ {
+  "key": "À jour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:146: tile.value = tr(\"À jour\")"
+  ]
+ },
+ {
+  "key": "Aucune fiche à réviser pour l'instant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:147: tile.caption = tr(\"Aucune fiche à réviser pour l'instant\")"
+  ]
+ },
+ {
+  "key": "Prochaine révision %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:149: tile.detail = tr(\"Prochaine révision \\(TF.relativeTime(next, from: now))\")"
+  ]
+ },
+ {
+  "key": "Touche « Réponse » pour vérifier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:163: tile.caption = tr(\"Touche « Réponse » pour vérifier\")"
+  ]
+ },
+ {
+  "key": "fiche à réviser",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:166: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
+  ]
+ },
+ {
+  "key": "fiches à réviser",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:166: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
+  ]
+ },
+ {
+  "key": "%@ fiches à réviser",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:167: tile.inline = tr(\"\\(due) fiches à réviser\")"
+  ]
+ },
+ {
+  "key": "sur %@ cette semaine",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:176: tile.caption = tr(\"sur \\(Fmt.hours(goal)) cette semaine\")"
+  ]
+ },
+ {
+  "key": "%@ de l'objectif",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:179: tile.detail = tr(\"\\(Fmt.percent(min(9.99, minutes / 60 / goal))) de l'objectif\")"
+  ]
+ },
+ {
+  "key": "Étude %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:180: tile.inline = tr(\"Étude \\(Fmt.minutes(minutes))\")"
+  ]
+ },
+ {
+  "key": "Horaire · %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:197: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
+  ]
+ },
+ {
+  "key": "hier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:67: case -1: return tr(\"hier\")"
+  ]
+ },
+ {
+  "key": "dans %@ jours",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:68: case 2...: return tr(\"dans \\(days) jours\")"
+  ]
+ },
+ {
+  "key": "il y a %@ jours",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:69: default: return tr(\"il y a \\(-days) jours\")"
+  ]
+ },
+ {
+  "key": "Auj.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:77: case 0: return tr(\"Auj.\")"
+  ]
+ },
+ {
+  "key": "%@ j",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:79: case 2...: return tr(\"\\(days) j\")"
+  ]
+ },
+ {
+  "key": "maintenant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:87: if seconds <= 0 { return tr(\"maintenant\") }"
+  ]
+ },
+ {
+  "key": "dans %@ min",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:88: if seconds < 3600 { return tr(\"dans \\(max(1, Int(seconds / 60))) min\") }"
+  ]
+ },
+ {
+  "key": "dans %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:90: if seconds < 86_400 { return tr(\"dans \\(Fmt.hours(seconds / 3600))\").replacingOccurrences(of: \" \", with: \"\\u{00A0}\") }"
+  ]
+ },
+ {
+  "key": "E",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "N",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "NE",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "NO",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "O",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "S",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "SE",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "SO",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:120: let names = [tr(\"N\"), tr(\"NE\"), tr(\"E\"), tr(\"SE\"), tr(\"S\"), tr(\"SO\"), tr(\"O\"), tr(\"NO\")]"
+  ]
+ },
+ {
+  "key": "faible",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:127: case ..<3: return tr(\"faible\")"
+  ]
+ },
+ {
+  "key": "modéré",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:128: case 3..<6: return tr(\"modéré\")"
+  ]
+ },
+ {
+  "key": "élevé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:129: case 6..<8: return tr(\"élevé\")"
+  ]
+ },
+ {
+  "key": "très élevé",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:130: case 8..<11: return tr(\"très élevé\")"
+  ]
+ },
+ {
+  "key": "extrême",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileFactory.swift:131: default: return tr(\"extrême\")"
+  ]
+ },
+ {
+  "key": "Dernier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TileView.swift:1077: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
+  ]
+ },
+ {
+  "key": "Ajoute ta date de naissance dans Tessera, espace Ma vie.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:17: private static let lifeHint = tr(\"Ajoute ta date de naissance dans Tessera, espace Ma vie.\")"
+  ]
+ },
+ {
+  "key": "%@ ans dans %@ %@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:30: tile.caption = days == 0 ? tr(\"Joyeux anniversaire !\") : tr(\"\\(next.age) ans dans \\(days) \\(TF.days(days))\")"
+  ]
+ },
+ {
+  "key": "Joyeux anniversaire !",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:30: tile.caption = days == 0 ? tr(\"Joyeux anniversaire !\") : tr(\"\\(next.age) ans dans \\(days) \\(TF.days(days))\")",
+   "Shared/Render/Tiles/TimeTiles.swift:49: tile.caption = tr(\"Joyeux anniversaire !\")"
+  ]
+ },
+ {
+  "key": "%@ de ton année en cours",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:31: tile.detail = tr(\"\\(Fmt.percent(fraction)) de ton année en cours\")"
+  ]
+ },
+ {
+  "key": "avant tes %@ ans",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:56: tile.caption = tr(\"avant tes \\(next.age) ans\")"
+  ]
+ },
+ {
+  "key": "%@ · %@ de la semaine",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:72: tile.caption = tr(\"\\(Fmt.format(now, template: \"dMMMM\")) · \\(Fmt.percent(progress)) de la semaine\")"
+  ]
+ },
+ {
+  "key": "Semaine %@ · %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:76: tile.inline = tr(\"Semaine \\(week) · \\(Fmt.percent(progress))\")"
+  ]
+ },
+ {
+  "key": "Aucun jour férié trouvé.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:83: return .empty(tr(\"Jour férié\"), symbol: \"sun.max\", message: tr(\"Aucun jour férié trouvé.\"))"
+  ]
+ },
+ {
+  "key": "Jour férié",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:83: return .empty(tr(\"Jour férié\"), symbol: \"sun.max\", message: tr(\"Aucun jour férié trouvé.\"))"
+  ]
+ },
+ {
+  "key": "Prochain férié",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:86: var tile = Tile(title: tr(\"Prochain férié\"), symbol: \"sun.max\")"
+  ]
+ },
+ {
+  "key": "éclairée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:105: tile.unit = tr(\"éclairée\")"
+  ]
+ },
+ {
+  "key": "Pleine lune %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TimeTiles.swift:107: tile.detail = tr(\"Pleine lune \\(TF.relativeDay(full, from: now))\")"
+  ]
+ },
+ {
+  "key": "Ajoute ton voyage dans Tessera, espace Voyage.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:4: static let hint = tr(\"Ajoute ton voyage dans Tessera, espace Voyage.\")"
+  ]
+ },
+ {
+  "key": "sur %@ · bon voyage !",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:30: tile.caption = tr(\"sur \\(position.total) · bon voyage !\")"
+  ]
+ },
+ {
+  "key": "%@ · jour %@/%@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:34: tile.inline = tr(\"\\(trip.destination) · jour \\(position.day)/\\(position.total)\")"
+  ]
+ },
+ {
+  "key": "c'est le départ !",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:39: tile.caption = days == 0 ? tr(\"c'est le départ !\") : tr(\"avant \\(trip.destination)\")"
+  ]
+ },
+ {
+  "key": "Du %@ au %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:40: tile.detail = tr(\"Du \\(Fmt.format(trip.start, template: \"dMMM\")) au \\(Fmt.format(trip.end, template: \"dMMM\"))\")"
+  ]
+ },
+ {
+  "key": "Ajoute ton vol dans Tessera, espace Voyage.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:52: return .empty(tr(\"Vol\"), symbol: \"airplane\", message: tr(\"Ajoute ton vol dans Tessera, espace Voyage.\"))"
+  ]
+ },
+ {
+  "key": "Terminal %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:63: if !flight.terminal.isEmpty { parts.append(tr(\"Terminal \\(flight.terminal)\")) }"
+  ]
+ },
+ {
+  "key": "Porte %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:64: if !flight.gate.isEmpty { parts.append(tr(\"Porte \\(flight.gate)\")) }"
+  ]
+ },
+ {
+  "key": "Siège %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:65: if !flight.seat.isEmpty { parts.append(tr(\"Siège \\(flight.seat)\")) }"
+  ]
+ },
+ {
+  "key": "Ajoute ton hébergement dans Tessera, espace Voyage.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:87: return .empty(tr(\"Hôtel\"), symbol: \"bed.double.fill\", message: tr(\"Ajoute ton hébergement dans Tessera, espace Voyage.\"))"
+  ]
+ },
+ {
+  "key": "Arrivée %@ à %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:93: tile.detail = tr(\"Arrivée \\(Fmt.shortDay(stay.checkIn)) à \\(TF.time(stay.checkIn, context))\")"
+  ]
+ },
+ {
+  "key": "Départ %@ à %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:95: tile.detail = tr(\"Départ \\(Fmt.shortDay(stay.checkOut)) à \\(TF.time(stay.checkOut, context))\")"
+  ]
+ },
+ {
+  "key": "Réservation",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:102: rows.append(TileRow(id: \"conf\", title: tr(\"Réservation\"), value: stay.confirmation, symbol: \"number\"))"
+  ]
+ },
+ {
+  "key": "Choisis la ville de destination dans l'espace Voyage.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:116: let message = trip.location == nil ? tr(\"Choisis la ville de destination dans l'espace Voyage.\") : tr(\"La météo s'affiche dès que la connexion est disponible.\")"
+  ]
+ },
+ {
+  "key": "La météo s'affiche dès que la connexion est disponible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:116: let message = trip.location == nil ? tr(\"Choisis la ville de destination dans l'espace Voyage.\") : tr(\"La météo s'affiche dès que la connexion est disponible.\")"
+  ]
+ },
+ {
+  "key": "Maintenant sur place · prévisions du séjour 7 jours avant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:124: tile.detail = tripDays.isEmpty ? tr(\"Maintenant sur place · prévisions du séjour 7 jours avant\") : tr(\"Prévisions pendant ton séjour\")"
+  ]
+ },
+ {
+  "key": "Prévisions pendant ton séjour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:124: tile.detail = tripDays.isEmpty ? tr(\"Maintenant sur place · prévisions du séjour 7 jours avant\") : tr(\"Prévisions pendant ton séjour\")"
+  ]
+ },
+ {
+  "key": "%@%@ h par rapport à ici",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:143: tile.caption = offset == 0 ? tr(\"même heure qu'ici\") : tr(\"\\(offset > 0 ? \"+\" : \"\")\\(hours) h par rapport à ici\")"
+  ]
+ },
+ {
+  "key": "même heure qu'ici",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:143: tile.caption = offset == 0 ? tr(\"même heure qu'ici\") : tr(\"\\(offset > 0 ? \"+\" : \"\")\\(hours) h par rapport à ici\")"
+  ]
+ },
+ {
+  "key": "Ta destination utilise ta devise : rien à convertir.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:155: return .empty(tr(\"Devise\"), symbol: \"coloncurrencysign.circle\", message: tr(\"Ta destination utilise ta devise : rien à convertir.\"))"
+  ]
+ },
+ {
+  "key": "Les taux de change s'affichent dès que la connexion est disponible.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:158: return .empty(tr(\"Devise\"), symbol: \"coloncurrencysign.circle\", message: tr(\"Les taux de change s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")"
+  ]
+ },
+ {
+  "key": "pour %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:163: tile.caption = tr(\"pour \\(Fmt.money(amount, currency: home))\")"
+  ]
+ },
+ {
+  "key": "Taux de référence BCE · %@ · Frankfurter",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:170: tile.footnote = tr(\"Taux de référence BCE · \\(Fmt.format(rates.fetchedAt, template: \"dMMMM\")) · Frankfurter\")"
+  ]
+ },
+ {
+  "key": "dernier jour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:185: tile.caption = left == 0 ? tr(\"dernier jour\") : tr(\"\\(left) \\(TF.days(left)) restants\")"
+  ]
+ },
+ {
+  "key": "de voyage, départ %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:194: tile.caption = tr(\"de voyage, départ \\(TF.relativeDay(trip.start, from: now))\")"
+  ]
+ },
+ {
+  "key": "Planifie tes activités dans Tessera, espace Voyage.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/TravelTiles.swift:206: return .empty(tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\", message: tr(\"Planifie tes activités dans Tessera, espace Voyage.\"))"
+  ]
+ },
+ {
+  "key": "Choisis ta ville dans Tessera pour voir la météo.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:7: return .empty(kind.title, symbol: kind.symbol, message: tr(\"Choisis ta ville dans Tessera pour voir la météo.\"), emptySymbol: \"location.slash\")"
+  ]
+ },
+ {
+  "key": "Les heures du soleil arrivent avec la prochaine mise à jour météo.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:24: return .empty(tr(\"Soleil\"), symbol: \"sunrise.fill\", message: tr(\"Les heures du soleil arrivent avec la prochaine mise à jour météo.\"))"
+  ]
+ },
+ {
+  "key": "Lever du soleil · %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:32: tile.caption = tr(\"Lever du soleil · \\(TF.relativeTime(sunrise, from: now))\")"
+  ]
+ },
+ {
+  "key": "Coucher du soleil · %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:35: tile.caption = tr(\"Coucher du soleil · \\(TF.relativeTime(sunset, from: now))\")"
+  ]
+ },
+ {
+  "key": "Lever demain",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:38: tile.caption = tr(\"Lever demain\")"
+  ]
+ },
+ {
+  "key": "Durée du jour : %@ · %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:42: tile.detail = tr(\"Durée du jour : \\(Fmt.hours(length)) · \\(weather.locationName)\")"
+  ]
+ },
+ {
+  "key": "Coucher",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:45: tile.inline = \"\\(isDay ? tr(\"Coucher\") : tr(\"Lever\")) \\(TF.time(nextEvent, context))\""
+  ]
+ },
+ {
+  "key": "Lever",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:45: tile.inline = \"\\(isDay ? tr(\"Coucher\") : tr(\"Lever\")) \\(TF.time(nextEvent, context))\""
+  ]
+ },
+ {
+  "key": "Le risque de pluie arrive avec la prochaine mise à jour météo.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:57: return .empty(tr(\"Pluie\"), symbol: \"cloud.rain.fill\", message: tr(\"Le risque de pluie arrive avec la prochaine mise à jour météo.\"))"
+  ]
+ },
+ {
+  "key": "Quelques averses possibles d'ici 12 h",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:66: tile.caption = tr(\"Quelques averses possibles d'ici 12 h\")"
+  ]
+ },
+ {
+  "key": "Pas de pluie prévue d'ici 12 h",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:68: tile.caption = tr(\"Pas de pluie prévue d'ici 12 h\")"
+  ]
+ },
+ {
+  "key": "Probabilité de précipitations · Open-Meteo.com",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:80: tile.footnote = tr(\"Probabilité de précipitations · Open-Meteo.com\")"
+  ]
+ },
+ {
+  "key": "vent %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:89: if let direction = weather.windDirection { parts.append(tr(\"vent \\(TF.compass(direction))\")) }"
+  ]
+ },
+ {
+  "key": "rafales %@",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:90: if let gusts = weather.windGusts { parts.append(tr(\"rafales \\(Int(gusts.rounded()))\")) }"
+  ]
+ },
+ {
+  "key": "UV %@ · %@",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:94: tile.detail = tr(\"UV \\(Int(uv.rounded())) · \\(TF.uvLevel(uv))\")"
+  ]
+ },
+ {
+  "key": "Maximum du jour",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:99: tile.rows.append(TileRow(id: \"uvmax\", title: tr(\"Maximum du jour\"), value: \"\\(Int(peak.rounded()))\", symbol: \"sun.max\"))"
+  ]
+ },
+ {
+  "key": "Vent %@ km/h",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:103: tile.inline = tr(\"Vent \\(Int(weather.windSpeed.rounded())) km/h\")"
+  ]
+ },
+ {
+  "key": "Ressenti",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:112: var rows = [TileRow(id: \"feels\", title: tr(\"Ressenti\"), value: Fmt.temperature(weather.apparentTemperature, unit: unit), symbol: \"thermometer.medium\")]"
+  ]
+ },
+ {
+  "key": "UV",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:120: rows.append(TileRow(id: \"uv\", title: tr(\"UV\"), value: \"\\(Int(uv.rounded())) · \\(TF.uvLevel(uv))\", symbol: \"sun.max.fill\"))"
+  ]
+ },
+ {
+  "key": "Pluie aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:123: rows.append(TileRow(id: \"rain\", title: tr(\"Pluie aujourd'hui\"), value: \"\\(rain) %\", symbol: \"cloud.rain.fill\"))"
+  ]
+ },
+ {
+  "key": "Ressenti %@ · ↑%@ ↓%@",
+  "placeholders": 3,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:129: tile.detail = tr(\"Ressenti \\(Fmt.temperature(weather.apparentTemperature, unit: unit)) · ↑\\(Fmt.temperature(weather.high, unit: unit)) ↓\\(Fmt.temperature(weather.low, unit: uni"
+  ]
+ },
+ {
+  "key": "%@ %% de pluie",
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/WeatherTiles.swift:141: let rain = day.precipitationProbability.map { tr(\"\\($0) % de pluie\") }"
+  ]
+ },
+ {
+  "key": "Touche pour débloquer ce widget",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/WidgetCanvas.swift:143: Text(tr(\"Touche pour débloquer ce widget\"))"
+  ]
+ },
+ {
+  "key": "Entitlements",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/SharedStore.swift:61: return plist?[tr(\"Entitlements\")] as? [String: Any]"
+  ]
+ },
+ {
+  "key": "aucun groupe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:42: let groups = launch.groups.isEmpty ? tr(\"aucun groupe\") : launch.groups"
+  ]
+ },
+ {
+  "key": "aucun",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \"",
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \""
+  ]
+ },
+ {
+  "key": "signature : %@ · profil : %@(",
+  "placeholders": 2,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \""
+  ]
+ },
+ {
+  "key": "Inactif",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:61: return ProvisioningProfile.appGroups().isEmpty ? tr(\"Inactif (aucun groupe)\") : tr(\"Inactif\")"
+  ]
+ },
+ {
+  "key": "Inactif (aucun groupe)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:61: return ProvisioningProfile.appGroups().isEmpty ? tr(\"Inactif (aucun groupe)\") : tr(\"Inactif\")"
+  ]
+ },
+ {
+  "key": "Actif (groupe de l'installation)",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:63: return AppGroup.identifier == AppGroup.declaredIdentifier ? tr(\"Actif\") : tr(\"Actif (groupe de l'installation)\")"
+  ]
+ },
+ {
+  "key": "Cobalt",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:15: AccentSwatch(name: tr(\"Cobalt\"), hex: \"3366FF\"),"
+  ]
+ },
+ {
+  "key": "Ambre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:17: AccentSwatch(name: tr(\"Ambre\"), hex: \"F2A33A\"),"
+  ]
+ },
+ {
+  "key": "Lilas",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:18: AccentSwatch(name: tr(\"Lilas\"), hex: \"8C6CFF\"),"
+  ]
+ },
+ {
+  "key": "Olive",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:20: AccentSwatch(name: tr(\"Olive\"), hex: \"7FA33A\"),"
+  ]
+ },
+ {
+  "key": "Ardoise",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:21: AccentSwatch(name: tr(\"Ardoise\"), hex: \"6B7280\"),",
+   "Shared/Theme/Theme.swift:438: id: .chalk, name: tr(\"Ardoise\"), tagline: tr(\"Tableau noir et craie\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Nuit",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:26: AccentSwatch(name: tr(\"Nuit\"), hex: \"111318\"),"
+  ]
+ },
+ {
+  "key": "Encre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:27: AccentSwatch(name: tr(\"Encre\"), hex: \"1B2340\"),"
+  ]
+ },
+ {
+  "key": "Bordeaux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:29: AccentSwatch(name: tr(\"Bordeaux\"), hex: \"4A1628\"),"
+  ]
+ },
+ {
+  "key": "Brume",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:31: AccentSwatch(name: tr(\"Brume\"), hex: \"DDE3EA\"),",
+   "Shared/Theme/Theme.swift:447: id: .mist, name: tr(\"Brume\"), tagline: tr(\"Pâle, léger, presque translucide\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Blanc",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Palette.swift:34: AccentSwatch(name: tr(\"Blanc\"), hex: \"FFFFFF\"),"
+  ]
+ },
+ {
+  "key": "Suit le mode clair ou sombre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:100: id: .minimal, name: tr(\"Minimal\"), tagline: tr(\"Suit le mode clair ou sombre\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Toujours lumineux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:109: id: .light, name: tr(\"Clair\"), tagline: tr(\"Toujours lumineux\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Toujours sombre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:117: id: .dark, name: tr(\"Sombre\"), tagline: tr(\"Toujours sombre\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Noir, blanc, rien d'autre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:125: id: .monochrome, name: tr(\"Monochrome\"), tagline: tr(\"Noir, blanc, rien d'autre\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Translucide et lumineux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:133: id: .glass, name: tr(\"Verre\"), tagline: tr(\"Translucide et lumineux\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Un dégradé bleu nuit vers turquoise",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:141: id: .aurora, name: tr(\"Aurore\"), tagline: tr(\"Un dégradé bleu nuit vers turquoise\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Serif et reflets dorés",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:149: id: .elegant, name: tr(\"Élégant\"), tagline: tr(\"Serif et reflets dorés\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Élégant",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:149: id: .elegant, name: tr(\"Élégant\"), tagline: tr(\"Serif et reflets dorés\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Digital",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:157: id: .digital, name: tr(\"Digital\"), tagline: tr(\"Écran à cristaux liquides\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Écran à cristaux liquides",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:157: id: .digital, name: tr(\"Digital\"), tagline: tr(\"Écran à cristaux liquides\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Papier chaud et typo ronde",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:165: id: .retro, name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Futuriste",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:173: id: .futuristic, name: tr(\"Futuriste\"), tagline: tr(\"Néon cyan sur nuit profonde\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Néon cyan sur nuit profonde",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:173: id: .futuristic, name: tr(\"Futuriste\"), tagline: tr(\"Néon cyan sur nuit profonde\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "De grands chiffres, en serif",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:181: id: .typography, name: tr(\"Typo\"), tagline: tr(\"De grands chiffres, en serif\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Typo",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:181: id: .typography, name: tr(\"Typo\"), tagline: tr(\"De grands chiffres, en serif\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Ta couleur en plein fond",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:190: id: .colorful, name: tr(\"Couleur\"), tagline: tr(\"Ta couleur en plein fond\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Moderne",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:208: id: .modern, name: tr(\"Moderne\"), tagline: tr(\"Net, doux, pastilles d'icônes\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Net, doux, pastilles d'icônes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:208: id: .modern, name: tr(\"Moderne\"), tagline: tr(\"Net, doux, pastilles d'icônes\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Carte",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:218: id: .card, name: tr(\"Carte\"), tagline: tr(\"Le contenu posé sur une carte\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Le contenu posé sur une carte",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:218: id: .card, name: tr(\"Carte\"), tagline: tr(\"Le contenu posé sur une carte\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Formes rondes, tons tendres",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:228: id: .soft, name: tr(\"Doux\"), tagline: tr(\"Formes rondes, tons tendres\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Compact",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:238: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Plus d'infos, moins d'espace",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:238: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Liquid Glass",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:248: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Verre liquide et reflets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:248: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Graphite, argent, fin liseré",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:260: id: .premium, name: tr(\"Premium\"), tagline: tr(\"Graphite, argent, fin liseré\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Ta couleur en dégradé vif",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:271: id: .gradient, name: tr(\"Dégradé\"), tagline: tr(\"Ta couleur en dégradé vif\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Lueurs roses sur fond noir",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:280: id: .neon, name: tr(\"Néon\"), tagline: tr(\"Lueurs roses sur fond noir\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Serif, papier et capitales",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:289: id: .editorial, name: tr(\"Éditorial\"), tagline: tr(\"Serif, papier et capitales\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Magazine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:301: id: .magazine, name: tr(\"Magazine\"), tagline: tr(\"Un grand chiffre, comme une une\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Un grand chiffre, comme une une",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:301: id: .magazine, name: tr(\"Magazine\"), tagline: tr(\"Un grand chiffre, comme une une\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Petites cartes, tout d'un coup d'œil",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:311: id: .dashboard, name: tr(\"Tableau de bord\"), tagline: tr(\"Petites cartes, tout d'un coup d'œil\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Tableau de bord",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:311: id: .dashboard, name: tr(\"Tableau de bord\"), tagline: tr(\"Petites cartes, tout d'un coup d'œil\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Audacieux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:320: id: .bold, name: tr(\"Audacieux\"), tagline: tr(\"Chiffres énormes, couleur pleine\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Chiffres énormes, couleur pleine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:320: id: .bold, name: tr(\"Audacieux\"), tagline: tr(\"Chiffres énormes, couleur pleine\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Data",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:329: id: .data, name: tr(\"Data\"), tagline: tr(\"Grille, mono et courbes\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Grille, mono et courbes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:329: id: .data, name: tr(\"Data\"), tagline: tr(\"Grille, mono et courbes\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Luxe",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:338: id: .luxury, name: tr(\"Luxe\"), tagline: tr(\"Noir profond et or\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Noir et jaune fluo, énergie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:347: id: .sport, name: tr(\"Sport\"), tagline: tr(\"Noir et jaune fluo, énergie\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Marine, sobre et aligné",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:356: id: .business, name: tr(\"Business\"), tagline: tr(\"Marine, sobre et aligné\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Ta couleur sur noir, lignes d'écran",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:368: id: .terminal, name: tr(\"Terminal\"), tagline: tr(\"Ta couleur sur noir, lignes d'écran\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Bleu d'architecte et grille",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:377: id: .blueprint, name: tr(\"Plan\"), tagline: tr(\"Bleu d'architecte et grille\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Plan",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:377: id: .blueprint, name: tr(\"Plan\"), tagline: tr(\"Bleu d'architecte et grille\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Couleurs de dragée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:389: id: .pastel, name: tr(\"Pastel\"), tagline: tr(\"Couleurs de dragée\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Papier crème et encre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:399: id: .paper, name: tr(\"Papier\"), tagline: tr(\"Papier crème et encre\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Bord épais, noir sur blanc",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:408: id: .brutalist, name: tr(\"Brutaliste\"), tagline: tr(\"Bord épais, noir sur blanc\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Brutaliste",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:408: id: .brutalist, name: tr(\"Brutaliste\"), tagline: tr(\"Bord épais, noir sur blanc\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Carbone",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:420: id: .carbon, name: tr(\"Carbone\"), tagline: tr(\"Fibre sombre et relief\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Fibre sombre et relief",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:420: id: .carbon, name: tr(\"Carbone\"), tagline: tr(\"Fibre sombre et relief\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Rose et bleu rétro-futur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:429: id: .vapor, name: tr(\"Vapor\"), tagline: tr(\"Rose et bleu rétro-futur\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Vapor",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:429: id: .vapor, name: tr(\"Vapor\"), tagline: tr(\"Rose et bleu rétro-futur\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Tableau noir et craie",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:438: id: .chalk, name: tr(\"Ardoise\"), tagline: tr(\"Tableau noir et craie\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Pâle, léger, presque translucide",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:447: id: .mist, name: tr(\"Brume\"), tagline: tr(\"Pâle, léger, presque translucide\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Mon widget",
+  "placeholders": 0,
+  "uses": [
+   "Widgets/QuickWidget.swift:14: .configurationDisplayName(tr(\"Mon widget\"))"
+  ]
+ },
+ {
+  "key": "Ton dernier widget enregistré dans Tessera, sans aucun réglage.",
+  "placeholders": 0,
+  "uses": [
+   "Widgets/QuickWidget.swift:15: .description(tr(\"Ton dernier widget enregistré dans Tessera, sans aucun réglage.\"))"
+  ]
+ },
+ {
+  "key": "Série %@/%@",
+  "placeholders": 2,
+  "uses": [
+   "Widgets/WorkoutLiveActivityWidget.swift:23: Text(tr(\"Série \\(state.setNumber)/\\(state.sets)\"))"
+  ]
+ }
+]

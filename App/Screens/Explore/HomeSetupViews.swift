@@ -601,7 +601,7 @@ struct HomeSetupSheet: View {
                     widgetsSection
                     wallpaperSection
                     if let installed {
-                        Label(installed == setup.widgets.count ? tr("Widgets ajoutés à Mes widgets") : tr("\(Fmt.plural(installed, tr("widget ajouté"), tr("widgets ajoutés"))) (limite de la version gr)atuite)", systemImage: "checkmark.circle.fill")
+                        Label(installed == setup.widgets.count ? tr("Widgets ajoutés à Mes widgets") : tr("\(Fmt.plural(installed, tr("widget ajouté"), tr("widgets ajoutés"))) (limite de la version gratuite)"), systemImage: "checkmark.circle.fill")
                             .foregroundStyle(.green)
                             .font(.subheadline.weight(.semibold))
                     }
