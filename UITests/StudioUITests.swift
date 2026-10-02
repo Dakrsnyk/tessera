@@ -60,7 +60,9 @@ final class StudioUITests: XCTestCase {
             index += target > index ? 1 : -1
             let identifier = "studio-\(Self.sections[index])"
             app.buttons[identifier].firstMatch.tap()
-            XCTAssertTrue(waitForSelection(identifier), "La section \(Self.sections[index]) ne s'ouvre pas", file: file, line: line)
+            // A chip at the edge of the bar can miss its first tap while the bar is still moving.
+            if !waitForSelection(identifier) { app.buttons[identifier].firstMatch.tap() }
+            XCTAssertTrue(waitForSelection(identifier),"La section \(Self.sections[index]) ne s'ouvre pas", file: file, line: line)
         }
     }
 
