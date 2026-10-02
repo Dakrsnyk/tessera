@@ -23,7 +23,7 @@ struct DailySection: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Mon Quotidien".uppercased())
+                    Text(tr("Mon Quotidien").uppercased())
                         .font(.caption.weight(.bold))
                         .tracking(1.1)
                         .foregroundStyle(Color.accentColor)
@@ -33,7 +33,7 @@ struct DailySection: View {
                 }
                 Spacer()
                 NavigationLink(value: HomeRoute.info) {
-                    Text("Mes données")
+                    Text(tr("Mes données"))
                         .font(.subheadline.weight(.semibold))
                 }
                 .accessibilityIdentifier("daily-data")
@@ -62,14 +62,14 @@ struct DailySection: View {
     /// Nothing entered yet: what « Mon Quotidien » will show, and where to start. No fake figure.
     private var emptyState: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("Ton quotidien apparaîtra ici", systemImage: "sun.max")
+            Label(tr("Ton quotidien apparaîtra ici"), systemImage: "sun.max")
                 .font(.headline)
-            Text("Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte.")
+            Text(tr("Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             NavigationLink(value: HomeRoute.info) {
-                Text("Ajouter mes informations")
+                Text(tr("Ajouter mes informations"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.onAccent)
                     .frame(maxWidth: .infinity, minHeight: 44)
@@ -92,7 +92,7 @@ private struct DailyTileView: View {
     var body: some View {
         switch tile {
         case let .nutrition(nutrition):
-            DailyPager(id: "nutrition", titles: ["Aujourd'hui", "Repas", "7 jours"], accentHex: "F08A24") { page in
+            DailyPager(id: "nutrition", titles: [tr("Aujourd'hui"), tr("Repas"), tr("7 jours")], accentHex: "F08A24") { page in
                 switch page {
                 case 1: NutritionMealsTile(nutrition: nutrition)
                 case 2: NutritionWeekTile(nutrition: nutrition)
@@ -100,23 +100,23 @@ private struct DailyTileView: View {
                 }
             }
         case let .workout(workout):
-            DailyPager(id: "workout", titles: ["Séance", "Semaine"], accentHex: "E5484D") { page in
+            DailyPager(id: "workout", titles: [tr("Séance"), tr("Semaine")], accentHex: "E5484D") { page in
                 if page == 1 { WorkoutWeekTile() } else { WorkoutDayTile(workout: workout) }
             }
         case let .classes(title, items): TimedListTile(title: title, symbol: "graduationcap.fill", colorHex: "D6409F", items: items, space: .student)
         case let .agenda(title, items): TimedListTile(title: title, symbol: "calendar", colorHex: "3366FF", items: items, space: .productivity)
         case let .habits(done, items): HabitsDayTile(done: done, items: items)
         case let .water(glasses, goal):
-            DailyPager(id: "water", titles: ["Aujourd'hui", "7 jours"], accentHex: "3A8DDE") { page in
+            DailyPager(id: "water", titles: [tr("Aujourd'hui"), tr("7 jours")], accentHex: "3A8DDE") { page in
                 if page == 1 { WaterWeekTile(goal: goal) } else { WaterDayTile(glasses: glasses, goal: goal) }
             }
         case let .steps(steps, goal):
-            DailyPager(id: "steps", titles: ["Aujourd'hui", "7 jours"], accentHex: "12A4B5") { page in
+            DailyPager(id: "steps", titles: [tr("Aujourd'hui"), tr("7 jours")], accentHex: "12A4B5") { page in
                 if page == 1 { StepsWeekTile(goal: goal) } else { StepsDayTile(steps: steps, goal: goal) }
             }
         case let .budget(spent, perDay): BudgetDayTile(spent: spent, perDayLeft: perDay)
         case let .weather(snapshot):
-            DailyPager(id: "weather", titles: ["Maintenant", "Prochaines heures"], accentHex: "3A8DDE") { page in
+            DailyPager(id: "weather", titles: [tr("Maintenant"), tr("Prochaines heures")], accentHex: "3A8DDE") { page in
                 if page == 1 { WeatherHoursTile(weather: snapshot) } else { WeatherDayTile(weather: snapshot) }
             }
         case let .reminders(items): RemindersDayTile(items: items)
@@ -194,14 +194,14 @@ private struct NutritionDayTile: View {
                             Text(TF.int(abs(left)))
                                 .font(.title3.weight(.bold))
                                 .monospacedDigit()
-                            Text(left >= 0 ? "kcal restantes" : "kcal en trop")
+                            Text(left >= 0 ? tr("kcal restantes") : tr("kcal en trop"))
                                 .font(.system(size: 10))
                                 .foregroundStyle(.secondary)
                         } else {
                             Text(TF.int(nutrition.eaten.kcal))
                                 .font(.title3.weight(.bold))
                                 .monospacedDigit()
-                            Text("kcal mangées")
+                            Text(tr("kcal mangées"))
                                 .font(.system(size: 10))
                                 .foregroundStyle(.secondary)
                         }
@@ -212,18 +212,18 @@ private struct NutritionDayTile: View {
                 .frame(width: 96, height: 96)
                 VStack(alignment: .leading, spacing: 7) {
                     HStack {
-                        Label("Nutrition", systemImage: "fork.knife")
+                        Label(tr("Nutrition"), systemImage: "fork.knife")
                             .font(.caption.weight(.bold))
                             .foregroundStyle(accent)
                         Spacer()
-                        Text(nutrition.knowsKcal ? "\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal))" : "Objectif à définir")
+                        Text(nutrition.knowsKcal ? "\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal))" : tr("Objectif à définir"))
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
                     }
-                    macro("Protéines", nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, "E5484D")
-                    macro("Glucides", nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, "F2A33A")
-                    macro("Lipides", nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, "3366FF")
+                    macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, "E5484D")
+                    macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, "F2A33A")
+                    macro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, "3366FF")
                 }
             }
             .contentShape(Rectangle())
@@ -234,7 +234,7 @@ private struct NutritionDayTile: View {
                 Button {
                     router.isFoodScanPresented = true
                 } label: {
-                    Label("Scanner", systemImage: "barcode.viewfinder")
+                    Label(tr("Scanner"), systemImage: "barcode.viewfinder")
                         .font(.subheadline.weight(.bold))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity, minHeight: 38)
@@ -254,7 +254,7 @@ private struct NutritionDayTile: View {
                 .buttonStyle(.plain)
             }
             if let meal = nutrition.nextMeal, let kcal = nutrition.nextMealKcal, kcal > 0 {
-                Text("Prochain repas : \(meal.lowercased()), environ \(TF.int(kcal)) kcal")
+                Text(tr("Prochain repas : \(meal.lowercased()), environ \(TF.int(kcal)) kcal"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -266,7 +266,7 @@ private struct NutritionDayTile: View {
     }
 
     private var mealsText: String {
-        nutrition.foods == 0 ? "Rien noté" : Fmt.plural(nutrition.meals, "repas", "repas")
+        nutrition.foods == 0 ? tr("Rien noté") : Fmt.plural(nutrition.meals, tr("repas"), tr("repas"))
     }
 
     private func macro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String) -> some View {
@@ -298,11 +298,11 @@ private struct WorkoutDayTile: View {
                     .font(.title3.weight(.bold))
                     .lineLimit(2)
                     .minimumScaleFactor(0.8)
-                Text("\(Fmt.plural(workout.exercises.count, "exercice", "exercices")) · \(Fmt.plural(workout.totalSets, "série", "séries"))")
+                Text("\(Fmt.plural(workout.exercises.count, tr("exercice"), tr("exercices"))) · \(Fmt.plural(workout.totalSets, tr("série"), tr("séries")))")
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.7))
                 Spacer(minLength: 4)
-                actionButton("Commencer") {
+                actionButton(tr("Commencer")) {
                     model.update(\.fitness) { state in
                         if let routine = state.routine(for: Date()) { state.startSession(routine, at: Date()) }
                     }
@@ -311,7 +311,7 @@ private struct WorkoutDayTile: View {
                 Text(exercise)
                     .font(.headline)
                     .lineLimit(1)
-                Text("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? "\(ProfileNumberField.format(weight)) kg" : "poids du corps")")
+                Text(tr("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("poids du corps)"))")
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.75))
                 if let restEndsAt, restEndsAt > Date() {
@@ -321,7 +321,7 @@ private struct WorkoutDayTile: View {
                         .foregroundStyle(Color(hex: "FF8A8D"))
                 }
                 Spacer(minLength: 4)
-                actionButton("Série faite") {
+                actionButton(tr("Série faite")) {
                     model.update(\.fitness) { $0.completeNextSet(at: Date()) }
                     Haptics.tap()
                 }
@@ -329,16 +329,16 @@ private struct WorkoutDayTile: View {
                 Text(workout.name)
                     .font(.title3.weight(.bold))
                     .lineLimit(1)
-                Label("Faite · \(Fmt.plural(sets, "série", "séries"))", systemImage: "checkmark.circle.fill")
+                Label(tr("Faite · \(Fmt.plural(sets, tr("série"), tr("sér)ies")))", systemImage: "checkmark.circle.fill")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(Color(hex: "7FD6A8"))
                 if volume > 0 {
-                    Text("\(TF.int(volume)) kg soulevés")
+                    Text(tr("\(TF.int(volume)) kg soulevés"))
                         .font(.caption)
                         .foregroundStyle(.white.opacity(0.7))
                 }
             case let .rest(nextName, nextDay):
-                Text("Repos aujourd'hui")
+                Text(tr("Repos aujourd'hui"))
                     .font(.headline)
                 if let nextName, let nextDay {
                     Text("\(nextDay) : \(nextName)")
@@ -353,10 +353,10 @@ private struct WorkoutDayTile: View {
 
     private var title: String {
         switch workout.stage {
-        case .inProgress: "Séance en cours"
-        case .done: "Séance du jour"
-        case .rest: "Sport"
-        case .planned: "Séance du jour"
+        case .inProgress: tr("Séance en cours")
+        case .done: tr("Séance du jour")
+        case .rest: tr("Sport")
+        case .planned: tr("Séance du jour")
         }
     }
 
@@ -414,7 +414,7 @@ private struct HabitsDayTile: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        DayCard(title: "Habitudes", symbol: "repeat", colorHex: "5C8424", route: .page(.planningHabits)) {
+        DayCard(title: tr("Habitudes"), symbol: "repeat", colorHex: "5C8424", route: .page(.planningHabits)) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text("\(done)")
                     .font(.title.weight(.bold))
@@ -444,12 +444,12 @@ private struct WaterDayTile: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        DayCard(title: "Eau", symbol: "drop.fill", colorHex: "3A8DDE") {
+        DayCard(title: tr("Eau"), symbol: "drop.fill", colorHex: "3A8DDE") {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text("\(glasses)")
                     .font(.title.weight(.bold))
                     .contentTransition(.numericText())
-                Text(goal.map { "/\($0) verres" } ?? (glasses > 1 ? " verres" : " verre"))
+                Text(goal.map { tr("/\($0) verres") } ?? (glasses > 1 ? tr(" verres") : tr(" verre")))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.secondary)
             }
@@ -461,7 +461,7 @@ private struct WaterDayTile: View {
                 withAnimation(.snappy) { model.updateContent { $0.hydration.add(1, on: Date()) } }
                 Haptics.tap()
             } label: {
-                Label("Un verre", systemImage: "plus")
+                Label(tr("Un verre"), systemImage: "plus")
                     .font(.subheadline.weight(.bold))
                     .foregroundStyle(Color(hex: "3A8DDE"))
                     .frame(maxWidth: .infinity, minHeight: 34)
@@ -479,7 +479,7 @@ private struct StepsDayTile: View {
     let goal: Int?
 
     var body: some View {
-        DayCard(title: "Pas", symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
+        DayCard(title: tr("Pas"), symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text(Fmt.number(steps))
                     .font(.title2.weight(.bold))
@@ -494,7 +494,7 @@ private struct StepsDayTile: View {
             if let goal {
                 BarView(progress: Double(steps) / Double(max(1, goal)), color: Color(hex: "12A4B5"), track: Color(hex: "12A4B5").opacity(0.15), height: 6)
             } else {
-                Text("Objectif à définir")
+                Text(tr("Objectif à définir"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -510,17 +510,17 @@ private struct BudgetDayTile: View {
 
     var body: some View {
         let currency = model.settings.currencyCode
-        DayCard(title: "Budget", symbol: "creditcard.fill", colorHex: "2F8F7A", route: .space(.budget)) {
+        DayCard(title: tr("Budget"), symbol: "creditcard.fill", colorHex: "2F8F7A", route: .space(.budget)) {
             if let perDayLeft {
                 Text(TF.money(perDayLeft, currency))
                     .font(.title2.weight(.bold))
                     .minimumScaleFactor(0.7)
                     .lineLimit(1)
-                Text("à dépenser par jour d'ici la fin du mois")
+                Text(tr("à dépenser par jour d'ici la fin du mois"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-            Text("Dépensé aujourd'hui : \(TF.money(spent, currency))")
+            Text(tr("Dépensé aujourd'hui : \(TF.money(spent, currency))"))
                 .font(perDayLeft == nil ? .headline : .caption.weight(.semibold))
                 .foregroundStyle(perDayLeft == nil ? .primary : .secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -543,7 +543,7 @@ private struct WeatherDayTile: View {
             }
             Text(WeatherCode.description(weather.code))
                 .font(.caption.weight(.semibold))
-            Text("Max \(Fmt.temperature(weather.high, unit: model.settings.temperatureUnit)) · Min \(Fmt.temperature(weather.low, unit: model.settings.temperatureUnit))")
+            Text(tr("Max \(Fmt.temperature(weather.high, unit: model.settings.temperatureUnit)) · Min \(Fmt.temperature(weather.low, unit: model.settings.temperatureUnit))"))
                 .font(.caption)
                 .foregroundStyle(.secondary)
             if let rain = rainHint {
@@ -560,7 +560,7 @@ private struct WeatherDayTile: View {
     private var rainHint: String? {
         let now = Date()
         guard let hour = weather.hourly.first(where: { $0.date > now && DateMath.isSameDay($0.date, now) && ($0.precipitationProbability ?? 0) >= 50 }) else { return nil }
-        return "Pluie probable vers \(Fmt.time(hour.date, uses24Hour: true))"
+        return tr("Pluie probable vers \(Fmt.time(hour.date, uses24Hour: true))")
     }
 }
 
@@ -568,7 +568,7 @@ private struct RemindersDayTile: View {
     let items: [DailyBrief.Reminder]
 
     var body: some View {
-        DayCard(title: "À ne pas oublier", symbol: "bell.fill", colorHex: "4B5563") {
+        DayCard(title: tr("À ne pas oublier"), symbol: "bell.fill", colorHex: "4B5563") {
             VStack(alignment: .leading, spacing: 7) {
                 ForEach(items) { item in
                     if let route = item.route {
@@ -596,7 +596,7 @@ private struct RemindersDayTile: View {
             Spacer(minLength: 8)
             Text(item.when)
                 .font(.caption)
-                .foregroundStyle(item.when == "En retard" ? Color.red : .secondary)
+                .foregroundStyle(item.when == tr("En retard") ? Color.red : .secondary)
                 .lineLimit(1)
             if item.route != nil {
                 Image(systemName: "chevron.right").font(.caption2.weight(.bold)).foregroundStyle(.tertiary)
@@ -611,7 +611,7 @@ private struct PrioritiesDayTile: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        DayCard(title: "Top 3", symbol: "3.circle.fill", colorHex: "6B7280", route: .space(.productivity)) {
+        DayCard(title: tr("Top 3"), symbol: "3.circle.fill", colorHex: "6B7280", route: .space(.productivity)) {
             VStack(alignment: .leading, spacing: 6) {
                 ForEach(items) { item in
                     Button {
@@ -660,7 +660,7 @@ private struct InviteDayTile: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 Spacer(minLength: 6)
-                Text("Ajouter")
+                Text(tr("Ajouter"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color.accentColor)
             }
@@ -677,12 +677,12 @@ private struct InviteDayTile: View {
 
     private var invitation: String {
         switch area {
-        case .nutrition: "Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici."
-        case .fitness: "Crée ton programme : ta séance du jour apparaîtra ici."
-        case .student: "Ajoute tes cours : ton horaire du jour apparaîtra ici."
-        case .budget: "Donne ton budget du mois pour voir ce qu'il te reste chaque jour."
-        case .habits: "Ajoute une habitude à suivre chaque jour."
-        case .productivity: "Ajoute tes tâches ou ton top 3 du jour."
+        case .nutrition: tr("Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici.")
+        case .fitness: tr("Crée ton programme : ta séance du jour apparaîtra ici.")
+        case .student: tr("Ajoute tes cours : ton horaire du jour apparaîtra ici.")
+        case .budget: tr("Donne ton budget du mois pour voir ce qu'il te reste chaque jour.")
+        case .habits: tr("Ajoute une habitude à suivre chaque jour.")
+        case .productivity: tr("Ajoute tes tâches ou ton top 3 du jour.")
         default: area.items.first?.purpose ?? ""
         }
     }
@@ -696,7 +696,7 @@ private struct NutritionMealsTile: View {
 
     var body: some View {
         let state = model.nutrition
-        DayCard(title: "Repas du jour", symbol: "fork.knife", colorHex: "F08A24", route: .app(.nutrition)) {
+        DayCard(title: tr("Repas du jour"), symbol: "fork.knife", colorHex: "F08A24", route: .app(.nutrition)) {
             VStack(spacing: 6) {
                 ForEach(MealType.allCases) { meal in
                     let kcal = NutritionMath.totals(of: meal, state, on: Date()).kcal
@@ -704,7 +704,7 @@ private struct NutritionMealsTile: View {
                         Text(meal.title)
                             .font(.subheadline.weight(kcal > 0 ? .semibold : .regular))
                         Spacer()
-                        Text(kcal > 0 ? "\(TF.int(kcal)) kcal" : "—")
+                        Text(kcal > 0 ? tr("\(TF.int(kcal)) kcal") : "—")
                             .font(.subheadline)
                             .monospacedDigit()
                             .foregroundStyle(kcal > 0 ? .primary : .secondary)
@@ -712,9 +712,9 @@ private struct NutritionMealsTile: View {
                 }
                 Divider()
                 HStack {
-                    Text("Total").font(.subheadline.weight(.bold))
+                    Text(tr("Total")).font(.subheadline.weight(.bold))
                     Spacer()
-                    Text(nutrition.knowsKcal ? "\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal)) kcal" : "\(TF.int(nutrition.eaten.kcal)) kcal")
+                    Text(nutrition.knowsKcal ? tr("\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal)) kcal") : tr("\(TF.int(nutrition.eaten.kcal)) kcal"))
                         .font(.subheadline.weight(.bold))
                         .monospacedDigit()
                 }
@@ -731,9 +731,9 @@ private struct NutritionWeekTile: View {
     var body: some View {
         let days = NutritionMath.dailyCalories(model.nutrition, days: 7, until: Date())
         let logged = days.filter { $0 > 0 }
-        DayCard(title: "Calories · 7 jours", symbol: "chart.bar.fill", colorHex: "F08A24", route: .page(.nutritionHistory)) {
+        DayCard(title: tr("Calories · 7 jours"), symbol: "chart.bar.fill", colorHex: "F08A24", route: .page(.nutritionHistory)) {
             DailyWeekBars(values: days, goal: nutrition.knowsKcal ? nutrition.goals.kcal : nil, colorHex: "F08A24")
-            Text(logged.isEmpty ? "Rien noté cette semaine" : "Moyenne : \(TF.int(logged.reduce(0, +) / Double(logged.count))) kcal par jour noté")
+            Text(logged.isEmpty ? tr("Rien noté cette semaine") : tr("Moyenne : \(TF.int(logged.reduce(0, +) / Double(logged.count))) kcal par jour noté"))
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -752,11 +752,11 @@ private struct WorkoutWeekTile: View {
             session.isFinished && (week?.contains(session.start) ?? false)
         }
         let goal = state.weeklyGoal
-        DayCard(title: "Cette semaine", symbol: "calendar", colorHex: "E5484D", isDark: true, route: .space(.fitness)) {
+        DayCard(title: tr("Cette semaine"), symbol: "calendar", colorHex: "E5484D", isDark: true, route: .space(.fitness)) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text("\(done.count)")
                     .font(.title.weight(.bold))
-                Text("/\(goal) séances")
+                Text(tr("/\(goal) séances"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.white.opacity(0.7))
             }
@@ -770,7 +770,7 @@ private struct WorkoutWeekTile: View {
                         .frame(maxWidth: .infinity)
                 }
             }
-            Text(done.count >= goal ? "Objectif de la semaine atteint" : "Encore \(Fmt.plural(goal - done.count, "séance", "séances"))")
+            Text(done.count >= goal ? tr("Objectif de la semaine atteint") : tr("Encore \(Fmt.plural(goal - done.count, tr("séance"), tr("séan)ces")))")
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.75))
         }
@@ -787,11 +787,11 @@ private struct WaterWeekTile: View {
         let values = (0..<7).reversed().map { offset in
             Double(hydration.glasses(on: DateMath.calendar.date(byAdding: .day, value: -offset, to: Date()) ?? Date()))
         }
-        DayCard(title: "Eau · 7 jours", symbol: "drop.fill", colorHex: "3A8DDE") {
+        DayCard(title: tr("Eau · 7 jours"), symbol: "drop.fill", colorHex: "3A8DDE") {
             DailyWeekBars(values: values, goal: goal.map(Double.init), colorHex: "3A8DDE", height: 44)
             if let goal {
                 let reached = values.filter { $0 >= Double(goal) }.count
-                Text("Objectif atteint \(Fmt.plural(reached, "jour", "jours")) sur 7")
+                Text(tr("Objectif atteint \(Fmt.plural(reached, tr("jour"), tr("jours")))) sur 7")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -807,14 +807,14 @@ private struct StepsWeekTile: View {
     var body: some View {
         let days = counter.week.suffix(7)
         let values = days.map { Double($0.steps) }
-        DayCard(title: "Pas · 7 jours", symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
+        DayCard(title: tr("Pas · 7 jours"), symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
             if values.isEmpty {
-                Text("La semaine apparaîtra ici.")
+                Text(tr("La semaine apparaîtra ici."))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             } else {
                 DailyWeekBars(values: Array(values), goal: goal.map(Double.init), colorHex: "12A4B5", height: 44)
-                Text("Moyenne : \(Fmt.number(Int(values.reduce(0, +) / Double(values.count)))) pas")
+                Text(tr("Moyenne : \(Fmt.number(Int(values.reduce(0, +) / Double(values.count)))) pas"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -831,7 +831,7 @@ private struct WeatherHoursTile: View {
     var body: some View {
         let now = Date()
         let hours = weather.hourly.filter { $0.date > now }.prefix(5)
-        DayCard(title: "Prochaines heures", symbol: "clock", colorHex: "3A8DDE", route: .app(.weather)) {
+        DayCard(title: tr("Prochaines heures"), symbol: "clock", colorHex: "3A8DDE", route: .app(.weather)) {
             HStack(alignment: .top, spacing: 4) {
                 ForEach(Array(hours), id: \.date) { hour in
                     VStack(spacing: 4) {

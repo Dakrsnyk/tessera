@@ -20,7 +20,7 @@ enum SampleData {
 
     // MARK: Weather, events, content
 
-    static func weather(now: Date, name: String = "Montréal", shift: Double = 0) -> WeatherSnapshot {
+    static func weather(now: Date, name: String = tr("Montréal"), shift: Double = 0) -> WeatherSnapshot {
         let startHour = DateMath.calendar.dateInterval(of: .hour, for: now)?.start ?? now
         let rain = [0, 0, 5, 10, 20, 45, 70, 60, 35, 15, 5, 0, 0, 0, 10, 20, 30, 20, 10, 5, 0, 0, 0, 0]
         let hours = (0..<24).map { (offset: Int) -> HourForecast in
@@ -56,29 +56,29 @@ enum SampleData {
 
     static func events(now: Date) -> EventsResult {
         .ready([
-            EventSnapshot(id: "1", title: "Réunion d'équipe", start: now.addingTimeInterval(3_600), end: now.addingTimeInterval(5_400), isAllDay: false, colorHex: "3366FF"),
-            EventSnapshot(id: "2", title: "Dentiste", start: now.addingTimeInterval(4 * 3_600), end: now.addingTimeInterval(5 * 3_600), isAllDay: false, colorHex: "FF6B57"),
-            EventSnapshot(id: "3", title: "Souper avec Léa", start: now.addingTimeInterval(8 * 3_600), end: now.addingTimeInterval(10 * 3_600), isAllDay: false, colorHex: "2F8F7A"),
+            EventSnapshot(id: "1", title: tr("Réunion d'équipe"), start: now.addingTimeInterval(3_600), end: now.addingTimeInterval(5_400), isAllDay: false, colorHex: "3366FF"),
+            EventSnapshot(id: "2", title: tr("Dentiste"), start: now.addingTimeInterval(4 * 3_600), end: now.addingTimeInterval(5 * 3_600), isAllDay: false, colorHex: "FF6B57"),
+            EventSnapshot(id: "3", title: tr("Souper avec Léa"), start: now.addingTimeInterval(8 * 3_600), end: now.addingTimeInterval(10 * 3_600), isAllDay: false, colorHex: "2F8F7A"),
         ])
     }
 
     static func content(now: Date) -> ContentState {
         var content = ContentState()
         content.tasks = [
-            TaskItem(title: "Appeler le garage", priority: .medium, due: DateMath.startOfDay(now)),
-            TaskItem(title: "Envoyer la facture", priority: .high, due: day(0, 11, from: now), hasTime: true),
-            TaskItem(title: "Courir 5 km", isDone: true, completedAt: now, due: DateMath.startOfDay(now)),
-            TaskItem(title: "Lire 20 pages", due: DateMath.startOfDay(now), repeats: .daily),
-            TaskItem(title: "Payer le loyer", priority: .high, due: day(-1, 0, from: now)),
-            TaskItem(title: "Réserver le resto pour samedi", priority: .low, due: day(2, 0, from: now)),
-            TaskItem(title: "Trier les photos de vacances"),
+            TaskItem(title: tr("Appeler le garage"), priority: .medium, due: DateMath.startOfDay(now)),
+            TaskItem(title: tr("Envoyer la facture"), priority: .high, due: day(0, 11, from: now), hasTime: true),
+            TaskItem(title: tr("Courir 5 km"), isDone: true, completedAt: now, due: DateMath.startOfDay(now)),
+            TaskItem(title: tr("Lire 20 pages"), due: DateMath.startOfDay(now), repeats: .daily),
+            TaskItem(title: tr("Payer le loyer"), priority: .high, due: day(-1, 0, from: now)),
+            TaskItem(title: tr("Réserver le resto pour samedi"), priority: .low, due: day(2, 0, from: now)),
+            TaskItem(title: tr("Trier les photos de vacances")),
         ]
         func keys(_ offsets: [Int]) -> [String] { offsets.map { DateMath.dayKey(day(-$0, from: now)) } }
         content.habits = [
-            Habit(name: "Méditer", symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: keys(Array(0...11) + [13, 14, 16, 17, 18, 20, 22, 23, 25])),
-            Habit(name: "Sport", symbol: "figure.run", colorHex: "FF6B57", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),
-            Habit(name: "Lecture", symbol: "book.fill", colorHex: "2F8F7A", completedDays: keys([0, 1, 2, 3, 5, 6, 7, 9, 10, 12, 14, 15, 17, 19, 21, 22, 24, 26, 28])),
-            Habit(name: "Pas d'écran au lit", symbol: "moon.zzz.fill", colorHex: "3366FF", completedDays: keys([0, 2, 3, 6, 9, 10, 13, 17, 20, 24])),
+            Habit(name: tr("Méditer"), symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: keys(Array(0...11) + [13, 14, 16, 17, 18, 20, 22, 23, 25])),
+            Habit(name: tr("Sport"), symbol: "figure.run", colorHex: "FF6B57", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),
+            Habit(name: tr("Lecture"), symbol: "book.fill", colorHex: "2F8F7A", completedDays: keys([0, 1, 2, 3, 5, 6, 7, 9, 10, 12, 14, 15, 17, 19, 21, 22, 24, 26, 28])),
+            Habit(name: tr("Pas d'écran au lit"), symbol: "moon.zzz.fill", colorHex: "3366FF", completedDays: keys([0, 2, 3, 6, 9, 10, 13, 17, 20, 24])),
         ]
         content.hydration.add(5, on: now)
         return content
@@ -95,23 +95,23 @@ enum SampleData {
         data.portfolio = portfolio(now: now)
         data.prices = PriceBook(prices: ["bitcoin": 64_210, "ethereum": 3_180], changes: ["bitcoin": 2.4, "ethereum": -1.2, "XEQT": 0.6, "AAPL": 1.1])
         data.quotes = [
-            CoinQuote(id: "bitcoin", symbol: "BTC", name: "Bitcoin", price: 64_210, change24h: 2.4),
-            CoinQuote(id: "ethereum", symbol: "ETH", name: "Ethereum", price: 3_180, change24h: -1.2),
-            CoinQuote(id: "solana", symbol: "SOL", name: "Solana", price: 148, change24h: 5.6),
+            CoinQuote(id: "bitcoin", symbol: "BTC", name: tr("Bitcoin"), price: 64_210, change24h: 2.4),
+            CoinQuote(id: "ethereum", symbol: "ETH", name: tr("Ethereum"), price: 3_180, change24h: -1.2),
+            CoinQuote(id: "solana", symbol: "SOL", name: tr("Solana"), price: 148, change24h: 5.6),
         ]
         data.global = MarketGlobal(totalMarketCap: 2.35e12, change24h: 1.8, bitcoinDominance: 54.2, ethereumDominance: 12.1, fetchedAt: now)
-        let example = CompanyRef(cik: 1, ticker: "EXMP", name: "Exemple Inc.")
+        let example = CompanyRef(cik: 1, ticker: "EXMP", name: tr("Exemple Inc."))
         data.following = MarketsState()
-        data.following.followed = [example, CompanyRef(cik: 2, ticker: "DEMO", name: "Démo Corp"), CompanyRef(cik: 3, ticker: "TEST", name: "Test Industries")]
+        data.following.followed = [example, CompanyRef(cik: 2, ticker: "DEMO", name: tr("Démo Corp")), CompanyRef(cik: 3, ticker: "TEST", name: tr("Test Industries"))]
         data.companies = [
             company(example, base: 82e9, growth: 0.12, margin: 0.21, now: now),
-            company(CompanyRef(cik: 2, ticker: "DEMO", name: "Démo Corp"), base: 54e9, growth: 0.06, margin: 0.14, now: now),
-            company(CompanyRef(cik: 3, ticker: "TEST", name: "Test Industries"), base: 31e9, growth: 0.19, margin: 0.09, now: now),
+            company(CompanyRef(cik: 2, ticker: "DEMO", name: tr("Démo Corp")), base: 54e9, growth: 0.06, margin: 0.14, now: now),
+            company(CompanyRef(cik: 3, ticker: "TEST", name: tr("Test Industries")), base: 31e9, growth: 0.19, margin: 0.09, now: now),
         ]
         data.stocks = ["EXMP": StockQuote(symbol: "EXMP", price: 186.40, changePercent: 1.3, fetchedAt: now)]
         data.student = student(now: now)
         data.travel = travel(now: now, ongoing: ongoingTrip)
-        data.tripWeather = weather(now: now, name: "Lisbonne", shift: 6)
+        data.tripWeather = weather(now: now, name: tr("Lisbonne"), shift: 6)
         data.fx = FXRates(base: "CAD", rates: ["EUR": 0.66, "USD": 0.73, "GBP": 0.55, "JPY": 106.2, "CHF": 0.62, "MXN": 13.4], day: DateMath.dayKey(now), fetchedAt: now)
         data.car = car(now: now)
         data.productivity = productivity(now: now)
@@ -157,7 +157,7 @@ enum SampleData {
             }
         }
         if let oats = foods.item("builtin.oats"), let milk = foods.item("builtin.milk2"), let whey = foods.item("builtin.whey"), let banana = foods.item("builtin.banana") {
-            state.savedMeals = [SavedMeal(name: "Déjeuner protéiné", items: [
+            state.savedMeals = [SavedMeal(name: tr("Déjeuner protéiné"), items: [
                 SavedMeal.Item(food: oats, grams: 60), SavedMeal.Item(food: milk, grams: 250),
                 SavedMeal.Item(food: whey, grams: 30), SavedMeal.Item(food: banana, grams: 120),
             ])]
@@ -171,20 +171,20 @@ enum SampleData {
     static func fitness(now: Date) -> FitnessState {
         var state = FitnessState()
         state.bodyWeightKg = 75
-        let upper = Routine(name: "Haut du corps", exercises: [
-            ExerciseTemplate(name: "Développé couché", sets: 4, reps: 8, weight: 60, restSeconds: 120),
-            ExerciseTemplate(name: "Tractions", sets: 4, reps: 8, weight: 0, restSeconds: 90),
-            ExerciseTemplate(name: "Développé militaire", sets: 3, reps: 10, weight: 35, restSeconds: 90),
-            ExerciseTemplate(name: "Rowing haltère", sets: 3, reps: 10, weight: 24, restSeconds: 75),
+        let upper = Routine(name: tr("Haut du corps"), exercises: [
+            ExerciseTemplate(name: tr("Développé couché"), sets: 4, reps: 8, weight: 60, restSeconds: 120),
+            ExerciseTemplate(name: tr("Tractions"), sets: 4, reps: 8, weight: 0, restSeconds: 90),
+            ExerciseTemplate(name: tr("Développé militaire"), sets: 3, reps: 10, weight: 35, restSeconds: 90),
+            ExerciseTemplate(name: tr("Rowing haltère"), sets: 3, reps: 10, weight: 24, restSeconds: 75),
         ], weekdays: [1, 4])
-        let lower = Routine(name: "Bas du corps", exercises: [
-            ExerciseTemplate(name: "Squat", sets: 4, reps: 6, weight: 80, restSeconds: 150),
-            ExerciseTemplate(name: "Soulevé de terre roumain", sets: 3, reps: 8, weight: 70, restSeconds: 120),
-            ExerciseTemplate(name: "Fentes", sets: 3, reps: 10, weight: 20, restSeconds: 90),
+        let lower = Routine(name: tr("Bas du corps"), exercises: [
+            ExerciseTemplate(name: tr("Squat"), sets: 4, reps: 6, weight: 80, restSeconds: 150),
+            ExerciseTemplate(name: tr("Soulevé de terre roumain"), sets: 3, reps: 8, weight: 70, restSeconds: 120),
+            ExerciseTemplate(name: tr("Fentes"), sets: 3, reps: 10, weight: 20, restSeconds: 90),
         ], weekdays: [2, 5])
-        let full = Routine(name: "Full body", exercises: [
-            ExerciseTemplate(name: "Soulevé de terre", sets: 3, reps: 5, weight: 100, restSeconds: 180),
-            ExerciseTemplate(name: "Pompes", sets: 3, reps: 15, weight: 0, restSeconds: 60),
+        let full = Routine(name: tr("Full body"), exercises: [
+            ExerciseTemplate(name: tr("Soulevé de terre"), sets: 3, reps: 5, weight: 100, restSeconds: 180),
+            ExerciseTemplate(name: tr("Pompes"), sets: 3, reps: 15, weight: 0, restSeconds: 60),
         ], weekdays: [3, 6, 7])
         state.routines = [upper, lower, full]
         // Four weeks of history on the planned days.
@@ -218,9 +218,9 @@ enum SampleData {
         let cat = BudgetState.fixedID
         let dayOfMonth = DateMath.calendar.component(.day, from: now)
         let plan: [(Double, Int, String)] = [
-            (86.40, 1, "IGA"), (4.50, 2, "Café"), (32.00, 4, "Cinéma"), (112.75, 1, "Costco"), (3.75, 3, "Bus"),
-            (18.90, 2, "Lunch"), (64.20, 5, "Quincaillerie"), (41.30, 1, "Marché"), (27.00, 2, "Pizza"), (90.00, 3, "Passe mensuelle"),
-            (15.00, 4, "Musée"), (58.60, 1, "Épicerie"), (22.40, 2, "Resto"), (35.00, 6, "Cadeau"), (9.99, 6, "App"),
+            (86.40, 1, "IGA"), (4.50, 2, tr("Café")), (32.00, 4, tr("Cinéma")), (112.75, 1, tr("Costco")), (3.75, 3, tr("Bus")),
+            (18.90, 2, tr("Lunch")), (64.20, 5, tr("Quincaillerie")), (41.30, 1, tr("Marché")), (27.00, 2, tr("Pizza")), (90.00, 3, tr("Passe mensuelle")),
+            (15.00, 4, tr("Musée")), (58.60, 1, tr("Épicerie")), (22.40, 2, tr("Resto")), (35.00, 6, tr("Cadeau")), (9.99, 6, tr("App")),
         ]
         for (index, item) in plan.enumerated() {
             let dayNumber = min(dayOfMonth, 1 + index * 2)
@@ -237,11 +237,11 @@ enum SampleData {
         for back in 1...5 {
             guard let start = calendar.date(byAdding: .month, value: -back, to: monthStart) else { continue }
             let past: [(Double, Int, String, Int)] = [
-                (92 + Double(back * 7), 1, "Épicerie", 2), (118 - Double(back * 5), 1, "Costco", 9), (84 + Double(back * 3), 1, "IGA", 16), (101, 1, "Marché", 24),
-                (24 + Double(back * 4), 2, "Resto", 5), (46 - Double(back * 2), 2, "Brunch", 13), (31, 2, "Pizza", 21),
-                (90, 3, "Passe mensuelle", 1), (22 + Double(back), 3, "Taxi", 18),
-                (38 + Double(back * 6), 4, "Spectacle", 11), (19, 4, "Cinéma", 26),
-                (Double(40 + back * 13), 5, "Quincaillerie", 7), (27.5, 6, "Divers", 20),
+                (92 + Double(back * 7), 1, tr("Épicerie"), 2), (118 - Double(back * 5), 1, tr("Costco"), 9), (84 + Double(back * 3), 1, "IGA", 16), (101, 1, tr("Marché"), 24),
+                (24 + Double(back * 4), 2, tr("Resto"), 5), (46 - Double(back * 2), 2, tr("Brunch"), 13), (31, 2, tr("Pizza"), 21),
+                (90, 3, tr("Passe mensuelle"), 1), (22 + Double(back), 3, tr("Taxi"), 18),
+                (38 + Double(back * 6), 4, tr("Spectacle"), 11), (19, 4, tr("Cinéma"), 26),
+                (Double(40 + back * 13), 5, tr("Quincaillerie"), 7), (27.5, 6, tr("Divers"), 20),
             ]
             for item in past {
                 let date = start.addingTimeInterval(TimeInterval(item.3 - 1) * 86_400 + 13 * 3_600)
@@ -253,36 +253,36 @@ enum SampleData {
             guard let start = calendar.date(byAdding: .month, value: -back, to: monthStart) else { continue }
             for payDay in [1, 15] {
                 let date = start.addingTimeInterval(TimeInterval(payDay - 1) * 86_400 + 9 * 3_600)
-                if date <= now { state.addIncome(IncomeEntry(amount: 1_500, label: "Salaire", date: date)) }
+                if date <= now { state.addIncome(IncomeEntry(amount: 1_500, label: tr("Salaire"), date: date)) }
             }
             if back % 2 == 1 {
-                state.addIncome(IncomeEntry(amount: 350 + Double(back * 40), label: "Contrat de design", date: start.addingTimeInterval(19 * 86_400 + 15 * 3_600)))
+                state.addIncome(IncomeEntry(amount: 350 + Double(back * 40), label: tr("Contrat de design"), date: start.addingTimeInterval(19 * 86_400 + 15 * 3_600)))
             }
         }
         state.quickExpenses = [
-            QuickExpense(name: "Café", amount: 4.5, categoryID: cat(2), symbol: "cup.and.saucer.fill"),
-            QuickExpense(name: "Bus", amount: 3.75, categoryID: cat(3), symbol: "bus.fill"),
-            QuickExpense(name: "Lunch", amount: 15, categoryID: cat(2), symbol: "takeoutbag.and.cup.and.straw.fill"),
+            QuickExpense(name: tr("Café"), amount: 4.5, categoryID: cat(2), symbol: "cup.and.saucer.fill"),
+            QuickExpense(name: tr("Bus"), amount: 3.75, categoryID: cat(3), symbol: "bus.fill"),
+            QuickExpense(name: tr("Lunch"), amount: 15, categoryID: cat(2), symbol: "takeoutbag.and.cup.and.straw.fill"),
         ]
         state.bills = [
-            Bill(name: "Loyer", amount: 1_250, anchorDate: day(3, 0, from: now), symbol: "house.fill"),
-            Bill(name: "Hydro", amount: 86, anchorDate: day(9, 0, from: now), symbol: "bolt.fill"),
-            Bill(name: "Internet", amount: 70, anchorDate: day(12, 0, from: now), symbol: "wifi"),
-            Bill(name: "Netflix", amount: 16.99, anchorDate: day(5, 0, from: now), isSubscription: true, symbol: "play.tv.fill"),
-            Bill(name: "Spotify", amount: 11.99, anchorDate: day(15, 0, from: now), isSubscription: true, symbol: "music.note"),
+            Bill(name: tr("Loyer"), amount: 1_250, anchorDate: day(3, 0, from: now), symbol: "house.fill"),
+            Bill(name: tr("Hydro"), amount: 86, anchorDate: day(9, 0, from: now), symbol: "bolt.fill"),
+            Bill(name: tr("Internet"), amount: 70, anchorDate: day(12, 0, from: now), symbol: "wifi"),
+            Bill(name: tr("Netflix"), amount: 16.99, anchorDate: day(5, 0, from: now), isSubscription: true, symbol: "play.tv.fill"),
+            Bill(name: tr("Spotify"), amount: 11.99, anchorDate: day(15, 0, from: now), isSubscription: true, symbol: "music.note"),
             Bill(name: "iCloud+", amount: 3.99, anchorDate: day(1, 0, from: now), isSubscription: true, symbol: "icloud.fill"),
-            Bill(name: "Salle de sport", amount: 39.99, anchorDate: day(20, 0, from: now), isSubscription: true, symbol: "dumbbell.fill"),
+            Bill(name: tr("Salle de sport"), amount: 39.99, anchorDate: day(20, 0, from: now), isSubscription: true, symbol: "dumbbell.fill"),
         ]
         state.goals = [
-            SavingsGoal(name: "Voyage au Japon", target: 5_000, saved: 2_150, deadline: day(240, 0, from: now)),
-            SavingsGoal(name: "Fonds d'urgence", target: 10_000, saved: 6_400, deadline: nil),
+            SavingsGoal(name: tr("Voyage au Japon"), target: 5_000, saved: 2_150, deadline: day(240, 0, from: now)),
+            SavingsGoal(name: tr("Fonds d'urgence"), target: 10_000, saved: 6_400, deadline: nil),
         ]
         state.accounts = [
-            Account(name: "Compte chèque", balance: 2_350),
-            Account(name: "Épargne", balance: 6_400),
-            Account(name: "CELI", balance: 12_500),
-            Account(name: "Carte de crédit", balance: 850, isLiability: true),
-            Account(name: "Prêt auto", balance: 9_800, isLiability: true),
+            Account(name: tr("Compte chèque"), balance: 2_350),
+            Account(name: tr("Épargne"), balance: 6_400),
+            Account(name: tr("CELI"), balance: 12_500),
+            Account(name: tr("Carte de crédit"), balance: 850, isLiability: true),
+            Account(name: tr("Prêt auto"), balance: 9_800, isLiability: true),
         ]
         let worth = BudgetMath.netWorth(state)
         state.netWorthHistory = (0..<30).map { offset in
@@ -293,7 +293,7 @@ enum SampleData {
 
     static func business(now: Date) -> BusinessState {
         var state = BusinessState()
-        state.name = "Atelier Nova"
+        state.name = tr("Atelier Nova")
         state.monthlyGoal = 12_000
         for offset in 0..<62 {
             let date = day(-offset, 8, from: now)
@@ -303,19 +303,19 @@ enum SampleData {
             state.sales.append(SalesEntry(date: date, amount: max(90, amount), orders: orders, newCustomers: 1 + offset % 3, visitors: 160 + (offset * 13) % 90))
         }
         state.expenses = [
-            BusinessExpense(date: day(-2, from: now), amount: 900, label: "Publicité"),
-            BusinessExpense(date: day(-6, from: now), amount: 620, label: "Matériel"),
-            BusinessExpense(date: day(-9, from: now), amount: 49, label: "Hébergement"),
-            BusinessExpense(date: day(-12, from: now), amount: 310, label: "Frais de paiement"),
-            BusinessExpense(date: day(-15, from: now), amount: 1_450, label: "Sous-traitance"),
+            BusinessExpense(date: day(-2, from: now), amount: 900, label: tr("Publicité")),
+            BusinessExpense(date: day(-6, from: now), amount: 620, label: tr("Matériel")),
+            BusinessExpense(date: day(-9, from: now), amount: 49, label: tr("Hébergement")),
+            BusinessExpense(date: day(-12, from: now), amount: 310, label: tr("Frais de paiement")),
+            BusinessExpense(date: day(-15, from: now), amount: 1_450, label: tr("Sous-traitance")),
         ]
         let mrr: [Double] = [2_100, 2_380, 2_620, 2_890, 3_150, 3_420]
         state.subscriptions = mrr.enumerated().map { pair in
             SubscriptionSnapshot(month: DateMath.calendar.date(byAdding: .month, value: pair.offset - 5, to: now) ?? now, mrr: pair.element, subscribers: 70 + pair.offset * 8)
         }
         state.pinnedKPIs = [.revenue, .profit, .orders, .averageBasket, .conversion, .mrr]
-        var followers = CustomMetric(name: "Abonnés Instagram", target: 5_000)
-        var quotes = CustomMetric(name: "Devis envoyés", unit: "devis")
+        var followers = CustomMetric(name: tr("Abonnés Instagram"), target: 5_000)
+        var quotes = CustomMetric(name: tr("Devis envoyés"), unit: tr("devis"))
         for week in 0..<8 {
             let date = day(-7 * (7 - week), 18, from: now)
             followers.record(Double(3_120 + week * 145 + (week % 3) * 40), at: date)
@@ -328,11 +328,11 @@ enum SampleData {
     static func portfolio(now: Date) -> PortfolioState {
         var state = PortfolioState()
         state.holdings = [
-            Holding(kind: .etf, name: "iShares Core Equity", symbol: "XEQT", quantity: 120, costBasis: 3_300, manualPrice: 32.4),
-            Holding(kind: .stock, name: "Exemple Inc.", symbol: "EXMP", quantity: 15, costBasis: 2_450, manualPrice: 186.4),
-            Holding(kind: .crypto, name: "Bitcoin", symbol: "bitcoin", quantity: 0.08, costBasis: 4_200),
-            Holding(kind: .crypto, name: "Ethereum", symbol: "ethereum", quantity: 1.2, costBasis: 3_000),
-            Holding(kind: .cash, name: "Liquidités", symbol: "CAD", quantity: 1_500, costBasis: 1_500),
+            Holding(kind: .etf, name: tr("iShares Core Equity"), symbol: "XEQT", quantity: 120, costBasis: 3_300, manualPrice: 32.4),
+            Holding(kind: .stock, name: tr("Exemple Inc."), symbol: "EXMP", quantity: 15, costBasis: 2_450, manualPrice: 186.4),
+            Holding(kind: .crypto, name: tr("Bitcoin"), symbol: "bitcoin", quantity: 0.08, costBasis: 4_200),
+            Holding(kind: .crypto, name: tr("Ethereum"), symbol: "ethereum", quantity: 1.2, costBasis: 3_000),
+            Holding(kind: .cash, name: tr("Liquidités"), symbol: "CAD", quantity: 1_500, costBasis: 1_500),
         ]
         return state
     }
@@ -357,41 +357,41 @@ enum SampleData {
 
     static func student(now: Date) -> StudentState {
         var state = StudentState()
-        let math = Course(name: "Mathématiques", colorHex: "3366FF", teacher: "Mme Tremblay", credits: 3)
-        let bio = Course(name: "Biologie", colorHex: "D6409F", teacher: "M. Gagnon", credits: 3)
-        let history = Course(name: "Histoire", colorHex: "F2A33A", teacher: "Mme Roy", credits: 2)
-        let english = Course(name: "Anglais", colorHex: "1E9E75", teacher: "M. Smith", credits: 2)
+        let math = Course(name: tr("Mathématiques"), colorHex: "3366FF", teacher: tr("Mme Tremblay"), credits: 3)
+        let bio = Course(name: tr("Biologie"), colorHex: "D6409F", teacher: tr("M. Gagnon"), credits: 3)
+        let history = Course(name: tr("Histoire"), colorHex: "F2A33A", teacher: tr("Mme Roy"), credits: 2)
+        let english = Course(name: tr("Anglais"), colorHex: "1E9E75", teacher: tr("M. Smith"), credits: 2)
         state.courses = [math, bio, history, english]
         var slots: [ClassSlot] = []
         for weekday in 1...5 {
-            slots.append(ClassSlot(courseID: [math, bio, history, english, math][weekday - 1].id, weekday: weekday, startMinute: 8 * 60 + 30, endMinute: 10 * 60 + 20, room: ["B-204", "Labo 3", "A-110", "C-015", "B-204"][weekday - 1]))
-            slots.append(ClassSlot(courseID: [bio, english, math, history, bio][weekday - 1].id, weekday: weekday, startMinute: 13 * 60, endMinute: 14 * 60 + 50, room: ["Labo 3", "C-015", "B-204", "A-110", "Labo 1"][weekday - 1]))
-            slots.append(ClassSlot(courseID: [history, math, english, bio, english][weekday - 1].id, weekday: weekday, startMinute: 15 * 60, endMinute: 16 * 60 + 20, room: ["A-110", "B-204", "C-015", "Labo 3", "C-015"][weekday - 1]))
+            slots.append(ClassSlot(courseID: [math, bio, history, english, math][weekday - 1].id, weekday: weekday, startMinute: 8 * 60 + 30, endMinute: 10 * 60 + 20, room: ["B-204", tr("Labo 3"), "A-110", "C-015", "B-204"][weekday - 1]))
+            slots.append(ClassSlot(courseID: [bio, english, math, history, bio][weekday - 1].id, weekday: weekday, startMinute: 13 * 60, endMinute: 14 * 60 + 50, room: [tr("Labo 3"), "C-015", "B-204", "A-110", tr("Labo 1")][weekday - 1]))
+            slots.append(ClassSlot(courseID: [history, math, english, bio, english][weekday - 1].id, weekday: weekday, startMinute: 15 * 60, endMinute: 16 * 60 + 20, room: ["A-110", "B-204", "C-015", tr("Labo 3"), "C-015"][weekday - 1]))
         }
         state.slots = slots
         state.exams = [
-            Exam(courseID: bio.id, title: "Intra de biologie", date: day(6, 9, from: now), room: "Gymnase"),
-            Exam(courseID: math.id, title: "Examen final de maths", date: day(21, 13, 30, from: now), room: "B-204"),
+            Exam(courseID: bio.id, title: tr("Intra de biologie"), date: day(6, 9, from: now), room: tr("Gymnase")),
+            Exam(courseID: math.id, title: tr("Examen final de maths"), date: day(21, 13, 30, from: now), room: "B-204"),
         ]
         state.assignments = [
-            Assignment(courseID: bio.id, title: "Rapport de labo", due: day(2, 23, 59, from: now)),
-            Assignment(courseID: history.id, title: "Dissertation", due: day(5, 17, from: now)),
-            Assignment(courseID: math.id, title: "Exercices ch. 4", due: day(1, 9, from: now), isDone: true),
-            Assignment(courseID: english.id, title: "Oral en équipe", due: day(9, 10, from: now)),
+            Assignment(courseID: bio.id, title: tr("Rapport de labo"), due: day(2, 23, 59, from: now)),
+            Assignment(courseID: history.id, title: tr("Dissertation"), due: day(5, 17, from: now)),
+            Assignment(courseID: math.id, title: tr("Exercices ch. 4"), due: day(1, 9, from: now), isDone: true),
+            Assignment(courseID: english.id, title: tr("Oral en équipe"), due: day(9, 10, from: now)),
         ]
         state.grades = [
-            Grade(courseID: math.id, title: "Quiz 1", score: 17, maxScore: 20, weight: 10),
-            Grade(courseID: math.id, title: "Devoir 1", score: 82, maxScore: 100, weight: 15),
-            Grade(courseID: bio.id, title: "Labo 1", score: 88, maxScore: 100, weight: 15),
-            Grade(courseID: bio.id, title: "Quiz", score: 7, maxScore: 10, weight: 10),
-            Grade(courseID: history.id, title: "Exposé", score: 91, maxScore: 100, weight: 20),
-            Grade(courseID: english.id, title: "Rédaction", score: 76, maxScore: 100, weight: 20),
+            Grade(courseID: math.id, title: tr("Quiz 1"), score: 17, maxScore: 20, weight: 10),
+            Grade(courseID: math.id, title: tr("Devoir 1"), score: 82, maxScore: 100, weight: 15),
+            Grade(courseID: bio.id, title: tr("Labo 1"), score: 88, maxScore: 100, weight: 15),
+            Grade(courseID: bio.id, title: tr("Quiz"), score: 7, maxScore: 10, weight: 10),
+            Grade(courseID: history.id, title: tr("Exposé"), score: 91, maxScore: 100, weight: 20),
+            Grade(courseID: english.id, title: tr("Rédaction"), score: 76, maxScore: 100, weight: 20),
         ]
         state.cards = [
-            Flashcard(deck: "Biologie", front: "Mitochondrie", back: "Organite qui produit l'énergie de la cellule (ATP).", box: 2, due: now.addingTimeInterval(-600)),
-            Flashcard(deck: "Biologie", front: "Photosynthèse", back: "Production de glucose à partir de CO₂, d'eau et de lumière.", box: 1, due: now.addingTimeInterval(-300)),
-            Flashcard(deck: "Histoire", front: "1867", back: "Confédération canadienne.", box: 3, due: day(2, 0, from: now)),
-            Flashcard(deck: "Anglais", front: "To overcome", back: "Surmonter", box: 1, due: now.addingTimeInterval(-60)),
+            Flashcard(deck: tr("Biologie"), front: tr("Mitochondrie"), back: tr("Organite qui produit l'énergie de la cellule (ATP)."), box: 2, due: now.addingTimeInterval(-600)),
+            Flashcard(deck: tr("Biologie"), front: tr("Photosynthèse"), back: tr("Production de glucose à partir de CO₂, d'eau et de lumière."), box: 1, due: now.addingTimeInterval(-300)),
+            Flashcard(deck: tr("Histoire"), front: "1867", back: tr("Confédération canadienne."), box: 3, due: day(2, 0, from: now)),
+            Flashcard(deck: tr("Anglais"), front: tr("To overcome"), back: tr("Surmonter"), box: 1, due: now.addingTimeInterval(-60)),
         ]
         let week = DateMath.week(containing: now)
         for (index, date) in week.enumerated() where date <= now {
@@ -408,28 +408,28 @@ enum SampleData {
         let startOffset = ongoing ? -3 : 18
         let start = day(startOffset, 21, 30, from: now)
         let end = day(startOffset + 9, 18, from: now)
-        state.trips = [Trip(destination: "Lisbonne", start: start, end: end, timeZoneID: "Europe/Lisbon", currencyCode: "EUR", latitude: 38.72, longitude: -9.14)]
-        state.flights = [Flight(number: "TP 258", from: "YUL", to: "LIS", departure: start, arrival: start.addingTimeInterval(6.5 * 3600), terminal: "A", gate: "52", seat: "23C")]
-        state.stays = [Stay(name: "Hôtel Alfama", address: "Rua de São Miguel 12, Lisbonne", checkIn: day(startOffset + 1, 15, from: now), checkOut: day(startOffset + 9, 11, from: now), confirmation: "HX4821")]
+        state.trips = [Trip(destination: tr("Lisbonne"), start: start, end: end, timeZoneID: "Europe/Lisbon", currencyCode: "EUR", latitude: 38.72, longitude: -9.14)]
+        state.flights = [Flight(number: tr("TP 258"), from: "YUL", to: "LIS", departure: start, arrival: start.addingTimeInterval(6.5 * 3600), terminal: "A", gate: "52", seat: "23C")]
+        state.stays = [Stay(name: tr("Hôtel Alfama"), address: tr("Rua de São Miguel 12, Lisbonne"), checkIn: day(startOffset + 1, 15, from: now), checkOut: day(startOffset + 9, 11, from: now), confirmation: "HX4821")]
         let base = ongoing ? 0 : startOffset + 1
         state.activities = [
-            TripActivity(title: "Château Saint-Georges", date: day(base, ongoing ? 15 : 10, from: now), place: "Alfama"),
-            TripActivity(title: "Tram 28", date: day(base + 1, 11, from: now), place: "Martim Moniz"),
-            TripActivity(title: "Pastéis de Belém", date: day(base + 2, 15, from: now), place: "Belém"),
+            TripActivity(title: tr("Château Saint-Georges"), date: day(base, ongoing ? 15 : 10, from: now), place: tr("Alfama")),
+            TripActivity(title: tr("Tram 28"), date: day(base + 1, 11, from: now), place: tr("Martim Moniz")),
+            TripActivity(title: tr("Pastéis de Belém"), date: day(base + 2, 15, from: now), place: tr("Belém")),
         ]
         state.sampleAmount = 100
         let trip = state.trips[0]
         state.trips[0].budget = 3_200
         state.expenses = [
-            TripExpense(tripID: trip.id, amount: 1_180, currencyCode: "CAD", kind: .transport, label: "Billets d'avion", date: day(-40, 20, from: now)),
-            TripExpense(tripID: trip.id, amount: 896, currencyCode: "EUR", kind: .lodging, label: "Hôtel Alfama", date: day(-30, 20, from: now)),
+            TripExpense(tripID: trip.id, amount: 1_180, currencyCode: "CAD", kind: .transport, label: tr("Billets d'avion"), date: day(-40, 20, from: now)),
+            TripExpense(tripID: trip.id, amount: 896, currencyCode: "EUR", kind: .lodging, label: tr("Hôtel Alfama"), date: day(-30, 20, from: now)),
         ]
         if ongoing {
             state.expenses += [
-                TripExpense(tripID: trip.id, amount: 42.5, currencyCode: "EUR", kind: .food, label: "Souper à Alfama", date: day(-2, 21, from: now)),
-                TripExpense(tripID: trip.id, amount: 18, currencyCode: "EUR", kind: .transport, label: "Carte Viva Viagem", date: day(-2, 10, from: now)),
-                TripExpense(tripID: trip.id, amount: 15, currencyCode: "EUR", kind: .activities, label: "Château Saint-Georges", date: day(-1, 15, from: now)),
-                TripExpense(tripID: trip.id, amount: 31.8, currencyCode: "EUR", kind: .food, label: "Marché de Campo de Ourique", date: day(-1, 13, from: now)),
+                TripExpense(tripID: trip.id, amount: 42.5, currencyCode: "EUR", kind: .food, label: tr("Souper à Alfama"), date: day(-2, 21, from: now)),
+                TripExpense(tripID: trip.id, amount: 18, currencyCode: "EUR", kind: .transport, label: tr("Carte Viva Viagem"), date: day(-2, 10, from: now)),
+                TripExpense(tripID: trip.id, amount: 15, currencyCode: "EUR", kind: .activities, label: tr("Château Saint-Georges"), date: day(-1, 15, from: now)),
+                TripExpense(tripID: trip.id, amount: 31.8, currencyCode: "EUR", kind: .food, label: tr("Marché de Campo de Ourique"), date: day(-1, 13, from: now)),
             ]
         }
         state.addEssentials(to: trip.id, abroad: true)
@@ -441,7 +441,7 @@ enum SampleData {
 
     static func car(now: Date) -> CarState {
         var state = CarState()
-        state.name = "Civic 2019"
+        state.name = tr("Civic 2019")
         state.tankLiters = 47
         var odometer = 61_200.0
         for index in 0..<10 {
@@ -454,16 +454,16 @@ enum SampleData {
         state.readings = [OdometerReading(date: day(-1, 18, from: now), km: odometer + 180)]
         let current = odometer + 180
         state.services = [
-            ServiceItem(name: "Vidange d'huile", intervalKm: 8_000, intervalMonths: 6, lastKm: current - 6_400, lastDate: DateMath.calendar.date(byAdding: .month, value: -4, to: now), cost: 90),
-            ServiceItem(name: "Rotation des pneus", intervalKm: 10_000, intervalMonths: nil, lastKm: current - 3_100, lastDate: nil, cost: 40),
-            ServiceItem(name: "Plaquettes de frein", intervalKm: 40_000, intervalMonths: nil, lastKm: current - 21_000, lastDate: nil, cost: 320),
+            ServiceItem(name: tr("Vidange d'huile"), intervalKm: 8_000, intervalMonths: 6, lastKm: current - 6_400, lastDate: DateMath.calendar.date(byAdding: .month, value: -4, to: now), cost: 90),
+            ServiceItem(name: tr("Rotation des pneus"), intervalKm: 10_000, intervalMonths: nil, lastKm: current - 3_100, lastDate: nil, cost: 40),
+            ServiceItem(name: tr("Plaquettes de frein"), intervalKm: 40_000, intervalMonths: nil, lastKm: current - 21_000, lastDate: nil, cost: 320),
         ]
         let year = DateMath.calendar.component(.year, from: now)
         let winter = Holidays.make(year, 12, 1)
         state.deadlines = [
-            CarDeadline(title: "Pneus d'hiver", date: winter < now ? Holidays.make(year + 1, 12, 1) : winter, symbol: "snowflake"),
-            CarDeadline(title: "Immatriculation", date: day(64, 0, from: now), symbol: "doc.text.fill"),
-            CarDeadline(title: "Assurance auto", date: day(142, 0, from: now), symbol: "shield.fill"),
+            CarDeadline(title: tr("Pneus d'hiver"), date: winter < now ? Holidays.make(year + 1, 12, 1) : winter, symbol: "snowflake"),
+            CarDeadline(title: tr("Immatriculation"), date: day(64, 0, from: now), symbol: "doc.text.fill"),
+            CarDeadline(title: tr("Assurance auto"), date: day(142, 0, from: now), symbol: "shield.fill"),
         ]
         state.insuranceMonthly = 95
         state.loanMonthly = 320
@@ -476,18 +476,18 @@ enum SampleData {
         var state = ProductivityState()
         let today = DateMath.dayKey(now)
         state.priorities = [
-            PriorityItem(title: "Finir la présentation", doneDayKey: today),
-            PriorityItem(title: "Appeler le comptable"),
-            PriorityItem(title: "30 minutes de sport"),
+            PriorityItem(title: tr("Finir la présentation"), doneDayKey: today),
+            PriorityItem(title: tr("Appeler le comptable")),
+            PriorityItem(title: tr("30 minutes de sport")),
         ]
-        let tasks = ["Maquettes", "Textes", "Photos", "Paiement en ligne", "Tests", "Nom de domaine", "Annonce", "Mise en ligne"]
-        state.projects = [Project(name: "Lancement du site", colorHex: "3366FF", deadline: day(12, 17, from: now), tasks: tasks.enumerated().map { pair in
+        let tasks = [tr("Maquettes"), tr("Textes"), tr("Photos"), tr("Paiement en ligne"), tr("Tests"), tr("Nom de domaine"), tr("Annonce"), tr("Mise en ligne")]
+        state.projects = [Project(name: tr("Lancement du site"), colorHex: "3366FF", deadline: day(12, 17, from: now), tasks: tasks.enumerated().map { pair in
             ProjectTask(title: pair.element, isDone: pair.offset < 5, completedAt: pair.offset < 5 ? day(-pair.offset, from: now) : nil)
         })]
-        state.deadlines = [Deadline(title: "Rendu du rapport", date: day(2, 17, from: now))]
+        state.deadlines = [Deadline(title: tr("Rendu du rapport"), date: day(2, 17, from: now))]
         state.counters = [
-            CounterItem(name: "Cafés", symbol: "cup.and.saucer.fill", colorHex: "B7791F", step: 1, goal: 3, resetsDaily: true, total: 2, dayKey: today),
-            CounterItem(name: "Pompes", symbol: "figure.strengthtraining.functional", colorHex: "E5484D", step: 10, goal: 100, resetsDaily: true, total: 40, dayKey: today),
+            CounterItem(name: tr("Cafés"), symbol: "cup.and.saucer.fill", colorHex: "B7791F", step: 1, goal: 3, resetsDaily: true, total: 2, dayKey: today),
+            CounterItem(name: tr("Pompes"), symbol: "figure.strengthtraining.functional", colorHex: "E5484D", step: 10, goal: 100, resetsDaily: true, total: 40, dayKey: today),
         ]
         let week = DateMath.week(containing: now)
         for (index, date) in week.enumerated() where date <= now {

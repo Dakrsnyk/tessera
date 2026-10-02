@@ -13,16 +13,16 @@ struct StudiesTimetablePage: View {
         let state = model.student
         MiniAppScroll {
             if state.slots.isEmpty {
-                EmptyStateView(symbol: "calendar.day.timeline.left", title: "Ton horaire",
-                               message: state.courses.isEmpty ? "Ajoute d'abord un cours, puis ses plages de la semaine." : "Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accueil et dans ton planning.",
-                               actionTitle: state.courses.isEmpty ? "Ajouter un cours" : "Ajouter une plage") {
+                EmptyStateView(symbol: "calendar.day.timeline.left", title: tr("Ton horaire"),
+                               message: state.courses.isEmpty ? tr("Ajoute d'abord un cours, puis ses plages de la semaine.") : tr("Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accueil et dans ton planning."),
+                               actionTitle: state.courses.isEmpty ? tr("Ajouter un cours") : tr("Ajouter une plage")) {
                     sheet = state.courses.isEmpty ? StudiesSheet.course(Course(name: "")) : StudiesSheet.slot(Studies.newSlot(state))
                 }
                 .tint(Color(hex: Studies.accentHex))
             } else {
                 TimetableGrid(state: state, selected: $weekday) { sheet = .slot($0) }
                 dayList(state: state)
-                MiniActionButton(title: "Ajouter une plage", symbol: "plus", colorHex: Studies.accentHex, isProminent: false) {
+                MiniActionButton(title: tr("Ajouter une plage"), symbol: "plus", colorHex: Studies.accentHex, isProminent: false) {
                     var slot = Studies.newSlot(state)
                     slot.weekday = weekday
                     sheet = .slot(slot)
@@ -30,7 +30,7 @@ struct StudiesTimetablePage: View {
                 .accessibilityIdentifier("timetable-add")
             }
         }
-        .navigationTitle("Horaire")
+        .navigationTitle(tr("Horaire"))
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -38,17 +38,17 @@ struct StudiesTimetablePage: View {
     private func dayList(state: StudentState) -> some View {
         let slots = state.slots.filter { $0.weekday == weekday }.sorted { $0.startMinute < $1.startMinute }
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, "cours", "cours"))
+            MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr("cours"), tr("cours")))
             if slots.isEmpty {
-                Text("Pas de cours ce jour-là.").font(.subheadline).foregroundStyle(.secondary).card(padding: 14)
+                Text(tr("Pas de cours ce jour-là.")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)
             } else {
                 MiniRowsCard {
                     ForEach(Array(slots.enumerated()), id: \.element.id) { index, slot in
                         if index > 0 { MiniDivider() }
                         Button { sheet = .slot(slot) } label: {
                             MiniRow(symbol: "graduationcap.fill", colorHex: state.course(slot.courseID)?.colorHex ?? Studies.accentHex,
-                                    title: state.course(slot.courseID)?.name ?? "Cours",
-                                    detail: slot.room.isEmpty ? nil : "Salle \(slot.room)",
+                                    title: state.course(slot.courseID)?.name ?? tr("Cours"),
+                                    detail: slot.room.isEmpty ? nil : tr("Salle \(slot.room)"),
                                     value: "\(Studies.minuteText(slot.startMinute))–\(Studies.minuteText(slot.endMinute))", showsChevron: false)
                         }
                         .buttonStyle(.plain)
@@ -119,7 +119,7 @@ struct TimetableGrid: View {
             ForEach(state.slots.filter { $0.weekday == day }) { slot in
                 let hex = state.course(slot.courseID)?.colorHex ?? Studies.accentHex
                 Button { onTap(slot) } label: {
-                    Text(TF.shortName(state.course(slot.courseID)?.name ?? "Cours", words: 1))
+                    Text(TF.shortName(state.course(slot.courseID)?.name ?? tr("Cours"), words: 1))
                         .font(.system(size: 9, weight: .semibold))
                         .foregroundStyle(.white)
                         .lineLimit(2)
@@ -159,26 +159,26 @@ struct StudiesCoursesPage: View {
                     let ids = offsets.map { state.courses[$0].id }
                     model.update(\.student) { student in ids.forEach { student.deleteCourse($0) } }
                 }
-                Button { sheet = .course(Course(name: "")) } label: { Label("Nouveau cours", systemImage: "plus") }
+                Button { sheet = .course(Course(name: "")) } label: { Label(tr("Nouveau cours"), systemImage: "plus") }
                     .accessibilityIdentifier("courses-new")
             } footer: {
                 if !state.courses.isEmpty {
-                    Text("Supprimer un cours retire aussi ses plages de l'horaire ; ses notes, examens et devoirs restent.")
+                    Text(tr("Supprimer un cours retire aussi ses plages de l'horaire ; ses notes, examens et devoirs restent."))
                 }
             }
             Section {
-                DatePicker("Début", selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\.student) { $0.semesterStart = date } }), displayedComponents: .date)
-                DatePicker("Fin", selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\.student) { $0.semesterEnd = date } }), displayedComponents: .date)
+                DatePicker(tr("Début"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\.student) { $0.semesterStart = date } }), displayedComponents: .date)
+                DatePicker(tr("Fin"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\.student) { $0.semesterEnd = date } }), displayedComponents: .date)
             } header: {
-                Text("Session")
+                Text(tr("Session"))
             } footer: {
-                Text("Sert à suivre l'avancement de ta session.")
+                Text(tr("Sert à suivre l'avancement de ta session."))
             }
             .environment(\.locale, Fmt.locale)
         }
         .styledList()
         .tint(Color(hex: Studies.accentHex))
-        .navigationTitle("Cours")
+        .navigationTitle(tr("Cours"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -186,7 +186,7 @@ struct StudiesCoursesPage: View {
     private func courseDetail(_ course: Course, hours: Double) -> String {
         var parts: [String] = []
         if !course.teacher.isEmpty { parts.append(course.teacher) }
-        if hours > 0 { parts.append("\(Fmt.hours(hours)) / semaine") }
+        if hours > 0 { parts.append(tr("\(Fmt.hours(hours)) / semaine")) }
         return parts.joined(separator: " · ")
     }
 
@@ -235,24 +235,24 @@ struct StudiesCoursePage: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Menu {
-                            Button { sheet = .course(course) } label: { Label("Modifier le cours", systemImage: "pencil") }
-                            Button(role: .destructive) { confirmingDelete = true } label: { Label("Supprimer le cours", systemImage: "trash") }
+                            Button { sheet = .course(course) } label: { Label(tr("Modifier le cours"), systemImage: "pencil") }
+                            Button(role: .destructive) { confirmingDelete = true } label: { Label(tr("Supprimer le cours"), systemImage: "trash") }
                         } label: {
                             Image(systemName: "ellipsis.circle")
                         }
                         .accessibilityIdentifier("course-menu")
                     }
                 }
-                .confirmationDialog("Supprimer « \(course.name) » ?", isPresented: $confirmingDelete, titleVisibility: .visible) {
-                    Button("Supprimer le cours", role: .destructive) {
+                .confirmationDialog(tr("Supprimer « \(course.name) » ?"), isPresented: $confirmingDelete, titleVisibility: .visible) {
+                    Button(tr("Supprimer le cours"), role: .destructive) {
                         model.update(\.student) { $0.deleteCourse(courseID) }
                         if !router.homePath.isEmpty { router.homePath.removeLast() }
                     }
                 } message: {
-                    Text("Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours.")
+                    Text(tr("Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours."))
                 }
             } else {
-                ContentUnavailableView("Cours supprimé", systemImage: "books.vertical")
+                ContentUnavailableView(tr("Cours supprimé"), systemImage: "books.vertical")
             }
         }
         .navigationBarTitleDisplayMode(.large)
@@ -270,9 +270,9 @@ struct StudiesCoursePage: View {
                     .foregroundStyle(.secondary)
             }
             HStack(spacing: 10) {
-                MiniStat(title: "Moyenne", value: StudentMath.courseAverage(state, course: course.id).map { "\(TF.decimal($0, 1)) %" } ?? "–", colorHex: course.colorHex)
-                MiniStat(title: "Évalué", value: "\(TF.int(StudentMath.evaluatedWeight(state, course: course.id))) %", detail: "de la note finale")
-                MiniStat(title: "Étude", value: Fmt.minutes(Double(studied)), detail: "cette semaine")
+                MiniStat(title: tr("Moyenne"), value: StudentMath.courseAverage(state, course: course.id).map { "\(TF.decimal($0, 1)) %" } ?? "–", colorHex: course.colorHex)
+                MiniStat(title: tr("Évalué"), value: "\(TF.int(StudentMath.evaluatedWeight(state, course: course.id))) %", detail: tr("de la note finale"))
+                MiniStat(title: tr("Étude"), value: Fmt.minutes(Double(studied)), detail: tr("cette semaine"))
             }
         }
     }
@@ -280,8 +280,8 @@ struct StudiesCoursePage: View {
     private func headerDetail(_ course: Course, hours: Double) -> String {
         var parts: [String] = []
         if !course.teacher.isEmpty { parts.append(course.teacher) }
-        parts.append("\(TF.decimal(course.credits, 1)) crédits")
-        if hours > 0 { parts.append("\(Fmt.hours(hours)) de cours / semaine") }
+        parts.append(tr("\(TF.decimal(course.credits, 1)) crédits"))
+        if hours > 0 { parts.append(tr("\(Fmt.hours(hours)) de cours / semaine")) }
         return parts.joined(separator: " · ")
     }
 
@@ -291,14 +291,14 @@ struct StudiesCoursePage: View {
             let left = 100 - StudentMath.evaluatedWeight(state, course: course.id)
             VStack(alignment: .leading, spacing: 8) {
                 Stepper(value: $target, in: 50...100, step: 5) {
-                    Text("Objectif : \(TF.int(target)) %").font(.subheadline.weight(.semibold))
+                    Text(tr("Objectif : \(TF.int(target)) %")).font(.subheadline.weight(.semibold))
                 }
                 .accessibilityIdentifier("course-goal")
                 Group {
                     if needed <= 0 {
-                        Text("C'est acquis : même sans point sur les \(TF.int(left)) % qui restent, tu finis à \(TF.int(target)) % ou plus.")
+                        Text(tr("C'est acquis : même sans point sur les \(TF.int(left)) % qui restent, tu finis à \(TF.int(target)) % ou plus."))
                     } else if needed > 100 {
-                        Text("Hors d'atteinte : il faudrait \(TF.int(needed)) % sur les \(TF.int(left)) % qui restent.")
+                        Text(tr("Hors d'atteinte : il faudrait \(TF.int(needed)) % sur les \(TF.int(left)) % qui restent."))
                     } else {
                         Text("Il te faut en moyenne **\(TF.int(needed.rounded(.up))) %** sur les \(TF.int(left)) % qui restent.")
                     }
@@ -313,12 +313,12 @@ struct StudiesCoursePage: View {
 
     private func classes(_ course: Course, state: StudentState) -> some View {
         let slots = state.slots.filter { $0.courseID == course.id }.sorted { ($0.weekday, $0.startMinute) < ($1.weekday, $1.startMinute) }
-        return section("Horaire", add: "Ajouter une plage", onAdd: { sheet = .slot(Studies.newSlot(state, course: course.id)) }) {
+        return section(tr("Horaire"), add: tr("Ajouter une plage"), onAdd: { sheet = .slot(Studies.newSlot(state, course: course.id)) }) {
             ForEach(Array(slots.enumerated()), id: \.element.id) { index, slot in
                 if index > 0 { MiniDivider() }
                 Button { sheet = .slot(slot) } label: {
                     MiniRow(symbol: "clock", colorHex: course.colorHex, title: Studies.weekdayNames[slot.weekday - 1],
-                            detail: slot.room.isEmpty ? nil : "Salle \(slot.room)",
+                            detail: slot.room.isEmpty ? nil : tr("Salle \(slot.room)"),
                             value: "\(Studies.minuteText(slot.startMinute))–\(Studies.minuteText(slot.endMinute))", showsChevron: false)
                 }
                 .buttonStyle(.plain)
@@ -328,7 +328,7 @@ struct StudiesCoursePage: View {
 
     private func exams(_ course: Course, state: StudentState, now: Date) -> some View {
         let exams = state.exams.filter { $0.courseID == course.id }.sorted { $0.date < $1.date }
-        return section("Examens", add: "Ajouter un examen", onAdd: { sheet = .exam(Studies.newExam(state, course: course.id)) }) {
+        return section(tr("Examens"), add: tr("Ajouter un examen"), onAdd: { sheet = .exam(Studies.newExam(state, course: course.id)) }) {
             ForEach(Array(exams.enumerated()), id: \.element.id) { index, exam in
                 if index > 0 { Divider() }
                 Button { sheet = .exam(exam) } label: { ExamRow(exam: exam, state: state, now: now) }
@@ -340,7 +340,7 @@ struct StudiesCoursePage: View {
 
     private func homework(_ course: Course, state: StudentState, now: Date) -> some View {
         let open = state.assignments.filter { $0.courseID == course.id && !$0.isDone }.sorted { $0.due < $1.due }
-        return section("Devoirs à rendre", add: "Ajouter un devoir", onAdd: { sheet = .assignment(Studies.newAssignment(state, course: course.id)) }) {
+        return section(tr("Devoirs à rendre"), add: tr("Ajouter un devoir"), onAdd: { sheet = .assignment(Studies.newAssignment(state, course: course.id)) }) {
             ForEach(Array(open.enumerated()), id: \.element.id) { index, assignment in
                 if index > 0 { Divider() }
                 AssignmentRow(assignment: assignment, state: state, now: now) { sheet = .assignment(assignment) }
@@ -350,12 +350,12 @@ struct StudiesCoursePage: View {
 
     private func grades(_ course: Course, state: StudentState) -> some View {
         let grades = state.grades.filter { $0.courseID == course.id }
-        return section("Notes", add: "Ajouter une note", onAdd: { sheet = .grade(Studies.newGrade(state, course: course.id)) }) {
+        return section(tr("Notes"), add: tr("Ajouter une note"), onAdd: { sheet = .grade(Studies.newGrade(state, course: course.id)) }) {
             ForEach(Array(grades.enumerated()), id: \.element.id) { index, grade in
                 if index > 0 { MiniDivider() }
                 Button { sheet = .grade(grade) } label: {
                     MiniRow(symbol: "checkmark.seal.fill", colorHex: course.colorHex, title: grade.title,
-                            detail: "\(TF.decimal(grade.score, 1))/\(TF.decimal(grade.maxScore, 0)) · compte pour \(TF.int(grade.weight)) %",
+                            detail: tr("\(TF.decimal(grade.score, 1))/\(TF.decimal(grade.maxScore, 0)) · compte pour \(TF.int(grade.weight)) %"),
                             value: "\(TF.int(grade.ratio * 100)) %", showsChevron: false)
                 }
                 .buttonStyle(.plain)
@@ -398,30 +398,30 @@ struct StudiesExamsPage: View {
         let upcoming = StudentMath.upcomingExams(state, at: now)
         let past = StudentMath.pastExams(state, at: now)
         MiniAppScroll {
-            MiniActionButton(title: "Nouvel examen", symbol: "plus", colorHex: Studies.accentHex) {
+            MiniActionButton(title: tr("Nouvel examen"), symbol: "plus", colorHex: Studies.accentHex) {
                 sheet = .exam(Studies.newExam(state))
             }
             .accessibilityIdentifier("exams-new")
             if upcoming.isEmpty && past.isEmpty {
-                Text("Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.")
+                Text(tr("Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
             }
             if !upcoming.isEmpty {
-                list("À venir", upcoming, state: state, now: now)
+                list(tr("À venir"), upcoming, state: state, now: now)
                 if let first = upcoming.first, DateMath.daysBetween(now, first.date) <= 7 {
-                    Label("Prochain examen \(TF.relativeDay(first.date, from: now)) : lance le chrono d'étude dans « Révisions » pour suivre le temps passé sur ce cours.", systemImage: "lightbulb")
+                    Label(tr("Prochain examen \(TF.relativeDay(first.date, from: now)) : lance le chrono d'étude dans « Révisions » pour suivre le temps passé sur ce cours."), systemImage: "lightbulb")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }
             if !past.isEmpty {
-                list("Passés", past, state: state, now: now)
+                list(tr("Passés"), past, state: state, now: now)
                     .opacity(0.7)
             }
         }
-        .navigationTitle("Examens")
+        .navigationTitle(tr("Examens"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -438,7 +438,7 @@ struct StudiesExamsPage: View {
                             Button(role: .destructive) {
                                 model.update(\.student) { $0.exams.removeAll { $0.id == exam.id } }
                             } label: {
-                                Label("Supprimer", systemImage: "trash")
+                                Label(tr("Supprimer"), systemImage: "trash")
                             }
                         }
                 }
@@ -462,17 +462,17 @@ struct StudiesAssignmentsPage: View {
         let done = state.assignments.filter(\.isDone).sorted { $0.due > $1.due }
         List {
             Section {
-                Button { sheet = .assignment(Studies.newAssignment(state)) } label: { Label("Nouveau devoir", systemImage: "plus") }
+                Button { sheet = .assignment(Studies.newAssignment(state)) } label: { Label(tr("Nouveau devoir"), systemImage: "plus") }
                     .accessibilityIdentifier("assignments-new")
             }
-            section("En retard", groups.late, state: state, now: now)
-            section("Cette semaine", groups.thisWeek, state: state, now: now)
-            section("Plus tard", groups.later, state: state, now: now)
-            section("Rendus", Array(done.prefix(20)), state: state, now: now)
+            section(tr("En retard"), groups.late, state: state, now: now)
+            section(tr("Cette semaine"), groups.thisWeek, state: state, now: now)
+            section(tr("Plus tard"), groups.later, state: state, now: now)
+            section(tr("Rendus"), Array(done.prefix(20)), state: state, now: now)
         }
         .styledList()
         .tint(Color(hex: Studies.accentHex))
-        .navigationTitle("Devoirs")
+        .navigationTitle(tr("Devoirs"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -504,24 +504,24 @@ struct StudiesGradesPage: View {
         MiniAppScroll {
             if let overall = StudentMath.overallAverage(state) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Moyenne générale").font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+                    Text(tr("Moyenne générale")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
                     Text("\(TF.decimal(overall, 1)) %")
                         .font(.system(size: 44, weight: .bold, design: .rounded))
                         .foregroundStyle(Color(hex: Studies.accentHex))
                         .monospacedDigit()
-                    Text("Pondérée par les crédits de chaque cours.").font(.caption).foregroundStyle(.secondary)
+                    Text(tr("Pondérée par les crédits de chaque cours.")).font(.caption).foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .card()
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("grades-overall")
             }
-            MiniActionButton(title: "Nouvelle note", symbol: "plus", colorHex: Studies.accentHex) {
+            MiniActionButton(title: tr("Nouvelle note"), symbol: "plus", colorHex: Studies.accentHex) {
                 sheet = .grade(Studies.newGrade(state))
             }
             .accessibilityIdentifier("grades-new")
             if state.grades.isEmpty {
-                Text("Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale.")
+                Text(tr("Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
@@ -529,7 +529,7 @@ struct StudiesGradesPage: View {
             let graded = state.courses.filter { StudentMath.courseAverage(state, course: $0.id) != nil }
             if !graded.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Par cours")
+                    MiniSectionTitle(title: tr("Par cours"))
                     VStack(spacing: 0) {
                         ForEach(Array(graded.enumerated()), id: \.element.id) { index, course in
                             if index > 0 { Divider() }
@@ -545,7 +545,7 @@ struct StudiesGradesPage: View {
             }
             if !state.grades.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Toutes les notes", detail: "\(state.grades.count)")
+                    MiniSectionTitle(title: tr("Toutes les notes"), detail: "\(state.grades.count)")
                     MiniRowsCard {
                         ForEach(Array(state.grades.reversed().enumerated()), id: \.element.id) { index, grade in
                             if index > 0 { MiniDivider() }
@@ -560,7 +560,7 @@ struct StudiesGradesPage: View {
                 }
             }
         }
-        .navigationTitle("Notes")
+        .navigationTitle(tr("Notes"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -582,7 +582,7 @@ struct StudiesGradesPage: View {
                 Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
             }
             ProgressView(value: min(100, average), total: 100).tint(Color(hex: course.colorHex))
-            Text("\(TF.int(evaluated)) % de la note finale évalué").font(.caption).foregroundStyle(.secondary)
+            Text(tr("\(TF.int(evaluated)) % de la note finale évalué")).font(.caption).foregroundStyle(.secondary)
         }
         .padding(.vertical, 10)
         .contentShape(Rectangle())
@@ -609,7 +609,7 @@ struct StudiesRevisionPage: View {
             weeks(state: state, now: now)
             cards(state: state, now: now)
         }
-        .navigationTitle("Révisions")
+        .navigationTitle(tr("Révisions"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -620,7 +620,7 @@ struct StudiesRevisionPage: View {
         let days = DateMath.week(containing: now)
         let points = DayValue.list(days, byDay)
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Cette semaine", detail: "\(Fmt.minutes(studied)) sur \(Fmt.hours(state.weeklyStudyGoalHours))")
+            MiniSectionTitle(title: tr("Cette semaine"), detail: tr("\(Fmt.minutes(studied)) sur \(Fmt.hours(state.weeklyStudyGoalHours))"))
             VStack(alignment: .leading, spacing: 12) {
                 ProgressView(value: min(studied, state.weeklyStudyGoalHours * 60), total: max(1, state.weeklyStudyGoalHours * 60))
                     .tint(Color(hex: accentHex))
@@ -637,7 +637,7 @@ struct StudiesRevisionPage: View {
                 .frame(height: 120)
                 HStack(spacing: 8) {
                     ForEach([25, 45, 60], id: \.self) { minutes in
-                        Button("+\(minutes) min") {
+                        Button(tr("+\(minutes) min")) {
                             Haptics.tap()
                             model.update(\.student) { $0.logStudy(minutes: minutes, courseID: nil) }
                         }
@@ -647,7 +647,7 @@ struct StudiesRevisionPage: View {
                 }
                 .accessibilityIdentifier("revision-quick-add")
                 Stepper(value: Binding(get: { state.weeklyStudyGoalHours }, set: { hours in model.update(\.student) { $0.weeklyStudyGoalHours = hours } }), in: 1...60) {
-                    Text("Objectif : \(Fmt.hours(state.weeklyStudyGoalHours)) par semaine").font(.subheadline)
+                    Text(tr("Objectif : \(Fmt.hours(state.weeklyStudyGoalHours)) par semaine")).font(.subheadline)
                 }
             }
             .card(padding: 14)
@@ -659,7 +659,7 @@ struct StudiesRevisionPage: View {
         let history = StudentMath.studyByWeek(state, weeks: 6, at: now)
         if history.dropLast().contains(where: { $0.minutes > 0 }) {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "6 dernières semaines")
+                MiniSectionTitle(title: tr("6 dernières semaines"))
                 Chart {
                     ForEach(history) { week in
                         BarMark(x: .value("Semaine", week.start, unit: .weekOfYear), y: .value("Heures", Double(week.minutes) / 60))
@@ -679,11 +679,11 @@ struct StudiesRevisionPage: View {
     private func cards(state: StudentState, now: Date) -> some View {
         let decks = StudentMath.decks(state, at: now)
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Fiches", detail: state.cards.isEmpty ? nil : "\(StudentMath.dueCount(state, at: now)) à réviser")
+            MiniSectionTitle(title: tr("Fiches"), detail: state.cards.isEmpty ? nil : tr("\(StudentMath.dueCount(state, at: now)) à réviser"))
             if let card = StudentMath.dueCard(state, at: now) {
                 review(card)
             } else if !state.cards.isEmpty {
-                Label("Tout est révisé pour l'instant.", systemImage: "checkmark.seal.fill")
+                Label(tr("Tout est révisé pour l'instant."), systemImage: "checkmark.seal.fill")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
@@ -694,7 +694,7 @@ struct StudiesRevisionPage: View {
                         withAnimation(.snappy) { openDeck = openDeck == deck.name ? nil : deck.name }
                     } label: {
                         MiniRow(symbol: "rectangle.stack.fill", colorHex: "8C6CFF", title: deck.name,
-                                detail: deck.due > 0 ? "\(deck.due) à réviser" : "à jour", value: "\(deck.total)", showsChevron: false)
+                                detail: deck.due > 0 ? tr("\(deck.due) à réviser") : tr("à jour"), value: "\(deck.total)", showsChevron: false)
                     }
                     .buttonStyle(.plain)
                     if openDeck == deck.name {
@@ -703,7 +703,7 @@ struct StudiesRevisionPage: View {
                                 HStack {
                                     Text(card.front).font(.subheadline).foregroundStyle(.primary).lineLimit(1)
                                     Spacer()
-                                    Text("boîte \(card.box)").font(.caption).foregroundStyle(.secondary)
+                                    Text(tr("boîte \(card.box)")).font(.caption).foregroundStyle(.secondary)
                                 }
                                 .padding(.leading, 46)
                                 .padding(.vertical, 8)
@@ -714,8 +714,8 @@ struct StudiesRevisionPage: View {
                     }
                     MiniDivider()
                 }
-                Button { sheet = .card(Flashcard(deck: openDeck ?? decks.first?.name ?? "Général", front: "", back: "")) } label: {
-                    Label("Nouvelle fiche", systemImage: "plus.circle.fill")
+                Button { sheet = .card(Flashcard(deck: openDeck ?? decks.first?.name ?? tr("Général"), front: "", back: "")) } label: {
+                    Label(tr("Nouvelle fiche"), systemImage: "plus.circle.fill")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -725,7 +725,7 @@ struct StudiesRevisionPage: View {
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("cards-new")
             }
-            Text("Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes.")
+            Text(tr("Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
@@ -738,12 +738,12 @@ struct StudiesRevisionPage: View {
             if revealed {
                 Text(card.back).font(.body).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 HStack(spacing: 10) {
-                    MiniActionButton(title: "À revoir", symbol: "arrow.counterclockwise", colorHex: "E5484D", isProminent: false) { grade(false) }
-                    MiniActionButton(title: "Je savais", symbol: "checkmark", colorHex: "1E9E75") { grade(true) }
+                    MiniActionButton(title: tr("À revoir"), symbol: "arrow.counterclockwise", colorHex: "E5484D", isProminent: false) { grade(false) }
+                    MiniActionButton(title: tr("Je savais"), symbol: "checkmark", colorHex: "1E9E75") { grade(true) }
                         .accessibilityIdentifier("card-known")
                 }
             } else {
-                MiniActionButton(title: "Voir la réponse", symbol: "eye", colorHex: "8C6CFF", isProminent: false) {
+                MiniActionButton(title: tr("Voir la réponse"), symbol: "eye", colorHex: "8C6CFF", isProminent: false) {
                     withAnimation(.snappy) { revealed = true }
                 }
                 .accessibilityIdentifier("card-reveal")

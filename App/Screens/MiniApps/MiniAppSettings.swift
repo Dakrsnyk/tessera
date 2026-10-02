@@ -44,7 +44,7 @@ struct MiniAppSettingsSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
-                Label("Mes paramètres", systemImage: "slider.horizontal.3")
+                Label(tr("Mes paramètres"), systemImage: "slider.horizontal.3")
                     .font(.headline)
                     .foregroundStyle(.primary)
                     .accessibilityAddTraits(.isHeader)
@@ -54,7 +54,7 @@ struct MiniAppSettingsSection: View {
             Button {
                 withAnimation(.snappy) { isEditing.toggle() }
             } label: {
-                Label(isEditing ? "Terminé" : "Modifier mes paramètres", systemImage: isEditing ? "checkmark" : "pencil")
+                Label(isEditing ? tr("Terminé") : tr("Modifier mes paramètres"), systemImage: isEditing ? "checkmark" : "pencil")
                     .font(.subheadline.weight(.semibold))
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
@@ -65,7 +65,7 @@ struct MiniAppSettingsSection: View {
                 editors
                     .transition(.opacity.combined(with: .move(edge: .top)))
             }
-            Text("Modifié ici, c'est modifié partout : « Mes informations », tes widgets et « Mon Quotidien ».")
+            Text(tr("Modifié ici, c'est modifié partout : « Mes informations », tes widgets et « Mon Quotidien »."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -81,16 +81,16 @@ struct MiniAppSettingsSection: View {
         let profile = model.profile
         switch app {
         case .nutrition:
-            if let height = profile.heightCm { rows.append(("Taille", "\(TF.int(height)) cm")) }
-            if let aim = profile.nutritionAim { rows.append(("Objectif", aim.title)) }
-            if profile.calculatedActivity != nil { rows.append(("Calcul", "Suit ton poids et ton activité")) }
+            if let height = profile.heightCm { rows.append((tr("Taille"), tr("\(TF.int(height)) cm"))) }
+            if let aim = profile.nutritionAim { rows.append((tr("Objectif"), aim.title)) }
+            if profile.calculatedActivity != nil { rows.append((tr("Calcul"), tr("Suit ton poids et ton activité"))) }
         case .fitness:
-            if let goal = profile.fitnessGoal { rows.append(("Objectif", goal.title)) }
-            if let level = profile.fitnessLevel { rows.append(("Niveau", level.title)) }
+            if let goal = profile.fitnessGoal { rows.append((tr("Objectif"), goal.title)) }
+            if let level = profile.fitnessLevel { rows.append((tr("Niveau"), level.title)) }
             let days = model.fitness.routines.flatMap(\.weekdays)
-            if !days.isEmpty { rows.append(("Jours", Self.weekdays(Set(days)))) }
+            if !days.isEmpty { rows.append((tr("Jours"), Self.weekdays(Set(days)))) }
         case .weather:
-            rows.append(("Unité", model.settings.temperatureUnit.title))
+            rows.append((tr("Unité"), model.settings.temperatureUnit.title))
         default:
             break
         }
@@ -103,7 +103,7 @@ struct MiniAppSettingsSection: View {
     @ViewBuilder private var summary: some View {
         let rows = rows
         if rows.isEmpty {
-            Text("Rien de renseigné pour l'instant.")
+            Text(tr("Rien de renseigné pour l'instant."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         } else {
@@ -137,7 +137,7 @@ struct MiniAppSettingsSection: View {
                 TopicForm(topic: topic)
             }
             if app == .weather {
-                Picker("Unité de température", selection: Binding(
+                Picker(tr("Unité de température"), selection: Binding(
                     get: { model.settings.temperatureUnit },
                     set: { unit in model.updateSettings { $0.temperatureUnit = unit } }
                 )) {
@@ -146,7 +146,7 @@ struct MiniAppSettingsSection: View {
                 .pickerStyle(.segmented)
                 .accessibilityIdentifier("weather-unit")
             }
-            WidgetDataSection(items: app.settingsItems, title: "Tes données")
+            WidgetDataSection(items: app.settingsItems, title: tr("Tes données"))
         }
     }
 

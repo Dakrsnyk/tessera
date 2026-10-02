@@ -51,7 +51,7 @@ struct AppStyleSwatch: View {
                 .minimumScaleFactor(0.8)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Style \(style.name)"))
+        .accessibilityLabel(Text(tr("Style \(style.name)")))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
@@ -81,7 +81,7 @@ struct AppearancePicker: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        Picker("Mode", selection: Binding(get: { model.settings.appearance }, set: { mode in
+        Picker(tr("Mode"), selection: Binding(get: { model.settings.appearance }, set: { mode in
             withAnimation(.easeInOut(duration: 0.35)) { model.setAppearance(mode) }
         })) {
             ForEach(AppearanceMode.allCases) { mode in
@@ -106,7 +106,7 @@ struct MiniAppScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Aujourd'hui")
+            Text(tr("Aujourd'hui"))
                 .font(.system(size: 15, weight: .bold, design: style.fontDesign))
                 .foregroundStyle(ink)
                 .padding(.top, 4)
@@ -119,10 +119,10 @@ struct MiniAppScreen: View {
                 }
                 .frame(width: 28, height: 28)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Tâches")
+                    Text(tr("Tâches"))
                         .font(.system(size: 10, weight: .semibold, design: style.fontDesign))
                         .foregroundStyle(ink)
-                    Text("3 sur 5")
+                    Text(tr("3 sur 5"))
                         .font(.system(size: 9, design: style.fontDesign))
                         .foregroundStyle(muted)
                 }
@@ -136,7 +136,7 @@ struct MiniAppScreen: View {
             }
             .padding(8)
             .background(card, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-            Text("Ajouter")
+            Text(tr("Ajouter"))
                 .font(.system(size: 10, weight: .semibold, design: style.fontDesign))
                 .foregroundStyle(onAccent)
                 .frame(maxWidth: .infinity, minHeight: 24)
@@ -187,11 +187,11 @@ struct StylePreviewPair: View {
         HStack(spacing: 12) {
             VStack(spacing: 6) {
                 MiniAppScreen(style: style, dark: false)
-                Label("Clair", systemImage: "sun.max.fill").font(.caption2.weight(.medium)).foregroundStyle(.secondary)
+                Label(tr("Clair"), systemImage: "sun.max.fill").font(.caption2.weight(.medium)).foregroundStyle(.secondary)
             }
             VStack(spacing: 6) {
                 MiniAppScreen(style: style, dark: true)
-                Label("Sombre", systemImage: "moon.fill").font(.caption2.weight(.medium)).foregroundStyle(.secondary)
+                Label(tr("Sombre"), systemImage: "moon.fill").font(.caption2.weight(.medium)).foregroundStyle(.secondary)
             }
         }
         .frame(height: height)

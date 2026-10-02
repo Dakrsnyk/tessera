@@ -74,10 +74,10 @@ enum SamplePayload {
         switch kind {
         case .tasks:
             payload.content.tasks = [
-                TaskItem(title: "Appeler le garage"),
-                TaskItem(title: "Envoyer la facture"),
-                TaskItem(title: "Courir 5 km", isDone: true, completedAt: now),
-                TaskItem(title: "Lire 20 pages"),
+                TaskItem(title: tr("Appeler le garage")),
+                TaskItem(title: tr("Envoyer la facture")),
+                TaskItem(title: tr("Courir 5 km"), isDone: true, completedAt: now),
+                TaskItem(title: tr("Lire 20 pages")),
             ]
         case .habits:
             // Today and the days before it, never days still ahead.
@@ -85,9 +85,9 @@ enum SamplePayload {
                 DateMath.dayKey(DateMath.calendar.date(byAdding: .day, value: -offset, to: now) ?? now)
             }
             payload.content.habits = [
-                Habit(name: "Méditer", symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: Array(recent.prefix(4))),
-                Habit(name: "Sport", symbol: "figure.run", colorHex: "FF6B57", completedDays: [recent[0], recent[2]]),
-                Habit(name: "Lecture", symbol: "book.fill", colorHex: "2F8F7A", completedDays: Array(recent.prefix(3))),
+                Habit(name: tr("Méditer"), symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: Array(recent.prefix(4))),
+                Habit(name: tr("Sport"), symbol: "figure.run", colorHex: "FF6B57", completedDays: [recent[0], recent[2]]),
+                Habit(name: tr("Lecture"), symbol: "book.fill", colorHex: "2F8F7A", completedDays: Array(recent.prefix(3))),
             ]
         case .hydration:
             payload.content.hydration.add(5, on: now)
@@ -96,9 +96,9 @@ enum SamplePayload {
         case .moneyFlow:
             payload.content.money = MoneyState(
                 items: [
-                    MoneyItem(name: "Salaire", amount: 3_600, period: .month, isIncome: true),
-                    MoneyItem(name: "Loyer", amount: 1_250, period: .month, isIncome: false),
-                    MoneyItem(name: "Épicerie", amount: 110, period: .week, isIncome: false),
+                    MoneyItem(name: tr("Salaire"), amount: 3_600, period: .month, isIncome: true),
+                    MoneyItem(name: tr("Loyer"), amount: 1_250, period: .month, isIncome: false),
+                    MoneyItem(name: tr("Épicerie"), amount: 110, period: .week, isIncome: false),
                 ],
                 startDate: DateMath.calendar.date(byAdding: .day, value: -12, to: now) ?? now
             )
@@ -119,9 +119,9 @@ enum SamplePayload {
             ))
         case .upNext:
             payload.events = .ready([
-                EventSnapshot(id: "1", title: "Réunion d'équipe", start: now.addingTimeInterval(3_600), end: now.addingTimeInterval(5_400), isAllDay: false, colorHex: "3366FF"),
-                EventSnapshot(id: "2", title: "Dentiste", start: now.addingTimeInterval(4 * 3_600), end: now.addingTimeInterval(5 * 3_600), isAllDay: false, colorHex: "FF6B57"),
-                EventSnapshot(id: "3", title: "Dîner avec Léa", start: now.addingTimeInterval(8 * 3_600), end: now.addingTimeInterval(10 * 3_600), isAllDay: false, colorHex: "2F8F7A"),
+                EventSnapshot(id: "1", title: tr("Réunion d'équipe"), start: now.addingTimeInterval(3_600), end: now.addingTimeInterval(5_400), isAllDay: false, colorHex: "3366FF"),
+                EventSnapshot(id: "2", title: tr("Dentiste"), start: now.addingTimeInterval(4 * 3_600), end: now.addingTimeInterval(5 * 3_600), isAllDay: false, colorHex: "FF6B57"),
+                EventSnapshot(id: "3", title: tr("Dîner avec Léa"), start: now.addingTimeInterval(8 * 3_600), end: now.addingTimeInterval(10 * 3_600), isAllDay: false, colorHex: "2F8F7A"),
             ])
         default:
             SampleData.fill(&payload, for: kind, now: now)

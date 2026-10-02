@@ -53,7 +53,7 @@ enum CalendarService {
             .map { event in
                 EventSnapshot(
                     id: event.eventIdentifier ?? UUID().uuidString,
-                    title: event.title?.trimmed.nonEmpty ?? "Sans titre",
+                    title: event.title?.trimmed.nonEmpty ?? tr("Sans titre"),
                     start: event.startDate,
                     end: event.endDate,
                     isAllDay: event.isAllDay,
@@ -78,7 +78,7 @@ enum CalendarService {
             .map { event in
                 EventSnapshot(
                     id: event.eventIdentifier ?? UUID().uuidString,
-                    title: event.title?.trimmed.nonEmpty ?? "Sans titre",
+                    title: event.title?.trimmed.nonEmpty ?? tr("Sans titre"),
                     start: event.startDate,
                     end: event.endDate,
                     isAllDay: event.isAllDay,

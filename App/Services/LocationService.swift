@@ -8,9 +8,9 @@ enum LocationError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .denied: "L'accès à la position est refusé. Tu peux l'autoriser dans Réglages, ou chercher ta ville."
-        case .unavailable: "Ta position n'a pas pu être trouvée. Réessaie ou cherche ta ville."
-        case .notFound: "Aucune ville trouvée."
+        case .denied: tr("L'accès à la position est refusé. Tu peux l'autoriser dans Réglages, ou chercher ta ville.")
+        case .unavailable: tr("Ta position n'a pas pu être trouvée. Réessaie ou cherche ta ville.")
+        case .notFound: tr("Aucune ville trouvée.")
         }
     }
 }
@@ -49,7 +49,7 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
         let location = try await requestLocation()
         let placemark = try? await CLGeocoder().reverseGeocodeLocation(location).first
         return WeatherLocation(
-            name: placemark?.locality ?? placemark?.name ?? "Ma position",
+            name: placemark?.locality ?? placemark?.name ?? tr("Ma position"),
             latitude: location.coordinate.latitude,
             longitude: location.coordinate.longitude
         )

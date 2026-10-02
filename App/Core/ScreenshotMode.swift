@@ -268,7 +268,7 @@ enum ScreenshotMode {
         guard model.designs.isEmpty else { return }
         model.updateSettings {
             $0.hasCompletedOnboarding = true
-            $0.weatherLocation = WeatherLocation(name: "Montréal", latitude: 45.5019, longitude: -73.5674)
+            $0.weatherLocation = WeatherLocation(name: tr("Montréal"), latitude: 45.5019, longitude: -73.5674)
         }
         for id in ["progress-year", "tasks-minimal", "weather-aurora", "habits-dark", "countdown-holidays", "money-net"] {
             model.save(TemplateCatalog.design(id))

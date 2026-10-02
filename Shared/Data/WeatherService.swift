@@ -71,8 +71,8 @@ enum WeatherError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .badResponse: "Le service météo n'a pas répondu."
-        case .decoding: "Les données météo sont illisibles."
+        case .badResponse: tr("Le service météo n'a pas répondu.")
+        case .decoding: tr("Les données météo sont illisibles.")
         }
     }
 }
@@ -240,24 +240,24 @@ private struct OpenMeteoResponse: Decodable {
 enum WeatherCode {
     static func description(_ code: Int) -> String {
         switch code {
-        case 0: "Ciel dégagé"
-        case 1: "Plutôt dégagé"
-        case 2: "Partiellement nuageux"
-        case 3: "Couvert"
-        case 45, 48: "Brouillard"
-        case 51, 53, 55: "Bruine"
-        case 56, 57: "Bruine verglaçante"
-        case 61, 63: "Pluie"
-        case 65: "Forte pluie"
-        case 66, 67: "Pluie verglaçante"
-        case 71, 73: "Neige"
-        case 75: "Forte neige"
-        case 77: "Grains de neige"
-        case 80, 81: "Averses"
-        case 82: "Violentes averses"
-        case 85, 86: "Averses de neige"
-        case 95: "Orage"
-        case 96, 99: "Orage et grêle"
+        case 0: tr("Ciel dégagé")
+        case 1: tr("Plutôt dégagé")
+        case 2: tr("Partiellement nuageux")
+        case 3: tr("Couvert")
+        case 45, 48: tr("Brouillard")
+        case 51, 53, 55: tr("Bruine")
+        case 56, 57: tr("Bruine verglaçante")
+        case 61, 63: tr("Pluie")
+        case 65: tr("Forte pluie")
+        case 66, 67: tr("Pluie verglaçante")
+        case 71, 73: tr("Neige")
+        case 75: tr("Forte neige")
+        case 77: tr("Grains de neige")
+        case 80, 81: tr("Averses")
+        case 82: tr("Violentes averses")
+        case 85, 86: tr("Averses de neige")
+        case 95: tr("Orage")
+        case 96, 99: tr("Orage et grêle")
         default: "—"
         }
     }

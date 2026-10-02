@@ -20,46 +20,46 @@ extension AppModel {
         func money(_ value: Double?) -> String? { value.map { TF.money($0, currency) } }
         switch topic {
         case .sport:
-            add("goal", "target", "Objectif", profile.fitnessGoal?.title)
-            add("weight", "scalemass", "Poids", profile.weightKg.map { "\(ProfileNumberField.format($0)) kg" })
-            add("height", "ruler", "Taille", profile.heightCm.map(Self.heightText))
-            add("age", "person", "Âge", age.map { "\($0) ans" })
-            add("workouts", "calendar", "Séances", profile.knows(.weeklyWorkouts) ? "\(fitness.weeklyGoal) par semaine" : nil)
-            add("level", "chart.bar.fill", "Niveau", profile.fitnessLevel?.title)
+            add("goal", "target", tr("Objectif"), profile.fitnessGoal?.title)
+            add("weight", "scalemass", tr("Poids"), profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") })
+            add("height", "ruler", tr("Taille"), profile.heightCm.map(Self.heightText))
+            add("age", "person", tr("Âge"), age.map { tr("\($0) ans") })
+            add("workouts", "calendar", tr("Séances"), profile.knows(.weeklyWorkouts) ? tr("\(fitness.weeklyGoal) par semaine") : nil)
+            add("level", "chart.bar.fill", tr("Niveau"), profile.fitnessLevel?.title)
         case .nutrition:
-            add("aim", "target", "Objectif", profile.nutritionAim?.title)
-            add("kcal", "flame", "Calories", profile.knows(.kcalTarget) ? "\(TF.int(nutrition.goals.kcal)) kcal" : nil)
-            add("protein", "bolt.heart", "Protéines", profile.knows(.proteinTarget) ? "\(TF.int(nutrition.goals.protein)) g" : nil)
-            add("carbs", "leaf", "Glucides", profile.knows(.carbsTarget) ? "\(TF.int(nutrition.goals.carbs)) g" : nil)
-            add("fat", "drop", "Lipides", profile.knows(.fatTarget) ? "\(TF.int(nutrition.goals.fat)) g" : nil)
+            add("aim", "target", tr("Objectif"), profile.nutritionAim?.title)
+            add("kcal", "flame", tr("Calories"), profile.knows(.kcalTarget) ? tr("\(TF.int(nutrition.goals.kcal)) kcal") : nil)
+            add("protein", "bolt.heart", tr("Protéines"), profile.knows(.proteinTarget) ? "\(TF.int(nutrition.goals.protein)) g" : nil)
+            add("carbs", "leaf", tr("Glucides"), profile.knows(.carbsTarget) ? "\(TF.int(nutrition.goals.carbs)) g" : nil)
+            add("fat", "drop", tr("Lipides"), profile.knows(.fatTarget) ? "\(TF.int(nutrition.goals.fat)) g" : nil)
         case .money:
-            add("income", "arrow.down.circle", "Revenu mensuel", money(profile.monthlyIncome))
-            add("budget", "creditcard", "Budget", profile.knows(.monthlyBudget) ? TF.money(budget.monthlyBudget, currency) : nil)
-            add("savings", "banknote", "Épargne visée", money(profile.monthlySavingsGoal))
-            add("expenses", "cart", "Dépenses", profile.mainExpenses.isEmpty ? nil : profile.mainExpenses.prefix(2).joined(separator: ", "))
+            add("income", "arrow.down.circle", tr("Revenu mensuel"), money(profile.monthlyIncome))
+            add("budget", "creditcard", tr("Budget"), profile.knows(.monthlyBudget) ? TF.money(budget.monthlyBudget, currency) : nil)
+            add("savings", "banknote", tr("Épargne visée"), money(profile.monthlySavingsGoal))
+            add("expenses", "cart", tr("Dépenses"), profile.mainExpenses.isEmpty ? nil : profile.mainExpenses.prefix(2).joined(separator: ", "))
         case .business:
-            add("name", "briefcase", "Activité", profile.knows(.businessName) ? business.name : nil)
-            add("goal", "target", "Objectif", profile.knows(.businessGoal) ? "\(TF.money(business.monthlyGoal, currency)) / mois" : nil)
-            add("clients", "person.2", "Clients", profile.businessClients.map { Fmt.number($0) })
-            add("revenue", "chart.line.uptrend.xyaxis", "Ce mois-ci", business.sales.isEmpty ? nil : TF.money(BusinessMath.revenue(business, .month, at: Date()), currency))
+            add("name", "briefcase", tr("Activité"), profile.knows(.businessName) ? business.name : nil)
+            add("goal", "target", tr("Objectif"), profile.knows(.businessGoal) ? tr("\(TF.money(business.monthlyGoal, currency)) / mois") : nil)
+            add("clients", "person.2", tr("Clients"), profile.businessClients.map { Fmt.number($0) })
+            add("revenue", "chart.line.uptrend.xyaxis", tr("Ce mois-ci"), business.sales.isEmpty ? nil : TF.money(BusinessMath.revenue(business, .month, at: Date()), currency))
         case .productivity:
-            add("goal", "target", "Objectif", profile.mainGoal.trimmed.nonEmpty)
+            add("goal", "target", tr("Objectif"), profile.mainGoal.trimmed.nonEmpty)
             let open = content.tasks.filter { !$0.isDone }.count
-            add("tasks", "checklist", "Tâches du jour", content.tasks.isEmpty ? nil : Fmt.number(open))
-            add("work", "clock", "Travail", profile.dailyWorkHours.map { "\(ProfileNumberField.format($0)) h par jour" })
-            add("focus", "brain.head.profile", "Concentration", profile.knows(.focusGoal) ? "\(Fmt.hours(productivity.weeklyFocusGoalHours)) / sem." : nil)
+            add("tasks", "checklist", tr("Tâches du jour"), content.tasks.isEmpty ? nil : Fmt.number(open))
+            add("work", "clock", tr("Travail"), profile.dailyWorkHours.map { tr("\(ProfileNumberField.format($0)) h par jour") })
+            add("focus", "brain.head.profile", tr("Concentration"), profile.knows(.focusGoal) ? tr("\(Fmt.hours(productivity.weeklyFocusGoalHours)) / sem.") : nil)
         case .studies:
-            add("field", "graduationcap", "Études", profile.studyField.trimmed.nonEmpty)
-            add("hours", "clock", "Étude perso", profile.weeklyStudyHours.map { "\(ProfileNumberField.format($0)) h / sem." })
-            add("courses", "book", "Cours", student.courses.isEmpty ? nil : Fmt.number(student.courses.count))
+            add("field", "graduationcap", tr("Études"), profile.studyField.trimmed.nonEmpty)
+            add("hours", "clock", tr("Étude perso"), profile.weeklyStudyHours.map { tr("\(ProfileNumberField.format($0)) h / sem.") })
+            add("courses", "book", tr("Cours"), student.courses.isEmpty ? nil : Fmt.number(student.courses.count))
         case .car:
-            add("name", "car", "Voiture", profile.knows(.carName) ? car.name : nil)
-            add("km", "gauge.with.dots.needle.33percent", "Compteur", CarMath.odometer(car).map { "\(TF.int($0)) km" })
+            add("name", "car", tr("Voiture"), profile.knows(.carName) ? car.name : nil)
+            add("km", "gauge.with.dots.needle.33percent", tr("Compteur"), CarMath.odometer(car).map { tr("\(TF.int($0)) km") })
         case .weather:
-            add("city", "location", "Ville", settings.weatherLocation?.name)
+            add("city", "location", tr("Ville"), settings.weatherLocation?.name)
         case .wellbeing:
-            add("water", "drop.fill", "Eau", profile.knows(.hydrationGoal) ? "\(content.hydration.goal) verres / jour" : nil)
-            add("habits", "repeat", "Habitudes", content.habits.isEmpty ? nil : Fmt.number(content.habits.count))
+            add("water", "drop.fill", tr("Eau"), profile.knows(.hydrationGoal) ? tr("\(content.hydration.goal) verres / jour") : nil)
+            add("habits", "repeat", tr("Habitudes"), content.habits.isEmpty ? nil : Fmt.number(content.habits.count))
         }
         return facts
     }

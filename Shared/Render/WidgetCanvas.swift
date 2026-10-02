@@ -133,14 +133,14 @@ struct PremiumLockedView: View {
                 Text(context.design.kind.title)
                     .font(s.text(15, .semibold))
                     .foregroundStyle(s.primary)
-                Label("Premium", systemImage: "lock.fill")
+                Label(tr("Premium"), systemImage: "lock.fill")
                     .font(s.text(11, .semibold))
                     .foregroundStyle(s.onAccent)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
                     .background(s.accent, in: Capsule())
                 if !context.isSmall {
-                    Text("Touche pour débloquer ce widget")
+                    Text(tr("Touche pour débloquer ce widget"))
                         .font(s.text(11))
                         .foregroundStyle(s.secondary)
                 }

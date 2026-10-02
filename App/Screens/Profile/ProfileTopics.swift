@@ -196,7 +196,7 @@ struct GenderPicker: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Genre")
+            Text(tr("Genre"))
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(.secondary)
             FlowLayout {
@@ -208,13 +208,13 @@ struct GenderPicker: View {
                 }
             }
             if profile.sex == .other {
-                ProfileTextField(placeholder: "Précise si tu veux (facultatif)", text: Binding(
+                ProfileTextField(placeholder: tr("Précise si tu veux (facultatif)"), text: Binding(
                     get: { model.profile.genderDetail },
                     set: { value in model.update(\.profile) { $0.genderDetail = value } }
                 ), identifier: "gender-detail")
             }
             if let sex = profile.sex, !sex.isBinary {
-                Text("Pour estimer tes calories, Tessera utilise :")
+                Text(tr("Pour estimer tes calories, Tessera utilise :"))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 FlowLayout {
@@ -289,31 +289,31 @@ struct TopicForm: View {
     /// Age, height and weight side by side (also used by the nutrition calculation).
     private func bodyFields() -> some View {
         HStack(spacing: 8) {
-            ProfileNumberField(title: "Âge", unit: "ans", value: ageBinding, decimals: false, identifier: "profile-age")
+            ProfileNumberField(title: tr("Âge"), unit: tr("ans"), value: ageBinding, decimals: false, identifier: "profile-age")
                 .disabled(model.life.birthday != nil)
-            ProfileNumberField(title: "Taille", unit: "cm", value: heightBinding, decimals: false, identifier: "profile-height")
-            ProfileNumberField(title: "Poids", unit: "kg", value: weightBinding, identifier: "profile-weight")
+            ProfileNumberField(title: tr("Taille"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
+            ProfileNumberField(title: tr("Poids"), unit: tr("kg"), value: weightBinding, identifier: "profile-weight")
         }
     }
 
     // MARK: Sport
 
     @ViewBuilder private var sport: some View {
-        QuestionCard(title: "Ton objectif") {
+        QuestionCard(title: tr("Ton objectif")) {
             FlowLayout {
                 ForEach(FitnessGoal.allCases) { goal in
                     ChoiceChip(title: goal.title, isSelected: profile.fitnessGoal == goal) { toggle(\.fitnessGoal, goal) }
                 }
             }
         }
-        QuestionCard(title: "Ton niveau") {
+        QuestionCard(title: tr("Ton niveau")) {
             FlowLayout {
                 ForEach(FitnessLevel.allCases) { level in
                     ChoiceChip(title: level.title, isSelected: profile.fitnessLevel == level) { toggle(\.fitnessLevel, level) }
                 }
             }
         }
-        QuestionCard(title: "Séances par semaine", detail: "Le widget Régularité suit cet objectif.") {
+        QuestionCard(title: tr("Séances par semaine"), detail: tr("Le widget Régularité suit cet objectif.")) {
             HStack(spacing: 6) {
                 ForEach(1...7, id: \.self) { count in
                     let isOn = profile.knows(.weeklyWorkouts) && model.fitness.weeklyGoal == count
@@ -327,12 +327,12 @@ struct TopicForm: View {
                             .background(isOn ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(AppFill.screenFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel(Text(Fmt.plural(count, "séance", "séances")))
+                    .accessibilityLabel(Text(Fmt.plural(count, tr("séance"), tr("séances"))))
                     .accessibilityAddTraits(isOn ? .isSelected : [])
                 }
             }
         }
-        QuestionCard(title: "Toi", detail: model.life.birthday != nil ? "L'âge vient de ton anniversaire (Ma vie)." : "Le poids sert aussi à estimer les calories brûlées.") {
+        QuestionCard(title: tr("Toi"), detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Le poids sert aussi à estimer les calories brûlées.")) {
             VStack(alignment: .leading, spacing: 10) {
                 bodyFields()
                 GenderPicker()
@@ -361,20 +361,20 @@ struct TopicForm: View {
     }
 
     @ViewBuilder private var nutrition: some View {
-        QuestionCard(title: "Ton objectif") {
+        QuestionCard(title: tr("Ton objectif")) {
             FlowLayout {
                 ForEach(NutritionAim.allCases) { aim in
                     ChoiceChip(title: aim.title, isSelected: profile.nutritionAim == aim) { toggle(\.nutritionAim, aim) }
                 }
             }
         }
-        QuestionCard(title: "Par jour", detail: "Laisse vide ce que tu ne sais pas : Tessera peut le calculer.") {
+        QuestionCard(title: tr("Par jour"), detail: tr("Laisse vide ce que tu ne sais pas : Tessera peut le calculer.")) {
             VStack(spacing: 8) {
-                ProfileNumberField(title: "Calories", unit: "kcal", value: targetBinding(.kcalTarget, \.kcal), decimals: false, identifier: "target-kcal")
+                ProfileNumberField(title: tr("Calories"), unit: "kcal", value: targetBinding(.kcalTarget, \.kcal), decimals: false, identifier: "target-kcal")
                 HStack(spacing: 8) {
-                    ProfileNumberField(title: "Protéines", unit: "g", value: targetBinding(.proteinTarget, \.protein), decimals: false, identifier: "target-protein")
-                    ProfileNumberField(title: "Glucides", unit: "g", value: targetBinding(.carbsTarget, \.carbs), decimals: false, identifier: "target-carbs")
-                    ProfileNumberField(title: "Lipides", unit: "g", value: targetBinding(.fatTarget, \.fat), decimals: false, identifier: "target-fat")
+                    ProfileNumberField(title: tr("Protéines"), unit: "g", value: targetBinding(.proteinTarget, \.protein), decimals: false, identifier: "target-protein")
+                    ProfileNumberField(title: tr("Glucides"), unit: "g", value: targetBinding(.carbsTarget, \.carbs), decimals: false, identifier: "target-carbs")
+                    ProfileNumberField(title: tr("Lipides"), unit: "g", value: targetBinding(.fatTarget, \.fat), decimals: false, identifier: "target-fat")
                 }
             }
         }
@@ -385,7 +385,7 @@ struct TopicForm: View {
     private var calculation: some View {
         let activity = model.activityFromWorkouts ?? calculationActivity
         let result = activity.flatMap { model.calculatedNutritionGoals(activity: $0) }
-        return QuestionCard(title: "Calculer pour moi", detail: "Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.") {
+        return QuestionCard(title: tr("Calculer pour moi"), detail: tr("Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.")) {
             VStack(alignment: .leading, spacing: 10) {
                 // Shown when something was missing as the card appeared, and kept while the user types
                 // (a field never disappears under their fingers).
@@ -405,7 +405,7 @@ struct TopicForm: View {
                 Button {
                     if let result, let activity { model.setNutritionGoals(result, calculatedWith: activity) }
                 } label: {
-                    Label("Calculer mes objectifs", systemImage: "wand.and.stars")
+                    Label(tr("Calculer mes objectifs"), systemImage: "wand.and.stars")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 44)
@@ -420,15 +420,15 @@ struct TopicForm: View {
 
     // MARK: Money
 
-    private static let expenseChoices = ["Logement", "Épicerie", "Transport", "Restaurants", "Loisirs", "Abonnements", "Santé", "Shopping", "Voyages"]
+    private static let expenseChoices = [tr("Logement"), tr("Épicerie"), tr("Transport"), tr("Restaurants"), tr("Loisirs"), tr("Abonnements"), tr("Santé"), tr("Shopping"), tr("Voyages")]
 
     @ViewBuilder private var money: some View {
-        QuestionCard(title: "Chaque mois") {
+        QuestionCard(title: tr("Chaque mois")) {
             VStack(spacing: 8) {
                 HStack(spacing: 8) {
-                    ProfileNumberField(title: "Revenu", unit: currencySymbol, value: profileBinding(\.monthlyIncome), decimals: false, identifier: "money-income")
+                    ProfileNumberField(title: tr("Revenu"), unit: currencySymbol, value: profileBinding(\.monthlyIncome), decimals: false, identifier: "money-income")
                     ProfileNumberField(
-                        title: "Budget", unit: currencySymbol,
+                        title: tr("Budget"), unit: currencySymbol,
                         value: Binding(
                             get: { model.profile.knows(.monthlyBudget) ? model.budget.monthlyBudget : nil },
                             set: { value in if let value { model.setMonthlyBudget(value) } else { model.forget(.monthlyBudget) } }
@@ -436,10 +436,10 @@ struct TopicForm: View {
                         decimals: false, identifier: "money-budget"
                     )
                 }
-                ProfileNumberField(title: "Épargne visée", unit: currencySymbol, value: profileBinding(\.monthlySavingsGoal), decimals: false, identifier: "money-savings")
+                ProfileNumberField(title: tr("Épargne visée"), unit: currencySymbol, value: profileBinding(\.monthlySavingsGoal), decimals: false, identifier: "money-savings")
             }
         }
-        QuestionCard(title: "Tes principales dépenses") {
+        QuestionCard(title: tr("Tes principales dépenses")) {
             FlowLayout {
                 ForEach(Self.expenseChoices, id: \.self) { expense in
                     let isOn = profile.mainExpenses.contains(expense)
@@ -458,9 +458,9 @@ struct TopicForm: View {
     // MARK: Business
 
     @ViewBuilder private var business: some View {
-        QuestionCard(title: "Ton activité") {
+        QuestionCard(title: tr("Ton activité")) {
             ProfileTextField(
-                placeholder: "Nom ou activité",
+                placeholder: tr("Nom ou activité"),
                 text: Binding(
                     get: { model.profile.knows(.businessName) ? model.business.name : "" },
                     set: { name in
@@ -470,10 +470,10 @@ struct TopicForm: View {
                 identifier: "business-name"
             )
         }
-        QuestionCard(title: "Chaque mois", detail: "Le chiffre d'affaires, les dépenses et le bénéfice viennent des ventes que tu notes.") {
+        QuestionCard(title: tr("Chaque mois"), detail: tr("Le chiffre d'affaires, les dépenses et le bénéfice viennent des ventes que tu notes.")) {
             HStack(spacing: 8) {
                 ProfileNumberField(
-                    title: "Objectif de CA", unit: currencySymbol,
+                    title: tr("Objectif de CA"), unit: currencySymbol,
                     value: Binding(
                         get: { model.profile.knows(.businessGoal) ? model.business.monthlyGoal : nil },
                         set: { value in if let value { model.setBusinessGoal(value) } else { model.forget(.businessGoal) } }
@@ -481,7 +481,7 @@ struct TopicForm: View {
                     decimals: false, identifier: "business-goal"
                 )
                 ProfileNumberField(
-                    title: "Clients", unit: "",
+                    title: tr("Clients"), unit: "",
                     value: Binding(get: { model.profile.businessClients.map { Double($0) } }, set: { value in model.update(\.profile) { $0.businessClients = value.map { Int(safely: $0) } } }),
                     decimals: false, identifier: "business-clients"
                 )
@@ -492,14 +492,14 @@ struct TopicForm: View {
     // MARK: Productivity
 
     @ViewBuilder private var productivity: some View {
-        QuestionCard(title: "Ton objectif du moment") {
-            ProfileTextField(placeholder: "Finir mon projet, lire plus…", text: profileBinding(\.mainGoal), identifier: "productivity-goal")
+        QuestionCard(title: tr("Ton objectif du moment")) {
+            ProfileTextField(placeholder: tr("Finir mon projet, lire plus…"), text: profileBinding(\.mainGoal), identifier: "productivity-goal")
         }
-        QuestionCard(title: "Ton rythme") {
+        QuestionCard(title: tr("Ton rythme")) {
             HStack(spacing: 8) {
-                ProfileNumberField(title: "Travail / étude", unit: "h par jour", value: profileBinding(\.dailyWorkHours), identifier: "work-hours")
+                ProfileNumberField(title: tr("Travail / étude"), unit: tr("h par jour"), value: profileBinding(\.dailyWorkHours), identifier: "work-hours")
                 ProfileNumberField(
-                    title: "Concentration", unit: "h / sem.",
+                    title: tr("Concentration"), unit: tr("h / sem."),
                     value: Binding(
                         get: { model.profile.knows(.focusGoal) ? model.productivity.weeklyFocusGoalHours : nil },
                         set: { value in if let value { model.setFocusGoal(value) } else { model.forget(.focusGoal) } }
@@ -508,8 +508,8 @@ struct TopicForm: View {
                 )
             }
         }
-        QuestionCard(title: "Une tâche pour commencer", detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, "tâche à faire", "tâches à faire")) {
-            quickAdd(placeholder: "Ex. : appeler le garage", text: $newTask, identifier: "first-task") {
+        QuestionCard(title: tr("Une tâche pour commencer"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr("tâche à faire"), tr("tâches à faire"))) {
+            quickAdd(placeholder: tr("Ex. : appeler le garage"), text: $newTask, identifier: "first-task") {
                 model.updateContent { $0.tasks.append(TaskItem(title: newTask.trimmed)) }
                 newTask = ""
             }
@@ -531,27 +531,27 @@ struct TopicForm: View {
             }
             .buttonStyle(.plain)
             .disabled(text.wrappedValue.trimmed.isEmpty)
-            .accessibilityLabel(Text("Ajouter"))
+            .accessibilityLabel(Text(tr("Ajouter")))
         }
     }
 
     // MARK: Studies
 
     @ViewBuilder private var studies: some View {
-        QuestionCard(title: "Ce que tu étudies") {
-            ProfileTextField(placeholder: "Filière, niveau…", text: profileBinding(\.studyField), identifier: "study-field")
+        QuestionCard(title: tr("Ce que tu étudies")) {
+            ProfileTextField(placeholder: tr("Filière, niveau…"), text: profileBinding(\.studyField), identifier: "study-field")
         }
-        QuestionCard(title: "Ton rythme", detail: "Tes cours, examens et notes s'ajoutent dans Créer › Études.") {
-            ProfileNumberField(title: "Étude personnelle", unit: "h par semaine", value: profileBinding(\.weeklyStudyHours), identifier: "study-hours")
+        QuestionCard(title: tr("Ton rythme"), detail: tr("Tes cours, examens et notes s'ajoutent dans Créer › Études.")) {
+            ProfileNumberField(title: tr("Étude personnelle"), unit: tr("h par semaine"), value: profileBinding(\.weeklyStudyHours), identifier: "study-hours")
         }
     }
 
     // MARK: Car
 
     @ViewBuilder private var car: some View {
-        QuestionCard(title: "Ta voiture") {
+        QuestionCard(title: tr("Ta voiture")) {
             ProfileTextField(
-                placeholder: "Marque et modèle",
+                placeholder: tr("Marque et modèle"),
                 text: Binding(
                     get: { model.profile.knows(.carName) ? model.car.name : "" },
                     set: { name in
@@ -561,9 +561,9 @@ struct TopicForm: View {
                 identifier: "car-name"
             )
         }
-        QuestionCard(title: "Kilométrage actuel", detail: "Les pleins et les entretiens le mettent ensuite à jour.") {
+        QuestionCard(title: tr("Kilométrage actuel"), detail: tr("Les pleins et les entretiens le mettent ensuite à jour.")) {
             ProfileNumberField(
-                title: "Compteur", unit: "km",
+                title: tr("Compteur"), unit: tr("km"),
                 value: Binding(get: { model.odometer }, set: { model.setOdometer($0) }),
                 decimals: false, identifier: "car-km"
             )
@@ -573,13 +573,13 @@ struct TopicForm: View {
     // MARK: Weather
 
     private var weather: some View {
-        QuestionCard(title: "Ta ville", detail: "Pour la météo de tes widgets. Tu peux la changer quand tu veux.") {
+        QuestionCard(title: tr("Ta ville"), detail: tr("Pour la météo de tes widgets. Tu peux la changer quand tu veux.")) {
             Button {
                 showsCityPicker = true
             } label: {
                 HStack {
                     Image(systemName: "location.fill")
-                    Text(model.settings.weatherLocation?.name ?? "Choisir ma ville")
+                    Text(model.settings.weatherLocation?.name ?? tr("Choisir ma ville"))
                         .fontWeight(.semibold)
                     Spacer()
                     Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(.tertiary)
@@ -594,7 +594,7 @@ struct TopicForm: View {
                     WeatherLocationView()
                         .toolbar {
                             ToolbarItem(placement: .confirmationAction) {
-                                Button("OK") { showsCityPicker = false }
+                                Button(tr("OK")) { showsCityPicker = false }
                             }
                         }
                 }
@@ -605,7 +605,7 @@ struct TopicForm: View {
     // MARK: Well-being
 
     @ViewBuilder private var wellbeing: some View {
-        QuestionCard(title: "Verres d'eau par jour", detail: "Le widget Hydratation suit cet objectif.") {
+        QuestionCard(title: tr("Verres d'eau par jour"), detail: tr("Le widget Hydratation suit cet objectif.")) {
             FlowLayout {
                 ForEach([4, 6, 8, 10, 12], id: \.self) { glasses in
                     let isOn = profile.knows(.hydrationGoal) && model.content.hydration.goal == glasses
@@ -615,8 +615,8 @@ struct TopicForm: View {
                 }
             }
         }
-        QuestionCard(title: "Une habitude à suivre", detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, "habitude suivie", "habitudes suivies")) {
-            quickAdd(placeholder: "Ex. : méditer, lire, marcher", text: $newHabit, identifier: "first-habit") {
+        QuestionCard(title: tr("Une habitude à suivre"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr("habitude suivie"), tr("habitudes suivies"))) {
+            quickAdd(placeholder: tr("Ex. : méditer, lire, marcher"), text: $newHabit, identifier: "first-habit") {
                 guard model.canAddHabit else { return }
                 model.updateContent { $0.habits.append(Habit(name: newHabit.trimmed, symbol: "checkmark.circle", colorHex: "7FA33A")) }
                 newHabit = ""
@@ -699,7 +699,7 @@ struct TopicEditorSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("OK") { dismiss() }
+                    Button(tr("OK")) { dismiss() }
                 }
             }
         }
@@ -715,7 +715,7 @@ struct InterestsEditorSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("Tessera met ces thèmes en avant, sans jamais cacher les autres.")
+                    Text(tr("Tessera met ces thèmes en avant, sans jamais cacher les autres."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     InterestGrid(selection: Binding(
@@ -726,11 +726,11 @@ struct InterestsEditorSheet: View {
                 .padding(20)
             }
             .background(.screenFill)
-            .navigationTitle("Centres d'intérêt")
+            .navigationTitle(tr("Centres d'intérêt"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("OK") { dismiss() }
+                    Button(tr("OK")) { dismiss() }
                 }
             }
         }

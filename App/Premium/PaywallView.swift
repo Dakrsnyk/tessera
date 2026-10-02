@@ -42,11 +42,11 @@ struct PaywallView: View {
                         Image(systemName: "xmark")
                             .font(.subheadline.weight(.semibold))
                     }
-                    .accessibilityLabel(Text("Fermer"))
+                    .accessibilityLabel(Text(tr("Fermer")))
                 }
             }
-            .alert("Achat", isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {
-                Button("OK", role: .cancel) {
+            .alert(tr("Achat"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {
+                Button(tr("OK"), role: .cancel) {
                     if didPurchase { dismiss() }
                 }
             } message: {
@@ -63,9 +63,9 @@ struct PaywallView: View {
     private var hero: some View {
         VStack(spacing: 12) {
             TesseraMark(size: 56)
-            Text("Tessera Premium")
+            Text(tr("Tessera Premium"))
                 .font(.largeTitle.weight(.bold))
-            Text("Tous les widgets, tous les styles, sans limite.")
+            Text(tr("Tous les widgets, tous les styles, sans limite."))
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -91,11 +91,11 @@ struct PaywallView: View {
 
     private var perks: some View {
         VStack(alignment: .leading, spacing: 16) {
-            PerkRow(symbol: "square.stack.3d.up.fill", title: "Tous les widgets des espaces", detail: "Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…")
-            PerkRow(symbol: "wand.and.stars", title: "Widgets intelligents", detail: "« Maintenant » change selon le moment, et les analyses résument ta journée")
-            PerkRow(symbol: "bag.fill", title: "Tous les packs", detail: "Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…")
-            PerkRow(symbol: "paintpalette", title: "8 styles en plus", detail: "Verre, Aurore, Élégant, Digital, Rétro, Futuriste…")
-            PerkRow(symbol: "photo", title: "Fonds photo, couleurs libres", detail: "Et les polices Serif et Mono")
+            PerkRow(symbol: "square.stack.3d.up.fill", title: tr("Tous les widgets des espaces"), detail: tr("Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…"))
+            PerkRow(symbol: "wand.and.stars", title: tr("Widgets intelligents"), detail: tr("« Maintenant » change selon le moment, et les analyses résument ta journée"))
+            PerkRow(symbol: "bag.fill", title: tr("Tous les packs"), detail: tr("Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…"))
+            PerkRow(symbol: "paintpalette", title: tr("8 styles en plus"), detail: tr("Verre, Aurore, Élégant, Digital, Rétro, Futuriste…"))
+            PerkRow(symbol: "photo", title: tr("Fonds photo, couleurs libres"), detail: tr("Et les polices Serif et Mono"))
         }
         .card(padding: 20)
     }
@@ -105,18 +105,18 @@ struct PaywallView: View {
             HStack {
                 Text("")
                 Spacer()
-                Text("Gratuit").frame(width: 72)
-                Text("Premium").frame(width: 72).foregroundStyle(Color.premiumInk)
+                Text(tr("Gratuit")).frame(width: 72)
+                Text(tr("Premium")).frame(width: 72).foregroundStyle(Color.premiumInk)
             }
             .font(.caption.weight(.semibold))
             .foregroundStyle(.secondary)
             .padding(.bottom, 8)
-            comparisonRow("Widgets", free: "\(WidgetKind.allCases.filter { !$0.isPremium }.count)", premium: "\(WidgetKind.allCases.count)")
-            comparisonRow("Styles", free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
-            comparisonRow("Widgets enregistrés", free: "\(AppModel.freeDesignLimit)", premium: "∞")
-            comparisonRow("Habitudes", free: "\(AppModel.freeHabitLimit)", premium: "∞")
-            comparisonRow("Couleurs", free: "\(Palette.freeAccents.count)", premium: "∞")
-            comparisonRow("Fonds et polices", free: "—", premium: "✓")
+            comparisonRow(tr("Widgets"), free: "\(WidgetKind.allCases.filter { !$0.isPremium }.count)", premium: "\(WidgetKind.allCases.count)")
+            comparisonRow(tr("Styles"), free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
+            comparisonRow(tr("Widgets enregistrés"), free: "\(AppModel.freeDesignLimit)", premium: "∞")
+            comparisonRow(tr("Habitudes"), free: "\(AppModel.freeHabitLimit)", premium: "∞")
+            comparisonRow(tr("Couleurs"), free: "\(Palette.freeAccents.count)", premium: "∞")
+            comparisonRow(tr("Fonds et polices"), free: "—", premium: "✓")
         }
         .card(padding: 18)
     }
@@ -134,13 +134,13 @@ struct PaywallView: View {
             .padding(.vertical, 10)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("\(title) : gratuit \(free), Premium \(premium)"))
+        .accessibilityLabel(Text(tr("\(title) : gratuit \(free), Premium \(premium)")))
     }
 
     @ViewBuilder private var plans: some View {
         switch store.loadState {
         case .idle, .loading:
-            ProgressView("Chargement des offres…")
+            ProgressView(tr("Chargement des offres…"))
                 .frame(maxWidth: .infinity, minHeight: 120)
         case let .failed(reason):
             VStack(spacing: 10) {
@@ -151,7 +151,7 @@ struct PaywallView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
-                Button("Réessayer") { Task { await store.loadProducts() } }
+                Button(tr("Réessayer")) { Task { await store.loadProducts() } }
                     .buttonStyle(.bordered)
             }
             .frame(maxWidth: .infinity)
@@ -177,19 +177,19 @@ struct PaywallView: View {
             if let trial = store.trialDescription(for: product) { return trial }
             if let savings = store.yearlySavingsPercent { return "−\(savings) %" }
         }
-        if product.id == PremiumConfiguration.lifetimeID { return "Paiement unique" }
+        if product.id == PremiumConfiguration.lifetimeID { return tr("Paiement unique") }
         return nil
     }
 
     private func subtitle(for product: Product) -> String {
         switch product.id {
         case PremiumConfiguration.yearlyID:
-            if let monthly = store.monthlyEquivalent(of: product) { return "\(product.displayPrice) par an, soit \(monthly) par mois" }
-            return "\(product.displayPrice) par an"
+            if let monthly = store.monthlyEquivalent(of: product) { return tr("\(product.displayPrice) par an, soit \(monthly) par mois") }
+            return tr("\(product.displayPrice) par an")
         case PremiumConfiguration.monthlyID:
-            return "\(product.displayPrice) par mois"
+            return tr("\(product.displayPrice) par mois")
         default:
-            return "\(product.displayPrice), une seule fois"
+            return tr("\(product.displayPrice), une seule fois")
         }
     }
 
@@ -198,9 +198,9 @@ struct PaywallView: View {
             Image(systemName: "checkmark.seal.fill")
                 .font(.largeTitle)
                 .foregroundStyle(Color.accentColor)
-            Text("Tu profites de Premium")
+            Text(tr("Tu profites de Premium"))
                 .font(.headline)
-            Text("Merci ! Tous les widgets et tous les styles sont débloqués.")
+            Text(tr("Merci ! Tous les widgets et tous les styles sont débloqués."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -220,10 +220,10 @@ struct PaywallView: View {
                 Task {
                     let found = await store.restore()
                     didPurchase = found
-                    message = found ? "Ton accès Premium est rétabli." : "Aucun achat Premium trouvé pour ce compte Apple."
+                    message = found ? tr("Ton accès Premium est rétabli.") : tr("Aucun achat Premium trouvé pour ce compte Apple.")
                 }
             } label: {
-                Text(store.isRestoring ? "Restauration…" : "Restaurer mes achats")
+                Text(store.isRestoring ? tr("Restauration…") : tr("Restaurer mes achats"))
                     .font(.footnote.weight(.medium))
                     .frame(minHeight: 32)
             }
@@ -243,7 +243,7 @@ struct PaywallView: View {
         } label: {
             HStack {
                 if store.purchasingID != nil { ProgressView().tint(AppFill.onAccent) }
-                Text(isTrial ? "Essayer gratuitement" : "Continuer")
+                Text(isTrial ? tr("Essayer gratuitement") : tr("Continuer"))
                     .font(.headline)
                     .foregroundStyle(.onAccent)
             }
@@ -256,13 +256,13 @@ struct PaywallView: View {
 
     private var legal: some View {
         VStack(spacing: 10) {
-            Text("L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. Si tu profites d'un essai gratuit, il prend fin dès l'achat d'un abonnement.")
+            Text(tr("L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. Si tu profites d'un essai gratuit, il prend fin dès l'achat d'un abonnement."))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
             HStack(spacing: 16) {
-                Button("Conditions") { openURL(PremiumConfiguration.termsURL) }
-                Button("Confidentialité") { openURL(PremiumConfiguration.privacyURL) }
+                Button(tr("Conditions")) { openURL(PremiumConfiguration.termsURL) }
+                Button(tr("Confidentialité")) { openURL(PremiumConfiguration.privacyURL) }
             }
             .font(.caption.weight(.medium))
         }
@@ -273,9 +273,9 @@ struct PaywallView: View {
         case .success:
             Haptics.success()
             didPurchase = true
-            message = "Bienvenue dans Tessera Premium !"
+            message = tr("Bienvenue dans Tessera Premium !")
         case .pending:
-            message = "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé."
+            message = tr("Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.")
         case .cancelled:
             break
         case let .failed(reason):

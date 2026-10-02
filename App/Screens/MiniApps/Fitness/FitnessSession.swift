@@ -23,7 +23,7 @@ struct FitnessSessionPage: View {
                 chooser(state: state)
             }
         }
-        .navigationTitle("Séance")
+        .navigationTitle(tr("Séance"))
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $info) { exercise in
             ExerciseInfoSheet(exercise: exercise)
@@ -43,7 +43,7 @@ struct FitnessSessionPage: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Fermer") { picking = false }
+                        Button(tr("Fermer")) { picking = false }
                     }
                 }
             }
@@ -69,7 +69,7 @@ struct FitnessSessionPage: View {
                     .foregroundStyle(.secondary)
                 }
                 Spacer()
-                Text("\(session.sets.count)/\(session.totalSets) séries")
+                Text(tr("\(session.sets.count)/\(session.totalSets) séries"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.secondary)
             }
@@ -80,12 +80,12 @@ struct FitnessSessionPage: View {
             VStack(alignment: .leading, spacing: 14) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Série \(session.setIndex + 1) sur \(exercise.sets)")
+                        Text(tr("Série \(session.setIndex + 1) sur \(exercise.sets)"))
                             .font(.caption.weight(.bold))
                             .foregroundStyle(Color(hex: accentHex))
                         Text(exercise.name).font(.title2.weight(.bold))
                         if let last, let best = last.best {
-                            Text("La dernière fois : \(ProfileNumberField.format(best.weight)) kg × \(best.reps)")
+                            Text(tr("La dernière fois : \(ProfileNumberField.format(best.weight)) kg × \(best.reps)"))
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                         }
@@ -100,17 +100,17 @@ struct FitnessSessionPage: View {
                                 .foregroundStyle(Color(hex: accentHex))
                                 .frame(width: 44, height: 44)
                         }
-                        .accessibilityLabel(Text("Fiche de l'exercice"))
+                        .accessibilityLabel(Text(tr("Fiche de l'exercice")))
                         .accessibilityIdentifier("session-info")
                     }
                 }
                 HStack(spacing: 12) {
-                    adjuster(title: "Répétitions", value: "\(reps)") {
+                    adjuster(title: tr("Répétitions"), value: "\(reps)") {
                         reps = max(1, reps - 1)
                     } plus: {
                         reps = min(100, reps + 1)
                     }
-                    adjuster(title: "Charge", value: weight > 0 ? "\(ProfileNumberField.format(weight)) kg" : "Corps") {
+                    adjuster(title: tr("Charge"), value: weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("Corps")) {
                         weight = max(0, weight - 2.5)
                     } plus: {
                         weight += 2.5
@@ -126,7 +126,7 @@ struct FitnessSessionPage: View {
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                         Spacer()
-                        Button("Passer le repos") {
+                        Button(tr("Passer le repos")) {
                             model.update(\.fitness) { $0.skipRest() }
                         }
                         .font(.subheadline.weight(.semibold))
@@ -134,11 +134,11 @@ struct FitnessSessionPage: View {
                     .padding(12)
                     .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
-                MiniActionButton(title: "Série faite", symbol: "checkmark.circle.fill", colorHex: accentHex) {
+                MiniActionButton(title: tr("Série faite"), symbol: "checkmark.circle.fill", colorHex: accentHex) {
                     completeSet()
                 }
                 .accessibilityIdentifier("session-set-done")
-                Button("Passer cet exercice") {
+                Button(tr("Passer cet exercice")) {
                     model.update(\.fitness) { $0.active?.skipExercise(at: Date()) }
                 }
                 .font(.subheadline)
@@ -148,7 +148,7 @@ struct FitnessSessionPage: View {
 
             // The whole session.
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "La séance")
+                MiniSectionTitle(title: tr("La séance"))
                 MiniRowsCard {
                     ForEach(Array(session.exercises.enumerated()), id: \.element.id) { index, item in
                         exerciseRow(item, index: index, session: session)
@@ -158,7 +158,7 @@ struct FitnessSessionPage: View {
                 Button {
                     picking = true
                 } label: {
-                    Label("Ajouter un exercice", systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
+                    Label(tr("Ajouter un exercice"), systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
                 }
                 .accessibilityIdentifier("session-add")
             }
@@ -166,18 +166,18 @@ struct FitnessSessionPage: View {
             Button(role: .destructive) {
                 confirmFinish = true
             } label: {
-                Text("Terminer la séance").frame(maxWidth: .infinity, minHeight: 44)
+                Text(tr("Terminer la séance")).frame(maxWidth: .infinity, minHeight: 44)
             }
             .buttonStyle(.bordered)
             .accessibilityIdentifier("session-finish")
-            .confirmationDialog("Terminer la séance ?", isPresented: $confirmFinish, titleVisibility: .visible) {
-                Button("Terminer et enregistrer") {
+            .confirmationDialog(tr("Terminer la séance ?"), isPresented: $confirmFinish, titleVisibility: .visible) {
+                Button(tr("Terminer et enregistrer")) {
                     model.update(\.fitness) { $0.finishActive(at: Date()) }
                     Haptics.success()
                     dismiss()
                 }
             } message: {
-                Text("Les séries faites sont enregistrées dans l'historique.")
+                Text(tr("Les séries faites sont enregistrées dans l'historique."))
             }
         }
         .onAppear { load(exercise) }
@@ -250,7 +250,7 @@ struct FitnessSessionPage: View {
                         Image(systemName: "info.circle").foregroundStyle(Color(hex: accentHex))
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel(Text("Fiche de \(item.name)"))
+                    .accessibilityLabel(Text(tr("Fiche de \(item.name)")))
                 }
             }
             if !done.isEmpty {
@@ -260,7 +260,7 @@ struct FitnessSessionPage: View {
                             Button {
                                 editingSet = set
                             } label: {
-                                Text(set.weight > 0 ? "\(ProfileNumberField.format(set.weight)) × \(set.reps)" : "\(set.reps) reps")
+                                Text(set.weight > 0 ? "\(ProfileNumberField.format(set.weight)) × \(set.reps)" : tr("\(set.reps) reps"))
                                     .font(.caption.weight(.semibold))
                                     .monospacedDigit()
                                     .padding(.horizontal, 10)
@@ -280,10 +280,10 @@ struct FitnessSessionPage: View {
 
     private func chooser(state: FitnessState) -> some View {
         MiniAppScroll {
-            Text("Choisis la séance à faire.")
+            Text(tr("Choisis la séance à faire."))
                 .font(.headline)
             if state.routines.isEmpty {
-                Text("Aucune séance dans ton programme : crée-en une dans Programme.")
+                Text(tr("Aucune séance dans ton programme : crée-en une dans Programme."))
                     .foregroundStyle(.secondary)
             }
             MiniRowsCard {
@@ -293,7 +293,7 @@ struct FitnessSessionPage: View {
                         model.update(\.fitness) { $0.startSession(routine, at: Date()) }
                     } label: {
                         MiniRow(symbol: "play.fill", colorHex: accentHex, title: routine.name,
-                                detail: "\(Fmt.plural(routine.exercises.count, "exercice", "exercices")) · environ \(FitnessPlan.minutes(routine)) min")
+                                detail: tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · environ \(FitnessPlan.minutes(routin)e)) min")
                     }
                     .buttonStyle(.plain)
                     if index < state.routines.count - 1 { MiniDivider() }
@@ -301,11 +301,11 @@ struct FitnessSessionPage: View {
                 if !state.routines.isEmpty { MiniDivider() }
                 Button {
                     model.update(\.fitness) { state in
-                        state.startSession(Routine(name: "Séance libre", exercises: []), at: Date())
+                        state.startSession(Routine(name: tr("Séance libre"), exercises: []), at: Date())
                     }
                     picking = true
                 } label: {
-                    MiniRow(symbol: "sparkles", colorHex: accentHex, title: "Séance libre", detail: "Ajoute les exercices au fur et à mesure")
+                    MiniRow(symbol: "sparkles", colorHex: accentHex, title: tr("Séance libre"), detail: tr("Ajoute les exercices au fur et à mesure"))
                 }
                 .buttonStyle(.plain)
             }
@@ -324,8 +324,8 @@ struct SetEditor: View {
     var body: some View {
         SheetForm(title: set.exercise, canSave: reps > 0, onSave: save) {
             Section {
-                Stepper("Répétitions : \(reps)", value: $reps, in: 1...100)
-                NumberRow(title: "Charge", value: $weight, unit: "kg")
+                Stepper(tr("Répétitions : \(reps)"), value: $reps, in: 1...100)
+                NumberRow(title: tr("Charge"), value: $weight, unit: tr("kg"))
             }
             Section {
                 Button(role: .destructive) {
@@ -336,7 +336,7 @@ struct SetEditor: View {
                     }
                     dismiss()
                 } label: {
-                    Label("Supprimer cette série", systemImage: "trash")
+                    Label(tr("Supprimer cette série"), systemImage: "trash")
                 }
             }
         }

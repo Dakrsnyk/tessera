@@ -25,7 +25,7 @@ struct LockScreenCreator: View {
                     subtitle: family.shortTitle
                 )
             }
-            return items.isEmpty ? nil : (space?.title ?? "Général", items)
+            return items.isEmpty ? nil : (space?.title ?? tr("Général"), items)
         }
     }
 
@@ -36,7 +36,7 @@ struct LockScreenCreator: View {
             Toggle(isOn: $onlyInteractive.animation(.snappy)) {
                 HStack(spacing: 6) {
                     InteractiveBadge()
-                    Text("Seulement les widgets interactifs")
+                    Text(tr("Seulement les widgets interactifs"))
                         .font(.subheadline)
                 }
             }
@@ -73,7 +73,7 @@ struct LockScreenCreator: View {
 
     private var intro: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("Sous l'heure, sans déverrouiller", systemImage: "lock.fill")
+            Label(tr("Sous l'heure, sans déverrouiller"), systemImage: "lock.fill")
                 .font(.headline)
             Text("Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués \(Image(systemName: "hand.tap.fill")) s'utilisent directement : valider une série, cocher une habitude, ajouter un verre…")
                 .font(.subheadline)
@@ -82,7 +82,7 @@ struct LockScreenCreator: View {
             Button {
                 showsGuide = true
             } label: {
-                Label("Comment l'ajouter", systemImage: "questionmark.circle")
+                Label(tr("Comment l'ajouter"), systemImage: "questionmark.circle")
                     .font(.subheadline.weight(.semibold))
             }
             .accessibilityIdentifier("lock-guide")
@@ -94,18 +94,18 @@ struct LockScreenCreator: View {
     /// The workout in progress, as it appears on the Lock Screen and in the Dynamic Island.
     private var workoutLive: some View {
         let now = Date()
-        let attributes = WorkoutActivityAttributes(routineName: "Haut du corps")
+        let attributes = WorkoutActivityAttributes(routineName: tr("Haut du corps"))
         let state = WorkoutActivityAttributes.ContentState(
-            exercise: "Développé couché", setNumber: 3, sets: 4, load: "8 × 60 kg",
+            exercise: tr("Développé couché"), setNumber: 3, sets: 4, load: tr("8 × 60 kg"),
             doneSets: 6, totalSets: 16, restStart: now.addingTimeInterval(-38), restEnd: now.addingTimeInterval(52)
         )
         return VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 8) {
-                Text("Pendant une séance")
+                Text(tr("Pendant une séance"))
                     .font(.headline)
                 InteractiveBadge(showsText: true)
             }
-            Text("Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans déverrouiller.")
+            Text(tr("Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans déverrouiller."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -126,10 +126,10 @@ struct LockScreenGuide: View {
     @Environment(\.dismiss) private var dismiss
 
     private let steps: [(String, String)] = [
-        ("hand.tap", "Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser »."),
-        ("lock.iphone", "Choisis « Écran verrouillé », puis touche la zone sous l'heure."),
-        ("plus.circle", "Dans la liste, choisis Tessera, puis le widget voulu."),
-        ("slider.horizontal.3", "Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche."),
+        ("hand.tap", tr("Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».")),
+        ("lock.iphone", tr("Choisis « Écran verrouillé », puis touche la zone sous l'heure.")),
+        ("plus.circle", tr("Dans la liste, choisis Tessera, puis le widget voulu.")),
+        ("slider.horizontal.3", tr("Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.")),
     ]
 
     var body: some View {
@@ -142,7 +142,7 @@ struct LockScreenGuide: View {
                             .foregroundStyle(Color.accentColor)
                             .frame(width: 30)
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Étape \(index + 1)")
+                            Text(tr("Étape \(index + 1)"))
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(.secondary)
                             Text(step.1)
@@ -152,16 +152,16 @@ struct LockScreenGuide: View {
                     .padding(.vertical, 4)
                 }
                 Section {
-                    Text("Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions.")
+                    Text(tr("Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }
-            .navigationTitle("Écran verrouillé")
+            .navigationTitle(tr("Écran verrouillé"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("OK") { dismiss() }
+                    Button(tr("OK")) { dismiss() }
                 }
             }
         }

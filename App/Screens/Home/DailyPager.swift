@@ -49,8 +49,8 @@ struct DailyPager<Content: View>: View {
             dots
         }
         .accessibilityElement(children: .contain)
-        .accessibilityAction(named: Text("Vue suivante")) { go(by: 1) }
-        .accessibilityAction(named: Text("Vue précédente")) { go(by: -1) }
+        .accessibilityAction(named: Text(tr("Vue suivante"))) { go(by: 1) }
+        .accessibilityAction(named: Text(tr("Vue précédente"))) { go(by: -1) }
         .onChange(of: position) { _, new in
             guard let new, new != model.settings.dailyCardPages[id] ?? 0 else { return }
             Haptics.tap()
@@ -72,7 +72,7 @@ struct DailyPager<Content: View>: View {
         }
         .animation(.snappy, value: page)
         .accessibilityElement()
-        .accessibilityLabel(Text("Vue \(page + 1) sur \(count) : \(titles[page])"))
+        .accessibilityLabel(Text(tr("Vue \(page + 1) sur \(count) : \(titles[page])")))
         .accessibilityIdentifier("daily-pager-\(id)-dots")
     }
 

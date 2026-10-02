@@ -6,10 +6,10 @@ enum AssetKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .stock: "Actions"
-        case .etf: "ETF"
-        case .crypto: "Crypto"
-        case .cash: "Liquidités"
+        case .stock: tr("Actions")
+        case .etf: tr("ETF")
+        case .crypto: tr("Crypto")
+        case .cash: tr("Liquidités")
         }
     }
 

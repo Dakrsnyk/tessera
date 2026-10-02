@@ -15,24 +15,24 @@ struct BudgetSpaceSections: View {
                 Text(TF.money(BudgetMath.remaining(state, at: now), currency))
                     .font(.system(size: 34, weight: .semibold, design: .rounded))
                     .monospacedDigit()
-                Text("restent ce mois-ci, soit \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour")
+                Text(tr("restent ce mois-ci, soit \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour"))
                     .font(.subheadline)
                     .foregroundStyle(Color.secondary)
                 ProgressView(value: min(1, BudgetMath.spentThisMonth(state, at: now) / max(1, state.monthlyBudget)))
                     .tint(Color(hex: "2F8F7A"))
             }
             .padding(.vertical, 4)
-            NumberRow(title: "Budget du mois", value: Binding(get: { state.monthlyBudget }, set: { value in model.setMonthlyBudget(value) }), unit: currency)
+            NumberRow(title: tr("Budget du mois"), value: Binding(get: { state.monthlyBudget }, set: { value in model.setMonthlyBudget(value) }), unit: currency)
             Button {
                 sheets?.open { ExpenseEditor() }
             } label: {
-                Label("Noter une dépense", systemImage: "plus.circle.fill").font(.headline)
+                Label(tr("Noter une dépense"), systemImage: "plus.circle.fill").font(.headline)
             }
         } header: {
             Text(Fmt.monthYear(now))
         }
 
-        Section("Dépenses du mois") {
+        Section(tr("Dépenses du mois")) {
             let expenses = BudgetMath.expenses(state, in: month).sorted { $0.date > $1.date }
             ForEach(expenses.prefix(40)) { expense in
                 let category = state.category(expense.categoryID)
@@ -41,7 +41,7 @@ struct BudgetSpaceSections: View {
                         .foregroundStyle(Color(hex: category?.colorHex ?? "64748B"))
                         .frame(width: 22)
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(expense.note.isEmpty ? (category?.name ?? "Dépense") : expense.note)
+                        Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note)
                         Text(Fmt.shortDay(expense.date)).font(.caption).foregroundStyle(Color.secondary)
                     }
                     Spacer()
@@ -51,12 +51,12 @@ struct BudgetSpaceSections: View {
                     Button(role: .destructive) {
                         model.update(\.budget) { $0.expenses.removeAll { $0.id == expense.id } }
                     } label: {
-                        Label("Supprimer", systemImage: "trash")
+                        Label(tr("Supprimer"), systemImage: "trash")
                     }
                 }
             }
             if expenses.isEmpty {
-                HintRow(text: "Aucune dépense notée ce mois-ci.")
+                HintRow(text: tr("Aucune dépense notée ce mois-ci."))
             }
         }
 
@@ -73,15 +73,15 @@ struct BudgetSpaceSections: View {
             Button {
                 sheets?.open { QuickExpenseEditor(quick: QuickExpense(name: "", amount: 5, categoryID: BudgetState.fixedID(2))) }
             } label: {
-                Label("Nouvelle dépense rapide", systemImage: "plus")
+                Label(tr("Nouvelle dépense rapide"), systemImage: "plus")
             }
         } header: {
-            Text("Dépenses rapides")
+            Text(tr("Dépenses rapides"))
         } footer: {
-            Text("Café, bus, lunch… Le widget Dépense rapide les note d'une touche.")
+            Text(tr("Café, bus, lunch… Le widget Dépense rapide les note d'une touche."))
         }
 
-        Section("Factures et abonnements") {
+        Section(tr("Factures et abonnements")) {
             ForEach(BudgetMath.upcomingBills(state, at: now, within: 400)) { item in
                 Button {
                     sheets?.open { BillEditor(bill: item.bill) }
@@ -90,7 +90,7 @@ struct BudgetSpaceSections: View {
                         Image(systemName: item.bill.symbol).frame(width: 22).foregroundStyle(.tint)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(item.bill.name).foregroundStyle(Color.primary)
-                            Text("\(item.bill.isSubscription ? "Abonnement · " : "")\(Fmt.shortDay(item.due))").font(.caption).foregroundStyle(Color.secondary)
+                            Text("\(item.bill.isSubscription ? tr("Abonnement · ") : "")\(Fmt.shortDay(item.due))").font(.caption).foregroundStyle(Color.secondary)
                         }
                         Spacer()
                         Text(TF.money(item.bill.amount, currency, decimals: 2)).foregroundStyle(Color.secondary).monospacedDigit()
@@ -100,14 +100,14 @@ struct BudgetSpaceSections: View {
             Button {
                 sheets?.open { BillEditor(bill: Bill(name: "", amount: 0, anchorDate: Date())) }
             } label: {
-                Label("Nouvelle facture", systemImage: "plus")
+                Label(tr("Nouvelle facture"), systemImage: "plus")
             }
             if !state.bills.isEmpty {
-                ValueRow(title: "Abonnements", value: "\(TF.money(BudgetMath.subscriptionsMonthly(state), currency, decimals: 2)) / mois", symbol: "repeat.circle")
+                ValueRow(title: tr("Abonnements"), value: tr("\(TF.money(BudgetMath.subscriptionsMonthly(state), currency, decimals: 2)) / mois"), symbol: "repeat.circle")
             }
         }
 
-        Section("Épargne") {
+        Section(tr("Épargne")) {
             ForEach(state.goals) { goal in
                 Button {
                     sheets?.open { GoalEditor(goal: goal) }
@@ -126,7 +126,7 @@ struct BudgetSpaceSections: View {
             Button {
                 sheets?.open { GoalEditor(goal: SavingsGoal(name: "", target: 1_000, saved: 0, deadline: nil)) }
             } label: {
-                Label("Nouvel objectif", systemImage: "plus")
+                Label(tr("Nouvel objectif"), systemImage: "plus")
             }
         }
 
@@ -143,30 +143,30 @@ struct BudgetSpaceSections: View {
             Button {
                 sheets?.open { AccountEditor(account: Account(name: "", balance: 0)) }
             } label: {
-                Label("Nouveau compte ou dette", systemImage: "plus")
+                Label(tr("Nouveau compte ou dette"), systemImage: "plus")
             }
             if !state.accounts.isEmpty {
-                ValueRow(title: "Valeur nette", value: TF.money(BudgetMath.netWorth(state), currency), symbol: "sum")
+                ValueRow(title: tr("Valeur nette"), value: TF.money(BudgetMath.netWorth(state), currency), symbol: "sum")
             }
         } header: {
-            Text("Comptes")
+            Text(tr("Comptes"))
         } footer: {
-            Text("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.")
+            Text(tr("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque."))
         }
 
-        Section("Catégories") {
+        Section(tr("Catégories")) {
             ForEach(state.categories) { category in
                 Button {
                     sheets?.open { CategoryEditor(category: category) }
                 } label: {
-                    ValueRow(title: category.name, value: category.monthlyLimit > 0 ? "\(TF.money(category.monthlyLimit, currency)) / mois" : "Sans limite", symbol: category.symbol, colorHex: category.colorHex)
+                    ValueRow(title: category.name, value: category.monthlyLimit > 0 ? tr("\(TF.money(category.monthlyLimit, currency)) / mois") : tr("Sans limite"), symbol: category.symbol, colorHex: category.colorHex)
                 }
                 .tint(.primary)
             }
             Button {
                 sheets?.open { CategoryEditor(category: BudgetCategory(name: "", symbol: "tag", colorHex: "3366FF")) }
             } label: {
-                Label("Nouvelle catégorie", systemImage: "plus")
+                Label(tr("Nouvelle catégorie"), systemImage: "plus")
             }
         }
     }
@@ -189,22 +189,22 @@ struct ExpenseEditor: View {
     }
 
     var body: some View {
-        SheetForm(title: isNew ? "Dépense" : "Modifier la dépense", canSave: expense.amount > 0, onSave: save) {
+        SheetForm(title: isNew ? tr("Dépense") : tr("Modifier la dépense"), canSave: expense.amount > 0, onSave: save) {
             Section {
-                NumberRow(title: "Montant", value: $expense.amount, unit: model.settings.currencyCode)
+                NumberRow(title: tr("Montant"), value: $expense.amount, unit: model.settings.currencyCode)
                     .accessibilityIdentifier("expense-amount")
-                Picker("Catégorie", selection: $expense.categoryID) {
+                Picker(tr("Catégorie"), selection: $expense.categoryID) {
                     ForEach(model.budget.categories) { category in
                         Label(category.name, systemImage: category.symbol).tag(Optional(category.id))
                     }
                 }
-                TextField("Note (facultatif)", text: $expense.note)
-                DatePicker("Date", selection: $expense.date, displayedComponents: .date)
+                TextField(tr("Note (facultatif)"), text: $expense.note)
+                DatePicker(tr("Date"), selection: $expense.date, displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)
             }
             if !isNew {
                 Section {
-                    Button("Supprimer la dépense", role: .destructive) {
+                    Button(tr("Supprimer la dépense"), role: .destructive) {
                         let id = expense.id
                         model.update(\.budget) { $0.expenses.removeAll { $0.id == id } }
                         dismiss()
@@ -235,16 +235,16 @@ struct IncomeEditor: View {
     }
 
     var body: some View {
-        SheetForm(title: isNew ? "Revenu" : "Modifier le revenu", canSave: income.amount > 0, onSave: save) {
+        SheetForm(title: isNew ? tr("Revenu") : tr("Modifier le revenu"), canSave: income.amount > 0, onSave: save) {
             Section {
-                NumberRow(title: "Montant", value: $income.amount, unit: model.settings.currencyCode)
-                TextField("Source (salaire, contrat, remboursement…)", text: $income.label)
-                DatePicker("Date", selection: $income.date, displayedComponents: .date)
+                NumberRow(title: tr("Montant"), value: $income.amount, unit: model.settings.currencyCode)
+                TextField(tr("Source (salaire, contrat, remboursement…)"), text: $income.label)
+                DatePicker(tr("Date"), selection: $income.date, displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)
             }
             if !isNew {
                 Section {
-                    Button("Supprimer le revenu", role: .destructive) {
+                    Button(tr("Supprimer le revenu"), role: .destructive) {
                         let id = income.id
                         model.update(\.budget) { $0.incomes.removeAll { $0.id == id } }
                         dismiss()
@@ -256,7 +256,7 @@ struct IncomeEditor: View {
 
     private func save() {
         var saved = income
-        saved.label = saved.label.trimmed.isEmpty ? "Revenu" : saved.label.trimmed
+        saved.label = saved.label.trimmed.isEmpty ? tr("Revenu") : saved.label.trimmed
         model.update(\.budget) { $0.save(saved) }
         Haptics.success()
     }
@@ -269,15 +269,15 @@ struct QuickExpenseEditor: View {
     private let symbols = ["cup.and.saucer.fill", "bus.fill", "takeoutbag.and.cup.and.straw.fill", "cart.fill", "fuelpump.fill", "parkingsign.circle.fill", "gift.fill", "tram.fill"]
 
     var body: some View {
-        SheetForm(title: "Dépense rapide", canSave: !quick.name.trimmed.isEmpty && quick.amount > 0, onSave: save) {
-            TextField("Nom (café, bus…)", text: $quick.name)
-            NumberRow(title: "Montant", value: $quick.amount, unit: model.settings.currencyCode)
-            Picker("Catégorie", selection: $quick.categoryID) {
+        SheetForm(title: tr("Dépense rapide"), canSave: !quick.name.trimmed.isEmpty && quick.amount > 0, onSave: save) {
+            TextField(tr("Nom (café, bus…)"), text: $quick.name)
+            NumberRow(title: tr("Montant"), value: $quick.amount, unit: model.settings.currencyCode)
+            Picker(tr("Catégorie"), selection: $quick.categoryID) {
                 ForEach(model.budget.categories) { category in
                     Text(category.name).tag(Optional(category.id))
                 }
             }
-            Picker("Icône", selection: $quick.symbol) {
+            Picker(tr("Icône"), selection: $quick.symbol) {
                 ForEach(symbols, id: \.self) { Image(systemName: $0).tag($0) }
             }
         }
@@ -301,15 +301,15 @@ struct BillEditor: View {
     @State var bill: Bill
 
     var body: some View {
-        SheetForm(title: "Facture", canSave: !bill.name.trimmed.isEmpty && bill.amount > 0, onSave: save) {
-            TextField("Nom (loyer, Hydro, Netflix…)", text: $bill.name)
-            NumberRow(title: "Montant", value: $bill.amount, unit: model.settings.currencyCode)
-            Picker("Fréquence", selection: $bill.period) {
+        SheetForm(title: tr("Facture"), canSave: !bill.name.trimmed.isEmpty && bill.amount > 0, onSave: save) {
+            TextField(tr("Nom (loyer, Hydro, Netflix…)"), text: $bill.name)
+            NumberRow(title: tr("Montant"), value: $bill.amount, unit: model.settings.currencyCode)
+            Picker(tr("Fréquence"), selection: $bill.period) {
                 ForEach(BillPeriod.allCases) { Text($0.title).tag($0) }
             }
-            DatePicker("Prochaine échéance", selection: $bill.anchorDate, displayedComponents: .date)
+            DatePicker(tr("Prochaine échéance"), selection: $bill.anchorDate, displayedComponents: .date)
                 .environment(\.locale, Fmt.locale)
-            Toggle("C'est un abonnement", isOn: $bill.isSubscription)
+            Toggle(tr("C'est un abonnement"), isOn: $bill.isSubscription)
         }
     }
 
@@ -333,20 +333,20 @@ struct GoalEditor: View {
     @State private var deposit: Double = 0
 
     var body: some View {
-        SheetForm(title: "Objectif d'épargne", canSave: !goal.name.trimmed.isEmpty && goal.target > 0, onSave: save) {
+        SheetForm(title: tr("Objectif d'épargne"), canSave: !goal.name.trimmed.isEmpty && goal.target > 0, onSave: save) {
             Section {
-                TextField("Nom (voyage, fonds d'urgence…)", text: $goal.name)
-                NumberRow(title: "Objectif", value: $goal.target, unit: model.settings.currencyCode)
-                NumberRow(title: "Déjà épargné", value: $goal.saved, unit: model.settings.currencyCode)
-                Toggle("Date limite", isOn: Binding(get: { goal.deadline != nil }, set: { goal.deadline = $0 ? (goal.deadline ?? Date().addingTimeInterval(180 * 86_400)) : nil }))
+                TextField(tr("Nom (voyage, fonds d'urgence…)"), text: $goal.name)
+                NumberRow(title: tr("Objectif"), value: $goal.target, unit: model.settings.currencyCode)
+                NumberRow(title: tr("Déjà épargné"), value: $goal.saved, unit: model.settings.currencyCode)
+                Toggle(tr("Date limite"), isOn: Binding(get: { goal.deadline != nil }, set: { goal.deadline = $0 ? (goal.deadline ?? Date().addingTimeInterval(180 * 86_400)) : nil }))
                 if goal.deadline != nil {
-                    DatePicker("Pour le", selection: Binding(get: { goal.deadline ?? Date() }, set: { goal.deadline = $0 }), displayedComponents: .date)
+                    DatePicker(tr("Pour le"), selection: Binding(get: { goal.deadline ?? Date() }, set: { goal.deadline = $0 }), displayedComponents: .date)
                         .environment(\.locale, Fmt.locale)
                 }
             }
-            Section("Ajouter un versement") {
-                NumberRow(title: "Montant", value: $deposit, unit: model.settings.currencyCode)
-                Button("Ajouter au montant épargné") {
+            Section(tr("Ajouter un versement")) {
+                NumberRow(title: tr("Montant"), value: $deposit, unit: model.settings.currencyCode)
+                Button(tr("Ajouter au montant épargné")) {
                     goal.saved += deposit
                     deposit = 0
                 }
@@ -373,10 +373,10 @@ struct AccountEditor: View {
     @State var account: Account
 
     var body: some View {
-        SheetForm(title: "Compte", canSave: !account.name.trimmed.isEmpty, onSave: save) {
-            TextField("Nom (compte chèque, CELI, prêt auto…)", text: $account.name)
-            NumberRow(title: "Solde", value: $account.balance, unit: model.settings.currencyCode)
-            Toggle("C'est une dette", isOn: $account.isLiability)
+        SheetForm(title: tr("Compte"), canSave: !account.name.trimmed.isEmpty, onSave: save) {
+            TextField(tr("Nom (compte chèque, CELI, prêt auto…)"), text: $account.name)
+            NumberRow(title: tr("Solde"), value: $account.balance, unit: model.settings.currencyCode)
+            Toggle(tr("C'est une dette"), isOn: $account.isLiability)
         }
     }
 
@@ -401,13 +401,13 @@ struct CategoryEditor: View {
     private let symbols = ["cart", "fork.knife", "bus", "ticket", "house", "square.grid.2x2", "tag", "heart", "gamecontroller", "tshirt", "pawprint", "graduationcap", "cross.case", "gift"]
 
     var body: some View {
-        SheetForm(title: "Catégorie", canSave: !category.name.trimmed.isEmpty, onSave: save) {
-            TextField("Nom", text: $category.name)
-            Picker("Icône", selection: $category.symbol) {
+        SheetForm(title: tr("Catégorie"), canSave: !category.name.trimmed.isEmpty, onSave: save) {
+            TextField(tr("Nom"), text: $category.name)
+            Picker(tr("Icône"), selection: $category.symbol) {
                 ForEach(symbols, id: \.self) { Image(systemName: $0).tag($0) }
             }
             ColorChoiceRow(hex: $category.colorHex)
-            NumberRow(title: "Limite par mois", value: $category.monthlyLimit, unit: model.settings.currencyCode)
+            NumberRow(title: tr("Limite par mois"), value: $category.monthlyLimit, unit: model.settings.currencyCode)
         }
     }
 

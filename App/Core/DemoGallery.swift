@@ -19,7 +19,7 @@ struct DemoGalleryView: View {
     var body: some View {
         let palette = DemoPalette(scheme: scheme, accentHex: MiniApp.fitness.colorHex)
         VStack(alignment: .leading, spacing: 6) {
-            Text("Démonstrations · page \(page)")
+            Text(tr("Démonstrations · page \(page)"))
                 .font(.headline)
             ForEach(exercises) { exercise in
                 VStack(alignment: .leading, spacing: 2) {
@@ -38,7 +38,7 @@ struct DemoGalleryView: View {
                         }
                         .frame(height: 74)
                     } else {
-                        Text("Pas de démonstration").font(.caption2).foregroundStyle(.red)
+                        Text(tr("Pas de démonstration")).font(.caption2).foregroundStyle(.red)
                     }
                 }
             }

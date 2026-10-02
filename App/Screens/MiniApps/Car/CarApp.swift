@@ -38,9 +38,9 @@ enum Car {
 
     static func remaining(_ status: CarMath.ServiceStatus) -> String {
         var parts: [String] = []
-        if let km = status.kmLeft { parts.append(km >= 0 ? "dans \(Fmt.number(Int(km))) km" : "dépassé de \(Fmt.number(Int(-km))) km") }
-        if let days = status.daysLeft { parts.append(days >= 0 ? "d'ici \(days) j" : "en retard de \(-days) j") }
-        return parts.isEmpty ? "Pas encore de repère" : parts.joined(separator: " ou ")
+        if let km = status.kmLeft { parts.append(km >= 0 ? tr("dans \(Fmt.number(Int(km))) km") : tr("dépassé de \(Fmt.number(Int(-km))) km")) }
+        if let days = status.daysLeft { parts.append(days >= 0 ? tr("d'ici \(days) j") : tr("en retard de \(-days) j")) }
+        return parts.isEmpty ? tr("Pas encore de repère") : parts.joined(separator: tr(" ou "))
     }
 }
 
@@ -63,9 +63,9 @@ struct CarAppView: View {
                 hero(state: state, now: now)
             }
             HStack(spacing: 10) {
-                MiniActionButton(title: "Plein", symbol: "fuelpump.fill", colorHex: Car.fuelHex) { sheet = .fuel(nil) }
+                MiniActionButton(title: tr("Plein"), symbol: "fuelpump.fill", colorHex: Car.fuelHex) { sheet = .fuel(nil) }
                     .accessibilityIdentifier("car-add-fuel")
-                MiniActionButton(title: "Kilométrage", symbol: "speedometer", colorHex: accentHex, isProminent: false) { sheet = .odometer }
+                MiniActionButton(title: tr("Kilométrage"), symbol: "speedometer", colorHex: accentHex, isProminent: false) { sheet = .odometer }
                     .accessibilityIdentifier("car-add-odometer")
             }
             stats(state: state, now: now)
@@ -74,12 +74,12 @@ struct CarAppView: View {
             more(state: state, now: now)
             MiniAppSettingsSection(app: .car)
         }
-        .navigationTitle(state.name.isEmpty ? "Auto" : state.name)
+        .navigationTitle(state.name.isEmpty ? tr("Auto") : state.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { sheet = .settings } label: { Image(systemName: "slider.horizontal.3") }
-                    .accessibilityLabel(Text("Voiture et réservoir"))
+                    .accessibilityLabel(Text(tr("Voiture et réservoir")))
                     .accessibilityIdentifier("car-settings")
             }
         }
@@ -89,8 +89,8 @@ struct CarAppView: View {
     private var start: some View {
         VStack(alignment: .leading, spacing: 10) {
             Image(systemName: "car.fill").font(.system(size: 28)).foregroundStyle(Color(hex: accentHex))
-            Text("Ta voiture, sans surprise").font(.title3.weight(.bold))
-            Text("Note tes pleins et ton kilométrage : consommation, autonomie, coût réel par mois, entretiens et échéances se suivent tout seuls.")
+            Text(tr("Ta voiture, sans surprise")).font(.title3.weight(.bold))
+            Text(tr("Note tes pleins et ton kilométrage : consommation, autonomie, coût réel par mois, entretiens et échéances se suivent tout seuls."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -106,29 +106,29 @@ struct CarAppView: View {
         return VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Compteur").font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
-                    Text(CarMath.odometer(state).map { "\(Fmt.number(Int($0))) km" } ?? "–")
+                    Text(tr("Compteur")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+                    Text(CarMath.odometer(state).map { tr("\(Fmt.number(Int($0))) km") } ?? "–")
                         .font(.system(size: 36, weight: .bold, design: .rounded))
                         .monospacedDigit()
                 }
                 Spacer()
                 if let month = CarMath.kmThisMonth(state, at: now) {
                     VStack(alignment: .trailing, spacing: 2) {
-                        Text("Ce mois-ci").font(.caption).foregroundStyle(.secondary)
-                        Text("\(Fmt.number(Int(month))) km").font(.headline).monospacedDigit()
+                        Text(tr("Ce mois-ci")).font(.caption).foregroundStyle(.secondary)
+                        Text(tr("\(Fmt.number(Int(month))) km")).font(.headline).monospacedDigit()
                     }
                 }
             }
             if let range {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
-                        Label("Autonomie estimée", systemImage: "fuelpump.fill").font(.subheadline.weight(.semibold))
+                        Label(tr("Autonomie estimée"), systemImage: "fuelpump.fill").font(.subheadline.weight(.semibold))
                         Spacer()
-                        Text("≈ \(Fmt.number(Int(range.km))) km").font(.headline).monospacedDigit()
+                        Text(tr("≈ \(Fmt.number(Int(range.km))) km")).font(.headline).monospacedDigit()
                     }
                     ProgressView(value: range.share)
                         .tint(range.share < 0.2 ? Color(hex: Car.alertHex) : Color(hex: Car.fuelHex))
-                    Text("Environ \(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \(Fmt.format(range.since.date, template: "dMMMM"))")
+                    Text(tr("Environ \(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \(Fmt.format(range.since.date, template: "dMMMM"))"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -137,7 +137,7 @@ struct CarAppView: View {
                 .background(Color(hex: Car.fuelHex).opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
             } else if state.tankLiters == nil && CarMath.consumption(state) != nil {
                 Button { sheet = .settings } label: {
-                    Label("Indique la taille du réservoir pour voir l'autonomie", systemImage: "fuelpump")
+                    Label(tr("Indique la taille du réservoir pour voir l'autonomie"), systemImage: "fuelpump")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: Car.fuelHex))
                 }
@@ -159,14 +159,14 @@ struct CarAppView: View {
             HStack(spacing: 10) {
                 if let consumption {
                     NavigationLink(value: HomeRoute.page(.carFuel)) {
-                        MiniStat(title: "Consommation", value: TF.decimal(consumption, 1), unit: "L/100",
-                                 detail: CarMath.fuelCostPerKm(state).map { "\(TF.money($0 * 100, currency, decimals: 2)) / 100 km" })
+                        MiniStat(title: tr("Consommation"), value: TF.decimal(consumption, 1), unit: "L/100",
+                                 detail: CarMath.fuelCostPerKm(state).map { tr("\(TF.money($0 * 100, currency, decimals: 2)) / 100 km") })
                     }
                     .buttonStyle(.plain)
                 }
                 if cost.total > 0 {
                     NavigationLink(value: HomeRoute.page(.carCosts)) {
-                        MiniStat(title: "Coût réel", value: TF.money(cost.total, currency), detail: "par mois, tout compris")
+                        MiniStat(title: tr("Coût réel"), value: TF.money(cost.total, currency), detail: tr("par mois, tout compris"))
                     }
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("car-cost")
@@ -182,7 +182,7 @@ struct CarAppView: View {
         let statuses = CarMath.serviceStatus(state, at: now)
         if !statuses.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Entretien")
+                MiniSectionTitle(title: tr("Entretien"))
                 NavigationLink(value: HomeRoute.page(.carMaintenance)) {
                     VStack(spacing: 12) {
                         ForEach(statuses.prefix(2), id: \.item.id) { status in
@@ -202,14 +202,14 @@ struct CarAppView: View {
         let upcoming = CarMath.upcomingDeadlines(state, at: now)
         if !upcoming.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Échéances")
+                MiniSectionTitle(title: tr("Échéances"))
                 NavigationLink(value: HomeRoute.page(.carDeadlines)) {
                     VStack(spacing: 0) {
                         ForEach(Array(upcoming.prefix(2).enumerated()), id: \.element.id) { index, deadline in
                             if index > 0 { MiniDivider() }
                             let days = DateMath.daysBetween(now, deadline.date)
                             MiniRow(symbol: deadline.symbol, colorHex: days <= 14 ? Car.alertHex : accentHex, title: deadline.title,
-                                    detail: Fmt.format(deadline.date, template: "dMMMMyyyy"), value: days == 0 ? "aujourd'hui" : "J-\(days)", showsChevron: false)
+                                    detail: Fmt.format(deadline.date, template: "dMMMMyyyy"), value: days == 0 ? tr("aujourd'hui") : "J-\(days)", showsChevron: false)
                         }
                     }
                     .padding(.horizontal, 14)
@@ -227,31 +227,31 @@ struct CarAppView: View {
     private func more(state: CarState, now: Date) -> some View {
         MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.carFuel)) {
-                MiniRow(symbol: "fuelpump.fill", colorHex: Car.fuelHex, title: "Carburant", detail: "Pleins, prix et consommation",
+                MiniRow(symbol: "fuelpump.fill", colorHex: Car.fuelHex, title: tr("Carburant"), detail: tr("Pleins, prix et consommation"),
                         value: state.fills.isEmpty ? nil : "\(state.fills.count)")
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("car-fuel")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.carMileage)) {
-                MiniRow(symbol: "speedometer", colorHex: accentHex, title: "Kilométrage", detail: "Kilomètres par mois")
+                MiniRow(symbol: "speedometer", colorHex: accentHex, title: tr("Kilométrage"), detail: tr("Kilomètres par mois"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("car-mileage")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.carMaintenance)) {
-                MiniRow(symbol: "wrench.and.screwdriver.fill", colorHex: "3366FF", title: "Entretien", detail: "Vidange, pneus, freins…",
+                MiniRow(symbol: "wrench.and.screwdriver.fill", colorHex: "3366FF", title: tr("Entretien"), detail: tr("Vidange, pneus, freins…"),
                         value: state.services.isEmpty ? nil : "\(state.services.count)")
             }
             .buttonStyle(.plain)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.carDeadlines)) {
-                MiniRow(symbol: "calendar.badge.exclamationmark", colorHex: Car.alertHex, title: "Échéances", detail: "Assurance, immatriculation, pneus d'hiver…")
+                MiniRow(symbol: "calendar.badge.exclamationmark", colorHex: Car.alertHex, title: tr("Échéances"), detail: tr("Assurance, immatriculation, pneus d'hiver…"))
             }
             .buttonStyle(.plain)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.carCosts)) {
-                MiniRow(symbol: "creditcard.fill", colorHex: "2F8F7A", title: "Coûts", detail: "Ce que la voiture coûte vraiment chaque mois")
+                MiniRow(symbol: "creditcard.fill", colorHex: "2F8F7A", title: tr("Coûts"), detail: tr("Ce que la voiture coûte vraiment chaque mois"))
             }
             .buttonStyle(.plain)
         }
@@ -284,13 +284,13 @@ struct CarSettingsEditor: View {
     @State private var tank: Double = 0
 
     var body: some View {
-        SheetForm(title: "Ma voiture", canSave: true, onSave: save) {
+        SheetForm(title: tr("Ma voiture"), canSave: true, onSave: save) {
             Section {
-                TextField("Nom de la voiture", text: $name)
-                NumberRow(title: "Réservoir", value: $tank, unit: "L")
+                TextField(tr("Nom de la voiture"), text: $name)
+                NumberRow(title: tr("Réservoir"), value: $tank, unit: "L")
                     .accessibilityIdentifier("car-tank")
             } footer: {
-                Text("La taille du réservoir (dans le manuel ou sur le site du constructeur) sert à estimer l'autonomie après un plein complet.")
+                Text(tr("La taille du réservoir (dans le manuel ou sur le site du constructeur) sert à estimer l'autonomie après un plein complet."))
             }
         }
         .onAppear {
@@ -301,7 +301,7 @@ struct CarSettingsEditor: View {
 
     private func save() {
         let liters = tank
-        model.setCarName(name.trimmed.isEmpty ? "Ma voiture" : name.trimmed)
+        model.setCarName(name.trimmed.isEmpty ? tr("Ma voiture") : name.trimmed)
         model.update(\.car) { $0.tankLiters = liters > 0 ? liters : nil }
     }
 }

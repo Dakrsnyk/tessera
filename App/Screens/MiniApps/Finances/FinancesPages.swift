@@ -13,7 +13,7 @@ struct MonthSwitcher: View {
             Button { move(-1) } label: {
                 Image(systemName: "chevron.left").font(.subheadline.weight(.bold)).frame(width: 40, height: 36)
             }
-            .accessibilityLabel(Text("Mois précédent"))
+            .accessibilityLabel(Text(tr("Mois précédent")))
             Text(Fmt.monthYear(month).capitalizedFirst)
                 .font(.subheadline.weight(.semibold))
                 .frame(maxWidth: .infinity)
@@ -21,7 +21,7 @@ struct MonthSwitcher: View {
                 Image(systemName: "chevron.right").font(.subheadline.weight(.bold)).frame(width: 40, height: 36)
             }
             .disabled(isCurrent)
-            .accessibilityLabel(Text("Mois suivant"))
+            .accessibilityLabel(Text(tr("Mois suivant")))
         }
         .foregroundStyle(Color(hex: colorHex))
         .background(.cardFill, in: Capsule())
@@ -41,7 +41,7 @@ struct FinancesTransactionsPage: View {
     enum Kind: String, CaseIterable, Identifiable {
         case expenses, incomes
         var id: String { rawValue }
-        var title: String { self == .expenses ? "Dépenses" : "Revenus" }
+        var title: String { self == .expenses ? tr("Dépenses") : tr("Revenus") }
     }
 
     @Environment(AppModel.self) private var model
@@ -60,7 +60,7 @@ struct FinancesTransactionsPage: View {
                 MonthSwitcher(month: $month)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
-                Picker("Type", selection: $kind) {
+                Picker(tr("Type"), selection: $kind) {
                     ForEach(Kind.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
@@ -75,12 +75,12 @@ struct FinancesTransactionsPage: View {
         }
         .styledList()
         .tint(Color(hex: Finances.accentHex))
-        .navigationTitle("Opérations")
+        .navigationTitle(tr("Opérations"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { sheet = kind == .expenses ? FinanceSheet.expense(nil) : FinanceSheet.income(nil) } label: { Image(systemName: "plus") }
-                    .accessibilityLabel(Text(kind == .expenses ? "Nouvelle dépense" : "Nouveau revenu"))
+                    .accessibilityLabel(Text(kind == .expenses ? tr("Nouvelle dépense") : tr("Nouveau revenu")))
                     .accessibilityIdentifier("transactions-add")
             }
         }
@@ -92,20 +92,20 @@ struct FinancesTransactionsPage: View {
         let all = BudgetMath.expenses(state, in: interval).filter { categoryID == nil || $0.categoryID == categoryID }.sorted { $0.date > $1.date }
         Section {
             Menu {
-                Button("Toutes les catégories") { categoryID = nil }
+                Button(tr("Toutes les catégories")) { categoryID = nil }
                 ForEach(state.categories) { category in
                     Button { categoryID = category.id } label: { Label(category.name, systemImage: category.symbol) }
                 }
             } label: {
                 HStack {
-                    Label(state.category(categoryID)?.name ?? "Toutes les catégories", systemImage: "line.3.horizontal.decrease.circle")
+                    Label(state.category(categoryID)?.name ?? tr("Toutes les catégories"), systemImage: "line.3.horizontal.decrease.circle")
                     Spacer()
                     Text(TF.money(all.reduce(0) { $0 + $1.amount }, currency, decimals: 2)).font(.headline).monospacedDigit().foregroundStyle(.primary)
                 }
             }
         }
         if all.isEmpty {
-            Section { Text("Aucune dépense notée pour ce mois.").foregroundStyle(.secondary) }
+            Section { Text(tr("Aucune dépense notée pour ce mois.")).foregroundStyle(.secondary) }
         }
         ForEach(days(all.map(\.date)), id: \.self) { day in
             let items = all.filter { DateMath.isSameDay($0.date, day) }
@@ -127,12 +127,12 @@ struct FinancesTransactionsPage: View {
         let all = BudgetMath.incomes(state, in: interval).sorted { $0.date > $1.date }
         Section {
             HStack {
-                Text("Total du mois")
+                Text(tr("Total du mois"))
                 Spacer()
                 Text(TF.money(all.reduce(0) { $0 + $1.amount }, currency, decimals: 2)).font(.headline).monospacedDigit().foregroundStyle(Color(hex: Finances.incomeHex))
             }
             if all.isEmpty {
-                Text(model.profile.monthlyIncome.map { "Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : \(TF.money($0, currency))." } ?? "Aucun revenu noté ce mois-ci.")
+                Text(model.profile.monthlyIncome.map { tr("Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : \(TF.money($0, currency)).") } ?? tr("Aucun revenu noté ce mois-ci."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -166,7 +166,7 @@ struct FinancesTransactionsPage: View {
                 .foregroundStyle(Color(hex: category?.colorHex ?? "64748B"))
                 .frame(width: 24)
             VStack(alignment: .leading, spacing: 2) {
-                Text(expense.note.isEmpty ? (category?.name ?? "Dépense") : expense.note).foregroundStyle(.primary)
+                Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note).foregroundStyle(.primary)
                 if !expense.note.isEmpty, let category {
                     Text(category.name).font(.caption).foregroundStyle(.secondary)
                 }
@@ -207,7 +207,7 @@ struct FinancesCategoriesPage: View {
                 .chartBackground { _ in
                     VStack(spacing: 2) {
                         Text(TF.money(total, currency)).font(.title2.weight(.bold)).monospacedDigit()
-                        Text("dépensés").font(.caption).foregroundStyle(.secondary)
+                        Text(tr("dépensés")).font(.caption).foregroundStyle(.secondary)
                     }
                 }
                 .frame(height: 220)
@@ -233,7 +233,7 @@ struct FinancesCategoriesPage: View {
                 }
                 Divider()
                 Button { sheet = .category(BudgetCategory(name: "", symbol: "tag", colorHex: "3366FF")) } label: {
-                    Label("Nouvelle catégorie", systemImage: "plus.circle.fill")
+                    Label(tr("Nouvelle catégorie"), systemImage: "plus.circle.fill")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: Finances.accentHex))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -243,20 +243,20 @@ struct FinancesCategoriesPage: View {
             }
             .padding(.horizontal, 14)
             .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-            Text("Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois.")
+            Text(tr("Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
-        .navigationTitle("Catégories")
+        .navigationTitle(tr("Catégories"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
 
     private func limitText(category: BudgetCategory, spent: Double, total: Double) -> String {
-        let share = total > 0 ? " · \(Fmt.percent(spent / total)) du mois" : ""
-        guard category.monthlyLimit > 0 else { return "Sans limite\(share)" }
+        let share = total > 0 ? tr(" · \(Fmt.percent(spent / total)) du mois") : ""
+        guard category.monthlyLimit > 0 else { return tr("Sans limite\(share)") }
         let left = category.monthlyLimit - spent
-        return (left >= 0 ? "\(TF.money(left, currency)) restants" : "Dépassé de \(TF.money(-left, currency))") + share
+        return (left >= 0 ? tr("\(TF.money(left, currency)) restants") : tr("Dépassé de \(TF.money(-left, currency))")) + share
     }
 }
 
@@ -276,8 +276,8 @@ struct FinancesBillsPage: View {
             if !state.bills.isEmpty {
                 Section {
                     HStack(spacing: 10) {
-                        MiniStat(title: "Par mois", value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, "facture", "factures"))
-                        MiniStat(title: "Abonnements", value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: "par mois")
+                        MiniStat(title: tr("Par mois"), value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, tr("facture"), tr("factures")))
+                        MiniStat(title: tr("Abonnements"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr("par mois"))
                     }
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
@@ -290,7 +290,7 @@ struct FinancesBillsPage: View {
                             Image(systemName: item.bill.symbol).frame(width: 24).foregroundStyle(item.days <= 2 ? Color(hex: Finances.overHex) : Color(hex: Finances.accentHex))
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(item.bill.name).foregroundStyle(.primary)
-                                Text("\(item.bill.isSubscription ? "Abonnement · " : "")\(item.bill.period.title.lowercased()) · \(TF.relativeDay(item.due, from: now))")
+                                Text("\(item.bill.isSubscription ? tr("Abonnement · ") : "")\(item.bill.period.title.lowercased()) · \(TF.relativeDay(item.due, from: now))")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
@@ -303,17 +303,17 @@ struct FinancesBillsPage: View {
                     let ids = offsets.map { all[$0].bill.id }
                     model.update(\.budget) { $0.bills.removeAll { ids.contains($0.id) } }
                 }
-                Button { sheet = .bill(Bill(name: "", amount: 0, anchorDate: Date())) } label: { Label("Nouvelle facture", systemImage: "plus") }
+                Button { sheet = .bill(Bill(name: "", amount: 0, anchorDate: Date())) } label: { Label(tr("Nouvelle facture"), systemImage: "plus") }
                     .accessibilityIdentifier("bills-new")
             } header: {
-                Text("Prochaines échéances")
+                Text(tr("Prochaines échéances"))
             } footer: {
-                Text("Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.")
+                Text(tr("Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois."))
             }
         }
         .styledList()
         .tint(Color(hex: Finances.accentHex))
-        .navigationTitle("Factures")
+        .navigationTitle(tr("Factures"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -331,7 +331,7 @@ struct FinancesSavingsPage: View {
         let state = model.budget
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Objectifs d'épargne", detail: state.goals.isEmpty ? nil : TF.money(state.goals.reduce(0) { $0 + $1.saved }, currency))
+                MiniSectionTitle(title: tr("Objectifs d'épargne"), detail: state.goals.isEmpty ? nil : TF.money(state.goals.reduce(0) { $0 + $1.saved }, currency))
                 VStack(spacing: 0) {
                     ForEach(Array(state.goals.enumerated()), id: \.element.id) { index, goal in
                         if index > 0 { Divider() }
@@ -344,7 +344,7 @@ struct FinancesSavingsPage: View {
                     }
                     if !state.goals.isEmpty { Divider() }
                     Button { sheet = .goal(SavingsGoal(name: "", target: 1_000, saved: 0, deadline: nil)) } label: {
-                        Label("Nouvel objectif", systemImage: "plus.circle.fill")
+                        Label(tr("Nouvel objectif"), systemImage: "plus.circle.fill")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(Color(hex: Finances.incomeHex))
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -356,19 +356,19 @@ struct FinancesSavingsPage: View {
                 .padding(.horizontal, 14)
                 .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
                 if !state.goals.isEmpty {
-                    Text("Touche un objectif pour y ajouter un versement.").font(.footnote).foregroundStyle(.secondary)
+                    Text(tr("Touche un objectif pour y ajouter un versement.")).font(.footnote).foregroundStyle(.secondary)
                 }
             }
             accounts(state: state)
         }
-        .navigationTitle("Épargne")
+        .navigationTitle(tr("Épargne"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
 
     private func accounts(state: BudgetState) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Comptes", detail: state.accounts.isEmpty ? nil : "valeur nette \(TF.money(BudgetMath.netWorth(state), currency))")
+            MiniSectionTitle(title: tr("Comptes"), detail: state.accounts.isEmpty ? nil : tr("valeur nette \(TF.money(BudgetMath.netWorth(state), currency))"))
             if state.netWorthHistory.count >= 2 {
                 Chart(state.netWorthHistory, id: \.date) { point in
                     LineMark(x: .value("Date", point.date), y: .value("Valeur nette", point.value))
@@ -388,14 +388,14 @@ struct FinancesSavingsPage: View {
                     Button { sheet = .account(account) } label: {
                         MiniRow(symbol: account.isLiability ? "creditcard.fill" : "building.columns.fill",
                                 colorHex: account.isLiability ? Finances.overHex : Finances.accentHex,
-                                title: account.name, detail: account.isLiability ? "Dette" : nil,
+                                title: account.name, detail: account.isLiability ? tr("Dette") : nil,
                                 value: (account.isLiability ? "−" : "") + TF.money(account.balance, currency), showsChevron: false)
                     }
                     .buttonStyle(.plain)
                 }
                 if !state.accounts.isEmpty { MiniDivider() }
                 Button { sheet = .account(Account(name: "", balance: 0)) } label: {
-                    Label("Nouveau compte ou dette", systemImage: "plus.circle.fill")
+                    Label(tr("Nouveau compte ou dette"), systemImage: "plus.circle.fill")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: Finances.accentHex))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -403,7 +403,7 @@ struct FinancesSavingsPage: View {
                 }
                 .buttonStyle(.plain)
             }
-            Text("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.").font(.footnote).foregroundStyle(.secondary)
+            Text(tr("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.")).font(.footnote).foregroundStyle(.secondary)
         }
     }
 }
@@ -439,20 +439,20 @@ struct FinancesTrendsPage: View {
         let past = months.dropLast().filter { $0.spent > 0 || $0.earned > 0 }
         MiniAppScroll {
             if months.isEmpty {
-                Text("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.")
+                Text(tr("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
             } else {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: months.count >= 6 ? "Six derniers mois" : "Par mois")
+                MiniSectionTitle(title: months.count >= 6 ? tr("Six derniers mois") : tr("Par mois"))
                 Chart(bars(months)) { bar in
                     BarMark(x: .value("Mois", bar.month, unit: .month), y: .value("Montant", bar.value))
                         .foregroundStyle(by: .value("Type", bar.series))
                         .position(by: .value("Type", bar.series))
                         .cornerRadius(3)
                 }
-                .chartForegroundStyleScale(["Revenus": Color(hex: Finances.incomeHex), "Dépenses": Color(hex: Finances.accentHex).opacity(0.55)])
+                .chartForegroundStyleScale([tr("Revenus"): Color(hex: Finances.incomeHex), tr("Dépenses"): Color(hex: Finances.accentHex).opacity(0.55)])
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month)) { _ in
                         AxisValueLabel(format: .dateTime.month(.abbreviated), centered: true)
@@ -468,28 +468,28 @@ struct FinancesTrendsPage: View {
                 let spent = past.reduce(0) { $0 + $1.spent } / Double(past.count)
                 let earned = past.reduce(0) { $0 + $1.earned } / Double(past.count)
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Moyenne par mois", detail: "sur \(Fmt.plural(past.count, "mois complet", "mois complets"))")
+                    MiniSectionTitle(title: tr("Moyenne par mois"), detail: tr("sur \(Fmt.plural(past.count, tr("mois complet"), tr("mois compl)ets")))")
                     HStack(spacing: 10) {
-                        MiniStat(title: "Dépenses", value: TF.money(spent, currency))
+                        MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency))
                         if earned > 0 {
-                            MiniStat(title: "Revenus", value: TF.money(earned, currency), colorHex: Finances.incomeHex)
-                            MiniStat(title: "Mis de côté", value: TF.money(earned - spent, currency), detail: earned > 0 ? Fmt.percent(max(0, (earned - spent) / earned)) + " des revenus" : nil,
+                            MiniStat(title: tr("Revenus"), value: TF.money(earned, currency), colorHex: Finances.incomeHex)
+                            MiniStat(title: tr("Mis de côté"), value: TF.money(earned - spent, currency), detail: earned > 0 ? Fmt.percent(max(0, (earned - spent) / earned)) + tr(" des revenus") : nil,
                                      colorHex: earned - spent < 0 ? Finances.overHex : Finances.incomeHex)
                         }
                     }
                 }
             }
             changes(state: state, now: now)
-            Text("Moyennes calculées sur les mois terminés où tu as noté quelque chose.")
+            Text(tr("Moyennes calculées sur les mois terminés où tu as noté quelque chose."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
-        .navigationTitle("Évolution")
+        .navigationTitle(tr("Évolution"))
         .navigationBarTitleDisplayMode(.large)
     }
 
     private func bars(_ months: [BudgetMath.MonthSummary]) -> [Bar] {
-        months.flatMap { [Bar(month: $0.start, series: "Revenus", value: $0.earned), Bar(month: $0.start, series: "Dépenses", value: $0.spent)] }
+        months.flatMap { [Bar(month: $0.start, series: tr("Revenus"), value: $0.earned), Bar(month: $0.start, series: tr("Dépenses"), value: $0.spent)] }
     }
 
     @ViewBuilder
@@ -508,7 +508,7 @@ struct FinancesTrendsPage: View {
         .sorted { abs($0.current - $0.previous) > abs($1.current - $1.previous) }
         if !rows.isEmpty && !previous.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Par rapport au mois dernier", detail: "à la même date")
+                MiniSectionTitle(title: tr("Par rapport au mois dernier"), detail: tr("à la même date"))
                 MiniRowsCard {
                     ForEach(Array(rows.prefix(6).enumerated()), id: \.element.id) { index, row in
                         if index > 0 { MiniDivider() }

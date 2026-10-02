@@ -47,7 +47,7 @@ struct StoreCombo: Identifiable {
     var isPremium: Bool { makeDesign().usesPremiumFeatures }
 
     /// « 2 widgets · Nutrition »
-    var summary: String { "\(parts.count) widgets · \(category.title)" }
+    var summary: String { tr("\(parts.count) widgets · \(category.title)") }
 }
 
 enum StoreComboCatalog {
@@ -68,89 +68,89 @@ enum StoreComboCatalog {
 
     /// Two small widgets side by side, in a medium widget.
     static let mediums: [StoreCombo] = [
-        combo("jour-annee", "Jour et année", "Où en est ta journée, et ton année.", .minimal, "2F8F7A",
+        combo("jour-annee", tr("Jour et année"), tr("Où en est ta journée, et ton année."), .minimal, "2F8F7A",
               [s(.progress, "progress-day"), s(.progress, "progress-year")]),
-        combo("heure-mois", "L'heure et le mois", "L'heure d'un côté, le calendrier de l'autre.", .monochrome, "6B7280",
+        combo("heure-mois", tr("L'heure et le mois"), tr("L'heure d'un côté, le calendrier de l'autre."), .monochrome, "6B7280",
               [s(.clock), s(.calendar)]),
-        combo("semaine-lune", "Semaine et lune", "Ta semaine et la phase de la lune.", .dark, "8C6CFF",
+        combo("semaine-lune", tr("Semaine et lune"), tr("Ta semaine et la phase de la lune."), .dark, "8C6CFF",
               [s(.weekView), s(.moonPhase)]),
-        combo("meteo-soleil", "Météo et soleil", "Le temps qu'il fait et les heures de soleil.", .light, "F2A33A",
+        combo("meteo-soleil", tr("Météo et soleil"), tr("Le temps qu'il fait et les heures de soleil."), .light, "F2A33A",
               [s(.weather), s(.sunCycle)]),
-        combo("pluie-vent", "Pluie, vent et UV", "Faut-il un parapluie, ou de la crème ?", .glass, "3366FF",
+        combo("pluie-vent", tr("Pluie, vent et UV"), tr("Faut-il un parapluie, ou de la crème ?"), .glass, "3366FF",
               [s(.rainNext), s(.windUV)]),
-        combo("calories-macros", "Calories et macros", "Ce qu'il te reste à manger, et comment.", .glass, "2F8F7A",
+        combo("calories-macros", tr("Calories et macros"), tr("Ce qu'il te reste à manger, et comment."), .glass, "2F8F7A",
               [s(.caloriesLeft), s(.macros)]),
-        combo("proteines-repas", "Protéines et prochain repas", "Ton objectif de protéines et ce qui vient.", .light, "F2A33A",
+        combo("proteines-repas", tr("Protéines et prochain repas"), tr("Ton objectif de protéines et ce qui vient."), .light, "F2A33A",
               [s(.proteinLeft), s(.nextMeal)]),
-        combo("seance-regularite", "Séance et régularité", "La séance du jour et ta semaine d'entraînement.", .dark, "FF6B57",
+        combo("seance-regularite", tr("Séance et régularité"), tr("La séance du jour et ta semaine d'entraînement."), .dark, "FF6B57",
               [s(.todaysWorkout), s(.trainingStreak)]),
-        combo("serie-repos", "Série et repos", "La prochaine série et le temps de repos.", .futuristic, "3366FF",
+        combo("serie-repos", tr("Série et repos"), tr("La prochaine série et le temps de repos."), .futuristic, "3366FF",
               [s(.nextSet), s(.restTimer)]),
-        combo("reste-epargne", "Reste du mois et épargne", "Ce qu'il te reste, et ce que tu mets de côté.", .light, "2F8F7A",
+        combo("reste-epargne", tr("Reste du mois et épargne"), tr("Ce qu'il te reste, et ce que tu mets de côté."), .light, "2F8F7A",
               [s(.budgetLeft), s(.savingsGoal)]),
-        combo("depense-factures", "Dépense et factures", "Note une dépense, vois les factures qui arrivent.", .colorful, "FF6B57",
+        combo("depense-factures", tr("Dépense et factures"), tr("Note une dépense, vois les factures qui arrivent."), .colorful, "FF6B57",
               [s(.quickExpense), s(.billsUpcoming)]),
-        combo("eau-serie", "Eau et série", "Tes verres d'eau et ta série d'habitudes.", .minimal, "3366FF",
+        combo("eau-serie", tr("Eau et série"), tr("Tes verres d'eau et ta série d'habitudes."), .minimal, "3366FF",
               [s(.hydration), s(.habitStreak)]),
-        combo("taches-top3", "Tâches et top 3", "Ta liste et tes trois priorités du jour.", .light, "2F8F7A",
+        combo("taches-top3", tr("Tâches et top 3"), tr("Ta liste et tes trois priorités du jour."), .light, "2F8F7A",
               [s(.tasks), s(.priorities)]),
-        combo("focus-echeance", "Focus et échéance", "Une séance de focus et la prochaine date limite.", .futuristic, "3366FF",
+        combo("focus-echeance", tr("Focus et échéance"), tr("Une séance de focus et la prochaine date limite."), .futuristic, "3366FF",
               [s(.focus), s(.deadline)]),
-        combo("cours-examen", "Cours et examen", "Le prochain cours et le prochain examen.", .minimal, "F2588F",
+        combo("cours-examen", tr("Cours et examen"), tr("Le prochain cours et le prochain examen."), .minimal, "F2588F",
               [s(.nextClass), s(.nextExam)]),
-        combo("fiche-session", "Fiche et session", "Une fiche à réviser et l'avancement de ta session.", .retro, "F2A33A",
+        combo("fiche-session", tr("Fiche et session"), tr("Une fiche à réviser et l'avancement de ta session."), .retro, "F2A33A",
               [s(.flashcard, "flashcard-retro"), s(.semesterProgress)]),
-        combo("depart-vol", "Départ et vol", "Les jours avant le départ, et ton vol.", .aurora, "3366FF",
+        combo("depart-vol", tr("Départ et vol"), tr("Les jours avant le départ, et ton vol."), .aurora, "3366FF",
               [s(.tripCountdown, "trip-aurora"), s(.flight)]),
-        combo("sur-place", "Heure et devise sur place", "L'heure là-bas et combien ça coûte ici.", .retro, "F2A33A",
+        combo("sur-place", tr("Heure et devise sur place"), tr("L'heure là-bas et combien ça coûte ici."), .retro, "F2A33A",
               [s(.localTime), s(.currency)]),
-        combo("ventes-objectif", "Ventes et objectif", "Les ventes du jour et l'objectif du mois.", .elegant, "F2A33A",
+        combo("ventes-objectif", tr("Ventes et objectif"), tr("Les ventes du jour et l'objectif du mois."), .elegant, "F2A33A",
               [s(.revenueToday), s(.revenueGoal)]),
-        combo("benefice-mrr", "Bénéfice et MRR", "Ce que tu gagnes, et ce qui revient chaque mois.", .dark, "2F8F7A",
+        combo("benefice-mrr", tr("Bénéfice et MRR"), tr("Ce que tu gagnes, et ce qui revient chaque mois."), .dark, "2F8F7A",
               [s(.profit), s(.mrr)]),
-        combo("anniv-ferie", "Anniversaire et jour férié", "Les deux prochaines dates à fêter.", .light, "F2588F",
+        combo("anniv-ferie", tr("Anniversaire et jour férié"), tr("Les deux prochaines dates à fêter."), .light, "F2588F",
               [s(.birthday), s(.holiday)]),
-        combo("entretien-carburant", "Entretien et carburant", "Le prochain entretien et ta consommation.", .dark, "6B7280",
+        combo("entretien-carburant", tr("Entretien et carburant"), tr("Le prochain entretien et ta consommation."), .dark, "6B7280",
               [s(.nextService), s(.fuelStats)]),
-        combo("portefeuille-variation", "Portefeuille et variation", "Ton portefeuille et ce qui bouge le plus.", .futuristic, "3366FF",
+        combo("portefeuille-variation", tr("Portefeuille et variation"), tr("Ton portefeuille et ce qui bouge le plus."), .futuristic, "3366FF",
               [s(.portfolio), s(.topMover)]),
-        combo("crypto-marche", "Bitcoin et marché", "Le cours du bitcoin et le marché crypto.", .digital, "2F8F7A",
+        combo("crypto-marche", tr("Bitcoin et marché"), tr("Le cours du bitcoin et le marché crypto."), .digital, "2F8F7A",
               [s(.crypto, "crypto-dark"), s(.marketOverview)]),
     ]
 
     /// Four small widgets, two medium ones, or one medium and two small, in a large widget.
     static let larges: [StoreCombo] = [
-        combo("le-temps", "Le temps qui passe", "L'heure, le mois, l'année et les vacances.", .minimal, "F2A33A",
+        combo("le-temps", tr("Le temps qui passe"), tr("L'heure, le mois, l'année et les vacances."), .minimal, "F2A33A",
               [s(.clock), s(.calendar), s(.progress, "progress-year"), s(.countdown, "countdown-holidays")]),
-        combo("routine", "Routine du jour", "Tes habitudes, ton eau et ta série.", .minimal, "8C6CFF",
+        combo("routine", tr("Routine du jour"), tr("Tes habitudes, ton eau et ta série."), .minimal, "8C6CFF",
               [m(.habits), s(.hydration), s(.habitStreak)]),
-        combo("nutrition-complete", "Nutrition complète", "Calories, macros, protéines et série de suivi.", .light, "2F8F7A",
+        combo("nutrition-complete", tr("Nutrition complète"), tr("Calories, macros, protéines et série de suivi."), .light, "2F8F7A",
               [s(.caloriesLeft), s(.macros), s(.proteinLeft), s(.nutritionStreak)]),
-        combo("repas-calories", "Repas et calories", "Tes repas du jour, tes calories et tes macros.", .glass, "F2A33A",
+        combo("repas-calories", tr("Repas et calories"), tr("Tes repas du jour, tes calories et tes macros."), .glass, "F2A33A",
               [m(.mealsToday), s(.caloriesLeft), s(.macros)]),
-        combo("salle", "Salle de sport", "Série, repos, régularité et records.", .dark, "FF6B57",
+        combo("salle", tr("Salle de sport"), tr("Série, repos, régularité et records."), .dark, "FF6B57",
               [s(.nextSet), s(.restTimer), s(.trainingStreak), s(.personalRecords)]),
-        combo("seance-volume", "Séance et volume", "La séance du jour et le volume de la semaine.", .futuristic, "3366FF",
+        combo("seance-volume", tr("Séance et volume"), tr("La séance du jour et le volume de la semaine."), .futuristic, "3366FF",
               [m(.todaysWorkout), m(.weeklyVolume)]),
-        combo("budget-mois", "Budget du mois", "Tes dépenses, ce qu'il reste et ton épargne.", .light, "FF6B57",
+        combo("budget-mois", tr("Budget du mois"), tr("Tes dépenses, ce qu'il reste et ton épargne."), .light, "FF6B57",
               [m(.spendingByCategory), s(.budgetLeft), s(.savingsGoal)]),
-        combo("mon-argent", "Mon argent", "Reste, épargne, valeur nette et dépense rapide.", .colorful, "2F8F7A",
+        combo("mon-argent", tr("Mon argent"), tr("Reste, épargne, valeur nette et dépense rapide."), .colorful, "2F8F7A",
               [s(.budgetLeft), s(.savingsGoal), s(.netWorth), s(.quickExpense)]),
-        combo("journee-productive", "Journée productive", "Tes tâches, ton top 3 et une séance de focus.", .light, "2F8F7A",
+        combo("journee-productive", tr("Journée productive"), tr("Tes tâches, ton top 3 et une séance de focus."), .light, "2F8F7A",
               [m(.tasks), s(.priorities), s(.focus)]),
-        combo("tout-le-ciel", "Tout le ciel", "La météo, le soleil et la pluie à venir.", .aurora, "3366FF",
+        combo("tout-le-ciel", tr("Tout le ciel"), tr("La météo, le soleil et la pluie à venir."), .aurora, "3366FF",
               [m(.weather), s(.sunCycle), s(.rainNext)]),
-        combo("ma-session", "Ma session", "L'horaire du jour, le prochain examen et la session.", .retro, "F2A33A",
+        combo("ma-session", tr("Ma session"), tr("L'horaire du jour, le prochain examen et la session."), .retro, "F2A33A",
               [m(.timetable), s(.nextExam), s(.semesterProgress)]),
-        combo("en-voyage", "En voyage", "Heure, devise, météo et prochaine activité.", .aurora, "3366FF",
+        combo("en-voyage", tr("En voyage"), tr("Heure, devise, météo et prochaine activité."), .aurora, "3366FF",
               [s(.localTime), s(.currency), s(.destinationWeather), s(.nextActivity)]),
-        combo("mon-entreprise", "Mon entreprise", "Tes ventes sur 30 jours, l'objectif et le bénéfice.", .elegant, "F2A33A",
+        combo("mon-entreprise", tr("Mon entreprise"), tr("Tes ventes sur 30 jours, l'objectif et le bénéfice."), .elegant, "F2A33A",
               [m(.revenueTrend), s(.revenueGoal), s(.profit)]),
-        combo("ma-voiture", "Ma voiture", "Ce qu'elle coûte, son entretien et son kilométrage.", .dark, "6B7280",
+        combo("ma-voiture", tr("Ma voiture"), tr("Ce qu'elle coûte, son entretien et son kilométrage."), .dark, "6B7280",
               [m(.carCost), s(.nextService), s(.mileage)]),
-        combo("mes-placements", "Mes placements", "Ton portefeuille, sa répartition et ce qui bouge.", .futuristic, "8C6CFF",
+        combo("mes-placements", tr("Mes placements"), tr("Ton portefeuille, sa répartition et ce qui bouge."), .futuristic, "8C6CFF",
               [m(.portfolio), s(.allocation), s(.topMover)]),
-        combo("monde-semaine", "Le monde et ma semaine", "Tes fuseaux horaires et ta semaine.", .futuristic, "3366FF",
+        combo("monde-semaine", tr("Le monde et ma semaine"), tr("Tes fuseaux horaires et ta semaine."), .futuristic, "3366FF",
               [m(.worldClock, "world-futuristic"), m(.weekView)]),
     ]
 
@@ -198,7 +198,7 @@ struct ComboCard: View {
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityLabel(Text("\(combo.name), \(combo.summary)"))
-        .accessibilityHint(Text("Ouvre l'éditeur"))
+        .accessibilityHint(Text(tr("Ouvre l'éditeur")))
     }
 }
 
@@ -213,9 +213,9 @@ struct StoreCombosView: View {
         var id: String { rawValue }
         var title: String {
             switch self {
-            case .all: "Toutes"
-            case .medium: "Moyennes"
-            case .large: "Grandes"
+            case .all: tr("Toutes")
+            case .medium: tr("Moyennes")
+            case .large: tr("Grandes")
             }
         }
     }
@@ -249,10 +249,10 @@ struct StoreCombosView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 26) {
-                Text("Plusieurs widgets réunis en un seul, pour tout voir d'un coup d'œil. Touche-en un pour le personnaliser.")
+                Text(tr("Plusieurs widgets réunis en un seul, pour tout voir d'un coup d'œil. Touche-en un pour le personnaliser."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                Picker("Taille", selection: $size) {
+                Picker(tr("Taille"), selection: $size) {
                     ForEach(SizeFilter.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
@@ -277,7 +277,7 @@ struct StoreCombosView: View {
         }
         .background(.screenFill)
         .screenshotScroll()
-        .navigationTitle("Combinaisons")
+        .navigationTitle(tr("Combinaisons"))
         .navigationBarTitleDisplayMode(.large)
     }
 }
@@ -311,13 +311,13 @@ private struct ComboRow: View {
         }
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityHint(Text("Ouvre l'éditeur"))
+        .accessibilityHint(Text(tr("Ouvre l'éditeur")))
     }
 }
 
 /// The « Obtenir » capsule of the Store.
 struct GetLabel: View {
-    var title = "Obtenir"
+    var title = tr("Obtenir")
 
     var body: some View {
         Text(title)

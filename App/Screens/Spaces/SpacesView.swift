@@ -18,7 +18,7 @@ struct SpacesView: View {
             ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("Choisis un univers, puis la taille de ton widget.")
+                    Text(tr("Choisis un univers, puis la taille de ton widget."))
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
                         .padding(.horizontal, 20)
@@ -54,7 +54,7 @@ struct SpacesView: View {
             }
             .background(.screenFill)
             .screenshotScroll()
-            .navigationTitle("Créer")
+            .navigationTitle(tr("Créer"))
             .navigationDestination(for: Space.self) { space in
                 SpaceView(space: space)
             }
@@ -88,11 +88,11 @@ struct SpacesView: View {
     private var universeFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                filterChip("Tout", isOn: universe == nil && !showsLockScreen) {
+                filterChip(tr("Tout"), isOn: universe == nil && !showsLockScreen) {
                     universe = nil
                     showsLockScreen = false
                 }
-                filterChip("Écran verrouillé", symbol: "lock.fill", isOn: showsLockScreen) {
+                filterChip(tr("Écran verrouillé"), symbol: "lock.fill", isOn: showsLockScreen) {
                     withAnimation(.snappy) { showsLockScreen = true }
                 }
                 .accessibilityIdentifier("create-lockscreen")
@@ -141,47 +141,47 @@ struct SpacesView: View {
         switch space {
         case .productivity:
             let open = model.content.tasks.filter { !$0.isDone }.count
-            return open == 0 ? "Aucune tâche en attente" : Fmt.plural(open, "tâche à faire", "tâches à faire")
+            return open == 0 ? tr("Aucune tâche en attente") : Fmt.plural(open, tr("tâche à faire"), tr("tâches à faire"))
         case .habits:
             let habits = model.content.habits
-            return habits.isEmpty ? "Crée une habitude" : "\(habits.filter { $0.isDone(on: now) }.count)/\(habits.count) aujourd'hui"
+            return habits.isEmpty ? tr("Crée une habitude") : tr("\(habits.filter { $0.isDone(on: now) }.count)/\(habits.count) aujourd'hui")
         case .nutrition:
             let eaten = NutritionMath.totals(model.nutrition, on: now).kcal
-            if model.nutrition.entries.isEmpty { return "Note ton premier repas" }
-            return model.profile.knows(.kcalTarget) ? "\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes" : "\(TF.int(eaten)) kcal aujourd'hui"
+            if model.nutrition.entries.isEmpty { return tr("Note ton premier repas") }
+            return model.profile.knows(.kcalTarget) ? tr("\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes") : tr("\(TF.int(eaten)) kcal aujourd'hui")
         case .fitness:
-            if model.fitness.routines.isEmpty { return "Crée ta séance" }
+            if model.fitness.routines.isEmpty { return tr("Crée ta séance") }
             let done = FitnessMath.workouts(inWeekOf: now, model.fitness)
-            return model.profile.knows(.weeklyWorkouts) ? "\(done)/\(model.fitness.weeklyGoal) séances" : Fmt.plural(done, "séance cette semaine", "séances cette semaine")
+            return model.profile.knows(.weeklyWorkouts) ? tr("\(done)/\(model.fitness.weeklyGoal) séances") : Fmt.plural(done, tr("séance cette semaine"), tr("séances cette semaine"))
         case .budget:
             guard model.profile.knows(.monthlyBudget) else {
-                return "Dépensé \(TF.money(BudgetMath.spentThisMonth(model.budget, at: now), currency)) ce mois-ci"
+                return tr("Dépensé \(TF.money(BudgetMath.spentThisMonth(model.budget, at: now), currency)) ce mois-ci")
             }
-            return "Reste \(TF.money(BudgetMath.remaining(model.budget, at: now), currency))"
+            return tr("Reste \(TF.money(BudgetMath.remaining(model.budget, at: now), currency))")
         case .investing:
-            return model.portfolio.holdings.isEmpty ? "Ajoute tes placements" : Fmt.plural(model.portfolio.holdings.count, "placement", "placements")
+            return model.portfolio.holdings.isEmpty ? tr("Ajoute tes placements") : Fmt.plural(model.portfolio.holdings.count, tr("placement"), tr("placements"))
         case .business:
-            return model.business.sales.isEmpty ? "Note ta première vente" : "\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois-ci"
+            return model.business.sales.isEmpty ? tr("Note ta première vente") : tr("\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois-ci")
         case .markets:
-            return Fmt.plural(model.following.followed.count, "entreprise suivie", "entreprises suivies")
+            return Fmt.plural(model.following.followed.count, tr("entreprise suivie"), tr("entreprises suivies"))
         case .student:
-            if let exam = StudentMath.nextExam(model.student, at: now) { return "Examen dans \(DateMath.daysBetween(now, exam.date)) j" }
-            return model.student.courses.isEmpty ? "Ajoute tes cours" : Fmt.plural(model.student.courses.count, "cours", "cours")
+            if let exam = StudentMath.nextExam(model.student, at: now) { return tr("Examen dans \(DateMath.daysBetween(now, exam.date)) j") }
+            return model.student.courses.isEmpty ? tr("Ajoute tes cours") : Fmt.plural(model.student.courses.count, tr("cours"), tr("cours"))
         case .travel:
             if let trip = TravelMath.currentTrip(model.travel, at: now) {
-                return TravelMath.isOngoing(trip, at: now) ? "En voyage à \(trip.destination)" : "\(trip.destination) dans \(DateMath.daysBetween(now, trip.start)) j"
+                return TravelMath.isOngoing(trip, at: now) ? tr("En voyage à \(trip.destination)") : tr("\(trip.destination) dans \(DateMath.daysBetween(now, trip.start)) j")
             }
-            return "Prépare ton prochain voyage"
+            return tr("Prépare ton prochain voyage")
         case .car:
             if let status = CarMath.serviceStatus(model.car, at: now).first, let km = status.kmLeft {
-                return "\(status.item.name) dans \(TF.int(km)) km"
+                return tr("\(status.item.name) dans \(TF.int(km)) km")
             }
-            return model.car.fills.isEmpty ? "Note ton premier plein" : model.car.name
+            return model.car.fills.isEmpty ? tr("Note ton premier plein") : model.car.name
         case .life:
             if let birthday = model.life.birthday {
-                return "Anniversaire dans \(DateMath.daysBetween(now, LifeMath.nextBirthday(birthday: birthday, after: now).date)) j"
+                return tr("Anniversaire dans \(DateMath.daysBetween(now, LifeMath.nextBirthday(birthday: birthday, after: now).date)) j")
             }
-            return "Anniversaire et jours fériés"
+            return tr("Anniversaire et jours fériés")
         }
     }
 }
@@ -194,10 +194,10 @@ enum SpaceUniverse: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .health: "Santé"
-        case .money: "Argent"
-        case .organisation: "Organisation"
-        case .life: "Vie"
+        case .health: tr("Santé")
+        case .money: tr("Argent")
+        case .organisation: tr("Organisation")
+        case .life: tr("Vie")
         }
     }
 }
@@ -231,11 +231,11 @@ struct ImmersiveSpaceCard: View {
                     .foregroundStyle(.white)
                     .frame(width: 32, height: 32)
                     .background(.white.opacity(0.2), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                Text(Fmt.plural(SpaceCatalog.kinds(in: space).count, "widget", "widgets"))
+                Text(Fmt.plural(SpaceCatalog.kinds(in: space).count, tr("widget"), tr("widgets")))
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.white.opacity(0.9))
                 if !usesOwnData {
-                    Text("· exemple")
+                    Text(tr("· exemple"))
                         .font(.caption)
                         .foregroundStyle(.white.opacity(0.75))
                 }
@@ -279,7 +279,7 @@ struct ImmersiveSpaceCard: View {
         .contentShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .accessibilityElement(children: .combine)
         .accessibilityLabel(Text("\(space.title), \(summary)"))
-        .accessibilityHint(Text("Crée un widget de cet espace"))
+        .accessibilityHint(Text(tr("Crée un widget de cet espace")))
     }
 }
 
@@ -323,7 +323,7 @@ struct SpaceCard: View {
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
                     .background(.screenFill, in: Capsule())
-                    .accessibilityLabel(Text("\(widgetCount) widgets"))
+                    .accessibilityLabel(Text(tr("\(widgetCount) widgets")))
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(space.title)
@@ -429,14 +429,14 @@ struct SpaceView: View {
                 Section {
                 } header: {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Widgets de l'espace")
+                        Text(tr("Widgets de l'espace"))
                         widgetStrip
                             .padding(.horizontal, -20)
                             .foregroundStyle(Color.primary)
                             .textCase(nil)
                     }
                 } footer: {
-                    Text("Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.")
+                    Text(tr("Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé."))
                 }
             }
             content

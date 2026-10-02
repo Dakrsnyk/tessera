@@ -20,7 +20,7 @@ struct WorkoutLiveActivityWidget: Widget {
                         Text(state.exercise)
                             .font(.headline)
                             .lineLimit(1)
-                        Text("Série \(state.setNumber)/\(state.sets)")
+                        Text(tr("Série \(state.setNumber)/\(state.sets)"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -32,13 +32,13 @@ struct WorkoutLiveActivityWidget: Widget {
                     HStack(spacing: 8) {
                         if state.isResting(at: Date()) {
                             Button(intent: SkipRestIntent()) {
-                                Label("Passer", systemImage: "forward.fill")
+                                Label(tr("Passer"), systemImage: "forward.fill")
                                     .frame(maxWidth: .infinity)
                             }
                             .tint(accent.opacity(0.4))
                         }
                         Button(intent: CompleteSetIntent()) {
-                            Label("Série faite", systemImage: "checkmark")
+                            Label(tr("Série faite"), systemImage: "checkmark")
                                 .frame(maxWidth: .infinity)
                         }
                         .tint(accent)

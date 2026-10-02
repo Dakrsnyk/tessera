@@ -117,7 +117,7 @@ struct SpaceBuilderView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Annuler") { dismiss() }
+                    Button(tr("Annuler")) { dismiss() }
                 }
                 ToolbarItem(placement: .primaryAction) {
                     // The data opens on top of the creator: back returns to the widget as it was,
@@ -125,10 +125,10 @@ struct SpaceBuilderView: View {
                     NavigationLink {
                         SpaceView(space: space, isEmbedded: true)
                     } label: {
-                        Label("Mes données", systemImage: "square.and.pencil")
+                        Label(tr("Mes données"), systemImage: "square.and.pencil")
                     }
                     .accessibilityIdentifier("space-data")
-                    .accessibilityLabel(Text("Mes données de l'espace \(space.title)"))
+                    .accessibilityLabel(Text(tr("Mes données de l'espace \(space.title)")))
                 }
             }
             // Selection, then editing as in the Studio: the same Studio as « Mes widgets ».
@@ -175,9 +175,9 @@ struct SpaceBuilderView: View {
                 .frame(width: 42, height: 42)
                 .background(Color(hex: space.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             VStack(alignment: .leading, spacing: 2) {
-                Text("Crée ton widget")
+                Text(tr("Crée ton widget"))
                     .font(.title3.weight(.semibold))
-                Text("Choisis une taille et tes widgets, puis personnalise-les dans le Studio.")
+                Text(tr("Choisis une taille et tes widgets, puis personnalise-les dans le Studio."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -188,7 +188,7 @@ struct SpaceBuilderView: View {
 
     private var formatPicker: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Picker("Taille", selection: Binding(get: { format }, set: { setFormat($0) })) {
+            Picker(tr("Taille"), selection: Binding(get: { format }, set: { setFormat($0) })) {
                 ForEach(WidgetFormat.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
@@ -201,9 +201,9 @@ struct SpaceBuilderView: View {
 
     private var formatHint: String {
         switch format {
-        case .small: "L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets."
-        case .medium: "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte."
-        case .large: "Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis."
+        case .small: tr("L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.")
+        case .medium: tr("Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.")
+        case .large: tr("Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.")
         }
     }
 
@@ -248,7 +248,7 @@ struct SpaceBuilderView: View {
                     .frame(maxWidth: 364)
                     .transition(.scale(scale: 0.92).combined(with: .opacity))
                 if design.isCombo {
-                    Text("Réunit : \(design.options.parts.map(\.name).joined(separator: " · "))")
+                    Text(tr("Réunit : \(design.options.parts.map(\.name).joined(separator: " · "))"))
                         .font(.caption.weight(.medium))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -273,12 +273,12 @@ struct SpaceBuilderView: View {
     }
 
     private var widgetsSection: some View {
-        EditorSection(title: "Widgets", detail: widgetsDetail) {
+        EditorSection(title: tr("Widgets"), detail: widgetsDetail) {
             if kinds.contains(where: \.isInteractive) {
                 Toggle(isOn: $onlyInteractive.animation(.snappy)) {
                     HStack(spacing: 6) {
                         InteractiveBadge()
-                        Text("Seulement les widgets interactifs")
+                        Text(tr("Seulement les widgets interactifs"))
                             .font(.subheadline)
                     }
                 }
@@ -307,8 +307,8 @@ struct SpaceBuilderView: View {
     }
 
     private var widgetsDetail: String {
-        let count = Fmt.plural(selection.count, "sélectionné", "sélectionnés")
-        return format == .small ? count : "\(count) · \(Composer.maxCount(for: format)) au plus"
+        let count = Fmt.plural(selection.count, tr("sélectionné"), tr("sélectionnés"))
+        return format == .small ? count : tr("\(count) · \(Composer.maxCount(for: format)) au plus")
     }
 
     private func kindCell(_ kind: WidgetKind) -> some View {
@@ -385,8 +385,8 @@ struct SpaceBuilderView: View {
     }
 
     private var continueTitle: String {
-        if format == .small && selection.count > 1 { return "Personnaliser les \(selection.count) widgets" }
-        return "Personnaliser le widget"
+        if format == .small && selection.count > 1 { return tr("Personnaliser les \(selection.count) widgets") }
+        return tr("Personnaliser le widget")
     }
 
     // MARK: Actions

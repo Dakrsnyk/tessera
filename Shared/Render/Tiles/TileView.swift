@@ -549,7 +549,7 @@ struct TileView: View {
             }
         }
         if result.count < 2, let detail = tile.detail {
-            result.append(Stat(id: "detail", label: "Détail", value: detail))
+            result.append(Stat(id: "detail", label: tr("Détail"), value: detail))
         }
         return result
     }
@@ -1074,7 +1074,7 @@ struct TileVisualView: View {
             let last = values.last ?? 0
             let previous = values.dropLast()
             let average = previous.isEmpty ? last : previous.reduce(0, +) / Double(previous.count)
-            ComparisonChart(current: last, reference: average, currentLabel: "Dernier", referenceLabel: "Moyenne", style: s)
+            ComparisonChart(current: last, reference: average, currentLabel: tr("Dernier"), referenceLabel: tr("Moyenne"), style: s)
         default:
             original
         }
@@ -1105,7 +1105,7 @@ struct TileVisualView: View {
                 BarView(progress: value, color: s.chart, track: s.options.chartFill ? s.track : s.track.opacity(0.4), height: height, radius: s.radius(height / 2))
             }
         case .comparison:
-            ComparisonChart(current: value, reference: 1, currentLabel: "Actuel", referenceLabel: "Objectif", style: s, asPercent: true)
+            ComparisonChart(current: value, reference: 1, currentLabel: tr("Actuel"), referenceLabel: tr("Objectif"), style: s, asPercent: true)
         default:
             original
         }

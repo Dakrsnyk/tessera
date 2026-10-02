@@ -28,9 +28,9 @@ struct ExerciseLibraryPage: View {
             .listRowBackground(Color.clear)
 
             if isBrowsing {
-                shortcut("Favoris", ids: state.favoriteExercises)
-                shortcut("Récents", ids: state.recentExercises.filter { !state.favoriteExercises.contains($0) })
-                shortcut("Les plus faits", ids: FitnessMath.frequentExercises(state).filter { !state.favoriteExercises.contains($0) && !state.recentExercises.contains($0) })
+                shortcut(tr("Favoris"), ids: state.favoriteExercises)
+                shortcut(tr("Récents"), ids: state.recentExercises.filter { !state.favoriteExercises.contains($0) })
+                shortcut(tr("Les plus faits"), ids: FitnessMath.frequentExercises(state).filter { !state.favoriteExercises.contains($0) && !state.recentExercises.contains($0) })
                 Section {
                     ForEach(state.customExercises) { custom in
                         VStack(alignment: .leading, spacing: 2) {
@@ -44,12 +44,12 @@ struct ExerciseLibraryPage: View {
                     Button {
                         creating = true
                     } label: {
-                        Label("Créer un exercice", systemImage: "plus.circle")
+                        Label(tr("Créer un exercice"), systemImage: "plus.circle")
                     }
                 } header: {
-                    Text("Mes exercices")
+                    Text(tr("Mes exercices"))
                 }
-                Section("Par muscle") {
+                Section(tr("Par muscle")) {
                     ForEach(MuscleGroup.allCases) { group in
                         Button {
                             filters.group = group
@@ -69,21 +69,21 @@ struct ExerciseLibraryPage: View {
                 let results = ExerciseLibrary.search(query, filters: filters)
                 Section {
                     if results.isEmpty {
-                        Text("Aucun exercice ne correspond. Essaie un autre mot ou retire un filtre.")
+                        Text(tr("Aucun exercice ne correspond. Essaie un autre mot ou retire un filtre."))
                             .foregroundStyle(Color.secondary)
                     }
                     ForEach(results) { exercise in
                         row(exercise)
                     }
                 } header: {
-                    Text(Fmt.plural(results.count, "exercice", "exercices"))
+                    Text(Fmt.plural(results.count, tr("exercice"), tr("exercices")))
                 }
             }
         }
         .styledList()
         .tint(Color(hex: accentHex))
-        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Développé, squat, dos, haltères…")
-        .navigationTitle(onPick == nil ? "Exercices" : "Ajouter un exercice")
+        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr("Développé, squat, dos, haltères…"))
+        .navigationTitle(onPick == nil ? tr("Exercices") : tr("Ajouter un exercice"))
         .navigationBarTitleDisplayMode(onPick == nil ? .large : .inline)
         .sheet(item: $info) { exercise in
             ExerciseInfoSheet(exercise: exercise)
@@ -98,27 +98,27 @@ struct ExerciseLibraryPage: View {
     private var filterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                filterMenu(title: filters.group?.title ?? "Muscle", isActive: filters.group != nil) {
-                    Button("Tous") { filters.group = nil }
+                filterMenu(title: filters.group?.title ?? tr("Muscle"), isActive: filters.group != nil) {
+                    Button(tr("Tous")) { filters.group = nil }
                     ForEach(MuscleGroup.allCases) { group in Button(group.title) { filters.group = group } }
                 }
-                filterMenu(title: filters.equipment?.title ?? "Équipement", isActive: filters.equipment != nil) {
-                    Button("Tous") { filters.equipment = nil }
+                filterMenu(title: filters.equipment?.title ?? tr("Équipement"), isActive: filters.equipment != nil) {
+                    Button(tr("Tous")) { filters.equipment = nil }
                     ForEach(Equipment.allCases) { item in Button(item.title) { filters.equipment = item } }
                 }
-                filterMenu(title: filters.type?.title ?? "Type", isActive: filters.type != nil) {
-                    Button("Tous") { filters.type = nil }
+                filterMenu(title: filters.type?.title ?? tr("Type"), isActive: filters.type != nil) {
+                    Button(tr("Tous")) { filters.type = nil }
                     ForEach(ExerciseType.allCases) { item in Button(item.title) { filters.type = item } }
                 }
-                filterMenu(title: filters.difficulty?.title ?? "Niveau", isActive: filters.difficulty != nil) {
-                    Button("Tous") { filters.difficulty = nil }
+                filterMenu(title: filters.difficulty?.title ?? tr("Niveau"), isActive: filters.difficulty != nil) {
+                    Button(tr("Tous")) { filters.difficulty = nil }
                     ForEach(Difficulty.allCases) { item in Button(item.title) { filters.difficulty = item } }
                 }
                 if !filters.isEmpty {
                     Button {
                         filters = ExerciseLibrary.Filters()
                     } label: {
-                        Label("Effacer", systemImage: "xmark")
+                        Label(tr("Effacer"), systemImage: "xmark")
                             .font(.subheadline.weight(.medium))
                     }
                     .accessibilityIdentifier("filters-clear")
@@ -184,14 +184,14 @@ struct ExerciseLibraryPage: View {
                     .foregroundStyle(Color(hex: accentHex))
             }
             .buttonStyle(.borderless)
-            .accessibilityLabel(Text("Fiche de \(exercise.name)"))
+            .accessibilityLabel(Text(tr("Fiche de \(exercise.name)")))
             .accessibilityIdentifier("exercise-info")
         }
         .swipeActions {
             Button {
                 model.update(\.fitness) { $0.toggleFavorite(exercise.id) }
             } label: {
-                Label(isFavorite ? "Retirer" : "Favori", systemImage: isFavorite ? "star.slash" : "star")
+                Label(isFavorite ? tr("Retirer") : tr("Favori"), systemImage: isFavorite ? "star.slash" : "star")
             }
             .tint(.orange)
         }
@@ -224,7 +224,7 @@ struct ExerciseInfoSheet: View {
             ExerciseDetailView(exercise: exercise, inSheet: true)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Fermer") { dismiss() }
+                        Button(tr("Fermer")) { dismiss() }
                     }
                 }
         }
@@ -255,10 +255,10 @@ struct ExerciseDetailView: View {
                     .frame(maxWidth: .infinity)
                 HStack(spacing: 6) {
                     Circle().fill(Color(hex: accentHex)).frame(width: 7, height: 7)
-                    Text("Muscles principaux")
+                    Text(tr("Muscles principaux"))
                     Circle().fill(Color(hex: accentHex).opacity(0.45)).frame(width: 7, height: 7)
                         .padding(.leading, 6)
-                    Text("secondaires")
+                    Text(tr("secondaires"))
                 }
                 .font(.caption2)
                 .foregroundStyle(.secondary)
@@ -273,17 +273,17 @@ struct ExerciseDetailView: View {
                     badge(exercise.difficulty.title)
                     ForEach(exercise.equipment, id: \.self) { badge($0.title) }
                 }
-                muscleLine("Principalement", exercise.primary, strong: true)
+                muscleLine(tr("Principalement"), exercise.primary, strong: true)
                 if !exercise.secondary.isEmpty {
-                    muscleLine("Aussi", exercise.secondary, strong: false)
+                    muscleLine(tr("Aussi"), exercise.secondary, strong: false)
                 }
             }
 
-            infoCard(title: "Position de départ", symbol: "figure.stand") {
+            infoCard(title: tr("Position de départ"), symbol: "figure.stand") {
                 Text(technique.start).fixedSize(horizontal: false, vertical: true)
             }
 
-            infoCard(title: "Exécution", symbol: "list.number") {
+            infoCard(title: tr("Exécution"), symbol: "list.number") {
                 VStack(alignment: .leading, spacing: 8) {
                     ForEach(Array((technique.steps + exercise.cues).enumerated()), id: \.offset) { index, step in
                         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -301,11 +301,11 @@ struct ExerciseDetailView: View {
                 }
             }
 
-            infoCard(title: "Points importants", symbol: "checkmark.circle") {
+            infoCard(title: tr("Points importants"), symbol: "checkmark.circle") {
                 bullets(technique.tips, symbol: "checkmark", hex: "2F8F7A")
             }
 
-            infoCard(title: "À éviter", symbol: "exclamationmark.triangle") {
+            infoCard(title: tr("À éviter"), symbol: "exclamationmark.triangle") {
                 bullets(technique.mistakes, symbol: "xmark", hex: "E5484D")
             }
 
@@ -314,7 +314,7 @@ struct ExerciseDetailView: View {
             let alternatives = ExerciseLibrary.alternatives(to: exercise)
             if !alternatives.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Alternatives")
+                    MiniSectionTitle(title: tr("Alternatives"))
                     MiniRowsCard {
                         ForEach(Array(alternatives.enumerated()), id: \.element.id) { index, other in
                             Group {
@@ -323,12 +323,12 @@ struct ExerciseDetailView: View {
                                         alternative = other
                                     } label: {
                                         MiniRow(symbol: other.pattern == exercise.pattern ? "arrow.triangle.branch" : "arrow.left.arrow.right", colorHex: accentHex,
-                                                title: other.name, detail: other.pattern == exercise.pattern ? "Variante" : "Mêmes muscles")
+                                                title: other.name, detail: other.pattern == exercise.pattern ? tr("Variante") : tr("Mêmes muscles"))
                                     }
                                 } else {
                                     NavigationLink(value: HomeRoute.page(.fitnessExercise(other.id))) {
                                         MiniRow(symbol: other.pattern == exercise.pattern ? "arrow.triangle.branch" : "arrow.left.arrow.right", colorHex: accentHex,
-                                                title: other.name, detail: other.pattern == exercise.pattern ? "Variante" : "Mêmes muscles")
+                                                title: other.name, detail: other.pattern == exercise.pattern ? tr("Variante") : tr("Mêmes muscles"))
                                     }
                                 }
                             }
@@ -339,7 +339,7 @@ struct ExerciseDetailView: View {
                 }
             }
 
-            Text("Consignes générales : adapte la charge à ton niveau et arrête en cas de douleur. En cas de doute, demande à un professionnel.")
+            Text(tr("Consignes générales : adapte la charge à ton niveau et arrête en cas de douleur. En cas de doute, demande à un professionnel."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -347,7 +347,7 @@ struct ExerciseDetailView: View {
         .safeAreaInset(edge: .bottom) {
             VStack(spacing: 0) {
                 Divider()
-                MiniActionButton(title: "Ajouter à ma séance", symbol: "plus", colorHex: accentHex) {
+                MiniActionButton(title: tr("Ajouter à ma séance"), symbol: "plus", colorHex: accentHex) {
                     adding = true
                 }
                 .accessibilityIdentifier("exercise-add")
@@ -366,7 +366,7 @@ struct ExerciseDetailView: View {
                 } label: {
                     Image(systemName: isFavorite ? "star.fill" : "star")
                 }
-                .accessibilityLabel(Text(isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"))
+                .accessibilityLabel(Text(isFavorite ? tr("Retirer des favoris") : tr("Ajouter aux favoris")))
                 .accessibilityIdentifier("exercise-favorite")
             }
         }
@@ -428,22 +428,22 @@ struct ExerciseDetailView: View {
             let best = history.compactMap(\.best).max { FitnessMath.oneRepMax($0) < FitnessMath.oneRepMax($1) }
             let recent = history.filter { $0.date > Date().addingTimeInterval(-30 * 86_400) }.count
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Mes performances")
+                MiniSectionTitle(title: tr("Mes performances"))
                 VStack(alignment: .leading, spacing: 12) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(DateMath.isSameDay(last.date, Date()) ? "Aujourd'hui" : "Dernière séance · \(Fmt.shortDay(last.date))")
+                        Text(DateMath.isSameDay(last.date, Date()) ? tr("Aujourd'hui") : tr("Dernière séance · \(Fmt.shortDay(last.date))"))
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(.secondary)
-                        Text(last.sets.map { $0.weight > 0 ? "\(ProfileNumberField.format($0.weight)) kg × \($0.reps)" : "\($0.reps) reps" }.joined(separator: " · "))
+                        Text(last.sets.map { $0.weight > 0 ? tr("\(ProfileNumberField.format($0.weight)) kg × \($0.reps)") : tr("\($0.reps) reps") }.joined(separator: " · "))
                             .font(.subheadline.weight(.medium))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     HStack(spacing: 10) {
                         if let best, best.weight > 0 {
-                            MiniStat(title: "Record", value: "\(ProfileNumberField.format(best.weight))", unit: "kg × \(best.reps)", detail: "1RM ≈ \(TF.int(FitnessMath.oneRepMax(best))) kg")
+                            MiniStat(title: tr("Record"), value: "\(ProfileNumberField.format(best.weight))", unit: tr("kg × \(best.reps)"), detail: tr("1RM ≈ \(TF.int(FitnessMath.oneRepMax(best))) kg"))
                         }
-                        MiniStat(title: "Volume", value: TF.int(last.volume), unit: "kg", detail: "dernière séance")
-                        MiniStat(title: "Fréquence", value: "\(recent)", unit: "×", detail: "en 30 jours")
+                        MiniStat(title: tr("Volume"), value: TF.int(last.volume), unit: tr("kg"), detail: tr("dernière séance"))
+                        MiniStat(title: tr("Fréquence"), value: "\(recent)", unit: "×", detail: tr("en 30 jours"))
                     }
                     if history.count >= 3 {
                         Chart {
@@ -458,7 +458,7 @@ struct ExerciseDetailView: View {
                         }
                         .frame(height: 150)
                         .accessibilityIdentifier("exercise-chart")
-                        Text("Charge la plus lourde de chaque séance").font(.caption).foregroundStyle(.secondary)
+                        Text(tr("Charge la plus lourde de chaque séance")).font(.caption).foregroundStyle(.secondary)
                     }
                 }
                 .card()
@@ -487,28 +487,28 @@ struct AddToRoutineSheet: View {
         let routines = model.fitness.routines
         SheetForm(title: exercise.name, canSave: routineID != nil || !newName.trimmed.isEmpty || routines.isEmpty, onSave: save) {
             Section {
-                Picker("Séance", selection: $routineID) {
+                Picker(tr("Séance"), selection: $routineID) {
                     ForEach(routines) { routine in Text(routine.name).tag(Optional(routine.id)) }
-                    Text("Nouvelle séance").tag(UUID?.none)
+                    Text(tr("Nouvelle séance")).tag(UUID?.none)
                 }
                 if routineID == nil {
-                    TextField("Nom de la nouvelle séance", text: $newName)
+                    TextField(tr("Nom de la nouvelle séance"), text: $newName)
                         .accessibilityIdentifier("add-routine-name")
                 }
             } header: {
-                Text("Dans quelle séance")
+                Text(tr("Dans quelle séance"))
             }
-            Section("Séries") {
-                Stepper("Séries : \(sets)", value: $sets, in: 1...12)
-                Stepper("Répétitions : \(reps)", value: $reps, in: 1...100)
-                NumberRow(title: "Charge", value: $weight, unit: "kg")
-                Stepper("Repos : \(rest) s", value: $rest, in: 15...600, step: 15)
+            Section(tr("Séries")) {
+                Stepper(tr("Séries : \(sets)"), value: $sets, in: 1...12)
+                Stepper(tr("Répétitions : \(reps)"), value: $reps, in: 1...100)
+                NumberRow(title: tr("Charge"), value: $weight, unit: tr("kg"))
+                Stepper(tr("Repos : \(rest) s"), value: $rest, in: 15...600, step: 15)
             }
             Section {
-                TextField("Tempo (ex. 3-1-1-0)", text: $tempo)
-                TextField("Notes", text: $notes, axis: .vertical)
+                TextField(tr("Tempo (ex. 3-1-1-0)"), text: $tempo)
+                TextField(tr("Notes"), text: $notes, axis: .vertical)
             } footer: {
-                Text("Tempo : secondes en descente, pause, montée, pause.")
+                Text(tr("Tempo : secondes en descente, pause, montée, pause."))
             }
         }
         .onAppear {
@@ -540,19 +540,19 @@ struct CustomExerciseEditor: View {
     @State private var notes = ""
 
     var body: some View {
-        SheetForm(title: "Nouvel exercice", canSave: !name.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: tr("Nouvel exercice"), canSave: !name.trimmed.isEmpty, onSave: save) {
             Section {
-                TextField("Nom", text: $name)
-                Picker("Muscle", selection: $muscle) {
+                TextField(tr("Nom"), text: $name)
+                Picker(tr("Muscle"), selection: $muscle) {
                     ForEach(Muscle.allCases) { Text($0.title).tag($0) }
                 }
-                Picker("Équipement", selection: $equipment) {
+                Picker(tr("Équipement"), selection: $equipment) {
                     ForEach(Equipment.allCases) { Text($0.title).tag($0) }
                 }
-                Picker("Type", selection: $type) {
+                Picker(tr("Type"), selection: $type) {
                     ForEach(ExerciseType.allCases) { Text($0.title).tag($0) }
                 }
-                TextField("Notes", text: $notes, axis: .vertical)
+                TextField(tr("Notes"), text: $notes, axis: .vertical)
             }
         }
     }

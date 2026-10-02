@@ -85,7 +85,7 @@ struct WidgetCarousel<Menu: View>: View {
         .buttonStyle(.plain)
         .contextMenu { menu(design) }
         .accessibilityLabel(Text("\(design.name), \(design.kindTitle), \(design.displayFormat.title)"))
-        .accessibilityHint(Text(isCentered ? "Ouvre l'éditeur" : "Amène ce widget au centre"))
+        .accessibilityHint(Text(isCentered ? tr("Ouvre l'éditeur") : tr("Amène ce widget au centre")))
         .accessibilityIdentifier(isCentered ? "carousel-center" : "carousel-item")
     }
 }
@@ -135,10 +135,10 @@ struct CategoryStrip: View {
     }
 
     private var options: [Option] {
-        var options = [Option(filter: .all, title: "Tous", symbol: "square.grid.2x2.fill", colorHex: "2F8F7A", count: designs.count)]
+        var options = [Option(filter: .all, title: tr("Tous"), symbol: "square.grid.2x2.fill", colorHex: "2F8F7A", count: designs.count)]
         let favorites = designs.filter(\.isFavorite).count
         if favorites > 0 {
-            options.append(Option(filter: .favorites, title: "Favoris", symbol: "heart.fill", colorHex: "F2588F", count: favorites))
+            options.append(Option(filter: .favorites, title: tr("Favoris"), symbol: "heart.fill", colorHex: "F2588F", count: favorites))
         }
         for category in WidgetCategory.allCases {
             let count = designs.filter { $0.kind.category == category }.count
@@ -184,7 +184,7 @@ struct CategoryStrip: View {
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel(Text("\(option.title), \(Fmt.plural(option.count, "widget", "widgets"))"))
+                    .accessibilityLabel(Text("\(option.title), \(Fmt.plural(option.count, tr("widget"), tr("widgets")))"))
                     .accessibilityAddTraits(isSelected ? .isSelected : [])
                     .accessibilityIdentifier("shelf-\(option.title)")
                 }

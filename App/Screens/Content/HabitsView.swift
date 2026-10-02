@@ -11,9 +11,9 @@ struct HabitsView: View {
             if habits.isEmpty {
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Aucune habitude pour l'instant")
+                        Text(tr("Aucune habitude pour l'instant"))
                             .font(.headline)
-                        Text("Crée une habitude, puis valide-la chaque jour d'une touche sur ton widget.")
+                        Text(tr("Crée une habitude, puis valide-la chaque jour d'une touche sur ton widget."))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -39,7 +39,7 @@ struct HabitsView: View {
                     }
                 } footer: {
                     if !model.isPremium {
-                        Text("\(min(habits.count, AppModel.freeHabitLimit)) sur \(AppModel.freeHabitLimit) habitudes en version gratuite.")
+                        Text(tr("\(min(habits.count, AppModel.freeHabitLimit)) sur \(AppModel.freeHabitLimit) habitudes en version gratuite."))
                     }
                 }
             }
@@ -52,12 +52,12 @@ struct HabitsView: View {
                         showsPaywall = true
                     }
                 } label: {
-                    Label("Nouvelle habitude", systemImage: "plus.circle.fill")
+                    Label(tr("Nouvelle habitude"), systemImage: "plus.circle.fill")
                 }
             }
         }
         .styledList()
-        .navigationTitle("Habitudes")
+        .navigationTitle(tr("Habitudes"))
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 if habits.count > 1 { EditButton() }
@@ -87,14 +87,14 @@ private struct HabitRow: View {
                     .background(Circle().fill(done ? color : color.opacity(0.14)))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(Text(done ? "Marquer \(habit.name) comme non fait" : "Valider \(habit.name)"))
+            .accessibilityLabel(Text(done ? tr("Marquer \(habit.name) comme non fait") : tr("Valider \(habit.name)")))
 
             Button(action: onEdit) {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(habit.name).foregroundStyle(.primary)
                         let streak = habit.streak()
-                        Text(streak > 0 ? "Série de \(streak) jour\(streak > 1 ? "s" : "")" : "Pas encore de série")
+                        Text(streak > 0 ? tr("Série de \(streak) jour\(streak > 1 ? "s" : "")") : tr("Pas encore de série"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -143,10 +143,10 @@ struct HabitEditor: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Nom") {
-                    TextField("Méditer, lire, courir…", text: $habit.name)
+                Section(tr("Nom")) {
+                    TextField(tr("Méditer, lire, courir…"), text: $habit.name)
                 }
-                Section("Icône") {
+                Section(tr("Icône")) {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 12) {
                         ForEach(Self.symbols, id: \.self) { symbol in
                             Button {
@@ -163,7 +163,7 @@ struct HabitEditor: View {
                     }
                     .padding(.vertical, 6)
                 }
-                Section("Couleur") {
+                Section(tr("Couleur")) {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 4)], spacing: 4) {
                         ForEach(Palette.freeAccents) { swatch in
                             ColorDot(hex: swatch.hex, isSelected: habit.colorHex == swatch.hex, size: 26) {
@@ -174,19 +174,19 @@ struct HabitEditor: View {
                     }
                 }
                 Section {
-                    Toggle("Rappel quotidien", isOn: $hasReminder)
+                    Toggle(tr("Rappel quotidien"), isOn: $hasReminder)
                     if hasReminder {
-                        DatePicker("Heure", selection: $reminderTime, displayedComponents: .hourAndMinute)
+                        DatePicker(tr("Heure"), selection: $reminderTime, displayedComponents: .hourAndMinute)
                             .environment(\.locale, Fmt.locale)
                     }
                 } footer: {
                     if notificationsDenied {
-                        Text("Les notifications sont désactivées pour Tessera dans Réglages.")
+                        Text(tr("Les notifications sont désactivées pour Tessera dans Réglages."))
                     }
                 }
                 if !isNew {
                     Section {
-                        Button("Supprimer l'habitude", role: .destructive) {
+                        Button(tr("Supprimer l'habitude"), role: .destructive) {
                             NotificationScheduler.cancelHabitReminder(habit.id)
                             model.updateContent { content in content.habits.removeAll { $0.id == habit.id } }
                             dismiss()
@@ -195,14 +195,14 @@ struct HabitEditor: View {
                 }
             }
             .styledList()
-            .navigationTitle(isNew ? "Nouvelle habitude" : "Habitude")
+            .navigationTitle(isNew ? tr("Nouvelle habitude") : tr("Habitude"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Annuler") { dismiss() }
+                    Button(tr("Annuler")) { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Enregistrer", action: save)
+                    Button(tr("Enregistrer"), action: save)
                         .disabled(habit.name.trimmed.isEmpty)
                 }
             }

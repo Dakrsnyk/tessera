@@ -24,7 +24,7 @@ struct AgendaItem: Identifiable, Hashable {
 
     /// "14:00" or "Journée".
     var timeText: String {
-        guard let start else { return "Journée" }
+        guard let start else { return tr("Journée") }
         return Fmt.time(start, uses24Hour: true)
     }
 }
@@ -46,14 +46,14 @@ enum Agenda {
         for occurrence in StudentMath.occurrences(student, on: day) {
             let course = student.course(occurrence.slot.courseID)
             items.append(AgendaItem(
-                id: "class-\(occurrence.slot.id)-\(DateMath.dayKey(day))", kind: .classSlot, title: course?.name ?? "Cours",
-                detail: occurrence.slot.room.isEmpty ? nil : "Salle \(occurrence.slot.room)",
+                id: "class-\(occurrence.slot.id)-\(DateMath.dayKey(day))", kind: .classSlot, title: course?.name ?? tr("Cours"),
+                detail: occurrence.slot.room.isEmpty ? nil : tr("Salle \(occurrence.slot.room)"),
                 start: occurrence.start, end: occurrence.end, colorHex: course?.colorHex ?? "D6409F", symbol: "graduationcap.fill"
             ))
         }
         for exam in student.exams where DateMath.isSameDay(exam.date, day) {
             items.append(AgendaItem(
-                id: "exam-\(exam.id)", kind: .exam, title: "Examen : \(exam.title)", detail: exam.room.isEmpty ? nil : "Salle \(exam.room)",
+                id: "exam-\(exam.id)", kind: .exam, title: tr("Examen : \(exam.title)"), detail: exam.room.isEmpty ? nil : tr("Salle \(exam.room)"),
                 start: exam.date, colorHex: "E5484D", symbol: "exclamationmark.circle.fill"
             ))
         }
@@ -65,13 +65,13 @@ enum Agenda {
         }
         for task in model.content.tasks where task.isDue(on: day) && (includeDone || !task.isDone) {
             items.append(AgendaItem(
-                id: "task-\(task.id)", kind: .task, title: task.title, detail: task.priority == .none ? nil : "Priorité \(task.priority.title.lowercased())",
+                id: "task-\(task.id)", kind: .task, title: task.title, detail: task.priority == .none ? nil : tr("Priorité \(task.priority.title.lowercased())"),
                 start: task.hasTime ? task.due : nil, colorHex: task.priority.colorHex ?? "3366FF", symbol: "checkmark.circle", isDone: task.isDone
             ))
         }
         for deadline in model.productivity.deadlines where DateMath.isSameDay(deadline.date, day) {
             items.append(AgendaItem(
-                id: "deadline-\(deadline.id)", kind: .deadline, title: deadline.title, detail: "Échéance",
+                id: "deadline-\(deadline.id)", kind: .deadline, title: deadline.title, detail: tr("Échéance"),
                 start: deadline.date, colorHex: "F2A33A", symbol: "flag.fill"
             ))
         }
@@ -79,7 +79,7 @@ enum Agenda {
         for routine in model.fitness.routines where routine.weekdays.contains(weekday) {
             items.append(AgendaItem(
                 id: "workout-\(routine.id)-\(DateMath.dayKey(day))", kind: .workout, title: routine.name,
-                detail: "Séance · environ \(max(5, routine.exercises.reduce(0) { $0 + $1.sets * (40 + $1.restSeconds) } / 60)) min",
+                detail: tr("Séance · environ \(max(5, routine.exercises.reduce(0) { $0 + $1.sets * (40 + $1.restSeconds) } / 60)) min"),
                 start: nil, colorHex: "E5484D", symbol: "figure.strengthtraining.traditional"
             ))
         }

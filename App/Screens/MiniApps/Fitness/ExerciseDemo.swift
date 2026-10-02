@@ -22,7 +22,7 @@ struct ExerciseDemoView: View {
         if let demo = ExerciseDemos.demo(for: exercise.id) {
             content(demo)
         } else {
-            Text("Démonstration indisponible")
+            Text(tr("Démonstration indisponible"))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, minHeight: 120)
@@ -54,9 +54,9 @@ struct ExerciseDemoView: View {
                     .contentShape(Rectangle())
                     .onTapGesture { togglePause(demo) }
                     .accessibilityElement()
-                    .accessibilityLabel(Text("Démonstration animée de \(exercise.name)"))
+                    .accessibilityLabel(Text(tr("Démonstration animée de \(exercise.name)")))
                     .accessibilityValue(Text(phase.label.map { demo.labels.indices.contains($0) ? demo.labels[$0] : "" } ?? ""))
-                    .accessibilityHint(Text(isPaused ? "Touchez deux fois pour lancer l'animation" : "Touchez deux fois pour mettre en pause"))
+                    .accessibilityHint(Text(isPaused ? tr("Touchez deux fois pour lancer l'animation") : tr("Touchez deux fois pour mettre en pause")))
                     .accessibilityAddTraits(.isButton)
                     .accessibilityIdentifier("exercise-demo-canvas")
 
@@ -100,7 +100,7 @@ private struct PhaseStrip: View {
 
     var body: some View {
         if labels.isEmpty {
-            Text("Mouvement continu")
+            Text(tr("Mouvement continu"))
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(.secondary)
         } else {
@@ -147,7 +147,7 @@ private struct ViewPicker: View {
                         .background(selection == index ? Color.primary : Color.secondary.opacity(0.12), in: Capsule())
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text("Vue \(name)"))
+                .accessibilityLabel(Text(tr("Vue \(name)")))
                 .accessibilityAddTraits(selection == index ? .isSelected : [])
                 .accessibilityIdentifier("exercise-demo-view-\(index)")
             }

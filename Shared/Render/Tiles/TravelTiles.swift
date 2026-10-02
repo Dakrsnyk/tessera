@@ -1,7 +1,7 @@
 import Foundation
 
 enum TravelTiles {
-    static let hint = "Ajoute ton voyage dans Tessera, espace Voyage."
+    static let hint = tr("Ajoute ton voyage dans Tessera, espace Voyage.")
 
     static func make(_ context: RenderContext) -> Tile {
         let data = context.payload.domains
@@ -21,27 +21,27 @@ enum TravelTiles {
 
     static func countdown(_ state: TravelState, now: Date) -> Tile {
         guard let trip = TravelMath.currentTrip(state, at: now) else {
-            return .empty("Voyage", symbol: "airplane.departure", message: hint)
+            return .empty(tr("Voyage"), symbol: "airplane.departure", message: hint)
         }
         var tile = Tile(title: trip.destination, symbol: "airplane.departure")
         if TravelMath.isOngoing(trip, at: now) {
             let position = TravelMath.tripDay(trip, at: now)
-            tile.value = "Jour \(position.day)"
-            tile.caption = "sur \(position.total) · bon voyage !"
+            tile.value = tr("Jour \(position.day)")
+            tile.caption = tr("sur \(position.total) · bon voyage !")
             tile.visual = .bar(Double(position.day) / Double(position.total))
             tile.gauge = Double(position.day) / Double(position.total)
             tile.shortValue = "J\(position.day)"
-            tile.inline = "\(trip.destination) · jour \(position.day)/\(position.total)"
+            tile.inline = tr("\(trip.destination) · jour \(position.day)/\(position.total)")
         } else {
             let days = DateMath.daysBetween(now, trip.start)
-            tile.value = days == 0 ? "Aujourd'hui" : Fmt.number(days)
+            tile.value = days == 0 ? tr("Aujourd'hui") : Fmt.number(days)
             tile.unit = days == 0 ? nil : TF.days(days)
-            tile.caption = days == 0 ? "c'est le départ !" : "avant \(trip.destination)"
-            tile.detail = "Du \(Fmt.format(trip.start, template: "dMMM")) au \(Fmt.format(trip.end, template: "dMMM"))"
+            tile.caption = days == 0 ? tr("c'est le départ !") : tr("avant \(trip.destination)")
+            tile.detail = tr("Du \(Fmt.format(trip.start, template: "dMMM")) au \(Fmt.format(trip.end, template: "dMMM"))")
             tile.visual = .ring(max(0.02, 1 - Double(days) / 60))
             tile.gauge = max(0, 1 - Double(days) / 60)
             tile.shortValue = Fmt.number(days)
-            tile.inline = "\(trip.destination) dans \(days) j"
+            tile.inline = tr("\(trip.destination) dans \(days) j")
         }
         return tile
     }
@@ -49,9 +49,9 @@ enum TravelTiles {
     static func flight(_ state: TravelState, context: RenderContext) -> Tile {
         let now = context.date
         guard let flight = TravelMath.nextFlight(state, at: now) else {
-            return .empty("Vol", symbol: "airplane", message: "Ajoute ton vol dans Tessera, espace Voyage.")
+            return .empty(tr("Vol"), symbol: "airplane", message: tr("Ajoute ton vol dans Tessera, espace Voyage."))
         }
-        var tile = Tile(title: "Vol \(flight.number)", symbol: "airplane")
+        var tile = Tile(title: tr("Vol \(flight.number)"), symbol: "airplane")
         let seconds = flight.departure.timeIntervalSince(now)
         if seconds > 0 && seconds < 12 * 3600 {
             tile.timer = now...flight.departure
@@ -60,21 +60,21 @@ enum TravelTiles {
         }
         tile.caption = "\(flight.from) → \(flight.to) · \(Fmt.shortDay(flight.departure))"
         var parts: [String] = []
-        if !flight.terminal.isEmpty { parts.append("Terminal \(flight.terminal)") }
-        if !flight.gate.isEmpty { parts.append("Porte \(flight.gate)") }
-        if !flight.seat.isEmpty { parts.append("Siège \(flight.seat)") }
+        if !flight.terminal.isEmpty { parts.append(tr("Terminal \(flight.terminal)")) }
+        if !flight.gate.isEmpty { parts.append(tr("Porte \(flight.gate)")) }
+        if !flight.seat.isEmpty { parts.append(tr("Siège \(flight.seat)")) }
         tile.detail = parts.isEmpty ? TF.relativeTime(flight.departure, from: now) : parts.joined(separator: " · ")
         // Local times: an outbound flight lands in the trip's time zone, a return flight leaves from it.
         let trip = TravelMath.currentTrip(state, at: now)
         let outbound = trip.map { flight.departure < $0.end.addingTimeInterval(-86_400) } ?? true
         let departureZone: TimeZone = outbound ? .current : (trip?.timeZone ?? .current)
         let arrivalZone: TimeZone = outbound ? (trip?.timeZone ?? .current) : .current
-        var rows = [TileRow(id: "dep", title: "Départ", value: TF.time(flight.departure, context, zone: departureZone), detail: flight.from, symbol: "airplane.departure")]
+        var rows = [TileRow(id: "dep", title: tr("Départ"), value: TF.time(flight.departure, context, zone: departureZone), detail: flight.from, symbol: "airplane.departure")]
         if let arrival = flight.arrival {
-            rows.append(TileRow(id: "arr", title: "Arrivée", value: TF.time(arrival, context, zone: arrivalZone), detail: flight.to, symbol: "airplane.arrival"))
+            rows.append(TileRow(id: "arr", title: tr("Arrivée"), value: TF.time(arrival, context, zone: arrivalZone), detail: flight.to, symbol: "airplane.arrival"))
         }
-        if !flight.gate.isEmpty { rows.append(TileRow(id: "gate", title: "Porte", value: flight.gate, symbol: "door.left.hand.open")) }
-        if !flight.seat.isEmpty { rows.append(TileRow(id: "seat", title: "Siège", value: flight.seat, symbol: "carseat.right")) }
+        if !flight.gate.isEmpty { rows.append(TileRow(id: "gate", title: tr("Porte"), value: flight.gate, symbol: "door.left.hand.open")) }
+        if !flight.seat.isEmpty { rows.append(TileRow(id: "seat", title: tr("Siège"), value: flight.seat, symbol: "carseat.right")) }
         tile.rows = rows
         tile.shortValue = TF.time(flight.departure, context)
         tile.inline = "\(flight.number) · \(TF.time(flight.departure, context))"
@@ -84,22 +84,22 @@ enum TravelTiles {
     static func hotel(_ state: TravelState, context: RenderContext) -> Tile {
         let now = context.date
         guard let stay = TravelMath.currentStay(state, at: now) else {
-            return .empty("Hôtel", symbol: "bed.double.fill", message: "Ajoute ton hébergement dans Tessera, espace Voyage.")
+            return .empty(tr("Hôtel"), symbol: "bed.double.fill", message: tr("Ajoute ton hébergement dans Tessera, espace Voyage."))
         }
-        var tile = Tile(title: "Hôtel", symbol: "bed.double.fill")
+        var tile = Tile(title: tr("Hôtel"), symbol: "bed.double.fill")
         tile.value = stay.name
         tile.caption = stay.address.isEmpty ? nil : stay.address
         if stay.checkIn > now {
-            tile.detail = "Arrivée \(Fmt.shortDay(stay.checkIn)) à \(TF.time(stay.checkIn, context))"
+            tile.detail = tr("Arrivée \(Fmt.shortDay(stay.checkIn)) à \(TF.time(stay.checkIn, context))")
         } else {
-            tile.detail = "Départ \(Fmt.shortDay(stay.checkOut)) à \(TF.time(stay.checkOut, context))"
+            tile.detail = tr("Départ \(Fmt.shortDay(stay.checkOut)) à \(TF.time(stay.checkOut, context))")
         }
         var rows = [
-            TileRow(id: "in", title: "Arrivée", value: Fmt.shortDay(stay.checkIn), symbol: "key.fill"),
-            TileRow(id: "out", title: "Départ", value: Fmt.shortDay(stay.checkOut), symbol: "suitcase.rolling.fill"),
+            TileRow(id: "in", title: tr("Arrivée"), value: Fmt.shortDay(stay.checkIn), symbol: "key.fill"),
+            TileRow(id: "out", title: tr("Départ"), value: Fmt.shortDay(stay.checkOut), symbol: "suitcase.rolling.fill"),
         ]
         if !stay.confirmation.isEmpty {
-            rows.append(TileRow(id: "conf", title: "Réservation", value: stay.confirmation, symbol: "number"))
+            rows.append(TileRow(id: "conf", title: tr("Réservation"), value: stay.confirmation, symbol: "number"))
         }
         tile.rows = rows
         tile.inline = stay.name
@@ -110,10 +110,10 @@ enum TravelTiles {
         let now = context.date
         let unit = context.settings.temperatureUnit
         guard let trip = TravelMath.currentTrip(data.travel, at: now) else {
-            return .empty("Météo à destination", symbol: "cloud.sun.rain", message: hint)
+            return .empty(tr("Météo à destination"), symbol: "cloud.sun.rain", message: hint)
         }
         guard let weather = data.tripWeather else {
-            let message = trip.location == nil ? "Choisis la ville de destination dans l'espace Voyage." : "La météo s'affiche dès que la connexion est disponible."
+            let message = trip.location == nil ? tr("Choisis la ville de destination dans l'espace Voyage.") : tr("La météo s'affiche dès que la connexion est disponible.")
             return .empty(trip.destination, symbol: "cloud.sun.rain", message: message)
         }
         var tile = Tile(title: trip.destination, symbol: WeatherCode.symbol(weather.code, isDay: weather.isDay))
@@ -121,7 +121,7 @@ enum TravelTiles {
         tile.caption = WeatherCode.description(weather.code)
         let tripDays = weather.daily.filter { $0.date >= DateMath.startOfDay(trip.start) && $0.date <= trip.end }
         let shown = tripDays.isEmpty ? Array(weather.daily.prefix(5)) : Array(tripDays.prefix(6))
-        tile.detail = tripDays.isEmpty ? "Maintenant sur place · prévisions du séjour 7 jours avant" : "Prévisions pendant ton séjour"
+        tile.detail = tripDays.isEmpty ? tr("Maintenant sur place · prévisions du séjour 7 jours avant") : tr("Prévisions pendant ton séjour")
         tile.rows = shown.map { day in
             TileRow(id: DateMath.dayKey(day.date), title: Fmt.format(day.date, template: "EEEd").capitalizedFirst, value: "\(Fmt.temperature(day.high, unit: unit)) / \(Fmt.temperature(day.low, unit: unit))", symbol: WeatherCode.symbol(day.code))
         }
@@ -133,14 +133,14 @@ enum TravelTiles {
     static func localTime(_ state: TravelState, context: RenderContext) -> Tile {
         let now = context.date
         guard let trip = TravelMath.currentTrip(state, at: now) else {
-            return .empty("Heure sur place", symbol: "clock.arrow.2.circlepath", message: hint)
+            return .empty(tr("Heure sur place"), symbol: "clock.arrow.2.circlepath", message: hint)
         }
         let zone = trip.timeZone
         let offset = TravelMath.offsetHours(zone, at: now)
         var tile = Tile(title: trip.destination, symbol: "clock.arrow.2.circlepath")
         tile.value = TF.time(now, context, zone: zone)
         let hours = offset.rounded() == offset ? "\(Int(offset))" : TF.decimal(offset, 1)
-        tile.caption = offset == 0 ? "même heure qu'ici" : "\(offset > 0 ? "+" : "")\(hours) h par rapport à ici"
+        tile.caption = offset == 0 ? tr("même heure qu'ici") : tr("\(offset > 0 ? "+" : "")\(hours) h par rapport à ici")
         tile.detail = Fmt.format(now, template: "EEEEdMMMM", timeZone: zone).capitalizedFirst
         tile.inline = "\(trip.destination) \(TF.time(now, context, zone: zone))"
         tile.shortValue = TF.time(now, context, zone: zone)
@@ -152,37 +152,37 @@ enum TravelTiles {
         let home = context.settings.currencyCode
         let foreign = TravelMath.currentTrip(data.travel, at: now)?.currencyCode ?? (home == "EUR" ? "USD" : "EUR")
         guard foreign != home else {
-            return .empty("Devise", symbol: "coloncurrencysign.circle", message: "Ta destination utilise ta devise : rien à convertir.")
+            return .empty(tr("Devise"), symbol: "coloncurrencysign.circle", message: tr("Ta destination utilise ta devise : rien à convertir."))
         }
         guard let rates = data.fx, rates.base == home, let rate = rates.rates[foreign] else {
-            return .empty("Devise", symbol: "coloncurrencysign.circle", message: "Les taux de change s'affichent dès que la connexion est disponible.", emptySymbol: "wifi.slash")
+            return .empty(tr("Devise"), symbol: "coloncurrencysign.circle", message: tr("Les taux de change s'affichent dès que la connexion est disponible."), emptySymbol: "wifi.slash")
         }
         let amount = data.travel.sampleAmount
         var tile = Tile(title: "\(home) → \(foreign)", symbol: "coloncurrencysign.circle")
         tile.value = Fmt.money(amount * rate, currency: foreign)
-        tile.caption = "pour \(Fmt.money(amount, currency: home))"
+        tile.caption = tr("pour \(Fmt.money(amount, currency: home))")
         tile.rows = [
             TileRow(id: "one", title: "1 \(home)", value: "\(TF.decimal(rate, 4)) \(foreign)", symbol: "arrow.right"),
             TileRow(id: "back", title: "1 \(foreign)", value: "\(TF.decimal(1 / rate, 4)) \(home)", symbol: "arrow.left"),
             TileRow(id: "ten", title: Fmt.money(10, currency: foreign), value: Fmt.money(10 / rate, currency: home), symbol: "equal"),
         ]
         tile.detail = "1 \(home) = \(TF.decimal(rate, 4)) \(foreign)"
-        tile.footnote = "Taux de référence BCE · \(Fmt.format(rates.fetchedAt, template: "dMMMM")) · Frankfurter"
+        tile.footnote = tr("Taux de référence BCE · \(Fmt.format(rates.fetchedAt, template: "dMMMM")) · Frankfurter")
         tile.inline = "1 \(home) = \(TF.decimal(rate, 3)) \(foreign)"
         return tile
     }
 
     static func progress(_ state: TravelState, now: Date) -> Tile {
         guard let trip = TravelMath.currentTrip(state, at: now) else {
-            return .empty("Voyage", symbol: "map", message: hint)
+            return .empty(tr("Voyage"), symbol: "map", message: hint)
         }
         var tile = Tile(title: trip.destination, symbol: "map")
         if TravelMath.isOngoing(trip, at: now) {
             let position = TravelMath.tripDay(trip, at: now)
             let left = position.total - position.day
             tile.value = "\(position.day)/\(position.total)"
-            tile.unit = "jours"
-            tile.caption = left == 0 ? "dernier jour" : "\(left) \(TF.days(left)) restants"
+            tile.unit = tr("jours")
+            tile.caption = left == 0 ? tr("dernier jour") : tr("\(left) \(TF.days(left)) restants")
             tile.visual = .ring(Double(position.day) / Double(position.total))
             tile.gauge = Double(position.day) / Double(position.total)
             tile.shortValue = "\(position.day)/\(position.total)"
@@ -190,8 +190,8 @@ enum TravelTiles {
             let days = DateMath.daysBetween(now, trip.start)
             let length = TravelMath.tripDay(trip, at: trip.end).total
             tile.value = Fmt.number(length)
-            tile.unit = "jours"
-            tile.caption = "de voyage, départ \(TF.relativeDay(trip.start, from: now))"
+            tile.unit = tr("jours")
+            tile.caption = tr("de voyage, départ \(TF.relativeDay(trip.start, from: now))")
             tile.visual = .ring(0)
             tile.gauge = 0
             tile.shortValue = "J-\(days)"
@@ -203,9 +203,9 @@ enum TravelTiles {
     static func nextActivity(_ state: TravelState, context: RenderContext) -> Tile {
         let now = context.date
         guard let activity = TravelMath.nextActivity(state, at: now) else {
-            return .empty("Prochaine activité", symbol: "mappin.and.ellipse", message: "Planifie tes activités dans Tessera, espace Voyage.")
+            return .empty(tr("Prochaine activité"), symbol: "mappin.and.ellipse", message: tr("Planifie tes activités dans Tessera, espace Voyage."))
         }
-        var tile = Tile(title: "Prochaine activité", symbol: "mappin.and.ellipse")
+        var tile = Tile(title: tr("Prochaine activité"), symbol: "mappin.and.ellipse")
         tile.value = activity.title
         let zone = TravelMath.currentTrip(state, at: now)?.timeZone ?? .current
         tile.caption = "\(TF.relativeDay(activity.date, from: now).capitalizedFirst) à \(TF.time(activity.date, context, zone: zone))"

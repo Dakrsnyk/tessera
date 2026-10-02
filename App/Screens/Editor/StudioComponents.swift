@@ -17,15 +17,15 @@ enum StudioSection: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .content: "Contenu"
-        case .theme: "Thème"
-        case .style: "Style"
-        case .colors: "Couleurs"
-        case .background: "Fond"
-        case .border: "Bordure"
-        case .chart: "Graphique"
-        case .density: "Densité"
-        case .myStyles: "Mes styles"
+        case .content: tr("Contenu")
+        case .theme: tr("Thème")
+        case .style: tr("Style")
+        case .colors: tr("Couleurs")
+        case .background: tr("Fond")
+        case .border: tr("Bordure")
+        case .chart: tr("Graphique")
+        case .density: tr("Densité")
+        case .myStyles: tr("Mes styles")
         }
     }
 
@@ -171,7 +171,7 @@ struct StudioColorRow: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 1) {
                 Text(title).font(.subheadline)
-                Text(hex == nil ? (detail ?? "Celle du style") : "Personnalisée")
+                Text(hex == nil ? (detail ?? tr("Celle du style")) : tr("Personnalisée"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -185,7 +185,7 @@ struct StudioColorRow: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text("Revenir à la couleur du style"))
+                .accessibilityLabel(Text(tr("Revenir à la couleur du style")))
             }
             ColorPicker(title, selection: Binding(
                 get: { hex.map { Color(hex: $0) } ?? fallback },
@@ -273,7 +273,7 @@ struct StudioStage: View {
             }
             .overlay(alignment: .bottom) {
                 if family.isAccessory {
-                    Text("Écran verrouillé : iOS affiche les widgets d'une seule teinte.")
+                    Text(tr("Écran verrouillé : iOS affiche les widgets d'une seule teinte."))
                         .font(.caption2.weight(.medium))
                         .foregroundStyle(.white.opacity(0.85))
                         .padding(.bottom, 6)

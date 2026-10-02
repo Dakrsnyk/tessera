@@ -17,9 +17,9 @@ enum WidgetFormat: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .small: "Petit"
-        case .medium: "Moyen"
-        case .large: "Grand"
+        case .small: tr("Petit")
+        case .medium: tr("Moyen")
+        case .large: tr("Grand")
         }
     }
 
@@ -202,7 +202,7 @@ extension WidgetDesign {
 
     /// « Macros », or « Combiné · 2 widgets » for a combined widget.
     var kindTitle: String {
-        isCombo ? "Combiné · \(options.parts.count) widgets" : kind.title
+        isCombo ? tr("Combiné · \(options.parts.count) widgets") : kind.title
     }
 }
 
@@ -235,50 +235,50 @@ enum Composer {
         func fits(_ kind: WidgetKind, _ size: WidgetFormat) -> Bool { kind.families.contains(size.family) }
         switch format {
         case .small:
-            guard let kind = kinds.first, kinds.count == 1 else { return .invalid("Un petit widget montre un seul widget.") }
-            return fits(kind, .small) ? .single(kind) : .invalid("\(kind.title) n'existe pas en petit.")
+            guard let kind = kinds.first, kinds.count == 1 else { return .invalid(tr("Un petit widget montre un seul widget.")) }
+            return fits(kind, .small) ? .single(kind) : .invalid(tr("\(kind.title) n'existe pas en petit."))
         case .medium:
             switch kinds.count {
             case 0:
-                return .invalid("Choisis 1 widget, ou 2 à réunir.")
+                return .invalid(tr("Choisis 1 widget, ou 2 à réunir."))
             case 1:
-                return fits(kinds[0], .medium) ? .single(kinds[0]) : .invalid("\(kinds[0].title) n'existe pas en moyen : ajoute un 2e widget pour les réunir.")
+                return fits(kinds[0], .medium) ? .single(kinds[0]) : .invalid(tr("\(kinds[0].title) n'existe pas en moyen : ajoute un 2e widget pour les réunir."))
             case 2:
                 guard kinds.allSatisfy({ fits($0, .small) }) else {
-                    return .invalid("Pour réunir 2 widgets, chacun doit exister en petit.")
+                    return .invalid(tr("Pour réunir 2 widgets, chacun doit exister en petit."))
                 }
                 return .combo(kinds.map { Slot(kind: $0, size: .small) })
             default:
-                return .invalid("Un widget moyen réunit 2 widgets au plus.")
+                return .invalid(tr("Un widget moyen réunit 2 widgets au plus."))
             }
         case .large:
             switch kinds.count {
             case 0:
-                return .invalid("Choisis de 1 à 4 widgets.")
+                return .invalid(tr("Choisis de 1 à 4 widgets."))
             case 1:
-                return fits(kinds[0], .large) ? .single(kinds[0]) : .invalid("\(kinds[0].title) n'existe pas en grand : ajoute d'autres widgets, jusqu'à 4.")
+                return fits(kinds[0], .large) ? .single(kinds[0]) : .invalid(tr("\(kinds[0].title) n'existe pas en grand : ajoute d'autres widgets, jusqu'à 4."))
             case 2:
                 guard kinds.allSatisfy({ fits($0, .medium) }) else {
-                    return .invalid("Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget.")
+                    return .invalid(tr("Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget."))
                 }
                 return .combo(kinds.map { Slot(kind: $0, size: .medium) })
             case 3:
                 // The richest widget takes a whole row, the two others share the other row.
                 guard let wide = kinds.lastIndex(where: { fits($0, .large) }) ?? kinds.lastIndex(where: { fits($0, .medium) }) else {
-                    return .invalid("Pour 3 widgets, l'un d'eux doit exister en moyen.")
+                    return .invalid(tr("Pour 3 widgets, l'un d'eux doit exister en moyen."))
                 }
                 let slots = kinds.enumerated().map { pair in Slot(kind: pair.element, size: pair.offset == wide ? .medium : .small) }
                 guard slots.filter({ $0.size == .small }).allSatisfy({ fits($0.kind, .small) }) else {
-                    return .invalid("Ces widgets ne tiennent pas ensemble en grand.")
+                    return .invalid(tr("Ces widgets ne tiennent pas ensemble en grand."))
                 }
                 return .combo(slots)
             case 4:
                 guard kinds.allSatisfy({ fits($0, .small) }) else {
-                    return .invalid("Pour réunir 4 widgets, chacun doit exister en petit.")
+                    return .invalid(tr("Pour réunir 4 widgets, chacun doit exister en petit."))
                 }
                 return .combo(kinds.map { Slot(kind: $0, size: .small) })
             default:
-                return .invalid("Un grand widget réunit 4 widgets au plus.")
+                return .invalid(tr("Un grand widget réunit 4 widgets au plus."))
             }
         }
     }

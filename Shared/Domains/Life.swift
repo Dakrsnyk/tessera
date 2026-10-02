@@ -6,10 +6,10 @@ enum HolidayRegion: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .quebec: "Québec"
-        case .canada: "Canada (fédéral)"
-        case .france: "France"
-        case .unitedStates: "États-Unis"
+        case .quebec: tr("Québec")
+        case .canada: tr("Canada (fédéral)")
+        case .france: tr("France")
+        case .unitedStates: tr("États-Unis")
         }
     }
 }
@@ -119,58 +119,58 @@ enum Holidays {
         switch region {
         case .quebec:
             days = [
-                Holiday(name: "Jour de l'An", date: make(year, 1, 1)),
-                Holiday(name: "Vendredi saint", date: shift(easter, -2)),
-                Holiday(name: "Lundi de Pâques", date: shift(easter, 1)),
-                Holiday(name: "Journée nationale des patriotes", date: mondayBeforeMay25(year)),
-                Holiday(name: "Fête nationale du Québec", date: make(year, 6, 24)),
-                Holiday(name: "Fête du Canada", date: make(year, 7, 1)),
-                Holiday(name: "Fête du Travail", date: nthWeekday(1, weekday: 2, month: 9, year: year)),
-                Holiday(name: "Action de grâce", date: nthWeekday(2, weekday: 2, month: 10, year: year)),
-                Holiday(name: "Noël", date: make(year, 12, 25)),
+                Holiday(name: tr("Jour de l'An"), date: make(year, 1, 1)),
+                Holiday(name: tr("Vendredi saint"), date: shift(easter, -2)),
+                Holiday(name: tr("Lundi de Pâques"), date: shift(easter, 1)),
+                Holiday(name: tr("Journée nationale des patriotes"), date: mondayBeforeMay25(year)),
+                Holiday(name: tr("Fête nationale du Québec"), date: make(year, 6, 24)),
+                Holiday(name: tr("Fête du Canada"), date: make(year, 7, 1)),
+                Holiday(name: tr("Fête du Travail"), date: nthWeekday(1, weekday: 2, month: 9, year: year)),
+                Holiday(name: tr("Action de grâce"), date: nthWeekday(2, weekday: 2, month: 10, year: year)),
+                Holiday(name: tr("Noël"), date: make(year, 12, 25)),
             ]
         case .canada:
             days = [
-                Holiday(name: "Jour de l'An", date: make(year, 1, 1)),
-                Holiday(name: "Vendredi saint", date: shift(easter, -2)),
-                Holiday(name: "Lundi de Pâques", date: shift(easter, 1)),
-                Holiday(name: "Fête de la Reine / Victoria", date: mondayBeforeMay25(year)),
-                Holiday(name: "Fête du Canada", date: make(year, 7, 1)),
-                Holiday(name: "Congé civique", date: nthWeekday(1, weekday: 2, month: 8, year: year)),
-                Holiday(name: "Fête du Travail", date: nthWeekday(1, weekday: 2, month: 9, year: year)),
-                Holiday(name: "Vérité et réconciliation", date: make(year, 9, 30)),
-                Holiday(name: "Action de grâce", date: nthWeekday(2, weekday: 2, month: 10, year: year)),
-                Holiday(name: "Jour du Souvenir", date: make(year, 11, 11)),
-                Holiday(name: "Noël", date: make(year, 12, 25)),
-                Holiday(name: "Lendemain de Noël", date: make(year, 12, 26)),
+                Holiday(name: tr("Jour de l'An"), date: make(year, 1, 1)),
+                Holiday(name: tr("Vendredi saint"), date: shift(easter, -2)),
+                Holiday(name: tr("Lundi de Pâques"), date: shift(easter, 1)),
+                Holiday(name: tr("Fête de la Reine / Victoria"), date: mondayBeforeMay25(year)),
+                Holiday(name: tr("Fête du Canada"), date: make(year, 7, 1)),
+                Holiday(name: tr("Congé civique"), date: nthWeekday(1, weekday: 2, month: 8, year: year)),
+                Holiday(name: tr("Fête du Travail"), date: nthWeekday(1, weekday: 2, month: 9, year: year)),
+                Holiday(name: tr("Vérité et réconciliation"), date: make(year, 9, 30)),
+                Holiday(name: tr("Action de grâce"), date: nthWeekday(2, weekday: 2, month: 10, year: year)),
+                Holiday(name: tr("Jour du Souvenir"), date: make(year, 11, 11)),
+                Holiday(name: tr("Noël"), date: make(year, 12, 25)),
+                Holiday(name: tr("Lendemain de Noël"), date: make(year, 12, 26)),
             ]
         case .france:
             days = [
-                Holiday(name: "Jour de l'An", date: make(year, 1, 1)),
-                Holiday(name: "Lundi de Pâques", date: shift(easter, 1)),
-                Holiday(name: "Fête du Travail", date: make(year, 5, 1)),
-                Holiday(name: "Victoire 1945", date: make(year, 5, 8)),
-                Holiday(name: "Ascension", date: shift(easter, 39)),
-                Holiday(name: "Lundi de Pentecôte", date: shift(easter, 50)),
-                Holiday(name: "Fête nationale", date: make(year, 7, 14)),
-                Holiday(name: "Assomption", date: make(year, 8, 15)),
-                Holiday(name: "Toussaint", date: make(year, 11, 1)),
-                Holiday(name: "Armistice 1918", date: make(year, 11, 11)),
-                Holiday(name: "Noël", date: make(year, 12, 25)),
+                Holiday(name: tr("Jour de l'An"), date: make(year, 1, 1)),
+                Holiday(name: tr("Lundi de Pâques"), date: shift(easter, 1)),
+                Holiday(name: tr("Fête du Travail"), date: make(year, 5, 1)),
+                Holiday(name: tr("Victoire 1945"), date: make(year, 5, 8)),
+                Holiday(name: tr("Ascension"), date: shift(easter, 39)),
+                Holiday(name: tr("Lundi de Pentecôte"), date: shift(easter, 50)),
+                Holiday(name: tr("Fête nationale"), date: make(year, 7, 14)),
+                Holiday(name: tr("Assomption"), date: make(year, 8, 15)),
+                Holiday(name: tr("Toussaint"), date: make(year, 11, 1)),
+                Holiday(name: tr("Armistice 1918"), date: make(year, 11, 11)),
+                Holiday(name: tr("Noël"), date: make(year, 12, 25)),
             ]
         case .unitedStates:
             days = [
-                Holiday(name: "New Year's Day", date: make(year, 1, 1)),
-                Holiday(name: "Martin Luther King Jr. Day", date: nthWeekday(3, weekday: 2, month: 1, year: year)),
-                Holiday(name: "Presidents' Day", date: nthWeekday(3, weekday: 2, month: 2, year: year)),
-                Holiday(name: "Memorial Day", date: nthWeekday(-1, weekday: 2, month: 5, year: year)),
-                Holiday(name: "Juneteenth", date: make(year, 6, 19)),
-                Holiday(name: "Independence Day", date: make(year, 7, 4)),
-                Holiday(name: "Labor Day", date: nthWeekday(1, weekday: 2, month: 9, year: year)),
-                Holiday(name: "Columbus Day", date: nthWeekday(2, weekday: 2, month: 10, year: year)),
-                Holiday(name: "Veterans Day", date: make(year, 11, 11)),
-                Holiday(name: "Thanksgiving", date: nthWeekday(4, weekday: 5, month: 11, year: year)),
-                Holiday(name: "Christmas Day", date: make(year, 12, 25)),
+                Holiday(name: tr("New Year's Day"), date: make(year, 1, 1)),
+                Holiday(name: tr("Martin Luther King Jr. Day"), date: nthWeekday(3, weekday: 2, month: 1, year: year)),
+                Holiday(name: tr("Presidents' Day"), date: nthWeekday(3, weekday: 2, month: 2, year: year)),
+                Holiday(name: tr("Memorial Day"), date: nthWeekday(-1, weekday: 2, month: 5, year: year)),
+                Holiday(name: tr("Juneteenth"), date: make(year, 6, 19)),
+                Holiday(name: tr("Independence Day"), date: make(year, 7, 4)),
+                Holiday(name: tr("Labor Day"), date: nthWeekday(1, weekday: 2, month: 9, year: year)),
+                Holiday(name: tr("Columbus Day"), date: nthWeekday(2, weekday: 2, month: 10, year: year)),
+                Holiday(name: tr("Veterans Day"), date: make(year, 11, 11)),
+                Holiday(name: tr("Thanksgiving"), date: nthWeekday(4, weekday: 5, month: 11, year: year)),
+                Holiday(name: tr("Christmas Day"), date: make(year, 12, 25)),
             ]
         }
         days.sort { $0.date < $1.date }
@@ -220,8 +220,8 @@ enum MoonPhase {
     }
 
     static func name(at date: Date) -> String {
-        ["Nouvelle lune", "Premier croissant", "Premier quartier", "Lune gibbeuse croissante",
-         "Pleine lune", "Lune gibbeuse décroissante", "Dernier quartier", "Dernier croissant"][index(phase(at: date))]
+        [tr("Nouvelle lune"), tr("Premier croissant"), tr("Premier quartier"), tr("Lune gibbeuse croissante"),
+         tr("Pleine lune"), tr("Lune gibbeuse décroissante"), tr("Dernier quartier"), tr("Dernier croissant")][index(phase(at: date))]
     }
 
     static func symbol(at date: Date) -> String {

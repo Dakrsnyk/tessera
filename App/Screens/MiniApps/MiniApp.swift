@@ -8,15 +8,15 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
 
     var title: String {
         switch self {
-        case .nutrition: "Nutrition"
-        case .fitness: "Fitness"
-        case .planning: "Planning"
-        case .studies: "Études"
-        case .finances: "Finances"
-        case .business: "Business"
-        case .travel: "Voyage"
-        case .car: "Auto"
-        case .weather: "Météo"
+        case .nutrition: tr("Nutrition")
+        case .fitness: tr("Fitness")
+        case .planning: tr("Planning")
+        case .studies: tr("Études")
+        case .finances: tr("Finances")
+        case .business: tr("Business")
+        case .travel: tr("Voyage")
+        case .car: tr("Auto")
+        case .weather: tr("Météo")
         }
     }
 
@@ -175,7 +175,7 @@ struct MiniAppPageView: View {
             if let exercise = ExerciseLibrary.info(id) {
                 ExerciseDetailView(exercise: exercise)
             } else {
-                ContentUnavailableView("Exercice introuvable", systemImage: "dumbbell")
+                ContentUnavailableView(tr("Exercice introuvable"), systemImage: "dumbbell")
             }
         case .fitnessHistory: FitnessHistoryPage()
         case let .fitnessSessionDetail(id): FitnessSessionDetailPage(sessionID: id)
@@ -401,7 +401,7 @@ struct DaySwitcher: View {
                     .font(.subheadline.weight(.bold))
                     .frame(width: 40, height: 36)
             }
-            .accessibilityLabel(Text("Jour précédent"))
+            .accessibilityLabel(Text(tr("Jour précédent")))
             Text(title)
                 .font(.subheadline.weight(.semibold))
                 .frame(maxWidth: .infinity)
@@ -414,7 +414,7 @@ struct DaySwitcher: View {
                     .frame(width: 40, height: 36)
             }
             .disabled(isToday)
-            .accessibilityLabel(Text("Jour suivant"))
+            .accessibilityLabel(Text(tr("Jour suivant")))
         }
         .foregroundStyle(Color(hex: colorHex))
         .background(.cardFill, in: Capsule())
@@ -423,8 +423,8 @@ struct DaySwitcher: View {
     }
 
     private var title: String {
-        if isToday { return "Aujourd'hui" }
-        if let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return "Hier" }
+        if isToday { return tr("Aujourd'hui") }
+        if let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return tr("Hier") }
         return Fmt.longDay(day)
     }
 

@@ -6,10 +6,10 @@ enum TaskPriority: Int, Codable, CaseIterable, Identifiable, Comparable {
 
     var title: String {
         switch self {
-        case .none: "Aucune"
-        case .low: "Basse"
-        case .medium: "Moyenne"
-        case .high: "Haute"
+        case .none: tr("Aucune")
+        case .low: tr("Basse")
+        case .medium: tr("Moyenne")
+        case .high: tr("Haute")
         }
     }
 
@@ -31,11 +31,11 @@ enum TaskRepeat: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .never: "Jamais"
-        case .daily: "Chaque jour"
-        case .weekdays: "En semaine"
-        case .weekly: "Chaque semaine"
-        case .monthly: "Chaque mois"
+        case .never: tr("Jamais")
+        case .daily: tr("Chaque jour")
+        case .weekdays: tr("En semaine")
+        case .weekly: tr("Chaque semaine")
+        case .monthly: tr("Chaque mois")
         }
     }
 
@@ -202,11 +202,11 @@ enum MoneyPeriod: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .day: "par jour"
-        case .week: "par semaine"
-        case .twoWeeks: "aux 2 semaines"
-        case .month: "par mois"
-        case .year: "par an"
+        case .day: tr("par jour")
+        case .week: tr("par semaine")
+        case .twoWeeks: tr("aux 2 semaines")
+        case .month: tr("par mois")
+        case .year: tr("par an")
         }
     }
 }

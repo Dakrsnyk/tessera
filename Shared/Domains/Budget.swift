@@ -28,7 +28,7 @@ struct QuickExpense: Codable, Hashable, Identifiable {
 enum BillPeriod: String, Codable, CaseIterable, Identifiable {
     case monthly, yearly
     var id: String { rawValue }
-    var title: String { self == .monthly ? "Mensuel" : "Annuel" }
+    var title: String { self == .monthly ? tr("Mensuel") : tr("Annuel") }
 }
 
 struct Bill: Codable, Hashable, Identifiable {
@@ -82,7 +82,7 @@ struct Account: Codable, Hashable, Identifiable {
 struct IncomeEntry: Codable, Hashable, Identifiable {
     var id = UUID()
     var amount: Double
-    var label: String = "Salaire"
+    var label: String = tr("Salaire")
     var date = Date()
 }
 
@@ -122,12 +122,12 @@ struct BudgetState: Codable, Hashable {
     }
 
     static let defaultCategories: [BudgetCategory] = [
-        BudgetCategory(id: BudgetState.fixedID(1), name: "Épicerie", symbol: "cart", colorHex: "1E9E75", monthlyLimit: 500),
-        BudgetCategory(id: BudgetState.fixedID(2), name: "Restos", symbol: "fork.knife", colorHex: "F06A3C", monthlyLimit: 200),
-        BudgetCategory(id: BudgetState.fixedID(3), name: "Transport", symbol: "bus", colorHex: "3366FF", monthlyLimit: 150),
-        BudgetCategory(id: BudgetState.fixedID(4), name: "Sorties", symbol: "ticket", colorHex: "8C6CFF", monthlyLimit: 150),
-        BudgetCategory(id: BudgetState.fixedID(5), name: "Maison", symbol: "house", colorHex: "B7791F", monthlyLimit: 150),
-        BudgetCategory(id: BudgetState.fixedID(6), name: "Autre", symbol: "square.grid.2x2", colorHex: "64748B", monthlyLimit: 0),
+        BudgetCategory(id: BudgetState.fixedID(1), name: tr("Épicerie"), symbol: "cart", colorHex: "1E9E75", monthlyLimit: 500),
+        BudgetCategory(id: BudgetState.fixedID(2), name: tr("Restos"), symbol: "fork.knife", colorHex: "F06A3C", monthlyLimit: 200),
+        BudgetCategory(id: BudgetState.fixedID(3), name: tr("Transport"), symbol: "bus", colorHex: "3366FF", monthlyLimit: 150),
+        BudgetCategory(id: BudgetState.fixedID(4), name: tr("Sorties"), symbol: "ticket", colorHex: "8C6CFF", monthlyLimit: 150),
+        BudgetCategory(id: BudgetState.fixedID(5), name: tr("Maison"), symbol: "house", colorHex: "B7791F", monthlyLimit: 150),
+        BudgetCategory(id: BudgetState.fixedID(6), name: tr("Autre"), symbol: "square.grid.2x2", colorHex: "64748B", monthlyLimit: 0),
     ]
 
     /// Stable identifiers for the default categories, identical in the app and the widgets.
@@ -210,7 +210,7 @@ enum BudgetMath {
     struct CategorySpend: Hashable {
         let category: BudgetCategory?
         let amount: Double
-        var name: String { category?.name ?? "Sans catégorie" }
+        var name: String { category?.name ?? tr("Sans catégorie") }
         var colorHex: String { category?.colorHex ?? "64748B" }
     }
 

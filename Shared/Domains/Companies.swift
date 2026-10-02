@@ -3,7 +3,7 @@ import Foundation
 /// App-wide identity used for API etiquette (the SEC asks for a contact in the User-Agent).
 enum AppInfo {
     static let supportEmail = "support@exemple.com"
-    static var userAgent: String { "Tessera/1.0 (\(supportEmail))" }
+    static var userAgent: String { tr("Tessera/1.0 (\(supportEmail))") }
 }
 
 struct CompanyRef: Codable, Hashable, Identifiable {
@@ -45,9 +45,9 @@ struct CompanyFinancials: Codable, Hashable {
 
 struct MarketsState: Codable, Hashable {
     var followed: [CompanyRef] = [
-        CompanyRef(cik: 320193, ticker: "AAPL", name: "Apple Inc."),
-        CompanyRef(cik: 1045810, ticker: "NVDA", name: "NVIDIA Corp"),
-        CompanyRef(cik: 1318605, ticker: "TSLA", name: "Tesla, Inc."),
+        CompanyRef(cik: 320193, ticker: "AAPL", name: tr("Apple Inc.")),
+        CompanyRef(cik: 1045810, ticker: "NVDA", name: tr("NVIDIA Corp")),
+        CompanyRef(cik: 1318605, ticker: "TSLA", name: tr("Tesla, Inc.")),
     ]
 
     enum CodingKeys: String, CodingKey { case followed }
@@ -136,7 +136,7 @@ enum CompanyService {
         let cik = ref.paddedCIK
         var bestAnnual: [FinancialPeriod] = []
         var bestQuarterly: [FinancialPeriod] = []
-        for tag in ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet", "RevenueFromContractWithCustomerIncludingAssessedTax"] {
+        for tag in ["RevenueFromContractWithCustomerExcludingAssessedTax", tr("Revenues"), "SalesRevenueNet", "RevenueFromContractWithCustomerIncludingAssessedTax"] {
             let facts = await concept(cik, taxonomy: "us-gaap", tag: tag)
             let annual = periods(facts, quarterly: false)
             if let last = annual.last, last.end > (bestAnnual.last?.end ?? .distantPast) {
@@ -218,7 +218,7 @@ enum BigNumber {
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = abs(number) >= 100 ? 0 : 1
         let text = formatter.string(from: NSNumber(value: number)) ?? "\(number)"
-        let symbol = currency == "USD" ? "$ US" : currency == "EUR" ? "€" : "$"
+        let symbol = currency == "USD" ? tr("$ US") : currency == "EUR" ? "€" : "$"
         // "416 G$ US", "12,4 M€", but "950 $ US".
         return suffix.isEmpty ? "\(text) \(symbol)" : "\(text)\(suffix)\(symbol)"
     }

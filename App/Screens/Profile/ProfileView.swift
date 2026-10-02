@@ -32,14 +32,14 @@ struct ProfileView: View {
 
                 Group {
                 Section {
-                    LabeledContent("Prénom") {
-                        TextField("Facultatif", text: settingBinding(\.profileName))
+                    LabeledContent(tr("Prénom")) {
+                        TextField(tr("Facultatif"), text: settingBinding(\.profileName))
                             .multilineTextAlignment(.trailing)
                             .textContentType(.givenName)
                             .submitLabel(.done)
                     }
-                    LabeledContent("Nom") {
-                        TextField("Facultatif", text: Binding(
+                    LabeledContent(tr("Nom")) {
+                        TextField(tr("Facultatif"), text: Binding(
                             get: { model.profile.lastName },
                             set: { name in model.update(\.profile) { $0.lastName = name } }
                         ))
@@ -57,11 +57,11 @@ struct ProfileView: View {
                             .padding(20)
                         }
                         .background(.screenFill)
-                        .navigationTitle("Centres d'intérêt")
+                        .navigationTitle(tr("Centres d'intérêt"))
                     } label: {
-                        LabeledContent("Centres d'intérêt", value: model.profile.interests.isEmpty ? "Aucun" : Fmt.plural(model.profile.interests.count, "choisi", "choisis"))
+                        LabeledContent(tr("Centres d'intérêt"), value: model.profile.interests.isEmpty ? tr("Aucun") : Fmt.plural(model.profile.interests.count, tr("choisi"), tr("choisis")))
                     }
-                    Picker("Jours fériés", selection: Binding(
+                    Picker(tr("Jours fériés"), selection: Binding(
                         get: { model.life.holidayRegion },
                         set: { value in model.update(\.life) { $0.holidayRegion = value } }
                     )) {
@@ -70,12 +70,12 @@ struct ProfileView: View {
                     NavigationLink {
                         WeatherLocationView()
                     } label: {
-                        LabeledContent("Ville (météo)", value: model.settings.weatherLocation?.name ?? "Aucune")
+                        LabeledContent(tr("Ville (météo)"), value: model.settings.weatherLocation?.name ?? tr("Aucune"))
                     }
                 } header: {
-                    Text("Mon profil")
+                    Text(tr("Mon profil"))
                 } footer: {
-                    Text("Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil.")
+                    Text(tr("Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil."))
                 }
 
                 premiumSection
@@ -87,53 +87,53 @@ struct ProfileView: View {
                     }
                     .padding(.vertical, 8)
                 } header: {
-                    Text("Apparence")
+                    Text(tr("Apparence"))
                 } footer: {
                     let style = AppStyle.style(model.settings.appStyle)
-                    Text("\(style.name) — \(style.tagline). Tes widgets gardent chacun leur propre style.")
+                    Text(tr("\(style.name) — \(style.tagline). Tes widgets gardent chacun leur propre style."))
                 }
 
-                Section("Préférences") {
-                    Picker("Température", selection: settingBinding(\.temperatureUnit)) {
+                Section(tr("Préférences")) {
+                    Picker(tr("Température"), selection: settingBinding(\.temperatureUnit)) {
                         ForEach(TemperatureUnit.allCases) { Text($0.title).tag($0) }
                     }
-                    Toggle("Heure sur 24 h", isOn: settingBinding(\.uses24HourClock))
-                    Picker("Devise (flux d'argent)", selection: settingBinding(\.currencyCode)) {
+                    Toggle(tr("Heure sur 24 h"), isOn: settingBinding(\.uses24HourClock))
+                    Picker(tr("Devise (flux d'argent)"), selection: settingBinding(\.currencyCode)) {
                         ForEach(AppSettings.currencies, id: \.self) { Text($0).tag($0) }
                     }
-                    Picker("Devise (crypto)", selection: settingBinding(\.cryptoCurrency)) {
+                    Picker(tr("Devise (crypto)"), selection: settingBinding(\.cryptoCurrency)) {
                         ForEach(AppSettings.cryptoCurrencies, id: \.self) { Text($0.uppercased()).tag($0) }
                     }
                 }
 
                 Section {
-                    LabeledContent("Autorisation", value: notificationStatus)
-                    NavigationLink { HydrationView() } label: { Text("Rappels d'hydratation") }
-                    NavigationLink { HabitsView() } label: { Text("Rappels d'habitudes") }
-                    if notificationStatus == "Refusée" {
-                        Button("Ouvrir les réglages de l'iPhone") {
+                    LabeledContent(tr("Autorisation"), value: notificationStatus)
+                    NavigationLink { HydrationView() } label: { Text(tr("Rappels d'hydratation")) }
+                    NavigationLink { HabitsView() } label: { Text(tr("Rappels d'habitudes")) }
+                    if notificationStatus == tr("Refusée") {
+                        Button(tr("Ouvrir les réglages de l'iPhone")) {
                             if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                         }
                     }
                 } header: {
-                    Text("Notifications")
+                    Text(tr("Notifications"))
                 } footer: {
-                    Text("Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.")
+                    Text(tr("Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur."))
                 }
 
-                Section("Tes données") {
-                    NavigationLink { TasksView() } label: { Label("Tâches", systemImage: "checklist") }
-                    NavigationLink { HabitsView() } label: { Label("Habitudes", systemImage: "repeat") }
-                    NavigationLink { HydrationView() } label: { Label("Hydratation", systemImage: "drop") }
-                    NavigationLink { MoneyView() } label: { Label("Revenus et dépenses", systemImage: "dollarsign.circle") }
-                    NavigationLink { CalendarAccessView() } label: { Label("Calendrier", systemImage: "calendar") }
+                Section(tr("Tes données")) {
+                    NavigationLink { TasksView() } label: { Label(tr("Tâches"), systemImage: "checklist") }
+                    NavigationLink { HabitsView() } label: { Label(tr("Habitudes"), systemImage: "repeat") }
+                    NavigationLink { HydrationView() } label: { Label(tr("Hydratation"), systemImage: "drop") }
+                    NavigationLink { MoneyView() } label: { Label(tr("Revenus et dépenses"), systemImage: "dollarsign.circle") }
+                    NavigationLink { CalendarAccessView() } label: { Label(tr("Calendrier"), systemImage: "calendar") }
                 }
 
-                Section("Aide") {
+                Section(tr("Aide")) {
                     Button {
                         showsAddGuide = true
                     } label: {
-                        Label("Ajouter un widget à l'écran d'accueil", systemImage: "plus.square.on.square")
+                        Label(tr("Ajouter un widget à l'écran d'accueil"), systemImage: "plus.square.on.square")
                     }
                     Button {
                         // The tutorial covers the whole app: close the profile first.
@@ -143,13 +143,13 @@ struct ProfileView: View {
                             router.startTutorial()
                         }
                     } label: {
-                        Label("Revoir le tutoriel", systemImage: "graduationcap")
+                        Label(tr("Revoir le tutoriel"), systemImage: "graduationcap")
                     }
                     .accessibilityIdentifier("settings-tutorial")
                     Button {
                         rate()
                     } label: {
-                        Label("Noter Tessera", systemImage: "star")
+                        Label(tr("Noter Tessera"), systemImage: "star")
                     }
                     .accessibilityIdentifier("settings-rate")
                     Button {
@@ -157,83 +157,83 @@ struct ProfileView: View {
                         copiedEmail = true
                     } label: {
                         LabeledContent {
-                            Text(copiedEmail ? "Copiée" : PremiumConfiguration.supportEmail)
+                            Text(copiedEmail ? tr("Copiée") : PremiumConfiguration.supportEmail)
                         } label: {
-                            Label("Contacter le support", systemImage: "envelope")
+                            Label(tr("Contacter le support"), systemImage: "envelope")
                         }
                     }
                 }
 
                 Section {
                     Link(destination: PremiumConfiguration.privacyURL) {
-                        Label("Confidentialité", systemImage: "hand.raised")
+                        Label(tr("Confidentialité"), systemImage: "hand.raised")
                     }
                     Link(destination: PremiumConfiguration.termsURL) {
-                        Label("Conditions d'utilisation", systemImage: "doc.text")
+                        Label(tr("Conditions d'utilisation"), systemImage: "doc.text")
                     }
                 } header: {
-                    Text("À propos")
+                    Text(tr("À propos"))
                 } footer: {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Tessera \(appVersion)")
-                        Text("Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko.")
-                        Text("Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.")
+                        Text(tr("Tessera \(appVersion)"))
+                        Text(tr("Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko."))
+                        Text(tr("Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire."))
                     }
                     .padding(.top, 6)
                 }
 
                 Section {
-                    Button("Effacer toutes mes données", role: .destructive) { confirmReset = true }
+                    Button(tr("Effacer toutes mes données"), role: .destructive) { confirmReset = true }
                 }
 
                 #if DEBUG
                 Section {
-                    Toggle("Premium débloqué (mode test)", isOn: Binding(
+                    Toggle(tr("Premium débloqué (mode test)"), isOn: Binding(
                         get: { model.isDebugPremiumOn },
                         set: { model.setDebugPremium($0) }
                     ))
-                    Button("Recharger les widgets") { WidgetCenter.shared.reloadAllTimelines() }
-                    LabeledContent("Version", value: WidgetDiagnostics.appVersion)
-                    LabeledContent("Module des widgets", value: WidgetDiagnostics.isExtensionInstalled ? "Installé" : "Absent")
-                    LabeledContent("Espace partagé", value: WidgetDiagnostics.sharedSpaceText)
+                    Button(tr("Recharger les widgets")) { WidgetCenter.shared.reloadAllTimelines() }
+                    LabeledContent(tr("Version"), value: WidgetDiagnostics.appVersion)
+                    LabeledContent(tr("Module des widgets"), value: WidgetDiagnostics.isExtensionInstalled ? tr("Installé") : tr("Absent"))
+                    LabeledContent(tr("Espace partagé"), value: WidgetDiagnostics.sharedSpaceText)
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Groupes accordés")
+                        Text(tr("Groupes accordés"))
                         Text(WidgetDiagnostics.groupsText)
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                             .textSelection(.enabled)
                     }
-                    LabeledContent("Widgets lancés par iOS", value: WidgetDiagnostics.lastLaunchText)
+                    LabeledContent(tr("Widgets lancés par iOS"), value: WidgetDiagnostics.lastLaunchText)
                 } header: {
-                    Text("Développeur")
+                    Text(tr("Développeur"))
                 } footer: {
-                    Text("Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.")
+                    Text(tr("Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium."))
                 }
                 #endif
                 }
                 .listRowBackground(Rectangle().fill(.cardFill))
             }
             .styledList()
-            .navigationTitle("Profil")
+            .navigationTitle(tr("Profil"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("OK") { dismiss() }
+                    Button(tr("OK")) { dismiss() }
                 }
             }
             .sheet(isPresented: $showsPaywall) { PaywallView() }
             .sheet(isPresented: $showsAddGuide) { AddToHomeScreenGuide(designName: nil) }
             .task(id: scenePhase) { await refreshNotificationStatus() }
             .manageSubscriptionsSheet(isPresented: $showsManageSubscriptions)
-            .alert("Restauration", isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {
-                Button("OK", role: .cancel) {}
+            .alert(tr("Restauration"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {
+                Button(tr("OK"), role: .cancel) {}
             } message: {
                 Text(restoreMessage ?? "")
             }
-            .confirmationDialog("Effacer toutes tes données ?", isPresented: $confirmReset, titleVisibility: .visible) {
-                Button("Tout effacer", role: .destructive) { model.resetAllData() }
+            .confirmationDialog(tr("Effacer toutes tes données ?"), isPresented: $confirmReset, titleVisibility: .visible) {
+                Button(tr("Tout effacer"), role: .destructive) { model.resetAllData() }
             } message: {
-                Text("Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.")
+                Text(tr("Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché."))
             }
         }
     }
@@ -243,17 +243,17 @@ struct ProfileView: View {
         return VStack(spacing: 14) {
             ProfileAvatar(name: name, size: 78)
             VStack(spacing: 3) {
-                Text(name.isEmpty ? "Ton profil" : name)
+                Text(name.isEmpty ? tr("Ton profil") : name)
                     .font(.title2.weight(.bold))
                     .foregroundStyle(.primary)
-                Label(model.isPremium ? "Tessera Premium" : "Version gratuite", systemImage: model.isPremium ? "sparkles" : "person")
+                Label(model.isPremium ? tr("Tessera Premium") : tr("Version gratuite"), systemImage: model.isPremium ? "sparkles" : "person")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(model.isPremium ? Color.premiumInk : Color.secondary)
             }
             HStack(spacing: 10) {
-                stat(model.designs.count, model.designs.count > 1 ? "widgets" : "widget")
-                stat(model.content.habits.count, model.content.habits.count > 1 ? "habitudes" : "habitude")
-                stat(Space.allCases.filter { model.hasData(in: $0) }.count, "espaces actifs")
+                stat(model.designs.count, model.designs.count > 1 ? tr("widgets") : tr("widget"))
+                stat(model.content.habits.count, model.content.habits.count > 1 ? tr("habitudes") : tr("habitude"))
+                stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr("espaces actifs"))
             }
         }
         .frame(maxWidth: .infinity)
@@ -279,7 +279,7 @@ struct ProfileView: View {
 
     @ViewBuilder private var birthdayRow: some View {
         if let birthday = model.life.birthday {
-            DatePicker("Anniversaire", selection: Binding(
+            DatePicker(tr("Anniversaire"), selection: Binding(
                 get: { birthday },
                 set: { value in model.update(\.life) { $0.birthday = value } }
             ), in: ...Date(), displayedComponents: .date)
@@ -287,7 +287,7 @@ struct ProfileView: View {
             Button {
                 model.update(\.life) { $0.birthday = Calendar.current.date(byAdding: .year, value: -25, to: Date()) }
             } label: {
-                Label("Ajouter mon anniversaire", systemImage: "gift")
+                Label(tr("Ajouter mon anniversaire"), systemImage: "gift")
             }
         }
     }
@@ -311,12 +311,12 @@ struct ProfileView: View {
                         .frame(width: 36, height: 36)
                         .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Premium actif").font(.headline)
+                        Text(tr("Premium actif")).font(.headline)
                         Text(premiumDetail).font(.caption).foregroundStyle(.secondary)
                     }
                 }
                 if model.premium.productID != PremiumConfiguration.lifetimeID && model.premium.isActive {
-                    Button("Gérer l'abonnement") { showsManageSubscriptions = true }
+                    Button(tr("Gérer l'abonnement")) { showsManageSubscriptions = true }
                 }
             } else {
                 Button {
@@ -328,8 +328,8 @@ struct ProfileView: View {
                             .frame(width: 36, height: 36)
                             .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Passer à Premium").font(.headline).foregroundStyle(.primary)
-                            Text("Tous les widgets et tous les styles").font(.caption).foregroundStyle(.secondary)
+                            Text(tr("Passer à Premium")).font(.headline).foregroundStyle(.primary)
+                            Text(tr("Tous les widgets et tous les styles")).font(.caption).foregroundStyle(.secondary)
                         }
                     }
                 }
@@ -338,11 +338,11 @@ struct ProfileView: View {
             Button {
                 Task {
                     let found = await premium.restore()
-                    restoreMessage = found ? "Ton accès Premium est rétabli." : "Aucun achat Premium trouvé pour ce compte Apple."
+                    restoreMessage = found ? tr("Ton accès Premium est rétabli.") : tr("Aucun achat Premium trouvé pour ce compte Apple.")
                 }
             } label: {
                 HStack {
-                    Text("Restaurer les achats")
+                    Text(tr("Restaurer les achats"))
                     Spacer()
                     if premium.isRestoring { ProgressView() }
                 }
@@ -353,25 +353,25 @@ struct ProfileView: View {
 
     private var premiumDetail: String {
         #if DEBUG
-        if model.isDebugPremiumOn && !model.premium.hasPurchase() { return "Débloqué en mode test" }
+        if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr("Débloqué en mode test") }
         #endif
         switch model.premium.productID ?? "" {
-        case PremiumConfiguration.lifetimeID: return "Accès à vie"
+        case PremiumConfiguration.lifetimeID: return tr("Accès à vie")
         case PremiumConfiguration.yearlyID, PremiumConfiguration.monthlyID:
             if let date = model.premium.expirationDate {
-                return "Renouvellement le \(Fmt.format(date, template: "dMMMMyyyy"))"
+                return tr("Renouvellement le \(Fmt.format(date, template: "dMMMMyyyy"))")
             }
-            return "Abonnement actif"
-        default: return "Merci pour ton soutien"
+            return tr("Abonnement actif")
+        default: return tr("Merci pour ton soutien")
         }
     }
 
     private func refreshNotificationStatus() async {
         let settings = await UNUserNotificationCenter.current().notificationSettings()
         switch settings.authorizationStatus {
-        case .authorized, .provisional, .ephemeral: notificationStatus = "Autorisée"
-        case .denied: notificationStatus = "Refusée"
-        case .notDetermined: notificationStatus = "Pas encore demandée"
+        case .authorized, .provisional, .ephemeral: notificationStatus = tr("Autorisée")
+        case .denied: notificationStatus = tr("Refusée")
+        case .notDetermined: notificationStatus = tr("Pas encore demandée")
         @unknown default: notificationStatus = "—"
         }
     }

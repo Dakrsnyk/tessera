@@ -18,10 +18,10 @@ struct PlanningAppView: View {
         let overdue = tasks.filter { $0.isOverdue(at: now) }
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: Fmt.longDay(now), detail: today.isEmpty ? nil : Fmt.plural(today.count, "élément", "éléments"))
+                MiniSectionTitle(title: Fmt.longDay(now), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
                 VStack(alignment: .leading, spacing: 0) {
                     if today.isEmpty {
-                        Text("Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier.")
+                        Text(tr("Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier."))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .padding(.vertical, 12)
@@ -42,14 +42,14 @@ struct PlanningAppView: View {
                             loadEvents()
                         }
                     } label: {
-                        Label("Ajouter les événements de mon calendrier", systemImage: "calendar.badge.plus")
+                        Label(tr("Ajouter les événements de mon calendrier"), systemImage: "calendar.badge.plus")
                             .font(.subheadline.weight(.semibold))
                     }
                     .tint(Color(hex: accentHex))
                 }
             }
 
-            MiniActionButton(title: "Nouvelle tâche", symbol: "plus", colorHex: accentHex) {
+            MiniActionButton(title: tr("Nouvelle tâche"), symbol: "plus", colorHex: accentHex) {
                 editing = TaskItem(title: "", due: DateMath.startOfDay(now))
             }
             .accessibilityIdentifier("planning-new-task")
@@ -57,12 +57,12 @@ struct PlanningAppView: View {
             priorities(now: now)
 
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Tâches")
+                MiniSectionTitle(title: tr("Tâches"))
                 NavigationLink(value: HomeRoute.page(.planningTasks)) {
                     HStack(spacing: 10) {
-                        countTile("En retard", overdue.count, overdue.isEmpty ? nil : "E5484D")
-                        countTile("Aujourd'hui", tasks.filter { !$0.isDone && $0.isDue(on: now) }.count, nil)
-                        countTile("À faire", tasks.filter { !$0.isDone }.count, nil)
+                        countTile(tr("En retard"), overdue.count, overdue.isEmpty ? nil : "E5484D")
+                        countTile(tr("Aujourd'hui"), tasks.filter { !$0.isDone && $0.isDue(on: now) }.count, nil)
+                        countTile(tr("À faire"), tasks.filter { !$0.isDone }.count, nil)
                     }
                 }
                 .buttonStyle(.plain)
@@ -71,39 +71,39 @@ struct PlanningAppView: View {
 
             MiniRowsCard {
                 NavigationLink(value: HomeRoute.page(.planningWeek)) {
-                    MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: "Semaine", detail: "Tout ce qui t'attend, jour par jour")
+                    MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Semaine"), detail: tr("Tout ce qui t'attend, jour par jour"))
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("planning-week")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningMonth)) {
-                    MiniRow(symbol: "calendar", colorHex: accentHex, title: "Mois", detail: "Le calendrier du mois")
+                    MiniRow(symbol: "calendar", colorHex: accentHex, title: tr("Mois"), detail: tr("Le calendrier du mois"))
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("planning-month")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningProjects)) {
-                    MiniRow(symbol: "folder.fill", colorHex: accentHex, title: "Projets", detail: "Tâches regroupées par projet",
+                    MiniRow(symbol: "folder.fill", colorHex: accentHex, title: tr("Projets"), detail: tr("Tâches regroupées par projet"),
                             value: model.productivity.projects.isEmpty ? nil : "\(model.productivity.projects.count)")
                 }
                 .buttonStyle(.plain)
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningHabits)) {
-                    MiniRow(symbol: "repeat", colorHex: "7FA33A", title: "Habitudes", detail: "Séries et régularité",
+                    MiniRow(symbol: "repeat", colorHex: "7FA33A", title: tr("Habitudes"), detail: tr("Séries et régularité"),
                             value: model.content.habits.isEmpty ? nil : "\(model.content.habits.filter { $0.isDone(on: now) }.count)/\(model.content.habits.count)")
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("planning-habits")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningFocus)) {
-                    MiniRow(symbol: "timer", colorHex: "8C6CFF", title: "Concentration",
-                            detail: "\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine")
+                    MiniRow(symbol: "timer", colorHex: "8C6CFF", title: tr("Concentration"),
+                            detail: tr("\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine"))
                 }
                 .buttonStyle(.plain)
             }
             MiniAppSettingsSection(app: .planning)
         }
-        .navigationTitle("Planning")
+        .navigationTitle(tr("Planning"))
         .navigationBarTitleDisplayMode(.large)
         .onAppear(perform: loadEvents)
         .sheet(item: $editing) { task in
@@ -134,7 +134,7 @@ struct PlanningAppView: View {
     private func priorities(now: Date) -> some View {
         let items = model.productivity.priorities
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Top 3 du jour", detail: items.isEmpty ? nil : "\(items.filter { $0.isDone(on: now) }.count)/\(items.count)")
+            MiniSectionTitle(title: tr("Top 3 du jour"), detail: items.isEmpty ? nil : "\(items.filter { $0.isDone(on: now) }.count)/\(items.count)")
             VStack(spacing: 0) {
                 ForEach(items) { item in
                     Button {
@@ -157,7 +157,7 @@ struct PlanningAppView: View {
                         Button(role: .destructive) {
                             model.update(\.productivity) { $0.priorities.removeAll { $0.id == item.id } }
                         } label: {
-                            Label("Retirer", systemImage: "trash")
+                            Label(tr("Retirer"), systemImage: "trash")
                         }
                     }
                     Divider()
@@ -165,7 +165,7 @@ struct PlanningAppView: View {
                 if items.count < 3 {
                     HStack(spacing: 12) {
                         Image(systemName: "plus.circle").font(.title3).foregroundStyle(Color(hex: accentHex))
-                        TextField("Ajouter une priorité", text: $newPriority)
+                        TextField(tr("Ajouter une priorité"), text: $newPriority)
                             .submitLabel(.done)
                             .onSubmit(addPriority)
                     }
@@ -225,7 +225,7 @@ struct AgendaRow: View {
                         .foregroundStyle(done ? Color(hex: item.colorHex) : .secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text(done ? "Marquer comme à faire" : "Marquer comme fait"))
+                .accessibilityLabel(Text(done ? tr("Marquer comme à faire") : tr("Marquer comme fait")))
             } else {
                 Image(systemName: item.symbol)
                     .font(.caption)
@@ -252,37 +252,37 @@ struct TaskEditor: View {
     @State private var hasDue = false
 
     var body: some View {
-        SheetForm(title: task.title.isEmpty ? "Nouvelle tâche" : "Tâche", canSave: !task.title.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: task.title.isEmpty ? tr("Nouvelle tâche") : tr("Tâche"), canSave: !task.title.trimmed.isEmpty, onSave: save) {
             Section {
-                TextField("Titre", text: $task.title)
+                TextField(tr("Titre"), text: $task.title)
                     .accessibilityIdentifier("task-title")
-                Picker("Priorité", selection: $task.priority) {
+                Picker(tr("Priorité"), selection: $task.priority) {
                     ForEach(TaskPriority.allCases) { Text($0.title).tag($0) }
                 }
             }
             Section {
-                Toggle("Échéance", isOn: $hasDue)
+                Toggle(tr("Échéance"), isOn: $hasDue)
                 if hasDue {
-                    DatePicker("Jour", selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)
-                    Toggle("À une heure précise", isOn: $task.hasTime)
+                    DatePicker(tr("Jour"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)
+                    Toggle(tr("À une heure précise"), isOn: $task.hasTime)
                     if task.hasTime {
-                        DatePicker("Heure", selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .hourAndMinute)
+                        DatePicker(tr("Heure"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .hourAndMinute)
                     }
-                    Picker("Répéter", selection: $task.repeats) {
+                    Picker(tr("Répéter"), selection: $task.repeats) {
                         ForEach(TaskRepeat.allCases) { Text($0.title).tag($0) }
                     }
                 }
             } footer: {
                 if task.repeats != .never && hasDue {
-                    Text("Une fois faite, la tâche revient à sa prochaine date.")
+                    Text(tr("Une fois faite, la tâche revient à sa prochaine date."))
                 }
             }
-            Section("Notes") {
-                TextField("Notes", text: $task.notes, axis: .vertical)
+            Section(tr("Notes")) {
+                TextField(tr("Notes"), text: $task.notes, axis: .vertical)
             }
             if model.content.tasks.contains(where: { $0.id == task.id }) {
                 Section {
-                    Button("Supprimer la tâche", role: .destructive) {
+                    Button(tr("Supprimer la tâche"), role: .destructive) {
                         let id = task.id
                         model.updateContent { $0.tasks.removeAll { $0.id == id } }
                         dismiss()

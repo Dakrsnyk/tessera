@@ -13,7 +13,7 @@ struct TasksView: View {
                     Image(systemName: "plus.circle.fill")
                         .font(.title3)
                         .foregroundStyle(Color.accentColor)
-                    TextField("Nouvelle tâche", text: $newTitle)
+                    TextField(tr("Nouvelle tâche"), text: $newTitle)
                         .focused($isAdding)
                         .submitLabel(.done)
                         .onSubmit(add)
@@ -23,15 +23,15 @@ struct TasksView: View {
 
             if tasks.isEmpty {
                 Section {
-                    Text("Tes tâches apparaîtront dans le widget, et tu pourras les cocher directement depuis l'écran d'accueil.")
+                    Text(tr("Tes tâches apparaîtront dans le widget, et tu pourras les cocher directement depuis l'écran d'accueil."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             } else {
-                Section("À faire") {
+                Section(tr("À faire")) {
                     let open = tasks.filter { !$0.isDone }
                     if open.isEmpty {
-                        Text("Tout est fait.")
+                        Text(tr("Tout est fait."))
                             .foregroundStyle(.secondary)
                     }
                     ForEach(open) { task in
@@ -49,9 +49,9 @@ struct TasksView: View {
                         .onDelete { offsets in delete(offsets, in: done) }
                     } header: {
                         HStack {
-                            Text("Terminées")
+                            Text(tr("Terminées"))
                             Spacer()
-                            Button("Tout effacer") {
+                            Button(tr("Tout effacer")) {
                                 model.updateContent { $0.tasks.removeAll(where: \.isDone) }
                             }
                             .font(.footnote.weight(.semibold))
@@ -62,7 +62,7 @@ struct TasksView: View {
             }
         }
         .styledList()
-        .navigationTitle("Tâches")
+        .navigationTitle(tr("Tâches"))
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 if !tasks.isEmpty { EditButton() }

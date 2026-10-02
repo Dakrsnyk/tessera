@@ -22,7 +22,7 @@ struct HomeView: View {
             .background(.screenFill)
             .screenshotScroll()
             // « Tessera » centered at the top, between the search (left) and the profile (right).
-            .navigationTitle("Tessera")
+            .navigationTitle(tr("Tessera"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: HomeRoute.self) { route in
                 switch route {
@@ -52,10 +52,10 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "magnifyingglass")
                     }
-                    .accessibilityLabel(Text("Rechercher un widget"))
+                    .accessibilityLabel(Text(tr("Rechercher un widget")))
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("Tessera")
+                    Text(tr("Tessera"))
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                         .accessibilityAddTraits(.isHeader)
                 }
@@ -66,7 +66,7 @@ struct HomeView: View {
                         ProfileAvatar(name: model.settings.profileName.trimmed, size: 32)
                             .tutorialTarget(.profile)
                     }
-                    .accessibilityLabel(Text("Profil et réglages"))
+                    .accessibilityLabel(Text(tr("Profil et réglages")))
                 }
             }
         }
@@ -143,9 +143,9 @@ struct HomeView: View {
     private var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
-        case 5..<12: return "Bonjour"
-        case 12..<18: return "Bon après-midi"
-        default: return "Bonsoir"
+        case 5..<12: return tr("Bonjour")
+        case 12..<18: return tr("Bon après-midi")
+        default: return tr("Bonsoir")
         }
     }
 
@@ -158,20 +158,20 @@ struct HomeView: View {
 
     @ViewBuilder private var myWidgets: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Mes widgets", actionTitle: model.designs.isEmpty ? nil : "Tout voir") {
+            SectionHeader(title: tr("Mes widgets"), actionTitle: model.designs.isEmpty ? nil : tr("Tout voir")) {
                 router.tab = .mine
             }
             if model.designs.isEmpty {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Crée ton premier widget")
+                    Text(tr("Crée ton premier widget"))
                         .font(.headline)
-                    Text("Choisis une catégorie, personnalise ton widget, puis ajoute-le à ton écran d'accueil.")
+                    Text(tr("Choisis une catégorie, personnalise ton widget, puis ajoute-le à ton écran d'accueil."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     Button {
                         router.tab = .spaces
                     } label: {
-                        Label("Créer un widget", systemImage: "plus.square.on.square")
+                        Label(tr("Créer un widget"), systemImage: "plus.square.on.square")
                             .frame(maxWidth: .infinity, minHeight: 44)
                             .foregroundStyle(.onAccent)
                     }
@@ -204,7 +204,7 @@ struct HomeView: View {
                 }
                 .padding(14)
                 .background(Self.wallpaper, in: RoundedRectangle(cornerRadius: 28, style: .continuous))
-                Text("Tes widgets comme sur ton écran d'accueil · touche-en un pour le modifier")
+                Text(tr("Tes widgets comme sur ton écran d'accueil · touche-en un pour le modifier"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -262,6 +262,15 @@ struct HomeView: View {
         case popular = "Populaires"
         case free = "Gratuits"
         var id: String { rawValue }
+
+        var title: String {
+            switch self {
+            case .forYou: tr("Pour toi")
+            case .new: tr("Nouveautés")
+            case .popular: tr("Populaires")
+            case .free: tr("Gratuits")
+            }
+        }
     }
 
     private var preferredCategories: [WidgetCategory] { model.profile.preferredCategories }
@@ -297,7 +306,7 @@ struct HomeView: View {
                 router.openExplore()
             } label: {
                 HStack(spacing: 4) {
-                    Text("Store")
+                    Text(tr("Store"))
                         .font(.title3.weight(.semibold))
                     Image(systemName: "chevron.right")
                         .font(.subheadline.weight(.bold))
@@ -307,7 +316,7 @@ struct HomeView: View {
             }
             .buttonStyle(.plain)
             .accessibilityAddTraits(.isHeader)
-            .accessibilityHint(Text("Ouvre le Store"))
+            .accessibilityHint(Text(tr("Ouvre le Store")))
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(shelves) { shelf in
@@ -315,7 +324,7 @@ struct HomeView: View {
                         Button {
                             withAnimation(.snappy) { chosenShelf = shelf }
                         } label: {
-                            Text(shelf.rawValue)
+                            Text(shelf.title)
                                 .font(.subheadline.weight(.semibold))
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
@@ -361,10 +370,10 @@ struct PremiumBanner: View {
                     .frame(width: 48, height: 48)
                     .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Tessera Premium")
+                    Text(tr("Tessera Premium"))
                         .font(.headline)
                         .foregroundStyle(.primary)
-                    Text("Plus de 70 widgets en plus, 12 styles, fonds photo.")
+                    Text(tr("Plus de 70 widgets en plus, 12 styles, fonds photo."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

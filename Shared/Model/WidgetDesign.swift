@@ -17,11 +17,11 @@ enum BackgroundStyle: Codable, Hashable {
 
     var title: String {
         switch self {
-        case .theme: "Thème"
-        case .color: "Couleur"
-        case .gradient: "Dégradé"
-        case .photo: "Photo"
-        case .glass: "Verre"
+        case .theme: tr("Thème")
+        case .color: tr("Couleur")
+        case .gradient: tr("Dégradé")
+        case .photo: tr("Photo")
+        case .glass: tr("Verre")
         }
     }
 }
@@ -32,11 +32,11 @@ enum FontChoice: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .theme: "Thème"
-        case .standard: "Standard"
-        case .rounded: "Arrondie"
-        case .serif: "Serif"
-        case .mono: "Mono"
+        case .theme: tr("Thème")
+        case .standard: tr("Standard")
+        case .rounded: tr("Arrondie")
+        case .serif: tr("Serif")
+        case .mono: tr("Mono")
         }
     }
 
@@ -49,8 +49,8 @@ enum ContentAlignment: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .leading: "À gauche"
-        case .center: "Centré"
+        case .leading: tr("À gauche")
+        case .center: tr("Centré")
         }
     }
 }
@@ -150,12 +150,12 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
         var features: [String] = []
         // A combined widget needs Premium as soon as one of the widgets inside does.
         for part in partDesigns where part.kind.isPremium {
-            features.append("Widget \(part.kind.title)")
+            features.append(tr("Widget \(part.kind.title)"))
         }
-        if theme.isPremium { features.append("Style \(theme.name)") }
-        if background.isPremium { features.append("Fond \(background.title.lowercased())") }
-        if font.isPremium { features.append("Police \(font.title)") }
-        if !Palette.freeAccents.contains(where: { $0.hex == accentHex }) { features.append("Couleur personnalisée") }
+        if theme.isPremium { features.append(tr("Style \(theme.name)")) }
+        if background.isPremium { features.append(tr("Fond \(background.title.lowercased())")) }
+        if font.isPremium { features.append(tr("Police \(font.title)")) }
+        if !Palette.freeAccents.contains(where: { $0.hex == accentHex }) { features.append(tr("Couleur personnalisée")) }
         for feature in style.premiumFeatures where !features.contains(feature) { features.append(feature) }
         return features
     }

@@ -13,13 +13,13 @@ struct PortfolioSpaceSections: View {
         let summary = PortfolioMath.summary(positions)
         Section {
             if positions.isEmpty {
-                HintRow(text: "Ajoute tes actions, ETF, cryptos et liquidités. Les cryptos se mettent à jour en direct (CoinGecko). Pour les actions et ETF, indique le dernier prix connu.")
+                HintRow(text: tr("Ajoute tes actions, ETF, cryptos et liquidités. Les cryptos se mettent à jour en direct (CoinGecko). Pour les actions et ETF, indique le dernier prix connu."))
             } else {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(TF.money(summary.value, currency))
                         .font(.system(size: 32, weight: .semibold, design: .rounded))
                         .monospacedDigit()
-                    Text("\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0)) au total")
+                    Text(tr("\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0)) au total"))
                         .foregroundStyle(summary.gain >= 0 ? Color.green : Color.red)
                 }
                 .padding(.vertical, 4)
@@ -49,12 +49,12 @@ struct PortfolioSpaceSections: View {
             Button {
                 sheets?.open { HoldingEditor(holding: Holding(kind: .etf, name: "", symbol: "", quantity: 0, costBasis: 0)) }
             } label: {
-                Label("Ajouter un placement", systemImage: "plus")
+                Label(tr("Ajouter un placement"), systemImage: "plus")
             }
         } header: {
-            Text("Mon portefeuille")
+            Text(tr("Mon portefeuille"))
         } footer: {
-            Text("À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.")
+            Text(tr("À titre informatif seulement : Tessera ne donne aucun conseil d'investissement."))
         }
         .task { await model.refreshMarkets() }
 
@@ -77,9 +77,9 @@ struct PortfolioSpaceSections: View {
                 }
             }
         } header: {
-            Text("Liste de suivi")
+            Text(tr("Liste de suivi"))
         } footer: {
-            Text("Cours fournis par CoinGecko.")
+            Text(tr("Cours fournis par CoinGecko."))
         }
     }
 }
@@ -89,34 +89,34 @@ struct HoldingEditor: View {
     @State var holding: Holding
 
     var body: some View {
-        SheetForm(title: "Placement", canSave: !holding.name.trimmed.isEmpty && holding.quantity > 0, onSave: save) {
+        SheetForm(title: tr("Placement"), canSave: !holding.name.trimmed.isEmpty && holding.quantity > 0, onSave: save) {
             Section {
-                Picker("Type", selection: $holding.kind) {
+                Picker(tr("Type"), selection: $holding.kind) {
                     ForEach(AssetKind.allCases) { Text($0.title).tag($0) }
                 }
                 if holding.kind == .crypto {
-                    Picker("Crypto", selection: $holding.symbol) {
+                    Picker(tr("Crypto"), selection: $holding.symbol) {
                         ForEach(CryptoService.coins) { Text("\($0.name) (\($0.symbol))").tag($0.id) }
                     }
                     .onChange(of: holding.symbol) { _, id in holding.name = CryptoService.info(id).name }
                 } else {
-                    TextField("Nom", text: $holding.name)
+                    TextField(tr("Nom"), text: $holding.name)
                     if holding.kind != .cash {
-                        TextField("Symbole (XEQT, AAPL…)", text: $holding.symbol)
+                        TextField(tr("Symbole (XEQT, AAPL…)"), text: $holding.symbol)
                             .textInputAutocapitalization(.characters)
                     }
                 }
             }
             Section {
-                NumberRow(title: holding.kind == .cash ? "Montant" : "Quantité", value: $holding.quantity)
+                NumberRow(title: holding.kind == .cash ? tr("Montant") : tr("Quantité"), value: $holding.quantity)
                 if holding.kind != .cash {
-                    NumberRow(title: "Prix payé au total", value: $holding.costBasis, unit: model.settings.currencyCode)
+                    NumberRow(title: tr("Prix payé au total"), value: $holding.costBasis, unit: model.settings.currencyCode)
                 }
                 if holding.kind == .stock || holding.kind == .etf {
-                    NumberRow(title: "Dernier prix connu", value: Binding(get: { holding.manualPrice ?? 0 }, set: { holding.manualPrice = $0 > 0 ? $0 : nil }), unit: model.settings.currencyCode)
+                    NumberRow(title: tr("Dernier prix connu"), value: Binding(get: { holding.manualPrice ?? 0 }, set: { holding.manualPrice = $0 > 0 ? $0 : nil }), unit: model.settings.currencyCode)
                 }
             } footer: {
-                Text(holding.kind == .crypto ? "Le prix se met à jour automatiquement." : "Mets le prix à jour quand tu veux : il sert à calculer la valeur.")
+                Text(holding.kind == .crypto ? tr("Le prix se met à jour automatiquement.") : tr("Mets le prix à jour quand tu veux : il sert à calculer la valeur."))
             }
         }
         .onAppear {
@@ -159,32 +159,32 @@ struct BusinessSpaceSections: View {
         let now = Date()
         let state = model.business
         Section {
-            TextField("Nom de l'entreprise", text: Binding(get: { state.name }, set: { name in model.setBusinessName(name) }))
-            NumberRow(title: "Objectif du mois", value: Binding(get: { state.monthlyGoal }, set: { goal in model.setBusinessGoal(goal) }), unit: currency)
-            ValueRow(title: "Aujourd'hui", value: TF.money(BusinessMath.revenue(state, .day, at: now), currency), symbol: "sun.max")
-            ValueRow(title: "Cette semaine", value: TF.money(BusinessMath.revenue(state, .week, at: now), currency), symbol: "calendar")
-            ValueRow(title: "Ce mois-ci", value: TF.money(BusinessMath.revenue(state, .month, at: now), currency), symbol: "chart.bar")
-            ValueRow(title: "Cette année", value: TF.money(BusinessMath.revenue(state, .year, at: now), currency), symbol: "chart.line.uptrend.xyaxis")
+            TextField(tr("Nom de l'entreprise"), text: Binding(get: { state.name }, set: { name in model.setBusinessName(name) }))
+            NumberRow(title: tr("Objectif du mois"), value: Binding(get: { state.monthlyGoal }, set: { goal in model.setBusinessGoal(goal) }), unit: currency)
+            ValueRow(title: tr("Aujourd'hui"), value: TF.money(BusinessMath.revenue(state, .day, at: now), currency), symbol: "sun.max")
+            ValueRow(title: tr("Cette semaine"), value: TF.money(BusinessMath.revenue(state, .week, at: now), currency), symbol: "calendar")
+            ValueRow(title: tr("Ce mois-ci"), value: TF.money(BusinessMath.revenue(state, .month, at: now), currency), symbol: "chart.bar")
+            ValueRow(title: tr("Cette année"), value: TF.money(BusinessMath.revenue(state, .year, at: now), currency), symbol: "chart.line.uptrend.xyaxis")
             let profit = BusinessMath.profit(state, month: now)
-            ValueRow(title: "Bénéfice du mois", value: "\(TF.money(profit.profit, currency))\(profit.margin.map { " · \(Fmt.percent($0))" } ?? "")", symbol: "banknote")
+            ValueRow(title: tr("Bénéfice du mois"), value: "\(TF.money(profit.profit, currency))\(profit.margin.map { " · \(Fmt.percent($0))" } ?? "")", symbol: "banknote")
         } header: {
-            Text("Chiffre d'affaires")
+            Text(tr("Chiffre d'affaires"))
         }
 
         Section {
-            Button { sheets?.open { SaleEditor() } } label: { Label("Noter une vente", systemImage: "plus.circle.fill").font(.headline) }
-            Button { sheets?.open { BusinessCostEditor() } } label: { Label("Noter une dépense", systemImage: "minus.circle") }
-            Button { sheets?.open { MRREditor() } } label: { Label("Mettre à jour le MRR", systemImage: "arrow.triangle.2.circlepath") }
+            Button { sheets?.open { SaleEditor() } } label: { Label(tr("Noter une vente"), systemImage: "plus.circle.fill").font(.headline) }
+            Button { sheets?.open { BusinessCostEditor() } } label: { Label(tr("Noter une dépense"), systemImage: "minus.circle") }
+            Button { sheets?.open { MRREditor() } } label: { Label(tr("Mettre à jour le MRR"), systemImage: "arrow.triangle.2.circlepath") }
         } footer: {
-            Text("Saisie manuelle : pour un export Shopify, Stripe ou autre, note le total du jour.")
+            Text(tr("Saisie manuelle : pour un export Shopify, Stripe ou autre, note le total du jour."))
         }
 
-        Section("Dernières ventes") {
+        Section(tr("Dernières ventes")) {
             ForEach(state.sales.sorted { $0.date > $1.date }.prefix(15)) { sale in
                 HStack {
                     VStack(alignment: .leading, spacing: 1) {
                         Text(Fmt.shortDay(sale.date))
-                        Text("\(Fmt.plural(sale.orders, "commande", "commandes"))\(sale.note.isEmpty ? "" : " · \(sale.note)")")
+                        Text("\(Fmt.plural(sale.orders, tr("commande"), tr("commandes")))\(sale.note.isEmpty ? "" : " · \(sale.note)")")
                             .font(.caption)
                             .foregroundStyle(Color.secondary)
                     }
@@ -195,12 +195,12 @@ struct BusinessSpaceSections: View {
                     Button(role: .destructive) {
                         model.update(\.business) { $0.sales.removeAll { $0.id == sale.id } }
                     } label: {
-                        Label("Supprimer", systemImage: "trash")
+                        Label(tr("Supprimer"), systemImage: "trash")
                     }
                 }
             }
             if state.sales.isEmpty {
-                HintRow(text: "Aucune vente notée pour l'instant.")
+                HintRow(text: tr("Aucune vente notée pour l'instant."))
             }
         }
     }
@@ -219,18 +219,18 @@ struct SaleEditor: View {
     }
 
     var body: some View {
-        SheetForm(title: isNew ? "Vente" : "Modifier la vente", canSave: sale.amount > 0, onSave: save) {
+        SheetForm(title: isNew ? tr("Vente") : tr("Modifier la vente"), canSave: sale.amount > 0, onSave: save) {
             Section {
-                NumberRow(title: "Montant", value: $sale.amount, unit: model.settings.currencyCode)
-                DatePicker("Date", selection: $sale.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
-                IntRow(title: "Commandes", value: $sale.orders)
-                IntRow(title: "Nouveaux clients", value: $sale.newCustomers)
-                IntRow(title: "Visiteurs", value: $sale.visitors)
-                TextField("Note (facultatif)", text: $sale.note)
+                NumberRow(title: tr("Montant"), value: $sale.amount, unit: model.settings.currencyCode)
+                DatePicker(tr("Date"), selection: $sale.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+                IntRow(title: tr("Commandes"), value: $sale.orders)
+                IntRow(title: tr("Nouveaux clients"), value: $sale.newCustomers)
+                IntRow(title: tr("Visiteurs"), value: $sale.visitors)
+                TextField(tr("Note (facultatif)"), text: $sale.note)
             }
             if !isNew {
                 Section {
-                    Button("Supprimer la vente", role: .destructive) {
+                    Button(tr("Supprimer la vente"), role: .destructive) {
                         let id = sale.id
                         model.update(\.business) { $0.sales.removeAll { $0.id == id } }
                         dismiss()
@@ -259,15 +259,15 @@ struct BusinessCostEditor: View {
     }
 
     var body: some View {
-        SheetForm(title: isNew ? "Dépense" : "Modifier la dépense", canSave: cost.amount > 0, onSave: save) {
+        SheetForm(title: isNew ? tr("Dépense") : tr("Modifier la dépense"), canSave: cost.amount > 0, onSave: save) {
             Section {
-                NumberRow(title: "Montant", value: $cost.amount, unit: model.settings.currencyCode)
-                TextField("Libellé (publicité, matériel…)", text: $cost.label)
-                DatePicker("Date", selection: $cost.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+                NumberRow(title: tr("Montant"), value: $cost.amount, unit: model.settings.currencyCode)
+                TextField(tr("Libellé (publicité, matériel…)"), text: $cost.label)
+                DatePicker(tr("Date"), selection: $cost.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
             }
             if !isNew {
                 Section {
-                    Button("Supprimer la dépense", role: .destructive) {
+                    Button(tr("Supprimer la dépense"), role: .destructive) {
                         let id = cost.id
                         model.update(\.business) { $0.expenses.removeAll { $0.id == id } }
                         dismiss()
@@ -279,7 +279,7 @@ struct BusinessCostEditor: View {
 
     private func save() {
         var saved = cost
-        saved.label = saved.label.trimmed.isEmpty ? "Dépense" : saved.label.trimmed
+        saved.label = saved.label.trimmed.isEmpty ? tr("Dépense") : saved.label.trimmed
         model.update(\.business) { $0.save(saved) }
     }
 }
@@ -289,10 +289,10 @@ struct MRREditor: View {
     @State private var snapshot = SubscriptionSnapshot(month: Date(), mrr: 0, subscribers: 0)
 
     var body: some View {
-        SheetForm(title: "Revenu récurrent", canSave: snapshot.mrr > 0, onSave: save) {
-            DatePicker("Mois", selection: $snapshot.month, displayedComponents: .date).environment(\.locale, Fmt.locale)
-            NumberRow(title: "MRR", value: $snapshot.mrr, unit: model.settings.currencyCode)
-            IntRow(title: "Abonnés", value: $snapshot.subscribers)
+        SheetForm(title: tr("Revenu récurrent"), canSave: snapshot.mrr > 0, onSave: save) {
+            DatePicker(tr("Mois"), selection: $snapshot.month, displayedComponents: .date).environment(\.locale, Fmt.locale)
+            NumberRow(title: tr("MRR"), value: $snapshot.mrr, unit: model.settings.currencyCode)
+            IntRow(title: tr("Abonnés"), value: $snapshot.subscribers)
         }
         .onAppear {
             if let last = model.business.subscriptions.max(by: { $0.month < $1.month }) {
@@ -344,9 +344,9 @@ struct MarketsSpaceSections: View {
             .onDelete { offsets in model.update(\.following) { $0.followed.remove(atOffsets: offsets) } }
             .onMove { from, to in model.update(\.following) { $0.followed.move(fromOffsets: from, toOffset: to) } }
         } header: {
-            Text("Entreprises suivies")
+            Text(tr("Entreprises suivies"))
         } footer: {
-            Text("Chiffres officiels déposés à la SEC (EDGAR, domaine public) : revenus, bénéfice, marge, croissance. Sociétés cotées aux États-Unis.")
+            Text(tr("Chiffres officiels déposés à la SEC (EDGAR, domaine public) : revenus, bénéfice, marge, croissance. Sociétés cotées aux États-Unis."))
         }
         .task {
             for ref in model.following.followed {
@@ -354,16 +354,16 @@ struct MarketsSpaceSections: View {
             }
         }
 
-        Section("Ajouter une entreprise") {
+        Section(tr("Ajouter une entreprise")) {
             HStack {
-                TextField("Nom ou symbole (Tesla, NVDA…)", text: $query)
+                TextField(tr("Nom ou symbole (Tesla, NVDA…)"), text: $query)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .onSubmit { Task { await search() } }
                 if isSearching {
                     ProgressView()
                 } else {
-                    Button("Chercher") { Task { await search() } }
+                    Button(tr("Chercher")) { Task { await search() } }
                         .disabled(query.trimmed.isEmpty)
                 }
             }
@@ -397,9 +397,9 @@ struct MarketsSpaceSections: View {
         defer { isSearching = false }
         do {
             results = try await CompanyService.search(text)
-            message = results.isEmpty ? "Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles." : nil
+            message = results.isEmpty ? tr("Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles.") : nil
         } catch {
-            message = "La SEC ne répond pas. Réessaie dans un instant."
+            message = tr("La SEC ne répond pas. Réessaie dans un instant.")
         }
     }
 }
@@ -411,27 +411,27 @@ struct CompanyDetailView: View {
     var body: some View {
         List {
             if let company = model.companies[ref.cik] {
-                Section("Revenus annuels") {
+                Section(tr("Revenus annuels")) {
                     ForEach(company.annualRevenue.reversed(), id: \.label) { period in
                         ValueRow(title: period.label, value: BigNumber.compact(period.value))
                     }
                 }
-                Section("Bénéfice net") {
+                Section(tr("Bénéfice net")) {
                     ForEach(company.annualNetIncome.reversed(), id: \.label) { period in
                         ValueRow(title: period.label, value: BigNumber.compact(period.value))
                     }
                 }
-                Section("Indicateurs") {
-                    if let margin = company.netMargin { ValueRow(title: "Marge nette", value: Fmt.percent(margin, decimals: 1)) }
-                    if let growth = company.revenueGrowth { ValueRow(title: "Croissance des revenus", value: Fmt.signedPercent(growth * 100)) }
-                    if let shares = company.sharesOutstanding { ValueRow(title: "Actions en circulation", value: "\(TF.decimal(shares / 1_000_000_000, 2)) milliards") }
-                    ValueRow(title: "Mis à jour", value: Fmt.shortDay(company.fetchedAt))
+                Section(tr("Indicateurs")) {
+                    if let margin = company.netMargin { ValueRow(title: tr("Marge nette"), value: Fmt.percent(margin, decimals: 1)) }
+                    if let growth = company.revenueGrowth { ValueRow(title: tr("Croissance des revenus"), value: Fmt.signedPercent(growth * 100)) }
+                    if let shares = company.sharesOutstanding { ValueRow(title: tr("Actions en circulation"), value: tr("\(TF.decimal(shares / 1_000_000_000, 2)) milliards")) }
+                    ValueRow(title: tr("Mis à jour"), value: Fmt.shortDay(company.fetchedAt))
                 }
             } else {
-                HintRow(text: "Chargement des états financiers…")
+                HintRow(text: tr("Chargement des états financiers…"))
             }
             Section {
-                HintRow(text: "Source : SEC EDGAR (données XBRL des dépôts 10-K et 10-Q). À titre informatif, pas un conseil d'investissement.")
+                HintRow(text: tr("Source : SEC EDGAR (données XBRL des dépôts 10-K et 10-Q). À titre informatif, pas un conseil d'investissement."))
             }
         }
         .styledList()

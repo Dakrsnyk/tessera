@@ -128,8 +128,8 @@ enum FocusNotifier {
         let settings = await center.notificationSettings()
         guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
         let content = UNMutableNotificationContent()
-        content.title = "Session terminée"
-        content.body = "\(minutes) minutes de concentration. Prends une pause."
+        content.title = tr("Session terminée")
+        content.body = tr("\(minutes) minutes de concentration. Prends une pause.")
         content.sound = .default
         let interval = max(1, end.timeIntervalSinceNow)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)

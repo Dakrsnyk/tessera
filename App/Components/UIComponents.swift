@@ -46,7 +46,7 @@ struct WidgetPreview: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("Aperçu du widget \(design.name)"))
+        .accessibilityLabel(Text(tr("Aperçu du widget \(design.name)")))
     }
 
     private func scaled(size: CGSize, scale: CGFloat) -> some View {
@@ -98,14 +98,14 @@ struct PremiumBadge: View {
     var body: some View {
         HStack(spacing: 3) {
             Image(systemName: "sparkles")
-            if !compact { Text("Premium") }
+            if !compact { Text(tr("Premium")) }
         }
         .font(.caption2.weight(.semibold))
         .foregroundStyle(Color.premiumInk)
         .padding(.horizontal, compact ? 5 : 7)
         .padding(.vertical, 3)
         .background(Color.premiumFill, in: Capsule())
-        .accessibilityLabel(Text("Premium"))
+        .accessibilityLabel(Text(tr("Premium")))
     }
 }
 
@@ -228,7 +228,7 @@ struct TemplateCard: View {
         .frame(width: cardWidth)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityHint(Text("Ouvre l'éditeur"))
+        .accessibilityHint(Text(tr("Ouvre l'éditeur")))
     }
 }
 
@@ -336,7 +336,7 @@ struct InteractiveBadge: View {
             Image(systemName: "hand.tap.fill")
                 .font(.system(size: 9, weight: .bold))
             if showsText {
-                Text("Interactif")
+                Text(tr("Interactif"))
                     .font(.system(size: 10, weight: .bold))
             }
         }
@@ -345,6 +345,6 @@ struct InteractiveBadge: View {
         .padding(.vertical, 3)
         .background(Color(light: "E3EDFF", dark: "1D2C4A"), in: Capsule())
         .accessibilityElement()
-        .accessibilityLabel(Text("Interactif"))
+        .accessibilityLabel(Text(tr("Interactif")))
     }
 }

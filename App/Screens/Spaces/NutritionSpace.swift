@@ -17,7 +17,7 @@ struct NutritionSpaceSections: View {
                     Text(TF.int(known.kcal ? max(0, state.goals.kcal - totals.kcal) : totals.kcal))
                         .font(.system(size: 34, weight: .semibold, design: .rounded))
                         .monospacedDigit()
-                    Text(known.kcal ? "kcal restantes" : "kcal mangées").foregroundStyle(Color.secondary)
+                    Text(known.kcal ? tr("kcal restantes") : tr("kcal mangées")).foregroundStyle(Color.secondary)
                     Spacer()
                     if known.kcal {
                         Text("\(TF.int(totals.kcal)) / \(TF.int(state.goals.kcal))")
@@ -44,17 +44,17 @@ struct NutritionSpaceSections: View {
                 Button {
                     sheets?.open { FoodSearchView(startsWithScanner: true) }
                 } label: {
-                    Label("Scanner un code-barres", systemImage: "barcode.viewfinder")
+                    Label(tr("Scanner un code-barres"), systemImage: "barcode.viewfinder")
                 }
             }
             Button {
                 sheets?.open { FoodSearchView() }
             } label: {
-                Label("Ajouter un aliment", systemImage: "plus.circle.fill")
+                Label(tr("Ajouter un aliment"), systemImage: "plus.circle.fill")
                     .font(.headline)
             }
         } header: {
-            Text("Aujourd'hui")
+            Text(tr("Aujourd'hui"))
         }
 
         ForEach(MealType.allCases) { meal in
@@ -68,18 +68,18 @@ struct NutritionSpaceSections: View {
                                 Text("\(TF.int(entry.grams)) g").font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
-                            Text("\(TF.int(entry.totals.kcal)) kcal").foregroundStyle(Color.secondary).monospacedDigit()
+                            Text(tr("\(TF.int(entry.totals.kcal)) kcal")).foregroundStyle(Color.secondary).monospacedDigit()
                         }
                         .swipeActions {
                             Button(role: .destructive) {
                                 model.update(\.nutrition) { $0.entries.removeAll { $0.id == entry.id } }
                             } label: {
-                                Label("Supprimer", systemImage: "trash")
+                                Label(tr("Supprimer"), systemImage: "trash")
                             }
                             Button {
                                 toggleFavorite(entry.food)
                             } label: {
-                                Label("Favori", systemImage: "star")
+                                Label(tr("Favori"), systemImage: "star")
                             }
                             .tint(.orange)
                         }
@@ -90,33 +90,33 @@ struct NutritionSpaceSections: View {
 
         Section {
             ForEach(state.favorites) { food in
-                ValueRow(title: food.displayName, value: "\(TF.int(food.nutrients(grams: food.servingGrams).kcal)) kcal", symbol: "star.fill", colorHex: "F2A33A")
+                ValueRow(title: food.displayName, value: tr("\(TF.int(food.nutrients(grams: food.servingGrams).kcal)) kcal"), symbol: "star.fill", colorHex: "F2A33A")
             }
             .onDelete { offsets in
                 model.update(\.nutrition) { $0.favorites.remove(atOffsets: offsets) }
             }
             if state.favorites.isEmpty {
-                HintRow(text: "Glisse un aliment vers la gauche pour l'ajouter aux favoris. Le widget Ajout rapide les propose d'une touche.")
+                HintRow(text: tr("Glisse un aliment vers la gauche pour l'ajouter aux favoris. Le widget Ajout rapide les propose d'une touche."))
             }
         } header: {
-            Text("Favoris")
+            Text(tr("Favoris"))
         }
 
         Section {
             Button {
                 sheets?.open { NutritionGoalsEditor(goals: model.nutrition.goals) }
             } label: {
-                ValueRow(title: "Objectifs du jour", value: known.kcal ? "\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g prot." : "À définir", symbol: "target")
+                ValueRow(title: tr("Objectifs du jour"), value: known.kcal ? tr("\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g prot.") : tr("À définir"), symbol: "target")
             }
             .tint(.primary)
             if let average = NutritionMath.average(state, days: 7, until: now) {
-                ValueRow(title: "Moyenne sur 7 jours", value: "\(TF.int(average)) kcal", symbol: "chart.bar")
+                ValueRow(title: tr("Moyenne sur 7 jours"), value: tr("\(TF.int(average)) kcal"), symbol: "chart.bar")
             }
-            ValueRow(title: "Série de suivi", value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), "jour", "jours"), symbol: "flame.fill")
+            ValueRow(title: tr("Série de suivi"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr("jour"), tr("jours")), symbol: "flame.fill")
         } header: {
-            Text("Objectifs")
+            Text(tr("Objectifs"))
         } footer: {
-            Text("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL).")
+            Text(tr("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL)."))
         }
     }
 
@@ -184,14 +184,14 @@ struct FoodSearchView: View {
                             Button {
                                 showsScanner = true
                             } label: {
-                                Label("Scanner", systemImage: "barcode.viewfinder")
+                                Label(tr("Scanner"), systemImage: "barcode.viewfinder")
                             }
                             .buttonStyle(.bordered)
                         }
                         Button {
                             showsCustom = true
                         } label: {
-                            Label("Aliment perso", systemImage: "square.and.pencil")
+                            Label(tr("Aliment perso"), systemImage: "square.and.pencil")
                         }
                         .buttonStyle(.bordered)
                     }
@@ -200,7 +200,7 @@ struct FoodSearchView: View {
                     Section {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 8) {
-                                FilterChip(title: "Pour toi", isSelected: category == nil) { category = nil }
+                                FilterChip(title: tr("Pour toi"), isSelected: category == nil) { category = nil }
                                 ForEach(FoodCategory.allCases) { item in
                                     FilterChip(title: item.title, symbol: item.symbol, isSelected: category == item) {
                                         category = category == item ? nil : item
@@ -214,7 +214,7 @@ struct FoodSearchView: View {
                     .listRowBackground(Color.clear)
                 }
                 if category == nil, !savedMeals.isEmpty {
-                    Section("Mes repas") {
+                    Section(tr("Mes repas")) {
                         ForEach(savedMeals) { saved in
                             Button {
                                 loggedMeal = saved
@@ -228,14 +228,14 @@ struct FoodSearchView: View {
                                             .lineLimit(1)
                                     }
                                     Spacer()
-                                    Text("\(TF.int(saved.totals.kcal)) kcal").font(.subheadline).foregroundStyle(Color.secondary).monospacedDigit()
+                                    Text(tr("\(TF.int(saved.totals.kcal)) kcal")).font(.subheadline).foregroundStyle(Color.secondary).monospacedDigit()
                                     Image(systemName: "plus.circle").foregroundStyle(.tint)
                                 }
                             }
                         }
                     }
                 }
-                Section(category.map(\.title) ?? (query.trimmed.isEmpty ? "Suggestions" : "Résultats")) {
+                Section(category.map(\.title) ?? (query.trimmed.isEmpty ? tr("Suggestions") : tr("Résultats"))) {
                     ForEach(local.prefix(80)) { food in
                         foodRow(food)
                     }
@@ -243,11 +243,11 @@ struct FoodSearchView: View {
                 if !query.trimmed.isEmpty {
                     Section {
                         if isSearching {
-                            HStack { ProgressView(); Text("Recherche sur Open Food Facts…").foregroundStyle(Color.secondary) }
+                            HStack { ProgressView(); Text(tr("Recherche sur Open Food Facts…")).foregroundStyle(Color.secondary) }
                         } else if let searchError {
                             HintRow(text: searchError)
                         } else if online.isEmpty {
-                            Button("Chercher « \(query.trimmed) » dans les produits emballés") {
+                            Button(tr("Chercher « \(query.trimmed) » dans les produits emballés")) {
                                 Task { await searchOnline() }
                             }
                         }
@@ -255,20 +255,20 @@ struct FoodSearchView: View {
                             foodRow(food)
                         }
                     } header: {
-                        Text("Produits emballés")
+                        Text(tr("Produits emballés"))
                     } footer: {
-                        Text("Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.")
+                        Text(tr("Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette."))
                     }
                 }
             }
             .styledList()
-            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Pomme, poulet, yogourt…")
+            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr("Pomme, poulet, yogourt…"))
             .onSubmit(of: .search) { Task { await searchOnline() } }
             .onChange(of: query) { _, _ in
                 online = []
                 searchError = nil
             }
-            .navigationTitle("Ajouter un aliment")
+            .navigationTitle(tr("Ajouter un aliment"))
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 if startsWithScanner && !didOfferScanner {
@@ -278,7 +278,7 @@ struct FoodSearchView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Fermer") { dismiss() }
+                    Button(tr("Fermer")) { dismiss() }
                 }
             }
             .sheet(item: $selected) { food in
@@ -296,11 +296,11 @@ struct FoodSearchView: View {
                         showsScanner = false
                     }
                     .ignoresSafeArea(edges: .bottom)
-                    .navigationTitle("Scanner un aliment")
+                    .navigationTitle(tr("Scanner un aliment"))
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
-                            Button("Annuler") { showsScanner = false }
+                            Button(tr("Annuler")) { showsScanner = false }
                         }
                     }
                     .safeAreaInset(edge: .bottom) {
@@ -308,7 +308,7 @@ struct FoodSearchView: View {
                         Button {
                             showsScanner = false
                         } label: {
-                            Label("Chercher ou créer l'aliment", systemImage: "magnifyingglass")
+                            Label(tr("Chercher ou créer l'aliment"), systemImage: "magnifyingglass")
                                 .font(.subheadline.weight(.semibold))
                                 .padding(.horizontal, 16)
                                 .frame(minHeight: 44)
@@ -352,9 +352,9 @@ struct FoodSearchView: View {
         defer { isSearching = false }
         do {
             online = try await OpenFoodFacts.search(text)
-            if online.isEmpty { searchError = "Aucun produit trouvé pour « \(text) »." }
+            if online.isEmpty { searchError = tr("Aucun produit trouvé pour « \(text) ».") }
         } catch {
-            searchError = "Open Food Facts ne répond pas. Réessaie dans un instant."
+            searchError = tr("Open Food Facts ne répond pas. Réessaie dans un instant.")
         }
     }
 
@@ -377,7 +377,7 @@ struct FoodSearchView: View {
             selected = food
         } else {
             query = code
-            searchError = "Produit \(code) introuvable. Crée-le comme aliment perso."
+            searchError = tr("Produit \(code) introuvable. Crée-le comme aliment perso.")
         }
     }
 }
@@ -405,14 +405,14 @@ struct FoodLogSheet: View {
                     if let brand = food.brand, !brand.isEmpty {
                         Text(brand).font(.subheadline.weight(.semibold)).foregroundStyle(Color.secondary)
                     }
-                    Text("Pour 100 g : \(TF.int(food.kcal)) kcal · protéines \(TF.decimal(food.protein, 1)) g · glucides \(TF.decimal(food.carbs, 1)) g · lipides \(TF.decimal(food.fat, 1)) g")
+                    Text(tr("Pour 100 g : \(TF.int(food.kcal)) kcal · protéines \(TF.decimal(food.protein, 1)) g · glucides \(TF.decimal(food.carbs, 1)) g · lipides \(TF.decimal(food.fat, 1)) g"))
                         .font(.footnote)
                         .foregroundStyle(Color.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
             Section {
-                NumberRow(title: "Quantité", value: $grams, unit: "g")
+                NumberRow(title: tr("Quantité"), value: $grams, unit: "g")
                     .accessibilityIdentifier("food-grams")
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
@@ -421,24 +421,24 @@ struct FoodLogSheet: View {
                         }
                     }
                 }
-                Picker("Repas", selection: $meal) {
+                Picker(tr("Repas"), selection: $meal) {
                     ForEach(MealType.allCases) { Text($0.title).tag($0) }
                 }
             } footer: {
                 if known.kcal {
-                    Text(left >= 0 ? "Après ajout, il te restera \(TF.int(left)) kcal." : "Après ajout, tu dépasseras ton objectif de \(TF.int(-left)) kcal.")
+                    Text(left >= 0 ? tr("Après ajout, il te restera \(TF.int(left)) kcal.") : tr("Après ajout, tu dépasseras ton objectif de \(TF.int(-left)) kcal."))
                 }
             }
-            Section("Apport") {
-                ValueRow(title: "Calories", value: "\(TF.int(totals.kcal)) kcal")
-                ValueRow(title: "Protéines", value: "\(TF.decimal(totals.protein, 1)) g")
-                ValueRow(title: "Glucides", value: "\(TF.decimal(totals.carbs, 1)) g")
-                ValueRow(title: "Lipides", value: "\(TF.decimal(totals.fat, 1)) g")
-                ValueRow(title: "Fibres", value: "\(TF.decimal(totals.fiber, 1)) g")
-                if let sugars = totals.sugars { ValueRow(title: "Sucres", value: "\(TF.decimal(sugars, 1)) g") }
-                if let saturated = totals.saturatedFat { ValueRow(title: "Gras saturés", value: "\(TF.decimal(saturated, 1)) g") }
-                if let sodium = totals.sodiumMg { ValueRow(title: "Sodium", value: "\(TF.int(sodium)) mg") }
-                if let cholesterol = totals.cholesterolMg { ValueRow(title: "Cholestérol", value: "\(TF.int(cholesterol)) mg") }
+            Section(tr("Apport")) {
+                ValueRow(title: tr("Calories"), value: tr("\(TF.int(totals.kcal)) kcal"))
+                ValueRow(title: tr("Protéines"), value: "\(TF.decimal(totals.protein, 1)) g")
+                ValueRow(title: tr("Glucides"), value: "\(TF.decimal(totals.carbs, 1)) g")
+                ValueRow(title: tr("Lipides"), value: "\(TF.decimal(totals.fat, 1)) g")
+                ValueRow(title: tr("Fibres"), value: "\(TF.decimal(totals.fiber, 1)) g")
+                if let sugars = totals.sugars { ValueRow(title: tr("Sucres"), value: "\(TF.decimal(sugars, 1)) g") }
+                if let saturated = totals.saturatedFat { ValueRow(title: tr("Gras saturés"), value: "\(TF.decimal(saturated, 1)) g") }
+                if let sodium = totals.sodiumMg { ValueRow(title: tr("Sodium"), value: tr("\(TF.int(sodium)) mg")) }
+                if let cholesterol = totals.cholesterolMg { ValueRow(title: tr("Cholestérol"), value: tr("\(TF.int(cholesterol)) mg")) }
             }
         }
         .onAppear {
@@ -457,9 +457,9 @@ struct FoodLogSheet: View {
     private var portions: [Portion] {
         let serving = food.servingGrams > 0 ? food.servingGrams : 100
         var list = [
-            Portion(title: "½ portion", grams: (serving / 2).rounded()),
-            Portion(title: food.servingName.isEmpty ? "1 portion" : food.servingName, grams: serving),
-            Portion(title: "2 portions", grams: serving * 2),
+            Portion(title: tr("½ portion"), grams: (serving / 2).rounded()),
+            Portion(title: food.servingName.isEmpty ? tr("1 portion") : food.servingName, grams: serving),
+            Portion(title: tr("2 portions"), grams: serving * 2),
         ]
         if abs(serving - 100) > 1 { list.append(Portion(title: "100 g", grams: 100)) }
         return list
@@ -488,20 +488,20 @@ struct SavedMealLogSheet: View {
         let totals = saved.totals
         SheetForm(title: saved.name, dismissesOnSave: onDone == nil, onSave: save) {
             Section {
-                Picker("Repas", selection: $meal) {
+                Picker(tr("Repas"), selection: $meal) {
                     ForEach(MealType.allCases) { Text($0.title).tag($0) }
                 }
             }
-            Section("Aliments") {
+            Section(tr("Aliments")) {
                 ForEach(Array(saved.items.enumerated()), id: \.offset) { _, item in
                     ValueRow(title: item.food.name, value: "\(TF.int(item.grams)) g")
                 }
             }
-            Section("Apport") {
-                ValueRow(title: "Calories", value: "\(TF.int(totals.kcal)) kcal")
-                ValueRow(title: "Protéines", value: "\(TF.decimal(totals.protein, 1)) g")
-                ValueRow(title: "Glucides", value: "\(TF.decimal(totals.carbs, 1)) g")
-                ValueRow(title: "Lipides", value: "\(TF.decimal(totals.fat, 1)) g")
+            Section(tr("Apport")) {
+                ValueRow(title: tr("Calories"), value: tr("\(TF.int(totals.kcal)) kcal"))
+                ValueRow(title: tr("Protéines"), value: "\(TF.decimal(totals.protein, 1)) g")
+                ValueRow(title: tr("Glucides"), value: "\(TF.decimal(totals.carbs, 1)) g")
+                ValueRow(title: tr("Lipides"), value: "\(TF.decimal(totals.fat, 1)) g")
             }
         }
         .onAppear { meal = presetMeal ?? .current() }
@@ -520,12 +520,12 @@ struct SavedMealLogSheet: View {
 enum FoodText {
     /// "165 kcal / 100 g · P 31 · G 0 · L 4": the line under a food in lists.
     static func summary(_ food: FoodItem) -> String {
-        "\(TF.int(food.kcal)) kcal / 100 g · P \(TF.int(food.protein)) · G \(TF.int(food.carbs)) · L \(TF.int(food.fat))"
+        tr("\(TF.int(food.kcal)) kcal / 100 g · P \(TF.int(food.protein)) · G \(TF.int(food.carbs)) · L \(TF.int(food.fat))")
     }
 
     /// "1 portion · 120 g · 198 kcal"
     static func portion(_ food: FoodItem, grams: Double) -> String {
-        "\(TF.int(grams)) g · \(TF.int(food.nutrients(grams: grams).kcal)) kcal"
+        tr("\(TF.int(grams)) g · \(TF.int(food.nutrients(grams: grams).kcal)) kcal")
     }
 }
 
@@ -541,17 +541,17 @@ struct CustomFoodEditor: View {
     @State private var serving: Double = 100
 
     var body: some View {
-        SheetForm(title: "Aliment perso", canSave: !name.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: tr("Aliment perso"), canSave: !name.trimmed.isEmpty, onSave: save) {
             Section {
-                TextField("Nom", text: $name)
-                NumberRow(title: "Portion", value: $serving, unit: "g")
+                TextField(tr("Nom"), text: $name)
+                NumberRow(title: tr("Portion"), value: $serving, unit: "g")
             }
-            Section("Pour 100 g") {
-                NumberRow(title: "Calories", value: $kcal, unit: "kcal")
-                NumberRow(title: "Protéines", value: $protein, unit: "g")
-                NumberRow(title: "Glucides", value: $carbs, unit: "g")
-                NumberRow(title: "Lipides", value: $fat, unit: "g")
-                NumberRow(title: "Fibres", value: $fiber, unit: "g")
+            Section(tr("Pour 100 g")) {
+                NumberRow(title: tr("Calories"), value: $kcal, unit: "kcal")
+                NumberRow(title: tr("Protéines"), value: $protein, unit: "g")
+                NumberRow(title: tr("Glucides"), value: $carbs, unit: "g")
+                NumberRow(title: tr("Lipides"), value: $fat, unit: "g")
+                NumberRow(title: tr("Fibres"), value: $fiber, unit: "g")
             }
         }
     }
@@ -576,35 +576,35 @@ struct NutritionGoalsEditor: View {
     @State private var usedCalculator = false
 
     var body: some View {
-        SheetForm(title: "Objectifs", onSave: save) {
-            Section("Par jour") {
-                NumberRow(title: "Calories", value: $goals.kcal, unit: "kcal")
-                NumberRow(title: "Protéines", value: $goals.protein, unit: "g")
-                NumberRow(title: "Glucides", value: $goals.carbs, unit: "g")
-                NumberRow(title: "Lipides", value: $goals.fat, unit: "g")
-                NumberRow(title: "Fibres", value: $goals.fiber, unit: "g")
+        SheetForm(title: tr("Objectifs"), onSave: save) {
+            Section(tr("Par jour")) {
+                NumberRow(title: tr("Calories"), value: $goals.kcal, unit: "kcal")
+                NumberRow(title: tr("Protéines"), value: $goals.protein, unit: "g")
+                NumberRow(title: tr("Glucides"), value: $goals.carbs, unit: "g")
+                NumberRow(title: tr("Lipides"), value: $goals.fat, unit: "g")
+                NumberRow(title: tr("Fibres"), value: $goals.fiber, unit: "g")
             }
             Section {
-                Picker("Référence", selection: $sex) {
+                Picker(tr("Référence"), selection: $sex) {
                     ForEach(NutritionCalculator.Sex.allCases) { Text($0.title).tag($0) }
                 }
-                Stepper("Âge : \(age) ans", value: $age, in: 16...90)
-                NumberRow(title: "Taille", value: $height, unit: "cm")
-                NumberRow(title: "Poids", value: $weight, unit: "kg")
-                Picker("Activité", selection: $activity) {
+                Stepper(tr("Âge : \(age) ans"), value: $age, in: 16...90)
+                NumberRow(title: tr("Taille"), value: $height, unit: tr("cm"))
+                NumberRow(title: tr("Poids"), value: $weight, unit: tr("kg"))
+                Picker(tr("Activité"), selection: $activity) {
                     ForEach(NutritionCalculator.Activity.allCases) { Text($0.title).tag($0) }
                 }
-                Picker("But", selection: $goal) {
+                Picker(tr("But"), selection: $goal) {
                     ForEach(NutritionCalculator.Goal.allCases) { Text($0.title).tag($0) }
                 }
-                Button("Calculer mes objectifs") {
+                Button(tr("Calculer mes objectifs")) {
                     goals = NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight, activity: activity, goal: goal)
                     usedCalculator = true
                 }
             } header: {
-                Text("Calculateur")
+                Text(tr("Calculateur"))
             } footer: {
-                Text("Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés.")
+                Text(tr("Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés."))
             }
         }
         .onAppear(perform: prefill)

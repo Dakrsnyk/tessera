@@ -220,7 +220,7 @@ final class AppModel {
         guard canCreateDesign else { return nil }
         var copy = design
         copy.id = UUID()
-        copy.name = asVariant ? "\(design.name) (variante)" : "\(design.name) (copie)"
+        copy.name = asVariant ? tr("\(design.name) (variante)") : tr("\(design.name) (copie)")
         copy.createdAt = Date()
         copy.isFavorite = false
         if case let .photo(name) = design.background, let image = ImageStore.image(named: name), let newName = ImageStore.save(image) {
@@ -260,7 +260,7 @@ final class AppModel {
     @discardableResult
     func saveStyle(named name: String, from design: WidgetDesign) -> SavedStyle {
         let trimmed = name.trimmed
-        let style = SavedStyle(name: trimmed.isEmpty ? "Mon thème" : trimmed, design: design)
+        let style = SavedStyle(name: trimmed.isEmpty ? tr("Mon thème") : trimmed, design: design)
         savedStyles.insert(style, at: 0)
         store.save(StyleLibrary(styles: savedStyles))
         return style

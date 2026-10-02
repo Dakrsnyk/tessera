@@ -63,20 +63,20 @@ struct StudioElementsPanel: View {
     let tile: Tile?
 
     var body: some View {
-        StudioGroup(title: "Éléments affichés") {
+        StudioGroup(title: tr("Éléments affichés")) {
             VStack(alignment: .leading, spacing: 12) {
-                Toggle("Titre", isOn: $design.showsTitle)
+                Toggle(tr("Titre"), isOn: $design.showsTitle)
                 if let tile {
-                    Toggle("Icône", isOn: shown("icon"))
-                    if !tile.value.isEmpty || tile.timer != nil { Toggle("Valeur principale", isOn: shown("value")) }
-                    if tile.caption != nil { Toggle("Légende", isOn: shown("caption")) }
-                    if tile.detail != nil { Toggle("Détails", isOn: $design.showsDetails) }
-                    if tile.visual != TileVisual.none { Toggle("Graphique", isOn: shown("visual")) }
-                    if !tile.buttons.isEmpty || tile.headerButton != nil { Toggle("Boutons", isOn: shown("buttons")) }
-                    if tile.footnote != nil { Toggle("Source", isOn: shown("footnote")) }
-                    if !tile.rows.isEmpty { Toggle("Lignes", isOn: shown("rows")) }
+                    Toggle(tr("Icône"), isOn: shown("icon"))
+                    if !tile.value.isEmpty || tile.timer != nil { Toggle(tr("Valeur principale"), isOn: shown("value")) }
+                    if tile.caption != nil { Toggle(tr("Légende"), isOn: shown("caption")) }
+                    if tile.detail != nil { Toggle(tr("Détails"), isOn: $design.showsDetails) }
+                    if tile.visual != TileVisual.none { Toggle(tr("Graphique"), isOn: shown("visual")) }
+                    if !tile.buttons.isEmpty || tile.headerButton != nil { Toggle(tr("Boutons"), isOn: shown("buttons")) }
+                    if tile.footnote != nil { Toggle(tr("Source"), isOn: shown("footnote")) }
+                    if !tile.rows.isEmpty { Toggle(tr("Lignes"), isOn: shown("rows")) }
                 } else {
-                    Toggle("Détails", isOn: $design.showsDetails)
+                    Toggle(tr("Détails"), isOn: $design.showsDetails)
                 }
             }
             .font(.subheadline)
@@ -84,7 +84,7 @@ struct StudioElementsPanel: View {
         if let tile {
             let lines = tile.rows.filter { UUID(uuidString: $0.id) == nil }
             if !lines.isEmpty && !design.style.isHidden("rows") {
-                StudioGroup(title: "Lignes", detail: "\(lines.count)") {
+                StudioGroup(title: tr("Lignes"), detail: "\(lines.count)") {
                     VStack(spacing: 10) {
                         ForEach(lines) { row in
                             line(id: row.id, key: "row:\(row.id)", title: row.title, colorHex: shownColor(of: row, in: tile.rows), colored: row.colorHex != nil || row.progress != nil)
@@ -93,7 +93,7 @@ struct StudioElementsPanel: View {
                 }
             }
             if case let .segments(segments) = tile.visual, !segments.isEmpty {
-                StudioGroup(title: "Répartition", detail: "\(segments.count)") {
+                StudioGroup(title: tr("Répartition"), detail: "\(segments.count)") {
                     VStack(spacing: 10) {
                         ForEach(Array(segments.enumerated()), id: \.offset) { pair in
                             let segment = pair.element
@@ -114,7 +114,7 @@ struct StudioElementsPanel: View {
                 Text(title).font(.subheadline).lineLimit(1)
             }
             if colored {
-                ColorPicker("Couleur de \(title)", selection: Binding(
+                ColorPicker(tr("Couleur de \(title)"), selection: Binding(
                     get: { Color(hex: design.style.rowColors[colorKey] ?? colorHex ?? design.accentHex) },
                     set: { design.style.rowColors[colorKey] = $0.hexString }
                 ), supportsOpacity: false)
@@ -153,7 +153,7 @@ struct StudioThemePanel: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        StudioNote(text: "Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget.", symbol: "sparkles")
+        StudioNote(text: tr("Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget."), symbol: "sparkles")
         StudioPreviewGrid(
             options: StylePreset.all,
             input: input,
@@ -181,7 +181,7 @@ struct StudioStylePanel: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        StudioNote(text: "Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent.", symbol: "swatchpalette")
+        StudioNote(text: tr("Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent."), symbol: "swatchpalette")
         StudioPreviewGrid(
             options: ThemeCatalog.all,
             input: input,
@@ -191,7 +191,7 @@ struct StudioStylePanel: View {
                 return copy
             },
             title: \.name,
-            subtitle: { $0.isPremium ? nil : "Gratuit" },
+            subtitle: { $0.isPremium ? nil : tr("Gratuit") },
             isSelected: { $0.id == design.themeID },
             showsLock: { $0.isPremium && !model.isPremium },
             identifier: { "theme-\($0.id.rawValue)" },
@@ -204,7 +204,7 @@ struct StudioStylePanel: View {
                 design.style.hidden = hidden
             }
         } label: {
-            Label("Revenir aux réglages du style", systemImage: "arrow.uturn.backward")
+            Label(tr("Revenir aux réglages du style"), systemImage: "arrow.uturn.backward")
                 .frame(maxWidth: .infinity, minHeight: 44)
         }
         .buttonStyle(.bordered)
@@ -231,14 +231,14 @@ struct StudioColorsPanel: View {
     /// What colors the widget now: the main color, a palette, colors picked one by one, or the style.
     private var colorsDetail: String {
         if design.style.recolor { return Palette.name(for: design.accentHex) }
-        if let palette = ColorPalette.all.first(where: { $0.matches(design) }) { return "Palette \(palette.name)" }
-        return usesStyleColors ? "Couleurs du style" : "Personnalisées"
+        if let palette = ColorPalette.all.first(where: { $0.matches(design) }) { return tr("Palette \(palette.name)") }
+        return usesStyleColors ? tr("Couleurs du style") : tr("Personnalisées")
     }
 
     var body: some View {
-        StudioGroup(title: "Couleur principale", detail: colorsDetail) {
+        StudioGroup(title: tr("Couleur principale"), detail: colorsDetail) {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.")
+                Text(tr("Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -251,7 +251,7 @@ struct StudioColorsPanel: View {
                         .accessibilityLabel(Text(swatch.name))
                         .accessibilityIdentifier("main-\(swatch.hex)")
                     }
-                    ColorPicker("Couleur personnalisée", selection: Binding(
+                    ColorPicker(tr("Couleur personnalisée"), selection: Binding(
                         get: { Color(hex: design.accentHex) },
                         set: { design = design.recolored(to: $0.hexString) }
                     ), supportsOpacity: false)
@@ -263,14 +263,14 @@ struct StudioColorsPanel: View {
                         Haptics.tap()
                         withAnimation { design = design.withStyleColors() }
                     } label: {
-                        Label("Revenir aux couleurs du style", systemImage: "arrow.uturn.backward")
+                        Label(tr("Revenir aux couleurs du style"), systemImage: "arrow.uturn.backward")
                             .font(.subheadline.weight(.medium))
                     }
                     .accessibilityIdentifier("colors-reset")
                 }
             }
         }
-        StudioGroup(title: "Palettes", detail: "Tout change d'un coup", isPremium: !model.isPremium) {
+        StudioGroup(title: tr("Palettes"), detail: tr("Tout change d'un coup"), isPremium: !model.isPremium) {
             FlowLayout(spacing: 8) {
                 ForEach(ColorPalette.all) { palette in
                     let isOn = palette.matches(design)
@@ -299,30 +299,30 @@ struct StudioColorsPanel: View {
                 }
             }
         }
-        StudioGroup(title: "Chaque couleur", isPremium: !model.isPremium) {
+        StudioGroup(title: tr("Chaque couleur"), isPremium: !model.isPremium) {
             VStack(spacing: 6) {
-                StudioColorRow(title: "Texte", hex: $design.style.textHex, fallback: style.primary)
+                StudioColorRow(title: tr("Texte"), hex: $design.style.textHex, fallback: style.primary)
                 Divider()
-                StudioColorRow(title: "Texte secondaire", hex: $design.style.secondaryHex, fallback: style.secondary)
+                StudioColorRow(title: tr("Texte secondaire"), hex: $design.style.secondaryHex, fallback: style.secondary)
                 Divider()
-                StudioColorRow(title: "Chiffres", hex: $design.style.numberHex, fallback: style.numberColor)
+                StudioColorRow(title: tr("Chiffres"), hex: $design.style.numberHex, fallback: style.numberColor)
                 Divider()
-                StudioColorRow(title: "Icônes", hex: $design.style.iconHex, fallback: style.icon)
+                StudioColorRow(title: tr("Icônes"), hex: $design.style.iconHex, fallback: style.icon)
                 Divider()
-                StudioColorRow(title: "Graphiques", hex: $design.style.chartHex, fallback: style.chart)
+                StudioColorRow(title: tr("Graphiques"), hex: $design.style.chartHex, fallback: style.chart)
                 Divider()
-                StudioColorRow(title: "Cartes et surfaces", hex: $design.style.panelHex, fallback: style.panel)
+                StudioColorRow(title: tr("Cartes et surfaces"), hex: $design.style.panelHex, fallback: style.panel)
             }
         }
-        StudioGroup(title: "Hausse et baisse", isPremium: !model.isPremium) {
+        StudioGroup(title: tr("Hausse et baisse"), isPremium: !model.isPremium) {
             VStack(spacing: 6) {
-                StudioColorRow(title: "Positif", hex: $design.style.positiveHex, fallback: style.positive, detail: "Gains, progression")
+                StudioColorRow(title: tr("Positif"), hex: $design.style.positiveHex, fallback: style.positive, detail: tr("Gains, progression"))
                 Divider()
-                StudioColorRow(title: "Négatif", hex: $design.style.negativeHex, fallback: style.negative, detail: "Pertes, dépassement")
+                StudioColorRow(title: tr("Négatif"), hex: $design.style.negativeHex, fallback: style.negative, detail: tr("Pertes, dépassement"))
             }
         }
         if input.tile.map({ !$0.rows.isEmpty }) == true {
-            StudioNote(text: "La couleur de chaque ligne (protéines, glucides, catégories…) se règle aussi dans Contenu.")
+            StudioNote(text: tr("La couleur de chaque ligne (protéines, glucides, catégories…) se règle aussi dans Contenu."))
         }
     }
 }
@@ -334,17 +334,17 @@ struct StudioBorderPanel: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        StudioGroup(title: "Bordure", isPremium: !model.isPremium) {
+        StudioGroup(title: tr("Bordure"), isPremium: !model.isPremium) {
             VStack(alignment: .leading, spacing: 14) {
                 StudioChoices(options: BorderKind.allCases, selection: $design.style.border, title: \.title, identifier: { "border-\($0.rawValue)" })
                 if design.effectiveStyle.border != .none {
-                    StudioSlider(title: "Épaisseur", value: $design.style.borderWidth, range: 0.5...6, step: 0.5, format: { String(format: "%.1f pt", $0) })
-                    StudioSlider(title: "Opacité", value: $design.style.borderOpacity, range: 0.1...1)
-                    StudioColorRow(title: "Couleur", hex: $design.style.borderHex, fallback: ResolvedStyle(design: design).borderColor)
+                    StudioSlider(title: tr("Épaisseur"), value: $design.style.borderWidth, range: 0.5...6, step: 0.5, format: { String(format: "%.1f pt", $0) })
+                    StudioSlider(title: tr("Opacité"), value: $design.style.borderOpacity, range: 0.1...1)
+                    StudioColorRow(title: tr("Couleur"), hex: $design.style.borderHex, fallback: ResolvedStyle(design: design).borderColor)
                 }
             }
         }
-        StudioNote(text: "La bordure suit exactement le contour du widget, que iOS dessine lui-même.")
+        StudioNote(text: tr("La bordure suit exactement le contour du widget, que iOS dessine lui-même."))
     }
 }
 
@@ -373,12 +373,12 @@ struct StudioChartPanel: View {
                 select: { design.style.chart = $0 }
             )
         }
-        StudioGroup(title: "Apparence du graphique") {
+        StudioGroup(title: tr("Apparence du graphique")) {
             VStack(spacing: 12) {
-                StudioSlider(title: "Épaisseur", value: $design.style.chartThickness, range: 0.5...2.5, step: 0.1, format: { String(format: "×%.1f", $0) })
-                Toggle("Remplissage", isOn: $design.style.chartFill)
-                Toggle("Afficher les valeurs", isOn: $design.style.chartValues)
-                StudioColorRow(title: "Couleur", hex: $design.style.chartHex, fallback: ResolvedStyle(design: design).chart)
+                StudioSlider(title: tr("Épaisseur"), value: $design.style.chartThickness, range: 0.5...2.5, step: 0.1, format: { String(format: "×%.1f", $0) })
+                Toggle(tr("Remplissage"), isOn: $design.style.chartFill)
+                Toggle(tr("Afficher les valeurs"), isOn: $design.style.chartValues)
+                StudioColorRow(title: tr("Couleur"), hex: $design.style.chartHex, fallback: ResolvedStyle(design: design).chart)
             }
             .font(.subheadline)
         }
@@ -406,7 +406,7 @@ struct StudioDensityPanel: View {
             identifier: { "density-\($0.rawValue)" },
             select: { design.style.density = $0 }
         )
-        StudioNote(text: design.effectiveStyle.density.summary + " Les marges, l'espacement et le nombre de lignes s'adaptent.")
+        StudioNote(text: design.effectiveStyle.density.summary + tr(" Les marges, l'espacement et le nombre de lignes s'adaptent."))
     }
 }
 
@@ -428,10 +428,10 @@ struct StudioMyStylesPanel: View {
         .sheet(item: $applying) { style in
             ApplyStyleSheet(style: style)
         }
-        .alert("Renommer le style", isPresented: Binding(get: { renaming != nil }, set: { if !$0 { renaming = nil } })) {
-            TextField("Nom", text: $renameText)
-            Button("Annuler", role: .cancel) { renaming = nil }
-            Button("Renommer") {
+        .alert(tr("Renommer le style"), isPresented: Binding(get: { renaming != nil }, set: { if !$0 { renaming = nil } })) {
+            TextField(tr("Nom"), text: $renameText)
+            Button(tr("Annuler"), role: .cancel) { renaming = nil }
+            Button(tr("Renommer")) {
                 if let renaming { model.renameStyle(renaming.id, to: renameText) }
                 renaming = nil
             }
@@ -439,13 +439,13 @@ struct StudioMyStylesPanel: View {
     }
 
     @ViewBuilder private var content: some View {
-        StudioGroup(title: "Enregistrer ce look") {
+        StudioGroup(title: tr("Enregistrer ce look")) {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Garde les couleurs, le fond, la bordure, le texte, les icônes et la disposition de ce widget sous un nom, pour les donner à d'autres widgets.")
+                Text(tr("Garde les couleurs, le fond, la bordure, le texte, les icônes et la disposition de ce widget sous un nom, pour les donner à d'autres widgets."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 HStack(spacing: 8) {
-                    TextField("Mon thème", text: $newName)
+                    TextField(tr("Mon thème"), text: $newName)
                         .textInputAutocapitalization(.sentences)
                         .submitLabel(.done)
                         .padding(10)
@@ -456,7 +456,7 @@ struct StudioMyStylesPanel: View {
                         model.saveStyle(named: newName, from: design)
                         newName = ""
                     } label: {
-                        Text("Enregistrer").foregroundStyle(.onAccent)
+                        Text(tr("Enregistrer")).foregroundStyle(.onAccent)
                     }
                     .buttonStyle(.borderedProminent)
                     .accessibilityIdentifier("style-save")
@@ -464,9 +464,9 @@ struct StudioMyStylesPanel: View {
             }
         }
         if model.savedStyles.isEmpty {
-            StudioNote(text: "Tes styles apparaîtront ici. Un même style sur la météo, la nutrition et le budget donne un écran d'accueil cohérent.", symbol: "bookmark")
+            StudioNote(text: tr("Tes styles apparaîtront ici. Un même style sur la météo, la nutrition et le budget donne un écran d'accueil cohérent."), symbol: "bookmark")
         } else {
-            StudioGroup(title: "Mes styles", detail: "\(model.savedStyles.count)") {
+            StudioGroup(title: tr("Mes styles"), detail: "\(model.savedStyles.count)") {
                 VStack(spacing: 0) {
                     ForEach(Array(model.savedStyles.enumerated()), id: \.element.id) { index, saved in
                         savedRow(saved)
@@ -486,18 +486,18 @@ struct StudioMyStylesPanel: View {
                     .allowsHitTesting(false)
                 VStack(alignment: .leading, spacing: 3) {
                     Text(saved.name).font(.subheadline.weight(.semibold)).lineLimit(1)
-                    Text("\(ThemeCatalog.theme(saved.themeID).name) · \(saved.style.look.isDefault ? "réglages du style" : "personnalisé")")
+                    Text("\(ThemeCatalog.theme(saved.themeID).name) · \(saved.style.look.isDefault ? tr("réglages du style") : tr("personnalisé"))")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
                 Spacer(minLength: 0)
                 Menu {
-                    Button("Renommer", systemImage: "pencil") {
+                    Button(tr("Renommer"), systemImage: "pencil") {
                         renameText = saved.name
                         renaming = saved
                     }
-                    Button("Supprimer", systemImage: "trash", role: .destructive) {
+                    Button(tr("Supprimer"), systemImage: "trash", role: .destructive) {
                         withAnimation { model.deleteStyle(saved.id) }
                     }
                 } label: {
@@ -506,14 +506,14 @@ struct StudioMyStylesPanel: View {
                         .foregroundStyle(.secondary)
                         .frame(minWidth: 44, minHeight: 44)
                 }
-                .accessibilityLabel(Text("Options de \(saved.name)"))
+                .accessibilityLabel(Text(tr("Options de \(saved.name)")))
             }
             HStack(spacing: 8) {
                 Button {
                     Haptics.tap()
                     withAnimation { design = saved.applied(to: design) }
                 } label: {
-                    Label(isApplied ? "Appliqué" : "Appliquer", systemImage: isApplied ? "checkmark" : "paintbrush")
+                    Label(isApplied ? tr("Appliqué") : tr("Appliquer"), systemImage: isApplied ? "checkmark" : "paintbrush")
                         .lineLimit(1)
                         .frame(maxWidth: .infinity)
                 }
@@ -524,7 +524,7 @@ struct StudioMyStylesPanel: View {
                     Button {
                         applying = saved
                     } label: {
-                        Label("Autres widgets", systemImage: "square.stack")
+                        Label(tr("Autres widgets"), systemImage: "square.stack")
                             .lineLimit(1)
                             .minimumScaleFactor(0.8)
                             .frame(maxWidth: .infinity)
@@ -569,17 +569,17 @@ struct ApplyStyleSheet: View {
                         .buttonStyle(.plain)
                     }
                 } footer: {
-                    Text("Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.")
+                    Text(tr("Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée."))
                 }
             }
-            .navigationTitle("Appliquer « \(style.name) »")
+            .navigationTitle(tr("Appliquer « \(style.name) »"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Annuler") { dismiss() }
+                    Button(tr("Annuler")) { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Appliquer (\(selection.count))") {
+                    Button(tr("Appliquer (\(selection.count))")) {
                         let count = model.apply(style, to: selection)
                         if count > 0 { Haptics.success() }
                         dismiss()

@@ -48,11 +48,11 @@ struct MonthlyBudgetEditor: View {
     @State private var amount: Double = 0
 
     var body: some View {
-        SheetForm(title: "Budget du mois", canSave: amount >= 0, onSave: { model.setMonthlyBudget(amount) }) {
+        SheetForm(title: tr("Budget du mois"), canSave: amount >= 0, onSave: { model.setMonthlyBudget(amount) }) {
             Section {
-                NumberRow(title: "Budget", value: $amount, unit: model.settings.currencyCode)
+                NumberRow(title: tr("Budget"), value: $amount, unit: model.settings.currencyCode)
             } footer: {
-                Text("Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.")
+                Text(tr("Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes."))
             }
         }
         .onAppear { amount = model.budget.monthlyBudget }
@@ -74,9 +74,9 @@ struct FinancesAppView: View {
         MiniAppScroll {
             hero(state: state, now: now)
             HStack(spacing: 10) {
-                MiniActionButton(title: "Dépense", symbol: "minus", colorHex: accentHex) { sheet = .expense(nil) }
+                MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex) { sheet = .expense(nil) }
                     .accessibilityIdentifier("finances-add-expense")
-                MiniActionButton(title: "Revenu", symbol: "plus", colorHex: Finances.incomeHex, isProminent: false) { sheet = .income(nil) }
+                MiniActionButton(title: tr("Revenu"), symbol: "plus", colorHex: Finances.incomeHex, isProminent: false) { sheet = .income(nil) }
                     .accessibilityIdentifier("finances-add-income")
             }
             month(state: state, now: now)
@@ -84,13 +84,13 @@ struct FinancesAppView: View {
             bills(state: state, now: now)
             savings(state: state)
             more(state: state)
-            Text("Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.")
+            Text(tr("Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             MiniAppSettingsSection(app: .finances)
         }
-        .navigationTitle("Finances")
+        .navigationTitle(tr("Finances"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -104,12 +104,12 @@ struct FinancesAppView: View {
         let comparison = BudgetMath.monthToDate(state, at: now)
         return VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline) {
-                Text(over ? "Dépassé ce mois-ci" : "Reste ce mois-ci")
+                Text(over ? tr("Dépassé ce mois-ci") : tr("Reste ce mois-ci"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Spacer()
                 Button { sheet = .budget } label: {
-                    Text("Budget \(TF.money(state.monthlyBudget, currency))")
+                    Text(tr("Budget \(TF.money(state.monthlyBudget, currency))"))
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                 }
@@ -128,7 +128,7 @@ struct FinancesAppView: View {
                 .foregroundStyle(.secondary)
             if comparison.previous > 0, abs(comparison.current - comparison.previous) >= 1 {
                 let difference = comparison.current - comparison.previous
-                Label("\(TF.money(abs(difference), currency)) de \(difference > 0 ? "plus" : "moins") que le mois dernier à la même date",
+                Label(tr("\(TF.money(abs(difference), currency)) de \(difference > 0 ? tr("plus") : tr("moins")) que le mois dernier à la mê)me date",
                       systemImage: difference > 0 ? "arrow.up.right" : "arrow.down.right")
                     .font(.caption)
                     .foregroundStyle(difference > 0 ? Color(hex: Finances.overHex) : Color(hex: Finances.incomeHex))
@@ -141,10 +141,10 @@ struct FinancesAppView: View {
 
     private func heroDetail(state: BudgetState, spent: Double, now: Date) -> String {
         let days = BudgetMath.daysLeftInMonth(now)
-        let dayText = Fmt.plural(days, "jour", "jours")
-        if days <= 1 { return "\(TF.money(spent, currency)) dépensés · dernier jour du mois" }
-        guard BudgetMath.remaining(state, at: now) > 0 else { return "\(TF.money(spent, currency)) dépensés · \(dayText) avant la fin du mois" }
-        return "\(TF.money(spent, currency)) dépensés · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour pendant \(dayText)"
+        let dayText = Fmt.plural(days, tr("jour"), tr("jours"))
+        if days <= 1 { return tr("\(TF.money(spent, currency)) dépensés · dernier jour du mois") }
+        guard BudgetMath.remaining(state, at: now) > 0 else { return tr("\(TF.money(spent, currency)) dépensés · \(dayText) avant la fin du mois") }
+        return tr("\(TF.money(spent, currency)) dépensés · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour pendant \(dayText)")
     }
 
     // MARK: The month
@@ -159,13 +159,13 @@ struct FinancesAppView: View {
             NavigationLink(value: HomeRoute.page(.financesTrends)) {
                 HStack(spacing: 10) {
                     if earned > 0 {
-                        MiniStat(title: "Revenus", value: TF.money(earned, currency), detail: "ce mois-ci", colorHex: Finances.incomeHex)
+                        MiniStat(title: tr("Revenus"), value: TF.money(earned, currency), detail: tr("ce mois-ci"), colorHex: Finances.incomeHex)
                     } else if let expected {
-                        MiniStat(title: "Revenus", value: TF.money(expected, currency), detail: "prévus (Mes informations)")
+                        MiniStat(title: tr("Revenus"), value: TF.money(expected, currency), detail: tr("prévus (Mes informations)"))
                     }
-                    MiniStat(title: "Dépenses", value: TF.money(spent, currency), detail: "ce mois-ci")
+                    MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency), detail: tr("ce mois-ci"))
                     let balance = (earned > 0 ? earned : (expected ?? 0)) - spent
-                    MiniStat(title: "Solde", value: TF.money(balance, currency), detail: earned > 0 ? "jusqu'ici" : "estimé",
+                    MiniStat(title: tr("Solde"), value: TF.money(balance, currency), detail: earned > 0 ? tr("jusqu'ici") : tr("estimé"),
                              colorHex: balance < 0 ? Finances.overHex : Finances.incomeHex)
                 }
             }
@@ -181,14 +181,14 @@ struct FinancesAppView: View {
         let status = BudgetMath.categoryStatus(state, at: now).filter { $0.spent > 0 }
         if !status.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Catégories", detail: Fmt.monthYear(now).capitalizedFirst)
+                MiniSectionTitle(title: tr("Catégories"), detail: Fmt.monthYear(now).capitalizedFirst)
                 NavigationLink(value: HomeRoute.page(.financesCategories)) {
                     VStack(spacing: 12) {
                         ForEach(status.prefix(4)) { item in
                             CategoryBar(status: item, currency: currency)
                         }
                         HStack {
-                            Text(status.count > 4 ? "Les \(status.count) catégories" : "Détail des catégories")
+                            Text(status.count > 4 ? tr("Les \(status.count) catégories") : tr("Détail des catégories"))
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundStyle(Color(hex: accentHex))
                             Spacer()
@@ -210,7 +210,7 @@ struct FinancesAppView: View {
         let upcoming = BudgetMath.upcomingBills(state, at: now, within: 14)
         if !upcoming.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Factures à venir", detail: "\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours")
+                MiniSectionTitle(title: tr("Factures à venir"), detail: tr("\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours"))
                 NavigationLink(value: HomeRoute.page(.financesBills)) {
                     VStack(spacing: 0) {
                         ForEach(Array(upcoming.prefix(3).enumerated()), id: \.element.id) { index, item in
@@ -236,7 +236,7 @@ struct FinancesAppView: View {
     private func savings(state: BudgetState) -> some View {
         if !state.goals.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Épargne")
+                MiniSectionTitle(title: tr("Épargne"))
                 NavigationLink(value: HomeRoute.page(.financesSavings)) {
                     VStack(spacing: 14) {
                         ForEach(state.goals.prefix(2)) { goal in
@@ -256,30 +256,30 @@ struct FinancesAppView: View {
     private func more(state: BudgetState) -> some View {
         MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.financesTransactions)) {
-                MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: "Opérations", detail: "Dépenses et revenus, mois par mois")
+                MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Opérations"), detail: tr("Dépenses et revenus, mois par mois"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("finances-transactions")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.financesCategories)) {
-                MiniRow(symbol: "chart.pie.fill", colorHex: "8C6CFF", title: "Catégories", detail: "Répartition et limites", value: "\(state.categories.count)")
+                MiniRow(symbol: "chart.pie.fill", colorHex: "8C6CFF", title: tr("Catégories"), detail: tr("Répartition et limites"), value: "\(state.categories.count)")
             }
             .buttonStyle(.plain)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.financesBills)) {
-                MiniRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: "Factures et abonnements",
-                        detail: state.bills.isEmpty ? "Loyer, Internet, abonnements…" : "\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois")
+                MiniRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: tr("Factures et abonnements"),
+                        detail: state.bills.isEmpty ? tr("Loyer, Internet, abonnements…") : tr("\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois"))
             }
             .buttonStyle(.plain)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.financesSavings)) {
-                MiniRow(symbol: "banknote.fill", colorHex: Finances.incomeHex, title: "Épargne et comptes",
-                        detail: state.accounts.isEmpty ? "Objectifs et valeur nette" : "Valeur nette \(TF.money(BudgetMath.netWorth(state), currency))")
+                MiniRow(symbol: "banknote.fill", colorHex: Finances.incomeHex, title: tr("Épargne et comptes"),
+                        detail: state.accounts.isEmpty ? tr("Objectifs et valeur nette") : tr("Valeur nette \(TF.money(BudgetMath.netWorth(state), currency))"))
             }
             .buttonStyle(.plain)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.financesTrends)) {
-                MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: "Évolution", detail: "Six mois, moyennes et comparaisons")
+                MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Évolution"), detail: tr("Six mois, moyennes et comparaisons"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("finances-trends")
@@ -340,11 +340,11 @@ struct GoalProgressRow: View {
     }
 
     private var detail: String {
-        var parts = ["\(TF.money(goal.saved, currency)) sur \(TF.money(goal.target, currency))"]
+        var parts = [tr("\(TF.money(goal.saved, currency)) sur \(TF.money(goal.target, currency))")]
         if let monthly = BudgetMath.monthlyToReach(goal, at: Date()), let deadline = goal.deadline {
-            parts.append("\(TF.money(monthly, currency)) / mois d'ici \(Fmt.monthYear(deadline))")
+            parts.append(tr("\(TF.money(monthly, currency)) / mois d'ici \(Fmt.monthYear(deadline))"))
         } else if goal.saved >= goal.target {
-            parts.append("atteint")
+            parts.append(tr("atteint"))
         }
         return parts.joined(separator: " · ")
     }

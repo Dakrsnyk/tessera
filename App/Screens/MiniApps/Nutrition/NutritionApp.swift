@@ -43,13 +43,13 @@ struct NutritionAppView: View {
             if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
             if !state.entries.isEmpty { weekTrend(state: state, known: known) }
             more(state: state, known: known)
-            Text("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL).")
+            Text(tr("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL)."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             MiniAppSettingsSection(app: .nutrition)
         }
-        .navigationTitle("Nutrition")
+        .navigationTitle(tr("Nutrition"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { sheet in
             switch sheet {
@@ -67,12 +67,12 @@ struct NutritionAppView: View {
     private var actions: some View {
         HStack(spacing: 10) {
             if canScan {
-                MiniActionButton(title: "Scanner", symbol: "barcode.viewfinder", colorHex: accentHex) {
+                MiniActionButton(title: tr("Scanner"), symbol: "barcode.viewfinder", colorHex: accentHex) {
                     sheet = .scan(day)
                 }
                 .accessibilityIdentifier("nutrition-scan")
             }
-            MiniActionButton(title: canScan ? "Rechercher" : "Ajouter un aliment", symbol: canScan ? "magnifyingglass" : "plus", colorHex: accentHex, isProminent: !canScan) {
+            MiniActionButton(title: canScan ? tr("Rechercher") : tr("Ajouter un aliment"), symbol: canScan ? "magnifyingglass" : "plus", colorHex: accentHex, isProminent: !canScan) {
                 sheet = .search(nil, day)
             }
             .accessibilityIdentifier("nutrition-search")
@@ -83,7 +83,7 @@ struct NutritionAppView: View {
 
     private func meals(entries: [FoodEntry]) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Repas", detail: entries.isEmpty ? nil : Fmt.plural(entries.count, "aliment", "aliments"))
+            MiniSectionTitle(title: tr("Repas"), detail: entries.isEmpty ? nil : Fmt.plural(entries.count, tr("aliment"), tr("aliments")))
             MiniRowsCard {
                 ForEach(Array(MealType.allCases.enumerated()), id: \.element) { index, meal in
                     let items = entries.filter { $0.meal == meal }
@@ -92,8 +92,8 @@ struct NutritionAppView: View {
                         NavigationLink(value: HomeRoute.page(.nutritionMeal(meal, day))) {
                             MiniRow(
                                 symbol: meal.symbol, colorHex: accentHex, title: meal.title,
-                                detail: items.isEmpty ? "Rien noté" : items.map(\.food.name).joined(separator: ", "),
-                                value: items.isEmpty ? nil : "\(TF.int(kcal)) kcal"
+                                detail: items.isEmpty ? tr("Rien noté") : items.map(\.food.name).joined(separator: ", "),
+                                value: items.isEmpty ? nil : tr("\(TF.int(kcal)) kcal")
                             )
                         }
                         .buttonStyle(.plain)
@@ -107,7 +107,7 @@ struct NutritionAppView: View {
                                 .frame(width: 44, height: 44)
                         }
                         .buttonStyle(.plain)
-                        .accessibilityLabel(Text("Ajouter au \(meal.title.lowercased())"))
+                        .accessibilityLabel(Text(tr("Ajouter au \(meal.title.lowercased())")))
                     }
                     if index < MealType.allCases.count - 1 { MiniDivider() }
                 }
@@ -123,7 +123,7 @@ struct NutritionAppView: View {
             Button {
                 sheet = .goals
             } label: {
-                insightCard(symbol: "target", title: "Définis ton objectif du jour", message: "Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas.", action: "Définir")
+                insightCard(symbol: "target", title: tr("Définis ton objectif du jour"), message: tr("Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas."), action: tr("Définir"))
             }
             .buttonStyle(.plain)
         } else if hasEntries {
@@ -133,17 +133,17 @@ struct NutritionAppView: View {
                 NavigationLink(value: HomeRoute.page(.nutritionIdeas)) {
                     insightCard(
                         symbol: "lightbulb.fill",
-                        title: "Il te reste environ \(TF.int(left)) kcal",
-                        message: proteinLeft.map { $0 > 10 ? "Et \(TF.int($0)) g de protéines pour atteindre ton objectif." : "Tes protéines sont presque atteintes." } ?? "Des idées pour la suite de ta journée.",
-                        action: "Voir des idées"
+                        title: tr("Il te reste environ \(TF.int(left)) kcal"),
+                        message: proteinLeft.map { $0 > 10 ? tr("Et \(TF.int($0)) g de protéines pour atteindre ton objectif.") : tr("Tes protéines sont presque atteintes.") } ?? tr("Des idées pour la suite de ta journée."),
+                        action: tr("Voir des idées")
                     )
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("nutrition-insight")
             } else if left < -50 {
-                insightCard(symbol: "info.circle.fill", title: "Objectif dépassé de \(TF.int(-left)) kcal", message: "Rien de grave : c'est la moyenne sur plusieurs jours qui compte. L'historique te la montre.", action: nil)
+                insightCard(symbol: "info.circle.fill", title: tr("Objectif dépassé de \(TF.int(-left)) kcal"), message: tr("Rien de grave : c'est la moyenne sur plusieurs jours qui compte. L'historique te la montre."), action: nil)
             } else {
-                insightCard(symbol: "checkmark.seal.fill", title: "Objectif atteint", message: "Tu es dans ta cible de calories aujourd'hui.", action: nil)
+                insightCard(symbol: "checkmark.seal.fill", title: tr("Objectif atteint"), message: tr("Tu es dans ta cible de calories aujourd'hui."), action: nil)
             }
         }
     }
@@ -182,9 +182,9 @@ struct NutritionAppView: View {
         return NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("7 derniers jours").font(.headline)
+                    Text(tr("7 derniers jours")).font(.headline)
                     Spacer()
-                    Text("Historique")
+                    Text(tr("Historique"))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                     Image(systemName: "chevron.right")
@@ -204,10 +204,10 @@ struct NutritionAppView: View {
     }
 
     private func trendText(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets) -> String {
-        guard stats.trackedDays > 0 else { return "Rien de noté ces 7 derniers jours." }
-        let average = "Moyenne \(TF.int(stats.averages.kcal)) kcal"
-        guard known.kcal else { return "\(average) sur \(Fmt.plural(stats.trackedDays, "jour noté", "jours notés"))." }
-        return "\(average) · \(stats.daysOnTarget) jour\(stats.daysOnTarget > 1 ? "s" : "") sur \(stats.trackedDays) dans l'objectif"
+        guard stats.trackedDays > 0 else { return tr("Rien de noté ces 7 derniers jours.") }
+        let average = tr("Moyenne \(TF.int(stats.averages.kcal)) kcal")
+        guard known.kcal else { return tr("\(average) sur \(Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours not)és")))." }
+        return tr("\(average) · \(stats.daysOnTarget) jour\(stats.daysOnTarget > 1 ? "s" : "") sur \(stats.trackedDays) dans l'objectif")
     }
 
     // MARK: More
@@ -215,7 +215,7 @@ struct NutritionAppView: View {
     private func more(state: NutritionState, known: NutritionTiles.Targets) -> some View {
         MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.nutritionSavedMeals)) {
-                MiniRow(symbol: "bookmark.fill", colorHex: accentHex, title: "Mes repas", detail: "Des repas enregistrés, à reprendre d'une touche", value: state.savedMeals.isEmpty ? nil : "\(state.savedMeals.count)")
+                MiniRow(symbol: "bookmark.fill", colorHex: accentHex, title: tr("Mes repas"), detail: tr("Des repas enregistrés, à reprendre d'une touche"), value: state.savedMeals.isEmpty ? nil : "\(state.savedMeals.count)")
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("nutrition-saved")
@@ -223,13 +223,13 @@ struct NutritionAppView: View {
             Button {
                 sheet = .goals
             } label: {
-                MiniRow(symbol: "target", colorHex: accentHex, title: "Objectifs", detail: known.kcal ? "\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g de protéines" : "À définir")
+                MiniRow(symbol: "target", colorHex: accentHex, title: tr("Objectifs"), detail: known.kcal ? tr("\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g de protéines") : tr("À définir"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("nutrition-goals")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
-                MiniRow(symbol: "chart.bar.xaxis", colorHex: accentHex, title: "Historique", detail: "Moyennes, tendances et poids")
+                MiniRow(symbol: "chart.bar.xaxis", colorHex: accentHex, title: tr("Historique"), detail: tr("Moyennes, tendances et poids"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("nutrition-history")
@@ -259,7 +259,7 @@ struct CalorieHero: View {
                             .font(.system(size: 30, weight: .bold, design: .rounded))
                             .monospacedDigit()
                             .contentTransition(.numericText())
-                        Text(known.kcal ? (left >= 0 ? "kcal restantes" : "kcal en trop") : "kcal mangées")
+                        Text(known.kcal ? (left >= 0 ? tr("kcal restantes") : tr("kcal en trop")) : tr("kcal mangées"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -268,12 +268,12 @@ struct CalorieHero: View {
                 }
                 .frame(width: 150, height: 150)
                 VStack(alignment: .leading, spacing: 12) {
-                    figure("Mangé", "\(TF.int(totals.kcal)) kcal")
+                    figure(tr("Mangé"), tr("\(TF.int(totals.kcal)) kcal"))
                     if known.kcal {
-                        figure("Objectif", "\(TF.int(goals.kcal)) kcal")
-                        figure(left >= 0 ? "Restant" : "Dépassé", "\(TF.int(abs(left))) kcal", color: left >= 0 ? nil : Color(hex: "E5484D"))
+                        figure(tr("Objectif"), tr("\(TF.int(goals.kcal)) kcal"))
+                        figure(left >= 0 ? tr("Restant") : tr("Dépassé"), tr("\(TF.int(abs(left))) kcal"), color: left >= 0 ? nil : Color(hex: "E5484D"))
                     } else {
-                        Text("Pas encore d'objectif : ajoute-le dans Objectifs.")
+                        Text(tr("Pas encore d'objectif : ajoute-le dans Objectifs."))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
@@ -282,19 +282,19 @@ struct CalorieHero: View {
                 Spacer(minLength: 0)
             }
             HStack(spacing: 12) {
-                MacroGauge(name: "Protéines", eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: "E5484D")
-                MacroGauge(name: "Glucides", eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: "F2A33A")
-                MacroGauge(name: "Lipides", eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: "3366FF")
+                MacroGauge(name: tr("Protéines"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: "E5484D")
+                MacroGauge(name: tr("Glucides"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: "F2A33A")
+                MacroGauge(name: tr("Lipides"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: "3366FF")
             }
             NavigationLink(value: HomeRoute.page(.nutritionNutrients(day))) {
                 HStack {
-                    Text("Fibres \(TF.int(totals.fiber)) g\(totals.sugars.map { " · sucres \(TF.int($0)) g" } ?? "")\(totals.sodiumMg.map { " · sodium \(TF.int($0)) mg" } ?? "")")
+                    Text(tr("Fibres \(TF.int(totals.fiber)) g\(totals.sugars.map { tr(" · sucres \(TF.int($0)) g") } ?? "")\(totals.sodiumMg.map { tr(" · sodium \(TF.int($0)) mg") }) ?? "")")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                     Spacer(minLength: 4)
-                    Text("Tous les nutriments")
+                    Text(tr("Tous les nutriments"))
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(accent)
                     Image(systemName: "chevron.right")
@@ -380,6 +380,6 @@ struct WeekBars: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Calories des 7 derniers jours"))
+        .accessibilityLabel(Text(tr("Calories des 7 derniers jours")))
     }
 }

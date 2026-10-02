@@ -20,16 +20,16 @@ struct TasksWidgetView: View {
                     WLabel(text: context.design.name, style: s)
                     Spacer()
                     if s.showsDetails, !content.tasks.isEmpty {
-                        Text(openCount == 0 ? "Terminé" : "\(openCount) à faire")
+                        Text(openCount == 0 ? tr("Terminé") : tr("\(openCount) à faire"))
                             .font(s.text(11, .semibold))
                             .foregroundStyle(s.accent)
                     }
                 }
             }
             if content.tasks.isEmpty {
-                WidgetMessage(symbol: "plus.circle", title: "Aucune tâche", message: "Ajoute-les dans Tessera", style: s)
+                WidgetMessage(symbol: "plus.circle", title: tr("Aucune tâche"), message: tr("Ajoute-les dans Tessera"), style: s)
             } else if visible.isEmpty {
-                WidgetMessage(symbol: "checkmark.circle", title: "Tout est fait", message: context.isSmall ? nil : "Belle journée.", style: s)
+                WidgetMessage(symbol: "checkmark.circle", title: tr("Tout est fait"), message: context.isSmall ? nil : tr("Belle journée."), style: s)
             } else {
                 ForEach(visible.prefix(limit)) { task in
                     IntentButton(intent: ToggleTaskIntent(taskID: task.id), isEnabled: context.isInteractive) {
@@ -51,7 +51,7 @@ struct TasksWidgetView: View {
                 if visible.count > limit {
                     let hidden = visible.dropFirst(limit)
                     let hiddenOpen = hidden.filter { !$0.isDone }.count
-                    Text(hiddenOpen > 0 ? "+ \(hiddenOpen) à faire" : "+ \(Fmt.plural(hidden.count, "terminée", "terminées"))")
+                    Text(hiddenOpen > 0 ? tr("+ \(hiddenOpen) à faire") : "+ \(Fmt.plural(hidden.count, tr("terminée"), tr("terminées")))")
                         .font(s.text(11))
                         .foregroundStyle(s.secondary)
                 }
@@ -85,7 +85,7 @@ struct HabitsWidgetView: View {
                 }
             }
             if habits.isEmpty {
-                WidgetMessage(symbol: "repeat", title: "Aucune habitude", message: "Crée-les dans Tessera", style: s)
+                WidgetMessage(symbol: "repeat", title: tr("Aucune habitude"), message: tr("Crée-les dans Tessera"), style: s)
             } else if context.isSmall {
                 smallGrid(Array(habits.prefix(4)))
             } else {
@@ -125,7 +125,7 @@ struct HabitsWidgetView: View {
             }
             .frame(width: size, height: size)
         }
-        .accessibilityLabel(Text("\(habit.name), \(done ? "fait" : "à faire")"))
+        .accessibilityLabel(Text("\(habit.name), \(done ? tr("fait") : tr("à faire"))"))
     }
 
     private func habitRow(_ habit: Habit) -> some View {
@@ -141,7 +141,7 @@ struct HabitsWidgetView: View {
                     .foregroundStyle(s.primary)
                     .lineLimit(1)
                 if s.showsDetails {
-                    Text(streak > 0 ? "Série de \(streak) j" : "Pas encore de série")
+                    Text(streak > 0 ? tr("Série de \(streak) j") : tr("Pas encore de série"))
                         .font(s.text(11))
                         .foregroundStyle(s.secondary)
                 }
@@ -177,10 +177,10 @@ struct FocusWidgetView: View {
             let range = start...max(end, start.addingTimeInterval(1))
             VStack(alignment: s.horizontalAlignment, spacing: 6) {
                 HStack {
-                    WLabel(text: "Focus", style: s, color: s.accent)
+                    WLabel(text: tr("Focus"), style: s, color: s.accent)
                     Spacer()
                     if !context.isSmall {
-                        Text("Fin à \(Fmt.time(end, uses24Hour: context.settings.uses24HourClock))")
+                        Text(tr("Fin à \(Fmt.time(end, uses24Hour: context.settings.uses24HourClock))"))
                             .font(s.text(11))
                             .foregroundStyle(s.secondary)
                     }
@@ -196,7 +196,7 @@ struct FocusWidgetView: View {
                     .progressViewStyle(.linear)
                     .tint(s.accent)
                 IntentButton(intent: StopFocusIntent(), isEnabled: context.isInteractive) {
-                    Label("Arrêter", systemImage: "stop.fill")
+                    Label(tr("Arrêter"), systemImage: "stop.fill")
                         .font(s.text(12, .semibold))
                         .foregroundStyle(s.secondary)
                         .padding(.top, 2)
@@ -206,13 +206,13 @@ struct FocusWidgetView: View {
         } else {
             let finished = focus.hasJustFinished(at: context.date)
             VStack(alignment: .leading, spacing: 8) {
-                WLabel(text: "Focus", style: s, color: s.accent)
-                Text(finished ? "Session terminée" : "Prêt à te concentrer ?")
+                WLabel(text: tr("Focus"), style: s, color: s.accent)
+                Text(finished ? tr("Session terminée") : tr("Prêt à te concentrer ?"))
                     .font(s.text(context.isSmall ? 15 : 17, s.titleWeight))
                     .foregroundStyle(s.primary)
                     .lineLimit(2)
                 if !context.isSmall, s.showsDetails {
-                    Text(finished ? "Prends une vraie pause avant la suivante." : "Lance une session, le minuteur défile ici.")
+                    Text(finished ? tr("Prends une vraie pause avant la suivante.") : tr("Lance une session, le minuteur défile ici."))
                         .font(s.text(12))
                         .foregroundStyle(s.secondary)
                 }
@@ -220,7 +220,7 @@ struct FocusWidgetView: View {
                 HStack(spacing: 6) {
                     ForEach(context.isSmall ? [25, 50] : [15, 25, 50], id: \.self) { minutes in
                         IntentButton(intent: StartFocusIntent(minutes: minutes), isEnabled: context.isInteractive) {
-                            Text("\(minutes) min")
+                            Text(tr("\(minutes) min"))
                                 .font(s.text(12, .semibold))
                                 .foregroundStyle(s.onAccent)
                                 .lineLimit(1)
@@ -245,16 +245,16 @@ struct UpNextWidgetView: View {
         let s = context.style
         switch context.payload.events {
         case .needsAccess:
-            WidgetMessage(symbol: "calendar.badge.exclamationmark", title: "Accès au calendrier", message: "Touche pour l'autoriser dans Tessera", style: s)
+            WidgetMessage(symbol: "calendar.badge.exclamationmark", title: tr("Accès au calendrier"), message: tr("Touche pour l'autoriser dans Tessera"), style: s)
         case let .ready(events):
             if events.isEmpty {
                 VStack(alignment: .leading, spacing: 4) {
-                    WLabel(text: "À venir", style: s, color: s.accent)
+                    WLabel(text: tr("À venir"), style: s, color: s.accent)
                     Spacer(minLength: 0)
-                    Text("Rien de prévu")
+                    Text(tr("Rien de prévu"))
                         .font(s.text(17, s.titleWeight))
                         .foregroundStyle(s.primary)
-                    Text("pour les prochaines 48 h")
+                    Text(tr("pour les prochaines 48 h"))
                         .font(s.text(12))
                         .foregroundStyle(s.secondary)
                 }
@@ -268,7 +268,7 @@ struct UpNextWidgetView: View {
     }
 
     private func timeRange(_ event: EventSnapshot) -> String {
-        if event.isAllDay { return "Toute la journée" }
+        if event.isAllDay { return tr("Toute la journée") }
         let uses24 = context.settings.uses24HourClock
         return "\(Fmt.time(event.start, uses24Hour: uses24)) – \(Fmt.time(event.end, uses24Hour: uses24))"
     }
@@ -276,8 +276,8 @@ struct UpNextWidgetView: View {
     private func dayLabel(_ date: Date) -> String {
         let delta = DateMath.daysBetween(context.date, date)
         switch delta {
-        case ...0: return "Aujourd'hui"
-        case 1: return "Demain"
+        case ...0: return tr("Aujourd'hui")
+        case 1: return tr("Demain")
         default: return Fmt.weekday(date)
         }
     }
@@ -285,7 +285,7 @@ struct UpNextWidgetView: View {
     private func nextEvent(_ event: EventSnapshot) -> some View {
         let s = context.style
         return VStack(alignment: .leading, spacing: 4) {
-            WLabel(text: event.isOngoing(at: context.date) ? "En cours" : dayLabel(event.start), style: s, color: s.accent)
+            WLabel(text: event.isOngoing(at: context.date) ? tr("En cours") : dayLabel(event.start), style: s, color: s.accent)
             Spacer(minLength: 0)
             HStack(alignment: .top, spacing: 8) {
                 RoundedRectangle(cornerRadius: 2).fill(Color(hex: event.colorHex)).frame(width: 4)
@@ -302,7 +302,7 @@ struct UpNextWidgetView: View {
             .fixedSize(horizontal: false, vertical: true)
             if s.showsDetails, !event.isAllDay, event.start > context.date {
                 HStack(spacing: 3) {
-                    Text("Dans")
+                    Text(tr("Dans"))
                     Text(event.start, style: .relative)
                 }
                 .font(s.text(12, .semibold))
@@ -318,7 +318,7 @@ struct UpNextWidgetView: View {
         let limit = context.isMedium ? 3 : 7
         let shown = Array(events.prefix(limit))
         return VStack(alignment: .leading, spacing: context.isLarge ? 10 : 7) {
-            WLabel(text: "À venir", style: s, color: s.accent)
+            WLabel(text: tr("À venir"), style: s, color: s.accent)
             ForEach(Array(shown.enumerated()), id: \.element.id) { pair in
                 let event = pair.element
                 let previous = pair.offset > 0 ? shown[pair.offset - 1] : nil
@@ -342,7 +342,7 @@ struct UpNextWidgetView: View {
                     }
                     Spacer(minLength: 0)
                     if event.isOngoing(at: context.date) {
-                        Text("En cours")
+                        Text(tr("En cours"))
                             .font(s.text(10, .semibold))
                             .foregroundStyle(s.onAccent)
                             .padding(.horizontal, 6)
@@ -376,7 +376,7 @@ struct NoteWidgetView: View {
                 if s.showsTitle, !title.isEmpty {
                     WLabel(text: title, style: s, color: s.accent)
                 }
-                Text(text.isEmpty ? "Écris ta note dans Tessera" : text)
+                Text(text.isEmpty ? tr("Écris ta note dans Tessera") : text)
                     .font(s.text(size, s.titleWeight))
                     .foregroundStyle(text.isEmpty ? s.secondary : s.primary)
                     .multilineTextAlignment(s.textAlignment)

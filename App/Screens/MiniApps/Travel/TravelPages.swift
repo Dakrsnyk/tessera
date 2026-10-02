@@ -16,12 +16,12 @@ struct TravelProgramPage: View {
                 let days = TravelMath.program(state, for: trip)
                 MiniAppScroll {
                     HStack(spacing: 8) {
-                        addButton("Vol", symbol: "airplane") { sheet = .flight(Flight(number: "", from: "", to: "", departure: trip.start)) }
-                        addButton("Hébergement", symbol: "bed.double.fill") { sheet = .stay(Stay(name: "", checkIn: trip.start, checkOut: trip.end)) }
-                        addButton("Activité", symbol: "mappin.and.ellipse") { sheet = .activity(TripActivity(title: "", date: max(trip.start, Date()))) }
+                        addButton(tr("Vol"), symbol: "airplane") { sheet = .flight(Flight(number: "", from: "", to: "", departure: trip.start)) }
+                        addButton(tr("Hébergement"), symbol: "bed.double.fill") { sheet = .stay(Stay(name: "", checkIn: trip.start, checkOut: trip.end)) }
+                        addButton(tr("Activité"), symbol: "mappin.and.ellipse") { sheet = .activity(TripActivity(title: "", date: max(trip.start, Date()))) }
                     }
                     if days.isEmpty {
-                        Text("Rien au programme pour l'instant. Ajoute tes vols, ton hébergement et ce que tu veux faire : tout se range ici jour par jour.")
+                        Text(tr("Rien au programme pour l'instant. Ajoute tes vols, ton hébergement et ce que tu veux faire : tout se range ici jour par jour."))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .card(padding: 14)
@@ -30,9 +30,9 @@ struct TravelProgramPage: View {
                         dayCard(day, trip: trip, state: state)
                     }
                 }
-                .navigationTitle("Programme")
+                .navigationTitle(tr("Programme"))
             } else {
-                ContentUnavailableView("Voyage introuvable", systemImage: "airplane")
+                ContentUnavailableView(tr("Voyage introuvable"), systemImage: "airplane")
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -50,7 +50,7 @@ struct TravelProgramPage: View {
             .background(Color(hex: Travel.accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(Text("Ajouter : \(title)"))
+        .accessibilityLabel(Text(tr("Ajouter : \(title)")))
     }
 
     private func dayCard(_ day: TravelMath.ProgramDay, trip: Trip, state: TravelState) -> some View {
@@ -60,7 +60,7 @@ struct TravelProgramPage: View {
                 Text(Fmt.longDay(day.day).capitalizedFirst).font(.headline)
                 Spacer()
                 if number >= 1 {
-                    Text("Jour \(number)").font(.caption.weight(.semibold)).foregroundStyle(Color(hex: Travel.accentHex))
+                    Text(tr("Jour \(number)")).font(.caption.weight(.semibold)).foregroundStyle(Color(hex: Travel.accentHex))
                 }
             }
             MiniRowsCard {
@@ -119,7 +119,7 @@ struct TravelBudgetPage: View {
                 let expenses = state.expenses.filter { $0.tripID == trip.id }.sorted { $0.date > $1.date }
                 MiniAppScroll {
                     summary(trip: trip, spending: spending)
-                    MiniActionButton(title: "Ajouter une dépense", symbol: "plus", colorHex: Travel.accentHex) {
+                    MiniActionButton(title: tr("Ajouter une dépense"), symbol: "plus", colorHex: Travel.accentHex) {
                         sheet = .expense(TripExpense(tripID: trip.id, amount: 0, currencyCode: TravelMath.isOngoing(trip, at: Date()) ? trip.currencyCode : currency))
                     }
                     .accessibilityIdentifier("trip-expense-new")
@@ -128,7 +128,7 @@ struct TravelBudgetPage: View {
                     }
                     if !expenses.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
-                            MiniSectionTitle(title: "Dépenses", detail: "\(expenses.count)")
+                            MiniSectionTitle(title: tr("Dépenses"), detail: "\(expenses.count)")
                             MiniRowsCard {
                                 ForEach(Array(expenses.enumerated()), id: \.element.id) { index, expense in
                                     if index > 0 { MiniDivider() }
@@ -143,9 +143,9 @@ struct TravelBudgetPage: View {
                         }
                     }
                 }
-                .navigationTitle("Budget · \(trip.destination)")
+                .navigationTitle(tr("Budget · \(trip.destination)"))
             } else {
-                ContentUnavailableView("Voyage introuvable", systemImage: "airplane")
+                ContentUnavailableView(tr("Voyage introuvable"), systemImage: "airplane")
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -155,24 +155,24 @@ struct TravelBudgetPage: View {
 
     private func summary(trip: Trip, spending: TravelMath.Spending) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Dépensé").font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+            Text(tr("Dépensé")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
             Text(TF.money(spending.total, currency)).font(.system(size: 38, weight: .bold, design: .rounded)).monospacedDigit()
             if let budget = trip.budget, budget > 0 {
                 ProgressView(value: min(1, spending.total / budget)).tint(spending.total > budget ? Color(hex: "E5484D") : Color(hex: Travel.accentHex))
-                Text(spending.total > budget ? "Dépassé de \(TF.money(spending.total - budget, currency)) sur \(TF.money(budget, currency))" : "Il reste \(TF.money(budget - spending.total, currency)) sur \(TF.money(budget, currency))")
+                Text(spending.total > budget ? tr("Dépassé de \(TF.money(spending.total - budget, currency)) sur \(TF.money(budget, currency))") : tr("Il reste \(TF.money(budget - spending.total, currency)) sur \(TF.money(budget, currency))"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 let days = TravelMath.tripDay(trip, at: Date())
                 if TravelMath.isOngoing(trip, at: Date()), budget > spending.total {
-                    Text("Soit \(TF.money((budget - spending.total) / Double(max(1, days.total - days.day + 1)), currency)) par jour jusqu'au retour")
+                    Text(tr("Soit \(TF.money((budget - spending.total) / Double(max(1, days.total - days.day + 1)), currency)) par jour jusqu'au retour"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
             HStack {
-                Text("Budget du voyage").font(.subheadline)
+                Text(tr("Budget du voyage")).font(.subheadline)
                 Spacer()
-                TextField("Montant", text: $budgetText)
+                TextField(tr("Montant"), text: $budgetText)
                     .keyboardType(.decimalPad)
                     .multilineTextAlignment(.trailing)
                     .frame(maxWidth: 120)
@@ -182,11 +182,11 @@ struct TravelBudgetPage: View {
             }
             .padding(.top, 4)
             if !spending.unconverted.isEmpty {
-                Text("Non converti (taux indisponible) : \(spending.unconverted.map { Fmt.money($0.value, currency: $0.key) }.sorted().joined(separator: ", ")).")
+                Text(tr("Non converti (taux indisponible) : \(spending.unconverted.map { Fmt.money($0.value, currency: $0.key) }.sorted().joined(separator: ", "))."))
                     .font(.caption)
                     .foregroundStyle(.orange)
             } else if trip.currencyCode != currency {
-                Text("Montants en \(trip.currencyCode) convertis au taux de référence de la BCE.").font(.caption2).foregroundStyle(.tertiary)
+                Text(tr("Montants en \(trip.currencyCode) convertis au taux de référence de la BCE.")).font(.caption2).foregroundStyle(.tertiary)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -207,7 +207,7 @@ struct TravelBudgetPage: View {
     private func byKind(_ spending: TravelMath.Spending) -> some View {
         let shares = spending.byKind.map { KindShare(kind: $0.key, amount: $0.value) }.sorted { $0.amount > $1.amount }
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Par type")
+            MiniSectionTitle(title: tr("Par type"))
             HStack(spacing: 16) {
                 Chart(shares) { share in
                     SectorMark(angle: .value("Montant", share.amount), innerRadius: .ratio(0.6), angularInset: 1.5)
@@ -245,7 +245,7 @@ struct TravelChecklistPage: View {
             Section {
                 HStack(spacing: 12) {
                     Image(systemName: "plus.circle.fill").font(.title3).foregroundStyle(Color(hex: Travel.accentHex))
-                    TextField("Ajouter (maillot, cadeaux…)", text: $newItem)
+                    TextField(tr("Ajouter (maillot, cadeaux…)"), text: $newItem)
                         .submitLabel(.done)
                         .onSubmit(add)
                         .accessibilityIdentifier("checklist-add")
@@ -274,7 +274,7 @@ struct TravelChecklistPage: View {
                         model.update(\.travel) { $0.checklist.removeAll { ids.contains($0.id) } }
                     }
                 } header: {
-                    Text("\(items.filter(\.isDone).count) sur \(items.count) prêts")
+                    Text(tr("\(items.filter(\.isDone).count) sur \(items.count) prêts"))
                 }
             }
             Section {
@@ -282,16 +282,16 @@ struct TravelChecklistPage: View {
                     let abroad = trip.map { $0.currencyCode != model.settings.currencyCode || TravelMath.offsetHours($0.timeZone, at: $0.start) != 0 } ?? true
                     model.update(\.travel) { $0.addEssentials(to: tripID, abroad: abroad) }
                 } label: {
-                    Label("Ajouter l'essentiel à emporter", systemImage: "sparkles")
+                    Label(tr("Ajouter l'essentiel à emporter"), systemImage: "sparkles")
                 }
                 .accessibilityIdentifier("checklist-essentials")
             } footer: {
-                Text("Ajoute les incontournables (passeport, chargeur, assurance…) sans doublon ; retire ceux qui ne te servent pas en glissant.")
+                Text(tr("Ajoute les incontournables (passeport, chargeur, assurance…) sans doublon ; retire ceux qui ne te servent pas en glissant."))
             }
         }
         .styledList()
         .tint(Color(hex: Travel.accentHex))
-        .navigationTitle("À ne pas oublier")
+        .navigationTitle(tr("À ne pas oublier"))
         .navigationBarTitleDisplayMode(.inline)
     }
 

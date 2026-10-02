@@ -86,8 +86,8 @@ struct WidgetStudio: View {
     }
 
     private var title: String {
-        if !isNew { return "Studio" }
-        return designs.count > 1 ? "Nouveaux widgets" : "Nouveau widget"
+        if !isNew { return tr("Studio") }
+        return designs.count > 1 ? tr("Nouveaux widgets") : tr("Nouveau widget")
     }
 
     // The body is split in parts so each is type-checked on its own.
@@ -134,13 +134,13 @@ struct WidgetStudio: View {
 
     private func dialogs<Content: View>(_ content: Content) -> some View {
         content
-            .confirmationDialog("Abandonner les modifications ?", isPresented: $confirmDiscard, titleVisibility: .visible) {
-                Button("Abandonner", role: .destructive) { onClose() }
+            .confirmationDialog(tr("Abandonner les modifications ?"), isPresented: $confirmDiscard, titleVisibility: .visible) {
+                Button(tr("Abandonner"), role: .destructive) { onClose() }
             }
-            .confirmationDialog("Supprimer ce widget ?", isPresented: $confirmDelete, titleVisibility: .visible) {
-                Button("Supprimer", role: .destructive, action: deleteDesign)
+            .confirmationDialog(tr("Supprimer ce widget ?"), isPresented: $confirmDelete, titleVisibility: .visible) {
+                Button(tr("Supprimer"), role: .destructive, action: deleteDesign)
             } message: {
-                Text("Les widgets qui l'affichent reviendront au modèle par défaut.")
+                Text(tr("Les widgets qui l'affichent reviendront au modèle par défaut."))
             }
             .sheet(isPresented: $showsPaywall) { PaywallView() }
     }
@@ -193,7 +193,7 @@ struct WidgetStudio: View {
     @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
         if !isPushed {
             ToolbarItem(placement: .cancellationAction) {
-                Button("Annuler") {
+                Button(tr("Annuler")) {
                     if hasChanges && !isNew { confirmDiscard = true } else { onClose() }
                 }
             }
@@ -203,13 +203,13 @@ struct WidgetStudio: View {
                 Image(systemName: "arrow.uturn.backward")
             }
             .disabled(past.isEmpty)
-            .accessibilityLabel(Text("Retour en arrière"))
+            .accessibilityLabel(Text(tr("Retour en arrière")))
             .accessibilityIdentifier("studio-undo")
             Button(action: redo) {
                 Image(systemName: "arrow.uturn.forward")
             }
             .disabled(future.isEmpty)
-            .accessibilityLabel(Text("Retour en avant"))
+            .accessibilityLabel(Text(tr("Retour en avant")))
             .accessibilityIdentifier("studio-redo")
         }
     }
@@ -239,15 +239,15 @@ struct WidgetStudio: View {
                 }
                 .id(pair.element.id)
                 .accessibilityIdentifier("studio-widget-\(pair.offset + 1)")
-                .accessibilityLabel(Text("Widget \(pair.offset + 1) sur \(designs.count) : \(pair.element.name)"))
+                .accessibilityLabel(Text(tr("Widget \(pair.offset + 1) sur \(designs.count) : \(pair.element.name)")))
             }
             Rectangle().fill(Color.secondary.opacity(0.3)).frame(width: 1, height: 24)
-            FilterChip(title: "Même style", symbol: sharesLook ? "link" : "link.badge.plus", isSelected: sharesLook) {
+            FilterChip(title: tr("Même style"), symbol: sharesLook ? "link" : "link.badge.plus", isSelected: sharesLook) {
                 Haptics.tap()
                 sharesLook.toggle()
             }
             .accessibilityIdentifier("studio-share-look")
-            .accessibilityHint(Text("Le thème, les couleurs, le fond et la bordure vont à tous les widgets"))
+            .accessibilityHint(Text(tr("Le thème, les couleurs, le fond et la bordure vont à tous les widgets")))
         }
     }
 
@@ -275,7 +275,7 @@ struct WidgetStudio: View {
         switch section {
         case .content:
             if !model.hasOwnData(for: design) && !design.dataItems.isEmpty {
-                Text("Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes.")
+                Text(tr("Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -302,7 +302,7 @@ struct WidgetStudio: View {
         case .background:
             backgroundSection
             textureSection
-            StudioNote(text: "iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Tessera propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Tessera.")
+            StudioNote(text: tr("iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Tessera propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Tessera."))
         case .border:
             StudioBorderPanel(design: edited)
         case .chart:
@@ -322,7 +322,7 @@ struct WidgetStudio: View {
                 .foregroundStyle(Color.premiumInk)
                 .font(.headline)
             VStack(alignment: .leading, spacing: 4) {
-                Text("Ce widget utilise Premium")
+                Text(tr("Ce widget utilise Premium"))
                     .font(.subheadline.weight(.semibold))
                 Text(design.premiumFeatures.joined(separator: " · "))
                     .font(.footnote)
@@ -330,7 +330,7 @@ struct WidgetStudio: View {
             }
             Spacer(minLength: 0)
             Button { showsPaywall = true } label: {
-                Text("Débloquer").foregroundStyle(.onAccent)
+                Text(tr("Débloquer")).foregroundStyle(.onAccent)
             }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
@@ -340,8 +340,8 @@ struct WidgetStudio: View {
     }
 
     private var nameSection: some View {
-        EditorSection(title: "Nom") {
-            TextField("Nom du widget", text: edited.name)
+        EditorSection(title: tr("Nom")) {
+            TextField(tr("Nom du widget"), text: edited.name)
                 .accessibilityIdentifier("widget-name")
                 .textInputAutocapitalization(.sentences)
                 .submitLabel(.done)
@@ -351,14 +351,14 @@ struct WidgetStudio: View {
     }
 
     private var backgroundSection: some View {
-        EditorSection(title: "Fond", isPremium: !model.isPremium) {
+        EditorSection(title: tr("Fond"), isPremium: !model.isPremium) {
             VStack(alignment: .leading, spacing: 14) {
-                Picker("Fond", selection: $backgroundTab) {
-                    Text("Style").tag(BackgroundKind.theme)
-                    Text("Couleur").tag(BackgroundKind.color)
-                    Text("Dégradé").tag(BackgroundKind.gradient)
-                    Text("Verre").tag(BackgroundKind.glass)
-                    Text("Photo").tag(BackgroundKind.photo)
+                Picker(tr("Fond"), selection: $backgroundTab) {
+                    Text(tr("Style")).tag(BackgroundKind.theme)
+                    Text(tr("Couleur")).tag(BackgroundKind.color)
+                    Text(tr("Dégradé")).tag(BackgroundKind.gradient)
+                    Text(tr("Verre")).tag(BackgroundKind.glass)
+                    Text(tr("Photo")).tag(BackgroundKind.photo)
                 }
                 .pickerStyle(.segmented)
                 .onChange(of: backgroundTab) { _, tab in
@@ -382,7 +382,7 @@ struct WidgetStudio: View {
                             .accessibilityLabel(Text(swatch.name))
                         }
                     }
-                    ColorPicker("Autre couleur", selection: Binding(
+                    ColorPicker(tr("Autre couleur"), selection: Binding(
                         get: {
                             if case let .color(hex) = design.background { return Color(hex: hex) }
                             return Color(hex: Palette.backgrounds[0].hex)
@@ -393,18 +393,18 @@ struct WidgetStudio: View {
                 case .gradient:
                     gradientSettings
                 case .glass:
-                    Text("Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter.")
+                    Text(tr("Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 case .theme:
-                    Text("Le fond du style choisi, clair ou sombre selon le style.")
+                    Text(tr("Le fond du style choisi, clair ou sombre selon le style."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 case .photo:
                     PhotosPicker(selection: $photoItem, matching: .images, photoLibrary: .shared()) {
                         HStack {
                             Image(systemName: "photo.on.rectangle")
-                            Text(BackgroundKind(design.background) == .photo ? "Changer de photo" : "Choisir une photo")
+                            Text(BackgroundKind(design.background) == .photo ? tr("Changer de photo") : tr("Choisir une photo"))
                             Spacer()
                             if isImportingPhoto { ProgressView() }
                         }
@@ -414,12 +414,12 @@ struct WidgetStudio: View {
                     }
                     .buttonStyle(.plain)
                     if case .photo = design.background {
-                        StudioSlider(title: "Voile pour la lisibilité", value: Binding(
+                        StudioSlider(title: tr("Voile pour la lisibilité"), value: Binding(
                             get: { design.style.veil ?? 0.28 },
                             set: { designs[index].style.veil = $0 }
                         ), range: 0...0.75)
                     }
-                    StudioNote(text: "La photo est réduite pour tenir dans la mémoire limitée des widgets.")
+                    StudioNote(text: tr("La photo est réduite pour tenir dans la mémoire limitée des widgets."))
                 }
             }
         }
@@ -427,7 +427,7 @@ struct WidgetStudio: View {
 
     /// Automatic (from the main color) or the person's own: two colors, a direction and an intensity.
     @ViewBuilder private var gradientSettings: some View {
-        Toggle("Mon propre dégradé", isOn: Binding(
+        Toggle(tr("Mon propre dégradé"), isOn: Binding(
             get: { design.style.gradient != nil },
             set: { isOn in
                 designs[index].style.gradient = isOn
@@ -438,11 +438,11 @@ struct WidgetStudio: View {
         .font(.subheadline)
         if let spec = design.style.gradient {
             HStack(spacing: 16) {
-                ColorPicker("Couleur 1", selection: Binding(
+                ColorPicker(tr("Couleur 1"), selection: Binding(
                     get: { Color(hex: spec.startHex) },
                     set: { designs[index].style.gradient?.startHex = $0.hexString }
                 ), supportsOpacity: false)
-                ColorPicker("Couleur 2", selection: Binding(
+                ColorPicker(tr("Couleur 2"), selection: Binding(
                     get: { Color(hex: spec.endHex) },
                     set: { designs[index].style.gradient?.endHex = $0.hexString }
                 ), supportsOpacity: false)
@@ -454,7 +454,7 @@ struct WidgetStudio: View {
                 title: \.title,
                 symbol: { $0.symbol }
             )
-            StudioSlider(title: "Intensité", value: Binding(
+            StudioSlider(title: tr("Intensité"), value: Binding(
                 get: { spec.intensity },
                 set: { designs[index].style.gradient?.intensity = $0 }
             ), range: 0.1...1)
@@ -468,11 +468,11 @@ struct WidgetStudio: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel(Text("Dégradé"))
+                    .accessibilityLabel(Text(tr("Dégradé")))
                 }
             }
         } else {
-            Text("Le dégradé suit la couleur principale.")
+            Text(tr("Le dégradé suit la couleur principale."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
@@ -485,11 +485,11 @@ struct WidgetStudio: View {
     ]
 
     private var textureSection: some View {
-        EditorSection(title: "Texture", isPremium: !model.isPremium) {
+        EditorSection(title: tr("Texture"), isPremium: !model.isPremium) {
             VStack(alignment: .leading, spacing: 12) {
                 StudioChoices(options: TextureKind.allCases, selection: edited.style.texture, title: \.title, identifier: { "texture-\($0.rawValue)" })
                 if design.effectiveStyle.texture != .none {
-                    StudioSlider(title: "Intensité", value: edited.style.textureOpacity, range: 0.1...1)
+                    StudioSlider(title: tr("Intensité"), value: edited.style.textureOpacity, range: 0.1...1)
                 }
             }
         }
@@ -497,7 +497,7 @@ struct WidgetStudio: View {
 
     /// The widgets inside a combined widget: each keeps its own name and options.
     private var comboPartsSection: some View {
-        EditorSection(title: "Widgets réunis", detail: "Règle chacun") {
+        EditorSection(title: tr("Widgets réunis"), detail: tr("Règle chacun")) {
             VStack(spacing: 0) {
                 ForEach(Array(design.options.parts.enumerated()), id: \.offset) { pair in
                     if pair.offset > 0 { Divider() }
@@ -519,7 +519,7 @@ struct WidgetStudio: View {
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
-                            Text("Régler")
+                            Text(tr("Régler"))
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
                             Image(systemName: "chevron.right")
@@ -540,7 +540,7 @@ struct WidgetStudio: View {
         Button(role: .destructive) {
             confirmDelete = true
         } label: {
-            Label("Supprimer ce widget", systemImage: "trash")
+            Label(tr("Supprimer ce widget"), systemImage: "trash")
                 .frame(maxWidth: .infinity, minHeight: 44)
         }
         .buttonStyle(.bordered)
@@ -565,9 +565,9 @@ struct WidgetStudio: View {
     }
 
     private var saveTitle: String {
-        if needsPremium { return "Débloquer et enregistrer" }
-        if !isNew { return "Enregistrer" }
-        return designs.count > 1 ? "Enregistrer les \(designs.count) widgets" : "Enregistrer le widget"
+        if needsPremium { return tr("Débloquer et enregistrer") }
+        if !isNew { return tr("Enregistrer") }
+        return designs.count > 1 ? tr("Enregistrer les \(designs.count) widgets") : tr("Enregistrer le widget")
     }
 
     // MARK: Undo and redo
@@ -687,8 +687,8 @@ struct ComboPartSettingsView: View {
                 WidgetPreview(design: shown, family: family, payload: model.previewPayload(for: shown), width: family == .systemSmall ? 170 : 330)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 8)
-                EditorSection(title: "Nom") {
-                    TextField("Nom du widget", text: part.name)
+                EditorSection(title: tr("Nom")) {
+                    TextField(tr("Nom du widget"), text: part.name)
                         .textInputAutocapitalization(.sentences)
                         .submitLabel(.done)
                         .padding(12)

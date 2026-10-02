@@ -25,28 +25,28 @@ struct ProductivitySpaceSections: View {
             }
             if model.productivity.priorities.count < 3 {
                 HStack {
-                    TextField("Nouvelle priorité", text: $newPriority)
+                    TextField(tr("Nouvelle priorité"), text: $newPriority)
                         .submitLabel(.done)
                         .onSubmit(addPriority)
-                    Button("Ajouter", action: addPriority)
+                    Button(tr("Ajouter"), action: addPriority)
                         .disabled(newPriority.trimmed.isEmpty)
                 }
             }
         } header: {
-            Text("Top 3 du jour")
+            Text(tr("Top 3 du jour"))
         } footer: {
-            Text("Les cases se décochent chaque matin. Coche-les depuis le widget.")
+            Text(tr("Les cases se décochent chaque matin. Coche-les depuis le widget."))
         }
 
-        Section("Tâches") {
+        Section(tr("Tâches")) {
             NavigationLink {
                 TasksView()
             } label: {
-                ValueRow(title: "Mes tâches", value: "\(model.content.tasks.filter { !$0.isDone }.count) à faire", symbol: "checklist")
+                ValueRow(title: tr("Mes tâches"), value: tr("\(model.content.tasks.filter { !$0.isDone }.count) à faire"), symbol: "checklist")
             }
         }
 
-        Section("Projets") {
+        Section(tr("Projets")) {
             ForEach(model.productivity.projects) { project in
                 Button {
                     sheets?.open { ProjectEditor(project: project) }
@@ -68,11 +68,11 @@ struct ProductivitySpaceSections: View {
             Button {
                 sheets?.open { ProjectEditor(project: Project(name: "")) }
             } label: {
-                Label("Nouveau projet", systemImage: "plus")
+                Label(tr("Nouveau projet"), systemImage: "plus")
             }
         }
 
-        Section("Échéances") {
+        Section(tr("Échéances")) {
             ForEach(model.productivity.deadlines.sorted { $0.date < $1.date }) { deadline in
                 Button {
                     sheets?.open { DeadlineEditor(deadline: deadline) }
@@ -89,7 +89,7 @@ struct ProductivitySpaceSections: View {
             Button {
                 sheets?.open { DeadlineEditor(deadline: Deadline(title: "", date: Date().addingTimeInterval(3 * 86_400))) }
             } label: {
-                Label("Nouvelle échéance", systemImage: "plus")
+                Label(tr("Nouvelle échéance"), systemImage: "plus")
             }
         }
 
@@ -115,7 +115,7 @@ struct ProductivitySpaceSections: View {
                     }
                     .buttonStyle(.plain)
                     .foregroundStyle(Color(hex: counter.colorHex))
-                    .accessibilityLabel(Text("Ajouter à \(counter.name)"))
+                    .accessibilityLabel(Text(tr("Ajouter à \(counter.name)")))
                 }
             }
             .onDelete { offsets in
@@ -124,23 +124,23 @@ struct ProductivitySpaceSections: View {
             Button {
                 sheets?.open { CounterEditor(counter: CounterItem(name: "")) }
             } label: {
-                Label("Nouveau compteur", systemImage: "plus")
+                Label(tr("Nouveau compteur"), systemImage: "plus")
             }
         } header: {
-            Text("Compteurs")
+            Text(tr("Compteurs"))
         } footer: {
-            Text("Cafés, pompes, pages lues… Le widget Compteur ajoute d'une touche.")
+            Text(tr("Cafés, pompes, pages lues… Le widget Compteur ajoute d'une touche."))
         }
 
-        Section("Travail profond") {
+        Section(tr("Travail profond")) {
             Stepper(value: Binding(
                 get: { model.productivity.weeklyFocusGoalHours },
                 set: { hours in model.setFocusGoal(hours) }
             ), in: 1...60, step: 1) {
-                ValueRow(title: "Objectif par semaine", value: Fmt.hours(model.productivity.weeklyFocusGoalHours))
+                ValueRow(title: tr("Objectif par semaine"), value: Fmt.hours(model.productivity.weeklyFocusGoalHours))
             }
-            ValueRow(title: "Cette semaine", value: Fmt.minutes(ProductivityMath.focusMinutes(model.productivity, weekOf: Date())), symbol: "brain.head.profile")
-            HintRow(text: "Chaque session lancée depuis le widget Focus compte ici.")
+            ValueRow(title: tr("Cette semaine"), value: Fmt.minutes(ProductivityMath.focusMinutes(model.productivity, weekOf: Date())), symbol: "brain.head.profile")
+            HintRow(text: tr("Chaque session lancée depuis le widget Focus compte ici."))
         }
     }
 
@@ -164,20 +164,20 @@ struct ProjectEditor: View {
     }
 
     var body: some View {
-        SheetForm(title: project.name.isEmpty ? "Nouveau projet" : project.name, canSave: !project.name.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: project.name.isEmpty ? tr("Nouveau projet") : project.name, canSave: !project.name.trimmed.isEmpty, onSave: save) {
             Section {
-                TextField("Nom du projet", text: $project.name)
+                TextField(tr("Nom du projet"), text: $project.name)
                 ColorChoiceRow(hex: $project.colorHex)
-                Toggle("Échéance", isOn: $hasDeadline)
+                Toggle(tr("Échéance"), isOn: $hasDeadline)
                 if hasDeadline {
-                    DatePicker("Date", selection: Binding(
+                    DatePicker(tr("Date"), selection: Binding(
                         get: { project.deadline ?? Date().addingTimeInterval(14 * 86_400) },
                         set: { project.deadline = $0 }
                     ), displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)
                 }
             }
-            Section("Tâches") {
+            Section(tr("Tâches")) {
                 ForEach($project.tasks) { $task in
                     HStack {
                         Button {
@@ -187,14 +187,14 @@ struct ProjectEditor: View {
                             Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
                         }
                         .buttonStyle(.plain)
-                        TextField("Tâche", text: $task.title)
+                        TextField(tr("Tâche"), text: $task.title)
                     }
                 }
                 .onDelete { project.tasks.remove(atOffsets: $0) }
                 HStack {
-                    TextField("Nouvelle tâche", text: $newTask)
+                    TextField(tr("Nouvelle tâche"), text: $newTask)
                         .onSubmit(addTask)
-                    Button("Ajouter", action: addTask).disabled(newTask.trimmed.isEmpty)
+                    Button(tr("Ajouter"), action: addTask).disabled(newTask.trimmed.isEmpty)
                 }
             }
         }
@@ -226,9 +226,9 @@ struct DeadlineEditor: View {
     @State var deadline: Deadline
 
     var body: some View {
-        SheetForm(title: "Échéance", canSave: !deadline.title.trimmed.isEmpty, onSave: save) {
-            TextField("Titre (rendu, dossier, examen…)", text: $deadline.title)
-            DatePicker("Date et heure", selection: $deadline.date)
+        SheetForm(title: tr("Échéance"), canSave: !deadline.title.trimmed.isEmpty, onSave: save) {
+            TextField(tr("Titre (rendu, dossier, examen…)"), text: $deadline.title)
+            DatePicker(tr("Date et heure"), selection: $deadline.date)
                 .environment(\.locale, Fmt.locale)
         }
     }
@@ -253,10 +253,10 @@ struct CounterEditor: View {
     private let symbols = ["plus.circle", "cup.and.saucer.fill", "figure.strengthtraining.functional", "book.fill", "drop.fill", "smoke", "pills.fill", "figure.walk", "phone.fill", "star.fill"]
 
     var body: some View {
-        SheetForm(title: "Compteur", canSave: !counter.name.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: tr("Compteur"), canSave: !counter.name.trimmed.isEmpty, onSave: save) {
             Section {
-                TextField("Nom (cafés, pompes…)", text: $counter.name)
-                Picker("Icône", selection: $counter.symbol) {
+                TextField(tr("Nom (cafés, pompes…)"), text: $counter.name)
+                Picker(tr("Icône"), selection: $counter.symbol) {
                     ForEach(symbols, id: \.self) { symbol in
                         Image(systemName: symbol).tag(symbol)
                     }
@@ -265,13 +265,13 @@ struct CounterEditor: View {
             }
             Section {
                 Stepper(value: $counter.step, in: 1...100) {
-                    ValueRow(title: "Pas", value: "+\(counter.step)")
+                    ValueRow(title: tr("Pas"), value: "+\(counter.step)")
                 }
-                Toggle("Objectif", isOn: $hasGoal)
+                Toggle(tr("Objectif"), isOn: $hasGoal)
                 if hasGoal {
-                    IntRow(title: "Objectif", value: Binding(get: { counter.goal ?? 10 }, set: { counter.goal = $0 }))
+                    IntRow(title: tr("Objectif"), value: Binding(get: { counter.goal ?? 10 }, set: { counter.goal = $0 }))
                 }
-                Toggle("Remettre à zéro chaque jour", isOn: $counter.resetsDaily)
+                Toggle(tr("Remettre à zéro chaque jour"), isOn: $counter.resetsDaily)
             }
         }
         .onAppear { hasGoal = counter.goal != nil }
@@ -295,25 +295,25 @@ struct HabitsSpaceSections: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        Section("Suivi") {
+        Section(tr("Suivi")) {
             NavigationLink {
                 HabitsView()
             } label: {
-                ValueRow(title: "Mes habitudes", value: "\(model.content.habits.count)", symbol: "repeat")
+                ValueRow(title: tr("Mes habitudes"), value: "\(model.content.habits.count)", symbol: "repeat")
             }
             NavigationLink {
                 HydrationView()
             } label: {
-                ValueRow(title: "Hydratation", value: "\(model.content.hydration.glasses(on: Date()))/\(model.content.hydration.goal) verres", symbol: "drop.fill")
+                ValueRow(title: tr("Hydratation"), value: tr("\(model.content.hydration.glasses(on: Date()))/\(model.content.hydration.goal) verres"), symbol: "drop.fill")
             }
         }
-        Section("Ce mois-ci") {
+        Section(tr("Ce mois-ci")) {
             ForEach(model.content.habits) { habit in
                 let streak = habit.streak(asOf: Date())
-                ValueRow(title: habit.name, value: Fmt.plural(streak, "jour", "jours"), symbol: habit.symbol, colorHex: habit.colorHex)
+                ValueRow(title: habit.name, value: Fmt.plural(streak, tr("jour"), tr("jours")), symbol: habit.symbol, colorHex: habit.colorHex)
             }
             if model.content.habits.isEmpty {
-                HintRow(text: "Crée une habitude pour suivre ta série.")
+                HintRow(text: tr("Crée une habitude pour suivre ta série."))
             }
         }
     }

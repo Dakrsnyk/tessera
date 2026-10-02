@@ -9,12 +9,12 @@ struct TargetOption: Identifiable, Hashable {
 enum TargetOptions {
     static func title(for kind: WidgetKind) -> String {
         switch kind {
-        case .habitStreak: "Habitude"
-        case .counter: "Compteur"
-        case .project: "Projet"
-        case .deadline: "Échéance"
-        case .savingsGoal: "Objectif"
-        default: "Entreprise"
+        case .habitStreak: tr("Habitude")
+        case .counter: tr("Compteur")
+        case .project: tr("Projet")
+        case .deadline: tr("Échéance")
+        case .savingsGoal: tr("Objectif")
+        default: tr("Entreprise")
         }
     }
 
@@ -41,11 +41,11 @@ struct SpaceOptionsSection: View {
     var body: some View {
         let kind = design.kind
         let targets = TargetOptions.options(for: kind, model: model)
-        EditorSection(title: "Contenu") {
+        EditorSection(title: tr("Contenu")) {
             VStack(alignment: .leading, spacing: 0) {
                 if !targets.isEmpty {
                     Picker(TargetOptions.title(for: kind), selection: $design.options.targetID) {
-                        Text("Automatique").tag(String?.none)
+                        Text(tr("Automatique")).tag(String?.none)
                         ForEach(targets) { option in
                             Text(option.title).tag(Optional(option.id))
                         }
@@ -58,7 +58,7 @@ struct SpaceOptionsSection: View {
                         SpaceView(space: space, isEmbedded: true)
                     } label: {
                         HStack {
-                            Label("Données de l'espace \(space.title)", systemImage: space.symbol)
+                            Label(tr("Données de l'espace \(space.title)"), systemImage: space.symbol)
                                 .foregroundStyle(.primary)
                             Spacer()
                             Image(systemName: "chevron.right")
@@ -97,16 +97,16 @@ struct SpaceOptionsSection: View {
         case .dashboards:
             if [.aiSummary, .aiNutrition, .aiFinance, .aiProductivity].contains(kind) {
                 return AIPhraser.isAvailable
-                    ? "Rédigé par Apple Intelligence sur ton iPhone, uniquement à partir de tes données. Chaque chiffre est vérifié avant d'être affiché."
-                    : "Calculé sur ton iPhone à partir de tes données, sans jamais inventer de chiffre. Avec Apple Intelligence (iOS 26), le texte est reformulé plus naturellement."
+                    ? tr("Rédigé par Apple Intelligence sur ton iPhone, uniquement à partir de tes données. Chaque chiffre est vérifié avant d'être affiché.")
+                    : tr("Calculé sur ton iPhone à partir de tes données, sans jamais inventer de chiffre. Avec Apple Intelligence (iOS 26), le texte est reformulé plus naturellement.")
             }
-            return "Ce tableau réunit plusieurs espaces et change selon ce que tu y notes."
+            return tr("Ce tableau réunit plusieurs espaces et change selon ce que tu y notes.")
         case .weather:
-            return "Données Open-Meteo pour la ville choisie dans Réglages."
+            return tr("Données Open-Meteo pour la ville choisie dans Réglages.")
         case .investing, .markets:
-            return "À titre informatif, pas un conseil financier."
+            return tr("À titre informatif, pas un conseil financier.")
         case .nutrition:
-            return "Valeurs indicatives, pas un avis médical."
+            return tr("Valeurs indicatives, pas un avis médical.")
         default:
             return nil
         }

@@ -65,34 +65,34 @@ enum MiniAppSummary {
         switch app {
         case .nutrition:
             let totals = NutritionMath.totals(model.nutrition, on: now)
-            return totals.kcal > 0 ? "\(TF.int(totals.kcal)) kcal aujourd'hui" : nil
+            return totals.kcal > 0 ? tr("\(TF.int(totals.kcal)) kcal aujourd'hui") : nil
         case .fitness:
-            if model.fitness.active.map({ !$0.isFinished }) == true { return "Séance en cours" }
+            if model.fitness.active.map({ !$0.isFinished }) == true { return tr("Séance en cours") }
             let days = FitnessMath.trainedDays(inWeekOf: now, model.fitness).filter { $0 }.count
-            return model.fitness.routines.isEmpty && days == 0 ? nil : "\(days) séance\(days > 1 ? "s" : "") cette semaine"
+            return model.fitness.routines.isEmpty && days == 0 ? nil : tr("\(days) séance\(days > 1 ? "s" : "") cette semaine")
         case .planning:
             let open = model.content.tasks.filter { !$0.isDone && ($0.isDue(on: now) || $0.isOverdue(at: now)) }.count
-            return open > 0 ? "\(open) tâche\(open > 1 ? "s" : "") aujourd'hui" : nil
+            return open > 0 ? tr("\(open) tâche\(open > 1 ? "s" : "") aujourd'hui") : nil
         case .studies:
             if let next = StudentMath.nextClass(model.student, at: now), DateMath.isSameDay(next.start, now) {
-                return "\(model.student.course(next.slot.courseID)?.name ?? "Cours") à \(Fmt.time(next.start, uses24Hour: true))"
+                return "\(model.student.course(next.slot.courseID)?.name ?? tr("Cours")) à \(Fmt.time(next.start, uses24Hour: true))"
             }
             let open = StudentMath.openAssignments(model.student).count
-            return open > 0 ? "\(open) devoir\(open > 1 ? "s" : "") à rendre" : nil
+            return open > 0 ? tr("\(open) devoir\(open > 1 ? "s" : "") à rendre") : nil
         case .finances:
             guard !model.budget.expenses.isEmpty else { return nil }
             let remaining = BudgetMath.remaining(model.budget, at: now)
-            return remaining >= 0 ? "\(TF.money(remaining, currency)) restants" : "Budget dépassé"
+            return remaining >= 0 ? tr("\(TF.money(remaining, currency)) restants") : tr("Budget dépassé")
         case .business:
             guard !model.business.sales.isEmpty else { return nil }
-            return "\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois"
+            return tr("\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois")
         case .travel:
             guard let trip = TravelMath.currentTrip(model.travel, at: now) else { return nil }
-            if TravelMath.isOngoing(trip, at: now) { return "\(trip.destination) · jour \(TravelMath.tripDay(trip, at: now).day)" }
+            if TravelMath.isOngoing(trip, at: now) { return tr("\(trip.destination) · jour \(TravelMath.tripDay(trip, at: now).day)") }
             return "\(trip.destination) · J-\(DateMath.daysBetween(now, trip.start))"
         case .car:
-            if let range = CarMath.range(model.car) { return "≈ \(Fmt.number(Int(range.km))) km d'autonomie" }
-            return CarMath.odometer(model.car).map { "\(Fmt.number(Int($0))) km" }
+            if let range = CarMath.range(model.car) { return tr("≈ \(Fmt.number(Int(range.km))) km d'autonomie") }
+            return CarMath.odometer(model.car).map { tr("\(Fmt.number(Int($0))) km") }
         case .weather:
             guard case let .ready(weather) = model.weather else { return nil }
             return "\(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit)) · \(WeatherCode.description(weather.code))"
@@ -135,11 +135,11 @@ struct MiniAppsRow: View {
         let _ = revision
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
-                Text("Mes mini-apps")
+                Text(tr("Mes mini-apps"))
                     .font(.title3.weight(.semibold))
                     .accessibilityAddTraits(.isHeader)
                 Spacer()
-                Button("Toutes") { showingAll = true }
+                Button(tr("Toutes")) { showingAll = true }
                     .font(.subheadline.weight(.semibold))
                     .accessibilityIdentifier("mini-apps-all")
             }
@@ -156,7 +156,7 @@ struct MiniAppsRow: View {
                                 MiniAppUsage.setHidden(app, true)
                                 revision += 1
                             } label: {
-                                Label("Masquer de l'accueil", systemImage: "eye.slash")
+                                Label(tr("Masquer de l'accueil"), systemImage: "eye.slash")
                             }
                         }
                     }
@@ -178,7 +178,7 @@ struct MiniAppsRow: View {
                 .frame(width: 34, height: 34)
                 .background(app.color, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
             Text(app.title).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
-            Text(caption ?? "Ouvrir")
+            Text(caption ?? tr("Ouvrir"))
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
@@ -200,7 +200,7 @@ struct AllMiniAppsSheet: View {
         NavigationStack {
             List {
                 if !order.shown.isEmpty {
-                    Section("Mes mini-apps") {
+                    Section(tr("Mes mini-apps")) {
                         ForEach(order.shown) { row($0) }
                     }
                 }
@@ -210,24 +210,24 @@ struct AllMiniAppsSheet: View {
                             row(app)
                                 .swipeActions {
                                     if MiniAppUsage.hidden.contains(app.rawValue) {
-                                        Button("Afficher") { MiniAppUsage.setHidden(app, false) }
+                                        Button(tr("Afficher")) { MiniAppUsage.setHidden(app, false) }
                                             .tint(app.color)
                                     }
                                 }
                         }
                     } header: {
-                        Text("À découvrir")
+                        Text(tr("À découvrir"))
                     } footer: {
-                        Text("Chaque mini-app utilise tes données de Tessera et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne.")
+                        Text(tr("Chaque mini-app utilise tes données de Tessera et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne."))
                     }
                 }
             }
             .styledList()
-            .navigationTitle("Mini-apps")
+            .navigationTitle(tr("Mini-apps"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("OK") { dismiss() }
+                    Button(tr("OK")) { dismiss() }
                 }
             }
         }

@@ -28,9 +28,9 @@ struct WeatherWidgetView: View {
         let s = context.style
         switch context.payload.weather {
         case .needsLocation:
-            WidgetMessage(symbol: "location.circle", title: "Choisis ta ville", message: "Touche pour la définir dans Tessera", style: s)
+            WidgetMessage(symbol: "location.circle", title: tr("Choisis ta ville"), message: tr("Touche pour la définir dans Tessera"), style: s)
         case .unavailable(.none):
-            WidgetMessage(symbol: "wifi.slash", title: "Météo indisponible", message: "Nouvel essai dans quelques minutes", style: s)
+            WidgetMessage(symbol: "wifi.slash", title: tr("Météo indisponible"), message: tr("Nouvel essai dans quelques minutes"), style: s)
         case let .ready(snapshot):
             content(snapshot, isStale: false)
         case let .unavailable(.some(snapshot)):
@@ -95,7 +95,7 @@ struct WeatherWidgetView: View {
                     .foregroundStyle(s.secondary)
             }
             if isStale {
-                Text("Mis à jour à \(Fmt.time(w.fetchedAt, uses24Hour: context.settings.uses24HourClock))")
+                Text(tr("Mis à jour à \(Fmt.time(w.fetchedAt, uses24Hour: context.settings.uses24HourClock))"))
                     .font(s.text(9))
                     .foregroundStyle(s.secondary)
             }
@@ -179,7 +179,7 @@ struct CryptoWidgetView: View {
         case let .unavailable(.some(coin)):
             content(coin, isStale: true)
         case .unavailable(.none):
-            WidgetMessage(symbol: "wifi.slash", title: "Cours indisponible", message: "Nouvel essai dans quelques minutes", style: s)
+            WidgetMessage(symbol: "wifi.slash", title: tr("Cours indisponible"), message: tr("Nouvel essai dans quelques minutes"), style: s)
         }
     }
 
@@ -228,7 +228,7 @@ struct CryptoWidgetView: View {
                     }
                     sparkline(coin.sparkline, color: lineColor)
                     HStack {
-                        Text("7 jours")
+                        Text(tr("7 jours"))
                         Spacer()
                         if let low = coin.sparkline.min() {
                             Text(Fmt.price(low, currency: coin.currency)).monospacedDigit()
@@ -263,7 +263,7 @@ struct CryptoWidgetView: View {
     }
 
     private func staleLabel(_ coin: CoinSnapshot) -> some View {
-        Text("Cours de \(Fmt.time(coin.fetchedAt, uses24Hour: context.settings.uses24HourClock))")
+        Text(tr("Cours de \(Fmt.time(coin.fetchedAt, uses24Hour: context.settings.uses24HourClock))"))
             .font(context.style.text(9))
             .foregroundStyle(context.style.secondary)
     }
@@ -285,7 +285,7 @@ struct MoneyFlowWidgetView: View {
         let color: Color = mode == .expense ? s.negative : mode == .income ? s.positive : (total >= 0 ? s.positive : s.negative)
 
         if money.items.isEmpty {
-            WidgetMessage(symbol: "dollarsign.circle", title: "Aucun montant", message: "Ajoute tes revenus et dépenses dans Tessera", style: s)
+            WidgetMessage(symbol: "dollarsign.circle", title: tr("Aucun montant"), message: tr("Ajoute tes revenus et dépenses dans Tessera"), style: s)
         } else {
             VStack(alignment: .leading, spacing: 3) {
                 if s.showsTitle { WLabel(text: label(mode), style: s) }
@@ -302,14 +302,14 @@ struct MoneyFlowWidgetView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                     if s.showsDetails {
-                        Text("\(Fmt.money(abs(summary.perDay(mode)) * MoneySummary.daysPerMonth, currency: currency, decimals: 0)) / mois")
+                        Text(tr("\(Fmt.money(abs(summary.perDay(mode)) * MoneySummary.daysPerMonth, currency: currency, decimals: 0)) / mois"))
                             .font(s.text(11))
                             .foregroundStyle(s.secondary)
                     }
                 } else {
                     Spacer(minLength: 0)
                     HStack {
-                        WLabel(text: "Aujourd'hui", style: s)
+                        WLabel(text: tr("Aujourd'hui"), style: s)
                         Spacer()
                         Text(todayText(today, mode: mode, currency: currency, short: true))
                             .font(s.text(15, .semibold).monospacedDigit())
@@ -317,7 +317,7 @@ struct MoneyFlowWidgetView: View {
                     }
                     BarView(progress: summary.dayFraction, color: color, track: s.track, height: 6)
                     if s.showsDetails {
-                        Text("\(Fmt.money(abs(summary.perDay(mode)), currency: currency)) / jour · \(Fmt.money(abs(summary.perDay(mode)) * MoneySummary.daysPerMonth, currency: currency, decimals: 0)) / mois")
+                        Text(tr("\(Fmt.money(abs(summary.perDay(mode)), currency: currency)) / jour · \(Fmt.money(abs(summary.perDay(mode)) * MoneySummary.daysPerMonth, currency: currency, decimals: 0)) / mois"))
                             .font(s.text(12))
                             .foregroundStyle(s.secondary)
                             .lineLimit(1)
@@ -329,7 +329,7 @@ struct MoneyFlowWidgetView: View {
                     }
                     Spacer(minLength: 0)
                     if s.showsDetails {
-                        Text("Depuis le \(Fmt.format(summary.startDate, template: "dMMMMyyyy"))")
+                        Text(tr("Depuis le \(Fmt.format(summary.startDate, template: "dMMMMyyyy"))"))
                             .font(s.text(10))
                             .foregroundStyle(s.secondary)
                     }
@@ -341,9 +341,9 @@ struct MoneyFlowWidgetView: View {
 
     private func label(_ mode: MoneyMode) -> String {
         switch mode {
-        case .net: "Solde net"
-        case .income: "Total gagné"
-        case .expense: "Total dépensé"
+        case .net: tr("Solde net")
+        case .income: tr("Total gagné")
+        case .expense: tr("Total dépensé")
         }
     }
 
@@ -354,7 +354,7 @@ struct MoneyFlowWidgetView: View {
         case .income: amount = "+" + Fmt.money(value, currency: currency)
         case .expense: amount = "−" + Fmt.money(value, currency: currency)
         }
-        return short ? amount : "\(amount) aujourd'hui"
+        return short ? amount : tr("\(amount) aujourd'hui")
     }
 
     @ViewBuilder
@@ -363,16 +363,16 @@ struct MoneyFlowWidgetView: View {
         let month = MoneySummary.daysPerMonth
         VStack(spacing: 8) {
             HStack {
-                WLabel(text: mode == .net ? "Chaque mois" : "Détail", style: s)
+                WLabel(text: mode == .net ? tr("Chaque mois") : tr("Détail"), style: s)
                 Spacer()
-                WLabel(text: "par mois", style: s)
+                WLabel(text: tr("par mois"), style: s)
             }
             if mode == .net {
-                row("Revenus", "+" + Fmt.money(summary.perDayIncome * month, currency: currency, decimals: 0), s.positive)
-                row("Dépenses", "−" + Fmt.money(summary.perDayExpense * month, currency: currency, decimals: 0), s.negative)
-                row("Il te reste", Fmt.signedMoney(summary.perDayNet * month, currency: currency, decimals: 0), summary.perDayNet >= 0 ? s.positive : s.negative, bold: true)
+                row(tr("Revenus"), "+" + Fmt.money(summary.perDayIncome * month, currency: currency, decimals: 0), s.positive)
+                row(tr("Dépenses"), "−" + Fmt.money(summary.perDayExpense * month, currency: currency, decimals: 0), s.negative)
+                row(tr("Il te reste"), Fmt.signedMoney(summary.perDayNet * month, currency: currency, decimals: 0), summary.perDayNet >= 0 ? s.positive : s.negative, bold: true)
                 if summary.perDayIncome > 0 {
-                    row("Part épargnée", Fmt.percent(summary.perDayNet / summary.perDayIncome), s.primary)
+                    row(tr("Part épargnée"), Fmt.percent(summary.perDayNet / summary.perDayIncome), s.primary)
                 }
             } else {
                 let items = money.items
@@ -416,7 +416,7 @@ struct HydrationWidgetView: View {
             VStack(spacing: 8) {
                 if s.showsTitle {
                     HStack {
-                        WLabel(text: "Hydratation", style: s)
+                        WLabel(text: tr("Hydratation"), style: s)
                         Spacer()
                     }
                 }
@@ -432,7 +432,7 @@ struct HydrationWidgetView: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
-                addButton(label: "Un verre", compact: true)
+                addButton(label: tr("Un verre"), compact: true)
             }
         } else {
             HStack(spacing: 16) {
@@ -444,12 +444,12 @@ struct HydrationWidgetView: View {
                 }
                 .frame(width: 96, height: 96)
                 VStack(alignment: .leading, spacing: 6) {
-                    if s.showsTitle { WLabel(text: "Hydratation", style: s) }
+                    if s.showsTitle { WLabel(text: tr("Hydratation"), style: s) }
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
                         Text("\(count)")
                             .font(s.number(34))
                             .foregroundStyle(s.numberColor)
-                        Text("sur \(goal) verres")
+                        Text(tr("sur \(goal) verres"))
                             .font(s.text(13))
                             .foregroundStyle(s.secondary)
                     }
@@ -471,8 +471,8 @@ struct HydrationWidgetView: View {
                                 .frame(width: 36, height: 32)
                                 .background(s.panel, in: Capsule())
                         }
-                        .accessibilityLabel(Text("Retirer un verre"))
-                        addButton(label: "Un verre", compact: false)
+                        .accessibilityLabel(Text(tr("Retirer un verre")))
+                        addButton(label: tr("Un verre"), compact: false)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)

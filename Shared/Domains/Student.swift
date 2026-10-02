@@ -51,7 +51,7 @@ struct Grade: Codable, Hashable, Identifiable {
 /// A flashcard reviewed with a Leitner schedule: a known card moves up a box and comes back later.
 struct Flashcard: Codable, Hashable, Identifiable {
     var id = UUID()
-    var deck: String = "Général"
+    var deck: String = tr("Général")
     var front: String
     var back: String
     var box: Int = 1

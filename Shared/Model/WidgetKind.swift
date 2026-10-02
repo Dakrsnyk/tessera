@@ -22,20 +22,20 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
 
     var title: String {
         switch self {
-        case .dashboards: "Tableaux de bord"
-        case .time: "Temps"
-        case .weather: "Météo"
-        case .productivity: "Productivité"
-        case .wellbeing: "Habitudes"
-        case .nutrition: "Nutrition"
-        case .fitness: "Fitness"
-        case .finance: "Budget"
-        case .investing: "Placements"
-        case .business: "Mon entreprise"
-        case .markets: "Sociétés cotées"
-        case .student: "Études"
-        case .travel: "Voyage"
-        case .car: "Auto"
+        case .dashboards: tr("Tableaux de bord")
+        case .time: tr("Temps")
+        case .weather: tr("Météo")
+        case .productivity: tr("Productivité")
+        case .wellbeing: tr("Habitudes")
+        case .nutrition: tr("Nutrition")
+        case .fitness: tr("Fitness")
+        case .finance: tr("Budget")
+        case .investing: tr("Placements")
+        case .business: tr("Mon entreprise")
+        case .markets: tr("Sociétés cotées")
+        case .student: tr("Études")
+        case .travel: tr("Voyage")
+        case .car: tr("Auto")
         }
     }
 
@@ -150,14 +150,14 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
 extension WidgetFamily {
     var shortTitle: String {
         switch self {
-        case .systemSmall: "Petit"
-        case .systemMedium: "Moyen"
-        case .systemLarge: "Grand"
-        case .systemExtraLarge: "Très grand"
-        case .accessoryCircular: "Rond"
-        case .accessoryRectangular: "Rectangle"
-        case .accessoryInline: "En ligne"
-        @unknown default: "Widget"
+        case .systemSmall: tr("Petit")
+        case .systemMedium: tr("Moyen")
+        case .systemLarge: tr("Grand")
+        case .systemExtraLarge: tr("Très grand")
+        case .accessoryCircular: tr("Rond")
+        case .accessoryRectangular: tr("Rectangle")
+        case .accessoryInline: tr("En ligne")
+        @unknown default: tr("Widget")
         }
     }
 

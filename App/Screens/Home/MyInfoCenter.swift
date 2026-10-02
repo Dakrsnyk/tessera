@@ -10,15 +10,15 @@ struct MyInfoCard: View {
         let areas = model.followedAreas
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
-                Text("Mes informations")
+                Text(tr("Mes informations"))
                     .font(.title3.weight(.semibold))
                     .accessibilityAddTraits(.isHeader)
                 Spacer()
                 NavigationLink(value: HomeRoute.info) {
-                    Text("Tout voir")
+                    Text(tr("Tout voir"))
                         .font(.subheadline.weight(.medium))
                 }
-                .accessibilityLabel(Text("Tout voir : Mes informations"))
+                .accessibilityLabel(Text(tr("Tout voir : Mes informations")))
             }
             if model.profile.interests.isEmpty {
                 prompt
@@ -67,29 +67,29 @@ struct MyInfoCard: View {
     }
 
     private func headline(_ completion: (filled: Int, total: Int, missing: [DataItem])) -> String {
-        if completion.missing.isEmpty { return "Ton profil est complet" }
-        return completion.filled * 3 >= completion.total * 2 ? "Ton profil est presque complet" : "Complète ton profil"
+        if completion.missing.isEmpty { return tr("Ton profil est complet") }
+        return completion.filled * 3 >= completion.total * 2 ? tr("Ton profil est presque complet") : tr("Complète ton profil")
     }
 
     private func detail(_ missing: [DataItem]) -> String {
-        guard !missing.isEmpty else { return "Tes widgets et « Mon Quotidien » utilisent tes vraies données." }
+        guard !missing.isEmpty else { return tr("Tes widgets et « Mon Quotidien » utilisent tes vraies données.") }
         let names = missing.prefix(2).map { $0.title.lowercasedFirst }
-        return "Il manque : \(names.joined(separator: ", "))\(missing.count > 2 ? "…" : ".")"
+        return tr("Il manque : \(names.joined(separator: ", "))\(missing.count > 2 ? "…" : ".")")
     }
 
     /// No interest and no data yet: an invitation, never empty cards.
     private var prompt: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("Personnalise Tessera", systemImage: "sparkles")
+            Label(tr("Personnalise Tessera"), systemImage: "sparkles")
                 .font(.headline)
-            Text("Dis ce qui t'intéresse : tes widgets et « Mon Quotidien » reprendront tes objectifs, ton programme, ton budget… sans que tu aies à les répéter.")
+            Text(tr("Dis ce qui t'intéresse : tes widgets et « Mon Quotidien » reprendront tes objectifs, ton programme, ton budget… sans que tu aies à les répéter."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             Button {
                 editsInterests = true
             } label: {
-                Text("Choisir mes centres d'intérêt")
+                Text(tr("Choisir mes centres d'intérêt"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.onAccent)
                     .frame(maxWidth: .infinity, minHeight: 44)
@@ -114,7 +114,7 @@ struct CompletionRing: View {
                 .monospacedDigit()
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("\(filled) sur \(total) renseignées"))
+        .accessibilityLabel(Text(tr("\(filled) sur \(total) renseignées")))
     }
 }
 
@@ -133,7 +133,7 @@ private struct AreaBadge: View {
                 .font(.caption2.weight(.semibold))
                 .foregroundStyle(.primary)
                 .lineLimit(1)
-            Text(missing == 0 ? "✓" : "À compléter")
+            Text(missing == 0 ? "✓" : tr("À compléter"))
                 .font(.system(size: 10, weight: .semibold))
                 .foregroundStyle(missing == 0 ? Color.accentColor : Color(light: "8A4B00", dark: "F5B25A"))
         }
@@ -156,7 +156,7 @@ struct MyInfoView: View {
         let completion = model.completion
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
-                Text("Tout ce que tes widgets savent de toi. Renseigné une fois ici ou en créant un widget, c'est utilisé partout : widgets, « Mon Quotidien » et statistiques.")
+                Text(tr("Tout ce que tes widgets savent de toi. Renseigné une fois ici ou en créant un widget, c'est utilisé partout : widgets, « Mon Quotidien » et statistiques."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -164,26 +164,26 @@ struct MyInfoView: View {
                     CompletionRing(filled: completion.filled, total: completion.total)
                         .frame(width: 60, height: 60)
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(completion.missing.isEmpty ? "Tout est renseigné" : Fmt.plural(completion.missing.count, "information à compléter", "informations à compléter"))
+                        Text(completion.missing.isEmpty ? tr("Tout est renseigné") : Fmt.plural(completion.missing.count, tr("information à compléter"), tr("informations à compléter")))
                             .font(.headline)
-                        Button("Mes centres d'intérêt") { editsInterests = true }
+                        Button(tr("Mes centres d'intérêt")) { editsInterests = true }
                             .font(.subheadline.weight(.semibold))
                     }
                     Spacer(minLength: 0)
                 }
                 .card()
                 if !followed.isEmpty {
-                    areaList("Tes thèmes", followed)
+                    areaList(tr("Tes thèmes"), followed)
                 }
-                areaList(followed.isEmpty ? "Catégories" : "Autres catégories", others)
-                areaList("Général", [.general])
+                areaList(followed.isEmpty ? tr("Catégories") : tr("Autres catégories"), others)
+                areaList(tr("Général"), [.general])
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
         .background(.screenFill)
         .screenshotScroll()
-        .navigationTitle("Mes informations")
+        .navigationTitle(tr("Mes informations"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $editsInterests) { InterestsEditorSheet() }
     }
@@ -229,7 +229,7 @@ private struct AreaRow: View {
                 Text(area.title)
                     .font(.body.weight(.medium))
                     .foregroundStyle(.primary)
-                Text(summaries.isEmpty ? "Rien de renseigné" : summaries.prefix(3).joined(separator: " · "))
+                Text(summaries.isEmpty ? tr("Rien de renseigné") : summaries.prefix(3).joined(separator: " · "))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
@@ -241,7 +241,7 @@ private struct AreaRow: View {
                     .foregroundStyle(Color(light: "8A4B00", dark: "F5B25A"))
                     .frame(minWidth: 20, minHeight: 20)
                     .background(Color(light: "FCE8CC", dark: "4A3314"), in: Circle())
-                    .accessibilityLabel(Text("\(missing) à compléter"))
+                    .accessibilityLabel(Text(tr("\(missing) à compléter")))
             }
             Image(systemName: "chevron.right")
                 .font(.caption.weight(.bold))
@@ -270,19 +270,19 @@ struct InfoAreaView: View {
                         .foregroundStyle(.white)
                         .frame(width: 44, height: 44)
                         .background(Color(hex: area.colorHex), in: RoundedRectangle(cornerRadius: 13, style: .continuous))
-                    Text(users.isEmpty ? "Ce que tu renseignes ici servira à tes widgets \(area.title.lowercasedFirst) et à « Mon Quotidien »." : "Utilisé par \(Fmt.plural(users.count, "de tes widgets", "de tes widgets")) : \(users.prefix(3).map(\.name).joined(separator: ", ")).")
+                    Text(users.isEmpty ? tr("Ce que tu renseignes ici servira à tes widgets \(area.title.lowercasedFirst) et à « Mon Quotidien ».") : tr("Utilisé par \(Fmt.plural(users.count, tr("de tes widgets"), tr("de tes widgets"))) : \(users.prefix(3).map(\.name).joined(separator: )", ")).")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                WidgetDataSection(items: area.items, title: "Tes données")
+                WidgetDataSection(items: area.items, title: tr("Tes données"))
                 if let topic = area.topic {
                     Button {
                         editsTopic = true
                     } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Plus de précisions")
+                                Text(tr("Plus de précisions"))
                                     .font(.subheadline.weight(.semibold))
                                     .foregroundStyle(.primary)
                                 Text(topic.purpose)
@@ -304,7 +304,7 @@ struct InfoAreaView: View {
                     NavigationLink {
                         SpaceView(space: space, isEmbedded: true)
                     } label: {
-                        Label("Toutes les données \(space.title)", systemImage: "square.and.pencil")
+                        Label(tr("Toutes les données \(space.title)"), systemImage: "square.and.pencil")
                             .font(.subheadline.weight(.semibold))
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }

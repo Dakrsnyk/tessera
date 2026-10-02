@@ -35,7 +35,7 @@ struct CarDeadline: Codable, Hashable, Identifiable {
 }
 
 struct CarState: Codable, Hashable {
-    var name = "Ma voiture"
+    var name = tr("Ma voiture")
     var fills: [FuelFill] = []
     var readings: [OdometerReading] = []
     var services: [ServiceItem] = []
@@ -57,7 +57,7 @@ struct CarState: Codable, Hashable {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        name = c.value(.name, "Ma voiture")
+        name = c.value(.name, tr("Ma voiture"))
         fills = c.value(.fills, [])
         readings = c.value(.readings, [])
         services = c.value(.services, [])

@@ -48,10 +48,10 @@ enum MealType: String, Codable, CaseIterable, Identifiable {
     /// Québec usage: déjeuner, dîner, souper.
     var title: String {
         switch self {
-        case .breakfast: "Déjeuner"
-        case .lunch: "Dîner"
-        case .dinner: "Souper"
-        case .snack: "Collation"
+        case .breakfast: tr("Déjeuner")
+        case .lunch: tr("Dîner")
+        case .dinner: tr("Souper")
+        case .snack: tr("Collation")
         }
     }
 
@@ -189,7 +189,7 @@ struct SavedMeal: Codable, Hashable, Identifiable {
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = c.value(.id, UUID())
-        name = c.value(.name, "Mon repas")
+        name = c.value(.name, tr("Mon repas"))
         items = c.value(.items, [])
         createdAt = c.value(.createdAt, Date())
     }
@@ -482,9 +482,9 @@ enum NutritionCalculator {
 
         var title: String {
             switch self {
-            case .female: "Femme"
-            case .male: "Homme"
-            case .neutral: "Moyenne des deux"
+            case .female: tr("Femme")
+            case .male: tr("Homme")
+            case .neutral: tr("Moyenne des deux")
             }
         }
     }
@@ -493,10 +493,10 @@ enum NutritionCalculator {
         var id: Double { rawValue }
         var title: String {
             switch self {
-            case .sedentary: "Sédentaire"
-            case .light: "Légère (1–3 séances)"
-            case .moderate: "Modérée (3–5 séances)"
-            case .active: "Élevée (6–7 séances)"
+            case .sedentary: tr("Sédentaire")
+            case .light: tr("Légère (1–3 séances)")
+            case .moderate: tr("Modérée (3–5 séances)")
+            case .active: tr("Élevée (6–7 séances)")
             }
         }
     }
@@ -505,9 +505,9 @@ enum NutritionCalculator {
         var id: Double { rawValue }
         var title: String {
             switch self {
-            case .lose: "Perdre doucement"
-            case .maintain: "Maintenir"
-            case .gain: "Prendre du muscle"
+            case .lose: tr("Perdre doucement")
+            case .maintain: tr("Maintenir")
+            case .gain: tr("Prendre du muscle")
             }
         }
     }

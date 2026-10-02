@@ -58,7 +58,7 @@ enum ProvisioningProfile {
         else { return nil }
         let plistData = data.subdata(in: start.lowerBound..<end.upperBound)
         let plist = try? PropertyListSerialization.propertyList(from: plistData, format: nil) as? [String: Any]
-        return plist?["Entitlements"] as? [String: Any]
+        return plist?[tr("Entitlements")] as? [String: Any]
     }
 }
 

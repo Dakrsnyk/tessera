@@ -25,7 +25,7 @@ enum DashboardTiles {
 
     static func eventRow(_ context: RenderContext) -> TileRow? {
         guard case let .ready(events) = context.payload.events, let next = events.first(where: { $0.end > context.date }) else { return nil }
-        let time = next.isAllDay ? "Journée" : TF.time(next.start, context)
+        let time = next.isAllDay ? tr("Journée") : TF.time(next.start, context)
         return TileRow(id: "event", title: next.title, value: time, symbol: "calendar", colorHex: next.colorHex)
     }
 
@@ -33,7 +33,7 @@ enum DashboardTiles {
         let tasks = context.payload.content.tasks
         guard !tasks.isEmpty else { return nil }
         let open = tasks.filter { !$0.isDone }
-        return TileRow(id: "tasks", title: open.first?.title ?? "Toutes les tâches sont faites", value: "\(open.count) à faire", symbol: "checklist")
+        return TileRow(id: "tasks", title: open.first?.title ?? tr("Toutes les tâches sont faites"), value: tr("\(open.count) à faire"), symbol: "checklist")
     }
 
     static func prioritiesRows(_ context: RenderContext) -> [TileRow] {
@@ -49,26 +49,26 @@ enum DashboardTiles {
         let eaten = NutritionMath.totals(nutrition, on: context.date).kcal
         // Without the person's own target, only what was eaten: never a default goal.
         guard context.payload.domains.knows(.kcalTarget) else {
-            return TileRow(id: "kcal", title: "Mangé aujourd'hui", value: "\(TF.int(eaten)) kcal", symbol: "flame")
+            return TileRow(id: "kcal", title: tr("Mangé aujourd'hui"), value: tr("\(TF.int(eaten)) kcal"), symbol: "flame")
         }
         let left = nutrition.goals.kcal - eaten
-        return TileRow(id: "kcal", title: left >= 0 ? "Calories restantes" : "Calories en trop", value: "\(TF.int(abs(left))) kcal", symbol: "flame", progress: eaten / max(1, nutrition.goals.kcal))
+        return TileRow(id: "kcal", title: left >= 0 ? tr("Calories restantes") : tr("Calories en trop"), value: tr("\(TF.int(abs(left))) kcal"), symbol: "flame", progress: eaten / max(1, nutrition.goals.kcal))
     }
 
     static func waterRow(_ context: RenderContext) -> TileRow {
         let hydration = context.payload.content.hydration
         let glasses = hydration.glasses(on: context.date)
         guard context.payload.domains.knows(.hydrationGoal) else {
-            return TileRow(id: "water", title: "Eau", value: glasses > 1 ? "\(glasses) verres" : "\(glasses) verre", symbol: "drop.fill")
+            return TileRow(id: "water", title: tr("Eau"), value: glasses > 1 ? tr("\(glasses) verres") : tr("\(glasses) verre"), symbol: "drop.fill")
         }
-        return TileRow(id: "water", title: "Eau", value: "\(glasses)/\(hydration.goal) verres", symbol: "drop.fill", progress: Double(glasses) / Double(max(1, hydration.goal)))
+        return TileRow(id: "water", title: tr("Eau"), value: tr("\(glasses)/\(hydration.goal) verres"), symbol: "drop.fill", progress: Double(glasses) / Double(max(1, hydration.goal)))
     }
 
     static func habitsRow(_ context: RenderContext) -> TileRow? {
         let habits = context.payload.content.habits
         guard !habits.isEmpty else { return nil }
         let done = habits.filter { $0.isDone(on: context.date) }.count
-        return TileRow(id: "habits", title: "Habitudes", value: "\(done)/\(habits.count)", symbol: "repeat", progress: Double(done) / Double(habits.count))
+        return TileRow(id: "habits", title: tr("Habitudes"), value: "\(done)/\(habits.count)", symbol: "repeat", progress: Double(done) / Double(habits.count))
     }
 
     static func budgetRow(_ context: RenderContext) -> TileRow? {
@@ -77,27 +77,27 @@ enum DashboardTiles {
         guard !budget.expenses.isEmpty || knowsBudget else { return nil }
         guard knowsBudget else {
             let spent = BudgetMath.spentToday(budget, at: context.date)
-            return TileRow(id: "budget", title: "Dépensé aujourd'hui", value: TF.money(spent, context.settings.currencyCode), symbol: "creditcard")
+            return TileRow(id: "budget", title: tr("Dépensé aujourd'hui"), value: TF.money(spent, context.settings.currencyCode), symbol: "creditcard")
         }
         let perDay = BudgetMath.perDayLeft(budget, at: context.date)
-        return TileRow(id: "budget", title: "Budget du jour", value: TF.money(perDay, context.settings.currencyCode), symbol: "creditcard")
+        return TileRow(id: "budget", title: tr("Budget du jour"), value: TF.money(perDay, context.settings.currencyCode), symbol: "creditcard")
     }
 
     static func workoutRow(_ context: RenderContext) -> TileRow? {
         let fitness = context.payload.domains.fitness
         guard fitness.isScheduled(context.date), let routine = fitness.routine(for: context.date) else { return nil }
         let done = FitnessMath.sessions(fitness).contains { DateMath.isSameDay($0.start, context.date) && $0.isFinished }
-        return TileRow(id: "workout", title: routine.name, value: done ? "Faite" : "Prévue", symbol: "figure.strengthtraining.traditional", isDone: done)
+        return TileRow(id: "workout", title: routine.name, value: done ? tr("Faite") : tr("Prévue"), symbol: "figure.strengthtraining.traditional", isDone: done)
     }
 
     // MARK: Dashboards
 
     static func myDay(_ context: RenderContext) -> Tile {
         let now = context.date
-        var tile = Tile(title: "Ma journée", symbol: "sun.horizon")
+        var tile = Tile(title: tr("Ma journée"), symbol: "sun.horizon")
         tile.value = Fmt.format(now, template: "EEEEd").capitalizedFirst
         tile.caption = TF.weather(context.payload).map { "\(Fmt.temperature($0.temperature, unit: context.settings.temperatureUnit)) · \(WeatherCode.description($0.code).lowercased()) à \($0.locationName)" } ?? Fmt.monthYear(now)
-        tile.detail = "\(Fmt.percent(DateMath.progress(of: .day, at: now))) de la journée écoulée"
+        tile.detail = tr("\(Fmt.percent(DateMath.progress(of: .day, at: now))) de la journée écoulée")
         tile.rows = [eventRow(context), tasksRow(context), caloriesRow(context), habitsRow(context)].compactMap { $0 } + [waterRow(context)]
         return tile
     }
@@ -120,7 +120,7 @@ enum DashboardTiles {
         let date = context.date
         switch Moment(date) {
         case .morning:
-            var tile = Tile(title: "Ce matin", symbol: "sunrise")
+            var tile = Tile(title: tr("Ce matin"), symbol: "sunrise")
             if let weather = TF.weather(context.payload) {
                 tile.value = Fmt.temperature(weather.temperature, unit: context.settings.temperatureUnit)
                 tile.caption = WeatherCode.description(weather.code)
@@ -140,41 +140,41 @@ enum DashboardTiles {
             tile.detail = eventRow(context).map { "\($0.title) à \($0.value ?? "")" }
             return tile
         case .day:
-            var tile = Tile(title: "Maintenant", symbol: "bolt.fill")
+            var tile = Tile(title: tr("Maintenant"), symbol: "bolt.fill")
             let open = context.payload.content.tasks.filter { !$0.isDone }
             tile.value = "\(open.count)"
-            tile.unit = open.count > 1 ? "tâches" : "tâche"
-            tile.caption = open.first.map { "Ensuite : \($0.title)" } ?? "Rien d'urgent, profites-en"
+            tile.unit = open.count > 1 ? tr("tâches") : tr("tâche")
+            tile.caption = open.first.map { tr("Ensuite : \($0.title)") } ?? tr("Rien d'urgent, profites-en")
             tile.rows = [eventRow(context), workoutRow(context), caloriesRow(context)].compactMap { $0 } + [waterRow(context)]
             tile.buttons = [
-                TileButton(title: "25 min", symbol: "timer", action: .startFocus(25), isProminent: true),
-                TileButton(title: "Eau", symbol: "drop.fill", action: .addWater),
+                TileButton(title: tr("25 min"), symbol: "timer", action: .startFocus(25), isProminent: true),
+                TileButton(title: tr("Eau"), symbol: "drop.fill", action: .addWater),
             ]
             return tile
         case .evening:
-            var tile = Tile(title: "Ce soir", symbol: "moon.stars")
+            var tile = Tile(title: tr("Ce soir"), symbol: "moon.stars")
             let done = context.payload.content.tasks.filter { $0.completedAt.map { DateMath.isSameDay($0, date) } ?? false }.count
             tile.value = "\(done)"
-            tile.unit = done > 1 ? "tâches faites" : "tâche faite"
-            tile.caption = "Le bilan de ta journée"
+            tile.unit = done > 1 ? tr("tâches faites") : tr("tâche faite")
+            tile.caption = tr("Le bilan de ta journée")
             let spent = BudgetMath.spentToday(context.payload.domains.budget, at: date)
             var rows = [habitsRow(context), caloriesRow(context)].compactMap { $0 }
             rows.append(waterRow(context))
             if spent > 0 {
-                rows.append(TileRow(id: "spent", title: "Dépensé aujourd'hui", value: TF.money(spent, context.settings.currencyCode), symbol: "creditcard"))
+                rows.append(TileRow(id: "spent", title: tr("Dépensé aujourd'hui"), value: TF.money(spent, context.settings.currencyCode), symbol: "creditcard"))
             }
             tile.rows = rows
             return tile
         case .night:
-            var tile = Tile(title: "Demain", symbol: "bed.double.fill")
+            var tile = Tile(title: tr("Demain"), symbol: "bed.double.fill")
             let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: date) ?? date
             tile.value = Fmt.format(tomorrow, template: "EEEE").capitalizedFirst
             if case let .ready(events) = context.payload.events, let first = events.first(where: { DateMath.isSameDay($0.start, tomorrow) }) {
                 tile.caption = "\(first.title) à \(TF.time(first.start, context))"
             } else {
-                tile.caption = "Rien de prévu tôt demain"
+                tile.caption = tr("Rien de prévu tôt demain")
             }
-            tile.detail = "Bonne nuit"
+            tile.detail = tr("Bonne nuit")
             tile.rows = [habitsRow(context)].compactMap { $0 }
             return tile
         }
@@ -182,17 +182,17 @@ enum DashboardTiles {
 
     static func morning(_ context: RenderContext) -> Tile {
         let now = context.date
-        var tile = Tile(title: "Ce matin", symbol: "sunrise")
+        var tile = Tile(title: tr("Ce matin"), symbol: "sunrise")
         if let weather = TF.weather(context.payload) {
             let unit = context.settings.temperatureUnit
             tile.value = Fmt.temperature(weather.temperature, unit: unit)
             tile.caption = "\(WeatherCode.description(weather.code)) · ↑\(Fmt.temperature(weather.high, unit: unit))"
             if let rain = weather.day(for: now)?.precipitationProbability, rain >= 40 {
-                tile.detail = "Prends un parapluie (\(rain) % de pluie)"
+                tile.detail = tr("Prends un parapluie (\(rain) % de pluie)")
             }
         } else {
             tile.value = Fmt.format(now, template: "EEEEd").capitalizedFirst
-            tile.caption = "Bonne journée"
+            tile.caption = tr("Bonne journée")
         }
         var rows: [TileRow] = []
         if let event = eventRow(context) { rows.append(event) }
@@ -206,24 +206,24 @@ enum DashboardTiles {
     static func fitness(_ context: RenderContext) -> Tile {
         let now = context.date
         let state = context.payload.domains.fitness
-        guard !state.routines.isEmpty else { return .empty("Tableau fitness", symbol: "figure.run", message: FitnessTiles.hint) }
+        guard !state.routines.isEmpty else { return .empty(tr("Tableau fitness"), symbol: "figure.run", message: FitnessTiles.hint) }
         let count = FitnessMath.workouts(inWeekOf: now, state)
-        var tile = Tile(title: "Fitness", symbol: "figure.run")
+        var tile = Tile(title: tr("Fitness"), symbol: "figure.run")
         tile.value = "\(count)/\(state.weeklyGoal)"
-        tile.caption = "séances cette semaine · série \(FitnessMath.weekStreak(state, until: now))"
+        tile.caption = tr("séances cette semaine · série \(FitnessMath.weekStreak(state, until: now))")
         var rows: [TileRow] = []
         let active = state.active.flatMap { $0.isFinished ? nil : $0 }
         if let exercise = active?.currentExercise {
             rows.append(TileRow(id: "set", title: exercise.name, value: FitnessTiles.setText(exercise), symbol: "arrow.forward.circle.fill", isHighlighted: true))
         } else if let routine = state.routine(for: now) {
-            rows.append(TileRow(id: "routine", title: routine.name, value: state.isScheduled(now) ? "Aujourd'hui" : "Prochaine", symbol: "figure.strengthtraining.traditional"))
+            rows.append(TileRow(id: "routine", title: routine.name, value: state.isScheduled(now) ? tr("Aujourd'hui") : tr("Prochaine"), symbol: "figure.strengthtraining.traditional"))
         }
-        rows.append(TileRow(id: "volume", title: "Volume", value: "\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg", symbol: "scalemass"))
-        rows.append(TileRow(id: "burned", title: "Calories brûlées", value: "\(TF.int(FitnessMath.caloriesBurned(state, on: now))) kcal", symbol: "flame"))
+        rows.append(TileRow(id: "volume", title: tr("Volume"), value: tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"), symbol: "scalemass"))
+        rows.append(TileRow(id: "burned", title: tr("Calories brûlées"), value: tr("\(TF.int(FitnessMath.caloriesBurned(state, on: now))) kcal"), symbol: "flame"))
         let nutrition = context.payload.domains.nutrition
         if !nutrition.entries.isEmpty {
             let protein = NutritionMath.totals(nutrition, on: now).protein
-            rows.append(TileRow(id: "protein", title: "Protéines", value: "\(TF.int(protein))/\(TF.int(nutrition.goals.protein)) g", symbol: "bolt.heart", progress: protein / max(1, nutrition.goals.protein)))
+            rows.append(TileRow(id: "protein", title: tr("Protéines"), value: "\(TF.int(protein))/\(TF.int(nutrition.goals.protein)) g", symbol: "bolt.heart", progress: protein / max(1, nutrition.goals.protein)))
         }
         tile.rows = rows
         tile.visual = .week(DateMath.week(containing: now).map { day -> Bool? in
@@ -231,7 +231,7 @@ enum DashboardTiles {
             if trained { return true }
             return day > now ? nil : false
         })
-        tile.buttons = active == nil ? [] : [TileButton(title: "Série faite", symbol: "checkmark", action: .completeSet, isProminent: true)]
+        tile.buttons = active == nil ? [] : [TileButton(title: tr("Série faite"), symbol: "checkmark", action: .completeSet, isProminent: true)]
         return tile
     }
 
@@ -240,11 +240,11 @@ enum DashboardTiles {
         let state = context.payload.domains.budget
         let currency = context.settings.currencyCode
         let remaining = BudgetMath.remaining(state, at: now)
-        var tile = Tile(title: "Argent", symbol: "dollarsign.circle")
+        var tile = Tile(title: tr("Argent"), symbol: "dollarsign.circle")
         tile.value = TF.money(remaining, currency)
         tile.trend = remaining < 0 ? false : nil
-        tile.caption = "reste ce mois · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency))/jour"
-        var rows = [TileRow(id: "today", title: "Dépensé aujourd'hui", value: TF.money(BudgetMath.spentToday(state, at: now), currency, decimals: 2), symbol: "cart")]
+        tile.caption = tr("reste ce mois · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency))/jour")
+        var rows = [TileRow(id: "today", title: tr("Dépensé aujourd'hui"), value: TF.money(BudgetMath.spentToday(state, at: now), currency, decimals: 2), symbol: "cart")]
         if let bill = BudgetMath.upcomingBills(state, at: now, within: 31).first {
             let cents = bill.bill.amount.rounded() == bill.bill.amount ? 0 : 2
             rows.append(TileRow(id: "bill", title: bill.bill.name, value: TF.money(bill.bill.amount, currency, decimals: cents), detail: TF.relativeDay(bill.due, from: now), symbol: bill.bill.symbol))
@@ -253,7 +253,7 @@ enum DashboardTiles {
             rows.append(TileRow(id: "goal", title: goal.name, value: Fmt.percent(goal.progress), symbol: "banknote", progress: goal.progress))
         }
         if !state.accounts.isEmpty {
-            rows.append(TileRow(id: "worth", title: "Valeur nette", value: TF.money(BudgetMath.netWorth(state), currency), symbol: "building.columns"))
+            rows.append(TileRow(id: "worth", title: tr("Valeur nette"), value: TF.money(BudgetMath.netWorth(state), currency), symbol: "building.columns"))
         }
         tile.rows = rows
         tile.visual = .bar(BudgetMath.spentThisMonth(state, at: now) / max(1, state.monthlyBudget))
@@ -263,14 +263,14 @@ enum DashboardTiles {
     static func student(_ context: RenderContext) -> Tile {
         let now = context.date
         let state = context.payload.domains.student
-        guard !state.courses.isEmpty || !state.exams.isEmpty else { return .empty("Tableau études", symbol: "graduationcap.circle", message: StudentTiles.hint) }
-        var tile = Tile(title: "Études", symbol: "graduationcap.circle")
+        guard !state.courses.isEmpty || !state.exams.isEmpty else { return .empty(tr("Tableau études"), symbol: "graduationcap.circle", message: StudentTiles.hint) }
+        var tile = Tile(title: tr("Études"), symbol: "graduationcap.circle")
         if let next = StudentMath.nextClass(state, at: now) {
-            tile.value = next.start <= now ? "En cours" : TF.time(next.start, context)
+            tile.value = next.start <= now ? tr("En cours") : TF.time(next.start, context)
             tile.caption = StudentTiles.courseName(state, next.slot.courseID) + (next.slot.room.isEmpty ? "" : " · \(next.slot.room)")
         } else {
-            tile.value = "Libre"
-            tile.caption = "Pas de cours prévu"
+            tile.value = tr("Libre")
+            tile.caption = tr("Pas de cours prévu")
         }
         var rows: [TileRow] = []
         if let exam = StudentMath.nextExam(state, at: now) {
@@ -280,9 +280,9 @@ enum DashboardTiles {
             rows.append(TileRow(id: item.id.uuidString, title: item.title, value: TF.relativeDay(item.due, from: now), isDone: false, action: .toggleAssignment(item.id.uuidString)))
         }
         let minutes = StudentMath.studyMinutes(state, weekOf: now)
-        rows.append(TileRow(id: "study", title: "Étude cette semaine", value: Fmt.minutes(minutes), symbol: "clock", progress: minutes / 60 / max(0.5, state.weeklyStudyGoalHours)))
+        rows.append(TileRow(id: "study", title: tr("Étude cette semaine"), value: Fmt.minutes(minutes), symbol: "clock", progress: minutes / 60 / max(0.5, state.weeklyStudyGoalHours)))
         if let average = StudentMath.overallAverage(state) {
-            rows.append(TileRow(id: "avg", title: "Moyenne", value: "\(TF.decimal(average, 1)) %", symbol: "graduationcap"))
+            rows.append(TileRow(id: "avg", title: tr("Moyenne"), value: "\(TF.decimal(average, 1)) %", symbol: "graduationcap"))
         }
         tile.rows = rows
         return tile
@@ -299,7 +299,7 @@ enum DashboardTiles {
         tile.rows = insight.points.prefix(5).enumerated().map { pair in
             TileRow(id: "\(pair.offset)", title: pair.element, symbol: "circle.fill")
         }
-        tile.footnote = "Calculé à partir de tes données, sur ton iPhone"
+        tile.footnote = tr("Calculé à partir de tes données, sur ton iPhone")
         tile.inline = insight.text
         return tile
     }

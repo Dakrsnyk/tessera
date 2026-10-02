@@ -50,53 +50,53 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     /// Where the step is, in the app's words (the tab, or the Studio).
     var place: String {
         switch self {
-        case .welcome, .finish: "Tessera"
-        case .daily, .miniApps, .info: "Accueil"
-        case .create: "Créer"
-        case .studio: "Studio"
-        case .store: "Store"
-        case .mine: "Mes widgets"
-        case .homeScreen: "Écran d'accueil"
+        case .welcome, .finish: tr("Tessera")
+        case .daily, .miniApps, .info: tr("Accueil")
+        case .create: tr("Créer")
+        case .studio: tr("Studio")
+        case .store: tr("Store")
+        case .mine: tr("Mes widgets")
+        case .homeScreen: tr("Écran d'accueil")
         }
     }
 
     func title(name: String) -> String {
         switch self {
-        case .welcome: name.isEmpty ? "Bienvenue !" : "Bienvenue, \(name) !"
-        case .daily: "Mon Quotidien"
-        case .miniApps: "Tes mini-apps"
-        case .info: "Mes informations"
-        case .create: "Créer un widget"
-        case .studio: "Le Studio"
-        case .store: "Le Store"
-        case .mine: "Mes widgets"
-        case .homeScreen: "Sur ton écran d'accueil"
-        case .finish: "À toi de jouer !"
+        case .welcome: name.isEmpty ? tr("Bienvenue !") : tr("Bienvenue, \(name) !")
+        case .daily: tr("Mon Quotidien")
+        case .miniApps: tr("Tes mini-apps")
+        case .info: tr("Mes informations")
+        case .create: tr("Créer un widget")
+        case .studio: tr("Le Studio")
+        case .store: tr("Le Store")
+        case .mine: tr("Mes widgets")
+        case .homeScreen: tr("Sur ton écran d'accueil")
+        case .finish: tr("À toi de jouer !")
         }
     }
 
     var message: String {
         switch self {
         case .welcome:
-            "Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel."
+            tr("Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.")
         case .daily:
-            "Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir."
+            tr("Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.")
         case .miniApps:
-            "Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes."
+            tr("Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes.")
         case .info:
-            "Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps et à tous tes widgets."
+            tr("Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps et à tous tes widgets.")
         case .create:
-            "Choisis un univers, la taille et tes widgets, puis « Personnaliser » les ouvre dans le Studio."
+            tr("Choisis un univers, la taille et tes widgets, puis « Personnaliser » les ouvre dans le Studio.")
         case .studio:
-            "Thème, style, couleur principale, palettes, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :"
+            tr("Thème, style, couleur principale, palettes, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :")
         case .store:
-            "Des widgets prêts à l'emploi, des packs et des écrans d'accueil complets. Tout s'ouvre dans le Studio pour être personnalisé."
+            tr("Des widgets prêts à l'emploi, des packs et des écrans d'accueil complets. Tout s'ouvre dans le Studio pour être personnalisé.")
         case .mine:
-            "Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les ou réunis-en plusieurs en un seul."
+            tr("Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les ou réunis-en plusieurs en un seul.")
         case .homeScreen:
-            "Tes widgets t'attendent dans la galerie de widgets d'iOS :"
+            tr("Tes widgets t'attendent dans la galerie de widgets d'iOS :")
         case .finish:
-            "Ton profil et les Réglages sont ici, en haut à droite. Tu pourras y revoir ce tutoriel quand tu veux."
+            tr("Ton profil et les Réglages sont ici, en haut à droite. Tu pourras y revoir ce tutoriel quand tu veux.")
         }
     }
 

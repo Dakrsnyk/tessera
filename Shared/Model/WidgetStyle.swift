@@ -9,17 +9,17 @@ enum LayoutKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .auto: "Auto"
-        case .vertical: "Vertical"
-        case .horizontal: "Horizontal"
-        case .minimal: "Minimal"
-        case .centered: "Focus"
-        case .split: "Deux colonnes"
-        case .data: "Données"
-        case .list: "Liste"
-        case .progress: "Progression"
-        case .graph: "Graphique"
-        case .cards: "Cartes"
+        case .auto: tr("Auto")
+        case .vertical: tr("Vertical")
+        case .horizontal: tr("Horizontal")
+        case .minimal: tr("Minimal")
+        case .centered: tr("Focus")
+        case .split: tr("Deux colonnes")
+        case .data: tr("Données")
+        case .list: tr("Liste")
+        case .progress: tr("Progression")
+        case .graph: tr("Graphique")
+        case .cards: tr("Cartes")
         }
     }
 
@@ -41,17 +41,17 @@ enum LayoutKind: String, Codable, CaseIterable, Identifiable {
 
     var summary: String {
         switch self {
-        case .auto: "La disposition prévue pour ce widget."
-        case .vertical: "Titre, valeur, puis le graphique en dessous."
-        case .horizontal: "Icône, valeur et progression sur une ligne."
-        case .minimal: "Une seule information, très grande."
-        case .centered: "L'icône et la valeur au centre, comme un cadran."
-        case .split: "La valeur d'un côté, le détail de l'autre."
-        case .data: "Plusieurs statistiques, bien alignées."
-        case .list: "Les lignes d'abord, la valeur en en-tête."
-        case .progress: "Une grande barre de progression."
-        case .graph: "La valeur et un grand graphique."
-        case .cards: "Chaque information sur sa petite carte."
+        case .auto: tr("La disposition prévue pour ce widget.")
+        case .vertical: tr("Titre, valeur, puis le graphique en dessous.")
+        case .horizontal: tr("Icône, valeur et progression sur une ligne.")
+        case .minimal: tr("Une seule information, très grande.")
+        case .centered: tr("L'icône et la valeur au centre, comme un cadran.")
+        case .split: tr("La valeur d'un côté, le détail de l'autre.")
+        case .data: tr("Plusieurs statistiques, bien alignées.")
+        case .list: tr("Les lignes d'abord, la valeur en en-tête.")
+        case .progress: tr("Une grande barre de progression.")
+        case .graph: tr("La valeur et un grand graphique.")
+        case .cards: tr("Chaque information sur sa petite carte.")
         }
     }
 }
@@ -74,19 +74,19 @@ enum ChartKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .auto: "Auto"
-        case .line: "Ligne"
-        case .area: "Aire"
-        case .bars: "Barres"
-        case .histogram: "Histogramme"
-        case .dots: "Points"
-        case .sparkline: "Sparkline"
-        case .evolution: "Évolution"
-        case .comparison: "Comparaison"
-        case .ring: "Anneau"
-        case .pie: "Cercle"
-        case .gauge: "Jauge"
-        case .progress: "Barre"
+        case .auto: tr("Auto")
+        case .line: tr("Ligne")
+        case .area: tr("Aire")
+        case .bars: tr("Barres")
+        case .histogram: tr("Histogramme")
+        case .dots: tr("Points")
+        case .sparkline: tr("Sparkline")
+        case .evolution: tr("Évolution")
+        case .comparison: tr("Comparaison")
+        case .ring: tr("Anneau")
+        case .pie: tr("Cercle")
+        case .gauge: tr("Jauge")
+        case .progress: tr("Barre")
         }
     }
 
@@ -125,17 +125,17 @@ enum Density: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .compact: "Aéré"
-        case .balanced: "Équilibré"
-        case .dense: "Dense"
+        case .compact: tr("Aéré")
+        case .balanced: tr("Équilibré")
+        case .dense: tr("Dense")
         }
     }
 
     var summary: String {
         switch self {
-        case .compact: "Peu d'informations, très lisible."
-        case .balanced: "Équilibre entre informations et espace."
-        case .dense: "Plus d'informations dans le même widget."
+        case .compact: tr("Peu d'informations, très lisible.")
+        case .balanced: tr("Équilibre entre informations et espace.")
+        case .dense: tr("Plus d'informations dans le même widget.")
         }
     }
 }
@@ -146,13 +146,13 @@ enum BorderKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .none: "Aucune"
-        case .solid: "Pleine"
-        case .dashed: "Tirets"
-        case .dotted: "Points"
-        case .double: "Double"
-        case .glow: "Lumineuse"
-        case .gradient: "Dégradé"
+        case .none: tr("Aucune")
+        case .solid: tr("Pleine")
+        case .dashed: tr("Tirets")
+        case .dotted: tr("Points")
+        case .double: tr("Double")
+        case .glow: tr("Lumineuse")
+        case .gradient: tr("Dégradé")
         }
     }
 }
@@ -163,23 +163,23 @@ enum DepthKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .none: "Aucune"
-        case .soft: "Légère"
-        case .strong: "Forte"
-        case .glow: "Lueur"
-        case .floating: "Flottant"
-        case .embossed: "Relief"
+        case .none: tr("Aucune")
+        case .soft: tr("Légère")
+        case .strong: tr("Forte")
+        case .glow: tr("Lueur")
+        case .floating: tr("Flottant")
+        case .embossed: tr("Relief")
         }
     }
 
     var summary: String {
         switch self {
-        case .none: "Tout est à plat."
-        case .soft: "Une ombre douce sous les chiffres et les cartes."
-        case .strong: "Une ombre marquée, plus de contraste."
-        case .glow: "Les chiffres et les graphiques brillent."
-        case .floating: "Le contenu semble flotter au-dessus du fond."
-        case .embossed: "Un léger relief, comme gravé."
+        case .none: tr("Tout est à plat.")
+        case .soft: tr("Une ombre douce sous les chiffres et les cartes.")
+        case .strong: tr("Une ombre marquée, plus de contraste.")
+        case .glow: tr("Les chiffres et les graphiques brillent.")
+        case .floating: tr("Le contenu semble flotter au-dessus du fond.")
+        case .embossed: tr("Un léger relief, comme gravé.")
         }
     }
 }
@@ -191,23 +191,23 @@ enum ShapeKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .theme: "Style"
-        case .rounded: "Arrondi"
-        case .soft: "Doux"
-        case .square: "Carré"
-        case .capsule: "Capsule"
-        case .panel: "Panneau"
+        case .theme: tr("Style")
+        case .rounded: tr("Arrondi")
+        case .soft: tr("Doux")
+        case .square: tr("Carré")
+        case .capsule: tr("Capsule")
+        case .panel: tr("Panneau")
         }
     }
 
     var summary: String {
         switch self {
-        case .theme: "Les formes prévues par le style."
-        case .rounded: "Coins arrondis classiques."
-        case .soft: "Coins très arrondis, forme douce."
-        case .square: "Coins nets, presque carrés."
-        case .capsule: "Barres, cartes et boutons en capsule."
-        case .panel: "Le contenu posé sur une carte intérieure."
+        case .theme: tr("Les formes prévues par le style.")
+        case .rounded: tr("Coins arrondis classiques.")
+        case .soft: tr("Coins très arrondis, forme douce.")
+        case .square: tr("Coins nets, presque carrés.")
+        case .capsule: tr("Barres, cartes et boutons en capsule.")
+        case .panel: tr("Le contenu posé sur une carte intérieure.")
         }
     }
 }
@@ -219,12 +219,12 @@ enum IconStyle: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .theme: "Style"
-        case .plain: "Simple"
-        case .circle: "Pastille"
-        case .square: "Carré"
-        case .outline: "Contour"
-        case .none: "Aucune"
+        case .theme: tr("Style")
+        case .plain: tr("Simple")
+        case .circle: tr("Pastille")
+        case .square: tr("Carré")
+        case .outline: tr("Contour")
+        case .none: tr("Aucune")
         }
     }
 }
@@ -236,11 +236,11 @@ enum IconFamily: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .theme: "Style"
-        case .filled: "Pleines"
-        case .outlined: "Traits"
-        case .circled: "Rondes"
-        case .squared: "Carrées"
+        case .theme: tr("Style")
+        case .filled: tr("Pleines")
+        case .outlined: tr("Traits")
+        case .circled: tr("Rondes")
+        case .squared: tr("Carrées")
         }
     }
 }
@@ -251,9 +251,9 @@ enum IconPosition: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .leading: "À gauche"
-        case .trailing: "À droite"
-        case .top: "En haut"
+        case .leading: tr("À gauche")
+        case .trailing: tr("À droite")
+        case .top: tr("En haut")
         }
     }
 }
@@ -264,10 +264,10 @@ enum TitleCase: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .theme: "Style"
-        case .upper: "MAJUSCULES"
-        case .normal: "Normal"
-        case .lower: "minuscules"
+        case .theme: tr("Style")
+        case .upper: tr("MAJUSCULES")
+        case .normal: tr("Normal")
+        case .lower: tr("minuscules")
         }
     }
 }
@@ -278,13 +278,13 @@ enum WeightChoice: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .light: "Fin"
-        case .regular: "Normal"
-        case .medium: "Moyen"
-        case .semibold: "Demi-gras"
-        case .bold: "Gras"
-        case .heavy: "Épais"
-        case .black: "Noir"
+        case .light: tr("Fin")
+        case .regular: tr("Normal")
+        case .medium: tr("Moyen")
+        case .semibold: tr("Demi-gras")
+        case .bold: tr("Gras")
+        case .heavy: tr("Épais")
+        case .black: tr("Noir")
         }
     }
 }
@@ -295,11 +295,11 @@ enum GradientDirection: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .down: "Vers le bas"
-        case .diagonal: "En diagonale"
-        case .across: "De gauche à droite"
-        case .up: "Vers le haut"
-        case .radial: "Depuis le centre"
+        case .down: tr("Vers le bas")
+        case .diagonal: tr("En diagonale")
+        case .across: tr("De gauche à droite")
+        case .up: tr("Vers le haut")
+        case .radial: tr("Depuis le centre")
         }
     }
 
@@ -320,14 +320,14 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .none: "Aucune"
-        case .grain: "Grain"
-        case .paper: "Papier"
-        case .dots: "Points"
-        case .grid: "Grille"
-        case .lines: "Lignes"
-        case .diagonal: "Rayures"
-        case .noise: "Bruit"
+        case .none: tr("Aucune")
+        case .grain: tr("Grain")
+        case .paper: tr("Papier")
+        case .dots: tr("Points")
+        case .grid: tr("Grille")
+        case .lines: tr("Lignes")
+        case .diagonal: tr("Rayures")
+        case .noise: tr("Bruit")
         }
     }
 }
@@ -344,14 +344,14 @@ struct TypePreset: Identifiable, Hashable {
     let tracking: Double
 
     static let all: [TypePreset] = [
-        TypePreset(id: "system", name: "Système", font: .standard, numberWeight: .semibold, titleWeight: .semibold, valueScale: 1, titleCase: .upper, tracking: 0),
-        TypePreset(id: "display", name: "Affiche", font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),
-        TypePreset(id: "light", name: "Léger", font: .standard, numberWeight: .light, titleWeight: .regular, valueScale: 1.1, titleCase: .normal, tracking: 0),
-        TypePreset(id: "friendly", name: "Arrondi", font: .rounded, numberWeight: .bold, titleWeight: .semibold, valueScale: 1, titleCase: .normal, tracking: 0),
-        TypePreset(id: "editorial", name: "Éditorial", font: .serif, numberWeight: .regular, titleWeight: .medium, valueScale: 1.1, titleCase: .upper, tracking: 1.2),
-        TypePreset(id: "classic", name: "Classique", font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),
-        TypePreset(id: "code", name: "Code", font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),
-        TypePreset(id: "tech", name: "Technique", font: .mono, numberWeight: .light, titleWeight: .regular, valueScale: 1, titleCase: .upper, tracking: 1.5),
+        TypePreset(id: "system", name: tr("Système"), font: .standard, numberWeight: .semibold, titleWeight: .semibold, valueScale: 1, titleCase: .upper, tracking: 0),
+        TypePreset(id: "display", name: tr("Affiche"), font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),
+        TypePreset(id: "light", name: tr("Léger"), font: .standard, numberWeight: .light, titleWeight: .regular, valueScale: 1.1, titleCase: .normal, tracking: 0),
+        TypePreset(id: "friendly", name: tr("Arrondi"), font: .rounded, numberWeight: .bold, titleWeight: .semibold, valueScale: 1, titleCase: .normal, tracking: 0),
+        TypePreset(id: "editorial", name: tr("Éditorial"), font: .serif, numberWeight: .regular, titleWeight: .medium, valueScale: 1.1, titleCase: .upper, tracking: 1.2),
+        TypePreset(id: "classic", name: tr("Classique"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),
+        TypePreset(id: "code", name: tr("Code"), font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),
+        TypePreset(id: "tech", name: tr("Technique"), font: .mono, numberWeight: .light, titleWeight: .regular, valueScale: 1, titleCase: .upper, tracking: 1.5),
     ]
 }
 
@@ -575,11 +575,11 @@ struct StyleOptions: Codable, Hashable {
     var premiumFeatures: [String] {
         var features: [String] = []
         let colors = [textHex, secondaryHex, numberHex, iconHex, chartHex, positiveHex, negativeHex, borderHex, shadowHex, panelHex]
-        if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append("Couleurs personnalisées") }
-        if gradient != nil { features.append("Dégradé personnalisé") }
-        if texture != .none { features.append("Texture") }
-        if border != .none { features.append("Bordure") }
-        if depth != .none { features.append("Ombre et profondeur") }
+        if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append(tr("Couleurs personnalisées")) }
+        if gradient != nil { features.append(tr("Dégradé personnalisé")) }
+        if texture != .none { features.append(tr("Texture")) }
+        if border != .none { features.append(tr("Bordure")) }
+        if depth != .none { features.append(tr("Ombre et profondeur")) }
         return features
     }
 
@@ -657,70 +657,70 @@ struct StylePreset: Identifiable, Hashable {
     }
 
     static let all: [StylePreset] = [
-        make("midnight", "Midnight", "Bleu nuit, chiffres fins, lueur discrète", theme: .dark, accent: "7C9CFF", background: .gradient) {
+        make("midnight", tr("Midnight"), tr("Bleu nuit, chiffres fins, lueur discrète"), theme: .dark, accent: "7C9CFF", background: .gradient) {
             $0.gradient = GradientSpec(startHex: "1B2250", endHex: "05060F", direction: .down)
             $0.depth = .glow
             $0.shadowHex = "7C9CFF"
             $0.numberWeight = .light
         },
-        make("pure-white", "Pure White", "Blanc pur, noir net, rien de trop", theme: .light, accent: "111114", background: .color("FFFFFF")) {
+        make("pure-white", tr("Pure White"), tr("Blanc pur, noir net, rien de trop"), theme: .light, accent: "111114", background: .color("FFFFFF")) {
             $0.border = .solid
             $0.borderHex = "E6E6EA"
             $0.borderWidth = 1
             $0.titleCase = .normal
         },
-        make("ocean", "Ocean", "Du turquoise au bleu profond", theme: .modern, accent: "5EE6D0", background: .gradient) {
+        make("ocean", tr("Ocean"), tr("Du turquoise au bleu profond"), theme: .modern, accent: "5EE6D0", background: .gradient) {
             $0.gradient = GradientSpec(startHex: "0B8FAC", endHex: "063A6B", direction: .diagonal)
             $0.chartHex = "9DF3E6"
             $0.shape = .soft
         },
-        make("forest", "Forest", "Vert forêt, texture papier", theme: .soft, accent: "A8D672", background: .color("1E3A2B")) {
+        make("forest", tr("Forest"), tr("Vert forêt, texture papier"), theme: .soft, accent: "A8D672", background: .color("1E3A2B")) {
             $0.texture = .paper
             $0.textureOpacity = 0.35
             $0.chartHex = "A8D672"
             $0.iconStyle = .circle
         },
-        make("sunset", "Sunset", "Orange, rose et violet du soir", theme: .gradient, accent: "FF8A5B", background: .gradient) {
+        make("sunset", tr("Sunset"), tr("Orange, rose et violet du soir"), theme: .gradient, accent: "FF8A5B", background: .gradient) {
             $0.gradient = GradientSpec(startHex: "FF9A62", endHex: "8E3BA8", direction: .diagonal)
             $0.depth = .soft
             $0.numberWeight = .heavy
         },
-        make("cyber", "Cyber", "Magenta et cyan, bord lumineux", theme: .neon, accent: "00F0FF") {
+        make("cyber", tr("Cyber"), tr("Magenta et cyan, bord lumineux"), theme: .neon, accent: "00F0FF") {
             $0.border = .glow
             $0.borderHex = "FF2DAA"
             $0.chartHex = "00F0FF"
             $0.numberHex = "FF2DAA"
         },
-        make("luxury", "Luxury", "Noir profond et or", theme: .luxury, accent: "D4AF37"),
-        make("minimal-black", "Minimal Black", "Noir total, une seule couleur", theme: .monochrome, accent: "FFFFFF") {
+        make("luxury", tr("Luxury"), tr("Noir profond et or"), theme: .luxury, accent: "D4AF37"),
+        make("minimal-black", tr("Minimal Black"), tr("Noir total, une seule couleur"), theme: .monochrome, accent: "FFFFFF") {
             $0.iconStyle = .none
             $0.titleCase = .lower
             $0.numberWeight = .regular
         },
-        make("glass", "Glass", "Verre dépoli et reflets", theme: .liquidGlass, accent: "5B7FE0"),
-        make("monochrome", "Monochrome", "Gris doux, chiffres noirs", theme: .light, accent: "3A3A3C", background: .color("E9E9EB")) {
+        make("glass", tr("Glass"), tr("Verre dépoli et reflets"), theme: .liquidGlass, accent: "5B7FE0"),
+        make("monochrome", tr("Monochrome"), tr("Gris doux, chiffres noirs"), theme: .light, accent: "3A3A3C", background: .color("E9E9EB")) {
             $0.shape = .panel
             $0.chartHex = "3A3A3C"
         },
-        make("sakura", "Sakura", "Rose poudré et prune", theme: .pastel, accent: "D0487A", background: .color("FBE4EC")) {
+        make("sakura", tr("Sakura"), tr("Rose poudré et prune"), theme: .pastel, accent: "D0487A", background: .color("FBE4EC")) {
             $0.textHex = "4A1830"
             $0.shape = .soft
             $0.iconStyle = .circle
         },
-        make("sand", "Sable", "Beige chaud, serif élégant", theme: .editorial, accent: "A0522D", background: .color("EFE3CC")) {
+        make("sand", tr("Sable"), tr("Beige chaud, serif élégant"), theme: .editorial, accent: "A0522D", background: .color("EFE3CC")) {
             $0.texture = .grain
             $0.textureOpacity = 0.3
         },
-        make("arctic", "Arctique", "Bleu glacier et blanc", theme: .modern, accent: "2F80ED", background: .gradient) {
+        make("arctic", tr("Arctique"), tr("Bleu glacier et blanc"), theme: .modern, accent: "2F80ED", background: .gradient) {
             $0.gradient = GradientSpec(startHex: "F4FAFF", endHex: "CFE3F7", direction: .down)
             $0.textHex = "0B2540"
             $0.secondaryHex = "5A7390"
         },
-        make("terminal", "Hacker", "Vert sur noir, lignes de balayage", theme: .terminal, accent: "39FF6A") {
+        make("terminal", tr("Hacker"), tr("Vert sur noir, lignes de balayage"), theme: .terminal, accent: "39FF6A") {
             $0.chart = .sparkline
         },
-        make("sport", "Stade", "Noir et jaune fluo, gros chiffres", theme: .sport, accent: "C6FF00"),
-        make("dashboard", "Cockpit", "Petites cartes sur ardoise", theme: .dashboard, accent: "4DA3FF"),
+        make("sport", tr("Stade"), tr("Noir et jaune fluo, gros chiffres"), theme: .sport, accent: "C6FF00"),
+        make("dashboard", tr("Cockpit"), tr("Petites cartes sur ardoise"), theme: .dashboard, accent: "4DA3FF"),
     ]
 
     static func preset(_ id: String) -> StylePreset? { all.first { $0.id == id } }
@@ -754,7 +754,7 @@ struct SavedStyle: Codable, Hashable, Identifiable {
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? c.decodeIfPresent(UUID.self, forKey: .id)) ?? UUID()
-        name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? "Mon thème"
+        name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr("Mon thème")
         themeID = (try? c.decodeIfPresent(ThemeID.self, forKey: .themeID)) ?? .minimal
         accentHex = (try? c.decodeIfPresent(String.self, forKey: .accentHex)) ?? Palette.defaultAccent
         background = (try? c.decodeIfPresent(BackgroundStyle.self, forKey: .background)) ?? .theme

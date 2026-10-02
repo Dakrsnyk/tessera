@@ -41,14 +41,14 @@ struct FusionSheet: View {
                 VStack(alignment: .leading, spacing: 20) {
                     stage
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Un widget \(format.title.lowercased())")
+                        Text(tr("Un widget \(format.title.lowercased())"))
                             .font(.title3.weight(.semibold))
-                        Text("Un vrai widget \(format.title.lowercased()) pour ton écran d'accueil : dans la galerie de widgets, choisis la taille \(format.title).")
+                        Text(tr("Un vrai widget \(format.title.lowercased()) pour ton écran d'accueil : dans la galerie de widgets, choisis la taille \(format.title)."))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    EditorSection(title: "Contient", detail: Fmt.plural(merged.options.parts.count, "widget", "widgets")) {
+                    EditorSection(title: tr("Contient"), detail: Fmt.plural(merged.options.parts.count, tr("widget"), tr("widgets"))) {
                         VStack(alignment: .leading, spacing: 12) {
                             ForEach(Array(merged.options.parts.enumerated()), id: \.offset) { _, part in
                                 HStack(spacing: 12) {
@@ -60,16 +60,16 @@ struct FusionSheet: View {
                                         .font(.subheadline.weight(.medium))
                                         .lineLimit(1)
                                     Spacer(minLength: 8)
-                                    Text(part.size == .small ? "Moitié de ligne" : "Ligne entière")
+                                    Text(part.size == .small ? tr("Moitié de ligne") : tr("Ligne entière"))
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
                             }
                         }
                     }
-                    Toggle("Garder aussi les widgets d'origine", isOn: $keepsOriginals)
+                    Toggle(tr("Garder aussi les widgets d'origine"), isOn: $keepsOriginals)
                         .card(padding: 14)
-                    Text("Aucune information n'est perdue : chaque widget garde tout son contenu. Le widget fusionné reste personnalisable dans l'éditeur (style, couleur, fond, police).")
+                    Text(tr("Aucune information n'est perdue : chaque widget garde tout son contenu. Le widget fusionné reste personnalisable dans l'éditeur (style, couleur, fond, police)."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -82,7 +82,7 @@ struct FusionSheet: View {
                     onConfirm(keepsOriginals)
                     dismiss()
                 } label: {
-                    Label("Fusionner", systemImage: "arrow.triangle.merge")
+                    Label(tr("Fusionner"), systemImage: "arrow.triangle.merge")
                         .font(.headline)
                         .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
@@ -93,11 +93,11 @@ struct FusionSheet: View {
                 .padding(.vertical, 10)
                 .background(.bar)
             }
-            .navigationTitle("Fusionner")
+            .navigationTitle(tr("Fusionner"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Annuler") { dismiss() }
+                    Button(tr("Annuler")) { dismiss() }
                 }
             }
         }

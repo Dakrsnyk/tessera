@@ -201,19 +201,19 @@ struct MainTabView: View {
         TabView(selection: $router.tab) {
             HomeView()
                 .pageEntrance(.home)
-                .tabItem { Label("Accueil", systemImage: "square.grid.2x2") }
+                .tabItem { Label(tr("Accueil"), systemImage: "square.grid.2x2") }
                 .tag(Router.Tab.home)
             SpacesView()
                 .pageEntrance(.spaces)
-                .tabItem { Label("Créer", systemImage: "plus.square.on.square") }
+                .tabItem { Label(tr("Créer"), systemImage: "plus.square.on.square") }
                 .tag(Router.Tab.spaces)
             ExploreView()
                 .pageEntrance(.explore)
-                .tabItem { Label("Store", systemImage: "bag") }
+                .tabItem { Label(tr("Store"), systemImage: "bag") }
                 .tag(Router.Tab.explore)
             MyWidgetsView()
                 .pageEntrance(.mine)
-                .tabItem { Label("Mes widgets", systemImage: "rectangle.stack") }
+                .tabItem { Label(tr("Mes widgets"), systemImage: "rectangle.stack") }
                 .tag(Router.Tab.mine)
         }
     }
@@ -238,7 +238,7 @@ struct ContentScreenView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("OK") { dismiss() }
+                    Button(tr("OK")) { dismiss() }
                 }
             }
         }

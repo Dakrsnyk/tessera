@@ -33,17 +33,17 @@ enum BusinessKPI: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .revenue: "Chiffre d'affaires"
-        case .costs: "Dépenses"
-        case .profit: "Bénéfice"
-        case .margin: "Marge"
-        case .orders: "Commandes"
-        case .averageBasket: "Panier moyen"
-        case .newCustomers: "Nouveaux clients"
-        case .visitors: "Visiteurs"
-        case .conversion: "Conversion"
-        case .mrr: "MRR"
-        case .subscribers: "Abonnés"
+        case .revenue: tr("Chiffre d'affaires")
+        case .costs: tr("Dépenses")
+        case .profit: tr("Bénéfice")
+        case .margin: tr("Marge")
+        case .orders: tr("Commandes")
+        case .averageBasket: tr("Panier moyen")
+        case .newCustomers: tr("Nouveaux clients")
+        case .visitors: tr("Visiteurs")
+        case .conversion: tr("Conversion")
+        case .mrr: tr("MRR")
+        case .subscribers: tr("Abonnés")
         }
     }
 
@@ -109,7 +109,7 @@ struct CustomMetric: Codable, Hashable, Identifiable {
 }
 
 struct BusinessState: Codable, Hashable {
-    var name = "Mon entreprise"
+    var name = tr("Mon entreprise")
     var monthlyGoal: Double = 10_000
     var sales: [SalesEntry] = []
     var expenses: [BusinessExpense] = []
@@ -125,7 +125,7 @@ struct BusinessState: Codable, Hashable {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        name = c.value(.name, "Mon entreprise")
+        name = c.value(.name, tr("Mon entreprise"))
         monthlyGoal = c.value(.monthlyGoal, 10_000)
         sales = c.value(.sales, [])
         expenses = c.value(.expenses, [])

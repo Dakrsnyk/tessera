@@ -43,17 +43,17 @@ enum SetupTag: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .minimal: "minimal"
-        case .dark: "sombre"
-        case .light: "clair"
-        case .colorful: "coloré"
-        case .pastel: "pastel"
-        case .productivity: "productivité"
-        case .fitness: "sport"
-        case .study: "études"
-        case .travel: "voyage"
-        case .money: "finances"
-        case .wellbeing: "bien-être"
+        case .minimal: tr("minimal")
+        case .dark: tr("sombre")
+        case .light: tr("clair")
+        case .colorful: tr("coloré")
+        case .pastel: tr("pastel")
+        case .productivity: tr("productivité")
+        case .fitness: tr("sport")
+        case .study: tr("études")
+        case .travel: tr("voyage")
+        case .money: tr("finances")
+        case .wellbeing: tr("bien-être")
         }
     }
 }
@@ -113,27 +113,27 @@ struct SetupApp: Hashable {
     let name: String
     let symbol: String
 
-    static let phone = SetupApp(name: "Téléphone", symbol: "phone.fill")
-    static let messages = SetupApp(name: "Messages", symbol: "message.fill")
-    static let mail = SetupApp(name: "Mail", symbol: "envelope.fill")
-    static let music = SetupApp(name: "Musique", symbol: "music.note")
-    static let photos = SetupApp(name: "Photos", symbol: "photo.on.rectangle.angled")
-    static let camera = SetupApp(name: "Caméra", symbol: "camera.fill")
-    static let maps = SetupApp(name: "Plans", symbol: "map.fill")
-    static let notes = SetupApp(name: "Notes", symbol: "note.text")
-    static let settings = SetupApp(name: "Réglages", symbol: "gearshape.fill")
-    static let clock = SetupApp(name: "Horloge", symbol: "clock.fill")
-    static let calendar = SetupApp(name: "Calendrier", symbol: "calendar")
-    static let books = SetupApp(name: "Livres", symbol: "book.fill")
-    static let weather = SetupApp(name: "Météo", symbol: "cloud.sun.fill")
-    static let reminders = SetupApp(name: "Rappels", symbol: "checklist")
-    static let health = SetupApp(name: "Santé", symbol: "heart.fill")
-    static let fitness = SetupApp(name: "Forme", symbol: "figure.run")
-    static let wallet = SetupApp(name: "Cartes", symbol: "creditcard.fill")
-    static let web = SetupApp(name: "Web", symbol: "globe")
-    static let podcasts = SetupApp(name: "Podcasts", symbol: "mic.fill")
-    static let files = SetupApp(name: "Fichiers", symbol: "folder.fill")
-    static let tessera = SetupApp(name: "Tessera", symbol: "")
+    static let phone = SetupApp(name: tr("Téléphone"), symbol: "phone.fill")
+    static let messages = SetupApp(name: tr("Messages"), symbol: "message.fill")
+    static let mail = SetupApp(name: tr("Mail"), symbol: "envelope.fill")
+    static let music = SetupApp(name: tr("Musique"), symbol: "music.note")
+    static let photos = SetupApp(name: tr("Photos"), symbol: "photo.on.rectangle.angled")
+    static let camera = SetupApp(name: tr("Caméra"), symbol: "camera.fill")
+    static let maps = SetupApp(name: tr("Plans"), symbol: "map.fill")
+    static let notes = SetupApp(name: tr("Notes"), symbol: "note.text")
+    static let settings = SetupApp(name: tr("Réglages"), symbol: "gearshape.fill")
+    static let clock = SetupApp(name: tr("Horloge"), symbol: "clock.fill")
+    static let calendar = SetupApp(name: tr("Calendrier"), symbol: "calendar")
+    static let books = SetupApp(name: tr("Livres"), symbol: "book.fill")
+    static let weather = SetupApp(name: tr("Météo"), symbol: "cloud.sun.fill")
+    static let reminders = SetupApp(name: tr("Rappels"), symbol: "checklist")
+    static let health = SetupApp(name: tr("Santé"), symbol: "heart.fill")
+    static let fitness = SetupApp(name: tr("Forme"), symbol: "figure.run")
+    static let wallet = SetupApp(name: tr("Cartes"), symbol: "creditcard.fill")
+    static let web = SetupApp(name: tr("Web"), symbol: "globe")
+    static let podcasts = SetupApp(name: tr("Podcasts"), symbol: "mic.fill")
+    static let files = SetupApp(name: tr("Fichiers"), symbol: "folder.fill")
+    static let tessera = SetupApp(name: tr("Tessera"), symbol: "")
 }
 
 enum SetupIconStyle {
@@ -173,24 +173,24 @@ enum SetupWallpaper: String, CaseIterable {
 
     var title: String {
         switch self {
-        case .midnight: "Nuit étoilée"
-        case .cream: "Soleil crème"
-        case .aurora: "Aurore boréale"
-        case .topography: "Courbes de niveau"
-        case .synthwave: "Rétro néon"
-        case .dunes: "Dunes"
-        case .jade: "Mosaïque jade"
-        case .pastel: "Brume pastel"
-        case .graphite: "Graphite"
-        case .paper: "Papier pointillé"
-        case .bureau: "Art déco"
-        case .bauhaus: "Formes"
-        case .ocean: "Océan"
-        case .forest: "Forêt de pins"
-        case .sunset: "Crépuscule"
-        case .terrazzo: "Terrazzo"
-        case .nebula: "Nébuleuse"
-        case .seventies: "Arcs seventies"
+        case .midnight: tr("Nuit étoilée")
+        case .cream: tr("Soleil crème")
+        case .aurora: tr("Aurore boréale")
+        case .topography: tr("Courbes de niveau")
+        case .synthwave: tr("Rétro néon")
+        case .dunes: tr("Dunes")
+        case .jade: tr("Mosaïque jade")
+        case .pastel: tr("Brume pastel")
+        case .graphite: tr("Graphite")
+        case .paper: tr("Papier pointillé")
+        case .bureau: tr("Art déco")
+        case .bauhaus: tr("Formes")
+        case .ocean: tr("Océan")
+        case .forest: tr("Forêt de pins")
+        case .sunset: tr("Crépuscule")
+        case .terrazzo: tr("Terrazzo")
+        case .nebula: tr("Nébuleuse")
+        case .seventies: tr("Arcs seventies")
         }
     }
 }
@@ -220,7 +220,7 @@ enum HomeSetupCatalog {
 
     static let all: [HomeSetup] = [
         HomeSetup(
-            id: "creme", name: "Crème", tagline: "Des tons chauds et l'essentiel de la journée, sans bruit.",
+            id: "creme", name: tr("Crème"), tagline: tr("Des tons chauds et l'essentiel de la journée, sans bruit."),
             tags: [.light, .minimal], wallpaper: .cream,
             icons: .solid(background: "FBF7EF", symbol: "8A6F55"),
             rows: [
@@ -232,7 +232,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [rectangular(.progress, "progress-year"), circular(.countdown, "countdown-holidays"), circular(.weather)])
         ),
         HomeSetup(
-            id: "aurore", name: "Aurore", tagline: "Des dégradés boréals pour l'eau, les habitudes et la météo.",
+            id: "aurore", name: tr("Aurore"), tagline: tr("Des dégradés boréals pour l'eau, les habitudes et la météo."),
             tags: [.colorful, .dark, .wellbeing], wallpaper: .aurora, icons: .glass,
             rows: [
                 .widgets([medium(.now, .aurora, "3366FF")]),
@@ -243,7 +243,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [circular(.hydration), circular(.habitStreak), circular(.weather), circular(.progress, "progress-day")])
         ),
         HomeSetup(
-            id: "graphite", name: "Graphite", tagline: "Noir, blanc et rien d'autre. L'heure, la journée, la semaine.",
+            id: "graphite", name: tr("Graphite"), tagline: tr("Noir, blanc et rien d'autre. L'heure, la journée, la semaine."),
             tags: [.dark, .minimal], wallpaper: .graphite,
             icons: .solid(background: "1C1C1E", symbol: "FFFFFF"),
             rows: [
@@ -255,7 +255,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [circular(.progress, "progress-day"), circular(.counter), circular(.weather), circular(.countdown)], clockWeight: .light)
         ),
         HomeSetup(
-            id: "neon", name: "Néon", tagline: "Focus, échéances et fuseaux, en cyan électrique.",
+            id: "neon", name: tr("Néon"), tagline: tr("Focus, échéances et fuseaux, en cyan électrique."),
             tags: [.dark, .colorful, .productivity], wallpaper: .synthwave, icons: .tinted("22E6FF"),
             rows: [
                 .widgets([small(.focus, .futuristic, "3366FF", "focus-futuristic"), small(.deadline, .futuristic, "3366FF")]),
@@ -267,7 +267,7 @@ enum HomeSetupCatalog {
                             clockDesign: .monospaced, clockWeight: .light)
         ),
         HomeSetup(
-            id: "topographie", name: "Topographie", tagline: "Soleil, lune et météo sur des courbes de niveau.",
+            id: "topographie", name: tr("Topographie"), tagline: tr("Soleil, lune et météo sur des courbes de niveau."),
             tags: [.light, .minimal, .wellbeing], wallpaper: .topography,
             icons: .solid(background: "F4F6EF", symbol: "5E7A3A"),
             rows: [
@@ -279,7 +279,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [rectangular(.sunCycle), circular(.moonPhase), circular(.weather)])
         ),
         HomeSetup(
-            id: "minuit", name: "Minuit", tagline: "Or et bleu nuit, serif et étoiles : ton agenda en élégance.",
+            id: "minuit", name: tr("Minuit"), tagline: tr("Or et bleu nuit, serif et étoiles : ton agenda en élégance."),
             tags: [.dark], wallpaper: .midnight,
             icons: .solid(background: "13203A", symbol: "C8A15A"),
             rows: [
@@ -292,7 +292,7 @@ enum HomeSetupCatalog {
                             clockDesign: .serif, clockWeight: .regular)
         ),
         HomeSetup(
-            id: "etudes", name: "Études", tagline: "Cours, examens et priorités sur papier pointillé.",
+            id: "etudes", name: tr("Études"), tagline: tr("Cours, examens et priorités sur papier pointillé."),
             tags: [.light, .study, .productivity], wallpaper: .paper,
             icons: .solid(background: "FFFFFF", symbol: "3366FF"),
             rows: [
@@ -304,7 +304,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.priorities), circular(.nextExam), circular(.semesterProgress)])
         ),
         HomeSetup(
-            id: "jade", name: "Jade", tagline: "Calories, séance et régularité, aux couleurs de Tessera.",
+            id: "jade", name: tr("Jade"), tagline: tr("Calories, séance et régularité, aux couleurs de Tessera."),
             tags: [.colorful, .fitness], wallpaper: .jade,
             icons: .gradient(["3FB39A", "1F6B5A"], symbol: "FFFFFF"),
             rows: [
@@ -316,7 +316,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [circular(.caloriesLeft), circular(.trainingStreak), rectangular(.nextSet)], clockWeight: .bold)
         ),
         HomeSetup(
-            id: "dune", name: "Dune", tagline: "Le départ, le vol et l'heure sur place, au soleil couchant.",
+            id: "dune", name: tr("Dune"), tagline: tr("Le départ, le vol et l'heure sur place, au soleil couchant."),
             tags: [.light, .travel, .colorful], wallpaper: .dunes,
             icons: .solid(background: "F9E6D2", symbol: "B5532C"),
             rows: [
@@ -329,7 +329,7 @@ enum HomeSetupCatalog {
                             clockDesign: .rounded, clockWeight: .bold)
         ),
         HomeSetup(
-            id: "pastel", name: "Pastel", tagline: "Une brume rose et lilas pour les dates qui comptent.",
+            id: "pastel", name: tr("Pastel"), tagline: tr("Une brume rose et lilas pour les dates qui comptent."),
             tags: [.pastel, .light], wallpaper: .pastel,
             icons: .gradient(["FFE1E8", "E6DDFF"], symbol: "A0567A"),
             rows: [
@@ -342,7 +342,7 @@ enum HomeSetupCatalog {
                             clockDesign: .serif, clockWeight: .medium)
         ),
         HomeSetup(
-            id: "bureau", name: "Bureau", tagline: "Ventes, MRR et portefeuille, façon art déco.",
+            id: "bureau", name: tr("Bureau"), tagline: tr("Ventes, MRR et portefeuille, façon art déco."),
             tags: [.dark, .money], wallpaper: .bureau, icons: .tinted("C8A15A"),
             rows: [
                 .widgets([small(.revenueToday, .elegant, "F2A33A"), small(.mrr, .elegant, "F2A33A")]),
@@ -353,7 +353,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [rectangular(.revenueToday), rectangular(.portfolio)], clockDesign: .serif, clockWeight: .regular)
         ),
         HomeSetup(
-            id: "corail", name: "Corail", tagline: "Ton budget en grandes formes colorées.",
+            id: "corail", name: tr("Corail"), tagline: tr("Ton budget en grandes formes colorées."),
             tags: [.colorful, .light, .money], wallpaper: .bauhaus,
             icons: .solid(background: "FFFFFF", symbol: "FF6B57"),
             rows: [
@@ -365,7 +365,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [rectangular(.budgetLeft), rectangular(.billsUpcoming)], clockDesign: .rounded, clockWeight: .bold)
         ),
         HomeSetup(
-            id: "ocean", name: "Océan", tagline: "L'eau, le ciel et tes habitudes, en bleu profond.",
+            id: "ocean", name: tr("Océan"), tagline: tr("L'eau, le ciel et tes habitudes, en bleu profond."),
             tags: [.dark, .wellbeing], wallpaper: .ocean, icons: .glass,
             rows: [
                 .widgets([small(.hydration, .glass, "3366FF"), small(.weather, .glass, "3366FF")]),
@@ -376,7 +376,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [circular(.hydration), circular(.moonPhase), rectangular(.weather)], clockDesign: .rounded, clockWeight: .medium)
         ),
         HomeSetup(
-            id: "foret", name: "Forêt", tagline: "Ton mois d'entraînement, à l'ombre des pins.",
+            id: "foret", name: tr("Forêt"), tagline: tr("Ton mois d'entraînement, à l'ombre des pins."),
             tags: [.dark, .fitness], wallpaper: .forest,
             icons: .solid(background: "1E3326", symbol: "A8D08D"),
             rows: [
@@ -388,7 +388,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [circular(.trainingStreak), circular(.weather), rectangular(.nextSet)], clockWeight: .bold)
         ),
         HomeSetup(
-            id: "crepuscule", name: "Crépuscule", tagline: "Le coucher du soleil, la semaine et ce qui t'attend.",
+            id: "crepuscule", name: tr("Crépuscule"), tagline: tr("Le coucher du soleil, la semaine et ce qui t'attend."),
             tags: [.colorful, .dark, .travel], wallpaper: .sunset, icons: .glass,
             rows: [
                 .widgets([small(.sunCycle, .glass, "F2588F"), small(.countdown, .glass, "F2588F", "countdown-holidays")]),
@@ -399,7 +399,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [rectangular(.sunCycle), circular(.countdown, "countdown-holidays"), circular(.weather)], clockDesign: .rounded)
         ),
         HomeSetup(
-            id: "terrazzo", name: "Terrazzo", tagline: "Tâches, priorités et focus sur des éclats de couleur.",
+            id: "terrazzo", name: tr("Terrazzo"), tagline: tr("Tâches, priorités et focus sur des éclats de couleur."),
             tags: [.light, .colorful, .productivity], wallpaper: .terrazzo,
             icons: .solid(background: "FFFFFF", symbol: "E4533D"),
             rows: [
@@ -411,7 +411,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [rectangular(.tasks), circular(.focus), circular(.counter)], clockDesign: .rounded, clockWeight: .bold)
         ),
         HomeSetup(
-            id: "nebuleuse", name: "Nébuleuse", tagline: "Portefeuille, crypto et marché, sous les étoiles.",
+            id: "nebuleuse", name: tr("Nébuleuse"), tagline: tr("Portefeuille, crypto et marché, sous les étoiles."),
             tags: [.dark, .money, .colorful], wallpaper: .nebula, icons: .tinted("B69CFF"),
             rows: [
                 .widgets([small(.crypto, .futuristic, "8C6CFF"), small(.topMover, .futuristic, "8C6CFF")]),
@@ -422,7 +422,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(widgets: [rectangular(.portfolio), rectangular(.crypto)], clockDesign: .monospaced, clockWeight: .light)
         ),
         HomeSetup(
-            id: "seventies", name: "Seventies", tagline: "Cours, fiches et heures d'étude, en arcs rétro.",
+            id: "seventies", name: tr("Seventies"), tagline: tr("Cours, fiches et heures d'étude, en arcs rétro."),
             tags: [.light, .study, .colorful], wallpaper: .seventies,
             icons: .solid(background: "FFF3E0", symbol: "C0602A"),
             rows: [

@@ -20,13 +20,13 @@ struct FitnessAppView: View {
             activity
             records(state: state)
             more(state: state)
-            Text("Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.")
+            Text(tr("Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             MiniAppSettingsSection(app: .fitness)
         }
-        .navigationTitle("Fitness")
+        .navigationTitle(tr("Fitness"))
         .navigationBarTitleDisplayMode(.large)
         .task { await steps.refreshWeek() }
         .sheet(item: $editing) { routine in
@@ -42,39 +42,39 @@ struct FitnessAppView: View {
         let doneToday = FitnessMath.sessions(state).filter { DateMath.isSameDay($0.start, now) && $0.isFinished }.last
         VStack(alignment: .leading, spacing: 14) {
             if let active, let exercise = active.currentExercise {
-                header("Séance en cours", symbol: "bolt.heart.fill")
+                header(tr("Séance en cours"), symbol: "bolt.heart.fill")
                 Text(active.routineName).font(.title2.weight(.bold))
-                Text("\(exercise.name) · série \(active.setIndex + 1) sur \(exercise.sets)")
+                Text(tr("\(exercise.name) · série \(active.setIndex + 1) sur \(exercise.sets)"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 ProgressView(value: Double(active.sets.count), total: Double(max(1, active.totalSets)))
                     .tint(Color(hex: accentHex))
-                MiniActionButton(title: "Reprendre la séance", symbol: "play.fill", colorHex: accentHex) {
+                MiniActionButton(title: tr("Reprendre la séance"), symbol: "play.fill", colorHex: accentHex) {
                     router.homePath.append(.page(.fitnessSession))
                 }
                 .accessibilityIdentifier("fitness-resume")
             } else if let doneToday {
-                header("Séance faite", symbol: "checkmark.seal.fill")
+                header(tr("Séance faite"), symbol: "checkmark.seal.fill")
                 Text(doneToday.routineName).font(.title2.weight(.bold))
-                Text("\(Fmt.plural(doneToday.sets.count, "série", "séries")) · \(TF.int(doneToday.duration / 60)) min · \(TF.int(doneToday.volume)) kg soulevés")
+                Text(tr("\(Fmt.plural(doneToday.sets.count, tr("série"), tr("séries"))) · \(TF.int(doneToday.duration / 60)) min · \(TF.int(doneToday.volume)) kg s)oulevés")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 NavigationLink(value: HomeRoute.page(.fitnessSessionDetail(doneToday.id))) {
-                    Text("Voir le détail")
+                    Text(tr("Voir le détail"))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                 }
             } else if let routine = state.routines.first(where: { $0.weekdays.contains(FitnessMath.isoWeekday(now)) }) {
-                header("Aujourd'hui", symbol: "calendar")
+                header(tr("Aujourd'hui"), symbol: "calendar")
                 routineSummary(routine)
-                MiniActionButton(title: "Commencer", symbol: "play.fill", colorHex: accentHex) {
+                MiniActionButton(title: tr("Commencer"), symbol: "play.fill", colorHex: accentHex) {
                     start(routine)
                 }
                 .accessibilityIdentifier("fitness-start")
             } else if !state.routines.isEmpty {
-                header("Repos aujourd'hui", symbol: "moon.zzz.fill")
+                header(tr("Repos aujourd'hui"), symbol: "moon.zzz.fill")
                 if let next = FitnessMath.nextPlanned(after: now, state) {
-                    Text("Prochaine séance : \(next.routine.name), \(dayText(next.day))")
+                    Text(tr("Prochaine séance : \(next.routine.name), \(dayText(next.day))"))
                         .font(.headline)
                 }
                 Menu {
@@ -82,18 +82,18 @@ struct FitnessAppView: View {
                         Button(routine.name) { start(routine) }
                     }
                 } label: {
-                    Label("Faire une séance quand même", systemImage: "play.circle")
+                    Label(tr("Faire une séance quand même"), systemImage: "play.circle")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                 }
                 .accessibilityIdentifier("fitness-start-anyway")
             } else {
-                header("Ton programme", symbol: "list.bullet.clipboard")
-                Text("Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.")
+                header(tr("Ton programme"), symbol: "list.bullet.clipboard")
+                Text(tr("Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
-                MiniActionButton(title: "Créer une séance", symbol: "plus", colorHex: accentHex) {
+                MiniActionButton(title: tr("Créer une séance"), symbol: "plus", colorHex: accentHex) {
                     editing = Routine(name: "", exercises: [])
                 }
                 .accessibilityIdentifier("fitness-create")
@@ -114,7 +114,7 @@ struct FitnessAppView: View {
     private func routineSummary(_ routine: Routine) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(routine.name).font(.title2.weight(.bold))
-            Text("\(Fmt.plural(routine.exercises.count, "exercice", "exercices")) · \(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, "série", "séries")) · environ \(FitnessPlan.minutes(routine)) min")
+            Text(tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · \(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr("série"), tr("séries"))) · environ \(FitnessPlan.minute)s(routine)) min")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             ForEach(routine.exercises.prefix(4)) { exercise in
@@ -128,7 +128,7 @@ struct FitnessAppView: View {
                 }
             }
             if routine.exercises.count > 4 {
-                Text("+ \(routine.exercises.count - 4) autres").font(.caption).foregroundStyle(.secondary)
+                Text(tr("+ \(routine.exercises.count - 4) autres")).font(.caption).foregroundStyle(.secondary)
             }
         }
     }
@@ -140,7 +140,7 @@ struct FitnessAppView: View {
     }
 
     private func dayText(_ day: Date) -> String {
-        if let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return "demain" }
+        if let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr("demain") }
         return Fmt.weekday(day).lowercased()
     }
 
@@ -151,7 +151,7 @@ struct FitnessAppView: View {
         let days = DateMath.week(containing: now)
         let count = FitnessMath.workouts(inWeekOf: now, state)
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Cette semaine", detail: "\(count) / \(state.weeklyGoal) séances")
+            MiniSectionTitle(title: tr("Cette semaine"), detail: tr("\(count) / \(state.weeklyGoal) séances"))
             VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 0) {
                     ForEach(Array(days.enumerated()), id: \.offset) { index, day in
@@ -175,9 +175,9 @@ struct FitnessAppView: View {
                     }
                 }
                 HStack(spacing: 10) {
-                    miniFigure("Durée", "\(TF.int(FitnessMath.minutes(inWeekOf: now, state))) min")
-                    miniFigure("Volume", "\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg")
-                    miniFigure("Calories", "~\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: now)))")
+                    miniFigure(tr("Durée"), tr("\(TF.int(FitnessMath.minutes(inWeekOf: now, state))) min"))
+                    miniFigure(tr("Volume"), tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"))
+                    miniFigure(tr("Calories"), "~\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: now)))")
                 }
             }
             .card()
@@ -208,7 +208,7 @@ struct FitnessAppView: View {
                     }
                     .frame(width: 64, height: 64)
                     VStack(alignment: .leading, spacing: 3) {
-                        Text("\(Fmt.number(count)) pas").font(.title3.weight(.bold)).monospacedDigit()
+                        Text(tr("\(Fmt.number(count)) pas")).font(.title3.weight(.bold)).monospacedDigit()
                         Text(activityDetail(today, goal: goal))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -228,7 +228,7 @@ struct FitnessAppView: View {
                     await steps.refreshWeek()
                 }
             } label: {
-                MiniRow(symbol: "figure.walk", colorHex: "12A4B5", title: "Afficher mes pas", detail: "Pas, distance et étages, depuis le capteur de ton iPhone")
+                MiniRow(symbol: "figure.walk", colorHex: "12A4B5", title: tr("Afficher mes pas"), detail: tr("Pas, distance et étages, depuis le capteur de ton iPhone"))
                     .card(padding: 12)
             }
             .buttonStyle(.plain)
@@ -239,10 +239,10 @@ struct FitnessAppView: View {
 
     private func activityDetail(_ day: StepCounter.Day?, goal: Int?) -> String {
         var parts: [String] = []
-        if let goal { parts.append("objectif \(Fmt.number(goal))") }
-        if let distance = day?.distance { parts.append("\(TF.decimal(distance / 1_000, 1)) km") }
-        if let floors = day?.floors, floors > 0 { parts.append(Fmt.plural(floors, "étage", "étages")) }
-        return parts.isEmpty ? "Aujourd'hui" : parts.joined(separator: " · ")
+        if let goal { parts.append(tr("objectif \(Fmt.number(goal))")) }
+        if let distance = day?.distance { parts.append(tr("\(TF.decimal(distance / 1_000, 1)) km")) }
+        if let floors = day?.floors, floors > 0 { parts.append(Fmt.plural(floors, tr("étage"), tr("étages"))) }
+        return parts.isEmpty ? tr("Aujourd'hui") : parts.joined(separator: " · ")
     }
 
     // MARK: Records
@@ -252,7 +252,7 @@ struct FitnessAppView: View {
         let best = Array(FitnessMath.records(state).prefix(3))
         if !best.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Records")
+                MiniSectionTitle(title: tr("Records"))
                 MiniRowsCard {
                     ForEach(Array(best.enumerated()), id: \.offset) { index, record in
                         let info = ExerciseLibrary.match(name: record.exercise)
@@ -275,8 +275,8 @@ struct FitnessAppView: View {
 
     private func recordRow(_ record: FitnessMath.Record, chevron: Bool = true) -> some View {
         MiniRow(symbol: "trophy.fill", colorHex: "F2A33A", title: record.exercise,
-                detail: "1RM estimé \(TF.int(record.oneRepMax)) kg",
-                value: "\(ProfileNumberField.format(record.weight)) kg × \(record.reps)", showsChevron: chevron)
+                detail: tr("1RM estimé \(TF.int(record.oneRepMax)) kg"),
+                value: tr("\(ProfileNumberField.format(record.weight)) kg × \(record.reps)"), showsChevron: chevron)
     }
 
     // MARK: More
@@ -284,25 +284,25 @@ struct FitnessAppView: View {
     private func more(state: FitnessState) -> some View {
         MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.fitnessProgram)) {
-                MiniRow(symbol: "calendar.badge.clock", colorHex: accentHex, title: "Programme", detail: "Tes séances de la semaine", value: state.routines.isEmpty ? nil : "\(state.routines.count)")
+                MiniRow(symbol: "calendar.badge.clock", colorHex: accentHex, title: tr("Programme"), detail: tr("Tes séances de la semaine"), value: state.routines.isEmpty ? nil : "\(state.routines.count)")
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("fitness-program")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.fitnessLibrary)) {
-                MiniRow(symbol: "books.vertical.fill", colorHex: accentHex, title: "Exercices", detail: "\(ExerciseLibrary.all.count) exercices, fiches et démonstrations")
+                MiniRow(symbol: "books.vertical.fill", colorHex: accentHex, title: tr("Exercices"), detail: tr("\(ExerciseLibrary.all.count) exercices, fiches et démonstrations"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("fitness-library")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.fitnessProgress)) {
-                MiniRow(symbol: "chart.line.uptrend.xyaxis", colorHex: accentHex, title: "Progression", detail: "Charges, volume et records")
+                MiniRow(symbol: "chart.line.uptrend.xyaxis", colorHex: accentHex, title: tr("Progression"), detail: tr("Charges, volume et records"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("fitness-progress")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.fitnessHistory)) {
-                MiniRow(symbol: "clock.arrow.circlepath", colorHex: accentHex, title: "Historique", detail: "Toutes tes séances", value: FitnessMath.sessions(state).isEmpty ? nil : "\(FitnessMath.sessions(state).count)")
+                MiniRow(symbol: "clock.arrow.circlepath", colorHex: accentHex, title: tr("Historique"), detail: tr("Toutes tes séances"), value: FitnessMath.sessions(state).isEmpty ? nil : "\(FitnessMath.sessions(state).count)")
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("fitness-history")
@@ -314,7 +314,7 @@ struct FitnessAppView: View {
 enum FitnessPlan {
     /// "4 × 8 · 80 kg"
     static func setText(_ exercise: ExerciseTemplate) -> String {
-        let load = exercise.weight > 0 ? " · \(ProfileNumberField.format(exercise.weight)) kg" : ""
+        let load = exercise.weight > 0 ? tr(" · \(ProfileNumberField.format(exercise.weight)) kg") : ""
         return "\(exercise.sets) × \(exercise.reps)\(load)"
     }
 

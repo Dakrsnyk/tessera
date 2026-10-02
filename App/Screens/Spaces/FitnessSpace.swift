@@ -13,12 +13,12 @@ struct FitnessSpaceSections: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(active.routineName).font(.caption.weight(.semibold)).foregroundStyle(Color.secondary)
                     Text(exercise.name).font(.title3.weight(.semibold))
-                    Text("Série \(active.setIndex + 1)/\(exercise.sets) · \(FitnessTiles.setText(exercise))")
+                    Text(tr("Série \(active.setIndex + 1)/\(exercise.sets) · \(FitnessTiles.setText(exercise))"))
                         .foregroundStyle(Color.secondary)
                     if let rest = active.restEndsAt, rest > now {
                         HStack {
                             Image(systemName: "timer")
-                            Text("Repos : ")
+                            Text(tr("Repos : "))
                             Text(timerInterval: now...rest, countsDown: true).monospacedDigit()
                         }
                         .font(.subheadline.weight(.medium))
@@ -32,33 +32,33 @@ struct FitnessSpaceSections: View {
                     Haptics.success()
                     model.update(\.fitness) { $0.completeNextSet(at: Date()) }
                 } label: {
-                    Label("Série faite", systemImage: "checkmark.circle.fill").font(.headline)
+                    Label(tr("Série faite"), systemImage: "checkmark.circle.fill").font(.headline)
                 }
-                Button("Terminer la séance", role: .destructive) {
+                Button(tr("Terminer la séance"), role: .destructive) {
                     model.update(\.fitness) { $0.finishActive(at: Date()) }
                 }
             } else if let routine = state.routine(for: now) {
-                ValueRow(title: routine.name, value: state.isScheduled(now) ? "Prévue aujourd'hui" : "Prochaine séance", symbol: "figure.strengthtraining.traditional")
+                ValueRow(title: routine.name, value: state.isScheduled(now) ? tr("Prévue aujourd'hui") : tr("Prochaine séance"), symbol: "figure.strengthtraining.traditional")
                 Button {
                     model.update(\.fitness) { $0.startSession(routine, at: Date()) }
                 } label: {
-                    Label("Commencer la séance", systemImage: "play.fill").font(.headline)
+                    Label(tr("Commencer la séance"), systemImage: "play.fill").font(.headline)
                 }
             } else {
-                HintRow(text: "Crée ta première séance : ses exercices, séries, charges et temps de repos. Le widget Prochaine série la suit ensuite depuis l'écran d'accueil.")
+                HintRow(text: tr("Crée ta première séance : ses exercices, séries, charges et temps de repos. Le widget Prochaine série la suit ensuite depuis l'écran d'accueil."))
             }
         } header: {
-            Text("Séance")
+            Text(tr("Séance"))
         }
 
-        Section("Mes séances") {
+        Section(tr("Mes séances")) {
             ForEach(state.routines) { routine in
                 Button {
                     sheets?.open { RoutineEditor(routine: routine) }
                 } label: {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(routine.name).foregroundStyle(Color.primary)
-                        Text("\(Fmt.plural(routine.exercises.count, "exercice", "exercices")) · \(weekdays(routine.weekdays))")
+                        Text("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · \(weekdays(routine.weekdays))")
                             .font(.caption)
                             .foregroundStyle(Color.secondary)
                     }
@@ -70,30 +70,30 @@ struct FitnessSpaceSections: View {
             Button {
                 sheets?.open { RoutineEditor(routine: Routine(name: "", exercises: [ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0)])) }
             } label: {
-                Label("Nouvelle séance", systemImage: "plus")
+                Label(tr("Nouvelle séance"), systemImage: "plus")
             }
         }
 
         Section {
             Stepper(value: Binding(get: { state.weeklyGoal }, set: { goal in model.setWeeklyWorkouts(goal) }), in: 1...7) {
-                ValueRow(title: "Objectif", value: "\(state.weeklyGoal) séances / semaine")
+                ValueRow(title: tr("Objectif"), value: tr("\(state.weeklyGoal) séances / semaine"))
             }
             // The weight lives in « Mes informations »: changing it here changes it everywhere.
-            OptionalNumberRow(title: "Poids", value: Binding(get: { model.profile.weightKg }, set: { model.setWeight($0) }), unit: "kg")
-            ValueRow(title: "Cette semaine", value: "\(FitnessMath.workouts(inWeekOf: now, state)) séances", symbol: "flame.fill")
-            ValueRow(title: "Volume", value: "\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg", symbol: "scalemass")
+            OptionalNumberRow(title: tr("Poids"), value: Binding(get: { model.profile.weightKg }, set: { model.setWeight($0) }), unit: tr("kg"))
+            ValueRow(title: tr("Cette semaine"), value: tr("\(FitnessMath.workouts(inWeekOf: now, state)) séances"), symbol: "flame.fill")
+            ValueRow(title: tr("Volume"), value: tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"), symbol: "scalemass")
             if let best = FitnessMath.records(state).first {
-                ValueRow(title: "Meilleur record", value: "\(best.exercise) · \(TF.int(best.weight)) kg", symbol: "trophy.fill")
+                ValueRow(title: tr("Meilleur record"), value: tr("\(best.exercise) · \(TF.int(best.weight)) kg"), symbol: "trophy.fill")
             }
         } header: {
-            Text("Suivi")
+            Text(tr("Suivi"))
         } footer: {
-            Text("Le poids sert à estimer les calories brûlées. Estimation indicative.")
+            Text(tr("Le poids sert à estimer les calories brûlées. Estimation indicative."))
         }
     }
 
     private func weekdays(_ days: [Int]) -> String {
-        guard !days.isEmpty else { return "à la demande" }
+        guard !days.isEmpty else { return tr("à la demande") }
         let names = ["lun.", "mar.", "mer.", "jeu.", "ven.", "sam.", "dim."]
         return days.compactMap { names[safe: $0 - 1] }.joined(separator: ", ")
     }
@@ -106,18 +106,18 @@ struct RoutineEditor: View {
     @State private var info: ExerciseInfo?
 
     var body: some View {
-        SheetForm(title: routine.name.isEmpty ? "Nouvelle séance" : routine.name, canSave: !routine.name.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: routine.name.isEmpty ? tr("Nouvelle séance") : routine.name, canSave: !routine.name.trimmed.isEmpty, onSave: save) {
             Section {
-                TextField("Nom (haut du corps, jambes…)", text: $routine.name)
+                TextField(tr("Nom (haut du corps, jambes…)"), text: $routine.name)
                     .accessibilityIdentifier("routine-name")
                 WeekdayPicker(selection: $routine.weekdays)
             } footer: {
-                Text("Les jours choisis décident de la séance proposée chaque jour.")
+                Text(tr("Les jours choisis décident de la séance proposée chaque jour."))
             }
             ForEach($routine.exercises) { $exercise in
                 Section {
                     HStack {
-                        TextField("Exercice", text: $exercise.name)
+                        TextField(tr("Exercice"), text: $exercise.name)
                             .accessibilityIdentifier("exercise-name")
                         if let known = exercise.info {
                             Button {
@@ -126,7 +126,7 @@ struct RoutineEditor: View {
                                 Image(systemName: "info.circle")
                             }
                             .buttonStyle(.borderless)
-                            .accessibilityLabel(Text("Fiche de l'exercice"))
+                            .accessibilityLabel(Text(tr("Fiche de l'exercice")))
                         }
                     }
                     // Suggestions from the library while the name is typed.
@@ -141,27 +141,27 @@ struct RoutineEditor: View {
                             }
                         }
                     }
-                    Stepper("Séries : \(exercise.sets)", value: $exercise.sets, in: 1...12)
-                    Stepper("Répétitions : \(exercise.reps)", value: $exercise.reps, in: 1...50)
-                    NumberRow(title: "Charge", value: $exercise.weight, unit: "kg")
-                    Stepper("Repos : \(exercise.restSeconds) s", value: $exercise.restSeconds, in: 15...600, step: 15)
-                    TextField("Tempo (ex. 3-1-1-0)", text: $exercise.tempo)
-                    TextField("Notes", text: $exercise.notes)
+                    Stepper(tr("Séries : \(exercise.sets)"), value: $exercise.sets, in: 1...12)
+                    Stepper(tr("Répétitions : \(exercise.reps)"), value: $exercise.reps, in: 1...50)
+                    NumberRow(title: tr("Charge"), value: $exercise.weight, unit: tr("kg"))
+                    Stepper(tr("Repos : \(exercise.restSeconds) s"), value: $exercise.restSeconds, in: 15...600, step: 15)
+                    TextField(tr("Tempo (ex. 3-1-1-0)"), text: $exercise.tempo)
+                    TextField(tr("Notes"), text: $exercise.notes)
                 }
             }
             Section {
                 Button {
                     picking = true
                 } label: {
-                    Label("Choisir dans la bibliothèque", systemImage: "books.vertical")
+                    Label(tr("Choisir dans la bibliothèque"), systemImage: "books.vertical")
                 }
                 Button {
                     routine.exercises.append(ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0))
                 } label: {
-                    Label("Ajouter un exercice", systemImage: "plus")
+                    Label(tr("Ajouter un exercice"), systemImage: "plus")
                 }
                 if routine.exercises.count > 1 {
-                    Button("Retirer le dernier exercice", role: .destructive) {
+                    Button(tr("Retirer le dernier exercice"), role: .destructive) {
                         routine.exercises.removeLast()
                     }
                 }
@@ -176,7 +176,7 @@ struct RoutineEditor: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Fermer") { picking = false }
+                        Button(tr("Fermer")) { picking = false }
                     }
                 }
             }

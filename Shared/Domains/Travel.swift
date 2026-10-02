@@ -54,12 +54,12 @@ enum TripExpenseKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .transport: "Transport"
-        case .lodging: "Hébergement"
-        case .food: "Repas"
-        case .activities: "Activités"
-        case .shopping: "Achats"
-        case .other: "Autre"
+        case .transport: tr("Transport")
+        case .lodging: tr("Hébergement")
+        case .food: tr("Repas")
+        case .activities: tr("Activités")
+        case .shopping: tr("Achats")
+        case .other: tr("Autre")
         }
     }
 
@@ -137,8 +137,8 @@ struct TravelState: Codable, Hashable {
 
     /// Adds the usual things to pack, skipping the ones already on the list.
     mutating func addEssentials(to trip: UUID, abroad: Bool) {
-        var titles = ["Chargeur de téléphone", "Médicaments", "Carte bancaire", "Vêtements", "Trousse de toilette", "Confirmations de réservation"]
-        if abroad { titles = ["Passeport", "Assurance voyage", "Adaptateur de prise"] + titles }
+        var titles = [tr("Chargeur de téléphone"), tr("Médicaments"), tr("Carte bancaire"), tr("Vêtements"), tr("Trousse de toilette"), tr("Confirmations de réservation")]
+        if abroad { titles = [tr("Passeport"), tr("Assurance voyage"), tr("Adaptateur de prise")] + titles }
         let existing = Set(checklist.filter { $0.tripID == trip }.map { $0.title.lowercased() })
         for title in titles where !existing.contains(title.lowercased()) {
             checklist.append(ChecklistItem(tripID: trip, title: title))
@@ -237,8 +237,8 @@ enum TravelMath {
     static func flightDetail(_ flight: Flight) -> String? {
         var parts: [String] = []
         if !flight.from.isEmpty && !flight.to.isEmpty { parts.append("\(flight.from) → \(flight.to)") }
-        if !flight.gate.isEmpty { parts.append("porte \(flight.gate)") }
-        if !flight.seat.isEmpty { parts.append("siège \(flight.seat)") }
+        if !flight.gate.isEmpty { parts.append(tr("porte \(flight.gate)")) }
+        if !flight.seat.isEmpty { parts.append(tr("siège \(flight.seat)")) }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }
 
@@ -246,11 +246,11 @@ enum TravelMath {
     static func program(_ state: TravelState, for trip: Trip) -> [ProgramDay] {
         var items: [ProgramItem] = []
         for flight in flights(state, for: trip) {
-            items.append(ProgramItem(id: "flight-\(flight.id)", kind: .flight, date: flight.departure, title: "Vol \(flight.number)", detail: flightDetail(flight)))
+            items.append(ProgramItem(id: "flight-\(flight.id)", kind: .flight, date: flight.departure, title: tr("Vol \(flight.number)"), detail: flightDetail(flight)))
         }
         for stay in stays(state, for: trip) {
-            items.append(ProgramItem(id: "in-\(stay.id)", kind: .checkIn, date: stay.checkIn, title: "Arrivée · \(stay.name)", detail: stay.address.isEmpty ? nil : stay.address))
-            items.append(ProgramItem(id: "out-\(stay.id)", kind: .checkOut, date: stay.checkOut, title: "Départ · \(stay.name)", detail: nil))
+            items.append(ProgramItem(id: "in-\(stay.id)", kind: .checkIn, date: stay.checkIn, title: tr("Arrivée · \(stay.name)"), detail: stay.address.isEmpty ? nil : stay.address))
+            items.append(ProgramItem(id: "out-\(stay.id)", kind: .checkOut, date: stay.checkOut, title: tr("Départ · \(stay.name)"), detail: nil))
         }
         for activity in activities(state, for: trip) {
             items.append(ProgramItem(id: "activity-\(activity.id)", kind: .activity, date: activity.date, title: activity.title, detail: activity.place.isEmpty ? nil : activity.place))

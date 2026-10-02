@@ -51,7 +51,7 @@ struct ClockWidgetView: View {
                                 .foregroundStyle(s.numberColor)
                         }
                         .frame(width: 74, height: 74)
-                        Text("de la journée")
+                        Text(tr("de la journée"))
                             .font(s.text(11))
                             .foregroundStyle(s.secondary)
                     }
@@ -146,7 +146,7 @@ struct CalendarWidgetView: View {
                         .font(s.text(13, .medium))
                         .foregroundStyle(s.secondary)
                     if s.showsDetails {
-                        Text("Semaine \(DateMath.calendar.component(.weekOfYear, from: date))")
+                        Text(tr("Semaine \(DateMath.calendar.component(.weekOfYear, from: date))"))
                             .font(s.text(12))
                             .foregroundStyle(s.secondary)
                     }
@@ -173,7 +173,7 @@ struct CalendarWidgetView: View {
                     HStack {
                         Text(Fmt.longDay(date))
                         Spacer()
-                        Text("Jour \(day) sur \(total)")
+                        Text(tr("Jour \(day) sur \(total)"))
                     }
                     .font(s.text(13, .medium))
                     .foregroundStyle(s.secondary)
@@ -208,7 +208,7 @@ struct WorldClockWidgetView: View {
         let shown = zones.prefix(context.isSmall ? 2 : 4).enumerated().map { ZoneItem(id: $0.element.id, zone: $0.element.zone, index: $0.offset) }
 
         if shown.isEmpty {
-            WidgetMessage(symbol: "globe", title: "Aucune ville", message: "Choisis tes villes dans Tessera", style: s)
+            WidgetMessage(symbol: "globe", title: tr("Aucune ville"), message: tr("Choisis tes villes dans Tessera"), style: s)
         } else if context.isSmall {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(shown) { item in
@@ -286,8 +286,8 @@ struct WorldClockWidgetView: View {
 enum ProgressText {
     static func title(_ unit: ProgressUnit, at date: Date) -> String {
         switch unit {
-        case .day: "Aujourd'hui"
-        case .week: "Semaine \(DateMath.calendar.component(.weekOfYear, from: date))"
+        case .day: tr("Aujourd'hui")
+        case .week: tr("Semaine \(DateMath.calendar.component(.weekOfYear, from: date))")
         case .month: Fmt.month(date)
         case .year: Fmt.format(date, template: "yyyy")
         }
@@ -298,11 +298,11 @@ enum ProgressText {
         if unit == .day {
             let minutes = max(0, Int(interval.end.timeIntervalSince(date) / 60))
             let hours = minutes / 60
-            return hours > 0 ? "\(hours) h \(minutes % 60) min restantes" : "\(minutes) min restantes"
+            return hours > 0 ? tr("\(hours) h \(minutes % 60) min restantes") : tr("\(minutes) min restantes")
         }
         // Days after today, as in "L'année en points".
         let days = max(0, DateMath.daysBetween(date, interval.end) - 1)
-        return days == 0 ? "Dernier jour" : Fmt.plural(days, "jour restant", "jours restants")
+        return days == 0 ? tr("Dernier jour") : Fmt.plural(days, tr("jour restant"), tr("jours restants"))
     }
 
     /// Segment count and how many are elapsed, for the segmented bar.
@@ -418,13 +418,13 @@ struct CountdownInfo {
             days = abs(delta)
             isToday = delta == 0
             isPast = delta < 0
-            caption = delta == 0 ? "C'est aujourd'hui" : delta > 0 ? (abs(delta) > 1 ? "jours restants" : "jour restant") : "jours passés"
+            caption = delta == 0 ? tr("C'est aujourd'hui") : delta > 0 ? (abs(delta) > 1 ? tr("jours restants") : tr("jour restant")) : tr("jours passés")
         case .since:
             let delta = DateMath.daysBetween(options.countdownDate, now)
             days = max(0, delta)
             isToday = delta == 0
             isPast = false
-            caption = delta == 0 ? "C'est aujourd'hui" : (delta > 1 ? "jours depuis" : "jour depuis")
+            caption = delta == 0 ? tr("C'est aujourd'hui") : (delta > 1 ? tr("jours depuis") : tr("jour depuis"))
         }
     }
 
@@ -436,14 +436,14 @@ struct CountdownInfo {
             let rest = days % 365
             let months = rest / 30
             return months > 0
-                ? "\(Fmt.plural(years, "an", "ans")) et \(Fmt.plural(months, "mois", "mois"))"
-                : Fmt.plural(years, "an", "ans")
+                ? tr("\(Fmt.plural(years, tr("an"), tr("ans"))) et \(Fmt.plural(months, tr("mois"), tr("mois")))")
+                : Fmt.plural(years, tr("an"), tr("ans"))
         }
         let weeks = days / 7
         let rest = days % 7
         return rest > 0
-            ? "\(Fmt.plural(weeks, "semaine", "semaines")) et \(Fmt.plural(rest, "jour", "jours"))"
-            : Fmt.plural(weeks, "semaine", "semaines")
+            ? tr("\(Fmt.plural(weeks, tr("semaine"), tr("semaines"))) et \(Fmt.plural(rest, tr("jour"), tr("jours")))")
+            : Fmt.plural(weeks, tr("semaine"), tr("semaines"))
     }
 }
 
@@ -454,7 +454,7 @@ struct CountdownWidgetView: View {
         let s = context.style
         let options = context.options
         let info = CountdownInfo(options: options, now: context.date)
-        let title = options.countdownTitle.trimmed.isEmpty ? "Événement" : options.countdownTitle
+        let title = options.countdownTitle.trimmed.isEmpty ? tr("Événement") : options.countdownTitle
 
         if context.isSmall {
             VStack(alignment: s.horizontalAlignment, spacing: 2) {
@@ -595,10 +595,10 @@ struct YearDotsWidgetView: View {
                         .foregroundStyle(s.numberColor)
                     Spacer(minLength: 0)
                     if s.showsDetails {
-                        Text("Jour \(day)")
+                        Text(tr("Jour \(day)"))
                             .font(s.text(13, .medium))
                             .foregroundStyle(s.primary)
-                        Text("\(total - day) restants")
+                        Text(tr("\(total - day) restants"))
                             .font(s.text(12))
                             .foregroundStyle(s.secondary)
                     }
@@ -624,7 +624,7 @@ struct YearDotsWidgetView: View {
                     HStack {
                         Text(Fmt.longDay(date))
                         Spacer()
-                        Text(Fmt.percent(Double(day) / Double(total)) + " de l'année")
+                        Text(Fmt.percent(Double(day) / Double(total)) + tr(" de l'année"))
                     }
                     .font(s.text(13, .medium))
                     .foregroundStyle(s.secondary)

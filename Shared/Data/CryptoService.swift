@@ -32,14 +32,14 @@ enum CryptoService {
     static let refreshInterval: TimeInterval = 15 * 60
 
     static let coins: [CoinInfo] = [
-        CoinInfo(id: "bitcoin", symbol: "BTC", name: "Bitcoin"),
-        CoinInfo(id: "ethereum", symbol: "ETH", name: "Ethereum"),
-        CoinInfo(id: "solana", symbol: "SOL", name: "Solana"),
-        CoinInfo(id: "ripple", symbol: "XRP", name: "XRP"),
-        CoinInfo(id: "cardano", symbol: "ADA", name: "Cardano"),
-        CoinInfo(id: "dogecoin", symbol: "DOGE", name: "Dogecoin"),
-        CoinInfo(id: "litecoin", symbol: "LTC", name: "Litecoin"),
-        CoinInfo(id: "polkadot", symbol: "DOT", name: "Polkadot"),
+        CoinInfo(id: "bitcoin", symbol: "BTC", name: tr("Bitcoin")),
+        CoinInfo(id: "ethereum", symbol: "ETH", name: tr("Ethereum")),
+        CoinInfo(id: "solana", symbol: "SOL", name: tr("Solana")),
+        CoinInfo(id: "ripple", symbol: "XRP", name: tr("XRP")),
+        CoinInfo(id: "cardano", symbol: "ADA", name: tr("Cardano")),
+        CoinInfo(id: "dogecoin", symbol: "DOGE", name: tr("Dogecoin")),
+        CoinInfo(id: "litecoin", symbol: "LTC", name: tr("Litecoin")),
+        CoinInfo(id: "polkadot", symbol: "DOT", name: tr("Polkadot")),
     ]
 
     static func info(_ id: String) -> CoinInfo {

@@ -97,7 +97,7 @@ enum ThemeCatalog {
     /// The first twelve styles, unchanged.
     static let classicThemes: [WidgetTheme] = [
         WidgetTheme(
-            id: .minimal, name: "Minimal", tagline: "Suit le mode clair ou sombre", isPremium: false,
+            id: .minimal, name: tr("Minimal"), tagline: tr("Suit le mode clair ou sombre"), isPremium: false,
             background: .solid(.adaptive(light: "FFFFFF", dark: "1C1C1E")),
             primary: .adaptive(light: "111114", dark: "F5F5F7"),
             secondary: .adaptive(light: "8A8A8E", dark: "98989F"),
@@ -106,7 +106,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: nil
         ),
         WidgetTheme(
-            id: .light, name: "Clair", tagline: "Toujours lumineux", isPremium: false,
+            id: .light, name: tr("Clair"), tagline: tr("Toujours lumineux"), isPremium: false,
             background: .solid(.fixed("F5F5F2")),
             primary: .fixed("16171A"), secondary: .fixed("7C7D82"),
             tint: .accent, panel: .fixed("E9E9E4"),
@@ -114,7 +114,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: false
         ),
         WidgetTheme(
-            id: .dark, name: "Sombre", tagline: "Toujours sombre", isPremium: false,
+            id: .dark, name: tr("Sombre"), tagline: tr("Toujours sombre"), isPremium: false,
             background: .solid(.fixed("101114")),
             primary: .fixed("F2F2F4"), secondary: .fixed("8B8D93"),
             tint: .accent, panel: .fixed("1E2024"),
@@ -122,7 +122,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: true
         ),
         WidgetTheme(
-            id: .monochrome, name: "Monochrome", tagline: "Noir, blanc, rien d'autre", isPremium: false,
+            id: .monochrome, name: tr("Monochrome"), tagline: tr("Noir, blanc, rien d'autre"), isPremium: false,
             background: .solid(.fixed("000000")),
             primary: .fixed("FFFFFF"), secondary: .fixed("7A7A7A"),
             tint: .fixed("FFFFFF"), panel: .fixed("1A1A1A"),
@@ -130,7 +130,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: true
         ),
         WidgetTheme(
-            id: .glass, name: "Verre", tagline: "Translucide et lumineux", isPremium: true,
+            id: .glass, name: tr("Verre"), tagline: tr("Translucide et lumineux"), isPremium: true,
             background: .gradient(["6A85E0", "9C7FD6", "D98FB6"]),
             primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.74),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.18),
@@ -138,7 +138,7 @@ enum ThemeCatalog {
             uppercaseLabels: false, isDarkSurface: true
         ),
         WidgetTheme(
-            id: .aurora, name: "Aurore", tagline: "Un dégradé bleu nuit vers turquoise", isPremium: true,
+            id: .aurora, name: tr("Aurore"), tagline: tr("Un dégradé bleu nuit vers turquoise"), isPremium: true,
             background: .gradient(["1C2566", "2A6F9B", "3FB5A3"]),
             primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.72),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.14),
@@ -146,7 +146,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: true
         ),
         WidgetTheme(
-            id: .elegant, name: "Élégant", tagline: "Serif et reflets dorés", isPremium: true,
+            id: .elegant, name: tr("Élégant"), tagline: tr("Serif et reflets dorés"), isPremium: true,
             background: .solid(.fixed("13203A")),
             primary: .fixed("F3EBDD"), secondary: .fixed("B3A792"),
             tint: .fixed("C8A15A"), panel: .fixed("1D2B48"),
@@ -154,7 +154,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: true
         ),
         WidgetTheme(
-            id: .digital, name: "Digital", tagline: "Écran à cristaux liquides", isPremium: true,
+            id: .digital, name: tr("Digital"), tagline: tr("Écran à cristaux liquides"), isPremium: true,
             background: .solid(.fixed("0A0F0B")),
             primary: .fixed("7CFFA0"), secondary: .fixed("3C8A54"),
             tint: .fixed("7CFFA0"), panel: .fixed("122017"),
@@ -162,7 +162,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: true
         ),
         WidgetTheme(
-            id: .retro, name: "Rétro", tagline: "Papier chaud et typo ronde", isPremium: true,
+            id: .retro, name: tr("Rétro"), tagline: tr("Papier chaud et typo ronde"), isPremium: true,
             background: .solid(.fixed("F1E4C8")),
             primary: .fixed("2A1E14"), secondary: .fixed("8A6F55"),
             tint: .fixed("D4532A"), panel: .fixed("E6D5B1"),
@@ -170,7 +170,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: false
         ),
         WidgetTheme(
-            id: .futuristic, name: "Futuriste", tagline: "Néon cyan sur nuit profonde", isPremium: true,
+            id: .futuristic, name: tr("Futuriste"), tagline: tr("Néon cyan sur nuit profonde"), isPremium: true,
             background: .gradient(["070B1F", "171046"]),
             primary: .fixed("E8F0FF"), secondary: .fixed("7F8BB5"),
             tint: .fixed("00E0FF"), panel: .fixed("00E0FF", 0.09),
@@ -178,7 +178,7 @@ enum ThemeCatalog {
             uppercaseLabels: true, isDarkSurface: true
         ),
         WidgetTheme(
-            id: .typography, name: "Typo", tagline: "De grands chiffres, en serif", isPremium: true,
+            id: .typography, name: tr("Typo"), tagline: tr("De grands chiffres, en serif"), isPremium: true,
             background: .solid(.adaptive(light: "FFFFFF", dark: "0E0E10")),
             primary: .adaptive(light: "0E0E10", dark: "FAFAFA"),
             secondary: .adaptive(light: "85858A", dark: "8E8E93"),
@@ -187,7 +187,7 @@ enum ThemeCatalog {
             uppercaseLabels: false, isDarkSurface: nil
         ),
         WidgetTheme(
-            id: .colorful, name: "Couleur", tagline: "Ta couleur en plein fond", isPremium: true,
+            id: .colorful, name: tr("Couleur"), tagline: tr("Ta couleur en plein fond"), isPremium: true,
             background: .accentFill,
             primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.78),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.2),
@@ -205,7 +205,7 @@ enum ThemeCatalog {
     /// Styles that change the composition too, not only the colors.
     static let studioThemes: [WidgetTheme] = [
         WidgetTheme(
-            id: .modern, name: "Moderne", tagline: "Net, doux, pastilles d'icônes", isPremium: false,
+            id: .modern, name: tr("Moderne"), tagline: tr("Net, doux, pastilles d'icônes"), isPremium: false,
             background: .solid(.adaptive(light: "FFFFFF", dark: "17181B")),
             primary: .adaptive(light: "101114", dark: "F4F4F6"),
             secondary: .adaptive(light: "84858B", dark: "9A9BA1"),
@@ -215,7 +215,7 @@ enum ThemeCatalog {
             preset: preset { $0.iconStyle = .circle; $0.shape = .soft; $0.iconFamily = .filled }
         ),
         WidgetTheme(
-            id: .card, name: "Carte", tagline: "Le contenu posé sur une carte", isPremium: false,
+            id: .card, name: tr("Carte"), tagline: tr("Le contenu posé sur une carte"), isPremium: false,
             background: .solid(.adaptive(light: "E9ECF1", dark: "0B0C0F")),
             primary: .adaptive(light: "15171C", dark: "F2F3F5"),
             secondary: .adaptive(light: "7D828C", dark: "979BA3"),
@@ -225,7 +225,7 @@ enum ThemeCatalog {
             preset: preset { $0.shape = .panel; $0.depth = .soft; $0.shadowOpacity = 0.25 }
         ),
         WidgetTheme(
-            id: .soft, name: "Doux", tagline: "Formes rondes, tons tendres", isPremium: false,
+            id: .soft, name: tr("Doux"), tagline: tr("Formes rondes, tons tendres"), isPremium: false,
             background: .solid(.adaptive(light: "F6F1FA", dark: "201C27")),
             primary: .adaptive(light: "2E2438", dark: "F3EEF8"),
             secondary: .adaptive(light: "8D7F99", dark: "A99DB5"),
@@ -235,7 +235,7 @@ enum ThemeCatalog {
             preset: preset { $0.shape = .soft; $0.iconStyle = .circle; $0.chartThickness = 1.3 }
         ),
         WidgetTheme(
-            id: .compact, name: "Compact", tagline: "Plus d'infos, moins d'espace", isPremium: false,
+            id: .compact, name: tr("Compact"), tagline: tr("Plus d'infos, moins d'espace"), isPremium: false,
             background: .solid(.adaptive(light: "FFFFFF", dark: "141416")),
             primary: .adaptive(light: "111114", dark: "F5F5F7"),
             secondary: .adaptive(light: "8A8A8E", dark: "98989F"),
@@ -245,7 +245,7 @@ enum ThemeCatalog {
             preset: preset { $0.density = .dense; $0.titleScale = 0.9; $0.valueScale = 0.9; $0.iconStyle = .none; $0.shape = .square }
         ),
         WidgetTheme(
-            id: .liquidGlass, name: "Liquid Glass", tagline: "Verre liquide et reflets", isPremium: true,
+            id: .liquidGlass, name: tr("Liquid Glass"), tagline: tr("Verre liquide et reflets"), isPremium: true,
             background: .glass(nil),
             primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.76),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.18),
@@ -257,7 +257,7 @@ enum ThemeCatalog {
             }
         ),
         WidgetTheme(
-            id: .premium, name: "Premium", tagline: "Graphite, argent, fin liseré", isPremium: true,
+            id: .premium, name: tr("Premium"), tagline: tr("Graphite, argent, fin liseré"), isPremium: true,
             background: .gradient(["2B2E35", "0C0D10"]),
             primary: .fixed("F2F2F4"), secondary: .fixed("9B9DA4"),
             tint: .accent, panel: .fixed("FFFFFF", 0.07),
@@ -268,7 +268,7 @@ enum ThemeCatalog {
             }
         ),
         WidgetTheme(
-            id: .gradient, name: "Dégradé", tagline: "Ta couleur en dégradé vif", isPremium: true,
+            id: .gradient, name: tr("Dégradé"), tagline: tr("Ta couleur en dégradé vif"), isPremium: true,
             background: .accentGradient,
             primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.78),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.2),
@@ -277,7 +277,7 @@ enum ThemeCatalog {
             preset: preset { $0.depth = .soft; $0.iconStyle = .circle; $0.shape = .soft }
         ),
         WidgetTheme(
-            id: .neon, name: "Néon", tagline: "Lueurs roses sur fond noir", isPremium: true,
+            id: .neon, name: tr("Néon"), tagline: tr("Lueurs roses sur fond noir"), isPremium: true,
             background: .solid(.fixed("07030F")),
             primary: .fixed("FFE9F7"), secondary: .fixed("B07FA3"),
             tint: .fixed("FF2DAA"), panel: .fixed("FF2DAA", 0.1),
@@ -286,7 +286,7 @@ enum ThemeCatalog {
             preset: preset { $0.border = .glow; $0.borderWidth = 1.5; $0.depth = .glow; $0.chartThickness = 1.3; $0.iconStyle = .outline }
         ),
         WidgetTheme(
-            id: .editorial, name: "Éditorial", tagline: "Serif, papier et capitales", isPremium: true,
+            id: .editorial, name: tr("Éditorial"), tagline: tr("Serif, papier et capitales"), isPremium: true,
             background: .solid(.fixed("F7F3EA")),
             primary: .fixed("151412"), secondary: .fixed("7A746A"),
             tint: .accent, panel: .fixed("ECE6D8"),
@@ -298,7 +298,7 @@ enum ThemeCatalog {
             }
         ),
         WidgetTheme(
-            id: .magazine, name: "Magazine", tagline: "Un grand chiffre, comme une une", isPremium: true,
+            id: .magazine, name: tr("Magazine"), tagline: tr("Un grand chiffre, comme une une"), isPremium: true,
             background: .solid(.adaptive(light: "FFFFFF", dark: "111111")),
             primary: .adaptive(light: "0D0D0D", dark: "FAFAFA"),
             secondary: .adaptive(light: "7F7F7F", dark: "8F8F8F"),
@@ -308,7 +308,7 @@ enum ThemeCatalog {
             preset: preset { $0.layout = .minimal; $0.valueScale = 1.3; $0.tracking = 2; $0.iconStyle = .none; $0.monospacedNumbers = false }
         ),
         WidgetTheme(
-            id: .dashboard, name: "Tableau de bord", tagline: "Petites cartes, tout d'un coup d'œil", isPremium: true,
+            id: .dashboard, name: tr("Tableau de bord"), tagline: tr("Petites cartes, tout d'un coup d'œil"), isPremium: true,
             background: .solid(.fixed("0F172A")),
             primary: .fixed("E2E8F0"), secondary: .fixed("8391A7"),
             tint: .accent, panel: .fixed("1E293B"),
@@ -317,7 +317,7 @@ enum ThemeCatalog {
             preset: preset { $0.layout = .cards; $0.density = .dense; $0.iconStyle = .square; $0.shape = .rounded }
         ),
         WidgetTheme(
-            id: .bold, name: "Audacieux", tagline: "Chiffres énormes, couleur pleine", isPremium: true,
+            id: .bold, name: tr("Audacieux"), tagline: tr("Chiffres énormes, couleur pleine"), isPremium: true,
             background: .accentFill,
             primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.8),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.22),
@@ -326,7 +326,7 @@ enum ThemeCatalog {
             preset: preset { $0.valueScale = 1.25; $0.tracking = 0.8; $0.iconStyle = .none; $0.layout = .minimal }
         ),
         WidgetTheme(
-            id: .data, name: "Data", tagline: "Grille, mono et courbes", isPremium: true,
+            id: .data, name: tr("Data"), tagline: tr("Grille, mono et courbes"), isPremium: true,
             background: .solid(.fixed("0B0E13")),
             primary: .fixed("E6EDF3"), secondary: .fixed("7D8590"),
             tint: .accent, panel: .fixed("161B22"),
@@ -335,7 +335,7 @@ enum ThemeCatalog {
             preset: preset { $0.layout = .data; $0.texture = .grid; $0.textureOpacity = 0.22; $0.iconStyle = .square; $0.chart = .line }
         ),
         WidgetTheme(
-            id: .luxury, name: "Luxe", tagline: "Noir profond et or", isPremium: true,
+            id: .luxury, name: tr("Luxe"), tagline: tr("Noir profond et or"), isPremium: true,
             background: .gradient(["171512", "050505"]),
             primary: .fixed("F5E7C1"), secondary: .fixed("A8946A"),
             tint: .fixed("D4AF37"), panel: .fixed("D4AF37", 0.08),
@@ -344,7 +344,7 @@ enum ThemeCatalog {
             preset: preset { $0.border = .double; $0.borderWidth = 1.2; $0.iconStyle = .outline; $0.tracking = 1.2; $0.monospacedNumbers = false }
         ),
         WidgetTheme(
-            id: .sport, name: "Sport", tagline: "Noir et jaune fluo, énergie", isPremium: true,
+            id: .sport, name: tr("Sport"), tagline: tr("Noir et jaune fluo, énergie"), isPremium: true,
             background: .solid(.fixed("0E0E0E")),
             primary: .fixed("FFFFFF"), secondary: .fixed("9A9A9A"),
             tint: .fixed("C6FF00"), panel: .fixed("1C1C1C"),
@@ -353,7 +353,7 @@ enum ThemeCatalog {
             preset: preset { $0.layout = .progress; $0.valueScale = 1.1; $0.iconStyle = .circle; $0.chartThickness = 1.5; $0.shape = .capsule }
         ),
         WidgetTheme(
-            id: .business, name: "Business", tagline: "Marine, sobre et aligné", isPremium: true,
+            id: .business, name: tr("Business"), tagline: tr("Marine, sobre et aligné"), isPremium: true,
             background: .solid(.fixed("0E2A47")),
             primary: .fixed("FFFFFF"), secondary: .fixed("9FB3C8"),
             tint: .accent, panel: .fixed("FFFFFF", 0.08),
@@ -365,7 +365,7 @@ enum ThemeCatalog {
             }
         ),
         WidgetTheme(
-            id: .terminal, name: "Terminal", tagline: "Ta couleur sur noir, lignes d'écran", isPremium: true,
+            id: .terminal, name: tr("Terminal"), tagline: tr("Ta couleur sur noir, lignes d'écran"), isPremium: true,
             background: .solid(.fixed("0A0A0A")),
             primary: .accent, secondary: .accentFaded(0.62),
             tint: .accent, panel: .accentFaded(0.1),
@@ -374,7 +374,7 @@ enum ThemeCatalog {
             preset: preset { $0.texture = .lines; $0.textureOpacity = 0.35; $0.titleCase = .lower; $0.iconStyle = .none; $0.chart = .sparkline; $0.shape = .square }
         ),
         WidgetTheme(
-            id: .blueprint, name: "Plan", tagline: "Bleu d'architecte et grille", isPremium: true,
+            id: .blueprint, name: tr("Plan"), tagline: tr("Bleu d'architecte et grille"), isPremium: true,
             background: .solid(.fixed("1D4E89")),
             primary: .fixed("FFFFFF"), secondary: .fixed("BFD4EE"),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.1),
@@ -386,7 +386,7 @@ enum ThemeCatalog {
             }
         ),
         WidgetTheme(
-            id: .pastel, name: "Pastel", tagline: "Couleurs de dragée", isPremium: true,
+            id: .pastel, name: tr("Pastel"), tagline: tr("Couleurs de dragée"), isPremium: true,
             background: .solid(.adaptive(light: "FFF1E6", dark: "2B2422")),
             primary: .adaptive(light: "4A3B35", dark: "F6EAE3"),
             secondary: .adaptive(light: "9C8A82", dark: "B8A69E"),
@@ -396,7 +396,7 @@ enum ThemeCatalog {
             preset: preset { $0.shape = .soft; $0.iconStyle = .circle; $0.chartThickness = 1.4; $0.layout = .horizontal }
         ),
         WidgetTheme(
-            id: .paper, name: "Papier", tagline: "Papier crème et encre", isPremium: true,
+            id: .paper, name: tr("Papier"), tagline: tr("Papier crème et encre"), isPremium: true,
             background: .solid(.fixed("F4EFE6")),
             primary: .fixed("2B2B2B"), secondary: .fixed("7C766C"),
             tint: .fixed("B23A2E"), panel: .fixed("EAE3D6"),
@@ -405,7 +405,7 @@ enum ThemeCatalog {
             preset: preset { $0.texture = .paper; $0.textureOpacity = 0.6; $0.iconFamily = .outlined; $0.monospacedNumbers = false }
         ),
         WidgetTheme(
-            id: .brutalist, name: "Brutaliste", tagline: "Bord épais, noir sur blanc", isPremium: true,
+            id: .brutalist, name: tr("Brutaliste"), tagline: tr("Bord épais, noir sur blanc"), isPremium: true,
             background: .solid(.fixed("FFFFFF")),
             primary: .fixed("000000"), secondary: .fixed("000000", 0.62),
             tint: .accent, panel: .fixed("000000", 0.06),
@@ -417,7 +417,7 @@ enum ThemeCatalog {
             }
         ),
         WidgetTheme(
-            id: .carbon, name: "Carbone", tagline: "Fibre sombre et relief", isPremium: true,
+            id: .carbon, name: tr("Carbone"), tagline: tr("Fibre sombre et relief"), isPremium: true,
             background: .gradient(["262626", "0F0F0F"]),
             primary: .fixed("EDEDED"), secondary: .fixed("8C8C8C"),
             tint: .accent, panel: .fixed("FFFFFF", 0.06),
@@ -426,7 +426,7 @@ enum ThemeCatalog {
             preset: preset { $0.texture = .diagonal; $0.textureOpacity = 0.3; $0.depth = .embossed; $0.iconStyle = .circle }
         ),
         WidgetTheme(
-            id: .vapor, name: "Vapor", tagline: "Rose et bleu rétro-futur", isPremium: true,
+            id: .vapor, name: tr("Vapor"), tagline: tr("Rose et bleu rétro-futur"), isPremium: true,
             background: .gradient(["FF6AD5", "8795E8"]),
             primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.8),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.2),
@@ -435,7 +435,7 @@ enum ThemeCatalog {
             preset: preset { $0.texture = .grid; $0.textureOpacity = 0.3; $0.depth = .glow; $0.shadowHex = "FFFFFF"; $0.iconStyle = .outline; $0.layout = .graph }
         ),
         WidgetTheme(
-            id: .chalk, name: "Ardoise", tagline: "Tableau noir et craie", isPremium: true,
+            id: .chalk, name: tr("Ardoise"), tagline: tr("Tableau noir et craie"), isPremium: true,
             background: .solid(.fixed("2F3B35")),
             primary: .fixed("F2F2EA"), secondary: .fixed("B5BDB5"),
             tint: .fixed("F6E27A"), panel: .fixed("FFFFFF", 0.08),
@@ -444,7 +444,7 @@ enum ThemeCatalog {
             preset: preset { $0.texture = .grain; $0.textureOpacity = 0.5; $0.border = .dashed; $0.borderWidth = 1.5; $0.borderOpacity = 0.35; $0.iconFamily = .outlined }
         ),
         WidgetTheme(
-            id: .mist, name: "Brume", tagline: "Pâle, léger, presque translucide", isPremium: true,
+            id: .mist, name: tr("Brume"), tagline: tr("Pâle, léger, presque translucide"), isPremium: true,
             background: .gradient(["F8FAFD", "DCE3EC"]),
             primary: .fixed("1E2833"), secondary: .fixed("6B7785"),
             tint: .accent, panel: .fixed("FFFFFF", 0.6),

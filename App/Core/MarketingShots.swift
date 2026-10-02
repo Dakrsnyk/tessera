@@ -131,7 +131,7 @@ struct MarketingBrand: View {
         HStack(spacing: 10) {
             TesseraMark(size: 28)
                 .environment(\.colorScheme, .dark)
-            Text("Tessera")
+            Text(tr("Tessera"))
                 .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .foregroundStyle(MK.cream)
         }
@@ -243,7 +243,7 @@ struct MarketingHomeScreen: View {
                         ForEach(row.element) { item in
                             VStack(spacing: 6) {
                                 WidgetPreview(design: item.design, family: item.family, payload: MK.payload(item.design), width: WidgetMetrics.size(item.family).width, date: MK.now)
-                                Text("Tessera")
+                                Text(tr("Tessera"))
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundStyle(Color.white.opacity(0.92))
                                     .shadow(color: .black.opacity(0.25), radius: 2, y: 1)
@@ -254,7 +254,7 @@ struct MarketingHomeScreen: View {
                 Spacer(minLength: 0)
                 HStack(spacing: 6) {
                     Image(systemName: "magnifyingglass")
-                    Text("Rechercher")
+                    Text(tr("Rechercher"))
                 }
                 .font(.system(size: 14, weight: .medium))
                 .foregroundStyle(Color.white.opacity(0.9))
@@ -316,7 +316,7 @@ struct MarketingHero: View {
             MarketingBackground(dark: true)
             VStack(spacing: 20) {
                 MarketingBrand()
-                MarketingTitle(title: "Ton iPhone.\nTon tableau de bord.", dark: true)
+                MarketingTitle(title: tr("Ton iPhone.\nTon tableau de bord."), dark: true)
             }
             .padding(.top, 70)
             MarketingPhone {
@@ -339,7 +339,7 @@ struct MarketingWall: View {
         let wide: CGFloat = 404
         ZStack(alignment: .top) {
             MarketingBackground()
-            MarketingTitle(eyebrow: "103 widgets · 12 styles", title: "Tout ce qui compte,\nd'un coup d'œil.")
+            MarketingTitle(eyebrow: tr("103 widgets · 12 styles"), title: tr("Tout ce qui compte,\nd'un coup d'œil."))
                 .padding(.top, 72)
             VStack(spacing: 16) {
                 MarketingFloating(item: MKWidget(.weather, .systemMedium, .aurora), width: wide)
@@ -363,9 +363,9 @@ struct MarketingWall: View {
 struct MarketingCustomize: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Personnalisation",
-            title: "À ton image.",
-            subtitle: "Styles, couleurs, photos, polices.",
+            eyebrow: tr("Personnalisation"),
+            title: tr("À ton image."),
+            subtitle: tr("Styles, couleurs, photos, polices."),
             floating: [
                 (MKWidget(.caloriesLeft, .systemSmall, .retro, "F2A33A"), 128, CGPoint(x: 71, y: 432)),
                 (MKWidget(.caloriesLeft, .systemSmall, .dark), 128, CGPoint(x: 369, y: 432)),
@@ -378,9 +378,9 @@ struct MarketingCustomize: View {
 struct MarketingNutrition: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Nutrition",
-            title: "Nutrition,\nsimplifiée.",
-            subtitle: "Scanne. Note. Suis tes macros.",
+            eyebrow: tr("Nutrition"),
+            title: tr("Nutrition,\nsimplifiée."),
+            subtitle: tr("Scanne. Note. Suis tes macros."),
             floating: [
                 (MKWidget(.caloriesLeft, .systemSmall, .aurora), 150, CGPoint(x: 348, y: 868)),
             ]
@@ -392,9 +392,9 @@ struct MarketingNutrition: View {
 struct MarketingFitness: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Sport",
-            title: "Chaque série\ncompte.",
-            subtitle: "Séance, repos et records.",
+            eyebrow: tr("Sport"),
+            title: tr("Chaque série\ncompte."),
+            subtitle: tr("Séance, repos et records."),
             floating: [
                 (MKWidget(.nextSet, .systemSmall, .dark, "FF6B57"), 150, CGPoint(x: 348, y: 868)),
             ]
@@ -406,9 +406,9 @@ struct MarketingFitness: View {
 struct MarketingMoney: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Budget · Entreprise",
-            title: "Tes finances.\nTon entreprise.",
-            subtitle: "Budget, ventes, bénéfice, MRR.",
+            eyebrow: tr("Budget · Entreprise"),
+            title: tr("Tes finances.\nTon entreprise."),
+            subtitle: tr("Budget, ventes, bénéfice, MRR."),
             floating: [
                 (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 336, y: 868)),
             ]
@@ -420,9 +420,9 @@ struct MarketingMoney: View {
 struct MarketingProductivity: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Productivité",
-            title: "Ta journée,\nbien en main.",
-            subtitle: "Top 3, tâches, échéances, focus.",
+            eyebrow: tr("Productivité"),
+            title: tr("Ta journée,\nbien en main."),
+            subtitle: tr("Top 3, tâches, échéances, focus."),
             floating: [
                 (MKWidget(.priorities, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 348, y: 868)),
             ]
@@ -434,9 +434,9 @@ struct MarketingProductivity: View {
 struct MarketingSpaces: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Créer",
-            title: "Toute ta vie,\nau même endroit.",
-            subtitle: "Nutrition, sport, études, voyage, auto…"
+            eyebrow: tr("Créer"),
+            title: tr("Toute ta vie,\nau même endroit."),
+            subtitle: tr("Nutrition, sport, études, voyage, auto…")
         )
     }
 }
@@ -445,9 +445,9 @@ struct MarketingSpaces: View {
 struct MarketingPremium: View {
     var body: some View {
         MarketingFeature(
-            eyebrow: "Tessera Premium",
-            title: "Tout Tessera,\nsans limite.",
-            subtitle: "Tous les widgets, styles et packs.",
+            eyebrow: tr("Tessera Premium"),
+            title: tr("Tout Tessera,\nsans limite."),
+            subtitle: tr("Tous les widgets, styles et packs."),
             floating: [
                 (MKWidget(.yearDots, .systemSmall, .glass, "8C6CFF"), 150, CGPoint(x: 92, y: 868)),
             ]
@@ -463,7 +463,7 @@ struct MarketingFinale: View {
             MarketingBackground(dark: true)
             VStack(spacing: 20) {
                 MarketingBrand()
-                MarketingTitle(title: "L'essentiel,\nen un regard.", subtitle: "Écran d'accueil et écran verrouillé.", dark: true)
+                MarketingTitle(title: tr("L'essentiel,\nen un regard."), subtitle: tr("Écran d'accueil et écran verrouillé."), dark: true)
             }
             .padding(.top, 70)
             VStack(spacing: 34) {

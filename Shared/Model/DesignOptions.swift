@@ -6,10 +6,10 @@ enum ProgressUnit: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .day: "Journée"
-        case .week: "Semaine"
-        case .month: "Mois"
-        case .year: "Année"
+        case .day: tr("Journée")
+        case .week: tr("Semaine")
+        case .month: tr("Mois")
+        case .year: tr("Année")
         }
     }
 }
@@ -20,8 +20,8 @@ enum CountdownMode: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .until: "Jours avant"
-        case .since: "Jours depuis"
+        case .until: tr("Jours avant")
+        case .since: tr("Jours depuis")
         }
     }
 }
@@ -32,9 +32,9 @@ enum MoneyMode: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .net: "Solde net"
-        case .income: "Revenus"
-        case .expense: "Dépenses"
+        case .net: tr("Solde net")
+        case .income: tr("Revenus")
+        case .expense: tr("Dépenses")
         }
     }
 }
@@ -43,13 +43,13 @@ enum MoneyMode: String, Codable, CaseIterable, Identifiable {
 /// saved designs keep decoding when new options are added.
 struct DesignOptions: Codable, Hashable {
     var progressUnit: ProgressUnit = .year
-    var countdownTitle: String = "Vacances"
+    var countdownTitle: String = tr("Vacances")
     var countdownDate: Date = Calendar.current.date(byAdding: .day, value: 42, to: Date()) ?? Date()
     var countdownMode: CountdownMode = .until
     var countdownReminder: Bool = false
     var cities: [String] = ["America/Toronto", "Europe/Paris", "Asia/Tokyo"]
     var noteTitle: String = ""
-    var noteText: String = "Fais une chose aujourd'hui dont tu seras fier demain."
+    var noteText: String = tr("Fais une chose aujourd'hui dont tu seras fier demain.")
     var coinID: String = "bitcoin"
     var moneyMode: MoneyMode = .net
     var showsCompletedTasks: Bool = true

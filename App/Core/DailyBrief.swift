@@ -19,9 +19,9 @@ enum DailyBrief {
 
         var title: String {
             switch self {
-            case .morning: "Ta matinée"
-            case .day: "Ta journée"
-            case .evening: "Ta soirée"
+            case .morning: tr("Ta matinée")
+            case .day: tr("Ta journée")
+            case .evening: tr("Ta soirée")
             }
         }
     }
@@ -291,8 +291,8 @@ enum DailyBrief {
             guard let day = DateMath.calendar.date(byAdding: .day, value: offset, to: now) else { continue }
             let weekday = FitnessMath.isoWeekday(day)
             if let routine = state.routines.first(where: { $0.weekdays.contains(weekday) }) {
-                let when = offset == 1 ? "Demain" : Fmt.weekday(day)
-                return Workout(name: "Repos", exercises: [], totalSets: 0, stage: .rest(nextName: routine.name, nextDay: when))
+                let when = offset == 1 ? tr("Demain") : Fmt.weekday(day)
+                return Workout(name: tr("Repos"), exercises: [], totalSets: 0, stage: .rest(nextName: routine.name, nextDay: when))
             }
         }
         return nil
@@ -313,25 +313,25 @@ enum DailyBrief {
                         id: occurrence.slot.id.uuidString + DateMath.dayKey(day),
                         date: occurrence.start,
                         time: Fmt.time(occurrence.start, uses24Hour: true),
-                        title: course?.name ?? "Cours",
+                        title: course?.name ?? tr("Cours"),
                         detail: occurrence.slot.room
                     )
                 }
             let exams = state.exams
                 .filter { DateMath.isSameDay($0.date, day) && (start == nil || $0.date > start!.addingTimeInterval(-2 * 3_600)) }
                 .map { exam in
-                    TimedItem(id: exam.id.uuidString, date: exam.date, time: Fmt.time(exam.date, uses24Hour: true), title: "Examen : \(exam.title)", detail: exam.room, isHighlighted: true)
+                    TimedItem(id: exam.id.uuidString, date: exam.date, time: Fmt.time(exam.date, uses24Hour: true), title: tr("Examen : \(exam.title)"), detail: exam.room, isHighlighted: true)
                 }
             return (classes + exams).sorted { $0.date < $1.date }
         }
         let moment = Moment(now)
         let today = items(on: now, from: now)
-        if moment != .evening, !today.isEmpty { return ("Cours aujourd'hui", today) }
+        if moment != .evening, !today.isEmpty { return (tr("Cours aujourd'hui"), today) }
         guard let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: now) else { return nil }
-        if moment == .evening, !today.isEmpty { return ("Cours ce soir", today) }
+        if moment == .evening, !today.isEmpty { return (tr("Cours ce soir"), today) }
         let next = items(on: tomorrow, from: nil)
         // Tomorrow's classes only in the evening, to prepare the bag.
-        if moment == .evening, !next.isEmpty { return ("Cours demain", next) }
+        if moment == .evening, !next.isEmpty { return (tr("Cours demain"), next) }
         return nil
     }
 
@@ -342,9 +342,9 @@ enum DailyBrief {
             .sorted { $0.start < $1.start }
         guard !today.isEmpty else { return nil }
         let items = today.prefix(4).map { event in
-            TimedItem(id: event.id, date: event.start, time: event.isAllDay ? "Journée" : Fmt.time(event.start, uses24Hour: true), title: event.title, detail: event.location ?? "")
+            TimedItem(id: event.id, date: event.start, time: event.isAllDay ? tr("Journée") : Fmt.time(event.start, uses24Hour: true), title: event.title, detail: event.location ?? "")
         }
-        return ("Agenda", Array(items))
+        return (tr("Agenda"), Array(items))
     }
 
     // MARK: Reminders
@@ -358,9 +358,9 @@ enum DailyBrief {
             let days = calendar.dateComponents([.day], from: todayStart, to: DateMath.startOfDay(date)).day ?? 0
             let time = withTime ? " \(Fmt.time(date, uses24Hour: true))" : ""
             switch days {
-            case ..<0: return "En retard"
-            case 0: return "Aujourd'hui\(time)"
-            case 1: return "Demain\(time)"
+            case ..<0: return tr("En retard")
+            case 0: return tr("Aujourd'hui\(time)")
+            case 1: return tr("Demain\(time)")
             default: return Fmt.weekday(date)
             }
         }
@@ -369,7 +369,7 @@ enum DailyBrief {
         }
         var reminders: [Reminder] = []
         for exam in input.student.exams where within(exam.date, days: 1) && exam.date > now {
-            reminders.append(Reminder(id: exam.id.uuidString, title: "Examen : \(exam.title)", when: when(exam.date, withTime: true), symbol: "pencil.and.list.clipboard", colorHex: "D6409F", date: exam.date, route: .page(.studiesExams)))
+            reminders.append(Reminder(id: exam.id.uuidString, title: tr("Examen : \(exam.title)"), when: when(exam.date, withTime: true), symbol: "pencil.and.list.clipboard", colorHex: "D6409F", date: exam.date, route: .page(.studiesExams)))
         }
         for work in input.student.assignments where !work.isDone && work.due < todayStart.addingTimeInterval(3 * 86_400) {
             reminders.append(Reminder(id: work.id.uuidString, title: work.title, when: when(work.due, withTime: false), symbol: "doc.text", colorHex: "D6409F", date: work.due, route: .page(.studiesAssignments)))
@@ -384,13 +384,13 @@ enum DailyBrief {
             reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: false), symbol: "car.fill", colorHex: "4B5563", date: deadline.date, route: .page(.carDeadlines)))
         }
         for trip in input.travel.trips where within(trip.start, days: 3) {
-            reminders.append(Reminder(id: trip.id.uuidString, title: "Départ pour \(trip.destination)", when: when(trip.start, withTime: false), symbol: "airplane", colorHex: "12A4B5", date: trip.start, route: .app(.travel)))
+            reminders.append(Reminder(id: trip.id.uuidString, title: tr("Départ pour \(trip.destination)"), when: when(trip.start, withTime: false), symbol: "airplane", colorHex: "12A4B5", date: trip.start, route: .app(.travel)))
         }
         var result = Array(reminders.sorted { $0.date < $1.date }.prefix(4))
         let open = input.content.tasks.filter { !$0.isDone }
         if !open.isEmpty && result.count < 4 {
             let names = open.prefix(2).map(\.title).joined(separator: ", ")
-            result.append(Reminder(id: "tasks", title: Fmt.plural(open.count, "tâche à faire", "tâches à faire"), when: names, symbol: "checklist", colorHex: "6B7280", date: .distantFuture, route: .page(.planningTasks)))
+            result.append(Reminder(id: "tasks", title: Fmt.plural(open.count, tr("tâche à faire"), tr("tâches à faire")), when: names, symbol: "checklist", colorHex: "6B7280", date: .distantFuture, route: .page(.planningTasks)))
         }
         return result
     }

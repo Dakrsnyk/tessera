@@ -20,12 +20,14 @@ enum AIPhraser {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
             guard case .available = SystemLanguageModel.default.availability else { return nil }
-            let prompt = "Faits :\n" + insight.facts.map { "- " + $0 }.joined(separator: "\n") + "\n\nRésume ces faits pour le widget « \(insight.title) »."
+            let prompt = tr("Faits :\n") + insight.facts.map { "- " + $0 }.joined(separator: "\n") + tr("\n\nRésume ces faits pour le widget « \(insight.title) ».")
             do {
+                // Written in the language the interface is shown in.
+                let language = Locale(identifier: "en").localizedString(forIdentifier: Localization.language) ?? "English"
                 let session = LanguageModelSession(instructions: """
-                Tu écris le texte d'un widget iPhone, en français, en tutoyant. \
-                Deux phrases courtes au maximum, 180 caractères au plus. \
-                Utilise uniquement les faits fournis. N'invente aucun chiffre, aucune donnée, aucun conseil médical ou financier.
+                You write the text of an iPhone widget, in \(language), speaking to the reader informally. \
+                Two short sentences at most, 180 characters at most. \
+                Use only the facts provided. Never invent a number, a piece of data, or medical or financial advice.
                 """)
                 let response = try await session.respond(to: prompt)
                 let text = response.content.trimmingCharacters(in: .whitespacesAndNewlines)

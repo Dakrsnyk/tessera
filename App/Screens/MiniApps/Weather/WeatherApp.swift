@@ -17,34 +17,34 @@ struct WeatherAppView: View {
                 content(snapshot)
             case let .unavailable(snapshot):
                 if let snapshot {
-                    Label("Pas de connexion : dernière météo reçue \(updatedText(snapshot.fetchedAt)).", systemImage: "wifi.slash")
+                    Label(tr("Pas de connexion : dernière météo reçue \(updatedText(snapshot.fetchedAt))."), systemImage: "wifi.slash")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     content(snapshot)
                 } else {
-                    EmptyStateView(symbol: "cloud.sun", title: "Météo indisponible", message: "Le service météo ne répond pas pour l'instant. Réessaie dans un moment.", actionTitle: "Réessayer") {
+                    EmptyStateView(symbol: "cloud.sun", title: tr("Météo indisponible"), message: tr("Le service météo ne répond pas pour l'instant. Réessaie dans un moment."), actionTitle: tr("Réessayer")) {
                         Task { await model.refreshWeather(force: true) }
                     }
                     .card()
                 }
             case .needsLocation:
-                EmptyStateView(symbol: "location.circle", title: "Ta ville", message: "Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets.", actionTitle: "Choisir ma ville") {
+                EmptyStateView(symbol: "location.circle", title: tr("Ta ville"), message: tr("Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets."), actionTitle: tr("Choisir ma ville")) {
                     choosingCity = true
                 }
                 .card()
             }
             trip
-            Text("Données météo : Open-Meteo.com (CC BY 4.0).")
+            Text(tr("Données météo : Open-Meteo.com (CC BY 4.0)."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
             MiniAppSettingsSection(app: .weather)
         }
-        .navigationTitle("Météo")
+        .navigationTitle(tr("Météo"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { choosingCity = true } label: { Image(systemName: "mappin.and.ellipse") }
-                    .accessibilityLabel(Text("Changer de ville"))
+                    .accessibilityLabel(Text(tr("Changer de ville")))
             }
         }
         .refreshable { await model.refreshWeather(force: true) }
@@ -54,7 +54,7 @@ struct WeatherAppView: View {
                 WeatherLocationView()
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
-                            Button("Fermer") { choosingCity = false }
+                            Button(tr("Fermer")) { choosingCity = false }
                         }
                     }
             }
@@ -85,11 +85,11 @@ struct WeatherAppView: View {
                     .font(.system(size: 44))
             }
             Text(WeatherCode.description(weather.code)).font(.title3.weight(.semibold))
-            Text("Ressenti \(Fmt.temperature(weather.apparentTemperature, unit: unit)) · Max \(Fmt.temperature(weather.high, unit: unit)) · Min \(Fmt.temperature(weather.low, unit: unit))")
+            Text(tr("Ressenti \(Fmt.temperature(weather.apparentTemperature, unit: unit)) · Max \(Fmt.temperature(weather.high, unit: unit)) · Min \(Fmt.temperature(weather.low, unit: unit))"))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             if let rain = weather.hourly.first(where: { $0.date > now && $0.date < now.addingTimeInterval(12 * 3_600) && ($0.precipitationProbability ?? 0) >= 50 }) {
-                Label("Pluie probable vers \(Fmt.time(rain.date, uses24Hour: true)) (\(rain.precipitationProbability ?? 0) %)", systemImage: "umbrella.fill")
+                Label(tr("Pluie probable vers \(Fmt.time(rain.date, uses24Hour: true)) (\(rain.precipitationProbability ?? 0) %)"), systemImage: "umbrella.fill")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(Color(hex: accentHex))
             }
@@ -107,7 +107,7 @@ struct WeatherAppView: View {
         let hours = weather.upcomingHours(from: now, count: 24)
         if !hours.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Prochaines heures")
+                MiniSectionTitle(title: tr("Prochaines heures"))
                 VStack(spacing: 12) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 16) {
@@ -177,7 +177,7 @@ struct WeatherAppView: View {
             let lowest = days.map(\.low).min() ?? 0
             let highest = days.map(\.high).max() ?? 1
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "\(days.count) prochains jours")
+                MiniSectionTitle(title: tr("\(days.count) prochains jours"))
                 VStack(spacing: 0) {
                     ForEach(Array(days.enumerated()), id: \.element.date) { index, day in
                         if index > 0 { Divider() }
@@ -197,45 +197,45 @@ struct WeatherAppView: View {
     private func details(_ weather: WeatherSnapshot, now: Date) -> some View {
         let today = weather.day(for: now)
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: "Détails")
+            MiniSectionTitle(title: tr("Détails"))
             VStack(spacing: 10) {
                 HStack(spacing: 10) {
-                    MiniStat(title: "Vent", value: "\(TF.int(weather.windSpeed)) km/h", detail: windDetail(weather))
-                    MiniStat(title: "Humidité", value: weather.humidity.map { "\(TF.int($0)) %" } ?? "–")
+                    MiniStat(title: tr("Vent"), value: tr("\(TF.int(weather.windSpeed)) km/h"), detail: windDetail(weather))
+                    MiniStat(title: tr("Humidité"), value: weather.humidity.map { "\(TF.int($0)) %" } ?? "–")
                 }
                 HStack(spacing: 10) {
-                    MiniStat(title: "Indice UV", value: weather.uvIndex(at: now).map { TF.int($0) } ?? "–", detail: uvDetail(weather, today: today, now: now))
-                    MiniStat(title: "Pression", value: weather.pressure.map { "\(TF.int($0)) hPa" } ?? "–")
+                    MiniStat(title: tr("Indice UV"), value: weather.uvIndex(at: now).map { TF.int($0) } ?? "–", detail: uvDetail(weather, today: today, now: now))
+                    MiniStat(title: tr("Pression"), value: weather.pressure.map { tr("\(TF.int($0)) hPa") } ?? "–")
                 }
                 if let sunrise = today?.sunrise, let sunset = today?.sunset {
                     HStack(spacing: 10) {
-                        MiniStat(title: "Lever du soleil", value: Fmt.time(sunrise, uses24Hour: true))
-                        MiniStat(title: "Coucher du soleil", value: Fmt.time(sunset, uses24Hour: true),
-                                 detail: "\(Fmt.hours(sunset.timeIntervalSince(sunrise) / 3_600)) de jour")
+                        MiniStat(title: tr("Lever du soleil"), value: Fmt.time(sunrise, uses24Hour: true))
+                        MiniStat(title: tr("Coucher du soleil"), value: Fmt.time(sunset, uses24Hour: true),
+                                 detail: tr("\(Fmt.hours(sunset.timeIntervalSince(sunrise) / 3_600)) de jour"))
                     }
                 }
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("weather-details")
-            Text("Mis à jour \(updatedText(weather.fetchedAt)).").font(.caption).foregroundStyle(.secondary)
+            Text(tr("Mis à jour \(updatedText(weather.fetchedAt)).")).font(.caption).foregroundStyle(.secondary)
         }
     }
 
     private func updatedText(_ date: Date) -> String {
-        DateMath.isSameDay(date, Date()) ? "à \(Fmt.time(date, uses24Hour: true))" : "le \(Fmt.shortDay(date))"
+        DateMath.isSameDay(date, Date()) ? "à \(Fmt.time(date, uses24Hour: true))" : tr("le \(Fmt.shortDay(date))")
     }
 
     private func windDetail(_ weather: WeatherSnapshot) -> String? {
         var parts: [String] = []
-        if let direction = weather.windDirection { parts.append("du \(TF.compass(direction))") }
-        if let gusts = weather.windGusts { parts.append("rafales \(TF.int(gusts)) km/h") }
+        if let direction = weather.windDirection { parts.append(tr("du \(TF.compass(direction))")) }
+        if let gusts = weather.windGusts { parts.append(tr("rafales \(TF.int(gusts)) km/h")) }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }
 
     private func uvDetail(_ weather: WeatherSnapshot, today: DayForecast?, now: Date) -> String? {
         guard let uv = weather.uvIndex(at: now) else { return nil }
         guard let highest = today?.uvMax else { return TF.uvLevel(uv) }
-        return "\(TF.uvLevel(uv)) · max \(TF.int(highest))"
+        return tr("\(TF.uvLevel(uv)) · max \(TF.int(highest))")
     }
 
     // MARK: Trip
@@ -246,7 +246,7 @@ struct WeatherAppView: View {
             let now = Date()
             let days = weather.daily.filter { DateMath.startOfDay($0.date) >= DateMath.startOfDay(now) }.prefix(7)
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "À \(trip.destination)", detail: "\(Fmt.temperature(weather.temperature, unit: unit)) maintenant")
+                MiniSectionTitle(title: "À \(trip.destination)", detail: tr("\(Fmt.temperature(weather.temperature, unit: unit)) maintenant"))
                 NavigationLink(value: HomeRoute.app(.travel)) {
                     VStack(spacing: 0) {
                         ForEach(Array(days.enumerated()), id: \.element.date) { index, day in
@@ -273,7 +273,7 @@ struct DayRow: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            Text(isToday ? "Aujourd'hui" : Fmt.format(day.date, template: "EEEd").capitalizedFirst)
+            Text(isToday ? tr("Aujourd'hui") : Fmt.format(day.date, template: "EEEd").capitalizedFirst)
                 .font(.subheadline.weight(isToday ? .semibold : .regular))
                 .frame(width: 92, alignment: .leading)
                 .lineLimit(1)

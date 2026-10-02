@@ -10,10 +10,10 @@ struct PlanningTasksPage: View {
         var id: String { rawValue }
         var title: String {
             switch self {
-            case .open: "À faire"
-            case .today: "Aujourd'hui"
-            case .upcoming: "À venir"
-            case .done: "Terminées"
+            case .open: tr("À faire")
+            case .today: tr("Aujourd'hui")
+            case .upcoming: tr("À venir")
+            case .done: tr("Terminées")
             }
         }
     }
@@ -31,7 +31,7 @@ struct PlanningTasksPage: View {
         let open = tasks.filter { !$0.isDone }
         List {
             Section {
-                Picker("Filtre", selection: $filter) {
+                Picker(tr("Filtre"), selection: $filter) {
                     ForEach(Filter.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
@@ -41,7 +41,7 @@ struct PlanningTasksPage: View {
             Section {
                 HStack(spacing: 12) {
                     Image(systemName: "plus.circle.fill").font(.title3).foregroundStyle(Color(hex: accentHex))
-                    TextField("Ajouter une tâche", text: $quickTitle)
+                    TextField(tr("Ajouter une tâche"), text: $quickTitle)
                         .submitLabel(.done)
                         .onSubmit(addQuick)
                         .accessibilityIdentifier("tasks-quick-add")
@@ -49,21 +49,21 @@ struct PlanningTasksPage: View {
             }
             switch filter {
             case .open:
-                section("En retard", open.filter { $0.isOverdue(at: now) })
-                section("Aujourd'hui", open.filter { !$0.isOverdue(at: now) && $0.isDue(on: now) })
-                section("Plus tard", open.filter { ($0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false) })
-                section("Sans date", open.filter { $0.due == nil })
+                section(tr("En retard"), open.filter { $0.isOverdue(at: now) })
+                section(tr("Aujourd'hui"), open.filter { !$0.isOverdue(at: now) && $0.isDue(on: now) })
+                section(tr("Plus tard"), open.filter { ($0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false) })
+                section(tr("Sans date"), open.filter { $0.due == nil })
             case .today:
-                section("Aujourd'hui", tasks.filter { $0.isDue(on: now) || $0.isOverdue(at: now) })
+                section(tr("Aujourd'hui"), tasks.filter { $0.isDue(on: now) || $0.isOverdue(at: now) })
             case .upcoming:
                 let upcoming = open.filter { $0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false }.sorted { ($0.due ?? now) < ($1.due ?? now) }
-                section("À venir", upcoming)
+                section(tr("À venir"), upcoming)
             case .done:
                 let done = tasks.filter(\.isDone).sorted { ($0.completedAt ?? .distantPast) > ($1.completedAt ?? .distantPast) }
-                section("Terminées", done)
+                section(tr("Terminées"), done)
                 if !done.isEmpty {
                     Section {
-                        Button("Effacer les tâches terminées", role: .destructive) {
+                        Button(tr("Effacer les tâches terminées"), role: .destructive) {
                             model.updateContent { $0.tasks.removeAll(where: \.isDone) }
                         }
                     }
@@ -72,7 +72,7 @@ struct PlanningTasksPage: View {
         }
         .styledList()
         .tint(Color(hex: accentHex))
-        .navigationTitle("Tâches")
+        .navigationTitle(tr("Tâches"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { TaskEditor(task: $0) }
     }
@@ -141,10 +141,10 @@ struct TaskRow: View {
     private var detail: String? {
         var parts: [String] = []
         if let due = task.due {
-            parts.append(DateMath.isSameDay(due, Date()) ? (task.hasTime ? "Aujourd'hui \(Fmt.time(due, uses24Hour: true))" : "Aujourd'hui") : Fmt.shortDay(due))
+            parts.append(DateMath.isSameDay(due, Date()) ? (task.hasTime ? tr("Aujourd'hui \(Fmt.time(due, uses24Hour: true))") : tr("Aujourd'hui")) : Fmt.shortDay(due))
         }
         if task.repeats != .never { parts.append(task.repeats.title.lowercased()) }
-        if task.priority != .none { parts.append("priorité \(task.priority.title.lowercased())") }
+        if task.priority != .none { parts.append(tr("priorité \(task.priority.title.lowercased())")) }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }
 }
@@ -173,7 +173,7 @@ struct PlanningWeekPage: View {
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(DateMath.isSameDay(entry.day, Date()) ? Color(hex: MiniApp.planning.colorHex) : .primary)
                     if entry.items.isEmpty {
-                        Text("Libre").font(.subheadline).foregroundStyle(.secondary).card(padding: 12)
+                        Text(tr("Libre")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)
                     } else {
                         VStack(spacing: 0) {
                             ForEach(entry.items) { item in AgendaRow(item: item) }
@@ -184,7 +184,7 @@ struct PlanningWeekPage: View {
                 }
             }
         }
-        .navigationTitle("Semaine")
+        .navigationTitle(tr("Semaine"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: load)
         .onChange(of: anchor) { _, _ in load() }
@@ -260,7 +260,7 @@ struct PlanningMonthPage: View {
             VStack(alignment: .leading, spacing: 8) {
                 MiniSectionTitle(title: Fmt.longDay(selected))
                 if items.isEmpty {
-                    Text("Rien de prévu.").font(.subheadline).foregroundStyle(.secondary).card(padding: 12)
+                    Text(tr("Rien de prévu.")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)
                 } else {
                     VStack(spacing: 0) {
                         ForEach(items) { item in AgendaRow(item: item) }
@@ -270,7 +270,7 @@ struct PlanningMonthPage: View {
                 }
             }
         }
-        .navigationTitle("Mois")
+        .navigationTitle(tr("Mois"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: load)
         .onChange(of: month) { _, _ in load() }
@@ -315,7 +315,7 @@ struct PlanningProjectsPage: View {
         let projects = model.productivity.projects
         List {
             if projects.isEmpty {
-                Text("Regroupe les tâches d'un même projet (un déménagement, un rapport, un voyage) et suis leur avancement.")
+                Text(tr("Regroupe les tâches d'un même projet (un déménagement, un rapport, un voyage) et suis leur avancement."))
                     .foregroundStyle(Color.secondary)
             }
             ForEach(projects) { project in
@@ -334,7 +334,7 @@ struct PlanningProjectsPage: View {
                             }
                         }
                     }
-                    Button("Modifier le projet") { editing = project }
+                    Button(tr("Modifier le projet")) { editing = project }
                 } header: {
                     HStack {
                         Circle().fill(Color(hex: project.colorHex)).frame(width: 8, height: 8)
@@ -344,7 +344,7 @@ struct PlanningProjectsPage: View {
                     }
                 } footer: {
                     if let deadline = project.deadline {
-                        Text("Échéance : \(Fmt.longDay(deadline))")
+                        Text(tr("Échéance : \(Fmt.longDay(deadline))"))
                     }
                 }
             }
@@ -352,13 +352,13 @@ struct PlanningProjectsPage: View {
                 Button {
                     editing = Project(name: "")
                 } label: {
-                    Label("Nouveau projet", systemImage: "folder.badge.plus")
+                    Label(tr("Nouveau projet"), systemImage: "folder.badge.plus")
                 }
             }
         }
         .styledList()
         .tint(Color(hex: MiniApp.planning.colorHex))
-        .navigationTitle("Projets")
+        .navigationTitle(tr("Projets"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { ProjectEditor(project: $0) }
     }
@@ -376,7 +376,7 @@ struct PlanningHabitsPage: View {
         let habits = model.content.habits
         MiniAppScroll {
             if habits.isEmpty {
-                EmptyStateView(symbol: "repeat", title: "Tes habitudes", message: "Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.", actionTitle: "Ajouter une habitude") {
+                EmptyStateView(symbol: "repeat", title: tr("Tes habitudes"), message: tr("Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir."), actionTitle: tr("Ajouter une habitude")) {
                     creating = true
                 }
                 .card()
@@ -406,7 +406,7 @@ struct PlanningHabitsPage: View {
                             Spacer()
                             VStack(alignment: .trailing, spacing: 1) {
                                 Text("\(habit.streak(asOf: now))").font(.headline).monospacedDigit()
-                                Text("série").font(.caption2).foregroundStyle(.secondary)
+                                Text(tr("série")).font(.caption2).foregroundStyle(.secondary)
                             }
                         }
                         .padding(.vertical, 10)
@@ -418,12 +418,12 @@ struct PlanningHabitsPage: View {
                 Button {
                     creating = true
                 } label: {
-                    Label("Ajouter une habitude", systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
+                    Label(tr("Ajouter une habitude"), systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
                 }
                 .tint(Color(hex: "7FA33A"))
             }
         }
-        .navigationTitle("Habitudes")
+        .navigationTitle(tr("Habitudes"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $creating) { HabitEditor(habit: Habit(name: "", symbol: "checkmark", colorHex: "7FA33A"), isNew: true) }
         .sheet(item: $editing) { HabitEditor(habit: $0, isNew: false) }
@@ -444,14 +444,14 @@ struct PlanningFocusPage: View {
         MiniAppScroll {
             VStack(spacing: 14) {
                 if focus.isRunning(at: now), let end = focus.endDate {
-                    Text("Session en cours").font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: "8C6CFF"))
+                    Text(tr("Session en cours")).font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: "8C6CFF"))
                     Text(timerInterval: now...end, countsDown: true)
                         .font(.system(size: 54, weight: .bold, design: .rounded))
                         .monospacedDigit()
-                    Button("Arrêter", role: .destructive) { stop() }
+                    Button(tr("Arrêter"), role: .destructive) { stop() }
                         .buttonStyle(.bordered)
                 } else {
-                    Text("Lance une session de concentration").font(.headline)
+                    Text(tr("Lance une session de concentration")).font(.headline)
                     HStack(spacing: 8) {
                         ForEach(choices, id: \.self) { minutes in
                             Button {
@@ -466,13 +466,13 @@ struct PlanningFocusPage: View {
                             .buttonStyle(.plain)
                         }
                     }
-                    Text("minutes").font(.caption).foregroundStyle(.secondary)
+                    Text(tr("minutes")).font(.caption).foregroundStyle(.secondary)
                 }
             }
             .frame(maxWidth: .infinity)
             .card()
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Cette semaine", detail: "\(TF.decimal(hours, 1)) h / \(TF.int(model.productivity.weeklyFocusGoalHours)) h")
+                MiniSectionTitle(title: tr("Cette semaine"), detail: "\(TF.decimal(hours, 1)) h / \(TF.int(model.productivity.weeklyFocusGoalHours)) h")
                 Chart {
                     ForEach(DayValue.list(DateMath.week(containing: now), week)) { item in
                         BarMark(x: .value("Jour", item.date, unit: .day), y: .value("Minutes", item.value))
@@ -484,7 +484,7 @@ struct PlanningFocusPage: View {
                 .card()
             }
         }
-        .navigationTitle("Concentration")
+        .navigationTitle(tr("Concentration"))
         .navigationBarTitleDisplayMode(.large)
     }
 

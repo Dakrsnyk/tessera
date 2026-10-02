@@ -43,30 +43,30 @@ enum BusinessPeriod: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .day: "Jour"
-        case .week: "Semaine"
-        case .month: "Mois"
-        case .year: "Année"
+        case .day: tr("Jour")
+        case .week: tr("Semaine")
+        case .month: tr("Mois")
+        case .year: tr("Année")
         }
     }
 
     /// « par rapport à hier / la semaine dernière… »
     var previousText: String {
         switch self {
-        case .day: "hier à la même heure"
-        case .week: "la semaine dernière à la même date"
-        case .month: "le mois dernier à la même date"
-        case .year: "l'an dernier à la même date"
+        case .day: tr("hier à la même heure")
+        case .week: tr("la semaine dernière à la même date")
+        case .month: tr("le mois dernier à la même date")
+        case .year: tr("l'an dernier à la même date")
         }
     }
 
     /// « par rapport au mois dernier… »
     var comparisonText: String {
         switch self {
-        case .day: "par rapport à hier à la même heure"
-        case .week: "par rapport à la semaine dernière à la même date"
-        case .month: "par rapport au mois dernier à la même date"
-        case .year: "par rapport à l'an dernier à la même date"
+        case .day: tr("par rapport à hier à la même heure")
+        case .week: tr("par rapport à la semaine dernière à la même date")
+        case .month: tr("par rapport au mois dernier à la même date")
+        case .year: tr("par rapport à l'an dernier à la même date")
         }
     }
 
@@ -121,7 +121,7 @@ struct BusinessAppView: View {
         let now = Date()
         let state = model.business
         MiniAppScroll {
-            Picker("Période", selection: $period) {
+            Picker(tr("Période"), selection: $period) {
                 ForEach(BusinessPeriod.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
@@ -132,9 +132,9 @@ struct BusinessAppView: View {
                 hero(state: state, now: now)
             }
             HStack(spacing: 10) {
-                MiniActionButton(title: "Vente", symbol: "plus", colorHex: accentHex) { sheet = .sale(nil) }
+                MiniActionButton(title: tr("Vente"), symbol: "plus", colorHex: accentHex) { sheet = .sale(nil) }
                     .accessibilityIdentifier("business-add-sale")
-                MiniActionButton(title: "Dépense", symbol: "minus", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }
+                MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }
                     .accessibilityIdentifier("business-add-cost")
             }
             kpis(state: state, now: now)
@@ -143,12 +143,12 @@ struct BusinessAppView: View {
             more(state: state)
             MiniAppSettingsSection(app: .business)
         }
-        .navigationTitle(state.name.isEmpty ? "Business" : state.name)
+        .navigationTitle(state.name.isEmpty ? tr("Business") : state.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { sheet = .settings } label: { Image(systemName: "slider.horizontal.3") }
-                    .accessibilityLabel(Text("Nom et objectif"))
+                    .accessibilityLabel(Text(tr("Nom et objectif")))
             }
         }
         .sheet(item: $sheet) { $0.editor }
@@ -157,8 +157,8 @@ struct BusinessAppView: View {
     private var start: some View {
         VStack(alignment: .leading, spacing: 10) {
             Image(systemName: "briefcase.fill").font(.system(size: 28)).foregroundStyle(Color(hex: accentHex))
-            Text("Ton activité, chiffres à l'appui").font(.title3.weight(.bold))
-            Text("Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls.")
+            Text(tr("Ton activité, chiffres à l'appui")).font(.title3.weight(.bold))
+            Text(tr("Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -173,7 +173,7 @@ struct BusinessAppView: View {
         let comparison = BusinessMath.compare(.revenue, state, period.math, at: now)
         let change = BusinessFormat.change(comparison.change, higherIsBetter: true)
         return VStack(alignment: .leading, spacing: 8) {
-            Text("Chiffre d'affaires").font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+            Text(tr("Chiffre d'affaires")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
             Text(TF.money(comparison.current ?? 0, currency))
                 .font(.system(size: 40, weight: .bold, design: .rounded))
                 .monospacedDigit()
@@ -183,12 +183,12 @@ struct BusinessAppView: View {
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(Color(hex: change.hex))
             } else if let previous = comparison.previous, previous == 0 {
-                Text("Rien \(period.previousText)").font(.subheadline).foregroundStyle(.secondary)
+                Text(tr("Rien \(period.previousText)")).font(.subheadline).foregroundStyle(.secondary)
             }
             if period == .month && state.monthlyGoal > 0 {
                 let progress = BusinessMath.goalProgress(state, at: now)
                 ProgressView(value: min(1, progress)).tint(Color(hex: progress >= 1 ? BusinessFormat.goodHex : accentHex))
-                Text("\(Fmt.percent(progress)) de l'objectif de \(TF.money(state.monthlyGoal, currency))")
+                Text(tr("\(Fmt.percent(progress)) de l'objectif de \(TF.money(state.monthlyGoal, currency))"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -205,14 +205,14 @@ struct BusinessAppView: View {
         let shown = state.pinnedKPIs.filter { $0 != .revenue }
         return VStack(alignment: .leading, spacing: 10) {
             HStack {
-                MiniSectionTitle(title: "Mes indicateurs")
+                MiniSectionTitle(title: tr("Mes indicateurs"))
                 Button { sheet = .kpis } label: {
-                    Text("Choisir").font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: accentHex))
+                    Text(tr("Choisir")).font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: accentHex))
                 }
                 .accessibilityIdentifier("business-choose-kpis")
             }
             if shown.isEmpty {
-                Text("Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…")
+                Text(tr("Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
@@ -222,7 +222,7 @@ struct BusinessAppView: View {
                         HStack(spacing: 10) {
                             ForEach(shown[start..<min(start + 2, shown.count)]) { kpi in
                                 KPITile(kpi: kpi, comparison: BusinessMath.compare(kpi, state, period.math, at: now), currency: currency,
-                                        note: kpi.isSnapshot ? "ce mois-ci" : nil)
+                                        note: kpi.isSnapshot ? tr("ce mois-ci") : nil)
                             }
                             if start + 1 >= shown.count { Color.clear.frame(maxWidth: .infinity, maxHeight: 1) }
                         }
@@ -238,7 +238,7 @@ struct BusinessAppView: View {
     private func metrics(state: BusinessState) -> some View {
         if !state.metrics.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Suivis à la main")
+                MiniSectionTitle(title: tr("Suivis à la main"))
                 NavigationLink(value: HomeRoute.page(.businessMetrics)) {
                     VStack(spacing: 0) {
                         ForEach(Array(state.metrics.prefix(3).enumerated()), id: \.element.id) { index, metric in
@@ -263,25 +263,25 @@ struct BusinessAppView: View {
         let points = BusinessMath.cumulative(state, period.math, at: now)
         if points.contains(where: { ($0.current ?? 0) > 0 || $0.previous > 0 }) {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Chiffre d'affaires cumulé", detail: period == .day ? "cette semaine" : nil)
+                MiniSectionTitle(title: tr("Chiffre d'affaires cumulé"), detail: period == .day ? tr("cette semaine") : nil)
                 Chart {
                     ForEach(points) { point in
-                        LineMark(x: .value("Jour", point.index), y: .value("Précédent", point.previous), series: .value("Série", "Précédent"))
+                        LineMark(x: .value("Jour", point.index), y: .value("Précédent", point.previous), series: .value("Série", tr("Précédent")))
                             .foregroundStyle(Color.secondary)
                             .lineStyle(StrokeStyle(lineWidth: 1.5, dash: [4, 4]))
                     }
                     ForEach(points.filter { $0.current != nil }) { point in
-                        LineMark(x: .value("Jour", point.index), y: .value("Actuel", point.current ?? 0), series: .value("Série", "Actuel"))
+                        LineMark(x: .value("Jour", point.index), y: .value("Actuel", point.current ?? 0), series: .value("Série", tr("Actuel")))
                             .foregroundStyle(Color(hex: accentHex))
                             .lineStyle(StrokeStyle(lineWidth: 2.5))
                     }
                 }
-                .chartXAxisLabel(period == .year ? "Mois" : "Jour")
+                .chartXAxisLabel(period == .year ? tr("Mois") : tr("Jour"))
                 .frame(height: 180)
                 .card()
                 HStack(spacing: 14) {
-                    legend("Cette période", hex: accentHex, dashed: false)
-                    legend("Période précédente", hex: "8A8A8E", dashed: true)
+                    legend(tr("Cette période"), hex: accentHex, dashed: false)
+                    legend(tr("Période précédente"), hex: "8A8A8E", dashed: true)
                 }
             }
         }
@@ -301,26 +301,26 @@ struct BusinessAppView: View {
     private func more(state: BusinessState) -> some View {
         MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.businessSales)) {
-                MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: "Ventes et dépenses", detail: "Tout ce que tu as noté, modifiable")
+                MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Ventes et dépenses"), detail: tr("Tout ce que tu as noté, modifiable"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("business-sales")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessResults)) {
-                MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: "Résultats", detail: "Chiffre d'affaires, dépenses et bénéfice par mois")
+                MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Résultats"), detail: tr("Chiffre d'affaires, dépenses et bénéfice par mois"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("business-results")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessRecurring)) {
-                MiniRow(symbol: "arrow.triangle.2.circlepath", colorHex: "1E9E75", title: "Revenu récurrent",
-                        detail: BusinessMath.recurring(state).map { "MRR \(TF.money($0.mrr, currency))" } ?? "MRR, abonnés, ARR")
+                MiniRow(symbol: "arrow.triangle.2.circlepath", colorHex: "1E9E75", title: tr("Revenu récurrent"),
+                        detail: BusinessMath.recurring(state).map { tr("MRR \(TF.money($0.mrr, currency))") } ?? tr("MRR, abonnés, ARR"))
             }
             .buttonStyle(.plain)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessMetrics)) {
-                MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: "F2A33A", title: "Suivis à la main",
-                        detail: "Tes propres indicateurs", value: state.metrics.isEmpty ? nil : "\(state.metrics.count)")
+                MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: "F2A33A", title: tr("Suivis à la main"),
+                        detail: tr("Tes propres indicateurs"), value: state.metrics.isEmpty ? nil : "\(state.metrics.count)")
             }
             .buttonStyle(.plain)
         }
@@ -351,7 +351,7 @@ struct KPITile: View {
             if let change {
                 Text(change.text).font(.caption.weight(.semibold)).foregroundStyle(Color(hex: change.hex))
             } else {
-                Text(note ?? (comparison.current == nil ? "pas encore de données" : "rien avant")).font(.caption).foregroundStyle(.tertiary)
+                Text(note ?? (comparison.current == nil ? tr("pas encore de données") : tr("rien avant"))).font(.caption).foregroundStyle(.tertiary)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -393,9 +393,9 @@ struct MetricRow: View {
         var parts: [String] = []
         if let latest = metric.latest { parts.append(Fmt.shortDay(latest.date)) }
         if let target = metric.target, let latest = metric.latest, target > 0 {
-            parts.append("objectif \(BusinessFormat.number(target, unit: metric.unit)) · \(Fmt.percent(latest.value / target))")
+            parts.append(tr("objectif \(BusinessFormat.number(target, unit: metric.unit)) · \(Fmt.percent(latest.value / target))"))
         }
-        return parts.isEmpty ? "Aucune valeur" : parts.joined(separator: " · ")
+        return parts.isEmpty ? tr("Aucune valeur") : parts.joined(separator: " · ")
     }
 }
 
@@ -428,15 +428,15 @@ struct KPIPicker: View {
                         .accessibilityIdentifier("kpi-\(kpi.rawValue)")
                     }
                 } footer: {
-                    Text("Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.")
+                    Text(tr("Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment."))
                 }
             }
             .styledList()
-            .navigationTitle("Mes indicateurs")
+            .navigationTitle(tr("Mes indicateurs"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("OK") { dismiss() }
+                    Button(tr("OK")) { dismiss() }
                 }
             }
         }
@@ -444,17 +444,17 @@ struct KPIPicker: View {
 
     private func explanation(_ kpi: BusinessKPI) -> String {
         switch kpi {
-        case .revenue: "Le total de tes ventes"
-        case .costs: "Le total de tes dépenses"
-        case .profit: "Ventes moins dépenses"
-        case .margin: "Le bénéfice rapporté aux ventes"
-        case .orders: "Le nombre de commandes"
-        case .averageBasket: "Ventes divisées par les commandes"
-        case .newCustomers: "Les clients arrivés sur la période"
-        case .visitors: "Les visites notées avec tes ventes"
-        case .conversion: "Commandes divisées par les visiteurs"
-        case .mrr: "Revenu mensuel récurrent (abonnements)"
-        case .subscribers: "Clients abonnés"
+        case .revenue: tr("Le total de tes ventes")
+        case .costs: tr("Le total de tes dépenses")
+        case .profit: tr("Ventes moins dépenses")
+        case .margin: tr("Le bénéfice rapporté aux ventes")
+        case .orders: tr("Le nombre de commandes")
+        case .averageBasket: tr("Ventes divisées par les commandes")
+        case .newCustomers: tr("Les clients arrivés sur la période")
+        case .visitors: tr("Les visites notées avec tes ventes")
+        case .conversion: tr("Commandes divisées par les visiteurs")
+        case .mrr: tr("Revenu mensuel récurrent (abonnements)")
+        case .subscribers: tr("Clients abonnés")
         }
     }
 }
@@ -466,12 +466,12 @@ struct BusinessSettingsEditor: View {
     @State private var goal: Double = 0
 
     var body: some View {
-        SheetForm(title: "Mon activité", canSave: true, onSave: save) {
+        SheetForm(title: tr("Mon activité"), canSave: true, onSave: save) {
             Section {
-                TextField("Nom de l'entreprise", text: $name)
-                NumberRow(title: "Objectif du mois", value: $goal, unit: model.settings.currencyCode)
+                TextField(tr("Nom de l'entreprise"), text: $name)
+                NumberRow(title: tr("Objectif du mois"), value: $goal, unit: model.settings.currencyCode)
             } footer: {
-                Text("L'objectif sert à la barre de progression du mois.")
+                Text(tr("L'objectif sert à la barre de progression du mois."))
             }
         }
         .onAppear {
@@ -481,7 +481,7 @@ struct BusinessSettingsEditor: View {
     }
 
     private func save() {
-        model.setBusinessName(name.trimmed.isEmpty ? "Mon entreprise" : name.trimmed)
+        model.setBusinessName(name.trimmed.isEmpty ? tr("Mon entreprise") : name.trimmed)
         model.setBusinessGoal(max(0, goal))
     }
 }
@@ -498,24 +498,24 @@ struct MetricEditor: View {
     private var isNew: Bool { !model.business.metrics.contains { $0.id == metric.id } }
 
     var body: some View {
-        SheetForm(title: isNew ? "Nouvel indicateur" : metric.name, canSave: !metric.name.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: isNew ? tr("Nouvel indicateur") : metric.name, canSave: !metric.name.trimmed.isEmpty, onSave: save) {
             Section {
-                TextField("Nom (abonnés, devis envoyés, NPS…)", text: $metric.name)
+                TextField(tr("Nom (abonnés, devis envoyés, NPS…)"), text: $metric.name)
                     .accessibilityIdentifier("metric-name")
-                TextField("Unité (facultatif)", text: $metric.unit)
-                Toggle("Plus c'est haut, mieux c'est", isOn: $metric.higherIsBetter)
-                Toggle("Objectif", isOn: $hasTarget)
+                TextField(tr("Unité (facultatif)"), text: $metric.unit)
+                Toggle(tr("Plus c'est haut, mieux c'est"), isOn: $metric.higherIsBetter)
+                Toggle(tr("Objectif"), isOn: $hasTarget)
                 if hasTarget {
-                    NumberRow(title: "Valeur visée", value: $target)
+                    NumberRow(title: tr("Valeur visée"), value: $target)
                 }
             }
             if isNew {
-                Section("Valeur d'aujourd'hui (facultatif)") {
-                    NumberRow(title: "Valeur", value: $firstValue)
+                Section(tr("Valeur d'aujourd'hui (facultatif)")) {
+                    NumberRow(title: tr("Valeur"), value: $firstValue)
                 }
             } else {
                 Section {
-                    Button("Supprimer l'indicateur", role: .destructive) {
+                    Button(tr("Supprimer l'indicateur"), role: .destructive) {
                         let id = metric.id
                         model.update(\.business) { $0.metrics.removeAll { $0.id == id } }
                         dismiss()
@@ -552,13 +552,13 @@ struct MetricValueEditor: View {
     var body: some View {
         SheetForm(title: metric.name, canSave: true, onSave: save) {
             Section {
-                NumberRow(title: "Valeur", value: $value, unit: metric.unit.isEmpty ? nil : metric.unit)
+                NumberRow(title: tr("Valeur"), value: $value, unit: metric.unit.isEmpty ? nil : metric.unit)
                     .accessibilityIdentifier("metric-value")
-                DatePicker("Date", selection: $date, in: ...Date(), displayedComponents: .date)
+                DatePicker(tr("Date"), selection: $date, in: ...Date(), displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)
             } footer: {
                 if let latest = metric.latest {
-                    Text("Dernière valeur : \(BusinessFormat.number(latest.value, unit: metric.unit)), \(Fmt.shortDay(latest.date)).")
+                    Text(tr("Dernière valeur : \(BusinessFormat.number(latest.value, unit: metric.unit)), \(Fmt.shortDay(latest.date))."))
                 }
             }
         }

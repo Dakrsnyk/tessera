@@ -1,9 +1,13 @@
 import Foundation
 
-/// Formatting helpers shared by the app and the widgets. The interface is French,
-/// so dates and numbers are always formatted with a French locale.
+/// Formatting helpers shared by the app and the widgets. Dates and numbers follow the language the
+/// interface is shown in, with the region of the iPhone (French in Canada: "2 200 $", "sam. 27 sept.").
 enum Fmt {
-    static let locale = Locale(identifier: "fr_CA")
+    static let locale: Locale = {
+        var components = Locale.Components(identifier: Localization.language)
+        if let region = Locale.current.region { components.region = region }
+        return Locale(components: components)
+    }()
 
     static let calendar: Calendar = {
         var cal = Calendar(identifier: .gregorian)
@@ -50,7 +54,7 @@ enum Fmt {
 
     /// French writes the first day of a month "1er".
     static func firstOfMonth(_ text: String, _ date: Date) -> String {
-        guard DateMath.calendar.component(.day, from: date) == 1 else { return text }
+        guard Localization.isFrench, DateMath.calendar.component(.day, from: date) == 1 else { return text }
         return text.replacingOccurrences(of: " 1 ", with: " 1er ")
     }
 
@@ -104,7 +108,12 @@ enum Fmt {
 
     static func signedPercent(_ value: Double, decimals: Int = 1) -> String {
         let sign = value < 0 ? "−" : "+"
-        return sign + String(format: "%.\(decimals)f", abs(value)).replacingOccurrences(of: ".", with: ",") + " %"
+        let formatter = NumberFormatter()
+        formatter.locale = locale
+        formatter.numberStyle = .percent
+        formatter.minimumFractionDigits = decimals
+        formatter.maximumFractionDigits = decimals
+        return sign + (formatter.string(from: NSNumber(value: abs(value) / 100)) ?? "\(abs(value)) %")
     }
 
     static func number(_ value: Int) -> String {
@@ -119,7 +128,9 @@ enum Fmt {
     }
 
     static func plural(_ count: Int, _ singular: String, _ plural: String) -> String {
-        "\(number(count)) \(abs(count) > 1 ? plural : singular)"
+        // French counts 0 and 1 as singular, the other languages only 1.
+        let isSingular = Localization.isFrench ? abs(count) <= 1 : abs(count) == 1
+        return "\(number(count)) \(isSingular ? singular : plural)"
     }
 }
 

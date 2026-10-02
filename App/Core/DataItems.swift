@@ -7,7 +7,7 @@ enum InfoArea: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
     var space: Space? { Space(rawValue: rawValue) }
-    var title: String { space?.title ?? "Général" }
+    var title: String { space?.title ?? tr("Général") }
     var symbol: String { space?.symbol ?? "gearshape.fill" }
     var colorHex: String { space?.colorHex ?? "6B7280" }
 
@@ -80,43 +80,43 @@ enum DataItem: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .kcalTarget: "Objectif calorique"
-        case .macroTargets: "Objectifs de macros"
-        case .meals: "Repas"
-        case .routines: "Programme d'entraînement"
-        case .weeklyWorkouts: "Séances par semaine"
-        case .weight: "Poids"
-        case .stepGoal: "Objectif de pas"
-        case .habits: "Habitudes"
-        case .hydrationGoal: "Objectif d'eau"
-        case .tasks: "Tâches"
-        case .priorities: "Top 3 du jour"
-        case .projects: "Projets"
-        case .deadlines: "Échéances"
-        case .counters: "Compteurs"
-        case .focusGoal: "Objectif de concentration"
-        case .timetable: "Cours et horaire"
-        case .exams: "Examens"
-        case .assignments: "Devoirs"
-        case .grades: "Notes"
-        case .flashcards: "Fiches de révision"
-        case .monthlyBudget: "Budget du mois"
-        case .expenses: "Dépenses"
-        case .bills: "Factures et abonnements"
-        case .savingsGoals: "Objectifs d'épargne"
-        case .accounts: "Comptes"
-        case .moneyFlow: "Revenus et dépenses fixes"
-        case .businessGoal: "Objectif de chiffre d'affaires"
-        case .sales: "Ventes"
-        case .holdings: "Placements"
-        case .companies: "Entreprises suivies"
-        case .trip: "Voyage"
-        case .carName: "Ta voiture"
-        case .carFills: "Pleins"
-        case .carDeadlines: "Échéances auto"
-        case .birthday: "Anniversaire"
-        case .city: "Ville"
-        case .calendar: "Calendrier"
+        case .kcalTarget: tr("Objectif calorique")
+        case .macroTargets: tr("Objectifs de macros")
+        case .meals: tr("Repas")
+        case .routines: tr("Programme d'entraînement")
+        case .weeklyWorkouts: tr("Séances par semaine")
+        case .weight: tr("Poids")
+        case .stepGoal: tr("Objectif de pas")
+        case .habits: tr("Habitudes")
+        case .hydrationGoal: tr("Objectif d'eau")
+        case .tasks: tr("Tâches")
+        case .priorities: tr("Top 3 du jour")
+        case .projects: tr("Projets")
+        case .deadlines: tr("Échéances")
+        case .counters: tr("Compteurs")
+        case .focusGoal: tr("Objectif de concentration")
+        case .timetable: tr("Cours et horaire")
+        case .exams: tr("Examens")
+        case .assignments: tr("Devoirs")
+        case .grades: tr("Notes")
+        case .flashcards: tr("Fiches de révision")
+        case .monthlyBudget: tr("Budget du mois")
+        case .expenses: tr("Dépenses")
+        case .bills: tr("Factures et abonnements")
+        case .savingsGoals: tr("Objectifs d'épargne")
+        case .accounts: tr("Comptes")
+        case .moneyFlow: tr("Revenus et dépenses fixes")
+        case .businessGoal: tr("Objectif de chiffre d'affaires")
+        case .sales: tr("Ventes")
+        case .holdings: tr("Placements")
+        case .companies: tr("Entreprises suivies")
+        case .trip: tr("Voyage")
+        case .carName: tr("Ta voiture")
+        case .carFills: tr("Pleins")
+        case .carDeadlines: tr("Échéances auto")
+        case .birthday: tr("Anniversaire")
+        case .city: tr("Ville")
+        case .calendar: tr("Calendrier")
         }
     }
 
@@ -165,43 +165,43 @@ enum DataItem: String, CaseIterable, Identifiable {
     /// Why it is asked, in the words of the widgets that use it.
     var purpose: String {
         switch self {
-        case .kcalTarget: "Pour savoir ce qu'il te reste à manger aujourd'hui."
-        case .macroTargets: "Pour suivre tes protéines, glucides et lipides."
-        case .meals: "Scanne ou cherche un aliment : tes widgets se mettent à jour."
-        case .routines: "Tes séances et les jours où tu les fais."
-        case .weeklyWorkouts: "Pour suivre ta régularité semaine après semaine."
-        case .weight: "Pour estimer les calories brûlées."
-        case .stepGoal: "Pour suivre tes pas dans « Mon Quotidien »."
-        case .habits: "Ce que tu veux faire chaque jour."
-        case .hydrationGoal: "Le nombre de verres d'eau à boire par jour."
-        case .tasks: "Ce qu'il te reste à faire."
-        case .priorities: "Les trois choses les plus importantes du jour."
-        case .projects: "Tes projets et leurs étapes."
-        case .deadlines: "Les dates à ne pas manquer."
-        case .counters: "Ce que tu comptes d'une touche."
-        case .focusGoal: "Les heures de concentration visées par semaine."
-        case .timetable: "Tes cours et leurs horaires de la semaine."
-        case .exams: "Tes prochains examens."
-        case .assignments: "Tes devoirs et leur date de remise."
-        case .grades: "Tes notes, pour ta moyenne."
-        case .flashcards: "Des fiches à réviser."
-        case .monthlyBudget: "Pour savoir ce qu'il te reste chaque jour."
-        case .expenses: "Note une dépense en quelques secondes."
-        case .bills: "Pour voir ce qui arrive bientôt."
-        case .savingsGoals: "Ce que tu mets de côté, et pour quoi."
-        case .accounts: "Pour ta valeur nette."
-        case .moneyFlow: "Ton salaire et tes dépenses fixes."
-        case .businessGoal: "Ce que tu vises chaque mois."
-        case .sales: "Note tes ventes pour suivre ton activité."
-        case .holdings: "Tes actions, ETF et cryptos."
-        case .companies: "Les sociétés cotées que tu suis."
-        case .trip: "Ton prochain voyage : destination et dates."
-        case .carName: "Le nom de ta voiture et son kilométrage."
-        case .carFills: "Tes pleins, pour le coût et la consommation."
-        case .carDeadlines: "Contrôle technique, assurance, pneus…"
-        case .birthday: "Pour ton âge et le compte à rebours."
-        case .city: "Pour la météo de tes widgets."
-        case .calendar: "Pour afficher tes événements."
+        case .kcalTarget: tr("Pour savoir ce qu'il te reste à manger aujourd'hui.")
+        case .macroTargets: tr("Pour suivre tes protéines, glucides et lipides.")
+        case .meals: tr("Scanne ou cherche un aliment : tes widgets se mettent à jour.")
+        case .routines: tr("Tes séances et les jours où tu les fais.")
+        case .weeklyWorkouts: tr("Pour suivre ta régularité semaine après semaine.")
+        case .weight: tr("Pour estimer les calories brûlées.")
+        case .stepGoal: tr("Pour suivre tes pas dans « Mon Quotidien ».")
+        case .habits: tr("Ce que tu veux faire chaque jour.")
+        case .hydrationGoal: tr("Le nombre de verres d'eau à boire par jour.")
+        case .tasks: tr("Ce qu'il te reste à faire.")
+        case .priorities: tr("Les trois choses les plus importantes du jour.")
+        case .projects: tr("Tes projets et leurs étapes.")
+        case .deadlines: tr("Les dates à ne pas manquer.")
+        case .counters: tr("Ce que tu comptes d'une touche.")
+        case .focusGoal: tr("Les heures de concentration visées par semaine.")
+        case .timetable: tr("Tes cours et leurs horaires de la semaine.")
+        case .exams: tr("Tes prochains examens.")
+        case .assignments: tr("Tes devoirs et leur date de remise.")
+        case .grades: tr("Tes notes, pour ta moyenne.")
+        case .flashcards: tr("Des fiches à réviser.")
+        case .monthlyBudget: tr("Pour savoir ce qu'il te reste chaque jour.")
+        case .expenses: tr("Note une dépense en quelques secondes.")
+        case .bills: tr("Pour voir ce qui arrive bientôt.")
+        case .savingsGoals: tr("Ce que tu mets de côté, et pour quoi.")
+        case .accounts: tr("Pour ta valeur nette.")
+        case .moneyFlow: tr("Ton salaire et tes dépenses fixes.")
+        case .businessGoal: tr("Ce que tu vises chaque mois.")
+        case .sales: tr("Note tes ventes pour suivre ton activité.")
+        case .holdings: tr("Tes actions, ETF et cryptos.")
+        case .companies: tr("Les sociétés cotées que tu suis.")
+        case .trip: tr("Ton prochain voyage : destination et dates.")
+        case .carName: tr("Le nom de ta voiture et son kilométrage.")
+        case .carFills: tr("Tes pleins, pour le coût et la consommation.")
+        case .carDeadlines: tr("Contrôle technique, assurance, pneus…")
+        case .birthday: tr("Pour ton âge et le compte à rebours.")
+        case .city: tr("Pour la météo de tes widgets.")
+        case .calendar: tr("Pour afficher tes événements.")
         }
     }
 
@@ -387,7 +387,7 @@ extension AppModel {
         guard isFilled(item) else { return nil }
         let currency = settings.currencyCode
         switch item {
-        case .kcalTarget: return "\(TF.int(nutrition.goals.kcal)) kcal par jour"
+        case .kcalTarget: return tr("\(TF.int(nutrition.goals.kcal)) kcal par jour")
         case .macroTargets:
             var parts: [String] = []
             if profile.knows(.proteinTarget) { parts.append("P \(TF.int(nutrition.goals.protein)) g") }
@@ -396,49 +396,49 @@ extension AppModel {
             return parts.joined(separator: " · ")
         case .meals:
             let today = NutritionMath.entries(nutrition, on: now).count
-            return today == 0 ? "Rien noté aujourd'hui" : Fmt.plural(today, "aliment noté aujourd'hui", "aliments notés aujourd'hui")
-        case .routines: return Fmt.plural(fitness.routines.count, "séance", "séances")
-        case .weeklyWorkouts: return "\(fitness.weeklyGoal) par semaine"
-        case .weight: return profile.weightKg.map { "\(ProfileNumberField.format($0)) kg" }
-        case .stepGoal: return profile.stepGoal.map { "\(Fmt.number($0)) pas" }
-        case .habits: return Fmt.plural(content.habits.count, "habitude", "habitudes")
-        case .hydrationGoal: return Fmt.plural(content.hydration.goal, "verre par jour", "verres par jour")
+            return today == 0 ? tr("Rien noté aujourd'hui") : Fmt.plural(today, tr("aliment noté aujourd'hui"), tr("aliments notés aujourd'hui"))
+        case .routines: return Fmt.plural(fitness.routines.count, tr("séance"), tr("séances"))
+        case .weeklyWorkouts: return tr("\(fitness.weeklyGoal) par semaine")
+        case .weight: return profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") }
+        case .stepGoal: return profile.stepGoal.map { tr("\(Fmt.number($0)) pas") }
+        case .habits: return Fmt.plural(content.habits.count, tr("habitude"), tr("habitudes"))
+        case .hydrationGoal: return Fmt.plural(content.hydration.goal, tr("verre par jour"), tr("verres par jour"))
         case .tasks:
             let open = content.tasks.filter { !$0.isDone }.count
-            return Fmt.plural(open, "tâche à faire", "tâches à faire")
-        case .priorities: return Fmt.plural(productivity.priorities.count, "priorité", "priorités")
-        case .projects: return Fmt.plural(productivity.projects.count, "projet", "projets")
-        case .deadlines: return Fmt.plural(productivity.deadlines.count, "échéance", "échéances")
-        case .counters: return Fmt.plural(productivity.counters.count, "compteur", "compteurs")
-        case .focusGoal: return "\(Fmt.hours(productivity.weeklyFocusGoalHours)) par semaine"
-        case .timetable: return Fmt.plural(student.courses.count, "cours", "cours")
+            return Fmt.plural(open, tr("tâche à faire"), tr("tâches à faire"))
+        case .priorities: return Fmt.plural(productivity.priorities.count, tr("priorité"), tr("priorités"))
+        case .projects: return Fmt.plural(productivity.projects.count, tr("projet"), tr("projets"))
+        case .deadlines: return Fmt.plural(productivity.deadlines.count, tr("échéance"), tr("échéances"))
+        case .counters: return Fmt.plural(productivity.counters.count, tr("compteur"), tr("compteurs"))
+        case .focusGoal: return tr("\(Fmt.hours(productivity.weeklyFocusGoalHours)) par semaine")
+        case .timetable: return Fmt.plural(student.courses.count, tr("cours"), tr("cours"))
         case .exams:
             let next = student.exams.filter { $0.date > now }.count
-            return next == 0 ? "Aucun à venir" : Fmt.plural(next, "examen à venir", "examens à venir")
+            return next == 0 ? tr("Aucun à venir") : Fmt.plural(next, tr("examen à venir"), tr("examens à venir"))
         case .assignments:
             let open = student.assignments.filter { !$0.isDone }.count
-            return Fmt.plural(open, "devoir à rendre", "devoirs à rendre")
-        case .grades: return Fmt.plural(student.grades.count, "note", "notes")
-        case .flashcards: return Fmt.plural(student.cards.count, "fiche", "fiches")
-        case .monthlyBudget: return "\(TF.money(budget.monthlyBudget, currency)) par mois"
-        case .expenses: return "\(TF.money(BudgetMath.spentToday(budget, at: now), currency)) aujourd'hui"
-        case .bills: return Fmt.plural(budget.bills.count, "facture", "factures")
-        case .savingsGoals: return Fmt.plural(budget.goals.count, "objectif", "objectifs")
-        case .accounts: return Fmt.plural(budget.accounts.count, "compte", "comptes")
-        case .moneyFlow: return Fmt.plural(content.money.items.count, "ligne", "lignes")
-        case .businessGoal: return "\(TF.money(business.monthlyGoal, currency)) par mois"
-        case .sales: return Fmt.plural(business.sales.count, "vente notée", "ventes notées")
-        case .holdings: return Fmt.plural(portfolio.holdings.count, "placement", "placements")
-        case .companies: return Fmt.plural(following.followed.count, "entreprise", "entreprises")
+            return Fmt.plural(open, tr("devoir à rendre"), tr("devoirs à rendre"))
+        case .grades: return Fmt.plural(student.grades.count, tr("note"), tr("notes"))
+        case .flashcards: return Fmt.plural(student.cards.count, tr("fiche"), tr("fiches"))
+        case .monthlyBudget: return tr("\(TF.money(budget.monthlyBudget, currency)) par mois")
+        case .expenses: return tr("\(TF.money(BudgetMath.spentToday(budget, at: now), currency)) aujourd'hui")
+        case .bills: return Fmt.plural(budget.bills.count, tr("facture"), tr("factures"))
+        case .savingsGoals: return Fmt.plural(budget.goals.count, tr("objectif"), tr("objectifs"))
+        case .accounts: return Fmt.plural(budget.accounts.count, tr("compte"), tr("comptes"))
+        case .moneyFlow: return Fmt.plural(content.money.items.count, tr("ligne"), tr("lignes"))
+        case .businessGoal: return tr("\(TF.money(business.monthlyGoal, currency)) par mois")
+        case .sales: return Fmt.plural(business.sales.count, tr("vente notée"), tr("ventes notées"))
+        case .holdings: return Fmt.plural(portfolio.holdings.count, tr("placement"), tr("placements"))
+        case .companies: return Fmt.plural(following.followed.count, tr("entreprise"), tr("entreprises"))
         case .trip:
             let next = travel.trips.filter { $0.end >= now }.min { $0.start < $1.start }
-            return next.map { "\($0.destination), \(Fmt.shortDay($0.start))" } ?? Fmt.plural(travel.trips.count, "voyage", "voyages")
-        case .carName: return odometer.map { "\(car.name) · \(TF.int($0)) km" } ?? car.name
-        case .carFills: return Fmt.plural(car.fills.count, "plein", "pleins")
-        case .carDeadlines: return Fmt.plural(car.deadlines.count, "échéance", "échéances")
+            return next.map { "\($0.destination), \(Fmt.shortDay($0.start))" } ?? Fmt.plural(travel.trips.count, tr("voyage"), tr("voyages"))
+        case .carName: return odometer.map { tr("\(car.name) · \(TF.int($0)) km") } ?? car.name
+        case .carFills: return Fmt.plural(car.fills.count, tr("plein"), tr("pleins"))
+        case .carDeadlines: return Fmt.plural(car.deadlines.count, tr("échéance"), tr("échéances"))
         case .birthday: return life.birthday.map { Fmt.format($0, template: "dMMMM") }
         case .city: return settings.weatherLocation?.name
-        case .calendar: return "Accès autorisé"
+        case .calendar: return tr("Accès autorisé")
         }
     }
 

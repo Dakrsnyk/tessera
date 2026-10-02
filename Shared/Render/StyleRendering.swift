@@ -336,7 +336,7 @@ extension ResolvedStyle {
             t.rows = []
         } else {
             t.rows = t.rows
-                .filter { !o.isHidden("row:\($0.id)") }
+                .filter { !o.isHidden(tr("row:\($0.id)")) }
                 .map { row in
                     var copy = row
                     if let hex = o.rowColors[row.id] { copy.colorHex = hex }
@@ -345,10 +345,10 @@ extension ResolvedStyle {
         }
         if case let .segments(segments) = t.visual {
             t.visual = .segments(segments
-                .filter { !o.isHidden("seg:\($0.label)") }
+                .filter { !o.isHidden(tr("seg:\($0.label)")) }
                 .map { segment in
                     var copy = segment
-                    if let hex = o.rowColors["seg:\(segment.label)"] { copy.colorHex = hex }
+                    if let hex = o.rowColors[tr("seg:\(segment.label)")] { copy.colorHex = hex }
                     return copy
                 })
         }
@@ -401,7 +401,7 @@ enum ChartText {
 
     private static func decimal(_ value: Double) -> String {
         let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "fr_FR")
+        formatter.locale = Fmt.locale
         formatter.maximumFractionDigits = 1
         formatter.minimumFractionDigits = 0
         return formatter.string(from: NSNumber(value: value)) ?? String(format: "%.1f", value)

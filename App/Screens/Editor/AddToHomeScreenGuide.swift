@@ -11,34 +11,34 @@ struct AddToHomeScreenGuide: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     if let designName {
-                        Label("« \(designName) » est prêt", systemImage: "checkmark.circle.fill")
+                        Label(tr("« \(designName) » est prêt"), systemImage: "checkmark.circle.fill")
                             .font(.headline)
                             .foregroundStyle(Color.accentColor)
                     }
 
-                    Picker("Emplacement", selection: $target) {
-                        Text("Écran d'accueil").tag(0)
-                        Text("Écran verrouillé").tag(1)
+                    Picker(tr("Emplacement"), selection: $target) {
+                        Text(tr("Écran d'accueil")).tag(0)
+                        Text(tr("Écran verrouillé")).tag(1)
                     }
                     .pickerStyle(.segmented)
 
                     VStack(alignment: .leading, spacing: 16) {
                         if target == 0 {
-                            AddStepRow(number: 1, symbol: "hand.tap", text: "Appuie longuement sur un espace vide de l'écran d'accueil")
-                            AddStepRow(number: 2, symbol: "plus", text: "Touche « Modifier » en haut, puis « Ajouter un widget »")
-                            AddStepRow(number: 3, symbol: "magnifyingglass", text: "Cherche « Tessera » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille")
-                            AddStepRow(number: 4, symbol: "slider.horizontal.3", text: "Une fois ajouté, touche le widget pendant que les icônes bougent et choisis ton design, ou un modèle du catalogue")
+                            AddStepRow(number: 1, symbol: "hand.tap", text: tr("Appuie longuement sur un espace vide de l'écran d'accueil"))
+                            AddStepRow(number: 2, symbol: "plus", text: tr("Touche « Modifier » en haut, puis « Ajouter un widget »"))
+                            AddStepRow(number: 3, symbol: "magnifyingglass", text: tr("Cherche « Tessera » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille"))
+                            AddStepRow(number: 4, symbol: "slider.horizontal.3", text: tr("Une fois ajouté, touche le widget pendant que les icônes bougent et choisis ton design, ou un modèle du catalogue"))
                         } else {
-                            AddStepRow(number: 1, symbol: "lock", text: "Sur l'écran verrouillé, appuie longuement puis touche « Personnaliser »")
-                            AddStepRow(number: 2, symbol: "rectangle.dashed", text: "Choisis « Écran verrouillé » et touche la zone des widgets")
-                            AddStepRow(number: 3, symbol: "magnifyingglass", text: "Ajoute un widget Tessera (progression, compte à rebours, météo…)")
-                            AddStepRow(number: 4, symbol: "slider.horizontal.3", text: "Touche-le pour choisir ton design")
+                            AddStepRow(number: 1, symbol: "lock", text: tr("Sur l'écran verrouillé, appuie longuement puis touche « Personnaliser »"))
+                            AddStepRow(number: 2, symbol: "rectangle.dashed", text: tr("Choisis « Écran verrouillé » et touche la zone des widgets"))
+                            AddStepRow(number: 3, symbol: "magnifyingglass", text: tr("Ajoute un widget Tessera (progression, compte à rebours, météo…)"))
+                            AddStepRow(number: 4, symbol: "slider.horizontal.3", text: tr("Touche-le pour choisir ton design"))
                         }
                     }
                     .card(padding: 20)
 
                     Label {
-                        Text("Pour changer le contenu d'un widget déjà posé : appui long sur le widget, puis « Modifier le widget ».")
+                        Text(tr("Pour changer le contenu d'un widget déjà posé : appui long sur le widget, puis « Modifier le widget »."))
                     } icon: {
                         Image(systemName: "lightbulb")
                     }
@@ -48,11 +48,11 @@ struct AddToHomeScreenGuide: View {
                 .padding(20)
             }
             .background(.screenFill)
-            .navigationTitle("Ajouter un widget")
+            .navigationTitle(tr("Ajouter un widget"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Compris") { dismiss() }
+                    Button(tr("Compris")) { dismiss() }
                 }
             }
         }

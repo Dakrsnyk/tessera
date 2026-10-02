@@ -17,7 +17,7 @@ struct HydrationView: View {
                             Text("\(count)")
                                 .font(.system(size: 52, weight: .semibold, design: .rounded))
                                 .contentTransition(.numericText())
-                            Text("sur \(goal) verres")
+                            Text(tr("sur \(goal) verres"))
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                         }
@@ -36,13 +36,13 @@ struct HydrationView: View {
                         }
                         .buttonStyle(.plain)
                         .disabled(count == 0)
-                        .accessibilityLabel(Text("Retirer un verre"))
+                        .accessibilityLabel(Text(tr("Retirer un verre")))
 
                         Button {
                             Haptics.tap()
                             withAnimation { model.updateContent { $0.hydration.add(1, on: Date()) } }
                         } label: {
-                            Label("Un verre", systemImage: "plus")
+                            Label(tr("Un verre"), systemImage: "plus")
                                 .font(.headline)
                                 .foregroundStyle(.onAccent)
                                 .frame(width: 150, height: 56)
@@ -60,23 +60,23 @@ struct HydrationView: View {
                     get: { state.goal },
                     set: { goal in model.setHydrationGoal(goal) }
                 ), in: 1...20) {
-                    Text("Objectif : \(state.goal) verres par jour")
+                    Text(tr("Objectif : \(state.goal) verres par jour"))
                 }
-                Toggle("Rappels de 10 h à 20 h", isOn: Binding(
+                Toggle(tr("Rappels de 10 h à 20 h"), isOn: Binding(
                     get: { model.settings.hydrationReminders },
                     set: { enabled in setReminders(enabled) }
                 ))
             } footer: {
                 Text(notificationsDenied
-                    ? "Les notifications sont désactivées pour Tessera dans Réglages."
-                    : "Un rappel toutes les deux heures. Tu peux aussi ajouter un verre depuis le widget.")
+                    ? tr("Les notifications sont désactivées pour Tessera dans Réglages.")
+                    : tr("Un rappel toutes les deux heures. Tu peux aussi ajouter un verre depuis le widget."))
             }
 
-            Section("7 derniers jours") {
+            Section(tr("7 derniers jours")) {
                 let days = (0..<7).compactMap { DateMath.calendar.date(byAdding: .day, value: -$0, to: Date()) }
                 ForEach(days, id: \.self) { day in
                     HStack {
-                        Text(DateMath.isSameDay(day, Date()) ? "Aujourd'hui" : Fmt.shortDay(day))
+                        Text(DateMath.isSameDay(day, Date()) ? tr("Aujourd'hui") : Fmt.shortDay(day))
                         Spacer()
                         Text("\(state.glasses(on: day)) / \(goal)")
                             .monospacedDigit()
@@ -87,7 +87,7 @@ struct HydrationView: View {
             }
         }
         .styledList()
-        .navigationTitle("Hydratation")
+        .navigationTitle(tr("Hydratation"))
     }
 
     private func setReminders(_ enabled: Bool) {

@@ -14,18 +14,18 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .sport: "Sport"
-        case .nutrition: "Nutrition"
-        case .finance: "Finance"
-        case .budget: "Budget"
-        case .business: "Business"
-        case .studies: "Études"
-        case .productivity: "Productivité"
-        case .travel: "Voyage"
-        case .car: "Automobile"
-        case .weather: "Météo"
-        case .design: "Design"
-        case .wellbeing: "Bien-être"
+        case .sport: tr("Sport")
+        case .nutrition: tr("Nutrition")
+        case .finance: tr("Finance")
+        case .budget: tr("Budget")
+        case .business: tr("Business")
+        case .studies: tr("Études")
+        case .productivity: tr("Productivité")
+        case .travel: tr("Voyage")
+        case .car: tr("Automobile")
+        case .weather: tr("Météo")
+        case .design: tr("Design")
+        case .wellbeing: tr("Bien-être")
         }
     }
 
@@ -124,15 +124,15 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .sport: "Sport"
-        case .nutrition: "Nutrition"
-        case .money: "Finances"
-        case .business: "Business"
-        case .productivity: "Productivité"
-        case .studies: "Études"
-        case .car: "Automobile"
-        case .weather: "Météo"
-        case .wellbeing: "Bien-être"
+        case .sport: tr("Sport")
+        case .nutrition: tr("Nutrition")
+        case .money: tr("Finances")
+        case .business: tr("Business")
+        case .productivity: tr("Productivité")
+        case .studies: tr("Études")
+        case .car: tr("Automobile")
+        case .weather: tr("Météo")
+        case .wellbeing: tr("Bien-être")
         }
     }
 
@@ -167,15 +167,15 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
     /// One line under the page title, saying what the answers are for.
     var purpose: String {
         switch self {
-        case .sport: "Pour des widgets Fitness à ton niveau, et des calories brûlées estimées avec ton poids."
-        case .nutrition: "Tes objectifs du jour : les widgets Nutrition comptent ce qu'il te reste."
-        case .money: "Ton budget et ton épargne, repris par les widgets Budget et Finances."
-        case .business: "Ton activité et ton objectif, suivis par les widgets Business."
-        case .productivity: "Ce que tu veux accomplir, pour des widgets qui t'y ramènent."
-        case .studies: "Ton programme et ton rythme de travail."
-        case .car: "Ta voiture et son kilométrage, pour suivre pleins et entretiens."
-        case .weather: "Ta ville, pour la météo de tes widgets."
-        case .wellbeing: "Ton objectif d'eau et une première habitude à suivre."
+        case .sport: tr("Pour des widgets Fitness à ton niveau, et des calories brûlées estimées avec ton poids.")
+        case .nutrition: tr("Tes objectifs du jour : les widgets Nutrition comptent ce qu'il te reste.")
+        case .money: tr("Ton budget et ton épargne, repris par les widgets Budget et Finances.")
+        case .business: tr("Ton activité et ton objectif, suivis par les widgets Business.")
+        case .productivity: tr("Ce que tu veux accomplir, pour des widgets qui t'y ramènent.")
+        case .studies: tr("Ton programme et ton rythme de travail.")
+        case .car: tr("Ta voiture et son kilométrage, pour suivre pleins et entretiens.")
+        case .weather: tr("Ta ville, pour la météo de tes widgets.")
+        case .wellbeing: tr("Ton objectif d'eau et une première habitude à suivre.")
         }
     }
 }
@@ -186,13 +186,13 @@ enum FitnessGoal: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .bulk: "Prise de masse"
-        case .weightLoss: "Perte de poids"
-        case .cut: "Sèche"
-        case .performance: "Performance"
-        case .maintain: "Maintien"
-        case .strength: "Force"
-        case .endurance: "Endurance"
+        case .bulk: tr("Prise de masse")
+        case .weightLoss: tr("Perte de poids")
+        case .cut: tr("Sèche")
+        case .performance: tr("Performance")
+        case .maintain: tr("Maintien")
+        case .strength: tr("Force")
+        case .endurance: tr("Endurance")
         }
     }
 
@@ -212,9 +212,9 @@ enum FitnessLevel: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .beginner: "Débutant"
-        case .intermediate: "Intermédiaire"
-        case .advanced: "Avancé"
+        case .beginner: tr("Débutant")
+        case .intermediate: tr("Intermédiaire")
+        case .advanced: tr("Avancé")
         }
     }
 }
@@ -225,9 +225,9 @@ enum NutritionAim: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .lose: "Perdre du poids"
-        case .maintain: "Maintenir"
-        case .gain: "Prendre du muscle"
+        case .lose: tr("Perdre du poids")
+        case .maintain: tr("Maintenir")
+        case .gain: tr("Prendre du muscle")
         }
     }
 
@@ -247,11 +247,11 @@ enum BodySex: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .female: "Femme"
-        case .male: "Homme"
-        case .nonBinary: "Non binaire"
-        case .other: "Autre"
-        case .undisclosed: "Je préfère ne pas répondre"
+        case .female: tr("Femme")
+        case .male: tr("Homme")
+        case .nonBinary: tr("Non binaire")
+        case .other: tr("Autre")
+        case .undisclosed: tr("Je préfère ne pas répondre")
         }
     }
 
@@ -439,7 +439,7 @@ struct UserProfile: Codable, Hashable {
         profile.nutritionAim = .gain
         profile.monthlyIncome = 3_000
         profile.monthlySavingsGoal = 400
-        profile.mainGoal = "Finir le projet Tessera"
+        profile.mainGoal = tr("Finir le projet Tessera")
         profile.provided = Set(ProvidedFact.allCases)
         profile.migrated = true
         return profile

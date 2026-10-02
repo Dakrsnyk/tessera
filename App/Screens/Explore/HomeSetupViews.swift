@@ -16,8 +16,8 @@ enum SetupPage: Int, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .home: "Écran d'accueil"
-        case .lock: "Écran verrouillé"
+        case .home: tr("Écran d'accueil")
+        case .lock: tr("Écran verrouillé")
         }
     }
 }
@@ -188,7 +188,7 @@ struct SetupHomeScreen: View {
                 Spacer(minLength: 0)
                 HStack(spacing: 5) {
                     Image(systemName: "magnifyingglass")
-                    Text("Rechercher")
+                    Text(tr("Rechercher"))
                 }
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(ink.opacity(0.9))
@@ -255,7 +255,7 @@ struct SetupHomeScreen: View {
                 width: WidgetMetrics.size(widget.family).width, date: SetupScreen.now
             )
             .shadow(color: .black.opacity(isLight ? 0.08 : 0.2), radius: 8, y: 3)
-            label("Tessera")
+            label(tr("Tessera"))
         }
     }
 
@@ -455,7 +455,7 @@ struct SetupCard: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text(isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"))
+                .accessibilityLabel(Text(isFavorite ? tr("Retirer des favoris") : tr("Ajouter aux favoris")))
             }
         }
         .accessibilityElement(children: .contain)
@@ -491,7 +491,7 @@ struct HomeSetupsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                Text("Des écrans complets : fond d'écran, widgets et écran verrouillé assortis. Touche-en un pour l'installer.")
+                Text(tr("Des écrans complets : fond d'écran, widgets et écran verrouillé assortis. Touche-en un pour l'installer."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 20)
@@ -499,9 +499,9 @@ struct HomeSetupsView: View {
                 if items.isEmpty {
                     EmptyStateView(
                         symbol: filter == .favorites ? "heart" : "square.grid.2x2",
-                        title: filter == .favorites ? "Aucun favori" : "Aucun écran",
-                        message: filter == .favorites ? "Touche le cœur sous un écran pour le retrouver ici." : "Essaie un autre filtre.",
-                        actionTitle: "Tout afficher"
+                        title: filter == .favorites ? tr("Aucun favori") : tr("Aucun écran"),
+                        message: filter == .favorites ? tr("Touche le cœur sous un écran pour le retrouver ici.") : tr("Essaie un autre filtre."),
+                        actionTitle: tr("Tout afficher")
                     ) { filter = .all }
                 } else {
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], alignment: .leading, spacing: 24) {
@@ -521,7 +521,7 @@ struct HomeSetupsView: View {
             .padding(.bottom, 32)
         }
         .background(.screenFill)
-        .navigationTitle("Écrans d'accueil")
+        .navigationTitle(tr("Écrans d'accueil"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $opened) { setup in
             HomeSetupSheet(setup: setup)
@@ -532,8 +532,8 @@ struct HomeSetupsView: View {
     private var chips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                FilterChip(title: "Tous", isSelected: filter == .all) { filter = .all }
-                FilterChip(title: "Favoris", symbol: "heart.fill", isSelected: filter == .favorites) { filter = .favorites }
+                FilterChip(title: tr("Tous"), isSelected: filter == .all) { filter = .all }
+                FilterChip(title: tr("Favoris"), symbol: "heart.fill", isSelected: filter == .favorites) { filter = .favorites }
                 Divider().frame(height: 22)
                 ForEach(Self.tagFilters) { tag in
                     FilterChip(title: "#\(tag.title)", isSelected: filter == .tag(tag)) {
@@ -601,7 +601,7 @@ struct HomeSetupSheet: View {
                     widgetsSection
                     wallpaperSection
                     if let installed {
-                        Label(installed == setup.widgets.count ? "Widgets ajoutés à Mes widgets" : "\(Fmt.plural(installed, "widget ajouté", "widgets ajoutés")) (limite de la version gratuite)", systemImage: "checkmark.circle.fill")
+                        Label(installed == setup.widgets.count ? tr("Widgets ajoutés à Mes widgets") : tr("\(Fmt.plural(installed, tr("widget ajouté"), tr("widgets ajoutés"))) (limite de la version gr)atuite)", systemImage: "checkmark.circle.fill")
                             .foregroundStyle(.green)
                             .font(.subheadline.weight(.semibold))
                     }
@@ -633,7 +633,7 @@ struct HomeSetupSheet: View {
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Fermer") { dismiss() }
+                    Button(tr("Fermer")) { dismiss() }
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
@@ -643,16 +643,16 @@ struct HomeSetupSheet: View {
                         Image(systemName: isFavorite ? "heart.fill" : "heart")
                             .foregroundStyle(isFavorite ? Color(hex: "F2588F") : Color.primary)
                     }
-                    .accessibilityLabel(Text(isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"))
+                    .accessibilityLabel(Text(isFavorite ? tr("Retirer des favoris") : tr("Ajouter aux favoris")))
                 }
             }
         }
     }
 
     private var buttonTitle: String {
-        if installed != nil { return "Voir comment les ajouter à l'écran" }
-        if needsPremium { return "Débloquer avec Premium" }
-        return "Ajouter les \(setup.widgets.count) widgets"
+        if installed != nil { return tr("Voir comment les ajouter à l'écran") }
+        if needsPremium { return tr("Débloquer avec Premium") }
+        return tr("Ajouter les \(setup.widgets.count) widgets")
     }
 
     private var carousel: some View {
@@ -669,7 +669,7 @@ struct HomeSetupSheet: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(height: 236 * SetupScreen.size.height / SetupScreen.size.width + 36)
-            Picker("Écran", selection: $page.animation()) {
+            Picker(tr("Écran"), selection: $page.animation()) {
                 ForEach(SetupPage.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
@@ -680,7 +680,7 @@ struct HomeSetupSheet: View {
 
     private var widgetsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "\(setup.widgets.count) widgets inclus")
+            SectionHeader(title: tr("\(setup.widgets.count) widgets inclus"))
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 12) {
                     ForEach(Array(setup.homeWidgets.enumerated()), id: \.offset) { pair in
@@ -701,7 +701,7 @@ struct HomeSetupSheet: View {
             .scrollClipDisabled()
             if !setup.lockOnlyWidgets.isEmpty {
                 Label {
-                    Text("Aussi pour l'écran verrouillé : \(setup.lockOnlyWidgets.map { $0.kind.title }.joined(separator: ", ")).")
+                    Text(tr("Aussi pour l'écran verrouillé : \(setup.lockOnlyWidgets.map { $0.kind.title }.joined(separator: ", "))."))
                 } icon: {
                     Image(systemName: "lock.iphone")
                 }
@@ -719,7 +719,7 @@ struct HomeSetupSheet: View {
                 .clipShape(SetupScreenShape())
                 .overlay { SetupScreenShape().stroke(Color.primary.opacity(0.1), lineWidth: 1) }
             VStack(alignment: .leading, spacing: 4) {
-                Text("Fond d'écran · \(setup.wallpaper.title)")
+                Text(tr("Fond d'écran · \(setup.wallpaper.title)"))
                     .font(.subheadline.weight(.semibold))
                 Text(wallpaperMessage)
                     .font(.footnote)
@@ -728,7 +728,7 @@ struct HomeSetupSheet: View {
                 Button(action: saveWallpaper) {
                     HStack(spacing: 6) {
                         if wallpaperState == .saving { ProgressView().controlSize(.small) }
-                        Label(wallpaperState == .saved ? "Enregistré dans Photos" : "Enregistrer dans Photos",
+                        Label(wallpaperState == .saved ? tr("Enregistré dans Photos") : tr("Enregistrer dans Photos"),
                               systemImage: wallpaperState == .saved ? "checkmark" : "square.and.arrow.down")
                     }
                     .font(.subheadline.weight(.semibold))
@@ -743,10 +743,10 @@ struct HomeSetupSheet: View {
 
     private var wallpaperMessage: String {
         switch wallpaperState {
-        case .denied: "Tessera n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Tessera › Photos."
-        case .failed: "L'image n'a pas pu être enregistrée. Réessaie."
-        case .saved: "Dans Photos, ouvre l'image, touche Partager puis « Utiliser en fond d'écran »."
-        default: "À la bonne taille pour ton iPhone. Ensuite, dans Photos : Partager › « Utiliser en fond d'écran »."
+        case .denied: tr("Tessera n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Tessera › Photos.")
+        case .failed: tr("L'image n'a pas pu être enregistrée. Réessaie.")
+        case .saved: tr("Dans Photos, ouvre l'image, touche Partager puis « Utiliser en fond d'écran ».")
+        default: tr("À la bonne taille pour ton iPhone. Ensuite, dans Photos : Partager › « Utiliser en fond d'écran ».")
         }
     }
 

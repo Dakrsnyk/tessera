@@ -54,10 +54,10 @@ struct AccessoryWidgetView: View {
 
     private func shortTitle(_ unit: ProgressUnit) -> String {
         switch unit {
-        case .day: "JOUR"
+        case .day: tr("JOUR")
         case .week: "SEM."
-        case .month: "MOIS"
-        case .year: "AN"
+        case .month: tr("MOIS")
+        case .year: tr("AN")
         }
     }
 
@@ -66,7 +66,7 @@ struct AccessoryWidgetView: View {
     @ViewBuilder private var countdown: some View {
         let options = context.options
         let info = CountdownInfo(options: options, now: context.date)
-        let title = options.countdownTitle.trimmed.isEmpty ? "Événement" : options.countdownTitle
+        let title = options.countdownTitle.trimmed.isEmpty ? tr("Événement") : options.countdownTitle
         switch family {
         case .accessoryCircular:
             ZStack {
@@ -78,7 +78,7 @@ struct AccessoryWidgetView: View {
                         Text(Fmt.number(info.days))
                             .font(.system(size: 20, weight: .semibold, design: .rounded))
                             .minimumScaleFactor(0.6)
-                        Text(info.days > 1 ? "jours" : "jour")
+                        Text(info.days > 1 ? tr("jours") : tr("jour"))
                             .font(.system(size: 10, weight: .medium))
                     }
                 }
@@ -90,13 +90,13 @@ struct AccessoryWidgetView: View {
                     .font(.headline)
                     .lineLimit(1)
                     .widgetAccentable()
-                Text(info.isToday ? "C'est aujourd'hui" : "\(Fmt.number(info.days)) \(info.caption)")
+                Text(info.isToday ? tr("C'est aujourd'hui") : "\(Fmt.number(info.days)) \(info.caption)")
                     .font(.body)
                 Text(Fmt.shortDay(options.countdownDate))
                     .font(.caption)
             }
         default:
-            Text(info.isToday ? "\(title) · aujourd'hui" : "\(title) · \(Fmt.number(info.days)) j")
+            Text(info.isToday ? tr("\(title) · aujourd'hui") : "\(title) · \(Fmt.number(info.days)) j")
         }
     }
 
@@ -106,7 +106,7 @@ struct AccessoryWidgetView: View {
         switch context.payload.weather {
         case let .ready(w): weatherContent(w)
         case let .unavailable(.some(w)): weatherContent(w)
-        default: Label("Météo", systemImage: "location.slash")
+        default: Label(tr("Météo"), systemImage: "location.slash")
         }
     }
 
@@ -145,7 +145,7 @@ struct AccessoryWidgetView: View {
     private var tasks: some View {
         let open = context.payload.content.tasks.filter { !$0.isDone }
         return VStack(alignment: .leading, spacing: 1) {
-            Text(open.isEmpty ? "Tout est fait" : "\(open.count) à faire")
+            Text(open.isEmpty ? tr("Tout est fait") : tr("\(open.count) à faire"))
                 .font(.headline)
                 .widgetAccentable()
             ForEach(open.prefix(2)) { task in
@@ -168,7 +168,7 @@ struct AccessoryWidgetView: View {
                 TimerRing(range: range, symbol: "timer", isLive: context.isInteractive, now: context.date)
             } else {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Focus").font(.headline).widgetAccentable()
+                    Text(tr("Focus")).font(.headline).widgetAccentable()
                     Text(timerInterval: range, countsDown: true)
                         .font(.system(.title3, design: .rounded).monospacedDigit())
                     ProgressView(timerInterval: range, countsDown: true, label: { EmptyView() }, currentValueLabel: { EmptyView() })
@@ -181,8 +181,8 @@ struct AccessoryWidgetView: View {
             }
         } else {
             VStack(alignment: .leading, spacing: 1) {
-                Text("Focus").font(.headline).widgetAccentable()
-                Text("Lance une session depuis l'écran d'accueil")
+                Text(tr("Focus")).font(.headline).widgetAccentable()
+                Text(tr("Lance une session depuis l'écran d'accueil"))
                     .font(.caption)
                     .lineLimit(2)
             }
@@ -215,7 +215,7 @@ struct AccessoryWidgetView: View {
                         .font(.headline)
                         .lineLimit(1)
                         .widgetAccentable()
-                    Text(event.isAllDay ? "Toute la journée" : Fmt.time(event.start, uses24Hour: context.settings.uses24HourClock))
+                    Text(event.isAllDay ? tr("Toute la journée") : Fmt.time(event.start, uses24Hour: context.settings.uses24HourClock))
                     if !event.isAllDay, event.start > context.date {
                         Text(event.start, style: .relative).font(.caption)
                     }
@@ -223,13 +223,13 @@ struct AccessoryWidgetView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             } else {
                 VStack(alignment: .leading) {
-                    Text("À venir").font(.headline).widgetAccentable()
-                    Text("Rien de prévu").font(.caption)
+                    Text(tr("À venir")).font(.headline).widgetAccentable()
+                    Text(tr("Rien de prévu")).font(.caption)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
         case .needsAccess:
-            Label("Calendrier", systemImage: "calendar.badge.exclamationmark")
+            Label(tr("Calendrier"), systemImage: "calendar.badge.exclamationmark")
         }
     }
 
@@ -239,7 +239,7 @@ struct AccessoryWidgetView: View {
         switch context.payload.crypto {
         case let .ready(coin): cryptoContent(coin)
         case let .unavailable(.some(coin)): cryptoContent(coin)
-        case .unavailable(.none): Label("Crypto", systemImage: "wifi.slash")
+        case .unavailable(.none): Label(tr("Crypto"), systemImage: "wifi.slash")
         }
     }
 
@@ -249,7 +249,7 @@ struct AccessoryWidgetView: View {
             Text(Fmt.price(coin.price, currency: coin.currency))
                 .font(.system(.title3, design: .rounded).monospacedDigit())
                 .minimumScaleFactor(0.6)
-            Text(Fmt.signedPercent(coin.change24h) + " sur 24 h").font(.caption)
+            Text(Fmt.signedPercent(coin.change24h) + tr(" sur 24 h")).font(.caption)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

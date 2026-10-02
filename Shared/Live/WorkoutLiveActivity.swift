@@ -38,8 +38,8 @@ enum WorkoutLiveActivity {
     static func content(for state: FitnessState, now: Date = Date()) -> (WorkoutActivityAttributes, WorkoutActivityAttributes.ContentState)? {
         guard let session = state.active, !session.isFinished, let exercise = session.currentExercise else { return nil }
         let load = exercise.weight > 0
-            ? "\(exercise.reps) × \(Self.kilograms(exercise.weight)) kg"
-            : "\(exercise.reps) répétitions"
+            ? tr("\(exercise.reps) × \(Self.kilograms(exercise.weight)) kg")
+            : tr("\(exercise.reps) répétitions")
         var content = WorkoutActivityAttributes.ContentState(
             exercise: exercise.name,
             setNumber: session.setIndex + 1,
@@ -108,7 +108,7 @@ struct WorkoutActivityView: View {
                     Text(state.exercise)
                         .font(.headline)
                         .lineLimit(1)
-                    Text("Série \(state.setNumber)/\(state.sets) · \(state.load)")
+                    Text(tr("Série \(state.setNumber)/\(state.sets) · \(state.load)"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -120,9 +120,9 @@ struct WorkoutActivityView: View {
                 .tint(accent)
             HStack(spacing: 8) {
                 if state.isResting(at: now) {
-                    actionButton("Passer", symbol: "forward.fill", prominent: false, intent: SkipRestIntent())
+                    actionButton(tr("Passer"), symbol: "forward.fill", prominent: false, intent: SkipRestIntent())
                 }
-                actionButton("Série faite", symbol: "checkmark", prominent: true, intent: CompleteSetIntent())
+                actionButton(tr("Série faite"), symbol: "checkmark", prominent: true, intent: CompleteSetIntent())
             }
         }
         .padding(16)
@@ -131,7 +131,7 @@ struct WorkoutActivityView: View {
     @ViewBuilder private var restView: some View {
         if let start = state.restStart, let end = state.restEnd, end > now {
             VStack(alignment: .trailing, spacing: 2) {
-                Text("Repos")
+                Text(tr("Repos"))
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
                 if isLive {
@@ -146,10 +146,10 @@ struct WorkoutActivityView: View {
             }
         } else {
             VStack(alignment: .trailing, spacing: 2) {
-                Text("Repos")
+                Text(tr("Repos"))
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
-                Text("Prêt")
+                Text(tr("Prêt"))
                     .font(.system(.title2, design: .rounded).weight(.semibold))
                     .foregroundStyle(accent)
             }

@@ -36,41 +36,41 @@ enum WidgetGroup: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .dates: "Dates et lune"
-        case .sky: "Météo avancée"
-        case .focus: "Priorités et projets"
-        case .habitsPlus: "Suivi d'habitudes"
-        case .nutrition: "Nutrition"
-        case .fitness: "Fitness"
-        case .budget: "Budget"
-        case .investing: "Placements"
-        case .business: "Mon entreprise"
-        case .companies: "Sociétés cotées"
-        case .student: "Études"
-        case .travel: "Voyage"
-        case .car: "Auto"
-        case .dashboards: "Tableaux de bord"
-        case .insights: "Analyses"
+        case .dates: tr("Dates et lune")
+        case .sky: tr("Météo avancée")
+        case .focus: tr("Priorités et projets")
+        case .habitsPlus: tr("Suivi d'habitudes")
+        case .nutrition: tr("Nutrition")
+        case .fitness: tr("Fitness")
+        case .budget: tr("Budget")
+        case .investing: tr("Placements")
+        case .business: tr("Mon entreprise")
+        case .companies: tr("Sociétés cotées")
+        case .student: tr("Études")
+        case .travel: tr("Voyage")
+        case .car: tr("Auto")
+        case .dashboards: tr("Tableaux de bord")
+        case .insights: tr("Analyses")
         }
     }
 
     var summary: String {
         switch self {
-        case .dates: "Anniversaire, jours fériés, lune et semaine."
-        case .sky: "Soleil, pluie, vent, UV et prévisions de la semaine."
-        case .focus: "Top 3, compteurs, projets, échéances et deep work."
-        case .habitsPlus: "Séries, semaine et taux de réussite de tes habitudes."
-        case .nutrition: "Calories, macros, repas et ajout rapide."
-        case .fitness: "Séance du jour, séries, repos, volume et records."
-        case .budget: "Reste du mois, factures, épargne et dépenses rapides."
-        case .investing: "Portefeuille, répartition et cours suivis."
-        case .business: "Chiffre d'affaires, objectif, bénéfice et MRR."
-        case .companies: "Chiffres officiels des sociétés cotées."
-        case .student: "Cours, examens, devoirs, moyenne et fiches."
-        case .travel: "Départ, vol, hôtel, météo et devise sur place."
-        case .car: "Entretien, coût, kilométrage et carburant."
-        case .dashboards: "Plusieurs espaces réunis, selon le moment de la journée."
-        case .insights: "Ta journée et tes tendances résumées à partir de tes données."
+        case .dates: tr("Anniversaire, jours fériés, lune et semaine.")
+        case .sky: tr("Soleil, pluie, vent, UV et prévisions de la semaine.")
+        case .focus: tr("Top 3, compteurs, projets, échéances et deep work.")
+        case .habitsPlus: tr("Séries, semaine et taux de réussite de tes habitudes.")
+        case .nutrition: tr("Calories, macros, repas et ajout rapide.")
+        case .fitness: tr("Séance du jour, séries, repos, volume et records.")
+        case .budget: tr("Reste du mois, factures, épargne et dépenses rapides.")
+        case .investing: tr("Portefeuille, répartition et cours suivis.")
+        case .business: tr("Chiffre d'affaires, objectif, bénéfice et MRR.")
+        case .companies: tr("Chiffres officiels des sociétés cotées.")
+        case .student: tr("Cours, examens, devoirs, moyenne et fiches.")
+        case .travel: tr("Départ, vol, hôtel, météo et devise sur place.")
+        case .car: tr("Entretien, coût, kilométrage et carburant.")
+        case .dashboards: tr("Plusieurs espaces réunis, selon le moment de la journée.")
+        case .insights: tr("Ta journée et tes tendances résumées à partir de tes données.")
         }
     }
 

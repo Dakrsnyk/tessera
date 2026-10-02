@@ -70,12 +70,12 @@ struct StudioGalleryView: View {
                 var design = WidgetDesign(kind: .nutritionWeek, themeID: .dark, accentHex: "FF6B57")
                 design.style.chart = kind
                 design.style.chartValues = true
-                result.append(Item(id: result.count, title: "Série · \(kind.title)", design: design))
+                result.append(Item(id: result.count, title: tr("Série · \(kind.title)"), design: design))
             }
             for kind in ChartKind.options(for: .segments).dropFirst() {
                 var design = WidgetDesign(kind: .macros, themeID: .minimal, accentHex: "2F8F7A")
                 design.style.chart = kind
-                result.append(Item(id: result.count, title: "Parts · \(kind.title)", design: design))
+                result.append(Item(id: result.count, title: tr("Parts · \(kind.title)"), design: design))
             }
             return Array(result.prefix(12))
         default:
@@ -86,16 +86,16 @@ struct StudioGalleryView: View {
                 change(&design)
                 result.append(Item(id: result.count, title: title, design: design))
             }
-            add("Bordure lumineuse") { $0.style.border = .glow; $0.style.borderWidth = 2 }
-            add("Double bordure") { $0.themeID = .light; $0.style.border = .double; $0.style.borderHex = "8C6CFF" }
-            add("Tirets + grille") { $0.style.border = .dashed; $0.style.texture = .grid }
-            add("Verre") { $0.background = .glass; $0.style.depth = .soft }
-            add("Dégradé perso") { $0.background = .gradient; $0.style.gradient = GradientSpec(startHex: "FF9A62", endHex: "8E3BA8", direction: .diagonal) }
-            add("Panneau flottant") { $0.themeID = .light; $0.style.shape = .panel; $0.style.depth = .floating }
-            add("Lueur + mono") { $0.font = .mono; $0.style.depth = .glow }
-            add("Papier + serif") { $0.themeID = .paper; $0.style.layout = .vertical }
-            add("Cartes denses") { $0.style.layout = .cards; $0.style.density = .dense }
-            add("Aéré + capsule") { $0.themeID = .soft; $0.style.density = .compact; $0.style.shape = .capsule }
+            add(tr("Bordure lumineuse")) { $0.style.border = .glow; $0.style.borderWidth = 2 }
+            add(tr("Double bordure")) { $0.themeID = .light; $0.style.border = .double; $0.style.borderHex = "8C6CFF" }
+            add(tr("Tirets + grille")) { $0.style.border = .dashed; $0.style.texture = .grid }
+            add(tr("Verre")) { $0.background = .glass; $0.style.depth = .soft }
+            add(tr("Dégradé perso")) { $0.background = .gradient; $0.style.gradient = GradientSpec(startHex: "FF9A62", endHex: "8E3BA8", direction: .diagonal) }
+            add(tr("Panneau flottant")) { $0.themeID = .light; $0.style.shape = .panel; $0.style.depth = .floating }
+            add(tr("Lueur + mono")) { $0.font = .mono; $0.style.depth = .glow }
+            add(tr("Papier + serif")) { $0.themeID = .paper; $0.style.layout = .vertical }
+            add(tr("Cartes denses")) { $0.style.layout = .cards; $0.style.density = .dense }
+            add(tr("Aéré + capsule")) { $0.themeID = .soft; $0.style.density = .compact; $0.style.shape = .capsule }
             return result
         }
     }

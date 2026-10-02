@@ -15,17 +15,17 @@ struct CarFuelPage: View {
         let fills = state.fills.sorted { $0.date > $1.date }
         let byFill = CarMath.consumptionByFill(state)
         MiniAppScroll {
-            MiniActionButton(title: "Noter un plein", symbol: "fuelpump.fill", colorHex: Car.fuelHex) { sheet = .fuel(nil) }
+            MiniActionButton(title: tr("Noter un plein"), symbol: "fuelpump.fill", colorHex: Car.fuelHex) { sheet = .fuel(nil) }
                 .accessibilityIdentifier("fuel-new")
             if fills.isEmpty {
-                Text("Aucun plein noté. À chaque plein, note les litres, le prix et le compteur : la consommation se calcule entre deux pleins complets.")
+                Text(tr("Aucun plein noté. À chaque plein, note les litres, le prix et le compteur : la consommation se calcule entre deux pleins complets."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
             }
             if byFill.count >= 2 {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Consommation", detail: CarMath.consumption(state).map { "moyenne \(TF.decimal($0, 1)) L/100" })
+                    MiniSectionTitle(title: tr("Consommation"), detail: CarMath.consumption(state).map { tr("moyenne \(TF.decimal($0, 1)) L/100") })
                     Chart(byFill) { item in
                         LineMark(x: .value("Date", item.fill.date), y: .value("L/100 km", item.perHundred))
                             .foregroundStyle(Color(hex: Car.fuelHex))
@@ -38,7 +38,7 @@ struct CarFuelPage: View {
             }
             if fills.count >= 2 {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Prix au litre", detail: CarMath.lastPricePerLiter(state).map { "dernier \(TF.money($0, currency, decimals: 3))" })
+                    MiniSectionTitle(title: tr("Prix au litre"), detail: CarMath.lastPricePerLiter(state).map { tr("dernier \(TF.money($0, currency, decimals: 3))") })
                     Chart(Array(fills.reversed())) { fill in
                         LineMark(x: .value("Date", fill.date), y: .value("Prix", fill.pricePerLiter))
                             .foregroundStyle(Color(hex: Car.accentHex))
@@ -51,13 +51,13 @@ struct CarFuelPage: View {
             }
             if !fills.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Pleins", detail: "\(fills.count)")
+                    MiniSectionTitle(title: tr("Pleins"), detail: "\(fills.count)")
                     MiniRowsCard {
                         ForEach(Array(fills.enumerated()), id: \.element.id) { index, fill in
                             if index > 0 { MiniDivider() }
                             Button { sheet = .fuel(fill) } label: {
                                 MiniRow(symbol: fill.isFull ? "fuelpump.fill" : "fuelpump", colorHex: Car.fuelHex, title: Fmt.shortDay(fill.date),
-                                        detail: "\(TF.decimal(fill.liters, 1)) L · \(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \(Fmt.number(Int(fill.odometer))) km\(fill.isFull ? "" : " · partiel")",
+                                        detail: tr("\(TF.decimal(fill.liters, 1)) L · \(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \(Fmt.number(Int(fill.odometer))) km\(fill.isFull ? "" : tr(" · partiel)"))",
                                         value: TF.money(fill.total, currency, decimals: 2), showsChevron: false)
                             }
                             .buttonStyle(.plain)
@@ -67,7 +67,7 @@ struct CarFuelPage: View {
                 }
             }
         }
-        .navigationTitle("Carburant")
+        .navigationTitle(tr("Carburant"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -87,13 +87,13 @@ struct CarMileagePage: View {
         let points = Array(CarMath.odometerPoints(state).reversed())
         MiniAppScroll {
             HStack(spacing: 10) {
-                MiniStat(title: "Compteur", value: CarMath.odometer(state).map { Fmt.number(Int($0)) } ?? "–", unit: "km")
-                MiniStat(title: "Moyenne", value: driven.isEmpty ? "–" : Fmt.number(Int(driven.reduce(0) { $0 + $1.km } / Double(driven.count))), unit: "km/mois")
+                MiniStat(title: tr("Compteur"), value: CarMath.odometer(state).map { Fmt.number(Int($0)) } ?? "–", unit: tr("km"))
+                MiniStat(title: tr("Moyenne"), value: driven.isEmpty ? "–" : Fmt.number(Int(driven.reduce(0) { $0 + $1.km } / Double(driven.count))), unit: "km/mois")
             }
-            MiniActionButton(title: "Noter le kilométrage", symbol: "speedometer", colorHex: Car.accentHex) { sheet = .odometer }
+            MiniActionButton(title: tr("Noter le kilométrage"), symbol: "speedometer", colorHex: Car.accentHex) { sheet = .odometer }
             if !driven.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Kilomètres par mois")
+                    MiniSectionTitle(title: tr("Kilomètres par mois"))
                     Chart(months) { month in
                         BarMark(x: .value("Mois", month.start, unit: .month), y: .value("km", month.km))
                             .foregroundStyle(Color(hex: Car.accentHex).gradient)
@@ -112,19 +112,19 @@ struct CarMileagePage: View {
             }
             if !points.isEmpty {
                 VStack(alignment: .leading, spacing: 10) {
-                    MiniSectionTitle(title: "Relevés")
+                    MiniSectionTitle(title: tr("Relevés"))
                     MiniRowsCard {
                         ForEach(Array(points.prefix(12).enumerated()), id: \.offset) { index, point in
                             if index > 0 { MiniDivider() }
                             MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: Car.accentHex, title: Fmt.shortDay(point.date),
-                                    value: "\(Fmt.number(Int(point.km))) km", showsChevron: false)
+                                    value: tr("\(Fmt.number(Int(point.km))) km"), showsChevron: false)
                         }
                     }
-                    Text("Les relevés viennent de tes pleins et des kilométrages notés.").font(.footnote).foregroundStyle(.secondary)
+                    Text(tr("Les relevés viennent de tes pleins et des kilométrages notés.")).font(.footnote).foregroundStyle(.secondary)
                 }
             }
         }
-        .navigationTitle("Kilométrage")
+        .navigationTitle(tr("Kilométrage"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -156,7 +156,7 @@ struct CarMaintenancePage: View {
                             model.update(\.car) { $0.markServiceDone(status.item.id, km: km) }
                             Haptics.success()
                         } label: {
-                            Label("Fait aujourd'hui", systemImage: "checkmark")
+                            Label(tr("Fait aujourd'hui"), systemImage: "checkmark")
                         }
                         .tint(.green)
                     }
@@ -164,7 +164,7 @@ struct CarMaintenancePage: View {
                         Button(role: .destructive) {
                             model.update(\.car) { $0.services.removeAll { $0.id == status.item.id } }
                         } label: {
-                            Label("Supprimer", systemImage: "trash")
+                            Label(tr("Supprimer"), systemImage: "trash")
                         }
                     }
                     .accessibilityIdentifier("service-row")
@@ -172,25 +172,25 @@ struct CarMaintenancePage: View {
                 Button {
                     sheet = .service(ServiceItem(name: "", intervalKm: 8_000, intervalMonths: 6, lastKm: CarMath.odometer(state), lastDate: now))
                 } label: {
-                    Label("Nouvel entretien", systemImage: "plus")
+                    Label(tr("Nouvel entretien"), systemImage: "plus")
                 }
             } footer: {
-                Text("Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui.")
+                Text(tr("Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui."))
             }
         }
         .styledList()
         .tint(Color(hex: "3366FF"))
-        .navigationTitle("Entretien")
+        .navigationTitle(tr("Entretien"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
 
     private func lastText(_ item: ServiceItem) -> String {
         var parts: [String] = []
-        if let km = item.lastKm { parts.append("dernier à \(Fmt.number(Int(km))) km") }
-        if let date = item.lastDate { parts.append("le \(Fmt.shortDay(date))") }
-        if item.cost > 0 { parts.append("environ \(TF.money(item.cost, model.settings.currencyCode))") }
-        return parts.isEmpty ? "Pas encore fait" : parts.joined(separator: " · ").capitalizedFirst
+        if let km = item.lastKm { parts.append(tr("dernier à \(Fmt.number(Int(km))) km")) }
+        if let date = item.lastDate { parts.append(tr("le \(Fmt.shortDay(date))")) }
+        if item.cost > 0 { parts.append(tr("environ \(TF.money(item.cost, model.settings.currencyCode))")) }
+        return parts.isEmpty ? tr("Pas encore fait") : parts.joined(separator: " · ").capitalizedFirst
     }
 }
 
@@ -216,7 +216,7 @@ struct CarDeadlinesPage: View {
                                 Text(Fmt.format(deadline.date, template: "EEEEdMMMMyyyy").capitalizedFirst).font(.caption).foregroundStyle(.secondary)
                             }
                             Spacer()
-                            Text(days < 0 ? "passée" : (days == 0 ? "aujourd'hui" : "J-\(days)"))
+                            Text(days < 0 ? tr("passée") : (days == 0 ? tr("aujourd'hui") : "J-\(days)"))
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundStyle(days <= 14 && days >= 0 ? Color(hex: Car.alertHex) : Color.secondary)
                                 .monospacedDigit()
@@ -230,13 +230,13 @@ struct CarDeadlinesPage: View {
                 Button {
                     sheet = .deadline(CarDeadline(title: "", date: now.addingTimeInterval(60 * 86_400)))
                 } label: {
-                    Label("Nouvelle échéance", systemImage: "plus")
+                    Label(tr("Nouvelle échéance"), systemImage: "plus")
                 }
             }
         }
         .styledList()
         .tint(Color(hex: Car.alertHex))
-        .navigationTitle("Échéances")
+        .navigationTitle(tr("Échéances"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -262,14 +262,14 @@ struct CarCostsPage: View {
         let now = Date()
         let cost = CarMath.monthlyCost(state, at: now)
         let shares = [
-            Share(name: "Frais fixes", hex: "2F8F7A", value: cost.fixed),
-            Share(name: "Carburant", hex: Car.fuelHex, value: cost.fuel),
-            Share(name: "Entretien", hex: "3366FF", value: cost.maintenance),
+            Share(name: tr("Frais fixes"), hex: "2F8F7A", value: cost.fixed),
+            Share(name: tr("Carburant"), hex: Car.fuelHex, value: cost.fuel),
+            Share(name: tr("Entretien"), hex: "3366FF", value: cost.maintenance),
         ].filter { $0.value > 0 }
         List {
             Section {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Par mois").font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+                    Text(tr("Par mois")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
                     Text(TF.money(cost.total, currency)).font(.system(size: 36, weight: .bold, design: .rounded)).monospacedDigit()
                     if !shares.isEmpty {
                         Chart(shares) { share in
@@ -289,7 +289,7 @@ struct CarCostsPage: View {
                         }
                     }
                     if let perKm = perKilometre(state, total: cost.total, now: now) {
-                        Text("Soit environ \(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.").font(.caption).foregroundStyle(.secondary)
+                        Text(tr("Soit environ \(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.")).font(.caption).foregroundStyle(.secondary)
                     }
                 }
                 .padding(.vertical, 6)
@@ -297,19 +297,19 @@ struct CarCostsPage: View {
                 .accessibilityIdentifier("car-costs")
             }
             Section {
-                NumberRow(title: "Assurance", value: binding(\.insuranceMonthly), unit: "/ mois")
-                NumberRow(title: "Prêt ou location", value: binding(\.loanMonthly), unit: "/ mois")
-                NumberRow(title: "Stationnement", value: binding(\.parkingMonthly), unit: "/ mois")
-                NumberRow(title: "Autres frais", value: binding(\.otherMonthly), unit: "/ mois")
-                NumberRow(title: "Entretien prévu", value: binding(\.maintenanceYearly), unit: "/ an")
+                NumberRow(title: tr("Assurance"), value: binding(\.insuranceMonthly), unit: tr("/ mois"))
+                NumberRow(title: tr("Prêt ou location"), value: binding(\.loanMonthly), unit: tr("/ mois"))
+                NumberRow(title: tr("Stationnement"), value: binding(\.parkingMonthly), unit: tr("/ mois"))
+                NumberRow(title: tr("Autres frais"), value: binding(\.otherMonthly), unit: tr("/ mois"))
+                NumberRow(title: tr("Entretien prévu"), value: binding(\.maintenanceYearly), unit: tr("/ an"))
             } header: {
-                Text("Frais fixes")
+                Text(tr("Frais fixes"))
             } footer: {
-                Text("Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.")
+                Text(tr("Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois."))
             }
         }
         .styledList()
-        .navigationTitle("Coûts")
+        .navigationTitle(tr("Coûts"))
         .navigationBarTitleDisplayMode(.large)
     }
 

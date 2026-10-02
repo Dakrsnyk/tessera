@@ -96,7 +96,7 @@ struct OnboardingView: View {
             .scrollDismissesKeyboard(.interactively)
             .safeAreaInset(edge: .bottom) {
                 Button(action: advance) {
-                    Text(isLast ? "C'est parti" : "Continuer")
+                    Text(isLast ? tr("C'est parti") : tr("Continuer"))
                         .font(.headline)
                         .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 52)
@@ -124,7 +124,7 @@ struct OnboardingView: View {
             }
             .opacity(index > 0 ? 1 : 0)
             .disabled(index == 0)
-            .accessibilityLabel(Text("Retour"))
+            .accessibilityLabel(Text(tr("Retour")))
             HStack(spacing: 5) {
                 ForEach(personal.indices, id: \.self) { item in
                     Capsule()
@@ -134,8 +134,8 @@ struct OnboardingView: View {
             }
             .animation(.snappy, value: position)
             .accessibilityElement()
-            .accessibilityLabel(Text("Étape \(position + 1) sur \(personal.count)"))
-            Button("Passer", action: skip)
+            .accessibilityLabel(Text(tr("Étape \(position + 1) sur \(personal.count)")))
+            Button(tr("Passer"), action: skip)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .frame(minWidth: 44, minHeight: 44)
@@ -168,19 +168,19 @@ private struct IdentityStep: View {
         VStack(alignment: .leading, spacing: 18) {
             StepTitle(
                 symbol: "hand.wave.fill", colorHex: "F2A33A",
-                title: "Comment veux-tu qu'on t'appelle ?",
-                message: "Ton prénom sert au message d'accueil. Tout reste sur ton iPhone."
+                title: tr("Comment veux-tu qu'on t'appelle ?"),
+                message: tr("Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.")
             )
             VStack(spacing: 10) {
                 ProfileTextField(
-                    placeholder: "Prénom",
+                    placeholder: tr("Prénom"),
                     text: Binding(get: { model.settings.profileName }, set: { name in model.updateSettings { $0.profileName = name } }),
                     identifier: "identity-first-name"
                 )
                 .textContentType(.givenName)
                 .focused($focused)
                 ProfileTextField(
-                    placeholder: "Nom (facultatif)",
+                    placeholder: tr("Nom (facultatif)"),
                     text: Binding(get: { model.profile.lastName }, set: { name in model.update(\.profile) { $0.lastName = name } }),
                     identifier: "identity-last-name"
                 )
@@ -191,7 +191,7 @@ private struct IdentityStep: View {
                 // What the Home tab will say.
                 HStack(spacing: 8) {
                     Image(systemName: "sparkles").foregroundStyle(Color.accentColor)
-                    Text("Bonjour \(first.split(separator: " ").first.map(String.init) ?? first)")
+                    Text(tr("Bonjour \(first.split(separator: " ").first.map(String.init) ?? first)"))
                         .font(.title3.weight(.semibold))
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
@@ -210,8 +210,8 @@ private struct InterestsStep: View {
         VStack(alignment: .leading, spacing: 18) {
             StepTitle(
                 symbol: "square.grid.2x2.fill", colorHex: "8C6CFF",
-                title: "Qu'est-ce qui t'intéresse ?",
-                message: "Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard."
+                title: tr("Qu'est-ce qui t'intéresse ?"),
+                message: tr("Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.")
             )
             InterestGrid(selection: Binding(
                 get: { model.profile.interests },
@@ -229,7 +229,7 @@ private struct TopicStep: View {
         VStack(alignment: .leading, spacing: 16) {
             StepTitle(symbol: topic.symbol, colorHex: topic.colorHex, title: topic.title, message: topic.purpose)
             TopicForm(topic: topic)
-            Text("Tout est facultatif : laisse vide ce que tu préfères ne pas dire.")
+            Text(tr("Tout est facultatif : laisse vide ce que tu préfères ne pas dire."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
@@ -273,12 +273,12 @@ private struct StyleStep: View {
             VStack(spacing: 22) {
                 VStack(spacing: 10) {
                     TesseraMark(size: 40)
-                    Text(isLast ? "Nouveau : les styles" : "Bienvenue dans Tessera")
+                    Text(isLast ? tr("Nouveau : les styles") : tr("Bienvenue dans Tessera"))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
-                    Text("Choisis ton style")
+                    Text(tr("Choisis ton style"))
                         .font(.largeTitle.weight(.bold))
-                    Text("Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.")
+                    Text(tr("Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -297,7 +297,7 @@ private struct StyleStep: View {
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom) {
             Button(action: onContinue) {
-                Text(isLast ? "C'est parti" : "Continuer")
+                Text(isLast ? tr("C'est parti") : tr("Continuer"))
                     .font(.headline)
                     .foregroundStyle(.onAccent)
                     .frame(maxWidth: .infinity, minHeight: 52)
@@ -328,7 +328,7 @@ struct AddStepRow: View {
             }
             .frame(width: 40, height: 40)
             VStack(alignment: .leading, spacing: 2) {
-                Text("Étape \(number)")
+                Text(tr("Étape \(number)"))
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Text(text)

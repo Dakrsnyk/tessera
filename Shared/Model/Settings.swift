@@ -4,7 +4,7 @@ enum TemperatureUnit: String, Codable, CaseIterable, Identifiable {
     case celsius, fahrenheit
     var id: String { rawValue }
 
-    var title: String { self == .celsius ? "Celsius (°C)" : "Fahrenheit (°F)" }
+    var title: String { self == .celsius ? tr("Celsius (°C)") : tr("Fahrenheit (°F)") }
 
     func convert(_ celsius: Double) -> Double {
         self == .celsius ? celsius : celsius * 9 / 5 + 32
@@ -24,16 +24,16 @@ enum AppStyleID: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .tessera: "Tessera"
-        case .ocean: "Océan"
-        case .coral: "Corail"
-        case .lavender: "Lavande"
-        case .sand: "Sable"
-        case .graphite: "Graphite"
-        case .forest: "Forêt"
-        case .rose: "Rose"
-        case .midnight: "Minuit"
-        case .neon: "Néon"
+        case .tessera: tr("Tessera")
+        case .ocean: tr("Océan")
+        case .coral: tr("Corail")
+        case .lavender: tr("Lavande")
+        case .sand: tr("Sable")
+        case .graphite: tr("Graphite")
+        case .forest: tr("Forêt")
+        case .rose: tr("Rose")
+        case .midnight: tr("Minuit")
+        case .neon: tr("Néon")
         }
     }
 }
@@ -45,9 +45,9 @@ enum AppearanceMode: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .system: "Auto"
-        case .light: "Clair"
-        case .dark: "Sombre"
+        case .system: tr("Auto")
+        case .light: tr("Clair")
+        case .dark: tr("Sombre")
         }
     }
 

@@ -39,10 +39,10 @@ enum WidgetDiagnostics {
             return Fmt.format(date, template: "dMMMHHmm")
         }
         if let launch = pasteboardLaunch {
-            let groups = launch.groups.isEmpty ? "aucun groupe" : launch.groups
+            let groups = launch.groups.isEmpty ? tr("aucun groupe") : launch.groups
             return "\(Fmt.format(launch.date, template: "dMMMHHmm")) (\(groups))"
         }
-        return "Jamais"
+        return tr("Jamais")
     }
 
     /// App Groups in the code signature, then in the provisioning profile.
@@ -53,14 +53,14 @@ enum WidgetDiagnostics {
         #endif
         let profile = ProvisioningProfile.appGroups()
         let hasProfile = ProvisioningProfile.entitlements() != nil
-        return "signature : \(signed.isEmpty ? "aucun" : signed.joined(separator: ", ")) · profil : \(hasProfile ? (profile.isEmpty ? "aucun" : profile.joined(separator: ", ")) : "absent")"
+        return tr("signature : \(signed.isEmpty ? tr("aucun") : signed.joined(separator: ", ")) · profil : \(hasProfile ? (profile.isEmpty ? tr("aucun") : profile.joined(separator: ", ")) : tr)("absent"))"
     }
 
     static var sharedSpaceText: String {
         guard AppGroup.isShared else {
-            return ProvisioningProfile.appGroups().isEmpty ? "Inactif (aucun groupe)" : "Inactif"
+            return ProvisioningProfile.appGroups().isEmpty ? tr("Inactif (aucun groupe)") : tr("Inactif")
         }
-        return AppGroup.identifier == AppGroup.declaredIdentifier ? "Actif" : "Actif (groupe de l'installation)"
+        return AppGroup.identifier == AppGroup.declaredIdentifier ? tr("Actif") : tr("Actif (groupe de l'installation)")
     }
 
     static var appVersion: String {

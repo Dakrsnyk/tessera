@@ -58,7 +58,7 @@ enum StoreShowcase {
                 widget: SetupWidget(kind: .countdown, family: .systemSmall, theme: theme.id,
                                     accent: Palette.freeAccents[index % Palette.freeAccents.count].hex, template: "countdown-holidays"),
                 title: theme.name,
-                subtitle: theme.isPremium ? "Premium" : "Gratuit"
+                subtitle: theme.isPremium ? tr("Premium") : tr("Gratuit")
             )
         }
     }
@@ -69,13 +69,13 @@ enum StoreShowcase {
             ShowcaseItem(
                 widget: SetupWidget(kind: .habitStreak, family: .systemSmall, theme: .colorful, accent: swatch.hex),
                 title: swatch.name,
-                subtitle: "Série"
+                subtitle: tr("Série")
             )
         }
     }
 
     static let collections: [StoreCollection] = [
-        StoreCollection(id: "sport", title: "Pour les sportifs", subtitle: "Séance, séries, repos et calories.",
+        StoreCollection(id: "sport", title: tr("Pour les sportifs"), subtitle: tr("Séance, séries, repos et calories."),
                         symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", categories: [.fitness, .nutrition], items: [
             item(.nextSet, .systemSmall, .dark, "FF6B57"),
             item(.todaysWorkout, .systemMedium, .dark, "FF6B57"),
@@ -88,7 +88,7 @@ enum StoreShowcase {
             item(.trainingStreak, .systemSmall, .colorful, "FF6B57"),
             item(.caloriesBurned, .systemSmall, .light, "FF6B57"),
         ]),
-        StoreCollection(id: "study", title: "Pour étudier", subtitle: "Cours, examens, devoirs et révisions.",
+        StoreCollection(id: "study", title: tr("Pour étudier"), subtitle: tr("Cours, examens, devoirs et révisions."),
                         symbol: "graduationcap.fill", colorHex: "D6409F", categories: [.student], items: [
             item(.nextExam, .systemSmall, .light, "3366FF"),
             item(.timetable, .systemMedium, .retro, "F2A33A"),
@@ -100,7 +100,7 @@ enum StoreShowcase {
             item(.nextClass, .systemSmall, .minimal, "3366FF"),
             item(.timetable, .systemLarge, .minimal, "F2588F"),
         ]),
-        StoreCollection(id: "money", title: "Budget serré", subtitle: "Reste du mois, factures, épargne et abonnements.",
+        StoreCollection(id: "money", title: tr("Budget serré"), subtitle: tr("Reste du mois, factures, épargne et abonnements."),
                         symbol: "creditcard.fill", colorHex: "2F8F7A", categories: [.finance, .investing], items: [
             item(.budgetLeft, .systemSmall, .light, "2F8F7A"),
             item(.spendingByCategory, .systemMedium, .light, "FF6B57"),
@@ -111,7 +111,7 @@ enum StoreShowcase {
             item(.netWorth, .systemSmall, .elegant, "F2A33A"),
             item(.moneyFlow, .systemLarge, .light, "2F8F7A", "money-net"),
         ]),
-        StoreCollection(id: "business", title: "Pour entreprendre", subtitle: "Ventes, objectifs, bénéfice et MRR.",
+        StoreCollection(id: "business", title: tr("Pour entreprendre"), subtitle: tr("Ventes, objectifs, bénéfice et MRR."),
                         symbol: "briefcase.fill", colorHex: "C28A12", categories: [.business, .markets], items: [
             item(.revenueGoal, .systemSmall, .elegant, "F2A33A"),
             item(.businessDashboard, .systemMedium, .elegant, "F2A33A"),
@@ -122,7 +122,7 @@ enum StoreShowcase {
             item(.companySnapshot, .systemSmall, .futuristic, "3366FF", "company-futuristic"),
             item(.businessKPIs, .systemLarge, .elegant, "F2A33A"),
         ]),
-        StoreCollection(id: "travel", title: "En voyage", subtitle: "Départ, vol, hôtel et heure sur place.",
+        StoreCollection(id: "travel", title: tr("En voyage"), subtitle: tr("Départ, vol, hôtel et heure sur place."),
                         symbol: "airplane", colorHex: "12A4B5", categories: [.travel], items: [
             item(.tripCountdown, .systemSmall, .aurora, "3366FF", "trip-aurora"),
             item(.flight, .systemMedium, .light, "3366FF"),
@@ -133,7 +133,7 @@ enum StoreShowcase {
             item(.nextActivity, .systemMedium, .light, "F2A33A"),
             item(.tripProgress, .systemSmall, .colorful, "3366FF"),
         ]),
-        StoreCollection(id: "calm", title: "Bien-être", subtitle: "Habitudes, eau, soleil et lune.",
+        StoreCollection(id: "calm", title: tr("Bien-être"), subtitle: tr("Habitudes, eau, soleil et lune."),
                         symbol: "leaf.fill", colorHex: "7FA33A", categories: [.wellbeing, .weather], items: [
             item(.hydration, .systemSmall, .aurora, "3366FF"),
             item(.habits, .systemMedium, .glass, "8C6CFF"),
@@ -143,7 +143,7 @@ enum StoreShowcase {
             item(.habitStreak, .systemSmall, .colorful, "7FA33A"),
             item(.habitWeek, .systemLarge, .light, "8C6CFF"),
         ]),
-        StoreCollection(id: "minimal", title: "Minimal et noir", subtitle: "L'essentiel, sans une couleur de trop.",
+        StoreCollection(id: "minimal", title: tr("Minimal et noir"), subtitle: tr("L'essentiel, sans une couleur de trop."),
                         symbol: "circle.lefthalf.filled", colorHex: "3A3A3F", categories: [.time, .productivity], items: [
             item(.clock, .systemSmall, .monochrome, "6B7280"),
             item(.progress, .systemMedium, .monochrome, "6B7280", "progress-day"),
@@ -154,7 +154,7 @@ enum StoreShowcase {
             item(.tasks, .systemSmall, .monochrome, "6B7280"),
             item(.yearDots, .systemLarge, .monochrome, "6B7280"),
         ]),
-        StoreCollection(id: "vivid", title: "Couleurs vives", subtitle: "Ta couleur en plein fond.",
+        StoreCollection(id: "vivid", title: tr("Couleurs vives"), subtitle: tr("Ta couleur en plein fond."),
                         symbol: "sparkles", colorHex: "F2588F", items: [
             item(.weather, .systemSmall, .colorful, "3366FF"),
             item(.now, .systemMedium, .colorful, "FF6B57"),
@@ -164,7 +164,7 @@ enum StoreShowcase {
             item(.trainingStreak, .systemSmall, .colorful, "7FA33A"),
             item(.caloriesLeft, .systemSmall, .colorful, "2F8F7A"),
         ]),
-        StoreCollection(id: "mediums", title: "Widgets moyens", subtitle: "Deux fois plus de place, pour tout voir d'un coup d'œil.",
+        StoreCollection(id: "mediums", title: tr("Widgets moyens"), subtitle: tr("Deux fois plus de place, pour tout voir d'un coup d'œil."),
                         symbol: "rectangle.fill", colorHex: "3366FF", items: [
             item(.now, .systemMedium, .colorful, "8C6CFF"),
             item(.weather, .systemMedium, .aurora, "3366FF"),
@@ -181,7 +181,7 @@ enum StoreShowcase {
             item(.businessKPIs, .systemMedium, .elegant, "F2A33A"),
             item(.upNext, .systemMedium, .digital, "2F8F7A"),
         ]),
-        StoreCollection(id: "larges", title: "Grands formats", subtitle: "Ta semaine, ton mois ou ta journée entière.",
+        StoreCollection(id: "larges", title: tr("Grands formats"), subtitle: tr("Ta semaine, ton mois ou ta journée entière."),
                         symbol: "square.fill", colorHex: "5B6CFF", items: [
             item(.calendar, .systemLarge, .typography, "FF6B57"),
             item(.myDay, .systemLarge, .glass, "8C6CFF"),
@@ -193,9 +193,9 @@ enum StoreShowcase {
             item(.weeklyVolume, .systemLarge, .futuristic, "3366FF"),
             item(.tasks, .systemLarge, .minimal, "2F8F7A"),
         ]),
-        StoreCollection(id: "styles", title: "Un widget, 12 styles", subtitle: "Le même compte à rebours, dans chaque style.",
+        StoreCollection(id: "styles", title: tr("Un widget, 12 styles"), subtitle: tr("Le même compte à rebours, dans chaque style."),
                         symbol: "paintbrush.fill", colorHex: "8C6CFF", items: allStyles),
-        StoreCollection(id: "colors", title: "Toutes les couleurs", subtitle: "Choisis la tienne, ou n'importe quelle autre avec Premium.",
+        StoreCollection(id: "colors", title: tr("Toutes les couleurs"), subtitle: tr("Choisis la tienne, ou n'importe quelle autre avec Premium."),
                         symbol: "eyedropper.halffull", colorHex: "F2A33A", items: allColors),
     ]
 
@@ -251,7 +251,7 @@ struct ShowcaseCard: View {
         .frame(width: width)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityHint(Text("Ouvre l'éditeur"))
+        .accessibilityHint(Text(tr("Ouvre l'éditeur")))
     }
 }
 

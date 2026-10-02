@@ -93,38 +93,38 @@ enum InsightEngine {
         let left = goals.kcal - today.kcal
         let proteinLeft = goals.protein - today.protein
         var facts = [
-            "Objectif : \(kcal(goals.kcal)) kcal",
-            "Mangé aujourd'hui : \(kcal(today.kcal)) kcal",
-            "Protéines : \(Int(safely: today.protein.rounded())) g sur \(Int(safely: goals.protein)) g",
+            tr("Objectif : \(kcal(goals.kcal)) kcal"),
+            tr("Mangé aujourd'hui : \(kcal(today.kcal)) kcal"),
+            tr("Protéines : \(Int(safely: today.protein.rounded())) g sur \(Int(safely: goals.protein)) g"),
         ]
         var text: String
         if today.kcal == 0 {
-            text = "Rien de noté aujourd'hui. Ton objectif est de \(kcal(goals.kcal)) kcal."
+            text = tr("Rien de noté aujourd'hui. Ton objectif est de \(kcal(goals.kcal)) kcal.")
         } else if left >= 0 {
-            text = "Il te reste \(kcal(left)) kcal aujourd'hui"
+            text = tr("Il te reste \(kcal(left)) kcal aujourd'hui")
             if proteinLeft > 0 {
-                text += " et \(Int(safely: proteinLeft.rounded())) g de protéines à trouver."
+                text += tr(" et \(Int(safely: proteinLeft.rounded())) g de protéines à trouver.")
             } else {
-                text += ", et ton objectif de protéines est atteint."
+                text += tr(", et ton objectif de protéines est atteint.")
             }
         } else {
-            text = "Tu as dépassé ton objectif de \(kcal(-left)) kcal aujourd'hui."
+            text = tr("Tu as dépassé ton objectif de \(kcal(-left)) kcal aujourd'hui.")
         }
-        facts.append("Reste : \(kcal(left)) kcal")
-        facts.append("Protéines restantes : \(Int(safely: max(0, proteinLeft).rounded())) g")
+        facts.append(tr("Reste : \(kcal(left)) kcal"))
+        facts.append(tr("Protéines restantes : \(Int(safely: max(0, proteinLeft).rounded())) g"))
         var points: [String] = []
         if let average = NutritionMath.average(state, days: 7, until: now) {
-            let line = "Moyenne sur 7 jours : \(kcal(average)) kcal"
+            let line = tr("Moyenne sur 7 jours : \(kcal(average)) kcal")
             facts.append(line)
             points.append(line)
         }
         let streak = NutritionMath.trackingStreak(state, until: now)
         if streak > 1 {
-            let line = "Suivi \(streak) jours d'affilée"
+            let line = tr("Suivi \(streak) jours d'affilée")
             facts.append(line)
             points.append(line)
         }
-        return Insight(title: "Nutrition", symbol: "fork.knife", text: text, facts: facts, points: points)
+        return Insight(title: tr("Nutrition"), symbol: "fork.knife", text: text, facts: facts, points: points)
     }
 
     static func finance(_ state: BudgetState, now: Date, currency: String) -> Insight {
@@ -133,32 +133,32 @@ enum InsightEngine {
         let perDay = BudgetMath.perDayLeft(state, at: now)
         func money(_ value: Double) -> String { Fmt.money(value, currency: currency, decimals: 0) }
         var facts = [
-            "Budget du mois : \(money(state.monthlyBudget))",
-            "Dépensé : \(money(spent))",
-            "Reste : \(money(remaining))",
-            "Par jour : \(money(perDay))",
+            tr("Budget du mois : \(money(state.monthlyBudget))"),
+            tr("Dépensé : \(money(spent))"),
+            tr("Reste : \(money(remaining))"),
+            tr("Par jour : \(money(perDay))"),
         ]
         var text = remaining >= 0
-            ? "Il te reste \(money(remaining)) ce mois-ci, soit \(money(perDay)) par jour."
-            : "Tu as dépassé ton budget du mois de \(money(-remaining))."
+            ? tr("Il te reste \(money(remaining)) ce mois-ci, soit \(money(perDay)) par jour.")
+            : tr("Tu as dépassé ton budget du mois de \(money(-remaining)).")
         var points: [String] = []
         let comparison = BudgetMath.weekComparison(state, at: now)
         if let biggest = comparison.filter({ $0.previous > 0 || $0.current > 0 }).max(by: { abs($0.current - $0.previous) < abs($1.current - $1.previous) }),
            abs(biggest.current - biggest.previous) >= 1 {
             let delta = biggest.current - biggest.previous
-            let line = "\(biggest.name) : \(money(biggest.current)) cette semaine contre \(money(biggest.previous)) la semaine dernière"
+            let line = tr("\(biggest.name) : \(money(biggest.current)) cette semaine contre \(money(biggest.previous)) la semaine dernière")
             facts.append(line)
             points.append(line)
             text += delta > 0
-                ? " Plus forte hausse : \(biggest.name.lowercased()) (\(money(delta)) de plus)."
-                : " Belle baisse en \(biggest.name.lowercased()) (\(money(-delta)) de moins)."
+                ? tr(" Plus forte hausse : \(biggest.name.lowercased()) (\(money(delta)) de plus).")
+                : tr(" Belle baisse en \(biggest.name.lowercased()) (\(money(-delta)) de moins).")
         }
         if let bill = BudgetMath.upcomingBills(state, at: now, within: 7).first {
-            let line = "\(bill.bill.name) : \(money(bill.bill.amount)) dans \(bill.days) j"
+            let line = tr("\(bill.bill.name) : \(money(bill.bill.amount)) dans \(bill.days) j")
             facts.append(line)
             points.append(line)
         }
-        return Insight(title: "Dépenses", symbol: "creditcard", text: text, facts: facts, points: points)
+        return Insight(title: tr("Dépenses"), symbol: "creditcard", text: text, facts: facts, points: points)
     }
 
     static func productivity(_ state: ProductivityState, content: ContentState, now: Date) -> Insight {
@@ -169,31 +169,31 @@ enum InsightEngine {
         let habitsDone = content.habits.filter { $0.isDone(on: now) }.count
         let focusText = Fmt.hours(focus)
         var facts = [
-            "Focus cette semaine : \(focusText)",
-            "Objectif : \(Fmt.hours(goal))",
-            "Tâches ouvertes : \(openTasks)",
-            "Tâches faites aujourd'hui : \(doneToday)",
-            "Habitudes faites aujourd'hui : \(habitsDone) sur \(content.habits.count)",
+            tr("Focus cette semaine : \(focusText)"),
+            tr("Objectif : \(Fmt.hours(goal))"),
+            tr("Tâches ouvertes : \(openTasks)"),
+            tr("Tâches faites aujourd'hui : \(doneToday)"),
+            tr("Habitudes faites aujourd'hui : \(habitsDone) sur \(content.habits.count)"),
         ]
-        var text = "\(focusText) de concentration cette semaine"
+        var text = tr("\(focusText) de concentration cette semaine")
         if goal > 0 {
             let percent = Int(safely: (focus / goal * 100).rounded())
-            facts.append("Progression : \(percent) %")
-            text += ", \(percent) % de ton objectif."
+            facts.append(tr("Progression : \(percent) %"))
+            text += tr(", \(percent) % de ton objectif.")
         } else {
             text += "."
         }
         if !content.habits.isEmpty {
-            text += " Habitudes du jour : \(habitsDone) sur \(content.habits.count)."
+            text += tr(" Habitudes du jour : \(habitsDone) sur \(content.habits.count).")
         }
-        var points = ["\(openTasks) tâche\(openTasks > 1 ? "s" : "") à faire", "\(doneToday) faite\(doneToday > 1 ? "s" : "") aujourd'hui"]
+        var points = [tr("\(openTasks) tâche\(openTasks > 1 ? "s" : "") à faire"), tr("\(doneToday) faite\(doneToday > 1 ? "s" : "") aujourd'hui")]
         let best = content.habits.max { $0.streak(asOf: now) < $1.streak(asOf: now) }
         if let best, best.streak(asOf: now) > 1 {
-            let line = "\(best.name) · série de \(best.streak(asOf: now)) j"
+            let line = tr("\(best.name) · série de \(best.streak(asOf: now)) j")
             facts.append(line)
             points.append(line)
         }
-        return Insight(title: "Productivité", symbol: "chart.line.uptrend.xyaxis", text: text, facts: facts, points: points)
+        return Insight(title: tr("Productivité"), symbol: "chart.line.uptrend.xyaxis", text: text, facts: facts, points: points)
     }
 
     /// The day in two sentences: what's next, what's left, and one number that matters.
@@ -204,39 +204,39 @@ enum InsightEngine {
         if case let .ready(weather) = payload.weather {
             let line = "\(weather.locationName) : \(Fmt.temperature(weather.temperature, unit: settings.temperatureUnit)), \(WeatherCode.description(weather.code).lowercased())"
             facts.append(line)
-            parts.append("\(Fmt.temperature(weather.temperature, unit: settings.temperatureUnit)) et \(WeatherCode.description(weather.code).lowercased()) à \(weather.locationName)")
+            parts.append(tr("\(Fmt.temperature(weather.temperature, unit: settings.temperatureUnit)) et \(WeatherCode.description(weather.code).lowercased()) à \(weather.locationName)"))
         }
         if case let .ready(events) = payload.events, let next = events.first(where: { $0.end > now }) {
-            let time = next.isAllDay ? "toute la journée" : "à \(Fmt.time(next.start, uses24Hour: settings.uses24HourClock))"
-            facts.append("Prochain : \(next.title) \(time)")
+            let time = next.isAllDay ? tr("toute la journée") : "à \(Fmt.time(next.start, uses24Hour: settings.uses24HourClock))"
+            facts.append(tr("Prochain : \(next.title) \(time)"))
             parts.append("\(next.title) \(time)")
         }
         let open = payload.content.tasks.filter { !$0.isDone }.count
         if !payload.content.tasks.isEmpty {
-            facts.append("Tâches : \(open)")
-            parts.append(open == 0 ? "toutes tes tâches sont faites" : "\(open) tâche\(open > 1 ? "s" : "") à faire")
+            facts.append(tr("Tâches : \(open)"))
+            parts.append(open == 0 ? tr("toutes tes tâches sont faites") : tr("\(open) tâche\(open > 1 ? "s" : "") à faire"))
         }
         let priorities = payload.domains.productivity.priorities
         if !priorities.isEmpty {
             let done = priorities.filter { $0.isDone(on: now) }.count
-            facts.append("Priorités : \(done) sur \(priorities.count)")
+            facts.append(tr("Priorités : \(done) sur \(priorities.count)"))
         }
         let nutrition = payload.domains.nutrition
         let eaten = NutritionMath.totals(nutrition, on: now).kcal
         if eaten > 0 {
             let left = kcal(nutrition.goals.kcal - eaten)
-            facts.append("Calories restantes : \(left) kcal")
-            parts.append("\(left) kcal restantes")
+            facts.append(tr("Calories restantes : \(left) kcal"))
+            parts.append(tr("\(left) kcal restantes"))
         }
         let text: String
         if parts.isEmpty {
-            text = "Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici."
+            text = tr("Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.")
         } else {
             let first = parts[0].capitalizedFirst
             let rest = parts.dropFirst().joined(separator: ", ")
             text = rest.isEmpty ? first + "." : first + ". " + rest.capitalizedFirst + "."
         }
-        return Insight(title: "Ma journée", symbol: "sparkles", text: text, facts: facts, points: Array(facts.prefix(5)))
+        return Insight(title: tr("Ma journée"), symbol: "sparkles", text: text, facts: facts, points: Array(facts.prefix(5)))
     }
 
     static func insight(for kind: WidgetKind, payload: WidgetPayload, now: Date) -> Insight {
@@ -253,7 +253,7 @@ extension Fmt {
     /// "3 h 20" / "45 min"
     static func hours(_ hours: Double) -> String {
         let minutes = Int(safely: (hours * 60).rounded())
-        if minutes < 60 { return "\(minutes) min" }
+        if minutes < 60 { return tr("\(minutes) min") }
         let h = minutes / 60
         let m = minutes % 60
         return m == 0 ? "\(h) h" : "\(h) h \(String(format: "%02d", m))"

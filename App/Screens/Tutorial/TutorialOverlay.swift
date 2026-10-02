@@ -134,7 +134,7 @@ struct TutorialOverlay: View {
                 .font(.caption.weight(.medium))
                 .monospacedDigit()
                 .foregroundStyle(.secondary)
-                .accessibilityLabel(Text("Étape \(step.number) sur \(TutorialStep.allCases.count)"))
+                .accessibilityLabel(Text(tr("Étape \(step.number) sur \(TutorialStep.allCases.count)")))
                 .accessibilityIdentifier("tutorial-step")
             Button {
                 finish()
@@ -147,7 +147,7 @@ struct TutorialOverlay: View {
             }
             .buttonStyle(.plain)
             .frame(minWidth: 44, minHeight: 44)
-            .accessibilityLabel(Text("Quitter le tutoriel"))
+            .accessibilityLabel(Text(tr("Quitter le tutoriel")))
             .accessibilityIdentifier("tutorial-close")
         }
     }
@@ -158,9 +158,9 @@ struct TutorialOverlay: View {
             TutorialStudioDemo(tried: $triedStudio)
         case .homeScreen:
             VStack(alignment: .leading, spacing: 10) {
-                AddStepRow(number: 1, symbol: "hand.tap", text: "Appuie longuement sur un espace vide de l'écran d'accueil")
-                AddStepRow(number: 2, symbol: "plus", text: "Touche « Modifier », puis « Ajouter un widget »")
-                AddStepRow(number: 3, symbol: "magnifyingglass", text: "Cherche « Tessera », choisis la taille, puis ton widget")
+                AddStepRow(number: 1, symbol: "hand.tap", text: tr("Appuie longuement sur un espace vide de l'écran d'accueil"))
+                AddStepRow(number: 2, symbol: "plus", text: tr("Touche « Modifier », puis « Ajouter un widget »"))
+                AddStepRow(number: 3, symbol: "magnifyingglass", text: tr("Cherche « Tessera », choisis la taille, puis ton widget"))
             }
         default:
             EmptyView()
@@ -181,7 +181,7 @@ struct TutorialOverlay: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(Text("Aller à l'étape \(item.number) : \(item.title(name: firstName))"))
+                .accessibilityLabel(Text(tr("Aller à l'étape \(item.number) : \(item.title(name: firstName))")))
             }
         }
     }
@@ -192,7 +192,7 @@ struct TutorialOverlay: View {
             HStack(spacing: 10) {
                 switch step {
                 case .welcome:
-                    Button("Passer le tutoriel") { finish() }
+                    Button(tr("Passer le tutoriel")) { finish() }
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -201,7 +201,7 @@ struct TutorialOverlay: View {
                 case .finish:
                     EmptyView()
                 default:
-                    Button("Passer l'étape") { advance() }
+                    Button(tr("Passer l'étape")) { advance() }
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -228,9 +228,9 @@ struct TutorialOverlay: View {
 
     private var primaryTitle: String {
         switch step {
-        case .welcome: "Commencer"
-        case .finish: "Terminer"
-        default: "Suivant"
+        case .welcome: tr("Commencer")
+        case .finish: tr("Terminer")
+        default: tr("Suivant")
         }
     }
 
@@ -290,16 +290,16 @@ struct TutorialStudioDemo: View {
                 .animation(.easeInOut(duration: 0.25), value: design)
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 8) {
-                    arrow("arrow.uturn.backward", label: "Retour en arrière", enabled: !past.isEmpty, action: undo)
-                    arrow("arrow.uturn.forward", label: "Retour en avant", enabled: !future.isEmpty, action: redo)
+                    arrow("arrow.uturn.backward", label: tr("Retour en arrière"), enabled: !past.isEmpty, action: undo)
+                    arrow("arrow.uturn.forward", label: tr("Retour en avant"), enabled: !future.isEmpty, action: redo)
                     Spacer(minLength: 0)
                     if tried {
-                        Label("Bravo !", systemImage: "checkmark.circle.fill")
+                        Label(tr("Bravo !"), systemImage: "checkmark.circle.fill")
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(Color.accentColor)
                             .transition(.scale.combined(with: .opacity))
                             .accessibilityElement(children: .ignore)
-                            .accessibilityLabel(Text("Bravo !"))
+                            .accessibilityLabel(Text(tr("Bravo !")))
                             .accessibilityIdentifier("tutorial-bravo")
                     }
                 }
@@ -336,7 +336,7 @@ struct TutorialStudioDemo: View {
                                     .overlay { Capsule().strokeBorder(Color(hex: palette.accent).opacity(0.8), lineWidth: 1.5) }
                             }
                             .buttonStyle(.plain)
-                            .accessibilityLabel(Text("Palette \(palette.name)"))
+                            .accessibilityLabel(Text(tr("Palette \(palette.name)")))
                         }
                     }
                 }

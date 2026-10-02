@@ -57,9 +57,9 @@ final class PremiumStore {
             if let subscription = yearly?.subscription {
                 isTrialEligible = await subscription.isEligibleForIntroOffer
             }
-            loadState = products.isEmpty ? .failed("Les offres ne sont pas encore disponibles.") : .loaded
+            loadState = products.isEmpty ? .failed(tr("Les offres ne sont pas encore disponibles.")) : .loaded
         } catch {
-            loadState = .failed("Impossible de joindre l'App Store. Vérifie ta connexion.")
+            loadState = .failed(tr("Impossible de joindre l'App Store. Vérifie ta connexion."))
         }
     }
 
@@ -71,7 +71,7 @@ final class PremiumStore {
             switch result {
             case let .success(verification):
                 guard case let .verified(transaction) = verification else {
-                    return .failed("L'achat n'a pas pu être vérifié.")
+                    return .failed(tr("L'achat n'a pas pu être vérifié."))
                 }
                 await transaction.finish()
                 await refreshEntitlements()
@@ -81,7 +81,7 @@ final class PremiumStore {
             case .userCancelled:
                 return .cancelled
             @unknown default:
-                return .failed("Réponse inattendue de l'App Store.")
+                return .failed(tr("Réponse inattendue de l'App Store."))
             }
         } catch {
             return .failed(error.localizedDescription)
@@ -150,11 +150,11 @@ final class PremiumStore {
         guard isTrialEligible, let offer = product.subscription?.introductoryOffer, offer.paymentMode == .freeTrial else { return nil }
         let period = offer.period
         switch period.unit {
-        case .day: return period.value == 1 ? "1 jour gratuit" : "\(period.value) jours gratuits"
-        case .week: return period.value == 1 ? "7 jours gratuits" : "\(period.value) semaines gratuites"
-        case .month: return "\(period.value) mois gratuit\(period.value > 1 ? "s" : "")"
-        case .year: return "1 an gratuit"
-        @unknown default: return "Essai gratuit"
+        case .day: return period.value == 1 ? tr("1 jour gratuit") : tr("\(period.value) jours gratuits")
+        case .week: return period.value == 1 ? tr("7 jours gratuits") : tr("\(period.value) semaines gratuites")
+        case .month: return tr("\(period.value) mois gratuit\(period.value > 1 ? "s" : "")")
+        case .year: return tr("1 an gratuit")
+        @unknown default: return tr("Essai gratuit")
         }
     }
 }

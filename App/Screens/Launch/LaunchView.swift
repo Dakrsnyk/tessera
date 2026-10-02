@@ -13,7 +13,7 @@ struct LaunchView: View {
             Rectangle().fill(.screenFill).ignoresSafeArea()
             VStack(spacing: 24) {
                 TesseraMark(size: 96, settled: settled || reduceMotion)
-                Text("Tessera")
+                Text(tr("Tessera"))
                     .font(.system(size: 30, weight: .semibold, design: .rounded))
                     .tracking(0.5)
                     .opacity(showsName || reduceMotion ? 1 : 0)

@@ -8,48 +8,48 @@ struct WorldCity: Identifiable, Hashable {
 
 enum WorldCities {
     static let all: [WorldCity] = [
-        WorldCity(id: "America/Toronto", name: "Toronto", country: "Canada"),
-        WorldCity(id: "America/Montreal", name: "Montréal", country: "Canada"),
-        WorldCity(id: "America/Vancouver", name: "Vancouver", country: "Canada"),
-        WorldCity(id: "America/Halifax", name: "Halifax", country: "Canada"),
-        WorldCity(id: "America/New_York", name: "New York", country: "États-Unis"),
-        WorldCity(id: "America/Chicago", name: "Chicago", country: "États-Unis"),
-        WorldCity(id: "America/Denver", name: "Denver", country: "États-Unis"),
-        WorldCity(id: "America/Los_Angeles", name: "Los Angeles", country: "États-Unis"),
-        WorldCity(id: "America/Mexico_City", name: "Mexico", country: "Mexique"),
-        WorldCity(id: "America/Sao_Paulo", name: "São Paulo", country: "Brésil"),
-        WorldCity(id: "America/Argentina/Buenos_Aires", name: "Buenos Aires", country: "Argentine"),
-        WorldCity(id: "Pacific/Honolulu", name: "Honolulu", country: "États-Unis"),
-        WorldCity(id: "Europe/London", name: "Londres", country: "Royaume-Uni"),
-        WorldCity(id: "Europe/Paris", name: "Paris", country: "France"),
-        WorldCity(id: "Europe/Brussels", name: "Bruxelles", country: "Belgique"),
-        WorldCity(id: "Europe/Zurich", name: "Zurich", country: "Suisse"),
-        WorldCity(id: "Europe/Madrid", name: "Madrid", country: "Espagne"),
-        WorldCity(id: "Europe/Lisbon", name: "Lisbonne", country: "Portugal"),
-        WorldCity(id: "Europe/Rome", name: "Rome", country: "Italie"),
-        WorldCity(id: "Europe/Berlin", name: "Berlin", country: "Allemagne"),
-        WorldCity(id: "Europe/Athens", name: "Athènes", country: "Grèce"),
-        WorldCity(id: "Europe/Istanbul", name: "Istanbul", country: "Turquie"),
-        WorldCity(id: "Europe/Moscow", name: "Moscou", country: "Russie"),
-        WorldCity(id: "Africa/Casablanca", name: "Casablanca", country: "Maroc"),
-        WorldCity(id: "Africa/Algiers", name: "Alger", country: "Algérie"),
-        WorldCity(id: "Africa/Tunis", name: "Tunis", country: "Tunisie"),
-        WorldCity(id: "Africa/Dakar", name: "Dakar", country: "Sénégal"),
-        WorldCity(id: "Africa/Abidjan", name: "Abidjan", country: "Côte d'Ivoire"),
-        WorldCity(id: "Africa/Cairo", name: "Le Caire", country: "Égypte"),
-        WorldCity(id: "Africa/Johannesburg", name: "Johannesburg", country: "Afrique du Sud"),
-        WorldCity(id: "Asia/Dubai", name: "Dubaï", country: "Émirats arabes unis"),
-        WorldCity(id: "Asia/Kolkata", name: "Mumbai", country: "Inde"),
-        WorldCity(id: "Asia/Bangkok", name: "Bangkok", country: "Thaïlande"),
-        WorldCity(id: "Asia/Singapore", name: "Singapour", country: "Singapour"),
-        WorldCity(id: "Asia/Hong_Kong", name: "Hong Kong", country: "Chine"),
-        WorldCity(id: "Asia/Shanghai", name: "Shanghai", country: "Chine"),
-        WorldCity(id: "Asia/Seoul", name: "Séoul", country: "Corée du Sud"),
-        WorldCity(id: "Asia/Tokyo", name: "Tokyo", country: "Japon"),
-        WorldCity(id: "Australia/Sydney", name: "Sydney", country: "Australie"),
-        WorldCity(id: "Pacific/Auckland", name: "Auckland", country: "Nouvelle-Zélande"),
-        WorldCity(id: "Indian/Reunion", name: "La Réunion", country: "France"),
-        WorldCity(id: "America/Martinique", name: "Martinique", country: "France"),
+        WorldCity(id: "America/Toronto", name: tr("Toronto"), country: tr("Canada")),
+        WorldCity(id: "America/Montreal", name: tr("Montréal"), country: tr("Canada")),
+        WorldCity(id: "America/Vancouver", name: tr("Vancouver"), country: tr("Canada")),
+        WorldCity(id: "America/Halifax", name: tr("Halifax"), country: tr("Canada")),
+        WorldCity(id: "America/New_York", name: tr("New York"), country: tr("États-Unis")),
+        WorldCity(id: "America/Chicago", name: tr("Chicago"), country: tr("États-Unis")),
+        WorldCity(id: "America/Denver", name: tr("Denver"), country: tr("États-Unis")),
+        WorldCity(id: "America/Los_Angeles", name: tr("Los Angeles"), country: tr("États-Unis")),
+        WorldCity(id: "America/Mexico_City", name: tr("Mexico"), country: tr("Mexique")),
+        WorldCity(id: "America/Sao_Paulo", name: tr("São Paulo"), country: tr("Brésil")),
+        WorldCity(id: "America/Argentina/Buenos_Aires", name: tr("Buenos Aires"), country: tr("Argentine")),
+        WorldCity(id: "Pacific/Honolulu", name: tr("Honolulu"), country: tr("États-Unis")),
+        WorldCity(id: "Europe/London", name: tr("Londres"), country: tr("Royaume-Uni")),
+        WorldCity(id: "Europe/Paris", name: tr("Paris"), country: tr("France")),
+        WorldCity(id: "Europe/Brussels", name: tr("Bruxelles"), country: tr("Belgique")),
+        WorldCity(id: "Europe/Zurich", name: tr("Zurich"), country: tr("Suisse")),
+        WorldCity(id: "Europe/Madrid", name: tr("Madrid"), country: tr("Espagne")),
+        WorldCity(id: "Europe/Lisbon", name: tr("Lisbonne"), country: tr("Portugal")),
+        WorldCity(id: "Europe/Rome", name: tr("Rome"), country: tr("Italie")),
+        WorldCity(id: "Europe/Berlin", name: tr("Berlin"), country: tr("Allemagne")),
+        WorldCity(id: "Europe/Athens", name: tr("Athènes"), country: tr("Grèce")),
+        WorldCity(id: "Europe/Istanbul", name: tr("Istanbul"), country: tr("Turquie")),
+        WorldCity(id: "Europe/Moscow", name: tr("Moscou"), country: tr("Russie")),
+        WorldCity(id: "Africa/Casablanca", name: tr("Casablanca"), country: tr("Maroc")),
+        WorldCity(id: "Africa/Algiers", name: tr("Alger"), country: tr("Algérie")),
+        WorldCity(id: "Africa/Tunis", name: tr("Tunis"), country: tr("Tunisie")),
+        WorldCity(id: "Africa/Dakar", name: tr("Dakar"), country: tr("Sénégal")),
+        WorldCity(id: "Africa/Abidjan", name: tr("Abidjan"), country: tr("Côte d'Ivoire")),
+        WorldCity(id: "Africa/Cairo", name: tr("Le Caire"), country: tr("Égypte")),
+        WorldCity(id: "Africa/Johannesburg", name: tr("Johannesburg"), country: tr("Afrique du Sud")),
+        WorldCity(id: "Asia/Dubai", name: tr("Dubaï"), country: tr("Émirats arabes unis")),
+        WorldCity(id: "Asia/Kolkata", name: tr("Mumbai"), country: tr("Inde")),
+        WorldCity(id: "Asia/Bangkok", name: tr("Bangkok"), country: tr("Thaïlande")),
+        WorldCity(id: "Asia/Singapore", name: tr("Singapour"), country: tr("Singapour")),
+        WorldCity(id: "Asia/Hong_Kong", name: tr("Hong Kong"), country: tr("Chine")),
+        WorldCity(id: "Asia/Shanghai", name: tr("Shanghai"), country: tr("Chine")),
+        WorldCity(id: "Asia/Seoul", name: tr("Séoul"), country: tr("Corée du Sud")),
+        WorldCity(id: "Asia/Tokyo", name: tr("Tokyo"), country: tr("Japon")),
+        WorldCity(id: "Australia/Sydney", name: tr("Sydney"), country: tr("Australie")),
+        WorldCity(id: "Pacific/Auckland", name: tr("Auckland"), country: tr("Nouvelle-Zélande")),
+        WorldCity(id: "Indian/Reunion", name: tr("La Réunion"), country: tr("France")),
+        WorldCity(id: "America/Martinique", name: tr("Martinique"), country: tr("France")),
     ]
 
     static func name(for identifier: String) -> String {
@@ -60,7 +60,7 @@ enum WorldCities {
     /// "+6 h", "−3,5 h", "Même heure"
     static func offsetText(for zone: TimeZone, at date: Date) -> String {
         let delta = zone.secondsFromGMT(for: date) - TimeZone.current.secondsFromGMT(for: date)
-        guard delta != 0 else { return "Même heure" }
+        guard delta != 0 else { return tr("Même heure") }
         let hours = Double(delta) / 3600
         let sign = hours < 0 ? "−" : "+"
         let value = abs(hours)
@@ -80,7 +80,7 @@ enum WorldCities {
         let remoteDay = remote.dateComponents([.year, .month, .day], from: date)
         guard localDay != remoteDay,
               let l = local.date(from: localDay), let r = local.date(from: remoteDay) else { return nil }
-        return r > l ? "Demain" : "Hier"
+        return r > l ? tr("Demain") : tr("Hier")
     }
 
     static func isDaytime(in zone: TimeZone, at date: Date) -> Bool {

@@ -25,7 +25,7 @@ struct DesignEntity: AppEntity {
     init(starter kind: WidgetKind) {
         id = Self.starterPrefix + kind.rawValue
         name = kind.title
-        kindTitle = "\(kind.category.title) · modèle"
+        kindTitle = tr("\(kind.category.title) · modèle")
     }
 
     static let starterPrefix = "kind:"

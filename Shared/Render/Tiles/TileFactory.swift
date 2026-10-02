@@ -55,18 +55,18 @@ enum TF {
     }
 
     static func days(_ count: Int) -> String {
-        abs(count) > 1 ? "jours" : "jour"
+        abs(count) > 1 ? tr("jours") : tr("jour")
     }
 
     /// "aujourd'hui", "demain", "dans 3 jours", "hier", "il y a 4 jours"
     static func relativeDay(_ date: Date, from now: Date) -> String {
         let days = DateMath.daysBetween(now, date)
         switch days {
-        case 0: return "aujourd'hui"
-        case 1: return "demain"
-        case -1: return "hier"
-        case 2...: return "dans \(days) jours"
-        default: return "il y a \(-days) jours"
+        case 0: return tr("aujourd'hui")
+        case 1: return tr("demain")
+        case -1: return tr("hier")
+        case 2...: return tr("dans \(days) jours")
+        default: return tr("il y a \(-days) jours")
         }
     }
 
@@ -74,20 +74,20 @@ enum TF {
     static func shortRelativeDay(_ date: Date, from now: Date) -> String {
         let days = DateMath.daysBetween(now, date)
         switch days {
-        case 0: return "Auj."
-        case 1: return "Demain"
-        case 2...: return "\(days) j"
-        default: return "En retard"
+        case 0: return tr("Auj.")
+        case 1: return tr("Demain")
+        case 2...: return tr("\(days) j")
+        default: return tr("En retard")
         }
     }
 
     /// "dans 2 h 10" / "dans 12 min" / "dans 3 jours"
     static func relativeTime(_ date: Date, from now: Date) -> String {
         let seconds = date.timeIntervalSince(now)
-        if seconds <= 0 { return "maintenant" }
-        if seconds < 3600 { return "dans \(max(1, Int(seconds / 60))) min" }
+        if seconds <= 0 { return tr("maintenant") }
+        if seconds < 3600 { return tr("dans \(max(1, Int(seconds / 60))) min") }
         // Non-breaking spaces keep "4 h 18" on one line.
-        if seconds < 86_400 { return "dans \(Fmt.hours(seconds / 3600))".replacingOccurrences(of: " ", with: "\u{00A0}") }
+        if seconds < 86_400 { return tr("dans \(Fmt.hours(seconds / 3600))").replacingOccurrences(of: " ", with: "\u{00A0}") }
         return relativeDay(date, from: now)
     }
 
@@ -117,18 +117,18 @@ enum TF {
     }
 
     static func compass(_ degrees: Double) -> String {
-        let names = ["N", "NE", "E", "SE", "S", "SO", "O", "NO"]
+        let names = [tr("N"), tr("NE"), tr("E"), tr("SE"), tr("S"), tr("SO"), tr("O"), tr("NO")]
         let index = Int(((degrees.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360) / 45).rounded()) % 8
         return names[index]
     }
 
     static func uvLevel(_ uv: Double) -> String {
         switch uv {
-        case ..<3: return "faible"
-        case 3..<6: return "modéré"
-        case 6..<8: return "élevé"
-        case 8..<11: return "très élevé"
-        default: return "extrême"
+        case ..<3: return tr("faible")
+        case 3..<6: return tr("modéré")
+        case 6..<8: return tr("élevé")
+        case 8..<11: return tr("très élevé")
+        default: return tr("extrême")
         }
     }
 }

@@ -21,10 +21,10 @@ struct SheetForm<Content: View>: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Annuler") { dismiss() }
+                    Button(tr("Annuler")) { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Enregistrer") {
+                    Button(tr("Enregistrer")) {
                         onSave()
                         if dismissesOnSave { dismiss() }
                     }
@@ -78,7 +78,7 @@ struct OptionalNumberRow: View {
         HStack {
             Text(title)
             Spacer()
-            TextField("À renseigner", value: $value, format: .number.locale(Fmt.locale))
+            TextField(tr("À renseigner"), value: $value, format: .number.locale(Fmt.locale))
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: 130)

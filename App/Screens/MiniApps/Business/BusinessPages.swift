@@ -7,7 +7,7 @@ struct BusinessSalesPage: View {
     enum Kind: String, CaseIterable, Identifiable {
         case sales, costs
         var id: String { rawValue }
-        var title: String { self == .sales ? "Ventes" : "Dépenses" }
+        var title: String { self == .sales ? tr("Ventes") : tr("Dépenses") }
     }
 
     @Environment(AppModel.self) private var model
@@ -20,7 +20,7 @@ struct BusinessSalesPage: View {
         let state = model.business
         List {
             Section {
-                Picker("Type", selection: $kind) {
+                Picker(tr("Type"), selection: $kind) {
                     ForEach(Kind.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
@@ -35,12 +35,12 @@ struct BusinessSalesPage: View {
         }
         .styledList()
         .tint(Color(hex: BusinessFormat.accentHex))
-        .navigationTitle("Ventes et dépenses")
+        .navigationTitle(tr("Ventes et dépenses"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { sheet = kind == .sales ? BusinessSheet.sale(nil) : BusinessSheet.cost(nil) } label: { Image(systemName: "plus") }
-                    .accessibilityLabel(Text(kind == .sales ? "Nouvelle vente" : "Nouvelle dépense"))
+                    .accessibilityLabel(Text(kind == .sales ? tr("Nouvelle vente") : tr("Nouvelle dépense")))
             }
         }
         .sheet(item: $sheet) { $0.editor }
@@ -50,7 +50,7 @@ struct BusinessSalesPage: View {
     private func sales(state: BusinessState) -> some View {
         let sorted = state.sales.sorted { $0.date > $1.date }
         if sorted.isEmpty {
-            Section { Text("Aucune vente notée pour l'instant.").foregroundStyle(.secondary) }
+            Section { Text(tr("Aucune vente notée pour l'instant.")).foregroundStyle(.secondary) }
         }
         ForEach(monthStarts(sorted.map(\.date)), id: \.self) { month in
             let items = sorted.filter { DateMath.calendar.isDate($0.date, equalTo: month, toGranularity: .month) }
@@ -86,7 +86,7 @@ struct BusinessSalesPage: View {
     private func costs(state: BusinessState) -> some View {
         let sorted = state.expenses.sorted { $0.date > $1.date }
         if sorted.isEmpty {
-            Section { Text("Aucune dépense notée pour l'instant.").foregroundStyle(.secondary) }
+            Section { Text(tr("Aucune dépense notée pour l'instant.")).foregroundStyle(.secondary) }
         }
         ForEach(monthStarts(sorted.map(\.date)), id: \.self) { month in
             let items = sorted.filter { DateMath.calendar.isDate($0.date, equalTo: month, toGranularity: .month) }
@@ -118,8 +118,8 @@ struct BusinessSalesPage: View {
     }
 
     private func saleDetail(_ sale: SalesEntry) -> String {
-        var parts = [Fmt.plural(sale.orders, "commande", "commandes")]
-        if sale.newCustomers > 0 { parts.append(Fmt.plural(sale.newCustomers, "nouveau client", "nouveaux clients")) }
+        var parts = [Fmt.plural(sale.orders, tr("commande"), tr("commandes"))]
+        if sale.newCustomers > 0 { parts.append(Fmt.plural(sale.newCustomers, tr("nouveau client"), tr("nouveaux clients"))) }
         if !sale.note.isEmpty { parts.append(sale.note) }
         return parts.joined(separator: " · ")
     }
@@ -155,13 +155,13 @@ struct BusinessResultsPage: View {
         let costs = BusinessMath.costs(state, in: year)
         MiniAppScroll {
             if months.isEmpty {
-                Text("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.")
+                Text(tr("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
             } else {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: months.count >= 6 ? "Six derniers mois" : "Par mois")
+                MiniSectionTitle(title: months.count >= 6 ? tr("Six derniers mois") : tr("Par mois"))
                 Chart {
                     ForEach(bars(months)) { bar in
                         BarMark(x: .value("Mois", bar.month, unit: .month), y: .value("Montant", bar.value))
@@ -171,11 +171,11 @@ struct BusinessResultsPage: View {
                     }
                     ForEach(months) { month in
                         LineMark(x: .value("Mois", month.start, unit: .month), y: .value("Bénéfice", month.profit))
-                            .foregroundStyle(by: .value("Type", "Bénéfice"))
+                            .foregroundStyle(by: .value("Type", tr("Bénéfice")))
                             .symbol(.circle)
                     }
                 }
-                .chartForegroundStyleScale(["Chiffre d'affaires": Color(hex: BusinessFormat.accentHex), "Dépenses": Color(hex: "8A8A8E").opacity(0.5), "Bénéfice": Color(hex: BusinessFormat.goodHex)])
+                .chartForegroundStyleScale([tr("Chiffre d'affaires"): Color(hex: BusinessFormat.accentHex), tr("Dépenses"): Color(hex: "8A8A8E").opacity(0.5), tr("Bénéfice"): Color(hex: BusinessFormat.goodHex)])
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month)) { _ in
                         AxisValueLabel(format: .dateTime.month(.abbreviated), centered: true)
@@ -188,16 +188,16 @@ struct BusinessResultsPage: View {
             }
             }
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Depuis le 1er janvier")
+                MiniSectionTitle(title: tr("Depuis le 1er janvier"))
                 HStack(spacing: 10) {
-                    MiniStat(title: "Chiffre d'affaires", value: TF.money(revenue, currency))
-                    MiniStat(title: "Bénéfice", value: TF.money(revenue - costs, currency),
-                             detail: revenue > 0 ? "marge \(Fmt.percent((revenue - costs) / revenue))" : nil,
+                    MiniStat(title: tr("Chiffre d'affaires"), value: TF.money(revenue, currency))
+                    MiniStat(title: tr("Bénéfice"), value: TF.money(revenue - costs, currency),
+                             detail: revenue > 0 ? tr("marge \(Fmt.percent((revenue - costs) / revenue))") : nil,
                              colorHex: revenue - costs < 0 ? BusinessFormat.badHex : BusinessFormat.goodHex)
                 }
             }
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: "Mois par mois")
+                MiniSectionTitle(title: tr("Mois par mois"))
                 MiniRowsCard {
                     ForEach(Array(months.reversed().enumerated()), id: \.element.id) { index, month in
                         if index > 0 { MiniDivider() }
@@ -207,16 +207,16 @@ struct BusinessResultsPage: View {
                     }
                 }
             }
-            Text("Le bénéfice ici, c'est tes ventes moins les dépenses que tu as notées : un repère, pas un résultat comptable.")
+            Text(tr("Le bénéfice ici, c'est tes ventes moins les dépenses que tu as notées : un repère, pas un résultat comptable."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
-        .navigationTitle("Résultats")
+        .navigationTitle(tr("Résultats"))
         .navigationBarTitleDisplayMode(.large)
     }
 
     private func bars(_ months: [BusinessMath.MonthResult]) -> [Bar] {
-        months.flatMap { [Bar(month: $0.start, series: "Chiffre d'affaires", value: $0.revenue), Bar(month: $0.start, series: "Dépenses", value: $0.costs)] }
+        months.flatMap { [Bar(month: $0.start, series: tr("Chiffre d'affaires"), value: $0.revenue), Bar(month: $0.start, series: tr("Dépenses"), value: $0.costs)] }
     }
 }
 
@@ -234,19 +234,19 @@ struct BusinessRecurringPage: View {
         MiniAppScroll {
             if let recurring = BusinessMath.recurring(state) {
                 HStack(spacing: 10) {
-                    MiniStat(title: "MRR", value: TF.money(recurring.mrr, currency),
-                             detail: recurring.growth.map { "\(Fmt.signedPercent($0 * 100)) sur un mois" }, colorHex: "1E9E75")
-                    MiniStat(title: "ARR", value: TF.money(recurring.arr, currency), detail: "MRR × 12")
-                    MiniStat(title: "Abonnés", value: Fmt.number(recurring.subscribers),
-                             detail: recurring.subscribers > 0 ? "\(TF.money(recurring.mrr / Double(recurring.subscribers), currency, decimals: 2)) chacun" : nil)
+                    MiniStat(title: tr("MRR"), value: TF.money(recurring.mrr, currency),
+                             detail: recurring.growth.map { tr("\(Fmt.signedPercent($0 * 100)) sur un mois") }, colorHex: "1E9E75")
+                    MiniStat(title: tr("ARR"), value: TF.money(recurring.arr, currency), detail: tr("MRR × 12"))
+                    MiniStat(title: tr("Abonnés"), value: Fmt.number(recurring.subscribers),
+                             detail: recurring.subscribers > 0 ? tr("\(TF.money(recurring.mrr / Double(recurring.subscribers), currency, decimals: 2)) chacun") : nil)
                 }
             } else {
-                Text("Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Tessera en suit la croissance.")
+                Text(tr("Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Tessera en suit la croissance."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
             }
-            MiniActionButton(title: "Mettre à jour le MRR", symbol: "arrow.triangle.2.circlepath", colorHex: "1E9E75") { sheet = .recurring }
+            MiniActionButton(title: tr("Mettre à jour le MRR"), symbol: "arrow.triangle.2.circlepath", colorHex: "1E9E75") { sheet = .recurring }
                 .accessibilityIdentifier("recurring-update")
             if snapshots.count >= 2 {
                 Chart(snapshots) { snapshot in
@@ -269,19 +269,19 @@ struct BusinessRecurringPage: View {
                     ForEach(Array(snapshots.reversed().enumerated()), id: \.element.id) { index, snapshot in
                         if index > 0 { MiniDivider() }
                         MiniRow(symbol: "calendar", colorHex: "1E9E75", title: Fmt.monthYear(snapshot.month).capitalizedFirst,
-                                detail: Fmt.plural(snapshot.subscribers, "abonné", "abonnés"), value: TF.money(snapshot.mrr, currency), showsChevron: false)
+                                detail: Fmt.plural(snapshot.subscribers, tr("abonné"), tr("abonnés")), value: TF.money(snapshot.mrr, currency), showsChevron: false)
                             .contextMenu {
                                 Button(role: .destructive) {
                                     model.update(\.business) { $0.subscriptions.removeAll { $0.id == snapshot.id } }
                                 } label: {
-                                    Label("Supprimer", systemImage: "trash")
+                                    Label(tr("Supprimer"), systemImage: "trash")
                                 }
                             }
                     }
                 }
             }
         }
-        .navigationTitle("Revenu récurrent")
+        .navigationTitle(tr("Revenu récurrent"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -296,12 +296,12 @@ struct BusinessMetricsPage: View {
     var body: some View {
         let metrics = model.business.metrics
         MiniAppScroll {
-            MiniActionButton(title: "Nouvel indicateur", symbol: "plus", colorHex: BusinessFormat.accentHex) {
+            MiniActionButton(title: tr("Nouvel indicateur"), symbol: "plus", colorHex: BusinessFormat.accentHex) {
                 sheet = .metric(CustomMetric(name: ""))
             }
             .accessibilityIdentifier("metrics-new")
             if metrics.isEmpty {
-                Text("Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Tessera trace leur évolution.")
+                Text(tr("Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Tessera trace leur évolution."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
@@ -310,7 +310,7 @@ struct BusinessMetricsPage: View {
                 card(metric)
             }
         }
-        .navigationTitle("Suivis à la main")
+        .navigationTitle(tr("Suivis à la main"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
@@ -335,7 +335,7 @@ struct BusinessMetricsPage: View {
                 .frame(height: 120)
             }
             Button { sheet = .metricValue(metric) } label: {
-                Label("Noter une valeur", systemImage: "plus.circle.fill")
+                Label(tr("Noter une valeur"), systemImage: "plus.circle.fill")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color(hex: BusinessFormat.accentHex))
             }

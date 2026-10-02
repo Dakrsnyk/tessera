@@ -11,8 +11,8 @@ struct QuickWidget: Widget {
         StaticConfiguration(kind: Self.kind, provider: QuickProvider()) { entry in
             DesignWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Mon widget")
-        .description("Ton dernier widget enregistré dans Tessera, sans aucun réglage.")
+        .configurationDisplayName(tr("Mon widget"))
+        .description(tr("Ton dernier widget enregistré dans Tessera, sans aucun réglage."))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline])
         .contentMarginsDisabled()
     }

@@ -11,31 +11,31 @@ enum Palette {
 
     /// Accent colors available to everyone. Any other color needs Premium.
     static let freeAccents: [AccentSwatch] = [
-        AccentSwatch(name: "Jade", hex: "2F8F7A"),
-        AccentSwatch(name: "Cobalt", hex: "3366FF"),
-        AccentSwatch(name: "Corail", hex: "FF6B57"),
-        AccentSwatch(name: "Ambre", hex: "F2A33A"),
-        AccentSwatch(name: "Lilas", hex: "8C6CFF"),
-        AccentSwatch(name: "Rose", hex: "F2588F"),
-        AccentSwatch(name: "Olive", hex: "7FA33A"),
-        AccentSwatch(name: "Ardoise", hex: "6B7280"),
+        AccentSwatch(name: tr("Jade"), hex: "2F8F7A"),
+        AccentSwatch(name: tr("Cobalt"), hex: "3366FF"),
+        AccentSwatch(name: tr("Corail"), hex: "FF6B57"),
+        AccentSwatch(name: tr("Ambre"), hex: "F2A33A"),
+        AccentSwatch(name: tr("Lilas"), hex: "8C6CFF"),
+        AccentSwatch(name: tr("Rose"), hex: "F2588F"),
+        AccentSwatch(name: tr("Olive"), hex: "7FA33A"),
+        AccentSwatch(name: tr("Ardoise"), hex: "6B7280"),
     ]
 
     /// Flat background colors offered in the editor (Premium).
     static let backgrounds: [AccentSwatch] = [
-        AccentSwatch(name: "Nuit", hex: "111318"),
-        AccentSwatch(name: "Encre", hex: "1B2340"),
-        AccentSwatch(name: "Forêt", hex: "163A30"),
-        AccentSwatch(name: "Bordeaux", hex: "4A1628"),
-        AccentSwatch(name: "Sable", hex: "E9DFCC"),
-        AccentSwatch(name: "Brume", hex: "DDE3EA"),
-        AccentSwatch(name: "Menthe", hex: "CFEBDD"),
-        AccentSwatch(name: "Pêche", hex: "F9D5C5"),
-        AccentSwatch(name: "Blanc", hex: "FFFFFF"),
-        AccentSwatch(name: "Noir", hex: "000000"),
+        AccentSwatch(name: tr("Nuit"), hex: "111318"),
+        AccentSwatch(name: tr("Encre"), hex: "1B2340"),
+        AccentSwatch(name: tr("Forêt"), hex: "163A30"),
+        AccentSwatch(name: tr("Bordeaux"), hex: "4A1628"),
+        AccentSwatch(name: tr("Sable"), hex: "E9DFCC"),
+        AccentSwatch(name: tr("Brume"), hex: "DDE3EA"),
+        AccentSwatch(name: tr("Menthe"), hex: "CFEBDD"),
+        AccentSwatch(name: tr("Pêche"), hex: "F9D5C5"),
+        AccentSwatch(name: tr("Blanc"), hex: "FFFFFF"),
+        AccentSwatch(name: tr("Noir"), hex: "000000"),
     ]
 
     static func name(for hex: String) -> String {
-        (freeAccents + backgrounds).first { $0.hex == hex }?.name ?? "Personnalisée"
+        (freeAccents + backgrounds).first { $0.hex == hex }?.name ?? tr("Personnalisée")
     }
 }

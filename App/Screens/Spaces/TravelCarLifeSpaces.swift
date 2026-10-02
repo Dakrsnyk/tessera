@@ -58,13 +58,13 @@ struct TravelSpaceSections: View {
             Button {
                 sheets?.open { TripEditor(trip: Trip(destination: "", start: now.addingTimeInterval(30 * 86_400), end: now.addingTimeInterval(37 * 86_400))) }
             } label: {
-                Label("Nouveau voyage", systemImage: "plus")
+                Label(tr("Nouveau voyage"), systemImage: "plus")
             }
         } header: {
-            Text("Voyages")
+            Text(tr("Voyages"))
         }
 
-        Section("Vols") {
+        Section(tr("Vols")) {
             ForEach(state.flights.sorted { $0.departure < $1.departure }) { flight in
                 Button { sheets?.open { FlightEditor(flight: flight) } } label: {
                     ValueRow(title: "\(flight.number) · \(flight.from) → \(flight.to)", value: Fmt.format(flight.departure, template: "dMMMHHmm"), symbol: "airplane")
@@ -80,11 +80,11 @@ struct TravelSpaceSections: View {
                 let start = TravelMath.currentTrip(state, at: now)?.start ?? now.addingTimeInterval(7 * 86_400)
                 sheets?.open { FlightEditor(flight: Flight(number: "", from: "", to: "", departure: start)) }
             } label: {
-                Label("Nouveau vol", systemImage: "plus")
+                Label(tr("Nouveau vol"), systemImage: "plus")
             }
         }
 
-        Section("Hébergement") {
+        Section(tr("Hébergement")) {
             ForEach(state.stays.sorted { $0.checkIn < $1.checkIn }) { stay in
                 Button { sheets?.open { StayEditor(stay: stay) } } label: {
                     ValueRow(title: stay.name, value: "\(Fmt.format(stay.checkIn, template: "dMMM")) – \(Fmt.format(stay.checkOut, template: "dMMM"))", symbol: "bed.double.fill")
@@ -100,11 +100,11 @@ struct TravelSpaceSections: View {
                 let trip = TravelMath.currentTrip(state, at: now)
                 sheets?.open { StayEditor(stay: Stay(name: "", checkIn: trip?.start ?? now, checkOut: trip?.end ?? now.addingTimeInterval(3 * 86_400))) }
             } label: {
-                Label("Nouvel hébergement", systemImage: "plus")
+                Label(tr("Nouvel hébergement"), systemImage: "plus")
             }
         }
 
-        Section("Activités") {
+        Section(tr("Activités")) {
             ForEach(state.activities.sorted { $0.date < $1.date }) { activity in
                 Button { sheets?.open { ActivityEditor(activity: activity) } } label: {
                     ValueRow(title: activity.title, value: Fmt.format(activity.date, template: "dMMMHHmm"), symbol: "mappin.and.ellipse")
@@ -119,16 +119,16 @@ struct TravelSpaceSections: View {
             Button {
                 sheets?.open { ActivityEditor(activity: TripActivity(title: "", date: TravelMath.currentTrip(state, at: now)?.start ?? now)) }
             } label: {
-                Label("Nouvelle activité", systemImage: "plus")
+                Label(tr("Nouvelle activité"), systemImage: "plus")
             }
         }
 
         Section {
-            NumberRow(title: "Montant à convertir", value: Binding(get: { state.sampleAmount }, set: { amount in model.update(\.travel) { $0.sampleAmount = max(1, amount) } }), unit: model.settings.currencyCode)
+            NumberRow(title: tr("Montant à convertir"), value: Binding(get: { state.sampleAmount }, set: { amount in model.update(\.travel) { $0.sampleAmount = max(1, amount) } }), unit: model.settings.currencyCode)
         } header: {
-            Text("Devise")
+            Text(tr("Devise"))
         } footer: {
-            Text("Taux de référence de la Banque centrale européenne, mis à jour chaque jour ouvrable (Frankfurter).")
+            Text(tr("Taux de référence de la Banque centrale européenne, mis à jour chaque jour ouvrable (Frankfurter)."))
         }
     }
 }
@@ -140,13 +140,13 @@ struct TripEditor: View {
     @State private var results: [DestinationResult] = []
 
     var body: some View {
-        SheetForm(title: "Voyage", canSave: !trip.destination.trimmed.isEmpty && trip.end >= trip.start, onSave: save) {
+        SheetForm(title: tr("Voyage"), canSave: !trip.destination.trimmed.isEmpty && trip.end >= trip.start, onSave: save) {
             Section {
-                TextField("Destination", text: $trip.destination)
+                TextField(tr("Destination"), text: $trip.destination)
                 HStack {
-                    TextField("Chercher la ville (météo et fuseau)", text: $query)
+                    TextField(tr("Chercher la ville (météo et fuseau)"), text: $query)
                         .onSubmit { Task { results = await DestinationSearch.search(query) } }
-                    Button("Chercher") { Task { results = await DestinationSearch.search(query) } }
+                    Button(tr("Chercher")) { Task { results = await DestinationSearch.search(query) } }
                         .disabled(query.trimmed.count < 2)
                 }
                 ForEach(results) { result in
@@ -160,18 +160,18 @@ struct TripEditor: View {
                     }
                 }
                 if trip.latitude != nil {
-                    Label("Ville trouvée : météo et heure locale activées", systemImage: "checkmark.circle.fill")
+                    Label(tr("Ville trouvée : météo et heure locale activées"), systemImage: "checkmark.circle.fill")
                         .font(.footnote)
                         .foregroundStyle(.green)
                 }
             }
             Section {
-                DatePicker("Départ", selection: $trip.start).environment(\.locale, Fmt.locale)
-                DatePicker("Retour", selection: $trip.end).environment(\.locale, Fmt.locale)
-                Picker("Devise sur place", selection: $trip.currencyCode) {
+                DatePicker(tr("Départ"), selection: $trip.start).environment(\.locale, Fmt.locale)
+                DatePicker(tr("Retour"), selection: $trip.end).environment(\.locale, Fmt.locale)
+                Picker(tr("Devise sur place"), selection: $trip.currencyCode) {
                     ForEach(FXService.currencies, id: \.self) { Text($0).tag($0) }
                 }
-                Picker("Fuseau horaire", selection: $trip.timeZoneID) {
+                Picker(tr("Fuseau horaire"), selection: $trip.timeZoneID) {
                     ForEach(timeZones, id: \.self) { Text(zoneLabel($0)).tag($0) }
                 }
             }
@@ -202,16 +202,16 @@ struct FlightEditor: View {
     @State var flight: Flight
 
     var body: some View {
-        SheetForm(title: "Vol", canSave: !flight.number.trimmed.isEmpty, onSave: save) {
-            TextField("Numéro de vol (AC 870…)", text: $flight.number).textInputAutocapitalization(.characters)
-            TextField("Départ (YUL)", text: $flight.from).textInputAutocapitalization(.characters)
-            TextField("Arrivée (CDG)", text: $flight.to).textInputAutocapitalization(.characters)
-            DatePicker("Décollage", selection: $flight.departure).environment(\.locale, Fmt.locale)
-            DatePicker("Atterrissage", selection: Binding(get: { flight.arrival ?? flight.departure.addingTimeInterval(7 * 3600) }, set: { flight.arrival = $0 }))
+        SheetForm(title: tr("Vol"), canSave: !flight.number.trimmed.isEmpty, onSave: save) {
+            TextField(tr("Numéro de vol (AC 870…)"), text: $flight.number).textInputAutocapitalization(.characters)
+            TextField(tr("Départ (YUL)"), text: $flight.from).textInputAutocapitalization(.characters)
+            TextField(tr("Arrivée (CDG)"), text: $flight.to).textInputAutocapitalization(.characters)
+            DatePicker(tr("Décollage"), selection: $flight.departure).environment(\.locale, Fmt.locale)
+            DatePicker(tr("Atterrissage"), selection: Binding(get: { flight.arrival ?? flight.departure.addingTimeInterval(7 * 3600) }, set: { flight.arrival = $0 }))
                 .environment(\.locale, Fmt.locale)
-            TextField("Terminal", text: $flight.terminal)
-            TextField("Porte", text: $flight.gate)
-            TextField("Siège", text: $flight.seat)
+            TextField(tr("Terminal"), text: $flight.terminal)
+            TextField(tr("Porte"), text: $flight.gate)
+            TextField(tr("Siège"), text: $flight.seat)
         }
     }
 
@@ -229,12 +229,12 @@ struct StayEditor: View {
     @State var stay: Stay
 
     var body: some View {
-        SheetForm(title: "Hébergement", canSave: !stay.name.trimmed.isEmpty && stay.checkOut > stay.checkIn, onSave: save) {
-            TextField("Nom", text: $stay.name)
-            TextField("Adresse", text: $stay.address)
-            DatePicker("Arrivée", selection: $stay.checkIn).environment(\.locale, Fmt.locale)
-            DatePicker("Départ", selection: $stay.checkOut).environment(\.locale, Fmt.locale)
-            TextField("Numéro de réservation", text: $stay.confirmation)
+        SheetForm(title: tr("Hébergement"), canSave: !stay.name.trimmed.isEmpty && stay.checkOut > stay.checkIn, onSave: save) {
+            TextField(tr("Nom"), text: $stay.name)
+            TextField(tr("Adresse"), text: $stay.address)
+            DatePicker(tr("Arrivée"), selection: $stay.checkIn).environment(\.locale, Fmt.locale)
+            DatePicker(tr("Départ"), selection: $stay.checkOut).environment(\.locale, Fmt.locale)
+            TextField(tr("Numéro de réservation"), text: $stay.confirmation)
         }
     }
 
@@ -252,10 +252,10 @@ struct ActivityEditor: View {
     @State var activity: TripActivity
 
     var body: some View {
-        SheetForm(title: "Activité", canSave: !activity.title.trimmed.isEmpty, onSave: save) {
-            TextField("Activité (visite, restaurant…)", text: $activity.title)
-            DatePicker("Date et heure", selection: $activity.date).environment(\.locale, Fmt.locale)
-            TextField("Lieu", text: $activity.place)
+        SheetForm(title: tr("Activité"), canSave: !activity.title.trimmed.isEmpty, onSave: save) {
+            TextField(tr("Activité (visite, restaurant…)"), text: $activity.title)
+            DatePicker(tr("Date et heure"), selection: $activity.date).environment(\.locale, Fmt.locale)
+            TextField(tr("Lieu"), text: $activity.place)
         }
     }
 
@@ -281,21 +281,21 @@ struct CarSpaceSections: View {
         let state = model.car
         let cost = CarMath.monthlyCost(state, at: now)
         Section {
-            TextField("Nom de la voiture", text: Binding(get: { state.name }, set: { name in model.setCarName(name) }))
+            TextField(tr("Nom de la voiture"), text: Binding(get: { state.name }, set: { name in model.setCarName(name) }))
             if let odometer = CarMath.odometer(state) {
-                ValueRow(title: "Compteur", value: "\(TF.int(odometer)) km", symbol: "gauge.with.dots.needle.33percent")
+                ValueRow(title: tr("Compteur"), value: tr("\(TF.int(odometer)) km"), symbol: "gauge.with.dots.needle.33percent")
             }
             if let consumption = CarMath.consumption(state) {
-                ValueRow(title: "Consommation", value: "\(TF.decimal(consumption, 1)) L/100 km", symbol: "fuelpump")
+                ValueRow(title: tr("Consommation"), value: tr("\(TF.decimal(consumption, 1)) L/100 km"), symbol: "fuelpump")
             }
-            ValueRow(title: "Coût par mois", value: TF.money(cost.total, currency), symbol: "car.fill")
-            Button { sheets?.open { FuelEditor() } } label: { Label("Noter un plein", systemImage: "fuelpump.fill") }
-            Button { sheets?.open { OdometerEditor() } } label: { Label("Noter le kilométrage", systemImage: "speedometer") }
+            ValueRow(title: tr("Coût par mois"), value: TF.money(cost.total, currency), symbol: "car.fill")
+            Button { sheets?.open { FuelEditor() } } label: { Label(tr("Noter un plein"), systemImage: "fuelpump.fill") }
+            Button { sheets?.open { OdometerEditor() } } label: { Label(tr("Noter le kilométrage"), systemImage: "speedometer") }
         } header: {
-            Text("Ma voiture")
+            Text(tr("Ma voiture"))
         }
 
-        Section("Entretien") {
+        Section(tr("Entretien")) {
             ForEach(CarMath.serviceStatus(state, at: now), id: \.item.id) { status in
                 Button { sheets?.open { ServiceEditor(service: status.item) } } label: {
                     VStack(alignment: .leading, spacing: 5) {
@@ -314,24 +314,24 @@ struct CarSpaceSections: View {
                         let km = CarMath.odometer(state) ?? 0
                         model.update(\.car) { $0.markServiceDone(status.item.id, km: km) }
                     } label: {
-                        Label("Fait", systemImage: "checkmark")
+                        Label(tr("Fait"), systemImage: "checkmark")
                     }
                     .tint(.green)
                     Button(role: .destructive) {
                         model.update(\.car) { $0.services.removeAll { $0.id == status.item.id } }
                     } label: {
-                        Label("Supprimer", systemImage: "trash")
+                        Label(tr("Supprimer"), systemImage: "trash")
                     }
                 }
             }
             Button {
                 sheets?.open { ServiceEditor(service: ServiceItem(name: "", intervalKm: 8_000, intervalMonths: 6, lastKm: CarMath.odometer(state), lastDate: now)) }
             } label: {
-                Label("Nouvel entretien", systemImage: "plus")
+                Label(tr("Nouvel entretien"), systemImage: "plus")
             }
         }
 
-        Section("Échéances") {
+        Section(tr("Échéances")) {
             ForEach(state.deadlines.sorted { $0.date < $1.date }) { deadline in
                 Button { sheets?.open { CarDeadlineEditor(deadline: deadline) } } label: {
                     ValueRow(title: deadline.title, value: Fmt.format(deadline.date, template: "dMMMyyyy"), symbol: deadline.symbol)
@@ -346,30 +346,30 @@ struct CarSpaceSections: View {
             Button {
                 sheets?.open { CarDeadlineEditor(deadline: CarDeadline(title: "", date: now.addingTimeInterval(60 * 86_400))) }
             } label: {
-                Label("Nouvelle échéance", systemImage: "plus")
+                Label(tr("Nouvelle échéance"), systemImage: "plus")
             }
         }
 
         Section {
-            NumberRow(title: "Assurance", value: carBinding(\.insuranceMonthly), unit: "/ mois")
-            NumberRow(title: "Prêt ou location", value: carBinding(\.loanMonthly), unit: "/ mois")
-            NumberRow(title: "Stationnement", value: carBinding(\.parkingMonthly), unit: "/ mois")
-            NumberRow(title: "Autres frais", value: carBinding(\.otherMonthly), unit: "/ mois")
-            NumberRow(title: "Entretien prévu", value: carBinding(\.maintenanceYearly), unit: "/ an")
+            NumberRow(title: tr("Assurance"), value: carBinding(\.insuranceMonthly), unit: tr("/ mois"))
+            NumberRow(title: tr("Prêt ou location"), value: carBinding(\.loanMonthly), unit: tr("/ mois"))
+            NumberRow(title: tr("Stationnement"), value: carBinding(\.parkingMonthly), unit: tr("/ mois"))
+            NumberRow(title: tr("Autres frais"), value: carBinding(\.otherMonthly), unit: tr("/ mois"))
+            NumberRow(title: tr("Entretien prévu"), value: carBinding(\.maintenanceYearly), unit: tr("/ an"))
         } header: {
-            Text("Coûts fixes")
+            Text(tr("Coûts fixes"))
         } footer: {
-            Text("Le coût mensuel ajoute la moyenne de tes pleins des trois derniers mois.")
+            Text(tr("Le coût mensuel ajoute la moyenne de tes pleins des trois derniers mois."))
         }
 
-        Section("Derniers pleins") {
+        Section(tr("Derniers pleins")) {
             ForEach(state.fills.sorted { $0.date > $1.date }.prefix(8)) { fill in
                 ValueRow(title: Fmt.shortDay(fill.date), value: "\(TF.decimal(fill.liters, 1)) L · \(TF.money(fill.total, currency, decimals: 2))")
                     .swipeActions {
                         Button(role: .destructive) {
                             model.update(\.car) { $0.fills.removeAll { $0.id == fill.id } }
                         } label: {
-                            Label("Supprimer", systemImage: "trash")
+                            Label(tr("Supprimer"), systemImage: "trash")
                         }
                     }
             }
@@ -377,7 +377,7 @@ struct CarSpaceSections: View {
     }
 
     private static func remaining(_ status: CarMath.ServiceStatus) -> String {
-        if let km = status.kmLeft { return "\(TF.int(km)) km" }
+        if let km = status.kmLeft { return tr("\(TF.int(km)) km") }
         if let days = status.daysLeft { return "\(days) j" }
         return "—"
     }
@@ -403,19 +403,19 @@ struct FuelEditor: View {
     }
 
     var body: some View {
-        SheetForm(title: isNew ? "Plein" : "Modifier le plein", canSave: fill.liters > 0 && fill.total > 0 && fill.odometer > 0, onSave: save) {
+        SheetForm(title: isNew ? tr("Plein") : tr("Modifier le plein"), canSave: fill.liters > 0 && fill.total > 0 && fill.odometer > 0, onSave: save) {
             Section {
-                NumberRow(title: "Litres", value: $fill.liters, unit: "L")
-                NumberRow(title: "Total payé", value: $fill.total, unit: model.settings.currencyCode)
-                NumberRow(title: "Compteur", value: $fill.odometer, unit: "km")
-                Toggle("Plein complet", isOn: $fill.isFull)
-                DatePicker("Date", selection: $fill.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+                NumberRow(title: tr("Litres"), value: $fill.liters, unit: "L")
+                NumberRow(title: tr("Total payé"), value: $fill.total, unit: model.settings.currencyCode)
+                NumberRow(title: tr("Compteur"), value: $fill.odometer, unit: tr("km"))
+                Toggle(tr("Plein complet"), isOn: $fill.isFull)
+                DatePicker(tr("Date"), selection: $fill.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
             } footer: {
-                Text("Un plein complet permet de calculer la consommation exacte et l'autonomie.")
+                Text(tr("Un plein complet permet de calculer la consommation exacte et l'autonomie."))
             }
             if !isNew {
                 Section {
-                    Button("Supprimer le plein", role: .destructive) {
+                    Button(tr("Supprimer le plein"), role: .destructive) {
                         let id = fill.id
                         model.update(\.car) { $0.fills.removeAll { $0.id == id } }
                         dismiss()
@@ -440,8 +440,8 @@ struct OdometerEditor: View {
     @State private var km: Double = 0
 
     var body: some View {
-        SheetForm(title: "Kilométrage", canSave: km > 0, onSave: save) {
-            NumberRow(title: "Compteur", value: $km, unit: "km")
+        SheetForm(title: tr("Kilométrage"), canSave: km > 0, onSave: save) {
+            NumberRow(title: tr("Compteur"), value: $km, unit: tr("km"))
         }
         .onAppear { km = CarMath.odometer(model.car) ?? 0 }
     }
@@ -457,14 +457,14 @@ struct ServiceEditor: View {
     @State var service: ServiceItem
 
     var body: some View {
-        SheetForm(title: "Entretien", canSave: !service.name.trimmed.isEmpty, onSave: save) {
-            TextField("Nom (vidange, pneus…)", text: $service.name)
-            NumberRow(title: "Tous les", value: Binding(get: { service.intervalKm ?? 0 }, set: { service.intervalKm = $0 > 0 ? $0 : nil }), unit: "km")
-            IntRow(title: "ou tous les", value: Binding(get: { service.intervalMonths ?? 0 }, set: { service.intervalMonths = $0 > 0 ? $0 : nil }), unit: "mois")
-            NumberRow(title: "Dernier au compteur", value: Binding(get: { service.lastKm ?? 0 }, set: { service.lastKm = $0 > 0 ? $0 : nil }), unit: "km")
-            DatePicker("Dernière fois", selection: Binding(get: { service.lastDate ?? Date() }, set: { service.lastDate = $0 }), displayedComponents: .date)
+        SheetForm(title: tr("Entretien"), canSave: !service.name.trimmed.isEmpty, onSave: save) {
+            TextField(tr("Nom (vidange, pneus…)"), text: $service.name)
+            NumberRow(title: tr("Tous les"), value: Binding(get: { service.intervalKm ?? 0 }, set: { service.intervalKm = $0 > 0 ? $0 : nil }), unit: tr("km"))
+            IntRow(title: tr("ou tous les"), value: Binding(get: { service.intervalMonths ?? 0 }, set: { service.intervalMonths = $0 > 0 ? $0 : nil }), unit: tr("mois"))
+            NumberRow(title: tr("Dernier au compteur"), value: Binding(get: { service.lastKm ?? 0 }, set: { service.lastKm = $0 > 0 ? $0 : nil }), unit: tr("km"))
+            DatePicker(tr("Dernière fois"), selection: Binding(get: { service.lastDate ?? Date() }, set: { service.lastDate = $0 }), displayedComponents: .date)
                 .environment(\.locale, Fmt.locale)
-            NumberRow(title: "Coût habituel", value: $service.cost, unit: model.settings.currencyCode)
+            NumberRow(title: tr("Coût habituel"), value: $service.cost, unit: model.settings.currencyCode)
         }
     }
 
@@ -482,10 +482,10 @@ struct CarDeadlineEditor: View {
     @State var deadline: CarDeadline
 
     var body: some View {
-        SheetForm(title: "Échéance", canSave: !deadline.title.trimmed.isEmpty, onSave: save) {
-            TextField("Titre (assurance, immatriculation…)", text: $deadline.title)
-            DatePicker("Date", selection: $deadline.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
-            Picker("Icône", selection: $deadline.symbol) {
+        SheetForm(title: tr("Échéance"), canSave: !deadline.title.trimmed.isEmpty, onSave: save) {
+            TextField(tr("Titre (assurance, immatriculation…)"), text: $deadline.title)
+            DatePicker(tr("Date"), selection: $deadline.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+            Picker(tr("Icône"), selection: $deadline.symbol) {
                 ForEach(["calendar", "shield.fill", "doc.text.fill", "snowflake", "wrench.and.screwdriver", "creditcard"], id: \.self) { Image(systemName: $0).tag($0) }
             }
         }
@@ -509,25 +509,25 @@ struct LifeSpaceSections: View {
         let now = Date()
         let life = model.life
         Section {
-            Toggle("Afficher mon anniversaire", isOn: Binding(
+            Toggle(tr("Afficher mon anniversaire"), isOn: Binding(
                 get: { life.birthday != nil },
                 set: { on in model.update(\.life) { $0.birthday = on ? ($0.birthday ?? Holidays.make(1995, 1, 1)) : nil } }
             ))
             if let birthday = life.birthday {
-                DatePicker("Date de naissance", selection: Binding(get: { birthday }, set: { date in model.update(\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)
+                DatePicker(tr("Date de naissance"), selection: Binding(get: { birthday }, set: { date in model.update(\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)
-                ValueRow(title: "Âge", value: "\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans", symbol: "person.crop.circle")
+                ValueRow(title: tr("Âge"), value: tr("\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans"), symbol: "person.crop.circle")
                 let next = LifeMath.nextBirthday(birthday: birthday, after: now)
-                ValueRow(title: "Prochain anniversaire", value: "dans \(DateMath.daysBetween(now, next.date)) j", symbol: "gift")
+                ValueRow(title: tr("Prochain anniversaire"), value: tr("dans \(DateMath.daysBetween(now, next.date)) j"), symbol: "gift")
             }
         } header: {
-            Text("Anniversaire")
+            Text(tr("Anniversaire"))
         } footer: {
-            Text("Ta date de naissance reste sur ton iPhone.")
+            Text(tr("Ta date de naissance reste sur ton iPhone."))
         }
 
-        Section("Jours fériés") {
-            Picker("Région", selection: Binding(get: { life.holidayRegion }, set: { region in model.update(\.life) { $0.holidayRegion = region } })) {
+        Section(tr("Jours fériés")) {
+            Picker(tr("Région"), selection: Binding(get: { life.holidayRegion }, set: { region in model.update(\.life) { $0.holidayRegion = region } })) {
                 ForEach(HolidayRegion.allCases) { Text($0.title).tag($0) }
             }
             ForEach(Holidays.upcoming(life.holidayRegion, from: now, count: 6), id: \.self) { holiday in
@@ -535,9 +535,9 @@ struct LifeSpaceSections: View {
             }
         }
 
-        Section("Lune") {
+        Section(tr("Lune")) {
             ValueRow(title: MoonPhase.name(at: now), value: Fmt.percent(MoonPhase.illumination(at: now)), symbol: MoonPhase.symbol(at: now))
-            ValueRow(title: "Pleine lune", value: Fmt.shortDay(MoonPhase.next(0.5, after: now)), symbol: "moonphase.full.moon")
+            ValueRow(title: tr("Pleine lune"), value: Fmt.shortDay(MoonPhase.next(0.5, after: now)), symbol: "moonphase.full.moon")
         }
     }
 }

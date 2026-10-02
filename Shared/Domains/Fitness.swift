@@ -201,7 +201,7 @@ struct FitnessState: Codable, Hashable {
         if let routineID, let index = routines.firstIndex(where: { $0.id == routineID }) {
             routines[index].exercises.append(exercise)
         } else {
-            let name = newRoutineName.trimmed.isEmpty ? "Nouvelle séance" : newRoutineName.trimmed
+            let name = newRoutineName.trimmed.isEmpty ? tr("Nouvelle séance") : newRoutineName.trimmed
             routines.append(Routine(name: name, exercises: [exercise]))
         }
         if let id = exercise.exerciseID { noteUsed(id) }

@@ -8,7 +8,7 @@ struct MagazineHeader: View {
     var eyebrow: String?
     let title: String
     var subtitle: String?
-    var actionTitle = "Tout voir"
+    var actionTitle = tr("Tout voir")
     var action: (() -> Void)?
 
     var body: some View {
@@ -64,7 +64,7 @@ struct WeeklySetupHero: View {
         Button(action: onOpen) {
             HStack(alignment: .bottom, spacing: 14) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Écran d'accueil\nde la semaine".uppercased())
+                    Text(tr("Écran d'accueil\nde la semaine").uppercased())
                         .font(.caption.weight(.bold))
                         .tracking(1.1)
                         .foregroundStyle(ink.opacity(0.85))
@@ -78,12 +78,12 @@ struct WeeklySetupHero: View {
                         .foregroundStyle(ink.opacity(0.88))
                         .fixedSize(horizontal: false, vertical: true)
                     Spacer(minLength: 12)
-                    Text("\(Fmt.plural(setup.widgets.count, "widget", "widgets")) · fond d'écran assorti")
+                    Text(tr("\(Fmt.plural(setup.widgets.count, tr("widget"), tr("widgets"))) · fond d'écran )assorti")
                         .font(.caption.weight(.medium))
                         .foregroundStyle(ink.opacity(0.85))
                         .fixedSize(horizontal: false, vertical: true)
                     HStack(spacing: 8) {
-                        Text("Installer")
+                        Text(tr("Installer"))
                             .font(.subheadline.weight(.bold))
                             .foregroundStyle(setup.wallpaper.isLight ? Color.white : Color.black)
                             .padding(.horizontal, 18)
@@ -110,8 +110,8 @@ struct WeeklySetupHero: View {
         .buttonStyle(.plain)
         .padding(.horizontal, 20)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("Écran d'accueil de la semaine : \(setup.name). \(setup.tagline)"))
-        .accessibilityHint(Text("Ouvre l'écran pour l'installer"))
+        .accessibilityLabel(Text(tr("Écran d'accueil de la semaine : \(setup.name). \(setup.tagline)")))
+        .accessibilityHint(Text(tr("Ouvre l'écran pour l'installer")))
     }
 
     /// The setup's wallpaper, scaled to cover the card, its middle band showing.
@@ -160,7 +160,7 @@ struct CollectionTile: View {
                     .foregroundStyle(.white)
                     .lineLimit(2)
                     .minimumScaleFactor(0.85)
-                Text(Fmt.plural(collection.items.count, "widget", "widgets"))
+                Text(Fmt.plural(collection.items.count, tr("widget"), tr("widgets")))
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.85))
             }
@@ -170,7 +170,7 @@ struct CollectionTile: View {
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .contentShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Collection \(collection.title), \(collection.items.count) widgets"))
+        .accessibilityLabel(Text(tr("Collection \(collection.title), \(collection.items.count) widgets")))
         .accessibilityAddTraits(.isButton)
     }
 }
@@ -210,7 +210,7 @@ struct PackCard: View {
                         .font(.subheadline.weight(.semibold))
                         .lineLimit(1)
                     // In a shelf, the style only (every pack holds six widgets, as the heading says).
-                    Text(width == nil ? "\(pack.kinds.count) widgets · \(ThemeCatalog.theme(pack.themeID).name)" : "Style \(ThemeCatalog.theme(pack.themeID).name)")
+                    Text(width == nil ? tr("\(pack.kinds.count) widgets · \(ThemeCatalog.theme(pack.themeID).name)") : tr("Style \(ThemeCatalog.theme(pack.themeID).name)"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -232,7 +232,7 @@ struct PackCard: View {
         .frame(maxWidth: width == nil ? .infinity : nil, alignment: .leading)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("Pack \(pack.name), \(pack.kinds.count) widgets. \(pack.tagline)"))
+        .accessibilityLabel(Text(tr("Pack \(pack.name), \(pack.kinds.count) widgets. \(pack.tagline)")))
     }
 }
 
@@ -310,7 +310,7 @@ private struct ShowcaseTile: View {
         }
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityHint(Text("Ouvre l'éditeur"))
+        .accessibilityHint(Text(tr("Ouvre l'éditeur")))
     }
 }
 
@@ -347,7 +347,7 @@ struct StoreCollectionView: View {
                 .frame(width: 38, height: 38)
                 .background(.white.opacity(0.2), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             Spacer(minLength: 18)
-            Text("Collection".uppercased())
+            Text(tr("Collection").uppercased())
                 .font(.caption.weight(.bold))
                 .tracking(1.1)
                 .foregroundStyle(.white.opacity(0.8))
@@ -357,7 +357,7 @@ struct StoreCollectionView: View {
             Text(collection.subtitle)
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.9))
-            Text(Fmt.plural(collection.items.count, "widget", "widgets"))
+            Text(Fmt.plural(collection.items.count, tr("widget"), tr("widgets")))
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.white.opacity(0.85))
                 .padding(.top, 2)
@@ -384,7 +384,7 @@ struct StoreCollectionsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                Text("Des sélections de widgets autour d'un thème, d'un format ou d'un style.")
+                Text(tr("Des sélections de widgets autour d'un thème, d'un format ou d'un style."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
@@ -403,7 +403,7 @@ struct StoreCollectionsView: View {
         }
         .background(.screenFill)
         .screenshotScroll()
-        .navigationTitle("Collections")
+        .navigationTitle(tr("Collections"))
         .navigationBarTitleDisplayMode(.large)
     }
 }
@@ -427,7 +427,7 @@ struct StorePacksView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                Text("Six widgets assortis, dans le même style, ajoutés d'une touche à Mes widgets.")
+                Text(tr("Six widgets assortis, dans le même style, ajoutés d'une touche à Mes widgets."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 HStack(spacing: 8) {
@@ -451,7 +451,7 @@ struct StorePacksView: View {
         }
         .background(.screenFill)
         .screenshotScroll()
-        .navigationTitle("Packs")
+        .navigationTitle(tr("Packs"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $openedPack) { pack in
             PackSheet(pack: pack)
@@ -516,7 +516,7 @@ struct PackFeature: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Pack de la semaine".uppercased())
+                    Text(tr("Pack de la semaine").uppercased())
                         .font(.caption.weight(.bold))
                         .tracking(1.1)
                         .foregroundStyle(.white.opacity(0.8))
@@ -544,14 +544,14 @@ struct PackFeature: View {
                 }
             }
             HStack(spacing: 10) {
-                Text("\(pack.kinds.count) widgets · style \(ThemeCatalog.theme(pack.themeID).name)")
+                Text(tr("\(pack.kinds.count) widgets · style \(ThemeCatalog.theme(pack.themeID).name)"))
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.white.opacity(0.9))
                 Spacer(minLength: 0)
                 if pack.isPremium && !isPremiumUser {
                     PremiumBadge(compact: true)
                 }
-                Text("Ajouter")
+                Text(tr("Ajouter"))
                     .font(.subheadline.weight(.bold))
                     .foregroundStyle(accent)
                     .padding(.horizontal, 18)
@@ -570,7 +570,7 @@ struct PackFeature: View {
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .contentShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Pack de la semaine : \(pack.name), \(pack.kinds.count) widgets. \(pack.tagline)"))
+        .accessibilityLabel(Text(tr("Pack de la semaine : \(pack.name), \(pack.kinds.count) widgets. \(pack.tagline)")))
         .accessibilityAddTraits(.isButton)
     }
 }
@@ -622,7 +622,7 @@ struct EssentialsList: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityElement(children: .combine)
-                .accessibilityHint(Text("Ouvre l'éditeur"))
+                .accessibilityHint(Text(tr("Ouvre l'éditeur")))
                 if pair.offset < shown.count - 1 {
                     Divider().padding(.leading, 34)
                 }
@@ -657,7 +657,7 @@ struct CategoryIndex: View {
                             .font(.body.weight(.medium))
                             .foregroundStyle(.primary)
                         Spacer(minLength: 6)
-                        Text(Fmt.plural(count, "widget", "widgets"))
+                        Text(Fmt.plural(count, tr("widget"), tr("widgets")))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                         Image(systemName: "chevron.right")

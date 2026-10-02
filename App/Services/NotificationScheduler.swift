@@ -32,7 +32,7 @@ enum NotificationScheduler {
         guard let hour = habit.reminderHour, let minute = habit.reminderMinute else { return }
         let content = UNMutableNotificationContent()
         content.title = habit.name
-        content.body = "C'est le moment de valider ton habitude du jour."
+        content.body = tr("C'est le moment de valider ton habitude du jour.")
         content.sound = .default
         var components = DateComponents()
         components.hour = hour
@@ -55,8 +55,8 @@ enum NotificationScheduler {
         guard enabled else { return }
         for hour in hydrationHours {
             let content = UNMutableNotificationContent()
-            content.title = "Un verre d'eau ?"
-            content.body = "Ajoute-le d'une touche depuis ton widget."
+            content.title = tr("Un verre d'eau ?")
+            content.body = tr("Ajoute-le d'une touche depuis ton widget.")
             content.sound = .default
             var components = DateComponents()
             components.hour = hour
@@ -77,8 +77,8 @@ enum NotificationScheduler {
         components.hour = 9
         guard let fireDate = DateMath.calendar.date(from: components), fireDate > Date() else { return }
         let content = UNMutableNotificationContent()
-        content.title = design.options.countdownTitle.trimmed.isEmpty ? "C'est le grand jour" : design.options.countdownTitle
-        content.body = "Le jour J est arrivé."
+        content.title = design.options.countdownTitle.trimmed.isEmpty ? tr("C'est le grand jour") : design.options.countdownTitle
+        content.body = tr("Le jour J est arrivé.")
         content.sound = .default
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         center.add(UNNotificationRequest(identifier: countdownID(design.id), content: content, trigger: trigger))

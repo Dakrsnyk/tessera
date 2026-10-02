@@ -70,9 +70,9 @@ struct MyWidgetsView: View {
                     if model.designs.isEmpty {
                         EmptyStateView(
                             symbol: "rectangle.stack.badge.plus",
-                            title: "Aucun widget pour l'instant",
-                            message: "Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.",
-                            actionTitle: "Ouvrir le Store"
+                            title: tr("Aucun widget pour l'instant"),
+                            message: tr("Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici."),
+                            actionTitle: tr("Ouvrir le Store")
                         ) { router.openExplore() }
                         .padding(20)
                         .tutorialTarget(.myWidgets)
@@ -94,12 +94,12 @@ struct MyWidgetsView: View {
             }
             }
             .background(.screenFill)
-            .navigationTitle(isSelecting ? selectionTitle : "Mes widgets")
+            .navigationTitle(isSelecting ? selectionTitle : tr("Mes widgets"))
             .navigationBarTitleDisplayMode(isSelecting ? .inline : .automatic)
             .toolbar {
                 if isSelecting {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button(allShownSelected ? "Tout désélectionner" : "Tout sélectionner") {
+                        Button(allShownSelected ? tr("Tout désélectionner") : tr("Tout sélectionner")) {
                             Haptics.tap()
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
                                 if allShownSelected {
@@ -113,12 +113,12 @@ struct MyWidgetsView: View {
                         }
                     }
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("OK") { endSelection() }
+                        Button(tr("OK")) { endSelection() }
                     }
                 } else {
                     if !model.designs.isEmpty {
                         ToolbarItem(placement: .topBarLeading) {
-                            Button("Sélectionner") {
+                            Button(tr("Sélectionner")) {
                                 withAnimation(.easeInOut(duration: 0.2)) { isSelecting = true }
                             }
                         }
@@ -130,13 +130,13 @@ struct MyWidgetsView: View {
                         } label: {
                             Image(systemName: "questionmark.circle")
                         }
-                        .accessibilityLabel(Text("Comment ajouter un widget"))
+                        .accessibilityLabel(Text(tr("Comment ajouter un widget")))
                         Button {
                             router.openExplore()
                         } label: {
                             Image(systemName: "plus")
                         }
-                        .accessibilityLabel(Text("Créer un widget"))
+                        .accessibilityLabel(Text(tr("Créer un widget")))
                     }
                 }
             }
@@ -145,11 +145,11 @@ struct MyWidgetsView: View {
                 if isSelecting { selectionBar }
             }
             .confirmationDialog(
-                selectedIDs.count == 1 ? "Supprimer ce widget ?" : "Supprimer ces \(selectedIDs.count) widgets ?",
+                selectedIDs.count == 1 ? tr("Supprimer ce widget ?") : tr("Supprimer ces \(selectedIDs.count) widgets ?"),
                 isPresented: $confirmsBatchDeletion,
                 titleVisibility: .visible
             ) {
-                Button(selectedIDs.count == 1 ? "Supprimer le widget" : "Supprimer les \(selectedIDs.count) widgets", role: .destructive) {
+                Button(selectedIDs.count == 1 ? tr("Supprimer le widget") : tr("Supprimer les \(selectedIDs.count) widgets"), role: .destructive) {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         model.delete(selectedDesigns)
                     }
@@ -157,7 +157,7 @@ struct MyWidgetsView: View {
                     endSelection()
                 }
             } message: {
-                Text("Les widgets qui les affichent sur ton écran d'accueil reviendront au modèle par défaut.")
+                Text(tr("Les widgets qui les affichent sur ton écran d'accueil reviendront au modèle par défaut."))
             }
             .sheet(isPresented: $showsFusion) {
                 if let merged = Fusion.merge(orderedSelection) {
@@ -212,16 +212,16 @@ struct MyWidgetsView: View {
                 }
             }
             .confirmationDialog(
-                "Supprimer « \(pendingDeletion?.name ?? "") » ?",
+                tr("Supprimer « \(pendingDeletion?.name ?? "") » ?"),
                 isPresented: Binding(get: { pendingDeletion != nil }, set: { if !$0 { pendingDeletion = nil } }),
                 titleVisibility: .visible
             ) {
-                Button("Supprimer", role: .destructive) {
+                Button(tr("Supprimer"), role: .destructive) {
                     if let design = pendingDeletion { model.delete(design) }
                     pendingDeletion = nil
                 }
             } message: {
-                Text("Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut.")
+                Text(tr("Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut."))
             }
         }
     }
@@ -230,7 +230,7 @@ struct MyWidgetsView: View {
 
     private var carousel: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("\(Fmt.plural(designs.count, "widget", "widgets")) · glisse pour les faire tourner")
+            Text(tr("\(Fmt.plural(designs.count, tr("widget"), tr("widgets"))) · glisse pour les faire )tourner")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .contentTransition(.numericText())
@@ -260,7 +260,7 @@ struct MyWidgetsView: View {
                     .padding(.horizontal, 12)
             }
             VStack(alignment: .leading, spacing: 8) {
-                Text("Trouver un widget")
+                Text(tr("Trouver un widget"))
                     .font(.headline)
                     .padding(.horizontal, 20)
                 CategoryStrip(designs: model.recentDesigns, filter: $filter)
@@ -281,29 +281,29 @@ struct MyWidgetsView: View {
     private func currentDetails(_ design: WidgetDesign) -> String {
         var parts = [design.isCombo ? design.kindTitle : design.kind.category.title, design.displayFormat.title]
         if let index = designs.firstIndex(where: { $0.id == design.id }) {
-            parts.append("\(index + 1) sur \(designs.count)")
+            parts.append(tr("\(index + 1) sur \(designs.count)"))
         }
         return parts.joined(separator: " · ")
     }
 
     private func actions(for design: WidgetDesign) -> some View {
         HStack(alignment: .top, spacing: 4) {
-            CarouselAction(title: "Modifier", symbol: "slider.horizontal.3", isProminent: true, identifier: "carousel-edit") {
+            CarouselAction(title: tr("Modifier"), symbol: "slider.horizontal.3", isProminent: true, identifier: "carousel-edit") {
                 router.openEditor(design, isNew: false)
             }
-            CarouselAction(title: "Dupliquer", symbol: "plus.square.on.square", identifier: "carousel-duplicate") {
+            CarouselAction(title: tr("Dupliquer"), symbol: "plus.square.on.square", identifier: "carousel-duplicate") {
                 duplicate(design)
             }
-            CarouselAction(title: "Favori", symbol: design.isFavorite ? "heart.fill" : "heart", identifier: "carousel-favorite") {
+            CarouselAction(title: tr("Favori"), symbol: design.isFavorite ? "heart.fill" : "heart", identifier: "carousel-favorite") {
                 Haptics.tap()
                 model.toggleFavorite(design)
             }
-            .accessibilityLabel(Text(design.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"))
-            CarouselAction(title: "Ajouter à l'écran", symbol: "apps.iphone.badge.plus", identifier: "carousel-place") {
+            .accessibilityLabel(Text(design.isFavorite ? tr("Retirer des favoris") : tr("Ajouter aux favoris")))
+            CarouselAction(title: tr("Ajouter à l'écran"), symbol: "apps.iphone.badge.plus", identifier: "carousel-place") {
                 router.lastSavedName = design.name
                 router.isAddGuidePresented = true
             }
-            .accessibilityLabel(Text("Ajouter à l'écran d'accueil"))
+            .accessibilityLabel(Text(tr("Ajouter à l'écran d'accueil")))
         }
     }
 
@@ -353,11 +353,11 @@ struct MyWidgetsView: View {
         let limit = AppModel.freeDesignLimit
         return HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
-                Text("\(min(used, limit)) sur \(limit) widgets gratuits")
+                Text(tr("\(min(used, limit)) sur \(limit) widgets gratuits"))
                     .font(.subheadline.weight(.semibold))
                 BarView(progress: Double(used) / Double(limit), color: .accentColor, track: Color.secondary.opacity(0.2), height: 5)
             }
-            Button("Illimité") { router.isPaywallPresented = true }
+            Button(tr("Illimité")) { router.isPaywallPresented = true }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
         }
@@ -365,7 +365,7 @@ struct MyWidgetsView: View {
     }
 
     private var selectionTitle: String {
-        selectedIDs.isEmpty ? "Sélection" : Fmt.plural(selectedIDs.count, "sélectionné", "sélectionnés")
+        selectedIDs.isEmpty ? tr("Sélection") : Fmt.plural(selectedIDs.count, tr("sélectionné"), tr("sélectionnés"))
     }
 
     private var selectionBar: some View {
@@ -373,13 +373,13 @@ struct MyWidgetsView: View {
             Divider()
             VStack(spacing: 10) {
                 HStack {
-                    Text(selectedIDs.isEmpty ? "Touche les widgets à supprimer ou à fusionner" : Fmt.plural(selectedIDs.count, "sélectionné", "sélectionnés"))
+                    Text(selectedIDs.isEmpty ? tr("Touche les widgets à supprimer ou à fusionner") : Fmt.plural(selectedIDs.count, tr("sélectionné"), tr("sélectionnés")))
                         .font(.subheadline.weight(.medium))
                         .foregroundStyle(.secondary)
                         .contentTransition(.numericText())
                     Spacer(minLength: 8)
                     if let fusion {
-                        Label("Fusion en widget \(fusion.format.title.lowercased())", systemImage: "arrow.triangle.merge")
+                        Label(tr("Fusion en widget \(fusion.format.title.lowercased())"), systemImage: "arrow.triangle.merge")
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(Color.accentColor)
                             .transition(.opacity)
@@ -390,7 +390,7 @@ struct MyWidgetsView: View {
                         Button {
                             showsFusion = true
                         } label: {
-                            Label("Fusionner", systemImage: "arrow.triangle.merge")
+                            Label(tr("Fusionner"), systemImage: "arrow.triangle.merge")
                                 .font(.headline)
                                 .foregroundStyle(.onAccent)
                                 .frame(maxWidth: .infinity, minHeight: 44)
@@ -401,7 +401,7 @@ struct MyWidgetsView: View {
                     Button(role: .destructive) {
                         confirmsBatchDeletion = true
                     } label: {
-                        Label("Supprimer", systemImage: "trash")
+                        Label(tr("Supprimer"), systemImage: "trash")
                             .font(.headline)
                             .foregroundStyle(.white)
                             .frame(maxWidth: fusion == nil ? nil : .infinity, minHeight: 44)
@@ -521,28 +521,28 @@ struct MyWidgetsView: View {
         Button {
             router.openEditor(design, isNew: false)
         } label: {
-            Label("Modifier", systemImage: "slider.horizontal.3")
+            Label(tr("Modifier"), systemImage: "slider.horizontal.3")
         }
         Button {
             duplicate(design)
         } label: {
-            Label("Dupliquer", systemImage: "plus.square.on.square")
+            Label(tr("Dupliquer"), systemImage: "plus.square.on.square")
         }
         Button {
             makeVariant(of: design)
         } label: {
-            Label("Créer une variante", systemImage: "wand.and.stars")
+            Label(tr("Créer une variante"), systemImage: "wand.and.stars")
         }
         Button {
             model.toggleFavorite(design)
         } label: {
-            Label(design.isFavorite ? "Retirer des favoris" : "Favori", systemImage: design.isFavorite ? "heart.slash" : "heart")
+            Label(design.isFavorite ? tr("Retirer des favoris") : tr("Favori"), systemImage: design.isFavorite ? "heart.slash" : "heart")
         }
         Divider()
         Button(role: .destructive) {
             pendingDeletion = design
         } label: {
-            Label("Supprimer", systemImage: "trash")
+            Label(tr("Supprimer"), systemImage: "trash")
         }
     }
 }

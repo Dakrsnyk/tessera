@@ -13,7 +13,7 @@ struct WeatherLocationView: View {
     var body: some View {
         List {
             if let current = model.settings.weatherLocation {
-                Section("Ville actuelle") {
+                Section(tr("Ville actuelle")) {
                     HStack {
                         Label(current.name, systemImage: "mappin.circle.fill")
                         Spacer()
@@ -30,14 +30,14 @@ struct WeatherLocationView: View {
                     locate()
                 } label: {
                     HStack {
-                        Label("Utiliser ma position", systemImage: "location.fill")
+                        Label(tr("Utiliser ma position"), systemImage: "location.fill")
                         Spacer()
                         if isLocating { ProgressView() }
                     }
                 }
                 .disabled(isLocating)
             } footer: {
-                Text("Ta position sert uniquement à trouver la météo. Elle n'est pas enregistrée ailleurs que sur ton iPhone.")
+                Text(tr("Ta position sert uniquement à trouver la météo. Elle n'est pas enregistrée ailleurs que sur ton iPhone."))
             }
 
             if let errorMessage {
@@ -49,7 +49,7 @@ struct WeatherLocationView: View {
             }
 
             if !results.isEmpty {
-                Section("Résultats") {
+                Section(tr("Résultats")) {
                     ForEach(results, id: \.self) { location in
                         Button {
                             select(location)
@@ -62,8 +62,8 @@ struct WeatherLocationView: View {
             }
         }
         .styledList()
-        .navigationTitle("Ville pour la météo")
-        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Chercher une ville")
+        .navigationTitle(tr("Ville pour la météo"))
+        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr("Chercher une ville"))
         .onSubmit(of: .search) { search() }
         .overlay {
             if isSearching { ProgressView() }
@@ -79,7 +79,7 @@ struct WeatherLocationView: View {
                 results = try await LocationService.search(query)
             } catch {
                 results = []
-                errorMessage = (error as? LocalizedError)?.errorDescription ?? "La recherche a échoué. Vérifie ta connexion."
+                errorMessage = (error as? LocalizedError)?.errorDescription ?? tr("La recherche a échoué. Vérifie ta connexion.")
             }
         }
     }
@@ -114,9 +114,9 @@ struct CalendarAccessView: View {
                     Image(systemName: "calendar.badge.clock")
                         .font(.system(size: 34))
                         .foregroundStyle(Color.accentColor)
-                    Text("Le widget À venir")
+                    Text(tr("Le widget À venir"))
                         .font(.headline)
-                    Text("Il affiche tes événements des 48 prochaines heures, directement depuis le calendrier de ton iPhone.")
+                    Text(tr("Il affiche tes événements des 48 prochaines heures, directement depuis le calendrier de ton iPhone."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -127,6 +127,6 @@ struct CalendarAccessView: View {
             }
         }
         .styledList()
-        .navigationTitle("Calendrier")
+        .navigationTitle(tr("Calendrier"))
     }
 }

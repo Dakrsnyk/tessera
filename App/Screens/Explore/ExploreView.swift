@@ -19,9 +19,9 @@ struct ExploreView: View {
         var id: String { rawValue }
         var title: String {
             switch self {
-            case .all: "Tous"
-            case .free: "Gratuits"
-            case .premium: "Premium"
+            case .all: tr("Tous")
+            case .free: tr("Gratuits")
+            case .premium: tr("Premium")
             }
         }
 
@@ -65,14 +65,14 @@ struct ExploreView: View {
             }
             .background(.screenFill)
             .screenshotScroll()
-            .navigationTitle("Store")
+            .navigationTitle(tr("Store"))
             .navigationDestination(for: StorePage.self) { page in
                 destination(page)
             }
             .sheet(item: $openedPack) { pack in
                 PackSheet(pack: pack)
             }
-            .searchable(text: $query, isPresented: $isSearchPresented, prompt: "Écrans, packs, météo, bitcoin…")
+            .searchable(text: $query, isPresented: $isSearchPresented, prompt: tr("Écrans, packs, météo, bitcoin…"))
             .onAppear(perform: consumeRequests)
             .onChange(of: router.exploreSearchRequested) { _, _ in consumeRequests() }
             .onChange(of: router.openedSetupID) { _, _ in consumeRequests() }
@@ -161,9 +161,9 @@ struct ExploreView: View {
         let setups = HomeSetupCatalog.all.filter { $0.id != weeklyID }
         return VStack(alignment: .leading, spacing: 14) {
             MagazineHeader(
-                eyebrow: "Clé en main",
-                title: "Écrans d'accueil",
-                subtitle: "Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches."
+                eyebrow: tr("Clé en main"),
+                title: tr("Écrans d'accueil"),
+                subtitle: tr("Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches.")
             ) {
                 router.storePath.append(.setups)
             }
@@ -202,7 +202,7 @@ struct ExploreView: View {
 
     private var forYouSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: "Selon tes centres d'intérêt", title: "Pour toi")
+            MagazineHeader(eyebrow: tr("Selon tes centres d'intérêt"), title: tr("Pour toi"))
             templateShelf(forYou)
         }
     }
@@ -214,9 +214,9 @@ struct ExploreView: View {
         let larges = combos.filter { $0.format == .large }
         return VStack(alignment: .leading, spacing: 14) {
             MagazineHeader(
-                eyebrow: "Plusieurs en un",
-                title: "Combinaisons",
-                subtitle: "\(StoreComboCatalog.all.count) widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand."
+                eyebrow: tr("Plusieurs en un"),
+                title: tr("Combinaisons"),
+                subtitle: tr("\(StoreComboCatalog.all.count) widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand.")
             ) {
                 router.storePath.append(.combos)
             }
@@ -247,9 +247,9 @@ struct ExploreView: View {
         let others = StoreRanking.packs(preferring: interests).filter { $0.id != featured.id }
         return VStack(alignment: .leading, spacing: 14) {
             MagazineHeader(
-                eyebrow: "Six widgets assortis",
-                title: "Packs",
-                subtitle: "Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets."
+                eyebrow: tr("Six widgets assortis"),
+                title: tr("Packs"),
+                subtitle: tr("Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets.")
             ) {
                 router.storePath.append(.packs)
             }
@@ -280,9 +280,9 @@ struct ExploreView: View {
         let collections = Array(StoreShowcase.collections(preferring: interests).prefix(4))
         return VStack(alignment: .leading, spacing: 14) {
             MagazineHeader(
-                eyebrow: "Sélections",
-                title: "Collections",
-                subtitle: "Des widgets réunis autour d'un thème, d'une taille ou d'un style."
+                eyebrow: tr("Sélections"),
+                title: tr("Collections"),
+                subtitle: tr("Des widgets réunis autour d'un thème, d'une taille ou d'un style.")
             ) {
                 router.storePath.append(.collections)
             }
@@ -303,7 +303,7 @@ struct ExploreView: View {
     /// Chosen by the team: there are no download counts to rank by.
     private var essentialsSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: "Notre sélection", title: "Incontournables", subtitle: "Les widgets à essayer en premier.")
+            MagazineHeader(eyebrow: tr("Notre sélection"), title: tr("Incontournables"), subtitle: tr("Les widgets à essayer en premier."))
             EssentialsList(templates: essentials, isPremiumUser: model.isPremium) { template in
                 router.openEditor(template.makeDesign(), isNew: true)
             }
@@ -322,7 +322,7 @@ struct ExploreView: View {
 
     private var lockScreenSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: "Sous l'heure", title: "Écran verrouillé", subtitle: "D'un coup d'œil, sans déverrouiller ton iPhone.")
+            MagazineHeader(eyebrow: tr("Sous l'heure"), title: tr("Écran verrouillé"), subtitle: tr("D'un coup d'œil, sans déverrouiller ton iPhone."))
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 14) {
                     ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
@@ -341,7 +341,7 @@ struct ExploreView: View {
 
     private var stylesSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: "12 styles", title: "Styles", subtitle: "Touche un style pour voir tous ses widgets.")
+            MagazineHeader(eyebrow: tr("12 styles"), title: tr("Styles"), subtitle: tr("Touche un style pour voir tous ses widgets."))
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(ThemeCatalog.all) { theme in
@@ -360,14 +360,14 @@ struct ExploreView: View {
 
     private var newestSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: "Vient d'arriver", title: "Nouveautés")
+            MagazineHeader(eyebrow: tr("Vient d'arriver"), title: tr("Nouveautés"))
             templateShelf(TemplateCatalog.newest)
         }
     }
 
     private var categoriesSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: "Tout le catalogue", title: "Catégories")
+            MagazineHeader(eyebrow: tr("Tout le catalogue"), title: tr("Catégories"))
             CategoryIndex(categories: interests + WidgetCategory.allCases.filter { !interests.contains($0) }) { category in
                 router.exploreCategory = category
             }
@@ -478,9 +478,9 @@ struct ExploreView: View {
             if templates.isEmpty && combos.isEmpty && packs.isEmpty && setups.isEmpty {
                 EmptyStateView(
                     symbol: "magnifyingglass",
-                    title: "Aucun résultat",
-                    message: "Essaie un autre mot, ou retire un filtre.",
-                    actionTitle: "Tout afficher"
+                    title: tr("Aucun résultat"),
+                    message: tr("Essaie un autre mot, ou retire un filtre."),
+                    actionTitle: tr("Tout afficher")
                 ) {
                     query = ""
                     access = .all
@@ -490,7 +490,7 @@ struct ExploreView: View {
             } else {
                 if !setups.isEmpty {
                     VStack(alignment: .leading, spacing: 14) {
-                        MagazineHeader(title: "Écrans d'accueil", subtitle: Fmt.plural(setups.count, "écran", "écrans"))
+                        MagazineHeader(title: tr("Écrans d'accueil"), subtitle: Fmt.plural(setups.count, tr("écran"), tr("écrans")))
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(alignment: .top, spacing: 14) {
                                 ForEach(setups) { setup in
@@ -512,13 +512,13 @@ struct ExploreView: View {
                 }
                 if !combos.isEmpty {
                     VStack(alignment: .leading, spacing: 14) {
-                        MagazineHeader(title: "Combinaisons", subtitle: Fmt.plural(combos.count, "combinaison", "combinaisons"))
+                        MagazineHeader(title: tr("Combinaisons"), subtitle: Fmt.plural(combos.count, tr("combinaison"), tr("combinaisons")))
                         comboShelf(combos, height: 140)
                     }
                 }
                 if !packs.isEmpty {
                     VStack(alignment: .leading, spacing: 14) {
-                        MagazineHeader(title: "Packs", subtitle: Fmt.plural(packs.count, "pack", "packs"))
+                        MagazineHeader(title: tr("Packs"), subtitle: Fmt.plural(packs.count, tr("pack"), tr("packs")))
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(alignment: .top, spacing: 16) {
                                 ForEach(packs) { pack in
@@ -536,7 +536,7 @@ struct ExploreView: View {
                 }
                 if !templates.isEmpty {
                     VStack(alignment: .leading, spacing: 14) {
-                        MagazineHeader(title: "Widgets", subtitle: Fmt.plural(templates.count, "widget", "widgets"))
+                        MagazineHeader(title: tr("Widgets"), subtitle: Fmt.plural(templates.count, tr("widget"), tr("widgets")))
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], alignment: .leading, spacing: 20) {
                             ForEach(templates) { template in
                                 templateButton(template, width: nil)
@@ -598,7 +598,7 @@ struct ThemeSwatch: View {
                     .frame(width: 76, height: 76)
                     .overlay {
                         VStack(spacing: 4) {
-                            Text("Aa")
+                            Text(tr("Aa"))
                                 .font(.system(size: 24, weight: theme.numberWeight, design: theme.fontDesign))
                                 .foregroundStyle(style.primary)
                             Capsule().fill(style.accent).frame(width: 26, height: 4)
@@ -623,7 +623,7 @@ struct ThemeSwatch: View {
                 .foregroundStyle(isSelected ? .primary : .secondary)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Style \(theme.name)\(showsLock ? ", Premium" : "")"))
+        .accessibilityLabel(Text(tr("Style \(theme.name)\(showsLock ? tr(", Premium") : )"")"))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
@@ -656,7 +656,7 @@ struct PackSheet: View {
                         packItem(design, family: .systemMedium)
                     }
                     if designs.contains(where: { !model.hasOwnData(for: $0) }) {
-                        Label("Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.", systemImage: "sparkles")
+                        Label(tr("Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget."), systemImage: "sparkles")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
@@ -673,7 +673,7 @@ struct PackSheet: View {
                         configures = true
                     }
                 } label: {
-                    Text(needsPremium ? "Débloquer avec Premium" : "Personnaliser et ajouter")
+                    Text(needsPremium ? tr("Débloquer avec Premium") : tr("Personnaliser et ajouter"))
                         .font(.headline)
                         .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
@@ -696,7 +696,7 @@ struct PackSheet: View {
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Fermer") { dismiss() }
+                    Button(tr("Fermer")) { dismiss() }
                 }
             }
         }
