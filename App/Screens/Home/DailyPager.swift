@@ -12,38 +12,45 @@ struct DailyPager<Content: View>: View {
     @ViewBuilder let content: (Int) -> Content
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    /// The page on screen, driven by the paging scroll view.
+    /// The page on screen, driven by the paging view.
     @State private var position: Int?
 
     private var count: Int { titles.count }
     private var saved: Int { min(max(0, model.settings.dailyCardPages[id] ?? 0), count - 1) }
     private var page: Int { position ?? saved }
 
+    private var selection: Binding<Int> {
+        Binding(get: { page }, set: { position = $0 })
+    }
+
     var body: some View {
         VStack(spacing: 7) {
-            // A horizontal paging scroll view: the system tells a sideways swipe from Home's vertical
-            // scroll, and taps on the card's buttons still work.
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 0) {
+            // Every page, invisible, gives the card the height of its tallest view; the paging view
+            // on top shows one at a time. A page-style TabView tells a sideways swipe from Home's
+            // vertical scroll, and taps on the card's buttons still work.
+            ZStack(alignment: .top) {
+                ForEach(0..<count, id: \.self) { index in
+                    content(index)
+                }
+            }
+            .hidden()
+            .accessibilityHidden(true)
+            .overlay {
+                TabView(selection: selection) {
                     ForEach(0..<count, id: \.self) { index in
                         content(index)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .containerRelativeFrame(.horizontal)
-                            .id(index)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                            .tag(index)
                     }
                 }
-                .scrollTargetLayout()
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .accessibilityIdentifier("daily-pager-\(id)")
             }
-            .scrollTargetBehavior(.paging)
-            .scrollPosition(id: $position)
-            .scrollClipDisabled(false)
-            .accessibilityIdentifier("daily-pager-\(id)")
             dots
         }
         .accessibilityElement(children: .contain)
         .accessibilityAction(named: Text("Vue suivante")) { go(by: 1) }
         .accessibilityAction(named: Text("Vue précédente")) { go(by: -1) }
-        .onAppear { if position == nil { position = saved } }
         .onChange(of: position) { _, new in
             guard let new, new != model.settings.dailyCardPages[id] ?? 0 else { return }
             Haptics.tap()
@@ -51,7 +58,7 @@ struct DailyPager<Content: View>: View {
         }
         .onChange(of: model.settings.dailyCardPages[id]) { _, value in
             let target = min(max(0, value ?? 0), count - 1)
-            if position != target { position = target }
+            if page != target { position = target }
         }
     }
 

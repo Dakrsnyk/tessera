@@ -55,6 +55,16 @@ final class MiniAppUITests: XCTestCase {
         reveal(element, what, file: file, line: line).tap()
     }
 
+    /// Switches a Toggle on: since iOS 17 a tap in the middle of a labelled Toggle lands on its label,
+    /// so the tap goes to the switch on the right.
+    private func turnOn(_ toggle: XCUIElement, _ what: String, file: StaticString = #filePath, line: UInt = #line) {
+        reveal(toggle, what, file: file, line: line)
+        func isOn() -> Bool { (toggle.value as? String) == "1" }
+        if !isOn() { toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.92, dy: 0.5)).tap() }
+        if !isOn() { toggle.switches.firstMatch.tap() }
+        XCTAssertTrue(isOn(), "\(what) n'a pas pu être activé", file: file, line: line)
+    }
+
     private var saveButton: XCUIElement {
         let buttons = app.navigationBars.buttons.matching(NSPredicate(format: "label == %@", "Enregistrer"))
         return buttons.allElementsBoundByIndex.first { $0.isHittable } ?? buttons.firstMatch
@@ -412,10 +422,15 @@ final class MiniAppUITests: XCTestCase {
         let pager = app.descendants(matching: .any)["daily-pager-nutrition"]
         XCTAssertTrue(pager.waitForExistence(timeout: 12), "La carte Nutrition doit pouvoir changer de vue")
         let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
-        XCTAssertTrue(dots.exists)
+        reveal(dots, "Points de la carte Nutrition")
         XCTAssertTrue(dots.label.contains("Vue 1 sur 3"), dots.label)
-        pager.swipeLeft()
-        XCTAssertTrue(app.descendants(matching: .any)["daily-nutrition-meals"].waitForExistence(timeout: 4), "Le glissement montre les repas")
+        // Swipe on the card itself, just above its dots.
+        let card = dots.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0)).withOffset(CGVector(dx: 0, dy: -60))
+        let left = card.withOffset(CGVector(dx: -80, dy: 0))
+        let right = card.withOffset(CGVector(dx: 80, dy: 0))
+        right.press(forDuration: 0.05, thenDragTo: left, withVelocity: .fast, thenHoldForDuration: 0)
+        let moved = expectation(for: NSPredicate(format: "label CONTAINS %@", "Vue 2 sur 3"), evaluatedWith: dots)
+        wait(for: [moved], timeout: 5)
         XCTAssertTrue(dots.label.contains("Vue 2 sur 3"), dots.label)
         snapshot("daily-swiped")
         // Kept for the next launch.
@@ -434,7 +449,8 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["lock-creator"].waitForExistence(timeout: 6))
         XCTAssertTrue(app.descendants(matching: .any)["lock-workout-preview"].waitForExistence(timeout: 4), "La séance en direct est présentée")
         snapshot("lock-creator")
-        tap(app.switches["lock-interactive-filter"], "Filtre interactifs")
+        turnOn(app.switches["lock-interactive-filter"], "Filtre interactifs")
+        XCTAssertTrue(app.buttons["lock-weather"].waitForNonExistence(timeout: 4), "Le filtre ne garde que les widgets interactifs")
         var drags = 0
         while !app.buttons["lock-nextSet"].exists && drags < 10 {
             scrollDownOnce()
