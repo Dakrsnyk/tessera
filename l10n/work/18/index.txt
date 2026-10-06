@@ -1,0 +1,324 @@
+323
+0 0 Faite
+1 0 Prévue
+2 1 %@ de la journée écoulée
+3 0 tâche
+4 0 tâches
+5 1 Ensuite : %@
+6 0 Rien d'urgent, profites-en
+7 0 25 min
+8 0 Ce soir
+9 0 tâche faite
+10 0 tâches faites
+11 0 Le bilan de ta journée
+12 0 Rien de prévu tôt demain
+13 0 Bonne nuit
+14 1 Prends un parapluie (%@ %% de pluie)
+15 0 Bonne journée
+16 1 séances cette semaine · série %@
+17 0 Prochaine
+18 1 reste ce mois · %@/jour
+19 0 Pas de cours prévu
+20 0 Étude cette semaine
+21 0 Calculé à partir de tes données, sur ton iPhone
+22 0 Crée ta première séance dans Tessera, espace Fitness.
+23 0 Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.
+24 2 En cours · %@/%@ séries
+25 0 Séance faite aujourd'hui
+26 2 %@ · %@) séries
+27 2 %@ · %@ séries
+28 3 %@ · série %@/%@
+29 1 Repos jusqu'à %@
+30 1 Touche pour démarrer « %@) »
+31 0 ta séance
+32 0 Valide une série pour lancer le repos
+33 0 Repos : prêt
+34 0 soulevés cette semaine
+35 2 Sem. dernière : %@ kg (%@)
+36 1 %@ kg cette semaine
+37 0 Tes records apparaîtront après ta première séance.
+38 2 %@ · %@ rép.
+39 1 1RM estimé : %@ kg
+40 2 %@ : %@ kg
+41 0 Objectif à définir dans Tessera
+42 1 %@ cette )semaine
+43 1 Série : %@
+44 0 semai)nes
+45 3 %@/%@ séances · série %@
+46 0 estimées aujourd'hui
+47 1 Semaine : %@ kcal
+48 0 Estimation selon la durée des séances et ton poids
+49 1 %@ kcal brûlées
+50 2 %@ séances en %@
+51 0 dépensés ce mois-ci
+52 0 Budget mensuel à définir dans Tessera
+53 1 Dépensé %@
+54 0 au-dessus du budget
+55 1 soit %@ par jour
+56 2 Dépensé : %@ sur %@
+57 0 Note tes dépenses dans Tessera, espace Budget.
+58 2 %@ · %@ catégories
+59 0 Ajoute tes factures dans Tessera, espace Budget.
+60 1 30 prochains jours : %@
+61 0 Crée un objectif d'épargne dans Tessera, espace Budget.
+62 2 %@ par mois jusqu'au %@
+63 0 Ajoute tes comptes et tes dettes dans Tessera, espace Budget.
+64 1 %@ sur 30 jours
+65 0 actifs moins dettes
+66 2 Actifs %@ · Dettes %@
+67 0 Ajoute tes abonnements dans Tessera, espace Budget.
+68 2 %@ · %@)/an
+69 0 abonnement
+70 0 abonnements
+71 1 Abonnements %@/mois
+72 0 Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.
+73 0 dépensé aujourd'hui
+74 1 Reste du mois : %@
+75 0 Ajoute tes placements dans Tessera, espace Placements.
+76 2 %@%@ au total
+77 1 Aujourd'hui : %@
+78 1 Portefeuille %@
+79 2 en %@ · total %@
+80 0 Les variations apparaissent pour les placements cotés en direct.
+81 1 %@ sur 24 h
+82 1 Ta position : %@
+83 0 Les cours s'affichent dès que la connexion est disponible.
+84 0 Cours : CoinGecko
+85 0 Les données du marché s'affichent dès que la connexion est disponible.
+86 1 capitalisation · %@ sur 24 h
+87 0 Dominance BTC
+88 0 Dominance ETH
+89 1 CoinGecko · %@
+90 1 Marché %@
+91 0 Note ton premier repas dans Tessera, espace Nutrition.
+92 0 Donne ton objectif calorique dans Tessera pour savoir ce qu'il te reste par repas.
+93 0 mangées aujourd'hui
+94 0 au-dessus de l'objectif
+95 1 restantes sur %@
+96 1 Mangé : %@ kcal
+97 1 +%@ kcal
+98 1 aujourd'hui · fibres %@ g
+99 2 sur %@ · fibres %@ g
+100 1 %@ g de protéines aujourd'hui
+101 1 à trouver sur %@ g
+102 1 %@ g de protéines restantes
+103 0 Rien de noté pour l'instant
+104 0 aliment noté
+105 0 aliments notés
+106 0 moyenne par jour
+107 1 moyenne · objectif %@
+108 1 Sur 30 jours : %@ kcal/j
+109 0 note un repas pour continuer
+110 0 repas noté aujourd'hui
+111 1 Suivi : %@
+112 0 Ajoute des favoris dans Tessera, espace Nutrition.
+113 0 aujourd'hui · touche pour ajouter
+114 1 pour le %@
+115 1 dont %@ g de protéines
+116 2 %@ : %@ kcal
+117 0 restantes pour la soirée
+118 0 Choisis tes trois priorités dans Tessera, espace Productivité.
+119 0 Journée gagnée
+120 0 priorités faites
+121 2 Priorités %@/%@
+122 0 Crée un projet et ses tâches dans Tessera, espace Productivité.
+123 3 %@ tâche%@ restante%@
+124 0 Ajoute une échéance dans Tessera, espace Productivité.
+125 1 avant %@
+126 0 Dernière ligne droite
+127 1 Focus %@ cette semaine
+128 0 Crée un compteur dans Tessera, espace Productivité.
+129 1 encore %@
+130 0 au total
+131 0 Crée une habitude dans Tessera pour suivre ta série.
+132 0 fait aujourd'hui
+133 0 pas encore fait aujourd'hui
+134 1 Record : %@
+135 0 Crée tes habitudes dans Tessera.
+136 0 validations cette semaine
+137 1 Habitudes : %@ cette semaine
+138 1 des habitudes tenues en %@
+139 1 Habitudes : %@ ce mois-ci
+140 0 Ajoute tes cours dans Tessera, espace Études.
+141 0 Cours actuel
+142 1 En cours · fin à %@
+143 1 %@ en co)urs
+144 0 Ajoute tes examens dans Tessera, espace Études.
+145 0 Ajoute tes travaux à rendre dans Tessera, espace Études.
+146 0 à rendre
+147 0 Tout est rendu
+148 0 Ajoute tes notes dans Tessera, espace Études.
+149 0 moyenne générale pondérée
+150 1 Moyenne %@ %%
+151 0 Indique les dates de ta session dans Tessera, espace Études.
+152 2 %@ %@ restants
+153 1 Fin le %@
+154 2 Session %@ · %@ j
+155 0 Crée tes fiches de révision dans Tessera, espace Études.
+156 0 À jour
+157 0 Aucune fiche à réviser pour l'instant
+158 1 Prochaine révision %@
+159 0 Touche « Réponse » pour vérifier
+160 0 fiche à réviser
+161 0 fiches à réviser
+162 1 %@ fiches à réviser
+163 1 sur %@ cette semaine
+164 1 %@ de l'objectif
+165 1 Étude %@
+166 1 Horaire · %@
+167 0 hier
+168 1 dans %@ jours
+169 1 il y a %@ jours
+170 0 Auj.
+171 1 %@ j
+172 0 maintenant
+173 1 dans %@ min
+174 1 dans %@
+175 0 E
+176 0 N
+177 0 NE
+178 0 NO
+179 0 O
+180 0 S
+181 0 SE
+182 0 SO
+183 0 faible
+184 0 modéré
+185 0 élevé
+186 0 très élevé
+187 0 extrême
+188 0 Dernier
+189 0 Ajoute ta date de naissance dans Tessera, espace Ma vie.
+190 3 %@ ans dans %@ %@
+191 0 Joyeux anniversaire !
+192 1 %@ de ton année en cours
+193 1 avant tes %@ ans
+194 2 %@ · %@ de la semaine
+195 2 Semaine %@ · %@
+196 0 Aucun jour férié trouvé.
+197 0 Jour férié
+198 0 Prochain férié
+199 0 éclairée
+200 1 Pleine lune %@
+201 0 Ajoute ton voyage dans Tessera, espace Voyage.
+202 1 sur %@ · bon voyage !
+203 3 %@ · jour %@/%@
+204 0 c'est le départ !
+205 2 Du %@ au %@
+206 0 Ajoute ton vol dans Tessera, espace Voyage.
+207 1 Terminal %@
+208 1 Porte %@
+209 1 Siège %@
+210 0 Ajoute ton hébergement dans Tessera, espace Voyage.
+211 2 Arrivée %@ à %@
+212 2 Départ %@ à %@
+213 0 Réservation
+214 0 Choisis la ville de destination dans l'espace Voyage.
+215 0 La météo s'affiche dès que la connexion est disponible.
+216 0 Maintenant sur place · prévisions du séjour 7 jours avant
+217 0 Prévisions pendant ton séjour
+218 2 %@%@ h par rapport à ici
+219 0 même heure qu'ici
+220 0 Ta destination utilise ta devise : rien à convertir.
+221 0 Les taux de change s'affichent dès que la connexion est disponible.
+222 1 pour %@
+223 1 Taux de référence BCE · %@ · Frankfurter
+224 0 dernier jour
+225 1 de voyage, départ %@
+226 0 Planifie tes activités dans Tessera, espace Voyage.
+227 0 Choisis ta ville dans Tessera pour voir la météo.
+228 0 Les heures du soleil arrivent avec la prochaine mise à jour météo.
+229 1 Lever du soleil · %@
+230 1 Coucher du soleil · %@
+231 0 Lever demain
+232 2 Durée du jour : %@ · %@
+233 0 Coucher
+234 0 Lever
+235 0 Le risque de pluie arrive avec la prochaine mise à jour météo.
+236 0 Quelques averses possibles d'ici 12 h
+237 0 Pas de pluie prévue d'ici 12 h
+238 0 Probabilité de précipitations · Open-Meteo.com
+239 1 vent %@
+240 1 rafales %@
+241 2 UV %@ · %@
+242 0 Maximum du jour
+243 1 Vent %@ km/h
+244 0 Ressenti
+245 0 UV
+246 0 Pluie aujourd'hui
+247 3 Ressenti %@ · ↑%@ ↓%@
+248 1 %@ %% de pluie
+249 0 Touche pour débloquer ce widget
+250 0 Entitlements
+251 0 aucun groupe
+252 0 aucun
+253 2 signature : %@ · profil : %@(
+254 0 Inactif
+255 0 Inactif (aucun groupe)
+256 0 Actif (groupe de l'installation)
+257 0 Cobalt
+258 0 Ambre
+259 0 Lilas
+260 0 Olive
+261 0 Ardoise
+262 0 Nuit
+263 0 Encre
+264 0 Bordeaux
+265 0 Brume
+266 0 Blanc
+267 0 Suit le mode clair ou sombre
+268 0 Toujours lumineux
+269 0 Toujours sombre
+270 0 Noir, blanc, rien d'autre
+271 0 Translucide et lumineux
+272 0 Un dégradé bleu nuit vers turquoise
+273 0 Serif et reflets dorés
+274 0 Élégant
+275 0 Digital
+276 0 Écran à cristaux liquides
+277 0 Papier chaud et typo ronde
+278 0 Futuriste
+279 0 Néon cyan sur nuit profonde
+280 0 De grands chiffres, en serif
+281 0 Typo
+282 0 Ta couleur en plein fond
+283 0 Moderne
+284 0 Net, doux, pastilles d'icônes
+285 0 Carte
+286 0 Le contenu posé sur une carte
+287 0 Formes rondes, tons tendres
+288 0 Compact
+289 0 Plus d'infos, moins d'espace
+290 0 Liquid Glass
+291 0 Verre liquide et reflets
+292 0 Graphite, argent, fin liseré
+293 0 Ta couleur en dégradé vif
+294 0 Lueurs roses sur fond noir
+295 0 Serif, papier et capitales
+296 0 Magazine
+297 0 Un grand chiffre, comme une une
+298 0 Petites cartes, tout d'un coup d'œil
+299 0 Tableau de bord
+300 0 Audacieux
+301 0 Chiffres énormes, couleur pleine
+302 0 Data
+303 0 Grille, mono et courbes
+304 0 Luxe
+305 0 Noir et jaune fluo, énergie
+306 0 Marine, sobre et aligné
+307 0 Ta couleur sur noir, lignes d'écran
+308 0 Bleu d'architecte et grille
+309 0 Plan
+310 0 Couleurs de dragée
+311 0 Papier crème et encre
+312 0 Bord épais, noir sur blanc
+313 0 Brutaliste
+314 0 Carbone
+315 0 Fibre sombre et relief
+316 0 Rose et bleu rétro-futur
+317 0 Vapor
+318 0 Tableau noir et craie
+319 0 Pâle, léger, presque translucide
+320 0 Mon widget
+321 0 Ton dernier widget enregistré dans Tessera, sans aucun réglage.
+322 2 Série %@/%@
