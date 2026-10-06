@@ -2,7 +2,8 @@
   "enabledPlugins": {
     "caveman@caveman": true,
     "claude-mem@thedotmack": true,
-    "headroom-large-file-and-log-reader@anthropic-plugin-directory": true
+    "headroom-large-file-and-log-reader@anthropic-plugin-directory": true,
+    "ponytail@ponytail": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -21,6 +22,12 @@
       "source": {
         "source": "github",
         "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
       }
     }
   }
