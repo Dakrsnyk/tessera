@@ -10,3 +10,7 @@ Config/Secrets.xcconfig
 # Exercise demonstration tool outputs
 scripts/demos/out/
 __pycache__/
+
+# Graphify analysis output
+graphify-out/
+

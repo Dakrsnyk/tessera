@@ -1,0 +1,27 @@
+{
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "claude-mem@thedotmack": true,
+    "headroom-large-file-and-log-reader@anthropic-plugin-directory": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  }
+}

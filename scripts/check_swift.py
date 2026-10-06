@@ -25,7 +25,7 @@ def swift_files():
                     yield os.path.join(base, name)
 
 
-FILES = {path: open(path, encoding="utf-8").read() for path in swift_files()}
+FILES = {os.path.normpath(path): open(path, encoding="utf-8").read() for path in swift_files()}
 
 
 def strip_comments(text):
@@ -195,15 +195,15 @@ def enum_cases(text, enum_name):
 
 
 def check_kinds():
-    kind_text = strip_comments(FILES[os.path.join(ROOT, "Shared/Model/WidgetKind.swift")])
+    kind_text = strip_comments(FILES[os.path.normpath(os.path.join(ROOT, "Shared/Model/WidgetKind.swift"))])
     kinds = enum_cases(kind_text, "WidgetKind")
-    catalog = strip_comments(FILES[os.path.join(ROOT, "Shared/Model/KindCatalog.swift")])
+    catalog = strip_comments(FILES[os.path.normpath(os.path.join(ROOT, "Shared/Model/KindCatalog.swift"))])
     described = re.findall(r"KindInfo\(kind:\s*\.(\w+)", catalog)
     for kind in kinds:
         if described.count(kind) != 1:
             problems.append(f"KindCatalog describes .{kind} {described.count(kind)} times")
     original = ["clock", "calendar", "worldClock", "progress", "countdown", "yearDots", "tasks", "habits", "focus", "upNext", "note", "weather", "crypto", "moneyFlow", "hydration"]
-    group_path = os.path.join(ROOT, "Shared/Model/WidgetGroup.swift")
+    group_path = os.path.normpath(os.path.join(ROOT, "Shared/Model/WidgetGroup.swift"))
     if group_path in FILES:
         groups = strip_comments(FILES[group_path])
         body = groups[groups.index("var kinds: [WidgetKind]"):groups.index("var flagship")]
@@ -213,7 +213,7 @@ def check_kinds():
                 continue
             if grouped.count(kind) != 1:
                 problems.append(f"WidgetGroup lists .{kind} {grouped.count(kind)} times")
-    needs_path = os.path.join(ROOT, "Shared/Data/DomainData.swift")
+    needs_path = os.path.normpath(os.path.join(ROOT, "Shared/Data/DomainData.swift"))
     if needs_path in FILES:
         text = strip_comments(FILES[needs_path])
         body = text[text.index("static func needs(for kind"):text.index("extension PayloadLoader")]
