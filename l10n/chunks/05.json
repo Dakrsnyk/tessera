@@ -29,10 +29,10 @@
   ]
  },
  {
-  "key": "%@ · %@ min · %@ kg s)oulevés",
+  "key": "%@ · %@ min · %@ kg soulevés",
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg s)oulevés\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))"
   ]
  },
  {
@@ -79,10 +79,10 @@
   ]
  },
  {
-  "key": "%@ · %@ · environ %@s(routine)) min",
+  "key": "%@ · %@ · environ %@ min",
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\")))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
   ]
  },
  {
@@ -313,11 +313,11 @@
   ]
  },
  {
-  "key": "%@ · environ %@) min",
+  "key": "%@ · environ %@ min",
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routin)e)) min\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:296: detail: tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routin)e)) min\")"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:296: detail: tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
   ]
  },
  {
@@ -344,10 +344,10 @@
   ]
  },
  {
-  "key": "%@ min · %@ · %@) kg",
+  "key": "%@ min · %@ · %@ kg",
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:139: Text(tr(\"\\(TF.int(session.duration / 60)) min · \\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.volu)me)) kg\")"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:139: Text(tr(\"\\(TF.int(session.duration / 60)) min · \\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.volume)) kg\"))"
   ]
  },
  {
@@ -883,10 +883,10 @@
   ]
  },
  {
-  "key": "jours not)és",
+  "key": "jours notés",
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours not)és\"))).\" }"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }"
   ]
  },
  {
@@ -984,10 +984,10 @@
   ]
  },
  {
-  "key": "Fibres %@ g%@%@ ?? ",
+  "key": "Fibres %@ g%@%@",
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") }) ??"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") } ?? \"\")\"))"
   ]
  },
  {
@@ -1801,13 +1801,6 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:231: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Horaire\"),",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:33: .navigationTitle(tr(\"Horaire\"))"
-  ]
- },
- {
-  "key": "%@ par )semaine",
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par )semaine\")"
   ]
  },
  {

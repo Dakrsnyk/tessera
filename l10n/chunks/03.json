@@ -823,10 +823,10 @@
   ]
  },
  {
-  "key": "%@ · fond d'écran )assorti",
+  "key": "%@ · fond d'écran assorti",
   "placeholders": 1,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran )assorti\")"
+   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))"
   ]
  },
  {
@@ -1311,10 +1311,10 @@
   ]
  },
  {
-  "key": "poids du corps)",
+  "key": "poids du corps",
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps)\"))\")"
+   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps\"))\"))"
   ]
  },
  {
@@ -1328,13 +1328,6 @@
  {
   "key": "Faite · %@",
   "placeholders": 1,
-  "uses": [
-   "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"sér)ies\")))\", systemImage: \"checkmark.circle.fill\")"
-  ]
- },
- {
-  "key": "sér)ies",
-  "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"sér)ies\")))\", systemImage: \"checkmark.circle.fill\")"
   ]
@@ -1582,13 +1575,6 @@
   ]
  },
  {
-  "key": "séan)ces",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séan)ces\")))\")"
-  ]
- },
- {
   "key": "Eau · 7 jours",
   "placeholders": 0,
   "uses": [
@@ -1596,10 +1582,10 @@
   ]
  },
  {
-  "key": "Objectif atteint %@) sur 7",
+  "key": "Objectif atteint %@ sur 7",
   "placeholders": 1,
   "uses": [
-   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\")))) sur 7\")"
+   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))"
   ]
  },
  {

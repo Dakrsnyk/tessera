@@ -864,10 +864,10 @@
   ]
  },
  {
-  "key": "%@ · glisse pour les faire )tourner",
+  "key": "%@ · glisse pour les faire tourner",
   "placeholders": 1,
   "uses": [
-   "App/Screens/MyWidgets/MyWidgetsView.swift:233: Text(tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) · glisse pour les faire )tourner\")"
+   "App/Screens/MyWidgets/MyWidgetsView.swift:233: Text(tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) · glisse pour les faire tourner\"))"
   ]
  },
  {

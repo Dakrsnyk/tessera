@@ -49,10 +49,10 @@
   ]
  },
  {
-  "key": "Utilisé par %@ : %@).",
+  "key": "Utilisé par %@ : %@.",
   "placeholders": 2,
   "uses": [
-   "App/Screens/Home/MyInfoCenter.swift:273: Text(users.isEmpty ? tr(\"Ce que tu renseignes ici servira à tes widgets \\(area.title.lowercasedFirst) et à « Mon Quotidien ».\") : tr(\"Utilisé par \\(Fmt.plural(users.count, tr(\"de "
+   "App/Screens/Home/MyInfoCenter.swift:273: Text(users.isEmpty ? tr(\"Ce que tu renseignes ici servira à tes widgets \\(area.title.lowercasedFirst) et à « Mon Quotidien ».\") : tr(\"Utilisé par \\(Fmt.plural(users.count, tr(\"de tes widgets\"), tr(\"de"
   ]
  },
  {
@@ -1179,10 +1179,10 @@
   ]
  },
  {
-  "key": " · partiel)",
+  "key": " · partiel",
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:60: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel"
+   "App/Screens/MiniApps/Car/CarPages.swift:60: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),"
   ]
  },
  {
@@ -1418,10 +1418,10 @@
   ]
  },
  {
-  "key": "%@ de %@ que le mois dernier à la mê)me date",
+  "key": "%@ de %@ que le mois dernier à la même date",
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la mê)me date\","
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la même date\"),"
   ]
  },
  {
@@ -1814,10 +1814,10 @@
   ]
  },
  {
-  "key": "mois compl)ets",
+  "key": "mois complets",
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois compl)ets\")))\")"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
   ]
  },
  {

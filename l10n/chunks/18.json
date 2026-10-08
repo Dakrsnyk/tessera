@@ -184,13 +184,6 @@
   ]
  },
  {
-  "key": "%@ · %@) séries",
-  "placeholders": 2,
-  "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:55: tile.caption = tr(\"\\(Fmt.plural(exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(totalSets)) séries\""
-  ]
- },
- {
   "key": "%@ · %@ séries",
   "placeholders": 2,
   "uses": [
@@ -213,10 +206,10 @@
   ]
  },
  {
-  "key": "Touche pour démarrer « %@) »",
+  "key": "Touche pour démarrer « %@ »",
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\"))) »\""
+   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
   ]
  },
  {
@@ -298,22 +291,15 @@
   ]
  },
  {
-  "key": "%@ cette )semaine",
+  "key": "%@ cette semaine",
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:167: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette )semaine\""
+   "Shared/Render/Tiles/FitnessTiles.swift:167: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette semaine\")"
   ]
  },
  {
   "key": "Série : %@",
   "placeholders": 1,
-  "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
-  ]
- },
- {
-  "key": "semai)nes",
-  "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
   ]
@@ -480,10 +466,10 @@
   ]
  },
  {
-  "key": "%@ · %@)/an",
+  "key": "%@ · %@/an",
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, curren)cy))/an\""
+   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
   ]
  },
  {
@@ -1010,10 +996,10 @@
   ]
  },
  {
-  "key": "%@ en co)urs",
+  "key": "%@ en cours",
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:52: tile.inline = ongoing ? tr(\"\\(course?.name ?? tr(\"Cours\")) en co)urs\" : \"\\(course?.name ?? tr(\"Cours\")) à \\(TF.time(next.start, context))\""
+   "Shared/Render/Tiles/StudentTiles.swift:52: tile.inline = ongoing ? tr(\"\\(course?.name ?? tr(\"Cours\")) en cours\") : \"\\(course?.name ?? tr(\"Cours\")) à \\(TF.time(next.start, context))\""
   ]
  },
  {
@@ -1784,10 +1770,10 @@
   ]
  },
  {
-  "key": "signature : %@ · profil : %@(",
+  "key": "signature : %@ · profil : %@",
   "placeholders": 2,
   "uses": [
-   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \""
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr(\"absent\"))\")"
   ]
  },
  {
@@ -2273,6 +2259,13 @@
   "placeholders": 2,
   "uses": [
    "Widgets/WorkoutLiveActivityWidget.swift:23: Text(tr(\"Série \\(state.setNumber)/\\(state.sets)\"))"
+  ]
+ },
+ {
+  "key": "absent",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr(\"absent\"))\")"
   ]
  }
 ]

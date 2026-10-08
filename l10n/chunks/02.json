@@ -1542,10 +1542,10 @@
   ]
  },
  {
-  "key": "%@ (limite de la version gr)atuite)",
+  "key": "%@ (limite de la version gratuite)",
   "placeholders": 1,
   "uses": [
-   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version "
+   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gratuite)\"), systemImage: "
   ]
  },
  {

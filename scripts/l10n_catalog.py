@@ -31,7 +31,7 @@ WORDS = re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿ]{2,}")
 
 
 def swift_files():
-    return sorted(f for root in ROOTS for f in glob.glob(f"{root}/**/*.swift", recursive=True))
+    return sorted(f.replace(os.sep, "/") for root in ROOTS for f in glob.glob(f"{root}/**/*.swift", recursive=True))
 
 
 def extract():

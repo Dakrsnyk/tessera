@@ -118,7 +118,7 @@
  "Supprimer les %@ widgets": "위젯 %@개 삭제",
  "Les widgets qui les affichent sur ton écran d'accueil reviendront au modèle par défaut.": "홈 화면에서 이 위젯들을 표시하던 위젯은 기본 템플릿으로 돌아가요.",
  "Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut.": "홈 화면에서 이 위젯을 표시하던 위젯은 기본 템플릿으로 돌아가요.",
- "%@ · glisse pour les faire )tourner": "%@ · 밀어서 넘겨보기",
+ "%@ · glisse pour les faire tourner": "%@ · 밀어서 넘겨보기",
  "Trouver un widget": "위젯 찾기",
  "Modifier": "편집",
  "Dupliquer": "복제",

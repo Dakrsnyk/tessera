@@ -2817,14 +2817,6 @@
   ]
  },
  {
-  "key": "jo)urs",
-  "placeholders": 0,
-  "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jo)urs\")))\" : tr(\"date dépassée\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:202: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jo)urs\")))\""
-  ]
- },
- {
   "key": "ou %@",
   "placeholders": 1,
   "uses": [

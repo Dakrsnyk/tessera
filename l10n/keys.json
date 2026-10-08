@@ -96,22 +96,22 @@
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:317: let load = exercise.weight > 0 ? tr(\" · \\(ProfileNumberField.format(exercise.weight)) kg\") : \"\""
   ]
  },
- " · partiel)": {
+ " · partiel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:60: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel)\"))\","
+   "App/Screens/MiniApps/Car/CarPages.swift:60: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),"
   ]
  },
  " · sodium %@ mg": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") }) ?? \"\")\")"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") } ?? \"\")\"))"
   ]
  },
  " · sucres %@ g": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") }) ?? \"\")\")"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") } ?? \"\")\"))"
   ]
  },
  "$ US": {
@@ -145,10 +145,10 @@
    "App/Core/AppModel.swift:223: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
- "%@ (limite de la version gr)atuite)": {
+ "%@ (limite de la version gratuite)": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gr)atuite)\", systemImage: "
+   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gratuite)\"), systemImage: "
   ]
  },
  "%@ (variante)": {
@@ -242,7 +242,7 @@
  "%@ L · %@/L · %@ km%@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:60: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel)\"))\","
+   "App/Screens/MiniApps/Car/CarPages.swift:60: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),"
   ]
  },
  "%@ L/100 km": {
@@ -305,10 +305,10 @@
    "Shared/Render/Tiles/MoneyTiles.swift:80: tile.inline = tr(\"\\(TF.money(total, currency)) ce mois-ci\")"
   ]
  },
- "%@ cette )semaine": {
+ "%@ cette semaine": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:167: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette )semaine\""
+   "Shared/Render/Tiles/FitnessTiles.swift:167: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette semaine\")"
   ]
  },
  "%@ chacun": {
@@ -350,10 +350,10 @@
    "App/Screens/Spaces/SpacesView.swift:177: return tr(\"\\(status.item.name) dans \\(TF.int(km)) km\")"
   ]
  },
- "%@ de %@ que le mois dernier à la mê)me date": {
+ "%@ de %@ que le mois dernier à la même date": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la mê)me date\","
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la même date\"),"
   ]
  },
  "%@ de concentration cette semaine": {
@@ -428,10 +428,10 @@
    "App/Screens/MiniApps/Finances/FinancesApp.swift:213: MiniSectionTitle(title: tr(\"Factures à venir\"), detail: tr(\"\\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours\"))"
   ]
  },
- "%@ en co)urs": {
+ "%@ en cours": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:52: tile.inline = ongoing ? tr(\"\\(course?.name ?? tr(\"Cours\")) en co)urs\" : \"\\(course?.name ?? tr(\"Cours\")) à \\(TF.time(next.start, context))\""
+   "Shared/Render/Tiles/StudentTiles.swift:52: tile.inline = ongoing ? tr(\"\\(course?.name ?? tr(\"Cours\")) en cours\") : \"\\(course?.name ?? tr(\"Cours\")) à \\(TF.time(next.start, context))\""
   ]
  },
  "%@ en retard": {
@@ -635,7 +635,7 @@
   "placeholders": 1,
   "uses": [
    "App/Core/DataItems.swift:402: case .weight: return profile.weightKg.map { tr(\"\\(ProfileNumberField.format($0)) kg\") }",
-   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps)\"))\")",
+   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps\"))\"))",
    "App/Screens/Home/MyInfoSection.swift:24: add(\"weight\", \"scalemass\", tr(\"Poids\"), profile.weightKg.map { tr(\"\\(ProfileNumberField.format($0)) kg\") })",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:179: miniFigure(tr(\"Volume\"), tr(\"\\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg\"))"
   ]
@@ -717,10 +717,10 @@
    "Shared/Render/Kinds/TimeWidgets.swift:301: return hours > 0 ? tr(\"\\(hours) h \\(minutes % 60) min restantes\") : tr(\"\\(minutes) min restantes\")"
   ]
  },
- "%@ min · %@ · %@) kg": {
+ "%@ min · %@ · %@ kg": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:139: Text(tr(\"\\(TF.int(session.duration / 60)) min · \\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.volu)me)) kg\")"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:139: Text(tr(\"\\(TF.int(session.duration / 60)) min · \\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.volume)) kg\"))"
   ]
  },
  "%@ minutes de concentration. Prends une pause.": {
@@ -751,12 +751,6 @@
   "placeholders": 1,
   "uses": [
    "Shared/Model/Combo.swift:239: return fits(kind, .small) ? .single(kind) : .invalid(tr(\"\\(kind.title) n'existe pas en petit.\"))"
-  ]
- },
- "%@ par )semaine": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par )semaine\")"
   ]
  },
  "%@ par an": {
@@ -797,7 +791,8 @@
   "uses": [
    "App/Core/DataItems.swift:401: case .weeklyWorkouts: return tr(\"\\(fitness.weeklyGoal) par semaine\")",
    "App/Core/DataItems.swift:413: case .focusGoal: return tr(\"\\(Fmt.hours(productivity.weeklyFocusGoalHours)) par semaine\")",
-   "App/Screens/Home/MyInfoSection.swift:27: add(\"workouts\", \"calendar\", tr(\"Séances\"), profile.knows(.weeklyWorkouts) ? tr(\"\\(fitness.weeklyGoal) par semaine\") : nil)"
+   "App/Screens/Home/MyInfoSection.swift:27: add(\"workouts\", \"calendar\", tr(\"Séances\"), profile.knows(.weeklyWorkouts) ? tr(\"\\(fitness.weeklyGoal) par semaine\") : nil)",
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))"
   ]
  },
  "%@ pas": {
@@ -890,7 +885,7 @@
  "%@ sur %@.": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours not)és\"))).\" }"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }"
   ]
  },
  "%@ sur 24 h": {
@@ -1073,10 +1068,10 @@
    "App/Core/DataItems.swift:436: case .carName: return odometer.map { tr(\"\\(car.name) · \\(TF.int($0)) km\") } ?? car.name"
   ]
  },
- "%@ · %@ min · %@ kg s)oulevés": {
+ "%@ · %@ min · %@ kg soulevés": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg s)oulevés\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))"
   ]
  },
  "%@ · %@ rép.": {
@@ -1088,25 +1083,20 @@
  "%@ · %@ séries": {
   "placeholders": 2,
   "uses": [
+   "Shared/Render/Tiles/FitnessTiles.swift:55: tile.caption = tr(\"\\(Fmt.plural(exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(totalSets) séries\")",
    "Shared/Render/Tiles/FitnessTiles.swift:63: tile.inline = tr(\"\\(tile.value) · \\(totalSets) séries\")"
   ]
  },
- "%@ · %@ · environ %@s(routine)) min": {
+ "%@ · %@ · environ %@ min": {
   "placeholders": 3,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
   ]
  },
- "%@ · %@) séries": {
+ "%@ · %@/an": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:55: tile.caption = tr(\"\\(Fmt.plural(exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(totalSets)) séries\""
-  ]
- },
- "%@ · %@)/an": {
-  "placeholders": 2,
-  "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, curren)cy))/an\""
+   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
   ]
  },
  "%@ · P %@ g · fibres %@ g": {
@@ -1121,11 +1111,11 @@
    "Shared/Render/AccessoryViews.swift:99: Text(info.isToday ? tr(\"\\(title) · aujourd'hui\") : \"\\(title) · \\(Fmt.number(info.days)) j\")"
   ]
  },
- "%@ · environ %@) min": {
+ "%@ · environ %@ min": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routin)e)) min\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:296: detail: tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routin)e)) min\")"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:296: detail: tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
   ]
  },
  "%@ · fin %@": {
@@ -1134,16 +1124,16 @@
    "App/Screens/MiniApps/Studies/StudiesApp.swift:215: Text(tr(\"\\(Fmt.percent(progress)) · fin \\(Fmt.shortDay(end))\"))"
   ]
  },
- "%@ · fond d'écran )assorti": {
+ "%@ · fond d'écran assorti": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran )assorti\")"
+   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))"
   ]
  },
- "%@ · glisse pour les faire )tourner": {
+ "%@ · glisse pour les faire tourner": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MyWidgets/MyWidgetsView.swift:233: Text(tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) · glisse pour les faire )tourner\")"
+   "App/Screens/MyWidgets/MyWidgetsView.swift:233: Text(tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) · glisse pour les faire tourner\"))"
   ]
  },
  "%@ · jour %@": {
@@ -1330,7 +1320,7 @@
  ", Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:626: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : )\"\")\"))"
+   "App/Screens/Explore/ExploreView.swift:626: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
   ]
  },
  ", et ton objectif de protéines est atteint.": {
@@ -10272,7 +10262,7 @@
  "Encore %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séan)ces\")))\")"
+   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séances\")))\"))"
   ]
  },
  "Encre": {
@@ -10968,7 +10958,7 @@
  "Faite · %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"sér)ies\")))\", systemImage: \"checkmark.circle.fill\")"
+   "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"séries\")))\"), systemImage: \"checkmark.circle.fill\")"
   ]
  },
  "Faits :\n": {
@@ -11087,10 +11077,10 @@
    "App/Screens/Spaces/NutritionSpace.swift:585: NumberRow(title: tr(\"Fibres\"), value: $goals.fiber, unit: \"g\")"
   ]
  },
- "Fibres %@ g%@%@ ?? ": {
+ "Fibres %@ g%@%@": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") }) ?? \"\")\")"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:291: Text(tr(\"Fibres \\(TF.int(totals.fiber)) g\\(totals.sugars.map { tr(\" · sucres \\(TF.int($0)) g\") } ?? \"\")\\(totals.sodiumMg.map { tr(\" · sodium \\(TF.int($0)) mg\") } ?? \"\")\"))"
   ]
  },
  "Fiche": {
@@ -16684,7 +16674,7 @@
  "Moyenne par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois compl)ets\")))\")"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
   ]
  },
  "Moyenne sur 7 jours": {
@@ -17796,7 +17786,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:650: Text(tr(\"Objectif : \\(Fmt.hours(state.weeklyStudyGoalHours)) par semaine\")).font(.subheadline)",
-   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
   ]
  },
  "Objectif : %@ verres": {
@@ -17820,10 +17810,10 @@
    "Shared/Render/Tiles/ProductivityTiles.swift:115: tile.caption = value >= goal ? tr(\"Objectif atteint\") : tr(\"encore \\(Fmt.number(goal - value))\")"
   ]
  },
- "Objectif atteint %@) sur 7": {
+ "Objectif atteint %@ sur 7": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\")))) sur 7\")"
+   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))"
   ]
  },
  "Objectif calorique": {
@@ -17866,7 +17856,7 @@
  "Objectif de la semaine atteint": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séan)ces\")))\")"
+   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séances\")))\"))"
   ]
  },
  "Objectif de pas": {
@@ -20942,7 +20932,7 @@
  "Record : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:156: tile.detail = tr(\"Record : \\(Fmt.plural(best, tr(\"jour\"), tr(\"jo)urs\")))\""
+   "Shared/Render/Tiles/ProductivityTiles.swift:156: tile.detail = tr(\"Record : \\(Fmt.plural(best, tr(\"jour\"), tr(\"jours\")))\")"
   ]
  },
  "Records": {
@@ -23686,7 +23676,7 @@
  "Style %@%@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:626: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : )\"\")\"))"
+   "App/Screens/Explore/ExploreView.swift:626: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
   ]
  },
  "Styles": {
@@ -23773,7 +23763,7 @@
  "Suivi : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:202: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jo)urs\")))\""
+   "Shared/Render/Tiles/NutritionTiles.swift:202: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\")"
   ]
  },
  "Suivi d'habitudes": {
@@ -24258,13 +24248,13 @@
  "Série %@/%@ · %@ × %@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps)\"))\")"
+   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps\"))\"))"
   ]
  },
  "Série : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
   ]
  },
  "Série de %@ j": {
@@ -24882,7 +24872,7 @@
  "Tes cours de la semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par )semaine\")"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))"
   ]
  },
  "Tes cours et leurs horaires de la semaine.": {
@@ -25936,10 +25926,10 @@
    "Shared/Render/WidgetCanvas.swift:143: Text(tr(\"Touche pour débloquer ce widget\"))"
   ]
  },
- "Touche pour démarrer « %@) »": {
+ "Touche pour démarrer « %@ »": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\"))) »\""
+   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
   ]
  },
  "Touche pour l'autoriser dans Tessera": {
@@ -26899,7 +26889,7 @@
    "App/Screens/Content/WeatherLocationView.swift:33: Label(tr(\"Utiliser ma position\"), systemImage: \"location.fill\")"
   ]
  },
- "Utilisé par %@ : %@).": {
+ "Utilisé par %@ : %@.": {
   "placeholders": 2,
   "uses": [
    "App/Screens/Home/MyInfoCenter.swift:273: Text(users.isEmpty ? tr(\"Ce que tu renseignes ici servira à tes widgets \\(area.title.lowercasedFirst) et à « Mon Quotidien ».\") : tr(\"Utilisé par \\(Fmt.plural(users.count, tr(\"de tes widgets\"), tr(\"de"
@@ -27581,7 +27571,7 @@
  "Widgets ajoutés à Mes widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gr)atuite)\", systemImage: "
+   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gratuite)\"), systemImage: "
   ]
  },
  "Widgets de l'espace": {
@@ -27665,13 +27655,13 @@
  "abonnement": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, curren)cy))/an\""
+   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
   ]
  },
  "abonnements": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, curren)cy))/an\""
+   "Shared/Render/Tiles/MoneyTiles.swift:152: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
   ]
  },
  "abonné": {
@@ -27684,6 +27674,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessPages.swift:272: detail: Fmt.plural(snapshot.subscribers, tr(\"abonné\"), tr(\"abonnés\")), value: TF.money(snapshot.mrr, currency), showsChevron: false)"
+  ]
+ },
+ "absent": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr(\"absent\"))\")"
   ]
  },
  "actifs moins dettes": {
@@ -27777,8 +27773,8 @@
  "aucun": {
   "placeholders": 0,
   "uses": [
-   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr)(\"absent\"))\"",
-   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr)(\"absent\"))\""
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr(\"absent\"))\")",
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr(\"absent\"))\")"
   ]
  },
  "aucun groupe": {
@@ -28033,8 +28029,8 @@
   "uses": [
    "App/Core/DataItems.swift:414: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\"), tr(\"cours\"))",
    "App/Core/DataItems.swift:414: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\"), tr(\"cours\"))",
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par )semaine\")",
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par )semaine\")"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))",
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))"
   ]
  },
  "coût estimé, tout compris": {
@@ -28083,7 +28079,7 @@
  "date dépassée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jo)urs\")))\" : tr(\"date dépassée\")"
+   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jours\")))\") : tr(\"date dépassée\")"
   ]
  },
  "de la journée": {
@@ -28320,7 +28316,7 @@
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:79: Text(Fmt.plural(results.count, tr(\"exercice\"), tr(\"exercices\")))",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute",
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routin)e)) min\")"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
   ]
  },
  "exercices": {
@@ -28329,7 +28325,7 @@
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:79: Text(Fmt.plural(results.count, tr(\"exercice\"), tr(\"exercices\")))",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute",
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routin)e)) min\")"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
   ]
  },
  "extrême": {
@@ -28530,18 +28526,10 @@
    "App/Screens/Home/MyInfoCenter.swift:167: Text(completion.missing.isEmpty ? tr(\"Tout est renseigné\") : Fmt.plural(completion.missing.count, tr(\"information à compléter\"), tr(\"informations à compléter\")))"
   ]
  },
- "jo)urs": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jo)urs\")))\" : tr(\"date dépassée\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:202: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jo)urs\")))\"",
-   "Shared/Render/Tiles/ProductivityTiles.swift:156: tile.detail = tr(\"Record : \\(Fmt.plural(best, tr(\"jour\"), tr(\"jo)urs\")))\""
-  ]
- },
  "jour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\")))) sur 7\")",
+   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:144: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
    "App/Screens/Spaces/NutritionSpace.swift:115: ValueRow(title: tr(\"Série de suivi\"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr(\"jour\"), tr(\"jours\")), symbol: \"flame.fill\")",
    "App/Screens/Spaces/ProductivitySpace.swift:313: ValueRow(title: habit.name, value: Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")), symbol: habit.symbol, colorHex: habit.colorHex)"
@@ -28556,7 +28544,7 @@
  "jour noté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours not)és\"))).\" }"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }"
   ]
  },
  "jour restant": {
@@ -28569,7 +28557,7 @@
  "jours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\")))) sur 7\")",
+   "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:144: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
    "App/Screens/Spaces/NutritionSpace.swift:115: ValueRow(title: tr(\"Série de suivi\"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr(\"jour\"), tr(\"jours\")), symbol: \"flame.fill\")",
    "App/Screens/Spaces/ProductivitySpace.swift:313: ValueRow(title: habit.name, value: Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")), symbol: habit.symbol, colorHex: habit.colorHex)"
@@ -28581,10 +28569,10 @@
    "Shared/Render/Kinds/TimeWidgets.swift:427: caption = delta == 0 ? tr(\"C'est aujourd'hui\") : (delta > 1 ? tr(\"jours depuis\") : tr(\"jour depuis\"))"
   ]
  },
- "jours not)és": {
+ "jours notés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours not)és\"))).\" }"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }"
   ]
  },
  "jours passés": {
@@ -28799,7 +28787,7 @@
  "moins": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la mê)me date\","
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la même date\"),"
   ]
  },
  "mois": {
@@ -28810,16 +28798,16 @@
    "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")"
   ]
  },
- "mois compl)ets": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois compl)ets\")))\")"
-  ]
- },
  "mois complet": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois compl)ets\")))\")"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
+  ]
+ },
+ "mois complets": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
   ]
  },
  "moyenne %@": {
@@ -28919,7 +28907,7 @@
  "ou %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jo)urs\")))\" : tr(\"date dépassée\")"
+   "Shared/Render/Tiles/CarTiles.swift:62: tile.caption = days >= 0 ? tr(\"ou \\(Fmt.plural(days, tr(\"jour\"), tr(\"jours\")))\") : tr(\"date dépassée\")"
   ]
  },
  "ou tous les": {
@@ -29122,13 +29110,13 @@
  "plus": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la mê)me date\","
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la même date\"),"
   ]
  },
- "poids du corps)": {
+ "poids du corps": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps)\"))\")"
+   "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps\"))\"))"
   ]
  },
  "pois chiche": {
@@ -29337,31 +29325,26 @@
    "Shared/Render/StyleRendering.swift:351: if let hex = o.rowColors[tr(\"seg:\\(segment.label)\")] { copy.colorHex = hex }"
   ]
  },
- "semai)nes": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
-  ]
- },
  "semaine": {
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/TimeWidgets.swift:445: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")",
    "Shared/Render/Kinds/TimeWidgets.swift:446: : Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))",
-   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semai)nes\")))\" : tr(\"Objectif : \\(goal) par semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
   ]
  },
  "semaines": {
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/TimeWidgets.swift:445: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")",
-   "Shared/Render/Kinds/TimeWidgets.swift:446: : Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))"
+   "Shared/Render/Kinds/TimeWidgets.swift:446: : Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))",
+   "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
   ]
  },
- "signature : %@ · profil : %@(": {
+ "signature : %@ · profil : %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr)(\"absent\"))\""
+   "Shared/Support/WidgetDiagnostics.swift:56: return tr(\"signature : \\(signed.isEmpty ? tr(\"aucun\") : signed.joined(separator: \", \")) · profil : \\(hasProfile ? (profile.isEmpty ? tr(\"aucun\") : profile.joined(separator: \", \")) : tr(\"absent\"))\")"
   ]
  },
  "siège %@": {
@@ -29403,7 +29386,7 @@
  "sur %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois compl)ets\")))\")",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:136: MiniStat(title: tr(\"Étude\"), value: Fmt.minutes(studied), detail: tr(\"sur \\(Fmt.hours(state.weeklyStudyGoalHours))\"),",
    "App/Screens/MiniApps/Travel/TravelApp.swift:145: Text(tr(\"sur \\(TF.money(budget, currency))\")).font(.caption).foregroundStyle(.secondary)",
    "Shared/Render/Tiles/MoneyTiles.swift:75: detail: limit > 0 ? tr(\"sur \\(TF.money(limit, currency))\") : nil,"
@@ -29447,17 +29430,11 @@
    "Shared/Domains/FoodDatabase.swift:296: \"potato\": [\"patate\", tr(\"pomme de terre\"), \"potato\"], \"sweetpotato\": [tr(\"patate douce\"), tr(\"sweet potato\")], \"kale\": [tr(\"chou kale\")],"
   ]
  },
- "séan)ces": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séan)ces\")))\")"
-  ]
- },
  "séance": {
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:400: case .routines: return Fmt.plural(fitness.routines.count, tr(\"séance\"), tr(\"séances\"))",
-   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séan)ces\")))\")",
+   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séances\")))\"))",
    "App/Screens/Profile/DataItemViews.swift:136: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))",
    "App/Screens/Profile/ProfileTopics.swift:330: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))"
   ]
@@ -29473,9 +29450,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:400: case .routines: return Fmt.plural(fitness.routines.count, tr(\"séance\"), tr(\"séances\"))",
+   "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séances\")))\"))",
    "App/Screens/Profile/DataItemViews.swift:136: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))",
-   "App/Screens/Profile/ProfileTopics.swift:330: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))",
-   "Shared/Render/Tiles/FitnessTiles.swift:167: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette )semaine\""
+   "App/Screens/Profile/ProfileTopics.swift:330: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))"
   ]
  },
  "séances cette semaine": {
@@ -29508,18 +29485,12 @@
    "App/Screens/Spaces/SpaceBuilderView.swift:310: let count = Fmt.plural(selection.count, tr(\"sélectionné\"), tr(\"sélectionnés\"))"
   ]
  },
- "sér)ies": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"sér)ies\")))\", systemImage: \"checkmark.circle.fill\")"
-  ]
- },
  "série": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
-   "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"sér)ies\")))\", systemImage: \"checkmark.circle.fill\")",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg s)oulevés\")",
+   "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"séries\")))\"), systemImage: \"checkmark.circle.fill\")",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
   ]
  },
@@ -29527,15 +29498,15 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg s)oulevés\")",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute",
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:139: Text(tr(\"\\(TF.int(session.duration / 60)) min · \\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.volu)me)) kg\")"
+   "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"séries\")))\"), systemImage: \"checkmark.circle.fill\")",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
   ]
  },
  "ta séance": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\"))) »\""
+   "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
   ]
  },
  "terminée": {
@@ -29681,7 +29652,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
-   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran )assorti\")",
+   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))",
    "App/Screens/Explore/StoreMagazine.swift:163: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Explore/StoreMagazine.swift:360: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))"
   ]
@@ -29689,14 +29660,14 @@
  "widget ajouté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gr)atuite)\", systemImage: "
+   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gratuite)\"), systemImage: "
   ]
  },
  "widgets": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
-   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran )assorti\")",
+   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))",
    "App/Screens/Explore/StoreMagazine.swift:163: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Explore/StoreMagazine.swift:360: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))"
   ]
@@ -29704,7 +29675,7 @@
  "widgets ajoutés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gr)atuite)\", systemImage: "
+   "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gratuite)\"), systemImage: "
   ]
  },
  "« %@ » est prêt": {
