@@ -483,7 +483,7 @@ struct NutritionHistoryPage: View {
 
     private func averages(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets, isSingleDay: Bool) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: isSingleDay ? tr("Bilan") : tr("Moyennes"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés")))
+            MiniSectionTitle(title: isSingleDay ? tr("Bilan") : tr("Moyennes", context: "averages"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés")))
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
                 MiniStat(title: tr("Calories"), value: TF.int(stats.averages.kcal), unit: "kcal", detail: known.kcal ? tr("objectif \(TF.int(stats.goal))") : nil, colorHex: accentHex)
                 MiniStat(title: tr("Protéines"), value: TF.int(stats.averages.protein), unit: "g")

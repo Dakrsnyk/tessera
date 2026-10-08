@@ -60,7 +60,7 @@ enum WidgetDiagnostics {
         guard AppGroup.isShared else {
             return ProvisioningProfile.appGroups().isEmpty ? tr("Inactif (aucun groupe)") : tr("Inactif")
         }
-        return AppGroup.identifier == AppGroup.declaredIdentifier ? tr("Actif") : tr("Actif (groupe de l'installation)")
+        return AppGroup.identifier == AppGroup.declaredIdentifier ? tr("Actif", context: "status") : tr("Actif (groupe de l'installation)")
     }
 
     static var appVersion: String {

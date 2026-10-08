@@ -589,7 +589,7 @@ struct NutritionGoalsEditor: View {
                     ForEach(NutritionCalculator.Sex.allCases) { Text($0.title).tag($0) }
                 }
                 Stepper(tr("Âge : \(age) ans"), value: $age, in: 16...90)
-                NumberRow(title: tr("Taille"), value: $height, unit: tr("cm"))
+                NumberRow(title: tr("Taille", context: "height"), value: $height, unit: tr("cm"))
                 NumberRow(title: tr("Poids"), value: $weight, unit: tr("kg"))
                 Picker(tr("Activité"), selection: $activity) {
                     ForEach(NutritionCalculator.Activity.allCases) { Text($0.title).tag($0) }

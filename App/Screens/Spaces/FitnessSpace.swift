@@ -146,7 +146,7 @@ struct RoutineEditor: View {
                     NumberRow(title: tr("Charge"), value: $exercise.weight, unit: tr("kg"))
                     Stepper(tr("Repos : \(exercise.restSeconds) s"), value: $exercise.restSeconds, in: 15...600, step: 15)
                     TextField(tr("Tempo (ex. 3-1-1-0)"), text: $exercise.tempo)
-                    TextField(tr("Notes"), text: $exercise.notes)
+                    TextField(tr("Notes", context: "text"), text: $exercise.notes)
                 }
             }
             Section {

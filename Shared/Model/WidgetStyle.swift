@@ -86,7 +86,7 @@ enum ChartKind: String, Codable, CaseIterable, Identifiable {
         case .ring: tr("Anneau")
         case .pie: tr("Cercle")
         case .gauge: tr("Jauge")
-        case .progress: tr("Barre")
+        case .progress: tr("Barre", context: "progress")
         }
     }
 

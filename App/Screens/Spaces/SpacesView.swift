@@ -166,7 +166,7 @@ struct SpacesView: View {
             return Fmt.plural(model.following.followed.count, tr("entreprise suivie"), tr("entreprises suivies"))
         case .student:
             if let exam = StudentMath.nextExam(model.student, at: now) { return tr("Examen dans \(DateMath.daysBetween(now, exam.date)) j") }
-            return model.student.courses.isEmpty ? tr("Ajoute tes cours") : Fmt.plural(model.student.courses.count, tr("cours"), tr("cours"))
+            return model.student.courses.isEmpty ? tr("Ajoute tes cours") : Fmt.plural(model.student.courses.count, tr("cours", context: "one"), tr("cours"))
         case .travel:
             if let trip = TravelMath.currentTrip(model.travel, at: now) {
                 return TravelMath.isOngoing(trip, at: now) ? tr("En voyage à \(trip.destination)") : tr("\(trip.destination) dans \(DateMath.daysBetween(now, trip.start)) j")

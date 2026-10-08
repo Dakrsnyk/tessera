@@ -321,7 +321,7 @@
  "%@ cm": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/MiniAppSettings.swift:84: if let height = profile.heightCm { rows.append((tr(\"Taille\"), tr(\"\\(TF.int(height)) cm\"))) }"
+   "App/Screens/MiniApps/MiniAppSettings.swift:84: if let height = profile.heightCm { rows.append((tr(\"Taille\", context: \"height\"), tr(\"\\(TF.int(height)) cm\"))) }"
   ]
  },
  "%@ commandes ce mois-ci": {
@@ -444,7 +444,7 @@
  "%@ et %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))) et \\(Fmt.plural(months, tr(\"mois\", context: \"one\"), tr(\"mois\")))\")",
    "Shared/Render/Kinds/TimeWidgets.swift:445: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")"
   ]
  },
@@ -769,7 +769,7 @@
    "App/Core/DataItems.swift:401: case .weeklyWorkouts: return tr(\"\\(fitness.weeklyGoal) par semaine\")",
    "App/Core/DataItems.swift:413: case .focusGoal: return tr(\"\\(Fmt.hours(productivity.weeklyFocusGoalHours)) par semaine\")",
    "App/Screens/Home/MyInfoSection.swift:27: add(\"workouts\", \"calendar\", tr(\"Séances\"), profile.knows(.weeklyWorkouts) ? tr(\"\\(fitness.weeklyGoal) par semaine\") : nil)",
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))"
   ]
  },
  "%@ pas": {
@@ -2138,14 +2138,19 @@
  "Actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/KindOptionsSection.swift:170: EditorSection(title: tr(\"Actif\")) {",
-   "Shared/Support/WidgetDiagnostics.swift:63: return AppGroup.identifier == AppGroup.declaredIdentifier ? tr(\"Actif\") : tr(\"Actif (groupe de l'installation)\")"
+   "App/Screens/Editor/KindOptionsSection.swift:170: EditorSection(title: tr(\"Actif\")) {"
   ]
  },
  "Actif (groupe de l'installation)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Support/WidgetDiagnostics.swift:63: return AppGroup.identifier == AppGroup.declaredIdentifier ? tr(\"Actif\") : tr(\"Actif (groupe de l'installation)\")"
+   "Shared/Support/WidgetDiagnostics.swift:63: return AppGroup.identifier == AppGroup.declaredIdentifier ? tr(\"Actif\", context: \"status\") : tr(\"Actif (groupe de l'installation)\")"
+  ]
+ },
+ "Actif [status]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:63: return AppGroup.identifier == AppGroup.declaredIdentifier ? tr(\"Actif\", context: \"status\") : tr(\"Actif (groupe de l'installation)\")"
   ]
  },
  "Actifs %@ · Dettes %@": {
@@ -2396,7 +2401,7 @@
  "Ajoute tes cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:169: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\"), tr(\"cours\"))"
+   "App/Screens/Spaces/SpacesView.swift:169: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))"
   ]
  },
  "Ajoute tes cours : ton horaire du jour apparaîtra ici.": {
@@ -4257,8 +4262,13 @@
  "Barre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ExerciseLibrary.swift:82: case .barbell: tr(\"Barre\")",
-   "Shared/Model/WidgetStyle.swift:89: case .progress: tr(\"Barre\")"
+   "Shared/Domains/ExerciseLibrary.swift:82: case .barbell: tr(\"Barre\")"
+  ]
+ },
+ "Barre [progress]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:89: case .progress: tr(\"Barre\", context: \"progress\")"
   ]
  },
  "Barre au front": {
@@ -4538,7 +4548,7 @@
  "Bilan": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "Billets d'avion": {
@@ -5694,8 +5704,13 @@
  "Cartes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/HomeSetups.swift:132: static let wallet = SetupApp(name: tr(\"Cartes\"), symbol: \"creditcard.fill\")",
    "Shared/Model/WidgetStyle.swift:22: case .cards: tr(\"Cartes\")"
+  ]
+ },
+ "Cartes [app]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:132: static let wallet = SetupApp(name: tr(\"Cartes\", context: \"app\"), symbol: \"creditcard.fill\")"
   ]
  },
  "Cartes denses": {
@@ -16650,8 +16665,13 @@
  "Moyennes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:217: case .medium: tr(\"Moyennes\")",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/Explore/StoreCombos.swift:217: case .medium: tr(\"Moyennes\")"
+  ]
+ },
+ "Moyennes [averages]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "Moyennes calculées sur les mois terminés où tu as noté quelque chose.": {
@@ -17156,7 +17176,6 @@
  "Note": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:276: SheetForm(title: tr(\"Note\"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {",
    "Shared/Model/KindCatalog.swift:146: KindInfo(kind: .note, title: tr(\"Note\"), summary: tr(\"Un mot, un rappel ou une citation, toujours sous les yeux.\"), category: .productivity, symbol: \"note.text\", isPremium: false, families: SML, keywo"
   ]
  },
@@ -17166,6 +17185,12 @@
    "App/Screens/MiniApps/Travel/TravelApp.swift:347: TextField(tr(\"Note (facultatif)\"), text: $expense.label)",
    "App/Screens/Spaces/BudgetSpace.swift:201: TextField(tr(\"Note (facultatif)\"), text: $expense.note)",
    "App/Screens/Spaces/MoneySpaces.swift:229: TextField(tr(\"Note (facultatif)\"), text: $sale.note)"
+  ]
+ },
+ "Note [grade]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:276: SheetForm(title: tr(\"Note\", context: \"grade\"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {"
   ]
  },
  "Note obtenue": {
@@ -17298,9 +17323,24 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:101: case .grades: tr(\"Notes\")",
-   "App/Screens/Explore/HomeSetups.swift:123: static let notes = SetupApp(name: tr(\"Notes\"), symbol: \"note.text\")",
-   "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:509: TextField(tr(\"Notes\"), text: $notes, axis: .vertical)",
-   "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:555: TextField(tr(\"Notes\"), text: $notes, axis: .vertical)"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:258: MiniRow(symbol: \"chart.bar.fill\", colorHex: \"3366FF\", title: tr(\"Notes\"), detail: tr(\"Moyennes et ce qu'il te faut pour ton objectif\"))",
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:353: return section(tr(\"Notes\"), add: tr(\"Ajouter une note\"), onAdd: { sheet = .grade(Studies.newGrade(state, course: course.id)) }) {",
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:563: .navigationTitle(tr(\"Notes\"))"
+  ]
+ },
+ "Notes [app]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:123: static let notes = SetupApp(name: tr(\"Notes\", context: \"app\"), symbol: \"note.text\")"
+  ]
+ },
+ "Notes [text]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:509: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
+   "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:555: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:280: Section(tr(\"Notes\", context: \"text\")) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:281: TextField(tr(\"Notes\", context: \"text\"), text: $task.notes, axis: .vertical)"
   ]
  },
  "Notifications": {
@@ -21638,8 +21678,13 @@
  "Retour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:127: .accessibilityLabel(Text(tr(\"Retour\")))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:170: DatePicker(tr(\"Retour\"), selection: $trip.end).environment(\\.locale, Fmt.locale)"
+  ]
+ },
+ "Retour [back]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:127: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))"
   ]
  },
  "Retour en arrière": {
@@ -22036,7 +22081,7 @@
  "Rien noté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\"), tr(\"repas\"))",
+   "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\", context: \"one\"), tr(\"repas\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:95: detail: items.isEmpty ? tr(\"Rien noté\") : items.map(\\.food.name).joined(separator: \", \"),"
   ]
  },
@@ -24530,9 +24575,16 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:255: Picker(tr(\"Taille\"), selection: $size) {",
-   "App/Screens/Home/MyInfoSection.swift:25: add(\"height\", \"ruler\", tr(\"Taille\"), profile.heightCm.map(Self.heightText))",
-   "App/Screens/MiniApps/MiniAppSettings.swift:84: if let height = profile.heightCm { rows.append((tr(\"Taille\"), tr(\"\\(TF.int(height)) cm\"))) }",
-   "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")"
+   "App/Screens/Spaces/SpaceBuilderView.swift:191: Picker(tr(\"Taille\"), selection: Binding(get: { format }, set: { setFormat($0) })) {"
+  ]
+ },
+ "Taille [height]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/MyInfoSection.swift:25: add(\"height\", \"ruler\", tr(\"Taille\", context: \"height\"), profile.heightCm.map(Self.heightText))",
+   "App/Screens/MiniApps/MiniAppSettings.swift:84: if let height = profile.heightCm { rows.append((tr(\"Taille\", context: \"height\"), tr(\"\\(TF.int(height)) cm\"))) }",
+   "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\", context: \"height\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")",
+   "App/Screens/Spaces/NutritionSpace.swift:592: NumberRow(title: tr(\"Taille\", context: \"height\"), value: $height, unit: tr(\"cm\"))"
   ]
  },
  "Talonner lourdement.": {
@@ -24830,7 +24882,7 @@
  "Tes cours de la semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))"
   ]
  },
  "Tes cours et leurs horaires de la semaine.": {
@@ -27685,17 +27737,23 @@
  "an": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")",
-   "Shared/Render/Kinds/TimeWidgets.swift:440: : Fmt.plural(years, tr(\"an\"), tr(\"ans\"))"
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))) et \\(Fmt.plural(months, tr(\"mois\", context: \"one\"), tr(\"mois\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:440: : Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))"
   ]
  },
  "ans": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:292: ProfileNumberField(title: tr(\"Âge\"), unit: tr(\"ans\"), value: ageBinding, decimals: false, identifier: \"profile-age\")",
-   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")",
-   "Shared/Render/Kinds/TimeWidgets.swift:440: : Fmt.plural(years, tr(\"an\"), tr(\"ans\"))",
-   "Shared/Render/Tiles/TimeTiles.swift:29: tile.unit = tr(\"ans\")"
+   "Shared/Render/Tiles/TimeTiles.swift:29: tile.unit = tr(\"ans\")",
+   "Shared/Render/Tiles/TimeTiles.swift:48: tile.unit = tr(\"ans\")"
+  ]
+ },
+ "ans [duration]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))) et \\(Fmt.plural(months, tr(\"mois\", context: \"one\"), tr(\"mois\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:440: : Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))"
   ]
  },
  "atteint": {
@@ -27903,8 +27961,8 @@
  "cm": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")",
-   "App/Screens/Spaces/NutritionSpace.swift:592: NumberRow(title: tr(\"Taille\"), value: $height, unit: tr(\"cm\"))"
+   "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\", context: \"height\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")",
+   "App/Screens/Spaces/NutritionSpace.swift:592: NumberRow(title: tr(\"Taille\", context: \"height\"), value: $height, unit: tr(\"cm\"))"
   ]
  },
  "coke zero": {
@@ -27985,10 +28043,19 @@
  "cours": {
   "placeholders": 0,
   "uses": [
-   "App/Core/DataItems.swift:414: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\"), tr(\"cours\"))",
-   "App/Core/DataItems.swift:414: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\"), tr(\"cours\"))",
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))",
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\"), tr(\"cours\"))) par semaine\"))"
+   "App/Core/DataItems.swift:414: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))",
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))",
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:41: MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\")))",
+   "App/Screens/Spaces/SpacesView.swift:169: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))"
+  ]
+ },
+ "cours [one]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/DataItems.swift:414: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))",
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))",
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:41: MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\")))",
+   "App/Screens/Spaces/SpacesView.swift:169: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))"
   ]
  },
  "coût estimé, tout compris": {
@@ -28517,7 +28584,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "jour restant": {
@@ -28546,7 +28613,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "jours passés": {
@@ -28762,8 +28829,13 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:463: IntRow(title: tr(\"ou tous les\"), value: Binding(get: { service.intervalMonths ?? 0 }, set: { service.intervalMonths = $0 > 0 ? $0 : nil }), unit: tr(\"mois\"))",
-   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")",
-   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\"))) et \\(Fmt.plural(months, tr(\"mois\"), tr(\"mois\")))\")"
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))) et \\(Fmt.plural(months, tr(\"mois\", context: \"one\"), tr(\"mois\")))\")"
+  ]
+ },
+ "mois [one]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))) et \\(Fmt.plural(months, tr(\"mois\", context: \"one\"), tr(\"mois\")))\")"
   ]
  },
  "mois complet": {
@@ -29204,8 +29276,13 @@
  "repas": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\"), tr(\"repas\"))",
-   "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\"), tr(\"repas\"))"
+   "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\", context: \"one\"), tr(\"repas\"))"
+  ]
+ },
+ "repas [one]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\", context: \"one\"), tr(\"repas\"))"
   ]
  },
  "repas noté aujourd'hui": {

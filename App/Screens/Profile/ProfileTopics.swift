@@ -291,7 +291,7 @@ struct TopicForm: View {
         HStack(spacing: 8) {
             ProfileNumberField(title: tr("Âge"), unit: tr("ans"), value: ageBinding, decimals: false, identifier: "profile-age")
                 .disabled(model.life.birthday != nil)
-            ProfileNumberField(title: tr("Taille"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
+            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
             ProfileNumberField(title: tr("Poids"), unit: tr("kg"), value: weightBinding, identifier: "profile-weight")
         }
     }

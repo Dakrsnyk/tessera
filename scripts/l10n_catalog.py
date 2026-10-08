@@ -30,6 +30,9 @@ NATIVE_BEFORE = re.compile(r"(LocalizedStringResource\s*=\s*$|IntentDescription\
                            r"DisplayRepresentation\(title:\s*$|TypeDisplayRepresentation\(name:\s*$|"
                            r"(?<![\w.])Text\(\s*$|\.configurationDisplayName\(\s*$|\.description\(\s*$)")
 WORDS = re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿ]{2,}")
+# tr("Taille", context: "height") is the key "Taille [height]": a French word with several meanings.
+CONTEXT_AFTER = re.compile(r'\s*,\s*context:\s*"([a-z]+)"\s*\)')
+CONTEXT_KEY = re.compile(r" \[[a-z]+\]$")
 
 
 def swift_files():
@@ -49,7 +52,11 @@ def code_keys():
             native = NATIVE_BEFORE.search(before) and WORDS.search(lit.key) and not lit.key.startswith(("%", "\\"))
             if not (wrapped or native):
                 continue
-            entry = keys.setdefault(lit.key, {"placeholders": lit.placeholder_count if lit.has_interpolation else 0, "uses": []})
+            key = lit.key
+            context = CONTEXT_AFTER.match(source, lit.end) if wrapped else None
+            if context:
+                key = f"{key} [{context.group(1)}]"
+            entry = keys.setdefault(key, {"placeholders": lit.placeholder_count if lit.has_interpolation else 0, "uses": []})
             line = source[line_start:source.find("\n", lit.start)].strip()
             if len(entry["uses"]) < 4:
                 entry["uses"].append(f"{path}:{line_of(source, lit.start)}: {line[:200]}")
@@ -148,7 +155,7 @@ def build():
     tables = {language: load(language) for language in LANGUAGES}
     strings = {}
     for key in sorted(keys):
-        localizations = {"fr": unit(key)}
+        localizations = {"fr": unit(CONTEXT_KEY.sub("", key))}
         for language, table in tables.items():
             if key in table and table[key].strip():
                 localizations[language] = unit(table[key])

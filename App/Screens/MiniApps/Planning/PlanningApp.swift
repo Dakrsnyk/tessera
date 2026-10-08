@@ -277,8 +277,8 @@ struct TaskEditor: View {
                     Text(tr("Une fois faite, la tâche revient à sa prochaine date."))
                 }
             }
-            Section(tr("Notes")) {
-                TextField(tr("Notes"), text: $task.notes, axis: .vertical)
+            Section(tr("Notes", context: "text")) {
+                TextField(tr("Notes", context: "text"), text: $task.notes, axis: .vertical)
             }
             if model.content.tasks.contains(where: { $0.id == task.id }) {
                 Section {

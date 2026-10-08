@@ -506,7 +506,7 @@ struct AddToRoutineSheet: View {
             }
             Section {
                 TextField(tr("Tempo (ex. 3-1-1-0)"), text: $tempo)
-                TextField(tr("Notes"), text: $notes, axis: .vertical)
+                TextField(tr("Notes", context: "text"), text: $notes, axis: .vertical)
             } footer: {
                 Text(tr("Tempo : secondes en descente, pause, montée, pause."))
             }
@@ -552,7 +552,7 @@ struct CustomExerciseEditor: View {
                 Picker(tr("Type"), selection: $type) {
                     ForEach(ExerciseType.allCases) { Text($0.title).tag($0) }
                 }
-                TextField(tr("Notes"), text: $notes, axis: .vertical)
+                TextField(tr("Notes", context: "text"), text: $notes, axis: .vertical)
             }
         }
     }

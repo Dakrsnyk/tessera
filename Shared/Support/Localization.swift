@@ -63,6 +63,16 @@ func tr(_ text: LocalizedText) -> String {
     return String(format: translated, locale: Fmt.locale, arguments: text.arguments.map { NSString(string: $0) })
 }
 
+/// The text in the language of the iPhone, for a French word with several meanings:
+/// `tr("Taille", context: "height")` looks up `"Taille [height]"`, so the height of a person and the
+/// size of a widget get their own translation. French shows the word itself.
+func tr(_ text: LocalizedText, context: String) -> String {
+    let key = "\(text.key) [\(context)]"
+    let translated = Localization.bundle.localizedString(forKey: key, value: text.key, table: nil)
+    guard !text.arguments.isEmpty else { return translated }
+    return String(format: translated, locale: Fmt.locale, arguments: text.arguments.map { NSString(string: $0) })
+}
+
 enum Localization {
     static let bundle = Bundle.main
 

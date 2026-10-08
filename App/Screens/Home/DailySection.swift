@@ -266,7 +266,7 @@ private struct NutritionDayTile: View {
     }
 
     private var mealsText: String {
-        nutrition.foods == 0 ? tr("Rien noté") : Fmt.plural(nutrition.meals, tr("repas"), tr("repas"))
+        nutrition.foods == 0 ? tr("Rien noté") : Fmt.plural(nutrition.meals, tr("repas", context: "one"), tr("repas"))
     }
 
     private func macro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String) -> some View {

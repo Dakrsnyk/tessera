@@ -411,7 +411,7 @@ extension AppModel {
         case .deadlines: return Fmt.plural(productivity.deadlines.count, tr("échéance"), tr("échéances"))
         case .counters: return Fmt.plural(productivity.counters.count, tr("compteur"), tr("compteurs"))
         case .focusGoal: return tr("\(Fmt.hours(productivity.weeklyFocusGoalHours)) par semaine")
-        case .timetable: return Fmt.plural(student.courses.count, tr("cours"), tr("cours"))
+        case .timetable: return Fmt.plural(student.courses.count, tr("cours", context: "one"), tr("cours"))
         case .exams:
             let next = student.exams.filter { $0.date > now }.count
             return next == 0 ? tr("Aucun à venir") : Fmt.plural(next, tr("examen à venir"), tr("examens à venir"))

@@ -1,0 +1,103 @@
+[
+ {
+  "key": "Actif [status]",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Support/WidgetDiagnostics.swift:63: return AppGroup.identifier == AppGroup.declaredIdentifier ? tr(\"Actif\", context: \"status\") : tr(\"Actif (groupe de l'installation)\")"
+  ]
+ },
+ {
+  "key": "Barre [progress]",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:89: case .progress: tr(\"Barre\", context: \"progress\")"
+  ]
+ },
+ {
+  "key": "Cartes [app]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:132: static let wallet = SetupApp(name: tr(\"Cartes\", context: \"app\"), symbol: \"creditcard.fill\")"
+  ]
+ },
+ {
+  "key": "Moyennes [averages]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+  ]
+ },
+ {
+  "key": "Note [grade]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:276: SheetForm(title: tr(\"Note\", context: \"grade\"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {"
+  ]
+ },
+ {
+  "key": "Notes [app]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:123: static let notes = SetupApp(name: tr(\"Notes\", context: \"app\"), symbol: \"note.text\")"
+  ]
+ },
+ {
+  "key": "Notes [text]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:509: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
+   "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:555: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:280: Section(tr(\"Notes\", context: \"text\")) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:281: TextField(tr(\"Notes\", context: \"text\"), text: $task.notes, axis: .vertical)"
+  ]
+ },
+ {
+  "key": "Retour [back]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:127: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))"
+  ]
+ },
+ {
+  "key": "Taille [height]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/MyInfoSection.swift:25: add(\"height\", \"ruler\", tr(\"Taille\", context: \"height\"), profile.heightCm.map(Self.heightText))",
+   "App/Screens/MiniApps/MiniAppSettings.swift:84: if let height = profile.heightCm { rows.append((tr(\"Taille\", context: \"height\"), tr(\"\\(TF.int(height)) cm\"))) }",
+   "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\", context: \"height\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")",
+   "App/Screens/Spaces/NutritionSpace.swift:592: NumberRow(title: tr(\"Taille\", context: \"height\"), value: $height, unit: tr(\"cm\"))"
+  ]
+ },
+ {
+  "key": "ans [duration]",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))) et \\(Fmt.plural(months, tr(\"mois\", context: \"one\"), tr(\"mois\")))\")",
+   "Shared/Render/Kinds/TimeWidgets.swift:440: : Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))"
+  ]
+ },
+ {
+  "key": "cours [one]",
+  "placeholders": 0,
+  "uses": [
+   "App/Core/DataItems.swift:414: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))",
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:232: detail: state.slots.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(state.slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))",
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:41: MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr(\"cours\", context: \"one\"), tr(\"cours\")))",
+   "App/Screens/Spaces/SpacesView.swift:169: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))"
+  ]
+ },
+ {
+  "key": "mois [one]",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Kinds/TimeWidgets.swift:439: ? tr(\"\\(Fmt.plural(years, tr(\"an\"), tr(\"ans\", context: \"duration\"))) et \\(Fmt.plural(months, tr(\"mois\", context: \"one\"), tr(\"mois\")))\")"
+  ]
+ },
+ {
+  "key": "repas [one]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\", context: \"one\"), tr(\"repas\"))"
+  ]
+ }
+]

@@ -124,7 +124,7 @@ struct OnboardingView: View {
             }
             .opacity(index > 0 ? 1 : 0)
             .disabled(index == 0)
-            .accessibilityLabel(Text(tr("Retour")))
+            .accessibilityLabel(Text(tr("Retour", context: "back")))
             HStack(spacing: 5) {
                 ForEach(personal.indices, id: \.self) { item in
                     Capsule()

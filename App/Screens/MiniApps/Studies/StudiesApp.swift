@@ -229,7 +229,7 @@ struct StudiesAppView: View {
         return MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.studiesTimetable)) {
                 MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Horaire"),
-                        detail: state.slots.isEmpty ? tr("Tes cours de la semaine") : tr("\(Fmt.plural(state.slots.count, tr("cours"), tr("cours"))) par semaine"))
+                        detail: state.slots.isEmpty ? tr("Tes cours de la semaine") : tr("\(Fmt.plural(state.slots.count, tr("cours", context: "one"), tr("cours"))) par semaine"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("studies-timetable")

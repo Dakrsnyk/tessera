@@ -22,7 +22,7 @@ extension AppModel {
         case .sport:
             add("goal", "target", tr("Objectif"), profile.fitnessGoal?.title)
             add("weight", "scalemass", tr("Poids"), profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") })
-            add("height", "ruler", tr("Taille"), profile.heightCm.map(Self.heightText))
+            add("height", "ruler", tr("Taille", context: "height"), profile.heightCm.map(Self.heightText))
             add("age", "person", tr("Âge"), age.map { tr("\($0) ans") })
             add("workouts", "calendar", tr("Séances"), profile.knows(.weeklyWorkouts) ? tr("\(fitness.weeklyGoal) par semaine") : nil)
             add("level", "chart.bar.fill", tr("Niveau"), profile.fitnessLevel?.title)

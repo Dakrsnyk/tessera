@@ -38,7 +38,7 @@ struct StudiesTimetablePage: View {
     private func dayList(state: StudentState) -> some View {
         let slots = state.slots.filter { $0.weekday == weekday }.sorted { $0.startMinute < $1.startMinute }
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr("cours"), tr("cours")))
+            MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr("cours", context: "one"), tr("cours")))
             if slots.isEmpty {
                 Text(tr("Pas de cours ce jour-là.")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)
             } else {

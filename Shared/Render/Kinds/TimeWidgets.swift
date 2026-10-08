@@ -436,8 +436,8 @@ struct CountdownInfo {
             let rest = days % 365
             let months = rest / 30
             return months > 0
-                ? tr("\(Fmt.plural(years, tr("an"), tr("ans"))) et \(Fmt.plural(months, tr("mois"), tr("mois")))")
-                : Fmt.plural(years, tr("an"), tr("ans"))
+                ? tr("\(Fmt.plural(years, tr("an"), tr("ans", context: "duration"))) et \(Fmt.plural(months, tr("mois", context: "one"), tr("mois")))")
+                : Fmt.plural(years, tr("an"), tr("ans", context: "duration"))
         }
         let weeks = days / 7
         let rest = days % 7

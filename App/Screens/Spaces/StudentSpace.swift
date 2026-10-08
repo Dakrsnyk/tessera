@@ -273,7 +273,7 @@ struct GradeEditor: View {
     @State var grade: Grade
 
     var body: some View {
-        SheetForm(title: tr("Note"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {
+        SheetForm(title: tr("Note", context: "grade"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {
             CoursePicker(selection: $grade.courseID, courses: model.student.courses)
             TextField(tr("Évaluation (quiz, examen…)"), text: $grade.title)
             NumberRow(title: tr("Note obtenue"), value: $grade.score)

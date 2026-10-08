@@ -196,7 +196,7 @@ enum StudentTiles {
         let isToday = DateMath.isSameDay(day, now)
         var tile = Tile(title: isToday ? tr("Horaire du jour") : tr("Horaire · \(Fmt.weekday(day))"), symbol: "list.bullet.rectangle.portrait")
         tile.value = Fmt.number(classes.count)
-        tile.unit = classes.count > 1 ? tr("cours") : tr("cours")
+        tile.unit = classes.count > 1 ? tr("cours") : tr("cours", context: "one")
         tile.caption = "\(TF.time(classes[0].start, context)) – \(TF.time(classes[classes.count - 1].end, context))"
         tile.rows = classes.map { item in
             TileRow(
