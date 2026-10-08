@@ -463,6 +463,17 @@ final class MiniAppUITests: XCTestCase {
     /// Home leads to the mini-apps through « Mon Quotidien »: its Nutrition card opens Nutrition.
     func testMonQuotidienOpensAMiniApp() {
         launch(["-screenshotScreen", "home"])
+        // The card keeps the view chosen last (another test leaves it on « Repas »): back to the first.
+        let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
+        reveal(dots, "Points de la carte Nutrition")
+        var swipes = 0
+        while !dots.label.contains("Vue 1 sur 3") && swipes < 3 {
+            let card = dots.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0)).withOffset(CGVector(dx: 0, dy: -60))
+            card.withOffset(CGVector(dx: -80, dy: 0))
+                .press(forDuration: 0.05, thenDragTo: card.withOffset(CGVector(dx: 80, dy: 0)), withVelocity: .fast, thenHoldForDuration: 0)
+            _ = XCTWaiter.wait(for: [expectation(for: NSPredicate(format: "label CONTAINS %@", "Vue 1 sur 3"), evaluatedWith: dots)], timeout: 3)
+            swipes += 1
+        }
         let nutrition = app.buttons["daily-nutrition-open"]
         reveal(nutrition, "La carte Nutrition de Mon Quotidien")
         nutrition.tap()
