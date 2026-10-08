@@ -18,5 +18,5 @@ for ident, probs in problems.items():
 payload = {"version": 1, "demos": results}
 OUT.parent.mkdir(parents=True, exist_ok=True)
 text = json.dumps(payload, separators=(",", ":"), ensure_ascii=False)
-OUT.write_text(text)
+OUT.write_text(text, encoding="utf-8")
 print("exported", len(results), "size", len(text) // 1024, "KB")
