@@ -75,5 +75,14 @@
  "Un widget à la fois, rangé par thème : temps, santé, argent…": "Un widget a la vez, ordenado por tema: tiempo, salud, dinero…",
  "Une note et un compteur sous les yeux.": "Una nota y un contador a la vista.",
  "Valise prête": "Maleta lista",
- "À la une": "Destacados"
+ "À la une": "Destacados",
+ "En pause": "En pausa",
+ "Mettre le repos en pause": "Pausar el descanso",
+ "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.": "No hay datos de pasos para este día: el iPhone guarda una semana aprox. y luego Tessera guarda cada día leído.",
+ "Pause": "Pausa",
+ "Pause · %@": "Pausa · %@",
+ "Rattraper la séance": "Recuperar el entrenamiento",
+ "Rattraper « %@ » d'hier": "Recuperar «%@» de ayer",
+ "Repos en pause · %@": "Descanso en pausa · %@",
+ "Reprendre le repos": "Reanudar el descanso"
 }

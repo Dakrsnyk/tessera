@@ -126,6 +126,29 @@ struct FitnessSessionPage: View {
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                         Spacer()
+                        Button {
+                            model.update(\.fitness) { $0.pauseRest(at: Date()) }
+                        } label: {
+                            Image(systemName: "pause.fill")
+                        }
+                        .accessibilityLabel(Text(tr("Mettre le repos en pause")))
+                        Button(tr("Passer le repos")) {
+                            model.update(\.fitness) { $0.skipRest() }
+                        }
+                        .font(.subheadline.weight(.semibold))
+                    }
+                    .padding(12)
+                    .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                } else if let paused = session.restPausedRemaining {
+                    HStack {
+                        Label(tr("Repos en pause · \(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))"), systemImage: "pause.circle")
+                            .font(.title3.weight(.semibold))
+                            .foregroundStyle(Color(hex: accentHex))
+                        Spacer()
+                        Button(tr("Reprendre")) {
+                            model.update(\.fitness) { $0.resumeRest(at: Date()) }
+                        }
+                        .font(.subheadline.weight(.semibold))
                         Button(tr("Passer le repos")) {
                             model.update(\.fitness) { $0.skipRest() }
                         }

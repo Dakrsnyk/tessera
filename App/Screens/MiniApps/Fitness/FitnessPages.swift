@@ -288,15 +288,25 @@ struct FitnessProgressPage: View {
 struct FitnessActivityPage: View {
     @Environment(AppModel.self) private var model
     private var steps: StepCounter { .shared }
+    /// The day shown: today, or any day before (each day read is kept with its date).
+    @State private var day = Date()
+    @State private var dayData: StepCounter.Day?
 
     private let tint = "12A4B5"
 
     var body: some View {
+        let isToday = DateMath.isSameDay(day, Date())
         MiniAppScroll {
             switch steps.status {
             case .allowed:
-                let today = steps.today
-                let count = today?.steps ?? steps.stepsToday ?? 0
+                DaySwitcher(day: $day, colorHex: tint)
+                let today = isToday ? steps.today : dayData
+                let count = today?.steps ?? (isToday ? steps.stepsToday ?? 0 : 0)
+                if !isToday && dayData == nil {
+                    Text(tr("Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu."))
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
                 let goal = model.profile.stepGoal
                 HStack(spacing: 10) {
                     MiniStat(title: tr("Pas"), value: Fmt.number(count), detail: goal.map { tr("objectif \(Fmt.number($0))") }, colorHex: tint)
@@ -347,5 +357,12 @@ struct FitnessActivityPage: View {
         .navigationTitle(tr("Activité"))
         .navigationBarTitleDisplayMode(.large)
         .task { await steps.refreshWeek() }
+        .task(id: day) {
+            if DateMath.isSameDay(day, Date()) {
+                dayData = nil
+            } else {
+                dayData = await steps.day(day)
+            }
+        }
     }
 }

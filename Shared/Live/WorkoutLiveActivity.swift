@@ -19,6 +19,8 @@ struct WorkoutActivityAttributes: Codable, Hashable {
         var totalSets: Int
         var restStart: Date?
         var restEnd: Date?
+        /// Seconds left of a rest on pause.
+        var restPaused: Double?
 
         func isResting(at date: Date) -> Bool {
             guard let restEnd else { return false }
@@ -52,6 +54,7 @@ enum WorkoutLiveActivity {
             content.restStart = min(session.sets.last?.date ?? now, now)
             content.restEnd = end
         }
+        content.restPaused = session.restPausedRemaining
         return (WorkoutActivityAttributes(routineName: session.routineName), content)
     }
 
@@ -122,7 +125,12 @@ struct WorkoutActivityView: View {
             ProgressView(value: Double(state.doneSets), total: Double(max(1, state.totalSets)))
                 .tint(accent)
             HStack(spacing: 8) {
-                if state.isResting(at: now) {
+                if state.restPaused != nil {
+                    actionButton(tr("Reprendre"), symbol: "play.fill", prominent: false, intent: ResumeRestIntent())
+                } else if state.isResting(at: now) {
+                    actionButton(tr("Pause"), symbol: "pause.fill", prominent: false, intent: PauseRestIntent())
+                }
+                if state.isResting(at: now) || state.restPaused != nil {
                     actionButton(tr("Passer"), symbol: "forward.fill", prominent: false, intent: SkipRestIntent())
                 }
                 actionButton(tr("Série faite"), symbol: "checkmark", prominent: true, intent: CompleteSetIntent())
@@ -139,7 +147,16 @@ struct WorkoutActivityView: View {
     }
 
     @ViewBuilder private var restView: some View {
-        if let start = state.restStart, let end = state.restEnd, end > now {
+        if let paused = state.restPaused {
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(tr("En pause"))
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                Text(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))
+                    .font(.system(.title, design: .rounded).weight(.semibold).monospacedDigit())
+                    .foregroundStyle(accent)
+            }
+        } else if let start = state.restStart, let end = state.restEnd, end > now {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(tr("Repos"))
                     .font(.caption2.weight(.semibold))

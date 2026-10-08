@@ -75,5 +75,14 @@
  "Un widget à la fois, rangé par thème : temps, santé, argent…": "One widget at a time, sorted by theme: time, health, money…",
  "Une note et un compteur sous les yeux.": "A note and a counter in sight.",
  "Valise prête": "Bags packed",
- "À la une": "Featured"
+ "À la une": "Featured",
+ "En pause": "Paused",
+ "Mettre le repos en pause": "Pause the rest",
+ "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.": "No step data for this day: the iPhone keeps about a week, then Tessera keeps every day it has read.",
+ "Pause": "Pause",
+ "Pause · %@": "Paused · %@",
+ "Rattraper la séance": "Catch up on this workout",
+ "Rattraper « %@ » d'hier": "Catch up on yesterday's “%@”",
+ "Repos en pause · %@": "Rest paused · %@",
+ "Reprendre le repos": "Resume the rest"
 }

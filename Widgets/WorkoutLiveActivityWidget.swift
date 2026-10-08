@@ -31,6 +31,19 @@ struct WorkoutLiveActivityWidget: Widget {
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     HStack(spacing: 8) {
+                        if state.restPaused != nil {
+                            Button(intent: ResumeRestIntent()) {
+                                Label(tr("Reprendre"), systemImage: "play.fill")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .tint(accent.opacity(0.4))
+                        } else if state.isResting(at: Date()) {
+                            Button(intent: PauseRestIntent()) {
+                                Label(tr("Pause"), systemImage: "pause.fill")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .tint(accent.opacity(0.4))
+                        }
                         if state.isResting(at: Date()) {
                             Button(intent: SkipRestIntent()) {
                                 Label(tr("Passer"), systemImage: "forward.fill")

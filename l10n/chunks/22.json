@@ -537,5 +537,72 @@
   "uses": [
    "App/Screens/Explore/ExploreView.swift:26: case .featured: tr(\"À la une\")"
   ]
+ },
+ {
+  "key": "En pause",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Live/WorkoutLiveActivity.swift:152: Text(tr(\"En pause\"))"
+  ]
+ },
+ {
+  "key": "Mettre le repos en pause",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:349: label: tr(\"Mettre le repos en pause\")) { $0.pauseRest(at: Date()) }",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:134: .accessibilityLabel(Text(tr(\"Mettre le repos en pause\")))",
+   "Shared/Intents/SpaceIntents.swift:41: static var title: LocalizedStringResource = \"Mettre le repos en pause\""
+  ]
+ },
+ {
+  "key": "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:306: Text(tr(\"Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.\"))"
+  ]
+ },
+ {
+  "key": "Pause",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Live/WorkoutLiveActivity.swift:131: actionButton(tr(\"Pause\"), symbol: \"pause.fill\", prominent: false, intent: PauseRestIntent())",
+   "Widgets/WorkoutLiveActivityWidget.swift:42: Label(tr(\"Pause\"), systemImage: \"pause.fill\")"
+  ]
+ },
+ {
+  "key": "Pause · %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:345: restControl(Text(tr(\"Pause · \\(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))\")), symbol: \"play.fill\","
+  ]
+ },
+ {
+  "key": "Rattraper la séance",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:146: MiniActionButton(title: tr(\"Rattraper la séance\"), symbol: \"arrow.uturn.forward\", colorHex: accentHex) {"
+  ]
+ },
+ {
+  "key": "Rattraper « %@ » d'hier",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:85: MiniActionButton(title: tr(\"Rattraper « \\(missed.name) » d'hier\"), symbol: \"arrow.uturn.forward\", colorHex: accentHex) {"
+  ]
+ },
+ {
+  "key": "Repos en pause · %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:144: Label(tr(\"Repos en pause · \\(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))\"), systemImage: \"pause.circle\")"
+  ]
+ },
+ {
+  "key": "Reprendre le repos",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:346: label: tr(\"Reprendre le repos\")) { $0.resumeRest(at: Date()) }",
+   "Shared/Intents/SpaceIntents.swift:53: static var title: LocalizedStringResource = \"Reprendre le repos\""
+  ]
  }
 ]

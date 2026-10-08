@@ -68,7 +68,8 @@ final class DailyBriefTests: XCTestCase {
 
     func testMealsComeFirstThenClassesAndTheWeatherInTheMorning() {
         let tiles = DailyBrief.tiles(dayInput(at: wednesday(8)))
-        XCTAssertEqual(ids(tiles).prefix(3), ["nutrition", "classes", "weather"])
+        XCTAssertEqual(ids(tiles).prefix(2), ["nutrition", "classes"])
+        XCTAssertFalse(ids(tiles).contains("weather"), "The weather is no longer in Mon Quotidien")
         guard case let .classes(title, items)? = tiles.first(where: { $0.id == "classes" }) else { return XCTFail() }
         XCTAssertEqual(title, "Cours aujourd'hui")
         XCTAssertEqual(items.first?.title, "Mathématiques")

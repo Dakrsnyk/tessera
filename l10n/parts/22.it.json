@@ -75,5 +75,14 @@
  "Un widget à la fois, rangé par thème : temps, santé, argent…": "Un widget alla volta, ordinato per tema: tempo, salute, soldi…",
  "Une note et un compteur sous les yeux.": "Una nota e un contatore sotto gli occhi.",
  "Valise prête": "Valigia pronta",
- "À la une": "In evidenza"
+ "À la une": "In evidenza",
+ "En pause": "In pausa",
+ "Mettre le repos en pause": "Metti in pausa il recupero",
+ "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.": "Nessun dato sui passi per questo giorno: l'iPhone conserva circa una settimana, poi Tessera conserva ogni giorno letto.",
+ "Pause": "Pausa",
+ "Pause · %@": "Pausa · %@",
+ "Rattraper la séance": "Recupera l'allenamento",
+ "Rattraper « %@ » d'hier": "Recupera «%@» di ieri",
+ "Repos en pause · %@": "Recupero in pausa · %@",
+ "Reprendre le repos": "Riprendi il recupero"
 }

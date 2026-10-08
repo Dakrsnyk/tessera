@@ -37,6 +37,30 @@ struct CompleteSetIntent: LiveActivityIntent {
     }
 }
 
+struct PauseRestIntent: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Mettre le repos en pause"
+    static var isDiscoverable = false
+
+    init() {}
+
+    func perform() async throws -> some IntentResult {
+        await changeWorkout { $0.pauseRest(at: Date()) }
+        return .result()
+    }
+}
+
+struct ResumeRestIntent: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Reprendre le repos"
+    static var isDiscoverable = false
+
+    init() {}
+
+    func perform() async throws -> some IntentResult {
+        await changeWorkout { $0.resumeRest(at: Date()) }
+        return .result()
+    }
+}
+
 struct SkipRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Passer le repos"
     static var isDiscoverable = false

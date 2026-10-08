@@ -340,11 +340,13 @@ private struct WorkoutDayTile: View {
                 Text(tr("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("poids du corps"))"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                if let restEndsAt, restEndsAt > Date() {
-                    Text(timerInterval: Date()...restEndsAt, countsDown: true)
-                        .font(.caption.weight(.semibold))
-                        .monospacedDigit()
-                        .foregroundStyle(Color(hex: "E5484D"))
+                // The rest: counting down with a pause button, or paused with a button to start again.
+                if let paused = model.fitness.active?.restPausedRemaining {
+                    restControl(Text(tr("Pause · \(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))")), symbol: "play.fill",
+                                label: tr("Reprendre le repos")) { $0.resumeRest(at: Date()) }
+                } else if let restEndsAt, restEndsAt > Date() {
+                    restControl(Text(timerInterval: Date()...restEndsAt, countsDown: true), symbol: "pause.fill",
+                                label: tr("Mettre le repos en pause")) { $0.pauseRest(at: Date()) }
                 }
                 Spacer(minLength: 4)
                 actionButton(tr("Série faite")) {
@@ -383,6 +385,27 @@ private struct WorkoutDayTile: View {
         case .done: tr("Séance du jour")
         case .rest: tr("Sport")
         case .planned: tr("Séance du jour")
+        }
+    }
+
+    private func restControl(_ time: Text, symbol: String, label: String, change: @escaping (inout FitnessState) -> Void) -> some View {
+        HStack(spacing: 8) {
+            time
+                .font(.caption.weight(.semibold))
+                .monospacedDigit()
+                .foregroundStyle(Color(hex: "E5484D"))
+            Button {
+                Haptics.tap()
+                model.update(\.fitness, change)
+            } label: {
+                Image(systemName: symbol)
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(Color(hex: "E5484D"))
+                    .frame(width: 28, height: 24)
+                    .background(Color(hex: "E5484D").opacity(0.14), in: Capsule())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(label))
         }
     }
 

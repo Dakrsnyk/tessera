@@ -212,9 +212,6 @@ enum DailyBrief {
             add(.budget(spentToday: spent, perDayLeft: knowsBudget ? BudgetMath.perDayLeft(input.budget, at: now) : nil), moment == .evening ? 62 : 56)
         }
 
-        if let weather = input.weather {
-            add(.weather(weather), moment == .morning ? 89 : (moment == .day ? 42 : 20))
-        }
 
         var tiles = scored.enumerated()
             .sorted { lhs, rhs in lhs.element.score == rhs.element.score ? lhs.offset < rhs.offset : lhs.element.score > rhs.element.score }

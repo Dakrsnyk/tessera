@@ -80,6 +80,13 @@ struct FitnessAppView: View {
                 .accessibilityIdentifier("fitness-start")
             } else if !state.routines.isEmpty {
                 header(tr("Repos aujourd'hui"), symbol: "moon.zzz.fill")
+                // Yesterday's session wasn't done: one tap to catch it up today.
+                if let missed = missedYesterday(state, now: now) {
+                    MiniActionButton(title: tr("Rattraper « \(missed.name) » d'hier"), symbol: "arrow.uturn.forward", colorHex: accentHex) {
+                        start(missed)
+                    }
+                    .accessibilityIdentifier("fitness-catch-up")
+                }
                 if let next = FitnessMath.nextPlanned(after: now, state) {
                     Text(tr("Prochaine séance : \(next.routine.name), \(dayText(next.day))"))
                         .font(.headline)
@@ -134,6 +141,14 @@ struct FitnessAppView: View {
             } else if let planned {
                 header(day > now ? tr("Prévu") : tr("Prévu, pas fait"), symbol: "calendar")
                 routineSummary(planned)
+                // A session missed that day: done now instead.
+                if day < now, state.active.map({ $0.isFinished }) ?? true {
+                    MiniActionButton(title: tr("Rattraper la séance"), symbol: "arrow.uturn.forward", colorHex: accentHex) {
+                        day = Date()
+                        start(planned)
+                    }
+                    .accessibilityIdentifier("fitness-catch-up")
+                }
             } else {
                 header(tr("Repos"), symbol: "moon.zzz.fill")
                 Text(state.routines.isEmpty ? tr("Aucune séance ce jour-là.") : tr("Aucune séance prévue ce jour-là."))
@@ -144,6 +159,14 @@ struct FitnessAppView: View {
         .card()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("fitness-day")
+    }
+
+    /// The routine planned yesterday, when no session was done that day.
+    private func missedYesterday(_ state: FitnessState, now: Date) -> Routine? {
+        guard let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: now),
+              let planned = state.routines.first(where: { $0.weekdays.contains(FitnessMath.isoWeekday(yesterday)) }) else { return nil }
+        let done = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, yesterday) && $0.isFinished }
+        return done ? nil : planned
     }
 
     private func header(_ title: String, symbol: String) -> some View {

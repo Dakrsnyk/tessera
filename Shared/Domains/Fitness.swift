@@ -107,6 +107,8 @@ struct WorkoutSession: Codable, Hashable, Identifiable {
     var exerciseIndex = 0
     var setIndex = 0
     var restEndsAt: Date?
+    /// A rest put on pause: the seconds left (the rest has no end while it is paused).
+    var restPausedRemaining: TimeInterval?
 
     var isFinished: Bool { end != nil }
     var currentExercise: ExerciseTemplate? { exercises[safe: exerciseIndex] }
@@ -123,6 +125,7 @@ struct WorkoutSession: Codable, Hashable, Identifiable {
             setIndex = 0
             exerciseIndex += 1
         }
+        restPausedRemaining = nil
         if exerciseIndex >= exercises.count {
             end = date
             restEndsAt = nil
@@ -140,6 +143,7 @@ extension WorkoutSession {
         setIndex = 0
         exerciseIndex += 1
         restEndsAt = nil
+        restPausedRemaining = nil
         if exerciseIndex >= exercises.count { end = date }
     }
 
@@ -235,6 +239,21 @@ struct FitnessState: Codable, Hashable {
 
     mutating func skipRest() {
         active?.restEndsAt = nil
+        active?.restPausedRemaining = nil
+    }
+
+    /// Stops the rest countdown where it is (from the app, Mon Quotidien or the Lock Screen).
+    mutating func pauseRest(at date: Date) {
+        guard let end = active?.restEndsAt, end > date else { return }
+        active?.restPausedRemaining = end.timeIntervalSince(date)
+        active?.restEndsAt = nil
+    }
+
+    /// Starts the paused rest again, for the seconds that were left.
+    mutating func resumeRest(at date: Date) {
+        guard let left = active?.restPausedRemaining else { return }
+        active?.restEndsAt = date.addingTimeInterval(left)
+        active?.restPausedRemaining = nil
     }
 
     /// Logs one set from a widget or the app, starting today's routine if needed.

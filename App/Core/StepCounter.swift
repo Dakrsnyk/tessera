@@ -55,6 +55,44 @@ final class StepCounter {
         revision += 1
     }
 
+    /// One day's steps. The iPhone keeps about a week of them: each day read is saved with its date,
+    /// so older days can still be looked at later.
+    func day(_ date: Date) async -> Day? {
+        let start = DateMath.startOfDay(date)
+        let oldest = DateMath.startOfDay(DateMath.calendar.date(byAdding: .day, value: -6, to: Date()) ?? Date())
+        guard status == .allowed, start >= oldest, start <= Date() else { return Self.saved(start) }
+        let isToday = DateMath.isSameDay(start, Date())
+        let end = isToday ? Date() : (DateMath.calendar.date(byAdding: .day, value: 1, to: start) ?? Date())
+        let day: Day = await withCheckedContinuation { continuation in
+            pedometer.queryPedometerData(from: start, to: end) { data, _ in
+                continuation.resume(returning: Day(date: start, steps: data?.numberOfSteps.intValue ?? 0,
+                                                   distance: data?.distance?.doubleValue, floors: data?.floorsAscended?.intValue))
+            }
+        }
+        Self.save(day)
+        return day
+    }
+
+    private static let historyKey = "stepHistory"
+
+    /// Saved days, by « yyyy-MM-dd »: [steps, distance in metres (-1 if unknown), floors (-1 if unknown)].
+    private static func save(_ day: Day) {
+        var history = UserDefaults.standard.dictionary(forKey: historyKey) as? [String: [Double]] ?? [:]
+        history[key(day.date)] = [Double(day.steps), day.distance ?? -1, Double(day.floors ?? -1)]
+        UserDefaults.standard.set(history, forKey: historyKey)
+    }
+
+    private static func saved(_ date: Date) -> Day? {
+        guard let values = (UserDefaults.standard.dictionary(forKey: historyKey) as? [String: [Double]])?[key(date)],
+              values.count == 3 else { return nil }
+        return Day(date: date, steps: Int(values[0]), distance: values[1] >= 0 ? values[1] : nil, floors: values[2] >= 0 ? Int(values[2]) : nil)
+    }
+
+    private static func key(_ date: Date) -> String {
+        let c = DateMath.calendar.dateComponents([.year, .month, .day], from: date)
+        return String(format: "%04d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0)
+    }
+
     /// Reads today in detail and the last seven days (the Fitness mini-app's activity).
     func refreshWeek() async {
         guard status == .allowed else { return }
@@ -73,6 +111,7 @@ final class StepCounter {
                 }
             }
             days.append(day)
+            Self.save(day)
         }
         week = days
         today = days.last
