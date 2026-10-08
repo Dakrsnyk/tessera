@@ -103,8 +103,8 @@ struct AppFill: ShapeStyle {
     /// towards black at the bottom. Subtle on purpose: the style stays the same.
     static func depth(_ style: AppStyle, dark: Bool) -> LinearGradient {
         let base = dark ? style.screenDark : style.screenLight
-        let top = dark ? mix(base, style.cardDark, 0.55) : mix(base, "FFFFFF", 0.45)
-        let bottom = dark ? mix(base, "000000", 0.45) : mix(base, "000000", 0.035)
+        let top = dark ? mix(base, style.cardDark, 0.75) : mix(base, "FFFFFF", 0.65)
+        let bottom = dark ? mix(base, "000000", 0.58) : mix(base, "000000", 0.07)
         return LinearGradient(colors: [top, Color(hex: base), bottom], startPoint: .top, endPoint: .bottom)
     }
 
