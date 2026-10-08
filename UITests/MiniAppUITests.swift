@@ -463,20 +463,17 @@ final class MiniAppUITests: XCTestCase {
     /// Home leads to the mini-apps through « Mon Quotidien »: its Nutrition card opens Nutrition.
     func testMonQuotidienOpensAMiniApp() {
         launch(["-screenshotScreen", "home"])
-        // The card keeps the view chosen last (another test leaves it on « Repas »): back to the first.
-        let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
-        reveal(dots, "Points de la carte Nutrition")
-        var swipes = 0
-        while !dots.label.contains("Vue 1 sur 3") && swipes < 3 {
-            let card = dots.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0)).withOffset(CGVector(dx: 0, dy: -60))
-            card.withOffset(CGVector(dx: -80, dy: 0))
-                .press(forDuration: 0.05, thenDragTo: card.withOffset(CGVector(dx: 80, dy: 0)), withVelocity: .fast, thenHoldForDuration: 0)
-            _ = XCTWaiter.wait(for: [expectation(for: NSPredicate(format: "label CONTAINS %@", "Vue 1 sur 3"), evaluatedWith: dots)], timeout: 3)
-            swipes += 1
+        // The card keeps the view chosen last (another test leaves it on « Repas »): its first two
+        // views both open Nutrition, whichever is on screen is used.
+        let links = app.buttons.matching(NSPredicate(format: "identifier IN %@", ["daily-nutrition-open", "daily-nutrition-meals"]))
+        XCTAssertTrue(app.descendants(matching: .any)["daily-pager-nutrition-dots"].waitForExistence(timeout: 12), "Carte Nutrition absente")
+        let deadline = Date().addingTimeInterval(8)
+        var link: XCUIElement?
+        while link == nil && Date() < deadline {
+            link = links.allElementsBoundByIndex.first { $0.exists && $0.isHittable }
         }
-        let nutrition = app.buttons["daily-nutrition-open"]
-        reveal(nutrition, "La carte Nutrition de Mon Quotidien")
-        nutrition.tap()
+        guard let link else { return XCTFail("La carte Nutrition de Mon Quotidien introuvable") }
+        link.tap()
         XCTAssertTrue(app.navigationBars["Nutrition"].waitForExistence(timeout: 10), "La mini-app Nutrition doit s'ouvrir")
         snapshot("daily-opens-nutrition")
         XCTAssertEqual(app.state, .runningForeground)
