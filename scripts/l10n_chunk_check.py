@@ -7,6 +7,9 @@ import json
 import os
 import sys
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 sys.path.insert(0, os.path.dirname(__file__))
 from l10n_catalog import LANGUAGES, placeholders  # noqa: E402
 
