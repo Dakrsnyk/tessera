@@ -1,15 +1,21 @@
-# État au passage à Claude Code
+# État de la localisation (mis à jour le 2026-10-08)
 
-Dernier commit poussé : 9d3e577 (localisation : réécriture `tr()`, tests en français, 9 langues déclarées). Résultat CI de ce commit pas encore lu.
+Langues : français (source) + en, es, de, it, pt-BR, ja. Le chinois (zh-Hans) et le coréen (ko) ont été retirés à la demande de l'utilisateur (traductions de mauvaise qualité ; récupérables dans l'historique git, avant le commit 5ee621c).
 
-## Reste à faire (localisation)
-1. Lire la CI de 9d3e577 (doit compiler ; tests en fr).
-2. Traductions : lots 11, 13, 15, 17, 18 incomplets (ko manquant au moins) → compléter dans `l10n/parts/NN.<lang>.json`, vérifier avec `python3 scripts/l10n_chunk_check.py NN`. Lots 01–10, 12, 14, 16 OK mais à revérifier après ré-extraction.
-3. Ré-extraire : `python3 scripts/l10n_catalog.py extract` (clés ~10 « mangées » ex. "sér)ies", "mê)me" → rattacher à la version propre).
-4. Pluriels à suffixe « s » à corriger dans le code avec `Fmt.plural` : "%@ séance%@ cette semaine", "%@ tâche%@ aujourd'hui", "%@ devoir%@ à rendre", "Série de %@ jour%@", "%@ mois gratuit%@" (PremiumStore), "%@ séance%@", "%@ jour%@ noté%@", "%@ jour%@ sur %@ à moins de 10 %% de ton objectif", "%@ · %@ jour%@ sur %@ dans l'objectif", "%@ faite%@ aujourd'hui", "%@ tâche%@ à faire", "%@ de %@ que le mois dernier…".
-5. Clés ambiguës (un mot FR, deux sens) à séparer : Note, Moyennes, Taille, Retour, ans, cours, repas, Barre, Terminal, Notes, Cartes, Actif, Référence, widgets "Next set"/"Focus".
-6. Fusionner `l10n/parts/NN.<lang>.json` → `l10n/<lang>.json`, puis `python3 scripts/l10n_catalog.py build` → `Shared/Localizable.xcstrings` + `App/InfoPlist.xcstrings` (brancher InfoPlist ; les INFOPLIST_KEY_* français du pbxproj restent en repli). `l10n_catalog.py check`.
-7. Vérifier : `[daily]`, puis captures par langue (`SHOT_LANG`/`SHOT_LOCALE` : en, de, ja…) pour troncatures (allemand long, police ja). Ajouter un test clés↔catalogue, mettre à jour le README.
+## Fait
+- Lots 01–20 complets dans `l10n/parts/NN.<langue>.json` (`l10n_chunk_check.py NN` OK pour chacun).
+- Japonais des lots 13, 15, 17 et 18 retraduit depuis le français (il était resté en anglais ou mélangé).
+- Clés ré-extraites : 4873 clés, rattachement des clés tronquées (« mê)me »…).
+- Pluriels construits avec `"s"` remplacés par `Fmt.plural` ; « de plus / de moins » en deux phrases.
+- Mots à double sens séparés avec `tr("mot", context: "x")` → clé `"mot [x]"` (Note, Notes, Moyennes, Taille, Retour, ans, Barre, Cartes, Actif ; singulier de cours, repas, mois).
+- Catalogues : `l10n_catalog.py merge` → `build` → `Shared/Localizable.xcstrings` (app + extension) et `App/InfoPlist.xcstrings` (nom affiché, autorisations). `check` et `sync` : 0 manquante.
+- CI : `l10n_catalog.py sync` affiché dans le rapport ; tag `[langs]` = captures des écrans clés en en/de/ja/es/it/pt-BR (fichiers `<langue>-<écran>-light.jpg` dans ci-report).
+- `[daily]` du 2026-10-08 (run 108) : compile, 173 tests OK, 1 échec `ProfileUITests.testAPackOpensInTheStudio` (« Le widget 2 ne s'ouvre pas » : le toucher sur la puce du Studio n'a pas sélectionné le widget ; passait aux 3 runs précédents, probablement instable, non lié aux textes — l'app est en français pendant les tests).
+
+## Reste à faire
+1. Relire les captures `[langs]` : textes coupés (allemand), police japonaise ; raccourcir les traductions trop longues dans `l10n/parts`, puis merge/build.
+2. Décider pour le test instable ci-dessus (relancer `[daily]` ou ajouter un second essai comme dans e940e31).
+3. Relecture des traductions par des locuteurs natifs si possible (surtout ja).
 
 ## Ensuite
 Compte Apple Developer, TestFlight signé via GitHub Actions, fiche App Store + politique de confidentialité (PRIVACY.md existe), marketing. Repasser le dépôt en privé.
