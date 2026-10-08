@@ -98,13 +98,13 @@ struct AppFill: ShapeStyle {
         }
     }
 
-    /// The screen color with a little depth: lighter at the top, darker at the bottom. Light mode
-    /// opens towards white; dark mode takes a hint of the style's card color at the top and sinks
-    /// towards black at the bottom. Subtle on purpose: the style stays the same.
+    /// The screen color with depth. Light mode: the style's accent color tints the top, fading into
+    /// the screen color, a little deeper at the bottom. Dark mode: the card color at the top, sinking
+    /// towards black at the bottom.
     static func depth(_ style: AppStyle, dark: Bool) -> LinearGradient {
         let base = dark ? style.screenDark : style.screenLight
-        let top = dark ? mix(base, style.cardDark, 0.75) : mix(base, "FFFFFF", 0.65)
-        let bottom = dark ? mix(base, "000000", 0.58) : mix(base, "000000", 0.07)
+        let top = dark ? mix(base, style.cardDark, 0.75) : mix(base, style.accentLight, 0.24)
+        let bottom = dark ? mix(base, "000000", 0.58) : mix(base, "000000", 0.05)
         return LinearGradient(colors: [top, Color(hex: base), bottom], startPoint: .top, endPoint: .bottom)
     }
 

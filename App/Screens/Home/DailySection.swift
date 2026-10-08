@@ -317,7 +317,7 @@ private struct WorkoutDayTile: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", isDark: true, route: .space(.fitness)) {
+        DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", route: .space(.fitness)) {
             switch workout.stage {
             case .planned:
                 Text(workout.name)
@@ -326,7 +326,7 @@ private struct WorkoutDayTile: View {
                     .minimumScaleFactor(0.8)
                 Text("\(Fmt.plural(workout.exercises.count, tr("exercice"), tr("exercices"))) · \(Fmt.plural(workout.totalSets, tr("série"), tr("séries")))")
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(.secondary)
                 Spacer(minLength: 4)
                 actionButton(tr("Commencer")) {
                     model.update(\.fitness) { state in
@@ -339,12 +339,12 @@ private struct WorkoutDayTile: View {
                     .lineLimit(1)
                 Text(tr("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("poids du corps"))"))
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.75))
+                    .foregroundStyle(.secondary)
                 if let restEndsAt, restEndsAt > Date() {
                     Text(timerInterval: Date()...restEndsAt, countsDown: true)
                         .font(.caption.weight(.semibold))
                         .monospacedDigit()
-                        .foregroundStyle(Color(hex: "FF8A8D"))
+                        .foregroundStyle(Color(hex: "E5484D"))
                 }
                 Spacer(minLength: 4)
                 actionButton(tr("Série faite")) {
@@ -357,11 +357,11 @@ private struct WorkoutDayTile: View {
                     .lineLimit(1)
                 Label(tr("Faite · \(Fmt.plural(sets, tr("série"), tr("séries")))"), systemImage: "checkmark.circle.fill")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color(hex: "7FD6A8"))
+                    .foregroundStyle(Color(hex: "2B9A66"))
                 if volume > 0 {
                     Text(tr("\(TF.int(volume)) kg soulevés"))
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(.secondary)
                 }
             case let .rest(nextName, nextDay):
                 Text(tr("Repos aujourd'hui"))
@@ -369,7 +369,7 @@ private struct WorkoutDayTile: View {
                 if let nextName, let nextDay {
                     Text("\(nextDay) : \(nextName)")
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
             }
@@ -778,27 +778,27 @@ private struct WorkoutWeekTile: View {
             session.isFinished && (week?.contains(session.start) ?? false)
         }
         let goal = state.weeklyGoal
-        DayCard(title: tr("Cette semaine"), symbol: "calendar", colorHex: "E5484D", isDark: true, route: .space(.fitness)) {
+        DayCard(title: tr("Cette semaine"), symbol: "calendar", colorHex: "E5484D", route: .space(.fitness)) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text("\(done.count)")
                     .font(.title.weight(.bold))
                 Text(tr("/\(goal) séances"))
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(.secondary)
             }
             HStack(spacing: 4) {
                 ForEach(0..<7, id: \.self) { offset in
                     let day = week.flatMap { DateMath.calendar.date(byAdding: .day, value: offset, to: $0.start) } ?? now
                     let trained = done.contains { DateMath.isSameDay($0.start, day) }
                     Circle()
-                        .fill(trained ? Color(hex: "FF8A8D") : Color.white.opacity(DateMath.isSameDay(day, now) ? 0.45 : 0.18))
+                        .fill(trained ? Color(hex: "E5484D") : Color.secondary.opacity(DateMath.isSameDay(day, now) ? 0.45 : 0.18))
                         .frame(width: 12, height: 12)
                         .frame(maxWidth: .infinity)
                 }
             }
             Text(done.count >= goal ? tr("Objectif de la semaine atteint") : tr("Encore \(Fmt.plural(goal - done.count, tr("séance"), tr("séances")))"))
                 .font(.caption)
-                .foregroundStyle(.white.opacity(0.75))
+                .foregroundStyle(.secondary)
         }
         .accessibilityIdentifier("daily-workout-week")
     }
