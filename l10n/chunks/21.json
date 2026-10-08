@@ -1,0 +1,58 @@
+[
+ {
+  "key": "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:432: Text(tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\"))"
+  ]
+ },
+ {
+  "key": "Créer cet aliment",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:436: Button(tr(\"Créer cet aliment\")) {"
+  ]
+ },
+ {
+  "key": "Le code-barres est retenu : le prochain scan retrouvera cet aliment.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:627: ? tr(\"Le code-barres est retenu : le prochain scan retrouvera cet aliment.\")"
+  ]
+ },
+ {
+  "key": "Le produit %@ n'est pas encore dans Open Food Facts.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:429: : tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
+  ]
+ },
+ {
+  "key": "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:628: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
+  ]
+ },
+ {
+  "key": "Pas de connexion : le produit %@ n'a pas pu être cherché.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:428: Label(offline ? tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
+  ]
+ },
+ {
+  "key": "Recherche du produit %@…",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:423: Text(tr(\"Recherche du produit \\(code)…\")).foregroundStyle(Color.secondary)"
+  ]
+ },
+ {
+  "key": "Scanner à nouveau",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:446: Button(tr(\"Scanner à nouveau\")) {"
+  ]
+ }
+]

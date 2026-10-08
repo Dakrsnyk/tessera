@@ -153,6 +153,16 @@ struct FoodSearchView: View {
     @State private var scannedCode: String?
     @State private var createdFood: FoodItem?
     @State private var didOfferScanner = false
+    /// What became of the last barcode scanned, shown at the top of the list.
+    @State private var scan: ScanState?
+    /// A custom food prefilled from a barcode (and the product's name when Open Food Facts has it).
+    @State private var customDraft: FoodItem?
+
+    private enum ScanState: Equatable {
+        case looking(String)
+        case notFound(String)
+        case offline(String)
+    }
 
     private var local: [FoodItem] {
         if let category, query.trimmed.isEmpty {
@@ -189,11 +199,17 @@ struct FoodSearchView: View {
                             .buttonStyle(.bordered)
                         }
                         Button {
+                            customDraft = nil
                             showsCustom = true
                         } label: {
                             Label(tr("Aliment perso"), systemImage: "square.and.pencil")
                         }
                         .buttonStyle(.bordered)
+                    }
+                }
+                if let scan {
+                    Section {
+                        scanRow(scan)
                     }
                 }
                 if query.trimmed.isEmpty {
@@ -319,7 +335,7 @@ struct FoodSearchView: View {
                 }
             }
             .sheet(isPresented: $showsCustom, onDismiss: logCreatedFood) {
-                CustomFoodEditor { food in
+                CustomFoodEditor(draft: customDraft) { food in
                     createdFood = food
                 }
             }
@@ -365,19 +381,77 @@ struct FoodSearchView: View {
     }
 
     private func logCreatedFood() {
+        customDraft = nil
         guard let food = createdFood else { return }
         createdFood = nil
         selected = food
     }
 
+    /// A scanned barcode: a food already saved with it (no connection needed), else Open Food Facts.
+    /// Every outcome shows something: the food, a custom food to complete, or what to do next.
     private func lookup(_ code: String) async {
-        isSearching = true
-        defer { isSearching = false }
-        if let food = try? await OpenFoodFacts.product(barcode: code) {
-            selected = food
-        } else {
-            query = code
-            searchError = tr("Produit \(code) introuvable. Crée-le comme aliment perso.")
+        let mine = model.nutrition.customFoods + model.nutrition.favorites + model.nutrition.recentFoods
+        if let known = mine.first(where: { $0.barcode.map(OpenFoodFacts.barcodeForms)?.contains(code) == true }) {
+            scan = nil
+            selected = known
+            return
+        }
+        scan = .looking(code)
+        do {
+            switch try await OpenFoodFacts.lookup(barcode: code) {
+            case .food(let food):
+                scan = nil
+                selected = food
+            case .partial(let draft):
+                scan = nil
+                customDraft = draft
+                showsCustom = true
+            case .unknown:
+                scan = .notFound(code)
+            }
+        } catch {
+            scan = .offline(code)
+        }
+    }
+
+    @ViewBuilder
+    private func scanRow(_ state: ScanState) -> some View {
+        switch state {
+        case .looking(let code):
+            HStack(spacing: 10) {
+                ProgressView()
+                Text(tr("Recherche du produit \(code)…")).foregroundStyle(Color.secondary)
+            }
+        case .notFound(let code), .offline(let code):
+            let offline = state == .offline(code)
+            VStack(alignment: .leading, spacing: 10) {
+                Label(offline ? tr("Pas de connexion : le produit \(code) n'a pas pu être cherché.")
+                              : tr("Le produit \(code) n'est pas encore dans Open Food Facts."),
+                      systemImage: offline ? "wifi.slash" : "barcode")
+                    .font(.subheadline)
+                Text(tr("Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera."))
+                    .font(.caption)
+                    .foregroundStyle(Color.secondary)
+                HStack(spacing: 10) {
+                    Button(tr("Créer cet aliment")) {
+                        customDraft = FoodItem(id: "custom.draft", name: "", brand: nil, kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0,
+                                               servingGrams: 100, servingName: "100 g", source: .custom, barcode: code)
+                        showsCustom = true
+                    }
+                    .buttonStyle(.borderedProminent)
+                    if offline {
+                        Button(tr("Réessayer")) { Task { await lookup(code) } }
+                            .buttonStyle(.bordered)
+                    } else {
+                        Button(tr("Scanner à nouveau")) {
+                            scan = nil
+                            showsScanner = true
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                }
+            }
+            .padding(.vertical, 4)
         }
     }
 }
@@ -530,6 +604,8 @@ enum FoodText {
 }
 
 struct CustomFoodEditor: View {
+    /// Prefill from a scan: the barcode, and the product's name and brand when they are known.
+    var draft: FoodItem? = nil
     var onCreate: (FoodItem) -> Void
     @Environment(AppModel.self) private var model
     @State private var name = ""
@@ -545,6 +621,12 @@ struct CustomFoodEditor: View {
             Section {
                 TextField(tr("Nom"), text: $name)
                 NumberRow(title: tr("Portion"), value: $serving, unit: "g")
+            } footer: {
+                if let draft, draft.barcode != nil {
+                    Text(draft.name.isEmpty
+                         ? tr("Le code-barres est retenu : le prochain scan retrouvera cet aliment.")
+                         : tr("Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette."))
+                }
             }
             Section(tr("Pour 100 g")) {
                 NumberRow(title: tr("Calories"), value: $kcal, unit: "kcal")
@@ -554,11 +636,14 @@ struct CustomFoodEditor: View {
                 NumberRow(title: tr("Fibres"), value: $fiber, unit: "g")
             }
         }
+        .onAppear {
+            if let draft, name.isEmpty { name = draft.name }
+        }
     }
 
     private func save() {
-        let food = FoodItem(id: "custom.\(UUID().uuidString)", name: name.trimmed, brand: nil, kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: fiber,
-                            servingGrams: max(1, serving), servingName: "\(TF.int(serving)) g", source: .custom, barcode: nil)
+        let food = FoodItem(id: "custom.\(UUID().uuidString)", name: name.trimmed, brand: draft?.brand, kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: fiber,
+                            servingGrams: max(1, serving), servingName: "\(TF.int(serving)) g", source: .custom, barcode: draft?.barcode)
         model.update(\.nutrition) { $0.customFoods.insert(food, at: 0) }
         onCreate(food)
     }

@@ -396,41 +396,59 @@ enum OpenFoodFacts {
         let code: String?
         let product_name: String?
         let product_name_fr: String?
+        let product_name_en: String?
+        let generic_name: String?
         let brands: String?
         let serving_quantity: Flexible?
         let serving_size: String?
         let nutriments: [String: Flexible]?
 
+        var name: String? {
+            product_name_fr?.trimmed.nonEmpty ?? product_name?.trimmed.nonEmpty
+                ?? product_name_en?.trimmed.nonEmpty ?? generic_name?.trimmed.nonEmpty
+        }
+
+        var brand: String? { brands?.split(separator: ",").first.map { String($0).trimmed } }
+
         func item(barcode: String? = nil) -> FoodItem? {
-            let name = (product_name_fr?.trimmed.nonEmpty ?? product_name?.trimmed.nonEmpty)
             guard let name, let nutriments else { return nil }
             func value(_ key: String) -> Double? { nutriments[key]?.value }
-            guard let kcal = value("energy-kcal_100g") ?? value("energy_100g").map({ $0 / 4.184 }) else { return nil }
+            let servingGrams = serving_quantity?.value ?? 0
+            /// Per 100 g, or computed from the value per serving when only that one is on the label.
+            func per100(_ key: String) -> Double? {
+                value("\(key)_100g") ?? (servingGrams > 0 ? value("\(key)_serving").map { $0 / servingGrams * 100 } : nil)
+            }
+            let protein = per100("proteins"), carbs = per100("carbohydrates"), fat = per100("fat")
+            let fromMacros: Double? = protein == nil && carbs == nil && fat == nil
+                ? nil : (protein ?? 0) * 4 + (carbs ?? 0) * 4 + (fat ?? 0) * 9
+            // Energy in kcal, else in kJ (« energy » is in kJ), else from the macros.
+            guard let kcal = per100("energy-kcal") ?? per100("energy-kj").map({ $0 / 4.184 })
+                    ?? per100("energy").map({ $0 / 4.184 }) ?? fromMacros else { return nil }
             let code = barcode ?? self.code ?? UUID().uuidString
-            let serving = serving_quantity?.value ?? 100
+            let serving = servingGrams > 0 ? servingGrams : 100
             return FoodItem(
                 id: "off.\(code)",
                 name: name,
-                brand: brands?.split(separator: ",").first.map { String($0).trimmed },
+                brand: brand,
                 kcal: kcal,
-                protein: value("proteins_100g") ?? 0,
-                carbs: value("carbohydrates_100g") ?? 0,
-                fat: value("fat_100g") ?? 0,
-                fiber: value("fiber_100g") ?? 0,
-                servingGrams: serving > 0 ? serving : 100,
+                protein: protein ?? 0,
+                carbs: carbs ?? 0,
+                fat: fat ?? 0,
+                fiber: per100("fiber") ?? 0,
+                servingGrams: serving,
                 servingName: serving_size?.trimmed.nonEmpty ?? "\(Int(safely: serving)) g",
                 source: .openFoodFacts,
                 barcode: code,
-                sugars: value("sugars_100g"),
-                saturatedFat: value("saturated-fat_100g"),
+                sugars: per100("sugars"),
+                saturatedFat: per100("saturated-fat"),
                 // Open Food Facts gives sodium and cholesterol in grams.
-                sodiumMg: value("sodium_100g").map { $0 * 1_000 } ?? value("salt_100g").map { $0 * 400 },
-                cholesterolMg: value("cholesterol_100g").map { $0 * 1_000 }
+                sodiumMg: per100("sodium").map { $0 * 1_000 } ?? per100("salt").map { $0 * 400 },
+                cholesterolMg: per100("cholesterol").map { $0 * 1_000 }
             )
         }
     }
 
-    static let fields = "code,product_name,product_name_fr,brands,serving_quantity,serving_size,nutriments"
+    static let fields = "code,product_name,product_name_fr,product_name_en,generic_name,brands,serving_quantity,serving_size,nutriments"
 
     static func search(_ query: String) async throws -> [FoodItem] {
         var components = URLComponents(string: "https://world.openfoodfacts.org/cgi/search.pl")!
@@ -449,15 +467,60 @@ enum OpenFoodFacts {
         return (page.products ?? []).compactMap { $0.item() }
     }
 
-    static func product(barcode: String) async throws -> FoodItem? {
-        guard let url = URL(string: "https://world.openfoodfacts.org/api/v2/product/\(barcode).json?fields=\(fields)") else { return nil }
-        let (data, response) = try await URLSession.shared.data(for: request(url))
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { return nil }
+    /// What a scanned barcode gives.
+    enum BarcodeResult {
+        /// A food ready to log.
+        case food(FoodItem)
+        /// A product known without its nutrition: its name, brand and barcode prefill a custom food.
+        case partial(FoodItem)
+        case unknown
+    }
+
+    /// Looks a barcode up under each of its forms (a UPC-A is also filed as an EAN-13 with a leading 0,
+    /// a UPC-E is the short form of a UPC-A). Throws when Open Food Facts can't be reached.
+    static func lookup(barcode: String) async throws -> BarcodeResult {
         struct Envelope: Decodable {
-            let status: Int?
             let product: Product?
         }
-        let envelope = try JSONDecoder().decode(Envelope.self, from: data)
-        return envelope.product?.item(barcode: barcode)
+        var partial: FoodItem?
+        for code in barcodeForms(barcode) {
+            guard let url = URL(string: "https://world.openfoodfacts.org/api/v2/product/\(code).json?fields=\(fields)") else { continue }
+            let (data, response) = try await URLSession.shared.data(for: request(url))
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            if status == 404 { continue }
+            guard status == 200 else { throw WeatherError.badResponse }
+            guard let product = (try? JSONDecoder().decode(Envelope.self, from: data))?.product else { continue }
+            if let food = product.item(barcode: barcode) { return .food(food) }
+            if partial == nil, let name = product.name {
+                partial = FoodItem(id: "off.\(barcode)", name: name, brand: product.brand, kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0,
+                                   servingGrams: 100, servingName: "100 g", source: .custom, barcode: barcode)
+            }
+        }
+        return partial.map(BarcodeResult.partial) ?? .unknown
+    }
+
+    /// The forms a retail barcode may be filed under in Open Food Facts.
+    static func barcodeForms(_ code: String) -> [String] {
+        var forms = [code]
+        if code.count == 13, code.hasPrefix("0") { forms.append(String(code.dropFirst())) }
+        if code.count == 12 { forms.append("0" + code) }
+        if code.count == 8, let upcA = upcEToUPCA(code) { forms += [upcA, "0" + upcA] }
+        var seen = Set<String>()
+        return forms.filter { seen.insert($0).inserted }
+    }
+
+    /// Expands an 8-digit UPC-E to the 12-digit UPC-A it stands for.
+    static func upcEToUPCA(_ code: String) -> String? {
+        let d = code.map(String.init)
+        guard d.count == 8, code.allSatisfy(\.isNumber), d[0] == "0" || d[0] == "1" else { return nil }
+        let m = Array(d[1...6])
+        let body: String
+        switch m[5] {
+        case "0", "1", "2": body = m[0] + m[1] + m[5] + "0000" + m[2] + m[3] + m[4]
+        case "3": body = m[0] + m[1] + m[2] + "00000" + m[3] + m[4]
+        case "4": body = m[0] + m[1] + m[2] + m[3] + "00000" + m[4]
+        default: body = m[0] + m[1] + m[2] + m[3] + m[4] + "0000" + m[5]
+        }
+        return d[0] + body + d[7]
     }
 }

@@ -976,13 +976,6 @@
   ]
  },
  {
-  "key": "Produit %@ introuvable. Crée-le comme aliment perso.",
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:380: searchError = tr(\"Produit \\(code) introuvable. Crée-le comme aliment perso.\")"
-  ]
- },
- {
   "key": "Pour 100 g : %@ kcal · protéines %@ g · glucides %@ g · lipides %@ g",
   "placeholders": 4,
   "uses": [

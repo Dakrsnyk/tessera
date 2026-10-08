@@ -1,0 +1,10 @@
+{
+ "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": "ラベルの値で作成しましょう。次回のスキャンで見つかります。",
+ "Créer cet aliment": "この食品を作成",
+ "Le code-barres est retenu : le prochain scan retrouvera cet aliment.": "バーコードは保存されます。次回のスキャンでこの食品が見つかります。",
+ "Le produit %@ n'est pas encore dans Open Food Facts.": "商品%@はまだOpen Food Factsにありません。",
+ "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": "Open Food Factsにこの商品はありますが、栄養成分がありません。ラベルから入力してください。",
+ "Pas de connexion : le produit %@ n'a pas pu être cherché.": "接続がありません。商品%@を検索できませんでした。",
+ "Recherche du produit %@…": "商品%@を検索中…",
+ "Scanner à nouveau": "もう一度スキャン"
+}

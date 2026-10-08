@@ -59080,6 +59080,53 @@
         }
       }
     },
+    "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lege es mit den Werten vom Etikett an: Der nächste Scan findet es."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create it with the values on the label: the next scan will find it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créalo con los valores de la etiqueta: el próximo escaneo lo encontrará."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crealo con i valori dell'etichetta: la prossima scansione lo troverà."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ラベルの値で作成しましょう。次回のスキャンで見つかります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crie com os valores do rótulo: o próximo escaneamento vai encontrá-lo."
+          }
+        }
+      }
+    },
     "Crée-les dans Tessera": {
       "extractionState": "manual",
       "localizations": {
@@ -59170,6 +59217,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Criar"
+          }
+        }
+      }
+    },
+    "Créer cet aliment": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lebensmittel anlegen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create this food"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crear este alimento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créer cet aliment"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea questo alimento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この食品を作成"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Criar este alimento"
           }
         }
       }
@@ -105563,6 +105657,53 @@
         }
       }
     },
+    "Le code-barres est retenu : le prochain scan retrouvera cet aliment.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Barcode wird gespeichert: Der nächste Scan findet dieses Lebensmittel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The barcode is saved: the next scan will find this food."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El código de barras se guarda: el próximo escaneo encontrará este alimento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le code-barres est retenu : le prochain scan retrouvera cet aliment."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il codice a barre viene salvato: la prossima scansione troverà questo alimento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バーコードは保存されます。次回のスキャンでこの食品が見つかります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O código de barras fica salvo: o próximo escaneamento vai encontrar este alimento."
+          }
+        }
+      }
+    },
     "Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.": {
       "extractionState": "manual",
       "localizations": {
@@ -107392,6 +107533,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O próximo feriado em Quebec, no Canadá ou na França."
+          }
+        }
+      }
+    },
+    "Le produit %@ n'est pas encore dans Open Food Facts.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Produkt %@ ist noch nicht in Open Food Facts."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Product %@ isn't in Open Food Facts yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El producto %@ aún no está en Open Food Facts."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le produit %@ n'est pas encore dans Open Food Facts."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il prodotto %@ non è ancora in Open Food Facts."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商品%@はまだOpen Food Factsにありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O produto %@ ainda não está no Open Food Facts."
           }
         }
       }
@@ -134233,6 +134421,53 @@
         }
       }
     },
+    "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts kennt dieses Produkt, aber nicht seine Nährwerte: Übertrage sie vom Etikett."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts knows this product, but not its nutrition facts: copy them from the label."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts conoce este producto, pero no sus valores nutricionales: cópialos de la etiqueta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts conosce questo prodotto, ma non i suoi valori nutrizionali: copiali dall'etichetta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Factsにこの商品はありますが、栄養成分がありません。ラベルから入力してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Open Food Facts conhece este produto, mas não seus valores nutricionais: copie-os do rótulo."
+          }
+        }
+      }
+    },
     "Open Food Facts ne répond pas. Réessaie dans un instant.": {
       "extractionState": "manual",
       "localizations": {
@@ -137660,6 +137895,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sem conexão: último clima recebido %@."
+          }
+        }
+      }
+    },
+    "Pas de connexion : le produit %@ n'a pas pu être cherché.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Verbindung: Das Produkt %@ konnte nicht gesucht werden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No connection: product %@ couldn't be looked up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin conexión: no se pudo buscar el producto %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas de connexion : le produit %@ n'a pas pu être cherché."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna connessione: impossibile cercare il prodotto %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接続がありません。商品%@を検索できませんでした。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem conexão: não foi possível buscar o produto %@."
           }
         }
       }
@@ -151858,53 +152140,6 @@
         }
       }
     },
-    "Produit %@ introuvable. Crée-le comme aliment perso.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Produkt %@ nicht gefunden. Erstelle es als eigenes Lebensmittel."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Product %@ not found. Create it as a custom food."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se encontró el producto %@. Créalo como alimento personalizado."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Produit %@ introuvable. Crée-le comme aliment perso."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prodotto %@ non trovato. Crealo come alimento personalizzato."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "商品 %@ が見つかりません。カスタム食品として作成してください。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Produto %@ não encontrado. Crie-o como alimento personalizado."
-          }
-        }
-      }
-    },
     "Produits emballés": {
       "extractionState": "manual",
       "localizations": {
@@ -155990,6 +156225,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recarregar widgets"
+          }
+        }
+      }
+    },
+    "Recherche du produit %@…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche Produkt %@…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looking up product %@…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscando el producto %@…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche du produit %@…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ricerca del prodotto %@…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商品%@を検索中…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscando o produto %@…"
           }
         }
       }
@@ -170748,6 +171030,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escanear código de barras"
+          }
+        }
+      }
+    },
+    "Scanner à nouveau": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut scannen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanear de nuevo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanner à nouveau"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scansiona di nuovo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もう一度スキャン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanear de novo"
           }
         }
       }

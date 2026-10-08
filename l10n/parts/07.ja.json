@@ -135,7 +135,6 @@
  "Chercher ou créer l'aliment": "食品を検索または作成",
  "Aucun produit trouvé pour « %@ ».": "「%@」に一致する商品が見つかりません。",
  "Open Food Facts ne répond pas. Réessaie dans un instant.": "Open Food Factsが応答しません。しばらくしてからもう一度お試しください。",
- "Produit %@ introuvable. Crée-le comme aliment perso.": "商品 %@ が見つかりません。カスタム食品として作成してください。",
  "Pour 100 g : %@ kcal · protéines %@ g · glucides %@ g · lipides %@ g": "100 gあたり：%@ kcal · タンパク質 %@ g · 炭水化物 %@ g · 脂質 %@ g",
  "Après ajout, il te restera %@ kcal.": "追加後の残りは %@ kcal です。",
  "Après ajout, tu dépasseras ton objectif de %@ kcal.": "追加すると目標を %@ kcal 超えます。",

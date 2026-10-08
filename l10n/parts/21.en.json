@@ -1,0 +1,10 @@
+{
+ "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": "Create it with the values on the label: the next scan will find it.",
+ "Créer cet aliment": "Create this food",
+ "Le code-barres est retenu : le prochain scan retrouvera cet aliment.": "The barcode is saved: the next scan will find this food.",
+ "Le produit %@ n'est pas encore dans Open Food Facts.": "Product %@ isn't in Open Food Facts yet.",
+ "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": "Open Food Facts knows this product, but not its nutrition facts: copy them from the label.",
+ "Pas de connexion : le produit %@ n'a pas pu être cherché.": "No connection: product %@ couldn't be looked up.",
+ "Recherche du produit %@…": "Looking up product %@…",
+ "Scanner à nouveau": "Scan again"
+}

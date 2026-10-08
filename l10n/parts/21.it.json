@@ -1,0 +1,10 @@
+{
+ "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": "Crealo con i valori dell'etichetta: la prossima scansione lo troverà.",
+ "Créer cet aliment": "Crea questo alimento",
+ "Le code-barres est retenu : le prochain scan retrouvera cet aliment.": "Il codice a barre viene salvato: la prossima scansione troverà questo alimento.",
+ "Le produit %@ n'est pas encore dans Open Food Facts.": "Il prodotto %@ non è ancora in Open Food Facts.",
+ "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": "Open Food Facts conosce questo prodotto, ma non i suoi valori nutrizionali: copiali dall'etichetta.",
+ "Pas de connexion : le produit %@ n'a pas pu être cherché.": "Nessuna connessione: impossibile cercare il prodotto %@.",
+ "Recherche du produit %@…": "Ricerca del prodotto %@…",
+ "Scanner à nouveau": "Scansiona di nuovo"
+}
