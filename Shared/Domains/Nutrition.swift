@@ -1,7 +1,8 @@
 import Foundation
 
 enum FoodSource: String, Codable, Hashable {
-    case builtin, openFoodFacts, custom
+    /// `nutrientFile`: the Canadian Nutrient File bundled with the app (generic foods).
+    case builtin, openFoodFacts, custom, nutrientFile
 }
 
 /// Nutrition values are per 100 g (or 100 ml).

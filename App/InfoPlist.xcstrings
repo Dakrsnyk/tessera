@@ -101,43 +101,43 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Kamera wird nur zum Scannen des Barcodes eines Lebensmittels verwendet."
+            "value": "Die Kamera wird nur zum Scannen eines Lebensmittel-Barcodes oder zum Fotografieren einer Mahlzeit verwendet: Das Foto wird auf deinem iPhone analysiert."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The camera is only used to scan a food's barcode."
+            "value": "The camera is only used to scan a food's barcode or to photograph a meal: the photo is analyzed on your iPhone."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La cámara solo se usa para escanear el código de barras de un alimento."
+            "value": "La cámara solo se usa para escanear el código de barras de un alimento o fotografiar una comida: la foto se analiza en tu iPhone."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La caméra sert uniquement à scanner le code-barres d'un aliment."
+            "value": "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier un repas : la photo est analysée sur ton iPhone."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La fotocamera serve solo a scansionare il codice a barre di un alimento."
+            "value": "La fotocamera serve solo a scansionare il codice a barre di un alimento o a fotografare un pasto: la foto viene analizzata sul tuo iPhone."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "カメラは食品のバーコードを読み取るためだけに使用します。"
+            "value": "カメラは食品のバーコードを読み取るか、食事を撮影するためだけに使用します。写真はiPhone上で分析されます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A câmera é usada apenas para ler o código de barras de um alimento."
+            "value": "A câmera é usada apenas para ler o código de barras de um alimento ou fotografar uma refeição: a foto é analisada no seu iPhone."
           }
         }
       }

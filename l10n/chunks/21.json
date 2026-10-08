@@ -118,5 +118,119 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:121: header(Fmt.plural(done.count, tr(\"séance faite\"), tr(\"séances faites\")), symbol: \"checkmark.seal.fill\")"
   ]
+ },
+ {
+  "key": "Ajouter au journal",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:149: Button(tr(\"Ajouter au journal\"), action: save)"
+  ]
+ },
+ {
+  "key": "Aliments détectés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:124: Text(tr(\"Aliments détectés\"))"
+  ]
+ },
+ {
+  "key": "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.",
+  "placeholders": 0,
+  "uses": [
+   "App/Core/NutrientFile.swift:8: static let attribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.\")"
+  ]
+ },
+ {
+  "key": "Analyse de la photo…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:107: Text(tr(\"Analyse de la photo…\")).foregroundStyle(Color.secondary)"
+  ]
+ },
+ {
+  "key": "Apport estimé",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:128: Section(tr(\"Apport estimé\")) {"
+  ]
+ },
+ {
+  "key": "Aucun aliment reconnu sur cette photo.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:112: Label(tr(\"Aucun aliment reconnu sur cette photo.\"), systemImage: \"eye.slash\")"
+  ]
+ },
+ {
+  "key": "Chercher un aliment",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:116: Button(tr(\"Chercher un aliment\")) { dismiss() }"
+  ]
+ },
+ {
+  "key": "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:113: Text(tr(\"Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.\"))"
+  ]
+ },
+ {
+  "key": "Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:200: Text(tr(\"Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.\"))"
+  ]
+ },
+ {
+  "key": "Photo du repas",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:142: .navigationTitle(tr(\"Photo du repas\"))",
+   "App/Screens/Spaces/NutritionSpace.swift:200: Label(tr(\"Photo du repas\"), systemImage: \"camera.fill\")"
+  ]
+ },
+ {
+  "key": "Prendre une photo",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:189: Label(image == nil ? tr(\"Prendre une photo\") : tr(\"Reprendre\"), systemImage: \"camera.fill\")"
+  ]
+ },
+ {
+  "key": "Quantité estimée",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:225: NumberRow(title: tr(\"Quantité estimée\"), value: item.grams, unit: \"g\")"
+  ]
+ },
+ {
+  "key": "Reprendre",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:189: Label(image == nil ? tr(\"Prendre une photo\") : tr(\"Reprendre\"), systemImage: \"camera.fill\")"
+  ]
+ },
+ {
+  "key": "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:126: Text(tr(\"Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.\"))"
+  ]
+ },
+ {
+  "key": "Vu : %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:219: Text(tr(\"Vu : \\(value.label)\")).font(.caption).foregroundStyle(Color.secondary)"
+  ]
+ },
+ {
+  "key": "≈ %@ kcal",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:129: ValueRow(title: tr(\"Calories\"), value: tr(\"≈ \\(TF.int(totals.kcal)) kcal\"))",
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:226: Text(tr(\"≈ \\(TF.int(value.food.nutrients(grams: value.grams).kcal)) kcal\"))"
+  ]
  }
 ]

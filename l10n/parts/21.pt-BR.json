@@ -15,5 +15,21 @@
  "Revenir à aujourd'hui": "Voltar para hoje",
  "Rien de prévu ce jour-là.": "Nada previsto nesse dia.",
  "séance faite": "treino feito",
- "séances faites": "treinos feitos"
+ "séances faites": "treinos feitos",
+ "Ajouter au journal": "Adicionar ao diário",
+ "Aliments détectés": "Alimentos detectados",
+ "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.": "Alimentos genéricos: Canadian Nutrient File, Health Canada.",
+ "Analyse de la photo…": "Analisando a foto…",
+ "Apport estimé": "Ingestão estimada",
+ "Aucun aliment reconnu sur cette photo.": "Nenhum alimento reconhecido nesta foto.",
+ "Chercher un aliment": "Buscar um alimento",
+ "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.": "Tente uma foto mais próxima e bem iluminada, ou adicione os alimentos à mão pela busca.",
+ "Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.": "Estimativa a partir da foto, feita no seu iPhone: confira os alimentos e as quantidades antes de adicionar.",
+ "Photo du repas": "Foto da refeição",
+ "Prendre une photo": "Tirar uma foto",
+ "Quantité estimée": "Quantidade estimada",
+ "Reprendre": "Tirar outra",
+ "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "Toque em um alimento para escolher outro e corrija a quantidade: são estimativas.",
+ "Vu : %@": "Visto: %@",
+ "≈ %@ kcal": "≈ %@ kcal"
 }

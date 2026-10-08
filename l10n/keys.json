@@ -493,7 +493,7 @@
  "%@ g · %@ kcal": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:602: tr(\"\\(TF.int(grams)) g · \\(TF.int(food.nutrients(grams: grams).kcal)) kcal\")"
+   "App/Screens/Spaces/NutritionSpace.swift:631: tr(\"\\(TF.int(grams)) g · \\(TF.int(food.nutrients(grams: grams).kcal)) kcal\")"
   ]
  },
  "%@ h %@ min restantes": {
@@ -563,7 +563,7 @@
  "%@ kcal / 100 g · P %@ · G %@ · L %@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:597: tr(\"\\(TF.int(food.kcal)) kcal / 100 g · P \\(TF.int(food.protein)) · G \\(TF.int(food.carbs)) · L \\(TF.int(food.fat))\")"
+   "App/Screens/Spaces/NutritionSpace.swift:626: tr(\"\\(TF.int(food.kcal)) kcal / 100 g · P \\(TF.int(food.protein)) · G \\(TF.int(food.carbs)) · L \\(TF.int(food.fat))\")"
   ]
  },
  "%@ kcal aujourd'hui": {
@@ -675,8 +675,8 @@
  "%@ mg": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:514: if let sodium = totals.sodiumMg { ValueRow(title: tr(\"Sodium\"), value: tr(\"\\(TF.int(sodium)) mg\")) }",
-   "App/Screens/Spaces/NutritionSpace.swift:515: if let cholesterol = totals.cholesterolMg { ValueRow(title: tr(\"Cholestérol\"), value: tr(\"\\(TF.int(cholesterol)) mg\")) }"
+   "App/Screens/Spaces/NutritionSpace.swift:543: if let sodium = totals.sodiumMg { ValueRow(title: tr(\"Sodium\"), value: tr(\"\\(TF.int(sodium)) mg\")) }",
+   "App/Screens/Spaces/NutritionSpace.swift:544: if let cholesterol = totals.cholesterolMg { ValueRow(title: tr(\"Cholestérol\"), value: tr(\"\\(TF.int(cholesterol)) mg\")) }"
   ]
  },
  "%@ milliards": {
@@ -1638,7 +1638,7 @@
  "1 portion": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:535: Portion(title: food.servingName.isEmpty ? tr(\"1 portion\") : food.servingName, grams: serving),",
+   "App/Screens/Spaces/NutritionSpace.swift:564: Portion(title: food.servingName.isEmpty ? tr(\"1 portion\") : food.servingName, grams: serving),",
    "Shared/Domains/FoodDatabase.swift:129: f(\"chicken\", tr(\"Poitrine de poulet cuite\"), 165, 31, 0, 3.6, 0, 120, tr(\"1 portion\"), s: 0, sf: 1, na: 74, chol: 85),",
    "Shared/Domains/FoodDatabase.swift:131: f(\"turkey\", tr(\"Poitrine de dinde cuite\"), 135, 30, 0, 1.5, 0, 100, tr(\"1 portion\"), s: 0, sf: 0.4, na: 99, chol: 70),",
    "Shared/Domains/FoodDatabase.swift:132: f(\"beef\", tr(\"Bœuf haché mi-maigre cuit\"), 250, 26, 0, 15, 0, 100, tr(\"1 portion\"), s: 0, sf: 5.9, na: 72, chol: 90),"
@@ -1805,7 +1805,7 @@
  "2 portions": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:536: Portion(title: tr(\"2 portions\"), grams: serving * 2),"
+   "App/Screens/Spaces/NutritionSpace.swift:565: Portion(title: tr(\"2 portions\"), grams: serving * 2),"
   ]
  },
  "2 tacos": {
@@ -2198,7 +2198,7 @@
    "App/Screens/Home/MyInfoSection.swift:41: add(\"name\", \"briefcase\", tr(\"Activité\"), profile.knows(.businessName) ? business.name : nil)",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:347: .navigationTitle(tr(\"Activité\"))",
    "App/Screens/MiniApps/Travel/TravelPages.swift:21: addButton(tr(\"Activité\"), symbol: \"mappin.and.ellipse\") { sheet = .activity(TripActivity(title: \"\", date: max(trip.start, Date()))) }",
-   "App/Screens/Spaces/NutritionSpace.swift:679: Picker(tr(\"Activité\"), selection: $activity) {"
+   "App/Screens/Spaces/NutritionSpace.swift:708: Picker(tr(\"Activité\"), selection: $activity) {"
   ]
  },
  "Activité (visite, restaurant…)": {
@@ -2571,6 +2571,12 @@
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:110: .accessibilityLabel(Text(tr(\"Ajouter au \\(meal.title.lowercased())\")))"
   ]
  },
+ "Ajouter au journal": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:149: Button(tr(\"Ajouter au journal\"), action: save)"
+  ]
+ },
  "Ajouter au montant épargné": {
   "placeholders": 0,
   "uses": [
@@ -2634,7 +2640,7 @@
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:75: MiniActionButton(title: canScan ? tr(\"Rechercher\") : tr(\"Ajouter un aliment\"), symbol: canScan ? \"magnifyingglass\" : \"plus\", colorHex: accentHex, isProminent: !canScan) {",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:78: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
    "App/Screens/Spaces/NutritionSpace.swift:53: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
-   "App/Screens/Spaces/NutritionSpace.swift:287: .navigationTitle(tr(\"Ajouter un aliment\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:313: .navigationTitle(tr(\"Ajouter un aliment\"))"
   ]
  },
  "Ajouter un cours": {
@@ -2847,15 +2853,27 @@
  "Aliment perso": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:205: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
-   "App/Screens/Spaces/NutritionSpace.swift:620: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
+   "App/Screens/Spaces/NutritionSpace.swift:216: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
+   "App/Screens/Spaces/NutritionSpace.swift:649: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
   ]
  },
  "Aliments": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:83: Text(tr(\"Aliments\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:569: Section(tr(\"Aliments\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:598: Section(tr(\"Aliments\")) {"
+  ]
+ },
+ "Aliments détectés": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:124: Text(tr(\"Aliments détectés\"))"
+  ]
+ },
+ "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/NutrientFile.swift:8: static let attribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.\")"
   ]
  },
  "Allemagne": {
@@ -3059,6 +3077,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseTechniques.swift:22: [tr(\"Amène les mains l'une vers l'autre devant le bas de la poitrine en arc de cercle.\"), tr(\"Serre les pectoraux mains jointes.\"), tr(\"Reviens lentement bras ouverts.\")],"
+  ]
+ },
+ "Analyse de la photo…": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:107: Text(tr(\"Analyse de la photo…\")).foregroundStyle(Color.secondary)"
   ]
  },
  "Analyse des dépenses": {
@@ -3267,8 +3291,14 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:200: Section(tr(\"Apport\")) {",
-   "App/Screens/Spaces/NutritionSpace.swift:506: Section(tr(\"Apport\")) {",
-   "App/Screens/Spaces/NutritionSpace.swift:574: Section(tr(\"Apport\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:535: Section(tr(\"Apport\")) {",
+   "App/Screens/Spaces/NutritionSpace.swift:603: Section(tr(\"Apport\")) {"
+  ]
+ },
+ "Apport estimé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:128: Section(tr(\"Apport estimé\")) {"
   ]
  },
  "Apprends-le avec un coach, à vide d'abord.": {
@@ -3287,13 +3317,13 @@
  "Après ajout, il te restera %@ kcal.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:503: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:532: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
  "Après ajout, tu dépasseras ton objectif de %@ kcal.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:503: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:532: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
  "Arachides grillées": {
@@ -3692,6 +3722,12 @@
    "App/Screens/Profile/ProfileView.swift:341: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
+ "Aucun aliment reconnu sur cette photo.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:112: Label(tr(\"Aucun aliment reconnu sur cette photo.\"), systemImage: \"eye.slash\")"
+  ]
+ },
  "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
   "placeholders": 0,
   "uses": [
@@ -3731,7 +3767,7 @@
  "Aucun produit trouvé pour « %@ ».": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:371: if online.isEmpty { searchError = tr(\"Aucun produit trouvé pour « \\(text) ».\") }"
+   "App/Screens/Spaces/NutritionSpace.swift:400: if online.isEmpty { searchError = tr(\"Aucun produit trouvé pour « \\(text) ».\") }"
   ]
  },
  "Aucun repas enregistré. Ouvre un repas de ta journée et touche « Enregistrer ce repas » : il sera ici, prêt à reprendre d'une touche.": {
@@ -5232,7 +5268,7 @@
  "But": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:682: Picker(tr(\"But\"), selection: $goal) {"
+   "App/Screens/Spaces/NutritionSpace.swift:711: Picker(tr(\"But\"), selection: $goal) {"
   ]
  },
  "Bénéfice": {
@@ -5403,14 +5439,14 @@
  "Calculateur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:690: Text(tr(\"Calculateur\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:719: Text(tr(\"Calculateur\"))"
   ]
  },
  "Calculer mes objectifs": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:408: Label(tr(\"Calculer mes objectifs\"), systemImage: \"wand.and.stars\")",
-   "App/Screens/Spaces/NutritionSpace.swift:685: Button(tr(\"Calculer mes objectifs\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:714: Button(tr(\"Calculer mes objectifs\")) {"
   ]
  },
  "Calculer pour moi": {
@@ -5452,8 +5488,8 @@
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:31: add(\"kcal\", \"flame\", tr(\"Calories\"), profile.knows(.kcalTarget) ? tr(\"\\(TF.int(nutrition.goals.kcal)) kcal\") : nil)",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:222: miniFigure(tr(\"Calories\"), \"~\\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: now)))\")",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:28: stat(tr(\"Calories\"), TF.int(totals.kcal), \"kcal\")",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:201: ValueRow(title: tr(\"Calories\"), value: tr(\"\\(TF.int(totals.kcal)) kcal\"))"
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:129: ValueRow(title: tr(\"Calories\"), value: tr(\"≈ \\(TF.int(totals.kcal)) kcal\"))",
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:28: stat(tr(\"Calories\"), TF.int(totals.kcal), \"kcal\")"
   ]
  },
  "Calories actives": {
@@ -6283,7 +6319,13 @@
  "Chercher ou créer l'aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:327: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
+   "App/Screens/Spaces/NutritionSpace.swift:356: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
+  ]
+ },
+ "Chercher un aliment": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:116: Button(tr(\"Chercher un aliment\")) { dismiss() }"
   ]
  },
  "Chercher une ville": {
@@ -6296,7 +6338,7 @@
  "Chercher « %@ » dans les produits emballés": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:266: Button(tr(\"Chercher « \\(query.trimmed) » dans les produits emballés\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:284: Button(tr(\"Chercher « \\(query.trimmed) » dans les produits emballés\")) {"
   ]
  },
  "Chevilles bloquées, descends le buste vers l'avant le plus lentement possible.": {
@@ -6611,7 +6653,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:260: limitRow(tr(\"Cholestérol\"), totals.cholesterolMg, limit: nil, unit: tr(\"mg\"), coverage: NutritionMath.coverage(entries, \\.cholesterolMg))",
-   "App/Screens/Spaces/NutritionSpace.swift:515: if let cholesterol = totals.cholesterolMg { ValueRow(title: tr(\"Cholestérol\"), value: tr(\"\\(TF.int(cholesterol)) mg\")) }"
+   "App/Screens/Spaces/NutritionSpace.swift:544: if let cholesterol = totals.cholesterolMg { ValueRow(title: tr(\"Cholestérol\"), value: tr(\"\\(TF.int(cholesterol)) mg\")) }"
   ]
  },
  "Chou": {
@@ -6808,7 +6850,7 @@
  "Collation": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:54: case .snack: tr(\"Collation\")"
+   "Shared/Domains/Nutrition.swift:55: case .snack: tr(\"Collation\")"
   ]
  },
  "Collations": {
@@ -7941,7 +7983,7 @@
  "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:432: Text(tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:461: Text(tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\"))"
   ]
  },
  "Crée-les dans Tessera": {
@@ -7962,7 +8004,7 @@
  "Créer cet aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:436: Button(tr(\"Créer cet aliment\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:465: Button(tr(\"Créer cet aliment\")) {"
   ]
  },
  "Créer un exercice": {
@@ -9149,7 +9191,7 @@
  "Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:276: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:294: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
   ]
  },
  "Données Open-Meteo pour la ville choisie dans Réglages.": {
@@ -9586,7 +9628,7 @@
  "Déjeuner": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:51: case .breakfast: tr(\"Déjeuner\")"
+   "Shared/Domains/Nutrition.swift:52: case .breakfast: tr(\"Déjeuner\")"
   ]
  },
  "Déjeuner protéiné": {
@@ -9998,7 +10040,7 @@
  "Dîner": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:52: case .lunch: tr(\"Dîner\")"
+   "Shared/Domains/Nutrition.swift:53: case .lunch: tr(\"Dîner\")"
   ]
  },
  "Dîner avec Léa": {
@@ -10455,6 +10497,12 @@
    "App/Screens/Explore/ExploreView.swift:482: message: tr(\"Essaie un autre mot, ou retire un filtre.\"),"
   ]
  },
+ "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:113: Text(tr(\"Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.\"))"
+  ]
+ },
  "Essayer gratuitement": {
   "placeholders": 0,
   "uses": [
@@ -10464,13 +10512,19 @@
  "Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:692: Text(tr(\"Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:721: Text(tr(\"Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés.\"))"
   ]
  },
  "Estimation selon la durée des séances et ton poids": {
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/FitnessTiles.swift:188: tile.footnote = tr(\"Estimation selon la durée des séances et ton poids\")"
+  ]
+ },
+ "Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:200: Text(tr(\"Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.\"))"
   ]
  },
  "Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.": {
@@ -10999,7 +11053,7 @@
  "Femme": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:485: case .female: tr(\"Femme\")",
+   "Shared/Domains/Nutrition.swift:486: case .female: tr(\"Femme\")",
    "Shared/Domains/Profile.swift:250: case .female: tr(\"Femme\")"
   ]
  },
@@ -11077,9 +11131,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:252: row(tr(\"Fibres\"), totals.fiber, goal: goals.fiber, unit: \"g\", hex: \"7FA33A\")",
-   "App/Screens/Spaces/NutritionSpace.swift:511: ValueRow(title: tr(\"Fibres\"), value: \"\\(TF.decimal(totals.fiber, 1)) g\")",
-   "App/Screens/Spaces/NutritionSpace.swift:636: NumberRow(title: tr(\"Fibres\"), value: $fiber, unit: \"g\")",
-   "App/Screens/Spaces/NutritionSpace.swift:670: NumberRow(title: tr(\"Fibres\"), value: $goals.fiber, unit: \"g\")"
+   "App/Screens/Spaces/NutritionSpace.swift:540: ValueRow(title: tr(\"Fibres\"), value: \"\\(TF.decimal(totals.fiber, 1)) g\")",
+   "App/Screens/Spaces/NutritionSpace.swift:665: NumberRow(title: tr(\"Fibres\"), value: $fiber, unit: \"g\")",
+   "App/Screens/Spaces/NutritionSpace.swift:699: NumberRow(title: tr(\"Fibres\"), value: $goals.fiber, unit: \"g\")"
   ]
  },
  "Fibres %@ g%@%@": {
@@ -12002,8 +12056,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:225: macro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
    "App/Screens/Home/MyInfoSection.swift:33: add(\"carbs\", \"leaf\", tr(\"Glucides\"), profile.knows(.carbsTarget) ? \"\\(TF.int(nutrition.goals.carbs)) g\" : nil)",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:286: MacroGauge(name: tr(\"Glucides\"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: \"F2A33A\")",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:30: stat(tr(\"Glucides\"), TF.int(totals.carbs), \"g\")"
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:131: ValueRow(title: tr(\"Glucides\"), value: \"≈ \\(TF.decimal(totals.carbs, 1)) g\")",
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:286: MacroGauge(name: tr(\"Glucides\"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: \"F2A33A\")"
   ]
  },
  "Good morning": {
@@ -12106,7 +12160,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:258: limitRow(tr(\"Gras saturés\"), totals.saturatedFat, limit: goals.saturatedFatMax, unit: \"g\", coverage: NutritionMath.coverage(entries, \\.saturatedFat))",
-   "App/Screens/Spaces/NutritionSpace.swift:513: if let saturated = totals.saturatedFat { ValueRow(title: tr(\"Gras saturés\"), value: \"\\(TF.decimal(saturated, 1)) g\") }"
+   "App/Screens/Spaces/NutritionSpace.swift:542: if let saturated = totals.saturatedFat { ValueRow(title: tr(\"Gras saturés\"), value: \"\\(TF.decimal(saturated, 1)) g\") }"
   ]
  },
  "Gratuit": {
@@ -12559,7 +12613,7 @@
  "Homme": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:486: case .male: tr(\"Homme\")",
+   "Shared/Domains/Nutrition.swift:487: case .male: tr(\"Homme\")",
    "Shared/Domains/Profile.swift:251: case .male: tr(\"Homme\")"
   ]
  },
@@ -14184,7 +14238,7 @@
  "Le code-barres est retenu : le prochain scan retrouvera cet aliment.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:627: ? tr(\"Le code-barres est retenu : le prochain scan retrouvera cet aliment.\")"
+   "App/Screens/Spaces/NutritionSpace.swift:656: ? tr(\"Le code-barres est retenu : le prochain scan retrouvera cet aliment.\")"
   ]
  },
  "Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.": {
@@ -14424,7 +14478,7 @@
  "Le produit %@ n'est pas encore dans Open Food Facts.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:429: : tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
+   "App/Screens/Spaces/NutritionSpace.swift:458: : tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
   ]
  },
  "Le risque de pluie arrive avec la prochaine mise à jour météo.": {
@@ -15020,8 +15074,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:226: macro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
    "App/Screens/Home/MyInfoSection.swift:34: add(\"fat\", \"drop\", tr(\"Lipides\"), profile.knows(.fatTarget) ? \"\\(TF.int(nutrition.goals.fat)) g\" : nil)",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:287: MacroGauge(name: tr(\"Lipides\"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: \"3366FF\")",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:31: stat(tr(\"Lipides\"), TF.int(totals.fat), \"g\")"
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:132: ValueRow(title: tr(\"Lipides\"), value: \"≈ \\(TF.decimal(totals.fat, 1)) g\")",
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:287: MacroGauge(name: tr(\"Lipides\"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: \"3366FF\")"
   ]
  },
  "Liquid Glass": {
@@ -15314,7 +15368,7 @@
  "Légère (1–3 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:497: case .light: tr(\"Légère (1–3 séances)\")"
+   "Shared/Domains/Nutrition.swift:498: case .light: tr(\"Légère (1–3 séances)\")"
   ]
  },
  "M. Gagnon": {
@@ -15544,7 +15598,7 @@
  "Maintenir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:509: case .maintain: tr(\"Maintenir\")",
+   "Shared/Domains/Nutrition.swift:510: case .maintain: tr(\"Maintenir\")",
    "Shared/Domains/Profile.swift:229: case .maintain: tr(\"Maintenir\")"
   ]
  },
@@ -15976,7 +16030,7 @@
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:218: MiniRow(symbol: \"bookmark.fill\", colorHex: accentHex, title: tr(\"Mes repas\"), detail: tr(\"Des repas enregistrés, à reprendre d'une touche\"), value: state.savedMeals.isEmpty ? nil : \"\\(state.savedMeals",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:115: Section(tr(\"Mes repas\")) {",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:664: .navigationTitle(tr(\"Mes repas\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:233: Section(tr(\"Mes repas\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:245: Section(tr(\"Mes repas\")) {"
   ]
  },
  "Mes revenus et dépenses": {
@@ -16260,7 +16314,7 @@
  "Modérée (3–5 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:498: case .moderate: tr(\"Modérée (3–5 séances)\")"
+   "Shared/Domains/Nutrition.swift:499: case .moderate: tr(\"Modérée (3–5 séances)\")"
   ]
  },
  "Moins d'une minute : rien n'a été noté": {
@@ -16394,7 +16448,7 @@
  "Mon repas": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:192: name = c.value(.name, tr(\"Mon repas\"))"
+   "Shared/Domains/Nutrition.swift:193: name = c.value(.name, tr(\"Mon repas\"))"
   ]
  },
  "Mon thème": {
@@ -16684,7 +16738,7 @@
  "Moyenne des deux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:487: case .neutral: tr(\"Moyenne des deux\")"
+   "Shared/Domains/Nutrition.swift:488: case .neutral: tr(\"Moyenne des deux\")"
   ]
  },
  "Moyenne générale": {
@@ -17972,7 +18026,7 @@
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:226: MiniRow(symbol: \"target\", colorHex: accentHex, title: tr(\"Objectifs\"), detail: known.kcal ? tr(\"\\(TF.int(state.goals.kcal)) kcal · \\(TF.int(state.goals.protein)) g de protéines\") : tr(\"À définir\"))",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:254: Text(tr(\"Objectifs\"))",
    "App/Screens/Spaces/NutritionSpace.swift:117: Text(tr(\"Objectifs\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:664: SheetForm(title: tr(\"Objectifs\"), onSave: save) {"
+   "App/Screens/Spaces/NutritionSpace.swift:693: SheetForm(title: tr(\"Objectifs\"), onSave: save) {"
   ]
  },
  "Objectifs d'épargne": {
@@ -18072,13 +18126,13 @@
  "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:628: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:657: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
   ]
  },
  "Open Food Facts ne répond pas. Réessaie dans un instant.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:373: searchError = tr(\"Open Food Facts ne répond pas. Réessaie dans un instant.\")"
+   "App/Screens/Spaces/NutritionSpace.swift:402: searchError = tr(\"Open Food Facts ne répond pas. Réessaie dans un instant.\")"
   ]
  },
  "Options de %@": {
@@ -18437,7 +18491,7 @@
   "uses": [
    "App/Screens/Content/MoneyView.swift:23: summaryValue(tr(\"Par jour\"), Fmt.signedMoney(summary.perDayNet, currency: currency))",
    "App/Screens/Profile/ProfileTopics.swift:371: QuestionCard(title: tr(\"Par jour\"), detail: tr(\"Laisse vide ce que tu ne sais pas : Tessera peut le calculer.\")) {",
-   "App/Screens/Spaces/NutritionSpace.swift:665: Section(tr(\"Par jour\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:694: Section(tr(\"Par jour\")) {"
   ]
  },
  "Par jour : %@": {
@@ -18533,7 +18587,7 @@
  "Pas de connexion : le produit %@ n'a pas pu être cherché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:428: Label(offline ? tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
+   "App/Screens/Spaces/NutritionSpace.swift:457: Label(offline ? tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
   ]
  },
  "Pas de cours ce jour-là.": {
@@ -18829,7 +18883,7 @@
  "Perdre doucement": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:508: case .lose: tr(\"Perdre doucement\")"
+   "Shared/Domains/Nutrition.swift:509: case .lose: tr(\"Perdre doucement\")"
   ]
  },
  "Perdre du poids": {
@@ -18967,10 +19021,18 @@
    "Shared/Model/WidgetDesign.swift:23: case .photo: tr(\"Photo\")"
   ]
  },
+ "Photo du repas": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:142: .navigationTitle(tr(\"Photo du repas\"))",
+   "App/Screens/Spaces/NutritionSpace.swift:200: Label(tr(\"Photo du repas\"), systemImage: \"camera.fill\")"
+  ]
+ },
  "Photos": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:120: static let photos = SetupApp(name: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\")",
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:195: Label(tr(\"Photos\"), systemImage: \"photo.on.rectangle\")",
    "Shared/Data/SampleData.swift:483: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
   ]
  },
@@ -19521,7 +19583,7 @@
  "Pomme, poulet, yogourt…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:281: .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr(\"Pomme, poulet, yogourt…\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:299: .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr(\"Pomme, poulet, yogourt…\"))"
   ]
  },
  "Pomodoro": {
@@ -19652,7 +19714,7 @@
  "Portion": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:623: NumberRow(title: tr(\"Portion\"), value: $serving, unit: \"g\")"
+   "App/Screens/Spaces/NutritionSpace.swift:652: NumberRow(title: tr(\"Portion\"), value: $serving, unit: \"g\")"
   ]
  },
  "Portugal": {
@@ -19748,13 +19810,13 @@
  "Pour 100 g": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:631: Section(tr(\"Pour 100 g\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:660: Section(tr(\"Pour 100 g\")) {"
   ]
  },
  "Pour 100 g : %@ kcal · protéines %@ g · glucides %@ g · lipides %@ g": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:482: Text(tr(\"Pour 100 g : \\(TF.int(food.kcal)) kcal · protéines \\(TF.decimal(food.protein, 1)) g · glucides \\(TF.decimal(food.carbs, 1)) g · lipides \\(TF.decimal(food.fat, 1)) g\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:511: Text(tr(\"Pour 100 g : \\(TF.int(food.kcal)) kcal · protéines \\(TF.decimal(food.protein, 1)) g · glucides \\(TF.decimal(food.carbs, 1)) g · lipides \\(TF.decimal(food.fat, 1)) g\"))"
   ]
  },
  "Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget.": {
@@ -19882,7 +19944,7 @@
   "uses": [
    "App/Screens/Explore/ExploreView.swift:205: MagazineHeader(eyebrow: tr(\"Selon tes centres d'intérêt\"), title: tr(\"Pour toi\"))",
    "App/Screens/Home/HomeView.swift:268: case .forYou: tr(\"Pour toi\")",
-   "App/Screens/Spaces/NutritionSpace.swift:219: FilterChip(title: tr(\"Pour toi\"), isSelected: category == nil) { category = nil }"
+   "App/Screens/Spaces/NutritionSpace.swift:231: FilterChip(title: tr(\"Pour toi\"), isSelected: category == nil) { category = nil }"
   ]
  },
  "Pour ton âge et le compte à rebours.": {
@@ -20145,8 +20207,14 @@
  "Prendre du muscle": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:510: case .gain: tr(\"Prendre du muscle\")",
+   "Shared/Domains/Nutrition.swift:511: case .gain: tr(\"Prendre du muscle\")",
    "Shared/Domains/Profile.swift:230: case .gain: tr(\"Prendre du muscle\")"
+  ]
+ },
+ "Prendre une photo": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:189: Label(image == nil ? tr(\"Prendre une photo\") : tr(\"Reprendre\"), systemImage: \"camera.fill\")"
   ]
  },
  "Prends un parapluie (%@ %% de pluie)": {
@@ -20418,7 +20486,7 @@
  "Produits emballés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:274: Text(tr(\"Produits emballés\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:292: Text(tr(\"Produits emballés\"))"
   ]
  },
  "Produits laitiers": {
@@ -20510,8 +20578,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:224: macro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
    "App/Screens/Home/MyInfoSection.swift:32: add(\"protein\", \"bolt.heart\", tr(\"Protéines\"), profile.knows(.proteinTarget) ? \"\\(TF.int(nutrition.goals.protein)) g\" : nil)",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:285: MacroGauge(name: tr(\"Protéines\"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: \"E5484D\")",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:29: stat(tr(\"Protéines\"), TF.int(totals.protein), \"g\")"
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:130: ValueRow(title: tr(\"Protéines\"), value: \"≈ \\(TF.decimal(totals.protein, 1)) g\")",
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:285: MacroGauge(name: tr(\"Protéines\"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: \"E5484D\")"
   ]
  },
  "Protéines : %@ g sur %@ g": {
@@ -20749,7 +20817,13 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:193: NumberRow(title: tr(\"Quantité\"), value: $grams, unit: \"g\")",
    "App/Screens/Spaces/MoneySpaces.swift:111: NumberRow(title: holding.kind == .cash ? tr(\"Montant\") : tr(\"Quantité\"), value: $holding.quantity)",
-   "App/Screens/Spaces/NutritionSpace.swift:489: NumberRow(title: tr(\"Quantité\"), value: $grams, unit: \"g\")"
+   "App/Screens/Spaces/NutritionSpace.swift:518: NumberRow(title: tr(\"Quantité\"), value: $grams, unit: \"g\")"
+  ]
+ },
+ "Quantité estimée": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:225: NumberRow(title: tr(\"Quantité estimée\"), value: item.grams, unit: \"g\")"
   ]
  },
  "Quelques averses possibles d'ici 12 h": {
@@ -20978,13 +21052,13 @@
  "Recherche du produit %@…": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:423: Text(tr(\"Recherche du produit \\(code)…\")).foregroundStyle(Color.secondary)"
+   "App/Screens/Spaces/NutritionSpace.swift:452: Text(tr(\"Recherche du produit \\(code)…\")).foregroundStyle(Color.secondary)"
   ]
  },
  "Recherche sur Open Food Facts…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:262: HStack { ProgressView(); Text(tr(\"Recherche sur Open Food Facts…\")).foregroundStyle(Color.secondary) }"
+   "App/Screens/Spaces/NutritionSpace.swift:280: HStack { ProgressView(); Text(tr(\"Recherche sur Open Food Facts…\")).foregroundStyle(Color.secondary) }"
   ]
  },
  "Rechercher": {
@@ -21350,8 +21424,8 @@
   "uses": [
    "App/Core/DataItems.swift:85: case .meals: tr(\"Repas\")",
    "App/Screens/Home/DailySection.swift:95: DailyPager(id: \"nutrition\", titles: [tr(\"Aujourd'hui\"), tr(\"Repas\"), tr(\"7 jours\")], accentHex: \"F08A24\") { page in",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:86: MiniSectionTitle(title: tr(\"Repas\"), detail: entries.isEmpty ? nil : Fmt.plural(entries.count, tr(\"aliment\"), tr(\"aliments\")))",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:196: Picker(tr(\"Repas\"), selection: $meal) {"
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:135: Picker(tr(\"Repas\"), selection: $meal) {",
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:86: MiniSectionTitle(title: tr(\"Repas\"), detail: entries.isEmpty ? nil : Fmt.plural(entries.count, tr(\"aliment\"), tr(\"aliments\")))"
   ]
  },
  "Repas du jour": {
@@ -21432,6 +21506,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseTechniques.swift:110: [tr(\"Descends le buste vers l'avant le plus lentement possible, hanches tendues.\"), tr(\"Amortis avec les mains près du sol.\"), tr(\"Repousse légèrement et remonte.\")],"
+  ]
+ },
+ "Reprendre": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:189: Label(image == nil ? tr(\"Prendre une photo\") : tr(\"Reprendre\"), systemImage: \"camera.fill\")"
   ]
  },
  "Reprendre la séance": {
@@ -22449,13 +22529,13 @@
   "uses": [
    "App/Premium/PaywallView.swift:154: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Weather/WeatherApp.swift:25: EmptyStateView(symbol: \"cloud.sun\", title: tr(\"Météo indisponible\"), message: tr(\"Le service météo ne répond pas pour l'instant. Réessaie dans un moment.\"), actionTitle: tr(\"Réessayer\")) {",
-   "App/Screens/Spaces/NutritionSpace.swift:443: Button(tr(\"Réessayer\")) { Task { await lookup(code) } }"
+   "App/Screens/Spaces/NutritionSpace.swift:472: Button(tr(\"Réessayer\")) { Task { await lookup(code) } }"
   ]
  },
  "Référence": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:673: Picker(tr(\"Référence\"), selection: $sex) {"
+   "App/Screens/Spaces/NutritionSpace.swift:702: Picker(tr(\"Référence\"), selection: $sex) {"
   ]
  },
  "Région": {
@@ -22592,7 +22672,7 @@
    "App/Screens/Content/WeatherLocationView.swift:52: Section(tr(\"Résultats\")) {",
    "App/Screens/MiniApps/Business/BusinessApp.swift:310: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Résultats\"), detail: tr(\"Chiffre d'affaires, dépenses et bénéfice par mois\"))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:214: .navigationTitle(tr(\"Résultats\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:254: Section(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\"))) {"
+   "App/Screens/Spaces/NutritionSpace.swift:271: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
   ]
  },
  "Résumé intelligent": {
@@ -22978,13 +23058,13 @@
    "App/Screens/Home/DailySection.swift:237: Label(tr(\"Scanner\"), systemImage: \"barcode.viewfinder\")",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:70: MiniActionButton(title: tr(\"Scanner\"), symbol: \"barcode.viewfinder\", colorHex: accentHex) {",
    "App/Screens/Profile/DataItemViews.swift:122: action(tr(\"Scanner\"), symbol: \"barcode.viewfinder\", prominent: true) { sheets?.open { FoodSearchView(startsWithScanner: true) } }",
-   "App/Screens/Spaces/NutritionSpace.swift:197: Label(tr(\"Scanner\"), systemImage: \"barcode.viewfinder\")"
+   "App/Screens/Spaces/NutritionSpace.swift:208: Label(tr(\"Scanner\"), systemImage: \"barcode.viewfinder\")"
   ]
  },
  "Scanner un aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:315: .navigationTitle(tr(\"Scanner un aliment\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:344: .navigationTitle(tr(\"Scanner un aliment\"))"
   ]
  },
  "Scanner un code-barres": {
@@ -22996,7 +23076,7 @@
  "Scanner à nouveau": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:446: Button(tr(\"Scanner à nouveau\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:475: Button(tr(\"Scanner à nouveau\")) {"
   ]
  },
  "Se balancer.": {
@@ -23402,7 +23482,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:259: limitRow(tr(\"Sodium\"), totals.sodiumMg, limit: goals.sodiumMaxMg, unit: tr(\"mg\"), coverage: NutritionMath.coverage(entries, \\.sodiumMg))",
-   "App/Screens/Spaces/NutritionSpace.swift:514: if let sodium = totals.sodiumMg { ValueRow(title: tr(\"Sodium\"), value: tr(\"\\(TF.int(sodium)) mg\")) }"
+   "App/Screens/Spaces/NutritionSpace.swift:543: if let sodium = totals.sodiumMg { ValueRow(title: tr(\"Sodium\"), value: tr(\"\\(TF.int(sodium)) mg\")) }"
   ]
  },
  "Soit %@ par jour jusqu'au retour": {
@@ -23544,7 +23624,7 @@
  "Souper": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:53: case .dinner: tr(\"Souper\")"
+   "Shared/Domains/Nutrition.swift:54: case .dinner: tr(\"Souper\")"
   ]
  },
  "Souper avec Léa": {
@@ -23805,13 +23885,13 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:257: limitRow(tr(\"Sucres\"), totals.sugars, limit: goals.sugarsMax, unit: \"g\", coverage: NutritionMath.coverage(entries, \\.sugars))",
-   "App/Screens/Spaces/NutritionSpace.swift:512: if let sugars = totals.sugars { ValueRow(title: tr(\"Sucres\"), value: \"\\(TF.decimal(sugars, 1)) g\") }"
+   "App/Screens/Spaces/NutritionSpace.swift:541: if let sugars = totals.sugars { ValueRow(title: tr(\"Sucres\"), value: \"\\(TF.decimal(sugars, 1)) g\") }"
   ]
  },
  "Suggestions": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:254: Section(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\"))) {"
+   "App/Screens/Spaces/NutritionSpace.swift:271: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
   ]
  },
  "Suis le coude du regard.": {
@@ -24287,7 +24367,7 @@
  "Sédentaire": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:496: case .sedentary: tr(\"Sédentaire\")"
+   "Shared/Domains/Nutrition.swift:497: case .sedentary: tr(\"Sédentaire\")"
   ]
  },
  "Sélection": {
@@ -24684,7 +24764,7 @@
    "App/Screens/Home/MyInfoSection.swift:25: add(\"height\", \"ruler\", tr(\"Taille\", context: \"height\"), profile.heightCm.map(Self.heightText))",
    "App/Screens/MiniApps/MiniAppSettings.swift:84: if let height = profile.heightCm { rows.append((tr(\"Taille\", context: \"height\"), tr(\"\\(TF.int(height)) cm\"))) }",
    "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\", context: \"height\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")",
-   "App/Screens/Spaces/NutritionSpace.swift:677: NumberRow(title: tr(\"Taille\", context: \"height\"), value: $height, unit: tr(\"cm\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:706: NumberRow(title: tr(\"Taille\", context: \"height\"), value: $height, unit: tr(\"cm\"))"
   ]
  },
  "Talonner lourdement.": {
@@ -26058,6 +26138,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:86: Text(tr(\"Touche un aliment pour changer sa quantité ou le déplacer. Glisse-le pour le supprimer.\"))"
+  ]
+ },
+ "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:126: Text(tr(\"Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.\"))"
   ]
  },
  "Touche un jour pour lui donner une séance. Tessera te propose chaque jour celle qui est prévue.": {
@@ -27585,6 +27671,12 @@
    "Shared/Model/Packs.swift:47: WidgetPack(id: \"traveler\", name: tr(\"Voyageur\"), tagline: tr(\"Départ, vol, hôtel, météo, heure et devise sur place.\"), symbol: \"airplane\","
   ]
  },
+ "Vu : %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:219: Text(tr(\"Vu : \\(value.label)\")).font(.caption).foregroundStyle(Color.secondary)"
+  ]
+ },
  "Vue %@": {
   "placeholders": 1,
   "uses": [
@@ -28062,7 +28154,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:294: ProfileNumberField(title: tr(\"Taille\", context: \"height\"), unit: tr(\"cm\"), value: heightBinding, decimals: false, identifier: \"profile-height\")",
-   "App/Screens/Spaces/NutritionSpace.swift:677: NumberRow(title: tr(\"Taille\", context: \"height\"), value: $height, unit: tr(\"cm\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:706: NumberRow(title: tr(\"Taille\", context: \"height\"), value: $height, unit: tr(\"cm\"))"
   ]
  },
  "coke zero": {
@@ -29905,7 +29997,7 @@
  "½ portion": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:534: Portion(title: tr(\"½ portion\"), grams: (serving / 2).rounded()),"
+   "App/Screens/Spaces/NutritionSpace.swift:563: Portion(title: tr(\"½ portion\"), grams: (serving / 2).rounded()),"
   ]
  },
  "½ tasse": {
@@ -30190,7 +30282,7 @@
  "Âge : %@ ans": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:676: Stepper(tr(\"Âge : \\(age) ans\"), value: $age, in: 16...90)"
+   "App/Screens/Spaces/NutritionSpace.swift:705: Stepper(tr(\"Âge : \\(age) ans\"), value: $age, in: 16...90)"
   ]
  },
  "Écarte les bouts de la corde en bas du mouvement.": {
@@ -30388,7 +30480,7 @@
  "Élevée (6–7 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:499: case .active: tr(\"Élevée (6–7 séances)\")"
+   "Shared/Domains/Nutrition.swift:500: case .active: tr(\"Élevée (6–7 séances)\")"
   ]
  },
  "Élégance": {
@@ -30863,6 +30955,13 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/FoodDatabase.swift:145: f(\"egg\", tr(\"Œuf\"), 143, 13, 0.7, 9.5, 0, 50, tr(\"1 gros œuf\"), s: 0.4, sf: 3.1, na: 142, chol: 372),"
+  ]
+ },
+ "≈ %@ kcal": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:129: ValueRow(title: tr(\"Calories\"), value: tr(\"≈ \\(TF.int(totals.kcal)) kcal\"))",
+   "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:226: Text(tr(\"≈ \\(TF.int(value.food.nutrients(grams: value.grams).kcal)) kcal\"))"
   ]
  },
  "≈ %@ km": {

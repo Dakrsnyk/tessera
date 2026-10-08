@@ -157,6 +157,7 @@ struct FoodSearchView: View {
     @State private var scan: ScanState?
     /// A custom food prefilled from a barcode (and the product's name when Open Food Facts has it).
     @State private var customDraft: FoodItem?
+    @State private var showsMealPhoto = false
 
     private enum ScanState: Equatable {
         case looking(String)
@@ -174,7 +175,9 @@ struct FoodSearchView: View {
         let q = FoodDatabase.normalized(query)
         let filteredMine = q.isEmpty ? mine : mine.filter { FoodDatabase.normalized($0.name).contains(q) }
         let builtin = FoodDatabase.search(query).filter { !seen.contains($0.id) }
-        return filteredMine + builtin
+        // Thousands of generic foods (Canadian Nutrient File) after the everyday ones.
+        let generic = q.isEmpty ? [] : NutrientFile.search(query)
+        return filteredMine + builtin + generic
     }
 
     /// Saved meals, offered first when nothing is typed: a whole meal in one tap.
@@ -189,7 +192,15 @@ struct FoodSearchView: View {
         NavigationStack {
             List {
                 Section {
+                    ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
+                        Button {
+                            showsMealPhoto = true
+                        } label: {
+                            Label(tr("Photo du repas"), systemImage: "camera.fill")
+                        }
+                        .buttonStyle(.bordered)
+                        .accessibilityIdentifier("meal-photo")
                         if DataScannerViewController.isSupported {
                             Button {
                                 showsScanner = true
@@ -205,6 +216,7 @@ struct FoodSearchView: View {
                             Label(tr("Aliment perso"), systemImage: "square.and.pencil")
                         }
                         .buttonStyle(.bordered)
+                    }
                     }
                 }
                 if let scan {
@@ -251,9 +263,15 @@ struct FoodSearchView: View {
                         }
                     }
                 }
-                Section(category.map(\.title) ?? (query.trimmed.isEmpty ? tr("Suggestions") : tr("Résultats"))) {
+                Section {
                     ForEach(local.prefix(80)) { food in
                         foodRow(food)
+                    }
+                } header: {
+                    Text(category.map(\.title) ?? (query.trimmed.isEmpty ? tr("Suggestions") : tr("Résultats")))
+                } footer: {
+                    if !query.trimmed.isEmpty, local.contains(where: { $0.source == .nutrientFile }) {
+                        Text(NutrientFile.attribution)
                     }
                 }
                 if !query.trimmed.isEmpty {
@@ -284,6 +302,14 @@ struct FoodSearchView: View {
                 online = []
                 searchError = nil
             }
+            // Few foods found here: the packaged products are looked up by themselves, once typing pauses.
+            .task(id: query) {
+                let text = query.trimmed
+                guard text.count >= 3, local.count < 8 else { return }
+                try? await Task.sleep(for: .milliseconds(700))
+                guard !Task.isCancelled, online.isEmpty, searchError == nil else { return }
+                await searchOnline()
+            }
             .navigationTitle(tr("Ajouter un aliment"))
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
@@ -299,6 +325,9 @@ struct FoodSearchView: View {
             }
             .sheet(item: $selected) { food in
                 FoodLogSheet(food: food, presetMeal: presetMeal, day: day) { dismiss() }
+            }
+            .sheet(isPresented: $showsMealPhoto) {
+                MealPhotoSheet(presetMeal: presetMeal, day: day) { dismiss() }
             }
             .sheet(item: $loggedMeal) { saved in
                 SavedMealLogSheet(saved: saved, presetMeal: presetMeal, day: day) { dismiss() }

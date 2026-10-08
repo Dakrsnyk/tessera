@@ -9,13 +9,13 @@
   "ja": "Tesseraは「次の予定」ウィジェットに今後の予定を表示します。データがiPhoneの外に出ることはありません。"
  },
  "NSCameraUsageDescription": {
-  "fr": "La caméra sert uniquement à scanner le code-barres d'un aliment.",
-  "en": "The camera is only used to scan a food's barcode.",
-  "es": "La cámara solo se usa para escanear el código de barras de un alimento.",
-  "de": "Die Kamera wird nur zum Scannen des Barcodes eines Lebensmittels verwendet.",
-  "it": "La fotocamera serve solo a scansionare il codice a barre di un alimento.",
-  "pt-BR": "A câmera é usada apenas para ler o código de barras de um alimento.",
-  "ja": "カメラは食品のバーコードを読み取るためだけに使用します。"
+  "fr": "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier un repas : la photo est analysée sur ton iPhone.",
+  "en": "The camera is only used to scan a food's barcode or to photograph a meal: the photo is analyzed on your iPhone.",
+  "es": "La cámara solo se usa para escanear el código de barras de un alimento o fotografiar una comida: la foto se analiza en tu iPhone.",
+  "de": "Die Kamera wird nur zum Scannen eines Lebensmittel-Barcodes oder zum Fotografieren einer Mahlzeit verwendet: Das Foto wird auf deinem iPhone analysiert.",
+  "it": "La fotocamera serve solo a scansionare il codice a barre di un alimento o a fotografare un pasto: la foto viene analizzata sul tuo iPhone.",
+  "pt-BR": "A câmera é usada apenas para ler o código de barras de um alimento ou fotografar uma refeição: a foto é analisada no seu iPhone.",
+  "ja": "カメラは食品のバーコードを読み取るか、食事を撮影するためだけに使用します。写真はiPhone上で分析されます。"
  },
  "NSLocationWhenInUseUsageDescription": {
   "fr": "Ta position sert uniquement à trouver la météo de ta ville.",

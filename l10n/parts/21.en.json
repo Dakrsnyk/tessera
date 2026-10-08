@@ -15,5 +15,21 @@
  "Revenir à aujourd'hui": "Back to today",
  "Rien de prévu ce jour-là.": "Nothing planned that day.",
  "séance faite": "workout done",
- "séances faites": "workouts done"
+ "séances faites": "workouts done",
+ "Ajouter au journal": "Add to log",
+ "Aliments détectés": "Foods detected",
+ "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.": "Generic foods: Canadian Nutrient File, Health Canada.",
+ "Analyse de la photo…": "Analyzing the photo…",
+ "Apport estimé": "Estimated intake",
+ "Aucun aliment reconnu sur cette photo.": "No food recognized in this photo.",
+ "Chercher un aliment": "Search for a food",
+ "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.": "Try a closer, well-lit photo, or add the foods by hand from the search.",
+ "Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.": "Estimate from the photo, made on your iPhone: check the foods and amounts before adding.",
+ "Photo du repas": "Meal photo",
+ "Prendre une photo": "Take a photo",
+ "Quantité estimée": "Estimated amount",
+ "Reprendre": "Retake",
+ "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "Tap a food to pick another one, and correct the amount: these are estimates.",
+ "Vu : %@": "Seen: %@",
+ "≈ %@ kcal": "≈ %@ kcal"
 }

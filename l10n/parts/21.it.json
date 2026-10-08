@@ -15,5 +15,21 @@
  "Revenir à aujourd'hui": "Torna a oggi",
  "Rien de prévu ce jour-là.": "Niente in programma quel giorno.",
  "séance faite": "allenamento fatto",
- "séances faites": "allenamenti fatti"
+ "séances faites": "allenamenti fatti",
+ "Ajouter au journal": "Aggiungi al diario",
+ "Aliments détectés": "Alimenti rilevati",
+ "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.": "Alimenti generici: Canadian Nutrient File, Health Canada.",
+ "Analyse de la photo…": "Analisi della foto…",
+ "Apport estimé": "Apporto stimato",
+ "Aucun aliment reconnu sur cette photo.": "Nessun alimento riconosciuto in questa foto.",
+ "Chercher un aliment": "Cerca un alimento",
+ "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.": "Prova una foto più ravvicinata e ben illuminata, oppure aggiungi gli alimenti a mano dalla ricerca.",
+ "Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.": "Stima dalla foto, fatta sul tuo iPhone: controlla alimenti e quantità prima di aggiungere.",
+ "Photo du repas": "Foto del pasto",
+ "Prendre une photo": "Scatta una foto",
+ "Quantité estimée": "Quantità stimata",
+ "Reprendre": "Riscatta",
+ "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "Tocca un alimento per sceglierne un altro e correggi la quantità: sono stime.",
+ "Vu : %@": "Visto: %@",
+ "≈ %@ kcal": "≈ %@ kcal"
 }

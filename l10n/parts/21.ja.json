@@ -15,5 +15,21 @@
  "Revenir à aujourd'hui": "今日に戻る",
  "Rien de prévu ce jour-là.": "この日の予定はありません。",
  "séance faite": "回のワークアウト完了",
- "séances faites": "回のワークアウト完了"
+ "séances faites": "回のワークアウト完了",
+ "Ajouter au journal": "記録に追加",
+ "Aliments détectés": "検出された食品",
+ "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.": "一般食品：Canadian Nutrient File（カナダ保健省）",
+ "Analyse de la photo…": "写真を分析中…",
+ "Apport estimé": "推定摂取量",
+ "Aucun aliment reconnu sur cette photo.": "この写真から食品を認識できませんでした。",
+ "Chercher un aliment": "食品を検索",
+ "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.": "もっと近くで明るい写真を試すか、検索から手動で食品を追加してください。",
+ "Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.": "iPhone上で写真から推定しています。追加する前に食品と量を確認してください。",
+ "Photo du repas": "食事の写真",
+ "Prendre une photo": "写真を撮る",
+ "Quantité estimée": "推定量",
+ "Reprendre": "撮り直す",
+ "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "食品をタップして別のものを選び、量を修正してください。これは推定値です。",
+ "Vu : %@": "検出：%@",
+ "≈ %@ kcal": "≈ %@ kcal"
 }

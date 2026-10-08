@@ -15,5 +15,21 @@
  "Revenir à aujourd'hui": "Zurück zu heute",
  "Rien de prévu ce jour-là.": "An diesem Tag ist nichts geplant.",
  "séance faite": "Training erledigt",
- "séances faites": "Trainings erledigt"
+ "séances faites": "Trainings erledigt",
+ "Ajouter au journal": "Zum Tagebuch",
+ "Aliments détectés": "Erkannte Lebensmittel",
+ "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.": "Allgemeine Lebensmittel: Canadian Nutrient File, Health Canada.",
+ "Analyse de la photo…": "Foto wird analysiert…",
+ "Apport estimé": "Geschätzte Aufnahme",
+ "Aucun aliment reconnu sur cette photo.": "Auf diesem Foto wurde kein Lebensmittel erkannt.",
+ "Chercher un aliment": "Lebensmittel suchen",
+ "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.": "Versuche ein näheres, gut beleuchtetes Foto oder füge die Lebensmittel über die Suche von Hand hinzu.",
+ "Estimation à partir de la photo, faite sur ton iPhone : vérifie les aliments et les quantités avant d'ajouter.": "Schätzung anhand des Fotos, auf deinem iPhone erstellt: Prüfe Lebensmittel und Mengen vor dem Hinzufügen.",
+ "Photo du repas": "Mahlzeit-Foto",
+ "Prendre une photo": "Foto aufnehmen",
+ "Quantité estimée": "Geschätzte Menge",
+ "Reprendre": "Neu aufnehmen",
+ "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "Tippe auf ein Lebensmittel, um ein anderes zu wählen, und korrigiere die Menge: Das sind Schätzungen.",
+ "Vu : %@": "Erkannt: %@",
+ "≈ %@ kcal": "≈ %@ kcal"
 }
