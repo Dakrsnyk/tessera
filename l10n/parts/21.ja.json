@@ -31,5 +31,16 @@
  "Reprendre": "撮り直す",
  "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "食品をタップして別のものを選び、量を修正してください。これは推定値です。",
  "Vu : %@": "検出：%@",
- "≈ %@ kcal": "≈ %@ kcal"
+ "≈ %@ kcal": "≈ %@ kcal",
+ "Afficher %@": "%@を表示",
+ "Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.": "自動：入力した内容に応じて、今大切なもの（食事、今日のワークアウト、授業など）を先に表示します。",
+ "Disposition automatique": "自動レイアウト",
+ "Fais glisser une carte pour la déplacer. ½ : à côté d'une autre carte ; Large : toute la largeur.": "カードをドラッグして移動します。½：ほかのカードと並べる、ワイド：全幅。",
+ "Large": "ワイド",
+ "Masquer %@": "%@を非表示",
+ "Masquées": "非表示",
+ "Modifier la disposition": "レイアウトを編集",
+ "Sur l'Accueil": "ホームに表示",
+ "Semaine du %@": "%@の週",
+ "À découvrir cette semaine": "今週のおすすめ"
 }

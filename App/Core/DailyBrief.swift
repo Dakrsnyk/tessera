@@ -155,14 +155,16 @@ enum DailyBrief {
             if let tile { scored.append((tile, score)) }
         }
 
+        // By default, what was entered for meals comes first, then today's session; a session in
+        // progress, an exam or a reminder due today go before them.
         let nutrition = nutritionTile(input)
-        add(nutrition.map(Tile.nutrition), moment == .morning ? 70 : (moment == .day ? 80 : 96))
+        add(nutrition.map(Tile.nutrition), 99)
 
         if let workout = workoutTile(input) {
             let score: Int
             switch workout.stage {
             case .inProgress: score = 110
-            case .planned: score = moment == .morning ? 72 : (moment == .day ? 88 : 86)
+            case .planned: score = 95
             case .done: score = moment == .evening ? 78 : 60
             case .rest: score = 30
             }
@@ -170,7 +172,7 @@ enum DailyBrief {
         }
 
         if let classes = classesTile(input) {
-            let score = classes.items.contains(where: \.isHighlighted) ? 98 : (moment == .morning ? 94 : (moment == .day ? 86 : 50))
+            let score = classes.items.contains(where: \.isHighlighted) ? 100 : (moment == .morning ? 90 : (moment == .day ? 86 : 50))
             add(.classes(title: classes.title, items: classes.items), score)
         }
 
@@ -181,7 +183,7 @@ enum DailyBrief {
         let reminders = remindersTile(input)
         if !reminders.isEmpty {
             let urgent = reminders.contains { DateMath.isSameDay($0.date, now) && $0.date >= now }
-            add(.reminders(reminders), urgent ? 97 : (moment == .evening ? 72 : 84))
+            add(.reminders(reminders), urgent ? 100 : (moment == .evening ? 72 : 84))
         }
 
         let priorities = input.productivity.priorities.prefix(3).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
@@ -211,24 +213,41 @@ enum DailyBrief {
         }
 
         if let weather = input.weather {
-            add(.weather(weather), moment == .morning ? 100 : (moment == .day ? 42 : 20))
+            add(.weather(weather), moment == .morning ? 89 : (moment == .day ? 42 : 20))
         }
 
         var tiles = scored.enumerated()
             .sorted { lhs, rhs in lhs.element.score == rhs.element.score ? lhs.offset < rhs.offset : lhs.element.score > rhs.element.score }
             .map(\.element.tile)
 
-        // A discreet invitation for interests with nothing entered yet, at most two.
-        tiles += invitations(input, shown: tiles).prefix(2).map(Tile.invite)
+        // A discreet invitation for interests with nothing entered yet: two on an empty Home, one
+        // next to a few real cards, none once Home is full of the person's own figures.
+        let room = tiles.count >= 4 ? 0 : (tiles.count >= 2 ? 1 : 2)
+        tiles += invitations(input, shown: tiles).prefix(room).map(Tile.invite)
         return tiles
     }
 
-    /// Rows of the dashboard: wide tiles alone, the others two by two, in order.
-    static func rows(_ tiles: [Tile]) -> [[Tile]] {
+    /// The cards as the person arranged them: hidden ones left out, the chosen order first (the
+    /// others after, in the automatic order), invitations last.
+    static func arranged(_ tiles: [Tile], order: [String], hidden: [String]) -> [Tile] {
+        let invites = tiles.filter { if case .invite = $0 { true } else { false } }
+        let cards = tiles.filter { tile in !invites.contains(tile) && !hidden.contains(tile.id) }
+        guard !order.isEmpty else { return cards + invites }
+        let sorted = cards.enumerated().sorted { lhs, rhs in
+            let l = order.firstIndex(of: lhs.element.id) ?? order.count + lhs.offset
+            let r = order.firstIndex(of: rhs.element.id) ?? order.count + rhs.offset
+            return l < r
+        }
+        return sorted.map(\.element) + invites
+    }
+
+    /// Rows of the dashboard: wide tiles alone, the others two by two, in order. `wide` is the
+    /// size the person chose for a card (full width or half), over the card's own size.
+    static func rows(_ tiles: [Tile], wide: [String: Bool] = [:]) -> [[Tile]] {
         var rows: [[Tile]] = []
         var waiting: Tile?
         for tile in tiles {
-            if tile.isWide {
+            if wide[tile.id] ?? tile.isWide {
                 rows.append([tile])
             } else if let first = waiting {
                 rows.append([first, tile])

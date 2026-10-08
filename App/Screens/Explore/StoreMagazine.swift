@@ -333,7 +333,7 @@ struct StoreCollectionView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
-        .background(.screenFill)
+        .background(.screenGradient)
         .screenshotScroll()
         .navigationTitle(collection.title)
         .navigationBarTitleDisplayMode(.inline)
@@ -401,7 +401,7 @@ struct StoreCollectionsView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
-        .background(.screenFill)
+        .background(.screenGradient)
         .screenshotScroll()
         .navigationTitle(tr("Collections"))
         .navigationBarTitleDisplayMode(.large)
@@ -449,7 +449,7 @@ struct StorePacksView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
-        .background(.screenFill)
+        .background(.screenGradient)
         .screenshotScroll()
         .navigationTitle(tr("Packs"))
         .navigationBarTitleDisplayMode(.large)

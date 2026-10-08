@@ -15,11 +15,14 @@ enum HomeRoute: Hashable {
 struct DailySection: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    @State private var editingLayout = false
     private var steps: StepCounter { .shared }
 
     var body: some View {
         let now = Date()
-        let tiles = DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil))
+        let settings = model.settings
+        let automatic = DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil))
+        let tiles = DailyBrief.arranged(automatic, order: settings.dailyOrder, hidden: settings.dailyHidden)
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 3) {
@@ -32,17 +35,32 @@ struct DailySection: View {
                         .accessibilityAddTraits(.isHeader)
                 }
                 Spacer()
-                NavigationLink(value: HomeRoute.info) {
-                    Text(tr("Mes données"))
-                        .font(.subheadline.weight(.semibold))
+                VStack(alignment: .trailing, spacing: 6) {
+                    NavigationLink(value: HomeRoute.info) {
+                        Text(tr("Mes données"))
+                            .font(.subheadline.weight(.semibold))
+                    }
+                    .accessibilityIdentifier("daily-data")
+                    // Discreet: the size, order and choice of the cards, right here on Home.
+                    if !automatic.isEmpty {
+                        Button {
+                            editingLayout = true
+                        } label: {
+                            Image(systemName: "rectangle.3.group")
+                                .font(.footnote.weight(.semibold))
+                                .frame(width: 30, height: 24)
+                                .background(.cardFill, in: Capsule())
+                        }
+                        .accessibilityLabel(Text(tr("Modifier la disposition")))
+                        .accessibilityIdentifier("daily-layout")
+                    }
                 }
-                .accessibilityIdentifier("daily-data")
             }
             if tiles.isEmpty {
                 emptyState
             } else {
                 VStack(spacing: 12) {
-                    ForEach(Array(DailyBrief.rows(tiles).enumerated()), id: \.offset) { pair in
+                    ForEach(Array(DailyBrief.rows(tiles, wide: settings.dailyWide).enumerated()), id: \.offset) { pair in
                         HStack(alignment: .top, spacing: 12) {
                             ForEach(pair.element) { tile in
                                 DailyTileView(tile: tile)
@@ -57,6 +75,9 @@ struct DailySection: View {
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("daily-section")
         .task { await steps.refresh() }
+        .sheet(isPresented: $editingLayout) {
+            DailyLayoutEditor(available: automatic.filter { if case .invite = $0 { false } else { true } })
+        }
     }
 
     /// Nothing entered yet: what « Mon Quotidien » will show, and where to start. No fake figure.

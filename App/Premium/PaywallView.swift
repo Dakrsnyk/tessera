@@ -29,7 +29,7 @@ struct PaywallView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 24)
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .screenshotScroll()
             .safeAreaInset(edge: .bottom) {
                 if !model.isPremium { purchaseBar }

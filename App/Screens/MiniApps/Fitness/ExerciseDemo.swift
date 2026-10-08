@@ -399,6 +399,20 @@ struct DemoPalette {
 }
 
 enum DemoRenderer {
+    /// A little more muscle on every figure, the same in every exercise: the body's strokes (role
+    /// « ink ») 12 % thicker, the muscles worked (roles « muscle », « muscle2 ») 18 %. Lengths,
+    /// movements, the head and the equipment stay as they are: athletic, not a bodybuilder.
+    static let bodyBulk = 1.12
+    static let muscleBulk = 1.18
+
+    private static func strokeWidth(_ prim: DemoPrim) -> Double {
+        switch prim.role {
+        case 0: prim.width * bodyBulk
+        case 1, 2: prim.width * muscleBulk
+        default: prim.width
+        }
+    }
+
     private struct Item {
         let depth: Double
         let order: Int
@@ -503,14 +517,14 @@ enum DemoRenderer {
                 var path = Path()
                 path.addLines(item.screen)
                 context.stroke(path, with: .color(color),
-                               style: StrokeStyle(lineWidth: CGFloat(item.prim.width * scale), lineCap: .round, lineJoin: .round))
+                               style: StrokeStyle(lineWidth: CGFloat(strokeWidth(item.prim) * scale), lineCap: .round, lineJoin: .round))
             case .poly:
                 var path = Path()
                 path.addLines(item.screen)
                 path.closeSubpath()
                 context.fill(path, with: .color(color))
                 if item.prim.width > 0 {
-                    context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: CGFloat(item.prim.width * scale), lineJoin: .round))
+                    context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: CGFloat(strokeWidth(item.prim) * scale), lineJoin: .round))
                 }
             case .ball:
                 let c = item.screen[0]

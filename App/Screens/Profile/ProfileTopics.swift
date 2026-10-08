@@ -694,7 +694,7 @@ struct TopicEditorSheet: View {
                 .padding(20)
             }
             .scrollDismissesKeyboard(.interactively)
-            .background(.screenFill)
+            .background(.screenGradient)
             .navigationTitle(topic.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -725,7 +725,7 @@ struct InterestsEditorSheet: View {
                 }
                 .padding(20)
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .navigationTitle(tr("Centres d'intérêt"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

@@ -63,7 +63,7 @@ struct ExploreView: View {
                     if step == .store { withAnimation { proxy.scrollTo(Self.top, anchor: .top) } }
                 }
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .screenshotScroll()
             .navigationTitle(tr("Store"))
             .navigationDestination(for: StorePage.self) { page in
@@ -360,8 +360,10 @@ struct ExploreView: View {
 
     private var newestSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: tr("Vient d'arriver"), title: tr("Nouveautés"))
-            templateShelf(TemplateCatalog.newest)
+            // Changes every week: a fresh selection from the whole catalog, dated so it reads as new.
+            let monday = DateMath.week(containing: Date()).first ?? Date()
+            MagazineHeader(eyebrow: tr("Semaine du \(Fmt.shortDay(monday))"), title: tr("À découvrir cette semaine"))
+            templateShelf(TemplateCatalog.weeklyPick())
         }
     }
 
@@ -663,7 +665,7 @@ struct PackSheet: View {
                 }
                 .padding(20)
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .safeAreaInset(edge: .bottom) {
                 Button {
                     if needsPremium {

@@ -184,6 +184,28 @@ enum TemplateCatalog {
 
     static var newest: [WidgetTemplate] { showcase }
 
+    /// The Store's pick of the week: a dozen templates from the whole catalog, the same all week and
+    /// different the next one (the ISO week seeds the draw), so the Store always has something to show.
+    static func weeklyPick(now: Date = Date(), count: Int = 12) -> [WidgetTemplate] {
+        let calendar = Calendar(identifier: .iso8601)
+        let week = calendar.component(.yearForWeekOfYear, from: now) * 53 + calendar.component(.weekOfYear, from: now)
+        var generator = WeekGenerator(seed: UInt64(week))
+        return Array(all.shuffled(using: &generator).prefix(count))
+    }
+
+    /// SplitMix64: the same sequence for the same week, on every device.
+    private struct WeekGenerator: RandomNumberGenerator {
+        var state: UInt64
+        init(seed: UInt64) { state = seed &+ 0x9E37_79B9_7F4A_7C15 }
+        mutating func next() -> UInt64 {
+            state &+= 0x9E37_79B9_7F4A_7C15
+            var z = state
+            z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
+            z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
+            return z ^ (z >> 31)
+        }
+    }
+
     static func templates(for kind: WidgetKind) -> [WidgetTemplate] {
         all.filter { $0.kind == kind }
     }

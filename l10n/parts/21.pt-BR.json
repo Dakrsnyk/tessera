@@ -31,5 +31,16 @@
  "Reprendre": "Tirar outra",
  "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "Toque em um alimento para escolher outro e corrija a quantidade: são estimativas.",
  "Vu : %@": "Visto: %@",
- "≈ %@ kcal": "≈ %@ kcal"
+ "≈ %@ kcal": "≈ %@ kcal",
+ "Afficher %@": "Mostrar %@",
+ "Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.": "Automático: o Tessera mostra primeiro o que importa agora (refeições, treino do dia, aulas…), conforme o que você registrou.",
+ "Disposition automatique": "Disposição automática",
+ "Fais glisser une carte pour la déplacer. ½ : à côté d'une autre carte ; Large : toute la largeur.": "Arraste um cartão para movê-lo. ½: ao lado de outro cartão; Largo: largura total.",
+ "Large": "Largo",
+ "Masquer %@": "Ocultar %@",
+ "Masquées": "Ocultos",
+ "Modifier la disposition": "Editar disposição",
+ "Sur l'Accueil": "No Início",
+ "Semaine du %@": "Semana de %@",
+ "À découvrir cette semaine": "Para descobrir nesta semana"
 }

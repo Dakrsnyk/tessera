@@ -93,7 +93,7 @@ struct MyWidgetsView: View {
                 if step == .mine { withAnimation { proxy.scrollTo("top", anchor: .top) } }
             }
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .navigationTitle(isSelecting ? selectionTitle : tr("Mes widgets"))
             .navigationBarTitleDisplayMode(isSelecting ? .inline : .automatic)
             .toolbar {

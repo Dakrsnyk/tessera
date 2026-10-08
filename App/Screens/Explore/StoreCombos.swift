@@ -275,7 +275,7 @@ struct StoreCombosView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
-        .background(.screenFill)
+        .background(.screenGradient)
         .screenshotScroll()
         .navigationTitle(tr("Combinaisons"))
         .navigationBarTitleDisplayMode(.large)

@@ -31,5 +31,16 @@
  "Reprendre": "Retake",
  "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "Tap a food to pick another one, and correct the amount: these are estimates.",
  "Vu : %@": "Seen: %@",
- "≈ %@ kcal": "≈ %@ kcal"
+ "≈ %@ kcal": "≈ %@ kcal",
+ "Afficher %@": "Show %@",
+ "Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.": "Automatic: Tessera puts what matters now first (meals, today's workout, classes…), based on what you entered.",
+ "Disposition automatique": "Automatic layout",
+ "Fais glisser une carte pour la déplacer. ½ : à côté d'une autre carte ; Large : toute la largeur.": "Drag a card to move it. ½: next to another card; Wide: full width.",
+ "Large": "Wide",
+ "Masquer %@": "Hide %@",
+ "Masquées": "Hidden",
+ "Modifier la disposition": "Edit layout",
+ "Sur l'Accueil": "On Home",
+ "Semaine du %@": "Week of %@",
+ "À découvrir cette semaine": "To discover this week"
 }

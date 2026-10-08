@@ -52,7 +52,7 @@ struct SpacesView: View {
                 if step == .create { withAnimation { proxy.scrollTo("spaces-top", anchor: .top) } }
             }
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .screenshotScroll()
             .navigationTitle(tr("Créer"))
             .navigationDestination(for: Space.self) { space in

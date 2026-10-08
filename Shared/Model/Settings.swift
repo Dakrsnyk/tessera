@@ -85,12 +85,20 @@ struct AppSettings: Codable, Hashable {
     var reviewRequestedVersion: String?
     /// The view chosen on each « Mon Quotidien » card (swiped left or right), by card.
     var dailyCardPages: [String: Int] = [:]
+    /// « Mon Quotidien » arranged by hand (the layout button under « Mes données »): the cards in
+    /// this order, any other after them. Empty: the automatic order, by what matters now.
+    var dailyOrder: [String] = []
+    /// Cards hidden from « Mon Quotidien ».
+    var dailyHidden: [String] = []
+    /// The size chosen for a card: true full width, false half; absent, the card's own size.
+    var dailyWide: [String: Bool] = [:]
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
         case hasCompletedOnboarding, hydrationReminders
         case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
+        case dailyOrder, dailyHidden, dailyWide
     }
 
     init() {}
@@ -115,6 +123,9 @@ struct AppSettings: Codable, Hashable {
         lastCountedOpen = try? c.decodeIfPresent(Date.self, forKey: .lastCountedOpen)
         reviewRequestedVersion = try? c.decodeIfPresent(String.self, forKey: .reviewRequestedVersion)
         dailyCardPages = (try? c.decodeIfPresent([String: Int].self, forKey: .dailyCardPages)) ?? [:]
+        dailyOrder = (try? c.decodeIfPresent([String].self, forKey: .dailyOrder)) ?? []
+        dailyHidden = (try? c.decodeIfPresent([String].self, forKey: .dailyHidden)) ?? []
+        dailyWide = (try? c.decodeIfPresent([String: Bool].self, forKey: .dailyWide)) ?? [:]
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

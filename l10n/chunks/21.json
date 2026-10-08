@@ -232,5 +232,82 @@
    "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:129: ValueRow(title: tr(\"Calories\"), value: tr(\"≈ \\(TF.int(totals.kcal)) kcal\"))",
    "App/Screens/MiniApps/Nutrition/MealPhotoView.swift:226: Text(tr(\"≈ \\(TF.int(value.food.nutrients(grams: value.grams).kcal)) kcal\"))"
   ]
+ },
+ {
+  "key": "Afficher %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:115: .accessibilityLabel(Text(isHidden ? tr(\"Afficher \\(info.title)\") : tr(\"Masquer \\(info.title)\")))"
+  ]
+ },
+ {
+  "key": "Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:59: Text(tr(\"Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.\"))"
+  ]
+ },
+ {
+  "key": "Disposition automatique",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:55: Label(tr(\"Disposition automatique\"), systemImage: \"wand.and.stars\")"
+  ]
+ },
+ {
+  "key": "Fais glisser une carte pour la déplacer. ½ : à côté d'une autre carte ; Large : toute la largeur.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:38: Text(tr(\"Fais glisser une carte pour la déplacer. ½ : à côté d'une autre carte ; Large : toute la largeur.\"))"
+  ]
+ },
+ {
+  "key": "Large",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:94: Text(tr(\"Large\")).tag(true)"
+  ]
+ },
+ {
+  "key": "Masquer %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:115: .accessibilityLabel(Text(isHidden ? tr(\"Afficher \\(info.title)\") : tr(\"Masquer \\(info.title)\")))"
+  ]
+ },
+ {
+  "key": "Masquées",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:41: Section(tr(\"Masquées\")) {"
+  ]
+ },
+ {
+  "key": "Modifier la disposition",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:54: .accessibilityLabel(Text(tr(\"Modifier la disposition\")))"
+  ]
+ },
+ {
+  "key": "Sur l'Accueil",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:36: Text(tr(\"Sur l'Accueil\"))"
+  ]
+ },
+ {
+  "key": "Semaine du %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:365: MagazineHeader(eyebrow: tr(\"Semaine du \\(Fmt.shortDay(monday))\"), title: tr(\"À découvrir cette semaine\"))"
+  ]
+ },
+ {
+  "key": "À découvrir cette semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:365: MagazineHeader(eyebrow: tr(\"Semaine du \\(Fmt.shortDay(monday))\"), title: tr(\"À découvrir cette semaine\"))"
+  ]
  }
 ]

@@ -181,7 +181,7 @@ struct MyInfoView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
-        .background(.screenFill)
+        .background(.screenGradient)
         .screenshotScroll()
         .navigationTitle(tr("Mes informations"))
         .navigationBarTitleDisplayMode(.large)
@@ -316,7 +316,7 @@ struct InfoAreaView: View {
             .padding(.bottom, 32)
         }
         .scrollDismissesKeyboard(.interactively)
-        .background(.screenFill)
+        .background(.screenGradient)
         .navigationTitle(area.title)
         .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $editsTopic) {

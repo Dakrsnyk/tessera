@@ -82,25 +82,47 @@ extension EnvironmentValues {
 /// mode instantly, without rebuilding any screen.
 struct AppFill: ShapeStyle {
     enum Kind {
-        case screen, card, onAccent
+        case screen, screenGradient, card, onAccent
     }
 
     let kind: Kind
 
-    func resolve(in environment: EnvironmentValues) -> Color {
+    func resolve(in environment: EnvironmentValues) -> AnyShapeStyle {
         let style = environment.appStyle
         let dark = environment.colorScheme == .dark
         switch kind {
-        case .screen: return Color(hex: dark ? style.screenDark : style.screenLight)
-        case .card: return Color(hex: dark ? style.cardDark : "FFFFFF")
-        case .onAccent: return Color(hex: dark ? style.inkOnDarkAccent : "FFFFFF")
+        case .screen: return AnyShapeStyle(Color(hex: dark ? style.screenDark : style.screenLight))
+        case .screenGradient: return AnyShapeStyle(Self.depth(style, dark: dark))
+        case .card: return AnyShapeStyle(Color(hex: dark ? style.cardDark : "FFFFFF"))
+        case .onAccent: return AnyShapeStyle(Color(hex: dark ? style.inkOnDarkAccent : "FFFFFF"))
         }
+    }
+
+    /// The screen color with a little depth: lighter at the top, darker at the bottom. Light mode
+    /// opens towards white; dark mode takes a hint of the style's card color at the top and sinks
+    /// towards black at the bottom. Subtle on purpose: the style stays the same.
+    static func depth(_ style: AppStyle, dark: Bool) -> LinearGradient {
+        let base = dark ? style.screenDark : style.screenLight
+        let top = dark ? mix(base, style.cardDark, 0.55) : mix(base, "FFFFFF", 0.45)
+        let bottom = dark ? mix(base, "000000", 0.45) : mix(base, "000000", 0.035)
+        return LinearGradient(colors: [top, Color(hex: base), bottom], startPoint: .top, endPoint: .bottom)
+    }
+
+    private static func mix(_ hex: String, _ other: String, _ amount: Double) -> Color {
+        func rgb(_ hex: String) -> (Double, Double, Double) {
+            let value = UInt64(hex, radix: 16) ?? 0
+            return (Double((value >> 16) & 0xFF) / 255, Double((value >> 8) & 0xFF) / 255, Double(value & 0xFF) / 255)
+        }
+        let (r, g, b) = rgb(hex), (r2, g2, b2) = rgb(other)
+        return Color(red: r + (r2 - r) * amount, green: g + (g2 - g) * amount, blue: b + (b2 - b) * amount)
     }
 }
 
 extension ShapeStyle where Self == AppFill {
-    /// Screen background (behind cards and lists).
+    /// Screen color, flat (small fields, bars).
     static var screenFill: AppFill { AppFill(kind: .screen) }
+    /// Whole-screen background (behind cards and lists): the screen color with a subtle vertical depth.
+    static var screenGradient: AppFill { AppFill(kind: .screenGradient) }
     /// Cards and list rows.
     static var cardFill: AppFill { AppFill(kind: .card) }
     /// Text and symbols drawn on an accent-colored fill.
@@ -122,6 +144,6 @@ extension View {
     /// Lists and forms on the style's background instead of the system gray.
     func styledList() -> some View {
         scrollContentBackground(.hidden)
-            .background(.screenFill)
+            .background(.screenGradient)
     }
 }

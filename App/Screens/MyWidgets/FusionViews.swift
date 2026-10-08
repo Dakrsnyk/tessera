@@ -76,7 +76,7 @@ struct FusionSheet: View {
                 }
                 .padding(20)
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .safeAreaInset(edge: .bottom) {
                 Button {
                     onConfirm(keepsOriginals)

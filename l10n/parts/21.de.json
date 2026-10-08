@@ -31,5 +31,16 @@
  "Reprendre": "Neu aufnehmen",
  "Touche un aliment pour en choisir un autre, et corrige la quantité : ce sont des estimations.": "Tippe auf ein Lebensmittel, um ein anderes zu wählen, und korrigiere die Menge: Das sind Schätzungen.",
  "Vu : %@": "Erkannt: %@",
- "≈ %@ kcal": "≈ %@ kcal"
+ "≈ %@ kcal": "≈ %@ kcal",
+ "Afficher %@": "%@ einblenden",
+ "Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.": "Automatisch: Tessera zeigt zuerst, was jetzt zählt (Mahlzeiten, heutiges Training, Kurse…), je nach deinen Angaben.",
+ "Disposition automatique": "Automatische Anordnung",
+ "Fais glisser une carte pour la déplacer. ½ : à côté d'une autre carte ; Large : toute la largeur.": "Ziehe eine Karte, um sie zu verschieben. ½: neben einer anderen Karte; Breit: volle Breite.",
+ "Large": "Breit",
+ "Masquer %@": "%@ ausblenden",
+ "Masquées": "Ausgeblendet",
+ "Modifier la disposition": "Anordnung bearbeiten",
+ "Sur l'Accueil": "Auf Home",
+ "Semaine du %@": "Woche vom %@",
+ "À découvrir cette semaine": "Diese Woche entdecken"
 }

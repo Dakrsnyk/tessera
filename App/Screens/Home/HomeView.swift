@@ -19,7 +19,7 @@ struct HomeView: View {
                     // The tutorial brings what it talks about near the top, above its card.
                     .onChange(of: router.tutorialStep) { _, step in bringIntoView(step, proxy: proxy) }
             }
-            .background(.screenFill)
+            .background(.screenGradient)
             .screenshotScroll()
             // « Tessera » centered at the top, between the search (left) and the profile (right).
             .navigationTitle(tr("Tessera"))

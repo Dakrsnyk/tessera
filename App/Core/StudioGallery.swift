@@ -119,7 +119,7 @@ struct StudioGalleryView: View {
                 .padding(8)
             }
         }
-        .background(.screenFill)
+        .background(.screenGradient)
     }
 }
 #endif
