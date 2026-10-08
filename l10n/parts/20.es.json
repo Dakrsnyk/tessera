@@ -11,5 +11,7 @@
  "ans [duration]": "años",
  "cours [one]": "clase",
  "mois [one]": "mes",
- "repas [one]": "comida"
+ "repas [one]": "comida",
+ "Moyenne [priority]": "Media",
+ "Nom [lastname]": "Apellido"
 }

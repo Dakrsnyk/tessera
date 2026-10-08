@@ -38,7 +38,7 @@ struct ProfileView: View {
                             .textContentType(.givenName)
                             .submitLabel(.done)
                     }
-                    LabeledContent(tr("Nom")) {
+                    LabeledContent(tr("Nom", context: "lastname")) {
                         TextField(tr("Facultatif"), text: Binding(
                             get: { model.profile.lastName },
                             set: { name in model.update(\.profile) { $0.lastName = name } }

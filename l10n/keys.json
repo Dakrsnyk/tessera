@@ -16603,7 +16603,7 @@
    "App/Screens/MiniApps/Car/CarPages.swift:91: MiniStat(title: tr(\"Moyenne\"), value: driven.isEmpty ? \"–\" : Fmt.number(Int(driven.reduce(0) { $0 + $1.km } / Double(driven.count))), unit: \"km/mois\")",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:130: MiniStat(title: tr(\"Moyenne\"), value: StudentMath.overallAverage(state).map { \"\\(TF.decimal($0, 1)) %\" } ?? \"–\",",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:273: MiniStat(title: tr(\"Moyenne\"), value: StudentMath.courseAverage(state, course: course.id).map { \"\\(TF.decimal($0, 1)) %\" } ?? \"–\", colorHex: course.colorHex)",
-   "Shared/Model/Content.swift:11: case .medium: tr(\"Moyenne\")"
+   "Shared/Model/KindCatalog.swift:240: KindInfo(kind: .gradeAverage, title: tr(\"Moyenne\"), summary: tr(\"Ta moyenne générale pondérée et celle de chaque cours.\"), category: .student, symbol: \"graduationcap\", isPremium: true, families: SML, "
   ]
  },
  "Moyenne %@ %%": {
@@ -16629,6 +16629,12 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Home/DailySection.swift:817: Text(tr(\"Moyenne : \\(Fmt.number(Int(values.reduce(0, +) / Double(values.count)))) pas\"))"
+  ]
+ },
+ "Moyenne [priority]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Content.swift:11: case .medium: tr(\"Moyenne\", context: \"priority\")"
   ]
  },
  "Moyenne des deux": {
@@ -17071,6 +17077,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/BudgetSpace.swift:338: TextField(tr(\"Nom (voyage, fonds d'urgence…)\"), text: $goal.name)"
+  ]
+ },
+ "Nom [lastname]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:41: LabeledContent(tr(\"Nom\", context: \"lastname\")) {"
   ]
  },
  "Nom de domaine": {

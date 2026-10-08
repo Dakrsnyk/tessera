@@ -8,7 +8,7 @@ enum TaskPriority: Int, Codable, CaseIterable, Identifiable, Comparable {
         switch self {
         case .none: tr("Aucune")
         case .low: tr("Basse")
-        case .medium: tr("Moyenne")
+        case .medium: tr("Moyenne", context: "priority")
         case .high: tr("Haute")
         }
     }

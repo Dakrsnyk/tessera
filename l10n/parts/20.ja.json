@@ -11,5 +11,7 @@
  "ans [duration]": "年",
  "cours [one]": "授業",
  "mois [one]": "か月",
- "repas [one]": "食"
+ "repas [one]": "食",
+ "Moyenne [priority]": "中",
+ "Nom [lastname]": "姓"
 }

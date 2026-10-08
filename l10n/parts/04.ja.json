@@ -194,7 +194,7 @@
  "Budget %@": "予算 %@",
  "%@ dépensés · dernier jour du mois": "%@使用 · 今月は最終日",
  "%@ dépensés · %@ avant la fin du mois": "%1$@使用 · 月末まであと%2$@",
- "%@ dépensés · %@ par jour pendant %@": "%1$@使用 · %3$@は1日%2$@",
+ "%@ dépensés · %@ par jour pendant %@": "%1$@使用 · 残り%3$@、1日%2$@",
  "prévus (Mes informations)": "見込み（マイ情報）",
  "Solde": "残高",
  "estimé": "推定",

@@ -307,7 +307,11 @@ jobs:
           if [ "$LANGS" = "true" ]; then
             for pair in en:en_US de:de_DE ja:ja_JP es:es_MX it:it_IT pt-BR:pt_BR; do
               export SHOT_LANG=${pair%%:*} SHOT_LOCALE=${pair#*:}
-              WAIT=12 shoot $SHOT_LANG-home home top light
+              # A fresh install per language: the demo data is created again, in that language.
+              xcrun simctl uninstall "$DEVICE" com.dakrsnyk.tessera || true
+              xcrun simctl install "$DEVICE" "$APP"
+              WAIT=12 shoot $SHOT_LANG-home-fresh home-fresh top light
+              WAIT=8 shoot $SHOT_LANG-home home top light
               for screen in home-pages store paywall settings onboarding-sport spaces-lock mywidgets creator-fitness studio-theme app-nutrition app-fitness app-planning app-finances; do
                 WAIT=8 shoot $SHOT_LANG-$screen $screen top light
               done

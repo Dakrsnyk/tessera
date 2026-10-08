@@ -3139,7 +3139,7 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@使用 · %3$@は1日%2$@"
+            "value": "%1$@使用 · 残り%3$@、1日%2$@"
           }
         },
         "pt-BR": {
@@ -20405,7 +20405,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zum Bildschirm hinzufügen"
+            "value": "Hinzufügen"
           }
         },
         "en": {
@@ -20417,7 +20417,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Añadir a la pantalla"
+            "value": "Añadir"
           }
         },
         "fr": {
@@ -20429,7 +20429,7 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aggiungi alla schermata"
+            "value": "Aggiungi"
           }
         },
         "ja": {
@@ -44775,7 +44775,7 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Questa settimana"
+            "value": "Settimana"
           }
         },
         "ja": {
@@ -97885,7 +97885,7 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tutto il giorno"
+            "value": "Tutto il dì"
           }
         },
         "ja": {
@@ -124175,6 +124175,53 @@
         }
       }
     },
+    "Moyenne [priority]": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mittel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyenne"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Média"
+          }
+        }
+      }
+    },
     "Moyenne des deux": {
       "extractionState": "manual",
       "localizations": {
@@ -127508,6 +127555,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nome (viagem, reserva de emergência…)"
+          }
+        }
+      }
+    },
+    "Nom [lastname]": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nachname"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last name"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apellido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cognome"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "姓"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sobrenome"
           }
         }
       }
@@ -179324,7 +179418,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Entrenamiento del día"
+            "value": "Rutina de hoy"
           }
         },
         "fr": {
@@ -179412,13 +179506,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Workout in progress"
+            "value": "Live workout"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Entrenamiento en curso"
+            "value": "Entrenando"
           }
         },
         "fr": {
@@ -179430,7 +179524,7 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Allenamento in corso"
+            "value": "In corso"
           }
         },
         "ja": {
@@ -179442,7 +179536,7 @@
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Treino em andamento"
+            "value": "Em andamento"
           }
         }
       }

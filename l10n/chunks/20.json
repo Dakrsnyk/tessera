@@ -99,5 +99,19 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:269: nutrition.foods == 0 ? tr(\"Rien noté\") : Fmt.plural(nutrition.meals, tr(\"repas\", context: \"one\"), tr(\"repas\"))"
   ]
+ },
+ {
+  "key": "Moyenne [priority]",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Content.swift:11: case .medium: tr(\"Moyenne\", context: \"priority\")"
+  ]
+ },
+ {
+  "key": "Nom [lastname]",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:41: LabeledContent(tr(\"Nom\", context: \"lastname\")) {"
+  ]
  }
 ]
