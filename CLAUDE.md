@@ -9,7 +9,7 @@ App iOS (SwiftUI, iOS 17, Swift 5) de widgets/mini-apps. Actif de revenu passif 
 - Pas de Mac : tout se vérifie par la CI GitHub Actions (Dakrsnyk/tessera).
 
 ## CI (pilotée par tags dans le message de commit)
-`[check]` compile seul · `[unit]` · `[daily]` (tests logiques + MiniApp/Studio/Profile UITests + captures) · `[studio]` `[apps]` `[demos]` `[shots]` `[langs]` (captures des écrans clés dans les 6 langues, sans tests) `[stack]` `[marketing]` `[place]` ; workflow_dispatch = tout.
+`[check]` compile seul (à privilégier ; ne pas lancer ni relire de captures : demande de l'utilisateur) · `[unit]` · `[daily]` (tests logiques + MiniApp/Studio/Profile UITests + captures) · `[studio]` `[apps]` `[demos]` `[shots]` `[langs]` (captures des écrans clés dans les 6 langues, sans tests) `[stack]` `[marketing]` `[place]` ; workflow_dispatch = tout.
 - Suivi : `scratchpad/colorcheck/ci.sh` (si absent : `gh api repos/Dakrsnyk/tessera/actions/runs`).
 - Rapport : `git fetch -q origin ci-report && mkdir -p /tmp/rNNN && git archive origin/ci-report | tar -x -C /tmp/rNNN` ; échecs : grep "Test Case .*failed" et "error:" dans report.txt. L'étape de tests finit par `|| true` : le job est vert même si des tests échouent.
 - Avant chaque commit : `python3 scripts/check_swift.py` (ordre des labels d'init, catalogue de kinds, sécurité Release).
