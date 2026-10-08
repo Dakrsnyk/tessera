@@ -460,14 +460,14 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertFalse(app.buttons["lock-weather"].exists, "Le filtre ne garde que les widgets interactifs")
     }
 
-    /// Home leads to the mini-apps through « Mon Quotidien »: its weather card opens Météo.
-    func testMonQuotidienOpensTheWeatherMiniApp() {
+    /// Home leads to the mini-apps through « Mon Quotidien »: its Nutrition card opens Nutrition.
+    func testMonQuotidienOpensAMiniApp() {
         launch(["-screenshotScreen", "home"])
-        let weather = app.buttons["daily-weather"]
-        reveal(weather, "La carte Météo de Mon Quotidien")
-        weather.tap()
-        XCTAssertTrue(app.navigationBars["Météo"].waitForExistence(timeout: 10), "La météo détaillée doit s'ouvrir")
-        snapshot("weather")
+        let nutrition = app.buttons["daily-nutrition-open"]
+        reveal(nutrition, "La carte Nutrition de Mon Quotidien")
+        nutrition.tap()
+        XCTAssertTrue(app.navigationBars["Nutrition"].waitForExistence(timeout: 10), "La mini-app Nutrition doit s'ouvrir")
+        snapshot("daily-opens-nutrition")
         XCTAssertEqual(app.state, .runningForeground)
     }
 }
