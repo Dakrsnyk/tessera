@@ -108,9 +108,10 @@ struct HomeView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 2) {
+            // In the app style's color, like « Mon Quotidien ».
             Text(Fmt.longDay(Date()))
-                .font(.subheadline.weight(.medium))
-                .foregroundStyle(.secondary)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color.accentColor)
         }
     }
 }
