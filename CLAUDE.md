@@ -27,5 +27,5 @@ App iOS (SwiftUI, iOS 17, Swift 5) de widgets/mini-apps. Actif de revenu passif 
 - Code en français ; `tr("texte français")` cherche le texte comme clé dans `Shared/Localizable.xcstrings`. Interpolations → `%@` (`%1$@` pour réordonner), `%` littéral → `%%`.
 - Langues cibles : en, es, de, it, pt-BR, ja (+ fr source). Chinois et coréen retirés le 2026-10-08 (traductions de mauvaise qualité ; récupérables dans l'historique git). Glossaire : `l10n/GLOSSARY.md`.
 - Dates/nombres : `Fmt.locale`. Pluriels : `Fmt.plural`.
-- Scripts : `scripts/l10n_scan.py`, `l10n_rewrite.py`, `l10n_catalog.py extract|build|check`, `l10n_chunk_check.py NN`.
+- Scripts : `scripts/l10n_scan.py`, `l10n_rewrite.py`, `l10n_catalog.py extract|merge|build|check|sync`, `l10n_chunk_check.py NN`. Nouveau texte : extract → traduire dans `l10n/parts/NN.<langue>.json` → merge → build → sync (le rapport CI affiche `l10n sync`).
 - Les UITests sont forcés en français (`-AppleLanguages (fr) -AppleLocale fr_CA`).

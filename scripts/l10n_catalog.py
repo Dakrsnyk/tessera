@@ -4,6 +4,7 @@
     python3 scripts/l10n_catalog.py merge     # l10n/<language>.json from the batches l10n/parts/NN.<language>.json
     python3 scripts/l10n_catalog.py build    # Shared/Localizable.xcstrings from l10n/<language>.json
     python3 scripts/l10n_catalog.py check     # placeholders, missing translations (fails on a broken placeholder)
+    python3 scripts/l10n_catalog.py sync      # every tr() text of the code is in the catalog and translated
 
 The code is written in French and `tr("…")` looks the French text up at run time. A translation
 file maps each French key to its translation; an interpolated value is `%@` (or `%1$@`, `%2$@`… to
@@ -35,7 +36,7 @@ def swift_files():
     return sorted(f.replace(os.sep, "/") for root in ROOTS for f in glob.glob(f"{root}/**/*.swift", recursive=True))
 
 
-def extract():
+def code_keys():
     keys = {}
     for path in swift_files():
         source = open(path, encoding="utf8").read()
@@ -52,6 +53,11 @@ def extract():
             line = source[line_start:source.find("\n", lit.start)].strip()
             if len(entry["uses"]) < 4:
                 entry["uses"].append(f"{path}:{line_of(source, lit.start)}: {line[:200]}")
+    return keys
+
+
+def extract():
+    keys = code_keys()
     os.makedirs("l10n", exist_ok=True)
     json.dump(dict(sorted(keys.items())), open(KEYS, "w", encoding="utf8"), ensure_ascii=False, indent=1)
     print(f"{len(keys)} keys")
@@ -115,6 +121,24 @@ def check():
         sys.exit(1)
 
 
+def sync():
+    """Fails when the code has texts the catalog does not know or does not translate in every language."""
+    keys = code_keys()
+    strings = json.load(open(CATALOG, encoding="utf8"))["strings"]
+    unknown = [k for k in keys if k not in strings]
+    untranslated = [f"{k!r} ({', '.join(l for l in LANGUAGES if l not in strings[k]['localizations'])})"
+                    for k in keys if k in strings and any(l not in strings[k]["localizations"] for l in LANGUAGES)]
+    unused = [k for k in strings if k not in keys]
+    for title, items in (("Not in the catalog", unknown), ("Untranslated", untranslated)):
+        if items:
+            print(f"{title} ({len(items)}):")
+            print("\n".join(f"  {item}" for item in items[:40]))
+    print(f"l10n sync: {len(keys)} texts in the code, {len(unknown)} not in the catalog, "
+          f"{len(untranslated)} untranslated, {len(unused)} unused in the catalog")
+    if unknown or untranslated:
+        sys.exit(1)
+
+
 def unit(value):
     return {"stringUnit": {"state": "translated", "value": value}}
 
@@ -143,4 +167,4 @@ def build():
 
 
 if __name__ == "__main__":
-    {"extract": extract, "merge": merge, "build": build, "check": check}[sys.argv[1]]()
+    {"extract": extract, "merge": merge, "build": build, "check": check, "sync": sync}[sys.argv[1]]()

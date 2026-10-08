@@ -497,6 +497,7 @@ jobs:
             cat release-check.txt 2>/dev/null || true
             echo "---- errors ----"
             python3 scripts/check_swift.py 2>&1 | tail -40 || true
+            python3 scripts/l10n_catalog.py sync 2>&1 | tail -45 || true
             grep -hE "error:" sim.log device.log release.log 2>/dev/null | sort -u | head -500 || true
             echo "---- tests ----"
             grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -400 || true

@@ -186,6 +186,7 @@ Config/    Info.plist, entitlements, configuration StoreKit locale
 - Données : fichiers JSON dans l'App Group, un fichier par domaine pour éviter les écrasements entre l'app et les widgets.
 - Réseau : seulement pour la météo (cache 30 min) et la crypto (cache 15 min), avec repli sur le cache hors connexion.
 - Rafraîchissement : chaque widget a son propre rythme (à la minute pour les horloges, à minuit pour le calendrier, au changement de session pour Focus…).
+- Langues : français (source), anglais, espagnol, allemand, italien, portugais (Brésil) et japonais. L'interface suit la langue de l'iPhone. Le code est écrit en français : `tr("texte")` cherche ce texte dans `Shared/Localizable.xcstrings`, et `App/InfoPlist.xcstrings` traduit le nom affiché et les demandes d'autorisation. Pour ajouter ou modifier un texte : `python3 scripts/l10n_catalog.py extract`, ajouter les traductions dans `l10n/parts/NN.<langue>.json`, puis `merge`, `build` et `sync` (vocabulaire et ton : `l10n/GLOSSARY.md`).
 
 ---
 
