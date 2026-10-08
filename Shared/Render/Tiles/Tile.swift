@@ -67,6 +67,19 @@ enum TileVisual: Hashable {
     case sun(progress: Double?, sunrise: String, sunset: String)
     /// A live countdown bar.
     case timer(Date, Date)
+    /// The week's schedule: Monday-first columns, blocks between the first and last hour shown,
+    /// and today's column (0 = Monday).
+    case schedule([ScheduleBlock], today: Int?)
+}
+
+/// One entry of the week's schedule, placed in its day's column (0 = Monday). `start` and `end` are
+/// fractions of the hours shown (0 = the first, 1 = the last).
+struct ScheduleBlock: Hashable {
+    var day: Int
+    var start: Double
+    var end: Double
+    var colorHex: String
+    var title: String
 }
 
 struct TileEmpty: Hashable {

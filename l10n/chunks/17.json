@@ -617,13 +617,6 @@
   ]
  },
  {
-  "key": "Cours, examens, devoirs, moyenne et fiches.",
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/WidgetGroup.swift:69: case .student: tr(\"Cours, examens, devoirs, moyenne et fiches.\")"
-  ]
- },
- {
   "key": "Départ, vol, hôtel, météo et devise sur place.",
   "placeholders": 0,
   "uses": [

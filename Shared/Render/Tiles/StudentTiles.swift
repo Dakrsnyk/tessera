@@ -18,6 +18,28 @@ enum StudentTiles {
         }
     }
 
+    /// The large widget: the whole week's schedule (classes, work, appointments, other events).
+    static func weekSchedule(_ state: StudentState, context: RenderContext) -> Tile {
+        let now = context.date
+        let first = (state.slots.map(\.startMinute).min() ?? 8 * 60) / 60 * 60
+        let last = max(first + 60, ((state.slots.map(\.endMinute).max() ?? 18 * 60) + 59) / 60 * 60)
+        let span = Double(last - first)
+        var tile = Tile(title: tr("Horaire de la semaine"), symbol: "calendar.day.timeline.left")
+        tile.value = Fmt.number(state.slots.count)
+        tile.unit = state.slots.count > 1 ? tr("éléments") : tr("élément")
+        func hour(_ minutes: Int) -> String { String(format: "%d:%02d", minutes / 60, minutes % 60) }
+        tile.caption = "\(hour(first)) – \(hour(last))"
+        tile.visual = .schedule(state.slots.map { slot in
+            ScheduleBlock(day: slot.weekday - 1,
+                          start: Double(slot.startMinute - first) / span,
+                          end: Double(slot.endMinute - first) / span,
+                          colorHex: state.colorHex(of: slot),
+                          title: state.title(of: slot))
+        }, today: FitnessMath.isoWeekday(now) - 1)
+        tile.inline = tr("Horaire de la semaine")
+        return tile
+    }
+
     static func courseName(_ state: StudentState, _ id: UUID?) -> String {
         state.course(id)?.name ?? tr("Cours")
     }
@@ -182,6 +204,7 @@ enum StudentTiles {
     }
 
     static func timetable(_ state: StudentState, context: RenderContext) -> Tile {
+        if context.family == .systemLarge, !state.slots.isEmpty { return weekSchedule(state, context: context) }
         let now = context.date
         var day = now
         var classes = StudentMath.occurrences(state, on: now)
@@ -196,15 +219,15 @@ enum StudentTiles {
         let isToday = DateMath.isSameDay(day, now)
         var tile = Tile(title: isToday ? tr("Horaire du jour") : tr("Horaire · \(Fmt.weekday(day))"), symbol: "list.bullet.rectangle.portrait")
         tile.value = Fmt.number(classes.count)
-        tile.unit = classes.count > 1 ? tr("cours") : tr("cours", context: "one")
+        tile.unit = classes.count > 1 ? tr("éléments") : tr("élément")
         tile.caption = "\(TF.time(classes[0].start, context)) – \(TF.time(classes[classes.count - 1].end, context))"
         tile.rows = classes.map { item in
             TileRow(
                 id: item.slot.id.uuidString,
-                title: courseName(state, item.slot.courseID),
+                title: state.title(of: item.slot),
                 value: TF.time(item.start, context),
-                detail: item.slot.room.isEmpty ? nil : tr("Salle \(item.slot.room)"),
-                colorHex: state.course(item.slot.courseID)?.colorHex,
+                detail: item.slot.room.isEmpty ? nil : (item.slot.kind == .course ? tr("Salle \(item.slot.room)") : item.slot.room),
+                colorHex: state.colorHex(of: item.slot),
                 isDone: nil,
                 isHighlighted: isToday && item.start <= now && item.end > now
             )

@@ -34,7 +34,7 @@ enum StudiesSheet: Identifiable {
 }
 
 enum Studies {
-    static var accentHex: String { MiniApp.studies.colorHex }
+    static var accentHex: String { ScheduleKind.course.colorHex }
     static let weekdayNames = [tr("Lundi"), tr("Mardi"), tr("Mercredi"), tr("Jeudi"), tr("Vendredi"), tr("Samedi"), tr("Dimanche")]
 
     static func minuteText(_ minutes: Int) -> String {
@@ -64,8 +64,11 @@ enum Studies {
         Grade(courseID: course ?? state.courses.first?.id, title: "", score: 0)
     }
 
+    /// A new entry of the schedule: a class when there are courses, another event otherwise.
     static func newSlot(_ state: StudentState, course: UUID? = nil, now: Date = Date()) -> ClassSlot {
-        ClassSlot(courseID: course ?? state.courses.first?.id, weekday: min(5, FitnessMath.isoWeekday(now)), startMinute: 8 * 60 + 30, endMinute: 10 * 60 + 20)
+        let courseID = course ?? state.courses.first?.id
+        return ClassSlot(courseID: courseID, weekday: min(5, FitnessMath.isoWeekday(now)), startMinute: 8 * 60 + 30, endMinute: 10 * 60 + 20,
+                         kind: courseID == nil ? .other : .course)
     }
 }
 
@@ -92,7 +95,6 @@ struct StudiesAppView: View {
                 semester(state: state, now: now)
             }
             more(state: state, now: now)
-            MiniAppSettingsSection(app: .studies)
         }
         .navigationTitle(tr("Études"))
         .navigationBarTitleDisplayMode(.large)

@@ -21,10 +21,16 @@ struct DailySection: View {
     var body: some View {
         let now = Date()
         let settings = model.settings
-        let automatic = DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil))
+        let brief = DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil))
+        let automatic = DailyCategories.adding(settings.dailyAdded, to: brief, model: model, now: now)
         let tiles = DailyBrief.arranged(automatic, order: settings.dailyOrder, hidden: settings.dailyHidden)
         // Real figures entered by the person (invitations to fill in a category don't count).
-        let hasData = automatic.contains { if case .invite = $0 { false } else { true } }
+        let hasData = automatic.contains { tile in
+            switch tile {
+            case .invite, .miniApp(_, caption: nil): false
+            default: true
+            }
+        }
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 3) {
@@ -44,18 +50,17 @@ struct DailySection: View {
                     }
                     .accessibilityIdentifier("daily-data")
                     // Discreet: the size, order and choice of the cards, right here on Home.
-                    if hasData {
-                        Button {
-                            editingLayout = true
-                        } label: {
-                            Image(systemName: "rectangle.3.group")
-                                .font(.footnote.weight(.semibold))
-                                .frame(width: 30, height: 24)
-                                .background(.cardFill, in: Capsule())
-                        }
-                        .accessibilityLabel(Text(tr("Modifier la disposition")))
-                        .accessibilityIdentifier("daily-layout")
+                    // Always there: categories can be added before any data is entered.
+                    Button {
+                        editingLayout = true
+                    } label: {
+                        Image(systemName: "rectangle.3.group")
+                            .font(.footnote.weight(.semibold))
+                            .frame(width: 30, height: 24)
+                            .background(.cardFill, in: Capsule())
                     }
+                    .accessibilityLabel(Text(tr("Modifier la disposition")))
+                    .accessibilityIdentifier("daily-layout")
                 }
             }
             // Nothing entered yet: Mon Quotidien asks for the information, the invitations follow.
@@ -148,6 +153,16 @@ private struct DailyTileView: View {
         case let .reminders(items): RemindersDayTile(items: items)
         case let .priorities(items): PrioritiesDayTile(items: items)
         case let .invite(area): InviteDayTile(area: area)
+        case let .miniApp(raw, caption):
+            if let app = MiniApp(rawValue: raw) {
+                DayCard(title: app.title, symbol: app.symbol, colorHex: app.colorHex, route: .app(app)) {
+                    Text(caption ?? tr("Rien pour l'instant : touche pour ajouter tes données."))
+                        .font(caption == nil ? .caption : .headline)
+                        .foregroundStyle(caption == nil ? Color.secondary : Color.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .accessibilityIdentifier("daily-app-\(raw)")
+            }
         }
     }
 }

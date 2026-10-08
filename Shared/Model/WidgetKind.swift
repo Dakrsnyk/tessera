@@ -33,7 +33,7 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
         case .investing: tr("Placements")
         case .business: tr("Mon entreprise")
         case .markets: tr("Sociétés cotées")
-        case .student: tr("Études")
+        case .student: tr("Planning · études")
         case .travel: tr("Voyage")
         case .car: tr("Auto")
         }

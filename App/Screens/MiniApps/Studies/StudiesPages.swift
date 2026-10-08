@@ -14,15 +14,15 @@ struct StudiesTimetablePage: View {
         MiniAppScroll {
             if state.slots.isEmpty {
                 EmptyStateView(symbol: "calendar.day.timeline.left", title: tr("Ton horaire"),
-                               message: state.courses.isEmpty ? tr("Ajoute d'abord un cours, puis ses plages de la semaine.") : tr("Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accueil et dans ton planning."),
-                               actionTitle: state.courses.isEmpty ? tr("Ajouter un cours") : tr("Ajouter une plage")) {
-                    sheet = state.courses.isEmpty ? StudiesSheet.course(Course(name: "")) : StudiesSheet.slot(Studies.newSlot(state))
+                               message: tr("Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire."),
+                               actionTitle: tr("Ajouter un événement")) {
+                    sheet = StudiesSheet.slot(Studies.newSlot(state))
                 }
                 .tint(Color(hex: Studies.accentHex))
             } else {
                 TimetableGrid(state: state, selected: $weekday) { sheet = .slot($0) }
                 dayList(state: state)
-                MiniActionButton(title: tr("Ajouter une plage"), symbol: "plus", colorHex: Studies.accentHex, isProminent: false) {
+                MiniActionButton(title: tr("Ajouter un événement"), symbol: "plus", colorHex: Studies.accentHex, isProminent: false) {
                     var slot = Studies.newSlot(state)
                     slot.weekday = weekday
                     sheet = .slot(slot)
@@ -38,17 +38,17 @@ struct StudiesTimetablePage: View {
     private func dayList(state: StudentState) -> some View {
         let slots = state.slots.filter { $0.weekday == weekday }.sorted { $0.startMinute < $1.startMinute }
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr("cours", context: "one"), tr("cours")))
+            MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr("élément"), tr("éléments")))
             if slots.isEmpty {
-                Text(tr("Pas de cours ce jour-là.")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)
+                Text(tr("Rien de prévu ce jour-là.")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)
             } else {
                 MiniRowsCard {
                     ForEach(Array(slots.enumerated()), id: \.element.id) { index, slot in
                         if index > 0 { MiniDivider() }
                         Button { sheet = .slot(slot) } label: {
-                            MiniRow(symbol: "graduationcap.fill", colorHex: state.course(slot.courseID)?.colorHex ?? Studies.accentHex,
-                                    title: state.course(slot.courseID)?.name ?? tr("Cours"),
-                                    detail: slot.room.isEmpty ? nil : tr("Salle \(slot.room)"),
+                            MiniRow(symbol: slot.kind.symbol, colorHex: state.colorHex(of: slot),
+                                    title: state.title(of: slot),
+                                    detail: slot.room.isEmpty ? nil : (slot.kind == .course ? tr("Salle \(slot.room)") : slot.room),
                                     value: "\(Studies.minuteText(slot.startMinute))–\(Studies.minuteText(slot.endMinute))", showsChevron: false)
                         }
                         .buttonStyle(.plain)
@@ -117,9 +117,9 @@ struct TimetableGrid: View {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .fill(day == selected ? Color(hex: Studies.accentHex).opacity(0.07) : Color.primary.opacity(0.03))
             ForEach(state.slots.filter { $0.weekday == day }) { slot in
-                let hex = state.course(slot.courseID)?.colorHex ?? Studies.accentHex
+                let hex = state.colorHex(of: slot)
                 Button { onTap(slot) } label: {
-                    Text(TF.shortName(state.course(slot.courseID)?.name ?? tr("Cours"), words: 1))
+                    Text(TF.shortName(state.title(of: slot), words: 1))
                         .font(.system(size: 9, weight: .semibold))
                         .foregroundStyle(.white)
                         .lineLimit(2)

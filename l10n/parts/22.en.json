@@ -84,5 +84,19 @@
  "Rattraper la séance": "Catch up on this workout",
  "Rattraper « %@ » d'hier": "Catch up on yesterday's “%@”",
  "Repos en pause · %@": "Rest paused · %@",
- "Reprendre le repos": "Resume the rest"
+ "Reprendre le repos": "Resume the rest",
+ "Ajouter un événement": "Add an event",
+ "Autre événement": "Other event",
+ "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.": "Choose the mini-apps to show: their card shows your real data, and appears even when empty to invite you to fill it in.",
+ "Cours, examens, devoirs, notes et fiches": "Classes, exams, homework, grades and flashcards",
+ "Cours, travail, rendez-vous et autres événements": "Classes, work, appointments and other events",
+ "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.": "Classes, work, appointments… Add what happens every week: your week takes shape here and in the Schedule widget.",
+ "Horaire de la semaine": "Weekly schedule",
+ "Horaire de la semaine, cours, examens, devoirs, moyenne et fiches.": "Weekly schedule, classes, exams, homework, average and flashcards.",
+ "Horaire de la semaine, cours, examens, notes et fiches": "Weekly schedule, classes, exams, grades and flashcards",
+ "Lieu (facultatif)": "Place (optional)",
+ "Planning · études": "Planning · studies",
+ "Rendez-vous": "Appointment",
+ "Rien pour l'instant : touche pour ajouter tes données.": "Nothing yet: tap to add your data.",
+ "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": "Your day, and your whole week in large: classes, work, appointments."
 }

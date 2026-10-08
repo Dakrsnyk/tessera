@@ -36,9 +36,9 @@ struct StudentSpaceSections: View {
                     sheets?.open { SlotEditor(slot: slot) }
                 } label: {
                     HStack {
-                        Circle().fill(Color(hex: state.course(slot.courseID)?.colorHex ?? "999999")).frame(width: 8, height: 8)
+                        Circle().fill(Color(hex: state.colorHex(of: slot))).frame(width: 8, height: 8)
                         VStack(alignment: .leading, spacing: 1) {
-                            Text(StudentTiles.courseName(state, slot.courseID)).foregroundStyle(Color.primary)
+                            Text(state.title(of: slot)).foregroundStyle(Color.primary)
                             Text("\(weekdayNames[safe: slot.weekday - 1] ?? "") · \(minuteText(slot.startMinute))–\(minuteText(slot.endMinute))\(slot.room.isEmpty ? "" : " · \(slot.room)")")
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
@@ -204,7 +204,17 @@ struct SlotEditor: View {
 
     var body: some View {
         SheetForm(title: tr("Horaire"), canSave: slot.endMinute > slot.startMinute, onSave: save) {
-            CoursePicker(selection: $slot.courseID, courses: model.student.courses)
+            // The kind of entry, chosen by the person: a class, work, an appointment or another event.
+            Picker(tr("Type"), selection: $slot.kind) {
+                ForEach(ScheduleKind.allCases) { kind in
+                    Label(kind.title, systemImage: kind.symbol).tag(kind)
+                }
+            }
+            if slot.kind == .course {
+                CoursePicker(selection: $slot.courseID, courses: model.student.courses)
+            } else {
+                TextField(tr("Nom de l'événement"), text: $slot.title)
+            }
             Picker(tr("Jour"), selection: $slot.weekday) {
                 ForEach(1...7, id: \.self) { day in
                     Text([tr("Lundi"), tr("Mardi"), tr("Mercredi"), tr("Jeudi"), tr("Vendredi"), tr("Samedi"), tr("Dimanche")][day - 1]).tag(day)
@@ -212,7 +222,7 @@ struct SlotEditor: View {
             }
             MinuteTimePicker(title: tr("Début"), minutes: $slot.startMinute)
             MinuteTimePicker(title: tr("Fin"), minutes: $slot.endMinute)
-            TextField(tr("Salle (facultatif)"), text: $slot.room)
+            TextField(slot.kind == .course ? tr("Salle (facultatif)") : tr("Lieu (facultatif)"), text: $slot.room)
         }
     }
 

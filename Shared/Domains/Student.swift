@@ -9,7 +9,41 @@ struct Course: Codable, Hashable, Identifiable {
     var credits: Double = 3
 }
 
-/// A weekly class in the timetable. Times are minutes after midnight.
+/// What an entry of the week's schedule is: chosen by the person when adding it.
+enum ScheduleKind: String, Codable, CaseIterable, Identifiable {
+    case course, work, appointment, other
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .course: tr("Cours")
+        case .work: tr("Travail")
+        case .appointment: tr("Rendez-vous")
+        case .other: tr("Autre événement")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .course: "graduationcap.fill"
+        case .work: "briefcase.fill"
+        case .appointment: "person.2.fill"
+        case .other: "star.fill"
+        }
+    }
+
+    var colorHex: String {
+        switch self {
+        case .course: "D6409F"
+        case .work: "3366FF"
+        case .appointment: "F2A33A"
+        case .other: "7FA33A"
+        }
+    }
+}
+
+/// A weekly entry of the Planning schedule: a class (with its course) or another event of the week
+/// (work, an appointment…). Times are minutes after midnight.
 struct ClassSlot: Codable, Hashable, Identifiable {
     var id = UUID()
     var courseID: UUID?
@@ -17,7 +51,36 @@ struct ClassSlot: Codable, Hashable, Identifiable {
     var weekday: Int
     var startMinute: Int
     var endMinute: Int
+    /// The place (a classroom for a class).
     var room: String = ""
+    var kind: ScheduleKind = .course
+    /// The name of an event that isn't a class (a class shows its course's name).
+    var title: String = ""
+
+    enum CodingKeys: String, CodingKey { case id, courseID, weekday, startMinute, endMinute, room, kind, title }
+
+    init(courseID: UUID?, weekday: Int, startMinute: Int, endMinute: Int, room: String = "", kind: ScheduleKind = .course, title: String = "") {
+        self.courseID = courseID
+        self.weekday = weekday
+        self.startMinute = startMinute
+        self.endMinute = endMinute
+        self.room = room
+        self.kind = kind
+        self.title = title
+    }
+
+    /// Classes saved before the other kinds of events existed read as classes.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
+        courseID = try c.decodeIfPresent(UUID.self, forKey: .courseID)
+        weekday = try c.decode(Int.self, forKey: .weekday)
+        startMinute = try c.decode(Int.self, forKey: .startMinute)
+        endMinute = try c.decode(Int.self, forKey: .endMinute)
+        room = try c.decodeIfPresent(String.self, forKey: .room) ?? ""
+        kind = (try? c.decodeIfPresent(ScheduleKind.self, forKey: .kind)) ?? .course
+        title = try c.decodeIfPresent(String.self, forKey: .title) ?? ""
+    }
 }
 
 struct Exam: Codable, Hashable, Identifiable {
@@ -104,6 +167,17 @@ struct StudentState: Codable, Hashable {
         timerCourseID = c.optional(.timerCourseID)
     }
 
+    /// What a schedule entry is called: its course for a class, its own name for another event.
+    func title(of slot: ClassSlot) -> String {
+        if slot.kind == .course { return course(slot.courseID)?.name ?? tr("Cours") }
+        return slot.title.trimmed.isEmpty ? slot.kind.title : slot.title
+    }
+
+    /// Its color: the course's for a class, the kind's for another event.
+    func colorHex(of slot: ClassSlot) -> String {
+        slot.kind == .course ? (course(slot.courseID)?.colorHex ?? ScheduleKind.course.colorHex) : slot.kind.colorHex
+    }
+
     func course(_ id: UUID?) -> Course? {
         guard let id else { return nil }
         return courses.first { $0.id == id }
@@ -182,11 +256,12 @@ enum StudentMath {
         .sorted { $0.start < $1.start }
     }
 
-    /// The class in progress or the next one, looking up to a week ahead.
+    /// The class in progress or the next one, looking up to a week ahead (classes only, not the
+    /// other events of the schedule).
     static func nextClass(_ state: StudentState, at date: Date) -> ClassOccurrence? {
         for offset in 0..<8 {
             guard let day = DateMath.calendar.date(byAdding: .day, value: offset, to: date) else { continue }
-            if let next = occurrences(state, on: day).first(where: { $0.end > date }) { return next }
+            if let next = occurrences(state, on: day).first(where: { $0.end > date && $0.slot.kind == .course }) { return next }
         }
         return nil
     }

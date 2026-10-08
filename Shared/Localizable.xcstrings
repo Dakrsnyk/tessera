@@ -17109,53 +17109,6 @@
         }
       }
     },
-    "Ajoute d'abord un cours, puis ses plages de la semaine.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Füge zuerst einen Kurs hinzu, dann seine Zeiten der Woche."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add a course first, then its weekly time slots."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Primero agrega un curso y luego sus bloques de la semana."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoute d'abord un cours, puis ses plages de la semaine."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aggiungi prima un corso, poi le sue fasce della settimana."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "まず科目を追加して、そのあと週ごとの時間帯を追加してください。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adicione primeiro uma disciplina e depois os horários dela na semana."
-          }
-        }
-      }
-    },
     "Ajoute des favoris dans Tessera, espace Nutrition.": {
       "extractionState": "manual",
       "localizations": {
@@ -17340,53 +17293,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adiciona os itens indispensáveis (passaporte, carregador, seguro…) sem duplicar; remova os que não precisar deslizando."
-          }
-        }
-      }
-    },
-    "Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accueil et dans ton planning.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Füge die Zeiten deiner Kurse hinzu: Sie erscheinen hier, im Home und in der Planung."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add your courses' time slots: they'll appear here, on Home and in Planning."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agrega los bloques de tus clases: aparecerán aquí, en Inicio y en Planificación."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accueil et dans ton planning."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aggiungi le fasce dei tuoi corsi: appariranno qui, in Home e in Pianificazione."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "科目の時間帯を追加すると、ここ、ホーム、プランニングに表示されます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adicione os horários das suas aulas: eles vão aparecer aqui, no Início e em Planejamento."
           }
         }
       }
@@ -20066,6 +19972,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicionar um widget à Tela de Início"
+          }
+        }
+      }
+    },
+    "Ajouter un événement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ereignis hinzufügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add an event"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir un evento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter un événement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi un evento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予定を追加"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar um evento"
           }
         }
       }
@@ -30594,6 +30547,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Outra cor"
+          }
+        }
+      }
+    },
+    "Autre événement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anderes Ereignis"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other event"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otro evento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autre événement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altro evento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その他の予定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outro evento"
           }
         }
       }
@@ -49445,6 +49445,53 @@
         }
       }
     },
+    "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle die Mini-Apps aus: Ihre Karte zeigt deine echten Daten und erscheint auch leer, um dich zum Ausfüllen einzuladen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the mini-apps to show: their card shows your real data, and appears even when empty to invite you to fill it in."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige las miniapps que quieres ver: su tarjeta muestra tus datos reales y aparece aunque esté vacía para invitarte a completarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli le mini-app da mostrare: la loro scheda mostra i tuoi dati reali e compare anche vuota per invitarti a compilarla."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示するミニアプリを選んでください。カードには実際のデータが表示され、空でも入力を促すために表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha os miniapps a exibir: o cartão mostra seus dados reais e aparece mesmo vazio para convidar você a preenchê-lo."
+          }
+        }
+      }
+    },
     "Choisis ta ville": {
       "extractionState": "manual",
       "localizations": {
@@ -57764,96 +57811,49 @@
         }
       }
     },
-    "Cours, examens, devoirs, moyenne et fiches.": {
+    "Cours, examens, devoirs, notes et fiches": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kurse, Prüfungen, Hausaufgaben, Durchschnitt und Lernkarten."
+            "value": "Kurse, Prüfungen, Hausaufgaben, Noten und Lernkarten"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Courses, exams, homework, average and flashcards."
+            "value": "Classes, exams, homework, grades and flashcards"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Clases, exámenes, tareas, promedio y fichas."
+            "value": "Clases, exámenes, tareas, notas y tarjetas"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cours, examens, devoirs, moyenne et fiches."
+            "value": "Cours, examens, devoirs, notes et fiches"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Corsi, esami, compiti, media e schede."
+            "value": "Lezioni, esami, compiti, voti e schede"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "授業、試験、課題、平均点、カード。"
+            "value": "授業、試験、課題、成績、暗記カード"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aulas, provas, tarefas, média e fichas."
-          }
-        }
-      }
-    },
-    "Cours, examens, notes et fiches": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurse, Prüfungen, Noten und Karteikarten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classes, exams, grades and flashcards"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clases, exámenes, notas y fichas"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cours, examens, notes et fiches"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Corsi, esami, voti e schede"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "授業、試験、成績、カード"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aulas, provas, notas e fichas"
+            "value": "Aulas, provas, tarefas, notas e cartões"
           }
         }
       }
@@ -57901,6 +57901,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aulas, fichas e horas de estudo, em arcos retrô."
+          }
+        }
+      }
+    },
+    "Cours, travail, rendez-vous et autres événements": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurse, Arbeit, Termine und andere Ereignisse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classes, work, appointments and other events"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clases, trabajo, citas y otros eventos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cours, travail, rendez-vous et autres événements"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lezioni, lavoro, appuntamenti e altri eventi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業、仕事、約束、その他の予定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aulas, trabalho, compromissos e outros eventos"
+          }
+        }
+      }
+    },
+    "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurse, Arbeit, Termine… Füge hinzu, was jede Woche wiederkehrt: Deine Woche ordnet sich hier und im Stundenplan-Widget."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classes, work, appointments… Add what happens every week: your week takes shape here and in the Schedule widget."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clases, trabajo, citas… Añade lo que se repite cada semana: tu semana se organiza aquí y en el widget Horario."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lezioni, lavoro, appuntamenti… Aggiungi ciò che si ripete ogni settimana: la tua settimana si organizza qui e nel widget Orario."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業、仕事、約束… 毎週のことを追加しましょう。1週間がここと時間割ウィジェットで整理されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aulas, trabalho, compromissos… Adicione o que se repete toda semana: sua semana se organiza aqui e no widget Horário."
           }
         }
       }
@@ -95317,6 +95411,147 @@
         }
       }
     },
+    "Horaire de la semaine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wochenplan"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly schedule"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horario de la semana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horaire de la semaine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orario della settimana"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の時間割"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agenda da semana"
+          }
+        }
+      }
+    },
+    "Horaire de la semaine, cours, examens, devoirs, moyenne et fiches.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wochenplan, Kurse, Prüfungen, Hausaufgaben, Durchschnitt und Lernkarten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly schedule, classes, exams, homework, average and flashcards."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horario semanal, clases, exámenes, tareas, promedio y tarjetas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horaire de la semaine, cours, examens, devoirs, moyenne et fiches."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orario settimanale, lezioni, esami, compiti, media e schede."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の時間割、授業、試験、課題、平均点、暗記カード。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agenda semanal, aulas, provas, tarefas, média e cartões."
+          }
+        }
+      }
+    },
+    "Horaire de la semaine, cours, examens, notes et fiches": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wochenplan, Kurse, Prüfungen, Noten und Lernkarten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly schedule, classes, exams, grades and flashcards"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horario semanal, clases, exámenes, notas y tarjetas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horaire de la semaine, cours, examens, notes et fiches"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orario settimanale, lezioni, esami, voti e schede"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の時間割、授業、試験、成績、暗記カード"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agenda semanal, aulas, provas, notas e cartões"
+          }
+        }
+      }
+    },
     "Horaire du jour": {
       "extractionState": "manual",
       "localizations": {
@@ -114207,6 +114442,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Local"
+          }
+        }
+      }
+    },
+    "Lieu (facultatif)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ort (optional)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place (optional)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lugar (opcional)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieu (facultatif)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luogo (facoltativo)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "場所（任意）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local (opcional)"
           }
         }
       }
@@ -140766,53 +141048,6 @@
         }
       }
     },
-    "Pas de cours ce jour-là.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An diesem Tag ist kein Kurs."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No classes that day."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No hay clases ese día."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pas de cours ce jour-là."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nessuna lezione quel giorno."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "この日は授業がありません。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sem aula nesse dia."
-          }
-        }
-      }
-    },
     "Pas de cours prévu": {
       "extractionState": "manual",
       "localizations": {
@@ -144992,6 +145227,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Planejamento"
+          }
+        }
+      }
+    },
+    "Planning · études": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planung · Studium"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planning · studies"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planificación · estudios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planning · études"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pianificazione · studio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プランニング · 勉強"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planejamento · estudos"
           }
         }
       }
@@ -161963,6 +162245,53 @@
         }
       }
     },
+    "Rendez-vous": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termin"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appointment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cita"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rendez-vous"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuntamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "約束"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compromisso"
+          }
+        }
+      }
+    },
     "Rendu": {
       "extractionState": "manual",
       "localizations": {
@@ -168633,6 +168962,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nada registrado nesta semana"
+          }
+        }
+      }
+    },
+    "Rien pour l'instant : touche pour ajouter tes données.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch nichts: Tippe, um deine Daten hinzuzufügen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing yet: tap to add your data."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada por ahora: toca para añadir tus datos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien pour l'instant : touche pour ajouter tes données."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora niente: tocca per aggiungere i tuoi dati."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだありません。タップしてデータを追加しましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada por enquanto: toque para adicionar seus dados."
           }
         }
       }
@@ -186262,6 +186638,53 @@
         }
       }
     },
+    "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Tag und in groß deine ganze Woche: Kurse, Arbeit, Termine."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your day, and your whole week in large: classes, work, appointments."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu día, y toda tu semana en grande: clases, trabajo, citas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua giornata, e in grande tutta la settimana: lezioni, lavoro, appuntamenti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日の予定と、大サイズでは1週間全体：授業、仕事、約束。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu dia, e em tamanho grande toda a sua semana: aulas, trabalho, compromissos."
+          }
+        }
+      }
+    },
     "Ta liste de suivi, la crypto et le marché.": {
       "extractionState": "manual",
       "localizations": {
@@ -199982,53 +200405,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todos os widgets, todos os estilos, sem limites."
-          }
-        }
-      }
-    },
-    "Tous tes cours de la journée.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alle deine Kurse des Tages."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All your classes for the day."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todas tus clases del día."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tous tes cours de la journée."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutti i tuoi corsi della giornata."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日のすべての授業。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todas as suas aulas do dia."
           }
         }
       }

@@ -75,6 +75,22 @@ struct PlanningAppView: View {
             }
 
             MiniRowsCard {
+                // The week's schedule (classes, work, appointments, other events) and the studies.
+                NavigationLink(value: HomeRoute.page(.studiesTimetable)) {
+                    MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Horaire de la semaine"),
+                            detail: tr("Cours, travail, rendez-vous et autres événements"),
+                            value: model.student.slots.isEmpty ? nil : "\(model.student.slots.count)")
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("planning-schedule")
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.studiesHome)) {
+                    MiniRow(symbol: "graduationcap.fill", colorHex: ScheduleKind.course.colorHex, title: tr("Études"),
+                            detail: tr("Cours, examens, devoirs, notes et fiches"))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("planning-studies")
+                MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningWeek)) {
                     MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Semaine"), detail: tr("Tout ce qui t'attend, jour par jour"))
                 }

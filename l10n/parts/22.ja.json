@@ -84,5 +84,19 @@
  "Rattraper la séance": "ワークアウトを取り戻す",
  "Rattraper « %@ » d'hier": "昨日の「%@」を取り戻す",
  "Repos en pause · %@": "休憩を一時停止中 · %@",
- "Reprendre le repos": "休憩を再開"
+ "Reprendre le repos": "休憩を再開",
+ "Ajouter un événement": "予定を追加",
+ "Autre événement": "その他の予定",
+ "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.": "表示するミニアプリを選んでください。カードには実際のデータが表示され、空でも入力を促すために表示されます。",
+ "Cours, examens, devoirs, notes et fiches": "授業、試験、課題、成績、暗記カード",
+ "Cours, travail, rendez-vous et autres événements": "授業、仕事、約束、その他の予定",
+ "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.": "授業、仕事、約束… 毎週のことを追加しましょう。1週間がここと時間割ウィジェットで整理されます。",
+ "Horaire de la semaine": "週の時間割",
+ "Horaire de la semaine, cours, examens, devoirs, moyenne et fiches.": "週の時間割、授業、試験、課題、平均点、暗記カード。",
+ "Horaire de la semaine, cours, examens, notes et fiches": "週の時間割、授業、試験、成績、暗記カード",
+ "Lieu (facultatif)": "場所（任意）",
+ "Planning · études": "プランニング · 勉強",
+ "Rendez-vous": "約束",
+ "Rien pour l'instant : touche pour ajouter tes données.": "まだありません。タップしてデータを追加しましょう。",
+ "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": "今日の予定と、大サイズでは1週間全体：授業、仕事、約束。"
 }

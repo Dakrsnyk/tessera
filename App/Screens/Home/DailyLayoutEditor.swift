@@ -45,6 +45,25 @@ struct DailyLayoutEditor: View {
                     }
                 }
                 Section {
+                    ForEach(DailyCategories.choices) { app in
+                        Toggle(isOn: Binding(
+                            get: { DailyCategories.isShown(app, available: available, settings: settings) },
+                            set: { on in model.updateSettings { DailyCategories.set(app, shown: on, in: &$0) } }
+                        )) {
+                            Label {
+                                Text(app.title)
+                            } icon: {
+                                Image(systemName: app.symbol).foregroundStyle(Color(hex: app.colorHex))
+                            }
+                        }
+                        .accessibilityIdentifier("daily-category-\(app.rawValue)")
+                    }
+                } header: {
+                    Text(tr("Catégories"))
+                } footer: {
+                    Text(tr("Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir."))
+                }
+                Section {
                     Button {
                         model.updateSettings {
                             $0.dailyOrder = []
@@ -138,6 +157,8 @@ struct DailyLayoutEditor: View {
         case .reminders: (tr("À ne pas oublier"), "bell.fill", "E5484D")
         case .priorities: (tr("Top 3"), "star.fill", "F5A524")
         case .invite: (tr("Mes données"), "plus", "8E8E93")
+        case let .miniApp(raw, _):
+            MiniApp(rawValue: raw).map { ($0.title, $0.symbol, $0.colorHex) } ?? (raw, "square", "8E8E93")
         }
     }
 }

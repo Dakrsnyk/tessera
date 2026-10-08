@@ -36,7 +36,7 @@ enum MiniAppSummary {
         case .nutrition: !model.nutrition.entries.isEmpty
         case .fitness: !model.fitness.routines.isEmpty || !model.fitness.history.isEmpty
         case .planning: !model.content.tasks.isEmpty || !model.content.habits.isEmpty || !model.productivity.projects.isEmpty
-        case .studies: !model.student.courses.isEmpty
+            || !model.student.courses.isEmpty || !model.student.slots.isEmpty
         case .finances: !model.budget.expenses.isEmpty || !model.budget.bills.isEmpty || !model.budget.goals.isEmpty
         case .business: !model.business.sales.isEmpty
         case .travel: !model.travel.trips.isEmpty
@@ -49,8 +49,7 @@ enum MiniAppSummary {
         switch app {
         case .nutrition: [.nutrition, .wellbeing]
         case .fitness: [.sport, .wellbeing]
-        case .planning: [.productivity]
-        case .studies: [.studies]
+        case .planning: [.productivity, .studies]
         case .finances: [.budget, .finance]
         case .business: [.business]
         case .travel: [.travel]
@@ -72,13 +71,12 @@ enum MiniAppSummary {
             return model.fitness.routines.isEmpty && days == 0 ? nil : tr("\(Fmt.plural(days, tr("séance"), tr("séances"))) cette semaine")
         case .planning:
             let open = model.content.tasks.filter { !$0.isDone && ($0.isDue(on: now) || $0.isOverdue(at: now)) }.count
-            return open > 0 ? tr("\(Fmt.plural(open, tr("tâche"), tr("tâches"))) aujourd'hui") : nil
-        case .studies:
-            if let next = StudentMath.nextClass(model.student, at: now), DateMath.isSameDay(next.start, now) {
-                return "\(model.student.course(next.slot.courseID)?.name ?? tr("Cours")) à \(Fmt.time(next.start, uses24Hour: true))"
+            if open > 0 { return tr("\(Fmt.plural(open, tr("tâche"), tr("tâches"))) aujourd'hui") }
+            if let next = StudentMath.occurrences(model.student, on: now).first(where: { $0.end > now }) {
+                return "\(model.student.title(of: next.slot)) à \(Fmt.time(next.start, uses24Hour: true))"
             }
-            let open = StudentMath.openAssignments(model.student).count
-            return open > 0 ? tr("\(Fmt.plural(open, tr("devoir"), tr("devoirs"))) à rendre") : nil
+            let homework = StudentMath.openAssignments(model.student).count
+            return homework > 0 ? tr("\(Fmt.plural(homework, tr("devoir"), tr("devoirs"))) à rendre") : nil
         case .finances:
             guard !model.budget.expenses.isEmpty else { return nil }
             let remaining = BudgetMath.remaining(model.budget, at: now)

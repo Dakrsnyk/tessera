@@ -3,7 +3,7 @@ import SwiftUI
 /// The mini-apps reached from Home: each one is a whole part of Tessera (a dashboard, then its
 /// sections), built on the same data as the widgets, « Mes informations » and the spaces of Créer.
 enum MiniApp: String, CaseIterable, Identifiable, Hashable {
-    case nutrition, fitness, planning, studies, finances, business, travel, car, weather
+    case nutrition, fitness, planning, finances, business, travel, car, weather
     var id: String { rawValue }
 
     var title: String {
@@ -11,7 +11,6 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .nutrition: tr("Nutrition")
         case .fitness: tr("Fitness")
         case .planning: tr("Planning")
-        case .studies: tr("Études")
         case .finances: tr("Finances")
         case .business: tr("Business")
         case .travel: tr("Voyage")
@@ -25,7 +24,6 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .nutrition: "fork.knife"
         case .fitness: "dumbbell.fill"
         case .planning: "calendar"
-        case .studies: "graduationcap.fill"
         case .finances: "creditcard.fill"
         case .business: "briefcase.fill"
         case .travel: "airplane"
@@ -39,7 +37,6 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .nutrition: "F08A24"
         case .fitness: "E5484D"
         case .planning: "3366FF"
-        case .studies: "D6409F"
         case .finances: "2F8F7A"
         case .business: "8C6CFF"
         case .travel: "12A4B5"
@@ -56,7 +53,6 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .nutrition: .nutrition
         case .fitness: .fitness
         case .planning: .productivity
-        case .studies: .student
         case .finances: .budget
         case .business: .business
         case .travel: .travel
@@ -69,6 +65,11 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
     var isBuilt: Bool { true }
 
     init?(space: Space) {
+        // Studies live in Planning now (schedule, classes, exams, homework, grades, cards).
+        if space == .student {
+            self = .planning
+            return
+        }
         guard let app = MiniApp.allCases.first(where: { $0.space == space }) else { return nil }
         self = app
     }
@@ -97,6 +98,8 @@ enum MiniAppPage: Hashable {
     case planningProjects
     case planningHabits
     case planningFocus
+    /// Studies inside Planning: the next class, homework, exams, the average and the cards.
+    case studiesHome
     case studiesTimetable
     case studiesCourses
     case studiesCourse(UUID)
@@ -141,8 +144,6 @@ struct MiniAppView: View {
             FitnessAppView()
         case .planning:
             PlanningAppView()
-        case .studies:
-            StudiesAppView()
         case .finances:
             FinancesAppView()
         case .business:
@@ -187,6 +188,7 @@ struct MiniAppPageView: View {
         case .planningProjects: PlanningProjectsPage()
         case .planningHabits: PlanningHabitsPage()
         case .planningFocus: PlanningFocusPage()
+        case .studiesHome: StudiesAppView()
         case .studiesTimetable: StudiesTimetablePage()
         case .studiesCourses: StudiesCoursesPage()
         case let .studiesCourse(id): StudiesCoursePage(courseID: id)

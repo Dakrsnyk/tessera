@@ -1018,6 +1018,8 @@ struct TileVisualView: View {
             MonthDots(days: days, offset: offset, marked: marked, today: today, style: s)
         case let .grid(names, rows, colors):
             HabitGrid(names: names, rows: rows, colors: colors, style: s)
+        case let .schedule(blocks, today):
+            ScheduleWeek(blocks: blocks, today: today, style: s)
         case let .symbol(name):
             Image(systemName: s.symbol(name))
                 .resizable()
@@ -1312,6 +1314,52 @@ struct MonthDots: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+}
+
+/// The week's schedule in a large widget: a column a day, each entry a block in its color, with its
+/// name when the block is tall enough.
+struct ScheduleWeek: View {
+    let blocks: [ScheduleBlock]
+    let today: Int?
+    let style: ResolvedStyle
+
+    var body: some View {
+        let symbols = DateMath.weekdaySymbols()
+        HStack(alignment: .top, spacing: 3) {
+            ForEach(0..<7, id: \.self) { day in
+                VStack(spacing: 3) {
+                    Text(day < symbols.count ? symbols[day] : "")
+                        .font(style.text(9, day == today ? .bold : .medium))
+                        .foregroundStyle(day == today ? style.chart : style.secondary)
+                    GeometryReader { proxy in
+                        ZStack(alignment: .top) {
+                            RoundedRectangle(cornerRadius: style.radius(4), style: .continuous)
+                                .fill(style.track.opacity(day == today ? 1 : 0.5))
+                            ForEach(Array(blocks.filter { $0.day == day }.enumerated()), id: \.offset) { item in
+                                let block = item.element
+                                let height = max(4, (block.end - block.start) * proxy.size.height)
+                                RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
+                                    .fill(Color(hex: block.colorHex))
+                                    .frame(height: height)
+                                    .overlay(alignment: .topLeading) {
+                                        if height > 18 {
+                                            Text(block.title)
+                                                .font(.system(size: 7, weight: .semibold))
+                                                .foregroundStyle(.white)
+                                                .lineLimit(height > 30 ? 2 : 1)
+                                                .minimumScaleFactor(0.7)
+                                                .padding(2)
+                                        }
+                                    }
+                                    .offset(y: block.start * proxy.size.height)
+                            }
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
         }
     }
 }

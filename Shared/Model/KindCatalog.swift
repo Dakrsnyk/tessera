@@ -17,7 +17,7 @@ enum Space: String, CaseIterable, Identifiable, Codable {
         case .investing: tr("Placements")
         case .business: tr("Mon entreprise")
         case .markets: tr("Sociétés cotées")
-        case .student: tr("Études")
+        case .student: tr("Planning · études")
         case .travel: tr("Voyage")
         case .car: tr("Auto")
         case .life: tr("Ma vie")
@@ -34,7 +34,7 @@ enum Space: String, CaseIterable, Identifiable, Codable {
         case .investing: tr("Actions, ETF, crypto et cash")
         case .business: tr("Chiffre d'affaires et indicateurs")
         case .markets: tr("Chiffres officiels des sociétés cotées")
-        case .student: tr("Cours, examens, notes et fiches")
+        case .student: tr("Horaire de la semaine, cours, examens, notes et fiches")
         case .travel: tr("Vols, hôtels et activités")
         case .car: tr("Pleins, entretiens et coûts")
         case .life: tr("Anniversaire, jours fériés, profil")
@@ -241,7 +241,7 @@ enum KindCatalog {
         KindInfo(kind: .semesterProgress, title: tr("Session"), summary: tr("L'avancement de ta session ou de ton semestre."), category: .student, symbol: "calendar.badge.clock", isPremium: false, families: SM + [circ, inline], keywords: ["semestre", "session", "progression"], space: .student, isNew: true),
         KindInfo(kind: .flashcard, title: tr("Fiche de révision"), summary: tr("Une fiche à retourner depuis l'écran d'accueil, avec répétition espacée."), category: .student, symbol: "rectangle.on.rectangle.angled", isPremium: true, families: SM, keywords: ["flashcards", "fiches", "révision", "mémoriser"], space: .student, isNew: true, isInteractive: true),
         KindInfo(kind: .studyHours, title: tr("Heures d'étude"), summary: tr("Tes heures d'étude de la semaine face à ton objectif."), category: .student, symbol: "clock.badge.checkmark", isPremium: true, families: SML, keywords: ["étude", "heures", "révisions"], space: .student, isNew: true),
-        KindInfo(kind: .timetable, title: tr("Horaire du jour"), summary: tr("Tous tes cours de la journée."), category: .student, symbol: "list.bullet.rectangle.portrait", isPremium: true, families: SML, keywords: ["horaire", "emploi du temps", "cours"], space: .student, isNew: true),
+        KindInfo(kind: .timetable, title: tr("Horaire"), summary: tr("Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous."), category: .student, symbol: "list.bullet.rectangle.portrait", isPremium: true, families: SML, keywords: ["horaire", "emploi du temps", "cours"], space: .student, isNew: true),
     ]
 
     // MARK: Voyage

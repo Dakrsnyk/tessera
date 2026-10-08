@@ -84,5 +84,19 @@
  "Rattraper la séance": "Recuperar o treino",
  "Rattraper « %@ » d'hier": "Recuperar “%@” de ontem",
  "Repos en pause · %@": "Descanso pausado · %@",
- "Reprendre le repos": "Retomar o descanso"
+ "Reprendre le repos": "Retomar o descanso",
+ "Ajouter un événement": "Adicionar um evento",
+ "Autre événement": "Outro evento",
+ "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.": "Escolha os miniapps a exibir: o cartão mostra seus dados reais e aparece mesmo vazio para convidar você a preenchê-lo.",
+ "Cours, examens, devoirs, notes et fiches": "Aulas, provas, tarefas, notas e cartões",
+ "Cours, travail, rendez-vous et autres événements": "Aulas, trabalho, compromissos e outros eventos",
+ "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.": "Aulas, trabalho, compromissos… Adicione o que se repete toda semana: sua semana se organiza aqui e no widget Horário.",
+ "Horaire de la semaine": "Agenda da semana",
+ "Horaire de la semaine, cours, examens, devoirs, moyenne et fiches.": "Agenda semanal, aulas, provas, tarefas, média e cartões.",
+ "Horaire de la semaine, cours, examens, notes et fiches": "Agenda semanal, aulas, provas, notas e cartões",
+ "Lieu (facultatif)": "Local (opcional)",
+ "Planning · études": "Planejamento · estudos",
+ "Rendez-vous": "Compromisso",
+ "Rien pour l'instant : touche pour ajouter tes données.": "Nada por enquanto: toque para adicionar seus dados.",
+ "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": "Seu dia, e em tamanho grande toda a sua semana: aulas, trabalho, compromissos."
 }

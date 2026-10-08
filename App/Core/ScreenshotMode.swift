@@ -107,8 +107,10 @@ enum ScreenshotMode {
             // A mini-app on Home, and one of its pages: app-nutrition, app-nutrition-history…
             if screen.hasPrefix("app-") {
                 let parts = screen.dropFirst(4).split(separator: "-").map(String.init)
-                if let app = parts.first.flatMap(MiniApp.init(rawValue:)) {
-                    let name = "\(app.rawValue)-\(parts.dropFirst().first ?? "")"
+                // Studies are a part of Planning: app-studies opens it, app-studies-<page> one of its pages.
+                let isStudies = parts.first == "studies"
+                if let app = isStudies ? MiniApp.planning : parts.first.flatMap(MiniApp.init(rawValue:)) {
+                    let name = "\(isStudies ? "studies" : app.rawValue)-\(parts.dropFirst().first ?? (isStudies ? "home" : ""))"
                     // Travel is captured during the trip, the richest moment of the mini-app.
                     if app == .travel { model.update(\.travel) { $0 = SampleData.travel(now: Date(), ongoing: true) } }
                     let tripID = model.travel.trips.first?.id
@@ -131,6 +133,7 @@ enum ScreenshotMode {
                     case "planning-projects": .planningProjects
                     case "planning-habits": .planningHabits
                     case "planning-focus": .planningFocus
+                    case "studies-home": .studiesHome
                     case "studies-timetable": .studiesTimetable
                     case "studies-courses": .studiesCourses
                     case "studies-course": model.student.courses.first.map { .studiesCourse($0.id) }

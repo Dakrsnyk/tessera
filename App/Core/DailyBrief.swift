@@ -117,6 +117,8 @@ enum DailyBrief {
         case reminders([Reminder])
         case priorities([Check])
         case invite(InfoArea)
+        /// A mini-app added to Mon Quotidien by the person: its name and one figure from its data (nil: nothing yet).
+        case miniApp(String, caption: String?)
 
         var id: String {
             switch self {
@@ -132,6 +134,7 @@ enum DailyBrief {
             case .reminders: "reminders"
             case .priorities: "priorities"
             case let .invite(area): "invite-\(area.rawValue)"
+            case let .miniApp(app, _): "app-\(app)"
             }
         }
 
@@ -324,12 +327,12 @@ enum DailyBrief {
             let classes = StudentMath.occurrences(state, on: day)
                 .filter { start == nil || $0.end > start! }
                 .map { occurrence -> TimedItem in
-                    let course = state.courses.first { $0.id == occurrence.slot.courseID }
+                    let title = state.title(of: occurrence.slot)
                     return TimedItem(
                         id: occurrence.slot.id.uuidString + DateMath.dayKey(day),
                         date: occurrence.start,
                         time: Fmt.time(occurrence.start, uses24Hour: true),
-                        title: course?.name ?? tr("Cours"),
+                        title: title,
                         detail: occurrence.slot.room
                     )
                 }

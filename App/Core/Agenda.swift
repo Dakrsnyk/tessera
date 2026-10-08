@@ -44,11 +44,11 @@ enum Agenda {
         }
         let student = model.student
         for occurrence in StudentMath.occurrences(student, on: day) {
-            let course = student.course(occurrence.slot.courseID)
+            let slot = occurrence.slot
             items.append(AgendaItem(
-                id: "class-\(occurrence.slot.id)-\(DateMath.dayKey(day))", kind: .classSlot, title: course?.name ?? tr("Cours"),
-                detail: occurrence.slot.room.isEmpty ? nil : tr("Salle \(occurrence.slot.room)"),
-                start: occurrence.start, end: occurrence.end, colorHex: course?.colorHex ?? "D6409F", symbol: "graduationcap.fill"
+                id: "class-\(slot.id)-\(DateMath.dayKey(day))", kind: .classSlot, title: student.title(of: slot),
+                detail: slot.room.isEmpty ? nil : (slot.kind == .course ? tr("Salle \(slot.room)") : slot.room),
+                start: occurrence.start, end: occurrence.end, colorHex: student.colorHex(of: slot), symbol: slot.kind.symbol
             ))
         }
         for exam in student.exams where DateMath.isSameDay(exam.date, day) {

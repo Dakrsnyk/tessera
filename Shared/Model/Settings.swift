@@ -92,13 +92,15 @@ struct AppSettings: Codable, Hashable {
     var dailyHidden: [String] = []
     /// The size chosen for a card: true full width, false half; absent, the card's own size.
     var dailyWide: [String: Bool] = [:]
+    /// Mini-apps added to « Mon Quotidien » by the person (MiniApp raw values), shown even without data.
+    var dailyAdded: [String] = []
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
         case hasCompletedOnboarding, hydrationReminders
         case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
-        case dailyOrder, dailyHidden, dailyWide
+        case dailyOrder, dailyHidden, dailyWide, dailyAdded
     }
 
     init() {}
@@ -126,6 +128,7 @@ struct AppSettings: Codable, Hashable {
         dailyOrder = (try? c.decodeIfPresent([String].self, forKey: .dailyOrder)) ?? []
         dailyHidden = (try? c.decodeIfPresent([String].self, forKey: .dailyHidden)) ?? []
         dailyWide = (try? c.decodeIfPresent([String: Bool].self, forKey: .dailyWide)) ?? [:]
+        dailyAdded = (try? c.decodeIfPresent([String].self, forKey: .dailyAdded)) ?? []
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

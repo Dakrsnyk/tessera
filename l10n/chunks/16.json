@@ -78,13 +78,6 @@
   ]
  },
  {
-  "key": "Cours, examens, notes et fiches",
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/KindCatalog.swift:37: case .student: tr(\"Cours, examens, notes et fiches\")"
-  ]
- },
- {
   "key": "Vols, hôtels et activités",
   "placeholders": 0,
   "uses": [
@@ -978,13 +971,6 @@
   "uses": [
    "Shared/Model/KindCatalog.swift:244: KindInfo(kind: .timetable, title: tr(\"Horaire du jour\"), summary: tr(\"Tous tes cours de la journée.\"), category: .student, symbol: \"list.bullet.rectangle.portrait\", isPremium: true, fa",
    "Shared/Render/Tiles/StudentTiles.swift:197: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
-  ]
- },
- {
-  "key": "Tous tes cours de la journée.",
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/KindCatalog.swift:244: KindInfo(kind: .timetable, title: tr(\"Horaire du jour\"), summary: tr(\"Tous tes cours de la journée.\"), category: .student, symbol: \"list.bullet.rectangle.portrait\", isPremium: true, fa"
   ]
  },
  {

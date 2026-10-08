@@ -604,5 +604,108 @@
    "App/Screens/Home/DailySection.swift:346: label: tr(\"Reprendre le repos\")) { $0.resumeRest(at: Date()) }",
    "Shared/Intents/SpaceIntents.swift:53: static var title: LocalizedStringResource = \"Reprendre le repos\""
   ]
+ },
+ {
+  "key": "Ajouter un événement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:18: actionTitle: tr(\"Ajouter un événement\")) {",
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:25: MiniActionButton(title: tr(\"Ajouter un événement\"), symbol: \"plus\", colorHex: Studies.accentHex, isProminent: false) {"
+  ]
+ },
+ {
+  "key": "Autre événement",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Student.swift:22: case .other: tr(\"Autre événement\")"
+  ]
+ },
+ {
+  "key": "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailyLayoutEditor.swift:64: Text(tr(\"Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.\"))"
+  ]
+ },
+ {
+  "key": "Cours, examens, devoirs, notes et fiches",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:89: detail: tr(\"Cours, examens, devoirs, notes et fiches\"))"
+  ]
+ },
+ {
+  "key": "Cours, travail, rendez-vous et autres événements",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:81: detail: tr(\"Cours, travail, rendez-vous et autres événements\"),"
+  ]
+ },
+ {
+  "key": "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:17: message: tr(\"Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.\"),"
+  ]
+ },
+ {
+  "key": "Horaire de la semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:80: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Horaire de la semaine\"),",
+   "Shared/Render/Tiles/StudentTiles.swift:27: var tile = Tile(title: tr(\"Horaire de la semaine\"), symbol: \"calendar.day.timeline.left\")",
+   "Shared/Render/Tiles/StudentTiles.swift:39: tile.inline = tr(\"Horaire de la semaine\")"
+  ]
+ },
+ {
+  "key": "Horaire de la semaine, cours, examens, devoirs, moyenne et fiches.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetGroup.swift:69: case .student: tr(\"Horaire de la semaine, cours, examens, devoirs, moyenne et fiches.\")"
+  ]
+ },
+ {
+  "key": "Horaire de la semaine, cours, examens, notes et fiches",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/KindCatalog.swift:37: case .student: tr(\"Horaire de la semaine, cours, examens, notes et fiches\")"
+  ]
+ },
+ {
+  "key": "Lieu (facultatif)",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:225: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)"
+  ]
+ },
+ {
+  "key": "Planning · études",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/KindCatalog.swift:20: case .student: tr(\"Planning · études\")",
+   "Shared/Model/WidgetGroup.swift:49: case .student: tr(\"Planning · études\")",
+   "Shared/Model/WidgetKind.swift:36: case .student: tr(\"Planning · études\")"
+  ]
+ },
+ {
+  "key": "Rendez-vous",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Student.swift:21: case .appointment: tr(\"Rendez-vous\")"
+  ]
+ },
+ {
+  "key": "Rien pour l'instant : touche pour ajouter tes données.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:159: Text(caption ?? tr(\"Rien pour l'instant : touche pour ajouter tes données.\"))"
+  ]
+ },
+ {
+  "key": "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/KindCatalog.swift:244: KindInfo(kind: .timetable, title: tr(\"Horaire\"), summary: tr(\"Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.\"), category: .student, symbol: \"list.bullet.rectangle.portrait\", i"
+  ]
  }
 ]

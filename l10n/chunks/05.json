@@ -1940,32 +1940,11 @@
   ]
  },
  {
-  "key": "Ajoute d'abord un cours, puis ses plages de la semaine.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Studies/StudiesPages.swift:17: message: state.courses.isEmpty ? tr(\"Ajoute d'abord un cours, puis ses plages de la semaine.\") : tr(\"Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accu"
-  ]
- },
- {
-  "key": "Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accueil et dans ton planning.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Studies/StudiesPages.swift:17: message: state.courses.isEmpty ? tr(\"Ajoute d'abord un cours, puis ses plages de la semaine.\") : tr(\"Ajoute les plages de tes cours : elles apparaîtront ici, sur l'accu"
-  ]
- },
- {
   "key": "Ajouter une plage",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:18: actionTitle: state.courses.isEmpty ? tr(\"Ajouter un cours\") : tr(\"Ajouter une plage\")) {",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:25: MiniActionButton(title: tr(\"Ajouter une plage\"), symbol: \"plus\", colorHex: Studies.accentHex, isProminent: false) {"
-  ]
- },
- {
-  "key": "Pas de cours ce jour-là.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Studies/StudiesPages.swift:43: Text(tr(\"Pas de cours ce jour-là.\")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)"
   ]
  },
  {
