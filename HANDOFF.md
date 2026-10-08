@@ -13,7 +13,7 @@ Langues : français (source) + en, es, de, it, pt-BR, ja. Le chinois (zh-Hans) e
 - `[daily]` du 2026-10-08 (run 108) : compile, 173 tests OK, 1 échec `ProfileUITests.testAPackOpensInTheStudio` (« Le widget 2 ne s'ouvre pas » : le toucher sur la puce du Studio n'a pas sélectionné le widget ; passait aux 3 runs précédents, probablement instable, non lié aux textes — l'app est en français pendant les tests).
 
 ## Reste à faire
-1. Relire les captures `[langs]` : textes coupés (allemand), police japonaise ; raccourcir les traductions trop longues dans `l10n/parts`, puis merge/build.
+1. Captures `[langs]` relues (runs 109 et 111) : libellés coupés raccourcis, Prénom/Nom et priorité « Moyenne » corrigés, données d'exemple dans la langue capturée. Run 111 : tout compile, sync 0 écart. Relancer `[langs]` après tout changement de texte visible.
 2. Décider pour le test instable ci-dessus (relancer `[daily]` ou ajouter un second essai comme dans e940e31).
 3. Relecture des traductions par des locuteurs natifs si possible (surtout ja).
 
