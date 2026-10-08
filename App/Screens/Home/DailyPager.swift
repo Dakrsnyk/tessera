@@ -2,8 +2,9 @@ import SwiftUI
 
 /// A « Mon Quotidien » card with several views: swiping left or right shows the next or previous
 /// one, dots under the card show where the person is, and the view chosen stays for the next launch.
-/// Taps still open the card (the swipe needs a clearly horizontal movement), the vertical scroll of
-/// Home is untouched, and VoiceOver offers « Vue suivante » / « Vue précédente ».
+/// Home stays still: the card never follows the finger nor bounces at its ends; a clearly horizontal
+/// swipe changes the view, anything else is a tap on the card or the vertical scroll of Home.
+/// VoiceOver offers « Vue suivante » / « Vue précédente ».
 struct DailyPager<Content: View>: View {
     /// The card's key in the settings (`AppSettings.dailyCardPages`).
     let id: String
@@ -12,22 +13,20 @@ struct DailyPager<Content: View>: View {
     @ViewBuilder let content: (Int) -> Content
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    /// The page on screen, driven by the paging view.
+    /// The page on screen.
     @State private var position: Int?
+    /// The direction of the last change, for the transition.
+    @State private var forward = true
 
     private var count: Int { titles.count }
     private var saved: Int { min(max(0, model.settings.dailyCardPages[id] ?? 0), count - 1) }
     private var page: Int { position ?? saved }
 
-    private var selection: Binding<Int> {
-        Binding(get: { page }, set: { position = $0 })
-    }
-
     var body: some View {
         VStack(spacing: 7) {
-            // Every page, invisible, gives the card the height of its tallest view; the paging view
-            // on top shows one at a time. A page-style TabView tells a sideways swipe from Home's
-            // vertical scroll, and taps on the card's buttons still work.
+            // Every page, invisible, gives the card the height of its tallest view; the page on
+            // screen is drawn on top. Only a clearly sideways swipe changes it, so the card never
+            // drags Home along nor fights its vertical scroll, and taps on the card still work.
             ZStack(alignment: .top) {
                 ForEach(0..<count, id: \.self) { index in
                     content(index)
@@ -35,17 +34,18 @@ struct DailyPager<Content: View>: View {
             }
             .hidden()
             .accessibilityHidden(true)
-            .overlay {
-                TabView(selection: selection) {
-                    ForEach(0..<count, id: \.self) { index in
-                        content(index)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                            .tag(index)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .accessibilityIdentifier("daily-pager-\(id)")
+            .overlay(alignment: .top) {
+                content(page)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .id(page)
+                    .transition(.asymmetric(
+                        insertion: .move(edge: forward ? .trailing : .leading).combined(with: .opacity),
+                        removal: .opacity))
             }
+            .clipped()
+            .contentShape(Rectangle())
+            .simultaneousGesture(swipe)
+            .accessibilityIdentifier("daily-pager-\(id)")
             dots
         }
         .accessibilityElement(children: .contain)
@@ -76,9 +76,20 @@ struct DailyPager<Content: View>: View {
         .accessibilityIdentifier("daily-pager-\(id)-dots")
     }
 
+    /// A swipe counts only when it is long and mostly horizontal.
+    private var swipe: some Gesture {
+        DragGesture(minimumDistance: 24)
+            .onEnded { value in
+                let dx = value.translation.width, dy = value.translation.height
+                guard count > 1, abs(dx) > 50, abs(dx) > abs(dy) * 1.8 else { return }
+                go(by: dx < 0 ? 1 : -1)
+            }
+    }
+
     private func go(by delta: Int) {
         guard count > 1 else { return }
         let next = (page + delta + count) % count
+        forward = delta > 0
         withAnimation(reduceMotion ? .easeInOut(duration: 0.2) : .spring(response: 0.38, dampingFraction: 0.86)) {
             position = next
         }

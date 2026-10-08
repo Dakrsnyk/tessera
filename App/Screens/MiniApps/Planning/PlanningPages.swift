@@ -22,6 +22,8 @@ struct PlanningTasksPage: View {
     @State private var filter: Filter = .open
     @State private var editing: TaskItem?
     @State private var quickTitle = ""
+    /// The day shown by the « Aujourd'hui » filter: any day, before or after.
+    @State private var day = Date()
 
     private var accentHex: String { MiniApp.planning.colorHex }
 
@@ -54,7 +56,16 @@ struct PlanningTasksPage: View {
                 section(tr("Plus tard"), open.filter { ($0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false) })
                 section(tr("Sans date"), open.filter { $0.due == nil })
             case .today:
-                section(tr("Aujourd'hui"), tasks.filter { $0.isDue(on: now) || $0.isOverdue(at: now) })
+                Section {
+                    DaySwitcher(day: $day, colorHex: accentHex, allowsFuture: true)
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
+                if DateMath.isSameDay(day, now) {
+                    section(tr("Aujourd'hui"), tasks.filter { $0.isDue(on: now) || $0.isOverdue(at: now) })
+                } else {
+                    section(Fmt.longDay(day), tasks.filter { $0.isDue(on: day) })
+                }
             case .upcoming:
                 let upcoming = open.filter { $0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false }.sorted { ($0.due ?? now) < ($1.due ?? now) }
                 section(tr("À venir"), upcoming)
@@ -371,10 +382,16 @@ struct PlanningHabitsPage: View {
     @State private var editing: Habit?
     @State private var creating = false
 
+    /// The day the habits are checked for (a habit forgotten yesterday can still be checked).
+    @State private var day = Date()
+
     var body: some View {
-        let now = Date()
+        let now = day
         let habits = model.content.habits
         MiniAppScroll {
+            if !habits.isEmpty {
+                DaySwitcher(day: $day, colorHex: "7FA33A")
+            }
             if habits.isEmpty {
                 EmptyStateView(symbol: "repeat", title: tr("Tes habitudes"), message: tr("Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir."), actionTitle: tr("Ajouter une habitude")) {
                     creating = true

@@ -6,5 +6,14 @@
  "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": "Open Food Facts conoce este producto, pero no sus valores nutricionales: cópialos de la etiqueta.",
  "Pas de connexion : le produit %@ n'a pas pu être cherché.": "Sin conexión: no se pudo buscar el producto %@.",
  "Recherche du produit %@…": "Buscando el producto %@…",
- "Scanner à nouveau": "Escanear de nuevo"
+ "Scanner à nouveau": "Escanear de nuevo",
+ "Aucune séance ce jour-là.": "Ningún entrenamiento ese día.",
+ "Aucune séance prévue ce jour-là.": "Ningún entrenamiento previsto ese día.",
+ "Choisir une date": "Elegir una fecha",
+ "Prévu": "Previsto",
+ "Prévu, pas fait": "Previsto, no hecho",
+ "Revenir à aujourd'hui": "Volver a hoy",
+ "Rien de prévu ce jour-là.": "Nada previsto ese día.",
+ "séance faite": "entrenamiento hecho",
+ "séances faites": "entrenamientos hechos"
 }

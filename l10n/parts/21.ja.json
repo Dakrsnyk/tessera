@@ -6,5 +6,14 @@
  "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": "Open Food Factsにこの商品はありますが、栄養成分がありません。ラベルから入力してください。",
  "Pas de connexion : le produit %@ n'a pas pu être cherché.": "接続がありません。商品%@を検索できませんでした。",
  "Recherche du produit %@…": "商品%@を検索中…",
- "Scanner à nouveau": "もう一度スキャン"
+ "Scanner à nouveau": "もう一度スキャン",
+ "Aucune séance ce jour-là.": "この日のワークアウトはありません。",
+ "Aucune séance prévue ce jour-là.": "この日の予定のワークアウトはありません。",
+ "Choisir une date": "日付を選択",
+ "Prévu": "予定",
+ "Prévu, pas fait": "予定・未実施",
+ "Revenir à aujourd'hui": "今日に戻る",
+ "Rien de prévu ce jour-là.": "この日の予定はありません。",
+ "séance faite": "回のワークアウト完了",
+ "séances faites": "回のワークアウト完了"
 }

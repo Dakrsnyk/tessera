@@ -93,7 +93,7 @@
  " · %@ kg": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:317: let load = exercise.weight > 0 ? tr(\" · \\(ProfileNumberField.format(exercise.weight)) kg\") : \"\""
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:359: let load = exercise.weight > 0 ? tr(\" · \\(ProfileNumberField.format(exercise.weight)) kg\") : \"\""
   ]
  },
  " · partiel": {
@@ -142,7 +142,7 @@
  "%@ (copie)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:223: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:232: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ (limite de la version gratuite)": {
@@ -154,7 +154,7 @@
  "%@ (variante)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:223: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:232: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ / %@ kcal": {
@@ -166,7 +166,7 @@
  "%@ / %@ séances": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:154: MiniSectionTitle(title: tr(\"Cette semaine\"), detail: tr(\"\\(count) / \\(state.weeklyGoal) séances\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:196: MiniSectionTitle(title: tr(\"Cette semaine\"), detail: tr(\"\\(count) / \\(state.weeklyGoal) séances\"))"
   ]
  },
  "%@ / 100 km": {
@@ -457,7 +457,7 @@
  "%@ exercices, fiches et démonstrations": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:293: MiniRow(symbol: \"books.vertical.fill\", colorHex: accentHex, title: tr(\"Exercices\"), detail: tr(\"\\(ExerciseLibrary.all.count) exercices, fiches et démonstrations\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:335: MiniRow(symbol: \"books.vertical.fill\", colorHex: accentHex, title: tr(\"Exercices\"), detail: tr(\"\\(ExerciseLibrary.all.count) exercices, fiches et démonstrations\"))"
   ]
  },
  "%@ fiches à réviser": {
@@ -529,7 +529,7 @@
  "%@ h sur %@ h cette semaine": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:100: detail: tr(\"\\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \\(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:105: detail: tr(\"\\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \\(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine\"))"
   ]
  },
  "%@ hPa": {
@@ -620,7 +620,7 @@
    "App/Core/DataItems.swift:402: case .weight: return profile.weightKg.map { tr(\"\\(ProfileNumberField.format($0)) kg\") }",
    "App/Screens/Home/DailySection.swift:314: Text(tr(\"Série \\(set)/\\(sets) · \\(reps) × \\(weight > 0 ? tr(\"\\(ProfileNumberField.format(weight)) kg\") : tr(\"poids du corps\"))\"))",
    "App/Screens/Home/MyInfoSection.swift:24: add(\"weight\", \"scalemass\", tr(\"Poids\"), profile.weightKg.map { tr(\"\\(ProfileNumberField.format($0)) kg\") })",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:179: miniFigure(tr(\"Volume\"), tr(\"\\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:221: miniFigure(tr(\"Volume\"), tr(\"\\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg\"))"
   ]
  },
  "%@ kg cette semaine": {
@@ -639,7 +639,7 @@
   "placeholders": 2,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:437: Text(last.sets.map { $0.weight > 0 ? tr(\"\\(ProfileNumberField.format($0.weight)) kg × \\($0.reps)\") : tr(\"\\($0.reps) reps\") }.joined(separator: \" · \"))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:279: value: tr(\"\\(ProfileNumberField.format(record.weight)) kg × \\(record.reps)\"), showsChevron: chevron)",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:321: value: tr(\"\\(ProfileNumberField.format(record.weight)) kg × \\(record.reps)\"), showsChevron: chevron)",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:177: Text(set.weight > 0 ? tr(\"\\(ProfileNumberField.format(set.weight)) kg × \\(set.reps)\") : tr(\"\\(set.reps) répétitions\"))",
    "Shared/Render/Tiles/FitnessTiles.swift:145: TileRow(id: record.exercise, title: record.exercise, value: tr(\"\\(TF.int(record.weight)) kg × \\(record.reps)\"), detail: tr(\"1RM ≈ \\(TF.int(record.oneRepMax)) kg\"), symbol: \"trophy\")"
   ]
@@ -688,7 +688,7 @@
  "%@ min": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:178: miniFigure(tr(\"Durée\"), tr(\"\\(TF.int(FitnessMath.minutes(inWeekOf: now, state))) min\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:220: miniFigure(tr(\"Durée\"), tr(\"\\(TF.int(FitnessMath.minutes(inWeekOf: now, state))) min\"))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:166: ValueRow(title: tr(\"Durée\"), value: tr(\"\\(TF.int(session.duration / 60)) min\"))",
    "Shared/Data/Insights.swift:256: if minutes < 60 { return tr(\"\\(minutes) min\") }",
    "Shared/Render/Kinds/ProductivityWidgets.swift:223: Text(tr(\"\\(minutes) min\"))"
@@ -776,7 +776,7 @@
   "placeholders": 1,
   "uses": [
    "App/Core/DataItems.swift:403: case .stepGoal: return profile.stepGoal.map { tr(\"\\(Fmt.number($0)) pas\") }",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:211: Text(tr(\"\\(Fmt.number(count)) pas\")).font(.title3.weight(.bold)).monospacedDigit()"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:253: Text(tr(\"\\(Fmt.number(count)) pas\")).font(.title3.weight(.bold)).monospacedDigit()"
   ]
  },
  "%@ pas aujourd'hui": {
@@ -838,7 +838,7 @@
  "%@ sur %@ habitudes en version gratuite.": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:42: Text(tr(\"\\(min(habits.count, AppModel.freeHabitLimit)) sur \\(AppModel.freeHabitLimit) habitudes en version gratuite.\"))"
+   "App/Screens/Content/HabitsView.swift:51: Text(tr(\"\\(min(habits.count, AppModel.freeHabitLimit)) sur \\(AppModel.freeHabitLimit) habitudes en version gratuite.\"))"
   ]
  },
  "%@ sur %@ prêts": {
@@ -1017,7 +1017,8 @@
  "%@ · %@ min · %@ kg soulevés": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:66: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:126: Text(tr(\"\\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.duration / 60)) min · \\(TF.int(session.volume)) kg soulevés\"))"
   ]
  },
  "%@ · %@ rép.": {
@@ -1042,7 +1043,7 @@
  "%@ · %@ · environ %@ min": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:159: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
   ]
  },
  "%@ · %@/an": {
@@ -1115,7 +1116,7 @@
  "%@ · série %@ sur %@": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:47: Text(tr(\"\\(exercise.name) · série \\(active.setIndex + 1) sur \\(exercise.sets)\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:54: Text(tr(\"\\(exercise.name) · série \\(active.setIndex + 1) sur \\(exercise.sets)\"))"
   ]
  },
  "%@ · série %@/%@": {
@@ -1241,7 +1242,7 @@
  "+ %@ autres": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:131: Text(tr(\"+ \\(routine.exercises.count - 4) autres\")).font(.caption).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:173: Text(tr(\"+ \\(routine.exercises.count - 4) autres\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
  "+ %@ à faire": {
@@ -1769,7 +1770,7 @@
  "1RM estimé %@ kg": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:278: detail: tr(\"1RM estimé \\(TF.int(record.oneRepMax)) kg\"),"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:320: detail: tr(\"1RM estimé \\(TF.int(record.oneRepMax)) kg\"),"
   ]
  },
  "1RM estimé : %@ kg": {
@@ -2278,7 +2279,7 @@
  "Afficher mes pas": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:231: MiniRow(symbol: \"figure.walk\", colorHex: \"12A4B5\", title: tr(\"Afficher mes pas\"), detail: tr(\"Pas, distance et étages, depuis le capteur de ton iPhone\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:273: MiniRow(symbol: \"figure.walk\", colorHex: \"12A4B5\", title: tr(\"Afficher mes pas\"), detail: tr(\"Pas, distance et étages, depuis le capteur de ton iPhone\"))",
    "App/Screens/Profile/DataItemViews.swift:335: action(tr(\"Afficher mes pas\"), symbol: \"figure.walk\") {"
   ]
  },
@@ -2600,7 +2601,7 @@
  "Ajouter les événements de mon calendrier": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:45: Label(tr(\"Ajouter les événements de mon calendrier\"), systemImage: \"calendar.badge.plus\")"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:50: Label(tr(\"Ajouter les événements de mon calendrier\"), systemImage: \"calendar.badge.plus\")"
   ]
  },
  "Ajouter ma date de naissance": {
@@ -2728,8 +2729,8 @@
  "Ajouter une habitude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:379: EmptyStateView(symbol: \"repeat\", title: tr(\"Tes habitudes\"), message: tr(\"Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.\"), actionTitle: tr(\"Ajouter une habitude\")) {",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:421: Label(tr(\"Ajouter une habitude\"), systemImage: \"plus.circle.fill\").font(.subheadline.weight(.semibold))"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:396: EmptyStateView(symbol: \"repeat\", title: tr(\"Tes habitudes\"), message: tr(\"Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.\"), actionTitle: tr(\"Ajouter une habitude\")) {",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:438: Label(tr(\"Ajouter une habitude\"), systemImage: \"plus.circle.fill\").font(.subheadline.weight(.semibold))"
   ]
  },
  "Ajouter une note": {
@@ -2749,13 +2750,13 @@
  "Ajouter une priorité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:168: TextField(tr(\"Ajouter une priorité\"), text: $newPriority)"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:174: TextField(tr(\"Ajouter une priorité\"), text: $newPriority)"
   ]
  },
  "Ajouter une tâche": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:44: TextField(tr(\"Ajouter une tâche\"), text: $quickTitle)"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:46: TextField(tr(\"Ajouter une tâche\"), text: $quickTitle)"
   ]
  },
  "Ajouter une ville": {
@@ -2840,7 +2841,7 @@
  "Aliment": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:45: @Parameter(title: \"Aliment\")"
+   "Shared/Intents/SpaceIntents.swift:56: @Parameter(title: \"Aliment\")"
   ]
  },
  "Aliment perso": {
@@ -3158,7 +3159,7 @@
  "Annuler": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:202: Button(tr(\"Annuler\")) { dismiss() }",
+   "App/Screens/Content/HabitsView.swift:213: Button(tr(\"Annuler\")) { dismiss() }",
    "App/Screens/Content/MoneyView.swift:158: ToolbarItem(placement: .cancellationAction) { Button(tr(\"Annuler\")) { dismiss() } }",
    "App/Screens/Editor/EditorView.swift:196: Button(tr(\"Annuler\")) {",
    "App/Screens/Editor/StudioPanels.swift:433: Button(tr(\"Annuler\"), role: .cancel) { renaming = nil }"
@@ -3406,7 +3407,7 @@
  "Arrêter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:451: Button(tr(\"Arrêter\"), role: .destructive) { stop() }",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:468: Button(tr(\"Arrêter\"), role: .destructive) { stop() }",
    "Shared/Render/Kinds/ProductivityWidgets.swift:199: Label(tr(\"Arrêter\"), systemImage: \"stop.fill\")"
   ]
  },
@@ -3823,7 +3824,7 @@
  "Aucune habitude pour l'instant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:14: Text(tr(\"Aucune habitude pour l'instant\"))"
+   "App/Screens/Content/HabitsView.swift:23: Text(tr(\"Aucune habitude pour l'instant\"))"
   ]
  },
  "Aucune information n'est perdue : chaque widget garde tout son contenu. Le widget fusionné reste personnalisable dans l'éditeur (style, couleur, fond, police).": {
@@ -3844,6 +3845,12 @@
    "App/Screens/Spaces/MoneySpaces.swift:400: message = results.isEmpty ? tr(\"Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles.\") : nil"
   ]
  },
+ "Aucune séance ce jour-là.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:139: Text(state.routines.isEmpty ? tr(\"Aucune séance ce jour-là.\") : tr(\"Aucune séance prévue ce jour-là.\"))"
+  ]
+ },
  "Aucune séance dans ton programme : crée-en une dans Programme.": {
   "placeholders": 0,
   "uses": [
@@ -3854,6 +3861,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:126: Text(tr(\"Aucune séance pour l'instant. Commence celle du jour depuis Fitness : elle s'enregistre ici.\"))"
+  ]
+ },
+ "Aucune séance prévue ce jour-là.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:139: Text(state.routines.isEmpty ? tr(\"Aucune séance ce jour-là.\") : tr(\"Aucune séance prévue ce jour-là.\"))"
   ]
  },
  "Aucune tâche": {
@@ -3917,7 +3930,7 @@
  "Aujourd'hui %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:144: parts.append(DateMath.isSameDay(due, Date()) ? (task.hasTime ? tr(\"Aujourd'hui \\(Fmt.time(due, uses24Hour: true))\") : tr(\"Aujourd'hui\")) : Fmt.shortDay(due))",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:155: parts.append(DateMath.isSameDay(due, Date()) ? (task.hasTime ? tr(\"Aujourd'hui \\(Fmt.time(due, uses24Hour: true))\") : tr(\"Aujourd'hui\")) : Fmt.shortDay(due))",
    "Shared/Render/Tiles/BusinessTiles.swift:135: tile.inline = tr(\"Aujourd'hui \\(TF.money(values.today, currency))\")"
   ]
  },
@@ -4631,7 +4644,7 @@
  "Bleu franc, net et calme": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:27: AppStyle(id: .ocean, tagline: tr(\"Bleu franc, net et calme\"), accentLight: \"2563EB\", accentDark: \"4F80FF\","
+   "Shared/Theme/AppStyle.swift:27: AppStyle(id: .ocean, tagline: tr(\"Bleu franc, net et calme\"), accentLight: \"2563EB\", accentDark: \"4F80FF\","
   ]
  },
  "Bleu glacier et blanc": {
@@ -5438,7 +5451,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:31: add(\"kcal\", \"flame\", tr(\"Calories\"), profile.knows(.kcalTarget) ? tr(\"\\(TF.int(nutrition.goals.kcal)) kcal\") : nil)",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:180: miniFigure(tr(\"Calories\"), \"~\\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: now)))\")",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:222: miniFigure(tr(\"Calories\"), \"~\\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: now)))\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:28: stat(tr(\"Calories\"), TF.int(totals.kcal), \"kcal\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:201: ValueRow(title: tr(\"Calories\"), value: tr(\"\\(TF.int(totals.kcal)) kcal\"))"
   ]
@@ -5479,7 +5492,7 @@
  "Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:23: Text(tr(\"Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:30: Text(tr(\"Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.\"))"
   ]
  },
  "Calories par jour": {
@@ -6012,8 +6025,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:755: DayCard(title: tr(\"Cette semaine\"), symbol: \"calendar\", colorHex: \"E5484D\", isDark: true, route: .space(.fitness)) {",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:154: MiniSectionTitle(title: tr(\"Cette semaine\"), detail: tr(\"\\(count) / \\(state.weeklyGoal) séances\"))",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:475: MiniSectionTitle(title: tr(\"Cette semaine\"), detail: \"\\(TF.decimal(hours, 1)) h / \\(TF.int(model.productivity.weeklyFocusGoalHours)) h\")",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:196: MiniSectionTitle(title: tr(\"Cette semaine\"), detail: tr(\"\\(count) / \\(state.weeklyGoal) séances\"))",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:492: MiniSectionTitle(title: tr(\"Cette semaine\"), detail: \"\\(TF.decimal(hours, 1)) h / \\(TF.int(model.productivity.weeklyFocusGoalHours)) h\")",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:469: section(tr(\"Cette semaine\"), groups.thisWeek, state: state, now: now)"
   ]
  },
@@ -6026,7 +6039,7 @@
  "Chaleureux et vivant": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:29: AppStyle(id: .coral, tagline: tr(\"Chaleureux et vivant\"), accentLight: \"E4533D\", accentDark: \"F26A55\","
+   "Shared/Theme/AppStyle.swift:29: AppStyle(id: .coral, tagline: tr(\"Chaleureux et vivant\"), accentLight: \"E4533D\", accentDark: \"F26A55\","
   ]
  },
  "Champignons": {
@@ -6214,7 +6227,7 @@
  "Charges, volume et records": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:299: MiniRow(symbol: \"chart.line.uptrend.xyaxis\", colorHex: accentHex, title: tr(\"Progression\"), detail: tr(\"Charges, volume et records\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:341: MiniRow(symbol: \"chart.line.uptrend.xyaxis\", colorHex: accentHex, title: tr(\"Progression\"), detail: tr(\"Charges, volume et records\"))"
   ]
  },
  "Chargeur de téléphone": {
@@ -6447,6 +6460,13 @@
   "placeholders": 0,
   "uses": [
    "Shared/Intents/DesignIntent.swift:70: static var title: LocalizedStringResource = \"Choisir un widget\""
+  ]
+ },
+ "Choisir une date": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/MiniApp.swift:422: .accessibilityLabel(Text(tr(\"Choisir une date\")))",
+   "App/Screens/MiniApps/MiniApp.swift:459: .navigationTitle(tr(\"Choisir une date\"))"
   ]
  },
  "Choisir une photo": {
@@ -6728,13 +6748,13 @@
  "Cocher un devoir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:202: static var title: LocalizedStringResource = \"Cocher un devoir\""
+   "Shared/Intents/SpaceIntents.swift:213: static var title: LocalizedStringResource = \"Cocher un devoir\""
   ]
  },
  "Cocher une priorité": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:120: static var title: LocalizedStringResource = \"Cocher une priorité\""
+   "Shared/Intents/SpaceIntents.swift:131: static var title: LocalizedStringResource = \"Cocher une priorité\""
   ]
  },
  "Cocher une tâche": {
@@ -6746,7 +6766,7 @@
  "Cocher une tâche du projet": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:141: static var title: LocalizedStringResource = \"Cocher une tâche du projet\""
+   "Shared/Intents/SpaceIntents.swift:152: static var title: LocalizedStringResource = \"Cocher une tâche du projet\""
   ]
  },
  "Cockpit": {
@@ -6879,7 +6899,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:305: actionButton(tr(\"Commencer\")) {",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:70: MiniActionButton(title: tr(\"Commencer\"), symbol: \"play.fill\", colorHex: accentHex) {",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:77: MiniActionButton(title: tr(\"Commencer\"), symbol: \"play.fill\", colorHex: accentHex) {",
    "App/Screens/Tutorial/TutorialOverlay.swift:231: case .welcome: tr(\"Commencer\")",
    "Shared/Render/Tiles/FitnessTiles.swift:62: tile.buttons = doneToday ? [] : [TileButton(title: active == nil ? tr(\"Commencer\") : tr(\"Série faite\"), symbol: active == nil ? \"play.fill\" : \"checkmark\", action: .completeSet, isProminent: true)]"
   ]
@@ -6978,7 +6998,7 @@
  "Compter": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:92: static var title: LocalizedStringResource = \"Compter\""
+   "Shared/Intents/SpaceIntents.swift:103: static var title: LocalizedStringResource = \"Compter\""
   ]
  },
  "Comptes": {
@@ -7009,8 +7029,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:50: add(\"focus\", \"brain.head.profile\", tr(\"Concentration\"), profile.knows(.focusGoal) ? tr(\"\\(Fmt.hours(productivity.weeklyFocusGoalHours)) / sem.\") : nil)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:99: MiniRow(symbol: \"timer\", colorHex: \"8C6CFF\", title: tr(\"Concentration\"),",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:487: .navigationTitle(tr(\"Concentration\"))",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:104: MiniRow(symbol: \"timer\", colorHex: \"8C6CFF\", title: tr(\"Concentration\"),",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:504: .navigationTitle(tr(\"Concentration\"))",
    "App/Screens/Profile/DataItemViews.swift:191: title: tr(\"Concentration\"), unit: tr(\"h par semaine\"),"
   ]
  },
@@ -7399,7 +7419,7 @@
  "Couleur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:166: Section(tr(\"Couleur\")) {",
+   "App/Screens/Content/HabitsView.swift:176: Section(tr(\"Couleur\")) {",
    "App/Screens/Editor/EditorView.swift:358: Text(tr(\"Couleur\")).tag(BackgroundKind.color)",
    "App/Screens/Editor/StudioPanels.swift:343: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.borderHex, fallback: ResolvedStyle(design: design).borderColor)",
    "App/Screens/Editor/StudioPanels.swift:381: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.chartHex, fallback: ResolvedStyle(design: design).chart)"
@@ -7849,7 +7869,7 @@
  "Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:92: Text(tr(\"Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:99: Text(tr(\"Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.\"))"
   ]
  },
  "Crée ton premier widget": {
@@ -7915,7 +7935,7 @@
  "Crée une habitude, puis valide-la chaque jour d'une touche sur ton widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:16: Text(tr(\"Crée une habitude, puis valide-la chaque jour d'une touche sur ton widget.\"))"
+   "App/Screens/Content/HabitsView.swift:25: Text(tr(\"Crée une habitude, puis valide-la chaque jour d'une touche sur ton widget.\"))"
   ]
  },
  "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": {
@@ -7962,7 +7982,7 @@
  "Créer une séance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:96: MiniActionButton(title: tr(\"Créer une séance\"), symbol: \"plus\", colorHex: accentHex) {",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:103: MiniActionButton(title: tr(\"Créer une séance\"), symbol: \"plus\", colorHex: accentHex) {",
    "App/Screens/Profile/DataItemViews.swift:126: buttons(add: tr(\"Créer une séance\"), space: model.isFilled(.routines) ? .fitness : nil) {"
   ]
  },
@@ -8060,7 +8080,7 @@
  "Cyan électrique sur fond nuit": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:43: AppStyle(id: .neon, tagline: tr(\"Cyan électrique sur fond nuit\"), accentLight: \"0086A8\", accentDark: \"22D3EE\","
+   "Shared/Theme/AppStyle.swift:43: AppStyle(id: .neon, tagline: tr(\"Cyan électrique sur fond nuit\"), accentLight: \"0086A8\", accentDark: \"22D3EE\","
   ]
  },
  "Cyber": {
@@ -8135,7 +8155,7 @@
    "App/Screens/Editor/KindOptionsSection.swift:73: DatePicker(tr(\"Date\"), selection: $design.options.countdownDate, displayedComponents: .date)",
    "App/Screens/MiniApps/Business/BusinessApp.swift:557: DatePicker(tr(\"Date\"), selection: $date, in: ...Date(), displayedComponents: .date)",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:165: ValueRow(title: tr(\"Date\"), value: Fmt.longDay(session.start))",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:348: DatePicker(tr(\"Date\"), selection: $expense.date, displayedComponents: .date).environment(\\.locale, Fmt.locale)"
+   "App/Screens/MiniApps/MiniApp.swift:452: DatePicker(tr(\"Date\"), selection: Binding(get: { day }, set: { day = $0; picking = false }),"
   ]
  },
  "Date de naissance": {
@@ -8511,9 +8531,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DailyBrief.swift:294: let when = offset == 1 ? tr(\"Demain\") : Fmt.weekday(day)",
+   "App/Screens/MiniApps/MiniApp.swift:481: if let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr(\"Demain\") }",
    "Shared/Model/WorldCities.swift:83: return r > l ? tr(\"Demain\") : tr(\"Hier\")",
-   "Shared/Render/Kinds/ProductivityWidgets.swift:280: case 1: return tr(\"Demain\")",
-   "Shared/Render/Tiles/DashboardTiles.swift:169: var tile = Tile(title: tr(\"Demain\"), symbol: \"bed.double.fill\")"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:280: case 1: return tr(\"Demain\")"
   ]
  },
  "Demain%@": {
@@ -8958,7 +8978,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/StudentSpace.swift:254: SheetForm(title: tr(\"Devoir\"), canSave: !assignment.title.trimmed.isEmpty, onSave: save) {",
-   "Shared/Intents/SpaceIntents.swift:205: @Parameter(title: \"Devoir\")"
+   "Shared/Intents/SpaceIntents.swift:216: @Parameter(title: \"Devoir\")"
   ]
  },
  "Devoir 1": {
@@ -9153,7 +9173,7 @@
  "Doré, comme un soir d'été": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:33: AppStyle(id: .sand, tagline: tr(\"Doré, comme un soir d'été\"), accentLight: \"A26A18\", accentDark: \"E3AC4F\","
+   "Shared/Theme/AppStyle.swift:33: AppStyle(id: .sand, tagline: tr(\"Doré, comme un soir d'été\"), accentLight: \"A26A18\", accentDark: \"E3AC4F\","
   ]
  },
  "Dos": {
@@ -9272,7 +9292,7 @@
  "Doux et rêveur": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:31: AppStyle(id: .lavender, tagline: tr(\"Doux et rêveur\"), accentLight: \"6D4AE8\", accentDark: \"8B6DFF\","
+   "Shared/Theme/AppStyle.swift:31: AppStyle(id: .lavender, tagline: tr(\"Doux et rêveur\"), accentLight: \"6D4AE8\", accentDark: \"8B6DFF\","
   ]
  },
  "Du": {
@@ -9390,7 +9410,7 @@
  "Durée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:178: miniFigure(tr(\"Durée\"), tr(\"\\(TF.int(FitnessMath.minutes(inWeekOf: now, state))) min\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:220: miniFigure(tr(\"Durée\"), tr(\"\\(TF.int(FitnessMath.minutes(inWeekOf: now, state))) min\"))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:166: ValueRow(title: tr(\"Durée\"), value: tr(\"\\(TF.int(session.duration / 60)) min\"))"
   ]
  },
@@ -10047,7 +10067,7 @@
  "Effacer les tâches terminées": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:66: Button(tr(\"Effacer les tâches terminées\"), role: .destructive) {"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:77: Button(tr(\"Effacer les tâches terminées\"), role: .destructive) {"
   ]
  },
  "Effacer toutes mes données": {
@@ -10178,8 +10198,8 @@
   "uses": [
    "App/Core/DailyBrief.swift:361: case ..<0: return tr(\"En retard\")",
    "App/Screens/Home/DailySection.swift:599: .foregroundStyle(item.when == tr(\"En retard\") ? Color.red : .secondary)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:63: countTile(tr(\"En retard\"), overdue.count, overdue.isEmpty ? nil : \"E5484D\")",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:52: section(tr(\"En retard\"), open.filter { $0.isOverdue(at: now) })"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:68: countTile(tr(\"En retard\"), overdue.count, overdue.isEmpty ? nil : \"E5484D\")",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:54: section(tr(\"En retard\"), open.filter { $0.isOverdue(at: now) })"
   ]
  },
  "En semaine": {
@@ -10265,7 +10285,7 @@
  "Enregistrer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:205: Button(tr(\"Enregistrer\"), action: save)",
+   "App/Screens/Content/HabitsView.swift:219: Button(tr(\"Enregistrer\"), action: save)",
    "App/Screens/Content/MoneyView.swift:160: Button(tr(\"Enregistrer\"), action: save)",
    "App/Screens/Editor/EditorView.swift:569: if !isNew { return tr(\"Enregistrer\") }",
    "App/Screens/Editor/StudioPanels.swift:459: Text(tr(\"Enregistrer\")).foregroundStyle(.onAccent)"
@@ -10558,7 +10578,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:86: .navigationTitle(onPick == nil ? tr(\"Exercices\") : tr(\"Ajouter un exercice\"))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:293: MiniRow(symbol: \"books.vertical.fill\", colorHex: accentHex, title: tr(\"Exercices\"), detail: tr(\"\\(ExerciseLibrary.all.count) exercices, fiches et démonstrations\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:335: MiniRow(symbol: \"books.vertical.fill\", colorHex: accentHex, title: tr(\"Exercices\"), detail: tr(\"\\(ExerciseLibrary.all.count) exercices, fiches et démonstrations\"))"
   ]
  },
  "Exercices ch. 4": {
@@ -10868,7 +10888,7 @@
  "Faire une séance quand même": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:85: Label(tr(\"Faire une séance quand même\"), systemImage: \"play.circle\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:92: Label(tr(\"Faire une séance quand même\"), systemImage: \"play.circle\")"
   ]
  },
  "Fais de grands cercles lents avec les bras.": {
@@ -11151,7 +11171,7 @@
  "Filtre": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:34: Picker(tr(\"Filtre\"), selection: $filter) {"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:36: Picker(tr(\"Filtre\"), selection: $filter) {"
   ]
  },
  "Fin": {
@@ -11216,7 +11236,7 @@
  "Fitness": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:29: .navigationTitle(tr(\"Fitness\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:36: .navigationTitle(tr(\"Fitness\"))",
    "App/Screens/MiniApps/MiniApp.swift:12: case .fitness: tr(\"Fitness\")",
    "Shared/Model/KindCatalog.swift:15: case .fitness: tr(\"Fitness\")",
    "Shared/Model/WidgetGroup.swift:44: case .fitness: tr(\"Fitness\")"
@@ -12196,7 +12216,7 @@
  "Habitude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:198: .navigationTitle(isNew ? tr(\"Nouvelle habitude\") : tr(\"Habitude\"))",
+   "App/Screens/Content/HabitsView.swift:208: .navigationTitle(isNew ? tr(\"Nouvelle habitude\") : tr(\"Habitude\"))",
    "App/Screens/Editor/SpaceOptionsSection.swift:12: case .habitStreak: tr(\"Habitude\")",
    "Shared/Intents/InteractiveIntents.swift:35: @Parameter(title: \"Habitude\")"
   ]
@@ -12206,7 +12226,7 @@
   "uses": [
    "App/Core/DataItems.swift:90: case .habits: tr(\"Habitudes\")",
    "App/Premium/PaywallView.swift:117: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
-   "App/Screens/Content/HabitsView.swift:60: .navigationTitle(tr(\"Habitudes\"))",
+   "App/Screens/Content/HabitsView.swift:69: .navigationTitle(tr(\"Habitudes\"))",
    "App/Screens/Home/DailySection.swift:417: DayCard(title: tr(\"Habitudes\"), symbol: \"repeat\", colorHex: \"5C8424\", route: .page(.planningHabits)) {"
   ]
  },
@@ -12433,8 +12453,8 @@
  "Heure": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:179: DatePicker(tr(\"Heure\"), selection: $reminderTime, displayedComponents: .hourAndMinute)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:269: DatePicker(tr(\"Heure\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .hourAndMinute)",
+   "App/Screens/Content/HabitsView.swift:189: DatePicker(tr(\"Heure\"), selection: $reminderTime, displayedComponents: .hourAndMinute)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:277: DatePicker(tr(\"Heure\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .hourAndMinute)",
    "Shared/Model/Templates.swift:63: WidgetTemplate(id: \"clock-minimal\", name: tr(\"Heure\"), kind: .clock, themeID: .minimal, accentHex: \"2F8F7A\", isFeatured: true),"
   ]
  },
@@ -12497,7 +12517,7 @@
  "Hier": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:427: if let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return tr(\"Hier\") }",
+   "App/Screens/MiniApps/MiniApp.swift:480: if let yesterday = calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return tr(\"Hier\") }",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:415: case .yesterday: tr(\"Hier\")",
    "Shared/Model/WorldCities.swift:83: return r > l ? tr(\"Demain\") : tr(\"Hier\")"
   ]
@@ -12524,7 +12544,7 @@
  "Historique": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:305: MiniRow(symbol: \"clock.arrow.circlepath\", colorHex: accentHex, title: tr(\"Historique\"), detail: tr(\"Toutes tes séances\"), value: FitnessMath.sessions(state).isEmpty ? nil : \"\\(FitnessMath.sessions(sta",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:347: MiniRow(symbol: \"clock.arrow.circlepath\", colorHex: accentHex, title: tr(\"Historique\"), detail: tr(\"Toutes tes séances\"), value: FitnessMath.sessions(state).isEmpty ? nil : \"\\(FitnessMath.sessions(sta",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:149: .navigationTitle(tr(\"Historique\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:187: Text(tr(\"Historique\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:232: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: accentHex, title: tr(\"Historique\"), detail: tr(\"Moyennes, tendances et poids\"))"
@@ -12675,7 +12695,7 @@
  "Icône": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:149: Section(tr(\"Icône\")) {",
+   "App/Screens/Content/HabitsView.swift:159: Section(tr(\"Icône\")) {",
    "App/Screens/Editor/StudioPanels.swift:70: Toggle(tr(\"Icône\"), isOn: shown(\"icon\"))",
    "App/Screens/Spaces/BudgetSpace.swift:280: Picker(tr(\"Icône\"), selection: $quick.symbol) {",
    "App/Screens/Spaces/BudgetSpace.swift:406: Picker(tr(\"Icône\"), selection: $category.symbol) {"
@@ -12837,7 +12857,7 @@
  "Indigo, pour les couche-tard": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:41: AppStyle(id: .midnight, tagline: tr(\"Indigo, pour les couche-tard\"), accentLight: \"4B46C8\", accentDark: \"7571F2\","
+   "Shared/Theme/AppStyle.swift:41: AppStyle(id: .midnight, tagline: tr(\"Indigo, pour les couche-tard\"), accentLight: \"4B46C8\", accentDark: \"7571F2\","
   ]
  },
  "Indique la taille du réservoir pour voir l'autonomie": {
@@ -13014,7 +13034,7 @@
  "Jade et crème, l'original": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:25: AppStyle(id: .tessera, tagline: tr(\"Jade et crème, l'original\"), accentLight: \"2F8F7A\", accentDark: \"3FA58D\","
+   "Shared/Theme/AppStyle.swift:25: AppStyle(id: .tessera, tagline: tr(\"Jade et crème, l'original\"), accentLight: \"2F8F7A\", accentDark: \"3FA58D\","
   ]
  },
  "Jamais": {
@@ -13070,7 +13090,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:742: MiniActionButton(title: tr(\"Je savais\"), symbol: \"checkmark\", colorHex: \"1E9E75\") { grade(true) }",
-   "Shared/Intents/SpaceIntents.swift:182: @Parameter(title: \"Je savais\")",
+   "Shared/Intents/SpaceIntents.swift:193: @Parameter(title: \"Je savais\")",
    "Shared/Render/Tiles/StudentTiles.swift:160: TileButton(title: tr(\"Je savais\"), symbol: \"checkmark\", action: .gradeCard(true), isProminent: true),"
   ]
  },
@@ -13094,7 +13114,7 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:46: case .day: tr(\"Jour\")",
    "App/Screens/MiniApps/Business/BusinessApp.swift:279: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:266: DatePicker(tr(\"Jour\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:274: DatePicker(tr(\"Jour\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)",
    "App/Screens/Spaces/StudentSpace.swift:208: Picker(tr(\"Jour\"), selection: $slot.weekday) {"
   ]
  },
@@ -13148,13 +13168,13 @@
  "Jour précédent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:404: .accessibilityLabel(Text(tr(\"Jour précédent\")))"
+   "App/Screens/MiniApps/MiniApp.swift:408: .accessibilityLabel(Text(tr(\"Jour précédent\")))"
   ]
  },
  "Jour suivant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:417: .accessibilityLabel(Text(tr(\"Jour suivant\")))"
+   "App/Screens/MiniApps/MiniApp.swift:444: .accessibilityLabel(Text(tr(\"Jour suivant\")))"
   ]
  },
  "Journée": {
@@ -14011,7 +14031,7 @@
  "Lance une session de concentration": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:454: Text(tr(\"Lance une session de concentration\")).font(.headline)"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:471: Text(tr(\"Lance une session de concentration\")).font(.headline)"
   ]
  },
  "Lance une session depuis l'écran d'accueil": {
@@ -14134,7 +14154,7 @@
  "Le calendrier du mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:80: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: tr(\"Mois\"), detail: tr(\"Le calendrier du mois\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:85: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: tr(\"Mois\"), detail: tr(\"Le calendrier du mois\"))"
   ]
  },
  "Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.": {
@@ -14741,7 +14761,7 @@
  "Les notifications sont désactivées pour Tessera dans Réglages.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:184: Text(tr(\"Les notifications sont désactivées pour Tessera dans Réglages.\"))",
+   "App/Screens/Content/HabitsView.swift:194: Text(tr(\"Les notifications sont désactivées pour Tessera dans Réglages.\"))",
    "App/Screens/Content/HydrationView.swift:71: ? tr(\"Les notifications sont désactivées pour Tessera dans Réglages.\")"
   ]
  },
@@ -14940,7 +14960,7 @@
  "Libre": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:176: Text(tr(\"Libre\")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:187: Text(tr(\"Libre\")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)",
    "Shared/Render/Tiles/DashboardTiles.swift:272: tile.value = tr(\"Libre\")"
   ]
  },
@@ -15027,7 +15047,7 @@
  "Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:379: EmptyStateView(symbol: \"repeat\", title: tr(\"Tes habitudes\"), message: tr(\"Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.\"), actionTitle: tr(\"Ajouter une habitude\")) {"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:396: EmptyStateView(symbol: \"repeat\", title: tr(\"Tes habitudes\"), message: tr(\"Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.\"), actionTitle: tr(\"Ajouter une habitude\")) {"
   ]
  },
  "Lisbonne": {
@@ -15714,13 +15734,13 @@
  "Marquer %@ comme non fait": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:90: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))"
+   "App/Screens/Content/HabitsView.swift:100: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))"
   ]
  },
  "Marquer comme fait": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:228: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:234: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
   ]
  },
  "Marquer comme rendu": {
@@ -15732,7 +15752,7 @@
  "Marquer comme à faire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:228: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:234: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
   ]
  },
  "Marquer comme à rendre": {
@@ -16204,7 +16224,7 @@
  "Modifier le projet": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:337: Button(tr(\"Modifier le projet\")) { editing = project }"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:348: Button(tr(\"Modifier le projet\")) { editing = project }"
   ]
  },
  "Modifier le revenu": {
@@ -16254,8 +16274,8 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:48: case .month: tr(\"Mois\")",
    "App/Screens/MiniApps/Business/BusinessApp.swift:279: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:80: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: tr(\"Mois\"), detail: tr(\"Le calendrier du mois\"))",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:273: .navigationTitle(tr(\"Mois\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:85: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: tr(\"Mois\"), detail: tr(\"Le calendrier du mois\"))",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:284: .navigationTitle(tr(\"Mois\"))"
   ]
  },
  "Mois d'entraînement": {
@@ -16380,7 +16400,7 @@
  "Mon thème": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:263: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
+   "App/Core/AppModel.swift:272: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
    "App/Screens/Editor/StudioPanels.swift:448: TextField(tr(\"Mon thème\"), text: $newName)",
    "Shared/Model/WidgetStyle.swift:757: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
   ]
@@ -16805,7 +16825,7 @@
  "Méditer, lire, courir…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:147: TextField(tr(\"Méditer, lire, courir…\"), text: $habit.name)"
+   "App/Screens/Content/HabitsView.swift:157: TextField(tr(\"Méditer, lire, courir…\"), text: $habit.name)"
   ]
  },
  "Mélange montagnard": {
@@ -16982,7 +17002,7 @@
  "Noir et blanc, sans détour": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:35: AppStyle(id: .graphite, tagline: tr(\"Noir et blanc, sans détour\"), accentLight: \"1C1C1E\", accentDark: \"D1D1D6\","
+   "Shared/Theme/AppStyle.swift:35: AppStyle(id: .graphite, tagline: tr(\"Noir et blanc, sans détour\"), accentLight: \"1C1C1E\", accentDark: \"D1D1D6\","
   ]
  },
  "Noir et jaune fluo, gros chiffres": {
@@ -17043,7 +17063,7 @@
  "Nom": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:146: Section(tr(\"Nom\")) {",
+   "App/Screens/Content/HabitsView.swift:156: Section(tr(\"Nom\")) {",
    "App/Screens/Editor/EditorView.swift:343: EditorSection(title: tr(\"Nom\")) {",
    "App/Screens/Editor/EditorView.swift:690: EditorSection(title: tr(\"Nom\")) {",
    "App/Screens/Editor/StudioPanels.swift:432: TextField(tr(\"Nom\"), text: $renameText)"
@@ -17316,7 +17336,7 @@
  "Noter la fiche": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:179: static var title: LocalizedStringResource = \"Noter la fiche\""
+   "Shared/Intents/SpaceIntents.swift:190: static var title: LocalizedStringResource = \"Noter la fiche\""
   ]
  },
  "Noter le kilométrage": {
@@ -17339,7 +17359,7 @@
   "uses": [
    "App/Screens/Spaces/BudgetSpace.swift:29: Label(tr(\"Noter une dépense\"), systemImage: \"plus.circle.fill\").font(.headline)",
    "App/Screens/Spaces/MoneySpaces.swift:176: Button { sheets?.open { BusinessCostEditor() } } label: { Label(tr(\"Noter une dépense\"), systemImage: \"minus.circle\") }",
-   "Shared/Intents/SpaceIntents.swift:68: static var title: LocalizedStringResource = \"Noter une dépense\""
+   "Shared/Intents/SpaceIntents.swift:79: static var title: LocalizedStringResource = \"Noter une dépense\""
   ]
  },
  "Noter une valeur": {
@@ -17375,8 +17395,8 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:509: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:555: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:280: Section(tr(\"Notes\", context: \"text\")) {",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:281: TextField(tr(\"Notes\", context: \"text\"), text: $task.notes, axis: .vertical)"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:288: Section(tr(\"Notes\", context: \"text\")) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:289: TextField(tr(\"Notes\", context: \"text\"), text: $task.notes, axis: .vertical)"
   ]
  },
  "Notifications": {
@@ -17448,7 +17468,7 @@
  "Nouveau projet": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:355: Label(tr(\"Nouveau projet\"), systemImage: \"folder.badge.plus\")",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:366: Label(tr(\"Nouveau projet\"), systemImage: \"folder.badge.plus\")",
    "App/Screens/Profile/DataItemViews.swift:178: buttons(add: tr(\"Nouveau projet\"), space: model.isFilled(.projects) ? .productivity : nil) {",
    "App/Screens/Spaces/ProductivitySpace.swift:71: Label(tr(\"Nouveau projet\"), systemImage: \"plus\")",
    "App/Screens/Spaces/ProductivitySpace.swift:167: SheetForm(title: project.name.isEmpty ? tr(\"Nouveau projet\") : project.name, canSave: !project.name.trimmed.isEmpty, onSave: save) {"
@@ -17598,8 +17618,8 @@
  "Nouvelle habitude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:55: Label(tr(\"Nouvelle habitude\"), systemImage: \"plus.circle.fill\")",
-   "App/Screens/Content/HabitsView.swift:198: .navigationTitle(isNew ? tr(\"Nouvelle habitude\") : tr(\"Habitude\"))"
+   "App/Screens/Content/HabitsView.swift:64: Label(tr(\"Nouvelle habitude\"), systemImage: \"plus.circle.fill\")",
+   "App/Screens/Content/HabitsView.swift:208: .navigationTitle(isNew ? tr(\"Nouvelle habitude\") : tr(\"Habitude\"))"
   ]
  },
  "Nouvelle lune": {
@@ -17636,8 +17656,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/TasksView.swift:16: TextField(tr(\"Nouvelle tâche\"), text: $newTitle)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:52: MiniActionButton(title: tr(\"Nouvelle tâche\"), symbol: \"plus\", colorHex: accentHex) {",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:255: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, onSave: save) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:57: MiniActionButton(title: tr(\"Nouvelle tâche\"), symbol: \"plus\", colorHex: accentHex) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:263: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, closesWithBackArrow: exists, onSave: save) {",
    "App/Screens/Spaces/ProductivitySpace.swift:195: TextField(tr(\"Nouvelle tâche\"), text: $newTask)"
   ]
  },
@@ -17786,7 +17806,7 @@
    "App/Premium/PaywallView.swift:49: Button(tr(\"OK\"), role: .cancel) {",
    "App/Screens/Home/MiniAppsRow.swift:230: Button(tr(\"OK\")) { dismiss() }",
    "App/Screens/MiniApps/Business/BusinessApp.swift:439: Button(tr(\"OK\")) { dismiss() }",
-   "App/Screens/MyWidgets/MyWidgetsView.swift:116: Button(tr(\"OK\")) { endSelection() }"
+   "App/Screens/MiniApps/MiniApp.swift:469: Button(tr(\"OK\")) { picking = false }"
   ]
  },
  "Objectif": {
@@ -18495,7 +18515,7 @@
    "App/Screens/Home/DailySection.swift:482: DayCard(title: tr(\"Pas\"), symbol: \"figure.walk\", colorHex: \"12A4B5\", route: .page(.fitnessActivity)) {",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:302: MiniStat(title: tr(\"Pas\"), value: Fmt.number(count), detail: goal.map { tr(\"objectif \\(Fmt.number($0))\") }, colorHex: tint)",
    "App/Screens/Spaces/ProductivitySpace.swift:268: ValueRow(title: tr(\"Pas\"), value: \"+\\(counter.step)\")",
-   "Shared/Intents/SpaceIntents.swift:98: @Parameter(title: \"Pas\")"
+   "Shared/Intents/SpaceIntents.swift:109: @Parameter(title: \"Pas\")"
   ]
  },
  "Pas d'écran au lit": {
@@ -18567,7 +18587,7 @@
  "Pas encore de série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsView.swift:107: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "Shared/Render/Kinds/ProductivityWidgets.swift:144: Text(streak > 0 ? tr(\"Série de \\(streak) j\") : tr(\"Pas encore de série\"))"
   ]
  },
@@ -18604,7 +18624,7 @@
  "Pas, distance et étages, depuis le capteur de ton iPhone": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:231: MiniRow(symbol: \"figure.walk\", colorHex: \"12A4B5\", title: tr(\"Afficher mes pas\"), detail: tr(\"Pas, distance et étages, depuis le capteur de ton iPhone\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:273: MiniRow(symbol: \"figure.walk\", colorHex: \"12A4B5\", title: tr(\"Afficher mes pas\"), detail: tr(\"Pas, distance et étages, depuis le capteur de ton iPhone\"))"
   ]
  },
  "Passages d'épaules au bâton": {
@@ -18642,9 +18662,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/OnboardingView.swift:138: Button(tr(\"Passer\"), action: skip)",
-   "Shared/Live/WorkoutLiveActivity.swift:123: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipRestIntent())",
+   "Shared/Live/WorkoutLiveActivity.swift:126: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipRestIntent())",
    "Shared/Render/Tiles/FitnessTiles.swift:101: TileButton(title: tr(\"Passer\"), symbol: \"forward.fill\", action: .skipRest),",
-   "Widgets/WorkoutLiveActivityWidget.swift:35: Label(tr(\"Passer\"), systemImage: \"forward.fill\")"
+   "Widgets/WorkoutLiveActivityWidget.swift:36: Label(tr(\"Passer\"), systemImage: \"forward.fill\")"
   ]
  },
  "Passer cet exercice": {
@@ -18663,7 +18683,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessSession.swift:129: Button(tr(\"Passer le repos\")) {",
-   "Shared/Intents/SpaceIntents.swift:28: static var title: LocalizedStringResource = \"Passer le repos\""
+   "Shared/Intents/SpaceIntents.swift:41: static var title: LocalizedStringResource = \"Passer le repos\""
   ]
  },
  "Passer le tutoriel": {
@@ -19040,7 +19060,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/MiniApp.swift:13: case .planning: tr(\"Planning\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:106: .navigationTitle(tr(\"Planning\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:111: .navigationTitle(tr(\"Planning\"))"
   ]
  },
  "Plans": {
@@ -19321,7 +19341,7 @@
  "Plus tard": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:54: section(tr(\"Plus tard\"), open.filter { ($0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false) })",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:56: section(tr(\"Plus tard\"), open.filter { ($0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false) })",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:470: section(tr(\"Plus tard\"), groups.later, state: state, now: now)"
   ]
  },
@@ -20169,8 +20189,8 @@
  "Priorité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:259: Picker(tr(\"Priorité\"), selection: $task.priority) {",
-   "Shared/Intents/SpaceIntents.swift:123: @Parameter(title: \"Priorité\")"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:267: Picker(tr(\"Priorité\"), selection: $task.priority) {",
+   "Shared/Intents/SpaceIntents.swift:134: @Parameter(title: \"Priorité\")"
   ]
  },
  "Priorité %@": {
@@ -20342,7 +20362,7 @@
  "Prochaine séance : %@, %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:77: Text(tr(\"Prochaine séance : \\(next.routine.name), \\(dayText(next.day))\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:84: Text(tr(\"Prochaine séance : \\(next.routine.name), \\(dayText(next.day))\"))"
   ]
  },
  "Prochaine série": {
@@ -20422,7 +20442,7 @@
  "Programme": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:287: MiniRow(symbol: \"calendar.badge.clock\", colorHex: accentHex, title: tr(\"Programme\"), detail: tr(\"Tes séances de la semaine\"), value: state.routines.isEmpty ? nil : \"\\(state.routines.count)\")",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:329: MiniRow(symbol: \"calendar.badge.clock\", colorHex: accentHex, title: tr(\"Programme\"), detail: tr(\"Tes séances de la semaine\"), value: state.routines.isEmpty ? nil : \"\\(state.routines.count)\")",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:94: .navigationTitle(tr(\"Programme\"))",
    "App/Screens/MiniApps/Travel/TravelApp.swift:213: MiniRow(symbol: \"list.bullet.below.rectangle\", colorHex: accentHex, title: tr(\"Programme\"),",
    "App/Screens/MiniApps/Travel/TravelPages.swift:33: .navigationTitle(tr(\"Programme\"))"
@@ -20449,7 +20469,7 @@
  "Progression": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:299: MiniRow(symbol: \"chart.line.uptrend.xyaxis\", colorHex: accentHex, title: tr(\"Progression\"), detail: tr(\"Charges, volume et records\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:341: MiniRow(symbol: \"chart.line.uptrend.xyaxis\", colorHex: accentHex, title: tr(\"Progression\"), detail: tr(\"Charges, volume et records\"))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:262: .navigationTitle(tr(\"Progression\"))",
    "Shared/Model/KindCatalog.swift:118: KindInfo(kind: .progress, title: tr(\"Progression\"), summary: tr(\"Où en est ta journée, ta semaine, ton mois ou ton année.\"), category: .time, symbol: \"chart.bar.fill\", isPremium: false, families: SM +",
    "Shared/Model/WidgetStyle.swift:20: case .progress: tr(\"Progression\")"
@@ -20465,7 +20485,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/SpaceOptionsSection.swift:14: case .project: tr(\"Projet\")",
-   "Shared/Intents/SpaceIntents.swift:144: @Parameter(title: \"Projet\")",
+   "Shared/Intents/SpaceIntents.swift:155: @Parameter(title: \"Projet\")",
    "Shared/Model/KindCatalog.swift:148: KindInfo(kind: .project, title: tr(\"Projet\"), summary: tr(\"L'avancement d'un projet, ses tâches restantes et son échéance.\"), category: .productivity, symbol: \"folder.fill\", isPremium: true, families:",
    "Shared/Render/Tiles/ProductivityTiles.swift:44: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Tessera, espace Productivité.\"))"
   ]
@@ -20474,8 +20494,8 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:94: case .projects: tr(\"Projets\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:86: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:361: .navigationTitle(tr(\"Projets\"))",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:91: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:372: .navigationTitle(tr(\"Projets\"))",
    "App/Screens/Spaces/ProductivitySpace.swift:49: Section(tr(\"Projets\")) {"
   ]
  },
@@ -20567,6 +20587,18 @@
    "Shared/Render/Tiles/TravelTiles.swift:124: tile.detail = tripDays.isEmpty ? tr(\"Maintenant sur place · prévisions du séjour 7 jours avant\") : tr(\"Prévisions pendant ton séjour\")"
   ]
  },
+ "Prévu": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:135: header(day > now ? tr(\"Prévu\") : tr(\"Prévu, pas fait\"), symbol: \"calendar\")"
+  ]
+ },
+ "Prévu, pas fait": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:135: header(day > now ? tr(\"Prévu\") : tr(\"Prévu, pas fait\"), symbol: \"calendar\")"
+  ]
+ },
  "Prévue": {
   "placeholders": 0,
   "uses": [
@@ -20582,7 +20614,7 @@
  "Prêt": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:152: Text(tr(\"Prêt\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:162: Text(tr(\"Prêt\"))",
    "Shared/Render/Tiles/FitnessTiles.swift:106: tile.value = tr(\"Prêt\")"
   ]
  },
@@ -20856,7 +20888,7 @@
  "Rappel quotidien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:177: Toggle(tr(\"Rappel quotidien\"), isOn: $hasReminder)"
+   "App/Screens/Content/HabitsView.swift:187: Toggle(tr(\"Rappel quotidien\"), isOn: $hasReminder)"
   ]
  },
  "Rappeler maman dimanche.": {
@@ -20984,7 +21016,7 @@
  "Records": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:255: MiniSectionTitle(title: tr(\"Records\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:297: MiniSectionTitle(title: tr(\"Records\"))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:242: MiniSectionTitle(title: tr(\"Records\"))",
    "Shared/Model/KindCatalog.swift:183: KindInfo(kind: .personalRecords, title: tr(\"Records\"), summary: tr(\"Tes meilleures charges par exercice.\"), category: .fitness, symbol: \"trophy.fill\", isPremium: true, families: SML, keywords: [\"recor",
    "Shared/Render/Tiles/FitnessTiles.swift:139: guard let best = records.first else { return .empty(tr(\"Records\"), symbol: \"trophy.fill\", message: tr(\"Tes records apparaîtront après ta première séance.\")) }"
@@ -21152,7 +21184,7 @@
  "Regroupe les tâches d'un même projet (un déménagement, un rapport, un voyage) et suis leur avancement.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:318: Text(tr(\"Regroupe les tâches d'un même projet (un déménagement, un rapport, un voyage) et suis leur avancement.\"))"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:329: Text(tr(\"Regroupe les tâches d'un même projet (un déménagement, un rapport, un voyage) et suis leur avancement.\"))"
   ]
  },
  "Relevés": {
@@ -21346,9 +21378,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DailyBrief.swift:295: return Workout(name: tr(\"Repos\"), exercises: [], totalSets: 0, stage: .rest(nextName: routine.name, nextDay: when))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:138: header(tr(\"Repos\"), symbol: \"moon.zzz.fill\")",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:40: Text(planned.isEmpty ? tr(\"Repos\") : planned.map(\\.name).joined(separator: \" + \"))",
-   "Shared/Live/WorkoutLiveActivity.swift:134: Text(tr(\"Repos\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:149: Text(tr(\"Repos\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:144: Text(tr(\"Repos\"))"
   ]
  },
  "Repos : ": {
@@ -21374,7 +21406,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:341: Text(tr(\"Repos aujourd'hui\"))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:75: header(tr(\"Repos aujourd'hui\"), symbol: \"moon.zzz.fill\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:82: header(tr(\"Repos aujourd'hui\"), symbol: \"moon.zzz.fill\")"
   ]
  },
  "Repos jusqu'à %@": {
@@ -21405,7 +21437,7 @@
  "Reprendre la séance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:52: MiniActionButton(title: tr(\"Reprendre la séance\"), symbol: \"play.fill\", colorHex: accentHex) {"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: MiniActionButton(title: tr(\"Reprendre la séance\"), symbol: \"play.fill\", colorHex: accentHex) {"
   ]
  },
  "Reprendre un %@ précédent": {
@@ -21686,7 +21718,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:194: Label(isFavorite ? tr(\"Retirer\") : tr(\"Favori\"), systemImage: isFavorite ? \"star.slash\" : \"star\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:160: Label(tr(\"Retirer\"), systemImage: \"trash\")"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:166: Label(tr(\"Retirer\"), systemImage: \"trash\")"
   ]
  },
  "Retirer %@": {
@@ -21732,7 +21764,8 @@
  "Retour [back]": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:127: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))"
+   "App/Screens/Onboarding/OnboardingView.swift:127: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
+   "App/Screens/Spaces/SpaceForms.swift:52: Text(tr(\"Retour\", context: \"back\"))"
   ]
  },
  "Retour en arrière": {
@@ -21752,7 +21785,7 @@
  "Retourner la fiche": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:166: static var title: LocalizedStringResource = \"Retourner la fiche\""
+   "Shared/Intents/SpaceIntents.swift:177: static var title: LocalizedStringResource = \"Retourner la fiche\""
   ]
  },
  "Revenir aux couleurs du style": {
@@ -21777,6 +21810,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseTechniques.swift:56: [tr(\"Décoller la poitrine de l'appui.\"), tr(\"Hausser les épaules.\"), tr(\"Revenir trop vite.\")]),"
+  ]
+ },
+ "Revenir à aujourd'hui": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/MiniApp.swift:433: .accessibilityLabel(Text(tr(\"Revenir à aujourd'hui\")))"
   ]
  },
  "Revenir à la couleur du style": {
@@ -22099,7 +22138,13 @@
  "Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:24: Text(tr(\"Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier.\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:28: Text(isToday ? tr(\"Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier.\")"
+  ]
+ },
+ "Rien de prévu ce jour-là.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:29: : tr(\"Rien de prévu ce jour-là.\"))"
   ]
  },
  "Rien de prévu tôt demain": {
@@ -22111,7 +22156,7 @@
  "Rien de prévu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:263: Text(tr(\"Rien de prévu.\")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:274: Text(tr(\"Rien de prévu.\")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)"
   ]
  },
  "Rien de renseigné": {
@@ -22482,7 +22527,7 @@
  "Répéter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:271: Picker(tr(\"Répéter\"), selection: $task.repeats) {"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:279: Picker(tr(\"Répéter\"), selection: $task.repeats) {"
   ]
  },
  "Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes.": {
@@ -22771,7 +22816,7 @@
  "Sans date": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:55: section(tr(\"Sans date\"), open.filter { $0.due == nil })"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:57: section(tr(\"Sans date\"), open.filter { $0.due == nil })"
   ]
  },
  "Sans limite": {
@@ -23031,8 +23076,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:103: DailyPager(id: \"workout\", titles: [tr(\"Séance\"), tr(\"Semaine\")], accentHex: \"E5484D\") { page in",
    "App/Screens/MiniApps/Business/BusinessApp.swift:47: case .week: tr(\"Semaine\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:74: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Semaine\"), detail: tr(\"Tout ce qui t'attend, jour par jour\"))",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:187: .navigationTitle(tr(\"Semaine\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:79: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Semaine\"), detail: tr(\"Tout ce qui t'attend, jour par jour\"))",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:198: .navigationTitle(tr(\"Semaine\"))"
   ]
  },
  "Semaine %@": {
@@ -23229,7 +23274,7 @@
  "Session en cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:447: Text(tr(\"Session en cours\")).font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: \"8C6CFF\"))"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:464: Text(tr(\"Session en cours\")).font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: \"8C6CFF\"))"
   ]
  },
  "Session terminée": {
@@ -23899,7 +23944,7 @@
  "Supprimer l'habitude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:189: Button(tr(\"Supprimer l'habitude\"), role: .destructive) {"
+   "App/Screens/Content/HabitsView.swift:199: Button(tr(\"Supprimer l'habitude\"), role: .destructive) {"
   ]
  },
  "Supprimer l'indicateur": {
@@ -23919,7 +23964,7 @@
  "Supprimer la tâche": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:285: Button(tr(\"Supprimer la tâche\"), role: .destructive) {"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:293: Button(tr(\"Supprimer la tâche\"), role: .destructive) {"
   ]
  },
  "Supprimer la vente": {
@@ -24144,7 +24189,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:356: case .inProgress: tr(\"Séance en cours\")",
    "App/Screens/Home/MiniAppsRow.swift:70: if model.fitness.active.map({ !$0.isFinished }) == true { return tr(\"Séance en cours\") }",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:45: header(tr(\"Séance en cours\"), symbol: \"bolt.heart.fill\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:52: header(tr(\"Séance en cours\"), symbol: \"bolt.heart.fill\")"
   ]
  },
  "Séance et régularité": {
@@ -24162,7 +24207,7 @@
  "Séance faite": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:57: header(tr(\"Séance faite\"), symbol: \"checkmark.seal.fill\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:64: header(tr(\"Séance faite\"), symbol: \"checkmark.seal.fill\")"
   ]
  },
  "Séance faite aujourd'hui": {
@@ -24293,14 +24338,14 @@
  "Série %@/%@": {
   "placeholders": 2,
   "uses": [
-   "Widgets/WorkoutLiveActivityWidget.swift:23: Text(tr(\"Série \\(state.setNumber)/\\(state.sets)\"))"
+   "Widgets/WorkoutLiveActivityWidget.swift:24: Text(tr(\"Série \\(state.setNumber)/\\(state.sets)\"))"
   ]
  },
  "Série %@/%@ · %@": {
   "placeholders": 3,
   "uses": [
    "App/Screens/Spaces/FitnessSpace.swift:16: Text(tr(\"Série \\(active.setIndex + 1)/\\(exercise.sets) · \\(FitnessTiles.setText(exercise))\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:111: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:114: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
   ]
  },
  "Série %@/%@ · %@ × %@": {
@@ -24318,7 +24363,7 @@
  "Série de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))"
+   "App/Screens/Content/HabitsView.swift:107: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))"
   ]
  },
  "Série de %@ j": {
@@ -24347,7 +24392,7 @@
    "App/Screens/Home/DailySection.swift:324: actionButton(tr(\"Série faite\")) {",
    "App/Screens/MiniApps/Fitness/FitnessSession.swift:137: MiniActionButton(title: tr(\"Série faite\"), symbol: \"checkmark.circle.fill\", colorHex: accentHex) {",
    "App/Screens/Spaces/FitnessSpace.swift:35: Label(tr(\"Série faite\"), systemImage: \"checkmark.circle.fill\").font(.headline)",
-   "Shared/Live/WorkoutLiveActivity.swift:125: actionButton(tr(\"Série faite\"), symbol: \"checkmark\", prominent: true, intent: CompleteSetIntent())"
+   "Shared/Live/WorkoutLiveActivity.swift:128: actionButton(tr(\"Série faite\"), symbol: \"checkmark\", prominent: true, intent: CompleteSetIntent())"
   ]
  },
  "Série · %@": {
@@ -24378,7 +24423,7 @@
  "Séries et régularité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:92: MiniRow(symbol: \"repeat\", colorHex: \"7FA33A\", title: tr(\"Habitudes\"), detail: tr(\"Séries et régularité\"),"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:97: MiniRow(symbol: \"repeat\", colorHex: \"7FA33A\", title: tr(\"Habitudes\"), detail: tr(\"Séries et régularité\"),"
   ]
  },
  "Séries, semaine et taux de réussite de tes habitudes.": {
@@ -24803,7 +24848,7 @@
  "Tendre et affirmé": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:39: AppStyle(id: .rose, tagline: tr(\"Tendre et affirmé\"), accentLight: \"D13F72\", accentDark: \"E8588B\","
+   "Shared/Theme/AppStyle.swift:39: AppStyle(id: .rose, tagline: tr(\"Tendre et affirmé\"), accentLight: \"D13F72\", accentDark: \"E8588B\","
   ]
  },
  "Tends complètement les bras vers le bas (ou l'arrière).": {
@@ -24906,7 +24951,7 @@
   "uses": [
    "App/Screens/Content/TasksView.swift:52: Text(tr(\"Terminées\"))",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:16: case .done: tr(\"Terminées\")",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:63: section(tr(\"Terminées\"), done)"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:74: section(tr(\"Terminées\"), done)"
   ]
  },
  "Terrazzo": {
@@ -25012,7 +25057,7 @@
  "Tes habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:379: EmptyStateView(symbol: \"repeat\", title: tr(\"Tes habitudes\"), message: tr(\"Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.\"), actionTitle: tr(\"Ajouter une habitude\")) {"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:396: EmptyStateView(symbol: \"repeat\", title: tr(\"Tes habitudes\"), message: tr(\"Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.\"), actionTitle: tr(\"Ajouter une habitude\")) {"
   ]
  },
  "Tes habitudes de la semaine, validées d'une touche.": {
@@ -25156,7 +25201,7 @@
  "Tes séances de la semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:287: MiniRow(symbol: \"calendar.badge.clock\", colorHex: accentHex, title: tr(\"Programme\"), detail: tr(\"Tes séances de la semaine\"), value: state.routines.isEmpty ? nil : \"\\(state.routines.count)\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:329: MiniRow(symbol: \"calendar.badge.clock\", colorHex: accentHex, title: tr(\"Programme\"), detail: tr(\"Tes séances de la semaine\"), value: state.routines.isEmpty ? nil : \"\\(state.routines.count)\")"
   ]
  },
  "Tes séances de la semaine face à ton objectif, et ta série de semaines.": {
@@ -25585,7 +25630,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:68: Toggle(tr(\"Titre\"), isOn: $design.showsTitle)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:257: TextField(tr(\"Titre\"), text: $task.title)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:265: TextField(tr(\"Titre\"), text: $task.title)",
    "App/Screens/Spaces/StudentSpace.swift:255: TextField(tr(\"Titre\"), text: $assignment.title)"
   ]
  },
@@ -25840,7 +25885,7 @@
  "Ton programme": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:91: header(tr(\"Ton programme\"), symbol: \"list.bullet.clipboard\")"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:98: header(tr(\"Ton programme\"), symbol: \"list.bullet.clipboard\")"
   ]
  },
  "Ton programme et ton rythme de travail.": {
@@ -25902,7 +25947,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:93: case .priorities: tr(\"Top 3 du jour\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:137: MiniSectionTitle(title: tr(\"Top 3 du jour\"), detail: items.isEmpty ? nil : \"\\(items.filter { $0.isDone(on: now) }.count)/\\(items.count)\")",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:143: MiniSectionTitle(title: tr(\"Top 3 du jour\"), detail: items.isEmpty ? nil : \"\\(items.filter { $0.isDone(on: now) }.count)/\\(items.count)\")",
    "App/Screens/Spaces/ProductivitySpace.swift:36: Text(tr(\"Top 3 du jour\"))",
    "Shared/Model/KindCatalog.swift:147: KindInfo(kind: .priorities, title: tr(\"Top 3 du jour\"), summary: tr(\"Tes trois priorités du jour, cochées depuis l'écran d'accueil.\"), category: .productivity, symbol: \"3.circle\", isPremium: false, fa"
   ]
@@ -26240,7 +26285,7 @@
  "Tout ce qui t'attend, jour par jour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:74: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Semaine\"), detail: tr(\"Tout ce qui t'attend, jour par jour\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:79: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Semaine\"), detail: tr(\"Tout ce qui t'attend, jour par jour\"))"
   ]
  },
  "Tout change d'un coup": {
@@ -26421,7 +26466,7 @@
  "Toutes tes séances": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:305: MiniRow(symbol: \"clock.arrow.circlepath\", colorHex: accentHex, title: tr(\"Historique\"), detail: tr(\"Toutes tes séances\"), value: FitnessMath.sessions(state).isEmpty ? nil : \"\\(FitnessMath.sessions(sta"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:347: MiniRow(symbol: \"clock.arrow.circlepath\", colorHex: accentHex, title: tr(\"Historique\"), detail: tr(\"Toutes tes séances\"), value: FitnessMath.sessions(state).isEmpty ? nil : \"\\(FitnessMath.sessions(sta"
   ]
  },
  "Tractions": {
@@ -26604,10 +26649,10 @@
  "Tâche": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:255: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, onSave: save) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:263: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, closesWithBackArrow: exists, onSave: save) {",
    "App/Screens/Spaces/ProductivitySpace.swift:190: TextField(tr(\"Tâche\"), text: $task.title)",
    "Shared/Intents/InteractiveIntents.swift:13: @Parameter(title: \"Tâche\")",
-   "Shared/Intents/SpaceIntents.swift:147: @Parameter(title: \"Tâche\")"
+   "Shared/Intents/SpaceIntents.swift:158: @Parameter(title: \"Tâche\")"
   ]
  },
  "Tâches": {
@@ -26616,7 +26661,7 @@
    "App/Components/StylePicker.swift:122: Text(tr(\"Tâches\"))",
    "App/Core/DataItems.swift:92: case .tasks: tr(\"Tâches\")",
    "App/Screens/Content/TasksView.swift:65: .navigationTitle(tr(\"Tâches\"))",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:60: MiniSectionTitle(title: tr(\"Tâches\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:65: MiniSectionTitle(title: tr(\"Tâches\"))"
   ]
  },
  "Tâches : %@": {
@@ -26652,7 +26697,7 @@
  "Tâches regroupées par projet": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:86: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:91: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),"
   ]
  },
  "Tâches, priorités et focus sur des éclats de couleur.": {
@@ -26871,7 +26916,7 @@
  "Une fois faite, la tâche revient à sa prochaine date.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:277: Text(tr(\"Une fois faite, la tâche revient à sa prochaine date.\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:285: Text(tr(\"Une fois faite, la tâche revient à sa prochaine date.\"))"
   ]
  },
  "Une grande barre de progression.": {
@@ -27043,13 +27088,13 @@
  "Valider %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:90: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))"
+   "App/Screens/Content/HabitsView.swift:100: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))"
   ]
  },
  "Valider la série": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/SpaceIntents.swift:14: static var title: LocalizedStringResource = \"Valider la série\""
+   "Shared/Intents/SpaceIntents.swift:29: static var title: LocalizedStringResource = \"Valider la série\""
   ]
  },
  "Valider une habitude": {
@@ -27270,7 +27315,7 @@
  "Vert profond et naturel": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppStyle.swift:37: AppStyle(id: .forest, tagline: tr(\"Vert profond et naturel\"), accentLight: \"2B7A4B\", accentDark: \"3F9A63\","
+   "Shared/Theme/AppStyle.swift:37: AppStyle(id: .forest, tagline: tr(\"Vert profond et naturel\"), accentLight: \"2B7A4B\", accentDark: \"3F9A63\","
   ]
  },
  "Vert sur noir, lignes de balayage": {
@@ -27416,7 +27461,7 @@
  "Voir le détail": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:63: Text(tr(\"Voir le détail\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:70: Text(tr(\"Voir le détail\"))"
   ]
  },
  "Voir les %@ devoirs": {
@@ -27488,7 +27533,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:445: MiniStat(title: tr(\"Volume\"), value: TF.int(last.volume), unit: tr(\"kg\"), detail: tr(\"dernière séance\"))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:179: miniFigure(tr(\"Volume\"), tr(\"\\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:221: miniFigure(tr(\"Volume\"), tr(\"\\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg\"))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:167: ValueRow(title: tr(\"Volume\"), value: tr(\"\\(TF.int(session.volume)) kg\"))",
    "App/Screens/Spaces/FitnessSpace.swift:84: ValueRow(title: tr(\"Volume\"), value: tr(\"\\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg\"), symbol: \"scalemass\")"
   ]
@@ -28190,7 +28235,7 @@
  "demain": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:143: if let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr(\"demain\") }",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:185: if let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr(\"demain\") }",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:49: case 1: return tr(\"demain\")",
    "Shared/Render/Tiles/TileFactory.swift:66: case 1: return tr(\"demain\")"
   ]
@@ -28397,7 +28442,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:79: Text(Fmt.plural(results.count, tr(\"exercice\"), tr(\"exercices\")))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:159: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
   ]
  },
@@ -28406,7 +28451,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:79: Text(Fmt.plural(results.count, tr(\"exercice\"), tr(\"exercices\")))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:159: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:67: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
   ]
  },
@@ -28623,7 +28668,7 @@
  "jour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsView.swift:107: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:144: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
@@ -28652,7 +28697,7 @@
  "jours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsView.swift:107: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:144: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
@@ -28871,7 +28916,7 @@
  "minutes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:469: Text(tr(\"minutes\")).font(.caption).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:486: Text(tr(\"minutes\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
  "modéré": {
@@ -28994,7 +29039,7 @@
  "objectif %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:242: if let goal { parts.append(tr(\"objectif \\(Fmt.number(goal))\")) }",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:284: if let goal { parts.append(tr(\"objectif \\(Fmt.number(goal))\")) }",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:302: MiniStat(title: tr(\"Pas\"), value: Fmt.number(count), detail: goal.map { tr(\"objectif \\(Fmt.number($0))\") }, colorHex: tint)",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:488: MiniStat(title: tr(\"Calories\"), value: TF.int(stats.averages.kcal), unit: \"kcal\", detail: known.kcal ? tr(\"objectif \\(TF.int(stats.goal))\") : nil, colorHex: accentHex)"
   ]
@@ -29271,7 +29316,7 @@
  "priorité %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:147: if task.priority != .none { parts.append(tr(\"priorité \\(task.priority.title.lowercased())\")) }"
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:158: if task.priority != .none { parts.append(tr(\"priorité \\(task.priority.title.lowercased())\")) }"
   ]
  },
  "priorités": {
@@ -29552,6 +29597,12 @@
    "Shared/Render/Tiles/FitnessTiles.swift:164: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")"
   ]
  },
+ "séance faite": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:121: header(Fmt.plural(done.count, tr(\"séance faite\"), tr(\"séances faites\")), symbol: \"checkmark.seal.fill\")"
+  ]
+ },
  "séances": {
   "placeholders": 0,
   "uses": [
@@ -29575,6 +29626,12 @@
    "Shared/Render/Tiles/DashboardTiles.swift:213: tile.caption = tr(\"séances cette semaine · série \\(FitnessMath.weekStreak(state, until: now))\")"
   ]
  },
+ "séances faites": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:121: header(Fmt.plural(done.count, tr(\"séance faite\"), tr(\"séances faites\")), symbol: \"checkmark.seal.fill\")"
+  ]
+ },
  "sélectionné": {
   "placeholders": 0,
   "uses": [
@@ -29596,8 +29653,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
    "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"séries\")))\"), systemImage: \"checkmark.circle.fill\")",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:66: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:126: Text(tr(\"\\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.duration / 60)) min · \\(TF.int(session.volume)) kg soulevés\"))"
   ]
  },
  "séries": {
@@ -29605,8 +29662,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:301: Text(\"\\(Fmt.plural(workout.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(workout.totalSets, tr(\"série\"), tr(\"séries\")))\")",
    "App/Screens/Home/DailySection.swift:332: Label(tr(\"Faite · \\(Fmt.plural(sets, tr(\"série\"), tr(\"séries\")))\"), systemImage: \"checkmark.circle.fill\")",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:59: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))",
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:117: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(Fmt.plural(routine.exercises.reduce(0) { $0 + $1.sets }, tr(\"série\"), tr(\"séries\"))) · environ \\(FitnessPlan.minute"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:66: Text(tr(\"\\(Fmt.plural(doneToday.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(doneToday.duration / 60)) min · \\(TF.int(doneToday.volume)) kg soulevés\"))",
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:126: Text(tr(\"\\(Fmt.plural(session.sets.count, tr(\"série\"), tr(\"séries\"))) · \\(TF.int(session.duration / 60)) min · \\(TF.int(session.volume)) kg soulevés\"))"
   ]
  },
  "ta séance": {
@@ -29902,7 +29959,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/TasksView.swift:31: Section(tr(\"À faire\")) {",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:65: countTile(tr(\"À faire\"), tasks.filter { !$0.isDone }.count, nil)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:70: countTile(tr(\"À faire\"), tasks.filter { !$0.isDone }.count, nil)",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:13: case .open: tr(\"À faire\")"
   ]
  },
@@ -30060,7 +30117,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/DataItemViews.swift:78: Text(tr(\"À renseigner\"))",
-   "App/Screens/Spaces/SpaceForms.swift:81: TextField(tr(\"À renseigner\"), value: $value, format: .number.locale(Fmt.locale))"
+   "App/Screens/Spaces/SpaceForms.swift:102: TextField(tr(\"À renseigner\"), value: $value, format: .number.locale(Fmt.locale))"
   ]
  },
  "À revoir": {
@@ -30104,14 +30161,14 @@
  "À une heure précise": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:267: Toggle(tr(\"À une heure précise\"), isOn: $task.hasTime)"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:275: Toggle(tr(\"À une heure précise\"), isOn: $task.hasTime)"
   ]
  },
  "À venir": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Planning/PlanningPages.swift:15: case .upcoming: tr(\"À venir\")",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:60: section(tr(\"À venir\"), upcoming)",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:71: section(tr(\"À venir\"), upcoming)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:412: list(tr(\"À venir\"), upcoming, state: state, now: now)",
    "App/Screens/MiniApps/Travel/TravelApp.swift:106: MiniSectionTitle(title: tr(\"À venir\"))"
   ]
@@ -30177,14 +30234,14 @@
   "uses": [
    "App/Core/Agenda.swift:74: id: \"deadline-\\(deadline.id)\", kind: .deadline, title: deadline.title, detail: tr(\"Échéance\"),",
    "App/Screens/Editor/SpaceOptionsSection.swift:15: case .deadline: tr(\"Échéance\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:264: Toggle(tr(\"Échéance\"), isOn: $hasDue)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:272: Toggle(tr(\"Échéance\"), isOn: $hasDue)",
    "App/Screens/Spaces/ProductivitySpace.swift:171: Toggle(tr(\"Échéance\"), isOn: $hasDeadline)"
   ]
  },
  "Échéance : %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:347: Text(tr(\"Échéance : \\(Fmt.longDay(deadline))\"))",
+   "App/Screens/MiniApps/Planning/PlanningPages.swift:358: Text(tr(\"Échéance : \\(Fmt.longDay(deadline))\"))",
    "Shared/Render/Tiles/ProductivityTiles.swift:52: tile.detail = tr(\"Échéance : \\(Fmt.longDay(deadline))\")"
   ]
  },
@@ -30775,25 +30832,25 @@
  "élément": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:21: MiniSectionTitle(title: Fmt.longDay(now), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr(\"élément\"), tr(\"éléments\")))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:25: MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr(\"élément\"), tr(\"éléments\")))"
   ]
  },
  "éléments": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:21: MiniSectionTitle(title: Fmt.longDay(now), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr(\"élément\"), tr(\"éléments\")))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:25: MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr(\"élément\"), tr(\"éléments\")))"
   ]
  },
  "étage": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:244: if let floors = day?.floors, floors > 0 { parts.append(Fmt.plural(floors, tr(\"étage\"), tr(\"étages\"))) }"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:286: if let floors = day?.floors, floors > 0 { parts.append(Fmt.plural(floors, tr(\"étage\"), tr(\"étages\"))) }"
   ]
  },
  "étages": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:244: if let floors = day?.floors, floors > 0 { parts.append(Fmt.plural(floors, tr(\"étage\"), tr(\"étages\"))) }"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:286: if let floors = day?.floors, floors > 0 { parts.append(Fmt.plural(floors, tr(\"étage\"), tr(\"étages\"))) }"
   ]
  },
  "études": {

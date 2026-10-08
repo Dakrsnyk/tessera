@@ -69,7 +69,8 @@ enum WorkoutLiveActivity {
             }
             return
         }
-        let activityContent = ActivityContent(state: content, staleDate: nil)
+        // At the end of the rest the activity is drawn again: « Prêt » replaces the countdown.
+        let activityContent = ActivityContent(state: content, staleDate: content.restEnd)
         if let current = running.first(where: { $0.attributes.routineName == attributes.routineName }) {
             await current.update(activityContent)
             for other in running where other.id != current.id {
@@ -95,7 +96,9 @@ struct WorkoutActivityView: View {
     var isLive = true
     var now = Date()
 
-    private let accent = Color(hex: "FF6B57")
+    /// The app style chosen in Tessera: the Lock Screen follows its colors and its font.
+    private var style: AppStyle { AppStyle.style(SharedStore.shared.settings.appStyle) }
+    private var accent: Color { style.accent }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -126,6 +129,13 @@ struct WorkoutActivityView: View {
             }
         }
         .padding(16)
+        .fontDesign(style.fontDesign)
+    }
+
+    /// The Lock Screen background: the style's screen color, or its card color at night.
+    static var background: Color {
+        let style = AppStyle.style(SharedStore.shared.settings.appStyle)
+        return Color(light: style.screenLight, dark: style.cardDark)
     }
 
     @ViewBuilder private var restView: some View {
@@ -160,7 +170,7 @@ struct WorkoutActivityView: View {
     private func actionButton<I: AppIntent>(_ title: String, symbol: String, prominent: Bool, intent: I) -> some View {
         let label = Label(title, systemImage: symbol)
             .font(.subheadline.weight(.bold))
-            .foregroundStyle(prominent ? Color.white : accent)
+            .foregroundStyle(prominent ? style.onAccent : accent)
             .frame(maxWidth: .infinity, minHeight: 38)
             .background(prominent ? accent : accent.opacity(0.18), in: Capsule())
         if isLive {

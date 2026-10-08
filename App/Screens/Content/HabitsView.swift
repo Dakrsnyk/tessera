@@ -4,10 +4,19 @@ struct HabitsView: View {
     @Environment(AppModel.self) private var model
     @State private var editing: Habit?
     @State private var showsPaywall = false
+    /// The day the habits are checked for: a habit forgotten yesterday can still be checked.
+    @State private var day = Date()
 
     var body: some View {
         let habits = model.content.habits
         List {
+            if !habits.isEmpty {
+                Section {
+                    DaySwitcher(day: $day, colorHex: Palette.freeAccents[0].hex)
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
+            }
             if habits.isEmpty {
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
@@ -22,9 +31,9 @@ struct HabitsView: View {
             } else {
                 Section {
                     ForEach(habits) { habit in
-                        HabitRow(habit: habit) {
+                        HabitRow(habit: habit, day: day) {
                             Haptics.tap()
-                            model.updateContent { $0.toggleHabit(habit.id) }
+                            model.updateContent { $0.toggleHabit(habit.id, on: day) }
                         } onEdit: {
                             editing = habit
                         }
@@ -72,12 +81,13 @@ struct HabitsView: View {
 
 private struct HabitRow: View {
     let habit: Habit
+    var day = Date()
     let onToggle: () -> Void
     let onEdit: () -> Void
 
     var body: some View {
         let color = Color(hex: habit.colorHex)
-        let done = habit.isDone(on: Date())
+        let done = habit.isDone(on: day)
         HStack(spacing: 12) {
             Button(action: onToggle) {
                 Image(systemName: habit.symbol)
@@ -100,9 +110,9 @@ private struct HabitRow: View {
                     }
                     Spacer()
                     HStack(spacing: 4) {
-                        ForEach(DateMath.week(containing: Date()), id: \.self) { day in
+                        ForEach(DateMath.week(containing: day), id: \.self) { weekday in
                             Circle()
-                                .fill(habit.isDone(on: day) ? color : Color.secondary.opacity(0.2))
+                                .fill(habit.isDone(on: weekday) ? color : Color.secondary.opacity(0.2))
                                 .frame(width: 8, height: 8)
                         }
                     }
@@ -199,7 +209,11 @@ struct HabitEditor: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(tr("Annuler")) { dismiss() }
+                    if isNew {
+                        Button(tr("Annuler")) { dismiss() }
+                    } else {
+                        BackArrowButton { dismiss() }
+                    }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(tr("Enregistrer"), action: save)

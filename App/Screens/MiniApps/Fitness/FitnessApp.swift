@@ -7,6 +7,8 @@ struct FitnessAppView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     @State private var editing: Routine?
+    /// The day the first card shows: today's session, or what was done or planned another day.
+    @State private var day = Date()
     private var steps: StepCounter { .shared }
 
     private var accentHex: String { MiniApp.fitness.colorHex }
@@ -15,7 +17,12 @@ struct FitnessAppView: View {
         let now = Date()
         let state = model.fitness
         MiniAppScroll {
-            today(state: state, now: now)
+            DaySwitcher(day: $day, colorHex: accentHex, allowsFuture: true)
+            if DateMath.isSameDay(day, now) {
+                today(state: state, now: now)
+            } else {
+                otherDay(state: state, now: now)
+            }
             week(state: state, now: now)
             activity
             records(state: state)
@@ -102,6 +109,41 @@ struct FitnessAppView: View {
         .card()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("fitness-today")
+    }
+
+    /// Another day: the sessions done that day, else the one the program planned for it.
+    @ViewBuilder
+    private func otherDay(state: FitnessState, now: Date) -> some View {
+        let done = FitnessMath.sessions(state).filter { DateMath.isSameDay($0.start, day) && $0.isFinished }
+        let planned = state.routines.first { $0.weekdays.contains(FitnessMath.isoWeekday(day)) }
+        VStack(alignment: .leading, spacing: 14) {
+            if !done.isEmpty {
+                header(Fmt.plural(done.count, tr("séance faite"), tr("séances faites")), symbol: "checkmark.seal.fill")
+                ForEach(done) { session in
+                    NavigationLink(value: HomeRoute.page(.fitnessSessionDetail(session.id))) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(session.routineName).font(.title3.weight(.bold)).foregroundStyle(Color.primary)
+                            Text(tr("\(Fmt.plural(session.sets.count, tr("série"), tr("séries"))) · \(TF.int(session.duration / 60)) min · \(TF.int(session.volume)) kg soulevés"))
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
+                }
+            } else if let planned {
+                header(day > now ? tr("Prévu") : tr("Prévu, pas fait"), symbol: "calendar")
+                routineSummary(planned)
+            } else {
+                header(tr("Repos"), symbol: "moon.zzz.fill")
+                Text(state.routines.isEmpty ? tr("Aucune séance ce jour-là.") : tr("Aucune séance prévue ce jour-là."))
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .card()
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("fitness-day")
     }
 
     private func header(_ title: String, symbol: String) -> some View {

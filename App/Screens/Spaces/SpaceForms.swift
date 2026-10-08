@@ -6,6 +6,8 @@ struct SheetForm<Content: View>: View {
     var canSave = true
     /// False when saving closes a parent sheet (which takes this one with it, in one motion).
     var dismissesOnSave = true
+    /// An existing item (a task, a habit) opened from a list: « ‹ Retour » instead of « Annuler ».
+    var closesWithBackArrow = false
     let onSave: () -> Void
     @ViewBuilder let content: () -> Content
     @Environment(\.dismiss) private var dismiss
@@ -21,7 +23,11 @@ struct SheetForm<Content: View>: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(tr("Annuler")) { dismiss() }
+                    if closesWithBackArrow {
+                        BackArrowButton { dismiss() }
+                    } else {
+                        Button(tr("Annuler")) { dismiss() }
+                    }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(tr("Enregistrer")) {
@@ -32,6 +38,21 @@ struct SheetForm<Content: View>: View {
                 }
             }
         }
+    }
+}
+
+/// « ‹ Retour », like the system's back button, for an item opened from a list in a sheet.
+struct BackArrowButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 3) {
+                Image(systemName: "chevron.backward").font(.body.weight(.semibold))
+                Text(tr("Retour", context: "back"))
+            }
+        }
+        .accessibilityIdentifier("back-arrow")
     }
 }
 

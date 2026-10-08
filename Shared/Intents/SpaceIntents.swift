@@ -8,6 +8,21 @@ private func refreshWidgets() {
     WidgetCenter.shared.reloadAllTimelines()
 }
 
+extension Notification.Name {
+    /// The workout was changed outside the app's screens (Lock Screen, Dynamic Island, a widget):
+    /// the app reads it back, so the session has a single state everywhere.
+    static let workoutSavedOutside = Notification.Name("tessera.workoutSavedOutside")
+}
+
+/// Saves a workout change made by a button outside the app, then updates the widgets, the app
+/// (when it is running) and the Live Activity.
+private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
+    SharedStore.shared.update(FitnessState.self, change)
+    refreshWidgets()
+    await MainActor.run { NotificationCenter.default.post(name: .workoutSavedOutside, object: nil) }
+    await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
+}
+
 /// A Live Activity intent: from a widget, the Lock Screen or the Live Activity, it runs in the app's
 /// process, so it can start the workout's Live Activity and update its rest countdown.
 struct CompleteSetIntent: LiveActivityIntent {
@@ -17,9 +32,7 @@ struct CompleteSetIntent: LiveActivityIntent {
     init() {}
 
     func perform() async throws -> some IntentResult {
-        SharedStore.shared.update(FitnessState.self) { $0.completeNextSet(at: Date()) }
-        refreshWidgets()
-        await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
+        await changeWorkout { $0.completeNextSet(at: Date()) }
         return .result()
     }
 }
@@ -31,9 +44,7 @@ struct SkipRestIntent: LiveActivityIntent {
     init() {}
 
     func perform() async throws -> some IntentResult {
-        SharedStore.shared.update(FitnessState.self) { $0.skipRest() }
-        refreshWidgets()
-        await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
+        await changeWorkout { $0.skipRest() }
         return .result()
     }
 }

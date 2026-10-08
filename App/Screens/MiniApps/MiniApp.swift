@@ -385,10 +385,14 @@ struct MiniDivider: View {
     }
 }
 
-/// Moves between days (yesterday, the day before…) without leaving the screen.
+/// Moves between days without leaving the screen: the day before, the day after, any date from the
+/// calendar (a touch on the date), and back to today. Logs (meals, habits) stop at today; plans
+/// (agenda, tasks, program) look ahead too.
 struct DaySwitcher: View {
     @Binding var day: Date
     var colorHex = "F08A24"
+    var allowsFuture = false
+    @State private var picking = false
 
     private var isToday: Bool { DateMath.isSameDay(day, Date()) }
 
@@ -402,10 +406,33 @@ struct DaySwitcher: View {
                     .frame(width: 40, height: 36)
             }
             .accessibilityLabel(Text(tr("Jour précédent")))
-            Text(title)
+            Button {
+                picking = true
+            } label: {
+                HStack(spacing: 4) {
+                    Text(title)
+                        .contentTransition(.numericText())
+                    Image(systemName: "chevron.down")
+                        .font(.caption2.weight(.bold))
+                        .opacity(0.6)
+                }
                 .font(.subheadline.weight(.semibold))
-                .frame(maxWidth: .infinity)
-                .contentTransition(.numericText())
+                .frame(maxWidth: .infinity, minHeight: 36)
+            }
+            .accessibilityLabel(Text(tr("Choisir une date")))
+            .accessibilityValue(Text(title))
+            if !isToday {
+                Button {
+                    Haptics.tap()
+                    withAnimation(.snappy) { day = Date() }
+                } label: {
+                    Image(systemName: "arrow.uturn.backward")
+                        .font(.caption.weight(.bold))
+                        .frame(width: 32, height: 36)
+                }
+                .accessibilityLabel(Text(tr("Revenir à aujourd'hui")))
+                .transition(.scale.combined(with: .opacity))
+            }
             Button {
                 move(1)
             } label: {
@@ -413,24 +440,51 @@ struct DaySwitcher: View {
                     .font(.subheadline.weight(.bold))
                     .frame(width: 40, height: 36)
             }
-            .disabled(isToday)
+            .disabled(isToday && !allowsFuture)
             .accessibilityLabel(Text(tr("Jour suivant")))
         }
         .foregroundStyle(Color(hex: colorHex))
         .background(.cardFill, in: Capsule())
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("day-switcher")
+        .sheet(isPresented: $picking) {
+            NavigationStack {
+                DatePicker(tr("Date"), selection: Binding(get: { day }, set: { day = $0; picking = false }),
+                           in: allowsFuture ? Date.distantPast...Date.distantFuture : Date.distantPast...Date(),
+                           displayedComponents: .date)
+                    .datePickerStyle(.graphical)
+                    .tint(Color(hex: colorHex))
+                    .environment(\.locale, Fmt.locale)
+                    .padding(.horizontal)
+                    .navigationTitle(tr("Choisir une date"))
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button(tr("Aujourd'hui")) {
+                                day = Date()
+                                picking = false
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button(tr("OK")) { picking = false }
+                        }
+                    }
+            }
+            .presentationDetents([.medium, .large])
+        }
     }
 
     private var title: String {
         if isToday { return tr("Aujourd'hui") }
-        if let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return tr("Hier") }
+        let calendar = DateMath.calendar
+        if let yesterday = calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return tr("Hier") }
+        if let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr("Demain") }
         return Fmt.longDay(day)
     }
 
     private func move(_ days: Int) {
         guard let next = DateMath.calendar.date(byAdding: .day, value: days, to: day) else { return }
         Haptics.tap()
-        withAnimation(.snappy) { day = min(next, Date()) }
+        withAnimation(.snappy) { day = allowsFuture ? next : min(next, Date()) }
     }
 }

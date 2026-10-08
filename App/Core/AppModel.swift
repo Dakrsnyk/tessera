@@ -48,10 +48,19 @@ final class AppModel {
 
     @ObservationIgnored private let store: SharedStore
     @ObservationIgnored private var reloadTask: Task<Void, Never>?
+    @ObservationIgnored private var workoutObserver: NSObjectProtocol?
 
     init(store: SharedStore = .shared) {
         self.store = store
         reloadFromDisk()
+        // A set validated or a rest skipped from the Lock Screen while the app is open: the session
+        // in memory follows, so the next change here doesn't write an older state over it.
+        workoutObserver = NotificationCenter.default.addObserver(forName: .workoutSavedOutside, object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                self.fitness = self.store.state(FitnessState.self)
+            }
+        }
     }
 
     /// Widgets can change tasks, habits and water while the app is in the background.

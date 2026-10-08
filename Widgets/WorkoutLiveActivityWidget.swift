@@ -5,13 +5,14 @@ import WidgetKit
 
 /// The workout in progress on the Lock Screen and in the Dynamic Island (see `WorkoutLiveActivity`).
 struct WorkoutLiveActivityWidget: Widget {
-    private let accent = Color(hex: "FF6B57")
+    /// The app style chosen in Tessera, like the rest of the session's screens.
+    private var accent: Color { AppStyle.style(SharedStore.shared.settings.appStyle).accent }
 
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: WorkoutActivityAttributes.self) { context in
             WorkoutActivityView(attributes: context.attributes, state: context.state)
-                .activityBackgroundTint(Color.black.opacity(0.55))
-                .activitySystemActionForegroundColor(.white)
+                .activityBackgroundTint(WorkoutActivityView.background)
+                .activitySystemActionForegroundColor(accent)
         } dynamicIsland: { context in
             let state = context.state
             return DynamicIsland {

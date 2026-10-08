@@ -54,5 +54,69 @@
   "uses": [
    "App/Screens/Spaces/NutritionSpace.swift:446: Button(tr(\"Scanner à nouveau\")) {"
   ]
+ },
+ {
+  "key": "Aucune séance ce jour-là.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:139: Text(state.routines.isEmpty ? tr(\"Aucune séance ce jour-là.\") : tr(\"Aucune séance prévue ce jour-là.\"))"
+  ]
+ },
+ {
+  "key": "Aucune séance prévue ce jour-là.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:139: Text(state.routines.isEmpty ? tr(\"Aucune séance ce jour-là.\") : tr(\"Aucune séance prévue ce jour-là.\"))"
+  ]
+ },
+ {
+  "key": "Choisir une date",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/MiniApp.swift:422: .accessibilityLabel(Text(tr(\"Choisir une date\")))",
+   "App/Screens/MiniApps/MiniApp.swift:459: .navigationTitle(tr(\"Choisir une date\"))"
+  ]
+ },
+ {
+  "key": "Prévu",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:135: header(day > now ? tr(\"Prévu\") : tr(\"Prévu, pas fait\"), symbol: \"calendar\")"
+  ]
+ },
+ {
+  "key": "Prévu, pas fait",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:135: header(day > now ? tr(\"Prévu\") : tr(\"Prévu, pas fait\"), symbol: \"calendar\")"
+  ]
+ },
+ {
+  "key": "Revenir à aujourd'hui",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/MiniApp.swift:433: .accessibilityLabel(Text(tr(\"Revenir à aujourd'hui\")))"
+  ]
+ },
+ {
+  "key": "Rien de prévu ce jour-là.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:29: : tr(\"Rien de prévu ce jour-là.\"))"
+  ]
+ },
+ {
+  "key": "séance faite",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:121: header(Fmt.plural(done.count, tr(\"séance faite\"), tr(\"séances faites\")), symbol: \"checkmark.seal.fill\")"
+  ]
+ },
+ {
+  "key": "séances faites",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:121: header(Fmt.plural(done.count, tr(\"séance faite\"), tr(\"séances faites\")), symbol: \"checkmark.seal.fill\")"
+  ]
  }
 ]

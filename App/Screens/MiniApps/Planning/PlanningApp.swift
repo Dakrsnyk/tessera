@@ -8,26 +8,31 @@ struct PlanningAppView: View {
     @State private var editing: TaskItem?
     @State private var newPriority = ""
     @State private var askingCalendar = false
+    /// The day the agenda shows (today by default; any day before or after).
+    @State private var day = Date()
 
     private var accentHex: String { MiniApp.planning.colorHex }
 
     var body: some View {
         let now = Date()
-        let today = Agenda.items(on: now, model: model, events: events)
+        let isToday = DateMath.isSameDay(day, now)
+        let today = Agenda.items(on: day, model: model, events: events)
         let tasks = model.content.tasks
         let overdue = tasks.filter { $0.isOverdue(at: now) }
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: Fmt.longDay(now), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
+                DaySwitcher(day: $day, colorHex: accentHex, allowsFuture: true)
+                MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
                 VStack(alignment: .leading, spacing: 0) {
                     if today.isEmpty {
-                        Text(tr("Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier."))
+                        Text(isToday ? tr("Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier.")
+                                     : tr("Rien de prévu ce jour-là."))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .padding(.vertical, 12)
                     }
                     ForEach(Array(today.enumerated()), id: \.element.id) { index, item in
-                        AgendaRow(item: item, isNow: item.start.map { $0 <= now && (item.end ?? $0) > now } ?? false)
+                        AgendaRow(item: item, isNow: isToday && (item.start.map { $0 <= now && (item.end ?? $0) > now } ?? false))
                         if index < today.count - 1 { Divider().padding(.leading, 62) }
                     }
                 }
@@ -50,7 +55,7 @@ struct PlanningAppView: View {
             }
 
             MiniActionButton(title: tr("Nouvelle tâche"), symbol: "plus", colorHex: accentHex) {
-                editing = TaskItem(title: "", due: DateMath.startOfDay(now))
+                editing = TaskItem(title: "", due: DateMath.startOfDay(day))
             }
             .accessibilityIdentifier("planning-new-task")
 
@@ -106,13 +111,14 @@ struct PlanningAppView: View {
         .navigationTitle(tr("Planning"))
         .navigationBarTitleDisplayMode(.large)
         .onAppear(perform: loadEvents)
+        .onChange(of: day) { _, _ in loadEvents() }
         .sheet(item: $editing) { task in
             TaskEditor(task: task)
         }
     }
 
     private func loadEvents() {
-        let start = DateMath.startOfDay(Date())
+        let start = DateMath.startOfDay(day)
         events = CalendarService.events(from: start, to: start.addingTimeInterval(86_400))
     }
 
@@ -252,7 +258,9 @@ struct TaskEditor: View {
     @State private var hasDue = false
 
     var body: some View {
-        SheetForm(title: task.title.isEmpty ? tr("Nouvelle tâche") : tr("Tâche"), canSave: !task.title.trimmed.isEmpty, onSave: save) {
+        // An existing task opens like a detail page: a back arrow to leave it.
+        let exists = model.content.tasks.contains { $0.id == task.id }
+        SheetForm(title: task.title.isEmpty ? tr("Nouvelle tâche") : tr("Tâche"), canSave: !task.title.trimmed.isEmpty, closesWithBackArrow: exists, onSave: save) {
             Section {
                 TextField(tr("Titre"), text: $task.title)
                     .accessibilityIdentifier("task-title")
