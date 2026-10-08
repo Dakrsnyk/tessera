@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from l10n_scan import scan, line_of  # noqa: E402
 
 ROOTS = ("App", "Shared", "Widgets")
-LANGUAGES = ["en", "es", "de", "it", "pt-BR", "ja", "zh-Hans", "ko"]
+LANGUAGES = ["en", "es", "de", "it", "pt-BR", "ja"]
 CATALOG = "Shared/Localizable.xcstrings"
 INFO_CATALOG = "App/InfoPlist.xcstrings"
 KEYS = "l10n/keys.json"

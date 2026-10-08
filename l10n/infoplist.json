@@ -6,9 +6,7 @@
   "de": "Tessera zeigt deine nächsten Termine im Widget „Als Nächstes“. Nichts verlässt dein iPhone.",
   "it": "Tessera mostra i tuoi prossimi appuntamenti nel widget In arrivo. Nulla lascia il tuo iPhone.",
   "pt-BR": "O Tessera mostra seus próximos compromissos no widget A seguir. Nada sai do seu iPhone.",
-  "ja": "Tesseraは「次の予定」ウィジェットに今後の予定を表示します。データがiPhoneの外に出ることはありません。",
-  "zh-Hans": "Tessera 会在“即将到来”小组件中显示你接下来的日程。所有数据都不会离开你的 iPhone。",
-  "ko": "Tessera는 '다음 일정' 위젯에 다가오는 일정을 보여줘요. 어떤 데이터도 iPhone 밖으로 나가지 않아요."
+  "ja": "Tesseraは「次の予定」ウィジェットに今後の予定を表示します。データがiPhoneの外に出ることはありません。"
  },
  "NSCameraUsageDescription": {
   "fr": "La caméra sert uniquement à scanner le code-barres d'un aliment.",
@@ -17,9 +15,7 @@
   "de": "Die Kamera wird nur zum Scannen des Barcodes eines Lebensmittels verwendet.",
   "it": "La fotocamera serve solo a scansionare il codice a barre di un alimento.",
   "pt-BR": "A câmera é usada apenas para ler o código de barras de um alimento.",
-  "ja": "カメラは食品のバーコードを読み取るためだけに使用します。",
-  "zh-Hans": "相机仅用于扫描食品条形码。",
-  "ko": "카메라는 식품 바코드를 스캔하는 데만 사용해요."
+  "ja": "カメラは食品のバーコードを読み取るためだけに使用します。"
  },
  "NSLocationWhenInUseUsageDescription": {
   "fr": "Ta position sert uniquement à trouver la météo de ta ville.",
@@ -28,9 +24,7 @@
   "de": "Dein Standort wird nur verwendet, um das Wetter in deiner Stadt zu finden.",
   "it": "La tua posizione serve solo a trovare il meteo della tua città.",
   "pt-BR": "Sua localização é usada apenas para encontrar o clima da sua cidade.",
-  "ja": "位置情報はあなたの街の天気を調べるためだけに使用します。",
-  "zh-Hans": "你的位置仅用于查找你所在城市的天气。",
-  "ko": "위치는 내 도시의 날씨를 찾는 데만 사용해요."
+  "ja": "位置情報はあなたの街の天気を調べるためだけに使用します。"
  },
  "NSMotionUsageDescription": {
   "fr": "Tessera lit tes pas du jour pour « Mon Quotidien ». Rien ne quitte ton iPhone.",
@@ -39,9 +33,7 @@
   "de": "Tessera liest deine heutigen Schritte für „Mein Tag“. Nichts verlässt dein iPhone.",
   "it": "Tessera legge i tuoi passi di oggi per «La mia giornata». Nulla lascia il tuo iPhone.",
   "pt-BR": "O Tessera lê seus passos do dia para “Meu dia”. Nada sai do seu iPhone.",
-  "ja": "Tesseraは「マイデイ」のために今日の歩数を読み取ります。データがiPhoneの外に出ることはありません。",
-  "zh-Hans": "Tessera 会读取你今天的步数，用于“我的一天”。所有数据都不会离开你的 iPhone。",
-  "ko": "Tessera는 '나의 하루'를 위해 오늘의 걸음 수를 읽어요. 어떤 데이터도 iPhone 밖으로 나가지 않아요."
+  "ja": "Tesseraは「マイデイ」のために今日の歩数を読み取ります。データがiPhoneの外に出ることはありません。"
  },
  "NSPhotoLibraryAddUsageDescription": {
   "fr": "Tessera enregistre dans Photos les fonds d'écran que tu choisis dans le Store.",
@@ -50,9 +42,7 @@
   "de": "Tessera speichert die Hintergrundbilder, die du im Store auswählst, in Fotos.",
   "it": "Tessera salva in Foto gli sfondi che scegli nello Store.",
   "pt-BR": "O Tessera salva no Fotos os papéis de parede que você escolhe na Loja.",
-  "ja": "Tesseraはストアで選んだ壁紙を写真に保存します。",
-  "zh-Hans": "Tessera 会将你在商店中选择的墙纸存储到照片。",
-  "ko": "Tessera는 스토어에서 고른 배경화면을 사진에 저장해요."
+  "ja": "Tesseraはストアで選んだ壁紙を写真に保存します。"
  },
  "CFBundleDisplayName": {
   "fr": "Tessera",
@@ -61,8 +51,6 @@
   "de": "Tessera",
   "it": "Tessera",
   "pt-BR": "Tessera",
-  "ja": "Tessera",
-  "zh-Hans": "Tessera",
-  "ko": "Tessera"
+  "ja": "Tessera"
  }
 }

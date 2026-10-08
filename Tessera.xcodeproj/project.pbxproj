@@ -272,8 +272,6 @@
 				it,
 				"pt-BR",
 				ja,
-				"zh-Hans",
-				ko,
 				Base,
 			);
 			mainGroup = A10000000000000000000060;

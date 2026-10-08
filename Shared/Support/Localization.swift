@@ -66,12 +66,12 @@ func tr(_ text: LocalizedText) -> String {
 enum Localization {
     static let bundle = Bundle.main
 
-    /// The language the interface is shown in ("fr", "en", "pt-BR", "zh-Hans"…).
+    /// The language the interface is shown in ("fr", "en", "pt-BR", "ja"…).
     static let language: String = bundle.preferredLocalizations.first ?? "en"
 
     /// True when the interface is in French (some French-only typography follows from it).
     static var isFrench: Bool { language.hasPrefix("fr") }
 
     /// The languages Tessera is translated into, French first.
-    static let supported = ["fr", "en", "es", "de", "it", "pt-BR", "ja", "zh-Hans", "ko"]
+    static let supported = ["fr", "en", "es", "de", "it", "pt-BR", "ja"]
 }
