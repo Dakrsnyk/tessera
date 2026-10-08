@@ -35580,53 +35580,6 @@
         }
       }
     },
-    "Bon après-midi": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guten Tag"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Good afternoon"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buenas tardes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bon après-midi"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buon pomeriggio"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "こんにちは"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boa tarde"
-          }
-        }
-      }
-    },
     "Bonbon": {
       "extractionState": "manual",
       "localizations": {
@@ -35670,53 +35623,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bala"
-          }
-        }
-      }
-    },
-    "Bonjour": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guten Morgen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Good morning"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buenos días"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonjour"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buongiorno"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "おはようございます"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bom dia"
           }
         }
       }
@@ -35952,53 +35858,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bons hábitos"
-          }
-        }
-      }
-    },
-    "Bonsoir": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guten Abend"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Good evening"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buenas noches"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonsoir"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buonasera"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "こんばんは"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boa noite"
           }
         }
       }
@@ -49445,53 +49304,6 @@
         }
       }
     },
-    "Choisis une catégorie, personnalise ton widget, puis ajoute-le à ton écran d'accueil.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wähle eine Kategorie, passe dein Widget an und füge es dann deinem Home-Bildschirm hinzu."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a category, customize your widget, then add it to your Home Screen."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elige una categoría, personaliza tu widget y agrégalo a tu pantalla de inicio."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisis une catégorie, personnalise ton widget, puis ajoute-le à ton écran d'accueil."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scegli una categoria, personalizza il tuo widget, poi aggiungilo alla schermata Home."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カテゴリを選び、ウィジェットをカスタマイズして、ホーム画面に追加しましょう。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha uma categoria, personalize seu widget e depois adicione-o à Tela de Início."
-          }
-        }
-      }
-    },
     "Choisis une taille et tes widgets, puis personnalise-les dans le Studio.": {
       "extractionState": "manual",
       "localizations": {
@@ -52214,6 +52026,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comparador"
+          }
+        }
+      }
+    },
+    "Complète tes informations pour personnaliser ton Mon Quotidien.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ergänze deine Infos, um Mein Tag zu personalisieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fill in your info to personalize My Day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completa tus datos para personalizar Mi día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complète tes informations pour personnaliser ton Mon Quotidien."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completa le tue info per personalizzare La mia giornata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "情報を入力して、マイデイをカスタマイズしましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete suas informações para personalizar o Meu dia."
           }
         }
       }
@@ -59123,53 +58982,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Crie seus treinos (exercícios, séries, cargas, descanso) e escolha os dias: o Tessera sugere o certo para cada dia."
-          }
-        }
-      }
-    },
-    "Crée ton premier widget": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erstelle dein erstes Widget"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Create your first widget"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crea tu primer widget"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crée ton premier widget"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crea il tuo primo widget"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最初のウィジェットを作成"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crie seu primeiro widget"
           }
         }
       }
@@ -131413,53 +131225,6 @@
         }
       }
     },
-    "Nouveautés": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Neu"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novedades"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouveautés"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novità"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新着"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novidades"
-          }
-        }
-      }
-    },
     "Nouveaux clients": {
       "extractionState": "manual",
       "localizations": {
@@ -133054,53 +132819,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nutrição,\nsimplificada."
-          }
-        }
-      }
-    },
-    "Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ernährung, Fitness, Planung, Finanzen, Reisen … Jede Karte öffnet eine vollständige App, und deine Widgets zeigen, was du dort einträgst."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrition, Fitness, Planning, Finances, Travel… Each card opens a full app, and your widgets show what you log there."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrición, Fitness, Planificación, Finanzas, Viajes… Cada tarjeta abre una app completa, y tus widgets muestran lo que registras en ella."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrizione, Fitness, Pianificazione, Finanze, Viaggi… Ogni scheda apre un'app completa e i tuoi widget mostrano quello che ci registri."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "栄養、フィットネス、プランニング、ファイナンス、旅行…。各カードで本格的なアプリが開き、ウィジェットにはそこで記録した内容が表示されます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrição, Fitness, Planejamento, Finanças, Viagem… Cada cartão abre um app completo, e seus widgets mostram o que você registra nele."
           }
         }
       }
@@ -136109,53 +135827,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abre o editor"
-          }
-        }
-      }
-    },
-    "Ouvre le Store": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Öffnet den Store"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opens the Store"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abre la Tienda"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouvre le Store"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apre lo Store"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ストアを開きます"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abre a Loja"
           }
         }
       }
@@ -146923,53 +146594,6 @@
         }
       }
     },
-    "Populaires": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beliebt"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Popular"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Populares"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Populaires"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Popolari"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "人気"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Populares"
-          }
-        }
-      }
-    },
     "Porte": {
       "extractionState": "manual",
       "localizations": {
@@ -157541,53 +157165,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buscar"
-          }
-        }
-      }
-    },
-    "Rechercher un widget": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widget suchen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search for a widget"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar un widget"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rechercher un widget"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cerca un widget"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ウィジェットを検索"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar um widget"
           }
         }
       }
@@ -188048,53 +187625,6 @@
         }
       }
     },
-    "Tes mini-apps": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Mini-Apps"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your mini-apps"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus miniapps"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes mini-apps"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le tue mini-app"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ミニアプリ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suas miniapps"
-          }
-        }
-      }
-    },
     "Tes notes, pour ta moyenne.": {
       "extractionState": "manual",
       "localizations": {
@@ -189360,53 +188890,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seus copos de água e sua sequência de hábitos."
-          }
-        }
-      }
-    },
-    "Tes widgets comme sur ton écran d'accueil · touche-en un pour le modifier": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Widgets wie auf deinem Home-Bildschirm · tippe auf eins, um es zu bearbeiten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your widgets as they look on your Home Screen · tap one to edit it"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus widgets como en tu pantalla de inicio · toca uno para editarlo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes widgets comme sur ton écran d'accueil · touche-en un pour le modifier"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I tuoi widget come nella schermata Home · tocca un widget per modificarlo"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ホーム画面と同じ見た目のウィジェット · タップして編集"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seus widgets como na Tela de Início · toque em um para editá-lo"
           }
         }
       }
@@ -194201,53 +193684,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seu nome é usado na mensagem de boas-vindas. Tudo fica no seu iPhone."
-          }
-        }
-      }
-    },
-    "Ton quotidien apparaîtra ici": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dein Tag erscheint hier"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your day will show up here"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu día aparecerá aquí"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ton quotidien apparaîtra ici"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La tua giornata apparirà qui"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ここに今日が表示されます"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seu dia vai aparecer aqui"
           }
         }
       }

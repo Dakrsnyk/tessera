@@ -309,5 +309,12 @@
   "uses": [
    "App/Screens/Explore/ExploreView.swift:365: MagazineHeader(eyebrow: tr(\"Semaine du \\(Fmt.shortDay(monday))\"), title: tr(\"À découvrir cette semaine\"))"
   ]
+ },
+ {
+  "key": "Complète tes informations pour personnaliser ton Mon Quotidien.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:90: Label(tr(\"Complète tes informations pour personnaliser ton Mon Quotidien.\"), systemImage: \"sun.max\")"
+  ]
  }
 ]

@@ -90,14 +90,14 @@ final class ProfileUITests: XCTestCase {
         // Then the tour of the app, step by step, on the app itself.
         let step = app.staticTexts["tutorial-step"]
         XCTAssertTrue(step.waitForExistence(timeout: 10), "Le tutoriel doit suivre les premières questions")
-        XCTAssertEqual(step.label, "Étape 1 sur 10")
+        XCTAssertEqual(step.label, "Étape 1 sur 9")
         XCTAssertTrue(app.staticTexts["Bienvenue, Mathys !"].exists, "Le tutoriel accueille par le prénom")
         snapshot("tutorial-welcome")
-        for number in 2...10 {
+        for number in 2...9 {
             app.buttons["tutorial-next"].tap()
-            XCTAssertTrue(waitForLabel(step, "Étape \(number) sur 10"), "Étape \(number) du tutoriel absente")
+            XCTAssertTrue(waitForLabel(step, "Étape \(number) sur 9"), "Étape \(number) du tutoriel absente")
             if number == 2 { snapshot("tutorial-daily") }
-            if number == 6 {
+            if number == 5 {
                 // The Studio in miniature works: a color repaints the widget, the arrow takes it back.
                 app.buttons["tutorial-color-FF6B57"].tap()
                 let bravo = app.descendants(matching: .any).matching(identifier: "tutorial-bravo").firstMatch
@@ -110,7 +110,8 @@ final class ProfileUITests: XCTestCase {
 
         let info = app.buttons["home-info"]
         XCTAssertTrue(info.waitForExistence(timeout: 10), "« Mes informations » absent de l'accueil")
-        XCTAssertTrue(app.staticTexts["Bonjour Mathys"].exists || app.staticTexts["Bon après-midi Mathys"].exists || app.staticTexts["Bonsoir Mathys"].exists)
+        // Home has no greeting any more.
+        XCTAssertFalse(app.staticTexts["Bonjour Mathys"].exists, "Plus de salutation sur l'accueil")
         snapshot("home-after-onboarding")
         tapButton("home-info")
         let fitness = app.buttons["area-fitness"]
@@ -163,15 +164,15 @@ final class ProfileUITests: XCTestCase {
         replay.tap()
         let step = app.staticTexts["tutorial-step"]
         XCTAssertTrue(step.waitForExistence(timeout: 10), "Réglages doit relancer le tutoriel")
-        XCTAssertEqual(step.label, "Étape 1 sur 10")
+        XCTAssertEqual(step.label, "Étape 1 sur 9")
         app.buttons["tutorial-next"].tap()
-        XCTAssertTrue(waitForLabel(step, "Étape 2 sur 10"))
-        XCTAssertTrue(app.navigationBars["Tessera"].exists || app.staticTexts["Mon Quotidien"].exists, "L'étape montre l'accueil")
+        XCTAssertTrue(waitForLabel(step, "Étape 2 sur 9"))
+        XCTAssertTrue(app.staticTexts["Mon Quotidien"].exists || app.descendants(matching: .any)["daily-section"].exists, "L'étape montre l'accueil")
         app.buttons["tutorial-skip"].tap()
-        XCTAssertTrue(waitForLabel(step, "Étape 3 sur 10"), "« Passer l'étape » mène à la suivante")
+        XCTAssertTrue(waitForLabel(step, "Étape 3 sur 9"), "« Passer l'étape » mène à la suivante")
         // Straight to the Store: several steps skipped at once.
-        app.buttons["Aller à l'étape 7 : Le Store"].tap()
-        XCTAssertTrue(waitForLabel(step, "Étape 7 sur 10"))
+        app.buttons["Aller à l'étape 6 : Le Store"].tap()
+        XCTAssertTrue(waitForLabel(step, "Étape 6 sur 9"))
         XCTAssertTrue(app.tabBars.buttons["Store"].isSelected || app.navigationBars["Store"].waitForExistence(timeout: 5), "L'étape montre le Store")
         snapshot("tutorial-store")
         app.buttons["tutorial-close"].tap()

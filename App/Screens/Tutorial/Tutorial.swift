@@ -5,13 +5,13 @@ import SwiftUI
 /// through the app itself, tab by tab, lighting up what each step talks about. Every step can be
 /// skipped, and the tour can be left at any time.
 enum TutorialStep: String, CaseIterable, Identifiable {
-    case welcome, daily, miniApps, info, create, studio, store, mine, homeScreen, finish
+    case welcome, daily, info, create, studio, store, mine, homeScreen, finish
     var id: String { rawValue }
 
     /// The tab shown behind the step.
     var tab: Router.Tab {
         switch self {
-        case .welcome, .daily, .miniApps, .info, .finish: .home
+        case .welcome, .daily, .info, .finish: .home
         case .create, .studio: .spaces
         case .store: .explore
         case .mine, .homeScreen: .mine
@@ -22,7 +22,6 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     var target: TutorialTarget? {
         switch self {
         case .daily: .daily
-        case .miniApps: .miniApps
         case .info: .info
         case .create: .createSpace
         case .store: .storeHero
@@ -36,7 +35,6 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         switch self {
         case .welcome: "hand.wave.fill"
         case .daily: "sun.max.fill"
-        case .miniApps: "square.grid.2x2.fill"
         case .info: "person.text.rectangle.fill"
         case .create: "plus.square.on.square"
         case .studio: "paintbrush.pointed.fill"
@@ -51,7 +49,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     var place: String {
         switch self {
         case .welcome, .finish: tr("Tessera")
-        case .daily, .miniApps, .info: tr("Accueil")
+        case .daily, .info: tr("Accueil")
         case .create: tr("Créer")
         case .studio: tr("Studio")
         case .store: tr("Store")
@@ -64,7 +62,6 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         switch self {
         case .welcome: name.isEmpty ? tr("Bienvenue !") : tr("Bienvenue, \(name) !")
         case .daily: tr("Mon Quotidien")
-        case .miniApps: tr("Tes mini-apps")
         case .info: tr("Mes informations")
         case .create: tr("Créer un widget")
         case .studio: tr("Le Studio")
@@ -81,8 +78,6 @@ enum TutorialStep: String, CaseIterable, Identifiable {
             tr("Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.")
         case .daily:
             tr("Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.")
-        case .miniApps:
-            tr("Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes.")
         case .info:
             tr("Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps et à tous tes widgets.")
         case .create:

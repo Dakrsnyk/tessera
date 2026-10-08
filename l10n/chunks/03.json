@@ -1116,13 +1116,6 @@
   ]
  },
  {
-  "key": "Ton quotidien apparaîtra ici",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/DailySection.swift:65: Label(tr(\"Ton quotidien apparaîtra ici\"), systemImage: \"sun.max\")"
-  ]
- },
- {
   "key": "Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte.",
   "placeholders": 0,
   "uses": [
@@ -1626,38 +1619,10 @@
   ]
  },
  {
-  "key": "Rechercher un widget",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:55: .accessibilityLabel(Text(tr(\"Rechercher un widget\")))"
-  ]
- },
- {
   "key": "Profil et réglages",
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/HomeView.swift:69: .accessibilityLabel(Text(tr(\"Profil et réglages\")))"
-  ]
- },
- {
-  "key": "Bonjour",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:146: case 5..<12: return tr(\"Bonjour\")"
-  ]
- },
- {
-  "key": "Bon après-midi",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:147: case 12..<18: return tr(\"Bon après-midi\")"
-  ]
- },
- {
-  "key": "Bonsoir",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:148: default: return tr(\"Bonsoir\")"
   ]
  },
  {
@@ -1669,46 +1634,11 @@
   ]
  },
  {
-  "key": "Crée ton premier widget",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:166: Text(tr(\"Crée ton premier widget\"))"
-  ]
- },
- {
-  "key": "Choisis une catégorie, personnalise ton widget, puis ajoute-le à ton écran d'accueil.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:168: Text(tr(\"Choisis une catégorie, personnalise ton widget, puis ajoute-le à ton écran d'accueil.\"))"
-  ]
- },
- {
   "key": "Créer un widget",
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/HomeView.swift:174: Label(tr(\"Créer un widget\"), systemImage: \"plus.square.on.square\")",
    "App/Screens/MyWidgets/MyWidgetsView.swift:139: .accessibilityLabel(Text(tr(\"Créer un widget\")))"
-  ]
- },
- {
-  "key": "Tes widgets comme sur ton écran d'accueil · touche-en un pour le modifier",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:207: Text(tr(\"Tes widgets comme sur ton écran d'accueil · touche-en un pour le modifier\"))"
-  ]
- },
- {
-  "key": "Populaires",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:270: case .popular: tr(\"Populaires\")"
-  ]
- },
- {
-  "key": "Ouvre le Store",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:319: .accessibilityHint(Text(tr(\"Ouvre le Store\")))"
   ]
  },
  {

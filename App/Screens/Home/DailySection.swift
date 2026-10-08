@@ -23,6 +23,8 @@ struct DailySection: View {
         let settings = model.settings
         let automatic = DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil))
         let tiles = DailyBrief.arranged(automatic, order: settings.dailyOrder, hidden: settings.dailyHidden)
+        // Real figures entered by the person (invitations to fill in a category don't count).
+        let hasData = automatic.contains { if case .invite = $0 { false } else { true } }
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 3) {
@@ -42,7 +44,7 @@ struct DailySection: View {
                     }
                     .accessibilityIdentifier("daily-data")
                     // Discreet: the size, order and choice of the cards, right here on Home.
-                    if !automatic.isEmpty {
+                    if hasData {
                         Button {
                             editingLayout = true
                         } label: {
@@ -56,9 +58,11 @@ struct DailySection: View {
                     }
                 }
             }
-            if tiles.isEmpty {
+            // Nothing entered yet: Mon Quotidien asks for the information, the invitations follow.
+            if !hasData {
                 emptyState
-            } else {
+            }
+            if !tiles.isEmpty {
                 VStack(spacing: 12) {
                     ForEach(Array(DailyBrief.rows(tiles, wide: settings.dailyWide).enumerated()), id: \.offset) { pair in
                         HStack(alignment: .top, spacing: 12) {
@@ -80,11 +84,12 @@ struct DailySection: View {
         }
     }
 
-    /// Nothing entered yet: what « Mon Quotidien » will show, and where to start. No fake figure.
+    /// Nothing entered yet: « Mon Quotidien » asks for the person's information. No fake figure.
     private var emptyState: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label(tr("Ton quotidien apparaîtra ici"), systemImage: "sun.max")
+            Label(tr("Complète tes informations pour personnaliser ton Mon Quotidien."), systemImage: "sun.max")
                 .font(.headline)
+                .fixedSize(horizontal: false, vertical: true)
             Text(tr("Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)

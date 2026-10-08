@@ -1330,14 +1330,6 @@
   ]
  },
  {
-  "key": "Nouveautés",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:363: MagazineHeader(eyebrow: tr(\"Vient d'arriver\"), title: tr(\"Nouveautés\"))",
-   "App/Screens/Home/HomeView.swift:269: case .new: tr(\"Nouveautés\")"
-  ]
- },
- {
   "key": "Catégories",
   "placeholders": 0,
   "uses": [

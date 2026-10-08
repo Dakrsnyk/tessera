@@ -296,13 +296,6 @@
   ]
  },
  {
-  "key": "Tes mini-apps",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Tutorial/Tutorial.swift:67: case .miniApps: tr(\"Tes mini-apps\")"
-  ]
- },
- {
   "key": "Le Studio",
   "placeholders": 0,
   "uses": [
@@ -342,13 +335,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Tutorial/Tutorial.swift:83: tr(\"Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.\")"
-  ]
- },
- {
-  "key": "Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Tutorial/Tutorial.swift:85: tr(\"Nutrition, Fitness, Planning, Finances, Voyage… Chaque carte ouvre une app complète, et tes widgets affichent ce que tu y notes.\")"
   ]
  },
  {
