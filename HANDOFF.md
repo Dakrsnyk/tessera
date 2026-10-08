@@ -1,21 +1,31 @@
-# État de la localisation (mis à jour le 2026-10-08)
+# État de Tessera (mis à jour le 2026-10-08)
 
-Langues : français (source) + en, es, de, it, pt-BR, ja. Le chinois (zh-Hans) et le coréen (ko) ont été retirés à la demande de l'utilisateur (traductions de mauvaise qualité ; récupérables dans l'historique git, avant le commit 5ee621c).
+## Localisation — terminée
+Français (source) + en, es, de, it, pt-BR, ja. Chinois et coréen retirés (récupérables avant 5ee621c).
+`l10n_catalog.py extract|merge|build|check|sync`, lots `l10n/parts/NN.<langue>.json` (01–21), `tr("mot", context: "x")` pour les mots à double sens. Tag `[langs]` = captures des écrans clés dans les 6 langues.
 
-## Fait
-- Lots 01–20 complets dans `l10n/parts/NN.<langue>.json` (`l10n_chunk_check.py NN` OK pour chacun).
-- Japonais des lots 13, 15, 17 et 18 retraduit depuis le français (il était resté en anglais ou mélangé).
-- Clés ré-extraites : 4873 clés, rattachement des clés tronquées (« mê)me »…).
-- Pluriels construits avec `"s"` remplacés par `Fmt.plural` ; « de plus / de moins » en deux phrases.
-- Mots à double sens séparés avec `tr("mot", context: "x")` → clé `"mot [x]"` (Note, Notes, Moyennes, Taille, Retour, ans, Barre, Cartes, Actif ; singulier de cours, repas, mois).
-- Catalogues : `l10n_catalog.py merge` → `build` → `Shared/Localizable.xcstrings` (app + extension) et `App/InfoPlist.xcstrings` (nom affiché, autorisations). `check` et `sync` : 0 manquante.
-- CI : `l10n_catalog.py sync` affiché dans le rapport ; tag `[langs]` = captures des écrans clés en en/de/ja/es/it/pt-BR (fichiers `<langue>-<écran>-light.jpg` dans ci-report).
-- `[daily]` du 2026-10-08 (run 108) : compile, 173 tests OK, 1 échec `ProfileUITests.testAPackOpensInTheStudio` (« Le widget 2 ne s'ouvre pas » : le toucher sur la puce du Studio n'a pas sélectionné le widget ; passait aux 3 runs précédents, probablement instable, non lié aux textes — l'app est en français pendant les tests).
+## Améliorations du 2026-10-08 (demande en 21 points)
+Abandonnés à la demande de l'utilisateur : iPad, Apple Watch.
 
-## Reste à faire
-1. Captures `[langs]` relues (runs 109 et 111) : libellés coupés raccourcis, Prénom/Nom et priorité « Moyenne » corrigés, données d'exemple dans la langue capturée. Run 111 : tout compile, sync 0 écart. Relancer `[langs]` après tout changement de texte visible.
-2. Décider pour le test instable ci-dessus (relancer `[daily]` ou ajouter un second essai comme dans e940e31).
-3. Relecture des traductions par des locuteurs natifs si possible (surtout ja).
+Fait :
+- Scan code-barres : jamais d'écran vide (formes UPC/EAN, calories en kJ / par portion / depuis les macros, fiche incomplète → aliment perso prérempli, introuvable / hors ligne → message + « Créer cet aliment »).
+- Séance : une seule source de vérité (notification `workoutSavedOutside` quand l'écran verrouillé change la séance), activité en direct redessinée à la fin du repos, aux couleurs / police du style (AppStyle est dans Shared).
+- Navigation par jour (`DaySwitcher` : précédent / suivant / calendrier / aujourd'hui) : Nutrition, Planning, Tâches, Habitudes (2 écrans), Fitness.
+- Flèche « ‹ Retour » sur une tâche ou une habitude existante (`BackArrowButton`, `SheetForm.closesWithBackArrow`).
+- Accueil fixe : `DailyPager` change de vue sur un balayage franc, sans suivre le doigt.
+- Base alimentaire : Fichier canadien sur les éléments nutritifs (5 596 aliments fr/en, `scripts/cnf_build.py` → `App/Resources/cnf-foods.json`, `NutrientFile`), Open Food Facts lancé automatiquement si peu de résultats.
+- Photo du repas : Vision d'Apple sur l'iPhone (pas d'IA en ligne, choix de l'utilisateur) → aliments candidats → quantités et macros estimées (≈) → correction → « Ajouter au journal ».
+- Mon Quotidien : Nutrition puis séance du jour en tête ; invitations limitées ; bouton de disposition sous « Mes données » (ordre, ½ / Large, masquer ; `AppSettings.dailyOrder/dailyHidden/dailyWide`).
+- Fond : `screenGradient` (dégradé discret calculé depuis le style).
+- Store : « À découvrir cette semaine » (`TemplateCatalog.weeklyPick`, tirage par semaine ISO).
+- Personnages des démonstrations : +12 % corps / +18 % muscles au rendu (`DemoRenderer.bodyBulk`). Ne pas régénérer `ExerciseDemos.json` sur Windows sans vérifier : l'export local ne reproduit pas le fichier du dépôt (et écrit en cp1252 sans `PYTHONUTF8=1`).
+
+## Outils
+- Hook `.git/hooks/pre-commit` : check_swift.py + `l10n_catalog.py sync` (bloque un texte non traduit).
+- `bash scripts/ci_report.sh [run]` : attend la CI et n'affiche que statuts, tests échoués, erreurs, l10n.
+
+## Tests instables connus (non liés aux changements, à surveiller)
+`ProfileUITests.testAPackOpensInTheStudio` (run 108) et `StudioUITests.testTheStudioChangesTheWidgetAndKeepsItAll` (run 113) : un toucher sur une puce du Studio parfois non pris en compte. Piste : second essai comme dans e940e31.
 
 ## Ensuite
-Compte Apple Developer, TestFlight signé via GitHub Actions, fiche App Store + politique de confidentialité (PRIVACY.md existe), marketing. Repasser le dépôt en privé.
+Compte Apple Developer, TestFlight signé via GitHub Actions, fiche App Store + politique de confidentialité (PRIVACY.md existe, à compléter pour la photo du repas : analysée sur l'iPhone, rien n'est envoyé), marketing. Repasser le dépôt en privé.
