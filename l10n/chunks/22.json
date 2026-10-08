@@ -1,0 +1,541 @@
+[
+ {
+  "key": "Athlète",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:173: combo(\"athlete\", tr(\"Athlète\"), tr(\"Ton mois d'entraînement, tes calories et ta régularité.\"), .synthwave, \"FF2A6D\","
+  ]
+ },
+ {
+  "key": "Au volant",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:155: combo(\"km-echeances\", tr(\"Au volant\"), tr(\"Ton kilométrage et les prochaines échéances.\"), .carbon, \"6B7280\","
+  ]
+ },
+ {
+  "key": "Aube",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:460: id: .dawn, name: tr(\"Aube\"), tagline: tr(\"Pêche et corail d'un lever de soleil\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Bientôt",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain compte à rebours et le prochain anniversaire.\"), .blossom, \"D13F72\","
+  ]
+ },
+ {
+  "key": "Bleu de glace, net et lumineux",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:519: id: .glacier, name: tr(\"Glacier\"), tagline: tr(\"Bleu de glace, net et lumineux\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Bon élève",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:151: combo(\"moyenne-etude\", tr(\"Bon élève\"), tr(\"Ta moyenne et tes heures d'étude.\"), .blossom, \"6D4AE8\","
+  ]
+ },
+ {
+  "key": "Bulletin météo",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:161: combo(\"ciel-complet\", tr(\"Bulletin météo\"), tr(\"Détails, vent, pluie et soleil.\"), .glacier, \"3366FF\","
+  ]
+ },
+ {
+  "key": "Ce que j'ai mangé",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:143: combo(\"repas-reste\", tr(\"Ce que j'ai mangé\"), tr(\"Tes repas du jour et les calories qui restent.\"), .dune, \"F08A24\","
+  ]
+ },
+ {
+  "key": "Ce qui entre et sort, ta valeur nette et une dépense rapide.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:177: combo(\"flux-argent\", tr(\"Flux d'argent\"), tr(\"Ce qui entre et sort, ta valeur nette et une dépense rapide.\"), .lagoon, \"2B9A66\","
+  ]
+ },
+ {
+  "key": "Ce qui sort",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:175: combo(\"factures-abonnements\", tr(\"Ce qui sort\"), tr(\"Tes factures à venir et tes abonnements.\"), .glacier, \"E4533D\","
+  ]
+ },
+ {
+  "key": "Ce qui vient",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Ton prochain rendez-vous et tes tâches.\"), .forest, \"2B7A4B\","
+  ]
+ },
+ {
+  "key": "Ce qui vient et l'avancement de ton projet.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:165: combo(\"productivite-totale\", tr(\"Bureau\"), tr(\"Ce qui vient et l'avancement de ton projet.\"), .matteBlack, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Cerisier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:488: id: .blossom, name: tr(\"Cerisier\"), tagline: tr(\"Rose tendre, formes rondes\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Combinés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:29: case .combos: tr(\"Combinés\")"
+  ]
+ },
+ {
+  "key": "Dehors",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:133: combo(\"soleil-vent\", tr(\"Dehors\"), tr(\"Le soleil, le vent et l'indice UV.\"), .dawn, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Des ensembles de widgets pour un usage : études, sport, voyage…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:53: case .packs: tr(\"Des ensembles de widgets pour un usage : études, sport, voyage…\")"
+  ]
+ },
+ {
+  "key": "Des écrans d'accueil complets : widgets et fond d'écran assortis.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:50: case .screens: tr(\"Des écrans d'accueil complets : widgets et fond d'écran assortis.\")"
+  ]
+ },
+ {
+  "key": "Détails, vent, pluie et soleil.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:161: combo(\"ciel-complet\", tr(\"Bulletin météo\"), tr(\"Détails, vent, pluie et soleil.\"), .glacier, \"3366FF\","
+  ]
+ },
+ {
+  "key": "En bourse",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:191: combo(\"bourse-societes\", tr(\"En bourse\"), tr(\"Les revenus d'une société, son action et son aperçu.\"), .synthwave, \"8C6CFF\","
+  ]
+ },
+ {
+  "key": "Esprit clair",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Note, compteur, focus et échéance.\"), .paper, \"2F8F7A\","
+  ]
+ },
+ {
+  "key": "Garage",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:187: combo(\"auto-complet\", tr(\"Garage\"), tr(\"Tes échéances, ta consommation et ton kilométrage.\"), .carbon, \"6B7280\","
+  ]
+ },
+ {
+  "key": "Glacier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:519: id: .glacier, name: tr(\"Glacier\"), tagline: tr(\"Bleu de glace, net et lumineux\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "L'année en points et ton âge qui avance.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"L'année en points et ton âge qui avance.\"), .matteBlack, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "L'heure et la phase de la lune.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:127: combo(\"heure-lune\", tr(\"Nuit claire\"), tr(\"L'heure et la phase de la lune.\"), .synthwave, \"FF2A6D\","
+  ]
+ },
+ {
+  "key": "La météo du jour et les prévisions de la semaine.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:163: combo(\"semaine-meteo\", tr(\"La semaine dehors\"), tr(\"La météo du jour et les prévisions de la semaine.\"), .lagoon, \"1CB5E0\","
+  ]
+ },
+ {
+  "key": "La météo et la prochaine pluie.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:131: combo(\"meteo-pluie\", tr(\"Parapluie ?\"), tr(\"La météo et la prochaine pluie.\"), .glacier, \"3366FF\","
+  ]
+ },
+ {
+  "key": "La semaine dehors",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:163: combo(\"semaine-meteo\", tr(\"La semaine dehors\"), tr(\"La météo du jour et les prévisions de la semaine.\"), .lagoon, \"1CB5E0\","
+  ]
+ },
+ {
+  "key": "La sélection de la semaine et ce qui te correspond.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:49: case .featured: tr(\"La sélection de la semaine et ce qui te correspond.\")"
+  ]
+ },
+ {
+  "key": "Lagon",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:469: id: .lagoon, name: tr(\"Lagon\"), tagline: tr(\"Turquoise profond, chiffres nets\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Le départ, le vol, l'hôtel et le séjour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:185: combo(\"voyage-complet\", tr(\"Valise prête\"), tr(\"Le départ, le vol, l'hôtel et le séjour.\"), .dawn, \"3366FF\","
+  ]
+ },
+ {
+  "key": "Le fil des ans",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"L'année en points et ton âge qui avance.\"), .matteBlack, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Le minuteur et tes heures de travail profond.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:139: combo(\"focus-profond\", tr(\"Concentration\"), tr(\"Le minuteur et tes heures de travail profond.\"), .lagoon, \"1CB5E0\","
+  ]
+ },
+ {
+  "key": "Le mois, ton anniversaire et le prochain jour férié.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton anniversaire et le prochain jour férié.\"), .forest, \"2B7A4B\","
+  ]
+ },
+ {
+  "key": "Le même widget dans chaque style : choisis l'allure qui te plaît.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:54: case .styles: tr(\"Le même widget dans chaque style : choisis l'allure qui te plaît.\")"
+  ]
+ },
+ {
+  "key": "Le soleil, le vent et l'indice UV.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:133: combo(\"soleil-vent\", tr(\"Dehors\"), tr(\"Le soleil, le vent et l'indice UV.\"), .dawn, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Les marchés",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, la crypto et le marché.\"), .matteBlack, \"22D3EE\","
+  ]
+ },
+ {
+  "key": "Les revenus d'une société, son action et son aperçu.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:191: combo(\"bourse-societes\", tr(\"En bourse\"), tr(\"Les revenus d'une société, son action et son aperçu.\"), .synthwave, \"8C6CFF\","
+  ]
+ },
+ {
+  "key": "Mes dates",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton anniversaire et le prochain jour férié.\"), .forest, \"2B7A4B\","
+  ]
+ },
+ {
+  "key": "Mousse, papier et titres à empattements",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:478: id: .forest, name: tr(\"Sous-bois\"), tagline: tr(\"Mousse, papier et titres à empattements\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Noir mat",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:498: id: .matteBlack, name: tr(\"Noir mat\"), tagline: tr(\"Noir profond, fil fin, rien de trop\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Noir profond, fil fin, rien de trop",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:498: id: .matteBlack, name: tr(\"Noir mat\"), tagline: tr(\"Noir profond, fil fin, rien de trop\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Note, compteur, focus et échéance.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Note, compteur, focus et échéance.\"), .paper, \"2F8F7A\","
+  ]
+ },
+ {
+  "key": "Nuit claire",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:127: combo(\"heure-lune\", tr(\"Nuit claire\"), tr(\"L'heure et la phase de la lune.\"), .synthwave, \"FF2A6D\","
+  ]
+ },
+ {
+  "key": "Nuit violette et néon rose",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:528: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Parapluie ?",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:131: combo(\"meteo-pluie\", tr(\"Parapluie ?\"), tr(\"La météo et la prochaine pluie.\"), .glacier, \"3366FF\","
+  ]
+ },
+ {
+  "key": "Patrimoine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:147: combo(\"patrimoine-abonnements\", tr(\"Patrimoine\"), tr(\"Ta valeur nette et tes abonnements.\"), .glacier, \"2B9A66\","
+  ]
+ },
+ {
+  "key": "Plusieurs widgets réunis en un seul, prêts à poser.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:52: case .combos: tr(\"Plusieurs widgets réunis en un seul, prêts à poser.\")"
+  ]
+ },
+ {
+  "key": "Pêche et corail d'un lever de soleil",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:460: id: .dawn, name: tr(\"Aube\"), tagline: tr(\"Pêche et corail d'un lever de soleil\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Rose tendre, formes rondes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:488: id: .blossom, name: tr(\"Cerisier\"), tagline: tr(\"Rose tendre, formes rondes\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Réservations",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:153: combo(\"vol-hotel\", tr(\"Réservations\"), tr(\"Ton vol et ton hôtel, côte à côte.\"), .dawn, \"3366FF\","
+  ]
+ },
+ {
+  "key": "Sable chaud, grain et serif",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:510: id: .dune, name: tr(\"Dune\"), tagline: tr(\"Sable chaud, grain et serif\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Semaine d'études",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:183: combo(\"etudes-semaine\", tr(\"Semaine d'études\"), tr(\"Tes travaux à rendre, ta moyenne et une fiche.\"), .blossom, \"6D4AE8\","
+  ]
+ },
+ {
+  "key": "Sous-bois",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:478: id: .forest, name: tr(\"Sous-bois\"), tagline: tr(\"Mousse, papier et titres à empattements\"), isPremium: false,"
+  ]
+ },
+ {
+  "key": "Synthwave",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:528: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Ta liste de suivi, la crypto et le marché.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, la crypto et le marché.\"), .matteBlack, \"22D3EE\","
+  ]
+ },
+ {
+  "key": "Ta moyenne et tes heures d'étude.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:151: combo(\"moyenne-etude\", tr(\"Bon élève\"), tr(\"Ta moyenne et tes heures d'étude.\"), .blossom, \"6D4AE8\","
+  ]
+ },
+ {
+  "key": "Ta semaine d'habitudes, ton taux et ton eau.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:169: combo(\"habitudes-semaine\", tr(\"Bonnes habitudes\"), tr(\"Ta semaine d'habitudes, ton taux et ton eau.\"), .forest, \"7FA33A\","
+  ]
+ },
+ {
+  "key": "Ta valeur nette et tes abonnements.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:147: combo(\"patrimoine-abonnements\", tr(\"Patrimoine\"), tr(\"Ta valeur nette et tes abonnements.\"), .glacier, \"2B9A66\","
+  ]
+ },
+ {
+  "key": "Tes calories de la semaine, tes protéines et le prochain repas.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:171: combo(\"nutrition-semaine\", tr(\"Semaine nutrition\"), tr(\"Tes calories de la semaine, tes protéines et le prochain repas.\"), .dune, \"F08A24\","
+  ]
+ },
+ {
+  "key": "Tes factures à venir et tes abonnements.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:175: combo(\"factures-abonnements\", tr(\"Ce qui sort\"), tr(\"Tes factures à venir et tes abonnements.\"), .glacier, \"E4533D\","
+  ]
+ },
+ {
+  "key": "Tes indicateurs, ton MRR et les ventes du jour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:181: combo(\"tableau-business\", tr(\"Tableau de bord\"), tr(\"Tes indicateurs, ton MRR et les ventes du jour.\"), .dawn, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Tes records et le volume de la semaine.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:145: combo(\"records-volume\", tr(\"Progression\"), tr(\"Tes records et le volume de la semaine.\"), .matteBlack, \"E5484D\","
+  ]
+ },
+ {
+  "key": "Tes repas du jour et les calories qui restent.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:143: combo(\"repas-reste\", tr(\"Ce que j'ai mangé\"), tr(\"Tes repas du jour et les calories qui restent.\"), .dune, \"F08A24\","
+  ]
+ },
+ {
+  "key": "Tes revenus récurrents et les ventes du jour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:149: combo(\"mrr-jour\", tr(\"Revenus\"), tr(\"Tes revenus récurrents et les ventes du jour.\"), .lagoon, \"2F8F7A\","
+  ]
+ },
+ {
+  "key": "Tes travaux à rendre, ta moyenne et une fiche.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:183: combo(\"etudes-semaine\", tr(\"Semaine d'études\"), tr(\"Tes travaux à rendre, ta moyenne et une fiche.\"), .blossom, \"6D4AE8\","
+  ]
+ },
+ {
+  "key": "Tes échéances, ta consommation et ton kilométrage.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:187: combo(\"auto-complet\", tr(\"Garage\"), tr(\"Tes échéances, ta consommation et ton kilométrage.\"), .carbon, \"6B7280\","
+  ]
+ },
+ {
+  "key": "Ton kilométrage et les prochaines échéances.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:155: combo(\"km-echeances\", tr(\"Au volant\"), tr(\"Ton kilométrage et les prochaines échéances.\"), .carbon, \"6B7280\","
+  ]
+ },
+ {
+  "key": "Ton mois d'entraînement, tes calories et ta régularité.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:173: combo(\"athlete\", tr(\"Athlète\"), tr(\"Ton mois d'entraînement, tes calories et ta régularité.\"), .synthwave, \"FF2A6D\","
+  ]
+ },
+ {
+  "key": "Ton prochain compte à rebours et le prochain anniversaire.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain compte à rebours et le prochain anniversaire.\"), .blossom, \"D13F72\","
+  ]
+ },
+ {
+  "key": "Ton prochain rendez-vous et tes tâches.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Ton prochain rendez-vous et tes tâches.\"), .forest, \"2B7A4B\","
+  ]
+ },
+ {
+  "key": "Ton taux de réussite et ta série.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:141: combo(\"taux-serie\", tr(\"Régularité\"), tr(\"Ton taux de réussite et ta série.\"), .forest, \"7FA33A\","
+  ]
+ },
+ {
+  "key": "Ton vol et ton hôtel, côte à côte.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:153: combo(\"vol-hotel\", tr(\"Réservations\"), tr(\"Ton vol et ton hôtel, côte à côte.\"), .dawn, \"3366FF\","
+  ]
+ },
+ {
+  "key": "Turquoise profond, chiffres nets",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:469: id: .lagoon, name: tr(\"Lagon\"), tagline: tr(\"Turquoise profond, chiffres nets\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Un widget à la fois, rangé par thème : temps, santé, argent…",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:51: case .widgets: tr(\"Un widget à la fois, rangé par thème : temps, santé, argent…\")"
+  ]
+ },
+ {
+  "key": "Une note et un compteur sous les yeux.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:135: combo(\"note-compteur\", tr(\"Pense-bête\"), tr(\"Une note et un compteur sous les yeux.\"), .paper, \"2F8F7A\","
+  ]
+ },
+ {
+  "key": "Valise prête",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:185: combo(\"voyage-complet\", tr(\"Valise prête\"), tr(\"Le départ, le vol, l'hôtel et le séjour.\"), .dawn, \"3366FF\","
+  ]
+ },
+ {
+  "key": "À la une",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:26: case .featured: tr(\"À la une\")"
+  ]
+ }
+]

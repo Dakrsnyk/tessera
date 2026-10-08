@@ -1,8 +1,9 @@
 import SwiftUI
 import WidgetKit
 
-/// The Store, laid out like a magazine: this week's Home Screen on the cover, then complete screens,
-/// combinations, packs, collections and single widgets, each under a clear heading.
+/// The Store, in aisles: one row at the top picks what to look at (the week's picks, complete Home
+/// Screens, single widgets, combinations, packs, styles), each aisle says in one line what it holds and
+/// shows only that. Search and filters work across everything.
 struct ExploreView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -12,7 +13,48 @@ struct ExploreView: View {
     @State private var isSearchPresented = false
     @State private var openedPack: WidgetPack?
     @State private var openedSetup: HomeSetup?
+    @State private var aisle: StoreAisle = .featured
     @AppStorage(SetupFavorites.key) private var favoritesRaw = ""
+
+    /// The aisles of the Store, from the week's picks to the styles.
+    enum StoreAisle: String, CaseIterable, Identifiable {
+        case featured, screens, widgets, combos, packs, styles
+        var id: String { rawValue }
+
+        var title: String {
+            switch self {
+            case .featured: tr("À la une")
+            case .screens: tr("Écrans d'accueil")
+            case .widgets: tr("Widgets")
+            case .combos: tr("Combinés")
+            case .packs: tr("Packs")
+            case .styles: tr("Styles")
+            }
+        }
+
+        var symbol: String {
+            switch self {
+            case .featured: "star.fill"
+            case .screens: "iphone"
+            case .widgets: "square.grid.2x2.fill"
+            case .combos: "square.split.2x2.fill"
+            case .packs: "shippingbox.fill"
+            case .styles: "paintpalette.fill"
+            }
+        }
+
+        /// What the aisle holds, in one line.
+        var hint: String {
+            switch self {
+            case .featured: tr("La sélection de la semaine et ce qui te correspond.")
+            case .screens: tr("Des écrans d'accueil complets : widgets et fond d'écran assortis.")
+            case .widgets: tr("Un widget à la fois, rangé par thème : temps, santé, argent…")
+            case .combos: tr("Plusieurs widgets réunis en un seul, prêts à poser.")
+            case .packs: tr("Des ensembles de widgets pour un usage : études, sport, voyage…")
+            case .styles: tr("Le même widget dans chaque style : choisis l'allure qui te plaît.")
+            }
+        }
+    }
 
     enum AccessFilter: String, CaseIterable, Identifiable {
         case all, free, premium
@@ -60,7 +102,10 @@ struct ExploreView: View {
                     proxy.scrollTo(Self.top, anchor: .top)
                 }
                 .onChange(of: router.tutorialStep) { _, step in
-                    if step == .store { withAnimation { proxy.scrollTo(Self.top, anchor: .top) } }
+                    if step == .store {
+                        aisle = .featured
+                        withAnimation { proxy.scrollTo(Self.top, anchor: .top) }
+                    }
                 }
             }
             .background(.screenGradient)
@@ -124,35 +169,66 @@ struct ExploreView: View {
     // MARK: - Magazine
 
     private var magazine: some View {
-        let weekly = HomeSetupCatalog.weekly()
-        return LazyVStack(alignment: .leading, spacing: 38) {
-            VStack(alignment: .leading, spacing: 14) {
-                Text(Fmt.longDay(Date()).uppercased())
-                    .font(.caption.weight(.bold))
-                    .tracking(1.1)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal, 20)
-                WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
-                    openedSetup = weekly
+        VStack(alignment: .leading, spacing: 26) {
+            aisleBar
+            LazyVStack(alignment: .leading, spacing: 38) {
+                switch aisle {
+                case .featured:
+                    let weekly = HomeSetupCatalog.weekly()
+                    VStack(alignment: .leading, spacing: 14) {
+                        Text(Fmt.longDay(Date()).uppercased())
+                            .font(.caption.weight(.bold))
+                            .tracking(1.1)
+                            .foregroundStyle(.secondary)
+                            .padding(.horizontal, 20)
+                        WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
+                            openedSetup = weekly
+                        }
+                        .tutorialTarget(.storeHero)
+                    }
+                    if !forYou.isEmpty {
+                        forYouSection
+                    }
+                    newestSection
+                case .screens:
+                    setupsSection(excluding: "")
+                case .widgets:
+                    categoriesSection
+                    essentialsSection
+                    lockScreenSection
+                case .combos:
+                    combosSection
+                case .packs:
+                    packsSection
+                    collectionsSection
+                case .styles:
+                    stylesSection
                 }
-                .tutorialTarget(.storeHero)
-            }
-            setupsSection(excluding: weekly.id)
-            if !forYou.isEmpty {
-                forYouSection
-            }
-            combosSection
-            packsSection
-            collectionsSection
-            Group {
-                essentialsSection
-                lockScreenSection
-                stylesSection
-                newestSection
-                categoriesSection
             }
         }
         .padding(.top, 2)
+    }
+
+    /// The aisles, one tap away, and what the one chosen holds.
+    private var aisleBar: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(StoreAisle.allCases) { item in
+                        FilterChip(title: item.title, symbol: item.symbol, isSelected: aisle == item) {
+                            withAnimation(.snappy) { aisle = item }
+                        }
+                        .accessibilityIdentifier("store-aisle-\(item.rawValue)")
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+            Text(aisle.hint)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 20)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 
     /// Complete Home Screens, drawn as on a real iPhone.

@@ -67,7 +67,9 @@ enum StoreComboCatalog {
     static let all: [StoreCombo] = mediums + larges
 
     /// Two small widgets side by side, in a medium widget.
-    static let mediums: [StoreCombo] = [
+    static let mediums: [StoreCombo] = firstMediums + moreMediums
+
+    private static let firstMediums: [StoreCombo] = [
         combo("jour-annee", tr("Jour et année"), tr("Où en est ta journée, et ton année."), .minimal, "2F8F7A",
               [s(.progress, "progress-day"), s(.progress, "progress-year")]),
         combo("heure-mois", tr("L'heure et le mois"), tr("L'heure d'un côté, le calendrier de l'autre."), .monochrome, "6B7280",
@@ -118,8 +120,82 @@ enum StoreComboCatalog {
               [s(.crypto, "crypto-dark"), s(.marketOverview)]),
     ]
 
+    /// More pairs, across every category and many styles.
+    static let moreMediums: [StoreCombo] = [
+        combo("compte-anniv", tr("Bientôt"), tr("Ton prochain compte à rebours et le prochain anniversaire."), .blossom, "D13F72",
+              [s(.countdown), s(.birthday)]),
+        combo("heure-lune", tr("Nuit claire"), tr("L'heure et la phase de la lune."), .synthwave, "FF2A6D",
+              [s(.clock), s(.moonPhase)]),
+        combo("annee-age", tr("Le fil des ans"), tr("L'année en points et ton âge qui avance."), .matteBlack, "F2A33A",
+              [s(.yearDots), s(.ageProgress)]),
+        combo("meteo-pluie", tr("Parapluie ?"), tr("La météo et la prochaine pluie."), .glacier, "3366FF",
+              [s(.weather), s(.rainNext)]),
+        combo("soleil-vent", tr("Dehors"), tr("Le soleil, le vent et l'indice UV."), .dawn, "F2A33A",
+              [s(.sunCycle), s(.windUV)]),
+        combo("note-compteur", tr("Pense-bête"), tr("Une note et un compteur sous les yeux."), .paper, "2F8F7A",
+              [s(.note), s(.counter)]),
+        combo("agenda-taches", tr("Ce qui vient"), tr("Ton prochain rendez-vous et tes tâches."), .forest, "2B7A4B",
+              [s(.upNext), s(.tasks)]),
+        combo("focus-profond", tr("Concentration"), tr("Le minuteur et tes heures de travail profond."), .lagoon, "1CB5E0",
+              [s(.deepWork), s(.focus)]),
+        combo("taux-serie", tr("Régularité"), tr("Ton taux de réussite et ta série."), .forest, "7FA33A",
+              [s(.habitRate), s(.habitStreak)]),
+        combo("repas-reste", tr("Ce que j'ai mangé"), tr("Tes repas du jour et les calories qui restent."), .dune, "F08A24",
+              [s(.mealsToday), s(.caloriesLeft)]),
+        combo("records-volume", tr("Progression"), tr("Tes records et le volume de la semaine."), .matteBlack, "E5484D",
+              [s(.personalRecords), s(.weeklyVolume)]),
+        combo("patrimoine-abonnements", tr("Patrimoine"), tr("Ta valeur nette et tes abonnements."), .glacier, "2B9A66",
+              [s(.netWorth), s(.subscriptions)]),
+        combo("mrr-jour", tr("Revenus"), tr("Tes revenus récurrents et les ventes du jour."), .lagoon, "2F8F7A",
+              [s(.mrr), s(.revenueToday)]),
+        combo("moyenne-etude", tr("Bon élève"), tr("Ta moyenne et tes heures d'étude."), .blossom, "6D4AE8",
+              [s(.gradeAverage), s(.studyHours)]),
+        combo("vol-hotel", tr("Réservations"), tr("Ton vol et ton hôtel, côte à côte."), .dawn, "3366FF",
+              [s(.flight), s(.hotel)]),
+        combo("km-echeances", tr("Au volant"), tr("Ton kilométrage et les prochaines échéances."), .carbon, "6B7280",
+              [s(.mileage), s(.carDeadlines)]),
+    ]
+
+    /// More large ones, across every category and many styles.
+    static let moreLarges: [StoreCombo] = [
+        combo("ciel-complet", tr("Bulletin météo"), tr("Détails, vent, pluie et soleil."), .glacier, "3366FF",
+              [s(.weatherDetails), s(.windUV), s(.rainNext), s(.sunCycle)]),
+        combo("semaine-meteo", tr("La semaine dehors"), tr("La météo du jour et les prévisions de la semaine."), .lagoon, "1CB5E0",
+              [m(.weather), m(.weeklyForecast)]),
+        combo("productivite-totale", tr("Bureau"), tr("Ce qui vient et l'avancement de ton projet."), .matteBlack, "F2A33A",
+              [m(.upNext), m(.project)]),
+        combo("esprit-clair", tr("Esprit clair"), tr("Note, compteur, focus et échéance."), .paper, "2F8F7A",
+              [s(.note), s(.counter), s(.focus), s(.deadline)]),
+        combo("habitudes-semaine", tr("Bonnes habitudes"), tr("Ta semaine d'habitudes, ton taux et ton eau."), .forest, "7FA33A",
+              [m(.habitWeek), s(.habitRate), s(.hydration)]),
+        combo("nutrition-semaine", tr("Semaine nutrition"), tr("Tes calories de la semaine, tes protéines et le prochain repas."), .dune, "F08A24",
+              [m(.nutritionWeek), s(.proteinLeft), s(.nextMeal)]),
+        combo("athlete", tr("Athlète"), tr("Ton mois d'entraînement, tes calories et ta régularité."), .synthwave, "FF2A6D",
+              [m(.workoutMonth), s(.caloriesBurned), s(.trainingStreak)]),
+        combo("factures-abonnements", tr("Ce qui sort"), tr("Tes factures à venir et tes abonnements."), .glacier, "E4533D",
+              [m(.billsUpcoming), m(.subscriptions)]),
+        combo("flux-argent", tr("Flux d'argent"), tr("Ce qui entre et sort, ta valeur nette et une dépense rapide."), .lagoon, "2B9A66",
+              [m(.moneyFlow), s(.netWorth), s(.quickExpense)]),
+        combo("marches", tr("Les marchés"), tr("Ta liste de suivi, la crypto et le marché."), .matteBlack, "22D3EE",
+              [m(.watchlist), s(.crypto), s(.marketOverview)]),
+        combo("tableau-business", tr("Tableau de bord"), tr("Tes indicateurs, ton MRR et les ventes du jour."), .dawn, "F2A33A",
+              [m(.businessKPIs), s(.mrr), s(.revenueToday)]),
+        combo("etudes-semaine", tr("Semaine d'études"), tr("Tes travaux à rendre, ta moyenne et une fiche."), .blossom, "6D4AE8",
+              [m(.assignments), s(.gradeAverage), s(.flashcard)]),
+        combo("voyage-complet", tr("Valise prête"), tr("Le départ, le vol, l'hôtel et le séjour."), .dawn, "3366FF",
+              [s(.tripCountdown), s(.flight), s(.hotel), s(.tripProgress)]),
+        combo("auto-complet", tr("Garage"), tr("Tes échéances, ta consommation et ton kilométrage."), .carbon, "6B7280",
+              [m(.carDeadlines), s(.fuelStats), s(.mileage)]),
+        combo("temps-perso", tr("Mes dates"), tr("Le mois, ton anniversaire et le prochain jour férié."), .forest, "2B7A4B",
+              [m(.calendar), s(.birthday), s(.holiday)]),
+        combo("bourse-societes", tr("En bourse"), tr("Les revenus d'une société, son action et son aperçu."), .synthwave, "8C6CFF",
+              [m(.companyRevenue), s(.companyStock), s(.companySnapshot)]),
+    ]
+
     /// Four small widgets, two medium ones, or one medium and two small, in a large widget.
-    static let larges: [StoreCombo] = [
+    static let larges: [StoreCombo] = firstLarges + moreLarges
+
+    private static let firstLarges: [StoreCombo] = [
         combo("le-temps", tr("Le temps qui passe"), tr("L'heure, le mois, l'année et les vacances."), .minimal, "F2A33A",
               [s(.clock), s(.calendar), s(.progress, "progress-year"), s(.countdown, "countdown-holidays")]),
         combo("routine", tr("Routine du jour"), tr("Tes habitudes, ton eau et ta série."), .minimal, "8C6CFF",

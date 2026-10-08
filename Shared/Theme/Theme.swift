@@ -7,6 +7,7 @@ enum ThemeID: String, Codable, CaseIterable, Identifiable {
     case modern, card, soft, compact
     case liquidGlass, premium, gradient, neon, editorial, magazine, dashboard, bold, data, luxury, sport, business
     case terminal, blueprint, pastel, paper, brutalist, carbon, vapor, chalk, mist
+    case dawn, lagoon, forest, blossom, matteBlack, dune, glacier, synthwave
     var id: String { rawValue }
 }
 
@@ -453,6 +454,86 @@ enum ThemeCatalog {
             preset: preset {
                 $0.texture = .noise; $0.textureOpacity = 0.25; $0.depth = .soft; $0.shadowOpacity = 0.18
                 $0.border = .solid; $0.borderHex = "FFFFFF"; $0.borderWidth = 1.5; $0.borderOpacity = 0.9; $0.shape = .panel
+            }
+        ),
+        WidgetTheme(
+            id: .dawn, name: tr("Aube"), tagline: tr("Pêche et corail d'un lever de soleil"), isPremium: true,
+            background: .gradient(["FFB88C", "DE6262"]),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.82),
+            tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.18),
+            fontDesign: .rounded, numberWeight: .heavy, titleWeight: .semibold,
+            uppercaseLabels: false, isDarkSurface: true,
+            preset: preset { $0.depth = .soft; $0.shadowOpacity = 0.2; $0.shape = .soft; $0.iconStyle = .circle; $0.chart = .area }
+        ),
+        WidgetTheme(
+            id: .lagoon, name: tr("Lagon"), tagline: tr("Turquoise profond, chiffres nets"), isPremium: true,
+            background: .gradient(["1CB5E0", "0B3D64"]),
+            primary: .fixed("FFFFFF"), secondary: .fixed("D6F3FF"),
+            tint: .fixed("7FF0FF"), panel: .fixed("FFFFFF", 0.14),
+            fontDesign: .default, numberWeight: .semibold, titleWeight: .medium,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset { $0.texture = .diagonal; $0.textureOpacity = 0.2; $0.layout = .graph; $0.chart = .line; $0.shape = .rounded }
+        ),
+        WidgetTheme(
+            id: .forest, name: tr("Sous-bois"), tagline: tr("Mousse, papier et titres à empattements"), isPremium: false,
+            background: .solid(.adaptive(light: "EEF3EA", dark: "18221B")),
+            primary: .adaptive(light: "1F3324", dark: "E6EFE3"),
+            secondary: .adaptive(light: "5E7462", dark: "A3B8A6"),
+            tint: .accent, panel: .adaptive(light: "DDE8D8", dark: "243328"),
+            fontDesign: .serif, numberWeight: .semibold, titleWeight: .semibold,
+            uppercaseLabels: false, isDarkSurface: nil,
+            preset: preset { $0.texture = .paper; $0.textureOpacity = 0.35; $0.shape = .soft; $0.iconStyle = .plain }
+        ),
+        WidgetTheme(
+            id: .blossom, name: tr("Cerisier"), tagline: tr("Rose tendre, formes rondes"), isPremium: true,
+            background: .solid(.adaptive(light: "FFF0F3", dark: "2A1A1F")),
+            primary: .adaptive(light: "4B2530", dark: "FBE7EC"),
+            secondary: .adaptive(light: "A07380", dark: "C9A0AB"),
+            tint: .accent, panel: .adaptive(light: "FFDCE4", dark: "3A242B"),
+            fontDesign: .rounded, numberWeight: .bold, titleWeight: .semibold,
+            uppercaseLabels: false, isDarkSurface: nil,
+            preset: preset { $0.shape = .capsule; $0.iconStyle = .circle; $0.chart = .ring; $0.chartThickness = 1.3 }
+        ),
+        WidgetTheme(
+            id: .matteBlack, name: tr("Noir mat"), tagline: tr("Noir profond, fil fin, rien de trop"), isPremium: true,
+            background: .solid(.fixed("111111")),
+            primary: .fixed("F5F5F5"), secondary: .fixed("F5F5F5", 0.58),
+            tint: .accent, panel: .fixed("FFFFFF", 0.06),
+            fontDesign: .default, numberWeight: .light, titleWeight: .regular,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset {
+                $0.border = .solid; $0.borderHex = "FFFFFF"; $0.borderWidth = 1; $0.borderOpacity = 0.12
+                $0.shape = .square; $0.iconStyle = .none; $0.tracking = 0.6; $0.chart = .sparkline
+            }
+        ),
+        WidgetTheme(
+            id: .dune, name: tr("Dune"), tagline: tr("Sable chaud, grain et serif"), isPremium: true,
+            background: .gradient(["F3E3C3", "D9B98A"]),
+            primary: .fixed("3B2A17"), secondary: .fixed("7A6043"),
+            tint: .accent, panel: .fixed("FFFFFF", 0.35),
+            fontDesign: .serif, numberWeight: .medium, titleWeight: .semibold,
+            uppercaseLabels: false, isDarkSurface: false,
+            preset: preset { $0.texture = .grain; $0.textureOpacity = 0.4; $0.shape = .rounded; $0.iconStyle = .outline }
+        ),
+        WidgetTheme(
+            id: .glacier, name: tr("Glacier"), tagline: tr("Bleu de glace, net et lumineux"), isPremium: false,
+            background: .gradient(["E0F2FF", "A7C7E7"]),
+            primary: .fixed("0F2A44"), secondary: .fixed("4A6A88"),
+            tint: .accent, panel: .fixed("FFFFFF", 0.5),
+            fontDesign: .rounded, numberWeight: .semibold, titleWeight: .medium,
+            uppercaseLabels: false, isDarkSurface: false,
+            preset: preset { $0.depth = .floating; $0.shadowOpacity = 0.2; $0.shape = .rounded; $0.iconStyle = .square }
+        ),
+        WidgetTheme(
+            id: .synthwave, name: tr("Synthwave"), tagline: tr("Nuit violette et néon rose"), isPremium: true,
+            background: .solid(.fixed("0D0221")),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.7),
+            tint: .fixed("FF2A6D"), panel: .fixed("FF2A6D", 0.14),
+            fontDesign: .monospaced, numberWeight: .bold, titleWeight: .semibold,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset {
+                $0.texture = .lines; $0.textureOpacity = 0.25; $0.depth = .glow; $0.shadowHex = "FF2A6D"
+                $0.border = .glow; $0.borderHex = "FF2A6D"; $0.borderWidth = 1.5; $0.borderOpacity = 0.8; $0.chart = .bars
             }
         ),
     ]
