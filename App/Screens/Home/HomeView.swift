@@ -96,6 +96,8 @@ struct HomeView: View {
             .padding(.top, 4)
             .padding(.bottom, 32)
         }
+        // Home scrolls up and down only: never sideways, never a sideways bounce.
+        .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
     }
 
     /// At the 10th opening, once per major version, on a calm Home: nothing open over it, no tour,
