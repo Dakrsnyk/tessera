@@ -20,7 +20,7 @@ jobs:
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
-      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') || contains(github.event.head_commit.message, '[demos]') || contains(github.event.head_commit.message, '[daily]') }}
+      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') || contains(github.event.head_commit.message, '[demos]') || contains(github.event.head_commit.message, '[daily]') || contains(github.event.head_commit.message, '[langs]') }}
       # [demos] runs the logic tests and the exercise sheet UI tests, then the demonstrations of every exercise.
       DEMOS: ${{ contains(github.event.head_commit.message, '[demos]') }}
       # [daily] runs the logic tests and the UI tests of Mon Quotidien, Créer, the Studio and the first launch,
@@ -35,6 +35,8 @@ jobs:
       PLACE: ${{ contains(github.event.head_commit.message, '[place]') }}
       # [shots] builds (IPA included) and takes the screenshots, without the tests.
       SHOTSONLY: ${{ contains(github.event.head_commit.message, '[shots]') }}
+      # [langs] builds and takes the key screens in every translated language (no tests), to spot truncations.
+      LANGS: ${{ contains(github.event.head_commit.message, '[langs]') }}
       # [unit] builds (IPA included) and runs the logic tests only, without the UI tests or screenshots.
       UNIT: ${{ contains(github.event.head_commit.message, '[unit]') }}
       # [check] only compiles for the simulator (fastest way to find compile errors).
@@ -126,7 +128,7 @@ jobs:
 
       - name: Tests (logic and widget placement)
         id: tests
-        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.SHOTSONLY != 'true' && (env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true')
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.SHOTSONLY != 'true' && env.LANGS != 'true' && (env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true')
         continue-on-error: true
         timeout-minutes: 55
         run: |
@@ -302,6 +304,17 @@ jobs:
             WAIT=10 shoot app-weather-dark app-weather top dark
             WAIT=8 shoot home-apps home 0.3 light
           }
+          if [ "$LANGS" = "true" ]; then
+            for pair in en:en_US de:de_DE ja:ja_JP es:es_MX it:it_IT pt-BR:pt_BR; do
+              export SHOT_LANG=${pair%%:*} SHOT_LOCALE=${pair#*:}
+              WAIT=12 shoot $SHOT_LANG-home home top light
+              for screen in home-pages store paywall settings onboarding-sport spaces-lock mywidgets creator-fitness studio-theme app-nutrition app-fitness app-planning app-finances; do
+                WAIT=8 shoot $SHOT_LANG-$screen $screen top light
+              done
+              WAIT=8 shoot $SHOT_LANG-home home top dark
+            done
+            exit 0
+          fi
           if [ "$STUDIO" = "true" ]; then
             brand_shots
             tutorial_shots
