@@ -1,0 +1,288 @@
+{
+  "sourceLanguage": "fr",
+  "strings": {
+    "CFBundleDisplayName": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera"
+          }
+        }
+      }
+    },
+    "NSCalendarsFullAccessUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera zeigt deine nächsten Termine im Widget „Als Nächstes“. Nichts verlässt dein iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera shows your upcoming events in the Up Next widget. Nothing leaves your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera muestra tus próximas citas en el widget Próximo. Nada sale de tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera mostra i tuoi prossimi appuntamenti nel widget In arrivo. Nulla lascia il tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tesseraは「次の予定」ウィジェットに今後の予定を表示します。データがiPhoneの外に出ることはありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Tessera mostra seus próximos compromissos no widget A seguir. Nada sai do seu iPhone."
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Kamera wird nur zum Scannen des Barcodes eines Lebensmittels verwendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The camera is only used to scan a food's barcode."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cámara solo se usa para escanear el código de barras de un alimento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La caméra sert uniquement à scanner le code-barres d'un aliment."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fotocamera serve solo a scansionare il codice a barre di un alimento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラは食品のバーコードを読み取るためだけに使用します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A câmera é usada apenas para ler o código de barras de um alimento."
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Standort wird nur verwendet, um das Wetter in deiner Stadt zu finden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your location is only used to find the weather in your city."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu ubicación solo se usa para encontrar el clima de tu ciudad."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta position sert uniquement à trouver la météo de ta ville."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua posizione serve solo a trovare il meteo della tua città."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置情報はあなたの街の天気を調べるためだけに使用します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua localização é usada apenas para encontrar o clima da sua cidade."
+          }
+        }
+      }
+    },
+    "NSMotionUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera liest deine heutigen Schritte für „Mein Tag“. Nichts verlässt dein iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera reads today's steps for “My Day”. Nothing leaves your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera lee tus pasos del día para «Mi día». Nada sale de tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera lit tes pas du jour pour « Mon Quotidien ». Rien ne quitte ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera legge i tuoi passi di oggi per «La mia giornata». Nulla lascia il tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tesseraは「マイデイ」のために今日の歩数を読み取ります。データがiPhoneの外に出ることはありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Tessera lê seus passos do dia para “Meu dia”. Nada sai do seu iPhone."
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryAddUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera speichert die Hintergrundbilder, die du im Store auswählst, in Fotos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera saves the wallpapers you pick in the Store to Photos."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera guarda en Fotos los fondos de pantalla que eliges en la Tienda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera enregistre dans Photos les fonds d'écran que tu choisis dans le Store."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera salva in Foto gli sfondi che scegli nello Store."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tesseraはストアで選んだ壁紙を写真に保存します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Tessera salva no Fotos os papéis de parede que você escolhe na Loja."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

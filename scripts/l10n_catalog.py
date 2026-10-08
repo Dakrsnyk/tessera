@@ -1,7 +1,8 @@
 """Tessera's translations.
 
     python3 scripts/l10n_catalog.py extract   # l10n/keys.json: every French text and where it is used
-    python3 scripts/l10n_catalog.py build     # Shared/Localizable.xcstrings from l10n/<language>.json
+    python3 scripts/l10n_catalog.py merge     # l10n/<language>.json from the batches l10n/parts/NN.<language>.json
+    python3 scripts/l10n_catalog.py build    # Shared/Localizable.xcstrings from l10n/<language>.json
     python3 scripts/l10n_catalog.py check     # placeholders, missing translations (fails on a broken placeholder)
 
 The code is written in French and `tr("…")` looks the French text up at run time. A translation
@@ -81,6 +82,17 @@ def load(language):
     return json.load(open(path, encoding="utf8")) if os.path.exists(path) else {}
 
 
+def merge():
+    keys = json.load(open(KEYS, encoding="utf8"))
+    for language in LANGUAGES:
+        table = {}
+        for path in sorted(glob.glob(f"l10n/parts/*.{language}.json")):
+            table.update(json.load(open(path, encoding="utf8")))
+        table = {key: table[key] for key in sorted(table) if key in keys}
+        json.dump(table, open(f"l10n/{language}.json", "w", encoding="utf8"), ensure_ascii=False, indent=1)
+        print(f"{language}: {len(table)} translations")
+
+
 def check():
     keys = json.load(open(KEYS, encoding="utf8"))
     broken = []
@@ -131,4 +143,4 @@ def build():
 
 
 if __name__ == "__main__":
-    {"extract": extract, "build": build, "check": check}[sys.argv[1]]()
+    {"extract": extract, "merge": merge, "build": build, "check": check}[sys.argv[1]]()
