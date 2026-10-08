@@ -186,7 +186,7 @@ enum InsightEngine {
         if !content.habits.isEmpty {
             text += tr(" Habitudes du jour : \(habitsDone) sur \(content.habits.count).")
         }
-        var points = [tr("\(openTasks) tâche\(openTasks > 1 ? "s" : "") à faire"), tr("\(doneToday) faite\(doneToday > 1 ? "s" : "") aujourd'hui")]
+        var points = [tr("\(Fmt.plural(openTasks, tr("tâche"), tr("tâches"))) à faire"), tr("\(Fmt.plural(doneToday, tr("faite"), tr("faites"))) aujourd'hui")]
         let best = content.habits.max { $0.streak(asOf: now) < $1.streak(asOf: now) }
         if let best, best.streak(asOf: now) > 1 {
             let line = tr("\(best.name) · série de \(best.streak(asOf: now)) j")
@@ -214,7 +214,7 @@ enum InsightEngine {
         let open = payload.content.tasks.filter { !$0.isDone }.count
         if !payload.content.tasks.isEmpty {
             facts.append(tr("Tâches : \(open)"))
-            parts.append(open == 0 ? tr("toutes tes tâches sont faites") : tr("\(open) tâche\(open > 1 ? "s" : "") à faire"))
+            parts.append(open == 0 ? tr("toutes tes tâches sont faites") : tr("\(Fmt.plural(open, tr("tâche"), tr("tâches"))) à faire"))
         }
         let priorities = payload.domains.productivity.priorities
         if !priorities.isEmpty {

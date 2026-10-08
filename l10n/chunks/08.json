@@ -826,21 +826,6 @@
   ]
  },
  {
-  "key": "%@ faite%@ aujourd'hui",
-  "placeholders": 2,
-  "uses": [
-   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(openTasks) tâche\\(openTasks > 1 ? \"s\" : \"\") à faire\"), tr(\"\\(doneToday) faite\\(doneToday > 1 ? \"s\" : \"\") aujourd'hui\")]"
-  ]
- },
- {
-  "key": "%@ tâche%@ à faire",
-  "placeholders": 2,
-  "uses": [
-   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(openTasks) tâche\\(openTasks > 1 ? \"s\" : \"\") à faire\"), tr(\"\\(doneToday) faite\\(doneToday > 1 ? \"s\" : \"\") aujourd'hui\")]",
-   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(open) tâche\\(open > 1 ? \"s\" : \"\") à faire\"))"
-  ]
- },
- {
   "key": "%@ · série de %@ j",
   "placeholders": 2,
   "uses": [

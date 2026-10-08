@@ -128,7 +128,7 @@ struct FinancesAppView: View {
                 .foregroundStyle(.secondary)
             if comparison.previous > 0, abs(comparison.current - comparison.previous) >= 1 {
                 let difference = comparison.current - comparison.previous
-                Label(tr("\(TF.money(abs(difference), currency)) de \(difference > 0 ? tr("plus") : tr("moins")) que le mois dernier à la même date"),
+                Label(difference > 0 ? tr("\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date") : tr("\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date"),
                       systemImage: difference > 0 ? "arrow.up.right" : "arrow.down.right")
                     .font(.caption)
                     .foregroundStyle(difference > 0 ? Color(hex: Finances.overHex) : Color(hex: Finances.incomeHex))

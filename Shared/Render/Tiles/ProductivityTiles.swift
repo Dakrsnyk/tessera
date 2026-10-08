@@ -46,7 +46,7 @@ enum ProductivityTiles {
         var tile = Tile(title: project.name, symbol: "folder.fill")
         tile.value = Fmt.percent(project.progress)
         let remaining = project.remaining.count
-        var caption = remaining == 0 ? tr("Terminé") : tr("\(remaining) tâche\(remaining > 1 ? "s" : "") restante\(remaining > 1 ? "s" : "")")
+        var caption = remaining == 0 ? tr("Terminé") : Fmt.plural(remaining, tr("tâche restante"), tr("tâches restantes"))
         if let deadline = project.deadline {
             caption += " · \(TF.relativeDay(deadline, from: now))"
             tile.detail = tr("Échéance : \(Fmt.longDay(deadline))")

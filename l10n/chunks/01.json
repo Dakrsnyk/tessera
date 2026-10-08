@@ -1946,13 +1946,6 @@
   ]
  },
  {
-  "key": "%@ mois gratuit%@",
-  "placeholders": 2,
-  "uses": [
-   "App/Premium/PremiumStore.swift:155: case .month: return tr(\"\\(period.value) mois gratuit\\(period.value > 1 ? \"s\" : \"\")\")"
-  ]
- },
- {
   "key": "1 an gratuit",
   "placeholders": 0,
   "uses": [
@@ -2015,13 +2008,6 @@
   "uses": [
    "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(streak) jour\\(streak > 1 ? \"s\" : \"\")\") : tr(\"Pas encore de série\"))",
    "Shared/Render/Kinds/ProductivityWidgets.swift:144: Text(streak > 0 ? tr(\"Série de \\(streak) j\") : tr(\"Pas encore de série\"))"
-  ]
- },
- {
-  "key": "Série de %@ jour%@",
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(streak) jour\\(streak > 1 ? \"s\" : \"\")\") : tr(\"Pas encore de série\"))"
   ]
  },
  {

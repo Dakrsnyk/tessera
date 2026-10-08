@@ -854,13 +854,6 @@
   ]
  },
  {
-  "key": "%@ tâche%@ restante%@",
-  "placeholders": 3,
-  "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : tr(\"\\(remaining) tâche\\(remaining > 1 ? \"s\" : \"\") restante\\(remaining > 1 ? \"s\" : \"\")\")"
-  ]
- },
- {
   "key": "Ajoute une échéance dans Tessera, espace Productivité.",
   "placeholders": 0,
   "uses": [

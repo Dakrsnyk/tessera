@@ -115,8 +115,6 @@
  "Progression : %@ %%": "Fortschritt: %@ %%",
  ", %@ %% de ton objectif.": ", %@ %% deines Ziels.",
  " Habitudes du jour : %@ sur %@.": " Gewohnheiten heute: %@ von %@.",
- "%@ faite%@ aujourd'hui": "%@ Task%@ heute erledigt",
- "%@ tâche%@ à faire": "%@ Task%@ zu erledigen",
  "%@ · série de %@ j": "%@ · Serie von %@ T",
  "%@ et %@ à %@": "%@ und %@ in %@",
  "toute la journée": "ganztägig",

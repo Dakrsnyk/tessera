@@ -115,8 +115,6 @@
  "Progression : %@ %%": "进度：%@%%",
  ", %@ %% de ton objectif.": "，完成了目标的 %@%%。",
  " Habitudes du jour : %@ sur %@.": " 今日习惯：%@ / %@。",
- "%@ faite%@ aujourd'hui": "今日完成 %@ task%@",
- "%@ tâche%@ à faire": "待办 %@ task%@",
  "%@ · série de %@ j": "%@ · 连续 %@ 天",
  "%@ et %@ à %@": "%3$@现在%1$@，%2$@",
  "toute la journée": "全天",

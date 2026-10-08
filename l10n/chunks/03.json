@@ -1727,27 +1727,6 @@
   ]
  },
  {
-  "key": "%@ séance%@ cette semaine",
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:72: return model.fitness.routines.isEmpty && days == 0 ? nil : tr(\"\\(days) séance\\(days > 1 ? \"s\" : \"\") cette semaine\")"
-  ]
- },
- {
-  "key": "%@ tâche%@ aujourd'hui",
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:75: return open > 0 ? tr(\"\\(open) tâche\\(open > 1 ? \"s\" : \"\") aujourd'hui\") : nil"
-  ]
- },
- {
-  "key": "%@ devoir%@ à rendre",
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:81: return open > 0 ? tr(\"\\(open) devoir\\(open > 1 ? \"s\" : \"\") à rendre\") : nil"
-  ]
- },
- {
   "key": "%@ restants",
   "placeholders": 1,
   "uses": [

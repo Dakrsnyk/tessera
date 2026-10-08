@@ -268,7 +268,7 @@ struct FitnessProgressPage: View {
         let first = sessions.first?.topWeight ?? record.weight
         let change = record.weight - first
         return MiniRow(symbol: "trophy.fill", colorHex: "F2A33A", title: record.exercise,
-                       detail: sessions.count > 1 && change > 0 ? tr("+\(ProfileNumberField.format(change)) kg depuis le début · \(sessions.count) séances") : tr("\(sessions.count) séance\(sessions.count > 1 ? "s" : "")"),
+                       detail: sessions.count > 1 && change > 0 ? tr("+\(ProfileNumberField.format(change)) kg depuis le début · \(sessions.count) séances") : Fmt.plural(sessions.count, tr("séance"), tr("séances")),
                        value: "\(ProfileNumberField.format(record.weight)) × \(record.reps)", showsChevron: chevron)
     }
 

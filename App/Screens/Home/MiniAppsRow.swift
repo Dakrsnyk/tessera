@@ -69,16 +69,16 @@ enum MiniAppSummary {
         case .fitness:
             if model.fitness.active.map({ !$0.isFinished }) == true { return tr("Séance en cours") }
             let days = FitnessMath.trainedDays(inWeekOf: now, model.fitness).filter { $0 }.count
-            return model.fitness.routines.isEmpty && days == 0 ? nil : tr("\(days) séance\(days > 1 ? "s" : "") cette semaine")
+            return model.fitness.routines.isEmpty && days == 0 ? nil : tr("\(Fmt.plural(days, tr("séance"), tr("séances"))) cette semaine")
         case .planning:
             let open = model.content.tasks.filter { !$0.isDone && ($0.isDue(on: now) || $0.isOverdue(at: now)) }.count
-            return open > 0 ? tr("\(open) tâche\(open > 1 ? "s" : "") aujourd'hui") : nil
+            return open > 0 ? tr("\(Fmt.plural(open, tr("tâche"), tr("tâches"))) aujourd'hui") : nil
         case .studies:
             if let next = StudentMath.nextClass(model.student, at: now), DateMath.isSameDay(next.start, now) {
                 return "\(model.student.course(next.slot.courseID)?.name ?? tr("Cours")) à \(Fmt.time(next.start, uses24Hour: true))"
             }
             let open = StudentMath.openAssignments(model.student).count
-            return open > 0 ? tr("\(open) devoir\(open > 1 ? "s" : "") à rendre") : nil
+            return open > 0 ? tr("\(Fmt.plural(open, tr("devoir"), tr("devoirs"))) à rendre") : nil
         case .finances:
             guard !model.budget.expenses.isEmpty else { return nil }
             let remaining = BudgetMath.remaining(model.budget, at: now)

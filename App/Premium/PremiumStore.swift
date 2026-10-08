@@ -152,7 +152,7 @@ final class PremiumStore {
         switch period.unit {
         case .day: return period.value == 1 ? tr("1 jour gratuit") : tr("\(period.value) jours gratuits")
         case .week: return period.value == 1 ? tr("7 jours gratuits") : tr("\(period.value) semaines gratuites")
-        case .month: return tr("\(period.value) mois gratuit\(period.value > 1 ? "s" : "")")
+        case .month: return Fmt.plural(period.value, tr("mois gratuit"), tr("mois gratuits"))
         case .year: return tr("1 an gratuit")
         @unknown default: return tr("Essai gratuit")
         }

@@ -94,7 +94,7 @@ private struct HabitRow: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(habit.name).foregroundStyle(.primary)
                         let streak = habit.streak()
-                        Text(streak > 0 ? tr("Série de \(streak) jour\(streak > 1 ? "s" : "")") : tr("Pas encore de série"))
+                        Text(streak > 0 ? tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))") : tr("Pas encore de série"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

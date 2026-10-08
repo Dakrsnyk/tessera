@@ -115,8 +115,6 @@
  "Progression : %@ %%": "進捗：%@%%",
  ", %@ %% de ton objectif.": "で、目標の%@%%です。",
  " Habitudes du jour : %@ sur %@.": " 今日の習慣：%@ / %@。",
- "%@ faite%@ aujourd'hui": "今日完了：%@ task%@",
- "%@ tâche%@ à faire": "未完了：%@ task%@",
  "%@ · série de %@ j": "%@ · 連続記録 %@日",
  "%@ et %@ à %@": "%3$@は%1$@、%2$@",
  "toute la journée": "終日",

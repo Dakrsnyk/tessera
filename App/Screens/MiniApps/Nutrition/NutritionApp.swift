@@ -207,7 +207,7 @@ struct NutritionAppView: View {
         guard stats.trackedDays > 0 else { return tr("Rien de noté ces 7 derniers jours.") }
         let average = tr("Moyenne \(TF.int(stats.averages.kcal)) kcal")
         guard known.kcal else { return tr("\(average) sur \(Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés"))).") }
-        return tr("\(average) · \(stats.daysOnTarget) jour\(stats.daysOnTarget > 1 ? "s" : "") sur \(stats.trackedDays) dans l'objectif")
+        return tr("\(average) · \(Fmt.plural(stats.daysOnTarget, tr("jour"), tr("jours"))) sur \(stats.trackedDays) dans l'objectif")
     }
 
     // MARK: More

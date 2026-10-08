@@ -1,0 +1,86 @@
+[
+ {
+  "key": "%@ de moins que le mois dernier à la même date",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
+  ]
+ },
+ {
+  "key": "%@ de plus que le mois dernier à la même date",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
+  ]
+ },
+ {
+  "key": "%@ sur %@ à moins de 10 %% de ton objectif",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:494: Label(tr(\"\\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) à moins de 10 % de ton objectif\"), systemImage: \"target\")"
+  ]
+ },
+ {
+  "key": "%@ · %@ sur %@ dans l'objectif",
+  "placeholders": 3,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
+  ]
+ },
+ {
+  "key": "%@ à rendre",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Home/MiniAppsRow.swift:81: return open > 0 ? tr(\"\\(Fmt.plural(open, tr(\"devoir\"), tr(\"devoirs\"))) à rendre\") : nil"
+  ]
+ },
+ {
+  "key": "Série de %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))"
+  ]
+ },
+ {
+  "key": "faite",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]"
+  ]
+ },
+ {
+  "key": "faites",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]"
+  ]
+ },
+ {
+  "key": "mois gratuit",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumStore.swift:155: case .month: return Fmt.plural(period.value, tr(\"mois gratuit\"), tr(\"mois gratuits\"))"
+  ]
+ },
+ {
+  "key": "mois gratuits",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumStore.swift:155: case .month: return Fmt.plural(period.value, tr(\"mois gratuit\"), tr(\"mois gratuits\"))"
+  ]
+ },
+ {
+  "key": "tâche restante",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : Fmt.plural(remaining, tr(\"tâche restante\"), tr(\"tâches restantes\"))"
+  ]
+ },
+ {
+  "key": "tâches restantes",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : Fmt.plural(remaining, tr(\"tâche restante\"), tr(\"tâches restantes\"))"
+  ]
+ }
+]

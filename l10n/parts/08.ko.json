@@ -115,8 +115,6 @@
  "Progression : %@ %%": "진행률: %@%%",
  ", %@ %% de ton objectif.": "이고, 목표의 %@%%예요.",
  " Habitudes du jour : %@ sur %@.": " 오늘의 습관: %@ / %@.",
- "%@ faite%@ aujourd'hui": "오늘 완료: %@ task%@",
- "%@ tâche%@ à faire": "남은 일: %@ task%@",
  "%@ · série de %@ j": "%@ · 연속 기록 %@일",
  "%@ et %@ à %@": "%3$@ 현재 %1$@, %2$@",
  "toute la journée": "하루 종일",

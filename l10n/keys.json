@@ -281,9 +281,9 @@
   "placeholders": 1,
   "uses": [
    "App/Core/DataItems.swift:424: case .expenses: return tr(\"\\(TF.money(BudgetMath.spentToday(budget, at: now), currency)) aujourd'hui\")",
-   "Shared/Render/Kinds/DataWidgets.swift:357: return short ? amount : tr(\"\\(amount) aujourd'hui\")",
-   "Shared/Render/Tiles/StudentTiles.swift:74: tile.inline = days == 0 ? tr(\"\\(exam.title) aujourd'hui\") : tr(\"\\(exam.title) dans \\(days) j\")",
-   "Shared/Render/Tiles/TimeTiles.swift:94: tile.inline = days == 0 ? tr(\"\\(next.name) aujourd'hui\") : tr(\"\\(next.name) dans \\(days) j\")"
+   "App/Screens/Home/MiniAppsRow.swift:75: return open > 0 ? tr(\"\\(Fmt.plural(open, tr(\"tâche\"), tr(\"tâches\"))) aujourd'hui\") : nil",
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]",
+   "Shared/Render/Kinds/DataWidgets.swift:357: return short ? amount : tr(\"\\(amount) aujourd'hui\")"
   ]
  },
  "%@ aux 100 km": {
@@ -308,6 +308,7 @@
  "%@ cette semaine": {
   "placeholders": 1,
   "uses": [
+   "App/Screens/Home/MiniAppsRow.swift:72: return model.fitness.routines.isEmpty && days == 0 ? nil : tr(\"\\(Fmt.plural(days, tr(\"séance\"), tr(\"séances\"))) cette semaine\")",
    "Shared/Render/Tiles/FitnessTiles.swift:167: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette semaine\")"
   ]
  },
@@ -350,12 +351,6 @@
    "App/Screens/Spaces/SpacesView.swift:177: return tr(\"\\(status.item.name) dans \\(TF.int(km)) km\")"
   ]
  },
- "%@ de %@ que le mois dernier à la même date": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la même date\"),"
-  ]
- },
  "%@ de concentration cette semaine": {
   "placeholders": 1,
   "uses": [
@@ -392,16 +387,22 @@
    "Shared/Render/Tiles/DashboardTiles.swift:100: tile.detail = tr(\"\\(Fmt.percent(DateMath.progress(of: .day, at: now))) de la journée écoulée\")"
   ]
  },
+ "%@ de moins que le mois dernier à la même date": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
+  ]
+ },
+ "%@ de plus que le mois dernier à la même date": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
+  ]
+ },
  "%@ de ton année en cours": {
   "placeholders": 1,
   "uses": [
    "Shared/Render/Tiles/TimeTiles.swift:31: tile.detail = tr(\"\\(Fmt.percent(fraction)) de ton année en cours\")"
-  ]
- },
- "%@ devoir%@ à rendre": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:81: return open > 0 ? tr(\"\\(open) devoir\\(open > 1 ? \"s\" : \"\") à rendre\") : nil"
   ]
  },
  "%@ dépensés · %@ avant la fin du mois": {
@@ -457,12 +458,6 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:293: MiniRow(symbol: \"books.vertical.fill\", colorHex: accentHex, title: tr(\"Exercices\"), detail: tr(\"\\(ExerciseLibrary.all.count) exercices, fiches et démonstrations\"))"
-  ]
- },
- "%@ faite%@ aujourd'hui": {
-  "placeholders": 2,
-  "uses": [
-   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(openTasks) tâche\\(openTasks > 1 ? \"s\" : \"\") à faire\"), tr(\"\\(doneToday) faite\\(doneToday > 1 ? \"s\" : \"\") aujourd'hui\")]"
   ]
  },
  "%@ fiches à réviser": {
@@ -548,18 +543,6 @@
   "placeholders": 1,
   "uses": [
    "Shared/Render/Tiles/TileFactory.swift:79: case 2...: return tr(\"\\(days) j\")"
-  ]
- },
- "%@ jour%@ noté%@": {
-  "placeholders": 3,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : tr(\"\\(stats.trackedDays) jour\\(stats.trackedDays > 1 ? \"s\" : \"\") noté\\(stats.trackedDays > 1 ? \"s\" : \"\")"
-  ]
- },
- "%@ jour%@ sur %@ à moins de 10 %% de ton objectif": {
-  "placeholders": 3,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:494: Label(tr(\"\\(stats.daysOnTarget) jour\\(stats.daysOnTarget > 1 ? \"s\" : \"\") sur \\(stats.trackedDays) à moins de 10 % de ton objectif\"), systemImage: \"target\")"
   ]
  },
  "%@ jours gratuits": {
@@ -729,12 +712,6 @@
    "Shared/Intents/InteractiveIntents.swift:132: content.body = tr(\"\\(minutes) minutes de concentration. Prends une pause.\")"
   ]
  },
- "%@ mois gratuit%@": {
-  "placeholders": 2,
-  "uses": [
-   "App/Premium/PremiumStore.swift:155: case .month: return tr(\"\\(period.value) mois gratuit\\(period.value > 1 ? \"s\" : \"\")\")"
-  ]
- },
  "%@ n'existe pas en grand : ajoute d'autres widgets, jusqu'à 4.": {
   "placeholders": 1,
   "uses": [
@@ -882,6 +859,12 @@
    "App/Screens/MyWidgets/MyWidgetsView.swift:356: Text(tr(\"\\(min(used, limit)) sur \\(limit) widgets gratuits\"))"
   ]
  },
+ "%@ sur %@ à moins de 10 %% de ton objectif": {
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:494: Label(tr(\"\\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) à moins de 10 % de ton objectif\"), systemImage: \"target\")"
+  ]
+ },
  "%@ sur %@.": {
   "placeholders": 2,
   "uses": [
@@ -926,18 +909,6 @@
    "Shared/Render/Tiles/BusinessTiles.swift:114: tile.detail = tr(\"\\(Fmt.signedPercent(growth * 100)) sur un mois\")"
   ]
  },
- "%@ séance%@": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:271: detail: sessions.count > 1 && change > 0 ? tr(\"+\\(ProfileNumberField.format(change)) kg depuis le début · \\(sessions.count) séances\") : tr(\"\\(sessions.count) séance\\(sessions.count > 1 ? \"s\" : \"\")\"),"
-  ]
- },
- "%@ séance%@ cette semaine": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:72: return model.fitness.routines.isEmpty && days == 0 ? nil : tr(\"\\(days) séance\\(days > 1 ? \"s\" : \"\") cette semaine\")"
-  ]
- },
  "%@ séances": {
   "placeholders": 1,
   "uses": [
@@ -955,25 +926,6 @@
   "placeholders": 2,
   "uses": [
    "Shared/Render/Tiles/FitnessTiles.swift:208: tile.inline = tr(\"\\(trained.count) séances en \\(Fmt.month(now).lowercased())\")"
-  ]
- },
- "%@ tâche%@ aujourd'hui": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:75: return open > 0 ? tr(\"\\(open) tâche\\(open > 1 ? \"s\" : \"\") aujourd'hui\") : nil"
-  ]
- },
- "%@ tâche%@ restante%@": {
-  "placeholders": 3,
-  "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : tr(\"\\(remaining) tâche\\(remaining > 1 ? \"s\" : \"\") restante\\(remaining > 1 ? \"s\" : \"\")\")"
-  ]
- },
- "%@ tâche%@ à faire": {
-  "placeholders": 2,
-  "uses": [
-   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(openTasks) tâche\\(openTasks > 1 ? \"s\" : \"\") à faire\"), tr(\"\\(doneToday) faite\\(doneToday > 1 ? \"s\" : \"\") aujourd'hui\")]",
-   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(open) tâche\\(open > 1 ? \"s\" : \"\") à faire\"))"
   ]
  },
  "%@ verre": {
@@ -1049,12 +1001,6 @@
    "Shared/Render/Tiles/TimeTiles.swift:72: tile.caption = tr(\"\\(Fmt.format(now, template: \"dMMMM\")) · \\(Fmt.percent(progress)) de la semaine\")"
   ]
  },
- "%@ · %@ jour%@ sur %@ dans l'objectif": {
-  "placeholders": 4,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(stats.daysOnTarget) jour\\(stats.daysOnTarget > 1 ? \"s\" : \"\") sur \\(stats.trackedDays) dans l'objectif\")"
-  ]
- },
  "%@ · %@ kg": {
   "placeholders": 2,
   "uses": [
@@ -1078,6 +1024,12 @@
   "placeholders": 2,
   "uses": [
    "Shared/Render/Tiles/FitnessTiles.swift:142: tile.caption = tr(\"\\(best.exercise) · \\(best.reps) rép.\")"
+  ]
+ },
+ "%@ · %@ sur %@ dans l'objectif": {
+  "placeholders": 3,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
   ]
  },
  "%@ · %@ séries": {
@@ -1196,14 +1148,20 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:93: contentLink(tr(\"Gérer mes tâches\"), detail: tr(\"\\(model.content.tasks.filter { !$0.isDone }.count) à faire\")) { TasksView() }",
    "App/Screens/Spaces/ProductivitySpace.swift:45: ValueRow(title: tr(\"Mes tâches\"), value: tr(\"\\(model.content.tasks.filter { !$0.isDone }.count) à faire\"), symbol: \"checklist\")",
-   "Shared/Render/AccessoryViews.swift:148: Text(open.isEmpty ? tr(\"Tout est fait\") : tr(\"\\(open.count) à faire\"))",
-   "Shared/Render/Kinds/ProductivityWidgets.swift:23: Text(openCount == 0 ? tr(\"Terminé\") : tr(\"\\(openCount) à faire\"))"
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]",
+   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(Fmt.plural(open, tr(\"tâche\"), tr(\"tâches\"))) à faire\"))"
   ]
  },
  "%@ à préparer": {
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Travel/TravelApp.swift:169: Text(done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ "%@ à rendre": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Home/MiniAppsRow.swift:81: return open > 0 ? tr(\"\\(Fmt.plural(open, tr(\"devoir\"), tr(\"devoirs\"))) à rendre\") : nil"
   ]
  },
  "%@ à réviser": {
@@ -1301,7 +1259,7 @@
  "+%@ kg depuis le début · %@ séances": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:271: detail: sessions.count > 1 && change > 0 ? tr(\"+\\(ProfileNumberField.format(change)) kg depuis le début · \\(sessions.count) séances\") : tr(\"\\(sessions.count) séance\\(sessions.count > 1 ? \"s\" : \"\")\"),"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:271: detail: sessions.count > 1 && change > 0 ? tr(\"+\\(ProfileNumberField.format(change)) kg depuis le début · \\(sessions.count) séances\") : Fmt.plural(sessions.count, tr(\"séance\"), tr(\"séances\")),"
   ]
  },
  "+%@ min": {
@@ -4580,7 +4538,7 @@
  "Bilan": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : tr(\"\\(stats.trackedDays) jour\\(stats.trackedDays > 1 ? \"s\" : \"\") noté\\(stats.trackedDays > 1 ? \"s\" : \"\")"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "Billets d'avion": {
@@ -16693,7 +16651,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:217: case .medium: tr(\"Moyennes\")",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : tr(\"\\(stats.trackedDays) jour\\(stats.trackedDays > 1 ? \"s\" : \"\") noté\\(stats.trackedDays > 1 ? \"s\" : \"\")"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "Moyennes calculées sur les mois terminés où tu as noté quelque chose.": {
@@ -18521,7 +18479,7 @@
  "Pas encore de série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(streak) jour\\(streak > 1 ? \"s\" : \"\")\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "Shared/Render/Kinds/ProductivityWidgets.swift:144: Text(streak > 0 ? tr(\"Série de \\(streak) j\") : tr(\"Pas encore de série\"))"
   ]
  },
@@ -24257,16 +24215,16 @@
    "Shared/Render/Tiles/FitnessTiles.swift:172: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
   ]
  },
+ "Série de %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))"
+  ]
+ },
  "Série de %@ j": {
   "placeholders": 1,
   "uses": [
    "Shared/Render/Kinds/ProductivityWidgets.swift:144: Text(streak > 0 ? tr(\"Série de \\(streak) j\") : tr(\"Pas encore de série\"))"
-  ]
- },
- "Série de %@ jour%@": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(streak) jour\\(streak > 1 ? \"s\" : \"\")\") : tr(\"Pas encore de série\"))"
   ]
  },
  "Série de suivi": {
@@ -24833,7 +24791,7 @@
   "uses": [
    "App/Screens/MiniApps/MiniAppSettings.swift:57: Label(isEditing ? tr(\"Terminé\") : tr(\"Modifier mes paramètres\"), systemImage: isEditing ? \"checkmark\" : \"pencil\")",
    "Shared/Render/Kinds/ProductivityWidgets.swift:23: Text(openCount == 0 ? tr(\"Terminé\") : tr(\"\\(openCount) à faire\"))",
-   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : tr(\"\\(remaining) tâche\\(remaining > 1 ? \"s\" : \"\") restante\\(remaining > 1 ? \"s\" : \"\")\")"
+   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : Fmt.plural(remaining, tr(\"tâche restante\"), tr(\"tâches restantes\"))"
   ]
  },
  "Terminées": {
@@ -28160,6 +28118,7 @@
  "devoir": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Home/MiniAppsRow.swift:81: return open > 0 ? tr(\"\\(Fmt.plural(open, tr(\"devoir\"), tr(\"devoirs\"))) à rendre\") : nil",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:156: MiniSectionTitle(title: tr(\"À rendre\"), detail: Fmt.plural(open.count, tr(\"devoir\"), tr(\"devoirs\")))"
   ]
  },
@@ -28173,6 +28132,7 @@
  "devoirs": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Home/MiniAppsRow.swift:81: return open > 0 ? tr(\"\\(Fmt.plural(open, tr(\"devoir\"), tr(\"devoirs\"))) à rendre\") : nil",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:156: MiniSectionTitle(title: tr(\"À rendre\"), detail: Fmt.plural(open.count, tr(\"devoir\"), tr(\"devoirs\")))"
   ]
  },
@@ -28366,6 +28326,18 @@
    "Shared/Render/Tiles/ProductivityTiles.swift:142: tile.caption = habit.isDone(on: now) ? tr(\"fait aujourd'hui\") : tr(\"pas encore fait aujourd'hui\")"
   ]
  },
+ "faite": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]"
+  ]
+ },
+ "faites": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]"
+  ]
+ },
  "feves noires": {
   "placeholders": 0,
   "uses": [
@@ -28529,10 +28501,10 @@
  "jour": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:144: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:115: ValueRow(title: tr(\"Série de suivi\"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr(\"jour\"), tr(\"jours\")), symbol: \"flame.fill\")",
-   "App/Screens/Spaces/ProductivitySpace.swift:313: ValueRow(title: habit.name, value: Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")), symbol: habit.symbol, colorHex: habit.colorHex)"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
   ]
  },
  "jour depuis": {
@@ -28544,7 +28516,8 @@
  "jour noté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }",
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "jour restant": {
@@ -28557,10 +28530,10 @@
  "jours": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Content/HabitsView.swift:97: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Home/DailySection.swift:794: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:144: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:115: ValueRow(title: tr(\"Série de suivi\"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr(\"jour\"), tr(\"jours\")), symbol: \"flame.fill\")",
-   "App/Screens/Spaces/ProductivitySpace.swift:313: ValueRow(title: habit.name, value: Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")), symbol: habit.symbol, colorHex: habit.colorHex)"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
   ]
  },
  "jours depuis": {
@@ -28572,7 +28545,8 @@
  "jours notés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }",
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "jours passés": {
@@ -28784,12 +28758,6 @@
    "Shared/Render/Tiles/TileFactory.swift:128: case 3..<6: return tr(\"modéré\")"
   ]
  },
- "moins": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la même date\"),"
-  ]
- },
  "mois": {
   "placeholders": 0,
   "uses": [
@@ -28808,6 +28776,18 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:471: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
+  ]
+ },
+ "mois gratuit": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumStore.swift:155: case .month: return Fmt.plural(period.value, tr(\"mois gratuit\"), tr(\"mois gratuits\"))"
+  ]
+ },
+ "mois gratuits": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumStore.swift:155: case .month: return Fmt.plural(period.value, tr(\"mois gratuit\"), tr(\"mois gratuits\"))"
   ]
  },
  "moyenne %@": {
@@ -29105,12 +29085,6 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:437: case .carFills: return Fmt.plural(car.fills.count, tr(\"plein\"), tr(\"pleins\"))"
-  ]
- },
- "plus": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: Label(tr(\"\\(TF.money(abs(difference), currency)) de \\(difference > 0 ? tr(\"plus\") : tr(\"moins\")) que le mois dernier à la même date\"),"
   ]
  },
  "poids du corps": {
@@ -29435,8 +29409,8 @@
   "uses": [
    "App/Core/DataItems.swift:400: case .routines: return Fmt.plural(fitness.routines.count, tr(\"séance\"), tr(\"séances\"))",
    "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séances\")))\"))",
-   "App/Screens/Profile/DataItemViews.swift:136: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))",
-   "App/Screens/Profile/ProfileTopics.swift:330: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))"
+   "App/Screens/Home/MiniAppsRow.swift:72: return model.fitness.routines.isEmpty && days == 0 ? nil : tr(\"\\(Fmt.plural(days, tr(\"séance\"), tr(\"séances\"))) cette semaine\")",
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:271: detail: sessions.count > 1 && change > 0 ? tr(\"+\\(ProfileNumberField.format(change)) kg depuis le début · \\(sessions.count) séances\") : Fmt.plural(sessions.count, tr(\"séance\"), tr(\"séances\")),"
   ]
  },
  "séance cette semaine": {
@@ -29451,8 +29425,8 @@
   "uses": [
    "App/Core/DataItems.swift:400: case .routines: return Fmt.plural(fitness.routines.count, tr(\"séance\"), tr(\"séances\"))",
    "App/Screens/Home/DailySection.swift:773: Text(done.count >= goal ? tr(\"Objectif de la semaine atteint\") : tr(\"Encore \\(Fmt.plural(goal - done.count, tr(\"séance\"), tr(\"séances\")))\"))",
-   "App/Screens/Profile/DataItemViews.swift:136: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))",
-   "App/Screens/Profile/ProfileTopics.swift:330: .accessibilityLabel(Text(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))))"
+   "App/Screens/Home/MiniAppsRow.swift:72: return model.fitness.routines.isEmpty && days == 0 ? nil : tr(\"\\(Fmt.plural(days, tr(\"séance\"), tr(\"séances\"))) cette semaine\")",
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:271: detail: sessions.count > 1 && change > 0 ? tr(\"+\\(ProfileNumberField.format(change)) kg depuis le début · \\(sessions.count) séances\") : Fmt.plural(sessions.count, tr(\"séance\"), tr(\"séances\")),"
   ]
  },
  "séances cette semaine": {
@@ -29536,7 +29510,7 @@
  "toutes tes tâches sont faites": {
   "placeholders": 0,
   "uses": [
-   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(open) tâche\\(open > 1 ? \"s\" : \"\") à faire\"))"
+   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(Fmt.plural(open, tr(\"tâche\"), tr(\"tâches\"))) à faire\"))"
   ]
  },
  "très élevé": {
@@ -29548,6 +29522,9 @@
  "tâche": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Home/MiniAppsRow.swift:75: return open > 0 ? tr(\"\\(Fmt.plural(open, tr(\"tâche\"), tr(\"tâches\"))) aujourd'hui\") : nil",
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]",
+   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(Fmt.plural(open, tr(\"tâche\"), tr(\"tâches\"))) à faire\"))",
    "Shared/Render/Tiles/DashboardTiles.swift:146: tile.unit = open.count > 1 ? tr(\"tâches\") : tr(\"tâche\")"
   ]
  },
@@ -29555,6 +29532,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/DashboardTiles.swift:158: tile.unit = done > 1 ? tr(\"tâches faites\") : tr(\"tâche faite\")"
+  ]
+ },
+ "tâche restante": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : Fmt.plural(remaining, tr(\"tâche restante\"), tr(\"tâches restantes\"))"
   ]
  },
  "tâche à faire": {
@@ -29569,6 +29552,9 @@
  "tâches": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Home/MiniAppsRow.swift:75: return open > 0 ? tr(\"\\(Fmt.plural(open, tr(\"tâche\"), tr(\"tâches\"))) aujourd'hui\") : nil",
+   "Shared/Data/Insights.swift:189: var points = [tr(\"\\(Fmt.plural(openTasks, tr(\"tâche\"), tr(\"tâches\"))) à faire\"), tr(\"\\(Fmt.plural(doneToday, tr(\"faite\"), tr(\"faites\"))) aujourd'hui\")]",
+   "Shared/Data/Insights.swift:217: parts.append(open == 0 ? tr(\"toutes tes tâches sont faites\") : tr(\"\\(Fmt.plural(open, tr(\"tâche\"), tr(\"tâches\"))) à faire\"))",
    "Shared/Render/Tiles/DashboardTiles.swift:146: tile.unit = open.count > 1 ? tr(\"tâches\") : tr(\"tâche\")"
   ]
  },
@@ -29576,6 +29562,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/DashboardTiles.swift:158: tile.unit = done > 1 ? tr(\"tâches faites\") : tr(\"tâche faite\")"
+  ]
+ },
+ "tâches restantes": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : Fmt.plural(remaining, tr(\"tâche restante\"), tr(\"tâches restantes\"))"
   ]
  },
  "tâches à faire": {

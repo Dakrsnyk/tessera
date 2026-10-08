@@ -115,8 +115,6 @@
  "Progression : %@ %%": "Progress: %@%%",
  ", %@ %% de ton objectif.": ", %@%% of your goal.",
  " Habitudes du jour : %@ sur %@.": " Today's habits: %@ of %@.",
- "%@ faite%@ aujourd'hui": "%@ task%@ done today",
- "%@ tâche%@ à faire": "%@ task%@ to do",
  "%@ · série de %@ j": "%@ · %@-day streak",
  "%@ et %@ à %@": "%@ and %@ in %@",
  "toute la journée": "all day",

@@ -387,13 +387,6 @@
   ]
  },
  {
-  "key": "%@ séance%@",
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:271: detail: sessions.count > 1 && change > 0 ? tr(\"+\\(ProfileNumberField.format(change)) kg depuis le début · \\(sessions.count) séances\") : tr(\"\\(sessions.count) séance\\(s"
-  ]
- },
- {
   "key": "+%@ kg depuis le début · %@ séances",
   "placeholders": 2,
   "uses": [
@@ -890,13 +883,6 @@
   ]
  },
  {
-  "key": "%@ · %@ jour%@ sur %@ dans l'objectif",
-  "placeholders": 4,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:210: return tr(\"\\(average) · \\(stats.daysOnTarget) jour\\(stats.daysOnTarget > 1 ? \"s\" : \"\") sur \\(stats.trackedDays) dans l'objectif\")"
-  ]
- },
- {
   "key": "Des repas enregistrés, à reprendre d'une touche",
   "placeholders": 0,
   "uses": [
@@ -1310,24 +1296,10 @@
   ]
  },
  {
-  "key": "%@ jour%@ noté%@",
-  "placeholders": 3,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : tr(\"\\(stats.trackedDays) jour\\(stats.trackedDays > 1 ? \"s\" : \"\") no"
-  ]
- },
- {
   "key": "Bilan",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\"), detail: isSingleDay ? nil : tr(\"\\(stats.trackedDays) jour\\(stats.trackedDays > 1 ? \"s\" : \"\") no"
-  ]
- },
- {
-  "key": "%@ jour%@ sur %@ à moins de 10 %% de ton objectif",
-  "placeholders": 3,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:494: Label(tr(\"\\(stats.daysOnTarget) jour\\(stats.daysOnTarget > 1 ? \"s\" : \"\") sur \\(stats.trackedDays) à moins de 10 % de ton objectif\"), systemImage: \"target\")"
   ]
  },
  {

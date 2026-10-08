@@ -1,0 +1,14 @@
+{
+ "%@ de moins que le mois dernier à la même date": "比上月同期少%@",
+ "%@ de plus que le mois dernier à la même date": "比上月同期多%@",
+ "%@ sur %@ à moins de 10 %% de ton objectif": "%2$@ 天中有 %1$@与目标相差不超过 10%%",
+ "%@ · %@ sur %@ dans l'objectif": "%1$@ · %3$@ 天中有 %2$@达标",
+ "%@ à rendre": "待交%@",
+ "Série de %@": "连续 %@",
+ "faite": "已完成",
+ "faites": "已完成",
+ "mois gratuit": "个月免费",
+ "mois gratuits": "个月免费",
+ "tâche restante": "项任务待完成",
+ "tâches restantes": "项任务待完成"
+}

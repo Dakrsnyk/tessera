@@ -1,0 +1,14 @@
+{
+ "%@ de moins que le mois dernier à la même date": "先月の同じ日より%@少ない",
+ "%@ de plus que le mois dernier à la même date": "先月の同じ日より%@多い",
+ "%@ sur %@ à moins de 10 %% de ton objectif": "%2$@日中%1$@が目標の誤差10%%以内",
+ "%@ · %@ sur %@ dans l'objectif": "%1$@ · %3$@日中%2$@が目標内",
+ "%@ à rendre": "提出する%@",
+ "Série de %@": "%@連続",
+ "faite": "完了",
+ "faites": "完了",
+ "mois gratuit": "か月無料",
+ "mois gratuits": "か月無料",
+ "tâche restante": "件残り",
+ "tâches restantes": "件残り"
+}

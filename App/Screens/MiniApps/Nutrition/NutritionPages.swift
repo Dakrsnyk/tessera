@@ -483,7 +483,7 @@ struct NutritionHistoryPage: View {
 
     private func averages(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets, isSingleDay: Bool) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: isSingleDay ? tr("Bilan") : tr("Moyennes"), detail: isSingleDay ? nil : tr("\(stats.trackedDays) jour\(stats.trackedDays > 1 ? "s" : "") noté\(stats.trackedDays > 1 ? "s" : "")"))
+            MiniSectionTitle(title: isSingleDay ? tr("Bilan") : tr("Moyennes"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés")))
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
                 MiniStat(title: tr("Calories"), value: TF.int(stats.averages.kcal), unit: "kcal", detail: known.kcal ? tr("objectif \(TF.int(stats.goal))") : nil, colorHex: accentHex)
                 MiniStat(title: tr("Protéines"), value: TF.int(stats.averages.protein), unit: "g")
@@ -491,7 +491,7 @@ struct NutritionHistoryPage: View {
                 MiniStat(title: tr("Lipides"), value: TF.int(stats.averages.fat), unit: "g")
             }
             if known.kcal, !isSingleDay {
-                Label(tr("\(stats.daysOnTarget) jour\(stats.daysOnTarget > 1 ? "s" : "") sur \(stats.trackedDays) à moins de 10 % de ton objectif"), systemImage: "target")
+                Label(tr("\(Fmt.plural(stats.daysOnTarget, tr("jour"), tr("jours"))) sur \(stats.trackedDays) à moins de 10 % de ton objectif"), systemImage: "target")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
