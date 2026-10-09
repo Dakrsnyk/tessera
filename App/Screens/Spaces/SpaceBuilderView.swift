@@ -150,6 +150,10 @@ struct SpaceBuilderView: View {
                 let defaults = UserDefaults.standard
                 if let raw = defaults.string(forKey: "screenshotCreatorFormat"), let size = WidgetFormat(rawValue: raw) {
                     setFormat(size)
+                    // A new size keeps the selection: the captures show that size's usual widgets
+                    // (two side by side in medium), as a person would pick them.
+                    let preset = SpaceCatalog.preset(for: space, format: size)
+                    if !preset.isEmpty { selection = preset }
                 } else if defaults.bool(forKey: "screenshotCreatorMulti") {
                     selection = Array(kinds.prefix(3))
                 }
