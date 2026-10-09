@@ -520,11 +520,11 @@ private struct BalanceChartCard: View {
     /// Where the balance starts from, and what it counts.
     private func caption(_ points: [BudgetMath.BalancePoint]) -> String {
         if let amount = state.openingBalance, let date = state.openingDate {
-            return tr("À partir de \(TF.money(amount, currency)) le \(Fmt.shortDay(date)), puis tes revenus et tes dépenses, factures et montants fixes compris.")
+            return tr("À partir de \(TF.money(amount, currency)) le \(Fmt.format(date, template: "dMMM")), puis tes revenus et tes dépenses, factures et montants fixes compris.")
         }
         guard let first = points.first, points.contains(where: { $0.balance != 0 }) else {
             return tr("Note tes revenus et tes dépenses : ton solde s'affichera ici.")
         }
-        return tr("Revenus moins dépenses depuis le \(Fmt.shortDay(first.date)), factures et montants fixes compris.")
+        return tr("Revenus moins dépenses depuis le \(Fmt.format(first.date, template: "dMMM")), factures et montants fixes compris.")
     }
 }

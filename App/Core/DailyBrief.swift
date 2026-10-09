@@ -142,8 +142,8 @@ enum DailyBrief {
         /// Across the dashboard, or half of it.
         var isWide: Bool {
             switch self {
-            case .nutrition, .reminders, .invite: true
-            case let .planning(items): items.count > 2
+            // Planning: the week as a table, readable across the dashboard (half of it on demand).
+            case .nutrition, .reminders, .invite, .planning: true
             default: false
             }
         }

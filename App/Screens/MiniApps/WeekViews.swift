@@ -10,7 +10,7 @@ enum WeekTitle {
         if contains(now) { return tr("Cette semaine") }
         if let last = DateMath.calendar.date(byAdding: .day, value: -7, to: now), contains(last) { return tr("Semaine dernière") }
         if let next = DateMath.calendar.date(byAdding: .day, value: 7, to: now), contains(next) { return tr("Semaine prochaine") }
-        return tr("Semaine du \(Fmt.shortDay(first))")
+        return tr("Semaine du \(Fmt.format(first, template: "dMMM"))")
     }
 
     /// The same day a week before or after; never after today when the future isn't allowed.
