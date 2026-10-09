@@ -58,5 +58,19 @@
  "Vert sapin, rouge et fils d'or": "Verde-pinheiro, vermelho e fios de ouro",
  "Vert tendre, feuilles et serif de serre": "Verde suave, folhas e serifa de estufa",
  "Violet inquiétant et vert acide": "Roxo inquietante e verde ácido",
- "Étoiles": "Estrelas"
+ "Étoiles": "Estrelas",
+ "%@ · revenu fixe": "%@ · renda fixa",
+ "Assurances": "Seguros",
+ "Automatique (%@)": "Automática (%@)",
+ "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.": "Cada pagamento conta nas suas despesas e na categoria dele, na data dele.",
+ "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.": "Contado nas despesas de Finanças e na categoria dele nesta data, depois a cada vencimento.",
+ "Compté dans les revenus de Finances à cette date, puis à chaque échéance.": "Contado nas receitas de Finanças nesta data, depois a cada vencimento.",
+ "Date d'un paiement": "Data de um pagamento",
+ "Dépense fixe · %@": "Despesa fixa · %@",
+ "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": "Informe seus saldos manualmente: o Tessera não se conecta a nenhum banco. Toque em uma conta para editá-la ou excluí-la.",
+ "Supprimer l'objectif": "Excluir a meta",
+ "Supprimer la facture": "Excluir a conta",
+ "Supprimer le compte": "Excluir a conta bancária",
+ "Touche un objectif pour y ajouter un versement ou le supprimer.": "Toque em uma meta para adicionar um depósito ou excluí-la.",
+ "Téléphone et Internet": "Telefone e Internet"
 }

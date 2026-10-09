@@ -428,5 +428,103 @@
   "uses": [
    "Shared/Model/WidgetStyle.swift:333: case .stars: tr(\"Étoiles\")"
   ]
+ },
+ {
+  "key": "%@ · revenu fixe",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:149: Text(income.fixedID == nil ? Fmt.shortDay(income.date) : tr(\"\\(Fmt.shortDay(income.date)) · revenu fixe\"))"
+  ]
+ },
+ {
+  "key": "Assurances",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:131: case .insurance: tr(\"Assurances\")"
+  ]
+ },
+ {
+  "key": "Automatique (%@)",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:365: Text(found.map { tr(\"Automatique (\\($0))\") } ?? tr(\"Automatique\")).tag(UUID?.none)"
+  ]
+ },
+ {
+  "key": "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:325: Text(tr(\"Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.\"))"
+  ]
+ },
+ {
+  "key": "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Content/MoneyView.swift:150: : tr(\"Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.\"))"
+  ]
+ },
+ {
+  "key": "Compté dans les revenus de Finances à cette date, puis à chaque échéance.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Content/MoneyView.swift:149: Text(item.isIncome ? tr(\"Compté dans les revenus de Finances à cette date, puis à chaque échéance.\")"
+  ]
+ },
+ {
+  "key": "Date d'un paiement",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Content/MoneyView.swift:138: DatePicker(tr(\"Date d'un paiement\"), selection: Binding("
+  ]
+ },
+ {
+  "key": "Dépense fixe · %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:174: Label(tr(\"Dépense fixe · \\(category?.name ?? tr(\"Sans catégorie\"))\"), systemImage: \"repeat\")"
+  ]
+ },
+ {
+  "key": "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:432: Text(tr(\"Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "Supprimer l'objectif",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:403: Button(tr(\"Supprimer l'objectif\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Supprimer la facture",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:329: Button(tr(\"Supprimer la facture\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Supprimer le compte",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/BudgetSpace.swift:440: Button(tr(\"Supprimer le compte\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Touche un objectif pour y ajouter un versement ou le supprimer.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:378: Text(tr(\"Touche un objectif pour y ajouter un versement ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
+  ]
+ },
+ {
+  "key": "Téléphone et Internet",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/Budget.swift:132: case .telecom: tr(\"Téléphone et Internet\")"
+  ]
  }
 ]

@@ -58,5 +58,19 @@
  "Vert sapin, rouge et fils d'or": "もみの木の緑、赤、金糸",
  "Vert tendre, feuilles et serif de serre": "やわらかな緑、葉っぱ、温室のセリフ体",
  "Violet inquiétant et vert acide": "不気味な紫と酸性のグリーン",
- "Étoiles": "星"
+ "Étoiles": "星",
+ "%@ · revenu fixe": "%@ · 固定収入",
+ "Assurances": "保険",
+ "Automatique (%@)": "自動（%@）",
+ "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.": "支払いはそれぞれの日付で、支出とそのカテゴリに計上されます。",
+ "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.": "この日付と以降の各支払日に、ファイナンスの支出とそのカテゴリに計上されます。",
+ "Compté dans les revenus de Finances à cette date, puis à chaque échéance.": "この日付と以降の各支払日に、ファイナンスの収入に計上されます。",
+ "Date d'un paiement": "支払日",
+ "Dépense fixe · %@": "固定費 · %@",
+ "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": "残高は手入力です。Tesseraはどの銀行にも接続しません。口座をタップすると編集・削除できます。",
+ "Supprimer l'objectif": "目標を削除",
+ "Supprimer la facture": "請求を削除",
+ "Supprimer le compte": "口座を削除",
+ "Touche un objectif pour y ajouter un versement ou le supprimer.": "目標をタップすると、入金の追加や削除ができます。",
+ "Téléphone et Internet": "電話・インターネット"
 }

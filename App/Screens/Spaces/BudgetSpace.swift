@@ -48,10 +48,13 @@ struct BudgetSpaceSections: View {
                     Text(TF.money(expense.amount, currency, decimals: 2)).monospacedDigit()
                 }
                 .swipeActions {
-                    Button(role: .destructive) {
-                        model.update(\.budget) { $0.expenses.removeAll { $0.id == expense.id } }
-                    } label: {
-                        Label(tr("Supprimer"), systemImage: "trash")
+                    // A payment of a fixed expense is removed with its bill or fixed expense.
+                    if expense.fixedID == nil {
+                        Button(role: .destructive) {
+                            model.update(\.budget) { $0.expenses.removeAll { $0.id == expense.id } }
+                        } label: {
+                            Label(tr("Supprimer"), systemImage: "trash")
+                        }
                     }
                 }
             }
@@ -139,7 +142,10 @@ struct BudgetSpaceSections: View {
                 }
                 .tint(.primary)
             }
-            .onDelete { offsets in model.update(\.budget) { $0.accounts.remove(atOffsets: offsets) } }
+            .onDelete { offsets in
+                let ids = offsets.map { state.accounts[$0].id }
+                model.update(\.budget) { budget in ids.forEach { budget.removeAccount($0) } }
+            }
             Button {
                 sheets?.open { AccountEditor(account: Account(name: "", balance: 0)) }
             } label: {
@@ -298,18 +304,35 @@ struct QuickExpenseEditor: View {
 
 struct BillEditor: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
     @State var bill: Bill
+
+    private var isNew: Bool { !model.budget.bills.contains { $0.id == bill.id } }
 
     var body: some View {
         SheetForm(title: tr("Facture"), canSave: !bill.name.trimmed.isEmpty && bill.amount > 0, onSave: save) {
-            TextField(tr("Nom (loyer, Hydro, Netflix…)"), text: $bill.name)
-            NumberRow(title: tr("Montant"), value: $bill.amount, unit: model.settings.currencyCode)
-            Picker(tr("Fréquence"), selection: $bill.period) {
-                ForEach(BillPeriod.allCases) { Text($0.title).tag($0) }
+            Section {
+                TextField(tr("Nom (loyer, Hydro, Netflix…)"), text: $bill.name)
+                NumberRow(title: tr("Montant"), value: $bill.amount, unit: model.settings.currencyCode)
+                Picker(tr("Fréquence"), selection: $bill.period) {
+                    ForEach(BillPeriod.allCases) { Text($0.title).tag($0) }
+                }
+                DatePicker(tr("Prochaine échéance"), selection: $bill.anchorDate, displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+                Toggle(tr("C'est un abonnement"), isOn: $bill.isSubscription)
+                FixedCategoryPicker(name: bill.name, isSubscription: bill.isSubscription, selection: $bill.categoryID)
+            } footer: {
+                Text(tr("Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date."))
             }
-            DatePicker(tr("Prochaine échéance"), selection: $bill.anchorDate, displayedComponents: .date)
-                .environment(\.locale, Fmt.locale)
-            Toggle(tr("C'est un abonnement"), isOn: $bill.isSubscription)
+            if !isNew {
+                Section {
+                    Button(tr("Supprimer la facture"), role: .destructive) {
+                        let id = bill.id
+                        model.update(\.budget) { $0.bills.removeAll { $0.id == id } }
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 
@@ -327,13 +350,36 @@ struct BillEditor: View {
     }
 }
 
+/// The category of a fixed expense: found from its name (« Automatique »), or chosen.
+struct FixedCategoryPicker: View {
+    @Environment(AppModel.self) private var model
+    let name: String
+    var isSubscription = false
+    @Binding var selection: UUID?
+
+    var body: some View {
+        let state = model.budget
+        let found = state.category(state.existingCategoryID(forFixed: name, isSubscription: isSubscription))?.name
+            ?? FixedExpenseNature.of(name, isSubscription: isSubscription)?.categoryName
+        Picker(tr("Catégorie"), selection: $selection) {
+            Text(found.map { tr("Automatique (\($0))") } ?? tr("Automatique")).tag(UUID?.none)
+            ForEach(state.categories) { category in
+                Label(category.name, systemImage: category.symbol).tag(Optional(category.id))
+            }
+        }
+        .accessibilityIdentifier("fixed-category")
+    }
+}
+
 struct GoalEditor: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
     @State var goal: SavingsGoal
     @State private var deposit: Double = 0
 
     var body: some View {
         SheetForm(title: tr("Objectif d'épargne"), canSave: !goal.name.trimmed.isEmpty && goal.target > 0, onSave: save) {
+            let isNew = !model.budget.goals.contains { $0.id == goal.id }
             Section {
                 TextField(tr("Nom (voyage, fonds d'urgence…)"), text: $goal.name)
                 NumberRow(title: tr("Objectif"), value: $goal.target, unit: model.settings.currencyCode)
@@ -351,6 +397,15 @@ struct GoalEditor: View {
                     deposit = 0
                 }
                 .disabled(deposit <= 0)
+            }
+            if !isNew {
+                Section {
+                    Button(tr("Supprimer l'objectif"), role: .destructive) {
+                        let id = goal.id
+                        model.update(\.budget) { $0.goals.removeAll { $0.id == id } }
+                        dismiss()
+                    }
+                }
             }
         }
     }
@@ -370,13 +425,25 @@ struct GoalEditor: View {
 
 struct AccountEditor: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
     @State var account: Account
 
     var body: some View {
         SheetForm(title: tr("Compte"), canSave: !account.name.trimmed.isEmpty, onSave: save) {
-            TextField(tr("Nom (compte chèque, CELI, prêt auto…)"), text: $account.name)
-            NumberRow(title: tr("Solde"), value: $account.balance, unit: model.settings.currencyCode)
-            Toggle(tr("C'est une dette"), isOn: $account.isLiability)
+            Section {
+                TextField(tr("Nom (compte chèque, CELI, prêt auto…)"), text: $account.name)
+                NumberRow(title: tr("Solde"), value: $account.balance, unit: model.settings.currencyCode)
+                Toggle(tr("C'est une dette"), isOn: $account.isLiability)
+            }
+            if model.budget.accounts.contains(where: { $0.id == account.id }) {
+                Section {
+                    Button(tr("Supprimer le compte"), role: .destructive) {
+                        let id = account.id
+                        model.update(\.budget) { $0.removeAccount(id) }
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 

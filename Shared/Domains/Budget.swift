@@ -14,6 +14,9 @@ struct Expense: Codable, Hashable, Identifiable {
     var categoryID: UUID?
     var note: String = ""
     var date = Date()
+    /// Set on an expense that comes from a fixed expense (a bill, a fixed cost): computed on its
+    /// date, never saved, so it is counted once and follows any change to the fixed expense.
+    var fixedID: UUID?
 }
 
 /// A one-tap expense (coffee, bus ticket…) offered by the "Dépense rapide" widget.
@@ -40,6 +43,8 @@ struct Bill: Codable, Hashable, Identifiable {
     var period: BillPeriod = .monthly
     var isSubscription = false
     var symbol: String = "doc.text"
+    /// The category its payments count in; found from its name when the person doesn't choose.
+    var categoryID: UUID?
 
     var monthlyCost: Double { period == .monthly ? amount : amount / 12 }
 
@@ -84,6 +89,102 @@ struct IncomeEntry: Codable, Hashable, Identifiable {
     var amount: Double
     var label: String = tr("Salaire")
     var date = Date()
+    /// Set on an income that comes from a fixed income (computed, never saved).
+    var fixedID: UUID?
+}
+
+/// What a fixed expense is, found from its name (rent, insurance, phone…), so that its payments
+/// land in the right category without the person sorting them.
+enum FixedExpenseNature: CaseIterable {
+    case housing, insurance, telecom, subscription, transport, health, loan, education
+
+    static func of(_ name: String, isSubscription: Bool = false) -> FixedExpenseNature? {
+        let words = name.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).lowercased().split { !$0.isLetter }.map(String.init)
+        let folded = " " + words.joined(separator: " ") + " "
+        for nature in allCases {
+            let found = nature.keywords.contains { keyword in
+                keyword.contains(" ") ? folded.contains(" \(keyword) ") : words.contains { $0 == keyword || (keyword.count >= 5 && $0.hasPrefix(keyword)) }
+            }
+            if found { return nature }
+        }
+        return isSubscription ? .subscription : nil
+    }
+
+    var keywords: [String] {
+        switch self {
+        case .housing: ["loyer", "rent", "hypotheque", "mortgage", "condo", "copropriete", "logement", "appartement", "taxe fonciere", "taxes municipales",
+                        "electricite", "hydro", "gaz", "chauffage", "energie", "edf", "engie", "eau potable", "facture d eau"]
+        case .insurance: ["assurance", "assurances", "insurance", "mutuelle"]
+        case .telecom: ["internet", "telephone", "mobile", "cellulaire", "cell", "forfait", "fibre", "wifi", "bell", "videotron", "rogers", "fido", "telus", "sfr", "bouygues", "phone"]
+        case .subscription: ["abonnement", "subscription", "netflix", "spotify", "disney", "prime", "youtube", "icloud", "deezer", "crave", "xbox", "playstation", "chatgpt", "gym"]
+        case .transport: ["transport", "bus", "metro", "opus", "navigo", "essence", "voiture", "automobile", "stationnement", "parking", "train", "velo", "passe"]
+        case .health: ["sante", "pharmacie", "dentiste", "medecin", "therapie", "psy", "lunettes"]
+        case .loan: ["pret", "credit", "emprunt", "loan", "dette"]
+        case .education: ["ecole", "scolarite", "universite", "garderie", "creche", "tuition", "frais de scolarite"]
+        }
+    }
+
+    /// The category it goes in when no category of its kind exists yet.
+    var categoryName: String {
+        switch self {
+        case .housing: tr("Maison")
+        case .insurance: tr("Assurances")
+        case .telecom: tr("Téléphone et Internet")
+        case .subscription: tr("Abonnements")
+        case .transport: tr("Transport")
+        case .health: tr("Santé")
+        case .loan: tr("Crédits")
+        case .education: tr("Études")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .housing: "house"
+        case .insurance: "shield"
+        case .telecom: "wifi"
+        case .subscription: "repeat"
+        case .transport: "bus"
+        case .health: "cross.case"
+        case .loan: "creditcard"
+        case .education: "graduationcap"
+        }
+    }
+
+    var colorHex: String {
+        switch self {
+        case .housing: "B7791F"
+        case .insurance: "2F8F7A"
+        case .telecom: "3366FF"
+        case .subscription: "D6409F"
+        case .transport: "3366FF"
+        case .health: "E5484D"
+        case .loan: "64748B"
+        case .education: "8C6CFF"
+        }
+    }
+
+    /// The default category of its kind (rent and energy in « Maison », transport in « Transport »).
+    var defaultCategoryID: UUID? {
+        switch self {
+        case .housing: BudgetState.fixedID(5)
+        case .transport: BudgetState.fixedID(3)
+        default: nil
+        }
+    }
+}
+
+extension MoneyPeriod {
+    /// The time between two payments.
+    var step: (component: Calendar.Component, value: Int) {
+        switch self {
+        case .day: (.day, 1)
+        case .week: (.day, 7)
+        case .twoWeeks: (.day, 14)
+        case .month: (.month, 1)
+        case .year: (.year, 1)
+        }
+    }
 }
 
 struct ValuePoint: Codable, Hashable {
@@ -101,9 +202,14 @@ struct BudgetState: Codable, Hashable {
     var accounts: [Account] = []
     var netWorthHistory: [ValuePoint] = []
     var incomes: [IncomeEntry] = []
+    /// The fixed incomes and expenses of « Revenus et dépenses fixes », copied here by the app so
+    /// that Finances and its widgets count them on their dates.
+    var fixedFlows: [MoneyItem] = []
+    /// Their first date when an item has none of its own.
+    var fixedFlowsStart: Date?
 
     enum CodingKeys: String, CodingKey {
-        case monthlyBudget, categories, expenses, quickExpenses, bills, goals, accounts, netWorthHistory, incomes
+        case monthlyBudget, categories, expenses, quickExpenses, bills, goals, accounts, netWorthHistory, incomes, fixedFlows, fixedFlowsStart
     }
 
     init() {}
@@ -119,6 +225,8 @@ struct BudgetState: Codable, Hashable {
         accounts = c.value(.accounts, [])
         netWorthHistory = c.value(.netWorthHistory, [])
         incomes = c.value(.incomes, [])
+        fixedFlows = c.value(.fixedFlows, [])
+        fixedFlowsStart = try? c.decodeIfPresent(Date.self, forKey: .fixedFlowsStart)
     }
 
     static let defaultCategories: [BudgetCategory] = [
@@ -161,6 +269,32 @@ struct BudgetState: Codable, Hashable {
         if let index = incomes.firstIndex(where: { $0.id == income.id }) { incomes[index] = income } else { addIncome(income) }
     }
 
+    /// The category of a fixed expense from its name: the default category of its kind, one of the
+    /// same name, or a new one; « Autre » when its kind isn't recognised.
+    mutating func categoryID(forFixed name: String, isSubscription: Bool = false) -> UUID? {
+        if let id = existingCategoryID(forFixed: name, isSubscription: isSubscription) { return id }
+        guard let nature = FixedExpenseNature.of(name, isSubscription: isSubscription) else { return nil }
+        let category = BudgetCategory(name: nature.categoryName, symbol: nature.symbol, colorHex: nature.colorHex)
+        categories.append(category)
+        return category.id
+    }
+
+    /// The same, without creating a category.
+    func existingCategoryID(forFixed name: String, isSubscription: Bool = false) -> UUID? {
+        guard let nature = FixedExpenseNature.of(name, isSubscription: isSubscription) else {
+            return categories.first { $0.id == BudgetState.fixedID(6) }?.id
+        }
+        if let id = nature.defaultCategoryID, categories.contains(where: { $0.id == id }) { return id }
+        let wanted = nature.categoryName.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil)
+        return categories.first { $0.name.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil) == wanted }?.id
+    }
+
+    /// Deletes an account; the net worth follows.
+    mutating func removeAccount(_ id: UUID, at date: Date = Date()) {
+        accounts.removeAll { $0.id == id }
+        if accounts.isEmpty { netWorthHistory = [] } else { snapshotNetWorth(at: date) }
+    }
+
     /// Adds a payment to a savings goal.
     mutating func deposit(_ amount: Double, toGoal id: UUID) {
         guard amount > 0, let index = goals.firstIndex(where: { $0.id == id }) else { return }
@@ -182,12 +316,76 @@ enum BudgetMath {
         DateMath.calendar.dateInterval(of: .month, for: date) ?? DateInterval(start: date, duration: 1)
     }
 
-    static func expenses(_ state: BudgetState, in interval: DateInterval) -> [Expense] {
-        state.expenses.filter { interval.contains($0.date) }
+    /// What was spent in the interval: the expenses noted, and the payments of the fixed expenses
+    /// (bills, fixed costs) on their dates up to now. A payment also noted by hand counts once.
+    static func expenses(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> [Expense] {
+        let noted = state.expenses.filter { interval.contains($0.date) }
+        let fixed = fixedExpenses(state, in: interval, now: now).filter { payment in
+            !state.expenses.contains { isSamePayment($0.amount, $0.date, payment.amount, payment.date) && ($0.categoryID == payment.categoryID || folded($0.note) == folded(payment.note)) }
+        }
+        return noted + fixed
+    }
+
+    /// The payments of the bills and of the fixed expenses of « Revenus et dépenses fixes » (one
+    /// already listed as a bill of the same name isn't counted twice).
+    static func fixedExpenses(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> [Expense] {
+        var result: [Expense] = []
+        for bill in state.bills {
+            let step: (component: Calendar.Component, value: Int) = bill.period == .monthly ? (.month, 1) : (.year, 1)
+            for date in paymentDates(from: bill.anchorDate, every: step, in: interval, until: now) {
+                result.append(Expense(id: paymentID(bill.id, date), amount: bill.amount,
+                                      categoryID: bill.categoryID ?? state.existingCategoryID(forFixed: bill.name, isSubscription: bill.isSubscription),
+                                      note: bill.name, date: date, fixedID: bill.id))
+            }
+        }
+        let billNames = Set(state.bills.map { folded($0.name) })
+        for item in state.fixedFlows where !item.isIncome && !billNames.contains(folded(item.name)) {
+            for date in paymentDates(from: item.date ?? state.fixedFlowsStart ?? now, every: item.period.step, in: interval, until: now) {
+                result.append(Expense(id: paymentID(item.id, date), amount: item.amount,
+                                      categoryID: item.categoryID ?? state.existingCategoryID(forFixed: item.name),
+                                      note: item.name, date: date, fixedID: item.id))
+            }
+        }
+        return result
+    }
+
+    /// The dates a recurring amount falls on in the interval, from its first date and up to now.
+    static func paymentDates(from first: Date, every step: (component: Calendar.Component, value: Int), in interval: DateInterval, until now: Date) -> [Date] {
+        let start = DateMath.startOfDay(first)
+        let end = min(interval.end, now)
+        var dates: [Date] = []
+        var index = 0
+        while index < 5_000, let date = DateMath.calendar.date(byAdding: step.component, value: step.value * index, to: start), date <= end {
+            if date >= interval.start, date < interval.end { dates.append(date) }
+            index += 1
+        }
+        return dates
+    }
+
+    /// The same payment noted twice: same amount, three days apart at most.
+    static func isSamePayment(_ amount: Double, _ date: Date, _ otherAmount: Double, _ otherDate: Date) -> Bool {
+        abs(amount - otherAmount) < 0.01 && abs(DateMath.daysBetween(date, otherDate)) <= 3
+    }
+
+    private static func folded(_ text: String) -> String {
+        text.trimmingCharacters(in: .whitespaces).folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil)
+    }
+
+    /// A stable identifier for a payment of a fixed amount on a day.
+    static func paymentID(_ id: UUID, _ date: Date) -> UUID {
+        var bytes = id.uuid
+        let day = UInt32(max(0, Int(date.timeIntervalSince1970 / 86_400)))
+        withUnsafeMutableBytes(of: &bytes) { raw in
+            raw[12] ^= UInt8(truncatingIfNeeded: day >> 24)
+            raw[13] ^= UInt8(truncatingIfNeeded: day >> 16)
+            raw[14] ^= UInt8(truncatingIfNeeded: day >> 8)
+            raw[15] ^= UInt8(truncatingIfNeeded: day)
+        }
+        return UUID(uuid: bytes)
     }
 
     static func spentThisMonth(_ state: BudgetState, at date: Date) -> Double {
-        expenses(state, in: monthInterval(date)).reduce(0) { $0 + $1.amount }
+        expenses(state, in: monthInterval(date), now: date).reduce(0) { $0 + $1.amount }
     }
 
     static func remaining(_ state: BudgetState, at date: Date) -> Double {
@@ -204,7 +402,8 @@ enum BudgetMath {
     }
 
     static func spentToday(_ state: BudgetState, at date: Date) -> Double {
-        state.expenses.filter { DateMath.isSameDay($0.date, date) }.reduce(0) { $0 + $1.amount }
+        let day = DateInterval(start: DateMath.startOfDay(date), end: DateMath.nextMidnight(after: date))
+        return expenses(state, in: day, now: date).reduce(0) { $0 + $1.amount }
     }
 
     struct CategorySpend: Hashable {
@@ -214,9 +413,9 @@ enum BudgetMath {
         var colorHex: String { category?.colorHex ?? "64748B" }
     }
 
-    static func byCategory(_ state: BudgetState, in interval: DateInterval) -> [CategorySpend] {
+    static func byCategory(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> [CategorySpend] {
         var totals: [UUID?: Double] = [:]
-        for expense in expenses(state, in: interval) {
+        for expense in expenses(state, in: interval, now: now) {
             totals[expense.categoryID, default: 0] += expense.amount
         }
         return totals.map { CategorySpend(category: state.category($0.key), amount: $0.value) }
@@ -254,8 +453,8 @@ enum BudgetMath {
         let elapsed = date.timeIntervalSince(week.start)
         let current = DateInterval(start: week.start, duration: max(1, elapsed))
         let previous = DateInterval(start: lastStart, duration: max(1, elapsed))
-        let now = byCategory(state, in: current)
-        let before = byCategory(state, in: previous)
+        let now = byCategory(state, in: current, now: date)
+        let before = byCategory(state, in: previous, now: date)
         let names = Set(now.map(\.name) + before.map(\.name))
         return names.map { name -> (name: String, current: Double, previous: Double) in
             (name, now.first { $0.name == name }?.amount ?? 0, before.first { $0.name == name }?.amount ?? 0)
@@ -264,16 +463,26 @@ enum BudgetMath {
 
     // MARK: Mini-app
 
-    static func incomes(_ state: BudgetState, in interval: DateInterval) -> [IncomeEntry] {
-        state.incomes.filter { interval.contains($0.date) }
+    /// What came in: the incomes noted, and the fixed incomes on their dates up to now (one also
+    /// noted by hand counts once).
+    static func incomes(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> [IncomeEntry] {
+        let noted = state.incomes.filter { interval.contains($0.date) }
+        var fixed: [IncomeEntry] = []
+        for item in state.fixedFlows where item.isIncome {
+            for date in paymentDates(from: item.date ?? state.fixedFlowsStart ?? now, every: item.period.step, in: interval, until: now)
+            where !state.incomes.contains(where: { isSamePayment($0.amount, $0.date, item.amount, date) }) {
+                fixed.append(IncomeEntry(id: paymentID(item.id, date), amount: item.amount, label: item.name, date: date, fixedID: item.id))
+            }
+        }
+        return noted + fixed
     }
 
-    static func earned(_ state: BudgetState, in interval: DateInterval) -> Double {
-        incomes(state, in: interval).reduce(0) { $0 + $1.amount }
+    static func earned(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> Double {
+        incomes(state, in: interval, now: now).reduce(0) { $0 + $1.amount }
     }
 
-    static func spent(_ state: BudgetState, in interval: DateInterval) -> Double {
-        expenses(state, in: interval).reduce(0) { $0 + $1.amount }
+    static func spent(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> Double {
+        expenses(state, in: interval, now: now).reduce(0) { $0 + $1.amount }
     }
 
     /// One month: what came in and what went out.
@@ -291,7 +500,7 @@ enum BudgetMath {
         return (0..<count).reversed().compactMap { back in
             guard let start = DateMath.calendar.date(byAdding: .month, value: -back, to: current) else { return nil }
             let interval = monthInterval(start)
-            return MonthSummary(start: start, spent: spent(state, in: interval), earned: earned(state, in: interval))
+            return MonthSummary(start: start, spent: spent(state, in: interval, now: date), earned: earned(state, in: interval, now: date))
         }
     }
 
@@ -301,8 +510,8 @@ enum BudgetMath {
         let elapsed = max(1, date.timeIntervalSince(month.start))
         let previousStart = DateMath.calendar.date(byAdding: .month, value: -1, to: month.start) ?? month.start
         let previousEnd = min(previousStart.addingTimeInterval(elapsed), month.start)
-        return (spent(state, in: DateInterval(start: month.start, end: max(month.start, date))),
-                spent(state, in: DateInterval(start: previousStart, end: previousEnd)))
+        return (spent(state, in: DateInterval(start: month.start, end: max(month.start, date)), now: date),
+                spent(state, in: DateInterval(start: previousStart, end: previousEnd), now: date))
     }
 
     /// A category this month: what was spent against its limit.
@@ -318,9 +527,9 @@ enum BudgetMath {
 
     /// Every category with a limit or some spending this month, the biggest spending first.
     static func categoryStatus(_ state: BudgetState, at date: Date) -> [CategoryStatus] {
-        let month = monthInterval(date)
+        let spending = expenses(state, in: monthInterval(date), now: date)
         return state.categories.map { category in
-            CategoryStatus(category: category, spent: expenses(state, in: month).filter { $0.categoryID == category.id }.reduce(0) { $0 + $1.amount })
+            CategoryStatus(category: category, spent: spending.filter { $0.categoryID == category.id }.reduce(0) { $0 + $1.amount })
         }
         .filter { $0.spent > 0 || $0.limit > 0 }
         .sorted { $0.spent > $1.spent }

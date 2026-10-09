@@ -1749,13 +1749,6 @@
   ]
  },
  {
-  "key": "Touche un objectif pour y ajouter un versement.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:359: Text(tr(\"Touche un objectif pour y ajouter un versement.\")).font(.footnote).foregroundStyle(.secondary)"
-  ]
- },
- {
   "key": "valeur nette %@",
   "placeholders": 1,
   "uses": [

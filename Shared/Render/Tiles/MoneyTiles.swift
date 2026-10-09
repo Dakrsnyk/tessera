@@ -35,7 +35,7 @@ enum MoneyTiles {
             tile.value = TF.money(spent, currency)
             tile.caption = tr("dépensés ce mois-ci")
             tile.detail = tr("Budget mensuel à définir dans Tessera")
-            tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now)).prefix(4).map { item in
+            tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now).prefix(4).map { item in
                 TileRow(id: item.name, title: item.name, value: TF.money(item.amount, currency), colorHex: item.colorHex)
             }
             tile.shortValue = TF.money(spent, currency)
@@ -50,7 +50,7 @@ enum MoneyTiles {
         tile.caption = remaining >= 0 ? tr("soit \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour") : tr("au-dessus du budget")
         tile.detail = tr("Dépensé : \(TF.money(spent, currency)) sur \(TF.money(budget, currency))")
         tile.visual = .bar(spent / budget)
-        tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now)).prefix(4).map { item in
+        tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now).prefix(4).map { item in
             TileRow(id: item.name, title: item.name, value: TF.money(item.amount, currency), colorHex: item.colorHex)
         }
         tile.gauge = max(0, 1 - spent / budget)
@@ -60,7 +60,7 @@ enum MoneyTiles {
     }
 
     static func byCategory(_ state: BudgetState, now: Date, currency: String) -> Tile {
-        let items = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now))
+        let items = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now)
         guard !items.isEmpty else { return .empty(tr("Dépenses"), symbol: "chart.bar.doc.horizontal", message: tr("Note tes dépenses dans Tessera, espace Budget.")) }
         let total = items.reduce(0) { $0 + $1.amount }
         var tile = Tile(title: tr("Dépenses du mois"), symbol: "chart.bar.doc.horizontal")

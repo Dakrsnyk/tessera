@@ -58,5 +58,19 @@
  "Vert sapin, rouge et fils d'or": "Tannengrün, Rot und Goldfäden",
  "Vert tendre, feuilles et serif de serre": "Zartes Grün, Blätter und Gewächshaus-Serife",
  "Violet inquiétant et vert acide": "Unheimliches Violett und Säuregrün",
- "Étoiles": "Sterne"
+ "Étoiles": "Sterne",
+ "%@ · revenu fixe": "%@ · festes Einkommen",
+ "Assurances": "Versicherungen",
+ "Automatique (%@)": "Automatisch (%@)",
+ "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.": "Jede Zahlung zählt zu deinen Ausgaben und zu ihrer Kategorie, an ihrem Datum.",
+ "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.": "Wird an diesem Datum und danach bei jeder Fälligkeit zu den Ausgaben in Finanzen und zu seiner Kategorie gezählt.",
+ "Compté dans les revenus de Finances à cette date, puis à chaque échéance.": "Wird an diesem Datum und danach bei jeder Fälligkeit zu den Einnahmen in Finanzen gezählt.",
+ "Date d'un paiement": "Datum einer Zahlung",
+ "Dépense fixe · %@": "Fixe Ausgabe · %@",
+ "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": "Gib deine Kontostände von Hand ein: Tessera verbindet sich mit keiner Bank. Tippe auf ein Konto, um es zu ändern oder zu löschen.",
+ "Supprimer l'objectif": "Ziel löschen",
+ "Supprimer la facture": "Rechnung löschen",
+ "Supprimer le compte": "Konto löschen",
+ "Touche un objectif pour y ajouter un versement ou le supprimer.": "Tippe auf ein Ziel, um eine Einzahlung hinzuzufügen oder es zu löschen.",
+ "Téléphone et Internet": "Telefon und Internet"
 }

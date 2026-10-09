@@ -58,5 +58,19 @@
  "Vert sapin, rouge et fils d'or": "Fir green, red and gold threads",
  "Vert tendre, feuilles et serif de serre": "Soft green, leaves and greenhouse serif",
  "Violet inquiétant et vert acide": "Unsettling purple and acid green",
- "Étoiles": "Stars"
+ "Étoiles": "Stars",
+ "%@ · revenu fixe": "%@ · fixed income",
+ "Assurances": "Insurance",
+ "Automatique (%@)": "Automatic (%@)",
+ "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.": "Each payment counts in your expenses and in its category, on its date.",
+ "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.": "Counted in Finances expenses and in its category on this date, then on each due date.",
+ "Compté dans les revenus de Finances à cette date, puis à chaque échéance.": "Counted in Finances income on this date, then on each due date.",
+ "Date d'un paiement": "Payment date",
+ "Dépense fixe · %@": "Fixed expense · %@",
+ "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": "Enter your balances by hand: Tessera doesn't connect to any bank. Tap an account to edit or delete it.",
+ "Supprimer l'objectif": "Delete goal",
+ "Supprimer la facture": "Delete bill",
+ "Supprimer le compte": "Delete account",
+ "Touche un objectif pour y ajouter un versement ou le supprimer.": "Tap a goal to add a deposit or delete it.",
+ "Téléphone et Internet": "Phone and Internet"
 }

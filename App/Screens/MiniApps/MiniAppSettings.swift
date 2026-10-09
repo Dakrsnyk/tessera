@@ -25,7 +25,7 @@ extension MiniApp {
         case .nutrition: [.kcalTarget, .macroTargets, .weight]
         case .fitness: [.routines, .weeklyWorkouts, .weight, .stepGoal]
         case .planning: [.focusGoal, .habits, .hydrationGoal, .priorities, .timetable, .exams, .assignments]
-        case .finances: [.monthlyBudget, .moneyFlow, .savingsGoals, .bills]
+        case .finances: [.monthlyBudget, .moneyFlow, .savingsGoals]
         case .business: [.businessGoal]
         case .travel: [.trip]
         case .car: [.carName, .carDeadlines]

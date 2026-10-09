@@ -8,6 +8,8 @@ enum FinanceSheet: Identifiable {
     case goal(SavingsGoal)
     case account(Account)
     case category(BudgetCategory)
+    /// A fixed income or expense of « Revenus et dépenses fixes ».
+    case flow(MoneyItem)
     case budget
 
     var id: String {
@@ -18,6 +20,7 @@ enum FinanceSheet: Identifiable {
         case let .goal(goal): "goal-\(goal.id)"
         case let .account(account): "account-\(account.id)"
         case let .category(category): "category-\(category.id)"
+        case let .flow(item): "flow-\(item.id)"
         case .budget: "budget"
         }
     }
@@ -31,6 +34,7 @@ enum FinanceSheet: Identifiable {
         case let .goal(goal): GoalEditor(goal: goal)
         case let .account(account): AccountEditor(account: account)
         case let .category(category): CategoryEditor(category: category)
+        case let .flow(item): MoneyItemEditor(item: item, isNew: false)
         case .budget: MonthlyBudgetEditor()
         }
     }

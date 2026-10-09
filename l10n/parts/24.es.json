@@ -58,5 +58,19 @@
  "Vert sapin, rouge et fils d'or": "Verde abeto, rojo e hilos de oro",
  "Vert tendre, feuilles et serif de serre": "Verde tierno, hojas y serifa de invernadero",
  "Violet inquiétant et vert acide": "Violeta inquietante y verde ácido",
- "Étoiles": "Estrellas"
+ "Étoiles": "Estrellas",
+ "%@ · revenu fixe": "%@ · ingreso fijo",
+ "Assurances": "Seguros",
+ "Automatique (%@)": "Automática (%@)",
+ "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.": "Cada pago cuenta en tus gastos y en su categoría, en su fecha.",
+ "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.": "Se cuenta en los gastos de Finanzas y en su categoría en esta fecha, y luego en cada vencimiento.",
+ "Compté dans les revenus de Finances à cette date, puis à chaque échéance.": "Se cuenta en los ingresos de Finanzas en esta fecha, y luego en cada vencimiento.",
+ "Date d'un paiement": "Fecha de un pago",
+ "Dépense fixe · %@": "Gasto fijo · %@",
+ "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": "Introduce tus saldos a mano: Tessera no se conecta a ningún banco. Toca una cuenta para modificarla o eliminarla.",
+ "Supprimer l'objectif": "Eliminar el objetivo",
+ "Supprimer la facture": "Eliminar la factura",
+ "Supprimer le compte": "Eliminar la cuenta",
+ "Touche un objectif pour y ajouter un versement ou le supprimer.": "Toca un objetivo para añadir un aporte o eliminarlo.",
+ "Téléphone et Internet": "Teléfono e Internet"
 }

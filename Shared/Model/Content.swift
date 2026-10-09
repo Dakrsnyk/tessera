@@ -217,6 +217,10 @@ struct MoneyItem: Codable, Identifiable, Hashable {
     var amount: Double
     var period: MoneyPeriod
     var isIncome: Bool
+    /// The day of a payment (the next or a past one); nil: the start of the calculation.
+    var date: Date?
+    /// For an expense, the Finances category its payments count in (found from its name).
+    var categoryID: UUID?
 
     var perDay: Double { amount / period.days }
 }

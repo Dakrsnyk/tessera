@@ -8179,6 +8179,53 @@
         }
       }
     },
+    "%@ · revenu fixe": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · festes Einkommen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · fixed income"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · ingreso fijo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · revenu fixe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · entrata fissa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · 固定収入"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · renda fixa"
+          }
+        }
+      }
+    },
     "%@ · série %@ sur %@": {
       "extractionState": "manual",
       "localizations": {
@@ -26979,6 +27026,53 @@
         }
       }
     },
+    "Assurances": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versicherungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insurance"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assurances"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assicurazioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保険"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguros"
+          }
+        }
+      }
+    },
     "Atelier Nova": {
       "extractionState": "manual",
       "localizations": {
@@ -30171,6 +30265,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Automático"
+          }
+        }
+      }
+    },
+    "Automatique (%@)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch (%@)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic (%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automática (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique (%@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatica (%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動（%@）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automática (%@)"
           }
         }
       }
@@ -46907,6 +47048,53 @@
         }
       }
     },
+    "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jede Zahlung zählt zu deinen Ausgaben und zu ihrer Kategorie, an ihrem Datum."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each payment counts in your expenses and in its category, on its date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada pago cuenta en tus gastos y en su categoría, en su fecha."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque paiement compte dans tes dépenses et dans sa catégorie, à sa date."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogni pagamento conta nelle tue spese e nella sua categoria, alla sua data."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払いはそれぞれの日付で、支出とそのカテゴリに計上されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada pagamento conta nas suas despesas e na categoria dele, na data dele."
+          }
+        }
+      }
+    },
     "Chaque semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -53953,6 +54141,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contadores"
+          }
+        }
+      }
+    },
+    "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird an diesem Datum und danach bei jeder Fälligkeit zu den Ausgaben in Finanzen und zu seiner Kategorie gezählt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Counted in Finances expenses and in its category on this date, then on each due date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se cuenta en los gastos de Finanzas y en su categoría en esta fecha, y luego en cada vencimiento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conteggiato nelle spese di Finanze e nella sua categoria in questa data, poi a ogni scadenza."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この日付と以降の各支払日に、ファイナンスの支出とそのカテゴリに計上されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contado nas despesas de Finanças e na categoria dele nesta data, depois a cada vencimento."
+          }
+        }
+      }
+    },
+    "Compté dans les revenus de Finances à cette date, puis à chaque échéance.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird an diesem Datum und danach bei jeder Fälligkeit zu den Einnahmen in Finanzen gezählt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Counted in Finances income on this date, then on each due date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se cuenta en los ingresos de Finanzas en esta fecha, y luego en cada vencimiento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compté dans les revenus de Finances à cette date, puis à chaque échéance."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conteggiato nelle entrate di Finanze in questa data, poi a ogni scadenza."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この日付と以降の各支払日に、ファイナンスの収入に計上されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contado nas receitas de Finanças nesta data, depois a cada vencimento."
           }
         }
       }
@@ -62460,6 +62742,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Data"
+          }
+        }
+      }
+    },
+    "Date d'un paiement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datum einer Zahlung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Payment date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha de un pago"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date d'un paiement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data di un pagamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data de um pagamento"
           }
         }
       }
@@ -74915,6 +75244,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gasto e contas"
+          }
+        }
+      }
+    },
+    "Dépense fixe · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixe Ausgabe · %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixed expense · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto fijo · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépense fixe · %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spesa fissa · %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "固定費 · %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despesa fixa · %@"
           }
         }
       }
@@ -175311,6 +175687,53 @@
         }
       }
     },
+    "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gib deine Kontostände von Hand ein: Tessera verbindet sich mit keiner Bank. Tippe auf ein Konto, um es zu ändern oder zu löschen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter your balances by hand: Tessera doesn't connect to any bank. Tap an account to edit or delete it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introduce tus saldos a mano: Tessera no se conecta a ningún banco. Toca una cuenta para modificarla o eliminarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inserisci i saldi a mano: Tessera non si collega a nessuna banca. Tocca un conto per modificarlo o eliminarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残高は手入力です。Tesseraはどの銀行にも接続しません。口座をタップすると編集・削除できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informe seus saldos manualmente: o Tessera não se conecta a nenhum banco. Toque em uma conta para editá-la ou excluí-la."
+          }
+        }
+      }
+    },
     "Sakura": {
       "extractionState": "manual",
       "localizations": {
@@ -184758,6 +185181,53 @@
         }
       }
     },
+    "Supprimer l'objectif": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar el objetivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer l'objectif"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina l'obiettivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir a meta"
+          }
+        }
+      }
+    },
     "Supprimer la dépense": {
       "extractionState": "manual",
       "localizations": {
@@ -184801,6 +185271,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Excluir despesa"
+          }
+        }
+      }
+    },
+    "Supprimer la facture": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechnung löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete bill"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar la factura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer la facture"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina la bolletta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請求を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir a conta"
           }
         }
       }
@@ -184895,6 +185412,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apagar venda"
+          }
+        }
+      }
+    },
+    "Supprimer le compte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konto löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete account"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar la cuenta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le compte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina il conto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "口座を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir a conta bancária"
           }
         }
       }
@@ -201819,49 +202383,49 @@
         }
       }
     },
-    "Touche un objectif pour y ajouter un versement.": {
+    "Touche un objectif pour y ajouter un versement ou le supprimer.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tippe auf ein Ziel, um eine Einzahlung hinzuzufügen."
+            "value": "Tippe auf ein Ziel, um eine Einzahlung hinzuzufügen oder es zu löschen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap a goal to add a deposit."
+            "value": "Tap a goal to add a deposit or delete it."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toca un objetivo para añadirle un aporte."
+            "value": "Toca un objetivo para añadir un aporte o eliminarlo."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touche un objectif pour y ajouter un versement."
+            "value": "Touche un objectif pour y ajouter un versement ou le supprimer."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tocca un obiettivo per aggiungere un versamento."
+            "value": "Tocca un obiettivo per aggiungere un versamento o eliminarlo."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "目標をタップして入金を追加します。"
+            "value": "目標をタップすると、入金の追加や削除ができます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toque em uma meta para adicionar um depósito."
+            "value": "Toque em uma meta para adicionar um depósito ou excluí-la."
           }
         }
       }
@@ -206609,6 +207173,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Telefone"
+          }
+        }
+      }
+    },
+    "Téléphone et Internet": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telefon und Internet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phone and Internet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teléfono e Internet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléphone et Internet"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telefono e Internet"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "電話・インターネット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telefone e Internet"
           }
         }
       }

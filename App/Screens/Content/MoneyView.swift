@@ -125,7 +125,7 @@ struct MoneyItemEditor: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                Section(tr("Détails")) {
+                Section {
                     TextField(item.isIncome ? tr("Salaire, freelance…") : tr("Loyer, épicerie…"), text: $item.name)
                     HStack {
                         TextField(tr("Montant"), text: $amountText)
@@ -135,6 +135,19 @@ struct MoneyItemEditor: View {
                     Picker(tr("Fréquence"), selection: $item.period) {
                         ForEach(MoneyPeriod.allCases) { Text($0.title).tag($0) }
                     }
+                    DatePicker(tr("Date d'un paiement"), selection: Binding(
+                        get: { item.date ?? model.content.money.startDate },
+                        set: { item.date = DateMath.startOfDay($0) }
+                    ), displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+                    if !item.isIncome {
+                        FixedCategoryPicker(name: item.name, selection: $item.categoryID)
+                    }
+                } header: {
+                    Text(tr("Détails"))
+                } footer: {
+                    Text(item.isIncome ? tr("Compté dans les revenus de Finances à cette date, puis à chaque échéance.")
+                         : tr("Compté dans les dépenses de Finances et dans sa catégorie à cette date, puis à chaque échéance."))
                 }
                 if let amount = parsedAmount, amount > 0 {
                     Section {

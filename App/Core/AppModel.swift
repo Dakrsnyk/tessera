@@ -102,6 +102,25 @@ final class AppModel {
         for ref in following.followed {
             if let cached = CompanyService.cached(ref.cik) { companies[ref.cik] = cached }
         }
+        syncFinances()
+    }
+
+    /// Keeps Finances in step with « Revenus et dépenses fixes » (counted on their dates) and makes
+    /// sure the category of every fixed expense exists, found from its name when none was chosen.
+    func syncFinances() {
+        var budget = self.budget
+        for item in content.money.items where !item.isIncome && item.categoryID == nil {
+            _ = budget.categoryID(forFixed: item.name)
+        }
+        for bill in budget.bills where bill.categoryID == nil {
+            _ = budget.categoryID(forFixed: bill.name, isSubscription: bill.isSubscription)
+        }
+        budget.fixedFlows = content.money.items
+        budget.fixedFlowsStart = content.money.startDate
+        guard budget != self.budget else { return }
+        self.budget = budget
+        store.save(budget)
+        scheduleWidgetReload()
     }
 
     // MARK: Mini-apps
@@ -112,6 +131,8 @@ final class AppModel {
         change(&value)
         self[keyPath: keyPath] = value
         store.save(value)
+        // A new bill or fixed expense: its category is found and created if needed.
+        if T.self == BudgetState.self { syncFinances() }
         // Targets calculated from the body follow it (a new weight, a new aim, more workouts…).
         if T.self == UserProfile.self || T.self == FitnessState.self || T.self == LifeState.self {
             followCalculatedNutritionGoals()
@@ -307,8 +328,11 @@ final class AppModel {
     // MARK: Content
 
     func updateContent(_ change: (inout ContentState) -> Void) {
+        let money = content.money
         change(&content)
         store.content = content
+        // « Revenus et dépenses fixes » count in Finances too.
+        if content.money != money { syncFinances() }
         scheduleWidgetReload()
     }
 

@@ -111,11 +111,13 @@ struct FinancesTransactionsPage: View {
             let items = all.filter { DateMath.isSameDay($0.date, day) }
             Section(Fmt.longDay(day)) {
                 ForEach(items) { expense in
-                    Button { sheet = .expense(expense) } label: { expenseRow(expense, state: state) }
-                        .accessibilityIdentifier("expense-row")
+                    // A payment of a fixed expense opens the fixed expense, and is changed or removed there.
+                    Button { sheet = expense.fixedID.flatMap { fixedSheet($0, state: state) } ?? .expense(expense) } label: { expenseRow(expense, state: state) }
+                        .accessibilityIdentifier(expense.fixedID == nil ? "expense-row" : "fixed-expense-row")
+                        .deleteDisabled(expense.fixedID != nil)
                 }
                 .onDelete { offsets in
-                    let ids = offsets.map { items[$0].id }
+                    let ids = offsets.map { items[$0] }.filter { $0.fixedID == nil }.map(\.id)
                     model.update(\.budget) { $0.expenses.removeAll { ids.contains($0.id) } }
                 }
             }
@@ -140,11 +142,12 @@ struct FinancesTransactionsPage: View {
         if !all.isEmpty {
             Section {
                 ForEach(all) { income in
-                    Button { sheet = .income(income) } label: {
+                    Button { sheet = income.fixedID.flatMap { fixedSheet($0, state: state) } ?? .income(income) } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(income.label).foregroundStyle(.primary)
-                                Text(Fmt.shortDay(income.date)).font(.caption).foregroundStyle(.secondary)
+                                Text(income.fixedID == nil ? Fmt.shortDay(income.date) : tr("\(Fmt.shortDay(income.date)) · revenu fixe"))
+                                    .font(.caption).foregroundStyle(.secondary)
                             }
                             Spacer()
                             Text("+\(TF.money(income.amount, currency, decimals: 2))").monospacedDigit().foregroundStyle(Color(hex: Finances.incomeHex))
@@ -152,7 +155,7 @@ struct FinancesTransactionsPage: View {
                     }
                 }
                 .onDelete { offsets in
-                    let ids = offsets.map { all[$0].id }
+                    let ids = offsets.map { all[$0] }.filter { $0.fixedID == nil }.map(\.id)
                     model.update(\.budget) { $0.incomes.removeAll { ids.contains($0.id) } }
                 }
             }
@@ -167,13 +170,22 @@ struct FinancesTransactionsPage: View {
                 .frame(width: 24)
             VStack(alignment: .leading, spacing: 2) {
                 Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note).foregroundStyle(.primary)
-                if !expense.note.isEmpty, let category {
+                if expense.fixedID != nil {
+                    Label(tr("Dépense fixe · \(category?.name ?? tr("Sans catégorie"))"), systemImage: "repeat")
+                        .font(.caption).foregroundStyle(.secondary)
+                } else if !expense.note.isEmpty, let category {
                     Text(category.name).font(.caption).foregroundStyle(.secondary)
                 }
             }
             Spacer()
             Text(TF.money(expense.amount, currency, decimals: 2)).monospacedDigit().foregroundStyle(.primary)
         }
+    }
+
+    /// The bill or the fixed income or expense a payment comes from.
+    private func fixedSheet(_ id: UUID, state: BudgetState) -> FinanceSheet? {
+        if let bill = state.bills.first(where: { $0.id == id }) { return .bill(bill) }
+        return model.content.money.items.first { $0.id == id }.map { FinanceSheet.flow($0) }
     }
 
     /// The distinct days, most recent first.
@@ -341,6 +353,13 @@ struct FinancesSavingsPage: View {
                                 .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                model.update(\.budget) { $0.goals.removeAll { $0.id == goal.id } }
+                            } label: {
+                                Label(tr("Supprimer"), systemImage: "trash")
+                            }
+                        }
                     }
                     if !state.goals.isEmpty { Divider() }
                     Button { sheet = .goal(SavingsGoal(name: "", target: 1_000, saved: 0, deadline: nil)) } label: {
@@ -356,7 +375,7 @@ struct FinancesSavingsPage: View {
                 .padding(.horizontal, 14)
                 .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
                 if !state.goals.isEmpty {
-                    Text(tr("Touche un objectif pour y ajouter un versement.")).font(.footnote).foregroundStyle(.secondary)
+                    Text(tr("Touche un objectif pour y ajouter un versement ou le supprimer.")).font(.footnote).foregroundStyle(.secondary)
                 }
             }
             accounts(state: state)
@@ -392,6 +411,13 @@ struct FinancesSavingsPage: View {
                                 value: (account.isLiability ? "−" : "") + TF.money(account.balance, currency), showsChevron: false)
                     }
                     .buttonStyle(.plain)
+                    .contextMenu {
+                        Button(role: .destructive) {
+                            model.update(\.budget) { $0.removeAccount(account.id) }
+                        } label: {
+                            Label(tr("Supprimer"), systemImage: "trash")
+                        }
+                    }
                 }
                 if !state.accounts.isEmpty { MiniDivider() }
                 Button { sheet = .account(Account(name: "", balance: 0)) } label: {
@@ -403,7 +429,7 @@ struct FinancesSavingsPage: View {
                 }
                 .buttonStyle(.plain)
             }
-            Text(tr("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.")).font(.footnote).foregroundStyle(.secondary)
+            Text(tr("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.")).font(.footnote).foregroundStyle(.secondary)
         }
     }
 }
