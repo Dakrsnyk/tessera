@@ -24864,6 +24864,53 @@
         }
       }
     },
+    "Argent lunaire, poussière d'étoiles et nuit profonde": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mondsilber, Sternenstaub und tiefe Nacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lunar silver, stardust and deep night"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plata lunar, polvo de estrellas y noche profunda"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Argent lunaire, poussière d'étoiles et nuit profonde"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Argento lunare, polvere di stelle e notte profonda"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月の銀色、星くず、深い夜"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prata lunar, poeira de estrelas e noite profunda"
+          }
+        }
+      }
+    },
     "Argentine": {
       "extractionState": "manual",
       "localizations": {
@@ -35110,6 +35157,100 @@
         }
       }
     },
+    "Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiefseeblau und Wellen: Wasser, Wetter, Regen und Mond."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abyssal blue and waves: water, weather, rain and the moon."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul abisal y olas: el agua, el tiempo, la lluvia y la luna."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blu abissale e onde: l'acqua, il meteo, la pioggia e la luna."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深海の青と波：水分補給、天気、雨、月。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul abissal e ondas: a água, o clima, a chuva e a lua."
+          }
+        }
+      }
+    },
+    "Bleu abyssal et vagues lumineuses": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiefseeblau und leuchtende Wellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abyssal blue and glowing waves"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul abisal y olas luminosas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu abyssal et vagues lumineuses"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blu abissale e onde luminose"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深海の青と光る波"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul abissal e ondas luminosas"
+          }
+        }
+      }
+    },
     "Bleu d'architecte et grille": {
       "extractionState": "manual",
       "localizations": {
@@ -35153,6 +35294,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Azul de arquiteto e grade"
+          }
+        }
+      }
+    },
+    "Bleu d'hiver et flocons qui tombent": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Winterblau und fallende Flocken"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Winter blue and falling snowflakes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul invernal y copos que caen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu d'hiver et flocons qui tombent"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blu d'inverno e fiocchi che cadono"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "冬の青と舞い落ちる雪"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul de inverno e flocos caindo"
           }
         }
       }
@@ -35294,6 +35482,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Azul-glacial e branco"
+          }
+        }
+      }
+    },
+    "Bleu héroïque, cape rouge, éclat doré": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heldenblau, roter Umhang, goldener Glanz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heroic blue, red cape, golden gleam"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul heroico, capa roja, destello dorado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu héroïque, cape rouge, éclat doré"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blu eroico, mantello rosso, bagliore dorato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヒーローの青、赤いマント、金色の輝き"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul heroico, capa vermelha, brilho dourado"
           }
         }
       }
@@ -36375,6 +36610,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Borda luminosa"
+          }
+        }
+      }
+    },
+    "Botanique": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Botanik"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Botanical"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Botánico"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Botanique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Botanico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボタニカル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Botânico"
           }
         }
       }
@@ -42485,6 +42767,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Melão cantalupo"
+          }
+        }
+      }
+    },
+    "Cape héroïque": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heldenumhang"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heroic Cape"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capa heroica"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cape héroïque"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantello eroico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヒーローのマント"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capa heroica"
           }
         }
       }
@@ -50855,6 +51184,53 @@
         }
       }
     },
+    "Citrouille": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kürbis"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pumpkin"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calabaza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Citrouille"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zucca"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "かぼちゃ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abóbora"
+          }
+        }
+      }
+    },
     "Civic 2019": {
       "extractionState": "manual",
       "localizations": {
@@ -51885,6 +52261,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coleção %@, %@ widgets"
+          }
+        }
+      }
+    },
+    "Collection Halloween": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Halloween-Kollektion"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Halloween Collection"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colección Halloween"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collection Halloween"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collezione Halloween"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ハロウィンコレクション"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coleção de Halloween"
+          }
+        }
+      }
+    },
+    "Collection de Noël": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weihnachtskollektion"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Christmas Collection"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colección de Navidad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collection de Noël"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collezione di Natale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリスマスコレクション"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coleção de Natal"
           }
         }
       }
@@ -53201,6 +53671,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contagem regressiva e preparação"
+          }
+        }
+      }
+    },
+    "Compte à rebours, lune, note et compteur, avec un sourire inquiétant.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown, Mond, Notiz und Zähler, mit einem unheimlichen Grinsen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown, moon, note and counter, with an unsettling grin."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuenta atrás, luna, nota y contador, con una sonrisa inquietante."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte à rebours, lune, note et compteur, avec un sourire inquiétant."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conto alla rovescia, luna, nota e contatore, con un sorriso inquietante."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カウントダウン、月、メモ、カウンター。不気味な笑みとともに。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contagem regressiva, lua, nota e contador, com um sorriso inquietante."
           }
         }
       }
@@ -57760,6 +58277,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Disciplina excluída"
+          }
+        }
+      }
+    },
+    "Cours, devoirs, ce qui vient et compte à rebours, tissés serré.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurse, Hausaufgaben, Nächstes und Countdown, eng verwoben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classes, homework, what's next and a countdown, tightly woven."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clases, tareas, lo próximo y una cuenta atrás, bien tejidos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cours, devoirs, ce qui vient et compte à rebours, tissés serré."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lezioni, compiti, ciò che arriva e conto alla rovescia, intrecciati stretti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業、課題、次の予定、カウントダウンをしっかり織り込んで。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aulas, tarefas, o que vem e contagem regressiva, bem tecidos."
           }
         }
       }
@@ -66502,6 +67066,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Das mãos à frente aos braços na horizontal nas laterais."
+          }
+        }
+      }
+    },
+    "Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dunkle, geheimnisvolle Packs, inspiriert von Helden und Halloween-Nächten. Bis zum 31. Oktober."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark, mysterious packs inspired by heroes and Halloween nights. Until October 31."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs oscuros y misteriosos, inspirados en héroes y noches de Halloween. Hasta el 31 de octubre."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pack scuri e misteriosi, ispirati agli eroi e alle notti di Halloween. Fino al 31 ottobre."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヒーローとハロウィンの夜に着想を得た、ダークで神秘的なパック。10月31日まで。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pacotes sombrios e misteriosos, inspirados em heróis e nas noites de Halloween. Até 31 de outubro."
           }
         }
       }
@@ -76423,6 +77034,53 @@
         }
       }
     },
+    "Eau, météo, pluie, lune et heure, au fil des vagues.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wasser, Wetter, Regen, Mond und Uhrzeit, im Takt der Wellen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Water, weather, rain, moon and time, with the waves."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agua, tiempo, lluvia, luna y hora, al ritmo de las olas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eau, météo, pluie, lune et heure, au fil des vagues."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acqua, meteo, pioggia, luna e ora, al ritmo delle onde."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "水分補給、天気、雨、月、時刻を波のリズムで。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Água, clima, chuva, lua e hora, ao sabor das ondas."
+          }
+        }
+      }
+    },
     "Edamame": {
       "extractionState": "manual",
       "localizations": {
@@ -79286,6 +79944,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escada (stepper)"
+          }
+        }
+      }
+    },
+    "Espace": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weltall"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Space"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espacio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espace"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spazio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "宇宙"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espaço"
           }
         }
       }
@@ -83520,6 +84225,100 @@
         }
       }
     },
+    "Farce sombre": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dunkler Streich"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark Prank"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broma oscura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farce sombre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scherzo oscuro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダークないたずら"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brincadeira sombria"
+          }
+        }
+      }
+    },
+    "Farceur": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spaßvogel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trickster"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bromista"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farceur"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burlone"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トリックスター"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brincalhão"
+          }
+        }
+      }
+    },
     "Faut-il un parapluie, ou de la crème ?": {
       "extractionState": "manual",
       "localizations": {
@@ -84174,6 +84973,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Feta"
+          }
+        }
+      }
+    },
+    "Feuillage": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laub"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foliage"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follaje"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feuillage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fogliame"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "葉っぱ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folhagem"
+          }
+        }
+      }
+    },
+    "Feuillage et lumière verte : la météo, la pluie et tes habitudes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laub und grünes Licht: Wetter, Regen und deine Gewohnheiten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foliage and green light: weather, rain and your habits."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follaje y luz verde: el tiempo, la lluvia y tus hábitos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feuillage et lumière verte : la météo, la pluie et tes habitudes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fogliame e luce verde: il meteo, la pioggia e le tue abitudini."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "葉っぱと緑の光：天気、雨、習慣。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folhagem e luz verde: o clima, a chuva e seus hábitos."
           }
         }
       }
@@ -86994,6 +87887,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Floresta de pinheiros"
+          }
+        }
+      }
+    },
+    "Forêt profonde, feuillage et lumière verte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiefer Wald, Laub und grünes Licht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deep forest, foliage and green light"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bosque profundo, follaje y luz verde"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forêt profonde, feuillage et lumière verte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foresta profonda, fogliame e luce verde"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深い森、葉っぱ、緑の光"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Floresta profunda, folhagem e luz verde"
           }
         }
       }
@@ -93014,6 +93954,53 @@
         }
       }
     },
+    "Habitudes, eau, séries et notes, comme un carnet de serre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gewohnheiten, Wasser, Serien und Notizen, wie ein Gewächshaus-Notizbuch."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Habits, water, streaks and notes, like a greenhouse notebook."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hábitos, agua, rachas y notas, como un cuaderno de invernadero."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Habitudes, eau, séries et notes, comme un carnet de serre."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abitudini, acqua, serie e note, come un taccuino da serra."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "習慣、水分補給、連続記録、メモ。温室のノートのように。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hábitos, água, sequências e notas, como um caderno de estufa."
+          }
+        }
+      }
+    },
     "Hack squat": {
       "extractionState": "manual",
       "localizations": {
@@ -96206,6 +97193,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hospedagem"
+          }
+        }
+      }
+    },
+    "Héroïque": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heroisch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heroic"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heroico"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Héroïque"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eroico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヒロイック"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heroico"
           }
         }
       }
@@ -101521,6 +102555,100 @@
         }
       }
     },
+    "Justicier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rächer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vigilante"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Justiciero"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Justicier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giustiziere"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヴィジランテ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Justiceiro"
+          }
+        }
+      }
+    },
+    "Justicier de la nuit": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächtlicher Rächer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night Vigilante"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Justiciero nocturno"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Justicier de la nuit"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giustiziere della notte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夜のヴィジランテ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Justiceiro da noite"
+          }
+        }
+      }
+    },
     "Ketchup": {
       "extractionState": "manual",
       "localizations": {
@@ -103119,6 +104247,100 @@
         }
       }
     },
+    "L'heure, la lune, l'année en points et le monde, sous les étoiles.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit, Mond, das Jahr in Punkten und die Welt, unter den Sternen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The time, the moon, the year in dots and the world, under the stars."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La hora, la luna, el año en puntos y el mundo, bajo las estrellas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'heure, la lune, l'année en points et le monde, sous les étoiles."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'ora, la luna, l'anno a punti e il mondo, sotto le stelle."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時刻、月、ドットで見る1年、世界時計を星空の下で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hora, a lua, o ano em pontos e o mundo, sob as estrelas."
+          }
+        }
+      }
+    },
+    "L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit, Wetter, Nächstes und dein Fokus, über der schlafenden Stadt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The time, the weather, what's next and your focus, over the sleeping city."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La hora, el tiempo, lo próximo y tu concentración, sobre la ciudad dormida."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'ora, il meteo, ciò che arriva e la tua concentrazione, sulla città addormentata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時刻、天気、次の予定、集中を眠る街の上で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hora, o clima, o que vem e sua concentração, sobre a cidade adormecida."
+          }
+        }
+      }
+    },
     "L'heure, la météo, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.": {
       "extractionState": "manual",
       "localizations": {
@@ -104341,6 +105563,53 @@
         }
       }
     },
+    "La magie de Noël": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Zauber von Weihnachten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Magic of Christmas"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La magia de la Navidad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La magie de Noël"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La magia del Natale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリスマスの魔法"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A magia do Natal"
+          }
+        }
+      }
+    },
     "La main ne sert qu'à l'équilibre.": {
       "extractionState": "manual",
       "localizations": {
@@ -105422,49 +106691,49 @@
         }
       }
     },
-    "La sélection de la semaine et ce qui te correspond.": {
+    "La sélection de la semaine : un écran, un style et des widgets à découvrir.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Auswahl der Woche und was zu dir passt."
+            "value": "Die Auswahl der Woche: ein Bildschirm, ein Stil und Widgets zum Entdecken."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This week's picks and what suits you."
+            "value": "This week's picks: a screen, a style and widgets to discover."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La selección de la semana y lo que va contigo."
+            "value": "La selección de la semana: una pantalla, un estilo y widgets por descubrir."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La sélection de la semaine et ce qui te correspond."
+            "value": "La sélection de la semaine : un écran, un style et des widgets à découvrir."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La selezione della settimana e ciò che fa per te."
+            "value": "La selezione della settimana: una schermata, uno stile e widget da scoprire."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "今週のおすすめと、あなたに合うもの。"
+            "value": "今週のセレクション：画面、スタイル、注目のウィジェット。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A seleção da semana e o que combina com você."
+            "value": "A seleção da semana: uma tela, um estilo e widgets para descobrir."
           }
         }
       }
@@ -107956,6 +109225,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "O código de barras fica salvo: o próximo escaneamento vai encontrar este alimento."
+          }
+        }
+      }
+    },
+    "Le compte à rebours d'Halloween, la lune et la météo du soir.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Halloween-Countdown, der Mond und das Abendwetter."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Halloween countdown, the moon and the evening weather."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cuenta atrás de Halloween, la luna y el tiempo de la noche."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le compte à rebours d'Halloween, la lune et la météo du soir."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il conto alla rovescia di Halloween, la luna e il meteo della sera."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ハロウィンまでのカウントダウン、月、夜の天気。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A contagem regressiva do Halloween, a lua e o clima da noite."
+          }
+        }
+      }
+    },
+    "Le compte à rebours de Noël, le calendrier et les jours fériés.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Weihnachts-Countdown, der Kalender und die Feiertage."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Christmas countdown, the calendar and public holidays."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cuenta atrás de Navidad, el calendario y los festivos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le compte à rebours de Noël, le calendrier et les jours fériés."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il conto alla rovescia di Natale, il calendario e i giorni festivi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリスマスまでのカウントダウン、カレンダー、祝日。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A contagem regressiva do Natal, o calendário e os feriados."
           }
         }
       }
@@ -112143,6 +113506,53 @@
         }
       }
     },
+    "Les héros de la nuit": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Helden der Nacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heroes of the Night"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los héroes de la noche"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les héros de la nuit"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli eroi della notte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夜のヒーローたち"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os heróis da noite"
+          }
+        }
+      }
+    },
     "Les jambes battent en petits mouvements rapides.": {
       "extractionState": "manual",
       "localizations": {
@@ -113831,6 +115241,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Os widgets que os exibem na sua Tela de Início voltarão ao modelo padrão."
+          }
+        }
+      }
+    },
+    "Les écrans d'accueil assortis": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die passenden Home-Bildschirme"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The matching Home Screens"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las pantallas de inicio a juego"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les écrans d'accueil assortis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le schermate Home abbinate"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "おそろいのホーム画面"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As telas de início combinando"
           }
         }
       }
@@ -120317,6 +121774,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Marcar como a entregar"
+          }
+        }
+      }
+    },
+    "Mars": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mars"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mars"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marte"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mars"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "火星"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marte"
           }
         }
       }
@@ -129016,6 +130520,100 @@
         }
       }
     },
+    "Météo, lune, heure et calendrier, sous les flocons.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wetter, Mond, Uhrzeit und Kalender, unter den Flocken."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weather, moon, time and calendar, under the snowflakes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo, luna, hora y calendario, bajo los copos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Météo, lune, heure et calendrier, sous les flocons."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meteo, luna, ora e calendario, sotto i fiocchi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "天気、月、時刻、カレンダーを雪の下で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clima, lua, hora e calendário, sob os flocos."
+          }
+        }
+      }
+    },
+    "Météo, pluie, soleil, habitudes et eau, au cœur de la forêt.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wetter, Regen, Sonne, Gewohnheiten und Wasser, mitten im Wald."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weather, rain, sun, habits and water, deep in the forest."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo, lluvia, sol, hábitos y agua, en el corazón del bosque."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Météo, pluie, soleil, habitudes et eau, au cœur de la forêt."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meteo, pioggia, sole, abitudini e acqua, nel cuore della foresta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "天気、雨、太陽、習慣、水分補給を森の奥で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clima, chuva, sol, hábitos e água, no coração da floresta."
+          }
+        }
+      }
+    },
     "Météo, premier rendez-vous, priorités et objectif du jour pour bien démarrer.": {
       "extractionState": "manual",
       "localizations": {
@@ -129059,6 +130657,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clima, primeiro compromisso, prioridades e meta do dia para começar bem."
+          }
+        }
+      }
+    },
+    "Météo, soleil, vent et compte à rebours, sur la planète rouge.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wetter, Sonne, Wind und Countdown, auf dem roten Planeten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weather, sun, wind and countdown, on the red planet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo, sol, viento y cuenta atrás, en el planeta rojo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Météo, soleil, vent et compte à rebours, sur la planète rouge."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meteo, sole, vento e conto alla rovescia, sul pianeta rosso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "天気、太陽、風、カウントダウンを赤い惑星で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clima, sol, vento e contagem regressiva, no planeta vermelho."
           }
         }
       }
@@ -129435,6 +131080,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Natação"
+          }
+        }
+      }
+    },
+    "Nature": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natur"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nature"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naturaleza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nature"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natura"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自然"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natureza"
           }
         }
       }
@@ -132870,53 +134562,6 @@
         }
       }
     },
-    "Notre sélection": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unsere Auswahl"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Our picks"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nuestra selección"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notre sélection"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La nostra selezione"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "おすすめ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nossa seleção"
-          }
-        }
-      }
-    },
     "Nouilles de riz cuites": {
       "extractionState": "manual",
       "localizations": {
@@ -134793,6 +136438,194 @@
           "stringUnit": {
             "state": "translated",
             "value": "Noite clara"
+          }
+        }
+      }
+    },
+    "Nuit de neige": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schneenacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snowy Night"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noche de nieve"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuit de neige"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notte di neve"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "雪の夜"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noite de neve"
+          }
+        }
+      }
+    },
+    "Nuit des citrouilles": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kürbisnacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pumpkin Night"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noche de calabazas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuit des citrouilles"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notte delle zucche"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "かぼちゃの夜"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noite das abóboras"
+          }
+        }
+      }
+    },
+    "Nuit noire et orange citrouille": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schwarze Nacht und Kürbisorange"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Black night and pumpkin orange"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noche negra y naranja calabaza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuit noire et orange citrouille"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notte nera e arancione zucca"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "漆黒の夜とかぼちゃのオレンジ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noite escura e laranja-abóbora"
+          }
+        }
+      }
+    },
+    "Nuit urbaine, gris acier et signal jaune": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stadtnacht, Stahlgrau und gelbes Signal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urban night, steel grey and a yellow signal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noche urbana, gris acero y señal amarilla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuit urbaine, gris acier et signal jaune"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notte urbana, grigio acciaio e segnale giallo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "都会の夜、鋼のグレー、黄色いシグナル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noite urbana, cinza-aço e sinal amarelo"
           }
         }
       }
@@ -137147,6 +138980,53 @@
         }
       }
     },
+    "Océan profond": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiefer Ozean"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deep Ocean"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Océano profundo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Océan profond"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oceano profondo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深海"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oceano profundo"
+          }
+        }
+      }
+    },
     "Oignon": {
       "extractionState": "manual",
       "localizations": {
@@ -139211,6 +141091,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pacotes"
+          }
+        }
+      }
+    },
+    "Packs thématiques": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Themen-Packs"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Themed packs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs temáticos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs thématiques"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pack a tema"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テーマパック"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pacotes temáticos"
           }
         }
       }
@@ -153029,6 +154956,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Empurrar na ponta dos pés."
+          }
+        }
+      }
+    },
+    "Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sternenstaub, Mond und Zeitzonen, in Mondsilber."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stardust, moon and time zones, in lunar silver."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polvo de estrellas, luna y husos horarios, en plata lunar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polvere di stelle, luna e fusi orari, in argento lunare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "星くず、月、タイムゾーンを月の銀色で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poeira de estrelas, lua e fusos horários, em prata lunar."
           }
         }
       }
@@ -169765,6 +171739,147 @@
         }
       }
     },
+    "Rouge vif, bleu nuit et toile tissée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leuchtendes Rot, Nachtblau und gewebtes Netz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bright red, midnight blue and a woven web"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rojo vivo, azul noche y telaraña tejida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rouge vif, bleu nuit et toile tissée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rosso vivo, blu notte e ragnatela intrecciata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鮮やかな赤、ミッドナイトブルー、張りめぐらされた網"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vermelho vivo, azul-noite e teia tecida"
+          }
+        }
+      }
+    },
+    "Rouille et poussière : la météo, le soleil et le vent de la planète rouge.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rost und Staub: Wetter, Sonne und Wind des roten Planeten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust and dust: the weather, sun and wind of the red planet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Óxido y polvo: el tiempo, el sol y el viento del planeta rojo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rouille et poussière : la météo, le soleil et le vent de la planète rouge."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ruggine e polvere: il meteo, il sole e il vento del pianeta rosso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "さびと砂ぼこり：赤い惑星の天気、太陽、風。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferrugem e poeira: o clima, o sol e o vento do planeta vermelho."
+          }
+        }
+      }
+    },
+    "Rouille, poussière et horizon martien": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rost, Staub und Marshorizont"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust, dust and a Martian horizon"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Óxido, polvo y horizonte marciano"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rouille, poussière et horizon martien"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ruggine, polvere e orizzonte marziano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "さび、砂ぼこり、火星の地平線"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferrugem, poeira e horizonte marciano"
+          }
+        }
+      }
+    },
     "Roule vers l'avant en allongeant le corps.": {
       "extractionState": "manual",
       "localizations": {
@@ -174179,6 +176294,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saúde"
+          }
+        }
+      }
+    },
+    "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tannen, Flocken und Goldfäden für deine Widgets, den ganzen Dezember."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fir trees, snowflakes and gold threads for your widgets, all through December."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abetos, copos y hilos de oro para tus widgets, durante todo diciembre."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abeti, fiocchi e fili d'oro per i tuoi widget, per tutto dicembre."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もみの木、雪の結晶、金糸をウィジェットに。12月のあいだずっと。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinheiros, flocos e fios de ouro para seus widgets, durante todo o mês de dezembro."
           }
         }
       }
@@ -181280,6 +183442,53 @@
         }
       }
     },
+    "Style de la semaine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stil der Woche"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Style of the week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estilo de la semana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Style de la semaine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stile della settimana"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週のスタイル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estilo da semana"
+          }
+        }
+      }
+    },
     "Styles": {
       "extractionState": "manual",
       "localizations": {
@@ -184801,6 +187010,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Treino, regularidade, calorias e proteínas, tudo junto."
+          }
+        }
+      }
+    },
+    "Séance, séries, records et calories, en bleu, rouge et or.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Training, Sätze, Rekorde und Kalorien, in Blau, Rot und Gold."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workout, sets, records and calories, in blue, red and gold."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión, series, récords y calorías, en azul, rojo y oro."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Séance, séries, records et calories, en bleu, rouge et or."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allenamento, serie, record e calorie, in blu, rosso e oro."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウト、セット、自己ベスト、カロリーを青・赤・金で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treino, séries, recordes e calorias, em azul, vermelho e dourado."
           }
         }
       }
@@ -196226,6 +198482,100 @@
         }
       }
     },
+    "Toile": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telaraña"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toile"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ragnatela"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クモの巣"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teia"
+          }
+        }
+      }
+    },
+    "Toile urbaine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stadtnetz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urban Web"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telaraña urbana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toile urbaine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ragnatela urbana"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "都会のクモの巣"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teia urbana"
+          }
+        }
+      }
+    },
     "Tokyo": {
       "extractionState": "manual",
       "localizations": {
@@ -204404,6 +206754,53 @@
         }
       }
     },
+    "Un carnet de serre : habitudes, eau, calendrier et notes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Gewächshaus-Notizbuch: Gewohnheiten, Wasser, Kalender und Notizen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A greenhouse notebook: habits, water, calendar and notes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un cuaderno de invernadero: hábitos, agua, calendario y notas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un carnet de serre : habitudes, eau, calendrier et notes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un taccuino da serra: abitudini, acqua, calendario e note."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "温室のノート：習慣、水分補給、カレンダー、メモ。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um caderno de estufa: hábitos, água, calendário e notas."
+          }
+        }
+      }
+    },
     "Un coussin sous la hanche si besoin.": {
       "extractionState": "manual",
       "localizations": {
@@ -205199,6 +207596,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Um tema ajusta tudo de uma vez: estilo, cores, fundo e borda. Depois, a cor principal ou uma paleta (Cores) repinta todo o widget."
+          }
+        }
+      }
+    },
+    "Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d'accueil assorti.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Welt pro Pack: Weltall, Mars, Natur, Pflanzen und Ozean, jeweils mit passendem Home-Bildschirm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One world per pack: space, Mars, nature, plants and ocean, each with its matching Home Screen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un universo por pack: espacio, Marte, naturaleza, plantas y océano, con su pantalla de inicio a juego."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d'accueil assorti."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un universo per pack: spazio, Marte, natura, piante e oceano, con la sua schermata Home abbinata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パックごとにひとつの世界：宇宙、火星、自然、植物、海。それぞれにおそろいのホーム画面つき。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um universo por pacote: espaço, Marte, natureza, plantas e oceano, com sua tela de início combinando."
           }
         }
       }
@@ -206754,6 +209198,53 @@
         }
       }
     },
+    "Vagues": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waves"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vagues"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onde"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "波"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ondas"
+          }
+        }
+      }
+    },
     "Valeur": {
       "extractionState": "manual",
       "localizations": {
@@ -207502,6 +209993,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Variação"
+          }
+        }
+      }
+    },
+    "Veillée de Noël": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heiligabend"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Christmas Eve"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nochebuena"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veillée de Noël"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vigilia di Natale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリスマスイブ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Véspera de Natal"
           }
         }
       }
@@ -208916,6 +211454,53 @@
         }
       }
     },
+    "Vert sapin, rouge et fils d'or": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tannengrün, Rot und Goldfäden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fir green, red and gold threads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde abeto, rojo e hilos de oro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vert sapin, rouge et fils d'or"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde abete, rosso e fili d'oro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もみの木の緑、赤、金糸"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde-pinheiro, vermelho e fios de ouro"
+          }
+        }
+      }
+    },
     "Vert sur noir, lignes de balayage": {
       "extractionState": "manual",
       "localizations": {
@@ -208959,6 +211544,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verde sobre preto, linhas de varredura"
+          }
+        }
+      }
+    },
+    "Vert tendre, feuilles et serif de serre": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zartes Grün, Blätter und Gewächshaus-Serife"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soft green, leaves and greenhouse serif"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde tierno, hojas y serifa de invernadero"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vert tendre, feuilles et serif de serre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde tenero, foglie e grazie da serra"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "やわらかな緑、葉っぱ、温室のセリフ体"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde suave, folhas e serifa de estufa"
           }
         }
       }
@@ -209664,6 +212296,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pancadas fortes"
+          }
+        }
+      }
+    },
+    "Violet inquiétant et vert acide": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unheimliches Violett und Säuregrün"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unsettling purple and acid green"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violeta inquietante y verde ácido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violet inquiétant et vert acide"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viola inquietante e verde acido"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不気味な紫と酸性のグリーン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roxo inquietante e verde ácido"
           }
         }
       }
@@ -233587,6 +236266,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alongamento de ombros (braço cruzado)"
+          }
+        }
+      }
+    },
+    "Étoiles": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sterne"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stars"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estrellas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étoiles"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stelle"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "星"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estrelas"
           }
         }
       }

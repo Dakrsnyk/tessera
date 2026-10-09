@@ -968,7 +968,7 @@
  "%@ widgets · style %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:547: Text(tr(\"\\(pack.kinds.count) widgets · style \\(ThemeCatalog.theme(pack.themeID).name)\"))"
+   "App/Screens/Explore/StoreMagazine.swift:558: Text(tr(\"\\(pack.kinds.count) widgets · style \\(ThemeCatalog.theme(pack.themeID).name)\"))"
   ]
  },
  "%@ · %@ au plus": {
@@ -1273,7 +1273,7 @@
  ", Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:696: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
+   "App/Screens/Explore/ExploreView.swift:672: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
   ]
  },
  ", et ton objectif de protéines est atteint.": {
@@ -1950,7 +1950,7 @@
  "Aa": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:671: Text(tr(\"Aa\"))"
+   "App/Screens/Explore/ExploreView.swift:647: Text(tr(\"Aa\"))"
   ]
  },
  "Abaisse d'abord les épaules, puis tire les coudes vers le bas et l'arrière.": {
@@ -2236,7 +2236,7 @@
  "Affiche": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:348: TypePreset(id: \"display\", name: tr(\"Affiche\"), font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),"
+   "Shared/Model/WidgetStyle.swift:355: TypePreset(id: \"display\", name: tr(\"Affiche\"), font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),"
   ]
  },
  "Affiche un widget que tu as créé dans Tessera, ou un modèle du catalogue.": {
@@ -2531,7 +2531,7 @@
   "placeholders": 0,
   "uses": [
    "App/Components/StylePicker.swift:139: Text(tr(\"Ajouter\"))",
-   "App/Screens/Explore/StoreMagazine.swift:554: Text(tr(\"Ajouter\"))",
+   "App/Screens/Explore/StoreMagazine.swift:565: Text(tr(\"Ajouter\"))",
    "App/Screens/Home/DailySection.swift:727: Text(tr(\"Ajouter\"))",
    "App/Screens/Profile/DataItemViews.swift:439: .accessibilityLabel(Text(tr(\"Ajouter\")))"
   ]
@@ -3152,7 +3152,7 @@
  "Anniversaires, comptes à rebours et jours fériés.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:63: WidgetPack(id: \"dates\", name: tr(\"Dates importantes\"), tagline: tr(\"Anniversaires, comptes à rebours et jours fériés.\"), symbol: \"gift.fill\","
+   "Shared/Model/Packs.swift:84: WidgetPack(id: \"dates\", name: tr(\"Dates importantes\"), tagline: tr(\"Anniversaires, comptes à rebours et jours fériés.\"), symbol: \"gift.fill\","
   ]
  },
  "Annonce": {
@@ -3346,14 +3346,14 @@
  "Arctique": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:714: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:721: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
   ]
  },
  "Ardoise": {
   "placeholders": 0,
   "uses": [
    "Shared/Theme/Palette.swift:21: AccentSwatch(name: tr(\"Ardoise\"), hex: \"6B7280\"),",
-   "Shared/Theme/Theme.swift:439: id: .chalk, name: tr(\"Ardoise\"), tagline: tr(\"Tableau noir et craie\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:443: id: .chalk, name: tr(\"Ardoise\"), tagline: tr(\"Tableau noir et craie\"), isPremium: true,"
   ]
  },
  "Argent": {
@@ -3361,6 +3361,12 @@
   "uses": [
    "App/Screens/Spaces/SpacesView.swift:198: case .money: tr(\"Argent\")",
    "Shared/Render/Tiles/DashboardTiles.swift:243: var tile = Tile(title: tr(\"Argent\"), symbol: \"dollarsign.circle\")"
+  ]
+ },
+ "Argent lunaire, poussière d'étoiles et nuit profonde": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:548: id: .space, name: tr(\"Espace\"), tagline: tr(\"Argent lunaire, poussière d'étoiles et nuit profonde\"), isPremium: true,"
   ]
  },
  "Argentine": {
@@ -3411,7 +3417,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetStyle.swift:195: case .rounded: tr(\"Arrondi\")",
-   "Shared/Model/WidgetStyle.swift:350: TypePreset(id: \"friendly\", name: tr(\"Arrondi\"), font: .rounded, numberWeight: .bold, titleWeight: .semibold, valueScale: 1, titleCase: .normal, tracking: 0),"
+   "Shared/Model/WidgetStyle.swift:357: TypePreset(id: \"friendly\", name: tr(\"Arrondi\"), font: .rounded, numberWeight: .bold, titleWeight: .semibold, valueScale: 1, titleCase: .normal, tracking: 0),"
   ]
  },
  "Arrondie": {
@@ -3716,7 +3722,7 @@
  "Aube": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:460: id: .dawn, name: tr(\"Aube\"), tagline: tr(\"Pêche et corail d'un lever de soleil\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:464: id: .dawn, name: tr(\"Aube\"), tagline: tr(\"Pêche et corail d'un lever de soleil\"), isPremium: true,"
   ]
  },
  "Aubergine": {
@@ -3820,7 +3826,7 @@
  "Aucun résultat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:551: title: tr(\"Aucun résultat\"),"
+   "App/Screens/Explore/ExploreView.swift:527: title: tr(\"Aucun résultat\"),"
   ]
  },
  "Aucun widget pour l'instant": {
@@ -3968,7 +3974,7 @@
  "Audacieux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:321: id: .bold, name: tr(\"Audacieux\"), tagline: tr(\"Chiffres énormes, couleur pleine\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:325: id: .bold, name: tr(\"Audacieux\"), tagline: tr(\"Chiffres énormes, couleur pleine\"), isPremium: true,"
   ]
  },
  "Auj.": {
@@ -4010,7 +4016,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:235: id: \"aurore\", name: tr(\"Aurore\"), tagline: tr(\"Des dégradés boréals pour l'eau, les habitudes et la météo.\"),",
-   "Shared/Theme/Theme.swift:142: id: .aurora, name: tr(\"Aurore\"), tagline: tr(\"Un dégradé bleu nuit vers turquoise\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:146: id: .aurora, name: tr(\"Aurore\"), tagline: tr(\"Un dégradé bleu nuit vers turquoise\"), isPremium: true,"
   ]
  },
  "Aurore boréale": {
@@ -4527,7 +4533,7 @@
  "Beige chaud, serif élégant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:710: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {"
+   "Shared/Model/WidgetStyle.swift:717: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {"
   ]
  },
  "Beigne glacé": {
@@ -4594,7 +4600,7 @@
  "Bien démarrer": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:37: WidgetPack(id: \"morning\", name: tr(\"Bien démarrer\"), tagline: tr(\"Météo, agenda, priorités et eau, dès le réveil.\"), symbol: \"sunrise.fill\","
+   "Shared/Model/Packs.swift:58: WidgetPack(id: \"morning\", name: tr(\"Bien démarrer\"), tagline: tr(\"Météo, agenda, priorités et eau, dès le réveil.\"), symbol: \"sunrise.fill\","
   ]
  },
  "Bien-être": {
@@ -4685,7 +4691,7 @@
  "Bitcoin, marché, portefeuille et plus forte variation.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:79: WidgetPack(id: \"crypto\", name: tr(\"Crypto\"), tagline: tr(\"Bitcoin, marché, portefeuille et plus forte variation.\"), symbol: \"bitcoinsign.circle.fill\","
+   "Shared/Model/Packs.swift:100: WidgetPack(id: \"crypto\", name: tr(\"Crypto\"), tagline: tr(\"Bitcoin, marché, portefeuille et plus forte variation.\"), symbol: \"bitcoinsign.circle.fill\","
   ]
  },
  "Bière": {
@@ -4709,19 +4715,37 @@
  "Blanc pur, noir net, rien de trop": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:666: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
+   "Shared/Model/WidgetStyle.swift:673: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
+  ]
+ },
+ "Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:484: id: \"vagues\", name: tr(\"Océan profond\"), tagline: tr(\"Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune.\"),"
+  ]
+ },
+ "Bleu abyssal et vagues lumineuses": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:591: id: .ocean, name: tr(\"Océan\"), tagline: tr(\"Bleu abyssal et vagues lumineuses\"), isPremium: true,"
   ]
  },
  "Bleu d'architecte et grille": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:378: id: .blueprint, name: tr(\"Plan\"), tagline: tr(\"Bleu d'architecte et grille\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:382: id: .blueprint, name: tr(\"Plan\"), tagline: tr(\"Bleu d'architecte et grille\"), isPremium: true,"
+  ]
+ },
+ "Bleu d'hiver et flocons qui tombent": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:680: id: .snowfall, name: tr(\"Nuit de neige\"), tagline: tr(\"Bleu d'hiver et flocons qui tombent\"), isPremium: true,"
   ]
  },
  "Bleu de glace, net et lumineux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:519: id: .glacier, name: tr(\"Glacier\"), tagline: tr(\"Bleu de glace, net et lumineux\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:523: id: .glacier, name: tr(\"Glacier\"), tagline: tr(\"Bleu de glace, net et lumineux\"), isPremium: false,"
   ]
  },
  "Bleu franc, net et calme": {
@@ -4733,13 +4757,19 @@
  "Bleu glacier et blanc": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:714: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:721: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+  ]
+ },
+ "Bleu héroïque, cape rouge, éclat doré": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:604: id: .heroic, name: tr(\"Héroïque\"), tagline: tr(\"Bleu héroïque, cape rouge, éclat doré\"), isPremium: true,"
   ]
  },
  "Bleu nuit, chiffres fins, lueur discrète": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:660: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:667: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
   ]
  },
  "Bleuets": {
@@ -4841,20 +4871,20 @@
  "Bonne soirée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:77: WidgetPack(id: \"evening\", name: tr(\"Bonne soirée\"), tagline: tr(\"La lune, la journée qui s'achève et tes habitudes.\"), symbol: \"moon.stars.fill\","
+   "Shared/Model/Packs.swift:98: WidgetPack(id: \"evening\", name: tr(\"Bonne soirée\"), tagline: tr(\"La lune, la journée qui s'achève et tes habitudes.\"), symbol: \"moon.stars.fill\","
   ]
  },
  "Bonnes habitudes": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:169: combo(\"habitudes-semaine\", tr(\"Bonnes habitudes\"), tr(\"Ta semaine d'habitudes, ton taux et ton eau.\"), .forest, \"7FA33A\",",
-   "Shared/Model/Packs.swift:57: WidgetPack(id: \"habits\", name: tr(\"Bonnes habitudes\"), tagline: tr(\"Routine, eau, séries, taux de réussite et rythme du jour.\"), symbol: \"leaf.fill\","
+   "Shared/Model/Packs.swift:78: WidgetPack(id: \"habits\", name: tr(\"Bonnes habitudes\"), tagline: tr(\"Routine, eau, séries, taux de réussite et rythme du jour.\"), symbol: \"leaf.fill\","
   ]
  },
  "Bord épais, noir sur blanc": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:409: id: .brutalist, name: tr(\"Brutaliste\"), tagline: tr(\"Bord épais, noir sur blanc\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:413: id: .brutalist, name: tr(\"Brutaliste\"), tagline: tr(\"Bord épais, noir sur blanc\"), isPremium: true,"
   ]
  },
  "Bordeaux": {
@@ -4868,13 +4898,21 @@
   "uses": [
    "App/Screens/Editor/StudioComponents.swift:25: case .border: tr(\"Bordure\")",
    "App/Screens/Editor/StudioPanels.swift:337: StudioGroup(title: tr(\"Bordure\"), isPremium: !model.isPremium) {",
-   "Shared/Model/WidgetStyle.swift:581: if border != .none { features.append(tr(\"Bordure\")) }"
+   "Shared/Model/WidgetStyle.swift:588: if border != .none { features.append(tr(\"Bordure\")) }"
   ]
  },
  "Bordure lumineuse": {
   "placeholders": 0,
   "uses": [
    "App/Core/StudioGallery.swift:89: add(tr(\"Bordure lumineuse\")) { $0.style.border = .glow; $0.style.borderWidth = 2 }"
+  ]
+ },
+ "Botanique": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:472: id: \"botanique\", name: tr(\"Botanique\"), tagline: tr(\"Un carnet de serre : habitudes, eau, calendrier et notes.\"),",
+   "Shared/Model/Packs.swift:112: WidgetPack(id: \"plants\", name: tr(\"Botanique\"), tagline: tr(\"Habitudes, eau, séries et notes, comme un carnet de serre.\"), symbol: \"leaf.fill\",",
+   "Shared/Theme/Theme.swift:579: id: .botanical, name: tr(\"Botanique\"), tagline: tr(\"Vert tendre, feuilles et serif de serre\"), isPremium: true,"
   ]
  },
  "Bouger le bras et la jambe du même côté.": {
@@ -5050,14 +5088,14 @@
  "Bruit": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:330: case .noise: tr(\"Bruit\")"
+   "Shared/Model/WidgetStyle.swift:332: case .noise: tr(\"Bruit\")"
   ]
  },
  "Brume": {
   "placeholders": 0,
   "uses": [
    "Shared/Theme/Palette.swift:31: AccentSwatch(name: tr(\"Brume\"), hex: \"DDE3EA\"),",
-   "Shared/Theme/Theme.swift:448: id: .mist, name: tr(\"Brume\"), tagline: tr(\"Pâle, léger, presque translucide\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:452: id: .mist, name: tr(\"Brume\"), tagline: tr(\"Pâle, léger, presque translucide\"), isPremium: true,"
   ]
  },
  "Brume pastel": {
@@ -5075,7 +5113,7 @@
  "Brutaliste": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:409: id: .brutalist, name: tr(\"Brutaliste\"), tagline: tr(\"Bord épais, noir sur blanc\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:413: id: .brutalist, name: tr(\"Brutaliste\"), tagline: tr(\"Bord épais, noir sur blanc\"), isPremium: true,"
   ]
  },
  "Bruxelles": {
@@ -5148,7 +5186,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreShowcase.swift:103: StoreCollection(id: \"money\", title: tr(\"Budget serré\"), subtitle: tr(\"Reste du mois, factures, épargne et abonnements.\"),",
-   "Shared/Model/Packs.swift:45: WidgetPack(id: \"budget\", name: tr(\"Budget serré\"), tagline: tr(\"Reste du mois, dépenses rapides, factures et épargne.\"), symbol: \"creditcard.fill\","
+   "Shared/Model/Packs.swift:66: WidgetPack(id: \"budget\", name: tr(\"Budget serré\"), tagline: tr(\"Reste du mois, dépenses rapides, factures et épargne.\"), symbol: \"creditcard.fill\","
   ]
  },
  "Budget · %@": {
@@ -5609,7 +5647,7 @@
  "Calories, macros, protéines, repas et semaine.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:55: WidgetPack(id: \"nutrition\", name: tr(\"Nutrition complète\"), tagline: tr(\"Calories, macros, protéines, repas et semaine.\"), symbol: \"fork.knife\","
+   "Shared/Model/Packs.swift:76: WidgetPack(id: \"nutrition\", name: tr(\"Nutrition complète\"), tagline: tr(\"Calories, macros, protéines, repas et semaine.\"), symbol: \"fork.knife\","
   ]
  },
  "Calories, macros, repas et ajout rapide.": {
@@ -5704,6 +5742,12 @@
    "Shared/Domains/FoodDatabase.swift:69: f(\"cantaloupe\", tr(\"Cantaloup\"), 34, 0.8, 8.2, 0.2, 0.9, 160, tr(\"1 tasse\"), s: 7.9, sf: 0.1, na: 16),"
   ]
  },
+ "Cape héroïque": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:120: WidgetPack(id: \"hero-cape\", name: tr(\"Cape héroïque\"), tagline: tr(\"Séance, séries, records et calories, en bleu, rouge et or.\"), symbol: \"bolt.shield.fill\","
+  ]
+ },
  "Capitalisation ≈ %@": {
   "placeholders": 1,
   "uses": [
@@ -5719,7 +5763,7 @@
  "Carbone": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:421: id: .carbon, name: tr(\"Carbone\"), tagline: tr(\"Fibre sombre et relief\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:425: id: .carbon, name: tr(\"Carbone\"), tagline: tr(\"Fibre sombre et relief\"), isPremium: true,"
   ]
  },
  "Carburant": {
@@ -5772,7 +5816,7 @@
  "Carte": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:219: id: .card, name: tr(\"Carte\"), tagline: tr(\"Le contenu posé sur une carte\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:223: id: .card, name: tr(\"Carte\"), tagline: tr(\"Le contenu posé sur une carte\"), isPremium: false,"
   ]
  },
  "Carte Viva Viagem": {
@@ -5834,10 +5878,10 @@
  "Catégories": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:313: shelfRow(tr(\"Catégories\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:62: Text(tr(\"Catégories\"))",
    "App/Screens/Home/MyInfoCenter.swift:178: areaList(followed.isEmpty ? tr(\"Catégories\") : tr(\"Autres catégories\"), others)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:184: MiniSectionTitle(title: tr(\"Catégories\"), detail: Fmt.monthYear(now).capitalizedFirst)"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:184: MiniSectionTitle(title: tr(\"Catégories\"), detail: Fmt.monthYear(now).capitalizedFirst)",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:265: MiniRow(symbol: \"chart.pie.fill\", colorHex: \"8C6CFF\", title: tr(\"Catégories\"), detail: tr(\"Répartition et limites\"), value: \"\\(state.categories.count)\")"
   ]
  },
  "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.": {
@@ -6108,7 +6152,7 @@
  "Cerisier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:488: id: .blossom, name: tr(\"Cerisier\"), tagline: tr(\"Rose tendre, formes rondes\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:492: id: .blossom, name: tr(\"Cerisier\"), tagline: tr(\"Rose tendre, formes rondes\"), isPremium: true,"
   ]
  },
  "Ces widgets ne tiennent pas ensemble en grand.": {
@@ -6469,7 +6513,7 @@
  "Chiffre d'affaires, objectif, bénéfice et MRR.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:43: WidgetPack(id: \"founder\", name: tr(\"Entrepreneur\"), tagline: tr(\"Chiffre d'affaires, objectif, bénéfice et MRR.\"), symbol: \"briefcase.fill\",",
+   "Shared/Model/Packs.swift:64: WidgetPack(id: \"founder\", name: tr(\"Entrepreneur\"), tagline: tr(\"Chiffre d'affaires, objectif, bénéfice et MRR.\"), symbol: \"briefcase.fill\",",
    "Shared/Model/WidgetGroup.swift:67: case .business: tr(\"Chiffre d'affaires, objectif, bénéfice et MRR.\")"
   ]
  },
@@ -6506,7 +6550,7 @@
  "Chiffres énormes, couleur pleine": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:321: id: .bold, name: tr(\"Audacieux\"), tagline: tr(\"Chiffres énormes, couleur pleine\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:325: id: .bold, name: tr(\"Audacieux\"), tagline: tr(\"Chiffres énormes, couleur pleine\"), isPremium: true,"
   ]
  },
  "Chili con carne": {
@@ -6816,6 +6860,12 @@
    "Shared/Model/Templates.swift:96: WidgetTemplate(id: \"note-quote\", name: tr(\"Citation\"), kind: .note, themeID: .typography, accentHex: \"FF6B57\", font: .serif,"
   ]
  },
+ "Citrouille": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:652: id: .pumpkin, name: tr(\"Citrouille\"), tagline: tr(\"Nuit noire et orange citrouille\"), isPremium: true,"
+  ]
+ },
  "Civic 2019": {
   "placeholders": 0,
   "uses": [
@@ -6827,13 +6877,13 @@
   "uses": [
    "App/Components/StylePicker.swift:190: Label(tr(\"Clair\"), systemImage: \"sun.max.fill\").font(.caption2.weight(.medium)).foregroundStyle(.secondary)",
    "Shared/Model/Settings.swift:49: case .light: tr(\"Clair\")",
-   "Shared/Theme/Theme.swift:110: id: .light, name: tr(\"Clair\"), tagline: tr(\"Toujours lumineux\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:114: id: .light, name: tr(\"Clair\"), tagline: tr(\"Toujours lumineux\"), isPremium: false,"
   ]
  },
  "Classique": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:352: TypePreset(id: \"classic\", name: tr(\"Classique\"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),"
+   "Shared/Model/WidgetStyle.swift:359: TypePreset(id: \"classic\", name: tr(\"Classique\"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),"
   ]
  },
  "Clients": {
@@ -6894,13 +6944,13 @@
  "Cockpit": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:723: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
+   "Shared/Model/WidgetStyle.swift:730: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
   ]
  },
  "Code": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:353: TypePreset(id: \"code\", name: tr(\"Code\"), font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),"
+   "Shared/Model/WidgetStyle.swift:360: TypePreset(id: \"code\", name: tr(\"Code\"), font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),"
   ]
  },
  "CoinGecko · %@": {
@@ -6951,10 +7001,21 @@
    "App/Screens/Explore/StoreMagazine.swift:173: .accessibilityLabel(Text(tr(\"Collection \\(collection.title), \\(collection.items.count) widgets\")))"
   ]
  },
+ "Collection Halloween": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:699: case .halloween: tr(\"Collection Halloween\")"
+  ]
+ },
+ "Collection de Noël": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:700: case .christmas: tr(\"Collection de Noël\")"
+  ]
+ },
  "Collections": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:397: shelfRow(tr(\"Collections\"), action: { router.storePath.append(.collections) }) {",
    "App/Screens/Explore/StoreMagazine.swift:406: .navigationTitle(tr(\"Collections\"))"
   ]
  },
@@ -6967,7 +7028,7 @@
  "Combinaisons": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))",
+   "App/Screens/Explore/ExploreView.swift:561: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))",
    "App/Screens/Explore/StoreCombos.swift:356: .navigationTitle(tr(\"Combinaisons\"))"
   ]
  },
@@ -7058,7 +7119,7 @@
  "Compact": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:239: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:243: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
   ]
  },
  "Comparaison": {
@@ -7126,6 +7187,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:259: MiniRow(symbol: \"pencil.and.list.clipboard\", colorHex: \"E5484D\", title: tr(\"Examens\"), detail: tr(\"Compte à rebours et préparation\"),"
+  ]
+ },
+ "Compte à rebours, lune, note et compteur, avec un sourire inquiétant.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:129: WidgetPack(id: \"dark-jest\", name: tr(\"Farce sombre\"), tagline: tr(\"Compte à rebours, lune, note et compteur, avec un sourire inquiétant.\"), symbol: \"theatermasks.fill\","
   ]
  },
  "Compter": {
@@ -7605,7 +7672,7 @@
  "Couleurs de dragée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:390: id: .pastel, name: tr(\"Pastel\"), tagline: tr(\"Couleurs de dragée\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:394: id: .pastel, name: tr(\"Pastel\"), tagline: tr(\"Couleurs de dragée\"), isPremium: true,"
   ]
  },
  "Couleurs du style": {
@@ -7617,14 +7684,14 @@
  "Couleurs personnalisées": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:578: if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append(tr(\"Couleurs personnalisées\")) }"
+   "Shared/Model/WidgetStyle.swift:585: if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append(tr(\"Couleurs personnalisées\")) }"
   ]
  },
  "Couleurs vives": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreShowcase.swift:157: StoreCollection(id: \"vivid\", title: tr(\"Couleurs vives\"), subtitle: tr(\"Ta couleur en plein fond.\"),",
-   "Shared/Model/Packs.swift:75: WidgetPack(id: \"vivid\", name: tr(\"Couleurs vives\"), tagline: tr(\"Ta couleur en plein fond, sur six widgets.\"), symbol: \"paintpalette.fill\","
+   "Shared/Model/Packs.swift:96: WidgetPack(id: \"vivid\", name: tr(\"Couleurs vives\"), tagline: tr(\"Ta couleur en plein fond, sur six widgets.\"), symbol: \"paintpalette.fill\","
   ]
  },
  "Courbes de niveau": {
@@ -7745,6 +7812,12 @@
    "App/Screens/MiniApps/Studies/StudiesPages.swift:329: ContentUnavailableView(tr(\"Cours supprimé\"), systemImage: \"books.vertical\")"
   ]
  },
+ "Cours, devoirs, ce qui vient et compte à rebours, tissés serré.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:126: WidgetPack(id: \"city-web\", name: tr(\"Toile urbaine\"), tagline: tr(\"Cours, devoirs, ce qui vient et compte à rebours, tissés serré.\"), symbol: \"circle.hexagongrid.fill\","
+  ]
+ },
  "Cours, examens et priorités sur papier pointillé.": {
   "placeholders": 0,
   "uses": [
@@ -7754,7 +7827,7 @@
  "Cours, examens, devoirs et fiches de révision.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:39: WidgetPack(id: \"student\", name: tr(\"Étudiant\"), tagline: tr(\"Cours, examens, devoirs et fiches de révision.\"), symbol: \"graduationcap.fill\","
+   "Shared/Model/Packs.swift:60: WidgetPack(id: \"student\", name: tr(\"Étudiant\"), tagline: tr(\"Cours, examens, devoirs et fiches de révision.\"), symbol: \"graduationcap.fill\","
   ]
  },
  "Cours, examens, devoirs et révisions.": {
@@ -7833,7 +7906,7 @@
  "Coût, entretien, kilométrage et carburant.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:65: WidgetPack(id: \"car\", name: tr(\"Ma voiture\"), tagline: tr(\"Coût, entretien, kilométrage et carburant.\"), symbol: \"car.fill\","
+   "Shared/Model/Packs.swift:86: WidgetPack(id: \"car\", name: tr(\"Ma voiture\"), tagline: tr(\"Coût, entretien, kilométrage et carburant.\"), symbol: \"car.fill\","
   ]
  },
  "Coûts": {
@@ -8224,7 +8297,7 @@
  "Cyber": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:688: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
+   "Shared/Model/WidgetStyle.swift:695: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
   ]
  },
  "Céleri": {
@@ -8278,7 +8351,7 @@
  "Data": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:330: id: .data, name: tr(\"Data\"), tagline: tr(\"Grille, mono et courbes\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:334: id: .data, name: tr(\"Data\"), tagline: tr(\"Grille, mono et courbes\"), isPremium: true,"
   ]
  },
  "Date": {
@@ -8320,7 +8393,7 @@
  "Dates importantes": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:63: WidgetPack(id: \"dates\", name: tr(\"Dates importantes\"), tagline: tr(\"Anniversaires, comptes à rebours et jours fériés.\"), symbol: \"gift.fill\","
+   "Shared/Model/Packs.swift:84: WidgetPack(id: \"dates\", name: tr(\"Dates importantes\"), tagline: tr(\"Anniversaires, comptes à rebours et jours fériés.\"), symbol: \"gift.fill\","
   ]
  },
  "Dattes": {
@@ -8338,7 +8411,7 @@
  "De grands chiffres, en serif": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:182: id: .typography, name: tr(\"Typo\"), tagline: tr(\"De grands chiffres, en serif\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:186: id: .typography, name: tr(\"Typo\"), tagline: tr(\"De grands chiffres, en serif\"), isPremium: true,"
   ]
  },
  "De l'ouverture confortable jusqu'aux genoux joints.": {
@@ -8846,7 +8919,7 @@
  "Des ensembles de widgets pour un usage : études, sport, voyage…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:64: case .packs: tr(\"Des ensembles de widgets pour un usage : études, sport, voyage…\")"
+   "App/Screens/Explore/ExploreView.swift:67: case .packs: tr(\"Des ensembles de widgets pour un usage : études, sport, voyage…\")"
   ]
  },
  "Des fiches à réviser.": {
@@ -8885,6 +8958,12 @@
    "Shared/Domains/ExerciseTechniques.swift:54: tr(\"Des mains devant toi jusqu'aux bras à l'horizontale sur les côtés.\"), tr(\"Expire en ouvrant, inspire en revenant.\"),"
   ]
  },
+ "Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:713: case .halloween: tr(\"Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.\")"
+  ]
+ },
  "Des repas enregistrés, à reprendre d'une touche": {
   "placeholders": 0,
   "uses": [
@@ -8918,7 +8997,7 @@
  "Des écrans d'accueil complets : widgets et fond d'écran assortis.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:61: case .screens: tr(\"Des écrans d'accueil complets : widgets et fond d'écran assortis.\")"
+   "App/Screens/Explore/ExploreView.swift:64: case .screens: tr(\"Des écrans d'accueil complets : widgets et fond d'écran assortis.\")"
   ]
  },
  "Des épaules jusqu'aux bras tendus, charge au-dessus du milieu du pied.": {
@@ -9149,7 +9228,7 @@
  "Digital": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:158: id: .digital, name: tr(\"Digital\"), tagline: tr(\"Écran à cristaux liquides\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:162: id: .digital, name: tr(\"Digital\"), tagline: tr(\"Écran à cristaux liquides\"), isPremium: true,"
   ]
  },
  "Dimanche": {
@@ -9436,7 +9515,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetStyle.swift:196: case .soft: tr(\"Doux\")",
-   "Shared/Theme/Theme.swift:229: id: .soft, name: tr(\"Doux\"), tagline: tr(\"Formes rondes, tons tendres\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:233: id: .soft, name: tr(\"Doux\"), tagline: tr(\"Formes rondes, tons tendres\"), isPremium: false,"
   ]
  },
  "Doux et rêveur": {
@@ -9523,7 +9602,7 @@
  "Du turquoise au bleu profond": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:672: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:679: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
   ]
  },
  "Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter.": {
@@ -9542,7 +9621,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:319: id: \"dune\", name: tr(\"Dune\"), tagline: tr(\"Le départ, le vol et l'heure sur place, au soleil couchant.\"),",
-   "Shared/Theme/Theme.swift:510: id: .dune, name: tr(\"Dune\"), tagline: tr(\"Sable chaud, grain et serif\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:514: id: .dune, name: tr(\"Dune\"), tagline: tr(\"Sable chaud, grain et serif\"), isPremium: true,"
   ]
  },
  "Dunes": {
@@ -9586,7 +9665,7 @@
  "Débloquer avec Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:746: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))",
+   "App/Screens/Explore/ExploreView.swift:722: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))",
    "App/Screens/Explore/HomeSetupViews.swift:654: if needsPremium { return tr(\"Débloquer avec Premium\") }"
   ]
  },
@@ -9731,7 +9810,7 @@
  "Dégradé personnalisé": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:579: if gradient != nil { features.append(tr(\"Dégradé personnalisé\")) }"
+   "Shared/Model/WidgetStyle.swift:586: if gradient != nil { features.append(tr(\"Dégradé personnalisé\")) }"
   ]
  },
  "Déjeuner": {
@@ -9873,7 +9952,7 @@
  "Départ, vol, hôtel, météo, heure et devise sur place.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:47: WidgetPack(id: \"traveler\", name: tr(\"Voyageur\"), tagline: tr(\"Départ, vol, hôtel, météo, heure et devise sur place.\"), symbol: \"airplane\","
+   "Shared/Model/Packs.swift:68: WidgetPack(id: \"traveler\", name: tr(\"Voyageur\"), tagline: tr(\"Départ, vol, hôtel, météo, heure et devise sur place.\"), symbol: \"airplane\","
   ]
  },
  "Dépassé": {
@@ -10209,6 +10288,12 @@
    "App/Screens/Home/DailySection.swift:854: DayCard(title: tr(\"Eau · 7 jours\"), symbol: \"drop.fill\", colorHex: \"3A8DDE\") {"
   ]
  },
+ "Eau, météo, pluie, lune et heure, au fil des vagues.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:114: WidgetPack(id: \"water\", name: tr(\"Océan\"), tagline: tr(\"Eau, météo, pluie, lune et heure, au fil des vagues.\"), symbol: \"water.waves\","
+  ]
+ },
  "Edamame": {
   "placeholders": 0,
   "uses": [
@@ -10531,7 +10616,7 @@
  "Entrepreneur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:43: WidgetPack(id: \"founder\", name: tr(\"Entrepreneur\"), tagline: tr(\"Chiffre d'affaires, objectif, bénéfice et MRR.\"), symbol: \"briefcase.fill\","
+   "Shared/Model/Packs.swift:64: WidgetPack(id: \"founder\", name: tr(\"Entrepreneur\"), tagline: tr(\"Chiffre d'affaires, objectif, bénéfice et MRR.\"), symbol: \"briefcase.fill\","
   ]
  },
  "Entreprise": {
@@ -10594,6 +10679,14 @@
    "Shared/Domains/ExerciseLibrary.swift:812: x(\"stair-climber\", tr(\"Escaliers (stepper)\"), [.heart], [.glutes, .quads], [.machine], .cardio, .intermediate, .lunge, aka: [\"stepper\", \"escalier\"]),"
   ]
  },
+ "Espace": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:439: id: \"espace\", name: tr(\"Espace\"), tagline: tr(\"Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire.\"),",
+   "Shared/Model/Packs.swift:106: WidgetPack(id: \"space\", name: tr(\"Espace\"), tagline: tr(\"L'heure, la lune, l'année en points et le monde, sous les étoiles.\"), symbol: \"sparkles\",",
+   "Shared/Theme/Theme.swift:548: id: .space, name: tr(\"Espace\"), tagline: tr(\"Argent lunaire, poussière d'étoiles et nuit profonde\"), isPremium: true,"
+  ]
+ },
  "Espace partagé": {
   "placeholders": 0,
   "uses": [
@@ -10627,7 +10720,7 @@
  "Essaie un autre mot, ou retire un filtre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:552: message: tr(\"Essaie un autre mot, ou retire un filtre.\"),"
+   "App/Screens/Explore/ExploreView.swift:528: message: tr(\"Essaie un autre mot, ou retire un filtre.\"),"
   ]
  },
  "Essaie une photo plus proche et bien éclairée, ou ajoute les aliments à la main depuis la recherche.": {
@@ -11171,6 +11264,18 @@
    "App/Services/AIPhraser.swift:23: let prompt = tr(\"Faits :\\n\") + insight.facts.map { \"- \" + $0 }.joined(separator: \"\\n\") + tr(\"\\n\\nRésume ces faits pour le widget « \\(insight.title) ».\")"
   ]
  },
+ "Farce sombre": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:129: WidgetPack(id: \"dark-jest\", name: tr(\"Farce sombre\"), tagline: tr(\"Compte à rebours, lune, note et compteur, avec un sourire inquiétant.\"), symbol: \"theatermasks.fill\","
+  ]
+ },
+ "Farceur": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:640: id: .jester, name: tr(\"Farceur\"), tagline: tr(\"Violet inquiétant et vert acide\"), isPremium: true,"
+  ]
+ },
  "Faut-il un parapluie, ou de la crème ?": {
   "placeholders": 0,
   "uses": [
@@ -11236,7 +11341,7 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:45: .accessibilityLabel(Text(tr(\"Fermer\")))",
-   "App/Screens/Explore/ExploreView.swift:769: Button(tr(\"Fermer\")) { dismiss() }",
+   "App/Screens/Explore/ExploreView.swift:745: Button(tr(\"Fermer\")) { dismiss() }",
    "App/Screens/Explore/HomeSetupViews.swift:636: Button(tr(\"Fermer\")) { dismiss() }",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:227: Button(tr(\"Fermer\")) { dismiss() }"
   ]
@@ -11266,10 +11371,22 @@
    "Shared/Domains/FoodDatabase.swift:166: f(\"feta\", tr(\"Feta\"), 264, 14, 4.1, 21, 0, 30, tr(\"1 portion\"), s: 4.1, sf: 15, na: 1_116, chol: 89),"
   ]
  },
+ "Feuillage": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:337: case .leaves: tr(\"Feuillage\")"
+  ]
+ },
+ "Feuillage et lumière verte : la météo, la pluie et tes habitudes.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:461: id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Feuillage et lumière verte : la météo, la pluie et tes habitudes.\"),"
+  ]
+ },
  "Fibre sombre et relief": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:421: id: .carbon, name: tr(\"Carbone\"), tagline: tr(\"Fibre sombre et relief\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:425: id: .carbon, name: tr(\"Carbone\"), tagline: tr(\"Fibre sombre et relief\"), isPremium: true,"
   ]
  },
  "Fibres": {
@@ -11502,7 +11619,7 @@
  "Focus, travail profond, priorités et échéances.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:59: WidgetPack(id: \"focus\", name: tr(\"Concentration\"), tagline: tr(\"Focus, travail profond, priorités et échéances.\"), symbol: \"scope\","
+   "Shared/Model/Packs.swift:80: WidgetPack(id: \"focus\", name: tr(\"Concentration\"), tagline: tr(\"Focus, travail profond, priorités et échéances.\"), symbol: \"scope\","
   ]
  },
  "Focus, échéances et fuseaux, en cyan électrique.": {
@@ -11604,7 +11721,7 @@
  "Forest": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:677: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
+   "Shared/Model/WidgetStyle.swift:684: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
   ]
  },
  "Forme": {
@@ -11622,7 +11739,7 @@
  "Formes rondes, tons tendres": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:229: id: .soft, name: tr(\"Doux\"), tagline: tr(\"Formes rondes, tons tendres\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:233: id: .soft, name: tr(\"Doux\"), tagline: tr(\"Formes rondes, tons tendres\"), isPremium: false,"
   ]
  },
  "Forte": {
@@ -11656,6 +11773,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:189: case .forest: tr(\"Forêt de pins\")"
+  ]
+ },
+ "Forêt profonde, feuillage et lumière verte": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:570: id: .nature, name: tr(\"Nature\"), tagline: tr(\"Forêt profonde, feuillage et lumière verte\"), isPremium: true,"
   ]
  },
  "Frais de paiement": {
@@ -11778,7 +11901,7 @@
  "Futuriste": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:174: id: .futuristic, name: tr(\"Futuriste\"), tagline: tr(\"Néon cyan sur nuit profonde\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:178: id: .futuristic, name: tr(\"Futuriste\"), tagline: tr(\"Néon cyan sur nuit profonde\"), isPremium: true,"
   ]
  },
  "Féculents": {
@@ -12176,13 +12299,13 @@
  "Glacier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:519: id: .glacier, name: tr(\"Glacier\"), tagline: tr(\"Bleu de glace, net et lumineux\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:523: id: .glacier, name: tr(\"Glacier\"), tagline: tr(\"Bleu de glace, net et lumineux\"), isPremium: false,"
   ]
  },
  "Glass": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:700: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
+   "Shared/Model/WidgetStyle.swift:707: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
   ]
  },
  "Glisse le long du mur jusqu'aux cuisses parallèles au sol.": {
@@ -12221,7 +12344,7 @@
  "Grain": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:324: case .grain: tr(\"Grain\")"
+   "Shared/Model/WidgetStyle.swift:326: case .grain: tr(\"Grain\")"
   ]
  },
  "Graines de chia": {
@@ -12299,7 +12422,7 @@
  "Graphite, argent, fin liseré": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:261: id: .premium, name: tr(\"Premium\"), tagline: tr(\"Graphite, argent, fin liseré\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:265: id: .premium, name: tr(\"Premium\"), tagline: tr(\"Graphite, argent, fin liseré\"), isPremium: true,"
   ]
  },
  "Gras": {
@@ -12326,25 +12449,25 @@
  "Gratuits": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:76: case .free: tr(\"Gratuits\")"
+   "App/Screens/Explore/ExploreView.swift:80: case .free: tr(\"Gratuits\")"
   ]
  },
  "Grille": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:327: case .grid: tr(\"Grille\")"
+   "Shared/Model/WidgetStyle.swift:329: case .grid: tr(\"Grille\")"
   ]
  },
  "Grille, mono et courbes": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:330: id: .data, name: tr(\"Data\"), tagline: tr(\"Grille, mono et courbes\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:334: id: .data, name: tr(\"Data\"), tagline: tr(\"Grille, mono et courbes\"), isPremium: true,"
   ]
  },
  "Gris doux, chiffres noirs": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:701: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {"
+   "Shared/Model/WidgetStyle.swift:708: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {"
   ]
  },
  "Groupes accordés": {
@@ -12465,6 +12588,12 @@
    "App/Screens/Explore/StoreShowcase.swift:136: StoreCollection(id: \"calm\", title: tr(\"Bien-être\"), subtitle: tr(\"Habitudes, eau, soleil et lune.\"),"
   ]
  },
+ "Habitudes, eau, séries et notes, comme un carnet de serre.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:112: WidgetPack(id: \"plants\", name: tr(\"Botanique\"), tagline: tr(\"Habitudes, eau, séries et notes, comme un carnet de serre.\"), symbol: \"leaf.fill\","
+  ]
+ },
  "Hack squat": {
   "placeholders": 0,
   "uses": [
@@ -12474,7 +12603,7 @@
  "Hacker": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:719: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
+   "Shared/Model/WidgetStyle.swift:726: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
   ]
  },
  "Halifax": {
@@ -12703,13 +12832,13 @@
  "Heure, fuseaux, focus et crypto en cyan électrique.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:71: WidgetPack(id: \"neon\", name: tr(\"Néon\"), tagline: tr(\"Heure, fuseaux, focus et crypto en cyan électrique.\"), symbol: \"bolt.fill\","
+   "Shared/Model/Packs.swift:92: WidgetPack(id: \"neon\", name: tr(\"Néon\"), tagline: tr(\"Heure, fuseaux, focus et crypto en cyan électrique.\"), symbol: \"bolt.fill\","
   ]
  },
  "Heure, météo, tâches, habitudes et dates, gratuitement.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:53: WidgetPack(id: \"essentials\", name: tr(\"L'essentiel\"), tagline: tr(\"Heure, météo, tâches, habitudes et dates, gratuitement.\"), symbol: \"star.fill\","
+   "Shared/Model/Packs.swift:74: WidgetPack(id: \"essentials\", name: tr(\"L'essentiel\"), tagline: tr(\"Heure, météo, tâches, habitudes et dates, gratuitement.\"), symbol: \"star.fill\","
   ]
  },
  "Heures d'étude": {
@@ -12901,6 +13030,12 @@
    "Shared/Data/SampleData.swift:308: BusinessExpense(date: day(-9, from: now), amount: 49, label: tr(\"Hébergement\")),"
   ]
  },
+ "Héroïque": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:604: id: .heroic, name: tr(\"Héroïque\"), tagline: tr(\"Bleu héroïque, cape rouge, éclat doré\"), isPremium: true,"
+  ]
+ },
  "Hôtel": {
   "placeholders": 0,
   "uses": [
@@ -13043,7 +13178,7 @@
  "Incontournables": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:318: shelfRow(tr(\"Incontournables\")) {"
+   "App/Screens/Explore/ExploreView.swift:326: shelfRow(tr(\"Incontournables\")) {"
   ]
  },
  "Inde": {
@@ -13219,7 +13354,7 @@
  "Investisseur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:49: WidgetPack(id: \"investor\", name: tr(\"Investisseur\"), tagline: tr(\"Portefeuille, répartition, cours et chiffres officiels.\"), symbol: \"chart.line.uptrend.xyaxis\","
+   "Shared/Model/Packs.swift:70: WidgetPack(id: \"investor\", name: tr(\"Investisseur\"), tagline: tr(\"Portefeuille, répartition, cours et chiffres officiels.\"), symbol: \"chart.line.uptrend.xyaxis\","
   ]
  },
  "Ischio-jambiers": {
@@ -13626,6 +13761,18 @@
    "Shared/Domains/ExerciseLibrary.swift:538: range: tr(\"Jusqu'à une tension agréable, jamais une douleur.\"),"
   ]
  },
+ "Justicier": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:616: id: .vigilante, name: tr(\"Justicier\"), tagline: tr(\"Nuit urbaine, gris acier et signal jaune\"), isPremium: true,"
+  ]
+ },
+ "Justicier de la nuit": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:123: WidgetPack(id: \"night-watch\", name: tr(\"Justicier de la nuit\"), tagline: tr(\"L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie.\"),"
+  ]
+ },
  "Ketchup": {
   "placeholders": 0,
   "uses": [
@@ -13765,13 +13912,13 @@
  "L'essentiel": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:53: WidgetPack(id: \"essentials\", name: tr(\"L'essentiel\"), tagline: tr(\"Heure, météo, tâches, habitudes et dates, gratuitement.\"), symbol: \"star.fill\","
+   "Shared/Model/Packs.swift:74: WidgetPack(id: \"essentials\", name: tr(\"L'essentiel\"), tagline: tr(\"Heure, météo, tâches, habitudes et dates, gratuitement.\"), symbol: \"star.fill\","
   ]
  },
  "L'essentiel en noir et blanc, sans rien de plus.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:51: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\","
+   "Shared/Model/Packs.swift:72: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\","
   ]
  },
  "L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.": {
@@ -13832,6 +13979,18 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:254: KindInfo(kind: .localTime, title: tr(\"Heure sur place\"), summary: tr(\"L'heure à destination et le décalage avec chez toi.\"), category: .travel, symbol: \"clock.arrow.2.circlepath\", isPremium: false, fa"
+  ]
+ },
+ "L'heure, la lune, l'année en points et le monde, sous les étoiles.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:106: WidgetPack(id: \"space\", name: tr(\"Espace\"), tagline: tr(\"L'heure, la lune, l'année en points et le monde, sous les étoiles.\"), symbol: \"sparkles\","
+  ]
+ },
+ "L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:123: WidgetPack(id: \"night-watch\", name: tr(\"Justicier de la nuit\"), tagline: tr(\"L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie.\"),"
   ]
  },
  "L'heure, la météo, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.": {
@@ -13988,7 +14147,13 @@
  "La lune, la journée qui s'achève et tes habitudes.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:77: WidgetPack(id: \"evening\", name: tr(\"Bonne soirée\"), tagline: tr(\"La lune, la journée qui s'achève et tes habitudes.\"), symbol: \"moon.stars.fill\","
+   "Shared/Model/Packs.swift:98: WidgetPack(id: \"evening\", name: tr(\"Bonne soirée\"), tagline: tr(\"La lune, la journée qui s'achève et tes habitudes.\"), symbol: \"moon.stars.fill\","
+  ]
+ },
+ "La magie de Noël": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:707: case .christmas: tr(\"La magie de Noël\")"
   ]
  },
  "La main ne sert qu'à l'équilibre.": {
@@ -14129,10 +14294,10 @@
    "Shared/Model/KindCatalog.swift:179: KindInfo(kind: .todaysWorkout, title: tr(\"Séance du jour\"), summary: tr(\"La séance prévue aujourd'hui et ses exercices.\"), category: .fitness, symbol: \"figure.strengthtraining.traditional\", isPremium:"
   ]
  },
- "La sélection de la semaine et ce qui te correspond.": {
+ "La sélection de la semaine : un écran, un style et des widgets à découvrir.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:60: case .featured: tr(\"La sélection de la semaine et ce qui te correspond.\")"
+   "App/Screens/Explore/ExploreView.swift:63: case .featured: tr(\"La sélection de la semaine : un écran, un style et des widgets à découvrir.\")"
   ]
  },
  "La série en cours d'une habitude et ses 30 derniers jours.": {
@@ -14201,7 +14366,7 @@
  "Lagon": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:469: id: .lagoon, name: tr(\"Lagon\"), tagline: tr(\"Turquoise profond, chiffres nets\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:473: id: .lagoon, name: tr(\"Lagon\"), tagline: tr(\"Turquoise profond, chiffres nets\"), isPremium: true,"
   ]
  },
  "Laisse descendre la barre en pliant les poignets.": {
@@ -14459,6 +14624,18 @@
    "App/Screens/Spaces/NutritionSpace.swift:656: ? tr(\"Le code-barres est retenu : le prochain scan retrouvera cet aliment.\")"
   ]
  },
+ "Le compte à rebours d'Halloween, la lune et la météo du soir.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:132: WidgetPack(id: \"pumpkin-night\", name: tr(\"Nuit des citrouilles\"), tagline: tr(\"Le compte à rebours d'Halloween, la lune et la météo du soir.\"), symbol: \"moon.stars.fill\","
+  ]
+ },
+ "Le compte à rebours de Noël, le calendrier et les jours fériés.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:139: WidgetPack(id: \"christmas-eve\", name: tr(\"Veillée de Noël\"), tagline: tr(\"Le compte à rebours de Noël, le calendrier et les jours fériés.\"), symbol: \"gift.fill\","
+  ]
+ },
  "Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.": {
   "placeholders": 0,
   "uses": [
@@ -14468,7 +14645,7 @@
  "Le contenu posé sur une carte": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:219: id: .card, name: tr(\"Carte\"), tagline: tr(\"Le contenu posé sur une carte\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:223: id: .card, name: tr(\"Carte\"), tagline: tr(\"Le contenu posé sur une carte\"), isPremium: false,"
   ]
  },
  "Le contenu posé sur une carte intérieure.": {
@@ -14624,7 +14801,7 @@
  "Le même widget dans chaque style : choisis l'allure qui te plaît.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:65: case .styles: tr(\"Le même widget dans chaque style : choisis l'allure qui te plaît.\")"
+   "App/Screens/Explore/ExploreView.swift:69: case .styles: tr(\"Le même widget dans chaque style : choisis l'allure qui te plaît.\")"
   ]
  },
  "Le nom de ta voiture et son kilométrage.": {
@@ -14994,6 +15171,12 @@
    "Shared/Render/Tiles/WeatherTiles.swift:24: return .empty(tr(\"Soleil\"), symbol: \"sunrise.fill\", message: tr(\"Les heures du soleil arrivent avec la prochaine mise à jour météo.\"))"
   ]
  },
+ "Les héros de la nuit": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:706: case .halloween: tr(\"Les héros de la nuit\")"
+  ]
+ },
  "Les jambes battent en petits mouvements rapides.": {
   "placeholders": 0,
   "uses": [
@@ -15190,7 +15373,7 @@
  "Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:729: Label(tr(\"Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.\"), systemImage: \"sparkles\")"
+   "App/Screens/Explore/ExploreView.swift:705: Label(tr(\"Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.\"), systemImage: \"sparkles\")"
   ]
  },
  "Les widgets qui l'affichent reviendront au modèle par défaut.": {
@@ -15209,6 +15392,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MyWidgets/MyWidgetsView.swift:160: Text(tr(\"Les widgets qui les affichent sur ton écran d'accueil reviendront au modèle par défaut.\"))"
+  ]
+ },
+ "Les écrans d'accueil assortis": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:375: shelfRow(tr(\"Les écrans d'accueil assortis\")) {"
   ]
  },
  "Les épaules restent au-dessus des pieds.": {
@@ -15314,7 +15503,7 @@
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:77: if !tile.rows.isEmpty { Toggle(tr(\"Lignes\"), isOn: shown(\"rows\")) }",
    "App/Screens/Editor/StudioPanels.swift:87: StudioGroup(title: tr(\"Lignes\"), detail: \"\\(lines.count)\") {",
-   "Shared/Model/WidgetStyle.swift:328: case .lines: tr(\"Lignes\")"
+   "Shared/Model/WidgetStyle.swift:330: case .lines: tr(\"Lignes\")"
   ]
  },
  "Lilas": {
@@ -15353,7 +15542,7 @@
  "Liquid Glass": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:249: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:253: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
   ]
  },
  "Liquidités": {
@@ -15494,7 +15683,7 @@
  "Lueurs roses sur fond noir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:281: id: .neon, name: tr(\"Néon\"), tagline: tr(\"Lueurs roses sur fond noir\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:285: id: .neon, name: tr(\"Néon\"), tagline: tr(\"Lueurs roses sur fond noir\"), isPremium: true,"
   ]
  },
  "Lumineuse": {
@@ -15556,13 +15745,13 @@
  "Luxe": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:339: id: .luxury, name: tr(\"Luxe\"), tagline: tr(\"Noir profond et or\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:343: id: .luxury, name: tr(\"Luxe\"), tagline: tr(\"Noir profond et or\"), isPremium: true,"
   ]
  },
  "Luxury": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:694: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),"
+   "Shared/Model/WidgetStyle.swift:701: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),"
   ]
  },
  "Lâcher la barre d'un coup.": {
@@ -15616,7 +15805,7 @@
  "Léger": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:349: TypePreset(id: \"light\", name: tr(\"Léger\"), font: .standard, numberWeight: .light, titleWeight: .regular, valueScale: 1.1, titleCase: .normal, tracking: 0),"
+   "Shared/Model/WidgetStyle.swift:356: TypePreset(id: \"light\", name: tr(\"Léger\"), font: .standard, numberWeight: .light, titleWeight: .regular, valueScale: 1.1, titleCase: .normal, tracking: 0),"
   ]
  },
  "Léger buste vers l'avant.": {
@@ -15771,13 +15960,13 @@
  "Magazine": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:302: id: .magazine, name: tr(\"Magazine\"), tagline: tr(\"Un grand chiffre, comme une une\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:306: id: .magazine, name: tr(\"Magazine\"), tagline: tr(\"Un grand chiffre, comme une une\"), isPremium: true,"
   ]
  },
  "Magenta et cyan, bord lumineux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:688: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
+   "Shared/Model/WidgetStyle.swift:695: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
   ]
  },
  "Mail": {
@@ -16010,7 +16199,7 @@
  "Marine, sobre et aligné": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:357: id: .business, name: tr(\"Business\"), tagline: tr(\"Marine, sobre et aligné\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:361: id: .business, name: tr(\"Business\"), tagline: tr(\"Marine, sobre et aligné\"), isPremium: true,"
   ]
  },
  "Maroc": {
@@ -16085,6 +16274,14 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:353: .accessibilityLabel(Text(assignment.isDone ? tr(\"Marquer comme à rendre\") : tr(\"Marquer comme rendu\")))"
+  ]
+ },
+ "Mars": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:450: id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Rouille et poussière : la météo, le soleil et le vent de la planète rouge.\"),",
+   "Shared/Model/Packs.swift:108: WidgetPack(id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Météo, soleil, vent et compte à rebours, sur la planète rouge.\"), symbol: \"globe.europe.africa.fill\",",
+   "Shared/Theme/Theme.swift:561: id: .mars, name: tr(\"Mars\"), tagline: tr(\"Rouille, poussière et horizon martien\"), isPremium: true,"
   ]
  },
  "Martim Moniz": {
@@ -16419,7 +16616,7 @@
  "Midnight": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:660: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:667: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
   ]
  },
  "Miel": {
@@ -16437,15 +16634,15 @@
  "Minimal": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:51: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\",",
+   "Shared/Model/Packs.swift:72: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\",",
    "Shared/Model/WidgetStyle.swift:15: case .minimal: tr(\"Minimal\")",
-   "Shared/Theme/Theme.swift:101: id: .minimal, name: tr(\"Minimal\"), tagline: tr(\"Suit le mode clair ou sombre\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:105: id: .minimal, name: tr(\"Minimal\"), tagline: tr(\"Suit le mode clair ou sombre\"), isPremium: false,"
   ]
  },
  "Minimal Black": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:695: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
+   "Shared/Model/WidgetStyle.swift:702: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
   ]
  },
  "Minimal et noir": {
@@ -16538,7 +16735,7 @@
  "Moderne": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:209: id: .modern, name: tr(\"Moderne\"), tagline: tr(\"Net, doux, pastilles d'icônes\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:213: id: .modern, name: tr(\"Moderne\"), tagline: tr(\"Net, doux, pastilles d'icônes\"), isPremium: false,"
   ]
  },
  "Modifier": {
@@ -16762,7 +16959,7 @@
   "uses": [
    "App/Core/AppModel.swift:272: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
    "App/Screens/Editor/StudioPanels.swift:448: TextField(tr(\"Mon thème\"), text: $newName)",
-   "Shared/Model/WidgetStyle.swift:757: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
+   "Shared/Model/WidgetStyle.swift:764: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
   ]
  },
  "Mon widget": {
@@ -16788,8 +16985,8 @@
  "Monochrome": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:701: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {",
-   "Shared/Theme/Theme.swift:126: id: .monochrome, name: tr(\"Monochrome\"), tagline: tr(\"Noir, blanc, rien d'autre\"), isPremium: false,"
+   "Shared/Model/WidgetStyle.swift:708: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {",
+   "Shared/Theme/Theme.swift:130: id: .monochrome, name: tr(\"Monochrome\"), tagline: tr(\"Noir, blanc, rien d'autre\"), isPremium: false,"
   ]
  },
  "Montant": {
@@ -16951,7 +17148,7 @@
  "Mousse, papier et titres à empattements": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:478: id: .forest, name: tr(\"Sous-bois\"), tagline: tr(\"Mousse, papier et titres à empattements\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:482: id: .forest, name: tr(\"Sous-bois\"), tagline: tr(\"Mousse, papier et titres à empattements\"), isPremium: false,"
   ]
  },
  "Moutarde": {
@@ -17256,19 +17453,37 @@
  "Météo, agenda, priorités et eau, dès le réveil.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:37: WidgetPack(id: \"morning\", name: tr(\"Bien démarrer\"), tagline: tr(\"Météo, agenda, priorités et eau, dès le réveil.\"), symbol: \"sunrise.fill\","
+   "Shared/Model/Packs.swift:58: WidgetPack(id: \"morning\", name: tr(\"Bien démarrer\"), tagline: tr(\"Météo, agenda, priorités et eau, dès le réveil.\"), symbol: \"sunrise.fill\","
   ]
  },
  "Météo, détails, pluie, vent, soleil et lune.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:61: WidgetPack(id: \"weather\", name: tr(\"Tout le ciel\"), tagline: tr(\"Météo, détails, pluie, vent, soleil et lune.\"), symbol: \"cloud.sun.fill\","
+   "Shared/Model/Packs.swift:82: WidgetPack(id: \"weather\", name: tr(\"Tout le ciel\"), tagline: tr(\"Météo, détails, pluie, vent, soleil et lune.\"), symbol: \"cloud.sun.fill\","
+  ]
+ },
+ "Météo, lune, heure et calendrier, sous les flocons.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:142: WidgetPack(id: \"snow-night\", name: tr(\"Nuit de neige\"), tagline: tr(\"Météo, lune, heure et calendrier, sous les flocons.\"), symbol: \"snowflake\","
+  ]
+ },
+ "Météo, pluie, soleil, habitudes et eau, au cœur de la forêt.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:110: WidgetPack(id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Météo, pluie, soleil, habitudes et eau, au cœur de la forêt.\"), symbol: \"tree.fill\","
   ]
  },
  "Météo, premier rendez-vous, priorités et objectif du jour pour bien démarrer.": {
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:275: KindInfo(kind: .morning, title: tr(\"Ce matin\"), summary: tr(\"Météo, premier rendez-vous, priorités et objectif du jour pour bien démarrer.\"), category: .dashboards, symbol: \"sunrise\", isPremium: true,"
+  ]
+ },
+ "Météo, soleil, vent et compte à rebours, sur la planète rouge.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:108: WidgetPack(id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Météo, soleil, vent et compte à rebours, sur la planète rouge.\"), symbol: \"globe.europe.africa.fill\","
   ]
  },
  "Même heure": {
@@ -17320,16 +17535,25 @@
    "Shared/Domains/ExerciseLibrary.swift:819: x(\"swimming\", tr(\"Natation\"), [.fullBody], [.heart], [.other], .cardio, .intermediate, .generic, aka: [\"nage\", \"piscine\"]),"
   ]
  },
+ "Nature": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:461: id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Feuillage et lumière verte : la météo, la pluie et tes habitudes.\"),",
+   "Shared/Model/Packs.swift:110: WidgetPack(id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Météo, pluie, soleil, habitudes et eau, au cœur de la forêt.\"), symbol: \"tree.fill\",",
+   "Shared/Theme/Theme.swift:570: id: .nature, name: tr(\"Nature\"), tagline: tr(\"Forêt profonde, feuillage et lumière verte\"), isPremium: true,"
+  ]
+ },
  "Neige": {
   "placeholders": 0,
   "uses": [
-   "Shared/Data/WeatherService.swift:253: case 71, 73: tr(\"Neige\")"
+   "Shared/Data/WeatherService.swift:253: case 71, 73: tr(\"Neige\")",
+   "Shared/Model/WidgetStyle.swift:334: case .snow: tr(\"Neige\")"
   ]
  },
  "Net, doux, pastilles d'icônes": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:209: id: .modern, name: tr(\"Moderne\"), tagline: tr(\"Net, doux, pastilles d'icônes\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:213: id: .modern, name: tr(\"Moderne\"), tagline: tr(\"Net, doux, pastilles d'icônes\"), isPremium: false,"
   ]
  },
  "Netflix": {
@@ -17374,38 +17598,38 @@
  "Noir et jaune fluo, gros chiffres": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:722: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
+   "Shared/Model/WidgetStyle.swift:729: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
   ]
  },
  "Noir et jaune fluo, énergie": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:348: id: .sport, name: tr(\"Sport\"), tagline: tr(\"Noir et jaune fluo, énergie\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:352: id: .sport, name: tr(\"Sport\"), tagline: tr(\"Noir et jaune fluo, énergie\"), isPremium: true,"
   ]
  },
  "Noir mat": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:498: id: .matteBlack, name: tr(\"Noir mat\"), tagline: tr(\"Noir profond, fil fin, rien de trop\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:502: id: .matteBlack, name: tr(\"Noir mat\"), tagline: tr(\"Noir profond, fil fin, rien de trop\"), isPremium: true,"
   ]
  },
  "Noir profond et or": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:694: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),",
-   "Shared/Theme/Theme.swift:339: id: .luxury, name: tr(\"Luxe\"), tagline: tr(\"Noir profond et or\"), isPremium: true,"
+   "Shared/Model/WidgetStyle.swift:701: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),",
+   "Shared/Theme/Theme.swift:343: id: .luxury, name: tr(\"Luxe\"), tagline: tr(\"Noir profond et or\"), isPremium: true,"
   ]
  },
  "Noir profond, fil fin, rien de trop": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:498: id: .matteBlack, name: tr(\"Noir mat\"), tagline: tr(\"Noir profond, fil fin, rien de trop\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:502: id: .matteBlack, name: tr(\"Noir mat\"), tagline: tr(\"Noir profond, fil fin, rien de trop\"), isPremium: true,"
   ]
  },
  "Noir total, une seule couleur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:695: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
+   "Shared/Model/WidgetStyle.swift:702: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
   ]
  },
  "Noir, blanc et rien d'autre. L'heure, la journée, la semaine.": {
@@ -17417,7 +17641,7 @@
  "Noir, blanc, rien d'autre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:126: id: .monochrome, name: tr(\"Monochrome\"), tagline: tr(\"Noir, blanc, rien d'autre\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:130: id: .monochrome, name: tr(\"Monochrome\"), tagline: tr(\"Noir, blanc, rien d'autre\"), isPremium: false,"
   ]
  },
  "Noix de Grenoble": {
@@ -17784,12 +18008,6 @@
    "App/Screens/Profile/ProfileView.swift:125: Text(tr(\"Notifications\"))"
   ]
  },
- "Notre sélection": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:281: shelfRow(forYou.isEmpty ? tr(\"Notre sélection\") : tr(\"Pour toi\")) {"
-  ]
- },
  "Nouilles de riz cuites": {
   "placeholders": 0,
   "uses": [
@@ -18059,7 +18277,8 @@
   "uses": [
    "Shared/Domains/Life.swift:130: Holiday(name: tr(\"Noël\"), date: make(year, 12, 25)),",
    "Shared/Domains/Life.swift:144: Holiday(name: tr(\"Noël\"), date: make(year, 12, 25)),",
-   "Shared/Domains/Life.swift:159: Holiday(name: tr(\"Noël\"), date: make(year, 12, 25)),"
+   "Shared/Domains/Life.swift:159: Holiday(name: tr(\"Noël\"), date: make(year, 12, 25)),",
+   "Shared/Theme/Theme.swift:668: id: .christmas, name: tr(\"Noël\"), tagline: tr(\"Vert sapin, rouge et fils d'or\"), isPremium: true,"
   ]
  },
  "Nuit": {
@@ -18074,10 +18293,35 @@
    "App/Screens/Explore/StoreCombos.swift:127: combo(\"heure-lune\", tr(\"Nuit claire\"), tr(\"L'heure et la phase de la lune.\"), .synthwave, \"FF2A6D\","
   ]
  },
+ "Nuit de neige": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:142: WidgetPack(id: \"snow-night\", name: tr(\"Nuit de neige\"), tagline: tr(\"Météo, lune, heure et calendrier, sous les flocons.\"), symbol: \"snowflake\",",
+   "Shared/Theme/Theme.swift:680: id: .snowfall, name: tr(\"Nuit de neige\"), tagline: tr(\"Bleu d'hiver et flocons qui tombent\"), isPremium: true,"
+  ]
+ },
+ "Nuit des citrouilles": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:132: WidgetPack(id: \"pumpkin-night\", name: tr(\"Nuit des citrouilles\"), tagline: tr(\"Le compte à rebours d'Halloween, la lune et la météo du soir.\"), symbol: \"moon.stars.fill\","
+  ]
+ },
+ "Nuit noire et orange citrouille": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:652: id: .pumpkin, name: tr(\"Citrouille\"), tagline: tr(\"Nuit noire et orange citrouille\"), isPremium: true,"
+  ]
+ },
+ "Nuit urbaine, gris acier et signal jaune": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:616: id: .vigilante, name: tr(\"Justicier\"), tagline: tr(\"Nuit urbaine, gris acier et signal jaune\"), isPremium: true,"
+  ]
+ },
  "Nuit violette et néon rose": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:528: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:532: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
   ]
  },
  "Nuit étoilée": {
@@ -18123,7 +18367,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:203: combo(\"nutrition-complete\", tr(\"Nutrition complète\"), tr(\"Calories, macros, protéines et série de suivi.\"), .light, \"2F8F7A\",",
-   "Shared/Model/Packs.swift:55: WidgetPack(id: \"nutrition\", name: tr(\"Nutrition complète\"), tagline: tr(\"Calories, macros, protéines, repas et semaine.\"), symbol: \"fork.knife\","
+   "Shared/Model/Packs.swift:76: WidgetPack(id: \"nutrition\", name: tr(\"Nutrition complète\"), tagline: tr(\"Calories, macros, protéines, repas et semaine.\"), symbol: \"fork.knife\","
   ]
  },
  "Nutrition,\nsimplifiée.": {
@@ -18161,7 +18405,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:258: id: \"neon\", name: tr(\"Néon\"), tagline: tr(\"Focus, échéances et fuseaux, en cyan électrique.\"),",
-   "Shared/Model/Packs.swift:71: WidgetPack(id: \"neon\", name: tr(\"Néon\"), tagline: tr(\"Heure, fuseaux, focus et crypto en cyan électrique.\"), symbol: \"bolt.fill\",",
+   "Shared/Model/Packs.swift:92: WidgetPack(id: \"neon\", name: tr(\"Néon\"), tagline: tr(\"Heure, fuseaux, focus et crypto en cyan électrique.\"), symbol: \"bolt.fill\",",
    "Shared/Model/Settings.swift:36: case .neon: tr(\"Néon\")",
    "Shared/Model/StyleColors.swift:87: make(\"neon\", tr(\"Néon\"), background: [\"0B0416\"], panel: \"1C0C31\", text: \"FFE9F7\", secondary: \"B48AB0\","
   ]
@@ -18169,7 +18413,7 @@
  "Néon cyan sur nuit profonde": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:174: id: .futuristic, name: tr(\"Futuriste\"), tagline: tr(\"Néon cyan sur nuit profonde\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:178: id: .futuristic, name: tr(\"Futuriste\"), tagline: tr(\"Néon cyan sur nuit profonde\"), isPremium: true,"
   ]
  },
  "O": {
@@ -18393,7 +18637,7 @@
  "Ocean": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:672: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:679: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
   ]
  },
  "Océan": {
@@ -18401,8 +18645,14 @@
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:188: case .ocean: tr(\"Océan\")",
    "App/Screens/Explore/HomeSetups.swift:368: id: \"ocean\", name: tr(\"Océan\"), tagline: tr(\"L'eau, le ciel et tes habitudes, en bleu profond.\"),",
-   "Shared/Model/Settings.swift:28: case .ocean: tr(\"Océan\")",
-   "Shared/Model/StyleColors.swift:72: make(\"ocean\", tr(\"Océan\"), background: [\"0B3C5D\", \"06192B\"], panel: \"134A70\", text: \"EAF6FF\", secondary: \"93B8D2\","
+   "Shared/Model/Packs.swift:114: WidgetPack(id: \"water\", name: tr(\"Océan\"), tagline: tr(\"Eau, météo, pluie, lune et heure, au fil des vagues.\"), symbol: \"water.waves\",",
+   "Shared/Model/Settings.swift:28: case .ocean: tr(\"Océan\")"
+  ]
+ },
+ "Océan profond": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:484: id: \"vagues\", name: tr(\"Océan profond\"), tagline: tr(\"Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune.\"),"
   ]
  },
  "Oignon": {
@@ -18432,7 +18682,7 @@
  "Ombre et profondeur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:582: if depth != .none { features.append(tr(\"Ombre et profondeur\")) }"
+   "Shared/Model/WidgetStyle.swift:589: if depth != .none { features.append(tr(\"Ombre et profondeur\")) }"
   ]
  },
  "Omelette nature": {
@@ -18511,7 +18761,7 @@
  "Orange, rose et violet du soir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:683: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:690: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
   ]
  },
  "Organisation": {
@@ -18658,21 +18908,27 @@
  "Pack de la semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:519: Text(tr(\"Pack de la semaine\").uppercased())"
+   "App/Screens/Explore/StoreMagazine.swift:530: Text(tr(\"Pack de la semaine\").uppercased())"
   ]
  },
  "Pack de la semaine : %@, %@ widgets. %@": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:573: .accessibilityLabel(Text(tr(\"Pack de la semaine : \\(pack.name), \\(pack.kinds.count) widgets. \\(pack.tagline)\")))"
+   "App/Screens/Explore/StoreMagazine.swift:584: .accessibilityLabel(Text(tr(\"Pack de la semaine : \\(pack.name), \\(pack.kinds.count) widgets. \\(pack.tagline)\")))"
   ]
  },
  "Packs": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:29: case .packs: tr(\"Packs\")",
-   "App/Screens/Explore/ExploreView.swift:591: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))",
+   "App/Screens/Explore/ExploreView.swift:567: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))",
    "App/Screens/Explore/StoreMagazine.swift:454: .navigationTitle(tr(\"Packs\"))"
+  ]
+ },
+ "Packs thématiques": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:30: case .themes: tr(\"Packs thématiques\")"
   ]
  },
  "Pad thaï": {
@@ -18758,8 +19014,8 @@
  "Papier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:325: case .paper: tr(\"Papier\")",
-   "Shared/Theme/Theme.swift:400: id: .paper, name: tr(\"Papier\"), tagline: tr(\"Papier crème et encre\"), isPremium: true,"
+   "Shared/Model/WidgetStyle.swift:327: case .paper: tr(\"Papier\")",
+   "Shared/Theme/Theme.swift:404: id: .paper, name: tr(\"Papier\"), tagline: tr(\"Papier crème et encre\"), isPremium: true,"
   ]
  },
  "Papier + serif": {
@@ -18771,19 +19027,19 @@
  "Papier chaud et typo ronde": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:166: id: .retro, name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:170: id: .retro, name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde\"), isPremium: true,"
   ]
  },
  "Papier chaud et typo ronde, pour tous les jours.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:73: WidgetPack(id: \"retro\", name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde, pour tous les jours.\"), symbol: \"camera.macro\","
+   "Shared/Model/Packs.swift:94: WidgetPack(id: \"retro\", name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde, pour tous les jours.\"), symbol: \"camera.macro\","
   ]
  },
  "Papier crème et encre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:400: id: .paper, name: tr(\"Papier\"), tagline: tr(\"Papier crème et encre\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:404: id: .paper, name: tr(\"Papier\"), tagline: tr(\"Papier crème et encre\"), isPremium: true,"
   ]
  },
  "Papier pointillé": {
@@ -19087,7 +19343,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:332: id: \"pastel\", name: tr(\"Pastel\"), tagline: tr(\"Une brume rose et lilas pour les dates qui comptent.\"),",
-   "Shared/Theme/Theme.swift:390: id: .pastel, name: tr(\"Pastel\"), tagline: tr(\"Couleurs de dragée\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:394: id: .pastel, name: tr(\"Pastel\"), tagline: tr(\"Couleurs de dragée\"), isPremium: true,"
   ]
  },
  "Pastille": {
@@ -19258,7 +19514,7 @@
  "Personnaliser et ajouter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:746: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))"
+   "App/Screens/Explore/ExploreView.swift:722: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))"
   ]
  },
  "Personnaliser le widget": {
@@ -19314,13 +19570,13 @@
  "Petites cartes sur ardoise": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:723: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
+   "Shared/Model/WidgetStyle.swift:730: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
   ]
  },
  "Petites cartes, tout d'un coup d'œil": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:312: id: .dashboard, name: tr(\"Tableau de bord\"), tagline: tr(\"Petites cartes, tout d'un coup d'œil\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:316: id: .dashboard, name: tr(\"Tableau de bord\"), tagline: tr(\"Petites cartes, tout d'un coup d'œil\"), isPremium: true,"
   ]
  },
  "Petits pas rapides sans amplitude.": {
@@ -19442,7 +19698,7 @@
  "Plan": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:378: id: .blueprint, name: tr(\"Plan\"), tagline: tr(\"Bleu d'architecte et grille\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:382: id: .blueprint, name: tr(\"Plan\"), tagline: tr(\"Bleu d'architecte et grille\"), isPremium: true,"
   ]
  },
  "Planche (gainage)": {
@@ -19718,7 +19974,7 @@
  "Plus d'infos, moins d'espace": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:239: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:243: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
   ]
  },
  "Plus de 70 widgets en plus, 12 styles, fonds photo.": {
@@ -19793,7 +20049,7 @@
  "Plusieurs widgets réunis en un seul, prêts à poser.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:63: case .combos: tr(\"Plusieurs widgets réunis en un seul, prêts à poser.\")"
+   "App/Screens/Explore/ExploreView.swift:66: case .combos: tr(\"Plusieurs widgets réunis en un seul, prêts à poser.\")"
   ]
  },
  "Plutôt dégagé": {
@@ -19864,7 +20120,7 @@
   "uses": [
    "Shared/Model/WidgetStyle.swift:82: case .dots: tr(\"Points\")",
    "Shared/Model/WidgetStyle.swift:152: case .dotted: tr(\"Points\")",
-   "Shared/Model/WidgetStyle.swift:326: case .dots: tr(\"Points\")"
+   "Shared/Model/WidgetStyle.swift:328: case .dots: tr(\"Points\")"
   ]
  },
  "Points importants": {
@@ -20055,7 +20311,7 @@
  "Portefeuille, répartition, cours et chiffres officiels.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:49: WidgetPack(id: \"investor\", name: tr(\"Investisseur\"), tagline: tr(\"Portefeuille, répartition, cours et chiffres officiels.\"), symbol: \"chart.line.uptrend.xyaxis\","
+   "Shared/Model/Packs.swift:70: WidgetPack(id: \"investor\", name: tr(\"Investisseur\"), tagline: tr(\"Portefeuille, répartition, cours et chiffres officiels.\"), symbol: \"chart.line.uptrend.xyaxis\","
   ]
  },
  "Portion": {
@@ -20289,7 +20545,6 @@
  "Pour toi": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:281: shelfRow(forYou.isEmpty ? tr(\"Notre sélection\") : tr(\"Pour toi\")) {",
    "App/Screens/Spaces/NutritionSpace.swift:231: FilterChip(title: tr(\"Pour toi\"), isSelected: category == nil) { category = nil }"
   ]
  },
@@ -20499,6 +20754,12 @@
    "Shared/Domains/ExerciseTechniques.swift:128: [tr(\"Cambrer le bas du dos en haut.\"), tr(\"Pousser sur la pointe des pieds.\")]),"
   ]
  },
+ "Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:439: id: \"espace\", name: tr(\"Espace\"), tagline: tr(\"Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire.\"),"
+  ]
+ },
  "Poussée de traîneau": {
   "placeholders": 0,
   "uses": [
@@ -20535,7 +20796,7 @@
    "App/Components/UIComponents.swift:101: if !compact { Text(tr(\"Premium\")) }",
    "App/Components/UIComponents.swift:108: .accessibilityLabel(Text(tr(\"Premium\")))",
    "App/Premium/PaywallView.swift:109: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
-   "App/Screens/Explore/ExploreView.swift:77: case .premium: tr(\"Premium\")"
+   "App/Screens/Explore/ExploreView.swift:81: case .premium: tr(\"Premium\")"
   ]
  },
  "Premium actif": {
@@ -21084,13 +21345,13 @@
  "Pure White": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:666: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
+   "Shared/Model/WidgetStyle.swift:673: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
   ]
  },
  "Pâle, léger, presque translucide": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:448: id: .mist, name: tr(\"Brume\"), tagline: tr(\"Pâle, léger, presque translucide\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:452: id: .mist, name: tr(\"Brume\"), tagline: tr(\"Pâle, léger, presque translucide\"), isPremium: true,"
   ]
  },
  "Pâtes cuites": {
@@ -21148,7 +21409,7 @@
  "Pêche et corail d'un lever de soleil": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:460: id: .dawn, name: tr(\"Aube\"), tagline: tr(\"Pêche et corail d'un lever de soleil\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:464: id: .dawn, name: tr(\"Aube\"), tagline: tr(\"Pêche et corail d'un lever de soleil\"), isPremium: true,"
   ]
  },
  "Qu'est-ce qui t'intéresse ?": {
@@ -21392,7 +21653,7 @@
  "Rayures": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:329: case .diagonal: tr(\"Rayures\")"
+   "Shared/Model/WidgetStyle.swift:331: case .diagonal: tr(\"Rayures\")"
   ]
  },
  "Rebondir sur la poitrine.": {
@@ -22144,7 +22405,7 @@
  "Reste du mois, dépenses rapides, factures et épargne.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:45: WidgetPack(id: \"budget\", name: tr(\"Budget serré\"), tagline: tr(\"Reste du mois, dépenses rapides, factures et épargne.\"), symbol: \"creditcard.fill\","
+   "Shared/Model/Packs.swift:66: WidgetPack(id: \"budget\", name: tr(\"Budget serré\"), tagline: tr(\"Reste du mois, dépenses rapides, factures et épargne.\"), symbol: \"creditcard.fill\","
   ]
  },
  "Reste du mois, dépenses, épargne et factures réunies.": {
@@ -22727,19 +22988,19 @@
  "Rose et bleu rétro-futur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:430: id: .vapor, name: tr(\"Vapor\"), tagline: tr(\"Rose et bleu rétro-futur\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:434: id: .vapor, name: tr(\"Vapor\"), tagline: tr(\"Rose et bleu rétro-futur\"), isPremium: true,"
   ]
  },
  "Rose poudré et prune": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:705: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
+   "Shared/Model/WidgetStyle.swift:712: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
   ]
  },
  "Rose tendre, formes rondes": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:488: id: .blossom, name: tr(\"Cerisier\"), tagline: tr(\"Rose tendre, formes rondes\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:492: id: .blossom, name: tr(\"Cerisier\"), tagline: tr(\"Rose tendre, formes rondes\"), isPremium: true,"
   ]
  },
  "Rotation contrôlée, sans forcer.": {
@@ -22764,6 +23025,24 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseLibrary.swift:834: x(\"thoracic-rotation\", tr(\"Rotations thoraciques\"), [.back], [.obliques], [.bodyweight], .mobility, .beginner, .rotation, aka: [\"rotation thoracique\"]),"
+  ]
+ },
+ "Rouge vif, bleu nuit et toile tissée": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:628: id: .webSlinger, name: tr(\"Toile\"), tagline: tr(\"Rouge vif, bleu nuit et toile tissée\"), isPremium: true,"
+  ]
+ },
+ "Rouille et poussière : la météo, le soleil et le vent de la planète rouge.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:450: id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Rouille et poussière : la météo, le soleil et le vent de la planète rouge.\"),"
+  ]
+ },
+ "Rouille, poussière et horizon martien": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:561: id: .mars, name: tr(\"Mars\"), tagline: tr(\"Rouille, poussière et horizon martien\"), isPremium: true,"
   ]
  },
  "Roule vers l'avant en allongeant le corps.": {
@@ -22805,7 +23084,7 @@
  "Routine, eau, séries, taux de réussite et rythme du jour.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:57: WidgetPack(id: \"habits\", name: tr(\"Bonnes habitudes\"), tagline: tr(\"Routine, eau, séries, taux de réussite et rythme du jour.\"), symbol: \"leaf.fill\","
+   "Shared/Model/Packs.swift:78: WidgetPack(id: \"habits\", name: tr(\"Bonnes habitudes\"), tagline: tr(\"Routine, eau, séries, taux de réussite et rythme du jour.\"), symbol: \"leaf.fill\","
   ]
  },
  "Rouvre lentement.": {
@@ -23115,8 +23394,8 @@
  "Rétro": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:73: WidgetPack(id: \"retro\", name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde, pour tous les jours.\"), symbol: \"camera.macro\",",
-   "Shared/Theme/Theme.swift:166: id: .retro, name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde\"), isPremium: true,"
+   "Shared/Model/Packs.swift:94: WidgetPack(id: \"retro\", name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde, pour tous les jours.\"), symbol: \"camera.macro\",",
+   "Shared/Theme/Theme.swift:170: id: .retro, name: tr(\"Rétro\"), tagline: tr(\"Papier chaud et typo ronde\"), isPremium: true,"
   ]
  },
  "Rétro néon": {
@@ -23193,14 +23472,14 @@
   "uses": [
    "Shared/Model/Settings.swift:31: case .sand: tr(\"Sable\")",
    "Shared/Model/StyleColors.swift:84: make(\"sand\", tr(\"Sable\"), background: [\"F5EDE1\"], panel: \"E9DAC3\", text: \"3A2A1A\", secondary: \"8C7358\",",
-   "Shared/Model/WidgetStyle.swift:710: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {",
+   "Shared/Model/WidgetStyle.swift:717: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {",
    "Shared/Theme/Palette.swift:30: AccentSwatch(name: tr(\"Sable\"), hex: \"E9DFCC\"),"
   ]
  },
  "Sable chaud, grain et serif": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:510: id: .dune, name: tr(\"Dune\"), tagline: tr(\"Sable chaud, grain et serif\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:514: id: .dune, name: tr(\"Dune\"), tagline: tr(\"Sable chaud, grain et serif\"), isPremium: true,"
   ]
  },
  "Sacrifier la technique en fin de série.": {
@@ -23231,7 +23510,7 @@
  "Sakura": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:705: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
+   "Shared/Model/WidgetStyle.swift:712: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
   ]
  },
  "Salade César": {
@@ -23281,7 +23560,7 @@
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:207: combo(\"salle\", tr(\"Salle de sport\"), tr(\"Série, repos, régularité et records.\"), .dark, \"FF6B57\",",
    "Shared/Data/SampleData.swift:274: Bill(name: tr(\"Salle de sport\"), amount: 39.99, anchorDate: day(20, 0, from: now), isSubscription: true, symbol: \"dumbbell.fill\"),",
-   "Shared/Model/Packs.swift:67: WidgetPack(id: \"gym\", name: tr(\"Salle de sport\"), tagline: tr(\"Séance, volume, records et mois d'entraînement.\"), symbol: \"dumbbell.fill\","
+   "Shared/Model/Packs.swift:88: WidgetPack(id: \"gym\", name: tr(\"Salle de sport\"), tagline: tr(\"Séance, volume, records et mois d'entraînement.\"), symbol: \"dumbbell.fill\","
   ]
  },
  "Salsa": {
@@ -23366,6 +23645,12 @@
    "App/Screens/Explore/HomeSetups.swift:130: static let health = SetupApp(name: tr(\"Santé\"), symbol: \"heart.fill\")",
    "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voyages\")]",
    "App/Screens/Spaces/SpacesView.swift:197: case .health: tr(\"Santé\")"
+  ]
+ },
+ "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:714: case .christmas: tr(\"Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.\")"
   ]
  },
  "Sardines en conserve": {
@@ -23691,19 +23976,19 @@
  "Serif et reflets dorés": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:150: id: .elegant, name: tr(\"Élégant\"), tagline: tr(\"Serif et reflets dorés\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:154: id: .elegant, name: tr(\"Élégant\"), tagline: tr(\"Serif et reflets dorés\"), isPremium: true,"
   ]
  },
  "Serif et reflets dorés pour l'agenda et la journée.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:69: WidgetPack(id: \"elegant\", name: tr(\"Élégance\"), tagline: tr(\"Serif et reflets dorés pour l'agenda et la journée.\"), symbol: \"crown.fill\","
+   "Shared/Model/Packs.swift:90: WidgetPack(id: \"elegant\", name: tr(\"Élégance\"), tagline: tr(\"Serif et reflets dorés pour l'agenda et la journée.\"), symbol: \"crown.fill\","
   ]
  },
  "Serif, papier et capitales": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:290: id: .editorial, name: tr(\"Éditorial\"), tagline: tr(\"Serif, papier et capitales\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:294: id: .editorial, name: tr(\"Éditorial\"), tagline: tr(\"Serif, papier et capitales\"), isPremium: true,"
   ]
  },
  "Serre en haut.": {
@@ -24030,7 +24315,7 @@
   "uses": [
    "App/Components/StylePicker.swift:194: Label(tr(\"Sombre\"), systemImage: \"moon.fill\").font(.caption2.weight(.medium)).foregroundStyle(.secondary)",
    "Shared/Model/Settings.swift:50: case .dark: tr(\"Sombre\")",
-   "Shared/Theme/Theme.swift:118: id: .dark, name: tr(\"Sombre\"), tagline: tr(\"Toujours sombre\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:122: id: .dark, name: tr(\"Sombre\"), tagline: tr(\"Toujours sombre\"), isPremium: false,"
   ]
  },
  "Sorties": {
@@ -24140,7 +24425,7 @@
  "Sous-bois": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:478: id: .forest, name: tr(\"Sous-bois\"), tagline: tr(\"Mousse, papier et titres à empattements\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:482: id: .forest, name: tr(\"Sous-bois\"), tagline: tr(\"Mousse, papier et titres à empattements\"), isPremium: false,"
   ]
  },
  "Sous-traitance": {
@@ -24185,7 +24470,7 @@
  "Sportif": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:41: WidgetPack(id: \"athlete\", name: tr(\"Sportif\"), tagline: tr(\"Séance, séries, repos, calories et protéines.\"), symbol: \"figure.strengthtraining.traditional\","
+   "Shared/Model/Packs.swift:62: WidgetPack(id: \"athlete\", name: tr(\"Sportif\"), tagline: tr(\"Séance, séries, repos, calories et protéines.\"), symbol: \"figure.strengthtraining.traditional\","
   ]
  },
  "Spotify": {
@@ -24263,7 +24548,7 @@
  "Stade": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:722: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
+   "Shared/Model/WidgetStyle.swift:729: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
   ]
  },
  "Standard": {
@@ -24288,7 +24573,7 @@
  "Store": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:123: .navigationTitle(tr(\"Store\"))",
+   "App/Screens/Explore/ExploreView.swift:127: .navigationTitle(tr(\"Store\"))",
    "App/Screens/Tutorial/Tutorial.swift:55: case .store: tr(\"Store\")",
    "App/TesseraApp.swift:212: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }"
   ]
@@ -24320,14 +24605,20 @@
  "Style %@%@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:696: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
+   "App/Screens/Explore/ExploreView.swift:672: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
+  ]
+ },
+ "Style de la semaine": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:812: Text(tr(\"Style de la semaine\").uppercased())"
   ]
  },
  "Styles": {
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:115: comparisonRow(tr(\"Styles\"), free: \"\\(ThemeCatalog.free.count)\", premium: \"\\(ThemeCatalog.all.count)\")",
-   "App/Screens/Explore/ExploreView.swift:30: case .styles: tr(\"Styles\")"
+   "App/Screens/Explore/ExploreView.swift:31: case .styles: tr(\"Styles\")"
   ]
  },
  "Styles, couleurs, photos, polices.": {
@@ -24376,7 +24667,7 @@
  "Suit le mode clair ou sombre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:101: id: .minimal, name: tr(\"Minimal\"), tagline: tr(\"Suit le mode clair ou sombre\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:105: id: .minimal, name: tr(\"Minimal\"), tagline: tr(\"Suit le mode clair ou sombre\"), isPremium: false,"
   ]
  },
  "Suit ton poids et ton activité": {
@@ -24433,7 +24724,7 @@
  "Sunset": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:683: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:690: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
   ]
  },
  "Superman": {
@@ -24692,13 +24983,13 @@
  "Synthwave": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:528: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:532: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
   ]
  },
  "Système": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:347: TypePreset(id: \"system\", name: tr(\"Système\"), font: .standard, numberWeight: .semibold, titleWeight: .semibold, valueScale: 1, titleCase: .upper, tracking: 0),"
+   "Shared/Model/WidgetStyle.swift:354: TypePreset(id: \"system\", name: tr(\"Système\"), font: .standard, numberWeight: .semibold, titleWeight: .semibold, valueScale: 1, titleCase: .upper, tracking: 0),"
   ]
  },
  "São Paulo": {
@@ -24800,6 +25091,12 @@
    "Shared/Model/KindCatalog.swift:276: KindInfo(kind: .fitnessDashboard, title: tr(\"Tableau fitness\"), summary: tr(\"Séance, régularité, calories et protéines réunies.\"), category: .dashboards, symbol: \"figure.run\", isPremium: true, familie"
   ]
  },
+ "Séance, séries, records et calories, en bleu, rouge et or.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:120: WidgetPack(id: \"hero-cape\", name: tr(\"Cape héroïque\"), tagline: tr(\"Séance, séries, records et calories, en bleu, rouge et or.\"), symbol: \"bolt.shield.fill\","
+  ]
+ },
  "Séance, séries, repos et calories.": {
   "placeholders": 0,
   "uses": [
@@ -24809,13 +25106,13 @@
  "Séance, séries, repos, calories et protéines.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:41: WidgetPack(id: \"athlete\", name: tr(\"Sportif\"), tagline: tr(\"Séance, séries, repos, calories et protéines.\"), symbol: \"figure.strengthtraining.traditional\","
+   "Shared/Model/Packs.swift:62: WidgetPack(id: \"athlete\", name: tr(\"Sportif\"), tagline: tr(\"Séance, séries, repos, calories et protéines.\"), symbol: \"figure.strengthtraining.traditional\","
   ]
  },
  "Séance, volume, records et mois d'entraînement.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:67: WidgetPack(id: \"gym\", name: tr(\"Salle de sport\"), tagline: tr(\"Séance, volume, records et mois d'entraînement.\"), symbol: \"dumbbell.fill\","
+   "Shared/Model/Packs.swift:88: WidgetPack(id: \"gym\", name: tr(\"Salle de sport\"), tagline: tr(\"Séance, volume, records et mois d'entraînement.\"), symbol: \"dumbbell.fill\","
   ]
  },
  "Séances": {
@@ -24994,19 +25291,19 @@
  "Ta couleur en dégradé vif": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:272: id: .gradient, name: tr(\"Dégradé\"), tagline: tr(\"Ta couleur en dégradé vif\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:276: id: .gradient, name: tr(\"Dégradé\"), tagline: tr(\"Ta couleur en dégradé vif\"), isPremium: true,"
   ]
  },
  "Ta couleur en plein fond": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:191: id: .colorful, name: tr(\"Couleur\"), tagline: tr(\"Ta couleur en plein fond\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:195: id: .colorful, name: tr(\"Couleur\"), tagline: tr(\"Ta couleur en plein fond\"), isPremium: true,"
   ]
  },
  "Ta couleur en plein fond, sur six widgets.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:75: WidgetPack(id: \"vivid\", name: tr(\"Couleurs vives\"), tagline: tr(\"Ta couleur en plein fond, sur six widgets.\"), symbol: \"paintpalette.fill\","
+   "Shared/Model/Packs.swift:96: WidgetPack(id: \"vivid\", name: tr(\"Couleurs vives\"), tagline: tr(\"Ta couleur en plein fond, sur six widgets.\"), symbol: \"paintpalette.fill\","
   ]
  },
  "Ta couleur en plein fond.": {
@@ -25018,7 +25315,7 @@
  "Ta couleur sur noir, lignes d'écran": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:369: id: .terminal, name: tr(\"Terminal\"), tagline: tr(\"Ta couleur sur noir, lignes d'écran\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:373: id: .terminal, name: tr(\"Terminal\"), tagline: tr(\"Ta couleur sur noir, lignes d'écran\"), isPremium: true,"
   ]
  },
  "Ta date de naissance reste sur ton iPhone.": {
@@ -25207,7 +25504,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:181: combo(\"tableau-business\", tr(\"Tableau de bord\"), tr(\"Tes indicateurs, ton MRR et les ventes du jour.\"), .dawn, \"F2A33A\",",
-   "Shared/Theme/Theme.swift:312: id: .dashboard, name: tr(\"Tableau de bord\"), tagline: tr(\"Petites cartes, tout d'un coup d'œil\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:316: id: .dashboard, name: tr(\"Tableau de bord\"), tagline: tr(\"Petites cartes, tout d'un coup d'œil\"), isPremium: true,"
   ]
  },
  "Tableau de bord business": {
@@ -25226,7 +25523,7 @@
  "Tableau noir et craie": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:439: id: .chalk, name: tr(\"Ardoise\"), tagline: tr(\"Tableau noir et craie\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:443: id: .chalk, name: tr(\"Ardoise\"), tagline: tr(\"Tableau noir et craie\"), isPremium: true,"
   ]
  },
  "Tableau études": {
@@ -25384,7 +25681,7 @@
  "Technique": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:354: TypePreset(id: \"tech\", name: tr(\"Technique\"), font: .mono, numberWeight: .light, titleWeight: .regular, valueScale: 1, titleCase: .upper, tracking: 1.5),"
+   "Shared/Model/WidgetStyle.swift:361: TypePreset(id: \"tech\", name: tr(\"Technique\"), font: .mono, numberWeight: .light, titleWeight: .regular, valueScale: 1, titleCase: .upper, tracking: 1.5),"
   ]
  },
  "Tempo (ex. 3-1-1-0)": {
@@ -25477,7 +25774,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:212: TextField(tr(\"Terminal\"), text: $flight.terminal)",
-   "Shared/Theme/Theme.swift:369: id: .terminal, name: tr(\"Terminal\"), tagline: tr(\"Ta couleur sur noir, lignes d'écran\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:373: id: .terminal, name: tr(\"Terminal\"), tagline: tr(\"Ta couleur sur noir, lignes d'écran\"), isPremium: true,"
   ]
  },
  "Terminal %@": {
@@ -26029,7 +26326,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:488: EditorSection(title: tr(\"Texture\"), isPremium: !model.isPremium) {",
-   "Shared/Model/WidgetStyle.swift:580: if texture != .none { features.append(tr(\"Texture\")) }"
+   "Shared/Model/WidgetStyle.swift:587: if texture != .none { features.append(tr(\"Texture\")) }"
   ]
  },
  "Thanksgiving": {
@@ -26313,6 +26610,19 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:335: QuestionCard(title: tr(\"Toi\"), detail: model.life.birthday != nil ? tr(\"L'âge vient de ton anniversaire (Ma vie).\") : tr(\"Le poids sert aussi à estimer les calories brûlées.\")) {"
+  ]
+ },
+ "Toile": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:336: case .web: tr(\"Toile\")",
+   "Shared/Theme/Theme.swift:628: id: .webSlinger, name: tr(\"Toile\"), tagline: tr(\"Rouge vif, bleu nuit et toile tissée\"), isPremium: true,"
+  ]
+ },
+ "Toile urbaine": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:126: WidgetPack(id: \"city-web\", name: tr(\"Toile urbaine\"), tagline: tr(\"Cours, devoirs, ce qui vient et compte à rebours, tissés serré.\"), symbol: \"circle.hexagongrid.fill\","
   ]
  },
  "Tokyo": {
@@ -26745,7 +27055,7 @@
  "Touche un style pour voir tous ses widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:413: Text(tr(\"Touche un style pour voir tous ses widgets.\"))"
+   "App/Screens/Explore/ExploreView.swift:399: Text(tr(\"Touche un style pour voir tous ses widgets.\"))"
   ]
  },
  "Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.": {
@@ -26799,13 +27109,13 @@
  "Toujours lumineux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:110: id: .light, name: tr(\"Clair\"), tagline: tr(\"Toujours lumineux\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:114: id: .light, name: tr(\"Clair\"), tagline: tr(\"Toujours lumineux\"), isPremium: false,"
   ]
  },
  "Toujours sombre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:118: id: .dark, name: tr(\"Sombre\"), tagline: tr(\"Toujours sombre\"), isPremium: false,"
+   "Shared/Theme/Theme.swift:122: id: .dark, name: tr(\"Sombre\"), tagline: tr(\"Toujours sombre\"), isPremium: false,"
   ]
  },
  "Tour du monde": {
@@ -26843,7 +27153,7 @@
  "Tous": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:75: case .all: tr(\"Tous\")",
+   "App/Screens/Explore/ExploreView.swift:79: case .all: tr(\"Tous\")",
    "App/Screens/Explore/HomeSetupViews.swift:535: FilterChip(title: tr(\"Tous\"), isSelected: filter == .all) { filter = .all }",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:102: Button(tr(\"Tous\")) { filters.group = nil }",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:106: Button(tr(\"Tous\")) { filters.equipment = nil }"
@@ -26924,7 +27234,7 @@
  "Tout afficher": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:553: actionTitle: tr(\"Tout afficher\")",
+   "App/Screens/Explore/ExploreView.swift:529: actionTitle: tr(\"Tout afficher\")",
    "App/Screens/Explore/HomeSetupViews.swift:504: actionTitle: tr(\"Tout afficher\")"
   ]
  },
@@ -27019,7 +27329,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:217: combo(\"tout-le-ciel\", tr(\"Tout le ciel\"), tr(\"La météo, le soleil et la pluie à venir.\"), .aurora, \"3366FF\",",
-   "Shared/Model/Packs.swift:61: WidgetPack(id: \"weather\", name: tr(\"Tout le ciel\"), tagline: tr(\"Météo, détails, pluie, vent, soleil et lune.\"), symbol: \"cloud.sun.fill\","
+   "Shared/Model/Packs.swift:82: WidgetPack(id: \"weather\", name: tr(\"Tout le ciel\"), tagline: tr(\"Météo, détails, pluie, vent, soleil et lune.\"), symbol: \"cloud.sun.fill\","
   ]
  },
  "Tout le dos contre le mur.": {
@@ -27037,10 +27347,10 @@
  "Tout voir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:247: Text(tr(\"Tout voir\"))",
-   "App/Screens/Explore/ExploreView.swift:252: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(title)\"))",
-   "App/Screens/Explore/ExploreView.swift:826: Text(tr(\"Tout voir\"))",
-   "App/Screens/Explore/ExploreView.swift:831: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(aisle.title)\"))"
+   "App/Screens/Explore/ExploreView.swift:252: Text(tr(\"Tout voir\"))",
+   "App/Screens/Explore/ExploreView.swift:257: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(title)\"))",
+   "App/Screens/Explore/ExploreView.swift:802: Text(tr(\"Tout voir\"))",
+   "App/Screens/Explore/ExploreView.swift:807: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(aisle.title)\"))"
   ]
  },
  "Tout voir : Mes informations": {
@@ -27172,7 +27482,7 @@
  "Translucide et lumineux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:134: id: .glass, name: tr(\"Verre\"), tagline: tr(\"Translucide et lumineux\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:138: id: .glass, name: tr(\"Verre\"), tagline: tr(\"Translucide et lumineux\"), isPremium: true,"
   ]
  },
  "Transport": {
@@ -27293,7 +27603,7 @@
  "Turquoise profond, chiffres nets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:469: id: .lagoon, name: tr(\"Lagon\"), tagline: tr(\"Turquoise profond, chiffres nets\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:473: id: .lagoon, name: tr(\"Lagon\"), tagline: tr(\"Turquoise profond, chiffres nets\"), isPremium: true,"
   ]
  },
  "Type": {
@@ -27308,7 +27618,7 @@
  "Typo": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:182: id: .typography, name: tr(\"Typo\"), tagline: tr(\"De grands chiffres, en serif\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:186: id: .typography, name: tr(\"Typo\"), tagline: tr(\"De grands chiffres, en serif\"), isPremium: true,"
   ]
  },
  "Tâche": {
@@ -27401,6 +27711,12 @@
    "Shared/Render/Tiles/WeatherTiles.swift:94: tile.detail = tr(\"UV \\(Int(uv.rounded())) · \\(TF.uvLevel(uv))\")"
   ]
  },
+ "Un carnet de serre : habitudes, eau, calendrier et notes.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:472: id: \"botanique\", name: tr(\"Botanique\"), tagline: tr(\"Un carnet de serre : habitudes, eau, calendrier et notes.\"),"
+  ]
+ },
  "Un coussin sous la hanche si besoin.": {
   "placeholders": 0,
   "uses": [
@@ -27416,7 +27732,7 @@
  "Un dégradé bleu nuit vers turquoise": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:142: id: .aurora, name: tr(\"Aurore\"), tagline: tr(\"Un dégradé bleu nuit vers turquoise\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:146: id: .aurora, name: tr(\"Aurore\"), tagline: tr(\"Un dégradé bleu nuit vers turquoise\"), isPremium: true,"
   ]
  },
  "Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.": {
@@ -27428,7 +27744,7 @@
  "Un grand chiffre, comme une une": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:302: id: .magazine, name: tr(\"Magazine\"), tagline: tr(\"Un grand chiffre, comme une une\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:306: id: .magazine, name: tr(\"Magazine\"), tagline: tr(\"Un grand chiffre, comme une une\"), isPremium: true,"
   ]
  },
  "Un grand widget réunit 4 widgets au plus.": {
@@ -27503,6 +27819,12 @@
    "App/Screens/Editor/StudioPanels.swift:156: StudioNote(text: tr(\"Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget.\"), symbol: \"sparkles\")"
   ]
  },
+ "Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d'accueil assorti.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:68: case .themes: tr(\"Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d'accueil assorti.\")"
+  ]
+ },
  "Un verre": {
   "placeholders": 0,
   "uses": [
@@ -27545,7 +27867,7 @@
  "Un widget à la fois, rangé par thème : temps, santé, argent…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:62: case .widgets: tr(\"Un widget à la fois, rangé par thème : temps, santé, argent…\")"
+   "App/Screens/Explore/ExploreView.swift:65: case .widgets: tr(\"Un widget à la fois, rangé par thème : temps, santé, argent…\")"
   ]
  },
  "Un widget, 12 styles": {
@@ -27709,6 +28031,12 @@
    "Shared/Model/Templates.swift:79: configure: .countdown(tr(\"Vacances\"), days: 42, mode: .until)),"
   ]
  },
+ "Vagues": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:335: case .waves: tr(\"Vagues\")"
+  ]
+ },
  "Valeur": {
   "placeholders": 0,
   "uses": [
@@ -27802,7 +28130,7 @@
  "Vapor": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:430: id: .vapor, name: tr(\"Vapor\"), tagline: tr(\"Rose et bleu rétro-futur\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:434: id: .vapor, name: tr(\"Vapor\"), tagline: tr(\"Rose et bleu rétro-futur\"), isPremium: true,"
   ]
  },
  "Variante": {
@@ -27810,6 +28138,12 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:326: title: other.name, detail: other.pattern == exercise.pattern ? tr(\"Variante\") : tr(\"Mêmes muscles\"))",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:331: title: other.name, detail: other.pattern == exercise.pattern ? tr(\"Variante\") : tr(\"Mêmes muscles\"))"
+  ]
+ },
+ "Veillée de Noël": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:139: WidgetPack(id: \"christmas-eve\", name: tr(\"Veillée de Noël\"), tagline: tr(\"Le compte à rebours de Noël, le calendrier et les jours fériés.\"), symbol: \"gift.fill\","
   ]
  },
  "Vendredi": {
@@ -27926,19 +28260,19 @@
    "App/Core/StudioGallery.swift:92: add(tr(\"Verre\")) { $0.background = .glass; $0.style.depth = .soft }",
    "App/Screens/Editor/EditorView.swift:360: Text(tr(\"Verre\")).tag(BackgroundKind.glass)",
    "Shared/Model/WidgetDesign.swift:24: case .glass: tr(\"Verre\")",
-   "Shared/Theme/Theme.swift:134: id: .glass, name: tr(\"Verre\"), tagline: tr(\"Translucide et lumineux\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:138: id: .glass, name: tr(\"Verre\"), tagline: tr(\"Translucide et lumineux\"), isPremium: true,"
   ]
  },
  "Verre dépoli et reflets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:700: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
+   "Shared/Model/WidgetStyle.swift:707: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
   ]
  },
  "Verre liquide et reflets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:249: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:253: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
   ]
  },
  "Verre, Aurore, Élégant, Digital, Rétro, Futuriste…": {
@@ -27999,7 +28333,7 @@
  "Vert forêt, texture papier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:677: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
+   "Shared/Model/WidgetStyle.swift:684: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
   ]
  },
  "Vert profond et naturel": {
@@ -28008,10 +28342,22 @@
    "Shared/Theme/AppStyle.swift:37: AppStyle(id: .forest, tagline: tr(\"Vert profond et naturel\"), accentLight: \"2B7A4B\", accentDark: \"3F9A63\","
   ]
  },
+ "Vert sapin, rouge et fils d'or": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:668: id: .christmas, name: tr(\"Noël\"), tagline: tr(\"Vert sapin, rouge et fils d'or\"), isPremium: true,"
+  ]
+ },
  "Vert sur noir, lignes de balayage": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:719: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
+   "Shared/Model/WidgetStyle.swift:726: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
+  ]
+ },
+ "Vert tendre, feuilles et serif de serre": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:579: id: .botanical, name: tr(\"Botanique\"), tagline: tr(\"Vert tendre, feuilles et serif de serre\"), isPremium: true,"
   ]
  },
  "Vertical": {
@@ -28103,6 +28449,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Data/WeatherService.swift:257: case 82: tr(\"Violentes averses\")"
+  ]
+ },
+ "Violet inquiétant et vert acide": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:640: id: .jester, name: tr(\"Farceur\"), tagline: tr(\"Violet inquiétant et vert acide\"), isPremium: true,"
   ]
  },
  "Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.": {
@@ -28266,7 +28618,7 @@
  "Voyageur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:47: WidgetPack(id: \"traveler\", name: tr(\"Voyageur\"), tagline: tr(\"Départ, vol, hôtel, météo, heure et devise sur place.\"), symbol: \"airplane\","
+   "Shared/Model/Packs.swift:68: WidgetPack(id: \"traveler\", name: tr(\"Voyageur\"), tagline: tr(\"Départ, vol, hôtel, météo, heure et devise sur place.\"), symbol: \"airplane\","
   ]
  },
  "Vu : %@": {
@@ -28365,7 +28717,7 @@
   "uses": [
    "App/Premium/PaywallView.swift:114: comparisonRow(tr(\"Widgets\"), free: \"\\(WidgetKind.allCases.filter { !$0.isPremium }.count)\", premium: \"\\(WidgetKind.allCases.count)\")",
    "App/Screens/Explore/ExploreView.swift:27: case .widgets: tr(\"Widgets\")",
-   "App/Screens/Explore/ExploreView.swift:609: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Spaces/SpaceBuilderView.swift:276: EditorSection(title: tr(\"Widgets\"), detail: widgetsDetail) {"
   ]
  },
@@ -28771,13 +29123,13 @@
  "combinaison": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
+   "App/Screens/Explore/ExploreView.swift:561: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
   ]
  },
  "combinaisons": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
+   "App/Screens/Explore/ExploreView.swift:561: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
   ]
  },
  "commande": {
@@ -29760,13 +30112,13 @@
  "pack": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:591: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
+   "App/Screens/Explore/ExploreView.swift:567: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
   ]
  },
  "packs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:591: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
+   "App/Screens/Explore/ExploreView.swift:567: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
   ]
  },
  "pain complet": {
@@ -30131,7 +30483,7 @@
  "row:%@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/StyleRendering.swift:339: .filter { !o.isHidden(tr(\"row:\\($0.id)\")) }"
+   "Shared/Render/StyleRendering.swift:438: .filter { !o.isHidden(tr(\"row:\\($0.id)\")) }"
   ]
  },
  "réglages du style": {
@@ -30167,8 +30519,8 @@
  "seg:%@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/StyleRendering.swift:348: .filter { !o.isHidden(tr(\"seg:\\($0.label)\")) }",
-   "Shared/Render/StyleRendering.swift:351: if let hex = o.rowColors[tr(\"seg:\\(segment.label)\")] { copy.colorHex = hex }"
+   "Shared/Render/StyleRendering.swift:447: .filter { !o.isHidden(tr(\"seg:\\($0.label)\")) }",
+   "Shared/Render/StyleRendering.swift:450: if let hex = o.rowColors[tr(\"seg:\\(segment.label)\")] { copy.colorHex = hex }"
   ]
  },
  "semaine": {
@@ -30527,10 +30879,10 @@
  "widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:347: Text(Fmt.plural(count, tr(\"widget\"), tr(\"widgets\")))",
-   "App/Screens/Explore/ExploreView.swift:609: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))",
-   "App/Screens/Explore/StoreMagazine.swift:163: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))"
+   "App/Screens/Explore/StoreMagazine.swift:163: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/StoreMagazine.swift:360: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))"
   ]
  },
  "widget ajouté": {
@@ -30542,10 +30894,10 @@
  "widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:347: Text(Fmt.plural(count, tr(\"widget\"), tr(\"widgets\")))",
-   "App/Screens/Explore/ExploreView.swift:609: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))",
-   "App/Screens/Explore/StoreMagazine.swift:163: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))"
+   "App/Screens/Explore/StoreMagazine.swift:163: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/StoreMagazine.swift:360: Text(Fmt.plural(collection.items.count, tr(\"widget\"), tr(\"widgets\")))"
   ]
  },
  "widgets ajoutés": {
@@ -30646,7 +30998,7 @@
  "À découvrir cette semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:284: shelfRow(tr(\"À découvrir cette semaine\")) {"
+   "App/Screens/Explore/ExploreView.swift:294: shelfRow(tr(\"À découvrir cette semaine\")) {"
   ]
  },
  "À définir": {
@@ -31006,9 +31358,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/AddToHomeScreenGuide.swift:21: Text(tr(\"Écran verrouillé\")).tag(1)",
+   "App/Screens/Explore/ExploreView.swift:329: shelfRow(tr(\"Écran verrouillé\")) {",
    "App/Screens/Explore/HomeSetupViews.swift:20: case .lock: tr(\"Écran verrouillé\")",
-   "App/Screens/Spaces/LockScreenCreator.swift:160: .navigationTitle(tr(\"Écran verrouillé\"))",
-   "App/Screens/Spaces/SpacesView.swift:95: filterChip(tr(\"Écran verrouillé\"), symbol: \"lock.fill\", isOn: showsLockScreen) {"
+   "App/Screens/Spaces/LockScreenCreator.swift:160: .navigationTitle(tr(\"Écran verrouillé\"))"
   ]
  },
  "Écran verrouillé : iOS affiche les widgets d'une seule teinte.": {
@@ -31020,21 +31372,21 @@
  "Écran à cristaux liquides": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:158: id: .digital, name: tr(\"Digital\"), tagline: tr(\"Écran à cristaux liquides\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:162: id: .digital, name: tr(\"Digital\"), tagline: tr(\"Écran à cristaux liquides\"), isPremium: true,"
   ]
  },
  "Écrans d'accueil": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:26: case .screens: tr(\"Écrans d'accueil\")",
-   "App/Screens/Explore/ExploreView.swift:563: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
+   "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
    "App/Screens/Explore/HomeSetupViews.swift:524: .navigationTitle(tr(\"Écrans d'accueil\"))"
   ]
  },
  "Écrans, packs, météo, bitcoin…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:130: .searchable(text: $query, isPresented: $isSearchPresented, prompt: tr(\"Écrans, packs, météo, bitcoin…\"))"
+   "App/Screens/Explore/ExploreView.swift:134: .searchable(text: $query, isPresented: $isSearchPresented, prompt: tr(\"Écrans, packs, météo, bitcoin…\"))"
   ]
  },
  "Écris ta note dans Tessera": {
@@ -31046,8 +31398,8 @@
  "Éditorial": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:351: TypePreset(id: \"editorial\", name: tr(\"Éditorial\"), font: .serif, numberWeight: .regular, titleWeight: .medium, valueScale: 1.1, titleCase: .upper, tracking: 1.2),",
-   "Shared/Theme/Theme.swift:290: id: .editorial, name: tr(\"Éditorial\"), tagline: tr(\"Serif, papier et capitales\"), isPremium: true,"
+   "Shared/Model/WidgetStyle.swift:358: TypePreset(id: \"editorial\", name: tr(\"Éditorial\"), font: .serif, numberWeight: .regular, titleWeight: .medium, valueScale: 1.1, titleCase: .upper, tracking: 1.2),",
+   "Shared/Theme/Theme.swift:294: id: .editorial, name: tr(\"Éditorial\"), tagline: tr(\"Serif, papier et capitales\"), isPremium: true,"
   ]
  },
  "Égypte": {
@@ -31101,13 +31453,13 @@
  "Élégance": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:69: WidgetPack(id: \"elegant\", name: tr(\"Élégance\"), tagline: tr(\"Serif et reflets dorés pour l'agenda et la journée.\"), symbol: \"crown.fill\","
+   "Shared/Model/Packs.swift:90: WidgetPack(id: \"elegant\", name: tr(\"Élégance\"), tagline: tr(\"Serif et reflets dorés pour l'agenda et la journée.\"), symbol: \"crown.fill\","
   ]
  },
  "Élégant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/Theme.swift:150: id: .elegant, name: tr(\"Élégant\"), tagline: tr(\"Serif et reflets dorés\"), isPremium: true,"
+   "Shared/Theme/Theme.swift:154: id: .elegant, name: tr(\"Élégant\"), tagline: tr(\"Serif et reflets dorés\"), isPremium: true,"
   ]
  },
  "Éléments affichés": {
@@ -31360,6 +31712,12 @@
    "Shared/Domains/ExerciseLibrary.swift:851: x(\"shoulder-stretch\", tr(\"Étirement des épaules (bras croisé)\"), [.shoulders], [], [.bodyweight], .stretching, .beginner, .stretchStand,"
   ]
  },
+ "Étoiles": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:333: case .stars: tr(\"Étoiles\")"
+  ]
+ },
  "Étude": {
   "placeholders": 0,
   "uses": [
@@ -31404,7 +31762,7 @@
  "Étudiant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Packs.swift:39: WidgetPack(id: \"student\", name: tr(\"Étudiant\"), tagline: tr(\"Cours, examens, devoirs et fiches de révision.\"), symbol: \"graduationcap.fill\","
+   "Shared/Model/Packs.swift:60: WidgetPack(id: \"student\", name: tr(\"Étudiant\"), tagline: tr(\"Cours, examens, devoirs et fiches de révision.\"), symbol: \"graduationcap.fill\","
   ]
  },
  "Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…": {
@@ -31521,13 +31879,13 @@
  "écran": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:563: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+   "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
   ]
  },
  "écrans": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:563: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+   "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
   ]
  },
  "élevé": {

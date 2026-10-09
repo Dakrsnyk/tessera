@@ -1,6 +1,26 @@
 import Foundation
 
 /// A themed set of widgets installed in one tap from the Store, with a shared look.
+/// The seasons of the Store: Halloween in October, Christmas in December.
+enum StoreSeason: String, Hashable, CaseIterable {
+    case halloween, christmas
+
+    /// The season of the date, if any.
+    static func current(_ now: Date = Date()) -> StoreSeason? {
+        switch DateMath.calendar.component(.month, from: now) {
+        case 10: .halloween
+        case 12: .christmas
+        default: nil
+        }
+    }
+}
+
+/// Where a pack sits in the Store: the everyday packs, the themed worlds, or a season's collection.
+enum PackGroup: Hashable {
+    case everyday, themed
+    case seasonal(StoreSeason)
+}
+
 struct WidgetPack: Identifiable, Hashable {
     let id: String
     let name: String
@@ -9,6 +29,7 @@ struct WidgetPack: Identifiable, Hashable {
     let themeID: ThemeID
     let accentHex: String
     let kinds: [WidgetKind]
+    var group: PackGroup = .everyday
 
     var isPremium: Bool {
         ThemeCatalog.theme(themeID).isPremium || kinds.contains(where: \.isPremium)
@@ -78,7 +99,61 @@ enum PackCatalog {
                    themeID: .glass, accentHex: "8C6CFF", kinds: [.moonPhase, .habitStreak, .progress, .weather, .note, .countdown]),
         WidgetPack(id: "crypto", name: tr("Crypto"), tagline: tr("Bitcoin, marché, portefeuille et plus forte variation."), symbol: "bitcoinsign.circle.fill",
                    themeID: .digital, accentHex: "2F8F7A", kinds: [.crypto, .marketOverview, .portfolio, .topMover, .watchlist, .allocation]),
+    ] + themedPacks + halloweenPacks + christmasPacks
+
+    /// One world each: its own style, its own motif, its matching Home Screen.
+    private static let themedPacks: [WidgetPack] = [
+        WidgetPack(id: "space", name: tr("Espace"), tagline: tr("L'heure, la lune, l'année en points et le monde, sous les étoiles."), symbol: "sparkles",
+                   themeID: .space, accentHex: "8C6CFF", kinds: [.clock, .moonPhase, .yearDots, .worldClock, .progress, .countdown], group: .themed),
+        WidgetPack(id: "mars", name: tr("Mars"), tagline: tr("Météo, soleil, vent et compte à rebours, sur la planète rouge."), symbol: "globe.europe.africa.fill",
+                   themeID: .mars, accentHex: "FF6B57", kinds: [.weather, .sunCycle, .windUV, .countdown, .focus, .progress], group: .themed),
+        WidgetPack(id: "nature", name: tr("Nature"), tagline: tr("Météo, pluie, soleil, habitudes et eau, au cœur de la forêt."), symbol: "tree.fill",
+                   themeID: .nature, accentHex: "2F8F7A", kinds: [.weather, .rainNext, .sunCycle, .habits, .hydration, .moonPhase], group: .themed),
+        WidgetPack(id: "plants", name: tr("Botanique"), tagline: tr("Habitudes, eau, séries et notes, comme un carnet de serre."), symbol: "leaf.fill",
+                   themeID: .botanical, accentHex: "2F8F7A", kinds: [.habits, .hydration, .habitStreak, .habitRate, .note, .calendar], group: .themed),
+        WidgetPack(id: "water", name: tr("Océan"), tagline: tr("Eau, météo, pluie, lune et heure, au fil des vagues."), symbol: "water.waves",
+                   themeID: .ocean, accentHex: "3366FF", kinds: [.hydration, .weather, .rainNext, .moonPhase, .clock, .progress], group: .themed),
     ]
+
+    /// Halloween: heroes of the night and dark, mysterious moods (colours and motifs only).
+    private static let halloweenPacks: [WidgetPack] = [
+        WidgetPack(id: "hero-cape", name: tr("Cape héroïque"), tagline: tr("Séance, séries, records et calories, en bleu, rouge et or."), symbol: "bolt.shield.fill",
+                   themeID: .heroic, accentHex: "E5484D", kinds: [.todaysWorkout, .nextSet, .personalRecords, .trainingStreak, .caloriesBurned, .weeklyVolume],
+                   group: .seasonal(.halloween)),
+        WidgetPack(id: "night-watch", name: tr("Justicier de la nuit"), tagline: tr("L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie."),
+                   symbol: "moon.fill", themeID: .vigilante, accentHex: "F2A33A", kinds: [.clock, .weather, .upNext, .focus, .tasks, .moonPhase],
+                   group: .seasonal(.halloween)),
+        WidgetPack(id: "city-web", name: tr("Toile urbaine"), tagline: tr("Cours, devoirs, ce qui vient et compte à rebours, tissés serré."), symbol: "circle.hexagongrid.fill",
+                   themeID: .webSlinger, accentHex: "3366FF", kinds: [.nextClass, .assignments, .upNext, .countdown, .weather, .tasks],
+                   group: .seasonal(.halloween)),
+        WidgetPack(id: "dark-jest", name: tr("Farce sombre"), tagline: tr("Compte à rebours, lune, note et compteur, avec un sourire inquiétant."), symbol: "theatermasks.fill",
+                   themeID: .jester, accentHex: "8C6CFF", kinds: [.countdown, .moonPhase, .note, .counter, .clock, .progress],
+                   group: .seasonal(.halloween)),
+        WidgetPack(id: "pumpkin-night", name: tr("Nuit des citrouilles"), tagline: tr("Le compte à rebours d'Halloween, la lune et la météo du soir."), symbol: "moon.stars.fill",
+                   themeID: .pumpkin, accentHex: "F2A33A", kinds: [.countdown, .moonPhase, .weather, .calendar, .clock, .note],
+                   group: .seasonal(.halloween)),
+    ]
+
+    /// Christmas, from the start of December.
+    private static let christmasPacks: [WidgetPack] = [
+        WidgetPack(id: "christmas-eve", name: tr("Veillée de Noël"), tagline: tr("Le compte à rebours de Noël, le calendrier et les jours fériés."), symbol: "gift.fill",
+                   themeID: .christmas, accentHex: "E5484D", kinds: [.countdown, .calendar, .holiday, .weather, .note, .moonPhase],
+                   group: .seasonal(.christmas)),
+        WidgetPack(id: "snow-night", name: tr("Nuit de neige"), tagline: tr("Météo, lune, heure et calendrier, sous les flocons."), symbol: "snowflake",
+                   themeID: .snowfall, accentHex: "3366FF", kinds: [.weather, .moonPhase, .clock, .calendar, .countdown, .hydration],
+                   group: .seasonal(.christmas)),
+    ]
+
+    /// The packs that stay in the Store all year, outside the themed worlds.
+    static var everyday: [WidgetPack] { all.filter { $0.group == .everyday } }
+
+    /// The themed worlds: space, Mars, nature, plants, water.
+    static var themed: [WidgetPack] { all.filter { $0.group == .themed } }
+
+    /// A season's collection, kept apart from the packs of all year.
+    static func seasonal(_ season: StoreSeason) -> [WidgetPack] {
+        all.filter { $0.group == .seasonal(season) }
+    }
 
     static func pack(_ id: String) -> WidgetPack? {
         all.first { $0.id == id }

@@ -466,7 +466,7 @@ enum StoreRanking {
         func rank(_ pack: WidgetPack) -> Int {
             pack.kinds.compactMap { categories.firstIndex(of: $0.category) }.min() ?? Int.max
         }
-        return PackCatalog.all.enumerated()
+        return PackCatalog.everyday.enumerated()
             .sorted { lhs, rhs in
                 let left = rank(lhs.element)
                 let right = rank(rhs.element)
@@ -500,7 +500,18 @@ enum StoreEdition {
 
     /// The pack of the week (shifted from the Home Screen of the week, so they don't always pair up).
     static func pack(now: Date = Date()) -> WidgetPack {
-        PackCatalog.all[(week(now) * 7 + 3) % PackCatalog.all.count]
+        let packs = PackCatalog.everyday
+        return packs[(week(now) * 7 + 3) % packs.count]
+    }
+
+    /// The styles put forward in turn, one a week, starting with Espace the week of 5 October 2026.
+    static let weeklyStyles: [ThemeID] = [.space, .mars, .nature, .botanical, .ocean]
+
+    static func style(now: Date = Date()) -> WidgetTheme {
+        let start = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 5)) ?? now
+        let weeks = Int((Double(DateMath.daysBetween(start, now)) / 7).rounded(.down))
+        let count = weeklyStyles.count
+        return ThemeCatalog.theme(weeklyStyles[((weeks % count) + count) % count])
     }
 }
 
@@ -677,5 +688,153 @@ struct CategoryIndex: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 4)
         .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+    }
+}
+
+// MARK: - Seasons and the style of the week
+
+extension StoreSeason {
+    var title: String {
+        switch self {
+        case .halloween: tr("Collection Halloween")
+        case .christmas: tr("Collection de Noël")
+        }
+    }
+
+    var headline: String {
+        switch self {
+        case .halloween: tr("Les héros de la nuit")
+        case .christmas: tr("La magie de Noël")
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .halloween: tr("Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.")
+        case .christmas: tr("Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.")
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .halloween: "moon.stars.fill"
+        case .christmas: "snowflake"
+        }
+    }
+
+    /// The colours of the collection's banner, and of its glow.
+    var colors: [String] {
+        switch self {
+        case .halloween: ["120A24", "3A1450", "8A3A0C"]
+        case .christmas: ["0A2A17", "14532D", "7A1020"]
+        }
+    }
+
+    var glowHex: String {
+        switch self {
+        case .halloween: "FF7A1A"
+        case .christmas: "D4AF37"
+        }
+    }
+}
+
+/// A season's collection at the top of the Store, in its own colours and apart from the packs of all year.
+struct SeasonalCollection: View {
+    let season: StoreSeason
+    let isPremiumUser: Bool
+    let onOpen: (WidgetPack) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 6) {
+                Label(season.title.uppercased(), systemImage: season.symbol)
+                    .font(.caption.weight(.bold))
+                    .tracking(1.1)
+                    .foregroundStyle(Color(hex: season.glowHex))
+                Text(season.headline)
+                    .font(.system(size: 26, weight: .bold))
+                    .foregroundStyle(.white)
+                Text(season.subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.8))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.horizontal, 18)
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(alignment: .top, spacing: 14) {
+                    ForEach(PackCatalog.seasonal(season)) { pack in
+                        Button {
+                            onOpen(pack)
+                        } label: {
+                            PackCard(pack: pack, isPremiumUser: isPremiumUser, width: 230)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 18)
+            }
+        }
+        .padding(.vertical, 20)
+        .background {
+            ZStack {
+                LinearGradient(colors: season.colors.map { Color(hex: $0) }, startPoint: .topLeading, endPoint: .bottomTrailing)
+                RadialGradient(colors: [Color(hex: season.glowHex).opacity(0.35), .clear], center: .bottomTrailing, startRadius: 0, endRadius: 280)
+                TexturePattern(kind: season == .halloween ? .stars : .snow)
+                    .fill(Color.white.opacity(0.22))
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        }
+        .environment(\.colorScheme, .dark)
+        .padding(.horizontal, 16)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("store-season-\(season.rawValue)")
+    }
+}
+
+/// The style of the week, across the page: three widgets dressed in it, its name and its mood.
+struct WeeklyStyleFeature: View {
+    let theme: WidgetTheme
+    let isPremiumUser: Bool
+    let onOpen: () -> Void
+
+    var body: some View {
+        let designs = [WidgetKind.clock, .moonPhase, .countdown].map { WidgetDesign(kind: $0, themeID: theme.id) }
+        Button(action: onOpen) {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(spacing: 10) {
+                    ForEach(Array(designs.enumerated()), id: \.offset) { pair in
+                        WidgetPreview(design: pair.element, family: .systemSmall, payload: SamplePayload.make(for: pair.element), width: 88)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                HStack(alignment: .center, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(tr("Style de la semaine").uppercased())
+                            .font(.caption.weight(.bold))
+                            .tracking(1.1)
+                            .foregroundStyle(Color.accentColor)
+                        Text(theme.name)
+                            .font(.title2.weight(.bold))
+                            .foregroundStyle(.primary)
+                        Text(theme.tagline)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    Spacer(minLength: 6)
+                    if theme.isPremium && !isPremiumUser {
+                        PremiumBadge(compact: true)
+                    }
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+            .padding(16)
+            .background(.cardFill, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 20)
+        .accessibilityIdentifier("store-weekly-style")
     }
 }

@@ -434,10 +434,72 @@ enum HomeSetupCatalog {
             lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.nextClass), circular(.nextExam), circular(.semesterProgress)],
                             clockDesign: .rounded, clockWeight: .heavy)
         ),
+        // The themed worlds: the Home Screen of each pack of « Packs thématiques ».
+        HomeSetup(
+            id: "espace", name: tr("Espace"), tagline: tr("Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire."),
+            tags: [.dark, .minimal], wallpaper: .midnight, icons: .tinted("E9ECF5"),
+            rows: [
+                .widgets([medium(.yearDots, .space, "8C6CFF")]),
+                .widgets([small(.clock, .space, "8C6CFF"), small(.moonPhase, .space, "8C6CFF")]),
+                .widgetAndApps(small(.worldClock, .space, "8C6CFF"), [.clock, .weather, .photos, .maps], widgetFirst: false),
+            ],
+            dock: [.phone, .messages, .web, .music],
+            lock: SetupLock(widgets: [circular(.moonPhase), circular(.progress, "progress-day"), circular(.countdown), circular(.weather)], clockWeight: .light)
+        ),
+        HomeSetup(
+            id: "mars", name: tr("Mars"), tagline: tr("Rouille et poussière : la météo, le soleil et le vent de la planète rouge."),
+            tags: [.dark, .colorful], wallpaper: .sunset, icons: .tinted("FFB27A"),
+            rows: [
+                .widgets([medium(.weather, .mars, "FF6B57")]),
+                .widgets([small(.sunCycle, .mars, "FF6B57"), small(.windUV, .mars, "FF6B57")]),
+                .widgetAndApps(small(.countdown, .mars, "FF6B57"), [.maps, .camera, .photos, .weather], widgetFirst: true),
+            ],
+            dock: [.phone, .messages, .web, .music],
+            lock: SetupLock(widgets: [circular(.weather), circular(.countdown), circular(.focus), circular(.progress, "progress-day")], clockWeight: .bold)
+        ),
+        HomeSetup(
+            id: "nature", name: tr("Nature"), tagline: tr("Feuillage et lumière verte : la météo, la pluie et tes habitudes."),
+            tags: [.dark, .wellbeing], wallpaper: .forest, icons: .tinted("B8E07A"),
+            rows: [
+                .widgets([medium(.weather, .nature, "2F8F7A")]),
+                .widgets([small(.rainNext, .nature, "2F8F7A"), small(.sunCycle, .nature, "2F8F7A")]),
+                .widgetAndApps(small(.habits, .nature, "2F8F7A"), [.health, .fitness, .maps, .camera], widgetFirst: false),
+            ],
+            dock: [.phone, .messages, .web, .music],
+            lock: SetupLock(widgets: [rectangular(.rainNext), circular(.hydration), circular(.weather)], clockDesign: .serif)
+        ),
+        HomeSetup(
+            id: "botanique", name: tr("Botanique"), tagline: tr("Un carnet de serre : habitudes, eau, calendrier et notes."),
+            tags: [.wellbeing, .minimal], wallpaper: .jade,
+            icons: .solid(background: "EFF5E6", symbol: "3E7B4F"),
+            rows: [
+                .widgets([small(.habits, .botanical, "2F8F7A"), small(.hydration, .botanical, "2F8F7A")]),
+                .widgets([medium(.calendar, .botanical, "2F8F7A")]),
+                .widgetAndApps(small(.note, .botanical, "2F8F7A"), [.notes, .reminders, .health, .photos], widgetFirst: true),
+            ],
+            dock: [.phone, .messages, .web, .music],
+            lock: SetupLock(widgets: [circular(.habitStreak), circular(.hydration), circular(.weather)], clockDesign: .serif)
+        ),
+        HomeSetup(
+            id: "vagues", name: tr("Océan profond"), tagline: tr("Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune."),
+            tags: [.dark, .wellbeing, .colorful], wallpaper: .ocean, icons: .tinted("8FE9FF"),
+            rows: [
+                .widgets([small(.weather, .ocean, "3366FF"), small(.rainNext, .ocean, "3366FF")]),
+                .widgets([medium(.hydration, .ocean, "3366FF")]),
+                .widgetAndApps(small(.moonPhase, .ocean, "3366FF"), [.weather, .music, .podcasts, .photos], widgetFirst: false),
+            ],
+            dock: [.phone, .messages, .web, .camera],
+            lock: SetupLock(widgets: [circular(.hydration), circular(.moonPhase), circular(.weather), circular(.progress, "progress-day")], clockDesign: .rounded)
+        ),
     ]
 
     static func setup(_ id: String) -> HomeSetup? {
         all.first { $0.id == id }
+    }
+
+    /// The Home Screens of the themed worlds, in the order of their packs.
+    static var themed: [HomeSetup] {
+        ["espace", "mars", "nature", "botanique", "vagues"].compactMap(setup)
     }
 
     /// The setup put forward in the Store this week: the same all week, a different one each week.

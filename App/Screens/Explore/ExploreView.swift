@@ -17,7 +17,7 @@ struct ExploreView: View {
 
     /// The aisles of the Store, from the week's picks to the styles.
     enum StoreAisle: String, CaseIterable, Identifiable {
-        case featured, screens, widgets, combos, packs, styles
+        case featured, screens, widgets, combos, packs, themes, styles
         var id: String { rawValue }
 
         var title: String {
@@ -27,6 +27,7 @@ struct ExploreView: View {
             case .widgets: tr("Widgets")
             case .combos: tr("Combinés")
             case .packs: tr("Packs")
+            case .themes: tr("Packs thématiques")
             case .styles: tr("Styles")
             }
         }
@@ -38,6 +39,7 @@ struct ExploreView: View {
             case .widgets: "square.grid.2x2.fill"
             case .combos: "square.split.2x2.fill"
             case .packs: "shippingbox.fill"
+            case .themes: "globe.americas.fill"
             case .styles: "paintpalette.fill"
             }
         }
@@ -50,6 +52,7 @@ struct ExploreView: View {
             case .widgets: "2F8F7A"
             case .combos: "6D4AE8"
             case .packs: "E5484D"
+            case .themes: "1E88C8"
             case .styles: "D6409F"
             }
         }
@@ -57,11 +60,12 @@ struct ExploreView: View {
         /// What the aisle holds, in one line.
         var hint: String {
             switch self {
-            case .featured: tr("La sélection de la semaine et ce qui te correspond.")
+            case .featured: tr("La sélection de la semaine : un écran, un style et des widgets à découvrir.")
             case .screens: tr("Des écrans d'accueil complets : widgets et fond d'écran assortis.")
             case .widgets: tr("Un widget à la fois, rangé par thème : temps, santé, argent…")
             case .combos: tr("Plusieurs widgets réunis en un seul, prêts à poser.")
             case .packs: tr("Des ensembles de widgets pour un usage : études, sport, voyage…")
+            case .themes: tr("Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d'accueil assorti.")
             case .styles: tr("Le même widget dans chaque style : choisis l'allure qui te plaît.")
             }
         }
@@ -216,7 +220,7 @@ struct ExploreView: View {
         case .screens: return { router.storePath.append(.setups) }
         case .combos: return { router.storePath.append(.combos) }
         case .packs: return { router.storePath.append(.packs) }
-        case .featured, .widgets, .styles: return nil
+        case .featured, .widgets, .themes, .styles: return nil
         }
     }
 
@@ -227,6 +231,7 @@ struct ExploreView: View {
         case .widgets: widgetRows
         case .combos: comboRows
         case .packs: packRows
+        case .themes: themeRows
         case .styles: styleRows
         }
     }
@@ -264,8 +269,12 @@ struct ExploreView: View {
         }
     }
 
-    /// The Home Screen of the week, then the widgets for the person and those of the week.
+    /// The season's collection when there is one, the Home Screen and the style of the week, then
+    /// the widgets of the week.
     @ViewBuilder private var featuredRows: some View {
+        if let season = StoreSeason.current() {
+            SeasonalCollection(season: season, isPremiumUser: model.isPremium) { openedPack = $0 }
+        }
         let weekly = HomeSetupCatalog.weekly()
         VStack(alignment: .leading, spacing: 14) {
             Text(Fmt.longDay(Date()).uppercased())
@@ -278,8 +287,9 @@ struct ExploreView: View {
             }
             .tutorialTarget(.storeHero)
         }
-        shelfRow(forYou.isEmpty ? tr("Notre sélection") : tr("Pour toi")) {
-            templateItems(forYou.isEmpty ? essentials : forYou)
+        let style = StoreEdition.style()
+        WeeklyStyleFeature(theme: style, isPremiumUser: model.isPremium) {
+            themeFilter = style.id
         }
         shelfRow(tr("À découvrir cette semaine")) {
             templateItems(TemplateCatalog.weeklyPick())
@@ -288,35 +298,35 @@ struct ExploreView: View {
 
     /// Complete Home Screens, drawn as on a real iPhone: one row, they're big.
     private var setupsRow: some View {
-        let favorites = SetupFavorites.ids(favoritesRaw)
-        return shelfRow {
+        shelfRow {
             ForEach(HomeSetupCatalog.all) { setup in
-                SetupCard(
-                    setup: setup,
-                    showsPages: false,
-                    isFavorite: favorites.contains(setup.id),
-                    isPremiumUser: model.isPremium,
-                    onFavorite: {
-                        Haptics.tap()
-                        favoritesRaw = SetupFavorites.toggled(setup.id, in: favoritesRaw)
-                    },
-                    onOpen: { openedSetup = setup }
-                )
-                .frame(width: 150)
+                setupCard(setup)
             }
         }
         .padding(.vertical, 4)
     }
 
-    /// The themes of the catalog, then the widgets to try first and those of the Lock Screen.
+    private func setupCard(_ setup: HomeSetup) -> some View {
+        SetupCard(
+            setup: setup,
+            showsPages: false,
+            isFavorite: SetupFavorites.ids(favoritesRaw).contains(setup.id),
+            isPremiumUser: model.isPremium,
+            onFavorite: {
+                Haptics.tap()
+                favoritesRaw = SetupFavorites.toggled(setup.id, in: favoritesRaw)
+            },
+            onOpen: { openedSetup = setup }
+        )
+        .frame(width: 150)
+    }
+
+    /// The widgets to try first, then those of the Lock Screen.
     @ViewBuilder private var widgetRows: some View {
-        shelfRow(tr("Catégories")) {
-            ForEach(interests + WidgetCategory.allCases.filter { !interests.contains($0) }) { category in
-                categoryCard(category)
-            }
-        }
         shelfRow(tr("Incontournables")) {
             templateItems(essentials)
+        }
+        shelfRow(tr("Écran verrouillé")) {
             ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
                 Button {
                     router.openEditor(pair.element.widget.makeDesign(), isNew: true)
@@ -326,35 +336,6 @@ struct ExploreView: View {
                 .buttonStyle(.plain)
             }
         }
-    }
-
-    private func categoryCard(_ category: WidgetCategory) -> some View {
-        let count = WidgetKind.allCases.filter { $0.category == category }.count
-        return Button {
-            router.exploreCategory = category
-        } label: {
-            VStack(alignment: .leading, spacing: 10) {
-                Image(systemName: category.symbol)
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: 34, height: 34)
-                    .background(Color(hex: category.colorHex), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(category.title)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.primary)
-                        .lineLimit(1)
-                    Text(Fmt.plural(count, tr("widget"), tr("widgets")))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .frame(width: 128, alignment: .leading)
-            .padding(12)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("store-category-\(category.rawValue)")
     }
 
     /// Two small widgets in a medium one on the first row, up to four in a large one on the second.
@@ -380,43 +361,48 @@ struct ExploreView: View {
         }
     }
 
-    /// The pack of the week first, then every other pack; the collections on the second row.
+    /// The packs of all year on two rows, the pack of the week first.
     @ViewBuilder private var packRows: some View {
         let featured = StoreEdition.pack()
         let packs = [featured] + StoreRanking.packs(preferring: interests).filter { $0.id != featured.id }
-        shelfRow {
-            ForEach(packs) { pack in
-                Button {
-                    openedPack = pack
-                } label: {
-                    PackCard(pack: pack, isPremiumUser: model.isPremium)
-                }
-                .buttonStyle(.plain)
+        shelfRow { packItems(packs.enumerated().filter { $0.offset % 2 == 0 }.map(\.element)) }
+        shelfRow { packItems(packs.enumerated().filter { $0.offset % 2 == 1 }.map(\.element)) }
+    }
+
+    /// The themed worlds: their packs, then their matching Home Screens.
+    @ViewBuilder private var themeRows: some View {
+        shelfRow { packItems(PackCatalog.themed) }
+        shelfRow(tr("Les écrans d'accueil assortis")) {
+            ForEach(HomeSetupCatalog.themed) { setup in
+                setupCard(setup)
             }
         }
-        shelfRow(tr("Collections"), action: { router.storePath.append(.collections) }) {
-            ForEach(StoreShowcase.collections(preferring: interests)) { collection in
-                Button {
-                    router.storePath.append(.collection(collection.id))
-                } label: {
-                    CollectionTile(collection: collection)
-                        .frame(width: 170)
-                }
-                .buttonStyle(.plain)
+        .padding(.bottom, 4)
+    }
+
+    private func packItems(_ packs: [WidgetPack]) -> some View {
+        ForEach(packs) { pack in
+            Button {
+                openedPack = pack
+            } label: {
+                PackCard(pack: pack, isPremiumUser: model.isPremium)
             }
+            .buttonStyle(.plain)
         }
     }
 
-    /// Every style on two rows: a tap shows all its widgets.
+    /// Every style on two rows, the style of the week first: a tap shows all its widgets.
     private var styleRows: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        let weekly = StoreEdition.style().id
+        let themes = ThemeCatalog.all.filter { $0.id == weekly } + ThemeCatalog.all.filter { $0.id != weekly }
+        return VStack(alignment: .leading, spacing: 8) {
             Text(tr("Touche un style pour voir tous ses widgets."))
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.fixed(104), spacing: 14), GridItem(.fixed(104))], alignment: .top, spacing: 12) {
-                    ForEach(ThemeCatalog.all) { theme in
+                    ForEach(themes) { theme in
                         Button {
                             themeFilter = theme.id
                         } label: {
@@ -438,16 +424,6 @@ struct ExploreView: View {
         let varied = small.filter { seen.insert($0.kind.category).inserted }
         let rest = small.filter { template in !varied.contains { $0.id == template.id } }
         return Array((varied + rest).prefix(6))
-    }
-
-    /// Widgets of the categories the person is interested in, one per kind.
-    private var forYou: [WidgetTemplate] {
-        var seen = Set<WidgetKind>()
-        return interests
-            .flatMap { category in TemplateCatalog.all.filter { $0.kind.category == category } }
-            .filter { seen.insert($0.kind).inserted }
-            .prefix(14)
-            .map { $0 }
     }
 
     /// Template cards: every fourth widget (and those with no small size) shown medium.

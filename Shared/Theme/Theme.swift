@@ -8,6 +8,10 @@ enum ThemeID: String, Codable, CaseIterable, Identifiable {
     case liquidGlass, premium, gradient, neon, editorial, magazine, dashboard, bold, data, luxury, sport, business
     case terminal, blueprint, pastel, paper, brutalist, carbon, vapor, chalk, mist
     case dawn, lagoon, forest, blossom, matteBlack, dune, glacier, synthwave
+    // Themed styles: worlds (space, Mars, nature, plants, water), heroes of the night, the holidays.
+    case space, mars, nature, botanical, ocean
+    case heroic, vigilante, webSlinger, jester, pumpkin
+    case christmas, snowfall
     var id: String { rawValue }
 }
 
@@ -535,6 +539,151 @@ enum ThemeCatalog {
                 $0.texture = .lines; $0.textureOpacity = 0.25; $0.depth = .glow; $0.shadowHex = "FF2A6D"
                 $0.border = .glow; $0.borderHex = "FF2A6D"; $0.borderWidth = 1.5; $0.borderOpacity = 0.8; $0.chart = .bars
             }
+        ),
+    ] + worldThemes + nightThemes + holidayThemes
+
+    /// Worlds: deep space, the red planet, the forest, plants, the ocean.
+    static let worldThemes: [WidgetTheme] = [
+        WidgetTheme(
+            id: .space, name: tr("Espace"), tagline: tr("Argent lunaire, poussière d'étoiles et nuit profonde"), isPremium: true,
+            background: .gradient(["9AA0AD", "3E4250", "0E0F15"]),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.78),
+            tint: .fixed("E9ECF5"), panel: .fixed("FFFFFF", 0.12),
+            fontDesign: .default, numberWeight: .semibold, titleWeight: .semibold,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset {
+                $0.texture = .stars; $0.textureOpacity = 0.9; $0.depth = .glow; $0.shadowHex = "FFFFFF"; $0.shadowOpacity = 0.22
+                $0.border = .solid; $0.borderHex = "FFFFFF"; $0.borderWidth = 2.5; $0.borderOpacity = 0.75
+                $0.iconStyle = .outline; $0.tracking = 1; $0.shape = .rounded
+            }
+        ),
+        WidgetTheme(
+            id: .mars, name: tr("Mars"), tagline: tr("Rouille, poussière et horizon martien"), isPremium: true,
+            background: .gradient(["E07A45", "9C3A1E", "2B0E08"]),
+            primary: .fixed("FFF4EC"), secondary: .fixed("FFE2D2", 0.82),
+            tint: .fixed("FFB27A"), panel: .fixed("FFFFFF", 0.12),
+            fontDesign: .default, numberWeight: .bold, titleWeight: .semibold,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset { $0.texture = .grain; $0.textureOpacity = 0.6; $0.depth = .soft; $0.shadowOpacity = 0.3; $0.shape = .rounded; $0.chart = .area }
+        ),
+        WidgetTheme(
+            id: .nature, name: tr("Nature"), tagline: tr("Forêt profonde, feuillage et lumière verte"), isPremium: true,
+            background: .gradient(["3E7A3A", "16361F"]),
+            primary: .fixed("F1F8EC"), secondary: .fixed("D3E8C8", 0.85),
+            tint: .fixed("B8E07A"), panel: .fixed("FFFFFF", 0.1),
+            fontDesign: .serif, numberWeight: .semibold, titleWeight: .medium,
+            uppercaseLabels: false, isDarkSurface: true,
+            preset: preset { $0.texture = .leaves; $0.textureOpacity = 0.5; $0.shape = .soft; $0.iconStyle = .circle; $0.chart = .ring }
+        ),
+        WidgetTheme(
+            id: .botanical, name: tr("Botanique"), tagline: tr("Vert tendre, feuilles et serif de serre"), isPremium: true,
+            background: .gradient(["EFF5E6", "CFE3C4"]),
+            primary: .fixed("1F3A24"), secondary: .fixed("557A5B"),
+            tint: .fixed("3E7B4F"), panel: .fixed("FFFFFF", 0.55),
+            fontDesign: .serif, numberWeight: .medium, titleWeight: .semibold,
+            uppercaseLabels: false, isDarkSurface: false,
+            preset: preset {
+                $0.texture = .leaves; $0.textureOpacity = 0.35; $0.shape = .soft; $0.iconStyle = .outline
+                $0.border = .solid; $0.borderHex = "3E7B4F"; $0.borderWidth = 1; $0.borderOpacity = 0.25
+            }
+        ),
+        WidgetTheme(
+            id: .ocean, name: tr("Océan"), tagline: tr("Bleu abyssal et vagues lumineuses"), isPremium: true,
+            background: .gradient(["2AA7DF", "0B4A8B", "061B3A"]),
+            primary: .fixed("FFFFFF"), secondary: .fixed("D8F1FF"),
+            tint: .fixed("8FE9FF"), panel: .fixed("FFFFFF", 0.12),
+            fontDesign: .rounded, numberWeight: .semibold, titleWeight: .medium,
+            uppercaseLabels: false, isDarkSurface: true,
+            preset: preset { $0.texture = .waves; $0.textureOpacity = 0.45; $0.depth = .soft; $0.shadowOpacity = 0.25; $0.shape = .rounded; $0.chart = .area }
+        ),
+    ]
+
+    /// Heroes of the night, for Halloween: colours and motifs only, no name or emblem.
+    static let nightThemes: [WidgetTheme] = [
+        WidgetTheme(
+            id: .heroic, name: tr("Héroïque"), tagline: tr("Bleu héroïque, cape rouge, éclat doré"), isPremium: true,
+            background: .gradient(["2E63E6", "0E2A80"]),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.8),
+            tint: .fixed("FFD23F"), panel: .fixed("E53935", 0.24),
+            fontDesign: .default, numberWeight: .heavy, titleWeight: .bold,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset {
+                $0.border = .solid; $0.borderHex = "E53935"; $0.borderWidth = 3; $0.borderOpacity = 1
+                $0.texture = .diagonal; $0.textureOpacity = 0.25; $0.depth = .strong; $0.shape = .rounded; $0.iconStyle = .circle; $0.chart = .bars
+            }
+        ),
+        WidgetTheme(
+            id: .vigilante, name: tr("Justicier"), tagline: tr("Nuit urbaine, gris acier et signal jaune"), isPremium: true,
+            background: .gradient(["33363D", "0A0A0C"]),
+            primary: .fixed("F2F2F2"), secondary: .fixed("B8BBC2"),
+            tint: .fixed("F5C518"), panel: .fixed("FFFFFF", 0.07),
+            fontDesign: .default, numberWeight: .black, titleWeight: .bold,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset {
+                $0.texture = .grid; $0.textureOpacity = 0.35; $0.border = .solid; $0.borderHex = "F5C518"; $0.borderWidth = 1; $0.borderOpacity = 0.6
+                $0.shape = .square; $0.iconStyle = .square; $0.tracking = 1.2
+            }
+        ),
+        WidgetTheme(
+            id: .webSlinger, name: tr("Toile"), tagline: tr("Rouge vif, bleu nuit et toile tissée"), isPremium: true,
+            background: .gradient(["E3262F", "8F0F16"]),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.85),
+            tint: .fixed("FFFFFF"), panel: .fixed("1E3A8A", 0.55),
+            fontDesign: .default, numberWeight: .heavy, titleWeight: .bold,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset {
+                $0.texture = .web; $0.textureOpacity = 0.8; $0.border = .solid; $0.borderHex = "1E3A8A"; $0.borderWidth = 4; $0.borderOpacity = 1
+                $0.shape = .rounded; $0.iconStyle = .circle
+            }
+        ),
+        WidgetTheme(
+            id: .jester, name: tr("Farceur"), tagline: tr("Violet inquiétant et vert acide"), isPremium: true,
+            background: .gradient(["5E2A8C", "1C0A33"]),
+            primary: .fixed("F3E9FF"), secondary: .fixed("C9B2E6"),
+            tint: .fixed("7CF03D"), panel: .fixed("7CF03D", 0.14),
+            fontDesign: .serif, numberWeight: .black, titleWeight: .semibold,
+            uppercaseLabels: false, isDarkSurface: true,
+            preset: preset {
+                $0.border = .glow; $0.borderHex = "7CF03D"; $0.borderWidth = 1.5; $0.borderOpacity = 0.8; $0.depth = .glow; $0.shadowHex = "7CF03D"
+                $0.texture = .diagonal; $0.textureOpacity = 0.3; $0.shape = .soft; $0.chart = .ring
+            }
+        ),
+        WidgetTheme(
+            id: .pumpkin, name: tr("Citrouille"), tagline: tr("Nuit noire et orange citrouille"), isPremium: true,
+            background: .gradient(["2A1206", "0B0604"]),
+            primary: .fixed("FFF1E0"), secondary: .fixed("FFC58A", 0.85),
+            tint: .fixed("FF7A1A"), panel: .fixed("FF7A1A", 0.14),
+            fontDesign: .rounded, numberWeight: .heavy, titleWeight: .bold,
+            uppercaseLabels: true, isDarkSurface: true,
+            preset: preset {
+                $0.texture = .stars; $0.textureOpacity = 0.5; $0.depth = .glow; $0.shadowHex = "FF7A1A"; $0.shadowOpacity = 0.35
+                $0.border = .solid; $0.borderHex = "FF7A1A"; $0.borderWidth = 1.5; $0.borderOpacity = 0.6; $0.shape = .rounded; $0.iconStyle = .circle
+            }
+        ),
+    ]
+
+    /// The holidays: Christmas Eve and a snowy night.
+    static let holidayThemes: [WidgetTheme] = [
+        WidgetTheme(
+            id: .christmas, name: tr("Noël"), tagline: tr("Vert sapin, rouge et fils d'or"), isPremium: true,
+            background: .gradient(["14532D", "0A2A17"]),
+            primary: .fixed("FFF8E7"), secondary: .fixed("F1E3C2", 0.85),
+            tint: .fixed("E63946"), panel: .fixed("FFFFFF", 0.1),
+            fontDesign: .serif, numberWeight: .bold, titleWeight: .semibold,
+            uppercaseLabels: false, isDarkSurface: true,
+            preset: preset {
+                $0.texture = .snow; $0.textureOpacity = 0.45; $0.border = .double; $0.borderHex = "D4AF37"; $0.borderWidth = 2; $0.borderOpacity = 0.9
+                $0.shape = .rounded; $0.iconStyle = .circle
+            }
+        ),
+        WidgetTheme(
+            id: .snowfall, name: tr("Nuit de neige"), tagline: tr("Bleu d'hiver et flocons qui tombent"), isPremium: true,
+            background: .gradient(["4F7DBF", "1B2F5C"]),
+            primary: .fixed("FFFFFF"), secondary: .fixed("E1ECFF"),
+            tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.14),
+            fontDesign: .rounded, numberWeight: .semibold, titleWeight: .medium,
+            uppercaseLabels: false, isDarkSurface: true,
+            preset: preset { $0.texture = .snow; $0.textureOpacity = 0.75; $0.depth = .soft; $0.shadowOpacity = 0.25; $0.shape = .rounded; $0.iconStyle = .circle }
         ),
     ]
 

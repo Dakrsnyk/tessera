@@ -1225,13 +1225,6 @@
   ]
  },
  {
-  "key": "Notre sélection",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:306: MagazineHeader(eyebrow: tr(\"Notre sélection\"), title: tr(\"Incontournables\"), subtitle: tr(\"Les widgets à essayer en premier.\"))"
-  ]
- },
- {
   "key": "Touche un style pour voir tous ses widgets.",
   "placeholders": 0,
   "uses": [

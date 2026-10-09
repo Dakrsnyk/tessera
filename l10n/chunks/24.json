@@ -1,0 +1,432 @@
+[
+ {
+  "key": "Argent lunaire, poussière d'étoiles et nuit profonde",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:548: id: .space, name: tr(\"Espace\"), tagline: tr(\"Argent lunaire, poussière d'étoiles et nuit profonde\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:484: id: \"vagues\", name: tr(\"Océan profond\"), tagline: tr(\"Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune.\"),"
+  ]
+ },
+ {
+  "key": "Bleu abyssal et vagues lumineuses",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:591: id: .ocean, name: tr(\"Océan\"), tagline: tr(\"Bleu abyssal et vagues lumineuses\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Bleu d'hiver et flocons qui tombent",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:680: id: .snowfall, name: tr(\"Nuit de neige\"), tagline: tr(\"Bleu d'hiver et flocons qui tombent\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Bleu héroïque, cape rouge, éclat doré",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:604: id: .heroic, name: tr(\"Héroïque\"), tagline: tr(\"Bleu héroïque, cape rouge, éclat doré\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Botanique",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:472: id: \"botanique\", name: tr(\"Botanique\"), tagline: tr(\"Un carnet de serre : habitudes, eau, calendrier et notes.\"),",
+   "Shared/Model/Packs.swift:112: WidgetPack(id: \"plants\", name: tr(\"Botanique\"), tagline: tr(\"Habitudes, eau, séries et notes, comme un carnet de serre.\"), symbol: \"leaf.fill\",",
+   "Shared/Theme/Theme.swift:579: id: .botanical, name: tr(\"Botanique\"), tagline: tr(\"Vert tendre, feuilles et serif de serre\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Cape héroïque",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:120: WidgetPack(id: \"hero-cape\", name: tr(\"Cape héroïque\"), tagline: tr(\"Séance, séries, records et calories, en bleu, rouge et or.\"), symbol: \"bolt.shield.fill\","
+  ]
+ },
+ {
+  "key": "Citrouille",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:652: id: .pumpkin, name: tr(\"Citrouille\"), tagline: tr(\"Nuit noire et orange citrouille\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Collection Halloween",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:699: case .halloween: tr(\"Collection Halloween\")"
+  ]
+ },
+ {
+  "key": "Collection de Noël",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:700: case .christmas: tr(\"Collection de Noël\")"
+  ]
+ },
+ {
+  "key": "Compte à rebours, lune, note et compteur, avec un sourire inquiétant.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:129: WidgetPack(id: \"dark-jest\", name: tr(\"Farce sombre\"), tagline: tr(\"Compte à rebours, lune, note et compteur, avec un sourire inquiétant.\"), symbol: \"theatermasks.fill\","
+  ]
+ },
+ {
+  "key": "Cours, devoirs, ce qui vient et compte à rebours, tissés serré.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:126: WidgetPack(id: \"city-web\", name: tr(\"Toile urbaine\"), tagline: tr(\"Cours, devoirs, ce qui vient et compte à rebours, tissés serré.\"), symbol: \"circle.hexagongrid.fill\","
+  ]
+ },
+ {
+  "key": "Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:713: case .halloween: tr(\"Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.\")"
+  ]
+ },
+ {
+  "key": "Eau, météo, pluie, lune et heure, au fil des vagues.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:114: WidgetPack(id: \"water\", name: tr(\"Océan\"), tagline: tr(\"Eau, météo, pluie, lune et heure, au fil des vagues.\"), symbol: \"water.waves\","
+  ]
+ },
+ {
+  "key": "Espace",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:439: id: \"espace\", name: tr(\"Espace\"), tagline: tr(\"Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire.\"),",
+   "Shared/Model/Packs.swift:106: WidgetPack(id: \"space\", name: tr(\"Espace\"), tagline: tr(\"L'heure, la lune, l'année en points et le monde, sous les étoiles.\"), symbol: \"sparkles\",",
+   "Shared/Theme/Theme.swift:548: id: .space, name: tr(\"Espace\"), tagline: tr(\"Argent lunaire, poussière d'étoiles et nuit profonde\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Farce sombre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:129: WidgetPack(id: \"dark-jest\", name: tr(\"Farce sombre\"), tagline: tr(\"Compte à rebours, lune, note et compteur, avec un sourire inquiétant.\"), symbol: \"theatermasks.fill\","
+  ]
+ },
+ {
+  "key": "Farceur",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:640: id: .jester, name: tr(\"Farceur\"), tagline: tr(\"Violet inquiétant et vert acide\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Feuillage",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:337: case .leaves: tr(\"Feuillage\")"
+  ]
+ },
+ {
+  "key": "Feuillage et lumière verte : la météo, la pluie et tes habitudes.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:461: id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Feuillage et lumière verte : la météo, la pluie et tes habitudes.\"),"
+  ]
+ },
+ {
+  "key": "Forêt profonde, feuillage et lumière verte",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:570: id: .nature, name: tr(\"Nature\"), tagline: tr(\"Forêt profonde, feuillage et lumière verte\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Habitudes, eau, séries et notes, comme un carnet de serre.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:112: WidgetPack(id: \"plants\", name: tr(\"Botanique\"), tagline: tr(\"Habitudes, eau, séries et notes, comme un carnet de serre.\"), symbol: \"leaf.fill\","
+  ]
+ },
+ {
+  "key": "Héroïque",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:604: id: .heroic, name: tr(\"Héroïque\"), tagline: tr(\"Bleu héroïque, cape rouge, éclat doré\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Justicier",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:616: id: .vigilante, name: tr(\"Justicier\"), tagline: tr(\"Nuit urbaine, gris acier et signal jaune\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Justicier de la nuit",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:123: WidgetPack(id: \"night-watch\", name: tr(\"Justicier de la nuit\"), tagline: tr(\"L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie.\"),"
+  ]
+ },
+ {
+  "key": "L'heure, la lune, l'année en points et le monde, sous les étoiles.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:106: WidgetPack(id: \"space\", name: tr(\"Espace\"), tagline: tr(\"L'heure, la lune, l'année en points et le monde, sous les étoiles.\"), symbol: \"sparkles\","
+  ]
+ },
+ {
+  "key": "L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:123: WidgetPack(id: \"night-watch\", name: tr(\"Justicier de la nuit\"), tagline: tr(\"L'heure, la météo, ce qui vient et ta concentration, sur la ville endormie.\"),"
+  ]
+ },
+ {
+  "key": "La magie de Noël",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:707: case .christmas: tr(\"La magie de Noël\")"
+  ]
+ },
+ {
+  "key": "La sélection de la semaine : un écran, un style et des widgets à découvrir.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:63: case .featured: tr(\"La sélection de la semaine : un écran, un style et des widgets à découvrir.\")"
+  ]
+ },
+ {
+  "key": "Le compte à rebours d'Halloween, la lune et la météo du soir.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:132: WidgetPack(id: \"pumpkin-night\", name: tr(\"Nuit des citrouilles\"), tagline: tr(\"Le compte à rebours d'Halloween, la lune et la météo du soir.\"), symbol: \"moon.stars.fill\","
+  ]
+ },
+ {
+  "key": "Le compte à rebours de Noël, le calendrier et les jours fériés.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:139: WidgetPack(id: \"christmas-eve\", name: tr(\"Veillée de Noël\"), tagline: tr(\"Le compte à rebours de Noël, le calendrier et les jours fériés.\"), symbol: \"gift.fill\","
+  ]
+ },
+ {
+  "key": "Les héros de la nuit",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:706: case .halloween: tr(\"Les héros de la nuit\")"
+  ]
+ },
+ {
+  "key": "Les écrans d'accueil assortis",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:375: shelfRow(tr(\"Les écrans d'accueil assortis\")) {"
+  ]
+ },
+ {
+  "key": "Mars",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:450: id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Rouille et poussière : la météo, le soleil et le vent de la planète rouge.\"),",
+   "Shared/Model/Packs.swift:108: WidgetPack(id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Météo, soleil, vent et compte à rebours, sur la planète rouge.\"), symbol: \"globe.europe.africa.fill\",",
+   "Shared/Theme/Theme.swift:561: id: .mars, name: tr(\"Mars\"), tagline: tr(\"Rouille, poussière et horizon martien\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Météo, lune, heure et calendrier, sous les flocons.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:142: WidgetPack(id: \"snow-night\", name: tr(\"Nuit de neige\"), tagline: tr(\"Météo, lune, heure et calendrier, sous les flocons.\"), symbol: \"snowflake\","
+  ]
+ },
+ {
+  "key": "Météo, pluie, soleil, habitudes et eau, au cœur de la forêt.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:110: WidgetPack(id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Météo, pluie, soleil, habitudes et eau, au cœur de la forêt.\"), symbol: \"tree.fill\","
+  ]
+ },
+ {
+  "key": "Météo, soleil, vent et compte à rebours, sur la planète rouge.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:108: WidgetPack(id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Météo, soleil, vent et compte à rebours, sur la planète rouge.\"), symbol: \"globe.europe.africa.fill\","
+  ]
+ },
+ {
+  "key": "Nature",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:461: id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Feuillage et lumière verte : la météo, la pluie et tes habitudes.\"),",
+   "Shared/Model/Packs.swift:110: WidgetPack(id: \"nature\", name: tr(\"Nature\"), tagline: tr(\"Météo, pluie, soleil, habitudes et eau, au cœur de la forêt.\"), symbol: \"tree.fill\",",
+   "Shared/Theme/Theme.swift:570: id: .nature, name: tr(\"Nature\"), tagline: tr(\"Forêt profonde, feuillage et lumière verte\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Nuit de neige",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:142: WidgetPack(id: \"snow-night\", name: tr(\"Nuit de neige\"), tagline: tr(\"Météo, lune, heure et calendrier, sous les flocons.\"), symbol: \"snowflake\",",
+   "Shared/Theme/Theme.swift:680: id: .snowfall, name: tr(\"Nuit de neige\"), tagline: tr(\"Bleu d'hiver et flocons qui tombent\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Nuit des citrouilles",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:132: WidgetPack(id: \"pumpkin-night\", name: tr(\"Nuit des citrouilles\"), tagline: tr(\"Le compte à rebours d'Halloween, la lune et la météo du soir.\"), symbol: \"moon.stars.fill\","
+  ]
+ },
+ {
+  "key": "Nuit noire et orange citrouille",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:652: id: .pumpkin, name: tr(\"Citrouille\"), tagline: tr(\"Nuit noire et orange citrouille\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Nuit urbaine, gris acier et signal jaune",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:616: id: .vigilante, name: tr(\"Justicier\"), tagline: tr(\"Nuit urbaine, gris acier et signal jaune\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Océan profond",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:484: id: \"vagues\", name: tr(\"Océan profond\"), tagline: tr(\"Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune.\"),"
+  ]
+ },
+ {
+  "key": "Packs thématiques",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:30: case .themes: tr(\"Packs thématiques\")"
+  ]
+ },
+ {
+  "key": "Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:439: id: \"espace\", name: tr(\"Espace\"), tagline: tr(\"Poussière d'étoiles, lune et fuseaux horaires, en argent lunaire.\"),"
+  ]
+ },
+ {
+  "key": "Rouge vif, bleu nuit et toile tissée",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:628: id: .webSlinger, name: tr(\"Toile\"), tagline: tr(\"Rouge vif, bleu nuit et toile tissée\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Rouille et poussière : la météo, le soleil et le vent de la planète rouge.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:450: id: \"mars\", name: tr(\"Mars\"), tagline: tr(\"Rouille et poussière : la météo, le soleil et le vent de la planète rouge.\"),"
+  ]
+ },
+ {
+  "key": "Rouille, poussière et horizon martien",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:561: id: .mars, name: tr(\"Mars\"), tagline: tr(\"Rouille, poussière et horizon martien\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:714: case .christmas: tr(\"Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.\")"
+  ]
+ },
+ {
+  "key": "Style de la semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMagazine.swift:812: Text(tr(\"Style de la semaine\").uppercased())"
+  ]
+ },
+ {
+  "key": "Séance, séries, records et calories, en bleu, rouge et or.",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:120: WidgetPack(id: \"hero-cape\", name: tr(\"Cape héroïque\"), tagline: tr(\"Séance, séries, records et calories, en bleu, rouge et or.\"), symbol: \"bolt.shield.fill\","
+  ]
+ },
+ {
+  "key": "Toile",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:336: case .web: tr(\"Toile\")",
+   "Shared/Theme/Theme.swift:628: id: .webSlinger, name: tr(\"Toile\"), tagline: tr(\"Rouge vif, bleu nuit et toile tissée\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Toile urbaine",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:126: WidgetPack(id: \"city-web\", name: tr(\"Toile urbaine\"), tagline: tr(\"Cours, devoirs, ce qui vient et compte à rebours, tissés serré.\"), symbol: \"circle.hexagongrid.fill\","
+  ]
+ },
+ {
+  "key": "Un carnet de serre : habitudes, eau, calendrier et notes.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetups.swift:472: id: \"botanique\", name: tr(\"Botanique\"), tagline: tr(\"Un carnet de serre : habitudes, eau, calendrier et notes.\"),"
+  ]
+ },
+ {
+  "key": "Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d'accueil assorti.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:68: case .themes: tr(\"Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d'accueil assorti.\")"
+  ]
+ },
+ {
+  "key": "Vagues",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:335: case .waves: tr(\"Vagues\")"
+  ]
+ },
+ {
+  "key": "Veillée de Noël",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Packs.swift:139: WidgetPack(id: \"christmas-eve\", name: tr(\"Veillée de Noël\"), tagline: tr(\"Le compte à rebours de Noël, le calendrier et les jours fériés.\"), symbol: \"gift.fill\","
+  ]
+ },
+ {
+  "key": "Vert sapin, rouge et fils d'or",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:668: id: .christmas, name: tr(\"Noël\"), tagline: tr(\"Vert sapin, rouge et fils d'or\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Vert tendre, feuilles et serif de serre",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:579: id: .botanical, name: tr(\"Botanique\"), tagline: tr(\"Vert tendre, feuilles et serif de serre\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Violet inquiétant et vert acide",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Theme/Theme.swift:640: id: .jester, name: tr(\"Farceur\"), tagline: tr(\"Violet inquiétant et vert acide\"), isPremium: true,"
+  ]
+ },
+ {
+  "key": "Étoiles",
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/WidgetStyle.swift:333: case .stars: tr(\"Étoiles\")"
+  ]
+ }
+]

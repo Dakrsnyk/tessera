@@ -175,13 +175,6 @@
   ]
  },
  {
-  "key": "La sélection de la semaine et ce qui te correspond.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:49: case .featured: tr(\"La sélection de la semaine et ce qui te correspond.\")"
-  ]
- },
- {
   "key": "Lagon",
   "placeholders": 0,
   "uses": [

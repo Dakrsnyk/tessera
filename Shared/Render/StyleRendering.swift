@@ -172,7 +172,8 @@ struct StyleBorder: View {
 
 // MARK: - Texture
 
-/// A fine pattern over the background: grain, paper, dots, grid, lines, stripes or noise.
+/// A fine pattern over the background: grain, paper, dots, grid, lines, stripes, noise, or the
+/// motifs of the themed styles (stars, snow, waves, a web, foliage).
 struct TextureView: View {
     let kind: TextureKind
     let color: Color
@@ -195,6 +196,11 @@ struct TextureView: View {
         case .lines: 0.16
         case .diagonal: 0.12
         case .noise: 0.35
+        case .stars: 0.75
+        case .snow: 0.6
+        case .waves: 0.3
+        case .web: 0.4
+        case .leaves: 0.22
         }
     }
 }
@@ -270,6 +276,99 @@ struct TexturePattern: Shape {
                     path.addLine(to: CGPoint(x: x, y: y + 0.5))
                     path.closeSubpath()
                 }
+            }
+        case .stars:
+            // Star dust of every size, and a few bright stars with four rays.
+            var generator = TextureRandom(seed: 21)
+            let area = rect.width * rect.height
+            for _ in 0..<min(Int(area / 160), 1_500) {
+                let x = rect.minX + CGFloat(generator.next()) * rect.width
+                let y = rect.minY + CGFloat(generator.next()) * rect.height
+                let size = 0.6 + CGFloat(generator.next() * generator.next()) * 1.8
+                path.addEllipse(in: CGRect(x: x, y: y, width: size, height: size))
+            }
+            for _ in 0..<max(2, Int(area / 6_000)) {
+                let x = rect.minX + CGFloat(generator.next()) * rect.width
+                let y = rect.minY + CGFloat(generator.next()) * rect.height
+                let ray = 3 + CGFloat(generator.next()) * 4
+                path.addRect(CGRect(x: x - ray, y: y - 0.4, width: ray * 2, height: 0.8))
+                path.addRect(CGRect(x: x - 0.4, y: y - ray, width: 0.8, height: ray * 2))
+                path.addEllipse(in: CGRect(x: x - 1.2, y: y - 1.2, width: 2.4, height: 2.4))
+            }
+        case .snow:
+            // Round flakes, small far away and bigger close by.
+            var generator = TextureRandom(seed: 34)
+            for _ in 0..<min(Int(rect.width * rect.height / 260), 900) {
+                let x = rect.minX + CGFloat(generator.next()) * rect.width
+                let y = rect.minY + CGFloat(generator.next()) * rect.height
+                let size = 1.2 + CGFloat(generator.next() * generator.next()) * 3.6
+                path.addEllipse(in: CGRect(x: x, y: y, width: size, height: size))
+            }
+        case .waves:
+            // Swell lines, each a little offset from the one above.
+            var line = Path()
+            var y = rect.minY + 6
+            var row = 0
+            while y < rect.maxY + 6 {
+                let phase = CGFloat(row) * 1.3
+                line.move(to: CGPoint(x: rect.minX, y: y + sin(phase) * 3))
+                var x = rect.minX
+                while x <= rect.maxX {
+                    x += 3
+                    line.addLine(to: CGPoint(x: x, y: y + sin(x / 11 + phase) * 3))
+                }
+                y += 11
+                row += 1
+            }
+            path.addPath(line.strokedPath(StrokeStyle(lineWidth: 1, lineCap: .round)))
+        case .web:
+            // A web spun from the top corner: rays, then threads that sag between them.
+            let center = CGPoint(x: rect.minX, y: rect.minY)
+            let reach = hypot(rect.width, rect.height)
+            let rays = 8
+            var web = Path()
+            let angles = (0...rays).map { CGFloat($0) / CGFloat(rays) * .pi / 2 }
+            for angle in angles {
+                web.move(to: center)
+                web.addLine(to: CGPoint(x: center.x + cos(angle) * reach, y: center.y + sin(angle) * reach))
+            }
+            var radius: CGFloat = 14
+            while radius < reach {
+                for index in 0..<rays {
+                    let a = angles[index], b = angles[index + 1]
+                    let start = CGPoint(x: center.x + cos(a) * radius, y: center.y + sin(a) * radius)
+                    let end = CGPoint(x: center.x + cos(b) * radius, y: center.y + sin(b) * radius)
+                    let middle = (a + b) / 2
+                    let control = CGPoint(x: center.x + cos(middle) * radius * 0.86, y: center.y + sin(middle) * radius * 0.86)
+                    if index == 0 { web.move(to: start) }
+                    web.addQuadCurve(to: end, control: control)
+                }
+                radius *= 1.32
+            }
+            path.addPath(web.strokedPath(StrokeStyle(lineWidth: 0.8, lineCap: .round, lineJoin: .round)))
+        case .leaves:
+            // Leaves scattered on a loose grid, each turned its own way.
+            var generator = TextureRandom(seed: 55)
+            let step: CGFloat = 26
+            var y = rect.minY + step / 2
+            while y < rect.maxY + step / 2 {
+                var x = rect.minX + step / 2
+                while x < rect.maxX + step / 2 {
+                    let cx = x + (CGFloat(generator.next()) - 0.5) * step * 0.7
+                    let cy = y + (CGFloat(generator.next()) - 0.5) * step * 0.7
+                    let length = 9 + CGFloat(generator.next()) * 8
+                    let width = length * 0.42
+                    let angle = CGFloat(generator.next()) * .pi * 2
+                    var leaf = Path()
+                    leaf.move(to: CGPoint(x: -length / 2, y: 0))
+                    leaf.addQuadCurve(to: CGPoint(x: length / 2, y: 0), control: CGPoint(x: 0, y: -width))
+                    leaf.addQuadCurve(to: CGPoint(x: -length / 2, y: 0), control: CGPoint(x: 0, y: width))
+                    leaf.closeSubpath()
+                    let turn = CGAffineTransform(translationX: cx, y: cy).rotated(by: angle)
+                    path.addPath(leaf, transform: turn)
+                    x += step
+                }
+                y += step
             }
         }
         return path

@@ -20,7 +20,7 @@ jobs:
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
-      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') || contains(github.event.head_commit.message, '[demos]') || contains(github.event.head_commit.message, '[daily]') || contains(github.event.head_commit.message, '[langs]') }}
+      QA: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[qa]') || contains(github.event.head_commit.message, '[shots]') || contains(github.event.head_commit.message, '[studio]') || contains(github.event.head_commit.message, '[apps]') || contains(github.event.head_commit.message, '[demos]') || contains(github.event.head_commit.message, '[daily]') || contains(github.event.head_commit.message, '[langs]') || contains(github.event.head_commit.message, '[store]') }}
       # [demos] runs the logic tests and the exercise sheet UI tests, then the demonstrations of every exercise.
       DEMOS: ${{ contains(github.event.head_commit.message, '[demos]') }}
       # [daily] runs the logic tests and the UI tests of Mon Quotidien, Créer, the Studio and the first launch,
@@ -39,6 +39,8 @@ jobs:
       LANGS: ${{ contains(github.event.head_commit.message, '[langs]') }}
       # [unit] builds (IPA included) and runs the logic tests only, without the UI tests or screenshots.
       UNIT: ${{ contains(github.event.head_commit.message, '[unit]') }}
+      # [store] runs the logic tests, then only the Store captures (every aisle) and the styles side by side.
+      STORE: ${{ contains(github.event.head_commit.message, '[store]') }}
       # [check] only compiles for the simulator (fastest way to find compile errors).
       CHECK: ${{ contains(github.event.head_commit.message, '[check]') }}
       # [marketing] renders the App Store screenshots on a 6.9" iPhone (1320 x 2868).
@@ -137,6 +139,7 @@ jobs:
           ONLY=""
           if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
           if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
+          if [ "$STORE" = "true" ]; then ONLY="-only-testing:TesseraTests"; fi
           if [ "$APPS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/DataEntryUITests -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
           if [ "$DAILY" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/ProfileUITests"; fi
           if [ "$DEMOS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests/testTheLibraryFindsExercisesAndShowsTheirSheet -only-testing:TesseraUITests/MiniAppUITests/testASessionKeepsItsPlaceWhenTheSheetOpens -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
@@ -232,7 +235,7 @@ jobs:
             # Créer: the selection, then the Studio with the widgets chosen.
             WAIT=9 shoot creator-studio creator-fitness top light -screenshotCreatorMulti YES -screenshotCreatorStudio YES
             WAIT=9 shoot creator-studio-medium creator-nutrition top light -screenshotCreatorFormat medium -screenshotCreatorStudio YES
-            for page in 1 2 3; do shoot gallery-styles-$page gallery-styles-$page top light; done
+            for page in 1 2 3 4; do shoot gallery-styles-$page gallery-styles-$page top light; done
             shoot gallery-styles-1-dark gallery-styles-1 top dark
             for page in 1 2; do shoot gallery-presets-$page gallery-presets-$page top light; done
             for size in small medium large; do shoot gallery-layouts-$size gallery-layouts-$size top light; done
@@ -317,6 +320,14 @@ jobs:
               done
               WAIT=8 shoot $SHOT_LANG-home home top dark
             done
+            exit 0
+          fi
+          if [ "$STORE" = "true" ]; then
+            shoot store store top light
+            for slice in 0.12 0.24 0.36 0.48 0.6 0.72 0.84; do shoot store-at-$slice store $slice light; done
+            shoot store-end store bottom light
+            shoot store-at-0.3-dark store 0.3 dark
+            for page in 1 2 3 4; do shoot gallery-styles-$page gallery-styles-$page top light; done
             exit 0
           fi
           if [ "$STUDIO" = "true" ]; then

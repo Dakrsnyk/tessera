@@ -316,6 +316,8 @@ enum GradientDirection: String, Codable, CaseIterable, Identifiable {
 
 enum TextureKind: String, Codable, CaseIterable, Identifiable {
     case none, grain, paper, dots, grid, lines, diagonal, noise
+    // Motifs of the themed styles: space, snow, water, a web, foliage.
+    case stars, snow, waves, web, leaves
     var id: String { rawValue }
 
     var title: String {
@@ -328,6 +330,11 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
         case .lines: tr("Lignes")
         case .diagonal: tr("Rayures")
         case .noise: tr("Bruit")
+        case .stars: tr("Étoiles")
+        case .snow: tr("Neige")
+        case .waves: tr("Vagues")
+        case .web: tr("Toile")
+        case .leaves: tr("Feuillage")
         }
     }
 }
