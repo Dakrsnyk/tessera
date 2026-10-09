@@ -210,7 +210,7 @@ final class DomainLogicTests: XCTestCase {
             XCTAssertEqual(WidgetGroup.allCases.filter { $0.kinds.contains(kind) }.count, 1, "\(kind)")
         }
         XCTAssertEqual(Set(WidgetGroup.allCases.map(\.kindID)).count, WidgetGroup.allCases.count)
-        XCTAssertTrue((20...30).contains(WidgetKind.freeKinds.count))
+        XCTAssertTrue((30...40).contains(WidgetKind.freeKinds.count), "Each mini-app keeps its essential widget free")
         XCTAssertTrue((60...100).contains(WidgetKind.allCases.count - WidgetKind.freeKinds.count))
     }
 
