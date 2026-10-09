@@ -1,9 +1,9 @@
 import SwiftUI
 import WidgetKit
 
-/// The Store, in aisles: one row at the top picks what to look at (the week's picks, complete Home
-/// Screens, single widgets, combinations, packs, styles), each aisle says in one line what it holds and
-/// shows only that. Search and filters work across everything.
+/// The Store, in aisles one under the other (the week's picks, complete Home Screens, single widgets,
+/// combinations, packs, styles), each with a header in its colour and two scrolling rows; the row at
+/// the top jumps to an aisle. Search and filters work across everything.
 struct ExploreView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -13,7 +13,6 @@ struct ExploreView: View {
     @State private var isSearchPresented = false
     @State private var openedPack: WidgetPack?
     @State private var openedSetup: HomeSetup?
-    @State private var aisle: StoreAisle = .featured
     @AppStorage(SetupFavorites.key) private var favoritesRaw = ""
 
     /// The aisles of the Store, from the week's picks to the styles.
@@ -40,6 +39,18 @@ struct ExploreView: View {
             case .combos: "square.split.2x2.fill"
             case .packs: "shippingbox.fill"
             case .styles: "paintpalette.fill"
+            }
+        }
+
+        /// The colour of the aisle's header, so that each aisle is told apart at a glance.
+        var colorHex: String {
+            switch self {
+            case .featured: "F2A33A"
+            case .screens: "3366FF"
+            case .widgets: "2F8F7A"
+            case .combos: "6D4AE8"
+            case .packs: "E5484D"
+            case .styles: "D6409F"
             }
         }
 
@@ -90,7 +101,7 @@ struct ExploreView: View {
                         if isFiltering {
                             filtered
                         } else {
-                            magazine
+                            magazine(proxy)
                         }
                     }
                     .padding(.bottom, 36)
@@ -103,7 +114,6 @@ struct ExploreView: View {
                 }
                 .onChange(of: router.tutorialStep) { _, step in
                     if step == .store {
-                        aisle = .featured
                         withAnimation { proxy.scrollTo(Self.top, anchor: .top) }
                     }
                 }
@@ -168,137 +178,190 @@ struct ExploreView: View {
 
     // MARK: - Magazine
 
-    private var magazine: some View {
+    /// Every aisle, one under the other: a header in the aisle's colour, then two scrolling rows
+    /// (one for the Home Screens, which are big).
+    private func magazine(_ proxy: ScrollViewProxy) -> some View {
         VStack(alignment: .leading, spacing: 26) {
-            aisleBar
-            LazyVStack(alignment: .leading, spacing: 38) {
-                switch aisle {
-                case .featured:
-                    let weekly = HomeSetupCatalog.weekly()
-                    VStack(alignment: .leading, spacing: 14) {
-                        Text(Fmt.longDay(Date()).uppercased())
-                            .font(.caption.weight(.bold))
-                            .tracking(1.1)
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal, 20)
-                        WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
-                            openedSetup = weekly
-                        }
-                        .tutorialTarget(.storeHero)
+            aisleBar(proxy)
+            VStack(alignment: .leading, spacing: 44) {
+                ForEach(StoreAisle.allCases) { item in
+                    VStack(alignment: .leading, spacing: 16) {
+                        AisleHeader(aisle: item, action: seeAll(item))
+                        aisleRows(item)
                     }
-                    if !forYou.isEmpty {
-                        forYouSection
-                    }
-                    newestSection
-                case .screens:
-                    setupsSection(excluding: "")
-                case .widgets:
-                    categoriesSection
-                    essentialsSection
-                    lockScreenSection
-                case .combos:
-                    combosSection
-                case .packs:
-                    packsSection
-                    collectionsSection
-                case .styles:
-                    stylesSection
+                    .id(item)
                 }
             }
         }
         .padding(.top, 2)
     }
 
-    /// The aisles, one tap away, and what the one chosen holds.
-    private var aisleBar: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(StoreAisle.allCases) { item in
-                        FilterChip(title: item.title, symbol: item.symbol, isSelected: aisle == item) {
-                            withAnimation(.snappy) { aisle = item }
-                        }
-                        .accessibilityIdentifier("store-aisle-\(item.rawValue)")
+    /// The aisles, one tap away: a tap scrolls to the aisle.
+    private func aisleBar(_ proxy: ScrollViewProxy) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(StoreAisle.allCases) { item in
+                    FilterChip(title: item.title, symbol: item.symbol, isSelected: false) {
+                        withAnimation(.snappy) { proxy.scrollTo(item, anchor: .top) }
                     }
+                    .accessibilityIdentifier("store-aisle-\(item.rawValue)")
                 }
-                .padding(.horizontal, 20)
             }
-            Text(aisle.hint)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, 20)
-                .fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal, 20)
         }
     }
 
-    /// Complete Home Screens, drawn as on a real iPhone.
-    private func setupsSection(excluding weeklyID: String) -> some View {
-        let favorites = SetupFavorites.ids(favoritesRaw)
-        let setups = HomeSetupCatalog.all.filter { $0.id != weeklyID }
-        return VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(
-                eyebrow: tr("Clé en main"),
-                title: tr("Écrans d'accueil"),
-                subtitle: tr("Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches.")
-            ) {
-                router.storePath.append(.setups)
+    private func seeAll(_ item: StoreAisle) -> (() -> Void)? {
+        switch item {
+        case .screens: return { router.storePath.append(.setups) }
+        case .combos: return { router.storePath.append(.combos) }
+        case .packs: return { router.storePath.append(.packs) }
+        case .featured, .widgets, .styles: return nil
+        }
+    }
+
+    @ViewBuilder private func aisleRows(_ item: StoreAisle) -> some View {
+        switch item {
+        case .featured: featuredRows
+        case .screens: setupsRow
+        case .widgets: widgetRows
+        case .combos: comboRows
+        case .packs: packRows
+        case .styles: styleRows
+        }
+    }
+
+    /// One scrolling row, with what it holds above it.
+    private func shelfRow<Content: View>(_ title: String? = nil, action: (() -> Void)? = nil,
+                                         @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if let title {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Spacer(minLength: 8)
+                    if let action {
+                        Button(action: action) {
+                            HStack(spacing: 3) {
+                                Text(tr("Tout voir"))
+                                Image(systemName: "chevron.right").font(.caption.weight(.bold))
+                            }
+                            .font(.subheadline.weight(.semibold))
+                        }
+                        .accessibilityLabel(Text("\(tr("Tout voir")) : \(title)"))
+                    }
+                }
+                .padding(.horizontal, 20)
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 14) {
-                    ForEach(setups) { setup in
-                        SetupCard(
-                            setup: setup,
-                            showsPages: false,
-                            isFavorite: favorites.contains(setup.id),
-                            isPremiumUser: model.isPremium,
-                            onFavorite: {
-                                Haptics.tap()
-                                favoritesRaw = SetupFavorites.toggled(setup.id, in: favoritesRaw)
-                            },
-                            onOpen: { openedSetup = setup }
-                        )
-                        .frame(width: 150)
-                    }
+                    content()
                 }
                 .padding(.horizontal, 20)
-                .padding(.vertical, 6)
+                .padding(.vertical, 2)
             }
         }
     }
 
-    /// Widgets of the categories the person is interested in, one per kind.
-    private var forYou: [WidgetTemplate] {
-        var seen = Set<WidgetKind>()
-        return interests
-            .flatMap { category in TemplateCatalog.all.filter { $0.kind.category == category } }
-            .filter { seen.insert($0.kind).inserted }
-            .prefix(14)
-            .map { $0 }
-    }
-
-    private var forYouSection: some View {
+    /// The Home Screen of the week, then the widgets for the person and those of the week.
+    @ViewBuilder private var featuredRows: some View {
+        let weekly = HomeSetupCatalog.weekly()
         VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: tr("Selon tes centres d'intérêt"), title: tr("Pour toi"))
-            templateShelf(forYou)
+            Text(Fmt.longDay(Date()).uppercased())
+                .font(.caption.weight(.bold))
+                .tracking(1.1)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 20)
+            WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
+                openedSetup = weekly
+            }
+            .tutorialTarget(.storeHero)
+        }
+        shelfRow(forYou.isEmpty ? tr("Notre sélection") : tr("Pour toi")) {
+            templateItems(forYou.isEmpty ? essentials : forYou)
+        }
+        shelfRow(tr("À découvrir cette semaine")) {
+            templateItems(TemplateCatalog.weeklyPick())
         }
     }
 
-    /// Two small widgets in a medium one, up to four in a large one.
-    private var combosSection: some View {
-        let combos = StoreRanking.combos(StoreComboCatalog.all, preferring: interests)
-        let mediums = combos.filter { $0.format == .medium }
-        let larges = combos.filter { $0.format == .large }
-        return VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(
-                eyebrow: tr("Plusieurs en un"),
-                title: tr("Combinaisons"),
-                subtitle: tr("\(StoreComboCatalog.all.count) widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand.")
-            ) {
-                router.storePath.append(.combos)
+    /// Complete Home Screens, drawn as on a real iPhone: one row, they're big.
+    private var setupsRow: some View {
+        let favorites = SetupFavorites.ids(favoritesRaw)
+        return shelfRow {
+            ForEach(HomeSetupCatalog.all) { setup in
+                SetupCard(
+                    setup: setup,
+                    showsPages: false,
+                    isFavorite: favorites.contains(setup.id),
+                    isPremiumUser: model.isPremium,
+                    onFavorite: {
+                        Haptics.tap()
+                        favoritesRaw = SetupFavorites.toggled(setup.id, in: favoritesRaw)
+                    },
+                    onOpen: { openedSetup = setup }
+                )
+                .frame(width: 150)
             }
-            comboShelf(mediums, height: 140)
-            comboShelf(larges, height: 250)
         }
+        .padding(.vertical, 4)
+    }
+
+    /// The themes of the catalog, then the widgets to try first and those of the Lock Screen.
+    @ViewBuilder private var widgetRows: some View {
+        shelfRow(tr("Catégories")) {
+            ForEach(interests + WidgetCategory.allCases.filter { !interests.contains($0) }) { category in
+                categoryCard(category)
+            }
+        }
+        shelfRow(tr("Incontournables")) {
+            templateItems(essentials)
+            ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
+                Button {
+                    router.openEditor(pair.element.widget.makeDesign(), isNew: true)
+                } label: {
+                    LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    private func categoryCard(_ category: WidgetCategory) -> some View {
+        let count = WidgetKind.allCases.filter { $0.category == category }.count
+        return Button {
+            router.exploreCategory = category
+        } label: {
+            VStack(alignment: .leading, spacing: 10) {
+                Image(systemName: category.symbol)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 34, height: 34)
+                    .background(Color(hex: category.colorHex), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(category.title)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                    Text(Fmt.plural(count, tr("widget"), tr("widgets")))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .frame(width: 128, alignment: .leading)
+            .padding(12)
+            .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("store-category-\(category.rawValue)")
+    }
+
+    /// Two small widgets in a medium one on the first row, up to four in a large one on the second.
+    @ViewBuilder private var comboRows: some View {
+        let combos = StoreRanking.combos(StoreComboCatalog.all, preferring: interests)
+        comboShelf(combos.filter { $0.format == .medium }, height: 140)
+        comboShelf(combos.filter { $0.format == .large }, height: 250)
     }
 
     private func comboShelf(_ combos: [StoreCombo], height: CGFloat) -> some View {
@@ -317,109 +380,42 @@ struct ExploreView: View {
         }
     }
 
-    /// The pack of the week, big, then every other pack.
-    private var packsSection: some View {
+    /// The pack of the week first, then every other pack; the collections on the second row.
+    @ViewBuilder private var packRows: some View {
         let featured = StoreEdition.pack()
-        let others = StoreRanking.packs(preferring: interests).filter { $0.id != featured.id }
-        return VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(
-                eyebrow: tr("Six widgets assortis"),
-                title: tr("Packs"),
-                subtitle: tr("Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets.")
-            ) {
-                router.storePath.append(.packs)
-            }
-            Button {
-                openedPack = featured
-            } label: {
-                PackFeature(pack: featured, isPremiumUser: model.isPremium)
-            }
-            .buttonStyle(.plain)
-            .padding(.horizontal, 20)
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: .top, spacing: 16) {
-                    ForEach(others) { pack in
-                        Button {
-                            openedPack = pack
-                        } label: {
-                            PackCard(pack: pack, isPremiumUser: model.isPremium)
-                        }
-                        .buttonStyle(.plain)
-                    }
+        let packs = [featured] + StoreRanking.packs(preferring: interests).filter { $0.id != featured.id }
+        shelfRow {
+            ForEach(packs) { pack in
+                Button {
+                    openedPack = pack
+                } label: {
+                    PackCard(pack: pack, isPremiumUser: model.isPremium)
                 }
+                .buttonStyle(.plain)
+            }
+        }
+        shelfRow(tr("Collections"), action: { router.storePath.append(.collections) }) {
+            ForEach(StoreShowcase.collections(preferring: interests)) { collection in
+                Button {
+                    router.storePath.append(.collection(collection.id))
+                } label: {
+                    CollectionTile(collection: collection)
+                        .frame(width: 170)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    /// Every style on two rows: a tap shows all its widgets.
+    private var styleRows: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(tr("Touche un style pour voir tous ses widgets."))
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
                 .padding(.horizontal, 20)
-            }
-        }
-    }
-
-    private var collectionsSection: some View {
-        let collections = Array(StoreShowcase.collections(preferring: interests).prefix(4))
-        return VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(
-                eyebrow: tr("Sélections"),
-                title: tr("Collections"),
-                subtitle: tr("Des widgets réunis autour d'un thème, d'une taille ou d'un style.")
-            ) {
-                router.storePath.append(.collections)
-            }
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
-                ForEach(collections) { collection in
-                    Button {
-                        router.storePath.append(.collection(collection.id))
-                    } label: {
-                        CollectionTile(collection: collection)
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-            .padding(.horizontal, 20)
-        }
-    }
-
-    /// Chosen by the team: there are no download counts to rank by.
-    private var essentialsSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: tr("Notre sélection"), title: tr("Incontournables"), subtitle: tr("Les widgets à essayer en premier."))
-            EssentialsList(templates: essentials, isPremiumUser: model.isPremium) { template in
-                router.openEditor(template.makeDesign(), isNew: true)
-            }
-            .padding(.horizontal, 20)
-        }
-    }
-
-    /// Six chosen widgets from six different categories.
-    private var essentials: [WidgetTemplate] {
-        var seen = Set<WidgetCategory>()
-        let small = TemplateCatalog.featured.filter { $0.kind.families.contains(.systemSmall) }
-        let varied = small.filter { seen.insert($0.kind.category).inserted }
-        let rest = small.filter { template in !varied.contains { $0.id == template.id } }
-        return Array((varied + rest).prefix(6))
-    }
-
-    private var lockScreenSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: tr("Sous l'heure"), title: tr("Écran verrouillé"), subtitle: tr("D'un coup d'œil, sans déverrouiller ton iPhone."))
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: .top, spacing: 14) {
-                    ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
-                        Button {
-                            router.openEditor(pair.element.widget.makeDesign(), isNew: true)
-                        } label: {
-                            LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.horizontal, 20)
-            }
-        }
-    }
-
-    private var stylesSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: tr("12 styles"), title: tr("Styles"), subtitle: tr("Touche un style pour voir tous ses widgets."))
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
+                LazyHGrid(rows: [GridItem(.fixed(104), spacing: 14), GridItem(.fixed(104))], alignment: .top, spacing: 12) {
                     ForEach(ThemeCatalog.all) { theme in
                         Button {
                             themeFilter = theme.id
@@ -434,37 +430,33 @@ struct ExploreView: View {
         }
     }
 
-    private var newestSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            // Changes every week: a fresh selection from the whole catalog, dated so it reads as new.
-            let monday = DateMath.week(containing: Date()).first ?? Date()
-            MagazineHeader(eyebrow: tr("Semaine du \(Fmt.shortDay(monday))"), title: tr("À découvrir cette semaine"))
-            templateShelf(TemplateCatalog.weeklyPick())
-        }
+    /// Six chosen widgets from six different categories, chosen by the team: there are no download
+    /// counts to rank by.
+    private var essentials: [WidgetTemplate] {
+        var seen = Set<WidgetCategory>()
+        let small = TemplateCatalog.featured.filter { $0.kind.families.contains(.systemSmall) }
+        let varied = small.filter { seen.insert($0.kind.category).inserted }
+        let rest = small.filter { template in !varied.contains { $0.id == template.id } }
+        return Array((varied + rest).prefix(6))
     }
 
-    private var categoriesSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            MagazineHeader(eyebrow: tr("Tout le catalogue"), title: tr("Catégories"))
-            CategoryIndex(categories: interests + WidgetCategory.allCases.filter { !interests.contains($0) }) { category in
-                router.exploreCategory = category
-            }
-            .padding(.horizontal, 20)
-        }
+    /// Widgets of the categories the person is interested in, one per kind.
+    private var forYou: [WidgetTemplate] {
+        var seen = Set<WidgetKind>()
+        return interests
+            .flatMap { category in TemplateCatalog.all.filter { $0.kind.category == category } }
+            .filter { seen.insert($0.kind).inserted }
+            .prefix(14)
+            .map { $0 }
     }
 
-    /// Template shelves: every fourth widget (and those with no small size) shown medium.
-    private func templateShelf(_ templates: [WidgetTemplate]) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(alignment: .top, spacing: 14) {
-                ForEach(Array(templates.enumerated()), id: \.element.id) { pair in
-                    let template = pair.element
-                    let canBeMedium = template.kind.families.contains(.systemMedium)
-                    let family: WidgetFamily? = pair.offset % 4 == 0 && canBeMedium ? .systemMedium : nil
-                    templateButton(template, width: 150, family: family)
-                }
-            }
-            .padding(.horizontal, 20)
+    /// Template cards: every fourth widget (and those with no small size) shown medium.
+    private func templateItems(_ templates: [WidgetTemplate]) -> some View {
+        ForEach(Array(templates.enumerated()), id: \.element.id) { pair in
+            let template = pair.element
+            let canBeMedium = template.kind.families.contains(.systemMedium)
+            let family: WidgetFamily? = pair.offset % 4 == 0 && canBeMedium ? .systemMedium : nil
+            templateButton(template, width: 150, family: family)
         }
     }
 
@@ -799,5 +791,47 @@ struct PackSheet: View {
                 }
             Text(design.kind.title).font(.caption.weight(.semibold)).lineLimit(1)
         }
+    }
+}
+
+/// The header of an aisle of the Store: its symbol in its colour, its name, what it holds.
+struct AisleHeader: View {
+    let aisle: ExploreView.StoreAisle
+    var action: (() -> Void)?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Rectangle()
+                .fill(Color(hex: aisle.colorHex).opacity(0.5))
+                .frame(height: 2)
+            HStack(alignment: .center, spacing: 12) {
+                Image(systemName: aisle.symbol)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 40, height: 40)
+                    .background(Color(hex: aisle.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(aisle.title)
+                        .font(.title2.weight(.bold))
+                        .accessibilityAddTraits(.isHeader)
+                    Text(aisle.hint)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: 6)
+                if let action {
+                    Button(action: action) {
+                        HStack(spacing: 3) {
+                            Text(tr("Tout voir"))
+                            Image(systemName: "chevron.right").font(.caption.weight(.bold))
+                        }
+                        .font(.subheadline.weight(.semibold))
+                    }
+                    .accessibilityLabel(Text("\(tr("Tout voir")) : \(aisle.title)"))
+                }
+            }
+        }
+        .padding(.horizontal, 20)
     }
 }

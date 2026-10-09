@@ -1178,25 +1178,11 @@
   ]
  },
  {
-  "key": "Clé en main",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:164: eyebrow: tr(\"Clé en main\"),"
-  ]
- },
- {
   "key": "Écrans d'accueil",
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:165: title: tr(\"Écrans d'accueil\"),",
    "App/Screens/Explore/ExploreView.swift:493: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
-  ]
- },
- {
-  "key": "Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:166: subtitle: tr(\"Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches.\")"
   ]
  },
  {
@@ -1208,39 +1194,11 @@
   ]
  },
  {
-  "key": "Selon tes centres d'intérêt",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:205: MagazineHeader(eyebrow: tr(\"Selon tes centres d'intérêt\"), title: tr(\"Pour toi\"))"
-  ]
- },
- {
-  "key": "Plusieurs en un",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:217: eyebrow: tr(\"Plusieurs en un\"),"
-  ]
- },
- {
   "key": "Combinaisons",
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:218: title: tr(\"Combinaisons\"),",
    "App/Screens/Explore/ExploreView.swift:515: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
-  ]
- },
- {
-  "key": "%@ widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand.",
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:219: subtitle: tr(\"\\(StoreComboCatalog.all.count) widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand.\")"
-  ]
- },
- {
-  "key": "Six widgets assortis",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:250: eyebrow: tr(\"Six widgets assortis\"),"
   ]
  },
  {
@@ -1252,32 +1210,11 @@
   ]
  },
  {
-  "key": "Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:252: subtitle: tr(\"Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets.\")"
-  ]
- },
- {
-  "key": "Sélections",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:283: eyebrow: tr(\"Sélections\"),"
-  ]
- },
- {
   "key": "Collections",
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:284: title: tr(\"Collections\"),",
    "App/Screens/Explore/StoreMagazine.swift:406: .navigationTitle(tr(\"Collections\"))"
-  ]
- },
- {
-  "key": "Des widgets réunis autour d'un thème, d'une taille ou d'un style.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:285: subtitle: tr(\"Des widgets réunis autour d'un thème, d'une taille ou d'un style.\")"
   ]
  },
  {
@@ -1288,38 +1225,10 @@
   ]
  },
  {
-  "key": "Les widgets à essayer en premier.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:306: MagazineHeader(eyebrow: tr(\"Notre sélection\"), title: tr(\"Incontournables\"), subtitle: tr(\"Les widgets à essayer en premier.\"))"
-  ]
- },
- {
   "key": "Notre sélection",
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:306: MagazineHeader(eyebrow: tr(\"Notre sélection\"), title: tr(\"Incontournables\"), subtitle: tr(\"Les widgets à essayer en premier.\"))"
-  ]
- },
- {
-  "key": "D'un coup d'œil, sans déverrouiller ton iPhone.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:325: MagazineHeader(eyebrow: tr(\"Sous l'heure\"), title: tr(\"Écran verrouillé\"), subtitle: tr(\"D'un coup d'œil, sans déverrouiller ton iPhone.\"))"
-  ]
- },
- {
-  "key": "Sous l'heure",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:325: MagazineHeader(eyebrow: tr(\"Sous l'heure\"), title: tr(\"Écran verrouillé\"), subtitle: tr(\"D'un coup d'œil, sans déverrouiller ton iPhone.\"))"
-  ]
- },
- {
-  "key": "12 styles",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:344: MagazineHeader(eyebrow: tr(\"12 styles\"), title: tr(\"Styles\"), subtitle: tr(\"Touche un style pour voir tous ses widgets.\"))"
   ]
  },
  {
@@ -1335,13 +1244,6 @@
   "uses": [
    "App/Screens/Explore/ExploreView.swift:370: MagazineHeader(eyebrow: tr(\"Tout le catalogue\"), title: tr(\"Catégories\"))",
    "App/Screens/Home/MyInfoCenter.swift:178: areaList(followed.isEmpty ? tr(\"Catégories\") : tr(\"Autres catégories\"), others)"
-  ]
- },
- {
-  "key": "Tout le catalogue",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:370: MagazineHeader(eyebrow: tr(\"Tout le catalogue\"), title: tr(\"Catégories\"))"
   ]
  },
  {

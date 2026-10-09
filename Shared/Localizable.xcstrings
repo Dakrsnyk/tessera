@@ -7051,53 +7051,6 @@
         }
       }
     },
-    "%@ widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Widgets, die mehrere vereinen: zwei in einem mittleren, bis zu vier in einem großen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ widgets that combine several: two in a medium, up to four in a large."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ widgets que reúnen varios: dos en uno mediano, hasta cuatro en uno grande."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ widgets qui en réunissent plusieurs : deux dans un moyen, jusqu'à quatre dans un grand."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ widget che ne riuniscono più di uno: due in uno medio, fino a quattro in uno grande."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "複数をまとめた%@個のウィジェット。ミディアムなら2つ、ラージなら最大4つが入ります。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ widgets que reúnem vários: dois em um médio, até quatro em um grande."
-          }
-        }
-      }
-    },
     "%@ widgets · %@": {
       "extractionState": "manual",
       "localizations": {
@@ -12875,53 +12828,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "103 widgets · 12 estilos"
-          }
-        }
-      }
-    },
-    "12 styles": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12 Stile"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12 styles"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12 estilos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12 styles"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12 stili"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12スタイル"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12 estilos"
           }
         }
       }
@@ -50996,53 +50902,6 @@
         }
       }
     },
-    "Clé en main": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sofort startklar"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ready to go"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Listo para usar"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clé en main"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pronto all'uso"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すぐ使える"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pronto para usar"
-          }
-        }
-      }
-    },
     "Clémentine": {
       "extractionState": "manual",
       "localizations": {
@@ -61477,53 +61336,6 @@
         }
       }
     },
-    "D'un coup d'œil, sans déverrouiller ton iPhone.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auf einen Blick, ohne dein iPhone zu entsperren."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "At a glance, without unlocking your iPhone."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De un vistazo, sin desbloquear tu iPhone."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "D'un coup d'œil, sans déverrouiller ton iPhone."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Con un'occhiata, senza sbloccare il tuo iPhone."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "iPhoneのロックを解除せずに、ひと目で確認できます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De relance, sem desbloquear o iPhone."
-          }
-        }
-      }
-    },
     "Dakar": {
       "extractionState": "manual",
       "localizations": {
@@ -66643,53 +66455,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Widgets prontos para usar, pacotes e telas de início completas. Tudo abre no Studio para você personalizar."
-          }
-        }
-      }
-    },
-    "Des widgets réunis autour d'un thème, d'une taille ou d'un style.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widgets, gruppiert nach Thema, Größe oder Stil."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widgets grouped by theme, size or style."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widgets agrupados por tema, tamaño o estilo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Des widgets réunis autour d'un thème, d'une taille ou d'un style."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widget raggruppati per tema, dimensione o stile."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "テーマ、サイズ、スタイルごとにまとめたウィジェットです。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widgets reunidos por tema, tamanho ou estilo."
           }
         }
       }
@@ -86007,53 +85772,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Papel de parede · %@"
-          }
-        }
-      }
-    },
-    "Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Passendes Hintergrundbild, Widgets und Sperrbildschirm, in wenigen Taps eingerichtet."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Matching wallpaper, widgets and Lock Screen, set up in a few taps."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fondo de pantalla, widgets y pantalla bloqueada a juego, instalados en unos toques."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fond d'écran, widgets et écran verrouillé assortis, installés en quelques touches."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sfondo, widget e schermata di blocco coordinati, installati in pochi tocchi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "揃いの壁紙、ウィジェット、ロック画面を、数回のタップでセットアップできます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Papel de parede, widgets e Tela Bloqueada combinando, instalados em poucos toques."
           }
         }
       }
@@ -113737,53 +113455,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Os widgets que os exibem na sua Tela de Início voltarão ao modelo padrão."
-          }
-        }
-      }
-    },
-    "Les widgets à essayer en premier.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Widgets zum Ausprobieren für den Anfang."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The widgets to try first."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los widgets para probar primero."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les widgets à essayer en premier."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I widget da provare per primi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "まず試したいウィジェットです。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os widgets para experimentar primeiro."
           }
         }
       }
@@ -147346,53 +147017,6 @@
         }
       }
     },
-    "Plusieurs en un": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mehrere in einem"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Several in one"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Varios en uno"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plusieurs en un"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Più in uno"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1つで複数"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vários em um"
-          }
-        }
-      }
-    },
     "Plusieurs espaces réunis, selon le moment de la journée.": {
       "extractionState": "manual",
       "localizations": {
@@ -175546,53 +175170,6 @@
         }
       }
     },
-    "Selon tes centres d'intérêt": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Passend zu deinen Interessen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Based on your interests"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Según tus intereses"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Selon tes centres d'intérêt"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In base ai tuoi interessi"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "あなたの興味に合わせて"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De acordo com seus interesses"
-          }
-        }
-      }
-    },
     "Sem. dernière : %@ kg (%@)": {
       "extractionState": "manual",
       "localizations": {
@@ -175965,53 +175542,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Semana de estudos"
-          }
-        }
-      }
-    },
-    "Semaine du %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Woche vom %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Week of %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Semana del %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Semaine du %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settimana del %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@の週"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Semana de %@"
           }
         }
       }
@@ -177849,53 +177379,6 @@
         }
       }
     },
-    "Six widgets assortis": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sechs passende Widgets"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Six matching widgets"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seis widgets a juego"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Six widgets assortis"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sei widget coordinati"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "おそろいの6ウィジェット"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seis widgets combinando"
-          }
-        }
-      }
-    },
     "Six widgets assortis, dans le même style, ajoutés d'une touche à Mes widgets.": {
       "extractionState": "manual",
       "localizations": {
@@ -179490,53 +178973,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fonte: demonstrações financeiras registradas na SEC (EDGAR)"
-          }
-        }
-      }
-    },
-    "Sous l'heure": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unter der Uhrzeit"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Under the clock"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bajo la hora"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sous l'heure"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sotto l'ora"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "時刻の下"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abaixo da hora"
           }
         }
       }
@@ -184942,53 +184378,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Selecionar"
-          }
-        }
-      }
-    },
-    "Sélections": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auswahl"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Picks"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Selecciones"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sélections"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Selezioni"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セレクション"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seleções"
           }
         }
       }
@@ -201302,53 +200691,6 @@
         }
       }
     },
-    "Tout le catalogue": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der ganze Katalog"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The full catalog"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todo el catálogo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout le catalogue"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutto il catalogo"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カタログ全体"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todo o catálogo"
-          }
-        }
-      }
-    },
     "Tout le ciel": {
       "extractionState": "manual",
       "localizations": {
@@ -204823,53 +204165,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Um estilo muda a aparência e a composição: disposição, formas, texto, ícones, sombra. Suas cores permanecem."
-          }
-        }
-      }
-    },
-    "Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Stil, eine Farbe, sechs Widgets – mit einem Tipp zu Meine Widgets hinzugefügt."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One style, one color, six widgets added to My widgets in one tap."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un estilo, un color, seis widgets añadidos a Mis widgets con un toque."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un style, une couleur, six widgets ajoutés d'une touche à Mes widgets."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uno stile, un colore, sei widget aggiunti a I miei widget con un tocco."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1つのスタイル、1つの色、6つのウィジェットを、ワンタップでマイウィジェットに追加できます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um estilo, uma cor, seis widgets adicionados a Meus widgets com um toque."
           }
         }
       }

@@ -297,13 +297,6 @@
   ]
  },
  {
-  "key": "Semaine du %@",
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:365: MagazineHeader(eyebrow: tr(\"Semaine du \\(Fmt.shortDay(monday))\"), title: tr(\"À découvrir cette semaine\"))"
-  ]
- },
- {
   "key": "À découvrir cette semaine",
   "placeholders": 0,
   "uses": [
