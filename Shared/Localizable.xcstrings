@@ -44792,53 +44792,6 @@
         }
       }
     },
-    "Ce qui vient et l'avancement de ton projet.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was ansteht und der Fortschritt deines Projekts."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What's next and your project's progress."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lo que viene y el avance de tu proyecto."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce qui vient et l'avancement de ton projet."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cosa arriva e l'avanzamento del tuo progetto."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "次の予定とプロジェクトの進み具合。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que vem aí e o andamento do seu projeto."
-          }
-        }
-      }
-    },
     "Ce soir": {
       "extractionState": "manual",
       "localizations": {
@@ -53295,6 +53248,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hodômetro"
+          }
+        }
+      }
+    },
+    "Compteur, focus, échéance et priorités.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zähler, Fokus, Frist und Prioritäten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Counter, focus, deadline and priorities."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contador, enfoque, fecha límite y prioridades."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compteur, focus, échéance et priorités."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contatore, focus, scadenza e priorità."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カウンター、集中、締め切り、優先事項。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contador, foco, prazo e prioridades."
           }
         }
       }
@@ -102320,53 +102320,6 @@
         }
       }
     },
-    "L'année en points et ton âge qui avance.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Jahr in Punkten und dein Alter, das voranschreitet."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The year in dots and your age moving on."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El año en puntos y tu edad que avanza."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'année en points et ton âge qui avance."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'anno a punti e la tua età che avanza."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ドットで見る1年と、進んでいく年齢。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O ano em pontos e sua idade avançando."
-          }
-        }
-      }
-    },
     "L'argent qu'il te reste à dépenser ce mois-ci, et par jour.": {
       "extractionState": "manual",
       "localizations": {
@@ -109088,49 +109041,49 @@
         }
       }
     },
-    "Le mois, ton anniversaire et le prochain jour férié.": {
+    "Le mois, ton compte à rebours et l'année en points.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Monat, dein Geburtstag und der nächste Feiertag."
+            "value": "Der Monat, dein Countdown und das Jahr in Punkten."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The month, your birthday and the next holiday."
+            "value": "The month, your countdown and the year in dots."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El mes, tu cumpleaños y el próximo festivo."
+            "value": "El mes, tu cuenta atrás y el año en puntos."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le mois, ton anniversaire et le prochain jour férié."
+            "value": "Le mois, ton compte à rebours et l'année en points."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il mese, il tuo compleanno e la prossima festività."
+            "value": "Il mese, il tuo conto alla rovescia e l'anno a punti."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "今月、誕生日、次の祝日。"
+            "value": "今月、カウントダウン、ドットで見る1年。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O mês, seu aniversário e o próximo feriado."
+            "value": "O mês, sua contagem regressiva e o ano em pontos."
           }
         }
       }
@@ -132349,53 +132302,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anote um gasto, veja as contas que vêm por aí."
-          }
-        }
-      }
-    },
-    "Note, compteur, focus et échéance.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notiz, Zähler, Fokus und Frist."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Note, counter, focus and deadline."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nota, contador, enfoque y vencimiento."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Note, compteur, focus et échéance."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nota, contatore, focus e scadenza."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メモ、カウンター、集中、期限。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nota, contador, foco e prazo."
           }
         }
       }
@@ -186685,49 +186591,49 @@
         }
       }
     },
-    "Ta liste de suivi, la crypto et le marché.": {
+    "Ta liste de suivi, ta plus forte variation et ta répartition.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deine Watchlist, Krypto und der Markt."
+            "value": "Deine Watchlist, deine größte Bewegung und deine Aufteilung."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your watchlist, crypto and the market."
+            "value": "Your watchlist, your biggest mover and your allocation."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tu lista de seguimiento, las cripto y el mercado."
+            "value": "Tu lista de seguimiento, tu mayor variación y tu distribución."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ta liste de suivi, la crypto et le marché."
+            "value": "Ta liste de suivi, ta plus forte variation et ta répartition."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La tua watchlist, le cripto e il mercato."
+            "value": "La tua watchlist, la tua variazione più forte e la tua ripartizione."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ウォッチリスト、暗号資産、市場。"
+            "value": "ウォッチリスト、最大の値動き、資産配分。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sua lista de acompanhamento, cripto e o mercado."
+            "value": "Sua lista de acompanhamento, sua maior variação e sua alocação."
           }
         }
       }
@@ -192607,6 +192513,100 @@
         }
       }
     },
+    "Tes tâches et l'avancement de ton projet.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Aufgaben und der Fortschritt deines Projekts."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your tasks and your project's progress."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus tareas y el avance de tu proyecto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes tâches et l'avancement de ton projet."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le tue attività e l'avanzamento del tuo progetto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクとプロジェクトの進み具合。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas tarefas e o andamento do seu projeto."
+          }
+        }
+      }
+    },
+    "Tes tâches et ta prochaine échéance.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Aufgaben und deine nächste Frist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your tasks and your next deadline."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus tareas y tu próxima fecha límite."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes tâches et ta prochaine échéance."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le tue attività e la tua prossima scadenza."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクと次の締め切り。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas tarefas e seu próximo prazo."
+          }
+        }
+      }
+    },
     "Tes tâches, ton top 3 et une séance de focus.": {
       "extractionState": "manual",
       "localizations": {
@@ -197260,49 +197260,49 @@
         }
       }
     },
-    "Ton prochain compte à rebours et le prochain anniversaire.": {
+    "Ton prochain anniversaire et le prochain jour férié.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dein nächster Countdown und der nächste Geburtstag."
+            "value": "Dein nächster Geburtstag und der nächste Feiertag."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your next countdown and the next birthday."
+            "value": "Your next birthday and the next public holiday."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tu próxima cuenta atrás y el próximo cumpleaños."
+            "value": "Tu próximo cumpleaños y el próximo día festivo."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ton prochain compte à rebours et le prochain anniversaire."
+            "value": "Ton prochain anniversaire et le prochain jour férié."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il prossimo conto alla rovescia e il prossimo compleanno."
+            "value": "Il tuo prossimo compleanno e il prossimo giorno festivo."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "次のカウントダウンと次の誕生日。"
+            "value": "次の誕生日と次の祝日。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sua próxima contagem regressiva e o próximo aniversário."
+            "value": "Seu próximo aniversário e o próximo feriado."
           }
         }
       }
@@ -197350,53 +197350,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua próxima aula, o horário e a sala."
-          }
-        }
-      }
-    },
-    "Ton prochain rendez-vous et tes tâches.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dein nächster Termin und deine Aufgaben."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your next appointment and your tasks."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu próxima cita y tus tareas."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ton prochain rendez-vous et tes tâches."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il prossimo appuntamento e le tue attività."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "次の予定とタスク。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seu próximo compromisso e suas tarefas."
           }
         }
       }
@@ -198102,6 +198055,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seu voo e seu hotel, lado a lado."
+          }
+        }
+      }
+    },
+    "Ton âge qui avance et ton prochain anniversaire.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein wachsendes Alter und dein nächster Geburtstag."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your age ticking up and your next birthday."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu edad que avanza y tu próximo cumpleaños."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton âge qui avance et ton prochain anniversaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua età che avanza e il tuo prossimo compleanno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "進んでいく年齢と次の誕生日。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua idade avançando e seu próximo aniversário."
           }
         }
       }
@@ -205767,49 +205767,49 @@
         }
       }
     },
-    "Une note et un compteur sous les yeux.": {
+    "Une note et ton prochain rendez-vous sous les yeux.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Eine Notiz und ein Zähler im Blick."
+            "value": "Eine Notiz und dein nächster Termin im Blick."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A note and a counter in sight."
+            "value": "A note and your next appointment in sight."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Una nota y un contador a la vista."
+            "value": "Una nota y tu próxima cita a la vista."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une note et un compteur sous les yeux."
+            "value": "Une note et ton prochain rendez-vous sous les yeux."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Una nota e un contatore sotto gli occhi."
+            "value": "Una nota e il tuo prossimo appuntamento sotto gli occhi."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "メモとカウンターをいつも目の前に。"
+            "value": "メモと次の予定をひと目で。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Uma nota e um contador à vista."
+            "value": "Uma nota e seu próximo compromisso à vista."
           }
         }
       }

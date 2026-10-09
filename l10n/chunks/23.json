@@ -1,0 +1,58 @@
+[
+ {
+  "key": "Ton prochain anniversaire et le prochain jour férié.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain anniversaire et le prochain jour férié.\"), .blossom, \"D13F72\","
+  ]
+ },
+ {
+  "key": "Ton âge qui avance et ton prochain anniversaire.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"Ton âge qui avance et ton prochain anniversaire.\"), .matteBlack, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Une note et ton prochain rendez-vous sous les yeux.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:135: combo(\"note-compteur\", tr(\"Pense-bête\"), tr(\"Une note et ton prochain rendez-vous sous les yeux.\"), .paper, \"2F8F7A\","
+  ]
+ },
+ {
+  "key": "Tes tâches et ta prochaine échéance.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Tes tâches et ta prochaine échéance.\"), .forest, \"2B7A4B\","
+  ]
+ },
+ {
+  "key": "Tes tâches et l'avancement de ton projet.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:165: combo(\"productivite-totale\", tr(\"Bureau\"), tr(\"Tes tâches et l'avancement de ton projet.\"), .matteBlack, \"F2A33A\","
+  ]
+ },
+ {
+  "key": "Compteur, focus, échéance et priorités.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Compteur, focus, échéance et priorités.\"), .paper, \"2F8F7A\","
+  ]
+ },
+ {
+  "key": "Ta liste de suivi, ta plus forte variation et ta répartition.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, ta plus forte variation et ta répartition.\"), .matteBlack, \"22D3EE\","
+  ]
+ },
+ {
+  "key": "Le mois, ton compte à rebours et l'année en points.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton compte à rebours et l'année en points.\"), .forest, \"2B7A4B\","
+  ]
+ }
+]

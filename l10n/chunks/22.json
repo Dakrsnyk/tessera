@@ -77,13 +77,6 @@
   ]
  },
  {
-  "key": "Ce qui vient et l'avancement de ton projet.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:165: combo(\"productivite-totale\", tr(\"Bureau\"), tr(\"Ce qui vient et l'avancement de ton projet.\"), .matteBlack, \"F2A33A\","
-  ]
- },
- {
   "key": "Cerisier",
   "placeholders": 0,
   "uses": [
@@ -154,13 +147,6 @@
   ]
  },
  {
-  "key": "L'année en points et ton âge qui avance.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"L'année en points et ton âge qui avance.\"), .matteBlack, \"F2A33A\","
-  ]
- },
- {
   "key": "L'heure et la phase de la lune.",
   "placeholders": 0,
   "uses": [
@@ -224,13 +210,6 @@
   ]
  },
  {
-  "key": "Le mois, ton anniversaire et le prochain jour férié.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton anniversaire et le prochain jour férié.\"), .forest, \"2B7A4B\","
-  ]
- },
- {
   "key": "Le même widget dans chaque style : choisis l'allure qui te plaît.",
   "placeholders": 0,
   "uses": [
@@ -284,13 +263,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Theme/Theme.swift:498: id: .matteBlack, name: tr(\"Noir mat\"), tagline: tr(\"Noir profond, fil fin, rien de trop\"), isPremium: true,"
-  ]
- },
- {
-  "key": "Note, compteur, focus et échéance.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Note, compteur, focus et échéance.\"), .paper, \"2F8F7A\","
   ]
  },
  {
@@ -375,13 +347,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Theme/Theme.swift:528: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
-  ]
- },
- {
-  "key": "Ta liste de suivi, la crypto et le marché.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, la crypto et le marché.\"), .matteBlack, \"22D3EE\","
   ]
  },
  {
@@ -476,20 +441,6 @@
   ]
  },
  {
-  "key": "Ton prochain compte à rebours et le prochain anniversaire.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain compte à rebours et le prochain anniversaire.\"), .blossom, \"D13F72\","
-  ]
- },
- {
-  "key": "Ton prochain rendez-vous et tes tâches.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Ton prochain rendez-vous et tes tâches.\"), .forest, \"2B7A4B\","
-  ]
- },
- {
   "key": "Ton taux de réussite et ta série.",
   "placeholders": 0,
   "uses": [
@@ -515,13 +466,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:51: case .widgets: tr(\"Un widget à la fois, rangé par thème : temps, santé, argent…\")"
-  ]
- },
- {
-  "key": "Une note et un compteur sous les yeux.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:135: combo(\"note-compteur\", tr(\"Pense-bête\"), tr(\"Une note et un compteur sous les yeux.\"), .paper, \"2F8F7A\","
   ]
  },
  {

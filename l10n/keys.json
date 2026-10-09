@@ -4602,7 +4602,7 @@
  "Bientôt": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain compte à rebours et le prochain anniversaire.\"), .blossom, \"D13F72\","
+   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain anniversaire et le prochain jour férié.\"), .blossom, \"D13F72\","
   ]
  },
  "Bienvenue !": {
@@ -5179,7 +5179,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:345: id: \"bureau\", name: tr(\"Bureau\"), tagline: tr(\"Ventes, MRR et portefeuille, façon art déco.\"),",
-   "App/Screens/Explore/StoreCombos.swift:165: combo(\"productivite-totale\", tr(\"Bureau\"), tr(\"Ce qui vient et l'avancement de ton projet.\"), .matteBlack, \"F2A33A\","
+   "App/Screens/Explore/StoreCombos.swift:165: combo(\"productivite-totale\", tr(\"Bureau\"), tr(\"Tes tâches et l'avancement de ton projet.\"), .matteBlack, \"F2A33A\","
   ]
  },
  "Burpees": {
@@ -6010,13 +6010,7 @@
  "Ce qui vient": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Ton prochain rendez-vous et tes tâches.\"), .forest, \"2B7A4B\","
-  ]
- },
- "Ce qui vient et l'avancement de ton projet.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:165: combo(\"productivite-totale\", tr(\"Bureau\"), tr(\"Ce qui vient et l'avancement de ton projet.\"), .matteBlack, \"F2A33A\","
+   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Tes tâches et ta prochaine échéance.\"), .forest, \"2B7A4B\","
   ]
  },
  "Ce soir": {
@@ -7143,6 +7137,12 @@
    "App/Screens/Home/MyInfoSection.swift:57: add(\"km\", \"gauge.with.dots.needle.33percent\", tr(\"Compteur\"), CarMath.odometer(car).map { tr(\"\\(TF.int($0)) km\") })",
    "App/Screens/MiniApps/Car/CarApp.swift:109: Text(tr(\"Compteur\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)",
    "App/Screens/MiniApps/Car/CarPages.swift:90: MiniStat(title: tr(\"Compteur\"), value: CarMath.odometer(state).map { Fmt.number(Int($0)) } ?? \"–\", unit: tr(\"km\"))"
+  ]
+ },
+ "Compteur, focus, échéance et priorités.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Compteur, focus, échéance et priorités.\"), .paper, \"2F8F7A\","
   ]
  },
  "Compteurs": {
@@ -10609,7 +10609,7 @@
  "Esprit clair": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Note, compteur, focus et échéance.\"), .paper, \"2F8F7A\","
+   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Compteur, focus, échéance et priorités.\"), .paper, \"2F8F7A\","
   ]
  },
  "Essai gratuit": {
@@ -13732,12 +13732,6 @@
    "Shared/Model/KindCatalog.swift:120: KindInfo(kind: .yearDots, title: tr(\"L'année en points\"), summary: tr(\"Chaque jour de l'année est un point. Regarde-la avancer.\"), category: .time, symbol: \"circle.grid.3x3.fill\", isPremium: true, fam"
   ]
  },
- "L'année en points et ton âge qui avance.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"L'année en points et ton âge qui avance.\"), .matteBlack, \"F2A33A\","
-  ]
- },
  "L'argent qu'il te reste à dépenser ce mois-ci, et par jour.": {
   "placeholders": 0,
   "uses": [
@@ -14546,7 +14540,7 @@
  "Le fil des ans": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"L'année en points et ton âge qui avance.\"), .matteBlack, \"F2A33A\","
+   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"Ton âge qui avance et ton prochain anniversaire.\"), .matteBlack, \"F2A33A\","
   ]
  },
  "Le fond du style choisi, clair ou sombre selon le style.": {
@@ -14603,10 +14597,10 @@
    "Shared/Model/KindCatalog.swift:116: KindInfo(kind: .calendar, title: tr(\"Calendrier\"), summary: tr(\"Le mois en un coup d'œil, aujourd'hui mis en avant.\"), category: .time, symbol: \"calendar\", isPremium: false, families: SML, keywords: ["
   ]
  },
- "Le mois, ton anniversaire et le prochain jour férié.": {
+ "Le mois, ton compte à rebours et l'année en points.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton anniversaire et le prochain jour férié.\"), .forest, \"2B7A4B\","
+   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton compte à rebours et l'année en points.\"), .forest, \"2B7A4B\","
   ]
  },
  "Le monde et ma semaine": {
@@ -15063,7 +15057,7 @@
  "Les marchés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, la crypto et le marché.\"), .matteBlack, \"22D3EE\","
+   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, ta plus forte variation et ta répartition.\"), .matteBlack, \"22D3EE\","
   ]
  },
  "Les montants sont répartis heure par heure : le widget montre ce qui s'accumule au fil de la journée.": {
@@ -16245,7 +16239,7 @@
  "Mes dates": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton anniversaire et le prochain jour férié.\"), .forest, \"2B7A4B\","
+   "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton compte à rebours et l'année en points.\"), .forest, \"2B7A4B\","
   ]
  },
  "Mes données": {
@@ -17704,12 +17698,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:93: combo(\"depense-factures\", tr(\"Dépense et factures\"), tr(\"Note une dépense, vois les factures qui arrivent.\"), .colorful, \"FF6B57\","
-  ]
- },
- "Note, compteur, focus et échéance.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:167: combo(\"esprit-clair\", tr(\"Esprit clair\"), tr(\"Note, compteur, focus et échéance.\"), .paper, \"2F8F7A\","
   ]
  },
  "Noter Tessera": {
@@ -19222,7 +19210,7 @@
  "Pense-bête": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:135: combo(\"note-compteur\", tr(\"Pense-bête\"), tr(\"Une note et un compteur sous les yeux.\"), .paper, \"2F8F7A\",",
+   "App/Screens/Explore/StoreCombos.swift:135: combo(\"note-compteur\", tr(\"Pense-bête\"), tr(\"Une note et ton prochain rendez-vous sous les yeux.\"), .paper, \"2F8F7A\",",
    "Shared/Model/Templates.swift:98: WidgetTemplate(id: \"note-reminder\", name: tr(\"Pense-bête\"), kind: .note, themeID: .minimal, accentHex: \"F2A33A\","
   ]
  },
@@ -25052,10 +25040,10 @@
    "Shared/Model/KindCatalog.swift:244: KindInfo(kind: .timetable, title: tr(\"Horaire\"), summary: tr(\"Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.\"), category: .student, symbol: \"list.bullet.rectangle.portrait\", i"
   ]
  },
- "Ta liste de suivi, la crypto et le marché.": {
+ "Ta liste de suivi, ta plus forte variation et ta répartition.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, la crypto et le marché.\"), .matteBlack, \"22D3EE\","
+   "App/Screens/Explore/StoreCombos.swift:179: combo(\"marches\", tr(\"Les marchés\"), tr(\"Ta liste de suivi, ta plus forte variation et ta répartition.\"), .matteBlack, \"22D3EE\","
   ]
  },
  "Ta liste du jour, que tu coches directement sur l'écran d'accueil.": {
@@ -25838,6 +25826,18 @@
    "App/Screens/Content/TasksView.swift:26: Text(tr(\"Tes tâches apparaîtront dans le widget, et tu pourras les cocher directement depuis l'écran d'accueil.\"))"
   ]
  },
+ "Tes tâches et l'avancement de ton projet.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:165: combo(\"productivite-totale\", tr(\"Bureau\"), tr(\"Tes tâches et l'avancement de ton projet.\"), .matteBlack, \"F2A33A\","
+  ]
+ },
+ "Tes tâches et ta prochaine échéance.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Tes tâches et ta prochaine échéance.\"), .forest, \"2B7A4B\","
+  ]
+ },
  "Tes tâches, ton top 3 et une séance de focus.": {
   "placeholders": 0,
   "uses": [
@@ -26450,22 +26450,16 @@
    "App/Screens/Explore/StoreCombos.swift:227: combo(\"mes-placements\", tr(\"Mes placements\"), tr(\"Ton portefeuille, sa répartition et ce qui bouge.\"), .futuristic, \"8C6CFF\","
   ]
  },
- "Ton prochain compte à rebours et le prochain anniversaire.": {
+ "Ton prochain anniversaire et le prochain jour férié.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain compte à rebours et le prochain anniversaire.\"), .blossom, \"D13F72\","
+   "App/Screens/Explore/StoreCombos.swift:125: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain anniversaire et le prochain jour férié.\"), .blossom, \"D13F72\","
   ]
  },
  "Ton prochain cours, l'heure et la salle.": {
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:237: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM + [rect, inli"
-  ]
- },
- "Ton prochain rendez-vous et tes tâches.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreCombos.swift:137: combo(\"agenda-taches\", tr(\"Ce qui vient\"), tr(\"Ton prochain rendez-vous et tes tâches.\"), .forest, \"2B7A4B\","
   ]
  },
  "Ton prochain voyage": {
@@ -26557,6 +26551,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:153: combo(\"vol-hotel\", tr(\"Réservations\"), tr(\"Ton vol et ton hôtel, côte à côte.\"), .dawn, \"3366FF\","
+  ]
+ },
+ "Ton âge qui avance et ton prochain anniversaire.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreCombos.swift:129: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"Ton âge qui avance et ton prochain anniversaire.\"), .matteBlack, \"F2A33A\","
   ]
  },
  "Ton âge à la décimale près et le chemin vers ton prochain anniversaire.": {
@@ -27578,10 +27578,10 @@
    "Shared/Domains/ExerciseTechniques.swift:352: \"pigeon\": t(tr(\"Une jambe pliée devant toi, tibia au sol, l'autre jambe allongée derrière.\"),"
   ]
  },
- "Une note et un compteur sous les yeux.": {
+ "Une note et ton prochain rendez-vous sous les yeux.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreCombos.swift:135: combo(\"note-compteur\", tr(\"Pense-bête\"), tr(\"Une note et un compteur sous les yeux.\"), .paper, \"2F8F7A\","
+   "App/Screens/Explore/StoreCombos.swift:135: combo(\"note-compteur\", tr(\"Pense-bête\"), tr(\"Une note et ton prochain rendez-vous sous les yeux.\"), .paper, \"2F8F7A\","
   ]
  },
  "Une ombre douce sous les chiffres et les cartes.": {
