@@ -446,7 +446,7 @@ jobs:
         id: marketing
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.MARKETING == 'true'
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 30
         run: |
           set +e
           mkdir -p marketing
@@ -463,31 +463,34 @@ jobs:
           xcrun simctl ui "$DEVICE" appearance light
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4
           xcrun simctl install "$DEVICE" "$APP"
+          # The language of the App Store page (French unless MARKETING_LANG says otherwise).
+          LANG_ARGS=(-AppleLanguages "(${MARKETING_LANG:-fr})" -AppleLocale "${MARKETING_LOCALE:-fr_CA}")
           # The first launch saves the demo data every scene reads.
-          xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen home
+          xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera "${LANG_ARGS[@]}" -screenshotScreen home
           sleep 8
           shot() { # file screen [extra launch arguments]
             xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera 2>/dev/null
-            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera -screenshotScreen "$2" $3 $4
+            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera "${LANG_ARGS[@]}" -screenshotScreen "$2" "${@:3}"
             sleep 7
             xcrun simctl io "$DEVICE" screenshot --type=png "marketing/$1.png"
           }
-          # Scenes drawn entirely by the app.
-          for n in 01 02 10; do shot $n marketing-$n; done
-          # Scenes with a phone: the screen area white then black, for difference matting.
-          for n in 03 04 05 06 07 08 09; do
-            shot $n-white marketing-$n -marketingScreen white
-            shot $n-black marketing-$n -marketingScreen black
+          LINES=()
+          while IFS= read -r line; do LINES+=("$line"); done < <(grep -vE '^[[:space:]]*(#|$)' scripts/marketing_scenes.txt)
+          for line in "${LINES[@]}"; do
+            read -r scene screen <<< "$line"
+            if [ -n "$screen" ]; then
+              # A phone with the real screen: the screen area white then black, for difference matting.
+              shot "$scene-white" "marketing-$scene" -marketingScreen white
+              shot "$scene-black" "marketing-$scene" -marketingScreen black
+            else
+              shot "$scene" "marketing-$scene"
+            fi
           done
           # The real screens that go inside the phones.
-          shot screen-03 editor-v2
-          shot screen-04 space-nutrition
-          shot screen-05 space-fitness
-          shot screen-06 space-business
-          shot screen-07 space-productivity
-          shot screen-08 spaces
-          shot screen-09 store
-          sips -g pixelWidth -g pixelHeight marketing/01.png
+          for screen in $(printf '%s\n' "${LINES[@]}" | awk 'NF > 1 { print $2 }' | sort -u); do
+            shot "screen-$screen" "$screen"
+          done
+          sips -g pixelWidth -g pixelHeight marketing/hero.png
 
       - name: Release build (App Store configuration) without the test unlock
         id: release

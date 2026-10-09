@@ -13114,53 +13114,6 @@
         }
       }
     },
-    "103 widgets · 12 styles": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "103 Widgets · 12 Stile"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "103 widgets · 12 styles"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "103 widgets · 12 estilos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "103 widgets · 12 styles"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "103 widget · 12 stili"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "103 ウィジェット · 12 スタイル"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "103 widgets · 12 estilos"
-          }
-        }
-      }
-    },
     "1RM estimé %@ kg": {
       "extractionState": "manual",
       "localizations": {
@@ -16353,6 +16306,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atividade (passeio, restaurante…)"
+          }
+        }
+      }
+    },
+    "Activité en direct": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live-Aktivität"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live Activity"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actividad en vivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activité en direct"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attività Live"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライブアクティビティ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atividade ao Vivo"
           }
         }
       }
@@ -27966,6 +27966,53 @@
         }
       }
     },
+    "Aucun compte à créer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Konto nötig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No account needed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin cuenta que crear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun compte à créer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun account da creare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アカウント登録不要"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma conta para criar"
+          }
+        }
+      }
+    },
     "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
       "extractionState": "manual",
       "localizations": {
@@ -29090,6 +29137,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhuma nota por enquanto. Cada nota vale uma porcentagem da sua disciplina: o Tessera calcula a média da disciplina e depois sua média geral."
+          }
+        }
+      }
+    },
+    "Aucune pub, aucun suivi": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Werbung, kein Tracking"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No ads, no tracking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin anuncios ni rastreo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune pub, aucun suivi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente pubblicità, niente tracciamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "広告なし、トラッキングなし"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem anúncios, sem rastreamento"
           }
         }
       }
@@ -38917,96 +39011,49 @@
         }
       }
     },
-    "Budget · Entreprise": {
+    "Budget, dépenses, revenus": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Budget · Unternehmen"
+            "value": "Budget, Ausgaben, Einnahmen"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Budget · Business"
+            "value": "Budget, expenses, income"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Presupuesto · Negocio"
+            "value": "Presupuesto, gastos, ingresos"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Budget · Entreprise"
+            "value": "Budget, dépenses, revenus"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Budget · Azienda"
+            "value": "Budget, spese, entrate"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "予算 · ビジネス"
+            "value": "予算、支出、収入"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Orçamento · Negócios"
-          }
-        }
-      }
-    },
-    "Budget, ventes, bénéfice, MRR.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Budget, Verkäufe, Gewinn, MRR."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Budget, sales, profit, MRR."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Presupuesto, ventas, beneficio, MRR."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Budget, ventes, bénéfice, MRR."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Budget, vendite, utile, MRR."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "予算、販売、利益、MRR。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Orçamento, vendas, lucro, MRR."
+            "value": "Orçamento, despesas, receitas"
           }
         }
       }
@@ -42160,6 +42207,53 @@
         }
       }
     },
+    "Calories, macros, code-barres": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalorien, Makros, Barcodes"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calories, macros, barcodes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorías, macros, códigos de barras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calories, macros, code-barres"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorie, macro, codici a barre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カロリー、マクロ、バーコード"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorias, macros, códigos de barras"
+          }
+        }
+      }
+    },
     "Calories, macros, protéines et série de suivi.": {
       "extractionState": "manual",
       "localizations": {
@@ -42297,6 +42391,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Calorias, macros, refeições e registro rápido."
+          }
+        }
+      }
+    },
+    "Calories, protéines, eau, séance.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalorien, Protein, Wasser, Training."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calories, protein, water, workout."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorías, proteínas, agua, entreno."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calories, protéines, eau, séance."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorie, proteine, acqua, allenamento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カロリー、たんぱく質、水分、ワークアウト。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorias, proteínas, água, treino."
           }
         }
       }
@@ -67352,6 +67493,53 @@
         }
       }
     },
+    "Des styles\npour tout.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stile\nfür alles."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A style\nfor everything."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estilos\npara todo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des styles\npour tout."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stili\nper tutto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あらゆる\nスタイルを。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estilos\npara tudo."
+          }
+        }
+      }
+    },
     "Des sélections de widgets autour d'un thème, d'un format ou d'un style.": {
       "extractionState": "manual",
       "localizations": {
@@ -75530,6 +75718,53 @@
         }
       }
     },
+    "Dépenses, revenus, catégories.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgaben, Einnahmen, Kategorien."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expenses, income, categories."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gastos, ingresos, categorías."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépenses, revenus, catégories."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spese, entrate, categorie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出、収入、カテゴリ。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despesas, receitas, categorias."
+          }
+        }
+      }
+    },
     "Dépensé": {
       "extractionState": "manual",
       "localizations": {
@@ -77688,6 +77923,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ela se apoia no antebraço, cotovelo colado ao tronco, mão na altura do queixo."
+          }
+        }
+      }
+    },
+    "Elles nourrissent tes widgets.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie versorgen deine Widgets."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "They power your widgets."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimentan tus widgets."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elles nourrissent tes widgets."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimentano i tuoi widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェットにデータを届けます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elas alimentam seus widgets."
           }
         }
       }
@@ -80837,6 +81119,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "E as fontes Serif e Mono"
+          }
+        }
+      }
+    },
+    "Et sur l'écran verrouillé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Und auf dem Sperrbildschirm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "And on the Lock Screen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Y en la pantalla bloqueada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Et sur l'écran verrouillé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E sulla schermata di blocco."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロック画面にも。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E na Tela Bloqueada."
           }
         }
       }
@@ -96868,6 +97197,100 @@
         }
       }
     },
+    "Horaire, tâches, habitudes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stundenplan, Aufgaben, Gewohnheiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule, tasks, habits"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horario, tareas, hábitos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horaire, tâches, habitudes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orario, attività, abitudini"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間割、タスク、習慣"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário, tarefas, hábitos"
+          }
+        }
+      }
+    },
+    "Horaire, tâches, habitudes, focus.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stundenplan, Aufgaben, Gewohnheiten, Fokus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule, tasks, habits, focus."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horario, tareas, hábitos, foco."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horaire, tâches, habitudes, focus."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orario, attività, abitudini, focus."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間割、タスク、習慣、集中。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário, tarefas, hábitos, foco."
+          }
+        }
+      }
+    },
     "Horizontal": {
       "extractionState": "manual",
       "localizations": {
@@ -104012,19 +104435,19 @@
         }
       }
     },
-    "L'essentiel,\nen un regard.": {
+    "L'essentiel,\nd'un regard.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das Wesentliche,\nauf einen Blick."
+            "value": "Das Wichtigste\nauf einen Blick."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The essentials,\nat a glance."
+            "value": "What matters,\nat a glance."
           }
         },
         "es": {
@@ -104036,25 +104459,25 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L'essentiel,\nen un regard."
+            "value": "L'essentiel,\nd'un regard."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "L'essenziale,\nin un colpo d'occhio."
+            "value": "L'essenziale,\na colpo d'occhio."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "大事なことを、\nひと目で。"
+            "value": "大切なことを\nひと目で。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O essencial,\nem um relance."
+            "value": "O essencial,\nnum relance."
           }
         }
       }
@@ -137476,53 +137899,6 @@
         }
       }
     },
-    "Nutrition, sport, études, voyage, auto…": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ernährung, Sport, Studium, Reisen, Auto…"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrition, fitness, studies, travel, car…"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrición, deporte, estudios, viajes, auto…"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrition, sport, études, voyage, auto…"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alimentazione, sport, studi, viaggi, auto…"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "栄養、スポーツ、学習、旅行、車…"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrição, esporte, estudos, viagens, carro…"
-          }
-        }
-      }
-    },
     "Nébuleuse": {
       "extractionState": "manual",
       "localizations": {
@@ -141655,6 +142031,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pacotes temáticos, coleções de Halloween e Natal, Estudante, Esportista, Viajante…"
+          }
+        }
+      }
+    },
+    "Packs, collections, fonds d'écran.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pakete, Kollektionen, Hintergründe."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs, collections, wallpapers."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs, colecciones, fondos de pantalla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs, collections, fonds d'écran."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pack, collezioni, sfondi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パック、コレクション、壁紙。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pacotes, coleções, papéis de parede."
           }
         }
       }
@@ -147910,6 +148333,53 @@
         }
       }
     },
+    "Plein, entretien, échéances": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanken, Wartung, Fristen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuel, service, deadlines"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combustible, mantenimiento, plazos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plein, entretien, échéances"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rifornimenti, manutenzione, scadenze"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "給油、整備、期限"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abastecimento, revisão, prazos"
+          }
+        }
+      }
+    },
     "Pleine": {
       "extractionState": "manual",
       "localizations": {
@@ -149504,6 +149974,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mais infos, menos espaço"
+          }
+        }
+      }
+    },
+    "Plus de 100 widgets": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Über 100 Widgets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Over 100 widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más de 100 widgets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus de 100 widgets"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oltre 100 widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100種類以上のウィジェット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais de 100 widgets"
           }
         }
       }
@@ -158109,6 +158626,53 @@
         }
       }
     },
+    "Programme, budget, valise": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Programm, Budget, Koffer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Itinerary, budget, packing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Itinerario, presupuesto, maleta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Programme, budget, valise"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Programma, budget, valigia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "旅程、予算、荷物"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roteiro, orçamento, mala"
+          }
+        }
+      }
+    },
     "Progresse en amplitude petit à petit.": {
       "extractionState": "manual",
       "localizations": {
@@ -159045,6 +159609,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Previsão durante a sua estadia"
+          }
+        }
+      }
+    },
+    "Prévisions, pluie, soleil": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorhersage, Regen, Sonne"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forecast, rain, sun"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pronóstico, lluvia, sol"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévisions, pluie, soleil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previsioni, pioggia, sole"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予報、雨、日の出・日の入り"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previsão, chuva, sol"
           }
         }
       }
@@ -165300,6 +165911,53 @@
         }
       }
     },
+    "Repas, séance, eau, pas, météo.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahlzeiten, Training, Wasser, Schritte, Wetter."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meals, workout, water, steps, weather."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comidas, entreno, agua, pasos, clima."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repas, séance, eau, pas, météo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasti, allenamento, acqua, passi, meteo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食事、ワークアウト、水分、歩数、天気。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeições, treino, água, passos, clima."
+          }
+        }
+      }
+    },
     "Repos": {
       "extractionState": "manual",
       "localizations": {
@@ -165625,6 +166283,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Descanso até %@"
+          }
+        }
+      }
+    },
+    "Repos, séries,\ncharges.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause, Sätze,\nGewichte."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rest, sets,\nweights."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descanso, series,\ncargas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repos, séries,\ncharges."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recupero, serie,\ncarichi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "休憩、セット、\n重量。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descanso, séries,\ncargas."
           }
         }
       }
@@ -176627,6 +177332,53 @@
         }
       }
     },
+    "Sans déverrouiller ton iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne dein iPhone zu entsperren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without unlocking your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin desbloquear tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans déverrouiller ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza sbloccare l'iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhoneのロックを解除せずに。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem desbloquear o iPhone."
+          }
+        }
+      }
+    },
     "Sans limite": {
       "extractionState": "manual",
       "localizations": {
@@ -177896,49 +178648,96 @@
         }
       }
     },
-    "Scanne. Note. Suis tes macros.": {
+    "Scanne un code-barres, c'est noté.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scannen. Eintragen. Makros im Blick."
+            "value": "Barcode scannen, schon notiert."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scan. Log. Track your macros."
+            "value": "Scan a barcode and it's logged."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Escanea. Anota. Sigue tus macros."
+            "value": "Escanea un código de barras y listo."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scanne. Note. Suis tes macros."
+            "value": "Scanne un code-barres, c'est noté."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scansiona. Registra. Segui i tuoi macro."
+            "value": "Scansiona un codice a barre ed è fatto."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "スキャン。記録。マクロを管理。"
+            "value": "バーコードを読み取るだけで記録。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Escaneie. Registre. Acompanhe seus macros."
+            "value": "Escaneie um código de barras e pronto."
+          }
+        }
+      }
+    },
+    "Scanne, note, suis tes macros.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scannen, notieren, Makros verfolgen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan, log, track your macros."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanea, registra, sigue tus macros."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanne, note, suis tes macros."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scansiona, annota, segui i macro."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み取って、記録して、マクロを管理。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escaneie, registre, acompanhe seus macros."
           }
         }
       }
@@ -186544,6 +187343,53 @@
         }
       }
     },
+    "Sur ton écran\nd'accueil.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf deinem\nHome-Bildschirm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On your\nHome Screen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En tu pantalla\nde inicio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur ton écran\nd'accueil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sulla tua\nschermata Home."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホーム画面に。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na sua Tela\nde Início."
+          }
+        }
+      }
+    },
     "Sur ton écran d'accueil": {
       "extractionState": "manual",
       "localizations": {
@@ -187672,53 +188518,6 @@
         }
       }
     },
-    "Séance, repos et records.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Training, Pausen und Rekorde."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Workouts, rest, and records."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entrenamiento, descanso y récords."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Séance, repos et records."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allenamento, recupero e record."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ワークアウト、休憩、記録更新。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Treino, descanso e recordes."
-          }
-        }
-      }
-    },
     "Séance, régularité, calories et protéines réunies.": {
       "extractionState": "manual",
       "localizations": {
@@ -188044,6 +188843,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Treinos por semana"
+          }
+        }
+      }
+    },
+    "Séances, repos et records.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trainings, Pausen und Rekorde."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workouts, rest and records."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrenos, descansos y récords."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Séances, repos et records."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allenamenti, recuperi e record."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウト、休憩、自己ベスト。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treinos, descansos e recordes."
+          }
+        }
+      }
+    },
+    "Séances, repos, records": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trainings, Pausen, Rekorde"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workouts, rest, records"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrenos, descansos, récords"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Séances, repos, records"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allenamenti, recuperi, record"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウト、休憩、自己ベスト"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treinos, descansos, recordes"
           }
         }
       }
@@ -189740,49 +190633,49 @@
         }
       }
     },
-    "Ta journée,\nbien en main.": {
+    "Ta journée,\nen un écran.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dein Tag,\nfest im Griff."
+            "value": "Dein Tag\nauf einen Blick."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your day,\nunder control."
+            "value": "Your day,\non one screen."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tu día,\nbajo control."
+            "value": "Tu día,\nen una pantalla."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ta journée,\nbien en main."
+            "value": "Ta journée,\nen un écran."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La tua giornata,\nsotto controllo."
+            "value": "La tua giornata,\nin una schermata."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "1日を、\nしっかり管理。"
+            "value": "一日を\nひとつの画面に。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seu dia,\nsob controle."
+            "value": "Seu dia,\nem uma tela."
           }
         }
       }
@@ -190445,6 +191338,53 @@
         }
       }
     },
+    "Ta semaine,\nbien en main.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Woche\nim Griff."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your week,\nunder control."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu semana,\nbajo control."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta semaine,\nbien en main."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua settimana,\nsotto controllo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一週間を\nしっかり管理。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua semana,\nsob controle."
+          }
+        }
+      }
+    },
     "Ta semaine, ton mois ou ta journée entière.": {
       "extractionState": "manual",
       "localizations": {
@@ -190539,6 +191479,53 @@
         }
       }
     },
+    "Ta séance,\nen direct.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Training,\nlive."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your workout,\nlive."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu entreno,\nen vivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta séance,\nen direct."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo allenamento,\nin diretta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウトを\nライブで。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu treino,\nao vivo."
+          }
+        }
+      }
+    },
     "Ta valeur nette et tes abonnements.": {
       "extractionState": "manual",
       "localizations": {
@@ -190582,6 +191569,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seu patrimônio líquido e suas assinaturas."
+          }
+        }
+      }
+    },
+    "Ta vie,\nen widgets.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Leben\nin Widgets."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your life,\nin widgets."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu vida,\nen widgets."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta vie,\nen widgets."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua vita,\nin widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎日を\nウィジェットで。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua vida,\nem widgets."
           }
         }
       }
@@ -193500,6 +194534,53 @@
         }
       }
     },
+    "Tes calories,\nen un regard.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Kalorien\nauf einen Blick."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your calories,\nat a glance."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus calorías,\nde un vistazo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes calories,\nen un regard."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le tue calorie,\na colpo d'occhio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カロリーを\nひと目で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas calorias,\nnum relance."
+          }
+        }
+      }
+    },
     "Tes cours de la semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -193782,6 +194863,53 @@
         }
       }
     },
+    "Tes données\nrestent à toi.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Daten\nbleiben deine."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your data\nstays yours."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus datos\nson tuyos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes données\nrestent à toi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi dati\nrestano tuoi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "データは\nあなただけのもの。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus dados\nsão só seus."
+          }
+        }
+      }
+    },
     "Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.": {
       "extractionState": "manual",
       "localizations": {
@@ -194060,53 +195188,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suas contas a vencer e suas assinaturas."
-          }
-        }
-      }
-    },
-    "Tes finances.\nTon entreprise.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Finanzen.\nDein Unternehmen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your finances.\nYour business."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus finanzas.\nTu negocio."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes finances.\nTon entreprise."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le tue finanze.\nLa tua azienda."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "あなたのお金。\nあなたのビジネス。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suas finanças.\nSeu negócio."
           }
         }
       }
@@ -199798,6 +200879,53 @@
         }
       }
     },
+    "Ton budget,\nsous contrôle.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Budget\nim Griff."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your budget,\nin check."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu presupuesto,\nbajo control."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton budget,\nsous contrôle."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo budget,\nsotto controllo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "家計を\nしっかり把握。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu orçamento,\nsob controle."
+          }
+        }
+      }
+    },
     "Ton chiffre d'affaires du mois face à ton objectif.": {
       "extractionState": "manual",
       "localizations": {
@@ -200080,49 +201208,49 @@
         }
       }
     },
-    "Ton iPhone.\nTon tableau de bord.": {
+    "Ton iPhone,\nà ton image.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dein iPhone.\nDein Dashboard."
+            "value": "Dein iPhone,\nwie du es willst."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your iPhone.\nYour dashboard."
+            "value": "Your iPhone,\nyour way."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tu iPhone.\nTu panel de control."
+            "value": "Tu iPhone,\na tu manera."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ton iPhone.\nTon tableau de bord."
+            "value": "Ton iPhone,\nà ton image."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il tuo iPhone.\nLa tua dashboard."
+            "value": "Il tuo iPhone,\na modo tuo."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "あなたのiPhone。\nあなたのダッシュボード。"
+            "value": "あなたらしい\niPhoneに。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seu iPhone.\nSeu painel."
+            "value": "Seu iPhone,\ndo seu jeito."
           }
         }
       }
@@ -201678,53 +202806,6 @@
         }
       }
     },
-    "Top 3, tâches, échéances, focus.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top 3, Aufgaben, Fälligkeiten, Fokus."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top 3, tasks, deadlines, focus."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top 3, tareas, vencimientos, concentración."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top 3, tâches, échéances, focus."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top 3, attività, scadenze, focus."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "トップ3、タスク、期限、集中。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top 3, tarefas, prazos, foco."
-          }
-        }
-      }
-    },
     "Topographie": {
       "extractionState": "manual",
       "localizations": {
@@ -202853,6 +203934,53 @@
         }
       }
     },
+    "Touche « Série faite », le repos démarre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe auf „Satz geschafft“, die Pause startet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap “Set done” and the rest starts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca «Serie hecha» y empieza el descanso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touche « Série faite », le repos démarre."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca «Serie completata», parte il recupero."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「セット完了」をタップすると休憩が始まります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque em “Série feita” e o descanso começa."
+          }
+        }
+      }
+    },
     "Touche-le pour choisir ton design": {
       "extractionState": "manual",
       "localizations": {
@@ -203652,53 +204780,6 @@
         }
       }
     },
-    "Tous les widgets, styles et packs.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alle Widgets, Stile und Pakete."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All widgets, styles, and packs."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos los widgets, estilos y packs."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tous les widgets, styles et packs."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutti i widget, stili e pack."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すべてのウィジェット、スタイル、パック。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos os widgets, estilos e pacotes."
-          }
-        }
-      }
-    },
     "Tous les widgets, tous les styles, sans limite.": {
       "extractionState": "manual",
       "localizations": {
@@ -203887,53 +204968,6 @@
         }
       }
     },
-    "Tout Tessera,\nsans limite.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ganz Tessera,\nohne Grenzen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All of Tessera,\nno limits."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todo Tessera,\nsin límites."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout Tessera,\nsans limite."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutto Tessera,\nsenza limiti."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tesseraのすべてを、\n制限なしで。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todo o Tessera,\nsem limites."
-          }
-        }
-      }
-    },
     "Tout afficher": {
       "extractionState": "manual",
       "localizations": {
@@ -204075,49 +205109,49 @@
         }
       }
     },
-    "Tout ce qui compte,\nd'un coup d'œil.": {
+    "Tout ce qui\ncompte.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alles Wichtige,\nauf einen Blick."
+            "value": "Alles, was\nzählt."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Everything that matters,\nat a glance."
+            "value": "Everything\nthat matters."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todo lo importante,\nde un vistazo."
+            "value": "Todo lo que\nimporta."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tout ce qui compte,\nd'un coup d'œil."
+            "value": "Tout ce qui\ncompte."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tutto ciò che conta,\nin un colpo d'occhio."
+            "value": "Tutto ciò\nche conta."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "大切なことが、\nひと目でわかる。"
+            "value": "大切なことを\nすべて。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tudo o que importa,\nem um relance."
+            "value": "Tudo o que\nimporta."
           }
         }
       }
@@ -204729,6 +205763,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Costas inteiras contra a parede."
+          }
+        }
+      }
+    },
+    "Tout reste sur ton iPhone": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles bleibt auf deinem iPhone"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything stays on your iPhone"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo se queda en tu iPhone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout reste sur ton iPhone"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutto resta sull'iPhone"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてiPhone内に保存"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tudo fica no seu iPhone"
           }
         }
       }
@@ -208775,6 +209856,53 @@
         }
       }
     },
+    "Un widget,\nmille styles.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Widget,\nunzählige Stile."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One widget,\nendless styles."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un widget,\nmil estilos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un widget,\nmille styles."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un widget,\nmille stili."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ひとつのウィジェット、\n無数のスタイル。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um widget,\nmil estilos."
+          }
+        }
+      }
+    },
     "Un widget, 12 styles": {
       "extractionState": "manual",
       "localizations": {
@@ -211497,6 +212625,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vendas, MRR e carteira, em estilo art déco."
+          }
+        }
+      }
+    },
+    "Ventes, objectifs, MRR": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umsatz, Ziele, MRR"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sales, goals, MRR"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ventas, objetivos, MRR"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ventes, objectifs, MRR"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vendite, obiettivi, MRR"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "売上、目標、MRR"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vendas, metas, MRR"
           }
         }
       }
@@ -215116,6 +216291,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Widgets salvos"
+          }
+        }
+      }
+    },
+    "Widgets et mini-apps pour toute ta journée.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets und Mini-Apps für deinen ganzen Tag."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets and mini-apps for your whole day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets y miniapps para todo tu día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets et mini-apps pour toute ta journée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget e mini-app per tutta la giornata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一日をまるごと支えるウィジェットとミニアプリ。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets e miniapps para o seu dia todo."
           }
         }
       }

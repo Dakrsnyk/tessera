@@ -1,0 +1,22 @@
+# App Store screenshots: one scene per line, in the order of the App Store page.
+# scene              real screen that goes inside the phone (none: the scene is drawn entirely by the app)
+# A scene `pano-<name>-1` / `pano-<name>-2` is one picture across two screenshots.
+# The CI renders them with [marketing]; scripts/marketing_compose.py assembles the report into final PNGs.
+hero
+pano-sport-1
+pano-sport-2
+lock
+pano-nutrition-1     app-nutrition
+pano-nutrition-2     app-nutrition
+nutrition            app-nutrition
+fitness              app-fitness
+daily                home
+pano-style-1         editor-v2
+pano-style-2         editor-v2
+store                store
+planning             app-planning-week
+finances             app-finances
+wall
+apps
+privacy
+finale

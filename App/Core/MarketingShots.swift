@@ -4,11 +4,14 @@ import WidgetKit
 
 /// App Store screenshots drawn by the app itself, so they show the real screens and widgets.
 /// Each scene is laid out on a 440 × 956 pt canvas: a 6.9" iPhone captures it at 1320 × 2868 px.
-/// Mode: `-screenshotScreen marketing-<01…10>` (the CI renders them with `[marketing]` in a commit message).
+/// Mode: `-screenshotScreen marketing-<scene>`; the scenes are listed in scripts/marketing_scenes.txt
+/// (the CI renders them with `[marketing]` in a commit message, scripts/marketing_compose.py assembles them).
+/// `pano-<name>-1` and `pano-<name>-2` are the two halves of one scene twice as wide.
 struct MarketingView: View {
     let scene: String
 
-    private var number: Int { Int(scene.split(separator: "-").last ?? "1") ?? 1 }
+    /// « marketing-pano-sport-2 » → « pano-sport-2 ».
+    private var name: String { String(scene.dropFirst("marketing-".count)) }
 
     var body: some View {
         GeometryReader { geo in
@@ -26,25 +29,49 @@ struct MarketingView: View {
     }
 
     @ViewBuilder private var canvas: some View {
-        switch number {
-        case 1: MarketingHero()
-        case 2: MarketingWall()
-        case 3: MarketingCustomize()
-        case 4: MarketingNutrition()
-        case 5: MarketingFitness()
-        case 6: MarketingMoney()
-        case 7: MarketingProductivity()
-        case 8: MarketingSpaces()
-        case 9: MarketingPremium()
-        default: MarketingFinale()
+        if name.hasPrefix("pano-"), let half = Int(name.suffix(1)) {
+            panorama(String(name.dropLast(2)))
+                .frame(width: MK.wide.width, height: MK.wide.height)
+                .offset(x: half == 2 ? -MK.canvas.width : 0)
+                .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .topLeading)
+                .clipped()
+        } else {
+            single(name)
+        }
+    }
+
+    @ViewBuilder private func panorama(_ base: String) -> some View {
+        switch base {
+        case "pano-nutrition": MarketingPanoNutrition()
+        case "pano-style": MarketingPanoStyle()
+        default: MarketingPanoSport()
+        }
+    }
+
+    @ViewBuilder private func single(_ name: String) -> some View {
+        switch name {
+        case "lock": MarketingLock()
+        case "nutrition": MarketingNutrition()
+        case "fitness": MarketingFitness()
+        case "daily": MarketingDaily()
+        case "store": MarketingStore()
+        case "planning": MarketingPlanning()
+        case "finances": MarketingFinances()
+        case "wall": MarketingWall()
+        case "apps": MarketingApps()
+        case "privacy": MarketingPrivacy()
+        case "finale": MarketingFinale()
+        default: MarketingHero()
         }
     }
 }
 
-// MARK: - Design tokens (from the app icon and the accent palette)
+// MARK: - Design tokens (from the app icon: cream, charcoal, red and orange tiles)
 
 enum MK {
     static let canvas = CGSize(width: 440, height: 956)
+    /// A panorama: two screenshots side by side.
+    static let wide = CGSize(width: 880, height: 956)
     /// The phone's screen, in 6.9" iPhone points (the real screens are captured on that iPhone).
     static let screen = CGSize(width: 440, height: 956)
 
@@ -58,15 +85,20 @@ enum MK {
         UserDefaults.standard.string(forKey: "marketingScreen") == "black" ? .black : .white
     }
 
+    static let red = Color(hex: "E5383B")
+    static let orange = Color(hex: "FF8A3D")
     static let jade = Color(hex: "2F8F7A")
     static let jadeLight = Color(hex: "6CCBB0")
     static let amber = Color(hex: "F2A33A")
-    static let cream = Color(hex: "EFEDE6")
-    static let ink = Color(hex: "16171A")
-    static let paperTop = Color(hex: "F7F5F0")
-    static let paperBottom = Color(hex: "ECE8DF")
-    static let deepTop = Color(hex: "16302A")
-    static let deepBottom = Color(hex: "0A1512")
+    static let cream = Color(hex: "F7F4EF")
+    static let ink = Color(hex: "1A1516")
+    static let paperTop = Color(hex: "FAF8F4")
+    static let paperBottom = Color(hex: "EEE8DF")
+    static let deepTop = Color(hex: "2A2223")
+    static let deepBottom = Color(hex: "0E0C0C")
+
+    /// The accent of the app style the screens are captured with.
+    static var appAccent: Color { AppStyle.style(SharedStore.shared.settings.appStyle).accent }
 
     static func design(_ kind: WidgetKind, _ theme: ThemeID, _ accent: String = Palette.defaultAccent) -> WidgetDesign {
         WidgetDesign(kind: kind, themeID: theme, accentHex: accent)
@@ -75,21 +107,47 @@ enum MK {
     static func payload(_ design: WidgetDesign) -> WidgetPayload {
         SamplePayload.make(for: design, now: now)
     }
+
+    /// The demo session (« Haut du corps »), during the rest after the second set of bench press.
+    static var workout: (attributes: WorkoutActivityAttributes, state: WorkoutActivityAttributes.ContentState) {
+        (
+            WorkoutActivityAttributes(routineName: tr("Haut du corps")),
+            WorkoutActivityAttributes.ContentState(
+                exercise: tr("Développé couché"),
+                setNumber: 3,
+                sets: 4,
+                load: tr("\(8) × \(60) kg"),
+                doneSets: 2,
+                totalSets: 14,
+                restStart: now.addingTimeInterval(-36),
+                restEnd: now.addingTimeInterval(84),
+                restPaused: nil
+            )
+        )
+    }
 }
 
 // MARK: - Building blocks
 
-struct MarketingBackground: View {
+/// A soft ground with two glows. Their centers are relative: the same view fills a screenshot or a panorama.
+struct MarketingGround: View {
     var dark = false
+    var glow: Color = MK.orange
+    var glowCenter = UnitPoint(x: 0.5, y: 0.62)
+    var second: Color = MK.red
+    var secondCenter = UnitPoint(x: 0.95, y: 0.05)
 
     var body: some View {
-        if dark {
-            ZStack {
+        ZStack {
+            if dark {
                 LinearGradient(colors: [MK.deepTop, MK.deepBottom], startPoint: .top, endPoint: .bottom)
-                RadialGradient(colors: [MK.jade.opacity(0.35), .clear], center: .init(x: 0.5, y: 0.62), startRadius: 10, endRadius: 360)
+                RadialGradient(colors: [glow.opacity(0.34), .clear], center: glowCenter, startRadius: 10, endRadius: 430)
+                RadialGradient(colors: [second.opacity(0.22), .clear], center: secondCenter, startRadius: 0, endRadius: 360)
+            } else {
+                LinearGradient(colors: [MK.paperTop, MK.paperBottom], startPoint: .top, endPoint: .bottom)
+                RadialGradient(colors: [glow.opacity(0.17), .clear], center: glowCenter, startRadius: 0, endRadius: 420)
+                RadialGradient(colors: [second.opacity(0.10), .clear], center: secondCenter, startRadius: 0, endRadius: 360)
             }
-        } else {
-            LinearGradient(colors: [MK.paperTop, MK.paperBottom], startPoint: .top, endPoint: .bottom)
         }
     }
 }
@@ -104,21 +162,23 @@ struct MarketingTitle: View {
         VStack(spacing: 12) {
             if let eyebrow {
                 Text(eyebrow.uppercased())
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.system(size: 13, weight: .bold))
                     .tracking(1.8)
-                    .foregroundStyle(dark ? MK.jadeLight : MK.jade)
+                    .foregroundStyle(dark ? MK.orange : MK.red)
             }
             Text(title)
                 .font(.system(size: 40, weight: .bold))
                 .tracking(-0.9)
+                .lineSpacing(-2)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(dark ? MK.cream : MK.ink)
                 .fixedSize(horizontal: false, vertical: true)
             if let subtitle {
                 Text(subtitle)
-                    .font(.system(size: 18))
+                    .font(.system(size: 18, weight: .regular))
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(dark ? MK.cream.opacity(0.72) : MK.ink.opacity(0.58))
+                    .foregroundStyle(dark ? MK.cream.opacity(0.7) : MK.ink.opacity(0.56))
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .padding(.horizontal, 26)
@@ -127,18 +187,19 @@ struct MarketingTitle: View {
 }
 
 struct MarketingBrand: View {
+    var dark = true
+
     var body: some View {
         HStack(spacing: 10) {
-            TesseraMark(size: 28)
-                .environment(\.colorScheme, .dark)
+            TesseraMark(size: 30)
             Text(tr("Tessera"))
                 .font(.system(size: 22, weight: .semibold, design: .rounded))
-                .foregroundStyle(MK.cream)
+                .foregroundStyle(dark ? MK.cream : MK.ink)
         }
     }
 }
 
-/// A plain iPhone: dark titanium frame, Dynamic Island, the screen drawn at iPhone 16 Pro size.
+/// A plain iPhone: dark titanium frame, Dynamic Island, the screen drawn at iPhone 16 Pro Max size.
 struct MarketingPhone<Screen: View>: View {
     var width: CGFloat
     var showsIsland: Bool
@@ -151,19 +212,19 @@ struct MarketingPhone<Screen: View>: View {
     }
 
     var body: some View {
-        let bezel = width * 0.034
+        let bezel = width * 0.03
         let screenWidth = width - bezel * 2
         let scale = screenWidth / MK.screen.width
         let screenHeight = MK.screen.height * scale
-        let outerRadius = width * 0.165
+        let outerRadius = width * 0.16
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: outerRadius, style: .continuous)
-                .fill(Color(hex: "1A1B1F"))
+                .fill(Color(hex: "16171A"))
                 .overlay {
                     RoundedRectangle(cornerRadius: outerRadius, style: .continuous)
                         .strokeBorder(
-                            LinearGradient(colors: [Color(hex: "73767D"), Color(hex: "2B2D32"), Color(hex: "5A5D64")], startPoint: .topLeading, endPoint: .bottomTrailing),
-                            lineWidth: 2.2
+                            LinearGradient(colors: [Color(hex: "8A8D93"), Color(hex: "2B2D32"), Color(hex: "6A6D73")], startPoint: .topLeading, endPoint: .bottomTrailing),
+                            lineWidth: 2
                         )
                 }
             screen
@@ -181,16 +242,18 @@ struct MarketingPhone<Screen: View>: View {
             }
         }
         .frame(width: width, height: screenHeight + bezel * 2)
-        .shadow(color: .black.opacity(0.26), radius: 38, x: 0, y: 24)
+        .shadow(color: .black.opacity(0.28), radius: 40, x: 0, y: 26)
     }
 }
 
 struct MarketingStatusBar: View {
     var light = false
+    /// The Lock Screen shows the big clock instead of the time in the status bar.
+    var showsTime = true
 
     var body: some View {
         HStack {
-            Text("9:41")
+            Text(showsTime ? "9:41" : "")
                 .font(.system(size: 17, weight: .semibold))
                 .frame(width: 100)
             Spacer()
@@ -209,12 +272,13 @@ struct MarketingStatusBar: View {
     }
 }
 
+/// The Home Screen wallpaper: the icon's charcoal, warmed by its red and orange.
 struct MarketingWallpaper: View {
     var body: some View {
         ZStack {
-            LinearGradient(colors: [Color(hex: "1F4A40"), Color(hex: "12302A")], startPoint: .top, endPoint: .bottom)
-            RadialGradient(colors: [MK.jade.opacity(0.9), .clear], center: .init(x: 0.15, y: 0.1), startRadius: 0, endRadius: 420)
-            RadialGradient(colors: [MK.amber.opacity(0.45), .clear], center: .init(x: 0.95, y: 0.95), startRadius: 0, endRadius: 380)
+            LinearGradient(colors: [Color(hex: "3A2A2B"), Color(hex: "151112")], startPoint: .top, endPoint: .bottom)
+            RadialGradient(colors: [MK.red.opacity(0.75), .clear], center: .init(x: 0.12, y: 0.06), startRadius: 0, endRadius: 430)
+            RadialGradient(colors: [MK.orange.opacity(0.55), .clear], center: .init(x: 0.95, y: 0.92), startRadius: 0, endRadius: 400)
         }
     }
 }
@@ -270,6 +334,124 @@ struct MarketingHomeScreen: View {
     }
 }
 
+/// The Lock Screen as iOS draws it: the date, the clock, widgets under it, the workout's Live Activity.
+struct MarketingLockScreen: View {
+    var circular: [WidgetDesign]
+    var rectangular: WidgetDesign?
+    var showsWorkout = true
+
+    var body: some View {
+        ZStack(alignment: .top) {
+            MarketingWallpaper()
+            VStack(spacing: 0) {
+                Text(MK.now.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(Fmt.locale)))
+                    .font(.system(size: 21, weight: .semibold))
+                    .foregroundStyle(Color.white.opacity(0.9))
+                    .padding(.top, 68)
+                Text("9:41")
+                    .font(.system(size: 112, weight: .bold))
+                    .tracking(-2)
+                    .foregroundStyle(Color.white.opacity(0.96))
+                    .padding(.top, -12)
+                HStack(spacing: 14) {
+                    if let rectangular {
+                        lockWidget(rectangular, .accessoryRectangular)
+                    }
+                    ForEach(Array(circular.enumerated()), id: \.offset) { pair in
+                        lockWidget(pair.element, .accessoryCircular)
+                    }
+                }
+                .padding(.top, -4)
+                Spacer(minLength: 0)
+                if showsWorkout {
+                    MarketingLiveActivity()
+                        .padding(.horizontal, 12)
+                }
+                HStack {
+                    MarketingLockButton(symbol: "flashlight.off.fill")
+                    Spacer()
+                    MarketingLockButton(symbol: "camera.fill")
+                }
+                .padding(.horizontal, 44)
+                .padding(.top, 28)
+                Capsule()
+                    .fill(Color.white.opacity(0.92))
+                    .frame(width: 148, height: 5)
+                    .padding(.top, 20)
+                    .padding(.bottom, 9)
+            }
+            MarketingStatusBar(light: true, showsTime: false)
+        }
+        .frame(width: MK.screen.width, height: MK.screen.height)
+    }
+
+    private func lockWidget(_ design: WidgetDesign, _ family: WidgetFamily) -> some View {
+        WidgetPreview(design: design, family: family, payload: MK.payload(design), width: WidgetMetrics.size(family).width, date: MK.now)
+    }
+}
+
+struct MarketingLockButton: View {
+    let symbol: String
+
+    var body: some View {
+        Image(systemName: symbol)
+            .font(.system(size: 21, weight: .medium))
+            .foregroundStyle(Color.white)
+            .frame(width: 50, height: 50)
+            .background(Color.black.opacity(0.3), in: Circle())
+    }
+}
+
+/// The workout's Live Activity, drawn by the same view as the real one.
+struct MarketingLiveActivity: View {
+    var body: some View {
+        let workout = MK.workout
+        WorkoutActivityView(attributes: workout.attributes, state: workout.state, isLive: false, now: MK.now)
+            .background(WorkoutActivityView.background, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
+            .environment(\.colorScheme, .dark)
+    }
+}
+
+/// The Dynamic Island while resting: the session's symbol and the countdown.
+struct MarketingIsland: View {
+    var body: some View {
+        HStack {
+            Image(systemName: "figure.strengthtraining.traditional")
+                .foregroundStyle(MK.appAccent)
+            Spacer()
+            Text("1:24")
+                .monospacedDigit()
+                .foregroundStyle(Color.white)
+        }
+        .font(.system(size: 24, weight: .semibold))
+        .padding(.horizontal, 26)
+        .frame(width: 300, height: 66)
+        .background(Color.black, in: Capsule())
+        .environment(\.colorScheme, .dark)
+    }
+}
+
+/// Lock Screen widgets enlarged, on a piece of wallpaper so their white ink shows on a light ground.
+struct MarketingLockChip: View {
+    let designs: [(WidgetDesign, WidgetFamily)]
+    var scale: CGFloat = 1.45
+
+    var body: some View {
+        HStack(spacing: 16) {
+            ForEach(Array(designs.enumerated()), id: \.offset) { pair in
+                let family = pair.element.1
+                WidgetPreview(design: pair.element.0, family: family, payload: MK.payload(pair.element.0), width: WidgetMetrics.size(family).width * scale, date: MK.now)
+            }
+        }
+        .padding(18)
+        .background {
+            MarketingWallpaper()
+                .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+        }
+        .shadow(color: .black.opacity(0.24), radius: 26, x: 0, y: 16)
+    }
+}
+
 /// A real widget floating over the composition.
 struct MarketingFloating: View {
     let item: MKWidget
@@ -277,70 +459,258 @@ struct MarketingFloating: View {
 
     var body: some View {
         WidgetPreview(design: item.design, family: item.family, payload: MK.payload(item.design), width: width, date: MK.now)
-            .shadow(color: .black.opacity(0.22), radius: 26, x: 0, y: 16)
+            .shadow(color: .black.opacity(0.2), radius: 26, x: 0, y: 16)
     }
 }
 
-/// Title at the top, the phone below it bleeding off the bottom edge, optional floating widgets.
+/// Title at the top, the phone below it bleeding off the bottom edge, then whatever floats over it.
 /// The phone's screen is the placeholder the real capture replaces.
-struct MarketingFeature: View {
+struct MarketingFeature<Extra: View>: View {
     let eyebrow: String
     let title: String
     var subtitle: String?
-    var floating: [(item: MKWidget, width: CGFloat, center: CGPoint)] = []
+    var glow: Color = MK.orange
+    let extra: Extra
+
+    init(eyebrow: String, title: String, subtitle: String? = nil, glow: Color = MK.orange, @ViewBuilder extra: () -> Extra) {
+        self.eyebrow = eyebrow
+        self.title = title
+        self.subtitle = subtitle
+        self.glow = glow
+        self.extra = extra()
+    }
 
     var body: some View {
-        ZStack(alignment: .top) {
-            MarketingBackground()
+        ZStack(alignment: .topLeading) {
+            MarketingGround(glow: glow, glowCenter: UnitPoint(x: 0.5, y: 0.7))
             MarketingTitle(eyebrow: eyebrow, title: title, subtitle: subtitle)
-                .padding(.top, 72)
-            MarketingPhone(showsIsland: false) { MK.placeholder }
-                .padding(.top, 292)
+                .padding(.top, 70)
+            MarketingPhone(width: 340) { MK.placeholder }
+                .padding(.leading, 50)
+                .padding(.top, 280)
+            extra
         }
-        .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .top)
-        .overlay {
-            ForEach(Array(floating.enumerated()), id: \.offset) { pair in
-                MarketingFloating(item: pair.element.item, width: pair.element.width)
-                    .position(pair.element.center)
+        .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .topLeading)
+    }
+}
+
+/// Places a view by its top-leading corner on the canvas.
+private extension View {
+    func at(_ x: CGFloat, _ y: CGFloat) -> some View {
+        padding(.leading, x).padding(.top, y)
+    }
+}
+
+// MARK: - Panoramas (two screenshots that make one picture)
+
+/// The workout on the Lock Screen, then its Live Activity and the Dynamic Island up close.
+struct MarketingPanoSport: View {
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            MarketingGround(dark: true, glow: MK.red, glowCenter: UnitPoint(x: 0.5, y: 0.64), second: MK.orange, secondCenter: UnitPoint(x: 0.98, y: 0.04))
+            // An activity ring around the seam joins the two screenshots.
+            Circle()
+                .trim(from: 0.06, to: 0.78)
+                .stroke(
+                    AngularGradient(colors: [MK.red, MK.orange, MK.amber, MK.red], center: .center),
+                    style: StrokeStyle(lineWidth: 26, lineCap: .round)
+                )
+                .rotationEffect(.degrees(-90))
+                .frame(width: 700, height: 700)
+                .opacity(0.22)
+                .at(90, 420)
+            HStack(alignment: .top, spacing: 0) {
+                MarketingTitle(eyebrow: tr("Écran verrouillé"), title: tr("Ta séance,\nen direct."), subtitle: tr("Sans déverrouiller ton iPhone."), dark: true)
+                MarketingTitle(eyebrow: tr("Activité en direct"), title: tr("Repos, séries,\ncharges."), subtitle: tr("Touche « Série faite », le repos démarre."), dark: true)
             }
+            .padding(.top, 70)
+            MarketingPhone(width: 330) {
+                MarketingLockScreen(circular: [MK.design(.caloriesLeft, .minimal), MK.design(.hydration, .minimal), MK.design(.trainingStreak, .minimal)])
+            }
+            .at(55, 290)
+            MarketingLiveActivity()
+                .frame(width: 404)
+                .shadow(color: .black.opacity(0.45), radius: 30, x: 0, y: 18)
+                .at(458, 312)
+            MarketingIsland()
+                .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 10)
+                .at(510, 548)
+            MarketingLockChip(designs: [(MK.design(.restTimer, .minimal), .accessoryCircular), (MK.design(.trainingStreak, .minimal), .accessoryCircular)], scale: 1.4)
+                .at(522, 680)
         }
+        .frame(width: MK.wide.width, height: MK.wide.height, alignment: .topLeading)
+    }
+}
+
+/// The real Nutrition screen, then its widgets: on the Home Screen and on the Lock Screen.
+struct MarketingPanoNutrition: View {
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            MarketingGround(glow: Color(hex: "F08A24"), glowCenter: UnitPoint(x: 0.5, y: 0.6), second: MK.red, secondCenter: UnitPoint(x: 0.98, y: 0.04))
+            HStack(alignment: .top, spacing: 0) {
+                MarketingTitle(eyebrow: tr("Nutrition"), title: tr("Tes calories,\nen un regard."), subtitle: tr("Scanne un code-barres, c'est noté."))
+                MarketingTitle(eyebrow: tr("Widgets"), title: tr("Sur ton écran\nd'accueil."), subtitle: tr("Et sur l'écran verrouillé."))
+            }
+            .padding(.top, 70)
+            MarketingPhone(width: 330) { MK.placeholder }
+                .at(55, 290)
+            MarketingFloating(item: MKWidget(.mealsToday, .systemMedium, .light), width: 392)
+                .at(464, 286)
+            MarketingFloating(item: MKWidget(.proteinLeft, .systemSmall, .light), width: 186)
+                .at(464, 494)
+            MarketingFloating(item: MKWidget(.macros, .systemSmall, .light), width: 186)
+                .at(670, 494)
+            // Across the two screenshots.
+            MarketingFloating(item: MKWidget(.caloriesLeft, .systemSmall, .aurora), width: 206)
+                .at(337, 700)
+            MarketingLockChip(designs: [(MK.design(.caloriesLeft, .minimal), .accessoryRectangular)], scale: 1.3)
+                .at(592, 716)
+        }
+        .frame(width: MK.wide.width, height: MK.wide.height, alignment: .topLeading)
+    }
+}
+
+/// The real Studio, then one widget in six styles.
+struct MarketingPanoStyle: View {
+    private let styles: [(ThemeID, String)] = [
+        (.liquidGlass, "8C6CFF"), (.retro, "F2A33A"),
+        (.neon, "FF4F9A"), (.paper, "2F8F7A"),
+        (.luxury, "C9A45C"), (.pastel, "5B8DEF"),
+    ]
+
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            MarketingGround(glow: Color(hex: "8C6CFF"), glowCenter: UnitPoint(x: 0.5, y: 0.6), second: MK.orange, secondCenter: UnitPoint(x: 0.98, y: 0.04))
+            HStack(alignment: .top, spacing: 0) {
+                MarketingTitle(eyebrow: tr("Personnalisation"), title: tr("À ton image."), subtitle: tr("Styles, couleurs, photos, polices."))
+                MarketingTitle(eyebrow: tr("Studio"), title: tr("Un widget,\nmille styles."))
+            }
+            .padding(.top, 70)
+            MarketingPhone(width: 330) { MK.placeholder }
+                .at(55, 290)
+            VStack(spacing: 18) {
+                ForEach(0..<3, id: \.self) { row in
+                    HStack(spacing: 18) {
+                        ForEach(0..<2, id: \.self) { column in
+                            let style = styles[row * 2 + column]
+                            MarketingFloating(item: MKWidget(.caloriesLeft, .systemSmall, style.0, style.1), width: 180)
+                        }
+                    }
+                }
+            }
+            .at(471, 262)
+        }
+        .frame(width: MK.wide.width, height: MK.wide.height, alignment: .topLeading)
     }
 }
 
 // MARK: - Scenes
 
-/// 01 — What Tessera is, at a glance.
+/// What Tessera is, at a glance.
 struct MarketingHero: View {
     var body: some View {
         ZStack(alignment: .top) {
-            MarketingBackground(dark: true)
+            MarketingGround(dark: true, glow: MK.red, glowCenter: UnitPoint(x: 0.5, y: 0.66), second: MK.orange, secondCenter: UnitPoint(x: 0.95, y: 0.05))
             VStack(spacing: 20) {
                 MarketingBrand()
-                MarketingTitle(title: tr("Ton iPhone.\nTon tableau de bord."), dark: true)
+                MarketingTitle(title: tr("Ton iPhone,\nà ton image."), subtitle: tr("Widgets et mini-apps pour toute ta journée."), dark: true)
             }
-            .padding(.top, 70)
-            MarketingPhone {
+            .padding(.top, 66)
+            MarketingPhone(width: 340) {
                 MarketingHomeScreen(rows: [
-                    [MKWidget(.now, .systemMedium, .light)],
-                    [MKWidget(.caloriesLeft, .systemSmall, .aurora), MKWidget(.weather, .systemSmall, .light, "3366FF")],
-                    [MKWidget(.habitStreak, .systemSmall, .retro, "F2A33A"), MKWidget(.budgetLeft, .systemSmall, .dark)],
+                    [MKWidget(.mealsToday, .systemMedium, .light)],
+                    [MKWidget(.caloriesLeft, .systemSmall, .aurora), MKWidget(.nextSet, .systemSmall, .dark, "FF6B57")],
+                    [MKWidget(.habitStreak, .systemSmall, .retro, "F2A33A"), MKWidget(.weather, .systemSmall, .light, "3366FF")],
                 ])
             }
-            .padding(.top, 292)
+            .padding(.top, 300)
         }
         .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .top)
     }
 }
 
-/// 02 — The library: many kinds, many styles.
+/// The Lock Screen: nutrition widgets under the clock, the workout in progress.
+struct MarketingLock: View {
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            MarketingGround(glow: MK.red, glowCenter: UnitPoint(x: 0.5, y: 0.66))
+            MarketingTitle(eyebrow: tr("Écran verrouillé"), title: tr("L'essentiel,\nd'un regard."), subtitle: tr("Calories, protéines, eau, séance."))
+                .padding(.top, 70)
+            MarketingPhone(width: 340) {
+                MarketingLockScreen(circular: [MK.design(.proteinLeft, .minimal), MK.design(.hydration, .minimal)], rectangular: MK.design(.caloriesLeft, .minimal))
+            }
+            .at(50, 280)
+        }
+        .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .topLeading)
+    }
+}
+
+/// Nutrition: food → calories → macros → what's left.
+struct MarketingNutrition: View {
+    var body: some View {
+        MarketingFeature(eyebrow: tr("Nutrition"), title: tr("Nutrition,\nsimplifiée."), subtitle: tr("Scanne, note, suis tes macros."), glow: Color(hex: "F08A24")) {
+            MarketingFloating(item: MKWidget(.caloriesLeft, .systemSmall, .aurora), width: 164)
+                .at(262, 760)
+        }
+    }
+}
+
+/// Training: the real session screen and its Live Activity.
+struct MarketingFitness: View {
+    var body: some View {
+        MarketingFeature(eyebrow: tr("Sport"), title: tr("Chaque série\ncompte."), subtitle: tr("Séances, repos et records."), glow: MK.red) {
+            MarketingLiveActivity()
+                .frame(width: 404)
+                .shadow(color: .black.opacity(0.3), radius: 30, x: 0, y: 18)
+                .at(18, 740)
+        }
+    }
+}
+
+/// Mon Quotidien: the whole day on one screen.
+struct MarketingDaily: View {
+    var body: some View {
+        MarketingFeature(eyebrow: tr("Mon Quotidien"), title: tr("Ta journée,\nen un écran."), subtitle: tr("Repas, séance, eau, pas, météo.")) {
+            EmptyView()
+        }
+    }
+}
+
+struct MarketingStore: View {
+    var body: some View {
+        MarketingFeature(eyebrow: tr("Store"), title: tr("Des styles\npour tout."), subtitle: tr("Packs, collections, fonds d'écran."), glow: Color(hex: "8C6CFF")) {
+            EmptyView()
+        }
+    }
+}
+
+struct MarketingPlanning: View {
+    var body: some View {
+        MarketingFeature(eyebrow: tr("Planning"), title: tr("Ta semaine,\nbien en main."), subtitle: tr("Horaire, tâches, habitudes, focus."), glow: Color(hex: "3366FF")) {
+            MarketingFloating(item: MKWidget(.priorities, .systemSmall, .light, "3366FF"), width: 164)
+                .at(262, 760)
+        }
+    }
+}
+
+struct MarketingFinances: View {
+    var body: some View {
+        MarketingFeature(eyebrow: tr("Finances"), title: tr("Ton budget,\nsous contrôle."), subtitle: tr("Dépenses, revenus, catégories."), glow: MK.jade) {
+            MarketingFloating(item: MKWidget(.budgetLeft, .systemSmall, .dark), width: 164)
+                .at(262, 760)
+        }
+    }
+}
+
+/// The library: many kinds, many styles.
 struct MarketingWall: View {
     var body: some View {
         let small: CGFloat = 194
         let wide: CGFloat = 404
         ZStack(alignment: .top) {
-            MarketingBackground()
-            MarketingTitle(eyebrow: tr("103 widgets · 12 styles"), title: tr("Tout ce qui compte,\nd'un coup d'œil."))
-                .padding(.top, 72)
+            MarketingGround(glow: MK.orange, glowCenter: UnitPoint(x: 0.5, y: 0.6))
+            MarketingTitle(eyebrow: tr("Plus de 100 widgets"), title: tr("Tout ce qui\ncompte."))
+                .padding(.top, 70)
             VStack(spacing: 16) {
                 MarketingFloating(item: MKWidget(.weather, .systemMedium, .aurora), width: wide)
                 HStack(spacing: 16) {
@@ -353,119 +723,123 @@ struct MarketingWall: View {
                 }
                 MarketingFloating(item: MKWidget(.tasks, .systemMedium, .light), width: wide)
             }
-            .padding(.top, 262)
+            .padding(.top, 236)
         }
         .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .top)
     }
 }
 
-/// 03 — Personalization, in the real editor.
-struct MarketingCustomize: View {
+/// Every mini-app, with what it does.
+struct MarketingApps: View {
+    private let apps: [(MiniApp, String)] = [
+        (.nutrition, tr("Calories, macros, code-barres")),
+        (.fitness, tr("Séances, repos, records")),
+        (.planning, tr("Horaire, tâches, habitudes")),
+        (.finances, tr("Budget, dépenses, revenus")),
+        (.business, tr("Ventes, objectifs, MRR")),
+        (.travel, tr("Programme, budget, valise")),
+        (.car, tr("Plein, entretien, échéances")),
+        (.weather, tr("Prévisions, pluie, soleil")),
+    ]
+
     var body: some View {
-        MarketingFeature(
-            eyebrow: tr("Personnalisation"),
-            title: tr("À ton image."),
-            subtitle: tr("Styles, couleurs, photos, polices."),
-            floating: [
-                (MKWidget(.caloriesLeft, .systemSmall, .retro, "F2A33A"), 128, CGPoint(x: 71, y: 432)),
-                (MKWidget(.caloriesLeft, .systemSmall, .dark), 128, CGPoint(x: 369, y: 432)),
-            ]
-        )
+        ZStack(alignment: .top) {
+            MarketingGround(glow: MK.orange, glowCenter: UnitPoint(x: 0.5, y: 0.65))
+            MarketingTitle(eyebrow: tr("Mini-apps"), title: tr("Toute ta vie,\nau même endroit."), subtitle: tr("Elles nourrissent tes widgets."))
+                .padding(.top, 70)
+            VStack(spacing: 12) {
+                ForEach(0..<4, id: \.self) { row in
+                    HStack(spacing: 12) {
+                        ForEach(0..<2, id: \.self) { column in
+                            card(apps[row * 2 + column])
+                        }
+                    }
+                }
+            }
+            .padding(.top, 290)
+        }
+        .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .top)
+    }
+
+    private func card(_ item: (MiniApp, String)) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Image(systemName: item.0.symbol)
+                .font(.system(size: 21, weight: .semibold))
+                .foregroundStyle(Color.white)
+                .frame(width: 46, height: 46)
+                .background(item.0.color.gradient, in: RoundedRectangle(cornerRadius: 13, style: .continuous))
+            VStack(alignment: .leading, spacing: 3) {
+                Text(item.0.title)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(MK.ink)
+                Text(item.1)
+                    .font(.system(size: 13.5))
+                    .foregroundStyle(MK.ink.opacity(0.55))
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(16)
+        .frame(width: 186, height: 146, alignment: .topLeading)
+        .background(Color.white, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .shadow(color: .black.opacity(0.07), radius: 16, x: 0, y: 8)
     }
 }
 
-/// 04 — Nutrition: food → calories → macros → what's left.
-struct MarketingNutrition: View {
+/// Nothing leaves the iPhone: no account, no ads, no tracking.
+struct MarketingPrivacy: View {
     var body: some View {
-        MarketingFeature(
-            eyebrow: tr("Nutrition"),
-            title: tr("Nutrition,\nsimplifiée."),
-            subtitle: tr("Scanne. Note. Suis tes macros."),
-            floating: [
-                (MKWidget(.caloriesLeft, .systemSmall, .aurora), 150, CGPoint(x: 348, y: 868)),
-            ]
-        )
+        ZStack(alignment: .top) {
+            MarketingGround(dark: true, glow: MK.jade, glowCenter: UnitPoint(x: 0.5, y: 0.5), second: MK.orange, secondCenter: UnitPoint(x: 0.95, y: 0.05))
+            MarketingTitle(eyebrow: tr("Confidentialité"), title: tr("Tes données\nrestent à toi."), dark: true)
+                .padding(.top, 70)
+            VStack(spacing: 34) {
+                Image(systemName: "lock.shield.fill")
+                    .font(.system(size: 92, weight: .regular))
+                    .foregroundStyle(MK.jadeLight, MK.jade.opacity(0.5))
+                    .frame(width: 190, height: 190)
+                    .background(MK.jade.opacity(0.16), in: Circle())
+                    .overlay(Circle().strokeBorder(MK.jadeLight.opacity(0.25), lineWidth: 1))
+                VStack(spacing: 12) {
+                    row("iphone", tr("Tout reste sur ton iPhone"))
+                    row("person.crop.circle.badge.xmark", tr("Aucun compte à créer"))
+                    row("eye.slash.fill", tr("Aucune pub, aucun suivi"))
+                }
+            }
+            .padding(.top, 262)
+        }
+        .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .top)
+    }
+
+    private func row(_ symbol: String, _ text: String) -> some View {
+        HStack(spacing: 14) {
+            Image(systemName: symbol)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundStyle(MK.jadeLight)
+                .frame(width: 30)
+            Text(text)
+                .font(.system(size: 19, weight: .semibold))
+                .foregroundStyle(MK.cream)
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 22)
+        .frame(width: 372, height: 66)
+        .background(Color.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Color.white.opacity(0.08), lineWidth: 1))
     }
 }
 
-/// 05 — Training: session, rest, progress.
-struct MarketingFitness: View {
-    var body: some View {
-        MarketingFeature(
-            eyebrow: tr("Sport"),
-            title: tr("Chaque série\ncompte."),
-            subtitle: tr("Séance, repos et records."),
-            floating: [
-                (MKWidget(.nextSet, .systemSmall, .dark, "FF6B57"), 150, CGPoint(x: 348, y: 868)),
-            ]
-        )
-    }
-}
-
-/// 06 — Money and business.
-struct MarketingMoney: View {
-    var body: some View {
-        MarketingFeature(
-            eyebrow: tr("Budget · Entreprise"),
-            title: tr("Tes finances.\nTon entreprise."),
-            subtitle: tr("Budget, ventes, bénéfice, MRR."),
-            floating: [
-                (MKWidget(.budgetLeft, .systemSmall, .light), 150, CGPoint(x: 336, y: 868)),
-            ]
-        )
-    }
-}
-
-/// 07 — The day: priorities, tasks, deadlines, focus.
-struct MarketingProductivity: View {
-    var body: some View {
-        MarketingFeature(
-            eyebrow: tr("Productivité"),
-            title: tr("Ta journée,\nbien en main."),
-            subtitle: tr("Top 3, tâches, échéances, focus."),
-            floating: [
-                (MKWidget(.priorities, .systemSmall, .retro, "F2A33A"), 150, CGPoint(x: 348, y: 868)),
-            ]
-        )
-    }
-}
-
-/// 08 — Every part of life, in one place.
-struct MarketingSpaces: View {
-    var body: some View {
-        MarketingFeature(
-            eyebrow: tr("Créer"),
-            title: tr("Toute ta vie,\nau même endroit."),
-            subtitle: tr("Nutrition, sport, études, voyage, auto…")
-        )
-    }
-}
-
-/// 09 — Premium: every widget, every style, the packs.
-struct MarketingPremium: View {
-    var body: some View {
-        MarketingFeature(
-            eyebrow: tr("Tessera Premium"),
-            title: tr("Tout Tessera,\nsans limite."),
-            subtitle: tr("Tous les widgets, styles et packs."),
-            floating: [
-                (MKWidget(.yearDots, .systemSmall, .glass, "8C6CFF"), 150, CGPoint(x: 92, y: 868)),
-            ]
-        )
-    }
-}
-
-/// 10 — The promise, with the brand's mosaic: a jade column, a cream tile, an amber tile.
+/// The promise, with the brand's mosaic of widgets and Lock Screen widgets.
 struct MarketingFinale: View {
     var body: some View {
         let tile: CGFloat = 184
         ZStack(alignment: .top) {
-            MarketingBackground(dark: true)
+            MarketingGround(dark: true, glow: MK.orange, glowCenter: UnitPoint(x: 0.5, y: 0.6), second: MK.red, secondCenter: UnitPoint(x: 0.05, y: 0.02))
             VStack(spacing: 20) {
                 MarketingBrand()
-                MarketingTitle(title: tr("L'essentiel,\nen un regard."), subtitle: tr("Écran d'accueil et écran verrouillé."), dark: true)
+                MarketingTitle(title: tr("Ta vie,\nen widgets."), subtitle: tr("Écran d'accueil et écran verrouillé."), dark: true)
             }
-            .padding(.top, 70)
+            .padding(.top, 66)
             VStack(spacing: 34) {
                 HStack(alignment: .top, spacing: 16) {
                     VStack(spacing: 16) {
