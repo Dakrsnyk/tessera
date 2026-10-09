@@ -30,6 +30,12 @@ Fait :
 - Choix : Profil → « Icône de l'app », ou appui long sur l'icône → « Changer d'icône » (raccourci dynamique `QuickActions`, reçu par `TesseraAppDelegate` / `TesseraSceneDelegate`). Liste dans `AppIconChoice.all` (check_swift.py vérifie les assets).
 - Dessin : `node scripts/app_icons.js <dossier>` (Playwright + Chromium) puis `python3 scripts/app_icons_install.py <dossier>`. `TesseraMark` dessine le logo Classique dans l'app.
 
+## Semaines et solde (2026-10-09)
+- `App/Screens/MiniApps/WeekViews.swift` : `WeekCard` (7 ronds, un toucher choisit le jour, balayage ou flèches = semaine ; Fitness, Nutrition sans futur), `WeekTimetable` (semaine en tableau : colonnes par jour, heures, blocs côte à côte s'ils se chevauchent, bande « sans heure », ligne rouge = maintenant ; `compact` pour Mon Quotidien), `WeekTableCard` (titre + tableau, Planning et page Semaine).
+- Mon Quotidien : la carte Planning est le tableau de la semaine, Large par défaut.
+- Finances : `BalanceChartCard` en haut (Mois / 3 mois / Année) sur `BudgetMath.balanceHistory` ; « Solde de départ » facultatif (`BudgetState.openingBalance/openingDate`, `OpeningBalanceEditor`) : sans lui, le graphique part de zéro.
+- Créateur : un format choisi garde la sélection ; seules les captures/tests (`-screenshotCreatorFormat`) reprennent les widgets habituels du format.
+
 ## Outils
 - Hook `.git/hooks/pre-commit` : check_swift.py + `l10n_catalog.py sync` (bloque un texte non traduit).
 - `bash scripts/ci_report.sh [run]` : attend la CI et n'affiche que statuts, tests échoués, erreurs, l10n.
