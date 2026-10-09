@@ -10,6 +10,7 @@ App iOS (SwiftUI, iOS 17, Swift 5) de widgets/mini-apps. Actif de revenu passif 
 
 ## CI (pilotée par tags dans le message de commit)
 `[check]` compile seul (à privilégier ; tokens et temps minimum : ne relire que les 1 à 3 captures liées au changement, en petit) · `[unit]` · `[daily]` (tests logiques + MiniApp/Studio/Profile UITests + captures) · `[studio]` `[apps]` `[demos]` `[shots]` `[langs]` (captures des écrans clés dans les 6 langues, sans tests) `[store]` (tests logiques + captures du Store et des styles) `[stack]` `[marketing]` `[place]` ; workflow_dispatch = tout.
+- IPA (Releases « Version de test ») : seulement sans tag, ou avec `[unit]`, `[daily]`, `[apps]`, `[studio]`, `[store]`, `[demos]`, `[shots]`, `[langs]` (tests sans échec). `[check]`, `[marketing]` et `[place]` n'en publient pas : finir une série de changements par un `[unit]` pour que l'utilisateur ait la version à installer.
 - Suivi : `scratchpad/colorcheck/ci.sh` (si absent : `gh api repos/Dakrsnyk/tessera/actions/runs`).
 - Rapport : `git fetch -q origin ci-report && mkdir -p /tmp/rNNN && git archive origin/ci-report | tar -x -C /tmp/rNNN` ; échecs : grep "Test Case .*failed" et "error:" dans report.txt. L'étape de tests finit par `|| true` : le job est vert même si des tests échouent.
 - Avant chaque commit : `python3 scripts/check_swift.py` (ordre des labels d'init, catalogue de kinds, sécurité Release).
