@@ -37,6 +37,21 @@ final class FinancesBusinessTests: XCTestCase {
         XCTAssertEqual(comparison.previous, 200)
     }
 
+    func testTheBalanceGoesDayByDayFromZero() {
+        var state = BudgetState()
+        state.addIncome(IncomeEntry(amount: 1_500, label: "Salaire", date: september(1)))
+        state.add(Expense(amount: 80, categoryID: BudgetState.fixedID(1), date: september(3)))
+        state.add(Expense(amount: 45, categoryID: BudgetState.fixedID(2), date: september(3, 18)))
+        state.add(Expense(amount: 200, categoryID: BudgetState.fixedID(1), date: august(10)))
+        let points = BudgetMath.balanceHistory(state, from: september(1), now: september(10))
+        XCTAssertEqual(points.count, 10, "One point a day, today included")
+        XCTAssertEqual(points[0].balance, 1_500)
+        XCTAssertEqual(points[1].balance, 1_500)
+        XCTAssertEqual(points[2].balance, 1_375, "Both expenses of the 3rd")
+        XCTAssertEqual(points.last?.balance, 1_375)
+        XCTAssertTrue(BudgetMath.balanceHistory(state, from: september(12), now: september(10)).isEmpty)
+    }
+
     func testCategoriesComparedWithTheirLimits() {
         var state = BudgetState()
         state.categories[0].monthlyLimit = 100

@@ -162,58 +162,39 @@ struct TaskRow: View {
 
 // MARK: - Week and month
 
+/// The week as a table (a column a day, the hours down the side), then what the chosen day holds.
+/// A swipe on the table, or its arrows, changes week.
 struct PlanningWeekPage: View {
     @Environment(AppModel.self) private var model
-    @State private var anchor = Date()
+    @State private var day = Date()
     @State private var events: [EventSnapshot] = []
 
     var body: some View {
-        let days = Agenda.week(containing: anchor, model: model, events: events)
+        let week = Agenda.week(containing: day, model: model, events: events)
+        let items = week.first { DateMath.isSameDay($0.day, day) }?.items ?? []
         MiniAppScroll {
-            HStack {
-                Button { move(-1) } label: { Image(systemName: "chevron.left").frame(width: 44, height: 44) }
-                Spacer()
-                Text(weekTitle).font(.headline)
-                Spacer()
-                Button { move(1) } label: { Image(systemName: "chevron.right").frame(width: 44, height: 44) }
-            }
-            .tint(Color(hex: MiniApp.planning.colorHex))
-            ForEach(Array(days.enumerated()), id: \.offset) { _, entry in
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(Fmt.longDay(entry.day))
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(DateMath.isSameDay(entry.day, Date()) ? Color(hex: MiniApp.planning.colorHex) : .primary)
-                    if entry.items.isEmpty {
-                        Text(tr("Libre")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)
-                    } else {
-                        VStack(spacing: 0) {
-                            ForEach(entry.items) { item in AgendaRow(item: item) }
-                        }
-                        .padding(.horizontal, 14)
-                        .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            WeekTableCard(day: $day, days: week)
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: Fmt.longDay(day), detail: items.isEmpty ? nil : Fmt.plural(items.count, tr("élément"), tr("éléments")))
+                if items.isEmpty {
+                    Text(tr("Libre")).font(.subheadline).foregroundStyle(.secondary).card(padding: 12)
+                } else {
+                    VStack(spacing: 0) {
+                        ForEach(items) { item in AgendaRow(item: item) }
                     }
+                    .padding(.horizontal, 14)
+                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                 }
             }
         }
         .navigationTitle(tr("Semaine"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: load)
-        .onChange(of: anchor) { _, _ in load() }
-    }
-
-    private var weekTitle: String {
-        let week = DateMath.week(containing: anchor)
-        guard let first = week.first, let last = week.last else { return "" }
-        return "\(Fmt.shortDay(first)) – \(Fmt.shortDay(last))"
-    }
-
-    private func move(_ weeks: Int) {
-        anchor = DateMath.calendar.date(byAdding: .weekOfYear, value: weeks, to: anchor) ?? anchor
+        .onChange(of: day) { _, _ in load() }
     }
 
     private func load() {
-        let week = DateMath.week(containing: anchor)
-        guard let first = week.first else { return }
+        guard let first = DateMath.week(containing: day).first else { return }
         events = CalendarService.events(from: first, to: first.addingTimeInterval(7 * 86_400))
     }
 }

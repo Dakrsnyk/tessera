@@ -211,41 +211,20 @@ struct FitnessAppView: View {
 
     // MARK: Week
 
+    /// The week of the chosen day: a tap on a round shows that day above, a swipe changes week.
     private func week(state: FitnessState, now: Date) -> some View {
-        let trained = FitnessMath.trainedDays(inWeekOf: now, state)
-        let days = DateMath.week(containing: now)
-        let count = FitnessMath.workouts(inWeekOf: now, state)
-        return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Cette semaine"), detail: tr("\(count) / \(state.weeklyGoal) séances"))
-            VStack(alignment: .leading, spacing: 14) {
-                HStack(spacing: 0) {
-                    ForEach(Array(days.enumerated()), id: \.offset) { index, day in
-                        let planned = state.routines.contains { $0.weekdays.contains(FitnessMath.isoWeekday(day)) }
-                        VStack(spacing: 6) {
-                            Text(String(Fmt.weekday(day).prefix(1)))
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(DateMath.isSameDay(day, now) ? Color(hex: accentHex) : .secondary)
-                            ZStack {
-                                Circle()
-                                    .fill(trained[safe: index] == true ? Color(hex: accentHex) : Color.clear)
-                                Circle()
-                                    .strokeBorder(trained[safe: index] == true ? Color.clear : (planned ? Color(hex: accentHex).opacity(0.6) : Color.secondary.opacity(0.25)), style: StrokeStyle(lineWidth: 2, dash: planned ? [] : [3, 3]))
-                                if trained[safe: index] == true {
-                                    Image(systemName: "checkmark").font(.caption.weight(.bold)).foregroundStyle(.white)
-                                }
-                            }
-                            .frame(width: 30, height: 30)
-                        }
-                        .frame(maxWidth: .infinity)
-                    }
-                }
-                HStack(spacing: 10) {
-                    miniFigure(tr("Durée"), tr("\(TF.int(FitnessMath.minutes(inWeekOf: now, state))) min"))
-                    miniFigure(tr("Volume"), tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"))
-                    miniFigure(tr("Calories"), "~\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: now)))")
-                }
+        WeekCard(day: $day, colorHex: accentHex, allowsFuture: true,
+                 detail: { week in tr("\(FitnessMath.workouts(inWeekOf: week[0], state)) / \(state.weeklyGoal) séances") },
+                 mark: { date in
+                     let trained = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, date) && $0.isFinished }
+                     let planned = state.routines.contains { $0.weekdays.contains(FitnessMath.isoWeekday(date)) }
+                     return WeekDayMark(isDone: trained, isPlanned: planned)
+                 }) { week in
+            HStack(spacing: 10) {
+                miniFigure(tr("Durée"), tr("\(TF.int(FitnessMath.minutes(inWeekOf: week[0], state))) min"))
+                miniFigure(tr("Volume"), tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: week[0]).reduce(0, +))) kg"))
+                miniFigure(tr("Calories"), "~\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: week[0])))")
             }
-            .card()
         }
     }
 

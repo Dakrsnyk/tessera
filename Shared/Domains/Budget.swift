@@ -485,6 +485,39 @@ enum BudgetMath {
         expenses(state, in: interval, now: now).reduce(0) { $0 + $1.amount }
     }
 
+    /// The balance at the end of one day of a period.
+    struct BalancePoint: Hashable, Identifiable {
+        let date: Date
+        let balance: Double
+        var id: Date { date }
+    }
+
+    /// The balance day by day from `start` to today, from zero at the start: what came in minus what
+    /// went out, the fixed incomes and expenses on their dates.
+    static func balanceHistory(_ state: BudgetState, from start: Date, now: Date = Date()) -> [BalancePoint] {
+        let first = DateMath.startOfDay(start)
+        let last = DateMath.startOfDay(now)
+        guard first <= last, let stop = DateMath.calendar.date(byAdding: .day, value: 1, to: last) else { return [] }
+        let interval = DateInterval(start: first, end: stop.addingTimeInterval(-1))
+        var change: [String: Double] = [:]
+        for income in incomes(state, in: interval, now: now) {
+            change[DateMath.dayKey(income.date), default: 0] += income.amount
+        }
+        for expense in expenses(state, in: interval, now: now) {
+            change[DateMath.dayKey(expense.date), default: 0] -= expense.amount
+        }
+        var points: [BalancePoint] = []
+        var balance = 0.0
+        var cursor = first
+        while cursor <= last, points.count < 800 {
+            balance += change[DateMath.dayKey(cursor)] ?? 0
+            points.append(BalancePoint(date: cursor, balance: balance))
+            guard let next = DateMath.calendar.date(byAdding: .day, value: 1, to: cursor) else { break }
+            cursor = next
+        }
+        return points
+    }
+
     /// One month: what came in and what went out.
     struct MonthSummary: Hashable, Identifiable {
         let start: Date

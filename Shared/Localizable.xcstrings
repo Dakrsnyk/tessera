@@ -13678,6 +13678,53 @@
         }
       }
     },
+    "3 mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 Monate"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 meses"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 mesi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3か月"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 meses"
+          }
+        }
+      }
+    },
     "3 sur 5": {
       "extractionState": "manual",
       "localizations": {
@@ -41925,49 +41972,49 @@
         }
       }
     },
-    "Calories des 7 derniers jours": {
+    "Calories de la semaine": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kalorien der letzten 7 Tage"
+            "value": "Kalorien der Woche"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calories for the last 7 days"
+            "value": "Calories of the week"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calorías de los últimos 7 días"
+            "value": "Calorías de la semana"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calories des 7 derniers jours"
+            "value": "Calories de la semaine"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calorie degli ultimi 7 giorni"
+            "value": "Calorie della settimana"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "過去7日間のカロリー"
+            "value": "週のカロリー"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Calorias dos últimos 7 dias"
+            "value": "Calorias da semana"
           }
         }
       }
@@ -134985,6 +135032,53 @@
         }
       }
     },
+    "Note tes revenus et tes dépenses : ton solde s'affichera ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trag deine Einnahmen und Ausgaben ein: Dein Saldo erscheint hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log your income and expenses: your balance will show here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anota tus ingresos y gastos: tu saldo aparecerá aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note tes revenus et tes dépenses : ton solde s'affichera ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annota entrate e spese: il tuo saldo apparirà qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収入と支出を記録すると、ここに残高が表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registre suas receitas e despesas: seu saldo aparecerá aqui."
+          }
+        }
+      }
+    },
     "Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls.": {
       "extractionState": "manual",
       "localizations": {
@@ -170423,6 +170517,53 @@
         }
       }
     },
+    "Revenus moins dépenses depuis le %@, factures et montants fixes compris.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einnahmen minus Ausgaben seit %@, Rechnungen und feste Beträge inbegriffen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Income minus expenses since %@, bills and fixed amounts included."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingresos menos gastos desde el %@, facturas y montos fijos incluidos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenus moins dépenses depuis le %@, factures et montants fixes compris."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrate meno spese dal %@, bollette e importi fissi inclusi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@以降の収入から支出を引いた額（請求書と固定額を含む）。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Receitas menos despesas desde %@, contas e valores fixos incluídos."
+          }
+        }
+      }
+    },
     "Revenus trimestriels": {
       "extractionState": "manual",
       "localizations": {
@@ -172021,49 +172162,49 @@
         }
       }
     },
-    "Rien de noté ces 7 derniers jours.": {
+    "Rien de noté cette semaine.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "In den letzten 7 Tagen nichts erfasst."
+            "value": "Diese Woche nichts eingetragen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nothing logged in the last 7 days."
+            "value": "Nothing logged this week."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nada registrado en los últimos 7 días."
+            "value": "Nada registrado esta semana."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rien de noté ces 7 derniers jours."
+            "value": "Rien de noté cette semaine."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Niente di registrato negli ultimi 7 giorni."
+            "value": "Niente annotato questa settimana."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "過去7日間の記録はありません。"
+            "value": "この週の記録はありません。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nada registrado nos últimos 7 dias."
+            "value": "Nada registrado nesta semana."
           }
         }
       }
@@ -180199,6 +180340,53 @@
         }
       }
     },
+    "Semaine dernière": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letzte Woche"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana pasada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine dernière"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimana scorsa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先週"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana passada"
+          }
+        }
+      }
+    },
     "Semaine du %@": {
       "extractionState": "manual",
       "localizations": {
@@ -180383,6 +180571,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Semana de nutrição"
+          }
+        }
+      }
+    },
+    "Semaine prochaine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächste Woche"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próxima semana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine prochaine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prossima settimana"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "来週"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próxima semana"
           }
         }
       }
@@ -239603,6 +239838,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Evolução"
+          }
+        }
+      }
+    },
+    "Évolution du solde": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf des Saldos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balance over time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evolución del saldo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Évolution du solde"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Andamento del saldo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残高の推移"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evolução do saldo"
           }
         }
       }

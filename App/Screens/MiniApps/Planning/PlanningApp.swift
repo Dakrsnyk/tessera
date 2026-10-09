@@ -1,7 +1,8 @@
 import SwiftUI
 
-/// The Planning mini-app: today in one timeline (calendar, classes, tasks, deadlines, workouts), the
-/// three priorities, the tasks to do, then the week, the month, the projects, the habits and focus.
+/// The Planning mini-app: the week as a table and the chosen day in one timeline (calendar, classes,
+/// tasks, deadlines, workouts), the three priorities, the tasks to do, then the week, the month, the
+/// projects, the habits and focus.
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
@@ -22,6 +23,9 @@ struct PlanningAppView: View {
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
                 DaySwitcher(day: $day, colorHex: accentHex, allowsFuture: true)
+                // The week as a table: a tap on a day shows it below, a swipe changes week.
+                WeekTableCard(day: $day, days: Agenda.week(containing: day, model: model, events: events))
+                    .padding(.bottom, 6)
                 MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
                 VStack(alignment: .leading, spacing: 0) {
                     if today.isEmpty {
@@ -133,9 +137,10 @@ struct PlanningAppView: View {
         }
     }
 
+    /// The calendar events of the chosen day's whole week (the table shows them all).
     private func loadEvents() {
-        let start = DateMath.startOfDay(day)
-        events = CalendarService.events(from: start, to: start.addingTimeInterval(86_400))
+        let start = DateMath.week(containing: day).first ?? DateMath.startOfDay(day)
+        events = CalendarService.events(from: start, to: start.addingTimeInterval(7 * 86_400))
     }
 
     private func countTile(_ title: String, _ count: Int, _ hex: String?) -> some View {

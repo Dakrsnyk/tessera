@@ -548,26 +548,29 @@ private struct WorkoutDayTile: View {
     }
 }
 
-/// What comes next: classes, work, appointments, other events of the schedule, exams and the
-/// events of the Apple calendar. A tap shows the whole week. Half width: the time above the title.
+/// The week as a table: classes, work, appointments, tasks, workouts and the events of the Apple
+/// calendar, a column a day. A tap opens the week in Planning (where the weeks change). Half width:
+/// the same table, its blocks without text.
 private struct PlanningDayTile: View {
     let items: [DailyBrief.TimedItem]
     @Environment(AppModel.self) private var model
     @Environment(\.dailyCompact) private var compact
+    @State private var events: [EventSnapshot] = []
 
     private let colorHex = "3366FF"
 
     var body: some View {
+        let week = Agenda.week(containing: Date(), model: model, events: events)
+        let isEmpty = week.allSatisfy { $0.items.isEmpty }
         DayCard(title: tr("Planning"), symbol: "calendar.day.timeline.left", colorHex: colorHex) {
             NavigationLink(value: HomeRoute.page(.planningWeek)) {
-                VStack(alignment: .leading, spacing: compact ? 8 : 7) {
-                    if items.isEmpty {
+                VStack(alignment: .leading, spacing: 8) {
+                    if isEmpty {
                         Text(tr("Rien de prévu cette semaine."))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
-                    }
-                    ForEach(items.prefix(compact ? 3 : 5)) { item in
-                        if compact { compactRow(item) } else { row(item) }
+                    } else {
+                        WeekTimetable(days: week, compact: compact, hourHeight: compact ? 12 : 22)
                     }
                     HStack(spacing: 3) {
                         Text(tr("Toute la semaine"))
@@ -585,7 +588,10 @@ private struct PlanningDayTile: View {
             if case .needsAccess = model.events {
                 Button {
                     Task {
-                        if await CalendarService.requestAccess() { model.refreshEvents() }
+                        if await CalendarService.requestAccess() {
+                            model.refreshEvents()
+                            loadEvents()
+                        }
                     }
                 } label: {
                     Label(tr("Relier le calendrier Apple"), systemImage: "calendar.badge.plus")
@@ -599,52 +605,14 @@ private struct PlanningDayTile: View {
             }
         }
         .accessibilityIdentifier("daily-planning")
+        .onAppear(perform: loadEvents)
+        .onChange(of: model.events) { _, _ in loadEvents() }
     }
 
-    private func row(_ item: DailyBrief.TimedItem) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Circle()
-                .fill(Color(hex: item.colorHex ?? colorHex))
-                .frame(width: 7, height: 7)
-            Text(item.time)
-                .font(.subheadline.weight(.bold))
-                .monospacedDigit()
-                .lineLimit(1)
-                .fixedSize()
-            VStack(alignment: .leading, spacing: 0) {
-                Text(item.title)
-                    .font(.subheadline.weight(item.isHighlighted ? .bold : .regular))
-                    .foregroundStyle(item.isHighlighted ? Color(hex: item.colorHex ?? colorHex) : .primary)
-                    .lineLimit(1)
-                if !item.detail.isEmpty {
-                    Text(item.detail)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                }
-            }
-        }
-    }
-
-    private func compactRow(_ item: DailyBrief.TimedItem) -> some View {
-        HStack(alignment: .top, spacing: 7) {
-            Capsule()
-                .fill(Color(hex: item.colorHex ?? colorHex))
-                .frame(width: 3)
-            VStack(alignment: .leading, spacing: 1) {
-                Text(item.time)
-                    .font(.caption.weight(.bold))
-                    .monospacedDigit()
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                Text(item.title)
-                    .font(.subheadline.weight(item.isHighlighted ? .bold : .semibold))
-                    .foregroundStyle(.primary)
-                    .lineLimit(2)
-            }
-        }
-        .fixedSize(horizontal: false, vertical: true)
+    /// The calendar events of the whole week, the days already gone included.
+    private func loadEvents() {
+        guard CalendarService.hasAccess, let first = DateMath.week(containing: Date()).first else { return }
+        events = CalendarService.events(from: first, to: first.addingTimeInterval(7 * 86_400))
     }
 }
 

@@ -47,6 +47,25 @@ final class AppearanceAndStoreTests: XCTestCase {
         }
     }
 
+    @MainActor
+    func testTheWeekTablePutsWhatOverlapsSideBySide() {
+        let day = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 5, hour: 0))!
+        func at(_ hour: Int, _ minute: Int = 0) -> Date { day.addingTimeInterval(TimeInterval(hour * 3_600 + minute * 60)) }
+        let items = [
+            AgendaItem(id: "a", kind: .event, title: "Cours", start: at(9), end: at(11), colorHex: "3366FF", symbol: "book"),
+            AgendaItem(id: "b", kind: .event, title: "Appel", start: at(10), end: at(10, 30), colorHex: "E5484D", symbol: "phone"),
+            AgendaItem(id: "c", kind: .event, title: "Dîner", start: at(19), end: nil, colorHex: "F2A33A", symbol: "fork.knife"),
+            AgendaItem(id: "d", kind: .task, title: "Sans heure", start: nil, colorHex: "3366FF", symbol: "checkmark.circle"),
+        ]
+        let placed = WeekTimetable.layout(items)
+        XCTAssertEqual(placed.count, 3, "What has no time goes in the band above the hours")
+        let byID = Dictionary(uniqueKeysWithValues: placed.map { ($0.item.id, $0) })
+        XCTAssertEqual(byID["a"]?.lanes, 2)
+        XCTAssertEqual(byID["b"]?.lane, 1)
+        XCTAssertEqual(byID["c"]?.lanes, 1, "Alone in its hour: the whole width")
+        XCTAssertEqual(byID["c"].map { $0.end - $0.start }, 45, "Without an end: 45 minutes")
+    }
+
     func testSetupsFitOnAPhone() {
         XCTAssertEqual(Set(HomeSetupCatalog.all.map(\.id)).count, HomeSetupCatalog.all.count)
         XCTAssertGreaterThanOrEqual(HomeSetupCatalog.all.filter { !$0.isPremium }.count, 3, "Some setups stay free")

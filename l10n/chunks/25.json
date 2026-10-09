@@ -403,5 +403,45 @@
   "key": "Par défaut",
   "placeholders": 0,
   "uses": []
+ },
+ {
+  "key": "3 mois",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Évolution du solde",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Note tes revenus et tes dépenses : ton solde s'affichera ici.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Revenus moins dépenses depuis le %@, factures et montants fixes compris.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Rien de noté cette semaine.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Calories de la semaine",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Semaine dernière",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Semaine prochaine",
+  "placeholders": 0,
+  "uses": []
  }
 ]

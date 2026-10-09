@@ -41,7 +41,7 @@ struct NutritionAppView: View {
             actions
             meals(entries: entries)
             if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
-            if !state.entries.isEmpty { weekTrend(state: state, known: known) }
+            weekTrend(state: state, known: known)
             more(state: state, known: known)
             Text(tr("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL)."))
                 .font(.footnote)
@@ -175,36 +175,59 @@ struct NutritionAppView: View {
 
     // MARK: Trend
 
+    /// The week of the chosen day: a round a day (on target: checked; otherwise how far it got), a tap
+    /// shows that day above, a swipe changes week; the calories of each day below.
     private func weekTrend(state: NutritionState, known: NutritionTiles.Targets) -> some View {
-        let end = Date()
-        let start = DateMath.calendar.date(byAdding: .day, value: -6, to: end) ?? end
-        let stats = NutritionMath.stats(state, from: start, to: end)
-        return NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
+        let goal = state.goals.kcal
+        return WeekCard(day: $day, colorHex: accentHex, allowsFuture: false,
+                        detail: { week in
+                            let stats = weekStats(state, week)
+                            return stats.trackedDays == 0 ? nil : tr("Moyenne \(TF.int(stats.averages.kcal)) kcal")
+                        },
+                        mark: { date in
+                            let entries = NutritionMath.entries(state, on: date)
+                            guard !entries.isEmpty else { return WeekDayMark() }
+                            let kcal = NutritionMath.totals(state, on: date).kcal
+                            guard known.kcal, goal > 0 else { return WeekDayMark(progress: 1) }
+                            return WeekDayMark(progress: kcal / goal, isDone: abs(kcal - goal) <= goal * 0.1)
+                        }) { week in
+            let stats = weekStats(state, week)
+            let values = week.map { NutritionMath.totals(state, on: $0).kcal }
             VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    Text(tr("7 derniers jours")).font(.headline)
-                    Spacer()
-                    Text(tr("Historique"))
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: accentHex))
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(.tertiary)
-                }
-                WeekBars(values: stats.kcalPerDay, days: stats.days, goal: known.kcal ? stats.goal : nil, colorHex: accentHex)
+                WeekBars(values: values, days: week, goal: known.kcal ? goal : nil, colorHex: accentHex,
+                         highlighted: week.firstIndex { DateMath.isSameDay($0, day) })
                     .frame(height: 70)
-                Text(trendText(stats, known: known))
+                Text(trendText(stats, known: known, empty: tr("Rien de noté cette semaine.")))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+                NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
+                    HStack {
+                        Text(tr("Historique"))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Color(hex: accentHex))
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("nutrition-trend")
             }
-            .card()
         }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("nutrition-trend")
     }
 
-    private func trendText(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets) -> String {
-        guard stats.trackedDays > 0 else { return tr("Rien de noté ces 7 derniers jours.") }
+    /// The days of the week up to today.
+    private func weekStats(_ state: NutritionState, _ week: [Date]) -> NutritionMath.PeriodStats {
+        let now = Date()
+        let start = week.first ?? now
+        let end = min(week.last ?? now, now)
+        return NutritionMath.stats(state, from: start, to: max(start, end))
+    }
+
+    private func trendText(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets, empty: String) -> String {
+        guard stats.trackedDays > 0 else { return empty }
         let average = tr("Moyenne \(TF.int(stats.averages.kcal)) kcal")
         guard known.kcal else { return tr("\(average) sur \(Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés"))).") }
         return tr("\(average) · \(Fmt.plural(stats.daysOnTarget, tr("jour"), tr("jours"))) sur \(stats.trackedDays) dans l'objectif")
@@ -351,6 +374,8 @@ struct WeekBars: View {
     let days: [Date]
     let goal: Double?
     let colorHex: String
+    /// The bar drawn in full color (the last one by default).
+    var highlighted: Int?
 
     var body: some View {
         let top = max(values.max() ?? 0, goal ?? 0, 1)
@@ -367,7 +392,7 @@ struct WeekBars: View {
                     ForEach(Array(values.enumerated()), id: \.offset) { index, value in
                         VStack(spacing: 4) {
                             RoundedRectangle(cornerRadius: 4, style: .continuous)
-                                .fill(Color(hex: colorHex).opacity(index == values.count - 1 ? 1 : 0.45))
+                                .fill(Color(hex: colorHex).opacity(index == (highlighted ?? values.count - 1) ? 1 : 0.45))
                                 .frame(height: max(3, height * value / top))
                             Text(days.indices.contains(index) ? String(Fmt.weekday(days[index]).prefix(1)) : "")
                                 .font(.caption2)
@@ -380,6 +405,6 @@ struct WeekBars: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(tr("Calories des 7 derniers jours")))
+        .accessibilityLabel(Text(tr("Calories de la semaine")))
     }
 }

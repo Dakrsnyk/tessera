@@ -1,3 +1,4 @@
+import Charts
 import SwiftUI
 
 /// Everything the Finances mini-app edits in a sheet.
@@ -63,8 +64,9 @@ struct MonthlyBudgetEditor: View {
     }
 }
 
-/// The Finances mini-app: what is left this month, what came in and went out, the categories, the
-/// bills coming and the savings; then every operation, the evolution and the accounts.
+/// The Finances mini-app: the balance as it went (a chart), what is left this month, what came in and
+/// went out, the categories, the bills coming and the savings; then every operation, the evolution
+/// and the accounts.
 struct FinancesAppView: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: FinanceSheet?
@@ -76,6 +78,7 @@ struct FinancesAppView: View {
         let now = Date()
         let state = model.budget
         MiniAppScroll {
+            BalanceChartCard(state: state, currency: currency)
             hero(state: state, now: now)
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex) { sheet = .expense(nil) }
@@ -351,5 +354,113 @@ struct GoalProgressRow: View {
             parts.append(tr("atteint"))
         }
         return parts.joined(separator: " · ")
+    }
+}
+
+/// The balance as it went, at the top of Finances: what came in minus what went out, day by day, over
+/// the month, three months or the year (from zero at the start of the period).
+private struct BalanceChartCard: View {
+    let state: BudgetState
+    let currency: String
+    @State private var period: Period = .month
+
+    enum Period: String, CaseIterable, Identifiable {
+        case month, quarter, year
+
+        var id: String { rawValue }
+
+        var title: String {
+            switch self {
+            case .month: tr("Mois")
+            case .quarter: tr("3 mois")
+            case .year: tr("Année")
+            }
+        }
+
+        func start(_ now: Date) -> Date {
+            let month = BudgetMath.monthInterval(now).start
+            switch self {
+            case .month: return month
+            case .quarter: return DateMath.calendar.date(byAdding: .month, value: -2, to: month) ?? month
+            case .year: return DateMath.calendar.date(byAdding: .month, value: -11, to: month) ?? month
+            }
+        }
+    }
+
+    var body: some View {
+        let now = Date()
+        let points = BudgetMath.balanceHistory(state, from: period.start(now), now: now)
+        let balance = points.last?.balance ?? 0
+        let color = Color(hex: balance < 0 ? Finances.overHex : Finances.incomeHex)
+        let dayFormat: Date.FormatStyle = period == .month ? .dateTime.day().month(.abbreviated) : .dateTime.month(.abbreviated)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(tr("Solde"))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Text(TF.money(balance, currency))
+                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .foregroundStyle(balance < 0 ? color : Color.primary)
+                        .monospacedDigit()
+                        .contentTransition(.numericText())
+                }
+                Spacer(minLength: 8)
+                Picker(tr("Période"), selection: $period.animation(.snappy)) {
+                    ForEach(Period.allCases) { Text($0.title).tag($0) }
+                }
+                .pickerStyle(.segmented)
+                .frame(maxWidth: 190)
+            }
+            Chart {
+                ForEach(points) { point in
+                    AreaMark(x: .value("Jour", point.date), y: .value("Solde", point.balance))
+                        .foregroundStyle(LinearGradient(colors: [color.opacity(0.28), color.opacity(0.02)], startPoint: .top, endPoint: .bottom))
+                        .interpolationMethod(.monotone)
+                    LineMark(x: .value("Jour", point.date), y: .value("Solde", point.balance))
+                        .foregroundStyle(color)
+                        .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
+                        .interpolationMethod(.monotone)
+                }
+                RuleMark(y: .value("Zéro", 0.0))
+                    .foregroundStyle(Color.secondary.opacity(0.4))
+                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
+                if let last = points.last {
+                    PointMark(x: .value("Jour", last.date), y: .value("Solde", last.balance))
+                        .foregroundStyle(color)
+                        .symbolSize(70)
+                }
+            }
+            .chartXAxis {
+                AxisMarks(values: .automatic(desiredCount: 4)) { _ in
+                    AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
+                    AxisValueLabel(format: dayFormat)
+                }
+            }
+            .chartYAxis {
+                AxisMarks(position: .trailing, values: .automatic(desiredCount: 4)) { value in
+                    AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
+                    AxisValueLabel {
+                        if let amount = value.as(Double.self) {
+                            Text(TF.money(amount, currency))
+                        }
+                    }
+                }
+            }
+            .frame(height: 170)
+            .accessibilityLabel(Text(tr("Évolution du solde")))
+            Text(caption(points))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .card()
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("finances-balance")
+    }
+
+    /// What came in and went out over the period, and since when.
+    private func caption(_ points: [BudgetMath.BalancePoint]) -> String {
+        guard let first = points.first else { return tr("Note tes revenus et tes dépenses : ton solde s'affichera ici.") }
+        return tr("Revenus moins dépenses depuis le \(Fmt.shortDay(first.date)), factures et montants fixes compris.")
     }
 }
