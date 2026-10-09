@@ -23454,6 +23454,147 @@
         }
       }
     },
+    "Annuler cette fois-ci": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur dieses Mal absagen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel this time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar esta vez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler cette fois-ci"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla questa volta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今回だけキャンセル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar desta vez"
+          }
+        }
+      }
+    },
+    "Annulé cette fois-ci": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Mal abgesagt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelled this time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelado esta vez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulé cette fois-ci"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annullato questa volta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今回はキャンセル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelado desta vez"
+          }
+        }
+      }
+    },
+    "Annulé le %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abgesagt am %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelled on %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelado el %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulé le %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annullato il %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@はキャンセル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelado em %@"
+          }
+        }
+      }
+    },
     "Année": {
       "extractionState": "manual",
       "localizations": {
@@ -43335,6 +43476,53 @@
         }
       }
     },
+    "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Datei ist keine Tessera-Sicherung oder beschädigt. Nichts wurde geändert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file isn't a Tessera backup, or it's damaged. Nothing was changed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este archivo no es una copia de seguridad de Tessera o está dañado. No se ha cambiado nada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo file non è un backup di Tessera, oppure è danneggiato. Non è stato modificato nulla."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルはTesseraのバックアップではないか、破損しています。何も変更されていません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este arquivo não é um backup do Tessera ou está danificado. Nada foi alterado."
+          }
+        }
+      }
+    },
     "Ce matin": {
       "extractionState": "manual",
       "localizations": {
@@ -45540,6 +45728,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Este período"
+          }
+        }
+      }
+    },
+    "Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Sicherung stammt aus einer neueren Tessera-Version. Aktualisiere die App und versuche es erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This backup comes from a newer version of Tessera. Update the app, then try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta copia de seguridad viene de una versión más reciente de Tessera. Actualiza la app y vuelve a intentarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo backup proviene da una versione più recente di Tessera. Aggiorna l'app, poi riprova."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このバックアップは新しいバージョンのTesseraで作成されています。アプリをアップデートしてから、もう一度お試しください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este backup vem de uma versão mais recente do Tessera. Atualize o app e tente novamente."
           }
         }
       }
@@ -57811,49 +58046,49 @@
         }
       }
     },
-    "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.": {
+    "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine ou ce qui arrive une seule fois : ta semaine s'organise ici et dans le widget Horaire.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kurse, Arbeit, Termine… Füge hinzu, was jede Woche wiederkehrt: Deine Woche ordnet sich hier und im Stundenplan-Widget."
+            "value": "Kurse, Arbeit, Termine… Füge hinzu, was jede Woche wiederkehrt oder nur einmal stattfindet: Deine Woche ordnet sich hier und im Stundenplan-Widget."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Classes, work, appointments… Add what happens every week: your week takes shape here and in the Schedule widget."
+            "value": "Classes, work, appointments… Add what happens every week or just once: your week takes shape here and in the Schedule widget."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Clases, trabajo, citas… Añade lo que se repite cada semana: tu semana se organiza aquí y en el widget Horario."
+            "value": "Clases, trabajo, citas… Añade lo que se repite cada semana o lo que pasa una sola vez: tu semana se organiza aquí y en el widget Horario."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire."
+            "value": "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine ou ce qui arrive une seule fois : ta semaine s'organise ici et dans le widget Horaire."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lezioni, lavoro, appuntamenti… Aggiungi ciò che si ripete ogni settimana: la tua settimana si organizza qui e nel widget Orario."
+            "value": "Lezioni, lavoro, appuntamenti… Aggiungi ciò che si ripete ogni settimana o che accade una sola volta: la tua settimana si organizza qui e nel widget Orario."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "授業、仕事、約束… 毎週のことを追加しましょう。1週間がここと時間割ウィジェットで整理されます。"
+            "value": "授業、仕事、約束… 毎週のことや一度だけの予定を追加しましょう。1週間がここと時間割ウィジェットで整理されます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aulas, trabalho, compromissos… Adicione o que se repete toda semana: sua semana se organiza aqui e no widget Horário."
+            "value": "Aulas, trabalho, compromissos… Adicione o que se repete toda semana ou acontece uma só vez: sua semana se organiza aqui e no widget Horário."
           }
         }
       }
@@ -81781,6 +82016,53 @@
         }
       }
     },
+    "Exporter mes données": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Daten exportieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export my data"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar mis datos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exporter mes données"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esporta i miei dati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "データを書き出す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar meus dados"
+          }
+        }
+      }
+    },
     "Exposé": {
       "extractionState": "manual",
       "localizations": {
@@ -104811,6 +105093,53 @@
         }
       }
     },
+    "La sauvegarde n'a pas pu être créée.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Sicherung konnte nicht erstellt werden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The backup couldn't be created."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido crear la copia de seguridad."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sauvegarde n'a pas pu être créée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non è stato possibile creare il backup."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックアップを作成できませんでした。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível criar o backup."
+          }
+        }
+      }
+    },
     "La semaine apparaîtra ici.": {
       "extractionState": "manual",
       "localizations": {
@@ -111387,6 +111716,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "As próximas duas datas para comemorar."
+          }
+        }
+      }
+    },
+    "Les données actuelles de l'app seront remplacées par celles de la sauvegarde du %@. Ton abonnement n'est pas touché.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die aktuellen Daten der App werden durch die Sicherung vom %@ ersetzt. Dein Abo bleibt unberührt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app's current data will be replaced by the backup from %@. Your subscription isn't affected."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los datos actuales de la app se sustituirán por los de la copia de seguridad del %@. Tu suscripción no se ve afectada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les données actuelles de l'app seront remplacées par celles de la sauvegarde du %@. Ton abonnement n'est pas touché."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I dati attuali dell'app saranno sostituiti da quelli del backup del %@. Il tuo abbonamento non viene toccato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリの現在のデータは、%@のバックアップのデータに置き換えられます。サブスクリプションには影響しません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os dados atuais do app serão substituídos pelos do backup de %@. Sua assinatura não é afetada."
           }
         }
       }
@@ -157498,6 +157874,53 @@
         }
       }
     },
+    "Quand": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wann"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuándo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いつ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando"
+          }
+        }
+      }
+    },
     "Quantité": {
       "extractionState": "manual",
       "localizations": {
@@ -161728,6 +162151,53 @@
         }
       }
     },
+    "Remplacer tes données par cette sauvegarde ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Daten durch diese Sicherung ersetzen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replace your data with this backup?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Sustituir tus datos por esta copia de seguridad?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remplacer tes données par cette sauvegarde ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sostituire i tuoi dati con questo backup?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "データをこのバックアップで置き換えますか？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Substituir seus dados por este backup?"
+          }
+        }
+      }
+    },
     "Remplissage": {
       "extractionState": "manual",
       "localizations": {
@@ -164031,6 +164501,53 @@
         }
       }
     },
+    "Restaurer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wiederherstellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "復元"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar"
+          }
+        }
+      }
+    },
     "Restaurer les achats": {
       "extractionState": "manual",
       "localizations": {
@@ -164121,6 +164638,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Restaurar compras"
+          }
+        }
+      }
+    },
+    "Restaurer une sauvegarde": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sicherung wiederherstellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore a backup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar una copia de seguridad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer une sauvegarde"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina un backup"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックアップから復元"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar um backup"
           }
         }
       }
@@ -171739,6 +172303,53 @@
         }
       }
     },
+    "Rétablir cette fois-ci": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Mal wiederherstellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bring back this time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restablecer esta vez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir cette fois-ci"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina questa volta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今回を元に戻す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restabelecer desta vez"
+          }
+        }
+      }
+    },
     "Rétro": {
       "extractionState": "manual",
       "localizations": {
@@ -174418,6 +175029,100 @@
         }
       }
     },
+    "Sauvegarde": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sicherung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia de seguridad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sauvegarde"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックアップ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup"
+          }
+        }
+      }
+    },
+    "Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sicherung gespeichert. Bewahre sie in Dateien oder iCloud Drive auf."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup saved. Keep it in Files or iCloud Drive."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia de seguridad guardada. Guárdala en Archivos o iCloud Drive."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup salvato. Conservalo in File o iCloud Drive."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックアップを保存しました。「ファイル」またはiCloud Driveに保管してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup salvo. Guarde-o em Arquivos ou no iCloud Drive."
+          }
+        }
+      }
+    },
     "Scanne ou cherche un aliment : tes widgets se mettent à jour.": {
       "extractionState": "manual",
       "localizations": {
@@ -175546,6 +176251,53 @@
         }
       }
     },
+    "Semaine du %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woche vom %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week of %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana del %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine du %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimana del %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の週"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana de %@"
+          }
+        }
+      }
+    },
     "Semaine et lune": {
       "extractionState": "manual",
       "localizations": {
@@ -175683,6 +176435,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Semana de nutrição"
+          }
+        }
+      }
+    },
+    "Semaine précédente": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorherige Woche"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana anterior"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine précédente"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimana precedente"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前の週"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana anterior"
+          }
+        }
+      }
+    },
+    "Semaine suivante": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächste Woche"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semana siguiente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaine suivante"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimana successiva"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次の週"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próxima semana"
           }
         }
       }
@@ -189975,6 +190821,53 @@
         }
       }
     },
+    "Tes données sont de retour.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Daten sind wieder da."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your data is back."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus datos han vuelto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes données sont de retour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi dati sono tornati."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "データが復元されました。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus dados estão de volta."
+          }
+        }
+      }
+    },
     "Tes dépenses comparées à la semaine dernière.": {
       "extractionState": "manual",
       "localizations": {
@@ -203652,6 +204545,53 @@
         }
       }
     },
+    "Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Datei mit deinen Widgets, den Daten deiner Mini-Apps und deinen Einstellungen, zum Aufbewahren in Dateien oder iCloud Drive. Sie stellt alles auf diesem oder einem anderen iPhone wieder her."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A file with your widgets, your mini-apps' data and your settings, to keep in Files or iCloud Drive. It puts everything back on this iPhone or another one."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un archivo con tus widgets, los datos de tus miniapps y tus ajustes, para guardar en Archivos o iCloud Drive. Lo devuelve todo a su sitio en este iPhone o en otro."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un file con i tuoi widget, i dati delle tue mini-app e le tue impostazioni, da conservare in File o iCloud Drive. Rimette tutto a posto su questo iPhone o su un altro."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェット、ミニアプリのデータ、設定をまとめたファイルです。「ファイル」やiCloud Driveに保管できます。このiPhoneでも別のiPhoneでも、すべてを元どおりにします。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um arquivo com seus widgets, os dados dos seus miniapps e seus ajustes, para guardar em Arquivos ou no iCloud Drive. Ele coloca tudo de volta neste iPhone ou em outro."
+          }
+        }
+      }
+    },
     "Un grand chiffre, comme une une": {
       "extractionState": "manual",
       "localizations": {
@@ -205246,6 +206186,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uma pegada mais aberta poupa os ombros."
+          }
+        }
+      }
+    },
+    "Une seule fois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur einmal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Just once"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una sola vez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une seule fois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una sola volta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一度だけ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma só vez"
           }
         }
       }
@@ -223952,6 +224939,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "sala %@"
+          }
+        }
+      }
+    },
+    "sauvegarde": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sicherung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "backup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "copia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sauvegarde"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "backup"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "backup"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "backup"
           }
         }
       }

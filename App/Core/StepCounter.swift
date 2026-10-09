@@ -73,7 +73,7 @@ final class StepCounter {
         return day
     }
 
-    private static let historyKey = "stepHistory"
+    static let historyKey = "stepHistory"
 
     /// Saved days, by « yyyy-MM-dd »: [steps, distance in metres (-1 if unknown), floors (-1 if unknown)].
     private static func save(_ day: Day) {

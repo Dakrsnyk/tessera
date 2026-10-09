@@ -21,20 +21,22 @@ enum StudentTiles {
     /// The large widget: the whole week's schedule (classes, work, appointments, other events).
     static func weekSchedule(_ state: StudentState, context: RenderContext) -> Tile {
         let now = context.date
-        let first = (state.slots.map(\.startMinute).min() ?? 8 * 60) / 60 * 60
-        let last = max(first + 60, ((state.slots.map(\.endMinute).max() ?? 18 * 60) + 59) / 60 * 60)
+        // This week: the weekly entries (not those cancelled) and the events dated this week.
+        let entries = DateMath.week(containing: now).flatMap { StudentMath.occurrences(state, on: $0) }
+        let first = (entries.map(\.slot.startMinute).min() ?? 8 * 60) / 60 * 60
+        let last = max(first + 60, ((entries.map(\.slot.endMinute).max() ?? 18 * 60) + 59) / 60 * 60)
         let span = Double(last - first)
         var tile = Tile(title: tr("Horaire de la semaine"), symbol: "calendar.day.timeline.left")
-        tile.value = Fmt.number(state.slots.count)
-        tile.unit = state.slots.count > 1 ? tr("éléments") : tr("élément")
+        tile.value = Fmt.number(entries.count)
+        tile.unit = entries.count > 1 ? tr("éléments") : tr("élément")
         func hour(_ minutes: Int) -> String { String(format: "%d:%02d", minutes / 60, minutes % 60) }
         tile.caption = "\(hour(first)) – \(hour(last))"
-        tile.visual = .schedule(state.slots.map { slot in
-            ScheduleBlock(day: slot.weekday - 1,
-                          start: Double(slot.startMinute - first) / span,
-                          end: Double(slot.endMinute - first) / span,
-                          colorHex: state.colorHex(of: slot),
-                          title: state.title(of: slot))
+        tile.visual = .schedule(entries.map { entry in
+            ScheduleBlock(day: FitnessMath.isoWeekday(entry.start) - 1,
+                          start: Double(entry.slot.startMinute - first) / span,
+                          end: Double(entry.slot.endMinute - first) / span,
+                          colorHex: state.colorHex(of: entry.slot),
+                          title: state.title(of: entry.slot))
         }, today: FitnessMath.isoWeekday(now) - 1)
         tile.inline = tr("Horaire de la semaine")
         return tile

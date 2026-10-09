@@ -492,6 +492,19 @@ final class AppModel {
         updateSettings { $0.appearance = mode }
     }
 
+    /// Puts back a backup: the widgets, every mini-app and the settings, then the widgets and the
+    /// reminders follow. Premium status isn't in a backup (it belongs to the App Store account).
+    func restore(_ archive: DataBackup.Archive) {
+        let previousHabits = content.habits.map(\.id)
+        DataBackup.restore(archive, store: store)
+        reloadFromDisk()
+        let habits = Set(content.habits.map(\.id))
+        for id in previousHabits where !habits.contains(id) { NotificationScheduler.cancelHabitReminder(id) }
+        for habit in content.habits { NotificationScheduler.syncHabitReminder(habit) }
+        for design in designs { NotificationScheduler.syncCountdownReminder(for: design) }
+        scheduleWidgetReload()
+    }
+
     /// Erases everything the user created. Premium status is kept (it belongs to the App Store account).
     func resetAllData() {
         for design in designs {

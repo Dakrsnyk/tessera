@@ -1,5 +1,6 @@
 import StoreKit
 import SwiftUI
+import UniformTypeIdentifiers
 import UserNotifications
 import WidgetKit
 
@@ -15,6 +16,11 @@ struct ProfileView: View {
     @State private var restoreMessage: String?
     @State private var showsManageSubscriptions = false
     @State private var confirmReset = false
+    @State private var backup: BackupDocument?
+    @State private var exportsBackup = false
+    @State private var importsBackup = false
+    @State private var pendingRestore: DataBackup.Archive?
+    @State private var backupMessage: String?
     @State private var copiedEmail = false
     @State private var notificationStatus = "—"
     @Environment(\.openURL) private var openURL
@@ -183,6 +189,34 @@ struct ProfileView: View {
                 }
 
                 Section {
+                    Button {
+                        exportBackup()
+                    } label: {
+                        Label(tr("Exporter mes données"), systemImage: "square.and.arrow.up")
+                    }
+                    .accessibilityIdentifier("backup-export")
+                    .fileExporter(isPresented: $exportsBackup, document: backup, contentType: .json,
+                                  defaultFilename: DataBackup.fileName(Date())) { result in
+                        if case .success = result { backupMessage = tr("Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.") }
+                        backup = nil
+                    }
+                    Button {
+                        importsBackup = true
+                    } label: {
+                        Label(tr("Restaurer une sauvegarde"), systemImage: "arrow.counterclockwise")
+                    }
+                    .accessibilityIdentifier("backup-import")
+                    .fileImporter(isPresented: $importsBackup, allowedContentTypes: [.json]) { result in
+                        guard case let .success(url) = result else { return }
+                        readBackup(at: url)
+                    }
+                } header: {
+                    Text(tr("Sauvegarde"))
+                } footer: {
+                    Text(tr("Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre."))
+                }
+
+                Section {
                     Button(tr("Effacer toutes mes données"), role: .destructive) { confirmReset = true }
                 }
 
@@ -230,11 +264,49 @@ struct ProfileView: View {
             } message: {
                 Text(restoreMessage ?? "")
             }
+            .confirmationDialog(tr("Remplacer tes données par cette sauvegarde ?"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {
+                Button(tr("Restaurer"), role: .destructive) {
+                    if let archive = pendingRestore {
+                        model.restore(archive)
+                        backupMessage = tr("Tes données sont de retour.")
+                    }
+                    pendingRestore = nil
+                }
+            } message: {
+                Text(tr("Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché."))
+            }
+            .alert(tr("Sauvegarde"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {
+                Button(tr("OK"), role: .cancel) {}
+            } message: {
+                Text(backupMessage ?? "")
+            }
             .confirmationDialog(tr("Effacer toutes tes données ?"), isPresented: $confirmReset, titleVisibility: .visible) {
                 Button(tr("Tout effacer"), role: .destructive) { model.resetAllData() }
             } message: {
                 Text(tr("Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché."))
             }
+        }
+    }
+
+    private func exportBackup() {
+        do {
+            backup = BackupDocument(data: try DataBackup.make())
+            exportsBackup = true
+        } catch {
+            backupMessage = tr("La sauvegarde n'a pas pu être créée.")
+        }
+    }
+
+    /// Reads the file chosen and asks before replacing anything; a file that isn't a backup changes nothing.
+    private func readBackup(at url: URL) {
+        let access = url.startAccessingSecurityScopedResource()
+        defer { if access { url.stopAccessingSecurityScopedResource() } }
+        do {
+            pendingRestore = try DataBackup.read(Data(contentsOf: url))
+        } catch DataBackup.Failure.newerVersion {
+            backupMessage = tr("Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.")
+        } catch {
+            backupMessage = tr("Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.")
         }
     }
 

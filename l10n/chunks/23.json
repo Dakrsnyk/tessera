@@ -54,5 +54,168 @@
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:189: combo(\"temps-perso\", tr(\"Mes dates\"), tr(\"Le mois, ton compte à rebours et l'année en points.\"), .forest, \"2B7A4B\","
   ]
+ },
+ {
+  "key": "Annuler cette fois-ci",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:117: Label(entry.isCancelled ? tr(\"Rétablir cette fois-ci\") : tr(\"Annuler cette fois-ci\"),"
+  ]
+ },
+ {
+  "key": "Annulé cette fois-ci",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:102: let detail = entry.isCancelled ? tr(\"Annulé cette fois-ci\") : [slot.date == nil ? nil : tr(\"Une seule fois\"), place].compactMap { $0 }.joined(separator: \" · \")"
+  ]
+ },
+ {
+  "key": "Annulé le %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:241: Toggle(tr(\"Annulé le \\(Fmt.longDay(day))\"), isOn: cancelled(on: day))"
+  ]
+ },
+ {
+  "key": "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:309: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.\")"
+  ]
+ },
+ {
+  "key": "Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:307: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.\")"
+  ]
+ },
+ {
+  "key": "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine ou ce qui arrive une seule fois : ta semaine s'organise ici et dans le widget Horaire.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:26: message: tr(\"Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine ou ce qui arrive une seule fois : ta semaine s'organise ici et dans le widget Horaire.\"),"
+  ]
+ },
+ {
+  "key": "Exporter mes données",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:195: Label(tr(\"Exporter mes données\"), systemImage: \"square.and.arrow.up\")"
+  ]
+ },
+ {
+  "key": "La sauvegarde n'a pas pu être créée.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:296: backupMessage = tr(\"La sauvegarde n'a pas pu être créée.\")"
+  ]
+ },
+ {
+  "key": "Les données actuelles de l'app seront remplacées par celles de la sauvegarde du %@. Ton abonnement n'est pas touché.",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:276: Text(tr(\"Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \\(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché.\"))"
+  ]
+ },
+ {
+  "key": "Quand",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/StudentSpace.swift:220: Picker(tr(\"Quand\"), selection: isOnce) {"
+  ]
+ },
+ {
+  "key": "Remplacer tes données par cette sauvegarde ?",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:267: .confirmationDialog(tr(\"Remplacer tes données par cette sauvegarde ?\"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {"
+  ]
+ },
+ {
+  "key": "Restaurer",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:268: Button(tr(\"Restaurer\"), role: .destructive) {"
+  ]
+ },
+ {
+  "key": "Restaurer une sauvegarde",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:206: Label(tr(\"Restaurer une sauvegarde\"), systemImage: \"arrow.counterclockwise\")"
+  ]
+ },
+ {
+  "key": "Rétablir cette fois-ci",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:117: Label(entry.isCancelled ? tr(\"Rétablir cette fois-ci\") : tr(\"Annuler cette fois-ci\"),"
+  ]
+ },
+ {
+  "key": "Sauvegarde",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:214: Text(tr(\"Sauvegarde\"))",
+   "App/Screens/Profile/ProfileView.swift:278: .alert(tr(\"Sauvegarde\"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {"
+  ]
+ },
+ {
+  "key": "Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:200: if case .success = result { backupMessage = tr(\"Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.\") }"
+  ]
+ },
+ {
+  "key": "Semaine du %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:61: Text(weekOffset == 0 ? tr(\"Cette semaine\") : tr(\"Semaine du \\(Fmt.shortDay(week.first ?? Date()))\"))"
+  ]
+ },
+ {
+  "key": "Semaine précédente",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:56: .accessibilityLabel(Text(tr(\"Semaine précédente\")))"
+  ]
+ },
+ {
+  "key": "Semaine suivante",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:74: .accessibilityLabel(Text(tr(\"Semaine suivante\")))"
+  ]
+ },
+ {
+  "key": "Tes données sont de retour.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:271: backupMessage = tr(\"Tes données sont de retour.\")"
+  ]
+ },
+ {
+  "key": "Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:216: Text(tr(\"Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.\"))"
+  ]
+ },
+ {
+  "key": "Une seule fois",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:102: let detail = entry.isCancelled ? tr(\"Annulé cette fois-ci\") : [slot.date == nil ? nil : tr(\"Une seule fois\"), place].compactMap { $0 }.joined(separator: \" · \")",
+   "App/Screens/Spaces/StudentSpace.swift:222: Text(tr(\"Une seule fois\")).tag(true)"
+  ]
+ },
+ {
+  "key": "sauvegarde",
+  "placeholders": 0,
+  "uses": [
+   "App/Core/DataBackup.swift:79: return String(format: \"Tessera-%@-%04d-%02d-%02d\", tr(\"sauvegarde\"), c.year ?? 0, c.month ?? 0, c.day ?? 0)"
+  ]
  }
 ]

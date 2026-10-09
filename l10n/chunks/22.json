@@ -586,13 +586,6 @@
   ]
  },
  {
-  "key": "Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Studies/StudiesPages.swift:17: message: tr(\"Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire.\"),"
-  ]
- },
- {
   "key": "Horaire de la semaine",
   "placeholders": 0,
   "uses": [

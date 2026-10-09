@@ -42,8 +42,8 @@ enum ScheduleKind: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-/// A weekly entry of the Planning schedule: a class (with its course) or another event of the week
-/// (work, an appointment…). Times are minutes after midnight.
+/// An entry of the Planning schedule: a class (with its course) or another event (work, an
+/// appointment…), every week or once on a date. Times are minutes after midnight.
 struct ClassSlot: Codable, Hashable, Identifiable {
     var id = UUID()
     var courseID: UUID?
@@ -56,10 +56,14 @@ struct ClassSlot: Codable, Hashable, Identifiable {
     var kind: ScheduleKind = .course
     /// The name of an event that isn't a class (a class shows its course's name).
     var title: String = ""
+    /// The day of an event that happens once; nil for an entry that comes back every week.
+    var date: Date?
+    /// The days (« yyyy-MM-dd ») a weekly entry doesn't take place: a class cancelled once.
+    var skippedDays: [String] = []
 
-    enum CodingKeys: String, CodingKey { case id, courseID, weekday, startMinute, endMinute, room, kind, title }
+    enum CodingKeys: String, CodingKey { case id, courseID, weekday, startMinute, endMinute, room, kind, title, date, skippedDays }
 
-    init(courseID: UUID?, weekday: Int, startMinute: Int, endMinute: Int, room: String = "", kind: ScheduleKind = .course, title: String = "") {
+    init(courseID: UUID?, weekday: Int, startMinute: Int, endMinute: Int, room: String = "", kind: ScheduleKind = .course, title: String = "", date: Date? = nil) {
         self.courseID = courseID
         self.weekday = weekday
         self.startMinute = startMinute
@@ -67,6 +71,7 @@ struct ClassSlot: Codable, Hashable, Identifiable {
         self.room = room
         self.kind = kind
         self.title = title
+        self.date = date
     }
 
     /// Classes saved before the other kinds of events existed read as classes.
@@ -80,6 +85,15 @@ struct ClassSlot: Codable, Hashable, Identifiable {
         room = try c.decodeIfPresent(String.self, forKey: .room) ?? ""
         kind = (try? c.decodeIfPresent(ScheduleKind.self, forKey: .kind)) ?? .course
         title = try c.decodeIfPresent(String.self, forKey: .title) ?? ""
+        date = try c.decodeIfPresent(Date.self, forKey: .date)
+        skippedDays = try c.decodeIfPresent([String].self, forKey: .skippedDays) ?? []
+    }
+
+    /// Whether the entry falls on the day: on its date when it happens once, on its weekday otherwise
+    /// (a day it was cancelled included).
+    func falls(on day: Date) -> Bool {
+        if let date { return DateMath.isSameDay(date, day) }
+        return weekday == FitnessMath.isoWeekday(day)
     }
 }
 
@@ -234,6 +248,14 @@ struct StudentState: Codable, Hashable {
         for index in assignments.indices where assignments[index].courseID == id { assignments[index].courseID = nil }
         for index in sessions.indices where sessions[index].courseID == id { sessions[index].courseID = nil }
     }
+
+    /// Cancels a weekly entry on one day only, or brings it back that day.
+    mutating func setCancelled(_ cancelled: Bool, slot id: UUID, on day: Date) {
+        guard let index = slots.firstIndex(where: { $0.id == id }) else { return }
+        let key = DateMath.dayKey(day)
+        slots[index].skippedDays.removeAll { $0 == key }
+        if cancelled { slots[index].skippedDays.append(key) }
+    }
 }
 
 enum StudentMath {
@@ -241,18 +263,23 @@ enum StudentMath {
         let slot: ClassSlot
         let start: Date
         let end: Date
+
+        /// A weekly entry that doesn't take place this time.
+        var isCancelled: Bool { slot.skippedDays.contains(DateMath.dayKey(start)) }
     }
 
-    static func occurrences(_ state: StudentState, on day: Date) -> [ClassOccurrence] {
-        let weekday = FitnessMath.isoWeekday(day)
+    /// What the day holds: the weekly entries of its weekday and the events of its date. A weekly
+    /// entry cancelled that day is left out, unless asked for (to show it crossed out and bring it back).
+    static func occurrences(_ state: StudentState, on day: Date, includingCancelled: Bool = false) -> [ClassOccurrence] {
         let start = DateMath.startOfDay(day)
-        return state.slots.filter { $0.weekday == weekday }.map { slot in
+        return state.slots.filter { $0.falls(on: day) }.map { slot in
             ClassOccurrence(
                 slot: slot,
                 start: start.addingTimeInterval(TimeInterval(slot.startMinute) * 60),
                 end: start.addingTimeInterval(TimeInterval(slot.endMinute) * 60)
             )
         }
+        .filter { includingCancelled || !$0.isCancelled }
         .sorted { $0.start < $1.start }
     }
 
@@ -374,7 +401,7 @@ enum StudentMath {
 
     /// Minutes of class a week for a course, from the timetable.
     static func weeklyClassMinutes(_ state: StudentState, course: UUID) -> Int {
-        state.slots.filter { $0.courseID == course }.reduce(0) { $0 + max(0, $1.endMinute - $1.startMinute) }
+        state.slots.filter { $0.courseID == course && $0.date == nil }.reduce(0) { $0 + max(0, $1.endMinute - $1.startMinute) }
     }
 
     /// Share of the course's grade already evaluated (sum of the weights, up to 100 %).

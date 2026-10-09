@@ -3,29 +3,39 @@ import SwiftUI
 
 // MARK: - Timetable
 
-/// The week at a glance (a grid, one column a day), then the classes of the chosen day.
+/// A week at a glance (a grid, one column a day), then what the chosen day holds. Weeks follow one
+/// another: events that happen once show in their week, a weekly one cancelled once shows crossed out.
 struct StudiesTimetablePage: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: StudiesSheet?
     @State private var weekday = min(5, FitnessMath.isoWeekday(Date()))
+    /// 0: this week, 1: the next one, -1: the last one…
+    @State private var weekOffset = 0
+
+    private var week: [Date] {
+        DateMath.week(containing: DateMath.calendar.date(byAdding: .weekOfYear, value: weekOffset, to: Date()) ?? Date())
+    }
 
     var body: some View {
         let state = model.student
+        let week = self.week
+        let day = week[safe: weekday - 1] ?? Date()
         MiniAppScroll {
             if state.slots.isEmpty {
                 EmptyStateView(symbol: "calendar.day.timeline.left", title: tr("Ton horaire"),
-                               message: tr("Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine : ta semaine s'organise ici et dans le widget Horaire."),
+                               message: tr("Cours, travail, rendez-vous… Ajoute ce qui revient chaque semaine ou ce qui arrive une seule fois : ta semaine s'organise ici et dans le widget Horaire."),
                                actionTitle: tr("Ajouter un événement")) {
-                    sheet = StudiesSheet.slot(Studies.newSlot(state))
+                    sheet = .slotOn(Studies.newSlot(state), day)
                 }
                 .tint(Color(hex: Studies.accentHex))
             } else {
-                TimetableGrid(state: state, selected: $weekday) { sheet = .slot($0) }
-                dayList(state: state)
+                weekSwitcher(week)
+                TimetableGrid(state: state, week: week, selected: $weekday) { sheet = .slotOn($0.slot, $0.start) }
+                dayList(state: state, day: day)
                 MiniActionButton(title: tr("Ajouter un événement"), symbol: "plus", colorHex: Studies.accentHex, isProminent: false) {
                     var slot = Studies.newSlot(state)
                     slot.weekday = weekday
-                    sheet = .slot(slot)
+                    sheet = .slotOn(slot, day)
                 }
                 .accessibilityIdentifier("timetable-add")
             }
@@ -35,46 +45,108 @@ struct StudiesTimetablePage: View {
         .sheet(item: $sheet) { $0.editor }
     }
 
-    private func dayList(state: StudentState) -> some View {
-        let slots = state.slots.filter { $0.weekday == weekday }.sorted { $0.startMinute < $1.startMinute }
+    private func weekSwitcher(_ week: [Date]) -> some View {
+        HStack {
+            Button {
+                Haptics.tap()
+                weekOffset -= 1
+            } label: {
+                Image(systemName: "chevron.left").font(.body.weight(.semibold)).frame(width: 36, height: 36)
+            }
+            .accessibilityLabel(Text(tr("Semaine précédente")))
+            Spacer(minLength: 8)
+            Button {
+                weekOffset = 0
+            } label: {
+                Text(weekOffset == 0 ? tr("Cette semaine") : tr("Semaine du \(Fmt.shortDay(week.first ?? Date()))"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.primary)
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("timetable-week")
+            Spacer(minLength: 8)
+            Button {
+                Haptics.tap()
+                weekOffset += 1
+            } label: {
+                Image(systemName: "chevron.right").font(.body.weight(.semibold)).frame(width: 36, height: 36)
+            }
+            .accessibilityLabel(Text(tr("Semaine suivante")))
+            .accessibilityIdentifier("timetable-next-week")
+        }
+        .tint(Color(hex: Studies.accentHex))
+        .card(padding: 6)
+    }
+
+    private func dayList(state: StudentState, day: Date) -> some View {
+        let entries = StudentMath.occurrences(state, on: day, includingCancelled: true)
+        let count = entries.filter { !$0.isCancelled }.count
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: Studies.weekdayNames[weekday - 1], detail: slots.isEmpty ? nil : Fmt.plural(slots.count, tr("élément"), tr("éléments")))
-            if slots.isEmpty {
+            MiniSectionTitle(title: Fmt.longDay(day), detail: count == 0 ? nil : Fmt.plural(count, tr("élément"), tr("éléments")))
+            if entries.isEmpty {
                 Text(tr("Rien de prévu ce jour-là.")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)
             } else {
                 MiniRowsCard {
-                    ForEach(Array(slots.enumerated()), id: \.element.id) { index, slot in
+                    ForEach(Array(entries.enumerated()), id: \.element.slot.id) { index, entry in
                         if index > 0 { MiniDivider() }
-                        Button { sheet = .slot(slot) } label: {
-                            MiniRow(symbol: slot.kind.symbol, colorHex: state.colorHex(of: slot),
-                                    title: state.title(of: slot),
-                                    detail: slot.room.isEmpty ? nil : (slot.kind == .course ? tr("Salle \(slot.room)") : slot.room),
-                                    value: "\(Studies.minuteText(slot.startMinute))–\(Studies.minuteText(slot.endMinute))", showsChevron: false)
-                        }
-                        .buttonStyle(.plain)
+                        row(entry, state: state)
                     }
                 }
             }
         }
     }
+
+    private func row(_ entry: StudentMath.ClassOccurrence, state: StudentState) -> some View {
+        let slot = entry.slot
+        let place = slot.room.isEmpty ? nil : (slot.kind == .course ? tr("Salle \(slot.room)") : slot.room)
+        let detail = entry.isCancelled ? tr("Annulé cette fois-ci") : [slot.date == nil ? nil : tr("Une seule fois"), place].compactMap { $0 }.joined(separator: " · ")
+        return Button { sheet = .slotOn(slot, entry.start) } label: {
+            MiniRow(symbol: slot.kind.symbol, colorHex: state.colorHex(of: slot),
+                    title: state.title(of: slot),
+                    detail: detail.isEmpty ? nil : detail,
+                    value: "\(Studies.minuteText(slot.startMinute))–\(Studies.minuteText(slot.endMinute))", showsChevron: false)
+                .strikethrough(entry.isCancelled)
+                .opacity(entry.isCancelled ? 0.5 : 1)
+        }
+        .buttonStyle(.plain)
+        .contextMenu {
+            if slot.date == nil {
+                Button {
+                    model.update(\.student) { $0.setCancelled(!entry.isCancelled, slot: slot.id, on: entry.start) }
+                } label: {
+                    Label(entry.isCancelled ? tr("Rétablir cette fois-ci") : tr("Annuler cette fois-ci"),
+                          systemImage: entry.isCancelled ? "arrow.uturn.backward" : "calendar.badge.minus")
+                }
+            }
+            Button(role: .destructive) {
+                model.update(\.student) { $0.slots.removeAll { $0.id == slot.id } }
+            } label: {
+                Label(tr("Supprimer"), systemImage: "trash")
+            }
+        }
+    }
 }
 
-/// Monday to Friday (and the weekend when there are classes), each class a colored block.
+/// Monday to Friday (and the weekend when something falls on it), each entry a colored block; a
+/// weekly entry cancelled that day shows faded.
 struct TimetableGrid: View {
     let state: StudentState
+    let week: [Date]
     @Binding var selected: Int
-    let onTap: (ClassSlot) -> Void
+    let onTap: (StudentMath.ClassOccurrence) -> Void
 
     private let perMinute: CGFloat = 0.62
     private let letters = ["L", "M", "M", "J", "V", "S", "D"]
 
     var body: some View {
-        let hasWeekend = state.slots.contains(where: { $0.weekday >= 6 })
+        let entries = week.map { StudentMath.occurrences(state, on: $0, includingCancelled: true) }
+        let hasWeekend = entries.dropFirst(5).contains { !$0.isEmpty }
+        let all = entries.flatMap { $0 }
         let days = Array(1...(hasWeekend ? 7 : 5))
-        let first = (state.slots.map(\.startMinute).min() ?? 8 * 60) / 60 * 60
-        let last = ((state.slots.map(\.endMinute).max() ?? 17 * 60) + 59) / 60 * 60
+        let first = (all.map(\.slot.startMinute).min() ?? 8 * 60) / 60 * 60
+        let last = ((all.map(\.slot.endMinute).max() ?? 17 * 60) + 59) / 60 * 60
         let height = CGFloat(last - first) * perMinute
-        let today = FitnessMath.isoWeekday(Date())
+        let today = week.firstIndex { DateMath.isSameDay($0, Date()) }.map { $0 + 1 }
         VStack(spacing: 6) {
             HStack(spacing: 4) {
                 Color.clear.frame(width: 26, height: 1)
@@ -103,7 +175,7 @@ struct TimetableGrid: View {
                 }
                 .frame(width: 26, height: height, alignment: .topLeading)
                 ForEach(days, id: \.self) { day in
-                    column(day: day, first: first, height: height)
+                    column(day: day, entries: entries[safe: day - 1] ?? [], first: first, height: height)
                 }
             }
         }
@@ -112,13 +184,14 @@ struct TimetableGrid: View {
         .accessibilityIdentifier("timetable-grid")
     }
 
-    private func column(day: Int, first: Int, height: CGFloat) -> some View {
+    private func column(day: Int, entries: [StudentMath.ClassOccurrence], first: Int, height: CGFloat) -> some View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .fill(day == selected ? Color(hex: Studies.accentHex).opacity(0.07) : Color.primary.opacity(0.03))
-            ForEach(state.slots.filter { $0.weekday == day }) { slot in
+            ForEach(entries, id: \.slot.id) { entry in
+                let slot = entry.slot
                 let hex = state.colorHex(of: slot)
-                Button { onTap(slot) } label: {
+                Button { onTap(entry) } label: {
                     Text(TF.shortName(state.title(of: slot), words: 1))
                         .font(.system(size: 9, weight: .semibold))
                         .foregroundStyle(.white)
@@ -129,6 +202,7 @@ struct TimetableGrid: View {
                         .background(Color(hex: hex), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
                 }
                 .buttonStyle(.plain)
+                .opacity(entry.isCancelled ? 0.35 : 1)
                 .frame(height: max(14, CGFloat(slot.endMinute - slot.startMinute) * perMinute - 2))
                 .offset(y: CGFloat(slot.startMinute - first) * perMinute)
             }
@@ -312,7 +386,7 @@ struct StudiesCoursePage: View {
     }
 
     private func classes(_ course: Course, state: StudentState) -> some View {
-        let slots = state.slots.filter { $0.courseID == course.id }.sorted { ($0.weekday, $0.startMinute) < ($1.weekday, $1.startMinute) }
+        let slots = state.slots.filter { $0.courseID == course.id && $0.date == nil }.sorted { ($0.weekday, $0.startMinute) < ($1.weekday, $1.startMinute) }
         return section(tr("Horaire"), add: tr("Ajouter une plage"), onAdd: { sheet = .slot(Studies.newSlot(state, course: course.id)) }) {
             ForEach(Array(slots.enumerated()), id: \.element.id) { index, slot in
                 if index > 0 { MiniDivider() }

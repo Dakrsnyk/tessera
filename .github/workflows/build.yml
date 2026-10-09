@@ -508,6 +508,7 @@ jobs:
             echo "simulator: ${{ steps.sim.outcome }}"
             echo "device: ${{ steps.device.outcome }}"
             echo "tests: ${{ steps.tests.outcome }}"
+            echo "ipa: ${{ (steps.device.outcome == 'success' && steps.tests.outcome != 'failure') && 'published' || 'not published' }}"
             echo "screenshots: ${{ steps.shots.outcome }}"
             echo "release: ${{ steps.release.outcome }}"
             echo "marketing: ${{ steps.marketing.outcome }}"
@@ -547,7 +548,8 @@ jobs:
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-report
 
       - name: Publish test build
-        if: steps.device.outcome == 'success'
+        # No IPA when a test failed: a version with a known bug isn't handed out.
+        if: steps.device.outcome == 'success' && steps.tests.outcome != 'failure'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}

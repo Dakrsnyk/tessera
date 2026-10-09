@@ -39,7 +39,7 @@ struct StudentSpaceSections: View {
                         Circle().fill(Color(hex: state.colorHex(of: slot))).frame(width: 8, height: 8)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(state.title(of: slot)).foregroundStyle(Color.primary)
-                            Text("\(weekdayNames[safe: slot.weekday - 1] ?? "") · \(minuteText(slot.startMinute))–\(minuteText(slot.endMinute))\(slot.room.isEmpty ? "" : " · \(slot.room)")")
+                            Text("\(slot.date.map(Fmt.longDay) ?? weekdayNames[safe: slot.weekday - 1] ?? "") · \(minuteText(slot.startMinute))–\(minuteText(slot.endMinute))\(slot.room.isEmpty ? "" : " · \(slot.room)")")
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
                         }
@@ -201,6 +201,8 @@ struct CoursePicker: View {
 struct SlotEditor: View {
     @Environment(AppModel.self) private var model
     @State var slot: ClassSlot
+    /// The day it was opened from: a weekly entry can be cancelled that day only.
+    var day: Date?
 
     var body: some View {
         SheetForm(title: tr("Horaire"), canSave: slot.endMinute > slot.startMinute, onSave: save) {
@@ -215,19 +217,63 @@ struct SlotEditor: View {
             } else {
                 TextField(tr("Nom de l'événement"), text: $slot.title)
             }
-            Picker(tr("Jour"), selection: $slot.weekday) {
-                ForEach(1...7, id: \.self) { day in
-                    Text([tr("Lundi"), tr("Mardi"), tr("Mercredi"), tr("Jeudi"), tr("Vendredi"), tr("Samedi"), tr("Dimanche")][day - 1]).tag(day)
+            Picker(tr("Quand"), selection: isOnce) {
+                Text(tr("Chaque semaine")).tag(false)
+                Text(tr("Une seule fois")).tag(true)
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("slot-repeat")
+            if slot.date != nil {
+                DatePicker(tr("Date"), selection: date, displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+            } else {
+                Picker(tr("Jour"), selection: $slot.weekday) {
+                    ForEach(1...7, id: \.self) { day in
+                        Text([tr("Lundi"), tr("Mardi"), tr("Mercredi"), tr("Jeudi"), tr("Vendredi"), tr("Samedi"), tr("Dimanche")][day - 1]).tag(day)
+                    }
                 }
             }
             MinuteTimePicker(title: tr("Début"), minutes: $slot.startMinute)
             MinuteTimePicker(title: tr("Fin"), minutes: $slot.endMinute)
             TextField(slot.kind == .course ? tr("Salle (facultatif)") : tr("Lieu (facultatif)"), text: $slot.room)
+            // A weekly entry opened from one day: that day only, it doesn't take place.
+            if slot.date == nil, let day, FitnessMath.isoWeekday(day) == slot.weekday {
+                Toggle(tr("Annulé le \(Fmt.longDay(day))"), isOn: cancelled(on: day))
+                    .accessibilityIdentifier("slot-cancel-once")
+            }
         }
     }
 
+    private var isOnce: Binding<Bool> {
+        Binding(get: { slot.date != nil }, set: { once in
+            if once {
+                slot.date = DateMath.startOfDay(day ?? Date())
+            } else {
+                if let date = slot.date { slot.weekday = FitnessMath.isoWeekday(date) }
+                slot.date = nil
+            }
+        })
+    }
+
+    private var date: Binding<Date> {
+        Binding(get: { slot.date ?? day ?? Date() }, set: { slot.date = DateMath.startOfDay($0) })
+    }
+
+    private func cancelled(on day: Date) -> Binding<Bool> {
+        let key = DateMath.dayKey(day)
+        return Binding(get: { slot.skippedDays.contains(key) }, set: { cancelled in
+            slot.skippedDays.removeAll { $0 == key }
+            if cancelled { slot.skippedDays.append(key) }
+        })
+    }
+
     private func save() {
-        let saved = slot
+        var saved = slot
+        // An event that happens once: its weekday follows its date, and it has no week to skip.
+        if let date = saved.date {
+            saved.weekday = FitnessMath.isoWeekday(date)
+            saved.skippedDays = []
+        }
         model.update(\.student) { state in
             if let index = state.slots.firstIndex(where: { $0.id == saved.id }) { state.slots[index] = saved } else { state.slots.append(saved) }
         }

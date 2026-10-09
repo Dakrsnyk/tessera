@@ -4,6 +4,8 @@ import SwiftUI
 enum StudiesSheet: Identifiable {
     case course(Course)
     case slot(ClassSlot)
+    /// An entry opened from one day of the week: it can be cancelled that day only.
+    case slotOn(ClassSlot, Date)
     case exam(Exam)
     case assignment(Assignment)
     case grade(Grade)
@@ -13,6 +15,7 @@ enum StudiesSheet: Identifiable {
         switch self {
         case let .course(course): "course-\(course.id)"
         case let .slot(slot): "slot-\(slot.id)"
+        case let .slotOn(slot, day): "slot-\(slot.id)-\(DateMath.dayKey(day))"
         case let .exam(exam): "exam-\(exam.id)"
         case let .assignment(assignment): "assignment-\(assignment.id)"
         case let .grade(grade): "grade-\(grade.id)"
@@ -25,6 +28,7 @@ enum StudiesSheet: Identifiable {
         switch self {
         case let .course(course): CourseEditor(course: course)
         case let .slot(slot): SlotEditor(slot: slot)
+        case let .slotOn(slot, day): SlotEditor(slot: slot, day: day)
         case let .exam(exam): ExamEditor(exam: exam)
         case let .assignment(assignment): AssignmentEditor(assignment: assignment)
         case let .grade(grade): GradeEditor(grade: grade)
@@ -228,10 +232,11 @@ struct StudiesAppView: View {
 
     private func more(state: StudentState, now: Date) -> some View {
         let groups = StudentMath.assignmentGroups(state, at: now)
+        let weekly = state.slots.filter { $0.date == nil }
         return MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.studiesTimetable)) {
                 MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Horaire"),
-                        detail: state.slots.isEmpty ? tr("Tes cours de la semaine") : tr("\(Fmt.plural(state.slots.count, tr("cours", context: "one"), tr("cours"))) par semaine"))
+                        detail: weekly.isEmpty ? tr("Tes cours de la semaine") : tr("\(Fmt.plural(weekly.count, tr("cours", context: "one"), tr("cours"))) par semaine"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("studies-timetable")

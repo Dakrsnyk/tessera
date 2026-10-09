@@ -124,6 +124,27 @@ final class SharedStore {
         try? FileManager.default.removeItem(at: url(file))
     }
 
+    /// The file as saved, untouched: what a backup carries.
+    func rawData(_ file: StoreFile) -> Data? {
+        lock.lock(); defer { lock.unlock() }
+        return try? Data(contentsOf: url(file))
+    }
+
+    /// Puts back a file from a backup; nil removes it.
+    func setRawData(_ data: Data?, for file: StoreFile) {
+        lock.lock(); defer { lock.unlock() }
+        if let data {
+            try? data.write(to: url(file), options: [.atomic])
+        } else {
+            try? FileManager.default.removeItem(at: url(file))
+        }
+    }
+
+    /// Whether the bytes read as a value of this type, the way the store reads its files.
+    func decodes<T: Decodable>(_ type: T.Type, _ data: Data) -> Bool {
+        (try? decoder.decode(T.self, from: data)) != nil
+    }
+
     // MARK: Typed access
 
     var designs: [WidgetDesign] {
@@ -205,6 +226,27 @@ enum ImageStore {
 
     static func delete(named name: String) {
         try? FileManager.default.removeItem(at: directory.appendingPathComponent(name))
+    }
+
+    /// The photos saved, for a backup.
+    static func allNames() -> [String] {
+        ((try? FileManager.default.contentsOfDirectory(atPath: directory.path)) ?? []).filter(isStoredName)
+    }
+
+    static func data(named name: String) -> Data? {
+        guard isStoredName(name) else { return nil }
+        return try? Data(contentsOf: directory.appendingPathComponent(name))
+    }
+
+    /// Puts back a photo from a backup, only under a name the store gives itself and only if it is an image.
+    static func restore(_ data: Data, named name: String) {
+        guard isStoredName(name), UIImage(data: data) != nil else { return }
+        try? data.write(to: directory.appendingPathComponent(name), options: [.atomic])
+    }
+
+    /// The names `save` gives: a UUID and « .jpg ».
+    static func isStoredName(_ name: String) -> Bool {
+        name.hasSuffix(".jpg") && UUID(uuidString: String(name.dropLast(4))) != nil
     }
 }
 
