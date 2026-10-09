@@ -25,6 +25,11 @@ Fait :
 - Politique : PRIVACY.md et la page en ligne (`PremiumConfiguration.privacyURL`, artifact claude.ai, à partager « toute personne disposant du lien » avant la soumission).
 - Captures : `[marketing]` rend les scènes de `scripts/marketing_scenes.txt` (ordre de la page, `pano-<nom>-1/2` = une image sur deux captures, 2e colonne = vrai écran dans le téléphone), en français (`MARKETING_LANG`/`MARKETING_LOCALE` pour une autre langue). Assemblage : `python3 scripts/marketing_compose.py /tmp/rNNN/marketing <sortie>` → `NN-scene.png` 1320 × 2868 + `contact-sheet.jpg`.
 
+## Icône de l'app (2026-10-09)
+- Par défaut : « Verre rouge » (AppIcon, claire / sombre / teintée). 16 icônes au choix (AppIcon-<Nom>.appiconset, compilées comme icônes alternatives : `ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS`), vignettes `IconPreviews/IconPreview-<Nom>`.
+- Choix : Profil → « Icône de l'app », ou appui long sur l'icône → « Changer d'icône » (raccourci dynamique `QuickActions`, reçu par `TesseraAppDelegate` / `TesseraSceneDelegate`). Liste dans `AppIconChoice.all` (check_swift.py vérifie les assets).
+- Dessin : `node scripts/app_icons.js <dossier>` (Playwright + Chromium) puis `python3 scripts/app_icons_install.py <dossier>`. `TesseraMark` dessine le logo Verre rouge dans l'app.
+
 ## Outils
 - Hook `.git/hooks/pre-commit` : check_swift.py + `l10n_catalog.py sync` (bloque un texte non traduit).
 - `bash scripts/ci_report.sh [run]` : attend la CI et n'affiche que statuts, tests échoués, erreurs, l10n.
