@@ -30,18 +30,18 @@ struct LaunchView: View {
     }
 }
 
-/// The app mark, as on the icon: three tiles whose gaps draw a T (« T en creux »): red on top, orange
-/// and charcoal below, on cream. With `settled` false the tiles wait outside the frame, and slide in one
-/// after the other when it turns true. With a `tint` (tinted Home Screens), the tiles take that color.
+/// The app mark, as on the icon (« Verre rouge »): three tiles whose gaps draw a T (« T en creux »),
+/// two of clear glass and one of smoked glass, on the red and orange of the brand. With `settled` false
+/// the tiles wait outside the frame, and slide in one after the other when it turns true. With a `tint`
+/// (tinted Home Screens), the tiles take that color.
 struct TesseraMark: View {
     var size: CGFloat
     var settled = true
     var tint: Color?
 
-    static let red = Color(hex: "E5383B")
-    static let orange = Color(hex: "FF8A3D")
-    static let white = Color(hex: "F7F4EF")
-    static let charcoal = Color(hex: "211A1B")
+    private enum Look {
+        case clear, smoke
+    }
 
     var body: some View {
         let k = size / 1024
@@ -52,9 +52,14 @@ struct TesseraMark: View {
         let below = bar + gap
         ZStack(alignment: .topLeading) {
             background
-            tile(top, x: -over, y: -over, width: size + 2 * over, height: bar + over, order: 0, from: CGSize(width: 0, height: -size * 0.7))
-            tile(left, x: -over, y: below, width: stemLeft + over, height: size - below + over, order: 1, from: CGSize(width: -size * 0.7, height: 0))
-            tile(right, x: stemLeft + gap, y: below, width: size - stemLeft - gap + over, height: size - below + over, order: 2, from: CGSize(width: size * 0.7, height: size * 0.2))
+            tile(.clear, tint.map { AnyShapeStyle($0) }, x: -over, y: -over, width: size + 2 * over, height: bar + over, order: 0, from: CGSize(width: 0, height: -size * 0.7))
+            tile(.clear, tint.map { AnyShapeStyle($0.opacity(0.72)) }, x: -over, y: below, width: stemLeft + over, height: size - below + over, order: 1, from: CGSize(width: -size * 0.7, height: 0))
+            tile(.smoke, tint.map { AnyShapeStyle($0.opacity(0.45)) }, x: stemLeft + gap, y: below, width: size - stemLeft - gap + over, height: size - below + over, order: 2, from: CGSize(width: size * 0.7, height: size * 0.2))
+            if tint == nil {
+                // The light on the top of the glass.
+                LinearGradient(colors: [Color.white.opacity(0.16), .clear], startPoint: .top, endPoint: UnitPoint(x: 0.5, y: 0.38))
+                    .allowsHitTesting(false)
+            }
         }
         .frame(width: size, height: size, alignment: .topLeading)
         .clipShape(RoundedRectangle(cornerRadius: size * 0.2237, style: .continuous))
@@ -64,34 +69,44 @@ struct TesseraMark: View {
         .accessibilityHidden(true)
     }
 
+    /// The red and orange of the brand, in soft patches (as on the icon).
     @ViewBuilder private var background: some View {
         if tint == nil {
-            LinearGradient(colors: [Color(hex: "FBF8F3"), Color(hex: "EAE3D8")], startPoint: .topLeading, endPoint: .bottomTrailing)
+            ZStack {
+                Color(hex: "E8443A")
+                RadialGradient(colors: [Color(hex: "FF9A3D"), .clear], center: UnitPoint(x: 0.15, y: 0.95), startRadius: 0, endRadius: size * 0.9)
+                RadialGradient(colors: [Color(hex: "D61F3A"), .clear], center: UnitPoint(x: 0.9, y: 0.05), startRadius: 0, endRadius: size * 0.75)
+                RadialGradient(colors: [Color(hex: "FFB36B"), .clear], center: UnitPoint(x: 0.85, y: 0.85), startRadius: 0, endRadius: size * 0.45)
+            }
+            .frame(width: size, height: size)
         } else {
             Color.clear
         }
     }
 
-    private var top: AnyShapeStyle {
-        if let tint { return AnyShapeStyle(tint) }
-        return AnyShapeStyle(LinearGradient(colors: [Color(hex: "F04B4D"), Color(hex: "D62F33")], startPoint: .top, endPoint: .bottom))
-    }
-
-    private var left: AnyShapeStyle {
-        if let tint { return AnyShapeStyle(tint.opacity(0.72)) }
-        return AnyShapeStyle(LinearGradient(colors: [Color(hex: "FF9D55"), Color(hex: "F5782C")], startPoint: .top, endPoint: .bottom))
-    }
-
-    private var right: AnyShapeStyle {
-        if let tint { return AnyShapeStyle(tint.opacity(0.45)) }
-        return AnyShapeStyle(LinearGradient(colors: [Color(hex: "2B2223"), Color(hex: "0E0C0C")], startPoint: .top, endPoint: .bottom))
-    }
-
-    private func tile(_ fill: AnyShapeStyle, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, order: Int, from offset: CGSize) -> some View {
-        RoundedRectangle(cornerRadius: 56 * size / 1024, style: .continuous)
-            .fill(fill)
-            .frame(width: width, height: height)
-            .offset(x: x + (settled ? 0 : offset.width), y: y + (settled ? 0 : offset.height))
-            .animation(.spring(response: 0.55, dampingFraction: 0.78).delay(0.12 + Double(order) * 0.1), value: settled)
+    @ViewBuilder
+    private func tile(_ look: Look, _ tinted: AnyShapeStyle?, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, order: Int, from offset: CGSize) -> some View {
+        let k = size / 1024
+        let shape = RoundedRectangle(cornerRadius: 64 * k, style: .continuous)
+        Group {
+            if let tinted {
+                shape.fill(tinted)
+            } else if look == .clear {
+                shape.fill(LinearGradient(colors: [Color.white.opacity(0.55), Color.white.opacity(0.18)], startPoint: UnitPoint(x: 0.35, y: 0), endPoint: UnitPoint(x: 0.65, y: 1)))
+                    .overlay {
+                        shape.strokeBorder(LinearGradient(colors: [Color.white.opacity(0.8), Color.white.opacity(0.3)], startPoint: .top, endPoint: .bottom), lineWidth: max(0.5, 5 * k))
+                    }
+                    .shadow(color: .black.opacity(0.18), radius: 25 * k, x: 0, y: 20 * k)
+            } else {
+                shape.fill(LinearGradient(colors: [Color(hex: "14101E").opacity(0.55), Color(hex: "0A0810").opacity(0.78)], startPoint: UnitPoint(x: 0.35, y: 0), endPoint: UnitPoint(x: 0.65, y: 1)))
+                    .overlay {
+                        shape.strokeBorder(LinearGradient(colors: [Color.white.opacity(0.3), Color.white.opacity(0.1)], startPoint: .top, endPoint: .bottom), lineWidth: max(0.5, 5 * k))
+                    }
+                    .shadow(color: .black.opacity(0.25), radius: 25 * k, x: 0, y: 20 * k)
+            }
+        }
+        .frame(width: width, height: height)
+        .offset(x: x + (settled ? 0 : offset.width), y: y + (settled ? 0 : offset.height))
+        .animation(.spring(response: 0.55, dampingFraction: 0.78).delay(0.12 + Double(order) * 0.1), value: settled)
     }
 }

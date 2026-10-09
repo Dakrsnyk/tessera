@@ -3,6 +3,8 @@ import WidgetKit
 
 @main
 struct TesseraApp: App {
+    @UIApplicationDelegateAdaptor(TesseraAppDelegate.self) private var appDelegate
+    @State private var quickActions = QuickActions.shared
     @State private var model = AppModel()
     @State private var router = Router()
     @State private var premium = PremiumStore()
@@ -14,7 +16,16 @@ struct TesseraApp: App {
                 .environment(model)
                 .environment(router)
                 .environment(premium)
-                .onAppear { premium.start(model: model) }
+                .onAppear {
+                    premium.start(model: model)
+                    QuickActions.install()
+                }
+                // A long press on the icon, then « Changer d'icône »: straight to the icons.
+                .onChange(of: quickActions.pending, initial: true) { _, action in
+                    guard action == QuickActions.changeIcon else { return }
+                    quickActions.pending = nil
+                    router.isIconPickerPresented = true
+                }
                 .onOpenURL { url in
                     if let link = DeepLink(url: url) {
                         router.handle(link, model: model)
@@ -83,6 +94,17 @@ struct RootView: View {
                 .sheet(isPresented: $router.isProfilePresented) {
                     ProfileView()
                         .appStyle(model.settings)
+                }
+                .sheet(isPresented: $router.isIconPickerPresented) {
+                    NavigationStack {
+                        AppIconPicker()
+                            .toolbar {
+                                ToolbarItem(placement: .confirmationAction) {
+                                    Button(tr("OK")) { router.isIconPickerPresented = false }
+                                }
+                            }
+                    }
+                    .appStyle(model.settings)
                 }
                 .fullScreenCover(isPresented: $showsOnboarding) {
                     OnboardingView {

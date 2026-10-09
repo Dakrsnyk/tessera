@@ -100,6 +100,12 @@ struct ProfileView: View {
                 }
 
                 Section(tr("Préférences")) {
+                    NavigationLink {
+                        AppIconPicker()
+                    } label: {
+                        Label(tr("Icône de l'app"), systemImage: "app.badge")
+                    }
+                    .accessibilityIdentifier("settings-app-icon")
                     Picker(tr("Température"), selection: settingBinding(\.temperatureUnit)) {
                         ForEach(TemperatureUnit.allCases) { Text($0.title).tag($0) }
                     }

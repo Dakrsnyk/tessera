@@ -303,5 +303,105 @@
   "key": "L [fat]",
   "placeholders": 0,
   "uses": []
+ },
+ {
+  "key": "Verre rouge",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre jade",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre nuit",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre bleu",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre océan",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre corail",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre émeraude",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre améthyste",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre ambre",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre lagon",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre framboise",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre minuit",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre sakura",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre forêt",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Verre graphite",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Changer d'icône",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Choisis l'icône de Tessera sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Icône de l'app",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "L'icône n'a pas pu être changée. Réessaie dans un instant.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Par défaut",
+  "placeholders": 0,
+  "uses": []
  }
 ]

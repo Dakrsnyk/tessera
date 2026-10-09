@@ -6,6 +6,7 @@
 3. `switch kind` blocks in DataNeeds cover every kind.
 4. Release safety: the DEBUG Premium unlock is only referenced inside `#if DEBUG`.
 5. Privacy manifest: every "required reason" API the code uses is declared in Shared/PrivacyInfo.xcprivacy.
+6. App icons: every icon offered in « Icône de l'app » has its icon set and its preview in the asset catalog.
 
 Usage: python3 scripts/check_swift.py  (exit code 1 when something is wrong)
 """
@@ -278,12 +279,26 @@ def check_privacy_manifest():
         problems.append("PrivacyInfo.xcprivacy: NSPrivacyTracking must be false")
 
 
+def check_app_icons():
+    path = os.path.join(ROOT, "App", "Core", "AppIcons.swift")
+    text = FILES.get(os.path.normpath(path), "")
+    assets = re.findall(r'AppIconChoice\(asset: "([^"]+)"', text) + (["AppIcon"] if "asset: main" in text else [])
+    catalog = os.path.join(ROOT, "App", "Assets.xcassets")
+    for asset in assets:
+        if not os.path.isdir(os.path.join(catalog, f"{asset}.appiconset")):
+            problems.append(f"AppIcons.swift: no icon set {asset}.appiconset in App/Assets.xcassets")
+        if not os.path.isdir(os.path.join(catalog, "IconPreviews", f"IconPreview-{asset}.imageset")):
+            problems.append(f"AppIcons.swift: no preview IconPreview-{asset} in App/Assets.xcassets/IconPreviews")
+    return len(assets)
+
+
 checked = check_memberwise()
 kinds = check_kinds()
 check_release_safety()
 check_privacy_manifest()
+icons = check_app_icons()
 if problems:
     print("\n".join(problems))
     print(f"\n{len(problems)} problem(s)")
     sys.exit(1)
-print(f"OK: {checked} memberwise calls checked, {kinds} widget kinds, Release safety and privacy manifest verified")
+print(f"OK: {checked} memberwise calls checked, {kinds} widget kinds, {icons} app icons, Release safety and privacy manifest verified")

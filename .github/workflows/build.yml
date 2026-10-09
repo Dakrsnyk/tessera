@@ -495,6 +495,8 @@ jobs:
               sleep 5
             done
           done
+          # Not on the App Store page: screens to review with the captures.
+          shot extra-icons icons
           sips -g pixelWidth -g pixelHeight marketing/hero.png
 
       - name: Release build (App Store configuration) without the test unlock

@@ -52,6 +52,8 @@ final class Router {
     var isFoodScanPresented = false
     /// The profile page (with every setting), opened from the Home tab.
     var isProfilePresented = false
+    /// « Icône de l'app », opened by a long press on the icon (« Changer d'icône »).
+    var isIconPickerPresented = false
     /// Widgets just created in a space, flying to « Mes widgets ».
     var saveFlight: SaveFlight?
     /// Test captures: a space creator to open, and Mes widgets in selection mode.

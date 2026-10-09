@@ -1177,7 +1177,7 @@
  "%@ × %@ kg": {
   "placeholders": 2,
   "uses": [
-   "App/Core/MarketingShots.swift:125: load: tr(\"\\(8) × \\(60) kg\"),",
+   "App/Core/MarketingShots.swift:127: load: tr(\"\\(8) × \\(60) kg\"),",
    "Shared/Live/WorkoutLiveActivity.swift:43: ? tr(\"\\(exercise.reps) × \\(Self.kilograms(exercise.weight)) kg\")",
    "Shared/Render/Tiles/FitnessTiles.swift:36: exercise.weight > 0 ? tr(\"\\(exercise.reps) × \\(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg\") : tr(\"\\(exercise.reps) répétitions\")"
   ]
@@ -1219,7 +1219,7 @@
  "%@ écrans prêts\nà installer.": {
   "placeholders": 1,
   "uses": [
-   "App/Core/MarketingShots.swift:569: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
+   "App/Core/MarketingShots.swift:571: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "%@ — %@. Tes widgets gardent chacun leur propre style.": {
@@ -1964,7 +1964,7 @@
  "8 mini-apps,\nune seule app.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:786: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+   "App/Core/MarketingShots.swift:788: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "8 × 60 kg": {
@@ -2055,7 +2055,7 @@
  "Abonnement actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:436: return tr(\"Abonnement actif\")"
+   "App/Screens/Profile/ProfileView.swift:442: return tr(\"Abonnement actif\")"
   ]
  },
  "Abonnement · ": {
@@ -2103,7 +2103,7 @@
  "Absent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:231: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:237: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Accroupis-toi et pose les mains au sol.": {
@@ -2116,7 +2116,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Tutorial/Tutorial.swift:52: case .daily, .info: tr(\"Accueil\")",
-   "App/TesseraApp.swift:204: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
+   "App/TesseraApp.swift:226: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
   ]
  },
  "Accès au calendrier": {
@@ -2147,7 +2147,7 @@
  "Accès à vie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:431: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
+   "App/Screens/Profile/ProfileView.swift:437: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
   ]
  },
  "Accélère progressivement si tu veux.": {
@@ -2242,7 +2242,7 @@
  "Activité en direct": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:594: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:596: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Activités": {
@@ -2348,7 +2348,7 @@
  "Aide": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:138: Section(tr(\"Aide\")) {"
+   "App/Screens/Profile/ProfileView.swift:144: Section(tr(\"Aide\")) {"
   ]
  },
  "Aire": {
@@ -2646,7 +2646,7 @@
  "Ajouter mon anniversaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:362: Label(tr(\"Ajouter mon anniversaire\"), systemImage: \"gift\")"
+   "App/Screens/Profile/ProfileView.swift:368: Label(tr(\"Ajouter mon anniversaire\"), systemImage: \"gift\")"
   ]
  },
  "Ajouter mon salaire et mes dépenses fixes": {
@@ -2735,7 +2735,7 @@
  "Ajouter un widget à l'écran d'accueil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:142: Label(tr(\"Ajouter un widget à l'écran d'accueil\"), systemImage: \"plus.square.on.square\")"
+   "App/Screens/Profile/ProfileView.swift:148: Label(tr(\"Ajouter un widget à l'écran d'accueil\"), systemImage: \"plus.square.on.square\")"
   ]
  },
  "Ajouter un événement": {
@@ -3145,7 +3145,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:117: case .birthday: tr(\"Anniversaire\")",
-   "App/Screens/Profile/ProfileView.swift:354: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
+   "App/Screens/Profile/ProfileView.swift:360: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:524: Text(tr(\"Anniversaire\"))",
    "Shared/Model/KindCatalog.swift:122: KindInfo(kind: .birthday, title: tr(\"Anniversaire\"), summary: tr(\"Les jours avant ton prochain anniversaire, chaque année.\"), category: .time, symbol: \"gift\", isPremium: false, families: SM + [circ, i"
   ]
@@ -3780,13 +3780,13 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:246: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
-   "App/Screens/Profile/ProfileView.swift:413: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
+   "App/Screens/Profile/ProfileView.swift:419: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Aucun compte à créer": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:869: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
+   "App/Core/MarketingShots.swift:872: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
   ]
  },
  "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
@@ -3939,7 +3939,7 @@
  "Aucune pub, aucun suivi": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:870: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
+   "App/Core/MarketingShots.swift:873: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
   ]
  },
  "Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles.": {
@@ -4060,6 +4060,7 @@
  "Aurore boréale": {
   "placeholders": 0,
   "uses": [
+   "App/Core/AppIcons.swift:33: AppIconChoice(asset: \"AppIcon-Aurora\", title: tr(\"Aurore boréale\")),",
    "App/Screens/Explore/HomeSetups.swift:178: case .aurora: tr(\"Aurore boréale\")"
   ]
  },
@@ -4131,7 +4132,7 @@
  "Autorisation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:116: LabeledContent(tr(\"Autorisation\"), value: notificationStatus)"
+   "App/Screens/Profile/ProfileView.swift:122: LabeledContent(tr(\"Autorisation\"), value: notificationStatus)"
   ]
  },
  "Autorise « Mouvements et forme » pour Tessera dans les Réglages de l'iPhone pour voir tes pas.": {
@@ -4155,7 +4156,7 @@
  "Autorisée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:444: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
+   "App/Screens/Profile/ProfileView.swift:450: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
   ]
  },
  "Autre": {
@@ -5243,7 +5244,7 @@
  "Budget, dépenses, revenus": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:776: (.finances, tr(\"Budget, dépenses, revenus\")),"
+   "App/Core/MarketingShots.swift:778: (.finances, tr(\"Budget, dépenses, revenus\")),"
   ]
  },
  "Buenos Aires": {
@@ -5648,7 +5649,7 @@
  "Calories et macros calculées pour toi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:659: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
+   "App/Core/MarketingShots.swift:661: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
   ]
  },
  "Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.": {
@@ -5686,7 +5687,7 @@
  "Calories, macros, code-barres": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:773: (.nutrition, tr(\"Calories, macros, code-barres\")),"
+   "App/Core/MarketingShots.swift:775: (.nutrition, tr(\"Calories, macros, code-barres\")),"
   ]
  },
  "Calories, macros, protéines et série de suivi.": {
@@ -5939,7 +5940,7 @@
  "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:309: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.\")"
+   "App/Screens/Profile/ProfileView.swift:315: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.\")"
   ]
  },
  "Ce matin": {
@@ -6235,7 +6236,7 @@
  "Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:307: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.\")"
+   "App/Screens/Profile/ProfileView.swift:313: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.\")"
   ]
  },
  "Cette semaine": {
@@ -6293,6 +6294,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseTechniques.swift:313: [tr(\"Dessine de grands cercles avec le bassin.\"), tr(\"Change de sens après quelques tours.\")],"
+  ]
+ },
+ "Changer d'icône": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:75: localizedTitle: tr(\"Changer d'icône\"),"
   ]
  },
  "Changer de photo": {
@@ -6368,7 +6375,7 @@
  "Chaque série\ncompte.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:677: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
+   "App/Core/MarketingShots.swift:679: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Charge": {
@@ -6717,6 +6724,12 @@
    "Shared/Model/Combo.swift:257: return .invalid(tr(\"Choisis de 1 à 4 widgets.\"))"
   ]
  },
+ "Choisis l'icône de Tessera sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/AppIconPicker.swift:13: Text(tr(\"Choisis l'icône de Tessera sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».\"))"
+  ]
+ },
  "Choisis la séance à faire.": {
   "placeholders": 0,
   "uses": [
@@ -6935,6 +6948,7 @@
  "Classique": {
   "placeholders": 0,
   "uses": [
+   "App/Core/AppIcons.swift:37: AppIconChoice(asset: \"AppIcon-Classic\", title: tr(\"Classique\")),",
    "Shared/Model/WidgetStyle.swift:359: TypePreset(id: \"classic\", name: tr(\"Classique\"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),"
   ]
  },
@@ -7319,15 +7333,15 @@
  "Conditions d'utilisation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:178: Label(tr(\"Conditions d'utilisation\"), systemImage: \"doc.text\")"
+   "App/Screens/Profile/ProfileView.swift:184: Label(tr(\"Conditions d'utilisation\"), systemImage: \"doc.text\")"
   ]
  },
  "Confidentialité": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:858: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
+   "App/Core/MarketingShots.swift:861: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
    "App/Premium/PaywallView.swift:288: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
-   "App/Screens/Profile/ProfileView.swift:175: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
+   "App/Screens/Profile/ProfileView.swift:181: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
  },
  "Confirmations de réservation": {
@@ -7378,7 +7392,7 @@
  "Contacter le support": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:168: Label(tr(\"Contacter le support\"), systemImage: \"envelope\")"
+   "App/Screens/Profile/ProfileView.swift:174: Label(tr(\"Contacter le support\"), systemImage: \"envelope\")"
   ]
  },
  "Contenu": {
@@ -7444,7 +7458,7 @@
  "Copiée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:166: Text(copiedEmail ? tr(\"Copiée\") : PremiumConfiguration.supportEmail)"
+   "App/Screens/Profile/ProfileView.swift:172: Text(copiedEmail ? tr(\"Copiée\") : PremiumConfiguration.supportEmail)"
   ]
  },
  "Corail": {
@@ -8215,7 +8229,7 @@
   "uses": [
    "App/Screens/Spaces/SpacesView.swift:57: .navigationTitle(tr(\"Créer\"))",
    "App/Screens/Tutorial/Tutorial.swift:53: case .create: tr(\"Créer\")",
-   "App/TesseraApp.swift:208: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }"
+   "App/TesseraApp.swift:230: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }"
   ]
  },
  "Créer cet aliment": {
@@ -9033,7 +9047,7 @@
  "Des styles\npour tout.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:744: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
+   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Des sélections de widgets autour d'un thème, d'un format ou d'un style.": {
@@ -9057,7 +9071,7 @@
  "Des widgets sous l'heure, assortis à ton fond.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:728: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
+   "App/Core/MarketingShots.swift:730: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "Des écrans complets : fond d'écran, widgets et écran verrouillé assortis. Touche-en un pour l'installer.": {
@@ -9254,13 +9268,13 @@
  "Devise (crypto)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:110: Picker(tr(\"Devise (crypto)\"), selection: settingBinding(\\.cryptoCurrency)) {"
+   "App/Screens/Profile/ProfileView.swift:116: Picker(tr(\"Devise (crypto)\"), selection: settingBinding(\\.cryptoCurrency)) {"
   ]
  },
  "Devise (flux d'argent)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:107: Picker(tr(\"Devise (flux d'argent)\"), selection: settingBinding(\\.currencyCode)) {"
+   "App/Screens/Profile/ProfileView.swift:113: Picker(tr(\"Devise (flux d'argent)\"), selection: settingBinding(\\.currencyCode)) {"
   ]
  },
  "Devise sur place": {
@@ -9750,7 +9764,7 @@
  "Débloqué en mode test": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:428: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
+   "App/Screens/Profile/ProfileView.swift:434: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
   ]
  },
  "Début": {
@@ -10137,7 +10151,7 @@
  "Dépenses, revenus, catégories.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
+   "App/Core/MarketingShots.swift:764: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Dépensé": {
@@ -10215,7 +10229,7 @@
  "Développeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:242: Text(tr(\"Développeur\"))"
+   "App/Screens/Profile/ProfileView.swift:248: Text(tr(\"Développeur\"))"
   ]
  },
  "Développé Arnold": {
@@ -10227,7 +10241,7 @@
  "Développé couché": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:122: exercise: tr(\"Développé couché\"),",
+   "App/Core/MarketingShots.swift:124: exercise: tr(\"Développé couché\"),",
    "App/Screens/Spaces/LockScreenCreator.swift:99: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
    "Shared/Data/SampleData.swift:175: ExerciseTemplate(name: tr(\"Développé couché\"), sets: 4, reps: 8, weight: 60, restSeconds: 120),"
   ]
@@ -10406,13 +10420,13 @@
  "Effacer toutes mes données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:220: Button(tr(\"Effacer toutes mes données\"), role: .destructive) { confirmReset = true }"
+   "App/Screens/Profile/ProfileView.swift:226: Button(tr(\"Effacer toutes mes données\"), role: .destructive) { confirmReset = true }"
   ]
  },
  "Effacer toutes tes données ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:283: .confirmationDialog(tr(\"Effacer toutes tes données ?\"), isPresented: $confirmReset, titleVisibility: .visible) {"
+   "App/Screens/Profile/ProfileView.swift:289: .confirmationDialog(tr(\"Effacer toutes tes données ?\"), isPresented: $confirmReset, titleVisibility: .visible) {"
   ]
  },
  "Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.": {
@@ -10430,7 +10444,7 @@
  "Elles nourrissent tes widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:786: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+   "App/Core/MarketingShots.swift:788: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "Emplacement": {
@@ -10787,7 +10801,7 @@
  "Espace partagé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:232: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
+   "App/Screens/Profile/ProfileView.swift:238: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
   ]
  },
  "Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
@@ -11150,7 +11164,7 @@
  "Exporter mes données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:195: Label(tr(\"Exporter mes données\"), systemImage: \"square.and.arrow.up\")"
+   "App/Screens/Profile/ProfileView.swift:201: Label(tr(\"Exporter mes données\"), systemImage: \"square.and.arrow.up\")"
   ]
  },
  "Exposé": {
@@ -11611,7 +11625,7 @@
  "Finances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
+   "App/Core/MarketingShots.swift:764: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:97: .navigationTitle(tr(\"Finances\"))",
    "App/Screens/MiniApps/MiniApp.swift:14: case .finances: tr(\"Finances\")",
    "Shared/Domains/Profile.swift:129: case .money: tr(\"Finances\")"
@@ -11743,7 +11757,7 @@
  "Fond, widgets et icônes assortis, en un geste.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:569: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
+   "App/Core/MarketingShots.swift:571: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "Fonds d'urgence": {
@@ -12433,7 +12447,7 @@
  "Glucides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:664: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: \"F2A33A\", progress: day.totals.carbs / max(1, day.goals.carbs))",
+   "App/Core/MarketingShots.swift:666: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: \"F2A33A\", progress: day.totals.carbs / max(1, day.goals.carbs))",
    "App/Screens/Home/DailySection.swift:274: compactMacro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
    "App/Screens/Home/DailySection.swift:378: macro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
    "App/Screens/Home/MyInfoSection.swift:33: add(\"carbs\", \"leaf\", tr(\"Glucides\"), profile.knows(.carbsTarget) ? \"\\(TF.int(nutrition.goals.carbs)) g\" : nil)"
@@ -12577,7 +12591,7 @@
  "Groupes accordés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:234: Text(tr(\"Groupes accordés\"))"
+   "App/Screens/Profile/ProfileView.swift:240: Text(tr(\"Groupes accordés\"))"
   ]
  },
  "Gruau cuit à l'eau": {
@@ -12622,7 +12636,7 @@
  "Gérer l'abonnement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:391: Button(tr(\"Gérer l'abonnement\")) { showsManageSubscriptions = true }"
+   "App/Screens/Profile/ProfileView.swift:397: Button(tr(\"Gérer l'abonnement\")) { showsManageSubscriptions = true }"
   ]
  },
  "Gérer mes habitudes": {
@@ -12854,7 +12868,7 @@
  "Haut du corps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:120: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
+   "App/Core/MarketingShots.swift:122: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
    "App/Screens/Spaces/LockScreenCreator.swift:97: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
    "Shared/Data/SampleData.swift:174: let upper = Routine(name: tr(\"Haut du corps\"), exercises: ["
   ]
@@ -12912,7 +12926,7 @@
  "Heure sur 24 h": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:106: Toggle(tr(\"Heure sur 24 h\"), isOn: settingBinding(\\.uses24HourClock))"
+   "App/Screens/Profile/ProfileView.swift:112: Toggle(tr(\"Heure sur 24 h\"), isOn: settingBinding(\\.uses24HourClock))"
   ]
  },
  "Heure sur place": {
@@ -13058,13 +13072,13 @@
  "Horaire, tâches, habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:775: (.planning, tr(\"Horaire, tâches, habitudes\")),"
+   "App/Core/MarketingShots.swift:777: (.planning, tr(\"Horaire, tâches, habitudes\")),"
   ]
  },
  "Horaire, tâches, habitudes, focus.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:752: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
+   "App/Core/MarketingShots.swift:754: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Horizontal": {
@@ -13121,7 +13135,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HydrationView.swift:90: .navigationTitle(tr(\"Hydratation\"))",
-   "App/Screens/Profile/ProfileView.swift:133: NavigationLink { HydrationView() } label: { Label(tr(\"Hydratation\"), systemImage: \"drop\") }",
+   "App/Screens/Profile/ProfileView.swift:139: NavigationLink { HydrationView() } label: { Label(tr(\"Hydratation\"), systemImage: \"drop\") }",
    "App/Screens/Spaces/ProductivitySpace.swift:307: ValueRow(title: tr(\"Hydratation\"), value: tr(\"\\(model.content.hydration.glasses(on: Date()))/\\(model.content.hydration.goal) verres\"), symbol: \"drop.fill\")",
    "Shared/Model/KindCatalog.swift:157: KindInfo(kind: .hydration, title: tr(\"Hydratation\"), summary: tr(\"Tes verres d'eau de la journée, ajoutés d'une touche.\"), category: .wellbeing, symbol: \"drop.fill\", isPremium: false, families: SM + ["
   ]
@@ -13175,6 +13189,14 @@
    "App/Screens/Editor/StudioPanels.swift:70: Toggle(tr(\"Icône\"), isOn: shown(\"icon\"))",
    "App/Screens/Spaces/BudgetSpace.swift:286: Picker(tr(\"Icône\"), selection: $quick.symbol) {",
    "App/Screens/Spaces/BudgetSpace.swift:473: Picker(tr(\"Icône\"), selection: $category.symbol) {"
+  ]
+ },
+ "Icône de l'app": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/AppIconPicker.swift:32: .navigationTitle(tr(\"Icône de l'app\"))",
+   "App/Screens/Profile/AppIconPicker.swift:35: .alert(tr(\"Icône de l'app\"), isPresented: $failed) {",
+   "App/Screens/Profile/ProfileView.swift:106: Label(tr(\"Icône de l'app\"), systemImage: \"app.badge\")"
   ]
  },
  "Icône, valeur et progression sur une ligne.": {
@@ -13432,7 +13454,7 @@
  "Installé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:231: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:237: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Intensité": {
@@ -14134,6 +14156,12 @@
    "Shared/Model/WidgetStyle.swift:48: case .centered: tr(\"L'icône et la valeur au centre, comme un cadran.\")"
   ]
  },
+ "L'icône n'a pas pu être changée. Réessaie dans un instant.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/AppIconPicker.swift:38: Text(tr(\"L'icône n'a pas pu être changée. Réessaie dans un instant.\"))"
+  ]
+ },
  "L'image n'a pas pu être enregistrée. Réessaie.": {
   "placeholders": 0,
   "uses": [
@@ -14161,7 +14189,7 @@
  "L'écran\nverrouillé\naussi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:728: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
+   "App/Core/MarketingShots.swift:730: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "L'élastique ou la machine allège une partie du poids du corps.": {
@@ -14390,7 +14418,7 @@
  "La sauvegarde n'a pas pu être créée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:296: backupMessage = tr(\"La sauvegarde n'a pas pu être créée.\")"
+   "App/Screens/Profile/ProfileView.swift:302: backupMessage = tr(\"La sauvegarde n'a pas pu être créée.\")"
   ]
  },
  "La semaine apparaîtra ici.": {
@@ -15044,7 +15072,7 @@
  "Le repos démarre tout seul.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:594: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:596: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Le risque de pluie arrive avec la prochaine mise à jour météo.": {
@@ -15267,7 +15295,7 @@
  "Les données actuelles de l'app seront remplacées par celles de la sauvegarde du %@. Ton abonnement n'est pas touché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:276: Text(tr(\"Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \\(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché.\"))"
+   "App/Screens/Profile/ProfileView.swift:282: Text(tr(\"Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \\(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché.\"))"
   ]
  },
  "Les données du marché s'affichent dès que la connexion est disponible.": {
@@ -15680,7 +15708,7 @@
  "Lipides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:666: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: \"3366FF\", progress: day.totals.fat / max(1, day.goals.fat))",
+   "App/Core/MarketingShots.swift:668: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: \"3366FF\", progress: day.totals.fat / max(1, day.goals.fat))",
    "App/Screens/Home/DailySection.swift:275: compactMacro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
    "App/Screens/Home/DailySection.swift:379: macro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
    "App/Screens/Home/MyInfoSection.swift:34: add(\"fat\", \"drop\", tr(\"Lipides\"), profile.knows(.fatTarget) ? \"\\(TF.int(nutrition.goals.fat)) g\" : nil)"
@@ -16569,7 +16597,7 @@
  "Merci pour ton soutien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:437: default: return tr(\"Merci pour ton soutien\")"
+   "App/Screens/Profile/ProfileView.swift:443: default: return tr(\"Merci pour ton soutien\")"
   ]
  },
  "Mercredi": {
@@ -16713,7 +16741,7 @@
    "App/Screens/MyWidgets/MyWidgetsView.swift:97: .navigationTitle(isSelecting ? selectionTitle : tr(\"Mes widgets\"))",
    "App/Screens/Tutorial/Tutorial.swift:56: case .mine: tr(\"Mes widgets\")",
    "App/Screens/Tutorial/Tutorial.swift:69: case .mine: tr(\"Mes widgets\")",
-   "App/TesseraApp.swift:216: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }"
+   "App/TesseraApp.swift:238: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }"
   ]
  },
  "Messages": {
@@ -16776,7 +16804,7 @@
  "Mini-apps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:786: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
+   "App/Core/MarketingShots.swift:788: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
    "App/Screens/Home/MiniAppsRow.swift:224: .navigationTitle(tr(\"Mini-apps\"))"
   ]
  },
@@ -16959,7 +16987,7 @@
  "Module des widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:231: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:237: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Modérée (3–5 séances)": {
@@ -17053,7 +17081,7 @@
  "Mon Quotidien": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:692: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {",
+   "App/Core/MarketingShots.swift:694: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:83: .navigationTitle(tr(\"Mon Quotidien\"))",
    "App/Screens/Home/DailySection.swift:37: Text(tr(\"Mon Quotidien\").uppercased())",
    "App/Screens/Tutorial/Tutorial.swift:64: case .daily: tr(\"Mon Quotidien\")"
@@ -17260,7 +17288,7 @@
  "Montréal": {
   "placeholders": 0,
   "uses": [
-   "App/Core/ScreenshotMode.swift:274: $0.weatherLocation = WeatherLocation(name: tr(\"Montréal\"), latitude: 45.5019, longitude: -73.5674)",
+   "App/Core/ScreenshotMode.swift:275: $0.weatherLocation = WeatherLocation(name: tr(\"Montréal\"), latitude: 45.5019, longitude: -73.5674)",
    "Shared/Data/SampleData.swift:23: static func weather(now: Date, name: String = tr(\"Montréal\"), shift: Double = 0) -> WeatherSnapshot {",
    "Shared/Model/WorldCities.swift:12: WorldCity(id: \"America/Montreal\", name: tr(\"Montréal\"), country: tr(\"Canada\")),"
   ]
@@ -17565,7 +17593,7 @@
  "Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:185: Text(tr(\"Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko.\"))"
+   "App/Screens/Profile/ProfileView.swift:191: Text(tr(\"Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko.\"))"
   ]
  },
  "Météo avancée": {
@@ -18089,7 +18117,7 @@
  "Noter Tessera": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:158: Label(tr(\"Noter Tessera\"), systemImage: \"star\")"
+   "App/Screens/Profile/ProfileView.swift:164: Label(tr(\"Noter Tessera\"), systemImage: \"star\")"
   ]
  },
  "Noter la fiche": {
@@ -18161,7 +18189,7 @@
  "Notifications": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:125: Text(tr(\"Notifications\"))"
+   "App/Screens/Profile/ProfileView.swift:131: Text(tr(\"Notifications\"))"
   ]
  },
  "Nouilles de riz cuites": {
@@ -18513,7 +18541,7 @@
  "Nutrition": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:659: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {",
+   "App/Core/MarketingShots.swift:661: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:148: case .nutrition: (tr(\"Nutrition\"), \"fork.knife\", \"F08A24\")",
    "App/Screens/Home/DailySection.swift:252: Label(tr(\"Nutrition\"), systemImage: \"fork.knife\")",
    "App/Screens/Home/DailySection.swift:368: Label(tr(\"Nutrition\"), systemImage: \"fork.knife\")"
@@ -18529,7 +18557,7 @@
  "Nutrition, sport, planning, budget.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:622: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
+   "App/Core/MarketingShots.swift:624: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Nébuleuse": {
@@ -19016,7 +19044,7 @@
  "Ouvrir les réglages de l'iPhone": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:120: Button(tr(\"Ouvrir les réglages de l'iPhone\")) {"
+   "App/Screens/Profile/ProfileView.swift:126: Button(tr(\"Ouvrir les réglages de l'iPhone\")) {"
   ]
  },
  "Ouvrir trop grand.": {
@@ -19102,7 +19130,7 @@
  "Packs, collections, fonds d'écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:744: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
+   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Pad thaï": {
@@ -19232,6 +19260,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:624: MiniSectionTitle(title: tr(\"Par cours\"))"
+  ]
+ },
+ "Par défaut": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/AppIconPicker.swift:71: Text(tr(\"Par défaut\"))"
   ]
  },
  "Par jour": {
@@ -19402,7 +19436,7 @@
  "Pas encore demandée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:446: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
+   "App/Screens/Profile/ProfileView.swift:452: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
   ]
  },
  "Pas encore fait": {
@@ -19504,7 +19538,7 @@
  "Passer à Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:403: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
+   "App/Screens/Profile/ProfileView.swift:409: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
   ]
  },
  "Passés": {
@@ -19888,7 +19922,7 @@
  "Planning": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:752: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {",
+   "App/Core/MarketingShots.swift:754: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:150: case .planning: (tr(\"Planning\"), \"calendar.day.timeline.left\", \"3366FF\")",
    "App/Screens/Home/DailySection.swift:561: DayCard(title: tr(\"Planning\"), symbol: \"calendar.day.timeline.left\", colorHex: colorHex) {",
    "App/Screens/MiniApps/MiniApp.swift:13: case .planning: tr(\"Planning\")"
@@ -19936,7 +19970,7 @@
  "Plein, entretien, échéances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:779: (.car, tr(\"Plein, entretien, échéances\")),"
+   "App/Core/MarketingShots.swift:781: (.car, tr(\"Plein, entretien, échéances\")),"
   ]
  },
  "Pleine": {
@@ -20154,7 +20188,7 @@
  "Plus de 100\nwidgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:834: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
+   "App/Core/MarketingShots.swift:837: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Plus de précisions": {
@@ -20976,13 +21010,13 @@
  "Premium actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:386: Text(tr(\"Premium actif\")).font(.headline)"
+   "App/Screens/Profile/ProfileView.swift:392: Text(tr(\"Premium actif\")).font(.headline)"
   ]
  },
  "Premium débloqué (mode test)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:225: Toggle(tr(\"Premium débloqué (mode test)\"), isOn: Binding("
+   "App/Screens/Profile/ProfileView.swift:231: Toggle(tr(\"Premium débloqué (mode test)\"), isOn: Binding("
   ]
  },
  "Prendre du muscle": {
@@ -21267,7 +21301,7 @@
  "Profil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:251: .navigationTitle(tr(\"Profil\"))"
+   "App/Screens/Profile/ProfileView.swift:257: .navigationTitle(tr(\"Profil\"))"
   ]
  },
  "Profil et réglages": {
@@ -21300,7 +21334,7 @@
  "Programme, budget, valise": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:778: (.travel, tr(\"Programme, budget, valise\")),"
+   "App/Core/MarketingShots.swift:780: (.travel, tr(\"Programme, budget, valise\")),"
   ]
  },
  "Progresse en amplitude petit à petit.": {
@@ -21357,7 +21391,7 @@
  "Protéines": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:662: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: \"E5484D\", progress: day.totals.protein / max(1, day.goals.protein))",
+   "App/Core/MarketingShots.swift:664: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: \"E5484D\", progress: day.totals.protein / max(1, day.goals.protein))",
    "App/Screens/Home/DailySection.swift:273: compactMacro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
    "App/Screens/Home/DailySection.swift:377: macro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
    "App/Screens/Home/MyInfoSection.swift:32: add(\"protein\", \"bolt.heart\", tr(\"Protéines\"), profile.knows(.proteinTarget) ? \"\\(TF.int(nutrition.goals.protein)) g\" : nil)"
@@ -21439,7 +21473,7 @@
  "Prévisions, pluie, soleil": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:780: (.weather, tr(\"Prévisions, pluie, soleil\")),"
+   "App/Core/MarketingShots.swift:782: (.weather, tr(\"Prévisions, pluie, soleil\")),"
   ]
  },
  "Prévu": {
@@ -21773,13 +21807,13 @@
  "Rappels d'habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:118: NavigationLink { HabitsView() } label: { Text(tr(\"Rappels d'habitudes\")) }"
+   "App/Screens/Profile/ProfileView.swift:124: NavigationLink { HabitsView() } label: { Text(tr(\"Rappels d'habitudes\")) }"
   ]
  },
  "Rappels d'hydratation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:117: NavigationLink { HydrationView() } label: { Text(tr(\"Rappels d'hydratation\")) }"
+   "App/Screens/Profile/ProfileView.swift:123: NavigationLink { HydrationView() } label: { Text(tr(\"Rappels d'hydratation\")) }"
   ]
  },
  "Rappels de 10 h à 20 h": {
@@ -21851,7 +21885,7 @@
  "Recharger les widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:229: Button(tr(\"Recharger les widgets\")) { WidgetCenter.shared.reloadAllTimelines() }"
+   "App/Screens/Profile/ProfileView.swift:235: Button(tr(\"Recharger les widgets\")) { WidgetCenter.shared.reloadAllTimelines() }"
   ]
  },
  "Recherche du produit %@…": {
@@ -22019,8 +22053,8 @@
  "Refusée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:119: if notificationStatus == tr(\"Refusée\") {",
-   "App/Screens/Profile/ProfileView.swift:445: case .denied: notificationStatus = tr(\"Refusée\")"
+   "App/Screens/Profile/ProfileView.swift:125: if notificationStatus == tr(\"Refusée\") {",
+   "App/Screens/Profile/ProfileView.swift:451: case .denied: notificationStatus = tr(\"Refusée\")"
   ]
  },
  "Regard droit devant.": {
@@ -22177,7 +22211,7 @@
  "Remplacer tes données par cette sauvegarde ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:267: .confirmationDialog(tr(\"Remplacer tes données par cette sauvegarde ?\"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {"
+   "App/Screens/Profile/ProfileView.swift:273: .confirmationDialog(tr(\"Remplacer tes données par cette sauvegarde ?\"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {"
   ]
  },
  "Remplissage": {
@@ -22226,7 +22260,7 @@
  "Renouvellement le %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:434: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
+   "App/Screens/Profile/ProfileView.swift:440: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
   ]
  },
  "Renseigné": {
@@ -22273,7 +22307,7 @@
  "Repas, séance, eau, pas, météo.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:692: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
+   "App/Core/MarketingShots.swift:694: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
   ]
  },
  "Repos": {
@@ -22501,7 +22535,7 @@
  "Restauration": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:262: .alert(tr(\"Restauration\"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {"
+   "App/Screens/Profile/ProfileView.swift:268: .alert(tr(\"Restauration\"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {"
   ]
  },
  "Restauration…": {
@@ -22513,13 +22547,13 @@
  "Restaurer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:268: Button(tr(\"Restaurer\"), role: .destructive) {"
+   "App/Screens/Profile/ProfileView.swift:274: Button(tr(\"Restaurer\"), role: .destructive) {"
   ]
  },
  "Restaurer les achats": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:417: Text(tr(\"Restaurer les achats\"))"
+   "App/Screens/Profile/ProfileView.swift:423: Text(tr(\"Restaurer les achats\"))"
   ]
  },
  "Restaurer mes achats": {
@@ -22531,7 +22565,7 @@
  "Restaurer une sauvegarde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:206: Label(tr(\"Restaurer une sauvegarde\"), systemImage: \"arrow.counterclockwise\")"
+   "App/Screens/Profile/ProfileView.swift:212: Label(tr(\"Restaurer une sauvegarde\"), systemImage: \"arrow.counterclockwise\")"
   ]
  },
  "Reste %@": {
@@ -22821,7 +22855,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/MoneyView.swift:52: .navigationTitle(tr(\"Revenus et dépenses\"))",
-   "App/Screens/Profile/ProfileView.swift:134: NavigationLink { MoneyView() } label: { Label(tr(\"Revenus et dépenses\"), systemImage: \"dollarsign.circle\") }"
+   "App/Screens/Profile/ProfileView.swift:140: NavigationLink { MoneyView() } label: { Label(tr(\"Revenus et dépenses\"), systemImage: \"dollarsign.circle\") }"
   ]
  },
  "Revenus et dépenses fixes": {
@@ -22974,7 +23008,7 @@
  "Revoir le tutoriel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:152: Label(tr(\"Revoir le tutoriel\"), systemImage: \"graduationcap\")"
+   "App/Screens/Profile/ProfileView.swift:158: Label(tr(\"Revoir le tutoriel\"), systemImage: \"graduationcap\")"
   ]
  },
  "Reçois-toi sur l'avant du pied, genoux fléchis.": {
@@ -23807,7 +23841,7 @@
  "Sans compte, sans pub, sans suivi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:858: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
+   "App/Core/MarketingShots.swift:861: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
   ]
  },
  "Sans cours précis": {
@@ -23973,14 +24007,14 @@
  "Sauvegarde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:214: Text(tr(\"Sauvegarde\"))",
-   "App/Screens/Profile/ProfileView.swift:278: .alert(tr(\"Sauvegarde\"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {"
+   "App/Screens/Profile/ProfileView.swift:220: Text(tr(\"Sauvegarde\"))",
+   "App/Screens/Profile/ProfileView.swift:284: .alert(tr(\"Sauvegarde\"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {"
   ]
  },
  "Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:200: if case .success = result { backupMessage = tr(\"Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.\") }"
+   "App/Screens/Profile/ProfileView.swift:206: if case .success = result { backupMessage = tr(\"Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.\") }"
   ]
  },
  "Scanne ou cherche un aliment : tes widgets se mettent à jour.": {
@@ -23992,7 +24026,7 @@
  "Scanne.\nC'est noté.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:659: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
+   "App/Core/MarketingShots.swift:661: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
   ]
  },
  "Scanner": {
@@ -24007,7 +24041,7 @@
  "Scanner un aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:668: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
+   "App/Core/MarketingShots.swift:670: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
    "App/Screens/Spaces/NutritionSpace.swift:334: .navigationTitle(tr(\"Scanner un aliment\"))"
   ]
  },
@@ -24677,7 +24711,7 @@
  "Sport": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:677: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
+   "App/Core/MarketingShots.swift:679: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
    "App/Screens/Home/DailySection.swift:513: case .rest: tr(\"Sport\")",
    "Shared/Data/PayloadLoader.swift:89: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: [recent[0], recent[2]]),",
    "Shared/Data/SampleData.swift:79: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),"
@@ -24789,8 +24823,8 @@
  "Store": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:569: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
-   "App/Core/MarketingShots.swift:744: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
+   "App/Core/MarketingShots.swift:571: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
+   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
    "App/Screens/Explore/ExploreView.swift:127: .navigationTitle(tr(\"Store\"))",
    "App/Screens/Tutorial/Tutorial.swift:55: case .store: tr(\"Store\")"
   ]
@@ -24798,7 +24832,7 @@
  "Studio": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:706: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
+   "App/Core/MarketingShots.swift:708: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
    "App/Screens/Editor/EditorView.swift:89: if !isNew { return tr(\"Studio\") }",
    "App/Screens/Tutorial/Tutorial.swift:54: case .studio: tr(\"Studio\")"
   ]
@@ -24842,7 +24876,7 @@
  "Styles, couleurs, photos, polices.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:706: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
+   "App/Core/MarketingShots.swift:708: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Sucre blanc": {
@@ -25318,8 +25352,8 @@
  "Séance, repos, calories et macros.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:593: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:642: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
+   "App/Core/MarketingShots.swift:595: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:644: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
   ]
  },
  "Séance, régularité, calories et protéines réunies.": {
@@ -25368,13 +25402,13 @@
  "Séances, repos, records": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:774: (.fitness, tr(\"Séances, repos, records\")),"
+   "App/Core/MarketingShots.swift:776: (.fitness, tr(\"Séances, repos, records\")),"
   ]
  },
  "Séances, repos, records et progrès.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:677: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
+   "App/Core/MarketingShots.swift:679: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Séances, séries et records": {
@@ -25491,7 +25525,7 @@
  "Série faite ?\nUn geste.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:594: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:596: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Série · %@": {
@@ -25612,7 +25646,7 @@
  "Ta journée,\nen un écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:692: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
+   "App/Core/MarketingShots.swift:694: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
   ]
  },
  "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": {
@@ -25702,7 +25736,7 @@
  "Ta semaine,\nbien en main.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:752: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
+   "App/Core/MarketingShots.swift:754: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Ta semaine, ton mois ou ta journée entière.": {
@@ -25726,7 +25760,7 @@
  "Ta vie entière\nen widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:622: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
+   "App/Core/MarketingShots.swift:624: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Ta ville": {
@@ -25985,7 +26019,7 @@
  "Température": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:103: Picker(tr(\"Température\"), selection: settingBinding(\\.temperatureUnit)) {"
+   "App/Screens/Profile/ProfileView.swift:109: Picker(tr(\"Température\"), selection: settingBinding(\\.temperatureUnit)) {"
   ]
  },
  "Tendre et affirmé": {
@@ -26164,25 +26198,25 @@
    "App/Screens/Home/MyInfoCenter.swift:278: WidgetDataSection(items: area.items, title: tr(\"Tes données\"))",
    "App/Screens/MiniApps/MiniAppSettings.swift:147: WidgetDataSection(items: app.settingsItems, title: tr(\"Tes données\"))",
    "App/Screens/Profile/DataItemViews.swift:14: var title = tr(\"Tes données\")",
-   "App/Screens/Profile/ProfileView.swift:130: Section(tr(\"Tes données\")) {"
+   "App/Screens/Profile/ProfileView.swift:136: Section(tr(\"Tes données\")) {"
   ]
  },
  "Tes données\nrestent à toi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:858: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
+   "App/Core/MarketingShots.swift:861: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
   ]
  },
  "Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:186: Text(tr(\"Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.\"))"
+   "App/Screens/Profile/ProfileView.swift:192: Text(tr(\"Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.\"))"
   ]
  },
  "Tes données sont de retour.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:271: backupMessage = tr(\"Tes données sont de retour.\")"
+   "App/Screens/Profile/ProfileView.swift:277: backupMessage = tr(\"Tes données sont de retour.\")"
   ]
  },
  "Tes dépenses comparées à la semaine dernière.": {
@@ -26476,7 +26510,7 @@
  "Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:286: Text(tr(\"Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.\"))"
+   "App/Screens/Profile/ProfileView.swift:292: Text(tr(\"Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.\"))"
   ]
  },
  "Tes échéances, ta consommation et ton kilométrage.": {
@@ -26494,7 +26528,7 @@
  "Tessera": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:168: Text(tr(\"Tessera\"))",
+   "App/Core/MarketingShots.swift:170: Text(tr(\"Tessera\"))",
    "App/Screens/Explore/HomeSetupViews.swift:258: label(tr(\"Tessera\"))",
    "App/Screens/Explore/HomeSetups.swift:136: static let tessera = SetupApp(name: tr(\"Tessera\"), symbol: \"\")",
    "App/Screens/Launch/LaunchView.swift:16: Text(tr(\"Tessera\"))"
@@ -26503,7 +26537,7 @@
  "Tessera %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:184: Text(tr(\"Tessera \\(appVersion)\"))"
+   "App/Screens/Profile/ProfileView.swift:190: Text(tr(\"Tessera \\(appVersion)\"))"
   ]
  },
  "Tessera Premium": {
@@ -26511,7 +26545,7 @@
   "uses": [
    "App/Premium/PaywallView.swift:66: Text(tr(\"Tessera Premium\"))",
    "App/Screens/Home/HomeView.swift:131: Text(tr(\"Tessera Premium\"))",
-   "App/Screens/Profile/ProfileView.swift:321: Label(model.isPremium ? tr(\"Tessera Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+   "App/Screens/Profile/ProfileView.swift:327: Label(model.isPremium ? tr(\"Tessera Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
  },
  "Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.": {
@@ -26541,7 +26575,7 @@
  "Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:127: Text(tr(\"Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
+   "App/Screens/Profile/ProfileView.swift:133: Text(tr(\"Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
   ]
  },
  "Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.": {
@@ -26907,7 +26941,7 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:246: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
-   "App/Screens/Profile/ProfileView.swift:413: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
+   "App/Screens/Profile/ProfileView.swift:419: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
@@ -26955,7 +26989,7 @@
  "Ton budget,\nsous contrôle.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
+   "App/Core/MarketingShots.swift:764: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Ton chiffre d'affaires du mois face à ton objectif.": {
@@ -27088,7 +27122,7 @@
  "Ton profil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:318: Text(name.isEmpty ? tr(\"Ton profil\") : name)"
+   "App/Screens/Profile/ProfileView.swift:324: Text(name.isEmpty ? tr(\"Ton profil\") : name)"
   ]
  },
  "Ton profil est complet": {
@@ -27179,7 +27213,7 @@
  "Ton écran\nd'accueil,\ndéjà stylé.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:568: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
+   "App/Core/MarketingShots.swift:570: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
   ]
  },
  "Top 3": {
@@ -27453,7 +27487,7 @@
  "Tous les widgets et tous les styles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:404: Text(tr(\"Tous les widgets et tous les styles\")).font(.caption).foregroundStyle(.secondary)"
+   "App/Screens/Profile/ProfileView.swift:410: Text(tr(\"Tous les widgets et tous les styles\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
  "Tous les widgets, tous les styles, sans limite.": {
@@ -27521,7 +27555,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/TasksView.swift:54: Button(tr(\"Tout effacer\")) {",
-   "App/Screens/Profile/ProfileView.swift:284: Button(tr(\"Tout effacer\"), role: .destructive) { model.resetAllData() }"
+   "App/Screens/Profile/ProfileView.swift:290: Button(tr(\"Tout effacer\"), role: .destructive) { model.resetAllData() }"
   ]
  },
  "Tout est facultatif : laisse vide ce que tu préfères ne pas dire.": {
@@ -27584,7 +27618,7 @@
  "Tout reste sur ton iPhone": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:868: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
+   "App/Core/MarketingShots.swift:871: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
   ]
  },
  "Tout sélectionner": {
@@ -27611,8 +27645,8 @@
  "Tout, sans\ndéverrouiller.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:593: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:642: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
+   "App/Core/MarketingShots.swift:595: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:644: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
   ]
  },
  "Toute l'amplitude confortable, sans plier les coudes.": {
@@ -28001,7 +28035,7 @@
  "Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:216: Text(tr(\"Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.\"))"
+   "App/Screens/Profile/ProfileView.swift:222: Text(tr(\"Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.\"))"
   ]
  },
  "Un grand chiffre, comme une une": {
@@ -28136,7 +28170,7 @@
  "Un widget,\nmille styles.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:706: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
+   "App/Core/MarketingShots.swift:708: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Un widget, 12 styles": {
@@ -28514,7 +28548,7 @@
  "Ventes, objectifs, MRR": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:777: (.business, tr(\"Ventes, objectifs, MRR\")),"
+   "App/Core/MarketingShots.swift:779: (.business, tr(\"Ventes, objectifs, MRR\")),"
   ]
  },
  "Ventes, objectifs, bénéfice et MRR.": {
@@ -28538,16 +28572,106 @@
    "Shared/Theme/Theme.swift:138: id: .glass, name: tr(\"Verre\"), tagline: tr(\"Translucide et lumineux\"), isPremium: true,"
   ]
  },
+ "Verre ambre": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:29: AppIconChoice(asset: \"AppIcon-Amber\", title: tr(\"Verre ambre\")),"
+  ]
+ },
+ "Verre améthyste": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:28: AppIconChoice(asset: \"AppIcon-Amethyst\", title: tr(\"Verre améthyste\")),"
+  ]
+ },
+ "Verre bleu": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:24: AppIconChoice(asset: \"AppIcon-Blue\", title: tr(\"Verre bleu\")),"
+  ]
+ },
+ "Verre corail": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:26: AppIconChoice(asset: \"AppIcon-Coral\", title: tr(\"Verre corail\")),"
+  ]
+ },
  "Verre dépoli et reflets": {
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetStyle.swift:707: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
   ]
  },
+ "Verre forêt": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:35: AppIconChoice(asset: \"AppIcon-Forest\", title: tr(\"Verre forêt\")),"
+  ]
+ },
+ "Verre framboise": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:31: AppIconChoice(asset: \"AppIcon-Raspberry\", title: tr(\"Verre framboise\")),"
+  ]
+ },
+ "Verre graphite": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:36: AppIconChoice(asset: \"AppIcon-Graphite\", title: tr(\"Verre graphite\")),"
+  ]
+ },
+ "Verre jade": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:22: AppIconChoice(asset: \"AppIcon-Jade\", title: tr(\"Verre jade\")),"
+  ]
+ },
+ "Verre lagon": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:30: AppIconChoice(asset: \"AppIcon-Lagoon\", title: tr(\"Verre lagon\")),"
+  ]
+ },
  "Verre liquide et reflets": {
   "placeholders": 0,
   "uses": [
    "Shared/Theme/Theme.swift:253: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
+  ]
+ },
+ "Verre minuit": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:32: AppIconChoice(asset: \"AppIcon-Midnight\", title: tr(\"Verre minuit\")),"
+  ]
+ },
+ "Verre nuit": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:23: AppIconChoice(asset: \"AppIcon-Night\", title: tr(\"Verre nuit\")),"
+  ]
+ },
+ "Verre océan": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:25: AppIconChoice(asset: \"AppIcon-Ocean\", title: tr(\"Verre océan\")),"
+  ]
+ },
+ "Verre rouge": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:21: AppIconChoice(asset: main, title: tr(\"Verre rouge\")),"
+  ]
+ },
+ "Verre sakura": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:34: AppIconChoice(asset: \"AppIcon-Sakura\", title: tr(\"Verre sakura\")),"
+  ]
+ },
+ "Verre émeraude": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:27: AppIconChoice(asset: \"AppIcon-Emerald\", title: tr(\"Verre émeraude\")),"
   ]
  },
  "Verres": {
@@ -28590,13 +28714,13 @@
  "Version": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:230: LabeledContent(tr(\"Version\"), value: WidgetDiagnostics.appVersion)"
+   "App/Screens/Profile/ProfileView.swift:236: LabeledContent(tr(\"Version\"), value: WidgetDiagnostics.appVersion)"
   ]
  },
  "Version gratuite": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:321: Label(model.isPremium ? tr(\"Tessera Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+   "App/Screens/Profile/ProfileView.swift:327: Label(model.isPremium ? tr(\"Tessera Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
  },
  "Vert forêt, texture papier": {
@@ -28729,7 +28853,7 @@
  "Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:244: Text(tr(\"Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Prem"
+   "App/Screens/Profile/ProfileView.swift:250: Text(tr(\"Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Prem"
   ]
  },
  "Visiteurs": {
@@ -28978,7 +29102,7 @@
  "Widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:834: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
+   "App/Core/MarketingShots.swift:837: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
    "App/Premium/PaywallView.swift:115: comparisonRow(tr(\"Widgets\"), free: \"\\(WidgetKind.allCases.filter { !$0.isPremium }.count)\", premium: \"\\(WidgetKind.allCases.count)\")",
    "App/Screens/Explore/ExploreView.swift:27: case .widgets: tr(\"Widgets\")",
    "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))"
@@ -29011,7 +29135,7 @@
  "Widgets lancés par iOS": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:240: LabeledContent(tr(\"Widgets lancés par iOS\"), value: WidgetDiagnostics.lastLaunchText)"
+   "App/Screens/Profile/ProfileView.swift:246: LabeledContent(tr(\"Widgets lancés par iOS\"), value: WidgetDiagnostics.lastLaunchText)"
   ]
  },
  "Widgets moyens": {
@@ -29708,7 +29832,7 @@
  "espaces actifs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:328: stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr(\"espaces actifs\"))"
+   "App/Screens/Profile/ProfileView.swift:334: stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr(\"espaces actifs\"))"
   ]
  },
  "estimé": {
@@ -29886,7 +30010,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:404: case .habits: return Fmt.plural(content.habits.count, tr(\"habitude\"), tr(\"habitudes\"))",
-   "App/Screens/Profile/ProfileView.swift:327: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))"
+   "App/Screens/Profile/ProfileView.swift:333: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))"
   ]
  },
  "habitude suivie": {
@@ -29899,7 +30023,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:404: case .habits: return Fmt.plural(content.habits.count, tr(\"habitude\"), tr(\"habitudes\"))",
-   "App/Screens/Profile/ProfileView.swift:327: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))"
+   "App/Screens/Profile/ProfileView.swift:333: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))"
   ]
  },
  "habitudes suivies": {
@@ -30065,7 +30189,7 @@
  "kcal restantes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:660: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: \"F08A24\", progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
+   "App/Core/MarketingShots.swift:662: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: \"F08A24\", progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
    "App/Screens/Home/DailySection.swift:265: Text(nutrition.kcalLeft.map { $0 >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\") } ?? tr(\"kcal mangées\"))",
    "App/Screens/Home/DailySection.swift:350: Text(left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:262: Text(known.kcal ? (left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\")) : tr(\"kcal mangées\"))"
@@ -31361,7 +31485,7 @@
  "À propos": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:181: Text(tr(\"À propos\"))"
+   "App/Screens/Profile/ProfileView.swift:187: Text(tr(\"À propos\"))"
   ]
  },
  "À quatre pattes (ou debout face à la poulie), dos plat, ventre gainé.": {
@@ -31611,15 +31735,15 @@
  "Écran d'accueil et écran verrouillé.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:834: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
+   "App/Core/MarketingShots.swift:837: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Écran verrouillé": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:593: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:642: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:728: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))",
+   "App/Core/MarketingShots.swift:595: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:644: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:730: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))",
    "App/Screens/Editor/AddToHomeScreenGuide.swift:21: Text(tr(\"Écran verrouillé\")).tag(1)"
   ]
  },
@@ -31638,7 +31762,7 @@
  "Écrans d'accueil": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:568: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
+   "App/Core/MarketingShots.swift:570: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
    "App/Screens/Explore/ExploreView.swift:26: case .screens: tr(\"Écrans d'accueil\")",
    "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
    "App/Screens/Explore/HomeSetupViews.swift:524: .navigationTitle(tr(\"Écrans d'accueil\"))"

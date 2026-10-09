@@ -76,6 +76,7 @@ enum ScreenshotMode {
         case "mywidgets": router.tab = .mine
         case "paywall": router.isPaywallPresented = true
         case "settings", "profile": router.isProfilePresented = true
+        case "icons": router.isIconPickerPresented = true
         case "content": router.content = .money
         case "spaces": router.tab = .spaces
         case "store": router.tab = .explore
