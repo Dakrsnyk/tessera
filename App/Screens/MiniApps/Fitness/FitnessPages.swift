@@ -133,6 +133,11 @@ struct FitnessHistoryPage: View {
                             VStack(alignment: .leading, spacing: 3) {
                                 HStack {
                                     Text(session.routineName).font(.headline)
+                                    if session.isCatchUp {
+                                        Label(tr("Rattrapée"), systemImage: "arrow.uturn.forward")
+                                            .font(.caption2.weight(.semibold))
+                                            .foregroundStyle(Color(hex: MiniApp.fitness.colorHex))
+                                    }
                                     Spacer()
                                     Text(Fmt.shortDay(session.start)).font(.subheadline).foregroundStyle(Color.secondary)
                                 }
@@ -163,6 +168,9 @@ struct FitnessSessionDetailPage: View {
             if let session {
                 Section {
                     ValueRow(title: tr("Date"), value: Fmt.longDay(session.start))
+                    if let missed = session.catchUpFor {
+                        ValueRow(title: tr("Séance rattrapée"), value: tr("Prévue le \(Fmt.format(missed, template: "EEEEdMMMM"))"))
+                    }
                     ValueRow(title: tr("Durée"), value: tr("\(TF.int(session.duration / 60)) min"))
                     ValueRow(title: tr("Volume"), value: tr("\(TF.int(session.volume)) kg"))
                 }

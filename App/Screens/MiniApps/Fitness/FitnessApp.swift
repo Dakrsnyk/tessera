@@ -49,7 +49,7 @@ struct FitnessAppView: View {
         let doneToday = FitnessMath.sessions(state).filter { DateMath.isSameDay($0.start, now) && $0.isFinished }.last
         VStack(alignment: .leading, spacing: 14) {
             if let active, let exercise = active.currentExercise {
-                header(tr("Séance en cours"), symbol: "bolt.heart.fill")
+                header(active.isCatchUp ? tr("Rattrapage en cours") : tr("Séance en cours"), symbol: "bolt.heart.fill")
                 Text(active.routineName).font(.title2.weight(.bold))
                 Text(tr("\(exercise.name) · série \(active.setIndex + 1) sur \(exercise.sets)"))
                     .font(.subheadline)
@@ -61,8 +61,12 @@ struct FitnessAppView: View {
                 }
                 .accessibilityIdentifier("fitness-resume")
             } else if let doneToday {
-                header(tr("Séance faite"), symbol: "checkmark.seal.fill")
+                header(doneToday.isCatchUp ? tr("Séance rattrapée") : tr("Séance faite"),
+                       symbol: doneToday.isCatchUp ? "arrow.uturn.forward.circle.fill" : "checkmark.seal.fill")
                 Text(doneToday.routineName).font(.title2.weight(.bold))
+                if let missed = doneToday.catchUpFor {
+                    catchUpNote(missed)
+                }
                 Text(tr("\(Fmt.plural(doneToday.sets.count, tr("série"), tr("séries"))) · \(TF.int(doneToday.duration / 60)) min · \(TF.int(doneToday.volume)) kg soulevés"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -82,8 +86,8 @@ struct FitnessAppView: View {
                 header(tr("Repos aujourd'hui"), symbol: "moon.zzz.fill")
                 // Yesterday's session wasn't done: one tap to catch it up today.
                 if let missed = missedYesterday(state, now: now) {
-                    MiniActionButton(title: tr("Rattraper « \(missed.name) » d'hier"), symbol: "arrow.uturn.forward", colorHex: accentHex) {
-                        start(missed)
+                    MiniActionButton(title: tr("Rattraper « \(missed.routine.name) » d'hier"), symbol: "arrow.uturn.forward", colorHex: accentHex) {
+                        start(missed.routine, catchingUp: missed.day)
                     }
                     .accessibilityIdentifier("fitness-catch-up")
                 }
@@ -133,19 +137,39 @@ struct FitnessAppView: View {
                             Text(tr("\(Fmt.plural(session.sets.count, tr("série"), tr("séries"))) · \(TF.int(session.duration / 60)) min · \(TF.int(session.volume)) kg soulevés"))
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
+                            if let missed = session.catchUpFor {
+                                catchUpNote(missed)
+                            }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .buttonStyle(.plain)
                 }
+            } else if let planned, let caughtUp = FitnessMath.catchUp(of: day, state) {
+                // Missed that day, done another day.
+                header(tr("Séance rattrapée"), symbol: "arrow.uturn.forward.circle.fill")
+                Text(caughtUp.routineName).font(.title3.weight(.bold))
+                Text(caughtUp.isFinished ? tr("Faite le \(Fmt.format(caughtUp.start, template: "EEEEdMMMM")) à la place.") : tr("Rattrapage en cours."))
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                if caughtUp.isFinished {
+                    NavigationLink(value: HomeRoute.page(.fitnessSessionDetail(caughtUp.id))) {
+                        Text(tr("Voir le détail"))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Color(hex: accentHex))
+                    }
+                } else if planned.id != caughtUp.routineID {
+                    routineSummary(planned)
+                }
             } else if let planned {
                 header(day > now ? tr("Prévu") : tr("Prévu, pas fait"), symbol: "calendar")
                 routineSummary(planned)
-                // A session missed that day: done now instead.
+                // A session missed that day: done now instead, and marked as caught up.
                 if day < now, state.active.map({ $0.isFinished }) ?? true {
                     MiniActionButton(title: tr("Rattraper la séance"), symbol: "arrow.uturn.forward", colorHex: accentHex) {
+                        let missed = day
                         day = Date()
-                        start(planned)
+                        start(planned, catchingUp: missed)
                     }
                     .accessibilityIdentifier("fitness-catch-up")
                 }
@@ -161,12 +185,19 @@ struct FitnessAppView: View {
         .accessibilityIdentifier("fitness-day")
     }
 
-    /// The routine planned yesterday, when no session was done that day.
-    private func missedYesterday(_ state: FitnessState, now: Date) -> Routine? {
+    /// The routine planned yesterday, when no session was done that day nor caught up since.
+    private func missedYesterday(_ state: FitnessState, now: Date) -> (routine: Routine, day: Date)? {
         guard let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: now),
               let planned = state.routines.first(where: { $0.weekdays.contains(FitnessMath.isoWeekday(yesterday)) }) else { return nil }
         let done = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, yesterday) && $0.isFinished }
-        return done ? nil : planned
+        return done || FitnessMath.catchUp(of: yesterday, state) != nil ? nil : (planned, yesterday)
+    }
+
+    /// « Rattrapage de la séance du mardi 6 octobre ».
+    private func catchUpNote(_ missed: Date) -> some View {
+        Label(tr("Rattrapage de la séance du \(Fmt.format(missed, template: "EEEEdMMMM"))"), systemImage: "arrow.uturn.forward")
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(Color(hex: accentHex))
     }
 
     private func header(_ title: String, symbol: String) -> some View {
@@ -198,9 +229,10 @@ struct FitnessAppView: View {
         }
     }
 
-    private func start(_ routine: Routine) {
+    /// Starts a routine now; `missedDay`: the day it was planned for, when it is caught up.
+    private func start(_ routine: Routine, catchingUp missedDay: Date? = nil) {
         Haptics.success()
-        model.update(\.fitness) { $0.startSession(routine, at: Date()) }
+        model.update(\.fitness) { $0.startSession(routine, at: Date(), catchingUp: missedDay) }
         router.homePath.append(.page(.fitnessSession))
     }
 
@@ -218,7 +250,8 @@ struct FitnessAppView: View {
                  mark: { date in
                      let trained = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, date) && $0.isFinished }
                      let planned = state.routines.contains { $0.weekdays.contains(FitnessMath.isoWeekday(date)) }
-                     return WeekDayMark(isDone: trained, isPlanned: planned)
+                     let caughtUp = !trained && FitnessMath.catchUp(of: date, state)?.isFinished == true
+                     return WeekDayMark(isDone: trained, isPlanned: planned, isCaughtUp: caughtUp)
                  }) { week in
             HStack(spacing: 10) {
                 miniFigure(tr("Durée"), tr("\(TF.int(FitnessMath.minutes(inWeekOf: week[0], state))) min"))

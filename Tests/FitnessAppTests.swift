@@ -106,6 +106,31 @@ final class FitnessAppTests: XCTestCase {
         XCTAssertEqual(session.currentExercise?.name, "C")
     }
 
+    func testACaughtUpSessionRemembersTheDayItWasPlannedFor() throws {
+        var state = FitnessState()
+        let routine = Routine(name: "Jambes", exercises: [ExerciseTemplate(name: "Squat", sets: 1, reps: 5, weight: 100)], weekdays: [2])
+        state.routines = [routine]
+        let missed = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 6, hour: 7))!
+        let today = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 8, hour: 18))!
+        XCTAssertNil(FitnessMath.catchUp(of: missed, state))
+
+        state.startSession(routine, at: today, catchingUp: missed)
+        XCTAssertEqual(state.active?.catchUpFor, DateMath.startOfDay(missed))
+        XCTAssertNotNil(FitnessMath.catchUp(of: missed, state), "Under way, it already counts for the missed day")
+        _ = state.active?.completeSet(at: today.addingTimeInterval(120))
+        state.finishActive(at: today.addingTimeInterval(600))
+        let done = try XCTUnwrap(state.history.last)
+        XCTAssertTrue(done.isCatchUp)
+        XCTAssertEqual(FitnessMath.catchUp(of: missed, state)?.id, done.id)
+        XCTAssertNil(FitnessMath.catchUp(of: today, state), "The day it was done isn't a missed day")
+
+        // A session started the usual way isn't a catch-up, and older saved sessions read as such.
+        state.startSession(routine, at: today)
+        XCTAssertEqual(state.active?.isCatchUp, false)
+        let decoded = try JSONDecoder().decode(FitnessState.self, from: JSONEncoder().encode(state))
+        XCTAssertEqual(decoded.history.last?.catchUpFor, DateMath.startOfDay(missed))
+    }
+
     func testTheProgramGrowsFromTheLibrary() {
         var state = FitnessState()
         let squat = ExerciseTemplate(name: "Squat (barre)", sets: 4, reps: 6, weight: 100, restSeconds: 150, exerciseID: "back-squat", tempo: "3-1-1-0", notes: "Ceinture")

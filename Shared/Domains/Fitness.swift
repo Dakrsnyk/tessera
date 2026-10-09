@@ -109,8 +109,11 @@ struct WorkoutSession: Codable, Hashable, Identifiable {
     var restEndsAt: Date?
     /// A rest put on pause: the seconds left (the rest has no end while it is paused).
     var restPausedRemaining: TimeInterval?
+    /// A session caught up: the day it was planned for (« Séance rattrapée »).
+    var catchUpFor: Date?
 
     var isFinished: Bool { end != nil }
+    var isCatchUp: Bool { catchUpFor != nil }
     var currentExercise: ExerciseTemplate? { exercises[safe: exerciseIndex] }
     var volume: Double { sets.reduce(0) { $0 + Double($1.reps) * $1.weight } }
     var totalSets: Int { exercises.reduce(0) { $0 + $1.sets } }
@@ -221,9 +224,11 @@ struct FitnessState: Codable, Hashable {
         routines.contains { $0.weekdays.contains(FitnessMath.isoWeekday(date)) }
     }
 
-    mutating func startSession(_ routine: Routine, at date: Date) {
+    /// Starts a routine; `missedDay`: the day it was planned for, when it is caught up later.
+    mutating func startSession(_ routine: Routine, at date: Date, catchingUp missedDay: Date? = nil) {
         finishActive(at: date)
-        active = WorkoutSession(routineID: routine.id, routineName: routine.name, exercises: routine.exercises, start: date)
+        active = WorkoutSession(routineID: routine.id, routineName: routine.name, exercises: routine.exercises, start: date,
+                                catchUpFor: missedDay.map(DateMath.startOfDay))
     }
 
     mutating func finishActive(at date: Date) {
@@ -278,6 +283,13 @@ enum FitnessMath {
         var all = state.history
         if let active = state.active, !active.sets.isEmpty { all.append(active) }
         return all
+    }
+
+    /// The session that caught up the one planned on `day` (done another day, or under way).
+    static func catchUp(of day: Date, _ state: FitnessState) -> WorkoutSession? {
+        var all = state.history
+        if let active = state.active { all.append(active) }
+        return all.first { $0.catchUpFor.map { DateMath.isSameDay($0, day) } ?? false }
     }
 
     static func workouts(inWeekOf date: Date, _ state: FitnessState) -> Int {

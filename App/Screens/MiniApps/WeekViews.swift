@@ -22,12 +22,13 @@ enum WeekTitle {
 
 // MARK: - Week of rounds
 
-/// How a day reads in a week of rounds: done (filled, with a check), how far it got (a ring),
-/// planned (a full outline) or nothing (a dotted outline).
+/// How a day reads in a week of rounds: done (filled, with a check), caught up another day (tinted,
+/// with a return arrow), how far it got (a ring), planned (a full outline) or nothing (a dotted outline).
 struct WeekDayMark {
     var progress: Double = 0
     var isDone = false
     var isPlanned = false
+    var isCaughtUp = false
 }
 
 /// A week as seven rounds under its title: a tap on a round picks that day, a swipe across the
@@ -126,6 +127,10 @@ struct WeekCard<Content: View>: View {
                     if state.isDone {
                         Circle().fill(accent)
                         Image(systemName: "checkmark").font(.caption.weight(.bold)).foregroundStyle(Color.white)
+                    } else if state.isCaughtUp {
+                        Circle().fill(accent.opacity(0.16))
+                        Circle().strokeBorder(accent.opacity(0.7), lineWidth: 2)
+                        Image(systemName: "arrow.uturn.forward").font(.caption2.weight(.bold)).foregroundStyle(accent)
                     } else {
                         Circle()
                             .strokeBorder(state.isPlanned ? accent.opacity(0.6) : Color.secondary.opacity(0.25),
@@ -152,6 +157,7 @@ struct WeekCard<Content: View>: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(Text(Fmt.longDay(date)))
+        .accessibilityValue(Text(state.isCaughtUp ? tr("Séance rattrapée") : ""))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 

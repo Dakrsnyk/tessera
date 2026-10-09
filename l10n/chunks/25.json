@@ -483,5 +483,40 @@
   "key": "À partir de %@ le %@, puis tes revenus et tes dépenses, factures et montants fixes compris.",
   "placeholders": 2,
   "uses": []
+ },
+ {
+  "key": "Rattrapage en cours",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Séance rattrapée",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Faite le %@ à la place.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Rattrapage en cours.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Rattrapage de la séance du %@",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Rattrapée",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Prévue le %@",
+  "placeholders": 1,
+  "uses": []
  }
 ]
