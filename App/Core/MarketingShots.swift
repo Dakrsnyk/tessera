@@ -61,6 +61,7 @@ struct MarketingView: View {
         case "apps": MarketingApps()
         case "privacy": MarketingPrivacy()
         case "finale": MarketingFinale()
+        case "hero-lock": MarketingHero(showsLockScreen: true)
         default: MarketingHero()
         }
     }
@@ -108,9 +109,15 @@ enum MK {
         SamplePayload.make(for: design, now: now)
     }
 
-    /// The demo session (« Haut du corps »), during the rest after the second set of bench press.
+    /// The demo session in progress (the one the Fitness screen shows), 1:24 into a two-minute rest.
     static var workout: (attributes: WorkoutActivityAttributes, state: WorkoutActivityAttributes.ContentState) {
-        (
+        if var live = WorkoutLiveActivity.content(for: SharedStore.shared.state(FitnessState.self), now: now) {
+            live.1.restStart = now.addingTimeInterval(-36)
+            live.1.restEnd = now.addingTimeInterval(84)
+            live.1.restPaused = nil
+            return (attributes: live.0, state: live.1)
+        }
+        return (
             WorkoutActivityAttributes(routineName: tr("Haut du corps")),
             WorkoutActivityAttributes.ContentState(
                 exercise: tr("Développé couché"),
@@ -494,6 +501,22 @@ struct MarketingFeature<Extra: View>: View {
     }
 }
 
+/// A wide ring around the seam of a panorama: it joins the two screenshots without cutting any text.
+struct MarketingArc: View {
+    let colors: [Color]
+    var diameter: CGFloat = 700
+    var opacity: Double = 0.22
+
+    var body: some View {
+        Circle()
+            .trim(from: 0.06, to: 0.78)
+            .stroke(AngularGradient(colors: colors + [colors[0]], center: .center), style: StrokeStyle(lineWidth: 26, lineCap: .round))
+            .rotationEffect(.degrees(-90))
+            .frame(width: diameter, height: diameter)
+            .opacity(opacity)
+    }
+}
+
 /// Places a view by its top-leading corner on the canvas.
 private extension View {
     func at(_ x: CGFloat, _ y: CGFloat) -> some View {
@@ -508,16 +531,7 @@ struct MarketingPanoSport: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             MarketingGround(dark: true, glow: MK.red, glowCenter: UnitPoint(x: 0.5, y: 0.64), second: MK.orange, secondCenter: UnitPoint(x: 0.98, y: 0.04))
-            // An activity ring around the seam joins the two screenshots.
-            Circle()
-                .trim(from: 0.06, to: 0.78)
-                .stroke(
-                    AngularGradient(colors: [MK.red, MK.orange, MK.amber, MK.red], center: .center),
-                    style: StrokeStyle(lineWidth: 26, lineCap: .round)
-                )
-                .rotationEffect(.degrees(-90))
-                .frame(width: 700, height: 700)
-                .opacity(0.22)
+            MarketingArc(colors: [MK.red, MK.orange, MK.amber])
                 .at(90, 420)
             HStack(alignment: .top, spacing: 0) {
                 MarketingTitle(eyebrow: tr("Écran verrouillé"), title: tr("Ta séance,\nen direct."), subtitle: tr("Sans déverrouiller ton iPhone."), dark: true)
@@ -525,7 +539,7 @@ struct MarketingPanoSport: View {
             }
             .padding(.top, 70)
             MarketingPhone(width: 330) {
-                MarketingLockScreen(circular: [MK.design(.caloriesLeft, .minimal), MK.design(.hydration, .minimal), MK.design(.trainingStreak, .minimal)])
+                MarketingLockScreen(circular: [MK.design(.caloriesLeft, .minimal), MK.design(.proteinLeft, .minimal), MK.design(.hydration, .minimal)])
             }
             .at(55, 290)
             MarketingLiveActivity()
@@ -535,8 +549,8 @@ struct MarketingPanoSport: View {
             MarketingIsland()
                 .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 10)
                 .at(510, 548)
-            MarketingLockChip(designs: [(MK.design(.restTimer, .minimal), .accessoryCircular), (MK.design(.trainingStreak, .minimal), .accessoryCircular)], scale: 1.4)
-                .at(522, 680)
+            MarketingLockChip(designs: [(MK.design(.nextSet, .minimal), .accessoryRectangular), (MK.design(.caloriesLeft, .minimal), .accessoryCircular)], scale: 1.3)
+                .at(480, 690)
         }
         .frame(width: MK.wide.width, height: MK.wide.height, alignment: .topLeading)
     }
@@ -547,6 +561,8 @@ struct MarketingPanoNutrition: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             MarketingGround(glow: Color(hex: "F08A24"), glowCenter: UnitPoint(x: 0.5, y: 0.6), second: MK.red, secondCenter: UnitPoint(x: 0.98, y: 0.04))
+            MarketingArc(colors: [Color(hex: "F08A24"), MK.amber, MK.red], opacity: 0.16)
+                .at(90, 420)
             HStack(alignment: .top, spacing: 0) {
                 MarketingTitle(eyebrow: tr("Nutrition"), title: tr("Tes calories,\nen un regard."), subtitle: tr("Scanne un code-barres, c'est noté."))
                 MarketingTitle(eyebrow: tr("Widgets"), title: tr("Sur ton écran\nd'accueil."), subtitle: tr("Et sur l'écran verrouillé."))
@@ -560,11 +576,8 @@ struct MarketingPanoNutrition: View {
                 .at(464, 494)
             MarketingFloating(item: MKWidget(.macros, .systemSmall, .light), width: 186)
                 .at(670, 494)
-            // Across the two screenshots.
-            MarketingFloating(item: MKWidget(.caloriesLeft, .systemSmall, .aurora), width: 206)
-                .at(337, 700)
-            MarketingLockChip(designs: [(MK.design(.caloriesLeft, .minimal), .accessoryRectangular)], scale: 1.3)
-                .at(592, 716)
+            MarketingLockChip(designs: [(MK.design(.caloriesLeft, .minimal), .accessoryRectangular), (MK.design(.proteinLeft, .minimal), .accessoryCircular)], scale: 1.3)
+                .at(480, 712)
         }
         .frame(width: MK.wide.width, height: MK.wide.height, alignment: .topLeading)
     }
@@ -581,6 +594,8 @@ struct MarketingPanoStyle: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             MarketingGround(glow: Color(hex: "8C6CFF"), glowCenter: UnitPoint(x: 0.5, y: 0.6), second: MK.orange, secondCenter: UnitPoint(x: 0.98, y: 0.04))
+            MarketingArc(colors: [Color(hex: "8C6CFF"), Color(hex: "FF4F9A"), MK.orange], opacity: 0.16)
+                .at(90, 420)
             HStack(alignment: .top, spacing: 0) {
                 MarketingTitle(eyebrow: tr("Personnalisation"), title: tr("À ton image."), subtitle: tr("Styles, couleurs, photos, polices."))
                 MarketingTitle(eyebrow: tr("Studio"), title: tr("Un widget,\nmille styles."))
@@ -606,8 +621,10 @@ struct MarketingPanoStyle: View {
 
 // MARK: - Scenes
 
-/// What Tessera is, at a glance.
+/// What Tessera is, at a glance: the Home Screen, or the Lock Screen with the workout in progress.
 struct MarketingHero: View {
+    var showsLockScreen = false
+
     var body: some View {
         ZStack(alignment: .top) {
             MarketingGround(dark: true, glow: MK.red, glowCenter: UnitPoint(x: 0.5, y: 0.66), second: MK.orange, secondCenter: UnitPoint(x: 0.95, y: 0.05))
@@ -617,11 +634,15 @@ struct MarketingHero: View {
             }
             .padding(.top, 66)
             MarketingPhone(width: 340) {
-                MarketingHomeScreen(rows: [
-                    [MKWidget(.mealsToday, .systemMedium, .light)],
-                    [MKWidget(.caloriesLeft, .systemSmall, .aurora), MKWidget(.nextSet, .systemSmall, .dark, "FF6B57")],
-                    [MKWidget(.habitStreak, .systemSmall, .retro, "F2A33A"), MKWidget(.weather, .systemSmall, .light, "3366FF")],
-                ])
+                if showsLockScreen {
+                    MarketingLockScreen(circular: [MK.design(.proteinLeft, .minimal), MK.design(.hydration, .minimal)], rectangular: MK.design(.caloriesLeft, .minimal))
+                } else {
+                    MarketingHomeScreen(rows: [
+                        [MKWidget(.mealsToday, .systemMedium, .light)],
+                        [MKWidget(.caloriesLeft, .systemSmall, .aurora), MKWidget(.nextSet, .systemSmall, .dark, "FF6B57")],
+                        [MKWidget(.habitStreak, .systemSmall, .retro, "F2A33A"), MKWidget(.weather, .systemSmall, .light, "3366FF")],
+                    ])
+                }
             }
             .padding(.top, 300)
         }
@@ -687,8 +708,8 @@ struct MarketingStore: View {
 struct MarketingPlanning: View {
     var body: some View {
         MarketingFeature(eyebrow: tr("Planning"), title: tr("Ta semaine,\nbien en main."), subtitle: tr("Horaire, tâches, habitudes, focus."), glow: Color(hex: "3366FF")) {
-            MarketingFloating(item: MKWidget(.priorities, .systemSmall, .light, "3366FF"), width: 164)
-                .at(262, 760)
+            MarketingFloating(item: MKWidget(.priorities, .systemSmall, .dark, "5B8DEF"), width: 186)
+                .at(240, 738)
         }
     }
 }
@@ -793,11 +814,11 @@ struct MarketingPrivacy: View {
             MarketingGround(dark: true, glow: MK.jade, glowCenter: UnitPoint(x: 0.5, y: 0.5), second: MK.orange, secondCenter: UnitPoint(x: 0.95, y: 0.05))
             MarketingTitle(eyebrow: tr("Confidentialité"), title: tr("Tes données\nrestent à toi."), dark: true)
                 .padding(.top, 70)
-            VStack(spacing: 34) {
+            VStack(spacing: 46) {
                 Image(systemName: "lock.shield.fill")
-                    .font(.system(size: 92, weight: .regular))
+                    .font(.system(size: 104, weight: .regular))
                     .foregroundStyle(MK.jadeLight, MK.jade.opacity(0.5))
-                    .frame(width: 190, height: 190)
+                    .frame(width: 220, height: 220)
                     .background(MK.jade.opacity(0.16), in: Circle())
                     .overlay(Circle().strokeBorder(MK.jadeLight.opacity(0.25), lineWidth: 1))
                 VStack(spacing: 12) {
@@ -806,7 +827,7 @@ struct MarketingPrivacy: View {
                     row("eye.slash.fill", tr("Aucune pub, aucun suivi"))
                 }
             }
-            .padding(.top, 262)
+            .padding(.top, 318)
         }
         .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .top)
     }

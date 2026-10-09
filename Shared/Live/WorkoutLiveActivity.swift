@@ -66,6 +66,15 @@ enum WorkoutLiveActivity {
     static func sync(_ state: FitnessState, now: Date = Date()) async {
         #if canImport(ActivityKit) && os(iOS)
         let running = Activity<WorkoutActivityAttributes>.activities
+        #if DEBUG
+        // Captures of the test build (`-screenshotScreen`): no Live Activity, or its Dynamic Island shows on every screenshot.
+        if UserDefaults.standard.string(forKey: "screenshotScreen") != nil {
+            for activity in running {
+                await activity.end(nil, dismissalPolicy: .immediate)
+            }
+            return
+        }
+        #endif
         guard let (attributes, content) = Self.content(for: state, now: now) else {
             for activity in running {
                 await activity.end(nil, dismissalPolicy: .immediate)
