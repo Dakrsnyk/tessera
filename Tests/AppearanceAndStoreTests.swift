@@ -1,3 +1,4 @@
+import UIKit
 import WidgetKit
 import XCTest
 @testable import Tessera
@@ -30,6 +31,19 @@ final class AppearanceAndStoreTests: XCTestCase {
         XCTAssertEqual(Set(AppStyle.all.map(\.id)).count, AppStyle.all.count)
         for id in AppStyleID.allCases {
             XCTAssertEqual(AppStyle.style(id).id, id)
+        }
+    }
+
+    func testAppIconsComeWithTheirPictureAndVerreRougeFirst() {
+        let icons = AppIconChoice.all
+        XCTAssertEqual(icons.first?.asset, AppIconChoice.main, "Verre rouge, the main icon, comes first")
+        XCTAssertNil(icons.first?.alternateName)
+        XCTAssertEqual(Set(icons.map(\.asset)).count, icons.count)
+        for icon in icons.dropFirst() {
+            XCTAssertEqual(icon.alternateName, icon.asset)
+        }
+        for icon in icons {
+            XCTAssertNotNil(UIImage(named: icon.preview), "\(icon.preview) is in the app")
         }
     }
 
