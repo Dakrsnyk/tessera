@@ -69,7 +69,8 @@ enum TileVisual: Hashable {
     case timer(Date, Date)
     /// The week's schedule: Monday-first columns, blocks between the first and last hour shown,
     /// and today's column (0 = Monday).
-    case schedule([ScheduleBlock], today: Int?)
+    /// A week (Monday first): its blocks, today's column, the day numbers, the hours shown (minutes).
+    case schedule([ScheduleBlock], today: Int?, dates: [Int], firstMinute: Int, lastMinute: Int)
 }
 
 /// One entry of the week's schedule, placed in its day's column (0 = Monday). `start` and `end` are
@@ -80,6 +81,8 @@ struct ScheduleBlock: Hashable {
     var end: Double
     var colorHex: String
     var title: String
+    /// Its start time, written in the block when there is room.
+    var time: String?
 }
 
 struct TileEmpty: Hashable {

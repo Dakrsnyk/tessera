@@ -1018,8 +1018,8 @@ struct TileVisualView: View {
             MonthDots(days: days, offset: offset, marked: marked, today: today, style: s)
         case let .grid(names, rows, colors):
             HabitGrid(names: names, rows: rows, colors: colors, style: s)
-        case let .schedule(blocks, today):
-            ScheduleWeek(blocks: blocks, today: today, style: s)
+        case let .schedule(blocks, today, dates, first, last):
+            ScheduleWeek(blocks: blocks, today: today, dates: dates, firstMinute: first, lastMinute: last, style: s)
         case let .symbol(name):
             Image(systemName: s.symbol(name))
                 .resizable()
@@ -1320,47 +1320,102 @@ struct MonthDots: View {
 
 /// The week's schedule in a large widget: a column a day, each entry a block in its color, with its
 /// name when the block is tall enough.
+/// A week at a glance: each day with its letter and its date, the hours down the side with a line
+/// across, each entry a block with its name and its start time when there is room.
 struct ScheduleWeek: View {
     let blocks: [ScheduleBlock]
     let today: Int?
+    var dates: [Int] = []
+    var firstMinute = 8 * 60
+    var lastMinute = 18 * 60
     let style: ResolvedStyle
+
+    private let gutter: CGFloat = 20
 
     var body: some View {
         let symbols = DateMath.weekdaySymbols()
-        HStack(alignment: .top, spacing: 3) {
-            ForEach(0..<7, id: \.self) { day in
-                VStack(spacing: 3) {
-                    Text(day < symbols.count ? symbols[day] : "")
-                        .font(style.text(9, day == today ? .bold : .medium))
-                        .foregroundStyle(day == today ? style.chart : style.secondary)
-                    GeometryReader { proxy in
-                        ZStack(alignment: .top) {
-                            RoundedRectangle(cornerRadius: style.radius(4), style: .continuous)
-                                .fill(style.track.opacity(day == today ? 1 : 0.5))
-                            ForEach(Array(blocks.filter { $0.day == day }.enumerated()), id: \.offset) { item in
-                                let block = item.element
-                                let height = max(4, (block.end - block.start) * proxy.size.height)
-                                RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
-                                    .fill(Color(hex: block.colorHex))
-                                    .frame(height: height)
-                                    .overlay(alignment: .topLeading) {
-                                        if height > 18 {
-                                            Text(block.title)
-                                                .font(.system(size: 7, weight: .semibold))
-                                                .foregroundStyle(.white)
-                                                .lineLimit(height > 30 ? 2 : 1)
-                                                .minimumScaleFactor(0.7)
-                                                .padding(2)
-                                        }
-                                    }
-                                    .offset(y: block.start * proxy.size.height)
-                            }
+        let span = max(60, lastMinute - firstMinute)
+        let step = span > 8 * 60 ? 120 : 60
+        let hours = Array(stride(from: firstMinute, through: lastMinute, by: step))
+        VStack(spacing: 4) {
+            HStack(spacing: 3) {
+                Color.clear.frame(width: gutter, height: 1)
+                ForEach(0..<7, id: \.self) { day in
+                    VStack(spacing: 0) {
+                        Text(day < symbols.count ? symbols[day] : "")
+                            .font(style.text(8, .medium))
+                            .foregroundStyle(day == today ? style.chart : style.secondary)
+                        if let date = dates[safe: day] {
+                            Text("\(date)")
+                                .font(style.text(11, day == today ? .bold : .semibold))
+                                .foregroundStyle(day == today ? style.chart : style.primary)
                         }
                     }
+                    .frame(maxWidth: .infinity)
                 }
-                .frame(maxWidth: .infinity)
+            }
+            GeometryReader { proxy in
+                let height = proxy.size.height
+                let width = max(0, proxy.size.width - gutter - 3)
+                ZStack(alignment: .topLeading) {
+                    ForEach(hours, id: \.self) { minute in
+                        let y = CGFloat(minute - firstMinute) / CGFloat(span) * height
+                        Rectangle()
+                            .fill(style.track)
+                            .frame(width: width, height: 0.6)
+                            .offset(x: gutter + 3, y: y)
+                        Text("\(minute / 60)h")
+                            .font(style.text(7, .medium))
+                            .foregroundStyle(style.secondary)
+                            .lineLimit(1)
+                            .frame(width: gutter, alignment: .leading)
+                            .offset(y: min(max(0, y - 5), max(0, height - 10)))
+                    }
+                    HStack(alignment: .top, spacing: 3) {
+                        ForEach(0..<7, id: \.self) { day in
+                            column(day, height: height, span: span)
+                        }
+                    }
+                    .frame(width: width, height: height)
+                    .offset(x: gutter + 3)
+                }
             }
         }
+    }
+
+    private func column(_ day: Int, height: CGFloat, span: Int) -> some View {
+        ZStack(alignment: .top) {
+            RoundedRectangle(cornerRadius: style.radius(4), style: .continuous)
+                .fill(style.track.opacity(day == today ? 0.9 : 0.3))
+            ForEach(Array(blocks.filter { $0.day == day }.enumerated()), id: \.offset) { item in
+                let block = item.element
+                let blockHeight = max(4, (block.end - block.start) * height)
+                RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
+                    .fill(Color(hex: block.colorHex))
+                    .frame(height: blockHeight)
+                    .overlay(alignment: .topLeading) {
+                        if blockHeight > 14 {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(block.title)
+                                    .font(.system(size: 7, weight: .bold))
+                                    .lineLimit(blockHeight > 34 ? 2 : 1)
+                                if blockHeight > 24, let time = block.time {
+                                    Text(time)
+                                        .font(.system(size: 6, weight: .semibold))
+                                        .opacity(0.85)
+                                        .lineLimit(1)
+                                }
+                            }
+                            .foregroundStyle(.white)
+                            .minimumScaleFactor(0.7)
+                            .padding(2)
+                        }
+                    }
+                    .offset(y: block.start * height)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: height, alignment: .top)
     }
 }
 

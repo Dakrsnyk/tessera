@@ -1642,13 +1642,6 @@
   ]
  },
  {
-  "key": "Plus de 70 widgets en plus, 12 styles, fonds photo.",
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:376: Text(tr(\"Plus de 70 widgets en plus, 12 styles, fonds photo.\"))"
-  ]
- },
- {
   "key": "%@ kcal aujourd'hui",
   "placeholders": 1,
   "uses": [

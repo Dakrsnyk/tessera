@@ -8,8 +8,8 @@ import WidgetKit
 @MainActor
 @Observable
 final class AppModel {
-    static let freeDesignLimit = 5
-    static let freeHabitLimit = 3
+    static let freeDesignLimit = 8
+    static let freeHabitLimit = 5
 
     private(set) var designs: [WidgetDesign] = []
     private(set) var content = ContentState()

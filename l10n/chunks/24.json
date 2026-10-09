@@ -673,5 +673,96 @@
   "uses": [
    "App/Premium/PremiumStore.swift:158: return tr(\"\\(first) les \\(Fmt.plural(months, tr(\"premier mois\"), tr(\"premiers mois\"))), puis \\(regular)\")"
   ]
+ },
+ {
+  "key": "%@ styles en plus",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), detail: tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\"))"
+  ]
+ },
+ {
+  "key": "%@ widgets en plus, %@ styles, analyses et fonds photo.",
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Home/HomeView.swift:134: Text(tr(\"\\(WidgetKind.allCases.filter { $0.isPremium }.count) widgets en plus, \\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles, analyses et fonds photo.\"))"
+  ]
+ },
+ {
+  "key": "30 jours, ou la période de ton choix, avec tes moyennes et ton poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:466: message: tr(\"30 jours, ou la période de ton choix, avec tes moyennes et ton poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium.\"))"
+  ]
+ },
+ {
+  "key": "Analyses et historiques",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:98: PerkRow(symbol: \"chart.bar.xaxis\", title: tr(\"Analyses et historiques\"), detail: tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\"))"
+  ]
+ },
+ {
+  "key": "Découvrir Premium",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumLock.swift:30: Label(tr(\"Découvrir Premium\"), systemImage: \"sparkles\")"
+  ]
+ },
+ {
+  "key": "Espace, Mars, Océan, Aurore, Élégant, Synthwave…",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), detail: tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\"))"
+  ]
+ },
+ {
+  "key": "L'historique complet est dans Premium",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:465: PremiumLockCard(symbol: \"chart.line.uptrend.xyaxis\", title: tr(\"L'historique complet est dans Premium\"),"
+  ]
+ },
+ {
+  "key": "L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:98: PerkRow(symbol: \"chart.bar.xaxis\", title: tr(\"Analyses et historiques\"), detail: tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\"))"
+  ]
+ },
+ {
+  "key": "L'évolution est dans Premium",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:477: PremiumLockCard(symbol: \"chart.bar.xaxis\", title: tr(\"L'évolution est dans Premium\"),"
+  ]
+ },
+ {
+  "key": "Mois précédents avec Premium",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:25: .accessibilityLabel(Text(isLocked ? tr(\"Mois précédents avec Premium\") : tr(\"Mois précédent\")))"
+  ]
+ },
+ {
+  "key": "Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:96: PerkRow(symbol: \"bag.fill\", title: tr(\"Tous les packs\"), detail: tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\"))"
+  ]
+ },
+ {
+  "key": "Records, volume, bénéfice, MRR, devoirs, vol, carburant…",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:94: PerkRow(symbol: \"square.stack.3d.up.fill\", title: tr(\"Tous les widgets des espaces\"), detail: tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\"))"
+  ]
+ },
+ {
+  "key": "Six mois d'un coup d'œil, tes moyennes et la comparaison avec le mois dernier. Tes opérations restent enregistrées : tout s'affiche dès que tu passes à Premium.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:478: message: tr(\"Six mois d'un coup d'œil, tes moyennes et la comparaison avec le mois dernier. Tes opérations restent enregistrées : tout s'affiche dès que tu passes à Premium.\"))"
+  ]
  }
 ]

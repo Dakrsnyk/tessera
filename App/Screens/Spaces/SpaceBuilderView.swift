@@ -405,13 +405,13 @@ struct SpaceBuilderView: View {
         }
     }
 
+    /// A new size keeps the widgets the person picked, as they are: nothing added, nothing removed.
+    /// When they don't make a widget of that size, the preview says what to change.
     private func setFormat(_ newFormat: WidgetFormat) {
         guard newFormat != format else { return }
         Haptics.tap()
         withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
             format = newFormat
-            let preset = SpaceCatalog.preset(for: space, format: newFormat)
-            if !preset.isEmpty { selection = preset }
         }
     }
 }

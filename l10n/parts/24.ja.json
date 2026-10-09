@@ -93,5 +93,18 @@
  "Rien de prévu cette semaine.": "今週の予定はありません。",
  "Toute la semaine": "1週間すべて",
  "premier mois": "か月間",
- "premiers mois": "か月間"
+ "premiers mois": "か月間",
+ "%@ styles en plus": "スタイルが%@種類追加",
+ "%@ widgets en plus, %@ styles, analyses et fonds photo.": "ウィジェット%1$@個追加、スタイル%2$@種類、分析と写真の背景。",
+ "30 jours, ou la période de ton choix, avec tes moyennes et ton poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium.": "30日間、または好きな期間の平均と体重。食事の記録は保存されたままで、Premiumにするとすぐにすべて表示されます。",
+ "Analyses et historiques": "分析と履歴",
+ "Découvrir Premium": "Premiumを見る",
+ "Espace, Mars, Océan, Aurore, Élégant, Synthwave…": "宇宙、火星、海、オーロラ、エレガント、シンセウェーブ…",
+ "L'historique complet est dans Premium": "すべての履歴はPremiumで",
+ "L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés": "6か月間の家計の推移、7日より前の食事履歴、過去の月",
+ "L'évolution est dans Premium": "推移はPremiumで",
+ "Mois précédents avec Premium": "前の月はPremiumで",
+ "Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…": "テーマパック、ハロウィン・クリスマスコレクション、学生、スポーツ、旅行…",
+ "Records, volume, bénéfice, MRR, devoirs, vol, carburant…": "自己ベスト、ボリューム、利益、MRR、課題、フライト、燃料…",
+ "Six mois d'un coup d'œil, tes moyennes et la comparaison avec le mois dernier. Tes opérations restent enregistrées : tout s'affiche dès que tu passes à Premium.": "6か月をひと目で、平均、先月との比較。取引は保存されたままで、Premiumにするとすぐにすべて表示されます。"
 }

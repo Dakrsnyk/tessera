@@ -30,14 +30,20 @@ enum StudentTiles {
         tile.value = Fmt.number(entries.count)
         tile.unit = entries.count > 1 ? tr("éléments") : tr("élément")
         func hour(_ minutes: Int) -> String { String(format: "%d:%02d", minutes / 60, minutes % 60) }
-        tile.caption = "\(hour(first)) – \(hour(last))"
+        let week = DateMath.week(containing: now)
+        // The week's dates (the hours are down the side of the grid).
+        if let monday = week.first, let sunday = week.last {
+            tile.caption = "\(Fmt.shortDay(monday)) – \(Fmt.shortDay(sunday))"
+        }
         tile.visual = .schedule(entries.map { entry in
             ScheduleBlock(day: FitnessMath.isoWeekday(entry.start) - 1,
                           start: Double(entry.slot.startMinute - first) / span,
                           end: Double(entry.slot.endMinute - first) / span,
                           colorHex: state.colorHex(of: entry.slot),
-                          title: state.title(of: entry.slot))
-        }, today: FitnessMath.isoWeekday(now) - 1)
+                          title: state.title(of: entry.slot),
+                          time: hour(entry.slot.startMinute))
+        }, today: FitnessMath.isoWeekday(now) - 1,
+           dates: week.map { DateMath.calendar.component(.day, from: $0) }, firstMinute: first, lastMinute: last)
         tile.inline = tr("Horaire de la semaine")
         return tile
     }

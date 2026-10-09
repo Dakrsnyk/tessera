@@ -91,10 +91,11 @@ struct PaywallView: View {
 
     private var perks: some View {
         VStack(alignment: .leading, spacing: 16) {
-            PerkRow(symbol: "square.stack.3d.up.fill", title: tr("Tous les widgets des espaces"), detail: tr("Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…"))
+            PerkRow(symbol: "square.stack.3d.up.fill", title: tr("Tous les widgets des espaces"), detail: tr("Records, volume, bénéfice, MRR, devoirs, vol, carburant…"))
             PerkRow(symbol: "wand.and.stars", title: tr("Widgets intelligents"), detail: tr("« Maintenant » change selon le moment, et les analyses résument ta journée"))
-            PerkRow(symbol: "bag.fill", title: tr("Tous les packs"), detail: tr("Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…"))
-            PerkRow(symbol: "paintpalette", title: tr("8 styles en plus"), detail: tr("Verre, Aurore, Élégant, Digital, Rétro, Futuriste…"))
+            PerkRow(symbol: "bag.fill", title: tr("Tous les packs"), detail: tr("Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…"))
+            PerkRow(symbol: "paintpalette", title: tr("\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus"), detail: tr("Espace, Mars, Océan, Aurore, Élégant, Synthwave…"))
+            PerkRow(symbol: "chart.bar.xaxis", title: tr("Analyses et historiques"), detail: tr("L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés"))
             PerkRow(symbol: "photo", title: tr("Fonds photo, couleurs libres"), detail: tr("Et les polices Serif et Mono"))
         }
         .card(padding: 20)

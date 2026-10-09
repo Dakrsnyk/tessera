@@ -1601,13 +1601,6 @@
   ]
  },
  {
-  "key": "Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:94: PerkRow(symbol: \"square.stack.3d.up.fill\", title: tr(\"Tous les widgets des espaces\"), detail: tr(\"Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…\"))"
-  ]
- },
- {
   "key": "Tous les widgets des espaces",
   "placeholders": 0,
   "uses": [
@@ -1633,27 +1626,6 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:96: PerkRow(symbol: \"bag.fill\", title: tr(\"Tous les packs\"), detail: tr(\"Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…\"))"
-  ]
- },
- {
-  "key": "Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:96: PerkRow(symbol: \"bag.fill\", title: tr(\"Tous les packs\"), detail: tr(\"Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…\"))"
-  ]
- },
- {
-  "key": "8 styles en plus",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"8 styles en plus\"), detail: tr(\"Verre, Aurore, Élégant, Digital, Rétro, Futuriste…\"))"
-  ]
- },
- {
-  "key": "Verre, Aurore, Élégant, Digital, Rétro, Futuriste…",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"8 styles en plus\"), detail: tr(\"Verre, Aurore, Élégant, Digital, Rétro, Futuriste…\"))"
   ]
  },
  {

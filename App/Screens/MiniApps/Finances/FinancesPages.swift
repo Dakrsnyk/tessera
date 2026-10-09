@@ -5,15 +5,25 @@ import SwiftUI
 struct MonthSwitcher: View {
     @Binding var month: Date
     var colorHex = Finances.accentHex
+    /// The oldest day shown (the free plan: the last seven days); earlier months open Premium.
+    var earliest: Date?
+    var onLocked: (() -> Void)?
 
     private var isCurrent: Bool { DateMath.calendar.isDate(month, equalTo: Date(), toGranularity: .month) }
+    private var isLocked: Bool {
+        guard let earliest else { return false }
+        return BudgetMath.monthInterval(month).start <= earliest
+    }
 
     var body: some View {
         HStack(spacing: 6) {
-            Button { move(-1) } label: {
-                Image(systemName: "chevron.left").font(.subheadline.weight(.bold)).frame(width: 40, height: 36)
+            Button {
+                if isLocked { onLocked?() } else { move(-1) }
+            } label: {
+                Image(systemName: isLocked ? "lock.fill" : "chevron.left").font(.subheadline.weight(.bold)).frame(width: 40, height: 36)
             }
-            .accessibilityLabel(Text(tr("Mois précédent")))
+            .accessibilityLabel(Text(isLocked ? tr("Mois précédents avec Premium") : tr("Mois précédent")))
+            .accessibilityIdentifier("month-previous")
             Text(Fmt.monthYear(month).capitalizedFirst)
                 .font(.subheadline.weight(.semibold))
                 .frame(maxWidth: .infinity)
@@ -45,6 +55,7 @@ struct FinancesTransactionsPage: View {
     }
 
     @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
     @State private var month = Date()
     @State private var kind: Kind = .expenses
     @State private var categoryID: UUID?
@@ -57,7 +68,7 @@ struct FinancesTransactionsPage: View {
         let interval = BudgetMath.monthInterval(month)
         List {
             Section {
-                MonthSwitcher(month: $month)
+                MonthSwitcher(month: $month, earliest: model.isPremium ? nil : PremiumHistory.earliestFreeDay()) { router.isPaywallPresented = true }
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
                 Picker(tr("Type"), selection: $kind) {
@@ -198,6 +209,7 @@ struct FinancesTransactionsPage: View {
 
 struct FinancesCategoriesPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
     @State private var month = Date()
     @State private var sheet: FinanceSheet?
 
@@ -209,7 +221,7 @@ struct FinancesCategoriesPage: View {
         let spends = BudgetMath.byCategory(state, in: interval)
         let total = spends.reduce(0) { $0 + $1.amount }
         MiniAppScroll {
-            MonthSwitcher(month: $month)
+            MonthSwitcher(month: $month, earliest: model.isPremium ? nil : PremiumHistory.earliestFreeDay()) { router.isPaywallPresented = true }
             if total > 0 {
                 Chart(spends, id: \.name) { spend in
                     SectorMark(angle: .value("Montant", spend.amount), innerRadius: .ratio(0.62), angularInset: 1.5)
@@ -458,6 +470,19 @@ struct FinancesTrendsPage: View {
     }
 
     var body: some View {
+        if model.isPremium {
+            trends
+        } else {
+            MiniAppScroll {
+                PremiumLockCard(symbol: "chart.bar.xaxis", title: tr("L'évolution est dans Premium"),
+                                message: tr("Six mois d'un coup d'œil, tes moyennes et la comparaison avec le mois dernier. Tes opérations restent enregistrées : tout s'affiche dès que tu passes à Premium."))
+            }
+            .navigationTitle(tr("Évolution"))
+            .navigationBarTitleDisplayMode(.large)
+        }
+    }
+
+    @ViewBuilder private var trends: some View {
         let state = model.budget
         let now = Date()
         // From the first month with something noted: no empty months before the data starts.

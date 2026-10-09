@@ -38,7 +38,7 @@
  " des revenus": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:502: MiniStat(title: tr(\"Mis de côté\"), value: TF.money(earned - spent, currency), detail: earned > 0 ? Fmt.percent(max(0, (earned - spent) / earned)) + tr(\" des revenus\") : nil,"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:527: MiniStat(title: tr(\"Mis de côté\"), value: TF.money(earned - spent, currency), detail: earned > 0 ? Fmt.percent(max(0, (earned - spent) / earned)) + tr(\" des revenus\") : nil,"
   ]
  },
  " et ": {
@@ -87,7 +87,7 @@
  " · %@ du mois": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:268: let share = total > 0 ? tr(\" · \\(Fmt.percent(spent / total)) du mois\") : \"\""
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:280: let share = total > 0 ? tr(\" · \\(Fmt.percent(spent / total)) du mois\") : \"\""
   ]
  },
  " · %@ kg": {
@@ -135,7 +135,7 @@
  "%@ %@ restants": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:155: tile.caption = tr(\"\\(left) \\(TF.days(left)) restants\")",
+   "Shared/Render/Tiles/StudentTiles.swift:161: tile.caption = tr(\"\\(left) \\(TF.days(left)) restants\")",
    "Shared/Render/Tiles/TravelTiles.swift:185: tile.caption = left == 0 ? tr(\"dernier jour\") : tr(\"\\(left) \\(TF.days(left)) restants\")"
   ]
  },
@@ -237,7 +237,7 @@
  "%@ : gratuit %@, Premium %@": {
   "placeholders": 3,
   "uses": [
-   "App/Premium/PaywallView.swift:137: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
+   "App/Premium/PaywallView.swift:138: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
   ]
  },
  "%@ L · %@/L · %@ km%@": {
@@ -342,7 +342,7 @@
   "uses": [
    "App/Screens/Spaces/SpacesView.swift:172: return TravelMath.isOngoing(trip, at: now) ? tr(\"En voyage à \\(trip.destination)\") : tr(\"\\(trip.destination) dans \\(DateMath.daysBetween(now, trip.start)) j\")",
    "Shared/Render/Tiles/CarTiles.swift:142: tile.inline = tr(\"\\(next.title) dans \\(days) j\")",
-   "Shared/Render/Tiles/StudentTiles.swift:98: tile.inline = days == 0 ? tr(\"\\(exam.title) aujourd'hui\") : tr(\"\\(exam.title) dans \\(days) j\")",
+   "Shared/Render/Tiles/StudentTiles.swift:104: tile.inline = days == 0 ? tr(\"\\(exam.title) aujourd'hui\") : tr(\"\\(exam.title) dans \\(days) j\")",
    "Shared/Render/Tiles/TimeTiles.swift:94: tile.inline = days == 0 ? tr(\"\\(next.name) aujourd'hui\") : tr(\"\\(next.name) dans \\(days) j\")"
   ]
  },
@@ -373,7 +373,7 @@
  "%@ de l'objectif": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:203: tile.detail = tr(\"\\(Fmt.percent(min(9.99, minutes / 60 / goal))) de l'objectif\")"
+   "Shared/Render/Tiles/StudentTiles.swift:209: tile.detail = tr(\"\\(Fmt.percent(min(9.99, minutes / 60 / goal))) de l'objectif\")"
   ]
  },
  "%@ de l'objectif de %@": {
@@ -409,19 +409,19 @@
  "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:202: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
+   "App/Premium/PaywallView.swift:203: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
   ]
  },
  "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:204: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
+   "App/Premium/PaywallView.swift:205: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
   ]
  },
  "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:206: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
+   "App/Premium/PaywallView.swift:207: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
   ]
  },
  "%@ dépensés · %@ avant la fin du mois": {
@@ -451,7 +451,7 @@
  "%@ en cours": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:76: tile.inline = ongoing ? tr(\"\\(course?.name ?? tr(\"Cours\")) en cours\") : \"\\(course?.name ?? tr(\"Cours\")) à \\(TF.time(next.start, context))\""
+   "Shared/Render/Tiles/StudentTiles.swift:82: tile.inline = ongoing ? tr(\"\\(course?.name ?? tr(\"Cours\")) en cours\") : \"\\(course?.name ?? tr(\"Cours\")) à \\(TF.time(next.start, context))\""
   ]
  },
  "%@ en retard": {
@@ -482,7 +482,7 @@
  "%@ fiches à réviser": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:191: tile.inline = tr(\"\\(due) fiches à réviser\")"
+   "Shared/Render/Tiles/StudentTiles.swift:197: tile.inline = tr(\"\\(due) fiches à réviser\")"
   ]
  },
  "%@ g de fibres": {
@@ -624,7 +624,7 @@
  "%@ kcal · P %@ g": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:657: Text(tr(\"\\(TF.int(meal.totals.kcal)) kcal · P \\(TF.int(meal.totals.protein)) g\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:661: Text(tr(\"\\(TF.int(meal.totals.kcal)) kcal · P \\(TF.int(meal.totals.protein)) g\"))"
   ]
  },
  "%@ kg": {
@@ -766,7 +766,7 @@
   "uses": [
    "App/Core/DataItems.swift:423: case .monthlyBudget: return tr(\"\\(TF.money(budget.monthlyBudget, currency)) par mois\")",
    "App/Core/DataItems.swift:429: case .businessGoal: return tr(\"\\(TF.money(business.monthlyGoal, currency)) par mois\")",
-   "App/Premium/PaywallView.swift:189: return tr(\"\\(product.displayPrice) par mois\")",
+   "App/Premium/PaywallView.swift:190: return tr(\"\\(product.displayPrice) par mois\")",
    "App/Premium/PremiumStore.swift:171: case (.month, 1): tr(\"\\(price) par mois\")"
   ]
  },
@@ -807,13 +807,13 @@
  "%@ pour 12 mois": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:187: return tr(\"\\(product.displayPrice) pour 12 mois\")"
+   "App/Premium/PaywallView.swift:188: return tr(\"\\(product.displayPrice) pour 12 mois\")"
   ]
  },
  "%@ pour 12 mois, soit %@ par mois": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/PaywallView.swift:186: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
+   "App/Premium/PaywallView.swift:187: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
   ]
  },
  "%@ pour commencer, puis %@": {
@@ -839,7 +839,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:83: return remaining >= 0 ? tr(\"\\(TF.money(remaining, currency)) restants\") : tr(\"Budget dépassé\")",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:271: return (left >= 0 ? tr(\"\\(TF.money(left, currency)) restants\") : tr(\"Dépassé de \\(TF.money(-left, currency))\")) + share",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:283: return (left >= 0 ? tr(\"\\(TF.money(left, currency)) restants\") : tr(\"Dépassé de \\(TF.money(-left, currency))\")) + share",
    "Shared/Render/Kinds/TimeWidgets.swift:601: Text(tr(\"\\(total - day) restants\"))"
   ]
  },
@@ -855,6 +855,12 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:420: if studied > 0 { parts.append(tr(\"\\(Fmt.minutes(Double(studied))) révisé\")) }"
+  ]
+ },
+ "%@ styles en plus": {
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), detail: tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\"))"
   ]
  },
  "%@ sur %@": {
@@ -893,7 +899,7 @@
  "%@ sur %@ à moins de 10 %% de ton objectif": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:494: Label(tr(\"\\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) à moins de 10 % de ton objectif\"), systemImage: \"target\")"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:498: Label(tr(\"\\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) à moins de 10 % de ton objectif\"), systemImage: \"target\")"
   ]
  },
  "%@ sur %@.": {
@@ -981,6 +987,12 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Spaces/SpacesView.swift:326: .accessibilityLabel(Text(tr(\"\\(widgetCount) widgets\")))"
+  ]
+ },
+ "%@ widgets en plus, %@ styles, analyses et fonds photo.": {
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/Home/HomeView.swift:134: Text(tr(\"\\(WidgetKind.allCases.filter { $0.isPremium }.count) widgets en plus, \\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles, analyses et fonds photo.\"))"
   ]
  },
  "%@ widgets inclus": {
@@ -1141,7 +1153,7 @@
  "%@ · revenu fixe": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:149: Text(income.fixedID == nil ? Fmt.shortDay(income.date) : tr(\"\\(Fmt.shortDay(income.date)) · revenu fixe\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:160: Text(income.fixedID == nil ? Fmt.shortDay(income.date) : tr(\"\\(Fmt.shortDay(income.date)) · revenu fixe\"))"
   ]
  },
  "%@ · série %@ sur %@": {
@@ -1224,19 +1236,19 @@
  "%@%@ kg": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:567: MiniSectionTitle(title: tr(\"Poids\"), detail: tr(\"\\(change >= 0 ? \"+\" : \"\")\\(TF.decimal(change, 1)) kg\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:571: MiniSectionTitle(title: tr(\"Poids\"), detail: tr(\"\\(change >= 0 ? \"+\" : \"\")\\(TF.decimal(change, 1)) kg\"))"
   ]
  },
  "%@, une seule fois, sans abonnement": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:191: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
+   "App/Premium/PaywallView.swift:192: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
   ]
  },
  "%@. Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:198: return tr(\"\\(intro). Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.\")"
+   "App/Premium/PaywallView.swift:199: return tr(\"\\(intro). Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.\")"
   ]
  },
  "%@/%@ aujourd'hui": {
@@ -1876,6 +1888,12 @@
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:417: case .month: tr(\"30 jours\")"
   ]
  },
+ "30 jours, ou la période de ton choix, avec tes moyennes et ton poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:466: message: tr(\"30 jours, ou la période de ton choix, avec tes moyennes et ton poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium.\"))"
+  ]
+ },
  "30 minutes de sport": {
   "placeholders": 0,
   "uses": [
@@ -1940,12 +1958,6 @@
    "App/Screens/Home/DailySection.swift:155: DailyPager(id: \"water\", titles: [tr(\"Aujourd'hui\"), tr(\"7 jours\")], accentHex: \"3A8DDE\") { page in",
    "App/Screens/Home/DailySection.swift:159: DailyPager(id: \"steps\", titles: [tr(\"Aujourd'hui\"), tr(\"7 jours\")], accentHex: \"12A4B5\") { page in",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:416: case .week: tr(\"7 jours\")"
-  ]
- },
- "8 styles en plus": {
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"8 styles en plus\"), detail: tr(\"Verre, Aurore, Élégant, Digital, Rétro, Futuriste…\"))"
   ]
  },
  "8 × 60 kg": {
@@ -2042,14 +2054,14 @@
  "Abonnement · ": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:305: Text(\"\\(item.bill.isSubscription ? tr(\"Abonnement · \") : \"\")\\(item.bill.period.title.lowercased()) · \\(TF.relativeDay(item.due, from: now))\")",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:317: Text(\"\\(item.bill.isSubscription ? tr(\"Abonnement · \") : \"\")\\(item.bill.period.title.lowercased()) · \\(TF.relativeDay(item.due, from: now))\")",
    "App/Screens/Spaces/BudgetSpace.swift:96: Text(\"\\(item.bill.isSubscription ? tr(\"Abonnement · \") : \"\")\\(Fmt.shortDay(item.due))\").font(.caption).foregroundStyle(Color.secondary)"
   ]
  },
  "Abonnements": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:292: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:304: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
    "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voyages\")]",
    "App/Screens/Spaces/BudgetSpace.swift:109: ValueRow(title: tr(\"Abonnements\"), value: tr(\"\\(TF.money(BudgetMath.subscriptionsMonthly(state), currency, decimals: 2)) / mois\"), symbol: \"repeat.circle\")",
    "Shared/Domains/Budget.swift:133: case .subscription: tr(\"Abonnements\")"
@@ -2433,7 +2445,7 @@
  "Ajoute tes examens dans Tessera, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:84: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:90: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))"
   ]
  },
  "Ajoute tes factures dans Tessera, espace Budget.": {
@@ -2445,7 +2457,7 @@
  "Ajoute tes notes dans Tessera, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:132: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:138: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Tessera, espace Études.\"))"
   ]
  },
  "Ajoute tes placements": {
@@ -2470,7 +2482,7 @@
  "Ajoute tes travaux à rendre dans Tessera, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:105: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:111: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Tessera, espace Études.\"))"
   ]
  },
  "Ajoute tes tâches ou ton top 3 du jour.": {
@@ -2799,7 +2811,7 @@
  "Ajouter à ma journée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:645: Label(tr(\"Ajouter à ma journée\"), systemImage: \"plus.circle.fill\")"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:649: Label(tr(\"Ajouter à ma journée\"), systemImage: \"plus.circle.fill\")"
   ]
  },
  "Ajouter à ma séance": {
@@ -3107,6 +3119,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetGroup.swift:53: case .insights: tr(\"Analyses\")"
+  ]
+ },
+ "Analyses et historiques": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:98: PerkRow(symbol: \"chart.bar.xaxis\", title: tr(\"Analyses et historiques\"), detail: tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\"))"
   ]
  },
  "Ananas": {
@@ -3772,7 +3790,7 @@
  "Aucun achat Premium trouvé pour ce compte Apple.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:245: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
+   "App/Premium/PaywallView.swift:246: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
    "App/Screens/Profile/ProfileView.swift:413: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
@@ -3827,25 +3845,25 @@
  "Aucun repas enregistré. Ouvre un repas de ta journée et touche « Enregistrer ce repas » : il sera ici, prêt à reprendre d'une touche.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:633: Text(tr(\"Aucun repas enregistré. Ouvre un repas de ta journée et touche « Enregistrer ce repas » : il sera ici, prêt à reprendre d'une touche.\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:637: Text(tr(\"Aucun repas enregistré. Ouvre un repas de ta journée et touche « Enregistrer ce repas » : il sera ici, prêt à reprendre d'une touche.\"))"
   ]
  },
  "Aucun repas noté sur cette période.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:464: EmptyStateView(symbol: \"fork.knife\", title: tr(\"Rien de noté\"), message: tr(\"Aucun repas noté sur cette période.\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:468: EmptyStateView(symbol: \"fork.knife\", title: tr(\"Rien de noté\"), message: tr(\"Aucun repas noté sur cette période.\"))"
   ]
  },
  "Aucun revenu noté ce mois-ci.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:137: Text(model.profile.monthlyIncome.map { tr(\"Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : \\(TF.money($0, currency)).\") } ?? tr(\"Aucun revenu noté ce mois-ci.\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:148: Text(model.profile.monthlyIncome.map { tr(\"Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : \\(TF.money($0, currency)).\") } ?? tr(\"Aucun revenu noté ce mois-ci.\"))"
   ]
  },
  "Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : %@.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:137: Text(model.profile.monthlyIncome.map { tr(\"Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : \\(TF.money($0, currency)).\") } ?? tr(\"Aucun revenu noté ce mois-ci.\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:148: Text(model.profile.monthlyIncome.map { tr(\"Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : \\(TF.money($0, currency)).\") } ?? tr(\"Aucun revenu noté ce mois-ci.\"))"
   ]
  },
  "Aucun résultat": {
@@ -3890,7 +3908,7 @@
  "Aucune dépense notée pour ce mois.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:108: Section { Text(tr(\"Aucune dépense notée pour ce mois.\")).foregroundStyle(.secondary) }"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:119: Section { Text(tr(\"Aucune dépense notée pour ce mois.\")).foregroundStyle(.secondary) }"
   ]
  },
  "Aucune dépense notée pour l'instant.": {
@@ -3902,7 +3920,7 @@
  "Aucune fiche à réviser pour l'instant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:171: tile.caption = tr(\"Aucune fiche à réviser pour l'instant\")"
+   "Shared/Render/Tiles/StudentTiles.swift:177: tile.caption = tr(\"Aucune fiche à réviser pour l'instant\")"
   ]
  },
  "Aucune habitude": {
@@ -4664,7 +4682,7 @@
  "Bienvenue dans Tessera Premium !": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:298: message = tr(\"Bienvenue dans Tessera Premium !\")"
+   "App/Premium/PaywallView.swift:299: message = tr(\"Bienvenue dans Tessera Premium !\")"
   ]
  },
  "Bienvenue, %@ !": {
@@ -4676,7 +4694,7 @@
  "Bilan": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:490: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "Billets d'avion": {
@@ -5647,7 +5665,7 @@
  "Calories par jour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:503: MiniSectionTitle(title: tr(\"Calories par jour\"))",
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:507: MiniSectionTitle(title: tr(\"Calories par jour\"))",
    "App/Screens/Profile/DataItemViews.swift:111: ProfileNumberField(title: tr(\"Calories par jour\"), unit: \"kcal\", value: target(.kcalTarget, \\.kcal), decimals: false, identifier: \"data-kcal\")"
   ]
  },
@@ -6408,7 +6426,7 @@
  "Chargement des offres…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:143: ProgressView(tr(\"Chargement des offres…\"))"
+   "App/Premium/PaywallView.swift:144: ProgressView(tr(\"Chargement des offres…\"))"
   ]
  },
  "Chargement des états financiers…": {
@@ -7244,7 +7262,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:107: case .accounts: tr(\"Comptes\")",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:390: MiniSectionTitle(title: tr(\"Comptes\"), detail: state.accounts.isEmpty ? nil : tr(\"valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:402: MiniSectionTitle(title: tr(\"Comptes\"), detail: state.accounts.isEmpty ? nil : tr(\"valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))",
    "App/Screens/Spaces/BudgetSpace.swift:158: Text(tr(\"Comptes\"))"
   ]
  },
@@ -7300,7 +7318,7 @@
  "Conditions": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:286: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
+   "App/Premium/PaywallView.swift:287: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
   ]
  },
  "Conditions d'utilisation": {
@@ -7312,7 +7330,7 @@
  "Confidentialité": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:287: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
+   "App/Premium/PaywallView.swift:288: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Screens/Profile/ProfileView.swift:175: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
  },
@@ -7391,7 +7409,7 @@
  "Continuer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:268: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))",
+   "App/Premium/PaywallView.swift:269: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))",
    "App/Screens/Onboarding/OnboardingView.swift:99: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))",
    "App/Screens/Onboarding/OnboardingView.swift:329: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
   ]
@@ -7716,7 +7734,7 @@
  "Couleurs": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:118: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:119: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
    "App/Screens/Editor/StudioComponents.swift:23: case .colors: tr(\"Couleurs\")"
   ]
  },
@@ -7788,7 +7806,7 @@
  "Cours actuel": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:56: var tile = Tile(title: ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\"), symbol: \"book.closed\")"
+   "Shared/Render/Tiles/StudentTiles.swift:62: var tile = Tile(title: ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\"), symbol: \"book.closed\")"
   ]
  },
  "Cours avec une foulée souple, sous le corps.": {
@@ -8108,7 +8126,7 @@
  "Crée tes fiches de révision dans Tessera, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:166: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:172: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))"
   ]
  },
  "Crée tes habitudes dans Tessera.": {
@@ -9196,7 +9214,7 @@
  "Dette": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:410: title: account.name, detail: account.isLiability ? tr(\"Dette\") : nil,"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:422: title: account.name, detail: account.isLiability ? tr(\"Dette\") : nil,"
   ]
  },
  "Deux colonnes": {
@@ -9827,6 +9845,12 @@
    "Shared/Domains/ExerciseTechniques.swift:341: [tr(\"Décoller les talons.\"), tr(\"Forcer dans la douleur.\")]),"
   ]
  },
+ "Découvrir Premium": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumLock.swift:30: Label(tr(\"Découvrir Premium\"), systemImage: \"sparkles\")"
+  ]
+ },
  "Définir": {
   "placeholders": 0,
   "uses": [
@@ -10017,7 +10041,7 @@
  "Dépassé de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:271: return (left >= 0 ? tr(\"\\(TF.money(left, currency)) restants\") : tr(\"Dépassé de \\(TF.money(-left, currency))\")) + share"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:283: return (left >= 0 ? tr(\"\\(TF.money(left, currency)) restants\") : tr(\"Dépassé de \\(TF.money(-left, currency))\")) + share"
   ]
  },
  "Dépassé de %@ sur %@": {
@@ -10032,7 +10056,7 @@
    "App/Screens/Content/MoneyView.swift:124: Text(tr(\"Dépense\")).tag(false)",
    "App/Screens/MiniApps/Business/BusinessApp.swift:137: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:81: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex) { sheet = .expense(nil) }",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:172: Text(expense.note.isEmpty ? (category?.name ?? tr(\"Dépense\")) : expense.note).foregroundStyle(.primary)"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:183: Text(expense.note.isEmpty ? (category?.name ?? tr(\"Dépense\")) : expense.note).foregroundStyle(.primary)"
   ]
  },
  "Dépense de voyage": {
@@ -10050,14 +10074,14 @@
  "Dépense fixe · %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:174: Label(tr(\"Dépense fixe · \\(category?.name ?? tr(\"Sans catégorie\"))\"), systemImage: \"repeat\")"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:185: Label(tr(\"Dépense fixe · \\(category?.name ?? tr(\"Sans catégorie\"))\"), systemImage: \"repeat\")"
   ]
  },
  "Dépense rapide": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/BudgetSpace.swift:278: SheetForm(title: tr(\"Dépense rapide\"), canSave: !quick.name.trimmed.isEmpty && quick.amount > 0, onSave: save) {",
-   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: true, families: SM, ",
+   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: false, families: SM,",
    "Shared/Render/Tiles/MoneyTiles.swift:163: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.\"))",
    "Shared/Render/Tiles/MoneyTiles.swift:165: var tile = Tile(title: tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\")"
   ]
@@ -10437,7 +10461,7 @@
  "En cours · fin à %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:62: tile.caption = tr(\"En cours · fin à \\(TF.time(next.end, context))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:68: tile.caption = tr(\"En cours · fin à \\(TF.time(next.end, context))\")"
   ]
  },
  "En diagonale": {
@@ -10746,6 +10770,12 @@
    "App/Screens/Profile/ProfileView.swift:232: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
   ]
  },
+ "Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), detail: tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\"))"
+  ]
+ },
  "Espagne": {
   "placeholders": 0,
   "uses": [
@@ -10815,7 +10845,7 @@
  "Et les polices Serif et Mono": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:98: PerkRow(symbol: \"photo\", title: tr(\"Fonds photo, couleurs libres\"), detail: tr(\"Et les polices Serif et Mono\"))"
+   "App/Premium/PaywallView.swift:99: PerkRow(symbol: \"photo\", title: tr(\"Fonds photo, couleurs libres\"), detail: tr(\"Et les polices Serif et Mono\"))"
   ]
  },
  "Ethereum": {
@@ -11178,7 +11208,7 @@
  "Factures": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:328: .navigationTitle(tr(\"Factures\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:340: .navigationTitle(tr(\"Factures\"))",
    "Shared/Render/Tiles/MoneyTiles.swift:86: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Tessera, espace Budget.\")) }"
   ]
  },
@@ -11508,8 +11538,8 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:148: MiniStat(title: tr(\"Fiches\"), value: \"\\(due)\", detail: due == 0 ? tr(\"à jour\") : tr(\"à réviser\"), colorHex: due > 0 ? accentHex : nil)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:756: MiniSectionTitle(title: tr(\"Fiches\"), detail: state.cards.isEmpty ? nil : tr(\"\\(StudentMath.dueCount(state, at: now)) à réviser\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:166: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:169: var tile = Tile(title: tr(\"Fiches\"), symbol: \"checkmark.seal\")"
+   "Shared/Render/Tiles/StudentTiles.swift:172: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))",
+   "Shared/Render/Tiles/StudentTiles.swift:175: var tile = Tile(title: tr(\"Fiches\"), symbol: \"checkmark.seal\")"
   ]
  },
  "Fiches de révision": {
@@ -11555,7 +11585,7 @@
  "Fin le %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:156: tile.detail = tr(\"Fin le \\(Fmt.format(end, template: \"dMMMM\"))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:162: tile.detail = tr(\"Fin le \\(Fmt.format(end, template: \"dMMMM\"))\")"
   ]
  },
  "Fin à %@": {
@@ -11710,13 +11740,13 @@
  "Fonds et polices": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:119: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
+   "App/Premium/PaywallView.swift:120: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
   ]
  },
  "Fonds photo, couleurs libres": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:98: PerkRow(symbol: \"photo\", title: tr(\"Fonds photo, couleurs libres\"), detail: tr(\"Et les polices Serif et Mono\"))"
+   "App/Premium/PaywallView.swift:99: PerkRow(symbol: \"photo\", title: tr(\"Fonds photo, couleurs libres\"), detail: tr(\"Et les polices Serif et Mono\"))"
   ]
  },
  "Force": {
@@ -12494,7 +12524,7 @@
  "Gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:108: Text(tr(\"Gratuit\")).frame(width: 72)",
+   "App/Premium/PaywallView.swift:109: Text(tr(\"Gratuit\")).frame(width: 72)",
    "App/Screens/Editor/StudioPanels.swift:194: subtitle: { $0.isPremium ? nil : tr(\"Gratuit\") },",
    "App/Screens/Explore/StoreShowcase.swift:61: subtitle: theme.isPremium ? tr(\"Premium\") : tr(\"Gratuit\")"
   ]
@@ -12606,7 +12636,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:90: case .habits: tr(\"Habitudes\")",
-   "App/Premium/PaywallView.swift:117: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:118: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
    "App/Screens/Content/HabitsView.swift:69: .navigationTitle(tr(\"Habitudes\"))",
    "App/Screens/Home/DailyLayoutEditor.swift:151: case .habits: (tr(\"Habitudes\"), \"repeat\", \"7FA33A\")"
   ]
@@ -12898,7 +12928,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:243: KindInfo(kind: .studyHours, title: tr(\"Heures d'étude\"), summary: tr(\"Tes heures d'étude de la semaine face à ton objectif.\"), category: .student, symbol: \"clock.badge.checkmark\", isPremium: true, fam",
-   "Shared/Render/Tiles/StudentTiles.swift:198: var tile = Tile(title: tr(\"Heures d'étude\"), symbol: \"clock.badge.checkmark\")"
+   "Shared/Render/Tiles/StudentTiles.swift:204: var tile = Tile(title: tr(\"Heures d'étude\"), symbol: \"clock.badge.checkmark\")"
   ]
  },
  "Hier": {
@@ -12976,7 +13006,7 @@
   "uses": [
    "App/Screens/MiniApps/Planning/PlanningApp.swift:80: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Horaire de la semaine\"),",
    "Shared/Render/Tiles/StudentTiles.swift:29: var tile = Tile(title: tr(\"Horaire de la semaine\"), symbol: \"calendar.day.timeline.left\")",
-   "Shared/Render/Tiles/StudentTiles.swift:41: tile.inline = tr(\"Horaire de la semaine\")"
+   "Shared/Render/Tiles/StudentTiles.swift:47: tile.inline = tr(\"Horaire de la semaine\")"
   ]
  },
  "Horaire de la semaine, cours, examens, devoirs, moyenne et fiches.": {
@@ -12994,13 +13024,13 @@
  "Horaire du jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:222: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
+   "Shared/Render/Tiles/StudentTiles.swift:228: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
   ]
  },
  "Horaire · %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:222: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
+   "Shared/Render/Tiles/StudentTiles.swift:228: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
   ]
  },
  "Horizontal": {
@@ -13281,7 +13311,7 @@
  "Indique les dates de ta session dans Tessera, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:150: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:156: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Tessera, espace Études.\"))"
   ]
  },
  "Inspire avant de descendre, expire en remontant.": {
@@ -13503,7 +13533,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:816: MiniActionButton(title: tr(\"Je savais\"), symbol: \"checkmark\", colorHex: \"1E9E75\") { grade(true) }",
    "Shared/Intents/SpaceIntents.swift:217: @Parameter(title: \"Je savais\")",
-   "Shared/Render/Tiles/StudentTiles.swift:184: TileButton(title: tr(\"Je savais\"), symbol: \"checkmark\", action: .gradeCard(true), isProminent: true),"
+   "Shared/Render/Tiles/StudentTiles.swift:190: TileButton(title: tr(\"Je savais\"), symbol: \"checkmark\", action: .gradeCard(true), isProminent: true),"
   ]
  },
  "Jeudi": {
@@ -13574,7 +13604,7 @@
  "Jour par jour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:589: MiniSectionTitle(title: tr(\"Jour par jour\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:593: MiniSectionTitle(title: tr(\"Jour par jour\"))"
   ]
  },
  "Jour précédent": {
@@ -14052,6 +14082,12 @@
    "App/Screens/Explore/StoreCombos.swift:199: combo(\"le-temps\", tr(\"Le temps qui passe\"), tr(\"L'heure, le mois, l'année et les vacances.\"), .minimal, \"F2A33A\","
   ]
  },
+ "L'historique complet est dans Premium": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:465: PremiumLockCard(symbol: \"chart.line.uptrend.xyaxis\", title: tr(\"L'historique complet est dans Premium\"),"
+  ]
+ },
  "L'horaire du jour, le prochain examen et la session.": {
   "placeholders": 0,
   "uses": [
@@ -14092,6 +14128,18 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseLibrary.swift:614: aka: [\"traction assistee\"], cues: [tr(\"L'élastique ou la machine allège une partie du poids du corps.\")]),"
+  ]
+ },
+ "L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:98: PerkRow(symbol: \"chart.bar.xaxis\", title: tr(\"Analyses et historiques\"), detail: tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\"))"
+  ]
+ },
+ "L'évolution est dans Premium": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:477: PremiumLockCard(symbol: \"chart.bar.xaxis\", title: tr(\"L'évolution est dans Premium\"),"
   ]
  },
  "L/100 km": {
@@ -14902,7 +14950,7 @@
  "Le poids vient de « Mes informations » : chaque nouvelle valeur s'ajoute ici.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:581: Text(tr(\"Le poids vient de « Mes informations » : chaque nouvelle valeur s'ajoute ici.\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:585: Text(tr(\"Le poids vient de « Mes informations » : chaque nouvelle valeur s'ajoute ici.\"))"
   ]
  },
  "Le poing revient toujours protéger le menton.": {
@@ -15101,7 +15149,7 @@
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:281: Text(tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abo"
+   "App/Premium/PaywallView.swift:282: Text(tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abo"
   ]
  },
  "Les bras accompagnent en rythme.": {
@@ -15712,7 +15760,7 @@
  "Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:323: Text(tr(\"Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:335: Text(tr(\"Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.\"))"
   ]
  },
  "Loyer, épicerie…": {
@@ -16000,7 +16048,7 @@
  "Macros": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:167: KindInfo(kind: .macros, title: tr(\"Macros\"), summary: tr(\"Protéines, glucides et lipides de la journée face à tes objectifs.\"), category: .nutrition, symbol: \"chart.bar.xaxis\", isPremium: true, famili",
+   "Shared/Model/KindCatalog.swift:167: KindInfo(kind: .macros, title: tr(\"Macros\"), summary: tr(\"Protéines, glucides et lipides de la journée face à tes objectifs.\"), category: .nutrition, symbol: \"chart.bar.xaxis\", isPremium: false, famil",
    "Shared/Render/Tiles/NutritionTiles.swift:112: var tile = Tile(title: tr(\"Macros\"), symbol: \"chart.bar.xaxis\")"
   ]
  },
@@ -16469,7 +16517,7 @@
  "Merci ! Tous les widgets et tous les styles sont débloqués.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:217: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
+   "App/Premium/PaywallView.swift:218: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
   ]
  },
  "Merci pour ton soutien": {
@@ -16571,7 +16619,7 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:218: MiniRow(symbol: \"bookmark.fill\", colorHex: accentHex, title: tr(\"Mes repas\"), detail: tr(\"Des repas enregistrés, à reprendre d'une touche\"), value: state.savedMeals.isEmpty ? nil : \"\\(state.savedMeals",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:115: Section(tr(\"Mes repas\")) {",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:664: .navigationTitle(tr(\"Mes repas\"))",
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:668: .navigationTitle(tr(\"Mes repas\"))",
    "App/Screens/Spaces/NutritionSpace.swift:245: Section(tr(\"Mes repas\")) {"
   ]
  },
@@ -16722,7 +16770,7 @@
  "Mis de côté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:502: MiniStat(title: tr(\"Mis de côté\"), value: TF.money(earned - spent, currency), detail: earned > 0 ? Fmt.percent(max(0, (earned - spent) / earned)) + tr(\" des revenus\") : nil,"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:527: MiniStat(title: tr(\"Mis de côté\"), value: TF.money(earned - spent, currency), detail: earned > 0 ? Fmt.percent(max(0, (earned - spent) / earned)) + tr(\" des revenus\") : nil,"
   ]
  },
  "Mis à jour": {
@@ -16903,7 +16951,13 @@
  "Mois précédent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:16: .accessibilityLabel(Text(tr(\"Mois précédent\")))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:25: .accessibilityLabel(Text(isLocked ? tr(\"Mois précédents avec Premium\") : tr(\"Mois précédent\")))"
+  ]
+ },
+ "Mois précédents avec Premium": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:25: .accessibilityLabel(Text(isLocked ? tr(\"Mois précédents avec Premium\") : tr(\"Mois précédent\")))"
   ]
  },
  "Mois rétro": {
@@ -16915,7 +16969,7 @@
  "Mois suivant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:24: .accessibilityLabel(Text(tr(\"Mois suivant\")))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:34: .accessibilityLabel(Text(tr(\"Mois suivant\")))"
   ]
  },
  "Moitié de ligne": {
@@ -17270,7 +17324,7 @@
  "Moyenne %@ %%": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:144: tile.inline = tr(\"Moyenne \\(TF.decimal(overall, 1)) %\")"
+   "Shared/Render/Tiles/StudentTiles.swift:150: tile.inline = tr(\"Moyenne \\(TF.decimal(overall, 1)) %\")"
   ]
  },
  "Moyenne %@ kcal": {
@@ -17314,7 +17368,7 @@
  "Moyenne par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:497: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:522: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
   ]
  },
  "Moyenne sur 7 jours": {
@@ -17338,13 +17392,13 @@
  "Moyennes [averages]": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:490: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "Moyennes calculées sur les mois terminés où tu as noté quelque chose.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:509: Text(tr(\"Moyennes calculées sur les mois terminés où tu as noté quelque chose.\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:534: Text(tr(\"Moyennes calculées sur les mois terminés où tu as noté quelque chose.\"))"
   ]
  },
  "Moyennes et ce qu'il te faut pour ton objectif": {
@@ -18083,7 +18137,7 @@
  "Nouveau compte ou dette": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:424: Label(tr(\"Nouveau compte ou dette\"), systemImage: \"plus.circle.fill\")",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:436: Label(tr(\"Nouveau compte ou dette\"), systemImage: \"plus.circle.fill\")",
    "App/Screens/Spaces/BudgetSpace.swift:152: Label(tr(\"Nouveau compte ou dette\"), systemImage: \"plus\")"
   ]
  },
@@ -18129,7 +18183,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/MoneyView.swift:168: .navigationTitle(isNew ? (item.isIncome ? tr(\"Nouveau revenu\") : tr(\"Nouvelle dépense\")) : item.name)",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:83: .accessibilityLabel(Text(kind == .expenses ? tr(\"Nouvelle dépense\") : tr(\"Nouveau revenu\")))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:94: .accessibilityLabel(Text(kind == .expenses ? tr(\"Nouvelle dépense\") : tr(\"Nouveau revenu\")))"
   ]
  },
  "Nouveau vol": {
@@ -18211,7 +18265,7 @@
  "Nouvel objectif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:366: Label(tr(\"Nouvel objectif\"), systemImage: \"plus.circle.fill\")",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:378: Label(tr(\"Nouvel objectif\"), systemImage: \"plus.circle.fill\")",
    "App/Screens/Profile/DataItemViews.swift:243: buttons(add: tr(\"Nouvel objectif\"), space: model.isFilled(.savingsGoals) ? .budget : nil) {",
    "App/Screens/Spaces/BudgetSpace.swift:132: Label(tr(\"Nouvel objectif\"), systemImage: \"plus\")"
   ]
@@ -18225,7 +18279,7 @@
  "Nouvelle catégorie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:248: Label(tr(\"Nouvelle catégorie\"), systemImage: \"plus.circle.fill\")",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:260: Label(tr(\"Nouvelle catégorie\"), systemImage: \"plus.circle.fill\")",
    "App/Screens/Spaces/BudgetSpace.swift:175: Label(tr(\"Nouvelle catégorie\"), systemImage: \"plus\")"
   ]
  },
@@ -18234,7 +18288,7 @@
   "uses": [
    "App/Screens/Content/MoneyView.swift:168: .navigationTitle(isNew ? (item.isIncome ? tr(\"Nouveau revenu\") : tr(\"Nouvelle dépense\")) : item.name)",
    "App/Screens/MiniApps/Business/BusinessPages.swift:43: .accessibilityLabel(Text(kind == .sales ? tr(\"Nouvelle vente\") : tr(\"Nouvelle dépense\")))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:83: .accessibilityLabel(Text(kind == .expenses ? tr(\"Nouvelle dépense\") : tr(\"Nouveau revenu\")))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:94: .accessibilityLabel(Text(kind == .expenses ? tr(\"Nouvelle dépense\") : tr(\"Nouveau revenu\")))"
   ]
  },
  "Nouvelle dépense rapide": {
@@ -18246,7 +18300,7 @@
  "Nouvelle facture": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:318: Button { sheet = .bill(Bill(name: \"\", amount: 0, anchorDate: Date())) } label: { Label(tr(\"Nouvelle facture\"), systemImage: \"plus\") }",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:330: Button { sheet = .bill(Bill(name: \"\", amount: 0, anchorDate: Date())) } label: { Label(tr(\"Nouvelle facture\"), systemImage: \"plus\") }",
    "App/Screens/Profile/DataItemViews.swift:239: buttons(add: tr(\"Nouvelle facture\"), space: model.isFilled(.bills) ? .budget : nil) {",
    "App/Screens/Spaces/BudgetSpace.swift:106: Label(tr(\"Nouvelle facture\"), systemImage: \"plus\")"
   ]
@@ -18655,7 +18709,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:106: case .savingsGoals: tr(\"Objectifs d'épargne\")",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:346: MiniSectionTitle(title: tr(\"Objectifs d'épargne\"), detail: state.goals.isEmpty ? nil : TF.money(state.goals.reduce(0) { $0 + $1.saved }, currency))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:358: MiniSectionTitle(title: tr(\"Objectifs d'épargne\"), detail: state.goals.isEmpty ? nil : TF.money(state.goals.reduce(0) { $0 + $1.saved }, currency))"
   ]
  },
  "Objectifs de macros": {
@@ -18712,7 +18766,7 @@
  "Offre de bienvenue": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:176: if store.introDescription(for: product) != nil { return tr(\"Offre de bienvenue\") }"
+   "App/Premium/PaywallView.swift:177: if store.introDescription(for: product) != nil { return tr(\"Offre de bienvenue\") }"
   ]
  },
  "Oignon": {
@@ -18779,7 +18833,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:263: MiniRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Opérations\"), detail: tr(\"Dépenses et revenus, mois par mois\"))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:78: .navigationTitle(tr(\"Opérations\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:89: .navigationTitle(tr(\"Opérations\"))"
   ]
  },
  "Or": {
@@ -18991,6 +19045,12 @@
    "App/Screens/Explore/ExploreView.swift:30: case .themes: tr(\"Packs thématiques\")"
   ]
  },
+ "Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:96: PerkRow(symbol: \"bag.fill\", title: tr(\"Tous les packs\"), detail: tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\"))"
+  ]
+ },
  "Pad thaï": {
   "placeholders": 0,
   "uses": [
@@ -19006,7 +19066,7 @@
  "Paiement unique": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:178: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
+   "App/Premium/PaywallView.swift:179: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
   ]
  },
  "Pain blanc": {
@@ -19140,7 +19200,7 @@
    "App/Screens/Content/MoneyView.swift:25: summaryValue(tr(\"Par mois\"), Fmt.signedMoney(summary.perDayNet * MoneySummary.daysPerMonth, currency: currency, decimals: 0))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:164: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:272: Text(tr(\"Par mois\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:291: MiniStat(title: tr(\"Par mois\"), value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, tr(\"facture\"), tr(\"factures\")))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:303: MiniStat(title: tr(\"Par mois\"), value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, tr(\"facture\"), tr(\"factures\")))"
   ]
  },
  "Par muscle": {
@@ -19152,7 +19212,7 @@
  "Par rapport au mois dernier": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:537: MiniSectionTitle(title: tr(\"Par rapport au mois dernier\"), detail: tr(\"à la même date\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:562: MiniSectionTitle(title: tr(\"Par rapport au mois dernier\"), detail: tr(\"à la même date\"))"
   ]
  },
  "Par type": {
@@ -20039,12 +20099,6 @@
    "Shared/Theme/Theme.swift:243: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
   ]
  },
- "Plus de 70 widgets en plus, 12 styles, fonds photo.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/HomeView.swift:134: Text(tr(\"Plus de 70 widgets en plus, 12 styles, fonds photo.\"))"
-  ]
- },
  "Plus de précisions": {
   "placeholders": 0,
   "uses": [
@@ -20137,7 +20191,7 @@
   "uses": [
    "App/Core/DataItems.swift:88: case .weight: tr(\"Poids\")",
    "App/Screens/Home/MyInfoSection.swift:24: add(\"weight\", \"scalemass\", tr(\"Poids\"), profile.weightKg.map { tr(\"\\(ProfileNumberField.format($0)) kg\") })",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:567: MiniSectionTitle(title: tr(\"Poids\"), detail: tr(\"\\(change >= 0 ? \"+\" : \"\")\\(TF.decimal(change, 1)) kg\"))",
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:571: MiniSectionTitle(title: tr(\"Poids\"), detail: tr(\"\\(change >= 0 ? \"+\" : \"\")\\(TF.decimal(change, 1)) kg\"))",
    "App/Screens/Profile/DataItemViews.swift:140: ProfileNumberField(title: tr(\"Poids\"), unit: tr(\"kg\"), value: Binding(get: { model.profile.weightKg }, set: { model.setWeight($0) }), identifier: \"data-weight\")"
   ]
  },
@@ -20857,7 +20911,7 @@
   "uses": [
    "App/Components/UIComponents.swift:101: if !compact { Text(tr(\"Premium\")) }",
    "App/Components/UIComponents.swift:108: .accessibilityLabel(Text(tr(\"Premium\")))",
-   "App/Premium/PaywallView.swift:109: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
+   "App/Premium/PaywallView.swift:110: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
    "App/Screens/Explore/ExploreView.swift:81: case .premium: tr(\"Premium\")"
   ]
  },
@@ -21007,8 +21061,8 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:293: Label(isNow ? tr(\"En cours\") : tr(\"Prochain cours\"), systemImage: isNow ? \"dot.radiowaves.left.and.right\" : \"clock\")",
    "Shared/Model/KindCatalog.swift:237: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM + [rect, inli",
-   "Shared/Render/Tiles/StudentTiles.swift:52: return .empty(tr(\"Prochain cours\"), symbol: \"book.closed\", message: hint)",
-   "Shared/Render/Tiles/StudentTiles.swift:56: var tile = Tile(title: ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\"), symbol: \"book.closed\")"
+   "Shared/Render/Tiles/StudentTiles.swift:58: return .empty(tr(\"Prochain cours\"), symbol: \"book.closed\", message: hint)",
+   "Shared/Render/Tiles/StudentTiles.swift:62: var tile = Tile(title: ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\"), symbol: \"book.closed\")"
   ]
  },
  "Prochain cours, examen, devoirs et heures d'étude réunis.": {
@@ -21027,8 +21081,8 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:238: KindInfo(kind: .nextExam, title: tr(\"Prochain examen\"), summary: tr(\"Les jours avant ton prochain examen.\"), category: .student, symbol: \"pencil.and.list.clipboard\", isPremium: false, families: SM + [",
-   "Shared/Render/Tiles/StudentTiles.swift:84: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:87: var tile = Tile(title: tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\")"
+   "Shared/Render/Tiles/StudentTiles.swift:90: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))",
+   "Shared/Render/Tiles/StudentTiles.swift:93: var tile = Tile(title: tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\")"
   ]
  },
  "Prochain examen %@ : lance le chrono d'étude dans « Révisions » pour suivre le temps passé sur ce cours.": {
@@ -21086,7 +21140,7 @@
  "Prochaine révision %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:173: tile.detail = tr(\"Prochaine révision \\(TF.relativeTime(next, from: now))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:179: tile.detail = tr(\"Prochaine révision \\(TF.relativeTime(next, from: now))\")"
   ]
  },
  "Prochaine séance": {
@@ -21111,12 +21165,6 @@
    "Shared/Render/Tiles/FitnessTiles.swift:72: var tile = Tile(title: tr(\"Prochaine série\"), symbol: \"arrow.forward.circle.fill\")"
   ]
  },
- "Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…": {
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:94: PerkRow(symbol: \"square.stack.3d.up.fill\", title: tr(\"Tous les widgets des espaces\"), detail: tr(\"Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…\"))"
-  ]
- },
  "Prochaine échéance": {
   "placeholders": 0,
   "uses": [
@@ -21134,7 +21182,7 @@
  "Prochaines échéances": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:321: Text(tr(\"Prochaines échéances\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:333: Text(tr(\"Prochaines échéances\"))"
   ]
  },
  "Production de glucose à partir de CO₂, d'eau et de lumière.": {
@@ -21179,7 +21227,7 @@
  "Profiter de l'offre de bienvenue": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:268: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))"
+   "App/Premium/PaywallView.swift:269: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))"
   ]
  },
  "Programme": {
@@ -21284,7 +21332,7 @@
  "Protéines, glucides et lipides de la journée face à tes objectifs.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:167: KindInfo(kind: .macros, title: tr(\"Macros\"), summary: tr(\"Protéines, glucides et lipides de la journée face à tes objectifs.\"), category: .nutrition, symbol: \"chart.bar.xaxis\", isPremium: true, famili"
+   "Shared/Model/KindCatalog.swift:167: KindInfo(kind: .macros, title: tr(\"Macros\"), summary: tr(\"Protéines, glucides et lipides de la journée face à tes objectifs.\"), category: .nutrition, symbol: \"chart.bar.xaxis\", isPremium: false, famil"
   ]
  },
  "Prune": {
@@ -21787,6 +21835,12 @@
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:242: MiniSectionTitle(title: tr(\"Records\"))",
    "Shared/Model/KindCatalog.swift:183: KindInfo(kind: .personalRecords, title: tr(\"Records\"), summary: tr(\"Tes meilleures charges par exercice.\"), category: .fitness, symbol: \"trophy.fill\", isPremium: true, families: SML, keywords: [\"recor",
    "Shared/Render/Tiles/FitnessTiles.swift:139: guard let best = records.first else { return .empty(tr(\"Records\"), symbol: \"trophy.fill\", message: tr(\"Tes records apparaîtront après ta première séance.\")) }"
+  ]
+ },
+ "Records, volume, bénéfice, MRR, devoirs, vol, carburant…": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:94: PerkRow(symbol: \"square.stack.3d.up.fill\", title: tr(\"Tous les widgets des espaces\"), detail: tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\"))"
   ]
  },
  "Rectangle": {
@@ -22391,7 +22445,7 @@
  "Restauration…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:248: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:249: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer": {
@@ -22409,7 +22463,7 @@
  "Restaurer mes achats": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:248: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:249: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer une sauvegarde": {
@@ -22912,8 +22966,8 @@
  "Rien de noté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:464: EmptyStateView(symbol: \"fork.knife\", title: tr(\"Rien de noté\"), message: tr(\"Aucun repas noté sur cette période.\"))",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:594: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: Fmt.shortDay(pair.0), detail: pair.1 > 0 ? nil : tr(\"Rien de noté\"), value: pair.1 > 0 ? tr(\"\\(TF.int(pair.1)) kcal\") : nil)"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:468: EmptyStateView(symbol: \"fork.knife\", title: tr(\"Rien de noté\"), message: tr(\"Aucun repas noté sur cette période.\"))",
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:598: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: Fmt.shortDay(pair.0), detail: pair.1 > 0 ? nil : tr(\"Rien de noté\"), value: pair.1 > 0 ? tr(\"\\(TF.int(pair.1)) kcal\") : nil)"
   ]
  },
  "Rien de noté aujourd'hui. Ton objectif est de %@ kcal.": {
@@ -22944,7 +22998,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessPages.swift:158: Text(tr(\"Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.\"))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:468: Text(tr(\"Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:493: Text(tr(\"Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.\"))"
   ]
  },
  "Rien de prévu": {
@@ -23303,7 +23357,7 @@
  "Réessayer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:154: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
+   "App/Premium/PaywallView.swift:155: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Weather/WeatherApp.swift:25: EmptyStateView(symbol: \"cloud.sun\", title: tr(\"Météo indisponible\"), message: tr(\"Le service météo ne répond pas pour l'instant. Réessaie dans un moment.\"), actionTitle: tr(\"Réessayer\")) {",
    "App/Screens/Spaces/NutritionSpace.swift:472: Button(tr(\"Réessayer\")) { Task { await lookup(code) } }"
   ]
@@ -23353,7 +23407,7 @@
  "Répartition des calories": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:532: MiniSectionTitle(title: tr(\"Répartition des calories\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:536: MiniSectionTitle(title: tr(\"Répartition des calories\"))"
   ]
  },
  "Répartition et limites": {
@@ -23366,7 +23420,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/StudentSpace.swift:358: TextField(tr(\"Réponse\"), text: $card.back, axis: .vertical)",
-   "Shared/Render/Tiles/StudentTiles.swift:188: tile.buttons = [TileButton(title: tr(\"Réponse\"), symbol: \"eye\", action: .revealCard, isProminent: true)]"
+   "Shared/Render/Tiles/StudentTiles.swift:194: tile.buttons = [TileButton(title: tr(\"Réponse\"), symbol: \"eye\", action: .revealCard, isProminent: true)]"
   ]
  },
  "Réponse inattendue de l'App Store.": {
@@ -23589,7 +23643,7 @@
  "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:432: Text(tr(\"Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:444: Text(tr(\"Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
   ]
  },
  "Sakura": {
@@ -23678,7 +23732,7 @@
  "Sans catégorie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:174: Label(tr(\"Dépense fixe · \\(category?.name ?? tr(\"Sans catégorie\"))\"), systemImage: \"repeat\")",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:185: Label(tr(\"Dépense fixe · \\(category?.name ?? tr(\"Sans catégorie\"))\"), systemImage: \"repeat\")",
    "Shared/Domains/Budget.swift:412: var name: String { category?.name ?? tr(\"Sans catégorie\") }"
   ]
  },
@@ -23709,7 +23763,7 @@
  "Sans limite%@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:269: guard category.monthlyLimit > 0 else { return tr(\"Sans limite\\(share)\") }"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:281: guard category.monthlyLimit > 0 else { return tr(\"Sans limite\\(share)\") }"
   ]
  },
  "Sans tenir les barres si possible.": {
@@ -24188,7 +24242,7 @@
  "Session %@ · %@ j": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:160: tile.inline = tr(\"Session \\(Fmt.percent(progress)) · \\(left) j\")"
+   "Shared/Render/Tiles/StudentTiles.swift:166: tile.inline = tr(\"Session \\(Fmt.percent(progress)) · \\(left) j\")"
   ]
  },
  "Session en cours": {
@@ -24270,7 +24324,13 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessPages.swift:164: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:474: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:499: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))"
+  ]
+ },
+ "Six mois d'un coup d'œil, tes moyennes et la comparaison avec le mois dernier. Tes opérations restent enregistrées : tout s'affiche dès que tu passes à Premium.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:478: message: tr(\"Six mois d'un coup d'œil, tes moyennes et la comparaison avec le mois dernier. Tes opérations restent enregistrées : tout s'affiche dès que tu passes à Premium.\"))"
   ]
  },
  "Six mois, moyennes et comparaisons": {
@@ -24704,7 +24764,7 @@
  "Styles": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:115: comparisonRow(tr(\"Styles\"), free: \"\\(ThemeCatalog.free.count)\", premium: \"\\(ThemeCatalog.all.count)\")",
+   "App/Premium/PaywallView.swift:116: comparisonRow(tr(\"Styles\"), free: \"\\(ThemeCatalog.free.count)\", premium: \"\\(ThemeCatalog.all.count)\")",
    "App/Screens/Explore/ExploreView.swift:31: case .styles: tr(\"Styles\")"
   ]
  },
@@ -24832,7 +24892,7 @@
  "Supprimer ce repas": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:651: Label(tr(\"Supprimer ce repas\"), systemImage: \"trash\")"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:655: Label(tr(\"Supprimer ce repas\"), systemImage: \"trash\")"
   ]
  },
  "Supprimer ce widget": {
@@ -26026,7 +26086,7 @@
  "Tes dépenses habituelles, notées d'une touche.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: true, families: SM, "
+   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: false, families: SM,"
   ]
  },
  "Tes dépenses, ce qu'il reste et ton épargne.": {
@@ -26146,7 +26206,7 @@
  "Tes prochains rendez-vous, tirés de ton calendrier.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:145: KindInfo(kind: .upNext, title: tr(\"À venir\"), summary: tr(\"Tes prochains rendez-vous, tirés de ton calendrier.\"), category: .productivity, symbol: \"calendar.badge.clock\", isPremium: true, families: SM"
+   "Shared/Model/KindCatalog.swift:145: KindInfo(kind: .upNext, title: tr(\"À venir\"), summary: tr(\"Tes prochains rendez-vous, tirés de ton calendrier.\"), category: .productivity, symbol: \"calendar.badge.clock\", isPremium: false, families: S"
   ]
  },
  "Tes projets et leurs étapes.": {
@@ -26745,14 +26805,14 @@
  "Ton accès Premium est rétabli.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:245: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
+   "App/Premium/PaywallView.swift:246: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
    "App/Screens/Profile/ProfileView.swift:413: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:300: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
+   "App/Premium/PaywallView.swift:301: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
   ]
  },
  "Ton activité": {
@@ -27071,7 +27131,7 @@
  "Total du mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:132: Text(tr(\"Total du mois\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:143: Text(tr(\"Total du mois\"))"
   ]
  },
  "Total dépensé": {
@@ -27155,7 +27215,7 @@
  "Touche un objectif pour y ajouter un versement ou le supprimer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:378: Text(tr(\"Touche un objectif pour y ajouter un versement ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:390: Text(tr(\"Touche un objectif pour y ajouter un versement ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
   ]
  },
  "Touche un style pour voir tous ses widgets.": {
@@ -27173,7 +27233,7 @@
  "Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:258: Text(tr(\"Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois.\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:270: Text(tr(\"Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois.\"))"
   ]
  },
  "Touche « Modifier » en haut, puis « Ajouter un widget »": {
@@ -27191,7 +27251,7 @@
  "Touche « Réponse » pour vérifier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:187: tile.caption = tr(\"Touche « Réponse » pour vérifier\")"
+   "Shared/Render/Tiles/StudentTiles.swift:193: tile.caption = tr(\"Touche « Réponse » pour vérifier\")"
   ]
  },
  "Touche-le pour choisir ton design": {
@@ -27286,13 +27346,13 @@
  "Tous les packs": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:96: PerkRow(symbol: \"bag.fill\", title: tr(\"Tous les packs\"), detail: tr(\"Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…\"))"
+   "App/Premium/PaywallView.swift:96: PerkRow(symbol: \"bag.fill\", title: tr(\"Tous les packs\"), detail: tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\"))"
   ]
  },
  "Tous les widgets des espaces": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:94: PerkRow(symbol: \"square.stack.3d.up.fill\", title: tr(\"Tous les widgets des espaces\"), detail: tr(\"Prochaine série, macros, bénéfice, MRR, devoirs, vol, carburant…\"))"
+   "App/Premium/PaywallView.swift:94: PerkRow(symbol: \"square.stack.3d.up.fill\", title: tr(\"Tous les widgets des espaces\"), detail: tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\"))"
   ]
  },
  "Tous les widgets et tous les styles": {
@@ -27409,7 +27469,7 @@
  "Tout est rendu": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:113: tile.caption = tr(\"Tout est rendu\")"
+   "Shared/Render/Tiles/StudentTiles.swift:119: tile.caption = tr(\"Tout est rendu\")"
   ]
  },
  "Tout est renseigné": {
@@ -27509,8 +27569,8 @@
  "Toutes les catégories": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:95: Button(tr(\"Toutes les catégories\")) { categoryID = nil }",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:101: Label(state.category(categoryID)?.name ?? tr(\"Toutes les catégories\"), systemImage: \"line.3.horizontal.decrease.circle\")"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:106: Button(tr(\"Toutes les catégories\")) { categoryID = nil }",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:112: Label(state.category(categoryID)?.name ?? tr(\"Toutes les catégories\"), systemImage: \"line.3.horizontal.decrease.circle\")"
   ]
  },
  "Toutes les couleurs": {
@@ -27686,7 +27746,7 @@
  "Tu profites de Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:215: Text(tr(\"Tu profites de Premium\"))"
+   "App/Premium/PaywallView.swift:216: Text(tr(\"Tu profites de Premium\"))"
   ]
  },
  "Tunis": {
@@ -27724,7 +27784,7 @@
   "uses": [
    "App/Screens/Content/MoneyView.swift:122: Picker(tr(\"Type\"), selection: $item.isIncome) {",
    "App/Screens/MiniApps/Business/BusinessPages.swift:23: Picker(tr(\"Type\"), selection: $kind) {",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:63: Picker(tr(\"Type\"), selection: $kind) {",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:74: Picker(tr(\"Type\"), selection: $kind) {",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:109: filterMenu(title: filters.type?.title ?? tr(\"Type\"), isActive: filters.type != nil) {"
   ]
  },
@@ -28394,12 +28454,6 @@
    "Shared/Theme/Theme.swift:253: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
   ]
  },
- "Verre, Aurore, Élégant, Digital, Rétro, Futuriste…": {
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:97: PerkRow(symbol: \"paintpalette\", title: tr(\"8 styles en plus\"), detail: tr(\"Verre, Aurore, Élégant, Digital, Rétro, Futuriste…\"))"
-  ]
- },
  "Verres": {
   "placeholders": 0,
   "uses": [
@@ -28834,7 +28888,7 @@
  "Widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:114: comparisonRow(tr(\"Widgets\"), free: \"\\(WidgetKind.allCases.filter { !$0.isPremium }.count)\", premium: \"\\(WidgetKind.allCases.count)\")",
+   "App/Premium/PaywallView.swift:115: comparisonRow(tr(\"Widgets\"), free: \"\\(WidgetKind.allCases.filter { !$0.isPremium }.count)\", premium: \"\\(WidgetKind.allCases.count)\")",
    "App/Screens/Explore/ExploreView.swift:27: case .widgets: tr(\"Widgets\")",
    "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Spaces/SpaceBuilderView.swift:276: EditorSection(title: tr(\"Widgets\"), detail: widgetsDetail) {"
@@ -28855,7 +28909,7 @@
  "Widgets enregistrés": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:116: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
+   "App/Premium/PaywallView.swift:117: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
   ]
  },
  "Widgets intelligents": {
@@ -29453,7 +29507,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:420: return Fmt.plural(open, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:126: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:132: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
   ]
  },
  "devoirs": {
@@ -29467,7 +29521,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:420: return Fmt.plural(open, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:126: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:132: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
   ]
  },
  "dont %@ g de protéines": {
@@ -29497,7 +29551,7 @@
  "dépensés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:222: Text(tr(\"dépensés\")).font(.caption).foregroundStyle(.secondary)",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:234: Text(tr(\"dépensés\")).font(.caption).foregroundStyle(.secondary)",
    "App/Screens/MiniApps/Travel/TravelApp.swift:147: Text(tr(\"dépensés\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
@@ -29625,14 +29679,14 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:425: case .bills: return Fmt.plural(budget.bills.count, tr(\"facture\"), tr(\"factures\"))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:291: MiniStat(title: tr(\"Par mois\"), value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, tr(\"facture\"), tr(\"factures\")))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:303: MiniStat(title: tr(\"Par mois\"), value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, tr(\"facture\"), tr(\"factures\")))"
   ]
  },
  "factures": {
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:425: case .bills: return Fmt.plural(budget.bills.count, tr(\"facture\"), tr(\"factures\"))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:291: MiniStat(title: tr(\"Par mois\"), value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, tr(\"facture\"), tr(\"factures\")))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:303: MiniStat(title: tr(\"Par mois\"), value: TF.money(BudgetMath.billsMonthly(state), currency), detail: Fmt.plural(state.bills.count, tr(\"facture\"), tr(\"factures\")))"
   ]
  },
  "faible": {
@@ -29692,7 +29746,7 @@
  "fiche à réviser": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:190: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:196: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
   ]
  },
  "fiches": {
@@ -29704,7 +29758,7 @@
  "fiches à réviser": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:190: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:196: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
   ]
  },
  "finances": {
@@ -29844,7 +29898,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:490: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "jour restant": {
@@ -29873,7 +29927,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:209: guard known.kcal else { return tr(\"\\(average) sur \\(Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\"))).\") }",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:490: MiniSectionTitle(title: isSingleDay ? tr(\"Bilan\") : tr(\"Moyennes\", context: \"averages\"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr(\"jour noté\"), tr(\"jours notés\")))"
   ]
  },
  "jours passés": {
@@ -30104,13 +30158,13 @@
  "mois complet": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:497: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:522: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
   ]
  },
  "mois complets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:497: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:522: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))"
   ]
  },
  "moyenne %@": {
@@ -30128,7 +30182,7 @@
  "moyenne générale pondérée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:137: tile.caption = tr(\"moyenne générale pondérée\")"
+   "Shared/Render/Tiles/StudentTiles.swift:143: tile.caption = tr(\"moyenne générale pondérée\")"
   ]
  },
  "moyenne par jour": {
@@ -30192,7 +30246,7 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:307: if let goal { parts.append(tr(\"objectif \\(Fmt.number(goal))\")) }",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:312: MiniStat(title: tr(\"Pas\"), value: Fmt.number(count), detail: goal.map { tr(\"objectif \\(Fmt.number($0))\") }, colorHex: tint)",
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:488: MiniStat(title: tr(\"Calories\"), value: TF.int(stats.averages.kcal), unit: \"kcal\", detail: known.kcal ? tr(\"objectif \\(TF.int(stats.goal))\") : nil, colorHex: accentHex)"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:492: MiniStat(title: tr(\"Calories\"), value: TF.int(stats.averages.kcal), unit: \"kcal\", detail: known.kcal ? tr(\"objectif \\(TF.int(stats.goal))\") : nil, colorHex: accentHex)"
   ]
  },
  "objectif %@ · %@": {
@@ -30264,7 +30318,7 @@
  "par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:292: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:304: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
    "Shared/Model/Content.swift:208: case .month: tr(\"par mois\")",
    "Shared/Render/Kinds/DataWidgets.swift:368: WLabel(text: tr(\"par mois\"), style: s)"
   ]
@@ -30706,7 +30760,7 @@
  "sur %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:497: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:522: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:142: MiniStat(title: tr(\"Étude\"), value: Fmt.minutes(studied), detail: tr(\"sur \\(Fmt.hours(state.weeklyStudyGoalHours))\"),",
    "App/Screens/MiniApps/Travel/TravelApp.swift:145: Text(tr(\"sur \\(TF.money(budget, currency))\")).font(.caption).foregroundStyle(.secondary)",
    "Shared/Render/Tiles/MoneyTiles.swift:75: detail: limit > 0 ? tr(\"sur \\(TF.money(limit, currency))\") : nil,"
@@ -30715,7 +30769,7 @@
  "sur %@ cette semaine": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:200: tile.caption = tr(\"sur \\(Fmt.hours(goal)) cette semaine\")"
+   "Shared/Render/Tiles/StudentTiles.swift:206: tile.caption = tr(\"sur \\(Fmt.hours(goal)) cette semaine\")"
   ]
  },
  "sur %@ verres": {
@@ -30940,7 +30994,7 @@
  "valeur nette %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:390: MiniSectionTitle(title: tr(\"Comptes\"), detail: state.accounts.isEmpty ? nil : tr(\"valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:402: MiniSectionTitle(title: tr(\"Comptes\"), detail: state.accounts.isEmpty ? nil : tr(\"valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))"
   ]
  },
  "validations cette semaine": {
@@ -31184,7 +31238,7 @@
  "À jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:170: tile.value = tr(\"À jour\")"
+   "Shared/Render/Tiles/StudentTiles.swift:176: tile.value = tr(\"À jour\")"
   ]
  },
  "À la bonne taille pour ton iPhone. Ensuite, dans Photos : Partager › « Utiliser en fond d'écran ».": {
@@ -31305,7 +31359,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:815: MiniActionButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", colorHex: \"E5484D\", isProminent: false) { grade(false) }",
-   "Shared/Render/Tiles/StudentTiles.swift:183: TileButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", action: .gradeCard(false)),"
+   "Shared/Render/Tiles/StudentTiles.swift:189: TileButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", action: .gradeCard(false)),"
   ]
  },
  "À réviser maintenant": {
@@ -31631,7 +31685,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:243: MiniSectionTitle(title: tr(\"Épargne\"))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:383: .navigationTitle(tr(\"Épargne\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:395: .navigationTitle(tr(\"Épargne\"))",
    "App/Screens/Spaces/BudgetSpace.swift:113: Section(tr(\"Épargne\")) {",
    "Shared/Data/SampleData.swift:282: Account(name: tr(\"Épargne\"), balance: 6_400),"
   ]
@@ -31851,7 +31905,7 @@
  "Étude %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:204: tile.inline = tr(\"Étude \\(Fmt.minutes(minutes))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:210: tile.inline = tr(\"Étude \\(Fmt.minutes(minutes))\")"
   ]
  },
  "Étude cette semaine": {
@@ -31887,12 +31941,6 @@
    "Shared/Model/Packs.swift:60: WidgetPack(id: \"student\", name: tr(\"Étudiant\"), tagline: tr(\"Cours, examens, devoirs et fiches de révision.\"), symbol: \"graduationcap.fill\","
   ]
  },
- "Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…": {
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:96: PerkRow(symbol: \"bag.fill\", title: tr(\"Tous les packs\"), detail: tr(\"Étudiant, Sportif, Entrepreneur, Voyageur, Investisseur…\"))"
-  ]
- },
  "Évaluation (quiz, examen…)": {
   "placeholders": 0,
   "uses": [
@@ -31909,7 +31957,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:286: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Évolution\"), detail: tr(\"Six mois, moyennes et comparaisons\"))",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:513: .navigationTitle(tr(\"Évolution\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:480: .navigationTitle(tr(\"Évolution\"))",
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:538: .navigationTitle(tr(\"Évolution\"))",
    "Shared/Model/WidgetStyle.swift:84: case .evolution: tr(\"Évolution\")"
   ]
  },
@@ -31949,14 +31998,14 @@
  "à la même date": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:537: MiniSectionTitle(title: tr(\"Par rapport au mois dernier\"), detail: tr(\"à la même date\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:562: MiniSectionTitle(title: tr(\"Par rapport au mois dernier\"), detail: tr(\"à la même date\"))"
   ]
  },
  "à rendre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:109: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")",
-   "Shared/Render/Tiles/StudentTiles.swift:109: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")"
+   "Shared/Render/Tiles/StudentTiles.swift:115: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")",
+   "Shared/Render/Tiles/StudentTiles.swift:115: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")"
   ]
  },
  "à renseigner": {
@@ -32022,7 +32071,7 @@
    "App/Screens/MiniApps/Planning/PlanningApp.swift:25: MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr(\"élément\"), tr(\"éléments\")))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:85: MiniSectionTitle(title: Fmt.longDay(day), detail: count == 0 ? nil : Fmt.plural(count, tr(\"élément\"), tr(\"éléments\")))",
    "Shared/Render/Tiles/StudentTiles.swift:31: tile.unit = entries.count > 1 ? tr(\"éléments\") : tr(\"élément\")",
-   "Shared/Render/Tiles/StudentTiles.swift:224: tile.unit = classes.count > 1 ? tr(\"éléments\") : tr(\"élément\")"
+   "Shared/Render/Tiles/StudentTiles.swift:230: tile.unit = classes.count > 1 ? tr(\"éléments\") : tr(\"élément\")"
   ]
  },
  "éléments": {
@@ -32031,7 +32080,7 @@
    "App/Screens/MiniApps/Planning/PlanningApp.swift:25: MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr(\"élément\"), tr(\"éléments\")))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:85: MiniSectionTitle(title: Fmt.longDay(day), detail: count == 0 ? nil : Fmt.plural(count, tr(\"élément\"), tr(\"éléments\")))",
    "Shared/Render/Tiles/StudentTiles.swift:31: tile.unit = entries.count > 1 ? tr(\"éléments\") : tr(\"élément\")",
-   "Shared/Render/Tiles/StudentTiles.swift:224: tile.unit = classes.count > 1 ? tr(\"éléments\") : tr(\"élément\")"
+   "Shared/Render/Tiles/StudentTiles.swift:230: tile.unit = classes.count > 1 ? tr(\"éléments\") : tr(\"élément\")"
   ]
  },
  "étage": {

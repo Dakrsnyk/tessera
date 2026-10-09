@@ -131,7 +131,7 @@ struct PremiumBanner: View {
                     Text(tr("Tessera Premium"))
                         .font(.headline)
                         .foregroundStyle(.primary)
-                    Text(tr("Plus de 70 widgets en plus, 12 styles, fonds photo."))
+                    Text(tr("\(WidgetKind.allCases.filter { $0.isPremium }.count) widgets en plus, \(ThemeCatalog.all.count - ThemeCatalog.free.count) styles, analyses et fonds photo."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

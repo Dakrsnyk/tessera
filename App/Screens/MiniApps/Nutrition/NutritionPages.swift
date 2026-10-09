@@ -453,14 +453,18 @@ struct NutritionHistoryPage: View {
             }
             .pickerStyle(.segmented)
             .accessibilityIdentifier("history-period")
-            if period == .custom {
+            if period == .custom && model.isPremium {
                 VStack(spacing: 8) {
                     DatePicker(tr("Du"), selection: $customStart, in: ...Date(), displayedComponents: .date)
                     DatePicker(tr("Au"), selection: $customEnd, in: ...Date(), displayedComponents: .date)
                 }
                 .card(padding: 14)
             }
-            if stats.trackedDays == 0 {
+            if !model.isPremium && (period == .month || period == .custom) {
+                // The last seven days stay free; a longer history is part of Premium.
+                PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("L'historique complet est dans Premium"),
+                                message: tr("30 jours, ou la période de ton choix, avec tes moyennes et ton poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium."))
+            } else if stats.trackedDays == 0 {
                 EmptyStateView(symbol: "fork.knife", title: tr("Rien de noté"), message: tr("Aucun repas noté sur cette période."))
                     .card()
             } else {
