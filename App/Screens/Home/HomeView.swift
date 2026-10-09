@@ -43,6 +43,15 @@ struct HomeView: View {
             }
             .task(id: model.settings.openCount) { await askForReviewIfDue() }
             .toolbar {
+                // The date, on the same line as the profile, in the app style's color.
+                ToolbarItem(placement: .topBarLeading) {
+                    Text(Fmt.longDay(Date()))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                        .fixedSize()
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityIdentifier("home-date")
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         router.isProfilePresented = true
@@ -59,8 +68,6 @@ struct HomeView: View {
     private var scrollContent: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 30) {
-                header
-                    .id("home-top")
                 DailySection()
                     .id(TutorialTarget.daily.rawValue)
                     .tutorialTarget(.daily)
@@ -74,6 +81,7 @@ struct HomeView: View {
             .padding(.horizontal, 20)
             .padding(.top, 4)
             .padding(.bottom, 32)
+            .background(alignment: .top) { Color.clear.frame(height: 1).id("home-top") }
         }
         // Home scrolls up and down only: never sideways, never a sideways bounce.
         .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
@@ -106,14 +114,6 @@ struct HomeView: View {
         }
     }
 
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            // In the app style's color, like « Mon Quotidien ».
-            Text(Fmt.longDay(Date()))
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(Color.accentColor)
-        }
-    }
 }
 
 struct PremiumBanner: View {

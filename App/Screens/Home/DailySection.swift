@@ -72,8 +72,10 @@ struct DailySection: View {
                     ForEach(Array(DailyBrief.rows(tiles, wide: settings.dailyWide).enumerated()), id: \.offset) { pair in
                         HStack(alignment: .top, spacing: 12) {
                             ForEach(pair.element) { tile in
+                                // Two cards side by side: each lays itself out for half the width.
                                 DailyTileView(tile: tile)
                                     .frame(maxWidth: .infinity)
+                                    .environment(\.dailyCompact, pair.element.count > 1)
                             }
                         }
                         .fixedSize(horizontal: false, vertical: true)
@@ -115,6 +117,19 @@ struct DailySection: View {
 
 // MARK: - Tiles
 
+private struct DailyCompactKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    /// A card of « Mon Quotidien » at half width, next to another one: only what matters, laid out
+    /// for the narrow space (not the wide card made smaller).
+    var dailyCompact: Bool {
+        get { self[DailyCompactKey.self] }
+        set { self[DailyCompactKey.self] = newValue }
+    }
+}
+
 private struct DailyTileView: View {
     let tile: DailyBrief.Tile
     @Environment(AppModel.self) private var model
@@ -134,8 +149,7 @@ private struct DailyTileView: View {
             DailyPager(id: "workout", titles: [tr("Séance"), tr("Semaine")], accentHex: "E5484D") { page in
                 if page == 1 { WorkoutWeekTile() } else { WorkoutDayTile(workout: workout) }
             }
-        case let .classes(title, items): TimedListTile(title: title, symbol: "graduationcap.fill", colorHex: "D6409F", items: items, space: .student)
-        case let .agenda(title, items): TimedListTile(title: title, symbol: "calendar", colorHex: "3366FF", items: items, space: .productivity)
+        case let .planning(items): PlanningDayTile(items: items)
         case let .habits(done, items): HabitsDayTile(done: done, items: items)
         case let .water(glasses, goal):
             DailyPager(id: "water", titles: [tr("Aujourd'hui"), tr("7 jours")], accentHex: "3A8DDE") { page in
@@ -222,10 +236,108 @@ private struct DayCard<Content: View>: View {
 private struct NutritionDayTile: View {
     let nutrition: DailyBrief.Nutrition
     @Environment(Router.self) private var router
+    @Environment(\.dailyCompact) private var compact
 
     var body: some View {
+        if compact { compactBody } else { wideBody }
+    }
+
+    /// Half width: the ring with what is left beside it, the three macros on one line each, then
+    /// the scanner and the meals.
+    private var compactBody: some View {
         let accent = Color(hex: "F08A24")
-        VStack(alignment: .leading, spacing: 12) {
+        return VStack(alignment: .leading, spacing: 10) {
+            NavigationLink(value: HomeRoute.app(.nutrition)) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Label(tr("Nutrition"), systemImage: "fork.knife")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(accent)
+                        .lineLimit(1)
+                    HStack(spacing: 10) {
+                        RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 7, color: accent, track: accent.opacity(0.16))
+                            .frame(width: 46, height: 46)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(TF.int(abs(nutrition.kcalLeft ?? nutrition.eaten.kcal)))
+                                .font(.title3.weight(.bold))
+                                .monospacedDigit()
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.7)
+                            Text(nutrition.kcalLeft.map { $0 >= 0 ? tr("kcal restantes") : tr("kcal en trop") } ?? tr("kcal mangées"))
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
+                        }
+                    }
+                    VStack(spacing: 6) {
+                        compactMacro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, "E5484D")
+                        compactMacro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, "F2A33A")
+                        compactMacro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, "3366FF")
+                    }
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("daily-nutrition-open")
+            HStack(spacing: 6) {
+                Button {
+                    router.isFoodScanPresented = true
+                } label: {
+                    Image(systemName: "barcode.viewfinder")
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(.white)
+                        .frame(width: 44, height: 34)
+                        .background(accent, in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(tr("Scanner")))
+                .accessibilityIdentifier("daily-scan")
+                NavigationLink(value: HomeRoute.app(.nutrition)) {
+                    Text(mealsText)
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(Color(hex: "CF6414"))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                        .padding(.horizontal, 6)
+                        .frame(maxWidth: .infinity, minHeight: 34)
+                        .background(accent.opacity(0.14), in: Capsule())
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(14)
+        .frame(maxHeight: .infinity, alignment: .top)
+        .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("daily-nutrition")
+    }
+
+    /// A macro on one line: its colour, its name, eaten over the target; a thin bar under it.
+    private func compactMacro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(spacing: 5) {
+                Circle().fill(Color(hex: hex)).frame(width: 6, height: 6)
+                Text(name)
+                    .font(.caption2.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                Spacer(minLength: 4)
+                Text(goal.map { "\(TF.int(eaten))/\(TF.int($0))" } ?? "\(TF.int(eaten)) g")
+                    .font(.caption2)
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .layoutPriority(1)
+            }
+            if let goal {
+                BarView(progress: eaten / max(1, goal), color: Color(hex: hex), track: Color(hex: hex).opacity(0.15), height: 4)
+            }
+        }
+    }
+
+    private var wideBody: some View {
+        let accent = Color(hex: "F08A24")
+        return VStack(alignment: .leading, spacing: 12) {
             NavigationLink(value: HomeRoute.app(.nutrition)) {
             HStack(alignment: .center, spacing: 14) {
                 ZStack {
@@ -436,39 +548,103 @@ private struct WorkoutDayTile: View {
     }
 }
 
-private struct TimedListTile: View {
-    let title: String
-    let symbol: String
-    let colorHex: String
+/// What comes next: classes, work, appointments, other events of the schedule, exams and the
+/// events of the Apple calendar. A tap shows the whole week. Half width: the time above the title.
+private struct PlanningDayTile: View {
     let items: [DailyBrief.TimedItem]
-    let space: Space?
+    @Environment(AppModel.self) private var model
+    @Environment(\.dailyCompact) private var compact
+
+    private let colorHex = "3366FF"
 
     var body: some View {
-        DayCard(title: title, symbol: symbol, colorHex: colorHex, route: space.map(HomeRoute.space)) {
-            VStack(alignment: .leading, spacing: 6) {
-                ForEach(items.prefix(4)) { item in
-                    HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Text(item.time)
-                            .font(.subheadline.weight(.bold))
-                            .monospacedDigit()
-                            .frame(minWidth: 44, alignment: .leading)
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text(item.title)
-                                .font(.subheadline.weight(item.isHighlighted ? .bold : .regular))
-                                .foregroundStyle(item.isHighlighted ? Color(hex: colorHex) : .primary)
-                                .lineLimit(2)
-                            if !item.detail.isEmpty {
-                                Text(item.detail)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                    .lineLimit(1)
-                            }
-                        }
+        DayCard(title: tr("Planning"), symbol: "calendar.day.timeline.left", colorHex: colorHex) {
+            NavigationLink(value: HomeRoute.page(.planningWeek)) {
+                VStack(alignment: .leading, spacing: compact ? 8 : 7) {
+                    if items.isEmpty {
+                        Text(tr("Rien de prévu cette semaine."))
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
+                    ForEach(items.prefix(compact ? 3 : 5)) { item in
+                        if compact { compactRow(item) } else { row(item) }
+                    }
+                    HStack(spacing: 3) {
+                        Text(tr("Toute la semaine"))
+                        Image(systemName: "chevron.right").font(.caption2.weight(.bold))
+                    }
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Color(hex: colorHex))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("daily-planning-week")
+            // The Apple calendar, one tap away when it isn't linked yet.
+            if case .needsAccess = model.events {
+                Button {
+                    Task {
+                        if await CalendarService.requestAccess() { model.refreshEvents() }
+                    }
+                } label: {
+                    Label(tr("Relier le calendrier Apple"), systemImage: "calendar.badge.plus")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color(hex: colorHex))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("daily-planning-calendar")
+            }
+        }
+        .accessibilityIdentifier("daily-planning")
+    }
+
+    private func row(_ item: DailyBrief.TimedItem) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Circle()
+                .fill(Color(hex: item.colorHex ?? colorHex))
+                .frame(width: 7, height: 7)
+            Text(item.time)
+                .font(.subheadline.weight(.bold))
+                .monospacedDigit()
+                .lineLimit(1)
+                .fixedSize()
+            VStack(alignment: .leading, spacing: 0) {
+                Text(item.title)
+                    .font(.subheadline.weight(item.isHighlighted ? .bold : .regular))
+                    .foregroundStyle(item.isHighlighted ? Color(hex: item.colorHex ?? colorHex) : .primary)
+                    .lineLimit(1)
+                if !item.detail.isEmpty {
+                    Text(item.detail)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
                 }
             }
         }
-        .accessibilityIdentifier(space == .student ? "daily-classes" : "daily-agenda")
+    }
+
+    private func compactRow(_ item: DailyBrief.TimedItem) -> some View {
+        HStack(alignment: .top, spacing: 7) {
+            Capsule()
+                .fill(Color(hex: item.colorHex ?? colorHex))
+                .frame(width: 3)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(item.time)
+                    .font(.caption.weight(.bold))
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Text(item.title)
+                    .font(.subheadline.weight(item.isHighlighted ? .bold : .semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(2)
+            }
+        }
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
@@ -757,30 +933,47 @@ private struct InviteDayTile: View {
 private struct NutritionMealsTile: View {
     let nutrition: DailyBrief.Nutrition
     @Environment(AppModel.self) private var model
+    @Environment(\.dailyCompact) private var compact
 
     var body: some View {
         let state = model.nutrition
         DayCard(title: tr("Repas du jour"), symbol: "fork.knife", colorHex: "F08A24", route: .app(.nutrition)) {
-            VStack(spacing: 6) {
+            VStack(spacing: compact ? 5 : 6) {
                 ForEach(MealType.allCases) { meal in
                     let kcal = NutritionMath.totals(of: meal, state, on: Date()).kcal
-                    HStack(alignment: .firstTextBaseline) {
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
                         Text(meal.title)
-                            .font(.subheadline.weight(kcal > 0 ? .semibold : .regular))
-                        Spacer()
-                        Text(kcal > 0 ? tr("\(TF.int(kcal)) kcal") : "—")
-                            .font(.subheadline)
+                            .font((compact ? Font.caption : .subheadline).weight(kcal > 0 ? .semibold : .regular))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                        Spacer(minLength: 4)
+                        Text(kcal > 0 ? (compact ? TF.int(kcal) : tr("\(TF.int(kcal)) kcal")) : "—")
+                            .font(compact ? .caption : .subheadline)
                             .monospacedDigit()
                             .foregroundStyle(kcal > 0 ? .primary : .secondary)
+                            .lineLimit(1)
+                            .layoutPriority(1)
                     }
                 }
                 Divider()
-                HStack {
-                    Text(tr("Total")).font(.subheadline.weight(.bold))
-                    Spacer()
-                    Text(nutrition.knowsKcal ? tr("\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal)) kcal") : tr("\(TF.int(nutrition.eaten.kcal)) kcal"))
-                        .font(.subheadline.weight(.bold))
-                        .monospacedDigit()
+                if compact {
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(tr("Total")).font(.caption.weight(.bold))
+                        Text(nutrition.knowsKcal ? tr("\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal)) kcal") : tr("\(TF.int(nutrition.eaten.kcal)) kcal"))
+                            .font(.caption.weight(.bold))
+                            .monospacedDigit()
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    HStack {
+                        Text(tr("Total")).font(.subheadline.weight(.bold))
+                        Spacer()
+                        Text(nutrition.knowsKcal ? tr("\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal)) kcal") : tr("\(TF.int(nutrition.eaten.kcal)) kcal"))
+                            .font(.subheadline.weight(.bold))
+                            .monospacedDigit()
+                    }
                 }
             }
         }
@@ -891,10 +1084,11 @@ private struct StepsWeekTile: View {
 private struct WeatherHoursTile: View {
     let weather: WeatherSnapshot
     @Environment(AppModel.self) private var model
+    @Environment(\.dailyCompact) private var compact
 
     var body: some View {
         let now = Date()
-        let hours = weather.hourly.filter { $0.date > now }.prefix(5)
+        let hours = weather.hourly.filter { $0.date > now }.prefix(compact ? 3 : 5)
         DayCard(title: tr("Prochaines heures"), symbol: "clock", colorHex: "3A8DDE", route: .app(.weather)) {
             HStack(alignment: .top, spacing: 4) {
                 ForEach(Array(hours), id: \.date) { hour in

@@ -277,34 +277,6 @@
   ]
  },
  {
-  "key": "Cours aujourd'hui",
-  "placeholders": 0,
-  "uses": [
-   "App/Core/DailyBrief.swift:329: if moment != .evening, !today.isEmpty { return (tr(\"Cours aujourd'hui\"), today) }"
-  ]
- },
- {
-  "key": "Cours ce soir",
-  "placeholders": 0,
-  "uses": [
-   "App/Core/DailyBrief.swift:331: if moment == .evening, !today.isEmpty { return (tr(\"Cours ce soir\"), today) }"
-  ]
- },
- {
-  "key": "Cours demain",
-  "placeholders": 0,
-  "uses": [
-   "App/Core/DailyBrief.swift:334: if moment == .evening, !next.isEmpty { return (tr(\"Cours demain\"), next) }"
-  ]
- },
- {
-  "key": "Agenda",
-  "placeholders": 0,
-  "uses": [
-   "App/Core/DailyBrief.swift:347: return (tr(\"Agenda\"), Array(items))"
-  ]
- },
- {
   "key": "En retard",
   "placeholders": 0,
   "uses": [
@@ -1774,24 +1746,10 @@
   ]
  },
  {
-  "key": "%@ par an, soit %@ par mois",
-  "placeholders": 2,
-  "uses": [
-   "App/Premium/PaywallView.swift:187: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) par an, soit \\(monthly) par mois\") }"
-  ]
- },
- {
   "key": "%@ par an",
   "placeholders": 1,
   "uses": [
    "App/Premium/PaywallView.swift:188: return tr(\"\\(product.displayPrice) par an\")"
-  ]
- },
- {
-  "key": "%@, une seule fois",
-  "placeholders": 1,
-  "uses": [
-   "App/Premium/PaywallView.swift:192: return tr(\"\\(product.displayPrice), une seule fois\")"
   ]
  },
  {
@@ -1844,20 +1802,6 @@
   "uses": [
    "App/Premium/PaywallView.swift:246: Text(isTrial ? tr(\"Essayer gratuitement\") : tr(\"Continuer\"))",
    "App/Screens/Onboarding/OnboardingView.swift:99: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
-  ]
- },
- {
-  "key": "Essayer gratuitement",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:246: Text(isTrial ? tr(\"Essayer gratuitement\") : tr(\"Continuer\"))"
-  ]
- },
- {
-  "key": "L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. Si tu profites d'un essai gratuit, il prend fin dès l'achat d'un abonnement.",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:259: Text(tr(\"L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou ann"
   ]
  },
  {
@@ -1915,48 +1859,6 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PremiumStore.swift:84: return .failed(tr(\"Réponse inattendue de l'App Store.\"))"
-  ]
- },
- {
-  "key": "%@ jours gratuits",
-  "placeholders": 1,
-  "uses": [
-   "App/Premium/PremiumStore.swift:153: case .day: return period.value == 1 ? tr(\"1 jour gratuit\") : tr(\"\\(period.value) jours gratuits\")"
-  ]
- },
- {
-  "key": "1 jour gratuit",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PremiumStore.swift:153: case .day: return period.value == 1 ? tr(\"1 jour gratuit\") : tr(\"\\(period.value) jours gratuits\")"
-  ]
- },
- {
-  "key": "%@ semaines gratuites",
-  "placeholders": 1,
-  "uses": [
-   "App/Premium/PremiumStore.swift:154: case .week: return period.value == 1 ? tr(\"7 jours gratuits\") : tr(\"\\(period.value) semaines gratuites\")"
-  ]
- },
- {
-  "key": "7 jours gratuits",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PremiumStore.swift:154: case .week: return period.value == 1 ? tr(\"7 jours gratuits\") : tr(\"\\(period.value) semaines gratuites\")"
-  ]
- },
- {
-  "key": "1 an gratuit",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PremiumStore.swift:156: case .year: return tr(\"1 an gratuit\")"
-  ]
- },
- {
-  "key": "Essai gratuit",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PremiumStore.swift:157: @unknown default: return tr(\"Essai gratuit\")"
   ]
  },
  {

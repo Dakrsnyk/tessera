@@ -68,10 +68,9 @@ final class DailyBriefTests: XCTestCase {
 
     func testMealsComeFirstThenClassesAndTheWeatherInTheMorning() {
         let tiles = DailyBrief.tiles(dayInput(at: wednesday(8)))
-        XCTAssertEqual(ids(tiles).prefix(2), ["nutrition", "classes"])
+        XCTAssertEqual(ids(tiles).prefix(2), ["nutrition", "planning"])
         XCTAssertFalse(ids(tiles).contains("weather"), "The weather is no longer in Mon Quotidien")
-        guard case let .classes(title, items)? = tiles.first(where: { $0.id == "classes" }) else { return XCTFail() }
-        XCTAssertEqual(title, "Cours aujourd'hui")
+        guard case let .planning(items)? = tiles.first(where: { $0.id == "planning" }) else { return XCTFail() }
         XCTAssertEqual(items.first?.title, "Mathématiques")
         XCTAssertEqual(items.first?.time, "14:00")
     }
@@ -79,7 +78,8 @@ final class DailyBriefTests: XCTestCase {
     func testEveningStartsWithWhatIsLeftToEatAndTheHabits() {
         let tiles = DailyBrief.tiles(dayInput(at: wednesday(20)))
         XCTAssertEqual(ids(tiles).prefix(2), ["nutrition", "habits"])
-        XCTAssertFalse(ids(tiles).contains("classes"), "No class tomorrow (Thursday): nothing to show")
+        guard case let .planning(items)? = tiles.first(where: { $0.id == "planning" }) else { return XCTFail("The Planning card stays") }
+        XCTAssertTrue(items.isEmpty, "No class before next Wednesday: nothing to show this week")
     }
 
     func testAnExamTodayComesFirst() {
@@ -89,8 +89,8 @@ final class DailyBriefTests: XCTestCase {
         guard case let .reminders(items)? = tiles.first(where: { $0.id == "reminders" }) else { return XCTFail("The exam is a reminder") }
         XCTAssertEqual(items.first?.title, "Examen : Chimie")
         XCTAssertEqual(items.first?.when, "Aujourd'hui 16:00")
-        guard case let .classes(_, classes)? = tiles.first(where: { $0.id == "classes" }) else { return XCTFail() }
-        XCTAssertTrue(classes.contains { $0.isHighlighted && $0.title == "Examen : Chimie" })
+        guard case let .planning(items)? = tiles.first(where: { $0.id == "planning" }) else { return XCTFail() }
+        XCTAssertTrue(items.contains { $0.isHighlighted && $0.title == "Examen : Chimie" })
     }
 
     func testTheWorkoutFollowsTheSession() {

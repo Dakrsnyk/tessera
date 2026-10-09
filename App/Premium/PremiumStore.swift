@@ -19,8 +19,8 @@ final class PremiumStore {
     private(set) var loadState: LoadState = .idle
     private(set) var purchasingID: String?
     private(set) var isRestoring = false
-    /// Whether the user can still claim the yearly plan's free trial.
-    private(set) var isTrialEligible = false
+    /// Whether the user can still claim the welcome offer (once per Apple account, for the whole group).
+    private(set) var isIntroEligible = false
 
     @ObservationIgnored private weak var model: AppModel?
     @ObservationIgnored private var updatesTask: Task<Void, Never>?
@@ -54,8 +54,8 @@ final class PremiumStore {
         do {
             let fetched = try await Product.products(for: PremiumConfiguration.allProductIDs)
             products = PremiumConfiguration.allProductIDs.compactMap { id in fetched.first { $0.id == id } }
-            if let subscription = yearly?.subscription {
-                isTrialEligible = await subscription.isEligibleForIntroOffer
+            if let subscription = monthly?.subscription ?? yearly?.subscription {
+                isIntroEligible = await subscription.isEligibleForIntroOffer
             }
             loadState = products.isEmpty ? .failed(tr("Les offres ne sont pas encore disponibles.")) : .loaded
         } catch {
@@ -146,15 +146,32 @@ final class PremiumStore {
         return percent > 0 ? percent : nil
     }
 
-    func trialDescription(for product: Product) -> String? {
-        guard isTrialEligible, let offer = product.subscription?.introductoryOffer, offer.paymentMode == .freeTrial else { return nil }
-        let period = offer.period
-        switch period.unit {
-        case .day: return period.value == 1 ? tr("1 jour gratuit") : tr("\(period.value) jours gratuits")
-        case .week: return period.value == 1 ? tr("7 jours gratuits") : tr("\(period.value) semaines gratuites")
-        case .month: return Fmt.plural(period.value, tr("mois gratuit"), tr("mois gratuits"))
-        case .year: return tr("1 an gratuit")
-        @unknown default: return tr("Essai gratuit")
+    /// The welcome offer of a plan when the person can still claim it: its price, for how long, then
+    /// the price that follows (« 4,99 $ par mois les 3 premiers mois, puis 6,99 $ par mois »).
+    func introDescription(for product: Product) -> String? {
+        guard isIntroEligible, let subscription = product.subscription, let offer = subscription.introductoryOffer else { return nil }
+        let regular = Self.periodText(product.displayPrice, subscription.subscriptionPeriod)
+        switch offer.paymentMode {
+        case .payAsYouGo:
+            let months = offer.period.unit == .month ? offer.period.value * offer.periodCount : offer.periodCount
+            let first = Self.periodText(offer.displayPrice, offer.period)
+            return tr("\(first) les \(Fmt.plural(months, tr("premier mois"), tr("premiers mois"))), puis \(regular)")
+        case .payUpFront:
+            return tr("\(offer.displayPrice) pour commencer, puis \(regular)")
+        case .freeTrial:
+            return tr("Essai gratuit, puis \(regular)")
+        default:
+            return nil
+        }
+    }
+
+    /// « 6,99 $ par mois », « 59,99 $ par an ».
+    static func periodText(_ price: String, _ period: Product.SubscriptionPeriod) -> String {
+        switch (period.unit, period.value) {
+        case (.month, 1): tr("\(price) par mois")
+        case (.year, 1): tr("\(price) par an")
+        case (.week, 1): tr("\(price) par semaine")
+        default: tr("\(price) par période")
         }
     }
 }

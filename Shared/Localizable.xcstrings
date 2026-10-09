@@ -3056,6 +3056,147 @@
         }
       }
     },
+    "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ heute für 12 Monate belastet. Verlängert sich automatisch jedes Jahr zum gleichen Preis, jederzeit kündbar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ charged today for 12 months. Renews automatically every year at the same price; cancel anytime."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cobrados hoy por 12 meses. Se renueva automáticamente cada año al mismo precio; cancélalo cuando quieras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ addebitati oggi per 12 mesi. Rinnovo automatico ogni anno allo stesso prezzo, annullabile in qualsiasi momento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本日12か月分として%@が請求されます。毎年同じ価格で自動更新され、いつでもキャンセルできます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cobrados hoje por 12 meses. Renovação automática todo ano pelo mesmo preço, cancelável a qualquer momento."
+          }
+        }
+      }
+    },
+    "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ heute für einen Monat belastet. Verlängert sich automatisch jeden Monat, jederzeit kündbar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ charged today for one month. Renews automatically every month; cancel anytime."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cobrados hoy por un mes. Se renueva automáticamente cada mes; cancélalo cuando quieras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ addebitati oggi per un mese. Rinnovo automatico ogni mese, annullabile in qualsiasi momento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本日1か月分として%@が請求されます。毎月自動更新され、いつでもキャンセルできます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cobrados hoje por um mês. Renovação automática todo mês, cancelável a qualquer momento."
+          }
+        }
+      }
+    },
+    "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ einmalig belastet. Premium auf Lebenszeit, ohne Abo und ohne Verlängerung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ charged once. Premium for life, no subscription and no renewal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cobrados una sola vez. Premium de por vida, sin suscripción ni renovación."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ addebitati una sola volta. Premium a vita, senza abbonamento né rinnovo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の1回限りのお支払い。永久にPremium、サブスクリプションも更新もありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cobrados uma única vez. Premium vitalício, sem assinatura nem renovação."
+          }
+        }
+      }
+    },
     "%@ dépensés · %@ avant la fin du mois": {
       "extractionState": "manual",
       "localizations": {
@@ -4137,53 +4278,6 @@
         }
       }
     },
-    "%@ jours gratuits": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Tage kostenlos"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ days free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ días gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ jours gratuits"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ giorni gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@日間無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ dias grátis"
-          }
-        }
-      }
-    },
     "%@ kcal": {
       "extractionState": "manual",
       "localizations": {
@@ -4936,6 +5030,53 @@
         }
       }
     },
+    "%@ les %@, puis %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ in den %2$@, danach %3$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ for the first %2$@, then %3$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ los %2$@, luego %3$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ les %@, puis %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ per i %2$@, poi %3$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@は%1$@、その後は%3$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ nos %2$@, depois %3$@"
+          }
+        }
+      }
+    },
     "%@ maintenant": {
       "extractionState": "manual",
       "localizations": {
@@ -5453,53 +5594,6 @@
         }
       }
     },
-    "%@ par an, soit %@ par mois": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ pro Jahr, also %@ pro Monat"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ per year, or %@ per month"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ al año, es decir, %@ al mes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ par an, soit %@ par mois"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ all'anno, ovvero %@ al mese"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "年額 %@(月あたり %@)"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ por ano, ou seja, %@ por mês"
-          }
-        }
-      }
-    },
     "%@ par jour sur %@ %@": {
       "extractionState": "manual",
       "localizations": {
@@ -5641,6 +5735,53 @@
         }
       }
     },
+    "%@ par période": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pro Zeitraum"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per period"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ por periodo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ par période"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per periodo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "期間ごとに%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ por período"
+          }
+        }
+      }
+    },
     "%@ par semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -5778,6 +5919,147 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ passos hoje"
+          }
+        }
+      }
+    },
+    "%@ pour 12 mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ für 12 Monate"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ for 12 months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ por 12 meses"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pour 12 mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per 12 mesi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "12か月で%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ por 12 meses"
+          }
+        }
+      }
+    },
+    "%@ pour 12 mois, soit %@ par mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ für 12 Monate, also %2$@ pro Monat"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ for 12 months, or %2$@ a month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ por 12 meses, o sea %2$@ al mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pour 12 mois, soit %@ par mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ per 12 mesi, cioè %2$@ al mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "12か月で%1$@（月あたり%2$@）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ por 12 meses, ou seja %2$@ por mês"
+          }
+        }
+      }
+    },
+    "%@ pour commencer, puis %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ zum Start, danach %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ to start, then %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ para empezar, luego %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pour commencer, puis %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ per iniziare, poi %2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最初は%1$@、その後は%2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ para começar, depois %2$@"
           }
         }
       }
@@ -6013,53 +6295,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ de estudo"
-          }
-        }
-      }
-    },
-    "%@ semaines gratuites": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Wochen kostenlos"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ weeks free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ semanas gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ semaines gratuites"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ settimane gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@週間無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ semanas grátis"
           }
         }
       }
@@ -8837,49 +9072,96 @@
         }
       }
     },
-    "%@, une seule fois": {
+    "%@, une seule fois, sans abonnement": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@, einmalig"
+            "value": "%@, einmalig, ohne Abo"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@, one time only"
+            "value": "%@, once, no subscription"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@, un solo pago"
+            "value": "%@, una sola vez, sin suscripción"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@, une seule fois"
+            "value": "%@, une seule fois, sans abonnement"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@, una sola volta"
+            "value": "%@, una sola volta, senza abbonamento"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@(一回のみ)"
+            "value": "%@、1回限り、サブスクなし"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@, uma única vez"
+            "value": "%@, uma única vez, sem assinatura"
+          }
+        }
+      }
+    },
+    "%@. Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@. Verlängert sich automatisch jeden Monat, jederzeit kündbar. Das Willkommensangebot gilt nur einmal pro Apple Account."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@. Renews automatically every month; cancel anytime. The welcome offer applies only once per Apple Account."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@. Se renueva automáticamente cada mes; cancélalo cuando quieras. La oferta de bienvenida solo vale una vez por cuenta de Apple."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@. Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@. Rinnovo automatico ogni mese, annullabile in qualsiasi momento. L'offerta di benvenuto vale una sola volta per account Apple."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@。毎月自動更新され、いつでもキャンセルできます。ウェルカムオファーはApple Accountごとに1回限りです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@. Renovação automática todo mês, cancelável a qualquer momento. A oferta de boas-vindas vale apenas uma vez por Conta Apple."
           }
         }
       }
@@ -9726,53 +10008,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "/%@ copos"
-          }
-        }
-      }
-    },
-    "1 an gratuit": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 Jahr kostenlos"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 year free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 año gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 an gratuit"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 anno gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1年間無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 ano grátis"
           }
         }
       }
@@ -11183,53 +11418,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 cachorro-quente"
-          }
-        }
-      }
-    },
-    "1 jour gratuit": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 Tag kostenlos"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 day free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 día gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 jour gratuit"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 giorno gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1日間無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 dia grátis"
           }
         }
       }
@@ -14007,53 +14195,6 @@
         }
       }
     },
-    "7 jours gratuits": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7 Tage kostenlos"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7 days free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7 días gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7 jours gratuits"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7 giorni gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7日間無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7 dias grátis"
-          }
-        }
-      }
-    },
     "8 styles en plus": {
       "extractionState": "manual",
       "localizations": {
@@ -16823,53 +16964,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "África do Sul"
-          }
-        }
-      }
-    },
-    "Agenda": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Termine"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agenda"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agenda"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agenda"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agenda"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "予定"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agenda"
           }
         }
       }
@@ -57999,53 +58093,6 @@
         }
       }
     },
-    "Cours aujourd'hui": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurse heute"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classes today"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clases hoy"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cours aujourd'hui"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lezioni oggi"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日の授業"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aulas hoje"
-          }
-        }
-      }
-    },
     "Cours avec une foulée souple, sous le corps.": {
       "extractionState": "manual",
       "localizations": {
@@ -58093,53 +58140,6 @@
         }
       }
     },
-    "Cours ce soir": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurse heute Abend"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classes tonight"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clases esta noche"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cours ce soir"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lezioni stasera"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今夜の授業"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aulas hoje à noite"
-          }
-        }
-      }
-    },
     "Cours de %@": {
       "extractionState": "manual",
       "localizations": {
@@ -58183,53 +58183,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cotação das %@"
-          }
-        }
-      }
-    },
-    "Cours demain": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurse morgen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classes tomorrow"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clases mañana"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cours demain"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lezioni domani"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "明日の授業"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aulas amanhã"
           }
         }
       }
@@ -65750,6 +65703,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Amanhã"
+          }
+        }
+      }
+    },
+    "Demain %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morgen %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tomorrow %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mañana %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demain %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domani %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明日 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amanhã %@"
           }
         }
       }
@@ -80512,49 +80512,49 @@
         }
       }
     },
-    "Essai gratuit": {
+    "Essai gratuit, puis %@": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kostenlose Testphase"
+            "value": "Gratis testen, danach %@"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Free trial"
+            "value": "Free trial, then %@"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Prueba gratuita"
+            "value": "Prueba gratuita, luego %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Essai gratuit"
+            "value": "Essai gratuit, puis %@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Prova gratuita"
+            "value": "Prova gratuita, poi %@"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "無料トライアル"
+            "value": "無料トライアル、その後は%@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Teste grátis"
+            "value": "Teste grátis, depois %@"
           }
         }
       }
@@ -80696,53 +80696,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tente uma foto mais próxima e bem iluminada, ou adicione os alimentos à mão pela busca."
-          }
-        }
-      }
-    },
-    "Essayer gratuitement": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kostenlos testen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Try for free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Probar gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Essayer gratuitement"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prova gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "無料で試す"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Experimentar grátis"
           }
         }
       }
@@ -83798,6 +83751,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opcional"
+          }
+        }
+      }
+    },
+    "Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. Daraus ergibt sich dein Alter (Kalorien, Geburtstag); es bleibt auf deinem iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. It gives your age (calories, birthday) and stays on your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. Indica tu edad (calorías, cumpleaños) y se queda en tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facoltativa. Indica la tua età (calorie, compleanno) e resta sul tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任意。年齢（カロリー、誕生日）に使われ、iPhone内にのみ保存されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. Ela indica sua idade (calorias, aniversário) e fica no seu iPhone."
           }
         }
       }
@@ -103495,53 +103495,6 @@
         }
       }
     },
-    "L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. Si tu profites d'un essai gratuit, il prend fin dès l'achat d'un abonnement.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Abo verlängert sich automatisch, sofern du es nicht mindestens 24 Stunden vor Ende des laufenden Zeitraums kündigst. Die Zahlung wird deinem Apple-Account belastet. Du kannst das Abo in den Einstellungen deines App-Store-Accounts verwalten oder kündigen. Wenn du eine kostenlose Testphase nutzt, endet sie mit dem Kauf eines Abos."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The subscription renews automatically unless canceled at least 24 hours before the end of the current period. Payment is charged to your Apple account. You can manage or cancel the subscription in your App Store account settings. If you're on a free trial, it ends as soon as you purchase a subscription."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La suscripción se renueva automáticamente, salvo que la canceles al menos 24 horas antes de que termine el periodo en curso. El pago se carga a tu cuenta de Apple. Puedes gestionar o cancelar la suscripción en los ajustes de tu cuenta de App Store. Si estás en una prueba gratuita, esta termina en cuanto compras una suscripción."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. Si tu profites d'un essai gratuit, il prend fin dès l'achat d'un abonnement."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'abbonamento si rinnova automaticamente, a meno che tu non lo annulli almeno 24 ore prima della fine del periodo in corso. Il pagamento viene addebitato sul tuo account Apple. Puoi gestire o annullare l'abbonamento nelle impostazioni del tuo account App Store. Se stai usando una prova gratuita, termina non appena acquisti un abbonamento."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "サブスクリプションは、現在の期間が終了する24時間以上前にキャンセルしない限り、自動的に更新されます。お支払いはApple Accountに請求されます。サブスクリプションの管理やキャンセルは、App Storeアカウントの設定から行えます。無料トライアル中の場合、サブスクリプションを購入した時点で終了します。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do fim do período atual. O pagamento é cobrado na sua conta Apple. Você pode gerenciar ou cancelar a assinatura nos ajustes da sua conta da App Store. Se você estiver em um teste gratuito, ele termina assim que você adquirir uma assinatura."
-          }
-        }
-      }
-    },
     "L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers.": {
       "extractionState": "manual",
       "localizations": {
@@ -112938,6 +112891,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "As %@ categorias"
+          }
+        }
+      }
+    },
+    "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abos verlängern sich automatisch, wenn sie nicht mindestens 24 Stunden vor Ende des laufenden Zeitraums gekündigt werden. Die Zahlung wird deinem Apple Account belastet. Du kannst das Abo in den Einstellungen deines App Store-Kontos verwalten oder kündigen. Das Willkommensangebot gilt nur einmal pro Account; danach gilt der normale Preis. Der Kauf auf Lebenszeit ist eine einmalige Zahlung ohne Verlängerung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscriptions renew automatically unless canceled at least 24 hours before the end of the current period. Payment is charged to your Apple Account. You can manage or cancel your subscription in your App Store account settings. The welcome offer applies only once per account; when it ends, the regular price applies. The lifetime purchase is a one-time payment with no renewal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las suscripciones se renuevan automáticamente salvo que se cancelen al menos 24 h antes del final del periodo en curso. El pago se carga a tu cuenta de Apple. Puedes gestionar o cancelar la suscripción en los ajustes de tu cuenta del App Store. La oferta de bienvenida solo se aplica una vez por cuenta; al terminar, se aplica el precio normal. La compra de por vida es un pago único, sin renovación."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli abbonamenti si rinnovano automaticamente, salvo annullamento almeno 24 ore prima della fine del periodo in corso. Il pagamento viene addebitato sul tuo account Apple. Puoi gestire o annullare l'abbonamento nelle impostazioni del tuo account App Store. L'offerta di benvenuto si applica una sola volta per account; alla sua fine si applica il prezzo normale. L'acquisto a vita è un pagamento unico, senza rinnovo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスクリプションは、現在の期間終了の24時間前までにキャンセルしない限り自動更新されます。お支払いはApple Accountに請求されます。サブスクリプションの管理・キャンセルはApp Storeアカウントの設定から行えます。ウェルカムオファーはアカウントごとに1回限りで、終了後は通常価格が適用されます。永久購入は更新のない1回限りのお支払いです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As assinaturas são renovadas automaticamente, a menos que sejam canceladas pelo menos 24 h antes do fim do período atual. O pagamento é cobrado na sua Conta Apple. Você pode gerenciar ou cancelar a assinatura nos ajustes da sua conta da App Store. A oferta de boas-vindas vale apenas uma vez por conta; ao terminar, aplica-se o preço normal. A compra vitalícia é um pagamento único, sem renovação."
           }
         }
       }
@@ -139403,6 +139403,53 @@
         }
       }
     },
+    "Offre de bienvenue": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Willkommensangebot"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome offer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oferta de bienvenida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offre de bienvenue"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offerta di benvenuto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウェルカムオファー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oferta de boas-vindas"
+          }
+        }
+      }
+    },
     "Oignon": {
       "extractionState": "manual",
       "localizations": {
@@ -157968,6 +158015,53 @@
         }
       }
     },
+    "Profiter de l'offre de bienvenue": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Willkommensangebot nutzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get the welcome offer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprovechar la oferta de bienvenida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profiter de l'offre de bienvenue"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Approfitta dell'offerta di benvenuto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウェルカムオファーを利用"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aproveitar a oferta de boas-vindas"
+          }
+        }
+      }
+    },
     "Programme": {
       "extractionState": "manual",
       "localizations": {
@@ -163886,6 +163980,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Relevo"
+          }
+        }
+      }
+    },
+    "Relier le calendrier Apple": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Kalender verbinden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link Apple Calendar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vincular el Calendario de Apple"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relier le calendrier Apple"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collega il Calendario Apple"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appleカレンダーと連携"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vincular o Calendário da Apple"
           }
         }
       }
@@ -171077,6 +171218,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nada previsto nesse dia."
+          }
+        }
+      }
+    },
+    "Rien de prévu cette semaine.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Woche nichts geplant."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing planned this week."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada previsto esta semana."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de prévu cette semaine."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente in programma questa settimana."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週の予定はありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada previsto esta semana."
           }
         }
       }
@@ -204874,6 +205062,53 @@
         }
       }
     },
+    "Toute la semaine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die ganze Woche"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The whole week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toda la semana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toute la semaine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutta la settimana"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1週間すべて"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A semana toda"
+          }
+        }
+      }
+    },
     "Toute ta vie,\nau même endroit.": {
       "extractionState": "manual",
       "localizations": {
@@ -224285,100 +224520,6 @@
         }
       }
     },
-    "mois gratuit": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monat kostenlos"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "month free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mes gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mois gratuit"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mese gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "か月無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mês grátis"
-          }
-        }
-      }
-    },
-    "mois gratuits": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monate kostenlos"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "months free"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "meses gratis"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mois gratuits"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mesi gratis"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "か月無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "meses grátis"
-          }
-        }
-      }
-    },
     "moyenne %@": {
       "extractionState": "manual",
       "localizations": {
@@ -227007,6 +227148,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "para as próximas 48 h"
+          }
+        }
+      }
+    },
+    "premier mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ersten Monat"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "primer mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "premier mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "primo mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "か月間"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "primeiro mês"
+          }
+        }
+      }
+    },
+    "premiers mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ersten Monaten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "primeros meses"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "premiers mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "primi mesi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "か月間"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "primeiros meses"
           }
         }
       }

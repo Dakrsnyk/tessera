@@ -187,6 +187,7 @@ private struct IdentityStep: View {
                 .textContentType(.familyName)
             }
             .card(padding: 12)
+            birthDate
             if !first.isEmpty {
                 // What the Home tab will say.
                 HStack(spacing: 8) {
@@ -199,6 +200,34 @@ private struct IdentityStep: View {
         }
         .animation(.snappy, value: first.isEmpty)
         .onAppear { focused = model.settings.profileName.isEmpty }
+    }
+
+    /// The date of birth, optional, kept in one place (« Ma vie »): already given, it is only shown.
+    private var birthDate: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if let birthday = model.life.birthday {
+                DatePicker(tr("Date de naissance"), selection: Binding(
+                    get: { birthday },
+                    set: { date in model.update(\.life) { $0.birthday = DateMath.startOfDay(date) } }
+                ), in: ...Date(), displayedComponents: .date)
+                .environment(\.locale, Fmt.locale)
+                .accessibilityIdentifier("identity-birthday")
+            } else {
+                Button {
+                    model.update(\.life) { $0.birthday = Holidays.make(2000, 1, 1) }
+                } label: {
+                    Label(tr("Ajouter ma date de naissance"), systemImage: "gift")
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity, minHeight: 36, alignment: .leading)
+                }
+                .accessibilityIdentifier("identity-birthday-add")
+            }
+            Text(tr("Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone."))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .card(padding: 12)
     }
 }
 

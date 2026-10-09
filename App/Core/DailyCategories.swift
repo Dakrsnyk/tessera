@@ -13,7 +13,7 @@ enum DailyCategories {
         switch app {
         case .nutrition: ["nutrition"]
         case .fitness: ["workout"]
-        case .planning: ["agenda", "priorities", "reminders", "habits", "classes"]
+        case .planning: ["planning", "priorities", "reminders", "habits"]
         case .finances: ["budget"]
         default: []
         }

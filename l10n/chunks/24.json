@@ -526,5 +526,152 @@
   "uses": [
    "Shared/Domains/Budget.swift:132: case .telecom: tr(\"Téléphone et Internet\")"
   ]
+ },
+ {
+  "key": "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:202: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
+  ]
+ },
+ {
+  "key": "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:204: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
+  ]
+ },
+ {
+  "key": "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement.",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:206: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
+  ]
+ },
+ {
+  "key": "%@ les %@, puis %@",
+  "placeholders": 3,
+  "uses": [
+   "App/Premium/PremiumStore.swift:158: return tr(\"\\(first) les \\(Fmt.plural(months, tr(\"premier mois\"), tr(\"premiers mois\"))), puis \\(regular)\")"
+  ]
+ },
+ {
+  "key": "%@ par période",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PremiumStore.swift:174: default: tr(\"\\(price) par période\")"
+  ]
+ },
+ {
+  "key": "%@ pour 12 mois",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:187: return tr(\"\\(product.displayPrice) pour 12 mois\")"
+  ]
+ },
+ {
+  "key": "%@ pour 12 mois, soit %@ par mois",
+  "placeholders": 2,
+  "uses": [
+   "App/Premium/PaywallView.swift:186: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
+  ]
+ },
+ {
+  "key": "%@ pour commencer, puis %@",
+  "placeholders": 2,
+  "uses": [
+   "App/Premium/PremiumStore.swift:160: return tr(\"\\(offer.displayPrice) pour commencer, puis \\(regular)\")"
+  ]
+ },
+ {
+  "key": "%@, une seule fois, sans abonnement",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:191: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
+  ]
+ },
+ {
+  "key": "%@. Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PaywallView.swift:198: return tr(\"\\(intro). Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.\")"
+  ]
+ },
+ {
+  "key": "Demain %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Core/DailyBrief.swift:333: case 1: return tr(\"Demain \\(time)\")"
+  ]
+ },
+ {
+  "key": "Essai gratuit, puis %@",
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/PremiumStore.swift:162: return tr(\"Essai gratuit, puis \\(regular)\")"
+  ]
+ },
+ {
+  "key": "Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/OnboardingView.swift:225: Text(tr(\"Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.\"))"
+  ]
+ },
+ {
+  "key": "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement.",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:281: Text(tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abo"
+  ]
+ },
+ {
+  "key": "Offre de bienvenue",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:176: if store.introDescription(for: product) != nil { return tr(\"Offre de bienvenue\") }"
+  ]
+ },
+ {
+  "key": "Profiter de l'offre de bienvenue",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:268: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))"
+  ]
+ },
+ {
+  "key": "Relier le calendrier Apple",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:591: Label(tr(\"Relier le calendrier Apple\"), systemImage: \"calendar.badge.plus\")"
+  ]
+ },
+ {
+  "key": "Rien de prévu cette semaine.",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:565: Text(tr(\"Rien de prévu cette semaine.\"))"
+  ]
+ },
+ {
+  "key": "Toute la semaine",
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:573: Text(tr(\"Toute la semaine\"))"
+  ]
+ },
+ {
+  "key": "premier mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumStore.swift:158: return tr(\"\\(first) les \\(Fmt.plural(months, tr(\"premier mois\"), tr(\"premiers mois\"))), puis \\(regular)\")"
+  ]
+ },
+ {
+  "key": "premiers mois",
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumStore.swift:158: return tr(\"\\(first) les \\(Fmt.plural(months, tr(\"premier mois\"), tr(\"premiers mois\"))), puis \\(regular)\")"
+  ]
  }
 ]

@@ -85,6 +85,8 @@ enum DailyBrief {
         var title: String
         var detail: String
         var isHighlighted = false
+        /// The colour of its kind (a class, work, an appointment, a calendar).
+        var colorHex: String?
     }
 
     struct Reminder: Equatable, Identifiable {
@@ -107,8 +109,8 @@ enum DailyBrief {
     enum Tile: Equatable, Identifiable {
         case nutrition(Nutrition)
         case workout(Workout)
-        case classes(title: String, items: [TimedItem])
-        case agenda(title: String, items: [TimedItem])
+        /// What comes next in the schedule and the Apple calendar, over the coming week.
+        case planning(items: [TimedItem])
         case habits(done: Int, items: [Check])
         case water(glasses: Int, goal: Int?)
         case steps(steps: Int, goal: Int?)
@@ -124,8 +126,7 @@ enum DailyBrief {
             switch self {
             case .nutrition: "nutrition"
             case .workout: "workout"
-            case .classes: "classes"
-            case .agenda: "agenda"
+            case .planning: "planning"
             case .habits: "habits"
             case .water: "water"
             case .steps: "steps"
@@ -142,7 +143,7 @@ enum DailyBrief {
         var isWide: Bool {
             switch self {
             case .nutrition, .reminders, .invite: true
-            case let .agenda(_, items), let .classes(_, items): items.count > 3
+            case let .planning(items): items.count > 2
             default: false
             }
         }
@@ -174,13 +175,10 @@ enum DailyBrief {
             add(.workout(workout), score)
         }
 
-        if let classes = classesTile(input) {
-            let score = classes.items.contains(where: \.isHighlighted) ? 100 : (moment == .morning ? 90 : (moment == .day ? 86 : 50))
-            add(.classes(title: classes.title, items: classes.items), score)
-        }
-
-        if let agenda = agendaTile(input) {
-            add(.agenda(title: agenda.title, items: agenda.items), moment == .evening ? 55 : 88)
+        if let planning = planningTile(input) {
+            // Something within two hours, or an exam today, goes first.
+            let soon = planning.contains { $0.date < now.addingTimeInterval(2 * 3_600) || ($0.isHighlighted && DateMath.isSameDay($0.date, now)) }
+            add(.planning(items: planning), planning.isEmpty ? 40 : (soon ? 100 : (moment == .morning ? 90 : (moment == .day ? 86 : 70))))
         }
 
         let reminders = remindersTile(input)
@@ -317,53 +315,42 @@ enum DailyBrief {
         return nil
     }
 
-    // MARK: Classes and agenda
+    // MARK: Planning
 
-    static func classesTile(_ input: Input) -> (title: String, items: [TimedItem])? {
+    /// The next entries of the week: classes, work, appointments and other events of the schedule,
+    /// exams, and the events of the Apple calendar, the nearest first. Nil without any of them.
+    static func planningTile(_ input: Input) -> [TimedItem]? {
         let state = input.student
         let now = input.now
-        guard !state.courses.isEmpty || !state.exams.isEmpty else { return nil }
-        func items(on day: Date, from start: Date?) -> [TimedItem] {
-            let classes = StudentMath.occurrences(state, on: day)
-                .filter { start == nil || $0.end > start! }
-                .map { occurrence -> TimedItem in
-                    let title = state.title(of: occurrence.slot)
-                    return TimedItem(
-                        id: occurrence.slot.id.uuidString + DateMath.dayKey(day),
-                        date: occurrence.start,
-                        time: Fmt.time(occurrence.start, uses24Hour: true),
-                        title: title,
-                        detail: occurrence.slot.room
-                    )
-                }
-            let exams = state.exams
-                .filter { DateMath.isSameDay($0.date, day) && (start == nil || $0.date > start!.addingTimeInterval(-2 * 3_600)) }
-                .map { exam in
-                    TimedItem(id: exam.id.uuidString, date: exam.date, time: Fmt.time(exam.date, uses24Hour: true), title: tr("Examen : \(exam.title)"), detail: exam.room, isHighlighted: true)
-                }
-            return (classes + exams).sorted { $0.date < $1.date }
+        guard !state.slots.isEmpty || !state.exams.isEmpty || !input.events.isEmpty else { return nil }
+        let today = DateMath.startOfDay(now)
+        let horizon = today.addingTimeInterval(7 * 86_400)
+        func when(_ date: Date, allDay: Bool = false) -> String {
+            let days = DateMath.daysBetween(today, date)
+            let time = allDay ? tr("Journée") : Fmt.time(date, uses24Hour: true)
+            switch days {
+            case ...0: return time
+            case 1: return tr("Demain \(time)")
+            default: return "\(Fmt.weekday(date).capitalizedFirst) \(time)"
+            }
         }
-        let moment = Moment(now)
-        let today = items(on: now, from: now)
-        if moment != .evening, !today.isEmpty { return (tr("Cours aujourd'hui"), today) }
-        guard let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: now) else { return nil }
-        if moment == .evening, !today.isEmpty { return (tr("Cours ce soir"), today) }
-        let next = items(on: tomorrow, from: nil)
-        // Tomorrow's classes only in the evening, to prepare the bag.
-        if moment == .evening, !next.isEmpty { return (tr("Cours demain"), next) }
-        return nil
-    }
-
-    static func agendaTile(_ input: Input) -> (title: String, items: [TimedItem])? {
-        let now = input.now
-        let today = input.events
-            .filter { DateMath.isSameDay($0.start, now) && ($0.isAllDay || $0.end > now) }
-            .sorted { $0.start < $1.start }
-        guard !today.isEmpty else { return nil }
-        let items = today.prefix(4).map { event in
-            TimedItem(id: event.id, date: event.start, time: event.isAllDay ? tr("Journée") : Fmt.time(event.start, uses24Hour: true), title: event.title, detail: event.location ?? "")
+        var items: [TimedItem] = []
+        for offset in 0..<7 {
+            guard let day = DateMath.calendar.date(byAdding: .day, value: offset, to: today) else { continue }
+            for occurrence in StudentMath.occurrences(state, on: day) where occurrence.end > now {
+                items.append(TimedItem(id: occurrence.slot.id.uuidString + DateMath.dayKey(day), date: occurrence.start, time: when(occurrence.start),
+                                       title: state.title(of: occurrence.slot), detail: occurrence.slot.room, colorHex: state.colorHex(of: occurrence.slot)))
+            }
         }
-        return (tr("Agenda"), Array(items))
+        for exam in state.exams where exam.date > now.addingTimeInterval(-2 * 3_600) && exam.date < horizon {
+            items.append(TimedItem(id: exam.id.uuidString, date: exam.date, time: when(exam.date), title: tr("Examen : \(exam.title)"), detail: exam.room,
+                                   isHighlighted: true, colorHex: ScheduleKind.course.colorHex))
+        }
+        for event in input.events where (event.isAllDay ? event.end > today : event.end > now) && event.start < horizon {
+            items.append(TimedItem(id: event.id, date: max(event.start, today), time: when(max(event.start, today), allDay: event.isAllDay),
+                                   title: event.title, detail: event.location ?? "", colorHex: event.colorHex))
+        }
+        return Array(items.sorted { $0.date < $1.date }.prefix(5))
     }
 
     // MARK: Reminders
@@ -423,7 +410,7 @@ enum DailyBrief {
             switch space {
             case .nutrition where !ids.contains("nutrition"): .nutrition
             case .fitness where !ids.contains("workout"): .fitness
-            case .student where !ids.contains("classes") && input.student.courses.isEmpty: .student
+            case .student where !ids.contains("planning") && input.student.courses.isEmpty && input.student.slots.isEmpty: .student
             case .budget where !ids.contains("budget"): .budget
             case .habits where !ids.contains("habits"): .habits
             case .productivity where !ids.contains("priorities") && !ids.contains("reminders"): .productivity

@@ -74,7 +74,7 @@ final class AppModel {
             guard let location = settings.weatherLocation, cache.matches(location) else { return .needsLocation }
             return .ready(cache)
         } ?? (settings.weatherLocation == nil ? .needsLocation : .unavailable(nil))
-        events = CalendarService.upcoming()
+        events = CalendarService.upcoming(hours: 7 * 24, limit: 12)
         nutrition = store.state(NutritionState.self)
         fitness = store.state(FitnessState.self)
         budget = store.state(BudgetState.self)
@@ -392,8 +392,9 @@ final class AppModel {
         crypto[coinID] = await CryptoService.load(coinID: coinID, allowNetwork: true)
     }
 
+    /// The calendar's events of the coming week (Mon Quotidien's Planning, the « À venir » widget).
     func refreshEvents() {
-        events = CalendarService.upcoming()
+        events = CalendarService.upcoming(hours: 7 * 24, limit: 12)
     }
 
     /// Data for a preview inside the app: the user's real content and the latest fetched data.

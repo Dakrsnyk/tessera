@@ -56,20 +56,6 @@
   ]
  },
  {
-  "key": "mois gratuit",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PremiumStore.swift:155: case .month: return Fmt.plural(period.value, tr(\"mois gratuit\"), tr(\"mois gratuits\"))"
-  ]
- },
- {
-  "key": "mois gratuits",
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PremiumStore.swift:155: case .month: return Fmt.plural(period.value, tr(\"mois gratuit\"), tr(\"mois gratuits\"))"
-  ]
- },
- {
   "key": "tâche restante",
   "placeholders": 0,
   "uses": [

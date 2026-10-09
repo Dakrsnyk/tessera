@@ -173,23 +173,37 @@ struct PaywallView: View {
     }
 
     private func badge(for product: Product) -> String? {
-        if product.id == PremiumConfiguration.yearlyID {
-            if let trial = store.trialDescription(for: product) { return trial }
-            if let savings = store.yearlySavingsPercent { return "−\(savings) %" }
-        }
+        if store.introDescription(for: product) != nil { return tr("Offre de bienvenue") }
+        if product.id == PremiumConfiguration.yearlyID, let savings = store.yearlySavingsPercent { return "−\(savings) %" }
         if product.id == PremiumConfiguration.lifetimeID { return tr("Paiement unique") }
         return nil
     }
 
     private func subtitle(for product: Product) -> String {
+        if let intro = store.introDescription(for: product) { return intro }
         switch product.id {
         case PremiumConfiguration.yearlyID:
-            if let monthly = store.monthlyEquivalent(of: product) { return tr("\(product.displayPrice) par an, soit \(monthly) par mois") }
-            return tr("\(product.displayPrice) par an")
+            if let monthly = store.monthlyEquivalent(of: product) { return tr("\(product.displayPrice) pour 12 mois, soit \(monthly) par mois") }
+            return tr("\(product.displayPrice) pour 12 mois")
         case PremiumConfiguration.monthlyID:
             return tr("\(product.displayPrice) par mois")
         default:
-            return tr("\(product.displayPrice), une seule fois")
+            return tr("\(product.displayPrice), une seule fois, sans abonnement")
+        }
+    }
+
+    /// What will be charged, and when, before the purchase is confirmed.
+    private func terms(for product: Product) -> String {
+        if let intro = store.introDescription(for: product) {
+            return tr("\(intro). Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.")
+        }
+        switch product.id {
+        case PremiumConfiguration.yearlyID:
+            return tr("\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.")
+        case PremiumConfiguration.monthlyID:
+            return tr("\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.")
+        default:
+            return tr("\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.")
         }
     }
 
@@ -211,10 +225,18 @@ struct PaywallView: View {
 
     private var purchaseBar: some View {
         let product = store.products.first { $0.id == selectedID }
-        let isTrial = product.flatMap { store.trialDescription(for: $0) } != nil
+        let isIntro = product.flatMap { store.introDescription(for: $0) } != nil
         return VStack(spacing: 8) {
             if store.loadState == .loaded {
-                purchaseButton(product: product, isTrial: isTrial)
+                if let product {
+                    Text(terms(for: product))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("paywall-terms")
+                }
+                purchaseButton(product: product, isIntro: isIntro)
             }
             Button {
                 Task {
@@ -236,14 +258,14 @@ struct PaywallView: View {
         .background(.bar)
     }
 
-    private func purchaseButton(product: Product?, isTrial: Bool) -> some View {
+    private func purchaseButton(product: Product?, isIntro: Bool) -> some View {
         Button {
             guard let product else { return }
             Task { await buy(product) }
         } label: {
             HStack {
                 if store.purchasingID != nil { ProgressView().tint(AppFill.onAccent) }
-                Text(isTrial ? tr("Essayer gratuitement") : tr("Continuer"))
+                Text(isIntro ? tr("Profiter de l'offre de bienvenue") : tr("Continuer"))
                     .font(.headline)
                     .foregroundStyle(.onAccent)
             }
@@ -256,7 +278,7 @@ struct PaywallView: View {
 
     private var legal: some View {
         VStack(spacing: 10) {
-            Text(tr("L'abonnement se renouvelle automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. Si tu profites d'un essai gratuit, il prend fin dès l'achat d'un abonnement."))
+            Text(tr("Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement."))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

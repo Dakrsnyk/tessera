@@ -147,8 +147,7 @@ struct DailyLayoutEditor: View {
         switch tile {
         case .nutrition: (tr("Nutrition"), "fork.knife", "F08A24")
         case .workout: (tr("Séance du jour"), "figure.strengthtraining.traditional", "E5484D")
-        case .classes: (tr("Cours"), "graduationcap.fill", "3366FF")
-        case .agenda: (tr("Agenda"), "calendar", "8C6CFF")
+        case .planning: (tr("Planning"), "calendar.day.timeline.left", "3366FF")
         case .habits: (tr("Habitudes"), "repeat", "7FA33A")
         case .water: (tr("Eau"), "drop.fill", "3A8DDE")
         case .steps: (tr("Pas"), "figure.walk", "12A4B5")
