@@ -288,5 +288,20 @@
   "key": "Sans compte, sans pub, sans suivi.",
   "placeholders": 0,
   "uses": []
+ },
+ {
+  "key": "P [protein]",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "G [carbs]",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "L [fat]",
+  "placeholders": 0,
+  "uses": []
  }
 ]

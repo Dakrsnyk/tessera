@@ -722,7 +722,7 @@ struct MarketingLockScreens: View {
     private let setups = ["jade", "aurore", "creme"]
 
     var body: some View {
-        let width: CGFloat = 208
+        let width: CGFloat = 200
         ZStack(alignment: .topLeading) {
             MarketingGround()
             MarketingHeadline(eyebrow: tr("Écran verrouillé"), title: tr("L'écran\nverrouillé\naussi."), subtitle: tr("Des widgets sous l'heure, assortis à ton fond."))
@@ -731,8 +731,8 @@ struct MarketingLockScreens: View {
                 MarketingPhone(width: width) {
                     MarketingSetupScreen { SetupLockScreen(setup: MK.setup(setups[index])) }
                 }
-                .rotationEffect(.degrees(Double(index - 1) * 5))
-                .at(130 + CGFloat(index) * 90 - width / 2, 410 + (index == 1 ? 0 : 30))
+                .rotationEffect(.degrees(Double(index - 1) * 4))
+                .at(116 + CGFloat(index) * 104 - width / 2, 420 + (index == 1 ? 0 : 34))
             }
         }
         .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .topLeading)

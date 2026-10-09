@@ -1562,7 +1562,54 @@ struct TileAccessoryView: View {
         tile.buttons.first(where: \.isProminent) ?? tile.buttons.first
     }
 
-    private var rectangular: some View {
+    @ViewBuilder private var rectangular: some View {
+        if !tile.lockColumns.isEmpty, tile.empty == nil {
+            lockColumns
+        } else {
+            rectangularWithAction
+        }
+    }
+
+    /// The title, then a few figures side by side, each with its bar (the macros).
+    private var lockColumns: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Label(tile.title, systemImage: tile.symbol)
+                .font(.headline)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+                .widgetAccentable()
+            HStack(alignment: .top, spacing: 8) {
+                ForEach(tile.lockColumns) { column in
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack(alignment: .firstTextBaseline, spacing: 3) {
+                            Text(column.title)
+                                .font(.system(size: 11, weight: .bold))
+                                .widgetAccentable()
+                            Text(column.value ?? "")
+                                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        }
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                        if let progress = column.progress {
+                            GeometryReader { geo in
+                                ZStack(alignment: .leading) {
+                                    Capsule().opacity(0.3)
+                                    Capsule()
+                                        .frame(width: max(4, geo.size.width * min(1, max(0, progress))))
+                                        .widgetAccentable()
+                                }
+                            }
+                            .frame(height: 4)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var rectangularWithAction: some View {
         HStack(alignment: .center, spacing: 6) {
             rectangularText
             if let button = lockAction, button.action != .scanFood {

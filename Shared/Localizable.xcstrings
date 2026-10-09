@@ -89818,6 +89818,53 @@
         }
       }
     },
+    "G [carbs]": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "K"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "G"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C"
+          }
+        }
+      }
+    },
     "Gaine le ventre et serre les fessiers.": {
       "extractionState": "manual",
       "localizations": {
@@ -103914,6 +103961,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kefir natural"
+          }
+        }
+      }
+    },
+    "L [fat]": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "F"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "F"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "G"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "G"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "F"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "G"
           }
         }
       }
@@ -141890,6 +141984,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Como está a sua meta de economia."
+          }
+        }
+      }
+    },
+    "P [protein]": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "P"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "P"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "P"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "P"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "P"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "P"
           }
         }
       }

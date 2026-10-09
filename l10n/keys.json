@@ -225,7 +225,7 @@
  "%@ : %@ kcal": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:234: tile.inline = tr(\"\\(budget.meal.title) : \\(TF.int(budget.kcal)) kcal\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:241: tile.inline = tr(\"\\(budget.meal.title) : \\(TF.int(budget.kcal)) kcal\")"
   ]
  },
  "%@ : %@ kg": {
@@ -500,13 +500,13 @@
  "%@ g de protéines aujourd'hui": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:136: tile.inline = tr(\"\\(TF.int(totals.protein)) g de protéines aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:143: tile.inline = tr(\"\\(TF.int(totals.protein)) g de protéines aujourd'hui\")"
   ]
  },
  "%@ g de protéines restantes": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:148: tile.inline = tr(\"\\(TF.int(left)) g de protéines restantes\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:155: tile.inline = tr(\"\\(TF.int(left)) g de protéines restantes\")"
   ]
  },
  "%@ g · %@ kcal": {
@@ -585,7 +585,7 @@
    "App/Screens/Home/MiniAppsRow.swift:67: return totals.kcal > 0 ? tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\") : nil",
    "App/Screens/Spaces/SpacesView.swift:151: return model.profile.knows(.kcalTarget) ? tr(\"\\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes\") : tr(\"\\(TF.int(eaten)) kcal aujourd'hui\")",
    "Shared/Render/Tiles/NutritionTiles.swift:91: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:166: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:173: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")"
   ]
  },
  "%@ kcal brûlées": {
@@ -606,7 +606,7 @@
    "App/Screens/Spaces/SpacesView.swift:151: return model.profile.knows(.kcalTarget) ? tr(\"\\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes\") : tr(\"\\(TF.int(eaten)) kcal aujourd'hui\")",
    "Shared/Data/Insights.swift:229: parts.append(tr(\"\\(left) kcal restantes\"))",
    "Shared/Render/Tiles/NutritionTiles.swift:106: tile.inline = left >= 0 ? tr(\"\\(TF.int(left)) kcal restantes\") : tr(\"+\\(TF.int(-left)) kcal\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:240: tile.inline = tr(\"\\(TF.int(left)) kcal restantes\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:247: tile.inline = tr(\"\\(TF.int(left)) kcal restantes\")"
   ]
  },
  "%@ kcal · %@ g de protéines": {
@@ -1949,7 +1949,7 @@
    "App/Screens/Content/HydrationView.swift:75: Section(tr(\"7 derniers jours\")) {",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:321: MiniSectionTitle(title: tr(\"7 derniers jours\"), detail: tr(\"moyenne \\(Fmt.number(steps.week.reduce(0) { $0 + $1.steps } / max(1, steps.week.count)))\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:185: Text(tr(\"7 derniers jours\")).font(.headline)",
-   "Shared/Render/Tiles/NutritionTiles.swift:173: var tile = Tile(title: tr(\"7 derniers jours\"), symbol: \"chart.bar\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:180: var tile = Tile(title: tr(\"7 derniers jours\"), symbol: \"chart.bar\")"
   ]
  },
  "7 jours": {
@@ -2361,14 +2361,14 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:172: KindInfo(kind: .quickFood, title: tr(\"Ajout rapide\"), summary: tr(\"Tes aliments favoris, ajoutés au journal d'une touche.\"), category: .nutrition, symbol: \"plus.app\", isPremium: true, families: SM, ke",
-   "Shared/Render/Tiles/NutritionTiles.swift:209: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))",
-   "Shared/Render/Tiles/NutritionTiles.swift:212: var tile = Tile(title: tr(\"Ajout rapide\"), symbol: \"plus.app\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:216: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))",
+   "Shared/Render/Tiles/NutritionTiles.swift:219: var tile = Tile(title: tr(\"Ajout rapide\"), symbol: \"plus.app\")"
   ]
  },
  "Ajoute des favoris dans Tessera, espace Nutrition.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:209: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:216: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))"
   ]
  },
  "Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.": {
@@ -12041,6 +12041,12 @@
    "Shared/Domains/Life.swift:126: Holiday(name: tr(\"Fête nationale du Québec\"), date: make(year, 6, 24)),"
   ]
  },
+ "G [carbs]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:123: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
+  ]
+ },
  "Gaine le ventre et serre les fessiers.": {
   "placeholders": 0,
   "uses": [
@@ -13946,6 +13952,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/FoodDatabase.swift:162: f(\"kefir\", tr(\"Kéfir nature\"), 41, 3.8, 4.5, 0.9, 0, 250, tr(\"1 tasse\"), s: 4.6, sf: 0.6, na: 40, chol: 5),"
+  ]
+ },
+ "L [fat]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:123: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
   ]
  },
  "L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers.": {
@@ -17367,7 +17379,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:208: let average = tr(\"Moyenne \\(TF.int(stats.averages.kcal)) kcal\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:186: tile.inline = tr(\"Moyenne \\(TF.int(average)) kcal\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:193: tile.inline = tr(\"Moyenne \\(TF.int(average)) kcal\")"
   ]
  },
  "Moyenne : %@ kcal par jour noté": {
@@ -18620,7 +18632,7 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:146: insightCard(symbol: \"checkmark.seal.fill\", title: tr(\"Objectif atteint\"), message: tr(\"Tu es dans ta cible de calories aujourd'hui.\"), action: nil)",
    "Shared/Render/Tiles/MoneyTiles.swift:112: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:144: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")",
+   "Shared/Render/Tiles/NutritionTiles.swift:151: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")",
    "Shared/Render/Tiles/ProductivityTiles.swift:115: tile.caption = value >= goal ? tr(\"Objectif atteint\") : tr(\"encore \\(Fmt.number(goal - value))\")"
   ]
  },
@@ -19035,6 +19047,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:196: KindInfo(kind: .savingsGoal, title: tr(\"Objectif d'épargne\"), summary: tr(\"Où tu en es de ton objectif d'épargne.\"), category: .finance, symbol: \"banknote\", isPremium: false, families: SM + [circ], ke"
+  ]
+ },
+ "P [protein]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/NutritionTiles.swift:123: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
   ]
  },
  "PROCHAIN VOYAGE": {
@@ -21148,7 +21166,7 @@
   "uses": [
    "Shared/Model/KindCatalog.swift:173: KindInfo(kind: .nextMeal, title: tr(\"Prochain repas\"), summary: tr(\"Ce qu'il reste pour ton prochain repas en calories et en protéines.\"), category: .nutrition, symbol: \"clock.badge.checkmark\", isPrem",
    "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Tessera pour savoir ce qu'i",
-   "Shared/Render/Tiles/NutritionTiles.swift:227: var tile = Tile(title: tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:234: var tile = Tile(title: tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\")"
   ]
  },
  "Prochain repas : %@, environ %@ kcal": {
@@ -22237,7 +22255,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:940: DayCard(title: tr(\"Repas du jour\"), symbol: \"fork.knife\", colorHex: \"F08A24\", route: .app(.nutrition)) {",
    "Shared/Model/KindCatalog.swift:169: KindInfo(kind: .mealsToday, title: tr(\"Repas du jour\"), summary: tr(\"Ce que tu as mangé aujourd'hui, repas par repas.\"), category: .nutrition, symbol: \"list.bullet.rectangle\", isPremium: true, familie",
-   "Shared/Render/Tiles/NutritionTiles.swift:155: var tile = Tile(title: tr(\"Repas du jour\"), symbol: \"list.bullet.rectangle\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:162: var tile = Tile(title: tr(\"Repas du jour\"), symbol: \"list.bullet.rectangle\")"
   ]
  },
  "Repas et calories": {
@@ -23035,7 +23053,7 @@
  "Rien de noté pour l'instant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:158: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:165: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
   ]
  },
  "Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.": {
@@ -24144,7 +24162,7 @@
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:171: combo(\"nutrition-semaine\", tr(\"Semaine nutrition\"), tr(\"Tes calories de la semaine, tes protéines et le prochain repas.\"), .dune, \"F08A24\",",
    "Shared/Model/KindCatalog.swift:170: KindInfo(kind: .nutritionWeek, title: tr(\"Semaine nutrition\"), summary: tr(\"Tes calories des sept derniers jours et ta moyenne.\"), category: .nutrition, symbol: \"chart.bar\", isPremium: true, families:",
-   "Shared/Render/Tiles/NutritionTiles.swift:172: guard days.contains(where: { $0 > 0 }) else { return .empty(tr(\"Semaine nutrition\"), symbol: \"chart.bar\", message: hint) }"
+   "Shared/Render/Tiles/NutritionTiles.swift:179: guard days.contains(where: { $0 > 0 }) else { return .empty(tr(\"Semaine nutrition\"), symbol: \"chart.bar\", message: hint) }"
   ]
  },
  "Semaine précédente": {
@@ -24898,7 +24916,7 @@
  "Suivi : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:202: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:209: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\")"
   ]
  },
  "Suivi d'habitudes": {
@@ -25076,7 +25094,7 @@
  "Sur 30 jours : %@ kcal/j": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:179: tile.detail = tr(\"Sur 30 jours : \\(TF.int(month)) kcal/j\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:186: tile.detail = tr(\"Sur 30 jours : \\(TF.int(month)) kcal/j\")"
   ]
  },
  "Sur l'Accueil": {
@@ -25452,7 +25470,7 @@
   "uses": [
    "App/Screens/Spaces/NutritionSpace.swift:115: ValueRow(title: tr(\"Série de suivi\"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr(\"jour\"), tr(\"jours\")), symbol: \"flame.fill\")",
    "Shared/Model/KindCatalog.swift:171: KindInfo(kind: .nutritionStreak, title: tr(\"Série de suivi\"), summary: tr(\"Les jours d'affilée où tu as noté ce que tu manges.\"), category: .nutrition, symbol: \"flame.fill\", isPremium: true, families:",
-   "Shared/Render/Tiles/NutritionTiles.swift:193: var tile = Tile(title: tr(\"Série de suivi\"), symbol: \"flame.fill\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:200: var tile = Tile(title: tr(\"Série de suivi\"), symbol: \"flame.fill\")"
   ]
  },
  "Série et repos": {
@@ -29095,7 +29113,7 @@
  "aliment noté": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:158: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:165: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
   ]
  },
  "aliment noté aujourd'hui": {
@@ -29113,7 +29131,7 @@
  "aliments notés": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:158: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:165: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
   ]
  },
  "aliments notés aujourd'hui": {
@@ -29217,7 +29235,7 @@
  "aujourd'hui · touche pour ajouter": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:215: tile.caption = tr(\"aujourd'hui · touche pour ajouter\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:222: tile.caption = tr(\"aujourd'hui · touche pour ajouter\")"
   ]
  },
  "aux 2 semaines": {
@@ -29599,7 +29617,7 @@
  "dont %@ g de protéines": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:232: tile.detail = tr(\"dont \\(TF.int(budget.protein)) g de protéines\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:239: tile.detail = tr(\"dont \\(TF.int(budget.protein)) g de protéines\")"
   ]
  },
  "du %@": {
@@ -30172,7 +30190,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/NutritionTiles.swift:87: tile.caption = tr(\"mangées aujourd'hui\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:133: tile.caption = tr(\"mangées aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:140: tile.caption = tr(\"mangées aujourd'hui\")"
   ]
  },
  "marge %@": {
@@ -30260,13 +30278,13 @@
  "moyenne par jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:177: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:184: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
   ]
  },
  "moyenne · objectif %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:177: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:184: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
   ]
  },
  "même heure qu'ici": {
@@ -30285,7 +30303,7 @@
  "note un repas pour continuer": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:196: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:203: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
   ]
  },
  "notes": {
@@ -30575,7 +30593,7 @@
  "pour le %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:231: tile.caption = tr(\"pour le \\(budget.meal.title.lowercased())\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:238: tile.caption = tr(\"pour le \\(budget.meal.title.lowercased())\")"
   ]
  },
  "pour les prochaines 48 h": {
@@ -30677,13 +30695,13 @@
  "repas noté aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:196: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:203: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
   ]
  },
  "restantes pour la soirée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:239: tile.caption = tr(\"restantes pour la soirée\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:246: tile.caption = tr(\"restantes pour la soirée\")"
   ]
  },
  "restantes sur %@": {
@@ -32091,7 +32109,7 @@
  "à trouver sur %@ g": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:144: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:151: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
   ]
  },
  "échéance": {

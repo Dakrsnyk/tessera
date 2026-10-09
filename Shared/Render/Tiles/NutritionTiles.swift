@@ -120,7 +120,14 @@ enum NutritionTiles {
             TileSegment(label: tr("Glucides"), value: totals.carbs * 4, colorHex: "F2A33A"),
             TileSegment(label: tr("Lipides"), value: totals.fat * 9, colorHex: "3366FF"),
         ])
-        tile.inline = "P \(TF.int(totals.protein)) · G \(TF.int(totals.carbs)) · L \(TF.int(totals.fat))"
+        let letters = (tr("P", context: "protein"), tr("G", context: "carbs"), tr("L", context: "fat"))
+        tile.inline = "\(letters.0) \(TF.int(totals.protein)) · \(letters.1) \(TF.int(totals.carbs)) · \(letters.2) \(TF.int(totals.fat))"
+        // On the Lock Screen: the three macros, each with its bar (the calories have their own widget).
+        tile.lockColumns = [
+            TileRow(id: "p", title: letters.0, value: "\(TF.int(totals.protein)) g", progress: known.protein ? totals.protein / max(1, state.goals.protein) : nil),
+            TileRow(id: "c", title: letters.1, value: "\(TF.int(totals.carbs)) g", progress: known.carbs ? totals.carbs / max(1, state.goals.carbs) : nil),
+            TileRow(id: "f", title: letters.2, value: "\(TF.int(totals.fat)) g", progress: known.fat ? totals.fat / max(1, state.goals.fat) : nil),
+        ]
         return tile
     }
 

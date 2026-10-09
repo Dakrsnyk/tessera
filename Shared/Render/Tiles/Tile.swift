@@ -118,6 +118,9 @@ struct Tile: Hashable {
     var footnote: String? = nil
     /// Small widgets show the rows (a checklist or a list) instead of the big value.
     var compactRows = false
+    /// Lock Screen rectangular widget: a few figures side by side under the title, each with its bar
+    /// (title = a short label, value, progress).
+    var lockColumns: [TileRow] = []
 
     static func empty(_ title: String, symbol: String, message: String, emptySymbol: String? = nil) -> Tile {
         var tile = Tile(title: title, symbol: symbol)
