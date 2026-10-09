@@ -1,21 +1,18 @@
-# App Store screenshots: one scene per line, in the order of the App Store page.
+# App Store screenshots: one scene per line, in the order of the App Store page (Apple takes 10 at most).
 # scene              real screen that goes inside the phone (none: the scene is drawn entirely by the app)
 # A scene `pano-<name>-1` / `pano-<name>-2` is one picture across two screenshots.
 # The CI renders them with [marketing]; scripts/marketing_compose.py assembles the report into final PNGs.
 hero
 pano-setups-1
 pano-setups-2
-pano-lock-1
-pano-lock-2
 nutrition            app-nutrition
 fitness              app-fitness
 daily                home
 studio               editor-v2
-lockscreens
-store                store
 planning             app-planning-week
-finances             app-finances
 apps
-wall
-privacy
 lock
+# Also drawn by MarketingShots.swift, not on the page (put a line back to render it):
+# pano-lock-1, pano-lock-2, lockscreens, wall, privacy
+# store                store
+# finances             app-finances
