@@ -135,7 +135,7 @@ struct TimetableGrid: View {
     @Binding var selected: Int
     let onTap: (StudentMath.ClassOccurrence) -> Void
 
-    private let perMinute: CGFloat = 0.62
+    private let perMinute: CGFloat = 0.8
     private let letters = ["L", "M", "M", "J", "V", "S", "D"]
 
     var body: some View {
@@ -155,11 +155,17 @@ struct TimetableGrid: View {
                         Haptics.tap()
                         selected = day
                     } label: {
-                        Text(letters[day - 1])
-                            .font(.caption.weight(.bold))
-                            .foregroundStyle(day == selected ? Color.white : (day == today ? Color(hex: Studies.accentHex) : Color.secondary))
-                            .frame(maxWidth: .infinity, minHeight: 26)
-                            .background(day == selected ? Color(hex: Studies.accentHex) : Color.clear, in: Capsule())
+                        // The day and its date, so the week reads at a glance.
+                        VStack(spacing: 0) {
+                            Text(letters[day - 1])
+                                .font(.caption2.weight(.bold))
+                            Text(week[safe: day - 1].map { "\(DateMath.calendar.component(.day, from: $0))" } ?? "")
+                                .font(.subheadline.weight(.bold))
+                                .monospacedDigit()
+                        }
+                        .foregroundStyle(day == selected ? Color.white : (day == today ? Color(hex: Studies.accentHex) : Color.primary))
+                        .frame(maxWidth: .infinity, minHeight: 38)
+                        .background(day == selected ? Color(hex: Studies.accentHex) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
@@ -177,6 +183,18 @@ struct TimetableGrid: View {
                 ForEach(days, id: \.self) { day in
                     column(day: day, entries: entries[safe: day - 1] ?? [], first: first, height: height)
                 }
+            }
+            // A thin line at each hour, across the days.
+            .background(alignment: .topLeading) {
+                ZStack(alignment: .topLeading) {
+                    ForEach(Array(stride(from: first, through: last, by: 60)), id: \.self) { minute in
+                        Rectangle()
+                            .fill(Color.primary.opacity(0.08))
+                            .frame(height: 0.5)
+                            .offset(y: CGFloat(minute - first) * perMinute)
+                    }
+                }
+                .padding(.leading, 30)
             }
         }
         .card(padding: 12)
