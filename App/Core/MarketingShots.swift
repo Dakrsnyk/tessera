@@ -7,7 +7,7 @@ import WidgetKit
 /// Mode: `-screenshotScreen marketing-<scene>`; the scenes are listed in scripts/marketing_scenes.txt
 /// (the CI renders them with `[marketing]` in a commit message, scripts/marketing_compose.py assembles them).
 /// `pano-<name>-1` and `pano-<name>-2` are the two halves of one scene twice as wide.
-/// The look: the red and orange of the icon, big white titles, whole phones (some tilted),
+/// The look: a white-to-grey ground, big dark titles, whole phones (some tilted),
 /// real screens and widgets popping out of them.
 struct MarketingView: View {
     let scene: String
@@ -91,6 +91,8 @@ enum MK {
     static let orange = Color(hex: "FF8A3D")
     static let deepRed = Color(hex: "B3202B")
     static let ink = Color(hex: "1A1516")
+    /// The shadows under phones and cards on the light ground.
+    static let shadow = Color(hex: "1F2128")
     static let cream = Color(hex: "F7F4EF")
 
     /// The wallpaper of the Lock Screens drawn by the scenes (one of the Store's wallpapers).
@@ -141,19 +143,19 @@ enum MK {
 
 // MARK: - Building blocks
 
-/// The ground of every screenshot: the icon's red melting into its orange. Relative stops, so the
+/// The ground of every screenshot: white at the top fading into a soft grey. Relative stops, so the
 /// same view fills one screenshot or a panorama.
 struct MarketingGround: View {
     var body: some View {
         ZStack {
-            LinearGradient(colors: [MK.red, Color(hex: "F2603A"), MK.orange], startPoint: .topLeading, endPoint: .bottomTrailing)
-            RadialGradient(colors: [Color.white.opacity(0.2), .clear], center: UnitPoint(x: 0.9, y: 0.04), startRadius: 0, endRadius: 440)
-            RadialGradient(colors: [MK.deepRed.opacity(0.45), .clear], center: UnitPoint(x: 0.05, y: 1), startRadius: 0, endRadius: 520)
+            LinearGradient(colors: [Color.white, Color(hex: "F1F1F3"), Color(hex: "D9DADF")], startPoint: .top, endPoint: .bottom)
+            RadialGradient(colors: [Color.white.opacity(0.9), .clear], center: UnitPoint(x: 0.15, y: 0.02), startRadius: 0, endRadius: 420)
+            RadialGradient(colors: [Color(hex: "C4C6CD").opacity(0.45), .clear], center: UnitPoint(x: 0.95, y: 1), startRadius: 0, endRadius: 520)
         }
     }
 }
 
-/// The big white title at the top left, as on the best App Store pages.
+/// The big title at the top left, as on the best App Store pages.
 struct MarketingHeadline: View {
     var eyebrow: String?
     let title: String
@@ -168,23 +170,23 @@ struct MarketingHeadline: View {
                     Text(tr("Tessera"))
                         .font(.system(size: 21, weight: .semibold, design: .rounded))
                 }
-                .foregroundStyle(Color.white)
+                .foregroundStyle(MK.ink)
             } else if let eyebrow {
                 Text(eyebrow.uppercased())
                     .font(.system(size: 13, weight: .heavy))
                     .tracking(1.6)
-                    .foregroundStyle(Color.white.opacity(0.78))
+                    .foregroundStyle(MK.red)
             }
             Text(title)
                 .font(.system(size: 44, weight: .bold))
                 .tracking(-1.2)
                 .lineSpacing(-4)
-                .foregroundStyle(Color.white)
+                .foregroundStyle(MK.ink)
                 .fixedSize(horizontal: false, vertical: true)
             if let subtitle {
                 Text(subtitle)
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundStyle(Color.white.opacity(0.86))
+                    .foregroundStyle(MK.ink.opacity(0.58))
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -222,7 +224,7 @@ struct MarketingPhone<Screen: View>: View {
             RoundedRectangle(cornerRadius: outerRadius, style: .continuous)
                 .fill(Color(hex: "16171A"))
                 // Only the body casts a shadow: nothing drawn on the screen darkens the real capture.
-                .shadow(color: Color(hex: "5A0E14").opacity(0.45), radius: 36, x: 0, y: 24)
+                .shadow(color: MK.shadow.opacity(0.25), radius: 36, x: 0, y: 24)
                 .overlay {
                     RoundedRectangle(cornerRadius: outerRadius, style: .continuous)
                         .strokeBorder(
@@ -418,7 +420,7 @@ struct MarketingLockChip: View {
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
         }
         .environment(\.colorScheme, .dark)
-        .shadow(color: Color(hex: "5A0E14").opacity(0.4), radius: 26, x: 0, y: 16)
+        .shadow(color: MK.shadow.opacity(0.22), radius: 26, x: 0, y: 16)
     }
 }
 
@@ -433,7 +435,7 @@ struct MarketingFloating: View {
     var body: some View {
         let design = MK.design(kind, theme, accent)
         WidgetPreview(design: design, family: family, payload: MK.payload(design), width: width, date: MK.now)
-            .shadow(color: Color(hex: "5A0E14").opacity(0.35), radius: 24, x: 0, y: 14)
+            .shadow(color: MK.shadow.opacity(0.19), radius: 24, x: 0, y: 14)
     }
 }
 
@@ -471,7 +473,7 @@ struct MarketingBubble: View {
             .padding(.horizontal, size * 0.18)
         }
         .frame(width: size, height: size)
-        .shadow(color: Color(hex: "5A0E14").opacity(0.3), radius: 18, x: 0, y: 10)
+        .shadow(color: MK.shadow.opacity(0.17), radius: 18, x: 0, y: 10)
     }
 }
 
@@ -493,18 +495,18 @@ struct MarketingPill: View {
         .padding(.horizontal, 18)
         .frame(height: 48)
         .background(Color.white, in: Capsule())
-        .shadow(color: Color(hex: "5A0E14").opacity(0.3), radius: 18, x: 0, y: 10)
+        .shadow(color: MK.shadow.opacity(0.17), radius: 18, x: 0, y: 10)
     }
 }
 
-/// A wide white ring around the seam of a panorama: it joins the two screenshots without cutting any text.
+/// A wide soft ring around the seam of a panorama: it joins the two screenshots without cutting any text.
 struct MarketingArc: View {
     var diameter: CGFloat = 760
 
     var body: some View {
         Circle()
             .trim(from: 0.04, to: 0.8)
-            .stroke(Color.white.opacity(0.14), style: StrokeStyle(lineWidth: 30, lineCap: .round))
+            .stroke(Color.black.opacity(0.045), style: StrokeStyle(lineWidth: 30, lineCap: .round))
             .rotationEffect(.degrees(-90))
             .frame(width: diameter, height: diameter)
     }
@@ -599,10 +601,10 @@ struct MarketingPanoLock: View {
             MarketingLiveActivity()
                 .frame(width: 400)
                 .rotationEffect(.degrees(-3))
-                .shadow(color: Color(hex: "3A0A10").opacity(0.5), radius: 30, x: 0, y: 18)
+                .shadow(color: MK.shadow.opacity(0.28), radius: 30, x: 0, y: 18)
                 .at(460, 300)
             MarketingIsland()
-                .shadow(color: Color(hex: "3A0A10").opacity(0.45), radius: 20, x: 0, y: 10)
+                .shadow(color: MK.shadow.opacity(0.25), radius: 20, x: 0, y: 10)
                 .at(510, 528)
             MarketingLockChip(designs: [(MK.design(.macros, .minimal), .accessoryRectangular), (MK.design(.caloriesLeft, .minimal), .accessoryCircular)], scale: 1.3)
                 .rotationEffect(.degrees(2.5))
@@ -680,7 +682,7 @@ struct MarketingFitness: View {
                 .at(278, 360)
             MarketingLiveActivity()
                 .frame(width: 392)
-                .shadow(color: Color(hex: "3A0A10").opacity(0.45), radius: 26, x: 0, y: 16)
+                .shadow(color: MK.shadow.opacity(0.25), radius: 26, x: 0, y: 16)
                 .at(24, 778)
         }
     }
@@ -820,7 +822,8 @@ struct MarketingApps: View {
         .padding(16)
         .frame(width: 186, height: 146, alignment: .topLeading)
         .background(Color.white, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .shadow(color: Color(hex: "5A0E14").opacity(0.22), radius: 18, x: 0, y: 10)
+        .overlay(RoundedRectangle(cornerRadius: 24, style: .continuous).strokeBorder(Color.black.opacity(0.05), lineWidth: 1))
+        .shadow(color: MK.shadow.opacity(0.12), radius: 18, x: 0, y: 10)
     }
 }
 
@@ -860,10 +863,10 @@ struct MarketingPrivacy: View {
             VStack(spacing: 40) {
                 Image(systemName: "lock.shield.fill")
                     .font(.system(size: 100, weight: .regular))
-                    .foregroundStyle(Color.white)
+                    .foregroundStyle(MK.ink)
                     .frame(width: 210, height: 210)
-                    .background(Color.white.opacity(0.16), in: Circle())
-                    .overlay(Circle().strokeBorder(Color.white.opacity(0.3), lineWidth: 1))
+                    .background(Color.white, in: Circle())
+                    .shadow(color: MK.shadow.opacity(0.14), radius: 24, x: 0, y: 12)
                 VStack(spacing: 12) {
                     row("iphone", tr("Tout reste sur ton iPhone"))
                     row("person.crop.circle.badge.xmark", tr("Aucun compte à créer"))
@@ -890,7 +893,8 @@ struct MarketingPrivacy: View {
         .padding(.horizontal, 22)
         .frame(width: 384, height: 66)
         .background(Color.white, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .shadow(color: Color(hex: "5A0E14").opacity(0.2), radius: 14, x: 0, y: 8)
+        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Color.black.opacity(0.05), lineWidth: 1))
+        .shadow(color: MK.shadow.opacity(0.11), radius: 14, x: 0, y: 8)
     }
 }
 #endif
