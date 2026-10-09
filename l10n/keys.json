@@ -194,7 +194,7 @@
  "%@ / mois d'ici %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:352: parts.append(tr(\"\\(TF.money(monthly, currency)) / mois d'ici \\(Fmt.monthYear(deadline))\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:399: parts.append(tr(\"\\(TF.money(monthly, currency)) / mois d'ici \\(Fmt.monthYear(deadline))\"))"
   ]
  },
  "%@ / sem.": {
@@ -391,13 +391,13 @@
  "%@ de moins que le mois dernier à la même date": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:138: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:185: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
   ]
  },
  "%@ de plus que le mois dernier à la même date": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:138: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:185: Label(difference > 0 ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\") : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\""
   ]
  },
  "%@ de ton année en cours": {
@@ -427,25 +427,25 @@
  "%@ dépensés · %@ avant la fin du mois": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:153: guard BudgetMath.remaining(state, at: now) > 0 else { return tr(\"\\(TF.money(spent, currency)) dépensés · \\(dayText) avant la fin du mois\") }"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:200: guard BudgetMath.remaining(state, at: now) > 0 else { return tr(\"\\(TF.money(spent, currency)) dépensés · \\(dayText) avant la fin du mois\") }"
   ]
  },
  "%@ dépensés · %@ par jour pendant %@": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:154: return tr(\"\\(TF.money(spent, currency)) dépensés · \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour pendant \\(dayText)\")"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:201: return tr(\"\\(TF.money(spent, currency)) dépensés · \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour pendant \\(dayText)\")"
   ]
  },
  "%@ dépensés · dernier jour du mois": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:152: if days <= 1 { return tr(\"\\(TF.money(spent, currency)) dépensés · dernier jour du mois\") }"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:199: if days <= 1 { return tr(\"\\(TF.money(spent, currency)) dépensés · dernier jour du mois\") }"
   ]
  },
  "%@ en 14 jours": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:220: MiniSectionTitle(title: tr(\"Factures à venir\"), detail: tr(\"\\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:267: MiniSectionTitle(title: tr(\"Factures à venir\"), detail: tr(\"\\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours\"))"
   ]
  },
  "%@ en cours": {
@@ -866,7 +866,7 @@
  "%@ sur %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:350: var parts = [tr(\"\\(TF.money(goal.saved, currency)) sur \\(TF.money(goal.target, currency))\")]",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:397: var parts = [tr(\"\\(TF.money(goal.saved, currency)) sur \\(TF.money(goal.target, currency))\")]",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:715: MiniSectionTitle(title: tr(\"Cette semaine\"), detail: tr(\"\\(Fmt.minutes(studied)) sur \\(Fmt.hours(state.weeklyStudyGoalHours))\"))",
    "App/Screens/MyWidgets/MyWidgetsView.swift:284: parts.append(tr(\"\\(index + 1) sur \\(designs.count)\"))",
    "App/Screens/Spaces/StudentSpace.swift:139: ValueRow(title: tr(\"Cette semaine\"), value: tr(\"\\(Fmt.minutes(StudentMath.studyMinutes(state, weekOf: now))) sur \\(Fmt.hours(state.weeklyStudyGoalHours))\"), symbol: \"clock\")"
@@ -1874,7 +1874,7 @@
  "3 mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:375: case .quarter: tr(\"3 mois\")"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:425: case .quarter: tr(\"3 mois\")"
   ]
  },
  "3 sur 5": {
@@ -2660,6 +2660,12 @@
    "App/Screens/Profile/DataItemViews.swift:251: link(model.isFilled(.moneyFlow) ? tr(\"Gérer mes revenus et dépenses\") : tr(\"Ajouter mon salaire et mes dépenses fixes\")) { MoneyView() }"
   ]
  },
+ "Ajouter ton solde de départ": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:507: Label(state.openingBalance == nil ? tr(\"Ajouter ton solde de départ\") : tr(\"Modifier le solde de départ\"),"
+  ]
+ },
  "Ajouter un aliment": {
   "placeholders": 0,
   "uses": [
@@ -3235,7 +3241,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:49: case .year: tr(\"Année\")",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:376: case .year: tr(\"Année\")",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:426: case .year: tr(\"Année\")",
    "Shared/Model/DesignOptions.swift:12: case .year: tr(\"Année\")"
   ]
  },
@@ -3739,6 +3745,12 @@
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:459: DatePicker(tr(\"Au\"), selection: $customEnd, in: ...Date(), displayedComponents: .date)"
   ]
  },
+ "Au début du": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:93: DatePicker(tr(\"Au début du\"), selection: $date, in: ...Date(), displayedComponents: .date)"
+  ]
+ },
  "Au moins jusqu'aux cuisses parallèles au sol si ta mobilité le permet, dos neutre.": {
   "placeholders": 0,
   "uses": [
@@ -4168,7 +4180,7 @@
  "Autre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Budget.swift:238: BudgetCategory(id: BudgetState.fixedID(6), name: tr(\"Autre\"), symbol: \"square.grid.2x2\", colorHex: \"64748B\", monthlyLimit: 0),",
+   "Shared/Domains/Budget.swift:245: BudgetCategory(id: BudgetState.fixedID(6), name: tr(\"Autre\"), symbol: \"square.grid.2x2\", colorHex: \"64748B\", monthlyLimit: 0),",
    "Shared/Domains/ExerciseLibrary.swift:89: case .other: tr(\"Autre\")",
    "Shared/Domains/Profile.swift:253: case .other: tr(\"Autre\")",
    "Shared/Domains/Travel.swift:62: case .other: tr(\"Autre\")"
@@ -5186,13 +5198,13 @@
    "App/Screens/Home/DailyLayoutEditor.swift:154: case .budget: (tr(\"Budget\"), \"creditcard.fill\", \"2B9A66\")",
    "App/Screens/Home/DailySection.swift:721: DayCard(title: tr(\"Budget\"), symbol: \"creditcard.fill\", colorHex: \"2F8F7A\", route: .space(.budget)) {",
    "App/Screens/Home/MyInfoSection.swift:37: add(\"budget\", \"creditcard\", tr(\"Budget\"), profile.knows(.monthlyBudget) ? TF.money(budget.monthlyBudget, currency) : nil)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:58: NumberRow(title: tr(\"Budget\"), value: $amount, unit: model.settings.currencyCode)"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:62: NumberRow(title: tr(\"Budget\"), value: $amount, unit: model.settings.currencyCode)"
   ]
  },
  "Budget %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:119: Text(tr(\"Budget \\(TF.money(state.monthlyBudget, currency))\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:166: Text(tr(\"Budget \\(TF.money(state.monthlyBudget, currency))\"))"
   ]
  },
  "Budget du jour": {
@@ -5206,7 +5218,7 @@
   "uses": [
    "App/Core/DataItems.swift:103: case .monthlyBudget: tr(\"Budget du mois\")",
    "App/Screens/Explore/StoreCombos.swift:211: combo(\"budget-mois\", tr(\"Budget du mois\"), tr(\"Tes dépenses, ce qu'il reste et ton épargne.\"), .light, \"FF6B57\",",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:56: SheetForm(title: tr(\"Budget du mois\"), canSave: amount >= 0, onSave: { model.setMonthlyBudget(amount) }) {",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:60: SheetForm(title: tr(\"Budget du mois\"), canSave: amount >= 0, onSave: { model.setMonthlyBudget(amount) }) {",
    "App/Screens/Spaces/BudgetSpace.swift:25: NumberRow(title: tr(\"Budget du mois\"), value: Binding(get: { state.monthlyBudget }, set: { value in model.setMonthlyBudget(value) }), unit: currency)"
   ]
  },
@@ -5939,8 +5951,8 @@
   "uses": [
    "App/Screens/Home/DailyLayoutEditor.swift:62: Text(tr(\"Catégories\"))",
    "App/Screens/Home/MyInfoCenter.swift:178: areaList(followed.isEmpty ? tr(\"Catégories\") : tr(\"Autres catégories\"), others)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:191: MiniSectionTitle(title: tr(\"Catégories\"), detail: Fmt.monthYear(now).capitalizedFirst)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:272: MiniRow(symbol: \"chart.pie.fill\", colorHex: \"8C6CFF\", title: tr(\"Catégories\"), detail: tr(\"Répartition et limites\"), value: \"\\(state.categories.count)\")"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:238: MiniSectionTitle(title: tr(\"Catégories\"), detail: Fmt.monthYear(now).capitalizedFirst)",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:319: MiniRow(symbol: \"chart.pie.fill\", colorHex: \"8C6CFF\", title: tr(\"Catégories\"), detail: tr(\"Répartition et limites\"), value: \"\\(state.categories.count)\")"
   ]
  },
  "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.": {
@@ -6032,6 +6044,12 @@
    "App/Screens/MiniApps/Car/CarApp.swift:254: MiniRow(symbol: \"creditcard.fill\", colorHex: \"2F8F7A\", title: tr(\"Coûts\"), detail: tr(\"Ce que la voiture coûte vraiment chaque mois\"))"
   ]
  },
+ "Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:96: Text(tr(\"Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera.\"))"
+  ]
+ },
  "Ce que tu as mangé aujourd'hui, repas par repas.": {
   "placeholders": 0,
   "uses": [
@@ -6077,7 +6095,7 @@
  "Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:60: Text(tr(\"Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:64: Text(tr(\"Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.\"))"
   ]
  },
  "Ce que tu veux accomplir, pour des widgets qui t'y ramènent.": {
@@ -10062,7 +10080,7 @@
  "Dépassé ce mois-ci": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:114: Text(over ? tr(\"Dépassé ce mois-ci\") : tr(\"Reste ce mois-ci\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:161: Text(over ? tr(\"Dépassé ce mois-ci\") : tr(\"Reste ce mois-ci\"))"
   ]
  },
  "Dépassé de %@": {
@@ -10082,7 +10100,7 @@
   "uses": [
    "App/Screens/Content/MoneyView.swift:124: Text(tr(\"Dépense\")).tag(false)",
    "App/Screens/MiniApps/Business/BusinessApp.swift:137: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:84: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex) { sheet = .expense(nil) }",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:131: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex) { sheet = .expense(nil) }",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:183: Text(expense.note.isEmpty ? (category?.name ?? tr(\"Dépense\")) : expense.note).foregroundStyle(.primary)"
   ]
  },
@@ -10133,7 +10151,7 @@
  "Dépenses et revenus, mois par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:266: MiniRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Opérations\"), detail: tr(\"Dépenses et revenus, mois par mois\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:313: MiniRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Opérations\"), detail: tr(\"Dépenses et revenus, mois par mois\"))"
   ]
  },
  "Dépenses par catégorie": {
@@ -10214,7 +10232,7 @@
  "Détail des catégories": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:198: Text(status.count > 4 ? tr(\"Les \\(status.count) catégories\") : tr(\"Détail des catégories\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:245: Text(status.count > 4 ? tr(\"Les \\(status.count) catégories\") : tr(\"Détail des catégories\"))"
   ]
  },
  "Détails": {
@@ -11244,14 +11262,14 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:105: case .bills: tr(\"Factures et abonnements\")",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:277: MiniRow(symbol: \"doc.text.fill\", colorHex: \"F2A33A\", title: tr(\"Factures et abonnements\"),",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:324: MiniRow(symbol: \"doc.text.fill\", colorHex: \"F2A33A\", title: tr(\"Factures et abonnements\"),",
    "App/Screens/Spaces/BudgetSpace.swift:87: Section(tr(\"Factures et abonnements\")) {"
   ]
  },
  "Factures à venir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:220: MiniSectionTitle(title: tr(\"Factures à venir\"), detail: tr(\"\\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:267: MiniSectionTitle(title: tr(\"Factures à venir\"), detail: tr(\"\\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours\"))",
    "Shared/Model/KindCatalog.swift:195: KindInfo(kind: .billsUpcoming, title: tr(\"Factures à venir\"), summary: tr(\"Tes prochaines factures et leurs échéances.\"), category: .finance, symbol: \"doc.text\", isPremium: true, families: SML + [rect",
    "Shared/Render/Tiles/MoneyTiles.swift:88: var tile = Tile(title: tr(\"Factures à venir\"), symbol: \"doc.text\")"
   ]
@@ -11632,7 +11650,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:764: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:100: .navigationTitle(tr(\"Finances\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:147: .navigationTitle(tr(\"Finances\"))",
    "App/Screens/MiniApps/MiniApp.swift:14: case .finances: tr(\"Finances\")",
    "Shared/Domains/Profile.swift:129: case .money: tr(\"Finances\")"
   ]
@@ -15223,7 +15241,7 @@
  "Les %@ catégories": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:198: Text(status.count > 4 ? tr(\"Les \\(status.count) catégories\") : tr(\"Détail des catégories\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:245: Text(status.count > 4 ? tr(\"Les \\(status.count) catégories\") : tr(\"Détail des catégories\"))"
   ]
  },
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement.": {
@@ -15834,7 +15852,7 @@
  "Loyer, Internet, abonnements…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:278: detail: state.bills.isEmpty ? tr(\"Loyer, Internet, abonnements…\") : tr(\"\\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:325: detail: state.bills.isEmpty ? tr(\"Loyer, Internet, abonnements…\") : tr(\"\\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois\"))"
   ]
  },
  "Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.": {
@@ -16254,7 +16272,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/Budget.swift:130: case .housing: tr(\"Maison\")",
-   "Shared/Domains/Budget.swift:237: BudgetCategory(id: BudgetState.fixedID(5), name: tr(\"Maison\"), symbol: \"house\", colorHex: \"B7791F\", monthlyLimit: 150),"
+   "Shared/Domains/Budget.swift:244: BudgetCategory(id: BudgetState.fixedID(5), name: tr(\"Maison\"), symbol: \"house\", colorHex: \"B7791F\", monthlyLimit: 150),"
   ]
  },
  "Mangue": {
@@ -16972,6 +16990,12 @@
    "App/Screens/Spaces/BudgetSpace.swift:244: SheetForm(title: isNew ? tr(\"Revenu\") : tr(\"Modifier le revenu\"), canSave: income.amount > 0, onSave: save) {"
   ]
  },
+ "Modifier le solde de départ": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:507: Label(state.openingBalance == nil ? tr(\"Ajouter ton solde de départ\") : tr(\"Modifier le solde de départ\"),"
+  ]
+ },
  "Modifier le voyage": {
   "placeholders": 0,
   "uses": [
@@ -17013,7 +17037,7 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:48: case .month: tr(\"Mois\")",
    "App/Screens/MiniApps/Business/BusinessApp.swift:279: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:374: case .month: tr(\"Mois\")",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:424: case .month: tr(\"Mois\")",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:105: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: tr(\"Mois\"), detail: tr(\"Le calendrier du mois\"))"
   ]
  },
@@ -17183,9 +17207,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/MoneyView.swift:131: TextField(tr(\"Montant\"), text: $amountText)",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:83: Text(tr(\"Montant\"))",
    "App/Screens/MiniApps/Travel/TravelApp.swift:339: NumberRow(title: tr(\"Montant\"), value: $expense.amount, unit: expense.currencyCode)",
-   "App/Screens/MiniApps/Travel/TravelPages.swift:175: TextField(tr(\"Montant\"), text: $budgetText)",
-   "App/Screens/Spaces/BudgetSpace.swift:200: NumberRow(title: tr(\"Montant\"), value: $expense.amount, unit: model.settings.currencyCode)"
+   "App/Screens/MiniApps/Travel/TravelPages.swift:175: TextField(tr(\"Montant\"), text: $budgetText)"
   ]
  },
  "Montant à convertir": {
@@ -18076,7 +18100,7 @@
  "Note tes revenus et tes dépenses : ton solde s'affichera ici.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:462: guard let first = points.first else { return tr(\"Note tes revenus et tes dépenses : ton solde s'affichera ici.\") }"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:526: return tr(\"Note tes revenus et tes dépenses : ton solde s'affichera ici.\")"
   ]
  },
  "Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls.": {
@@ -18810,7 +18834,7 @@
  "Objectifs et valeur nette": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:284: detail: state.accounts.isEmpty ? tr(\"Objectifs et valeur nette\") : tr(\"Valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:331: detail: state.accounts.isEmpty ? tr(\"Objectifs et valeur nette\") : tr(\"Valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))"
   ]
  },
  "Obliques": {
@@ -18915,7 +18939,7 @@
  "Opérations": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:266: MiniRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Opérations\"), detail: tr(\"Dépenses et revenus, mois par mois\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:313: MiniRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Opérations\"), detail: tr(\"Dépenses et revenus, mois par mois\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:89: .navigationTitle(tr(\"Opérations\"))"
   ]
  },
@@ -21617,7 +21641,7 @@
    "App/Screens/Editor/KindOptionsSection.swift:57: EditorSection(title: tr(\"Période\")) {",
    "App/Screens/Editor/KindOptionsSection.swift:58: Picker(tr(\"Période\"), selection: $design.options.progressUnit) {",
    "App/Screens/MiniApps/Business/BusinessApp.swift:124: Picker(tr(\"Période\"), selection: $period) {",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:408: Picker(tr(\"Période\"), selection: $period.animation(.snappy)) {"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:459: Picker(tr(\"Période\"), selection: $period.animation(.snappy)) {"
   ]
  },
  "Période précédente": {
@@ -22616,7 +22640,7 @@
  "Reste ce mois-ci": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:114: Text(over ? tr(\"Dépassé ce mois-ci\") : tr(\"Reste ce mois-ci\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:161: Text(over ? tr(\"Dépassé ce mois-ci\") : tr(\"Reste ce mois-ci\"))"
   ]
  },
  "Reste du mois": {
@@ -22685,7 +22709,7 @@
  "Restos": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Budget.swift:234: BudgetCategory(id: BudgetState.fixedID(2), name: tr(\"Restos\"), symbol: \"fork.knife\", colorHex: \"F06A3C\", monthlyLimit: 200),"
+   "Shared/Domains/Budget.swift:241: BudgetCategory(id: BudgetState.fixedID(2), name: tr(\"Restos\"), symbol: \"fork.knife\", colorHex: \"F06A3C\", monthlyLimit: 200),"
   ]
  },
  "Retenir sa respiration.": {
@@ -22728,6 +22752,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/FitnessSpace.swift:164: Button(tr(\"Retirer le dernier exercice\"), role: .destructive) {"
+  ]
+ },
+ "Retirer le solde de départ": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:100: Button(tr(\"Retirer le solde de départ\"), role: .destructive) {"
   ]
  },
  "Retirer un verre": {
@@ -22810,7 +22840,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/MoneyView.swift:123: Text(tr(\"Revenu\")).tag(true)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:86: MiniActionButton(title: tr(\"Revenu\"), symbol: \"plus\", colorHex: Finances.incomeHex, isProminent: false) { sheet = .income(nil) }",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:133: MiniActionButton(title: tr(\"Revenu\"), symbol: \"plus\", colorHex: Finances.incomeHex, isProminent: false) { sheet = .income(nil) }",
    "App/Screens/Profile/ProfileTopics.swift:429: ProfileNumberField(title: tr(\"Revenu\"), unit: currencySymbol, value: profileBinding(\\.monthlyIncome), decimals: false, identifier: \"money-income\")",
    "App/Screens/Spaces/BudgetSpace.swift:244: SheetForm(title: isNew ? tr(\"Revenu\") : tr(\"Modifier le revenu\"), canSave: income.amount > 0, onSave: save) {"
   ]
@@ -22847,8 +22877,8 @@
   "uses": [
    "App/Screens/Content/MoneyView.swift:34: itemsSection(title: tr(\"Revenus\"), isIncome: true, items: money.items.filter(\\.isIncome), currency: currency)",
    "App/Screens/Explore/StoreCombos.swift:149: combo(\"mrr-jour\", tr(\"Revenus\"), tr(\"Tes revenus récurrents et les ventes du jour.\"), .lagoon, \"2F8F7A\",",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:169: MiniStat(title: tr(\"Revenus\"), value: TF.money(earned, currency), detail: tr(\"ce mois-ci\"), colorHex: Finances.incomeHex)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:171: MiniStat(title: tr(\"Revenus\"), value: TF.money(expected, currency), detail: tr(\"prévus (Mes informations)\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:216: MiniStat(title: tr(\"Revenus\"), value: TF.money(earned, currency), detail: tr(\"ce mois-ci\"), colorHex: Finances.incomeHex)",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:218: MiniStat(title: tr(\"Revenus\"), value: TF.money(expected, currency), detail: tr(\"prévus (Mes informations)\"))"
   ]
  },
  "Revenus %@ : %@": {
@@ -22880,7 +22910,7 @@
  "Revenus moins dépenses depuis le %@, factures et montants fixes compris.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:463: return tr(\"Revenus moins dépenses depuis le \\(Fmt.shortDay(first.date)), factures et montants fixes compris.\")"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:528: return tr(\"Revenus moins dépenses depuis le \\(Fmt.shortDay(first.date)), factures et montants fixes compris.\")"
   ]
  },
  "Revenus trimestriels": {
@@ -23528,7 +23558,7 @@
  "Répartition et limites": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:272: MiniRow(symbol: \"chart.pie.fill\", colorHex: \"8C6CFF\", title: tr(\"Catégories\"), detail: tr(\"Répartition et limites\"), value: \"\\(state.categories.count)\")"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:319: MiniRow(symbol: \"chart.pie.fill\", colorHex: \"8C6CFF\", title: tr(\"Catégories\"), detail: tr(\"Répartition et limites\"), value: \"\\(state.categories.count)\")"
   ]
  },
  "Réponse": {
@@ -23848,7 +23878,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:185: Label(tr(\"Dépense fixe · \\(category?.name ?? tr(\"Sans catégorie\"))\"), systemImage: \"repeat\")",
-   "Shared/Domains/Budget.swift:412: var name: String { category?.name ?? tr(\"Sans catégorie\") }"
+   "Shared/Domains/Budget.swift:419: var name: String { category?.name ?? tr(\"Sans catégorie\") }"
   ]
  },
  "Sans cigarette": {
@@ -24236,7 +24266,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:56: .accessibilityLabel(Text(tr(\"Semaine précédente\")))",
    "App/Screens/MiniApps/WeekViews.swift:66: .accessibilityLabel(Text(tr(\"Semaine précédente\")))",
-   "App/Screens/MiniApps/WeekViews.swift:451: .accessibilityLabel(Text(tr(\"Semaine précédente\")))"
+   "App/Screens/MiniApps/WeekViews.swift:453: .accessibilityLabel(Text(tr(\"Semaine précédente\")))"
   ]
  },
  "Semaine suivante": {
@@ -24244,7 +24274,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:74: .accessibilityLabel(Text(tr(\"Semaine suivante\")))",
    "App/Screens/MiniApps/WeekViews.swift:75: .accessibilityLabel(Text(tr(\"Semaine suivante\")))",
-   "App/Screens/MiniApps/WeekViews.swift:458: .accessibilityLabel(Text(tr(\"Semaine suivante\")))"
+   "App/Screens/MiniApps/WeekViews.swift:460: .accessibilityLabel(Text(tr(\"Semaine suivante\")))"
   ]
  },
  "Serif": {
@@ -24475,7 +24505,7 @@
  "Six mois, moyennes et comparaisons": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:289: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Évolution\"), detail: tr(\"Six mois, moyennes et comparaisons\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:336: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Évolution\"), detail: tr(\"Six mois, moyennes et comparaisons\"))"
   ]
  },
  "Six widgets assortis, dans le même style, ajoutés d'une touche à Mes widgets.": {
@@ -24552,9 +24582,21 @@
  "Solde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:175: MiniStat(title: tr(\"Solde\"), value: TF.money(balance, currency), detail: earned > 0 ? tr(\"jusqu'ici\") : tr(\"estimé\"),",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:398: Text(tr(\"Solde\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:222: MiniStat(title: tr(\"Solde\"), value: TF.money(balance, currency), detail: earned > 0 ? tr(\"jusqu'ici\") : tr(\"estimé\"),",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:449: Text(state.openingBalance == nil ? tr(\"Solde\") : tr(\"Solde du compte\"))",
    "App/Screens/Spaces/BudgetSpace.swift:435: NumberRow(title: tr(\"Solde\"), value: $account.balance, unit: model.settings.currencyCode)"
+  ]
+ },
+ "Solde de départ": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:80: SheetForm(title: tr(\"Solde de départ\"), canSave: amount != nil, onSave: { model.setOpeningBalance(amount, on: date) }) {"
+  ]
+ },
+ "Solde du compte": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:449: Text(state.openingBalance == nil ? tr(\"Solde\") : tr(\"Solde du compte\"))"
   ]
  },
  "Solde net": {
@@ -24608,7 +24650,7 @@
  "Sorties": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Budget.swift:236: BudgetCategory(id: BudgetState.fixedID(4), name: tr(\"Sorties\"), symbol: \"ticket\", colorHex: \"8C6CFF\", monthlyLimit: 150),"
+   "Shared/Domains/Budget.swift:243: BudgetCategory(id: BudgetState.fixedID(4), name: tr(\"Sorties\"), symbol: \"ticket\", colorHex: \"8C6CFF\", monthlyLimit: 150),"
   ]
  },
  "Soulevé de terre": {
@@ -26618,7 +26660,7 @@
  "Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:94: Text(tr(\"Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:141: Text(tr(\"Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.\"))"
   ]
  },
  "Tessera/1.0 (%@)": {
@@ -27817,7 +27859,7 @@
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:423: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voyages\")]",
    "Shared/Domains/Budget.swift:134: case .transport: tr(\"Transport\")",
-   "Shared/Domains/Budget.swift:235: BudgetCategory(id: BudgetState.fixedID(3), name: tr(\"Transport\"), symbol: \"bus\", colorHex: \"3366FF\", monthlyLimit: 150),",
+   "Shared/Domains/Budget.swift:242: BudgetCategory(id: BudgetState.fixedID(3), name: tr(\"Transport\"), symbol: \"bus\", colorHex: \"3366FF\", monthlyLimit: 150),",
    "Shared/Domains/Travel.swift:57: case .transport: tr(\"Transport\")"
   ]
  },
@@ -28402,7 +28444,7 @@
  "Valeur nette %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:284: detail: state.accounts.isEmpty ? tr(\"Objectifs et valeur nette\") : tr(\"Valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:331: detail: state.accounts.isEmpty ? tr(\"Objectifs et valeur nette\") : tr(\"Valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))",
    "Shared/Render/Tiles/MoneyTiles.swift:141: tile.inline = tr(\"Valeur nette \\(TF.money(worth, currency))\")"
   ]
  },
@@ -29326,7 +29368,7 @@
  "atteint": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:354: parts.append(tr(\"atteint\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:401: parts.append(tr(\"atteint\"))"
   ]
  },
  "au compteur": {
@@ -29483,8 +29525,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:225: note: kpi.isSnapshot ? tr(\"ce mois-ci\") : nil)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:169: MiniStat(title: tr(\"Revenus\"), value: TF.money(earned, currency), detail: tr(\"ce mois-ci\"), colorHex: Finances.incomeHex)",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:173: MiniStat(title: tr(\"Dépenses\"), value: TF.money(spent, currency), detail: tr(\"ce mois-ci\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:216: MiniStat(title: tr(\"Revenus\"), value: TF.money(earned, currency), detail: tr(\"ce mois-ci\"), colorHex: Finances.incomeHex)",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:220: MiniStat(title: tr(\"Dépenses\"), value: TF.money(spent, currency), detail: tr(\"ce mois-ci\"))",
    "Shared/Render/Tiles/BusinessTiles.swift:33: tile.caption = tr(\"ce mois-ci\")"
   ]
  },
@@ -29875,7 +29917,7 @@
  "estimé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:175: MiniStat(title: tr(\"Solde\"), value: TF.money(balance, currency), detail: earned > 0 ? tr(\"jusqu'ici\") : tr(\"estimé\"),"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:222: MiniStat(title: tr(\"Solde\"), value: TF.money(balance, currency), detail: earned > 0 ? tr(\"jusqu'ici\") : tr(\"estimé\"),"
   ]
  },
  "estimées aujourd'hui": {
@@ -30135,7 +30177,7 @@
   "uses": [
    "App/Screens/Content/HabitsView.swift:107: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Home/DailySection.swift:1019: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:151: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:198: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:233: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
   ]
  },
@@ -30164,7 +30206,7 @@
   "uses": [
    "App/Screens/Content/HabitsView.swift:107: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Home/DailySection.swift:1019: Text(tr(\"Objectif atteint \\(Fmt.plural(reached, tr(\"jour\"), tr(\"jours\"))) sur 7\"))",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:151: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:198: let dayText = Fmt.plural(days, tr(\"jour\"), tr(\"jours\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:233: return tr(\"\\(average) · \\(Fmt.plural(stats.daysOnTarget, tr(\"jour\"), tr(\"jours\"))) sur \\(stats.trackedDays) dans l'objectif\")"
   ]
  },
@@ -30197,7 +30239,7 @@
  "jusqu'ici": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:175: MiniStat(title: tr(\"Solde\"), value: TF.money(balance, currency), detail: earned > 0 ? tr(\"jusqu'ici\") : tr(\"estimé\"),"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:222: MiniStat(title: tr(\"Solde\"), value: TF.money(balance, currency), detail: earned > 0 ? tr(\"jusqu'ici\") : tr(\"estimé\"),"
   ]
  },
  "jusqu'à %@": {
@@ -30826,7 +30868,7 @@
  "prévus (Mes informations)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:171: MiniStat(title: tr(\"Revenus\"), value: TF.money(expected, currency), detail: tr(\"prévus (Mes informations)\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:218: MiniStat(title: tr(\"Revenus\"), value: TF.money(expected, currency), detail: tr(\"prévus (Mes informations)\"))"
   ]
  },
  "rafales %@": {
@@ -31519,6 +31561,12 @@
    "App/Screens/MiniApps/Travel/TravelPages.swift:294: .navigationTitle(tr(\"À ne pas oublier\"))"
   ]
  },
+ "À partir de %@ le %@, puis tes revenus et tes dépenses, factures et montants fixes compris.": {
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:523: return tr(\"À partir de \\(TF.money(amount, currency)) le \\(Fmt.shortDay(date)), puis tes revenus et tes dépenses, factures et montants fixes compris.\")"
+  ]
+ },
  "À propos": {
   "placeholders": 0,
   "uses": [
@@ -31602,6 +31650,7 @@
  "À renseigner": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:86: TextField(tr(\"À renseigner\"), value: $amount, format: .number.locale(Fmt.locale))",
    "App/Screens/Profile/DataItemViews.swift:78: Text(tr(\"À renseigner\"))",
    "App/Screens/Spaces/SpaceForms.swift:102: TextField(tr(\"À renseigner\"), value: $value, format: .number.locale(Fmt.locale))"
   ]
@@ -31930,7 +31979,7 @@
  "Épargne": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:246: MiniSectionTitle(title: tr(\"Épargne\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:293: MiniSectionTitle(title: tr(\"Épargne\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:395: .navigationTitle(tr(\"Épargne\"))",
    "App/Screens/Spaces/BudgetSpace.swift:113: Section(tr(\"Épargne\")) {",
    "Shared/Data/SampleData.swift:282: Account(name: tr(\"Épargne\"), balance: 6_400),"
@@ -31939,7 +31988,7 @@
  "Épargne et comptes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:283: MiniRow(symbol: \"banknote.fill\", colorHex: Finances.incomeHex, title: tr(\"Épargne et comptes\"),"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:330: MiniRow(symbol: \"banknote.fill\", colorHex: Finances.incomeHex, title: tr(\"Épargne et comptes\"),"
   ]
  },
  "Épargne visée": {
@@ -32202,7 +32251,7 @@
  "Évolution": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:289: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Évolution\"), detail: tr(\"Six mois, moyennes et comparaisons\"))",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:336: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Évolution\"), detail: tr(\"Six mois, moyennes et comparaisons\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:480: .navigationTitle(tr(\"Évolution\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:538: .navigationTitle(tr(\"Évolution\"))",
    "Shared/Model/WidgetStyle.swift:84: case .evolution: tr(\"Évolution\")"
@@ -32211,7 +32260,7 @@
  "Évolution du solde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:450: .accessibilityLabel(Text(tr(\"Évolution du solde\")))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:501: .accessibilityLabel(Text(tr(\"Évolution du solde\")))"
   ]
  },
  "Événement": {

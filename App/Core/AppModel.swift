@@ -691,6 +691,15 @@ extension AppModel {
         markProvided(.monthlyBudget)
     }
 
+    /// « Solde de départ »: what the account held at the start of a day; nil takes it away (the
+    /// balance chart starts from zero again).
+    func setOpeningBalance(_ amount: Double?, on date: Date) {
+        update(\.budget) {
+            $0.openingBalance = amount
+            $0.openingDate = amount == nil ? nil : DateMath.startOfDay(date)
+        }
+    }
+
     func setBusinessName(_ name: String) {
         update(\.business) { $0.name = name }
         markProvided(.businessName)

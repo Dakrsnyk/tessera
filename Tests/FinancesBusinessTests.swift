@@ -52,6 +52,31 @@ final class FinancesBusinessTests: XCTestCase {
         XCTAssertTrue(BudgetMath.balanceHistory(state, from: september(12), now: september(10)).isEmpty)
     }
 
+    func testTheBalanceStartsFromTheOpeningBalance() {
+        var state = BudgetState()
+        state.addIncome(IncomeEntry(amount: 1_500, label: "Salaire", date: september(1)))
+        state.add(Expense(amount: 125, categoryID: BudgetState.fixedID(1), date: september(3)))
+        state.add(Expense(amount: 50, categoryID: BudgetState.fixedID(2), date: september(5)))
+        // 1 000 on the account at the start of the 5th: what came before is taken back from it.
+        state.openingBalance = 1_000
+        state.openingDate = september(5, 0)
+        let points = BudgetMath.balanceHistory(state, from: september(1), now: september(10))
+        XCTAssertEqual(points.count, 10)
+        XCTAssertEqual(points[0].balance, 1_125, "Before the opening day: 1 000 minus what the 1st to the 4th brought")
+        XCTAssertEqual(points[3].balance, 1_000, "The evening before: the opening balance")
+        XCTAssertEqual(points[4].balance, 950, "The 5th's expense comes after")
+        XCTAssertEqual(points.last?.balance, 950)
+
+        // An opening balance before the period: the operations since are added to it.
+        state.openingDate = august(20, 0)
+        XCTAssertEqual(BudgetMath.balanceHistory(state, from: september(1), now: september(10)).last?.balance, 2_325)
+
+        // Saved and read back.
+        let decoded = try? JSONDecoder().decode(BudgetState.self, from: JSONEncoder().encode(state))
+        XCTAssertEqual(decoded?.openingBalance, 1_000)
+        XCTAssertEqual(decoded?.openingDate, august(20, 0))
+    }
+
     func testCategoriesComparedWithTheirLimits() {
         var state = BudgetState()
         state.categories[0].monthlyLimit = 100

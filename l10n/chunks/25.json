@@ -443,5 +443,45 @@
   "key": "Semaine prochaine",
   "placeholders": 0,
   "uses": []
+ },
+ {
+  "key": "Solde de départ",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Au début du",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Retirer le solde de départ",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Solde du compte",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Ajouter ton solde de départ",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Modifier le solde de départ",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "À partir de %@ le %@, puis tes revenus et tes dépenses, factures et montants fixes compris.",
+  "placeholders": 2,
+  "uses": []
  }
 ]

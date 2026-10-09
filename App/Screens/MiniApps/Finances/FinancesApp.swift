@@ -12,6 +12,8 @@ enum FinanceSheet: Identifiable {
     /// A fixed income or expense of « Revenus et dépenses fixes ».
     case flow(MoneyItem)
     case budget
+    /// « Solde de départ », for the balance chart.
+    case opening
 
     var id: String {
         switch self {
@@ -23,6 +25,7 @@ enum FinanceSheet: Identifiable {
         case let .category(category): "category-\(category.id)"
         case let .flow(item): "flow-\(item.id)"
         case .budget: "budget"
+        case .opening: "opening"
         }
     }
 
@@ -37,6 +40,7 @@ enum FinanceSheet: Identifiable {
         case let .category(category): CategoryEditor(category: category)
         case let .flow(item): MoneyItemEditor(item: item, isNew: false)
         case .budget: MonthlyBudgetEditor()
+        case .opening: OpeningBalanceEditor()
         }
     }
 }
@@ -64,6 +68,49 @@ struct MonthlyBudgetEditor: View {
     }
 }
 
+/// « Solde de départ »: what the account held at the start of a day. The balance chart starts from it,
+/// then follows what is noted; without it, the chart shows what came in minus what went out.
+struct OpeningBalanceEditor: View {
+    @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
+    @State private var amount: Double?
+    @State private var date = Date()
+
+    var body: some View {
+        SheetForm(title: tr("Solde de départ"), canSave: amount != nil, onSave: { model.setOpeningBalance(amount, on: date) }) {
+            Section {
+                HStack {
+                    Text(tr("Montant"))
+                    Spacer()
+                    // A balance can be negative (an overdraft): a keyboard with the minus sign.
+                    TextField(tr("À renseigner"), value: $amount, format: .number.locale(Fmt.locale))
+                        .keyboardType(.numbersAndPunctuation)
+                        .multilineTextAlignment(.trailing)
+                        .frame(maxWidth: 140)
+                        .accessibilityIdentifier("opening-amount")
+                    Text(UnitText.display(model.settings.currencyCode)).foregroundStyle(Color.secondary)
+                }
+                DatePicker(tr("Au début du"), selection: $date, in: ...Date(), displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+            } footer: {
+                Text(tr("Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera."))
+            }
+            if model.budget.openingBalance != nil {
+                Section {
+                    Button(tr("Retirer le solde de départ"), role: .destructive) {
+                        model.setOpeningBalance(nil, on: date)
+                        dismiss()
+                    }
+                }
+            }
+        }
+        .onAppear {
+            amount = model.budget.openingBalance
+            date = model.budget.openingDate ?? Date()
+        }
+    }
+}
+
 /// The Finances mini-app: the balance as it went (a chart), what is left this month, what came in and
 /// went out, the categories, the bills coming and the savings; then every operation, the evolution
 /// and the accounts.
@@ -78,7 +125,7 @@ struct FinancesAppView: View {
         let now = Date()
         let state = model.budget
         MiniAppScroll {
-            BalanceChartCard(state: state, currency: currency)
+            BalanceChartCard(state: state, currency: currency) { sheet = .opening }
             hero(state: state, now: now)
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex) { sheet = .expense(nil) }
@@ -358,10 +405,13 @@ struct GoalProgressRow: View {
 }
 
 /// The balance as it went, at the top of Finances: what came in minus what went out, day by day, over
-/// the month, three months or the year (from zero at the start of the period).
+/// the month, three months or the year: from the « Solde de départ » when there is one, otherwise from
+/// zero at the start of the period.
 private struct BalanceChartCard: View {
     let state: BudgetState
     let currency: String
+    /// Opens « Solde de départ ».
+    let onEditOpening: () -> Void
     @State private var period: Period = .month
 
     enum Period: String, CaseIterable, Identifiable {
@@ -396,7 +446,7 @@ private struct BalanceChartCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(tr("Solde"))
+                    Text(state.openingBalance == nil ? tr("Solde") : tr("Solde du compte"))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
                     Text(TF.money(balance, currency))
@@ -452,15 +502,29 @@ private struct BalanceChartCard: View {
             Text(caption(points))
                 .font(.caption)
                 .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Button(action: onEditOpening) {
+                Label(state.openingBalance == nil ? tr("Ajouter ton solde de départ") : tr("Modifier le solde de départ"),
+                      systemImage: state.openingBalance == nil ? "plus.circle.fill" : "pencil")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color(hex: Finances.accentHex))
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("finances-opening")
         }
         .card()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("finances-balance")
     }
 
-    /// What came in and went out over the period, and since when.
+    /// Where the balance starts from, and what it counts.
     private func caption(_ points: [BudgetMath.BalancePoint]) -> String {
-        guard let first = points.first else { return tr("Note tes revenus et tes dépenses : ton solde s'affichera ici.") }
+        if let amount = state.openingBalance, let date = state.openingDate {
+            return tr("À partir de \(TF.money(amount, currency)) le \(Fmt.shortDay(date)), puis tes revenus et tes dépenses, factures et montants fixes compris.")
+        }
+        guard let first = points.first, points.contains(where: { $0.balance != 0 }) else {
+            return tr("Note tes revenus et tes dépenses : ton solde s'affichera ici.")
+        }
         return tr("Revenus moins dépenses depuis le \(Fmt.shortDay(first.date)), factures et montants fixes compris.")
     }
 }

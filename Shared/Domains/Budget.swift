@@ -207,9 +207,14 @@ struct BudgetState: Codable, Hashable {
     var fixedFlows: [MoneyItem] = []
     /// Their first date when an item has none of its own.
     var fixedFlowsStart: Date?
+    /// « Solde de départ »: what the account held at the start of `openingDate`, so that the balance
+    /// chart shows the real balance (nil: the chart starts from zero).
+    var openingBalance: Double?
+    var openingDate: Date?
 
     enum CodingKeys: String, CodingKey {
         case monthlyBudget, categories, expenses, quickExpenses, bills, goals, accounts, netWorthHistory, incomes, fixedFlows, fixedFlowsStart
+        case openingBalance, openingDate
     }
 
     init() {}
@@ -227,6 +232,8 @@ struct BudgetState: Codable, Hashable {
         incomes = c.value(.incomes, [])
         fixedFlows = c.value(.fixedFlows, [])
         fixedFlowsStart = try? c.decodeIfPresent(Date.self, forKey: .fixedFlowsStart)
+        openingBalance = try? c.decodeIfPresent(Double.self, forKey: .openingBalance)
+        openingDate = try? c.decodeIfPresent(Date.self, forKey: .openingDate)
     }
 
     static let defaultCategories: [BudgetCategory] = [
@@ -492,13 +499,20 @@ enum BudgetMath {
         var id: Date { date }
     }
 
-    /// The balance day by day from `start` to today, from zero at the start: what came in minus what
-    /// went out, the fixed incomes and expenses on their dates.
+    /// The balance day by day from `start` to today: what came in minus what went out, the fixed
+    /// incomes and expenses on their dates. From the « Solde de départ » when there is one (before
+    /// its day, the operations noted since are taken back), otherwise from zero at the start.
     static func balanceHistory(_ state: BudgetState, from start: Date, now: Date = Date()) -> [BalancePoint] {
+        let calendar = DateMath.calendar
         let first = DateMath.startOfDay(start)
         let last = DateMath.startOfDay(now)
-        guard first <= last, let stop = DateMath.calendar.date(byAdding: .day, value: 1, to: last) else { return [] }
-        let interval = DateInterval(start: first, end: stop.addingTimeInterval(-1))
+        guard first <= last else { return [] }
+        let opening = state.openingBalance.map { (amount: $0, day: DateMath.startOfDay(state.openingDate ?? first)) }
+        // The operations of the period, and of the days between it and the opening balance.
+        let from = min(first, opening?.day ?? first)
+        let to = max(last, opening?.day ?? last)
+        guard let stop = calendar.date(byAdding: .day, value: 1, to: to) else { return [] }
+        let interval = DateInterval(start: from, end: stop.addingTimeInterval(-1))
         var change: [String: Double] = [:]
         for income in incomes(state, in: interval, now: now) {
             change[DateMath.dayKey(income.date), default: 0] += income.amount
@@ -506,13 +520,30 @@ enum BudgetMath {
         for expense in expenses(state, in: interval, now: now) {
             change[DateMath.dayKey(expense.date), default: 0] -= expense.amount
         }
-        var points: [BalancePoint] = []
+        /// What the days from `a` (included) to `b` (excluded) changed.
+        func net(_ a: Date, _ b: Date) -> Double {
+            var total = 0.0
+            var day = a
+            var count = 0
+            while day < b, count < 20_000 {
+                total += change[DateMath.dayKey(day)] ?? 0
+                guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
+                day = next
+                count += 1
+            }
+            return total
+        }
+        // The balance at the start of the period's first day.
         var balance = 0.0
+        if let opening {
+            balance = opening.day <= first ? opening.amount + net(opening.day, first) : opening.amount - net(first, opening.day)
+        }
+        var points: [BalancePoint] = []
         var cursor = first
         while cursor <= last, points.count < 800 {
             balance += change[DateMath.dayKey(cursor)] ?? 0
             points.append(BalancePoint(date: cursor, balance: balance))
-            guard let next = DateMath.calendar.date(byAdding: .day, value: 1, to: cursor) else { break }
+            guard let next = calendar.date(byAdding: .day, value: 1, to: cursor) else { break }
             cursor = next
         }
         return points
