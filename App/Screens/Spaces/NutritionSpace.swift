@@ -157,7 +157,6 @@ struct FoodSearchView: View {
     @State private var scan: ScanState?
     /// A custom food prefilled from a barcode (and the product's name when Open Food Facts has it).
     @State private var customDraft: FoodItem?
-    @State private var showsMealPhoto = false
 
     private enum ScanState: Equatable {
         case looking(String)
@@ -194,13 +193,6 @@ struct FoodSearchView: View {
                 Section {
                     ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
-                        Button {
-                            showsMealPhoto = true
-                        } label: {
-                            Label(tr("Photo du repas"), systemImage: "camera.fill")
-                        }
-                        .buttonStyle(.bordered)
-                        .accessibilityIdentifier("meal-photo")
                         if DataScannerViewController.isSupported {
                             Button {
                                 showsScanner = true
@@ -326,9 +318,6 @@ struct FoodSearchView: View {
             .sheet(item: $selected) { food in
                 FoodLogSheet(food: food, presetMeal: presetMeal, day: day) { dismiss() }
             }
-            .sheet(isPresented: $showsMealPhoto) {
-                MealPhotoSheet(presetMeal: presetMeal, day: day) { dismiss() }
-            }
             .sheet(item: $loggedMeal) { saved in
                 SavedMealLogSheet(saved: saved, presetMeal: presetMeal, day: day) { dismiss() }
             }
@@ -341,6 +330,7 @@ struct FoodSearchView: View {
                         showsScanner = false
                     }
                     .ignoresSafeArea(edges: .bottom)
+                    .overlay { ScanFrame() }
                     .navigationTitle(tr("Scanner un aliment"))
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
@@ -764,6 +754,57 @@ struct NutritionGoalsEditor: View {
 }
 
 // MARK: - Barcode scanner
+
+/// The small square the barcode goes in, the camera dimmed around it.
+private struct ScanFrame: View {
+    var body: some View {
+        GeometryReader { geo in
+            let side = min(geo.size.width * 0.6, 240)
+            let square = CGRect(x: (geo.size.width - side) / 2, y: (geo.size.height - side) / 2 - 40, width: side, height: side)
+            ZStack {
+                Path { path in
+                    path.addRect(CGRect(origin: .zero, size: geo.size))
+                    path.addRoundedRect(in: square, cornerSize: CGSize(width: 24, height: 24), style: .continuous)
+                }
+                .fill(Color.black.opacity(0.42), style: FillStyle(eoFill: true))
+                ScanCorners()
+                    .stroke(Color.white, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
+                    .frame(width: side, height: side)
+                    .position(x: square.midX, y: square.midY)
+                Text(tr("Place le code-barres dans le carré"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.white)
+                    .multilineTextAlignment(.center)
+                    .shadow(color: .black.opacity(0.4), radius: 3, y: 1)
+                    .frame(width: geo.size.width - 48)
+                    .position(x: square.midX, y: square.maxY + 32)
+            }
+        }
+        .allowsHitTesting(false)
+    }
+}
+
+/// The four rounded corners of the scanning square.
+private struct ScanCorners: Shape {
+    func path(in rect: CGRect) -> Path {
+        let radius: CGFloat = 24
+        let arm: CGFloat = 40
+        var path = Path()
+        let corners: [(CGPoint, CGFloat, CGFloat)] = [
+            (CGPoint(x: rect.minX, y: rect.minY), 1, 1),
+            (CGPoint(x: rect.maxX, y: rect.minY), -1, 1),
+            (CGPoint(x: rect.maxX, y: rect.maxY), -1, -1),
+            (CGPoint(x: rect.minX, y: rect.maxY), 1, -1),
+        ]
+        for (corner, dx, dy) in corners {
+            path.move(to: CGPoint(x: corner.x, y: corner.y + dy * arm))
+            path.addLine(to: CGPoint(x: corner.x, y: corner.y + dy * radius))
+            path.addQuadCurve(to: CGPoint(x: corner.x + dx * radius, y: corner.y), control: corner)
+            path.addLine(to: CGPoint(x: corner.x + dx * arm, y: corner.y))
+        }
+        return path
+    }
+}
 
 /// Live barcode scanning with VisionKit (devices with a camera and iOS 16+).
 struct BarcodeScannerView: UIViewControllerRepresentable {

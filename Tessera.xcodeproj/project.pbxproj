@@ -472,7 +472,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Tessera;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier un repas : la photo est analysée sur ton iPhone.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Tessera lit tes pas du jour pour « Mon Quotidien ». Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Tessera enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";
@@ -515,7 +515,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Tessera;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier un repas : la photo est analysée sur ton iPhone.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Tessera lit tes pas du jour pour « Mon Quotidien ». Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Tessera enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";

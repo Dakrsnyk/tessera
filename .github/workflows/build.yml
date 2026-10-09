@@ -537,6 +537,8 @@ jobs:
               grep -hE "BUILD (SUCCEEDED|FAILED)|error:" stack-build-o.log | head -10 || true
               grep -hE "Test Case .*(passed|failed)|crash|Crash|TEST (SUCCEEDED|FAILED)|EXC_|stack" stack-o.log | head -40 || true
             fi
+            APPDIR=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+            echo "privacy manifest: app $([ -f $APPDIR/PrivacyInfo.xcprivacy ] && echo yes || echo MISSING), widget $([ -f $APPDIR/PlugIns/TesseraWidgets.appex/PrivacyInfo.xcprivacy ] && echo yes || echo MISSING)"
             echo "---- widget extension bundle ----"
             ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex 2>/dev/null || true
             ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex/Metadata.appintents 2>/dev/null || true

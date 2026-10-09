@@ -5,10 +5,12 @@
 2. Every widget kind is described in KindCatalog, and each V2 kind belongs to exactly one WidgetGroup.
 3. `switch kind` blocks in DataNeeds cover every kind.
 4. Release safety: the DEBUG Premium unlock is only referenced inside `#if DEBUG`.
+5. Privacy manifest: every "required reason" API the code uses is declared in Shared/PrivacyInfo.xcprivacy.
 
 Usage: python3 scripts/check_swift.py  (exit code 1 when something is wrong)
 """
 import os
+import plistlib
 import re
 import sys
 
@@ -249,11 +251,39 @@ def check_release_safety():
                     problems.append(f"{os.path.relpath(path, ROOT)}:{number}: {name} used outside #if DEBUG")
 
 
+def check_privacy_manifest():
+    """Apple refuses an upload whose code calls these APIs without a reason in the manifest
+    (Shared/ is compiled into the app and the widget extension: the manifest goes into both)."""
+    path = os.path.join(ROOT, "Shared", "PrivacyInfo.xcprivacy")
+    try:
+        manifest = plistlib.load(open(path, "rb"))
+    except Exception as error:  # noqa: BLE001
+        problems.append(f"Shared/PrivacyInfo.xcprivacy unreadable: {error}")
+        return
+    declared = {item.get("NSPrivacyAccessedAPIType"): item.get("NSPrivacyAccessedAPITypeReasons", [])
+                for item in manifest.get("NSPrivacyAccessedAPITypes", [])}
+    apis = {
+        "NSPrivacyAccessedAPICategoryUserDefaults": r"\bUserDefaults\b|@AppStorage",
+        "NSPrivacyAccessedAPICategoryFileTimestamp": r"\.(modificationDate|creationDate)\b|contentModificationDate|creationDateKey|\bgetattrlist\b",
+        "NSPrivacyAccessedAPICategorySystemBootTime": r"\bsystemUptime\b|\bmach_absolute_time\b",
+        "NSPrivacyAccessedAPICategoryDiskSpace": r"volumeAvailableCapacity|volumeTotalCapacity|systemFreeSize|systemSize\b",
+        "NSPrivacyAccessedAPICategoryActiveKeyboards": r"\bactiveInputModes\b",
+    }
+    for category, pattern in apis.items():
+        users = [os.path.relpath(p, ROOT) for p, text in FILES.items()
+                 if not os.path.relpath(p, ROOT).startswith("Tests") and re.search(pattern, strip_comments(text))]
+        if users and not declared.get(category):
+            problems.append(f"PrivacyInfo.xcprivacy: {category} has no reason, used in {', '.join(users[:3])}")
+    if manifest.get("NSPrivacyTracking") is not False:
+        problems.append("PrivacyInfo.xcprivacy: NSPrivacyTracking must be false")
+
+
 checked = check_memberwise()
 kinds = check_kinds()
 check_release_safety()
+check_privacy_manifest()
 if problems:
     print("\n".join(problems))
     print(f"\n{len(problems)} problem(s)")
     sys.exit(1)
-print(f"OK: {checked} memberwise calls checked, {kinds} widget kinds, Release safety verified")
+print(f"OK: {checked} memberwise calls checked, {kinds} widget kinds, Release safety and privacy manifest verified")
