@@ -194,9 +194,13 @@ struct WorkoutActivityView: View {
 
     @ViewBuilder
     private func actionButton<I: AppIntent>(_ title: String, symbol: String, prominent: Bool, intent: I) -> some View {
+        // One line: « Série faite » no longer breaks in two on a narrow Lock Screen.
         let label = Label(title, systemImage: symbol)
             .font(.subheadline.weight(.bold))
+            .lineLimit(1)
+            .minimumScaleFactor(0.7)
             .foregroundStyle(prominent ? style.onAccent : accent)
+            .padding(.horizontal, 6)
             .frame(maxWidth: .infinity, minHeight: 38)
             .background(prominent ? accent : accent.opacity(0.18), in: Capsule())
         if isLive {

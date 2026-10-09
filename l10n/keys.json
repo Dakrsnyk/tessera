@@ -1177,7 +1177,7 @@
  "%@ × %@ kg": {
   "placeholders": 2,
   "uses": [
-   "App/Core/MarketingShots.swift:119: load: tr(\"\\(8) × \\(60) kg\"),",
+   "App/Core/MarketingShots.swift:125: load: tr(\"\\(8) × \\(60) kg\"),",
    "Shared/Live/WorkoutLiveActivity.swift:43: ? tr(\"\\(exercise.reps) × \\(Self.kilograms(exercise.weight)) kg\")",
    "Shared/Render/Tiles/FitnessTiles.swift:36: exercise.weight > 0 ? tr(\"\\(exercise.reps) × \\(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg\") : tr(\"\\(exercise.reps) répétitions\")"
   ]
@@ -1214,6 +1214,12 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:774: MiniSectionTitle(title: tr(\"Fiches\"), detail: state.cards.isEmpty ? nil : tr(\"\\(StudentMath.dueCount(state, at: now)) à réviser\"))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:789: detail: deck.due > 0 ? tr(\"\\(deck.due) à réviser\") : tr(\"à jour\"), value: \"\\(deck.total)\", showsChevron: false)"
+  ]
+ },
+ "%@ écrans prêts\nà installer.": {
+  "placeholders": 1,
+  "uses": [
+   "App/Core/MarketingShots.swift:569: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "%@ — %@. Tes widgets gardent chacun leur propre style.": {
@@ -1955,6 +1961,12 @@
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:416: case .week: tr(\"7 jours\")"
   ]
  },
+ "8 mini-apps,\nune seule app.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:786: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+  ]
+ },
  "8 × 60 kg": {
   "placeholders": 0,
   "uses": [
@@ -2230,7 +2242,7 @@
  "Activité en direct": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:524: MarketingTitle(eyebrow: tr(\"Activité en direct\"), title: tr(\"Repos, séries,\\ncharges.\"), subtitle: tr(\"Touche « Série faite », le repos démarre.\"), dark: true)"
+   "App/Core/MarketingShots.swift:594: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Activités": {
@@ -3774,7 +3786,7 @@
  "Aucun compte à créer": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:805: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
+   "App/Core/MarketingShots.swift:869: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
   ]
  },
  "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
@@ -3927,7 +3939,7 @@
  "Aucune pub, aucun suivi": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:806: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
+   "App/Core/MarketingShots.swift:870: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
   ]
  },
  "Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles.": {
@@ -5231,7 +5243,7 @@
  "Budget, dépenses, revenus": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:738: (.finances, tr(\"Budget, dépenses, revenus\")),"
+   "App/Core/MarketingShots.swift:776: (.finances, tr(\"Budget, dépenses, revenus\")),"
   ]
  },
  "Buenos Aires": {
@@ -5633,6 +5645,12 @@
    "App/Screens/Explore/StoreCombos.swift:83: combo(\"calories-macros\", tr(\"Calories et macros\"), tr(\"Ce qu'il te reste à manger, et comment.\"), .glass, \"2F8F7A\","
   ]
  },
+ "Calories et macros calculées pour toi.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:659: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
+  ]
+ },
  "Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.": {
   "placeholders": 0,
   "uses": [
@@ -5668,7 +5686,7 @@
  "Calories, macros, code-barres": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:735: (.nutrition, tr(\"Calories, macros, code-barres\")),"
+   "App/Core/MarketingShots.swift:773: (.nutrition, tr(\"Calories, macros, code-barres\")),"
   ]
  },
  "Calories, macros, protéines et série de suivi.": {
@@ -5687,12 +5705,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetGroup.swift:63: case .nutrition: tr(\"Calories, macros, repas et ajout rapide.\")"
-  ]
- },
- "Calories, protéines, eau, séance.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:637: MarketingTitle(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'essentiel,\\nd'un regard.\"), subtitle: tr(\"Calories, protéines, eau, séance.\"))"
   ]
  },
  "Calories, séance et régularité, aux couleurs de Tessera.": {
@@ -6356,7 +6368,7 @@
  "Chaque série\ncompte.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:661: MarketingFeature(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos et records.\"), glow: MK.red) {"
+   "App/Core/MarketingShots.swift:677: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Charge": {
@@ -7313,7 +7325,7 @@
  "Confidentialité": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:794: MarketingTitle(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), dark: true)",
+   "App/Core/MarketingShots.swift:858: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
    "App/Premium/PaywallView.swift:288: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Screens/Profile/ProfileView.swift:175: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
@@ -9021,7 +9033,7 @@
  "Des styles\npour tout.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:681: MarketingFeature(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\"), glow: Color(hex: \"8C6CFF\")) {"
+   "App/Core/MarketingShots.swift:744: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Des sélections de widgets autour d'un thème, d'un format ou d'un style.": {
@@ -9040,6 +9052,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Tutorial/Tutorial.swift:88: tr(\"Des widgets prêts à l'emploi, des packs et des écrans d'accueil complets. Tout s'ouvre dans le Studio pour être personnalisé.\")"
+  ]
+ },
+ "Des widgets sous l'heure, assortis à ton fond.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:728: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "Des écrans complets : fond d'écran, widgets et écran verrouillé assortis. Touche-en un pour l'installer.": {
@@ -10119,7 +10137,7 @@
  "Dépenses, revenus, catégories.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:698: MarketingFeature(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\"), glow: MK.jade) {"
+   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Dépensé": {
@@ -10209,7 +10227,7 @@
  "Développé couché": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:116: exercise: tr(\"Développé couché\"),",
+   "App/Core/MarketingShots.swift:122: exercise: tr(\"Développé couché\"),",
    "App/Screens/Spaces/LockScreenCreator.swift:99: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
    "Shared/Data/SampleData.swift:175: ExerciseTemplate(name: tr(\"Développé couché\"), sets: 4, reps: 8, weight: 60, restSeconds: 120),"
   ]
@@ -10412,7 +10430,7 @@
  "Elles nourrissent tes widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:748: MarketingTitle(eyebrow: tr(\"Mini-apps\"), title: tr(\"Toute ta vie,\\nau même endroit.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+   "App/Core/MarketingShots.swift:786: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "Emplacement": {
@@ -10517,7 +10535,7 @@
  "En pause": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:152: Text(tr(\"En pause\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:161: Text(tr(\"En pause\"))"
   ]
  },
  "En position de pompe, bras tendus, corps gainé.": {
@@ -10836,12 +10854,6 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:99: PerkRow(symbol: \"photo\", title: tr(\"Fonds photo, couleurs libres\"), detail: tr(\"Et les polices Serif et Mono\"))"
-  ]
- },
- "Et sur l'écran verrouillé.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:552: MarketingTitle(eyebrow: tr(\"Widgets\"), title: tr(\"Sur ton écran\\nd'accueil.\"), subtitle: tr(\"Et sur l'écran verrouillé.\"))"
   ]
  },
  "Ethereum": {
@@ -11599,7 +11611,7 @@
  "Finances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:698: MarketingFeature(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\"), glow: MK.jade) {",
+   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:97: .navigationTitle(tr(\"Finances\"))",
    "App/Screens/MiniApps/MiniApp.swift:14: case .finances: tr(\"Finances\")",
    "Shared/Domains/Profile.swift:129: case .money: tr(\"Finances\")"
@@ -11726,6 +11738,12 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Explore/HomeSetupViews.swift:722: Text(tr(\"Fond d'écran · \\(setup.wallpaper.title)\"))"
+  ]
+ },
+ "Fond, widgets et icônes assortis, en un geste.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:569: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "Fonds d'urgence": {
@@ -12409,10 +12427,10 @@
  "Glucides": {
   "placeholders": 0,
   "uses": [
+   "App/Core/MarketingShots.swift:664: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: \"F2A33A\", progress: day.totals.carbs / max(1, day.goals.carbs))",
    "App/Screens/Home/DailySection.swift:274: compactMacro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
    "App/Screens/Home/DailySection.swift:378: macro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
-   "App/Screens/Home/MyInfoSection.swift:33: add(\"carbs\", \"leaf\", tr(\"Glucides\"), profile.knows(.carbsTarget) ? \"\\(TF.int(nutrition.goals.carbs)) g\" : nil)",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:286: MacroGauge(name: tr(\"Glucides\"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: \"F2A33A\")"
+   "App/Screens/Home/MyInfoSection.swift:33: add(\"carbs\", \"leaf\", tr(\"Glucides\"), profile.knows(.carbsTarget) ? \"\\(TF.int(nutrition.goals.carbs)) g\" : nil)"
   ]
  },
  "Good morning": {
@@ -12830,7 +12848,7 @@
  "Haut du corps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:114: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
+   "App/Core/MarketingShots.swift:120: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
    "App/Screens/Spaces/LockScreenCreator.swift:97: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
    "Shared/Data/SampleData.swift:174: let upper = Routine(name: tr(\"Haut du corps\"), exercises: ["
   ]
@@ -13034,13 +13052,13 @@
  "Horaire, tâches, habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:737: (.planning, tr(\"Horaire, tâches, habitudes\")),"
+   "App/Core/MarketingShots.swift:775: (.planning, tr(\"Horaire, tâches, habitudes\")),"
   ]
  },
  "Horaire, tâches, habitudes, focus.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:689: MarketingFeature(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\"), glow: Color(hex: \"3366FF\")) {"
+   "App/Core/MarketingShots.swift:752: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Horizontal": {
@@ -14014,12 +14032,6 @@
    "App/Screens/Spaces/SpaceBuilderView.swift:204: case .small: tr(\"L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.\")"
   ]
  },
- "L'essentiel,\nd'un regard.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:637: MarketingTitle(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'essentiel,\\nd'un regard.\"), subtitle: tr(\"Calories, protéines, eau, séance.\"))"
-  ]
- },
  "L'essentiel, sans une couleur de trop.": {
   "placeholders": 0,
   "uses": [
@@ -14132,6 +14144,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:335: QuestionCard(title: tr(\"Toi\"), detail: model.life.birthday != nil ? tr(\"L'âge vient de ton anniversaire (Ma vie).\") : tr(\"Le poids sert aussi à estimer les calories brûlées.\")) {"
+  ]
+ },
+ "L'écran\nverrouillé\naussi.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:728: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "L'élastique ou la machine allège une partie du poids du corps.": {
@@ -15011,6 +15029,12 @@
    "App/Screens/Spaces/NutritionSpace.swift:448: : tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
   ]
  },
+ "Le repos démarre tout seul.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:594: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+  ]
+ },
  "Le risque de pluie arrive avec la prochaine mise à jour météo.": {
   "placeholders": 0,
   "uses": [
@@ -15644,10 +15668,10 @@
  "Lipides": {
   "placeholders": 0,
   "uses": [
+   "App/Core/MarketingShots.swift:666: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: \"3366FF\", progress: day.totals.fat / max(1, day.goals.fat))",
    "App/Screens/Home/DailySection.swift:275: compactMacro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
    "App/Screens/Home/DailySection.swift:379: macro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
-   "App/Screens/Home/MyInfoSection.swift:34: add(\"fat\", \"drop\", tr(\"Lipides\"), profile.knows(.fatTarget) ? \"\\(TF.int(nutrition.goals.fat)) g\" : nil)",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:287: MacroGauge(name: tr(\"Lipides\"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: \"3366FF\")"
+   "App/Screens/Home/MyInfoSection.swift:34: add(\"fat\", \"drop\", tr(\"Lipides\"), profile.knows(.fatTarget) ? \"\\(TF.int(nutrition.goals.fat)) g\" : nil)"
   ]
  },
  "Liquid Glass": {
@@ -16740,7 +16764,7 @@
  "Mini-apps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:748: MarketingTitle(eyebrow: tr(\"Mini-apps\"), title: tr(\"Toute ta vie,\\nau même endroit.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
+   "App/Core/MarketingShots.swift:786: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
    "App/Screens/Home/MiniAppsRow.swift:224: .navigationTitle(tr(\"Mini-apps\"))"
   ]
  },
@@ -17017,7 +17041,7 @@
  "Mon Quotidien": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:673: MarketingFeature(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {",
+   "App/Core/MarketingShots.swift:692: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:83: .navigationTitle(tr(\"Mon Quotidien\"))",
    "App/Screens/Home/DailySection.swift:37: Text(tr(\"Mon Quotidien\").uppercased())",
    "App/Screens/Tutorial/Tutorial.swift:64: case .daily: tr(\"Mon Quotidien\")"
@@ -18477,10 +18501,10 @@
  "Nutrition": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:551: MarketingTitle(eyebrow: tr(\"Nutrition\"), title: tr(\"Tes calories,\\nen un regard.\"), subtitle: tr(\"Scanne un code-barres, c'est noté.\"))",
-   "App/Core/MarketingShots.swift:651: MarketingFeature(eyebrow: tr(\"Nutrition\"), title: tr(\"Nutrition,\\nsimplifiée.\"), subtitle: tr(\"Scanne, note, suis tes macros.\"), glow: Color(hex: \"F08A24\")) {",
+   "App/Core/MarketingShots.swift:659: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:148: case .nutrition: (tr(\"Nutrition\"), \"fork.knife\", \"F08A24\")",
-   "App/Screens/Home/DailySection.swift:252: Label(tr(\"Nutrition\"), systemImage: \"fork.knife\")"
+   "App/Screens/Home/DailySection.swift:252: Label(tr(\"Nutrition\"), systemImage: \"fork.knife\")",
+   "App/Screens/Home/DailySection.swift:368: Label(tr(\"Nutrition\"), systemImage: \"fork.knife\")"
   ]
  },
  "Nutrition complète": {
@@ -18490,10 +18514,10 @@
    "Shared/Model/Packs.swift:76: WidgetPack(id: \"nutrition\", name: tr(\"Nutrition complète\"), tagline: tr(\"Calories, macros, protéines, repas et semaine.\"), symbol: \"fork.knife\","
   ]
  },
- "Nutrition,\nsimplifiée.": {
+ "Nutrition, sport, planning, budget.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:651: MarketingFeature(eyebrow: tr(\"Nutrition\"), title: tr(\"Nutrition,\\nsimplifiée.\"), subtitle: tr(\"Scanne, note, suis tes macros.\"), glow: Color(hex: \"F08A24\")) {"
+   "App/Core/MarketingShots.swift:622: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Nébuleuse": {
@@ -19060,7 +19084,7 @@
  "Packs, collections, fonds d'écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:681: MarketingFeature(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\"), glow: Color(hex: \"8C6CFF\")) {"
+   "App/Core/MarketingShots.swift:744: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Pad thaï": {
@@ -19428,7 +19452,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/OnboardingView.swift:138: Button(tr(\"Passer\"), action: skip)",
-   "Shared/Live/WorkoutLiveActivity.swift:134: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipRestIntent())",
+   "Shared/Live/WorkoutLiveActivity.swift:143: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipRestIntent())",
    "Shared/Render/Tiles/FitnessTiles.swift:101: TileButton(title: tr(\"Passer\"), symbol: \"forward.fill\", action: .skipRest),",
    "Widgets/WorkoutLiveActivityWidget.swift:49: Label(tr(\"Passer\"), systemImage: \"forward.fill\")"
   ]
@@ -19523,7 +19547,7 @@
  "Pause": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:131: actionButton(tr(\"Pause\"), symbol: \"pause.fill\", prominent: false, intent: PauseRestIntent())",
+   "Shared/Live/WorkoutLiveActivity.swift:140: actionButton(tr(\"Pause\"), symbol: \"pause.fill\", prominent: false, intent: PauseRestIntent())",
    "Widgets/WorkoutLiveActivityWidget.swift:42: Label(tr(\"Pause\"), systemImage: \"pause.fill\")"
   ]
  },
@@ -19629,12 +19653,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/Profile.swift:192: case .performance: tr(\"Performance\")"
-  ]
- },
- "Personnalisation": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:585: MarketingTitle(eyebrow: tr(\"Personnalisation\"), title: tr(\"À ton image.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"))"
   ]
  },
  "Personnalise Tessera": {
@@ -19852,7 +19870,7 @@
  "Planning": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:689: MarketingFeature(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\"), glow: Color(hex: \"3366FF\")) {",
+   "App/Core/MarketingShots.swift:752: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:150: case .planning: (tr(\"Planning\"), \"calendar.day.timeline.left\", \"3366FF\")",
    "App/Screens/Home/DailySection.swift:561: DayCard(title: tr(\"Planning\"), symbol: \"calendar.day.timeline.left\", colorHex: colorHex) {",
    "App/Screens/MiniApps/MiniApp.swift:13: case .planning: tr(\"Planning\")"
@@ -19900,7 +19918,7 @@
  "Plein, entretien, échéances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:741: (.car, tr(\"Plein, entretien, échéances\")),"
+   "App/Core/MarketingShots.swift:779: (.car, tr(\"Plein, entretien, échéances\")),"
   ]
  },
  "Pleine": {
@@ -20115,10 +20133,10 @@
    "Shared/Theme/Theme.swift:243: id: .compact, name: tr(\"Compact\"), tagline: tr(\"Plus d'infos, moins d'espace\"), isPremium: false,"
   ]
  },
- "Plus de 100 widgets": {
+ "Plus de 100\nwidgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:712: MarketingTitle(eyebrow: tr(\"Plus de 100 widgets\"), title: tr(\"Tout ce qui\\ncompte.\"))"
+   "App/Core/MarketingShots.swift:834: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Plus de précisions": {
@@ -21264,7 +21282,7 @@
  "Programme, budget, valise": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:740: (.travel, tr(\"Programme, budget, valise\")),"
+   "App/Core/MarketingShots.swift:778: (.travel, tr(\"Programme, budget, valise\")),"
   ]
  },
  "Progresse en amplitude petit à petit.": {
@@ -21321,10 +21339,10 @@
  "Protéines": {
   "placeholders": 0,
   "uses": [
+   "App/Core/MarketingShots.swift:662: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: \"E5484D\", progress: day.totals.protein / max(1, day.goals.protein))",
    "App/Screens/Home/DailySection.swift:273: compactMacro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
    "App/Screens/Home/DailySection.swift:377: macro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
-   "App/Screens/Home/MyInfoSection.swift:32: add(\"protein\", \"bolt.heart\", tr(\"Protéines\"), profile.knows(.proteinTarget) ? \"\\(TF.int(nutrition.goals.protein)) g\" : nil)",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:285: MacroGauge(name: tr(\"Protéines\"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: \"E5484D\")"
+   "App/Screens/Home/MyInfoSection.swift:32: add(\"protein\", \"bolt.heart\", tr(\"Protéines\"), profile.knows(.proteinTarget) ? \"\\(TF.int(nutrition.goals.protein)) g\" : nil)"
   ]
  },
  "Protéines : %@ g sur %@ g": {
@@ -21403,7 +21421,7 @@
  "Prévisions, pluie, soleil": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:742: (.weather, tr(\"Prévisions, pluie, soleil\")),"
+   "App/Core/MarketingShots.swift:780: (.weather, tr(\"Prévisions, pluie, soleil\")),"
   ]
  },
  "Prévu": {
@@ -21433,7 +21451,7 @@
  "Prêt": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:179: Text(tr(\"Prêt\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:188: Text(tr(\"Prêt\"))",
    "Shared/Render/Tiles/FitnessTiles.swift:106: tile.value = tr(\"Prêt\")"
   ]
  },
@@ -21833,7 +21851,6 @@
  "Rechercher": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:321: Text(tr(\"Rechercher\"))",
    "App/Screens/Explore/HomeSetupViews.swift:191: Text(tr(\"Rechercher\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:75: MiniActionButton(title: canScan ? tr(\"Rechercher\") : tr(\"Ajouter un aliment\"), symbol: canScan ? \"magnifyingglass\" : \"plus\", colorHex: accentHex, isProminent: !canScan) {"
   ]
@@ -22238,7 +22255,7 @@
  "Repas, séance, eau, pas, météo.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:673: MarketingFeature(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
+   "App/Core/MarketingShots.swift:692: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
   ]
  },
  "Repos": {
@@ -22247,7 +22264,7 @@
    "App/Core/DailyBrief.swift:312: return Workout(name: tr(\"Repos\"), exercises: [], totalSets: 0, stage: .rest(nextName: routine.name, nextDay: when))",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:153: header(tr(\"Repos\"), symbol: \"moon.zzz.fill\")",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:40: Text(planned.isEmpty ? tr(\"Repos\") : planned.map(\\.name).joined(separator: \" + \"))",
-   "Shared/Live/WorkoutLiveActivity.swift:161: Text(tr(\"Repos\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:170: Text(tr(\"Repos\"))"
   ]
  },
  "Repos : ": {
@@ -22289,12 +22306,6 @@
    "Shared/Render/Tiles/FitnessTiles.swift:104: tile.inline = tr(\"Repos jusqu'à \\(Fmt.time(rest, uses24Hour: true))\")"
   ]
  },
- "Repos, séries,\ncharges.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:524: MarketingTitle(eyebrow: tr(\"Activité en direct\"), title: tr(\"Repos, séries,\\ncharges.\"), subtitle: tr(\"Touche « Série faite », le repos démarre.\"), dark: true)"
-  ]
- },
  "Repose doucement.": {
   "placeholders": 0,
   "uses": [
@@ -22317,7 +22328,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessSession.swift:148: Button(tr(\"Reprendre\")) {",
-   "Shared/Live/WorkoutLiveActivity.swift:129: actionButton(tr(\"Reprendre\"), symbol: \"play.fill\", prominent: false, intent: ResumeRestIntent())",
+   "Shared/Live/WorkoutLiveActivity.swift:138: actionButton(tr(\"Reprendre\"), symbol: \"play.fill\", prominent: false, intent: ResumeRestIntent())",
    "Widgets/WorkoutLiveActivityWidget.swift:36: Label(tr(\"Reprendre\"), systemImage: \"play.fill\")"
   ]
  },
@@ -23775,6 +23786,12 @@
    "Shared/Model/Templates.swift:83: configure: .countdown(tr(\"Sans cigarette\"), days: -30, mode: .since)),"
   ]
  },
+ "Sans compte, sans pub, sans suivi.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:858: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
+  ]
+ },
  "Sans cours précis": {
   "placeholders": 0,
   "uses": [
@@ -23785,12 +23802,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Planning/PlanningPages.swift:57: section(tr(\"Sans date\"), open.filter { $0.due == nil })"
-  ]
- },
- "Sans déverrouiller ton iPhone.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:523: MarketingTitle(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Ta séance,\\nen direct.\"), subtitle: tr(\"Sans déverrouiller ton iPhone.\"), dark: true)"
   ]
  },
  "Sans limite": {
@@ -23960,16 +23971,10 @@
    "App/Core/DataItems.swift:170: case .meals: tr(\"Scanne ou cherche un aliment : tes widgets se mettent à jour.\")"
   ]
  },
- "Scanne un code-barres, c'est noté.": {
+ "Scanne.\nC'est noté.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:551: MarketingTitle(eyebrow: tr(\"Nutrition\"), title: tr(\"Tes calories,\\nen un regard.\"), subtitle: tr(\"Scanne un code-barres, c'est noté.\"))"
-  ]
- },
- "Scanne, note, suis tes macros.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:651: MarketingFeature(eyebrow: tr(\"Nutrition\"), title: tr(\"Nutrition,\\nsimplifiée.\"), subtitle: tr(\"Scanne, note, suis tes macros.\"), glow: Color(hex: \"F08A24\")) {"
+   "App/Core/MarketingShots.swift:659: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
   ]
  },
  "Scanner": {
@@ -23984,6 +23989,7 @@
  "Scanner un aliment": {
   "placeholders": 0,
   "uses": [
+   "App/Core/MarketingShots.swift:668: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
    "App/Screens/Spaces/NutritionSpace.swift:334: .navigationTitle(tr(\"Scanner un aliment\"))"
   ]
  },
@@ -24653,7 +24659,7 @@
  "Sport": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:661: MarketingFeature(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos et records.\"), glow: MK.red) {",
+   "App/Core/MarketingShots.swift:677: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
    "App/Screens/Home/DailySection.swift:513: case .rest: tr(\"Sport\")",
    "Shared/Data/PayloadLoader.swift:89: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: [recent[0], recent[2]]),",
    "Shared/Data/SampleData.swift:79: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),"
@@ -24765,16 +24771,16 @@
  "Store": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:681: MarketingFeature(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\"), glow: Color(hex: \"8C6CFF\")) {",
+   "App/Core/MarketingShots.swift:569: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
+   "App/Core/MarketingShots.swift:744: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
    "App/Screens/Explore/ExploreView.swift:127: .navigationTitle(tr(\"Store\"))",
-   "App/Screens/Tutorial/Tutorial.swift:55: case .store: tr(\"Store\")",
-   "App/TesseraApp.swift:212: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }"
+   "App/Screens/Tutorial/Tutorial.swift:55: case .store: tr(\"Store\")"
   ]
  },
  "Studio": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:586: MarketingTitle(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"))",
+   "App/Core/MarketingShots.swift:706: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
    "App/Screens/Editor/EditorView.swift:89: if !isNew { return tr(\"Studio\") }",
    "App/Screens/Tutorial/Tutorial.swift:54: case .studio: tr(\"Studio\")"
   ]
@@ -24818,7 +24824,7 @@
  "Styles, couleurs, photos, polices.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:585: MarketingTitle(eyebrow: tr(\"Personnalisation\"), title: tr(\"À ton image.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"))"
+   "App/Core/MarketingShots.swift:706: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Sucre blanc": {
@@ -25138,12 +25144,6 @@
    "Shared/Domains/ExerciseTechniques.swift:293: tr(\"Sur les durées d'effort et de repos prévues.\"), tr(\"Respire en rythme, sans bloquer.\"),"
   ]
  },
- "Sur ton écran\nd'accueil.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:552: MarketingTitle(eyebrow: tr(\"Widgets\"), title: tr(\"Sur ton écran\\nd'accueil.\"), subtitle: tr(\"Et sur l'écran verrouillé.\"))"
-  ]
- },
  "Sur ton écran d'accueil": {
   "placeholders": 0,
   "uses": [
@@ -25297,6 +25297,13 @@
    "App/Core/Agenda.swift:82: detail: tr(\"Séance · environ \\(max(5, routine.exercises.reduce(0) { $0 + $1.sets * (40 + $1.restSeconds) } / 60)) min\"),"
   ]
  },
+ "Séance, repos, calories et macros.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:593: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:642: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
+  ]
+ },
  "Séance, régularité, calories et protéines réunies.": {
   "placeholders": 0,
   "uses": [
@@ -25340,16 +25347,16 @@
    "App/Screens/Profile/ProfileTopics.swift:316: QuestionCard(title: tr(\"Séances par semaine\"), detail: tr(\"Le widget Régularité suit cet objectif.\")) {"
   ]
  },
- "Séances, repos et records.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:661: MarketingFeature(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos et records.\"), glow: MK.red) {"
-  ]
- },
  "Séances, repos, records": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:736: (.fitness, tr(\"Séances, repos, records\")),"
+   "App/Core/MarketingShots.swift:774: (.fitness, tr(\"Séances, repos, records\")),"
+  ]
+ },
+ "Séances, repos, records et progrès.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:677: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Séances, séries et records": {
@@ -25413,7 +25420,7 @@
   "placeholders": 3,
   "uses": [
    "App/Screens/Spaces/FitnessSpace.swift:16: Text(tr(\"Série \\(active.setIndex + 1)/\\(exercise.sets) · \\(FitnessTiles.setText(exercise))\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:117: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:126: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
   ]
  },
  "Série %@/%@ · %@ × %@": {
@@ -25460,7 +25467,13 @@
    "App/Screens/Home/DailySection.swift:479: actionButton(tr(\"Série faite\")) {",
    "App/Screens/MiniApps/Fitness/FitnessSession.swift:160: MiniActionButton(title: tr(\"Série faite\"), symbol: \"checkmark.circle.fill\", colorHex: accentHex) {",
    "App/Screens/Spaces/FitnessSpace.swift:35: Label(tr(\"Série faite\"), systemImage: \"checkmark.circle.fill\").font(.headline)",
-   "Shared/Live/WorkoutLiveActivity.swift:136: actionButton(tr(\"Série faite\"), symbol: \"checkmark\", prominent: true, intent: CompleteSetIntent())"
+   "Shared/Live/WorkoutLiveActivity.swift:145: actionButton(tr(\"Série faite\"), symbol: \"checkmark\", prominent: true, intent: CompleteSetIntent())"
+  ]
+ },
+ "Série faite ?\nUn geste.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:594: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Série · %@": {
@@ -25581,7 +25594,7 @@
  "Ta journée,\nen un écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:673: MarketingFeature(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
+   "App/Core/MarketingShots.swift:692: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
   ]
  },
  "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": {
@@ -25671,7 +25684,7 @@
  "Ta semaine,\nbien en main.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:689: MarketingFeature(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\"), glow: Color(hex: \"3366FF\")) {"
+   "App/Core/MarketingShots.swift:752: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Ta semaine, ton mois ou ta journée entière.": {
@@ -25686,22 +25699,16 @@
    "App/Core/DailyBrief.swift:24: case .evening: tr(\"Ta soirée\")"
   ]
  },
- "Ta séance,\nen direct.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:523: MarketingTitle(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Ta séance,\\nen direct.\"), subtitle: tr(\"Sans déverrouiller ton iPhone.\"), dark: true)"
-  ]
- },
  "Ta valeur nette et tes abonnements.": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:147: combo(\"patrimoine-abonnements\", tr(\"Patrimoine\"), tr(\"Ta valeur nette et tes abonnements.\"), .glacier, \"2B9A66\","
   ]
  },
- "Ta vie,\nen widgets.": {
+ "Ta vie entière\nen widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:840: MarketingTitle(title: tr(\"Ta vie,\\nen widgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"), dark: true)"
+   "App/Core/MarketingShots.swift:622: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Ta ville": {
@@ -26103,12 +26110,6 @@
    "Shared/Model/KindCatalog.swift:170: KindInfo(kind: .nutritionWeek, title: tr(\"Semaine nutrition\"), summary: tr(\"Tes calories des sept derniers jours et ta moyenne.\"), category: .nutrition, symbol: \"chart.bar\", isPremium: true, families:"
   ]
  },
- "Tes calories,\nen un regard.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:551: MarketingTitle(eyebrow: tr(\"Nutrition\"), title: tr(\"Tes calories,\\nen un regard.\"), subtitle: tr(\"Scanne un code-barres, c'est noté.\"))"
-  ]
- },
  "Tes cours de la semaine": {
   "placeholders": 0,
   "uses": [
@@ -26151,7 +26152,7 @@
  "Tes données\nrestent à toi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:794: MarketingTitle(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), dark: true)"
+   "App/Core/MarketingShots.swift:858: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
   ]
  },
  "Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.": {
@@ -26475,10 +26476,10 @@
  "Tessera": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:195: Text(tr(\"Tessera\"))",
-   "App/Core/MarketingShots.swift:310: Text(tr(\"Tessera\"))",
+   "App/Core/MarketingShots.swift:168: Text(tr(\"Tessera\"))",
    "App/Screens/Explore/HomeSetupViews.swift:258: label(tr(\"Tessera\"))",
-   "App/Screens/Explore/HomeSetups.swift:136: static let tessera = SetupApp(name: tr(\"Tessera\"), symbol: \"\")"
+   "App/Screens/Explore/HomeSetups.swift:136: static let tessera = SetupApp(name: tr(\"Tessera\"), symbol: \"\")",
+   "App/Screens/Launch/LaunchView.swift:16: Text(tr(\"Tessera\"))"
   ]
  },
  "Tessera %@": {
@@ -26936,7 +26937,7 @@
  "Ton budget,\nsous contrôle.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:698: MarketingFeature(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\"), glow: MK.jade) {"
+   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Ton chiffre d'affaires du mois face à ton objectif.": {
@@ -26973,12 +26974,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:252: KindInfo(kind: .hotel, title: tr(\"Hôtel\"), summary: tr(\"Ton hôtel, son adresse et les dates d'arrivée et de départ.\"), category: .travel, symbol: \"bed.double.fill\", isPremium: true, families: SM, keyw"
-  ]
- },
- "Ton iPhone,\nà ton image.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:616: MarketingTitle(title: tr(\"Ton iPhone,\\nà ton image.\"), subtitle: tr(\"Widgets et mini-apps pour toute ta journée.\"), dark: true)"
   ]
  },
  "Ton kilométrage et les prochaines échéances.": {
@@ -27163,6 +27158,12 @@
    "Shared/Model/KindCatalog.swift:121: KindInfo(kind: .ageProgress, title: tr(\"Mon âge\"), summary: tr(\"Ton âge à la décimale près et le chemin vers ton prochain anniversaire.\"), category: .time, symbol: \"person.crop.circle.badge.clock\", is"
   ]
  },
+ "Ton écran\nd'accueil,\ndéjà stylé.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:568: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
+  ]
+ },
  "Top 3": {
   "placeholders": 0,
   "uses": [
@@ -27330,12 +27331,6 @@
    "Shared/Render/Tiles/StudentTiles.swift:193: tile.caption = tr(\"Touche « Réponse » pour vérifier\")"
   ]
  },
- "Touche « Série faite », le repos démarre.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:524: MarketingTitle(eyebrow: tr(\"Activité en direct\"), title: tr(\"Repos, séries,\\ncharges.\"), subtitle: tr(\"Touche « Série faite », le repos démarre.\"), dark: true)"
-  ]
- },
  "Touche-le pour choisir ton design": {
   "placeholders": 0,
   "uses": [
@@ -27486,12 +27481,6 @@
    "App/Screens/MiniApps/Business/BusinessApp.swift:304: MiniRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Ventes et dépenses\"), detail: tr(\"Tout ce que tu as noté, modifiable\"))"
   ]
  },
- "Tout ce qui\ncompte.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:712: MarketingTitle(eyebrow: tr(\"Plus de 100 widgets\"), title: tr(\"Tout ce qui\\ncompte.\"))"
-  ]
- },
  "Tout ce qui t'attend, jour par jour": {
   "placeholders": 0,
   "uses": [
@@ -27577,7 +27566,7 @@
  "Tout reste sur ton iPhone": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:804: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
+   "App/Core/MarketingShots.swift:868: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
   ]
  },
  "Tout sélectionner": {
@@ -27599,6 +27588,13 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MyInfoCenter.swift:21: .accessibilityLabel(Text(tr(\"Tout voir : Mes informations\")))"
+  ]
+ },
+ "Tout, sans\ndéverrouiller.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:593: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:642: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
   ]
  },
  "Toute l'amplitude confortable, sans plier les coudes.": {
@@ -27627,12 +27623,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:573: Text(tr(\"Toute la semaine\"))"
-  ]
- },
- "Toute ta vie,\nau même endroit.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:748: MarketingTitle(eyebrow: tr(\"Mini-apps\"), title: tr(\"Toute ta vie,\\nau même endroit.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "Toutes": {
@@ -28128,7 +28118,7 @@
  "Un widget,\nmille styles.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:586: MarketingTitle(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"))"
+   "App/Core/MarketingShots.swift:706: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Un widget, 12 styles": {
@@ -28506,7 +28496,7 @@
  "Ventes, objectifs, MRR": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:739: (.business, tr(\"Ventes, objectifs, MRR\")),"
+   "App/Core/MarketingShots.swift:777: (.business, tr(\"Ventes, objectifs, MRR\")),"
   ]
  },
  "Ventes, objectifs, bénéfice et MRR.": {
@@ -28970,7 +28960,7 @@
  "Widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:552: MarketingTitle(eyebrow: tr(\"Widgets\"), title: tr(\"Sur ton écran\\nd'accueil.\"), subtitle: tr(\"Et sur l'écran verrouillé.\"))",
+   "App/Core/MarketingShots.swift:834: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
    "App/Premium/PaywallView.swift:115: comparisonRow(tr(\"Widgets\"), free: \"\\(WidgetKind.allCases.filter { !$0.isPremium }.count)\", premium: \"\\(WidgetKind.allCases.count)\")",
    "App/Screens/Explore/ExploreView.swift:27: case .widgets: tr(\"Widgets\")",
    "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))"
@@ -28992,12 +28982,6 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:117: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
-  ]
- },
- "Widgets et mini-apps pour toute ta journée.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:616: MarketingTitle(title: tr(\"Ton iPhone,\\nà ton image.\"), subtitle: tr(\"Widgets et mini-apps pour toute ta journée.\"), dark: true)"
   ]
  },
  "Widgets intelligents": {
@@ -30063,10 +30047,10 @@
  "kcal restantes": {
   "placeholders": 0,
   "uses": [
+   "App/Core/MarketingShots.swift:660: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: \"F08A24\", progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
    "App/Screens/Home/DailySection.swift:265: Text(nutrition.kcalLeft.map { $0 >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\") } ?? tr(\"kcal mangées\"))",
    "App/Screens/Home/DailySection.swift:350: Text(left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\"))",
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:262: Text(known.kcal ? (left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\")) : tr(\"kcal mangées\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:20: Text(known.kcal ? tr(\"kcal restantes\") : tr(\"kcal mangées\")).foregroundStyle(Color.secondary)"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:262: Text(known.kcal ? (left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\")) : tr(\"kcal mangées\"))"
   ]
  },
  "kg": {
@@ -31475,12 +31459,6 @@
    "App/Screens/Tutorial/Tutorial.swift:71: case .finish: tr(\"À toi de jouer !\")"
   ]
  },
- "À ton image.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:585: MarketingTitle(eyebrow: tr(\"Personnalisation\"), title: tr(\"À ton image.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"))"
-  ]
- },
  "À une heure précise": {
   "placeholders": 0,
   "uses": [
@@ -31615,16 +31593,16 @@
  "Écran d'accueil et écran verrouillé.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:840: MarketingTitle(title: tr(\"Ta vie,\\nen widgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"), dark: true)"
+   "App/Core/MarketingShots.swift:834: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Écran verrouillé": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:523: MarketingTitle(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Ta séance,\\nen direct.\"), subtitle: tr(\"Sans déverrouiller ton iPhone.\"), dark: true)",
-   "App/Core/MarketingShots.swift:637: MarketingTitle(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'essentiel,\\nd'un regard.\"), subtitle: tr(\"Calories, protéines, eau, séance.\"))",
-   "App/Screens/Editor/AddToHomeScreenGuide.swift:21: Text(tr(\"Écran verrouillé\")).tag(1)",
-   "App/Screens/Explore/ExploreView.swift:329: shelfRow(tr(\"Écran verrouillé\")) {"
+   "App/Core/MarketingShots.swift:593: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:642: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:728: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))",
+   "App/Screens/Editor/AddToHomeScreenGuide.swift:21: Text(tr(\"Écran verrouillé\")).tag(1)"
   ]
  },
  "Écran verrouillé : iOS affiche les widgets d'une seule teinte.": {
@@ -31642,6 +31620,7 @@
  "Écrans d'accueil": {
   "placeholders": 0,
   "uses": [
+   "App/Core/MarketingShots.swift:568: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
    "App/Screens/Explore/ExploreView.swift:26: case .screens: tr(\"Écrans d'accueil\")",
    "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
    "App/Screens/Explore/HomeSetupViews.swift:524: .navigationTitle(tr(\"Écrans d'accueil\"))"

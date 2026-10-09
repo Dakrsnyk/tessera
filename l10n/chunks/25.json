@@ -203,5 +203,90 @@
   "key": "Ta vie,\nen widgets.",
   "placeholders": 0,
   "uses": []
+ },
+ {
+  "key": "Ton écran\nd'accueil,\ndéjà stylé.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "%@ écrans prêts\nà installer.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Fond, widgets et icônes assortis, en un geste.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Tout, sans\ndéverrouiller.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Séance, repos, calories et macros.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Série faite ?\nUn geste.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Le repos démarre tout seul.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Ta vie entière\nen widgets.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Nutrition, sport, planning, budget.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Scanne.\nC'est noté.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Calories et macros calculées pour toi.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Séances, repos, records et progrès.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "L'écran\nverrouillé\naussi.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Des widgets sous l'heure, assortis à ton fond.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "8 mini-apps,\nune seule app.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Plus de 100\nwidgets.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Sans compte, sans pub, sans suivi.",
+  "placeholders": 0,
+  "uses": []
  }
 ]

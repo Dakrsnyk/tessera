@@ -3,21 +3,19 @@
 # A scene `pano-<name>-1` / `pano-<name>-2` is one picture across two screenshots.
 # The CI renders them with [marketing]; scripts/marketing_compose.py assembles the report into final PNGs.
 hero
-hero-lock
-pano-sport-1
-pano-sport-2
-lock
-pano-nutrition-1     app-nutrition
-pano-nutrition-2     app-nutrition
+pano-setups-1
+pano-setups-2
+pano-lock-1
+pano-lock-2
 nutrition            app-nutrition
 fitness              app-fitness
 daily                home
-pano-style-1         editor-v2
-pano-style-2         editor-v2
+studio               editor-v2
+lockscreens
 store                store
 planning             app-planning-week
 finances             app-finances
-wall
 apps
+wall
 privacy
-finale
+lock
