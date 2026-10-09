@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// « Icône de l'app »: Tessera's icon on the Home Screen, among the glass icons and the classic one.
+/// « Icône de l'app »: Tessera's icon on the Home Screen, the classic one or one of the glass icons.
 /// Reached from Profil, or from a long press on the icon (« Changer d'icône »).
 struct AppIconPicker: View {
     @State private var current: String?

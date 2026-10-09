@@ -1,5 +1,6 @@
-// The app icons: Verre rouge (the main icon) and the alternates the person can pick in « Icône de l'app ».
-// Each icon is drawn in HTML and rendered by Chromium to 1024 × 1024 PNGs: light, dark and tinted.
+// The app icons: Classique (the main icon) and the alternates the person can pick in « Icône de l'app ».
+// Each icon is drawn in HTML and rendered by Chromium to 1024 × 1024 PNGs, light and tinted: the icons
+// stay light when the iPhone is in Dark Mode (app_icons_install.py puts the light picture in both slots).
 //
 //   node scripts/app_icons.js <output folder>     (needs Playwright and a Chromium)
 //   python3 scripts/app_icons_install.py <output folder>   (asset catalog + previews)
@@ -15,8 +16,8 @@ const glass = (base, a, b, c) => ({ bg: mesh(base, [[a, 12, 92, 65], [b, 95, 8, 
 
 // Asset name → look. Keep in sync with AppIconChoice.all (App/Core/AppIcons.swift).
 const icons = {
-  "AppIcon": { bg: mesh("#E8443A", [["#FF9A3D", 15, 95, 70], ["#D61F3A", 90, 5, 60], ["#FFB36B", 85, 85, 45]]), glass: true },
-  "AppIcon-Classic": { classic: true },
+  "AppIcon": { classic: true },
+  "AppIcon-RedGlass": { bg: mesh("#E8443A", [["#FF9A3D", 15, 95, 70], ["#D61F3A", 90, 5, 60], ["#FFB36B", 85, 85, 45]]), glass: true },
   "AppIcon-Jade": { bg: mesh("#1F8F78", [["#7FE0C4", 10, 90, 65], ["#0E5C4C", 95, 10, 60], ["#3FD0A8", 80, 80, 45]]), glass: true },
   "AppIcon-Night": { bg: mesh("#241B5C", [["#7B5CFF", 15, 85, 60], ["#0B0A2A", 95, 5, 60], ["#E0479E", 90, 95, 45]]), glass: true },
   "AppIcon-Blue": { bg: mesh("#2563EB", [["#7C3AED", 90, 90, 60], ["#38BDF8", 10, 5, 55], ["#4F46E5", 20, 95, 50]]), glass: true },
@@ -75,7 +76,7 @@ html, body { margin: 0; background: #000; }
   const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
   const page = await browser.newPage({ viewport: { width: 1024, height: 1024 }, deviceScaleFactor: 1 });
   for (const [name, icon] of Object.entries(icons)) {
-    for (const variant of ["light", "dark", "tinted"]) {
+    for (const variant of ["light", "tinted"]) {
       await page.setContent(html(icon, variant));
       await page.waitForTimeout(80);
       await (await page.$(".icon")).screenshot({ path: path.join(out, `${name}-${variant}.png`) });

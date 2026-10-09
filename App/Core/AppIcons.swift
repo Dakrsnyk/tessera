@@ -1,10 +1,10 @@
 import SwiftUI
 import UIKit
 
-/// The icons Tessera can take on the Home Screen: « Verre rouge » by default, the others picked in
+/// The icons Tessera can take on the Home Screen: « Classique » by default, the glass ones picked in
 /// « Icône de l'app » (Profil, or a long press on the icon, then « Changer d'icône »).
 /// Each one is an icon set of the asset catalog, built as an alternate icon, with its picture
-/// `IconPreview-<asset>`. They are drawn by scripts/app_icons.js.
+/// `IconPreview-<asset>`. They stay light in Dark Mode. They are drawn by scripts/app_icons.js.
 struct AppIconChoice: Identifiable, Hashable {
     /// The icon set; « AppIcon » is the main icon.
     let asset: String
@@ -18,7 +18,8 @@ struct AppIconChoice: Identifiable, Hashable {
     static let main = "AppIcon"
 
     static let all: [AppIconChoice] = [
-        AppIconChoice(asset: main, title: tr("Verre rouge")),
+        AppIconChoice(asset: main, title: tr("Classique")),
+        AppIconChoice(asset: "AppIcon-RedGlass", title: tr("Verre rouge")),
         AppIconChoice(asset: "AppIcon-Jade", title: tr("Verre jade")),
         AppIconChoice(asset: "AppIcon-Night", title: tr("Verre nuit")),
         AppIconChoice(asset: "AppIcon-Blue", title: tr("Verre bleu")),
@@ -34,7 +35,6 @@ struct AppIconChoice: Identifiable, Hashable {
         AppIconChoice(asset: "AppIcon-Sakura", title: tr("Verre sakura")),
         AppIconChoice(asset: "AppIcon-Forest", title: tr("Verre forêt")),
         AppIconChoice(asset: "AppIcon-Graphite", title: tr("Verre graphite")),
-        AppIconChoice(asset: "AppIcon-Classic", title: tr("Classique")),
     ]
 }
 

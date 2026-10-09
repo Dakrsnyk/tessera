@@ -2,9 +2,10 @@
 
     python3 scripts/app_icons_install.py <folder rendered by app_icons.js>
 
-Each icon becomes an icon set (light, dark, tinted at 1024 px) and a small picture
-`IconPreview-<name>` shown in « Icône de l'app ». The main icon is AppIcon; every other icon set
-is built as an alternate icon (ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS).
+Each icon becomes an icon set (1024 px; its light picture also fills the dark slot, so the icon stays
+light when the iPhone is in Dark Mode; plus the tinted one) and a small picture `IconPreview-<name>`
+shown in « Icône de l'app ». The main icon is AppIcon (Classique); every other icon set is built as
+an alternate icon (ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS).
 """
 import json
 import os
@@ -22,7 +23,7 @@ def icon_set(name, source):
     folder = os.path.join(ASSETS, f"{name}.appiconset")
     os.makedirs(folder, exist_ok=True)
     images = []
-    for variant, suffix, appearance in (("light", "", None), ("dark", "-Dark", "dark"), ("tinted", "-Tinted", "tinted")):
+    for variant, suffix, appearance in (("light", "", None), ("light", "-Dark", "dark"), ("tinted", "-Tinted", "tinted")):
         filename = f"{name}{suffix}-1024.png"
         Image.open(os.path.join(source, f"{name}-{variant}.png")).convert("RGB").save(os.path.join(folder, filename), optimize=True)
         image = {"filename": filename, "idiom": "universal", "platform": "ios", "size": "1024x1024"}

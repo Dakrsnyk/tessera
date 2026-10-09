@@ -1,7 +1,7 @@
 {
   "images": [
     {
-      "filename": "AppIcon-Classic-1024.png",
+      "filename": "AppIcon-RedGlass-1024.png",
       "idiom": "universal",
       "platform": "ios",
       "size": "1024x1024"
@@ -13,7 +13,7 @@
           "value": "dark"
         }
       ],
-      "filename": "AppIcon-Classic-Dark-1024.png",
+      "filename": "AppIcon-RedGlass-Dark-1024.png",
       "idiom": "universal",
       "platform": "ios",
       "size": "1024x1024"
@@ -25,7 +25,7 @@
           "value": "tinted"
         }
       ],
-      "filename": "AppIcon-Classic-Tinted-1024.png",
+      "filename": "AppIcon-RedGlass-Tinted-1024.png",
       "idiom": "universal",
       "platform": "ios",
       "size": "1024x1024"

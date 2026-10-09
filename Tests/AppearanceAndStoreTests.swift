@@ -34,9 +34,9 @@ final class AppearanceAndStoreTests: XCTestCase {
         }
     }
 
-    func testAppIconsComeWithTheirPictureAndVerreRougeFirst() {
+    func testAppIconsComeWithTheirPictureAndClassiqueFirst() {
         let icons = AppIconChoice.all
-        XCTAssertEqual(icons.first?.asset, AppIconChoice.main, "Verre rouge, the main icon, comes first")
+        XCTAssertEqual(icons.first?.asset, AppIconChoice.main, "Classique, the main icon, comes first")
         XCTAssertNil(icons.first?.alternateName)
         XCTAssertEqual(Set(icons.map(\.asset)).count, icons.count)
         for icon in icons.dropFirst() {
