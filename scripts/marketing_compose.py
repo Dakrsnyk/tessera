@@ -7,6 +7,8 @@ a phone was rendered twice, its screen area white then black: the difference bet
 for each pixel, how much of the screen shows through, and the real capture of the screen goes there
 (shadows and widgets drawn over the phone stay on top). The two halves of a panorama are joined
 before matting, since a phone or a widget can straddle them, then cut apart again.
+The simulator draws its Dynamic Island into every screenshot: on a scene it is painted over with
+the ground around it (the island drawn on each phone covers the one of the real screen).
 Also writes contact-sheet.jpg: every screenshot, numbered, in order. Needs Pillow and numpy.
 """
 import os
@@ -30,7 +32,34 @@ def scenes():
 
 
 def load(path):
-    return np.asarray(Image.open(path).convert("RGB"), dtype=np.float32)
+    return without_island(np.asarray(Image.open(path).convert("RGB"), dtype=np.float32))
+
+
+def without_island(image):
+    """Paints the ground back over the black Dynamic Island the simulator puts in its screenshots:
+    each column of the area goes smoothly from the pixel above it to the pixel below it."""
+    height, width = image.shape[:2]
+    left = width // 4
+    area = image[: height // 12, left: width - left]
+    ys, xs = np.nonzero(area.sum(axis=2) < 6)
+    if len(xs) < 500:
+        return image
+    y0, y1 = max(1, int(ys.min()) - 4), int(ys.max()) + 4
+    x0, x1 = left + int(xs.min()) - 4, left + int(xs.max()) + 4
+    # Rows averaged and smoothed sideways, or the dithering of the gradient would draw stripes.
+    above = smooth(image[max(0, y0 - 8):y0, x0:x1 + 1].mean(axis=0))
+    below = smooth(image[y1 + 1:y1 + 9, x0:x1 + 1].mean(axis=0))
+    t = np.linspace(0.0, 1.0, y1 - y0 + 1)[:, None, None]
+    image = image.copy()
+    image[y0:y1 + 1, x0:x1 + 1] = above[None] * (1 - t) + below[None] * t
+    return image
+
+
+def smooth(row, size=31):
+    """A row of pixels blurred sideways (edges repeated)."""
+    padded = np.pad(row, ((size // 2, size // 2), (0, 0)), mode="edge")
+    kernel = np.ones(size) / size
+    return np.stack([np.convolve(padded[:, c], kernel, mode="valid") for c in range(row.shape[1])], axis=1)
 
 
 def matte(white, black, screen):
@@ -71,9 +100,10 @@ def compose(source, output):
             written.append(target)
             continue
         if screen is None:
-            Image.open(os.path.join(source, f"{scene}.png")).convert("RGB").save(target, optimize=True)
+            save(load(os.path.join(source, f"{scene}.png")), target)
             written.append(target)
             continue
+        # The real screen keeps its island: the one drawn on the phone covers it.
         capture = Image.open(os.path.join(source, f"screen-{screen}.png"))
         if scene.startswith("pano-"):
             base = scene[:-2]

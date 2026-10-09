@@ -486,9 +486,14 @@ jobs:
               shot "$scene" "marketing-$scene"
             fi
           done
-          # The real screens that go inside the phones.
+          # The real screens that go inside the phones. A screen captured before it is drawn is almost
+          # empty (a white PNG of about 100 KB, a real screen is 800 KB or more): it is taken again.
           for screen in $(printf '%s\n' "${LINES[@]}" | awk 'NF > 1 { print $2 }' | sort -u); do
-            shot "screen-$screen" "$screen"
+            for attempt in 1 2 3; do
+              shot "screen-$screen" "$screen"
+              [ "$(stat -f%z "marketing/screen-$screen.png")" -gt 300000 ] && break
+              sleep 5
+            done
           done
           sips -g pixelWidth -g pixelHeight marketing/hero.png
 

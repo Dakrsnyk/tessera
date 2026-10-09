@@ -227,6 +227,8 @@ struct MarketingPhone<Screen: View>: View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: outerRadius, style: .continuous)
                 .fill(Color(hex: "16171A"))
+                // Only the body casts a shadow: nothing drawn on the screen darkens the real capture.
+                .shadow(color: .black.opacity(0.28), radius: 40, x: 0, y: 26)
                 .overlay {
                     RoundedRectangle(cornerRadius: outerRadius, style: .continuous)
                         .strokeBorder(
@@ -249,7 +251,6 @@ struct MarketingPhone<Screen: View>: View {
             }
         }
         .frame(width: width, height: screenHeight + bezel * 2)
-        .shadow(color: .black.opacity(0.28), radius: 40, x: 0, y: 26)
     }
 }
 
