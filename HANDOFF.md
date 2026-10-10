@@ -36,6 +36,11 @@ Fait :
 - Finances : `BalanceChartCard` en haut (Mois / 3 mois / Année) sur `BudgetMath.balanceHistory` ; « Solde de départ » facultatif (`BudgetState.openingBalance/openingDate`, `OpeningBalanceEditor`) : sans lui, le graphique part de zéro.
 - Créateur : un format choisi garde la sélection ; seules les captures/tests (`-screenshotCreatorFormat`) reprennent les widgets habituels du format.
 
+## Paywall, rappels et note (2026-10-10)
+- Paywall contextuel : `PaywallContext` (App/Premium) dit ce qui a été touché (widget et ses réglages Premium, limite de widgets ou d'habitudes, mois passés, accueil, pack) ; `router.showPaywall(_:)` ou `.sheet(item:)` local ; l'avantage lié passe en tête de liste.
+- Rappels intelligents : `SmartReminders` (Shared) planifie 7 jours (séance prévue non commencée à 18 h, aucun repas noté à 20 h si on note ses repas, facture la veille à 9 h), replanifiés après chaque changement (`AppModel.syncReminders`, boutons des widgets). Réglages : Profil › Rappels intelligents, et « Mes paramètres » de Fitness/Nutrition/Finances. Actifs par défaut, mais rien ne part sans autorisation.
+- Note : plus jamais à l'ouverture ; après un bon moment (`AppModel.celebrate` : séance enregistrée, objectif calorique atteint, objectif d'épargne atteint, widget créé), dès 5 ouvertures, une fois par version majeure, écran calme (`RootView`).
+
 ## Outils
 - Hook `.git/hooks/pre-commit` : check_swift.py + `l10n_catalog.py sync` (bloque un texte non traduit).
 - `bash scripts/ci_report.sh [run]` : attend la CI et n'affiche que statuts, tests échoués, erreurs, l10n.

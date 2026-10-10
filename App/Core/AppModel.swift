@@ -48,6 +48,7 @@ final class AppModel {
 
     @ObservationIgnored private let store: SharedStore
     @ObservationIgnored private var reloadTask: Task<Void, Never>?
+    @ObservationIgnored private var remindersTask: Task<Void, Never>?
     @ObservationIgnored private var workoutObserver: NSObjectProtocol?
 
     init(store: SharedStore = .shared) {
@@ -128,6 +129,7 @@ final class AppModel {
     /// Changes one mini-app's data, saves it for the widgets and refreshes them.
     func update<T: StoredState>(_ keyPath: ReferenceWritableKeyPath<AppModel, T>, _ change: (inout T) -> Void) {
         var value = self[keyPath: keyPath]
+        let before = value
         change(&value)
         self[keyPath: keyPath] = value
         store.save(value)
@@ -141,7 +143,41 @@ final class AppModel {
         if let fitness = value as? FitnessState {
             Task { await WorkoutLiveActivity.sync(fitness) }
         }
+        // The smart reminders follow what is done (a workout begun, a meal noted, a new bill).
+        if T.self == FitnessState.self || T.self == NutritionState.self || T.self == BudgetState.self {
+            syncReminders()
+        }
+        noteGoodMoment(from: before, to: value)
         scheduleWidgetReload()
+    }
+
+    // MARK: Good moments
+
+    /// Moments worth a rating request: RootView asks once the screen is calm (`ReviewPrompt`).
+    private(set) var goodMoments = 0
+
+    /// Something the person can be pleased with: a workout finished, a goal reached, a widget made.
+    func celebrate() {
+        goodMoments += 1
+    }
+
+    /// A workout recorded, the calorie goal of the day reached, a savings goal reached.
+    private func noteGoodMoment<T>(from before: T, to after: T) {
+        if let old = before as? FitnessState, let new = after as? FitnessState,
+           let last = new.history.last, last.id != old.history.last?.id {
+            celebrate()
+        }
+        if let old = before as? NutritionState, let new = after as? NutritionState {
+            let goal = new.goals.kcal
+            let was = NutritionMath.totals(old, on: Date()).kcal
+            let now = NutritionMath.totals(new, on: Date()).kcal
+            func onTarget(_ kcal: Double) -> Bool { goal > 0 && abs(kcal - goal) <= goal * 0.1 }
+            if now > was, onTarget(now), !onTarget(was) { celebrate() }
+        }
+        if let old = before as? BudgetState, let new = after as? BudgetState {
+            func reached(_ state: BudgetState) -> Int { state.goals.filter { $0.target > 0 && $0.saved >= $0.target }.count }
+            if reached(new) > reached(old) { celebrate() }
+        }
     }
 
     /// Everything a widget of any kind may show, from the data in memory (used by previews).
@@ -361,6 +397,11 @@ final class AppModel {
         if before.cryptoCurrency != settings.cryptoCurrency {
             crypto = [:]
         }
+        if before.remindsWorkout != settings.remindsWorkout || before.remindsMeals != settings.remindsMeals
+            || before.remindsBills != settings.remindsBills || before.workoutReminderHour != settings.workoutReminderHour
+            || before.mealReminderHour != settings.mealReminderHour || before.currencyCode != settings.currencyCode {
+            syncReminders()
+        }
         scheduleWidgetReload()
     }
 
@@ -488,6 +529,19 @@ final class AppModel {
     // MARK: Widgets
 
     /// Coalesces bursts of edits (typing a task, dragging a slider) into one widget reload.
+    /// Plans the smart reminders again from the data in memory, once the changes settle.
+    func syncReminders() {
+        #if DEBUG
+        if ScreenshotMode.isActive { return }
+        #endif
+        remindersTask?.cancel()
+        remindersTask = Task {
+            try? await Task.sleep(for: .seconds(1))
+            guard !Task.isCancelled else { return }
+            await SmartReminders.sync(fitness: fitness, nutrition: nutrition, budget: budget, settings: settings)
+        }
+    }
+
     func scheduleWidgetReload() {
         reloadTask?.cancel()
         reloadTask = Task {

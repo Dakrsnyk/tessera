@@ -1,4 +1,3 @@
-import StoreKit
 import SwiftUI
 import WidgetKit
 
@@ -7,7 +6,6 @@ import WidgetKit
 struct HomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
-    @Environment(\.requestReview) private var requestReview
 
     var body: some View {
         @Bindable var router = router
@@ -41,7 +39,6 @@ struct HomeView: View {
                 model.refreshEvents()
                 await model.refreshWeather()
             }
-            .task(id: model.settings.openCount) { await askForReviewIfDue() }
             .toolbar {
                 // The date, on the same line as the profile, in the app style's color.
                 ToolbarItem(placement: .topBarLeading) {
@@ -85,22 +82,6 @@ struct HomeView: View {
         }
         // Home scrolls up and down only: never sideways, never a sideways bounce.
         .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
-    }
-
-    /// At the 10th opening, once per major version, on a calm Home: nothing open over it, no tour,
-    /// no workout in progress, after a short pause.
-    private func askForReviewIfDue() async {
-        guard ReviewPrompt.shouldAsk(model.settings) else { return }
-        try? await Task.sleep(for: .seconds(2.5))
-        guard !Task.isCancelled, ReviewPrompt.shouldAsk(model.settings), isCalm else { return }
-        model.updateSettings { ReviewPrompt.markAsked(&$0) }
-        requestReview()
-    }
-
-    private var isCalm: Bool {
-        router.tab == .home && router.homePath.isEmpty && router.tutorialStep == nil && router.editor == nil
-            && !router.isPaywallPresented && router.content == nil && !router.isAddGuidePresented
-            && !router.isFoodScanPresented && !router.isProfilePresented && model.fitness.active == nil
     }
 
     private func bringIntoView(_ step: TutorialStep?, proxy: ScrollViewProxy) {

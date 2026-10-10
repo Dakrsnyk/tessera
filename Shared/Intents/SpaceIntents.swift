@@ -21,6 +21,8 @@ private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
     refreshWidgets()
     await MainActor.run { NotificationCenter.default.post(name: .workoutSavedOutside, object: nil) }
     await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
+    // The workout begun: no reminder for it tonight.
+    await SmartReminders.refresh()
 }
 
 /// A Live Activity intent: from a widget, the Lock Screen or the Live Activity, it runs in the app's
@@ -95,6 +97,8 @@ struct LogFoodIntent: AppIntent {
             state.log(food, grams: food.servingGrams, meal: MealType.current(at: now), at: now)
         }
         refreshWidgets()
+        // A meal noted: no « Rien de noté aujourd'hui » this evening.
+        await SmartReminders.refresh()
         return .result()
     }
 }

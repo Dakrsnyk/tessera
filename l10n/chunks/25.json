@@ -518,5 +518,185 @@
   "key": "Prévue le %@",
   "placeholders": 1,
   "uses": []
+ },
+ {
+  "key": "Débloque ces widgets",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Débloque ce widget",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Il utilise des réglages de Premium.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Plus de %@ widgets",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "La version gratuite garde %@ widgets. Avec Premium, enregistre-en autant que tu veux, et garde tes variantes.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Plus de %@ habitudes",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "La version gratuite suit %@ habitudes. Avec Premium, suis-en autant que tu veux, sur tes widgets aussi.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Tes mois passés",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Tout ce que tu notes est gardé. Premium affiche les mois d'avant et l'évolution de tes finances sur six mois.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "L'accueil « %@ »",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "%@ prêts à poser d'un coup, avec leurs styles.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Le pack « %@ »",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "%@ assortis, à personnaliser et ajouter ensemble.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Et avec Premium, tout le reste :",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Rappel de séance",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Désactivé",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Rappel des repas",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Rappel des factures",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "La veille",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Rappels intelligents",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Autoriser les notifications",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Les rappels ci-dessous partent une fois les notifications autorisées.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Les notifications de Tessera sont refusées dans les réglages de l'iPhone.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Prochain rappel",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Un jour où ton programme prévoit une séance, si elle n'est pas commencée à cette heure.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Si aucun repas n'est noté ce jour-là. Seulement si tu as noté des repas cette semaine.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "La veille de chaque facture et abonnement de Finances, à 9 h.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Aujourd'hui à %@",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Demain à %@",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "%@ à %@",
+  "placeholders": 2,
+  "uses": []
+ },
+ {
+  "key": "Ta séance t'attend",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "« %@ » est prévue aujourd'hui.",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Rien de noté aujourd'hui",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "Ajoute tes repas en quelques secondes pour garder ton suivi juste.",
+  "placeholders": 0,
+  "uses": []
+ },
+ {
+  "key": "%@ demain",
+  "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "%@ à payer demain.",
+  "placeholders": 1,
+  "uses": []
  }
 ]

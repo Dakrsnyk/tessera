@@ -3,7 +3,7 @@ import SwiftUI
 struct HabitsView: View {
     @Environment(AppModel.self) private var model
     @State private var editing: Habit?
-    @State private var showsPaywall = false
+    @State private var paywall: PaywallContext?
     /// The day the habits are checked for: a habit forgotten yesterday can still be checked.
     @State private var day = Date()
 
@@ -58,7 +58,7 @@ struct HabitsView: View {
                     if model.canAddHabit {
                         editing = Habit(name: "", symbol: HabitEditor.symbols[0], colorHex: Palette.freeAccents[0].hex)
                     } else {
-                        showsPaywall = true
+                        paywall = .habitLimit
                     }
                 } label: {
                     Label(tr("Nouvelle habitude"), systemImage: "plus.circle.fill")
@@ -75,7 +75,7 @@ struct HabitsView: View {
         .sheet(item: $editing) { habit in
             HabitEditor(habit: habit, isNew: !habits.contains { $0.id == habit.id })
         }
-        .sheet(isPresented: $showsPaywall) { PaywallView() }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 }
 

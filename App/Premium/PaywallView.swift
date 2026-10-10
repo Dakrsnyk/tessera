@@ -3,6 +3,8 @@ import SwiftUI
 import WidgetKit
 
 struct PaywallView: View {
+    /// What the paywall opens for: shown first, before everything Premium adds (nil: the general one).
+    var context: PaywallContext? = nil
     @Environment(AppModel.self) private var model
     @Environment(PremiumStore.self) private var store
     @Environment(\.dismiss) private var dismiss
@@ -15,8 +17,12 @@ struct PaywallView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 28) {
-                    hero
-                    showcase
+                    if let context {
+                        contextHeader(context)
+                    } else {
+                        hero
+                        showcase
+                    }
                     perks
                     if model.isPremium {
                         activeState
@@ -89,14 +95,80 @@ struct PaywallView: View {
         .accessibilityHidden(true)
     }
 
+    /// What was touched: its picture (the widgets as they will look), what it needs, then the rest.
+    private func contextHeader(_ context: PaywallContext) -> some View {
+        VStack(spacing: 14) {
+            HStack(spacing: 8) {
+                TesseraMark(size: 26)
+                Text(tr("Tessera Premium"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+            Image(systemName: context.symbol)
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundStyle(Color.premiumInk)
+                .frame(width: 56, height: 56)
+                .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            Text(context.title)
+                .font(.title.weight(.bold))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(context.detail)
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+            if !context.designs.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .top, spacing: 12) {
+                        ForEach(context.designs.prefix(6)) { design in
+                            let family = design.displayFormat.family
+                            WidgetPreview(design: design, family: family, payload: model.previewPayload(for: design),
+                                          width: family == .systemSmall ? 140 : 300)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+                .padding(.horizontal, -20)
+                .accessibilityHidden(true)
+            }
+            Text(tr("Et avec Premium, tout le reste :"))
+                .font(.subheadline.weight(.semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 6)
+        }
+        .padding(.top, 4)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("paywall-context")
+    }
+
+    private var perkRows: [(perk: PaywallPerk, symbol: String, title: String, detail: String)] {
+        [
+            (.widgets, "square.stack.3d.up.fill", tr("Tous les widgets des espaces"), tr("Records, volume, bénéfice, MRR, devoirs, vol, carburant…")),
+            (.smart, "wand.and.stars", tr("Widgets intelligents"), tr("« Maintenant » change selon le moment, et les analyses résument ta journée")),
+            (.packs, "bag.fill", tr("Tous les packs"), tr("Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…")),
+            (.styles, "paintpalette", tr("\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus"), tr("Espace, Mars, Océan, Aurore, Élégant, Synthwave…")),
+            (.history, "chart.bar.xaxis", tr("Analyses et historiques"), tr("L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés")),
+            (.photo, "photo", tr("Fonds photo, couleurs libres"), tr("Et les polices Serif et Mono")),
+        ]
+    }
+
+    /// The advantages, the one that goes with what was touched first and set off.
     private var perks: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            PerkRow(symbol: "square.stack.3d.up.fill", title: tr("Tous les widgets des espaces"), detail: tr("Records, volume, bénéfice, MRR, devoirs, vol, carburant…"))
-            PerkRow(symbol: "wand.and.stars", title: tr("Widgets intelligents"), detail: tr("« Maintenant » change selon le moment, et les analyses résument ta journée"))
-            PerkRow(symbol: "bag.fill", title: tr("Tous les packs"), detail: tr("Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…"))
-            PerkRow(symbol: "paintpalette", title: tr("\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus"), detail: tr("Espace, Mars, Océan, Aurore, Élégant, Synthwave…"))
-            PerkRow(symbol: "chart.bar.xaxis", title: tr("Analyses et historiques"), detail: tr("L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés"))
-            PerkRow(symbol: "photo", title: tr("Fonds photo, couleurs libres"), detail: tr("Et les polices Serif et Mono"))
+        let highlighted = context?.perk
+        let rows = perkRows.filter { $0.perk == highlighted } + perkRows.filter { $0.perk != highlighted }
+        return VStack(alignment: .leading, spacing: 16) {
+            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                PerkRow(symbol: row.symbol, title: row.title, detail: row.detail)
+                    .padding(row.perk == highlighted ? 10 : 0)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background {
+                        if row.perk == highlighted {
+                            RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color.premiumFill.opacity(0.6))
+                        }
+                    }
+                    .padding(row.perk == highlighted ? -10 : 0)
+            }
         }
         .card(padding: 20)
     }

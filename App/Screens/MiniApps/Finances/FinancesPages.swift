@@ -68,7 +68,7 @@ struct FinancesTransactionsPage: View {
         let interval = BudgetMath.monthInterval(month)
         List {
             Section {
-                MonthSwitcher(month: $month, earliest: model.isPremium ? nil : PremiumHistory.earliestFreeDay()) { router.isPaywallPresented = true }
+                MonthSwitcher(month: $month, earliest: model.isPremium ? nil : PremiumHistory.earliestFreeDay()) { router.showPaywall(.financesHistory) }
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
                 Picker(tr("Type"), selection: $kind) {
@@ -221,7 +221,7 @@ struct FinancesCategoriesPage: View {
         let spends = BudgetMath.byCategory(state, in: interval)
         let total = spends.reduce(0) { $0 + $1.amount }
         MiniAppScroll {
-            MonthSwitcher(month: $month, earliest: model.isPremium ? nil : PremiumHistory.earliestFreeDay()) { router.isPaywallPresented = true }
+            MonthSwitcher(month: $month, earliest: model.isPremium ? nil : PremiumHistory.earliestFreeDay()) { router.showPaywall(.financesHistory) }
             if total > 0 {
                 Chart(spends, id: \.name) { spend in
                     SectorMark(angle: .value("Montant", spend.amount), innerRadius: .ratio(0.62), angularInset: 1.5)

@@ -120,6 +120,8 @@ struct ProfileView: View {
 
                 Section {
                     LabeledContent(tr("Autorisation"), value: notificationStatus)
+                    NavigationLink { SmartRemindersView() } label: { Text(tr("Rappels intelligents")) }
+                        .accessibilityIdentifier("settings-smart-reminders")
                     NavigationLink { HydrationView() } label: { Text(tr("Rappels d'hydratation")) }
                     NavigationLink { HabitsView() } label: { Text(tr("Rappels d'habitudes")) }
                     if notificationStatus == tr("Refusée") {

@@ -349,6 +349,10 @@ jobs:
             WAIT=8 shoot studio-theme studio-theme top light
             WAIT=8 shoot studio-style studio-style top light
             WAIT=7 shoot settings-end settings bottom light
+            # The paywall opened for what was touched, and the smart reminders.
+            WAIT=7 shoot paywall-widget paywall-widget top light
+            WAIT=7 shoot paywall-history paywall-history top light
+            WAIT=7 shoot reminders reminders top light
             exit 0
           fi
           if [ "$DEMOS" = "true" ]; then

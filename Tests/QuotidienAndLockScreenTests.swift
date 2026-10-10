@@ -96,23 +96,52 @@ final class QuotidienAndLockScreenTests: XCTestCase {
 
     // MARK: Rating
 
-    func testTheRatingIsAskedAtTheTenthOpeningOnce() {
+    func testTheRatingWaitsForAFewOpeningsThenIsAskedOnce() {
         var settings = AppSettings()
         let start = Date(timeIntervalSince1970: 1_800_000_000)
-        for index in 0..<9 {
+        for index in 0..<4 {
             ReviewPrompt.countOpen(&settings, at: start.addingTimeInterval(Double(index) * 5 * 3600))
         }
-        XCTAssertEqual(settings.openCount, 9)
+        XCTAssertEqual(settings.openCount, 4)
         XCTAssertFalse(ReviewPrompt.shouldAsk(settings, version: "1"))
         // Coming back a few minutes later is the same opening.
-        ReviewPrompt.countOpen(&settings, at: start.addingTimeInterval(8 * 5 * 3600 + 600))
-        XCTAssertEqual(settings.openCount, 9)
-        ReviewPrompt.countOpen(&settings, at: start.addingTimeInterval(9 * 5 * 3600))
-        XCTAssertEqual(settings.openCount, 10)
+        ReviewPrompt.countOpen(&settings, at: start.addingTimeInterval(3 * 5 * 3600 + 600))
+        XCTAssertEqual(settings.openCount, 4)
+        ReviewPrompt.countOpen(&settings, at: start.addingTimeInterval(4 * 5 * 3600))
+        XCTAssertEqual(settings.openCount, ReviewPrompt.opensBeforeAsking)
         XCTAssertTrue(ReviewPrompt.shouldAsk(settings, version: "1"))
         ReviewPrompt.markAsked(&settings, version: "1")
         XCTAssertFalse(ReviewPrompt.shouldAsk(settings, version: "1"), "Asked once")
         XCTAssertTrue(ReviewPrompt.shouldAsk(settings, version: "2"), "Asked again for a new major version")
+    }
+
+    func testGoodMomentsAreAWorkoutFinishedAndAGoalReached() {
+        let model = temporaryModel()
+        let start = model.goodMoments
+        // A set done is not yet a good moment; the workout recorded is.
+        let routine = Routine(name: "Jambes", exercises: [ExerciseTemplate(name: "Squat", sets: 2, reps: 5, weight: 100)])
+        model.update(\.fitness) { $0.startSession(routine, at: Date()) }
+        model.update(\.fitness) { _ = $0.active?.completeSet(at: Date()) }
+        XCTAssertEqual(model.goodMoments, start)
+        model.update(\.fitness) { $0.finishActive(at: Date()) }
+        XCTAssertEqual(model.goodMoments, start + 1)
+
+        // The calorie goal of the day reached (within 10 %), once.
+        model.update(\.nutrition) { $0.goals.kcal = 500 }
+        let food = FoodItem(id: "test.food", name: "Riz", brand: nil, kcal: 100, protein: 2, carbs: 22, fat: 0.3, fiber: 0.4,
+                            servingGrams: 100, servingName: "", source: .custom, barcode: nil)
+        model.update(\.nutrition) { $0.log(food, grams: 300, meal: .lunch) }
+        XCTAssertEqual(model.goodMoments, start + 1, "300 kcal of 500: not yet")
+        model.update(\.nutrition) { $0.log(food, grams: 180, meal: .dinner) }
+        XCTAssertEqual(model.goodMoments, start + 2, "480 kcal of 500: reached")
+        model.update(\.nutrition) { $0.log(food, grams: 10, meal: .snack) }
+        XCTAssertEqual(model.goodMoments, start + 2, "Still on target: no second time")
+
+        // A savings goal reached.
+        model.update(\.budget) { $0.goals = [SavingsGoal(name: "Vélo", target: 800, saved: 750)] }
+        XCTAssertEqual(model.goodMoments, start + 2)
+        model.update(\.budget) { $0.goals[0].saved = 800 }
+        XCTAssertEqual(model.goodMoments, start + 3)
     }
 
     // MARK: Lock Screen workout

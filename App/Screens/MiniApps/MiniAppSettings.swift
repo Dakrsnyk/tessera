@@ -49,6 +49,27 @@ struct MiniAppSettingsSection: View {
                 Spacer()
             }
             summary
+            if let reminder {
+                NavigationLink {
+                    SmartRemindersView()
+                } label: {
+                    HStack(spacing: 8) {
+                        Label(reminder.title, systemImage: "bell.badge")
+                            .font(.subheadline)
+                            .foregroundStyle(.primary)
+                        Spacer(minLength: 8)
+                        Text(reminder.value)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("miniapp-reminder")
+            }
             Button {
                 withAnimation(.snappy) { isEditing.toggle() }
             } label: {
@@ -70,6 +91,23 @@ struct MiniAppSettingsSection: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("miniapp-settings")
+    }
+
+    // MARK: Reminder
+
+    /// The smart reminder that goes with this mini-app, and when it comes.
+    private var reminder: (title: String, value: String)? {
+        let settings = model.settings
+        func hour(_ value: Int) -> String {
+            let date = DateMath.calendar.date(bySettingHour: value, minute: 0, second: 0, of: Date()) ?? Date()
+            return Fmt.time(date, uses24Hour: settings.uses24HourClock)
+        }
+        switch app {
+        case .fitness: return (tr("Rappel de séance"), settings.remindsWorkout ? hour(settings.workoutReminderHour) : tr("Désactivé"))
+        case .nutrition: return (tr("Rappel des repas"), settings.remindsMeals ? hour(settings.mealReminderHour) : tr("Désactivé"))
+        case .finances: return (tr("Rappel des factures"), settings.remindsBills ? tr("La veille") : tr("Désactivé"))
+        default: return nil
+        }
     }
 
     // MARK: Current values

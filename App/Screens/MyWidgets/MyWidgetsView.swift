@@ -15,7 +15,7 @@ struct MyWidgetsView: View {
     @State private var selectionOrder: [UUID] = []
     @State private var confirmsBatchDeletion = false
     @State private var showsFusion = false
-    @State private var showsPaywall = false
+    @State private var paywall: PaywallContext?
     /// Where each selected card is on screen, for the merge animation.
     @State private var cardFrames: [UUID: CGRect] = [:]
     @State private var fusionRun: FusionRun?
@@ -166,7 +166,7 @@ struct MyWidgetsView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showsPaywall) { PaywallView() }
+            .sheet(item: $paywall) { PaywallView(context: $0) }
             .overlay {
                 if let run = fusionRun {
                     FusionOverlay(run: run) { phase in
@@ -310,7 +310,7 @@ struct MyWidgetsView: View {
     /// The same widget, same data, opened in the Studio to give it another look.
     private func makeVariant(of design: WidgetDesign) {
         guard let copy = model.duplicate(design, asVariant: true) else {
-            router.isPaywallPresented = true
+            router.showPaywall(.designLimit)
             return
         }
         Haptics.success()
@@ -319,7 +319,7 @@ struct MyWidgetsView: View {
 
     private func duplicate(_ design: WidgetDesign) {
         guard let copy = model.duplicate(design) else {
-            router.isPaywallPresented = true
+            router.showPaywall(.designLimit)
             return
         }
         Haptics.success()
@@ -357,7 +357,7 @@ struct MyWidgetsView: View {
                     .font(.subheadline.weight(.semibold))
                 BarView(progress: Double(used) / Double(limit), color: .accentColor, track: Color.secondary.opacity(0.2), height: 5)
             }
-            Button(tr("Illimité")) { router.isPaywallPresented = true }
+            Button(tr("Illimité")) { router.showPaywall(.designLimit) }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
         }
@@ -432,7 +432,7 @@ struct MyWidgetsView: View {
         Task { @MainActor in
             try? await Task.sleep(for: .milliseconds(380))
             if needsPaywall {
-                showsPaywall = true
+                paywall = merged.usesPremiumFeatures && !model.isPremium ? PaywallContext.designs([merged]) : PaywallContext.designLimit
                 return
             }
             fusionRun = FusionRun(sources: sources, merged: merged, mergedPayload: model.payload(for: merged), keepsOriginals: keepsOriginals)

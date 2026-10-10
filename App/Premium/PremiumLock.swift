@@ -25,7 +25,8 @@ struct PremiumLockCard: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             Button {
-                router.isPaywallPresented = true
+                // The paywall starts with this card's own words.
+                router.showPaywall(PaywallContext(symbol: symbol, title: title, detail: message, perk: .history))
             } label: {
                 Label(tr("Découvrir Premium"), systemImage: "sparkles")
                     .font(.subheadline.weight(.semibold))

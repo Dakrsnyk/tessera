@@ -2069,6 +2069,53 @@
         }
       }
     },
+    "%@ assortis, à personnaliser et ajouter ensemble.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, die zusammenpassen – gemeinsam anpassen und hinzufügen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ that go together, to customize and add at once."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a juego, para personalizar y añadir juntos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ assortis, à personnaliser et ajouter ensemble."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ abbinati, da personalizzare e aggiungere insieme."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "相性のよい%@を、まとめてカスタマイズして追加できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ combinando, para personalizar e adicionar juntos."
+          }
+        }
+      }
+    },
     "%@ au total": {
       "extractionState": "manual",
       "localizations": {
@@ -3052,6 +3099,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ do seu ano em andamento"
+          }
+        }
+      }
+    },
+    "%@ demain": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ morgen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tomorrow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ mañana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ demain"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ domani"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明日は%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ amanhã"
           }
         }
       }
@@ -6111,6 +6205,53 @@
         }
       }
     },
+    "%@ prêts à poser d'un coup, avec leurs styles.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, auf einmal bereit zum Platzieren, mit ihren Stilen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ready to place in one go, with their styles."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ listos para poner de una vez, con sus estilos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ prêts à poser d'un coup, avec leurs styles."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pronti da posizionare in un colpo, con i loro stili."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@をスタイルごとまとめて配置できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ prontos para colocar de uma vez, com seus estilos."
+          }
+        }
+      }
+    },
     "%@ reps": {
       "extractionState": "manual",
       "localizations": {
@@ -8743,6 +8884,53 @@
         }
       }
     },
+    "%@ à %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ um %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ at %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ a las %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ à %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ alle %2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ às %2$@"
+          }
+        }
+      }
+    },
     "%@ à compléter": {
       "extractionState": "manual",
       "localizations": {
@@ -8833,6 +9021,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ a fazer"
+          }
+        }
+      }
+    },
+    "%@ à payer demain.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ morgen fällig."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ due tomorrow."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a pagar mañana."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ à payer demain."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ da pagare domani."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明日 %@ の支払いがあります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a pagar amanhã."
           }
         }
       }
@@ -18327,6 +18562,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicione seus investimentos no Tessera, no espaço Investimentos."
+          }
+        }
+      }
+    },
+    "Ajoute tes repas en quelques secondes pour garder ton suivi juste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trag deine Mahlzeiten in Sekunden ein, damit dein Verlauf stimmt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your meals in a few seconds to keep your tracking accurate."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade tus comidas en unos segundos para que tu seguimiento sea exacto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute tes repas en quelques secondes pour garder ton suivi juste."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi i pasti in pochi secondi per un monitoraggio preciso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "数秒で食事を記録して、正確な記録を保ちましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione suas refeições em segundos para manter seu acompanhamento certo."
           }
         }
       }
@@ -30175,6 +30457,53 @@
         }
       }
     },
+    "Aujourd'hui à %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute um %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today at %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy a las %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd'hui à %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oggi alle %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoje às %@"
+          }
+        }
+      }
+    },
     "Aujourd'hui%@": {
       "extractionState": "manual",
       "localizations": {
@@ -30970,6 +31299,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permitir acesso ao calendário"
+          }
+        }
+      }
+    },
+    "Autoriser les notifications": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen erlauben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow notifications"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir notificaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser les notifications"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consenti le notifiche"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知を許可"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir notificações"
           }
         }
       }
@@ -66130,6 +66506,53 @@
         }
       }
     },
+    "Demain à %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morgen um %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tomorrow at %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mañana a las %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demain à %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domani alle %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明日 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amanhã às %@"
+          }
+        }
+      }
+    },
     "Demain%@": {
       "extractionState": "manual",
       "localizations": {
@@ -73133,6 +73556,100 @@
         }
       }
     },
+    "Débloque ce widget": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Widget freischalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock this widget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquea este widget"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Débloque ce widget"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sblocca questo widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このウィジェットを解除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloqueie este widget"
+          }
+        }
+      }
+    },
+    "Débloque ces widgets": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Widgets freischalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock these widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquea estos widgets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Débloque ces widgets"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sblocca questi widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらのウィジェットを解除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloqueie estes widgets"
+          }
+        }
+      }
+    },
     "Débloquer": {
       "extractionState": "manual",
       "localizations": {
@@ -76513,6 +77030,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gasto hoje: %@"
+          }
+        }
+      }
+    },
+    "Désactivé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactivé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattivato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativado"
           }
         }
       }
@@ -81495,6 +82059,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "E %@ g de proteínas para atingir sua meta."
+          }
+        }
+      }
+    },
+    "Et avec Premium, tout le reste :": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Und mit Premium alles andere:"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "And with Premium, everything else:"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Y con Premium, todo lo demás:"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Et avec Premium, tout le reste :"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E con Premium, tutto il resto:"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "さらにPremiumでは:"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E com o Premium, todo o resto:"
           }
         }
       }
@@ -99218,6 +99829,53 @@
         }
       }
     },
+    "Il utilise des réglages de Premium.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es nutzt Premium-Einstellungen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It uses Premium settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa ajustes de Premium."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il utilise des réglages de Premium."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa impostazioni Premium."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumの設定を使用しています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ele usa ajustes do Premium."
+          }
+        }
+      }
+    },
     "Illimité": {
       "extractionState": "manual",
       "localizations": {
@@ -104388,6 +105046,53 @@
         }
       }
     },
+    "L'accueil « %@ »": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Home-Bildschirm „%@“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “%@” Home Screen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pantalla de inicio «%@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accueil « %@ »"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La schermata Home «%@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホーム画面「%@」"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A tela de início “%@”"
+          }
+        }
+      }
+    },
     "L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers.": {
       "extractionState": "manual",
       "localizations": {
@@ -108477,6 +109182,194 @@
         }
       }
     },
+    "La veille": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am Vortag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day before"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El día antes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La veille"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il giorno prima"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na véspera"
+          }
+        }
+      }
+    },
+    "La veille de chaque facture et abonnement de Finances, à 9 h.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am Vortag jeder Rechnung und jedes Abos in Finanzen, um 9 Uhr."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The day before each bill and subscription in Finances, at 9 AM."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El día antes de cada factura y suscripción de Finanzas, a las 9 h."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La veille de chaque facture et abonnement de Finances, à 9 h."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il giorno prima di ogni fattura e abbonamento di Finanze, alle 9."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「家計」の各請求とサブスクリプションの前日、午前9時に通知します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na véspera de cada fatura e assinatura de Finanças, às 9 h."
+          }
+        }
+      }
+    },
+    "La version gratuite garde %@ widgets. Avec Premium, enregistre-en autant que tu veux, et garde tes variantes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die kostenlose Version behält %@ Widgets. Mit Premium speicherst du so viele du willst, samt Varianten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The free version keeps %@ widgets. With Premium, save as many as you like, variants included."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La versión gratuita guarda %@ widgets. Con Premium, guarda todos los que quieras, con sus variantes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La version gratuite garde %@ widgets. Avec Premium, enregistre-en autant que tu veux, et garde tes variantes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La versione gratuita conserva %@ widget. Con Premium salvane quanti vuoi, varianti comprese."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無料版で保存できるウィジェットは%@個です。Premiumならバリエーションも含めて好きなだけ保存できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A versão gratuita guarda %@ widgets. Com o Premium, salve quantos quiser, com suas variações."
+          }
+        }
+      }
+    },
+    "La version gratuite suit %@ habitudes. Avec Premium, suis-en autant que tu veux, sur tes widgets aussi.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die kostenlose Version verfolgt %@ Gewohnheiten. Mit Premium so viele du willst, auch auf deinen Widgets."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The free version tracks %@ habits. With Premium, track as many as you like, on your widgets too."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La versión gratuita sigue %@ hábitos. Con Premium, sigue todos los que quieras, también en tus widgets."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La version gratuite suit %@ habitudes. Avec Premium, suis-en autant que tu veux, sur tes widgets aussi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La versione gratuita segue %@ abitudini. Con Premium seguine quante vuoi, anche sui tuoi widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無料版で記録できる習慣は%@個です。Premiumならウィジェットでも好きなだけ記録できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A versão gratuita acompanha %@ hábitos. Com o Premium, acompanhe quantos quiser, também nos seus widgets."
+          }
+        }
+      }
+    },
     "Labo 1": {
       "extractionState": "manual",
       "localizations": {
@@ -112190,6 +113083,53 @@
         }
       }
     },
+    "Le pack « %@ »": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Paket „%@“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “%@” pack"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El pack «%@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le pack « %@ »"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pack «%@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パック「%@」"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O pacote “%@”"
+          }
+        }
+      }
+    },
     "Le placement qui a le plus bougé en 24 h.": {
       "extractionState": "manual",
       "localizations": {
@@ -115715,6 +116655,53 @@
         }
       }
     },
+    "Les notifications de Tessera sont refusées dans les réglages de l'iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tesseras Mitteilungen sind in den iPhone-Einstellungen deaktiviert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tessera's notifications are turned off in the iPhone's Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las notificaciones de Tessera están desactivadas en los ajustes del iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les notifications de Tessera sont refusées dans les réglages de l'iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le notifiche di Tessera sono disattivate nelle impostazioni dell'iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhoneの設定でTesseraの通知がオフになっています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As notificações do Tessera estão desativadas nos ajustes do iPhone."
+          }
+        }
+      }
+    },
     "Les notifications sont désactivées pour Tessera dans Réglages.": {
       "extractionState": "manual",
       "localizations": {
@@ -115993,6 +116980,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "A previsão dos próximos sete dias."
+          }
+        }
+      }
+    },
+    "Les rappels ci-dessous partent une fois les notifications autorisées.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erinnerungen unten kommen, sobald Mitteilungen erlaubt sind."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The reminders below are sent once notifications are allowed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los recordatorios de abajo se envían cuando permites las notificaciones."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les rappels ci-dessous partent une fois les notifications autorisées."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I promemoria qui sotto partono una volta consentite le notifiche."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知を許可すると、以下のリマインダーが届きます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os lembretes abaixo são enviados quando as notificações estiverem permitidas."
           }
         }
       }
@@ -150824,6 +151858,100 @@
         }
       }
     },
+    "Plus de %@ habitudes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mehr als %@ Gewohnheiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More than %@ habits"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más de %@ hábitos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus de %@ habitudes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Più di %@ abitudini"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個を超える習慣"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais de %@ hábitos"
+          }
+        }
+      }
+    },
+    "Plus de %@ widgets": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mehr als %@ Widgets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More than %@ widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más de %@ widgets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus de %@ widgets"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Più di %@ widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@個を超えるウィジェット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais de %@ widgets"
+          }
+        }
+      }
+    },
     "Plus de 100\nwidgets.": {
       "extractionState": "manual",
       "localizations": {
@@ -158485,6 +159613,53 @@
         }
       }
     },
+    "Prochain rappel": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächste Erinnerung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next reminder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo recordatorio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prochain rappel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prossimo promemoria"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次のリマインダー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo lembrete"
+          }
+        }
+      }
+    },
     "Prochain rendez-vous": {
       "extractionState": "manual",
       "localizations": {
@@ -162903,6 +164078,147 @@
         }
       }
     },
+    "Rappel de séance": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trainingserinnerung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workout reminder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorio de entrenamiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rappel de séance"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promemoria allenamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウトのリマインダー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lembrete de treino"
+          }
+        }
+      }
+    },
+    "Rappel des factures": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechnungserinnerung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bill reminder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorio de facturas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rappel des factures"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promemoria fatture"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請求のリマインダー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lembrete de faturas"
+          }
+        }
+      }
+    },
+    "Rappel des repas": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahlzeiten-Erinnerung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal reminder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorio de comidas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rappel des repas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promemoria pasti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食事のリマインダー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lembrete de refeições"
+          }
+        }
+      }
+    },
     "Rappel quotidien": {
       "extractionState": "manual",
       "localizations": {
@@ -163181,6 +164497,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lembretes das 10h às 20h"
+          }
+        }
+      }
+    },
+    "Rappels intelligents": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intelligente Erinnerungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smart reminders"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios inteligentes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rappels intelligents"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promemoria intelligenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スマートリマインダー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lembretes inteligentes"
           }
         }
       }
@@ -172628,6 +173991,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nada registrado"
+          }
+        }
+      }
+    },
+    "Rien de noté aujourd'hui": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute nichts eingetragen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing logged today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada anotado hoy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de noté aujourd'hui"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente annotato oggi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日はまだ記録がありません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada registrado hoje"
           }
         }
       }
@@ -182639,6 +184049,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compras"
+          }
+        }
+      }
+    },
+    "Si aucun repas n'est noté ce jour-là. Seulement si tu as noté des repas cette semaine.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn an diesem Tag keine Mahlzeit eingetragen ist. Nur wenn du diese Woche Mahlzeiten eingetragen hast."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If no meal has been logged that day. Only if you've logged meals this week."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si no has anotado ninguna comida ese día. Solo si anotaste comidas esta semana."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si aucun repas n'est noté ce jour-là. Seulement si tu as noté des repas cette semaine."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se quel giorno non è stato annotato nessun pasto. Solo se hai annotato pasti questa settimana."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その日に食事が記録されていない場合。今週食事を記録している場合のみ通知します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se nenhuma refeição foi registrada nesse dia. Só se você registrou refeições nesta semana."
           }
         }
       }
@@ -192842,6 +194299,53 @@
         }
       }
     },
+    "Ta séance t'attend": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Training wartet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your workout is waiting"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu entrenamiento te espera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta séance t'attend"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo allenamento ti aspetta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウトの時間です"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu treino está esperando"
+          }
+        }
+      }
+    },
     "Ta valeur nette et tes abonnements.": {
       "extractionState": "manual",
       "localizations": {
@@ -196880,6 +198384,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suas melhores cargas por exercício."
+          }
+        }
+      }
+    },
+    "Tes mois passés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine vergangenen Monate"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your past months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus meses anteriores"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes mois passés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi mesi passati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去の月"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus meses anteriores"
           }
         }
       }
@@ -206331,6 +207882,53 @@
         }
       }
     },
+    "Tout ce que tu notes est gardé. Premium affiche les mois d'avant et l'évolution de tes finances sur six mois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles, was du einträgst, bleibt gespeichert. Premium zeigt die Monate davor und den Verlauf deiner Finanzen über sechs Monate."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything you log is kept. Premium shows the months before and how your finances changed over six months."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo lo que anotas se guarda. Premium muestra los meses anteriores y la evolución de tus finanzas en seis meses."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout ce que tu notes est gardé. Premium affiche les mois d'avant et l'évolution de tes finances sur six mois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutto ciò che annoti viene conservato. Premium mostra i mesi precedenti e l'andamento delle tue finanze su sei mesi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録した内容はすべて保存されています。Premiumでは過去の月と6か月間の家計の推移を表示します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tudo o que você registra fica guardado. O Premium mostra os meses anteriores e a evolução das suas finanças em seis meses."
+          }
+        }
+      }
+    },
     "Tout ce qui t'attend, jour par jour": {
       "extractionState": "manual",
       "localizations": {
@@ -210134,6 +211732,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Um widget grande combina no máximo 4 widgets."
+          }
+        }
+      }
+    },
+    "Un jour où ton programme prévoit une séance, si elle n'est pas commencée à cette heure.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An einem Tag mit geplantem Training, wenn es bis zu dieser Uhrzeit nicht begonnen hat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On a day your program plans a workout, if it hasn't started by this time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un día en que tu programa prevé un entrenamiento, si no lo has empezado a esta hora."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un jour où ton programme prévoit une séance, si elle n'est pas commencée à cette heure."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nei giorni in cui il programma prevede un allenamento, se non è iniziato entro quest'ora."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プログラムでワークアウトが予定されている日に、この時刻までに始めていなければ通知します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Num dia em que seu programa prevê um treino, se ele não tiver começado até esse horário."
           }
         }
       }
@@ -234151,6 +235796,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "widgets adicionados"
+          }
+        }
+      }
+    },
+    "« %@ » est prévue aujourd'hui.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ ist für heute geplant."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” is planned for today."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» está previsto para hoy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » est prévue aujourd'hui."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» è previsto per oggi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日は「%@」の予定です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” está previsto para hoje."
           }
         }
       }

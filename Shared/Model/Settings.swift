@@ -94,6 +94,13 @@ struct AppSettings: Codable, Hashable {
     var dailyWide: [String: Bool] = [:]
     /// Mini-apps added to « Mon Quotidien » by the person (MiniApp raw values), shown even without data.
     var dailyAdded: [String] = []
+    /// « Rappels intelligents » (`SmartReminders`): the workout of the day not begun at its hour, no meal
+    /// noted in the evening, a bill due tomorrow. On, but sent only once notifications are allowed.
+    var remindsWorkout = true
+    var remindsMeals = true
+    var remindsBills = true
+    var workoutReminderHour = 18
+    var mealReminderHour = 20
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
@@ -101,6 +108,7 @@ struct AppSettings: Codable, Hashable {
         case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
         case dailyOrder, dailyHidden, dailyWide, dailyAdded
+        case remindsWorkout, remindsMeals, remindsBills, workoutReminderHour, mealReminderHour
     }
 
     init() {}
@@ -129,6 +137,11 @@ struct AppSettings: Codable, Hashable {
         dailyHidden = (try? c.decodeIfPresent([String].self, forKey: .dailyHidden)) ?? []
         dailyWide = (try? c.decodeIfPresent([String: Bool].self, forKey: .dailyWide)) ?? [:]
         dailyAdded = (try? c.decodeIfPresent([String].self, forKey: .dailyAdded)) ?? []
+        remindsWorkout = (try? c.decodeIfPresent(Bool.self, forKey: .remindsWorkout)) ?? true
+        remindsMeals = (try? c.decodeIfPresent(Bool.self, forKey: .remindsMeals)) ?? true
+        remindsBills = (try? c.decodeIfPresent(Bool.self, forKey: .remindsBills)) ?? true
+        workoutReminderHour = (try? c.decodeIfPresent(Int.self, forKey: .workoutReminderHour)) ?? 18
+        mealReminderHour = (try? c.decodeIfPresent(Int.self, forKey: .mealReminderHour)) ?? 20
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

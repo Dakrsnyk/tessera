@@ -759,7 +759,7 @@ struct HomeSetupSheet: View {
         }
         if needsPremium {
             dismiss()
-            router.isPaywallPresented = true
+            router.showPaywall(.setup(setup.name, designs: setup.designs()))
             return
         }
         // The Studio, with every widget of the setup: styled, given its data, then saved together.

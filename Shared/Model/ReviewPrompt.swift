@@ -1,10 +1,12 @@
 import Foundation
 
-/// When to ask for a rating: at the 10th opening of the app, once per major version.
+/// When to ask for a rating: right after a good moment (a workout finished, the calorie goal of the
+/// day reached, a savings goal reached, a widget made), never at the opening of the app; once the app
+/// has been opened on a few different occasions, and once per major version.
 /// Apple decides whether the request is shown (at most three times a year) and never says whether
 /// the user rated, so Tessera only remembers that it asked.
 enum ReviewPrompt {
-    static let opensBeforeAsking = 10
+    static let opensBeforeAsking = 5
     /// Coming back to the app within this time is the same opening.
     static let minimumGap: TimeInterval = 4 * 3600
 

@@ -42,7 +42,7 @@ struct WidgetStudio: View {
     @State private var designs: [WidgetDesign]
     @State private var index = 0
     @State private var family: WidgetFamily
-    @State private var showsPaywall = false
+    @State private var paywall: PaywallContext?
     @State private var confirmDiscard = false
     @State private var confirmDelete = false
     @State private var photoItem: PhotosPickerItem?
@@ -142,7 +142,7 @@ struct WidgetStudio: View {
             } message: {
                 Text(tr("Les widgets qui l'affichent reviendront au modèle par défaut."))
             }
-            .sheet(isPresented: $showsPaywall) { PaywallView() }
+            .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 
     private func observed<Content: View>(_ content: Content, sections: [StudioSection]) -> some View {
@@ -329,7 +329,7 @@ struct WidgetStudio: View {
                     .foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)
-            Button { showsPaywall = true } label: {
+            Button { paywall = .designs(designs.filter(\.usesPremiumFeatures)) } label: {
                 Text(tr("Débloquer")).foregroundStyle(.onAccent)
             }
                 .buttonStyle(.borderedProminent)
@@ -618,13 +618,16 @@ struct WidgetStudio: View {
 
     private func save() {
         if needsPremium || (isNew && !model.canCreateDesign) || exceedsFreeLimit {
-            showsPaywall = true
+            // The paywall says what this save needs: the Premium settings used, or more room.
+            paywall = needsPremium ? PaywallContext.designs(designs.filter(\.usesPremiumFeatures)) : PaywallContext.designLimit
             return
         }
         var saved = designs
         if isNew {
             let added = model.install(designs: designs)
             saved = Array(designs.prefix(added))
+            // A widget made: a good moment (a rating may be asked once the Studio has closed).
+            if added > 0 { model.celebrate() }
             // The new widgets glide into « Mes widgets » as the Studio closes.
             router.saveFlight = SaveFlight(designs: saved, source: previewFrame)
             if !isPushed && designs.count == 1 {

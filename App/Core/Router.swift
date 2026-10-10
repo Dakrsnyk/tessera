@@ -31,7 +31,7 @@ enum StorePage: Hashable {
 }
 
 enum ContentScreen: String, Identifiable {
-    case tasks, habits, hydration, money, weather, calendar
+    case tasks, habits, hydration, money, weather, calendar, reminders
     var id: String { rawValue }
 }
 
@@ -46,6 +46,8 @@ final class Router {
     var tab: Tab = .home
     var editor: EditorRequest?
     var isPaywallPresented = false
+    /// What the paywall opens for (nil: the general one).
+    var paywallContext: PaywallContext?
     var content: ContentScreen?
     var isAddGuidePresented = false
     /// The food scanner, opened from a Nutrition widget.
@@ -79,6 +81,12 @@ final class Router {
     var spacePath: [Space] = []
     /// The tutorial step on screen (after the first questions, or from Réglages › Aide).
     var tutorialStep: TutorialStep?
+
+    /// The paywall, opened for what the person touched: it shows first what Premium unlocks there.
+    func showPaywall(_ context: PaywallContext? = nil) {
+        paywallContext = context
+        isPaywallPresented = true
+    }
 
     /// Starts the tutorial from the beginning, on Home, with nothing open over it.
     func startTutorial() {

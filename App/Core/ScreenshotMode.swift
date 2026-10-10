@@ -75,6 +75,10 @@ enum ScreenshotMode {
         case "editor": router.openEditor(TemplateCatalog.design("countdown-holidays"), isNew: true)
         case "mywidgets": router.tab = .mine
         case "paywall": router.isPaywallPresented = true
+        // The paywall opened for what was touched: a widget with a Premium style, the months before.
+        case "paywall-widget": router.showPaywall(.designs([TemplateCatalog.design("focus-futuristic")]))
+        case "paywall-history": router.showPaywall(.financesHistory)
+        case "reminders": router.content = .reminders
         case "settings", "profile": router.isProfilePresented = true
         case "icons": router.isIconPickerPresented = true
         case "content": router.content = .money

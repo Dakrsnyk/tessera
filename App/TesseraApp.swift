@@ -1,3 +1,4 @@
+import StoreKit
 import SwiftUI
 import WidgetKit
 
@@ -39,6 +40,8 @@ struct TesseraApp: App {
                         Task { await WorkoutLiveActivity.sync(model.fitness) }
                         Task { await premium.refreshEntitlements() }
                         Task { await model.refreshInsights() }
+                        // A new day, or something done from a widget: the reminders follow.
+                        model.syncReminders()
                     } else if phase == .background {
                         WidgetCenter.shared.reloadAllTimelines()
                     }
@@ -50,6 +53,7 @@ struct TesseraApp: App {
 struct RootView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    @Environment(\.requestReview) private var requestReview
     @State private var showsLaunch = true
     /// The app grows into place as the launch mark lifts away.
     @State private var revealed = false
@@ -78,8 +82,8 @@ struct RootView: View {
                 }) { request in
                     EditorView(request: request)
                 }
-                .sheet(isPresented: $router.isPaywallPresented) {
-                    PaywallView()
+                .sheet(isPresented: $router.isPaywallPresented, onDismiss: { router.paywallContext = nil }) {
+                    PaywallView(context: router.paywallContext)
                 }
                 .sheet(item: $router.content) { screen in
                     ContentScreenView(screen: screen)
@@ -203,6 +207,33 @@ struct RootView: View {
             }
         }
         .animation(.easeInOut(duration: 0.25), value: router.tutorialStep == nil)
+        // A good moment (a workout finished, a goal reached, a widget made): perhaps a rating.
+        .onChange(of: model.goodMoments) { _, _ in
+            Task { await askForReviewAfterGoodMoment() }
+        }
+    }
+
+    /// Right after a good moment, never at the opening: once the app has been opened a few times,
+    /// once per major version, and when the screen is calm (nothing sliding, no tour, no workout
+    /// under way). It waits a little for a sheet to close, then lets the moment go.
+    private func askForReviewAfterGoodMoment() async {
+        guard ReviewPrompt.shouldAsk(model.settings) else { return }
+        for _ in 0..<12 {
+            try? await Task.sleep(for: .seconds(1.5))
+            guard ReviewPrompt.shouldAsk(model.settings) else { return }
+            if isCalmForReview {
+                model.updateSettings { ReviewPrompt.markAsked(&$0) }
+                requestReview()
+                return
+            }
+        }
+    }
+
+    private var isCalmForReview: Bool {
+        router.editor == nil && !router.isPaywallPresented && !router.isAddGuidePresented && router.saveFlight == nil
+            && router.tutorialStep == nil && router.content == nil && !router.isFoodScanPresented
+            && !showsOnboarding && !showsPersonalization && !showsStylePicker && !showsLaunch
+            && (model.fitness.active.map { $0.isFinished } ?? true)
     }
 
     private func startTutorialIfNeeded(after delay: Double) {
@@ -256,6 +287,7 @@ struct ContentScreenView: View {
                 case .money: MoneyView()
                 case .weather: WeatherLocationView()
                 case .calendar: CalendarAccessView()
+                case .reminders: SmartRemindersView()
                 }
             }
             .toolbar {

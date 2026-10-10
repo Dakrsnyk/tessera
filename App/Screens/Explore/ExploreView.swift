@@ -714,7 +714,7 @@ struct PackSheet: View {
                 Button {
                     if needsPremium {
                         dismiss()
-                        router.isPaywallPresented = true
+                        router.showPaywall(.pack(pack.name, designs: designs))
                     } else {
                         configures = true
                     }
