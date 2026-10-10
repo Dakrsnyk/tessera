@@ -118,7 +118,13 @@ struct PaywallView: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-            if !context.designs.isEmpty {
+            if context.designs.count == 1, let design = context.designs.first {
+                let family = design.displayFormat.family
+                WidgetPreview(design: design, family: family, payload: model.previewPayload(for: design),
+                              width: family == .systemSmall ? 160 : 320)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityHidden(true)
+            } else if !context.designs.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .top, spacing: 12) {
                         ForEach(context.designs.prefix(6)) { design in
