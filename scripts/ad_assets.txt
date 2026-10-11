@@ -1,0 +1,26 @@
+# Pieces of the promo videos, drawn by MarketingShots.swift (MarketingAdAsset), rendered with [video].
+# name                                    matte: rendered on white then black (difference matting)
+lock
+lock-plain
+home-jade
+home-aurore
+home-creme
+home-minuit
+home-ocean
+live                                      matte
+island                                    matte
+chip                                      matte
+widget-caloriesLeft-small-light           matte
+widget-macros-medium-light                matte
+widget-nextSet-small-light                matte
+widget-todaysWorkout-medium-light         matte
+widget-trainingStreak-small-light         matte
+widget-weekView-medium-light              matte
+widget-habitStreak-small-light            matte
+widget-upNext-small-light                 matte
+widget-budgetLeft-small-light             matte
+widget-macros-rect-minimal                matte
+widget-caloriesLeft-circular-minimal      matte
+widget-nextSet-small-neon                 matte
+widget-caloriesLeft-small-luxury          matte
+widget-habitStreak-small-aurora           matte

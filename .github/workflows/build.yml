@@ -479,6 +479,31 @@ jobs:
             record $scene
           done
           ls -lh videos
+          # The pieces of the videos drawn by the app (scripts/ad_assets.txt): screens, and elements
+          # rendered on white then black for difference matting.
+          xcrun simctl install "$DEVICE" build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          mkdir -p videos/assets
+          ARGS=(-AppleLanguages "(fr)" -AppleLocale fr_CA)
+          xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera "${ARGS[@]}" -screenshotScreen home < /dev/null > /dev/null || true
+          sleep 8
+          ashot() { # file asset [extra launch arguments]
+            xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera < /dev/null 2>/dev/null || true
+            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera "${ARGS[@]}" -screenshotScreen "marketing-ad-$2" "${@:3}" < /dev/null > /dev/null || true
+            sleep 6
+            xcrun simctl io "$DEVICE" screenshot --type=png "videos/assets/$1.png" < /dev/null > /dev/null 2>&1 || true
+          }
+          ASSETS=()
+          while IFS= read -r line; do ASSETS+=("$line"); done < <(grep -vE '^[[:space:]]*(#|$)' scripts/ad_assets.txt)
+          for line in "${ASSETS[@]}"; do
+            read -r name mode <<< "$line"
+            if [ "$mode" = "matte" ]; then
+              ashot "$name-white" "$name" -marketingScreen white
+              ashot "$name-black" "$name" -marketingScreen black
+            else
+              ashot "$name" "$name"
+            fi
+          done
+          ls videos/assets
 
       - name: App Store screenshots
         id: marketing
@@ -600,6 +625,7 @@ jobs:
           [ -d shots ] && cp shots/*.jpg report/ 2>/dev/null || true
           [ -d marketing ] && mkdir -p report/marketing && cp marketing/* report/marketing/ 2>/dev/null || true
           [ -d videos ] && mkdir -p report/videos && cp videos/*.mp4 videos/*.log report/videos/ 2>/dev/null || true
+          [ -d videos/assets ] && cp -R videos/assets report/videos/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
           [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true

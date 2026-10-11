@@ -50,6 +50,14 @@ struct MarketingView: View {
     }
 
     @ViewBuilder private func single(_ name: String) -> some View {
+        if name.hasPrefix("ad-") {
+            MarketingAdAsset(name: String(name.dropFirst(3)))
+        } else {
+            scene(name)
+        }
+    }
+
+    @ViewBuilder private func scene(_ name: String) -> some View {
         switch name {
         case "lock": MarketingLock()
         case "nutrition": MarketingNutrition()
@@ -549,6 +557,66 @@ struct MarketingShowcase<Extra: View>: View {
             extra
         }
         .frame(width: MK.canvas.width, height: MK.canvas.height, alignment: .topLeading)
+    }
+}
+
+// MARK: - Promo videos
+
+/// The pieces of the promo videos, drawn by the app so the videos show the real screens and widgets
+/// (`-screenshotScreen marketing-ad-<name>`, listed in scripts/ad_assets.txt, rendered with `[video]`).
+/// Whole screens: `lock`, `lock-plain` (no workout), `home-<setup>`. One element alone, large, on the
+/// placeholder ground (rendered white then black, for difference matting): `live` (the workout's Live
+/// Activity), `island`, `chip` (Lock Screen widgets on the wallpaper), `widget-<kind>-<family>-<style>`
+/// with the family `small`, `medium`, `large`, `rect` or `circular`.
+struct MarketingAdAsset: View {
+    let name: String
+
+    var body: some View {
+        let parts = name.split(separator: "-").map(String.init)
+        Group {
+            if name == "lock" {
+                MarketingLockScreen()
+            } else if name == "lock-plain" {
+                MarketingLockScreen(showsWorkout: false)
+            } else if parts.count == 2, parts[0] == "home" {
+                MarketingSetupScreen { SetupHomeScreen(setup: MK.setup(parts[1])) }
+            } else if name == "live" {
+                element { MarketingLiveActivity().frame(width: 410) }
+            } else if name == "island" {
+                element { MarketingIsland() }
+            } else if name == "chip" {
+                element {
+                    MarketingLockChip(designs: [(MK.design(.macros, .minimal), .accessoryRectangular), (MK.design(.caloriesLeft, .minimal), .accessoryCircular)], scale: 1.6)
+                }
+            } else if parts.count == 4, parts[0] == "widget", let kind = WidgetKind(rawValue: parts[1]), let theme = ThemeID(rawValue: parts[3]) {
+                let family = Self.family(parts[2])
+                let design = MK.design(kind, theme)
+                element {
+                    WidgetPreview(design: design, family: family, payload: MK.payload(design), width: family == .accessoryCircular ? 220 : 400, date: MK.now)
+                        .environment(\.colorScheme, family == .accessoryRectangular || family == .accessoryCircular ? .dark : .light)
+                }
+            } else {
+                MK.placeholder
+            }
+        }
+        .frame(width: MK.canvas.width, height: MK.canvas.height)
+    }
+
+    private func element<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        ZStack {
+            MK.placeholder
+            content()
+        }
+    }
+
+    private static func family(_ name: String) -> WidgetFamily {
+        switch name {
+        case "medium": .systemMedium
+        case "large": .systemLarge
+        case "rect": .accessoryRectangular
+        case "circular": .accessoryCircular
+        default: .systemSmall
+        }
     }
 }
 
