@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, outils]
+tags: [ardane, module, zone/outils]
 ---
 
 # Localisation
@@ -26,5 +26,11 @@ Le code est écrit en français ; `tr("texte")` cherche ce texte comme clé dans
 ## Relations
 
 - [[Tests-CI-et-outils]] : vérifié par la CI (l10n sync)
+
+## Fichiers du module (1)
+
+- [[Localization (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

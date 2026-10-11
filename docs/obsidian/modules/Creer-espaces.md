@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Créer : les espaces
@@ -32,5 +32,19 @@ L'onglet Créer : chaque espace est l'endroit où l'on saisit les données d'une
 - [[Studio-editeur]] : ouvre le Studio (openEditor)
 - [[Domaines-metier]] : saisie des données
 - [[Mes-widgets]] : les widgets créés y arrivent
+
+## Fichiers du module (9)
+
+- [[SaveFlight (swift)]]
+- [[LockScreenCreator (swift)]]
+- [[ProductivitySpace (swift)]]
+- [[SpaceBuilderView (swift)]]
+- [[SpaceForms (swift)]]
+- [[SpaceSheets (swift)]]
+- [[SpacesView (swift)]]
+- [[StudentSpace (swift)]]
+- [[KindCatalog (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, metier]
+tags: [ardane, module, zone/metier]
 ---
 
 # Noyau : AppModel et Router
@@ -31,5 +31,14 @@ Source unique des données de l'app et navigation. `AppModel` (@Observable, @Mai
 - [[Services-externes]] : remplit les caches réseau
 - [[Intents-et-activite-en-direct]] : démarre l'activité en direct
 - [[Premium-et-abonnements]] : état Premium
+
+## Fichiers du module (4)
+
+- [[AppModel+Debug (swift)]]
+- [[AppModel (swift)]]
+- [[Router (swift)]]
+- [[TesseraApp (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

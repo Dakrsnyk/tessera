@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Studio (éditeur de widgets)
@@ -34,5 +34,22 @@ Le Studio : contenu, taille, style, couleurs, fond, bordure et réglages propres
 - [[Widgets-extension]] : le design est rendu par WidgetCanvas
 - [[Noyau-AppModel]] : enregistre le design
 - [[Premium-et-abonnements]] : styles et couleurs Premium
+
+## Fichiers du module (12)
+
+- [[StylePicker (swift)]]
+- [[AddToHomeScreenGuide (swift)]]
+- [[EditorView (swift)]]
+- [[KindOptionsSection (swift)]]
+- [[SpaceOptionsSection (swift)]]
+- [[StudioComponents (swift)]]
+- [[StudioPanels (swift)]]
+- [[DesignOptions (swift)]]
+- [[StyleColors (swift)]]
+- [[WidgetDesign (swift)]]
+- [[WidgetStyle (swift)]]
+- [[Theme (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

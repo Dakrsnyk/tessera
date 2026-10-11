@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Lancement, premier lancement et tutoriel
@@ -25,5 +25,14 @@ L'écran de lancement (le logo), les questions du premier lancement et la visite
 
 - [[Profil-et-reglages]] : le tutoriel se relance depuis l'aide
 - [[Noyau-AppModel]]
+
+## Fichiers du module (4)
+
+- [[LaunchView (swift)]]
+- [[OnboardingView (swift)]]
+- [[Tutorial (swift)]]
+- [[TutorialOverlay (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

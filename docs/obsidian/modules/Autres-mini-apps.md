@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Autres mini-apps
@@ -32,5 +32,19 @@ Business, Voyage, Auto et Météo, plus les espaces Placements, Marchés et Ma v
 
 - [[Services-externes]] : Open-Meteo, Frankfurter, CoinGecko, Finnhub, SEC
 - [[Domaines-metier]]
+
+## Fichiers du module (9)
+
+- [[BusinessApp (swift)]]
+- [[BusinessPages (swift)]]
+- [[CarApp (swift)]]
+- [[CarPages (swift)]]
+- [[TravelApp (swift)]]
+- [[TravelPages (swift)]]
+- [[WeatherApp (swift)]]
+- [[MoneySpaces (swift)]]
+- [[TravelCarLifeSpaces (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

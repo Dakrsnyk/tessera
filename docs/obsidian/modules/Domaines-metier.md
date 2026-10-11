@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, metier]
+tags: [ardane, module, zone/metier]
 ---
 
 # Domaines métier (Shared/Domains)
@@ -40,5 +40,26 @@ Les règles et les états de chaque partie de la vie gérée par Ardane, partag�
 - [[Donnees-et-stockage]] : un fichier par domaine
 - [[Services-externes]] : Open Food Facts, CoinGecko, Finnhub, SEC, Frankfurter
 - [[Mini-apps]] : affichés et modifiés par les mini-apps
+
+## Fichiers du module (16)
+
+- [[Budget (swift)]]
+- [[Business (swift)]]
+- [[Car (swift)]]
+- [[Companies (swift)]]
+- [[ExerciseLibrary (swift)]]
+- [[ExerciseTechniques (swift)]]
+- [[Fitness (swift)]]
+- [[FoodDatabase (swift)]]
+- [[Life (swift)]]
+- [[Nutrition (swift)]]
+- [[Portfolio (swift)]]
+- [[Productivity (swift)]]
+- [[Profile (swift)]]
+- [[StoredStates (swift)]]
+- [[Student (swift)]]
+- [[Travel (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, ios]
+tags: [ardane, module, zone/ios]
 ---
 
 # Widgets : extension et rendu
@@ -40,5 +40,39 @@ L'extension WidgetKit (cible TesseraWidgets) et le rendu partagé : un même cod
 - [[Intents-et-activite-en-direct]] : boutons interactifs
 - [[Services-externes]] : météo, crypto, taux de change au rafraîchissement
 - [[Studio-editeur]] : les designs
+
+## Fichiers du module (29)
+
+- [[UIComponents (swift)]]
+- [[DesignIntent (swift)]]
+- [[WidgetGroup (swift)]]
+- [[WidgetKind (swift)]]
+- [[WorldCities (swift)]]
+- [[AccessoryViews (swift)]]
+- [[DataWidgets (swift)]]
+- [[ProductivityWidgets (swift)]]
+- [[TimeWidgets (swift)]]
+- [[RenderComponents (swift)]]
+- [[StyleRendering (swift)]]
+- [[BusinessTiles (swift)]]
+- [[CarTiles (swift)]]
+- [[DashboardTiles (swift)]]
+- [[ProductivityTiles (swift)]]
+- [[StudentTiles (swift)]]
+- [[Tile (swift)]]
+- [[TileFactory (swift)]]
+- [[TileView (swift)]]
+- [[TimeTiles (swift)]]
+- [[TravelTiles (swift)]]
+- [[WeatherTiles (swift)]]
+- [[WidgetCanvas (swift)]]
+- [[DesignProvider (swift)]]
+- [[DesignWidgets (swift)]]
+- [[QuickWidget (swift)]]
+- [[TesseraWidgetsBundle (swift)]]
+- [[WidgetLog (swift)]]
+- [[WorkoutLiveActivityWidget (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

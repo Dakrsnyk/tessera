@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Store
@@ -32,5 +32,20 @@ L'onglet Store (Explore) : la sélection de la semaine, des écrans d'accueil co
 - [[Studio-editeur]] : ouvre un modèle
 - [[Premium-et-abonnements]] : packs et styles Premium
 - [[Mes-widgets]] : installe des widgets
+
+## Fichiers du module (10)
+
+- [[ExploreView (swift)]]
+- [[HomeSetupViews (swift)]]
+- [[HomeSetups (swift)]]
+- [[SetupWallpapers (swift)]]
+- [[StoreCombos (swift)]]
+- [[StoreMagazine (swift)]]
+- [[StoreShowcase (swift)]]
+- [[Combo (swift)]]
+- [[Packs (swift)]]
+- [[Templates (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

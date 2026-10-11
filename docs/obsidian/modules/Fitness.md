@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Fitness
@@ -34,5 +34,18 @@ Programme de la semaine, séance en direct, repos, bibliothèque d'exercices ave
 - [[Intents-et-activite-en-direct]] : Série faite, pause, passer
 - [[Domaines-metier]] : FitnessState
 - [[Donnees-et-stockage]] : ExerciseDemos.json
+
+## Fichiers du module (8)
+
+- [[StepCounter (swift)]]
+- [[ExerciseDemo (swift)]]
+- [[ExerciseLibraryViews (swift)]]
+- [[FitnessApp (swift)]]
+- [[FitnessPages (swift)]]
+- [[FitnessSession (swift)]]
+- [[FitnessSpace (swift)]]
+- [[FitnessTiles (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

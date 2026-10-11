@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, metier]
+tags: [ardane, module, zone/metier]
 ---
 
 # Premium et abonnements
@@ -32,5 +32,17 @@ Achats StoreKit 2 : l'App Store fait foi, le résultat est mis en cache pour l'e
 - [[Noyau-AppModel]] : état Premium, limites
 - [[Store]] : packs Premium
 - [[Studio-editeur]] : styles Premium
+
+## Fichiers du module (7)
+
+- [[PaywallContext (swift)]]
+- [[PaywallView (swift)]]
+- [[PremiumConfiguration (swift)]]
+- [[PremiumLock (swift)]]
+- [[PremiumStore (swift)]]
+- [[DebugPremium (swift)]]
+- [[Palette (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

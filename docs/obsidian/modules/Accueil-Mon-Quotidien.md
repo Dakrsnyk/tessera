@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Accueil : Mon Quotidien
@@ -34,5 +34,20 @@ L'onglet Accueil : « Mon Quotidien » rassemble ce qui compte aujourd'hui, cons
 - [[Noyau-AppModel]] : lit l'état
 - [[Nutrition]] : carte et bouton Scanner
 - [[Fitness]] : carte séance en cours
+
+## Fichiers du module (10)
+
+- [[Agenda (swift)]]
+- [[DailyBrief (swift)]]
+- [[DailyCategories (swift)]]
+- [[DailyLayoutEditor (swift)]]
+- [[DailyPager (swift)]]
+- [[DailySection (swift)]]
+- [[HomeView (swift)]]
+- [[MiniAppsRow (swift)]]
+- [[MyInfoCenter (swift)]]
+- [[MyInfoSection (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

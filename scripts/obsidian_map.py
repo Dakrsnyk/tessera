@@ -249,6 +249,12 @@ MODULES = [
                  "Shared/Domains/Companies.swift", "Shared/Domains/Travel.swift", "Shared/Data/CalendarService.swift", "App/Services/LocationService.swift",
                  "App/Core/StepCounter.swift", "App/Services/AIPhraser.swift", "App/Services/NotificationScheduler.swift", "App/Premium/PremiumStore.swift"],
      "links": [("Noyau-AppModel", "caches réseau"), ("Widgets-extension", "rafraîchissement des widgets"), ("Nutrition", "Open Food Facts"), ("Premium-et-abonnements", "StoreKit")]},
+    {"file": "Outils-partages", "title": "Outils partagés (Shared/Support)", "zone": "outils",
+     "role": "Petits outils communs à l'app et à l'extension : couleurs, dates, formats, décodage tolérant, diagnostic des widgets.",
+     "features": ["Couleurs hexadécimales, calculs de dates, formats de nombres et de dates selon la langue.", "Diagnostic des widgets manquants (builds de test), droits signés de l'App Group."],
+     "sources": ["Shared/Support/ColorHex.swift", "Shared/Support/DateMath.swift", "Shared/Support/Formatting.swift", "Shared/Support/Helpers.swift",
+                 "Shared/Support/WidgetDiagnostics.swift", "Shared/Support/SignedEntitlements.swift"],
+     "links": [("Donnees-et-stockage", "App Group"), ("Localisation", "formats selon la langue")]},
     {"file": "Localisation", "title": "Localisation", "zone": "outils",
      "role": "Le code est écrit en français ; `tr(\"texte\")` cherche ce texte comme clé dans le catalogue. Langues : fr (source), en, es, de, it, pt-BR, ja.",
      "features": ["Catalogue `Shared/Localizable.xcstrings`, textes d'Info.plist `App/InfoPlist.xcstrings`.", "Traductions en lots dans `l10n/`, glossaire, scripts `l10n_*`."],
@@ -284,9 +290,9 @@ def rel_from(folder, path):
     return os.path.relpath(os.path.join(ROOT, path), folder).replace(os.sep, "/")
 
 
-def write_note(m):
+def write_note(m, files=()):
     zone_label = ZONES[m["zone"]][0]
-    lines = ["---", f"tags: [ardane, module, {m['zone']}]", "---", "", f"# {m['title']}", "", f"Zone : **{zone_label}** · Cartes : [[Vue-Globale.canvas|Vue globale]] · "
+    lines = ["---", f"tags: [ardane, module, zone/{m['zone']}]", "---", "", f"# {m['title']}", "", f"Zone : **{zone_label}** · Cartes : [[Vue-Globale.canvas|Vue globale]] · "
              "[[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]", "", m["role"], "", "## Ce qui existe (vérifié dans le code)", ""]
     lines += [f"- {f}" for f in m["features"]]
     lines += ["", "## Fichiers sources", ""]
@@ -294,6 +300,9 @@ def write_note(m):
     lines += ["", "## Relations", ""]
     for target, text in m["links"]:
         lines.append(f"- [[{target}]]" + (f" : {text}" if text else ""))
+    if files:
+        lines += ["", f"## Fichiers du module ({len(files)})", ""] + [f"- [[{code_note_name(p)}]]" for p in files]
+    lines += ["", "Partie de [[Ardane]]."]
     lines += ["", "> À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).", ""]
     open(os.path.join(NOTES, m["file"] + ".md"), "w").write("\n".join(lines))
 
@@ -627,6 +636,134 @@ def fonctionnalites():
     cv.save("Fonctionnalites.canvas")
 
 
+
+# ----------------------------------------------------------------------------------------------- graph
+# One note per Swift file, per external service and framework, and the hub « Ardane »: the links come from
+# the code itself (a file uses a type declared in another file, imports a framework, calls a web API), so
+# Obsidian's graph view draws the real dependency network of the project.
+CODE = os.path.join(OUT, "code")
+SERVICES_DIR = os.path.join(OUT, "services")
+SWIFT_DIRS = ["App", "Shared", "Widgets", "Tests", "UITests"]
+FALLBACK = [  # first matching prefix wins, after the modules' own source lists
+    ("App/Screens/Home/", "Accueil-Mon-Quotidien"), ("App/Screens/MiniApps/Nutrition/", "Nutrition"), ("App/Screens/MiniApps/Fitness/", "Fitness"),
+    ("App/Screens/MiniApps/Planning/", "Planning-et-habitudes"), ("App/Screens/MiniApps/Studies/", "Planning-et-habitudes"),
+    ("App/Screens/MiniApps/Finances/", "Finances"), ("App/Screens/MiniApps/", "Autres-mini-apps"), ("App/Screens/Spaces/", "Creer-espaces"),
+    ("App/Screens/Explore/", "Store"), ("App/Screens/Editor/", "Studio-editeur"), ("App/Screens/MyWidgets/", "Mes-widgets"),
+    ("App/Screens/Profile/", "Profil-et-reglages"), ("App/Screens/Content/", "Planning-et-habitudes"), ("App/Screens/", "Onboarding-et-tutoriel"),
+    ("App/Premium/", "Premium-et-abonnements"), ("App/Services/", "Services-externes"), ("App/Components/", "Widgets-extension"),
+    ("App/Core/", "Noyau-AppModel"), ("App/", "Noyau-AppModel"), ("Shared/Domains/", "Domaines-metier"), ("Shared/Data/", "Donnees-et-stockage"),
+    ("Shared/Render/", "Widgets-extension"), ("Shared/Model/", "Widgets-extension"), ("Shared/Theme/", "Studio-editeur"),
+    ("Shared/Intents/", "Intents-et-activite-en-direct"), ("Shared/Live/", "Intents-et-activite-en-direct"), ("Shared/Support/", "Outils-partages"),
+    ("Widgets/", "Widgets-extension"), ("Tests/", "Tests-CI-et-outils"), ("UITests/", "Tests-CI-et-outils"),
+]
+EXTERNAL = [  # name, kind, what it is, how a file shows it uses it (regex on its code)
+    ("Open Food Facts", "api", "Base alimentaire ouverte : recherche d'aliments et codes-barres (world.openfoodfacts.org).", r"openfoodfacts\.org"),
+    ("Open-Meteo", "api", "Prévisions météo (api.open-meteo.com).", r"open-meteo\.com"),
+    ("CoinGecko", "api", "Cours des cryptomonnaies (api.coingecko.com).", r"coingecko\.com"),
+    ("Finnhub", "api", "Cours des actions (finnhub.io).", r"finnhub\.io"),
+    ("SEC EDGAR", "api", "Données financières des sociétés cotées américaines (data.sec.gov).", r"sec\.gov"),
+    ("Frankfurter", "api", "Taux de change (api.frankfurter.dev).", r"frankfurter\.dev"),
+    ("StoreKit", "framework", "Achats intégrés et abonnements (StoreKit 2).", r"^import StoreKit"),
+    ("WidgetKit", "framework", "Widgets de l'écran d'accueil et de l'écran verrouillé.", r"^import WidgetKit"),
+    ("ActivityKit", "framework", "Activités en direct (écran verrouillé, Dynamic Island).", r"^import ActivityKit"),
+    ("AppIntents", "framework", "Actions des boutons de widgets et de l'activité en direct.", r"^import AppIntents"),
+    ("VisionKit", "framework", "Scanner de codes-barres par la caméra.", r"^import VisionKit"),
+    ("EventKit", "framework", "Lecture du calendrier.", r"^import EventKit"),
+    ("CoreLocation", "framework", "Ville et position.", r"^import CoreLocation"),
+    ("CoreMotion", "framework", "Nombre de pas.", r"^import CoreMotion"),
+    ("UserNotifications", "framework", "Rappels et notifications locales.", r"^import UserNotifications"),
+    ("Swift Charts", "framework", "Graphiques des mini-apps.", r"^import Charts"),
+    ("FoundationModels", "framework", "Modèle d'Apple sur l'appareil (iOS 26).", r"^import FoundationModels"),
+    ("PhotosUI", "framework", "Choix d'une photo.", r"^import PhotosUI"),
+    ("App Group", "data", "Conteneur partagé `group.com.dakrsnyk.tessera` : un fichier JSON par domaine, lu par l'app et l'extension.", r"\bSharedStore\b"),
+    ("Base alimentaire CNF", "data", "Fichier canadien sur les éléments nutritifs embarqué, ~5 600 aliments (App/Resources/cnf-foods.json).", r"cnf-foods"),
+    ("Demos des exercices", "data", "Démonstrations animées des 163 exercices (App/Resources/ExerciseDemos.json).", r"\"ExerciseDemos\""),
+]
+
+
+def swift_files():
+    found = []
+    for d in SWIFT_DIRS:
+        for base, _, files in os.walk(os.path.join(ROOT, d)):
+            found += [os.path.relpath(os.path.join(base, f), ROOT).replace(os.sep, "/") for f in files if f.endswith(".swift")]
+    return sorted(found)
+
+
+def code_note_name(path):
+    return os.path.basename(path)[:-6] + " (swift)"
+
+
+def module_of(path):
+    for m in MODULES:
+        if path in m["sources"]:
+            return m["file"]
+    return next(mod for prefix, mod in FALLBACK if path.startswith(prefix))
+
+
+def strip_comments(text):
+    text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+    text = re.sub(r'"""(.*?)"""', '""', text, flags=re.S)
+    # String contents are text shown to people, not code: « Store » in a label is not the type Store.
+    text = re.sub(r'"(?:[^"\\\n]|\\.)*"', '""', text)
+    return "\n".join(line.split("//")[0] for line in text.splitlines())
+
+
+def code_graph():
+    files = swift_files()
+    raw = {p: open(os.path.join(ROOT, p), encoding="utf-8").read() for p in files}
+    code = {p: strip_comments(t) for p, t in raw.items()}
+    declared = {}
+    for p, text in code.items():
+        for match in re.finditer(r"^(?:@\w+(?:\([^)]*\))?\s+)*(?:public |internal |final |nonisolated )*(struct|class|enum|protocol|actor|typealias)\s+([A-Z]\w*)", text, re.M):
+            declared.setdefault(match.group(2), p)
+    uses, used_by, external = {}, {}, {}
+    for p, text in code.items():
+        names = set(re.findall(r"\b([A-Z]\w+)\b", text))
+        targets = sorted({declared[n] for n in names if n in declared and declared[n] != p})
+        uses[p] = targets
+        for t in targets:
+            used_by.setdefault(t, []).append(p)
+        external[p] = [name for name, _, _, pattern in EXTERNAL if re.search(pattern, raw[p], re.M)]
+    os.makedirs(CODE, exist_ok=True)
+    os.makedirs(SERVICES_DIR, exist_ok=True)
+    for old in os.listdir(CODE):
+        os.remove(os.path.join(CODE, old))
+    by_module = {}
+    for p in files:
+        mod = module_of(p)
+        by_module.setdefault(mod, []).append(p)
+        zone = BY_FILE[mod]["zone"]
+        doc = next((re.sub(r"^\s*///\s?", "", l) for l in raw[p].splitlines() if l.strip().startswith("///")), "")
+        types = sorted(n for n, f in declared.items() if f == p)
+        lines = ["---", f"tags: [ardane, code, zone/{zone}]", f"source: {p}", "---", "",
+                 f"# {os.path.basename(p)}", "", f"Module : [[{mod}]] · Fichier : [{p}]({rel_from(CODE, p)}) · {raw[p].count(chr(10))} lignes", ""]
+        if doc:
+            lines += [f"> {doc}", ""]
+        if types:
+            lines += ["**Déclare :** " + ", ".join(f"`{t}`" for t in types), ""]
+        if uses[p]:
+            lines += ["## Utilise", ""] + [f"- [[{code_note_name(t)}]]" for t in uses[p]] + [""]
+        if external[p]:
+            lines += ["## Services et frameworks", ""] + [f"- [[{e}]]" for e in external[p]] + [""]
+        if used_by.get(p):
+            lines += [f"Utilisé par {len(used_by[p])} fichier(s) (voir les rétroliens).", ""]
+        open(os.path.join(CODE, code_note_name(p) + ".md"), "w").write("\n".join(lines))
+    for name, kind, what, _ in EXTERNAL:
+        users = [p for p in files if name in external[p]]
+        label = {"api": "API web", "framework": "Framework Apple", "data": "Données"}[kind]
+        lines = ["---", f"tags: [ardane, service, service/{kind}]", "---", "", f"# {name}", "", f"{label} · [[Services-externes]] · [[Ardane]]", "", what, "",
+                 f"Utilisé par {len(users)} fichier(s) : voir les rétroliens."]
+        open(os.path.join(SERVICES_DIR, name + ".md"), "w").write("\n".join(lines) + "\n")
+    hub = ["---", "tags: [ardane, hub]", "---", "", "# Ardane", "", "Le centre de la carte : chaque module, puis ses fichiers, ses services et ses données.", "",
+           "[[docs/obsidian/README|Guide]] · [[Vue-Globale.canvas|Vue globale]] · [[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]", ""]
+    for z, (label, _) in ZONES.items():
+        mods = [m for m in MODULES if m["zone"] == z]
+        if mods:
+            hub += [f"## {label}", ""] + [f"- [[{m['file']}]]" for m in mods] + [""]
+    open(os.path.join(OUT, "Ardane.md"), "w").write("\n".join(hub))
+    return by_module, sum(len(v) for v in uses.values())
+
+
 # --- README ----------------------------------------------------------------------------------------
 def readme():
     zones = {}
@@ -650,7 +787,16 @@ def readme():
         lines.append(f"**{label}**")
         lines += [f"- [[{m['file']}|{m['title']}]] ([fichier](modules/{m['file']}.md))" for m in zones[z]]
         lines.append("")
-    lines += ["## Couleurs", "",
+    lines += ["## Vue graphique (le réseau d'étoiles)", "",
+              "Chaque fichier du code a sa note dans `code/` (ce qu'il déclare, ce qu'il utilise, ses services), chaque service ou framework dans `services/`, et [[Ardane]] est le centre. Les liens viennent du code : la vue graphique dessine les vraies dépendances.", "",
+              "1. Ouvrir la vue graphique : icône « Vue graphique » dans la barre de gauche (ou Ctrl+G).",
+              "2. Roue dentée en haut à droite du graphe → **Filtres** → dans la recherche, taper `path:docs/obsidian` (seulement la carte).",
+              "3. **Groupes** → « Nouveau groupe » six fois, avec ces requêtes et une couleur chacune :",
+              "   - `tag:#zone/interface` (cyan) · `tag:#zone/metier` (vert) · `tag:#zone/donnees` (jaune)",
+              "   - `tag:#zone/ios` (violet) · `tag:#zone/outils` (gris) · `tag:#service` (orange)",
+              "4. **Affichage** : activer « Flèches », taille des nœuds un peu plus grande ; **Forces** : augmenter « Répulsion » pour séparer les grappes.",
+              "5. Clic sur un point : ouvre la note ; survol : allume ses liens. Les gros points (AppModel, SharedStore, WidgetDesign…) sont les fichiers dont tout dépend.", "",
+              "## Couleurs", "",
               "Cyan : interface · Vert : logique métier · Jaune : données · Violet : widgets et iOS · Orange : services externes · Gris : outillage.", "",
               "## Mettre à jour", "",
               "Modifier `MODULES` ou les cartes dans `scripts/obsidian_map.py`, puis lancer `python3 scripts/obsidian_map.py` : il réécrit `docs/obsidian/` et vérifie le JSON des cartes, les liens entre notes et l'existence de chaque fichier source cité. `python3 scripts/obsidian_map.py --check` vérifie sans rien écrire.", ""]
@@ -661,7 +807,12 @@ def readme():
 def check():
     errors = []
     notes = {os.path.splitext(f)[0] for f in os.listdir(NOTES) if f.endswith(".md")}
-    targets = notes | {"docs/obsidian/README", "Vue-Globale.canvas", "Architecture.canvas", "Fonctionnalites.canvas"}
+    every = {}
+    for base, _, fs in os.walk(OUT):
+        for f in fs:
+            if f.endswith(".md"):
+                every[os.path.join(base, f)] = os.path.splitext(f)[0]
+    targets = set(every.values()) | {"docs/obsidian/README", "Vue-Globale.canvas", "Architecture.canvas", "Fonctionnalites.canvas"}
 
     def links_in(text, base, where):
         for target in re.findall(r"\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]", text):
@@ -699,14 +850,13 @@ def check():
             if e.get("fromSide") not in (None, "top", "right", "bottom", "left") or e.get("toSide") not in (None, "top", "right", "bottom", "left"):
                 errors.append(f"{name}: côté de flèche invalide")
         print(f"{name}: {len(data['nodes'])} nœuds, {len(data['edges'])} flèches")
-    for f in sorted(os.listdir(NOTES)):
-        links_in(open(os.path.join(NOTES, f)).read(), NOTES, f"modules/{f}")
-    links_in(open(os.path.join(OUT, "README.md")).read(), OUT, "README.md")
+    for path in sorted(every):
+        links_in(open(path).read(), os.path.dirname(path), os.path.relpath(path, OUT))
     for m in MODULES:
         for p in m["sources"]:
             if not os.path.exists(os.path.join(ROOT, p)):
                 errors.append(f"{m['file']}: source {p} absente")
-    print(f"{len(notes)} notes de modules")
+    print(f"{len(notes)} notes de modules, {len(every)} notes en tout")
     if errors:
         print("\n".join(errors))
         sys.exit(1)
@@ -716,8 +866,10 @@ def check():
 if __name__ == "__main__":
     if "--check" not in sys.argv:
         os.makedirs(NOTES, exist_ok=True)
+        by_module, link_count = code_graph()
         for m in MODULES:
-            write_note(m)
+            write_note(m, by_module.get(m["file"], []))
+        print(f"vue graphique : {sum(len(v) for v in by_module.values())} notes de code, {link_count} liens de dépendance")
         vue_globale()
         architecture()
         fonctionnalites()

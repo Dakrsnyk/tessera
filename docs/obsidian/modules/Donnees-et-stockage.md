@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, donnees]
+tags: [ardane, module, zone/donnees]
 ---
 
 # Données et stockage
@@ -38,5 +38,18 @@ Tout est stocké sur l'appareil, dans le conteneur App Group partagé par l'app 
 - [[Widgets-extension]] : lu par l'extension
 - [[Intents-et-activite-en-direct]] : écrit par les boutons des widgets
 - [[Profil-et-reglages]] : sauvegarde et import
+
+## Fichiers du module (8)
+
+- [[DataBackup (swift)]]
+- [[DataItems (swift)]]
+- [[NutrientFile (swift)]]
+- [[DomainData (swift)]]
+- [[Insights (swift)]]
+- [[PayloadLoader (swift)]]
+- [[SampleData (swift)]]
+- [[SharedStore (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

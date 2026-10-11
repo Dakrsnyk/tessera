@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Profil et réglages
@@ -34,5 +34,21 @@ Le profil (qui est la personne, ses chiffres) et tous les réglages de l'app.
 - [[Donnees-et-stockage]] : sauvegarde
 - [[Services-externes]] : UserNotifications
 - [[Onboarding-et-tutoriel]] : aide
+
+## Fichiers du module (11)
+
+- [[AppIcons (swift)]]
+- [[AppIconPicker (swift)]]
+- [[DataItemViews (swift)]]
+- [[ProfileTopics (swift)]]
+- [[ProfileView (swift)]]
+- [[SmartRemindersView (swift)]]
+- [[NotificationScheduler (swift)]]
+- [[ReviewPrompt (swift)]]
+- [[Settings (swift)]]
+- [[SmartReminders (swift)]]
+- [[AppStyle (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

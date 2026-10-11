@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Mini-apps
@@ -28,5 +28,13 @@ Chaque mini-app est une partie entière d'Ardane : un tableau de bord, puis ses 
 - [[Finances]]
 - [[Autres-mini-apps]] : Business, Voyage, Auto, Météo, Études
 - [[Domaines-metier]] : données de chaque mini-app
+
+## Fichiers du module (3)
+
+- [[MiniApp (swift)]]
+- [[MiniAppSettings (swift)]]
+- [[WeekViews (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

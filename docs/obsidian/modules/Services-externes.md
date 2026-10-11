@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, services]
+tags: [ardane, module, zone/services]
 ---
 
 # Services externes et frameworks Apple
@@ -39,5 +39,14 @@ Ce qui sort de l'appareil (API web, sans compte) et les frameworks système util
 - [[Widgets-extension]] : rafraîchissement des widgets
 - [[Nutrition]] : Open Food Facts
 - [[Premium-et-abonnements]] : StoreKit
+
+## Fichiers du module (4)
+
+- [[AIPhraser (swift)]]
+- [[LocationService (swift)]]
+- [[CryptoService (swift)]]
+- [[WeatherService (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

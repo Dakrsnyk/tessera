@@ -48,8 +48,21 @@ Cartes et notes générées à partir du code par `scripts/obsidian_map.py` : ri
 - [[Services-externes|Services externes et frameworks Apple]] ([fichier](modules/Services-externes.md))
 
 **Qualité et outillage**
+- [[Outils-partages|Outils partagés (Shared/Support)]] ([fichier](modules/Outils-partages.md))
 - [[Localisation|Localisation]] ([fichier](modules/Localisation.md))
 - [[Tests-CI-et-outils|Tests, CI et outils]] ([fichier](modules/Tests-CI-et-outils.md))
+
+## Vue graphique (le réseau d'étoiles)
+
+Chaque fichier du code a sa note dans `code/` (ce qu'il déclare, ce qu'il utilise, ses services), chaque service ou framework dans `services/`, et [[Ardane]] est le centre. Les liens viennent du code : la vue graphique dessine les vraies dépendances.
+
+1. Ouvrir la vue graphique : icône « Vue graphique » dans la barre de gauche (ou Ctrl+G).
+2. Roue dentée en haut à droite du graphe → **Filtres** → dans la recherche, taper `path:docs/obsidian` (seulement la carte).
+3. **Groupes** → « Nouveau groupe » six fois, avec ces requêtes et une couleur chacune :
+   - `tag:#zone/interface` (cyan) · `tag:#zone/metier` (vert) · `tag:#zone/donnees` (jaune)
+   - `tag:#zone/ios` (violet) · `tag:#zone/outils` (gris) · `tag:#service` (orange)
+4. **Affichage** : activer « Flèches », taille des nœuds un peu plus grande ; **Forces** : augmenter « Répulsion » pour séparer les grappes.
+5. Clic sur un point : ouvre la note ; survol : allume ses liens. Les gros points (AppModel, SharedStore, WidgetDesign…) sont les fichiers dont tout dépend.
 
 ## Couleurs
 

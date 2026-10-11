@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Nutrition
@@ -31,5 +31,14 @@ Calories et macros du jour, repas, recherche d'aliments, scanner de code-barres,
 - [[Services-externes]] : Open Food Facts
 - [[Domaines-metier]] : NutritionState
 - [[Intents-et-activite-en-direct]] : LogFoodIntent, lien scan-food
+
+## Fichiers du module (4)
+
+- [[NutritionApp (swift)]]
+- [[NutritionPages (swift)]]
+- [[NutritionSpace (swift)]]
+- [[NutritionTiles (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

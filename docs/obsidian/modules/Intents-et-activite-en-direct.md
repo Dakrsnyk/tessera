@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, ios]
+tags: [ardane, module, zone/ios]
 ---
 
 # Boutons des widgets, activité en direct et liens
@@ -29,5 +29,14 @@ Les actions qui changent les données sans ouvrir l'app (App Intents des widgets
 - [[Donnees-et-stockage]] : écrivent dans le SharedStore
 - [[Fitness]] : séance en cours
 - [[Noyau-AppModel]] : liens reçus par le Router
+
+## Fichiers du module (4)
+
+- [[InteractiveIntents (swift)]]
+- [[SpaceIntents (swift)]]
+- [[WorkoutLiveActivity (swift)]]
+- [[DeepLink (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

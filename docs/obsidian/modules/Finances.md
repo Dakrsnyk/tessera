@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Finances
@@ -29,5 +29,16 @@ Saisie manuelle des revenus et dépenses : solde, reste du mois, catégories, fa
 - [[Domaines-metier]] : BudgetState
 - [[Premium-et-abonnements]] : historique et évolution
 - [[Intents-et-activite-en-direct]] : QuickExpenseIntent
+
+## Fichiers du module (6)
+
+- [[MoneyView (swift)]]
+- [[FinancesApp (swift)]]
+- [[FinancesPages (swift)]]
+- [[BudgetSpace (swift)]]
+- [[MoneyMath (swift)]]
+- [[MoneyTiles (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

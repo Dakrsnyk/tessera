@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, outils]
+tags: [ardane, module, zone/outils]
 ---
 
 # Tests, CI et outils
@@ -32,5 +32,43 @@ Pas de Mac : tout se compile et se teste sur GitHub Actions, piloté par des tag
 
 - [[Localisation]]
 - [[Premium-et-abonnements]] : sécurité Release du déverrouillage DEBUG
+
+## Fichiers du module (33)
+
+- [[AdExport (swift)]]
+- [[DemoGallery (swift)]]
+- [[MarketingShots (swift)]]
+- [[ScreenshotMode (swift)]]
+- [[StudioGallery (swift)]]
+- [[AppearanceAndStoreTests (swift)]]
+- [[CoreLogicTests (swift)]]
+- [[DailyBriefTests (swift)]]
+- [[DataBackupTests (swift)]]
+- [[DomainLogicTests (swift)]]
+- [[ExerciseDemoTests (swift)]]
+- [[FinancesBusinessTests (swift)]]
+- [[FinancesSyncTests (swift)]]
+- [[FitnessAppTests (swift)]]
+- [[FusionTests (swift)]]
+- [[NutritionAppTests (swift)]]
+- [[PlanningStudiesTests (swift)]]
+- [[ProfileTests (swift)]]
+- [[QuotidienAndLockScreenTests (swift)]]
+- [[ScheduleTests (swift)]]
+- [[SmartRemindersTests (swift)]]
+- [[StoreSeasonTests (swift)]]
+- [[StudioColorTests (swift)]]
+- [[StudioTests (swift)]]
+- [[TravelCarTests (swift)]]
+- [[TutorialTests (swift)]]
+- [[AdShotsUITests (swift)]]
+- [[DataEntryUITests (swift)]]
+- [[MiniAppUITests (swift)]]
+- [[ProfileUITests (swift)]]
+- [[PromoVideoUITests (swift)]]
+- [[StudioUITests (swift)]]
+- [[WidgetPlacementUITests (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

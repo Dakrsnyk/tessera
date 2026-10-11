@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Mes widgets
@@ -22,5 +22,13 @@ L'onglet Mes widgets : tous les widgets créés, en carrousel, favoris ou par ca
 
 - [[Studio-editeur]] : modifier un widget
 - [[Widgets-extension]] : les widgets posés sur l'iPhone
+
+## Fichiers du module (3)
+
+- [[FusionViews (swift)]]
+- [[MyWidgetsView (swift)]]
+- [[WidgetCarousel (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

@@ -1,5 +1,5 @@
 ---
-tags: [ardane, module, interface]
+tags: [ardane, module, zone/interface]
 ---
 
 # Planning, tâches et habitudes
@@ -35,5 +35,20 @@ La semaine en tableau et le jour choisi, les tâches, le Top 3, les projets, la 
 - [[Services-externes]] : EventKit (calendrier)
 - [[Intents-et-activite-en-direct]] : cocher une habitude ou une tâche depuis un widget
 - [[Domaines-metier]]
+
+## Fichiers du module (10)
+
+- [[HabitsView (swift)]]
+- [[HydrationView (swift)]]
+- [[TasksView (swift)]]
+- [[WeatherLocationView (swift)]]
+- [[PlanningApp (swift)]]
+- [[PlanningPages (swift)]]
+- [[StudiesApp (swift)]]
+- [[StudiesPages (swift)]]
+- [[CalendarService (swift)]]
+- [[Content (swift)]]
+
+Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

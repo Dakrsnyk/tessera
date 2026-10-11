@@ -14,3 +14,6 @@ __pycache__/
 # Graphify analysis output
 graphify-out/
 
+
+# Réglages locaux d'Obsidian (chaque personne garde les siens)
+.obsidian/
