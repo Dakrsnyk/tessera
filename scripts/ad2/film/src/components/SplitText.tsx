@@ -1,5 +1,6 @@
-import { interpolate, useCurrentFrame } from "remotion";
+import { interpolate } from "remotion";
 import { AXIS, C, clamp, ease, W } from "../lib/brand";
+import { useFilmFrame } from "../lib/time";
 
 /**
  * « Split from the seam » (§2.6): a 2 px line flashes at x = 540 for 8 frames, then the line of type
@@ -14,7 +15,7 @@ export const SplitText: React.FC<{
   exitAt?: number;
   children: React.ReactNode;
 }> = ({ from, top, height, exitAt, children }) => {
-  const frame = useCurrentFrame();
+  const frame = useFilmFrame();
   const local = frame - from;
   if (local < 0) return null;
 
@@ -31,10 +32,7 @@ export const SplitText: React.FC<{
     top: top - 30,
     width: W,
     height: height + 60,
-    clipPath:
-      side === "left"
-        ? `inset(0px ${W - AXIS}px 0px ${AXIS - reach}px)`
-        : `inset(0px ${W - AXIS - reach}px 0px ${AXIS}px)`,
+    clipPath: side === "left" ? `inset(0px ${W - AXIS}px 0px ${AXIS - reach}px)` : `inset(0px ${W - AXIS - reach}px 0px ${AXIS}px)`,
     opacity,
   });
   const content = (dx: number): React.CSSProperties => ({

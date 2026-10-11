@@ -162,7 +162,13 @@ export const Phone3D: React.FC<PhoneProps> = ({ yaw, pitch = 0, roll = 0, positi
 
   const mat = useMemo(
     () => ({
-      titanium: new THREE.MeshPhysicalMaterial({ color: "#8A8781", metalness: 1, roughness: 0.3, anisotropy: 0.6, anisotropyRotation: Math.PI / 2 }),
+      titanium: new THREE.MeshPhysicalMaterial({
+        color: "#8A8781",
+        metalness: 1,
+        roughness: 0.3,
+        anisotropy: 0.6,
+        anisotropyRotation: Math.PI / 2,
+      }),
       // Unlit black glass: with the environment set on the scene, envMapIntensity does not dim a material's
       // reflection, and an infinitely distant studio seen through an 85 mm lens covers the whole glass.
       // Its reflection is the drawn streak (§2.3).
@@ -180,10 +186,7 @@ export const Phone3D: React.FC<PhoneProps> = ({ yaw, pitch = 0, roll = 0, positi
   mat.streak.sweepTex.offset.x = sweep < 0 ? 2 : 0.5 - sweep * 1.4 + 0.2;
 
   return (
-    <group
-      position={position}
-      rotation={[THREE.MathUtils.degToRad(pitch), THREE.MathUtils.degToRad(yaw), THREE.MathUtils.degToRad(roll)]}
-    >
+    <group position={position} rotation={[THREE.MathUtils.degToRad(pitch), THREE.MathUtils.degToRad(yaw), THREE.MathUtils.degToRad(roll)]}>
       <mesh geometry={geo.body} material={mat.titanium} />
       {geo.buttons.map((b, i) => (
         <mesh key={i} geometry={b.g} material={mat.titanium} position={[b.x, b.y, 0]} scale={[0.6, 1, 1]} />

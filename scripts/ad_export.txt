@@ -242,3 +242,10 @@ demo demo-bench-press-dark exercise=bench-press view=3/4 fps=60 w=402 h=236 scal
 demo demo-back-squat-dark exercise=back-squat view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=dark
 demo demo-deadlift-dark exercise=deadlift view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=dark
 demo demo-pull-up-dark exercise=pull-up view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=dark
+# Déclinaisons (film Nutrition en apparence claire) : l'ajout rapide, un accueil héros clair, l'écran verrouillé Études.
+widget quickFood-s-light kind=quickFood family=small scale=4 theme=light
+widget quickFood-m-light kind=quickFood family=medium scale=3 theme=light
+widget quickFood-m-paper kind=quickFood family=medium scale=3 theme=paper
+home home-hero-light setup=etudes rows=macros.medium|quickFood.medium|budgetLeft.small+priorities.small theme=light
+setupwidgets setup-hero-light setup=etudes rows=macros.medium|quickFood.medium|budgetLeft.small+priorities.small theme=light
+lock lock-etudes setup=etudes scale=3

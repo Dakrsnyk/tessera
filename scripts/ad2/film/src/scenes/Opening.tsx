@@ -1,12 +1,17 @@
-import { Audio } from "@remotion/media";
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, interpolate } from "remotion";
+import { FilmAudio } from "../components/FilmAudio";
 import { Grain } from "../components/Grain";
 import { CameraRig, lensFov, PHONE, Phone3D, StudioEnvironment } from "../components/Phone3D";
 import { Seam } from "../components/Seam";
 import { SplitText } from "../components/SplitText";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
-import { useImageTexture } from "../lib/useTexture";
+import { HERO_WIDGETS, heroHome, heroWidget } from "../lib/kit";
+import { drawLifted, useCanvasTexture } from "../lib/useCanvas";
+import { useImages } from "../lib/useImages";
+import { useFilmFrame } from "../lib/time";
+
+const FILES = [heroHome("aurore"), ...HERO_WIDGETS.map((w) => heroWidget("aurore", w.index))];
 
 /** Ambient tint of the hero Home (average colour of the capture, desaturated 40 %), at most 6 % spill. */
 const TINT = "#43576A";
@@ -19,16 +24,28 @@ const TINT = "#43576A";
  *     (Aurora); a light sweep crosses the glass at f180. V2 starts at f234.
  * 3 · f240–359: push-in to 1.10×, rising 30 px; « Designed around you. » splits from the seam.
  */
-export const Opening: React.FC = () => {
-  const frame = useCurrentFrame();
-  const screen = useImageTexture(staticFile("kit/home-aurore.png"));
+export const Opening: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
+  const frame = useFilmFrame();
+  const images = useImages(FILES);
+  const { ctx, texture: screen } = useCanvasTexture();
+  if (images) {
+    // The hero Home (Aurora). « Breath » (f150–): each widget lifts 40 px in z and settles, 12 frames apart.
+    ctx.drawImage(images[FILES[0]], 0, 0);
+    HERO_WIDGETS.forEach((w, i) => {
+      const start = 150 + 12 * i;
+      const b = interpolate(frame, [start, start + 12, start + 30], [0, 1, 0], { ...clamp, easing: Easing.bezier(0.45, 0, 0.55, 1) });
+      if (b > 0) drawLifted(ctx, images[heroWidget("aurore", w.index)], w.rect, b);
+    });
+    screen.needsUpdate = true;
+  }
 
   // One continuous orbit from edge-on to frontal: no stop at the shot change.
   const yaw = interpolate(frame, [6, 236], [90, 0], { ...clamp, easing: Easing.bezier(0.45, 0, 0.18, 1) });
   // Dolly back 6 % (shot 1), push-in 4 %/s (shot 2), then to 1.10× (shot 3). Long tails, no dead stops.
   const distance = interpolate(frame, [0, 110, 240, 359], [455, 482, 446, 404], {
     ...clamp,
-    easing: [ease.arrival, Easing.bezier(0.42, 0, 0.58, 1), Easing.bezier(0.42, 0, 0.3, 1)],
+    // The last push keeps some speed into the next shot (the orbit into the exploded view continues).
+    easing: [ease.arrival, Easing.bezier(0.42, 0, 0.58, 1), Easing.bezier(0.42, 0, 0.75, 0.88)],
   });
   const rise = interpolate(frame, [240, 359], [0, 2.8], { ...clamp, easing: Easing.bezier(0.42, 0, 0.3, 1) });
 
@@ -46,9 +63,7 @@ export const Opening: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.void }}>
-      <AbsoluteFill
-        style={{ background: `radial-gradient(circle 900px at ${AXIS}px ${H / 2}px, ${C.lifted}, ${C.void} 70%)` }}
-      />
+      <AbsoluteFill style={{ background: `radial-gradient(circle 900px at ${AXIS}px ${H / 2}px, ${C.lifted}, ${C.void} 70%)` }} />
       <AbsoluteFill
         style={{
           background: `radial-gradient(ellipse 700px 1100px at ${AXIS}px ${H / 2}px, ${TINT}, transparent 75%)`,
@@ -56,7 +71,7 @@ export const Opening: React.FC = () => {
         }}
       />
       {/* Mounted once the capture is decoded: the canvas only redraws when the frame changes. */}
-      {screen && (
+      {images && (
         <ThreeCanvas width={W} height={H}>
           <StudioEnvironment />
           <CameraRig lens={85} distance={distance} height={12 + rise} lookY={rise} />
@@ -75,13 +90,7 @@ export const Opening: React.FC = () => {
       </SplitText>
       <Grain />
 
-      <Audio src={staticFile("sfx/opening.wav")} />
-      <Sequence from={36} layout="none">
-        <Audio src={staticFile("vo/main-V1.wav")} />
-      </Sequence>
-      <Sequence from={234} layout="none">
-        <Audio src={staticFile("vo/main-V2.wav")} />
-      </Sequence>
+      {audio && <FilmAudio from={0} />}
     </AbsoluteFill>
   );
 };

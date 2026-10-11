@@ -81,8 +81,23 @@ export const useFontsReady = () => {
 /** Type styles of §2.6. `display` uses the 32 optical size. */
 export const type = {
   hero: { fontFamily: INTER, fontWeight: 700, fontSize: 132, letterSpacing: "-0.03em", fontVariationSettings: "'opsz' 32" },
-  super: { fontFamily: INTER, fontWeight: 600, fontSize: 88, lineHeight: 1.04, letterSpacing: "-0.02em", fontVariationSettings: "'opsz' 32" },
-  eyebrow: { fontFamily: INTER, fontWeight: 600, fontSize: 25, letterSpacing: "0.14em", textTransform: "uppercase", color: C.type2, fontVariationSettings: "'opsz' 14" },
+  super: {
+    fontFamily: INTER,
+    fontWeight: 600,
+    fontSize: 88,
+    lineHeight: 1.04,
+    letterSpacing: "-0.02em",
+    fontVariationSettings: "'opsz' 32",
+  },
+  eyebrow: {
+    fontFamily: INTER,
+    fontWeight: 600,
+    fontSize: 25,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: C.type2,
+    fontVariationSettings: "'opsz' 14",
+  },
   wordmark: { fontFamily: INTER, fontWeight: 600, fontSize: 120, letterSpacing: "-0.02em", fontVariationSettings: "'opsz' 32" },
   tagline: { fontFamily: INTER, fontWeight: 400, fontSize: 40, color: C.type2, fontVariationSettings: "'opsz' 20" },
   cta: { fontFamily: INTER, fontWeight: 500, fontSize: 32, fontVariationSettings: "'opsz' 20" },

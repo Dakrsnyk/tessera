@@ -14,7 +14,11 @@ export const useImages = (files: string[]): Record<string, HTMLImageElement> | n
         (file) =>
           new Promise<[string, HTMLImageElement]>((resolve, reject) => {
             const img = new Image();
-            img.onload = () => img.decode().then(() => resolve([file, img]), () => resolve([file, img]));
+            img.onload = () =>
+              img.decode().then(
+                () => resolve([file, img]),
+                () => resolve([file, img]),
+              );
             img.onerror = () => reject(new Error(`cannot load ${file}`));
             img.src = staticFile(file);
           }),

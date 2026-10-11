@@ -1,11 +1,12 @@
 import { ThreeCanvas } from "@remotion/three";
 import { useMemo } from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, interpolate } from "remotion";
 import * as THREE from "three";
 import { Grain } from "../components/Grain";
 import { CameraLook, StudioEnvironment } from "../components/Phone3D";
 import { BarcodeLabel, LABEL } from "../components/Barcode";
 import { AXIS, C, clamp, ease, H, useFontsReady, W } from "../lib/brand";
+import { useFilmFrame } from "../lib/time";
 
 /** The daylight pool on the floor: #F2F2F4 at its heart, falling off to black. */
 const poolTexture = () => {
@@ -55,7 +56,7 @@ const SCALE = 1.6;
  * dollies in. No product: everyone knows what a barcode is (decision of 2026-10-11).
  */
 export const Daylight: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useFilmFrame();
   const fonts = useFontsReady();
   // Light on: instant, with a 4-frame settle (a softbox, not a fade).
   const light = interpolate(frame, [0, 4], [0.82, 1], clamp);

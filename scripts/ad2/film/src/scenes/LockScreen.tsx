@@ -1,16 +1,17 @@
-import { Audio } from "@remotion/media";
 import { useThree } from "@react-three/fiber";
 import { ThreeCanvas } from "@remotion/three";
 import { useMemo } from "react";
-import { AbsoluteFill, Easing, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
 import * as THREE from "three";
 import { Callout } from "../components/Callout";
+import { FilmAudio } from "../components/FilmAudio";
 import { Grain } from "../components/Grain";
 import { CameraLook, lensFov, Phone3D, phoneMatrix, SCREEN, screenPoint, StudioEnvironment } from "../components/Phone3D";
 import { Seam } from "../components/Seam";
 import { SplitText } from "../components/SplitText";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
 import { imageTexture, useImages } from "../lib/useImages";
+import { useFilmFrame } from "../lib/time";
 
 const LOCK = "kit/lock-crepuscule.png";
 const REST = [0, 1, 2, 3, 4].map((i) => `kit/live-rest-real-${String(i).padStart(3, "0")}.png`);
@@ -35,8 +36,7 @@ const T = { detach: 102, lifted: 138, tap: 270, bladeEnd: 282, dock: 300, docked
 
 /** The Live Activity on screen: the real 1 Hz countdown (a new second every 60 frames, on the beats), then
  * after « Série faite » the real after-state (next set, the rest restarted at 2:00, 1:59 on f330). */
-const laFile = (f: number) =>
-  f < T.bladeEnd ? REST[Math.min(4, Math.max(0, Math.floor(f / 60)))] : f < T.docked ? AFTER[0] : AFTER[1];
+const laFile = (f: number) => (f < T.bladeEnd ? REST[Math.min(4, Math.max(0, Math.floor(f / 60)))] : f < T.docked ? AFTER[0] : AFTER[1]);
 
 /** Lift progress: detaches f102–138 (0.3, 0, 0.1, 1), docks back f300–330. */
 const liftAt = (f: number) =>
@@ -75,7 +75,10 @@ const LiftedActivity: React.FC<{ p: number; texture: THREE.Texture }> = ({ p, te
   const up = new THREE.Vector3(0, 1, 0).applyQuaternion(cam.quaternion);
   const end = cam.position.clone().add(forward.multiplyScalar(d));
   // Rises about 40 px on the way and settles.
-  const position = start.clone().lerp(end, p).add(up.multiplyScalar(Math.sin(Math.PI * p) * 2.5));
+  const position = start
+    .clone()
+    .lerp(end, p)
+    .add(up.multiplyScalar(Math.sin(Math.PI * p) * 2.5));
   const quaternion = startQ.clone().slerp(cam.quaternion, p);
   return (
     <mesh position={position} quaternion={quaternion}>
@@ -85,8 +88,8 @@ const LiftedActivity: React.FC<{ p: number; texture: THREE.Texture }> = ({ p, te
   );
 };
 
-export const LockScreen: React.FC = () => {
-  const frame = useCurrentFrame();
+export const LockScreen: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
+  const frame = useFilmFrame();
   const images = useImages(FILES);
   const canvas = useMemo(() => {
     const c = document.createElement("canvas");
@@ -194,7 +197,10 @@ export const LockScreen: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: C.void }}>
       <AbsoluteFill style={{ background: `radial-gradient(circle 900px at ${AXIS}px ${H / 2}px, ${C.lifted}, ${C.void} 70%)` }} />
       <AbsoluteFill
-        style={{ background: `radial-gradient(ellipse 800px 700px at ${AXIS}px ${H / 2}px, ${TINT}, transparent 75%)`, opacity: 0.06 * sleep }}
+        style={{
+          background: `radial-gradient(ellipse 800px 700px at ${AXIS}px ${H / 2}px, ${TINT}, transparent 75%)`,
+          opacity: 0.06 * sleep,
+        }}
       />
       <AbsoluteFill style={{ filter: `blur(${focusBlur + liftBlur}px) brightness(${dim})` }}>
         {/* Mounted once the pictures are decoded: the canvas only redraws when the frame changes. */}
@@ -262,15 +268,11 @@ export const LockScreen: React.FC = () => {
       <SplitText from={288} exitAt={336} top={1330} height={100}>
         <span style={type.super}>Without opening the app.</span>
       </SplitText>
+      {/* The line from the previous shot becomes the rail the camera glides along (fades over 24 frames). */}
+      <Seam x={AXIS} top={300} height={1320} intensity={interpolate(frame, [0, 24], [1, 0], { ...clamp, easing: ease.transfer })} />
       <Grain />
 
-      <Audio src={staticFile("sfx/lock.wav")} />
-      <Sequence from={38} layout="none">
-        <Audio src={staticFile("vo/main-V7.wav")} />
-      </Sequence>
-      <Sequence from={220} layout="none">
-        <Audio src={staticFile("vo/main-V8.wav")} />
-      </Sequence>
+      {audio && <FilmAudio from={1560} />}
     </AbsoluteFill>
   );
 };
