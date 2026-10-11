@@ -5,13 +5,14 @@ one text) and cut back into lines at the chunk's longest silences. Each line is 
 (faster-whisper small.en): text and word timings (for the typography) go to <out>/<film>.json.
 
     venv312/bin/python -I vo.py <spec.json> <film> <out dir>
+    Windows: ~/ardane-tools/venv/Scripts/python -I -X utf8 vo.py ...  (see scripts/ad2/README.md)
 """
 import json, os, re, sys
 import numpy as np
 import soundfile as sf
 
 spec_path, film, out = sys.argv[1:4]
-spec = json.load(open(spec_path))
+spec = json.load(open(spec_path, encoding="utf-8"))
 cfg = spec["films"][film]
 voice = cfg.get("voice", spec.get("voice", "af_heart"))
 speed = cfg.get("speed", spec.get("speed", 0.95))
@@ -95,11 +96,15 @@ for chunk in cfg["chunks"]:
 
 # ASR check and word timings.
 from faster_whisper import WhisperModel
+# ARDANE_HF_CACHE keeps the model (~500 MB) out of the repository (and of the Obsidian vault).
 asr = WhisperModel("small.en", device="cpu", compute_type="int8",
-                   download_root=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tools", "hf_cache"))
+                   download_root=os.environ.get("ARDANE_HF_CACHE") or os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tools", "hf_cache"))
 norm = lambda s: re.sub(r"[^a-z0-9' ]", " ", s.lower()).split()
 for line in lines_out:
-    segments, _ = asr.transcribe(line["file"], word_timestamps=True, language="en", beam_size=5)
+    # Samples at 16 kHz rather than the path: recent PyAV no longer takes faster-whisper's decode arguments.
+    audio, sr = sf.read(line["file"], dtype="float32")
+    audio16 = np.interp(np.arange(0, len(audio), sr / 16000), np.arange(len(audio)), audio).astype(np.float32)
+    segments, _ = asr.transcribe(audio16, word_timestamps=True, language="en", beam_size=5)
     words = [w for s in segments for w in s.words]
     hyp = " ".join(w.word.strip() for w in words)
     ref = [w for w in norm(line["text"]) if w not in [b.lower() for b in brand]]
@@ -114,4 +119,4 @@ for line in lines_out:
     line["wer"] = round(d[-1, -1] / max(1, len(ref)), 3)
     line["words"] = [{"w": w.word.strip(), "start": round(w.start, 3), "end": round(w.end, 3)} for w in words]
     print(f"ASR {line['id']}: wer {line['wer']}  « {hyp} »")
-json.dump({"film": film, "voice": voice, "speed": speed, "sr": SR, "lines": lines_out}, open(os.path.join(out, f"{film}.json"), "w"), indent=1)
+json.dump({"film": film, "voice": voice, "speed": speed, "sr": SR, "lines": lines_out}, open(os.path.join(out, f"{film}.json"), "w", encoding="utf-8"), indent=1)

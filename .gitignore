@@ -17,3 +17,7 @@ graphify-out/
 
 # Réglages locaux d'Obsidian (chaque personne garde les siens)
 .obsidian/
+
+# Production de la publicité (rendus locaux, gros fichiers)
+pub/
+scripts/tools/
