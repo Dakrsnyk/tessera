@@ -1,0 +1,65 @@
+{
+ "voice": "af_heart",
+ "speed": 0.95,
+ "brand": {"Ardane": "ɑɹdˈɑn"},
+ "films": {
+  "main": {"chunks": [
+   [{"id": "V1", "text": "Every day runs on a few essentials.", "start": 0.6, "max": 2.8},
+    {"id": "V2", "text": "They deserve an interface designed around you.", "start": 3.9, "max": 2.9}],
+   [{"id": "V3", "text": "Start with a world you love.", "start": 8.0, "max": 2.4},
+    {"id": "V4", "text": "Every widget follows.", "start": 11.0, "max": 1.4}],
+   [{"id": "V5", "text": "When you train, it keeps track of every set.", "start": 16.4, "max": 3.6},
+    {"id": "V6", "text": "And shows you every exercise, move by move.", "start": 21.6, "max": 3.2}],
+   [{"id": "V7", "text": "Your rest counts down on your Lock Screen.", "start": 26.2, "max": 3.2},
+    {"id": "V8", "text": "Set done? Tap it, right there.", "start": 29.8, "max": 2.0}],
+   [{"id": "V9", "text": "Food is just as simple.", "start": 32.2, "max": 2.0},
+    {"id": "V10", "text": "Scan a barcode, or search.", "start": 35.0, "max": 2.0},
+    {"id": "V11", "text": "And see exactly what's left for today.", "start": 38.8, "max": 2.8}],
+   [{"id": "V12", "text": "Your money.", "start": 42.2, "max": 1.0},
+    {"id": "V13", "text": "Your week.", "start": 44.2, "max": 0.9},
+    {"id": "V14", "text": "The habits you're building.", "start": 46.1, "max": 1.6}],
+   [{"id": "V15", "text": "Everything, in one place that feels like yours.", "start": 48.4, "max": 3.3}],
+   [{"id": "V16", "text": "Ardane.", "start": 54.2, "max": 0.9},
+    {"id": "V17", "text": "Coming soon to the App Store.", "start": 55.2, "max": 2.4}]
+  ]},
+  "s30": {"chunks": [
+   [{"id": "V1", "text": "Your day runs on a few essentials.", "start": 0.3, "max": 2.6},
+    {"id": "V2", "text": "Ardane designs them around you.", "start": 3.2, "max": 2.2}],
+   [{"id": "V3", "text": "Pick a world. Every widget follows.", "start": 6.2, "max": 2.4}],
+   [{"id": "V4", "text": "Train, and it keeps track of every set.", "start": 10.4, "max": 3.2},
+    {"id": "V5", "text": "Tap Set done, right from your Lock Screen.", "start": 13.9, "max": 3.1}],
+   [{"id": "V6", "text": "Scan a barcode, and see exactly what's left for today.", "start": 18.0, "max": 4.0}],
+   [{"id": "V7", "text": "Ardane. Coming soon to the App Store.", "start": 26.2, "max": 2.7}]
+  ]},
+  "s15": {"chunks": [
+   [{"id": "V1", "text": "Your meals. Your workout. What's due. Your week.", "start": 1.0, "max": 4.6}],
+   [{"id": "V2", "text": "All of your day, on one screen.", "start": 7.2, "max": 2.8}],
+   [{"id": "V3", "text": "Ardane. Coming soon to the App Store.", "start": 12.2, "max": 2.6}]
+  ]},
+  "s8": {"chunks": [
+   [{"id": "V1", "text": "Life's essentials, designed around you.", "start": 1.0, "max": 2.2},
+    {"id": "V2", "text": "Ardane. Coming soon to the App Store.", "start": 5.6, "max": 2.3}]
+  ]},
+  "fitness": {"voice": "af_bella", "speed": 1.0, "chunks": [
+   [{"id": "V1", "text": "Rest, counted to the second.", "start": 0.3, "max": 2.2},
+    {"id": "V2", "text": "Every set, tracked as you lift.", "start": 4.3, "max": 2.4}],
+   [{"id": "V3", "text": "Set done? Tap it right on your Lock Screen.", "start": 8.3, "max": 3.5},
+    {"id": "V4", "text": "And every exercise, shown move by move.", "start": 12.3, "max": 3.0}],
+   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 17.0, "max": 2.6}]
+  ]},
+  "nutrition": {"chunks": [
+   [{"id": "V1", "text": "Scan a barcode.", "start": 3.1, "max": 1.3},
+    {"id": "V2", "text": "Or just search.", "start": 5.6, "max": 1.1}],
+   [{"id": "V3", "text": "See calories, protein, carbs and fat, at a glance.", "start": 8.6, "max": 3.8},
+    {"id": "V4", "text": "And log your usuals straight from your Home Screen.", "start": 13.2, "max": 3.2}],
+   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 17.2, "max": 2.6}]
+  ]},
+  "perso": {"chunks": [
+   [{"id": "V1", "text": "Start with a world you love.", "start": 0.3, "max": 2.2},
+    {"id": "V2", "text": "Every widget follows your style.", "start": 6.2, "max": 2.2}],
+   [{"id": "V3", "text": "Down to your Lock Screen, and even the app icon.", "start": 14.2, "max": 2.8},
+    {"id": "V4", "text": "Make it yours.", "start": 18.6, "max": 1.6}],
+   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 21.2, "max": 2.6}]
+  ]}
+ }
+}

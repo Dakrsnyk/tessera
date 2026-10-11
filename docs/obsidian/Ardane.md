@@ -6,7 +6,7 @@ tags: [ardane, hub]
 
 Le centre de la carte : chaque module, puis ses fichiers, ses services et ses données.
 
-[[docs/obsidian/README|Guide]] · [[Vue-Globale.canvas|Vue globale]] · [[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]
+[[docs/obsidian/README|Guide]] · [[Memoire|Mémoire du projet]] · [[Vue-Globale.canvas|Vue globale]] · [[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]
 
 ## Interface (App/Screens)
 

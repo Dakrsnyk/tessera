@@ -786,7 +786,7 @@ def code_graph():
                  f"Utilisé par {len(users)} fichier(s) : voir les rétroliens."]
         open(os.path.join(SERVICES_DIR, name + ".md"), "w").write("\n".join(lines) + "\n")
     hub = ["---", "tags: [ardane, hub]", "---", "", "# Ardane", "", "Le centre de la carte : chaque module, puis ses fichiers, ses services et ses données.", "",
-           "[[docs/obsidian/README|Guide]] · [[Vue-Globale.canvas|Vue globale]] · [[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]", ""]
+           "[[docs/obsidian/README|Guide]] · [[Memoire|Mémoire du projet]] · [[Vue-Globale.canvas|Vue globale]] · [[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]", ""]
     for z, (label, _) in ZONES.items():
         mods = [m for m in MODULES if m["zone"] == z]
         if mods:
@@ -825,6 +825,7 @@ def readme():
               "3. **Groupes** → « Nouveau groupe » six fois, avec ces requêtes et une couleur chacune :",
               "   - `tag:#zone/interface` (cyan) · `tag:#zone/metier` (vert) · `tag:#zone/donnees` (jaune)",
               "   - `tag:#zone/ios` (violet) · `tag:#zone/outils` (gris) · `tag:#service` (orange)",
+              "   - facultatif : `tag:#memoire` (blanc) pour la [[Memoire|mémoire du projet]] (demandes, chantiers, décisions, pièges).",
               "4. **Forces** : force centrale ≈ 0,3 · répulsion ≈ 15 · force des liens ≈ 0,6 · distance des liens ≈ 120. **Affichage** : « Flèches » activé, taille des nœuds ≈ 1,5, seuil d'estompage du texte vers la gauche pour voir les noms des modules.",
               "5. Clic sur un point : ouvre la note ; survol : allume ses liens. Les gros points (AppModel, SharedStore, WidgetDesign…) sont les fichiers dont tout dépend.", "",
               "## Couleurs", "",
@@ -850,7 +851,7 @@ def check():
             if target not in targets:
                 errors.append(f"{where}: lien [[{target}]] sans cible")
         for path in re.findall(r"\]\(([^)\s]+)\)", text):
-            if re.match(r"[a-z]+://", path):
+            if re.match(r"[a-z]+://", path) or path.startswith("/"):  # web link, or the voice script's IPA markup [Ardane](/ɑɹdˈɑn/)
                 continue
             if not os.path.exists(os.path.normpath(os.path.join(base, path))):
                 errors.append(f"{where}: lien {path} vers un fichier absent")

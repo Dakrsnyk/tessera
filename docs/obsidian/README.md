@@ -61,6 +61,7 @@ Chaque fichier du code a sa note dans `code/` (ce qu'il déclare, ce qu'il utili
 3. **Groupes** → « Nouveau groupe » six fois, avec ces requêtes et une couleur chacune :
    - `tag:#zone/interface` (cyan) · `tag:#zone/metier` (vert) · `tag:#zone/donnees` (jaune)
    - `tag:#zone/ios` (violet) · `tag:#zone/outils` (gris) · `tag:#service` (orange)
+   - facultatif : `tag:#memoire` (blanc) pour la [[Memoire|mémoire du projet]] (demandes, chantiers, décisions, pièges).
 4. **Forces** : force centrale ≈ 0,3 · répulsion ≈ 15 · force des liens ≈ 0,6 · distance des liens ≈ 120. **Affichage** : « Flèches » activé, taille des nœuds ≈ 1,5, seuil d'estompage du texte vers la gauche pour voir les noms des modules.
 5. Clic sur un point : ouvre la note ; survol : allume ses liens. Les gros points (AppModel, SharedStore, WidgetDesign…) sont les fichiers dont tout dépend.
 
