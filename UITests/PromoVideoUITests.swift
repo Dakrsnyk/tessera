@@ -190,6 +190,22 @@ final class PromoVideoUITests: XCTestCase {
         pause(1.5)
     }
 
+    /// The launch: the two halves of the A slide in, the name rises under them.
+    func testVideoLaunch() {
+        launch("launch")
+        pause(4)
+    }
+
+    /// « Icône de l'app »: the icons to choose from, read slowly.
+    func testVideoIcons() {
+        launch("icons")
+        pause(2.5)
+        scroll(distance: 0.25)
+        pause(1.5)
+        scroll(down: false, distance: 0.25)
+        pause(1.5)
+    }
+
     /// The Store: ready-made Home Screens and packs.
     func testVideoStore() {
         launch("store")

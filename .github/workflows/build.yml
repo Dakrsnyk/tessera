@@ -475,7 +475,7 @@ jobs:
             wait $XPID 2>/dev/null || true
             ls -lh "videos/$1.mp4" 2>/dev/null || echo "no video for $1"
           }
-          for scene in testVideoMonQuotidien testVideoPlanning testVideoFitness testVideoNutrition testVideoStudio testVideoFinances testVideoStore; do
+          for scene in testVideoLaunch testVideoMonQuotidien testVideoPlanning testVideoFitness testVideoNutrition testVideoStudio testVideoFinances testVideoStore testVideoIcons; do
             record $scene
           done
           ls -lh videos
