@@ -17,12 +17,14 @@ import { PhoneTest } from "./scenes/PhoneTest";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
-      <Composition id="MainFilm" component={MainFilm} durationInFrames={MAIN_LENGTH} fps={FPS} width={W} height={H} />
+      <Composition id="MainFilm" component={CutFilm} defaultProps={{ film: "main" as const }} durationInFrames={filmLength("main")} fps={FPS} width={W} height={H} />
+    <Composition id="MainFilm58" component={MainFilm} durationInFrames={MAIN_LENGTH} fps={FPS} width={W} height={H} />
     <Composition id="Film30" component={CutFilm} defaultProps={{ film: "s30" as const }} durationInFrames={filmLength("s30")} fps={FPS} width={W} height={H} />
     <Composition id="Film8" component={CutFilm} defaultProps={{ film: "s8" as const }} durationInFrames={filmLength("s8")} fps={FPS} width={W} height={H} />
     <Composition id="Film15" component={CutFilm} defaultProps={{ film: "s15" as const }} durationInFrames={filmLength("s15")} fps={FPS} width={W} height={H} />
     <Composition id="FilmFitness" component={CutFilm} defaultProps={{ film: "fitness" as const }} durationInFrames={filmLength("fitness")} fps={FPS} width={W} height={H} />
     <Composition id="FilmPerso" component={CutFilm} defaultProps={{ film: "perso" as const }} durationInFrames={filmLength("perso")} fps={FPS} width={W} height={H} />
+    <Composition id="FilmNutrition" component={CutFilm} defaultProps={{ film: "nutrition" as const }} durationInFrames={filmLength("nutrition")} fps={FPS} width={W} height={H} />
       <Folder name="Principal">
         {/* Shots 1–3: f0–359. */}
         <Composition id="Opening" component={Opening} durationInFrames={360} fps={FPS} width={W} height={H} />

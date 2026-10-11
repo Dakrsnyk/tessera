@@ -19,6 +19,8 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-11 : la campagne se fait en local sur le PC Windows (les rendus survivent à la session) ; outils hors du dépôt dans `~/ardane-tools`.
 - 2026-10-11 : moteur du film = Remotion (comme le prévoit le concept), plutôt que CSS 3D + Playwright fait main : chronologie à l'image près, rendu parallèle, mixage audio, aperçu dans le navigateur. Licence gratuite jusqu'à 3 personnes.
 - 2026-10-11 : pas de produit (pot de yaourt) dans la pub : « les gens savent comment ça marche ». Le scan est représenté par un code-barres seul (EAN-13 fictif, préfixe 200), imprimé sur une étiquette blanche (`Barcode.tsx`), qui vient se poser dans le carré de visée du scanner.
+- 2026-10-11 : priorités du message pub : 1) l'utilité, 2) **personnaliser ses widgets à son goût** (Studio : 16 thèmes, 57 styles, 14 palettes), présent dans chaque film. Le film principal passe à 60 s (univers 10 → 6 s, Studio 6 s).
+- 2026-10-11 : chaque film s'ouvre sur une accroche dite et écrite (« Organize your life / training / meals with Ardane », « Your phone. Your style. Meet Ardane. »), le texte s'ouvrant depuis la ligne de lumière.
 - Voix : Kokoro-82M (licence Apache-2.0). Musique : Mixkit (licence gratuite, publicité en ligne permise). Runway n'est pas utilisé : la version gratuite (125 crédits une seule fois) met un filigrane.
 
 ## Outillage

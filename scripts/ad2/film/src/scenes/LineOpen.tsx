@@ -1,9 +1,10 @@
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, interpolate } from "remotion";
 import * as THREE from "three";
 import { Grain } from "../components/Grain";
 import { CameraLook, lensFov, PHONE, Phone3D, SCREEN, StudioEnvironment } from "../components/Phone3D";
 import { Seam } from "../components/Seam";
+import { StyledWidget } from "../components/StyledWidget";
 import { AXIS, C, clamp, ease, H, W } from "../lib/brand";
 import { HERO_WIDGETS, heroHome, heroWidget, type Rect } from "../lib/kit";
 import { useFilmFrame } from "../lib/time";
@@ -29,7 +30,7 @@ const S = ((H * FRACTION) / PHONE.h) * (SCREEN.w / 1206);
 const toFrame = ([x, y, w, h]: Rect): Rect => [AXIS + (x - 603) * S, H / 2 + (y - 1311) * S, w * S, h * S];
 const LIFTED: Rect = [60, 760 - (960 * 510) / 1092 / 2, 960, (960 * 510) / 1092];
 
-export const LineOpen: React.FC<{ audio?: boolean }> = () => {
+export const LineOpen: React.FC<{ audio?: boolean; styles?: { at: number; file: string }[] }> = ({ styles = [] }) => {
   const frame = useFilmFrame();
   const images = useImages(FILES);
   const screen = useCanvasTexture();
@@ -98,12 +99,7 @@ export const LineOpen: React.FC<{ audio?: boolean }> = () => {
       )}
       <Seam x={AXIS - gap / 2} top={H / 2 - lineH / 2} height={lineH} intensity={edges} />
       {gap > 2 && <Seam x={AXIS + gap / 2} top={H / 2 - lineH / 2} height={lineH} intensity={edges} />}
-      {lifted && (
-        <Img
-          src={staticFile(heroWidget("crepuscule", MACROS.index))}
-          style={{ position: "absolute", left: r[0], top: r[1], width: r[2], height: r[3], filter: `drop-shadow(0 ${30 * lift}px ${70 * lift}px rgba(0,0,0,0.6))` }}
-        />
-      )}
+      {lifted && <StyledWidget base={heroWidget("crepuscule", MACROS.index)} styles={styles} frame={frame} rect={r} lift={lift} />}
       <Grain />
     </AbsoluteFill>
   );

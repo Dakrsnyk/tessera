@@ -6,6 +6,7 @@ import { FilmAudio } from "../components/FilmAudio";
 import { Grain } from "../components/Grain";
 import { CameraLook, lensFov, PHONE, Phone3D, SCREEN, StudioEnvironment } from "../components/Phone3D";
 import { Seam } from "../components/Seam";
+import { StyledWidget } from "../components/StyledWidget";
 import { SplitText } from "../components/SplitText";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
 import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect } from "../lib/kit";
@@ -49,7 +50,7 @@ const PANE_S = 900 / 1206;
 const PANE_X = (W - 900) / 2;
 
 /** `tapAt` (the Fitness film): « Série faite » is tapped in the app on that frame, the blade reveals the after-state. */
-export const Fitness: React.FC<{ audio?: boolean; tapAt?: number }> = ({ audio = true, tapAt }) => {
+export const Fitness: React.FC<{ audio?: boolean; tapAt?: number; styles?: { at: number; file: string }[] }> = ({ audio = true, tapAt, styles = [] }) => {
   const frame = useFilmFrame();
   const images = useImages(FILES);
   const screen = useCanvasTexture();
@@ -257,6 +258,9 @@ export const Fitness: React.FC<{ audio?: boolean; tapAt?: number }> = ({ audio =
             </div>
           )}
         </div>
+      )}
+      {styles.length > 0 && frame >= 48 && frame < 150 && (
+        <StyledWidget base={heroWidget(U, NEXT.index)} styles={styles} frame={frame} rect={liftedRect} lift={lift} />
       )}
       {frame >= 150 && frame < 174 && (
         <Seam x={container[0] + container[2] * blade150} top={container[1]} height={Math.min(container[3], H)} spread={0.5} />

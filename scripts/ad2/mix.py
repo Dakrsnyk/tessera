@@ -183,13 +183,16 @@ def voice_chain(x):
     return reverb(x, 0.9, 0.06)
 
 
-def voice_track(vo_dir, film="main", length=LENGTH):
+def voice_track(vo_dir, film="main", length=LENGTH, lines=None):
+    """The voice of a film: its vo_spec lines at their starts, or an explicit list [{file, start}]."""
     spec = json.load(open(os.path.join(HERE, "vo_spec.json"), encoding="utf-8"))
     n = int(length * SR)
     tr = np.zeros(n)
-    for chunk in spec["films"][film]["chunks"]:
-        for line in chunk:
-            audio, sr = sf.read(os.path.join(vo_dir, f"{film}-{line['id']}.wav"), dtype="float64")
+    if lines is None:
+        lines = [{"file": f"{film}-{line['id']}", "start": line["start"]} for chunk in spec["films"][film]["chunks"] for line in chunk]
+    for line in lines:
+        if True:
+            audio, sr = sf.read(os.path.join(vo_dir, f"{line['file']}.wav"), dtype="float64")
             if audio.ndim > 1:
                 audio = audio.mean(axis=1)
             audio = resample_poly(audio, SR, sr) if sr != SR else audio
@@ -262,6 +265,29 @@ SCENE_LENGTH = {"Opening": 360, "Universes": 600, "Fitness": 600, "LockScreen": 
 SCENE_LENGTH.update({"LineOpen": 270, "MyDay": 660, "FitnessCold": 240, "Build": 360, "StyleCycle": 240, "LockIcon": 180, "FivePhones": 180})
 # Peaks (merge-like hits) of the cut-down scenes, in scene frames.
 SCENE_HITS = {"Gather": [240], "FivePhones": [165]}
+SCENE_LENGTH.update({"Studio": 360, "HookCard": 110})
+STUDIO_STEPS = ["studio-preset-midnight", "studio-preset-sunset", "studio-style-aurora", "studio-style-neon", "studio-style-paper", "studio-style-liquidGlass", "studio-palette-gold"]
+STUDIO_AT = [90, 120, 150, 180, 210, 240, 270]
+
+
+def timbre_of(name):
+    """The arp's timbre for a style or universe (same notes, another voice, like the same widget restyled)."""
+    for key, timbre in (("midnight", "space"), ("space", "space"), ("espace", "space"), ("sunset", "sunset"), ("crepuscule", "sunset"), ("gold", "sunset"),
+                        ("luxury", "aurora"), ("aurora", "aurora"), ("aurore", "aurora"), ("neon", "neon"), ("paper", "paper"), ("etudes", "paper"),
+                        ("liquidGlass", "minimal"), ("glass", "minimal"), ("graphite", "minimal")):
+        if key in name:
+            return timbre
+    return "aurora"
+
+
+def scene_universes(scene, props):
+    if scene == "Studio":
+        steps = props.get("steps", list(range(7)))
+        at = props.get("at", STUDIO_AT)
+        return [(0, "sunset")] + [(a, timbre_of(STUDIO_STEPS[i])) for i, a in zip(steps, at)]
+    if props.get("styles"):
+        return [(0, "sunset")] + [(st["at"], timbre_of(st["file"])) for st in props["styles"]]
+    return SCENE_UNIVERSES.get(scene, [])
 # Universe changes of the scenes that change universes (the strata arp follows them).
 SCENE_UNIVERSES = {
     "Universes": [(0, "aurora"), (180, "space"), (240, "paper"), (300, "neon"), (360, "minimal"), (420, "sunset")],
@@ -299,6 +325,20 @@ def extra_events(scene, props):
         ev += [(f - 10, blade_shimmer(f), db(-29), 0) for f in (70, 100, 130)]
     if scene == "FivePhones":
         ev += [(100, whoosh(0.9, 1500, 6000, seed=95), db(-29), 0)] + [(165 + 4 * i, dock_click(), db(-20), 0) for i in range(4)]
+    if scene == "HookCard":
+        ev += [(4, glass("D6"), db(-19), 0), (4, whoosh(0.9), db(-29), 0), (4, thump(45, 120), db(-15), 0)]
+    if scene == "Opening" and props.get("hook"):
+        ev += [(6, thump(45, 120), db(-15), 0)]
+    if scene == "Studio":
+        steps = props.get("steps", list(range(7)))
+        at = props.get("at", STUDIO_AT)
+        end = props.get("end", 360)
+        ev += [(0, air_pull(), db(-30), 0), (36, thump(55, 40), db(-17), 0), (36, whoosh(0.6, 800, 5000, seed=101), db(-31), 0)]
+        for a in at:
+            ev += [(a - 8, tap_pulse(), db(-16), 0), (a, blade_shimmer(a), db(-29), 0)]
+        ev += [(end - 60, whoosh(0.7, 600, 3000, seed=103), db(-32), 0)]
+    if props.get("styles"):
+        ev += [(st["at"] - 10, blade_shimmer(st["at"]), db(-29), 0) for st in props["styles"]]
     if scene == "Fitness" and props.get("tapAt") is not None:
         t = props["tapAt"]
         ev += [(t, tap_pulse(), db(-12), 0), (t, glass("A5", index=2.5, decay=1.2, wet=0.3), db(-20), 0), (t + 1, blade_shimmer(t), db(-30), 0)]
@@ -338,7 +378,7 @@ def cut_plan(film):
     universes = []
     hits = []
     for seg in segs:
-        for f, timbre in SCENE_UNIVERSES.get(seg["scene"], []):
+        for f, timbre in scene_universes(seg["scene"], seg.get("props", {})):
             out = map_scene_frame(seg, f) if f > seg["output"][0] else (seg["at"] if f <= seg["output"][0] else None)
             if out is not None:
                 universes.append((out / FPS, timbre))
@@ -362,7 +402,7 @@ def main():
         music = score_cut(length, plan["music"], universes=universes, hits=hits, risers=risers)
         meter = pyln.Meter(SR)
         music *= db(-20 - meter.integrated_loudness(music))
-        voice = voice_track(vo_dir, plan["vo"], length)
+        voice = voice_track(vo_dir, plan.get("vo"), length, plan.get("voice"))
         sfx = sfx_track(events, plan["length"])
         mixdown, music = master(music, sfx, voice, breaks)
     else:

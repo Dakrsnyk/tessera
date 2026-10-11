@@ -22,7 +22,8 @@ const TAB = k("home-s00.png");
 const FILES = [TALL, LAST, TAB];
 const START = 470;
 const END = 2897; // offset of slice s10
-const FLICKS = [
+type Flick = { at: number; distance: number };
+const FLICKS: Flick[] = [
   { at: 120, distance: 700 },
   { at: 300, distance: 1100 },
   { at: 480, distance: END - START - 1800 },
@@ -30,22 +31,27 @@ const FLICKS = [
 /** UIScrollView deceleration: 0.998 per millisecond → e^(−2.002 t). */
 const DECAY = -Math.log(0.998) * 1000;
 
-const scrollAt = (f: number) => {
+const scrollAt = (f: number, flicks: Flick[]) => {
   let y = START;
-  for (const fl of FLICKS) {
+  for (const fl of flicks) {
     if (f > fl.at) y += fl.distance * (1 - Math.exp((-DECAY * (f - fl.at)) / 60));
   }
   return y;
 };
 
-export const MyDay: React.FC<{ audio?: boolean }> = () => {
+/** `flicks` (frames, distances summing to the page), `settle` (frame of the switch to the real s10 slice), `pullOut`. */
+export const MyDay: React.FC<{ audio?: boolean; flicks?: Flick[]; settle?: number; pullOut?: boolean }> = ({
+  flicks = FLICKS,
+  settle: settleAt = 612,
+  pullOut = true,
+}) => {
   const frame = useFilmFrame();
   const images = useImages(FILES);
   const screen = useCanvasTexture();
-  const settle = interpolate(frame, [612, 624], [0, 1], clamp);
+  const settle = interpolate(frame, [settleAt, settleAt + 12], [0, 1], clamp);
   if (images) {
     const ctx = screen.ctx;
-    const y = Math.min(scrollAt(frame), END);
+    const y = Math.min(scrollAt(frame, flicks), END);
     ctx.drawImage(images[TALL], 0, y, 1206, 2622, 0, 0, 1206, 2622);
     // Status bar on top and the floating tab bar at the bottom stay put while the page scrolls.
     ctx.drawImage(images[TAB], 0, 0, 1206, 140, 0, 0, 1206, 140);
@@ -58,10 +64,10 @@ export const MyDay: React.FC<{ audio?: boolean }> = () => {
     screen.texture.needsUpdate = true;
   }
   // Macro at 135 mm (the phone wider than the frame), then the pull-out to the Close's framing (50 mm).
-  const out = interpolate(frame, [624, 660], [0, 1], { ...clamp, easing: ease.transfer });
+  const out = pullOut ? interpolate(frame, [settleAt + 12, settleAt + 48], [0, 1], { ...clamp, easing: ease.transfer }) : 0;
   const lens = 135 - 85 * out;
   const fraction = 1.255 + (0.632 - 1.255) * out;
-  const drift = interpolate(frame, [0, 624], [0, 1], clamp);
+  const drift = interpolate(frame, [0, settleAt + 12], [0, 1], clamp);
   const distance = PHONE.h / (2 * Math.tan(THREE.MathUtils.degToRad(lensFov(lens)) / 2) * fraction * (1 + 0.03 * drift));
   // The line ignites across the lit phone (f0–30), then stays on the glass as a still vertical specular line.
   const ignite = interpolate(frame, [0, 6, 30], [0.2, 1, 0], clamp);

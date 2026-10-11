@@ -1,8 +1,9 @@
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, interpolate } from "remotion";
 import * as THREE from "three";
 import { Callout } from "../components/Callout";
 import { Grain } from "../components/Grain";
+import { StyledWidget } from "../components/StyledWidget";
 import { CameraLook, lensFov, PHONE, Phone3D, SCREEN, StudioEnvironment } from "../components/Phone3D";
 import { AXIS, C, clamp, ease, H, W } from "../lib/brand";
 import { HERO_WIDGETS, heroHome, heroWidget, type Rect } from "../lib/kit";
@@ -15,11 +16,12 @@ import { useImages } from "../lib/useImages";
  * widget of the Nutrition film (« log your usuals straight from your Home Screen »). No tap: there is no
  * after-state capture. Ends frontal at the Close's framing (50 mm, 63 %).
  */
-export const WidgetLift: React.FC<{ audio?: boolean; home?: string; index?: number; label?: string; light?: boolean }> = ({
+export const WidgetLift: React.FC<{ audio?: boolean; home?: string; index?: number; label?: string; light?: boolean; styles?: { at: number; file: string }[] }> = ({
   home = "light",
   index = 1,
   label = "Quick add",
   light = true,
+  styles = [],
 }) => {
   const frame = useFilmFrame();
   const files = [heroHome(home), heroWidget(home, index)];
@@ -69,9 +71,7 @@ export const WidgetLift: React.FC<{ audio?: boolean; home?: string; index?: numb
           </ThreeCanvas>
         </AbsoluteFill>
       )}
-      {lifted && (
-        <Img src={staticFile(files[1])} style={{ position: "absolute", left: r[0], top: r[1], width: r[2], height: r[3], filter: `drop-shadow(0 30px 70px rgba(0,0,0,${0.6 * Math.min(1, lift)}))` }} />
-      )}
+      {lifted && <StyledWidget base={files[1]} styles={styles} frame={frame} rect={r} lift={Math.min(1, lift)} />}
       <Callout label={label} at={[target[0] + 80, target[1] - 10]} labelY={target[1] - 110} from={60} to={200} />
       <Grain />
     </AbsoluteFill>

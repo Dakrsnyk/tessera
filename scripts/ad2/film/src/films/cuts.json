@@ -11,25 +11,38 @@
   "Close": 3180
  },
  "films": {
-  "s30": {
-   "length": 1800,
-   "vo": "s30",
+  "main": {
+   "length": 3600,
    "segments": [
     {
      "scene": "Opening",
      "at": 0,
      "input": [
       0,
-      240
+      6,
+      140,
+      360
      ],
      "output": [
       0,
+      6,
+      8,
       359
-     ]
+     ],
+     "props": {
+      "hook": {
+       "lines": [
+        "Organize",
+        "your life",
+        "with Ardane."
+       ],
+       "to": 118
+      }
+     }
     },
     {
      "scene": "Universes",
-     "at": 240,
+     "at": 360,
      "input": [
       0,
       90,
@@ -42,40 +55,329 @@
       150,
       450,
       480,
-      540
+      560
      ],
      "props": {
       "words": false
      }
     },
     {
-     "scene": "Fitness",
-     "at": 600,
+     "scene": "Studio",
+     "at": 720,
      "input": [
       0,
-      150
+      360
      ],
      "output": [
       0,
-      150
+      360
      ]
     },
     {
-     "scene": "LockScreen",
-     "at": 750,
+     "scene": "Fitness",
+     "at": 1080,
      "input": [
       0,
-      270
+      600
      ],
      "output": [
+      0,
+      600
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "LockScreen",
+     "at": 1680,
+     "input": [
+      0,
+      360
+     ],
+     "output": [
+      0,
+      360
+     ]
+    },
+    {
+     "scene": "Nutrition",
+     "at": 2040,
+     "input": [
+      0,
+      600
+     ],
+     "output": [
+      0,
+      600
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Essentials",
+     "at": 2640,
+     "input": [
+      0,
+      360
+     ],
+     "output": [
+      0,
+      360
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Gather",
+     "at": 3000,
+     "input": [
+      0,
+      300
+     ],
+     "output": [
+      0,
+      300
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Close",
+     "at": 3300,
+     "input": [
+      0,
+      300
+     ],
+     "output": [
+      0,
+      300
+     ]
+    }
+   ],
+   "voice": [
+    {
+     "file": "hook-K1",
+     "start": 0.25
+    },
+    {
+     "file": "hook-K2",
+     "start": 3.5
+    },
+    {
+     "file": "main-V3",
+     "start": 7.0
+    },
+    {
+     "file": "main-V4",
+     "start": 9.3
+    },
+    {
+     "file": "design-D1",
+     "start": 12.6
+    },
+    {
+     "file": "main-V5",
+     "start": 18.4
+    },
+    {
+     "file": "main-V6",
+     "start": 23.6
+    },
+    {
+     "file": "main-V7",
+     "start": 28.2
+    },
+    {
+     "file": "main-V8",
+     "start": 31.667
+    },
+    {
+     "file": "main-V9",
+     "start": 34.2
+    },
+    {
+     "file": "main-V10",
+     "start": 37.0
+    },
+    {
+     "file": "main-V11",
+     "start": 40.8
+    },
+    {
+     "file": "main-V12",
+     "start": 44.2
+    },
+    {
+     "file": "main-V13",
+     "start": 46.2
+    },
+    {
+     "file": "main-V14",
+     "start": 48.1
+    },
+    {
+     "file": "main-V15",
+     "start": 50.4
+    },
+    {
+     "file": "main-V16",
+     "start": 56.2
+    },
+    {
+     "file": "main-V17",
+     "start": 57.2
+    }
+   ],
+   "music": [
+    {
+     "type": "void",
+     "start": 0,
+     "end": 6
+    },
+    {
+     "type": "strata",
+     "start": 6,
+     "end": 12
+    },
+    {
+     "type": "design",
+     "start": 12,
+     "end": 18
+    },
+    {
+     "type": "pulse",
+     "start": 18,
+     "end": 28
+    },
+    {
+     "type": "break",
+     "start": 28,
+     "end": 34
+    },
+    {
+     "type": "daylight",
+     "start": 34,
+     "end": 44
+    },
+    {
+     "type": "run",
+     "start": 44,
+     "end": 50
+    },
+    {
+     "type": "gather",
+     "start": 50,
+     "end": 55
+    },
+    {
+     "type": "logo",
+     "start": 55,
+     "end": 60
+    }
+   ]
+  },
+  "s30": {
+   "length": 1800,
+   "segments": [
+    {
+     "scene": "Opening",
+     "at": 0,
+     "input": [
+      0,
+      6,
+      110,
+      250
+     ],
+     "output": [
+      0,
+      6,
+      8,
+      359
+     ],
+     "props": {
+      "hook": {
+       "lines": [
+        "Organize",
+        "your life",
+        "with Ardane."
+       ],
+       "to": 92
+      }
+     }
+    },
+    {
+     "scene": "Universes",
+     "at": 250,
+     "input": [
+      0,
       60,
-      330
+      200,
+      220,
+      240
+     ],
+     "output": [
+      0,
+      150,
+      450,
+      480,
+      560
+     ],
+     "props": {
+      "words": false
+     }
+    },
+    {
+     "scene": "Studio",
+     "at": 490,
+     "input": [
+      0,
+      210
+     ],
+     "output": [
+      0,
+      210
+     ],
+     "props": {
+      "steps": [
+       2,
+       3,
+       4,
+       6
+      ],
+      "at": [
+       74,
+       98,
+       122,
+       146
+      ],
+      "end": 210
+     }
+    },
+    {
+     "scene": "Fitness",
+     "at": 700,
+     "input": [
+      0,
+      150
+     ],
+     "output": [
+      0,
+      150
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "LockScreen",
+     "at": 850,
+     "input": [
+      0,
+      280
+     ],
+     "output": [
+      70,
+      350
      ],
      "transition": "line"
     },
     {
      "scene": "Nutrition",
-     "at": 1020,
+     "at": 1130,
      "input": [
       0,
       45,
@@ -85,7 +387,7 @@
       275,
       293,
       329,
-      420
+      400
      ],
      "output": [
       0,
@@ -102,24 +404,24 @@
     },
     {
      "scene": "Gather",
-     "at": 1440,
+     "at": 1530,
      "input": [
       0,
-      120
+      70
      ],
      "output": [
-      180,
+      230,
       300
      ],
      "transition": "split"
     },
     {
      "scene": "Close",
-     "at": 1560,
+     "at": 1600,
      "input": [
       0,
       120,
-      240
+      200
      ],
      "output": [
       0,
@@ -128,170 +430,361 @@
      ]
     }
    ],
+   "voice": [
+    {
+     "file": "hook-K1",
+     "start": 0.25
+    },
+    {
+     "file": "hook-K2",
+     "start": 2.0
+    },
+    {
+     "file": "s30-V3",
+     "start": 5.2
+    },
+    {
+     "file": "design-D1",
+     "start": 8.25
+    },
+    {
+     "file": "s30-V4",
+     "start": 11.8
+    },
+    {
+     "file": "s30-V5",
+     "start": 15.2
+    },
+    {
+     "file": "s30-V6",
+     "start": 20.1
+    },
+    {
+     "file": "s30-V7",
+     "start": 27.6
+    }
+   ],
    "music": [
     {
      "type": "void",
      "start": 0,
-     "end": 4
+     "end": 4.17
     },
     {
      "type": "strata",
-     "start": 4,
-     "end": 10
+     "start": 4.17,
+     "end": 8.17
+    },
+    {
+     "type": "design",
+     "start": 8.17,
+     "end": 11.67
     },
     {
      "type": "pulse",
-     "start": 10,
-     "end": 12.5
+     "start": 11.67,
+     "end": 14.17
     },
     {
      "type": "break",
-     "start": 12.5,
-     "end": 17
+     "start": 14.17,
+     "end": 18.83
     },
     {
      "type": "daylight",
-     "start": 17,
-     "end": 24
+     "start": 18.83,
+     "end": 25.5
     },
     {
      "type": "gather",
-     "start": 24,
-     "end": 27
+     "start": 25.5,
+     "end": 26.67
     },
     {
      "type": "logo",
-     "start": 27,
+     "start": 26.67,
      "end": 30
-    }
-   ]
-  },
-  "s8": {
-   "length": 480,
-   "vo": "s8",
-   "segments": [
-    {
-     "scene": "LineOpen",
-     "at": 0,
-     "input": [
-      0,
-      270
-     ],
-     "output": [
-      0,
-      270
-     ]
-    },
-    {
-     "scene": "Close",
-     "at": 270,
-     "input": [
-      0,
-      120,
-      210
-     ],
-     "output": [
-      0,
-      120,
-      300
-     ]
-    }
-   ],
-   "music": [
-    {
-     "type": "void",
-     "start": 0,
-     "end": 1
-    },
-    {
-     "type": "strata",
-     "start": 1,
-     "end": 2.5
-    },
-    {
-     "type": "gather",
-     "start": 2.5,
-     "end": 5.5
-    },
-    {
-     "type": "logo",
-     "start": 5.5,
-     "end": 8
     }
    ]
   },
   "s15": {
    "length": 900,
-   "vo": "s15",
    "segments": [
     {
-     "scene": "MyDay",
+     "scene": "HookCard",
      "at": 0,
      "input": [
       0,
-      660
+      110
      ],
      "output": [
       0,
-      660
-     ]
+      110
+     ],
+     "props": {
+      "lines": [
+       "Organize",
+       "your life",
+       "with Ardane."
+      ],
+      "to": 84
+     }
+    },
+    {
+     "scene": "MyDay",
+     "at": 110,
+     "input": [
+      0,
+      450
+     ],
+     "output": [
+      0,
+      450
+     ],
+     "props": {
+      "flicks": [
+       {
+        "at": 60,
+        "distance": 700
+       },
+       {
+        "at": 160,
+        "distance": 900
+       },
+       {
+        "at": 260,
+        "distance": 827
+       }
+      ],
+      "settle": 420,
+      "pullOut": false
+     }
+    },
+    {
+     "scene": "Studio",
+     "at": 560,
+     "input": [
+      0,
+      180
+     ],
+     "output": [
+      0,
+      180
+     ],
+     "props": {
+      "steps": [
+       2,
+       3,
+       4,
+       6
+      ],
+      "at": [
+       70,
+       94,
+       118,
+       142
+      ],
+      "end": 180,
+      "words": false
+     },
+     "transition": "split"
     },
     {
      "scene": "Close",
-     "at": 660,
+     "at": 740,
      "input": [
       0,
-      120,
-      240
+      40,
+      160
      ],
      "output": [
-      0,
+      30,
       120,
       300
      ],
      "props": {
-      "screenFile": "home-s10.png",
       "tagline": "Your whole day. One screen."
-     }
+     },
+     "transition": "split"
+    }
+   ],
+   "voice": [
+    {
+     "file": "hook-K1",
+     "start": 0.25
+    },
+    {
+     "file": "s15-V1",
+     "start": 2.0
+    },
+    {
+     "file": "s15-V2",
+     "start": 7.0
+    },
+    {
+     "file": "design-D2",
+     "start": 9.9
+    },
+    {
+     "file": "s15-V3",
+     "start": 12.55
     }
    ],
    "music": [
     {
-     "type": "pulse",
+     "type": "void",
      "start": 0,
-     "end": 10.5
+     "end": 1.83
     },
     {
-     "type": "gather",
-     "start": 10.5,
-     "end": 12
+     "type": "pulse",
+     "start": 1.83,
+     "end": 9.33
+    },
+    {
+     "type": "design",
+     "start": 9.33,
+     "end": 12.33
     },
     {
      "type": "logo",
-     "start": 12,
+     "start": 12.33,
      "end": 15
+    }
+   ]
+  },
+  "s8": {
+   "length": 480,
+   "segments": [
+    {
+     "scene": "HookCard",
+     "at": 0,
+     "input": [
+      0,
+      96
+     ],
+     "output": [
+      0,
+      96
+     ],
+     "props": {
+      "lines": [
+       "Organize",
+       "your life",
+       "with Ardane."
+      ],
+      "to": 70
+     }
+    },
+    {
+     "scene": "LineOpen",
+     "at": 96,
+     "input": [
+      0,
+      180
+     ],
+     "output": [
+      0,
+      270
+     ],
+     "props": {
+      "styles": [
+       {
+        "at": 190,
+        "file": "kit/macros-m-neon.png"
+       },
+       {
+        "at": 210,
+        "file": "kit/macros-m-paper.png"
+       },
+       {
+        "at": 230,
+        "file": "kit/macros-m-luxury.png"
+       }
+      ]
+     }
+    },
+    {
+     "scene": "Close",
+     "at": 276,
+     "input": [
+      0,
+      60,
+      204
+     ],
+     "output": [
+      0,
+      60,
+      300
+     ]
+    }
+   ],
+   "voice": [
+    {
+     "file": "hook-K1",
+     "start": 0.25
+    },
+    {
+     "file": "s8-V2",
+     "start": 5.55
+    }
+   ],
+   "music": [
+    {
+     "type": "void",
+     "start": 0,
+     "end": 1.6
+    },
+    {
+     "type": "strata",
+     "start": 1.6,
+     "end": 4.6
+    },
+    {
+     "type": "logo",
+     "start": 4.6,
+     "end": 8
     }
    ]
   },
   "fitness": {
    "length": 1200,
-   "vo": "fitness",
    "segments": [
     {
-     "scene": "FitnessCold",
+     "scene": "HookCard",
      "at": 0,
      "input": [
       0,
-      240
+      100
      ],
      "output": [
       0,
-      240
+      100
+     ],
+     "props": {
+      "lines": [
+       "Organize",
+       "your training",
+       "with Ardane."
+      ],
+      "to": 76
+     }
+    },
+    {
+     "scene": "FitnessCold",
+     "at": 100,
+     "input": [
+      0,
+      200
+     ],
+     "output": [
+      0,
+      200
      ]
     },
     {
      "scene": "Fitness",
-     "at": 240,
+     "at": 300,
      "input": [
       0,
       240
@@ -300,33 +793,51 @@
       0,
       240
      ],
+     "transition": "split",
      "props": {
-      "tapAt": 210
-     },
-     "transition": "split"
+      "tapAt": 210,
+      "styles": [
+       {
+        "at": 70,
+        "file": "kit/setup-hero-neon-1.png"
+       },
+       {
+        "at": 95,
+        "file": "kit/setup-hero-etudes-1.png"
+       },
+       {
+        "at": 120,
+        "file": "kit/setup-hero-espace-1.png"
+       },
+       {
+        "at": 145,
+        "file": "kit/setup-hero-crepuscule-1.png"
+       }
+      ]
+     }
     },
     {
      "scene": "LockScreen",
-     "at": 480,
+     "at": 540,
      "input": [
       0,
-      290
+      260
      ],
      "output": [
-      50,
-      340
+      60,
+      320
      ],
      "transition": "line"
     },
     {
      "scene": "Fitness",
-     "at": 770,
+     "at": 800,
      "input": [
       0,
-      270
+      240
      ],
      "output": [
-      330,
+      360,
       600
      ],
      "transition": "split"
@@ -350,25 +861,60 @@
      "transition": "line"
     }
    ],
+   "voice": [
+    {
+     "file": "hook_bella-KF",
+     "start": 0.25
+    },
+    {
+     "file": "fitness-V1",
+     "start": 2.0
+    },
+    {
+     "file": "fitness-V2",
+     "start": 5.1
+    },
+    {
+     "file": "design_bella-D2",
+     "start": 7.0
+    },
+    {
+     "file": "fitness-V3",
+     "start": 11.34
+    },
+    {
+     "file": "fitness-V4",
+     "start": 14.0
+    },
+    {
+     "file": "fitness-V5",
+     "start": 17.55
+    }
+   ],
    "music": [
     {
-     "type": "pulse",
+     "type": "void",
      "start": 0,
-     "end": 4
+     "end": 1.67
     },
     {
      "type": "pulse",
-     "start": 4,
-     "end": 8
+     "start": 1.67,
+     "end": 5
+    },
+    {
+     "type": "design",
+     "start": 5,
+     "end": 9
     },
     {
      "type": "break",
-     "start": 8,
-     "end": 12.83
+     "start": 9,
+     "end": 13.33
     },
     {
      "type": "run",
-     "start": 12.83,
+     "start": 13.33,
      "end": 17.33
     },
     {
@@ -378,147 +924,40 @@
     }
    ]
   },
-  "perso": {
-   "length": 1440,
-   "vo": "perso",
-   "segments": [
-    {
-     "scene": "Build",
-     "at": 0,
-     "input": [
-      0,
-      360
-     ],
-     "output": [
-      0,
-      360
-     ]
-    },
-    {
-     "scene": "Universes",
-     "at": 360,
-     "input": [
-      0,
-      60,
-      240,
-      258,
-      300
-     ],
-     "output": [
-      0,
-      150,
-      450,
-      480,
-      560
-     ],
-     "props": {
-      "words": false
-     }
-    },
-    {
-     "scene": "StyleCycle",
-     "at": 660,
-     "input": [
-      0,
-      240
-     ],
-     "output": [
-      0,
-      240
-     ]
-    },
-    {
-     "scene": "LockIcon",
-     "at": 900,
-     "input": [
-      0,
-      180
-     ],
-     "output": [
-      0,
-      180
-     ],
-     "transition": "split"
-    },
-    {
-     "scene": "FivePhones",
-     "at": 1080,
-     "input": [
-      0,
-      180
-     ],
-     "output": [
-      0,
-      180
-     ],
-     "transition": "split"
-    },
-    {
-     "scene": "Close",
-     "at": 1260,
-     "input": [
-      0,
-      120,
-      180
-     ],
-     "output": [
-      0,
-      120,
-      300
-     ],
-     "props": {
-      "tagline": "Make it yours."
-     }
-    }
-   ],
-   "music": [
-    {
-     "type": "void",
-     "start": 0,
-     "end": 1.5
-    },
-    {
-     "type": "strata",
-     "start": 1.5,
-     "end": 11
-    },
-    {
-     "type": "strata",
-     "start": 11,
-     "end": 15
-    },
-    {
-     "type": "daylight",
-     "start": 15,
-     "end": 18
-    },
-    {
-     "type": "gather",
-     "start": 18,
-     "end": 21
-    },
-    {
-     "type": "logo",
-     "start": 21,
-     "end": 24
-    }
-   ]
-  },
   "nutrition": {
    "length": 1200,
-   "vo": "nutrition",
    "segments": [
     {
-     "scene": "Nutrition",
+     "scene": "HookCard",
      "at": 0,
      "input": [
       0,
-      80,
-      110,
-      180,
-      330,
-      450,
-      630
+      100
+     ],
+     "output": [
+      0,
+      100
+     ],
+     "props": {
+      "lines": [
+       "Organize",
+       "your meals",
+       "with Ardane."
+      ],
+      "to": 76
+     }
+    },
+    {
+     "scene": "Nutrition",
+     "at": 100,
+     "input": [
+      0,
+      70,
+      100,
+      160,
+      310,
+      430,
+      650
      ],
      "output": [
       0,
@@ -535,7 +974,7 @@
     },
     {
      "scene": "WidgetLift",
-     "at": 630,
+     "at": 750,
      "input": [
       0,
       240
@@ -544,19 +983,31 @@
       0,
       240
      ],
-     "transition": "split"
+     "transition": "split",
+     "props": {
+      "styles": [
+       {
+        "at": 150,
+        "file": "kit/quickFood-m-paper.png"
+       },
+       {
+        "at": 180,
+        "file": "kit/quickFood-m-light.png"
+       }
+      ]
+     }
     },
     {
      "scene": "Close",
-     "at": 870,
+     "at": 990,
      "input": [
       0,
-      120,
-      330
+      110,
+      210
      ],
      "output": [
       0,
-      120,
+      110,
       300
      ],
      "props": {
@@ -565,26 +1016,249 @@
      }
     }
    ],
+   "voice": [
+    {
+     "file": "hook-KN",
+     "start": 0.25
+    },
+    {
+     "file": "nutrition-V1",
+     "start": 4.2
+    },
+    {
+     "file": "nutrition-V2",
+     "start": 6.5
+    },
+    {
+     "file": "nutrition-V3",
+     "start": 9.3
+    },
+    {
+     "file": "nutrition-V4",
+     "start": 13.0
+    },
+    {
+     "file": "design-D2",
+     "start": 15.4
+    },
+    {
+     "file": "nutrition-V5",
+     "start": 17.45
+    }
+   ],
    "music": [
     {
      "type": "void",
      "start": 0,
-     "end": 0.5
+     "end": 1.67
     },
     {
      "type": "daylight",
-     "start": 0.5,
-     "end": 10.5
+     "start": 1.67,
+     "end": 12.5
     },
     {
-     "type": "daylight",
-     "start": 10.5,
-     "end": 14.5
+     "type": "design",
+     "start": 12.5,
+     "end": 16.5
     },
     {
      "type": "logo",
-     "start": 14.5,
+     "start": 16.5,
      "end": 20
+    }
+   ]
+  },
+  "perso": {
+   "length": 1440,
+   "segments": [
+    {
+     "scene": "HookCard",
+     "at": 0,
+     "input": [
+      0,
+      110
+     ],
+     "output": [
+      0,
+      110
+     ],
+     "props": {
+      "lines": [
+       "Your phone.",
+       "Your style.",
+       "Meet Ardane."
+      ],
+      "to": 86
+     }
+    },
+    {
+     "scene": "Build",
+     "at": 110,
+     "input": [
+      0,
+      270
+     ],
+     "output": [
+      0,
+      360
+     ]
+    },
+    {
+     "scene": "Universes",
+     "at": 380,
+     "input": [
+      0,
+      50,
+      210,
+      225,
+      260
+     ],
+     "output": [
+      0,
+      150,
+      450,
+      480,
+      560
+     ],
+     "props": {
+      "words": false
+     }
+    },
+    {
+     "scene": "Studio",
+     "at": 640,
+     "input": [
+      0,
+      240
+     ],
+     "output": [
+      0,
+      240
+     ],
+     "props": {
+      "steps": [
+       0,
+       2,
+       3,
+       4,
+       6
+      ],
+      "at": [
+       70,
+       96,
+       122,
+       148,
+       174
+      ],
+      "end": 240,
+      "words": false
+     }
+    },
+    {
+     "scene": "LockIcon",
+     "at": 880,
+     "input": [
+      0,
+      180
+     ],
+     "output": [
+      0,
+      180
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "FivePhones",
+     "at": 1060,
+     "input": [
+      0,
+      180
+     ],
+     "output": [
+      0,
+      180
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Close",
+     "at": 1240,
+     "input": [
+      0,
+      120,
+      200
+     ],
+     "output": [
+      0,
+      120,
+      300
+     ],
+     "props": {
+      "tagline": "Make it yours."
+     }
+    }
+   ],
+   "voice": [
+    {
+     "file": "hook-KP",
+     "start": 0.25
+    },
+    {
+     "file": "perso-V1",
+     "start": 2.5
+    },
+    {
+     "file": "perso-V2",
+     "start": 6.6
+    },
+    {
+     "file": "design-D1",
+     "start": 11.0
+    },
+    {
+     "file": "perso-V3",
+     "start": 14.9
+    },
+    {
+     "file": "perso-V4",
+     "start": 18.4
+    },
+    {
+     "file": "perso-V5",
+     "start": 21.6
+    }
+   ],
+   "music": [
+    {
+     "type": "void",
+     "start": 0,
+     "end": 1.83
+    },
+    {
+     "type": "strata",
+     "start": 1.83,
+     "end": 10.67
+    },
+    {
+     "type": "design",
+     "start": 10.67,
+     "end": 14.67
+    },
+    {
+     "type": "daylight",
+     "start": 14.67,
+     "end": 17.67
+    },
+    {
+     "type": "gather",
+     "start": 17.67,
+     "end": 20.67
+    },
+    {
+     "type": "logo",
+     "start": 20.67,
+     "end": 24
     }
    ]
   }

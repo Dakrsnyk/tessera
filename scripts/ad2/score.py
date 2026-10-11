@@ -339,6 +339,7 @@ SECTION_CHORDS = {
     "run": ["Dm9", "Bbmaj7", "Csus4"],
     "gather": ["Bbmaj9", "Gm9", "A7sus4"],
     "logo": ["Dmaj9"],
+    "design": ["Dm9", "Bbmaj7", "Fmaj7/A", "Cadd9"],
 }
 
 
@@ -458,6 +459,18 @@ def score_cut(length, sections, universes=(), hits=(), risers=(), logo_at=None, 
         elif kind == "run":
             groove(t0, t1)
             arp_run(t0, t1, octave_up=1, gain=db(-25), timbre="sunset")
+            # The accents of the run (Money, Week, Habits): crash and sub on each bar.
+            a = t0
+            while a < t1 - 0.5:
+                rng = np.random.default_rng(int(a * 10))
+                crash = filt(rng.standard_normal(int(1.2 * SR)) * np.exp(-t_axis(1.2) / 0.35), "highpass", 3000)
+                add(drums, crash, a, db(-24))
+                add(low, sub(note("D1"), 0.8, attack=0.005, release=0.7), a, db(-16))
+                a += 2.0
+        elif kind == "design":
+            # Designing a widget: the arp leads, its timbre following each style tapped; a light groove.
+            groove(t0, t1, back="rim", hats16=False)
+            arp_run(t0, t1, octave_up=0, gain=db(-22))
         elif kind == "logo":
             add(low, sub(note("D1"), t1 - t0, attack=0.05, release=2.5), t0, db(-20))
 

@@ -77,7 +77,7 @@ export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]
   const form = interpolate(frame, [30, 66], [0, 1], { ...clamp, easing: ease.transfer });
   const recede = interpolate(frame, [end - 60, end - 30], [0, 1], { ...clamp, easing: ease.transfer });
   const paneX = (W - 900) / 2;
-  const paneY = 150;
+  const paneY = 290;
   const preview: Rect = [paneX + PREVIEW[0] * PS, paneY + PREVIEW[1] * PS, PREVIEW[2] * PS, PREVIEW[3] * PS];
   const liftedMid: Rect = [AXIS - 470, 520, 940, (940 * 510) / 1092];
   const mix = (a: Rect, b: Rect, p: number) => a.map((v, j) => v + (b[j] - v) * p) as Rect;
@@ -165,9 +165,11 @@ export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]
           style={{ position: "absolute", left: widgetRect[0], top: widgetRect[1], width: widgetRect[2], height: widgetRect[3], opacity: 1 - form * 0.9, filter: `drop-shadow(0 30px 60px rgba(0,0,0,${0.6 * (1 - form)}))` }}
         />
       )}
+      {/* What each section holds (Faits vérifiés): 16 complete themes, 57 styles, 14 palettes. */}
       {(["Theme", "Style", "Colours"] as const).map((s) => {
         const r = sectionNow(s);
-        return r ? <Callout key={s} label={s} at={[preview[0] + 90, preview[1] - 6]} labelY={preview[1] - 70} from={r.from} to={Math.min(r.to, end - 64)} /> : null;
+        const label = { Theme: "16 themes", Style: "57 styles", Colours: "14 palettes" }[s];
+        return r ? <Callout key={s} label={label} at={[AXIS, paneY - 6]} labelY={paneY - 70} from={r.from} to={Math.min(r.to, end - 64)} /> : null;
       })}
       {words && (
         <SplitText from={end - 58} exitAt={end - 12} top={1250} height={160}>
