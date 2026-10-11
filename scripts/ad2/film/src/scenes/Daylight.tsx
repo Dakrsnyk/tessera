@@ -4,7 +4,7 @@ import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import * as THREE from "three";
 import { Grain } from "../components/Grain";
 import { CameraLook, StudioEnvironment } from "../components/Phone3D";
-import { YogurtTub } from "../components/YogurtTub";
+import { BarcodeLabel, LABEL } from "../components/Barcode";
 import { AXIS, C, clamp, ease, H, useFontsReady, W } from "../lib/brand";
 
 /** The daylight pool on the floor: #F2F2F4 at its heart, falling off to black. */
@@ -20,13 +20,17 @@ const poolTexture = () => {
   g.addColorStop(1, "#000000");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, 1024, 1024);
-  // The tub's contact shadow.
-  const s = ctx.createRadialGradient(512, 512, 0, 512, 512, 70);
-  s.addColorStop(0, "rgba(0,0,0,0.55)");
-  s.addColorStop(0.6, "rgba(0,0,0,0.25)");
+  // The label's contact shadow: a long thin ellipse under its standing edge.
+  ctx.save();
+  ctx.translate(512, 512);
+  ctx.scale(1, 0.2);
+  const s = ctx.createRadialGradient(0, 0, 0, 0, 0, 52);
+  s.addColorStop(0, "rgba(0,0,0,0.5)");
+  s.addColorStop(0.6, "rgba(0,0,0,0.2)");
   s.addColorStop(1, "rgba(0,0,0,0)");
   ctx.fillStyle = s;
-  ctx.fillRect(0, 0, 1024, 1024);
+  ctx.fillRect(-60, -60, 120, 120);
+  ctx.restore();
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
@@ -42,19 +46,24 @@ const Floor: React.FC<{ light: number }> = ({ light }) => {
   );
 };
 
+/** The label at 1.6× (about 10 cm wide), standing on the pool. */
+const SCALE = 1.6;
+
 /**
  * Shot 14 of the main film (f1920–2009, 32.0–33.5 s): S5 « Daylight ». The light snaps on at f1920 (the
- * brightest image of the film), the unbranded tub turns 40° on the pool while the camera dollies in.
+ * brightest image of the film): a printed barcode, and nothing else, turns 40° on the pool while the camera
+ * dollies in. No product: everyone knows what a barcode is (decision of 2026-10-11).
  */
 export const Daylight: React.FC = () => {
   const frame = useCurrentFrame();
   const fonts = useFontsReady();
   // Light on: instant, with a 4-frame settle (a softbox, not a fade).
   const light = interpolate(frame, [0, 4], [0.82, 1], clamp);
-  const turn = interpolate(frame, [0, 89], [-Math.PI / 2 - 0.35, -Math.PI / 2 + 0.35], { ...clamp, easing: Easing.bezier(0.3, 0, 0.6, 1) });
-  const dolly = interpolate(frame, [0, 89], [640, 590], { ...clamp, easing: ease.arrival });
-  const target = new THREE.Vector3(0, 46, 0);
-  const position = new THREE.Vector3(0, 46 + dolly * 0.26, dolly);
+  const turn = interpolate(frame, [0, 89], [-0.35, 0.35], { ...clamp, easing: Easing.bezier(0.3, 0, 0.6, 1) });
+  const dolly = interpolate(frame, [0, 89], [980, 900], { ...clamp, easing: ease.arrival });
+  const centre = (LABEL.h * SCALE) / 2;
+  const target = new THREE.Vector3(0, centre, 0);
+  const position = new THREE.Vector3(0, centre + dolly * 0.24, dolly);
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.void }}>
@@ -65,7 +74,7 @@ export const Daylight: React.FC = () => {
           <ambientLight intensity={0.25 * light} />
           <CameraLook lens={85} position={position} target={target} />
           <Floor light={light} />
-          <YogurtTub rotationY={turn} />
+          <BarcodeLabel rotationY={turn} position={[0, centre, 0]} scale={SCALE} />
         </ThreeCanvas>
       )}
       {/* Frame edges fall to black (the pool is the only bright surface). */}

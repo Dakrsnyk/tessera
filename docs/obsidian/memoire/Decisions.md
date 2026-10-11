@@ -18,6 +18,7 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - Les enregistrements vidéo du simulateur ne tournent qu'à 8–14 i/s : le mouvement est reconstruit à 60 i/s à partir d'images fixes réelles.
 - 2026-10-11 : la campagne se fait en local sur le PC Windows (les rendus survivent à la session) ; outils hors du dépôt dans `~/ardane-tools`.
 - 2026-10-11 : moteur du film = Remotion (comme le prévoit le concept), plutôt que CSS 3D + Playwright fait main : chronologie à l'image près, rendu parallèle, mixage audio, aperçu dans le navigateur. Licence gratuite jusqu'à 3 personnes.
+- 2026-10-11 : pas de produit (pot de yaourt) dans la pub : « les gens savent comment ça marche ». Le scan est représenté par un code-barres seul (EAN-13 fictif, préfixe 200), imprimé sur une étiquette blanche (`Barcode.tsx`), qui vient se poser dans le carré de visée du scanner.
 - Voix : Kokoro-82M (licence Apache-2.0). Musique : Mixkit (licence gratuite, publicité en ligne permise). Runway n'est pas utilisé : la version gratuite (125 crédits une seule fois) met un filigrane.
 
 ## Outillage

@@ -15,3 +15,5 @@ Retour : [[Memoire]]
 ## Idées pour plus tard
 
 ## Fait
+
+- [x] Pub : pas de pot de yaourt généré ; le scan est représenté par un code-barres seul (fait le 2026-10-11).

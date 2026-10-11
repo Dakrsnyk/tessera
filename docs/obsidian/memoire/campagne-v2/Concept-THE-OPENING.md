@@ -85,7 +85,7 @@ Sources: `brief/brief.md` (requirements) and `brief/facts.md` (what really exist
 - **Screen:** an emissive plane with the real PNG. The simctl captures already contain the black Dynamic Island area (`audit/R-personalization.json` §3), so the phone model does not draw a second one. Crop the last 2 pixel rows of captures (2620–2621).
 - **Lifted widget:** the real PNG, unaltered, plus a 1 px inner highlight on the top edge (white 14 %) and a contact shadow on the plane behind it (y +30 px, blur 60 px, black 50 %, fading as distance grows). We never add blur, glass or texture to a widget's own background: that would change its real style.
 - **Floor:** black mirror. The reflection is a vertical flip, blurred 12 px, fading from 35 % to 0 over 300 px, at 22 % opacity.
-- **Product prop (Nutrition):** a matte white tub (lathe geometry), roughness 0.55. The label reads "GREEK YOGURT 0%" in Inter with a fictional EAN-13. No real brand.
+- **Scan prop (Nutrition):** ~~a matte white tub~~ **amended 2026-10-11 at the user's request: no product.** Only a printed barcode (fictional EAN-13, prefix 200) on a plain white label; everyone knows what a barcode is. Wherever this document says « tub », read « the barcode label ».
 
 ### 2.4 Depth layering rules
 | Plane | Content | Focus and treatment |
