@@ -9,6 +9,10 @@ The vault to open in Obsidian is the repository root (paths stay the real ones).
 """
 import json, os, re, sys
 
+if os.name == "nt" and not sys.flags.utf8_mode:  # Windows reads files as cp1252 by default; the project is UTF-8
+    import subprocess
+    sys.exit(subprocess.call([sys.executable, "-X", "utf8"] + sys.argv))
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "docs", "obsidian")
 NOTES = os.path.join(OUT, "modules")

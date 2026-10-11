@@ -20,6 +20,13 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 - Détourage des captures d'iPhone : la Dynamic Island et les dernières lignes paraissent opaques ; les masquer avant de calculer l'alpha.
 - Les longues tâches à plusieurs agents peuvent s'arrêter sur la limite d'utilisation : préférer un travail direct et des étapes courtes.
 
+## Windows (sessions sur le PC de l'utilisateur)
+- Pas de Mac : rien ne se compile en local, la CI GitHub reste la seule vérification (compilation, tests, captures).
+- Python lit en cp1252 par défaut : `check_swift.py` et `obsidian_map.py` se relancent seuls en UTF-8 ; pour les autres scripts, `PYTHONUTF8=1` (variable d'environnement permanente) ou `python -X utf8`.
+- Sous Windows la commande est souvent `python` ou `py`, pas `python3`.
+- Git convertit les fins de ligne (LF dans le dépôt, CRLF sur le disque) : normal, ne pas « corriger » des fichiers entiers.
+- Le vault Obsidian est ce même dossier : ne pas toucher à `.obsidian/` (réglages de l'utilisateur, ignoré par Git).
+
 ## Obsidian
 - Obsidian réécrit un `.canvas` à son format quand on l'ouvre : le script écrit déjà ce format, mais si GitHub Desktop montre des canvas modifiés, « Discard all changes » avant « Pull origin ».
 - Les liens entre notes se résolvent par nom de fichier : deux notes du même nom (ou une note nommée comme un vrai fichier `.json` du dépôt) rendent le lien ambigu. Le guide est lié par `[[docs/obsidian/README|Guide]]`.
