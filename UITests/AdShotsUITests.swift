@@ -12,6 +12,10 @@ final class AdShotsUITests: XCTestCase {
     /// The app style of the films: Corail, the colors of Ardane's icon.
     private static let style = "coral"
 
+    /// `AD_APPEARANCE=dark` (`TEST_RUNNER_AD_APPEARANCE` for xcodebuild): the same scenes in that appearance,
+    /// each shot named `<name>-dark`. The main film shows the app in Dark appearance, floating in black.
+    private static let appearance = ProcessInfo.processInfo.environment["AD_APPEARANCE"].flatMap { $0.isEmpty ? nil : $0 }
+
     override func setUp() {
         continueAfterFailure = true
     }
@@ -25,7 +29,8 @@ final class AdShotsUITests: XCTestCase {
     private func launch(_ screen: String, _ extra: [String] = []) {
         app = XCUIApplication()
         app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA", "-screenshotScreen", screen,
-                               "-screenshotStyle", Self.style] + extra
+                               "-screenshotStyle", Self.style]
+            + (Self.appearance.map { ["-screenshotAppearance", $0] } ?? []) + extra
         app.launch()
     }
 
@@ -37,7 +42,8 @@ final class AdShotsUITests: XCTestCase {
     /// not printed), then the app left alone while the CI takes its screenshot. The test also keeps its
     /// own lossless copy of the screen in the result bundle (an attachment the CI exports), in case the
     /// log reaches the CI late.
-    private func shot(_ name: String, hold: TimeInterval = 2.2) {
+    private func shot(_ base: String, hold: TimeInterval = 2.2) {
+        let name = Self.appearance.map { "\(base)-\($0)" } ?? base
         let start = Date()
         XCTContext.runActivity(named: "ADSHOT \(name)") { _ in }
         print("ADSHOT \(name)")

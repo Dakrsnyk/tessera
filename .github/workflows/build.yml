@@ -547,22 +547,37 @@ jobs:
           }
           rm -rf adkit-results
           mkdir -p adkit-results adkit/attachments
-          for scene in testAdFitnessSession testAdNutritionAdd testAdFinancesPeriods testAdStudio testAdPlanning testAdHabits testAdExerciseLibrary; do
-            LOG="adkit/logs/$scene.log"
+          run_scene() { # scene [appearance]: AD_APPEARANCE reaches the test as TEST_RUNNER_AD_APPEARANCE
+            local scene=$1 look=${2:-}
+            local tag=$scene${look:+-$look}
+            LOG="adkit/logs/$tag.log"
             rm -f "$LOG.end"
             : > "$LOG"
             watch_shots "$LOG" &
             WPID=$!
-            xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
-              -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage fr -testRegion CA \
-              -resultBundlePath "adkit-results/$scene.xcresult" \
-              -only-testing:TesseraUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
+            TEST_RUNNER_AD_APPEARANCE="$look" xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage fr -testRegion CA               -resultBundlePath "adkit-results/$tag.xcresult"               -only-testing:TesseraUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
             touch "$LOG.end"
             wait $WPID 2>/dev/null || true
             rm -f "$LOG.end"
-            echo "$scene: $(grep -cE "ADSHOT [A-Za-z0-9._-]+" "$LOG") marker lines"
+            echo "$tag: $(grep -cE "ADSHOT [A-Za-z0-9._-]+" "$LOG") marker lines"
             # The test's own lossless copy of each moment (attachment « ADSHOT <name> »), in attachments/.
-            xcrun xcresulttool export attachments --path "adkit-results/$scene.xcresult" --output-path "adkit-results/$scene" > /dev/null 2>&1 || true
+            xcrun xcresulttool export attachments --path "adkit-results/$tag.xcresult" --output-path "adkit-results/$tag" > /dev/null 2>&1 || true
+          }
+          fresh_install() { # the scenes change the data (a set done, a food added): a fresh install, then the demo data
+            xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera < /dev/null 2>/dev/null || true
+            xcrun simctl uninstall "$DEVICE" com.dakrsnyk.tessera || true
+            xcrun simctl install "$DEVICE" "$APP"
+            xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera "${ARGS[@]}" -screenshotScreen home < /dev/null > /dev/null || true
+            sleep 8
+          }
+          for scene in testAdFitnessSession testAdNutritionAdd testAdFinancesPeriods testAdStudio testAdPlanning testAdHabits testAdExerciseLibrary; do
+            run_scene "$scene"
+          done
+          # The main film shows the app in Dark appearance, floating in black: its scenes again, in dark
+          # (shots <name>-dark), from the same demo data as the light ones.
+          fresh_install
+          for scene in testAdFitnessSession testAdNutritionAdd testAdPlanning testAdHabits testAdExerciseLibrary; do
+            run_scene "$scene" dark
           done
           python3 - <<'PY' || true
           import glob, json, os, shutil
@@ -579,11 +594,7 @@ jobs:
           ls adkit/shots adkit/attachments
 
           # 2) The scenes changed the data (a set done, a food added): a fresh install, then the demo data.
-          xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera < /dev/null 2>/dev/null || true
-          xcrun simctl uninstall "$DEVICE" com.dakrsnyk.tessera || true
-          xcrun simctl install "$DEVICE" "$APP"
-          xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera "${ARGS[@]}" -screenshotScreen home < /dev/null > /dev/null || true
-          sleep 8
+          fresh_install
 
           # 3) The pieces the app exports itself (App/Core/AdExport.swift): PNG files with true transparency,
           # listed in scripts/ad_export.txt, written into the app's Documents/export, then done.txt.
@@ -595,11 +606,11 @@ jobs:
             cp scripts/ad_export.txt "$DATA/Documents/ad_export.txt"
             xcrun simctl terminate "$DEVICE" com.dakrsnyk.tessera < /dev/null 2>/dev/null || true
             xcrun simctl launch "$DEVICE" com.dakrsnyk.tessera "${ARGS[@]}" -screenshotScreen export < /dev/null > /dev/null || true
-            for i in $(seq 1 300); do
+            for i in $(seq 1 600); do
               [ -f "$DATA/Documents/export/done.txt" ] && break
               sleep 2
             done
-            [ -f "$DATA/Documents/export/done.txt" ] || echo "export: no done.txt after 10 minutes (progress.txt has what was done)" > adkit/export-timeout.txt
+            [ -f "$DATA/Documents/export/done.txt" ] || echo "export: no done.txt after 20 minutes (progress.txt has what was done)" > adkit/export-timeout.txt
             cp -R "$DATA/Documents/export/." adkit/export/ 2>/dev/null || true
             echo "export: $(ls adkit/export | wc -l | tr -d ' ') files"
           else

@@ -216,3 +216,29 @@ demo demo-bench-press exercise=bench-press view=3/4 fps=60 w=402 h=236 scale=3 b
 demo demo-back-squat exercise=back-squat view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
 demo demo-deadlift exercise=deadlift view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
 demo demo-pull-up exercise=pull-up view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
+
+# --- Film principal « THE OPENING » (docs/obsidian/memoire/campagne-v2/Concept-THE-OPENING.md §5.1) ---
+# Accueil héros : de vrais widgets sur un vrai décor du Store (fond, dock et icônes du décor), dessiné par
+# l'accueil du Store lui-même. Un univers par décor : Aurore (début), Espace, Études, Néon, Graphite, Crépuscule (fin).
+home home-hero-aurore setup=aurore rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=aurora
+setupwidgets setup-hero-aurore setup=aurore rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=aurora
+home home-hero-espace setup=espace rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=space
+setupwidgets setup-hero-espace setup=espace rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=space
+icons icons-espace setup=espace scale=4
+home home-hero-etudes setup=etudes rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=paper
+setupwidgets setup-hero-etudes setup=etudes rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=paper
+icons icons-etudes setup=etudes scale=4
+home home-hero-neon setup=neon rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=neon
+setupwidgets setup-hero-neon setup=neon rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=neon
+home home-hero-graphite setup=graphite rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=minimal
+setupwidgets setup-hero-graphite setup=graphite rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=minimal
+icons icons-graphite setup=graphite scale=4
+home home-hero-crepuscule setup=crepuscule rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small
+setupwidgets setup-hero-crepuscule setup=crepuscule rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small
+# Argent (plan 19) : les deux widgets dans le style du Crépuscule, du même passage.
+widget spendingByCategory-m-crepuscule kind=spendingByCategory family=medium scale=3 theme=glass accent=F2588F scheme=dark
+# Démonstrations pour le noir : schéma sombre (trait clair), le développé couché plus grand (porté à ~1 500 px).
+demo demo-bench-press-dark exercise=bench-press view=3/4 fps=60 w=402 h=236 scale=4 bg=clear scheme=dark
+demo demo-back-squat-dark exercise=back-squat view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=dark
+demo demo-deadlift-dark exercise=deadlift view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=dark
+demo demo-pull-up-dark exercise=pull-up view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=dark

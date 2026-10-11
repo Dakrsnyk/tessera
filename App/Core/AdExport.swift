@@ -16,7 +16,8 @@ import WidgetKit
 /// - `setupwidgets <name> setup= [wall=] [scale=]`: every widget of a Store setup as the setup draws it
 ///   (`<name>-<index>.png`, then the Lock Screen ones), and `<name>.json` (index, kind, family, place).
 /// - `home <name> setup= [wall=]`, `lock <name> setup= [wall=]`, `wall <name> wall=`: the Store's screens
-///   at 402 × 874 pt. `icons <name> setup=`: each app icon of the setup, one file each.
+///   at 402 × 874 pt. `icons <name> setup=`: each app icon of the setup, one file each. `home` and
+///   `setupwidgets` also take `rows= [theme=] [accent=]`: other widgets on the setup (see `storeSetup`).
 /// - `live <name> [state=rest|paused|ready] [rest=|from= to=] [paused=] [routine= exercise= set= sets= load=
 ///   done= total= restTotal=] [bg=real|night|clear] [scheme=] [w=] [radius=] [scale=]`: the workout's Live
 ///   Activity (`WorkoutActivityView`, the view of the widget extension), one picture per second of rest
@@ -186,16 +187,44 @@ enum AdExport {
 
     // MARK: - Store setups
 
-    /// A Store setup, on another wallpaper when `wall=` says so.
+    /// A Store setup, on another wallpaper when `wall=` says so, with other widget rows when `rows=` says so:
+    /// `rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small` (rows split by `|`, widgets of a
+    /// row by `+`, each `kind.family`), in `theme=` and `accent=`, else the style of the setup's first widget.
+    /// The film's hero Home Screen: real widgets on a real setup, drawn by the Store's own Home Screen.
     private static func storeSetup(_ job: AdJob) throws -> HomeSetup {
         guard let id = job.string("setup"), let base = HomeSetupCatalog.setup(id) else {
             throw AdFailure("unknown setup « \(job.string("setup") ?? "") »")
         }
-        guard let raw = job.string("wall") else { return base }
-        guard let wallpaper = SetupWallpaper(rawValue: raw) else { throw AdFailure("unknown wallpaper « \(raw) »") }
+        var wallpaper = base.wallpaper
+        if let raw = job.string("wall") {
+            guard let chosen = SetupWallpaper(rawValue: raw) else { throw AdFailure("unknown wallpaper « \(raw) »") }
+            wallpaper = chosen
+        }
+        var rows = base.rows
+        if let spec = job.string("rows") {
+            let first = base.rows.flatMap(\.widgets).first
+            var theme = first?.theme ?? .minimal
+            if let raw = job.string("theme") {
+                guard let chosen = ThemeID(rawValue: raw) else { throw AdFailure("unknown theme « \(raw) »") }
+                theme = chosen
+            }
+            let accent = job.string("accent").flatMap { isHex($0) ? $0.uppercased() : nil } ?? first?.accent ?? "FF7A59"
+            rows = try spec.split(separator: "|").map { row -> SetupRow in
+                let widgets = try row.split(separator: "+").map { item -> SetupWidget in
+                    let parts = item.split(separator: ".").map(String.init)
+                    guard parts.count == 2, let kind = WidgetKind(rawValue: parts[0]), let size = family(parts[1]),
+                          kind.families.contains(size) else {
+                        throw AdFailure("bad widget « \(item) » in rows (kind.small|medium|large)")
+                    }
+                    return SetupWidget(kind: kind, family: size, theme: theme, accent: accent)
+                }
+                return .widgets(widgets)
+            }
+        }
+        if job.string("wall") == nil && job.string("rows") == nil { return base }
         return HomeSetup(
             id: base.id, name: base.name, tagline: base.tagline, tags: base.tags, wallpaper: wallpaper,
-            icons: base.icons, rows: base.rows, dock: base.dock, lock: base.lock
+            icons: base.icons, rows: rows, dock: base.dock, lock: base.lock
         )
     }
 

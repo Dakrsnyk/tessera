@@ -121,3 +121,14 @@ studio-palette-sunset studio-palette-sunset
 icons icons
 spaces-lock spaces-lock
 spaces-lock-end spaces-lock -screenshotScroll bottom
+
+# Film principal « THE OPENING » : les écrans de l'app en sombre (ils flottent dans le noir, concept §5.1)
+app-fitness-session-dark app-fitness-session -screenshotAppearance dark
+app-fitness-session-end-dark app-fitness-session -screenshotScroll bottom -screenshotAppearance dark
+app-fitness-library-dark app-fitness-library -screenshotAppearance dark
+app-fitness-exercise-bench-press-dark app-fitness-exercise-bench-press -screenshotAppearance dark
+app-nutrition-s00-dark app-nutrition -screenshotScroll 0 -screenshotAppearance dark
+scan-frame-dark scan-frame -screenshotAppearance dark
+scan-frame-white-dark scan-frame -marketingScreen white -screenshotAppearance dark
+app-planning-week-dark app-planning-week -screenshotAppearance dark
+app-planning-habits-dark app-planning-habits -screenshotAppearance dark
