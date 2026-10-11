@@ -365,9 +365,12 @@ class Canvas:
         self.edges.append(e)
 
     def save(self, name):
+        # Obsidian's own layout (one node or edge per line, tabs): opening a map in Obsidian no longer
+        # rewrites the whole file and leaves changes to discard before pulling.
+        row = lambda item: json.dumps(item, ensure_ascii=False, separators=(",", ":"))
         with open(os.path.join(OUT, name), "w") as f:
-            json.dump({"nodes": self.nodes, "edges": self.edges}, f, ensure_ascii=False, indent="\t")
-            f.write("\n")
+            f.write('{\n\t"nodes":[\n' + ",\n".join("\t\t" + row(n) for n in self.nodes) + '\n\t],\n\t"edges":[\n'
+                    + ",\n".join("\t\t" + row(e) for e in self.edges) + "\n\t]\n}")
 
 
 def src_links(paths, limit=None, base=OUT):

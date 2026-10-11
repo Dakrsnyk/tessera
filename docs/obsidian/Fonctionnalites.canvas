@@ -1,746 +1,87 @@
 {
-	"nodes": [
-		{
-			"id": "g-onboarding-et-tutoriel",
-			"type": "group",
-			"x": 1040,
-			"y": 520,
-			"width": 800,
-			"height": 580,
-			"label": "Premier lancement"
-		},
-		{
-			"id": "g-autres-mini-apps",
-			"type": "group",
-			"x": 160,
-			"y": 520,
-			"width": 800,
-			"height": 580,
-			"label": "Autres mini-apps"
-		},
-		{
-			"id": "g-profil-et-reglages",
-			"type": "group",
-			"x": -720,
-			"y": 520,
-			"width": 800,
-			"height": 580,
-			"label": "Profil et réglages",
-			"color": "3"
-		},
-		{
-			"id": "g-premium-et-abonnements",
-			"type": "group",
-			"x": -1600,
-			"y": 520,
-			"width": 800,
-			"height": 580,
-			"label": "Abonnements Premium",
-			"color": "2"
-		},
-		{
-			"id": "g-finances",
-			"type": "group",
-			"x": 1040,
-			"y": -240,
-			"width": 800,
-			"height": 580,
-			"label": "Finances",
-			"color": "4"
-		},
-		{
-			"id": "g-planning-et-habitudes",
-			"type": "group",
-			"x": 160,
-			"y": -240,
-			"width": 800,
-			"height": 580,
-			"label": "Planning et habitudes",
-			"color": "4"
-		},
-		{
-			"id": "g-fitness",
-			"type": "group",
-			"x": -720,
-			"y": -240,
-			"width": 800,
-			"height": 580,
-			"label": "Fitness",
-			"color": "4"
-		},
-		{
-			"id": "g-nutrition",
-			"type": "group",
-			"x": -1600,
-			"y": -240,
-			"width": 800,
-			"height": 580,
-			"label": "Nutrition",
-			"color": "4"
-		},
-		{
-			"id": "g-store",
-			"type": "group",
-			"x": 1040,
-			"y": -1000,
-			"width": 800,
-			"height": 580,
-			"label": "Store",
-			"color": "5"
-		},
-		{
-			"id": "g-studio-editeur",
-			"type": "group",
-			"x": 160,
-			"y": -1000,
-			"width": 800,
-			"height": 580,
-			"label": "Studio",
-			"color": "5"
-		},
-		{
-			"id": "g-widgets-extension",
-			"type": "group",
-			"x": -720,
-			"y": -1000,
-			"width": 800,
-			"height": 580,
-			"label": "Widgets",
-			"color": "6"
-		},
-		{
-			"id": "g-accueil-mon-quotidien",
-			"type": "group",
-			"x": -1600,
-			"y": -1000,
-			"width": 800,
-			"height": 580,
-			"label": "Accueil — Mon Quotidien",
-			"color": "5"
-		},
-		{
-			"id": "titre",
-			"type": "text",
-			"x": -400,
-			"y": -1250,
-			"width": 800,
-			"height": 150,
-			"text": "# Fonctionnalités\nChaque zone : une partie d'Ardane et ses sous-fonctionnalités, avec les fichiers sources.\n[[Vue-Globale.canvas|← Vue globale]] · [[docs/obsidian/README|Guide]]",
-			"color": "6"
-		},
-		{
-			"id": "accueil-mon-quotidien-0",
-			"type": "text",
-			"x": -1550,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**Cartes du jour**\n- [DailySection.swift](../../App/Screens/Home/DailySection.swift)\n- [DailyBrief.swift](../../App/Core/DailyBrief.swift)"
-		},
-		{
-			"id": "accueil-mon-quotidien-1",
-			"type": "text",
-			"x": -1180,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**Cartes à plusieurs vues**\n- [DailyPager.swift](../../App/Screens/Home/DailyPager.swift)"
-		},
-		{
-			"id": "accueil-mon-quotidien-2",
-			"type": "text",
-			"x": -1550,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**Disposition à la main**\n- [DailyLayoutEditor.swift](../../App/Screens/Home/DailyLayoutEditor.swift)"
-		},
-		{
-			"id": "accueil-mon-quotidien-3",
-			"type": "text",
-			"x": -1180,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**Mes informations**\n- [MyInfoCenter.swift](../../App/Screens/Home/MyInfoCenter.swift)"
-		},
-		{
-			"id": "note-accueil-mon-quotidien",
-			"type": "text",
-			"x": -1550,
-			"y": -540,
-			"width": 700,
-			"height": 70,
-			"text": "[[Accueil-Mon-Quotidien|Ouvrir la note]]"
-		},
-		{
-			"id": "widgets-extension-0",
-			"type": "text",
-			"x": -670,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**103 types, 3 tailles + écran verrouillé**\n- [WidgetKind.swift](../../Shared/Model/WidgetKind.swift)"
-		},
-		{
-			"id": "widgets-extension-1",
-			"type": "text",
-			"x": -300,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**Rendu des tuiles**\n- [TileView.swift](../../Shared/Render/Tiles/TileView.swift)"
-		},
-		{
-			"id": "widgets-extension-2",
-			"type": "text",
-			"x": -670,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**Boutons interactifs**\n- [SpaceIntents.swift](../../Shared/Intents/SpaceIntents.swift)"
-		},
-		{
-			"id": "widgets-extension-3",
-			"type": "text",
-			"x": -300,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**Combinés et fusion**\n- [Combo.swift](../../Shared/Model/Combo.swift)\n- [FusionViews.swift](../../App/Screens/MyWidgets/FusionViews.swift)"
-		},
-		{
-			"id": "note-widgets-extension",
-			"type": "text",
-			"x": -670,
-			"y": -540,
-			"width": 700,
-			"height": 70,
-			"text": "[[Widgets-extension|Ouvrir la note]]"
-		},
-		{
-			"id": "studio-editeur-0",
-			"type": "text",
-			"x": 210,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**57 styles, 16 thèmes**\n- [WidgetStyle.swift](../../Shared/Model/WidgetStyle.swift)"
-		},
-		{
-			"id": "studio-editeur-1",
-			"type": "text",
-			"x": 580,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**14 palettes, couleurs**\n- [StyleColors.swift](../../Shared/Model/StyleColors.swift)"
-		},
-		{
-			"id": "studio-editeur-2",
-			"type": "text",
-			"x": 210,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**Fond, texture, bordure**\n- [StudioPanels.swift](../../App/Screens/Editor/StudioPanels.swift)"
-		},
-		{
-			"id": "studio-editeur-3",
-			"type": "text",
-			"x": 580,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**Réglages du type**\n- [KindOptionsSection.swift](../../App/Screens/Editor/KindOptionsSection.swift)"
-		},
-		{
-			"id": "note-studio-editeur",
-			"type": "text",
-			"x": 210,
-			"y": -540,
-			"width": 700,
-			"height": 70,
-			"text": "[[Studio-editeur|Ouvrir la note]]"
-		},
-		{
-			"id": "store-0",
-			"type": "text",
-			"x": 1090,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**23 écrans d'accueil prêts**\n- [HomeSetups.swift](../../App/Screens/Explore/HomeSetups.swift)"
-		},
-		{
-			"id": "store-1",
-			"type": "text",
-			"x": 1460,
-			"y": -920,
-			"width": 330,
-			"height": 150,
-			"text": "**18 fonds dessinés**\n- [SetupWallpapers.swift](../../App/Screens/Explore/SetupWallpapers.swift)"
-		},
-		{
-			"id": "store-2",
-			"type": "text",
-			"x": 1090,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**34 packs et saisons**\n- [Packs.swift](../../Shared/Model/Packs.swift)"
-		},
-		{
-			"id": "store-3",
-			"type": "text",
-			"x": 1460,
-			"y": -730,
-			"width": 330,
-			"height": 150,
-			"text": "**Combinés, modèles**\n- [StoreCombos.swift](../../App/Screens/Explore/StoreCombos.swift)\n- [Templates.swift](../../Shared/Model/Templates.swift)"
-		},
-		{
-			"id": "note-store",
-			"type": "text",
-			"x": 1090,
-			"y": -540,
-			"width": 700,
-			"height": 70,
-			"text": "[[Store|Ouvrir la note]]"
-		},
-		{
-			"id": "nutrition-0",
-			"type": "text",
-			"x": -1550,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Calories et macros**\n- [NutritionApp.swift](../../App/Screens/MiniApps/Nutrition/NutritionApp.swift)"
-		},
-		{
-			"id": "nutrition-1",
-			"type": "text",
-			"x": -1180,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Recherche et base CNF**\n- [NutritionSpace.swift](../../App/Screens/Spaces/NutritionSpace.swift)\n- [NutrientFile.swift](../../App/Core/NutrientFile.swift)"
-		},
-		{
-			"id": "nutrition-2",
-			"type": "text",
-			"x": -1550,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Scanner de code-barres**\n- [NutritionSpace.swift](../../App/Screens/Spaces/NutritionSpace.swift)\n- [FoodDatabase.swift](../../Shared/Domains/FoodDatabase.swift)"
-		},
-		{
-			"id": "nutrition-3",
-			"type": "text",
-			"x": -1180,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Repas, idées, historique**\n- [NutritionPages.swift](../../App/Screens/MiniApps/Nutrition/NutritionPages.swift)"
-		},
-		{
-			"id": "note-nutrition",
-			"type": "text",
-			"x": -1550,
-			"y": 220,
-			"width": 700,
-			"height": 70,
-			"text": "[[Nutrition|Ouvrir la note]]"
-		},
-		{
-			"id": "fitness-0",
-			"type": "text",
-			"x": -670,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Séance en direct, Série faite**\n- [FitnessSession.swift](../../App/Screens/MiniApps/Fitness/FitnessSession.swift)"
-		},
-		{
-			"id": "fitness-1",
-			"type": "text",
-			"x": -300,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Activité en direct**\n- [WorkoutLiveActivity.swift](../../Shared/Live/WorkoutLiveActivity.swift)"
-		},
-		{
-			"id": "fitness-2",
-			"type": "text",
-			"x": -670,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Bibliothèque et démos**\n- [ExerciseLibraryViews.swift](../../App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift)\n- [ExerciseDemo.swift](../../App/Screens/MiniApps/Fitness/ExerciseDemo.swift)"
-		},
-		{
-			"id": "fitness-3",
-			"type": "text",
-			"x": -300,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Programme, progression**\n- [FitnessPages.swift](../../App/Screens/MiniApps/Fitness/FitnessPages.swift)"
-		},
-		{
-			"id": "note-fitness",
-			"type": "text",
-			"x": -670,
-			"y": 220,
-			"width": 700,
-			"height": 70,
-			"text": "[[Fitness|Ouvrir la note]]"
-		},
-		{
-			"id": "planning-et-habitudes-0",
-			"type": "text",
-			"x": 210,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Semaine en tableau**\n- [PlanningApp.swift](../../App/Screens/MiniApps/Planning/PlanningApp.swift)\n- [WeekViews.swift](../../App/Screens/MiniApps/WeekViews.swift)"
-		},
-		{
-			"id": "planning-et-habitudes-1",
-			"type": "text",
-			"x": 580,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Tâches, Top 3, projets**\n- [PlanningPages.swift](../../App/Screens/MiniApps/Planning/PlanningPages.swift)"
-		},
-		{
-			"id": "planning-et-habitudes-2",
-			"type": "text",
-			"x": 210,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Études**\n- [StudiesPages.swift](../../App/Screens/MiniApps/Studies/StudiesPages.swift)"
-		},
-		{
-			"id": "planning-et-habitudes-3",
-			"type": "text",
-			"x": 580,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Habitudes et eau**\n- [HabitsView.swift](../../App/Screens/Content/HabitsView.swift)\n- [HydrationView.swift](../../App/Screens/Content/HydrationView.swift)"
-		},
-		{
-			"id": "note-planning-et-habitudes",
-			"type": "text",
-			"x": 210,
-			"y": 220,
-			"width": 700,
-			"height": 70,
-			"text": "[[Planning-et-habitudes|Ouvrir la note]]"
-		},
-		{
-			"id": "finances-0",
-			"type": "text",
-			"x": 1090,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Graphique du solde**\n- [FinancesApp.swift](../../App/Screens/MiniApps/Finances/FinancesApp.swift)"
-		},
-		{
-			"id": "finances-1",
-			"type": "text",
-			"x": 1460,
-			"y": -160,
-			"width": 330,
-			"height": 150,
-			"text": "**Catégories, factures**\n- [FinancesPages.swift](../../App/Screens/MiniApps/Finances/FinancesPages.swift)"
-		},
-		{
-			"id": "finances-2",
-			"type": "text",
-			"x": 1090,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Saisie des dépenses**\n- [BudgetSpace.swift](../../App/Screens/Spaces/BudgetSpace.swift)"
-		},
-		{
-			"id": "finances-3",
-			"type": "text",
-			"x": 1460,
-			"y": 30,
-			"width": 330,
-			"height": 150,
-			"text": "**Règles de budget**\n- [Budget.swift](../../Shared/Domains/Budget.swift)"
-		},
-		{
-			"id": "note-finances",
-			"type": "text",
-			"x": 1090,
-			"y": 220,
-			"width": 700,
-			"height": 70,
-			"text": "[[Finances|Ouvrir la note]]"
-		},
-		{
-			"id": "premium-et-abonnements-0",
-			"type": "text",
-			"x": -1550,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Achats StoreKit 2**\n- [PremiumStore.swift](../../App/Premium/PremiumStore.swift)\n- [Tessera.storekit](../../Config/Tessera.storekit)"
-		},
-		{
-			"id": "premium-et-abonnements-1",
-			"type": "text",
-			"x": -1180,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Paywall contextuel**\n- [PaywallContext.swift](../../App/Premium/PaywallContext.swift)\n- [PaywallView.swift](../../App/Premium/PaywallView.swift)"
-		},
-		{
-			"id": "premium-et-abonnements-2",
-			"type": "text",
-			"x": -1550,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Cadenas et limites**\n- [PremiumLock.swift](../../App/Premium/PremiumLock.swift)\n- [AppModel.swift](../../App/Core/AppModel.swift)"
-		},
-		{
-			"id": "premium-et-abonnements-3",
-			"type": "text",
-			"x": -1180,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Configuration App Store**\n- [PremiumConfiguration.swift](../../App/Premium/PremiumConfiguration.swift)"
-		},
-		{
-			"id": "note-premium-et-abonnements",
-			"type": "text",
-			"x": -1550,
-			"y": 980,
-			"width": 700,
-			"height": 70,
-			"text": "[[Premium-et-abonnements|Ouvrir la note]]"
-		},
-		{
-			"id": "profil-et-reglages-0",
-			"type": "text",
-			"x": -670,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Profil et données**\n- [ProfileView.swift](../../App/Screens/Profile/ProfileView.swift)\n- [DataItemViews.swift](../../App/Screens/Profile/DataItemViews.swift)"
-		},
-		{
-			"id": "profil-et-reglages-1",
-			"type": "text",
-			"x": -300,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Rappels intelligents**\n- [SmartRemindersView.swift](../../App/Screens/Profile/SmartRemindersView.swift)\n- [SmartReminders.swift](../../Shared/Support/SmartReminders.swift)"
-		},
-		{
-			"id": "profil-et-reglages-2",
-			"type": "text",
-			"x": -670,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Icône et style de l'app**\n- [AppIconPicker.swift](../../App/Screens/Profile/AppIconPicker.swift)\n- [Settings.swift](../../Shared/Model/Settings.swift)"
-		},
-		{
-			"id": "profil-et-reglages-3",
-			"type": "text",
-			"x": -300,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Sauvegarde**\n- [DataBackup.swift](../../App/Core/DataBackup.swift)"
-		},
-		{
-			"id": "note-profil-et-reglages",
-			"type": "text",
-			"x": -670,
-			"y": 980,
-			"width": 700,
-			"height": 70,
-			"text": "[[Profil-et-reglages|Ouvrir la note]]"
-		},
-		{
-			"id": "autres-mini-apps-0",
-			"type": "text",
-			"x": 210,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Business**\n- [BusinessApp.swift](../../App/Screens/MiniApps/Business/BusinessApp.swift)"
-		},
-		{
-			"id": "autres-mini-apps-1",
-			"type": "text",
-			"x": 580,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Voyage**\n- [TravelApp.swift](../../App/Screens/MiniApps/Travel/TravelApp.swift)"
-		},
-		{
-			"id": "autres-mini-apps-2",
-			"type": "text",
-			"x": 210,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Auto**\n- [CarApp.swift](../../App/Screens/MiniApps/Car/CarApp.swift)"
-		},
-		{
-			"id": "autres-mini-apps-3",
-			"type": "text",
-			"x": 580,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Météo**\n- [WeatherApp.swift](../../App/Screens/MiniApps/Weather/WeatherApp.swift)"
-		},
-		{
-			"id": "note-autres-mini-apps",
-			"type": "text",
-			"x": 210,
-			"y": 980,
-			"width": 700,
-			"height": 70,
-			"text": "[[Autres-mini-apps|Ouvrir la note]]"
-		},
-		{
-			"id": "onboarding-et-tutoriel-0",
-			"type": "text",
-			"x": 1090,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Écran de lancement**\n- [LaunchView.swift](../../App/Screens/Launch/LaunchView.swift)"
-		},
-		{
-			"id": "onboarding-et-tutoriel-1",
-			"type": "text",
-			"x": 1460,
-			"y": 600,
-			"width": 330,
-			"height": 150,
-			"text": "**Questions du premier lancement**\n- [OnboardingView.swift](../../App/Screens/Onboarding/OnboardingView.swift)"
-		},
-		{
-			"id": "onboarding-et-tutoriel-2",
-			"type": "text",
-			"x": 1090,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Tutoriel**\n- [Tutorial.swift](../../App/Screens/Tutorial/Tutorial.swift)"
-		},
-		{
-			"id": "onboarding-et-tutoriel-3",
-			"type": "text",
-			"x": 1460,
-			"y": 790,
-			"width": 330,
-			"height": 150,
-			"text": "**Icônes de l'app**\n- [AppIcons.swift](../../App/Core/AppIcons.swift)"
-		},
-		{
-			"id": "note-onboarding-et-tutoriel",
-			"type": "text",
-			"x": 1090,
-			"y": 980,
-			"width": 700,
-			"height": 70,
-			"text": "[[Onboarding-et-tutoriel|Ouvrir la note]]"
-		}
+	"nodes":[
+		{"id":"g-onboarding-et-tutoriel","type":"group","x":1040,"y":520,"width":800,"height":580,"label":"Premier lancement"},
+		{"id":"g-autres-mini-apps","type":"group","x":160,"y":520,"width":800,"height":580,"label":"Autres mini-apps"},
+		{"id":"g-profil-et-reglages","type":"group","x":-720,"y":520,"width":800,"height":580,"label":"Profil et réglages","color":"3"},
+		{"id":"g-premium-et-abonnements","type":"group","x":-1600,"y":520,"width":800,"height":580,"label":"Abonnements Premium","color":"2"},
+		{"id":"g-finances","type":"group","x":1040,"y":-240,"width":800,"height":580,"label":"Finances","color":"4"},
+		{"id":"g-planning-et-habitudes","type":"group","x":160,"y":-240,"width":800,"height":580,"label":"Planning et habitudes","color":"4"},
+		{"id":"g-fitness","type":"group","x":-720,"y":-240,"width":800,"height":580,"label":"Fitness","color":"4"},
+		{"id":"g-nutrition","type":"group","x":-1600,"y":-240,"width":800,"height":580,"label":"Nutrition","color":"4"},
+		{"id":"g-store","type":"group","x":1040,"y":-1000,"width":800,"height":580,"label":"Store","color":"5"},
+		{"id":"g-studio-editeur","type":"group","x":160,"y":-1000,"width":800,"height":580,"label":"Studio","color":"5"},
+		{"id":"g-widgets-extension","type":"group","x":-720,"y":-1000,"width":800,"height":580,"label":"Widgets","color":"6"},
+		{"id":"g-accueil-mon-quotidien","type":"group","x":-1600,"y":-1000,"width":800,"height":580,"label":"Accueil — Mon Quotidien","color":"5"},
+		{"id":"titre","type":"text","x":-400,"y":-1250,"width":800,"height":150,"text":"# Fonctionnalités\nChaque zone : une partie d'Ardane et ses sous-fonctionnalités, avec les fichiers sources.\n[[Vue-Globale.canvas|← Vue globale]] · [[docs/obsidian/README|Guide]]","color":"6"},
+		{"id":"accueil-mon-quotidien-0","type":"text","x":-1550,"y":-920,"width":330,"height":150,"text":"**Cartes du jour**\n- [DailySection.swift](../../App/Screens/Home/DailySection.swift)\n- [DailyBrief.swift](../../App/Core/DailyBrief.swift)"},
+		{"id":"accueil-mon-quotidien-1","type":"text","x":-1180,"y":-920,"width":330,"height":150,"text":"**Cartes à plusieurs vues**\n- [DailyPager.swift](../../App/Screens/Home/DailyPager.swift)"},
+		{"id":"accueil-mon-quotidien-2","type":"text","x":-1550,"y":-730,"width":330,"height":150,"text":"**Disposition à la main**\n- [DailyLayoutEditor.swift](../../App/Screens/Home/DailyLayoutEditor.swift)"},
+		{"id":"accueil-mon-quotidien-3","type":"text","x":-1180,"y":-730,"width":330,"height":150,"text":"**Mes informations**\n- [MyInfoCenter.swift](../../App/Screens/Home/MyInfoCenter.swift)"},
+		{"id":"note-accueil-mon-quotidien","type":"text","x":-1550,"y":-540,"width":700,"height":70,"text":"[[Accueil-Mon-Quotidien|Ouvrir la note]]"},
+		{"id":"widgets-extension-0","type":"text","x":-670,"y":-920,"width":330,"height":150,"text":"**103 types, 3 tailles + écran verrouillé**\n- [WidgetKind.swift](../../Shared/Model/WidgetKind.swift)"},
+		{"id":"widgets-extension-1","type":"text","x":-300,"y":-920,"width":330,"height":150,"text":"**Rendu des tuiles**\n- [TileView.swift](../../Shared/Render/Tiles/TileView.swift)"},
+		{"id":"widgets-extension-2","type":"text","x":-670,"y":-730,"width":330,"height":150,"text":"**Boutons interactifs**\n- [SpaceIntents.swift](../../Shared/Intents/SpaceIntents.swift)"},
+		{"id":"widgets-extension-3","type":"text","x":-300,"y":-730,"width":330,"height":150,"text":"**Combinés et fusion**\n- [Combo.swift](../../Shared/Model/Combo.swift)\n- [FusionViews.swift](../../App/Screens/MyWidgets/FusionViews.swift)"},
+		{"id":"note-widgets-extension","type":"text","x":-670,"y":-540,"width":700,"height":70,"text":"[[Widgets-extension|Ouvrir la note]]"},
+		{"id":"studio-editeur-0","type":"text","x":210,"y":-920,"width":330,"height":150,"text":"**57 styles, 16 thèmes**\n- [WidgetStyle.swift](../../Shared/Model/WidgetStyle.swift)"},
+		{"id":"studio-editeur-1","type":"text","x":580,"y":-920,"width":330,"height":150,"text":"**14 palettes, couleurs**\n- [StyleColors.swift](../../Shared/Model/StyleColors.swift)"},
+		{"id":"studio-editeur-2","type":"text","x":210,"y":-730,"width":330,"height":150,"text":"**Fond, texture, bordure**\n- [StudioPanels.swift](../../App/Screens/Editor/StudioPanels.swift)"},
+		{"id":"studio-editeur-3","type":"text","x":580,"y":-730,"width":330,"height":150,"text":"**Réglages du type**\n- [KindOptionsSection.swift](../../App/Screens/Editor/KindOptionsSection.swift)"},
+		{"id":"note-studio-editeur","type":"text","x":210,"y":-540,"width":700,"height":70,"text":"[[Studio-editeur|Ouvrir la note]]"},
+		{"id":"store-0","type":"text","x":1090,"y":-920,"width":330,"height":150,"text":"**23 écrans d'accueil prêts**\n- [HomeSetups.swift](../../App/Screens/Explore/HomeSetups.swift)"},
+		{"id":"store-1","type":"text","x":1460,"y":-920,"width":330,"height":150,"text":"**18 fonds dessinés**\n- [SetupWallpapers.swift](../../App/Screens/Explore/SetupWallpapers.swift)"},
+		{"id":"store-2","type":"text","x":1090,"y":-730,"width":330,"height":150,"text":"**34 packs et saisons**\n- [Packs.swift](../../Shared/Model/Packs.swift)"},
+		{"id":"store-3","type":"text","x":1460,"y":-730,"width":330,"height":150,"text":"**Combinés, modèles**\n- [StoreCombos.swift](../../App/Screens/Explore/StoreCombos.swift)\n- [Templates.swift](../../Shared/Model/Templates.swift)"},
+		{"id":"note-store","type":"text","x":1090,"y":-540,"width":700,"height":70,"text":"[[Store|Ouvrir la note]]"},
+		{"id":"nutrition-0","type":"text","x":-1550,"y":-160,"width":330,"height":150,"text":"**Calories et macros**\n- [NutritionApp.swift](../../App/Screens/MiniApps/Nutrition/NutritionApp.swift)"},
+		{"id":"nutrition-1","type":"text","x":-1180,"y":-160,"width":330,"height":150,"text":"**Recherche et base CNF**\n- [NutritionSpace.swift](../../App/Screens/Spaces/NutritionSpace.swift)\n- [NutrientFile.swift](../../App/Core/NutrientFile.swift)"},
+		{"id":"nutrition-2","type":"text","x":-1550,"y":30,"width":330,"height":150,"text":"**Scanner de code-barres**\n- [NutritionSpace.swift](../../App/Screens/Spaces/NutritionSpace.swift)\n- [FoodDatabase.swift](../../Shared/Domains/FoodDatabase.swift)"},
+		{"id":"nutrition-3","type":"text","x":-1180,"y":30,"width":330,"height":150,"text":"**Repas, idées, historique**\n- [NutritionPages.swift](../../App/Screens/MiniApps/Nutrition/NutritionPages.swift)"},
+		{"id":"note-nutrition","type":"text","x":-1550,"y":220,"width":700,"height":70,"text":"[[Nutrition|Ouvrir la note]]"},
+		{"id":"fitness-0","type":"text","x":-670,"y":-160,"width":330,"height":150,"text":"**Séance en direct, Série faite**\n- [FitnessSession.swift](../../App/Screens/MiniApps/Fitness/FitnessSession.swift)"},
+		{"id":"fitness-1","type":"text","x":-300,"y":-160,"width":330,"height":150,"text":"**Activité en direct**\n- [WorkoutLiveActivity.swift](../../Shared/Live/WorkoutLiveActivity.swift)"},
+		{"id":"fitness-2","type":"text","x":-670,"y":30,"width":330,"height":150,"text":"**Bibliothèque et démos**\n- [ExerciseLibraryViews.swift](../../App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift)\n- [ExerciseDemo.swift](../../App/Screens/MiniApps/Fitness/ExerciseDemo.swift)"},
+		{"id":"fitness-3","type":"text","x":-300,"y":30,"width":330,"height":150,"text":"**Programme, progression**\n- [FitnessPages.swift](../../App/Screens/MiniApps/Fitness/FitnessPages.swift)"},
+		{"id":"note-fitness","type":"text","x":-670,"y":220,"width":700,"height":70,"text":"[[Fitness|Ouvrir la note]]"},
+		{"id":"planning-et-habitudes-0","type":"text","x":210,"y":-160,"width":330,"height":150,"text":"**Semaine en tableau**\n- [PlanningApp.swift](../../App/Screens/MiniApps/Planning/PlanningApp.swift)\n- [WeekViews.swift](../../App/Screens/MiniApps/WeekViews.swift)"},
+		{"id":"planning-et-habitudes-1","type":"text","x":580,"y":-160,"width":330,"height":150,"text":"**Tâches, Top 3, projets**\n- [PlanningPages.swift](../../App/Screens/MiniApps/Planning/PlanningPages.swift)"},
+		{"id":"planning-et-habitudes-2","type":"text","x":210,"y":30,"width":330,"height":150,"text":"**Études**\n- [StudiesPages.swift](../../App/Screens/MiniApps/Studies/StudiesPages.swift)"},
+		{"id":"planning-et-habitudes-3","type":"text","x":580,"y":30,"width":330,"height":150,"text":"**Habitudes et eau**\n- [HabitsView.swift](../../App/Screens/Content/HabitsView.swift)\n- [HydrationView.swift](../../App/Screens/Content/HydrationView.swift)"},
+		{"id":"note-planning-et-habitudes","type":"text","x":210,"y":220,"width":700,"height":70,"text":"[[Planning-et-habitudes|Ouvrir la note]]"},
+		{"id":"finances-0","type":"text","x":1090,"y":-160,"width":330,"height":150,"text":"**Graphique du solde**\n- [FinancesApp.swift](../../App/Screens/MiniApps/Finances/FinancesApp.swift)"},
+		{"id":"finances-1","type":"text","x":1460,"y":-160,"width":330,"height":150,"text":"**Catégories, factures**\n- [FinancesPages.swift](../../App/Screens/MiniApps/Finances/FinancesPages.swift)"},
+		{"id":"finances-2","type":"text","x":1090,"y":30,"width":330,"height":150,"text":"**Saisie des dépenses**\n- [BudgetSpace.swift](../../App/Screens/Spaces/BudgetSpace.swift)"},
+		{"id":"finances-3","type":"text","x":1460,"y":30,"width":330,"height":150,"text":"**Règles de budget**\n- [Budget.swift](../../Shared/Domains/Budget.swift)"},
+		{"id":"note-finances","type":"text","x":1090,"y":220,"width":700,"height":70,"text":"[[Finances|Ouvrir la note]]"},
+		{"id":"premium-et-abonnements-0","type":"text","x":-1550,"y":600,"width":330,"height":150,"text":"**Achats StoreKit 2**\n- [PremiumStore.swift](../../App/Premium/PremiumStore.swift)\n- [Tessera.storekit](../../Config/Tessera.storekit)"},
+		{"id":"premium-et-abonnements-1","type":"text","x":-1180,"y":600,"width":330,"height":150,"text":"**Paywall contextuel**\n- [PaywallContext.swift](../../App/Premium/PaywallContext.swift)\n- [PaywallView.swift](../../App/Premium/PaywallView.swift)"},
+		{"id":"premium-et-abonnements-2","type":"text","x":-1550,"y":790,"width":330,"height":150,"text":"**Cadenas et limites**\n- [PremiumLock.swift](../../App/Premium/PremiumLock.swift)\n- [AppModel.swift](../../App/Core/AppModel.swift)"},
+		{"id":"premium-et-abonnements-3","type":"text","x":-1180,"y":790,"width":330,"height":150,"text":"**Configuration App Store**\n- [PremiumConfiguration.swift](../../App/Premium/PremiumConfiguration.swift)"},
+		{"id":"note-premium-et-abonnements","type":"text","x":-1550,"y":980,"width":700,"height":70,"text":"[[Premium-et-abonnements|Ouvrir la note]]"},
+		{"id":"profil-et-reglages-0","type":"text","x":-670,"y":600,"width":330,"height":150,"text":"**Profil et données**\n- [ProfileView.swift](../../App/Screens/Profile/ProfileView.swift)\n- [DataItemViews.swift](../../App/Screens/Profile/DataItemViews.swift)"},
+		{"id":"profil-et-reglages-1","type":"text","x":-300,"y":600,"width":330,"height":150,"text":"**Rappels intelligents**\n- [SmartRemindersView.swift](../../App/Screens/Profile/SmartRemindersView.swift)\n- [SmartReminders.swift](../../Shared/Support/SmartReminders.swift)"},
+		{"id":"profil-et-reglages-2","type":"text","x":-670,"y":790,"width":330,"height":150,"text":"**Icône et style de l'app**\n- [AppIconPicker.swift](../../App/Screens/Profile/AppIconPicker.swift)\n- [Settings.swift](../../Shared/Model/Settings.swift)"},
+		{"id":"profil-et-reglages-3","type":"text","x":-300,"y":790,"width":330,"height":150,"text":"**Sauvegarde**\n- [DataBackup.swift](../../App/Core/DataBackup.swift)"},
+		{"id":"note-profil-et-reglages","type":"text","x":-670,"y":980,"width":700,"height":70,"text":"[[Profil-et-reglages|Ouvrir la note]]"},
+		{"id":"autres-mini-apps-0","type":"text","x":210,"y":600,"width":330,"height":150,"text":"**Business**\n- [BusinessApp.swift](../../App/Screens/MiniApps/Business/BusinessApp.swift)"},
+		{"id":"autres-mini-apps-1","type":"text","x":580,"y":600,"width":330,"height":150,"text":"**Voyage**\n- [TravelApp.swift](../../App/Screens/MiniApps/Travel/TravelApp.swift)"},
+		{"id":"autres-mini-apps-2","type":"text","x":210,"y":790,"width":330,"height":150,"text":"**Auto**\n- [CarApp.swift](../../App/Screens/MiniApps/Car/CarApp.swift)"},
+		{"id":"autres-mini-apps-3","type":"text","x":580,"y":790,"width":330,"height":150,"text":"**Météo**\n- [WeatherApp.swift](../../App/Screens/MiniApps/Weather/WeatherApp.swift)"},
+		{"id":"note-autres-mini-apps","type":"text","x":210,"y":980,"width":700,"height":70,"text":"[[Autres-mini-apps|Ouvrir la note]]"},
+		{"id":"onboarding-et-tutoriel-0","type":"text","x":1090,"y":600,"width":330,"height":150,"text":"**Écran de lancement**\n- [LaunchView.swift](../../App/Screens/Launch/LaunchView.swift)"},
+		{"id":"onboarding-et-tutoriel-1","type":"text","x":1460,"y":600,"width":330,"height":150,"text":"**Questions du premier lancement**\n- [OnboardingView.swift](../../App/Screens/Onboarding/OnboardingView.swift)"},
+		{"id":"onboarding-et-tutoriel-2","type":"text","x":1090,"y":790,"width":330,"height":150,"text":"**Tutoriel**\n- [Tutorial.swift](../../App/Screens/Tutorial/Tutorial.swift)"},
+		{"id":"onboarding-et-tutoriel-3","type":"text","x":1460,"y":790,"width":330,"height":150,"text":"**Icônes de l'app**\n- [AppIcons.swift](../../App/Core/AppIcons.swift)"},
+		{"id":"note-onboarding-et-tutoriel","type":"text","x":1090,"y":980,"width":700,"height":70,"text":"[[Onboarding-et-tutoriel|Ouvrir la note]]"}
 	],
-	"edges": [
-		{
-			"id": "e-g-store-g-studio-editeur",
-			"fromNode": "g-store",
-			"fromSide": "left",
-			"toNode": "g-studio-editeur",
-			"toSide": "right",
-			"toEnd": "arrow",
-			"label": "ouvre un modèle"
-		},
-		{
-			"id": "e-g-studio-editeur-g-widgets-extension",
-			"fromNode": "g-studio-editeur",
-			"fromSide": "left",
-			"toNode": "g-widgets-extension",
-			"toSide": "right",
-			"toEnd": "arrow",
-			"label": "rendu du design"
-		},
-		{
-			"id": "e-g-accueil-mon-quotidien-g-nutrition",
-			"fromNode": "g-accueil-mon-quotidien",
-			"fromSide": "bottom",
-			"toNode": "g-nutrition",
-			"toSide": "top",
-			"toEnd": "arrow",
-			"label": "carte et Scanner"
-		},
-		{
-			"id": "e-g-fitness-g-widgets-extension",
-			"fromNode": "g-fitness",
-			"fromSide": "top",
-			"toNode": "g-widgets-extension",
-			"toSide": "bottom",
-			"toEnd": "arrow",
-			"label": "activité en direct, boutons"
-		},
-		{
-			"id": "e-g-premium-et-abonnements-g-studio-edit",
-			"fromNode": "g-premium-et-abonnements",
-			"fromSide": "top",
-			"toNode": "g-studio-editeur",
-			"toSide": "bottom",
-			"toEnd": "arrow",
-			"label": "styles Premium"
-		},
-		{
-			"id": "e-g-finances-g-premium-et-abonnements",
-			"fromNode": "g-finances",
-			"fromSide": "left",
-			"toNode": "g-premium-et-abonnements",
-			"toSide": "right",
-			"toEnd": "arrow",
-			"label": "Évolution Premium"
-		},
-		{
-			"id": "e-g-profil-et-reglages-g-planning-et-hab",
-			"fromNode": "g-profil-et-reglages",
-			"fromSide": "top",
-			"toNode": "g-planning-et-habitudes",
-			"toSide": "bottom",
-			"toEnd": "arrow",
-			"label": "rappels d'habitudes"
-		},
-		{
-			"id": "e-g-accueil-mon-quotidien-g-planning-et-",
-			"fromNode": "g-accueil-mon-quotidien",
-			"fromSide": "right",
-			"toNode": "g-planning-et-habitudes",
-			"toSide": "left",
-			"toEnd": "arrow",
-			"label": "planning et habitudes"
-		}
+	"edges":[
+		{"id":"e-g-store-g-studio-editeur","fromNode":"g-store","fromSide":"left","toNode":"g-studio-editeur","toSide":"right","toEnd":"arrow","label":"ouvre un modèle"},
+		{"id":"e-g-studio-editeur-g-widgets-extension","fromNode":"g-studio-editeur","fromSide":"left","toNode":"g-widgets-extension","toSide":"right","toEnd":"arrow","label":"rendu du design"},
+		{"id":"e-g-accueil-mon-quotidien-g-nutrition","fromNode":"g-accueil-mon-quotidien","fromSide":"bottom","toNode":"g-nutrition","toSide":"top","toEnd":"arrow","label":"carte et Scanner"},
+		{"id":"e-g-fitness-g-widgets-extension","fromNode":"g-fitness","fromSide":"top","toNode":"g-widgets-extension","toSide":"bottom","toEnd":"arrow","label":"activité en direct, boutons"},
+		{"id":"e-g-premium-et-abonnements-g-studio-edit","fromNode":"g-premium-et-abonnements","fromSide":"top","toNode":"g-studio-editeur","toSide":"bottom","toEnd":"arrow","label":"styles Premium"},
+		{"id":"e-g-finances-g-premium-et-abonnements","fromNode":"g-finances","fromSide":"left","toNode":"g-premium-et-abonnements","toSide":"right","toEnd":"arrow","label":"Évolution Premium"},
+		{"id":"e-g-profil-et-reglages-g-planning-et-hab","fromNode":"g-profil-et-reglages","fromSide":"top","toNode":"g-planning-et-habitudes","toSide":"bottom","toEnd":"arrow","label":"rappels d'habitudes"},
+		{"id":"e-g-accueil-mon-quotidien-g-planning-et-","fromNode":"g-accueil-mon-quotidien","fromSide":"right","toNode":"g-planning-et-habitudes","toSide":"left","toEnd":"arrow","label":"planning et habitudes"}
 	]
 }
