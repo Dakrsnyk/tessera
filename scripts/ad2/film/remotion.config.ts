@@ -14,3 +14,5 @@ Config.setCrf(16);
 Config.setPixelFormat("yuv420p");
 Config.setColorSpace("bt709");
 Config.setOverwriteOutput(true);
+// WebGL (the 3D phone) on the GPU through ANGLE instead of the software renderer.
+Config.setChromiumOpenGlRenderer("angle");

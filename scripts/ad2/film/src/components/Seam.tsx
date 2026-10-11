@@ -22,7 +22,9 @@ export const Seam: React.FC<{
   height: number;
   intensity?: number;
   core?: number;
-}> = ({ x, top, height, intensity = 1, core = 2 }) => {
+  /** Scales the glow widths (a Blade crossing a widget is narrower than the Line). */
+  spread?: number;
+}> = ({ x, top, height, intensity = 1, core = 2, spread = 1 }) => {
   if (intensity <= 0 || height <= 0) return null;
   const layer = (width: number, background: string, extra: number, opacity = 1): React.CSSProperties => {
     const h = height + 2 * extra;
@@ -43,9 +45,9 @@ export const Seam: React.FC<{
   };
   return (
     <>
-      <div style={layer(420, gaussian(C.raspberry, 0.08), 90)} />
-      <div style={layer(200, gaussian(C.coral, 0.25), 50)} />
-      <div style={layer(40, gaussian(C.peach, 0.85), 14)} />
+      <div style={layer(420 * spread, gaussian(C.raspberry, 0.08), 90 * spread)} />
+      <div style={layer(200 * spread, gaussian(C.coral, 0.25), 50 * spread)} />
+      <div style={layer(40 * spread, gaussian(C.peach, 0.85), 14 * spread)} />
       <div style={layer(core + 2, gaussian(C.seamWarm, 1), 4)} />
       <div style={layer(core, C.seamCore, 0)} />
     </>
