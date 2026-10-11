@@ -11,7 +11,7 @@
    [{"id": "V5", "text": "When you train, it keeps track of every set.", "start": 16.4, "max": 3.6},
     {"id": "V6", "text": "And shows you every exercise, move by move.", "start": 21.6, "max": 3.2}],
    [{"id": "V7", "text": "Your rest counts down on your Lock Screen.", "start": 26.2, "max": 3.2},
-    {"id": "V8", "text": "Set done? Tap it, right there.", "start": 29.8, "max": 2.0}],
+    {"id": "V8", "text": "Set done? Tap it, right there.", "start": 29.667, "max": 2.0}],
    [{"id": "V9", "text": "Food is just as simple.", "start": 32.2, "max": 2.0},
     {"id": "V10", "text": "Scan a barcode, or search.", "start": 35.0, "max": 2.0},
     {"id": "V11", "text": "And see exactly what's left for today.", "start": 38.8, "max": 2.8}],

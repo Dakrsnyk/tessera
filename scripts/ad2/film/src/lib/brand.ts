@@ -1,4 +1,5 @@
 // THE OPENING: palette, curves and timeline (Concept-THE-OPENING §2–3, docs/obsidian/memoire/campagne-v2).
+import { useEffect, useState } from "react";
 import { continueRender, delayRender, Easing, staticFile } from "remotion";
 
 export const W = 1080;
@@ -56,6 +57,26 @@ inter
     console.error(err);
     continueRender(fontHandle);
   });
+
+/** True once Inter is usable (for text drawn into canvases: textures, labels). Rendering waits for it. */
+export const useFontsReady = () => {
+  const [ready, setReady] = useState(() => document.fonts.check(`600 40px "${INTER}"`));
+  const [handle] = useState(() => (ready ? null : delayRender("Inter for canvases")));
+  useEffect(() => {
+    if (ready) return;
+    let tries = 0;
+    const poll = () => {
+      if (document.fonts.check(`600 40px "${INTER}"`) || tries++ > 200) {
+        setReady(true);
+        if (handle !== null) continueRender(handle);
+      } else {
+        setTimeout(poll, 25);
+      }
+    };
+    poll();
+  }, [ready, handle]);
+  return ready;
+};
 
 /** Type styles of §2.6. `display` uses the 32 optical size. */
 export const type = {

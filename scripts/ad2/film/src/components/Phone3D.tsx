@@ -57,7 +57,7 @@ const bandTexture = (sigma: number) => {
  * camera-left, a dim fill camera-right) and a narrow cool top strip, on black. Every reflection on the
  * titanium reads as a vertical line, the echo of the « A ».
  */
-export const StudioEnvironment: React.FC = () => {
+export const StudioEnvironment: React.FC<{ variant?: "studio" | "daylight" }> = ({ variant = "studio" }) => {
   const { gl, scene } = useThree();
   useLayoutEffect(() => {
     const env = new THREE.Scene();
@@ -85,6 +85,23 @@ export const StudioEnvironment: React.FC = () => {
     top.position.set(0, 9, 2);
     top.lookAt(0, 0, 0);
     env.add(top);
+    if (variant === "daylight") {
+      // Nutrition: one big top softbox (the daylight pool) and its bounce off the white floor.
+      const box = new THREE.Mesh(
+        new THREE.PlaneGeometry(9, 9),
+        new THREE.MeshBasicMaterial({ color: new THREE.Color("#FFFFFF").multiplyScalar(7), side: THREE.DoubleSide }),
+      );
+      box.position.set(0, 9.5, 0);
+      box.lookAt(0, 0, 0);
+      env.add(box);
+      const floor = new THREE.Mesh(
+        new THREE.CircleGeometry(7, 48),
+        new THREE.MeshBasicMaterial({ color: new THREE.Color("#F2F2F4").multiplyScalar(0.9), side: THREE.DoubleSide }),
+      );
+      floor.position.set(0, -6, 0);
+      floor.lookAt(0, 0, 0);
+      env.add(floor);
+    }
     const pmrem = new THREE.PMREMGenerator(gl);
     const target = pmrem.fromScene(env, 0.02);
     scene.environment = target.texture;
@@ -93,7 +110,7 @@ export const StudioEnvironment: React.FC = () => {
       target.dispose();
       pmrem.dispose();
     };
-  }, [gl, scene]);
+  }, [gl, scene, variant]);
   return null;
 };
 

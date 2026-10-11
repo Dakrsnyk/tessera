@@ -55,12 +55,16 @@ def sub(freq, seconds, attack=0.8, release=1.5):
 
 def one_pole_lowpass(x, cutoff):
     a = np.exp(-2 * np.pi * cutoff / SR)
-    y = np.empty_like(x)
-    acc = 0.0
-    for i, v in enumerate(x):
-        acc = (1 - a) * v + a * acc
-        y[i] = acc
-    return y
+    try:
+        from scipy.signal import lfilter
+        return lfilter([1 - a], [1, -a], x)
+    except ImportError:
+        y = np.empty_like(x)
+        acc = 0.0
+        for i, v in enumerate(x):
+            acc = (1 - a) * v + a * acc
+            y[i] = acc
+        return y
 
 
 def reverb(x, seconds=3.0, wet=0.3, seed=3):
