@@ -11,17 +11,16 @@ Module : [[Mini-apps]] · Fichier : [App/Screens/MiniApps/MiniAppSettings.swift]
 
 **Déclare :** `MiniAppSettingsSection`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[DataItems (swift)]]
 - [[MiniApp (swift)]]
-- [[DataItemViews (swift)]]
-- [[ProfileTopics (swift)]]
-- [[SmartRemindersView (swift)]]
-- [[Profile (swift)]]
-- [[Settings (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 8 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Profile.swift`
+- Données et stockage : `DataItems.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Profil et réglages : `DataItemViews.swift`, `ProfileTopics.swift`, `SmartRemindersView.swift`, `Settings.swift`
+
+Utilisé par 8 fichier(s) : `BusinessApp.swift`, `CarApp.swift`, `FinancesApp.swift`, `FitnessApp.swift`, `NutritionApp.swift`, `PlanningApp.swift`, `TravelApp.swift`, `WeatherApp.swift`

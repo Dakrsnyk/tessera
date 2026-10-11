@@ -11,25 +11,18 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/DailyBriefTests.swift](../..
 
 **Déclare :** `DailyBriefTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[AppModel (swift)]]
-- [[DailyBrief (swift)]]
-- [[DataItems (swift)]]
-- [[SampleData (swift)]]
-- [[Budget (swift)]]
-- [[Fitness (swift)]]
-- [[FoodDatabase (swift)]]
-- [[Nutrition (swift)]]
-- [[Student (swift)]]
-- [[Combo (swift)]]
-- [[Content (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[Tile (swift)]]
-- [[DateMath (swift)]]
-- [[SharedStore (swift)]]
+- Accueil : Mon Quotidien : `DailyBrief.swift`
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Fitness.swift`, `FoodDatabase.swift`, `Nutrition.swift`, `Student.swift`
+- Données et stockage : `DataItems.swift`, `SampleData.swift`, `SharedStore.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Store : `Combo.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`, `Tile.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group

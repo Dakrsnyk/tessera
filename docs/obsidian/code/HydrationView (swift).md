@@ -9,13 +9,11 @@ Module : [[Planning-et-habitudes]] · Fichier : [App/Screens/Content/HydrationVi
 
 **Déclare :** `HydrationView`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[NotificationScheduler (swift)]]
-- [[RenderComponents (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Profil et réglages : `NotificationScheduler.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `RenderComponents.swift`
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `KindOptionsSection.swift`, `ProfileView.swift`, `ProductivitySpace.swift`, `TesseraApp.swift`

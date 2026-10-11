@@ -11,12 +11,12 @@ Module : [[Fitness]] · Fichier : [App/Screens/MiniApps/Fitness/ExerciseDemo.swi
 
 **Déclare :** `DemoData`, `DemoFile`, `DemoModel`, `DemoPalette`, `DemoPrim`, `DemoRenderer`, `DemoSegment`, `ExerciseDemoView`, `ExerciseDemos`, `Vec3`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[ExerciseLibrary (swift)]]
+- Domaines métier (Shared/Domains) : `ExerciseLibrary.swift`
 
 ## Services et frameworks
 
 - [[Demos des exercices]]
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `AdExport.swift`, `DemoGallery.swift`, `ExerciseLibraryViews.swift`, `ExerciseDemoTests.swift`, `FitnessAppTests.swift`

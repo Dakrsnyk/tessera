@@ -11,19 +11,15 @@ Module : [[Tests-CI-et-outils]] · Fichier : [App/Core/StudioGallery.swift](../.
 
 **Déclare :** `StudioGalleryView`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[PayloadLoader (swift)]]
-- [[StyleColors (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[WidgetStyle (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
+- Données et stockage : `PayloadLoader.swift`
+- Premium et abonnements : `Palette.swift`
+- Studio (éditeur de widgets) : `StyleColors.swift`, `WidgetDesign.swift`, `WidgetStyle.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `TesseraApp.swift`

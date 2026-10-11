@@ -11,15 +11,15 @@ Module : [[Donnees-et-stockage]] · Fichier : [Shared/Support/SharedStore.swift]
 
 **Déclare :** `AppGroup`, `ImageStore`, `ProvisioningProfile`, `SharedStore`, `StoreFile`, `StoredState`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Content (swift)]]
-- [[Settings (swift)]]
-- [[WidgetDesign (swift)]]
-- [[SignedEntitlements (swift)]]
+- Outils partagés (Shared/Support) : `SignedEntitlements.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Profil et réglages : `Settings.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group
 
-Utilisé par 35 fichier(s) (voir les rétroliens).
+Utilisé par 35 fichier(s) : `AppModel.swift`, `DataBackup.swift`, `MarketingShots.swift`, `EditorView.swift`, `AIPhraser.swift`, `CryptoService.swift`, `DomainData.swift`, `Insights.swift`, `PayloadLoader.swift`, `WeatherService.swift`, `Companies.swift`, `Portfolio.swift` …

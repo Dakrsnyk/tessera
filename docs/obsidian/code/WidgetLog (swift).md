@@ -11,4 +11,4 @@ Module : [[Widgets-extension]] · Fichier : [Widgets/WidgetLog.swift](../../../W
 
 **Déclare :** `WidgetLog`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `DesignProvider.swift`, `DesignWidgets.swift`, `TesseraWidgetsBundle.swift`

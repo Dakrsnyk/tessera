@@ -11,17 +11,15 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/PlanningStudiesTests.swift](
 
 **Déclare :** `PlanningStudiesTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Agenda (swift)]]
-- [[AppModel (swift)]]
-- [[CalendarService (swift)]]
-- [[Fitness (swift)]]
-- [[Student (swift)]]
-- [[Content (swift)]]
-- [[DateMath (swift)]]
-- [[SharedStore (swift)]]
+- Accueil : Mon Quotidien : `Agenda.swift`
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Student.swift`
+- Données et stockage : `SharedStore.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`, `Content.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group

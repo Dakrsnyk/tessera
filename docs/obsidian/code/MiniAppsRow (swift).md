@@ -11,18 +11,14 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Screens/Home/MiniAppsRow.sw
 
 **Déclare :** `AllMiniAppsSheet`, `MiniAppSummary`, `MiniAppUsage`, `MiniAppsRow`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[Router (swift)]]
 - [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[Budget (swift)]]
-- [[Car (swift)]]
-- [[Fitness (swift)]]
-- [[Nutrition (swift)]]
-- [[Profile (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Car.swift`, `Fitness.swift`, `Nutrition.swift`, `Profile.swift`, `Student.swift`, `Travel.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+
+Utilisé par 2 fichier(s) : `DailyCategories.swift`, `MiniApp.swift`

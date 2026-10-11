@@ -11,11 +11,10 @@ Module : [[Mini-apps]] · Fichier : [App/Screens/MiniApps/WeekViews.swift](../..
 
 **Déclare :** `WeekCard`, `WeekDayMark`, `WeekTableCard`, `WeekTimetable`, `WeekTitle`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[Agenda (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Accueil : Mon Quotidien : `Agenda.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+Utilisé par 6 fichier(s) : `DailySection.swift`, `FitnessApp.swift`, `NutritionApp.swift`, `PlanningApp.swift`, `PlanningPages.swift`, `AppearanceAndStoreTests.swift`

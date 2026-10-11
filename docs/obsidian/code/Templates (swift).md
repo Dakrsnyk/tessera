@@ -11,14 +11,11 @@ Module : [[Store]] · Fichier : [Shared/Model/Templates.swift](../../../Shared/M
 
 **Déclare :** `TemplateCatalog`, `WidgetTemplate`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DesignOptions (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Premium et abonnements : `Palette.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`, `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
-Utilisé par 12 fichier(s) (voir les rétroliens).
+Utilisé par 12 fichier(s) : `UIComponents.swift`, `AdExport.swift`, `ScreenshotMode.swift`, `PaywallView.swift`, `ExploreView.swift`, `HomeSetups.swift`, `StoreCombos.swift`, `StoreMagazine.swift`, `SpaceBuilderView.swift`, `SpacesView.swift`, `Packs.swift`, `CoreLogicTests.swift`

@@ -11,16 +11,18 @@ Module : [[Fitness]] · Fichier : [App/Screens/MiniApps/Fitness/FitnessSession.s
 
 **Déclare :** `FitnessSessionPage`, `SetEditor`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[ExerciseLibraryViews (swift)]]
 - [[FitnessApp (swift)]]
-- [[MiniApp (swift)]]
-- [[SpaceForms (swift)]]
-- [[ExerciseLibrary (swift)]]
-- [[Fitness (swift)]]
-- [[DateMath (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `ExerciseLibrary.swift`, `Fitness.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
+
+Utilisé par 2 fichier(s) : `FitnessPages.swift`, `MiniApp.swift`

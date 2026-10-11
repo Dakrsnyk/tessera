@@ -36,6 +36,13 @@ Petits outils communs à l'app et à l'extension : couleurs, dates, formats, dé
 - [[SignedEntitlements (swift)]]
 - [[WidgetDiagnostics (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Donnees-et-stockage]] : 1 fichier(s)
+- [[Localisation]] : 1 fichier(s)
+- [[Profil-et-reglages]] : 1 fichier(s)
+- Studio (éditeur de widgets) : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

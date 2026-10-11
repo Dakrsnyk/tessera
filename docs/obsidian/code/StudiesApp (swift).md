@@ -11,17 +11,14 @@ Module : [[Planning-et-habitudes]] · Fichier : [App/Screens/MiniApps/Studies/St
 
 **Déclare :** `AssignmentRow`, `ExamRow`, `NextClassCard`, `Studies`, `StudiesAppView`, `StudiesSheet`, `StudyTimerCard`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[StudentSpace (swift)]]
-- [[Fitness (swift)]]
-- [[Student (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Créer : les espaces : `StudentSpace.swift`
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Student.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `MiniApp.swift`, `StudiesPages.swift`

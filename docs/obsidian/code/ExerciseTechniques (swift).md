@@ -9,6 +9,6 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/ExerciseTechniques.swi
 
 > The technique of the exercises whose movement differs from the general one of their family
 
-## Utilise
+## Utilise (même module)
 
 - [[ExerciseLibrary (swift)]]

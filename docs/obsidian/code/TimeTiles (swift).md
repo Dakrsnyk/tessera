@@ -9,13 +9,15 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/TimeTiles.swift
 
 **Déclare :** `TimeTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[Life (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Life.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+
+Utilisé par 1 fichier(s) : `TileFactory.swift`

@@ -47,6 +47,22 @@ Ce qui sort de l'appareil (API web, sans compte) et les frameworks système util
 - [[CryptoService (swift)]]
 - [[WeatherService (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Donnees-et-stockage]] : 3 fichier(s)
+- [[Localisation]] : 1 fichier(s)
+- [[Outils-partages]] : 1 fichier(s)
+- Profil et réglages : 1 fichier(s)
+- Widgets : extension et rendu : 1 fichier(s)
+
+## Services et frameworks
+
+- [[App Group]] : 3 fichier(s)
+- [[CoinGecko]] : 1 fichier(s)
+- [[CoreLocation]] : 1 fichier(s)
+- [[FoundationModels]] : 1 fichier(s)
+- [[Open-Meteo]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

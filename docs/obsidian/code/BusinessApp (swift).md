@@ -11,21 +11,22 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/MiniApps/Business/Busine
 
 **Déclare :** `BusinessAppView`, `BusinessFormat`, `BusinessPeriod`, `BusinessSettingsEditor`, `BusinessSheet`, `KPIPicker`, `KPITile`, `MetricEditor`, `MetricRow`, `MetricValueEditor`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[MiniAppSettings (swift)]]
 - [[MoneySpaces (swift)]]
-- [[SpaceForms (swift)]]
-- [[Business (swift)]]
-- [[TileFactory (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `Business.swift`
+- Mini-apps : `MiniApp.swift`, `MiniAppSettings.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `BusinessPages.swift`, `MiniApp.swift`

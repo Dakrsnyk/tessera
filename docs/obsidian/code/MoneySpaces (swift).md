@@ -11,18 +11,13 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/Spaces/MoneySpaces.swift
 
 **Déclare :** `BusinessCostEditor`, `BusinessSpaceSections`, `CompanyDetailView`, `HoldingEditor`, `MRREditor`, `MarketsSpaceSections`, `PortfolioSpaceSections`, `SaleEditor`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[SpaceForms (swift)]]
-- [[SpaceSheets (swift)]]
-- [[CryptoService (swift)]]
-- [[Business (swift)]]
-- [[Companies (swift)]]
-- [[Portfolio (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Créer : les espaces : `SpaceForms.swift`, `SpaceSheets.swift`
+- Domaines métier (Shared/Domains) : `Business.swift`, `Companies.swift`, `Portfolio.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Services externes et frameworks Apple : `CryptoService.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `BusinessApp.swift`, `DataItemViews.swift`, `SpacesView.swift`

@@ -11,12 +11,15 @@ Module : [[Studio-editeur]] · Fichier : [Shared/Theme/Theme.swift](../../../Sha
 
 **Déclare :** `CustomGradient`, `DesignBackground`, `GlassSurface`, `ResolvedStyle`, `ThemeBackground`, `ThemeCatalog`, `ThemeColor`, `ThemeID`, `WidgetTheme`
 
-## Utilise
+## Utilise (même module)
 
 - [[WidgetDesign (swift)]]
 - [[WidgetStyle (swift)]]
-- [[StyleRendering (swift)]]
-- [[ColorHex (swift)]]
-- [[SharedStore (swift)]]
 
-Utilisé par 29 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`
+- Outils partagés (Shared/Support) : `ColorHex.swift`
+- Widgets : extension et rendu : `StyleRendering.swift`
+
+Utilisé par 29 fichier(s) : `UIComponents.swift`, `AdExport.swift`, `MarketingShots.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `EditorView.swift`, `StudioPanels.swift`, `ExploreView.swift`, `HomeSetups.swift`, `StoreCombos.swift`, `StoreMagazine.swift`, `StoreShowcase.swift` …

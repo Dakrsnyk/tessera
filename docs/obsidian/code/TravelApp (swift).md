@@ -11,20 +11,20 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/MiniApps/Travel/TravelAp
 
 **Déclare :** `Travel`, `TravelAppView`, `TravelSheet`, `TripExpenseEditor`, `TripHero`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[MiniAppSettings (swift)]]
 - [[WeatherApp (swift)]]
-- [[SpaceForms (swift)]]
 - [[TravelCarLifeSpaces (swift)]]
-- [[WeatherService (swift)]]
-- [[Travel (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `Travel.swift`
+- Mini-apps : `MiniApp.swift`, `MiniAppSettings.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
+
+Utilisé par 2 fichier(s) : `MiniApp.swift`, `TravelPages.swift`

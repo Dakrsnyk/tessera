@@ -9,14 +9,15 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/CarTiles.swift]
 
 **Déclare :** `CarTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[Budget (swift)]]
-- [[Car (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Car.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+
+Utilisé par 1 fichier(s) : `TileFactory.swift`

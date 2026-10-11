@@ -11,8 +11,8 @@ Module : [[Studio-editeur]] · Fichier : [Shared/Model/DesignOptions.swift](../.
 
 **Déclare :** `CountdownMode`, `DesignOptions`, `MoneyMode`, `ProgressUnit`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Combo (swift)]]
+- Store : `Combo.swift`
 
-Utilisé par 13 fichier(s) (voir les rétroliens).
+Utilisé par 13 fichier(s) : `KindOptionsSection.swift`, `StoreCombos.swift`, `SpaceBuilderView.swift`, `MoneyMath.swift`, `Combo.swift`, `Templates.swift`, `WidgetDesign.swift`, `AccessoryViews.swift`, `DataWidgets.swift`, `TimeWidgets.swift`, `RenderComponents.swift`, `DateMath.swift` …

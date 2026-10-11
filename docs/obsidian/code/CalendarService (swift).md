@@ -11,12 +11,12 @@ Module : [[Planning-et-habitudes]] · Fichier : [Shared/Data/CalendarService.swi
 
 **Déclare :** `CalendarService`, `EventSnapshot`, `EventsResult`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
 
 ## Services et frameworks
 
 - [[EventKit]]
 
-Utilisé par 12 fichier(s) (voir les rétroliens).
+Utilisé par 12 fichier(s) : `Agenda.swift`, `AppModel.swift`, `DailyBrief.swift`, `DataItems.swift`, `KindOptionsSection.swift`, `DailySection.swift`, `PlanningApp.swift`, `PlanningPages.swift`, `PayloadLoader.swift`, `SampleData.swift`, `ProductivityWidgets.swift`, `PlanningStudiesTests.swift`

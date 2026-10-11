@@ -11,17 +11,15 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/RenderComponents.swif
 
 **Déclare :** `BarView`, `DotGridShape`, `IntentButton`, `RenderContext`, `RingView`, `SparklineShape`, `WLabel`, `WidgetMessage`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[PayloadLoader (swift)]]
-- [[DesignOptions (swift)]]
-- [[Settings (swift)]]
-- [[WidgetDesign (swift)]]
-- [[Theme (swift)]]
+- Données et stockage : `PayloadLoader.swift`
+- Profil et réglages : `Settings.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`, `WidgetDesign.swift`, `Theme.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[AppIntents]]
+- WidgetKit
+- AppIntents
 
-Utilisé par 28 fichier(s) (voir les rétroliens).
+Utilisé par 28 fichier(s) : `HydrationView.swift`, `EditorView.swift`, `DailySection.swift`, `MyInfoCenter.swift`, `FitnessApp.swift`, `NutritionApp.swift`, `NutritionPages.swift`, `MyWidgetsView.swift`, `AccessoryViews.swift`, `DataWidgets.swift`, `ProductivityWidgets.swift`, `TimeWidgets.swift` …

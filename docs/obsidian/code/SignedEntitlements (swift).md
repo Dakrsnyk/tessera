@@ -9,4 +9,4 @@ Module : [[Outils-partages]] · Fichier : [Shared/Support/SignedEntitlements.swi
 
 **Déclare :** `SignedEntitlements`
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `SharedStore.swift`, `WidgetDiagnostics.swift`

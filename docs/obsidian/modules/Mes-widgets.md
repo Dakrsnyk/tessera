@@ -29,6 +29,20 @@ L'onglet Mes widgets : tous les widgets créés, en carrousel, favoris ou par ca
 - [[MyWidgetsView (swift)]]
 - [[WidgetCarousel (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Studio-editeur]] : 3 fichier(s)
+- [[Widgets-extension]] : 3 fichier(s)
+- [[Noyau-AppModel]] : 2 fichier(s)
+- Premium et abonnements : 2 fichier(s)
+- Données et stockage : 1 fichier(s)
+- Outils partagés (Shared/Support) : 1 fichier(s)
+- Store : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 3 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

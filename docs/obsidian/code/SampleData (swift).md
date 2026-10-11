@@ -11,26 +11,17 @@ Module : [[Donnees-et-stockage]] · Fichier : [Shared/Data/SampleData.swift](../
 
 **Déclare :** `SampleData`
 
-## Utilise
+## Utilise (même module)
 
-- [[CalendarService (swift)]]
 - [[DomainData (swift)]]
 - [[PayloadLoader (swift)]]
-- [[WeatherService (swift)]]
-- [[Budget (swift)]]
-- [[Business (swift)]]
-- [[Car (swift)]]
-- [[Companies (swift)]]
-- [[Fitness (swift)]]
-- [[FoodDatabase (swift)]]
-- [[Life (swift)]]
-- [[Nutrition (swift)]]
-- [[Portfolio (swift)]]
-- [[Productivity (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
-- [[Content (swift)]]
-- [[WidgetKind (swift)]]
-- [[DateMath (swift)]]
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Business.swift`, `Car.swift`, `Companies.swift`, `Fitness.swift`, `FoodDatabase.swift`, `Life.swift`, `Nutrition.swift`, `Portfolio.swift`, `Productivity.swift`, `Student.swift`, `Travel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`, `Content.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
+
+Utilisé par 3 fichier(s) : `ScreenshotMode.swift`, `PayloadLoader.swift`, `DailyBriefTests.swift`

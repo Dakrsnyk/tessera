@@ -11,26 +11,28 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/WidgetCanvas.swift](.
 
 **Déclare :** `ComboWidgetView`, `KindContentView`, `PremiumLockedView`, `WidgetCanvas`, `WidgetLinks`
 
-## Utilise
+## Utilise (même module)
 
-- [[PayloadLoader (swift)]]
-- [[Combo (swift)]]
-- [[WidgetDesign (swift)]]
 - [[AccessoryViews (swift)]]
 - [[DataWidgets (swift)]]
 - [[ProductivityWidgets (swift)]]
 - [[TimeWidgets (swift)]]
 - [[RenderComponents (swift)]]
 - [[StyleRendering (swift)]]
-- [[NutritionTiles (swift)]]
 - [[TileFactory (swift)]]
 - [[TileView (swift)]]
-- [[ColorHex (swift)]]
-- [[DeepLink (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Boutons des widgets, activité en direct et liens : `DeepLink.swift`
+- Nutrition : `NutritionTiles.swift`
+- Outils partagés (Shared/Support) : `ColorHex.swift`
+- Store : `Combo.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `Theme.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `UIComponents.swift`, `HomeSetupViews.swift`, `DesignWidgets.swift`

@@ -11,8 +11,8 @@ Module : [[Planning-et-habitudes]] · Fichier : [Shared/Model/Content.swift](../
 
 **Déclare :** `ContentState`, `FocusSession`, `Habit`, `HydrationState`, `MoneyItem`, `MoneyPeriod`, `MoneyState`, `TaskItem`, `TaskPriority`, `TaskRepeat`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
 
-Utilisé par 33 fichier(s) (voir les rétroliens).
+Utilisé par 33 fichier(s) : `AdExport.swift`, `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `MarketingShots.swift`, `ScreenshotMode.swift`, `HabitsView.swift`, `MoneyView.swift`, `TasksView.swift`, `FinancesApp.swift`, `PlanningApp.swift`, `PlanningPages.swift` …

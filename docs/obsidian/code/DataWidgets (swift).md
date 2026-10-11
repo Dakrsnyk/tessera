@@ -9,22 +9,23 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Kinds/DataWidgets.swi
 
 **Déclare :** `CryptoWidgetView`, `HydrationWidgetView`, `MoneyFlowWidgetView`, `WeatherSymbol`, `WeatherWidgetView`
 
-## Utilise
+## Utilise (même module)
 
-- [[CryptoService (swift)]]
-- [[MoneyMath (swift)]]
-- [[WeatherService (swift)]]
-- [[InteractiveIntents (swift)]]
-- [[Content (swift)]]
-- [[DesignOptions (swift)]]
-- [[Settings (swift)]]
 - [[RenderComponents (swift)]]
-- [[Formatting (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Finances : `MoneyMath.swift`
+- Boutons des widgets, activité en direct et liens : `InteractiveIntents.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Profil et réglages : `Settings.swift`
+- Services externes et frameworks Apple : `CryptoService.swift`, `WeatherService.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`, `Theme.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[AppIntents]]
+- WidgetKit
+- AppIntents
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `WidgetCanvas.swift`

@@ -11,22 +11,24 @@ Module : [[Premium-et-abonnements]] · Fichier : [App/Premium/PaywallView.swift]
 
 **Déclare :** `PaywallView`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[PaywallContext (swift)]]
 - [[PremiumConfiguration (swift)]]
 - [[PremiumStore (swift)]]
-- [[LaunchView (swift)]]
-- [[OnboardingView (swift)]]
-- [[PayloadLoader (swift)]]
-- [[Templates (swift)]]
-- [[AppStyle (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Lancement, premier lancement et tutoriel : `LaunchView.swift`, `OnboardingView.swift`
+- Profil et réglages : `AppStyle.swift`
+- Store : `Templates.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[StoreKit]]
-- [[WidgetKit]]
+- StoreKit
+- WidgetKit
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `HabitsView.swift`, `EditorView.swift`, `MyWidgetsView.swift`, `ProfileView.swift`, `TesseraApp.swift`

@@ -73,6 +73,29 @@ L'extension WidgetKit (cible TesseraWidgets) et le rendu partagé : un même cod
 - [[WidgetLog (swift)]]
 - [[WorkoutLiveActivityWidget (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 11 fichier(s)
+- [[Outils-partages]] : 5 fichier(s)
+- [[Donnees-et-stockage]] : 4 fichier(s)
+- Boutons des widgets, activité en direct et liens : 4 fichier(s)
+- Studio (éditeur de widgets) : 4 fichier(s)
+- Finances : 2 fichier(s)
+- Planning, tâches et habitudes : 2 fichier(s)
+- Profil et réglages : 2 fichier(s)
+- Services externes et frameworks Apple : 2 fichier(s)
+- Store : 2 fichier(s)
+- Créer : les espaces : 1 fichier(s)
+- Fitness : 1 fichier(s)
+- Nutrition : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 18 fichier(s)
+- [[AppIntents]] : 6 fichier(s)
+- [[App Group]] : 4 fichier(s)
+- [[ActivityKit]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

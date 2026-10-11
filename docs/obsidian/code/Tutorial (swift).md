@@ -11,8 +11,8 @@ Module : [[Onboarding-et-tutoriel]] · Fichier : [App/Screens/Tutorial/Tutorial.
 
 **Déclare :** `TutorialFrames`, `TutorialStep`, `TutorialTarget`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Router (swift)]]
+- Noyau : AppModel et Router : `Router.swift`
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `Router.swift`, `ScreenshotMode.swift`, `HomeView.swift`, `TutorialOverlay.swift`, `TutorialTests.swift`

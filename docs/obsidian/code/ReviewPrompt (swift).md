@@ -11,8 +11,8 @@ Module : [[Profil-et-reglages]] · Fichier : [Shared/Model/ReviewPrompt.swift](.
 
 **Déclare :** `ReviewPrompt`
 
-## Utilise
+## Utilise (même module)
 
 - [[Settings (swift)]]
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `AppModel.swift`, `ProfileView.swift`, `TesseraApp.swift`, `QuotidienAndLockScreenTests.swift`

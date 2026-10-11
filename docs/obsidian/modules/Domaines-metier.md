@@ -60,6 +60,25 @@ Les règles et les états de chaque partie de la vie gérée par Ardane, partag�
 - [[Student (swift)]]
 - [[Travel (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Outils-partages]] : 3 fichier(s)
+- [[Donnees-et-stockage]] : 2 fichier(s)
+- [[Creer-espaces]] : 1 fichier(s)
+- Planning, tâches et habitudes : 1 fichier(s)
+- Profil et réglages : 1 fichier(s)
+- Services externes et frameworks Apple : 1 fichier(s)
+- Widgets : extension et rendu : 1 fichier(s)
+
+## Services et frameworks
+
+- [[App Group]] : 3 fichier(s)
+- [[CoinGecko]] : 1 fichier(s)
+- [[Finnhub]] : 1 fichier(s)
+- [[Frankfurter]] : 1 fichier(s)
+- [[Open Food Facts]] : 1 fichier(s)
+- [[SEC EDGAR]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

@@ -11,17 +11,19 @@ Module : [[Noyau-AppModel]] · Fichier : [App/Core/Router.swift](../../../App/Co
 
 **Déclare :** `ContentScreen`, `EditorRequest`, `Router`, `StorePage`
 
-## Utilise
+## Utilise (même module)
 
-- [[SaveFlight (swift)]]
 - [[AppModel (swift)]]
-- [[PaywallContext (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[Tutorial (swift)]]
-- [[KindCatalog (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[DeepLink (swift)]]
 
-Utilisé par 22 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Créer : les espaces : `SaveFlight.swift`, `KindCatalog.swift`
+- Boutons des widgets, activité en direct et liens : `DeepLink.swift`
+- Mini-apps : `MiniApp.swift`
+- Lancement, premier lancement et tutoriel : `Tutorial.swift`
+- Premium et abonnements : `PaywallContext.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
+
+Utilisé par 22 fichier(s) : `ScreenshotMode.swift`, `PremiumLock.swift`, `EditorView.swift`, `ExploreView.swift`, `HomeSetupViews.swift`, `StoreCombos.swift`, `StoreMagazine.swift`, `DailySection.swift`, `HomeView.swift`, `MiniAppsRow.swift`, `FinancesPages.swift`, `FitnessApp.swift` …

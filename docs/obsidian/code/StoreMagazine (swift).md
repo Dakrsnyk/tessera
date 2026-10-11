@@ -11,29 +11,27 @@ Module : [[Store]] · Fichier : [App/Screens/Explore/StoreMagazine.swift](../../
 
 **Déclare :** `CategoryIndex`, `CollectionTile`, `EssentialsList`, `MagazineHeader`, `PackCard`, `PackFeature`, `SeasonalCollection`, `ShowcaseGrid`, `StoreCollectionView`, `StoreCollectionsView`, `StoreEdition`, `StorePacksView`, `StoreRanking`, `WeeklySetupHero`, `WeeklyStyleFeature`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
 - [[ExploreView (swift)]]
 - [[HomeSetupViews (swift)]]
 - [[HomeSetups (swift)]]
 - [[SetupWallpapers (swift)]]
 - [[StoreCombos (swift)]]
 - [[StoreShowcase (swift)]]
-- [[PayloadLoader (swift)]]
 - [[Packs (swift)]]
 - [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[StyleRendering (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`, `StyleRendering.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `ExploreView.swift`, `AppearanceAndStoreTests.swift`, `StoreSeasonTests.swift`

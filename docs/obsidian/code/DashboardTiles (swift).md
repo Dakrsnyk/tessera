@@ -11,20 +11,19 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/DashboardTiles.
 
 **Déclare :** `DashboardTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[Insights (swift)]]
-- [[WeatherService (swift)]]
-- [[Budget (swift)]]
-- [[Fitness (swift)]]
-- [[Nutrition (swift)]]
-- [[Student (swift)]]
 - [[RenderComponents (swift)]]
-- [[FitnessTiles (swift)]]
 - [[StudentTiles (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Fitness.swift`, `Nutrition.swift`, `Student.swift`
+- Données et stockage : `Insights.swift`
+- Fitness : `FitnessTiles.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+
+Utilisé par 1 fichier(s) : `TileFactory.swift`

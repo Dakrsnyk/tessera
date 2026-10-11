@@ -11,14 +11,12 @@ Module : [[Finances]] · Fichier : [App/Screens/Spaces/BudgetSpace.swift](../../
 
 **Déclare :** `AccountEditor`, `BillEditor`, `BudgetSpaceSections`, `CategoryEditor`, `ExpenseEditor`, `FixedCategoryPicker`, `GoalEditor`, `IncomeEditor`, `QuickExpenseEditor`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[SpaceForms (swift)]]
-- [[SpaceSheets (swift)]]
-- [[Budget (swift)]]
-- [[TileFactory (swift)]]
-- [[Formatting (swift)]]
+- Créer : les espaces : `SpaceForms.swift`, `SpaceSheets.swift`
+- Domaines métier (Shared/Domains) : `Budget.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `MoneyView.swift`, `FinancesApp.swift`, `DataItemViews.swift`, `SpacesView.swift`

@@ -11,14 +11,14 @@ Module : [[Creer-espaces]] · Fichier : [App/Components/SaveFlight.swift](../../
 
 **Déclare :** `SaveFlight`, `SaveFlightOverlay`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[WidgetDesign (swift)]]
+- Noyau : AppModel et Router : `AppModel.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `Router.swift`, `EditorView.swift`, `TesseraApp.swift`

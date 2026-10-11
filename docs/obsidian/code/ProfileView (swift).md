@@ -11,36 +11,31 @@ Module : [[Profil-et-reglages]] · Fichier : [App/Screens/Profile/ProfileView.sw
 
 **Déclare :** `ProfileAvatar`, `ProfileView`
 
-## Utilise
+## Utilise (même module)
 
-- [[StylePicker (swift)]]
-- [[AppModel (swift)]]
-- [[DataBackup (swift)]]
-- [[Router (swift)]]
-- [[PaywallView (swift)]]
-- [[PremiumConfiguration (swift)]]
-- [[PremiumStore (swift)]]
-- [[HabitsView (swift)]]
-- [[HydrationView (swift)]]
-- [[MoneyView (swift)]]
-- [[TasksView (swift)]]
-- [[WeatherLocationView (swift)]]
-- [[AddToHomeScreenGuide (swift)]]
 - [[AppIconPicker (swift)]]
 - [[ProfileTopics (swift)]]
 - [[SmartRemindersView (swift)]]
-- [[Life (swift)]]
-- [[KindCatalog (swift)]]
 - [[ReviewPrompt (swift)]]
 - [[Settings (swift)]]
-- [[Formatting (swift)]]
-- [[WidgetDiagnostics (swift)]]
 - [[AppStyle (swift)]]
+
+## Utilise (autres modules)
+
+- Créer : les espaces : `KindCatalog.swift`
+- Domaines métier (Shared/Domains) : `Life.swift`
+- Données et stockage : `DataBackup.swift`
+- Finances : `MoneyView.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`, `WidgetDiagnostics.swift`
+- Planning, tâches et habitudes : `HabitsView.swift`, `HydrationView.swift`, `TasksView.swift`, `WeatherLocationView.swift`
+- Premium et abonnements : `PaywallView.swift`, `PremiumConfiguration.swift`, `PremiumStore.swift`
+- Studio (éditeur de widgets) : `StylePicker.swift`, `AddToHomeScreenGuide.swift`
 
 ## Services et frameworks
 
-- [[StoreKit]]
-- [[WidgetKit]]
-- [[UserNotifications]]
+- StoreKit
+- WidgetKit
+- UserNotifications
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `HomeView.swift`, `TesseraApp.swift`

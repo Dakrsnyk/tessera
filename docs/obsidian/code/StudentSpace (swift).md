@@ -11,16 +11,16 @@ Module : [[Creer-espaces]] · Fichier : [App/Screens/Spaces/StudentSpace.swift](
 
 **Déclare :** `AssignmentEditor`, `CardEditor`, `CourseEditor`, `CoursePicker`, `ExamEditor`, `GradeEditor`, `SlotEditor`, `StudentSpaceSections`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[SpaceForms (swift)]]
 - [[SpaceSheets (swift)]]
-- [[Fitness (swift)]]
-- [[Student (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Student.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
+
+Utilisé par 3 fichier(s) : `StudiesApp.swift`, `DataItemViews.swift`, `SpacesView.swift`

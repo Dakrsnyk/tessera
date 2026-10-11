@@ -11,16 +11,17 @@ Module : [[Profil-et-reglages]] · Fichier : [App/Screens/Profile/ProfileTopics.
 
 **Déclare :** `ChoiceChip`, `FlowLayout`, `GenderPicker`, `InterestGrid`, `InterestsEditorSheet`, `ProfileNumberField`, `ProfileTextField`, `QuestionCard`, `TopicEditorSheet`, `TopicForm`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[WeatherLocationView (swift)]]
-- [[SpaceForms (swift)]]
-- [[Nutrition (swift)]]
-- [[Profile (swift)]]
-- [[Content (swift)]]
-- [[Formatting (swift)]]
 - [[AppStyle (swift)]]
 
-Utilisé par 9 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `Nutrition.swift`, `Profile.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Planning, tâches et habitudes : `WeatherLocationView.swift`, `Content.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
+
+Utilisé par 9 fichier(s) : `EditorView.swift`, `StudioComponents.swift`, `StudioPanels.swift`, `DailySection.swift`, `MyInfoCenter.swift`, `MiniAppSettings.swift`, `OnboardingView.swift`, `DataItemViews.swift`, `ProfileView.swift`

@@ -11,25 +11,19 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Core/DailyBrief.swift](../.
 
 **Déclare :** `DailyBrief`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[DataItems (swift)]]
 - [[DailySection (swift)]]
-- [[CalendarService (swift)]]
-- [[WeatherService (swift)]]
-- [[Budget (swift)]]
-- [[Car (swift)]]
-- [[Fitness (swift)]]
-- [[Nutrition (swift)]]
-- [[Productivity (swift)]]
-- [[Profile (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
-- [[Content (swift)]]
-- [[KindCatalog (swift)]]
-- [[Tile (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Créer : les espaces : `KindCatalog.swift`
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Car.swift`, `Fitness.swift`, `Nutrition.swift`, `Productivity.swift`, `Profile.swift`, `Student.swift`, `Travel.swift`
+- Données et stockage : `DataItems.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`, `Content.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+- Widgets : extension et rendu : `Tile.swift`
+
+Utilisé par 4 fichier(s) : `DailyCategories.swift`, `DailyLayoutEditor.swift`, `DailySection.swift`, `DailyBriefTests.swift`

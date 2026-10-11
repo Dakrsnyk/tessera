@@ -11,4 +11,4 @@ Module : [[Premium-et-abonnements]] · Fichier : [Shared/Theme/Palette.swift](..
 
 **Déclare :** `AccentSwatch`, `Palette`
 
-Utilisé par 16 fichier(s) (voir les rétroliens).
+Utilisé par 16 fichier(s) : `MarketingShots.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `HabitsView.swift`, `EditorView.swift`, `StudioPanels.swift`, `ExploreView.swift`, `HomeSetups.swift`, `StoreShowcase.swift`, `TutorialOverlay.swift`, `Packs.swift`, `Templates.swift` …

@@ -11,9 +11,9 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Budget.swift](../../..
 
 **Déclare :** `Account`, `Bill`, `BillPeriod`, `BudgetCategory`, `BudgetMath`, `BudgetState`, `Expense`, `FixedExpenseNature`, `IncomeEntry`, `QuickExpense`, `SavingsGoal`, `ValuePoint`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Content (swift)]]
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `Content.swift`
 
-Utilisé par 30 fichier(s) (voir les rétroliens).
+Utilisé par 30 fichier(s) : `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `ScreenshotMode.swift`, `MiniAppsRow.swift`, `FinancesApp.swift`, `FinancesPages.swift`, `NutritionPages.swift`, `DataItemViews.swift`, `BudgetSpace.swift`, `DomainData.swift`, `Insights.swift` …

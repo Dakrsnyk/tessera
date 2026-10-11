@@ -11,20 +11,21 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/MiniApps/Car/CarPages.sw
 
 **Déclare :** `CarCostsPage`, `CarDeadlinesPage`, `CarFuelPage`, `CarMaintenancePage`, `CarMileagePage`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[CarApp (swift)]]
-- [[MiniApp (swift)]]
-- [[SpaceForms (swift)]]
-- [[Car (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `Car.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MiniApp.swift`

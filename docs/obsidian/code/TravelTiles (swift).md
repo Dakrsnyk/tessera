@@ -9,15 +9,17 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/TravelTiles.swi
 
 **Déclare :** `TravelTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[DomainData (swift)]]
-- [[WeatherService (swift)]]
-- [[Travel (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Travel.swift`
+- Données et stockage : `DomainData.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+
+Utilisé par 1 fichier(s) : `TileFactory.swift`

@@ -11,25 +11,24 @@ Module : [[Nutrition]] · Fichier : [App/Screens/MiniApps/Nutrition/NutritionPag
 
 **Déclare :** `DayValue`, `EntryEditor`, `NutritionHistoryPage`, `NutritionIdeasPage`, `NutritionMealPage`, `NutritionNutrientsPage`, `NutritionSavedMealsPage`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[PremiumLock (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
 - [[NutritionSpace (swift)]]
-- [[SpaceForms (swift)]]
-- [[Budget (swift)]]
-- [[Nutrition (swift)]]
-- [[RenderComponents (swift)]]
 - [[NutritionTiles (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Nutrition.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Premium et abonnements : `PremiumLock.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `RenderComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `FitnessPages.swift`, `MiniApp.swift`, `PlanningPages.swift`, `StudiesPages.swift`

@@ -11,17 +11,13 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/StudioColorTests.swift](../.
 
 **Déclare :** `StudioColorTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[StudioComponents (swift)]]
-- [[StyleColors (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetStyle (swift)]]
-- [[Tile (swift)]]
-- [[ColorHex (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
+- Outils partagés (Shared/Support) : `ColorHex.swift`
+- Premium et abonnements : `Palette.swift`
+- Studio (éditeur de widgets) : `StudioComponents.swift`, `StyleColors.swift`, `WidgetDesign.swift`, `WidgetStyle.swift`, `Theme.swift`
+- Widgets : extension et rendu : `Tile.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit

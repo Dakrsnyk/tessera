@@ -11,9 +11,7 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/NutritionAppTests.swift](../
 
 **Déclare :** `NutritionAppTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[FoodDatabase (swift)]]
-- [[Nutrition (swift)]]
-- [[Profile (swift)]]
-- [[DateMath (swift)]]
+- Domaines métier (Shared/Domains) : `FoodDatabase.swift`, `Nutrition.swift`, `Profile.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`

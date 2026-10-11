@@ -11,27 +11,18 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/AppearanceAndStoreTests.swif
 
 **Déclare :** `AppearanceAndStoreTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[Agenda (swift)]]
-- [[AppIcons (swift)]]
-- [[HomeSetups (swift)]]
-- [[StoreCombos (swift)]]
-- [[StoreMagazine (swift)]]
-- [[StoreShowcase (swift)]]
-- [[WeekViews (swift)]]
-- [[SpacesView (swift)]]
-- [[DomainData (swift)]]
-- [[PayloadLoader (swift)]]
-- [[Combo (swift)]]
-- [[KindCatalog (swift)]]
-- [[Packs (swift)]]
-- [[Settings (swift)]]
-- [[DateMath (swift)]]
-- [[AppStyle (swift)]]
-- [[Theme (swift)]]
+- Accueil : Mon Quotidien : `Agenda.swift`
+- Créer : les espaces : `SpacesView.swift`, `KindCatalog.swift`
+- Données et stockage : `DomainData.swift`, `PayloadLoader.swift`
+- Mini-apps : `WeekViews.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Profil et réglages : `AppIcons.swift`, `Settings.swift`, `AppStyle.swift`
+- Store : `HomeSetups.swift`, `StoreCombos.swift`, `StoreMagazine.swift`, `StoreShowcase.swift`, `Combo.swift`, `Packs.swift`
+- Studio (éditeur de widgets) : `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit

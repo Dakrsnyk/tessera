@@ -11,10 +11,12 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Business.swift](../../
 
 **Déclare :** `BusinessExpense`, `BusinessKPI`, `BusinessMath`, `BusinessState`, `CustomMetric`, `SalesEntry`, `SubscriptionSnapshot`
 
-## Utilise
+## Utilise (même module)
 
 - [[Budget (swift)]]
-- [[DateMath (swift)]]
-- [[Helpers (swift)]]
 
-Utilisé par 12 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Helpers.swift`
+
+Utilisé par 12 fichier(s) : `AppModel.swift`, `DataBackup.swift`, `MyInfoSection.swift`, `BusinessApp.swift`, `BusinessPages.swift`, `MoneySpaces.swift`, `DomainData.swift`, `SampleData.swift`, `StoredStates.swift`, `BusinessTiles.swift`, `DomainLogicTests.swift`, `FinancesBusinessTests.swift`

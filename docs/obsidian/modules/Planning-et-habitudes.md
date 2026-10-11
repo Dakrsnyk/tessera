@@ -49,6 +49,27 @@ La semaine en tableau et le jour choisi, les tâches, le Top 3, les projets, la 
 - [[CalendarService (swift)]]
 - [[Content (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Creer-espaces]] : 3 fichier(s)
+- [[Domaines-metier]] : 3 fichier(s)
+- [[Mini-apps]] : 3 fichier(s)
+- Premium et abonnements : 3 fichier(s)
+- Widgets : extension et rendu : 3 fichier(s)
+- Accueil : Mon Quotidien : 2 fichier(s)
+- Noyau : AppModel et Router : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Profil et réglages : 2 fichier(s)
+- Studio (éditeur de widgets) : 2 fichier(s)
+- Boutons des widgets, activité en direct et liens : 1 fichier(s)
+- Nutrition : 1 fichier(s)
+- Services externes et frameworks Apple : 1 fichier(s)
+
+## Services et frameworks
+
+- [[Swift Charts]] : 2 fichier(s)
+- [[EventKit]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

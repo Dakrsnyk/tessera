@@ -11,10 +11,13 @@ Module : [[Outils-partages]] · Fichier : [Shared/Support/Formatting.swift](../.
 
 **Déclare :** `Fmt`
 
-## Utilise
+## Utilise (même module)
 
-- [[Settings (swift)]]
 - [[DateMath (swift)]]
-- [[Localization (swift)]]
 
-Utilisé par 80 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Localisation : `Localization.swift`
+- Profil et réglages : `Settings.swift`
+
+Utilisé par 80 fichier(s) : `Agenda.swift`, `DailyBrief.swift`, `DataItems.swift`, `MarketingShots.swift`, `HabitsView.swift`, `HydrationView.swift`, `MoneyView.swift`, `WeatherLocationView.swift`, `KindOptionsSection.swift`, `ExploreView.swift`, `HomeSetupViews.swift`, `StoreMagazine.swift` …

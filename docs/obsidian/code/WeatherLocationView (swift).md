@@ -9,13 +9,13 @@ Module : [[Planning-et-habitudes]] · Fichier : [App/Screens/Content/WeatherLoca
 
 **Déclare :** `CalendarAccessView`, `WeatherLocationView`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[KindOptionsSection (swift)]]
-- [[LocationService (swift)]]
-- [[Settings (swift)]]
-- [[Formatting (swift)]]
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Profil et réglages : `Settings.swift`
+- Services externes et frameworks Apple : `LocationService.swift`
+- Studio (éditeur de widgets) : `KindOptionsSection.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+Utilisé par 6 fichier(s) : `KindOptionsSection.swift`, `WeatherApp.swift`, `DataItemViews.swift`, `ProfileTopics.swift`, `ProfileView.swift`, `TesseraApp.swift`

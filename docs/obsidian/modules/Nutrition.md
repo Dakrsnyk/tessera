@@ -39,6 +39,24 @@ Calories et macros du jour, repas, recherche d'aliments, scanner de code-barres,
 - [[NutritionSpace (swift)]]
 - [[NutritionTiles (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Widgets-extension]] : 5 fichier(s)
+- [[Domaines-metier]] : 4 fichier(s)
+- [[Mini-apps]] : 3 fichier(s)
+- Créer : les espaces : 2 fichier(s)
+- Données et stockage : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Accueil : Mon Quotidien : 1 fichier(s)
+- Noyau : AppModel et Router : 1 fichier(s)
+- Premium et abonnements : 1 fichier(s)
+- Store : 1 fichier(s)
+
+## Services et frameworks
+
+- [[VisionKit]] : 2 fichier(s)
+- [[Swift Charts]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

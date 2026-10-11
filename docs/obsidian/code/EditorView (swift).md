@@ -11,34 +11,29 @@ Module : [[Studio-editeur]] · Fichier : [App/Screens/Editor/EditorView.swift](.
 
 **Déclare :** `BackgroundKind`, `ColorDot`, `ComboPartSettingsView`, `EditorSection`, `EditorView`, `StudioPhotoSession`, `WidgetStudio`
 
-## Utilise
+## Utilise (même module)
 
-- [[SaveFlight (swift)]]
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[PaywallContext (swift)]]
-- [[PaywallView (swift)]]
 - [[KindOptionsSection (swift)]]
 - [[StudioComponents (swift)]]
 - [[StudioPanels (swift)]]
-- [[ExploreView (swift)]]
-- [[DataItemViews (swift)]]
-- [[ProfileTopics (swift)]]
-- [[PayloadLoader (swift)]]
 - [[WidgetDesign (swift)]]
 - [[WidgetStyle (swift)]]
-- [[RenderComponents (swift)]]
-- [[Tile (swift)]]
-- [[TileFactory (swift)]]
-- [[ColorHex (swift)]]
-- [[SharedStore (swift)]]
-- [[Palette (swift)]]
 - [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Créer : les espaces : `SaveFlight.swift`
+- Données et stockage : `PayloadLoader.swift`, `SharedStore.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `ColorHex.swift`
+- Premium et abonnements : `PaywallContext.swift`, `PaywallView.swift`, `Palette.swift`
+- Profil et réglages : `DataItemViews.swift`, `ProfileTopics.swift`
+- Store : `ExploreView.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `RenderComponents.swift`, `Tile.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 - [[PhotosUI]]
 
-Utilisé par 11 fichier(s) (voir les rétroliens).
+Utilisé par 11 fichier(s) : `HabitsView.swift`, `KindOptionsSection.swift`, `SpaceOptionsSection.swift`, `StudioComponents.swift`, `StudioPanels.swift`, `ExploreView.swift`, `HomeSetupViews.swift`, `FusionViews.swift`, `SpaceBuilderView.swift`, `SpaceForms.swift`, `TesseraApp.swift`

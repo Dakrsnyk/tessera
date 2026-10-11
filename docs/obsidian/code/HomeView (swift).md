@@ -11,20 +11,22 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Screens/Home/HomeView.swift
 
 **Déclare :** `HomeView`, `PremiumBanner`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[Router (swift)]]
 - [[DailySection (swift)]]
 - [[MyInfoCenter (swift)]]
-- [[MiniApp (swift)]]
-- [[ProfileView (swift)]]
-- [[SpacesView (swift)]]
-- [[Tutorial (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Créer : les espaces : `SpacesView.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Lancement, premier lancement et tutoriel : `Tutorial.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Profil et réglages : `ProfileView.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `TesseraApp.swift`

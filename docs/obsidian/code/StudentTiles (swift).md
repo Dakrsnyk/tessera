@@ -11,14 +11,15 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/StudentTiles.sw
 
 **Déclare :** `StudentTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[Fitness (swift)]]
-- [[Student (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Student.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+
+Utilisé par 2 fichier(s) : `DashboardTiles.swift`, `TileFactory.swift`

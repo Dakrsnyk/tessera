@@ -11,16 +11,18 @@ Module : [[Store]] · Fichier : [App/Screens/Explore/HomeSetups.swift](../../../
 
 **Déclare :** `HomeSetup`, `HomeSetupCatalog`, `SetupApp`, `SetupIconStyle`, `SetupLock`, `SetupRow`, `SetupTag`, `SetupWallpaper`, `SetupWidget`
 
-## Utilise
+## Utilise (même module)
 
 - [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Premium et abonnements : `Palette.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 11 fichier(s) (voir les rétroliens).
+Utilisé par 11 fichier(s) : `AdExport.swift`, `MarketingShots.swift`, `ScreenshotMode.swift`, `ExploreView.swift`, `HomeSetupViews.swift`, `SetupWallpapers.swift`, `StoreMagazine.swift`, `StoreShowcase.swift`, `LockScreenCreator.swift`, `AppearanceAndStoreTests.swift`, `StoreSeasonTests.swift`

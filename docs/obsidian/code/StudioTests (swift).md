@@ -11,20 +11,14 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/StudioTests.swift](../../../
 
 **Déclare :** `StudioTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[PayloadLoader (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[WidgetStyle (swift)]]
-- [[StyleRendering (swift)]]
-- [[Tile (swift)]]
-- [[SharedStore (swift)]]
-- [[Theme (swift)]]
+- Données et stockage : `PayloadLoader.swift`, `SharedStore.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `WidgetStyle.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`, `StyleRendering.swift`, `Tile.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[App Group]]
+- WidgetKit
+- App Group

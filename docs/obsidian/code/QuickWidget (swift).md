@@ -11,18 +11,20 @@ Module : [[Widgets-extension]] · Fichier : [Widgets/QuickWidget.swift](../../..
 
 **Déclare :** `QuickProvider`, `QuickWidget`
 
-## Utilise
+## Utilise (même module)
 
-- [[PayloadLoader (swift)]]
-- [[WidgetDesign (swift)]]
 - [[WidgetKind (swift)]]
-- [[SharedStore (swift)]]
 - [[DesignProvider (swift)]]
 - [[DesignWidgets (swift)]]
 
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`, `SharedStore.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[App Group]]
+- WidgetKit
+- App Group
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `TesseraWidgetsBundle.swift`

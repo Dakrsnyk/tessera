@@ -11,17 +11,15 @@ Module : [[Services-externes]] · Fichier : [App/Services/AIPhraser.swift](../..
 
 **Déclare :** `AIPhraser`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Insights (swift)]]
-- [[PayloadLoader (swift)]]
-- [[WidgetKind (swift)]]
-- [[Localization (swift)]]
-- [[SharedStore (swift)]]
+- Données et stockage : `Insights.swift`, `PayloadLoader.swift`, `SharedStore.swift`
+- Localisation : `Localization.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
 - [[FoundationModels]]
-- [[App Group]]
+- App Group
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `AppModel.swift`, `SpaceOptionsSection.swift`

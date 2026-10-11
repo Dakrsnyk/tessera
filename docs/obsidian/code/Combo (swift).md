@@ -11,15 +11,14 @@ Module : [[Store]] · Fichier : [Shared/Model/Combo.swift](../../../Shared/Model
 
 **Déclare :** `ComboLayout`, `ComboPart`, `Composer`, `Fusion`, `WidgetFormat`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DomainData (swift)]]
-- [[DesignOptions (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
+- Données et stockage : `DomainData.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`, `WidgetDesign.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 12 fichier(s) (voir les rétroliens).
+Utilisé par 12 fichier(s) : `ScreenshotMode.swift`, `StoreCombos.swift`, `FusionViews.swift`, `MyWidgetsView.swift`, `SpaceBuilderView.swift`, `SpacesView.swift`, `DesignOptions.swift`, `WidgetDesign.swift`, `WidgetCanvas.swift`, `AppearanceAndStoreTests.swift`, `DailyBriefTests.swift`, `FusionTests.swift`

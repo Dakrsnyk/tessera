@@ -11,4 +11,4 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/Tile.swift](../
 
 **Déclare :** `ScheduleBlock`, `Tile`, `TileAction`, `TileButton`, `TileEmpty`, `TileRow`, `TileSegment`, `TileVisual`
 
-Utilisé par 23 fichier(s) (voir les rétroliens).
+Utilisé par 23 fichier(s) : `DailyBrief.swift`, `DailyCategories.swift`, `EditorView.swift`, `StudioPanels.swift`, `DailyLayoutEditor.swift`, `DailySection.swift`, `StyleRendering.swift`, `BusinessTiles.swift`, `CarTiles.swift`, `DashboardTiles.swift`, `FitnessTiles.swift`, `MoneyTiles.swift` …

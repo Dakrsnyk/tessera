@@ -11,16 +11,15 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Companies.swift](../..
 
 **Déclare :** `AppInfo`, `BigNumber`, `CompanyCache`, `CompanyFinancials`, `CompanyRef`, `CompanyService`, `FinancialPeriod`, `MarketsState`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[WeatherService (swift)]]
-- [[Formatting (swift)]]
-- [[Helpers (swift)]]
-- [[SharedStore (swift)]]
+- Données et stockage : `SharedStore.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`, `Helpers.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
 
 ## Services et frameworks
 
 - [[SEC EDGAR]]
-- [[App Group]]
+- App Group
 
-Utilisé par 10 fichier(s) (voir les rétroliens).
+Utilisé par 10 fichier(s) : `AppModel.swift`, `DataBackup.swift`, `PremiumConfiguration.swift`, `MoneySpaces.swift`, `DomainData.swift`, `SampleData.swift`, `FoodDatabase.swift`, `StoredStates.swift`, `BusinessTiles.swift`, `MoneyTiles.swift`

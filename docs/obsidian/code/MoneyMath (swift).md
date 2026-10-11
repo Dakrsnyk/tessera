@@ -11,10 +11,10 @@ Module : [[Finances]] · Fichier : [Shared/Data/MoneyMath.swift](../../../Shared
 
 **Déclare :** `MoneyMath`, `MoneySummary`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Content (swift)]]
-- [[DesignOptions (swift)]]
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `MoneyView.swift`, `DataWidgets.swift`, `CoreLogicTests.swift`

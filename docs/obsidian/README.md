@@ -54,14 +54,14 @@ Cartes et notes générées à partir du code par `scripts/obsidian_map.py` : ri
 
 ## Vue graphique (le réseau d'étoiles)
 
-Chaque fichier du code a sa note dans `code/` (ce qu'il déclare, ce qu'il utilise, ses services), chaque service ou framework dans `services/`, et [[Ardane]] est le centre. Les liens viennent du code : la vue graphique dessine les vraies dépendances.
+Chaque fichier du code a sa note dans `code/` (ce qu'il déclare, ce qu'il utilise, ses services), chaque service ou framework dans `services/`, et [[Ardane]] est le centre. Chaque module est une étoile : ses fichiers sont reliés à lui et entre eux ; les modules sont reliés à leurs trois plus fortes dépendances (mesurées dans le code) et à leurs services. Les dépendances vers les fichiers d'autres modules restent écrites dans chaque note, sans lien, pour garder des grappes lisibles.
 
 1. Ouvrir la vue graphique : icône « Vue graphique » dans la barre de gauche (ou Ctrl+G).
-2. Roue dentée en haut à droite du graphe → **Filtres** → dans la recherche, taper `path:docs/obsidian` (seulement la carte).
+2. Roue dentée en haut à droite du graphe → **Filtres** → dans la recherche, taper `tag:#ardane` (seulement les notes de la carte, sans le guide ni les canvas).
 3. **Groupes** → « Nouveau groupe » six fois, avec ces requêtes et une couleur chacune :
    - `tag:#zone/interface` (cyan) · `tag:#zone/metier` (vert) · `tag:#zone/donnees` (jaune)
    - `tag:#zone/ios` (violet) · `tag:#zone/outils` (gris) · `tag:#service` (orange)
-4. **Affichage** : activer « Flèches », taille des nœuds un peu plus grande ; **Forces** : augmenter « Répulsion » pour séparer les grappes.
+4. **Forces** : force centrale ≈ 0,3 · répulsion ≈ 15 · force des liens ≈ 0,6 · distance des liens ≈ 120. **Affichage** : « Flèches » activé, taille des nœuds ≈ 1,5, seuil d'estompage du texte vers la gauche pour voir les noms des modules.
 5. Clic sur un point : ouvre la note ; survol : allume ses liens. Les gros points (AppModel, SharedStore, WidgetDesign…) sont les fichiers dont tout dépend.
 
 ## Couleurs

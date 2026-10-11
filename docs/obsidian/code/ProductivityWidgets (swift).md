@@ -9,18 +9,19 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Kinds/ProductivityWid
 
 **Déclare :** `FocusWidgetView`, `HabitsWidgetView`, `NoteWidgetView`, `TasksWidgetView`, `UpNextWidgetView`
 
-## Utilise
+## Utilise (même module)
 
-- [[CalendarService (swift)]]
-- [[InteractiveIntents (swift)]]
-- [[Content (swift)]]
 - [[RenderComponents (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Boutons des widgets, activité en direct et liens : `InteractiveIntents.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`, `Content.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[AppIntents]]
+- WidgetKit
+- AppIntents
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `WidgetCanvas.swift`

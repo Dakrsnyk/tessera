@@ -11,24 +11,24 @@ Module : [[Store]] · Fichier : [App/Screens/Explore/HomeSetupViews.swift](../..
 
 **Déclare :** `HomeSetupSheet`, `HomeSetupsView`, `SetupAppIcon`, `SetupCard`, `SetupFavorites`, `SetupHomeScreen`, `SetupLockScreen`, `SetupPage`, `SetupScreen`, `SetupScreenShape`, `SetupScreenshot`, `SetupStatusBar`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[EditorView (swift)]]
 - [[ExploreView (swift)]]
 - [[HomeSetups (swift)]]
 - [[SetupWallpapers (swift)]]
-- [[LaunchView (swift)]]
-- [[PayloadLoader (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetCanvas (swift)]]
-- [[Formatting (swift)]]
-- [[AppStyle (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Lancement, premier lancement et tutoriel : `LaunchView.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Profil et réglages : `AppStyle.swift`
+- Studio (éditeur de widgets) : `EditorView.swift`, `WidgetDesign.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetCanvas.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+Utilisé par 6 fichier(s) : `AdExport.swift`, `MarketingShots.swift`, `ScreenshotMode.swift`, `ExploreView.swift`, `SetupWallpapers.swift`, `StoreMagazine.swift`

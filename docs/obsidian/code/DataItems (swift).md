@@ -11,16 +11,18 @@ Module : [[Donnees-et-stockage]] · Fichier : [App/Core/DataItems.swift](../../.
 
 **Déclare :** `DataItem`, `InfoArea`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[CalendarService (swift)]]
 - [[PayloadLoader (swift)]]
-- [[Nutrition (swift)]]
-- [[Profile (swift)]]
-- [[KindCatalog (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 7 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Créer : les espaces : `KindCatalog.swift`
+- Domaines métier (Shared/Domains) : `Nutrition.swift`, `Profile.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
+
+Utilisé par 7 fichier(s) : `DailyBrief.swift`, `ScreenshotMode.swift`, `DailySection.swift`, `MyInfoCenter.swift`, `MiniAppSettings.swift`, `DataItemViews.swift`, `DailyBriefTests.swift`

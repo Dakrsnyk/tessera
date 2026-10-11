@@ -11,10 +11,12 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Nutrition.swift](../..
 
 **Déclare :** `FoodEntry`, `FoodItem`, `FoodSource`, `MealType`, `NutritionCalculator`, `NutritionGoals`, `NutritionMath`, `NutritionState`, `NutritionTotals`, `SavedMeal`
 
-## Utilise
+## Utilise (même module)
 
 - [[FoodDatabase (swift)]]
-- [[DateMath (swift)]]
-- [[Helpers (swift)]]
 
-Utilisé par 32 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Helpers.swift`
+
+Utilisé par 32 fichier(s) : `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `DataItems.swift`, `MarketingShots.swift`, `NutrientFile.swift`, `ScreenshotMode.swift`, `DailySection.swift`, `MiniAppsRow.swift`, `MiniApp.swift`, `NutritionApp.swift`, `NutritionPages.swift` …

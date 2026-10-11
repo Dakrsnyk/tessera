@@ -11,15 +11,13 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/DataBackupTests.swift](../..
 
 **Déclare :** `DataBackupTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DataBackup (swift)]]
-- [[Car (swift)]]
-- [[Student (swift)]]
-- [[Content (swift)]]
-- [[Settings (swift)]]
-- [[SharedStore (swift)]]
+- Domaines métier (Shared/Domains) : `Car.swift`, `Student.swift`
+- Données et stockage : `DataBackup.swift`, `SharedStore.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Profil et réglages : `Settings.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group

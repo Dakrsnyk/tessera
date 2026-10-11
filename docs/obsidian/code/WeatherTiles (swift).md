@@ -9,14 +9,16 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/WeatherTiles.sw
 
 **Déclare :** `WeatherTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[WeatherService (swift)]]
-- [[Settings (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Profil et réglages : `Settings.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+
+Utilisé par 1 fichier(s) : `TileFactory.swift`

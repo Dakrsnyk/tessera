@@ -11,21 +11,17 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/QuotidienAndLockScreenTests.
 
 **Déclare :** `QuotidienAndLockScreenTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[AppModel (swift)]]
-- [[MiniApp (swift)]]
-- [[Budget (swift)]]
-- [[Fitness (swift)]]
-- [[Nutrition (swift)]]
-- [[Profile (swift)]]
-- [[WorkoutLiveActivity (swift)]]
-- [[KindCatalog (swift)]]
-- [[ReviewPrompt (swift)]]
-- [[Settings (swift)]]
-- [[WidgetKind (swift)]]
-- [[SharedStore (swift)]]
+- Créer : les espaces : `KindCatalog.swift`
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Fitness.swift`, `Nutrition.swift`, `Profile.swift`
+- Données et stockage : `SharedStore.swift`
+- Boutons des widgets, activité en direct et liens : `WorkoutLiveActivity.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Profil et réglages : `ReviewPrompt.swift`, `Settings.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group

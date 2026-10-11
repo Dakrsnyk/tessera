@@ -48,6 +48,26 @@ L'onglet Accueil : « Mon Quotidien » rassemble ce qui compte aujourd'hui, cons
 - [[MyInfoCenter (swift)]]
 - [[MyInfoSection (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 9 fichier(s)
+- [[Profil-et-reglages]] : 4 fichier(s)
+- [[Widgets-extension]] : 4 fichier(s)
+- Créer : les espaces : 2 fichier(s)
+- Mini-apps : 2 fichier(s)
+- Noyau : AppModel et Router : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Planning, tâches et habitudes : 2 fichier(s)
+- Autres mini-apps : 1 fichier(s)
+- Données et stockage : 1 fichier(s)
+- Fitness : 1 fichier(s)
+- Lancement, premier lancement et tutoriel : 1 fichier(s)
+- Services externes et frameworks Apple : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

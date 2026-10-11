@@ -11,12 +11,8 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/SmartRemindersTests.swift](.
 
 **Déclare :** `SmartRemindersTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Budget (swift)]]
-- [[Fitness (swift)]]
-- [[FoodDatabase (swift)]]
-- [[Nutrition (swift)]]
-- [[Settings (swift)]]
-- [[DateMath (swift)]]
-- [[SmartReminders (swift)]]
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Fitness.swift`, `FoodDatabase.swift`, `Nutrition.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Profil et réglages : `Settings.swift`, `SmartReminders.swift`

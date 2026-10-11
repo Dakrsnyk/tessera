@@ -46,6 +46,23 @@ Programme de la semaine, séance en direct, repos, bibliothèque d'exercices ave
 - [[FitnessSpace (swift)]]
 - [[FitnessTiles (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Widgets-extension]] : 4 fichier(s)
+- [[Mini-apps]] : 3 fichier(s)
+- [[Outils-partages]] : 3 fichier(s)
+- Créer : les espaces : 2 fichier(s)
+- Domaines métier (Shared/Domains) : 2 fichier(s)
+- Noyau : AppModel et Router : 2 fichier(s)
+- Accueil : Mon Quotidien : 1 fichier(s)
+- Nutrition : 1 fichier(s)
+
+## Services et frameworks
+
+- [[Swift Charts]] : 2 fichier(s)
+- [[CoreMotion]] : 1 fichier(s)
+- [[Demos des exercices]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

@@ -50,6 +50,25 @@ Tout est stocké sur l'appareil, dans le conteneur App Group partagé par l'app 
 - [[SampleData (swift)]]
 - [[SharedStore (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 13 fichier(s)
+- [[Outils-partages]] : 3 fichier(s)
+- [[Planning-et-habitudes]] : 2 fichier(s)
+- Services externes et frameworks Apple : 2 fichier(s)
+- Studio (éditeur de widgets) : 2 fichier(s)
+- Créer : les espaces : 1 fichier(s)
+- Fitness : 1 fichier(s)
+- Localisation : 1 fichier(s)
+- Noyau : AppModel et Router : 1 fichier(s)
+- Profil et réglages : 1 fichier(s)
+- Widgets : extension et rendu : 1 fichier(s)
+
+## Services et frameworks
+
+- [[App Group]] : 5 fichier(s)
+- [[Base alimentaire CNF]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

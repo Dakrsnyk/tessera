@@ -11,8 +11,8 @@ Module : [[Localisation]] · Fichier : [Shared/Support/Localization.swift](../..
 
 **Déclare :** `Localization`, `LocalizedText`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Formatting (swift)]]
+- Outils partagés (Shared/Support) : `Formatting.swift`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `NutrientFile.swift`, `AIPhraser.swift`, `Formatting.swift`

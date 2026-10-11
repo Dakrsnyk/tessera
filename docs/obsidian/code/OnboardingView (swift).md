@@ -11,22 +11,22 @@ Module : [[Onboarding-et-tutoriel]] · Fichier : [App/Screens/Onboarding/Onboard
 
 **Déclare :** `AddStepRow`, `OnboardingView`, `PerkRow`
 
-## Utilise
+## Utilise (même module)
 
-- [[StylePicker (swift)]]
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[ScreenshotMode (swift)]]
 - [[LaunchView (swift)]]
-- [[ProfileTopics (swift)]]
-- [[Life (swift)]]
-- [[Profile (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
-- [[AppStyle (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Life.swift`, `Profile.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Profil et réglages : `ProfileTopics.swift`, `AppStyle.swift`
+- Studio (éditeur de widgets) : `StylePicker.swift`
+- Tests, CI et outils : `ScreenshotMode.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `PaywallView.swift`, `AddToHomeScreenGuide.swift`, `TutorialOverlay.swift`, `TesseraApp.swift`

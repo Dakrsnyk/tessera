@@ -11,16 +11,18 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/StyleRendering.swift]
 
 **Déclare :** `ArcShape`, `ChartText`, `ComparisonChart`, `GaugeArcChart`, `PieSlice`, `ProgressPieChart`, `SegmentsBarsChart`, `SegmentsRoundChart`, `SeriesDotsChart`, `SeriesLineChart`, `StyleBorder`, `StyleDepth`, `StyledIcon`, `SymbolFamily`, `TexturePattern`, `TextureRandom`, `TextureView`
 
-## Utilise
+## Utilise (même module)
 
-- [[WidgetStyle (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
-- [[Formatting (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Studio (éditeur de widgets) : `WidgetStyle.swift`, `Theme.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+Utilisé par 6 fichier(s) : `StoreMagazine.swift`, `TileView.swift`, `WidgetCanvas.swift`, `Theme.swift`, `StoreSeasonTests.swift`, `StudioTests.swift`

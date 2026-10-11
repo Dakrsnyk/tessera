@@ -11,26 +11,23 @@ Module : [[Creer-espaces]] · Fichier : [App/Screens/Spaces/SpaceBuilderView.swi
 
 **Déclare :** `SpaceBuilderView`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[EditorView (swift)]]
-- [[DataItemViews (swift)]]
 - [[SpacesView (swift)]]
-- [[PayloadLoader (swift)]]
-- [[Combo (swift)]]
-- [[DesignOptions (swift)]]
 - [[KindCatalog (swift)]]
-- [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[Formatting (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Profil et réglages : `DataItemViews.swift`
+- Store : `Combo.swift`, `Templates.swift`
+- Studio (éditeur de widgets) : `EditorView.swift`, `DesignOptions.swift`, `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `SpacesView.swift`

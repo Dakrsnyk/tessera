@@ -11,23 +11,22 @@ Module : [[Mes-widgets]] · Fichier : [App/Screens/MyWidgets/MyWidgetsView.swift
 
 **Déclare :** `MyWidgetsView`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[PaywallContext (swift)]]
-- [[PaywallView (swift)]]
-- [[StudioComponents (swift)]]
 - [[FusionViews (swift)]]
 - [[WidgetCarousel (swift)]]
-- [[Combo (swift)]]
-- [[WidgetDesign (swift)]]
-- [[RenderComponents (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Premium et abonnements : `PaywallContext.swift`, `PaywallView.swift`
+- Store : `Combo.swift`
+- Studio (éditeur de widgets) : `StudioComponents.swift`, `WidgetDesign.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `RenderComponents.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `TesseraApp.swift`

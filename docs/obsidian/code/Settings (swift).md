@@ -11,8 +11,8 @@ Module : [[Profil-et-reglages]] · Fichier : [Shared/Model/Settings.swift](../..
 
 **Déclare :** `AppSettings`, `AppStyleID`, `AppearanceMode`, `PremiumState`, `TemperatureUnit`, `WeatherLocation`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DebugPremium (swift)]]
+- Premium et abonnements : `DebugPremium.swift`
 
-Utilisé par 31 fichier(s) (voir les rétroliens).
+Utilisé par 31 fichier(s) : `StylePicker.swift`, `AppModel.swift`, `DailyCategories.swift`, `DataBackup.swift`, `ScreenshotMode.swift`, `MoneyView.swift`, `WeatherLocationView.swift`, `KindOptionsSection.swift`, `DailyLayoutEditor.swift`, `MiniAppSettings.swift`, `WeatherApp.swift`, `ProfileView.swift` …

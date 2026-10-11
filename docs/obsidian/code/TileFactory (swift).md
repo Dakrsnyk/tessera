@@ -11,30 +11,32 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/TileFactory.swi
 
 **Déclare :** `TF`, `TileFactory`
 
-## Utilise
+## Utilise (même module)
 
-- [[PayloadLoader (swift)]]
-- [[WeatherService (swift)]]
-- [[Fitness (swift)]]
 - [[WidgetKind (swift)]]
 - [[RenderComponents (swift)]]
 - [[BusinessTiles (swift)]]
 - [[CarTiles (swift)]]
 - [[DashboardTiles (swift)]]
-- [[FitnessTiles (swift)]]
-- [[MoneyTiles (swift)]]
-- [[NutritionTiles (swift)]]
 - [[ProductivityTiles (swift)]]
 - [[StudentTiles (swift)]]
 - [[Tile (swift)]]
 - [[TimeTiles (swift)]]
 - [[TravelTiles (swift)]]
 - [[WeatherTiles (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Fitness.swift`
+- Données et stockage : `PayloadLoader.swift`
+- Finances : `MoneyTiles.swift`
+- Fitness : `FitnessTiles.swift`
+- Nutrition : `NutritionTiles.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 39 fichier(s) (voir les rétroliens).
+Utilisé par 39 fichier(s) : `MarketingShots.swift`, `EditorView.swift`, `DailySection.swift`, `MyInfoSection.swift`, `BusinessApp.swift`, `BusinessPages.swift`, `CarApp.swift`, `CarPages.swift`, `FinancesApp.swift`, `FinancesPages.swift`, `ExerciseLibraryViews.swift`, `FitnessPages.swift` …

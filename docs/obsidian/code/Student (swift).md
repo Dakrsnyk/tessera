@@ -11,9 +11,12 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Student.swift](../../.
 
 **Déclare :** `Assignment`, `ClassSlot`, `Course`, `Exam`, `Flashcard`, `Grade`, `ScheduleKind`, `StudentMath`, `StudentState`, `StudySession`
 
-## Utilise
+## Utilise (même module)
 
 - [[Fitness (swift)]]
-- [[DateMath (swift)]]
 
-Utilisé par 23 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`
+
+Utilisé par 23 fichier(s) : `Agenda.swift`, `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `ScreenshotMode.swift`, `MiniAppsRow.swift`, `PlanningApp.swift`, `StudiesApp.swift`, `StudiesPages.swift`, `DataItemViews.swift`, `SpacesView.swift`, `StudentSpace.swift` …

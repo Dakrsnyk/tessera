@@ -11,11 +11,14 @@ Module : [[Studio-editeur]] · Fichier : [Shared/Model/WidgetStyle.swift](../../
 
 **Déclare :** `BorderKind`, `ChartFamily`, `ChartKind`, `Density`, `DepthKind`, `GradientDirection`, `GradientSpec`, `IconFamily`, `IconPosition`, `IconStyle`, `LayoutKind`, `SavedStyle`, `ShapeKind`, `StyleLibrary`, `StyleOptions`, `StylePreset`, `TextureKind`, `TitleCase`, `TypePreset`, `WeightChoice`
 
-## Utilise
+## Utilise (même module)
 
 - [[WidgetDesign (swift)]]
-- [[SharedStore (swift)]]
-- [[Palette (swift)]]
 - [[Theme (swift)]]
 
-Utilisé par 15 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`
+- Premium et abonnements : `Palette.swift`
+
+Utilisé par 15 fichier(s) : `AdExport.swift`, `AppModel.swift`, `DataBackup.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `EditorView.swift`, `StudioPanels.swift`, `StyleColors.swift`, `WidgetDesign.swift`, `StyleRendering.swift`, `TileView.swift`, `Theme.swift` …

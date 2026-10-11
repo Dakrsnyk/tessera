@@ -11,10 +11,13 @@ Module : [[Outils-partages]] · Fichier : [Shared/Support/WidgetDiagnostics.swif
 
 **Déclare :** `WidgetDiagnostics`
 
-## Utilise
+## Utilise (même module)
 
 - [[Formatting (swift)]]
-- [[SharedStore (swift)]]
 - [[SignedEntitlements (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`
+
+Utilisé par 2 fichier(s) : `ProfileView.swift`, `TesseraWidgetsBundle.swift`

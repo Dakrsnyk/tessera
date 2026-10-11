@@ -11,9 +11,8 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/FitnessAppTests.swift](../..
 
 **Déclare :** `FitnessAppTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[ExerciseDemo (swift)]]
-- [[ExerciseLibrary (swift)]]
-- [[Fitness (swift)]]
-- [[DateMath (swift)]]
+- Domaines métier (Shared/Domains) : `ExerciseLibrary.swift`, `Fitness.swift`
+- Fitness : `ExerciseDemo.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`

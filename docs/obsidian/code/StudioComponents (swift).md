@@ -11,19 +11,20 @@ Module : [[Studio-editeur]] · Fichier : [App/Screens/Editor/StudioComponents.sw
 
 **Déclare :** `StudioChoices`, `StudioColorRow`, `StudioGroup`, `StudioNote`, `StudioPreviewTile`, `StudioSection`, `StudioSectionBar`, `StudioSlider`, `StudioStage`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
 - [[EditorView (swift)]]
-- [[ExploreView (swift)]]
-- [[DataItemViews (swift)]]
-- [[ProfileTopics (swift)]]
-- [[PayloadLoader (swift)]]
 - [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Profil et réglages : `DataItemViews.swift`, `ProfileTopics.swift`
+- Store : `ExploreView.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `EditorView.swift`, `StudioPanels.swift`, `MyWidgetsView.swift`, `StudioColorTests.swift`

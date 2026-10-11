@@ -11,8 +11,7 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/FinancesBusinessTests.swift]
 
 **Déclare :** `FinancesBusinessTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Budget (swift)]]
-- [[Business (swift)]]
-- [[DateMath (swift)]]
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Business.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`

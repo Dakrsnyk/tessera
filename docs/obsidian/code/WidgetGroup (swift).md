@@ -11,12 +11,12 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Model/WidgetGroup.swift](../
 
 **Déclare :** `WidgetGroup`
 
-## Utilise
+## Utilise (même module)
 
 - [[WidgetKind (swift)]]
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `DomainLogicTests.swift`, `DesignProvider.swift`, `DesignWidgets.swift`

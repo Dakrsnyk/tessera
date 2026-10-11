@@ -49,6 +49,29 @@ Le profil (qui est la personne, ses chiffres) et tous les réglages de l'app.
 - [[SmartReminders (swift)]]
 - [[AppStyle (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 10 fichier(s)
+- [[Creer-espaces]] : 6 fichier(s)
+- [[Planning-et-habitudes]] : 5 fichier(s)
+- Premium et abonnements : 4 fichier(s)
+- Studio (éditeur de widgets) : 4 fichier(s)
+- Données et stockage : 3 fichier(s)
+- Outils partagés (Shared/Support) : 3 fichier(s)
+- Autres mini-apps : 2 fichier(s)
+- Finances : 2 fichier(s)
+- Fitness : 2 fichier(s)
+- Noyau : AppModel et Router : 2 fichier(s)
+- Nutrition : 1 fichier(s)
+- Widgets : extension et rendu : 1 fichier(s)
+
+## Services et frameworks
+
+- [[UserNotifications]] : 4 fichier(s)
+- [[App Group]] : 2 fichier(s)
+- [[StoreKit]] : 1 fichier(s)
+- [[WidgetKit]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

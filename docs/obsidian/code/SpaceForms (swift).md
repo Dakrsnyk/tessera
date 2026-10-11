@@ -11,10 +11,9 @@ Module : [[Creer-espaces]] · Fichier : [App/Screens/Spaces/SpaceForms.swift](..
 
 **Déclare :** `BackArrowButton`, `ColorChoiceRow`, `HintRow`, `IntRow`, `MinuteTimePicker`, `NumberRow`, `OptionalNumberRow`, `SheetForm`, `SpaceColors`, `UnitText`, `ValueRow`, `WeekdayPicker`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[EditorView (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Studio (éditeur de widgets) : `EditorView.swift`
 
-Utilisé par 20 fichier(s) (voir les rétroliens).
+Utilisé par 20 fichier(s) : `HabitsView.swift`, `BusinessApp.swift`, `CarApp.swift`, `CarPages.swift`, `FinancesApp.swift`, `ExerciseLibraryViews.swift`, `FitnessPages.swift`, `FitnessSession.swift`, `NutritionPages.swift`, `PlanningApp.swift`, `TravelApp.swift`, `DataItemViews.swift` …

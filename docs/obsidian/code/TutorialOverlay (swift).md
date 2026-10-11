@@ -11,20 +11,21 @@ Module : [[Onboarding-et-tutoriel]] · Fichier : [App/Screens/Tutorial/TutorialO
 
 **Déclare :** `TutorialOverlay`, `TutorialStudioDemo`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
 - [[OnboardingView (swift)]]
 - [[Tutorial (swift)]]
-- [[PayloadLoader (swift)]]
-- [[StyleColors (swift)]]
-- [[WidgetDesign (swift)]]
-- [[Palette (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Premium et abonnements : `Palette.swift`
+- Studio (éditeur de widgets) : `StyleColors.swift`, `WidgetDesign.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `TesseraApp.swift`

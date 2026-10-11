@@ -11,8 +11,8 @@ Module : [[Premium-et-abonnements]] · Fichier : [App/Premium/PaywallContext.swi
 
 **Déclare :** `PaywallContext`, `PaywallPerk`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[WidgetDesign (swift)]]
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+Utilisé par 6 fichier(s) : `Router.swift`, `PaywallView.swift`, `PremiumLock.swift`, `HabitsView.swift`, `EditorView.swift`, `MyWidgetsView.swift`

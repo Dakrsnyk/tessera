@@ -11,21 +11,19 @@ Module : [[Planning-et-habitudes]] · Fichier : [App/Screens/MiniApps/Planning/P
 
 **Déclare :** `AgendaRow`, `PlanningAppView`, `TaskEditor`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[Agenda (swift)]]
-- [[AppModel (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[MiniAppSettings (swift)]]
-- [[WeekViews (swift)]]
-- [[SpaceForms (swift)]]
 - [[CalendarService (swift)]]
-- [[Productivity (swift)]]
-- [[Student (swift)]]
 - [[Content (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `Agenda.swift`, `DailySection.swift`
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `Productivity.swift`, `Student.swift`
+- Mini-apps : `MiniApp.swift`, `MiniAppSettings.swift`, `WeekViews.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
+
+Utilisé par 2 fichier(s) : `MiniApp.swift`, `PlanningPages.swift`

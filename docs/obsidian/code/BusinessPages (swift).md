@@ -11,18 +11,20 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/MiniApps/Business/Busine
 
 **Déclare :** `BusinessMetricsPage`, `BusinessRecurringPage`, `BusinessResultsPage`, `BusinessSalesPage`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
 - [[BusinessApp (swift)]]
-- [[MiniApp (swift)]]
-- [[Business (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Business.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MiniApp.swift`

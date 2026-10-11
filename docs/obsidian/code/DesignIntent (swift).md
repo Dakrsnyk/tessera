@@ -11,17 +11,20 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Intents/DesignIntent.swift](
 
 **Déclare :** `DesignEntity`, `DesignQuery`, `DesignWidgetIntent`
 
-## Utilise
+## Utilise (même module)
 
-- [[WidgetDesign (swift)]]
 - [[WidgetKind (swift)]]
-- [[Formatting (swift)]]
-- [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[AppIntents]]
-- [[App Group]]
+- WidgetKit
+- AppIntents
+- App Group
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `DesignProvider.swift`, `DesignWidgets.swift`

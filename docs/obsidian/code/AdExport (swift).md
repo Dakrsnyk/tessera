@@ -11,27 +11,23 @@ Module : [[Tests-CI-et-outils]] · Fichier : [App/Core/AdExport.swift](../../../
 
 **Déclare :** `AdExport`, `AdFailure`, `AdJob`, `AdOutcome`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
 - [[MarketingShots (swift)]]
-- [[HomeSetupViews (swift)]]
-- [[HomeSetups (swift)]]
-- [[SetupWallpapers (swift)]]
-- [[ExerciseDemo (swift)]]
-- [[MiniApp (swift)]]
-- [[PayloadLoader (swift)]]
-- [[WorkoutLiveActivity (swift)]]
-- [[Content (swift)]]
-- [[StyleColors (swift)]]
-- [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[WidgetStyle (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Fitness : `ExerciseDemo.swift`
+- Boutons des widgets, activité en direct et liens : `WorkoutLiveActivity.swift`
+- Mini-apps : `MiniApp.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Store : `HomeSetupViews.swift`, `HomeSetups.swift`, `SetupWallpapers.swift`, `Templates.swift`
+- Studio (éditeur de widgets) : `StyleColors.swift`, `WidgetDesign.swift`, `WidgetStyle.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `ScreenshotMode.swift`

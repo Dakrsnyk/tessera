@@ -11,20 +11,16 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/Spaces/TravelCarLifeSpac
 
 **Déclare :** `ActivityEditor`, `CarDeadlineEditor`, `CarSpaceSections`, `DestinationResult`, `DestinationSearch`, `FlightEditor`, `FuelEditor`, `LifeSpaceSections`, `OdometerEditor`, `ServiceEditor`, `StayEditor`, `TravelSpaceSections`, `TripEditor`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[SpaceForms (swift)]]
-- [[SpaceSheets (swift)]]
-- [[Car (swift)]]
-- [[Life (swift)]]
-- [[Travel (swift)]]
-- [[TileFactory (swift)]]
-- [[Formatting (swift)]]
+- Créer : les espaces : `SpaceForms.swift`, `SpaceSheets.swift`
+- Domaines métier (Shared/Domains) : `Car.swift`, `Life.swift`, `Travel.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
 - [[CoreLocation]]
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `CarApp.swift`, `TravelApp.swift`, `DataItemViews.swift`, `SpacesView.swift`

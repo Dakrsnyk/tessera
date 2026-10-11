@@ -11,4 +11,4 @@ Module : [[Creer-espaces]] · Fichier : [App/Screens/Spaces/SpaceSheets.swift](.
 
 **Déclare :** `SpaceSheets`
 
-Utilisé par 8 fichier(s) (voir les rétroliens).
+Utilisé par 8 fichier(s) : `DataItemViews.swift`, `BudgetSpace.swift`, `FitnessSpace.swift`, `MoneySpaces.swift`, `NutritionSpace.swift`, `ProductivitySpace.swift`, `StudentSpace.swift`, `TravelCarLifeSpaces.swift`

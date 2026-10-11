@@ -9,16 +9,11 @@ Module : [[Finances]] · Fichier : [Shared/Render/Tiles/MoneyTiles.swift](../../
 
 **Déclare :** `MoneyTiles`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DomainData (swift)]]
-- [[Budget (swift)]]
-- [[Companies (swift)]]
-- [[Portfolio (swift)]]
-- [[RenderComponents (swift)]]
-- [[Tile (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Companies.swift`, `Portfolio.swift`
+- Données et stockage : `DomainData.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `RenderComponents.swift`, `Tile.swift`, `TileFactory.swift`
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `TileFactory.swift`, `ProfileTests.swift`

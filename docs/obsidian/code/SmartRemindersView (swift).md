@@ -11,17 +11,19 @@ Module : [[Profil-et-reglages]] · Fichier : [App/Screens/Profile/SmartReminders
 
 **Déclare :** `SmartRemindersView`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
 - [[NotificationScheduler (swift)]]
 - [[Settings (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 - [[SmartReminders (swift)]]
+
+## Utilise (autres modules)
+
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
 
 ## Services et frameworks
 
-- [[UserNotifications]]
+- UserNotifications
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `MiniAppSettings.swift`, `ProfileView.swift`, `TesseraApp.swift`

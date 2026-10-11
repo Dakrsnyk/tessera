@@ -11,40 +11,23 @@ Module : [[Profil-et-reglages]] · Fichier : [App/Screens/Profile/DataItemViews.
 
 **Déclare :** `DataItemRow`, `ExampleBadge`, `WidgetDataSection`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[DataItems (swift)]]
-- [[StepCounter (swift)]]
-- [[HabitsView (swift)]]
-- [[MoneyView (swift)]]
-- [[TasksView (swift)]]
-- [[WeatherLocationView (swift)]]
-- [[KindOptionsSection (swift)]]
 - [[ProfileTopics (swift)]]
-- [[BudgetSpace (swift)]]
-- [[FitnessSpace (swift)]]
-- [[MoneySpaces (swift)]]
-- [[NutritionSpace (swift)]]
-- [[ProductivitySpace (swift)]]
-- [[SpaceForms (swift)]]
-- [[SpaceSheets (swift)]]
-- [[SpacesView (swift)]]
-- [[StudentSpace (swift)]]
-- [[TravelCarLifeSpaces (swift)]]
-- [[Budget (swift)]]
-- [[Car (swift)]]
-- [[Fitness (swift)]]
-- [[Life (swift)]]
-- [[Nutrition (swift)]]
-- [[Portfolio (swift)]]
-- [[Productivity (swift)]]
-- [[Profile (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
-- [[Content (swift)]]
-- [[KindCatalog (swift)]]
-- [[Formatting (swift)]]
 - [[AppStyle (swift)]]
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Autres mini-apps : `MoneySpaces.swift`, `TravelCarLifeSpaces.swift`
+- Créer : les espaces : `ProductivitySpace.swift`, `SpaceForms.swift`, `SpaceSheets.swift`, `SpacesView.swift`, `StudentSpace.swift`, `KindCatalog.swift`
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Car.swift`, `Fitness.swift`, `Life.swift`, `Nutrition.swift`, `Portfolio.swift`, `Productivity.swift`, `Profile.swift`, `Student.swift`, `Travel.swift`
+- Données et stockage : `DataItems.swift`
+- Finances : `MoneyView.swift`, `BudgetSpace.swift`
+- Fitness : `StepCounter.swift`, `FitnessSpace.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Nutrition : `NutritionSpace.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Planning, tâches et habitudes : `HabitsView.swift`, `TasksView.swift`, `WeatherLocationView.swift`, `Content.swift`
+- Studio (éditeur de widgets) : `KindOptionsSection.swift`
+
+Utilisé par 6 fichier(s) : `EditorView.swift`, `StudioComponents.swift`, `ExploreView.swift`, `MyInfoCenter.swift`, `MiniAppSettings.swift`, `SpaceBuilderView.swift`

@@ -9,14 +9,17 @@ Module : [[Widgets-extension]] · Fichier : [Widgets/TesseraWidgetsBundle.swift]
 
 **Déclare :** `CalendarWidgets`, `DataWidgets`, `DomainGroups`, `LifeGroups`, `MoreGroups`, `ProductivityWidgets`, `TesseraWidgetsBundle`, `TimeWidgets`
 
-## Utilise
+## Utilise (même module)
 
-- [[WidgetDiagnostics (swift)]]
 - [[DesignWidgets (swift)]]
 - [[QuickWidget (swift)]]
 - [[WidgetLog (swift)]]
 - [[WorkoutLiveActivityWidget (swift)]]
 
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `WidgetDiagnostics.swift`
+
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit

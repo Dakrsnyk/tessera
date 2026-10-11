@@ -11,8 +11,8 @@ Module : [[Premium-et-abonnements]] · Fichier : [Shared/Support/DebugPremium.sw
 
 **Déclare :** `DebugPremium`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[SharedStore (swift)]]
+- Données et stockage : `SharedStore.swift`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `AppModel+Debug.swift`, `Settings.swift`, `DomainLogicTests.swift`

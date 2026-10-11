@@ -11,21 +11,20 @@ Module : [[Store]] · Fichier : [App/Screens/Explore/StoreCombos.swift](../../..
 
 **Déclare :** `ComboCard`, `GetLabel`, `StoreCombo`, `StoreComboCatalog`, `StoreCombosView`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[PayloadLoader (swift)]]
 - [[Combo (swift)]]
-- [[DesignOptions (swift)]]
 - [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`, `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `ExploreView.swift`, `StoreMagazine.swift`, `AppearanceAndStoreTests.swift`

@@ -11,21 +11,18 @@ Module : [[Fitness]] · Fichier : [App/Screens/MiniApps/Fitness/FitnessApp.swift
 
 **Déclare :** `FitnessAppView`, `FitnessPlan`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
 - [[StepCounter (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[MiniAppSettings (swift)]]
-- [[WeekViews (swift)]]
 - [[FitnessSpace (swift)]]
-- [[ExerciseLibrary (swift)]]
-- [[Fitness (swift)]]
-- [[RenderComponents (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Domaines métier (Shared/Domains) : `ExerciseLibrary.swift`, `Fitness.swift`
+- Mini-apps : `MiniApp.swift`, `MiniAppSettings.swift`, `WeekViews.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `RenderComponents.swift`
+
+Utilisé par 2 fichier(s) : `FitnessSession.swift`, `MiniApp.swift`

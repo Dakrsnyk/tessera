@@ -11,13 +11,16 @@ Module : [[Studio-editeur]] · Fichier : [Shared/Model/WidgetDesign.swift](../..
 
 **Déclare :** `BackgroundStyle`, `ContentAlignment`, `FontChoice`, `WidgetDesign`
 
-## Utilise
+## Utilise (même module)
 
-- [[Combo (swift)]]
 - [[DesignOptions (swift)]]
-- [[WidgetKind (swift)]]
 - [[WidgetStyle (swift)]]
-- [[Palette (swift)]]
 - [[Theme (swift)]]
 
-Utilisé par 49 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Premium et abonnements : `Palette.swift`
+- Store : `Combo.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
+
+Utilisé par 49 fichier(s) : `SaveFlight.swift`, `UIComponents.swift`, `AdExport.swift`, `AppModel.swift`, `DataBackup.swift`, `DataItems.swift`, `MarketingShots.swift`, `Router.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `PaywallContext.swift`, `EditorView.swift` …

@@ -11,15 +11,17 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Screens/Home/MyInfoCenter.s
 
 **Déclare :** `CompletionRing`, `InfoAreaView`, `MyInfoCard`, `MyInfoView`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[DataItems (swift)]]
 - [[DailySection (swift)]]
-- [[DataItemViews (swift)]]
-- [[ProfileTopics (swift)]]
-- [[SpacesView (swift)]]
-- [[RenderComponents (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Créer : les espaces : `SpacesView.swift`
+- Données et stockage : `DataItems.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Profil et réglages : `DataItemViews.swift`, `ProfileTopics.swift`
+- Widgets : extension et rendu : `RenderComponents.swift`
+
+Utilisé par 1 fichier(s) : `HomeView.swift`

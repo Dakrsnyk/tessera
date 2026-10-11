@@ -11,8 +11,8 @@ Module : [[Profil-et-reglages]] · Fichier : [App/Screens/Profile/AppIconPicker.
 
 **Déclare :** `AppIconPicker`
 
-## Utilise
+## Utilise (même module)
 
 - [[AppIcons (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `ProfileView.swift`, `TesseraApp.swift`

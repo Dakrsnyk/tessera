@@ -11,10 +11,10 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Screens/Home/DailyPager.swi
 
 **Déclare :** `DailyPager`, `DailyWeekBars`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[DateMath (swift)]]
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `DailySection.swift`

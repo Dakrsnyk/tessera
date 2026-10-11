@@ -11,17 +11,17 @@ Module : [[Intents-et-activite-en-direct]] · Fichier : [Shared/Intents/Interact
 
 **Déclare :** `AddWaterIntent`, `FocusNotifier`, `StartFocusIntent`, `StopFocusIntent`, `ToggleHabitIntent`, `ToggleTaskIntent`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Productivity (swift)]]
-- [[Content (swift)]]
-- [[SharedStore (swift)]]
+- Domaines métier (Shared/Domains) : `Productivity.swift`
+- Données et stockage : `SharedStore.swift`
+- Planning, tâches et habitudes : `Content.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[AppIntents]]
-- [[UserNotifications]]
-- [[App Group]]
+- WidgetKit
+- AppIntents
+- UserNotifications
+- App Group
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `PlanningPages.swift`, `DataWidgets.swift`, `ProductivityWidgets.swift`, `TileView.swift`

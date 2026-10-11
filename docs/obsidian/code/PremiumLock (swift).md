@@ -11,10 +11,13 @@ Module : [[Premium-et-abonnements]] · Fichier : [App/Premium/PremiumLock.swift]
 
 **Déclare :** `PremiumHistory`, `PremiumLockCard`
 
-## Utilise
+## Utilise (même module)
 
-- [[Router (swift)]]
 - [[PaywallContext (swift)]]
-- [[DateMath (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Noyau : AppModel et Router : `Router.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+
+Utilisé par 2 fichier(s) : `FinancesPages.swift`, `NutritionPages.swift`

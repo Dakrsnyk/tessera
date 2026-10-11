@@ -11,14 +11,10 @@ Module : [[Fitness]] · Fichier : [Shared/Render/Tiles/FitnessTiles.swift](../..
 
 **Déclare :** `FitnessTiles`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Fitness (swift)]]
-- [[RenderComponents (swift)]]
-- [[Tile (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
-- [[Helpers (swift)]]
+- Domaines métier (Shared/Domains) : `Fitness.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`, `Helpers.swift`
+- Widgets : extension et rendu : `RenderComponents.swift`, `Tile.swift`, `TileFactory.swift`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `DashboardTiles.swift`, `TileFactory.swift`, `ProfileTests.swift`

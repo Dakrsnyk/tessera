@@ -11,18 +11,21 @@ Module : [[Intents-et-activite-en-direct]] · Fichier : [Shared/Live/WorkoutLive
 
 **Déclare :** `WorkoutActivityAttributes`, `WorkoutActivityView`, `WorkoutLiveActivity`
 
-## Utilise
+## Utilise (même module)
 
-- [[Fitness (swift)]]
 - [[SpaceIntents (swift)]]
-- [[Content (swift)]]
-- [[SharedStore (swift)]]
-- [[AppStyle (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Fitness.swift`
+- Données et stockage : `SharedStore.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Profil et réglages : `AppStyle.swift`
 
 ## Services et frameworks
 
 - [[ActivityKit]]
-- [[AppIntents]]
-- [[App Group]]
+- AppIntents
+- App Group
 
-Utilisé par 8 fichier(s) (voir les rétroliens).
+Utilisé par 8 fichier(s) : `AdExport.swift`, `AppModel.swift`, `MarketingShots.swift`, `LockScreenCreator.swift`, `TesseraApp.swift`, `SpaceIntents.swift`, `QuotidienAndLockScreenTests.swift`, `WorkoutLiveActivityWidget.swift`

@@ -50,6 +50,26 @@ Le Studio : contenu, taille, style, couleurs, fond, bordure et réglages propres
 - [[WidgetStyle (swift)]]
 - [[Theme (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Widgets-extension]] : 7 fichier(s)
+- [[Planning-et-habitudes]] : 5 fichier(s)
+- [[Profil-et-reglages]] : 5 fichier(s)
+- Créer : les espaces : 3 fichier(s)
+- Premium et abonnements : 3 fichier(s)
+- Données et stockage : 2 fichier(s)
+- Noyau : AppModel et Router : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Services externes et frameworks Apple : 2 fichier(s)
+- Store : 2 fichier(s)
+- Finances : 1 fichier(s)
+- Lancement, premier lancement et tutoriel : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 4 fichier(s)
+- [[PhotosUI]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

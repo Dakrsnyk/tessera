@@ -11,14 +11,14 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/FinancesSyncTests.swift](../
 
 **Déclare :** `FinancesSyncTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[AppModel (swift)]]
-- [[Budget (swift)]]
-- [[Content (swift)]]
-- [[DateMath (swift)]]
-- [[SharedStore (swift)]]
+- Domaines métier (Shared/Domains) : `Budget.swift`
+- Données et stockage : `SharedStore.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `Content.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group

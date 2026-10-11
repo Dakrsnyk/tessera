@@ -11,17 +11,18 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Kinds/TimeWidgets.swi
 
 **Déclare :** `CalendarWidgetView`, `ClockWidgetView`, `CountdownInfo`, `CountdownWidgetView`, `MonthGridView`, `ProgressText`, `ProgressWidgetView`, `SegmentedProgressView`, `WorldClockWidgetView`, `YearDotsView`, `YearDotsWidgetView`
 
-## Utilise
+## Utilise (même module)
 
-- [[DesignOptions (swift)]]
 - [[WorldCities (swift)]]
 - [[RenderComponents (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`, `Theme.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `AccessoryViews.swift`, `WidgetCanvas.swift`, `CoreLogicTests.swift`

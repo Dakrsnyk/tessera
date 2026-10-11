@@ -11,15 +11,16 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/ProductivityTil
 
 **Déclare :** `ProductivityTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[Fitness (swift)]]
-- [[Productivity (swift)]]
-- [[Content (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Productivity.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Planning, tâches et habitudes : `Content.swift`
+
+Utilisé par 1 fichier(s) : `TileFactory.swift`

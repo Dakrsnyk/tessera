@@ -11,13 +11,15 @@ Module : [[Store]] · Fichier : [Shared/Model/Packs.swift](../../../Shared/Model
 
 **Déclare :** `PackCatalog`, `PackGroup`, `StoreSeason`, `WidgetPack`
 
-## Utilise
+## Utilise (même module)
 
 - [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[DateMath (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Premium et abonnements : `Palette.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
+
+Utilisé par 5 fichier(s) : `AppModel.swift`, `ExploreView.swift`, `StoreMagazine.swift`, `AppearanceAndStoreTests.swift`, `StoreSeasonTests.swift`

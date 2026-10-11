@@ -11,19 +11,20 @@ Module : [[Creer-espaces]] · Fichier : [App/Screens/Spaces/LockScreenCreator.sw
 
 **Déclare :** `LockScreenCreator`, `LockScreenGuide`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[HomeSetups (swift)]]
-- [[StoreShowcase (swift)]]
-- [[WorkoutLiveActivity (swift)]]
-- [[Content (swift)]]
 - [[KindCatalog (swift)]]
+
+## Utilise (autres modules)
+
+- Boutons des widgets, activité en direct et liens : `WorkoutLiveActivity.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Store : `HomeSetups.swift`, `StoreShowcase.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `SpacesView.swift`

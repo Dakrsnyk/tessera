@@ -11,10 +11,13 @@ Module : [[Studio-editeur]] · Fichier : [Shared/Model/StyleColors.swift](../../
 
 **Déclare :** `ColorPalette`
 
-## Utilise
+## Utilise (même module)
 
 - [[WidgetDesign (swift)]]
 - [[WidgetStyle (swift)]]
-- [[ColorHex (swift)]]
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `ColorHex.swift`
+
+Utilisé par 6 fichier(s) : `AdExport.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `StudioPanels.swift`, `TutorialOverlay.swift`, `StudioColorTests.swift`

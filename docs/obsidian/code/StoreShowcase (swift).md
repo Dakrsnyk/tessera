@@ -11,17 +11,19 @@ Module : [[Store]] · Fichier : [App/Screens/Explore/StoreShowcase.swift](../../
 
 **Déclare :** `LockShowcaseCard`, `ShowcaseCard`, `ShowcaseItem`, `StoreCollection`, `StoreShowcase`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
 - [[HomeSetups (swift)]]
-- [[PayloadLoader (swift)]]
-- [[WidgetKind (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Premium et abonnements : `Palette.swift`
+- Studio (éditeur de widgets) : `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `ExploreView.swift`, `StoreMagazine.swift`, `LockScreenCreator.swift`, `AppearanceAndStoreTests.swift`

@@ -11,4 +11,4 @@ Module : [[Intents-et-activite-en-direct]] · Fichier : [Shared/Support/DeepLink
 
 **Déclare :** `DeepLink`
 
-Utilisé par 7 fichier(s) (voir les rétroliens).
+Utilisé par 7 fichier(s) : `Router.swift`, `TesseraApp.swift`, `TileView.swift`, `WidgetCanvas.swift`, `CoreLogicTests.swift`, `DomainLogicTests.swift`, `ProfileTests.swift`

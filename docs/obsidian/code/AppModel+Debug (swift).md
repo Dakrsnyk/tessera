@@ -9,7 +9,10 @@ Module : [[Noyau-AppModel]] · Fichier : [App/Core/AppModel+Debug.swift](../../.
 
 > Test builds only (compiled out of Release): the Premium unlock switch in Réglages > Développeur.
 
-## Utilise
+## Utilise (même module)
 
 - [[AppModel (swift)]]
-- [[DebugPremium (swift)]]
+
+## Utilise (autres modules)
+
+- Premium et abonnements : `DebugPremium.swift`

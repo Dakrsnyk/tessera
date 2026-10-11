@@ -11,23 +11,22 @@ Module : [[Nutrition]] · Fichier : [App/Screens/MiniApps/Nutrition/NutritionApp
 
 **Déclare :** `CalorieHero`, `MacroGauge`, `NutritionAppView`, `NutritionSheet`, `WeekBars`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[MiniAppSettings (swift)]]
-- [[WeekViews (swift)]]
 - [[NutritionSpace (swift)]]
-- [[Nutrition (swift)]]
-- [[RenderComponents (swift)]]
 - [[NutritionTiles (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Domaines métier (Shared/Domains) : `Nutrition.swift`
+- Mini-apps : `MiniApp.swift`, `MiniAppSettings.swift`, `WeekViews.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `RenderComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
 - [[VisionKit]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MiniApp.swift`

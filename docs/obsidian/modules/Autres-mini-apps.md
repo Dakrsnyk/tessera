@@ -45,6 +45,24 @@ Business, Voyage, Auto et Météo, plus les espaces Placements, Marchés et Ma v
 - [[MoneySpaces (swift)]]
 - [[TravelCarLifeSpaces (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 6 fichier(s)
+- [[Creer-espaces]] : 2 fichier(s)
+- [[Mini-apps]] : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Services externes et frameworks Apple : 2 fichier(s)
+- Widgets : extension et rendu : 2 fichier(s)
+- Accueil : Mon Quotidien : 1 fichier(s)
+- Noyau : AppModel et Router : 1 fichier(s)
+- Planning, tâches et habitudes : 1 fichier(s)
+- Profil et réglages : 1 fichier(s)
+
+## Services et frameworks
+
+- [[Swift Charts]] : 6 fichier(s)
+- [[CoreLocation]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

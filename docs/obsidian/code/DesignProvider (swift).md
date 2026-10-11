@@ -11,24 +11,24 @@ Module : [[Widgets-extension]] · Fichier : [Widgets/DesignProvider.swift](../..
 
 **Déclare :** `DesignEntry`, `DesignProvider`, `TimelinePlanner`
 
-## Utilise
+## Utilise (même module)
 
-- [[CryptoService (swift)]]
-- [[PayloadLoader (swift)]]
-- [[WeatherService (swift)]]
-- [[Portfolio (swift)]]
-- [[Travel (swift)]]
 - [[DesignIntent (swift)]]
-- [[WidgetDesign (swift)]]
 - [[WidgetGroup (swift)]]
 - [[WidgetKind (swift)]]
-- [[DateMath (swift)]]
-- [[SharedStore (swift)]]
 - [[WidgetLog (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Portfolio.swift`, `Travel.swift`
+- Données et stockage : `PayloadLoader.swift`, `SharedStore.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Services externes et frameworks Apple : `CryptoService.swift`, `WeatherService.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[App Group]]
+- WidgetKit
+- App Group
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `DesignWidgets.swift`, `QuickWidget.swift`

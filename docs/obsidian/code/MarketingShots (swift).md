@@ -11,31 +11,24 @@ Module : [[Tests-CI-et-outils]] · Fichier : [App/Core/MarketingShots.swift](../
 
 **Déclare :** `MK`, `MarketingAdAsset`, `MarketingApps`, `MarketingArc`, `MarketingBubble`, `MarketingDaily`, `MarketingFinances`, `MarketingFitness`, `MarketingFloating`, `MarketingGround`, `MarketingHeadline`, `MarketingHero`, `MarketingIsland`, `MarketingLiveActivity`, `MarketingLock`, `MarketingLockButton`, `MarketingLockChip`, `MarketingLockScreen`, `MarketingLockScreens`, `MarketingNutrition`, `MarketingPanoLock`, `MarketingPanoSetups`, `MarketingPhone`, `MarketingPill`, `MarketingPlanning`, `MarketingPrivacy`, `MarketingSetupScreen`, `MarketingShowcase`, `MarketingStatusBar`, `MarketingStore`, `MarketingStudio`, `MarketingView`, `MarketingWall`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[HomeSetupViews (swift)]]
-- [[HomeSetups (swift)]]
-- [[SetupWallpapers (swift)]]
-- [[LaunchView (swift)]]
-- [[MiniApp (swift)]]
-- [[PayloadLoader (swift)]]
-- [[Fitness (swift)]]
-- [[Nutrition (swift)]]
-- [[WorkoutLiveActivity (swift)]]
-- [[Content (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[TileFactory (swift)]]
-- [[Formatting (swift)]]
-- [[SharedStore (swift)]]
-- [[AppStyle (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Nutrition.swift`
+- Données et stockage : `PayloadLoader.swift`, `SharedStore.swift`
+- Boutons des widgets, activité en direct et liens : `WorkoutLiveActivity.swift`
+- Mini-apps : `MiniApp.swift`
+- Lancement, premier lancement et tutoriel : `LaunchView.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Premium et abonnements : `Palette.swift`
+- Profil et réglages : `AppStyle.swift`
+- Store : `HomeSetupViews.swift`, `HomeSetups.swift`, `SetupWallpapers.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[App Group]]
+- WidgetKit
+- App Group
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `AdExport.swift`, `TesseraApp.swift`

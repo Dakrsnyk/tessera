@@ -11,23 +11,25 @@ Module : [[Studio-editeur]] · Fichier : [App/Screens/Editor/StudioPanels.swift]
 
 **Déclare :** `ApplyStyleSheet`, `StudioBorderPanel`, `StudioChartPanel`, `StudioColorsPanel`, `StudioDensityPanel`, `StudioElementsPanel`, `StudioInput`, `StudioMyStylesPanel`, `StudioPreviewGrid`, `StudioStylePanel`, `StudioThemePanel`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[EditorView (swift)]]
 - [[StudioComponents (swift)]]
-- [[ProfileTopics (swift)]]
-- [[PayloadLoader (swift)]]
 - [[StyleColors (swift)]]
 - [[WidgetDesign (swift)]]
 - [[WidgetStyle (swift)]]
-- [[Tile (swift)]]
-- [[Palette (swift)]]
 - [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Premium et abonnements : `Palette.swift`
+- Profil et réglages : `ProfileTopics.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `Tile.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `EditorView.swift`

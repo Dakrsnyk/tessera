@@ -11,26 +11,26 @@ Module : [[Fitness]] · Fichier : [App/Screens/MiniApps/Fitness/FitnessPages.swi
 
 **Déclare :** `FitnessActivityPage`, `FitnessHistoryPage`, `FitnessProgramPage`, `FitnessProgressPage`, `FitnessSessionDetailPage`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[StepCounter (swift)]]
-- [[DailySection (swift)]]
 - [[ExerciseLibraryViews (swift)]]
 - [[FitnessSession (swift)]]
-- [[MiniApp (swift)]]
-- [[NutritionPages (swift)]]
 - [[FitnessSpace (swift)]]
-- [[SpaceForms (swift)]]
-- [[ExerciseLibrary (swift)]]
-- [[Fitness (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `ExerciseLibrary.swift`, `Fitness.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Nutrition : `NutritionPages.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MiniApp.swift`

@@ -11,8 +11,8 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/TutorialTests.swift](../../.
 
 **Déclare :** `TutorialTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Router (swift)]]
-- [[Tutorial (swift)]]
-- [[Settings (swift)]]
+- Noyau : AppModel et Router : `Router.swift`
+- Lancement, premier lancement et tutoriel : `Tutorial.swift`
+- Profil et réglages : `Settings.swift`

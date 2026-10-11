@@ -9,10 +9,13 @@ Module : [[Planning-et-habitudes]] · Fichier : [App/Screens/Content/TasksView.s
 
 **Déclare :** `TasksView`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[Content (swift)]]
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Noyau : AppModel et Router : `AppModel.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
+
+Utilisé par 5 fichier(s) : `KindOptionsSection.swift`, `DataItemViews.swift`, `ProfileView.swift`, `ProductivitySpace.swift`, `TesseraApp.swift`

@@ -11,4 +11,4 @@ Module : [[Outils-partages]] · Fichier : [Shared/Support/ColorHex.swift](../../
 
 **Déclare :** `ColorMath`
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `EditorView.swift`, `StyleColors.swift`, `WidgetCanvas.swift`, `Theme.swift`, `StudioColorTests.swift`

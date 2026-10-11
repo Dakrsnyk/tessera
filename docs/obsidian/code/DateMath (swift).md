@@ -11,9 +11,12 @@ Module : [[Outils-partages]] · Fichier : [Shared/Support/DateMath.swift](../../
 
 **Déclare :** `DateMath`
 
-## Utilise
+## Utilise (même module)
 
-- [[DesignOptions (swift)]]
 - [[Formatting (swift)]]
 
-Utilisé par 90 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Studio (éditeur de widgets) : `DesignOptions.swift`
+
+Utilisé par 90 fichier(s) : `Agenda.swift`, `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `StepCounter.swift`, `PremiumLock.swift`, `HabitsView.swift`, `HydrationView.swift`, `MoneyView.swift`, `StoreMagazine.swift`, `DailyPager.swift`, `DailySection.swift` …

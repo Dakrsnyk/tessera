@@ -11,13 +11,16 @@ Module : [[Profil-et-reglages]] · Fichier : [Shared/Theme/AppStyle.swift](../..
 
 **Déclare :** `AppFill`, `AppStyle`
 
-## Utilise
+## Utilise (même module)
 
 - [[Settings (swift)]]
-- [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group
 
-Utilisé par 14 fichier(s) (voir les rétroliens).
+Utilisé par 14 fichier(s) : `StylePicker.swift`, `AppModel.swift`, `MarketingShots.swift`, `PaywallView.swift`, `ExploreView.swift`, `HomeSetupViews.swift`, `OnboardingView.swift`, `DataItemViews.swift`, `ProfileTopics.swift`, `ProfileView.swift`, `SpacesView.swift`, `WorkoutLiveActivity.swift` …

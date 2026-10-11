@@ -11,9 +11,9 @@ Module : [[Store]] · Fichier : [App/Screens/Explore/SetupWallpapers.swift](../.
 
 **Déclare :** `SetupWallpaperView`
 
-## Utilise
+## Utilise (même module)
 
 - [[HomeSetupViews (swift)]]
 - [[HomeSetups (swift)]]
 
-Utilisé par 4 fichier(s) (voir les rétroliens).
+Utilisé par 4 fichier(s) : `AdExport.swift`, `MarketingShots.swift`, `HomeSetupViews.swift`, `StoreMagazine.swift`

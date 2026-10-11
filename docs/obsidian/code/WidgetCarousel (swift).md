@@ -11,15 +11,14 @@ Module : [[Mes-widgets]] · Fichier : [App/Screens/MyWidgets/WidgetCarousel.swif
 
 **Déclare :** `CarouselAction`, `CategoryStrip`, `WidgetCarousel`, `WidgetShelfFilter`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[PayloadLoader (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
+- Données et stockage : `PayloadLoader.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MyWidgetsView.swift`

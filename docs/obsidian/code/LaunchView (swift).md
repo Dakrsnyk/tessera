@@ -11,4 +11,4 @@ Module : [[Onboarding-et-tutoriel]] · Fichier : [App/Screens/Launch/LaunchView.
 
 **Déclare :** `ArdaneHalf`, `ArdaneMark`, `LaunchView`
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `MarketingShots.swift`, `PaywallView.swift`, `HomeSetupViews.swift`, `OnboardingView.swift`, `TesseraApp.swift`

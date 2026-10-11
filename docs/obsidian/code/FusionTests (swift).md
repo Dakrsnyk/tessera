@@ -11,15 +11,14 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/FusionTests.swift](../../../
 
 **Déclare :** `FusionTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[SpacesView (swift)]]
-- [[DomainData (swift)]]
-- [[Combo (swift)]]
-- [[KindCatalog (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
+- Créer : les espaces : `SpacesView.swift`, `KindCatalog.swift`
+- Données et stockage : `DomainData.swift`
+- Store : `Combo.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit

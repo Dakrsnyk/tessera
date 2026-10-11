@@ -31,6 +31,10 @@ Le code est écrit en français ; `tr("texte")` cherche ce texte comme clé dans
 
 - [[Localization (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Outils-partages]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

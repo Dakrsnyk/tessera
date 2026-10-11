@@ -11,11 +11,9 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Screens/Home/MyInfoSection.
 
 **Déclare :** `InfoFact`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[AppModel (swift)]]
-- [[Business (swift)]]
-- [[Car (swift)]]
-- [[Profile (swift)]]
-- [[TileFactory (swift)]]
-- [[Formatting (swift)]]
+- Domaines métier (Shared/Domains) : `Business.swift`, `Car.swift`, `Profile.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Widgets : extension et rendu : `TileFactory.swift`

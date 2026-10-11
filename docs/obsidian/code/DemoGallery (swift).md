@@ -11,10 +11,10 @@ Module : [[Tests-CI-et-outils]] · Fichier : [App/Core/DemoGallery.swift](../../
 
 **Déclare :** `DemoGalleryView`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[ExerciseDemo (swift)]]
-- [[MiniApp (swift)]]
-- [[ExerciseLibrary (swift)]]
+- Domaines métier (Shared/Domains) : `ExerciseLibrary.swift`
+- Fitness : `ExerciseDemo.swift`
+- Mini-apps : `MiniApp.swift`
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `TesseraApp.swift`

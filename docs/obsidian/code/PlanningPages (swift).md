@@ -11,27 +11,27 @@ Module : [[Planning-et-habitudes]] · Fichier : [App/Screens/MiniApps/Planning/P
 
 **Déclare :** `PlanningFocusPage`, `PlanningHabitsPage`, `PlanningMonthPage`, `PlanningProjectsPage`, `PlanningTasksPage`, `PlanningWeekPage`, `TaskRow`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[Agenda (swift)]]
-- [[AppModel (swift)]]
 - [[HabitsView (swift)]]
-- [[MiniApp (swift)]]
-- [[NutritionPages (swift)]]
 - [[PlanningApp (swift)]]
-- [[WeekViews (swift)]]
-- [[ProductivitySpace (swift)]]
 - [[CalendarService (swift)]]
-- [[Fitness (swift)]]
-- [[Productivity (swift)]]
-- [[InteractiveIntents (swift)]]
 - [[Content (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `Agenda.swift`
+- Créer : les espaces : `ProductivitySpace.swift`
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Productivity.swift`
+- Boutons des widgets, activité en direct et liens : `InteractiveIntents.swift`
+- Mini-apps : `MiniApp.swift`, `WeekViews.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Nutrition : `NutritionPages.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MiniApp.swift`

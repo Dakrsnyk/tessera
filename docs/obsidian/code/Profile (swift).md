@@ -11,14 +11,16 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Profile.swift](../../.
 
 **Déclare :** `BodySex`, `FitnessGoal`, `FitnessLevel`, `Interest`, `NutritionAim`, `ProfileTopic`, `ProvidedFact`, `UserProfile`
 
-## Utilise
+## Utilise (même module)
 
-- [[DomainData (swift)]]
 - [[Budget (swift)]]
 - [[Nutrition (swift)]]
-- [[KindCatalog (swift)]]
-- [[WidgetKind (swift)]]
-- [[DateMath (swift)]]
-- [[SharedStore (swift)]]
 
-Utilisé par 17 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Créer : les espaces : `KindCatalog.swift`
+- Données et stockage : `DomainData.swift`, `SharedStore.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
+
+Utilisé par 17 fichier(s) : `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `DataItems.swift`, `ScreenshotMode.swift`, `MiniAppsRow.swift`, `MyInfoSection.swift`, `MiniAppSettings.swift`, `OnboardingView.swift`, `DataItemViews.swift`, `ProfileTopics.swift`, `NutritionSpace.swift` …

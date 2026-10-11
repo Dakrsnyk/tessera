@@ -11,14 +11,17 @@ Module : [[Services-externes]] · Fichier : [Shared/Data/CryptoService.swift](..
 
 **Déclare :** `CoinInfo`, `CoinSnapshot`, `CryptoCache`, `CryptoResult`, `CryptoService`
 
-## Utilise
+## Utilise (même module)
 
 - [[WeatherService (swift)]]
-- [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`
 
 ## Services et frameworks
 
 - [[CoinGecko]]
-- [[App Group]]
+- App Group
 
-Utilisé par 7 fichier(s) (voir les rétroliens).
+Utilisé par 7 fichier(s) : `AppModel.swift`, `KindOptionsSection.swift`, `MoneySpaces.swift`, `PayloadLoader.swift`, `AccessoryViews.swift`, `DataWidgets.swift`, `DesignProvider.swift`

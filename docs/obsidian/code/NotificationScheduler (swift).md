@@ -11,14 +11,14 @@ Module : [[Profil-et-reglages]] · Fichier : [App/Services/NotificationScheduler
 
 **Déclare :** `NotificationScheduler`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Content (swift)]]
-- [[WidgetDesign (swift)]]
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
 
 ## Services et frameworks
 
-- [[UserNotifications]]
+- UserNotifications
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `AppModel.swift`, `HabitsView.swift`, `HydrationView.swift`, `KindOptionsSection.swift`, `SmartRemindersView.swift`

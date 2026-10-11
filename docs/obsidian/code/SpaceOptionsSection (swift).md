@@ -11,14 +11,16 @@ Module : [[Studio-editeur]] · Fichier : [App/Screens/Editor/SpaceOptionsSection
 
 **Déclare :** `SpaceOptionsSection`, `TargetOption`, `TargetOptions`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
 - [[EditorView (swift)]]
-- [[SpacesView (swift)]]
-- [[AIPhraser (swift)]]
-- [[KindCatalog (swift)]]
 - [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Créer : les espaces : `SpacesView.swift`, `KindCatalog.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Services externes et frameworks Apple : `AIPhraser.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
+
+Utilisé par 1 fichier(s) : `KindOptionsSection.swift`

@@ -11,12 +11,12 @@ Module : [[Fitness]] · Fichier : [App/Core/StepCounter.swift](../../../App/Core
 
 **Déclare :** `StepCounter`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
 
 ## Services et frameworks
 
 - [[CoreMotion]]
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `DataBackup.swift`, `DailySection.swift`, `FitnessApp.swift`, `FitnessPages.swift`, `DataItemViews.swift`

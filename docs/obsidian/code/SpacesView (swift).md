@@ -11,36 +11,31 @@ Module : [[Creer-espaces]] · Fichier : [App/Screens/Spaces/SpacesView.swift](..
 
 **Déclare :** `ImmersiveSpaceCard`, `SpaceCard`, `SpaceCatalog`, `SpaceExample`, `SpaceUniverse`, `SpaceView`, `SpacesView`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[BudgetSpace (swift)]]
-- [[FitnessSpace (swift)]]
 - [[LockScreenCreator (swift)]]
-- [[MoneySpaces (swift)]]
-- [[NutritionSpace (swift)]]
 - [[ProductivitySpace (swift)]]
 - [[SpaceBuilderView (swift)]]
 - [[StudentSpace (swift)]]
-- [[TravelCarLifeSpaces (swift)]]
-- [[PayloadLoader (swift)]]
-- [[Car (swift)]]
-- [[Fitness (swift)]]
-- [[Nutrition (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
-- [[Combo (swift)]]
 - [[KindCatalog (swift)]]
-- [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[Formatting (swift)]]
-- [[AppStyle (swift)]]
+
+## Utilise (autres modules)
+
+- Autres mini-apps : `MoneySpaces.swift`, `TravelCarLifeSpaces.swift`
+- Domaines métier (Shared/Domains) : `Car.swift`, `Fitness.swift`, `Nutrition.swift`, `Student.swift`, `Travel.swift`
+- Données et stockage : `PayloadLoader.swift`
+- Finances : `BudgetSpace.swift`
+- Fitness : `FitnessSpace.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Nutrition : `NutritionSpace.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Profil et réglages : `AppStyle.swift`
+- Store : `Combo.swift`, `Templates.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 8 fichier(s) (voir les rétroliens).
+Utilisé par 8 fichier(s) : `SpaceOptionsSection.swift`, `HomeView.swift`, `MyInfoCenter.swift`, `DataItemViews.swift`, `SpaceBuilderView.swift`, `TesseraApp.swift`, `AppearanceAndStoreTests.swift`, `FusionTests.swift`

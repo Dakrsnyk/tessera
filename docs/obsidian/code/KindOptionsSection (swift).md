@@ -11,27 +11,25 @@ Module : [[Studio-editeur]] · Fichier : [App/Screens/Editor/KindOptionsSection.
 
 **Déclare :** `CalendarAccessRow`, `CityPickerView`, `KindOptionsSection`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[HabitsView (swift)]]
-- [[HydrationView (swift)]]
-- [[MoneyView (swift)]]
-- [[TasksView (swift)]]
-- [[WeatherLocationView (swift)]]
 - [[EditorView (swift)]]
 - [[SpaceOptionsSection (swift)]]
-- [[NotificationScheduler (swift)]]
-- [[CalendarService (swift)]]
-- [[CryptoService (swift)]]
 - [[DesignOptions (swift)]]
-- [[Settings (swift)]]
 - [[WidgetDesign (swift)]]
-- [[WorldCities (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Finances : `MoneyView.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Planning, tâches et habitudes : `HabitsView.swift`, `HydrationView.swift`, `TasksView.swift`, `WeatherLocationView.swift`, `CalendarService.swift`
+- Profil et réglages : `NotificationScheduler.swift`, `Settings.swift`
+- Services externes et frameworks Apple : `CryptoService.swift`
+- Widgets : extension et rendu : `WorldCities.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `WeatherLocationView.swift`, `EditorView.swift`, `DataItemViews.swift`

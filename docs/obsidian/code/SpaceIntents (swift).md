@@ -11,22 +11,20 @@ Module : [[Intents-et-activite-en-direct]] · Fichier : [Shared/Intents/SpaceInt
 
 **Déclare :** `CompleteSetIntent`, `CounterStepIntent`, `GradeCardIntent`, `LogFoodIntent`, `PauseRestIntent`, `QuickExpenseIntent`, `ResumeRestIntent`, `RevealCardIntent`, `SkipRestIntent`, `ToggleAssignmentIntent`, `TogglePriorityIntent`, `ToggleProjectTaskIntent`
 
-## Utilise
+## Utilise (même module)
 
-- [[Budget (swift)]]
-- [[Fitness (swift)]]
-- [[FoodDatabase (swift)]]
-- [[Nutrition (swift)]]
-- [[Productivity (swift)]]
-- [[Student (swift)]]
 - [[WorkoutLiveActivity (swift)]]
-- [[SharedStore (swift)]]
-- [[SmartReminders (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Fitness.swift`, `FoodDatabase.swift`, `Nutrition.swift`, `Productivity.swift`, `Student.swift`
+- Données et stockage : `SharedStore.swift`
+- Profil et réglages : `SmartReminders.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[AppIntents]]
-- [[App Group]]
+- WidgetKit
+- AppIntents
+- App Group
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `WorkoutLiveActivity.swift`, `TileView.swift`, `WorkoutLiveActivityWidget.swift`

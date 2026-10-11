@@ -11,8 +11,8 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Productivity.swift](..
 
 **Déclare :** `CounterItem`, `Deadline`, `FocusLog`, `PriorityItem`, `ProductivityMath`, `ProductivityState`, `Project`, `ProjectTask`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
 
-Utilisé par 16 fichier(s) (voir les rétroliens).
+Utilisé par 16 fichier(s) : `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `ScreenshotMode.swift`, `PlanningApp.swift`, `PlanningPages.swift`, `DataItemViews.swift`, `ProductivitySpace.swift`, `DomainData.swift`, `Insights.swift`, `SampleData.swift`, `StoredStates.swift` …

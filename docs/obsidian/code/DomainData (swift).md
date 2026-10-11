@@ -11,29 +11,21 @@ Module : [[Donnees-et-stockage]] · Fichier : [Shared/Data/DomainData.swift](../
 
 **Déclare :** `CompanyTargets`, `DataNeed`, `DataNeeds`, `DomainData`
 
-## Utilise
+## Utilise (même module)
 
 - [[Insights (swift)]]
 - [[PayloadLoader (swift)]]
-- [[WeatherService (swift)]]
-- [[Budget (swift)]]
-- [[Business (swift)]]
-- [[Car (swift)]]
-- [[Companies (swift)]]
-- [[Fitness (swift)]]
-- [[Life (swift)]]
-- [[Nutrition (swift)]]
-- [[Portfolio (swift)]]
-- [[Productivity (swift)]]
-- [[Profile (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
 - [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Business.swift`, `Car.swift`, `Companies.swift`, `Fitness.swift`, `Life.swift`, `Nutrition.swift`, `Portfolio.swift`, `Productivity.swift`, `Profile.swift`, `Student.swift`, `Travel.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group
 
-Utilisé par 12 fichier(s) (voir les rétroliens).
+Utilisé par 12 fichier(s) : `AppModel.swift`, `PayloadLoader.swift`, `SampleData.swift`, `Profile.swift`, `Combo.swift`, `BusinessTiles.swift`, `MoneyTiles.swift`, `NutritionTiles.swift`, `TravelTiles.swift`, `AppearanceAndStoreTests.swift`, `FusionTests.swift`, `ProfileTests.swift`

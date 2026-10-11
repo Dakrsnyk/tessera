@@ -11,31 +11,27 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Screens/Home/DailySection.s
 
 **Déclare :** `DailySection`, `HomeRoute`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
 - [[Agenda (swift)]]
-- [[AppModel (swift)]]
 - [[DailyBrief (swift)]]
 - [[DailyCategories (swift)]]
-- [[DataItems (swift)]]
-- [[Router (swift)]]
-- [[StepCounter (swift)]]
 - [[DailyLayoutEditor (swift)]]
 - [[DailyPager (swift)]]
-- [[MiniApp (swift)]]
-- [[WeatherApp (swift)]]
-- [[WeekViews (swift)]]
-- [[ProfileTopics (swift)]]
-- [[CalendarService (swift)]]
-- [[WeatherService (swift)]]
-- [[Fitness (swift)]]
-- [[Nutrition (swift)]]
-- [[KindCatalog (swift)]]
-- [[RenderComponents (swift)]]
-- [[Tile (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 18 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Autres mini-apps : `WeatherApp.swift`
+- Créer : les espaces : `KindCatalog.swift`
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Nutrition.swift`
+- Données et stockage : `DataItems.swift`
+- Fitness : `StepCounter.swift`
+- Mini-apps : `MiniApp.swift`, `WeekViews.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`
+- Profil et réglages : `ProfileTopics.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `RenderComponents.swift`, `Tile.swift`, `TileFactory.swift`
+
+Utilisé par 18 fichier(s) : `DailyBrief.swift`, `Router.swift`, `HomeView.swift`, `MiniAppsRow.swift`, `MyInfoCenter.swift`, `BusinessApp.swift`, `CarApp.swift`, `FinancesApp.swift`, `ExerciseLibraryViews.swift`, `FitnessApp.swift`, `FitnessPages.swift`, `NutritionApp.swift` …

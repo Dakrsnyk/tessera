@@ -11,22 +11,21 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/TileView.swift]
 
 **Déclare :** `BarsChart`, `HabitGrid`, `LineChart`, `MonthDots`, `ScheduleWeek`, `SegmentsChart`, `SunArc`, `TileAccessoryView`, `TileActionButton`, `TileButtonLabel`, `TileButtonsColumn`, `TileButtonsRow`, `TileHeaderButtonLabel`, `TileRowsView`, `TileView`, `TileVisualView`, `TimerRing`, `WeekStrip`
 
-## Utilise
+## Utilise (même module)
 
-- [[InteractiveIntents (swift)]]
-- [[SpaceIntents (swift)]]
-- [[WidgetStyle (swift)]]
 - [[RenderComponents (swift)]]
 - [[StyleRendering (swift)]]
 - [[Tile (swift)]]
-- [[DateMath (swift)]]
-- [[DeepLink (swift)]]
-- [[Formatting (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Boutons des widgets, activité en direct et liens : `InteractiveIntents.swift`, `SpaceIntents.swift`, `DeepLink.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Studio (éditeur de widgets) : `WidgetStyle.swift`, `Theme.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
-- [[AppIntents]]
+- WidgetKit
+- AppIntents
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `AccessoryViews.swift`, `WidgetCanvas.swift`

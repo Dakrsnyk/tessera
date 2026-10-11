@@ -11,13 +11,13 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Model/WidgetKind.swift](../.
 
 **Déclare :** `WidgetCategory`, `WidgetKind`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[KindCatalog (swift)]]
-- [[NutritionTiles (swift)]]
+- Créer : les espaces : `KindCatalog.swift`
+- Nutrition : `NutritionTiles.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 40 fichier(s) (voir les rétroliens).
+Utilisé par 40 fichier(s) : `AdExport.swift`, `DataItems.swift`, `MarketingShots.swift`, `Router.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `SpaceOptionsSection.swift`, `StudioComponents.swift`, `ExploreView.swift`, `HomeSetups.swift`, `StoreCombos.swift`, `StoreMagazine.swift` …

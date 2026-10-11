@@ -11,16 +11,11 @@ Module : [[Nutrition]] · Fichier : [Shared/Render/Tiles/NutritionTiles.swift](.
 
 **Déclare :** `NutritionTiles`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DomainData (swift)]]
-- [[Nutrition (swift)]]
-- [[Profile (swift)]]
-- [[WidgetKind (swift)]]
-- [[RenderComponents (swift)]]
-- [[Tile (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Domaines métier (Shared/Domains) : `Nutrition.swift`, `Profile.swift`
+- Données et stockage : `DomainData.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`, `RenderComponents.swift`, `Tile.swift`, `TileFactory.swift`
 
-Utilisé par 7 fichier(s) (voir les rétroliens).
+Utilisé par 7 fichier(s) : `NutritionApp.swift`, `NutritionPages.swift`, `NutritionSpace.swift`, `WidgetKind.swift`, `TileFactory.swift`, `WidgetCanvas.swift`, `ProfileTests.swift`

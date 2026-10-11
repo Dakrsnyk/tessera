@@ -11,4 +11,4 @@ Module : [[Outils-partages]] · Fichier : [Shared/Support/Helpers.swift](../../.
 
 **Déclare :** `Stats`
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `Business.swift`, `Companies.swift`, `Nutrition.swift`, `BusinessTiles.swift`, `FitnessTiles.swift`

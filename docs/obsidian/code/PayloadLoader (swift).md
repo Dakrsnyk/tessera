@@ -11,22 +11,23 @@ Module : [[Donnees-et-stockage]] · Fichier : [Shared/Data/PayloadLoader.swift](
 
 **Déclare :** `PayloadLoader`, `SamplePayload`, `WidgetPayload`
 
-## Utilise
+## Utilise (même module)
 
-- [[CalendarService (swift)]]
-- [[CryptoService (swift)]]
 - [[DomainData (swift)]]
 - [[SampleData (swift)]]
-- [[WeatherService (swift)]]
-- [[Content (swift)]]
-- [[Settings (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[DateMath (swift)]]
 - [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`, `Content.swift`
+- Profil et réglages : `Settings.swift`
+- Services externes et frameworks Apple : `CryptoService.swift`, `WeatherService.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group
 
-Utilisé par 32 fichier(s) (voir les rétroliens).
+Utilisé par 32 fichier(s) : `UIComponents.swift`, `AdExport.swift`, `AppModel.swift`, `DataItems.swift`, `MarketingShots.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `PaywallView.swift`, `EditorView.swift`, `StudioComponents.swift`, `StudioPanels.swift`, `HomeSetupViews.swift` …

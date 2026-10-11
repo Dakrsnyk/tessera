@@ -11,4 +11,4 @@ Module : [[Profil-et-reglages]] · Fichier : [App/Core/AppIcons.swift](../../../
 
 **Déclare :** `AppIconChoice`, `AppIconSwitcher`, `QuickActions`, `TesseraAppDelegate`, `TesseraSceneDelegate`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `AppIconPicker.swift`, `TesseraApp.swift`, `AppearanceAndStoreTests.swift`

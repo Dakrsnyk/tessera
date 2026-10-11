@@ -11,14 +11,16 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Screens/Home/DailyLayoutEdi
 
 **Déclare :** `DailyLayoutEditor`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
 - [[DailyBrief (swift)]]
 - [[DailyCategories (swift)]]
-- [[MiniApp (swift)]]
-- [[Settings (swift)]]
-- [[Tile (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Profil et réglages : `Settings.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `Tile.swift`
+
+Utilisé par 1 fichier(s) : `DailySection.swift`

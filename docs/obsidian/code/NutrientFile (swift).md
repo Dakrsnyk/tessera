@@ -11,14 +11,13 @@ Module : [[Donnees-et-stockage]] · Fichier : [App/Core/NutrientFile.swift](../.
 
 **Déclare :** `NutrientFile`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[FoodDatabase (swift)]]
-- [[Nutrition (swift)]]
-- [[Localization (swift)]]
+- Domaines métier (Shared/Domains) : `FoodDatabase.swift`, `Nutrition.swift`
+- Localisation : `Localization.swift`
 
 ## Services et frameworks
 
 - [[Base alimentaire CNF]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `NutritionSpace.swift`

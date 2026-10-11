@@ -39,6 +39,34 @@ Source unique des données de l'app et navigation. `AppModel` (@Observable, @Mai
 - [[Router (swift)]]
 - [[TesseraApp (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 12 fichier(s)
+- [[Profil-et-reglages]] : 9 fichier(s)
+- [[Planning-et-habitudes]] : 6 fichier(s)
+- Données et stockage : 5 fichier(s)
+- Lancement, premier lancement et tutoriel : 4 fichier(s)
+- Premium et abonnements : 4 fichier(s)
+- Studio (éditeur de widgets) : 4 fichier(s)
+- Tests, CI et outils : 4 fichier(s)
+- Créer : les espaces : 3 fichier(s)
+- Services externes et frameworks Apple : 3 fichier(s)
+- Accueil : Mon Quotidien : 2 fichier(s)
+- Boutons des widgets, activité en direct et liens : 2 fichier(s)
+- Store : 2 fichier(s)
+- Finances : 1 fichier(s)
+- Mes widgets : 1 fichier(s)
+- Mini-apps : 1 fichier(s)
+- Nutrition : 1 fichier(s)
+- Outils partagés (Shared/Support) : 1 fichier(s)
+- Widgets : extension et rendu : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 2 fichier(s)
+- [[App Group]] : 1 fichier(s)
+- [[StoreKit]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

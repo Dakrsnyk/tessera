@@ -11,13 +11,11 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Core/Agenda.swift](../../..
 
 **Déclare :** `Agenda`, `AgendaItem`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[AppModel (swift)]]
-- [[CalendarService (swift)]]
-- [[Fitness (swift)]]
-- [[Student (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Domaines métier (Shared/Domains) : `Fitness.swift`, `Student.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Planning, tâches et habitudes : `CalendarService.swift`
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+Utilisé par 6 fichier(s) : `DailySection.swift`, `PlanningApp.swift`, `PlanningPages.swift`, `WeekViews.swift`, `AppearanceAndStoreTests.swift`, `PlanningStudiesTests.swift`

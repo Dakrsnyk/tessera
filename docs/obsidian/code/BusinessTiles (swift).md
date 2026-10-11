@@ -9,16 +9,16 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/Tiles/BusinessTiles.s
 
 **Déclare :** `BusinessTiles`
 
-## Utilise
+## Utilise (même module)
 
-- [[DomainData (swift)]]
-- [[Budget (swift)]]
-- [[Business (swift)]]
-- [[Companies (swift)]]
 - [[RenderComponents (swift)]]
 - [[Tile (swift)]]
 - [[TileFactory (swift)]]
-- [[Formatting (swift)]]
-- [[Helpers (swift)]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Business.swift`, `Companies.swift`
+- Données et stockage : `DomainData.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`, `Helpers.swift`
+
+Utilisé par 1 fichier(s) : `TileFactory.swift`

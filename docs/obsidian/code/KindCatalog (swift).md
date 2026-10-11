@@ -11,12 +11,12 @@ Module : [[Creer-espaces]] · Fichier : [Shared/Model/KindCatalog.swift](../../.
 
 **Déclare :** `KindCatalog`, `KindInfo`, `Space`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[WidgetKind (swift)]]
+- Widgets : extension et rendu : `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 17 fichier(s) (voir les rétroliens).
+Utilisé par 17 fichier(s) : `DailyBrief.swift`, `DataItems.swift`, `Router.swift`, `ScreenshotMode.swift`, `SpaceOptionsSection.swift`, `DailySection.swift`, `MiniApp.swift`, `DataItemViews.swift`, `ProfileView.swift`, `LockScreenCreator.swift`, `SpaceBuilderView.swift`, `SpacesView.swift` …

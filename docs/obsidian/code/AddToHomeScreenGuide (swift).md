@@ -11,8 +11,8 @@ Module : [[Studio-editeur]] · Fichier : [App/Screens/Editor/AddToHomeScreenGuid
 
 **Déclare :** `AddToHomeScreenGuide`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[OnboardingView (swift)]]
+- Lancement, premier lancement et tutoriel : `OnboardingView.swift`
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `ProfileView.swift`, `TesseraApp.swift`

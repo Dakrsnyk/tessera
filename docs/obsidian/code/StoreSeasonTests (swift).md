@@ -11,12 +11,9 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/StoreSeasonTests.swift](../.
 
 **Déclare :** `StoreSeasonTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[HomeSetups (swift)]]
-- [[StoreMagazine (swift)]]
-- [[Packs (swift)]]
-- [[WidgetStyle (swift)]]
-- [[StyleRendering (swift)]]
-- [[DateMath (swift)]]
-- [[Theme (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Store : `HomeSetups.swift`, `StoreMagazine.swift`, `Packs.swift`
+- Studio (éditeur de widgets) : `WidgetStyle.swift`, `Theme.swift`
+- Widgets : extension et rendu : `StyleRendering.swift`

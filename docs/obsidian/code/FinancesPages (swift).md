@@ -11,21 +11,21 @@ Module : [[Finances]] · Fichier : [App/Screens/MiniApps/Finances/FinancesPages.
 
 **Déclare :** `FinancesBillsPage`, `FinancesCategoriesPage`, `FinancesSavingsPage`, `FinancesTransactionsPage`, `FinancesTrendsPage`, `MonthSwitcher`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[PremiumLock (swift)]]
 - [[FinancesApp (swift)]]
-- [[MiniApp (swift)]]
-- [[Budget (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Premium et abonnements : `PremiumLock.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MiniApp.swift`

@@ -11,8 +11,8 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Life.swift](../../../S
 
 **Déclare :** `Holiday`, `HolidayRegion`, `Holidays`, `LifeMath`, `LifeState`, `MoonPhase`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
 
-Utilisé par 11 fichier(s) (voir les rétroliens).
+Utilisé par 11 fichier(s) : `AppModel.swift`, `DataBackup.swift`, `OnboardingView.swift`, `DataItemViews.swift`, `ProfileView.swift`, `TravelCarLifeSpaces.swift`, `DomainData.swift`, `SampleData.swift`, `StoredStates.swift`, `TimeTiles.swift`, `DomainLogicTests.swift`

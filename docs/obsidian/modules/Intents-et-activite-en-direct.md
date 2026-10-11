@@ -37,6 +37,21 @@ Les actions qui changent les données sans ouvrir l'app (App Intents des widgets
 - [[WorkoutLiveActivity (swift)]]
 - [[DeepLink (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 6 fichier(s)
+- [[Profil-et-reglages]] : 2 fichier(s)
+- [[Donnees-et-stockage]] : 1 fichier(s)
+- Planning, tâches et habitudes : 1 fichier(s)
+
+## Services et frameworks
+
+- [[App Group]] : 3 fichier(s)
+- [[AppIntents]] : 3 fichier(s)
+- [[WidgetKit]] : 2 fichier(s)
+- [[ActivityKit]] : 1 fichier(s)
+- [[UserNotifications]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

@@ -11,13 +11,16 @@ Module : [[Premium-et-abonnements]] · Fichier : [App/Premium/PremiumStore.swift
 
 **Déclare :** `PremiumStore`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
 - [[PremiumConfiguration (swift)]]
+
+## Utilise (autres modules)
+
+- Noyau : AppModel et Router : `AppModel.swift`
 
 ## Services et frameworks
 
-- [[StoreKit]]
+- StoreKit
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `PaywallView.swift`, `ProfileView.swift`, `TesseraApp.swift`

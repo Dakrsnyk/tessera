@@ -11,18 +11,17 @@ Module : [[Mes-widgets]] · Fichier : [App/Screens/MyWidgets/FusionViews.swift](
 
 **Déclare :** `FusionOverlay`, `FusionRun`, `FusionSheet`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[EditorView (swift)]]
-- [[PayloadLoader (swift)]]
-- [[Combo (swift)]]
-- [[WidgetDesign (swift)]]
-- [[Formatting (swift)]]
+- Données et stockage : `PayloadLoader.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Store : `Combo.swift`
+- Studio (éditeur de widgets) : `EditorView.swift`, `WidgetDesign.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `MyWidgetsView.swift`

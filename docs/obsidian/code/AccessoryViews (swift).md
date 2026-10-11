@@ -11,20 +11,21 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Render/AccessoryViews.swift]
 
 **Déclare :** `AccessoryWidgetView`
 
-## Utilise
+## Utilise (même module)
 
-- [[CryptoService (swift)]]
-- [[WeatherService (swift)]]
-- [[DesignOptions (swift)]]
 - [[TimeWidgets (swift)]]
 - [[RenderComponents (swift)]]
 - [[TileFactory (swift)]]
 - [[TileView (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Services externes et frameworks Apple : `CryptoService.swift`, `WeatherService.swift`
+- Studio (éditeur de widgets) : `DesignOptions.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `WidgetCanvas.swift`

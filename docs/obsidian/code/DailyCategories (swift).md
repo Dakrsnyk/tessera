@@ -11,13 +11,16 @@ Module : [[Accueil-Mon-Quotidien]] · Fichier : [App/Core/DailyCategories.swift]
 
 **Déclare :** `DailyCategories`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
 - [[DailyBrief (swift)]]
 - [[MiniAppsRow (swift)]]
-- [[MiniApp (swift)]]
-- [[Settings (swift)]]
-- [[Tile (swift)]]
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Mini-apps : `MiniApp.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Profil et réglages : `Settings.swift`
+- Widgets : extension et rendu : `Tile.swift`
+
+Utilisé par 2 fichier(s) : `DailyLayoutEditor.swift`, `DailySection.swift`

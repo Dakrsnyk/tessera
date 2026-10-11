@@ -33,6 +33,22 @@ L'écran de lancement (le logo), les questions du premier lancement et la visite
 - [[Tutorial (swift)]]
 - [[TutorialOverlay (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Studio-editeur]] : 3 fichier(s)
+- [[Domaines-metier]] : 2 fichier(s)
+- [[Noyau-AppModel]] : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Profil et réglages : 2 fichier(s)
+- Données et stockage : 1 fichier(s)
+- Premium et abonnements : 1 fichier(s)
+- Tests, CI et outils : 1 fichier(s)
+- Widgets : extension et rendu : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 2 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

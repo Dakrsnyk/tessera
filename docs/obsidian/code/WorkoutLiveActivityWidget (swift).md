@@ -11,19 +11,18 @@ Module : [[Widgets-extension]] · Fichier : [Widgets/WorkoutLiveActivityWidget.s
 
 **Déclare :** `WorkoutLiveActivityWidget`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[SpaceIntents (swift)]]
-- [[WorkoutLiveActivity (swift)]]
-- [[Content (swift)]]
-- [[SharedStore (swift)]]
-- [[AppStyle (swift)]]
+- Données et stockage : `SharedStore.swift`
+- Boutons des widgets, activité en direct et liens : `SpaceIntents.swift`, `WorkoutLiveActivity.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Profil et réglages : `AppStyle.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 - [[ActivityKit]]
-- [[AppIntents]]
-- [[App Group]]
+- AppIntents
+- App Group
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `TesseraWidgetsBundle.swift`

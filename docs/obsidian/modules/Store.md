@@ -46,6 +46,21 @@ L'onglet Store (Explore) : la sélection de la semaine, des écrans d'accueil co
 - [[Packs (swift)]]
 - [[Templates (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Studio-editeur]] : 4 fichier(s)
+- [[Widgets-extension]] : 4 fichier(s)
+- [[Donnees-et-stockage]] : 2 fichier(s)
+- Noyau : AppModel et Router : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Profil et réglages : 2 fichier(s)
+- Lancement, premier lancement et tutoriel : 1 fichier(s)
+- Premium et abonnements : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 7 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

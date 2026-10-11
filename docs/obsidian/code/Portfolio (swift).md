@@ -11,16 +11,19 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Portfolio.swift](../..
 
 **Déclare :** `AssetKind`, `CoinQuote`, `Holding`, `MarketCache`, `MarketGlobal`, `MarketService`, `PortfolioMath`, `PortfolioState`, `PriceBook`, `StockQuote`
 
-## Utilise
+## Utilise (même module)
 
-- [[WeatherService (swift)]]
 - [[Budget (swift)]]
-- [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
 
 ## Services et frameworks
 
 - [[CoinGecko]]
 - [[Finnhub]]
-- [[App Group]]
+- App Group
 
-Utilisé par 9 fichier(s) (voir les rétroliens).
+Utilisé par 9 fichier(s) : `AppModel.swift`, `DataBackup.swift`, `DataItemViews.swift`, `MoneySpaces.swift`, `DomainData.swift`, `SampleData.swift`, `StoredStates.swift`, `MoneyTiles.swift`, `DesignProvider.swift`

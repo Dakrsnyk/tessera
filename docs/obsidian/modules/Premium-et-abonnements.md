@@ -43,6 +43,23 @@ Achats StoreKit 2 : l'App Store fait foi, le résultat est mis en cache pour l'e
 - [[DebugPremium (swift)]]
 - [[Palette (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Donnees-et-stockage]] : 2 fichier(s)
+- [[Noyau-AppModel]] : 2 fichier(s)
+- [[Onboarding-et-tutoriel]] : 2 fichier(s)
+- Domaines métier (Shared/Domains) : 1 fichier(s)
+- Outils partagés (Shared/Support) : 1 fichier(s)
+- Profil et réglages : 1 fichier(s)
+- Store : 1 fichier(s)
+- Studio (éditeur de widgets) : 1 fichier(s)
+- Widgets : extension et rendu : 1 fichier(s)
+
+## Services et frameworks
+
+- [[StoreKit]] : 2 fichier(s)
+- [[WidgetKit]] : 1 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

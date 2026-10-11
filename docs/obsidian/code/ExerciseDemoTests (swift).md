@@ -11,7 +11,7 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/ExerciseDemoTests.swift](../
 
 **Déclare :** `ExerciseDemoTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[ExerciseDemo (swift)]]
-- [[ExerciseLibrary (swift)]]
+- Domaines métier (Shared/Domains) : `ExerciseLibrary.swift`
+- Fitness : `ExerciseDemo.swift`

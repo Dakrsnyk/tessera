@@ -11,29 +11,27 @@ Module : [[Store]] · Fichier : [App/Screens/Explore/ExploreView.swift](../../..
 
 **Déclare :** `AisleHeader`, `ExploreView`, `FilterChip`, `PackSheet`, `ThemeSwatch`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Router (swift)]]
-- [[EditorView (swift)]]
 - [[HomeSetupViews (swift)]]
 - [[HomeSetups (swift)]]
 - [[StoreCombos (swift)]]
 - [[StoreMagazine (swift)]]
 - [[StoreShowcase (swift)]]
-- [[DataItemViews (swift)]]
 - [[Packs (swift)]]
 - [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetKind (swift)]]
-- [[Formatting (swift)]]
-- [[AppStyle (swift)]]
-- [[Palette (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Noyau : AppModel et Router : `AppModel.swift`, `Router.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Premium et abonnements : `Palette.swift`
+- Profil et réglages : `DataItemViews.swift`, `AppStyle.swift`
+- Studio (éditeur de widgets) : `EditorView.swift`, `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `WidgetKind.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 6 fichier(s) (voir les rétroliens).
+Utilisé par 6 fichier(s) : `EditorView.swift`, `StudioComponents.swift`, `HomeSetupViews.swift`, `StoreMagazine.swift`, `NutritionSpace.swift`, `TesseraApp.swift`

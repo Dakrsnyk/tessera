@@ -11,8 +11,7 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/TravelCarTests.swift](../../
 
 **Déclare :** `TravelCarTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Car (swift)]]
-- [[Travel (swift)]]
-- [[DateMath (swift)]]
+- Domaines métier (Shared/Domains) : `Car.swift`, `Travel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`

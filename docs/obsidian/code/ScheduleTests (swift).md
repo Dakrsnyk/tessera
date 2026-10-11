@@ -11,7 +11,7 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/ScheduleTests.swift](../../.
 
 **Déclare :** `ScheduleTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Student (swift)]]
-- [[DateMath (swift)]]
+- Domaines métier (Shared/Domains) : `Student.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`

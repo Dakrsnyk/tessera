@@ -11,30 +11,21 @@ Module : [[Donnees-et-stockage]] · Fichier : [App/Core/DataBackup.swift](../../
 
 **Déclare :** `BackupDocument`, `DataBackup`
 
-## Utilise
+## Utilise (même module)
 
-- [[StepCounter (swift)]]
-- [[Budget (swift)]]
-- [[Business (swift)]]
-- [[Car (swift)]]
-- [[Companies (swift)]]
-- [[Fitness (swift)]]
-- [[Life (swift)]]
-- [[Nutrition (swift)]]
-- [[Portfolio (swift)]]
-- [[Productivity (swift)]]
-- [[Profile (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
-- [[Content (swift)]]
-- [[Settings (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetStyle (swift)]]
-- [[DateMath (swift)]]
 - [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Business.swift`, `Car.swift`, `Companies.swift`, `Fitness.swift`, `Life.swift`, `Nutrition.swift`, `Portfolio.swift`, `Productivity.swift`, `Profile.swift`, `Student.swift`, `Travel.swift`
+- Fitness : `StepCounter.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Planning, tâches et habitudes : `Content.swift`
+- Profil et réglages : `Settings.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `WidgetStyle.swift`
 
 ## Services et frameworks
 
-- [[App Group]]
+- App Group
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `AppModel.swift`, `ProfileView.swift`, `DataBackupTests.swift`

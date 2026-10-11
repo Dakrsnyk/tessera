@@ -11,11 +11,10 @@ Module : [[Studio-editeur]] · Fichier : [App/Components/StylePicker.swift](../.
 
 **Déclare :** `AppStyleGrid`, `AppStyleSwatch`, `AppearancePicker`, `MiniAppScreen`, `StylePreviewPair`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[Settings (swift)]]
-- [[AppStyle (swift)]]
+- Noyau : AppModel et Router : `AppModel.swift`
+- Profil et réglages : `Settings.swift`, `AppStyle.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `OnboardingView.swift`, `ProfileView.swift`

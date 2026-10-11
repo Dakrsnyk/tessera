@@ -11,15 +11,15 @@ Module : [[Services-externes]] · Fichier : [Shared/Data/WeatherService.swift](.
 
 **Déclare :** `DayForecast`, `HourForecast`, `WeatherCode`, `WeatherError`, `WeatherResult`, `WeatherService`, `WeatherSnapshot`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Settings (swift)]]
-- [[DateMath (swift)]]
-- [[SharedStore (swift)]]
+- Données et stockage : `SharedStore.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Profil et réglages : `Settings.swift`
 
 ## Services et frameworks
 
 - [[Open-Meteo]]
-- [[App Group]]
+- App Group
 
-Utilisé par 20 fichier(s) (voir les rétroliens).
+Utilisé par 20 fichier(s) : `AppModel.swift`, `DailyBrief.swift`, `DailySection.swift`, `TravelApp.swift`, `WeatherApp.swift`, `CryptoService.swift`, `DomainData.swift`, `PayloadLoader.swift`, `SampleData.swift`, `Companies.swift`, `FoodDatabase.swift`, `Portfolio.swift` …

@@ -11,21 +11,22 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/MiniApps/Car/CarApp.swif
 
 **Déclare :** `Car`, `CarAppView`, `CarSettingsEditor`, `CarSheet`, `ServiceStatusRow`
 
-## Utilise
+## Utilise (même module)
 
-- [[AppModel (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[MiniAppSettings (swift)]]
-- [[SpaceForms (swift)]]
 - [[TravelCarLifeSpaces (swift)]]
-- [[Car (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Créer : les espaces : `SpaceForms.swift`
+- Domaines métier (Shared/Domains) : `Car.swift`
+- Mini-apps : `MiniApp.swift`, `MiniAppSettings.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Widgets : extension et rendu : `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `CarPages.swift`, `MiniApp.swift`

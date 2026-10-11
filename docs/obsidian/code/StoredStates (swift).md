@@ -7,7 +7,7 @@ source: Shared/Domains/StoredStates.swift
 
 Module : [[Domaines-metier]] · Fichier : [Shared/Domains/StoredStates.swift](../../../Shared/Domains/StoredStates.swift) · 15 lignes
 
-## Utilise
+## Utilise (même module)
 
 - [[Budget (swift)]]
 - [[Business (swift)]]
@@ -20,4 +20,7 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/StoredStates.swift](..
 - [[Productivity (swift)]]
 - [[Student (swift)]]
 - [[Travel (swift)]]
-- [[SharedStore (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `SharedStore.swift`

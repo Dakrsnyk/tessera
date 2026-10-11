@@ -11,23 +11,20 @@ Module : [[Autres-mini-apps]] · Fichier : [App/Screens/MiniApps/Weather/Weather
 
 **Déclare :** `DayRow`, `WeatherAppView`, `WeatherGlyph`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[WeatherLocationView (swift)]]
-- [[DailySection (swift)]]
-- [[MiniApp (swift)]]
-- [[MiniAppSettings (swift)]]
-- [[WeatherService (swift)]]
-- [[Travel (swift)]]
-- [[Settings (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[Formatting (swift)]]
+- Accueil : Mon Quotidien : `DailySection.swift`
+- Domaines métier (Shared/Domains) : `Travel.swift`
+- Mini-apps : `MiniApp.swift`, `MiniAppSettings.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`, `Formatting.swift`
+- Planning, tâches et habitudes : `WeatherLocationView.swift`
+- Profil et réglages : `Settings.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[Swift Charts]]
+- Swift Charts
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `DailySection.swift`, `MiniApp.swift`, `TravelApp.swift`

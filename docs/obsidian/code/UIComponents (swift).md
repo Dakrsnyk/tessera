@@ -11,16 +11,18 @@ Module : [[Widgets-extension]] · Fichier : [App/Components/UIComponents.swift](
 
 **Déclare :** `CardBackground`, `DesignCard`, `EmptyStateView`, `EqualHeightRow`, `Haptics`, `InteractiveBadge`, `PremiumBadge`, `SectionHeader`, `TemplateCard`, `WidgetMetrics`, `WidgetPreview`
 
-## Utilise
+## Utilise (même module)
 
-- [[PayloadLoader (swift)]]
-- [[Templates (swift)]]
-- [[WidgetDesign (swift)]]
 - [[WidgetCanvas (swift)]]
-- [[Theme (swift)]]
+
+## Utilise (autres modules)
+
+- Données et stockage : `PayloadLoader.swift`
+- Store : `Templates.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `Theme.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit
 
-Utilisé par 57 fichier(s) (voir les rétroliens).
+Utilisé par 57 fichier(s) : `SaveFlight.swift`, `StylePicker.swift`, `AdExport.swift`, `MarketingShots.swift`, `ScreenshotMode.swift`, `StudioGallery.swift`, `PaywallView.swift`, `HabitsView.swift`, `HydrationView.swift`, `TasksView.swift`, `WeatherLocationView.swift`, `EditorView.swift` …

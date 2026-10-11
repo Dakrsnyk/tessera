@@ -11,15 +11,18 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/FoodDatabase.swift](..
 
 **Déclare :** `FoodCategory`, `FoodDatabase`, `OpenFoodFacts`
 
-## Utilise
+## Utilise (même module)
 
-- [[WeatherService (swift)]]
 - [[Companies (swift)]]
 - [[Nutrition (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
 
 ## Services et frameworks
 
 - [[Open Food Facts]]
 
-Utilisé par 10 fichier(s) (voir les rétroliens).
+Utilisé par 10 fichier(s) : `NutrientFile.swift`, `NutritionSpace.swift`, `SampleData.swift`, `ExerciseLibrary.swift`, `Nutrition.swift`, `SpaceIntents.swift`, `DailyBriefTests.swift`, `DomainLogicTests.swift`, `NutritionAppTests.swift`, `SmartRemindersTests.swift`

@@ -45,6 +45,27 @@ L'onglet Créer : chaque espace est l'endroit où l'on saisit les données d'une
 - [[StudentSpace (swift)]]
 - [[KindCatalog (swift)]]
 
+## Dépend de (mesuré dans le code)
+
+- [[Domaines-metier]] : 6 fichier(s)
+- [[Planning-et-habitudes]] : 4 fichier(s)
+- [[Store]] : 4 fichier(s)
+- Studio (éditeur de widgets) : 4 fichier(s)
+- Widgets : extension et rendu : 3 fichier(s)
+- Autres mini-apps : 2 fichier(s)
+- Noyau : AppModel et Router : 2 fichier(s)
+- Outils partagés (Shared/Support) : 2 fichier(s)
+- Profil et réglages : 2 fichier(s)
+- Données et stockage : 1 fichier(s)
+- Finances : 1 fichier(s)
+- Fitness : 1 fichier(s)
+- Boutons des widgets, activité en direct et liens : 1 fichier(s)
+- Nutrition : 1 fichier(s)
+
+## Services et frameworks
+
+- [[WidgetKit]] : 5 fichier(s)
+
 Partie de [[Ardane]].
 
 > À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).

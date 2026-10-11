@@ -11,12 +11,12 @@ Module : [[Services-externes]] · Fichier : [App/Services/LocationService.swift]
 
 **Déclare :** `LocationError`, `LocationService`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Settings (swift)]]
+- Profil et réglages : `Settings.swift`
 
 ## Services et frameworks
 
 - [[CoreLocation]]
 
-Utilisé par 1 fichier(s) (voir les rétroliens).
+Utilisé par 1 fichier(s) : `WeatherLocationView.swift`

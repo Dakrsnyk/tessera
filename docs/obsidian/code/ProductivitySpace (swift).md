@@ -9,16 +9,17 @@ Module : [[Creer-espaces]] · Fichier : [App/Screens/Spaces/ProductivitySpace.sw
 
 **Déclare :** `CounterEditor`, `DeadlineEditor`, `HabitsSpaceSections`, `ProductivitySpaceSections`, `ProjectEditor`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[HabitsView (swift)]]
-- [[HydrationView (swift)]]
-- [[TasksView (swift)]]
 - [[SpaceForms (swift)]]
 - [[SpaceSheets (swift)]]
-- [[Productivity (swift)]]
-- [[Formatting (swift)]]
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+## Utilise (autres modules)
+
+- Domaines métier (Shared/Domains) : `Productivity.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Planning, tâches et habitudes : `HabitsView.swift`, `HydrationView.swift`, `TasksView.swift`
+- Widgets : extension et rendu : `UIComponents.swift`
+
+Utilisé par 3 fichier(s) : `PlanningPages.swift`, `DataItemViews.swift`, `SpacesView.swift`

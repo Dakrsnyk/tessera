@@ -11,31 +11,17 @@ Module : [[Tests-CI-et-outils]] · Fichier : [Tests/DomainLogicTests.swift](../.
 
 **Déclare :** `DomainLogicTests`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Insights (swift)]]
-- [[PayloadLoader (swift)]]
-- [[Budget (swift)]]
-- [[Business (swift)]]
-- [[Car (swift)]]
-- [[Fitness (swift)]]
-- [[FoodDatabase (swift)]]
-- [[Life (swift)]]
-- [[Nutrition (swift)]]
-- [[Productivity (swift)]]
-- [[Student (swift)]]
-- [[Travel (swift)]]
-- [[Settings (swift)]]
-- [[WidgetDesign (swift)]]
-- [[WidgetGroup (swift)]]
-- [[WidgetKind (swift)]]
-- [[RenderComponents (swift)]]
-- [[TileFactory (swift)]]
-- [[DateMath (swift)]]
-- [[DebugPremium (swift)]]
-- [[DeepLink (swift)]]
-- [[Theme (swift)]]
+- Domaines métier (Shared/Domains) : `Budget.swift`, `Business.swift`, `Car.swift`, `Fitness.swift`, `FoodDatabase.swift`, `Life.swift`, `Nutrition.swift`, `Productivity.swift`, `Student.swift`, `Travel.swift`
+- Données et stockage : `Insights.swift`, `PayloadLoader.swift`
+- Boutons des widgets, activité en direct et liens : `DeepLink.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Premium et abonnements : `DebugPremium.swift`
+- Profil et réglages : `Settings.swift`
+- Studio (éditeur de widgets) : `WidgetDesign.swift`, `Theme.swift`
+- Widgets : extension et rendu : `WidgetGroup.swift`, `WidgetKind.swift`, `RenderComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
-- [[WidgetKit]]
+- WidgetKit

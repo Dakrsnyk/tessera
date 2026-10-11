@@ -11,8 +11,8 @@ Module : [[Premium-et-abonnements]] · Fichier : [App/Premium/PremiumConfigurati
 
 **Déclare :** `PremiumConfiguration`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Companies (swift)]]
+- Domaines métier (Shared/Domains) : `Companies.swift`
 
-Utilisé par 3 fichier(s) (voir les rétroliens).
+Utilisé par 3 fichier(s) : `PaywallView.swift`, `PremiumStore.swift`, `ProfileView.swift`

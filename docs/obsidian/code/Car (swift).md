@@ -11,8 +11,8 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Car.swift](../../../Sh
 
 **Déclare :** `CarDeadline`, `CarMath`, `CarState`, `FuelFill`, `OdometerReading`, `ServiceItem`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[DateMath (swift)]]
+- Outils partagés (Shared/Support) : `DateMath.swift`
 
-Utilisé par 18 fichier(s) (voir les rétroliens).
+Utilisé par 18 fichier(s) : `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `ScreenshotMode.swift`, `MiniAppsRow.swift`, `MyInfoSection.swift`, `CarApp.swift`, `CarPages.swift`, `DataItemViews.swift`, `SpacesView.swift`, `TravelCarLifeSpaces.swift`, `DomainData.swift` …

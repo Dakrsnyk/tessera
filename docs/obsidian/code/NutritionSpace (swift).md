@@ -11,23 +11,22 @@ Module : [[Nutrition]] · Fichier : [App/Screens/Spaces/NutritionSpace.swift](..
 
 **Déclare :** `BarcodeScannerView`, `CustomFoodEditor`, `FoodLogSheet`, `FoodSearchView`, `FoodText`, `NutritionGoalsEditor`, `NutritionSpaceSections`, `SavedMealLogSheet`, `ScanFrameScreenshot`, `ScanFrameScreenshotStage`
 
-## Utilise
+## Utilise (même module)
 
-- [[UIComponents (swift)]]
-- [[AppModel (swift)]]
-- [[NutrientFile (swift)]]
-- [[ExploreView (swift)]]
-- [[SpaceForms (swift)]]
-- [[SpaceSheets (swift)]]
-- [[FoodDatabase (swift)]]
-- [[Nutrition (swift)]]
-- [[Profile (swift)]]
 - [[NutritionTiles (swift)]]
-- [[TileFactory (swift)]]
-- [[Formatting (swift)]]
+
+## Utilise (autres modules)
+
+- Créer : les espaces : `SpaceForms.swift`, `SpaceSheets.swift`
+- Domaines métier (Shared/Domains) : `FoodDatabase.swift`, `Nutrition.swift`, `Profile.swift`
+- Données et stockage : `NutrientFile.swift`
+- Noyau : AppModel et Router : `AppModel.swift`
+- Outils partagés (Shared/Support) : `Formatting.swift`
+- Store : `ExploreView.swift`
+- Widgets : extension et rendu : `UIComponents.swift`, `TileFactory.swift`
 
 ## Services et frameworks
 
 - [[VisionKit]]
 
-Utilisé par 5 fichier(s) (voir les rétroliens).
+Utilisé par 5 fichier(s) : `NutritionApp.swift`, `NutritionPages.swift`, `DataItemViews.swift`, `SpacesView.swift`, `TesseraApp.swift`

@@ -11,16 +11,16 @@ Module : [[Domaines-metier]] · Fichier : [Shared/Domains/Travel.swift](../../..
 
 **Déclare :** `ChecklistItem`, `FXCache`, `FXRates`, `FXService`, `Flight`, `Stay`, `TravelMath`, `TravelState`, `Trip`, `TripActivity`, `TripExpense`, `TripExpenseKind`, `TripWeatherService`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[WeatherService (swift)]]
-- [[Settings (swift)]]
-- [[DateMath (swift)]]
-- [[SharedStore (swift)]]
+- Données et stockage : `SharedStore.swift`
+- Outils partagés (Shared/Support) : `DateMath.swift`
+- Profil et réglages : `Settings.swift`
+- Services externes et frameworks Apple : `WeatherService.swift`
 
 ## Services et frameworks
 
 - [[Frankfurter]]
-- [[App Group]]
+- App Group
 
-Utilisé par 18 fichier(s) (voir les rétroliens).
+Utilisé par 18 fichier(s) : `AppModel.swift`, `DailyBrief.swift`, `DataBackup.swift`, `ScreenshotMode.swift`, `MiniAppsRow.swift`, `TravelApp.swift`, `TravelPages.swift`, `WeatherApp.swift`, `DataItemViews.swift`, `SpacesView.swift`, `TravelCarLifeSpaces.swift`, `DomainData.swift` …

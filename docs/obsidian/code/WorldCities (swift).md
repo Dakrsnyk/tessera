@@ -11,8 +11,8 @@ Module : [[Widgets-extension]] · Fichier : [Shared/Model/WorldCities.swift](../
 
 **Déclare :** `WorldCities`, `WorldCity`
 
-## Utilise
+## Utilise (autres modules)
 
-- [[Formatting (swift)]]
+- Outils partagés (Shared/Support) : `Formatting.swift`
 
-Utilisé par 2 fichier(s) (voir les rétroliens).
+Utilisé par 2 fichier(s) : `KindOptionsSection.swift`, `TimeWidgets.swift`

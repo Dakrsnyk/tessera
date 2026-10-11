@@ -290,7 +290,7 @@ def rel_from(folder, path):
     return os.path.relpath(os.path.join(ROOT, path), folder).replace(os.sep, "/")
 
 
-def write_note(m, files=()):
+def write_note(m, files=(), deps=None, services=None):
     zone_label = ZONES[m["zone"]][0]
     lines = ["---", f"tags: [ardane, module, zone/{m['zone']}]", "---", "", f"# {m['title']}", "", f"Zone : **{zone_label}** · Cartes : [[Vue-Globale.canvas|Vue globale]] · "
              "[[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]", "", m["role"], "", "## Ce qui existe (vérifié dans le code)", ""]
@@ -302,6 +302,15 @@ def write_note(m, files=()):
         lines.append(f"- [[{target}]]" + (f" : {text}" if text else ""))
     if files:
         lines += ["", f"## Fichiers du module ({len(files)})", ""] + [f"- [[{code_note_name(p)}]]" for p in files]
+    if deps:
+        # Measured in the code: how many of the other module's files this module's files use.
+        lines += ["", "## Dépend de (mesuré dans le code)", ""]
+        # The three strongest are links (the graph stays readable), the others plain text.
+        ranked = sorted(deps.items(), key=lambda kv: (-len(kv[1]), kv[0]))
+        lines += [(f"- [[{other}]]" if i < 3 else f"- {BY_FILE[other]['title']}") + f" : {len(used)} fichier(s)" for i, (other, used) in enumerate(ranked)]
+    if services:
+        lines += ["", "## Services et frameworks", ""]
+        lines += [f"- [[{name}]] : {len(users)} fichier(s)" for name, users in sorted(services.items(), key=lambda kv: (-len(kv[1]), kv[0]))]
     lines += ["", "Partie de [[Ardane]]."]
     lines += ["", "> À mettre à jour quand ce module change (voir `CLAUDE.md` et `scripts/obsidian_map.py`).", ""]
     open(os.path.join(NOTES, m["file"] + ".md"), "w").write("\n".join(lines))
@@ -724,32 +733,51 @@ def code_graph():
         for t in targets:
             used_by.setdefault(t, []).append(p)
         external[p] = [name for name, _, _, pattern in EXTERNAL if re.search(pattern, raw[p], re.M)]
+    modules = {p: module_of(p) for p in files}
+    # Graph shape: each module is a star (its files link to it and to each other); a dependency on another
+    # module's file stays in the note as text, and the modules link to each other and to their services.
+    # Linking every file to every file it uses (~1 600 links, half of them to tr(), Fmt, Color(hex:)…)
+    # drew one tangle instead of clusters.
+    service_users = {name: [p for p in files if name in external[p]] for name, _, _, _ in EXTERNAL}
     os.makedirs(CODE, exist_ok=True)
     os.makedirs(SERVICES_DIR, exist_ok=True)
     for old in os.listdir(CODE):
         os.remove(os.path.join(CODE, old))
-    by_module = {}
+    by_module, module_deps, module_services, link_count = {}, {}, {}, 0
     for p in files:
-        mod = module_of(p)
+        mod = modules[p]
         by_module.setdefault(mod, []).append(p)
         zone = BY_FILE[mod]["zone"]
         doc = next((re.sub(r"^\s*///\s?", "", l) for l in raw[p].splitlines() if l.strip().startswith("///")), "")
         types = sorted(n for n, f in declared.items() if f == p)
+        inside = [t for t in uses[p] if modules[t] == mod]
+        outside = [t for t in uses[p] if modules[t] != mod]
+        for t in outside:
+            module_deps.setdefault(mod, {}).setdefault(modules[t], set()).add(t)
+        for e in external[p]:
+            module_services.setdefault(mod, {}).setdefault(e, []).append(p)
         lines = ["---", f"tags: [ardane, code, zone/{zone}]", f"source: {p}", "---", "",
                  f"# {os.path.basename(p)}", "", f"Module : [[{mod}]] · Fichier : [{p}]({rel_from(CODE, p)}) · {raw[p].count(chr(10))} lignes", ""]
         if doc:
             lines += [f"> {doc}", ""]
         if types:
             lines += ["**Déclare :** " + ", ".join(f"`{t}`" for t in types), ""]
-        if uses[p]:
-            lines += ["## Utilise", ""] + [f"- [[{code_note_name(t)}]]" for t in uses[p]] + [""]
+        if inside:
+            lines += ["## Utilise (même module)", ""] + [f"- [[{code_note_name(t)}]]" for t in inside] + [""]
+            link_count += len(inside)
+        if outside:
+            lines += ["## Utilise (autres modules)", ""]
+            for other in sorted({modules[t] for t in outside}):
+                lines.append(f"- {BY_FILE[other]['title']} : " + ", ".join(f"`{os.path.basename(t)}`" for t in outside if modules[t] == other))
+            lines.append("")
         if external[p]:
-            lines += ["## Services et frameworks", ""] + [f"- [[{e}]]" for e in external[p]] + [""]
+            # A service few files use links from them; WidgetKit, the App Group… link from the modules.
+            lines += ["## Services et frameworks", ""] + [f"- [[{e}]]" if len(service_users[e]) <= 3 else f"- {e}" for e in external[p]] + [""]
         if used_by.get(p):
-            lines += [f"Utilisé par {len(used_by[p])} fichier(s) (voir les rétroliens).", ""]
+            lines += [f"Utilisé par {len(used_by[p])} fichier(s) : " + ", ".join(f"`{os.path.basename(u)}`" for u in used_by[p][:12]) + (" …" if len(used_by[p]) > 12 else ""), ""]
         open(os.path.join(CODE, code_note_name(p) + ".md"), "w").write("\n".join(lines))
     for name, kind, what, _ in EXTERNAL:
-        users = [p for p in files if name in external[p]]
+        users = service_users[name]
         label = {"api": "API web", "framework": "Framework Apple", "data": "Données"}[kind]
         lines = ["---", f"tags: [ardane, service, service/{kind}]", "---", "", f"# {name}", "", f"{label} · [[Services-externes]] · [[Ardane]]", "", what, "",
                  f"Utilisé par {len(users)} fichier(s) : voir les rétroliens."]
@@ -761,7 +789,7 @@ def code_graph():
         if mods:
             hub += [f"## {label}", ""] + [f"- [[{m['file']}]]" for m in mods] + [""]
     open(os.path.join(OUT, "Ardane.md"), "w").write("\n".join(hub))
-    return by_module, sum(len(v) for v in uses.values())
+    return by_module, module_deps, module_services, link_count
 
 
 # --- README ----------------------------------------------------------------------------------------
@@ -788,13 +816,13 @@ def readme():
         lines += [f"- [[{m['file']}|{m['title']}]] ([fichier](modules/{m['file']}.md))" for m in zones[z]]
         lines.append("")
     lines += ["## Vue graphique (le réseau d'étoiles)", "",
-              "Chaque fichier du code a sa note dans `code/` (ce qu'il déclare, ce qu'il utilise, ses services), chaque service ou framework dans `services/`, et [[Ardane]] est le centre. Les liens viennent du code : la vue graphique dessine les vraies dépendances.", "",
+              "Chaque fichier du code a sa note dans `code/` (ce qu'il déclare, ce qu'il utilise, ses services), chaque service ou framework dans `services/`, et [[Ardane]] est le centre. Chaque module est une étoile : ses fichiers sont reliés à lui et entre eux ; les modules sont reliés à leurs trois plus fortes dépendances (mesurées dans le code) et à leurs services. Les dépendances vers les fichiers d'autres modules restent écrites dans chaque note, sans lien, pour garder des grappes lisibles.", "",
               "1. Ouvrir la vue graphique : icône « Vue graphique » dans la barre de gauche (ou Ctrl+G).",
-              "2. Roue dentée en haut à droite du graphe → **Filtres** → dans la recherche, taper `path:docs/obsidian` (seulement la carte).",
+              "2. Roue dentée en haut à droite du graphe → **Filtres** → dans la recherche, taper `tag:#ardane` (seulement les notes de la carte, sans le guide ni les canvas).",
               "3. **Groupes** → « Nouveau groupe » six fois, avec ces requêtes et une couleur chacune :",
               "   - `tag:#zone/interface` (cyan) · `tag:#zone/metier` (vert) · `tag:#zone/donnees` (jaune)",
               "   - `tag:#zone/ios` (violet) · `tag:#zone/outils` (gris) · `tag:#service` (orange)",
-              "4. **Affichage** : activer « Flèches », taille des nœuds un peu plus grande ; **Forces** : augmenter « Répulsion » pour séparer les grappes.",
+              "4. **Forces** : force centrale ≈ 0,3 · répulsion ≈ 15 · force des liens ≈ 0,6 · distance des liens ≈ 120. **Affichage** : « Flèches » activé, taille des nœuds ≈ 1,5, seuil d'estompage du texte vers la gauche pour voir les noms des modules.",
               "5. Clic sur un point : ouvre la note ; survol : allume ses liens. Les gros points (AppModel, SharedStore, WidgetDesign…) sont les fichiers dont tout dépend.", "",
               "## Couleurs", "",
               "Cyan : interface · Vert : logique métier · Jaune : données · Violet : widgets et iOS · Orange : services externes · Gris : outillage.", "",
@@ -866,10 +894,10 @@ def check():
 if __name__ == "__main__":
     if "--check" not in sys.argv:
         os.makedirs(NOTES, exist_ok=True)
-        by_module, link_count = code_graph()
+        by_module, module_deps, module_services, link_count = code_graph()
         for m in MODULES:
-            write_note(m, by_module.get(m["file"], []))
-        print(f"vue graphique : {sum(len(v) for v in by_module.values())} notes de code, {link_count} liens de dépendance")
+            write_note(m, by_module.get(m["file"], []), module_deps.get(m["file"]), module_services.get(m["file"]))
+        print(f"vue graphique : {sum(len(v) for v in by_module.values())} notes de code, {link_count} liens dans les modules")
         vue_globale()
         architecture()
         fonctionnalites()
