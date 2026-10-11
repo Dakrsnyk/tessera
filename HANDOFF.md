@@ -45,6 +45,10 @@ Fait :
 - Rappels intelligents : `SmartReminders` (Shared) planifie 7 jours (séance prévue non commencée à 18 h, aucun repas noté à 20 h si on note ses repas, facture la veille à 9 h), replanifiés après chaque changement (`AppModel.syncReminders`, boutons des widgets). Réglages : Profil › Rappels intelligents, et « Mes paramètres » de Fitness/Nutrition/Finances. Actifs par défaut, mais rien ne part sans autorisation.
 - Note : plus jamais à l'ouverture ; après un bon moment (`AppModel.celebrate` : séance enregistrée, objectif calorique atteint, objectif d'épargne atteint, widget créé), dès 5 ouvertures, une fois par version majeure, écran calme (`RootView`).
 
+## Vidéos pub (2026-10-11)
+- `[video]` filme les scènes de `UITests/PromoVideoUITests.swift` et rend les pièces de `scripts/ad_assets.txt` ; montage dans `scripts/ads/` (README) : 5 films 9:16 (principal 40 s, 15 s, 8 s, Fitness, Nutrition), musique et bruitages synthétisés, kit PDF.
+- Run 158 : Lancement (animation non filmée), Planning (2 s utiles), « Série faite » dans Fitness et les thèmes du Studio (identifiants `theme-*` introuvables) sont à refaire avant un nouveau passage.
+
 ## Outils
 - Hook `.git/hooks/pre-commit` : check_swift.py + `l10n_catalog.py sync` (bloque un texte non traduit).
 - `bash scripts/ci_report.sh [run]` : attend la CI et n'affiche que statuts, tests échoués, erreurs, l10n.
