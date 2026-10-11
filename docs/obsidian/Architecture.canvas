@@ -1,0 +1,476 @@
+{
+	"nodes": [
+		{
+			"id": "g-l-ci",
+			"type": "group",
+			"x": -1100,
+			"y": 600,
+			"width": 1920,
+			"height": 360,
+			"label": "Construction, tests, qualité"
+		},
+		{
+			"id": "g-l-svc",
+			"type": "group",
+			"x": 1100,
+			"y": 520,
+			"width": 560,
+			"height": 590,
+			"label": "Services externes",
+			"color": "2"
+		},
+		{
+			"id": "g-l-ext",
+			"type": "group",
+			"x": 1100,
+			"y": -760,
+			"width": 560,
+			"height": 1170,
+			"label": "Extension WidgetKit (cible TesseraWidgets)",
+			"color": "6"
+		},
+		{
+			"id": "g-l-data",
+			"type": "group",
+			"x": -1100,
+			"y": 140,
+			"width": 2060,
+			"height": 400,
+			"label": "4. Persistance et ressources",
+			"color": "3"
+		},
+		{
+			"id": "g-l-shared",
+			"type": "group",
+			"x": -1100,
+			"y": -320,
+			"width": 2060,
+			"height": 400,
+			"label": "3. Code partagé app + extension (Shared/)",
+			"color": "4"
+		},
+		{
+			"id": "g-l-state",
+			"type": "group",
+			"x": -1100,
+			"y": -760,
+			"width": 2060,
+			"height": 390,
+			"label": "2. État, navigation, achats (App/Core, App/Premium)",
+			"color": "4"
+		},
+		{
+			"id": "g-l-ui",
+			"type": "group",
+			"x": -1100,
+			"y": -1180,
+			"width": 2060,
+			"height": 360,
+			"label": "1. Interface — SwiftUI (cible Tessera)",
+			"color": "5"
+		},
+		{
+			"id": "titre",
+			"type": "text",
+			"x": -400,
+			"y": -1450,
+			"width": 800,
+			"height": 160,
+			"text": "# Architecture technique\nCouches de l'app, cibles Xcode et dépendances (vérifiées dans le code).\n[[Vue-Globale.canvas|← Vue globale]] · [[docs/obsidian/README|Guide]]",
+			"color": "6"
+		},
+		{
+			"id": "app-entry",
+			"type": "text",
+			"x": -1050,
+			"y": -1100,
+			"width": 460,
+			"height": 230,
+			"text": "### Point d'entrée\n`TesseraApp` → `RootView` (lancement, onglets, feuilles, `onOpenURL`)\n- [TesseraApp.swift](../../App/TesseraApp.swift)"
+		},
+		{
+			"id": "tabs",
+			"type": "text",
+			"x": -550,
+			"y": -1100,
+			"width": 460,
+			"height": 230,
+			"text": "### Onglets\nAccueil · Créer · Store · Mes widgets\n[[Accueil-Mon-Quotidien]] · [[Creer-espaces]] · [[Store]] · [[Mes-widgets]]"
+		},
+		{
+			"id": "screens",
+			"type": "text",
+			"x": -50,
+			"y": -1100,
+			"width": 460,
+			"height": 230,
+			"text": "### Écrans\nMini-apps, Studio, Profil, Premium, tutoriel\n[[Mini-apps]] · [[Studio-editeur]] · [[Profil-et-reglages]] · [[Premium-et-abonnements]]"
+		},
+		{
+			"id": "components",
+			"type": "text",
+			"x": 450,
+			"y": -1100,
+			"width": 460,
+			"height": 230,
+			"text": "### Composants\nAperçus de widgets à taille réelle, sélecteur de style\n- [UIComponents.swift](../../App/Components/UIComponents.swift)\n- [StylePicker.swift](../../App/Components/StylePicker.swift)"
+		},
+		{
+			"id": "appmodel",
+			"type": "text",
+			"x": -1050,
+			"y": -680,
+			"width": 460,
+			"height": 260,
+			"text": "### AppModel\n@Observable, @MainActor : source unique, écrit tout, recharge les widgets, caches réseau\n[[Noyau-AppModel]]\n- [AppModel.swift](../../App/Core/AppModel.swift)"
+		},
+		{
+			"id": "router",
+			"type": "text",
+			"x": -550,
+			"y": -680,
+			"width": 460,
+			"height": 260,
+			"text": "### Router\nOnglet, feuilles, Studio, paywall, liens `tessera://`\n- [Router.swift](../../App/Core/Router.swift)\n- [DeepLink.swift](../../Shared/Support/DeepLink.swift)"
+		},
+		{
+			"id": "premiumstore",
+			"type": "text",
+			"x": -50,
+			"y": -680,
+			"width": 460,
+			"height": 260,
+			"text": "### PremiumStore\nStoreKit 2, droits en cache pour l'extension\n[[Premium-et-abonnements]]\n- [PremiumStore.swift](../../App/Premium/PremiumStore.swift)"
+		},
+		{
+			"id": "daily",
+			"type": "text",
+			"x": 450,
+			"y": -680,
+			"width": 460,
+			"height": 260,
+			"text": "### Mon Quotidien et analyses\nBrief du jour, agenda, analyses écrites depuis les données\n- [DailyBrief.swift](../../App/Core/DailyBrief.swift)\n- [Insights.swift](../../Shared/Data/Insights.swift)"
+		},
+		{
+			"id": "domains",
+			"type": "text",
+			"x": -1050,
+			"y": -240,
+			"width": 460,
+			"height": 270,
+			"text": "### Domaines\n11 états métier + profil\n[[Domaines-metier]]\n- [Nutrition.swift](../../Shared/Domains/Nutrition.swift)\n- [Fitness.swift](../../Shared/Domains/Fitness.swift)\n- [Budget.swift](../../Shared/Domains/Budget.swift)"
+		},
+		{
+			"id": "models",
+			"type": "text",
+			"x": -550,
+			"y": -240,
+			"width": 460,
+			"height": 270,
+			"text": "### Modèle de widget\n`WidgetDesign`, `WidgetKind` (103), styles (57), palettes, packs, modèles\n- [WidgetDesign.swift](../../Shared/Model/WidgetDesign.swift)\n- [WidgetKind.swift](../../Shared/Model/WidgetKind.swift)\n- [WidgetStyle.swift](../../Shared/Model/WidgetStyle.swift)"
+		},
+		{
+			"id": "render",
+			"type": "text",
+			"x": -50,
+			"y": -240,
+			"width": 460,
+			"height": 270,
+			"text": "### Rendu partagé\n`WidgetCanvas`, tuiles, écran verrouillé, thèmes\n[[Widgets-extension]]\n- [WidgetCanvas.swift](../../Shared/Render/WidgetCanvas.swift)\n- [Theme.swift](../../Shared/Theme/Theme.swift)"
+		},
+		{
+			"id": "support",
+			"type": "text",
+			"x": 450,
+			"y": -240,
+			"width": 460,
+			"height": 270,
+			"text": "### Support\nFormats, dates, couleurs, `tr()`, rappels\n[[Localisation]]\n- [Localization.swift](../../Shared/Support/Localization.swift)\n- [SmartReminders.swift](../../Shared/Support/SmartReminders.swift)"
+		},
+		{
+			"id": "sharedstore",
+			"type": "text",
+			"x": -1050,
+			"y": 220,
+			"width": 460,
+			"height": 270,
+			"text": "### SharedStore\nJSON par domaine dans l'App Group `group.com.dakrsnyk.tessera`, dossier `Tessera/`\n[[Donnees-et-stockage]]\n- [SharedStore.swift](../../Shared/Support/SharedStore.swift)"
+		},
+		{
+			"id": "payload",
+			"type": "text",
+			"x": -550,
+			"y": 220,
+			"width": 460,
+			"height": 270,
+			"text": "### Données des widgets\n`PayloadLoader`, `DataNeeds`, `DomainData`, `SampleData`\n- [PayloadLoader.swift](../../Shared/Data/PayloadLoader.swift)\n- [DomainData.swift](../../Shared/Data/DomainData.swift)"
+		},
+		{
+			"id": "backup",
+			"type": "text",
+			"x": -50,
+			"y": 220,
+			"width": 460,
+			"height": 270,
+			"text": "### Sauvegarde\nUn fichier qui contient tout ; import des sauvegardes Tessera\n- [DataBackup.swift](../../App/Core/DataBackup.swift)"
+		},
+		{
+			"id": "resources",
+			"type": "text",
+			"x": 450,
+			"y": 220,
+			"width": 460,
+			"height": 270,
+			"text": "### Ressources\nCNF, démos d'exercices, StoreKit, entitlements\n- [cnf-foods.json](../../App/Resources/cnf-foods.json)\n- [ExerciseDemos.json](../../App/Resources/ExerciseDemos.json)\n- [Tessera.storekit](../../Config/Tessera.storekit)\n- [Tessera.entitlements](../../Config/Tessera.entitlements)"
+		},
+		{
+			"id": "bundle",
+			"type": "text",
+			"x": 1150,
+			"y": -680,
+			"width": 460,
+			"height": 230,
+			"text": "### TesseraWidgetsBundle\nLes widgets de l'extension (groupes par domaine, horloge, calendrier, tâches…) et l'activité en direct\n- [TesseraWidgetsBundle.swift](../../Widgets/TesseraWidgetsBundle.swift)\n- [DesignWidgets.swift](../../Widgets/DesignWidgets.swift)"
+		},
+		{
+			"id": "provider",
+			"type": "text",
+			"x": 1150,
+			"y": -410,
+			"width": 460,
+			"height": 230,
+			"text": "### DesignProvider\nUn fournisseur pour tous les types ; lit le SharedStore, rafraîchit météo, crypto, taux\n- [DesignProvider.swift](../../Widgets/DesignProvider.swift)"
+		},
+		{
+			"id": "intents",
+			"type": "text",
+			"x": 1150,
+			"y": -140,
+			"width": 460,
+			"height": 230,
+			"text": "### App Intents\nBoutons des widgets, activité en direct, configuration\n[[Intents-et-activite-en-direct]]\n- [SpaceIntents.swift](../../Shared/Intents/SpaceIntents.swift)\n- [InteractiveIntents.swift](../../Shared/Intents/InteractiveIntents.swift)"
+		},
+		{
+			"id": "live",
+			"type": "text",
+			"x": 1150,
+			"y": 130,
+			"width": 460,
+			"height": 230,
+			"text": "### Activité en direct\nActivityKit : séance sur l'écran verrouillé et la Dynamic Island\n- [WorkoutLiveActivity.swift](../../Shared/Live/WorkoutLiveActivity.swift)\n- [WorkoutLiveActivityWidget.swift](../../Widgets/WorkoutLiveActivityWidget.swift)"
+		},
+		{
+			"id": "net",
+			"type": "text",
+			"x": 1150,
+			"y": 600,
+			"width": 460,
+			"height": 210,
+			"text": "### Réseau\nOpen Food Facts · Open-Meteo · CoinGecko · Finnhub · SEC · Frankfurter\n[[Services-externes]]"
+		},
+		{
+			"id": "fw",
+			"type": "text",
+			"x": 1150,
+			"y": 850,
+			"width": 460,
+			"height": 210,
+			"text": "### Frameworks\nStoreKit · WidgetKit · ActivityKit · AppIntents · VisionKit · EventKit · CoreLocation · CoreMotion · UserNotifications · Charts · FoundationModels"
+		},
+		{
+			"id": "targets",
+			"type": "text",
+			"x": -1050,
+			"y": 680,
+			"width": 580,
+			"height": 230,
+			"text": "### Cibles Xcode\nTessera · TesseraWidgets · TesseraTests (21) · TesseraUITests (7)\nDossiers synchronisés : un nouveau fichier rejoint sa cible\n- [project.pbxproj](../../Tessera.xcodeproj/project.pbxproj)"
+		},
+		{
+			"id": "ci",
+			"type": "text",
+			"x": -430,
+			"y": 680,
+			"width": 580,
+			"height": 230,
+			"text": "### CI GitHub Actions\nTags dans le message de commit\n[[Tests-CI-et-outils]]\n- [build.yml](../../.github/workflows/build.yml)\n- [check_swift.py](../../scripts/check_swift.py)"
+		},
+		{
+			"id": "debug",
+			"type": "text",
+			"x": 190,
+			"y": 680,
+			"width": 580,
+			"height": 230,
+			"text": "### Outils DEBUG\nCaptures, galeries, export pub (jamais en Release)\n- [ScreenshotMode.swift](../../App/Core/ScreenshotMode.swift)\n- [AdExport.swift](../../App/Core/AdExport.swift)"
+		}
+	],
+	"edges": [
+		{
+			"id": "e-app-entry-appmodel",
+			"fromNode": "app-entry",
+			"fromSide": "bottom",
+			"toNode": "appmodel",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "crée et injecte",
+			"color": "5"
+		},
+		{
+			"id": "e-tabs-router",
+			"fromNode": "tabs",
+			"fromSide": "bottom",
+			"toNode": "router",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "navigation",
+			"color": "5"
+		},
+		{
+			"id": "e-screens-appmodel",
+			"fromNode": "screens",
+			"fromSide": "left",
+			"toNode": "appmodel",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "lit / écrit",
+			"color": "5"
+		},
+		{
+			"id": "e-appmodel-domains",
+			"fromNode": "appmodel",
+			"fromSide": "bottom",
+			"toNode": "domains",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "états métier",
+			"color": "4"
+		},
+		{
+			"id": "e-appmodel-sharedstore",
+			"fromNode": "appmodel",
+			"fromSide": "bottom",
+			"toNode": "sharedstore",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "écrit chaque domaine",
+			"color": "3"
+		},
+		{
+			"id": "e-appmodel-bundle",
+			"fromNode": "appmodel",
+			"fromSide": "right",
+			"toNode": "bundle",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "WidgetCenter.reload",
+			"color": "6"
+		},
+		{
+			"id": "e-premiumstore-fw",
+			"fromNode": "premiumstore",
+			"fromSide": "bottom",
+			"toNode": "fw",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "StoreKit 2",
+			"color": "2"
+		},
+		{
+			"id": "e-sharedstore-provider",
+			"fromNode": "sharedstore",
+			"fromSide": "right",
+			"toNode": "provider",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "lit",
+			"color": "6"
+		},
+		{
+			"id": "e-provider-render",
+			"fromNode": "provider",
+			"fromSide": "left",
+			"toNode": "render",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "WidgetCanvas",
+			"color": "6"
+		},
+		{
+			"id": "e-provider-net",
+			"fromNode": "provider",
+			"fromSide": "bottom",
+			"toNode": "net",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "rafraîchit les caches",
+			"color": "2"
+		},
+		{
+			"id": "e-intents-sharedstore",
+			"fromNode": "intents",
+			"fromSide": "left",
+			"toNode": "sharedstore",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "écrit",
+			"color": "3"
+		},
+		{
+			"id": "e-live-intents",
+			"fromNode": "live",
+			"fromSide": "top",
+			"toNode": "intents",
+			"toSide": "bottom",
+			"toEnd": "arrow",
+			"label": "Série faite, pause, passer",
+			"color": "6"
+		},
+		{
+			"id": "e-domains-net",
+			"fromNode": "domains",
+			"fromSide": "right",
+			"toNode": "net",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "requêtes",
+			"color": "2"
+		},
+		{
+			"id": "e-payload-render",
+			"fromNode": "payload",
+			"fromSide": "top",
+			"toNode": "render",
+			"toSide": "bottom",
+			"toEnd": "arrow",
+			"label": "données des widgets"
+		},
+		{
+			"id": "e-resources-domains",
+			"fromNode": "resources",
+			"fromSide": "left",
+			"toNode": "domains",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "aliments, démos"
+		},
+		{
+			"id": "e-components-render",
+			"fromNode": "components",
+			"fromSide": "bottom",
+			"toNode": "render",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "aperçus réels"
+		},
+		{
+			"id": "e-ci-targets",
+			"fromNode": "ci",
+			"fromSide": "left",
+			"toNode": "targets",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "compile et teste"
+		}
+	]
+}

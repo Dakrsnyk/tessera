@@ -1,0 +1,758 @@
+{
+	"nodes": [
+		{
+			"id": "g-sub-autres-mini-apps",
+			"type": "group",
+			"x": 1230,
+			"y": -2330,
+			"width": 740,
+			"height": 520,
+			"label": "Autres mini-apps"
+		},
+		{
+			"id": "g-sub-finances",
+			"type": "group",
+			"x": 430,
+			"y": -2330,
+			"width": 740,
+			"height": 520,
+			"label": "Finances"
+		},
+		{
+			"id": "g-sub-planning-et-habitudes",
+			"type": "group",
+			"x": -370,
+			"y": -2330,
+			"width": 740,
+			"height": 520,
+			"label": "Planning et habitudes"
+		},
+		{
+			"id": "g-sub-fitness",
+			"type": "group",
+			"x": -1170,
+			"y": -2330,
+			"width": 740,
+			"height": 520,
+			"label": "Fitness"
+		},
+		{
+			"id": "g-sub-nutrition",
+			"type": "group",
+			"x": -1970,
+			"y": -2330,
+			"width": 740,
+			"height": 520,
+			"label": "Nutrition"
+		},
+		{
+			"id": "g-outils",
+			"type": "group",
+			"x": -1900,
+			"y": 1350,
+			"width": 580,
+			"height": 910,
+			"label": "Qualité et outillage"
+		},
+		{
+			"id": "g-services",
+			"type": "group",
+			"x": 900,
+			"y": 1350,
+			"width": 980,
+			"height": 500,
+			"label": "Services externes",
+			"color": "2"
+		},
+		{
+			"id": "g-ios",
+			"type": "group",
+			"x": 900,
+			"y": -140,
+			"width": 580,
+			"height": 910,
+			"label": "Widgets et système iOS",
+			"color": "6"
+		},
+		{
+			"id": "g-donnees",
+			"type": "group",
+			"x": -500,
+			"y": 1350,
+			"width": 1100,
+			"height": 500,
+			"label": "Données et stockage",
+			"color": "3"
+		},
+		{
+			"id": "g-metier",
+			"type": "group",
+			"x": -1900,
+			"y": -140,
+			"width": 580,
+			"height": 1320,
+			"label": "Logique métier et état",
+			"color": "4"
+		},
+		{
+			"id": "g-interface",
+			"type": "group",
+			"x": -950,
+			"y": -1250,
+			"width": 1900,
+			"height": 830,
+			"label": "Interface (App/Screens)",
+			"color": "5"
+		},
+		{
+			"id": "ardane",
+			"type": "text",
+			"x": -330,
+			"y": -170,
+			"width": 660,
+			"height": 340,
+			"text": "# Ardane\n*(anciennement Tessera : projet, cibles, module et identifiants gardent « Tessera »)*\n\nApp iOS 17 en SwiftUI de widgets et de mini-apps pour les essentiels du quotidien : nutrition, sport, argent, planning, habitudes…\n\n[[docs/obsidian/README|Guide]] · [[Architecture.canvas|Architecture]] · [[Fonctionnalites.canvas|Fonctionnalités]]",
+			"color": "6"
+		},
+		{
+			"id": "accueil-mon-quotidien",
+			"type": "text",
+			"x": -900,
+			"y": -1170,
+			"width": 420,
+			"height": 330,
+			"text": "## Accueil : Mon Quotidien\n[[Accueil-Mon-Quotidien|Ouvrir la note]]\n\n- Cartes du jour (nutrition, séance, habitudes, À ne pas oublier, planning, eau, budget, Top 3…), classées selon le moment de la journée.\n- Cartes à plusieurs vues (balayage), disposition à la main (ordre, demi ou large, masquer).\n- « Mes informations » : complétude du profil et chaque domaine suivi d'un coup d'œil.\n\n**Sources**\n- [HomeView.swift](../../App/Screens/Home/HomeView.swift)\n- [DailySection.swift](../../App/Screens/Home/DailySection.swift)"
+		},
+		{
+			"id": "mini-apps",
+			"type": "text",
+			"x": -440,
+			"y": -1170,
+			"width": 420,
+			"height": 330,
+			"text": "## Mini-apps\n[[Mini-apps|Ouvrir la note]]\n\n- `MiniApp` : nutrition, fitness, planning, finances, business, travel, car, weather.\n- `MiniAppPage` : les pages de chaque mini-app (repas, séance, bibliothèque, historique…).\n- « Mes paramètres » de chaque mini-app (`MiniAppSettings`), vues de semaine partagées (`WeekViews`).\n\n**Sources**\n- [MiniApp.swift](../../App/Screens/MiniApps/MiniApp.swift)\n- [MiniAppSettings.swift](../../App/Screens/MiniApps/MiniAppSettings.swift)"
+		},
+		{
+			"id": "creer-espaces",
+			"type": "text",
+			"x": 20,
+			"y": -1170,
+			"width": 420,
+			"height": 330,
+			"text": "## Créer : les espaces\n[[Creer-espaces|Ouvrir la note]]\n\n- `Space` : productivity, habits, nutrition, fitness, budget, investing, business, markets, student, travel, car, life.\n- Création de widgets depuis un espace (taille, un ou plusieurs widgets), envol vers « Mes widgets ».\n- « Écran verrouillé » : les widgets prévus pour l'écran verrouillé, par univers.\n\n**Sources**\n- [SpacesView.swift](../../App/Screens/Spaces/SpacesView.swift)\n- [SpaceBuilderView.swift](../../App/Screens/Spaces/SpaceBuilderView.swift)"
+		},
+		{
+			"id": "store",
+			"type": "text",
+			"x": 480,
+			"y": -1170,
+			"width": 420,
+			"height": 330,
+			"text": "## Store\n[[Store|Ouvrir la note]]\n\n- 23 écrans d'accueil prêts (fond, widgets, icônes et écran verrouillé assortis), 18 fonds d'écran dessinés en code.\n- 34 packs, saisons du Store (Halloween en octobre, Noël en décembre), widgets combinés, modèles.\n- Un modèle ouvre le Studio sur une copie (`router.openEditor`).\n\n**Sources**\n- [ExploreView.swift](../../App/Screens/Explore/ExploreView.swift)\n- [HomeSetups.swift](../../App/Screens/Explore/HomeSetups.swift)"
+		},
+		{
+			"id": "studio-editeur",
+			"type": "text",
+			"x": -900,
+			"y": -800,
+			"width": 420,
+			"height": 330,
+			"text": "## Studio (éditeur de widgets)\n[[Studio-editeur|Ouvrir la note]]\n\n- 57 styles (`ThemeID`), 16 thèmes complets (`StylePreset`), 14 palettes, couleur principale, fonds et textures, bordures.\n- « Mes styles » : looks enregistrés pour plusieurs widgets.\n- Réglages du type de widget et de l'élément suivi, guide d'ajout à l'écran d'accueil.\n\n**Sources**\n- [EditorView.swift](../../App/Screens/Editor/EditorView.swift)\n- [StudioComponents.swift](../../App/Screens/Editor/StudioComponents.swift)"
+		},
+		{
+			"id": "mes-widgets",
+			"type": "text",
+			"x": -440,
+			"y": -800,
+			"width": 420,
+			"height": 330,
+			"text": "## Mes widgets\n[[Mes-widgets|Ouvrir la note]]\n\n- Carrousel et filtres, modification dans le Studio, fusion (`FusionViews`).\n\n**Sources**\n- [MyWidgetsView.swift](../../App/Screens/MyWidgets/MyWidgetsView.swift)\n- [WidgetCarousel.swift](../../App/Screens/MyWidgets/WidgetCarousel.swift)"
+		},
+		{
+			"id": "profil-et-reglages",
+			"type": "text",
+			"x": 20,
+			"y": -800,
+			"width": 420,
+			"height": 330,
+			"text": "## Profil et réglages\n[[Profil-et-reglages|Ouvrir la note]]\n\n- Informations de la personne et données demandées là où un widget les utilise.\n- Rappels intelligents (séance, repas, factures), notifications locales.\n- Icône de l'app (19 icônes), style de l'app (10 styles `AppStyleID`, clair/sombre).\n\n**Sources**\n- [ProfileView.swift](../../App/Screens/Profile/ProfileView.swift)\n- [ProfileTopics.swift](../../App/Screens/Profile/ProfileTopics.swift)"
+		},
+		{
+			"id": "onboarding-et-tutoriel",
+			"type": "text",
+			"x": 480,
+			"y": -800,
+			"width": 420,
+			"height": 330,
+			"text": "## Lancement, premier lancement et tutoriel\n[[Onboarding-et-tutoriel|Ouvrir la note]]\n\n- Écran de lancement : les deux moitiés du A.\n- Premier lancement : style de l'app, profil, centres d'intérêt.\n- Tutoriel par étapes au-dessus de l'app.\n\n**Sources**\n- [LaunchView.swift](../../App/Screens/Launch/LaunchView.swift)\n- [OnboardingView.swift](../../App/Screens/Onboarding/OnboardingView.swift)"
+		},
+		{
+			"id": "noyau-appmodel",
+			"type": "text",
+			"x": -1850,
+			"y": -60,
+			"width": 480,
+			"height": 370,
+			"text": "## Noyau : AppModel et Router\n[[Noyau-AppModel|Ouvrir la note]]\n\n- État : designs (widgets), contenu (tâches, habitudes, eau, argent), réglages, Premium, 11 domaines métier, profil, « Mes styles ».\n- Caches réseau : météo, crypto, marchés, entreprises, taux de change, météo de voyage, analyses.\n- Limites gratuites : `freeDesignLimit = 8` widgets, `freeHabitLimit = 5` habitudes.\n\n**Sources**\n- [AppModel.swift](../../App/Core/AppModel.swift)\n- [Router.swift](../../App/Core/Router.swift)"
+		},
+		{
+			"id": "domaines-metier",
+			"type": "text",
+			"x": -1850,
+			"y": 350,
+			"width": 480,
+			"height": 370,
+			"text": "## Domaines métier (Shared/Domains)\n[[Domaines-metier|Ouvrir la note]]\n\n- Nutrition (`NutritionState`, base d'aliments `FoodDatabase`), Fitness (`FitnessState`, bibliothèque `ExerciseLibrary`, `ExerciseTechniques`).\n- Budget (`BudgetState`), Business (`BusinessState`), Placements (`PortfolioState`), Marchés et sociétés (`MarketsState`).\n- Études (`StudentState`), Voyage (`TravelState`), Auto (`CarState`), Productivité (`ProductivityState`), Ma vie (`LifeState`).\n\n**Sources**\n- [Nutrition.swift](../../Shared/Domains/Nutrition.swift)\n- [FoodDatabase.swift](../../Shared/Domains/FoodDatabase.swift)"
+		},
+		{
+			"id": "premium-et-abonnements",
+			"type": "text",
+			"x": -1850,
+			"y": 760,
+			"width": 480,
+			"height": 370,
+			"text": "## Premium et abonnements\n[[Premium-et-abonnements|Ouvrir la note]]\n\n- Produits (`Config/Tessera.storekit`) : `com.dakrsnyk.tessera.premium.lifetime` (achat unique), `.monthly` et `.yearly` (abonnements).\n- Paywall contextuel (`PaywallContext`) : widget, limite de widgets ou d'habitudes, historique, écran d'accueil, pack.\n- Limites gratuites (8 widgets, 5 habitudes), accents gratuits (`Palette`), cadenas Premium (`PremiumLock`).\n\n**Sources**\n- [PremiumStore.swift](../../App/Premium/PremiumStore.swift)\n- [PaywallView.swift](../../App/Premium/PaywallView.swift)"
+		},
+		{
+			"id": "donnees-et-stockage",
+			"type": "text",
+			"x": -450,
+			"y": 1430,
+			"width": 480,
+			"height": 370,
+			"text": "## Données et stockage\n[[Donnees-et-stockage|Ouvrir la note]]\n\n- App Group `group.com.dakrsnyk.tessera`, dossier `Tessera/` (nom conservé après le renommage en Ardane).\n- `StoreFile` : designs, content, settings, premium, weather, crypto, nutrition, fitness, budget, business, portfolio, following, student, travel, car, productivity, life, profile, styles, markets, companies, fx, tripWeather, insights.\n- Sauvegarde : un fichier qui contient tout, à garder où on veut ; les sauvegardes « Tessera » s'importent toujours.\n\n**Sources**\n- [SharedStore.swift](../../Shared/Support/SharedStore.swift)\n- [DataBackup.swift](../../App/Core/DataBackup.swift)\n- [DataItems.swift](../../App/Core/DataItems.swift)"
+		},
+		{
+			"id": "ressources",
+			"type": "text",
+			"x": 70,
+			"y": 1430,
+			"width": 480,
+			"height": 370,
+			"text": "## Ressources embarquées\n- Base alimentaire CNF (~5 600 aliments)\n- Démos d'exercices (163)\n- Catalogue de traductions\n\n**Sources**\n- [cnf-foods.json](../../App/Resources/cnf-foods.json)\n- [ExerciseDemos.json](../../App/Resources/ExerciseDemos.json)\n- [Localizable.xcstrings](../../Shared/Localizable.xcstrings)"
+		},
+		{
+			"id": "widgets-extension",
+			"type": "text",
+			"x": 950,
+			"y": -60,
+			"width": 480,
+			"height": 370,
+			"text": "## Widgets : extension et rendu\n[[Widgets-extension|Ouvrir la note]]\n\n- 103 types de widgets (`WidgetKind`), tailles petite, moyenne, grande et écran verrouillé (circulaire, rectangulaire, en ligne).\n- Un fournisseur pour tous les types (`DesignProvider`), configuration « Modifier le widget » (`DesignWidgetIntent`).\n- Rendu : `WidgetCanvas`, tuiles par domaine (`Tile`, `TileFactory`, `TileView`), widgets d'écran verrouillé (`AccessoryViews`).\n\n**Sources**\n- [TesseraWidgetsBundle.swift](../../Widgets/TesseraWidgetsBundle.swift)\n- [DesignProvider.swift](../../Widgets/DesignProvider.swift)"
+		},
+		{
+			"id": "intents-et-activite-en-direct",
+			"type": "text",
+			"x": 950,
+			"y": 350,
+			"width": 480,
+			"height": 370,
+			"text": "## Boutons des widgets, activité en direct et liens\n[[Intents-et-activite-en-direct|Ouvrir la note]]\n\n- Widgets interactifs : `AddWaterIntent`, `ToggleHabitIntent`, `ToggleTaskIntent`, `StartFocusIntent`, `StopFocusIntent` (InteractiveIntents).\n- Espaces : `LogFoodIntent`, `QuickExpenseIntent`, `TogglePriorityIntent`, `ToggleProjectTaskIntent`, `ToggleAssignmentIntent`, `CounterStepIntent`, `GradeCardIntent`, `RevealCardIntent` (SpaceIntents).\n- Activité en direct (ActivityKit) : `CompleteSetIntent` (Série faite), `PauseRestIntent`, `ResumeRestIntent`, `SkipRestIntent`.\n\n**Sources**\n- [InteractiveIntents.swift](../../Shared/Intents/InteractiveIntents.swift)\n- [SpaceIntents.swift](../../Shared/Intents/SpaceIntents.swift)"
+		},
+		{
+			"id": "api",
+			"type": "text",
+			"x": 950,
+			"y": 1430,
+			"width": 420,
+			"height": 370,
+			"text": "## API web (sans compte)\n- Open Food Facts : aliments, codes-barres\n- Open-Meteo : météo\n- CoinGecko : crypto\n- Finnhub : actions\n- SEC : sociétés cotées\n- Frankfurter : taux de change\n\n[[Services-externes|Ouvrir la note]]"
+		},
+		{
+			"id": "apple",
+			"type": "text",
+			"x": 1410,
+			"y": 1430,
+			"width": 420,
+			"height": 370,
+			"text": "## Frameworks Apple\n- StoreKit 2 (Premium)\n- WidgetKit, ActivityKit, AppIntents\n- VisionKit (scanner)\n- EventKit, CoreLocation, CoreMotion\n- UserNotifications, Charts\n- FoundationModels (iOS 26)\n\n[[Services-externes|Ouvrir la note]]"
+		},
+		{
+			"id": "tests-ci-et-outils",
+			"type": "text",
+			"x": -1850,
+			"y": 1430,
+			"width": 480,
+			"height": 370,
+			"text": "## Tests, CI et outils\n[[Tests-CI-et-outils|Ouvrir la note]]\n\n- Cibles : Tessera (app), TesseraWidgets (extension), TesseraTests (21 fichiers), TesseraUITests (7 fichiers).\n- Workflow `.github/workflows/build.yml` : `[check]`, `[unit]`, `[daily]`, `[studio]`, `[apps]`, `[shots]`, `[langs]`, `[store]`, `[marketing]`, `[video]`, `[adkit]`…\n- `scripts/check_swift.py` : ordre des labels d'init, catalogue de kinds, sécurité Release, manifeste de confidentialité.\n\n**Sources**\n- [build.yml](../../.github/workflows/build.yml)\n- [check_swift.py](../../scripts/check_swift.py)"
+		},
+		{
+			"id": "localisation",
+			"type": "text",
+			"x": -1850,
+			"y": 1840,
+			"width": 480,
+			"height": 370,
+			"text": "## Localisation\n[[Localisation|Ouvrir la note]]\n\n- Catalogue `Shared/Localizable.xcstrings`, textes d'Info.plist `App/InfoPlist.xcstrings`.\n- Traductions en lots dans `l10n/`, glossaire, scripts `l10n_*`.\n\n**Sources**\n- [Localization.swift](../../Shared/Support/Localization.swift)\n- [Formatting.swift](../../Shared/Support/Formatting.swift)"
+		},
+		{
+			"id": "nutrition-0",
+			"type": "text",
+			"x": -1920,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Anneau et macros du jour**"
+		},
+		{
+			"id": "nutrition-1",
+			"type": "text",
+			"x": -1580,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Recherche + base CNF**"
+		},
+		{
+			"id": "nutrition-2",
+			"type": "text",
+			"x": -1920,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Scanner de code-barres**"
+		},
+		{
+			"id": "nutrition-3",
+			"type": "text",
+			"x": -1580,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Widget « Scanner »**"
+		},
+		{
+			"id": "note-nutrition",
+			"type": "text",
+			"x": -1920,
+			"y": -1950,
+			"width": 640,
+			"height": 90,
+			"text": "[[Nutrition|Ouvrir la note Nutrition]]\n- [NutritionApp.swift](../../App/Screens/MiniApps/Nutrition/NutritionApp.swift)"
+		},
+		{
+			"id": "fitness-0",
+			"type": "text",
+			"x": -1120,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Séance en direct, Série faite**"
+		},
+		{
+			"id": "fitness-1",
+			"type": "text",
+			"x": -780,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Repos minuté**"
+		},
+		{
+			"id": "fitness-2",
+			"type": "text",
+			"x": -1120,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Activité en direct**"
+		},
+		{
+			"id": "fitness-3",
+			"type": "text",
+			"x": -780,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**163 exercices animés**"
+		},
+		{
+			"id": "note-fitness",
+			"type": "text",
+			"x": -1120,
+			"y": -1950,
+			"width": 640,
+			"height": 90,
+			"text": "[[Fitness|Ouvrir la note Fitness]]\n- [FitnessApp.swift](../../App/Screens/MiniApps/Fitness/FitnessApp.swift)"
+		},
+		{
+			"id": "planning-et-habitudes-0",
+			"type": "text",
+			"x": -320,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Semaine en tableau**"
+		},
+		{
+			"id": "planning-et-habitudes-1",
+			"type": "text",
+			"x": 20,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Tâches et Top 3**"
+		},
+		{
+			"id": "planning-et-habitudes-2",
+			"type": "text",
+			"x": -320,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Études**"
+		},
+		{
+			"id": "planning-et-habitudes-3",
+			"type": "text",
+			"x": 20,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Habitudes et eau**"
+		},
+		{
+			"id": "note-planning-et-habitudes",
+			"type": "text",
+			"x": -320,
+			"y": -1950,
+			"width": 640,
+			"height": 90,
+			"text": "[[Planning-et-habitudes|Ouvrir la note Planning et habitudes]]\n- [PlanningApp.swift](../../App/Screens/MiniApps/Planning/PlanningApp.swift)"
+		},
+		{
+			"id": "finances-0",
+			"type": "text",
+			"x": 480,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Graphique du solde**"
+		},
+		{
+			"id": "finances-1",
+			"type": "text",
+			"x": 820,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Reste du mois**"
+		},
+		{
+			"id": "finances-2",
+			"type": "text",
+			"x": 480,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Catégories, factures**"
+		},
+		{
+			"id": "finances-3",
+			"type": "text",
+			"x": 820,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Épargne, valeur nette**"
+		},
+		{
+			"id": "note-finances",
+			"type": "text",
+			"x": 480,
+			"y": -1950,
+			"width": 640,
+			"height": 90,
+			"text": "[[Finances|Ouvrir la note Finances]]\n- [FinancesApp.swift](../../App/Screens/MiniApps/Finances/FinancesApp.swift)"
+		},
+		{
+			"id": "autres-mini-apps-0",
+			"type": "text",
+			"x": 1280,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Business**"
+		},
+		{
+			"id": "autres-mini-apps-1",
+			"type": "text",
+			"x": 1620,
+			"y": -2250,
+			"width": 300,
+			"height": 110,
+			"text": "**Voyage (devises)**"
+		},
+		{
+			"id": "autres-mini-apps-2",
+			"type": "text",
+			"x": 1280,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Auto**"
+		},
+		{
+			"id": "autres-mini-apps-3",
+			"type": "text",
+			"x": 1620,
+			"y": -2100,
+			"width": 300,
+			"height": 110,
+			"text": "**Météo, placements**"
+		},
+		{
+			"id": "note-autres-mini-apps",
+			"type": "text",
+			"x": 1280,
+			"y": -1950,
+			"width": 640,
+			"height": 90,
+			"text": "[[Autres-mini-apps|Ouvrir la note Autres mini-apps]]\n- [BusinessApp.swift](../../App/Screens/MiniApps/Business/BusinessApp.swift)"
+		}
+	],
+	"edges": [
+		{
+			"id": "e-ardane-g-interface",
+			"fromNode": "ardane",
+			"fromSide": "top",
+			"toNode": "g-interface",
+			"toSide": "bottom",
+			"toEnd": "arrow",
+			"label": "écrans"
+		},
+		{
+			"id": "e-ardane-g-metier",
+			"fromNode": "ardane",
+			"fromSide": "left",
+			"toNode": "g-metier",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "état et règles"
+		},
+		{
+			"id": "e-ardane-g-donnees",
+			"fromNode": "ardane",
+			"fromSide": "bottom",
+			"toNode": "g-donnees",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "stockage"
+		},
+		{
+			"id": "e-ardane-g-ios",
+			"fromNode": "ardane",
+			"fromSide": "right",
+			"toNode": "g-ios",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "widgets et système"
+		},
+		{
+			"id": "e-ardane-g-services",
+			"fromNode": "ardane",
+			"fromSide": "bottom",
+			"toNode": "g-services",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "réseau et frameworks"
+		},
+		{
+			"id": "e-ardane-g-outils",
+			"fromNode": "ardane",
+			"fromSide": "bottom",
+			"toNode": "g-outils",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "qualité"
+		},
+		{
+			"id": "e-g-interface-noyau-appmodel",
+			"fromNode": "g-interface",
+			"fromSide": "bottom",
+			"toNode": "noyau-appmodel",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "lit et écrit l'état",
+			"color": "5"
+		},
+		{
+			"id": "e-store-studio-editeur",
+			"fromNode": "store",
+			"fromSide": "left",
+			"toNode": "studio-editeur",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "ouvre un modèle"
+		},
+		{
+			"id": "e-mes-widgets-studio-editeur",
+			"fromNode": "mes-widgets",
+			"fromSide": "left",
+			"toNode": "studio-editeur",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "modifier"
+		},
+		{
+			"id": "e-creer-espaces-studio-editeur",
+			"fromNode": "creer-espaces",
+			"fromSide": "left",
+			"toNode": "studio-editeur",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "créer"
+		},
+		{
+			"id": "e-accueil-mon-quotidien-mini-apps",
+			"fromNode": "accueil-mon-quotidien",
+			"fromSide": "right",
+			"toNode": "mini-apps",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "ouvre"
+		},
+		{
+			"id": "e-g-sub-nutrition-g-interface",
+			"fromNode": "g-sub-nutrition",
+			"fromSide": "bottom",
+			"toNode": "g-interface",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"color": "5"
+		},
+		{
+			"id": "e-g-sub-fitness-g-interface",
+			"fromNode": "g-sub-fitness",
+			"fromSide": "bottom",
+			"toNode": "g-interface",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"color": "5"
+		},
+		{
+			"id": "e-g-sub-planning-et-habitudes-g-interfac",
+			"fromNode": "g-sub-planning-et-habitudes",
+			"fromSide": "bottom",
+			"toNode": "g-interface",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"color": "5"
+		},
+		{
+			"id": "e-g-sub-finances-g-interface",
+			"fromNode": "g-sub-finances",
+			"fromSide": "bottom",
+			"toNode": "g-interface",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"color": "5"
+		},
+		{
+			"id": "e-g-sub-autres-mini-apps-g-interface",
+			"fromNode": "g-sub-autres-mini-apps",
+			"fromSide": "bottom",
+			"toNode": "g-interface",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"color": "5"
+		},
+		{
+			"id": "e-noyau-appmodel-domaines-metier",
+			"fromNode": "noyau-appmodel",
+			"fromSide": "bottom",
+			"toNode": "domaines-metier",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "états"
+		},
+		{
+			"id": "e-noyau-appmodel-donnees-et-stockage",
+			"fromNode": "noyau-appmodel",
+			"fromSide": "bottom",
+			"toNode": "donnees-et-stockage",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "écrit en JSON",
+			"color": "3"
+		},
+		{
+			"id": "e-donnees-et-stockage-widgets-extension",
+			"fromNode": "donnees-et-stockage",
+			"fromSide": "top",
+			"toNode": "widgets-extension",
+			"toSide": "bottom",
+			"toEnd": "arrow",
+			"label": "lu par l'extension",
+			"color": "6"
+		},
+		{
+			"id": "e-noyau-appmodel-widgets-extension",
+			"fromNode": "noyau-appmodel",
+			"fromSide": "right",
+			"toNode": "widgets-extension",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "recharge (WidgetCenter)",
+			"color": "6"
+		},
+		{
+			"id": "e-intents-et-activite-en-direct-donnees-",
+			"fromNode": "intents-et-activite-en-direct",
+			"fromSide": "bottom",
+			"toNode": "donnees-et-stockage",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "écrit sans ouvrir l'app",
+			"color": "3"
+		},
+		{
+			"id": "e-premium-et-abonnements-apple",
+			"fromNode": "premium-et-abonnements",
+			"fromSide": "right",
+			"toNode": "apple",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "StoreKit 2",
+			"color": "2"
+		},
+		{
+			"id": "e-domaines-metier-api",
+			"fromNode": "domaines-metier",
+			"fromSide": "right",
+			"toNode": "api",
+			"toSide": "left",
+			"toEnd": "arrow",
+			"label": "requêtes réseau",
+			"color": "2"
+		},
+		{
+			"id": "e-widgets-extension-api",
+			"fromNode": "widgets-extension",
+			"fromSide": "bottom",
+			"toNode": "api",
+			"toSide": "top",
+			"toEnd": "arrow",
+			"label": "rafraîchit météo, crypto, taux",
+			"color": "2"
+		},
+		{
+			"id": "e-ressources-domaines-metier",
+			"fromNode": "ressources",
+			"fromSide": "left",
+			"toNode": "domaines-metier",
+			"toSide": "right",
+			"toEnd": "arrow",
+			"label": "aliments, démos"
+		},
+		{
+			"id": "e-tests-ci-et-outils-g-interface",
+			"fromNode": "tests-ci-et-outils",
+			"fromSide": "top",
+			"toNode": "g-interface",
+			"toSide": "bottom",
+			"toEnd": "arrow",
+			"label": "captures et tests"
+		}
+	]
+}

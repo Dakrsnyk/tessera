@@ -24,6 +24,10 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, les ident
   `Co-Authored-By: Claude <noreply@anthropic.com>`
   `Claude-Session: https://claude.ai/code/session_011SGgP6YLhofhVhTasQukEx`
 
+## Carte Obsidian (docs/obsidian/)
+- Cartes `.canvas` et notes `modules/` générées par `scripts/obsidian_map.py`, vérifiées dans le code.
+- Quand une modification change l'architecture ou une fonctionnalité importante (module, écran, donnée, service, relation) : mettre à jour `MODULES` ou les cartes dans ce script, lancer `python3 scripts/obsidian_map.py` (il vérifie le JSON, les liens et les chemins), puis committer `docs/obsidian/` avec le changement.
+
 ## Localisation (voir HANDOFF.md pour l'état)
 - Code en français ; `tr("texte français")` cherche le texte comme clé dans `Shared/Localizable.xcstrings`. Interpolations → `%@` (`%1$@` pour réordonner), `%` littéral → `%%`.
 - Langues cibles : en, es, de, it, pt-BR, ja (+ fr source). Chinois et coréen retirés le 2026-10-08 (traductions de mauvaise qualité ; récupérables dans l'historique git). Glossaire : `l10n/GLOSSARY.md`.
