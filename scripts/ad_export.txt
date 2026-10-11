@@ -1,0 +1,218 @@
+# Pièces des films pub exportées par l'app elle-même (-screenshotScreen export, App/Core/AdExport.swift) :
+# PNG à vraie transparence, rendus par [adkit] dans report/adkit/export/ (puis done.txt : une ligne par
+# pièce, avec le nombre de fichiers ou la raison d'un échec). Une pièce par ligne :
+#   <type> <nom> clé=valeur…   (une valeur avec des espaces : %20)
+# widget : kind family=small|medium|large|rect|circular|inline theme preset palette accent recolor template
+#          scheme=light|dark ink=HEX scale render=image|snapshot
+# setupwidgets / home / lock : setup [wall] · wall : wall · icons : setup
+# live : state=rest|paused|ready rest | from to · paused · routine exercise set sets load done total restTotal
+#        bg=real|night|clear scheme w radius scale
+# demo : exercise view (indice ou nom : Profil, 3/4…) fps w h scale bg=clear|card|fill scheme accent
+# Échelles : 4 pour un petit widget (680 px), 3 pour moyen / grand (1 092 px de large), 4 pour l'écran verrouillé.
+
+# --- Macros (moyen) : 14 styles, 4 thèmes complets, 3 palettes, la couleur Corail ---
+widget macros-m-light kind=macros family=medium scale=3 theme=light
+widget macros-m-dark kind=macros family=medium scale=3 theme=dark scheme=dark
+widget macros-m-glass kind=macros family=medium scale=3 theme=glass
+widget macros-m-aurora kind=macros family=medium scale=3 theme=aurora
+widget macros-m-neon kind=macros family=medium scale=3 theme=neon scheme=dark
+widget macros-m-luxury kind=macros family=medium scale=3 theme=luxury
+widget macros-m-liquidGlass kind=macros family=medium scale=3 theme=liquidGlass
+widget macros-m-paper kind=macros family=medium scale=3 theme=paper
+widget macros-m-space kind=macros family=medium scale=3 theme=space scheme=dark
+widget macros-m-ocean kind=macros family=medium scale=3 theme=ocean
+widget macros-m-synthwave kind=macros family=medium scale=3 theme=synthwave scheme=dark
+widget macros-m-editorial kind=macros family=medium scale=3 theme=editorial
+widget macros-m-matteBlack kind=macros family=medium scale=3 theme=matteBlack scheme=dark
+widget macros-m-blossom kind=macros family=medium scale=3 theme=blossom
+widget macros-m-preset-midnight kind=macros family=medium scale=3 preset=midnight
+widget macros-m-preset-ocean kind=macros family=medium scale=3 preset=ocean
+widget macros-m-preset-sunset kind=macros family=medium scale=3 preset=sunset
+widget macros-m-preset-cyber kind=macros family=medium scale=3 preset=cyber
+widget macros-m-palette-coral kind=macros family=medium scale=3 palette=coral
+widget macros-m-palette-sunset kind=macros family=medium scale=3 palette=sunset
+widget macros-m-palette-gold kind=macros family=medium scale=3 palette=gold
+widget macros-m-light-corail kind=macros family=medium scale=3 theme=light accent=FF6B57
+widget macros-m-modern-corail kind=macros family=medium scale=3 theme=modern recolor=FF6B57
+
+# --- Calories restantes (petit) : 14 styles, 4 thèmes complets, Corail ---
+widget calories-s-light kind=caloriesLeft family=small scale=4 theme=light
+widget calories-s-dark kind=caloriesLeft family=small scale=4 theme=dark scheme=dark
+widget calories-s-glass kind=caloriesLeft family=small scale=4 theme=glass
+widget calories-s-aurora kind=caloriesLeft family=small scale=4 theme=aurora
+widget calories-s-neon kind=caloriesLeft family=small scale=4 theme=neon scheme=dark
+widget calories-s-luxury kind=caloriesLeft family=small scale=4 theme=luxury
+widget calories-s-liquidGlass kind=caloriesLeft family=small scale=4 theme=liquidGlass
+widget calories-s-paper kind=caloriesLeft family=small scale=4 theme=paper
+widget calories-s-space kind=caloriesLeft family=small scale=4 theme=space scheme=dark
+widget calories-s-ocean kind=caloriesLeft family=small scale=4 theme=ocean
+widget calories-s-synthwave kind=caloriesLeft family=small scale=4 theme=synthwave scheme=dark
+widget calories-s-editorial kind=caloriesLeft family=small scale=4 theme=editorial
+widget calories-s-matteBlack kind=caloriesLeft family=small scale=4 theme=matteBlack scheme=dark
+widget calories-s-blossom kind=caloriesLeft family=small scale=4 theme=blossom
+widget calories-s-preset-midnight kind=caloriesLeft family=small scale=4 preset=midnight
+widget calories-s-preset-ocean kind=caloriesLeft family=small scale=4 preset=ocean
+widget calories-s-preset-sunset kind=caloriesLeft family=small scale=4 preset=sunset
+widget calories-s-preset-cyber kind=caloriesLeft family=small scale=4 preset=cyber
+widget calories-s-light-corail kind=caloriesLeft family=small scale=4 theme=light accent=FF6B57
+widget calories-m-light kind=caloriesLeft family=medium scale=3 theme=light
+widget calories-m-aurora kind=caloriesLeft family=medium scale=3 theme=aurora
+
+# --- Fitness, Finances, Habitudes, Planning : clair + 2 looks forts ---
+widget nextSet-s-light kind=nextSet family=small scale=4 theme=light
+widget nextSet-s-neon kind=nextSet family=small scale=4 theme=neon scheme=dark
+widget nextSet-s-luxury kind=nextSet family=small scale=4 theme=luxury
+widget todaysWorkout-m-light kind=todaysWorkout family=medium scale=3 theme=light
+widget todaysWorkout-m-dark kind=todaysWorkout family=medium scale=3 theme=dark scheme=dark
+widget todaysWorkout-m-aurora kind=todaysWorkout family=medium scale=3 theme=aurora
+widget restTimer-s-light kind=restTimer family=small scale=4 theme=light
+widget restTimer-s-neon kind=restTimer family=small scale=4 theme=neon scheme=dark
+widget restTimer-s-dark kind=restTimer family=small scale=4 theme=dark scheme=dark
+widget trainingStreak-s-light kind=trainingStreak family=small scale=4 theme=light
+widget trainingStreak-s-aurora kind=trainingStreak family=small scale=4 theme=aurora
+widget trainingStreak-s-sport kind=trainingStreak family=small scale=4 theme=sport
+widget weeklyVolume-m-light kind=weeklyVolume family=medium scale=3 theme=light
+widget weeklyVolume-m-dark kind=weeklyVolume family=medium scale=3 theme=dark scheme=dark
+widget weeklyVolume-m-neon kind=weeklyVolume family=medium scale=3 theme=neon scheme=dark
+widget weekView-m-light kind=weekView family=medium scale=3 theme=light
+widget weekView-m-aurora kind=weekView family=medium scale=3 theme=aurora
+widget weekView-m-editorial kind=weekView family=medium scale=3 theme=editorial
+widget budgetLeft-s-light kind=budgetLeft family=small scale=4 theme=light
+widget budgetLeft-s-dark kind=budgetLeft family=small scale=4 theme=dark scheme=dark
+widget budgetLeft-s-luxury kind=budgetLeft family=small scale=4 theme=luxury
+widget spendingByCategory-m-light kind=spendingByCategory family=medium scale=3 theme=light
+widget spendingByCategory-m-dark kind=spendingByCategory family=medium scale=3 theme=dark scheme=dark
+widget spendingByCategory-m-glass kind=spendingByCategory family=medium scale=3 theme=glass
+widget moneyDashboard-m-light kind=moneyDashboard family=medium scale=3 theme=light
+widget moneyDashboard-m-dark kind=moneyDashboard family=medium scale=3 theme=dark scheme=dark
+widget moneyDashboard-m-aurora kind=moneyDashboard family=medium scale=3 theme=aurora
+widget habits-m-light kind=habits family=medium scale=3 theme=light
+widget habits-m-aurora kind=habits family=medium scale=3 theme=aurora
+widget habits-m-neon kind=habits family=medium scale=3 theme=neon scheme=dark
+widget habitStreak-s-light kind=habitStreak family=small scale=4 theme=light
+widget habitStreak-s-aurora kind=habitStreak family=small scale=4 theme=aurora
+widget habitStreak-s-neon kind=habitStreak family=small scale=4 theme=neon scheme=dark
+widget hydration-s-light kind=hydration family=small scale=4 theme=light
+widget hydration-s-ocean kind=hydration family=small scale=4 theme=ocean
+widget hydration-s-glass kind=hydration family=small scale=4 theme=glass
+widget priorities-s-light kind=priorities family=small scale=4 theme=light
+widget priorities-s-dark kind=priorities family=small scale=4 theme=dark scheme=dark
+widget priorities-s-paper kind=priorities family=small scale=4 theme=paper
+widget timetable-l-light kind=timetable family=large scale=3 theme=light
+widget timetable-l-aurora kind=timetable family=large scale=3 theme=aurora
+widget timetable-l-editorial kind=timetable family=large scale=3 theme=editorial
+widget upNext-s-light kind=upNext family=small scale=4 theme=light
+widget upNext-s-elegant kind=upNext family=small scale=4 theme=elegant
+widget upNext-s-dark kind=upNext family=small scale=4 theme=dark scheme=dark
+widget yearDots-l-light kind=yearDots family=large scale=3 theme=light
+widget yearDots-l-space kind=yearDots family=large scale=3 theme=space scheme=dark
+widget yearDots-l-dark kind=yearDots family=large scale=3 theme=dark scheme=dark
+
+# --- Écran verrouillé (encre blanche, fond transparent ; ink=HEX pour une encre foncée sur fond clair) ---
+widget lock-macros-rect kind=macros family=rect scale=4
+widget lock-caloriesLeft-circular kind=caloriesLeft family=circular scale=4
+widget lock-caloriesLeft-rect kind=caloriesLeft family=rect scale=4
+widget lock-caloriesLeft-inline kind=caloriesLeft family=inline scale=4
+widget lock-proteinLeft-circular kind=proteinLeft family=circular scale=4
+widget lock-nextSet-rect kind=nextSet family=rect scale=4
+widget lock-restTimer-circular kind=restTimer family=circular scale=4
+widget lock-restTimer-rect kind=restTimer family=rect scale=4
+widget lock-trainingStreak-circular kind=trainingStreak family=circular scale=4
+widget lock-budgetLeft-rect kind=budgetLeft family=rect scale=4
+widget lock-habitStreak-circular kind=habitStreak family=circular scale=4
+widget lock-hydration-circular kind=hydration family=circular scale=4
+widget lock-macros-rect-darkink kind=macros family=rect scale=4 ink=1C1C1E
+
+# --- 8 écrans du Store mis en avant : chaque widget à part, l'écran verrouillé, les icônes ---
+setupwidgets setup-jade setup=jade
+lock lock-jade setup=jade scale=3
+icons icons-jade setup=jade scale=4
+setupwidgets setup-aurore setup=aurore
+lock lock-aurore setup=aurore scale=3
+icons icons-aurore setup=aurore scale=4
+setupwidgets setup-minuit setup=minuit
+lock lock-minuit setup=minuit scale=3
+icons icons-minuit setup=minuit scale=4
+setupwidgets setup-neon setup=neon
+lock lock-neon setup=neon scale=3
+icons icons-neon setup=neon scale=4
+setupwidgets setup-ocean setup=ocean
+lock lock-ocean setup=ocean scale=3
+icons icons-ocean setup=ocean scale=4
+setupwidgets setup-nebuleuse setup=nebuleuse
+lock lock-nebuleuse setup=nebuleuse scale=3
+icons icons-nebuleuse setup=nebuleuse scale=4
+setupwidgets setup-crepuscule setup=crepuscule
+lock lock-crepuscule setup=crepuscule scale=3
+icons icons-crepuscule setup=crepuscule scale=4
+setupwidgets setup-creme setup=creme
+lock lock-creme setup=creme scale=3
+icons icons-creme setup=creme scale=4
+
+# --- Tous les écrans d'accueil du Store (1 206 × 2 622), et quelques-uns sur un autre fond ---
+home home-creme setup=creme scale=3
+home home-aurore setup=aurore scale=3
+home home-graphite setup=graphite scale=3
+home home-neon setup=neon scale=3
+home home-topographie setup=topographie scale=3
+home home-minuit setup=minuit scale=3
+home home-etudes setup=etudes scale=3
+home home-jade setup=jade scale=3
+home home-dune setup=dune scale=3
+home home-pastel setup=pastel scale=3
+home home-bureau setup=bureau scale=3
+home home-corail setup=corail scale=3
+home home-ocean setup=ocean scale=3
+home home-foret setup=foret scale=3
+home home-crepuscule setup=crepuscule scale=3
+home home-terrazzo setup=terrazzo scale=3
+home home-nebuleuse setup=nebuleuse scale=3
+home home-seventies setup=seventies scale=3
+home home-espace setup=espace scale=3
+home home-mars setup=mars scale=3
+home home-nature setup=nature scale=3
+home home-botanique setup=botanique scale=3
+home home-vagues setup=vagues scale=3
+home home-jade-nebula setup=jade wall=nebula scale=3
+home home-jade-aurora setup=jade wall=aurora scale=3
+home home-minuit-aurora setup=minuit wall=aurora scale=3
+home home-creme-pastel setup=creme wall=pastel scale=3
+
+# --- Tous les fonds d'écran ---
+wall wall-midnight wall=midnight scale=3
+wall wall-cream wall=cream scale=3
+wall wall-aurora wall=aurora scale=3
+wall wall-topography wall=topography scale=3
+wall wall-synthwave wall=synthwave scale=3
+wall wall-dunes wall=dunes scale=3
+wall wall-jade wall=jade scale=3
+wall wall-pastel wall=pastel scale=3
+wall wall-graphite wall=graphite scale=3
+wall wall-paper wall=paper scale=3
+wall wall-bureau wall=bureau scale=3
+wall wall-bauhaus wall=bauhaus scale=3
+wall wall-ocean wall=ocean scale=3
+wall wall-forest wall=forest scale=3
+wall wall-sunset wall=sunset scale=3
+wall wall-terrazzo wall=terrazzo scale=3
+wall wall-nebula wall=nebula scale=3
+wall wall-seventies wall=seventies scale=3
+
+# --- Activité en direct (la vraie vue de l'extension) : séance démo « Haut du corps », Développé couché 4 × 8 à 60 kg,
+#     14 séries, repos de 120 s (Shared/Data/SampleData.swift). Décompte : une image par seconde. ---
+live live-rest-real from=60 to=45 set=3 sets=4 done=2 total=14 restTotal=120 bg=real scheme=dark scale=3
+live live-afterset-real from=120 to=110 set=4 sets=4 done=3 total=14 restTotal=120 bg=real scheme=dark scale=3
+live live-paused-real state=paused paused=45 set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3
+live live-ready-real state=ready set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3
+live live-rest-night from=60 to=45 set=3 sets=4 done=2 total=14 restTotal=120 bg=night scheme=dark scale=3
+live live-afterset-night from=120 to=110 set=4 sets=4 done=3 total=14 restTotal=120 bg=night scheme=dark scale=3
+live live-paused-night state=paused paused=45 set=3 sets=4 done=2 total=14 bg=night scheme=dark scale=3
+live live-ready-night state=ready set=3 sets=4 done=2 total=14 bg=night scheme=dark scale=3
+live live-rest-real-light rest=52 set=3 sets=4 done=2 total=14 restTotal=120 bg=real scheme=light scale=3
+live live-rest-clear rest=52 set=3 sets=4 done=2 total=14 restTotal=120 bg=clear scheme=dark scale=3
+
+# --- Démonstrations d'exercices : une boucle à 60 images/s, vue 3/4 (la barre se voit le mieux), fond transparent ---
+demo demo-bench-press exercise=bench-press view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
+demo demo-back-squat exercise=back-squat view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
+demo demo-deadlift exercise=deadlift view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
+demo demo-pull-up exercise=pull-up view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light

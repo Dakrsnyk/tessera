@@ -784,6 +784,69 @@ private struct ScanFrame: View {
     }
 }
 
+#if DEBUG
+/// Test builds (`-screenshotScreen scan-frame`): the barcode scanner as it opens on an iPhone, built
+/// like the scanner sheet of `FoodSearchView` (same title, « Annuler », aiming square and search button,
+/// same modifiers), with a plain camera area since the simulator has no camera: black, or white with
+/// `-marketingScreen white` (the two captures give the overlay's transparency by difference). The ad
+/// films put a product behind it.
+struct ScanFrameScreenshot: View {
+    var body: some View {
+        NavigationStack {
+            cameraArea
+                .ignoresSafeArea(edges: .bottom)
+                .overlay { ScanFrame() }
+                .navigationTitle(tr("Scanner un aliment"))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button(tr("Annuler")) {}
+                    }
+                }
+                .safeAreaInset(edge: .bottom) {
+                    Button {} label: {
+                        Label(tr("Chercher ou créer l'aliment"), systemImage: "magnifyingglass")
+                            .font(.subheadline.weight(.semibold))
+                            .padding(.horizontal, 16)
+                            .frame(minHeight: 44)
+                            .background(.regularMaterial, in: Capsule())
+                    }
+                    .padding(.bottom, 12)
+                }
+        }
+    }
+
+    private var cameraArea: Color {
+        UserDefaults.standard.string(forKey: "marketingScreen") == "white" ? .white : .black
+    }
+}
+
+/// `-screenshotScreen scan-frame`: « Ajouter un aliment » opened over the Nutrition mini-app, then the
+/// scanner over it, as on an iPhone where « Scanner » opens the camera at once.
+struct ScanFrameScreenshotStage: View {
+    @State private var showsSearch = false
+    @State private var showsScanner = false
+
+    var body: some View {
+        Color.clear
+            .allowsHitTesting(false)
+            .sheet(isPresented: $showsSearch) {
+                FoodSearchView(startsWithScanner: true)
+                    .sheet(isPresented: $showsScanner) {
+                        ScanFrameScreenshot()
+                    }
+            }
+            .task {
+                // After the mini-app is pushed (ScreenshotMode opens it at 0.7 s), one sheet at a time.
+                try? await Task.sleep(for: .milliseconds(1_600))
+                showsSearch = true
+                try? await Task.sleep(for: .milliseconds(1_200))
+                showsScanner = true
+            }
+    }
+}
+#endif
+
 /// The four rounded corners of the scanning square.
 private struct ScanCorners: Shape {
     func path(in rect: CGRect) -> Path {

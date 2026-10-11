@@ -146,6 +146,8 @@ struct RootView: View {
                         DemoGalleryView(mode: galleryMode)
                     } else if ["gallery-styles", "gallery-presets", "gallery-layouts", "gallery-charts", "gallery-looks", "gallery-palettes", "gallery-recolor"].contains(where: galleryMode.hasPrefix) {
                         StudioGalleryView(mode: galleryMode)
+                    } else if galleryMode == "scan-frame" {
+                        ScanFrameScreenshotStage()
                     } else {
                         WidgetGalleryView(mode: galleryMode)
                     }

@@ -85,6 +85,19 @@ enum ScreenshotMode {
         case "spaces": router.tab = .spaces
         case "store": router.tab = .explore
         case "editor-v2": router.openEditor(TemplateCatalog.design("calories-glass"), isNew: true)
+        case "scan-frame":
+            // The barcode scanner with a plain camera area, over « Ajouter un aliment » and the Nutrition
+            // mini-app (ScanFrameScreenshotStage, shown by RootView).
+            router.tab = .home
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(700))
+                router.openApp(.nutrition)
+            }
+            return .gallery(screen)
+        case "export":
+            // The pieces of the ad films written as PNG files (AdExport, Documents/ad_export.txt).
+            router.tab = .home
+            Task { @MainActor in await AdExport.run() }
         default:
             if screen.hasPrefix("gallery") || screen.hasPrefix("marketing") { return .gallery(screen) }
             // Steps of the first launch (the flow picks the step itself, see `OnboardingView`).

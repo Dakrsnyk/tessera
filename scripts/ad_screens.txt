@@ -1,0 +1,123 @@
+# Écrans fixes de l'app pour les films, rendus par [adkit] dans report/adkit/screens/<fichier>.png
+# (iPhone 16 Pro, 1 206 × 2 622, barre d'état à 9:41, clair, français, style Corail, données démo).
+# Format : <fichier> <valeur de -screenshotScreen> [arguments de lancement en plus]
+# Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
+# qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
+
+# Mon Quotidien
+home-s00 home -screenshotScroll 0
+home-s01 home -screenshotScroll 0.1
+home-s02 home -screenshotScroll 0.2
+home-s03 home -screenshotScroll 0.3
+home-s04 home -screenshotScroll 0.4
+home-s05 home -screenshotScroll 0.5
+home-s06 home -screenshotScroll 0.6
+home-s07 home -screenshotScroll 0.7
+home-s08 home -screenshotScroll 0.8
+home-s09 home -screenshotScroll 0.9
+home-s10 home -screenshotScroll 1
+
+# Nutrition, la recherche d'aliment et le scanner (carré de visée réel, caméra noire puis blanche pour le détourage)
+app-nutrition-s00 app-nutrition -screenshotScroll 0
+app-nutrition-s01 app-nutrition -screenshotScroll 0.1
+app-nutrition-s02 app-nutrition -screenshotScroll 0.2
+app-nutrition-s03 app-nutrition -screenshotScroll 0.3
+app-nutrition-s04 app-nutrition -screenshotScroll 0.4
+app-nutrition-s05 app-nutrition -screenshotScroll 0.5
+app-nutrition-s06 app-nutrition -screenshotScroll 0.6
+app-nutrition-s07 app-nutrition -screenshotScroll 0.7
+app-nutrition-s08 app-nutrition -screenshotScroll 0.8
+app-nutrition-s09 app-nutrition -screenshotScroll 0.9
+app-nutrition-s10 app-nutrition -screenshotScroll 1
+scan-food scan-food
+scan-frame scan-frame
+scan-frame-white scan-frame -marketingScreen white
+
+# Fitness (la séance en cours après l'accueil : elle remplace la séance du jour des données démo)
+app-fitness-s00 app-fitness -screenshotScroll 0
+app-fitness-s01 app-fitness -screenshotScroll 0.1
+app-fitness-s02 app-fitness -screenshotScroll 0.2
+app-fitness-s03 app-fitness -screenshotScroll 0.3
+app-fitness-s04 app-fitness -screenshotScroll 0.4
+app-fitness-s05 app-fitness -screenshotScroll 0.5
+app-fitness-s06 app-fitness -screenshotScroll 0.6
+app-fitness-s07 app-fitness -screenshotScroll 0.7
+app-fitness-s08 app-fitness -screenshotScroll 0.8
+app-fitness-s09 app-fitness -screenshotScroll 0.9
+app-fitness-s10 app-fitness -screenshotScroll 1
+app-fitness-program app-fitness-program
+app-fitness-progress app-fitness-progress
+app-fitness-history app-fitness-history
+app-fitness-library app-fitness-library
+app-fitness-exercise-bench-press app-fitness-exercise-bench-press
+app-fitness-exercise-bench-press-end app-fitness-exercise-bench-press -screenshotScroll bottom
+app-fitness-exercise-back-squat app-fitness-exercise-back-squat
+app-fitness-exercise-back-squat-end app-fitness-exercise-back-squat -screenshotScroll bottom
+app-fitness-exercise-deadlift app-fitness-exercise-deadlift
+app-fitness-exercise-deadlift-end app-fitness-exercise-deadlift -screenshotScroll bottom
+app-fitness-exercise-pull-up app-fitness-exercise-pull-up
+app-fitness-exercise-pull-up-end app-fitness-exercise-pull-up -screenshotScroll bottom
+app-fitness-session app-fitness-session
+app-fitness-session-end app-fitness-session -screenshotScroll bottom
+
+# Finances
+app-finances-s00 app-finances -screenshotScroll 0
+app-finances-s01 app-finances -screenshotScroll 0.1
+app-finances-s02 app-finances -screenshotScroll 0.2
+app-finances-s03 app-finances -screenshotScroll 0.3
+app-finances-s04 app-finances -screenshotScroll 0.4
+app-finances-s05 app-finances -screenshotScroll 0.5
+app-finances-s06 app-finances -screenshotScroll 0.6
+app-finances-s07 app-finances -screenshotScroll 0.7
+app-finances-s08 app-finances -screenshotScroll 0.8
+app-finances-s09 app-finances -screenshotScroll 0.9
+app-finances-s10 app-finances -screenshotScroll 1
+app-finances-categories app-finances-categories
+app-finances-bills app-finances-bills
+app-finances-savings app-finances-savings
+app-finances-transactions app-finances-transactions
+
+# Planning et habitudes
+app-planning-s00 app-planning -screenshotScroll 0
+app-planning-s01 app-planning -screenshotScroll 0.1
+app-planning-s02 app-planning -screenshotScroll 0.2
+app-planning-s03 app-planning -screenshotScroll 0.3
+app-planning-s04 app-planning -screenshotScroll 0.4
+app-planning-s05 app-planning -screenshotScroll 0.5
+app-planning-s06 app-planning -screenshotScroll 0.6
+app-planning-s07 app-planning -screenshotScroll 0.7
+app-planning-s08 app-planning -screenshotScroll 0.8
+app-planning-s09 app-planning -screenshotScroll 0.9
+app-planning-s10 app-planning -screenshotScroll 1
+app-planning-habits app-planning-habits
+app-planning-week app-planning-week
+app-planning-tasks app-planning-tasks
+
+# Store, écrans prêts, Studio, icônes, écran verrouillé
+store store
+store-at-0.12 store -screenshotScroll 0.12
+store-at-0.24 store -screenshotScroll 0.24
+store-at-0.36 store -screenshotScroll 0.36
+store-at-0.48 store -screenshotScroll 0.48
+store-at-0.6 store -screenshotScroll 0.6
+store-at-0.72 store -screenshotScroll 0.72
+store-at-0.84 store -screenshotScroll 0.84
+store-end store -screenshotScroll bottom
+setups setups
+setups-end setups -screenshotScroll bottom
+setup-jade setup-jade
+setup-aurore setup-aurore
+setup-minuit setup-minuit
+setup-neon setup-neon
+studio-content studio-content
+studio-theme studio-theme
+studio-style studio-style
+studio-colors studio-colors
+studio-background studio-background
+studio-border studio-border
+studio-style-mid studio-style -screenshotScroll 0.4
+studio-palette-coral studio-palette-coral
+studio-palette-sunset studio-palette-sunset
+icons icons
+spaces-lock spaces-lock
+spaces-lock-end spaces-lock -screenshotScroll bottom
