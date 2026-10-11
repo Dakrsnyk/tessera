@@ -19,7 +19,7 @@ const FIGURES = [
 ];
 const fig = (i: number, f: number) => {
   const { name, count } = FIGURES[i];
-  return k(`demo-${name}-dark-${String(Math.max(0, f) % count).padStart(4, "0")}.png`);
+  return k(`demo-${name}-dark-${String(Math.round(Math.max(0, f)) % count).padStart(4, "0")}.png`);
 };
 const LA = { x: AXIS - 500, y: 250, w: 1000, h: (1000 * 465) / 1116 };
 /** Figures change half-way between the ticks (30, 90, 150 …), each with a 10-frame blade. */
@@ -27,7 +27,7 @@ const CHANGE = [30, 90, 150, 210];
 
 export const FitnessCold: React.FC<{ audio?: boolean }> = () => {
   const frame = useFilmFrame();
-  const second = Math.min(3, Math.max(0, Math.floor(frame / 60)));
+  const second = Math.min(3, Math.max(0, Math.floor(Math.round(frame) / 60)));
   let current = 0;
   for (let i = 0; i < CHANGE.length; i++) if (frame >= CHANGE[i] + 10) current = Math.min(3, i + 1);
   const changing = CHANGE.findIndex((c) => frame >= c && frame < c + 10);

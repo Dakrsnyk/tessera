@@ -24,7 +24,7 @@ const SESSION_AFTER = k("session-1-dark.png");
 const SET_DONE = { x0: 108, x1: 1098, y0: 1386, y1: 1524 };
 const LIBRARY = k("lib-0-dark.png");
 const DETAIL = k("ex-0-dark.png");
-const demo = (name: string, i: number, count: number) => k(`demo-${name}-dark-${String(i % count).padStart(4, "0")}.png`);
+const demo = (name: string, i: number, count: number) => k(`demo-${name}-dark-${String(Math.round(i) % count).padStart(4, "0")}.png`);
 const BENCH = { name: "bench-press", count: 240 };
 const SQUAT = { name: "back-squat", count: 234 };
 const DEAD = { name: "deadlift", count: 264 };
