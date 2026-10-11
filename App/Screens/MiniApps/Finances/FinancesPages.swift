@@ -332,7 +332,7 @@ struct FinancesBillsPage: View {
             } header: {
                 Text(tr("Prochaines échéances"))
             } footer: {
-                Text(tr("Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois."))
+                Text(tr("Loyer, électricité, Internet, abonnements : Ardane te rappelle la prochaine date et le total par mois."))
             }
         }
         .styledList()
@@ -441,7 +441,7 @@ struct FinancesSavingsPage: View {
                 }
                 .buttonStyle(.plain)
             }
-            Text(tr("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.")).font(.footnote).foregroundStyle(.secondary)
+            Text(tr("Saisis tes soldes à la main : Ardane ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.")).font(.footnote).foregroundStyle(.secondary)
         }
     }
 }

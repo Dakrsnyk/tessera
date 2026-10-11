@@ -34,7 +34,7 @@ enum MoneyTiles {
             var tile = Tile(title: tr("Dépenses du mois"), symbol: "creditcard")
             tile.value = TF.money(spent, currency)
             tile.caption = tr("dépensés ce mois-ci")
-            tile.detail = tr("Budget mensuel à définir dans Tessera")
+            tile.detail = tr("Budget mensuel à définir dans Ardane")
             tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now).prefix(4).map { item in
                 TileRow(id: item.name, title: item.name, value: TF.money(item.amount, currency), colorHex: item.colorHex)
             }
@@ -61,7 +61,7 @@ enum MoneyTiles {
 
     static func byCategory(_ state: BudgetState, now: Date, currency: String) -> Tile {
         let items = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now)
-        guard !items.isEmpty else { return .empty(tr("Dépenses"), symbol: "chart.bar.doc.horizontal", message: tr("Note tes dépenses dans Tessera, espace Budget.")) }
+        guard !items.isEmpty else { return .empty(tr("Dépenses"), symbol: "chart.bar.doc.horizontal", message: tr("Note tes dépenses dans Ardane, espace Budget.")) }
         let total = items.reduce(0) { $0 + $1.amount }
         var tile = Tile(title: tr("Dépenses du mois"), symbol: "chart.bar.doc.horizontal")
         tile.value = TF.money(total, currency)
@@ -83,7 +83,7 @@ enum MoneyTiles {
 
     static func bills(_ state: BudgetState, now: Date, currency: String) -> Tile {
         let upcoming = BudgetMath.upcomingBills(state, at: now, within: 31)
-        guard let next = upcoming.first else { return .empty(tr("Factures"), symbol: "doc.text", message: tr("Ajoute tes factures dans Tessera, espace Budget.")) }
+        guard let next = upcoming.first else { return .empty(tr("Factures"), symbol: "doc.text", message: tr("Ajoute tes factures dans Ardane, espace Budget.")) }
         let total = upcoming.reduce(0) { $0 + $1.bill.amount }
         var tile = Tile(title: tr("Factures à venir"), symbol: "doc.text")
         tile.value = TF.money(next.bill.amount, currency, decimals: 2)
@@ -99,7 +99,7 @@ enum MoneyTiles {
 
     static func savings(_ state: BudgetState, target: String?, now: Date, currency: String) -> Tile {
         guard let goal = state.goals.first(where: { $0.id.uuidString == target }) ?? state.goals.first else {
-            return .empty(tr("Épargne"), symbol: "banknote", message: tr("Crée un objectif d'épargne dans Tessera, espace Budget."))
+            return .empty(tr("Épargne"), symbol: "banknote", message: tr("Crée un objectif d'épargne dans Ardane, espace Budget."))
         }
         var tile = Tile(title: goal.name, symbol: "banknote")
         tile.value = Fmt.percent(goal.progress)
@@ -122,7 +122,7 @@ enum MoneyTiles {
     }
 
     static func netWorth(_ state: BudgetState, now: Date, currency: String) -> Tile {
-        guard !state.accounts.isEmpty else { return .empty(tr("Valeur nette"), symbol: "building.columns", message: tr("Ajoute tes comptes et tes dettes dans Tessera, espace Budget.")) }
+        guard !state.accounts.isEmpty else { return .empty(tr("Valeur nette"), symbol: "building.columns", message: tr("Ajoute tes comptes et tes dettes dans Ardane, espace Budget.")) }
         let worth = BudgetMath.netWorth(state)
         var tile = Tile(title: tr("Valeur nette"), symbol: "building.columns")
         tile.value = TF.money(worth, currency)
@@ -144,7 +144,7 @@ enum MoneyTiles {
 
     static func subscriptions(_ state: BudgetState, currency: String) -> Tile {
         let subs = state.bills.filter(\.isSubscription)
-        guard !subs.isEmpty else { return .empty(tr("Abonnements"), symbol: "repeat.circle", message: tr("Ajoute tes abonnements dans Tessera, espace Budget.")) }
+        guard !subs.isEmpty else { return .empty(tr("Abonnements"), symbol: "repeat.circle", message: tr("Ajoute tes abonnements dans Ardane, espace Budget.")) }
         let monthly = BudgetMath.subscriptionsMonthly(state)
         var tile = Tile(title: tr("Abonnements"), symbol: "repeat.circle")
         tile.value = TF.money(monthly, currency, decimals: 2)
@@ -160,7 +160,7 @@ enum MoneyTiles {
     static func quickExpense(_ state: BudgetState, now: Date, currency: String) -> Tile {
         let today = BudgetMath.spentToday(state, at: now)
         guard !state.quickExpenses.isEmpty else {
-            return .empty(tr("Dépense rapide"), symbol: "cart.badge.plus", message: tr("Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget."))
+            return .empty(tr("Dépense rapide"), symbol: "cart.badge.plus", message: tr("Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget."))
         }
         var tile = Tile(title: tr("Dépense rapide"), symbol: "cart.badge.plus")
         tile.value = TF.money(today, currency, decimals: 2)
@@ -179,7 +179,7 @@ enum MoneyTiles {
 
     static func portfolio(_ data: DomainData, currency: String) -> Tile {
         let positions = PortfolioMath.positions(data.portfolio, prices: data.prices)
-        guard !positions.isEmpty else { return .empty(tr("Portefeuille"), symbol: "chart.line.uptrend.xyaxis", message: tr("Ajoute tes placements dans Tessera, espace Placements.")) }
+        guard !positions.isEmpty else { return .empty(tr("Portefeuille"), symbol: "chart.line.uptrend.xyaxis", message: tr("Ajoute tes placements dans Ardane, espace Placements.")) }
         let summary = PortfolioMath.summary(positions)
         var tile = Tile(title: tr("Portefeuille"), symbol: "chart.line.uptrend.xyaxis")
         tile.value = TF.money(summary.value, currency)
@@ -210,7 +210,7 @@ enum MoneyTiles {
         let parts = PortfolioMath.allocation(positions)
         let total = parts.reduce(0) { $0 + $1.value }
         guard let largest = parts.max(by: { $0.value < $1.value }), total > 0 else {
-            return .empty(tr("Répartition"), symbol: "chart.pie", message: tr("Ajoute tes placements dans Tessera, espace Placements."))
+            return .empty(tr("Répartition"), symbol: "chart.pie", message: tr("Ajoute tes placements dans Ardane, espace Placements."))
         }
         var tile = Tile(title: tr("Répartition"), symbol: "chart.pie")
         tile.value = Fmt.percent(largest.value / total)

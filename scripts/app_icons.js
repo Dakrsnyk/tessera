@@ -1,22 +1,30 @@
-// The app icons: Classique (the main icon) and the alternates the person can pick in « Icône de l'app ».
-// Each icon is drawn in HTML and rendered by Chromium to 1024 × 1024 PNGs, light and tinted: the icons
-// stay light when the iPhone is in Dark Mode (app_icons_install.py puts the light picture in both slots).
+// The app icons: the main icon (Corail, the Ardane logo) and the alternates the person can pick in
+// « Icône de l'app ». Each icon is drawn in SVG and rendered by Chromium to 1024 × 1024 PNGs, light
+// and tinted: the icons stay light when the iPhone is in Dark Mode (app_icons_install.py puts the
+// light picture in both slots).
 //
-//   node scripts/app_icons.js <output folder>     (needs Playwright and a Chromium)
+//   node scripts/app_icons.js <output folder> [--sheet]   (needs Playwright and a Chromium)
 //   python3 scripts/app_icons_install.py <output folder>   (asset catalog + previews)
 //
-// The same geometry as TesseraMark: a band across the top, two tiles below, cream or glass.
+// The mark: an A in two halves split by a narrow gap (left half and right half of two tones).
+// The glass icons keep the colors of the former Tessera icons: a clear half and a smoked half on a
+// colored mesh, with the same sheen.
 const fs = require("fs");
 const path = require("path");
 const { chromium } = require(process.env.PLAYWRIGHT || "playwright");
 
-const RECTS = [[-90, -90, 1204, 390], [-90, 392, 556, 722], [558, 392, 556, 722]];
+// The two halves, in a 100 × 100 box (the B19 logo).
+const LEFT = "M47.5 19.3 L47.5 55.4 L34 86 H16 Z";
+const RIGHT = "M52.5 19.3 L84 86 H66 L52.5 55.4 Z";
 const mesh = (base, blobs) => blobs.map(([c, x, y, r]) => `radial-gradient(circle at ${x}% ${y}%, ${c}, transparent ${r}%)`).join(", ") + `, ${base}`;
 const glass = (base, a, b, c) => ({ bg: mesh(base, [[a, 12, 92, 65], [b, 95, 8, 60], [c, 85, 85, 45]]), glass: true });
 
 // Asset name → look. Keep in sync with AppIconChoice.all (App/Core/AppIcons.swift).
 const icons = {
-  "AppIcon": { classic: true },
+  "AppIcon": { bg: "linear-gradient(160deg, #FF7A59, #D9246A)", left: ["#FFFFFF", "#FFFFFF"], right: ["#FFE0CC", "#FFE0CC"] },
+  "AppIcon-Classic": { bg: "linear-gradient(135deg, #FBF8F3, #EAE3D8)", left: ["#F04B4D", "#F5782C"], right: ["#2B2223", "#0E0C0C"] },
+  // Glass on white: glossy halves, black and cyan.
+  "AppIcon-GlassBlack": { bg: "linear-gradient(160deg, #FFFFFF, #E9EDF2)", gloss: true, left: ["#3A3F47", "#07090C"], right: ["#7DF4FF", "#00AFCF"] },
   "AppIcon-RedGlass": { bg: mesh("#E8443A", [["#FF9A3D", 15, 95, 70], ["#D61F3A", 90, 5, 60], ["#FFB36B", 85, 85, 45]]), glass: true },
   "AppIcon-Jade": { bg: mesh("#1F8F78", [["#7FE0C4", 10, 90, 65], ["#0E5C4C", 95, 10, 60], ["#3FD0A8", 80, 80, 45]]), glass: true },
   "AppIcon-Night": { bg: mesh("#241B5C", [["#7B5CFF", 15, 85, 60], ["#0B0A2A", 95, 5, 60], ["#E0479E", 90, 95, 45]]), glass: true },
@@ -35,50 +43,62 @@ const icons = {
   "AppIcon-Graphite": glass("#4A5160", "#AEB8C8", "#1C2028", "#7A8598"),
 };
 
-const u = (v) => `${v}px`;
-function tileStyle(kind, dark) {
-  const shadow = `0 20px 50px rgba(0,0,0,${dark ? 0.3 : 0.18})`;
-  if (kind === "clear") return `background:linear-gradient(160deg, rgba(255,255,255,${dark ? 0.3 : 0.55}), rgba(255,255,255,${dark ? 0.08 : 0.18}));backdrop-filter:blur(30px) saturate(1.4);box-shadow:inset 0 6px 0 rgba(255,255,255,${dark ? 0.45 : 0.75}), inset 0 0 0 4px rgba(255,255,255,${dark ? 0.2 : 0.35}), ${shadow};`;
-  return `background:linear-gradient(160deg, rgba(20,16,30,${dark ? 0.65 : 0.55}), rgba(10,8,16,${dark ? 0.85 : 0.78}));backdrop-filter:blur(30px);box-shadow:inset 0 6px 0 rgba(255,255,255,${dark ? 0.18 : 0.28}), inset 0 0 0 4px rgba(255,255,255,0.12), ${shadow};`;
+function grad(id, [a, b]) {
+  return `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`;
 }
-const classicFills = ["linear-gradient(#F04B4D, #D62F33)", "linear-gradient(#FF9D55, #F5782C)", "linear-gradient(#2B2223, #0E0C0C)"];
-const tintedFills = ["linear-gradient(#FFFFFF, #E8E8E8)", "linear-gradient(#C9C9C9, #B5B5B5)", "linear-gradient(#7A7A7A, #626262)"];
+
+function svg(icon, variant) {
+  const defs = [];
+  let halves;
+  if (variant === "tinted") {
+    defs.push(grad("l", ["#FFFFFF", "#E8E8E8"]), grad("r", ["#9A9A9A", "#7E7E7E"]));
+    halves = `<path d="${LEFT}" fill="url(#l)"/><path d="${RIGHT}" fill="url(#r)"/>`;
+  } else if (icon.glass) {
+    // A clear glass half and a smoked one (both clear for the pale icons), like the former tiles.
+    const smoke = !icon.allClear;
+    defs.push(
+      `<linearGradient id="clear" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset="1" stop-color="#fff" stop-opacity=".2"/></linearGradient>`,
+      `<linearGradient id="smoke" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14101E" stop-opacity=".55"/><stop offset="1" stop-color="#0A0810" stop-opacity=".8"/></linearGradient>`,
+      `<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2.4" flood-color="#000" flood-opacity=".22"/></filter>`
+    );
+    const half = (d, fill, edge) => `<path d="${d}" fill="${fill}" filter="url(#shadow)"/><path d="${d}" fill="none" stroke="#fff" stroke-opacity="${edge}" stroke-width=".7"/>`;
+    halves = half(LEFT, "url(#clear)", 0.75) + half(RIGHT, smoke ? "url(#smoke)" : "url(#clear)", smoke ? 0.22 : 0.75);
+  } else if (icon.gloss) {
+    // Classic colors made of glass: each half glossy, lit from the top, with a bright rim and a soft
+    // shadow on the white ground.
+    defs.push(grad("l", icon.left), grad("r", icon.right),
+      `<linearGradient id="shine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".45" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>`,
+      `<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2.6" stdDeviation="2.6" flood-color="#0B1A2A" flood-opacity=".28"/></filter>`);
+    const half = (d, fill) => `<path d="${d}" fill="${fill}" filter="url(#soft)"/><path d="${d}" fill="url(#shine)"/><path d="${d}" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width=".6"/>`;
+    halves = half(LEFT, "url(#l)") + half(RIGHT, "url(#r)");
+  } else {
+    defs.push(grad("l", icon.left), grad("r", icon.right));
+    halves = `<path d="${LEFT}" fill="url(#l)"/><path d="${RIGHT}" fill="url(#r)"/>`;
+  }
+  return `<svg viewBox="0 0 100 100" width="1024" height="1024"><defs>${defs.join("")}</defs>${halves}</svg>`;
+}
 
 function html(icon, variant) {
-  const dark = variant === "dark";
-  let bg; let tiles;
-  if (variant === "tinted") {
-    bg = "#000";
-    tiles = RECTS.map((r, i) => `background:${tintedFills[i]};`);
-  } else if (icon.classic) {
-    bg = dark ? "linear-gradient(135deg, #2E2829, #141112)" : "linear-gradient(135deg, #FBF8F3, #EAE3D8)";
-    tiles = RECTS.map((r, i) => `background:${classicFills[i]};`);
-  } else {
-    bg = icon.bg;
-    tiles = RECTS.map((r, i) => tileStyle(i === 2 && !icon.allClear ? "smoke" : "clear", dark));
-  }
-  const parts = RECTS.map(([x, y, w, h], i) => `<i style="left:${u(x)};top:${u(y)};width:${u(w)};height:${u(h)};border-radius:${u(64)};${tiles[i]}"></i>`).join("");
-  const veil = dark && !icon.classic && variant !== "tinted" ? `<b class="veil"></b>` : "";
-  const sheen = variant === "tinted" || icon.classic ? "" : `<b class="sheen"></b>`;
+  const bg = variant === "tinted" ? "#000" : icon.bg;
+  const sheen = icon.glass && variant !== "tinted" ? `<b class="sheen"></b>` : "";
   return `<!doctype html><html><head><meta charset="utf-8"><style>
 html, body { margin: 0; background: #000; }
-.icon { position: relative; overflow: hidden; width: 1024px; height: 1024px; isolation: isolate; }
-.icon i, .icon b { position: absolute; display: block; }
-.veil { inset: 0; background: rgba(0,0,0,.42); }
-.sheen { inset: 0; background: linear-gradient(180deg, rgba(255,255,255,${dark ? 0.06 : 0.16}), transparent 38%); }
-</style></head><body><div class="icon" style="background:${bg}">${veil}${parts}${sheen}</div></body></html>`;
+.icon { position: relative; overflow: hidden; width: 1024px; height: 1024px; }
+.icon svg, .icon b { position: absolute; inset: 0; display: block; }
+.sheen { background: linear-gradient(180deg, rgba(255,255,255,.16), transparent 38%); }
+</style></head><body><div class="icon" style="background:${bg}">${svg(icon, variant)}${sheen}</div></body></html>`;
 }
 
 (async () => {
   const out = process.argv[2];
-  if (!out) throw new Error("usage: node scripts/app_icons.js <output folder>");
+  if (!out) throw new Error("usage: node scripts/app_icons.js <output folder> [--sheet]");
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
   const page = await browser.newPage({ viewport: { width: 1024, height: 1024 }, deviceScaleFactor: 1 });
   for (const [name, icon] of Object.entries(icons)) {
     for (const variant of ["light", "tinted"]) {
       await page.setContent(html(icon, variant));
-      await page.waitForTimeout(80);
+      await page.waitForTimeout(60);
       await (await page.$(".icon")).screenshot({ path: path.join(out, `${name}-${variant}.png`) });
     }
     console.log(name);

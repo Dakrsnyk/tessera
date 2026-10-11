@@ -324,7 +324,7 @@
   ]
  },
  {
-  "key": "Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.",
+  "key": "Petit tour d'Ardane en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Tutorial/Tutorial.swift:81: tr(\"Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.\")"
@@ -401,7 +401,7 @@
   ]
  },
  {
-  "key": "Cherche « Tessera », choisis la taille, puis ton widget",
+  "key": "Cherche « Ardane », choisis la taille, puis ton widget",
   "placeholders": 0,
   "uses": [
    "App/Screens/Tutorial/TutorialOverlay.swift:163: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Cherche « Tessera », choisis la taille, puis ton widget\"))"
@@ -868,7 +868,7 @@
   ]
  },
  {
-  "key": "Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.",
+  "key": "Ajoute ta ville, tes tâches ou tes repas dans Ardane pour voir ta journée résumée ici.",
   "placeholders": 0,
   "uses": [
    "Shared/Data/Insights.swift:233: text = tr(\"Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.\")"
@@ -2050,7 +2050,7 @@
   ]
  },
  {
-  "key": "Tessera/1.0 (%@)",
+  "key": "Ardane/1.0 (%@)",
   "placeholders": 1,
   "uses": [
    "Shared/Domains/Companies.swift:6: static var userAgent: String { tr(\"Tessera/1.0 (\\(supportEmail))\") }"

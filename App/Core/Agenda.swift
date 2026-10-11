@@ -1,6 +1,6 @@
 import Foundation
 
-/// One thing of a day, whatever part of Tessera it comes from: a calendar event, a class, an exam, a
+/// One thing of a day, whatever part of Ardane it comes from: a calendar event, a class, an exam, a
 /// piece of homework, a task, a deadline, a workout.
 struct AgendaItem: Identifiable, Hashable {
     enum Kind: String, Hashable {

@@ -1,6 +1,6 @@
 import XCTest
 
-/// Places Tessera widgets the way a person would, on a simulated iPhone, and keeps a
+/// Places Ardane widgets the way a person would, on a simulated iPhone, and keeps a
 /// screenshot (and the accessibility tree) of every step. Labels are matched in English and French.
 final class WidgetPlacementUITests: XCTestCase {
     private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
@@ -93,9 +93,9 @@ final class WidgetPlacementUITests: XCTestCase {
     }
 
     /// Flicks the widget pages of the gallery until the preview of one of `names` is on screen.
-    /// The system labels each preview "Tessera, <widget name>". `height` is where the previews are, from 0 to 1.
+    /// The system labels each preview "Ardane, <widget name>". `height` is where the previews are, from 0 to 1.
     private func swipeToWidget(_ names: [String], height: CGFloat, maxSwipes: Int, prefix: String) -> XCUIElement? {
-        let wanted = NSPredicate(format: "label IN %@", names.map { "Tessera, \($0)" } as NSArray)
+        let wanted = NSPredicate(format: "label IN %@", names.map { "Ardane, \($0)" } as NSArray)
         for step in 0...maxSwipes {
             for app in systemApps {
                 let preview = app.buttons.matching(wanted).firstMatch
@@ -122,7 +122,7 @@ final class WidgetPlacementUITests: XCTestCase {
         pause(2)
     }
 
-    /// From the Home Screen to the Tessera page of the widget gallery.
+    /// From the Home Screen to the Ardane page of the widget gallery.
     private func openTesseraGallery(_ prefix: String) {
         launchTesseraOnce()
         // A second press brings back the first page; its lower part is empty on a fresh simulator.
@@ -149,13 +149,13 @@ final class WidgetPlacementUITests: XCTestCase {
         let field = springboard.searchFields.firstMatch
         if field.waitForExistence(timeout: 4) {
             field.tap()
-            field.typeText("Tessera")
+            field.typeText("Ardane")
             pause(2)
         }
         snapshot("\(prefix)-5-search", tree: true)
 
-        let listed = tap(["Tessera"], types: [.cell, .button, .staticText, .other], timeout: 5)
-        XCTAssertTrue(listed, "Tessera is not listed in the widget gallery")
+        let listed = tap(["Ardane"], types: [.cell, .button, .staticText, .other], timeout: 5)
+        XCTAssertTrue(listed, "Ardane is not listed in the widget gallery")
         pause(2.5)
         snapshot("\(prefix)-6-tessera-widgets", tree: true)
     }
@@ -163,7 +163,7 @@ final class WidgetPlacementUITests: XCTestCase {
     /// Adds the widget shown in the gallery, leaves edit mode and waits for the first render.
     private func addShownWidget(_ prefix: String) {
         let added = tap(["Add Widget", "Ajouter le widget", "Ajouter un widget"], types: [.button])
-        XCTAssertTrue(added, "The button that adds the Tessera widget was not found")
+        XCTAssertTrue(added, "The button that adds the Ardane widget was not found")
         pause(2.5)
         snapshot("\(prefix)-7-added")
 
@@ -191,7 +191,7 @@ final class WidgetPlacementUITests: XCTestCase {
         openTesseraGallery("home-v2")
         let found = swipeToWidget(["Nutrition"], height: 0.58, maxSwipes: 75, prefix: "home-v2")
         snapshot("home-v2-6b-nutrition", tree: true)
-        XCTAssertNotNil(found, "The Nutrition widget was not found in the Tessera gallery")
+        XCTAssertNotNil(found, "The Nutrition widget was not found in the Ardane gallery")
         guard found != nil else { return }
         addShownWidget("home-v2")
     }
@@ -228,14 +228,14 @@ final class WidgetPlacementUITests: XCTestCase {
         pause(2.5)
         snapshot("lock-5-widget-sheet", tree: true)
 
-        var offered = tap(["Tessera"], types: [.cell, .button, .staticText, .other], timeout: 3)
+        var offered = tap(["Ardane"], types: [.cell, .button, .staticText, .other], timeout: 3)
         if !offered {
             springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.85))
                 .press(forDuration: 0.1, thenDragTo: springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45)))
             pause(1.5)
-            offered = tap(["Tessera"], types: [.cell, .button, .staticText, .other], timeout: 3)
+            offered = tap(["Ardane"], types: [.cell, .button, .staticText, .other], timeout: 3)
         }
-        XCTAssertTrue(offered, "Tessera is not offered for the Lock Screen")
+        XCTAssertTrue(offered, "Ardane is not offered for the Lock Screen")
         pause(2.5)
         snapshot("lock-6-tessera-widgets", tree: true)
 

@@ -66,7 +66,7 @@
   ]
  },
  {
-  "key": "Calories, séance et régularité, aux couleurs de Tessera.",
+  "key": "Calories, séance et régularité, aux couleurs d'Ardane.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:307: id: \"jade\", name: tr(\"Jade\"), tagline: tr(\"Calories, séance et régularité, aux couleurs de Tessera.\"),"
@@ -1116,7 +1116,7 @@
   ]
  },
  {
-  "key": "Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte.",
+  "key": "Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Ardane réunit chaque jour ce qui compte.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:67: Text(tr(\"Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte.\"))"
@@ -1723,7 +1723,7 @@
   ]
  },
  {
-  "key": "Chaque mini-app utilise tes données de Tessera et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne.",
+  "key": "Chaque mini-app utilise tes données d'Ardane et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:221: Text(tr(\"Chaque mini-app utilise tes données de Tessera et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accue"
@@ -1787,7 +1787,7 @@
   ]
  },
  {
-  "key": "Personnalise Tessera",
+  "key": "Personnalise Ardane",
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MyInfoCenter.swift:83: Label(tr(\"Personnalise Tessera\"), systemImage: \"sparkles\")"

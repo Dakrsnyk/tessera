@@ -80,7 +80,7 @@ struct MyInfoCard: View {
     /// No interest and no data yet: an invitation, never empty cards.
     private var prompt: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label(tr("Personnalise Tessera"), systemImage: "sparkles")
+            Label(tr("Personnalise Ardane"), systemImage: "sparkles")
                 .font(.headline)
             Text(tr("Dis ce qui t'intéresse : tes widgets et « Mon Quotidien » reprendront tes objectifs, ton programme, ton budget… sans que tu aies à les répéter."))
                 .font(.subheadline)
@@ -144,7 +144,7 @@ private struct AreaBadge: View {
 
 // MARK: - The center
 
-/// Every piece of data Tessera can use, grouped by area: given once here (or while making a widget),
+/// Every piece of data Ardane can use, grouped by area: given once here (or while making a widget),
 /// used everywhere. The person's areas first, the others below.
 struct MyInfoView: View {
     @Environment(AppModel.self) private var model

@@ -48,7 +48,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     /// Where the step is, in the app's words (the tab, or the Studio).
     var place: String {
         switch self {
-        case .welcome, .finish: tr("Tessera")
+        case .welcome, .finish: tr("Ardane")
         case .daily, .info: tr("Accueil")
         case .create: tr("Créer")
         case .studio: tr("Studio")
@@ -75,7 +75,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     var message: String {
         switch self {
         case .welcome:
-            tr("Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.")
+            tr("Petit tour d'Ardane en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.")
         case .daily:
             tr("Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.")
         case .info:

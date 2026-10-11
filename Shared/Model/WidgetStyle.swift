@@ -184,7 +184,7 @@ enum DepthKind: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-/// The shape of what sits inside the widget: iOS draws the widget's own outline, Tessera shapes the rest.
+/// The shape of what sits inside the widget: iOS draws the widget's own outline, Ardane shapes the rest.
 enum ShapeKind: String, Codable, CaseIterable, Identifiable {
     case theme, rounded, soft, square, capsule, panel
     var id: String { rawValue }

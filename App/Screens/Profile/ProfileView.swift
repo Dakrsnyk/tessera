@@ -132,7 +132,7 @@ struct ProfileView: View {
                 } header: {
                     Text(tr("Notifications"))
                 } footer: {
-                    Text(tr("Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur."))
+                    Text(tr("Ardane ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur."))
                 }
 
                 Section(tr("Tes données")) {
@@ -163,7 +163,7 @@ struct ProfileView: View {
                     Button {
                         rate()
                     } label: {
-                        Label(tr("Noter Tessera"), systemImage: "star")
+                        Label(tr("Noter Ardane"), systemImage: "star")
                     }
                     .accessibilityIdentifier("settings-rate")
                     Button {
@@ -189,7 +189,7 @@ struct ProfileView: View {
                     Text(tr("À propos"))
                 } footer: {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(tr("Tessera \(appVersion)"))
+                        Text(tr("Ardane \(appVersion)"))
                         Text(tr("Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko."))
                         Text(tr("Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire."))
                     }
@@ -312,9 +312,9 @@ struct ProfileView: View {
         do {
             pendingRestore = try DataBackup.read(Data(contentsOf: url))
         } catch DataBackup.Failure.newerVersion {
-            backupMessage = tr("Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.")
+            backupMessage = tr("Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.")
         } catch {
-            backupMessage = tr("Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.")
+            backupMessage = tr("Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.")
         }
     }
 
@@ -326,7 +326,7 @@ struct ProfileView: View {
                 Text(name.isEmpty ? tr("Ton profil") : name)
                     .font(.title2.weight(.bold))
                     .foregroundStyle(.primary)
-                Label(model.isPremium ? tr("Tessera Premium") : tr("Version gratuite"), systemImage: model.isPremium ? "sparkles" : "person")
+                Label(model.isPremium ? tr("Ardane Premium") : tr("Version gratuite"), systemImage: model.isPremium ? "sparkles" : "person")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(model.isPremium ? Color.premiumInk : Color.secondary)
             }

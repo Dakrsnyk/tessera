@@ -1,6 +1,6 @@
-# Tessera — translation brief
+# Ardane — translation brief
 
-Tessera is an iPhone app of customizable widgets (Home Screen, Lock Screen) with mini-apps
+Ardane is an iPhone app of customizable widgets (Home Screen, Lock Screen) with mini-apps
 (Nutrition, Fitness, Planning, Studies, Finances, Business, Travel, Car, Weather), a widget editor
 (« Studio »), a Store of ready-made widgets and setups, and a Premium subscription.
 The source language is French (Québec/France). Target languages and codes:
@@ -25,7 +25,7 @@ pt-BR (Brazilian Portuguese), ja (Japanese).
   In keys without placeholders, `%` is plain text.
 - Keep leading/trailing spaces exactly (a key " verres" → " glasses"). Keep `\n` line breaks.
 - Text between ** ** is bold markdown: keep the ** around the translated part.
-- If a key is a proper noun, a brand, a unit or a code (Tessera, Premium, Open Food Facts, SEC, kcal, kg,
+- If a key is a proper noun, a brand, a unit or a code (Ardane, Premium, Open Food Facts, SEC, kcal, kg,
   km, MRR, iCloud+, IGA, Costco…), keep it unchanged (translate only the generic words around it).
 - Word fragments built by code: when the key is a single word used with a number
   (e.g. `Fmt.plural(n, "jour", "jours")`), translate the singular key as singular and the plural key
@@ -53,7 +53,7 @@ pt-BR (Brazilian Portuguese), ja (Japanese).
 | Style (Studio) | Style | Estilo | Stil | Stile | Estilo | スタイル |
 | Combiné (widget) | Combo | Combinado | Kombi | Combinato | Combinado | コンボ |
 | Pack | Pack | Pack | Paket | Pack | Pacote | パック |
-| Tessera Premium | Tessera Premium | (same everywhere) | | | | |
+| Ardane Premium | Ardane Premium | (same everywhere) | | | | |
 | séance (sport) | workout | entrenamiento | Training | allenamento | treino | ワークアウト |
 | série (sets of an exercise) | set | serie | Satz | serie | série | セット |
 | série (days in a row: habits, tracking) | streak | racha | Serie | serie | sequência | 連続記録 |

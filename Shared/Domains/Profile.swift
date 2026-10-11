@@ -1,12 +1,12 @@
 import Foundation
 
-// « Mes informations »: what the user tells Tessera about themselves, entered once and reused by every
+// « Mes informations »: what the user tells Ardane about themselves, entered once and reused by every
 // widget. Each fact has exactly one home. Most live here, in `UserProfile`; the ones a space already
 // keeps (nutrition targets, weekly workouts, monthly budget…) stay in that space's data, and the profile
 // only records that the user actually gave them, so a default value is never shown as theirs.
 
 /// What the user is interested in, picked at the first launch. It decides which questions are asked and
-/// what Tessera puts forward first, never what it hides.
+/// what Ardane puts forward first, never what it hides.
 enum Interest: String, Codable, CaseIterable, Identifiable {
     case sport, nutrition, finance, budget, business, studies, productivity, travel, car, weather, design, wellbeing
 
@@ -439,7 +439,7 @@ struct UserProfile: Codable, Hashable {
         profile.nutritionAim = .gain
         profile.monthlyIncome = 3_000
         profile.monthlySavingsGoal = 400
-        profile.mainGoal = tr("Finir le projet Tessera")
+        profile.mainGoal = tr("Finir le projet Ardane")
         profile.provided = Set(ProvidedFact.allCases)
         profile.migrated = true
         return profile

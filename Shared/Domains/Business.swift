@@ -25,7 +25,7 @@ struct SubscriptionSnapshot: Codable, Hashable, Identifiable {
     var subscribers: Int
 }
 
-/// The indicators Tessera computes from the sales, costs and recurring revenue; the person picks
+/// The indicators Ardane computes from the sales, costs and recurring revenue; the person picks
 /// the ones shown on the dashboard.
 enum BusinessKPI: String, Codable, CaseIterable, Identifiable {
     case revenue, costs, profit, margin, orders, averageBasket, newCustomers, visitors, conversion, mrr, subscribers

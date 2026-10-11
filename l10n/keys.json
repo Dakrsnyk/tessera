@@ -237,7 +237,7 @@
  "%@ : gratuit %@, Premium %@": {
   "placeholders": 3,
   "uses": [
-   "App/Premium/PaywallView.swift:210: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
+   "App/Premium/PaywallView.swift:216: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
   ]
  },
  "%@ L · %@/L · %@ km%@": {
@@ -421,19 +421,19 @@
  "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:275: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
+   "App/Premium/PaywallView.swift:281: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
   ]
  },
  "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:277: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
+   "App/Premium/PaywallView.swift:283: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
   ]
  },
  "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:279: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
+   "App/Premium/PaywallView.swift:285: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
   ]
  },
  "%@ dépensés · %@ avant la fin du mois": {
@@ -778,7 +778,7 @@
   "uses": [
    "App/Core/DataItems.swift:423: case .monthlyBudget: return tr(\"\\(TF.money(budget.monthlyBudget, currency)) par mois\")",
    "App/Core/DataItems.swift:429: case .businessGoal: return tr(\"\\(TF.money(business.monthlyGoal, currency)) par mois\")",
-   "App/Premium/PaywallView.swift:262: return tr(\"\\(product.displayPrice) par mois\")",
+   "App/Premium/PaywallView.swift:268: return tr(\"\\(product.displayPrice) par mois\")",
    "App/Premium/PremiumStore.swift:171: case (.month, 1): tr(\"\\(price) par mois\")"
   ]
  },
@@ -819,13 +819,13 @@
  "%@ pour 12 mois": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:260: return tr(\"\\(product.displayPrice) pour 12 mois\")"
+   "App/Premium/PaywallView.swift:266: return tr(\"\\(product.displayPrice) pour 12 mois\")"
   ]
  },
  "%@ pour 12 mois, soit %@ par mois": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/PaywallView.swift:259: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
+   "App/Premium/PaywallView.swift:265: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
   ]
  },
  "%@ pour commencer, puis %@": {
@@ -878,7 +878,7 @@
  "%@ styles en plus": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:150: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
+   "App/Premium/PaywallView.swift:156: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
   ]
  },
  "%@ sur %@": {
@@ -1195,7 +1195,7 @@
  "%@ × %@ kg": {
   "placeholders": 2,
   "uses": [
-   "App/Core/MarketingShots.swift:127: load: tr(\"\\(8) × \\(60) kg\"),",
+   "App/Core/MarketingShots.swift:135: load: tr(\"\\(8) × \\(60) kg\"),",
    "Shared/Live/WorkoutLiveActivity.swift:43: ? tr(\"\\(exercise.reps) × \\(Self.kilograms(exercise.weight)) kg\")",
    "Shared/Render/Tiles/FitnessTiles.swift:36: exercise.weight > 0 ? tr(\"\\(exercise.reps) × \\(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg\") : tr(\"\\(exercise.reps) répétitions\")"
   ]
@@ -1249,7 +1249,7 @@
  "%@ écrans prêts\nà installer.": {
   "placeholders": 1,
   "uses": [
-   "App/Core/MarketingShots.swift:571: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
+   "App/Core/MarketingShots.swift:639: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "%@ — %@. Tes widgets gardent chacun leur propre style.": {
@@ -1279,13 +1279,13 @@
  "%@, une seule fois, sans abonnement": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:264: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
+   "App/Premium/PaywallView.swift:270: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
   ]
  },
  "%@. Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:271: return tr(\"\\(intro). Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.\")"
+   "App/Premium/PaywallView.swift:277: return tr(\"\\(intro). Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.\")"
   ]
  },
  "%@/%@ aujourd'hui": {
@@ -1999,7 +1999,7 @@
  "8 mini-apps,\nune seule app.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:788: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+   "App/Core/MarketingShots.swift:856: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "8 × 60 kg": {
@@ -2129,10 +2129,10 @@
    "Shared/Data/SampleData.swift:317: var followers = CustomMetric(name: tr(\"Abonnés Instagram\"), target: 5_000)"
   ]
  },
- "Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Tessera trace leur évolution.": {
+ "Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Ardane trace leur évolution.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:304: Text(tr(\"Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Tessera trace leur évolution.\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:304: Text(tr(\"Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Ardane trace leur évolution.\"))"
   ]
  },
  "Absent": {
@@ -2157,7 +2157,7 @@
  "Accès au calendrier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/ProductivityWidgets.swift:248: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:248: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Ardane\"), style: s)"
   ]
  },
  "Accès autorisé": {
@@ -2176,7 +2176,7 @@
  "Accès refusé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:358: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Accès refusé\"), message: tr(\"Autorise « Mouvements et forme » pour Tessera dans les Réglages de l'iPhone pour voir tes pas.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:358: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Accès refusé\"), message: tr(\"Autorise « Mouvements et forme » pour Ardane dans les Réglages de l'iPhone pour voir tes pas.\"))"
   ]
  },
  "Accès à vie": {
@@ -2231,7 +2231,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:230: KindInfo(kind: .companyStock, title: tr(\"Action\"), summary: tr(\"Le cours de l'action d'une société et sa capitalisation.\"), category: .markets, symbol: \"chart.line.uptrend.xyaxis.circle\", isPremium: t",
-   "Shared/Render/Tiles/BusinessTiles.swift:217: return .empty(tr(\"Action\"), symbol: \"chart.line.uptrend.xyaxis.circle\", message: tr(\"Suis une entreprise dans Tessera, espace Sociétés cotées.\"))"
+   "Shared/Render/Tiles/BusinessTiles.swift:217: return .empty(tr(\"Action\"), symbol: \"chart.line.uptrend.xyaxis.circle\", message: tr(\"Suis une entreprise dans Ardane, espace Sociétés cotées.\"))"
   ]
  },
  "Action de grâce": {
@@ -2277,7 +2277,7 @@
  "Activité en direct": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:596: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:664: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Activités": {
@@ -2324,10 +2324,10 @@
    "Shared/Model/WidgetStyle.swift:355: TypePreset(id: \"display\", name: tr(\"Affiche\"), font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),"
   ]
  },
- "Affiche un widget que tu as créé dans Tessera, ou un modèle du catalogue.": {
+ "Affiche un widget que tu as créé dans Ardane, ou un modèle du catalogue.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/DesignIntent.swift:71: static var description = IntentDescription(\"Affiche un widget que tu as créé dans Tessera, ou un modèle du catalogue.\")"
+   "Shared/Intents/DesignIntent.swift:71: static var description = IntentDescription(\"Affiche un widget que tu as créé dans Ardane, ou un modèle du catalogue.\")"
   ]
  },
  "Afficher": {
@@ -2396,20 +2396,20 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:172: KindInfo(kind: .quickFood, title: tr(\"Ajout rapide\"), summary: tr(\"Tes aliments favoris, ajoutés au journal d'une touche.\"), category: .nutrition, symbol: \"plus.app\", isPremium: true, families: SM, ke",
-   "Shared/Render/Tiles/NutritionTiles.swift:216: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))",
+   "Shared/Render/Tiles/NutritionTiles.swift:216: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Ardane, espace Nutrition.\"))",
    "Shared/Render/Tiles/NutritionTiles.swift:219: var tile = Tile(title: tr(\"Ajout rapide\"), symbol: \"plus.app\")"
   ]
  },
- "Ajoute des favoris dans Tessera, espace Nutrition.": {
+ "Ajoute des favoris dans Ardane, espace Nutrition.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:216: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:216: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Ardane, espace Nutrition.\"))"
   ]
  },
- "Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.": {
+ "Ajoute l'assurance, l'immatriculation ou les pneus dans Ardane, espace Auto.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:130: return .empty(tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\", message: tr(\"Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.\"))"
+   "Shared/Render/Tiles/CarTiles.swift:130: return .empty(tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\", message: tr(\"Ajoute l'assurance, l'immatriculation ou les pneus dans Ardane, espace Auto.\"))"
   ]
  },
  "Ajoute les exercices au fur et à mesure": {
@@ -2424,28 +2424,28 @@
    "App/Screens/MiniApps/Travel/TravelPages.swift:289: Text(tr(\"Ajoute les incontournables (passeport, chargeur, assurance…) sans doublon ; retire ceux qui ne te servent pas en glissant.\"))"
   ]
  },
- "Ajoute ta date de naissance dans Tessera, espace Ma vie.": {
+ "Ajoute ta date de naissance dans Ardane, espace Ma vie.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TimeTiles.swift:17: private static let lifeHint = tr(\"Ajoute ta date de naissance dans Tessera, espace Ma vie.\")"
+   "Shared/Render/Tiles/TimeTiles.swift:17: private static let lifeHint = tr(\"Ajoute ta date de naissance dans Ardane, espace Ma vie.\")"
   ]
  },
- "Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.": {
+ "Ajoute ta ville, tes tâches ou tes repas dans Ardane pour voir ta journée résumée ici.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Data/Insights.swift:233: text = tr(\"Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.\")"
+   "Shared/Data/Insights.swift:233: text = tr(\"Ajoute ta ville, tes tâches ou tes repas dans Ardane pour voir ta journée résumée ici.\")"
   ]
  },
- "Ajoute ta voiture et tes pleins dans Tessera, espace Auto.": {
+ "Ajoute ta voiture et tes pleins dans Ardane, espace Auto.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:4: static let hint = tr(\"Ajoute ta voiture et tes pleins dans Tessera, espace Auto.\")"
+   "Shared/Render/Tiles/CarTiles.swift:4: static let hint = tr(\"Ajoute ta voiture et tes pleins dans Ardane, espace Auto.\")"
   ]
  },
- "Ajoute tes abonnements dans Tessera, espace Budget.": {
+ "Ajoute tes abonnements dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:147: guard !subs.isEmpty else { return .empty(tr(\"Abonnements\"), symbol: \"repeat.circle\", message: tr(\"Ajoute tes abonnements dans Tessera, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:147: guard !subs.isEmpty else { return .empty(tr(\"Abonnements\"), symbol: \"repeat.circle\", message: tr(\"Ajoute tes abonnements dans Ardane, espace Budget.\")) }"
   ]
  },
  "Ajoute tes actions, ETF, cryptos et liquidités. Les cryptos se mettent à jour en direct (CoinGecko). Pour les actions et ETF, indique le dernier prix connu.": {
@@ -2454,10 +2454,10 @@
    "App/Screens/Spaces/MoneySpaces.swift:16: HintRow(text: tr(\"Ajoute tes actions, ETF, cryptos et liquidités. Les cryptos se mettent à jour en direct (CoinGecko). Pour les actions et ETF, indique le dernier prix connu.\"))"
   ]
  },
- "Ajoute tes comptes et tes dettes dans Tessera, espace Budget.": {
+ "Ajoute tes comptes et tes dettes dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:125: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Tessera, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:125: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Ardane, espace Budget.\")) }"
   ]
  },
  "Ajoute tes cours": {
@@ -2472,40 +2472,40 @@
    "App/Screens/Home/DailySection.swift:890: case .student: tr(\"Ajoute tes cours : ton horaire du jour apparaîtra ici.\")"
   ]
  },
- "Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Tessera calcule ensuite tes moyennes et ce qu'il te reste à faire.": {
+ "Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Ardane calcule ensuite tes moyennes et ce qu'il te reste à faire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:117: Text(tr(\"Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Tessera calcule ensuite tes moyennes et ce qu'il te reste à faire.\"))"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:117: Text(tr(\"Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Ardane calcule ensuite tes moyennes et ce qu'il te reste à faire.\"))"
   ]
  },
- "Ajoute tes cours dans Tessera, espace Études.": {
+ "Ajoute tes cours dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:4: static let hint = tr(\"Ajoute tes cours dans Tessera, espace Études.\")"
+   "Shared/Render/Tiles/StudentTiles.swift:4: static let hint = tr(\"Ajoute tes cours dans Ardane, espace Études.\")"
   ]
  },
- "Ajoute tes entretiens (vidange, pneus…) dans Tessera, espace Auto.": {
+ "Ajoute tes entretiens (vidange, pneus…) dans Ardane, espace Auto.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:47: return .empty(tr(\"Entretien\"), symbol: \"wrench.and.screwdriver\", message: tr(\"Ajoute tes entretiens (vidange, pneus…) dans Tessera, espace Auto.\"))"
+   "Shared/Render/Tiles/CarTiles.swift:47: return .empty(tr(\"Entretien\"), symbol: \"wrench.and.screwdriver\", message: tr(\"Ajoute tes entretiens (vidange, pneus…) dans Ardane, espace Auto.\"))"
   ]
  },
- "Ajoute tes examens dans Tessera, espace Études.": {
+ "Ajoute tes examens dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:90: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:90: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Ardane, espace Études.\"))"
   ]
  },
- "Ajoute tes factures dans Tessera, espace Budget.": {
+ "Ajoute tes factures dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:86: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Tessera, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:86: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Ardane, espace Budget.\")) }"
   ]
  },
- "Ajoute tes notes dans Tessera, espace Études.": {
+ "Ajoute tes notes dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:138: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:138: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Ardane, espace Études.\"))"
   ]
  },
  "Ajoute tes placements": {
@@ -2514,11 +2514,11 @@
    "App/Screens/Spaces/SpacesView.swift:162: return model.portfolio.holdings.isEmpty ? tr(\"Ajoute tes placements\") : Fmt.plural(model.portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
   ]
  },
- "Ajoute tes placements dans Tessera, espace Placements.": {
+ "Ajoute tes placements dans Ardane, espace Placements.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:182: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Tessera, espace Placements.\")) }",
-   "Shared/Render/Tiles/MoneyTiles.swift:213: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Tessera, espace Placements.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:182: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\")) }",
+   "Shared/Render/Tiles/MoneyTiles.swift:213: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\"))"
   ]
  },
  "Ajoute tes repas en quelques secondes pour garder ton suivi juste.": {
@@ -2527,16 +2527,16 @@
    "Shared/Support/SmartReminders.swift:52: body: tr(\"Ajoute tes repas en quelques secondes pour garder ton suivi juste.\"), date: date))"
   ]
  },
- "Ajoute tes revenus et dépenses dans Tessera": {
+ "Ajoute tes revenus et dépenses dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/DataWidgets.swift:288: WidgetMessage(symbol: \"dollarsign.circle\", title: tr(\"Aucun montant\"), message: tr(\"Ajoute tes revenus et dépenses dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/DataWidgets.swift:288: WidgetMessage(symbol: \"dollarsign.circle\", title: tr(\"Aucun montant\"), message: tr(\"Ajoute tes revenus et dépenses dans Ardane\"), style: s)"
   ]
  },
- "Ajoute tes travaux à rendre dans Tessera, espace Études.": {
+ "Ajoute tes travaux à rendre dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:111: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:111: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Ardane, espace Études.\"))"
   ]
  },
  "Ajoute tes tâches ou ton top 3 du jour.": {
@@ -2545,10 +2545,10 @@
    "App/Screens/Home/DailySection.swift:893: case .productivity: tr(\"Ajoute tes tâches ou ton top 3 du jour.\")"
   ]
  },
- "Ajoute ton hébergement dans Tessera, espace Voyage.": {
+ "Ajoute ton hébergement dans Ardane, espace Voyage.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TravelTiles.swift:87: return .empty(tr(\"Hôtel\"), symbol: \"bed.double.fill\", message: tr(\"Ajoute ton hébergement dans Tessera, espace Voyage.\"))"
+   "Shared/Render/Tiles/TravelTiles.swift:87: return .empty(tr(\"Hôtel\"), symbol: \"bed.double.fill\", message: tr(\"Ajoute ton hébergement dans Ardane, espace Voyage.\"))"
   ]
  },
  "Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.": {
@@ -2557,22 +2557,22 @@
    "Shared/Render/Tiles/FitnessTiles.swift:20: return .empty(tr(\"Calories brûlées\"), symbol: \"flame\", message: tr(\"Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.\"))"
   ]
  },
- "Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise.": {
+ "Ajoute ton revenu récurrent mensuel dans Ardane, espace Mon entreprise.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/BusinessTiles.swift:107: return .empty(\"MRR\", symbol: \"arrow.triangle.2.circlepath\", message: tr(\"Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise.\"))"
+   "Shared/Render/Tiles/BusinessTiles.swift:107: return .empty(\"MRR\", symbol: \"arrow.triangle.2.circlepath\", message: tr(\"Ajoute ton revenu récurrent mensuel dans Ardane, espace Mon entreprise.\"))"
   ]
  },
- "Ajoute ton vol dans Tessera, espace Voyage.": {
+ "Ajoute ton vol dans Ardane, espace Voyage.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TravelTiles.swift:52: return .empty(tr(\"Vol\"), symbol: \"airplane\", message: tr(\"Ajoute ton vol dans Tessera, espace Voyage.\"))"
+   "Shared/Render/Tiles/TravelTiles.swift:52: return .empty(tr(\"Vol\"), symbol: \"airplane\", message: tr(\"Ajoute ton vol dans Ardane, espace Voyage.\"))"
   ]
  },
- "Ajoute ton voyage dans Tessera, espace Voyage.": {
+ "Ajoute ton voyage dans Ardane, espace Voyage.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TravelTiles.swift:4: static let hint = tr(\"Ajoute ton voyage dans Tessera, espace Voyage.\")"
+   "Shared/Render/Tiles/TravelTiles.swift:4: static let hint = tr(\"Ajoute ton voyage dans Ardane, espace Voyage.\")"
   ]
  },
  "Ajoute un voyage : compte à rebours, heure et météo sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit.": {
@@ -2581,10 +2581,10 @@
    "App/Screens/MiniApps/Travel/TravelApp.swift:87: Text(tr(\"Ajoute un voyage : compte à rebours, heure et météo sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit.\"))"
   ]
  },
- "Ajoute un widget Tessera (progression, compte à rebours, météo…)": {
+ "Ajoute un widget Ardane (progression, compte à rebours, météo…)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/AddToHomeScreenGuide.swift:34: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Ajoute un widget Tessera (progression, compte à rebours, météo…)\"))"
+   "App/Screens/Editor/AddToHomeScreenGuide.swift:34: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Ajoute un widget Ardane (progression, compte à rebours, météo…)\"))"
   ]
  },
  "Ajoute une habitude à suivre chaque jour.": {
@@ -2593,10 +2593,10 @@
    "App/Screens/Home/DailySection.swift:892: case .habits: tr(\"Ajoute une habitude à suivre chaque jour.\")"
   ]
  },
- "Ajoute une échéance dans Tessera, espace Productivité.": {
+ "Ajoute une échéance dans Ardane, espace Productivité.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:68: return .empty(tr(\"Échéance\"), symbol: \"flag.checkered\", message: tr(\"Ajoute une échéance dans Tessera, espace Productivité.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:68: return .empty(tr(\"Échéance\"), symbol: \"flag.checkered\", message: tr(\"Ajoute une échéance dans Ardane, espace Productivité.\"))"
   ]
  },
  "Ajoute-le d'une touche depuis ton widget.": {
@@ -2605,10 +2605,10 @@
    "App/Services/NotificationScheduler.swift:59: content.body = tr(\"Ajoute-le d'une touche depuis ton widget.\")"
   ]
  },
- "Ajoute-les dans Tessera": {
+ "Ajoute-les dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Ardane\"), style: s)"
   ]
  },
  "Ajouter": {
@@ -3166,7 +3166,7 @@
  "Analyses et historiques": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:151: (.history, \"chart.bar.xaxis\", tr(\"Analyses et historiques\"), tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\")),"
+   "App/Premium/PaywallView.swift:157: (.history, \"chart.bar.xaxis\", tr(\"Analyses et historiques\"), tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\")),"
   ]
  },
  "Ananas": {
@@ -3421,6 +3421,72 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetStyle.swift:721: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+  ]
+ },
+ "Ardane": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/MarketingShots.swift:178: Text(tr(\"Ardane\"))",
+   "App/Screens/Explore/HomeSetupViews.swift:258: label(tr(\"Ardane\"))",
+   "App/Screens/Explore/HomeSetups.swift:136: static let tessera = SetupApp(name: tr(\"Ardane\"), symbol: \"\")",
+   "App/Screens/Launch/LaunchView.swift:15: Text(tr(\"Ardane\"))"
+  ]
+ },
+ "Ardane %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:192: Text(tr(\"Ardane \\(appVersion)\"))"
+  ]
+ },
+ "Ardane Premium": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:72: Text(tr(\"Ardane Premium\"))",
+   "App/Premium/PaywallView.swift:103: Text(tr(\"Ardane Premium\"))",
+   "App/Screens/Home/HomeView.swift:112: Text(tr(\"Ardane Premium\"))",
+   "App/Screens/Profile/ProfileView.swift:329: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+  ]
+ },
+ "Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:350: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle: tr(\"Autoriser\")) {"
+  ]
+ },
+ "Ardane lit tes événements pour les afficher. Rien ne quitte ton iPhone.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Editor/KindOptionsSection.swift:257: Text(tr(\"Ardane lit tes événements pour les afficher. Rien ne quitte ton iPhone.\"))"
+  ]
+ },
+ "Ardane met ces thèmes en avant, sans jamais cacher les autres.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileTopics.swift:718: Text(tr(\"Ardane met ces thèmes en avant, sans jamais cacher les autres.\"))"
+  ]
+ },
+ "Ardane n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Ardane › Photos.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/HomeSetupViews.swift:746: case .denied: tr(\"Ardane n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Ardane › Photos.\")"
+  ]
+ },
+ "Ardane ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:135: Text(tr(\"Ardane ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
+  ]
+ },
+ "Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:141: Text(tr(\"Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.\"))"
+  ]
+ },
+ "Ardane/1.0 (%@)": {
+  "placeholders": 1,
+  "uses": [
+   "Shared/Domains/Companies.swift:6: static var userAgent: String { tr(\"Ardane/1.0 (\\(supportEmail))\") }"
   ]
  },
  "Ardoise": {
@@ -3833,14 +3899,14 @@
  "Aucun achat Premium trouvé pour ce compte Apple.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:318: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
+   "App/Premium/PaywallView.swift:324: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
    "App/Screens/Profile/ProfileView.swift:421: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Aucun compte à créer": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:872: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
+   "App/Core/MarketingShots.swift:940: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
   ]
  },
  "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
@@ -3870,7 +3936,7 @@
  "Aucun montant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/DataWidgets.swift:288: WidgetMessage(symbol: \"dollarsign.circle\", title: tr(\"Aucun montant\"), message: tr(\"Ajoute tes revenus et dépenses dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/DataWidgets.swift:288: WidgetMessage(symbol: \"dollarsign.circle\", title: tr(\"Aucun montant\"), message: tr(\"Ajoute tes revenus et dépenses dans Ardane\"), style: s)"
   ]
  },
  "Aucun plein noté. À chaque plein, note les litres, le prix et le compteur : la consommation se calcule entre deux pleins complets.": {
@@ -3969,7 +4035,7 @@
  "Aucune habitude": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/ProductivityWidgets.swift:88: WidgetMessage(symbol: \"repeat\", title: tr(\"Aucune habitude\"), message: tr(\"Crée-les dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:88: WidgetMessage(symbol: \"repeat\", title: tr(\"Aucune habitude\"), message: tr(\"Crée-les dans Ardane\"), style: s)"
   ]
  },
  "Aucune habitude pour l'instant": {
@@ -3984,16 +4050,16 @@
    "App/Screens/MyWidgets/FusionViews.swift:72: Text(tr(\"Aucune information n'est perdue : chaque widget garde tout son contenu. Le widget fusionné reste personnalisable dans l'éditeur (style, couleur, fond, police).\"))"
   ]
  },
- "Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale.": {
+ "Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Ardane en tire la moyenne du cours, puis ta moyenne générale.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Studies/StudiesPages.swift:616: Text(tr(\"Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale.\"))"
+   "App/Screens/MiniApps/Studies/StudiesPages.swift:616: Text(tr(\"Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Ardane en tire la moyenne du cours, puis ta moyenne générale.\"))"
   ]
  },
  "Aucune pub, aucun suivi": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:873: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
+   "App/Core/MarketingShots.swift:941: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
   ]
  },
  "Aucune société trouvée. Seules les sociétés déposant à la SEC sont disponibles.": {
@@ -4029,7 +4095,7 @@
  "Aucune tâche": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Ardane\"), style: s)"
   ]
  },
  "Aucune tâche en attente": {
@@ -4054,7 +4120,7 @@
  "Aucune ville": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/TimeWidgets.swift:211: WidgetMessage(symbol: \"globe\", title: tr(\"Aucune ville\"), message: tr(\"Choisis tes villes dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/TimeWidgets.swift:211: WidgetMessage(symbol: \"globe\", title: tr(\"Aucune ville\"), message: tr(\"Choisis tes villes dans Ardane\"), style: s)"
   ]
  },
  "Aucune ville trouvée.": {
@@ -4120,7 +4186,7 @@
  "Aurore boréale": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:34: AppIconChoice(asset: \"AppIcon-Aurora\", title: tr(\"Aurore boréale\")),",
+   "App/Core/AppIcons.swift:37: AppIconChoice(asset: \"AppIcon-Aurora\", title: tr(\"Aurore boréale\")),",
    "App/Screens/Explore/HomeSetups.swift:178: case .aurora: tr(\"Aurore boréale\")"
   ]
  },
@@ -4170,10 +4236,10 @@
    "App/Screens/Spaces/BudgetSpace.swift:365: Text(found.map { tr(\"Automatique (\\($0))\") } ?? tr(\"Automatique\")).tag(UUID?.none)"
   ]
  },
- "Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.": {
+ "Automatique : Ardane met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailyLayoutEditor.swift:78: Text(tr(\"Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.\"))"
+   "App/Screens/Home/DailyLayoutEditor.swift:78: Text(tr(\"Automatique : Ardane met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.\"))"
   ]
  },
  "Automobile": {
@@ -4195,16 +4261,16 @@
    "App/Screens/Profile/ProfileView.swift:122: LabeledContent(tr(\"Autorisation\"), value: notificationStatus)"
   ]
  },
- "Autorise « Mouvements et forme » pour Tessera dans les Réglages de l'iPhone pour voir tes pas.": {
+ "Autorise « Mouvements et forme » pour Ardane dans les Réglages de l'iPhone pour voir tes pas.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:358: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Accès refusé\"), message: tr(\"Autorise « Mouvements et forme » pour Tessera dans les Réglages de l'iPhone pour voir tes pas.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:358: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Accès refusé\"), message: tr(\"Autorise « Mouvements et forme » pour Ardane dans les Réglages de l'iPhone pour voir tes pas.\"))"
   ]
  },
  "Autoriser": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:350: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle: tr(\"Autoriser\")) {"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:350: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle: tr(\"Autoriser\")) {"
   ]
  },
  "Autoriser l'accès au calendrier": {
@@ -4327,10 +4393,10 @@
    "Shared/Domains/ExerciseLibrary.swift:691: aka: [\"poignets\", \"wrist curl\"], cues: [tr(\"Avant-bras posés sur les cuisses, seuls les poignets bougent.\")]),"
   ]
  },
- "Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas.": {
+ "Avec ton objectif, Ardane te dit ce qu'il te reste et te propose des idées de repas.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:126: insightCard(symbol: \"target\", title: tr(\"Définis ton objectif du jour\"), message: tr(\"Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas.\"), action: tr(\"Définir\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:126: insightCard(symbol: \"target\", title: tr(\"Définis ton objectif du jour\"), message: tr(\"Avec ton objectif, Ardane te dit ce qu'il te reste et te propose des idées de repas.\"), action: tr(\"Définir\"))"
   ]
  },
  "Averses": {
@@ -4735,16 +4801,16 @@
    "App/Screens/Tutorial/Tutorial.swift:63: case .welcome: name.isEmpty ? tr(\"Bienvenue !\") : tr(\"Bienvenue, \\(name) !\")"
   ]
  },
- "Bienvenue dans Tessera": {
+ "Bienvenue dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:305: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Tessera\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:305: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
   ]
  },
- "Bienvenue dans Tessera Premium !": {
+ "Bienvenue dans Ardane Premium !": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:371: message = tr(\"Bienvenue dans Tessera Premium !\")"
+   "App/Premium/PaywallView.swift:377: message = tr(\"Bienvenue dans Ardane Premium !\")"
   ]
  },
  "Bienvenue, %@ !": {
@@ -5288,10 +5354,10 @@
    "App/Screens/Home/MiniAppsRow.swift:83: return remaining >= 0 ? tr(\"\\(TF.money(remaining, currency)) restants\") : tr(\"Budget dépassé\")"
   ]
  },
- "Budget mensuel à définir dans Tessera": {
+ "Budget mensuel à définir dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:37: tile.detail = tr(\"Budget mensuel à définir dans Tessera\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:37: tile.detail = tr(\"Budget mensuel à définir dans Ardane\")"
   ]
  },
  "Budget serré": {
@@ -5310,7 +5376,7 @@
  "Budget, dépenses, revenus": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:778: (.finances, tr(\"Budget, dépenses, revenus\")),"
+   "App/Core/MarketingShots.swift:846: (.finances, tr(\"Budget, dépenses, revenus\")),"
   ]
  },
  "Buenos Aires": {
@@ -5715,7 +5781,7 @@
  "Calories et macros calculées pour toi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:661: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
+   "App/Core/MarketingShots.swift:729: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
   ]
  },
  "Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.": {
@@ -5753,7 +5819,7 @@
  "Calories, macros, code-barres": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:775: (.nutrition, tr(\"Calories, macros, code-barres\")),"
+   "App/Core/MarketingShots.swift:843: (.nutrition, tr(\"Calories, macros, code-barres\")),"
   ]
  },
  "Calories, macros, protéines et série de suivi.": {
@@ -5774,10 +5840,10 @@
    "Shared/Model/WidgetGroup.swift:63: case .nutrition: tr(\"Calories, macros, repas et ajout rapide.\")"
   ]
  },
- "Calories, séance et régularité, aux couleurs de Tessera.": {
+ "Calories, séance et régularité, aux couleurs d'Ardane.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/HomeSetups.swift:307: id: \"jade\", name: tr(\"Jade\"), tagline: tr(\"Calories, séance et régularité, aux couleurs de Tessera.\"),"
+   "App/Screens/Explore/HomeSetups.swift:307: id: \"jade\", name: tr(\"Jade\"), tagline: tr(\"Calories, séance et régularité, aux couleurs d'Ardane.\"),"
   ]
  },
  "Cambrer en fin de mouvement.": {
@@ -6003,10 +6069,10 @@
    "App/Screens/MiniApps/Finances/FinancesApp.swift:319: MiniRow(symbol: \"chart.pie.fill\", colorHex: \"8C6CFF\", title: tr(\"Catégories\"), detail: tr(\"Répartition et limites\"), value: \"\\(state.categories.count)\")"
   ]
  },
- "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.": {
+ "Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:317: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.\")"
+   "App/Screens/Profile/ProfileView.swift:317: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.\")"
   ]
  },
  "Ce matin": {
@@ -6092,10 +6158,10 @@
    "App/Screens/MiniApps/Car/CarApp.swift:254: MiniRow(symbol: \"creditcard.fill\", colorHex: \"2F8F7A\", title: tr(\"Coûts\"), detail: tr(\"Ce que la voiture coûte vraiment chaque mois\"))"
   ]
  },
- "Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera.": {
+ "Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Ardane.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:96: Text(tr(\"Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera.\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:96: Text(tr(\"Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Ardane.\"))"
   ]
  },
  "Ce que tu as mangé aujourd'hui, repas par repas.": {
@@ -6140,10 +6206,10 @@
    "App/Screens/Home/MyInfoCenter.swift:273: Text(users.isEmpty ? tr(\"Ce que tu renseignes ici servira à tes widgets \\(area.title.lowercasedFirst) et à « Mon Quotidien ».\") : tr(\"Utilisé par \\(Fmt.plural(users.count, tr(\"de tes widgets\"), tr(\"de"
   ]
  },
- "Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.": {
+ "Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Ardane compte ce que tu notes.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:64: Text(tr(\"Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.\"))"
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:64: Text(tr(\"Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Ardane compte ce que tu notes.\"))"
   ]
  },
  "Ce que tu veux accomplir, pour des widgets qui t'y ramènent.": {
@@ -6305,10 +6371,10 @@
    "App/Screens/MiniApps/Business/BusinessApp.swift:283: legend(tr(\"Cette période\"), hex: accentHex, dashed: false)"
   ]
  },
- "Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.": {
+ "Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:315: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.\")"
+   "App/Screens/Profile/ProfileView.swift:315: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.\")"
   ]
  },
  "Cette semaine": {
@@ -6371,7 +6437,7 @@
  "Changer d'icône": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:75: localizedTitle: tr(\"Changer d'icône\"),"
+   "App/Core/AppIcons.swift:78: localizedTitle: tr(\"Changer d'icône\"),"
   ]
  },
  "Changer de photo": {
@@ -6410,10 +6476,10 @@
    "Shared/Model/KindCatalog.swift:120: KindInfo(kind: .yearDots, title: tr(\"L'année en points\"), summary: tr(\"Chaque jour de l'année est un point. Regarde-la avancer.\"), category: .time, symbol: \"circle.grid.3x3.fill\", isPremium: true, fam"
   ]
  },
- "Chaque mini-app utilise tes données de Tessera et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne.": {
+ "Chaque mini-app utilise tes données d'Ardane et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:219: Text(tr(\"Chaque mini-app utilise tes données de Tessera et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revi"
+   "App/Screens/Home/MiniAppsRow.swift:219: Text(tr(\"Chaque mini-app utilise tes données d'Ardane et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revien"
   ]
  },
  "Chaque mois": {
@@ -6447,7 +6513,7 @@
  "Chaque série\ncompte.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:679: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
+   "App/Core/MarketingShots.swift:747: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Charge": {
@@ -6506,7 +6572,7 @@
  "Chargement des offres…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:216: ProgressView(tr(\"Chargement des offres…\"))"
+   "App/Premium/PaywallView.swift:222: ProgressView(tr(\"Chargement des offres…\"))"
   ]
  },
  "Chargement des états financiers…": {
@@ -6557,16 +6623,16 @@
    "Shared/Domains/FoodDatabase.swift:163: f(\"cheddar\", tr(\"Cheddar\"), 403, 25, 1.3, 33, 0, 30, tr(\"1 portion\"), s: 0.5, sf: 21, na: 620, chol: 105),"
   ]
  },
- "Cherche « Tessera » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille": {
+ "Cherche « Ardane » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/AddToHomeScreenGuide.swift:29: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Cherche « Tessera » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille\"))"
+   "App/Screens/Editor/AddToHomeScreenGuide.swift:29: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Cherche « Ardane » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille\"))"
   ]
  },
- "Cherche « Tessera », choisis la taille, puis ton widget": {
+ "Cherche « Ardane », choisis la taille, puis ton widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Tutorial/TutorialOverlay.swift:163: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Cherche « Tessera », choisis la taille, puis ton widget\"))"
+   "App/Screens/Tutorial/TutorialOverlay.swift:163: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Cherche « Ardane », choisis la taille, puis ton widget\"))"
   ]
  },
  "Chercher": {
@@ -6796,10 +6862,10 @@
    "Shared/Model/Combo.swift:257: return .invalid(tr(\"Choisis de 1 à 4 widgets.\"))"
   ]
  },
- "Choisis l'icône de Tessera sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».": {
+ "Choisis l'icône d'Ardane sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/AppIconPicker.swift:13: Text(tr(\"Choisis l'icône de Tessera sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».\"))"
+   "App/Screens/Profile/AppIconPicker.swift:13: Text(tr(\"Choisis l'icône d'Ardane sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».\"))"
   ]
  },
  "Choisis la séance à faire.": {
@@ -6835,7 +6901,7 @@
  "Choisis ta ville": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/DataWidgets.swift:31: WidgetMessage(symbol: \"location.circle\", title: tr(\"Choisis ta ville\"), message: tr(\"Touche pour la définir dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/DataWidgets.swift:31: WidgetMessage(symbol: \"location.circle\", title: tr(\"Choisis ta ville\"), message: tr(\"Touche pour la définir dans Ardane\"), style: s)"
   ]
  },
  "Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets.": {
@@ -6844,22 +6910,22 @@
    "App/Screens/MiniApps/Weather/WeatherApp.swift:31: EmptyStateView(symbol: \"location.circle\", title: tr(\"Ta ville\"), message: tr(\"Choisis ta ville (ou ta position) pour voir la météo ici, sur l'accueil et dans les widgets.\"), actionTitle: tr(\"Choisir m"
   ]
  },
- "Choisis ta ville dans Tessera pour voir la météo.": {
+ "Choisis ta ville dans Ardane pour voir la météo.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/WeatherTiles.swift:7: return .empty(kind.title, symbol: kind.symbol, message: tr(\"Choisis ta ville dans Tessera pour voir la météo.\"), emptySymbol: \"location.slash\")"
+   "Shared/Render/Tiles/WeatherTiles.swift:7: return .empty(kind.title, symbol: kind.symbol, message: tr(\"Choisis ta ville dans Ardane pour voir la météo.\"), emptySymbol: \"location.slash\")"
   ]
  },
- "Choisis tes trois priorités dans Tessera, espace Productivité.": {
+ "Choisis tes trois priorités dans Ardane, espace Productivité.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:25: return .empty(tr(\"Top 3 du jour\"), symbol: \"3.circle\", message: tr(\"Choisis tes trois priorités dans Tessera, espace Productivité.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:25: return .empty(tr(\"Top 3 du jour\"), symbol: \"3.circle\", message: tr(\"Choisis tes trois priorités dans Ardane, espace Productivité.\"))"
   ]
  },
- "Choisis tes villes dans Tessera": {
+ "Choisis tes villes dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/TimeWidgets.swift:211: WidgetMessage(symbol: \"globe\", title: tr(\"Aucune ville\"), message: tr(\"Choisis tes villes dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/TimeWidgets.swift:211: WidgetMessage(symbol: \"globe\", title: tr(\"Aucune ville\"), message: tr(\"Choisis tes villes dans Ardane\"), style: s)"
   ]
  },
  "Choisis ton style": {
@@ -6910,10 +6976,10 @@
    "App/Screens/Spaces/LockScreenCreator.swift:130: (\"lock.iphone\", tr(\"Choisis « Écran verrouillé », puis touche la zone sous l'heure.\")),"
   ]
  },
- "Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.": {
+ "Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:243: message: tr(\"Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.\")"
+   "App/Screens/Onboarding/OnboardingView.swift:243: message: tr(\"Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.\")"
   ]
  },
  "Cholestérol": {
@@ -7020,7 +7086,7 @@
  "Classique": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:21: AppIconChoice(asset: main, title: tr(\"Classique\")),",
+   "App/Core/AppIcons.swift:23: AppIconChoice(asset: \"AppIcon-Classic\", title: tr(\"Classique\")),",
    "Shared/Model/WidgetStyle.swift:359: TypePreset(id: \"classic\", name: tr(\"Classique\"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),"
   ]
  },
@@ -7399,7 +7465,7 @@
  "Conditions": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:359: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
+   "App/Premium/PaywallView.swift:365: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
   ]
  },
  "Conditions d'utilisation": {
@@ -7411,8 +7477,8 @@
  "Confidentialité": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:861: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
-   "App/Premium/PaywallView.swift:360: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
+   "App/Core/MarketingShots.swift:929: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
+   "App/Premium/PaywallView.swift:366: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Screens/Profile/ProfileView.swift:183: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
  },
@@ -7491,7 +7557,7 @@
  "Continuer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:341: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))",
+   "App/Premium/PaywallView.swift:347: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))",
    "App/Screens/Onboarding/OnboardingView.swift:99: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))",
    "App/Screens/Onboarding/OnboardingView.swift:329: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
   ]
@@ -7536,10 +7602,10 @@
  "Corail": {
   "placeholders": 0,
   "uses": [
+   "App/Core/AppIcons.swift:22: AppIconChoice(asset: main, title: tr(\"Corail\")),",
    "App/Screens/Explore/HomeSetups.swift:356: id: \"corail\", name: tr(\"Corail\"), tagline: tr(\"Ton budget en grandes formes colorées.\"),",
    "Shared/Model/Settings.swift:29: case .coral: tr(\"Corail\")",
-   "Shared/Model/StyleColors.swift:75: make(\"coral\", tr(\"Corail\"), background: [\"FFF1EC\"], panel: \"FFDFD4\", text: \"3B1A12\", secondary: \"9A6A5E\",",
-   "Shared/Theme/Palette.swift:16: AccentSwatch(name: tr(\"Corail\"), hex: \"FF6B57\"),"
+   "Shared/Model/StyleColors.swift:75: make(\"coral\", tr(\"Corail\"), background: [\"FFF1EC\"], panel: \"FFDFD4\", text: \"3B1A12\", secondary: \"9A6A5E\","
   ]
  },
  "Corde à hauteur des yeux, tire vers le visage en ouvrant les coudes.": {
@@ -7816,7 +7882,7 @@
  "Couleurs": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:191: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:197: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
    "App/Screens/Editor/StudioComponents.swift:23: case .colors: tr(\"Couleurs\")"
   ]
  },
@@ -8187,10 +8253,10 @@
    "App/Screens/Spaces/FitnessSpace.swift:48: HintRow(text: tr(\"Crée ta première séance : ses exercices, séries, charges et temps de repos. Le widget Prochaine série la suit ensuite depuis l'écran d'accueil.\"))"
   ]
  },
- "Crée ta première séance dans Tessera, espace Fitness.": {
+ "Crée ta première séance dans Ardane, espace Fitness.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:4: static let hint = tr(\"Crée ta première séance dans Tessera, espace Fitness.\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:4: static let hint = tr(\"Crée ta première séance dans Ardane, espace Fitness.\")"
   ]
  },
  "Crée ta séance": {
@@ -8199,29 +8265,29 @@
    "App/Screens/Spaces/SpacesView.swift:153: if model.fitness.routines.isEmpty { return tr(\"Crée ta séance\") }"
   ]
  },
- "Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.": {
+ "Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:163: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:163: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.\"))"
   ]
  },
- "Crée tes fiches de révision dans Tessera, espace Études.": {
+ "Crée tes fiches de révision dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:172: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:172: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Ardane, espace Études.\"))"
   ]
  },
- "Crée tes habitudes dans Tessera.": {
+ "Crée tes habitudes dans Ardane.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:186: return .empty(tr(\"Semaine d'habitudes\"), symbol: \"square.grid.3x3.fill\", message: tr(\"Crée tes habitudes dans Tessera.\"))",
-   "Shared/Render/Tiles/ProductivityTiles.swift:206: return .empty(tr(\"Taux de réussite\"), symbol: \"percent\", message: tr(\"Crée tes habitudes dans Tessera.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:186: return .empty(tr(\"Semaine d'habitudes\"), symbol: \"square.grid.3x3.fill\", message: tr(\"Crée tes habitudes dans Ardane.\"))",
+   "Shared/Render/Tiles/ProductivityTiles.swift:206: return .empty(tr(\"Taux de réussite\"), symbol: \"percent\", message: tr(\"Crée tes habitudes dans Ardane.\"))"
   ]
  },
- "Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.": {
+ "Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Ardane te propose chaque jour la bonne.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessApp.swift:110: Text(tr(\"Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessApp.swift:110: Text(tr(\"Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Ardane te propose chaque jour la bonne.\"))"
   ]
  },
  "Crée ton programme : ta séance du jour apparaîtra ici.": {
@@ -8236,22 +8302,22 @@
    "App/Screens/Spaces/SpaceBuilderView.swift:182: Text(tr(\"Crée ton widget\"))"
   ]
  },
- "Crée un compteur dans Tessera, espace Productivité.": {
+ "Crée un compteur dans Ardane, espace Productivité.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:107: return .empty(tr(\"Compteur\"), symbol: \"plusminus.circle\", message: tr(\"Crée un compteur dans Tessera, espace Productivité.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:107: return .empty(tr(\"Compteur\"), symbol: \"plusminus.circle\", message: tr(\"Crée un compteur dans Ardane, espace Productivité.\"))"
   ]
  },
- "Crée un objectif d'épargne dans Tessera, espace Budget.": {
+ "Crée un objectif d'épargne dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:102: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Tessera, espace Budget.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:102: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Ardane, espace Budget.\"))"
   ]
  },
- "Crée un projet et ses tâches dans Tessera, espace Productivité.": {
+ "Crée un projet et ses tâches dans Ardane, espace Productivité.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:44: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Tessera, espace Productivité.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:44: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Ardane, espace Productivité.\"))"
   ]
  },
  "Crée un widget de cet espace": {
@@ -8266,10 +8332,10 @@
    "App/Screens/Spaces/SpacesView.swift:147: return habits.isEmpty ? tr(\"Crée une habitude\") : tr(\"\\(habits.filter { $0.isDone(on: now) }.count)/\\(habits.count) aujourd'hui\")"
   ]
  },
- "Crée une habitude dans Tessera pour suivre ta série.": {
+ "Crée une habitude dans Ardane pour suivre ta série.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/ProductivityTiles.swift:136: return .empty(tr(\"Série\"), symbol: \"flame.fill\", message: tr(\"Crée une habitude dans Tessera pour suivre ta série.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:136: return .empty(tr(\"Série\"), symbol: \"flame.fill\", message: tr(\"Crée une habitude dans Ardane pour suivre ta série.\"))"
   ]
  },
  "Crée une habitude pour suivre ta série.": {
@@ -8290,10 +8356,10 @@
    "App/Screens/Spaces/NutritionSpace.swift:451: Text(tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\"))"
   ]
  },
- "Crée-les dans Tessera": {
+ "Crée-les dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/ProductivityWidgets.swift:88: WidgetMessage(symbol: \"repeat\", title: tr(\"Aucune habitude\"), message: tr(\"Crée-les dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:88: WidgetMessage(symbol: \"repeat\", title: tr(\"Aucune habitude\"), message: tr(\"Crée-les dans Ardane\"), style: s)"
   ]
  },
  "Créer": {
@@ -8469,10 +8535,10 @@
    "App/Screens/Explore/HomeSetupViews.swift:748: case .saved: tr(\"Dans Photos, ouvre l'image, touche Partager puis « Utiliser en fond d'écran ».\")"
   ]
  },
- "Dans la liste, choisis Tessera, puis le widget voulu.": {
+ "Dans la liste, choisis Ardane, puis le widget voulu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:131: (\"plus.circle\", tr(\"Dans la liste, choisis Tessera, puis le widget voulu.\")),"
+   "App/Screens/Spaces/LockScreenCreator.swift:131: (\"plus.circle\", tr(\"Dans la liste, choisis Ardane, puis le widget voulu.\")),"
   ]
  },
  "Dans quelle séance": {
@@ -9125,7 +9191,7 @@
  "Des styles\npour tout.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
+   "App/Core/MarketingShots.swift:814: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Des sélections de widgets autour d'un thème, d'un format ou d'un style.": {
@@ -9149,7 +9215,7 @@
  "Des widgets sous l'heure, assortis à ton fond.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:730: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
+   "App/Core/MarketingShots.swift:798: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "Des écrans complets : fond d'écran, widgets et écran verrouillé assortis. Touche-en un pour l'installer.": {
@@ -9500,10 +9566,10 @@
    "App/Screens/Home/DailySection.swift:891: case .budget: tr(\"Donne ton budget du mois pour voir ce qu'il te reste chaque jour.\")"
   ]
  },
- "Donne ton objectif calorique dans Tessera pour savoir ce qu'il te reste par repas.": {
+ "Donne ton objectif calorique dans Ardane pour savoir ce qu'il te reste par repas.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Tessera pour savoir ce qu'i"
+   "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Ardane pour savoir ce qu'il"
   ]
  },
  "Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici.": {
@@ -9965,13 +10031,13 @@
  "Définir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:126: insightCard(symbol: \"target\", title: tr(\"Définis ton objectif du jour\"), message: tr(\"Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas.\"), action: tr(\"Définir\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:126: insightCard(symbol: \"target\", title: tr(\"Définis ton objectif du jour\"), message: tr(\"Avec ton objectif, Ardane te dit ce qu'il te reste et te propose des idées de repas.\"), action: tr(\"Définir\"))"
   ]
  },
  "Définis ton objectif du jour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:126: insightCard(symbol: \"target\", title: tr(\"Définis ton objectif du jour\"), message: tr(\"Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas.\"), action: tr(\"Définir\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionApp.swift:126: insightCard(symbol: \"target\", title: tr(\"Définis ton objectif du jour\"), message: tr(\"Avec ton objectif, Ardane te dit ce qu'il te reste et te propose des idées de repas.\"), action: tr(\"Définir\"))"
   ]
  },
  "Dégradé": {
@@ -10193,7 +10259,7 @@
   "uses": [
    "App/Screens/Spaces/BudgetSpace.swift:278: SheetForm(title: tr(\"Dépense rapide\"), canSave: !quick.name.trimmed.isEmpty && quick.amount > 0, onSave: save) {",
    "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: false, families: SM,",
-   "Shared/Render/Tiles/MoneyTiles.swift:163: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.\"))",
+   "Shared/Render/Tiles/MoneyTiles.swift:163: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.\"))",
    "Shared/Render/Tiles/MoneyTiles.swift:165: var tile = Tile(title: tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\")"
   ]
  },
@@ -10241,7 +10307,7 @@
  "Dépenses, revenus, catégories.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:764: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
+   "App/Core/MarketingShots.swift:832: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Dépensé": {
@@ -10339,7 +10405,7 @@
  "Développé couché": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:124: exercise: tr(\"Développé couché\"),",
+   "App/Core/MarketingShots.swift:132: exercise: tr(\"Développé couché\"),",
    "App/Screens/Spaces/LockScreenCreator.swift:99: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
    "Shared/Data/SampleData.swift:175: ExerciseTemplate(name: tr(\"Développé couché\"), sets: 4, reps: 8, weight: 60, restSeconds: 120),"
   ]
@@ -10542,7 +10608,7 @@
  "Elles nourrissent tes widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:788: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+   "App/Core/MarketingShots.swift:856: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "Emplacement": {
@@ -10905,7 +10971,7 @@
  "Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:150: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
+   "App/Premium/PaywallView.swift:156: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
   ]
  },
  "Espagne": {
@@ -10965,13 +11031,13 @@
  "Et avec Premium, tout le reste :": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:135: Text(tr(\"Et avec Premium, tout le reste :\"))"
+   "App/Premium/PaywallView.swift:141: Text(tr(\"Et avec Premium, tout le reste :\"))"
   ]
  },
  "Et les polices Serif et Mono": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:152: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
+   "App/Premium/PaywallView.swift:158: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
   ]
  },
  "Ethereum": {
@@ -11336,7 +11402,7 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:340: .navigationTitle(tr(\"Factures\"))",
    "App/Screens/Profile/SmartRemindersView.swift:70: Label(tr(\"Factures\"), systemImage: \"doc.text\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:86: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Tessera, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:86: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Ardane, espace Budget.\")) }"
   ]
  },
  "Factures et abonnements": {
@@ -11671,7 +11737,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:148: MiniStat(title: tr(\"Fiches\"), value: \"\\(due)\", detail: due == 0 ? tr(\"à jour\") : tr(\"à réviser\"), colorHex: due > 0 ? accentHex : nil)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:774: MiniSectionTitle(title: tr(\"Fiches\"), detail: state.cards.isEmpty ? nil : tr(\"\\(StudentMath.dueCount(state, at: now)) à réviser\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:172: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))",
+   "Shared/Render/Tiles/StudentTiles.swift:172: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Ardane, espace Études.\"))",
    "Shared/Render/Tiles/StudentTiles.swift:175: var tile = Tile(title: tr(\"Fiches\"), symbol: \"checkmark.seal\")"
   ]
  },
@@ -11736,7 +11802,7 @@
  "Finances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:764: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
+   "App/Core/MarketingShots.swift:832: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:147: .navigationTitle(tr(\"Finances\"))",
    "App/Screens/MiniApps/MiniApp.swift:14: case .finances: tr(\"Finances\")",
    "Shared/Domains/Profile.swift:129: case .money: tr(\"Finances\")"
@@ -11748,10 +11814,10 @@
    "Shared/Data/SampleData.swift:479: PriorityItem(title: tr(\"Finir la présentation\"), doneDayKey: today),"
   ]
  },
- "Finir le projet Tessera": {
+ "Finir le projet Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Profile.swift:442: profile.mainGoal = tr(\"Finir le projet Tessera\")"
+   "Shared/Domains/Profile.swift:442: profile.mainGoal = tr(\"Finir le projet Ardane\")"
   ]
  },
  "Finir mon projet, lire plus…": {
@@ -11868,7 +11934,7 @@
  "Fond, widgets et icônes assortis, en un geste.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:571: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
+   "App/Core/MarketingShots.swift:639: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "Fonds d'urgence": {
@@ -11880,13 +11946,13 @@
  "Fonds et polices": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:192: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
+   "App/Premium/PaywallView.swift:198: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
   ]
  },
  "Fonds photo, couleurs libres": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:152: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
+   "App/Premium/PaywallView.swift:158: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
   ]
  },
  "Force": {
@@ -12558,7 +12624,7 @@
  "Glucides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:666: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: \"F2A33A\", progress: day.totals.carbs / max(1, day.goals.carbs))",
+   "App/Core/MarketingShots.swift:734: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: \"F2A33A\", progress: day.totals.carbs / max(1, day.goals.carbs))",
    "App/Screens/Home/DailySection.swift:274: compactMacro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
    "App/Screens/Home/DailySection.swift:378: macro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
    "App/Screens/Home/MyInfoSection.swift:33: add(\"carbs\", \"leaf\", tr(\"Glucides\"), profile.knows(.carbsTarget) ? \"\\(TF.int(nutrition.goals.carbs)) g\" : nil)"
@@ -12670,7 +12736,7 @@
  "Gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:181: Text(tr(\"Gratuit\")).frame(width: 72)",
+   "App/Premium/PaywallView.swift:187: Text(tr(\"Gratuit\")).frame(width: 72)",
    "App/Screens/Editor/StudioPanels.swift:194: subtitle: { $0.isPremium ? nil : tr(\"Gratuit\") },",
    "App/Screens/Explore/StoreShowcase.swift:61: subtitle: theme.isPremium ? tr(\"Premium\") : tr(\"Gratuit\")"
   ]
@@ -12782,7 +12848,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:90: case .habits: tr(\"Habitudes\")",
-   "App/Premium/PaywallView.swift:190: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:196: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
    "App/Screens/Content/HabitsView.swift:69: .navigationTitle(tr(\"Habitudes\"))",
    "App/Screens/Home/DailyLayoutEditor.swift:151: case .habits: (tr(\"Habitudes\"), \"repeat\", \"7FA33A\")"
   ]
@@ -12979,7 +13045,7 @@
  "Haut du corps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:122: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
+   "App/Core/MarketingShots.swift:130: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
    "App/Screens/Spaces/LockScreenCreator.swift:97: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
    "Shared/Data/SampleData.swift:174: let upper = Routine(name: tr(\"Haut du corps\"), exercises: ["
   ]
@@ -13184,13 +13250,13 @@
  "Horaire, tâches, habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:777: (.planning, tr(\"Horaire, tâches, habitudes\")),"
+   "App/Core/MarketingShots.swift:845: (.planning, tr(\"Horaire, tâches, habitudes\")),"
   ]
  },
  "Horaire, tâches, habitudes, focus.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:754: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
+   "App/Core/MarketingShots.swift:822: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Horizontal": {
@@ -13283,7 +13349,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:252: KindInfo(kind: .hotel, title: tr(\"Hôtel\"), summary: tr(\"Ton hôtel, son adresse et les dates d'arrivée et de départ.\"), category: .travel, symbol: \"bed.double.fill\", isPremium: true, families: SM, keyw",
-   "Shared/Render/Tiles/TravelTiles.swift:87: return .empty(tr(\"Hôtel\"), symbol: \"bed.double.fill\", message: tr(\"Ajoute ton hébergement dans Tessera, espace Voyage.\"))",
+   "Shared/Render/Tiles/TravelTiles.swift:87: return .empty(tr(\"Hôtel\"), symbol: \"bed.double.fill\", message: tr(\"Ajoute ton hébergement dans Ardane, espace Voyage.\"))",
    "Shared/Render/Tiles/TravelTiles.swift:89: var tile = Tile(title: tr(\"Hôtel\"), symbol: \"bed.double.fill\")"
   ]
  },
@@ -13329,10 +13395,10 @@
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:365: .navigationTitle(tr(\"Idées\"))"
   ]
  },
- "Idées générales tirées de la table d'aliments de Tessera, à adapter à tes goûts. Ce n'est pas un avis médical.": {
+ "Idées générales tirées de la table d'aliments d'Ardane, à adapter à tes goûts. Ce n'est pas un avis médical.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:361: Text(tr(\"Idées générales tirées de la table d'aliments de Tessera, à adapter à tes goûts. Ce n'est pas un avis médical.\"))"
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:361: Text(tr(\"Idées générales tirées de la table d'aliments d'Ardane, à adapter à tes goûts. Ce n'est pas un avis médical.\"))"
   ]
  },
  "Il affiche tes événements des 48 prochaines heures, directement depuis le calendrier de ton iPhone.": {
@@ -13482,10 +13548,10 @@
    "App/Screens/MiniApps/Car/CarApp.swift:140: Label(tr(\"Indique la taille du réservoir pour voir l'autonomie\"), systemImage: \"fuelpump\")"
   ]
  },
- "Indique les dates de ta session dans Tessera, espace Études.": {
+ "Indique les dates de ta session dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:156: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Tessera, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:156: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Ardane, espace Études.\"))"
   ]
  },
  "Inspire avant de descendre, expire en remontant.": {
@@ -13642,7 +13708,7 @@
  "Jade": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/HomeSetups.swift:307: id: \"jade\", name: tr(\"Jade\"), tagline: tr(\"Calories, séance et régularité, aux couleurs de Tessera.\"),",
+   "App/Screens/Explore/HomeSetups.swift:307: id: \"jade\", name: tr(\"Jade\"), tagline: tr(\"Calories, séance et régularité, aux couleurs d'Ardane.\"),",
    "Shared/Model/StyleColors.swift:69: make(\"jade\", tr(\"Jade\"), background: [\"EEF7F3\"], panel: \"D9EEE5\", text: \"0F3029\", secondary: \"58786F\",",
    "Shared/Theme/Palette.swift:14: AccentSwatch(name: tr(\"Jade\"), hex: \"2F8F7A\"),"
   ]
@@ -14106,16 +14172,16 @@
    "App/Premium/PaywallContext.swift:69: title: tr(\"L'accueil « \\(name) »\"),"
   ]
  },
- "L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers.": {
+ "L'accès au calendrier est désactivé. Active-le dans Réglages > Ardane > Calendriers.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/KindOptionsSection.swift:247: Text(tr(\"L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers.\"))"
+   "App/Screens/Editor/KindOptionsSection.swift:247: Text(tr(\"L'accès au calendrier est désactivé. Active-le dans Réglages > Ardane > Calendriers.\"))"
   ]
  },
- "L'accès aux mouvements est désactivé : Réglages › Tessera › Mouvements et forme.": {
+ "L'accès aux mouvements est désactivé : Réglages › Ardane › Mouvements et forme.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/DataItemViews.swift:339: Text(tr(\"L'accès aux mouvements est désactivé : Réglages › Tessera › Mouvements et forme.\"))"
+   "App/Screens/Profile/DataItemViews.swift:339: Text(tr(\"L'accès aux mouvements est désactivé : Réglages › Ardane › Mouvements et forme.\"))"
   ]
  },
  "L'accès à la position est refusé. Tu peux l'autoriser dans Réglages, ou chercher ta ville.": {
@@ -14313,7 +14379,7 @@
  "L'écran\nverrouillé\naussi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:730: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
+   "App/Core/MarketingShots.swift:798: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "L'élastique ou la machine allège une partie du poids du corps.": {
@@ -14325,7 +14391,7 @@
  "L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:151: (.history, \"chart.bar.xaxis\", tr(\"Analyses et historiques\"), tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\")),"
+   "App/Premium/PaywallView.swift:157: (.history, \"chart.bar.xaxis\", tr(\"Analyses et historiques\"), tr(\"L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés\")),"
   ]
  },
  "L'évolution est dans Premium": {
@@ -14698,10 +14764,10 @@
    "Shared/Domains/ExerciseTechniques.swift:160: [tr(\"Laisse descendre les talons sous la marche.\"), tr(\"Monte sur la pointe des pieds le plus haut possible.\"), tr(\"Redescends lentement.\")],"
   ]
  },
- "Laisse vide ce que tu ne sais pas : Tessera peut le calculer.": {
+ "Laisse vide ce que tu ne sais pas : Ardane peut le calculer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:371: QuestionCard(title: tr(\"Par jour\"), detail: tr(\"Laisse vide ce que tu ne sais pas : Tessera peut le calculer.\")) {"
+   "App/Screens/Profile/ProfileTopics.swift:371: QuestionCard(title: tr(\"Par jour\"), detail: tr(\"Laisse vide ce que tu ne sais pas : Ardane peut le calculer.\")) {"
   ]
  },
  "Laisser claquer les charges.": {
@@ -15226,7 +15292,7 @@
  "Le repos démarre tout seul.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:596: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:664: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Le risque de pluie arrive avec la prochaine mise à jour météo.": {
@@ -15377,7 +15443,7 @@
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:354: Text(tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abo"
+   "App/Premium/PaywallView.swift:360: Text(tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abo"
   ]
  },
  "Les bras accompagnent en rythme.": {
@@ -15590,17 +15656,17 @@
    "App/Screens/Content/MoneyView.swift:31: Text(tr(\"Les montants sont répartis heure par heure : le widget montre ce qui s'accumule au fil de la journée.\"))"
   ]
  },
- "Les notifications de Tessera sont refusées dans les réglages de l'iPhone.": {
+ "Les notifications d'Ardane sont refusées dans les réglages de l'iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/SmartRemindersView.swift:33: Text(tr(\"Les notifications de Tessera sont refusées dans les réglages de l'iPhone.\"))"
+   "App/Screens/Profile/SmartRemindersView.swift:33: Text(tr(\"Les notifications d'Ardane sont refusées dans les réglages de l'iPhone.\"))"
   ]
  },
- "Les notifications sont désactivées pour Tessera dans Réglages.": {
+ "Les notifications sont désactivées pour Ardane dans Réglages.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsView.swift:194: Text(tr(\"Les notifications sont désactivées pour Tessera dans Réglages.\"))",
-   "App/Screens/Content/HydrationView.swift:71: ? tr(\"Les notifications sont désactivées pour Tessera dans Réglages.\")"
+   "App/Screens/Content/HabitsView.swift:194: Text(tr(\"Les notifications sont désactivées pour Ardane dans Réglages.\"))",
+   "App/Screens/Content/HydrationView.swift:71: ? tr(\"Les notifications sont désactivées pour Ardane dans Réglages.\")"
   ]
  },
  "Les offres ne sont pas encore disponibles.": {
@@ -15874,7 +15940,7 @@
  "Lipides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:668: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: \"3366FF\", progress: day.totals.fat / max(1, day.goals.fat))",
+   "App/Core/MarketingShots.swift:736: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: \"3366FF\", progress: day.totals.fat / max(1, day.goals.fat))",
    "App/Screens/Home/DailySection.swift:275: compactMacro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
    "App/Screens/Home/DailySection.swift:379: macro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
    "App/Screens/Home/MyInfoSection.swift:34: add(\"fat\", \"drop\", tr(\"Lipides\"), profile.knows(.fatTarget) ? \"\\(TF.int(nutrition.goals.fat)) g\" : nil)"
@@ -15997,10 +16063,10 @@
    "App/Screens/MiniApps/Finances/FinancesApp.swift:325: detail: state.bills.isEmpty ? tr(\"Loyer, Internet, abonnements…\") : tr(\"\\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois\"))"
   ]
  },
- "Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.": {
+ "Loyer, électricité, Internet, abonnements : Ardane te rappelle la prochaine date et le total par mois.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:335: Text(tr(\"Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.\"))"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:335: Text(tr(\"Loyer, électricité, Internet, abonnements : Ardane te rappelle la prochaine date et le total par mois.\"))"
   ]
  },
  "Loyer, épicerie…": {
@@ -16757,7 +16823,7 @@
  "Merci ! Tous les widgets et tous les styles sont débloqués.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:290: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
+   "App/Premium/PaywallView.swift:296: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
   ]
  },
  "Merci pour ton soutien": {
@@ -16970,7 +17036,7 @@
  "Mini-apps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:788: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
+   "App/Core/MarketingShots.swift:856: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
    "App/Screens/Home/MiniAppsRow.swift:224: .navigationTitle(tr(\"Mini-apps\"))"
   ]
  },
@@ -17253,7 +17319,7 @@
  "Mon Quotidien": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:694: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {",
+   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:83: .navigationTitle(tr(\"Mon Quotidien\"))",
    "App/Screens/Home/DailySection.swift:37: Text(tr(\"Mon Quotidien\").uppercased())",
    "App/Screens/Tutorial/Tutorial.swift:64: case .daily: tr(\"Mon Quotidien\")"
@@ -17460,7 +17526,7 @@
  "Montréal": {
   "placeholders": 0,
   "uses": [
-   "App/Core/ScreenshotMode.swift:275: $0.weatherLocation = WeatherLocation(name: tr(\"Montréal\"), latitude: 45.5019, longitude: -73.5674)",
+   "App/Core/ScreenshotMode.swift:279: $0.weatherLocation = WeatherLocation(name: tr(\"Montréal\"), latitude: 45.5019, longitude: -73.5674)",
    "Shared/Data/SampleData.swift:23: static func weather(now: Date, name: String = tr(\"Montréal\"), shift: Double = 0) -> WeatherSnapshot {",
    "Shared/Model/WorldCities.swift:12: WorldCity(id: \"America/Montreal\", name: tr(\"Montréal\"), country: tr(\"Canada\")),"
   ]
@@ -18221,16 +18287,16 @@
    "App/Screens/Spaces/SpacesView.swift:164: return model.business.sales.isEmpty ? tr(\"Note ta première vente\") : tr(\"\\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois-ci\")"
   ]
  },
- "Note tes dépenses dans Tessera, espace Budget.": {
+ "Note tes dépenses dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:64: guard !items.isEmpty else { return .empty(tr(\"Dépenses\"), symbol: \"chart.bar.doc.horizontal\", message: tr(\"Note tes dépenses dans Tessera, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:64: guard !items.isEmpty else { return .empty(tr(\"Dépenses\"), symbol: \"chart.bar.doc.horizontal\", message: tr(\"Note tes dépenses dans Ardane, espace Budget.\")) }"
   ]
  },
- "Note tes pleins dans Tessera, espace Auto.": {
+ "Note tes pleins dans Ardane, espace Auto.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/CarTiles.swift:102: guard !state.fills.isEmpty else { return .empty(tr(\"Carburant\"), symbol: \"fuelpump\", message: tr(\"Note tes pleins dans Tessera, espace Auto.\")) }"
+   "Shared/Render/Tiles/CarTiles.swift:102: guard !state.fills.isEmpty else { return .empty(tr(\"Carburant\"), symbol: \"fuelpump\", message: tr(\"Note tes pleins dans Ardane, espace Auto.\")) }"
   ]
  },
  "Note tes pleins et ton kilométrage : consommation, autonomie, coût réel par mois, entretiens et échéances se suivent tout seuls.": {
@@ -18251,10 +18317,10 @@
    "App/Screens/MiniApps/Business/BusinessApp.swift:161: Text(tr(\"Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls.\"))"
   ]
  },
- "Note tes ventes dans Tessera, espace Mon entreprise.": {
+ "Note tes ventes dans Ardane, espace Mon entreprise.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/BusinessTiles.swift:4: static let hint = tr(\"Note tes ventes dans Tessera, espace Mon entreprise.\")"
+   "Shared/Render/Tiles/BusinessTiles.swift:4: static let hint = tr(\"Note tes ventes dans Ardane, espace Mon entreprise.\")"
   ]
  },
  "Note tes ventes pour suivre ton activité.": {
@@ -18275,10 +18341,10 @@
    "App/Screens/Spaces/SpacesView.swift:150: if model.nutrition.entries.isEmpty { return tr(\"Note ton premier repas\") }"
   ]
  },
- "Note ton premier repas dans Tessera, espace Nutrition.": {
+ "Note ton premier repas dans Ardane, espace Nutrition.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:4: static let hint = tr(\"Note ton premier repas dans Tessera, espace Nutrition.\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:4: static let hint = tr(\"Note ton premier repas dans Ardane, espace Nutrition.\")"
   ]
  },
  "Note une dépense en quelques secondes.": {
@@ -18293,10 +18359,10 @@
    "App/Screens/Explore/StoreCombos.swift:93: combo(\"depense-factures\", tr(\"Dépense et factures\"), tr(\"Note une dépense, vois les factures qui arrivent.\"), .colorful, \"FF6B57\","
   ]
  },
- "Noter Tessera": {
+ "Noter Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:166: Label(tr(\"Noter Tessera\"), systemImage: \"star\")"
+   "App/Screens/Profile/ProfileView.swift:166: Label(tr(\"Noter Ardane\"), systemImage: \"star\")"
   ]
  },
  "Noter la fiche": {
@@ -18380,7 +18446,7 @@
  "Nouveau : les styles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:305: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Tessera\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:305: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
   ]
  },
  "Nouveau compte": {
@@ -18720,7 +18786,7 @@
  "Nutrition": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:661: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {",
+   "App/Core/MarketingShots.swift:729: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:148: case .nutrition: (tr(\"Nutrition\"), \"fork.knife\", \"F08A24\")",
    "App/Screens/Home/DailySection.swift:252: Label(tr(\"Nutrition\"), systemImage: \"fork.knife\")",
    "App/Screens/Home/DailySection.swift:368: Label(tr(\"Nutrition\"), systemImage: \"fork.knife\")"
@@ -18736,7 +18802,7 @@
  "Nutrition, sport, planning, budget.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:624: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
+   "App/Core/MarketingShots.swift:692: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Nébuleuse": {
@@ -18919,10 +18985,10 @@
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:144: insightCard(symbol: \"info.circle.fill\", title: tr(\"Objectif dépassé de \\(TF.int(-left)) kcal\"), message: tr(\"Rien de grave : c'est la moyenne sur plusieurs jours qui compte. L'historique te la montre."
   ]
  },
- "Objectif mensuel à définir dans Tessera": {
+ "Objectif mensuel à définir dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/BusinessTiles.swift:34: tile.detail = tr(\"Objectif mensuel à définir dans Tessera\")"
+   "Shared/Render/Tiles/BusinessTiles.swift:34: tile.detail = tr(\"Objectif mensuel à définir dans Ardane\")"
   ]
  },
  "Objectif par semaine": {
@@ -18938,11 +19004,11 @@
    "App/Screens/Home/DailySection.swift:705: Text(tr(\"Objectif à définir\"))"
   ]
  },
- "Objectif à définir dans Tessera": {
+ "Objectif à définir dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:165: tile.detail = tr(\"Objectif à définir dans Tessera\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:38: static let targetHint = tr(\"Objectif à définir dans Tessera\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:165: tile.detail = tr(\"Objectif à définir dans Ardane\")",
+   "Shared/Render/Tiles/NutritionTiles.swift:38: static let targetHint = tr(\"Objectif à définir dans Ardane\")"
   ]
  },
  "Objectifs": {
@@ -19015,7 +19081,7 @@
  "Offre de bienvenue": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:249: if store.introDescription(for: product) != nil { return tr(\"Offre de bienvenue\") }"
+   "App/Premium/PaywallView.swift:255: if store.introDescription(for: product) != nil { return tr(\"Offre de bienvenue\") }"
   ]
  },
  "Oignon": {
@@ -19304,13 +19370,13 @@
  "Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:149: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
+   "App/Premium/PaywallView.swift:155: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
   ]
  },
  "Packs, collections, fonds d'écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
+   "App/Core/MarketingShots.swift:814: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Pad thaï": {
@@ -19328,7 +19394,7 @@
  "Paiement unique": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:251: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
+   "App/Premium/PaywallView.swift:257: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
   ]
  },
  "Pain blanc": {
@@ -19452,7 +19518,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/MoneyView.swift:23: summaryValue(tr(\"Par jour\"), Fmt.signedMoney(summary.perDayNet, currency: currency))",
-   "App/Screens/Profile/ProfileTopics.swift:371: QuestionCard(title: tr(\"Par jour\"), detail: tr(\"Laisse vide ce que tu ne sais pas : Tessera peut le calculer.\")) {",
+   "App/Screens/Profile/ProfileTopics.swift:371: QuestionCard(title: tr(\"Par jour\"), detail: tr(\"Laisse vide ce que tu ne sais pas : Ardane peut le calculer.\")) {",
    "App/Screens/Spaces/NutritionSpace.swift:684: Section(tr(\"Par jour\")) {"
   ]
  },
@@ -19564,10 +19630,10 @@
    "Shared/Render/Tiles/DashboardTiles.swift:273: tile.caption = tr(\"Pas de cours prévu\")"
   ]
  },
- "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.": {
+ "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Ardane garde ensuite chaque jour lu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:314: Text(tr(\"Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:314: Text(tr(\"Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Ardane garde ensuite chaque jour lu.\"))"
   ]
  },
  "Pas de démonstration": {
@@ -19887,10 +19953,10 @@
    "Shared/Domains/Profile.swift:192: case .performance: tr(\"Performance\")"
   ]
  },
- "Personnalise Tessera": {
+ "Personnalise Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/MyInfoCenter.swift:83: Label(tr(\"Personnalise Tessera\"), systemImage: \"sparkles\")"
+   "App/Screens/Home/MyInfoCenter.swift:83: Label(tr(\"Personnalise Ardane\"), systemImage: \"sparkles\")"
   ]
  },
  "Personnaliser et ajouter": {
@@ -19943,10 +20009,10 @@
    "Shared/Model/WidgetKind.swift:153: case .systemSmall: tr(\"Petit\")"
   ]
  },
- "Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.": {
+ "Petit tour d'Ardane en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Tutorial/Tutorial.swift:78: tr(\"Petit tour de Tessera en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.\")"
+   "App/Screens/Tutorial/Tutorial.swift:78: tr(\"Petit tour d'Ardane en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.\")"
   ]
  },
  "Petites cartes sur ardoise": {
@@ -20093,16 +20159,16 @@
    "Shared/Domains/ExerciseLibrary.swift:761: x(\"side-plank\", tr(\"Planche latérale\"), [.obliques], [.abs, .shoulders], [.bodyweight], .strength, .beginner, .plank,"
   ]
  },
- "Planifie tes activités dans Tessera, espace Voyage.": {
+ "Planifie tes activités dans Ardane, espace Voyage.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TravelTiles.swift:206: return .empty(tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\", message: tr(\"Planifie tes activités dans Tessera, espace Voyage.\"))"
+   "Shared/Render/Tiles/TravelTiles.swift:206: return .empty(tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\", message: tr(\"Planifie tes activités dans Ardane, espace Voyage.\"))"
   ]
  },
  "Planning": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:754: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {",
+   "App/Core/MarketingShots.swift:822: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:150: case .planning: (tr(\"Planning\"), \"calendar.day.timeline.left\", \"3366FF\")",
    "App/Screens/Home/DailySection.swift:565: DayCard(title: tr(\"Planning\"), symbol: \"calendar.day.timeline.left\", colorHex: colorHex) {",
    "App/Screens/MiniApps/MiniApp.swift:13: case .planning: tr(\"Planning\")"
@@ -20150,7 +20216,7 @@
  "Plein, entretien, échéances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:781: (.car, tr(\"Plein, entretien, échéances\")),"
+   "App/Core/MarketingShots.swift:849: (.car, tr(\"Plein, entretien, échéances\")),"
   ]
  },
  "Pleine": {
@@ -20380,7 +20446,7 @@
  "Plus de 100\nwidgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:837: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
+   "App/Core/MarketingShots.swift:905: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Plus de précisions": {
@@ -20680,7 +20746,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:206: KindInfo(kind: .portfolio, title: tr(\"Portefeuille\"), summary: tr(\"La valeur de ton portefeuille et sa performance.\"), category: .investing, symbol: \"chart.line.uptrend.xyaxis\", isPremium: true, famil",
-   "Shared/Render/Tiles/MoneyTiles.swift:182: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Tessera, espace Placements.\")) }",
+   "Shared/Render/Tiles/MoneyTiles.swift:182: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\")) }",
    "Shared/Render/Tiles/MoneyTiles.swift:184: var tile = Tile(title: tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\")"
   ]
  },
@@ -20864,10 +20930,10 @@
    "App/Core/DataItems.swift:173: case .weight: tr(\"Pour estimer les calories brûlées.\")"
   ]
  },
- "Pour estimer tes calories, Tessera utilise :": {
+ "Pour estimer tes calories, Ardane utilise :": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:217: Text(tr(\"Pour estimer tes calories, Tessera utilise :\"))"
+   "App/Screens/Profile/ProfileTopics.swift:217: Text(tr(\"Pour estimer tes calories, Ardane utilise :\"))"
   ]
  },
  "Pour la météo de tes widgets.": {
@@ -21195,7 +21261,7 @@
   "uses": [
    "App/Components/UIComponents.swift:101: if !compact { Text(tr(\"Premium\")) }",
    "App/Components/UIComponents.swift:108: .accessibilityLabel(Text(tr(\"Premium\")))",
-   "App/Premium/PaywallView.swift:182: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
+   "App/Premium/PaywallView.swift:188: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
    "App/Screens/Explore/ExploreView.swift:81: case .premium: tr(\"Premium\")"
   ]
  },
@@ -21359,7 +21425,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:238: KindInfo(kind: .nextExam, title: tr(\"Prochain examen\"), summary: tr(\"Les jours avant ton prochain examen.\"), category: .student, symbol: \"pencil.and.list.clipboard\", isPremium: false, families: SM + [",
-   "Shared/Render/Tiles/StudentTiles.swift:90: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))",
+   "Shared/Render/Tiles/StudentTiles.swift:90: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Ardane, espace Études.\"))",
    "Shared/Render/Tiles/StudentTiles.swift:93: var tile = Tile(title: tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\")"
   ]
  },
@@ -21397,7 +21463,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:173: KindInfo(kind: .nextMeal, title: tr(\"Prochain repas\"), summary: tr(\"Ce qu'il reste pour ton prochain repas en calories et en protéines.\"), category: .nutrition, symbol: \"clock.badge.checkmark\", isPrem",
-   "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Tessera pour savoir ce qu'i",
+   "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Ardane pour savoir ce qu'il",
    "Shared/Render/Tiles/NutritionTiles.swift:234: var tile = Tile(title: tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\")"
   ]
  },
@@ -21417,7 +21483,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:257: KindInfo(kind: .nextActivity, title: tr(\"Prochaine activité\"), summary: tr(\"La prochaine activité prévue pendant ton voyage.\"), category: .travel, symbol: \"mappin.and.ellipse\", isPremium: true, famili",
-   "Shared/Render/Tiles/TravelTiles.swift:206: return .empty(tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\", message: tr(\"Planifie tes activités dans Tessera, espace Voyage.\"))",
+   "Shared/Render/Tiles/TravelTiles.swift:206: return .empty(tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\", message: tr(\"Planifie tes activités dans Ardane, espace Voyage.\"))",
    "Shared/Render/Tiles/TravelTiles.swift:208: var tile = Tile(title: tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\")"
   ]
  },
@@ -21511,7 +21577,7 @@
  "Profiter de l'offre de bienvenue": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:341: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))"
+   "App/Premium/PaywallView.swift:347: Text(isIntro ? tr(\"Profiter de l'offre de bienvenue\") : tr(\"Continuer\"))"
   ]
  },
  "Programme": {
@@ -21532,7 +21598,7 @@
  "Programme, budget, valise": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:780: (.travel, tr(\"Programme, budget, valise\")),"
+   "App/Core/MarketingShots.swift:848: (.travel, tr(\"Programme, budget, valise\")),"
   ]
  },
  "Progresse en amplitude petit à petit.": {
@@ -21568,7 +21634,7 @@
    "App/Screens/Editor/SpaceOptionsSection.swift:14: case .project: tr(\"Projet\")",
    "Shared/Intents/SpaceIntents.swift:183: @Parameter(title: \"Projet\")",
    "Shared/Model/KindCatalog.swift:148: KindInfo(kind: .project, title: tr(\"Projet\"), summary: tr(\"L'avancement d'un projet, ses tâches restantes et son échéance.\"), category: .productivity, symbol: \"folder.fill\", isPremium: true, families:",
-   "Shared/Render/Tiles/ProductivityTiles.swift:44: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Tessera, espace Productivité.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:44: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Ardane, espace Productivité.\"))"
   ]
  },
  "Projets": {
@@ -21589,7 +21655,7 @@
  "Protéines": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:664: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: \"E5484D\", progress: day.totals.protein / max(1, day.goals.protein))",
+   "App/Core/MarketingShots.swift:732: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: \"E5484D\", progress: day.totals.protein / max(1, day.goals.protein))",
    "App/Screens/Home/DailySection.swift:273: compactMacro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
    "App/Screens/Home/DailySection.swift:377: macro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
    "App/Screens/Home/MyInfoSection.swift:32: add(\"protein\", \"bolt.heart\", tr(\"Protéines\"), profile.knows(.proteinTarget) ? \"\\(TF.int(nutrition.goals.protein)) g\" : nil)"
@@ -21671,7 +21737,7 @@
  "Prévisions, pluie, soleil": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:782: (.weather, tr(\"Prévisions, pluie, soleil\")),"
+   "App/Core/MarketingShots.swift:850: (.weather, tr(\"Prévisions, pluie, soleil\")),"
   ]
  },
  "Prévu": {
@@ -22184,7 +22250,7 @@
  "Records, volume, bénéfice, MRR, devoirs, vol, carburant…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:147: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
+   "App/Premium/PaywallView.swift:153: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
   ]
  },
  "Rectangle": {
@@ -22560,7 +22626,7 @@
  "Repas, séance, eau, pas, météo.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:694: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
+   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
   ]
  },
  "Repos": {
@@ -22794,7 +22860,7 @@
  "Restauration…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:321: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:327: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer": {
@@ -22812,7 +22878,7 @@
  "Restaurer mes achats": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:321: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:327: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer une sauvegarde": {
@@ -23724,7 +23790,7 @@
  "Réessayer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:227: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
+   "App/Premium/PaywallView.swift:233: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Weather/WeatherApp.swift:25: EmptyStateView(symbol: \"cloud.sun\", title: tr(\"Météo indisponible\"), message: tr(\"Le service météo ne répond pas pour l'instant. Réessaie dans un moment.\"), actionTitle: tr(\"Réessayer\")) {",
    "App/Screens/Spaces/NutritionSpace.swift:462: Button(tr(\"Réessayer\")) { Task { await lookup(code) } }"
   ]
@@ -23767,7 +23833,7 @@
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:96: StudioGroup(title: tr(\"Répartition\"), detail: \"\\(segments.count)\") {",
    "Shared/Model/KindCatalog.swift:207: KindInfo(kind: .allocation, title: tr(\"Répartition\"), summary: tr(\"La part de chaque type de placement dans ton portefeuille.\"), category: .investing, symbol: \"chart.pie\", isPremium: true, families: S",
-   "Shared/Render/Tiles/MoneyTiles.swift:213: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Tessera, espace Placements.\"))",
+   "Shared/Render/Tiles/MoneyTiles.swift:213: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\"))",
    "Shared/Render/Tiles/MoneyTiles.swift:215: var tile = Tile(title: tr(\"Répartition\"), symbol: \"chart.pie\")"
   ]
  },
@@ -24001,16 +24067,16 @@
    "Shared/Domains/ExerciseLibrary.swift:186: steps: [tr(\"Saisis la charge un peu plus large que les épaules.\"), tr(\"Descends lentement vers le bas de la poitrine, coudes à environ 45° du corps.\"), tr(\"Pousse jusqu'aux bras tendus, sans verrouill"
   ]
  },
- "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.": {
+ "Saisis tes soldes à la main : Ardane ne se connecte à aucune banque.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/BudgetSpace.swift:160: Text(tr(\"Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.\"))"
+   "App/Screens/Spaces/BudgetSpace.swift:160: Text(tr(\"Saisis tes soldes à la main : Ardane ne se connecte à aucune banque.\"))"
   ]
  },
- "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": {
+ "Saisis tes soldes à la main : Ardane ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:444: Text(tr(\"Saisis tes soldes à la main : Tessera ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:444: Text(tr(\"Saisis tes soldes à la main : Ardane ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.\")).font(.footnote).foregroundStyle(.secondary)"
   ]
  },
  "Sakura": {
@@ -24112,7 +24178,7 @@
  "Sans compte, sans pub, sans suivi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:861: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
+   "App/Core/MarketingShots.swift:929: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
   ]
  },
  "Sans cours précis": {
@@ -24297,7 +24363,7 @@
  "Scanne.\nC'est noté.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:661: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
+   "App/Core/MarketingShots.swift:729: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
   ]
  },
  "Scanner": {
@@ -24312,7 +24378,7 @@
  "Scanner un aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:670: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
+   "App/Core/MarketingShots.swift:738: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
    "App/Screens/Spaces/NutritionSpace.swift:334: .navigationTitle(tr(\"Scanner un aliment\"))"
   ]
  },
@@ -24433,7 +24499,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:159: KindInfo(kind: .habitWeek, title: tr(\"Semaine d'habitudes\"), summary: tr(\"Toutes tes habitudes sur sept jours, en grille.\"), category: .wellbeing, symbol: \"square.grid.3x3.fill\", isPremium: true, fami",
-   "Shared/Render/Tiles/ProductivityTiles.swift:186: return .empty(tr(\"Semaine d'habitudes\"), symbol: \"square.grid.3x3.fill\", message: tr(\"Crée tes habitudes dans Tessera.\"))",
+   "Shared/Render/Tiles/ProductivityTiles.swift:186: return .empty(tr(\"Semaine d'habitudes\"), symbol: \"square.grid.3x3.fill\", message: tr(\"Crée tes habitudes dans Ardane.\"))",
    "Shared/Render/Tiles/ProductivityTiles.swift:195: var tile = Tile(title: tr(\"Semaine d'habitudes\"), symbol: \"square.grid.3x3.fill\")"
   ]
  },
@@ -24692,10 +24758,10 @@
    "App/Screens/Profile/SmartRemindersView.swift:66: Text(tr(\"Si aucun repas n'est noté ce jour-là. Seulement si tu as noté des repas cette semaine.\"))"
   ]
  },
- "Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Tessera en suit la croissance.": {
+ "Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Ardane en suit la croissance.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:244: Text(tr(\"Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Tessera en suit la croissance.\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:244: Text(tr(\"Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Ardane en suit la croissance.\"))"
   ]
  },
  "Simple": {
@@ -25018,7 +25084,7 @@
  "Sport": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:679: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
+   "App/Core/MarketingShots.swift:747: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
    "App/Screens/Home/DailySection.swift:513: case .rest: tr(\"Sport\")",
    "Shared/Data/PayloadLoader.swift:89: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: [recent[0], recent[2]]),",
    "Shared/Data/SampleData.swift:79: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),"
@@ -25130,8 +25196,8 @@
  "Store": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:571: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
-   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
+   "App/Core/MarketingShots.swift:639: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
+   "App/Core/MarketingShots.swift:814: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
    "App/Screens/Explore/ExploreView.swift:127: .navigationTitle(tr(\"Store\"))",
    "App/Screens/Tutorial/Tutorial.swift:55: case .store: tr(\"Store\")"
   ]
@@ -25139,7 +25205,7 @@
  "Studio": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:708: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
+   "App/Core/MarketingShots.swift:776: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
    "App/Screens/Editor/EditorView.swift:89: if !isNew { return tr(\"Studio\") }",
    "App/Screens/Tutorial/Tutorial.swift:54: case .studio: tr(\"Studio\")"
   ]
@@ -25176,14 +25242,14 @@
  "Styles": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:188: comparisonRow(tr(\"Styles\"), free: \"\\(ThemeCatalog.free.count)\", premium: \"\\(ThemeCatalog.all.count)\")",
+   "App/Premium/PaywallView.swift:194: comparisonRow(tr(\"Styles\"), free: \"\\(ThemeCatalog.free.count)\", premium: \"\\(ThemeCatalog.all.count)\")",
    "App/Screens/Explore/ExploreView.swift:31: case .styles: tr(\"Styles\")"
   ]
  },
  "Styles, couleurs, photos, polices.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:708: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
+   "App/Core/MarketingShots.swift:776: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Sucre blanc": {
@@ -25211,10 +25277,10 @@
    "Shared/Domains/ExerciseTechniques.swift:335: [tr(\"Le bassin reste immobile.\"), tr(\"Suis le coude du regard.\")],"
   ]
  },
- "Suis une entreprise dans Tessera, espace Sociétés cotées.": {
+ "Suis une entreprise dans Ardane, espace Sociétés cotées.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/BusinessTiles.swift:217: return .empty(tr(\"Action\"), symbol: \"chart.line.uptrend.xyaxis.circle\", message: tr(\"Suis une entreprise dans Tessera, espace Sociétés cotées.\"))"
+   "Shared/Render/Tiles/BusinessTiles.swift:217: return .empty(tr(\"Action\"), symbol: \"chart.line.uptrend.xyaxis.circle\", message: tr(\"Suis une entreprise dans Ardane, espace Sociétés cotées.\"))"
   ]
  },
  "Suisse": {
@@ -25668,8 +25734,8 @@
  "Séance, repos, calories et macros.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:595: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:644: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
+   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:712: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
   ]
  },
  "Séance, régularité, calories et protéines réunies.": {
@@ -25718,13 +25784,13 @@
  "Séances, repos, records": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:776: (.fitness, tr(\"Séances, repos, records\")),"
+   "App/Core/MarketingShots.swift:844: (.fitness, tr(\"Séances, repos, records\")),"
   ]
  },
  "Séances, repos, records et progrès.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:679: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
+   "App/Core/MarketingShots.swift:747: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Séances, séries et records": {
@@ -25769,7 +25835,7 @@
    "App/Screens/Explore/StoreShowcase.swift:72: subtitle: tr(\"Série\")",
    "Shared/Model/KindCatalog.swift:158: KindInfo(kind: .habitStreak, title: tr(\"Série\"), summary: tr(\"La série en cours d'une habitude et ses 30 derniers jours.\"), category: .wellbeing, symbol: \"flame.fill\", isPremium: false, families: SM +",
    "Shared/Model/Templates.swift:136: WidgetTemplate(id: \"streak-dark\", name: tr(\"Série\"), kind: .habitStreak, themeID: .dark, accentHex: \"F2A33A\"),",
-   "Shared/Render/Tiles/ProductivityTiles.swift:136: return .empty(tr(\"Série\"), symbol: \"flame.fill\", message: tr(\"Crée une habitude dans Tessera pour suivre ta série.\"))"
+   "Shared/Render/Tiles/ProductivityTiles.swift:136: return .empty(tr(\"Série\"), symbol: \"flame.fill\", message: tr(\"Crée une habitude dans Ardane pour suivre ta série.\"))"
   ]
  },
  "Série %@ sur %@": {
@@ -25841,7 +25907,7 @@
  "Série faite ?\nUn geste.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:596: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:664: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Série · %@": {
@@ -25962,7 +26028,7 @@
  "Ta journée,\nen un écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:694: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
+   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, météo.\")) {"
   ]
  },
  "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": {
@@ -26052,7 +26118,7 @@
  "Ta semaine,\nbien en main.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:754: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
+   "App/Core/MarketingShots.swift:822: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Ta semaine, ton mois ou ta journée entière.": {
@@ -26082,7 +26148,7 @@
  "Ta vie entière\nen widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:624: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
+   "App/Core/MarketingShots.swift:692: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Ta ville": {
@@ -26291,7 +26357,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:160: KindInfo(kind: .habitRate, title: tr(\"Taux de réussite\"), summary: tr(\"Le pourcentage d'habitudes tenues ce mois-ci.\"), category: .wellbeing, symbol: \"percent\", isPremium: true, families: SM, keywords",
-   "Shared/Render/Tiles/ProductivityTiles.swift:206: return .empty(tr(\"Taux de réussite\"), symbol: \"percent\", message: tr(\"Crée tes habitudes dans Tessera.\"))",
+   "Shared/Render/Tiles/ProductivityTiles.swift:206: return .empty(tr(\"Taux de réussite\"), symbol: \"percent\", message: tr(\"Crée tes habitudes dans Ardane.\"))",
    "Shared/Render/Tiles/ProductivityTiles.swift:222: var tile = Tile(title: tr(\"Taux de réussite\"), symbol: \"percent\")"
   ]
  },
@@ -26526,7 +26592,7 @@
  "Tes données\nrestent à toi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:861: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
+   "App/Core/MarketingShots.swift:929: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
   ]
  },
  "Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.": {
@@ -26640,7 +26706,7 @@
  "Tes pas": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:350: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle: tr(\"Autoriser\")) {"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:350: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle: tr(\"Autoriser\")) {"
   ]
  },
  "Tes pleins, pour le coût et la consommation.": {
@@ -26715,10 +26781,10 @@
    "App/Screens/Explore/StoreCombos.swift:205: combo(\"repas-calories\", tr(\"Repas et calories\"), tr(\"Tes repas du jour, tes calories et tes macros.\"), .glass, \"F2A33A\","
   ]
  },
- "Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte.": {
+ "Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Ardane réunit chaque jour ce qui compte.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailySection.swift:100: Text(tr(\"Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte.\"))"
+   "App/Screens/Home/DailySection.swift:100: Text(tr(\"Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Ardane réunit chaque jour ce qui compte.\"))"
   ]
  },
  "Tes revenus récurrents et les ventes du jour.": {
@@ -26851,72 +26917,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/Companies.swift:50: CompanyRef(cik: 1318605, ticker: \"TSLA\", name: tr(\"Tesla, Inc.\")),"
-  ]
- },
- "Tessera": {
-  "placeholders": 0,
-  "uses": [
-   "App/Core/MarketingShots.swift:170: Text(tr(\"Tessera\"))",
-   "App/Screens/Explore/HomeSetupViews.swift:258: label(tr(\"Tessera\"))",
-   "App/Screens/Explore/HomeSetups.swift:136: static let tessera = SetupApp(name: tr(\"Tessera\"), symbol: \"\")",
-   "App/Screens/Launch/LaunchView.swift:16: Text(tr(\"Tessera\"))"
-  ]
- },
- "Tessera %@": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Profile/ProfileView.swift:192: Text(tr(\"Tessera \\(appVersion)\"))"
-  ]
- },
- "Tessera Premium": {
-  "placeholders": 0,
-  "uses": [
-   "App/Premium/PaywallView.swift:72: Text(tr(\"Tessera Premium\"))",
-   "App/Premium/PaywallView.swift:103: Text(tr(\"Tessera Premium\"))",
-   "App/Screens/Home/HomeView.swift:112: Text(tr(\"Tessera Premium\"))",
-   "App/Screens/Profile/ProfileView.swift:329: Label(model.isPremium ? tr(\"Tessera Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
-  ]
- },
- "Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:350: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle: tr(\"Autoriser\")) {"
-  ]
- },
- "Tessera lit tes événements pour les afficher. Rien ne quitte ton iPhone.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Editor/KindOptionsSection.swift:257: Text(tr(\"Tessera lit tes événements pour les afficher. Rien ne quitte ton iPhone.\"))"
-  ]
- },
- "Tessera met ces thèmes en avant, sans jamais cacher les autres.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:718: Text(tr(\"Tessera met ces thèmes en avant, sans jamais cacher les autres.\"))"
-  ]
- },
- "Tessera n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Tessera › Photos.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/HomeSetupViews.swift:746: case .denied: tr(\"Tessera n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Tessera › Photos.\")"
-  ]
- },
- "Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Profile/ProfileView.swift:135: Text(tr(\"Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
-  ]
- },
- "Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:141: Text(tr(\"Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.\"))"
-  ]
- },
- "Tessera/1.0 (%@)": {
-  "placeholders": 1,
-  "uses": [
-   "Shared/Domains/Companies.swift:6: static var userAgent: String { tr(\"Tessera/1.0 (\\(supportEmail))\") }"
   ]
  },
  "Test Industries": {
@@ -27269,14 +27269,14 @@
  "Ton accès Premium est rétabli.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:318: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
+   "App/Premium/PaywallView.swift:324: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
    "App/Screens/Profile/ProfileView.swift:421: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:373: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
+   "App/Premium/PaywallView.swift:379: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
   ]
  },
  "Ton activité": {
@@ -27318,7 +27318,7 @@
  "Ton budget,\nsous contrôle.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:764: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
+   "App/Core/MarketingShots.swift:832: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Ton chiffre d'affaires du mois face à ton objectif.": {
@@ -27339,10 +27339,10 @@
    "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .mileage, title: tr(\"Kilométrage\"), summary: tr(\"Ton compteur et les kilomètres parcourus ce mois-ci.\"), category: .car, symbol: \"gauge.with.dots.needle.33percent\", isPremium: true, fam"
   ]
  },
- "Ton dernier widget enregistré dans Tessera, sans aucun réglage.": {
+ "Ton dernier widget enregistré dans Ardane, sans aucun réglage.": {
   "placeholders": 0,
   "uses": [
-   "Widgets/QuickWidget.swift:15: .description(tr(\"Ton dernier widget enregistré dans Tessera, sans aucun réglage.\"))"
+   "Widgets/QuickWidget.swift:15: .description(tr(\"Ton dernier widget enregistré dans Ardane, sans aucun réglage.\"))"
   ]
  },
  "Ton horaire": {
@@ -27542,7 +27542,7 @@
  "Ton écran\nd'accueil,\ndéjà stylé.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:570: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
+   "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
   ]
  },
  "Top 3": {
@@ -27622,10 +27622,10 @@
    "App/Screens/Explore/HomeSetupViews.swift:503: message: filter == .favorites ? tr(\"Touche le cœur sous un écran pour le retrouver ici.\") : tr(\"Essaie un autre filtre.\"),"
   ]
  },
- "Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.": {
+ "Touche le widget ajouté pour choisir lequel de tes widgets Ardane il affiche.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:132: (\"slider.horizontal.3\", tr(\"Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.\")),"
+   "App/Screens/Spaces/LockScreenCreator.swift:132: (\"slider.horizontal.3\", tr(\"Touche le widget ajouté pour choisir lequel de tes widgets Ardane il affiche.\")),"
   ]
  },
  "Touche les widgets à supprimer ou à fusionner": {
@@ -27646,16 +27646,16 @@
    "Shared/Render/Tiles/FitnessTiles.swift:81: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
   ]
  },
- "Touche pour l'autoriser dans Tessera": {
+ "Touche pour l'autoriser dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/ProductivityWidgets.swift:248: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:248: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Ardane\"), style: s)"
   ]
  },
- "Touche pour la définir dans Tessera": {
+ "Touche pour la définir dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/DataWidgets.swift:31: WidgetMessage(symbol: \"location.circle\", title: tr(\"Choisis ta ville\"), message: tr(\"Touche pour la définir dans Tessera\"), style: s)"
+   "Shared/Render/Kinds/DataWidgets.swift:31: WidgetMessage(symbol: \"location.circle\", title: tr(\"Choisis ta ville\"), message: tr(\"Touche pour la définir dans Ardane\"), style: s)"
   ]
  },
  "Touche un aliment pour changer sa quantité ou le déplacer. Glisse-le pour le supprimer.": {
@@ -27664,10 +27664,10 @@
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:86: Text(tr(\"Touche un aliment pour changer sa quantité ou le déplacer. Glisse-le pour le supprimer.\"))"
   ]
  },
- "Touche un jour pour lui donner une séance. Tessera te propose chaque jour celle qui est prévue.": {
+ "Touche un jour pour lui donner une séance. Ardane te propose chaque jour celle qui est prévue.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessPages.swift:53: Text(tr(\"Touche un jour pour lui donner une séance. Tessera te propose chaque jour celle qui est prévue.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessPages.swift:53: Text(tr(\"Touche un jour pour lui donner une séance. Ardane te propose chaque jour celle qui est prévue.\"))"
   ]
  },
  "Touche un objectif pour y ajouter un versement ou le supprimer.": {
@@ -27804,13 +27804,13 @@
  "Tous les packs": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:149: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
+   "App/Premium/PaywallView.swift:155: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
   ]
  },
  "Tous les widgets des espaces": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:147: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
+   "App/Premium/PaywallView.swift:153: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
   ]
  },
  "Tous les widgets et tous les styles": {
@@ -27953,7 +27953,7 @@
  "Tout reste sur ton iPhone": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:871: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
+   "App/Core/MarketingShots.swift:939: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
   ]
  },
  "Tout sélectionner": {
@@ -27980,8 +27980,8 @@
  "Tout, sans\ndéverrouiller.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:595: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:644: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
+   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:712: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
   ]
  },
  "Toute l'amplitude confortable, sans plier les coudes.": {
@@ -28199,7 +28199,7 @@
  "Tu profites de Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:288: Text(tr(\"Tu profites de Premium\"))"
+   "App/Premium/PaywallView.swift:294: Text(tr(\"Tu profites de Premium\"))"
   ]
  },
  "Tunis": {
@@ -28511,7 +28511,7 @@
  "Un widget,\nmille styles.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:708: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
+   "App/Core/MarketingShots.swift:776: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Un widget, 12 styles": {
@@ -28700,7 +28700,7 @@
    "App/Screens/Spaces/BudgetSpace.swift:155: ValueRow(title: tr(\"Valeur nette\"), value: TF.money(BudgetMath.netWorth(state), currency), symbol: \"sum\")",
    "Shared/Model/KindCatalog.swift:197: KindInfo(kind: .netWorth, title: tr(\"Valeur nette\"), summary: tr(\"Ce que tu possèdes moins ce que tu dois, et son évolution.\"), category: .finance, symbol: \"building.columns\", isPremium: true, familie",
    "Shared/Render/Tiles/DashboardTiles.swift:256: rows.append(TileRow(id: \"worth\", title: tr(\"Valeur nette\"), value: TF.money(BudgetMath.netWorth(state), currency), symbol: \"building.columns\"))",
-   "Shared/Render/Tiles/MoneyTiles.swift:125: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Tessera, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:125: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Ardane, espace Budget.\")) }"
   ]
  },
  "Valeur nette %@": {
@@ -28889,7 +28889,7 @@
  "Ventes, objectifs, MRR": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:779: (.business, tr(\"Ventes, objectifs, MRR\")),"
+   "App/Core/MarketingShots.swift:847: (.business, tr(\"Ventes, objectifs, MRR\")),"
   ]
  },
  "Ventes, objectifs, bénéfice et MRR.": {
@@ -28916,25 +28916,31 @@
  "Verre ambre": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:30: AppIconChoice(asset: \"AppIcon-Amber\", title: tr(\"Verre ambre\")),"
+   "App/Core/AppIcons.swift:33: AppIconChoice(asset: \"AppIcon-Amber\", title: tr(\"Verre ambre\")),"
   ]
  },
  "Verre améthyste": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:29: AppIconChoice(asset: \"AppIcon-Amethyst\", title: tr(\"Verre améthyste\")),"
+   "App/Core/AppIcons.swift:32: AppIconChoice(asset: \"AppIcon-Amethyst\", title: tr(\"Verre améthyste\")),"
   ]
  },
  "Verre bleu": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:25: AppIconChoice(asset: \"AppIcon-Blue\", title: tr(\"Verre bleu\")),"
+   "App/Core/AppIcons.swift:28: AppIconChoice(asset: \"AppIcon-Blue\", title: tr(\"Verre bleu\")),"
+  ]
+ },
+ "Verre classique": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:24: AppIconChoice(asset: \"AppIcon-GlassBlack\", title: tr(\"Verre classique\")),"
   ]
  },
  "Verre corail": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:27: AppIconChoice(asset: \"AppIcon-Coral\", title: tr(\"Verre corail\")),"
+   "App/Core/AppIcons.swift:30: AppIconChoice(asset: \"AppIcon-Coral\", title: tr(\"Verre corail\")),"
   ]
  },
  "Verre dépoli et reflets": {
@@ -28946,31 +28952,31 @@
  "Verre forêt": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:36: AppIconChoice(asset: \"AppIcon-Forest\", title: tr(\"Verre forêt\")),"
+   "App/Core/AppIcons.swift:39: AppIconChoice(asset: \"AppIcon-Forest\", title: tr(\"Verre forêt\")),"
   ]
  },
  "Verre framboise": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:32: AppIconChoice(asset: \"AppIcon-Raspberry\", title: tr(\"Verre framboise\")),"
+   "App/Core/AppIcons.swift:35: AppIconChoice(asset: \"AppIcon-Raspberry\", title: tr(\"Verre framboise\")),"
   ]
  },
  "Verre graphite": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:37: AppIconChoice(asset: \"AppIcon-Graphite\", title: tr(\"Verre graphite\")),"
+   "App/Core/AppIcons.swift:40: AppIconChoice(asset: \"AppIcon-Graphite\", title: tr(\"Verre graphite\")),"
   ]
  },
  "Verre jade": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:23: AppIconChoice(asset: \"AppIcon-Jade\", title: tr(\"Verre jade\")),"
+   "App/Core/AppIcons.swift:26: AppIconChoice(asset: \"AppIcon-Jade\", title: tr(\"Verre jade\")),"
   ]
  },
  "Verre lagon": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:31: AppIconChoice(asset: \"AppIcon-Lagoon\", title: tr(\"Verre lagon\")),"
+   "App/Core/AppIcons.swift:34: AppIconChoice(asset: \"AppIcon-Lagoon\", title: tr(\"Verre lagon\")),"
   ]
  },
  "Verre liquide et reflets": {
@@ -28982,37 +28988,37 @@
  "Verre minuit": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:33: AppIconChoice(asset: \"AppIcon-Midnight\", title: tr(\"Verre minuit\")),"
+   "App/Core/AppIcons.swift:36: AppIconChoice(asset: \"AppIcon-Midnight\", title: tr(\"Verre minuit\")),"
   ]
  },
  "Verre nuit": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:24: AppIconChoice(asset: \"AppIcon-Night\", title: tr(\"Verre nuit\")),"
+   "App/Core/AppIcons.swift:27: AppIconChoice(asset: \"AppIcon-Night\", title: tr(\"Verre nuit\")),"
   ]
  },
  "Verre océan": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:26: AppIconChoice(asset: \"AppIcon-Ocean\", title: tr(\"Verre océan\")),"
+   "App/Core/AppIcons.swift:29: AppIconChoice(asset: \"AppIcon-Ocean\", title: tr(\"Verre océan\")),"
   ]
  },
  "Verre rouge": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:22: AppIconChoice(asset: \"AppIcon-RedGlass\", title: tr(\"Verre rouge\")),"
+   "App/Core/AppIcons.swift:25: AppIconChoice(asset: \"AppIcon-RedGlass\", title: tr(\"Verre rouge\")),"
   ]
  },
  "Verre sakura": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:35: AppIconChoice(asset: \"AppIcon-Sakura\", title: tr(\"Verre sakura\")),"
+   "App/Core/AppIcons.swift:38: AppIconChoice(asset: \"AppIcon-Sakura\", title: tr(\"Verre sakura\")),"
   ]
  },
  "Verre émeraude": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:28: AppIconChoice(asset: \"AppIcon-Emerald\", title: tr(\"Verre émeraude\")),"
+   "App/Core/AppIcons.swift:31: AppIconChoice(asset: \"AppIcon-Emerald\", title: tr(\"Verre émeraude\")),"
   ]
  },
  "Verres": {
@@ -29061,7 +29067,7 @@
  "Version gratuite": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:329: Label(model.isPremium ? tr(\"Tessera Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+   "App/Screens/Profile/ProfileView.swift:329: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
  },
  "Vert forêt, texture papier": {
@@ -29271,7 +29277,7 @@
    "App/Screens/MiniApps/Travel/TravelPages.swift:19: addButton(tr(\"Vol\"), symbol: \"airplane\") { sheet = .flight(Flight(number: \"\", from: \"\", to: \"\", departure: trip.start)) }",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:205: SheetForm(title: tr(\"Vol\"), canSave: !flight.number.trimmed.isEmpty, onSave: save) {",
    "Shared/Model/KindCatalog.swift:251: KindInfo(kind: .flight, title: tr(\"Vol\"), summary: tr(\"Ton vol : heure de départ, terminal, porte et compte à rebours.\"), category: .travel, symbol: \"airplane\", isPremium: true, families: SM + [rect],",
-   "Shared/Render/Tiles/TravelTiles.swift:52: return .empty(tr(\"Vol\"), symbol: \"airplane\", message: tr(\"Ajoute ton vol dans Tessera, espace Voyage.\"))"
+   "Shared/Render/Tiles/TravelTiles.swift:52: return .empty(tr(\"Vol\"), symbol: \"airplane\", message: tr(\"Ajoute ton vol dans Ardane, espace Voyage.\"))"
   ]
  },
  "Vol %@": {
@@ -29444,8 +29450,8 @@
  "Widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:837: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
-   "App/Premium/PaywallView.swift:187: comparisonRow(tr(\"Widgets\"), free: \"\\(WidgetKind.allCases.filter { !$0.isPremium }.count)\", premium: \"\\(WidgetKind.allCases.count)\")",
+   "App/Core/MarketingShots.swift:905: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
+   "App/Premium/PaywallView.swift:193: comparisonRow(tr(\"Widgets\"), free: \"\\(WidgetKind.allCases.filter { !$0.isPremium }.count)\", premium: \"\\(WidgetKind.allCases.count)\")",
    "App/Screens/Explore/ExploreView.swift:27: case .widgets: tr(\"Widgets\")",
    "App/Screens/Explore/ExploreView.swift:585: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))"
   ]
@@ -29465,13 +29471,13 @@
  "Widgets enregistrés": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:189: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
+   "App/Premium/PaywallView.swift:195: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
   ]
  },
  "Widgets intelligents": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:148: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
+   "App/Premium/PaywallView.swift:154: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
   ]
  },
  "Widgets lancés par iOS": {
@@ -30399,10 +30405,10 @@
    "Shared/Domains/FoodDatabase.swift:315: \"pizza\": [\"pizza\"], \"burger\": [\"hamburger\", \"burger\"], \"hotdog\": [tr(\"hot dog\")], \"nuggets\": [\"nuggets\", tr(\"pepites de poulet\")],"
   ]
  },
- "iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Tessera propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Tessera.": {
+ "iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Ardane propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Ardane.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:305: StudioNote(text: tr(\"iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Tessera propose le Verre (givre et reflets dessinés), les dégradés d"
+   "App/Screens/Editor/EditorView.swift:305: StudioNote(text: tr(\"iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Ardane propose le Verre (givre et reflets dessinés), les dégradés do"
   ]
  },
  "iShares Core Equity": {
@@ -30531,7 +30537,7 @@
  "kcal restantes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:662: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: \"F08A24\", progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
+   "App/Core/MarketingShots.swift:730: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: \"F08A24\", progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
    "App/Screens/Home/DailySection.swift:265: Text(nutrition.kcalLeft.map { $0 >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\") } ?? tr(\"kcal mangées\"))",
    "App/Screens/Home/DailySection.swift:350: Text(left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:285: Text(known.kcal ? (left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\")) : tr(\"kcal mangées\"))"
@@ -31239,7 +31245,7 @@
  "sauvegarde": {
   "placeholders": 0,
   "uses": [
-   "App/Core/DataBackup.swift:79: return String(format: \"Tessera-%@-%04d-%02d-%02d\", tr(\"sauvegarde\"), c.year ?? 0, c.month ?? 0, c.day ?? 0)"
+   "App/Core/DataBackup.swift:80: return String(format: \"Ardane-%@-%04d-%02d-%02d\", tr(\"sauvegarde\"), c.year ?? 0, c.month ?? 0, c.day ?? 0)"
   ]
  },
  "secondaires": {
@@ -31653,7 +31659,7 @@
  "« Maintenant » change selon le moment, et les analyses résument ta journée": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:148: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
+   "App/Premium/PaywallView.swift:154: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
   ]
  },
  "· exemple": {
@@ -31937,10 +31943,10 @@
    "App/Screens/Spaces/StudentSpace.swift:123: ValueRow(title: tr(\"À réviser maintenant\"), value: \"\\(StudentMath.dueCount(state, at: now))\", symbol: \"rectangle.on.rectangle.angled\")"
   ]
  },
- "À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.": {
+ "À titre informatif seulement : Ardane ne donne aucun conseil d'investissement.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/MoneySpaces.swift:57: Text(tr(\"À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.\"))"
+   "App/Screens/Spaces/MoneySpaces.swift:57: Text(tr(\"À titre informatif seulement : Ardane ne donne aucun conseil d'investissement.\"))"
   ]
  },
  "À titre informatif, pas un conseil financier.": {
@@ -32057,7 +32063,7 @@
   "uses": [
    "App/Core/DataItems.swift:116: case .carDeadlines: tr(\"Échéances auto\")",
    "Shared/Model/KindCatalog.swift:267: KindInfo(kind: .carDeadlines, title: tr(\"Échéances auto\"), summary: tr(\"Assurance, immatriculation, pneus : les prochaines dates à retenir.\"), category: .car, symbol: \"calendar.badge.exclamationmark\",",
-   "Shared/Render/Tiles/CarTiles.swift:130: return .empty(tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\", message: tr(\"Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.\"))",
+   "Shared/Render/Tiles/CarTiles.swift:130: return .empty(tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\", message: tr(\"Ajoute l'assurance, l'immatriculation ou les pneus dans Ardane, espace Auto.\"))",
    "Shared/Render/Tiles/CarTiles.swift:133: var tile = Tile(title: tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\")"
   ]
  },
@@ -32090,15 +32096,15 @@
  "Écran d'accueil et écran verrouillé.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:837: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
+   "App/Core/MarketingShots.swift:905: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Écran verrouillé": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:595: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:644: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:730: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))",
+   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:712: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:798: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))",
    "App/Screens/Editor/AddToHomeScreenGuide.swift:21: Text(tr(\"Écran verrouillé\")).tag(1)"
   ]
  },
@@ -32117,7 +32123,7 @@
  "Écrans d'accueil": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:570: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
+   "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
    "App/Screens/Explore/ExploreView.swift:26: case .screens: tr(\"Écrans d'accueil\")",
    "App/Screens/Explore/ExploreView.swift:539: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
    "App/Screens/Explore/HomeSetupViews.swift:524: .navigationTitle(tr(\"Écrans d'accueil\"))"
@@ -32129,10 +32135,10 @@
    "App/Screens/Explore/ExploreView.swift:134: .searchable(text: $query, isPresented: $isSearchPresented, prompt: tr(\"Écrans, packs, météo, bitcoin…\"))"
   ]
  },
- "Écris ta note dans Tessera": {
+ "Écris ta note dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/ProductivityWidgets.swift:379: Text(text.isEmpty ? tr(\"Écris ta note dans Tessera\") : text)"
+   "Shared/Render/Kinds/ProductivityWidgets.swift:379: Text(text.isEmpty ? tr(\"Écris ta note dans Ardane\") : text)"
   ]
  },
  "Éditorial": {

@@ -241,7 +241,7 @@
   ]
  },
  {
-  "key": "Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.",
+  "key": "Automatique : Ardane met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailyLayoutEditor.swift:59: Text(tr(\"Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.\"))"

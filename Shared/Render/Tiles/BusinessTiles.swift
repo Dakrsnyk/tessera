@@ -1,7 +1,7 @@
 import Foundation
 
 enum BusinessTiles {
-    static let hint = tr("Note tes ventes dans Tessera, espace Mon entreprise.")
+    static let hint = tr("Note tes ventes dans Ardane, espace Mon entreprise.")
 
     static func make(_ context: RenderContext) -> Tile {
         let now = context.date
@@ -31,7 +31,7 @@ enum BusinessTiles {
             var tile = Tile(title: tr("Chiffre du mois"), symbol: "target")
             tile.value = TF.money(revenue, currency)
             tile.caption = tr("ce mois-ci")
-            tile.detail = tr("Objectif mensuel à définir dans Tessera")
+            tile.detail = tr("Objectif mensuel à définir dans Ardane")
             tile.shortValue = TF.money(revenue, currency)
             tile.inline = "CA \(TF.money(revenue, currency))"
             return tile
@@ -104,7 +104,7 @@ enum BusinessTiles {
 
     static func mrr(_ state: BusinessState, currency: String) -> Tile {
         guard let recurring = BusinessMath.recurring(state) else {
-            return .empty("MRR", symbol: "arrow.triangle.2.circlepath", message: tr("Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise."))
+            return .empty("MRR", symbol: "arrow.triangle.2.circlepath", message: tr("Ajoute ton revenu récurrent mensuel dans Ardane, espace Mon entreprise."))
         }
         var tile = Tile(title: tr("Revenu récurrent"), symbol: "arrow.triangle.2.circlepath")
         tile.value = TF.money(recurring.mrr, currency)
@@ -214,7 +214,7 @@ enum BusinessTiles {
         guard let company = data.companies.first ?? data.following.followed.first.map({ ref in
             CompanyFinancials(ref: ref, annualRevenue: [], quarterlyRevenue: [], annualNetIncome: [], sharesOutstanding: nil, fetchedAt: Date())
         }) else {
-            return .empty(tr("Action"), symbol: "chart.line.uptrend.xyaxis.circle", message: tr("Suis une entreprise dans Tessera, espace Sociétés cotées."))
+            return .empty(tr("Action"), symbol: "chart.line.uptrend.xyaxis.circle", message: tr("Suis une entreprise dans Ardane, espace Sociétés cotées."))
         }
         var tile = Tile(title: company.ref.name, symbol: "chart.line.uptrend.xyaxis.circle")
         if let quote = data.stocks[company.ref.ticker] {

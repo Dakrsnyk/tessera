@@ -14,7 +14,7 @@
   ]
  },
  {
-  "key": "Ajoute un widget Tessera (progression, compte à rebours, météo…)",
+  "key": "Ajoute un widget Ardane (progression, compte à rebours, météo…)",
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/AddToHomeScreenGuide.swift:34: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Ajoute un widget Tessera (progression, compte à rebours, météo…)\"))"
@@ -144,7 +144,7 @@
   ]
  },
  {
-  "key": "iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Tessera propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Tessera.",
+  "key": "iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Ardane propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Ardane.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:305: StudioNote(text: tr(\"iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Tessera propose le Verre (givre et reflets dess"
@@ -578,7 +578,7 @@
   ]
  },
  {
-  "key": "L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers.",
+  "key": "L'accès au calendrier est désactivé. Active-le dans Réglages > Ardane > Calendriers.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:247: Text(tr(\"L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers.\"))"
@@ -592,7 +592,7 @@
   ]
  },
  {
-  "key": "Tessera lit tes événements pour les afficher. Rien ne quitte ton iPhone.",
+  "key": "Ardane lit tes événements pour les afficher. Rien ne quitte ton iPhone.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:257: Text(tr(\"Tessera lit tes événements pour les afficher. Rien ne quitte ton iPhone.\"))"
@@ -1506,7 +1506,7 @@
   ]
  },
  {
-  "key": "Tessera n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Tessera › Photos.",
+  "key": "Ardane n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Ardane › Photos.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetupViews.swift:746: case .denied: tr(\"Tessera n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Tessera › Photos.\")"

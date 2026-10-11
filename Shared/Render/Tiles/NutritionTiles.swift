@@ -1,7 +1,7 @@
 import Foundation
 
 enum NutritionTiles {
-    static let hint = tr("Note ton premier repas dans Tessera, espace Nutrition.")
+    static let hint = tr("Note ton premier repas dans Ardane, espace Nutrition.")
 
     /// Nutrition widgets that open the scanner from their medium and large sizes.
     static let scanKinds: Set<WidgetKind> = [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nextMeal, .nutritionWeek, .nutritionStreak]
@@ -35,7 +35,7 @@ enum NutritionTiles {
         }
     }
 
-    static let targetHint = tr("Objectif à définir dans Tessera")
+    static let targetHint = tr("Objectif à définir dans Ardane")
 
     static func make(_ context: RenderContext) -> Tile {
         let now = context.date
@@ -50,7 +50,7 @@ enum NutritionTiles {
         case .nutritionWeek: tile = week(state, now: now, knowsGoal: known.kcal)
         case .nutritionStreak: tile = streak(state, now: now)
         case .quickFood: tile = quickFood(state, now: now)
-        case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr("Prochain repas"), symbol: "clock.badge.checkmark", message: tr("Donne ton objectif calorique dans Tessera pour savoir ce qu'il te reste par repas."))
+        case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr("Prochain repas"), symbol: "clock.badge.checkmark", message: tr("Donne ton objectif calorique dans Ardane pour savoir ce qu'il te reste par repas."))
         default: tile = TileFactory.placeholder(context.design.kind)
         }
         // Adding a food in two taps: the widget opens the app right on the camera.
@@ -213,7 +213,7 @@ enum NutritionTiles {
     static func quickFood(_ state: NutritionState, now: Date) -> Tile {
         let foods = Array((state.favorites.isEmpty ? state.recentFoods : state.favorites).prefix(3))
         guard !foods.isEmpty else {
-            return .empty(tr("Ajout rapide"), symbol: "plus.app", message: tr("Ajoute des favoris dans Tessera, espace Nutrition."))
+            return .empty(tr("Ajout rapide"), symbol: "plus.app", message: tr("Ajoute des favoris dans Ardane, espace Nutrition."))
         }
         let totals = NutritionMath.totals(state, on: now)
         var tile = Tile(title: tr("Ajout rapide"), symbol: "plus.app")

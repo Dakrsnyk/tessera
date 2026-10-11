@@ -4,7 +4,7 @@ import Foundation
 /// day reached, a savings goal reached, a widget made), never at the opening of the app; once the app
 /// has been opened on a few different occasions, and once per major version.
 /// Apple decides whether the request is shown (at most three times a year) and never says whether
-/// the user rated, so Tessera only remembers that it asked.
+/// the user rated, so Ardane only remembers that it asked.
 enum ReviewPrompt {
     static let opensBeforeAsking = 5
     /// Coming back to the app within this time is the same opening.

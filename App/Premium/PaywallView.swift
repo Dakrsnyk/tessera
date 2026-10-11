@@ -68,8 +68,8 @@ struct PaywallView: View {
 
     private var hero: some View {
         VStack(spacing: 12) {
-            TesseraMark(size: 56)
-            Text(tr("Tessera Premium"))
+            ArdaneMark(size: 56)
+            Text(tr("Ardane Premium"))
                 .font(.largeTitle.weight(.bold))
             Text(tr("Tous les widgets, tous les styles, sans limite."))
                 .font(.body)
@@ -99,8 +99,8 @@ struct PaywallView: View {
     private func contextHeader(_ context: PaywallContext) -> some View {
         VStack(spacing: 14) {
             HStack(spacing: 8) {
-                TesseraMark(size: 26)
-                Text(tr("Tessera Premium"))
+                ArdaneMark(size: 26)
+                Text(tr("Ardane Premium"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.secondary)
             }
@@ -374,7 +374,7 @@ struct PaywallView: View {
         case .success:
             Haptics.success()
             didPurchase = true
-            message = tr("Bienvenue dans Tessera Premium !")
+            message = tr("Bienvenue dans Ardane Premium !")
         case .pending:
             message = tr("Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.")
         case .cancelled:

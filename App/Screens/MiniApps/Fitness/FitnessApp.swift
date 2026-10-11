@@ -107,7 +107,7 @@ struct FitnessAppView: View {
                 .accessibilityIdentifier("fitness-start-anyway")
             } else {
                 header(tr("Ton programme"), symbol: "list.bullet.clipboard")
-                Text(tr("Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne."))
+                Text(tr("Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Ardane te propose chaque jour la bonne."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

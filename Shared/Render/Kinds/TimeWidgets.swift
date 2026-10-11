@@ -208,7 +208,7 @@ struct WorldClockWidgetView: View {
         let shown = zones.prefix(context.isSmall ? 2 : 4).enumerated().map { ZoneItem(id: $0.element.id, zone: $0.element.zone, index: $0.offset) }
 
         if shown.isEmpty {
-            WidgetMessage(symbol: "globe", title: tr("Aucune ville"), message: tr("Choisis tes villes dans Tessera"), style: s)
+            WidgetMessage(symbol: "globe", title: tr("Aucune ville"), message: tr("Choisis tes villes dans Ardane"), style: s)
         } else if context.isSmall {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(shown) { item in

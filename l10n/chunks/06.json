@@ -102,7 +102,7 @@
   ]
  },
  {
-  "key": "Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale.",
+  "key": "Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Ardane en tire la moyenne du cours, puis ta moyenne générale.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:524: Text(tr(\"Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale.\"))"
@@ -1048,7 +1048,7 @@
   ]
  },
  {
-  "key": "Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.",
+  "key": "Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/OnboardingView.swift:214: message: tr(\"Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.\")"
@@ -1062,7 +1062,7 @@
   ]
  },
  {
-  "key": "Bienvenue dans Tessera",
+  "key": "Bienvenue dans Ardane",
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/OnboardingView.swift:276: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Tessera\"))"
@@ -1278,7 +1278,7 @@
   ]
  },
  {
-  "key": "L'accès aux mouvements est désactivé : Réglages › Tessera › Mouvements et forme.",
+  "key": "L'accès aux mouvements est désactivé : Réglages › Ardane › Mouvements et forme.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/DataItemViews.swift:339: Text(tr(\"L'accès aux mouvements est désactivé : Réglages › Tessera › Mouvements et forme.\"))"
@@ -1313,7 +1313,7 @@
   ]
  },
  {
-  "key": "Pour estimer tes calories, Tessera utilise :",
+  "key": "Pour estimer tes calories, Ardane utilise :",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:217: Text(tr(\"Pour estimer tes calories, Tessera utilise :\"))"
@@ -1379,7 +1379,7 @@
   ]
  },
  {
-  "key": "Laisse vide ce que tu ne sais pas : Tessera peut le calculer.",
+  "key": "Laisse vide ce que tu ne sais pas : Ardane peut le calculer.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:371: QuestionCard(title: tr(\"Par jour\"), detail: tr(\"Laisse vide ce que tu ne sais pas : Tessera peut le calculer.\")) {"
@@ -1622,7 +1622,7 @@
   ]
  },
  {
-  "key": "Tessera met ces thèmes en avant, sans jamais cacher les autres.",
+  "key": "Ardane met ces thèmes en avant, sans jamais cacher les autres.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:718: Text(tr(\"Tessera met ces thèmes en avant, sans jamais cacher les autres.\"))"
@@ -1796,7 +1796,7 @@
   ]
  },
  {
-  "key": "Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.",
+  "key": "Ardane ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:121: Text(tr(\"Tessera ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
@@ -1824,7 +1824,7 @@
   ]
  },
  {
-  "key": "Noter Tessera",
+  "key": "Noter Ardane",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:152: Label(tr(\"Noter Tessera\"), systemImage: \"star\")"
@@ -1859,7 +1859,7 @@
   ]
  },
  {
-  "key": "Tessera %@",
+  "key": "Ardane %@",
   "placeholders": 1,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:178: Text(tr(\"Tessera \\(appVersion)\"))"

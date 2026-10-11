@@ -7,7 +7,8 @@ import UniformTypeIdentifiers
 /// network come back by themselves; premium status belongs to the App Store account.
 enum DataBackup {
     struct Archive: Codable {
-        var app = "Tessera"
+        /// The app's name when the backup was made (« Tessera » before it became Ardane).
+        var app = "Ardane"
         var version = 1
         var date: Date
         /// The files of the store, as saved, by name.
@@ -48,7 +49,7 @@ enum DataBackup {
     static func read(_ data: Data, store: SharedStore = .shared) throws -> Archive {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        guard let archive = try? decoder.decode(Archive.self, from: data), archive.app == "Tessera" else {
+        guard let archive = try? decoder.decode(Archive.self, from: data), ["Ardane", "Tessera"].contains(archive.app) else {
             throw Failure.notABackup
         }
         guard archive.version <= 1 else { throw Failure.newerVersion }
@@ -73,10 +74,10 @@ enum DataBackup {
         }
     }
 
-    /// « Tessera-sauvegarde-2026-10-08 ».
+    /// « Ardane-sauvegarde-2026-10-08 ».
     static func fileName(_ date: Date) -> String {
         let c = DateMath.calendar.dateComponents([.year, .month, .day], from: date)
-        return String(format: "Tessera-%@-%04d-%02d-%02d", tr("sauvegarde"), c.year ?? 0, c.month ?? 0, c.day ?? 0)
+        return String(format: "Ardane-%@-%04d-%02d-%02d", tr("sauvegarde"), c.year ?? 0, c.month ?? 0, c.day ?? 0)
     }
 
     private static func decodes(_ file: StoreFile, _ data: Data, store: SharedStore) -> Bool {

@@ -5,7 +5,7 @@ import SwiftUI
 /// A figure doing the exercise on the equipment it needs (bench at the right incline, machine, cable,
 /// bar...), drawn by the app from `ExerciseDemos.json`: 3D positions sampled over one repetition,
 /// interpolated, seen from a chosen angle. No outside video, so nothing to license, and the same
-/// clean style as the rest of Tessera. The phases of the movement are named under the figure.
+/// clean style as the rest of Ardane. The phases of the movement are named under the figure.
 struct ExerciseDemoView: View {
     let exercise: ExerciseInfo
     var colorHex = "E5484D"

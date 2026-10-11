@@ -22,7 +22,7 @@ enum ProductivityTiles {
     static func priorities(_ state: ProductivityState, now: Date) -> Tile {
         let items = Array(state.priorities.prefix(3))
         guard !items.isEmpty else {
-            return .empty(tr("Top 3 du jour"), symbol: "3.circle", message: tr("Choisis tes trois priorités dans Tessera, espace Productivité."))
+            return .empty(tr("Top 3 du jour"), symbol: "3.circle", message: tr("Choisis tes trois priorités dans Ardane, espace Productivité."))
         }
         let done = items.filter { $0.isDone(on: now) }.count
         var tile = Tile(title: tr("Top 3 du jour"), symbol: "3.circle")
@@ -41,7 +41,7 @@ enum ProductivityTiles {
     static func project(_ state: ProductivityState, target: String?, now: Date) -> Tile {
         let chosen = state.projects.first { $0.id.uuidString == target } ?? ProductivityMath.mainProject(state, at: now)
         guard let project = chosen else {
-            return .empty(tr("Projet"), symbol: "folder.fill", message: tr("Crée un projet et ses tâches dans Tessera, espace Productivité."))
+            return .empty(tr("Projet"), symbol: "folder.fill", message: tr("Crée un projet et ses tâches dans Ardane, espace Productivité."))
         }
         var tile = Tile(title: project.name, symbol: "folder.fill")
         tile.value = Fmt.percent(project.progress)
@@ -65,7 +65,7 @@ enum ProductivityTiles {
     static func deadline(_ state: ProductivityState, target: String?, now: Date, context: RenderContext) -> Tile {
         let chosen = state.deadlines.first { $0.id.uuidString == target && $0.date > now } ?? ProductivityMath.nextDeadline(state, after: now)
         guard let deadline = chosen else {
-            return .empty(tr("Échéance"), symbol: "flag.checkered", message: tr("Ajoute une échéance dans Tessera, espace Productivité."))
+            return .empty(tr("Échéance"), symbol: "flag.checkered", message: tr("Ajoute une échéance dans Ardane, espace Productivité."))
         }
         var tile = Tile(title: deadline.title, symbol: "flag.checkered")
         let seconds = deadline.date.timeIntervalSince(now)
@@ -104,7 +104,7 @@ enum ProductivityTiles {
 
     static func counter(_ state: ProductivityState, target: String?, now: Date) -> Tile {
         guard let counter = state.counters.first(where: { $0.id.uuidString == target }) ?? state.counters.first else {
-            return .empty(tr("Compteur"), symbol: "plusminus.circle", message: tr("Crée un compteur dans Tessera, espace Productivité."))
+            return .empty(tr("Compteur"), symbol: "plusminus.circle", message: tr("Crée un compteur dans Ardane, espace Productivité."))
         }
         let value = counter.value(on: now)
         var tile = Tile(title: counter.name, symbol: counter.symbol)
@@ -133,7 +133,7 @@ enum ProductivityTiles {
         let picked = content.habits.first { $0.id.uuidString == target }
             ?? content.habits.max { $0.streak(asOf: now) < $1.streak(asOf: now) }
         guard let habit = picked else {
-            return .empty(tr("Série"), symbol: "flame.fill", message: tr("Crée une habitude dans Tessera pour suivre ta série."))
+            return .empty(tr("Série"), symbol: "flame.fill", message: tr("Crée une habitude dans Ardane pour suivre ta série."))
         }
         let streak = habit.streak(asOf: now)
         var tile = Tile(title: habit.name, symbol: "flame.fill")
@@ -183,7 +183,7 @@ enum ProductivityTiles {
 
     static func habitWeek(_ content: ContentState, now: Date) -> Tile {
         guard !content.habits.isEmpty else {
-            return .empty(tr("Semaine d'habitudes"), symbol: "square.grid.3x3.fill", message: tr("Crée tes habitudes dans Tessera."))
+            return .empty(tr("Semaine d'habitudes"), symbol: "square.grid.3x3.fill", message: tr("Crée tes habitudes dans Ardane."))
         }
         let week = DateMath.week(containing: now)
         let habits = Array(content.habits.prefix(6))
@@ -203,7 +203,7 @@ enum ProductivityTiles {
 
     static func habitRate(_ content: ContentState, now: Date) -> Tile {
         guard !content.habits.isEmpty else {
-            return .empty(tr("Taux de réussite"), symbol: "percent", message: tr("Crée tes habitudes dans Tessera."))
+            return .empty(tr("Taux de réussite"), symbol: "percent", message: tr("Crée tes habitudes dans Ardane."))
         }
         let first = DateMath.calendar.dateInterval(of: .month, for: now)?.start ?? now
         let days = DateMath.daysBetween(first, now) + 1

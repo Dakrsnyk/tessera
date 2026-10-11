@@ -216,7 +216,7 @@ struct AllMiniAppsSheet: View {
                     } header: {
                         Text(tr("À découvrir"))
                     } footer: {
-                        Text(tr("Chaque mini-app utilise tes données de Tessera et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne."))
+                        Text(tr("Chaque mini-app utilise tes données d'Ardane et de « Mes informations » : rien n'est inventé, elles se remplissent à mesure que tu notes. Une mini-app masquée de l'accueil (appui long) revient en glissant sa ligne."))
                     }
                 }
             }

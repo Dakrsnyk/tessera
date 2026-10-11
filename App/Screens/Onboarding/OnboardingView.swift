@@ -231,7 +231,7 @@ private struct IdentityStep: View {
     }
 }
 
-/// Step 2: the interests. They decide the next pages, and what Tessera puts forward.
+/// Step 2: the interests. They decide the next pages, and what Ardane puts forward.
 private struct InterestsStep: View {
     @Environment(AppModel.self) private var model
 
@@ -240,7 +240,7 @@ private struct InterestsStep: View {
             StepTitle(
                 symbol: "square.grid.2x2.fill", colorHex: "8C6CFF",
                 title: tr("Qu'est-ce qui t'intéresse ?"),
-                message: tr("Choisis-en autant que tu veux. Tessera ne posera que les questions utiles, et tu pourras tout changer plus tard.")
+                message: tr("Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.")
             )
             InterestGrid(selection: Binding(
                 get: { model.profile.interests },
@@ -301,8 +301,8 @@ private struct StyleStep: View {
         ScrollView {
             VStack(spacing: 22) {
                 VStack(spacing: 10) {
-                    TesseraMark(size: 40)
-                    Text(isLast ? tr("Nouveau : les styles") : tr("Bienvenue dans Tessera"))
+                    ArdaneMark(size: 40)
+                    Text(isLast ? tr("Nouveau : les styles") : tr("Bienvenue dans Ardane"))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
                     Text(tr("Choisis ton style"))

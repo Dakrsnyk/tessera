@@ -241,7 +241,7 @@ struct BusinessRecurringPage: View {
                              detail: recurring.subscribers > 0 ? tr("\(TF.money(recurring.mrr / Double(recurring.subscribers), currency, decimals: 2)) chacun") : nil)
                 }
             } else {
-                Text(tr("Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Tessera en suit la croissance."))
+                Text(tr("Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Ardane en suit la croissance."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
@@ -301,7 +301,7 @@ struct BusinessMetricsPage: View {
             }
             .accessibilityIdentifier("metrics-new")
             if metrics.isEmpty {
-                Text(tr("Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Tessera trace leur évolution."))
+                Text(tr("Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Ardane trace leur évolution."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)

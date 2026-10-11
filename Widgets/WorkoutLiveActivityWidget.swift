@@ -5,7 +5,7 @@ import WidgetKit
 
 /// The workout in progress on the Lock Screen and in the Dynamic Island (see `WorkoutLiveActivity`).
 struct WorkoutLiveActivityWidget: Widget {
-    /// The app style chosen in Tessera, like the rest of the session's screens.
+    /// The app style chosen in Ardane, like the rest of the session's screens.
     private var accent: Color { AppStyle.style(SharedStore.shared.settings.appStyle).accent }
 
     var body: some WidgetConfiguration {

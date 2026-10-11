@@ -214,7 +214,7 @@ struct GenderPicker: View {
                 ), identifier: "gender-detail")
             }
             if let sex = profile.sex, !sex.isBinary {
-                Text(tr("Pour estimer tes calories, Tessera utilise :"))
+                Text(tr("Pour estimer tes calories, Ardane utilise :"))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 FlowLayout {
@@ -368,7 +368,7 @@ struct TopicForm: View {
                 }
             }
         }
-        QuestionCard(title: tr("Par jour"), detail: tr("Laisse vide ce que tu ne sais pas : Tessera peut le calculer.")) {
+        QuestionCard(title: tr("Par jour"), detail: tr("Laisse vide ce que tu ne sais pas : Ardane peut le calculer.")) {
             VStack(spacing: 8) {
                 ProfileNumberField(title: tr("Calories"), unit: "kcal", value: targetBinding(.kcalTarget, \.kcal), decimals: false, identifier: "target-kcal")
                 HStack(spacing: 8) {
@@ -715,7 +715,7 @@ struct InterestsEditorSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(tr("Tessera met ces thèmes en avant, sans jamais cacher les autres."))
+                    Text(tr("Ardane met ces thèmes en avant, sans jamais cacher les autres."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     InterestGrid(selection: Binding(

@@ -613,7 +613,7 @@ struct StudiesGradesPage: View {
             }
             .accessibilityIdentifier("grades-new")
             if state.grades.isEmpty {
-                Text(tr("Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Tessera en tire la moyenne du cours, puis ta moyenne générale."))
+                Text(tr("Aucune note pour l'instant. Chaque note compte pour un pourcentage de son cours : Ardane en tire la moyenne du cours, puis ta moyenne générale."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)

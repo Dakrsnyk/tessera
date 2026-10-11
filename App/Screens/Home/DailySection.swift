@@ -97,7 +97,7 @@ struct DailySection: View {
             Label(tr("Complète tes informations pour personnaliser ton Mon Quotidien."), systemImage: "sun.max")
                 .font(.headline)
                 .fixedSize(horizontal: false, vertical: true)
-            Text(tr("Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Tessera réunit chaque jour ce qui compte."))
+            Text(tr("Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Ardane réunit chaque jour ce qui compte."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

@@ -2140,7 +2140,7 @@
   ]
  },
  {
-  "key": "Touche pour la définir dans Tessera",
+  "key": "Touche pour la définir dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:31: WidgetMessage(symbol: \"location.circle\", title: tr(\"Choisis ta ville\"), message: tr(\"Touche pour la définir dans Tessera\"), style: s)"
@@ -2176,7 +2176,7 @@
   ]
  },
  {
-  "key": "Ajoute tes revenus et dépenses dans Tessera",
+  "key": "Ajoute tes revenus et dépenses dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:288: WidgetMessage(symbol: \"dollarsign.circle\", title: tr(\"Aucun montant\"), message: tr(\"Ajoute tes revenus et dépenses dans Tessera\"), style: s)"
@@ -2240,7 +2240,7 @@
   ]
  },
  {
-  "key": "Ajoute-les dans Tessera",
+  "key": "Ajoute-les dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Tessera\"), style: s)"
@@ -2289,7 +2289,7 @@
   ]
  },
  {
-  "key": "Crée-les dans Tessera",
+  "key": "Crée-les dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/ProductivityWidgets.swift:88: WidgetMessage(symbol: \"repeat\", title: tr(\"Aucune habitude\"), message: tr(\"Crée-les dans Tessera\"), style: s)"
@@ -2352,7 +2352,7 @@
   ]
  },
  {
-  "key": "Touche pour l'autoriser dans Tessera",
+  "key": "Touche pour l'autoriser dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/ProductivityWidgets.swift:248: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Tessera\"), style: s)"
@@ -2373,7 +2373,7 @@
   ]
  },
  {
-  "key": "Écris ta note dans Tessera",
+  "key": "Écris ta note dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/ProductivityWidgets.swift:379: Text(text.isEmpty ? tr(\"Écris ta note dans Tessera\") : text)"
@@ -2402,7 +2402,7 @@
   ]
  },
  {
-  "key": "Choisis tes villes dans Tessera",
+  "key": "Choisis tes villes dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/TimeWidgets.swift:211: WidgetMessage(symbol: \"globe\", title: tr(\"Aucune ville\"), message: tr(\"Choisis tes villes dans Tessera\"), style: s)"
@@ -2521,7 +2521,7 @@
   ]
  },
  {
-  "key": "Note tes ventes dans Tessera, espace Mon entreprise.",
+  "key": "Note tes ventes dans Ardane, espace Mon entreprise.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/BusinessTiles.swift:4: static let hint = tr(\"Note tes ventes dans Tessera, espace Mon entreprise.\")"
@@ -2535,7 +2535,7 @@
   ]
  },
  {
-  "key": "Objectif mensuel à définir dans Tessera",
+  "key": "Objectif mensuel à définir dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/BusinessTiles.swift:34: tile.detail = tr(\"Objectif mensuel à définir dans Tessera\")"
@@ -2627,7 +2627,7 @@
   ]
  },
  {
-  "key": "Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise.",
+  "key": "Ajoute ton revenu récurrent mensuel dans Ardane, espace Mon entreprise.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/BusinessTiles.swift:107: return .empty(\"MRR\", symbol: \"arrow.triangle.2.circlepath\", message: tr(\"Ajoute ton revenu récurrent mensuel dans Tessera, espace Mon entreprise.\"))"
@@ -2712,7 +2712,7 @@
   ]
  },
  {
-  "key": "Suis une entreprise dans Tessera, espace Sociétés cotées.",
+  "key": "Suis une entreprise dans Ardane, espace Sociétés cotées.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/BusinessTiles.swift:217: return .empty(tr(\"Action\"), symbol: \"chart.line.uptrend.xyaxis.circle\", message: tr(\"Suis une entreprise dans Tessera, espace Sociétés cotées.\"))"
@@ -2754,7 +2754,7 @@
   ]
  },
  {
-  "key": "Ajoute ta voiture et tes pleins dans Tessera, espace Auto.",
+  "key": "Ajoute ta voiture et tes pleins dans Ardane, espace Auto.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/CarTiles.swift:4: static let hint = tr(\"Ajoute ta voiture et tes pleins dans Tessera, espace Auto.\")"
@@ -2796,7 +2796,7 @@
   ]
  },
  {
-  "key": "Ajoute tes entretiens (vidange, pneus…) dans Tessera, espace Auto.",
+  "key": "Ajoute tes entretiens (vidange, pneus…) dans Ardane, espace Auto.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/CarTiles.swift:47: return .empty(tr(\"Entretien\"), symbol: \"wrench.and.screwdriver\", message: tr(\"Ajoute tes entretiens (vidange, pneus…) dans Tessera, espace Auto.\"))"
@@ -2838,7 +2838,7 @@
   ]
  },
  {
-  "key": "Note tes pleins dans Tessera, espace Auto.",
+  "key": "Note tes pleins dans Ardane, espace Auto.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/CarTiles.swift:102: guard !state.fills.isEmpty else { return .empty(tr(\"Carburant\"), symbol: \"fuelpump\", message: tr(\"Note tes pleins dans Tessera, espace Auto.\")) }"
@@ -2867,7 +2867,7 @@
   ]
  },
  {
-  "key": "Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.",
+  "key": "Ajoute l'assurance, l'immatriculation ou les pneus dans Ardane, espace Auto.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/CarTiles.swift:130: return .empty(tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\", message: tr(\"Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto.\"))"

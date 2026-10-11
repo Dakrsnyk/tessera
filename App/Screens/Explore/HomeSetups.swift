@@ -1,7 +1,7 @@
 import SwiftUI
 import WidgetKit
 
-/// A complete, ready-made screen: a wallpaper, Tessera widgets placed as on a real iPhone,
+/// A complete, ready-made screen: a wallpaper, Ardane widgets placed as on a real iPhone,
 /// app icons in the same mood and a matching Lock Screen. Shown in the Store, installed in one tap.
 struct HomeSetup: Identifiable {
     let id: String
@@ -133,7 +133,7 @@ struct SetupApp: Hashable {
     static let web = SetupApp(name: tr("Web"), symbol: "globe")
     static let podcasts = SetupApp(name: tr("Podcasts"), symbol: "mic.fill")
     static let files = SetupApp(name: tr("Fichiers"), symbol: "folder.fill")
-    static let tessera = SetupApp(name: tr("Tessera"), symbol: "")
+    static let tessera = SetupApp(name: tr("Ardane"), symbol: "")
 }
 
 enum SetupIconStyle {
@@ -304,7 +304,7 @@ enum HomeSetupCatalog {
             lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.priorities), circular(.nextExam), circular(.semesterProgress)])
         ),
         HomeSetup(
-            id: "jade", name: tr("Jade"), tagline: tr("Calories, séance et régularité, aux couleurs de Tessera."),
+            id: "jade", name: tr("Jade"), tagline: tr("Calories, séance et régularité, aux couleurs d'Ardane."),
             tags: [.colorful, .fitness], wallpaper: .jade,
             icons: .gradient(["3FB39A", "1F6B5A"], symbol: "FFFFFF"),
             rows: [

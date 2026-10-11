@@ -123,7 +123,7 @@ struct NutritionAppView: View {
             Button {
                 sheet = .goals
             } label: {
-                insightCard(symbol: "target", title: tr("Définis ton objectif du jour"), message: tr("Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas."), action: tr("Définir"))
+                insightCard(symbol: "target", title: tr("Définis ton objectif du jour"), message: tr("Avec ton objectif, Ardane te dit ce qu'il te reste et te propose des idées de repas."), action: tr("Définir"))
             }
             .buttonStyle(.plain)
         } else if hasEntries {

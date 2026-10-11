@@ -27,7 +27,7 @@ struct TasksWidgetView: View {
                 }
             }
             if content.tasks.isEmpty {
-                WidgetMessage(symbol: "plus.circle", title: tr("Aucune tâche"), message: tr("Ajoute-les dans Tessera"), style: s)
+                WidgetMessage(symbol: "plus.circle", title: tr("Aucune tâche"), message: tr("Ajoute-les dans Ardane"), style: s)
             } else if visible.isEmpty {
                 WidgetMessage(symbol: "checkmark.circle", title: tr("Tout est fait"), message: context.isSmall ? nil : tr("Belle journée."), style: s)
             } else {
@@ -85,7 +85,7 @@ struct HabitsWidgetView: View {
                 }
             }
             if habits.isEmpty {
-                WidgetMessage(symbol: "repeat", title: tr("Aucune habitude"), message: tr("Crée-les dans Tessera"), style: s)
+                WidgetMessage(symbol: "repeat", title: tr("Aucune habitude"), message: tr("Crée-les dans Ardane"), style: s)
             } else if context.isSmall {
                 smallGrid(Array(habits.prefix(4)))
             } else {
@@ -245,7 +245,7 @@ struct UpNextWidgetView: View {
         let s = context.style
         switch context.payload.events {
         case .needsAccess:
-            WidgetMessage(symbol: "calendar.badge.exclamationmark", title: tr("Accès au calendrier"), message: tr("Touche pour l'autoriser dans Tessera"), style: s)
+            WidgetMessage(symbol: "calendar.badge.exclamationmark", title: tr("Accès au calendrier"), message: tr("Touche pour l'autoriser dans Ardane"), style: s)
         case let .ready(events):
             if events.isEmpty {
                 VStack(alignment: .leading, spacing: 4) {
@@ -376,7 +376,7 @@ struct NoteWidgetView: View {
                 if s.showsTitle, !title.isEmpty {
                     WLabel(text: title, style: s, color: s.accent)
                 }
-                Text(text.isEmpty ? tr("Écris ta note dans Tessera") : text)
+                Text(text.isEmpty ? tr("Écris ta note dans Ardane") : text)
                     .font(s.text(size, s.titleWeight))
                     .foregroundStyle(text.isEmpty ? s.secondary : s.primary)
                     .multilineTextAlignment(s.textAlignment)

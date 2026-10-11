@@ -559,14 +559,14 @@
   ]
  },
  {
-  "key": "Dans la liste, choisis Tessera, puis le widget voulu.",
+  "key": "Dans la liste, choisis Ardane, puis le widget voulu.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/LockScreenCreator.swift:131: (\"plus.circle\", tr(\"Dans la liste, choisis Tessera, puis le widget voulu.\")),"
   ]
  },
  {
-  "key": "Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.",
+  "key": "Touche le widget ajouté pour choisir lequel de tes widgets Ardane il affiche.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/LockScreenCreator.swift:132: (\"slider.horizontal.3\", tr(\"Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.\")),"
@@ -608,7 +608,7 @@
   ]
  },
  {
-  "key": "À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.",
+  "key": "À titre informatif seulement : Ardane ne donne aucun conseil d'investissement.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/MoneySpaces.swift:57: Text(tr(\"À titre informatif seulement : Tessera ne donne aucun conseil d'investissement.\"))"

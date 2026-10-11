@@ -28,7 +28,7 @@ struct WeatherWidgetView: View {
         let s = context.style
         switch context.payload.weather {
         case .needsLocation:
-            WidgetMessage(symbol: "location.circle", title: tr("Choisis ta ville"), message: tr("Touche pour la définir dans Tessera"), style: s)
+            WidgetMessage(symbol: "location.circle", title: tr("Choisis ta ville"), message: tr("Touche pour la définir dans Ardane"), style: s)
         case .unavailable(.none):
             WidgetMessage(symbol: "wifi.slash", title: tr("Météo indisponible"), message: tr("Nouvel essai dans quelques minutes"), style: s)
         case let .ready(snapshot):
@@ -285,7 +285,7 @@ struct MoneyFlowWidgetView: View {
         let color: Color = mode == .expense ? s.negative : mode == .income ? s.positive : (total >= 0 ? s.positive : s.negative)
 
         if money.items.isEmpty {
-            WidgetMessage(symbol: "dollarsign.circle", title: tr("Aucun montant"), message: tr("Ajoute tes revenus et dépenses dans Tessera"), style: s)
+            WidgetMessage(symbol: "dollarsign.circle", title: tr("Aucun montant"), message: tr("Ajoute tes revenus et dépenses dans Ardane"), style: s)
         } else {
             VStack(alignment: .leading, spacing: 3) {
                 if s.showsTitle { WLabel(text: label(mode), style: s) }

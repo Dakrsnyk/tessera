@@ -109,7 +109,7 @@ struct PremiumBanner: View {
                     .frame(width: 48, height: 48)
                     .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(tr("Tessera Premium"))
+                    Text(tr("Ardane Premium"))
                         .font(.headline)
                         .foregroundStyle(.primary)
                     Text(tr("\(WidgetKind.allCases.filter { $0.isPremium }.count) widgets en plus, \(ThemeCatalog.all.count - ThemeCatalog.free.count) styles, analyses et fonds photo."))

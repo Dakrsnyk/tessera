@@ -128,8 +128,8 @@ struct LockScreenGuide: View {
     private let steps: [(String, String)] = [
         ("hand.tap", tr("Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».")),
         ("lock.iphone", tr("Choisis « Écran verrouillé », puis touche la zone sous l'heure.")),
-        ("plus.circle", tr("Dans la liste, choisis Tessera, puis le widget voulu.")),
-        ("slider.horizontal.3", tr("Touche le widget ajouté pour choisir lequel de tes widgets Tessera il affiche.")),
+        ("plus.circle", tr("Dans la liste, choisis Ardane, puis le widget voulu.")),
+        ("slider.horizontal.3", tr("Touche le widget ajouté pour choisir lequel de tes widgets Ardane il affiche.")),
     ]
 
     var body: some View {

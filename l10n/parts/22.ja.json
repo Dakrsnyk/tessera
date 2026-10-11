@@ -69,7 +69,7 @@
  "À la une": "注目",
  "En pause": "一時停止中",
  "Mettre le repos en pause": "休憩を一時停止",
- "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu.": "この日の歩数データはありません。iPhoneは約1週間分を保存し、その後はTesseraが読み取った日を保存します。",
+ "Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Ardane garde ensuite chaque jour lu.": "この日の歩数データはありません。iPhoneは約1週間分を保存し、その後はArdaneが読み取った日を保存します。",
  "Pause": "一時停止",
  "Pause · %@": "一時停止 · %@",
  "Rattraper la séance": "ワークアウトを取り戻す",

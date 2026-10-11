@@ -2,7 +2,7 @@ import SwiftUI
 import UserNotifications
 
 /// « Rappels intelligents »: each one on or off, at its hour. They come only when the thing isn't done
-/// yet (`SmartReminders`). Turning one on asks for notifications when Tessera may not send any yet.
+/// yet (`SmartReminders`). Turning one on asks for notifications when Ardane may not send any yet.
 /// Reached from Profil › Notifications, and from « Mes paramètres » in Fitness, Nutrition and Finances.
 struct SmartRemindersView: View {
     @Environment(AppModel.self) private var model
@@ -30,7 +30,7 @@ struct SmartRemindersView: View {
                         if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                     }
                 } footer: {
-                    Text(tr("Les notifications de Tessera sont refusées dans les réglages de l'iPhone."))
+                    Text(tr("Les notifications d'Ardane sont refusées dans les réglages de l'iPhone."))
                 }
             }
             if let next = SmartReminders.plan(fitness: model.fitness, nutrition: model.nutrition, budget: model.budget, settings: settings).first {

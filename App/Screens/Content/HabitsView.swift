@@ -191,7 +191,7 @@ struct HabitEditor: View {
                     }
                 } footer: {
                     if notificationsDenied {
-                        Text(tr("Les notifications sont désactivées pour Tessera dans Réglages."))
+                        Text(tr("Les notifications sont désactivées pour Ardane dans Réglages."))
                     }
                 }
                 if !isNew {

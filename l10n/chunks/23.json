@@ -77,14 +77,14 @@
   ]
  },
  {
-  "key": "Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.",
+  "key": "Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:309: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde de Tessera, ou il est abîmé. Rien n'a été changé.\")"
   ]
  },
  {
-  "key": "Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.",
+  "key": "Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:307: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente de Tessera. Mets l'app à jour, puis réessaie.\")"

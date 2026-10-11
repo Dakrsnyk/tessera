@@ -1,7 +1,7 @@
 import Foundation
 
 /// « Mon Quotidien »: what matters today, built only from what the person entered. Nothing is
-/// shown for a part of their life they haven't told Tessera about, and never a made-up number:
+/// shown for a part of their life they haven't told Ardane about, and never a made-up number:
 /// at most a discreet invitation for one of their interests. The order follows the moment of the
 /// day: the weather and the first class in the morning, tasks and the workout during the day,
 /// what's left to eat and the habits in the evening.

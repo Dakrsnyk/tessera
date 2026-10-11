@@ -1,12 +1,12 @@
 {
  "NSCalendarsFullAccessUsageDescription": {
-  "fr": "Tessera affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.",
-  "en": "Tessera shows your upcoming events in the Up Next widget. Nothing leaves your iPhone.",
-  "es": "Tessera muestra tus próximas citas en el widget Próximo. Nada sale de tu iPhone.",
-  "de": "Tessera zeigt deine nächsten Termine im Widget „Als Nächstes“. Nichts verlässt dein iPhone.",
-  "it": "Tessera mostra i tuoi prossimi appuntamenti nel widget In arrivo. Nulla lascia il tuo iPhone.",
-  "pt-BR": "O Tessera mostra seus próximos compromissos no widget A seguir. Nada sai do seu iPhone.",
-  "ja": "Tesseraは「次の予定」ウィジェットに今後の予定を表示します。データがiPhoneの外に出ることはありません。"
+  "fr": "Ardane affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone.",
+  "en": "Ardane shows your upcoming events in the Up Next widget. Nothing leaves your iPhone.",
+  "es": "Ardane muestra tus próximas citas en el widget Próximo. Nada sale de tu iPhone.",
+  "de": "Ardane zeigt deine nächsten Termine im Widget „Als Nächstes“. Nichts verlässt dein iPhone.",
+  "it": "Ardane mostra i tuoi prossimi appuntamenti nel widget In arrivo. Nulla lascia il tuo iPhone.",
+  "pt-BR": "O Ardane mostra seus próximos compromissos no widget A seguir. Nada sai do seu iPhone.",
+  "ja": "Ardaneは「次の予定」ウィジェットに今後の予定を表示します。データがiPhoneの外に出ることはありません。"
  },
  "NSCameraUsageDescription": {
   "fr": "La caméra sert uniquement à scanner le code-barres d'un aliment.",
@@ -27,30 +27,30 @@
   "ja": "位置情報はあなたの街の天気を調べるためだけに使用します。"
  },
  "NSMotionUsageDescription": {
-  "fr": "Tessera lit tes pas du jour pour « Mon Quotidien ». Rien ne quitte ton iPhone.",
-  "en": "Tessera reads today's steps for “My Day”. Nothing leaves your iPhone.",
-  "es": "Tessera lee tus pasos del día para «Mi día». Nada sale de tu iPhone.",
-  "de": "Tessera liest deine heutigen Schritte für „Mein Tag“. Nichts verlässt dein iPhone.",
-  "it": "Tessera legge i tuoi passi di oggi per «La mia giornata». Nulla lascia il tuo iPhone.",
-  "pt-BR": "O Tessera lê seus passos do dia para “Meu dia”. Nada sai do seu iPhone.",
-  "ja": "Tesseraは「マイデイ」のために今日の歩数を読み取ります。データがiPhoneの外に出ることはありません。"
+  "fr": "Ardane lit tes pas du jour pour « Mon Quotidien ». Rien ne quitte ton iPhone.",
+  "en": "Ardane reads today's steps for “My Day”. Nothing leaves your iPhone.",
+  "es": "Ardane lee tus pasos del día para «Mi día». Nada sale de tu iPhone.",
+  "de": "Ardane liest deine heutigen Schritte für „Mein Tag“. Nichts verlässt dein iPhone.",
+  "it": "Ardane legge i tuoi passi di oggi per «La mia giornata». Nulla lascia il tuo iPhone.",
+  "pt-BR": "O Ardane lê seus passos do dia para “Meu dia”. Nada sai do seu iPhone.",
+  "ja": "Ardaneは「マイデイ」のために今日の歩数を読み取ります。データがiPhoneの外に出ることはありません。"
  },
  "NSPhotoLibraryAddUsageDescription": {
-  "fr": "Tessera enregistre dans Photos les fonds d'écran que tu choisis dans le Store.",
-  "en": "Tessera saves the wallpapers you pick in the Store to Photos.",
-  "es": "Tessera guarda en Fotos los fondos de pantalla que eliges en la Tienda.",
-  "de": "Tessera speichert die Hintergrundbilder, die du im Store auswählst, in Fotos.",
-  "it": "Tessera salva in Foto gli sfondi che scegli nello Store.",
-  "pt-BR": "O Tessera salva no Fotos os papéis de parede que você escolhe na Loja.",
-  "ja": "Tesseraはストアで選んだ壁紙を写真に保存します。"
+  "fr": "Ardane enregistre dans Photos les fonds d'écran que tu choisis dans le Store.",
+  "en": "Ardane saves the wallpapers you pick in the Store to Photos.",
+  "es": "Ardane guarda en Fotos los fondos de pantalla que eliges en la Tienda.",
+  "de": "Ardane speichert die Hintergrundbilder, die du im Store auswählst, in Fotos.",
+  "it": "Ardane salva in Foto gli sfondi che scegli nello Store.",
+  "pt-BR": "O Ardane salva no Fotos os papéis de parede que você escolhe na Loja.",
+  "ja": "Ardaneはストアで選んだ壁紙を写真に保存します。"
  },
  "CFBundleDisplayName": {
-  "fr": "Tessera",
-  "en": "Tessera",
-  "es": "Tessera",
-  "de": "Tessera",
-  "it": "Tessera",
-  "pt-BR": "Tessera",
-  "ja": "Tessera"
+  "fr": "Ardane",
+  "en": "Ardane",
+  "es": "Ardane",
+  "de": "Ardane",
+  "it": "Ardane",
+  "pt-BR": "Ardane",
+  "ja": "Ardane"
  }
 }

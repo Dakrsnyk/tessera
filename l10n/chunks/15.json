@@ -2998,7 +2998,7 @@
   ]
  },
  {
-  "key": "Finir le projet Tessera",
+  "key": "Finir le projet Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Domains/Profile.swift:442: profile.mainGoal = tr(\"Finir le projet Tessera\")"
@@ -3117,7 +3117,7 @@
   ]
  },
  {
-  "key": "Affiche un widget que tu as créé dans Tessera, ou un modèle du catalogue.",
+  "key": "Affiche un widget que tu as créé dans Ardane, ou un modèle du catalogue.",
   "placeholders": 0,
   "uses": [
    "Shared/Intents/DesignIntent.swift:71: static var description = IntentDescription(\"Affiche un widget que tu as créé dans Tessera, ou un modèle du catalogue.\")"

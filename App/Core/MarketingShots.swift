@@ -174,8 +174,8 @@ struct MarketingHeadline: View {
         VStack(alignment: .leading, spacing: 10) {
             if showsBrand {
                 HStack(spacing: 9) {
-                    TesseraMark(size: 28)
-                    Text(tr("Tessera"))
+                    ArdaneMark(size: 28)
+                    Text(tr("Ardane"))
                         .font(.system(size: 21, weight: .semibold, design: .rounded))
                 }
                 .foregroundStyle(MK.ink)
@@ -684,7 +684,7 @@ struct MarketingPanoLock: View {
 
 // MARK: - Scenes
 
-/// What Tessera is: a Home Screen made with it, and the Lock Screen during a workout.
+/// What Ardane is: a Home Screen made with it, and the Lock Screen during a workout.
 struct MarketingHero: View {
     var body: some View {
         ZStack(alignment: .topLeading) {

@@ -108,7 +108,7 @@ struct WorkoutActivityView: View {
     var isLive = true
     var now = Date()
 
-    /// The app style chosen in Tessera: the Lock Screen follows its colors and its font.
+    /// The app style chosen in Ardane: the Lock Screen follows its colors and its font.
     private var style: AppStyle { AppStyle.style(SharedStore.shared.settings.appStyle) }
     private var accent: Color { style.accent }
 

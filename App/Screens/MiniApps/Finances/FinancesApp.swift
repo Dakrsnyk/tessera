@@ -61,7 +61,7 @@ struct MonthlyBudgetEditor: View {
             Section {
                 NumberRow(title: tr("Budget"), value: $amount, unit: model.settings.currencyCode)
             } footer: {
-                Text(tr("Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes."))
+                Text(tr("Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Ardane compte ce que tu notes."))
             }
         }
         .onAppear { amount = model.budget.monthlyBudget }
@@ -93,7 +93,7 @@ struct OpeningBalanceEditor: View {
                 DatePicker(tr("Au début du"), selection: $date, in: ...Date(), displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)
             } footer: {
-                Text(tr("Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera."))
+                Text(tr("Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Ardane."))
             }
             if model.budget.openingBalance != nil {
                 Section {
@@ -138,7 +138,7 @@ struct FinancesAppView: View {
             bills(state: state, now: now)
             savings(state: state)
             more(state: state)
-            Text(tr("Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers."))
+            Text(tr("Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

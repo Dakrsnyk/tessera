@@ -1,10 +1,11 @@
 import SwiftUI
 import UIKit
 
-/// The icons Tessera can take on the Home Screen: « Classique » by default, the glass ones picked in
+/// The icons Ardane can take on the Home Screen: « Corail » (the logo) by default, the others picked in
 /// « Icône de l'app » (Profil, or a long press on the icon, then « Changer d'icône »).
 /// Each one is an icon set of the asset catalog, built as an alternate icon, with its picture
-/// `IconPreview-<asset>`. They stay light in Dark Mode. They are drawn by scripts/app_icons.js.
+/// `IconPreview-<asset>`. They stay light in Dark Mode. They are drawn by scripts/app_icons.js
+/// (the glass ones keep the colors of the former Tessera icons).
 struct AppIconChoice: Identifiable, Hashable {
     /// The icon set; « AppIcon » is the main icon.
     let asset: String
@@ -18,7 +19,9 @@ struct AppIconChoice: Identifiable, Hashable {
     static let main = "AppIcon"
 
     static let all: [AppIconChoice] = [
-        AppIconChoice(asset: main, title: tr("Classique")),
+        AppIconChoice(asset: main, title: tr("Corail")),
+        AppIconChoice(asset: "AppIcon-Classic", title: tr("Classique")),
+        AppIconChoice(asset: "AppIcon-GlassBlack", title: tr("Verre classique")),
         AppIconChoice(asset: "AppIcon-RedGlass", title: tr("Verre rouge")),
         AppIconChoice(asset: "AppIcon-Jade", title: tr("Verre jade")),
         AppIconChoice(asset: "AppIcon-Night", title: tr("Verre nuit")),
@@ -57,7 +60,7 @@ enum AppIconSwitcher {
     }
 }
 
-/// The menu shown by a long press on Tessera's icon: « Changer d'icône ».
+/// The menu shown by a long press on Ardane's icon: « Changer d'icône ».
 @MainActor
 @Observable
 final class QuickActions {

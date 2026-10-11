@@ -50,7 +50,7 @@ struct FitnessProgramPage: View {
             } header: {
                 Text(tr("Ma semaine"))
             } footer: {
-                Text(tr("Touche un jour pour lui donner une séance. Tessera te propose chaque jour celle qui est prévue."))
+                Text(tr("Touche un jour pour lui donner une séance. Ardane te propose chaque jour celle qui est prévue."))
             }
 
             Section {
@@ -311,7 +311,7 @@ struct FitnessActivityPage: View {
                 let today = isToday ? steps.today : dayData
                 let count = today?.steps ?? (isToday ? steps.stepsToday ?? 0 : 0)
                 if !isToday && dayData == nil {
-                    Text(tr("Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Tessera garde ensuite chaque jour lu."))
+                    Text(tr("Pas de données de pas pour ce jour : l'iPhone garde environ une semaine, Ardane garde ensuite chaque jour lu."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
@@ -347,7 +347,7 @@ struct FitnessActivityPage: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             case .notAsked:
-                EmptyStateView(symbol: "figure.walk", title: tr("Tes pas"), message: tr("Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone."), actionTitle: tr("Autoriser")) {
+                EmptyStateView(symbol: "figure.walk", title: tr("Tes pas"), message: tr("Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone."), actionTitle: tr("Autoriser")) {
                     Task {
                         await steps.refresh(asking: true)
                         await steps.refreshWeek()
@@ -355,7 +355,7 @@ struct FitnessActivityPage: View {
                 }
                 .card()
             case .denied:
-                EmptyStateView(symbol: "figure.walk", title: tr("Accès refusé"), message: tr("Autorise « Mouvements et forme » pour Tessera dans les Réglages de l'iPhone pour voir tes pas."))
+                EmptyStateView(symbol: "figure.walk", title: tr("Accès refusé"), message: tr("Autorise « Mouvements et forme » pour Ardane dans les Réglages de l'iPhone pour voir tes pas."))
                     .card()
             case .unavailable:
                 EmptyStateView(symbol: "figure.walk", title: tr("Pas disponible"), message: tr("Cet appareil ne compte pas les pas."))

@@ -1,7 +1,7 @@
 import Foundation
 import WidgetKit
 
-/// The mini-apps inside Tessera. Each one feeds a family of widgets.
+/// The mini-apps inside Ardane. Each one feeds a family of widgets.
 enum Space: String, CaseIterable, Identifiable, Codable {
     case productivity, habits, nutrition, fitness, budget, investing, business, markets, student, travel, car, life
 

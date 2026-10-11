@@ -1,7 +1,7 @@
 import Foundation
 
 enum FitnessTiles {
-    static let hint = tr("Crée ta première séance dans Tessera, espace Fitness.")
+    static let hint = tr("Crée ta première séance dans Ardane, espace Fitness.")
 
     static func make(_ context: RenderContext) -> Tile {
         let now = context.date
@@ -162,7 +162,7 @@ enum FitnessTiles {
             // No weekly goal given: the sessions done, without a target the user never set.
             tile.value = Fmt.number(count)
             tile.caption = count > 1 ? tr("séances cette semaine") : tr("séance cette semaine")
-            tile.detail = tr("Objectif à définir dans Tessera")
+            tile.detail = tr("Objectif à définir dans Ardane")
             tile.shortValue = Fmt.number(count)
             tile.inline = tr("\(Fmt.plural(count, tr("séance"), tr("séances"))) cette semaine")
             return tile

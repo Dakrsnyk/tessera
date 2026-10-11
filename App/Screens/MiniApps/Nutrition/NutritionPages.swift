@@ -358,7 +358,7 @@ struct NutritionIdeasPage: View {
             }
             Section {
             } footer: {
-                Text(tr("Idées générales tirées de la table d'aliments de Tessera, à adapter à tes goûts. Ce n'est pas un avis médical."))
+                Text(tr("Idées générales tirées de la table d'aliments d'Ardane, à adapter à tes goûts. Ce n'est pas un avis médical."))
             }
         }
         .styledList()

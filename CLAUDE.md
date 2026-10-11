@@ -1,6 +1,6 @@
-# Tessera — notes pour Claude Code
+# Ardane — notes pour Claude Code
 
-App iOS (SwiftUI, iOS 17, Swift 5) de widgets/mini-apps. Actif de revenu passif visé (50–100 $/jour). Répondre en français.
+Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, les identifiants et le dossier de données gardent « Tessera »). App iOS (SwiftUI, iOS 17, Swift 5) de widgets/mini-apps. Actif de revenu passif visé (50–100 $/jour). Répondre en français.
 
 ## Architecture
 - `App/` (app), `Shared/` (compilé dans l'app ET l'extension widget), `UITests/`, `scripts/`, `l10n/`.

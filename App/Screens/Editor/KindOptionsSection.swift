@@ -244,7 +244,7 @@ struct CalendarAccessRow: View {
                 .foregroundStyle(.secondary)
         } else if CalendarService.accessDenied {
             VStack(alignment: .leading, spacing: 10) {
-                Text(tr("L'accès au calendrier est désactivé. Active-le dans Réglages > Tessera > Calendriers."))
+                Text(tr("L'accès au calendrier est désactivé. Active-le dans Réglages > Ardane > Calendriers."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 Button(tr("Ouvrir Réglages")) {
@@ -254,7 +254,7 @@ struct CalendarAccessRow: View {
             }
         } else {
             VStack(alignment: .leading, spacing: 10) {
-                Text(tr("Tessera lit tes événements pour les afficher. Rien ne quitte ton iPhone."))
+                Text(tr("Ardane lit tes événements pour les afficher. Rien ne quitte ton iPhone."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 Button {

@@ -119,7 +119,7 @@ jobs:
           codesign --force --sign - "$APP"
           mkdir -p Payload
           cp -R "$APP" Payload/
-          zip -qry Tessera.ipa Payload
+          zip -qry Ardane.ipa Payload
           # Diagnostic variant: the widget extension without its App Intents metadata. If its
           # « Mon widget » shows up in the widget gallery while the normal build shows nothing,
           # the system rejects the metadata; if neither shows up, the extension isn't started.
@@ -128,8 +128,8 @@ jobs:
           rm -rf diagnostic/Payload/Tessera.app/PlugIns/TesseraWidgets.appex/Metadata.appintents
           codesign --force --sign - diagnostic/Payload/Tessera.app/PlugIns/TesseraWidgets.appex
           codesign --force --sign - diagnostic/Payload/Tessera.app
-          (cd diagnostic && zip -qry ../Tessera-diagnostic.ipa Payload)
-          ls -lh Tessera.ipa Tessera-diagnostic.ipa
+          (cd diagnostic && zip -qry ../Ardane-diagnostic.ipa Payload)
+          ls -lh Ardane.ipa Ardane-diagnostic.ipa
 
       - name: Tests (logic and widget placement)
         id: tests
@@ -628,7 +628,7 @@ jobs:
           [ -d videos/assets ] && cp -R videos/assets report/videos/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
-          [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
+          [ -f Ardane.ipa ] && cp Ardane.ipa report/ || true
           cd report
           git init -q
           git checkout -q -b ci-report
@@ -648,7 +648,7 @@ jobs:
           make_latest: true
           body: |
             Version de test de Tessera (build ${{ github.run_number }}).
-            Installe `Tessera.ipa` sur ton iPhone avec Sideloadly (voir le README).
+            Installe `Ardane.ipa` sur ton iPhone avec Sideloadly (voir le README).
           files: |
-            Tessera.ipa
-            Tessera-diagnostic.ipa
+            Ardane.ipa
+            Ardane-diagnostic.ipa

@@ -125,9 +125,9 @@ struct SetupAppIcon: View {
         }
     }
 
-    /// Tessera's own icon, as iOS shows it on a Home Screen with colored icons.
+    /// Ardane's own icon, as iOS shows it on a Home Screen with colored icons.
     private var tesseraIcon: some View {
-        TesseraMark(size: size)
+        ArdaneMark(size: size)
             .shadow(color: .black.opacity(0.1), radius: 3, y: 1)
             .frame(width: size, height: size)
     }
@@ -151,7 +151,7 @@ struct SetupAppIcon: View {
             }
             if app == .tessera {
                 // Glass and tinted Home Screens: the T made of the tint, as iOS draws tinted icons.
-                TesseraMark(size: size, tint: symbolColor)
+                ArdaneMark(size: size, tint: symbolColor)
             } else {
                 Image(systemName: app.symbol)
                     .font(.system(size: size * 0.42, weight: .medium))
@@ -255,7 +255,7 @@ struct SetupHomeScreen: View {
                 width: WidgetMetrics.size(widget.family).width, date: SetupScreen.now
             )
             .shadow(color: .black.opacity(isLight ? 0.08 : 0.2), radius: 8, y: 3)
-            label(tr("Tessera"))
+            label(tr("Ardane"))
         }
     }
 
@@ -743,7 +743,7 @@ struct HomeSetupSheet: View {
 
     private var wallpaperMessage: String {
         switch wallpaperState {
-        case .denied: tr("Tessera n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Tessera › Photos.")
+        case .denied: tr("Ardane n'a pas accès à Photos. Autorise l'ajout de photos dans Réglages › Ardane › Photos.")
         case .failed: tr("L'image n'a pas pu être enregistrée. Réessaie.")
         case .saved: tr("Dans Photos, ouvre l'image, touche Partager puis « Utiliser en fond d'écran ».")
         default: tr("À la bonne taille pour ton iPhone. Ensuite, dans Photos : Partager › « Utiliser en fond d'écran ».")

@@ -114,7 +114,7 @@ struct StudiesAppView: View {
                 .foregroundStyle(Color(hex: accentHex))
             Text(tr("Ton année en un coup d'œil"))
                 .font(.title3.weight(.bold))
-            Text(tr("Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Tessera calcule ensuite tes moyennes et ce qu'il te reste à faire."))
+            Text(tr("Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Ardane calcule ensuite tes moyennes et ce qu'il te reste à faire."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

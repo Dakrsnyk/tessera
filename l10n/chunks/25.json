@@ -385,7 +385,7 @@
   "uses": []
  },
  {
-  "key": "Choisis l'icône de Tessera sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».",
+  "key": "Choisis l'icône d'Ardane sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».",
   "placeholders": 0,
   "uses": []
  },
@@ -455,7 +455,7 @@
   "uses": []
  },
  {
-  "key": "Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Tessera.",
+  "key": "Ce que ton compte affichait ce jour-là, avant ses opérations. Le graphique du solde part de ce montant, puis suit tes revenus et tes dépenses notés dans Ardane.",
   "placeholders": 0,
   "uses": []
  },
@@ -630,7 +630,7 @@
   "uses": []
  },
  {
-  "key": "Les notifications de Tessera sont refusées dans les réglages de l'iPhone.",
+  "key": "Les notifications d'Ardane sont refusées dans les réglages de l'iPhone.",
   "placeholders": 0,
   "uses": []
  },
@@ -697,6 +697,11 @@
  {
   "key": "%@ à payer demain.",
   "placeholders": 1,
+  "uses": []
+ },
+ {
+  "key": "Verre classique",
+  "placeholders": 0,
   "uses": []
  }
 ]

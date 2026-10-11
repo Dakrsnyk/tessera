@@ -2,7 +2,7 @@ import XCTest
 @testable import Tessera
 
 /// The Planning and Studies mini-apps: tasks with a priority, a date and a repeat; one day gathered
-/// from every part of Tessera; homework, exams, grades and study time that add up.
+/// from every part of Ardane; homework, exams, grades and study time that add up.
 @MainActor
 final class PlanningStudiesTests: XCTestCase {
     private func temporaryModel() -> AppModel {

@@ -64,7 +64,7 @@
   ]
  },
  {
-  "key": "Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.",
+  "key": "Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Ardane te propose chaque jour la bonne.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:92: Text(tr(\"Crée tes séances (exercices, séries, charges, repos) et choisis leurs jours : Tessera te propose chaque jour la bonne.\"))"
@@ -306,7 +306,7 @@
   ]
  },
  {
-  "key": "Touche un jour pour lui donner une séance. Tessera te propose chaque jour celle qui est prévue.",
+  "key": "Touche un jour pour lui donner une séance. Ardane te propose chaque jour celle qui est prévue.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:53: Text(tr(\"Touche un jour pour lui donner une séance. Tessera te propose chaque jour celle qui est prévue.\"))"
@@ -450,7 +450,7 @@
   ]
  },
  {
-  "key": "Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.",
+  "key": "Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:332: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Tessera lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle"
@@ -464,7 +464,7 @@
   ]
  },
  {
-  "key": "Autorise « Mouvements et forme » pour Tessera dans les Réglages de l'iPhone pour voir tes pas.",
+  "key": "Autorise « Mouvements et forme » pour Ardane dans les Réglages de l'iPhone pour voir tes pas.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:340: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Accès refusé\"), message: tr(\"Autorise « Mouvements et forme » pour Tessera dans les Réglages de l'iPhone pour voir tes"
@@ -761,7 +761,7 @@
   ]
  },
  {
-  "key": "Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de repas.",
+  "key": "Avec ton objectif, Ardane te dit ce qu'il te reste et te propose des idées de repas.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:126: insightCard(symbol: \"target\", title: tr(\"Définis ton objectif du jour\"), message: tr(\"Avec ton objectif, Tessera te dit ce qu'il te reste et te propose des idées de "
@@ -1183,7 +1183,7 @@
   ]
  },
  {
-  "key": "Idées générales tirées de la table d'aliments de Tessera, à adapter à tes goûts. Ce n'est pas un avis médical.",
+  "key": "Idées générales tirées de la table d'aliments d'Ardane, à adapter à tes goûts. Ce n'est pas un avis médical.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:361: Text(tr(\"Idées générales tirées de la table d'aliments de Tessera, à adapter à tes goûts. Ce n'est pas un avis médical.\"))"
@@ -1665,7 +1665,7 @@
   ]
  },
  {
-  "key": "Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Tessera calcule ensuite tes moyennes et ce qu'il te reste à faire.",
+  "key": "Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Ardane calcule ensuite tes moyennes et ce qu'il te reste à faire.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:111: Text(tr(\"Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Tessera calcule ensuite tes moyennes et ce qu'il te reste à faire.\")"

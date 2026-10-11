@@ -14,7 +14,7 @@ enum TimeTiles {
         }
     }
 
-    private static let lifeHint = tr("Ajoute ta date de naissance dans Tessera, espace Ma vie.")
+    private static let lifeHint = tr("Ajoute ta date de naissance dans Ardane, espace Ma vie.")
 
     static func age(_ life: LifeState, now: Date) -> Tile {
         guard let birthday = life.birthday else {

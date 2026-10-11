@@ -4,7 +4,7 @@ import WidgetKit
 
 /// A saved design, or a ready-made widget of the catalog, offered in the widget's "Modifier le widget" menu.
 struct DesignEntity: AppEntity {
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Widget Tessera"
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Widget Ardane"
     static var defaultQuery = DesignQuery()
 
     var id: String
@@ -65,10 +65,10 @@ struct DesignQuery: EntityStringQuery {
     }
 }
 
-/// Configuration shared by every Tessera widget: which saved design (or catalog widget) to display.
+/// Configuration shared by every Ardane widget: which saved design (or catalog widget) to display.
 struct DesignWidgetIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Choisir un widget"
-    static var description = IntentDescription("Affiche un widget que tu as créé dans Tessera, ou un modèle du catalogue.")
+    static var description = IntentDescription("Affiche un widget que tu as créé dans Ardane, ou un modèle du catalogue.")
 
     @Parameter(title: "Widget")
     var design: DesignEntity?

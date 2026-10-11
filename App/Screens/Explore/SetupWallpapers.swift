@@ -341,7 +341,7 @@ private struct JadeWallpaper: View {
             LinearGradient(colors: [hex("1F4A40"), hex("12302A")], startPoint: .top, endPoint: .bottom)
             RadialGradient(colors: [hex("2F8F7A").opacity(0.9), .clear], center: UnitPoint(x: 0.15, y: 0.08), startRadius: 0, endRadius: 420)
             RadialGradient(colors: [hex("F2A33A").opacity(0.4), .clear], center: UnitPoint(x: 0.95, y: 0.95), startRadius: 0, endRadius: 380)
-            // The Tessera mosaic, very large and soft.
+            // The Ardane mosaic, very large and soft.
             HStack(spacing: 18) {
                 tile(hex("3FB39A").opacity(0.32), height: 318)
                 VStack(spacing: 18) {

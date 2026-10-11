@@ -157,7 +157,7 @@ struct BudgetSpaceSections: View {
         } header: {
             Text(tr("Comptes"))
         } footer: {
-            Text(tr("Saisis tes soldes à la main : Tessera ne se connecte à aucune banque."))
+            Text(tr("Saisis tes soldes à la main : Ardane ne se connecte à aucune banque."))
         }
 
         Section(tr("Catégories")) {

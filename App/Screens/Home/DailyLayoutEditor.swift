@@ -2,7 +2,7 @@ import SwiftUI
 
 /// « Mon Quotidien » arranged by hand, from Home: the order of the cards (drag), their size (half or
 /// full width) and which ones show. Every change is saved at once; « Disposition automatique » gives
-/// the order back to Tessera (what matters at this moment of the day first).
+/// the order back to Ardane (what matters at this moment of the day first).
 struct DailyLayoutEditor: View {
     /// The cards Home can show now (only those with real data), in the automatic order.
     let available: [DailyBrief.Tile]
@@ -75,7 +75,7 @@ struct DailyLayoutEditor: View {
                     }
                     .disabled(isAutomatic)
                 } footer: {
-                    Text(tr("Automatique : Tessera met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné."))
+                    Text(tr("Automatique : Ardane met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné."))
                 }
             }
             .styledList()

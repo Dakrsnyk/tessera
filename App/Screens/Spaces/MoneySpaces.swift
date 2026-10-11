@@ -54,7 +54,7 @@ struct PortfolioSpaceSections: View {
         } header: {
             Text(tr("Mon portefeuille"))
         } footer: {
-            Text(tr("À titre informatif seulement : Tessera ne donne aucun conseil d'investissement."))
+            Text(tr("À titre informatif seulement : Ardane ne donne aucun conseil d'investissement."))
         }
         .task { await model.refreshMarkets() }
 

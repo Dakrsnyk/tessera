@@ -865,7 +865,7 @@
   ]
  },
  {
-  "key": "Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Tessera en suit la croissance.",
+  "key": "Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Ardane en suit la croissance.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessPages.swift:244: Text(tr(\"Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Tessera en suit la croissance.\"))"
@@ -894,7 +894,7 @@
   ]
  },
  {
-  "key": "Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Tessera trace leur évolution.",
+  "key": "Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Ardane trace leur évolution.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessPages.swift:304: Text(tr(\"Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Tessera trace leur évolution.\"))"
@@ -1375,14 +1375,14 @@
   ]
  },
  {
-  "key": "Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.",
+  "key": "Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Ardane compte ce que tu notes.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:55: Text(tr(\"Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Tessera compte ce que tu notes.\"))"
   ]
  },
  {
-  "key": "Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.",
+  "key": "Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:87: Text(tr(\"Tessera ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.\"))"
@@ -1726,7 +1726,7 @@
   ]
  },
  {
-  "key": "Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.",
+  "key": "Loyer, électricité, Internet, abonnements : Ardane te rappelle la prochaine date et le total par mois.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:311: Text(tr(\"Loyer, électricité, Internet, abonnements : Tessera te rappelle la prochaine date et le total par mois.\"))"
@@ -1771,7 +1771,7 @@
   ]
  },
  {
-  "key": "Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.",
+  "key": "Saisis tes soldes à la main : Ardane ne se connecte à aucune banque.",
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:406: Text(tr(\"Saisis tes soldes à la main : Tessera ne se connecte à aucune banque.\")).font(.footnote).foregroundStyle(.secondary)",

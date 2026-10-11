@@ -1,6 +1,6 @@
 import Foundation
 
-/// A part of Tessera where the person keeps their data: one per space, plus the general settings
+/// A part of Ardane where the person keeps their data: one per space, plus the general settings
 /// (city, calendar) the widgets share.
 enum InfoArea: String, CaseIterable, Identifiable {
     case nutrition, fitness, habits, productivity, student, budget, business, investing, markets, travel, car, life, general

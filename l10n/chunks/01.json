@@ -1275,7 +1275,7 @@
   ]
  },
  {
-  "key": "Tessera",
+  "key": "Ardane",
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:134: Text(tr(\"Tessera\"))",
@@ -1442,7 +1442,7 @@
   ]
  },
  {
-  "key": "Tessera Premium",
+  "key": "Ardane Premium",
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:448: eyebrow: tr(\"Tessera Premium\"),",
@@ -1450,7 +1450,7 @@
   ]
  },
  {
-  "key": "Tout Tessera,\nsans limite.",
+  "key": "Tout Ardane,\nsans limite.",
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:449: title: tr(\"Tout Tessera,\\nsans limite.\"),"
@@ -1792,7 +1792,7 @@
   ]
  },
  {
-  "key": "Bienvenue dans Tessera Premium !",
+  "key": "Bienvenue dans Ardane Premium !",
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:276: message = tr(\"Bienvenue dans Tessera Premium !\")"
@@ -1931,7 +1931,7 @@
   ]
  },
  {
-  "key": "Les notifications sont désactivées pour Tessera dans Réglages.",
+  "key": "Les notifications sont désactivées pour Ardane dans Réglages.",
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsView.swift:184: Text(tr(\"Les notifications sont désactivées pour Tessera dans Réglages.\"))",
@@ -2371,7 +2371,7 @@
   ]
  },
  {
-  "key": "Cherche « Tessera » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille",
+  "key": "Cherche « Ardane » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille",
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/AddToHomeScreenGuide.swift:29: AddStepRow(number: 3, symbol: \"magnifyingglass\", text: tr(\"Cherche « Tessera » : chaque espace a son entrée (Nutrition, Fitness, Budget…). Choisis la taille\"))"

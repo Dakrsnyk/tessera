@@ -1,7 +1,7 @@
 import Foundation
 
 enum StudentTiles {
-    static let hint = tr("Ajoute tes cours dans Tessera, espace Études.")
+    static let hint = tr("Ajoute tes cours dans Ardane, espace Études.")
 
     static func make(_ context: RenderContext) -> Tile {
         let state = context.payload.domains.student
@@ -87,7 +87,7 @@ enum StudentTiles {
     static func nextExam(_ state: StudentState, context: RenderContext) -> Tile {
         let now = context.date
         guard let exam = StudentMath.nextExam(state, at: now) else {
-            return .empty(tr("Prochain examen"), symbol: "pencil.and.list.clipboard", message: tr("Ajoute tes examens dans Tessera, espace Études."))
+            return .empty(tr("Prochain examen"), symbol: "pencil.and.list.clipboard", message: tr("Ajoute tes examens dans Ardane, espace Études."))
         }
         let days = DateMath.daysBetween(now, exam.date)
         var tile = Tile(title: tr("Prochain examen"), symbol: "pencil.and.list.clipboard")
@@ -108,7 +108,7 @@ enum StudentTiles {
     static func assignments(_ state: StudentState, now: Date) -> Tile {
         let open = StudentMath.openAssignments(state)
         guard !state.assignments.isEmpty else {
-            return .empty(tr("Devoirs"), symbol: "doc.text", message: tr("Ajoute tes travaux à rendre dans Tessera, espace Études."))
+            return .empty(tr("Devoirs"), symbol: "doc.text", message: tr("Ajoute tes travaux à rendre dans Ardane, espace Études."))
         }
         var tile = Tile(title: tr("Devoirs"), symbol: "doc.text")
         tile.value = Fmt.number(open.count)
@@ -135,7 +135,7 @@ enum StudentTiles {
 
     static func average(_ state: StudentState) -> Tile {
         guard let overall = StudentMath.overallAverage(state) else {
-            return .empty(tr("Moyenne"), symbol: "graduationcap", message: tr("Ajoute tes notes dans Tessera, espace Études."))
+            return .empty(tr("Moyenne"), symbol: "graduationcap", message: tr("Ajoute tes notes dans Ardane, espace Études."))
         }
         var tile = Tile(title: tr("Moyenne"), symbol: "graduationcap")
         tile.value = TF.decimal(overall, 1)
@@ -153,7 +153,7 @@ enum StudentTiles {
 
     static func semester(_ state: StudentState, now: Date) -> Tile {
         guard let progress = StudentMath.semesterProgress(state, at: now), let end = state.semesterEnd else {
-            return .empty(tr("Session"), symbol: "calendar.badge.clock", message: tr("Indique les dates de ta session dans Tessera, espace Études."))
+            return .empty(tr("Session"), symbol: "calendar.badge.clock", message: tr("Indique les dates de ta session dans Ardane, espace Études."))
         }
         let left = max(0, DateMath.daysBetween(now, end))
         var tile = Tile(title: tr("Session"), symbol: "calendar.badge.clock")
@@ -169,7 +169,7 @@ enum StudentTiles {
 
     static func flashcard(_ state: StudentState, now: Date) -> Tile {
         guard !state.cards.isEmpty else {
-            return .empty(tr("Fiches"), symbol: "rectangle.on.rectangle.angled", message: tr("Crée tes fiches de révision dans Tessera, espace Études."))
+            return .empty(tr("Fiches"), symbol: "rectangle.on.rectangle.angled", message: tr("Crée tes fiches de révision dans Ardane, espace Études."))
         }
         guard let card = StudentMath.dueCard(state, at: now) else {
             var tile = Tile(title: tr("Fiches"), symbol: "checkmark.seal")

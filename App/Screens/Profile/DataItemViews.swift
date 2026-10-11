@@ -7,7 +7,7 @@ extension AppModel {
 }
 
 /// The data a widget (or a pack, or a space) needs, asked right where it's made. Everything typed
-/// here goes to the one place Tessera keeps it: every widget, « Mon Quotidien » and « Mes informations »
+/// here goes to the one place Ardane keeps it: every widget, « Mon Quotidien » and « Mes informations »
 /// read it from there.
 struct WidgetDataSection: View {
     let items: [DataItem]
@@ -336,7 +336,7 @@ struct DataItemRow: View {
                 Task { await stepCounter.refresh(asking: true) }
             }
         case .denied:
-            Text(tr("L'accès aux mouvements est désactivé : Réglages › Tessera › Mouvements et forme."))
+            Text(tr("L'accès aux mouvements est désactivé : Réglages › Ardane › Mouvements et forme."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         case .unavailable:

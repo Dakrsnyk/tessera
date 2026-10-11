@@ -3,7 +3,7 @@ import WidgetKit
 
 /// A widget without any configuration: it shows the design saved most recently in the app
 /// (or « Maintenant » before the first one). It relies on no App Intent, so it is offered even
-/// where configurable widgets are not, and it is the quickest way to put Tessera on a screen.
+/// where configurable widgets are not, and it is the quickest way to put Ardane on a screen.
 struct QuickWidget: Widget {
     static let kind = "tessera.quick"
 
@@ -12,7 +12,7 @@ struct QuickWidget: Widget {
             DesignWidgetEntryView(entry: entry)
         }
         .configurationDisplayName(tr("Mon widget"))
-        .description(tr("Ton dernier widget enregistré dans Tessera, sans aucun réglage."))
+        .description(tr("Ton dernier widget enregistré dans Ardane, sans aucun réglage."))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline])
         .contentMarginsDisabled()
     }

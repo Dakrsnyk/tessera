@@ -4,7 +4,7 @@ enum WeatherTiles {
     static func make(_ context: RenderContext) -> Tile {
         let kind = context.design.kind
         guard let weather = TF.weather(context.payload) else {
-            return .empty(kind.title, symbol: kind.symbol, message: tr("Choisis ta ville dans Tessera pour voir la météo."), emptySymbol: "location.slash")
+            return .empty(kind.title, symbol: kind.symbol, message: tr("Choisis ta ville dans Ardane pour voir la météo."), emptySymbol: "location.slash")
         }
         let now = context.date
         let unit = context.settings.temperatureUnit

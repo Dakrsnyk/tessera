@@ -230,7 +230,7 @@ enum InsightEngine {
         }
         let text: String
         if parts.isEmpty {
-            text = tr("Ajoute ta ville, tes tâches ou tes repas dans Tessera pour voir ta journée résumée ici.")
+            text = tr("Ajoute ta ville, tes tâches ou tes repas dans Ardane pour voir ta journée résumée ici.")
         } else {
             let first = parts[0].capitalizedFirst
             let rest = parts.dropFirst().joined(separator: ", ")

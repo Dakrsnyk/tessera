@@ -160,7 +160,7 @@ struct TutorialOverlay: View {
             VStack(alignment: .leading, spacing: 10) {
                 AddStepRow(number: 1, symbol: "hand.tap", text: tr("Appuie longuement sur un espace vide de l'écran d'accueil"))
                 AddStepRow(number: 2, symbol: "plus", text: tr("Touche « Modifier », puis « Ajouter un widget »"))
-                AddStepRow(number: 3, symbol: "magnifyingglass", text: tr("Cherche « Tessera », choisis la taille, puis ton widget"))
+                AddStepRow(number: 3, symbol: "magnifyingglass", text: tr("Cherche « Ardane », choisis la taille, puis ton widget"))
             }
         default:
             EmptyView()

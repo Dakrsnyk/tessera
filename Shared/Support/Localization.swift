@@ -82,6 +82,6 @@ enum Localization {
     /// True when the interface is in French (some French-only typography follows from it).
     static var isFrench: Bool { language.hasPrefix("fr") }
 
-    /// The languages Tessera is translated into, French first.
+    /// The languages Ardane is translated into, French first.
     static let supported = ["fr", "en", "es", "de", "it", "pt-BR", "ja"]
 }

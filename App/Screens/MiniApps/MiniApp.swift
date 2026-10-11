@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The mini-apps reached from Home: each one is a whole part of Tessera (a dashboard, then its
+/// The mini-apps reached from Home: each one is a whole part of Ardane (a dashboard, then its
 /// sections), built on the same data as the widgets, « Mes informations » and the spaces of Créer.
 enum MiniApp: String, CaseIterable, Identifiable, Hashable {
     case nutrition, fitness, planning, finances, business, travel, car, weather

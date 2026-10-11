@@ -1,4 +1,8 @@
-# État de Tessera (mis à jour le 2026-10-09)
+# État d'Ardane, anciennement Tessera (mis à jour le 2026-10-11)
+
+## Nom et icônes (2026-10-11)
+- L'app s'appelle Ardane : nom affiché, textes (6 langues), autorisations, sauvegardes (les anciennes « Tessera » s'importent toujours). Restent « Tessera » : projet, cibles, schéma, module `Tessera`, identifiants `com.dakrsnyk.tessera…`, App Group et dossier de données `Tessera/` (rien n'est perdu).
+- Logo : un A en deux moitiés séparées par une fente, blanc et pêche sur dégradé corail (`ArdaneMark`, icône principale « Corail »). Icônes au choix : Classique (crème), Verre classique (blanc, noir et cyan) et les 16 verres aux couleurs des anciennes icônes. `scripts/app_icons.js` puis `app_icons_install.py`.
 
 ## Localisation — terminée
 Français (source) + en, es, de, it, pt-BR, ja. Chinois et coréen retirés (récupérables avant 5ee621c).
@@ -28,7 +32,7 @@ Fait :
 ## Icône de l'app (2026-10-09)
 - Par défaut : « Classique » (AppIcon). 16 icônes en verre au choix, dont Verre rouge (AppIcon-<Nom>.appiconset, compilées comme icônes alternatives : `ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS`), vignettes `IconPreviews/IconPreview-<Nom>`. Toutes restent claires en mode sombre (l'image claire est aussi dans l'emplacement « dark ») ; version teintée conservée.
 - Choix : Profil → « Icône de l'app », ou appui long sur l'icône → « Changer d'icône » (raccourci dynamique `QuickActions`, reçu par `TesseraAppDelegate` / `TesseraSceneDelegate`). Liste dans `AppIconChoice.all` (check_swift.py vérifie les assets).
-- Dessin : `node scripts/app_icons.js <dossier>` (Playwright + Chromium) puis `python3 scripts/app_icons_install.py <dossier>`. `TesseraMark` dessine le logo Classique dans l'app.
+- Dessin : `node scripts/app_icons.js <dossier>` (Playwright + Chromium) puis `python3 scripts/app_icons_install.py <dossier>`. `ArdaneMark` dessine le logo dans l'app.
 
 ## Semaines et solde (2026-10-09)
 - `App/Screens/MiniApps/WeekViews.swift` : `WeekCard` (7 ronds, un toucher choisit le jour, balayage ou flèches = semaine ; Fitness, Nutrition sans futur), `WeekTimetable` (semaine en tableau : colonnes par jour, heures, blocs côte à côte s'ils se chevauchent, bande « sans heure », ligne rouge = maintenant ; `compact` pour Mon Quotidien), `WeekTableCard` (titre + tableau, Planning et page Semaine).

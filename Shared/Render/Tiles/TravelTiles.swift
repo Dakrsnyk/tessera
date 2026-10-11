@@ -1,7 +1,7 @@
 import Foundation
 
 enum TravelTiles {
-    static let hint = tr("Ajoute ton voyage dans Tessera, espace Voyage.")
+    static let hint = tr("Ajoute ton voyage dans Ardane, espace Voyage.")
 
     static func make(_ context: RenderContext) -> Tile {
         let data = context.payload.domains
@@ -49,7 +49,7 @@ enum TravelTiles {
     static func flight(_ state: TravelState, context: RenderContext) -> Tile {
         let now = context.date
         guard let flight = TravelMath.nextFlight(state, at: now) else {
-            return .empty(tr("Vol"), symbol: "airplane", message: tr("Ajoute ton vol dans Tessera, espace Voyage."))
+            return .empty(tr("Vol"), symbol: "airplane", message: tr("Ajoute ton vol dans Ardane, espace Voyage."))
         }
         var tile = Tile(title: tr("Vol \(flight.number)"), symbol: "airplane")
         let seconds = flight.departure.timeIntervalSince(now)
@@ -84,7 +84,7 @@ enum TravelTiles {
     static func hotel(_ state: TravelState, context: RenderContext) -> Tile {
         let now = context.date
         guard let stay = TravelMath.currentStay(state, at: now) else {
-            return .empty(tr("Hôtel"), symbol: "bed.double.fill", message: tr("Ajoute ton hébergement dans Tessera, espace Voyage."))
+            return .empty(tr("Hôtel"), symbol: "bed.double.fill", message: tr("Ajoute ton hébergement dans Ardane, espace Voyage."))
         }
         var tile = Tile(title: tr("Hôtel"), symbol: "bed.double.fill")
         tile.value = stay.name
@@ -203,7 +203,7 @@ enum TravelTiles {
     static func nextActivity(_ state: TravelState, context: RenderContext) -> Tile {
         let now = context.date
         guard let activity = TravelMath.nextActivity(state, at: now) else {
-            return .empty(tr("Prochaine activité"), symbol: "mappin.and.ellipse", message: tr("Planifie tes activités dans Tessera, espace Voyage."))
+            return .empty(tr("Prochaine activité"), symbol: "mappin.and.ellipse", message: tr("Planifie tes activités dans Ardane, espace Voyage."))
         }
         var tile = Tile(title: tr("Prochaine activité"), symbol: "mappin.and.ellipse")
         tile.value = activity.title

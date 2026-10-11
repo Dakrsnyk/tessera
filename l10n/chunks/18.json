@@ -156,7 +156,7 @@
   ]
  },
  {
-  "key": "Crée ta première séance dans Tessera, espace Fitness.",
+  "key": "Crée ta première séance dans Ardane, espace Fitness.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/FitnessTiles.swift:4: static let hint = tr(\"Crée ta première séance dans Tessera, espace Fitness.\")"
@@ -283,7 +283,7 @@
   ]
  },
  {
-  "key": "Objectif à définir dans Tessera",
+  "key": "Objectif à définir dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/FitnessTiles.swift:165: tile.detail = tr(\"Objectif à définir dans Tessera\")",
@@ -354,7 +354,7 @@
   ]
  },
  {
-  "key": "Budget mensuel à définir dans Tessera",
+  "key": "Budget mensuel à définir dans Ardane",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:37: tile.detail = tr(\"Budget mensuel à définir dans Tessera\")"
@@ -389,7 +389,7 @@
   ]
  },
  {
-  "key": "Note tes dépenses dans Tessera, espace Budget.",
+  "key": "Note tes dépenses dans Ardane, espace Budget.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:64: guard !items.isEmpty else { return .empty(tr(\"Dépenses\"), symbol: \"chart.bar.doc.horizontal\", message: tr(\"Note tes dépenses dans Tessera, espace Budget.\")) }"
@@ -403,7 +403,7 @@
   ]
  },
  {
-  "key": "Ajoute tes factures dans Tessera, espace Budget.",
+  "key": "Ajoute tes factures dans Ardane, espace Budget.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:86: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Tessera, espace Budget.\")) }"
@@ -417,7 +417,7 @@
   ]
  },
  {
-  "key": "Crée un objectif d'épargne dans Tessera, espace Budget.",
+  "key": "Crée un objectif d'épargne dans Ardane, espace Budget.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:102: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Tessera, espace Budget.\"))"
@@ -431,7 +431,7 @@
   ]
  },
  {
-  "key": "Ajoute tes comptes et tes dettes dans Tessera, espace Budget.",
+  "key": "Ajoute tes comptes et tes dettes dans Ardane, espace Budget.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:125: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Tessera, espace Budget.\")) }"
@@ -459,7 +459,7 @@
   ]
  },
  {
-  "key": "Ajoute tes abonnements dans Tessera, espace Budget.",
+  "key": "Ajoute tes abonnements dans Ardane, espace Budget.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:147: guard !subs.isEmpty else { return .empty(tr(\"Abonnements\"), symbol: \"repeat.circle\", message: tr(\"Ajoute tes abonnements dans Tessera, espace Budget.\")) }"
@@ -494,7 +494,7 @@
   ]
  },
  {
-  "key": "Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.",
+  "key": "Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:163: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Tessera, espace Budget.\"))"
@@ -515,7 +515,7 @@
   ]
  },
  {
-  "key": "Ajoute tes placements dans Tessera, espace Placements.",
+  "key": "Ajoute tes placements dans Ardane, espace Placements.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:182: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Tessera, espace Placements.\")) }",
@@ -629,14 +629,14 @@
   ]
  },
  {
-  "key": "Note ton premier repas dans Tessera, espace Nutrition.",
+  "key": "Note ton premier repas dans Ardane, espace Nutrition.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/NutritionTiles.swift:4: static let hint = tr(\"Note ton premier repas dans Tessera, espace Nutrition.\")"
   ]
  },
  {
-  "key": "Donne ton objectif calorique dans Tessera pour savoir ce qu'il te reste par repas.",
+  "key": "Donne ton objectif calorique dans Ardane pour savoir ce qu'il te reste par repas.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Te"
@@ -777,7 +777,7 @@
   ]
  },
  {
-  "key": "Ajoute des favoris dans Tessera, espace Nutrition.",
+  "key": "Ajoute des favoris dans Ardane, espace Nutrition.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/NutritionTiles.swift:209: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Tessera, espace Nutrition.\"))"
@@ -819,7 +819,7 @@
   ]
  },
  {
-  "key": "Choisis tes trois priorités dans Tessera, espace Productivité.",
+  "key": "Choisis tes trois priorités dans Ardane, espace Productivité.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/ProductivityTiles.swift:25: return .empty(tr(\"Top 3 du jour\"), symbol: \"3.circle\", message: tr(\"Choisis tes trois priorités dans Tessera, espace Productivité.\"))"
@@ -847,14 +847,14 @@
   ]
  },
  {
-  "key": "Crée un projet et ses tâches dans Tessera, espace Productivité.",
+  "key": "Crée un projet et ses tâches dans Ardane, espace Productivité.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/ProductivityTiles.swift:44: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Tessera, espace Productivité.\"))"
   ]
  },
  {
-  "key": "Ajoute une échéance dans Tessera, espace Productivité.",
+  "key": "Ajoute une échéance dans Ardane, espace Productivité.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/ProductivityTiles.swift:68: return .empty(tr(\"Échéance\"), symbol: \"flag.checkered\", message: tr(\"Ajoute une échéance dans Tessera, espace Productivité.\"))"
@@ -883,7 +883,7 @@
   ]
  },
  {
-  "key": "Crée un compteur dans Tessera, espace Productivité.",
+  "key": "Crée un compteur dans Ardane, espace Productivité.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/ProductivityTiles.swift:107: return .empty(tr(\"Compteur\"), symbol: \"plusminus.circle\", message: tr(\"Crée un compteur dans Tessera, espace Productivité.\"))"
@@ -904,7 +904,7 @@
   ]
  },
  {
-  "key": "Crée une habitude dans Tessera pour suivre ta série.",
+  "key": "Crée une habitude dans Ardane pour suivre ta série.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/ProductivityTiles.swift:136: return .empty(tr(\"Série\"), symbol: \"flame.fill\", message: tr(\"Crée une habitude dans Tessera pour suivre ta série.\"))"
@@ -932,7 +932,7 @@
   ]
  },
  {
-  "key": "Crée tes habitudes dans Tessera.",
+  "key": "Crée tes habitudes dans Ardane.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/ProductivityTiles.swift:186: return .empty(tr(\"Semaine d'habitudes\"), symbol: \"square.grid.3x3.fill\", message: tr(\"Crée tes habitudes dans Tessera.\"))",
@@ -968,7 +968,7 @@
   ]
  },
  {
-  "key": "Ajoute tes cours dans Tessera, espace Études.",
+  "key": "Ajoute tes cours dans Ardane, espace Études.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/StudentTiles.swift:4: static let hint = tr(\"Ajoute tes cours dans Tessera, espace Études.\")"
@@ -996,14 +996,14 @@
   ]
  },
  {
-  "key": "Ajoute tes examens dans Tessera, espace Études.",
+  "key": "Ajoute tes examens dans Ardane, espace Études.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/StudentTiles.swift:60: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Tessera, espace Études.\"))"
   ]
  },
  {
-  "key": "Ajoute tes travaux à rendre dans Tessera, espace Études.",
+  "key": "Ajoute tes travaux à rendre dans Ardane, espace Études.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/StudentTiles.swift:81: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Tessera, espace Études.\"))"
@@ -1025,7 +1025,7 @@
   ]
  },
  {
-  "key": "Ajoute tes notes dans Tessera, espace Études.",
+  "key": "Ajoute tes notes dans Ardane, espace Études.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/StudentTiles.swift:108: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Tessera, espace Études.\"))"
@@ -1046,7 +1046,7 @@
   ]
  },
  {
-  "key": "Indique les dates de ta session dans Tessera, espace Études.",
+  "key": "Indique les dates de ta session dans Ardane, espace Études.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/StudentTiles.swift:126: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Tessera, espace Études.\"))"
@@ -1075,7 +1075,7 @@
   ]
  },
  {
-  "key": "Crée tes fiches de révision dans Tessera, espace Études.",
+  "key": "Crée tes fiches de révision dans Ardane, espace Études.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/StudentTiles.swift:142: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Tessera, espace Études.\"))"
@@ -1313,7 +1313,7 @@
   ]
  },
  {
-  "key": "Ajoute ta date de naissance dans Tessera, espace Ma vie.",
+  "key": "Ajoute ta date de naissance dans Ardane, espace Ma vie.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/TimeTiles.swift:17: private static let lifeHint = tr(\"Ajoute ta date de naissance dans Tessera, espace Ma vie.\")"
@@ -1398,7 +1398,7 @@
   ]
  },
  {
-  "key": "Ajoute ton voyage dans Tessera, espace Voyage.",
+  "key": "Ajoute ton voyage dans Ardane, espace Voyage.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/TravelTiles.swift:4: static let hint = tr(\"Ajoute ton voyage dans Tessera, espace Voyage.\")"
@@ -1433,7 +1433,7 @@
   ]
  },
  {
-  "key": "Ajoute ton vol dans Tessera, espace Voyage.",
+  "key": "Ajoute ton vol dans Ardane, espace Voyage.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/TravelTiles.swift:52: return .empty(tr(\"Vol\"), symbol: \"airplane\", message: tr(\"Ajoute ton vol dans Tessera, espace Voyage.\"))"
@@ -1461,7 +1461,7 @@
   ]
  },
  {
-  "key": "Ajoute ton hébergement dans Tessera, espace Voyage.",
+  "key": "Ajoute ton hébergement dans Ardane, espace Voyage.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/TravelTiles.swift:87: return .empty(tr(\"Hôtel\"), symbol: \"bed.double.fill\", message: tr(\"Ajoute ton hébergement dans Tessera, espace Voyage.\"))"
@@ -1573,14 +1573,14 @@
   ]
  },
  {
-  "key": "Planifie tes activités dans Tessera, espace Voyage.",
+  "key": "Planifie tes activités dans Ardane, espace Voyage.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/TravelTiles.swift:206: return .empty(tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\", message: tr(\"Planifie tes activités dans Tessera, espace Voyage.\"))"
   ]
  },
  {
-  "key": "Choisis ta ville dans Tessera pour voir la météo.",
+  "key": "Choisis ta ville dans Ardane pour voir la météo.",
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/WeatherTiles.swift:7: return .empty(kind.title, symbol: kind.symbol, message: tr(\"Choisis ta ville dans Tessera pour voir la météo.\"), emptySymbol: \"location.slash\")"
@@ -2241,7 +2241,7 @@
   ]
  },
  {
-  "key": "Ton dernier widget enregistré dans Tessera, sans aucun réglage.",
+  "key": "Ton dernier widget enregistré dans Ardane, sans aucun réglage.",
   "placeholders": 0,
   "uses": [
    "Widgets/QuickWidget.swift:15: .description(tr(\"Ton dernier widget enregistré dans Tessera, sans aucun réglage.\"))"

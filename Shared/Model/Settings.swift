@@ -24,7 +24,7 @@ enum AppStyleID: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .tessera: tr("Tessera")
+        case .tessera: tr("Ardane")
         case .ocean: tr("Océan")
         case .coral: tr("Corail")
         case .lavender: tr("Lavande")
@@ -81,7 +81,7 @@ struct AppSettings: Codable, Hashable {
     /// Opens of the app (at most one every few hours), for the rating request.
     var openCount = 0
     var lastCountedOpen: Date?
-    /// The major version for which Tessera already asked for a rating (asked once per major version).
+    /// The major version for which Ardane already asked for a rating (asked once per major version).
     var reviewRequestedVersion: String?
     /// The view chosen on each « Mon Quotidien » card (swiped left or right), by card.
     var dailyCardPages: [String: Int] = [:]

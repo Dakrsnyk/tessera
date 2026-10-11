@@ -1,4 +1,4 @@
-# Tessera
+# Ardane
 
 Application iOS de widgets personnalisables, organisée en **espaces** (mini-apps) : nutrition, sport, budget, business, placements, études, voyage, auto, productivité, habitudes, météo, ma journée.
 Chaque espace contient les données, et ses widgets les affichent sur l'écran d'accueil et l'écran verrouillé.
@@ -12,7 +12,7 @@ Chaque modification poussée sur `main` est compilée automatiquement sur un Mac
 
 | Dans le message | Ce qui est fait |
 |---|---|
-| (rien) | Vérifications statiques, compilation simulateur et iPhone, publication de `Tessera.ipa` |
+| (rien) | Vérifications statiques, compilation simulateur et iPhone, publication de `Ardane.ipa` |
 | `[check]` | Vérifications statiques et compilation simulateur seulement (le plus rapide) |
 | `[place]` | Compilation simulateur et test d'ajout des widgets à l'écran d'accueil et à l'écran verrouillé |
 | `[qa]` | Tous les tests automatiques, puis les captures d'écran de toutes les pages et de la galerie de widgets |
@@ -21,19 +21,19 @@ Chaque modification poussée sur `main` est compilée automatiquement sur un Mac
 | `[marketing]` | Rend les 10 captures App Store (iPhone 6,9 pouces, 1320 × 2868) : scènes dessinées par l'app, vrais écrans capturés à part |
 
 Le rapport (erreurs, résultats des tests, captures) est publié sur la branche `ci-report`.
-Le fichier à installer est publié dans **Releases** (colonne de droite du dépôt) : `Tessera.ipa`.
+Le fichier à installer est publié dans **Releases** (colonne de droite du dépôt) : `Ardane.ipa`.
 
 ### Première installation (PC Windows)
 
 1. Installe **iTunes** et **iCloud** depuis le site d'Apple (pas la version Microsoft Store).
 2. Installe **Sideloadly** depuis sideloadly.io.
-3. Télécharge le dernier `Tessera.ipa` dans *Releases*.
+3. Télécharge le dernier `Ardane.ipa` dans *Releases*.
 4. Branche ton iPhone en USB et touche **Se fier à cet ordinateur**.
-5. Ouvre Sideloadly, glisse `Tessera.ipa` dans la fenêtre, entre ton identifiant Apple et clique sur **Start**.
+5. Ouvre Sideloadly, glisse `Ardane.ipa` dans la fenêtre, entre ton identifiant Apple et clique sur **Start**.
 6. Sur l'iPhone :
    - Réglages > Confidentialité et sécurité > **Mode développeur** : active-le (l'iPhone redémarre).
    - Réglages > Général > **VPN et gestion de l'appareil** : touche ton identifiant et **Faire confiance**.
-7. Ouvre Tessera.
+7. Ouvre Ardane.
 
 Avec un identifiant Apple gratuit, l'app expire au bout de **7 jours** : relance simplement Sideloadly avec le même fichier. Un compte gratuit est aussi limité à 3 apps installées de cette façon.
 
@@ -59,7 +59,7 @@ Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS
 
 ---
 
-**Optimisation, même en Debug** : la configuration Debug est compilée optimisée (`-O`). Non optimisée, l'interface SwiftUI de Tessera dépasse la pile de 1 Mo du fil principal de l'iPhone et l'app plante au lancement sur un vrai téléphone (le simulateur a 8 Mo et ne le montre pas). Pour que les tests le voient, l'app Debug est liée avec une pile de 1 Mo, comme sur l'iPhone. Le mode CI `[stack]` compare les deux compilations.
+**Optimisation, même en Debug** : la configuration Debug est compilée optimisée (`-O`). Non optimisée, l'interface SwiftUI d'Ardane dépasse la pile de 1 Mo du fil principal de l'iPhone et l'app plante au lancement sur un vrai téléphone (le simulateur a 8 Mo et ne le montre pas). Pour que les tests le voient, l'app Debug est liée avec une pile de 1 Mo, comme sur l'iPhone. Le mode CI `[stack]` compare les deux compilations.
 
 ## 3. Ce que tu dois configurer toi-même
 
@@ -70,10 +70,10 @@ Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS
 | Identifiants (si tu changes de préfixe) | `PRODUCT_BUNDLE_IDENTIFIER` des 2 cibles, `APP_GROUP_ID`, fichiers `Config/*.entitlements` | Si `com.dakrsnyk.tessera` est déjà pris |
 | Fiche de l'app | App Store Connect > Mes apps | Avant la soumission |
 | Contrats, banque, fiscalité | App Store Connect > Accords | Obligatoire pour vendre |
-| **Abonnements** : groupe « Tessera Premium » avec `com.dakrsnyk.tessera.premium.monthly` (1 mois) et `…premium.yearly` (1 an, essai gratuit 1 semaine) | App Store Connect > Abonnements | Avant la soumission |
+| **Abonnements** : groupe « Ardane Premium » avec `com.dakrsnyk.tessera.premium.monthly` (1 mois) et `…premium.yearly` (1 an, essai gratuit 1 semaine) | App Store Connect > Abonnements | Avant la soumission |
 | **Achat unique** : `com.dakrsnyk.tessera.premium.lifetime` (non consommable) | App Store Connect > Achats intégrés | Avant la soumission |
 | Adresse de support | `App/Premium/PremiumConfiguration.swift` (`supportEmail`) | Avant la soumission |
-| Politique de confidentialité | Page « Confidentialité Tessera » (lien déjà dans l'app) : la rendre publique via son menu Partager | Avant la soumission |
+| Politique de confidentialité | Page « Confidentialité Ardane » (lien déjà dans l'app) : la rendre publique via son menu Partager | Avant la soumission |
 | **Clé Open-Meteo** (usage commercial) | Réglage `OPEN_METEO_API_KEY` du projet | Dès que l'app est vendue : l'API gratuite est réservée à l'usage non commercial |
 | Clé CoinGecko (facultative) | Réglage `COINGECKO_API_KEY` | Si la limite gratuite est atteinte |
 | Clé **Finnhub** (facultative) | Réglage `FINNHUB_API_KEY` (compte gratuit sur finnhub.io) | Pour le cours en direct des actions ; sans clé, le prix saisi à la main est utilisé |
@@ -127,7 +127,7 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Mes widgets** : un carrousel qu'on fait tourner du doigt, le widget du milieu en grand avec Modifier, Dupliquer, Favori et Ajouter à l'écran. En bas, les catégories des widgets enregistrés (plus Tous et Favoris) filtrent le carrousel. « Sélectionner » repasse en grille pour supprimer ou fusionner plusieurs widgets.
 
-**Écrans d'accueil** (Store) : 18 écrans complets dessinés comme sur un vrai iPhone : fond d'écran (dessiné par l'app), vrais widgets Tessera, icônes et dock assortis, et l'écran verrouillé qui va avec. Crème, Aurore, Graphite, Néon, Topographie, Minuit, Études, Jade, Dune, Pastel, Bureau, Corail, Océan, Forêt, Crépuscule, Terrazzo, Nébuleuse, Seventies. On les filtre (#minimal, #sombre, #pastel, #sport…), on les met en favoris, on ajoute tous leurs widgets d'une touche et on enregistre le fond d'écran dans Photos.
+**Écrans d'accueil** (Store) : 18 écrans complets dessinés comme sur un vrai iPhone : fond d'écran (dessiné par l'app), vrais widgets Ardane, icônes et dock assortis, et l'écran verrouillé qui va avec. Crème, Aurore, Graphite, Néon, Topographie, Minuit, Études, Jade, Dune, Pastel, Bureau, Corail, Océan, Forêt, Crépuscule, Terrazzo, Nébuleuse, Seventies. On les filtre (#minimal, #sombre, #pastel, #sport…), on les met en favoris, on ajoute tous leurs widgets d'une touche et on enregistre le fond d'écran dans Photos.
 
 **Premier lancement personnalisé** : style de l'app, prénom et nom, centres d'intérêt (Sport, Nutrition, Finance, Budget, Business, Études, Productivité, Voyage, Automobile, Météo, Design, Bien-être), puis seulement les questions utiles pour ces thèmes. Tout est facultatif et chaque étape peut être passée.
 
@@ -135,7 +135,7 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Écran verrouillé** (Créer › Écran verrouillé) : tous les widgets de l'écran verrouillé par univers, les interactifs marqués d'une main (filtre « Seulement les widgets interactifs », aussi dans la création par espace et dans le Store) et le guide pour les ajouter. Les widgets rectangulaires ont leur action principale (« Série faite »…). Pendant une séance, une Live Activity montre l'exercice, la série et le repos qui défile sur l'écran verrouillé et dans la Dynamic Island, avec « Série faite » et « Passer ».
 
-**Accueil** : un tableau de bord. « Mon Quotidien » réunit ce qui compte aujourd'hui, uniquement à partir de ce que la personne a renseigné : calories et macros (avec le bouton Scanner), séance du jour (Commencer, Série faite), cours et examens du jour, agenda, habitudes, eau, pas (capteur de mouvement de l'iPhone, sur autorisation), budget du jour, météo, « À ne pas oublier » (examens, devoirs, échéances, factures, voiture, départ). L'ordre suit le moment : météo et premier cours le matin, séance et tâches la journée, calories restantes et habitudes le soir. Rien n'est affiché sans données : au plus deux invitations discrètes. Les cartes Nutrition, Séance, Eau, Pas et Météo ont plusieurs vues (aujourd'hui, repas, 7 jours, prochaines heures…) : on glisse à gauche ou à droite, des points montrent la vue, et le choix est gardé. Puis « Mes informations », Mes widgets et un aperçu du Store. Au bout de la 10ᵉ ouverture (une par tranche de 4 h), Tessera propose une fois de le noter, sur un accueil calme ; « Noter Tessera » reste dans Réglages › Aide.
+**Accueil** : un tableau de bord. « Mon Quotidien » réunit ce qui compte aujourd'hui, uniquement à partir de ce que la personne a renseigné : calories et macros (avec le bouton Scanner), séance du jour (Commencer, Série faite), cours et examens du jour, agenda, habitudes, eau, pas (capteur de mouvement de l'iPhone, sur autorisation), budget du jour, météo, « À ne pas oublier » (examens, devoirs, échéances, factures, voiture, départ). L'ordre suit le moment : météo et premier cours le matin, séance et tâches la journée, calories restantes et habitudes le soir. Rien n'est affiché sans données : au plus deux invitations discrètes. Les cartes Nutrition, Séance, Eau, Pas et Météo ont plusieurs vues (aujourd'hui, repas, 7 jours, prochaines heures…) : on glisse à gauche ou à droite, des points montrent la vue, et le choix est gardé. Puis « Mes informations », Mes widgets et un aperçu du Store. Au bout de la 10ᵉ ouverture (une par tranche de 4 h), Ardane propose une fois de le noter, sur un accueil calme ; « Noter Ardane » reste dans Réglages › Aide.
 
 **Mes informations** : le centre de toutes les données, par thème (Nutrition, Fitness, Études, Budget…) : objectifs, programme, horaire, factures, voyage, voiture, ville, calendrier… Chaque information a un seul endroit où elle est gardée et tous les widgets, « Mon Quotidien » et les statistiques la reprennent : un objectif de 2 500 kcal donné une fois sert partout. Chaque widget sait ce dont il a besoin : l'éditeur, Créer et la configuration des packs demandent exactement ces informations, au moment de créer le widget. Ce qui n'a pas été renseigné n'est jamais inventé : les widgets affichent un état neutre (« Objectif à définir »). Chaque mini-app a en bas « Mes paramètres » : les valeurs actuelles et « Modifier mes paramètres », avec les mêmes formulaires que « Mes informations » (une seule source de données). Les objectifs caloriques calculés suivent le poids, la taille, l'âge, le genre et l'activité ; un objectif tapé à la main reste tel quel. Genre : Femme, Homme, Non binaire, Autre (précision libre) ou Je préfère ne pas répondre, modifiable à tout moment ; pour les réponses non binaires, le calcul utilise la moyenne des deux formules ou la référence choisie.
 
@@ -147,7 +147,7 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 **Icône et logo** : le « T en creux » : trois tuiles (rouge, orange, charbon) dont l'espace dessine un T, sur crème. L'icône a ses versions claire, sombre et teintée (iOS 18) ; le même logo s'anime au lancement (les tuiles glissent en place) et apparaît dans l'app (premier lancement, Premium, écrans d'accueil du Store).
 
-**Styles de l'app** : 10 ambiances pour l'app elle-même (Tessera, Océan, Corail, Lavande, Sable, Graphite, Forêt, Rose, Minuit, Néon), chacune en clair, en sombre ou automatique. Choisies au premier lancement, modifiables dans Réglages › Apparence. Les widgets gardent leurs propres styles.
+**Styles de l'app** : 10 ambiances pour l'app elle-même (Ardane, Océan, Corail, Lavande, Sable, Graphite, Forêt, Rose, Minuit, Néon), chacune en clair, en sombre ou automatique. Choisies au premier lancement, modifiables dans Réglages › Apparence. Les widgets gardent leurs propres styles.
 
 **Résumés intelligents** : calculés sur l'iPhone à partir des données de l'utilisateur. Avec Apple Intelligence (iOS 26), le texte est reformulé ; chaque nombre de la reformulation est vérifié par rapport aux données, sinon le texte calculé est gardé. Aucune donnée n'est inventée.
 

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// « Icône de l'app »: Tessera's icon on the Home Screen, the classic one or one of the glass icons.
+/// « Icône de l'app »: Ardane's icon on the Home Screen, the classic one or one of the glass icons.
 /// Reached from Profil, or from a long press on the icon (« Changer d'icône »).
 struct AppIconPicker: View {
     @State private var current: String?
@@ -10,7 +10,7 @@ struct AppIconPicker: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Text(tr("Choisis l'icône de Tessera sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône »."))
+                Text(tr("Choisis l'icône d'Ardane sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône »."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

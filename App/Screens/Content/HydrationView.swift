@@ -68,7 +68,7 @@ struct HydrationView: View {
                 ))
             } footer: {
                 Text(notificationsDenied
-                    ? tr("Les notifications sont désactivées pour Tessera dans Réglages.")
+                    ? tr("Les notifications sont désactivées pour Ardane dans Réglages.")
                     : tr("Un rappel toutes les deux heures. Tu peux aussi ajouter un verre depuis le widget."))
             }
 

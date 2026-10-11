@@ -1,7 +1,7 @@
 import Foundation
 
 enum CarTiles {
-    static let hint = tr("Ajoute ta voiture et tes pleins dans Tessera, espace Auto.")
+    static let hint = tr("Ajoute ta voiture et tes pleins dans Ardane, espace Auto.")
 
     static func make(_ context: RenderContext) -> Tile {
         let state = context.payload.domains.car
@@ -44,7 +44,7 @@ enum CarTiles {
     static func service(_ state: CarState, now: Date) -> Tile {
         let statuses = CarMath.serviceStatus(state, at: now)
         guard let first = statuses.first else {
-            return .empty(tr("Entretien"), symbol: "wrench.and.screwdriver", message: tr("Ajoute tes entretiens (vidange, pneus…) dans Tessera, espace Auto."))
+            return .empty(tr("Entretien"), symbol: "wrench.and.screwdriver", message: tr("Ajoute tes entretiens (vidange, pneus…) dans Ardane, espace Auto."))
         }
         var tile = Tile(title: first.item.name, symbol: "wrench.and.screwdriver")
         if let km = first.kmLeft {
@@ -99,7 +99,7 @@ enum CarTiles {
     }
 
     static func fuel(_ state: CarState, now: Date, currency: String) -> Tile {
-        guard !state.fills.isEmpty else { return .empty(tr("Carburant"), symbol: "fuelpump", message: tr("Note tes pleins dans Tessera, espace Auto.")) }
+        guard !state.fills.isEmpty else { return .empty(tr("Carburant"), symbol: "fuelpump", message: tr("Note tes pleins dans Ardane, espace Auto.")) }
         var tile = Tile(title: tr("Carburant"), symbol: "fuelpump")
         if let consumption = CarMath.consumption(state) {
             tile.value = TF.decimal(consumption, 1)
@@ -127,7 +127,7 @@ enum CarTiles {
     static func deadlines(_ state: CarState, now: Date) -> Tile {
         let upcoming = CarMath.upcomingDeadlines(state, at: now)
         guard let next = upcoming.first else {
-            return .empty(tr("Échéances auto"), symbol: "calendar.badge.exclamationmark", message: tr("Ajoute l'assurance, l'immatriculation ou les pneus dans Tessera, espace Auto."))
+            return .empty(tr("Échéances auto"), symbol: "calendar.badge.exclamationmark", message: tr("Ajoute l'assurance, l'immatriculation ou les pneus dans Ardane, espace Auto."))
         }
         let days = DateMath.daysBetween(now, next.date)
         var tile = Tile(title: tr("Échéances auto"), symbol: "calendar.badge.exclamationmark")
