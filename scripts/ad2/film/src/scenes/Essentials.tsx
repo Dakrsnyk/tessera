@@ -1,7 +1,7 @@
 import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
 import { FilmAudio } from "../components/FilmAudio";
 import { Grain } from "../components/Grain";
-import { SplitText } from "../components/SplitText";
+import { Seam } from "../components/Seam";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
 import { heroWidget, k } from "../lib/kit";
 import { useFilmFrame } from "../lib/time";
@@ -18,18 +18,32 @@ const STREAK = k("habitStreak-s-aurora.png");
 const TABLE = { x: 30, y: 560, w: 1146, h: 1680 };
 const CHECK = { x: 140, y: 970 };
 
-const Hero: React.FC<{ word: string; from: number; to: number; top?: number }> = ({ word, from, to, top = 250 }) => (
-  <SplitText from={from} exitAt={to} top={top} height={160}>
-    <span style={type.hero}>{word}</span>
-  </SplitText>
-);
+/** Hero words of the run (§2.6): cut in on the beat with a 6-frame opacity and blur rack; 12-frame fade out. */
+const Hero: React.FC<{ word: string; from: number; to: number; top?: number }> = ({ word, from, to, top = 250 }) => {
+  const frame = useFilmFrame();
+  if (frame < from || frame > to + 12) return null;
+  const rack = interpolate(frame, [from, from + 6], [0, 1], clamp);
+  const out = interpolate(frame, [to, to + 12], [1, 0], clamp);
+  return (
+    <div style={{ position: "absolute", left: 0, top, width: W, height: 160, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <span style={{ ...type.hero, color: C.type1, opacity: rack * out, filter: `blur(${(1 - rack) * 8}px)` }}>{word}</span>
+    </div>
+  );
+};
+
+/** A cut on the beat, carried by the seam: a line flashes at the axis across the change. */
+const BeatCut: React.FC<{ at: number }> = ({ at }) => {
+  const frame = useFilmFrame();
+  const i = interpolate(frame, [at - 4, at, at + 16], [0, 1, 0], clamp);
+  return i > 0 ? <Seam x={AXIS} top={240} height={1440} intensity={i} /> : null;
+};
 
 const Money: React.FC<{ f: number }> = ({ f }) => {
   // The seam laid flat: Money's own staging. The budget rises out of it; spending is revealed along it.
   const line = interpolate(f, [0, 10], [0, 1], { ...clamp, easing: ease.split });
-  const rise = interpolate(f, [4, 44], [0, 1], { ...clamp, easing: ease.lift });
+  const rise = interpolate(f, [4, 44], [0, 1], { ...clamp, easing: ease.lift }) + interpolate(f, [44, 120], [0, 0.02], clamp);
   const reveal = interpolate(f, [14, 62], [0, 1], { ...clamp, easing: Easing.bezier(0.45, 0, 0.2, 1) });
-  const out = interpolate(f, [108, 120], [1, 0], clamp);
+  const out = 1;
   const LINE_Y = 1080;
   const size = 560;
   const spendW = 940;
@@ -95,7 +109,7 @@ const Week: React.FC<{ f: number }> = ({ f }) => {
   // Lying flat under a raking light, tilting to a top-down plan (36 frames), then the page swipe at 45.0 s.
   const tilt = interpolate(f, [0, 36], [62, 0], { ...clamp, easing: ease.arrival });
   const swipe = interpolate(f, [60, 81], [0, 1], { ...clamp, easing: Easing.bezier(0.25, 0.9, 0.3, 1) });
-  const inOut = interpolate(f, [0, 10, 108, 120], [0, 1, 1, 0], clamp);
+  const inOut = interpolate(f, [0, 6], [0, 1], clamp);
   const s = 900 / TABLE.w;
   const w = 900;
   const h = TABLE.h * s;
@@ -153,11 +167,11 @@ const Week: React.FC<{ f: number }> = ({ f }) => {
 
 const Habits: React.FC<{ f: number }> = ({ f }) => {
   // 135 mm macro on the check circle, pulling back to 85 mm; the check at 46.5 s (f30 here), a radial blade.
-  const pull = interpolate(f, [0, 90], [0, 1], { ...clamp, easing: Easing.bezier(0.35, 0, 0.2, 1) });
+  const pull = interpolate(f, [0, 120], [0, 1], { ...clamp, easing: Easing.bezier(0.35, 0, 0.3, 1) });
   const scale = interpolate(pull, [0, 1], [2.6, 0.62]);
   const reveal = interpolate(f, [30, 48], [0, 1], { ...clamp, easing: ease.split });
   const streak = interpolate(f, [56, 92], [0, 1], { ...clamp, easing: ease.arrival });
-  const inOut = interpolate(f, [0, 8], [0, 1], clamp);
+  const inOut = interpolate(f, [0, 6], [0, 1], clamp);
   // The circle stays put on screen while the capture scales around it, then drifts to its place in the pane.
   const cx = interpolate(pull, [0, 1], [AXIS, AXIS - 603 * 0.62 + CHECK.x * 0.62]);
   const cy = interpolate(pull, [0, 1], [1040, 470 + CHECK.y * 0.62]);
@@ -229,9 +243,11 @@ export const Essentials: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       {frame < 120 && <Money f={frame} />}
       {frame >= 120 && frame < 240 && <Week f={frame - 120} />}
       {frame >= 240 && <Habits f={frame - 240} />}
-      <Hero word="Money." from={0} to={102} />
-      <Hero word="Week." from={120} to={222} top={230} />
+      <Hero word="Money." from={0} to={108} />
+      <Hero word="Week." from={120} to={228} top={230} />
       <Hero word="Habits." from={240} to={348} top={200} />
+      <BeatCut at={120} />
+      <BeatCut at={240} />
       <Grain />
       {audio && <FilmAudio from={2520} />}
     </AbsoluteFill>

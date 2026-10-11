@@ -81,7 +81,7 @@ const Guides: React.FC<{ e: number; opacity: number }> = ({ e, opacity }) => {
   );
 };
 
-export const Universes: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
+export const Universes: React.FC<{ audio?: boolean; words?: boolean }> = ({ audio = true, words = true }) => {
   const frame = useFilmFrame();
   const images = useImages(FILES);
   const base = useCanvasTexture();
@@ -191,6 +191,8 @@ export const Universes: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       <Callout label="Widgets" at={pinW} labelY={pinW[1] - 90} from={60} to={144} />
       <Callout label="Icons" at={pinI} labelY={pinI[1] + 90} from={68} to={144} />
       <Callout label="Wallpaper" at={pinB} labelX={Math.max(250, pinB[0] - 130)} from={76} to={144} />
+      {words && (
+        <>
       {/* While the hero word is read, the lower part of the phone falls back (type never over UI data). */}
       <AbsoluteFill
         style={{
@@ -201,6 +203,8 @@ export const Universes: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       <SplitText from={472} exitAt={578} top={1250} height={160}>
         <span style={type.hero}>Make it yours.</span>
       </SplitText>
+        </>
+      )}
       <Grain />
       {audio && <FilmAudio from={360} />}
     </AbsoluteFill>

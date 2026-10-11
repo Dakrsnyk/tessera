@@ -1,0 +1,592 @@
+{
+ "_doc": "Cut-downs of the main film: segments of its scenes, each at an output frame (`at`), with a time remap from segment-local output frames (`input`) to the scene's own frames (`output`). Camera moves may play faster; live UI stays 1:1. `transition`: cut (continuous framing), line (the seam carries the cut), split (the previous segment keeps playing in two halves for 30 frames). Read by src/films/CutFilm.tsx (picture) and scripts/ad2/mix.py (score sections, SFX, voice).",
+ "sceneStart": {
+  "Opening": 0,
+  "Universes": 360,
+  "Fitness": 960,
+  "LockScreen": 1560,
+  "Nutrition": 1920,
+  "Essentials": 2520,
+  "Gather": 2880,
+  "Close": 3180
+ },
+ "films": {
+  "s30": {
+   "length": 1800,
+   "vo": "s30",
+   "segments": [
+    {
+     "scene": "Opening",
+     "at": 0,
+     "input": [
+      0,
+      240
+     ],
+     "output": [
+      0,
+      359
+     ]
+    },
+    {
+     "scene": "Universes",
+     "at": 240,
+     "input": [
+      0,
+      90,
+      300,
+      330,
+      360
+     ],
+     "output": [
+      0,
+      150,
+      450,
+      480,
+      540
+     ],
+     "props": {
+      "words": false
+     }
+    },
+    {
+     "scene": "Fitness",
+     "at": 600,
+     "input": [
+      0,
+      150
+     ],
+     "output": [
+      0,
+      150
+     ]
+    },
+    {
+     "scene": "LockScreen",
+     "at": 750,
+     "input": [
+      0,
+      270
+     ],
+     "output": [
+      60,
+      330
+     ],
+     "transition": "line"
+    },
+    {
+     "scene": "Nutrition",
+     "at": 1020,
+     "input": [
+      0,
+      45,
+      55,
+      125,
+      245,
+      275,
+      293,
+      329,
+      420
+     ],
+     "output": [
+      0,
+      90,
+      110,
+      180,
+      300,
+      330,
+      366,
+      420,
+      520
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Gather",
+     "at": 1440,
+     "input": [
+      0,
+      120
+     ],
+     "output": [
+      180,
+      300
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Close",
+     "at": 1560,
+     "input": [
+      0,
+      120,
+      240
+     ],
+     "output": [
+      0,
+      120,
+      300
+     ]
+    }
+   ],
+   "music": [
+    {
+     "type": "void",
+     "start": 0,
+     "end": 4
+    },
+    {
+     "type": "strata",
+     "start": 4,
+     "end": 10
+    },
+    {
+     "type": "pulse",
+     "start": 10,
+     "end": 12.5
+    },
+    {
+     "type": "break",
+     "start": 12.5,
+     "end": 17
+    },
+    {
+     "type": "daylight",
+     "start": 17,
+     "end": 24
+    },
+    {
+     "type": "gather",
+     "start": 24,
+     "end": 27
+    },
+    {
+     "type": "logo",
+     "start": 27,
+     "end": 30
+    }
+   ]
+  },
+  "s8": {
+   "length": 480,
+   "vo": "s8",
+   "segments": [
+    {
+     "scene": "LineOpen",
+     "at": 0,
+     "input": [
+      0,
+      270
+     ],
+     "output": [
+      0,
+      270
+     ]
+    },
+    {
+     "scene": "Close",
+     "at": 270,
+     "input": [
+      0,
+      120,
+      210
+     ],
+     "output": [
+      0,
+      120,
+      300
+     ]
+    }
+   ],
+   "music": [
+    {
+     "type": "void",
+     "start": 0,
+     "end": 1
+    },
+    {
+     "type": "strata",
+     "start": 1,
+     "end": 2.5
+    },
+    {
+     "type": "gather",
+     "start": 2.5,
+     "end": 5.5
+    },
+    {
+     "type": "logo",
+     "start": 5.5,
+     "end": 8
+    }
+   ]
+  },
+  "s15": {
+   "length": 900,
+   "vo": "s15",
+   "segments": [
+    {
+     "scene": "MyDay",
+     "at": 0,
+     "input": [
+      0,
+      660
+     ],
+     "output": [
+      0,
+      660
+     ]
+    },
+    {
+     "scene": "Close",
+     "at": 660,
+     "input": [
+      0,
+      120,
+      240
+     ],
+     "output": [
+      0,
+      120,
+      300
+     ],
+     "props": {
+      "screenFile": "home-s10.png",
+      "tagline": "Your whole day. One screen."
+     }
+    }
+   ],
+   "music": [
+    {
+     "type": "pulse",
+     "start": 0,
+     "end": 10.5
+    },
+    {
+     "type": "gather",
+     "start": 10.5,
+     "end": 12
+    },
+    {
+     "type": "logo",
+     "start": 12,
+     "end": 15
+    }
+   ]
+  },
+  "fitness": {
+   "length": 1200,
+   "vo": "fitness",
+   "segments": [
+    {
+     "scene": "FitnessCold",
+     "at": 0,
+     "input": [
+      0,
+      240
+     ],
+     "output": [
+      0,
+      240
+     ]
+    },
+    {
+     "scene": "Fitness",
+     "at": 240,
+     "input": [
+      0,
+      240
+     ],
+     "output": [
+      0,
+      240
+     ],
+     "props": {
+      "tapAt": 210
+     },
+     "transition": "split"
+    },
+    {
+     "scene": "LockScreen",
+     "at": 480,
+     "input": [
+      0,
+      290
+     ],
+     "output": [
+      50,
+      340
+     ],
+     "transition": "line"
+    },
+    {
+     "scene": "Fitness",
+     "at": 770,
+     "input": [
+      0,
+      270
+     ],
+     "output": [
+      330,
+      600
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Close",
+     "at": 1040,
+     "input": [
+      0,
+      76,
+      160
+     ],
+     "output": [
+      44,
+      120,
+      300
+     ],
+     "props": {
+      "tagline": "Every set. Every second."
+     },
+     "transition": "line"
+    }
+   ],
+   "music": [
+    {
+     "type": "pulse",
+     "start": 0,
+     "end": 4
+    },
+    {
+     "type": "pulse",
+     "start": 4,
+     "end": 8
+    },
+    {
+     "type": "break",
+     "start": 8,
+     "end": 12.83
+    },
+    {
+     "type": "run",
+     "start": 12.83,
+     "end": 17.33
+    },
+    {
+     "type": "logo",
+     "start": 17.33,
+     "end": 20
+    }
+   ]
+  },
+  "perso": {
+   "length": 1440,
+   "vo": "perso",
+   "segments": [
+    {
+     "scene": "Build",
+     "at": 0,
+     "input": [
+      0,
+      360
+     ],
+     "output": [
+      0,
+      360
+     ]
+    },
+    {
+     "scene": "Universes",
+     "at": 360,
+     "input": [
+      0,
+      60,
+      240,
+      258,
+      300
+     ],
+     "output": [
+      0,
+      150,
+      450,
+      480,
+      560
+     ],
+     "props": {
+      "words": false
+     }
+    },
+    {
+     "scene": "StyleCycle",
+     "at": 660,
+     "input": [
+      0,
+      240
+     ],
+     "output": [
+      0,
+      240
+     ]
+    },
+    {
+     "scene": "LockIcon",
+     "at": 900,
+     "input": [
+      0,
+      180
+     ],
+     "output": [
+      0,
+      180
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "FivePhones",
+     "at": 1080,
+     "input": [
+      0,
+      180
+     ],
+     "output": [
+      0,
+      180
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Close",
+     "at": 1260,
+     "input": [
+      0,
+      120,
+      180
+     ],
+     "output": [
+      0,
+      120,
+      300
+     ],
+     "props": {
+      "tagline": "Make it yours."
+     }
+    }
+   ],
+   "music": [
+    {
+     "type": "void",
+     "start": 0,
+     "end": 1.5
+    },
+    {
+     "type": "strata",
+     "start": 1.5,
+     "end": 11
+    },
+    {
+     "type": "strata",
+     "start": 11,
+     "end": 15
+    },
+    {
+     "type": "daylight",
+     "start": 15,
+     "end": 18
+    },
+    {
+     "type": "gather",
+     "start": 18,
+     "end": 21
+    },
+    {
+     "type": "logo",
+     "start": 21,
+     "end": 24
+    }
+   ]
+  },
+  "nutrition": {
+   "length": 1200,
+   "vo": "nutrition",
+   "segments": [
+    {
+     "scene": "Nutrition",
+     "at": 0,
+     "input": [
+      0,
+      80,
+      110,
+      180,
+      330,
+      450,
+      630
+     ],
+     "output": [
+      0,
+      90,
+      110,
+      150,
+      300,
+      420,
+      600
+     ],
+     "props": {
+      "look": "light"
+     }
+    },
+    {
+     "scene": "WidgetLift",
+     "at": 630,
+     "input": [
+      0,
+      240
+     ],
+     "output": [
+      0,
+      240
+     ],
+     "transition": "split"
+    },
+    {
+     "scene": "Close",
+     "at": 870,
+     "input": [
+      0,
+      120,
+      330
+     ],
+     "output": [
+      0,
+      120,
+      300
+     ],
+     "props": {
+      "home": "light",
+      "tagline": "Know what’s left."
+     }
+    }
+   ],
+   "music": [
+    {
+     "type": "void",
+     "start": 0,
+     "end": 0.5
+    },
+    {
+     "type": "daylight",
+     "start": 0.5,
+     "end": 10.5
+    },
+    {
+     "type": "daylight",
+     "start": 10.5,
+     "end": 14.5
+    },
+    {
+     "type": "logo",
+     "start": 14.5,
+     "end": 20
+    }
+   ]
+  }
+ }
+}

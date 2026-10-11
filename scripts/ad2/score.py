@@ -325,3 +325,178 @@ if __name__ == "__main__":
         audio *= db(-1) / peak
     sf.write(out, audio.astype(np.float32), SR, subtype="FLOAT")
     print(f"score: {len(audio) / SR:.2f} s, {loud:.1f} → {meter.integrated_loudness(audio):.1f} LUFS, peak {20 * np.log10(np.abs(audio).max()):.1f} dBFS")
+
+
+# --- Scores of the cut-downs ---------------------------------------------------------------------
+# Built from the sections of src/films/cuts.json (seconds, any length): the same instruments and harmony
+# as the main film, each section in its own colour, the arp's timbre following the universes on screen.
+SECTION_CHORDS = {
+    "void": ["Dadd9"],
+    "strata": ["Dm9", "Bbmaj7", "Fmaj7/A", "Cadd9"],
+    "pulse": ["Dm9", "Bbmaj7", "Gm9", "A7sus4"],
+    "break": ["Bbmaj7", "Bbmaj7", "A7sus4"],
+    "daylight": ["Fmaj9", "C/E", "Dm9", "Bbmaj7#11", "Csus4"],
+    "run": ["Dm9", "Bbmaj7", "Csus4"],
+    "gather": ["Bbmaj9", "Gm9", "A7sus4"],
+    "logo": ["Dmaj9"],
+}
+
+
+def score_cut(length, sections, universes=(), hits=(), risers=(), logo_at=None, ticks=()):
+    """`sections`: [{type, start, end}] in seconds. `universes`: [(seconds, timbre)] for the strata arp.
+    `hits`: seconds of the merge-like peaks (sub drop + noise, a one-beat suck before). `risers`: seconds
+    where a riser ends (one beat of suck before when it is a hit). `logo_at`: the D major Picardy."""
+    n = int(round(length * SR))
+    pads = np.zeros((n, 2))
+    arp = np.zeros((n, 2))
+    drums = np.zeros((n, 2))
+    bass = np.zeros((n, 2))
+    low = np.zeros((n, 2))
+    fx = np.zeros((n, 2))
+    kicks = []
+
+    def chords_of(sec):
+        names = SECTION_CHORDS[sec["type"]]
+        out = []
+        t = sec["start"]
+        k = 0
+        while t < sec["end"] - 1e-6:
+            dur = min(2.0, sec["end"] - t)
+            name = names[-1] if (sec["type"] == "break" and sec["end"] - t <= 2.0) else names[k % len(names)]
+            if sec["type"] in ("void", "logo"):
+                dur = sec["end"] - t
+                name = names[0]
+            out.append((t, dur, name))
+            t += dur
+            k += 1
+        return out
+
+    progression = [c for sec in sections for c in chords_of(sec)]
+
+    def chord_at(s):
+        for t, d, name in progression:
+            if t <= s < t + d:
+                return name
+        return progression[-1][2]
+
+    def timbre_at(s):
+        name = "aurora"
+        for at, u in universes:
+            if s >= at:
+                name = u
+        return name
+
+    pattern = [0, 1, 2, 3, 4, 3, 2, 1]
+
+    def arp_run(t0, t1, octave_up=0, gain=db(-23), timbre=None):
+        s = np.ceil(t0 / 0.25) * 0.25
+        k = int(round(s / 0.25))
+        while s < t1 - 0.05:
+            tones = sorted(note(x) * (2 if note(x) < note("A3") else 1) for x in CH[chord_at(s)])
+            tones = [f * 2 ** octave_up for f in tones] + [tones[0] * 2 * 2 ** octave_up]
+            f = tones[pattern[k % 8] % len(tones)]
+            add(arp, pluck(f, timbre or timbre_at(s)), s, gain, pan=-0.35 if k % 2 == 0 else 0.35)
+            s += 0.25
+            k += 1
+
+    def groove(t0, t1, back="snap", hats16=True):
+        vel = [1.0, 0.45, 0.7, 0.45]
+        b = np.ceil(t0 / BEAT) * BEAT
+        while b < t1 - 0.05:
+            beat = int(round(b / BEAT)) % 4
+            if beat in (0, 2):
+                add(drums, kick(), b, db(-9))
+                kicks.append(b)
+            else:
+                add(drums, snap(int(b * 4)) if back == "snap" else rim(int(b * 4)), b, db(-16) if back == "snap" else db(-20))
+            for h in range(4 if hats16 else 2):
+                step = 0.25 if hats16 else 0.5
+                add(drums, hat(vel[h] if hats16 else 0.7, int(b * 16) + h), b + h * step * BEAT, db(-26), pan=0.25)
+            root = note(ROOT[chord_at(b)])
+            while root > note("D3"):
+                root /= 2
+            for e in range(2):
+                add(bass, bass_note(root * (2 if e % 2 else 1), 0.3), b + e * 0.25, db(-17))
+            b += BEAT
+
+    for sec in sections:
+        t0, t1, kind = sec["start"], sec["end"], sec["type"]
+        for t, d, name in chords_of(sec):
+            if kind == "void":
+                continue
+            cutoff = {"break": 900, "daylight": 2400, "gather": 2600, "logo": 2400}.get(kind, 1800)
+            gain = {"break": db(-20), "gather": db(-16), "logo": db(-15)}.get(kind, db(-18))
+            release = 2.6 if kind == "logo" else 0.9
+            pad_layer(pads, t, d, CH[name], gain, cutoff=cutoff, attack=0.35 if kind != "logo" else 0.08, release=release)
+        if kind == "void":
+            tt = t_axis(t1 - t0)
+            drone = (np.sin(2 * np.pi * note("D1") * tt) + 0.25 * np.sin(4 * np.pi * note("D1") * tt)) * np.clip(tt / 2.0, 0, 1)
+            add(low, drone, t0, db(-20))
+            p = t0 + 2.0
+            while p < t1 - 0.2:
+                add(low, sub(note("D1"), 0.5, attack=0.01, release=0.42), p, db(-18))
+                p += 1.0
+            if t1 - t0 > 2.5:
+                pad_layer(pads, max(t0, t1 - 2.0), min(2.0, t1 - t0), CH["Dadd9"], db(-17), cutoff=1200, attack=1.5)
+        elif kind == "strata":
+            arp_run(t0, t1)
+        elif kind == "pulse":
+            groove(t0, t1)
+            arp_run(t0, t1, gain=db(-25), timbre="sunset")
+        elif kind == "break":
+            add(low, sub(note("A#1"), t1 - t0, attack=0.6, release=0.6), t0, db(-24))
+        elif kind == "daylight":
+            groove(t0, t1, back="rim", hats16=False)
+            arp_run(t0, t1, octave_up=1, gain=db(-24), timbre="space")
+            bell_notes = ["A5", "G5", "F5", "E5", "G5"]
+            b = np.ceil(t0 / 2.0) * 2.0
+            k = 0
+            while b < t1 - 0.5:
+                add(fx, reverb(fm_glass(note(bell_notes[k % 5]), index=2.0, decay=1.4), 3.0, 0.35), b, db(-27))
+                b += 2.0
+                k += 1
+        elif kind == "run":
+            groove(t0, t1)
+            arp_run(t0, t1, octave_up=1, gain=db(-25), timbre="sunset")
+        elif kind == "logo":
+            add(low, sub(note("D1"), t1 - t0, attack=0.05, release=2.5), t0, db(-20))
+
+    for h in hits:
+        hit = np.zeros(int(1.6 * SR))
+        th = t_axis(1.6)
+        hit += np.sin(2 * np.pi * np.cumsum(60 * (0.5 ** (th / 1.5))) / SR) * np.exp(-th / 0.9)
+        rng = np.random.default_rng(int(h * 100))
+        hit += one_pole_lowpass(rng.standard_normal(len(th)), 2000) * np.exp(-th / 0.25) * 0.6
+        add(low, hit, h, db(-10))
+    for end, dur in risers:
+        add(fx, riser(dur), end - dur, db(-24))
+
+    duck = np.ones(n)
+    tt = np.arange(int(0.4 * SR)) / SR
+    shape = np.exp(-tt / 0.15)
+    for s in kicks:
+        i = int(s * SR)
+        seg = duck[i:i + len(shape)]
+        np.minimum(seg, 1 - shape[: len(seg)], out=seg)
+    pads *= (1 - (1 - db(-4)) * (1 - duck))[:, None]
+    bass *= (1 - (1 - db(-6)) * (1 - duck))[:, None]
+    d = int(0.375 * SR)
+    echo = np.zeros_like(arp)
+    for k in range(1, 5):
+        shifted = np.zeros_like(arp)
+        shifted[d * k:] = arp[: -d * k]
+        if k % 2:
+            shifted = shifted[:, ::-1]
+        echo += shifted * 0.25 ** k
+    arp += echo
+    pads = reverb(pads.mean(axis=1), 4.5, 0.3) * 0.9 + pads * 0.1
+    mixd = pads + arp + drums + bass + low + fx
+    for s in [h for h in hits] + [e for e, _ in risers]:
+        a, b = int((s - 0.06) * SR), int(s * SR)
+        if 0 < a < b <= n:
+            mixd[a:b] *= np.linspace(1, 0, b - a)[:, None]
+    end = n - int(0.12 * SR)
+    fade = int(0.6 * SR)
+    mixd[end - fade:end] *= np.linspace(1, 0, fade)[:, None]
+    mixd[end:] = 0
+    return mixd

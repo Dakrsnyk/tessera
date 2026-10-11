@@ -97,9 +97,14 @@ def light_on():
     return mix_mono(np.sin(2 * np.pi * 90 * t) * np.exp(-t / 0.02), whoosh(0.9, 5000, 12000, seed=31) * 0.5)
 
 
-def sfx_track():
-    n = int(LENGTH * SR)
-    tr = np.zeros((n, 2))
+def main_events():
+    """The SFX of the main film: (frame, sound, gain dB, pan), on the sync points of the shot list."""
+    ev = []
+
+    def put(_tr, sound, frame, gain=1.0, pan=0.0):
+        ev.append((frame, sound, gain, pan))
+
+    tr = None  # the events are placed later, by sfx_track
     # S1
     put(tr, glass("D6"), 6, db(-20))
     put(tr, whoosh(0.9), 6, db(-30))
@@ -145,7 +150,16 @@ def sfx_track():
     put(tr, glass("D5", index=4.0, decay=1.6, wet=0.3), 3240, db(-15))
     put(tr, glass("A5", index=4.0, decay=1.6, wet=0.3), 3270, db(-15))
     put(tr, glass("A6", index=2.0, decay=1.0, wet=0.35), 3300, db(-27))
-    tr[int(3470 / FPS * SR):] = 0
+    return ev
+
+
+
+
+def sfx_track(events, length_frames):
+    tr = np.zeros((int(length_frames / FPS * SR), 2))
+    for frame, sound, gain, pan in events:
+        put(tr, sound, frame, gain, pan)
+    tr[int((length_frames - 10) / FPS * SR):] = 0
     return tr
 
 
@@ -169,13 +183,13 @@ def voice_chain(x):
     return reverb(x, 0.9, 0.06)
 
 
-def voice_track(vo_dir):
+def voice_track(vo_dir, film="main", length=LENGTH):
     spec = json.load(open(os.path.join(HERE, "vo_spec.json"), encoding="utf-8"))
-    n = int(LENGTH * SR)
+    n = int(length * SR)
     tr = np.zeros(n)
-    for chunk in spec["films"]["main"]["chunks"]:
+    for chunk in spec["films"][film]["chunks"]:
         for line in chunk:
-            audio, sr = sf.read(os.path.join(vo_dir, f"main-{line['id']}.wav"), dtype="float64")
+            audio, sr = sf.read(os.path.join(vo_dir, f"{film}-{line['id']}.wav"), dtype="float64")
             if audio.ndim > 1:
                 audio = audio.mean(axis=1)
             audio = resample_poly(audio, SR, sr) if sr != SR else audio
@@ -224,33 +238,149 @@ def limit(x, ceiling, lookahead=0.005, release=0.08):
     return x * np.minimum(gain, need)[:, None]
 
 
-def main():
-    score_path, vo_dir, out = sys.argv[1:4]
-    stems = sys.argv[sys.argv.index("--stems") + 1] if "--stems" in sys.argv else None
-    music, sr = sf.read(score_path, dtype="float64")
-    assert sr == SR
-    n = int(LENGTH * SR)
-    music = np.pad(music, ((0, max(0, n - len(music))), (0, 0)))[:n]
-    voice = voice_track(vo_dir)
-    sfx = sfx_track()
+def master(music, sfx, voice, breaks=()):
+    """Ducks the music under the voice (−6 dB, −3 dB in `breaks`, the 2–4 kHz dip), sums, −14 LUFS."""
+    n = len(music)
     d = duck_envelope(voice)
-    # −6 dB under the voice, −3 dB in the S4 break (26–32 s), and the 2–4 kHz dip.
     depth = np.full(n, db(-6))
-    depth[int(26 * SR):int(32 * SR)] = db(-3)
+    for a, b in breaks:
+        depth[int(a * SR):int(b * SR)] = db(-3)
     gain = 1 - (1 - depth) * d
     mid = filt(music, "bandpass", [2000, 4000])
     music = music * gain[:, None] - mid * (1 - db(-2.5)) * d[:, None]
     mixdown = music + sfx + voice
     meter = pyln.Meter(SR)
-    # −14 LUFS with peaks under −1 dBFS: gain, then a look-ahead limiter, twice (the limiter costs a little).
+    # −14 LUFS with peaks under −1 dBFS: gain, then a look-ahead limiter, three times (the limiter costs a little).
     for _ in range(3):
         mixdown *= db(-14 - meter.integrated_loudness(mixdown))
         mixdown = limit(mixdown, db(-1.2))
+    return mixdown, music
+
+
+# --- Cut-downs (src/films/cuts.json) --------------------------------------------------------------
+SCENE_LENGTH = {"Opening": 360, "Universes": 600, "Fitness": 600, "LockScreen": 360, "Nutrition": 600, "Essentials": 360, "Gather": 300, "Close": 300}
+SCENE_LENGTH.update({"LineOpen": 270, "MyDay": 660, "FitnessCold": 240, "Build": 360, "StyleCycle": 240, "LockIcon": 180, "FivePhones": 180})
+# Peaks (merge-like hits) of the cut-down scenes, in scene frames.
+SCENE_HITS = {"Gather": [240], "FivePhones": [165]}
+# Universe changes of the scenes that change universes (the strata arp follows them).
+SCENE_UNIVERSES = {
+    "Universes": [(0, "aurora"), (180, "space"), (240, "paper"), (300, "neon"), (360, "minimal"), (420, "sunset")],
+    "LineOpen": [(0, "aurora"), (60, "neon"), (90, "paper"), (120, "sunset")],
+    "Build": [(0, "aurora")],
+    "StyleCycle": [(0, "sunset"), (60, "space"), (90, "neon"), (120, "paper"), (150, "aurora"), (180, "minimal"), (210, "sunset")],
+}
+
+
+def extra_events(scene, props):
+    """SFX of the scenes made for the cut-downs (scene frames), and of props that add a moment."""
+    ev = []
+    if scene == "LineOpen":
+        ev += [(6, glass("D6"), db(-20), 0), (6, whoosh(0.9), db(-30), 0)]
+        ev += [(f, blade_shimmer(f), db(-28), 0) for f in (50, 80, 110)]
+        ev += [(150 - 21, air_pull(), db(-28), 0), (186, thump(55, 40), db(-16), 0), (270, dock_click(), db(-18), 0)]
+    if scene == "MyDay":
+        ev += [(6, glass("D6"), db(-21), 0), (6, whoosh(0.9), db(-31), 0)]
+        ev += [(f, whoosh(0.5, 600, 3000, seed=f), db(-31), 0) for f in (120, 300, 480)]
+        ev += [(624, whoosh(0.9, 2000, 7000, seed=81), db(-30), 0)]
+    if scene == "FitnessCold":
+        ev += [(0, thump(45, 120), db(-16), 0)]
+        ev += [(f, tick(), db(-22), 0) for f in (0, 60, 120, 180)]
+        ev += [(f, blade_shimmer(f), db(-29), 0) for f in (30, 90, 150)]
+    if scene == "Build":
+        ev += [(20, glass("D6"), db(-21), 0), (20, whoosh(0.9), db(-31), 0)]
+        ev += [(f, dock_click(), db(-19), 0) for f in (150, 180, 210, 240)]
+        ev += [(250 + 6 * i, tap_pulse(), db(-26), 0) for i in range(4)]
+    if scene == "StyleCycle":
+        ev += [(-21 + 21, air_pull(), db(-30), 0), (36, thump(55, 40), db(-17), 0)]
+        ev += [(f - 10, blade_shimmer(f), db(-29), 0) for f in (60, 90, 120, 150, 180, 210)]
+        ev += [(240, dock_click(), db(-18), 0)]
+    if scene == "LockIcon":
+        ev += [(8, whoosh(0.5, 800, 4000, seed=91), db(-30), 0)]
+        ev += [(f - 10, blade_shimmer(f), db(-29), 0) for f in (70, 100, 130)]
+    if scene == "FivePhones":
+        ev += [(100, whoosh(0.9, 1500, 6000, seed=95), db(-29), 0)] + [(165 + 4 * i, dock_click(), db(-20), 0) for i in range(4)]
+    if scene == "Fitness" and props.get("tapAt") is not None:
+        t = props["tapAt"]
+        ev += [(t, tap_pulse(), db(-12), 0), (t, glass("A5", index=2.5, decay=1.2, wet=0.3), db(-20), 0), (t + 1, blade_shimmer(t), db(-30), 0)]
+    return ev
+
+
+def load_cuts():
+    for path in (os.path.join(os.path.expanduser("~"), "ardane-tools", "film", "src", "films", "cuts.json"),
+                 os.path.join(HERE, "film", "src", "films", "cuts.json")):
+        if os.path.exists(path):
+            return json.load(open(path, encoding="utf-8"))
+    raise SystemExit("cuts.json not found")
+
+
+def map_scene_frame(seg, local):
+    """Output frame of a scene frame inside a segment (inverse of its remap), or None if outside."""
+    if not (seg["output"][0] <= local <= seg["output"][-1]):
+        return None
+    return seg["at"] + float(np.interp(local, seg["output"], seg["input"]))
+
+
+def cut_plan(film):
+    cuts = load_cuts()
+    plan = cuts["films"][film]
+    starts = cuts["sceneStart"]
+    segs = plan["segments"]
+    events = []
+    by_scene = {}
+    for frame, sound, gain, pan in main_events():
+        scene = next(k for k, v in starts.items() if v <= frame < v + SCENE_LENGTH[k])
+        by_scene.setdefault(scene, []).append((frame - starts[scene], sound, gain, pan))
+    for seg in segs:
+        for local, sound, gain, pan in by_scene.get(seg["scene"], []) + extra_events(seg["scene"], seg.get("props", {})):
+            out = map_scene_frame(seg, local)
+            if out is not None:
+                events.append((int(round(out)), sound, gain, pan))
+    universes = []
+    hits = []
+    for seg in segs:
+        for f, timbre in SCENE_UNIVERSES.get(seg["scene"], []):
+            out = map_scene_frame(seg, f) if f > seg["output"][0] else (seg["at"] if f <= seg["output"][0] else None)
+            if out is not None:
+                universes.append((out / FPS, timbre))
+        for f in SCENE_HITS.get(seg["scene"], []):
+            out = map_scene_frame(seg, f)
+            if out is not None:
+                hits.append(out / FPS)
+    risers = [(seg["at"] / FPS, 1.0) for seg in segs if seg.get("transition") == "split"] + [(h, 1.75) for h in hits]
+    breaks = [(s["start"], s["end"]) for s in plan["music"] if s["type"] == "break"]
+    return plan, events, universes, hits, risers, breaks
+
+
+def main():
+    stems = sys.argv[sys.argv.index("--stems") + 1] if "--stems" in sys.argv else None
+    if sys.argv[1] == "cut":
+        # python mix.py cut <film> <vo dir> <out.wav>
+        from score import score_cut
+        film, vo_dir, out = sys.argv[2:5]
+        plan, events, universes, hits, risers, breaks = cut_plan(film)
+        length = plan["length"] / FPS
+        music = score_cut(length, plan["music"], universes=universes, hits=hits, risers=risers)
+        meter = pyln.Meter(SR)
+        music *= db(-20 - meter.integrated_loudness(music))
+        voice = voice_track(vo_dir, plan["vo"], length)
+        sfx = sfx_track(events, plan["length"])
+        mixdown, music = master(music, sfx, voice, breaks)
+    else:
+        # python mix.py <score.wav> <vo dir> <out.wav>: the main film.
+        score_path, vo_dir, out = sys.argv[1:4]
+        music, sr = sf.read(score_path, dtype="float64")
+        assert sr == SR
+        n = int(LENGTH * SR)
+        music = np.pad(music, ((0, max(0, n - len(music))), (0, 0)))[:n]
+        voice = voice_track(vo_dir)
+        sfx = sfx_track(main_events(), 3480)
+        mixdown, music = master(music, sfx, voice, breaks=[(26, 32)])
     sf.write(out, mixdown.astype(np.float32), SR, subtype="FLOAT")
     if stems:
         os.makedirs(stems, exist_ok=True)
         for name, x in (("music", music), ("sfx", sfx), ("voice", voice)):
             sf.write(os.path.join(stems, f"{name}.wav"), x.astype(np.float32), SR, subtype="FLOAT")
+    meter = pyln.Meter(SR)
     print(f"mix: {len(mixdown) / SR:.2f} s, {meter.integrated_loudness(mixdown):.1f} LUFS, peak {20 * np.log10(np.abs(mixdown).max()):.1f} dBFS")
 
 

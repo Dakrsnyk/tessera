@@ -27,39 +27,39 @@
     {"id": "V2", "text": "Ardane designs them around you.", "start": 3.2, "max": 2.2}],
    [{"id": "V3", "text": "Pick a world. Every widget follows.", "start": 6.2, "max": 2.4}],
    [{"id": "V4", "text": "Train, and it keeps track of every set.", "start": 10.4, "max": 3.2},
-    {"id": "V5", "text": "Tap Set done, right from your Lock Screen.", "start": 13.9, "max": 3.1}],
+    {"id": "V5", "text": "Tap Set done, right from your Lock Screen.", "start": 14.6, "max": 3.1}],
    [{"id": "V6", "text": "Scan a barcode, and see exactly what's left for today.", "start": 18.0, "max": 4.0}],
-   [{"id": "V7", "text": "Ardane. Coming soon to the App Store.", "start": 26.2, "max": 2.7}]
+   [{"id": "V7", "text": "Ardane. Coming soon to the App Store.", "start": 26.9, "max": 2.7}]
   ]},
   "s15": {"chunks": [
    [{"id": "V1", "text": "Your meals. Your workout. What's due. Your week.", "start": 1.0, "max": 4.6, "pause": 0.42}],
    [{"id": "V2", "text": "All of your day, on one screen.", "start": 7.2, "max": 2.8}],
-   [{"id": "V3", "text": "Ardane. Coming soon to the App Store.", "start": 12.2, "max": 2.6}]
+   [{"id": "V3", "text": "Ardane. Coming soon to the App Store.", "start": 12.0, "max": 2.6}]
   ]},
   "s8": {"chunks": [
    [{"id": "V1", "text": "Life's essentials, designed around you.", "start": 1.0, "max": 2.2},
-    {"id": "V2", "text": "Ardane. Coming soon to the App Store.", "start": 5.6, "max": 2.3}]
+    {"id": "V2", "text": "Ardane. Coming soon to the App Store.", "start": 5.5, "max": 2.3}]
   ]},
   "fitness": {"voice": "af_bella", "speed": 1.0, "chunks": [
    [{"id": "V1", "text": "Rest, counted to the second.", "start": 0.3, "max": 2.2},
     {"id": "V2", "text": "Every set, tracked as you lift.", "start": 4.3, "max": 2.4}],
-   [{"id": "V3", "text": "Set done? Tap it right on your Lock Screen.", "start": 8.3, "max": 3.5},
-    {"id": "V4", "text": "And every exercise, shown move by move.", "start": 12.3, "max": 3.0}],
-   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 17.0, "max": 2.6}]
+   [{"id": "V3", "text": "Set done? Tap it right on your Lock Screen.", "start": 10.51, "max": 3.5},
+    {"id": "V4", "text": "And every exercise, shown move by move.", "start": 13.0, "max": 3.0}],
+   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 17.55, "max": 2.6}]
   ]},
   "nutrition": {"chunks": [
    [{"id": "V1", "text": "Scan a barcode.", "start": 3.1, "max": 1.3},
     {"id": "V2", "text": "Or just search.", "start": 5.6, "max": 1.1}],
    [{"id": "V3", "text": "See calories, protein, carbs and fat, at a glance.", "start": 8.6, "max": 3.8},
-    {"id": "V4", "text": "And log your usuals straight from your Home Screen.", "start": 13.2, "max": 3.2}],
-   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 17.2, "max": 2.6}]
+    {"id": "V4", "text": "And log your usuals straight from your Home Screen.", "start": 11.0, "max": 3.2}],
+   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 15.5, "max": 2.6}]
   ]},
   "perso": {"chunks": [
    [{"id": "V1", "text": "Start with a world you love.", "start": 0.3, "max": 2.2},
     {"id": "V2", "text": "Every widget follows your style.", "start": 6.2, "max": 2.2}],
-   [{"id": "V3", "text": "Down to your Lock Screen, and even the app icon.", "start": 14.2, "max": 2.8},
+   [{"id": "V3", "text": "Down to your Lock Screen, and even the app icon.", "start": 15.1, "max": 2.8},
     {"id": "V4", "text": "Make it yours.", "start": 18.6, "max": 1.6}],
-   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 21.2, "max": 2.6}]
+   [{"id": "V5", "text": "Ardane. Coming soon to the App Store.", "start": 21.95, "max": 2.6}]
   ]}
  }
 }

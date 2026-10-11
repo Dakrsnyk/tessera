@@ -13,7 +13,6 @@ import { useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
 
-const HOME = heroHome("crepuscule");
 
 /**
  * Shots 24–25 of the main film (f3180–3479, 53.0–58.0 s), as frames 0–299.
@@ -26,8 +25,15 @@ export const LOGO = { size: 300, cx: AXIS, cy: 700 };
 const SLOT_TOP = LOGO.cy - LOGO.size / 2 + LOGO_GAP.top * LOGO.size;
 const SLOT_HEIGHT = (LOGO_GAP.bottom - LOGO_GAP.top) * LOGO.size;
 
-export const Close: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
+export const Close: React.FC<{ audio?: boolean; home?: string; screenFile?: string; tagline?: string }> = ({
+  audio = true,
+  home = "crepuscule",
+  screenFile,
+  tagline = "Life’s essentials, designed around you.",
+}) => {
   const frame = useFilmFrame();
+  // The screen the phone shows as it turns: a hero Home, or any capture (the 15 s film ends on My Day).
+  const HOME = screenFile ? `kit/${screenFile}` : heroHome(home);
   const images = useImages([HOME]);
   const screen = useCanvasTexture();
   if (images) {
@@ -95,7 +101,7 @@ export const Close: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
         </div>
       </SplitText>
       <SplitText from={170} top={1062} height={56}>
-        <span style={type.tagline}>Life’s essentials, designed around you.</span>
+        <span style={type.tagline}>{tagline}</span>
       </SplitText>
 
       <Grain />

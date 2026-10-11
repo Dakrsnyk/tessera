@@ -15,14 +15,30 @@ import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
 
 /** Local frame 0 = f1920 of the main film (32.0 s): the light snaps on. */
-const U = "crepuscule";
-const LOCK = k("lock-crepuscule.png");
-const SEARCH = k("nut-1-dark.png");
-const CHROME = k("scan-chrome-dark.png");
-const SHEET = k("nut-2-dark.png");
-const BEFORE = k("nut-0-dark.png");
-const AFTER = k("nut-3-dark.png");
-const FILES = [heroHome(U), LOCK, SEARCH, CHROME, SHEET, BEFORE, AFTER];
+/** The captures of each look: dark (the main film) or light (the Nutrition film, Concept §6.5). */
+const LOOKS = {
+  dark: {
+    home: heroHome("crepuscule"),
+    lock: k("lock-crepuscule.png"),
+    search: k("nut-1-dark.png"),
+    chrome: k("scan-chrome-dark.png"),
+    sheet: k("nut-2-dark.png"),
+    before: k("nut-0-dark.png"),
+    after: k("nut-3-dark.png"),
+    card: "#1E1A19",
+  },
+  light: {
+    home: heroHome("light"),
+    lock: k("lock-etudes.png"),
+    search: k("nut-1.png"),
+    chrome: k("scan-chrome-light.png"),
+    sheet: k("nut-2.png"),
+    before: k("nut-0.png"),
+    after: k("nut-3.png"),
+    card: "#FFFFFF",
+  },
+};
+type Look = (typeof LOOKS)["dark"];
 const MACROS = HERO_WIDGETS[0].rect;
 /** Points of the captures (px): the « Scanner » pill, the aiming square, « Enregistrer ». */
 const PILL = { x: 983, y: 288, w: 234, h: 71 };
@@ -106,7 +122,10 @@ const cameraAt = (f: number) => {
   return cam;
 };
 
-export const Nutrition: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
+export const Nutrition: React.FC<{ audio?: boolean; look?: "dark" | "light" }> = ({ audio = true, look = "dark" }) => {
+  const L = LOOKS[look];
+  const { home: HOME, lock: LOCK, search: SEARCH, chrome: CHROME, sheet: SHEET } = L;
+  const FILES = [HOME, LOCK, SEARCH, CHROME, SHEET, L.before, L.after];
   const frame = useFilmFrame();
   const fonts = useFontsReady();
   const images = useImages(FILES);
@@ -123,11 +142,11 @@ export const Nutrition: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
     const unlock = interpolate(frame, [110, 137], [0, 1], { ...clamp, easing: Easing.bezier(0.3, 0, 0.1, 1) });
     // Home (zooming in slightly as the Lock Screen leaves), then the app opening from the widget (180–207).
     const open = interpolate(frame, [180, 207], [0, 1], { ...clamp, easing: Easing.bezier(0.3, 0, 0.1, 1) });
-    if (open < 1) {
+    if (open < 1 || frame < 215) {
       const z = 0.94 + 0.06 * unlock;
       ctx.fillStyle = "#000";
       ctx.fillRect(0, 0, 1206, 2622);
-      ctx.drawImage(images[heroHome(U)], 603 - 603 * z, 1311 - 1311 * z, 1206 * z, 2622 * z);
+      ctx.drawImage(images[HOME], 603 - 603 * z, 1311 - 1311 * z, 1206 * z, 2622 * z);
       if (unlock < 1) ctx.drawImage(images[LOCK], 0, -2622 * unlock);
       // Tap pulse on « Scanner » (f2070 = local 150).
       const ring = interpolate(frame, [150, 168], [0, 1], { ...clamp, easing: ease.split });
@@ -152,7 +171,9 @@ export const Nutrition: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       ctx.beginPath();
       ctx.roundRect(...r, 60 * (1 - open) + 10);
       ctx.clip();
+      ctx.globalAlpha = interpolate(open, [0, 0.35], [0, 1], clamp);
       ctx.drawImage(images[SEARCH], ...r);
+      ctx.globalAlpha = 1;
       ctx.restore();
       const slide = interpolate(frame, [207, 235], [1, 0], { ...clamp, easing: Easing.bezier(0.2, 0.9, 0.25, 1) });
       if (frame >= 207) {
@@ -207,7 +228,7 @@ export const Nutrition: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
     const s = 940 / 1206;
     return { x: (W - 940) / 2, y: 40, s };
   })();
-  const lift = interpolate(frame, [330, 366], [0, 1], { ...clamp, easing: ease.lift });
+  const lift = interpolate(frame, [330, 366], [0, 1], { ...clamp, easing: ease.lift }) + interpolate(frame, [366, 420], [0, 0.015], clamp);
   // Frontal phone centred on the target: capture px → frame px is a plain scale.
   const glassS = (H / (2 * cam.position.distanceTo(cam.target) * (18 / cam.lens))) * (SCREEN.w / 1206);
   const glassRect = { x: AXIS - 603 * glassS, y: H / 2 - (1311 - SHEET_TOP) * glassS, s: glassS };
@@ -224,6 +245,7 @@ export const Nutrition: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
   const split = interpolate(frame, [420, 450], [0, 1], { ...clamp, easing: ease.chapter });
   const blade = interpolate(frame, [450, 470], [0, 1], { ...clamp, easing: Easing.bezier(0.45, 0, 0.55, 1) });
   const fan = interpolate(frame, [420, 452], [0, 1], { ...clamp, easing: ease.lift });
+  const float = interpolate(frame, [452, 600], [0, 1], clamp);
 
   const sheetLayer = (half?: "left" | "right") => (
     <div
@@ -303,7 +325,7 @@ export const Nutrition: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       <Callout label="Scanner" at={[pillAt[0], pillAt[1] - 70]} labelY={pillAt[1] - 190} from={120} to={174} />
 
       {/* Shot 18: the numbers, before → after. */}
-      {frame >= 420 && <Numbers fan={fan} blade={blade} frame={frame} />}
+      {frame >= 420 && <Numbers fan={fan} blade={blade} frame={frame} float={float} look={L} />}
       {frame >= 450 && frame < 470 && <Seam x={W * blade} top={420} height={1100} spread={0.6} />}
 
       {frame >= 330 && frame < 420 && sheetLayer()}
@@ -329,7 +351,7 @@ const CROPS: { name: string; src: Rect; at: [number, number]; scale: number; dep
   { name: "Fat", src: [780, 1228, 330, 184], at: [640, 1140], scale: 1.0, depth: 3 },
 ];
 
-const Crop: React.FC<{ file: string; c: (typeof CROPS)[number]; fan: number }> = ({ file, c, fan }) => {
+const Crop: React.FC<{ file: string; c: (typeof CROPS)[number]; fan: number; float?: number; card: string }> = ({ file, c, fan, float = 0, card }) => {
   const [sx, sy, sw, sh] = c.src;
   const w = sw * c.scale;
   const h = sh * c.scale;
@@ -338,12 +360,12 @@ const Crop: React.FC<{ file: string; c: (typeof CROPS)[number]; fan: number }> =
       style={{
         position: "absolute",
         left: c.at[0],
-        top: c.at[1] + (1 - fan) * 120 * (c.depth + 1),
+        top: c.at[1] + (1 - fan) * 120 * (c.depth + 1) - float * 14 * (c.depth + 1),
         width: w,
         height: h,
         overflow: "hidden",
         borderRadius: 28,
-        background: "#1E1A19",
+        background: card,
         boxShadow: "0 30px 70px rgba(0,0,0,0.55)",
         opacity: fan,
         filter: `blur(${c.depth * 0.6}px) brightness(${1 - c.depth * 0.06})`,
@@ -354,23 +376,24 @@ const Crop: React.FC<{ file: string; c: (typeof CROPS)[number]; fan: number }> =
   );
 };
 
-const Numbers: React.FC<{ fan: number; blade: number; frame: number }> = ({ fan, blade, frame }) => (
+const Numbers: React.FC<{ fan: number; blade: number; frame: number; float: number; look: Look }> = ({ fan, blade, frame, float, look }) => (
   <AbsoluteFill>
     <AbsoluteFill
       style={{ background: `radial-gradient(ellipse 800px 900px at ${AXIS}px ${H * 0.45}px, #3A2618, transparent 75%)`, opacity: 0.06 }}
     />
     {CROPS.map((c) => (
-      <Crop key={c.name} file={BEFORE} c={c} fan={fan} />
+      <Crop key={c.name} file={look.before} c={c} fan={fan} float={float} card={look.card} />
     ))}
     <AbsoluteFill style={{ clipPath: `inset(0 ${W * (1 - blade)}px 0 0)` }}>
       {CROPS.map((c) => (
-        <Crop key={c.name} file={AFTER} c={c} fan={fan} />
+        <Crop key={c.name} file={look.after} c={c} fan={fan} float={float} card={look.card} />
       ))}
     </AbsoluteFill>
     {CROPS.map((c, i) => {
       const w = c.src[2] * c.scale;
       const x = c.at[0] + w / 2;
-      return <Callout key={c.name} label={c.name} at={[x, c.at[1] - 10]} labelY={c.at[1] - 70} from={456 + 6 * i} to={576} />;
+      const lift = float * 14 * (c.depth + 1);
+      return <Callout key={c.name} label={c.name} at={[x, c.at[1] - 10 - lift]} labelY={c.at[1] - 70 - lift} from={456 + 6 * i} to={576} />;
     })}
     {void frame}
   </AbsoluteFill>
