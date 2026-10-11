@@ -3,6 +3,18 @@
  "speed": 0.95,
  "brand": {"Ardane": "ɑɹdˈɑn"},
  "films": {
+  "hook": {"chunks": [
+   [{"id": "K1", "text": "Organize your life with Ardane.", "start": 0, "max": 2.4}],
+   [{"id": "K2", "text": "Every essential of your day, designed around you.", "start": 0, "max": 3.0}],
+   [{"id": "KN", "text": "Organize your meals with Ardane.", "start": 0, "max": 2.4}],
+   [{"id": "KP", "text": "Your phone. Your style. Meet Ardane.", "start": 0, "max": 2.8}]]},
+  "hook_bella": {"voice": "af_bella", "speed": 1.0, "chunks": [
+   [{"id": "KF", "text": "Organize your training with Ardane.", "start": 0, "max": 2.4}]]},
+  "design": {"chunks": [
+   [{"id": "D1", "text": "And design every widget, exactly your way.", "start": 0, "max": 3.0}],
+   [{"id": "D2", "text": "Design it your way.", "start": 0, "max": 1.6}]]},
+  "design_bella": {"voice": "af_bella", "speed": 1.0, "chunks": [
+   [{"id": "D2", "text": "Design it your way.", "start": 0, "max": 1.6}]]},
   "main": {"chunks": [
    [{"id": "V1", "text": "Every day runs on a few essentials.", "start": 0.6, "max": 2.8},
     {"id": "V2", "text": "They deserve an interface designed around you.", "start": 3.9, "max": 2.9}],

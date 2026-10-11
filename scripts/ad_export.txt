@@ -249,3 +249,9 @@ widget quickFood-m-paper kind=quickFood family=medium scale=3 theme=paper
 home home-hero-light setup=etudes rows=macros.medium|quickFood.medium|budgetLeft.small+priorities.small theme=light
 setupwidgets setup-hero-light setup=etudes rows=macros.medium|quickFood.medium|budgetLeft.small+priorities.small theme=light
 lock lock-etudes setup=etudes scale=3
+# Personnaliser l'ajout rapide (film Nutrition) : le même widget dans d'autres styles.
+widget quickFood-m-aurora kind=quickFood family=medium scale=3 theme=aurora
+widget quickFood-m-neon kind=quickFood family=medium scale=3 theme=neon scheme=dark
+widget quickFood-m-glass kind=quickFood family=medium scale=3 theme=glass
+widget quickFood-m-luxury kind=quickFood family=medium scale=3 theme=luxury
+widget quickFood-m-space kind=quickFood family=medium scale=3 theme=space scheme=dark

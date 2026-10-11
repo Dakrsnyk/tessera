@@ -1,6 +1,7 @@
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, interpolate } from "remotion";
+import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { FilmAudio } from "../components/FilmAudio";
+import { hookSeamMask, HookText } from "../components/Hook";
 import { Grain } from "../components/Grain";
 import { CameraRig, lensFov, PHONE, Phone3D, StudioEnvironment } from "../components/Phone3D";
 import { Seam } from "../components/Seam";
@@ -24,7 +25,10 @@ const TINT = "#43576A";
  *     (Aurora); a light sweep crosses the glass at f180. V2 starts at f234.
  * 3 · f240–359: push-in to 1.10×, rising 30 px; « Designed around you. » splits from the seam.
  */
-export const Opening: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
+/** `hook`: the opening line of type, timed in the film's own frames (the opening's turn may be held under it). */
+export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: number } }> = ({ audio = true, hook }) => {
+  const outFrame = useCurrentFrame();
+  const hookOn = hook ? interpolate(outFrame, [6, 14, hook.to + 6, hook.to + 26], [0, 1, 1, 0], clamp) : 0;
   const frame = useFilmFrame();
   const images = useImages(FILES);
   const { ctx, texture: screen } = useCanvasTexture();
@@ -78,7 +82,10 @@ export const Opening: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
           <Phone3D yaw={yaw} screen={screen} screenOn={screenOn} sweep={sweep} />
         </ThreeCanvas>
       )}
-      <Seam x={AXIS} top={H / 2 - phoneHeightPx * 0.48} height={phoneHeightPx * 0.96} intensity={ignite * edgeOn} />
+      <AbsoluteFill style={hook ? { maskImage: hookSeamMask(hook.lines.length, hookOn), WebkitMaskImage: hookSeamMask(hook.lines.length, hookOn) } : undefined}>
+        <Seam x={AXIS} top={H / 2 - phoneHeightPx * 0.48} height={phoneHeightPx * 0.96} intensity={ignite * edgeOn} />
+      </AbsoluteFill>
+      {hook && <HookText raw lines={hook.lines} from={8} to={hook.to} />}
       <AbsoluteFill
         style={{
           background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.72) 72%, rgba(0,0,0,0.85) 100%)",

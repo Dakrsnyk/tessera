@@ -1,4 +1,4 @@
-import { interpolate } from "remotion";
+import { interpolate, useCurrentFrame } from "remotion";
 import { AXIS, C, clamp, ease, W } from "../lib/brand";
 import { useFilmFrame } from "../lib/time";
 
@@ -13,9 +13,13 @@ export const SplitText: React.FC<{
   top: number;
   height: number;
   exitAt?: number;
+  /** Time in the film's own frames (not the scene's remapped ones): the hook over a remapped opening. */
+  raw?: boolean;
   children: React.ReactNode;
-}> = ({ from, top, height, exitAt, children }) => {
-  const frame = useFilmFrame();
+}> = ({ from, top, height, exitAt, raw, children }) => {
+  const sceneFrame = useFilmFrame();
+  const rawFrame = useCurrentFrame();
+  const frame = raw ? rawFrame : sceneFrame;
   const local = frame - from;
   if (local < 0) return null;
 

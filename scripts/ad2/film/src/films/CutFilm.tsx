@@ -15,12 +15,14 @@ import { LockScreen } from "../scenes/LockScreen";
 import { Nutrition } from "../scenes/Nutrition";
 import { Opening } from "../scenes/Opening";
 import { Build, FivePhones, LockIcon, StyleCycle } from "../scenes/Perso";
+import { Studio } from "../scenes/Studio";
 import { Universes } from "../scenes/Universes";
+import { HookCard } from "../components/Hook";
 import { WidgetLift } from "../scenes/WidgetLift";
 import cuts from "./cuts.json";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const SCENES: Record<string, React.FC<any>> = { Opening, Universes, Fitness, LockScreen, Nutrition, Essentials, Gather, Close, LineOpen, MyDay, FitnessCold, Build, StyleCycle, LockIcon, FivePhones, WidgetLift };
+const SCENES: Record<string, React.FC<any>> = { Opening, Universes, Fitness, LockScreen, Nutrition, Essentials, Gather, Close, LineOpen, MyDay, FitnessCold, Build, StyleCycle, LockIcon, FivePhones, WidgetLift, Studio, HookCard };
 
 type Segment = { scene: string; at: number; input: number[]; output: number[]; transition?: string; props?: Record<string, unknown> };
 export type FilmId = keyof typeof cuts.films;

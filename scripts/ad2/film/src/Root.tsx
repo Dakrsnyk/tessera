@@ -10,6 +10,7 @@ import { MAIN_LENGTH, MainFilm } from "./scenes/MainFilm";
 import { CutFilm, filmLength } from "./films/CutFilm";
 import { Nutrition } from "./scenes/Nutrition";
 import { Opening } from "./scenes/Opening";
+import { Studio } from "./scenes/Studio";
 import { Universes } from "./scenes/Universes";
 import { PhoneTest } from "./scenes/PhoneTest";
 
@@ -27,7 +28,8 @@ export const RemotionRoot: React.FC = () => {
         <Composition id="Opening" component={Opening} durationInFrames={360} fps={FPS} width={W} height={H} />
         {/* Shots 4–6: f360–959. */}
         <Composition id="Universes" component={Universes} durationInFrames={600} fps={FPS} width={W} height={H} />
-        {/* Shots 7–10: f960–1559. */}
+        <Composition id="Studio" component={Studio} durationInFrames={360} fps={FPS} width={W} height={H} />
+      {/* Shots 7–10: f960–1559. */}
         <Composition id="Fitness" component={Fitness} durationInFrames={600} fps={FPS} width={W} height={H} />
         {/* Shots 11–13: f1560–1919. */}
         <Composition id="LockScreen" component={LockScreen} durationInFrames={360} fps={FPS} width={W} height={H} />

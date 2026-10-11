@@ -576,7 +576,7 @@ jobs:
           # The main film shows the app in Dark appearance, floating in black: its scenes again, in dark
           # (shots <name>-dark), from the same demo data as the light ones.
           fresh_install
-          for scene in testAdFitnessSession testAdNutritionAdd testAdPlanning testAdHabits testAdExerciseLibrary; do
+          for scene in testAdFitnessSession testAdNutritionAdd testAdPlanning testAdHabits testAdExerciseLibrary testAdStudio; do
             run_scene "$scene" dark
           done
           python3 - <<'PY' || true
