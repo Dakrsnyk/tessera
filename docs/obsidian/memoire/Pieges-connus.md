@@ -31,6 +31,6 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 - Le vault Obsidian est ce même dossier : ne pas toucher à `.obsidian/` (réglages de l'utilisateur, ignoré par Git).
 
 ## Obsidian
-- Obsidian réécrit un `.canvas` à son format quand on l'ouvre : le script écrit déjà ce format, mais si GitHub Desktop montre des canvas modifiés, « Discard all changes » avant « Pull origin ».
+- Obsidian réécrit un `.canvas` (ou les fins de ligne d'une note) quand on l'ouvre. Si GitHub Desktop montre ces fichiers modifiés : clic droit sur **ces fichiers seulement** → « Discard changes ». **Jamais « Discard all changes » pendant ou après une session Claude locale** : ça efface aussi son travail pas encore commité (le 2026-10-11, `synth.py` et des changements de `vo.py` ont été perdus puis réécrits). Dans le doute, demander à Claude de commiter d'abord.
 - Les liens entre notes se résolvent par nom de fichier : deux notes du même nom (ou une note nommée comme un vrai fichier `.json` du dépôt) rendent le lien ambigu. Le guide est lié par `[[docs/obsidian/README|Guide]]`.
 - Vue graphique en boule : force centrale trop forte (≈ 0,3 suffit) et filtre `tag:#ardane` oublié.

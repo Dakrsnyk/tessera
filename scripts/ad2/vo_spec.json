@@ -32,7 +32,7 @@
    [{"id": "V7", "text": "Ardane. Coming soon to the App Store.", "start": 26.2, "max": 2.7}]
   ]},
   "s15": {"chunks": [
-   [{"id": "V1", "text": "Your meals. Your workout. What's due. Your week.", "start": 1.0, "max": 4.6}],
+   [{"id": "V1", "text": "Your meals. Your workout. What's due. Your week.", "start": 1.0, "max": 4.6, "pause": 0.42}],
    [{"id": "V2", "text": "All of your day, on one screen.", "start": 7.2, "max": 2.8}],
    [{"id": "V3", "text": "Ardane. Coming soon to the App Store.", "start": 12.2, "max": 2.6}]
   ]},

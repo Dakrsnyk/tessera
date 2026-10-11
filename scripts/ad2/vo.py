@@ -7,7 +7,7 @@ one text) and cut back into lines at the chunk's longest silences. Each line is 
     venv312/bin/python -I vo.py <spec.json> <film> <out dir>
     Windows: ~/ardane-tools/venv/Scripts/python -I -X utf8 vo.py ...  (see scripts/ad2/README.md)
 """
-import json, os, re, sys
+import itertools, json, os, re, sys
 import numpy as np
 import soundfile as sf
 
@@ -67,6 +67,37 @@ def trim(audio, floor_db=-50, pad_ms=30):
     return audio[a:b]
 
 
+def pick_cuts(audio, weights):
+    """Silent runs that split audio into len(weights) parts: the pauses nearest to where the text
+    says the boundaries are (characters read at an even pace), a long pause winning over a near one
+    only when it is much longer. Inside a line (« Set done? Tap it… ») a pause can be longer than
+    the one between lines: the longest pauses alone cut at the wrong place."""
+    runs = [r for r in silences(audio) if r[0] > SR * 0.3 and r[1] < len(audio) - SR * 0.3]
+    k = len(weights) - 1
+    if len(runs) < k:
+        return None
+    total, acc, expected = sum(weights), 0, []
+    for w in weights[:-1]:
+        acc += w
+        expected.append(len(audio) * acc / total)
+    best, best_score = None, -1
+    for combo in itertools.combinations(runs, k):
+        score = sum((b - a) / (1 + ((a + b) / 2 - e) ** 2 / (0.12 * len(audio)) ** 2)
+                    for (a, b), e in zip(combo, expected))
+        if score > best_score:
+            best, best_score = combo, score
+    return list(best)
+
+
+def beats(text, pause):
+    """A line made of short beats (« Your meals. Your workout. What's due. Your week. »): Kokoro reads
+    it in one breath, with no pause to lengthen, so each sentence is synthesised alone and the beats
+    are joined by `pause` s of silence (one beat per card on screen)."""
+    sentences = [t for t in re.split(r"(?<=[.?!])\s+", text) if t]
+    gap = np.zeros(int(pause * SR), dtype=np.float32)
+    return np.concatenate([x for t in sentences for x in (trim(synth(t)), gap)][:-1])
+
+
 lines_out = []
 for chunk in cfg["chunks"]:
     ids = [line["id"] for line in chunk]
@@ -74,17 +105,15 @@ for chunk in cfg["chunks"]:
     audio = synth(text)
     pieces = [audio]
     if len(chunk) > 1:
-        runs = [r for r in silences(audio) if r[0] > SR * 0.3 and r[1] < len(audio) - SR * 0.3]
-        # The len-1 longest pauses, back in time order, are the cuts between lines.
-        cuts = sorted(sorted(runs, key=lambda r: r[1] - r[0], reverse=True)[:len(chunk) - 1])
-        if len(cuts) == len(chunk) - 1:
+        cuts = pick_cuts(audio, [len(line["text"]) for line in chunk])
+        if cuts:
             bounds = [0] + [(a + b) // 2 for a, b in cuts] + [len(audio)]
             pieces = [audio[bounds[i]:bounds[i + 1]] for i in range(len(chunk))]
         else:
             print("chunk", ids, "could not be split: synthesising its lines one by one")
             pieces = [synth(line["text"]) for line in chunk]
     for line, piece in zip(chunk, pieces):
-        piece = trim(piece)
+        piece = beats(line["text"], line["pause"]) if line.get("pause") else trim(piece)
         # Fades of 8 ms: no click at the cut.
         n = int(0.008 * SR)
         piece[:n] *= np.linspace(0, 1, n)

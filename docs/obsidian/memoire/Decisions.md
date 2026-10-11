@@ -17,6 +17,7 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - Direction retenue : [[Concept-THE-OPENING]] (la fente du « A » d'Ardane comme lumière et comme transition).
 - Les enregistrements vidéo du simulateur ne tournent qu'à 8–14 i/s : le mouvement est reconstruit à 60 i/s à partir d'images fixes réelles.
 - 2026-10-11 : la campagne se fait en local sur le PC Windows (les rendus survivent à la session) ; outils hors du dépôt dans `~/ardane-tools`.
+- 2026-10-11 : moteur du film = Remotion (comme le prévoit le concept), plutôt que CSS 3D + Playwright fait main : chronologie à l'image près, rendu parallèle, mixage audio, aperçu dans le navigateur. Licence gratuite jusqu'à 3 personnes.
 - Voix : Kokoro-82M (licence Apache-2.0). Musique : Mixkit (licence gratuite, publicité en ligne permise). Runway n'est pas utilisé : la version gratuite (125 crédits une seule fois) met un filigrane.
 
 ## Outillage
