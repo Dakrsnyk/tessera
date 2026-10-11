@@ -48,6 +48,9 @@ jobs:
       # [stack] runs the Home and mini-app UI tests with the iPhone's 1 MB main-thread stack, first
       # unoptimized (like the old test IPA), then optimized (like the IPA now), and reports both.
       STACK: ${{ contains(github.event.head_commit.message, '[stack]') }}
+      # [video] films the scenes of the promo videos (UITests/PromoVideoUITests) on the simulator, one
+      # recording per scene, in report/videos (no tests, no IPA).
+      VIDEO: ${{ contains(github.event.head_commit.message, '[video]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -63,7 +66,7 @@ jobs:
         run: python3 scripts/check_swift.py
 
       - name: Boot a simulator early
-        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true' || env.STACK == 'true'
+        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true' || env.STACK == 'true' || env.VIDEO == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
@@ -95,7 +98,7 @@ jobs:
 
       - name: Build for iPhone (unsigned)
         id: device
-        if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true' && env.MARKETING != 'true'
+        if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true' && env.MARKETING != 'true' && env.VIDEO != 'true'
         run: |
           set -o pipefail
           # Optimized (-O) like an App Store build: an unoptimized SwiftUI app can overflow the iPhone's
@@ -446,6 +449,37 @@ jobs:
           shoot info-fresh info-fresh top light
           WAIT=7 shoot app-nutrition-fresh app-nutrition-fresh top light
 
+      - name: Promo videos
+        id: videos
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.VIDEO == 'true'
+        continue-on-error: true
+        timeout-minutes: 45
+        run: |
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
+          xcrun simctl ui "$DEVICE" appearance light || true
+          mkdir -p videos
+          # One scene: the test starts, the recording starts with it and stops when it ends.
+          record() {
+            LOG="videos/$1.log"
+            xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+              -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage fr -testRegion CA \
+              -only-testing:TesseraUITests/PromoVideoUITests/$1 ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > "$LOG" 2>&1 &
+            XPID=$!
+            until grep -q "$1\]' started" "$LOG" || ! kill -0 $XPID 2>/dev/null; do sleep 0.2; done
+            xcrun simctl io "$DEVICE" recordVideo --codec=h264 --force "videos/$1.mp4" > "videos/$1.rec.log" 2>&1 &
+            RPID=$!
+            until grep -qE "$1\]' (passed|failed)" "$LOG" || ! kill -0 $XPID 2>/dev/null; do sleep 0.2; done
+            kill -INT $RPID 2>/dev/null || true
+            wait $RPID 2>/dev/null || true
+            wait $XPID 2>/dev/null || true
+            ls -lh "videos/$1.mp4" 2>/dev/null || echo "no video for $1"
+          }
+          for scene in testVideoMonQuotidien testVideoPlanning testVideoFitness testVideoNutrition testVideoStudio testVideoFinances testVideoStore; do
+            record $scene
+          done
+          ls -lh videos
+
       - name: App Store screenshots
         id: marketing
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.MARKETING == 'true'
@@ -537,6 +571,8 @@ jobs:
             echo "screenshots: ${{ steps.shots.outcome }}"
             echo "release: ${{ steps.release.outcome }}"
             echo "marketing: ${{ steps.marketing.outcome }}"
+            echo "videos: ${{ steps.videos.outcome }}"
+            ls -l videos/*.mp4 2>/dev/null || true
             cat release-check.txt 2>/dev/null || true
             echo "---- errors ----"
             python3 scripts/check_swift.py 2>&1 | tail -40 || true
@@ -563,6 +599,7 @@ jobs:
           } > report/report.txt
           [ -d shots ] && cp shots/*.jpg report/ 2>/dev/null || true
           [ -d marketing ] && mkdir -p report/marketing && cp marketing/* report/marketing/ 2>/dev/null || true
+          [ -d videos ] && mkdir -p report/videos && cp videos/*.mp4 videos/*.log report/videos/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
           [ -f Tessera.ipa ] && cp Tessera.ipa report/ || true
