@@ -14,7 +14,7 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.dakrsnyk.tessera</string>
+			<string>com.dakrsnyk.ardane</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>tessera</string>

@@ -7,9 +7,9 @@ import UIKit
 /// `IconPreview-<asset>`. They stay light in Dark Mode. They are drawn by scripts/app_icons.js
 /// (the glass ones keep the colors of the former Tessera icons).
 struct AppIconChoice: Identifiable, Hashable {
-    /// The icon set; « ArdaneIcon » is the main icon. The sets were called « AppIcon… » until build 176:
-    /// (renamed hoping iOS would drop the Tessera logo it keeps for notifications: it didn't, that cache
-    /// follows the bundle identifier and only a reinstall clears it).
+    /// The icon set; « ArdaneIcon » is the main icon (« AppIcon… » until build 176). iOS 18.1+ keeps the
+    /// icon of an app's notifications by bundle identifier, even across a reinstall: hence the identifier
+    /// com.dakrsnyk.ardane (2026-10-12), which no iPhone ever saw with the Tessera logo.
     let asset: String
     let title: String
 
@@ -59,16 +59,6 @@ enum AppIconSwitcher {
         } catch {
             return false
         }
-    }
-
-    /// An icon picked before the sets were renamed (« AppIcon-Jade ») no longer exists: the same one under
-    /// its new name (« ArdaneIcon-Jade »). Once; iOS shows its message.
-    static func migrateRenamedIcon() {
-        let app = UIApplication.shared
-        guard let old = app.alternateIconName, old.hasPrefix("AppIcon-"), app.supportsAlternateIcons else { return }
-        let name = "ArdaneIcon-" + old.dropFirst("AppIcon-".count)
-        let target = AppIconChoice.all.contains { $0.asset == name } ? name : nil
-        Task { try? await app.setAlternateIconName(target) }
     }
 }
 

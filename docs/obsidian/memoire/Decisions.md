@@ -25,6 +25,7 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 
 ## Confidentialité
 - 2026-10-11 : politique v2.0 (source `docs/legal/privacy.html`, publiée sur l'artifact de `PremiumConfiguration.privacyURL`, texte français copié dans `PRIVACY.md`). Responsable : le développeur indépendant établi au Québec (à remplacer par l'entreprise Ardane quand elle existera) ; contact `support.ardane@gmail.com` (`AppInfo.supportEmail`). Engagements à tenir : réponse sous 30 jours, courriels gardés au plus 24 mois, avis dans l'app avant un changement important. Toute nouvelle donnée ou nouveau service externe doit être ajouté à la politique et au manifeste de confidentialité.
+- 2026-10-12 : identifiant de l'app `com.dakrsnyk.ardane` (widgets `.widgets`, tests `.tests`/`.uitests`) au lieu de `com.dakrsnyk.tessera` : iOS 18.1+ gardait l'icône Tessera des notifications par identifiant, même après réinstallation. Gardés : App Group `group.com.dakrsnyk.tessera`, produits in-app `com.dakrsnyk.tessera.premium…`, schéma `tessera://`, sous-système de log des widgets.
 
 ## Outillage
 - La CI est pilotée par des tags dans le message de commit (voir `CLAUDE.md`) ; `[check]` d'abord, finir une série par `[unit]` pour avoir une version à installer.

@@ -67,7 +67,7 @@ Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS
 |---|---|---|
 | Compte **Apple Developer** (99 $ US/an) | developer.apple.com | Avant TestFlight et l'App Store |
 | **Team** de signature des 2 cibles | Xcode > Signing & Capabilities | Première ouverture sur Mac |
-| Identifiants (si tu changes de préfixe) | `PRODUCT_BUNDLE_IDENTIFIER` des 2 cibles, `APP_GROUP_ID`, fichiers `Config/*.entitlements` | Si `com.dakrsnyk.tessera` est déjà pris |
+| Identifiants (si tu changes de préfixe) | `PRODUCT_BUNDLE_IDENTIFIER` des 2 cibles, `APP_GROUP_ID`, fichiers `Config/*.entitlements` | Si `com.dakrsnyk.ardane` est déjà pris (App Group : `group.com.dakrsnyk.tessera`) |
 | Fiche de l'app | App Store Connect > Mes apps | Avant la soumission |
 | Contrats, banque, fiscalité | App Store Connect > Accords | Obligatoire pour vendre |
 | **Abonnements** : groupe « Ardane Premium » avec `com.dakrsnyk.tessera.premium.monthly` (1 mois) et `…premium.yearly` (1 an, essai gratuit 1 semaine) | App Store Connect > Abonnements | Avant la soumission |
