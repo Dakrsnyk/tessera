@@ -17,7 +17,7 @@ Retour : [[Memoire]]
 ## Fait
 
 - [x] Politique de confidentialité conforme (Loi 25, LPRPDE, RGPD, LGPD, APPI, CCPA/CPRA), en français et en anglais ; adresse de support réelle dans l'app (fait le 2026-10-11).
-- [x] Notifications avec l'ancien logo Tessera : rien dans le code (icône principale Ardane depuis la version de test 157) ; cache d'icônes d'iOS → redémarrer l'iPhone (diagnostic du 2026-10-11). Toujours là après redémarrage : jeux d'icônes renommés AppIcon… → ArdaneIcon… (2026-10-11) pour qu'iOS oublie l'icône en cache.
+- [x] Notifications avec l'ancien logo Tessera : rien dans le code (icône principale Ardane depuis la version de test 157) ; cache d'icônes d'iOS → redémarrer l'iPhone (diagnostic du 2026-10-11). Toujours là après redémarrage : jeux d'icônes renommés AppIcon… → ArdaneIcon… (2026-10-11) pour qu'iOS oublie l'icône en cache. Sans effet (2026-10-12) : rien de l'ancien logo dans l'app ni dans l'IPA (vérifié) ; il faut supprimer et réinstaller l'app (sauvegarde puis restauration).
 
 - [x] Pub : montrer dans tous les films (principal compris) qu'on peut personnaliser son widget à son goût — le point le plus important après l'utilité (fait le 2026-10-11 : séquence Studio, styles qui changent sur les widgets soulevés).
 - [x] Pub : commencer chaque film par une phrase d'accroche (« Organize your life with Ardane », etc.) (fait le 2026-10-11).

@@ -8,7 +8,8 @@ import UIKit
 /// (the glass ones keep the colors of the former Tessera icons).
 struct AppIconChoice: Identifiable, Hashable {
     /// The icon set; « ArdaneIcon » is the main icon. The sets were called « AppIcon… » until build 176:
-    /// iOS keeps the pictures of notifications by icon name, so the new names drop the Tessera logo it cached.
+    /// (renamed hoping iOS would drop the Tessera logo it keeps for notifications: it didn't, that cache
+    /// follows the bundle identifier and only a reinstall clears it).
     let asset: String
     let title: String
 
