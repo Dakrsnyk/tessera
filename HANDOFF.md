@@ -26,7 +26,7 @@ Fait :
 
 ## App Store (2026-10-09)
 - Manifeste de confidentialité `Shared/PrivacyInfo.xcprivacy` (copié dans l'app et l'extension) : UserDefaults (CA92.1, 1C8F.1), horodatage de fichier (C617.1). `check_swift.py` refuse une API « required reason » non déclarée ; le rapport CI affiche `privacy manifest: app yes, widget yes`.
-- Politique : PRIVACY.md et la page en ligne (`PremiumConfiguration.privacyURL`, artifact claude.ai, à partager « toute personne disposant du lien » avant la soumission).
+- Politique v2.0 (2026-10-11, FR + EN, Loi 25 / LPRPDE / RGPD / LGPD / APPI / CCPA) : source `docs/legal/privacy.html`, publiée sur l'artifact de `PremiumConfiguration.privacyURL` (à partager « toute personne disposant du lien » avant la soumission), texte français dans PRIVACY.md. Support : support.ardane@gmail.com. Étiquette App Store : « Données non collectées ».
 - Captures : `[marketing]` rend les scènes de `scripts/marketing_scenes.txt` (ordre de la page, `pano-<nom>-1/2` = une image sur deux captures, 2e colonne = vrai écran dans le téléphone), en français (`MARKETING_LANG`/`MARKETING_LOCALE` pour une autre langue). Assemblage : `python3 scripts/marketing_compose.py /tmp/rNNN/marketing <sortie>` → `NN-scene.png` 1320 × 2868 + `contact-sheet.jpg`.
 
 ## Icône de l'app (2026-10-09)

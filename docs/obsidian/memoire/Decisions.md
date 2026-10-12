@@ -23,6 +23,9 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-11 : chaque film s'ouvre sur une accroche dite et écrite (« Organize your life / training / meals with Ardane », « Your phone. Your style. Meet Ardane. »), le texte s'ouvrant depuis la ligne de lumière.
 - Voix : Kokoro-82M (licence Apache-2.0). Musique : Mixkit (licence gratuite, publicité en ligne permise). Runway n'est pas utilisé : la version gratuite (125 crédits une seule fois) met un filigrane.
 
+## Confidentialité
+- 2026-10-11 : politique v2.0 (source `docs/legal/privacy.html`, publiée sur l'artifact de `PremiumConfiguration.privacyURL`, texte français copié dans `PRIVACY.md`). Responsable : le développeur indépendant établi au Québec (à remplacer par l'entreprise Ardane quand elle existera) ; contact `support.ardane@gmail.com` (`AppInfo.supportEmail`). Engagements à tenir : réponse sous 30 jours, courriels gardés au plus 24 mois, avis dans l'app avant un changement important. Toute nouvelle donnée ou nouveau service externe doit être ajouté à la politique et au manifeste de confidentialité.
+
 ## Outillage
 - La CI est pilotée par des tags dans le message de commit (voir `CLAUDE.md`) ; `[check]` d'abord, finir une série par `[unit]` pour avoir une version à installer.
 - Carte Obsidian générée depuis le code par `scripts/obsidian_map.py` : chaque module est une étoile de ses fichiers ; seules les 3 plus fortes dépendances entre modules sont des liens (sinon le graphe devient une boule).

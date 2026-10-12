@@ -1,0 +1,326 @@
+<title>Confidentialité Ardane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* One reading column; the summary in a framed card, services and rights as grouped lists, a language switch in the header. */
+:root{
+  --bg:#F7F3F1; --surface:#FFFFFF; --ink:#1E1716; --muted:#6B5F5C; --line:#E7DDD9; --coral:#E8603F; --raspberry:#C42062; --tint:#FBEDE8;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif; --body:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#141011; --surface:#1D1718; --ink:#F1E9E7; --muted:#AFA19D; --line:#33292A; --coral:#FF8A6B; --raspberry:#F0558F; --tint:#2A1D1D; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --bg:#141011; --surface:#1D1718; --ink:#F1E9E7; --muted:#AFA19D; --line:#33292A; --coral:#FF8A6B; --raspberry:#F0558F; --tint:#2A1D1D; color-scheme:dark; }
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;padding-inline:16px;padding-block:32px 56px}
+main{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:30px}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mark{width:48px;height:48px;flex:none;border-radius:11px;background:linear-gradient(135deg,#FF7A59,#D9246A)}
+.mark svg{display:block;width:100%;height:100%}
+.titles{flex:1;min-width:0}
+h1{font-family:var(--display);font-size:30px;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.updated{color:var(--muted);font-size:15px;margin:4px 0 0;font-variant-numeric:tabular-nums}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.lang button{font:600 14px var(--body);color:var(--muted);background:none;border:0;padding:7px 14px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.lang button:focus-visible{outline:2px solid var(--coral);outline-offset:-2px}
+.summary{background:var(--tint);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.summary p{margin:0}
+.summary ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.summary li{padding-left:18px;position:relative}
+.summary li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:2px;background:var(--coral)}
+section{display:flex;flex-direction:column;gap:10px}
+h2{font-family:var(--display);font-size:21px;line-height:1.25;margin:0;text-wrap:balance}
+h3{font-size:17px;margin:6px 0 0;font-weight:600}
+p{margin:0;max-width:68ch}
+a{color:var(--raspberry);text-underline-offset:2px}
+.list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:flex;flex-direction:column}
+.list li{padding:13px 16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.list li:first-child{border-top:0}
+.list b{font-weight:600}
+.list span{color:var(--muted)}
+.contact{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.email{font:600 17px var(--body);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;user-select:all;word-break:break-all}
+.copy{font:600 14px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:9px 12px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--coral)}
+footer{color:var(--muted);font-size:15px;border-top:1px solid var(--line);padding-top:18px}
+</style>
+
+<main>
+  <header>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><polygon points="47.5,19.3 47.5,55.4 34,86 16,86" fill="#fff"/><polygon points="52.5,19.3 84,86 66,86 52.5,55.4" fill="#FFE0CC"/></svg>
+    </div>
+    <div class="titles">
+      <h1 data-fr="Politique de confidentialité d'Ardane" data-en="Ardane Privacy Policy">Politique de confidentialité d'Ardane</h1>
+      <p class="updated" data-fr="En vigueur le 11 octobre 2026 · version 2.0" data-en="Effective October 11, 2026 · version 2.0">En vigueur le 11 octobre 2026 · version 2.0</p>
+    </div>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button id="btn-fr" type="button" aria-pressed="true" lang="fr">Français</button>
+      <button id="btn-en" type="button" aria-pressed="false" lang="en">English</button>
+    </div>
+  </header>
+
+  <!-- ===================== FRANÇAIS ===================== -->
+  <article id="fr" lang="fr" style="display:flex;flex-direction:column;gap:30px">
+    <div class="summary">
+      <p><b>En bref</b></p>
+      <ul>
+        <li>Tout ce que tu crées dans Ardane reste sur ton iPhone. Ardane n'a ni compte, ni serveur, ni base de données à distance : nous ne recevons pas tes données.</li>
+        <li>Aucune publicité, aucun suivi, aucun outil de mesure d'audience, aucune vente ni location de données.</li>
+        <li>Quelques services externes reçoivent seulement ce qu'il faut pour répondre à une demande que tu fais (par exemple un code-barres), sans ton nom ni identifiant.</li>
+        <li>Tu peux exporter ou effacer toutes tes données à tout moment depuis l'app.</li>
+      </ul>
+    </div>
+
+    <section>
+      <h2>1. Qui est responsable</h2>
+      <p>Ardane est une application iOS éditée par son développeur indépendant, une personne établie au Québec (Canada). Ce développeur est le responsable du traitement au sens du RGPD et la personne responsable de la protection des renseignements personnels au sens de la Loi 25 du Québec. Si une entreprise est créée pour éditer Ardane, cette politique sera mise à jour pour l'indiquer.</p>
+      <div class="contact"><span class="email" id="mail-fr">support.ardane@gmail.com</span><button class="copy" type="button" data-copy="mail-fr">Copier</button></div>
+    </section>
+
+    <section>
+      <h2>2. Les données que tu crées</h2>
+      <p>Tes widgets et leurs réglages, tâches, habitudes, horaires, études, repas et aliments, séances d'entraînement, montants (revenus, dépenses, budgets), notes, profil (date de naissance, taille, poids, objectifs) et réglages sont enregistrés <b>uniquement sur ton appareil</b>, dans l'espace partagé entre l'app et ses widgets.</p>
+      <p>Certaines de ces données peuvent révéler des informations sensibles, comme ta santé (alimentation, poids, entraînement) ou ta situation financière. Elles ne quittent jamais ton iPhone du fait d'Ardane : nous n'y avons pas accès.</p>
+      <p>Les résumés rédigés par Apple Intelligence (sur les iPhone compatibles) sont produits sur ton iPhone par le modèle d'Apple intégré à l'appareil. Aucun texte n'est envoyé ailleurs pour les produire.</p>
+    </section>
+
+    <section>
+      <h2>3. Les accès que tu autorises</h2>
+      <p>Chaque accès est demandé par iOS au moment où une fonction en a besoin. Tu peux le refuser ou le retirer à tout moment dans Réglages &gt; Ardane ; l'app continue de fonctionner sans la fonction concernée.</p>
+      <ul class="list">
+        <li><b>Caméra</b><span>Uniquement pour scanner le code-barres d'un aliment. L'image n'est ni enregistrée ni envoyée : seul le numéro du code-barres est lu.</span></li>
+        <li><b>Position</b><span>Seulement quand tu touches « Utiliser ma position », pour trouver ta ville et la météo. Seules les coordonnées de la ville choisie sont gardées sur ton iPhone.</span></li>
+        <li><b>Calendrier</b><span>Lecture seule de tes prochains événements, pour le widget « À venir » et ton planning. Ils ne quittent pas ton iPhone.</span></li>
+        <li><b>Mouvements (podomètre)</b><span>Lecture de tes pas du jour pour « Mon Quotidien ». Ils ne quittent pas ton iPhone.</span></li>
+        <li><b>Photos</b><span>Ardane n'accède qu'aux photos que tu choisis comme fond ; une copie réduite est gardée sur ton iPhone. Un fond d'écran du Store que tu enregistres est ajouté à ta photothèque sans qu'Ardane puisse la lire.</span></li>
+        <li><b>Notifications et activités en direct</b><span>Uniquement pour les rappels que tu actives et pour suivre une séance en cours sur l'écran verrouillé.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Services externes</h2>
+      <p>Quand tu utilises certaines fonctions, l'app interroge directement un service externe. Il reçoit seulement ce qui est nécessaire à la réponse, sans ton nom, ton adresse courriel ni aucun identifiant de compte ou d'appareil. Comme pour toute connexion Internet, il voit aussi l'adresse IP de ta connexion, qu'il traite selon sa propre politique.</p>
+      <ul class="list">
+        <li><b>Apple</b><span>Retrouve une ville à partir du nom que tu tapes ou de ta position (géocodage), et traite les achats et abonnements Premium. Ardane ne voit jamais tes informations de paiement. Politique : apple.com/legal/privacy</span></li>
+        <li><b>Open-Meteo (météo)</b><span>Reçoit les coordonnées de la ville choisie. Politique : open-meteo.com</span></li>
+        <li><b>Open Food Facts (produits emballés)</b><span>Reçoit le code-barres scanné ou le texte que tu cherches. Association établie en France. Politique : world.openfoodfacts.org</span></li>
+        <li><b>CoinGecko (cours des cryptomonnaies)</b><span>Reçoit le nom de la cryptomonnaie et de la devise demandées. Politique : coingecko.com</span></li>
+        <li><b>Frankfurter (taux de change)</b><span>Reçoit les devises demandées. Site : frankfurter.dev</span></li>
+        <li><b>SEC EDGAR (données publiques d'entreprises américaines)</b><span>Reçoit l'identifiant de l'entreprise consultée. Service du gouvernement des États-Unis : sec.gov</span></li>
+        <li><b>Finnhub (cours des actions)</b><span>Reçoit le symbole de l'action demandée. Politique : finnhub.io</span></li>
+      </ul>
+      <p>Ces services peuvent être situés hors du Québec et du Canada, notamment dans l'Union européenne et aux États-Unis. Les données qu'ils reçoivent ne permettent pas, à elles seules, de t'identifier.</p>
+    </section>
+
+    <section>
+      <h2>5. Ce qu'Ardane ne fait pas</h2>
+      <ul class="list">
+        <li><b>Pas de compte ni de serveur</b><span>Nous ne recevons, ne stockons et ne consultons pas tes données.</span></li>
+        <li><b>Pas de publicité ni de suivi</b><span>Aucun identifiant publicitaire, aucun suivi entre apps ou sites, aucun outil de mesure d'audience ou de rapport de plantage tiers.</span></li>
+        <li><b>Pas de vente ni de partage</b><span>Aucune donnée n'est vendue, louée ou partagée à des fins publicitaires.</span></li>
+        <li><b>Pas de profilage</b><span>Aucune décision fondée exclusivement sur un traitement automatisé ne te concerne.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Bases juridiques</h2>
+      <p>Pour les personnes à qui le RGPD (Union européenne) ou la LGPD (Brésil) s'appliquent : les requêtes envoyées aux services externes reposent sur l'exécution du service que tu demandes ; les accès de la section 3 reposent sur ton consentement, que tu peux retirer à tout moment dans Réglages ; nos échanges par courriel reposent sur ta demande et sur notre intérêt légitime à y répondre. Les données de santé sont traitées uniquement sur ton appareil, à ton initiative, et ne nous sont jamais communiquées.</p>
+    </section>
+
+    <section>
+      <h2>7. Conservation</h2>
+      <p>Les données de l'app restent sur ton iPhone jusqu'à ce que tu les effaces ou supprimes l'app. Les fichiers de sauvegarde que tu exportes restent sous ton contrôle, à l'endroit où tu les ranges. Si tu nous écris, ton courriel est conservé le temps de te répondre, puis au plus 24 mois après le dernier échange.</p>
+    </section>
+
+    <section>
+      <h2>8. Sécurité</h2>
+      <p>Les données sont protégées par l'isolement des apps d'iOS et par le chiffrement de ton appareil lorsqu'il est verrouillé par un code. Toutes les requêtes vers les services externes passent par des connexions chiffrées (HTTPS). Un fichier de sauvegarde exporté contient tes données en clair : range-le dans un endroit que tu contrôles.</p>
+    </section>
+
+    <section>
+      <h2>9. Tes droits</h2>
+      <p>Selon la loi qui s'applique à toi (Loi 25 et LPRPDE au Canada, RGPD, LGPD, APPI, lois de Californie), tu peux notamment accéder à tes données, les corriger, les exporter, les supprimer, t'opposer à un traitement, retirer ton consentement et déposer une plainte.</p>
+      <ul class="list">
+        <li><b>Accéder, corriger</b><span>Toutes tes données sont visibles et modifiables dans l'app.</span></li>
+        <li><b>Exporter (portabilité)</b><span>Profil &gt; « Exporter mes données » crée un fichier de sauvegarde lisible.</span></li>
+        <li><b>Effacer</b><span>Profil &gt; « Effacer toutes mes données », ou supprimer l'app.</span></li>
+        <li><b>Retirer un consentement</b><span>Réglages &gt; Ardane, accès par accès.</span></li>
+        <li><b>Toute autre demande</b><span>Écris à support.ardane@gmail.com. Nous répondons dans un délai de 30 jours.</span></li>
+      </ul>
+      <h3>Porter plainte</h3>
+      <p>Tu peux t'adresser à la Commission d'accès à l'information du Québec (cai.gouv.qc.ca), au Commissariat à la protection de la vie privée du Canada (priv.gc.ca), à l'autorité de protection des données de ton pays dans l'Union européenne (en France, la CNIL : cnil.fr), à l'ANPD au Brésil ou à la Personal Information Protection Commission au Japon.</p>
+    </section>
+
+    <section>
+      <h2>10. Résidents de Californie</h2>
+      <p>Au cours des 12 derniers mois, nous n'avons collecté aucune catégorie de renseignements personnels au sens du CCPA/CPRA, et nous ne vendons ni ne partageons de renseignements personnels, y compris de renseignements sensibles. Tu as le droit de savoir, de supprimer et de corriger, et de ne subir aucune discrimination pour avoir exercé ces droits.</p>
+    </section>
+
+    <section>
+      <h2>11. Enfants</h2>
+      <p>Ardane ne s'adresse pas aux enfants de moins de 13 ans. Au Québec, un enfant de moins de 14 ans doit utiliser l'app avec l'accord d'un parent ou tuteur. Nous ne collectons sciemment aucune donnée concernant des enfants ; si un parent pense qu'un enfant nous a écrit, nous effaçons l'échange sur demande.</p>
+    </section>
+
+    <section>
+      <h2>12. Incidents de confidentialité</h2>
+      <p>Si un incident touchait des renseignements que nous détenons (nos échanges par courriel), nous le consignerions, prendrions les mesures pour en limiter les effets et aviserions la Commission d'accès à l'information et les personnes concernées lorsque la loi l'exige.</p>
+    </section>
+
+    <section>
+      <h2>13. Modifications</h2>
+      <p>Si cette politique change, la date en haut de la page est mise à jour. Pour un changement important, un avis est affiché dans l'app avant qu'il s'applique.</p>
+    </section>
+
+    <footer>Questions ou demandes : support.ardane@gmail.com · Cette politique est régie par les lois du Québec et du Canada, sans te priver de la protection que t'accorde la loi de ton pays de résidence.</footer>
+  </article>
+
+  <!-- ===================== ENGLISH ===================== -->
+  <article id="en" lang="en" hidden style="display:flex;flex-direction:column;gap:30px">
+    <div class="summary">
+      <p><b>In short</b></p>
+      <ul>
+        <li>Everything you create in Ardane stays on your iPhone. Ardane has no account, no server and no remote database: we do not receive your data.</li>
+        <li>No ads, no tracking, no analytics, and no selling or renting of data.</li>
+        <li>A few external services receive only what is needed to answer a request you make (a barcode, for example), without your name or any identifier.</li>
+        <li>You can export or erase all your data at any time from the app.</li>
+      </ul>
+    </div>
+
+    <section>
+      <h2>1. Who is responsible</h2>
+      <p>Ardane is an iOS app published by its independent developer, an individual based in Quebec, Canada. The developer is the controller under the GDPR and the person in charge of the protection of personal information under Quebec's Law 25. If a company is created to publish Ardane, this policy will be updated to say so.</p>
+      <div class="contact"><span class="email" id="mail-en">support.ardane@gmail.com</span><button class="copy" type="button" data-copy="mail-en">Copy</button></div>
+    </section>
+
+    <section>
+      <h2>2. The data you create</h2>
+      <p>Your widgets and their settings, tasks, habits, schedules, studies, meals and foods, workouts, amounts (income, expenses, budgets), notes, profile (date of birth, height, weight, goals) and settings are stored <b>only on your device</b>, in the space shared by the app and its widgets.</p>
+      <p>Some of this data can reveal sensitive information, such as your health (food, weight, training) or your finances. Ardane never sends it off your iPhone: we have no access to it.</p>
+      <p>Summaries written by Apple Intelligence (on compatible iPhones) are produced on your iPhone by Apple's on-device model. No text is sent anywhere to produce them.</p>
+    </section>
+
+    <section>
+      <h2>3. Access you allow</h2>
+      <p>iOS asks for each permission when a feature needs it. You can refuse it or withdraw it at any time in Settings &gt; Ardane; the app keeps working without that feature.</p>
+      <ul class="list">
+        <li><b>Camera</b><span>Only to scan a food barcode. The image is neither saved nor sent: only the barcode number is read.</span></li>
+        <li><b>Location</b><span>Only when you tap “Use my location”, to find your city and its weather. Only the coordinates of the chosen city are kept on your iPhone.</span></li>
+        <li><b>Calendar</b><span>Read-only access to your upcoming events, for the “Up next” widget and your schedule. They never leave your iPhone.</span></li>
+        <li><b>Motion (pedometer)</b><span>Reads today's steps for “My Day”. They never leave your iPhone.</span></li>
+        <li><b>Photos</b><span>Ardane only sees the photos you pick as a background; a reduced copy is kept on your iPhone. A Store wallpaper you save is added to your library without Ardane being able to read it.</span></li>
+        <li><b>Notifications and Live Activities</b><span>Only for the reminders you turn on and to follow a workout in progress on the Lock Screen.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. External services</h2>
+      <p>When you use some features, the app queries an external service directly. It receives only what is needed for the answer, without your name, email address or any account or device identifier. As with any Internet connection, it also sees your connection's IP address, which it handles under its own policy.</p>
+      <ul class="list">
+        <li><b>Apple</b><span>Finds a city from the name you type or from your location (geocoding), and processes Premium purchases and subscriptions. Ardane never sees your payment details. Policy: apple.com/legal/privacy</span></li>
+        <li><b>Open-Meteo (weather)</b><span>Receives the coordinates of the chosen city. Policy: open-meteo.com</span></li>
+        <li><b>Open Food Facts (packaged foods)</b><span>Receives the scanned barcode or the text you search for. Non-profit based in France. Policy: world.openfoodfacts.org</span></li>
+        <li><b>CoinGecko (crypto prices)</b><span>Receives the name of the crypto and currency requested. Policy: coingecko.com</span></li>
+        <li><b>Frankfurter (exchange rates)</b><span>Receives the currencies requested. Site: frankfurter.dev</span></li>
+        <li><b>SEC EDGAR (public data on US companies)</b><span>Receives the identifier of the company looked up. A US government service: sec.gov</span></li>
+        <li><b>Finnhub (stock prices)</b><span>Receives the stock symbol requested. Policy: finnhub.io</span></li>
+      </ul>
+      <p>These services may be located outside Quebec and Canada, notably in the European Union and the United States. The data they receive does not, on its own, identify you.</p>
+    </section>
+
+    <section>
+      <h2>5. What Ardane does not do</h2>
+      <ul class="list">
+        <li><b>No account, no server</b><span>We do not receive, store or view your data.</span></li>
+        <li><b>No ads, no tracking</b><span>No advertising identifier, no tracking across apps or websites, no third-party analytics or crash reporting.</span></li>
+        <li><b>No selling or sharing</b><span>No data is sold, rented or shared for advertising.</span></li>
+        <li><b>No profiling</b><span>No decision about you is based solely on automated processing.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Legal bases</h2>
+      <p>For people covered by the GDPR (European Union) or the LGPD (Brazil): requests sent to external services are based on performing the service you ask for; the permissions in section 3 are based on your consent, which you can withdraw at any time in Settings; our email exchanges are based on your request and our legitimate interest in answering it. Health data is processed only on your device, at your initiative, and is never disclosed to us.</p>
+    </section>
+
+    <section>
+      <h2>7. Retention</h2>
+      <p>App data stays on your iPhone until you erase it or delete the app. Backup files you export remain under your control, wherever you keep them. If you email us, your message is kept as long as needed to answer, then for at most 24 months after the last exchange.</p>
+    </section>
+
+    <section>
+      <h2>8. Security</h2>
+      <p>Data is protected by iOS app isolation and by your device's encryption when it is locked with a passcode. All requests to external services use encrypted connections (HTTPS). An exported backup file contains your data unencrypted: keep it somewhere you control.</p>
+    </section>
+
+    <section>
+      <h2>9. Your rights</h2>
+      <p>Depending on the law that applies to you (Law 25 and PIPEDA in Canada, GDPR, LGPD, APPI, California law), you can notably access, correct, export and delete your data, object to processing, withdraw consent and file a complaint.</p>
+      <ul class="list">
+        <li><b>Access, correct</b><span>All your data is visible and editable in the app.</span></li>
+        <li><b>Export (portability)</b><span>Profile &gt; “Export my data” creates a readable backup file.</span></li>
+        <li><b>Erase</b><span>Profile &gt; “Erase all my data”, or delete the app.</span></li>
+        <li><b>Withdraw consent</b><span>Settings &gt; Ardane, permission by permission.</span></li>
+        <li><b>Any other request</b><span>Write to support.ardane@gmail.com. We answer within 30 days.</span></li>
+      </ul>
+      <h3>Filing a complaint</h3>
+      <p>You can contact Quebec's Commission d'accès à l'information (cai.gouv.qc.ca), the Office of the Privacy Commissioner of Canada (priv.gc.ca), the data protection authority of your EU country (in France, the CNIL: cnil.fr), Brazil's ANPD or Japan's Personal Information Protection Commission.</p>
+    </section>
+
+    <section>
+      <h2>10. California residents</h2>
+      <p>In the past 12 months we have collected no category of personal information as defined by the CCPA/CPRA, and we do not sell or share personal information, including sensitive personal information. You have the right to know, to delete and to correct, and not to be discriminated against for exercising these rights.</p>
+    </section>
+
+    <section>
+      <h2>11. Children</h2>
+      <p>Ardane is not directed to children under 13. In Quebec, a child under 14 should use the app with the consent of a parent or guardian. We do not knowingly collect any data about children; if a parent believes a child has written to us, we delete the exchange on request.</p>
+    </section>
+
+    <section>
+      <h2>12. Privacy incidents</h2>
+      <p>If an incident affected information we hold (our email exchanges), we would record it, take steps to limit its effects and notify the Commission d'accès à l'information and the people concerned where the law requires it.</p>
+    </section>
+
+    <section>
+      <h2>13. Changes</h2>
+      <p>If this policy changes, the date at the top of the page is updated. For a significant change, a notice is shown in the app before it applies.</p>
+    </section>
+
+    <footer>Questions or requests: support.ardane@gmail.com · This policy is governed by the laws of Quebec and Canada, without depriving you of the protection given by the law of your country of residence.</footer>
+  </article>
+</main>
+
+<script>
+(function () {
+  var fr = document.getElementById("fr"), en = document.getElementById("en");
+  var bfr = document.getElementById("btn-fr"), ben = document.getElementById("btn-en");
+  function show(lang) {
+    fr.hidden = lang !== "fr"; en.hidden = lang !== "en";
+    bfr.setAttribute("aria-pressed", String(lang === "fr")); ben.setAttribute("aria-pressed", String(lang === "en"));
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-fr]").forEach(function (el) { el.textContent = el.getAttribute("data-" + lang); });
+    document.title = lang === "fr" ? "Confidentialité Ardane" : "Ardane Privacy";
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+  var start = "fr";
+  try { start = localStorage.getItem("lang") || ""; } catch (e) { start = ""; }
+  if (location.hash === "#en") start = "en";
+  else if (location.hash === "#fr") start = "fr";
+  else if (!start) start = (navigator.language || "fr").toLowerCase().indexOf("fr") === 0 ? "fr" : "en";
+  show(start === "en" ? "en" : "fr");
+  bfr.addEventListener("click", function () { show("fr"); });
+  ben.addEventListener("click", function () { show("en"); });
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = document.getElementById(b.getAttribute("data-copy")).textContent;
+      var label = b.textContent;
+      var done = function () { b.textContent = b.closest("#en") ? "Copied" : "Copié"; setTimeout(function () { b.textContent = label; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(done, function () { var r = document.createRange(); r.selectNodeContents(document.getElementById(b.getAttribute("data-copy"))); var s = getSelection(); s.removeAllRanges(); s.addRange(r); });
+      }
+    });
+  });
+})();
+</script>
