@@ -21,6 +21,7 @@ struct ProfileView: View {
     @State private var importsBackup = false
     @State private var pendingRestore: DataBackup.Archive?
     @State private var backupMessage: String?
+    @State private var notificationTestMessage: String?
     @State private var copiedEmail = false
     @State private var notificationStatus = "—"
     @Environment(\.openURL) private var openURL
@@ -222,6 +223,23 @@ struct ProfileView: View {
                     Text(tr("Sauvegarde"))
                 } footer: {
                     Text(tr("Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre."))
+                }
+
+                // Temporary: shows which icon iOS puts on a notification that surely comes from Ardane.
+                Section {
+                    Button {
+                        Task {
+                            let sent = await NotificationScheduler.sendTest(version: appVersion)
+                            notificationTestMessage = sent
+                                ? tr("Quitte l'app maintenant : la notification arrive dans 5 secondes.")
+                                : tr("Les notifications d'Ardane sont désactivées dans Réglages.")
+                        }
+                    } label: {
+                        Label(tr("Envoyer une notification de test"), systemImage: "bell.badge")
+                    }
+                    .accessibilityIdentifier("notification-test")
+                } footer: {
+                    Text(notificationTestMessage ?? tr("Elle arrive 5 secondes après le toucher : quitte l'app pour la voir. Son icône doit être le A d'Ardane."))
                 }
 
                 Section {
