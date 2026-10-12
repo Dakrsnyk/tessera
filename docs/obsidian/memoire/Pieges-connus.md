@@ -33,7 +33,7 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 - Le vault Obsidian est ce même dossier : ne pas toucher à `.obsidian/` (réglages de l'utilisateur, ignoré par Git).
 
 ## iOS
-- Après une mise à jour installée par-dessus (sideload), iOS peut garder l'ancienne icône dans les notifications et les Réglages : redémarrer l'iPhone vide le cache d'icônes.
+- Après une mise à jour installée par-dessus (sideload), iOS peut garder l'ancienne icône dans les notifications et les Réglages : redémarrer l'iPhone vide le cache d'icônes. Si ça ne suffit pas : iOS indexe ce cache par nom de jeu d'icônes ; les jeux s'appellent ArdaneIcon… depuis le 2026-10-11 (migration au lancement des anciens noms AppIcon-… dans `AppIconSwitcher.migrateRenamedIcon`). Ne pas renommer de nouveau sans cette migration.
 
 ## Obsidian
 - Obsidian réécrit un `.canvas` (ou les fins de ligne d'une note) quand on l'ouvre. Si GitHub Desktop montre ces fichiers modifiés : clic droit sur **ces fichiers seulement** → « Discard changes ». **Jamais « Discard all changes » pendant ou après une session Claude locale** : ça efface aussi son travail pas encore commité (le 2026-10-11, `synth.py` et des changements de `vo.py` ont été perdus puis réécrits). Dans le doute, demander à Claude de commiter d'abord.

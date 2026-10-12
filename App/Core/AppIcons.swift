@@ -7,7 +7,8 @@ import UIKit
 /// `IconPreview-<asset>`. They stay light in Dark Mode. They are drawn by scripts/app_icons.js
 /// (the glass ones keep the colors of the former Tessera icons).
 struct AppIconChoice: Identifiable, Hashable {
-    /// The icon set; « AppIcon » is the main icon.
+    /// The icon set; « ArdaneIcon » is the main icon. The sets were called « AppIcon… » until build 176:
+    /// iOS keeps the pictures of notifications by icon name, so the new names drop the Tessera logo it cached.
     let asset: String
     let title: String
 
@@ -16,28 +17,28 @@ struct AppIconChoice: Identifiable, Hashable {
     var alternateName: String? { asset == Self.main ? nil : asset }
     var preview: String { "IconPreview-\(asset)" }
 
-    static let main = "AppIcon"
+    static let main = "ArdaneIcon"
 
     static let all: [AppIconChoice] = [
         AppIconChoice(asset: main, title: tr("Corail")),
-        AppIconChoice(asset: "AppIcon-Classic", title: tr("Classique")),
-        AppIconChoice(asset: "AppIcon-GlassBlack", title: tr("Verre classique")),
-        AppIconChoice(asset: "AppIcon-RedGlass", title: tr("Verre rouge")),
-        AppIconChoice(asset: "AppIcon-Jade", title: tr("Verre jade")),
-        AppIconChoice(asset: "AppIcon-Night", title: tr("Verre nuit")),
-        AppIconChoice(asset: "AppIcon-Blue", title: tr("Verre bleu")),
-        AppIconChoice(asset: "AppIcon-Ocean", title: tr("Verre océan")),
-        AppIconChoice(asset: "AppIcon-Coral", title: tr("Verre corail")),
-        AppIconChoice(asset: "AppIcon-Emerald", title: tr("Verre émeraude")),
-        AppIconChoice(asset: "AppIcon-Amethyst", title: tr("Verre améthyste")),
-        AppIconChoice(asset: "AppIcon-Amber", title: tr("Verre ambre")),
-        AppIconChoice(asset: "AppIcon-Lagoon", title: tr("Verre lagon")),
-        AppIconChoice(asset: "AppIcon-Raspberry", title: tr("Verre framboise")),
-        AppIconChoice(asset: "AppIcon-Midnight", title: tr("Verre minuit")),
-        AppIconChoice(asset: "AppIcon-Aurora", title: tr("Aurore boréale")),
-        AppIconChoice(asset: "AppIcon-Sakura", title: tr("Verre sakura")),
-        AppIconChoice(asset: "AppIcon-Forest", title: tr("Verre forêt")),
-        AppIconChoice(asset: "AppIcon-Graphite", title: tr("Verre graphite")),
+        AppIconChoice(asset: "ArdaneIcon-Classic", title: tr("Classique")),
+        AppIconChoice(asset: "ArdaneIcon-GlassBlack", title: tr("Verre classique")),
+        AppIconChoice(asset: "ArdaneIcon-RedGlass", title: tr("Verre rouge")),
+        AppIconChoice(asset: "ArdaneIcon-Jade", title: tr("Verre jade")),
+        AppIconChoice(asset: "ArdaneIcon-Night", title: tr("Verre nuit")),
+        AppIconChoice(asset: "ArdaneIcon-Blue", title: tr("Verre bleu")),
+        AppIconChoice(asset: "ArdaneIcon-Ocean", title: tr("Verre océan")),
+        AppIconChoice(asset: "ArdaneIcon-Coral", title: tr("Verre corail")),
+        AppIconChoice(asset: "ArdaneIcon-Emerald", title: tr("Verre émeraude")),
+        AppIconChoice(asset: "ArdaneIcon-Amethyst", title: tr("Verre améthyste")),
+        AppIconChoice(asset: "ArdaneIcon-Amber", title: tr("Verre ambre")),
+        AppIconChoice(asset: "ArdaneIcon-Lagoon", title: tr("Verre lagon")),
+        AppIconChoice(asset: "ArdaneIcon-Raspberry", title: tr("Verre framboise")),
+        AppIconChoice(asset: "ArdaneIcon-Midnight", title: tr("Verre minuit")),
+        AppIconChoice(asset: "ArdaneIcon-Aurora", title: tr("Aurore boréale")),
+        AppIconChoice(asset: "ArdaneIcon-Sakura", title: tr("Verre sakura")),
+        AppIconChoice(asset: "ArdaneIcon-Forest", title: tr("Verre forêt")),
+        AppIconChoice(asset: "ArdaneIcon-Graphite", title: tr("Verre graphite")),
     ]
 }
 
@@ -57,6 +58,16 @@ enum AppIconSwitcher {
         } catch {
             return false
         }
+    }
+
+    /// An icon picked before the sets were renamed (« AppIcon-Jade ») no longer exists: the same one under
+    /// its new name (« ArdaneIcon-Jade »). Once; iOS shows its message.
+    static func migrateRenamedIcon() {
+        let app = UIApplication.shared
+        guard let old = app.alternateIconName, old.hasPrefix("AppIcon-"), app.supportsAlternateIcons else { return }
+        let name = "ArdaneIcon-" + old.dropFirst("AppIcon-".count)
+        let target = AppIconChoice.all.contains { $0.asset == name } ? name : nil
+        Task { try? await app.setAlternateIconName(target) }
     }
 }
 

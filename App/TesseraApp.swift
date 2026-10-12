@@ -20,6 +20,7 @@ struct TesseraApp: App {
                 .onAppear {
                     premium.start(model: model)
                     QuickActions.install()
+                    AppIconSwitcher.migrateRenamedIcon()
                 }
                 // A long press on the icon, then « Changer d'icône »: straight to the icons.
                 .onChange(of: quickActions.pending, initial: true) { _, action in

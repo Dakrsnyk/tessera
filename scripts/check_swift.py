@@ -287,7 +287,7 @@ def check_privacy_manifest():
 def check_app_icons():
     path = os.path.join(ROOT, "App", "Core", "AppIcons.swift")
     text = FILES.get(os.path.normpath(path), "")
-    assets = re.findall(r'AppIconChoice\(asset: "([^"]+)"', text) + (["AppIcon"] if "asset: main" in text else [])
+    assets = re.findall(r'AppIconChoice\(asset: "([^"]+)"', text) + (["ArdaneIcon"] if "asset: main" in text else [])
     catalog = os.path.join(ROOT, "App", "Assets.xcassets")
     for asset in assets:
         if not os.path.isdir(os.path.join(catalog, f"{asset}.appiconset")):
