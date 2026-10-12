@@ -32,4 +32,3 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
-- Bouton TEMPORAIRE « Envoyer une notification de test » (Profil, `NotificationScheduler.sendTest`, 2026-10-12) pour voir l'icône d'une notification qui vient sûrement d'Ardane (la mosaïque Tessera persiste malgré une réinstallation propre). À retirer une fois le diagnostic fait, avec ses quatre textes.

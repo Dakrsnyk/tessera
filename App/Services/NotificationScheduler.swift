@@ -45,21 +45,6 @@ enum NotificationScheduler {
         center.removePendingNotificationRequests(withIdentifiers: [habitID(id)])
     }
 
-    // MARK: Test (temporary: which icon iOS puts on Ardane's notifications)
-
-    /// A notification five seconds from now, with the version in its text: time to leave the app (in the
-    /// foreground iOS doesn't show it). False if notifications are off.
-    static func sendTest(version: String) async -> Bool {
-        guard await requestAuthorization() else { return false }
-        let content = UNMutableNotificationContent()
-        content.title = "Ardane"
-        content.body = tr("Notification de test envoyée par Ardane \(version).")
-        content.sound = .default
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        try? await center.add(UNNotificationRequest(identifier: "ardane.test", content: content, trigger: trigger))
-        return true
-    }
-
     // MARK: Hydration
 
     private static let hydrationHours = [10, 12, 14, 16, 18, 20]
