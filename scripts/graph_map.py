@@ -435,7 +435,10 @@ def birth_dates():
 
 
 def code_graph():
-    data = json.load(open(os.path.join(OUT, "graph.json"), encoding="utf-8"))
+    path = os.path.join(OUT, "graph.json")
+    if not os.path.exists(path):
+        raise SystemExit("graphify-out/graph.json introuvable : installer graphify (pip install graphifyy) puis relancer sans --no-graphify.")
+    data = json.load(open(path, encoding="utf-8"))
     owner = {}
     for n in data["nodes"]:
         path = n.get("source_file") or ""

@@ -43,4 +43,5 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 ## GitHub Desktop et éditeurs
 - Un éditeur (Obsidian par exemple) peut réécrire les fins de ligne d'une note qu'il ouvre. Si GitHub Desktop montre ces fichiers modifiés : clic droit sur **ces fichiers seulement** → « Discard changes ». **Jamais « Discard all changes » pendant ou après une session Claude locale** : ça efface aussi son travail pas encore commité (le 2026-10-11, `synth.py` et des changements de `vo.py` ont été perdus puis réécrits). Dans le doute, demander à Claude de commiter d'abord.
 - Vue graphique en boule : force centrale trop forte (≈ 0,3 suffit) et filtre `tag:#ardane` oublié.
+- La CI ignore les commits qui ne changent que des `.md` (`paths-ignore`) : un commit `[testflight]` ou `[unit]` doit toucher au moins un autre fichier (le 2026-10-15, un envoi TestFlight n'est pas parti).
 - Les tags CI sont cherchés n'importe où dans le message de commit : ne jamais écrire un tag entre crochets dans la description (le 2026-10-15, un commit [check] qui décrivait le tag TestFlight entre crochets a lancé l'envoi TestFlight au lieu de la compilation, échec « Secrets manquants »).
