@@ -11,6 +11,16 @@ struct SpacesView: View {
     @State private var universe: SpaceUniverse?
     /// The « Écran verrouillé » category: Lock Screen widgets instead of the spaces.
     @State private var showsLockScreen = false
+    /// « Photos et citations » touched: photos or a quote?
+    @State private var choosesPhotoQuote = false
+
+    /// A card of the list: a space, or « Photos et citations » (a mini-app of its own, not a space).
+    private enum CreateCard: Hashable, Identifiable {
+        case space(Space)
+        case photos
+
+        var id: Self { self }
+    }
 
     var body: some View {
         @Bindable var router = router
@@ -30,16 +40,21 @@ struct SpacesView: View {
                     } else {
                         LazyVStack(spacing: 14) {
                             // The user's interests first, every other space below.
-                            ForEach(shownSpaces) { space in
-                                // A space opens its widget creator; its data stays in « Mes données » there.
-                                Button {
-                                    creating = space
-                                } label: {
-                                    ImmersiveSpaceCard(space: space, summary: summary(for: space))
+                            ForEach(cards) { card in
+                                switch card {
+                                case let .space(space):
+                                    // A space opens its widget creator; its data stays in « Mes données » there.
+                                    Button {
+                                        creating = space
+                                    } label: {
+                                        ImmersiveSpaceCard(space: space, summary: summary(for: space))
+                                    }
+                                    .buttonStyle(.plain)
+                                    .accessibilityIdentifier("space-card-\(space.rawValue)")
+                                    .tutorialTarget(.createSpace, when: space == shownSpaces.first)
+                                case .photos:
+                                    photosCard
                                 }
-                                .buttonStyle(.plain)
-                                .accessibilityIdentifier("space-card-\(space.rawValue)")
-                                .tutorialTarget(.createSpace, when: space == shownSpaces.first)
                             }
                         }
                         .padding(.horizontal, 20)
@@ -83,6 +98,37 @@ struct SpacesView: View {
 
     private var shownSpaces: [Space] {
         orderedSpaces.filter { universe == nil || $0.universe == universe }
+    }
+
+    /// The spaces shown, with « Photos et citations » second in « Tout » (right under the first space, which
+    /// the tutorial points at, so it is seen without scrolling) and first in « Vie ».
+    private var cards: [CreateCard] {
+        var cards = shownSpaces.map { CreateCard.space($0) }
+        switch universe {
+        case nil: cards.insert(.photos, at: min(cards.count, 1))
+        case .life?: cards.insert(.photos, at: 0)
+        default: break
+        }
+        return cards
+    }
+
+    /// « Photos et citations »: photos or a quote, then the same editor as in its mini-app (size first).
+    private var photosCard: some View {
+        Button {
+            if model.canCreateDesign {
+                choosesPhotoQuote = true
+            } else {
+                router.showPaywall(.designLimit)
+            }
+        } label: {
+            PhotoQuotesCard()
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("space-card-photos")
+        .confirmationDialog(tr("Créer un widget"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {
+            Button(tr("Photos")) { router.photoQuoteDraft = PhotoQuoteDraft.blank(.photos) }
+            Button(tr("Citation")) { router.photoQuoteDraft = PhotoQuoteDraft.blank(.quote) }
+        }
     }
 
     private var universeFilter: some View {
@@ -223,18 +269,93 @@ struct ImmersiveSpaceCard: View {
     var body: some View {
         let examples = Array(SpaceCatalog.examples(for: space).prefix(2))
         let usesOwnData = model.hasData(in: space)
-        let color = Color(hex: space.colorHex)
+        ImmersiveCard(
+            symbol: space.symbol, colorHex: space.colorHex,
+            count: Fmt.plural(SpaceCatalog.kinds(in: space).count, tr("widget"), tr("widgets")),
+            isExample: !usesOwnData, title: space.title, summary: summary,
+            hint: tr("Crée un widget de cet espace"), ratios: examples.map { $0.family.aspectRatio }
+        ) {
+            ForEach(Array(examples.enumerated()), id: \.offset) { pair in
+                let design = pair.element.design
+                WidgetPreview(
+                    design: design, family: pair.element.family,
+                    payload: usesOwnData ? model.payload(for: design) : SamplePayload.make(for: design)
+                )
+                .shadow(color: .black.opacity(0.25), radius: 10, y: 5)
+            }
+        }
+    }
+}
+
+/// « Photos et citations » in the Créer tab, among the spaces: the user's own photo and quote widgets on
+/// the mini-app's colour, or example quotes until there are some (a photo widget has nothing to show
+/// before its photos are chosen).
+struct PhotoQuotesCard: View {
+    @Environment(AppModel.self) private var model
+
+    /// A quote on paper and one at night, as they look on the Home Screen.
+    private static let examples: [WidgetDesign] = {
+        var small = WidgetDesign(kind: .quote, format: .small)
+        small.options.quote = QuoteContent.sample
+        var medium = WidgetDesign(kind: .quote, format: .medium)
+        var quote = QuoteContent(text: tr("Ce qui se mesure s'améliore."))
+        quote.font = .rounded
+        if let night = QuotePalette.all.first(where: { $0.id == "night" }) { quote.apply(night) }
+        medium.options.quote = quote
+        return [small, medium]
+    }()
+
+    var body: some View {
+        let made = model.photoQuoteDesigns
+        // Either the user's own widgets or examples, never both on one card.
+        let shown = made.isEmpty ? Self.examples : Array(made.prefix(2))
+        let summary = made.isEmpty
+            ? tr("Tes photos et les phrases qui t'inspirent, sur ton écran d'accueil.")
+            : Fmt.plural(made.count, tr("widget photo ou citation"), tr("widgets photo ou citation"))
+        ImmersiveCard(
+            symbol: MiniApp.photos.symbol, colorHex: MiniApp.photos.colorHex,
+            count: Fmt.plural(WidgetKind.madeInTheirMiniApp.count, tr("widget"), tr("widgets")),
+            isExample: made.isEmpty, title: MiniApp.photos.title, summary: summary, summaryLines: 2,
+            hint: tr("Crée ton widget"), ratios: shown.map { ($0.format ?? .small).family.aspectRatio }
+        ) {
+            ForEach(shown) { design in
+                WidgetPreview(design: design, family: (design.format ?? .small).family, payload: WidgetPayload())
+                    .shadow(color: .black.opacity(0.25), radius: 10, y: 5)
+            }
+        }
+    }
+}
+
+/// The big cards of Créer: a colour as a deep backdrop, how many widgets, a title, a live figure, and two
+/// widgets sitting on it as on a wallpaper.
+private struct ImmersiveCard<Previews: View>: View {
+    let symbol: String
+    let colorHex: String
+    /// « 3 widgets ».
+    let count: String
+    /// The widgets show example data.
+    let isExample: Bool
+    let title: String
+    let summary: String
+    var summaryLines = 1
+    let hint: String
+    /// Width over height of each preview, so they share one height.
+    let ratios: [CGFloat]
+    @ViewBuilder let previews: () -> Previews
+
+    var body: some View {
+        let color = Color(hex: colorHex)
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 8) {
-                Image(systemName: space.symbol)
+                Image(systemName: symbol)
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(.white)
                     .frame(width: 32, height: 32)
                     .background(.white.opacity(0.2), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                Text(Fmt.plural(SpaceCatalog.kinds(in: space).count, tr("widget"), tr("widgets")))
+                Text(count)
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.white.opacity(0.9))
-                if !usesOwnData {
+                if isExample {
                     Text(tr("· exemple"))
                         .font(.caption)
                         .foregroundStyle(.white.opacity(0.75))
@@ -246,29 +367,22 @@ struct ImmersiveSpaceCard: View {
                     .frame(width: 34, height: 34)
                     .background(.white.opacity(0.2), in: Circle())
             }
-            Text(space.title)
+            Text(title)
                 .font(.system(size: 28, weight: .bold))
                 .foregroundStyle(.white)
                 .padding(.top, 12)
             Text(summary)
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.9))
-                .lineLimit(1)
-            EqualHeightRow(ratios: examples.map { $0.family.aspectRatio }, spacing: 10) {
-                ForEach(Array(examples.enumerated()), id: \.offset) { pair in
-                    let design = pair.element.design
-                    WidgetPreview(
-                        design: design, family: pair.element.family,
-                        payload: usesOwnData ? model.payload(for: design) : SamplePayload.make(for: design)
-                    )
-                    .shadow(color: .black.opacity(0.25), radius: 10, y: 5)
-                }
+                .lineLimit(summaryLines)
+            EqualHeightRow(ratios: ratios, spacing: 10) {
+                previews()
             }
             .padding(.top, 16)
         }
         .padding(18)
         .background {
-            // The space's colour, bright at the top right and deepening towards the widgets.
+            // The colour, bright at the top right and deepening towards the widgets.
             ZStack {
                 color
                 RadialGradient(colors: [.white.opacity(0.22), .clear], center: .topTrailing, startRadius: 0, endRadius: 280)
@@ -278,8 +392,8 @@ struct ImmersiveSpaceCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .contentShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("\(space.title), \(summary)"))
-        .accessibilityHint(Text(tr("Crée un widget de cet espace")))
+        .accessibilityLabel(Text("\(title), \(summary)"))
+        .accessibilityHint(Text(hint))
     }
 }
 

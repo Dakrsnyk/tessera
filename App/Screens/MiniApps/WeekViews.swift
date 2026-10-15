@@ -325,20 +325,25 @@ struct WeekTimetable: View {
     private func column(_ items: [AgendaItem], day: Date, first: Int, last: Int, height: CGFloat, now: Date) -> some View {
         let isSelected = selected.map { DateMath.isSameDay($0, day) } ?? false
         let placed = Self.layout(items)
+        let background = RoundedRectangle(cornerRadius: compact ? 4 : 8, style: .continuous)
+            .fill(isSelected ? Color.accentColor.opacity(0.08) : Color.primary.opacity(0.025))
         return GeometryReader { geo in
             ZStack(alignment: .topLeading) {
-                RoundedRectangle(cornerRadius: compact ? 4 : 8, style: .continuous)
-                    .fill(isSelected ? Color.accentColor.opacity(0.08) : Color.primary.opacity(0.025))
-                    .contentShape(Rectangle())
-                    .onTapGesture(coordinateSpace: .local) { location in
-                        guard let onCreate else { return }
-                        // Down to the half-hour touched, never past the last one of the day.
-                        let touched = first + Int(location.y / hourHeight * 60)
-                        onCreate(day, min(23 * 60 + 30, max(0, touched / 30 * 30)))
-                    }
-                    .accessibilityAction(named: Text(tr("Créer un événement ce jour-là"))) {
-                        onCreate?(day, 9 * 60)
-                    }
+                // Without `onCreate`, no gesture: a touch reaches the link the table may sit in.
+                if let onCreate {
+                    background
+                        .contentShape(Rectangle())
+                        .onTapGesture(coordinateSpace: .local) { location in
+                            // Down to the half-hour touched, never past the last one of the day.
+                            let touched = first + Int(location.y / hourHeight * 60)
+                            onCreate(day, min(23 * 60 + 30, max(0, touched / 30 * 30)))
+                        }
+                        .accessibilityAction(named: Text(tr("Créer un événement ce jour-là"))) {
+                            onCreate(day, 9 * 60)
+                        }
+                } else {
+                    background
+                }
                 ForEach(placed, id: \.item.id) { block in
                     let width: CGFloat = geo.size.width / CGFloat(block.lanes)
                     let minutes: CGFloat = CGFloat(min(block.end, last) - max(block.start, first))
@@ -363,6 +368,7 @@ struct WeekTimetable: View {
                             .fill(Color.red)
                             .frame(height: compact ? 1 : 1.5)
                             .offset(y: CGFloat(minute - first) / 60 * hourHeight)
+                            .allowsHitTesting(false)
                     }
                 }
             }
@@ -465,15 +471,21 @@ struct WeekTimetable: View {
 // MARK: - The week as a table, with its title
 
 /// The agenda of a week as a table under its title: a tap on a day picks it, a swipe across the
-/// table (or the arrows by the title) goes to the week before or after.
+/// table (or the arrows by the title) goes to the week before or after. `onCreate` and `onOpen`: see
+/// `WeekTimetable`.
 struct WeekTableCard: View {
     @Binding var day: Date
     let days: [(day: Date, items: [AgendaItem])]
+    let onCreate: ((Date, Int) -> Void)?
+    let onOpen: ((AgendaItem) -> Void)?
     @State private var forward = true
 
-    init(day: Binding<Date>, days: [(day: Date, items: [AgendaItem])]) {
+    init(day: Binding<Date>, days: [(day: Date, items: [AgendaItem])], onCreate: ((Date, Int) -> Void)? = nil,
+         onOpen: ((AgendaItem) -> Void)? = nil) {
         _day = day
         self.days = days
+        self.onCreate = onCreate
+        self.onOpen = onOpen
     }
 
     var body: some View {
@@ -506,7 +518,7 @@ struct WeekTableCard: View {
             }
             WeekTimetable(days: days, selected: day, onSelect: { picked in
                 withAnimation(.snappy) { day = picked }
-            })
+            }, onCreate: onCreate, onOpen: onOpen)
             .card(padding: 12)
             .id(DateMath.dayKey(week.first ?? day))
             .transition(.push(from: forward ? .trailing : .leading))

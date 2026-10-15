@@ -545,13 +545,19 @@ private struct WorkoutDayTile: View {
 }
 
 /// The week as a table: classes, work, appointments, tasks, workouts and the events of the Apple
-/// calendar, a column a day. A tap opens the week in Planning (where the weeks change). Half width:
-/// the same table, its blocks without text.
+/// calendar, a column a day. Full width: a touch on a free time creates an event there and a touch on a
+/// block opens it, as in Planning; « Toute la semaine » opens the week in Planning (where the weeks
+/// change). Half width: the same table, its blocks without text, too small to aim at: the whole card
+/// opens the week.
 private struct PlanningDayTile: View {
     let items: [DailyBrief.TimedItem]
     @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
     @Environment(\.dailyCompact) private var compact
+    @Environment(\.openURL) private var openURL
     @State private var events: [EventSnapshot] = []
+    /// A new event of the schedule, or what a block is, opened from the table.
+    @State private var editors = PlanningEditors()
 
     private let colorHex = "3366FF"
 
@@ -559,27 +565,41 @@ private struct PlanningDayTile: View {
         let week = Agenda.week(containing: Date(), model: model, events: events)
         let isEmpty = week.allSatisfy { $0.items.isEmpty }
         DayCard(title: tr("Planning"), symbol: "calendar.day.timeline.left", colorHex: colorHex) {
-            NavigationLink(value: HomeRoute.page(.planningWeek)) {
-                VStack(alignment: .leading, spacing: 8) {
-                    if isEmpty {
-                        Text(tr("Rien de prévu cette semaine."))
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    } else {
-                        WeekTimetable(days: week, compact: compact, hourHeight: compact ? 12 : 22)
+            if compact {
+                NavigationLink(value: HomeRoute.page(.planningWeek)) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        if isEmpty {
+                            emptyText
+                        } else {
+                            WeekTimetable(days: week, compact: true, hourHeight: 12)
+                        }
+                        weekLabel
                     }
-                    HStack(spacing: 3) {
-                        Text(tr("Toute la semaine"))
-                        Image(systemName: "chevron.right").font(.caption2.weight(.bold))
-                    }
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color(hex: colorHex))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("daily-planning-week")
+            } else {
+                // Empty, the table stays: a touch on a free time fills it.
+                if isEmpty { emptyText }
+                WeekTimetable(days: week, hourHeight: 22, onCreate: { date, minute in
+                    Haptics.tap()
+                    editors.create(on: date, at: minute)
+                }, onOpen: { item in
+                    // A deadline or a workout has no editor here: the week in Planning.
+                    editors.open(item, on: Date(), model: model, openURL: openURL) { _ in
+                        router.homePath.append(.page(.planningWeek))
+                    }
+                })
+                NavigationLink(value: HomeRoute.page(.planningWeek)) {
+                    weekLabel
+                        .frame(minHeight: 28)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("daily-planning-week")
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("daily-planning-week")
             // The Apple calendar, one tap away when it isn't linked yet.
             if case .needsAccess = model.events {
                 Button {
@@ -603,6 +623,22 @@ private struct PlanningDayTile: View {
         .accessibilityIdentifier("daily-planning")
         .onAppear(perform: loadEvents)
         .onChange(of: model.events) { _, _ in loadEvents() }
+        .planningEditors($editors)
+    }
+
+    private var emptyText: some View {
+        Text(tr("Rien de prévu cette semaine."))
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+    }
+
+    private var weekLabel: some View {
+        HStack(spacing: 3) {
+            Text(tr("Toute la semaine"))
+            Image(systemName: "chevron.right").font(.caption2.weight(.bold))
+        }
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(Color(hex: colorHex))
     }
 
     /// The calendar events of the whole week, the days already gone included.

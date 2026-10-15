@@ -389,8 +389,8 @@ struct FitnessAppView: View {
     // MARK: Exercises
 
     private func exercises(state: FitnessState) -> some View {
-        let quick = (state.favoriteExercises + state.recentExercises.filter { !state.favoriteExercises.contains($0) })
-            .compactMap(ExerciseLibrary.info).prefix(6)
+        // Favorites only: recent exercises are not shown here.
+        let quick = state.favoriteExercises.compactMap(ExerciseLibrary.info).prefix(6)
         return VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Exercices"))
             MiniRowsCard {
@@ -404,8 +404,7 @@ struct FitnessAppView: View {
                 ForEach(Array(quick)) { exercise in
                     MiniDivider()
                     NavigationLink(value: HomeRoute.page(.fitnessExercise(exercise.id))) {
-                        MiniRow(symbol: state.favoriteExercises.contains(exercise.id) ? "star.fill" : "clock", colorHex: accentHex,
-                                title: exercise.name, detail: exercise.summary)
+                        MiniRow(symbol: "star.fill", colorHex: accentHex, title: exercise.name, detail: exercise.summary)
                     }
                     .buttonStyle(.plain)
                 }

@@ -15,7 +15,8 @@ extension EnvironmentValues {
 }
 
 /// The exercise library: search as you type (names, other names, muscles, equipment), filters,
-/// favorites, recent and frequent exercises, and « Mes exercices ». Picking mode adds to a session.
+/// favorites, frequent exercises, and « Mes exercices ». Picking mode adds to a session and also
+/// offers the recent exercises.
 struct ExerciseLibraryPage: View {
     var onPick: ((ExerciseInfo) -> Void)?
     @Environment(AppModel.self) private var model
@@ -72,8 +73,10 @@ struct ExerciseLibraryPage: View {
 
             if isBrowsing {
                 shortcut(tr("Favoris"), ids: state.favoriteExercises)
-                shortcut(tr("Récents"), ids: state.recentExercises.filter { !state.favoriteExercises.contains($0) })
-                shortcut(tr("Les plus faits"), ids: FitnessMath.frequentExercises(state).filter { !state.favoriteExercises.contains($0) && !state.recentExercises.contains($0) })
+                // Recent exercises only while picking one for a session, where they speed up the choice.
+                let recents: [String] = onPick == nil ? [] : state.recentExercises.filter { !state.favoriteExercises.contains($0) }
+                shortcut(tr("Récents"), ids: recents)
+                shortcut(tr("Les plus faits"), ids: FitnessMath.frequentExercises(state).filter { !state.favoriteExercises.contains($0) && !recents.contains($0) })
                 Section {
                     ForEach(state.customExercises) { custom in
                         VStack(alignment: .leading, spacing: 2) {

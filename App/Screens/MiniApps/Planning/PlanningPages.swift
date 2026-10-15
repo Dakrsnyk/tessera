@@ -163,17 +163,25 @@ struct TaskRow: View {
 // MARK: - Week and month
 
 /// The week as a table (a column a day, the hours down the side), then what the chosen day holds.
-/// A swipe on the table, or its arrows, changes week.
+/// A swipe on the table, or its arrows, changes week; a touch on a free time creates an event there,
+/// a touch on a block opens it (as in the Planning).
 struct PlanningWeekPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.openURL) private var openURL
     @State private var day = Date()
     @State private var events: [EventSnapshot] = []
+    @State private var editors = PlanningEditors()
 
     var body: some View {
         let week = Agenda.week(containing: day, model: model, events: events)
         let items = week.first { DateMath.isSameDay($0.day, day) }?.items ?? []
         MiniAppScroll {
-            WeekTableCard(day: $day, days: week)
+            WeekTableCard(day: $day, days: week, onCreate: { date, minute in
+                Haptics.tap()
+                editors.create(on: date, at: minute)
+            }, onOpen: { item in
+                editors.open(item, on: day, model: model, openURL: openURL) { day = $0 }
+            })
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: Fmt.longDay(day), detail: items.isEmpty ? nil : Fmt.plural(items.count, tr("élément"), tr("éléments")))
                 if items.isEmpty {
@@ -191,6 +199,7 @@ struct PlanningWeekPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: load)
         .onChange(of: day) { _, _ in load() }
+        .planningEditors($editors)
     }
 
     private func load() {

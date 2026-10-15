@@ -7,15 +7,14 @@ import SwiftUI
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
-    @State private var editing: TaskItem?
     @State private var newPriority = ""
     @State private var askingCalendar = false
     /// The day the agenda shows (today by default; any day before or after).
     @State private var day = Date()
     /// How much time the calendar shows: the week by default.
     @State private var scale: CalendarScale = .week
-    /// An event of the schedule made or changed from the calendar.
-    @State private var scheduleSheet: StudiesSheet?
+    /// A task, or an event of the schedule, made or changed from the calendar.
+    @State private var editors = PlanningEditors()
     @Environment(\.openURL) private var openURL
 
     private var accentHex: String { MiniApp.planning.colorHex }
@@ -28,7 +27,7 @@ struct PlanningAppView: View {
         let overdue = tasks.filter { $0.isOverdue(at: now) }
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
-                PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: createEvent, onOpen: open)
+                PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
                     .padding(.bottom, 6)
                 MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
                 VStack(alignment: .leading, spacing: 0) {
@@ -63,7 +62,7 @@ struct PlanningAppView: View {
             }
 
             MiniActionButton(title: tr("Nouvelle tâche"), symbol: "plus", colorHex: accentHex) {
-                editing = TaskItem(title: "", due: DateMath.startOfDay(day))
+                editors.task = TaskItem(title: "", due: DateMath.startOfDay(day))
             }
             .accessibilityIdentifier("planning-new-task")
 
@@ -137,10 +136,7 @@ struct PlanningAppView: View {
         .onAppear(perform: loadEvents)
         .onChange(of: day) { _, _ in loadEvents() }
         .onChange(of: scale) { _, _ in loadEvents() }
-        .sheet(item: $editing) { task in
-            TaskEditor(task: task)
-        }
-        .sheet(item: $scheduleSheet) { $0.editor }
+        .planningEditors($editors)
     }
 
     /// The calendar events of what the calendar shows (the month around the day, or the whole year).
@@ -149,30 +145,9 @@ struct PlanningAppView: View {
         events = CalendarService.events(from: range.start, to: range.end)
     }
 
-    /// A touch on a free time: a new event of the schedule, that day, from that time, for an hour.
-    private func createEvent(on date: Date, at minute: Int) {
-        let slot = ClassSlot(courseID: nil, weekday: FitnessMath.isoWeekday(date), startMinute: minute, endMinute: min(24 * 60, minute + 60),
-                             kind: .appointment, title: "", date: DateMath.startOfDay(date))
-        scheduleSheet = .slotOn(slot, date)
-    }
-
-    /// A touch on something of the calendar: its own editor (the calendar's events open in Calendar).
+    /// A touch on something of the calendar: its own editor; a deadline or a workout shows its day.
     private func open(_ item: AgendaItem) {
-        let date = item.start ?? day
-        switch item.kind {
-        case .classSlot:
-            if let id = item.slotID, let slot = model.student.slots.first(where: { $0.id == id }) { scheduleSheet = .slotOn(slot, date) }
-        case .task:
-            if let id = item.taskID, let task = model.content.tasks.first(where: { $0.id == id }) { editing = task }
-        case .exam:
-            if let id = item.examID, let exam = model.student.exams.first(where: { $0.id == id }) { scheduleSheet = .exam(exam) }
-        case .assignment:
-            if let id = item.assignmentID, let assignment = model.student.assignments.first(where: { $0.id == id }) { scheduleSheet = .assignment(assignment) }
-        case .event:
-            if let url = URL(string: "calshow:\(Int(date.timeIntervalSinceReferenceDate))") { openURL(url) }
-        case .deadline, .workout:
-            day = date
-        }
+        editors.open(item, on: day, model: model, openURL: openURL) { day = $0 }
     }
 
     private func countTile(_ title: String, _ count: Int, _ hex: String?) -> some View {
@@ -241,6 +216,52 @@ struct PlanningAppView: View {
         guard !title.isEmpty else { return }
         model.update(\.productivity) { $0.priorities.append(PriorityItem(title: title)) }
         newPriority = ""
+    }
+}
+
+/// The editors the Planning's calendar opens, shared by the Planning, its week page and the Planning card
+/// of « Mon Quotidien »: a touch on a free time makes an event of the schedule there (its editor warns of
+/// what happens at the same time), a touch on a block opens its own editor. Shown by `planningEditors(_:)`.
+struct PlanningEditors {
+    /// A task, opened from the calendar or new.
+    var task: TaskItem?
+    /// An event of the schedule, an exam or homework, made or changed from the calendar.
+    var schedule: StudiesSheet?
+
+    /// A touch on a free time: a new event of the schedule, that day, from that time, for an hour.
+    mutating func create(on date: Date, at minute: Int) {
+        let slot = ClassSlot(courseID: nil, weekday: FitnessMath.isoWeekday(date), startMinute: minute, endMinute: min(24 * 60, minute + 60),
+                             kind: .appointment, title: "", date: DateMath.startOfDay(date))
+        schedule = .slotOn(slot, date)
+    }
+
+    /// A touch on something of the calendar: its own editor (the calendar's events open in Calendar). What
+    /// has no editor (a deadline, a workout) goes to `show` with its day; `day` stands for an item without a time.
+    @MainActor
+    mutating func open(_ item: AgendaItem, on day: Date, model: AppModel, openURL: OpenURLAction, show: (Date) -> Void) {
+        let date = item.start ?? day
+        switch item.kind {
+        case .classSlot:
+            if let id = item.slotID, let slot = model.student.slots.first(where: { $0.id == id }) { schedule = .slotOn(slot, date) }
+        case .task:
+            if let id = item.taskID, let found = model.content.tasks.first(where: { $0.id == id }) { task = found }
+        case .exam:
+            if let id = item.examID, let exam = model.student.exams.first(where: { $0.id == id }) { schedule = .exam(exam) }
+        case .assignment:
+            if let id = item.assignmentID, let assignment = model.student.assignments.first(where: { $0.id == id }) { schedule = .assignment(assignment) }
+        case .event:
+            if let url = URL(string: "calshow:\(Int(date.timeIntervalSinceReferenceDate))") { openURL(url) }
+        case .deadline, .workout:
+            show(date)
+        }
+    }
+}
+
+extension View {
+    /// The sheets of `PlanningEditors`: the task editor and the editor of the schedule.
+    func planningEditors(_ editors: Binding<PlanningEditors>) -> some View {
+        sheet(item: editors.task) { TaskEditor(task: $0) }
+            .sheet(item: editors.schedule) { $0.editor }
     }
 }
 

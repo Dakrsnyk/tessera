@@ -14,7 +14,7 @@ struct PhotoQuotesAppView: View {
     private var accentHex: String { MiniApp.photos.colorHex }
 
     var body: some View {
-        let made = model.recentDesigns.filter { $0.kind.isMadeInItsMiniApp }
+        let made = model.photoQuoteDesigns
         MiniAppScroll {
             Text(tr("Tes photos et les phrases qui t'inspirent, sur ton écran d'accueil."))
                 .font(.subheadline)
@@ -78,11 +78,13 @@ struct PhotoQuotesAppView: View {
             paywall = .designLimit
             return
         }
-        var design = WidgetDesign(kind: kind, format: .small)
-        design.name = kind == .photos ? tr("Mes photos") : tr("Ma citation")
-        if kind == .quote { design.options.quote = QuoteContent() }
-        editing = PhotoQuoteDraft(design: design, isNew: true)
+        editing = PhotoQuoteDraft.blank(kind)
     }
+}
+
+extension AppModel {
+    /// The photo and quote widgets, the most recently used first.
+    var photoQuoteDesigns: [WidgetDesign] { recentDesigns.filter { $0.kind.isMadeInItsMiniApp } }
 }
 
 /// A photo or quote widget being made or changed.
@@ -90,6 +92,15 @@ struct PhotoQuoteDraft: Identifiable {
     var design: WidgetDesign
     var isNew: Bool
     var id: UUID { design.id }
+
+    /// A new photo or quote widget, small until its size is chosen: started the same way from the mini-app
+    /// and from Créer (the caller checks the free limit first).
+    static func blank(_ kind: WidgetKind) -> PhotoQuoteDraft {
+        var design = WidgetDesign(kind: kind, format: .small)
+        design.name = kind == .photos ? tr("Mes photos") : tr("Ma citation")
+        if kind == .quote { design.options.quote = QuoteContent() }
+        return PhotoQuoteDraft(design: design, isNew: true)
+    }
 }
 
 /// Makes or changes a photo or quote widget: its size first, then its photos (framed one by one) or its
