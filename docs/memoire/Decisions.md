@@ -29,5 +29,5 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-15 : installation par TestFlight, signée par la CI avec un certificat Apple Distribution fait une fois (CSR par OpenSSL sous Windows) et deux profils App Store gardés en secrets GitHub ; pas de signature automatique en CI (chaque machine neuve créerait un certificat).
 
 ## Outillage
-- La CI est pilotée par des tags dans le message de commit (voir `CLAUDE.md`) ; `[check]` d'abord, finir une série par `[unit]` pour avoir une version à installer.
+- La CI est pilotée par des tags dans le message de commit (voir `CLAUDE.md`) ; `[check]` d'abord, finir une série par `[unit]` (tests) puis `[testflight]` (version sur l'iPhone par TestFlight, depuis le 2026-10-15).
 - 2026-10-12 : la carte Obsidian (`obsidian_map.py`, canvases, notes `modules/` et `code/`) est remplacée par la carte graphify (`scripts/graph_map.py`, demande de l'utilisateur) : un nœud par fichier relié par les vrais appels (graphify, analyse locale), 8 grandes catégories (ou les modules), réglages façon Obsidian (Filtres, Groupes, Affichage, Forces, Animer), mise à jour après chaque commit. Les descriptions des modules sont gardées dans `MODULES`. La mémoire passe de `docs/obsidian/memoire/` à `docs/memoire/`.
