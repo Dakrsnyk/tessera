@@ -79,6 +79,7 @@ case "${1:-}" in
     gh secret set ASC_KEY_P8_BASE64 -R "$REPO" --body "$(b64 "$P8")"
     rm -f dist.p12 dist.pem
     echo
+    gh secret list -R "$REPO"
     echo "Les 8 secrets sont enregistrés sur GitHub. Garde $DIR en lieu sûr (sauvegarde) : dist.key va avec le certificat."
     ;;
 

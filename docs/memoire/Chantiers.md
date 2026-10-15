@@ -38,7 +38,7 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 ## TestFlight — 2026-10-15
 
 - L'utilisateur a acheté le compte Apple Developer. Préparé : tag CI `[testflight]` (Release signée, envoi TestFlight), signature manuelle en Release, `scripts/signing/ardane_signing.sh` et `scripts/signing/README.md`.
-- À faire par l'utilisateur : identifiants, certificat, profils, fiche App Store Connect, clé API, secrets (README). Ensuite : commit `[testflight]` et vérifier le rapport.
+- Fait par l'utilisateur le 2026-10-15 : identifiants, certificat, profils, fiche App Store Connect, clé API (Key ID `YPPQ3U2GKY`), les 8 secrets GitHub (Team ID `WD538Z3CL9`). Premier envoi lancé le même jour.
 
 ## À ne pas oublier
 
