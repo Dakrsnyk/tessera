@@ -118,6 +118,7 @@ MODULES = [
          "Page dans l'ordre : aperçu, semaine, programme et séances, exercices, progression et statistiques, records en bas.",
          "Bibliothèque d'exercices (163) avec démonstration animée (`DemoRenderer`, `ExerciseDemos.json`) et technique ; complète en Premium (`ExerciseLibrary.freeIDs` offerts, ceux déjà faits restent ouverts).",
          "Ajouter un exercice pendant une séance l'ajoute directement à la séance en cours (`exercisePick`).",
+         "Exercices récents plus affichés (page Fitness, bibliothèque) : favoris seulement ; « Récents » reste dans le sélecteur d'une séance (2026-10-15).",
          "Semaine en ronds, records, progression, historique, séances rattrapées, calories estimées.",
          "Pas du jour via le capteur de mouvement (`StepCounter`, CoreMotion).",
      ],
