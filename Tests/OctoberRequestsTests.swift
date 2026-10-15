@@ -289,4 +289,132 @@ final class OctoberRequestsTests: XCTestCase {
         XCTAssertTrue(store.update(NutritionState.self) { $0.goals.kcal = 2_000 })
         XCTAssertEqual(store.state(NutritionState.self).goals.kcal, 2_000)
     }
+
+    // MARK: Business: sales from elsewhere
+
+    func testAStripeExportIsImportedOnceEvenTwice() throws {
+        let csv = """
+        id,Created date (UTC),Amount,Amount Refunded,Currency,Status,Description,Fee
+        ch_1,2026-10-01 14:05:10,49.00,0.00,cad,Paid,Abonnement,1.72
+        ch_2,2026-10-02 09:00:00,"1,200.00",200.00,cad,Paid,Atelier,35.10
+        ch_3,2026-10-03 10:00:00,15.00,0.00,cad,Failed,Essai,0
+        """
+        let batch = try BusinessCSV.parse(csv)
+        XCTAssertEqual(batch.sales.count, 2, "The failed payment is left out")
+        XCTAssertEqual(batch.skipped, 1)
+        XCTAssertEqual(batch.sales[1].amount, 1_000, accuracy: 0.001, "Refunded part taken off")
+        XCTAssertEqual(batch.expenses.map(\.amount).reduce(0, +), 36.82, accuracy: 0.001, "Fees become costs")
+        XCTAssertEqual(batch.currencies, ["cad"])
+        var utc = Calendar(identifier: .gregorian)
+        utc.timeZone = TimeZone(identifier: "UTC")!
+        XCTAssertEqual(utc.component(.hour, from: batch.sales[0].date), 14, "Stripe's times are UTC")
+
+        var state = BusinessState()
+        state.sales = [SalesEntry(amount: 80, note: "Typed by hand")]
+        let first = state.merge(batch)
+        XCTAssertEqual(first.added, 4)
+        let again = state.merge(try BusinessCSV.parse(csv))
+        XCTAssertEqual(again.added, 0, "The same file again adds nothing")
+        XCTAssertEqual(again.unchanged, 4)
+        XCTAssertEqual(state.sales.count, 3)
+        XCTAssertTrue(state.sales.contains { $0.note == "Typed by hand" }, "What was typed by hand stays")
+        state.removeEntries(from: .csv)
+        XCTAssertEqual(state.sales.count, 1)
+    }
+
+    func testAShopifyOrderOnSeveralLinesCountsOnce() throws {
+        let csv = """
+        Name,Financial Status,Paid at,Total,Lineitem name,Currency
+        #1001,paid,2026-10-01 10:12:13 -0400,59.90,T-shirt,CAD
+        #1001,,,,Casquette,
+        #1002,refunded,2026-10-02 11:00:00 -0400,25.00,Mug,CAD
+        #1003,voided,2026-10-03 11:00:00 -0400,10.00,Badge,CAD
+        """
+        let batch = try BusinessCSV.parse(csv)
+        XCTAssertEqual(batch.sales.map(\.externalID), ["#1001"])
+        XCTAssertEqual(batch.sales[0].amount, 59.90, accuracy: 0.001)
+        XCTAssertEqual(batch.skipped, 3, "The second line of an order has no total; refunded and voided orders are left out")
+    }
+
+    func testABankStyleFileWithSemicolonsAndCommas() throws {
+        let csv = "Date;Libellé;Montant\r\n15/10/2026;Vente marché;\"1 234,50\"\r\n16/10/2026;Loyer atelier;-450,00\r\n;Sans date;10"
+        let batch = try BusinessCSV.parse(csv)
+        XCTAssertEqual(batch.sales.first?.amount ?? 0, 1_234.5, accuracy: 0.001)
+        XCTAssertEqual(batch.expenses.first?.amount ?? 0, 450, accuracy: 0.001, "A negative amount is a cost")
+        XCTAssertEqual(batch.expenses.first?.label, "Loyer atelier")
+        XCTAssertEqual(batch.skipped, 1, "No date: never guessed")
+        XCTAssertNotNil(batch.sales.first?.externalID, "Without an id, the line itself is its id")
+        XCTAssertThrowsError(try BusinessCSV.parse("Nom;Ville\nA;B")) { error in
+            XCTAssertEqual(error as? BusinessCSV.ImportError, .missingColumns)
+        }
+    }
+
+    func testAmountsOfEveryRegion() {
+        XCTAssertEqual(BusinessCSV.amount("1 234,56 $"), 1_234.56)
+        XCTAssertEqual(BusinessCSV.amount("$1,234.56"), 1_234.56)
+        XCTAssertEqual(BusinessCSV.amount("1.234,56"), 1_234.56)
+        XCTAssertEqual(BusinessCSV.amount("-12.00"), -12)
+        XCTAssertEqual(BusinessCSV.amount("(12.00)"), -12)
+        XCTAssertEqual(BusinessCSV.amount("1,200"), 1_200)
+        XCTAssertNil(BusinessCSV.amount("—"))
+    }
+
+    func testStripeTransactionsBecomeSalesRefundsAndDailyFees() throws {
+        let json = """
+        {"object":"list","has_more":false,"data":[
+          {"id":"txn_1","amount":4900,"fee":172,"created":1790000000,"currency":"cad","type":"charge","description":"Abonnement"},
+          {"id":"txn_2","amount":-1000,"fee":0,"created":1790000500,"currency":"cad","type":"refund","description":null},
+          {"id":"txn_3","amount":-20000,"fee":0,"created":1790001000,"currency":"cad","type":"payout","description":"Virement"},
+          {"id":"txn_4","amount":500,"fee":0,"created":1790002000,"currency":"jpy","type":"payment","description":"Yen"}
+        ]}
+        """
+        let page = try JSONDecoder().decode(StripeTransactions.Page.self, from: Data(json.utf8))
+        let batch = StripeTransactions.batch(from: page.data)
+        XCTAssertEqual(batch.sales.map(\.amount), [49, -10, 500], "Cents, except for currencies without them")
+        XCTAssertEqual(batch.skipped, 1, "A payout moves money already counted")
+        XCTAssertEqual(batch.expenses.count, 1)
+        XCTAssertEqual(batch.expenses.first?.amount ?? 0, 1.72, accuracy: 0.001)
+        XCTAssertEqual(batch.expenses.first?.externalID, "fees-\(DateMath.dayKey(Date(timeIntervalSince1970: 1_790_000_000)))")
+        var state = BusinessState()
+        state.merge(batch)
+        XCTAssertEqual(state.merge(batch).added, 0, "A second sync adds nothing")
+    }
+
+    func testBusinessSavedBeforeStillReads() throws {
+        let state = try JSONDecoder().decode(BusinessState.self, from: Data(#"{"sales":[{"id":"6F9619FF-8B86-D011-B42D-00C04FC964FF","date":0,"amount":10,"orders":1,"newCustomers":0,"visitors":0,"note":""}]}"#.utf8))
+        XCTAssertEqual(state.sales.count, 1)
+        XCTAssertNil(state.sales[0].source)
+        XCTAssertNil(state.connections.stripe)
+    }
+
+    // MARK: Planning
+
+    func testAPinchMovesOneScaleAtATime() {
+        XCTAssertEqual(CalendarScale.step(for: 1.6), -1, "Spread: closer")
+        XCTAssertEqual(CalendarScale.step(for: 0.6), 1, "Pinch: wider")
+        XCTAssertEqual(CalendarScale.step(for: 1.1), 0, "A hesitant gesture changes nothing")
+        XCTAssertEqual(CalendarScale.week.closer, .day)
+        XCTAssertEqual(CalendarScale.week.wider, .month)
+        XCTAssertNil(CalendarScale.day.closer)
+        XCTAssertNil(CalendarScale.year.wider)
+        let day = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 15, hour: 9))!
+        for scale in CalendarScale.allCases {
+            XCTAssertTrue(scale.interval(containing: day).contains(day), "The day looked at stays in view (\(scale))")
+        }
+    }
+
+    func testAnEventOverlappingAnotherIsFound() {
+        let model = temporaryModel()
+        let day = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 15, hour: 9))!
+        let dentist = ClassSlot(courseID: nil, weekday: FitnessMath.isoWeekday(day), startMinute: 10 * 60, endMinute: 11 * 60,
+                                kind: .appointment, title: "Dentiste", date: DateMath.startOfDay(day))
+        model.update(\.student) { $0.slots = [dentist] }
+        var new = ClassSlot(courseID: nil, weekday: FitnessMath.isoWeekday(day), startMinute: 10 * 60 + 30, endMinute: 11 * 60 + 30,
+                            kind: .work, title: "Réunion", date: DateMath.startOfDay(day))
+        XCTAssertEqual(PlanningCalendar.conflicts(new, on: day, model: model, events: []).map(\.title), ["Dentiste"])
+        new.startMinute = 11 * 60
+        new.endMinute = 12 * 60
+        XCTAssertTrue(PlanningCalendar.conflicts(new, on: day, model: model, events: []).isEmpty, "Back to back is not a conflict")
+        XCTAssertTrue(PlanningCalendar.conflicts(dentist, on: day, model: model, events: []).isEmpty, "Never with itself")
+    }
 }

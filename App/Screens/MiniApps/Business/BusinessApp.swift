@@ -134,6 +134,7 @@ struct BusinessAppView: View {
                 MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }
                     .accessibilityIdentifier("business-add-cost")
             }
+            BusinessSourcesCard()
             kpis(state: state, now: now)
             metrics(state: state)
             curve(state: state, now: now)

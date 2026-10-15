@@ -31,7 +31,7 @@ Chaque accès est demandé par iOS au moment où une fonction en a besoin. Tu pe
 - **Position** — Seulement quand tu touches « Utiliser ma position », pour trouver ta ville et la météo. Seules les coordonnées de la ville choisie sont gardées sur ton iPhone.
 - **Calendrier** — Lecture seule de tes prochains événements, pour le widget « À venir » et ton planning. Ils ne quittent pas ton iPhone.
 - **Mouvements (podomètre)** — Lecture de tes pas du jour pour « Mon Quotidien ». Ils ne quittent pas ton iPhone.
-- **Photos** — Ardane n'accède qu'aux photos que tu choisis comme fond ; une copie réduite est gardée sur ton iPhone. Un fond d'écran du Store que tu enregistres est ajouté à ta photothèque sans qu'Ardane puisse la lire.
+- **Photos** — Ardane n'accède qu'aux photos que tu choisis (fond d'un widget, widgets de « Photos et citations »), par le sélecteur d'Apple, sans accès à ta photothèque ; une copie réduite est gardée sur ton iPhone. Un fond d'écran du Store que tu enregistres est ajouté à ta photothèque sans qu'Ardane puisse la lire.
 - **Notifications et activités en direct** — Uniquement pour les rappels que tu actives et pour suivre une séance en cours sur l'écran verrouillé.
 
 ## 4. Services externes
@@ -44,6 +44,7 @@ Quand tu utilises certaines fonctions, l'app interroge directement un service ex
 - **CoinGecko (cours des cryptomonnaies)** — Reçoit le nom de la cryptomonnaie et de la devise demandées. Politique : coingecko.com
 - **Frankfurter (taux de change)** — Reçoit les devises demandées. Site : frankfurter.dev
 - **SEC EDGAR (données publiques d'entreprises américaines)** — Reçoit l'identifiant de l'entreprise consultée. Service du gouvernement des États-Unis : sec.gov
+- **Stripe (facultatif, Business)** — Seulement si tu connectes ton compte avec une clé restreinte en lecture seule que tu crées toi-même : l'app lit directement chez Stripe tes ventes, remboursements et frais. La clé reste dans le trousseau de ton iPhone ; rien ne passe par Ardane. Un fichier de ventes que tu importes est lu sur ton iPhone. Politique : stripe.com/privacy
 - **Finnhub (cours des actions)** — Reçoit le symbole de l'action demandée. Politique : finnhub.io
 
 Ces services peuvent être situés hors du Québec et du Canada, notamment dans l'Union européenne et aux États-Unis. Les données qu'ils reçoivent ne permettent pas, à elles seules, de t'identifier.

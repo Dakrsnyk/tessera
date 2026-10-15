@@ -8,6 +8,9 @@ struct SalesEntry: Codable, Hashable, Identifiable {
     var newCustomers: Int = 0
     var visitors: Int = 0
     var note: String = ""
+    /// Where it came from when it wasn't typed (`BusinessSource`), and its id there.
+    var source: String?
+    var externalID: String?
 }
 
 struct BusinessExpense: Codable, Hashable, Identifiable {
@@ -15,6 +18,8 @@ struct BusinessExpense: Codable, Hashable, Identifiable {
     var date = Date()
     var amount: Double
     var label: String
+    var source: String?
+    var externalID: String?
 }
 
 struct SubscriptionSnapshot: Codable, Hashable, Identifiable {
@@ -116,10 +121,12 @@ struct BusinessState: Codable, Hashable {
     var subscriptions: [SubscriptionSnapshot] = []
     var pinnedKPIs: [BusinessKPI] = BusinessState.defaultKPIs
     var metrics: [CustomMetric] = []
+    /// Stripe and the files imported (`BusinessImport.swift`).
+    var connections = BusinessConnections()
 
     static let defaultKPIs: [BusinessKPI] = [.revenue, .profit, .orders, .averageBasket]
 
-    enum CodingKeys: String, CodingKey { case name, monthlyGoal, sales, expenses, subscriptions, pinnedKPIs, metrics }
+    enum CodingKeys: String, CodingKey { case name, monthlyGoal, sales, expenses, subscriptions, pinnedKPIs, metrics, connections }
 
     init() {}
 
@@ -132,6 +139,7 @@ struct BusinessState: Codable, Hashable {
         subscriptions = c.value(.subscriptions, [])
         pinnedKPIs = c.value(.pinnedKPIs, BusinessState.defaultKPIs)
         metrics = c.value(.metrics, [])
+        connections = c.value(.connections, BusinessConnections())
     }
 
     mutating func togglePinned(_ kpi: BusinessKPI) {
