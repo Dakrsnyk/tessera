@@ -19,6 +19,7 @@ Retour : [[Memoire]]
 - [ ] Créer : « Photos et citations » tout en bas ; possibilité de mettre une photo derrière une citation.
 - [ ] Icône de l'app : changer d'icône devient Premium.
 - [ ] Nutrition : widget d'écran verrouillé pour scanner directement un code-barres.
+- [ ] Mon Quotidien : retirer « Mes données » en haut (« Mes infos » est en bas) ; bouton de disposition remplacé par un petit « + ».
 
 ## Idées pour plus tard
 
