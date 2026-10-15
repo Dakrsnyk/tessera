@@ -449,8 +449,8 @@ enum OpenFoodFacts {
         }
     }
 
-    /// Open Food Facts keeps minerals and vitamins in grams per 100 g: only those on the label, never zeros
-    /// made up.
+    /// Open Food Facts keeps minerals and vitamins in grams per 100 g, and alcohol in % vol: only those on the
+    /// label, never zeros made up.
     private static func micros(_ per100: (String) -> Double?) -> Micronutrients? {
         func milligrams(_ key: String) -> Double? { per100(key).map { $0 * 1_000 } }
         func micrograms(_ key: String) -> Double? { per100(key).map { $0 * 1_000_000 } }
@@ -459,7 +459,15 @@ enum OpenFoodFacts {
             potassiumMg: milligrams("potassium"), calciumMg: milligrams("calcium"), ironMg: milligrams("iron"),
             magnesiumMg: milligrams("magnesium"), vitaminCMg: milligrams("vitamin-c"), vitaminAMcg: micrograms("vitamin-a"),
             vitaminDMcg: micrograms("vitamin-d"), vitaminB12Mcg: micrograms("vitamin-b12"),
-            folateMcg: micrograms("folates") ?? micrograms("vitamin-b9"))
+            folateMcg: micrograms("folates") ?? micrograms("vitamin-b9"),
+            transFat: per100("trans-fat"), omega3Fat: per100("omega-3-fat"), omega6Fat: per100("omega-6-fat"),
+            zincMg: milligrams("zinc"), phosphorusMg: milligrams("phosphorus"), seleniumMcg: micrograms("selenium"),
+            copperMg: milligrams("copper"), manganeseMg: milligrams("manganese"), vitaminEMg: milligrams("vitamin-e"),
+            vitaminKMcg: micrograms("vitamin-k") ?? micrograms("phylloquinone"), thiaminMg: milligrams("vitamin-b1"),
+            riboflavinMg: milligrams("vitamin-b2"), niacinMg: milligrams("vitamin-pp"), pantothenicAcidMg: milligrams("pantothenic-acid"),
+            vitaminB6Mg: milligrams("vitamin-b6"), cholineMg: milligrams("choline"), caffeineMg: milligrams("caffeine"),
+            // % vol × 0,789 g/ml (the density of ethanol): grams per 100 ml.
+            alcohol: per100("alcohol").map { $0 * 0.789 })
         return micros.isEmpty ? nil : micros
     }
 

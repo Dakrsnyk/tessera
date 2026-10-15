@@ -6,6 +6,7 @@ import WidgetKit
 struct TesseraApp: App {
     @UIApplicationDelegateAdaptor(TesseraAppDelegate.self) private var appDelegate
     @State private var quickActions = QuickActions.shared
+    @State private var openRequests = AppOpenRequests.shared
     @State private var model = AppModel()
     @State private var router = Router()
     @State private var premium = PremiumStore()
@@ -31,6 +32,12 @@ struct TesseraApp: App {
                     if let link = DeepLink(url: url) {
                         router.handle(link, model: model)
                     }
+                }
+                // The « Scanner un aliment » control (iOS 18): its intent runs in the app and asks for the scanner.
+                .onChange(of: openRequests.pending, initial: true) { _, link in
+                    guard let link else { return }
+                    openRequests.pending = nil
+                    router.handle(link, model: model)
                 }
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active {
@@ -98,7 +105,7 @@ struct RootView: View {
                     FoodSearchView(startsWithScanner: true)
                 }
                 .sheet(isPresented: $router.isAddGuidePresented) {
-                    AddToHomeScreenGuide(designName: router.lastSavedName)
+                    AddToHomeScreenGuide(designName: router.lastSavedName, designID: router.lastSavedID)
                 }
                 .sheet(isPresented: $router.isProfilePresented) {
                     ProfileView()

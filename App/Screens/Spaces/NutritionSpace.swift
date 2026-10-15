@@ -527,11 +527,15 @@ struct FoodLogSheet: View {
                 ValueRow(title: tr("Protéines"), value: "\(TF.decimal(totals.protein, 1)) g")
                 ValueRow(title: tr("Glucides"), value: "\(TF.decimal(totals.carbs, 1)) g")
                 ValueRow(title: tr("Lipides"), value: "\(TF.decimal(totals.fat, 1)) g")
-                ValueRow(title: tr("Fibres"), value: "\(TF.decimal(totals.fiber, 1)) g")
-                if let sugars = totals.sugars { ValueRow(title: tr("Sucres"), value: "\(TF.decimal(sugars, 1)) g") }
-                if let saturated = totals.saturatedFat { ValueRow(title: tr("Gras saturés"), value: "\(TF.decimal(saturated, 1)) g") }
-                if let sodium = totals.sodiumMg { ValueRow(title: tr("Sodium"), value: tr("\(TF.int(sodium)) mg")) }
-                if let cholesterol = totals.cholesterolMg { ValueRow(title: tr("Cholestérol"), value: tr("\(TF.int(cholesterol)) mg")) }
+                if model.isPremium {
+                    ValueRow(title: tr("Fibres"), value: "\(TF.decimal(totals.fiber, 1)) g")
+                } else {
+                    NutrientLockRow()
+                }
+            }
+            // Sugars, fats, sodium, minerals, vitamins…: only the values the food gives (Premium).
+            if model.isPremium {
+                FoodNutrientSections(totals: totals)
             }
         }
         .onAppear {
@@ -634,6 +638,15 @@ struct CustomFoodEditor: View {
     @State private var fat: Double = 0
     @State private var fiber: Double = 0
     @State private var serving: Double = 100
+    // The other lines of a nutrition label (Premium): left empty, a value stays unknown.
+    @State private var sugars: Double?
+    @State private var saturatedFat: Double?
+    @State private var transFat: Double?
+    @State private var cholesterolMg: Double?
+    @State private var sodiumMg: Double?
+    @State private var potassiumMg: Double?
+    @State private var calciumMg: Double?
+    @State private var ironMg: Double?
 
     var body: some View {
         SheetForm(title: tr("Aliment perso"), canSave: !name.trimmed.isEmpty, onSave: save) {
@@ -652,7 +665,19 @@ struct CustomFoodEditor: View {
                 NumberRow(title: tr("Protéines"), value: $protein, unit: "g")
                 NumberRow(title: tr("Glucides"), value: $carbs, unit: "g")
                 NumberRow(title: tr("Lipides"), value: $fat, unit: "g")
-                NumberRow(title: tr("Fibres"), value: $fiber, unit: "g")
+                if model.isPremium {
+                    NumberRow(title: tr("Fibres"), value: $fiber, unit: "g")
+                    OptionalNumberRow(title: Nutrient.sugars.title, value: $sugars, unit: Nutrient.sugars.unit)
+                    OptionalNumberRow(title: Nutrient.saturatedFat.title, value: $saturatedFat, unit: Nutrient.saturatedFat.unit)
+                    OptionalNumberRow(title: Nutrient.transFat.title, value: $transFat, unit: Nutrient.transFat.unit)
+                    OptionalNumberRow(title: Nutrient.cholesterol.title, value: $cholesterolMg, unit: Nutrient.cholesterol.unit)
+                    OptionalNumberRow(title: Nutrient.sodium.title, value: $sodiumMg, unit: Nutrient.sodium.unit)
+                    OptionalNumberRow(title: Nutrient.potassium.title, value: $potassiumMg, unit: Nutrient.potassium.unit)
+                    OptionalNumberRow(title: Nutrient.calcium.title, value: $calciumMg, unit: Nutrient.calcium.unit)
+                    OptionalNumberRow(title: Nutrient.iron.title, value: $ironMg, unit: Nutrient.iron.unit)
+                } else {
+                    NutrientLockRow()
+                }
             }
         }
         .onAppear {
@@ -661,8 +686,11 @@ struct CustomFoodEditor: View {
     }
 
     private func save() {
+        let micros = Micronutrients(potassiumMg: potassiumMg, calciumMg: calciumMg, ironMg: ironMg, transFat: transFat)
         let food = FoodItem(id: "custom.\(UUID().uuidString)", name: name.trimmed, brand: draft?.brand, kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: fiber,
-                            servingGrams: max(1, serving), servingName: "\(TF.int(serving)) g", source: .custom, barcode: draft?.barcode)
+                            servingGrams: max(1, serving), servingName: "\(TF.int(serving)) g", source: .custom, barcode: draft?.barcode,
+                            sugars: sugars, saturatedFat: saturatedFat, sodiumMg: sodiumMg, cholesterolMg: cholesterolMg,
+                            micros: micros.isEmpty ? nil : micros)
         model.update(\.nutrition) { $0.customFoods.insert(food, at: 0) }
         onCreate(food)
     }

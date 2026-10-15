@@ -2,6 +2,8 @@ import SwiftUI
 
 /// The workout as it happens: the exercise and set now, what to lift (changeable before the set),
 /// the rest, what was done, and the exercise sheet one tap away without leaving the session.
+/// Free: running any session and logging its sets, adding an exercise the person writes. Premium: the
+/// library (sheets, picking from it) and what was lifted last time on an exercise.
 struct FitnessSessionPage: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -10,6 +12,9 @@ struct FitnessSessionPage: View {
     @State private var info: ExerciseInfo?
     @State private var editingSet: SetLog?
     @State private var picking = false
+    /// An exercise the person writes (or one of « Mes exercices »), added to the session.
+    @State private var writing = false
+    @State private var paywall: PaywallContext?
     @State private var confirmFinish = false
 
     private var accentHex: String { MiniApp.fitness.colorHex }
@@ -48,14 +53,43 @@ struct FitnessSessionPage: View {
                 }
             }
         }
+        .sheet(isPresented: $writing) {
+            SessionExerciseForm { template in
+                model.update(\.fitness) { $0.active?.append(template) }
+            }
+        }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
+    }
+
+    /// The library: picking from it is Premium.
+    private func openLibrary() {
+        if model.isPremium { picking = true } else { paywall = .exerciseLibrary }
+    }
+
+    /// The ⓘ of a library exercise: its sheet with Premium, else the small Premium badge and the paywall.
+    @ViewBuilder
+    private func infoLabel(_ exercise: ExerciseInfo, font: Font) -> some View {
+        if model.canOpenExercise(exercise.id) {
+            Image(systemName: "info.circle")
+                .font(font)
+                .foregroundStyle(Color(hex: accentHex))
+        } else {
+            PremiumBadge(compact: true)
+        }
+    }
+
+    private func openInfo(_ exercise: ExerciseInfo) {
+        if model.canOpenExercise(exercise.id) { info = exercise } else { paywall = .exerciseLibrary }
     }
 
     // MARK: Live
 
     private func live(session: WorkoutSession, exercise: ExerciseTemplate, state: FitnessState) -> some View {
         let now = Date()
+        // What was lifted last time is the exercise's data: Premium.
         let last: FitnessMath.ExerciseSession? = exercise.info.flatMap { known in
-            FitnessMath.history(of: known, state).last(where: { past in !DateMath.isSameDay(past.date, now) })
+            guard model.canOpenExercise(known.id) else { return nil }
+            return FitnessMath.history(of: known, state).last(where: { past in !DateMath.isSameDay(past.date, now) })
         }
         return MiniAppScroll {
             HStack {
@@ -93,11 +127,9 @@ struct FitnessSessionPage: View {
                     Spacer()
                     if let exerciseInfo = exercise.info {
                         Button {
-                            info = exerciseInfo
+                            openInfo(exerciseInfo)
                         } label: {
-                            Image(systemName: "info.circle")
-                                .font(.title2)
-                                .foregroundStyle(Color(hex: accentHex))
+                            infoLabel(exerciseInfo, font: .title2)
                                 .frame(width: 44, height: 44)
                         }
                         .accessibilityLabel(Text(tr("Fiche de l'exercice")))
@@ -179,7 +211,16 @@ struct FitnessSessionPage: View {
                     }
                 }
                 Button {
-                    picking = true
+                    openLibrary()
+                } label: {
+                    HStack(spacing: 8) {
+                        Label(tr("Choisir dans la bibliothèque"), systemImage: "books.vertical").font(.subheadline.weight(.semibold))
+                        if !model.isPremium { PremiumBadge() }
+                    }
+                }
+                .accessibilityIdentifier("session-library")
+                Button {
+                    writing = true
                 } label: {
                     Label(tr("Ajouter un exercice"), systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
                 }
@@ -268,9 +309,9 @@ struct FitnessSessionPage: View {
                 Text(FitnessPlan.setText(item)).font(.caption).foregroundStyle(.secondary).monospacedDigit()
                 if let exerciseInfo = item.info {
                     Button {
-                        info = exerciseInfo
+                        openInfo(exerciseInfo)
                     } label: {
-                        Image(systemName: "info.circle").foregroundStyle(Color(hex: accentHex))
+                        infoLabel(exerciseInfo, font: .body)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(Text(tr("Fiche de \(item.name)")))
@@ -326,13 +367,72 @@ struct FitnessSessionPage: View {
                     model.update(\.fitness) { state in
                         state.startSession(Routine(name: tr("Séance libre"), exercises: []), at: Date())
                     }
-                    picking = true
+                    // From the library with Premium, else written by the person.
+                    if model.isPremium { picking = true } else { writing = true }
                 } label: {
                     MiniRow(symbol: "sparkles", colorHex: accentHex, title: tr("Séance libre"), detail: tr("Ajoute les exercices au fur et à mesure"))
                 }
                 .buttonStyle(.plain)
             }
         }
+    }
+}
+
+/// An exercise written by the person, or one of « Mes exercices », added to the session in progress
+/// with its sets, reps, load and rest (free, without the library).
+struct SessionExerciseForm: View {
+    let onAdd: (ExerciseTemplate) -> Void
+    @Environment(AppModel.self) private var model
+    @State private var name = ""
+    @State private var sets = 3
+    @State private var reps = 10
+    @State private var weight: Double = 0
+    @State private var rest = 90
+
+    var body: some View {
+        let mine = model.fitness.customExercises
+        SheetForm(title: tr("Ajouter un exercice"), canSave: !name.trimmed.isEmpty, onSave: save) {
+            Section {
+                TextField(tr("Exercice"), text: $name)
+                    .accessibilityIdentifier("session-exercise-name")
+            }
+            if !mine.isEmpty {
+                Section(tr("Mes exercices")) {
+                    ForEach(mine) { custom in
+                        Button {
+                            choose(custom)
+                        } label: {
+                            HStack {
+                                Text(custom.name).foregroundStyle(Color.primary)
+                                Spacer()
+                                if custom.name == name.trimmed {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Section(tr("Séries")) {
+                Stepper(tr("Séries : \(sets)"), value: $sets, in: 1...12)
+                Stepper(tr("Répétitions : \(reps)"), value: $reps, in: 1...100)
+                NumberRow(title: tr("Charge"), value: $weight, unit: tr("kg"))
+                Stepper(tr("Repos : \(rest) s"), value: $rest, in: 15...600, step: 15)
+            }
+        }
+    }
+
+    private func choose(_ custom: CustomExercise) {
+        name = custom.name
+        if custom.type != .strength {
+            sets = 1
+            reps = 1
+        }
+    }
+
+    private func save() {
+        onAdd(ExerciseTemplate(name: name.trimmed, sets: sets, reps: reps, weight: weight, restSeconds: rest))
+        Haptics.success()
     }
 }
 

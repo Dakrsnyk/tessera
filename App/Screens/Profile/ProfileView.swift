@@ -103,7 +103,12 @@ struct ProfileView: View {
                     NavigationLink {
                         AppIconPicker()
                     } label: {
-                        Label(tr("Icône de l'app"), systemImage: "app.badge")
+                        // Changing the icon is Premium: the icons are still shown, with the badge.
+                        HStack {
+                            Label(tr("Icône de l'app"), systemImage: "app.badge")
+                            Spacer(minLength: 8)
+                            if !model.isPremium { PremiumBadge() }
+                        }
                     }
                     .accessibilityIdentifier("settings-app-icon")
                     Picker(tr("Température"), selection: settingBinding(\.temperatureUnit)) {

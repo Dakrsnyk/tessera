@@ -2,7 +2,7 @@ import SwiftUI
 
 /// The Fitness mini-app, in the order a workout is prepared and done: the overview of the day (today's
 /// session or the next one, one main action), the week, the program and its sessions, the exercises and
-/// their library, the progress and statistics, and the personal records at the bottom.
+/// their library, and the progress and statistics (the personal records are in « Progression »).
 struct FitnessAppView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -27,7 +27,6 @@ struct FitnessAppView: View {
             program(state: state)
             exercises(state: state)
             progress(state: state)
-            records(state: state)
             Text(tr("Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
@@ -323,40 +322,6 @@ struct FitnessAppView: View {
         return parts.isEmpty ? tr("Aujourd'hui") : parts.joined(separator: " · ")
     }
 
-    // MARK: Records
-
-    @ViewBuilder
-    private func records(state: FitnessState) -> some View {
-        let best = Array(FitnessMath.records(state).prefix(3))
-        if !best.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Records personnels"))
-                MiniRowsCard {
-                    ForEach(Array(best.enumerated()), id: \.offset) { index, record in
-                        let info = ExerciseLibrary.match(name: record.exercise)
-                        Group {
-                            if let info {
-                                NavigationLink(value: HomeRoute.page(.fitnessExercise(info.id))) {
-                                    recordRow(record)
-                                }
-                                .buttonStyle(.plain)
-                            } else {
-                                recordRow(record, chevron: false)
-                            }
-                        }
-                        if index < best.count - 1 { MiniDivider() }
-                    }
-                }
-            }
-        }
-    }
-
-    private func recordRow(_ record: FitnessMath.Record, chevron: Bool = true) -> some View {
-        MiniRow(symbol: "trophy.fill", colorHex: "F2A33A", title: record.exercise,
-                detail: tr("1RM estimé \(TF.int(record.oneRepMax)) kg"),
-                value: tr("\(ProfileNumberField.format(record.weight)) kg × \(record.reps)"), showsChevron: chevron)
-    }
-
     // MARK: Program and sessions
 
     private func program(state: FitnessState) -> some View {
@@ -394,22 +359,36 @@ struct FitnessAppView: View {
         return VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Exercices"))
             MiniRowsCard {
+                // Open to everyone (« Mes exercices » is free); every exercise in it is Premium.
                 NavigationLink(value: HomeRoute.page(.fitnessLibrary)) {
-                    MiniRow(symbol: "books.vertical.fill", colorHex: accentHex, title: tr("Bibliothèque d'exercices"),
-                            detail: model.isPremium ? tr("\(ExerciseLibrary.all.count) exercices, fiches et démonstrations")
-                                                    : tr("\(ExerciseLibrary.freeCount) exercices offerts, \(ExerciseLibrary.all.count) avec Premium"))
+                    premiumRow(symbol: "books.vertical.fill", title: tr("Bibliothèque d'exercices"),
+                               detail: tr("\(ExerciseLibrary.all.count) exercices, fiches et démonstrations"))
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("fitness-library")
                 ForEach(Array(quick)) { exercise in
                     MiniDivider()
                     NavigationLink(value: HomeRoute.page(.fitnessExercise(exercise.id))) {
-                        MiniRow(symbol: "star.fill", colorHex: accentHex, title: exercise.name, detail: exercise.summary)
+                        premiumRow(symbol: "star.fill", title: exercise.name, detail: exercise.summary)
                     }
                     .buttonStyle(.plain)
                 }
             }
         }
+    }
+
+    /// A row of a Premium feature: the small Premium badge before the chevron while the person is not Premium.
+    private func premiumRow(symbol: String, title: String, detail: String?) -> some View {
+        HStack(spacing: 8) {
+            MiniRow(symbol: symbol, colorHex: accentHex, title: title, detail: detail, showsChevron: false)
+            if !model.isPremium {
+                PremiumBadge(compact: true)
+            }
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.tertiary)
+        }
+        .contentShape(Rectangle())
     }
 
     // MARK: Progress and statistics
@@ -420,8 +399,7 @@ struct FitnessAppView: View {
             activity
             MiniRowsCard {
                 NavigationLink(value: HomeRoute.page(.fitnessProgress)) {
-                    MiniRow(symbol: "chart.line.uptrend.xyaxis", colorHex: accentHex, title: tr("Progression"), detail: tr("Charges, volume, records et évolution"),
-                            value: model.isPremium ? nil : tr("Premium"))
+                    premiumRow(symbol: "chart.line.uptrend.xyaxis", title: tr("Progression"), detail: tr("Charges, volume, records et évolution"))
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("fitness-progress")

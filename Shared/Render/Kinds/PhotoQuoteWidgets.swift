@@ -47,12 +47,7 @@ struct PhotoCell: View {
 
     var body: some View {
         if let image = PhotoCell.image(slot.file, for: size, zoom: slot.zoom) {
-            let frame = PhotoLayout.frame(image: image.size, cell: size, slot: slot)
-            Image(uiImage: image)
-                .resizable()
-                .frame(width: frame.size.width, height: frame.size.height)
-                .offset(x: frame.offset.x, y: frame.offset.y)
-                .frame(width: size.width, height: size.height, alignment: .topLeading)
+            FramedPhoto(image: image, slot: slot, size: size)
         } else {
             PhotoPlaceholder(symbol: "photo.badge.exclamationmark", text: tr("Photo indisponible"))
         }
@@ -66,6 +61,22 @@ struct PhotoCell: View {
         let ratio = longest / max(image.size.width, image.size.height)
         let target = CGSize(width: image.size.width * ratio, height: image.size.height * ratio)
         return image.preparingThumbnail(of: target) ?? image
+    }
+}
+
+/// A loaded photo cut to its cell at its framing (to be clipped by the caller).
+struct FramedPhoto: View {
+    let image: UIImage
+    let slot: PhotoSlot
+    let size: CGSize
+
+    var body: some View {
+        let frame = PhotoLayout.frame(image: image.size, cell: size, slot: slot)
+        Image(uiImage: image)
+            .resizable()
+            .frame(width: frame.size.width, height: frame.size.height)
+            .offset(x: frame.offset.x, y: frame.offset.y)
+            .frame(width: size.width, height: size.height, alignment: .topLeading)
     }
 }
 
@@ -91,10 +102,14 @@ private struct PhotoPlaceholder: View {
     }
 }
 
-/// A quote with its author, in its typography, on its colors.
+/// A quote with its author, in its typography, on its colors or on a photo. On a photo, a veil darkens it
+/// (a little more toward the bottom) and the text is light (`QuoteContent.inkOnPhotoHex`), with a soft
+/// shadow; when the photo's file is gone, the quote is drawn on its own colors, as without a photo.
 struct QuoteWidgetView: View {
     let quote: QuoteContent
     let family: WidgetFamily
+    /// The photo behind the quote (`WidgetDesign.quoteBackground`).
+    var background: PhotoSlot?
 
     private var size: CGFloat {
         let length = quote.text.count
@@ -115,15 +130,48 @@ struct QuoteWidgetView: View {
     }
 
     var body: some View {
-        let ink = Color(hex: quote.textHex)
+        if let background {
+            // The photo is read at the widget's size, then cut as it was framed.
+            GeometryReader { geo in
+                if let image = Self.backgroundImage(background, size: geo.size) {
+                    layers(isOnPhoto: true) {
+                        FramedPhoto(image: image, slot: background, size: geo.size)
+                            .clipped()
+                        veil
+                    }
+                } else {
+                    layers(isOnPhoto: false) { Color(hex: quote.backgroundHex) }
+                }
+            }
+        } else {
+            layers(isOnPhoto: false) { Color(hex: quote.backgroundHex) }
+        }
+    }
+
+    /// The photo behind a quote at the size it is drawn, or nil without one or when its file is gone (the
+    /// quote then falls back to its own colors).
+    static func backgroundImage(_ slot: PhotoSlot?, size: CGSize) -> UIImage? {
+        guard let slot else { return nil }
+        return PhotoCell.image(slot.file, for: size, zoom: slot.zoom)
+    }
+
+    private var veil: some View {
+        LinearGradient(
+            colors: [Color.black.opacity(quote.photoVeil * 0.75), Color.black.opacity(quote.photoVeil), Color.black.opacity(min(0.9, quote.photoVeil * 1.3))],
+            startPoint: .top, endPoint: .bottom
+        )
+    }
+
+    private func layers<Backdrop: View>(isOnPhoto: Bool, @ViewBuilder backdrop: () -> Backdrop) -> some View {
+        let ink = Color(hex: isOnPhoto ? quote.inkOnPhotoHex : quote.textHex)
         let alignment: HorizontalAlignment = quote.isCentered ? .center : .leading
-        ZStack {
-            Color(hex: quote.backgroundHex)
+        return ZStack {
+            backdrop()
             VStack(alignment: alignment, spacing: family == .systemSmall ? 6 : 10) {
                 if quote.showsMarks {
                     Text("“")
                         .font(.system(size: size * 2.2, weight: .bold, design: design))
-                        .foregroundStyle(ink.opacity(0.35))
+                        .foregroundStyle(ink.opacity(isOnPhoto ? 0.5 : 0.35))
                         .frame(height: size * 1.1, alignment: .top)
                         .accessibilityHidden(true)
                 }
@@ -136,13 +184,14 @@ struct QuoteWidgetView: View {
                 if !quote.author.trimmed.isEmpty {
                     Text("— \(quote.author.trimmed)")
                         .font(.system(size: max(10, size * 0.62), weight: .medium, design: design))
-                        .foregroundStyle(ink.opacity(0.7))
+                        .foregroundStyle(ink.opacity(isOnPhoto ? 0.85 : 0.7))
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                 }
             }
             .frame(maxWidth: .infinity, alignment: quote.isCentered ? .center : .leading)
             .padding(family == .systemSmall ? 14 : 20)
+            .shadow(color: .black.opacity(isOnPhoto ? 0.45 : 0), radius: isOnPhoto ? 4 : 0, y: isOnPhoto ? 1 : 0)
         }
     }
 }

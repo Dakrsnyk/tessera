@@ -91,13 +91,15 @@ struct QuoteContent: Codable, Hashable {
     var isCentered = true
     /// Large quotation marks above the text.
     var showsMarks = true
+    /// With a photo behind the quote (`WidgetDesign.quoteBackground`): how much it is darkened under the text.
+    var photoVeil = 0.4
 
     init(text: String = "", author: String = "") {
         self.text = text
         self.author = author
     }
 
-    enum CodingKeys: String, CodingKey { case text, author, font, backgroundHex, textHex, isCentered, showsMarks }
+    enum CodingKeys: String, CodingKey { case text, author, font, backgroundHex, textHex, isCentered, showsMarks, photoVeil }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -109,11 +111,23 @@ struct QuoteContent: Codable, Hashable {
         textHex = c.value(.textHex, d.textHex)
         isCentered = c.value(.isCentered, d.isCentered)
         showsMarks = c.value(.showsMarks, d.showsMarks)
+        photoVeil = c.value(.photoVeil, d.photoVeil)
     }
 
     mutating func apply(_ palette: QuotePalette) {
         backgroundHex = palette.backgroundHex
         textHex = palette.textHex
+    }
+
+    /// The veil over a background photo: light enough to keep the photo, dark enough for light text.
+    static let veilRange: ClosedRange<Double> = 0.15...0.75
+
+    /// The text's color on a background photo, which is always darkened by its veil: the chosen color when
+    /// it is light (the light text of a palette, a pastel), else white, since a dark color would vanish there.
+    /// Without a photo, or when its file is gone, the quote keeps its own two colors.
+    var inkOnPhotoHex: String {
+        let rgb = ColorMath.rgb(textHex)
+        return ColorMath.relativeLuminance(rgb.r, rgb.g, rgb.b) >= 0.6 ? textHex : "FFFFFF"
     }
 
     static let sample = QuoteContent(text: tr("Fais de ta vie un rêve, et d'un rêve, une réalité."), author: "Antoine de Saint-Exupéry")
@@ -182,6 +196,12 @@ enum PhotoLayout {
         let y = min(0, max(cellSize.height - size.height, cellSize.height / 2 - slot.centerY * size.height))
         return (size, CGPoint(x: x, y: y))
     }
+}
+
+extension WidgetDesign {
+    /// The photo behind a quote widget: its first photo. It is kept in `options.photos` like a photo widget's,
+    /// so deleting, duplicating or backing up the widget handles its file the same way.
+    var quoteBackground: PhotoSlot? { kind == .quote ? options.photos.first : nil }
 }
 
 extension WidgetKind {

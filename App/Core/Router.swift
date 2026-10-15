@@ -69,6 +69,8 @@ final class Router {
     /// Set when a new widget is saved, so the guide opens once the editor has closed.
     var showsAddGuideAfterEditor = false
     var lastSavedName: String?
+    /// The widget the guide is about, when known (two widgets can share a name).
+    var lastSavedID: UUID?
     var exploreCategory: WidgetCategory?
     var exploreSearchRequested = false
     /// Store: the pages pushed on top of it, and a setup to open (used by test captures).

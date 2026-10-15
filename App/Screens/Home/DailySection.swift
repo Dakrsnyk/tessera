@@ -43,25 +43,18 @@ struct DailySection: View {
                         .accessibilityAddTraits(.isHeader)
                 }
                 Spacer()
-                VStack(alignment: .trailing, spacing: 6) {
-                    NavigationLink(value: HomeRoute.info) {
-                        Text(tr("Mes données"))
-                            .font(.subheadline.weight(.semibold))
-                    }
-                    .accessibilityIdentifier("daily-data")
-                    // Discreet: the size, order and choice of the cards, right here on Home.
-                    // Always there: categories can be added before any data is entered.
-                    Button {
-                        editingLayout = true
-                    } label: {
-                        Image(systemName: "rectangle.3.group")
-                            .font(.footnote.weight(.semibold))
-                            .frame(width: 30, height: 24)
-                            .background(.cardFill, in: Capsule())
-                    }
-                    .accessibilityLabel(Text(tr("Modifier la disposition")))
-                    .accessibilityIdentifier("daily-layout")
+                // A small « + »: add, order and size the cards, right here on Home (« Mes informations »
+                // is at the bottom of the page). Always there: categories can be added before any data.
+                Button {
+                    editingLayout = true
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.subheadline.weight(.bold))
+                        .frame(width: 32, height: 32)
+                        .background(.cardFill, in: Circle())
                 }
+                .accessibilityLabel(Text(tr("Modifier la disposition")))
+                .accessibilityIdentifier("daily-layout")
             }
             // Nothing entered yet: Mon Quotidien asks for the information, the invitations follow.
             if !hasData {
@@ -545,85 +538,85 @@ private struct WorkoutDayTile: View {
 }
 
 /// The week as a table: classes, work, appointments, tasks, workouts and the events of the Apple
-/// calendar, a column a day. Full width: a touch on a free time creates an event there and a touch on a
-/// block opens it, as in Planning; « Toute la semaine » opens the week in Planning (where the weeks
-/// change). Half width: the same table, its blocks without text, too small to aim at: the whole card
-/// opens the week.
+/// calendar, a column a day. A touch anywhere on the card opens Planning, where a touch on a free time of
+/// the calendar creates an event. Half width: the same table, its blocks without text. While the Apple
+/// calendar isn't linked, its button stays apart: the table opens Planning, the button links the calendar.
 private struct PlanningDayTile: View {
     let items: [DailyBrief.TimedItem]
     @Environment(AppModel.self) private var model
-    @Environment(Router.self) private var router
     @Environment(\.dailyCompact) private var compact
-    @Environment(\.openURL) private var openURL
     @State private var events: [EventSnapshot] = []
-    /// A new event of the schedule, or what a block is, opened from the table.
-    @State private var editors = PlanningEditors()
 
     private let colorHex = "3366FF"
 
     var body: some View {
         let week = Agenda.week(containing: Date(), model: model, events: events)
         let isEmpty = week.allSatisfy { $0.items.isEmpty }
-        DayCard(title: tr("Planning"), symbol: "calendar.day.timeline.left", colorHex: colorHex) {
-            if compact {
-                NavigationLink(value: HomeRoute.page(.planningWeek)) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        if isEmpty {
-                            emptyText
-                        } else {
-                            WeekTimetable(days: week, compact: true, hourHeight: 12)
-                        }
-                        weekLabel
+        Group {
+            if model.events == .needsAccess {
+                DayCard(title: tr("Planning"), symbol: "calendar.day.timeline.left", colorHex: colorHex) {
+                    NavigationLink(value: HomeRoute.app(.planning)) {
+                        table(week, isEmpty: isEmpty)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text(tr("Planning")))
+                    .accessibilityValue(Text(isEmpty ? tr("Rien de prévu cette semaine.") : ""))
+                    .accessibilityIdentifier("daily-planning-week")
+                    calendarButton
                 }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("daily-planning-week")
             } else {
-                // Empty, the table stays: a touch on a free time fills it.
-                if isEmpty { emptyText }
-                WeekTimetable(days: week, hourHeight: 22, onCreate: { date, minute in
-                    Haptics.tap()
-                    editors.create(on: date, at: minute)
-                }, onOpen: { item in
-                    // A deadline or a workout has no editor here: the week in Planning.
-                    editors.open(item, on: Date(), model: model, openURL: openURL) { _ in
-                        router.homePath.append(.page(.planningWeek))
-                    }
-                })
-                NavigationLink(value: HomeRoute.page(.planningWeek)) {
-                    weekLabel
-                        .frame(minHeight: 28)
-                        .contentShape(Rectangle())
+                DayCard(title: tr("Planning"), symbol: "calendar.day.timeline.left", colorHex: colorHex, route: .app(.planning)) {
+                    table(week, isEmpty: isEmpty)
+                        .accessibilityIdentifier("daily-planning-week")
                 }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("daily-planning-week")
-            }
-            // The Apple calendar, one tap away when it isn't linked yet.
-            if case .needsAccess = model.events {
-                Button {
-                    Task {
-                        if await CalendarService.requestAccess() {
-                            model.refreshEvents()
-                            loadEvents()
-                        }
-                    }
-                } label: {
-                    Label(tr("Relier le calendrier Apple"), systemImage: "calendar.badge.plus")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color(hex: colorHex))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("daily-planning-calendar")
+                // VoiceOver: the card reads as Planning, not as every block of the table.
+                .accessibilityLabel(Text(tr("Planning")))
+                .accessibilityValue(Text(isEmpty ? tr("Rien de prévu cette semaine.") : ""))
             }
         }
         .accessibilityIdentifier("daily-planning")
         .onAppear(perform: loadEvents)
         .onChange(of: model.events) { _, _ in loadEvents() }
-        .planningEditors($editors)
+    }
+
+    private func table(_ week: [(day: Date, items: [AgendaItem])], isEmpty: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if compact {
+                if isEmpty {
+                    emptyText
+                } else {
+                    WeekTimetable(days: week, compact: true, hourHeight: 12)
+                }
+            } else {
+                // Empty, the table stays: Planning is where its free times are filled.
+                if isEmpty { emptyText }
+                WeekTimetable(days: week, hourHeight: 22)
+            }
+            weekLabel
+                .frame(minHeight: compact ? nil : 28)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+    }
+
+    /// The Apple calendar, one tap away when it isn't linked yet.
+    private var calendarButton: some View {
+        Button {
+            Task {
+                if await CalendarService.requestAccess() {
+                    model.refreshEvents()
+                    loadEvents()
+                }
+            }
+        } label: {
+            Label(tr("Relier le calendrier Apple"), systemImage: "calendar.badge.plus")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Color(hex: colorHex))
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("daily-planning-calendar")
     }
 
     private var emptyText: some View {

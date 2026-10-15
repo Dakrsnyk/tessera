@@ -2,8 +2,8 @@ import Foundation
 
 /// About 5,600 generic foods from the Canadian Nutrient File (Health Canada, CNF 2015, Open
 /// Government Licence – Canada), with their French and English names and values per 100 g.
-/// Bundled with the app (`cnf-foods.json`, built by `scripts/cnf_build.py`, with fats, minerals and vitamins
-/// added by `scripts/cnf_extend.py`), so the search finds
+/// Bundled with the app (`cnf-foods.json`, built by `scripts/cnf_build.py`, with fats, minerals, vitamins,
+/// caffeine and alcohol added by `scripts/cnf_extend.py`), so the search finds
 /// them offline; read once, the first time someone searches.
 enum NutrientFile {
     static let attribution = tr("Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.")
@@ -42,14 +42,18 @@ enum NutrientFile {
         FoodDatabase.normalized(text).split(whereSeparator: { !$0.isLetter && !$0.isNumber }).map(String.init)
     }
 
-    /// Columns 15 to 25 (`scripts/cnf_extend.py`): fats, minerals and vitamins, null when the file has none.
+    /// Columns 15 to 43 (`scripts/cnf_extend.py`): fats, minerals, vitamins, caffeine and alcohol, null when
+    /// the file has none. A row stops after its last known value.
     private static func micros(_ row: [Any]) -> Micronutrients? {
-        guard row.count >= 26 else { return nil }
-        func number(_ index: Int) -> Double? { (row[index] as? NSNumber)?.doubleValue }
+        func number(_ index: Int) -> Double? { index < row.count ? (row[index] as? NSNumber)?.doubleValue : nil }
         let micros = Micronutrients(
             monounsaturatedFat: number(15), polyunsaturatedFat: number(16), potassiumMg: number(17), calciumMg: number(18),
             ironMg: number(19), magnesiumMg: number(20), vitaminCMg: number(21), vitaminAMcg: number(22),
-            vitaminDMcg: number(23), vitaminB12Mcg: number(24), folateMcg: number(25))
+            vitaminDMcg: number(23), vitaminB12Mcg: number(24), folateMcg: number(25),
+            transFat: number(26), omega3Fat: number(27), omega6Fat: number(28), zincMg: number(29), phosphorusMg: number(30),
+            seleniumMcg: number(31), copperMg: number(32), manganeseMg: number(33), vitaminEMg: number(34), vitaminKMcg: number(35),
+            thiaminMg: number(36), riboflavinMg: number(37), niacinMg: number(38), pantothenicAcidMg: number(39),
+            vitaminB6Mg: number(40), cholineMg: number(41), caffeineMg: number(42), alcohol: number(43))
         return micros.isEmpty ? nil : micros
     }
 

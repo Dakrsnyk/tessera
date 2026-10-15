@@ -161,6 +161,7 @@ struct FitnessSessionDetailPage: View {
     @Environment(AppModel.self) private var model
     @State private var editingSet: SetLog?
     @State private var info: ExerciseInfo?
+    @State private var paywall: PaywallContext?
 
     var body: some View {
         let session = FitnessMath.sessions(model.fitness).first { $0.id == sessionID }
@@ -195,12 +196,19 @@ struct FitnessSessionDetailPage: View {
                             Text(name)
                             Spacer()
                             if let known = ExerciseLibrary.match(name: name) {
+                                // The exercise sheet and its data are Premium; the sets of this session stay free.
+                                let isOpen = model.canOpenExercise(known.id)
                                 Button {
-                                    info = known
+                                    if isOpen { info = known } else { paywall = .exerciseLibrary }
                                 } label: {
-                                    Image(systemName: "info.circle")
+                                    if isOpen {
+                                        Image(systemName: "info.circle")
+                                    } else {
+                                        PremiumBadge(compact: true)
+                                    }
                                 }
                                 .textCase(nil)
+                                .accessibilityLabel(Text(isOpen ? tr("Fiche de \(name)") : tr("\(name), Premium")))
                             }
                         }
                     }
@@ -214,12 +222,14 @@ struct FitnessSessionDetailPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $editingSet) { SetEditor(set: $0) }
         .sheet(item: $info) { ExerciseInfoSheet(exercise: $0) }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 }
 
 // MARK: - Progress
 
-/// Records and the exercises followed regularly; each one opens its sheet with its chart.
+/// The volume over the weeks and the personal records (only here, not on the Fitness page); each record
+/// opens its exercise sheet with its chart. Premium.
 struct FitnessProgressPage: View {
     @Environment(AppModel.self) private var model
 
@@ -231,7 +241,7 @@ struct FitnessProgressPage: View {
         let volumes = weeklyVolumes(state)
         MiniAppScroll {
             if !model.isPremium {
-                // The records stay on the Fitness page; their evolution and the volume over weeks are Premium.
+                // The records, their evolution and the volume over weeks are Premium; the sessions stay recorded.
                 PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("La progression est dans Premium"),
                                 message: tr("Ton volume semaine après semaine, l'évolution de tes charges et tous tes records, exercice par exercice. Tes séances restent enregistrées : tout s'affiche dès que tu passes à Premium."))
             } else if records.isEmpty {

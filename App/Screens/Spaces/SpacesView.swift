@@ -100,13 +100,12 @@ struct SpacesView: View {
         orderedSpaces.filter { universe == nil || $0.universe == universe }
     }
 
-    /// The spaces shown, with « Photos et citations » second in « Tout » (right under the first space, which
-    /// the tutorial points at, so it is seen without scrolling) and first in « Vie ».
+    /// The spaces shown, with « Photos et citations » at the very bottom of « Tout » and of « Vie » (the first
+    /// space, which the tutorial points at, stays first).
     private var cards: [CreateCard] {
         var cards = shownSpaces.map { CreateCard.space($0) }
         switch universe {
-        case nil: cards.insert(.photos, at: min(cards.count, 1))
-        case .life?: cards.insert(.photos, at: 0)
+        case nil, .life?: cards.append(.photos)
         default: break
         }
         return cards

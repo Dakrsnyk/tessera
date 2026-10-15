@@ -83,7 +83,23 @@ struct FitnessSpaceSections: View {
             ValueRow(title: tr("Cette semaine"), value: tr("\(FitnessMath.workouts(inWeekOf: now, state)) séances"), symbol: "flame.fill")
             ValueRow(title: tr("Volume"), value: tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"), symbol: "scalemass")
             if let best = FitnessMath.records(state).first {
-                ValueRow(title: tr("Meilleur record"), value: tr("\(best.exercise) · \(TF.int(best.weight)) kg"), symbol: "trophy.fill")
+                // The records are part of the progress: Premium (kept, shown again with Premium).
+                if model.isPremium {
+                    ValueRow(title: tr("Meilleur record"), value: tr("\(best.exercise) · \(TF.int(best.weight)) kg"), symbol: "trophy.fill")
+                } else {
+                    Button {
+                        sheets?.open { PaywallView(context: .fitnessProgress) }
+                    } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: "trophy.fill")
+                                .foregroundStyle(Color.accentColor)
+                                .frame(width: 22)
+                            Text(tr("Meilleur record")).foregroundStyle(Color.primary)
+                            Spacer()
+                            PremiumBadge()
+                        }
+                    }
+                }
             }
         } header: {
             Text(tr("Suivi"))
@@ -99,13 +115,43 @@ struct FitnessSpaceSections: View {
     }
 }
 
+/// A session of the program: its name and days, then the two ways to add an exercise (from the library,
+/// Premium; written by the person, free), then its exercises with their sets, reps, load and rest.
 struct RoutineEditor: View {
     @Environment(AppModel.self) private var model
     @State var routine: Routine
     @State private var picking = false
     @State private var info: ExerciseInfo?
+    @State private var paywall: PaywallContext?
 
     var body: some View {
+        ScrollViewReader { proxy in
+            form
+                // An exercise added from the top of the form: shown where it lands, at the end.
+                .onChange(of: routine.exercises.count) { old, new in
+                    guard new > old, let added = routine.exercises.last?.id else { return }
+                    withAnimation { proxy.scrollTo(added, anchor: .top) }
+                }
+        }
+        .sheet(isPresented: $picking) {
+            NavigationStack {
+                ExerciseLibraryPage { picked in
+                    routine.exercises.removeAll { $0.name.trimmed.isEmpty }
+                    routine.exercises.append(ExerciseTemplate(name: picked.name, sets: 3, reps: 10, weight: 0, exerciseID: picked.id))
+                    picking = false
+                }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button(tr("Fermer")) { picking = false }
+                    }
+                }
+            }
+        }
+        .sheet(item: $info) { ExerciseInfoSheet(exercise: $0) }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
+    }
+
+    private var form: some View {
         SheetForm(title: routine.name.isEmpty ? tr("Nouvelle séance") : routine.name, canSave: !routine.name.trimmed.isEmpty, onSave: save) {
             Section {
                 TextField(tr("Nom (haut du corps, jambes…)"), text: $routine.name)
@@ -114,23 +160,50 @@ struct RoutineEditor: View {
             } footer: {
                 Text(tr("Les jours choisis décident de la séance proposée chaque jour."))
             }
+            // Right under the name and the days, to be seen from the start.
+            Section {
+                Button {
+                    if model.isPremium { picking = true } else { paywall = .exerciseLibrary }
+                } label: {
+                    HStack {
+                        Label(tr("Choisir dans la bibliothèque"), systemImage: "books.vertical")
+                        if !model.isPremium {
+                            Spacer()
+                            PremiumBadge()
+                        }
+                    }
+                }
+                .accessibilityIdentifier("routine-library")
+                Button {
+                    routine.exercises.append(ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0))
+                } label: {
+                    Label(tr("Ajouter un exercice"), systemImage: "plus")
+                }
+                .accessibilityIdentifier("routine-add-exercise")
+            }
             ForEach($routine.exercises) { $exercise in
                 Section {
                     HStack {
                         TextField(tr("Exercice"), text: $exercise.name)
                             .accessibilityIdentifier("exercise-name")
                         if let known = exercise.info {
+                            // The exercise sheet is Premium; the exercise itself keeps working.
+                            let isOpen = model.canOpenExercise(known.id)
                             Button {
-                                info = known
+                                if isOpen { info = known } else { paywall = .exerciseLibrary }
                             } label: {
-                                Image(systemName: "info.circle")
+                                if isOpen {
+                                    Image(systemName: "info.circle")
+                                } else {
+                                    PremiumBadge(compact: true)
+                                }
                             }
                             .buttonStyle(.borderless)
                             .accessibilityLabel(Text(tr("Fiche de l'exercice")))
                         }
                     }
-                    // Suggestions from the library while the name is typed.
-                    if exercise.info == nil, exercise.name.trimmed.count >= 2 {
+                    // Suggestions from the library while the name is typed (Premium, like the library).
+                    if model.isPremium, exercise.info == nil, exercise.name.trimmed.count >= 2 {
                         ForEach(ExerciseLibrary.search(exercise.name).prefix(3)) { suggestion in
                             Button {
                                 exercise.name = suggestion.name
@@ -148,40 +221,16 @@ struct RoutineEditor: View {
                     TextField(tr("Tempo (ex. 3-1-1-0)"), text: $exercise.tempo)
                     TextField(tr("Notes", context: "text"), text: $exercise.notes)
                 }
+                .id(exercise.id)
             }
-            Section {
-                Button {
-                    picking = true
-                } label: {
-                    Label(tr("Choisir dans la bibliothèque"), systemImage: "books.vertical")
-                }
-                Button {
-                    routine.exercises.append(ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0))
-                } label: {
-                    Label(tr("Ajouter un exercice"), systemImage: "plus")
-                }
-                if routine.exercises.count > 1 {
+            if routine.exercises.count > 1 {
+                Section {
                     Button(tr("Retirer le dernier exercice"), role: .destructive) {
                         routine.exercises.removeLast()
                     }
                 }
             }
         }
-        .sheet(isPresented: $picking) {
-            NavigationStack {
-                ExerciseLibraryPage { picked in
-                    routine.exercises.removeAll { $0.name.trimmed.isEmpty }
-                    routine.exercises.append(ExerciseTemplate(name: picked.name, sets: 3, reps: 10, weight: 0, exerciseID: picked.id))
-                    picking = false
-                }
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button(tr("Fermer")) { picking = false }
-                    }
-                }
-            }
-        }
-        .sheet(item: $info) { ExerciseInfoSheet(exercise: $0) }
     }
 
     private func save() {

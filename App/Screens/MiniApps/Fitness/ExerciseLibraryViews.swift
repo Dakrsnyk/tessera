@@ -16,7 +16,8 @@ extension EnvironmentValues {
 
 /// The exercise library: search as you type (names, other names, muscles, equipment), filters,
 /// favorites, frequent exercises, and « Mes exercices ». Picking mode adds to a session and also
-/// offers the recent exercises.
+/// offers the recent exercises. Every exercise is Premium: without it, the list shows what the library
+/// holds and a touch opens the paywall; « Mes exercices » stays free.
 struct ExerciseLibraryPage: View {
     var onPick: ((ExerciseInfo) -> Void)?
     @Environment(AppModel.self) private var model
@@ -25,8 +26,6 @@ struct ExerciseLibraryPage: View {
     @State private var info: ExerciseInfo?
     @State private var creating = false
     @State private var paywall: PaywallContext?
-    /// Exercises already used, open without Premium (computed once per drawing).
-    @State private var owned: Set<String> = []
 
     init(onPick: ((ExerciseInfo) -> Void)? = nil) {
         self.onPick = onPick
@@ -56,10 +55,13 @@ struct ExerciseLibraryPage: View {
                                 .frame(width: 36, height: 36)
                                 .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(tr("\(ExerciseLibrary.freeCount) exercices offerts sur \(ExerciseLibrary.all.count)"))
-                                    .font(.subheadline.weight(.semibold))
-                                    .foregroundStyle(Color.primary)
-                                Text(tr("Toute la bibliothèque, ses démonstrations et ses alternatives avec Premium. Ceux que tu as déjà faits restent à toi."))
+                                HStack(spacing: 6) {
+                                    Text(tr("Toute la bibliothèque d'exercices"))
+                                        .font(.subheadline.weight(.semibold))
+                                        .foregroundStyle(Color.primary)
+                                    PremiumBadge(compact: true)
+                                }
+                                Text(tr("Démonstrations, techniques, alternatives et tes performances sur chaque exercice. Tes propres exercices restent gratuits."))
                                     .font(.caption)
                                     .foregroundStyle(Color.secondary)
                                     .fixedSize(horizontal: false, vertical: true)
@@ -139,8 +141,6 @@ struct ExerciseLibraryPage: View {
             CustomExerciseEditor()
         }
         .sheet(item: $paywall) { PaywallView(context: $0) }
-        .onAppear { owned = model.ownedExerciseIDs }
-        .onChange(of: model.fitness) { _, _ in owned = model.ownedExerciseIDs }
     }
 
     // MARK: Filters
@@ -210,7 +210,7 @@ struct ExerciseLibraryPage: View {
 
     private func row(_ exercise: ExerciseInfo) -> some View {
         let isFavorite = model.fitness.favoriteExercises.contains(exercise.id)
-        let isOpen = model.canOpenExercise(exercise.id, owned: owned)
+        let isOpen = model.canOpenExercise(exercise.id)
         return HStack(spacing: 10) {
             Group {
                 if !isOpen {
@@ -221,9 +221,7 @@ struct ExerciseLibraryPage: View {
                         HStack {
                             ExerciseRowLabel(exercise: exercise)
                                 .opacity(0.6)
-                            Image(systemName: "lock.fill")
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(Color.premiumInk)
+                            PremiumBadge(compact: true)
                         }
                     }
                     .buttonStyle(.borderless)
@@ -281,13 +279,14 @@ struct ExerciseRowLabel: View {
 }
 
 /// The exercise sheet over a session or the library: closing it returns exactly where the person was.
+/// Without Premium, the lock in its place.
 struct ExerciseInfoSheet: View {
     let exercise: ExerciseInfo
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
-            ExerciseDetailView(exercise: exercise, inSheet: true)
+            ExerciseGate(exercise: exercise, inSheet: true)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         Button(tr("Fermer")) { dismiss() }
@@ -683,23 +682,27 @@ struct CustomExerciseEditor: View {
 
 // MARK: - Premium
 
-/// An exercise page: its sheet when it is open to the person (Premium, offered, or already used),
-/// else what it is and the way to Premium. Nothing the person did is ever locked.
+/// An exercise page: its sheet and the person's data on it with Premium, else what it is and the way
+/// to Premium. The sets done stay recorded and show again with Premium.
 struct ExerciseGate: View {
     let exercise: ExerciseInfo
+    var inSheet = false
     @Environment(AppModel.self) private var model
 
     var body: some View {
         if model.canOpenExercise(exercise.id) {
-            ExerciseDetailView(exercise: exercise)
+            ExerciseDetailView(exercise: exercise, inSheet: inSheet)
         } else {
             MiniAppScroll {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(exercise.name).font(.title2.weight(.bold))
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text(exercise.name).font(.title2.weight(.bold))
+                        PremiumBadge()
+                    }
                     Text(exercise.summary).font(.subheadline).foregroundStyle(.secondary)
                 }
                 PremiumLockCard(symbol: "books.vertical.fill", title: tr("Cet exercice est dans Premium"),
-                                message: tr("Sa démonstration, sa technique et ses alternatives, comme les \(ExerciseLibrary.all.count) exercices de la bibliothèque. \(ExerciseLibrary.freeCount) exercices sont offerts."),
+                                message: tr("Sa démonstration, sa technique, ses alternatives et tes performances, comme pour les \(ExerciseLibrary.all.count) exercices de la bibliothèque. Tes séries restent enregistrées : tout s'affiche dès que tu passes à Premium."),
                                 perk: .exercises)
             }
             .navigationTitle(exercise.name)

@@ -324,6 +324,14 @@ final class AppModel {
         return added
     }
 
+    /// A widget about to be placed: the most recently used of its size, so the Home Screen gallery previews it.
+    func markUsed(_ design: WidgetDesign) {
+        guard let index = designs.firstIndex(where: { $0.id == design.id }) else { return }
+        designs[index].lastUsedAt = Date()
+        store.designs = designs
+        scheduleWidgetReload()
+    }
+
     func toggleFavorite(_ design: WidgetDesign) {
         guard let index = designs.firstIndex(where: { $0.id == design.id }) else { return }
         designs[index].isFavorite.toggle()
@@ -648,20 +656,10 @@ final class AppModel {
 // MARK: - Premium access
 
 extension AppModel {
-    /// The library exercises the person already uses (a routine, the session in progress, a session done,
-    /// a favorite): they stay open without Premium.
-    var ownedExerciseIDs: Set<String> {
-        var ids = Set(fitness.favoriteExercises)
-        ids.formUnion(fitness.routines.flatMap(\.exercises).compactMap(\.exerciseID))
-        ids.formUnion(fitness.active?.exercises.compactMap(\.exerciseID) ?? [])
-        let names = Set(FitnessMath.sessions(fitness).flatMap(\.sets).map(\.exercise))
-        ids.formUnion(names.compactMap { ExerciseLibrary.match(name: $0)?.id })
-        return ids
-    }
-
-    /// Whether an exercise sheet opens: Premium, one of the essentials offered, or one already used.
-    func canOpenExercise(_ id: String, owned: Set<String>? = nil) -> Bool {
-        ExerciseLibrary.isOpen(id, isPremium: isPremium, owned: owned ?? ownedExerciseIDs)
+    /// Whether a library exercise opens, with its sheet and the person's data on it: Premium only. Its sets
+    /// stay recorded and the sessions that hold it keep working without Premium.
+    func canOpenExercise(_ id: String) -> Bool {
+        ExerciseLibrary.isOpen(id, isPremium: isPremium)
     }
 }
 

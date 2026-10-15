@@ -150,7 +150,7 @@ extension WorkoutSession {
         if exerciseIndex >= exercises.count { end = date }
     }
 
-    /// Adds an exercise at the end of the session (from the library, during the workout).
+    /// Adds an exercise at the end of the session (from the library or written by the person, during the workout).
     mutating func append(_ exercise: ExerciseTemplate) {
         exercises.append(exercise)
         if end != nil, exerciseIndex >= exercises.count - 1 { end = nil }

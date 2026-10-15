@@ -62,14 +62,20 @@ extension PaywallContext {
         )
     }
 
-    /// The whole exercise library of Fitness.
+    /// The exercise library of Fitness: every exercise, its sheet and the person's data on it.
     static var exerciseLibrary: PaywallContext {
         PaywallContext(
             symbol: "books.vertical.fill",
             title: tr("Toute la bibliothèque d'exercices"),
-            detail: tr("\(ExerciseLibrary.all.count) exercices avec leur démonstration, leur technique et leurs alternatives. \(ExerciseLibrary.freeCount) sont offerts, et ceux que tu as déjà faits restent à toi."),
+            detail: tr("\(ExerciseLibrary.all.count) exercices avec leur démonstration, leur technique, leurs alternatives et tes performances sur chacun. Tes séances et tes propres exercices restent gratuits."),
             perk: .exercises
         )
+    }
+
+    /// The progress of Fitness: the volume over the weeks, the evolution of the loads and the records.
+    static var fitnessProgress: PaywallContext {
+        statistics(tr("La progression est dans Premium"),
+                   detail: tr("Ton volume semaine après semaine, l'évolution de tes charges et tous tes records, exercice par exercice. Tes séances restent enregistrées : tout s'affiche dès que tu passes à Premium."))
     }
 
     /// The detailed statistics of a mini-app.

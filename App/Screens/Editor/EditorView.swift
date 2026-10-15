@@ -632,6 +632,7 @@ struct WidgetStudio: View {
             router.saveFlight = SaveFlight(designs: saved, source: previewFrame)
             if !isPushed && designs.count == 1 {
                 router.lastSavedName = design.name
+                router.lastSavedID = design.id
                 router.showsAddGuideAfterEditor = true
             }
         } else {

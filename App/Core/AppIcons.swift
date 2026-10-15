@@ -2,7 +2,7 @@ import SwiftUI
 import UIKit
 
 /// The icons Ardane can take on the Home Screen: « Corail » (the logo) by default, the others picked in
-/// « Icône de l'app » (Profil, or a long press on the icon, then « Changer d'icône »).
+/// « Icône de l'app » (Profil, or a long press on the icon, then « Changer d'icône »), with Premium.
 /// Each one is an icon set of the asset catalog, built as an alternate icon, with its picture
 /// `IconPreview-<asset>`. They stay light in Dark Mode. They are drawn by scripts/app_icons.js
 /// (the glass ones keep the colors of the former Tessera icons).
@@ -17,6 +17,12 @@ struct AppIconChoice: Identifiable, Hashable {
     /// What `setAlternateIconName` takes: nil for the main icon.
     var alternateName: String? { asset == Self.main ? nil : asset }
     var preview: String { "IconPreview-\(asset)" }
+
+    /// Changing the icon is Premium. Without it, the main icon stays free and the icon already on the Home
+    /// Screen is kept (never changed for the person): only picking another one is locked.
+    func isLocked(current: String, isPremium: Bool) -> Bool {
+        !isPremium && asset != current && asset != Self.main
+    }
 
     static let main = "ArdaneIcon"
 

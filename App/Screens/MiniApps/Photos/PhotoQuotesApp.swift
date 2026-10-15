@@ -111,6 +111,8 @@ struct PhotoQuoteEditor: View {
     @State private var design: WidgetDesign
     let isNew: Bool
     @State private var picked: [PhotosPickerItem] = []
+    /// The photo chosen to go behind a quote.
+    @State private var backgroundItem: PhotosPickerItem?
     @State private var isLoading = false
     @State private var failed = 0
     @State private var framing: PhotoSlot?
@@ -181,7 +183,10 @@ struct PhotoQuoteEditor: View {
             }
             .confirmationDialog(tr("Supprimer ce widget ?"), isPresented: $confirmsDelete, titleVisibility: .visible) {
                 Button(tr("Supprimer"), role: .destructive) {
-                    model.delete(design)
+                    // The saved widget's photos go with it, and so do the copies made in this edit.
+                    model.delete(model.design(id: design.id) ?? design)
+                    for file in written { ImageStore.delete(named: file) }
+                    written = []
                     dismiss()
                 }
             } message: {
@@ -191,8 +196,13 @@ struct PhotoQuoteEditor: View {
                 guard !items.isEmpty else { return }
                 Task { await load(items) }
             }
+            .onChange(of: backgroundItem) { _, item in
+                guard let item else { return }
+                Task { await load([item]) }
+            }
         }
-        .interactiveDismissDisabled(isLoading)
+        // Copies made in this edit are only cleaned up by Annuler or Enregistrer: no swiping them away.
+        .interactiveDismissDisabled(isLoading || !written.isEmpty)
     }
 
     private var canSave: Bool {
@@ -336,7 +346,8 @@ struct PhotoQuoteEditor: View {
         }
     }
 
-    /// Copies the chosen photos (downscaled) into the shared container, in the order they were chosen.
+    /// Copies the chosen photos (downscaled) into the shared container, in the order they were chosen. A
+    /// quote has one photo at most, behind its text: a new one takes its place.
     private func load(_ items: [PhotosPickerItem]) async {
         isLoading = true
         failed = 0
@@ -350,9 +361,14 @@ struct PhotoQuoteEditor: View {
             written.insert(file)
             slots.append(PhotoSlot(file: file))
         }
-        let room = PhotoLayout.maxPhotos - design.options.photos.count
-        design.options.photos.append(contentsOf: slots.prefix(max(0, room)))
+        if design.kind == .quote {
+            if let first = slots.first { design.options.photos = [first] }
+        } else {
+            let room = PhotoLayout.maxPhotos - design.options.photos.count
+            design.options.photos.append(contentsOf: slots.prefix(max(0, room)))
+        }
         picked = []
+        backgroundItem = nil
         isLoading = false
         Haptics.success()
     }
@@ -413,8 +429,11 @@ struct PhotoQuoteEditor: View {
                 ColorPicker(tr("Texte"), selection: colorBinding(\.textHex), supportsOpacity: false)
             }
             .font(.subheadline)
-            Toggle(tr("Centrée"), isOn: quote.isCentered).font(.subheadline)
-            Toggle(tr("Guillemets"), isOn: quote.showsMarks).font(.subheadline)
+            backgroundSection
+            Group {
+                Toggle(tr("Centrée"), isOn: quote.isCentered).font(.subheadline)
+                Toggle(tr("Guillemets"), isOn: quote.showsMarks).font(.subheadline)
+            }
             if quote.wrappedValue.text.trimmed.isEmpty {
                 Button(tr("Essayer avec un exemple")) {
                     let current = quote.wrappedValue
@@ -422,12 +441,84 @@ struct PhotoQuoteEditor: View {
                     sample.font = current.font
                     sample.backgroundHex = current.backgroundHex
                     sample.textHex = current.textHex
+                    sample.photoVeil = current.photoVeil
                     quote.wrappedValue = sample
                 }
                 .font(.subheadline.weight(.semibold))
             }
         }
         .tint(Color(hex: accentHex))
+    }
+
+    /// A photo behind the quote, copied and framed like a photo widget's (it is the widget's only photo), under
+    /// a veil that keeps the text readable.
+    private var backgroundSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text(tr("Photo de fond")).font(.subheadline.weight(.semibold))
+                Spacer()
+                if isLoading { ProgressView() }
+            }
+            if let slot = design.quoteBackground {
+                let widget = WidgetMetrics.size(format.family)
+                let thumbnail = CGSize(width: widget.width * 64 / max(1, widget.height), height: 64)
+                HStack(spacing: 12) {
+                    Button {
+                        framing = slot
+                    } label: {
+                        PhotoCell(slot: slot, size: thumbnail)
+                            .frame(width: thumbnail.width, height: thumbnail.height)
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text(tr("Recadrer")))
+                    .accessibilityIdentifier("quote-background-frame")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Button {
+                            framing = slot
+                        } label: {
+                            Label(tr("Recadrer"), systemImage: "crop")
+                        }
+                        PhotosPicker(selection: $backgroundItem, matching: .images) {
+                            Label(tr("Changer de photo"), systemImage: "photo.on.rectangle")
+                        }
+                        .disabled(isLoading)
+                        Button(role: .destructive) {
+                            withAnimation(.snappy) { design.options.photos = [] }
+                        } label: {
+                            Label(tr("Retirer"), systemImage: "minus.circle")
+                        }
+                        .accessibilityIdentifier("quote-background-remove")
+                    }
+                    .font(.subheadline.weight(.semibold))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                StudioSlider(title: tr("Voile pour la lisibilité"), value: quoteBinding.photoVeil, range: QuoteContent.veilRange)
+                Text(tr("Sur la photo, le texte garde ta couleur si elle est claire, sinon il passe en blanc. La couleur de fond ne sert que si la photo n'est plus disponible."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            } else {
+                PhotosPicker(selection: $backgroundItem, matching: .images) {
+                    HStack {
+                        Image(systemName: "photo.badge.plus")
+                        Text(tr("Choisir une photo"))
+                        Spacer()
+                    }
+                    .font(.subheadline.weight(.medium))
+                    .padding(12)
+                    .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                }
+                .buttonStyle(.plain)
+                .disabled(isLoading)
+                .accessibilityIdentifier("quote-background-pick")
+            }
+            if failed > 0 {
+                Label(Fmt.plural(failed, tr("photo illisible"), tr("photos illisibles")), systemImage: "exclamationmark.triangle")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+        }
     }
 
     private func colorBinding(_ keyPath: WritableKeyPath<QuoteContent, String>) -> Binding<Color> {

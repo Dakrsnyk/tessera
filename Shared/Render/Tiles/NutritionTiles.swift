@@ -44,7 +44,7 @@ enum NutritionTiles {
         var tile: Tile
         switch context.design.kind {
         case .caloriesLeft: tile = caloriesLeft(state, now: now, known: known)
-        case .macros: tile = macros(state, now: now, compact: context.isSmall, known: known)
+        case .macros: tile = macros(state, now: now, compact: context.isSmall, known: known, showsFiber: SharedStore.shared.premium.isPremium(at: now))
         case .proteinLeft: tile = proteinLeft(state, now: now, known: known.protein)
         case .mealsToday: tile = mealsToday(state, now: now)
         case .nutritionWeek: tile = week(state, now: now, knowsGoal: known.kcal)
@@ -107,12 +107,17 @@ enum NutritionTiles {
         return tile
     }
 
-    static func macros(_ state: NutritionState, now: Date, compact: Bool, known: Targets = Targets(all: true)) -> Tile {
+    /// `showsFiber`: the fibre is a nutrient of Premium.
+    static func macros(_ state: NutritionState, now: Date, compact: Bool, known: Targets = Targets(all: true), showsFiber: Bool = true) -> Tile {
         let totals = NutritionMath.totals(state, on: now)
         var tile = Tile(title: tr("Macros"), symbol: "chart.bar.xaxis")
         tile.value = TF.int(totals.kcal)
         tile.unit = "kcal"
-        tile.caption = known.kcal ? tr("sur \(TF.int(state.goals.kcal)) · fibres \(TF.int(totals.fiber)) g") : tr("aujourd'hui · fibres \(TF.int(totals.fiber)) g")
+        if showsFiber {
+            tile.caption = known.kcal ? tr("sur \(TF.int(state.goals.kcal)) · fibres \(TF.int(totals.fiber)) g") : tr("aujourd'hui · fibres \(TF.int(totals.fiber)) g")
+        } else {
+            tile.caption = known.kcal ? tr("sur \(TF.int(state.goals.kcal))") : tr("aujourd'hui")
+        }
         tile.rows = macroRows(totals, goals: state.goals, compact: compact, known: known)
         tile.compactRows = true
         tile.visual = .segments([

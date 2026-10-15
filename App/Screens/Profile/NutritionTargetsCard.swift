@@ -2,10 +2,13 @@ import SwiftUI
 
 /// The daily needs of « Mes infos › Nutrition »: calculated from the body, the aim and the activity, each
 /// one marked « Calculé » or « Personnalisé ». A touch on a value changes it by hand; a value typed by hand
-/// stays as it is when the calculation changes, with the new recommendation shown beside it.
+/// stays as it is when the calculation changes, with the new recommendation shown beside it. Without
+/// Premium, only the calories and the three macronutrients show; the others are marked Premium (their
+/// values, typed by hand or not, are kept).
 struct NutritionTargetsCard: View {
     @Environment(AppModel.self) private var model
     @State private var editing: NutritionTarget?
+    @State private var paywall: PaywallContext?
     @State private var showsMicronutrients = false
     @State private var showsMethod = false
 
@@ -30,16 +33,22 @@ struct NutritionTargetsCard: View {
                         .accessibilityIdentifier("nutrition-missing")
                 }
                 rows(NutritionTarget.allCases.filter { $0.group == .energy }, recommended: recommended, auto: auto)
-                Text(tr("À limiter").uppercased())
-                    .font(.caption2.weight(.bold))
-                    .foregroundStyle(.secondary)
+                groupTitle(NutritionTarget.Group.limits.title)
                     .padding(.top, 4)
                 rows(NutritionTarget.allCases.filter { $0.group == .limits }, recommended: recommended, auto: auto)
                 DisclosureGroup(isExpanded: $showsMicronutrients) {
-                    rows(NutritionTarget.allCases.filter { $0.group == .micronutrients }, recommended: recommended, auto: auto)
-                        .padding(.top, 6)
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach([NutritionTarget.Group.fats, .minerals, .vitamins], id: \.self) { group in
+                            groupTitle(group.title)
+                            rows(NutritionTarget.allCases.filter { $0.group == group }, recommended: recommended, auto: auto)
+                        }
+                    }
+                    .padding(.top, 6)
                 } label: {
-                    Text(tr("Minéraux et vitamines")).font(.subheadline.weight(.semibold))
+                    HStack(spacing: 6) {
+                        Text(tr("Acides gras, minéraux et vitamines")).font(.subheadline.weight(.semibold))
+                        if !model.isPremium { PremiumBadge(compact: true) }
+                    }
                 }
                 .accessibilityIdentifier("nutrition-micronutrients")
                 DisclosureGroup(isExpanded: $showsMethod) {
@@ -63,15 +72,30 @@ struct NutritionTargetsCard: View {
             NutritionTargetEditor(target: target)
                 .presentationDetents([.medium])
         }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
+        // Targets added by an update follow the calculation at once.
+        .onAppear { model.followCalculatedNutritionGoals() }
+    }
+
+    /// « À LIMITER », « MINÉRAUX »…
+    private func groupTitle(_ title: String) -> some View {
+        Text(title.uppercased())
+            .font(.caption2.weight(.bold))
+            .foregroundStyle(.secondary)
     }
 
     private func rows(_ targets: [NutritionTarget], recommended: NutritionGoals?, auto: Bool) -> some View {
         VStack(spacing: 0) {
             ForEach(Array(targets.enumerated()), id: \.element) { index, target in
+                let locked = target.isPremium && !model.isPremium
                 Button {
-                    editing = target
+                    if locked { paywall = .nutrients } else { editing = target }
                 } label: {
-                    row(target, recommended: recommended, auto: auto)
+                    if locked {
+                        lockedRow(target)
+                    } else {
+                        row(target, recommended: recommended, auto: auto)
+                    }
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("target-row-\(target.rawValue)")
@@ -82,17 +106,30 @@ struct NutritionTargetsCard: View {
         .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
+    /// A target of Premium without it: its name and the badge, the value kept out of sight.
+    private func lockedRow(_ target: NutritionTarget) -> some View {
+        HStack(spacing: 8) {
+            Text(target.isLimit ? tr("\(target.title) (max.)") : target.title)
+                .font(.subheadline)
+                .foregroundStyle(.primary)
+            Spacer(minLength: 6)
+            PremiumBadge(compact: true)
+        }
+        .padding(.vertical, 9)
+        .contentShape(Rectangle())
+    }
+
     private func row(_ target: NutritionTarget, recommended: NutritionGoals?, auto: Bool) -> some View {
         let profile = model.profile
         let isCustom = auto && profile.customTargets.contains(target)
-        let value = shownValue(target, auto: auto, recommended: recommended)
+        let value = model.shownNutritionTarget(target, recommended: recommended)
         let advice = recommended.map { $0[target] }
         return HStack(alignment: .center, spacing: 8) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(target.isLimit ? tr("\(target.title) (max.)") : target.title)
                     .font(.subheadline)
                     .foregroundStyle(.primary)
-                if let advice, value != nil, abs(advice - (value ?? 0)) >= 0.5, isCustom || !auto {
+                if let advice, value != nil, abs(advice - (value ?? 0)) >= (target.decimals > 0 ? 0.05 : 0.5), isCustom || !auto {
                     Text(tr("Recommandé : \(Self.format(advice, target))"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -120,17 +157,6 @@ struct NutritionTargetsCard: View {
         .contentShape(Rectangle())
     }
 
-    /// The value in force: calculated or typed. Unknown (—) while nothing gave it.
-    private func shownValue(_ target: NutritionTarget, auto: Bool, recommended: NutritionGoals?) -> Double? {
-        let goals = model.nutrition.goals
-        if auto {
-            if model.profile.customTargets.contains(target) { return goals[target] }
-            return recommended == nil ? nil : goals[target]
-        }
-        if let fact = target.providedFact { return model.profile.knows(fact) ? goals[target] : nil }
-        return goals[target]
-    }
-
     /// The steps with the person's own numbers.
     private var method: String {
         var parts: [String] = []
@@ -148,6 +174,7 @@ struct NutritionTargetsCard: View {
         }
         parts.append(tr("Fibres : 14 g par 1 000 kcal. Sucres et gras saturés : moins de 10 % des calories chacun (OMS). Sodium : moins de 2 300 mg."))
         parts.append(tr("Minéraux et vitamines : apports de référence pour les adultes (National Academies), selon ton âge et ton genre."))
+        parts.append(tr("Gras trans : moins de 1 % des calories (OMS). Caféine : 400 mg au plus (Santé Canada). Oméga-3 et oméga-6 : apports suffisants (National Academies)."))
         if model.profile.calculatedActivity == nil {
             parts.append(model.activityFromWorkouts == nil
                          ? tr("Activité : légère par défaut, choisis la tienne ci-dessus.")
@@ -165,6 +192,21 @@ struct NutritionTargetsCard: View {
     static func list(_ items: [String]) -> String {
         guard items.count > 1, let last = items.last else { return items.first ?? "" }
         return tr("\(items.dropLast().joined(separator: ", ")) et \(last)")
+    }
+}
+
+extension AppModel {
+    /// A daily target in force for the person: calculated or typed. Nil (—) while nothing gave it, never the
+    /// built-in default. The targets card and the nutrients page both show this one. `recommended` is
+    /// `recommendedNutritionGoals()`, worked out once by the caller.
+    func shownNutritionTarget(_ target: NutritionTarget, recommended: NutritionGoals?) -> Double? {
+        let goals = nutrition.goals
+        if profile.followsNutritionCalculation {
+            if profile.customTargets.contains(target) { return goals[target] }
+            return recommended == nil ? nil : goals[target]
+        }
+        if let fact = target.providedFact { return profile.knows(fact) ? goals[target] : nil }
+        return goals[target]
     }
 }
 

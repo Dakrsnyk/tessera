@@ -126,6 +126,7 @@ struct MyWidgetsView: View {
                     ToolbarItemGroup(placement: .topBarTrailing) {
                         Button {
                             router.lastSavedName = nil
+                            router.lastSavedID = nil
                             router.isAddGuidePresented = true
                         } label: {
                             Image(systemName: "questionmark.circle")
@@ -300,7 +301,10 @@ struct MyWidgetsView: View {
             }
             .accessibilityLabel(Text(design.isFavorite ? tr("Retirer des favoris") : tr("Ajouter aux favoris")))
             CarouselAction(title: tr("Ajouter à l'écran"), symbol: "apps.iphone.badge.plus", identifier: "carousel-place") {
+                // The widget to place becomes the latest of its size: the gallery previews it.
+                model.markUsed(design)
                 router.lastSavedName = design.name
+                router.lastSavedID = design.id
                 router.isAddGuidePresented = true
             }
             .accessibilityLabel(Text(tr("Ajouter à l'écran d'accueil")))

@@ -38,7 +38,7 @@ struct NutritionAppView: View {
         let entries = NutritionMath.entries(state, on: day)
         MiniAppScroll {
             DaySwitcher(day: $day, colorHex: accentHex)
-            CalorieHero(totals: totals, goals: state.goals, known: known, day: day)
+            CalorieHero(totals: totals, goals: state.goals, known: known, day: day, isPremium: model.isPremium)
             actions
             meals(entries: entries)
             if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
@@ -255,12 +255,14 @@ struct NutritionAppView: View {
 
 // MARK: - Calories and macros
 
-/// The day in one card: the calorie ring, what is eaten, left or over, then the three macros.
+/// The day in one card: the calorie ring, what is eaten, left or over, then the three macros. The other
+/// nutrients (Premium) are one touch below.
 struct CalorieHero: View {
     let totals: NutritionTotals
     let goals: NutritionGoals
     let known: NutritionTiles.Targets
     let day: Date
+    let isPremium: Bool
 
     private let accent = Color(hex: MiniApp.nutrition.colorHex)
 
@@ -304,15 +306,21 @@ struct CalorieHero: View {
             }
             NavigationLink(value: HomeRoute.page(.nutritionNutrients(day))) {
                 HStack {
-                    Text(tr("Fibres \(TF.int(totals.fiber)) g\(totals.sugars.map { tr(" · sucres \(TF.int($0)) g") } ?? "")\(totals.sodiumMg.map { tr(" · sodium \(TF.int($0)) mg") } ?? "")"))
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                    Spacer(minLength: 4)
+                    if isPremium {
+                        Text(tr("Fibres \(TF.int(totals.fiber)) g\(totals.sugars.map { tr(" · sucres \(TF.int($0)) g") } ?? "")\(totals.sodiumMg.map { tr(" · sodium \(TF.int($0)) mg") } ?? "")"))
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                        Spacer(minLength: 4)
+                    }
                     Text(tr("Tous les nutriments"))
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(accent)
+                    if !isPremium {
+                        PremiumBadge(compact: true)
+                        Spacer(minLength: 4)
+                    }
                     Image(systemName: "chevron.right")
                         .font(.caption2.weight(.bold))
                         .foregroundStyle(.tertiary)

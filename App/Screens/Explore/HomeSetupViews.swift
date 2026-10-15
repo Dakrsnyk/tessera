@@ -754,6 +754,7 @@ struct HomeSetupSheet: View {
         if installed != nil {
             dismiss()
             router.lastSavedName = setup.name
+            router.lastSavedID = nil
             router.isAddGuidePresented = true
             return
         }

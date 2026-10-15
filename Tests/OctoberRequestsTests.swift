@@ -4,7 +4,7 @@ import XCTest
 
 /// The requests of 2026-10-15: nutrition needs calculated from the body (and kept when typed by hand),
 /// more nutrients, the water mini-app removed without losing data, photo widgets laid out by their number
-/// of photos, habit regularity, the free part of the exercise library, and data never overwritten.
+/// of photos, habit regularity, the exercise library in Premium (sessions stay free), and data never overwritten.
 @MainActor
 final class OctoberRequestsTests: XCTestCase {
     private func temporaryDirectory() -> URL {
@@ -249,15 +249,34 @@ final class OctoberRequestsTests: XCTestCase {
 
     // MARK: Exercise library
 
-    func testTheFreeLibraryKeepsWhatThePersonAlreadyUses() {
-        XCTAssertTrue((30...45).contains(ExerciseLibrary.freeCount), "Enough to build a whole program")
-        XCTAssertEqual(ExerciseLibrary.freeCount, ExerciseLibrary.freeIDs.count, "Every free exercise exists")
-        let model = temporaryModel()
-        XCTAssertTrue(ExerciseLibrary.isOpen("bench-press", isPremium: false, owned: model.ownedExerciseIDs))
-        XCTAssertFalse(ExerciseLibrary.isOpen("pec-deck", isPremium: false, owned: model.ownedExerciseIDs))
-        XCTAssertTrue(ExerciseLibrary.isOpen("pec-deck", isPremium: true, owned: []))
-        model.update(\.fitness) { $0.routines = [Routine(name: "Pecs", exercises: [ExerciseTemplate(name: "Pec deck", sets: 3, reps: 10, weight: 30, exerciseID: "pec-deck")])] }
-        XCTAssertTrue(ExerciseLibrary.isOpen("pec-deck", isPremium: false, owned: model.ownedExerciseIDs), "Used in a routine: stays open")
+    func testEveryLibraryExerciseIsPremiumWithItsData() {
+        XCTAssertFalse(ExerciseLibrary.all.contains { ExerciseLibrary.isOpen($0.id, isPremium: false) }, "Even the essentials are Premium")
+        XCTAssertFalse(ExerciseLibrary.isOpen("bench-press", isPremium: false))
+        XCTAssertTrue(ExerciseLibrary.all.allSatisfy { ExerciseLibrary.isOpen($0.id, isPremium: true) }, "With Premium, the whole library opens")
+        XCTAssertFalse(ExerciseLibrary.isOpen("not-an-exercise", isPremium: true), "An unknown id never opens")
+    }
+
+    func testWithoutPremiumASessionStillRunsAndItsDataIsKept() throws {
+        var state = FitnessState()
+        // A routine holding a library exercise (chosen with Premium) and an exercise written by the person.
+        state.routines = [Routine(name: "Pecs", exercises: [
+            ExerciseTemplate(name: "Pec deck", sets: 2, reps: 10, weight: 30, exerciseID: "pec-deck"),
+            ExerciseTemplate(name: "Mon gainage", sets: 1, reps: 1, weight: 0),
+        ])]
+        XCTAssertFalse(ExerciseLibrary.isOpen("pec-deck", isPremium: false), "Used in a routine: its sheet stays Premium")
+        let start = Date().addingTimeInterval(-3_600)
+        state.startSession(state.routines[0], at: start)
+        // An exercise written during the session, without the library.
+        state.active?.append(ExerciseTemplate(name: "Mes pompes", sets: 1, reps: 15, weight: 0))
+        for minute in 1...4 { state.completeNextSet(at: start.addingTimeInterval(Double(minute) * 60)) }
+        XCTAssertNil(state.active, "Every set logged: the session is saved")
+        let session = try XCTUnwrap(state.history.last)
+        XCTAssertEqual(session.sets.map(\.exercise), ["Pec deck", "Pec deck", "Mon gainage", "Mes pompes"])
+        XCTAssertEqual(session.sets.first?.exerciseID, "pec-deck")
+        // The exercise's data, locked without Premium, is kept and shows again with Premium.
+        let deck = try XCTUnwrap(ExerciseLibrary.info("pec-deck"))
+        XCTAssertEqual(FitnessMath.history(of: deck, state).first?.sets.count, 2)
+        XCTAssertEqual(FitnessMath.records(state).first?.exercise, "Pec deck")
     }
 
     func testAnExerciseAddedDuringASessionTakesWhatWasLiftedLastTime() throws {

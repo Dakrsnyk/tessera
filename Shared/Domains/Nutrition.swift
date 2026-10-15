@@ -46,8 +46,8 @@ struct FoodItem: Codable, Hashable, Identifiable {
     }
 }
 
-/// Fats, minerals and vitamins: per 100 g on a food, per day on totals. A value the source doesn't give
-/// stays nil, never a zero made up.
+/// Fats, minerals, vitamins and a few more (caffeine, alcohol): per 100 g on a food, per day on totals. A
+/// value the source doesn't give stays nil, never a zero made up.
 struct Micronutrients: Codable, Hashable {
     var monounsaturatedFat: Double?
     var polyunsaturatedFat: Double?
@@ -62,10 +62,40 @@ struct Micronutrients: Codable, Hashable {
     var vitaminB12Mcg: Double?
     /// Dietary folate equivalents (DFE).
     var folateMcg: Double?
+    // Read since the nutrients of Premium: nil in the foods saved before.
+    var transFat: Double?
+    /// Every omega-3 fatty acid (alpha-linolenic, EPA, DHA…), grams.
+    var omega3Fat: Double?
+    /// Every omega-6 fatty acid (linoleic…), grams.
+    var omega6Fat: Double?
+    var zincMg: Double?
+    var phosphorusMg: Double?
+    var seleniumMcg: Double?
+    var copperMg: Double?
+    var manganeseMg: Double?
+    /// Alpha-tocopherol.
+    var vitaminEMg: Double?
+    var vitaminKMcg: Double?
+    /// Vitamin B1.
+    var thiaminMg: Double?
+    /// Vitamin B2.
+    var riboflavinMg: Double?
+    /// Vitamin B3, in niacin equivalents where the source gives them (Canadian Nutrient File).
+    var niacinMg: Double?
+    /// Vitamin B5.
+    var pantothenicAcidMg: Double?
+    var vitaminB6Mg: Double?
+    var cholineMg: Double?
+    var caffeineMg: Double?
+    /// Grams of ethanol.
+    var alcohol: Double?
 
     static let all: [WritableKeyPath<Micronutrients, Double?>] = [
         \.monounsaturatedFat, \.polyunsaturatedFat, \.potassiumMg, \.calciumMg, \.ironMg, \.magnesiumMg,
         \.vitaminCMg, \.vitaminAMcg, \.vitaminDMcg, \.vitaminB12Mcg, \.folateMcg,
+        \.transFat, \.omega3Fat, \.omega6Fat, \.zincMg, \.phosphorusMg, \.seleniumMcg, \.copperMg, \.manganeseMg,
+        \.vitaminEMg, \.vitaminKMcg, \.thiaminMg, \.riboflavinMg, \.niacinMg, \.pantothenicAcidMg, \.vitaminB6Mg,
+        \.cholineMg, \.caffeineMg, \.alcohol,
     ]
 
     var isEmpty: Bool { Self.all.allSatisfy { self[keyPath: $0] == nil } }
@@ -85,6 +115,222 @@ struct Micronutrients: Codable, Hashable {
             }
         }
         return sum
+    }
+}
+
+/// Every nutrient Ardane follows, in the order shown. Calories, protein, carbohydrates and fat are free;
+/// every other one is Premium (`isPremium`): its values are kept either way and shown with Premium.
+enum Nutrient: String, CaseIterable, Identifiable {
+    case kcal, protein, carbs, fat, fiber
+    case sugars, saturatedFat, transFat, cholesterol, sodium, caffeine, alcohol
+    case monounsaturatedFat, polyunsaturatedFat, omega3, omega6
+    case potassium, calcium, iron, magnesium, zinc, phosphorus, selenium, copper, manganese
+    case vitaminA, vitaminC, vitaminD, vitaminE, vitaminK, thiamin, riboflavin, niacin, pantothenicAcid, vitaminB6, folate, vitaminB12, choline
+    var id: String { rawValue }
+
+    /// The sections they are shown in.
+    enum Group: CaseIterable {
+        case energy, limits, fats, minerals, vitamins
+
+        var title: String {
+            switch self {
+            case .energy: tr("Objectifs")
+            case .limits: tr("À limiter")
+            case .fats: tr("Acides gras")
+            case .minerals: tr("Minéraux")
+            case .vitamins: tr("Vitamines")
+            }
+        }
+
+        var nutrients: [Nutrient] { Nutrient.allCases.filter { $0.group == self } }
+    }
+
+    var group: Group {
+        switch self {
+        case .kcal, .protein, .carbs, .fat, .fiber: .energy
+        case .sugars, .saturatedFat, .transFat, .cholesterol, .sodium, .caffeine, .alcohol: .limits
+        case .monounsaturatedFat, .polyunsaturatedFat, .omega3, .omega6: .fats
+        case .potassium, .calcium, .iron, .magnesium, .zinc, .phosphorus, .selenium, .copper, .manganese: .minerals
+        default: .vitamins
+        }
+    }
+
+    /// The four free ones.
+    static let free: [Nutrient] = [.kcal, .protein, .carbs, .fat]
+
+    var isPremium: Bool { !Self.free.contains(self) }
+
+    /// Its daily target (« Mes infos »), when a recognized reference gives one.
+    var target: NutritionTarget? { NutritionTarget(rawValue: rawValue) }
+
+    var title: String {
+        switch self {
+        case .kcal: tr("Calories")
+        case .protein: tr("Protéines")
+        case .carbs: tr("Glucides")
+        case .fat: tr("Lipides")
+        case .fiber: tr("Fibres")
+        case .sugars: tr("Sucres")
+        case .saturatedFat: tr("Gras saturés")
+        case .transFat: tr("Gras trans")
+        case .cholesterol: tr("Cholestérol")
+        case .sodium: tr("Sodium")
+        case .caffeine: tr("Caféine")
+        case .alcohol: tr("Alcool")
+        case .monounsaturatedFat: tr("Gras monoinsaturés")
+        case .polyunsaturatedFat: tr("Gras polyinsaturés")
+        case .omega3: tr("Oméga-3")
+        case .omega6: tr("Oméga-6")
+        case .potassium: tr("Potassium")
+        case .calcium: tr("Calcium")
+        case .iron: tr("Fer")
+        case .magnesium: tr("Magnésium")
+        case .zinc: tr("Zinc")
+        case .phosphorus: tr("Phosphore")
+        case .selenium: tr("Sélénium")
+        case .copper: tr("Cuivre")
+        case .manganese: tr("Manganèse")
+        case .vitaminA: tr("Vitamine A")
+        case .vitaminC: tr("Vitamine C")
+        case .vitaminD: tr("Vitamine D")
+        case .vitaminE: tr("Vitamine E")
+        case .vitaminK: tr("Vitamine K")
+        case .thiamin: tr("Thiamine (B1)")
+        case .riboflavin: tr("Riboflavine (B2)")
+        case .niacin: tr("Niacine (B3)")
+        case .pantothenicAcid: tr("Acide pantothénique (B5)")
+        case .vitaminB6: tr("Vitamine B6")
+        case .folate: tr("Folates (B9)")
+        case .vitaminB12: tr("Vitamine B12")
+        case .choline: tr("Choline")
+        }
+    }
+
+    var unit: String {
+        switch self {
+        case .kcal: "kcal"
+        case .protein, .carbs, .fat, .fiber, .sugars, .saturatedFat, .transFat, .alcohol,
+             .monounsaturatedFat, .polyunsaturatedFat, .omega3, .omega6: "g"
+        case .vitaminA, .vitaminD, .vitaminK, .folate, .vitaminB12, .selenium: "µg"
+        default: "mg"
+        }
+    }
+
+    /// Decimals worth showing (2,4 µg of B12, 1,2 mg of thiamin, 13 mg of iron, 2 100 kcal).
+    var decimals: Int {
+        switch self {
+        case .vitaminB12, .vitaminD, .transFat, .omega3, .copper, .manganese, .thiamin, .riboflavin, .vitaminB6: 1
+        default: 0
+        }
+    }
+
+    /// « 13 », « 2,4 »: the number alone.
+    func number(_ value: Double) -> String {
+        decimals > 0 ? TF.decimal(value, decimals) : TF.int(value)
+    }
+
+    /// « 13 mg », « 2,4 µg ».
+    func format(_ value: Double) -> String {
+        "\(number(value)) \(unit)"
+    }
+
+    /// An amount of one food: a few more decimals for the small ones (« 0,08 mg », « 1,4 g »).
+    func formatAmount(_ value: Double) -> String {
+        guard self != .kcal else { return format(value) }
+        let digits = value == 0 ? 0 : (value < 1 ? 2 : (value < 10 ? 1 : decimals))
+        return "\(digits > 0 ? TF.decimal(value, digits) : TF.int(value)) \(unit)"
+    }
+
+    /// What foods add up to, nil when no food gave the value.
+    func value(in totals: NutritionTotals) -> Double? {
+        switch self {
+        case .kcal: totals.kcal
+        case .protein: totals.protein
+        case .carbs: totals.carbs
+        case .fat: totals.fat
+        case .fiber: totals.fiber
+        case .sugars: totals.sugars
+        case .saturatedFat: totals.saturatedFat
+        case .cholesterol: totals.cholesterolMg
+        case .sodium: totals.sodiumMg
+        default: microsPath.flatMap { totals.micros[keyPath: $0] }
+        }
+    }
+
+    /// The value on a food (per 100 g), to know whether a day's total is complete. Nil for the ones every
+    /// food has.
+    var foodPath: KeyPath<FoodItem, Double?>? {
+        switch self {
+        case .kcal, .protein, .carbs, .fat, .fiber: nil
+        case .sugars: \.sugars
+        case .saturatedFat: \.saturatedFat
+        case .cholesterol: \.cholesterolMg
+        case .sodium: \.sodiumMg
+        case .transFat: \.micros?.transFat
+        case .caffeine: \.micros?.caffeineMg
+        case .alcohol: \.micros?.alcohol
+        case .monounsaturatedFat: \.micros?.monounsaturatedFat
+        case .polyunsaturatedFat: \.micros?.polyunsaturatedFat
+        case .omega3: \.micros?.omega3Fat
+        case .omega6: \.micros?.omega6Fat
+        case .potassium: \.micros?.potassiumMg
+        case .calcium: \.micros?.calciumMg
+        case .iron: \.micros?.ironMg
+        case .magnesium: \.micros?.magnesiumMg
+        case .zinc: \.micros?.zincMg
+        case .phosphorus: \.micros?.phosphorusMg
+        case .selenium: \.micros?.seleniumMcg
+        case .copper: \.micros?.copperMg
+        case .manganese: \.micros?.manganeseMg
+        case .vitaminA: \.micros?.vitaminAMcg
+        case .vitaminC: \.micros?.vitaminCMg
+        case .vitaminD: \.micros?.vitaminDMcg
+        case .vitaminE: \.micros?.vitaminEMg
+        case .vitaminK: \.micros?.vitaminKMcg
+        case .thiamin: \.micros?.thiaminMg
+        case .riboflavin: \.micros?.riboflavinMg
+        case .niacin: \.micros?.niacinMg
+        case .pantothenicAcid: \.micros?.pantothenicAcidMg
+        case .vitaminB6: \.micros?.vitaminB6Mg
+        case .folate: \.micros?.folateMcg
+        case .vitaminB12: \.micros?.vitaminB12Mcg
+        case .choline: \.micros?.cholineMg
+        }
+    }
+
+    private var microsPath: WritableKeyPath<Micronutrients, Double?>? {
+        switch self {
+        case .transFat: \.transFat
+        case .caffeine: \.caffeineMg
+        case .alcohol: \.alcohol
+        case .monounsaturatedFat: \.monounsaturatedFat
+        case .polyunsaturatedFat: \.polyunsaturatedFat
+        case .omega3: \.omega3Fat
+        case .omega6: \.omega6Fat
+        case .potassium: \.potassiumMg
+        case .calcium: \.calciumMg
+        case .iron: \.ironMg
+        case .magnesium: \.magnesiumMg
+        case .zinc: \.zincMg
+        case .phosphorus: \.phosphorusMg
+        case .selenium: \.seleniumMcg
+        case .copper: \.copperMg
+        case .manganese: \.manganeseMg
+        case .vitaminA: \.vitaminAMcg
+        case .vitaminC: \.vitaminCMg
+        case .vitaminD: \.vitaminDMcg
+        case .vitaminE: \.vitaminEMg
+        case .vitaminK: \.vitaminKMcg
+        case .thiamin: \.thiaminMg
+        case .riboflavin: \.riboflavinMg
+        case .niacin: \.niacinMg
+        case .pantothenicAcid: \.pantothenicAcidMg
+        case .vitaminB6: \.vitaminB6Mg
+        case .folate: \.folateMcg
+        case .vitaminB12: \.vitaminB12Mcg
+        case .choline: \.cholineMg
+        case .kcal, .protein, .carbs, .fat, .fiber, .sugars, .saturatedFat, .cholesterol, .sodium: nil
+        }
     }
 }
 
@@ -198,6 +444,27 @@ struct NutritionGoals: Codable, Hashable {
     var vitaminDMcg: Double = 15
     var vitaminB12Mcg: Double = 2.4
     var folateMcg: Double = 400
+    // The nutrients of Premium: the average of the female and male references until the calculation
+    // knows the person.
+    /// Under 1 % of the calories (WHO).
+    var transFatMax: Double = 2.4
+    /// Health Canada's limit for adults.
+    var caffeineMaxMg: Double = 400
+    var omega3Fat: Double = 1.4
+    var omega6Fat: Double = 15
+    var zincMg: Double = 10
+    var phosphorusMg: Double = 700
+    var seleniumMcg: Double = 55
+    var copperMg: Double = 0.9
+    var manganeseMg: Double = 2.1
+    var vitaminEMg: Double = 15
+    var vitaminKMcg: Double = 105
+    var thiaminMg: Double = 1.2
+    var riboflavinMg: Double = 1.2
+    var niacinMg: Double = 15
+    var pantothenicAcidMg: Double = 5
+    var vitaminB6Mg: Double = 1.3
+    var cholineMg: Double = 488
 
     init(kcal: Double = 2_200, protein: Double = 130, carbs: Double = 250, fat: Double = 70, fiber: Double = 30,
          sugarsMax: Double = 50, saturatedFatMax: Double = 20, sodiumMaxMg: Double = 2_300) {
@@ -214,6 +481,8 @@ struct NutritionGoals: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case kcal, protein, carbs, fat, fiber, sugarsMax, saturatedFatMax, sodiumMaxMg
         case potassiumMg, calciumMg, ironMg, magnesiumMg, vitaminCMg, vitaminAMcg, vitaminDMcg, vitaminB12Mcg, folateMcg
+        case transFatMax, caffeineMaxMg, omega3Fat, omega6Fat, zincMg, phosphorusMg, seleniumMcg, copperMg, manganeseMg
+        case vitaminEMg, vitaminKMcg, thiaminMg, riboflavinMg, niacinMg, pantothenicAcidMg, vitaminB6Mg, cholineMg
     }
 
     subscript(target: NutritionTarget) -> Double {
@@ -221,7 +490,7 @@ struct NutritionGoals: Codable, Hashable {
         set { self[keyPath: target.goalPath] = newValue }
     }
 
-    /// Tolerant: goals saved before the limits existed keep their values.
+    /// Tolerant: goals saved before the limits or the nutrients of Premium existed keep their values.
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         let d = NutritionGoals()
@@ -242,67 +511,56 @@ struct NutritionGoals: Codable, Hashable {
         vitaminDMcg = c.value(.vitaminDMcg, d.vitaminDMcg)
         vitaminB12Mcg = c.value(.vitaminB12Mcg, d.vitaminB12Mcg)
         folateMcg = c.value(.folateMcg, d.folateMcg)
+        transFatMax = c.value(.transFatMax, d.transFatMax)
+        caffeineMaxMg = c.value(.caffeineMaxMg, d.caffeineMaxMg)
+        omega3Fat = c.value(.omega3Fat, d.omega3Fat)
+        omega6Fat = c.value(.omega6Fat, d.omega6Fat)
+        zincMg = c.value(.zincMg, d.zincMg)
+        phosphorusMg = c.value(.phosphorusMg, d.phosphorusMg)
+        seleniumMcg = c.value(.seleniumMcg, d.seleniumMcg)
+        copperMg = c.value(.copperMg, d.copperMg)
+        manganeseMg = c.value(.manganeseMg, d.manganeseMg)
+        vitaminEMg = c.value(.vitaminEMg, d.vitaminEMg)
+        vitaminKMcg = c.value(.vitaminKMcg, d.vitaminKMcg)
+        thiaminMg = c.value(.thiaminMg, d.thiaminMg)
+        riboflavinMg = c.value(.riboflavinMg, d.riboflavinMg)
+        niacinMg = c.value(.niacinMg, d.niacinMg)
+        pantothenicAcidMg = c.value(.pantothenicAcidMg, d.pantothenicAcidMg)
+        vitaminB6Mg = c.value(.vitaminB6Mg, d.vitaminB6Mg)
+        cholineMg = c.value(.cholineMg, d.cholineMg)
     }
 }
 
 /// A daily target of « Mes infos › Nutrition »: calculated from the person's body, aim and activity,
-/// or typed by them (then kept as they are when the calculation changes).
+/// or typed by them (then kept as they are when the calculation changes). Each one is the target of the
+/// nutrient of the same name; cholesterol, alcohol and the mono- and polyunsaturated fats have none.
 enum NutritionTarget: String, Codable, CaseIterable, Identifiable {
-    case kcal, protein, carbs, fat, fiber, sugars, saturatedFat, sodium
-    case potassium, calcium, iron, magnesium, vitaminC, vitaminA, vitaminD, vitaminB12, folate
+    case kcal, protein, carbs, fat, fiber
+    case sugars, saturatedFat, transFat, sodium, caffeine
+    case omega3, omega6
+    case potassium, calcium, iron, magnesium, zinc, phosphorus, selenium, copper, manganese
+    case vitaminA, vitaminC, vitaminD, vitaminE, vitaminK, thiamin, riboflavin, niacin, pantothenicAcid, vitaminB6, folate, vitaminB12, choline
     var id: String { rawValue }
 
-    enum Group { case energy, limits, micronutrients }
+    typealias Group = Nutrient.Group
 
-    var group: Group {
-        switch self {
-        case .kcal, .protein, .carbs, .fat, .fiber: .energy
-        case .sugars, .saturatedFat, .sodium: .limits
-        default: .micronutrients
-        }
-    }
+    var nutrient: Nutrient { Nutrient(rawValue: rawValue) ?? .kcal }
 
-    /// A ceiling not to go over (sugars, saturated fat, sodium), rather than an amount to reach.
+    var group: Group { nutrient.group }
+
+    /// A ceiling not to go over (sugars, saturated and trans fats, sodium, caffeine), rather than an amount
+    /// to reach.
     var isLimit: Bool { group == .limits }
 
-    var title: String {
-        switch self {
-        case .kcal: tr("Calories")
-        case .protein: tr("Protéines")
-        case .carbs: tr("Glucides")
-        case .fat: tr("Lipides")
-        case .fiber: tr("Fibres")
-        case .sugars: tr("Sucres")
-        case .saturatedFat: tr("Gras saturés")
-        case .sodium: tr("Sodium")
-        case .potassium: tr("Potassium")
-        case .calcium: tr("Calcium")
-        case .iron: tr("Fer")
-        case .magnesium: tr("Magnésium")
-        case .vitaminC: tr("Vitamine C")
-        case .vitaminA: tr("Vitamine A")
-        case .vitaminD: tr("Vitamine D")
-        case .vitaminB12: tr("Vitamine B12")
-        case .folate: tr("Folates (B9)")
-        }
-    }
+    /// Every target but the calories and the three macronutrients.
+    var isPremium: Bool { nutrient.isPremium }
 
-    var unit: String {
-        switch self {
-        case .kcal: "kcal"
-        case .protein, .carbs, .fat, .fiber, .sugars, .saturatedFat: "g"
-        case .sodium, .potassium, .calcium, .iron, .magnesium, .vitaminC: "mg"
-        case .vitaminA, .vitaminD, .vitaminB12, .folate: "µg"
-        }
-    }
+    var title: String { nutrient.title }
+
+    var unit: String { nutrient.unit }
 
     /// Decimals worth showing (2,4 µg of B12, 13 mg of iron, 2 100 kcal).
-    var decimals: Int {
-        switch self {
-        case .vitaminB12, .vitaminD: 1
-        default: 0
-        }
-    }
+    var decimals: Int { nutrient.decimals }
 
     var goalPath: WritableKeyPath<NutritionGoals, Double> {
         switch self {
@@ -313,63 +571,44 @@ enum NutritionTarget: String, Codable, CaseIterable, Identifiable {
         case .fiber: \.fiber
         case .sugars: \.sugarsMax
         case .saturatedFat: \.saturatedFatMax
+        case .transFat: \.transFatMax
         case .sodium: \.sodiumMaxMg
+        case .caffeine: \.caffeineMaxMg
+        case .omega3: \.omega3Fat
+        case .omega6: \.omega6Fat
         case .potassium: \.potassiumMg
         case .calcium: \.calciumMg
         case .iron: \.ironMg
         case .magnesium: \.magnesiumMg
-        case .vitaminC: \.vitaminCMg
+        case .zinc: \.zincMg
+        case .phosphorus: \.phosphorusMg
+        case .selenium: \.seleniumMcg
+        case .copper: \.copperMg
+        case .manganese: \.manganeseMg
         case .vitaminA: \.vitaminAMcg
+        case .vitaminC: \.vitaminCMg
         case .vitaminD: \.vitaminDMcg
-        case .vitaminB12: \.vitaminB12Mcg
+        case .vitaminE: \.vitaminEMg
+        case .vitaminK: \.vitaminKMcg
+        case .thiamin: \.thiaminMg
+        case .riboflavin: \.riboflavinMg
+        case .niacin: \.niacinMg
+        case .pantothenicAcid: \.pantothenicAcidMg
+        case .vitaminB6: \.vitaminB6Mg
         case .folate: \.folateMcg
+        case .vitaminB12: \.vitaminB12Mcg
+        case .choline: \.cholineMg
         }
     }
 
     /// What a day's foods add up to, nil when no food eaten gave the value.
-    func eaten(_ totals: NutritionTotals) -> Double? {
-        switch self {
-        case .kcal: totals.kcal
-        case .protein: totals.protein
-        case .carbs: totals.carbs
-        case .fat: totals.fat
-        case .fiber: totals.fiber
-        case .sugars: totals.sugars
-        case .saturatedFat: totals.saturatedFat
-        case .sodium: totals.sodiumMg
-        case .potassium: totals.micros.potassiumMg
-        case .calcium: totals.micros.calciumMg
-        case .iron: totals.micros.ironMg
-        case .magnesium: totals.micros.magnesiumMg
-        case .vitaminC: totals.micros.vitaminCMg
-        case .vitaminA: totals.micros.vitaminAMcg
-        case .vitaminD: totals.micros.vitaminDMcg
-        case .vitaminB12: totals.micros.vitaminB12Mcg
-        case .folate: totals.micros.folateMcg
-        }
-    }
+    func eaten(_ totals: NutritionTotals) -> Double? { nutrient.value(in: totals) }
 
     /// The value on a food (per 100 g), to know whether a day's total is complete.
-    var foodPath: KeyPath<FoodItem, Double?>? {
-        switch self {
-        case .kcal, .protein, .carbs, .fat, .fiber: nil
-        case .sugars: \.sugars
-        case .saturatedFat: \.saturatedFat
-        case .sodium: \.sodiumMg
-        case .potassium: \.micros?.potassiumMg
-        case .calcium: \.micros?.calciumMg
-        case .iron: \.micros?.ironMg
-        case .magnesium: \.micros?.magnesiumMg
-        case .vitaminC: \.micros?.vitaminCMg
-        case .vitaminA: \.micros?.vitaminAMcg
-        case .vitaminD: \.micros?.vitaminDMcg
-        case .vitaminB12: \.micros?.vitaminB12Mcg
-        case .folate: \.micros?.folateMcg
-        }
-    }
+    var foodPath: KeyPath<FoodItem, Double?>? { nutrient.foodPath }
 
-    /// The macronutrients that follow the calories when only the calories were typed by hand.
-    var followsCalories: Bool { [.protein, .carbs, .fat, .fiber, .sugars, .saturatedFat].contains(self) }
+    /// The targets that follow the calories when only the calories were typed by hand.
+    var followsCalories: Bool { [.protein, .carbs, .fat, .fiber, .sugars, .saturatedFat, .transFat].contains(self) }
 
     /// The facts widgets read as « the person's own target ».
     var providedFact: ProvidedFact? {
@@ -766,7 +1005,10 @@ enum NutritionCalculator {
     /// - fibre: 14 g per 1 000 kcal (Dietary Guidelines); sugars and saturated fat: under 10 % of the
     ///   calories each (WHO); sodium: under 2 300 mg (Health Canada);
     /// - minerals and vitamins: the Dietary Reference Intakes for the age and gender (the average of both
-    ///   references for `neutral`).
+    ///   references for `neutral`);
+    /// - Premium: trans fat under 1 % of the calories (WHO), caffeine 400 mg at most (Health Canada),
+    ///   omega-3 and omega-6 at the adequate intakes of alpha-linolenic and linoleic acids, and the
+    ///   Dietary Reference Intakes of the other minerals and vitamins (none for cholesterol or alcohol).
     /// `kcal`: calories typed by the person, which the macronutrients then follow.
     static func goals(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal, kcal typed: Double? = nil) -> NutritionGoals {
         let steps = breakdown(sex: sex, age: age, heightCm: heightCm, weightKg: weightKg, activity: activity, goal: goal)
@@ -786,6 +1028,24 @@ enum NutritionCalculator {
         goals.vitaminDMcg = age > 70 ? 20 : 15
         goals.vitaminB12Mcg = 2.4
         goals.folateMcg = 400
+        // The nutrients of Premium.
+        goals.transFatMax = (kcal * 0.01 / 9 * 10).rounded() / 10
+        goals.caffeineMaxMg = 400
+        goals.omega3Fat = reference.value(female: 1.1, male: 1.6, places: 1)
+        goals.omega6Fat = reference.value(female: age > 50 ? 11 : 12, male: age > 50 ? 14 : 17)
+        goals.zincMg = reference.value(female: 8, male: 11)
+        goals.phosphorusMg = 700
+        goals.seleniumMcg = 55
+        goals.copperMg = 0.9
+        goals.manganeseMg = reference.value(female: 1.8, male: 2.3, places: 1)
+        goals.vitaminEMg = 15
+        goals.vitaminKMcg = reference.value(female: 90, male: 120)
+        goals.thiaminMg = reference.value(female: 1.1, male: 1.2, places: 1)
+        goals.riboflavinMg = reference.value(female: 1.1, male: 1.3, places: 1)
+        goals.niacinMg = reference.value(female: 14, male: 16)
+        goals.pantothenicAcidMg = 5
+        goals.vitaminB6Mg = age > 50 ? reference.value(female: 1.5, male: 1.7, places: 1) : 1.3
+        goals.cholineMg = reference.value(female: 425, male: 550)
         return goals
     }
 
@@ -793,11 +1053,13 @@ enum NutritionCalculator {
     private struct References {
         let sex: Sex
 
-        func value(female: Double, male: Double) -> Double {
+        /// `places`: the decimals the average of both keeps (1,15 mg of thiamin → 1,2).
+        func value(female: Double, male: Double, places: Int = 0) -> Double {
+            let factor = pow(10, Double(places))
             switch sex {
-            case .female: female
-            case .male: male
-            case .neutral: ((female + male) / 2).rounded()
+            case .female: return female
+            case .male: return male
+            case .neutral: return ((female + male) * factor / 2).rounded() / factor
             }
         }
     }

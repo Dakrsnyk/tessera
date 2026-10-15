@@ -202,6 +202,14 @@ struct EntryEditor: View {
                 ValueRow(title: tr("Protéines"), value: "\(TF.decimal(totals.protein, 1)) g")
                 ValueRow(title: tr("Glucides"), value: "\(TF.decimal(totals.carbs, 1)) g")
                 ValueRow(title: tr("Lipides"), value: "\(TF.decimal(totals.fat, 1)) g")
+                if model.isPremium {
+                    ValueRow(title: tr("Fibres"), value: "\(TF.decimal(totals.fiber, 1)) g")
+                } else {
+                    NutrientLockRow()
+                }
+            }
+            if model.isPremium {
+                FoodNutrientSections(totals: totals)
             }
             Section {
                 Button(role: .destructive) {
@@ -232,7 +240,8 @@ struct EntryEditor: View {
 // MARK: - Nutrients
 
 /// Every nutrient of a day against the person's targets and limits. A nutrient that some foods don't
-/// give is marked as partial rather than shown as a complete figure.
+/// give is marked as partial rather than shown as a complete figure. The calories and the three
+/// macronutrients are free; the other nutrients are Premium (their values are kept either way).
 struct NutritionNutrientsPage: View {
     let day: Date
     @Environment(AppModel.self) private var model
@@ -243,30 +252,54 @@ struct NutritionNutrientsPage: View {
         let totals = NutritionMath.totals(state, on: day)
         let goals = state.goals
         let known = NutritionTiles.Targets(model.profile)
+        let recommended = model.recommendedNutritionGoals()
+        let premium = model.isPremium
         List {
             Section {
                 row(tr("Calories"), totals.kcal, goal: known.kcal ? goals.kcal : nil, unit: "kcal", hex: "F08A24")
                 row(tr("Protéines"), totals.protein, goal: known.protein ? goals.protein : nil, unit: "g", hex: "E5484D")
                 row(tr("Glucides"), totals.carbs, goal: known.carbs ? goals.carbs : nil, unit: "g", hex: "F2A33A")
                 row(tr("Lipides"), totals.fat, goal: known.fat ? goals.fat : nil, unit: "g", hex: "3366FF")
-                row(tr("Fibres"), totals.fiber, goal: goals.fiber, unit: "g", hex: "7FA33A")
+                if premium {
+                    row(tr("Fibres"), totals.fiber, goal: model.shownNutritionTarget(.fiber, recommended: recommended), unit: "g", hex: "7FA33A")
+                }
             } header: {
                 Text(tr("Objectifs"))
             }
-            Section {
-                limitRow(tr("Sucres"), totals.sugars, limit: goals.sugarsMax, unit: "g", coverage: NutritionMath.coverage(entries, \.sugars))
-                limitRow(tr("Gras saturés"), totals.saturatedFat, limit: goals.saturatedFatMax, unit: "g", coverage: NutritionMath.coverage(entries, \.saturatedFat))
-                limitRow(tr("Sodium"), totals.sodiumMg, limit: goals.sodiumMaxMg, unit: tr("mg"), coverage: NutritionMath.coverage(entries, \.sodiumMg))
-                limitRow(tr("Cholestérol"), totals.cholesterolMg, limit: nil, unit: tr("mg"), coverage: NutritionMath.coverage(entries, \.cholesterolMg))
-            } header: {
-                Text(tr("À limiter"))
-            } footer: {
-                Text(tr("Limites habituelles des guides de santé publique, modifiables dans Objectifs. Quand un aliment ne donne pas une valeur, le total est marqué « partiel »."))
+            if premium {
+                Section {
+                    ForEach(Nutrient.Group.limits.nutrients) { nutrient in
+                        nutrientRow(nutrient, totals: totals, entries: entries, recommended: recommended)
+                    }
+                } header: {
+                    Text(tr("À limiter"))
+                } footer: {
+                    Text(tr("Limites habituelles des guides de santé publique, modifiables dans Objectifs. Quand un aliment ne donne pas une valeur, le total est marqué « partiel »."))
+                }
+                ForEach([Nutrient.Group.fats, .minerals, .vitamins], id: \.self) { group in
+                    Section {
+                        ForEach(group.nutrients) { nutrient in
+                            nutrientRow(nutrient, totals: totals, entries: entries, recommended: recommended)
+                        }
+                    } header: {
+                        Text(group.title)
+                    } footer: {
+                        if group == .vitamins {
+                            Text(tr("Des repères pour un adulte en bonne santé, pas un avis médical."))
+                        }
+                    }
+                }
+            } else {
+                Section {
+                    NutrientLockRow()
+                }
             }
         }
         .styledList()
         .navigationTitle(tr("Nutriments"))
         .navigationBarTitleDisplayMode(.inline)
+        // Targets added by an update follow the calculation at once.
+        .onAppear { model.followCalculatedNutritionGoals() }
     }
 
     private func row(_ title: String, _ value: Double, goal: Double?, unit: String, hex: String) -> some View {
@@ -285,11 +318,19 @@ struct NutritionNutrientsPage: View {
         .padding(.vertical, 4)
     }
 
-    private func limitRow(_ title: String, _ value: Double?, limit: Double?, unit: String, coverage: NutritionMath.Coverage) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+    /// A nutrient of Premium: against its target (a bar that fills) or its limit (red once over), or alone
+    /// when no reference gives one (cholesterol, alcohol, mono- and polyunsaturated fats) or while the
+    /// person's targets are unknown (the same « — » as in « Tes besoins par jour », never the default).
+    private func nutrientRow(_ nutrient: Nutrient, totals: NutritionTotals, entries: [FoodEntry], recommended: NutritionGoals?) -> some View {
+        let value = nutrient.value(in: totals)
+        let goal = nutrient.target.flatMap { model.shownNutritionTarget($0, recommended: recommended) }
+        let isLimit = nutrient.target?.isLimit ?? false
+        let isOver = isLimit && value != nil && goal != nil && (value ?? 0) > (goal ?? 0)
+        let isPartial = value != nil && nutrient.foodPath.map { !NutritionMath.coverage(entries, $0).isComplete } == true
+        return VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(title)
-                if value != nil, !coverage.isComplete {
+                Text(nutrient.title)
+                if isPartial {
                     Text(tr("partiel"))
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(Color.secondary)
@@ -299,15 +340,16 @@ struct NutritionNutrientsPage: View {
                 }
                 Spacer()
                 if let value {
-                    Text(limit.map { "\(TF.int(value)) / \(TF.int($0)) \(unit)" } ?? "\(TF.int(value)) \(unit)")
-                        .foregroundStyle(limit.map { value > $0 } == true ? Color(hex: "E5484D") : Color.secondary)
+                    Text(goal.map { "\(nutrient.number(value)) / \(nutrient.number($0)) \(nutrient.unit)" } ?? nutrient.format(value))
+                        .foregroundStyle(isOver ? Color(hex: "E5484D") : Color.secondary)
                         .monospacedDigit()
                 } else {
                     Text(tr("Non disponible")).foregroundStyle(Color.secondary)
                 }
             }
-            if let value, let limit {
-                BarView(progress: value / max(1, limit), color: value > limit ? Color(hex: "E5484D") : Color(hex: "8A8A8E"), track: Color.secondary.opacity(0.15), height: 6)
+            if let value, let goal, goal > 0 {
+                let color = isLimit ? (isOver ? Color(hex: "E5484D") : Color(hex: "8A8A8E")) : Color(hex: "7FA33A")
+                BarView(progress: value / goal, color: color, track: (isLimit ? Color.secondary : color).opacity(0.15), height: 6)
             }
         }
         .padding(.vertical, 4)
@@ -354,7 +396,13 @@ struct NutritionIdeasPage: View {
                 section(tr("Riches en protéines"), NutritionMath.proteinIdeas(within: kcalLeft))
             }
             if (remaining.fiber ?? 0) > 5 {
-                section(tr("Riches en fibres"), NutritionMath.fiberIdeas(within: kcalLeft))
+                if model.isPremium {
+                    section(tr("Riches en fibres"), NutritionMath.fiberIdeas(within: kcalLeft))
+                } else {
+                    Section(tr("Riches en fibres")) {
+                        NutrientLockRow()
+                    }
+                }
             }
             Section {
             } footer: {
@@ -372,7 +420,7 @@ struct NutritionIdeasPage: View {
     private func remainingText(_ remaining: NutritionMath.Remaining) -> String {
         var parts: [String] = []
         if let protein = remaining.protein { parts.append(protein > 0 ? tr("\(TF.int(protein)) g de protéines") : tr("protéines atteintes")) }
-        if let fiber = remaining.fiber { parts.append(fiber > 0 ? tr("\(TF.int(fiber)) g de fibres") : tr("fibres atteintes")) }
+        if model.isPremium, let fiber = remaining.fiber { parts.append(fiber > 0 ? tr("\(TF.int(fiber)) g de fibres") : tr("fibres atteintes")) }
         guard !parts.isEmpty else { return tr("Basé sur ce que tu as noté aujourd'hui.") }
         return tr("Encore ") + parts.joined(separator: tr(" et ")) + tr(" pour tes objectifs du jour.")
     }
@@ -386,7 +434,9 @@ struct NutritionIdeasPage: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(idea.food.name).foregroundStyle(Color.primary).lineLimit(1)
-                            Text(tr("\(idea.food.servingName) · P \(TF.int(idea.totals.protein)) g · fibres \(TF.int(idea.totals.fiber)) g"))
+                            Text(model.isPremium
+                                 ? tr("\(idea.food.servingName) · P \(TF.int(idea.totals.protein)) g · fibres \(TF.int(idea.totals.fiber)) g")
+                                 : tr("\(idea.food.servingName) · P \(TF.int(idea.totals.protein)) g"))
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
                                 .lineLimit(1)
