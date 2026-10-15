@@ -28,6 +28,7 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Gro
 - `python3 scripts/graph_map.py` : met à jour le graphe de code avec graphify (en local, sans API ; `pip install graphifyy`, ici dans `~/ardane-tools/graphify-venv`) puis écrit la carte dans `graphify-out/` (non versionné) : `index.html` (visionneuse `scripts/graph/viewer.html`), `graph-data.js` et `.json`. Un nœud par fichier, notes de `docs/memoire/` et services externes compris, 8 catégories.
 - Mise à jour à chaque tâche : le hook git post-commit relance le script (installer avec `python3 scripts/graph_map.py --install-hook` sur un nouveau clone ; sans hook, lancer le script en fin de tâche). Servie par le serveur « graphe » (`.claude/launch.json`), la page se recharge seule.
 - Quand un module, un écran, une donnée, un service ou une relation change : mettre à jour `MODULES`, `FALLBACK` ou `EXTERNAL` dans `scripts/graph_map.py` (rôle et fonctionnalités affichés au clic).
+- Version téléphone (instantané, privé) : https://claude.ai/artifact/FQBb8SpokSP57Hu12asBmV. Après un changement d'architecture : `python3 scripts/graph_map.py --artifact`, puis republier `graphify-out/artifact/carte-ardane.html` sur cette URL.
 
 ## Mémoire (docs/memoire/, lue aussi par l'utilisateur)
 - Début de tâche : lire `Demandes.md` (demandes écrites par l'utilisateur), `Chantiers.md`, et selon le sujet `Decisions.md`, `Pieges-connus.md`, le module concerné dans `MODULES` de `scripts/graph_map.py`.

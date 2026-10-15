@@ -4,6 +4,7 @@ linked by what really calls or uses what, coloured by a few large categories.
     python3 scripts/graph_map.py                 # refreshes the code graph with graphify, then writes the map
     python3 scripts/graph_map.py --no-graphify   # reuses graphify-out/graph.json as it is
     python3 scripts/graph_map.py --install-hook  # rebuilds the map after every commit (git post-commit hook)
+    python3 scripts/graph_map.py --artifact      # also writes graphify-out/artifact/carte-ardane.html (claude.ai page)
 
 The code graph comes from graphify (https://graphify.com, `pip install graphifyy`), run locally on the code
 only (no API, no cost). The map is written to graphify-out/ (not committed): index.html (the viewer, from
@@ -537,6 +538,23 @@ def build():
     }
 
 
+def write_artifact(graph):
+    """The same map as one page for claude.ai (readable on a phone): no document wrapper (the host adds it),
+    the library from the CDN, the data inline, without the local path."""
+    html = open(VIEWER, encoding="utf-8").read()
+    html = re.sub(r'<!doctype html>\s*|</?html[^>]*>\s*|</?head>\s*|</?body>\s*|<meta charset[^>]*>\s*|<meta name="viewport"[^>]*>\s*', "", html, flags=re.I)
+    html = re.sub(r'<script src="vendor/force-graph\.min\.js"></script>\s*<script>window\.ForceGraph[^\n]*\n', f'<script src="{FORCE_GRAPH}"></script>\n', html)
+    payload = json.dumps(dict(graph, root=""), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    html = html.replace('<script src="graph-data.js"></script>', "<script>window.ARDANE_GRAPH = " + payload + ";</script>")
+    html = re.sub(r"<!--.*?-->\s*", "", html, flags=re.S)
+    assert 'src="vendor/' not in html and 'src="graph-data.js"' not in html
+    path = os.path.join(OUT, "artifact", "carte-ardane.html")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(html)
+    print("Page à publier :", os.path.relpath(path, ROOT))
+
+
 def write(graph, quiet):
     os.makedirs(os.path.join(OUT, "vendor"), exist_ok=True)
     lib = os.path.join(OUT, "vendor", "force-graph.min.js")
@@ -582,7 +600,10 @@ def main():
     quiet = "--quiet" in args
     if "--no-graphify" not in args:
         refresh_code_graph(quiet)
-    write(build(), quiet)
+    graph = build()
+    write(graph, quiet)
+    if "--artifact" in args:
+        write_artifact(graph)
 
 
 if __name__ == "__main__":

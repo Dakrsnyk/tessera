@@ -32,6 +32,7 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 ## Carte du projet (graphify) — 2026-10-12
 
 - Fait : la carte Obsidian est remplacée par `scripts/graph_map.py` (graphify + visionneuse `scripts/graph/viewer.html`) : un nœud par fichier, 8 catégories ou les modules, Filtres / Groupes / Affichage / Forces / Animer, recherche, fiche au clic. Ouvrir `graphify-out/index.html`, ou le serveur « graphe » (mise à jour en direct).
+- Version téléphone (claude.ai, privée) : https://claude.ai/artifact/FQBb8SpokSP57Hu12asBmV ; c'est un instantané, à republier après les gros changements (`--artifact`).
 - Mise à jour après chaque commit par le hook git post-commit (installé sur ce PC ; sur un nouveau clone : `python3 scripts/graph_map.py --install-hook`).
 
 ## À ne pas oublier

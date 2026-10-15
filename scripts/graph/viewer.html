@@ -46,7 +46,7 @@
   button { font: inherit; color: inherit; }
 
   /* ---------- top left: identity + search ---------- */
-  .brand { position: fixed; top: 16px; left: 16px; width: min(340px, calc(100vw - 32px)); padding: 14px 14px 12px; display: grid; gap: 12px; z-index: 5; }
+  .brand { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); left: 16px; width: min(340px, calc(100vw - 32px)); padding: 14px 14px 12px; display: grid; gap: 12px; z-index: 5; }
   .brand-row { display: flex; align-items: center; gap: 11px; }
   .mark { width: 34px; height: 34px; border-radius: 9px; flex: none; }
   .brand h1 { margin: 0; font-size: 15px; font-weight: 650; letter-spacing: -0.01em; }
@@ -71,7 +71,7 @@
   .swatch { width: 9px; height: 9px; border-radius: 50%; flex: none; }
 
   /* ---------- right: settings ---------- */
-  .panel { position: fixed; top: 16px; right: 16px; width: 292px; max-height: calc(100vh - 160px); overflow: auto; z-index: 5; padding: 6px 0; scrollbar-width: thin; }
+  .panel { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); right: 16px; width: 292px; max-height: calc(100vh - 160px); overflow: auto; z-index: 5; padding: 6px 0; scrollbar-width: thin; }
   .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px 6px; }
   .panel-head span { font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
   .icon-btn { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; border: 0; background: none; color: var(--muted); cursor: pointer; }
@@ -119,7 +119,7 @@
   .secondary:hover { background: rgba(255, 255, 255, 0.05); }
 
   /* ---------- bottom left: selected node ---------- */
-  .card { position: fixed; left: 16px; bottom: 16px; width: min(380px, calc(100vw - 32px)); max-height: min(58vh, 520px); overflow: auto; padding: 16px; z-index: 6; display: none; }
+  .card { position: fixed; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: min(380px, calc(100vw - 32px)); max-height: min(58vh, 520px); overflow: auto; padding: 16px; z-index: 6; display: none; }
   .card.open { display: block; animation: rise .22s ease-out; }
   @keyframes rise { from { transform: translateY(8px); opacity: 0; } }
   .card-top { display: flex; align-items: flex-start; gap: 10px; }
@@ -150,14 +150,14 @@
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
   .empty { position: fixed; inset: 0; display: grid; place-items: center; color: var(--muted); text-align: center; padding: 24px; }
 
-  .gear { position: fixed; top: 16px; right: 16px; z-index: 6; display: none; width: 40px; height: 40px; }
+  .gear { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); right: 16px; z-index: 6; display: none; width: 40px; height: 40px; }
   @media (max-width: 760px) {
     .panel { top: auto; bottom: 0; right: 0; left: 0; width: auto; max-height: 62vh; border-radius: 16px 16px 0 0; padding-bottom: env(safe-area-inset-bottom, 0px); display: none; }
     .panel.open { display: block; }
     .gear { display: grid; }
     .brand { width: calc(100vw - 80px); }
     .zoom { display: none; }
-    .card { bottom: 12px; left: 12px; width: calc(100vw - 24px); }
+    .card { bottom: calc(12px + env(safe-area-inset-bottom, 0px)); left: 12px; width: calc(100vw - 24px); }
   }
 </style>
 </head>
@@ -260,6 +260,7 @@
 (() => {
   "use strict";
   const $ = (id) => document.getElementById(id);
+  const local = location.protocol === "file:" || /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   if (!window.ForceGraph || !window.ARDANE_GRAPH) {
     document.body.insertAdjacentHTML("beforeend", '<div class="empty">Le graphe n’a pas pu se charger.<br>Lance <code>python scripts/graph_map.py</code>, puis rouvre cette page.</div>');
     return;
@@ -284,7 +285,7 @@
 
   function hexToRgb(hex) { const v = parseInt(hex.slice(1), 16); return [v >> 16 & 255, v >> 8 & 255, v & 255]; }
   function rgba(hex, a) { const [r, g, b] = hexToRgb(hex); return `rgba(${r},${g},${b},${a})`; }
-  function norm(s) { return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+  function norm(s) { return (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
 
   function ingest(data, previous) {
     const old = previous || new Map();
@@ -464,7 +465,7 @@
       .filter((x) => x.other).sort((a, b) => b.w - a.w);
     const ext = n.path.includes(".") ? n.path.split(".").pop() : "";
     const kind = n.kind === "code" ? `${KIND.code} ${LANG[ext] || ext}` : KIND[n.kind];
-    const vscode = n.path ? `vscode://file/${encodeURI(DATA.root + "/" + n.path)}` : "";
+    const vscode = n.path && DATA.root && local ? `vscode://file/${encodeURI(DATA.root + "/" + n.path)}` : "";
     card.innerHTML = `
       <div class="card-top"><h2>${esc(n.name)}</h2>
         <button class="icon-btn" id="card-close" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
@@ -475,6 +476,7 @@
       ${around.length ? `<h3>Connexions</h3><div class="links">${around.slice(0, 40).map((x) => `<button data-id="${esc(x.other.id)}"><span class="swatch" style="background:${colorOf(x.other)}"></span><span class="n">${esc(x.other.name)}</span><span class="w">${x.out ? "→" : "←"} ${x.w}</span></button>`).join("")}</div>` : ""}
       <div class="card-actions"><button id="card-center">Centrer</button>${vscode ? `<a href="${vscode}">Ouvrir dans VS Code</a>` : ""}</div>`;
     card.classList.add("open");
+    if (window.innerWidth <= 760) $("panel").classList.remove("open");
     $("card-close").onclick = () => select(null);
     $("card-center").onclick = () => focusNode(n);
     card.querySelectorAll(".links button").forEach((b) => b.onclick = () => { const o = byId.get(b.dataset.id); if (o) select(o, true); });
@@ -599,7 +601,8 @@
   function stopAnimation() { animating = null; $("animate").textContent = "Animer"; $("timeline").classList.remove("open"); rebuild(); }
 
   // ---------------------------------------------------------------- stats, live reload
-  const live = location.protocol.startsWith("http");
+  // Served from this PC (« graphe » server): the map reloads by itself. A published copy is a snapshot.
+  const live = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   const rel = new Intl.RelativeTimeFormat("fr", { numeric: "auto" });
   let shownCounts = [0, 0];
   function ago(iso) {
@@ -616,7 +619,7 @@
     const nf = new Intl.NumberFormat("fr-CA");
     $("stats").textContent = `${nf.format(shownCounts[0])} fichiers · ${nf.format(shownCounts[1])} liens · ${DATA.commit} · mis à jour ${ago(DATA.generated)}`;
     $("live").classList.toggle("on", live);
-    $("live").title = live ? "Mise à jour automatique" : "Fichier local : ouvre le serveur « graphe » pour la mise à jour automatique";
+    $("live").title = live ? "Mise à jour automatique" : local ? "Fichier local : ouvre le serveur « graphe » pour la mise à jour automatique" : "Copie publiée de la carte";
   }
   setInterval(() => updateStats(), 30000);
 
