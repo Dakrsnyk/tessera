@@ -1,8 +1,7 @@
 """Keeps the Remotion project of the campaign in the repository without its node_modules.
 
-The project runs in ~/ardane-tools/film (outside the repo: the repo is also the Obsidian vault, and
-node_modules holds thousands of README files Obsidian would index). Its sources live in
-scripts/ad2/film/.
+The project runs in ~/ardane-tools/film (outside the repo: node_modules holds thousands of files).
+Its sources live in scripts/ad2/film/.
 
     python -X utf8 scripts/ad2/film_sync.py export   # ~/ardane-tools/film → scripts/ad2/film (before a commit)
     python -X utf8 scripts/ad2/film_sync.py import   # scripts/ad2/film → ~/ardane-tools/film, then `npm ci` there

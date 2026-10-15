@@ -1,10 +1,10 @@
 # Campagne v2 : outils locaux
 
-Brief, faits vérifiés et concept : `docs/obsidian/memoire/campagne-v2/`.
+Brief, faits vérifiés et concept : `docs/memoire/campagne-v2/`.
 
 ## Installation sur le PC Windows (une fois)
 
-Les outils vivent hors du dépôt, dans `%USERPROFILE%\ardane-tools` (le dépôt est aussi le vault Obsidian : pas de milliers de fichiers dedans). Les rendus vont dans `pub/` à la racine du dépôt (ignoré par Git, visible dans Obsidian).
+Les outils vivent hors du dépôt, dans `%USERPROFILE%\ardane-tools` (pas de milliers de fichiers dans le dépôt). Les rendus vont dans `pub/` à la racine du dépôt (ignoré par Git).
 
 ```bash
 winget install --id Gyan.FFmpeg -e
@@ -30,7 +30,7 @@ La vérification par Whisper se trompe sur les homophones (« Your week » → �
 
 ## Film (Remotion)
 
-Le projet tourne dans `~/ardane-tools/film` (hors du vault : `node_modules` contient des milliers de README qu'Obsidian indexerait) ; ses sources sont versionnées dans `scripts/ad2/film/`.
+Le projet tourne dans `~/ardane-tools/film` (hors du dépôt : `node_modules` contient des milliers de fichiers) ; ses sources sont versionnées dans `scripts/ad2/film/`.
 
 ```bash
 python -X utf8 scripts/ad2/film_sync.py import     # dépôt → ~/ardane-tools/film (nouvelle machine), puis npm ci là-bas

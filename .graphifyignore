@@ -1,0 +1,4 @@
+# Fichiers que graphify ignore (scripts/graph_map.py lit lui-même les notes de docs/memoire)
+l10n/work/
+docs/
+*.md

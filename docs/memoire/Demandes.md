@@ -1,0 +1,25 @@
+---
+tags: [ardane, memoire]
+---
+
+# Demandes
+
+Écris ici (Obsidian, VS Code ou Bloc-notes) ce que tu veux que Claude fasse ou garde en tête, puis pousse avec GitHub Desktop. Une ligne par demande ; Claude coche ce qui est fait et ajoute la date.
+
+Retour : [[Memoire]]
+
+## À faire
+
+- [ ] (exemple) Nutrition : …
+
+## Idées pour plus tard
+
+## Fait
+
+- [x] Politique de confidentialité conforme (Loi 25, LPRPDE, RGPD, LGPD, APPI, CCPA/CPRA), en français et en anglais ; adresse de support réelle dans l'app (fait le 2026-10-11).
+- [x] Notifications avec l'ancien logo Tessera : rien dans le code (icône principale Ardane depuis la version de test 157) ; cache d'icônes d'iOS → redémarrer l'iPhone (diagnostic du 2026-10-11). Toujours là après redémarrage : jeux d'icônes renommés AppIcon… → ArdaneIcon… (2026-10-11) pour qu'iOS oublie l'icône en cache. Sans effet (2026-10-12) : rien de l'ancien logo dans l'app ni dans l'IPA (vérifié) ; il faut supprimer et réinstaller l'app (sauvegarde puis restauration). Réinstallation faite, toujours la mosaïque (test de la 179) : bug d'iOS 18.1+ connu d'Apple, propre à cet iPhone ; pistes données à l'utilisateur (redémarrage forcé, changement de langue), changement d'identifiant proposé, accepté : `com.dakrsnyk.ardane` (2026-10-12). Vérifié par l'utilisateur sur la 180 : notification au A d'Ardane ; bouton de test retiré.
+
+- [x] Pub : montrer dans tous les films (principal compris) qu'on peut personnaliser son widget à son goût — le point le plus important après l'utilité (fait le 2026-10-11 : séquence Studio, styles qui changent sur les widgets soulevés).
+- [x] Pub : commencer chaque film par une phrase d'accroche (« Organize your life with Ardane », etc.) (fait le 2026-10-11).
+
+- [x] Pub : pas de pot de yaourt généré ; le scan est représenté par un code-barres seul (fait le 2026-10-11).

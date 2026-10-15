@@ -217,7 +217,7 @@ demo demo-back-squat exercise=back-squat view=3/4 fps=60 w=402 h=236 scale=3 bg=
 demo demo-deadlift exercise=deadlift view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
 demo demo-pull-up exercise=pull-up view=3/4 fps=60 w=402 h=236 scale=3 bg=clear scheme=light
 
-# --- Film principal « THE OPENING » (docs/obsidian/memoire/campagne-v2/Concept-THE-OPENING.md §5.1) ---
+# --- Film principal « THE OPENING » (docs/memoire/campagne-v2/Concept-THE-OPENING.md §5.1) ---
 # Accueil héros : de vrais widgets sur un vrai décor du Store (fond, dock et icônes du décor), dessiné par
 # l'accueil du Store lui-même. Un univers par décor : Aurore (début), Espace, Études, Néon, Graphite, Crépuscule (fin).
 home home-hero-aurore setup=aurore rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=aurora

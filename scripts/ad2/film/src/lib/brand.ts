@@ -1,4 +1,4 @@
-// THE OPENING: palette, curves and timeline (Concept-THE-OPENING §2–3, docs/obsidian/memoire/campagne-v2).
+// THE OPENING: palette, curves and timeline (Concept-THE-OPENING §2–3, docs/memoire/campagne-v2).
 import { useEffect, useState } from "react";
 import { continueRender, delayRender, Easing, staticFile } from "remotion";
 

@@ -24,12 +24,13 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Gro
   `Co-Authored-By: Claude <noreply@anthropic.com>`
   `Claude-Session: https://claude.ai/code/session_011SGgP6YLhofhVhTasQukEx`
 
-## Carte Obsidian (docs/obsidian/)
-- Cartes `.canvas` et notes `modules/` générées par `scripts/obsidian_map.py`, vérifiées dans le code.
-- Quand une modification change l'architecture ou une fonctionnalité importante (module, écran, donnée, service, relation) : mettre à jour `MODULES` ou les cartes dans ce script, lancer `python3 scripts/obsidian_map.py` (il vérifie le JSON, les liens et les chemins), puis committer `docs/obsidian/` avec le changement.
+## Carte du projet (graphify, remplace Obsidian depuis le 2026-10-12)
+- `python3 scripts/graph_map.py` : met à jour le graphe de code avec graphify (en local, sans API ; `pip install graphifyy`, ici dans `~/ardane-tools/graphify-venv`) puis écrit la carte dans `graphify-out/` (non versionné) : `index.html` (visionneuse `scripts/graph/viewer.html`), `graph-data.js` et `.json`. Un nœud par fichier, notes de `docs/memoire/` et services externes compris, 8 catégories.
+- Mise à jour à chaque tâche : le hook git post-commit relance le script (installer avec `python3 scripts/graph_map.py --install-hook` sur un nouveau clone ; sans hook, lancer le script en fin de tâche). Servie par le serveur « graphe » (`.claude/launch.json`), la page se recharge seule.
+- Quand un module, un écran, une donnée, un service ou une relation change : mettre à jour `MODULES`, `FALLBACK` ou `EXTERNAL` dans `scripts/graph_map.py` (rôle et fonctionnalités affichés au clic).
 
-## Mémoire (docs/obsidian/memoire/, lue aussi par l'utilisateur dans Obsidian)
-- Début de tâche : lire `Demandes.md` (demandes écrites par l'utilisateur), `Chantiers.md`, et selon le sujet `Decisions.md`, `Pieges-connus.md`, la note du module dans `docs/obsidian/modules/`.
+## Mémoire (docs/memoire/, lue aussi par l'utilisateur)
+- Début de tâche : lire `Demandes.md` (demandes écrites par l'utilisateur), `Chantiers.md`, et selon le sujet `Decisions.md`, `Pieges-connus.md`, le module concerné dans `MODULES` de `scripts/graph_map.py`.
 - Fin de tâche : cocher les demandes faites (avec la date), mettre à jour `Chantiers.md`, ajouter une décision ou un piège nouveau en une ligne. Ce qui doit survivre à la session va dans le dépôt, pas dans le scratchpad.
 
 ## Localisation (voir HANDOFF.md pour l'état)

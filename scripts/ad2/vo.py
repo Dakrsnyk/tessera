@@ -125,7 +125,7 @@ for chunk in cfg["chunks"]:
 
 # ASR check and word timings.
 from faster_whisper import WhisperModel
-# ARDANE_HF_CACHE keeps the model (~500 MB) out of the repository (and of the Obsidian vault).
+# ARDANE_HF_CACHE keeps the model (~500 MB) out of the repository.
 asr = WhisperModel("small.en", device="cpu", compute_type="int8",
                    download_root=os.environ.get("ARDANE_HF_CACHE") or os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tools", "hf_cache"))
 norm = lambda s: re.sub(r"[^a-z0-9' ]", " ", s.lower()).split()
