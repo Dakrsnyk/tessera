@@ -577,7 +577,8 @@ def write(graph, quiet):
 
 HOOK = """#!/bin/sh
 # Ardane : la carte du projet se met à jour après chaque commit (installé par scripts/graph_map.py --install-hook).
-( python3 scripts/graph_map.py --quiet >/dev/null 2>&1 || python scripts/graph_map.py --quiet >/dev/null 2>&1 ) &
+# Detached (no output kept open): the commit returns at once, the map follows about 40 s later.
+( python3 scripts/graph_map.py --quiet || python scripts/graph_map.py --quiet ) </dev/null >/dev/null 2>&1 &
 """
 
 
