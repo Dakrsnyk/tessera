@@ -16,6 +16,20 @@ Retour : [[Memoire]]
 
 ## Fait
 
+Série du 2026-10-15 (13 demandes, compilée en CI puis testée par `[unit]` ; à vérifier sur l'iPhone par TestFlight) :
+- [x] Nutrition : besoins calculés automatiquement à partir de l'âge, la taille, le poids, le genre, l'objectif et l'activité (Mifflin-St Jeor, protéines en g/kg, fibres 14 g/1 000 kcal, sucres et gras saturés < 10 % OMS, sodium < 2 300 mg, minéraux et vitamines DRI) ; chaque valeur « Calculé » ou « Personnalisé », modifiable à tout moment, jamais écrasée en silence ; nutriments détaillés seulement quand l'aliment les fournit (fait le 2026-10-15).
+- [x] « Mes infos » en tête de chaque mini-app à la place de « Modifier les paramètres » / « Mes paramètres » ; doublons retirés (objectifs Nutrition, séances par semaine de Fitness…) (fait le 2026-10-15).
+- [x] Fitness : ordre aperçu, semaine, programme et séances, exercices, progression et statistiques, records en bas ; ajouter un exercice pendant une séance l'ajoute directement à la séance en cours (fait le 2026-10-15).
+- [x] Premium : statistiques détaillées de chaque mini-app et bibliothèque complète d'exercices (aperçu gratuit, 39 exercices offerts, ceux déjà faits restent ouverts), cadenas clair et paywall ; aucune donnée gratuite effacée (fait le 2026-10-15).
+- [x] Planning : toucher une heure libre crée un événement prérempli (titre, durée, lieu…, modifier, supprimer, chevauchements signalés) ; pincement jour ↔ semaine ↔ mois ↔ année en gardant la position, sans création accidentelle, avec sélecteur de secours (fait le 2026-10-15).
+- [x] Finances Business : audit des intégrations (`docs/integrations-business.md`), Stripe en lecture seule par clé restreinte (trousseau, synchronisation sans doublon, dernière synchronisation et erreurs), import CSV (Stripe, Shopify, banque, tableur) ; Shopify, QuickBooks et Stripe Connect demandent un serveur (architecture documentée). Pas encore essayé avec un vrai compte Stripe (fait le 2026-10-15).
+- [x] Nouvelle mini-app Photos et citations : taille d'abord, sélecteur de photos système (aucun accès à la photothèque), mises en page 1 à 4 photos, au-delà rotation chaque heure (12 au plus), recadrage gardé, aperçu, modification, photo supprimée signalée ; citation avec auteur, typographie, couleurs et fond (fait le 2026-10-15).
+- [x] Mini-app Eau retirée partout (widgets, Mon Quotidien, rappels, intents), les autres données intactes (fait le 2026-10-15).
+- [x] Langue et fuseau horaire indépendants ; heures justes aux changements d'heure (bug corrigé dans l'emploi du temps) ; tests fr → en → fr sans changement des heures (fait le 2026-10-15).
+- [x] Activité en direct : boutons (pause, série suivante…) utilisables sans déverrouiller l'iPhone (à confirmer sur l'iPhone) (fait le 2026-10-15).
+- [x] Galerie des widgets : écran d'accueil = seulement « Mes widgets » (tes widgets) ; écran verrouillé = l'essentiel de chaque mini-app (fait le 2026-10-15).
+- [x] Réponse : tester Premium par TestFlight (achats du bac à sable, gratuits) une fois les produits créés dans App Store Connect (fait le 2026-10-15).
+
 - [x] Politique de confidentialité conforme (Loi 25, LPRPDE, RGPD, LGPD, APPI, CCPA/CPRA), en français et en anglais ; adresse de support réelle dans l'app (fait le 2026-10-11).
 - [x] Notifications avec l'ancien logo Tessera : rien dans le code (icône principale Ardane depuis la version de test 157) ; cache d'icônes d'iOS → redémarrer l'iPhone (diagnostic du 2026-10-11). Toujours là après redémarrage : jeux d'icônes renommés AppIcon… → ArdaneIcon… (2026-10-11) pour qu'iOS oublie l'icône en cache. Sans effet (2026-10-12) : rien de l'ancien logo dans l'app ni dans l'IPA (vérifié) ; il faut supprimer et réinstaller l'app (sauvegarde puis restauration). Réinstallation faite, toujours la mosaïque (test de la 179) : bug d'iOS 18.1+ connu d'Apple, propre à cet iPhone ; pistes données à l'utilisateur (redémarrage forcé, changement de langue), changement d'identifiant proposé, accepté : `com.dakrsnyk.ardane` (2026-10-12). Vérifié par l'utilisateur sur la 180 : notification au A d'Ardane ; bouton de test retiré.
 

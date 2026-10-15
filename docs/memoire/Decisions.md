@@ -10,6 +10,12 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-08 : iPad et Apple Watch abandonnés. Chinois et coréen retirés (traductions de mauvaise qualité, récupérables avant 5ee621c) ; langues : fr, en, es, de, it, pt-BR, ja.
 - 2026-10-09 : photo du repas retirée de [[Nutrition]] (récupérable avant 54d2373) ; le scan de code-barres garde son carré de visée.
 - 2026-10-11 : l'app s'appelle Ardane. Projet, cibles, module, identifiants, App Group et dossier de données gardent « Tessera » (rien n'est perdu).
+- 2026-10-15 : mini-app Eau retirée (`WidgetKind.retired`, `AppModel.removeRetiredFeatures`) ; les autres données restent.
+- 2026-10-15 : besoins nutritionnels calculés par défaut (Mifflin-St Jeor, NASEM, OMS, Santé Canada) ; une valeur modifiée à la main devient « Personnalisé » (`customTargets`) et n'est plus jamais recalculée.
+- 2026-10-15 : Premium = statistiques détaillées de chaque mini-app + bibliothèque complète d'exercices ; en gratuit, aperçu et 39 exercices offerts (`ExerciseLibrary.freeIDs`) ; un exercice déjà fait reste ouvert.
+- 2026-10-15 : Business ← Stripe par une clé restreinte « Balance transactions : Read » gardée dans le trousseau, sans serveur ; jamais de clé secrète `sk_` ni de mot de passe. Shopify, QuickBooks et Stripe Connect attendent un serveur OAuth (`docs/integrations-business.md`).
+- 2026-10-15 : galerie de l'écran d'accueil réduite au widget « Mes widgets » (`tessera.quick`, ne propose que les widgets créés) ; écran verrouillé : l'essentiel de chaque mini-app.
+- 2026-10-15 : l'heure suit toujours le fuseau de l'appareil (`Fmt.timeZone = .autoupdatingCurrent`), jamais la langue ; une heure d'emploi du temps est en minutes depuis minuit, recalculée pour chaque jour.
 - Le déverrouillage premium DEBUG n'est jamais actif en Release ([[Premium-et-abonnements]], vérifié par `scripts/check_swift.py`).
 
 ## Publicité

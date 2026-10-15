@@ -112,10 +112,12 @@ enum StripeSync {
         let newest = transactions.map { Date(timeIntervalSince1970: $0.created) }.max()
         model.update(\.business) { state in
             let result = state.merge(batch)
-            state.connections.stripe?.lastSync = now
-            state.connections.stripe?.lastError = nil
-            state.connections.stripe?.lastResult = result
-            if let newest { state.connections.stripe?.syncedUntil = max(newest, state.connections.stripe?.syncedUntil ?? newest) }
+            guard var link = state.connections.stripe else { return }
+            link.lastSync = now
+            link.lastError = nil
+            link.lastResult = result
+            if let newest { link.syncedUntil = max(newest, link.syncedUntil ?? newest) }
+            state.connections.stripe = link
         }
         return nil
     }

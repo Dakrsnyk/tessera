@@ -15,6 +15,11 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 ## Code et données
 - Ne pas régénérer `ExerciseDemos.json` sur Windows sans vérifier (export différent, encodage cp1252 sans `PYTHONUTF8=1`).
 - `python3 scripts/check_swift.py` avant chaque commit (ordre des labels d'init, catalogue de kinds, sécurité Release).
+- Une date d'emploi du temps calculée en ajoutant des secondes au début du jour se décale d'une heure les jours de changement d'heure : utiliser `DateMath.date(on:minute:)` (calendrier).
+- Écrire un état vide par-dessus un fichier illisible (iPhone verrouillé, protection des fichiers) efface les données : `SharedStore.update` refuse d'écrire quand le fichier existe mais ne se lit pas.
+- Remplacer le dernier membre d'un `struct` par un bloc de texte peut emporter son `}` final (run 188, `FitnessApp.swift`).
+- Ajouter une `WidgetCategory` ou un `WidgetKind` : les `switch` exhaustifs ailleurs (`Templates.autoAccent`, `KindCatalog`, `check_swift.py`) doivent suivre.
+- Nouveaux textes : `l10n_catalog.py extract` AVANT `merge` et `build`, sinon les clés nouvelles restent « not in the catalog ».
 
 ## Publicité
 - Remotion : un `ThreeCanvas` ne se redessine qu'au changement d'image ; le monter seulement quand images et police sont prêtes (sinon la première image d'un morceau de rendu sort sans écran). `scene.environment` ignore `envMapIntensity` : verre du téléphone en matériau non éclairé. Plan proche de la caméra à 40 mm (sinon le corps transperce le verre).

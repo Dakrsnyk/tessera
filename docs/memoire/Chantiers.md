@@ -40,6 +40,13 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - L'utilisateur a acheté le compte Apple Developer. Préparé : tag CI `[testflight]` (Release signée, envoi TestFlight), signature manuelle en Release, `scripts/signing/ardane_signing.sh` et `scripts/signing/README.md`.
 - Fait par l'utilisateur le 2026-10-15 : identifiants, certificat, profils, fiche App Store Connect, clé API (Key ID `YPPQ3U2GKY`), les 8 secrets GitHub (Team ID `WD538Z3CL9`). Premier envoi réussi le même jour : build 186 (version 1.0) envoyé sur App Store Connect (certificat « Apple Distribution: Mathys Lecointre (WD538Z3CL9) », profils valides jusqu'au 2027-10-15).
 
+## Série de 13 demandes — 2026-10-15
+
+- Fait (détail dans [[Demandes]]) : besoins nutritionnels calculés, « Mes infos » dans chaque mini-app, ordre de Fitness et ajout direct à la séance, Premium (statistiques détaillées et bibliothèque complète), Planning (création au toucher, pincement jour/semaine/mois/année), Business (Stripe en lecture seule et import CSV), mini-app Photos et citations, retrait de l'Eau, langue et fuseau horaire indépendants, boutons de l'activité en direct iPhone verrouillé, galerie de widgets réduite à « Mes widgets ».
+- À vérifier sur l'iPhone (impossible en CI) : boutons de l'activité en direct iPhone verrouillé ; galerie des widgets (les anciens widgets posés d'un autre type que « Mes widgets » disparaissent de l'écran d'accueil : les reposer par « Mes widgets ») ; pincement du calendrier ; Stripe avec une clé `rk_test_` puis `rk_live_`.
+- Reste à faire par l'utilisateur : produits in-app dans App Store Connect (`com.dakrsnyk.tessera.premium.monthly/yearly/lifetime`) et contrat « Paid Applications » pour tester Premium par TestFlight ; la politique v2.1 (Photos et Stripe) est republiée sur l'artifact de `PremiumConfiguration.privacyURL`, mais cette page est privée : la partager « toute personne disposant du lien » (menu Partager) avant la soumission à l'App Store.
+- Plus tard : Shopify, QuickBooks, Stripe Connect par un petit serveur OAuth (architecture dans `docs/integrations-business.md`).
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
