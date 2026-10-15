@@ -56,6 +56,9 @@ jobs:
       # and scroll slices from scripts/ad_screens.txt (screens/), and the pieces the app exports as PNG files
       # with true transparency from scripts/ad_export.txt (export/, see App/Core/AdExport.swift).
       ADKIT: ${{ contains(github.event.head_commit.message, '[adkit]') }}
+      # [testflight] signs a Release build with the Apple Developer account and uploads it to TestFlight
+      # (no simulator build, no tests, no test IPA). Secrets: see scripts/signing/README.md.
+      TESTFLIGHT: ${{ contains(github.event.head_commit.message, '[testflight]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -89,9 +92,84 @@ jobs:
           echo "DEVICE=$DEVICE" >> "$GITHUB_ENV"
           xcrun simctl boot "$DEVICE" || true
 
+      - name: TestFlight signing (certificate and provisioning profiles)
+        id: tfsign
+        if: env.TESTFLIGHT == 'true' && steps.static.outcome == 'success'
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          DIST_P12_BASE64: ${{ secrets.DIST_P12_BASE64 }}
+          DIST_P12_PASSWORD: ${{ secrets.DIST_P12_PASSWORD }}
+          PROFILE_APP_BASE64: ${{ secrets.PROFILE_APP_BASE64 }}
+          PROFILE_WIDGETS_BASE64: ${{ secrets.PROFILE_WIDGETS_BASE64 }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
+        run: |
+          missing=""
+          for v in APPLE_TEAM_ID DIST_P12_BASE64 DIST_P12_PASSWORD PROFILE_APP_BASE64 PROFILE_WIDGETS_BASE64 ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8_BASE64; do
+            [ -n "${!v}" ] || missing="$missing $v"
+          done
+          if [ -n "$missing" ]; then echo "::error::Secrets manquants :$missing (scripts/signing/README.md)" | tee testflight.txt; exit 1; fi
+          # The distribution certificate, in a keychain of its own for this run.
+          KEYCHAIN="$RUNNER_TEMP/ardane.keychain-db"; KC_PASS=$(openssl rand -hex 16)
+          echo "$DIST_P12_BASE64" | base64 --decode > "$RUNNER_TEMP/dist.p12"
+          security create-keychain -p "$KC_PASS" "$KEYCHAIN"
+          security set-keychain-settings -lut 7200 "$KEYCHAIN"
+          security unlock-keychain -p "$KC_PASS" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/dist.p12" -k "$KEYCHAIN" -P "$DIST_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KC_PASS" "$KEYCHAIN" > /dev/null
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+          security find-identity -v -p codesigning "$KEYCHAIN" | tee -a testflight.txt
+          # The two App Store profiles, under their UUID (both folders: Xcode 16+ reads the second one).
+          for pair in "PROFILE_APP_BASE64:Ardane App Store" "PROFILE_WIDGETS_BASE64:Ardane Widgets App Store"; do
+            var=${pair%%:*}; expected=${pair#*:}
+            echo "${!var}" | base64 --decode > "$RUNNER_TEMP/profile.mobileprovision"
+            security cms -D -i "$RUNNER_TEMP/profile.mobileprovision" > "$RUNNER_TEMP/profile.plist"
+            uuid=$(/usr/libexec/PlistBuddy -c "Print :UUID" "$RUNNER_TEMP/profile.plist")
+            name=$(/usr/libexec/PlistBuddy -c "Print :Name" "$RUNNER_TEMP/profile.plist")
+            echo "profile: $name ($uuid), expires $(/usr/libexec/PlistBuddy -c 'Print :ExpirationDate' "$RUNNER_TEMP/profile.plist")" | tee -a testflight.txt
+            [ "$name" = "$expected" ] || { echo "::error::Le profil s'appelle « $name », attendu « $expected »" | tee -a testflight.txt; exit 1; }
+            for dir in "$HOME/Library/MobileDevice/Provisioning Profiles" "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"; do
+              mkdir -p "$dir"; cp "$RUNNER_TEMP/profile.mobileprovision" "$dir/$uuid.mobileprovision"
+            done
+          done
+          echo "$ASC_KEY_P8_BASE64" | base64 --decode > "$RUNNER_TEMP/AuthKey_$ASC_KEY_ID.p8"
+
+      - name: TestFlight archive and upload
+        id: testflight
+        if: steps.tfsign.outcome == 'success'
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          set -o pipefail
+          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Release             -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/Ardane.xcarchive             DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CURRENT_PROJECT_VERSION=${{ github.run_number }} archive 2>&1 | tee archive.log | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
+          grep -q "ARCHIVE SUCCEEDED" archive.log
+          cat > build/ExportOptions.plist <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>teamID</key><string>$APPLE_TEAM_ID</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>signingCertificate</key><string>Apple Distribution</string>
+            <key>provisioningProfiles</key><dict>
+              <key>com.dakrsnyk.ardane</key><string>Ardane App Store</string>
+              <key>com.dakrsnyk.ardane.widgets</key><string>Ardane Widgets App Store</string>
+            </dict>
+            <key>manageAppVersionAndBuildNumber</key><false/>
+            <key>uploadSymbols</key><true/>
+          </dict></plist>
+          PLIST
+          xcodebuild -exportArchive -archivePath build/Ardane.xcarchive -exportOptionsPlist build/ExportOptions.plist             -exportPath build/export -authenticationKeyPath "$RUNNER_TEMP/AuthKey_$ASC_KEY_ID.p8"             -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" 2>&1 | tee export.log | tail -30
+          grep -q "EXPORT SUCCEEDED" export.log
+          echo "uploaded: build ${{ github.run_number }} (version 1.0)" | tee -a testflight.txt
+
       - name: Build for the simulator
         id: sim
-        if: steps.static.outcome == 'success'
+        if: steps.static.outcome == 'success' && env.TESTFLIGHT != 'true'
         run: |
           set -o pipefail
           # Keep compiling the other files and targets after an error, so one run lists every error.
@@ -725,6 +803,8 @@ jobs:
             echo "ipa: ${{ (steps.device.outcome == 'success' && steps.tests.outcome != 'failure') && 'published' || 'not published' }}"
             echo "screenshots: ${{ steps.shots.outcome }}"
             echo "release: ${{ steps.release.outcome }}"
+            echo "testflight: ${{ steps.testflight.outcome }}"
+            cat testflight.txt 2>/dev/null || true
             echo "marketing: ${{ steps.marketing.outcome }}"
             echo "videos: ${{ steps.videos.outcome }}"
             ls -l videos/*.mp4 2>/dev/null || true
@@ -740,7 +820,8 @@ jobs:
             echo "---- errors ----"
             python3 scripts/check_swift.py 2>&1 | tail -40 || true
             python3 scripts/l10n_catalog.py sync 2>&1 | tail -45 || true
-            grep -hE "error:" sim.log device.log release.log 2>/dev/null | sort -u | head -500 || true
+            grep -hE "error:" sim.log device.log release.log archive.log export.log 2>/dev/null | sort -u | head -500 || true
+            [ -f export.log ] && { echo "---- testflight export ----"; tail -60 export.log; } || true
             echo "---- tests ----"
             grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -400 || true
             if [ -f stack-onone.log ]; then

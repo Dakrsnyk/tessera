@@ -10,6 +10,7 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Gro
 
 ## CI (pilotée par tags dans le message de commit)
 `[check]` compile seul (à privilégier ; tokens et temps minimum : ne relire que les 1 à 3 captures liées au changement, en petit) · `[unit]` · `[daily]` (tests logiques + MiniApp/Studio/Profile UITests + captures) · `[studio]` `[apps]` `[demos]` `[shots]` `[langs]` (captures des écrans clés dans les 6 langues, sans tests) `[store]` (tests logiques + captures du Store et des styles) `[stack]` `[marketing]` `[place]` ; workflow_dispatch = tout.
+- `[testflight]` : version Release signée avec le compte Apple Developer et envoyée sur TestFlight (pas de simulateur, pas de tests, pas d'IPA de test). Configuration unique et secrets : `scripts/signing/README.md`. Signature manuelle en Release seulement (profils « Ardane App Store » et « Ardane Widgets App Store ») ; Debug reste non signé pour l'IPA de test.
 - IPA (Releases « Version de test ») : seulement sans tag, ou avec `[unit]`, `[daily]`, `[apps]`, `[studio]`, `[store]`, `[demos]`, `[shots]`, `[langs]` (tests sans échec). `[check]`, `[marketing]` et `[place]` n'en publient pas : finir une série de changements par un `[unit]` pour que l'utilisateur ait la version à installer.
 - Suivi : `scratchpad/colorcheck/ci.sh` (si absent : `gh api repos/Dakrsnyk/tessera/actions/runs`).
 - Rapport : `git fetch -q origin ci-report && mkdir -p /tmp/rNNN && git archive origin/ci-report | tar -x -C /tmp/rNNN` ; échecs : grep "Test Case .*failed" et "error:" dans report.txt. L'étape de tests finit par `|| true` : le job est vert même si des tests échouent.
@@ -18,7 +19,7 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Gro
 ## Règles impératives
 - Le déverrouillage premium DEBUG ne doit JAMAIS être actif en Release (check_swift.py le vérifie).
 - Ne pas casser l'existant. Pas d'image_search. Livrer des PNG/GIF (l'utilisateur ne peut pas ouvrir les artifacts Design).
-- Utilisateur sans compte Apple Developer : widgets écran verrouillé / Live Activities peuvent ne pas marcher en sideload.
+- Compte Apple Developer acheté le 2026-10-15 : installer par TestFlight (`[testflight]`) ; le sideload de l'IPA de test reste possible mais limite widgets écran verrouillé / Live Activities.
 - Le dépôt est public pour la CI : rappeler de le repasser en privé.
 - Commits terminés par :
   `Co-Authored-By: Claude <noreply@anthropic.com>`

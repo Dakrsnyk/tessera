@@ -35,6 +35,11 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - Version téléphone (claude.ai, privée) : https://claude.ai/artifact/FQBb8SpokSP57Hu12asBmV ; c'est un instantané, à republier après les gros changements (`--artifact`).
 - Mise à jour après chaque commit par le hook git post-commit (installé sur ce PC ; sur un nouveau clone : `python3 scripts/graph_map.py --install-hook`).
 
+## TestFlight — 2026-10-15
+
+- L'utilisateur a acheté le compte Apple Developer. Préparé : tag CI `[testflight]` (Release signée, envoi TestFlight), signature manuelle en Release, `scripts/signing/ardane_signing.sh` et `scripts/signing/README.md`.
+- À faire par l'utilisateur : identifiants, certificat, profils, fiche App Store Connect, clé API, secrets (README). Ensuite : commit `[testflight]` et vérifier le rapport.
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
