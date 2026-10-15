@@ -129,6 +129,7 @@ MODULES = [
      "role": "Le calendrier (jour, semaine, mois, année), les tâches, le Top 3, les projets, la concentration, les études et les habitudes.",
      "features": [
          "Calendrier `PlanningCalendar` : échelles jour, semaine, mois, année par pincement (et sélecteur), toucher une heure libre crée un événement prérempli, chevauchements signalés.",
+         "Éditeurs partagés `PlanningEditors` + `planningEditors(_:)` : le Planning, sa page Semaine et la carte Planning de Mon Quotidien créent et ouvrent les événements de la même façon.",
          "Tâches avec répétition, Top 3 du jour, mois, projets, minuteur de concentration.",
          "Études (cours, examens, devoirs, notes) dans le Planning.",
          "Habitudes quotidiennes (série, rappel) ; régularité sur 30 et 90 jours en Premium.",
@@ -170,6 +171,7 @@ MODULES = [
          "`Space` : productivity, habits, nutrition, fitness, budget, investing, business, markets, student, travel, car, life.",
          "Création de widgets depuis un espace (taille, un ou plusieurs widgets), envol vers « Mes widgets ».",
          "« Écran verrouillé » : les widgets prévus pour l'écran verrouillé, par univers.",
+         "Carte « Photos et citations » (`PhotoQuotesCard`, hors enum `Space`) : 2e dans « Tout », 1re dans « Vie » ; Photos ou Citation puis `PhotoQuoteEditor`.",
          "Formulaires des espaces (aliment, séance, dépense, plein…).",
      ],
      "sources": ["App/Screens/Spaces/SpacesView.swift", "App/Screens/Spaces/SpaceBuilderView.swift", "App/Screens/Spaces/LockScreenCreator.swift",

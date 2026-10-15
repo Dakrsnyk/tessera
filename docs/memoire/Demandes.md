@@ -11,13 +11,14 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
-- [ ] Quotidien : toucher le planning doit créer un événement (comme dans Planning).
-- [ ] Fitness : ne plus afficher les exercices récents (info inutile).
-- [ ] Créer : la catégorie « Photos et citations » doit apparaître parmi les catégories de widgets.
 
 ## Idées pour plus tard
 
 ## Fait
+
+- [x] Quotidien : toucher une heure libre de la carte Planning (pleine largeur) crée un événement, toucher un bloc l'ouvre ; même chose dans la page Semaine ; en demi-largeur, la carte ouvre la semaine (fait le 2026-10-15).
+- [x] Fitness : les exercices récents ne sont plus affichés (page Fitness et bibliothèque) ; seuls les favoris restent ; « Récents » reste seulement dans le sélecteur d'exercice d'une séance (fait le 2026-10-15).
+- [x] Créer : carte « Photos et citations » en deuxième position dans « Tout » et en premier dans « Vie » ; elle demande Photos ou Citation puis ouvre la création (fait le 2026-10-15).
 
 Série du 2026-10-15 (13 demandes, compilée en CI puis testée par `[unit]` ; à vérifier sur l'iPhone par TestFlight) :
 - [x] Nutrition : besoins calculés automatiquement à partir de l'âge, la taille, le poids, le genre, l'objectif et l'activité (Mifflin-St Jeor, protéines en g/kg, fibres 14 g/1 000 kcal, sucres et gras saturés < 10 % OMS, sodium < 2 300 mg, minéraux et vitamines DRI) ; chaque valeur « Calculé » ou « Personnalisé », modifiable à tout moment, jamais écrasée en silence ; nutriments détaillés seulement quand l'aliment les fournit (fait le 2026-10-15).
