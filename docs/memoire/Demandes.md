@@ -11,6 +11,13 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
+- [ ] Fitness : tous les exercices en Premium avec l'accès à leurs données ; section Records retirée de l'accueil de Fitness (gardée dans Progression) ; « Choisir dans la bibliothèque » et « Ajouter un exercice » juste sous le nom et les jours de la séance ; petits logos Premium partout où c'est Premium.
+- [ ] Widgets : un widget créé doit être tout de suite proposé quand on l'ajoute à l'écran d'accueil (tous mes widgets, pas seulement 3).
+- [ ] Bug widgets : un widget posé ne doit jamais être remplacé par un nouveau widget du même format.
+- [ ] Nutrition : beaucoup plus de nutriments, tous Premium sauf calories, protéines, glucides et lipides.
+- [ ] Planning : toucher l'horaire dans Mon Quotidien ouvre la mini-app Planning (c'est là qu'on crée un événement en touchant une plage horaire).
+- [ ] Créer : « Photos et citations » tout en bas ; possibilité de mettre une photo derrière une citation.
+- [ ] Icône de l'app : changer d'icône devient Premium.
 
 ## Idées pour plus tard
 
