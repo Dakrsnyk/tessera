@@ -9,7 +9,6 @@ enum BusinessSheet: Identifiable {
     case kpis
     case metric(CustomMetric)
     case metricValue(CustomMetric)
-    case settings
 
     var id: String {
         switch self {
@@ -19,7 +18,6 @@ enum BusinessSheet: Identifiable {
         case .kpis: "kpis"
         case let .metric(metric): "metric-\(metric.id)"
         case let .metricValue(metric): "value-\(metric.id)"
-        case .settings: "settings"
         }
     }
 
@@ -32,7 +30,6 @@ enum BusinessSheet: Identifiable {
         case .kpis: KPIPicker()
         case let .metric(metric): MetricEditor(metric: metric)
         case let .metricValue(metric): MetricValueEditor(metric: metric)
-        case .settings: BusinessSettingsEditor()
         }
     }
 }
@@ -141,16 +138,10 @@ struct BusinessAppView: View {
             metrics(state: state)
             curve(state: state, now: now)
             more(state: state)
-            MiniAppSettingsSection(app: .business)
+            MiniAppInfoSection(app: .business)
         }
         .navigationTitle(state.name.isEmpty ? tr("Business") : state.name)
         .navigationBarTitleDisplayMode(.large)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button { sheet = .settings } label: { Image(systemName: "slider.horizontal.3") }
-                    .accessibilityLabel(Text(tr("Nom et objectif")))
-            }
-        }
         .sheet(item: $sheet) { $0.editor }
     }
 
@@ -460,32 +451,6 @@ struct KPIPicker: View {
 }
 
 /// The business name and the monthly revenue goal.
-struct BusinessSettingsEditor: View {
-    @Environment(AppModel.self) private var model
-    @State private var name = ""
-    @State private var goal: Double = 0
-
-    var body: some View {
-        SheetForm(title: tr("Mon activité"), canSave: true, onSave: save) {
-            Section {
-                TextField(tr("Nom de l'entreprise"), text: $name)
-                NumberRow(title: tr("Objectif du mois"), value: $goal, unit: model.settings.currencyCode)
-            } footer: {
-                Text(tr("L'objectif sert à la barre de progression du mois."))
-            }
-        }
-        .onAppear {
-            name = model.business.name
-            goal = model.business.monthlyGoal
-        }
-    }
-
-    private func save() {
-        model.setBusinessName(name.trimmed.isEmpty ? tr("Mon entreprise") : name.trimmed)
-        model.setBusinessGoal(max(0, goal))
-    }
-}
-
 /// A metric followed by hand: its name, unit, direction and target.
 struct MetricEditor: View {
     @Environment(AppModel.self) private var model

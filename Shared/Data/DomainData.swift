@@ -40,7 +40,7 @@ enum DataNeed: Hashable {
 enum DataNeeds {
     static func needs(for kind: WidgetKind) -> Set<DataNeed> {
         switch kind {
-        case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .note, .weekView, .moonPhase:
+        case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .note, .weekView, .moonPhase, .photos, .quote:
             return []
         case .ageProgress, .birthday, .holiday:
             return [.life]

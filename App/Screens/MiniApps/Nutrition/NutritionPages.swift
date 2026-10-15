@@ -460,10 +460,10 @@ struct NutritionHistoryPage: View {
                 }
                 .card(padding: 14)
             }
-            if !model.isPremium && (period == .month || period == .custom) {
-                // The last seven days stay free; a longer history is part of Premium.
-                PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("L'historique complet est dans Premium"),
-                                message: tr("30 jours, ou la période de ton choix, avec tes moyennes et ton poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium."))
+            if !model.isPremium && (period == .week || period == .month || period == .custom) {
+                // A day stays free (and the week on the Nutrition page); the trends and analyses are Premium.
+                PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("L'historique détaillé est dans Premium"),
+                                message: tr("7 jours, 30 jours ou la période de ton choix : moyennes, tendances, répartition des macros et poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium."))
             } else if stats.trackedDays == 0 {
                 EmptyStateView(symbol: "fork.knife", title: tr("Rien de noté"), message: tr("Aucun repas noté sur cette période."))
                     .card()
@@ -483,6 +483,7 @@ struct NutritionHistoryPage: View {
         }
         .navigationTitle(tr("Historique"))
         .navigationBarTitleDisplayMode(.large)
+        .onAppear { if !model.isPremium && period == .week { period = .today } }
     }
 
     private func averages(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets, isSingleDay: Bool) -> some View {

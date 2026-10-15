@@ -58,12 +58,16 @@ struct DesignOptions: Codable, Hashable {
     var targetID: String?
     /// A combined widget: the widgets drawn inside it, in order. Empty for every other widget.
     var parts: [ComboPart] = []
+    /// A photo widget: its photos, in order, each with its framing.
+    var photos: [PhotoSlot] = []
+    /// A quote widget: its text, author, typography and colors.
+    var quote: QuoteContent?
 
     init() {}
 
     enum CodingKeys: String, CodingKey {
         case progressUnit, countdownTitle, countdownDate, countdownMode, countdownReminder
-        case cities, noteTitle, noteText, coinID, moneyMode, showsCompletedTasks, clockShowsDate, targetID, parts
+        case cities, noteTitle, noteText, coinID, moneyMode, showsCompletedTasks, clockShowsDate, targetID, parts, photos, quote
     }
 
     init(from decoder: Decoder) throws {
@@ -83,5 +87,7 @@ struct DesignOptions: Codable, Hashable {
         clockShowsDate = (try? c.decodeIfPresent(Bool.self, forKey: .clockShowsDate)) ?? d.clockShowsDate
         targetID = (try? c.decodeIfPresent(String.self, forKey: .targetID)) ?? nil
         parts = (try? c.decodeIfPresent([ComboPart].self, forKey: .parts)) ?? []
+        photos = (try? c.decodeIfPresent([PhotoSlot].self, forKey: .photos)) ?? []
+        quote = (try? c.decodeIfPresent(QuoteContent.self, forKey: .quote)) ?? nil
     }
 }

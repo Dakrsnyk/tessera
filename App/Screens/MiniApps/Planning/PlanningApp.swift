@@ -126,7 +126,7 @@ struct PlanningAppView: View {
                 }
                 .buttonStyle(.plain)
             }
-            MiniAppSettingsSection(app: .planning)
+            MiniAppInfoSection(app: .planning)
         }
         .navigationTitle(tr("Planning"))
         .navigationBarTitleDisplayMode(.large)

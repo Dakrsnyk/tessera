@@ -45,6 +45,8 @@ final class Router {
 
     var tab: Tab = .home
     var editor: EditorRequest?
+    /// A photo or quote widget, changed in its own editor (« Photos et citations »), not in the Studio.
+    var photoQuoteDraft: PhotoQuoteDraft?
     var isPaywallPresented = false
     /// What the paywall opens for (nil: the general one).
     var paywallContext: PaywallContext?
@@ -121,6 +123,10 @@ final class Router {
 
     func openEditor(_ design: WidgetDesign, isNew: Bool, section: String? = nil) {
         content = nil
+        if design.kind.isMadeInItsMiniApp {
+            photoQuoteDraft = PhotoQuoteDraft(design: design, isNew: isNew)
+            return
+        }
         editor = EditorRequest(design: design, isNew: isNew, section: section)
     }
 

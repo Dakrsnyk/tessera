@@ -2,7 +2,8 @@ import Foundation
 
 /// About 5,600 generic foods from the Canadian Nutrient File (Health Canada, CNF 2015, Open
 /// Government Licence – Canada), with their French and English names and values per 100 g.
-/// Bundled with the app (`cnf-foods.json`, built by `scripts/cnf_build.py`), so the search finds
+/// Bundled with the app (`cnf-foods.json`, built by `scripts/cnf_build.py`, with fats, minerals and vitamins
+/// added by `scripts/cnf_extend.py`), so the search finds
 /// them offline; read once, the first time someone searches.
 enum NutrientFile {
     static let attribution = tr("Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.")
@@ -41,6 +42,17 @@ enum NutrientFile {
         FoodDatabase.normalized(text).split(whereSeparator: { !$0.isLetter && !$0.isNumber }).map(String.init)
     }
 
+    /// Columns 15 to 25 (`scripts/cnf_extend.py`): fats, minerals and vitamins, null when the file has none.
+    private static func micros(_ row: [Any]) -> Micronutrients? {
+        guard row.count >= 26 else { return nil }
+        func number(_ index: Int) -> Double? { (row[index] as? NSNumber)?.doubleValue }
+        let micros = Micronutrients(
+            monounsaturatedFat: number(15), polyunsaturatedFat: number(16), potassiumMg: number(17), calciumMg: number(18),
+            ironMg: number(19), magnesiumMg: number(20), vitaminCMg: number(21), vitaminAMcg: number(22),
+            vitaminDMcg: number(23), vitaminB12Mcg: number(24), folateMcg: number(25))
+        return micros.isEmpty ? nil : micros
+    }
+
     private static func load() -> [Entry] {
         guard let url = Bundle.main.url(forResource: "cnf-foods", withExtension: "json"),
               let data = try? Data(contentsOf: url),
@@ -58,7 +70,8 @@ enum NutrientFile {
                 servingGrams: serving > 0 ? serving : 100,
                 servingName: ((french ? row[13] : row[14]) as? String) ?? "100 g",
                 source: .nutrientFile, barcode: nil,
-                sugars: number(row[8]), saturatedFat: number(row[9]), sodiumMg: number(row[10]), cholesterolMg: number(row[11]))
+                sugars: number(row[8]), saturatedFat: number(row[9]), sodiumMg: number(row[10]), cholesterolMg: number(row[11]),
+                micros: micros(row))
             return Entry(food: food, shownWords: words(name), shownName: FoodDatabase.normalized(name), otherWords: words(french ? en : fr))
         }
     }

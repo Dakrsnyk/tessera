@@ -81,6 +81,13 @@ enum TimelinePlanner {
             return Plan(dates: dates.isEmpty ? [now] : Array(dates), policy: .after(min(now.addingTimeInterval(30 * 60), midnight.addingTimeInterval(60))))
         }
         switch design.kind {
+        case .photos:
+            // More than four photos take turns: a new set each hour.
+            guard let next = PhotoLayout.nextChange(design.options.photos, after: now) else { return Plan(dates: [now], policy: .never) }
+            let dates = [now] + (0..<6).compactMap { DateMath.calendar.date(byAdding: .hour, value: $0, to: next) }
+            return Plan(dates: dates, policy: .atEnd)
+        case .quote:
+            return Plan(dates: [now], policy: .never)
         case .clock, .worldClock:
             let start = DateMath.calendar.dateInterval(of: .minute, for: now)?.start ?? now
             let dates = (0..<60).compactMap { DateMath.calendar.date(byAdding: .minute, value: $0, to: start) }

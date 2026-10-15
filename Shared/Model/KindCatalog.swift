@@ -280,5 +280,8 @@ enum KindCatalog {
         KindInfo(kind: .aiNutrition, title: tr("Conseil nutrition"), summary: tr("Ce qu'il te reste pour la journée, expliqué simplement."), category: .dashboards, symbol: "sparkles.rectangle.stack", isPremium: true, families: SM, keywords: ["ia", "nutrition", "analyse"], space: .nutrition, isNew: true),
         KindInfo(kind: .aiFinance, title: tr("Analyse des dépenses"), summary: tr("Tes dépenses comparées à la semaine dernière."), category: .dashboards, symbol: "sparkle.magnifyingglass", isPremium: true, families: SM, keywords: ["ia", "dépenses", "analyse"], space: .budget, isNew: true),
         KindInfo(kind: .aiProductivity, title: tr("Analyse productivité"), summary: tr("Tes tendances de concentration, d'habitudes et de tâches."), category: .dashboards, symbol: "chart.line.text.clipboard", isPremium: true, families: SM, keywords: ["ia", "productivité", "analyse"], space: .productivity, isNew: true),
+        // Photos et citations: made in their mini-app (the photos chosen, then framed), never from the catalog.
+        KindInfo(kind: .photos, title: tr("Photos"), summary: tr("Une à quatre de tes photos, cadrées comme tu veux."), category: .memories, symbol: "photo.on.rectangle.angled", isPremium: false, families: SML, keywords: ["photo", "photos", "souvenirs", "image", "galerie"], isNew: true),
+        KindInfo(kind: .quote, title: tr("Citation"), summary: tr("Une phrase qui t'inspire, avec ta typographie et tes couleurs."), category: .memories, symbol: "quote.opening", isPremium: false, families: SML, keywords: ["citation", "quote", "phrase", "inspiration", "texte"], isNew: true),
     ]
 }

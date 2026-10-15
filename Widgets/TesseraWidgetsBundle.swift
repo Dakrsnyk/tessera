@@ -12,79 +12,33 @@ struct TesseraWidgetsBundle: WidgetBundle {
         WidgetDiagnostics.recordLaunch()
     }
 
+    /// The Home Screen gallery offers « Mes widgets » only: the person's own widgets, made in Ardane.
+    /// The Lock Screen offers the essentials of each mini-app. Then the workout in progress.
     var body: some Widget {
         QuickWidget()
-        TimeWidgets().body
-        CalendarWidgets().body
-        ProductivityWidgets().body
-        DataWidgets().body
-        LifeGroups().body
-        DomainGroups().body
-        MoreGroups().body
+        LockScreenEssentials().body
+        LockScreenMore().body
         WorkoutLiveActivityWidget()
     }
 }
 
-struct TimeWidgets: WidgetBundle {
+struct LockScreenEssentials: WidgetBundle {
     var body: some Widget {
-        ClockWidget()
-        WorldClockWidget()
-        ProgressWidget()
+        NutritionLockWidget()
+        FitnessLockWidget()
+        PlanningLockWidget()
+        TasksLockWidget()
+        UpNextLockWidget()
     }
 }
 
-struct CalendarWidgets: WidgetBundle {
+struct LockScreenMore: WidgetBundle {
     var body: some Widget {
-        CalendarWidget()
-        CountdownWidget()
-        YearDotsWidget()
-    }
-}
-
-struct ProductivityWidgets: WidgetBundle {
-    var body: some Widget {
-        TasksWidget()
-        HabitsWidget()
-        FocusWidget()
-        UpNextWidget()
-        NoteWidget()
-    }
-}
-
-struct DataWidgets: WidgetBundle {
-    var body: some Widget {
-        WeatherWidget()
-        CryptoWidget()
-        MoneyFlowWidget()
-    }
-}
-
-struct LifeGroups: WidgetBundle {
-    var body: some Widget {
-        DashboardsGroupWidget()
-        DatesGroupWidget()
-        SkyGroupWidget()
-        FocusGroupWidget()
-        HabitsGroupWidget()
-    }
-}
-
-struct DomainGroups: WidgetBundle {
-    var body: some Widget {
-        NutritionGroupWidget()
-        FitnessGroupWidget()
-        BudgetGroupWidget()
-        InvestingGroupWidget()
-        BusinessGroupWidget()
-    }
-}
-
-struct MoreGroups: WidgetBundle {
-    var body: some Widget {
-        StudentGroupWidget()
-        TravelGroupWidget()
-        CarGroupWidget()
-        CompaniesGroupWidget()
-        InsightsGroupWidget()
+        HabitsLockWidget()
+        FinancesLockWidget()
+        BusinessLockWidget()
+        TravelLockWidget()
+        CarLockWidget()
+        WeatherLockWidget()
     }
 }

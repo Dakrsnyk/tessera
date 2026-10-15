@@ -443,9 +443,24 @@ enum OpenFoodFacts {
                 saturatedFat: per100("saturated-fat"),
                 // Open Food Facts gives sodium and cholesterol in grams.
                 sodiumMg: per100("sodium").map { $0 * 1_000 } ?? per100("salt").map { $0 * 400 },
-                cholesterolMg: per100("cholesterol").map { $0 * 1_000 }
+                cholesterolMg: per100("cholesterol").map { $0 * 1_000 },
+                micros: OpenFoodFacts.micros(per100)
             )
         }
+    }
+
+    /// Open Food Facts keeps minerals and vitamins in grams per 100 g: only those on the label, never zeros
+    /// made up.
+    private static func micros(_ per100: (String) -> Double?) -> Micronutrients? {
+        func milligrams(_ key: String) -> Double? { per100(key).map { $0 * 1_000 } }
+        func micrograms(_ key: String) -> Double? { per100(key).map { $0 * 1_000_000 } }
+        let micros = Micronutrients(
+            monounsaturatedFat: per100("monounsaturated-fat"), polyunsaturatedFat: per100("polyunsaturated-fat"),
+            potassiumMg: milligrams("potassium"), calciumMg: milligrams("calcium"), ironMg: milligrams("iron"),
+            magnesiumMg: milligrams("magnesium"), vitaminCMg: milligrams("vitamin-c"), vitaminAMcg: micrograms("vitamin-a"),
+            vitaminDMcg: micrograms("vitamin-d"), vitaminB12Mcg: micrograms("vitamin-b12"),
+            folateMcg: micrograms("folates") ?? micrograms("vitamin-b9"))
+        return micros.isEmpty ? nil : micros
     }
 
     static let fields = "code,product_name,product_name_fr,product_name_en,generic_name,brands,serving_quantity,serving_size,nutriments"

@@ -26,6 +26,9 @@ struct FoodItem: Codable, Hashable, Identifiable {
     var sodiumMg: Double?
     /// Milligrams.
     var cholesterolMg: Double?
+    /// Fats, minerals and vitamins per 100 g, when the source gives them (Canadian Nutrient File, Open
+    /// Food Facts). Nil for foods saved before they were read.
+    var micros: Micronutrients?
 
     var displayName: String {
         guard let brand, !brand.isEmpty else { return name }
@@ -37,8 +40,51 @@ struct FoodItem: Codable, Hashable, Identifiable {
         return NutritionTotals(
             kcal: kcal * factor, protein: protein * factor, carbs: carbs * factor, fat: fat * factor, fiber: fiber * factor,
             sugars: sugars.map { $0 * factor }, saturatedFat: saturatedFat.map { $0 * factor },
-            sodiumMg: sodiumMg.map { $0 * factor }, cholesterolMg: cholesterolMg.map { $0 * factor }
+            sodiumMg: sodiumMg.map { $0 * factor }, cholesterolMg: cholesterolMg.map { $0 * factor },
+            micros: micros.map { $0.scaled(factor) } ?? Micronutrients()
         )
+    }
+}
+
+/// Fats, minerals and vitamins: per 100 g on a food, per day on totals. A value the source doesn't give
+/// stays nil, never a zero made up.
+struct Micronutrients: Codable, Hashable {
+    var monounsaturatedFat: Double?
+    var polyunsaturatedFat: Double?
+    var potassiumMg: Double?
+    var calciumMg: Double?
+    var ironMg: Double?
+    var magnesiumMg: Double?
+    var vitaminCMg: Double?
+    /// Retinol activity equivalents (RAE).
+    var vitaminAMcg: Double?
+    var vitaminDMcg: Double?
+    var vitaminB12Mcg: Double?
+    /// Dietary folate equivalents (DFE).
+    var folateMcg: Double?
+
+    static let all: [WritableKeyPath<Micronutrients, Double?>] = [
+        \.monounsaturatedFat, \.polyunsaturatedFat, \.potassiumMg, \.calciumMg, \.ironMg, \.magnesiumMg,
+        \.vitaminCMg, \.vitaminAMcg, \.vitaminDMcg, \.vitaminB12Mcg, \.folateMcg,
+    ]
+
+    var isEmpty: Bool { Self.all.allSatisfy { self[keyPath: $0] == nil } }
+
+    func scaled(_ factor: Double) -> Micronutrients {
+        var copy = self
+        for path in Self.all { copy[keyPath: path] = self[keyPath: path].map { $0 * factor } }
+        return copy
+    }
+
+    static func + (lhs: Micronutrients, rhs: Micronutrients) -> Micronutrients {
+        var sum = Micronutrients()
+        for path in all {
+            switch (lhs[keyPath: path], rhs[keyPath: path]) {
+            case (nil, nil): sum[keyPath: path] = nil
+            case let (a, b): sum[keyPath: path] = (a ?? 0) + (b ?? 0)
+            }
+        }
+        return sum
     }
 }
 
@@ -109,6 +155,10 @@ struct NutritionTotals: Hashable {
     var saturatedFat: Double? = nil
     var sodiumMg: Double? = nil
     var cholesterolMg: Double? = nil
+    var micros = Micronutrients()
+
+    /// Salt from sodium (1 g of sodium is 2.5 g of salt, the conversion on nutrition labels).
+    var saltG: Double? { sodiumMg.map { $0 * 2.5 / 1_000 } }
 
     private static func add(_ a: Double?, _ b: Double?) -> Double? {
         switch (a, b) {
@@ -121,7 +171,8 @@ struct NutritionTotals: Hashable {
         NutritionTotals(
             kcal: lhs.kcal + rhs.kcal, protein: lhs.protein + rhs.protein, carbs: lhs.carbs + rhs.carbs, fat: lhs.fat + rhs.fat, fiber: lhs.fiber + rhs.fiber,
             sugars: add(lhs.sugars, rhs.sugars), saturatedFat: add(lhs.saturatedFat, rhs.saturatedFat),
-            sodiumMg: add(lhs.sodiumMg, rhs.sodiumMg), cholesterolMg: add(lhs.cholesterolMg, rhs.cholesterolMg)
+            sodiumMg: add(lhs.sodiumMg, rhs.sodiumMg), cholesterolMg: add(lhs.cholesterolMg, rhs.cholesterolMg),
+            micros: lhs.micros + rhs.micros
         )
     }
 }
@@ -136,6 +187,17 @@ struct NutritionGoals: Codable, Hashable {
     var sugarsMax: Double = 50
     var saturatedFatMax: Double = 20
     var sodiumMaxMg: Double = 2_300
+    /// Daily intakes of the adult reference values (Dietary Reference Intakes, National Academies),
+    /// set for the person by `NutritionCalculator` once their age and gender are known.
+    var potassiumMg: Double = 3_000
+    var calciumMg: Double = 1_000
+    var ironMg: Double = 13
+    var magnesiumMg: Double = 360
+    var vitaminCMg: Double = 85
+    var vitaminAMcg: Double = 800
+    var vitaminDMcg: Double = 15
+    var vitaminB12Mcg: Double = 2.4
+    var folateMcg: Double = 400
 
     init(kcal: Double = 2_200, protein: Double = 130, carbs: Double = 250, fat: Double = 70, fiber: Double = 30,
          sugarsMax: Double = 50, saturatedFatMax: Double = 20, sodiumMaxMg: Double = 2_300) {
@@ -149,7 +211,15 @@ struct NutritionGoals: Codable, Hashable {
         self.sodiumMaxMg = sodiumMaxMg
     }
 
-    enum CodingKeys: String, CodingKey { case kcal, protein, carbs, fat, fiber, sugarsMax, saturatedFatMax, sodiumMaxMg }
+    enum CodingKeys: String, CodingKey {
+        case kcal, protein, carbs, fat, fiber, sugarsMax, saturatedFatMax, sodiumMaxMg
+        case potassiumMg, calciumMg, ironMg, magnesiumMg, vitaminCMg, vitaminAMcg, vitaminDMcg, vitaminB12Mcg, folateMcg
+    }
+
+    subscript(target: NutritionTarget) -> Double {
+        get { self[keyPath: target.goalPath] }
+        set { self[keyPath: target.goalPath] = newValue }
+    }
 
     /// Tolerant: goals saved before the limits existed keep their values.
     init(from decoder: Decoder) throws {
@@ -163,6 +233,153 @@ struct NutritionGoals: Codable, Hashable {
         sugarsMax = c.value(.sugarsMax, d.sugarsMax)
         saturatedFatMax = c.value(.saturatedFatMax, d.saturatedFatMax)
         sodiumMaxMg = c.value(.sodiumMaxMg, d.sodiumMaxMg)
+        potassiumMg = c.value(.potassiumMg, d.potassiumMg)
+        calciumMg = c.value(.calciumMg, d.calciumMg)
+        ironMg = c.value(.ironMg, d.ironMg)
+        magnesiumMg = c.value(.magnesiumMg, d.magnesiumMg)
+        vitaminCMg = c.value(.vitaminCMg, d.vitaminCMg)
+        vitaminAMcg = c.value(.vitaminAMcg, d.vitaminAMcg)
+        vitaminDMcg = c.value(.vitaminDMcg, d.vitaminDMcg)
+        vitaminB12Mcg = c.value(.vitaminB12Mcg, d.vitaminB12Mcg)
+        folateMcg = c.value(.folateMcg, d.folateMcg)
+    }
+}
+
+/// A daily target of « Mes infos › Nutrition »: calculated from the person's body, aim and activity,
+/// or typed by them (then kept as they are when the calculation changes).
+enum NutritionTarget: String, Codable, CaseIterable, Identifiable {
+    case kcal, protein, carbs, fat, fiber, sugars, saturatedFat, sodium
+    case potassium, calcium, iron, magnesium, vitaminC, vitaminA, vitaminD, vitaminB12, folate
+    var id: String { rawValue }
+
+    enum Group { case energy, limits, micronutrients }
+
+    var group: Group {
+        switch self {
+        case .kcal, .protein, .carbs, .fat, .fiber: .energy
+        case .sugars, .saturatedFat, .sodium: .limits
+        default: .micronutrients
+        }
+    }
+
+    /// A ceiling not to go over (sugars, saturated fat, sodium), rather than an amount to reach.
+    var isLimit: Bool { group == .limits }
+
+    var title: String {
+        switch self {
+        case .kcal: tr("Calories")
+        case .protein: tr("Protéines")
+        case .carbs: tr("Glucides")
+        case .fat: tr("Lipides")
+        case .fiber: tr("Fibres")
+        case .sugars: tr("Sucres")
+        case .saturatedFat: tr("Gras saturés")
+        case .sodium: tr("Sodium")
+        case .potassium: tr("Potassium")
+        case .calcium: tr("Calcium")
+        case .iron: tr("Fer")
+        case .magnesium: tr("Magnésium")
+        case .vitaminC: tr("Vitamine C")
+        case .vitaminA: tr("Vitamine A")
+        case .vitaminD: tr("Vitamine D")
+        case .vitaminB12: tr("Vitamine B12")
+        case .folate: tr("Folates (B9)")
+        }
+    }
+
+    var unit: String {
+        switch self {
+        case .kcal: "kcal"
+        case .protein, .carbs, .fat, .fiber, .sugars, .saturatedFat: "g"
+        case .sodium, .potassium, .calcium, .iron, .magnesium, .vitaminC: "mg"
+        case .vitaminA, .vitaminD, .vitaminB12, .folate: "µg"
+        }
+    }
+
+    /// Decimals worth showing (2,4 µg of B12, 13 mg of iron, 2 100 kcal).
+    var decimals: Int {
+        switch self {
+        case .vitaminB12, .vitaminD: 1
+        default: 0
+        }
+    }
+
+    var goalPath: WritableKeyPath<NutritionGoals, Double> {
+        switch self {
+        case .kcal: \.kcal
+        case .protein: \.protein
+        case .carbs: \.carbs
+        case .fat: \.fat
+        case .fiber: \.fiber
+        case .sugars: \.sugarsMax
+        case .saturatedFat: \.saturatedFatMax
+        case .sodium: \.sodiumMaxMg
+        case .potassium: \.potassiumMg
+        case .calcium: \.calciumMg
+        case .iron: \.ironMg
+        case .magnesium: \.magnesiumMg
+        case .vitaminC: \.vitaminCMg
+        case .vitaminA: \.vitaminAMcg
+        case .vitaminD: \.vitaminDMcg
+        case .vitaminB12: \.vitaminB12Mcg
+        case .folate: \.folateMcg
+        }
+    }
+
+    /// What a day's foods add up to, nil when no food eaten gave the value.
+    func eaten(_ totals: NutritionTotals) -> Double? {
+        switch self {
+        case .kcal: totals.kcal
+        case .protein: totals.protein
+        case .carbs: totals.carbs
+        case .fat: totals.fat
+        case .fiber: totals.fiber
+        case .sugars: totals.sugars
+        case .saturatedFat: totals.saturatedFat
+        case .sodium: totals.sodiumMg
+        case .potassium: totals.micros.potassiumMg
+        case .calcium: totals.micros.calciumMg
+        case .iron: totals.micros.ironMg
+        case .magnesium: totals.micros.magnesiumMg
+        case .vitaminC: totals.micros.vitaminCMg
+        case .vitaminA: totals.micros.vitaminAMcg
+        case .vitaminD: totals.micros.vitaminDMcg
+        case .vitaminB12: totals.micros.vitaminB12Mcg
+        case .folate: totals.micros.folateMcg
+        }
+    }
+
+    /// The value on a food (per 100 g), to know whether a day's total is complete.
+    var foodPath: KeyPath<FoodItem, Double?>? {
+        switch self {
+        case .kcal, .protein, .carbs, .fat, .fiber: nil
+        case .sugars: \.sugars
+        case .saturatedFat: \.saturatedFat
+        case .sodium: \.sodiumMg
+        case .potassium: \.micros?.potassiumMg
+        case .calcium: \.micros?.calciumMg
+        case .iron: \.micros?.ironMg
+        case .magnesium: \.micros?.magnesiumMg
+        case .vitaminC: \.micros?.vitaminCMg
+        case .vitaminA: \.micros?.vitaminAMcg
+        case .vitaminD: \.micros?.vitaminDMcg
+        case .vitaminB12: \.micros?.vitaminB12Mcg
+        case .folate: \.micros?.folateMcg
+        }
+    }
+
+    /// The macronutrients that follow the calories when only the calories were typed by hand.
+    var followsCalories: Bool { [.protein, .carbs, .fat, .fiber, .sugars, .saturatedFat].contains(self) }
+
+    /// The facts widgets read as « the person's own target ».
+    var providedFact: ProvidedFact? {
+        switch self {
+        case .kcal: .kcalTarget
+        case .protein: .proteinTarget
+        case .carbs: .carbsTarget
+        case .fat: .fatTarget
+        default: nil
+        }
     }
 }
 
@@ -513,12 +730,75 @@ enum NutritionCalculator {
         }
     }
 
-    static func goals(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal) -> NutritionGoals {
-        let base: Double = 10 * weightKg + 6.25 * heightCm - 5 * Double(age) + sex.offset
-        let kcal = max(1_400, (base * activity.rawValue * (1 + goal.rawValue)).rounded())
-        let protein = (weightKg * (goal == .gain ? 2.0 : 1.6)).rounded()
+    /// The steps of the calculation, shown under « Comment c'est calculé ».
+    struct Breakdown: Hashable {
+        /// Resting energy (Mifflin-St Jeor, 1990).
+        var restingKcal: Double
+        /// With the activity factor: the energy spent in a day.
+        var dailyKcal: Double
+        /// The aim's change (−15 %, 0, +10 %).
+        var goalAdjustment: Double
+        /// Grams of protein per kilogram of body weight.
+        var proteinPerKg: Double
+    }
+
+    /// Grams of protein per kilogram: more to keep muscle while losing weight or to build it, more with
+    /// training (International Society of Sports Nutrition: 1,4 to 2,0 g/kg for active people), and at
+    /// least the adult reference otherwise.
+    static func proteinPerKg(activity: Activity, goal: Goal) -> Double {
+        switch goal {
+        case .lose: 1.8
+        case .gain: 2.0
+        case .maintain: activity == .sedentary || activity == .light ? 1.2 : 1.6
+        }
+    }
+
+    static func breakdown(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal) -> Breakdown {
+        let resting = 10 * weightKg + 6.25 * heightCm - 5 * Double(age) + sex.offset
+        return Breakdown(restingKcal: resting.rounded(), dailyKcal: (resting * activity.rawValue).rounded(),
+                         goalAdjustment: goal.rawValue, proteinPerKg: proteinPerKg(activity: activity, goal: goal))
+    }
+
+    /// Every daily target from the body, the activity and the aim:
+    /// - calories: Mifflin-St Jeor × activity factor × aim (−15 % to lose, +10 % to gain), 1 400 at least;
+    /// - protein: `proteinPerKg` × weight, within 35 % of the calories (the upper bound of the AMDR);
+    /// - fat: 28 % of the calories (AMDR 20–35 %); carbohydrates: the rest;
+    /// - fibre: 14 g per 1 000 kcal (Dietary Guidelines); sugars and saturated fat: under 10 % of the
+    ///   calories each (WHO); sodium: under 2 300 mg (Health Canada);
+    /// - minerals and vitamins: the Dietary Reference Intakes for the age and gender (the average of both
+    ///   references for `neutral`).
+    /// `kcal`: calories typed by the person, which the macronutrients then follow.
+    static func goals(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal, kcal typed: Double? = nil) -> NutritionGoals {
+        let steps = breakdown(sex: sex, age: age, heightCm: heightCm, weightKg: weightKg, activity: activity, goal: goal)
+        let kcal = typed ?? max(1_400, (steps.dailyKcal * (1 + goal.rawValue)).rounded())
+        let protein = min(weightKg * steps.proteinPerKg, kcal * 0.35 / 4).rounded()
         let fat = (kcal * 0.28 / 9).rounded()
         let carbs = max(0, ((kcal - protein * 4 - fat * 9) / 4).rounded())
-        return NutritionGoals(kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: 30)
+        var goals = NutritionGoals(kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: (kcal / 1_000 * 14).rounded(),
+                                   sugarsMax: (kcal * 0.10 / 4).rounded(), saturatedFatMax: (kcal * 0.10 / 9).rounded(), sodiumMaxMg: 2_300)
+        let reference = References(sex: sex)
+        goals.potassiumMg = reference.value(female: 2_600, male: 3_400)
+        goals.calciumMg = reference.value(female: age > 50 ? 1_200 : 1_000, male: age > 70 ? 1_200 : 1_000)
+        goals.ironMg = reference.value(female: age > 50 ? 8 : 18, male: 8)
+        goals.magnesiumMg = reference.value(female: age > 30 ? 320 : 310, male: age > 30 ? 420 : 400)
+        goals.vitaminCMg = reference.value(female: 75, male: 90)
+        goals.vitaminAMcg = reference.value(female: 700, male: 900)
+        goals.vitaminDMcg = age > 70 ? 20 : 15
+        goals.vitaminB12Mcg = 2.4
+        goals.folateMcg = 400
+        return goals
+    }
+
+    /// The adult reference values of the gender used by the formula.
+    private struct References {
+        let sex: Sex
+
+        func value(female: Double, male: Double) -> Double {
+            switch sex {
+            case .female: female
+            case .male: male
+            case .neutral: ((female + male) / 2).rounded()
+            }
+        }
     }
 }

@@ -125,7 +125,7 @@ struct FinancesAppView: View {
         let now = Date()
         let state = model.budget
         MiniAppScroll {
-            BalanceChartCard(state: state, currency: currency) { sheet = .opening }
+            BalanceChartCard(state: state, currency: currency, isPremium: model.isPremium) { sheet = .opening }
             hero(state: state, now: now)
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex) { sheet = .expense(nil) }
@@ -142,7 +142,7 @@ struct FinancesAppView: View {
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            MiniAppSettingsSection(app: .finances)
+            MiniAppInfoSection(app: .finances)
         }
         .navigationTitle(tr("Finances"))
         .navigationBarTitleDisplayMode(.large)
@@ -410,9 +410,12 @@ struct GoalProgressRow: View {
 private struct BalanceChartCard: View {
     let state: BudgetState
     let currency: String
+    /// The month stays free; three months and the year are part of the detailed statistics.
+    let isPremium: Bool
     /// Opens « Solde de départ ».
     let onEditOpening: () -> Void
     @State private var period: Period = .month
+    @State private var paywall: PaywallContext?
 
     enum Period: String, CaseIterable, Identifiable {
         case month, quarter, year
@@ -456,7 +459,13 @@ private struct BalanceChartCard: View {
                         .contentTransition(.numericText())
                 }
                 Spacer(minLength: 8)
-                Picker(tr("Période"), selection: $period.animation(.snappy)) {
+                Picker(tr("Période"), selection: Binding(get: { period }, set: { choice in
+                    if choice == .month || isPremium {
+                        withAnimation(.snappy) { period = choice }
+                    } else {
+                        paywall = .financesHistory
+                    }
+                })) {
                     ForEach(Period.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
@@ -515,6 +524,7 @@ private struct BalanceChartCard: View {
         .card()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("finances-balance")
+        .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 
     /// Where the balance starts from, and what it counts.

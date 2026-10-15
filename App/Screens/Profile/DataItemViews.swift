@@ -106,17 +106,12 @@ struct DataItemRow: View {
     @ViewBuilder private var editor: some View {
         let now = Date()
         switch item {
-        case .kcalTarget:
-            VStack(alignment: .leading, spacing: 8) {
-                ProfileNumberField(title: tr("Calories par jour"), unit: "kcal", value: target(.kcalTarget, \.kcal), decimals: false, identifier: "data-kcal")
-                action(tr("Calculer pour moi"), symbol: "wand.and.stars") { sheets?.open { TopicEditorSheet(topic: .nutrition) } }
+        case .kcalTarget, .macroTargets:
+            // Calculated from the body, the aim and the activity; changed by hand inside, value by value.
+            action(model.isFilled(item) ? tr("Voir mes besoins") : tr("Calculer mes besoins"), symbol: "wand.and.stars", prominent: !model.isFilled(item)) {
+                sheets?.open { TopicEditorSheet(topic: .nutrition) }
             }
-        case .macroTargets:
-            HStack(spacing: 8) {
-                ProfileNumberField(title: tr("Protéines"), unit: "g", value: target(.proteinTarget, \.protein), decimals: false, identifier: "data-protein")
-                ProfileNumberField(title: tr("Glucides"), unit: "g", value: target(.carbsTarget, \.carbs), decimals: false, identifier: "data-carbs")
-                ProfileNumberField(title: tr("Lipides"), unit: "g", value: target(.fatTarget, \.fat), decimals: false, identifier: "data-fat")
-            }
+            .accessibilityIdentifier(item == .kcalTarget ? "data-kcal" : "data-macros")
         case .meals:
             HStack(spacing: 8) {
                 action(tr("Scanner"), symbol: "barcode.viewfinder", prominent: true) { sheets?.open { FoodSearchView(startsWithScanner: true) } }
@@ -296,24 +291,6 @@ struct DataItemRow: View {
         case .calendar:
             CalendarAccessRow()
         }
-    }
-
-    private func target(_ fact: ProvidedFact, _ keyPath: WritableKeyPath<NutritionGoals, Double>) -> Binding<Double?> {
-        Binding(
-            get: { model.profile.knows(fact) ? model.nutrition.goals[keyPath: keyPath] : nil },
-            set: { value in
-                guard let value else {
-                    model.forget(fact)
-                    return
-                }
-                switch fact {
-                case .kcalTarget: model.setNutritionTargets(kcal: value)
-                case .proteinTarget: model.setNutritionTargets(protein: value)
-                case .carbsTarget: model.setNutritionTargets(carbs: value)
-                default: model.setNutritionTargets(fat: value)
-                }
-            }
-        )
     }
 
     @ViewBuilder private var stepsAccess: some View {

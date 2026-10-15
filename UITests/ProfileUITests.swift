@@ -83,7 +83,12 @@ final class ProfileUITests: XCTestCase {
         snapshot("sport")
         tapButton("onboarding-continue")
         XCTAssertTrue(app.staticTexts["Nutrition"].waitForExistence(timeout: 8))
-        type("2500", into: "target-kcal")
+        // No number to type: the needs are calculated from the body (the weight was given for sport).
+        type("30", into: "profile-age")
+        type("180", into: "profile-height")
+        tapButton("gender-male")
+        XCTAssertTrue(app.descendants(matching: .any)["nutrition-targets"].waitForExistence(timeout: 5), "Les besoins calculés doivent s'afficher")
+        snapshot("nutrition-needs")
         // Everything else can be skipped: the last page ends the first launch.
         tapButton("onboarding-skip")
 
@@ -217,10 +222,14 @@ final class ProfileUITests: XCTestCase {
         let example = app.staticTexts["Aperçu avec des données d'exemple"]
         XCTAssertTrue(example.exists, "Sans données, l'aperçu montre un exemple, identifié comme tel")
         snapshot("editor-fresh")
-        let kcal = app.textFields["data-kcal"]
-        kcal.tap()
-        kcal.typeText("2500")
-        XCTAssertTrue(waitForDisappearance(example), "Une fois l'objectif donné, l'aperçu montre les vraies données")
+        // The target is calculated from the body, in « Mes infos › Nutrition ».
+        app.buttons["data-kcal"].tap()
+        type("30", into: "profile-age")
+        type("175", into: "profile-height")
+        type("70", into: "profile-weight")
+        tapButton("gender-female")
+        tapButton("OK")
+        XCTAssertTrue(waitForDisappearance(example), "Une fois les besoins calculés, l'aperçu montre les vraies données")
         snapshot("editor-own-data")
     }
 

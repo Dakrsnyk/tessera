@@ -154,7 +154,11 @@ struct BusinessResultsPage: View {
         let revenue = BusinessMath.revenue(state, in: year)
         let costs = BusinessMath.costs(state, in: year)
         MiniAppScroll {
-            if months.isEmpty {
+            if !model.isPremium {
+                // The totals of the year stay free; the month-by-month analysis is part of Premium.
+                PremiumLockCard(symbol: "chart.bar.xaxis", title: tr("L'analyse mois par mois est dans Premium"),
+                                message: tr("Chiffre d'affaires, dépenses et bénéfice de chaque mois, leur évolution sur six mois et ta marge. Tout ce que tu notes reste enregistré."))
+            } else if months.isEmpty {
                 Text(tr("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -196,6 +200,7 @@ struct BusinessResultsPage: View {
                              colorHex: revenue - costs < 0 ? BusinessFormat.badHex : BusinessFormat.goodHex)
                 }
             }
+            if model.isPremium {
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: tr("Mois par mois"))
                 MiniRowsCard {
@@ -206,6 +211,7 @@ struct BusinessResultsPage: View {
                                 value: TF.money(month.profit, currency), showsChevron: false)
                     }
                 }
+            }
             }
             Text(tr("Le bénéfice ici, c'est tes ventes moins les dépenses que tu as notées : un repère, pas un résultat comptable."))
                 .font(.footnote)

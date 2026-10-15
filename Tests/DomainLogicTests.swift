@@ -205,7 +205,7 @@ final class DomainLogicTests: XCTestCase {
     // MARK: Catalog and widgets
 
     func testEveryNewWidgetBelongsToOneGalleryGroup() {
-        let original: Set<WidgetKind> = [.clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .tasks, .habits, .focus, .upNext, .note, .weather, .crypto, .moneyFlow, .hydration]
+        let original: Set<WidgetKind> = [.clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .tasks, .habits, .focus, .upNext, .note, .weather, .crypto, .moneyFlow, .hydration, .photos, .quote]
         for kind in WidgetKind.allCases where !original.contains(kind) {
             XCTAssertEqual(WidgetGroup.allCases.filter { $0.kinds.contains(kind) }.count, 1, "\(kind)")
         }

@@ -2,7 +2,8 @@ import AppIntents
 import Foundation
 import WidgetKit
 
-/// A saved design, or a ready-made widget of the catalog, offered in the widget's "Modifier le widget" menu.
+/// A saved design offered in the widget's "Modifier le widget" menu (a catalog widget chosen by an earlier
+/// version still reads).
 struct DesignEntity: AppEntity {
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Widget Ardane"
     static var defaultQuery = DesignQuery()
@@ -47,12 +48,11 @@ struct DesignQuery: EntityStringQuery {
         }
     }
 
+    /// The person's own widgets only, the latest first (« Modifier le widget » never lists the catalog).
     func suggestedEntities() async throws -> [DesignEntity] {
-        let saved = SharedStore.shared.designs
+        SharedStore.shared.designs
             .sorted { ($0.lastUsedAt ?? $0.updatedAt) > ($1.lastUsedAt ?? $1.updatedAt) }
             .map(DesignEntity.init(design:))
-        let catalog = WidgetCategory.allCases.flatMap { WidgetKind.kinds(in: $0) }.map { DesignEntity(starter: $0) }
-        return saved + catalog
     }
 
     func entities(matching string: String) async throws -> [DesignEntity] {
@@ -68,7 +68,7 @@ struct DesignQuery: EntityStringQuery {
 /// Configuration shared by every Ardane widget: which saved design (or catalog widget) to display.
 struct DesignWidgetIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Choisir un widget"
-    static var description = IntentDescription("Affiche un widget que tu as créé dans Ardane, ou un modèle du catalogue.")
+    static var description = IntentDescription("Affiche un widget que tu as créé dans Ardane.")
 
     @Parameter(title: "Widget")
     var design: DesignEntity?

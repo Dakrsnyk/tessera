@@ -235,8 +235,10 @@ struct GenderPicker: View {
 
 struct TopicForm: View {
     let topic: ProfileTopic
+    /// Inside a mini-app (« Mes infos »): the questions only, without the « first task / first habit » the
+    /// mini-app already lets the person add on its page.
+    var inMiniApp = false
     @Environment(AppModel.self) private var model
-    @State private var calculationActivity: NutritionCalculator.Activity?
     @State private var newTask = ""
     @State private var newHabit = ""
     @State private var showsCityPicker = false
@@ -342,80 +344,37 @@ struct TopicForm: View {
 
     // MARK: Nutrition
 
-    private func targetBinding(_ fact: ProvidedFact, _ keyPath: WritableKeyPath<NutritionGoals, Double>) -> Binding<Double?> {
-        Binding(
-            get: { model.profile.knows(fact) ? model.nutrition.goals[keyPath: keyPath] : nil },
-            set: { value in
-                guard let value else {
-                    model.forget(fact)
-                    return
-                }
-                switch fact {
-                case .kcalTarget: model.setNutritionTargets(kcal: value)
-                case .proteinTarget: model.setNutritionTargets(protein: value)
-                case .carbsTarget: model.setNutritionTargets(carbs: value)
-                default: model.setNutritionTargets(fat: value)
-                }
-            }
-        )
-    }
-
+    /// The aim, the body and the activity: the daily needs are calculated from them (no number to type
+    /// first), then each one can be changed by hand in the card below.
     @ViewBuilder private var nutrition: some View {
         QuestionCard(title: tr("Ton objectif")) {
             FlowLayout {
                 ForEach(NutritionAim.allCases) { aim in
                     ChoiceChip(title: aim.title, isSelected: profile.nutritionAim == aim) { toggle(\.nutritionAim, aim) }
+                        .accessibilityIdentifier("nutrition-aim-\(aim.rawValue)")
                 }
             }
         }
-        QuestionCard(title: tr("Par jour"), detail: tr("Laisse vide ce que tu ne sais pas : Ardane peut le calculer.")) {
-            VStack(spacing: 8) {
-                ProfileNumberField(title: tr("Calories"), unit: "kcal", value: targetBinding(.kcalTarget, \.kcal), decimals: false, identifier: "target-kcal")
-                HStack(spacing: 8) {
-                    ProfileNumberField(title: tr("Protéines"), unit: "g", value: targetBinding(.proteinTarget, \.protein), decimals: false, identifier: "target-protein")
-                    ProfileNumberField(title: tr("Glucides"), unit: "g", value: targetBinding(.carbsTarget, \.carbs), decimals: false, identifier: "target-carbs")
-                    ProfileNumberField(title: tr("Lipides"), unit: "g", value: targetBinding(.fatTarget, \.fat), decimals: false, identifier: "target-fat")
-                }
-            }
-        }
-        calculation
-    }
-
-    /// Mifflin-St Jeor from the profile: asks only for what is missing.
-    private var calculation: some View {
-        let activity = model.activityFromWorkouts ?? calculationActivity
-        let result = activity.flatMap { model.calculatedNutritionGoals(activity: $0) }
-        return QuestionCard(title: tr("Calculer pour moi"), detail: tr("Estimation à partir de ton âge, ta taille, ton poids et ton activité. Ce n'est pas un avis médical.")) {
+        QuestionCard(title: tr("Toi"), detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Pour calculer tes besoins. Le poids sert aussi à Fitness.")) {
             VStack(alignment: .leading, spacing: 10) {
-                // Shown when something was missing as the card appeared, and kept while the user types
-                // (a field never disappears under their fingers).
-                if asksBody {
-                    bodyFields()
-                }
+                bodyFields()
                 GenderPicker()
-                if model.activityFromWorkouts == nil {
-                    FlowLayout {
-                        ForEach(NutritionCalculator.Activity.allCases) { level in
-                            ChoiceChip(title: level.title, isSelected: calculationActivity == level) {
-                                calculationActivity = calculationActivity == level ? nil : level
-                            }
-                        }
-                    }
-                }
-                Button {
-                    if let result, let activity { model.setNutritionGoals(result, calculatedWith: activity) }
-                } label: {
-                    Label(tr("Calculer mes objectifs"), systemImage: "wand.and.stars")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.onAccent)
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                }
-                .buttonStyle(.borderedProminent)
-                .buttonBorderShape(.roundedRectangle(radius: 12))
-                .disabled(result == nil)
-                .accessibilityIdentifier("calculate-targets")
             }
         }
+        QuestionCard(title: tr("Ton activité"), detail: model.activityFromWorkouts != nil && profile.calculatedActivity == nil
+                     ? tr("D'après tes séances par semaine. Choisis-en une autre si elle te ressemble plus.")
+                     : tr("Ton activité physique habituelle, sport compris.")) {
+            FlowLayout {
+                ForEach(NutritionCalculator.Activity.allCases) { level in
+                    let isOn = (profile.calculatedActivity ?? model.activityFromWorkouts) == level
+                    ChoiceChip(title: level.title, isSelected: isOn) {
+                        model.setNutritionActivity(profile.calculatedActivity == level ? nil : level)
+                    }
+                    .accessibilityIdentifier("nutrition-activity-\(Int(level.rawValue * 1_000))")
+                }
+            }
+        }
+        NutritionTargetsCard()
     }
 
     // MARK: Money
@@ -508,10 +467,12 @@ struct TopicForm: View {
                 )
             }
         }
-        QuestionCard(title: tr("Une tâche pour commencer"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr("tâche à faire"), tr("tâches à faire"))) {
-            quickAdd(placeholder: tr("Ex. : appeler le garage"), text: $newTask, identifier: "first-task") {
-                model.updateContent { $0.tasks.append(TaskItem(title: newTask.trimmed)) }
-                newTask = ""
+        if !inMiniApp {
+            QuestionCard(title: tr("Une tâche pour commencer"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr("tâche à faire"), tr("tâches à faire"))) {
+                quickAdd(placeholder: tr("Ex. : appeler le garage"), text: $newTask, identifier: "first-task") {
+                    model.updateContent { $0.tasks.append(TaskItem(title: newTask.trimmed)) }
+                    newTask = ""
+                }
             }
         }
     }
@@ -567,6 +528,15 @@ struct TopicForm: View {
                 value: Binding(get: { model.odometer }, set: { model.setOdometer($0) }),
                 decimals: false, identifier: "car-km"
             )
+        }
+        if inMiniApp {
+            QuestionCard(title: tr("Réservoir"), detail: tr("Dans le manuel ou sur le site du constructeur : il sert à estimer l'autonomie après un plein complet.")) {
+                ProfileNumberField(
+                    title: tr("Capacité"), unit: "L",
+                    value: Binding(get: { model.car.tankLiters }, set: { liters in model.update(\.car) { $0.tankLiters = liters } }),
+                    identifier: "car-tank"
+                )
+            }
         }
     }
 

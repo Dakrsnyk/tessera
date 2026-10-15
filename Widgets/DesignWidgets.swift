@@ -27,140 +27,75 @@ struct DesignWidgetEntryView: View {
     }
 }
 
-private func designConfiguration(_ kind: WidgetKind) -> some WidgetConfiguration {
+/// Lock Screen sizes only: the Home Screen gallery shows « Mes widgets » alone (the person's own widgets).
+private func lockScreenFamilies(_ families: [WidgetFamily]) -> [WidgetFamily] {
+    families.filter { $0 == .accessoryCircular || $0 == .accessoryRectangular || $0 == .accessoryInline }
+}
+
+/// One of the essentials of a mini-app on the Lock Screen. The identifiers are those of the widgets of
+/// earlier versions, so the ones already on the Lock Screen stay.
+private func lockConfiguration(_ kind: WidgetKind) -> some WidgetConfiguration {
     AppIntentConfiguration(kind: kind.widgetKindID, intent: DesignWidgetIntent.self, provider: DesignProvider(kind: kind)) { entry in
         DesignWidgetEntryView(entry: entry)
     }
     .configurationDisplayName(kind.title)
     .description(kind.summary)
-    .supportedFamilies(kind.families)
+    .supportedFamilies(lockScreenFamilies(kind.families))
     .contentMarginsDisabled()
 }
 
-struct ClockWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.clock) }
-}
-
-struct CalendarWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.calendar) }
-}
-
-struct WorldClockWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.worldClock) }
-}
-
-struct ProgressWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.progress) }
-}
-
-struct CountdownWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.countdown) }
-}
-
-struct YearDotsWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.yearDots) }
-}
-
-struct TasksWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.tasks) }
-}
-
-struct HabitsWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.habits) }
-}
-
-struct FocusWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.focus) }
-}
-
-struct UpNextWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.upNext) }
-}
-
-struct NoteWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.note) }
-}
-
-struct WeatherWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.weather) }
-}
-
-struct CryptoWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.crypto) }
-}
-
-struct MoneyFlowWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.moneyFlow) }
-}
-
-// MARK: - V2 group widgets
-
-private func groupConfiguration(_ group: WidgetGroup) -> some WidgetConfiguration {
+private func lockConfiguration(_ group: WidgetGroup, title: String) -> some WidgetConfiguration {
     AppIntentConfiguration(kind: group.kindID, intent: DesignWidgetIntent.self, provider: DesignProvider(kind: group.flagship, group: group)) { entry in
         DesignWidgetEntryView(entry: entry)
     }
-    .configurationDisplayName(group.title)
+    .configurationDisplayName(title)
     .description(group.summary)
-    .supportedFamilies(group.families)
+    .supportedFamilies(lockScreenFamilies(group.families))
     .contentMarginsDisabled()
 }
 
-struct DatesGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.dates) }
+// MARK: - The essentials of each mini-app, on the Lock Screen
+
+struct NutritionLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.nutrition, title: tr("Nutrition")) }
 }
 
-struct SkyGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.sky) }
+struct FitnessLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.fitness, title: tr("Fitness")) }
 }
 
-struct FocusGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.focus) }
+struct PlanningLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.student, title: tr("Planning")) }
 }
 
-struct HabitsGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.habitsPlus) }
+struct TasksLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.tasks) }
 }
 
-struct NutritionGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.nutrition) }
+struct UpNextLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.upNext) }
 }
 
-struct FitnessGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.fitness) }
+struct HabitsLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.habitsPlus, title: tr("Habitudes")) }
 }
 
-struct BudgetGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.budget) }
+struct FinancesLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.budget, title: tr("Finances")) }
 }
 
-struct InvestingGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.investing) }
+struct BusinessLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.business, title: tr("Business")) }
 }
 
-struct BusinessGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.business) }
+struct TravelLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.travel, title: tr("Voyage")) }
 }
 
-struct CompaniesGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.companies) }
+struct CarLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.car, title: tr("Auto")) }
 }
 
-struct StudentGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.student) }
-}
-
-struct TravelGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.travel) }
-}
-
-struct CarGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.car) }
-}
-
-struct DashboardsGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.dashboards) }
-}
-
-struct InsightsGroupWidget: Widget {
-    var body: some WidgetConfiguration { groupConfiguration(.insights) }
+struct WeatherLockWidget: Widget {
+    var body: some WidgetConfiguration { lockConfiguration(.weather) }
 }

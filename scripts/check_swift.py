@@ -209,7 +209,7 @@ def check_kinds():
     for kind in kinds:
         if described.count(kind) != 1:
             problems.append(f"KindCatalog describes .{kind} {described.count(kind)} times")
-    original = ["clock", "calendar", "worldClock", "progress", "countdown", "yearDots", "tasks", "habits", "focus", "upNext", "note", "weather", "crypto", "moneyFlow", "hydration"]
+    original = ["clock", "calendar", "worldClock", "progress", "countdown", "yearDots", "tasks", "habits", "focus", "upNext", "note", "weather", "crypto", "moneyFlow", "hydration", "photos", "quote"]
     group_path = os.path.normpath(os.path.join(ROOT, "Shared/Model/WidgetGroup.swift"))
     if group_path in FILES:
         groups = strip_comments(FILES[group_path])

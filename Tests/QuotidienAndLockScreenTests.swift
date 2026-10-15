@@ -66,21 +66,34 @@ final class QuotidienAndLockScreenTests: XCTestCase {
         XCTAssertLessThan(model.nutrition.goals.kcal, first.kcal)
         XCTAssertEqual(model.nutrition.goals.protein, (78 * 1.6).rounded())
 
-        // A target typed by hand is the user's own: a later weight no longer changes it.
+        // A target typed by hand is the user's own (« Personnalisé »): a later weight no longer changes it,
+        // while the others keep following, the macronutrients after the typed calories.
         model.setNutritionTargets(kcal: 2_600)
-        XCTAssertNil(model.profile.calculatedActivity)
+        XCTAssertTrue(model.profile.customTargets.contains(.kcal))
+        XCTAssertTrue(model.profile.followsNutritionCalculation)
         model.setWeight(75)
         XCTAssertEqual(model.nutrition.goals.kcal, 2_600)
+        XCTAssertEqual(model.nutrition.goals.protein, (75 * 1.6).rounded(), "The protein still follows the weight")
+        XCTAssertEqual(model.nutrition.goals.fat, (2_600 * 0.28 / 9).rounded(), "The fat follows the typed calories")
+        // Back to the calculation.
+        model.resetNutritionTarget(.kcal)
+        XCTAssertLessThan(model.nutrition.goals.kcal, first.kcal)
+        XCTAssertFalse(model.profile.customTargets.contains(.kcal))
     }
 
-    func testEveryMiniAppOffersItsOwnSettings() {
-        for app in MiniApp.allCases {
-            XCTAssertFalse(app.settingsItems.isEmpty, "\(app) has nothing to change")
+    /// « Mes infos » of each mini-app: its questions, never a second copy of what its page already shows.
+    func testEveryMiniAppHasItsInfoWithoutRepeats() {
+        for app in MiniApp.allCases where app != .photos {
+            XCTAssertTrue(app.hasInfo, "\(app) has nothing in « Mes infos »")
         }
         XCTAssertEqual(MiniApp.nutrition.settingsTopic, .nutrition)
         XCTAssertEqual(MiniApp.fitness.settingsTopic, .sport)
-        XCTAssertTrue(MiniApp.nutrition.settingsItems.contains(.weight))
-        XCTAssertTrue(MiniApp.fitness.settingsItems.contains(.routines))
+        // The workouts per week and the weight are asked by the sport questions: not repeated below them.
+        XCTAssertFalse(MiniApp.fitness.settingsItems.contains(.weeklyWorkouts))
+        XCTAssertFalse(MiniApp.fitness.settingsItems.contains(.weight))
+        XCTAssertFalse(MiniApp.fitness.settingsItems.contains(.routines), "The program is on the Fitness page")
+        XCTAssertTrue(MiniApp.nutrition.settingsItems.isEmpty, "The needs are in the nutrition questions")
+        XCTAssertFalse(MiniApp.planning.settingsItems.contains(.priorities), "The top 3 is on the Planning page")
     }
 
     // MARK: Mon Quotidien cards

@@ -1,6 +1,19 @@
 import Charts
 import SwiftUI
 
+/// What « Ajouter » does on an exercise sheet opened while choosing an exercise for the session in
+/// progress: the exercise goes straight into it (no « which session? »).
+private struct ExercisePickKey: EnvironmentKey {
+    static let defaultValue: ((ExerciseInfo) -> Void)? = nil
+}
+
+extension EnvironmentValues {
+    var exercisePick: ((ExerciseInfo) -> Void)? {
+        get { self[ExercisePickKey.self] }
+        set { self[ExercisePickKey.self] = newValue }
+    }
+}
+
 /// The exercise library: search as you type (names, other names, muscles, equipment), filters,
 /// favorites, recent and frequent exercises, and « Mes exercices ». Picking mode adds to a session.
 struct ExerciseLibraryPage: View {
@@ -10,6 +23,9 @@ struct ExerciseLibraryPage: View {
     @State private var filters = ExerciseLibrary.Filters()
     @State private var info: ExerciseInfo?
     @State private var creating = false
+    @State private var paywall: PaywallContext?
+    /// Exercises already used, open without Premium (computed once per drawing).
+    @State private var owned: Set<String> = []
 
     init(onPick: ((ExerciseInfo) -> Void)? = nil) {
         self.onPick = onPick
@@ -26,6 +42,33 @@ struct ExerciseLibraryPage: View {
                     .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
             }
             .listRowBackground(Color.clear)
+
+            if !model.isPremium {
+                Section {
+                    Button {
+                        paywall = .exerciseLibrary
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "lock.open.fill")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundStyle(Color.premiumInk)
+                                .frame(width: 36, height: 36)
+                                .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(tr("\(ExerciseLibrary.freeCount) exercices offerts sur \(ExerciseLibrary.all.count)"))
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(Color.primary)
+                                Text(tr("Toute la bibliothèque, ses démonstrations et ses alternatives avec Premium. Ceux que tu as déjà faits restent à toi."))
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("library-premium")
+                }
+            }
 
             if isBrowsing {
                 shortcut(tr("Favoris"), ids: state.favoriteExercises)
@@ -87,10 +130,14 @@ struct ExerciseLibraryPage: View {
         .navigationBarTitleDisplayMode(onPick == nil ? .large : .inline)
         .sheet(item: $info) { exercise in
             ExerciseInfoSheet(exercise: exercise)
+                .environment(\.exercisePick, onPick)
         }
         .sheet(isPresented: $creating) {
             CustomExerciseEditor()
         }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
+        .onAppear { owned = model.ownedExerciseIDs }
+        .onChange(of: model.fitness) { _, _ in owned = model.ownedExerciseIDs }
     }
 
     // MARK: Filters
@@ -160,9 +207,25 @@ struct ExerciseLibraryPage: View {
 
     private func row(_ exercise: ExerciseInfo) -> some View {
         let isFavorite = model.fitness.favoriteExercises.contains(exercise.id)
+        let isOpen = model.canOpenExercise(exercise.id, owned: owned)
         return HStack(spacing: 10) {
             Group {
-                if let onPick {
+                if !isOpen {
+                    // Shown, to see what the library holds; opened with Premium.
+                    Button {
+                        paywall = .exerciseLibrary
+                    } label: {
+                        HStack {
+                            ExerciseRowLabel(exercise: exercise)
+                                .opacity(0.6)
+                            Image(systemName: "lock.fill")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(Color.premiumInk)
+                        }
+                    }
+                    .buttonStyle(.borderless)
+                    .accessibilityLabel(Text(tr("\(exercise.name), Premium")))
+                } else if let onPick {
                     Button {
                         onPick(exercise)
                     } label: {
@@ -177,7 +240,7 @@ struct ExerciseLibraryPage: View {
             }
             .accessibilityIdentifier("exercise-row")
             Button {
-                info = exercise
+                if isOpen { info = exercise } else { paywall = .exerciseLibrary }
             } label: {
                 Image(systemName: "info.circle")
                     .font(.title3)
@@ -240,8 +303,18 @@ struct ExerciseDetailView: View {
     let exercise: ExerciseInfo
     var inSheet = false
     @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
+    @Environment(\.exercisePick) private var exercisePick
+    @Environment(\.dismiss) private var dismiss
     @State private var adding = false
+    @State private var addedToSession = false
     @State private var alternative: ExerciseInfo?
+    @State private var paywall: PaywallContext?
+
+    /// The session in progress, if any: « Ajouter » puts the exercise straight into it.
+    private var activeSession: WorkoutSession? {
+        model.fitness.active.flatMap { $0.isFinished ? nil : $0 }
+    }
 
     private var accentHex: String { MiniApp.fitness.colorHex }
 
@@ -320,7 +393,7 @@ struct ExerciseDetailView: View {
                             Group {
                                 if inSheet {
                                     Button {
-                                        alternative = other
+                                        if model.canOpenExercise(other.id) { alternative = other } else { paywall = .exerciseLibrary }
                                     } label: {
                                         MiniRow(symbol: other.pattern == exercise.pattern ? "arrow.triangle.branch" : "arrow.left.arrow.right", colorHex: accentHex,
                                                 title: other.name, detail: other.pattern == exercise.pattern ? tr("Variante") : tr("Mêmes muscles"))
@@ -347,12 +420,30 @@ struct ExerciseDetailView: View {
         .safeAreaInset(edge: .bottom) {
             VStack(spacing: 0) {
                 Divider()
-                MiniActionButton(title: tr("Ajouter à ma séance"), symbol: "plus", colorHex: accentHex) {
-                    adding = true
+                if addedToSession, let session = activeSession {
+                    HStack(spacing: 10) {
+                        Label(tr("Ajouté à « \(session.routineName) »"), systemImage: "checkmark.circle.fill")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Color(hex: accentHex))
+                            .lineLimit(1)
+                        Spacer(minLength: 8)
+                        if !inSheet {
+                            Button(tr("Voir la séance")) { router.homePath.append(.page(.fitnessSession)) }
+                                .font(.subheadline.weight(.semibold))
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .frame(minHeight: 50)
+                    .padding(.vertical, 10)
+                    .accessibilityIdentifier("exercise-added")
+                } else {
+                    MiniActionButton(title: activeSession == nil ? tr("Ajouter à une séance") : tr("Ajouter à ma séance"), symbol: "plus", colorHex: accentHex) {
+                        add()
+                    }
+                    .accessibilityIdentifier("exercise-add")
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
                 }
-                .accessibilityIdentifier("exercise-add")
-                .padding(.horizontal, 20)
-                .padding(.vertical, 10)
             }
             .background(.bar)
         }
@@ -373,11 +464,31 @@ struct ExerciseDetailView: View {
         .sheet(isPresented: $adding) {
             AddToRoutineSheet(exercise: exercise)
         }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
         .navigationDestination(item: $alternative) { other in
             ExerciseDetailView(exercise: other, inSheet: true)
         }
         .onAppear {
             model.update(\.fitness) { $0.noteUsed(exercise.id) }
+        }
+    }
+
+    /// During a session: straight into it (the session of the picker when it opened this sheet). Otherwise
+    /// the choice of a session of the program.
+    private func add() {
+        if let exercisePick {
+            exercisePick(exercise)
+            dismiss()
+        } else if activeSession != nil {
+            let template = FitnessMath.sessionTemplate(for: exercise, model.fitness)
+            model.update(\.fitness) { state in
+                state.active?.append(template)
+                state.noteUsed(exercise.id)
+            }
+            Haptics.success()
+            withAnimation(.snappy) { addedToSession = true }
+        } else {
+            adding = true
         }
     }
 
@@ -445,7 +556,11 @@ struct ExerciseDetailView: View {
                         MiniStat(title: tr("Volume"), value: TF.int(last.volume), unit: tr("kg"), detail: tr("dernière séance"))
                         MiniStat(title: tr("Fréquence"), value: "\(recent)", unit: "×", detail: tr("en 30 jours"))
                     }
-                    if history.count >= 3 {
+                    if history.count >= 3, !model.isPremium {
+                        Label(tr("L'évolution de tes charges sur cet exercice est dans Premium."), systemImage: "lock.fill")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else if history.count >= 3 {
                         Chart {
                             ForEach(history) { session in
                                 LineMark(x: .value("Date", session.date), y: .value("Charge", session.topWeight))
@@ -560,5 +675,32 @@ struct CustomExerciseEditor: View {
     private func save() {
         let custom = CustomExercise(name: name.trimmed, muscle: muscle, equipment: equipment, type: type, notes: notes.trimmed)
         model.update(\.fitness) { $0.customExercises.insert(custom, at: 0) }
+    }
+}
+
+// MARK: - Premium
+
+/// An exercise page: its sheet when it is open to the person (Premium, offered, or already used),
+/// else what it is and the way to Premium. Nothing the person did is ever locked.
+struct ExerciseGate: View {
+    let exercise: ExerciseInfo
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if model.canOpenExercise(exercise.id) {
+            ExerciseDetailView(exercise: exercise)
+        } else {
+            MiniAppScroll {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(exercise.name).font(.title2.weight(.bold))
+                    Text(exercise.summary).font(.subheadline).foregroundStyle(.secondary)
+                }
+                PremiumLockCard(symbol: "books.vertical.fill", title: tr("Cet exercice est dans Premium"),
+                                message: tr("Sa démonstration, sa technique et ses alternatives, comme les \(ExerciseLibrary.all.count) exercices de la bibliothèque. \(ExerciseLibrary.freeCount) exercices sont offerts."),
+                                perk: .exercises)
+            }
+            .navigationTitle(exercise.name)
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }

@@ -34,7 +34,7 @@ struct FitnessSessionPage: View {
         .sheet(isPresented: $picking) {
             NavigationStack {
                 ExerciseLibraryPage { picked in
-                    let template = ExerciseTemplate(name: picked.name, sets: 3, reps: 10, weight: 0, exerciseID: picked.id)
+                    let template = FitnessMath.sessionTemplate(for: picked, model.fitness)
                     model.update(\.fitness) { state in
                         state.active?.append(template)
                         state.noteUsed(picked.id)

@@ -3,7 +3,7 @@ import SwiftUI
 /// The mini-apps reached from Home: each one is a whole part of Ardane (a dashboard, then its
 /// sections), built on the same data as the widgets, « Mes informations » and the spaces of Créer.
 enum MiniApp: String, CaseIterable, Identifiable, Hashable {
-    case nutrition, fitness, planning, finances, business, travel, car, weather
+    case nutrition, fitness, planning, finances, business, travel, car, weather, photos
     var id: String { rawValue }
 
     var title: String {
@@ -16,6 +16,7 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .travel: tr("Voyage")
         case .car: tr("Auto")
         case .weather: tr("Météo")
+        case .photos: tr("Photos et citations")
         }
     }
 
@@ -29,6 +30,7 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .travel: "airplane"
         case .car: "car.fill"
         case .weather: "cloud.sun.fill"
+        case .photos: "photo.on.rectangle.angled"
         }
     }
 
@@ -42,6 +44,7 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .travel: "12A4B5"
         case .car: "6B7280"
         case .weather: "3A8DDE"
+        case .photos: "D9608B"
         }
     }
 
@@ -57,7 +60,7 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
         case .business: .business
         case .travel: .travel
         case .car: .car
-        case .weather: nil
+        case .weather, .photos: nil
         }
     }
 
@@ -154,6 +157,8 @@ struct MiniAppView: View {
             CarAppView()
         case .weather:
             WeatherAppView()
+        case .photos:
+            PhotoQuotesAppView()
         }
     }
 }
@@ -174,7 +179,7 @@ struct MiniAppPageView: View {
         case .fitnessLibrary: ExerciseLibraryPage()
         case let .fitnessExercise(id):
             if let exercise = ExerciseLibrary.info(id) {
-                ExerciseDetailView(exercise: exercise)
+                ExerciseGate(exercise: exercise)
             } else {
                 ContentUnavailableView(tr("Exercice introuvable"), systemImage: "dumbbell")
             }

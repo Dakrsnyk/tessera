@@ -16,7 +16,7 @@ struct PaywallContext: Identifiable {
 
 /// The advantages listed on the paywall.
 enum PaywallPerk: CaseIterable {
-    case widgets, smart, packs, styles, history, photo
+    case widgets, smart, packs, styles, history, exercises, photo
 }
 
 extension PaywallContext {
@@ -60,6 +60,21 @@ extension PaywallContext {
             detail: tr("Tout ce que tu notes est gardé. Premium affiche les mois d'avant et l'évolution de tes finances sur six mois."),
             perk: .history
         )
+    }
+
+    /// The whole exercise library of Fitness.
+    static var exerciseLibrary: PaywallContext {
+        PaywallContext(
+            symbol: "books.vertical.fill",
+            title: tr("Toute la bibliothèque d'exercices"),
+            detail: tr("\(ExerciseLibrary.all.count) exercices avec leur démonstration, leur technique et leurs alternatives. \(ExerciseLibrary.freeCount) sont offerts, et ceux que tu as déjà faits restent à toi."),
+            perk: .exercises
+        )
+    }
+
+    /// The detailed statistics of a mini-app.
+    static func statistics(_ title: String, detail: String) -> PaywallContext {
+        PaywallContext(symbol: "chart.xyaxis.line", title: title, detail: detail, perk: .history)
     }
 
     /// A ready-made Home Screen of the Store.

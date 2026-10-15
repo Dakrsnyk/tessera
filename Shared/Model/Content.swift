@@ -135,6 +135,40 @@ struct Habit: Codable, Identifiable, Hashable {
         }
     }
 
+    /// How regular the habit is over the last `days` days (today included): the days done out of the days
+    /// since it was first done, when that is later. Nil before the first day done (nothing made up).
+    func regularity(days: Int, asOf date: Date = Date()) -> (done: Int, total: Int)? {
+        guard let first = completedDays.compactMap(DateMath.date(fromKey:)).min() else { return nil }
+        let today = DateMath.startOfDay(date)
+        let windowStart = DateMath.calendar.date(byAdding: .day, value: -(days - 1), to: today) ?? today
+        let start = max(windowStart, first)
+        guard start <= today else { return nil }
+        let total = DateMath.daysBetween(start, today) + 1
+        let keys = Set(completedDays)
+        let done = (0..<total).filter { offset in
+            DateMath.calendar.date(byAdding: .day, value: offset, to: start).map { keys.contains(DateMath.dayKey($0)) } ?? false
+        }.count
+        return (done, total)
+    }
+
+    /// The longest run of days in a row it was done.
+    var bestStreak: Int {
+        let days = Set(completedDays.compactMap(DateMath.date(fromKey:)))
+        var best = 0
+        for day in days {
+            // Only from the start of a run.
+            guard let before = DateMath.calendar.date(byAdding: .day, value: -1, to: day), !days.contains(before) else { continue }
+            var length = 1
+            var cursor = day
+            while let next = DateMath.calendar.date(byAdding: .day, value: 1, to: cursor), days.contains(next) {
+                length += 1
+                cursor = next
+            }
+            best = max(best, length)
+        }
+        return best
+    }
+
     /// Consecutive completed days ending today (or yesterday if today isn't done yet).
     func streak(asOf date: Date = Date()) -> Int {
         var day = isDone(on: date) ? date : DateMath.calendar.date(byAdding: .day, value: -1, to: date) ?? date

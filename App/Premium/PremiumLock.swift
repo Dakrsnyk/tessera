@@ -6,7 +6,8 @@ struct PremiumLockCard: View {
     let symbol: String
     let title: String
     let message: String
-    @Environment(Router.self) private var router
+    var perk: PaywallPerk = .history
+    @State private var paywall: PaywallContext?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -25,8 +26,8 @@ struct PremiumLockCard: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             Button {
-                // The paywall starts with this card's own words.
-                router.showPaywall(PaywallContext(symbol: symbol, title: title, detail: message, perk: .history))
+                // The paywall starts with this card's own words (over a sheet too).
+                paywall = PaywallContext(symbol: symbol, title: title, detail: message, perk: perk)
             } label: {
                 Label(tr("Découvrir Premium"), systemImage: "sparkles")
                     .font(.subheadline.weight(.semibold))
@@ -38,6 +39,7 @@ struct PremiumLockCard: View {
         .card()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("premium-lock")
+        .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 }
 

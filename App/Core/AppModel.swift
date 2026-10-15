@@ -264,6 +264,7 @@ final class AppModel {
     func delete(_ design: WidgetDesign) {
         designs.removeAll { $0.id == design.id }
         if case let .photo(name) = design.background { ImageStore.delete(named: name) }
+        for photo in design.options.photos { ImageStore.delete(named: photo.file) }
         store.designs = designs
         NotificationScheduler.cancelCountdownReminder(for: design.id)
         scheduleWidgetReload()
@@ -275,6 +276,7 @@ final class AppModel {
         guard !ids.isEmpty else { return }
         for design in designs where ids.contains(design.id) {
             if case let .photo(name) = design.background { ImageStore.delete(named: name) }
+            for photo in design.options.photos { ImageStore.delete(named: photo.file) }
             NotificationScheduler.cancelCountdownReminder(for: design.id)
         }
         designs.removeAll { ids.contains($0.id) }
@@ -292,6 +294,13 @@ final class AppModel {
         copy.isFavorite = false
         if case let .photo(name) = design.background, let image = ImageStore.image(named: name), let newName = ImageStore.save(image) {
             copy.background = .photo(newName)
+        }
+        // A photo widget's copy gets its own copies of the photos (deleting one never empties the other).
+        copy.options.photos = design.options.photos.map { slot in
+            var copied = slot
+            copied.id = UUID()
+            if let image = ImageStore.image(named: slot.file), let newName = ImageStore.save(image, maxDimension: 1_200) { copied.file = newName }
+            return copied
         }
         save(copy)
         return copy
@@ -589,6 +598,7 @@ final class AppModel {
     func resetAllData() {
         for design in designs {
             if case let .photo(name) = design.background { ImageStore.delete(named: name) }
+            for photo in design.options.photos { ImageStore.delete(named: photo.file) }
         }
         designs = []
         content = ContentState()
@@ -632,6 +642,26 @@ final class AppModel {
         crypto = [:]
         NotificationScheduler.cancelAll()
         scheduleWidgetReload()
+    }
+}
+
+// MARK: - Premium access
+
+extension AppModel {
+    /// The library exercises the person already uses (a routine, the session in progress, a session done,
+    /// a favorite): they stay open without Premium.
+    var ownedExerciseIDs: Set<String> {
+        var ids = Set(fitness.favoriteExercises)
+        ids.formUnion(fitness.routines.flatMap(\.exercises).compactMap(\.exerciseID))
+        ids.formUnion(fitness.active?.exercises.compactMap(\.exerciseID) ?? [])
+        let names = Set(FitnessMath.sessions(fitness).flatMap(\.sets).map(\.exercise))
+        ids.formUnion(names.compactMap { ExerciseLibrary.match(name: $0)?.id })
+        return ids
+    }
+
+    /// Whether an exercise sheet opens: Premium, one of the essentials offered, or one already used.
+    func canOpenExercise(_ id: String, owned: Set<String>? = nil) -> Bool {
+        ExerciseLibrary.isOpen(id, isPremium: isPremium, owned: owned ?? ownedExerciseIDs)
     }
 }
 
@@ -726,47 +756,127 @@ extension AppModel {
         update(\.profile) { $0.provided.formUnion(facts) }
     }
 
-    /// The daily nutrition targets, kept by the Nutrition space. Nil leaves a target as it was.
+    /// The daily nutrition targets typed by hand (« Mes infos »). Nil leaves a target as it was.
     func setNutritionTargets(kcal: Double? = nil, protein: Double? = nil, carbs: Double? = nil, fat: Double? = nil) {
-        update(\.nutrition) { state in
-            if let kcal { state.goals.kcal = max(0, kcal) }
-            if let protein { state.goals.protein = max(0, protein) }
-            if let carbs { state.goals.carbs = max(0, carbs) }
-            if let fat { state.goals.fat = max(0, fat) }
+        let typed: [(NutritionTarget, Double?)] = [(.kcal, kcal), (.protein, protein), (.carbs, carbs), (.fat, fat)]
+        for (target, value) in typed where value != nil {
+            setNutritionTarget(target, value)
         }
-        var facts: [ProvidedFact] = []
-        if kcal != nil { facts.append(.kcalTarget) }
-        if protein != nil { facts.append(.proteinTarget) }
-        if carbs != nil { facts.append(.carbsTarget) }
-        if fat != nil { facts.append(.fatTarget) }
-        // A target typed by hand is the user's own: it no longer follows the calculation.
-        if !facts.isEmpty { update(\.profile) { $0.provided.formUnion(facts); $0.calculatedActivity = nil } }
     }
 
-    /// Targets the user set or accepted. `calculatedWith` is the activity of « Calculer pour moi »:
-    /// such targets are then recalculated whenever the body data they come from changes.
+    /// A target typed by hand. While the targets follow the calculation, it stays as typed (« Personnalisé »)
+    /// and the others keep following; the macronutrients then follow typed calories. Nil gives it back to the
+    /// calculation (or, without the calculation, makes it unknown again).
+    func setNutritionTarget(_ target: NutritionTarget, _ value: Double?) {
+        let auto = profile.followsNutritionCalculation
+        guard let value else {
+            if auto {
+                resetNutritionTarget(target)
+            } else if let fact = target.providedFact {
+                forget(fact)
+            }
+            return
+        }
+        update(\.nutrition) { $0.goals[target] = max(0, value) }
+        update(\.profile) { profile in
+            profile.nutritionAuto = auto
+            if auto { profile.customTargets.insert(target) }
+            if let fact = target.providedFact { profile.provided.insert(fact) }
+        }
+    }
+
+    /// Back to the calculated value.
+    func resetNutritionTarget(_ target: NutritionTarget) {
+        update(\.profile) { profile in
+            profile.nutritionAuto = true
+            profile.customTargets.remove(target)
+        }
+    }
+
+    /// Targets that follow the calculation (on), or stay as they are now, the person's own (off).
+    func setNutritionCalculation(_ on: Bool) {
+        update(\.profile) { profile in
+            profile.nutritionAuto = on
+            if on { profile.customTargets = [] }
+        }
+        if !on { markProvided(.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget) }
+    }
+
+    /// The activity level of the calculation: the one chosen, else the one of the workouts per week.
+    func setNutritionActivity(_ activity: NutritionCalculator.Activity?) {
+        update(\.profile) { $0.calculatedActivity = activity }
+    }
+
+    /// Targets the user set or accepted at once. `calculatedWith` is an activity of the calculation: the
+    /// targets then follow the body data they come from.
     func setNutritionGoals(_ goals: NutritionGoals, calculatedWith activity: NutritionCalculator.Activity? = nil) {
         update(\.nutrition) { $0.goals = goals }
-        markProvided(.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget)
-        if profile.calculatedActivity != activity {
-            update(\.profile) { $0.calculatedActivity = activity }
+        update(\.profile) { profile in
+            profile.provided.formUnion([.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget])
+            profile.nutritionAuto = activity != nil
+            profile.customTargets = []
+            if let activity { profile.calculatedActivity = activity }
         }
     }
 
-    /// Recalculates targets that came from the calculator, when what they depend on changed.
+    /// Recalculates the targets that follow the calculation, when what they depend on changed (the body, the
+    /// aim, the activity, the workouts per week). Targets typed by hand stay; calories typed by hand lead the
+    /// macronutrients.
     func followCalculatedNutritionGoals() {
-        guard let stored = profile.calculatedActivity else { return }
-        let activity = activityFromWorkouts ?? stored
-        guard let fresh = calculatedNutritionGoals(activity: activity) else { return }
-        let current = nutrition.goals
-        guard fresh.kcal != current.kcal || fresh.protein != current.protein || fresh.carbs != current.carbs || fresh.fat != current.fat else { return }
-        var goals = current
-        goals.kcal = fresh.kcal
-        goals.protein = fresh.protein
-        goals.carbs = fresh.carbs
-        goals.fat = fresh.fat
-        nutrition.goals = goals
-        store.save(nutrition)
+        guard profile.followsNutritionCalculation, let fresh = recommendedNutritionGoals() else { return }
+        var goals = nutrition.goals
+        for target in NutritionTarget.allCases where !profile.customTargets.contains(target) {
+            goals[target] = fresh[target]
+        }
+        if goals != nutrition.goals {
+            nutrition.goals = goals
+            store.save(nutrition)
+            scheduleWidgetReload()
+        }
+        // Calculated from the person's own body: every widget counts them as theirs, and they keep following
+        // the calculation once given (the mode is kept, not guessed again).
+        let facts: Set<ProvidedFact> = [.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget]
+        if profile.nutritionAuto == nil || !facts.isSubset(of: profile.provided) {
+            update(\.profile) { profile in
+                profile.nutritionAuto = true
+                profile.provided.formUnion(facts)
+            }
+        }
+    }
+
+    /// The targets the calculation recommends now, with calories typed by hand leading the macronutrients
+    /// (`followingTypedCalories`). Nil until the age, the height, the weight and the gender are known.
+    func recommendedNutritionGoals(followingTypedCalories: Bool = true) -> NutritionGoals? {
+        guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.calculatorSex else { return nil }
+        let typed = followingTypedCalories && profile.customTargets.contains(.kcal) ? nutrition.goals.kcal : nil
+        return NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight,
+                                         activity: nutritionActivity, goal: nutritionGoal, kcal: typed)
+    }
+
+    /// The steps of the calculation, for « Comment c'est calculé ».
+    var nutritionBreakdown: NutritionCalculator.Breakdown? {
+        guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.calculatorSex else { return nil }
+        return NutritionCalculator.breakdown(sex: sex, age: age, heightCm: height, weightKg: weight, activity: nutritionActivity, goal: nutritionGoal)
+    }
+
+    /// What the calculation still needs, in the order the questions are asked.
+    var nutritionCalculationMissing: [String] {
+        var missing: [String] = []
+        if age == nil { missing.append(tr("ton âge")) }
+        if profile.heightCm == nil { missing.append(tr("ta taille")) }
+        if profile.weightKg == nil { missing.append(tr("ton poids")) }
+        if profile.calculatorSex == nil { missing.append(tr("ton genre")) }
+        return missing
+    }
+
+    /// The activity of the calculation: the one chosen, else the workouts per week, else light.
+    var nutritionActivity: NutritionCalculator.Activity {
+        profile.calculatedActivity ?? activityFromWorkouts ?? .light
+    }
+
+    /// The aim of the calculation: the nutrition aim, else the one of the sport goal, else maintaining.
+    var nutritionGoal: NutritionCalculator.Goal {
+        (profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim ?? .maintain).calculatorGoal
     }
 
     func setWeeklyWorkouts(_ count: Int) {
@@ -822,13 +932,11 @@ extension AppModel {
         }
     }
 
-    /// Nutrition targets from the profile (Mifflin-St Jeor), when age, height, weight and sex are known.
+    /// Nutrition targets from the profile (Mifflin-St Jeor) with this activity, when age, height, weight and
+    /// sex are known.
     func calculatedNutritionGoals(activity: NutritionCalculator.Activity) -> NutritionGoals? {
         guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.calculatorSex else { return nil }
-        return NutritionCalculator.goals(
-            sex: sex, age: age, heightCm: height, weightKg: weight,
-            activity: activity, goal: (profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim ?? .maintain).calculatorGoal
-        )
+        return NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight, activity: activity, goal: nutritionGoal)
     }
 
     /// The activity level that goes with the workouts per week, when the user gave them.

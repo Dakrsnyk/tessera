@@ -574,6 +574,27 @@ enum ExerciseLibrary {
 
     static let all: [ExerciseInfo] = chest + back + shoulders + arms + legs + core + fullBody + cardio + mobility + stretching
 
+    /// The essentials offered without Premium: one or two key movements per muscle, cardio, mobility and
+    /// stretching, enough to build a full program. The whole library comes with Premium; an exercise the
+    /// person already used (routine, session, favorite) always stays open to them.
+    static let freeIDs: Set<String> = [
+        "bench-press", "db-bench", "push-up", "knee-push-up", "pull-up", "lat-pulldown", "db-row", "seated-cable-row",
+        "ohp", "db-shoulder-press", "lateral-raise", "db-curl", "hammer-curl", "pushdown", "bench-dips",
+        "back-squat", "goblet-squat", "air-squat", "leg-press", "lunge", "deadlift", "rdl", "glute-bridge", "hip-thrust",
+        "standing-calf", "crunch", "plank", "side-plank", "leg-raise", "burpee",
+        "running", "walking", "cycling", "jump-rope", "rowing-machine",
+        "cat-cow", "hamstring-stretch", "quad-stretch", "childs-pose",
+    ]
+
+    static var freeCount: Int { all.filter { freeIDs.contains($0.id) }.count }
+
+    static func isFree(_ id: String) -> Bool { freeIDs.contains(id) }
+
+    /// Whether an exercise sheet opens: with Premium, for an exercise offered, or one already used.
+    static func isOpen(_ id: String, isPremium: Bool, owned: Set<String>) -> Bool {
+        isPremium || isFree(id) || owned.contains(id)
+    }
+
     private static let chest: [ExerciseInfo] = [
         x("bench-press", tr("Développé couché (barre)"), [.chest], [.triceps, .shoulders], [.barbell, .bench], .strength, .intermediate, .benchPress,
           aka: ["developpe couche", "bench press", "bench"], cues: [tr("Barre au-dessus des épaules en haut, au bas des pectoraux en bas.")]),

@@ -84,6 +84,9 @@ struct RootView: View {
                 }) { request in
                     EditorView(request: request)
                 }
+                .sheet(item: $router.photoQuoteDraft) { draft in
+                    PhotoQuoteEditor(draft: draft)
+                }
                 .sheet(isPresented: $router.isPaywallPresented, onDismiss: { router.paywallContext = nil }) {
                     PaywallView(context: router.paywallContext)
                 }

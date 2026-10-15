@@ -104,7 +104,7 @@ struct NutritionSpaceSections: View {
 
         Section {
             Button {
-                sheets?.open { NutritionGoalsEditor(goals: model.nutrition.goals) }
+                sheets?.open { TopicEditorSheet(topic: .nutrition) }
             } label: {
                 ValueRow(title: tr("Objectifs du jour"), value: known.kcal ? tr("\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g prot.") : tr("À définir"), symbol: "target")
             }
@@ -665,91 +665,6 @@ struct CustomFoodEditor: View {
                             servingGrams: max(1, serving), servingName: "\(TF.int(serving)) g", source: .custom, barcode: draft?.barcode)
         model.update(\.nutrition) { $0.customFoods.insert(food, at: 0) }
         onCreate(food)
-    }
-}
-
-struct NutritionGoalsEditor: View {
-    @Environment(AppModel.self) private var model
-    @State var goals: NutritionGoals
-    @State private var sex: NutritionCalculator.Sex = .female
-    @State private var age = 30
-    @State private var height: Double = 168
-    @State private var weight: Double = 65
-    @State private var activity: NutritionCalculator.Activity = .light
-    @State private var goal: NutritionCalculator.Goal = .maintain
-    @State private var usedCalculator = false
-
-    var body: some View {
-        SheetForm(title: tr("Objectifs"), onSave: save) {
-            Section(tr("Par jour")) {
-                NumberRow(title: tr("Calories"), value: $goals.kcal, unit: "kcal")
-                NumberRow(title: tr("Protéines"), value: $goals.protein, unit: "g")
-                NumberRow(title: tr("Glucides"), value: $goals.carbs, unit: "g")
-                NumberRow(title: tr("Lipides"), value: $goals.fat, unit: "g")
-                NumberRow(title: tr("Fibres"), value: $goals.fiber, unit: "g")
-            }
-            Section {
-                Picker(tr("Référence"), selection: $sex) {
-                    ForEach(NutritionCalculator.Sex.allCases) { Text($0.title).tag($0) }
-                }
-                Stepper(tr("Âge : \(age) ans"), value: $age, in: 16...90)
-                NumberRow(title: tr("Taille", context: "height"), value: $height, unit: tr("cm"))
-                NumberRow(title: tr("Poids"), value: $weight, unit: tr("kg"))
-                Picker(tr("Activité"), selection: $activity) {
-                    ForEach(NutritionCalculator.Activity.allCases) { Text($0.title).tag($0) }
-                }
-                Picker(tr("But"), selection: $goal) {
-                    ForEach(NutritionCalculator.Goal.allCases) { Text($0.title).tag($0) }
-                }
-                Button(tr("Calculer mes objectifs")) {
-                    goals = NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight, activity: activity, goal: goal)
-                    usedCalculator = true
-                }
-            } header: {
-                Text(tr("Calculateur"))
-            } footer: {
-                Text(tr("Estimation Mifflin-St Jeor, à ajuster selon tes sensations. Ce n'est pas un avis médical. Âge, taille et poids viennent de « Mes informations » et y sont gardés."))
-            }
-        }
-        .onAppear(perform: prefill)
-    }
-
-    /// The calculator starts from what the user already gave in « Mes informations ».
-    private func prefill() {
-        let profile = model.profile
-        if let known = profile.calculatorSex { sex = known }
-        if let known = model.age { age = min(90, max(16, known)) }
-        if let known = profile.heightCm { height = known }
-        if let known = profile.weightKg { weight = known }
-        if let known = model.activityFromWorkouts { activity = known }
-        if let aim = profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim { goal = aim.calculatorGoal }
-    }
-
-    private func save() {
-        model.setNutritionGoals(goals, calculatedWith: usedCalculator ? activity : nil)
-        // Values used for a calculation are the user's own: every widget gets them.
-        guard usedCalculator else { return }
-        let aim: NutritionAim = switch goal {
-        case .lose: .lose
-        case .maintain: .maintain
-        case .gain: .gain
-        }
-        model.update(\.profile) { profile in
-            // The gender stays the user's own words; only the formula's reference changes.
-            if let current = profile.sex, !current.isBinary {
-                profile.calculationSex = sex == .neutral ? nil : sex
-            } else {
-                switch sex {
-                case .female: profile.sex = .female
-                case .male: profile.sex = .male
-                case .neutral: if profile.sex == nil { profile.sex = .undisclosed }
-                }
-            }
-            profile.heightCm = height
-            if profile.weightKg != weight { profile.recordWeight(weight) }
-            profile.nutritionAim = aim
-        }
-        if model.life.birthday == nil { model.setAge(age) }
     }
 }
 

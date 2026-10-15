@@ -72,17 +72,10 @@ struct CarAppView: View {
             maintenance(state: state, now: now)
             deadlines(state: state, now: now)
             more(state: state, now: now)
-            MiniAppSettingsSection(app: .car)
+            MiniAppInfoSection(app: .car)
         }
         .navigationTitle(state.name.isEmpty ? tr("Auto") : state.name)
         .navigationBarTitleDisplayMode(.large)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button { sheet = .settings } label: { Image(systemName: "slider.horizontal.3") }
-                    .accessibilityLabel(Text(tr("Voiture et réservoir")))
-                    .accessibilityIdentifier("car-settings")
-            }
-        }
         .sheet(item: $sheet) { $0.editor }
     }
 

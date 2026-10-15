@@ -1,48 +1,73 @@
 import SwiftUI
 
-/// What a mini-app lets the person change about themselves, right where they look at it. There is
-/// no second copy: every row reads and writes the same data as « Mes informations », so a change
-/// here is a change everywhere (widgets, « Mon Quotidien », the other mini-apps), and what depends on
-/// it is recalculated (calculated calorie targets follow the weight, for instance).
+/// « Mes infos » inside each mini-app: the personal information it uses, shown and changed right where
+/// the person looks at it. There is no second copy: every answer reads and writes the same data as
+/// « Mes informations » on Home, so a change here is a change everywhere (widgets, « Mon Quotidien »,
+/// the other mini-apps), and what depends on it is recalculated (the nutrition needs follow the weight,
+/// for instance). What the page of the mini-app already lets the person change (a routine, a task, a
+/// bill) is not repeated here.
 extension MiniApp {
-    /// The questions of « Mes informations » that belong to this mini-app.
-    var settingsTopic: ProfileTopic? {
+    /// The questions of « Mes informations » this mini-app uses.
+    var infoTopics: [ProfileTopic] {
         switch self {
-        case .nutrition: .nutrition
-        case .fitness: .sport
-        case .planning: .productivity
-        case .finances: .money
-        case .business: .business
-        case .travel: nil
-        case .car: .car
-        case .weather: .weather
+        case .nutrition: [.nutrition]
+        case .fitness: [.sport]
+        case .planning: [.productivity, .studies]
+        case .finances: [.money]
+        case .business: [.business]
+        case .travel: []
+        case .car: [.car]
+        case .weather: [.weather]
+        case .photos: []
         }
     }
 
-    /// The pieces of data this mini-app uses, editable in place.
+    var settingsTopic: ProfileTopic? { infoTopics.first }
+
+    /// Other personal data it uses that none of its questions asks and its page doesn't show.
     var settingsItems: [DataItem] {
         switch self {
-        case .nutrition: [.kcalTarget, .macroTargets, .weight]
-        case .fitness: [.routines, .weeklyWorkouts, .weight, .stepGoal]
-        case .planning: [.focusGoal, .habits, .priorities, .timetable, .exams, .assignments]
-        case .finances: [.monthlyBudget, .moneyFlow, .savingsGoals]
-        case .business: [.businessGoal]
-        case .travel: [.trip]
-        case .car: [.carName, .carDeadlines]
-        case .weather: [.city]
+        case .fitness: [.stepGoal]
+        case .finances: [.moneyFlow]
+        default: []
         }
     }
+
+    /// Settings shared by every mini-app that this one depends on.
+    var commonSettings: [CommonSetting] {
+        switch self {
+        case .finances, .business: [.currency]
+        case .travel: [.currency, .temperature]
+        case .weather: [.temperature]
+        case .planning: [.clock]
+        default: []
+        }
+    }
+
+    /// Whether « Mes infos » has something to show.
+    var hasInfo: Bool { !infoTopics.isEmpty || !settingsItems.isEmpty || !commonSettings.isEmpty }
 }
 
-struct MiniAppSettingsSection: View {
+/// A setting of the whole app shown in the « Mes infos » of the mini-apps that use it.
+enum CommonSetting: Hashable {
+    case currency, temperature, clock
+}
+
+struct MiniAppInfoSection: View {
     let app: MiniApp
     @Environment(AppModel.self) private var model
     @State private var isEditing = false
 
     var body: some View {
+        if app.hasInfo {
+            content
+        }
+    }
+
+    private var content: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
-                Label(tr("Mes paramètres"), systemImage: "slider.horizontal.3")
+                Label(tr("Mes infos"), systemImage: "person.text.rectangle")
                     .font(.headline)
                     .foregroundStyle(.primary)
                     .accessibilityAddTraits(.isHeader)
@@ -73,7 +98,7 @@ struct MiniAppSettingsSection: View {
             Button {
                 withAnimation(.snappy) { isEditing.toggle() }
             } label: {
-                Label(isEditing ? tr("Terminé") : tr("Modifier mes paramètres"), systemImage: isEditing ? "checkmark" : "pencil")
+                Label(isEditing ? tr("Terminé") : tr("Modifier mes infos"), systemImage: isEditing ? "checkmark" : "pencil")
                     .font(.subheadline.weight(.semibold))
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
@@ -81,10 +106,10 @@ struct MiniAppSettingsSection: View {
             .tint(app.color)
             .accessibilityIdentifier("miniapp-settings-edit")
             if isEditing {
-                editors
+                MiniAppInfoEditors(app: app)
                     .transition(.opacity.combined(with: .move(edge: .top)))
             }
-            Text(tr("Modifié ici, c'est modifié partout : « Mes informations », tes widgets et « Mon Quotidien »."))
+            Text(tr("Les mêmes infos partout : modifiées ici, elles le sont dans « Mes informations », tes autres mini-apps et tes widgets."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -115,23 +140,55 @@ struct MiniAppSettingsSection: View {
     private var rows: [(String, String)] {
         var rows: [(String, String)] = []
         let profile = model.profile
+        func add(_ title: String, _ value: String?) {
+            if let value, !rows.contains(where: { $0.0 == title }) { rows.append((title, value)) }
+        }
         switch app {
-        case .nutrition:
-            if let height = profile.heightCm { rows.append((tr("Taille", context: "height"), tr("\(TF.int(height)) cm"))) }
-            if let aim = profile.nutritionAim { rows.append((tr("Objectif"), aim.title)) }
-            if profile.calculatedActivity != nil { rows.append((tr("Calcul"), tr("Suit ton poids et ton activité"))) }
-        case .fitness:
-            if let goal = profile.fitnessGoal { rows.append((tr("Objectif"), goal.title)) }
-            if let level = profile.fitnessLevel { rows.append((tr("Niveau"), level.title)) }
-            let days = model.fitness.routines.flatMap(\.weekdays)
-            if !days.isEmpty { rows.append((tr("Jours"), Self.weekdays(Set(days)))) }
+        case .nutrition, .fitness:
+            add(tr("Âge"), model.age.map { tr("\($0) ans") })
+            add(tr("Taille", context: "height"), profile.heightCm.map { tr("\(TF.int($0)) cm") })
+            add(tr("Poids"), profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") })
+            if app == .nutrition {
+                add(tr("Objectif"), profile.nutritionAim?.title)
+                if profile.followsNutritionCalculation, model.recommendedNutritionGoals() != nil {
+                    add(tr("Besoins"), tr("\(TF.int(model.nutrition.goals.kcal)) kcal · calculés"))
+                } else if profile.knows(.kcalTarget) {
+                    add(tr("Besoins"), tr("\(TF.int(model.nutrition.goals.kcal)) kcal par jour"))
+                }
+            } else {
+                add(tr("Objectif"), profile.fitnessGoal?.title)
+                add(tr("Niveau"), profile.fitnessLevel?.title)
+                if profile.knows(.weeklyWorkouts) { add(tr("Séances par semaine"), "\(model.fitness.weeklyGoal)") }
+            }
+        case .planning:
+            add(tr("Objectif"), profile.mainGoal.trimmed.nonEmpty)
+            if profile.knows(.focusGoal) { add(tr("Concentration"), tr("\(Fmt.hours(model.productivity.weeklyFocusGoalHours)) / sem.")) }
+            add(tr("Études"), profile.studyField.trimmed.nonEmpty)
+        case .finances:
+            add(tr("Revenu"), profile.monthlyIncome.map { TF.money($0, model.settings.currencyCode) })
+            if profile.knows(.monthlyBudget) { add(tr("Budget"), TF.money(model.budget.monthlyBudget, model.settings.currencyCode)) }
+            add(tr("Épargne visée"), profile.monthlySavingsGoal.map { TF.money($0, model.settings.currencyCode) })
+        case .business:
+            if profile.knows(.businessName) { add(tr("Activité"), model.business.name) }
+            if profile.knows(.businessGoal) { add(tr("Objectif de CA"), TF.money(model.business.monthlyGoal, model.settings.currencyCode)) }
+        case .car:
+            if profile.knows(.carName) { add(tr("Voiture"), model.car.name) }
+            add(tr("Compteur"), model.odometer.map { tr("\(TF.int($0)) km") })
+            add(tr("Réservoir"), model.car.tankLiters.map { "\(TF.int($0)) L" })
         case .weather:
-            rows.append((tr("Unité"), model.settings.temperatureUnit.title))
-        default:
+            add(tr("Ville"), model.settings.weatherLocation?.name)
+        case .travel, .photos:
             break
         }
-        for item in app.settingsItems where !rows.contains(where: { $0.0 == item.title }) {
-            if let value = model.summary(item) { rows.append((item.title, value)) }
+        for setting in app.commonSettings {
+            switch setting {
+            case .currency: add(tr("Devise"), UnitText.display(model.settings.currencyCode) + " · " + model.settings.currencyCode)
+            case .temperature: add(tr("Unité"), model.settings.temperatureUnit.title)
+            case .clock: add(tr("Heure"), model.settings.uses24HourClock ? tr("24 h") : tr("12 h"))
+            }
+        }
+        for item in app.settingsItems {
+            if let value = model.summary(item) { add(item.title, value) }
         }
         return rows
     }
@@ -164,31 +221,87 @@ struct MiniAppSettingsSection: View {
             .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         }
     }
+}
 
-    // MARK: Editors (the same components as « Mes informations »)
+/// What « Mes infos » lets the person change: the questions of « Mes informations » (the same
+/// components), the shared settings the mini-app depends on, and the few data its page doesn't show.
+struct MiniAppInfoEditors: View {
+    let app: MiniApp
+    @Environment(AppModel.self) private var model
 
-    @ViewBuilder private var editors: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if let topic = app.settingsTopic {
-                TopicForm(topic: topic)
-            }
-            if app == .weather {
-                Picker(tr("Unité de température"), selection: Binding(
-                    get: { model.settings.temperatureUnit },
-                    set: { unit in model.updateSettings { $0.temperatureUnit = unit } }
-                )) {
-                    ForEach(TemperatureUnit.allCases) { Text($0.title).tag($0) }
+            ForEach(app.infoTopics) { topic in
+                if app.infoTopics.count > 1 {
+                    Text(topic.title).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
                 }
-                .pickerStyle(.segmented)
-                .accessibilityIdentifier("weather-unit")
+                TopicForm(topic: topic, inMiniApp: true)
             }
-            WidgetDataSection(items: app.settingsItems, title: tr("Tes données"))
+            if !app.commonSettings.isEmpty {
+                QuestionCard(title: tr("Réglages communs"), detail: tr("Pour toute l'app.")) {
+                    VStack(spacing: 10) {
+                        ForEach(app.commonSettings, id: \.self) { setting in
+                            commonSetting(setting)
+                        }
+                    }
+                }
+            }
+            if !app.settingsItems.isEmpty {
+                WidgetDataSection(items: app.settingsItems, title: tr("Tes données"))
+            }
         }
     }
 
-    /// ISO weekdays (1 = lundi … 7 = dimanche), Monday first.
-    private static func weekdays(_ days: Set<Int>) -> String {
-        let symbols = DateMath.calendar.shortWeekdaySymbols    // Sunday first
-        return (1...7).filter(days.contains).map { symbols[$0 % 7].capitalized }.joined(separator: " · ")
+    @ViewBuilder private func commonSetting(_ setting: CommonSetting) -> some View {
+        switch setting {
+        case .currency:
+            Picker(tr("Devise"), selection: Binding(
+                get: { model.settings.currencyCode },
+                set: { code in model.updateSettings { $0.currencyCode = code } }
+            )) {
+                ForEach(AppSettings.currencies, id: \.self) { Text($0).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("info-currency")
+        case .temperature:
+            Picker(tr("Unité de température"), selection: Binding(
+                get: { model.settings.temperatureUnit },
+                set: { unit in model.updateSettings { $0.temperatureUnit = unit } }
+            )) {
+                ForEach(TemperatureUnit.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("weather-unit")
+        case .clock:
+            Toggle(tr("Heure sur 24 h"), isOn: Binding(
+                get: { model.settings.uses24HourClock },
+                set: { on in model.updateSettings { $0.uses24HourClock = on } }
+            ))
+            .font(.subheadline)
+        }
+    }
+}
+
+/// « Mes infos » of a mini-app in a sheet, opened from one of its screens (« Définis ton objectif du jour »…).
+struct MiniAppInfoSheet: View {
+    let app: MiniApp
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                MiniAppInfoEditors(app: app)
+                    .padding(20)
+            }
+            .scrollDismissesKeyboard(.interactively)
+            .background(.screenGradient)
+            .navigationTitle(tr("Mes infos"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(tr("OK")) { dismiss() }
+                }
+            }
+        }
     }
 }

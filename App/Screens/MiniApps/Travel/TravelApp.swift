@@ -69,7 +69,7 @@ struct TravelAppView: View {
                 start
             }
             others(state: state, now: now)
-            MiniAppSettingsSection(app: .travel)
+            MiniAppInfoSection(app: .travel)
         }
         .navigationTitle(tr("Voyage"))
         .navigationBarTitleDisplayMode(.large)

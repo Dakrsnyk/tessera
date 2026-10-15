@@ -17,6 +17,8 @@ enum TileFactory {
         case .travel: return TravelTiles.make(context)
         case .car: return CarTiles.make(context)
         case .dashboards: return DashboardTiles.make(context)
+        // Drawn by their own views (`PhotoCollageView`, `QuoteWidgetView`).
+        case .memories: return placeholder(kind)
         }
     }
 

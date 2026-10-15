@@ -154,7 +154,8 @@ struct PaywallView: View {
             (.smart, "wand.and.stars", tr("Widgets intelligents"), tr("« Maintenant » change selon le moment, et les analyses résument ta journée")),
             (.packs, "bag.fill", tr("Tous les packs"), tr("Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…")),
             (.styles, "paintpalette", tr("\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus"), tr("Espace, Mars, Océan, Aurore, Élégant, Synthwave…")),
-            (.history, "chart.bar.xaxis", tr("Analyses et historiques"), tr("L'évolution de tes finances sur six mois, l'historique de tes repas au-delà de 7 jours, les mois passés")),
+            (.history, "chart.bar.xaxis", tr("Statistiques détaillées"), tr("Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes habitudes")),
+            (.exercises, "books.vertical.fill", tr("Toute la bibliothèque d'exercices"), tr("\(ExerciseLibrary.all.count) exercices avec démonstration, technique et alternatives")),
             (.photo, "photo", tr("Fonds photo, couleurs libres"), tr("Et les polices Serif et Mono")),
         ]
     }
@@ -194,6 +195,8 @@ struct PaywallView: View {
             comparisonRow(tr("Styles"), free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
             comparisonRow(tr("Widgets enregistrés"), free: "\(AppModel.freeDesignLimit)", premium: "∞")
             comparisonRow(tr("Habitudes"), free: "\(AppModel.freeHabitLimit)", premium: "∞")
+            comparisonRow(tr("Exercices"), free: "\(ExerciseLibrary.freeCount)", premium: "\(ExerciseLibrary.all.count)")
+            comparisonRow(tr("Statistiques détaillées"), free: "—", premium: "✓")
             comparisonRow(tr("Couleurs"), free: "\(Palette.freeAccents.count)", premium: "∞")
             comparisonRow(tr("Fonds et polices"), free: "—", premium: "✓")
         }

@@ -5,8 +5,8 @@ import Foundation
 /// card with one figure from their data, or an invitation to fill them in. Nothing is made up.
 @MainActor
 enum DailyCategories {
-    /// The mini-apps that can be put in Mon Quotidien (the weather stays out of it).
-    static var choices: [MiniApp] { MiniApp.allCases.filter { $0 != .weather } }
+    /// The mini-apps that can be put in Mon Quotidien (the weather and the photos stay out of it).
+    static var choices: [MiniApp] { MiniApp.allCases.filter { $0 != .weather && $0 != .photos } }
 
     /// The cards of Mon Quotidien that already stand for a mini-app.
     static func cardIDs(_ app: MiniApp) -> [String] {

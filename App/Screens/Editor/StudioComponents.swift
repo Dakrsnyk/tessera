@@ -318,7 +318,7 @@ extension WidgetKind {
     var usesTileLayout: Bool {
         switch self {
         case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .tasks, .habits, .focus,
-             .upNext, .note, .weather, .crypto, .moneyFlow, .hydration:
+             .upNext, .note, .weather, .crypto, .moneyFlow, .hydration, .photos, .quote:
             false
         default:
             true

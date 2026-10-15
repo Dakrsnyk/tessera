@@ -230,7 +230,11 @@ struct FitnessProgressPage: View {
         let records = FitnessMath.records(state)
         let volumes = weeklyVolumes(state)
         MiniAppScroll {
-            if records.isEmpty {
+            if !model.isPremium {
+                // The records stay on the Fitness page; their evolution and the volume over weeks are Premium.
+                PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("La progression est dans Premium"),
+                                message: tr("Ton volume semaine après semaine, l'évolution de tes charges et tous tes records, exercice par exercice. Tes séances restent enregistrées : tout s'affiche dès que tu passes à Premium."))
+            } else if records.isEmpty {
                 EmptyStateView(symbol: "chart.line.uptrend.xyaxis", title: tr("Pas encore de progression"), message: tr("Fais quelques séances : tes charges, ton volume et tes records apparaîtront ici."))
                     .card()
             } else {

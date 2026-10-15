@@ -419,12 +419,44 @@ struct PlanningHabitsPage: View {
                     Label(tr("Ajouter une habitude"), systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
                 }
                 .tint(Color(hex: "7FA33A"))
+                regularity(habits, now: Date())
             }
         }
         .navigationTitle(tr("Habitudes"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $creating) { HabitEditor(habit: Habit(name: "", symbol: "checkmark", colorHex: "7FA33A"), isNew: true) }
         .sheet(item: $editing) { HabitEditor(habit: $0, isNew: false) }
+    }
+
+    /// The detailed statistics (Premium): how regular each habit is over 30 and 90 days, and its best streak.
+    @ViewBuilder
+    private func regularity(_ habits: [Habit], now: Date) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Régularité"))
+            if !model.isPremium {
+                PremiumLockCard(symbol: "chart.bar.doc.horizontal", title: tr("La régularité est dans Premium"),
+                                message: tr("Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés."))
+            } else {
+                MiniRowsCard {
+                    ForEach(Array(habits.enumerated()), id: \.element.id) { index, habit in
+                        if index > 0 { MiniDivider() }
+                        MiniRow(symbol: "chart.bar.fill", colorHex: habit.colorHex, title: habit.name,
+                                detail: tr("Meilleure série : \(Fmt.plural(habit.bestStreak, tr("jour"), tr("jours")))"),
+                                value: regularityText(habit, now: now), showsChevron: false)
+                    }
+                }
+                .accessibilityIdentifier("habits-regularity")
+                Text(tr("Compté depuis le premier jour coché, sur 30 et 90 jours."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    private func regularityText(_ habit: Habit, now: Date) -> String {
+        guard let month = habit.regularity(days: 30, asOf: now) else { return "—" }
+        let quarter = habit.regularity(days: 90, asOf: now) ?? month
+        return "\(Fmt.percent(Double(month.done) / Double(max(1, month.total)))) · \(Fmt.percent(Double(quarter.done) / Double(max(1, quarter.total))))"
     }
 }
 

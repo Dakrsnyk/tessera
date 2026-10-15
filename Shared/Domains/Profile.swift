@@ -301,9 +301,13 @@ struct UserProfile: Codable, Hashable {
 
     // Nutrition (the daily targets are `NutritionState.goals`).
     var nutritionAim: NutritionAim?
-    /// Set when the daily targets come from « Calculer pour moi » (with this activity): they then follow
-    /// the weight, the age, the height, the aim… Typing a target by hand clears it.
+    /// The activity level chosen for the calculation (older versions: set by « Calculer pour moi »).
     var calculatedActivity: NutritionCalculator.Activity?
+    /// Whether the daily targets follow the calculation (body, aim, activity). Nil: decided by what an
+    /// older version kept (calculated targets, or none yet: calculated; targets typed by hand: kept).
+    var nutritionAuto: Bool?
+    /// Targets typed by hand while the others follow the calculation: never replaced by it.
+    var customTargets: Set<NutritionTarget> = []
 
     // Money (the monthly budget is `BudgetState.monthlyBudget`).
     var monthlyIncome: Double?
@@ -328,7 +332,7 @@ struct UserProfile: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case lastName, interests, skippedTopics, birthYear, heightCm, weightKg, weightLog, sex, genderDetail, calculationSex
         case fitnessGoal, fitnessLevel, stepGoal
-        case nutritionAim, calculatedActivity, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
+        case nutritionAim, calculatedActivity, nutritionAuto, customTargets, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
         case businessClients, studyField, weeklyStudyHours, provided, migrated
     }
 
@@ -352,6 +356,8 @@ struct UserProfile: Codable, Hashable {
         stepGoal = c.optional(.stepGoal)
         nutritionAim = c.optional(.nutritionAim)
         calculatedActivity = c.optional(.calculatedActivity)
+        nutritionAuto = c.optional(.nutritionAuto)
+        customTargets = Set(c.value(.customTargets, [String]()).compactMap(NutritionTarget.init(rawValue:)))
         monthlyIncome = c.optional(.monthlyIncome)
         monthlySavingsGoal = c.optional(.monthlySavingsGoal)
         mainExpenses = c.value(.mainExpenses, [])
@@ -365,6 +371,11 @@ struct UserProfile: Codable, Hashable {
     }
 
     func knows(_ fact: ProvidedFact) -> Bool { provided.contains(fact) }
+
+    /// Whether the daily nutrition targets follow the calculation.
+    var followsNutritionCalculation: Bool {
+        nutritionAuto ?? (calculatedActivity != nil || !knows(.kcalTarget))
+    }
 
     /// The reference for the calorie formula: the gender itself when binary, else the chosen reference or the average.
     var calculatorSex: NutritionCalculator.Sex? {
@@ -437,6 +448,7 @@ struct UserProfile: Codable, Hashable {
         profile.fitnessLevel = .intermediate
         profile.stepGoal = 10_000
         profile.nutritionAim = .gain
+        profile.nutritionAuto = true
         profile.monthlyIncome = 3_000
         profile.monthlySavingsGoal = 400
         profile.mainGoal = tr("Finir le projet Ardane")

@@ -1,7 +1,8 @@
 import SwiftUI
 import VisionKit
 
-/// What a sheet of the Nutrition mini-app opens: the food search (for a meal), the scanner, the goals.
+/// What a sheet of the Nutrition mini-app opens: the food search (for a meal), the scanner, « Mes infos »
+/// (the daily needs, calculated).
 enum NutritionSheet: Identifiable {
     case search(MealType?, Date)
     case scan(Date)
@@ -47,7 +48,7 @@ struct NutritionAppView: View {
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            MiniAppSettingsSection(app: .nutrition)
+            MiniAppInfoSection(app: .nutrition)
         }
         .navigationTitle(tr("Nutrition"))
         .navigationBarTitleDisplayMode(.large)
@@ -55,7 +56,7 @@ struct NutritionAppView: View {
             switch sheet {
             case let .search(meal, day): FoodSearchView(presetMeal: meal, day: day)
             case let .scan(day): FoodSearchView(startsWithScanner: true, day: day)
-            case .goals: NutritionGoalsEditor(goals: model.nutrition.goals)
+            case .goals: MiniAppInfoSheet(app: .nutrition)
             }
         }
     }
@@ -123,7 +124,7 @@ struct NutritionAppView: View {
             Button {
                 sheet = .goals
             } label: {
-                insightCard(symbol: "target", title: tr("Définis ton objectif du jour"), message: tr("Avec ton objectif, Ardane te dit ce qu'il te reste et te propose des idées de repas."), action: tr("Définir"))
+                insightCard(symbol: "target", title: tr("Calcule tes besoins du jour"), message: tr("Ton âge, ta taille, ton poids et ton objectif suffisent : Ardane calcule tes calories et tes nutriments, puis te dit ce qu'il te reste."), action: tr("Calculer"))
             }
             .buttonStyle(.plain)
         } else if hasEntries {
@@ -243,14 +244,6 @@ struct NutritionAppView: View {
             .buttonStyle(.plain)
             .accessibilityIdentifier("nutrition-saved")
             MiniDivider()
-            Button {
-                sheet = .goals
-            } label: {
-                MiniRow(symbol: "target", colorHex: accentHex, title: tr("Objectifs"), detail: known.kcal ? tr("\(TF.int(state.goals.kcal)) kcal · \(TF.int(state.goals.protein)) g de protéines") : tr("À définir"))
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("nutrition-goals")
-            MiniDivider()
             NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
                 MiniRow(symbol: "chart.bar.xaxis", colorHex: accentHex, title: tr("Historique"), detail: tr("Moyennes, tendances et poids"))
             }
@@ -296,7 +289,7 @@ struct CalorieHero: View {
                         figure(tr("Objectif"), tr("\(TF.int(goals.kcal)) kcal"))
                         figure(left >= 0 ? tr("Restant") : tr("Dépassé"), tr("\(TF.int(abs(left))) kcal"), color: left >= 0 ? nil : Color(hex: "E5484D"))
                     } else {
-                        Text(tr("Pas encore d'objectif : ajoute-le dans Objectifs."))
+                        Text(tr("Pas encore d'objectif : calcule tes besoins dans « Mes infos »."))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)

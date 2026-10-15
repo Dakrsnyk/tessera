@@ -261,7 +261,8 @@ extension WidgetKind {
     /// The data this widget shows from the person, in the order to ask for it.
     var dataItems: [DataItem] {
         switch self {
-        case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .weekView, .moonPhase, .note, .holiday, .focus, .crypto, .marketOverview, .studyHours, .semesterProgress:
+        case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .weekView, .moonPhase, .note, .holiday, .focus, .crypto, .marketOverview, .studyHours, .semesterProgress,
+             .photos, .quote:
             []
         case .ageProgress, .birthday: [.birthday]
         case .weather, .sunCycle, .rainNext, .windUV, .weatherDetails, .weeklyForecast: [.city]

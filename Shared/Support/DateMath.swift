@@ -18,6 +18,12 @@ enum DateMath {
         return keyFormatter.string(from: date)
     }
 
+    /// The day of a key made by `dayKey` (its start, in the iPhone's time zone).
+    static func date(fromKey key: String) -> Date? {
+        keyFormatter.timeZone = Fmt.timeZone
+        return keyFormatter.date(from: key).map(startOfDay)
+    }
+
     static func startOfDay(_ date: Date) -> Date {
         calendar.startOfDay(for: date)
     }

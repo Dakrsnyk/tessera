@@ -366,6 +366,16 @@ enum FitnessMath {
         return ExerciseLibrary.match(name: set.exercise)?.id == exercise.id
     }
 
+    /// An exercise added to the session in progress: what was lifted the last time (its heaviest set),
+    /// else 3 × 10 for strength and one round for the rest.
+    static func sessionTemplate(for exercise: ExerciseInfo, _ state: FitnessState) -> ExerciseTemplate {
+        let last = history(of: exercise, state).last
+        let strength = exercise.type == .strength
+        let top = last?.sets.max { $0.weight < $1.weight }
+        return ExerciseTemplate(name: exercise.name, sets: strength ? max(1, min(6, last?.sets.count ?? 3)) : 1,
+                                reps: strength ? (top?.reps ?? 10) : 1, weight: top?.weight ?? 0, exerciseID: exercise.id)
+    }
+
     static func history(of exercise: ExerciseInfo, _ state: FitnessState) -> [ExerciseSession] {
         sessions(state)
             .sorted { $0.start < $1.start }

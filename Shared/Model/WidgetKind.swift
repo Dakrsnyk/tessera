@@ -17,6 +17,7 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
     case student
     case travel
     case car
+    case memories
 
     var id: String { rawValue }
 
@@ -36,6 +37,7 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
         case .student: tr("Planning · études")
         case .travel: tr("Voyage")
         case .car: tr("Auto")
+        case .memories: tr("Photos et citations")
         }
     }
 
@@ -55,6 +57,7 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
         case .student: "graduationcap"
         case .travel: "airplane"
         case .car: "car"
+        case .memories: "photo.on.rectangle.angled"
         }
     }
 
@@ -74,6 +77,7 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
         case .student: "D6409F"
         case .travel: "12A4B5"
         case .car: "4B5563"
+        case .memories: "D9608B"
         }
     }
 }
@@ -111,6 +115,8 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
     // Tableaux de bord
     case myDay, now, morning, fitnessDashboard, moneyDashboard, studentDashboard
     case aiSummary, aiNutrition, aiFinance, aiProductivity
+    // Photos et citations
+    case photos, quote
 
     var id: String { rawValue }
 
@@ -147,7 +153,7 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
     var isRetired: Bool { Self.retired.contains(self) }
 
     /// Every widget that can be made today.
-    static var offered: [WidgetKind] { allCases.filter { !$0.isRetired } }
+    static var offered: [WidgetKind] { allCases.filter { !$0.isRetired && !$0.isMadeInItsMiniApp } }
 
     static func kinds(in category: WidgetCategory) -> [WidgetKind] {
         offered.filter { $0.category == category }
