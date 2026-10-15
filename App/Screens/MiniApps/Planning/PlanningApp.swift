@@ -1,8 +1,9 @@
 import SwiftUI
 
-/// The Planning mini-app: the week as a table and the chosen day in one timeline (calendar, classes,
-/// tasks, deadlines, workouts), the three priorities, the tasks to do, then the week, the month, the
-/// projects, the habits and focus.
+/// The Planning mini-app: the calendar (a day, the week, the month or the year, changed with a pinch or the
+/// buttons above it; a touch on a free time creates an event there) and the chosen day in one timeline
+/// (calendar, classes, tasks, deadlines, workouts), the three priorities, the tasks to do, then the
+/// schedule, the studies, the projects, the habits and focus.
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
@@ -11,6 +12,11 @@ struct PlanningAppView: View {
     @State private var askingCalendar = false
     /// The day the agenda shows (today by default; any day before or after).
     @State private var day = Date()
+    /// How much time the calendar shows: the week by default.
+    @State private var scale: CalendarScale = .week
+    /// An event of the schedule made or changed from the calendar.
+    @State private var scheduleSheet: StudiesSheet?
+    @Environment(\.openURL) private var openURL
 
     private var accentHex: String { MiniApp.planning.colorHex }
 
@@ -22,9 +28,7 @@ struct PlanningAppView: View {
         let overdue = tasks.filter { $0.isOverdue(at: now) }
         MiniAppScroll {
             VStack(alignment: .leading, spacing: 10) {
-                DaySwitcher(day: $day, colorHex: accentHex, allowsFuture: true)
-                // The week as a table: a tap on a day shows it below, a swipe changes week.
-                WeekTableCard(day: $day, days: Agenda.week(containing: day, model: model, events: events))
+                PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: createEvent, onOpen: open)
                     .padding(.bottom, 6)
                 MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
                 VStack(alignment: .leading, spacing: 0) {
@@ -132,15 +136,43 @@ struct PlanningAppView: View {
         .navigationBarTitleDisplayMode(.large)
         .onAppear(perform: loadEvents)
         .onChange(of: day) { _, _ in loadEvents() }
+        .onChange(of: scale) { _, _ in loadEvents() }
         .sheet(item: $editing) { task in
             TaskEditor(task: task)
         }
+        .sheet(item: $scheduleSheet) { $0.editor }
     }
 
-    /// The calendar events of the chosen day's whole week (the table shows them all).
+    /// The calendar events of what the calendar shows (the month around the day, or the whole year).
     private func loadEvents() {
-        let start = DateMath.week(containing: day).first ?? DateMath.startOfDay(day)
-        events = CalendarService.events(from: start, to: start.addingTimeInterval(7 * 86_400))
+        let range = PlanningCalendar.range(for: scale, day: day)
+        events = CalendarService.events(from: range.start, to: range.end)
+    }
+
+    /// A touch on a free time: a new event of the schedule, that day, from that time, for an hour.
+    private func createEvent(on date: Date, at minute: Int) {
+        let slot = ClassSlot(courseID: nil, weekday: FitnessMath.isoWeekday(date), startMinute: minute, endMinute: min(24 * 60, minute + 60),
+                             kind: .appointment, title: "", date: DateMath.startOfDay(date))
+        scheduleSheet = .slotOn(slot, date)
+    }
+
+    /// A touch on something of the calendar: its own editor (the calendar's events open in Calendar).
+    private func open(_ item: AgendaItem) {
+        let date = item.start ?? day
+        switch item.kind {
+        case .classSlot:
+            if let id = item.slotID, let slot = model.student.slots.first(where: { $0.id == id }) { scheduleSheet = .slotOn(slot, date) }
+        case .task:
+            if let id = item.taskID, let task = model.content.tasks.first(where: { $0.id == id }) { editing = task }
+        case .exam:
+            if let id = item.examID, let exam = model.student.exams.first(where: { $0.id == id }) { scheduleSheet = .exam(exam) }
+        case .assignment:
+            if let id = item.assignmentID, let assignment = model.student.assignments.first(where: { $0.id == id }) { scheduleSheet = .assignment(assignment) }
+        case .event:
+            if let url = URL(string: "calshow:\(Int(date.timeIntervalSinceReferenceDate))") { openURL(url) }
+        case .deadline, .workout:
+            day = date
+        }
     }
 
     private func countTile(_ title: String, _ count: Int, _ hex: String?) -> some View {

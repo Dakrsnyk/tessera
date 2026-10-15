@@ -429,6 +429,7 @@ struct FitnessAppView: View {
             }
         }
     }
+}
 
 /// How a routine reads and lasts.
 enum FitnessPlan {

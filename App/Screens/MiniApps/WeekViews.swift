@@ -182,13 +182,25 @@ struct WeekTimetable: View {
     let compact: Bool
     let hourHeight: CGFloat
     let onSelect: ((Date) -> Void)?
+    /// A touch on a free time of a day: that day and the time touched (minutes after midnight, by
+    /// half-hours), to create something there.
+    let onCreate: ((Date, Int) -> Void)?
+    /// A touch on something of the day.
+    let onOpen: ((AgendaItem) -> Void)?
+    /// The hours shown at least (more when something falls outside).
+    let hours: ClosedRange<Int>
 
-    init(days: [(day: Date, items: [AgendaItem])], selected: Date? = nil, compact: Bool = false, hourHeight: CGFloat? = nil, onSelect: ((Date) -> Void)? = nil) {
+    init(days: [(day: Date, items: [AgendaItem])], selected: Date? = nil, compact: Bool = false, hourHeight: CGFloat? = nil,
+         hours: ClosedRange<Int> = 8...18, onSelect: ((Date) -> Void)? = nil, onCreate: ((Date, Int) -> Void)? = nil,
+         onOpen: ((AgendaItem) -> Void)? = nil) {
         self.days = days
         self.selected = selected
         self.compact = compact
         self.hourHeight = hourHeight ?? (compact ? 15 : 38)
+        self.hours = hours
         self.onSelect = onSelect
+        self.onCreate = onCreate
+        self.onOpen = onOpen
     }
 
     private var gutter: CGFloat { compact ? 16 : 28 }
@@ -200,8 +212,8 @@ struct WeekTimetable: View {
         let untimed = days.map { $0.items.filter { $0.start == nil } }
         let starts = timed.flatMap { $0 }.compactMap(\.start).map(Self.minute)
         let ends = timed.flatMap { $0 }.map { Self.end($0) }
-        let first = min(8 * 60, starts.min() ?? 8 * 60) / 60 * 60
-        let last = max(18 * 60, ((ends.max() ?? 17 * 60) + 59) / 60 * 60)
+        let first = min(hours.lowerBound * 60, starts.min() ?? hours.lowerBound * 60) / 60 * 60
+        let last = max(hours.upperBound * 60, ((ends.max() ?? (hours.upperBound - 1) * 60) + 59) / 60 * 60)
         let height = CGFloat(last - first) / 60 * hourHeight
         VStack(spacing: compact ? 4 : 8) {
             header(now: now)
@@ -317,14 +329,31 @@ struct WeekTimetable: View {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: compact ? 4 : 8, style: .continuous)
                     .fill(isSelected ? Color.accentColor.opacity(0.08) : Color.primary.opacity(0.025))
+                    .contentShape(Rectangle())
+                    .onTapGesture(coordinateSpace: .local) { location in
+                        guard let onCreate else { return }
+                        // Down to the half-hour touched, never past the last one of the day.
+                        let touched = first + Int(location.y / hourHeight * 60)
+                        onCreate(day, min(23 * 60 + 30, max(0, touched / 30 * 30)))
+                    }
+                    .accessibilityAction(named: Text(tr("Créer un événement ce jour-là"))) {
+                        onCreate?(day, 9 * 60)
+                    }
                 ForEach(placed, id: \.item.id) { block in
                     let width: CGFloat = geo.size.width / CGFloat(block.lanes)
                     let minutes: CGFloat = CGFloat(min(block.end, last) - max(block.start, first))
                     let length: CGFloat = max(compact ? 4 : 16, minutes / 60 * hourHeight - 1)
                     let top: CGFloat = CGFloat(max(block.start, first) - first) / 60 * hourHeight
-                    blockView(block)
-                        .frame(width: max(4, width - 1), height: length)
-                        .offset(x: CGFloat(block.lane) * width, y: top)
+                    Group {
+                        if let onOpen {
+                            Button { onOpen(block.item) } label: { blockView(block) }
+                                .buttonStyle(.plain)
+                        } else {
+                            blockView(block)
+                        }
+                    }
+                    .frame(width: max(4, width - 1), height: length)
+                    .offset(x: CGFloat(block.lane) * width, y: top)
                 }
                 // Now, on today's column.
                 if DateMath.isSameDay(day, now) {
@@ -475,9 +504,9 @@ struct WeekTableCard: View {
                     .font(.subheadline.weight(.semibold))
                 }
             }
-            WeekTimetable(days: days, selected: day) { picked in
+            WeekTimetable(days: days, selected: day, onSelect: { picked in
                 withAnimation(.snappy) { day = picked }
-            }
+            })
             .card(padding: 12)
             .id(DateMath.dayKey(week.first ?? day))
             .transition(.push(from: forward ? .trailing : .leading))

@@ -21,6 +21,9 @@ struct AgendaItem: Identifiable, Hashable {
 
     var taskID: UUID? { kind == .task ? UUID(uuidString: String(id.dropFirst(5))) : nil }
     var assignmentID: UUID? { kind == .assignment ? UUID(uuidString: String(id.dropFirst(11))) : nil }
+    /// The schedule entry (« class-<id>-<day> »).
+    var slotID: UUID? { kind == .classSlot ? UUID(uuidString: String(id.dropFirst(6).prefix(36))) : nil }
+    var examID: UUID? { kind == .exam ? UUID(uuidString: String(id.dropFirst(5))) : nil }
 
     /// "14:00" or "Journée".
     var timeText: String {

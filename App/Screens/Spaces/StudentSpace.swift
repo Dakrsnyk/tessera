@@ -200,12 +200,25 @@ struct CoursePicker: View {
 
 struct SlotEditor: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
     @State var slot: ClassSlot
     /// The day it was opened from: a weekly entry can be cancelled that day only.
     var day: Date?
+    @State private var confirmsDelete = false
+
+    /// Already saved (opened to change it), rather than being made.
+    private var isSaved: Bool { model.student.slots.contains { $0.id == slot.id } }
+
+    /// What else happens at that time, that day (the schedule and the calendar), shown as a warning: two
+    /// things at once stay possible, side by side in the calendar.
+    private var conflicts: [AgendaItem] {
+        guard let date = slot.date ?? day else { return [] }
+        let events = CalendarService.events(from: DateMath.startOfDay(date), to: DateMath.nextMidnight(after: date))
+        return PlanningCalendar.conflicts(slot, on: date, model: model, events: events)
+    }
 
     var body: some View {
-        SheetForm(title: tr("Horaire"), canSave: slot.endMinute > slot.startMinute, onSave: save) {
+        SheetForm(title: isSaved ? tr("Événement") : tr("Nouvel événement"), canSave: slot.endMinute > slot.startMinute, closesWithBackArrow: isSaved, onSave: save) {
             // The kind of entry, chosen by the person: a class, work, an appointment or another event.
             Picker(tr("Type"), selection: $slot.kind) {
                 ForEach(ScheduleKind.allCases) { kind in
@@ -233,15 +246,66 @@ struct SlotEditor: View {
                     }
                 }
             }
-            MinuteTimePicker(title: tr("Début"), minutes: $slot.startMinute)
+            MinuteTimePicker(title: tr("Début"), minutes: Binding(get: { slot.startMinute }, set: { start in
+                // The duration stays when the start moves.
+                let length = max(15, slot.endMinute - slot.startMinute)
+                slot.startMinute = start
+                slot.endMinute = min(24 * 60, start + length)
+            }))
             MinuteTimePicker(title: tr("Fin"), minutes: $slot.endMinute)
+            durationChips
             TextField(slot.kind == .course ? tr("Salle (facultatif)") : tr("Lieu (facultatif)"), text: $slot.room)
+            if !conflicts.isEmpty {
+                let list = conflicts.map { item in item.title + " (" + item.timeText + ")" }.joined(separator: ", ")
+                Label {
+                    Text(tr("En même temps que \(list)."))
+                } icon: {
+                    Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange)
+                }
+                .font(.footnote)
+                .accessibilityIdentifier("slot-conflict")
+            }
             // A weekly entry opened from one day: that day only, it doesn't take place.
             if slot.date == nil, let day, FitnessMath.isoWeekday(day) == slot.weekday {
                 Toggle(tr("Annulé le \(Fmt.longDay(day))"), isOn: cancelled(on: day))
                     .accessibilityIdentifier("slot-cancel-once")
             }
+            if isSaved {
+                Button(role: .destructive) {
+                    confirmsDelete = true
+                } label: {
+                    Label(slot.date == nil ? tr("Supprimer (toutes les semaines)") : tr("Supprimer l'événement"), systemImage: "trash")
+                }
+                .accessibilityIdentifier("slot-delete")
+            }
         }
+        .confirmationDialog(tr("Supprimer cet événement ?"), isPresented: $confirmsDelete, titleVisibility: .visible) {
+            Button(tr("Supprimer"), role: .destructive) {
+                let id = slot.id
+                model.update(\.student) { $0.slots.removeAll { $0.id == id } }
+                dismiss()
+            }
+        }
+    }
+
+    /// The usual lengths, from the start.
+    private var durationChips: some View {
+        HStack(spacing: 6) {
+            ForEach([30, 60, 90, 120], id: \.self) { minutes in
+                let isOn = slot.endMinute - slot.startMinute == minutes
+                Button {
+                    slot.endMinute = min(24 * 60, slot.startMinute + minutes)
+                } label: {
+                    Text(minutes < 60 ? tr("\(minutes) min") : (minutes % 60 == 0 ? tr("\(minutes / 60) h") : tr("\(minutes / 60) h \(minutes % 60)")))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(isOn ? Color.white : Color.primary)
+                        .frame(maxWidth: .infinity, minHeight: 34)
+                        .background(isOn ? Color.accentColor : Color.secondary.opacity(0.14), in: Capsule())
+                }
+                .buttonStyle(.borderless)
+            }
+        }
+        .accessibilityIdentifier("slot-durations")
     }
 
     private var isOnce: Binding<Bool> {

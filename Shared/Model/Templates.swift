@@ -160,6 +160,7 @@ enum TemplateCatalog {
         case .business: "F2A33A"
         case .student: "F2588F"
         case .car: "6B7280"
+        case .memories: "D9608B"
         }
     }
 
