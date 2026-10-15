@@ -112,7 +112,7 @@ struct PremiumBanner: View {
                     Text(tr("Ardane Premium"))
                         .font(.headline)
                         .foregroundStyle(.primary)
-                    Text(tr("\(WidgetKind.allCases.filter { $0.isPremium }.count) widgets en plus, \(ThemeCatalog.all.count - ThemeCatalog.free.count) styles, analyses et fonds photo."))
+                    Text(tr("\(WidgetKind.offered.filter { $0.isPremium }.count) widgets en plus, \(ThemeCatalog.all.count - ThemeCatalog.free.count) styles, analyses et fonds photo."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

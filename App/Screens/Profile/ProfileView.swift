@@ -122,7 +122,6 @@ struct ProfileView: View {
                     LabeledContent(tr("Autorisation"), value: notificationStatus)
                     NavigationLink { SmartRemindersView() } label: { Text(tr("Rappels intelligents")) }
                         .accessibilityIdentifier("settings-smart-reminders")
-                    NavigationLink { HydrationView() } label: { Text(tr("Rappels d'hydratation")) }
                     NavigationLink { HabitsView() } label: { Text(tr("Rappels d'habitudes")) }
                     if notificationStatus == tr("Refusée") {
                         Button(tr("Ouvrir les réglages de l'iPhone")) {
@@ -138,7 +137,6 @@ struct ProfileView: View {
                 Section(tr("Tes données")) {
                     NavigationLink { TasksView() } label: { Label(tr("Tâches"), systemImage: "checklist") }
                     NavigationLink { HabitsView() } label: { Label(tr("Habitudes"), systemImage: "repeat") }
-                    NavigationLink { HydrationView() } label: { Label(tr("Hydratation"), systemImage: "drop") }
                     NavigationLink { MoneyView() } label: { Label(tr("Revenus et dépenses"), systemImage: "dollarsign.circle") }
                     NavigationLink { CalendarAccessView() } label: { Label(tr("Calendrier"), systemImage: "calendar") }
                 }

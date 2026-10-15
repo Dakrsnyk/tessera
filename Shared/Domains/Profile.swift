@@ -175,7 +175,7 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
         case .studies: tr("Ton programme et ton rythme de travail.")
         case .car: tr("Ta voiture et son kilométrage, pour suivre pleins et entretiens.")
         case .weather: tr("Ta ville, pour la météo de tes widgets.")
-        case .wellbeing: tr("Ton objectif d'eau et une première habitude à suivre.")
+        case .wellbeing: tr("Une première habitude à suivre.")
         }
     }
 }

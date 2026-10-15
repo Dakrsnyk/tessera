@@ -1,5 +1,6 @@
 import AppIntents
 import Foundation
+import os
 import WidgetKit
 
 // Buttons of the mini-app widgets. Each one writes to the shared store, then refreshes the widgets.
@@ -15,9 +16,13 @@ extension Notification.Name {
 }
 
 /// Saves a workout change made by a button outside the app, then updates the widgets, the app
-/// (when it is running) and the Live Activity.
+/// (when it is running) and the Live Activity. It needs neither the app on screen nor the iPhone
+/// unlocked: the session file stays readable on the Lock Screen (see `SharedStore.writingOptions`).
 private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
-    SharedStore.shared.update(FitnessState.self, change)
+    guard SharedStore.shared.update(FitnessState.self, change) else {
+        Logger(subsystem: "com.dakrsnyk.tessera.widgets", category: "intents").error("workout button: the session file can't be read right now")
+        return
+    }
     refreshWidgets()
     await MainActor.run { NotificationCenter.default.post(name: .workoutSavedOutside, object: nil) }
     await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
@@ -30,6 +35,9 @@ private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
 struct CompleteSetIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Valider la série"
     static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
 
     init() {}
 
@@ -42,6 +50,9 @@ struct CompleteSetIntent: LiveActivityIntent {
 struct PauseRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Mettre le repos en pause"
     static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
 
     init() {}
 
@@ -54,6 +65,9 @@ struct PauseRestIntent: LiveActivityIntent {
 struct ResumeRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Reprendre le repos"
     static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
 
     init() {}
 
@@ -66,6 +80,9 @@ struct ResumeRestIntent: LiveActivityIntent {
 struct SkipRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Passer le repos"
     static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
 
     init() {}
 

@@ -45,24 +45,11 @@ enum NotificationScheduler {
         center.removePendingNotificationRequests(withIdentifiers: [habitID(id)])
     }
 
-    // MARK: Hydration
+    // MARK: Water (removed)
 
-    private static let hydrationHours = [10, 12, 14, 16, 18, 20]
-
-    static func setHydrationReminders(_ enabled: Bool) {
-        let ids = hydrationHours.map { "tessera.water.\($0)" }
-        center.removePendingNotificationRequests(withIdentifiers: ids)
-        guard enabled else { return }
-        for hour in hydrationHours {
-            let content = UNMutableNotificationContent()
-            content.title = tr("Un verre d'eau ?")
-            content.body = tr("Ajoute-le d'une touche depuis ton widget.")
-            content.sound = .default
-            var components = DateComponents()
-            components.hour = hour
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-            center.add(UNNotificationRequest(identifier: "tessera.water.\(hour)", content: content, trigger: trigger))
-        }
+    /// The water reminders of earlier versions: the water mini-app is gone, so are its reminders.
+    static func cancelWaterReminders() {
+        center.removePendingNotificationRequests(withIdentifiers: [10, 12, 14, 16, 18, 20].map { "tessera.water.\($0)" })
     }
 
     // MARK: Countdown

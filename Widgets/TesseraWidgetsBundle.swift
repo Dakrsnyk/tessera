@@ -56,7 +56,6 @@ struct DataWidgets: WidgetBundle {
         WeatherWidget()
         CryptoWidget()
         MoneyFlowWidget()
-        HydrationWidget()
     }
 }
 

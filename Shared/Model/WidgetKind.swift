@@ -140,11 +140,20 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
         families.contains { $0 == .accessoryCircular || $0 == .accessoryRectangular || $0 == .accessoryInline }
     }
 
+    /// Widgets of features that were removed (the water mini-app): kept so saved data still reads, never
+    /// offered again anywhere (catalog, Store, Créer, gallery). Saved ones are taken off at launch.
+    static let retired: Set<WidgetKind> = [.hydration]
+
+    var isRetired: Bool { Self.retired.contains(self) }
+
+    /// Every widget that can be made today.
+    static var offered: [WidgetKind] { allCases.filter { !$0.isRetired } }
+
     static func kinds(in category: WidgetCategory) -> [WidgetKind] {
-        allCases.filter { $0.category == category }
+        offered.filter { $0.category == category }
     }
 
-    static var freeKinds: [WidgetKind] { allCases.filter { !$0.isPremium } }
+    static var freeKinds: [WidgetKind] { offered.filter { !$0.isPremium } }
 }
 
 extension WidgetFamily {

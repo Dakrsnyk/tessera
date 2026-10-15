@@ -271,12 +271,12 @@ enum StudentMath {
     /// What the day holds: the weekly entries of its weekday and the events of its date. A weekly
     /// entry cancelled that day is left out, unless asked for (to show it crossed out and bring it back).
     static func occurrences(_ state: StudentState, on day: Date, includingCancelled: Bool = false) -> [ClassOccurrence] {
-        let start = DateMath.startOfDay(day)
-        return state.slots.filter { $0.falls(on: day) }.map { slot in
+        // Wall-clock times of that day: 9:00 stays 9:00 on the days the clocks change.
+        state.slots.filter { $0.falls(on: day) }.map { slot in
             ClassOccurrence(
                 slot: slot,
-                start: start.addingTimeInterval(TimeInterval(slot.startMinute) * 60),
-                end: start.addingTimeInterval(TimeInterval(slot.endMinute) * 60)
+                start: DateMath.date(on: day, minute: slot.startMinute),
+                end: DateMath.date(on: day, minute: slot.endMinute)
             )
         }
         .filter { includingCancelled || !$0.isCancelled }

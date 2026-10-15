@@ -149,7 +149,6 @@ struct DailyLayoutEditor: View {
         case .workout: (tr("Séance du jour"), "figure.strengthtraining.traditional", "E5484D")
         case .planning: (tr("Planning"), "calendar.day.timeline.left", "3366FF")
         case .habits: (tr("Habitudes"), "repeat", "7FA33A")
-        case .water: (tr("Eau"), "drop.fill", "3A8DDE")
         case .steps: (tr("Pas"), "figure.walk", "12A4B5")
         case .budget: (tr("Budget"), "creditcard.fill", "2B9A66")
         case .weather: (tr("Météo"), "cloud.sun.fill", "3A8DDE")

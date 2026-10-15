@@ -156,15 +156,6 @@ struct DataItemRow: View {
                 }
                 if model.isFilled(.habits) { link(tr("Gérer mes habitudes")) { HabitsView() } }
             }
-        case .hydrationGoal:
-            HStack(spacing: 6) {
-                ForEach([4, 6, 8, 10, 12], id: \.self) { glasses in
-                    let isOn = model.profile.knows(.hydrationGoal) && model.content.hydration.goal == glasses
-                    chip("\(glasses)", isOn: isOn) {
-                        if isOn { model.forget(.hydrationGoal) } else { model.setHydrationGoal(glasses) }
-                    }
-                }
-            }
         case .tasks:
             VStack(spacing: 8) {
                 quickAdd(tr("Ex. : appeler le garage"), identifier: "data-new-task") {

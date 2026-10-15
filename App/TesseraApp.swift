@@ -34,6 +34,8 @@ struct TesseraApp: App {
                 }
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active {
+                        // The iPhone is unlocked: older files become readable on the Lock Screen too.
+                        Task.detached(priority: .utility) { SharedStore.shared.relaxFileProtection() }
                         model.reloadFromDisk()
                         model.countOpen()
                         // A set validated from the Lock Screen while the app was closed.
@@ -285,7 +287,6 @@ struct ContentScreenView: View {
                 switch screen {
                 case .tasks: TasksView()
                 case .habits: HabitsView()
-                case .hydration: HydrationView()
                 case .money: MoneyView()
                 case .weather: WeatherLocationView()
                 case .calendar: CalendarAccessView()

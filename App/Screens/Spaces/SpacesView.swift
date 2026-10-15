@@ -355,7 +355,7 @@ enum SpaceCatalog {
         let pair: (medium: [WidgetKind], large: [WidgetKind])
         switch space {
         case .productivity: pair = ([.priorities, .deadline], [.priorities, .deadline, .tasks])
-        case .habits: pair = ([.habitStreak, .hydration], [.habitStreak, .hydration, .habits])
+        case .habits: pair = ([.habitStreak, .habits], [.habitStreak, .habitRate, .habits])
         case .nutrition: pair = ([.caloriesLeft, .macros], [.caloriesLeft, .macros, .mealsToday])
         case .fitness: pair = ([.nextSet, .trainingStreak], [.nextSet, .trainingStreak, .todaysWorkout])
         case .budget: pair = ([.budgetLeft, .savingsGoal], [.budgetLeft, .savingsGoal, .spendingByCategory])
@@ -382,7 +382,7 @@ enum SpaceCatalog {
         let picks: [(WidgetKind, WidgetFamily)]
         switch space {
         case .productivity: picks = [(.priorities, .systemSmall), (.tasks, .systemMedium)]
-        case .habits: picks = [(.habits, .systemMedium), (.hydration, .systemSmall)]
+        case .habits: picks = [(.habits, .systemMedium), (.habitStreak, .systemSmall)]
         case .nutrition: picks = [(.caloriesLeft, .systemSmall), (.macros, .systemSmall), (.nextMeal, .systemSmall)]
         case .fitness: picks = [(.todaysWorkout, .systemMedium), (.trainingStreak, .systemSmall)]
         case .budget: picks = [(.budgetLeft, .systemSmall), (.spendingByCategory, .systemMedium)]
@@ -402,7 +402,7 @@ enum SpaceCatalog {
 
     /// The widgets fed by a space.
     static func kinds(in space: Space) -> [WidgetKind] {
-        var kinds = WidgetKind.allCases.filter { $0.space == space }
+        var kinds = WidgetKind.offered.filter { $0.space == space }
         switch space {
         case .life: kinds += [.birthday, .ageProgress, .holiday].filter { !kinds.contains($0) }
         case .productivity: kinds += [.aiProductivity].filter { !kinds.contains($0) }

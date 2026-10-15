@@ -605,16 +605,6 @@ struct TopicForm: View {
     // MARK: Well-being
 
     @ViewBuilder private var wellbeing: some View {
-        QuestionCard(title: tr("Verres d'eau par jour"), detail: tr("Le widget Hydratation suit cet objectif.")) {
-            FlowLayout {
-                ForEach([4, 6, 8, 10, 12], id: \.self) { glasses in
-                    let isOn = profile.knows(.hydrationGoal) && model.content.hydration.goal == glasses
-                    ChoiceChip(title: "\(glasses)", isSelected: isOn) {
-                        if isOn { model.forget(.hydrationGoal) } else { model.setHydrationGoal(glasses) }
-                    }
-                }
-            }
-        }
         QuestionCard(title: tr("Une habitude à suivre"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr("habitude suivie"), tr("habitudes suivies"))) {
             quickAdd(placeholder: tr("Ex. : méditer, lire, marcher"), text: $newHabit, identifier: "first-habit") {
                 guard model.canAddHabit else { return }

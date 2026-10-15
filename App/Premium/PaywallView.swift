@@ -190,7 +190,7 @@ struct PaywallView: View {
             .font(.caption.weight(.semibold))
             .foregroundStyle(.secondary)
             .padding(.bottom, 8)
-            comparisonRow(tr("Widgets"), free: "\(WidgetKind.allCases.filter { !$0.isPremium }.count)", premium: "\(WidgetKind.allCases.count)")
+            comparisonRow(tr("Widgets"), free: "\(WidgetKind.freeKinds.count)", premium: "\(WidgetKind.offered.count)")
             comparisonRow(tr("Styles"), free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
             comparisonRow(tr("Widgets enregistrés"), free: "\(AppModel.freeDesignLimit)", premium: "∞")
             comparisonRow(tr("Habitudes"), free: "\(AppModel.freeHabitLimit)", premium: "∞")

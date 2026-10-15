@@ -14,7 +14,6 @@ enum TileAction: Hashable {
     case toggleAssignment(String)
     case startFocus(Int)
     case toggleHabit(String)
-    case addWater
     /// Opens the app on the barcode scanner. Widgets can't use the camera: this is a link, which works
     /// on medium and large widgets (see `RenderContext.allowsLinks`).
     case scanFood

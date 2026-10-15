@@ -27,7 +27,7 @@ enum Space: String, CaseIterable, Identifiable, Codable {
     var subtitle: String {
         switch self {
         case .productivity: tr("Tâches, priorités, projets, compteurs")
-        case .habits: tr("Habitudes et hydratation")
+        case .habits: tr("Habitudes et séries")
         case .nutrition: tr("Repas, calories et macros")
         case .fitness: tr("Séances, séries et records")
         case .budget: tr("Dépenses, factures et épargne")

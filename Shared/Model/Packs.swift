@@ -56,7 +56,7 @@ struct WidgetPack: Identifiable, Hashable {
 enum PackCatalog {
     static let all: [WidgetPack] = [
         WidgetPack(id: "morning", name: tr("Bien démarrer"), tagline: tr("Météo, agenda, priorités et eau, dès le réveil."), symbol: "sunrise.fill",
-                   themeID: .glass, accentHex: "8C6CFF", kinds: [.now, .morning, .weather, .upNext, .priorities, .hydration]),
+                   themeID: .glass, accentHex: "8C6CFF", kinds: [.now, .morning, .weather, .upNext, .priorities, .habitStreak]),
         WidgetPack(id: "student", name: tr("Étudiant"), tagline: tr("Cours, examens, devoirs et fiches de révision."), symbol: "graduationcap.fill",
                    themeID: .minimal, accentHex: "F2588F", kinds: [.nextClass, .nextExam, .assignments, .timetable, .flashcard, .semesterProgress]),
         WidgetPack(id: "athlete", name: tr("Sportif"), tagline: tr("Séance, séries, repos, calories et protéines."), symbol: "figure.strengthtraining.traditional",
@@ -76,7 +76,7 @@ enum PackCatalog {
         WidgetPack(id: "nutrition", name: tr("Nutrition complète"), tagline: tr("Calories, macros, protéines, repas et semaine."), symbol: "fork.knife",
                    themeID: .glass, accentHex: "2F8F7A", kinds: [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nutritionWeek, .nextMeal]),
         WidgetPack(id: "habits", name: tr("Bonnes habitudes"), tagline: tr("Routine, eau, séries, taux de réussite et rythme du jour."), symbol: "leaf.fill",
-                   themeID: .minimal, accentHex: "8C6CFF", kinds: [.habits, .hydration, .habitStreak, .habitRate, .sunCycle, .moonPhase]),
+                   themeID: .minimal, accentHex: "8C6CFF", kinds: [.habits, .habitWeek, .habitStreak, .habitRate, .sunCycle, .moonPhase]),
         WidgetPack(id: "focus", name: tr("Concentration"), tagline: tr("Focus, travail profond, priorités et échéances."), symbol: "scope",
                    themeID: .futuristic, accentHex: "3366FF", kinds: [.focus, .deepWork, .priorities, .deadline, .project, .tasks]),
         WidgetPack(id: "weather", name: tr("Tout le ciel"), tagline: tr("Météo, détails, pluie, vent, soleil et lune."), symbol: "cloud.sun.fill",
@@ -94,7 +94,7 @@ enum PackCatalog {
         WidgetPack(id: "retro", name: tr("Rétro"), tagline: tr("Papier chaud et typo ronde, pour tous les jours."), symbol: "camera.macro",
                    themeID: .retro, accentHex: "F2A33A", kinds: [.calendar, .progress, .countdown, .habits, .note, .weather]),
         WidgetPack(id: "vivid", name: tr("Couleurs vives"), tagline: tr("Ta couleur en plein fond, sur six widgets."), symbol: "paintpalette.fill",
-                   themeID: .colorful, accentHex: "F2588F", kinds: [.now, .weather, .hydration, .habitStreak, .budgetLeft, .trainingStreak]),
+                   themeID: .colorful, accentHex: "F2588F", kinds: [.now, .weather, .habits, .habitStreak, .budgetLeft, .trainingStreak]),
         WidgetPack(id: "evening", name: tr("Bonne soirée"), tagline: tr("La lune, la journée qui s'achève et tes habitudes."), symbol: "moon.stars.fill",
                    themeID: .glass, accentHex: "8C6CFF", kinds: [.moonPhase, .habitStreak, .progress, .weather, .note, .countdown]),
         WidgetPack(id: "crypto", name: tr("Crypto"), tagline: tr("Bitcoin, marché, portefeuille et plus forte variation."), symbol: "bitcoinsign.circle.fill",
@@ -108,11 +108,11 @@ enum PackCatalog {
         WidgetPack(id: "mars", name: tr("Mars"), tagline: tr("Météo, soleil, vent et compte à rebours, sur la planète rouge."), symbol: "globe.europe.africa.fill",
                    themeID: .mars, accentHex: "FF6B57", kinds: [.weather, .sunCycle, .windUV, .countdown, .focus, .progress], group: .themed),
         WidgetPack(id: "nature", name: tr("Nature"), tagline: tr("Météo, pluie, soleil, habitudes et eau, au cœur de la forêt."), symbol: "tree.fill",
-                   themeID: .nature, accentHex: "2F8F7A", kinds: [.weather, .rainNext, .sunCycle, .habits, .hydration, .moonPhase], group: .themed),
+                   themeID: .nature, accentHex: "2F8F7A", kinds: [.weather, .rainNext, .sunCycle, .habits, .windUV, .moonPhase], group: .themed),
         WidgetPack(id: "plants", name: tr("Botanique"), tagline: tr("Habitudes, eau, séries et notes, comme un carnet de serre."), symbol: "leaf.fill",
-                   themeID: .botanical, accentHex: "2F8F7A", kinds: [.habits, .hydration, .habitStreak, .habitRate, .note, .calendar], group: .themed),
-        WidgetPack(id: "water", name: tr("Océan"), tagline: tr("Eau, météo, pluie, lune et heure, au fil des vagues."), symbol: "water.waves",
-                   themeID: .ocean, accentHex: "3366FF", kinds: [.hydration, .weather, .rainNext, .moonPhase, .clock, .progress], group: .themed),
+                   themeID: .botanical, accentHex: "2F8F7A", kinds: [.habits, .weekView, .habitStreak, .habitRate, .note, .calendar], group: .themed),
+        WidgetPack(id: "water", name: tr("Océan"), tagline: tr("Météo, pluie, prévisions, lune et heure, au fil des vagues."), symbol: "water.waves",
+                   themeID: .ocean, accentHex: "3366FF", kinds: [.weeklyForecast, .weather, .rainNext, .moonPhase, .clock, .progress], group: .themed),
     ]
 
     /// Halloween: heroes of the night and dark, mysterious moods (colours and motifs only).
@@ -140,7 +140,7 @@ enum PackCatalog {
                    themeID: .christmas, accentHex: "E5484D", kinds: [.countdown, .calendar, .holiday, .weather, .note, .moonPhase],
                    group: .seasonal(.christmas)),
         WidgetPack(id: "snow-night", name: tr("Nuit de neige"), tagline: tr("Météo, lune, heure et calendrier, sous les flocons."), symbol: "snowflake",
-                   themeID: .snowfall, accentHex: "3366FF", kinds: [.weather, .moonPhase, .clock, .calendar, .countdown, .hydration],
+                   themeID: .snowfall, accentHex: "3366FF", kinds: [.weather, .moonPhase, .clock, .calendar, .countdown, .yearDots],
                    group: .seasonal(.christmas)),
     ]
 

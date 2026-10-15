@@ -40,7 +40,7 @@ enum StoreShowcase {
         item(.progress, .accessoryCircular, .minimal, "2F8F7A", "progress-year"),
         item(.caloriesLeft, .accessoryCircular, .minimal, "2F8F7A"),
         item(.tasks, .accessoryRectangular, .minimal, "2F8F7A"),
-        item(.hydration, .accessoryCircular, .minimal, "3366FF"),
+        item(.habitStreak, .accessoryCircular, .minimal, "3366FF"),
         item(.nextSet, .accessoryRectangular, .minimal, "FF6B57"),
         item(.trainingStreak, .accessoryCircular, .minimal, "FF6B57"),
         item(.budgetLeft, .accessoryRectangular, .minimal, "2F8F7A"),
@@ -133,9 +133,8 @@ enum StoreShowcase {
             item(.nextActivity, .systemMedium, .light, "F2A33A"),
             item(.tripProgress, .systemSmall, .colorful, "3366FF"),
         ]),
-        StoreCollection(id: "calm", title: tr("Bien-être"), subtitle: tr("Habitudes, eau, soleil et lune."),
+        StoreCollection(id: "calm", title: tr("Bien-être"), subtitle: tr("Habitudes, soleil et lune."),
                         symbol: "leaf.fill", colorHex: "7FA33A", categories: [.wellbeing, .weather], items: [
-            item(.hydration, .systemSmall, .aurora, "3366FF"),
             item(.habits, .systemMedium, .glass, "8C6CFF"),
             item(.habitRate, .systemSmall, .glass, "F2588F"),
             item(.moonPhase, .systemSmall, .elegant, "F2A33A"),
@@ -158,7 +157,6 @@ enum StoreShowcase {
                         symbol: "sparkles", colorHex: "F2588F", items: [
             item(.weather, .systemSmall, .colorful, "3366FF"),
             item(.now, .systemMedium, .colorful, "FF6B57"),
-            item(.hydration, .systemSmall, .colorful, "8C6CFF"),
             item(.habitStreak, .systemSmall, .colorful, "F2588F"),
             item(.budgetLeft, .systemMedium, .colorful, "F2A33A"),
             item(.trainingStreak, .systemSmall, .colorful, "7FA33A"),

@@ -13,7 +13,6 @@ struct AccessoryWidgetView: View {
         case .weather: weather
         case .tasks: tasks
         case .focus: focus
-        case .hydration: hydration
         case .upNext: upNext
         case .crypto: crypto
         case .clock, .calendar, .worldClock, .yearDots, .habits, .note, .moneyFlow: fallback
@@ -187,21 +186,6 @@ struct AccessoryWidgetView: View {
                     .lineLimit(2)
             }
         }
-    }
-
-    // MARK: Hydration
-
-    private var hydration: some View {
-        let state = context.payload.content.hydration
-        let count = state.glasses(on: context.date)
-        let goal = max(1, state.goal)
-        return Gauge(value: min(Double(count), Double(goal)), in: 0...Double(goal)) {
-            Image(systemName: "drop.fill")
-        } currentValueLabel: {
-            Text("\(count)")
-        }
-        .gaugeStyle(.accessoryCircular)
-        .widgetAccentable()
     }
 
     // MARK: Up next

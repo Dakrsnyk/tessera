@@ -98,21 +98,6 @@ struct KindOptionsSection: View {
             EditorSection(title: tr("Contenu")) {
                 contentLink(tr("Gérer mes habitudes"), detail: "\(model.content.habits.count)") { HabitsView() }
             }
-        case .hydration:
-            EditorSection(title: tr("Contenu")) {
-                VStack(spacing: 0) {
-                    Stepper(value: Binding(
-                        get: { model.content.hydration.goal },
-                        set: { goal in model.setHydrationGoal(goal) }
-                    ), in: 1...20) {
-                        Text(tr("Objectif : \(model.content.hydration.goal) verres"))
-                    }
-                    .frame(minHeight: 44)
-                    Divider()
-                    contentLink(tr("Suivi et rappels"), detail: nil) { HydrationView() }
-                }
-                .font(.subheadline)
-            }
         case .focus:
             EditorSection(title: tr("Contenu")) {
                 Text(tr("Lance une session de 15, 25 ou 50 minutes directement depuis le widget. Le minuteur défile en direct sur ton écran d'accueil."))

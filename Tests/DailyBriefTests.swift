@@ -43,12 +43,12 @@ final class DailyBriefTests: XCTestCase {
         XCTAssertNotNil(withTarget.nextMeal, "The next meal is suggested once the target is known")
     }
 
-    func testWaterAndBudgetNeverUseDefaultGoals() {
+    func testBudgetNeverUsesADefaultGoalAndWaterIsGone() {
         var input = DailyBrief.Input(now: wednesday(15))
         input.content.hydration.add(3, on: input.now)
         input.budget.expenses = [Expense(amount: 12, categoryID: nil, date: input.now)]
         let tiles = DailyBrief.tiles(input)
-        XCTAssertTrue(tiles.contains(.water(glasses: 3, goal: nil)), "3 glasses, no goal made up")
+        XCTAssertFalse(tiles.contains { $0.id == "water" }, "The water mini-app was removed: old glasses stay saved, never shown")
         XCTAssertTrue(tiles.contains(.budget(spentToday: 12, perDayLeft: nil)), "Spent today, no budget made up")
     }
 
@@ -119,9 +119,9 @@ final class DailyBriefTests: XCTestCase {
     }
 
     func testRowsPairHalfTiles() {
-        let tiles: [DailyBrief.Tile] = [.water(glasses: 1, goal: 8), .invite(.budget), .habits(done: 0, items: []), .steps(steps: 10, goal: nil), .budget(spentToday: 3, perDayLeft: nil)]
+        let tiles: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .invite(.budget), .habits(done: 0, items: []), .budget(spentToday: 3, perDayLeft: nil)]
         let rows = DailyBrief.rows(tiles).map { $0.map(\.id) }
-        XCTAssertEqual(rows, [["invite-budget"], ["water", "habits"], ["steps", "budget"]])
+        XCTAssertEqual(rows, [["invite-budget"], ["steps", "habits"], ["budget"]])
     }
 
     // MARK: One place for each value, example data only without it
@@ -160,7 +160,7 @@ final class DailyBriefTests: XCTestCase {
 
     func testDefaultsNeverCountAsGiven() {
         let model = temporaryModel()
-        for item in [DataItem.kcalTarget, .weeklyWorkouts, .monthlyBudget, .hydrationGoal, .focusGoal, .businessGoal, .carName, .stepGoal, .weight] {
+        for item in [DataItem.kcalTarget, .weeklyWorkouts, .monthlyBudget, .focusGoal, .businessGoal, .carName, .stepGoal, .weight] {
             XCTAssertFalse(model.isFilled(item), "\(item) counts as given without the person")
         }
         XCTAssertEqual(model.completion.filled, 0)

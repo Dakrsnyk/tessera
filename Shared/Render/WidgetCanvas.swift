@@ -108,7 +108,6 @@ struct KindContentView: View {
         case .weather: WeatherWidgetView(context: context)
         case .crypto: CryptoWidgetView(context: context)
         case .moneyFlow: MoneyFlowWidgetView(context: context)
-        case .hydration: HydrationWidgetView(context: context)
         default: TileView(tile: TileFactory.make(context), context: context)
         }
     }
@@ -158,7 +157,6 @@ enum WidgetLinks {
         switch design.kind {
         case .tasks: return DeepLink.tasks.url
         case .habits: return DeepLink.habits.url
-        case .hydration: return DeepLink.hydration.url
         case .moneyFlow: return DeepLink.money.url
         case .weather:
             if case .needsLocation = payload.weather { return DeepLink.weatherLocation.url }

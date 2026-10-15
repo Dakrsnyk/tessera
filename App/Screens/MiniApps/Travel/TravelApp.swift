@@ -34,7 +34,7 @@ enum Travel {
     static var accentHex: String { MiniApp.travel.colorHex }
 
     static func newTrip(now: Date = Date()) -> Trip {
-        let start = DateMath.startOfDay(now).addingTimeInterval(30 * 86_400 + 9 * 3_600)
+        let start = DateMath.date(on: DateMath.calendar.date(byAdding: .day, value: 30, to: now) ?? now, minute: 9 * 60)
         return Trip(destination: "", start: start, end: start.addingTimeInterval(7 * 86_400))
     }
 

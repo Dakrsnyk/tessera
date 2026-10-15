@@ -66,7 +66,7 @@ enum ScreenshotMode {
             // « Mon Quotidien » with every card swiped to its second view.
             router.tab = .home
             model.updateSettings { settings in
-                for card in ["nutrition", "workout", "water", "steps", "weather"] { settings.dailyCardPages[card] = 1 }
+                for card in ["nutrition", "workout", "steps", "weather"] { settings.dailyCardPages[card] = 1 }
             }
         case "spaces-lock":
             router.tab = .spaces
@@ -417,7 +417,7 @@ struct WidgetGalleryView: View {
     }
 
     private var kinds: [WidgetKind] {
-        WidgetKind.allCases.filter { $0.families.contains(family) }
+        WidgetKind.offered.filter { $0.families.contains(family) }
     }
 
     private var pageKinds: [WidgetKind] {

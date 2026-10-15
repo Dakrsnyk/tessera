@@ -116,8 +116,6 @@ enum TemplateCatalog {
                        configure: .money(.expense)),
 
         // Bien-être
-        WidgetTemplate(id: "water-minimal", name: tr("Verres d'eau"), kind: .hydration, themeID: .minimal, accentHex: "3366FF", isFeatured: true),
-        WidgetTemplate(id: "water-colorful", name: tr("Hydratation couleur"), kind: .hydration, themeID: .colorful, accentHex: "3366FF"),
     ]
 
     /// Hand-picked looks for the V2 widgets, shown in "Nouveautés".
@@ -139,7 +137,7 @@ enum TemplateCatalog {
     /// One default look for every V2 widget that has no hand-picked template.
     static let generated: [WidgetTemplate] = {
         let covered = Set((handmade + showcase).map(\.kind))
-        return WidgetKind.allCases.filter { !covered.contains($0) }.map { kind in
+        return WidgetKind.offered.filter { !covered.contains($0) }.map { kind in
             WidgetTemplate(id: "auto-\(kind.rawValue)", name: kind.title, kind: kind, themeID: autoTheme(kind.category), accentHex: autoAccent(kind.category))
         }
     }()

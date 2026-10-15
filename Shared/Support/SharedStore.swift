@@ -98,9 +98,29 @@ final class SharedStore {
     }()
     private let lock = NSLock()
 
+    /// Every file stays readable while the iPhone is locked (after its first unlock since it started):
+    /// the buttons of the workout's Live Activity and of the widgets run on the Lock Screen.
+    static let writingOptions: Data.WritingOptions = [.atomic, .completeFileProtectionUntilFirstUserAuthentication]
+
     init(directory: URL = AppGroup.containerURL.appendingPathComponent("Tessera", isDirectory: true)) {
         self.directory = directory
-        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true,
+                                                 attributes: [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication])
+    }
+
+    /// Files saved by an older version, or under a stricter default, become readable while the iPhone
+    /// is locked. Called once the app is open (the iPhone is then unlocked).
+    func relaxFileProtection() {
+        lock.lock(); defer { lock.unlock() }
+        let fileManager = FileManager.default
+        let attributes: [FileAttributeKey: Any] = [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication]
+        try? fileManager.setAttributes(attributes, ofItemAtPath: directory.path)
+        for name in (try? fileManager.contentsOfDirectory(atPath: directory.path)) ?? [] where name.hasSuffix(".json") {
+            let path = directory.appendingPathComponent(name).path
+            if (try? fileManager.attributesOfItem(atPath: path)[.protectionKey] as? FileProtectionType) != .completeUntilFirstUserAuthentication {
+                try? fileManager.setAttributes(attributes, ofItemAtPath: path)
+            }
+        }
     }
 
     private func url(_ file: StoreFile) -> URL {
@@ -116,7 +136,15 @@ final class SharedStore {
     func write<T: Encodable>(_ value: T, to file: StoreFile) {
         lock.lock(); defer { lock.unlock() }
         guard let data = try? encoder.encode(value) else { return }
-        try? data.write(to: url(file), options: [.atomic])
+        try? data.write(to: url(file), options: Self.writingOptions)
+    }
+
+    /// Whether a file exists that can't be read or decoded right now (protected while the iPhone is
+    /// locked, or damaged): a read-modify-write must then leave it alone rather than replace it.
+    private func isUnreadable(_ file: StoreFile) -> Bool {
+        let path = url(file)
+        guard FileManager.default.fileExists(atPath: path.path) else { return false }
+        return (try? Data(contentsOf: path)) == nil
     }
 
     func remove(_ file: StoreFile) {
@@ -134,7 +162,7 @@ final class SharedStore {
     func setRawData(_ data: Data?, for file: StoreFile) {
         lock.lock(); defer { lock.unlock() }
         if let data {
-            try? data.write(to: url(file), options: [.atomic])
+            try? data.write(to: url(file), options: Self.writingOptions)
         } else {
             try? FileManager.default.removeItem(at: url(file))
         }
@@ -169,6 +197,7 @@ final class SharedStore {
 
     /// Read-modify-write for small changes made from widget intents.
     func updateContent(_ change: (inout ContentState) -> Void) {
+        guard !isUnreadable(.content) else { return }
         var value = content
         change(&value)
         content = value
@@ -182,11 +211,15 @@ final class SharedStore {
         write(value, to: T.file)
     }
 
-    /// Read-modify-write of a mini-app's data (used by widget buttons and the app).
-    func update<T: StoredState>(_ type: T.Type, _ change: (inout T) -> Void) {
+    /// Read-modify-write of a mini-app's data (used by widget buttons and the app). Returns false, and
+    /// changes nothing, when the saved file can't be read: an empty state never replaces the person's data.
+    @discardableResult
+    func update<T: StoredState>(_ type: T.Type, _ change: (inout T) -> Void) -> Bool {
+        guard !isUnreadable(T.file) else { return false }
         var value = state(T.self)
         change(&value)
         write(value, to: T.file)
+        return true
     }
 
     func design(id: UUID) -> WidgetDesign? {
@@ -213,7 +246,7 @@ enum ImageStore {
         guard let data = resized.jpegData(compressionQuality: 0.82) else { return nil }
         let name = "\(UUID().uuidString).jpg"
         do {
-            try data.write(to: directory.appendingPathComponent(name), options: [.atomic])
+            try data.write(to: directory.appendingPathComponent(name), options: SharedStore.writingOptions)
             return name
         } catch {
             return nil
@@ -241,7 +274,7 @@ enum ImageStore {
     /// Puts back a photo from a backup, only under a name the store gives itself and only if it is an image.
     static func restore(_ data: Data, named name: String) {
         guard isStoredName(name), UIImage(data: data) != nil else { return }
-        try? data.write(to: directory.appendingPathComponent(name), options: [.atomic])
+        try? data.write(to: directory.appendingPathComponent(name), options: SharedStore.writingOptions)
     }
 
     /// The names `save` gives: a UUID and « .jpg ».

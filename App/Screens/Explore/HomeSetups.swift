@@ -236,11 +236,11 @@ enum HomeSetupCatalog {
             tags: [.colorful, .dark, .wellbeing], wallpaper: .aurora, icons: .glass,
             rows: [
                 .widgets([medium(.now, .aurora, "3366FF")]),
-                .widgets([small(.weather, .glass, "8C6CFF"), small(.hydration, .aurora, "3366FF")]),
+                .widgets([small(.weather, .glass, "8C6CFF"), small(.habitStreak, .aurora, "3366FF")]),
                 .widgetAndApps(small(.habitStreak, .aurora, "3366FF"), [.health, .fitness, .music, .podcasts], widgetFirst: false),
             ],
             dock: [.phone, .messages, .web, .camera],
-            lock: SetupLock(widgets: [circular(.hydration), circular(.habitStreak), circular(.weather), circular(.progress, "progress-day")])
+            lock: SetupLock(widgets: [circular(.moonPhase), circular(.habitStreak), circular(.weather), circular(.progress, "progress-day")])
         ),
         HomeSetup(
             id: "graphite", name: tr("Graphite"), tagline: tr("Noir, blanc et rien d'autre. L'heure, la journée, la semaine."),
@@ -335,10 +335,10 @@ enum HomeSetupCatalog {
             rows: [
                 .widgets([small(.countdown, .typography, "F2588F", "countdown-birthday"), small(.birthday, .glass, "F2588F")]),
                 .widgets([medium(.note, .typography, "F2588F", "note-reminder")]),
-                .widgetAndApps(small(.hydration, .glass, "F2588F"), [.photos, .messages, .music, .calendar], widgetFirst: true),
+                .widgetAndApps(small(.habitStreak, .glass, "F2588F"), [.photos, .messages, .music, .calendar], widgetFirst: true),
             ],
             dock: [.phone, .mail, .web, .camera],
-            lock: SetupLock(widgets: [circular(.birthday), circular(.hydration), circular(.countdown, "countdown-birthday"), circular(.moonPhase)],
+            lock: SetupLock(widgets: [circular(.birthday), circular(.habitStreak), circular(.countdown, "countdown-birthday"), circular(.moonPhase)],
                             clockDesign: .serif, clockWeight: .medium)
         ),
         HomeSetup(
@@ -368,12 +368,12 @@ enum HomeSetupCatalog {
             id: "ocean", name: tr("Océan"), tagline: tr("L'eau, le ciel et tes habitudes, en bleu profond."),
             tags: [.dark, .wellbeing], wallpaper: .ocean, icons: .glass,
             rows: [
-                .widgets([small(.hydration, .glass, "3366FF"), small(.weather, .glass, "3366FF")]),
+                .widgets([small(.moonPhase, .glass, "3366FF"), small(.weather, .glass, "3366FF")]),
                 .widgets([medium(.habitWeek, .glass, "3366FF")]),
                 .widgetAndApps(small(.moonPhase, .glass, "3366FF"), [.health, .music, .podcasts, .weather], widgetFirst: true),
             ],
             dock: [.phone, .messages, .web, .camera],
-            lock: SetupLock(widgets: [circular(.hydration), circular(.moonPhase), rectangular(.weather)], clockDesign: .rounded, clockWeight: .medium)
+            lock: SetupLock(widgets: [circular(.habitStreak), circular(.moonPhase), rectangular(.weather)], clockDesign: .rounded, clockWeight: .medium)
         ),
         HomeSetup(
             id: "foret", name: tr("Forêt"), tagline: tr("Ton mois d'entraînement, à l'ombre des pins."),
@@ -466,30 +466,30 @@ enum HomeSetupCatalog {
                 .widgetAndApps(small(.habits, .nature, "2F8F7A"), [.health, .fitness, .maps, .camera], widgetFirst: false),
             ],
             dock: [.phone, .messages, .web, .music],
-            lock: SetupLock(widgets: [rectangular(.rainNext), circular(.hydration), circular(.weather)], clockDesign: .serif)
+            lock: SetupLock(widgets: [rectangular(.rainNext), circular(.moonPhase), circular(.weather)], clockDesign: .serif)
         ),
         HomeSetup(
             id: "botanique", name: tr("Botanique"), tagline: tr("Un carnet de serre : habitudes, eau, calendrier et notes."),
             tags: [.wellbeing, .minimal], wallpaper: .jade,
             icons: .solid(background: "EFF5E6", symbol: "3E7B4F"),
             rows: [
-                .widgets([small(.habits, .botanical, "2F8F7A"), small(.hydration, .botanical, "2F8F7A")]),
+                .widgets([small(.habits, .botanical, "2F8F7A"), small(.habitStreak, .botanical, "2F8F7A")]),
                 .widgets([medium(.calendar, .botanical, "2F8F7A")]),
                 .widgetAndApps(small(.note, .botanical, "2F8F7A"), [.notes, .reminders, .health, .photos], widgetFirst: true),
             ],
             dock: [.phone, .messages, .web, .music],
-            lock: SetupLock(widgets: [circular(.habitStreak), circular(.hydration), circular(.weather)], clockDesign: .serif)
+            lock: SetupLock(widgets: [circular(.habitStreak), circular(.moonPhase), circular(.weather)], clockDesign: .serif)
         ),
         HomeSetup(
             id: "vagues", name: tr("Océan profond"), tagline: tr("Bleu abyssal et vagues : l'eau, la météo, la pluie et la lune."),
             tags: [.dark, .wellbeing, .colorful], wallpaper: .ocean, icons: .tinted("8FE9FF"),
             rows: [
                 .widgets([small(.weather, .ocean, "3366FF"), small(.rainNext, .ocean, "3366FF")]),
-                .widgets([medium(.hydration, .ocean, "3366FF")]),
+                .widgets([medium(.weeklyForecast, .ocean, "3366FF")]),
                 .widgetAndApps(small(.moonPhase, .ocean, "3366FF"), [.weather, .music, .podcasts, .photos], widgetFirst: false),
             ],
             dock: [.phone, .messages, .web, .camera],
-            lock: SetupLock(widgets: [circular(.hydration), circular(.moonPhase), circular(.weather), circular(.progress, "progress-day")], clockDesign: .rounded)
+            lock: SetupLock(widgets: [circular(.habitStreak), circular(.moonPhase), circular(.weather), circular(.progress, "progress-day")], clockDesign: .rounded)
         ),
     ]
 

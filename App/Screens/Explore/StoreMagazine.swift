@@ -654,7 +654,7 @@ struct CategoryIndex: View {
         VStack(spacing: 0) {
             ForEach(Array(categories.enumerated()), id: \.element) { pair in
                 let category = pair.element
-                let count = WidgetKind.allCases.filter { $0.category == category }.count
+                let count = WidgetKind.kinds(in: category).count
                 Button {
                     onOpen(category)
                 } label: {

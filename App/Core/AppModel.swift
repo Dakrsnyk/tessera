@@ -54,6 +54,7 @@ final class AppModel {
     init(store: SharedStore = .shared) {
         self.store = store
         reloadFromDisk()
+        removeRetiredFeatures()
         // A set validated or a rest skipped from the Lock Screen while the app is open: the session
         // in memory follows, so the next change here doesn't write an older state over it.
         workoutObserver = NotificationCenter.default.addObserver(forName: .workoutSavedOutside, object: nil, queue: .main) { [weak self] _ in
@@ -634,6 +635,39 @@ final class AppModel {
     }
 }
 
+// MARK: - Removed features
+
+extension AppModel {
+    /// The water mini-app was removed (2026-10-15): its widgets leave « Mes widgets » (and the combined
+    /// widgets that held one keep their other parts), its reminders stop. The glasses already noted stay
+    /// in the saved data, untouched, so nothing else is lost.
+    fileprivate func removeRetiredFeatures() {
+        var kept: [WidgetDesign] = []
+        var changed = false
+        for var design in designs {
+            if design.isCombo, design.options.parts.contains(where: { $0.kind.isRetired }) {
+                design.options.parts.removeAll { $0.kind.isRetired }
+                changed = true
+                guard let first = design.options.parts.first else { continue }
+                if design.kind.isRetired { design.kind = first.kind }
+            } else if design.kind.isRetired {
+                changed = true
+                continue
+            }
+            kept.append(design)
+        }
+        if changed {
+            designs = kept
+            store.designs = kept
+            scheduleWidgetReload()
+        }
+        if settings.hydrationReminders {
+            updateSettings { $0.hydrationReminders = false }
+            NotificationScheduler.cancelWaterReminders()
+        }
+    }
+}
+
 // MARK: - « Mes informations »
 
 extension AppModel {
@@ -767,11 +801,6 @@ extension AppModel {
     func setFocusGoal(_ hours: Double) {
         update(\.productivity) { $0.weeklyFocusGoalHours = max(0.5, hours) }
         markProvided(.focusGoal)
-    }
-
-    func setHydrationGoal(_ glasses: Int) {
-        updateContent { $0.hydration.goal = min(20, max(1, glasses)) }
-        markProvided(.hydrationGoal)
     }
 
     func setCarName(_ name: String) {

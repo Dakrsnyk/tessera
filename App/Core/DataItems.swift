@@ -26,7 +26,7 @@ enum InfoArea: String, CaseIterable, Identifiable {
 enum DataItem: String, CaseIterable, Identifiable {
     case kcalTarget, macroTargets, meals
     case routines, weeklyWorkouts, weight, stepGoal
-    case habits, hydrationGoal
+    case habits
     case tasks, priorities, projects, deadlines, counters, focusGoal
     case timetable, exams, assignments, grades, flashcards
     case monthlyBudget, expenses, bills, savingsGoals, accounts, moneyFlow
@@ -48,7 +48,7 @@ enum DataItem: String, CaseIterable, Identifiable {
 
     var style: Style {
         switch self {
-        case .kcalTarget, .macroTargets, .weeklyWorkouts, .weight, .stepGoal, .hydrationGoal, .focusGoal,
+        case .kcalTarget, .macroTargets, .weeklyWorkouts, .weight, .stepGoal, .focusGoal,
              .monthlyBudget, .businessGoal, .carName, .birthday, .city:
             .value
         case .meals, .expenses, .sales, .carFills:
@@ -64,7 +64,7 @@ enum DataItem: String, CaseIterable, Identifiable {
         switch self {
         case .kcalTarget, .macroTargets, .meals: .nutrition
         case .routines, .weeklyWorkouts, .weight, .stepGoal: .fitness
-        case .habits, .hydrationGoal: .habits
+        case .habits: .habits
         case .tasks, .priorities, .projects, .deadlines, .counters, .focusGoal: .productivity
         case .timetable, .exams, .assignments, .grades, .flashcards: .student
         case .monthlyBudget, .expenses, .bills, .savingsGoals, .accounts, .moneyFlow: .budget
@@ -88,7 +88,6 @@ enum DataItem: String, CaseIterable, Identifiable {
         case .weight: tr("Poids")
         case .stepGoal: tr("Objectif de pas")
         case .habits: tr("Habitudes")
-        case .hydrationGoal: tr("Objectif d'eau")
         case .tasks: tr("Tâches")
         case .priorities: tr("Top 3 du jour")
         case .projects: tr("Projets")
@@ -130,7 +129,6 @@ enum DataItem: String, CaseIterable, Identifiable {
         case .weight: "scalemass"
         case .stepGoal: "figure.walk"
         case .habits: "repeat"
-        case .hydrationGoal: "drop.fill"
         case .tasks: "checklist"
         case .priorities: "3.circle"
         case .projects: "folder"
@@ -173,7 +171,6 @@ enum DataItem: String, CaseIterable, Identifiable {
         case .weight: tr("Pour estimer les calories brûlées.")
         case .stepGoal: tr("Pour suivre tes pas dans « Mon Quotidien ».")
         case .habits: tr("Ce que tu veux faire chaque jour.")
-        case .hydrationGoal: tr("Le nombre de verres d'eau à boire par jour.")
         case .tasks: tr("Ce qu'il te reste à faire.")
         case .priorities: tr("Les trois choses les plus importantes du jour.")
         case .projects: tr("Tes projets et leurs étapes.")
@@ -212,7 +209,7 @@ enum DataItem: String, CaseIterable, Identifiable {
     /// The few items that make an area « complete » in « Mes informations » (the others are extras).
     var isKey: Bool {
         switch self {
-        case .kcalTarget, .macroTargets, .routines, .weeklyWorkouts, .weight, .stepGoal, .habits, .hydrationGoal,
+        case .kcalTarget, .macroTargets, .routines, .weeklyWorkouts, .weight, .stepGoal, .habits,
              .tasks, .timetable, .exams, .monthlyBudget, .bills, .businessGoal, .holdings, .trip, .carName, .birthday, .city:
             true
         default:
@@ -271,7 +268,7 @@ extension WidgetKind {
         case .upNext: [.calendar]
         case .tasks: [.tasks]
         case .habits, .habitStreak, .habitWeek, .habitRate: [.habits]
-        case .hydration: [.hydrationGoal]
+        case .hydration: []
         case .deepWork: [.focusGoal]
         case .priorities: [.priorities]
         case .project: [.projects]
@@ -350,7 +347,6 @@ extension AppModel {
         case .weight: profile.weightKg != nil
         case .stepGoal: profile.stepGoal != nil
         case .habits: !content.habits.isEmpty
-        case .hydrationGoal: profile.knows(.hydrationGoal)
         case .tasks: !content.tasks.isEmpty
         case .priorities: !productivity.priorities.isEmpty
         case .projects: !productivity.projects.isEmpty
@@ -402,7 +398,6 @@ extension AppModel {
         case .weight: return profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") }
         case .stepGoal: return profile.stepGoal.map { tr("\(Fmt.number($0)) pas") }
         case .habits: return Fmt.plural(content.habits.count, tr("habitude"), tr("habitudes"))
-        case .hydrationGoal: return Fmt.plural(content.hydration.goal, tr("verre par jour"), tr("verres par jour"))
         case .tasks:
             let open = content.tasks.filter { !$0.isDone }.count
             return Fmt.plural(open, tr("tâche à faire"), tr("tâches à faire"))

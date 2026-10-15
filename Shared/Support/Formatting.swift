@@ -1,24 +1,42 @@
 import Foundation
 
-/// Formatting helpers shared by the app and the widgets. Dates and numbers follow the language the
-/// interface is shown in, with the region of the iPhone (French in Canada: "2 200 $", "sam. 27 sept.").
+/// Formatting helpers shared by the app and the widgets. Three settings, kept apart:
+/// - the language (`Localization.language`): which translation the texts use;
+/// - the regional format (`locale`): that language with the region of the iPhone, for the way dates and
+///   numbers are written (French in Canada: "2 200 $", "sam. 27 sept.");
+/// - the time zone (`timeZone`): always the iPhone's own, following it when it changes (travel, daylight
+///   saving time). It never comes from the language or the region: switching Ardane from French to English
+///   changes how a time is written, never the time itself. Only a feature made for it (a world clock, a
+///   trip's local time) shows another zone, passed explicitly.
 enum Fmt {
-    static let locale: Locale = {
-        var components = Locale.Components(identifier: Localization.language)
-        if let region = Locale.current.region { components.region = region }
-        return Locale(components: components)
-    }()
+    static let locale: Locale = makeLocale(language: Localization.language, region: Locale.current.region)
 
-    static let calendar: Calendar = {
+    /// The iPhone's time zone, kept up to date by the system.
+    static var timeZone: TimeZone { .autoupdatingCurrent }
+
+    static let calendar: Calendar = makeCalendar(locale: locale, timeZone: .autoupdatingCurrent)
+
+    /// The regional format for a language: the language's own words with the iPhone's region. It carries
+    /// no time zone.
+    static func makeLocale(language: String, region: Locale.Region?) -> Locale {
+        var components = Locale.Components(identifier: language)
+        if let region { components.region = region }
+        components.timeZone = nil
+        return Locale(components: components)
+    }
+
+    /// The calendar every date is computed with (Monday first, ISO weeks), in the given time zone, whatever
+    /// the language.
+    static func makeCalendar(locale: Locale, timeZone: TimeZone) -> Calendar {
         var cal = Calendar(identifier: .gregorian)
         cal.locale = locale
         cal.firstWeekday = 2
         cal.minimumDaysInFirstWeek = 4
-        cal.timeZone = .current
+        cal.timeZone = timeZone
         return cal
-    }()
+    }
 
-    static func format(_ date: Date, template: String, timeZone: TimeZone = .current) -> String {
+    static func format(_ date: Date, template: String, timeZone: TimeZone = Fmt.timeZone) -> String {
         let formatter = DateFormatter()
         formatter.locale = locale
         formatter.timeZone = timeZone
@@ -26,7 +44,12 @@ enum Fmt {
         return formatter.string(from: date)
     }
 
-    static func time(_ date: Date, uses24Hour: Bool, timeZone: TimeZone = .current) -> String {
+    static func time(_ date: Date, uses24Hour: Bool, timeZone: TimeZone = Fmt.timeZone) -> String {
+        time(date, uses24Hour: uses24Hour, timeZone: timeZone, locale: locale)
+    }
+
+    /// A time written for a regional format: the language changes the writing, never the hour.
+    static func time(_ date: Date, uses24Hour: Bool, timeZone: TimeZone, locale: Locale) -> String {
         let formatter = DateFormatter()
         formatter.locale = uses24Hour ? locale : Locale(identifier: "en_US")
         formatter.timeZone = timeZone
@@ -34,7 +57,7 @@ enum Fmt {
         return formatter.string(from: date)
     }
 
-    static func meridiem(_ date: Date, timeZone: TimeZone = .current) -> String {
+    static func meridiem(_ date: Date, timeZone: TimeZone = Fmt.timeZone) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US")
         formatter.timeZone = timeZone

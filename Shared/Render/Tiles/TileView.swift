@@ -872,8 +872,6 @@ struct TileActionButton<Label: View>: View {
             IntentButton(intent: StartFocusIntent(minutes: minutes), isEnabled: isEnabled, label: label)
         case let .toggleHabit(id):
             IntentButton(intent: ToggleHabitIntent(habitID: UUID(uuidString: id) ?? UUID()), isEnabled: isEnabled, label: label)
-        case .addWater:
-            IntentButton(intent: AddWaterIntent(glasses: 1), isEnabled: isEnabled, label: label)
         case .scanFood:
             if isEnabled {
                 Link(destination: DeepLink.scanFood.url) { label() }

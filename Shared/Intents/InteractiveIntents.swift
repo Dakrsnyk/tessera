@@ -50,28 +50,6 @@ struct ToggleHabitIntent: AppIntent {
     }
 }
 
-struct AddWaterIntent: AppIntent {
-    static var title: LocalizedStringResource = "Ajouter un verre d'eau"
-    static var isDiscoverable = false
-
-    @Parameter(title: "Verres")
-    var glasses: Int
-
-    init() {
-        glasses = 1
-    }
-
-    init(glasses: Int) {
-        self.glasses = glasses
-    }
-
-    func perform() async throws -> some IntentResult {
-        SharedStore.shared.updateContent { $0.hydration.add(glasses, on: Date()) }
-        WidgetCenter.shared.reloadAllTimelines()
-        return .result()
-    }
-}
-
 struct StartFocusIntent: AppIntent {
     static var title: LocalizedStringResource = "Lancer une session Focus"
     static var isDiscoverable = false

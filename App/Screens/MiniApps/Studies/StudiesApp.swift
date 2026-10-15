@@ -57,11 +57,11 @@ enum Studies {
 
     /// A new exam, homework or grade starts on the course being looked at, or the first one.
     static func newExam(_ state: StudentState, course: UUID? = nil, now: Date = Date()) -> Exam {
-        Exam(courseID: course ?? state.courses.first?.id, title: "", date: DateMath.startOfDay(now).addingTimeInterval(7 * 86_400 + 9 * 3_600))
+        Exam(courseID: course ?? state.courses.first?.id, title: "", date: DateMath.date(on: DateMath.calendar.date(byAdding: .day, value: 7, to: now) ?? now, minute: 9 * 60))
     }
 
     static func newAssignment(_ state: StudentState, course: UUID? = nil, now: Date = Date()) -> Assignment {
-        Assignment(courseID: course ?? state.courses.first?.id, title: "", due: DateMath.startOfDay(now).addingTimeInterval(3 * 86_400 + 23 * 3_600 + 59 * 60))
+        Assignment(courseID: course ?? state.courses.first?.id, title: "", due: DateMath.date(on: DateMath.calendar.date(byAdding: .day, value: 3, to: now) ?? now, minute: 23 * 60 + 59))
     }
 
     static func newGrade(_ state: StudentState, course: UUID? = nil) -> Grade {

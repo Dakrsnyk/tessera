@@ -58,7 +58,6 @@ extension AppModel {
         case .weather:
             add("city", "location", tr("Ville"), settings.weatherLocation?.name)
         case .wellbeing:
-            add("water", "drop.fill", tr("Eau"), profile.knows(.hydrationGoal) ? tr("\(content.hydration.goal) verres / jour") : nil)
             add("habits", "repeat", tr("Habitudes"), content.habits.isEmpty ? nil : Fmt.number(content.habits.count))
         }
         return facts
@@ -85,7 +84,7 @@ extension AppModel {
         case .weather:
             answered = [settings.weatherLocation != nil]
         case .wellbeing:
-            answered = [profile.knows(.hydrationGoal)]
+            answered = [!content.habits.isEmpty]
         }
         return answered.filter { !$0 }.count
     }

@@ -111,7 +111,7 @@ enum TimelinePlanner {
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(WeatherService.refreshInterval)))
         case .crypto:
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(CryptoService.refreshInterval)))
-        case .tasks, .habits, .hydration:
+        case .tasks, .habits:
             return Plan(dates: [now, midnight], policy: .after(midnight.addingTimeInterval(60)))
         case .calendar, .countdown, .yearDots, .note:
             return Plan(dates: [now, midnight], policy: .after(midnight.addingTimeInterval(60)))

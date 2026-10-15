@@ -112,7 +112,6 @@ enum DailyBrief {
         /// What comes next in the schedule and the Apple calendar, over the coming week.
         case planning(items: [TimedItem])
         case habits(done: Int, items: [Check])
-        case water(glasses: Int, goal: Int?)
         case steps(steps: Int, goal: Int?)
         case budget(spentToday: Double, perDayLeft: Double?)
         case weather(WeatherSnapshot)
@@ -128,7 +127,6 @@ enum DailyBrief {
             case .workout: "workout"
             case .planning: "planning"
             case .habits: "habits"
-            case .water: "water"
             case .steps: "steps"
             case .budget: "budget"
             case .weather: "weather"
@@ -195,12 +193,6 @@ enum DailyBrief {
         let habits = input.content.habits.map { Check(id: $0.id.uuidString, title: $0.name, isDone: $0.isDone(on: now)) }
         if !habits.isEmpty {
             add(.habits(done: habits.filter(\.isDone).count, items: habits), moment == .evening ? 92 : 50)
-        }
-
-        let glasses = input.content.hydration.glasses(on: now)
-        let knowsWater = input.profile.knows(.hydrationGoal)
-        if knowsWater || glasses > 0 {
-            add(.water(glasses: glasses, goal: knowsWater ? input.content.hydration.goal : nil), moment == .evening ? 80 : 58)
         }
 
         if let steps = input.steps {

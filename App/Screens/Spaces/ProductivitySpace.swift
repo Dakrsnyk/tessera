@@ -301,11 +301,6 @@ struct HabitsSpaceSections: View {
             } label: {
                 ValueRow(title: tr("Mes habitudes"), value: "\(model.content.habits.count)", symbol: "repeat")
             }
-            NavigationLink {
-                HydrationView()
-            } label: {
-                ValueRow(title: tr("Hydratation"), value: tr("\(model.content.hydration.glasses(on: Date()))/\(model.content.hydration.goal) verres"), symbol: "drop.fill")
-            }
         }
         Section(tr("Ce mois-ci")) {
             ForEach(model.content.habits) { habit in

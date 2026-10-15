@@ -760,7 +760,7 @@ struct MarketingFitness: View {
 struct MarketingDaily: View {
     var body: some View {
         MarketingShowcase(eyebrow: tr("Mon Quotidien"), title: tr("Ta journée,\nen un écran."), subtitle: tr("Repas, séance, eau, pas, météo.")) {
-            MarketingFloating(kind: .hydration, theme: .aurora, accent: "3366FF", width: 140)
+            MarketingFloating(kind: .habitStreak, theme: .aurora, accent: "3366FF", width: 140)
                 .rotationEffect(.degrees(-6))
                 .at(10, 690)
             MarketingFloating(kind: .caloriesLeft, theme: .colorful, accent: "2F8F7A", width: 140)

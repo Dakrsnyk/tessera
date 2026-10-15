@@ -151,10 +151,6 @@ private struct DailyTileView: View {
             }
         case let .planning(items): PlanningDayTile(items: items)
         case let .habits(done, items): HabitsDayTile(done: done, items: items)
-        case let .water(glasses, goal):
-            DailyPager(id: "water", titles: [tr("Aujourd'hui"), tr("7 jours")], accentHex: "3A8DDE") { page in
-                if page == 1 { WaterWeekTile(goal: goal) } else { WaterDayTile(glasses: glasses, goal: goal) }
-            }
         case let .steps(steps, goal):
             DailyPager(id: "steps", titles: [tr("Aujourd'hui"), tr("7 jours")], accentHex: "12A4B5") { page in
                 if page == 1 { StepsWeekTile(goal: goal) } else { StepsDayTile(steps: steps, goal: goal) }
@@ -646,42 +642,6 @@ private struct HabitsDayTile: View {
     }
 }
 
-private struct WaterDayTile: View {
-    let glasses: Int
-    let goal: Int?
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        DayCard(title: tr("Eau"), symbol: "drop.fill", colorHex: "3A8DDE") {
-            HStack(alignment: .firstTextBaseline, spacing: 2) {
-                Text("\(glasses)")
-                    .font(.title.weight(.bold))
-                    .contentTransition(.numericText())
-                Text(goal.map { tr("/\($0) verres") } ?? (glasses > 1 ? tr(" verres") : tr(" verre")))
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.secondary)
-            }
-            if let goal {
-                BarView(progress: Double(glasses) / Double(max(1, goal)), color: Color(hex: "3A8DDE"), track: Color(hex: "3A8DDE").opacity(0.15), height: 6)
-            }
-            Spacer(minLength: 4)
-            Button {
-                withAnimation(.snappy) { model.updateContent { $0.hydration.add(1, on: Date()) } }
-                Haptics.tap()
-            } label: {
-                Label(tr("Un verre"), systemImage: "plus")
-                    .font(.subheadline.weight(.bold))
-                    .foregroundStyle(Color(hex: "3A8DDE"))
-                    .frame(maxWidth: .infinity, minHeight: 34)
-                    .overlay { Capsule().strokeBorder(Color(hex: "3A8DDE"), lineWidth: 1.5) }
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("daily-water-add")
-        }
-        .accessibilityIdentifier("daily-water")
-    }
-}
-
 private struct StepsDayTile: View {
     let steps: Int
     let goal: Int?
@@ -1000,28 +960,6 @@ private struct WorkoutWeekTile: View {
                 .foregroundStyle(.secondary)
         }
         .accessibilityIdentifier("daily-workout-week")
-    }
-}
-
-private struct WaterWeekTile: View {
-    let goal: Int?
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        let hydration = model.content.hydration
-        let values = (0..<7).reversed().map { offset in
-            Double(hydration.glasses(on: DateMath.calendar.date(byAdding: .day, value: -offset, to: Date()) ?? Date()))
-        }
-        DayCard(title: tr("Eau · 7 jours"), symbol: "drop.fill", colorHex: "3A8DDE") {
-            DailyWeekBars(values: values, goal: goal.map(Double.init), colorHex: "3A8DDE", height: 44)
-            if let goal {
-                let reached = values.filter { $0 >= Double(goal) }.count
-                Text(tr("Objectif atteint \(Fmt.plural(reached, tr("jour"), tr("jours"))) sur 7"))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-        }
-        .accessibilityIdentifier("daily-water-week")
     }
 }
 

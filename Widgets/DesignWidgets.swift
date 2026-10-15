@@ -93,10 +93,6 @@ struct MoneyFlowWidget: Widget {
     var body: some WidgetConfiguration { designConfiguration(.moneyFlow) }
 }
 
-struct HydrationWidget: Widget {
-    var body: some WidgetConfiguration { designConfiguration(.hydration) }
-}
-
 // MARK: - V2 group widgets
 
 private func groupConfiguration(_ group: WidgetGroup) -> some WidgetConfiguration {
