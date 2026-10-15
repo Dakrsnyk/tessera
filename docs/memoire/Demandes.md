@@ -11,19 +11,19 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
-- [ ] Fitness : tous les exercices en Premium avec l'accès à leurs données ; section Records retirée de l'accueil de Fitness (gardée dans Progression) ; « Choisir dans la bibliothèque » et « Ajouter un exercice » juste sous le nom et les jours de la séance ; petits logos Premium partout où c'est Premium.
-- [ ] Widgets : un widget créé doit être tout de suite proposé quand on l'ajoute à l'écran d'accueil (tous mes widgets, pas seulement 3).
-- [ ] Bug widgets : un widget posé ne doit jamais être remplacé par un nouveau widget du même format.
-- [ ] Nutrition : beaucoup plus de nutriments, tous Premium sauf calories, protéines, glucides et lipides.
-- [ ] Planning : toucher l'horaire dans Mon Quotidien ouvre la mini-app Planning (c'est là qu'on crée un événement en touchant une plage horaire).
-- [ ] Créer : « Photos et citations » tout en bas ; possibilité de mettre une photo derrière une citation.
-- [ ] Icône de l'app : changer d'icône devient Premium.
-- [ ] Nutrition : widget d'écran verrouillé pour scanner directement un code-barres.
-- [ ] Mon Quotidien : retirer « Mes données » en haut (« Mes infos » est en bas) ; bouton de disposition remplacé par un petit « + ».
 
 ## Idées pour plus tard
 
 ## Fait
+
+- [x] Fitness : toute la bibliothèque d'exercices et les données de chaque exercice en Premium ; gratuit : séances, exercices écrits à la main, séries notées ; Records retirés de l'accueil (dans Progression) ; « Choisir dans la bibliothèque » et « Ajouter un exercice » sous le nom et les jours de la séance ; logos Premium (fait le 2026-10-15).
+- [x] Nutrition : 18 nutriments de plus (gras trans, oméga-3 et 6, zinc, phosphore, sélénium, cuivre, manganèse, vitamines E, K, B1, B2, B3, B5, B6, choline, caféine, alcool) ; tout sauf calories, protéines, glucides et lipides est Premium (fait le 2026-10-15).
+- [x] Widgets : un widget posé garde le widget choisi à l'ajout ; la galerie montre, pour chaque taille, ton dernier widget de cette taille ; « Modifier le widget » les liste tous. Une entrée par widget créé dans la galerie est impossible sous iOS (une entrée par taille). À vérifier sur l'iPhone (fait le 2026-10-15).
+- [x] Planning : toucher la carte Planning de Mon Quotidien ouvre la mini-app Planning, où l'on crée un événement en touchant une heure libre (fait le 2026-10-15).
+- [x] Créer : « Photos et citations » en dernier ; photo de fond derrière une citation (cadrage, voile réglable) (fait le 2026-10-15).
+- [x] Icône de l'app en Premium (l'icône en place et Corail restent) (fait le 2026-10-15).
+- [x] Nutrition : widget d'écran verrouillé « Scanner un aliment » et contrôle iOS 18 (fait le 2026-10-15).
+- [x] Mon Quotidien : « Mes données » retiré en haut ; bouton « + » pour arranger les cartes (fait le 2026-10-15).
 
 - [x] Quotidien : toucher une heure libre de la carte Planning (pleine largeur) crée un événement, toucher un bloc l'ouvre ; même chose dans la page Semaine ; en demi-largeur, la carte ouvre la semaine (fait le 2026-10-15).
 - [x] Fitness : les exercices récents ne sont plus affichés (page Fitness et bibliothèque) ; seuls les favoris restent ; « Récents » reste seulement dans le sélecteur d'exercice d'une séance (fait le 2026-10-15).

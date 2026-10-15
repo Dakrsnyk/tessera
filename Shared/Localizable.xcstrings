@@ -3714,143 +3714,49 @@
         }
       }
     },
-    "%@ exercices avec leur démonstration, leur technique et leurs alternatives. %@ sont offerts, et ceux que tu as déjà faits restent à toi.": {
+    "%@ exercices avec leur démonstration, leur technique, leurs alternatives et tes performances sur chacun. Tes séances et tes propres exercices restent gratuits.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ Übungen mit Demo, Technik und Alternativen. %2$@ sind kostenlos, und die, die du schon gemacht hast, bleiben dir."
+            "value": "%@ Übungen mit Demo, Technik, Alternativen und deiner Leistung bei jeder einzelnen. Deine Trainings und eigenen Übungen bleiben kostenlos."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ exercises with their demo, technique and alternatives. %2$@ are free, and the ones you've already done stay yours."
+            "value": "%@ exercises with their demo, technique, alternatives and your performance on each one. Your workouts and your own exercises stay free."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ ejercicios con su demostración, su técnica y sus alternativas. %2$@ son gratis, y los que ya hiciste siguen siendo tuyos."
+            "value": "%@ ejercicios con su demostración, su técnica, sus alternativas y tu rendimiento en cada uno. Tus entrenamientos y tus propios ejercicios siguen siendo gratis."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ exercices avec leur démonstration, leur technique et leurs alternatives. %@ sont offerts, et ceux que tu as déjà faits restent à toi."
+            "value": "%@ exercices avec leur démonstration, leur technique, leurs alternatives et tes performances sur chacun. Tes séances et tes propres exercices restent gratuits."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ esercizi con dimostrazione, tecnica e alternative. %2$@ sono gratuiti, e quelli che hai già fatto restano tuoi."
+            "value": "%@ esercizi con dimostrazione, tecnica, alternative e le tue prestazioni su ciascuno. I tuoi allenamenti e i tuoi esercizi restano gratuiti."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@種類のエクササイズをデモ・フォーム・代替種目つきで。%2$@種類は無料で、すでに行ったものはそのまま使えます。"
+            "value": "%@種類のエクササイズに、デモ・フォーム・代替種目と、種目ごとの自分の成績がつきます。ワークアウトと自分で作った種目は引き続き無料です。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ exercícios com demonstração, técnica e alternativas. %2$@ são grátis, e os que você já fez continuam seus."
-          }
-        }
-      }
-    },
-    "%@ exercices offerts sur %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kostenlose Übungen von %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ free exercises out of %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ ejercicios gratis de %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ exercices offerts sur %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ esercizi gratuiti su %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%2$@種類中%1$@種類が無料"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ exercícios grátis de %@"
-          }
-        }
-      }
-    },
-    "%@ exercices offerts, %@ avec Premium": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kostenlose Übungen, %@ mit Premium"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ free exercises, %@ with Premium"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ ejercicios gratis, %@ con Premium"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ exercices offerts, %@ avec Premium"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ esercizi gratuiti, %@ con Premium"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "無料%@種類、Premiumで%@種類"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ exercícios grátis, %@ com Premium"
+            "value": "%@ exercícios com demonstração, técnica, alternativas e seu desempenho em cada um. Seus treinos e seus próprios exercícios continuam grátis."
           }
         }
       }
@@ -5500,53 +5406,6 @@
         }
       }
     },
-    "%@ mg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ mg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ mg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ mg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ mg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ mg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ mg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ mg"
-          }
-        }
-      }
-    },
     "%@ milliards": {
       "extractionState": "manual",
       "localizations": {
@@ -5919,6 +5778,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ não existe em pequeno."
+          }
+        }
+      }
+    },
+    "%@ nutriments en plus des calories, protéines, glucides et lipides, avec tes besoins calculés. Ce que tu notes est gardé : tout s'affiche dès que tu passes à Premium.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ weitere Nährstoffe neben Kalorien, Protein, Kohlenhydraten und Fett, mit deinem berechneten Bedarf. Was du einträgst, bleibt gespeichert: Alles erscheint, sobald du zu Premium wechselst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ more nutrients on top of calories, protein, carbs and fat, with your needs worked out. Everything you log is kept: it all shows as soon as you go Premium."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ nutrientes además de calorías, proteínas, carbohidratos y grasas, con tus necesidades calculadas. Lo que anotas se guarda: todo aparece en cuanto pasas a Premium."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ nutriments en plus des calories, protéines, glucides et lipides, avec tes besoins calculés. Ce que tu notes est gardé : tout s'affiche dès que tu passes à Premium."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altri %@ nutrienti oltre a calorie, proteine, carboidrati e grassi, con il tuo fabbisogno calcolato. Ciò che annoti viene conservato: tutto appare appena passi a Premium."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カロリー、タンパク質、炭水化物、脂質に加えて%@種類の栄養素を、計算された必要量とともに。記録した内容は保存され、Premiumにするとすぐにすべて表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ nutrientes além de calorias, proteínas, carboidratos e gorduras, com suas necessidades calculadas. O que você registra fica salvo: tudo aparece assim que você assinar o Premium."
           }
         }
       }
@@ -8316,6 +8222,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ · %@/ano"
+          }
+        }
+      }
+    },
+    "%@ · P %@ g": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · E %2$@ g"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · P %2$@ g"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · P %2$@ g"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ g"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · P %2$@ g"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · P %2$@ g"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ g"
           }
         }
       }
@@ -13537,53 +13490,6 @@
         }
       }
     },
-    "1RM estimé %@ kg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Geschätztes 1RM %@ kg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Est. 1RM %@ kg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1RM estimado %@ kg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1RM estimé %@ kg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1RM stimato %@ kg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "推定1RM %@ kg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1RM estimado %@ kg"
-          }
-        }
-      }
-    },
     "1RM estimé : %@ kg": {
       "extractionState": "manual",
       "localizations": {
@@ -16353,6 +16259,147 @@
           "stringUnit": {
             "state": "translated",
             "value": "Compras"
+          }
+        }
+      }
+    },
+    "Acide pantothénique (B5)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pantothensäure (B5)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pantothenic acid (B5)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ácido pantoténico (B5)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acide pantothénique (B5)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acido pantotenico (B5)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パントテン酸（B5）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ácido pantotênico (B5)"
+          }
+        }
+      }
+    },
+    "Acides gras": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fettsäuren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fatty acids"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ácidos grasos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acides gras"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acidi grassi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脂肪酸"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ácidos graxos"
+          }
+        }
+      }
+    },
+    "Acides gras, minéraux et vitamines": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fettsäuren, Mineralstoffe und Vitamine"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fatty acids, minerals and vitamins"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ácidos grasos, minerales y vitaminas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acides gras, minéraux et vitamines"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acidi grassi, minerali e vitamine"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脂肪酸、ミネラル、ビタミン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ácidos graxos, minerais e vitaminas"
           }
         }
       }
@@ -19130,6 +19177,53 @@
         }
       }
     },
+    "Ajoute ton dernier widget de cette taille : il restera le même. Pour un autre, touche longuement › Modifier le widget.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge dein neuestes Widget dieser Größe hinzu: Es bleibt dasselbe. Für ein anderes: gedrückt halten › Widget bearbeiten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your latest widget in this size: it will stay the same. For another one, touch and hold › Edit Widget."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade tu último widget de este tamaño: seguirá siendo el mismo. Para otro, mantén pulsado › Editar widget."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute ton dernier widget de cette taille : il restera le même. Pour un autre, touche longuement › Modifier le widget."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi il tuo ultimo widget di questa dimensione: resterà lo stesso. Per un altro, tieni premuto › Modifica widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このサイズの最新のウィジェットを追加します。追加後は変わりません。別のものにするには、長押し › 「ウィジェットを編集」。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione seu último widget deste tamanho: ele vai continuar o mesmo. Para outro, toque e segure › Editar Widget."
+          }
+        }
+      }
+    },
     "Ajoute ton hébergement dans Ardane, espace Voyage.": {
       "extractionState": "manual",
       "localizations": {
@@ -19502,6 +19596,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicione um prazo no Ardane, no espaço Produtividade."
+          }
+        }
+      }
+    },
+    "Ajoute-le : il garde ce widget, même quand tu en crées d'autres": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge es hinzu: Es behält dieses Widget, auch wenn du weitere erstellst"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add it: it keeps this widget, even when you make others"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añádelo: conservará este widget, aunque crees otros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute-le : il garde ce widget, même quand tu en crées d'autres"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungilo: mantiene questo widget, anche quando ne crei altri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加します。ほかのウィジェットを作っても、このウィジェットのままです"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione-o: ele mantém este widget, mesmo quando você criar outros"
           }
         }
       }
@@ -21758,6 +21899,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ajustar de 10 em 10 g"
+          }
+        }
+      }
+    },
+    "Alcool": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alkohol"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alcohol"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alcohol"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alcool"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alcol"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルコール"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Álcool"
           }
         }
       }
@@ -33183,6 +33371,53 @@
         }
       }
     },
+    "Avec Premium, choisis l'icône d'Ardane parmi %@ et change-la quand tu veux. L'icône par défaut reste gratuite.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit Premium wählst du das Ardane-Symbol aus %@ und änderst es, wann du willst. Das Standardsymbol bleibt kostenlos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With Premium, choose Ardane's icon from %@ and change it whenever you like. The default icon stays free."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium, elige el ícono de Ardane entre %@ y cámbialo cuando quieras. El ícono predeterminado sigue siendo gratis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec Premium, choisis l'icône d'Ardane parmi %@ et change-la quand tu veux. L'icône par défaut reste gratuite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium, scegli l'icona di Ardane tra %@ e cambiala quando vuoi. L'icona predefinita resta gratuita."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumなら、%@種類からArdaneのアイコンを選んで、いつでも変更できます。デフォルトのアイコンは引き続き無料です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o Premium, escolha o ícone do Ardane entre %@ e troque quando quiser. O ícone padrão continua grátis."
+          }
+        }
+      }
+    },
     "Averses": {
       "extractionState": "manual",
       "localizations": {
@@ -42865,6 +43100,53 @@
         }
       }
     },
+    "Caféine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koffein"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caffeine"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cafeína"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caféine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caffeina"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カフェイン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cafeína"
+          }
+        }
+      }
+    },
     "Cafés": {
       "extractionState": "manual",
       "localizations": {
@@ -50291,49 +50573,96 @@
         }
       }
     },
-    "Cherche « Ardane », puis « Mes widgets » : tes widgets y sont, à chaque taille": {
+    "Cherche « Ardane », puis « Mes widgets » : chaque taille montre ton dernier widget de cette taille": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suche nach „Ardane“, dann „Meine Widgets“: Dort sind deine Widgets, in jeder Größe"
+            "value": "Suche nach „Ardane“, dann „Meine Widgets“: Jede Größe zeigt dein neuestes Widget dieser Größe"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search for “Ardane”, then “My widgets”: your widgets are there, in every size"
+            "value": "Search for “Ardane”, then “My widgets”: each size shows your latest widget in that size"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Busca «Ardane» y luego «Mis widgets»: ahí están tus widgets, en cada tamaño"
+            "value": "Busca «Ardane» y luego «Mis widgets»: cada tamaño muestra tu último widget de ese tamaño"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cherche « Ardane », puis « Mes widgets » : tes widgets y sont, à chaque taille"
+            "value": "Cherche « Ardane », puis « Mes widgets » : chaque taille montre ton dernier widget de cette taille"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cerca «Ardane», poi «I miei widget»: lì trovi i tuoi widget, in ogni dimensione"
+            "value": "Cerca «Ardane», poi «I miei widget»: ogni dimensione mostra il tuo ultimo widget di quella dimensione"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "「Ardane」を検索し、「マイウィジェット」へ。あなたのウィジェットが各サイズで並んでいます"
+            "value": "「Ardane」を検索し、「マイウィジェット」へ。各サイズに、そのサイズの最新のウィジェットが表示されます"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Procure “Ardane” e depois “Meus widgets”: seus widgets estão lá, em todos os tamanhos"
+            "value": "Procure “Ardane” e depois “Meus widgets”: cada tamanho mostra seu último widget desse tamanho"
+          }
+        }
+      }
+    },
+    "Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu'à la taille %@ : « %@ » y est": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche nach „Ardane“, dann „Meine Widgets“, und scrolle zur Größe %1$@: Dort ist „%2$@“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search for “Ardane”, then “My widgets”, and scroll to the %1$@ size: “%2$@” is there"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca «Ardane», luego «Mis widgets», y desplázate hasta el tamaño %1$@: ahí está «%2$@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu'à la taille %@ : « %@ » y est"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca «Ardane», poi «I miei widget», e scorri fino alla dimensione %1$@: lì trovi «%2$@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「Ardane」を検索し、「マイウィジェット」で「%1$@」サイズまでスクロールすると、「%2$@」があります"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procure “Ardane”, depois “Meus widgets”, e role até o tamanho %1$@: “%2$@” está lá"
           }
         }
       }
@@ -51509,6 +51838,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chocolate amargo 70%"
+          }
+        }
+      }
+    },
+    "Choisi à l'ajout": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beim Hinzufügen gewählt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chosen when added"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegido al añadirlo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisi à l'ajout"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelto all'aggiunta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加時に選択"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhido ao adicionar"
           }
         }
       }
@@ -53154,6 +53530,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Colesterol"
+          }
+        }
+      }
+    },
+    "Choline": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cholin"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choline"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choline"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colina"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コリン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colina"
           }
         }
       }
@@ -64340,6 +64763,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coxas paralelas ao chão, posição fixa."
+          }
+        }
+      }
+    },
+    "Cuivre": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kupfer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copper"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cobre"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuivre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rame"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "銅"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cobre"
           }
         }
       }
@@ -77598,6 +78068,53 @@
         }
       }
     },
+    "Démonstrations, techniques, alternatives et tes performances sur chaque exercice. Tes propres exercices restent gratuits.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demos, Technik, Alternativen und deine Leistung bei jeder Übung. Deine eigenen Übungen bleiben kostenlos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demos, technique, alternatives and your performance on every exercise. Your own exercises stay free."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demostraciones, técnicas, alternativas y tu rendimiento en cada ejercicio. Tus propios ejercicios siguen siendo gratis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démonstrations, techniques, alternatives et tes performances sur chaque exercice. Tes propres exercices restent gratuits."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimostrazioni, tecnica, alternative e le tue prestazioni su ogni esercizio. I tuoi esercizi restano gratuiti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "各種目のデモ、フォーム、代替種目、自分の成績。自分で作った種目は引き続き無料です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demonstrações, técnicas, alternativas e seu desempenho em cada exercício. Seus próprios exercícios continuam grátis."
+          }
+        }
+      }
+    },
     "Départ": {
       "extractionState": "manual",
       "localizations": {
@@ -89254,6 +89771,53 @@
         }
       }
     },
+    "Fibres, sucres, gras, minéraux, vitamines, caféine…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ballaststoffe, Zucker, Fette, Mineralstoffe, Vitamine, Koffein…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiber, sugars, fats, minerals, vitamins, caffeine…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fibra, azúcares, grasas, minerales, vitaminas, cafeína…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fibres, sucres, gras, minéraux, vitamines, caféine…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fibre, zuccheri, grassi, minerali, vitamine, caffeina…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食物繊維、糖類、脂肪、ミネラル、ビタミン、カフェイン…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fibras, açúcares, gorduras, minerais, vitaminas, cafeína…"
+          }
+        }
+      }
+    },
     "Fiche": {
       "extractionState": "manual",
       "localizations": {
@@ -97150,6 +97714,100 @@
         }
       }
     },
+    "Gras monoinsaturés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einfach ungesättigte Fette"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monounsaturated fat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grasas monoinsaturadas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gras monoinsaturés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grassi monoinsaturi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一価不飽和脂肪酸"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gorduras monoinsaturadas"
+          }
+        }
+      }
+    },
+    "Gras polyinsaturés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mehrfach ungesättigte Fette"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polyunsaturated fat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grasas poliinsaturadas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gras polyinsaturés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grassi polinsaturi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "多価不飽和脂肪酸"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gorduras poli-insaturadas"
+          }
+        }
+      }
+    },
     "Gras saturés": {
       "extractionState": "manual",
       "localizations": {
@@ -97193,6 +97851,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gorduras saturadas"
+          }
+        }
+      }
+    },
+    "Gras trans": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transfette"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trans fat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grasas trans"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gras trans"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grassi trans"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トランス脂肪酸"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gorduras trans"
+          }
+        }
+      }
+    },
+    "Gras trans : moins de 1 % des calories (OMS). Caféine : 400 mg au plus (Santé Canada). Oméga-3 et oméga-6 : apports suffisants (National Academies).": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transfette: unter 1 % der Kalorien (WHO). Koffein: höchstens 400 mg (Health Canada). Omega-3 und Omega-6: ausreichende Zufuhr (National Academies)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trans fat: under 1% of calories (WHO). Caffeine: 400 mg at most (Health Canada). Omega-3 and omega-6: adequate intakes (National Academies)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grasas trans: menos del 1 % de las calorías (OMS). Cafeína: 400 mg como máximo (Health Canada). Omega-3 y omega-6: ingestas adecuadas (National Academies)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gras trans : moins de 1 % des calories (OMS). Caféine : 400 mg au plus (Santé Canada). Oméga-3 et oméga-6 : apports suffisants (National Academies)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grassi trans: meno dell'1% delle calorie (OMS). Caffeina: al massimo 400 mg (Health Canada). Omega-3 e omega-6: assunzioni adeguate (National Academies)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トランス脂肪酸：カロリーの1%未満（WHO）。カフェイン：400 mg以下（カナダ保健省）。オメガ3とオメガ6：目安量（National Academies）。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gorduras trans: menos de 1% das calorias (OMS). Cafeína: no máximo 400 mg (Health Canada). Ômega-3 e ômega-6: ingestão adequada (National Academies)."
           }
         }
       }
@@ -126478,6 +127230,53 @@
         }
       }
     },
+    "Manganèse": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mangan"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manganese"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manganeso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manganèse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manganese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マンガン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manganês"
+          }
+        }
+      }
+    },
     "Mangue": {
       "extractionState": "manual",
       "localizations": {
@@ -130896,49 +131695,49 @@
         }
       }
     },
-    "Minéraux et vitamines": {
+    "Minéraux": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mineralstoffe und Vitamine"
+            "value": "Mineralstoffe"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minerals and vitamins"
+            "value": "Minerals"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minerales y vitaminas"
+            "value": "Minerales"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minéraux et vitamines"
+            "value": "Minéraux"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minerali e vitamine"
+            "value": "Minerali"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ミネラルとビタミン"
+            "value": "ミネラル"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minerais e vitaminas"
+            "value": "Minerais"
           }
         }
       }
@@ -137801,6 +138600,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nova York"
+          }
+        }
+      }
+    },
+    "Niacine (B3)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niacin (B3)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niacin (B3)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niacina (B3)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niacine (B3)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niacina (B3)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ナイアシン（B3）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niacina (B3)"
           }
         }
       }
@@ -145607,6 +146453,100 @@
         }
       }
     },
+    "Oméga-3": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-3"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-3"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-3"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oméga-3"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-3"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オメガ3"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ômega-3"
+          }
+        }
+      }
+    },
+    "Oméga-6": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-6"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-6"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-6"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oméga-6"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omega-6"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オメガ6"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ômega-6"
+          }
+        }
+      }
+    },
     "Opacité": {
       "extractionState": "manual",
       "localizations": {
@@ -146308,6 +147248,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abra sem forçar."
+          }
+        }
+      }
+    },
+    "Ouvre Ardane sur le scanner de code-barres.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnet Ardane direkt im Barcode-Scanner."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens Ardane on the barcode scanner."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre Ardane en el escáner de códigos de barras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvre Ardane sur le scanner de code-barres."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apre Ardane sullo scanner di codici a barre."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardaneのバーコードスキャナを開きます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre o Ardane no scanner de código de barras."
           }
         }
       }
@@ -152845,6 +153832,53 @@
         }
       }
     },
+    "Phosphore": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phosphor"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phosphorus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fósforo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phosphore"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fosforo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fósforo"
+          }
+        }
+      }
+    },
     "Photo": {
       "extractionState": "manual",
       "localizations": {
@@ -152935,6 +153969,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Foto %@"
+          }
+        }
+      }
+    },
+    "Photo de fond": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrundfoto"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background photo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foto de fondo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photo de fond"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foto di sfondo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "背景写真"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foto de fundo"
           }
         }
       }
@@ -160126,6 +161207,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para saber o que ainda pode comer hoje."
+          }
+        }
+      }
+    },
+    "Pour scanner un aliment d'un geste, ajoute « Scanner un aliment » à côté de Nutrition, ou à la place d'un bouton en bas de l'écran verrouillé (iOS 18). Ardane s'ouvre sur le scanner une fois ton iPhone déverrouillé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um ein Lebensmittel mit einem Tipp zu scannen, füge „Lebensmittel scannen“ neben Ernährung hinzu oder ersetze damit ein Steuerelement unten auf dem Sperrbildschirm (iOS 18). Ardane öffnet den Scanner, sobald dein iPhone entsperrt ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To scan a food in one tap, add “Scan a food” next to Nutrition, or in place of a button at the bottom of the Lock Screen (iOS 18). Ardane opens on the scanner once your iPhone is unlocked."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para escanear un alimento con un toque, añade «Escanear un alimento» junto a Nutrición, o en lugar de uno de los botones de la parte inferior de la pantalla bloqueada (iOS 18). Ardane se abre en el escáner una vez que desbloqueas tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour scanner un aliment d'un geste, ajoute « Scanner un aliment » à côté de Nutrition, ou à la place d'un bouton en bas de l'écran verrouillé (iOS 18). Ardane s'ouvre sur le scanner une fois ton iPhone déverrouillé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per scansionare un alimento con un tocco, aggiungi «Scansiona un alimento» accanto ad Alimentazione, o al posto di un pulsante in basso nella schermata di blocco (iOS 18). Ardane si apre sullo scanner una volta sbloccato l'iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワンタップで食品をスキャンするには、「食品をスキャン」を栄養ウィジェットの隣に追加するか、ロック画面下部のボタンと置き換えます（iOS 18）。iPhoneのロックを解除すると、Ardaneのスキャナが開きます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para escanear um alimento num gesto, adicione “Escanear um alimento” ao lado de Nutrição ou no lugar de um botão na parte de baixo da Tela Bloqueada (iOS 18). O Ardane abre no scanner assim que o iPhone for desbloqueado."
           }
         }
       }
@@ -169906,53 +171034,6 @@
         }
       }
     },
-    "Records personnels": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Persönliche Rekorde"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personal records"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Récords personales"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Records personnels"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Record personali"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自己ベスト"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recordes pessoais"
-          }
-        }
-      }
-    },
     "Records, volume, bénéfice, MRR, devoirs, vol, carburant…": {
       "extractionState": "manual",
       "localizations": {
@@ -176392,6 +177473,53 @@
         }
       }
     },
+    "Revenir à l'icône par défaut ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Standardsymbol zurück?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go back to the default icon?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Volver al ícono predeterminado?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenir à l'icône par défaut ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tornare all'icona predefinita?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デフォルトのアイコンに戻しますか？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltar ao ícone padrão?"
+          }
+        }
+      }
+    },
     "Revenir à la couleur du style": {
       "extractionState": "manual",
       "localizations": {
@@ -178174,6 +179302,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aterrisse com os dois pés no caixote, joelhos flexionados, e então se endireite."
+          }
+        }
+      }
+    },
+    "Riboflavine (B2)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riboflavin (B2)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riboflavin (B2)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riboflavina (B2)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riboflavine (B2)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riboflavina (B2)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビタミンB2"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riboflavina (B2)"
           }
         }
       }
@@ -183348,49 +184523,49 @@
         }
       }
     },
-    "Sa démonstration, sa technique et ses alternatives, comme les %@ exercices de la bibliothèque. %@ exercices sont offerts.": {
+    "Sa démonstration, sa technique, ses alternatives et tes performances, comme pour les %@ exercices de la bibliothèque. Tes séries restent enregistrées : tout s'affiche dès que tu passes à Premium.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Demo, Technik und Alternativen, wie bei allen %@ Übungen der Bibliothek. %@ Übungen sind gratis."
+            "value": "Demo, Technik, Alternativen und deine Leistung, wie bei allen %@ Übungen der Bibliothek. Deine Sätze bleiben gespeichert: Alles erscheint, sobald du zu Premium wechselst."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Its demo, technique and alternatives, like all %@ exercises in the library. %@ exercises are free."
+            "value": "Its demo, technique, alternatives and your performance, like all %@ exercises in the library. Your sets stay saved: everything shows as soon as you go Premium."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Su demostración, su técnica y sus alternativas, como los %@ ejercicios de la biblioteca. %@ ejercicios son gratis."
+            "value": "Su demostración, su técnica, sus alternativas y tu rendimiento, como en los %@ ejercicios de la biblioteca. Tus series siguen guardadas: todo aparece en cuanto pasas a Premium."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sa démonstration, sa technique et ses alternatives, comme les %@ exercices de la bibliothèque. %@ exercices sont offerts."
+            "value": "Sa démonstration, sa technique, ses alternatives et tes performances, comme pour les %@ exercices de la bibliothèque. Tes séries restent enregistrées : tout s'affiche dès que tu passes à Premium."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La dimostrazione, la tecnica e le alternative, come per i %@ esercizi della libreria. %@ esercizi sono gratuiti."
+            "value": "La dimostrazione, la tecnica, le alternative e le tue prestazioni, come per i %@ esercizi della libreria. Le tue serie restano salvate: tutto appare appena passi a Premium."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ライブラリの%@種目と同じく、デモ・フォーム・代替種目つき。%@種目は無料です。"
+            "value": "ライブラリの%@種目と同じく、デモ・フォーム・代替種目と自分の成績が見られます。セットの記録は保存されたままで、Premiumにするとすぐにすべて表示されます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A demonstração, a técnica e as alternativas, como os %@ exercícios da biblioteca. %@ exercícios são grátis."
+            "value": "A demonstração, a técnica, as alternativas e seu desempenho, como nos %@ exercícios da biblioteca. Suas séries continuam salvas: tudo aparece assim que você assinar o Premium."
           }
         }
       }
@@ -184284,6 +185459,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sanduíche de presunto e queijo"
+          }
+        }
+      }
+    },
+    "Sans Premium, tu ne pourras plus revenir à « %@ ».": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Premium kannst du nicht mehr zu „%@“ zurückwechseln."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without Premium, you won't be able to go back to “%@”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin Premium, ya no podrás volver a «%@»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans Premium, tu ne pourras plus revenir à « %@ »."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza Premium, non potrai più tornare a «%@»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumがないと、「%@」には戻せなくなります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem o Premium, você não poderá mais voltar para “%@”."
           }
         }
       }
@@ -194910,6 +196132,53 @@
         }
       }
     },
+    "Sur la photo, le texte garde ta couleur si elle est claire, sinon il passe en blanc. La couleur de fond ne sert que si la photo n'est plus disponible.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf dem Foto behält der Text deine Farbe, wenn sie hell ist, sonst wird er weiß. Die Hintergrundfarbe wird nur verwendet, wenn das Foto nicht mehr verfügbar ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On the photo, the text keeps your color if it's light, otherwise it turns white. The background color is only used if the photo is no longer available."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sobre la foto, el texto conserva tu color si es claro; si no, cambia a blanco. El color de fondo solo se usa si la foto ya no está disponible."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur la photo, le texte garde ta couleur si elle est claire, sinon il passe en blanc. La couleur de fond ne sert que si la photo n'est plus disponible."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sulla foto, il testo mantiene il tuo colore se è chiaro, altrimenti diventa bianco. Il colore di sfondo serve solo se la foto non è più disponibile."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真の上では、選んだ色が明るければテキストはその色のまま、暗ければ白になります。背景色は、写真が使えなくなったときだけ使われます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sobre a foto, o texto mantém sua cor se ela for clara; senão, fica branco. A cor de fundo só é usada se a foto não estiver mais disponível."
+          }
+        }
+      }
+    },
     "Sur le banc à 45°, hanches sur l'appui, chevilles bloquées sous les rouleaux, corps aligné, bras croisés.": {
       "extractionState": "manual",
       "localizations": {
@@ -197021,6 +198290,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Selecionar"
+          }
+        }
+      }
+    },
+    "Sélénium": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selenium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selenio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sélénium"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selenio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セレン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selênio"
           }
         }
       }
@@ -205344,53 +206660,6 @@
         }
       }
     },
-    "Tes widgets créés dans Ardane. Touche longuement › Modifier le widget pour en choisir un autre.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine in Ardane erstellten Widgets. Gedrückt halten › Widget bearbeiten, um ein anderes zu wählen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The widgets you made in Ardane. Touch and hold › Edit Widget to pick another one."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los widgets que creaste en Ardane. Mantén pulsado › Editar widget para elegir otro."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes widgets créés dans Ardane. Touche longuement › Modifier le widget pour en choisir un autre."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I widget creati in Ardane. Tieni premuto › Modifica widget per sceglierne un altro."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardaneで作ったウィジェット。長押し › 「ウィジェットを編集」で別のものを選べます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os widgets que você criou no Ardane. Toque e segure › Editar Widget para escolher outro."
-          }
-        }
-      }
-    },
     "Tes widgets et « Mon Quotidien » utilisent tes vraies données.": {
       "extractionState": "manual",
       "localizations": {
@@ -205998,6 +207267,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tailândia"
+          }
+        }
+      }
+    },
+    "Thiamine (B1)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thiamin (B1)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thiamin (B1)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiamina (B1)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thiamine (B1)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiamina (B1)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビタミンB1"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiamina (B1)"
           }
         }
       }
@@ -212065,6 +213381,53 @@
         }
       }
     },
+    "Touche-le pour scanner un code-barres : Ardane s'ouvre sur le scanner, une fois ton iPhone déverrouillé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe darauf, um einen Barcode zu scannen: Ardane öffnet den Scanner, sobald dein iPhone entsperrt ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap it to scan a barcode: Ardane opens on the scanner once your iPhone is unlocked."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tócalo para escanear un código de barras: Ardane se abre en el escáner una vez que desbloqueas tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touche-le pour scanner un code-barres : Ardane s'ouvre sur le scanner, une fois ton iPhone déverrouillé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toccalo per scansionare un codice a barre: Ardane si apre sullo scanner, una volta sbloccato l'iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タップしてバーコードをスキャン。iPhoneのロックを解除すると、Ardaneのスキャナが開きます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque nele para escanear um código de barras: o Ardane abre no scanner assim que o iPhone for desbloqueado."
+          }
+        }
+      }
+    },
     "Touchez deux fois pour lancer l'animation": {
       "extractionState": "manual",
       "localizations": {
@@ -214180,53 +215543,6 @@
         }
       }
     },
-    "Toute la bibliothèque, ses démonstrations et ses alternatives avec Premium. Ceux que tu as déjà faits restent à toi.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die ganze Bibliothek mit Demos und Alternativen mit Premium. Die Übungen, die du schon gemacht hast, bleiben dir."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The full library, its demos and alternatives with Premium. The ones you've already done stay yours."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toda la biblioteca, sus demostraciones y alternativas con Premium. Los que ya hiciste siguen siendo tuyos."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toute la bibliothèque, ses démonstrations et ses alternatives avec Premium. Ceux que tu as déjà faits restent à toi."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutta la libreria, le dimostrazioni e le alternative con Premium. Quelli che hai già fatto restano tuoi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Premiumでライブラリのすべての種目、デモ、代替種目が使えます。すでに行った種目は引き続き使えます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toda a biblioteca, demonstrações e alternativas com o Premium. Os que você já fez continuam seus."
-          }
-        }
-      }
-    },
     "Toute la journée": {
       "extractionState": "manual",
       "localizations": {
@@ -214505,6 +215821,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todos os dados de %@"
+          }
+        }
+      }
+    },
+    "Toutes les icônes de l'app": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle App-Symbole"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All app icons"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los íconos de la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les icônes de l'app"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutte le icone dell'app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのアプリアイコン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos os ícones do app"
           }
         }
       }
@@ -218218,6 +219581,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uma ficha para revisar e o andamento do seu semestre."
+          }
+        }
+      }
+    },
+    "Une fois ajouté, touche le widget pendant que les icônes bougent et choisis « %@ »": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe nach dem Hinzufügen auf das Widget, während die Symbole wackeln, und wähle „%@“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once added, tap the widget while the icons jiggle and choose “%@”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una vez añadido, toca el widget mientras los iconos se mueven y elige «%@»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois ajouté, touche le widget pendant que les icônes bougent et choisis « %@ »"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una volta aggiunto, tocca il widget mentre le icone si muovono e scegli «%@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加後、アイコンが揺れている間にウィジェットをタップして、「%@」を選びます"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depois de adicionado, toque no widget enquanto os ícones tremem e escolha “%@”"
           }
         }
       }
@@ -223533,6 +224943,53 @@
         }
       }
     },
+    "Vitamine B6": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamin B6"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamin B6"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina B6"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamine B6"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina B6"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビタミンB6"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina B6"
+          }
+        }
+      }
+    },
     "Vitamine C": {
       "extractionState": "manual",
       "localizations": {
@@ -223623,6 +225080,147 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vitamina D"
+          }
+        }
+      }
+    },
+    "Vitamine E": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamin E"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamin E"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina E"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamine E"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina E"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビタミンE"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina E"
+          }
+        }
+      }
+    },
+    "Vitamine K": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamin K"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamin K"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina K"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamine K"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina K"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビタミンK"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamina K"
+          }
+        }
+      }
+    },
+    "Vitamines": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamine"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamins"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitaminas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamines"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitamine"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビタミン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitaminas"
           }
         }
       }
@@ -226161,6 +227759,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Iogurte grego natural 2%"
+          }
+        }
+      }
+    },
+    "Zinc": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zink"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zinc"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zinc"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zinc"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zinco"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "亜鉛"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zinco"
           }
         }
       }
@@ -234668,53 +236313,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "margem %@"
-          }
-        }
-      }
-    },
-    "mg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mg"
           }
         }
       }

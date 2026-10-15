@@ -20,6 +20,8 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 - Remplacer le dernier membre d'un `struct` par un bloc de texte peut emporter son `}` final (run 188, `FitnessApp.swift`).
 - Ajouter une `WidgetCategory` ou un `WidgetKind` : les `switch` exhaustifs ailleurs (`Templates.autoAccent`, `KindCatalog`, `check_swift.py`) doivent suivre.
 - Nouveaux textes : `l10n_catalog.py extract` AVANT `merge` et `build`, sinon les clés nouvelles restent « not in the catalog ».
+- Galerie de l'écran d'accueil : iOS ne montre qu'une entrée par taille et par type de widget ; impossible d'en montrer une par widget créé (`AppIntentRecommendation` = watchOS seulement). `defaultResult()` peut être mis en cache par iOS (FB15592256) : vérifier sur l'iPhone.
+- Un contrôle iOS 18 ne peut pas ouvrir un schéma `tessera://` (`OpenURLIntent` = liens universels seulement) : `OpenFoodScannerIntent` (OpenIntent, dans les deux cibles) + `AppOpenRequests` lu par l'app.
 
 ## Publicité
 - Remotion : un `ThreeCanvas` ne se redessine qu'au changement d'image ; le monter seulement quand images et police sont prêtes (sinon la première image d'un morceau de rendu sort sans écran). `scene.environment` ignore `envMapIntensity` : verre du téléphone en matériau non éclairé. Plan proche de la caméra à 40 mm (sinon le corps transperce le verre).
