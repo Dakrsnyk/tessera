@@ -11,6 +11,9 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
+- [ ] Quotidien : toucher le planning doit créer un événement (comme dans Planning).
+- [ ] Fitness : ne plus afficher les exercices récents (info inutile).
+- [ ] Créer : la catégorie « Photos et citations » doit apparaître parmi les catégories de widgets.
 
 ## Idées pour plus tard
 
