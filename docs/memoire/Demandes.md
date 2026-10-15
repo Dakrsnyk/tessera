@@ -18,6 +18,7 @@ Retour : [[Memoire]]
 - [ ] Planning : toucher l'horaire dans Mon Quotidien ouvre la mini-app Planning (c'est là qu'on crée un événement en touchant une plage horaire).
 - [ ] Créer : « Photos et citations » tout en bas ; possibilité de mettre une photo derrière une citation.
 - [ ] Icône de l'app : changer d'icône devient Premium.
+- [ ] Nutrition : widget d'écran verrouillé pour scanner directement un code-barres.
 
 ## Idées pour plus tard
 
