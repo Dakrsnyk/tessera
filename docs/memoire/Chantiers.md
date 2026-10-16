@@ -58,7 +58,7 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 
 ## Série du 2026-10-16 : devises, cours, 3 widgets gratuits, alphabet, salle, mode Clair
 
-- Fait (détail dans [[Demandes]]) : run 201 compile la vague 1, run 202 les corrections et le mode Clair/Teinté ; run 203 : 278 tests logiques réussis, 0 échec (48 nouveaux : `CurrencyConversionTests`, `LivePricesTests`, `FreeWidgetLimitTests`, `SectionIndexTests`, `ScheduleRoomTests`, `AccentedRenderingTests`) ; puis envoi TestFlight (version normale, Premium non débloqué).
+- Fait (détail dans [[Demandes]]) : run 201 compile la vague 1, run 202 les corrections et le mode Clair/Teinté ; run 203 : 278 tests logiques réussis, 0 échec (48 nouveaux : `CurrencyConversionTests`, `LivePricesTests`, `FreeWidgetLimitTests`, `SectionIndexTests`, `ScheduleRoomTests`, `AccentedRenderingTests`) ; build 204 (version 1.0) envoyé sur TestFlight (run 204, version normale, Premium non débloqué).
 - À vérifier sur l'iPhone : widgets en Clair (clair et sombre) et Teinté (grand « Horaire de la semaine », Habitudes, Focus, Photos, Citation) ; import d'un CSV en USD (aperçu converti ; en mode avion : erreur et « Importer sans conversion ») ; widget Crypto qui avance seul ; Liste de suivi en petit sur un petit iPhone.
 - Hypothèse annoncée à l'utilisateur : les citations sont illimitées comme les photos.
 - Connu, à traiter à part : en mode En veille de jour (fond retiré, en couleur), les palettes à texte foncé (Jade, Sable…) s'affichent en texte foncé sur noir.
