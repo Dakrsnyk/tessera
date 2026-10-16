@@ -73,6 +73,14 @@ struct SmartRemindersView: View {
             } footer: {
                 Text(tr("La veille de chaque facture et abonnement de Finances, à 9 h."))
             }
+            Section {
+                Toggle(isOn: binding(\.encourages)) {
+                    Label(tr("Encouragements"), systemImage: "hands.clap")
+                }
+                .accessibilityIdentifier("reminders-encourage")
+            } footer: {
+                Text(tr("Un mot après une séance, un record, une longue période d'étude ou un objectif atteint, et un conseil après tes repas. Deux au plus par jour, jamais la nuit."))
+            }
         }
         .styledList()
         .navigationTitle(tr("Rappels intelligents"))

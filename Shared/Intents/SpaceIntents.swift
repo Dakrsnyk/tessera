@@ -19,6 +19,7 @@ extension Notification.Name {
 /// (when it is running) and the Live Activity. It needs neither the app on screen nor the iPhone
 /// unlocked: the session file stays readable on the Lock Screen (see `SharedStore.writingOptions`).
 private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
+    let before = SharedStore.shared.state(FitnessState.self)
     guard SharedStore.shared.update(FitnessState.self, change) else {
         Logger(subsystem: "com.dakrsnyk.tessera.widgets", category: "intents").error("workout button: the session file can't be read right now")
         return
@@ -28,6 +29,8 @@ private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
     await WorkoutLiveActivity.sync(SharedStore.shared.state(FitnessState.self))
     // The workout begun: no reminder for it tonight.
     await SmartReminders.refresh()
+    // A workout finished from the Lock Screen: the same encouragement as in the app (never twice, see the log).
+    await Encouragements.considerAndDeliver(from: before, to: SharedStore.shared.state(FitnessState.self))
 }
 
 /// A Live Activity intent: from a widget, the Lock Screen or the Live Activity, it runs in the app's

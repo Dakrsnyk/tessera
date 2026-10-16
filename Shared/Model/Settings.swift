@@ -101,6 +101,9 @@ struct AppSettings: Codable, Hashable {
     var remindsBills = true
     var workoutReminderHour = 18
     var mealReminderHour = 20
+    /// « Encouragements » (`Encouragements`): a word after a workout, a meal, a study session or a goal
+    /// reached. Two a day at most, never at night; sent only once notifications are allowed.
+    var encourages = true
 
     enum CodingKeys: String, CodingKey {
         case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
@@ -109,6 +112,7 @@ struct AppSettings: Codable, Hashable {
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
         case dailyOrder, dailyHidden, dailyWide, dailyAdded
         case remindsWorkout, remindsMeals, remindsBills, workoutReminderHour, mealReminderHour
+        case encourages
     }
 
     init() {}
@@ -142,6 +146,7 @@ struct AppSettings: Codable, Hashable {
         remindsBills = (try? c.decodeIfPresent(Bool.self, forKey: .remindsBills)) ?? true
         workoutReminderHour = (try? c.decodeIfPresent(Int.self, forKey: .workoutReminderHour)) ?? 18
         mealReminderHour = (try? c.decodeIfPresent(Int.self, forKey: .mealReminderHour)) ?? 20
+        encourages = (try? c.decodeIfPresent(Bool.self, forKey: .encourages)) ?? true
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

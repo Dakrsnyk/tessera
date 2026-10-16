@@ -162,6 +162,8 @@ final class AppModel {
             syncReminders()
         }
         noteGoodMoment(from: before, to: value)
+        // A word when it is deserved (a workout, a record, a meal, a study goal): two a day at most.
+        Encouragements.consider(from: before, to: value, settings: settings)
         scheduleWidgetReload()
     }
 
@@ -428,9 +430,12 @@ final class AppModel {
     // MARK: Content
 
     func updateContent(_ change: (inout ContentState) -> Void) {
+        let before = content
         let money = content.money
         change(&content)
         store.content = content
+        // A habit streak milestone (7, 21, 30… days).
+        Encouragements.consider(from: before, to: content, settings: settings)
         // « Revenus et dépenses fixes » count in Finances too.
         if content.money != money { syncFinances() }
         scheduleWidgetReload()

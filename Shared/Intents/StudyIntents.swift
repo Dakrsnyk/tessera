@@ -14,6 +14,7 @@ extension Notification.Name {
 /// Saves a timer change made outside the app, then updates the widgets, the app (when it is
 /// running) and the Live Activity.
 private func changeStudy(_ change: (inout StudentState) -> Void) async {
+    let before = SharedStore.shared.state(StudentState.self)
     guard SharedStore.shared.update(StudentState.self, change) else {
         Logger(subsystem: "com.dakrsnyk.tessera.widgets", category: "intents").error("study button: the studies file can't be read right now")
         return
@@ -21,6 +22,7 @@ private func changeStudy(_ change: (inout StudentState) -> Void) async {
     WidgetCenter.shared.reloadAllTimelines()
     await MainActor.run { NotificationCenter.default.post(name: .studySavedOutside, object: nil) }
     await StudyLiveActivity.sync(SharedStore.shared.state(StudentState.self))
+    await Encouragements.considerAndDeliver(from: before, to: SharedStore.shared.state(StudentState.self))
 }
 
 /// Stops the timer and adds the time studied to the week, like « Terminer et noter » in the app.

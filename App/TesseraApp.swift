@@ -12,6 +12,11 @@ struct TesseraApp: App {
     @State private var premium = PremiumStore()
     @Environment(\.scenePhase) private var scenePhase
 
+    init() {
+        // The encouragements show as a banner while the app is open too.
+        NotificationPresenter.install()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()
@@ -47,6 +52,8 @@ struct TesseraApp: App {
                         model.countOpen()
                         // A set validated from the Lock Screen while the app was closed.
                         Task { await WorkoutLiveActivity.sync(model.fitness) }
+                        // A study timer stopped or cancelled from the Lock Screen while the app was closed.
+                        Task { await StudyLiveActivity.sync(model.student) }
                         Task { await premium.refreshEntitlements() }
                         Task { await model.refreshInsights() }
                         // A new day, or something done from a widget: the reminders follow.
