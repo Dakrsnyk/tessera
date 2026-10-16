@@ -52,6 +52,7 @@ struct RingView: View {
                 .trim(from: 0, to: max(0.001, min(1, progress)))
                 .stroke(color, style: StrokeStyle(lineWidth: lineWidth, lineCap: .round))
                 .rotationEffect(.degrees(-90))
+                .widgetAccentable()
         }
         .padding(lineWidth / 2)
     }
@@ -73,6 +74,7 @@ struct BarView: View {
                 RoundedRectangle(cornerRadius: corner, style: .continuous)
                     .fill(color)
                     .frame(width: max(height, geo.size.width * min(1, max(0, progress))))
+                    .widgetAccentable()
             }
         }
         .frame(height: height)
@@ -161,6 +163,7 @@ struct WidgetMessage: View {
             Image(systemName: style.symbol(symbol))
                 .font(.system(size: 22, weight: .medium))
                 .foregroundStyle(style.icon)
+                .widgetAccentable()
             Text(title)
                 .font(style.text(14, .semibold))
                 .foregroundStyle(style.primary)

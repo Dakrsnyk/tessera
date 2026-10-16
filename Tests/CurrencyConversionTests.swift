@@ -85,6 +85,49 @@ final class CurrencyConversionTests: XCTestCase {
         XCTAssertEqual(batch.converted(with: tooOld).unconverted, ["USD"], "A rate a month old isn't the rate of the day")
     }
 
+    func testOnlyTheCurrenciesWithoutARateStayAsTheyCame() throws {
+        let batch = try BusinessCSV.parse(csv + "\n2026-01-05,Souk,50.00,AED")
+        var rates = history
+        rates.unavailable = ["AED": .unsupported]
+        let converted = batch.converted(with: rates)
+        XCTAssertEqual(converted.unconverted, ["AED"])
+        XCTAssertEqual(converted.sales.map(\.amount), [137.33, 27.45, 40, 50], "USD converted all the same, AED as it came")
+        XCTAssertNil(converted.sales[3].original)
+
+        let code = "AED"
+        let message = CurrencyConversion.problemMessage(for: converted.unconverted, unavailable: rates.unavailable)
+        XCTAssertTrue(message.contains(tr("La BCE ne publie pas de taux pour \(code).")))
+        XCTAssertFalse(message.contains(tr("Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.")),
+                       "Trying again won't help")
+    }
+
+    func testTheMessageSaysWhyARateIsMissing() throws {
+        let code = "USD"
+        let offline = CurrencyConversion.problemMessage(for: [code], unavailable: [code: .unreachable])
+        XCTAssertTrue(offline.contains(tr("Non converti (taux indisponible) : \(code).")))
+        XCTAssertTrue(offline.contains(tr("Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.")))
+
+        // Rates for USD, but none for a day two months after the last one (a date to come, or misread).
+        let later = try BusinessCSV.parse("Date,Amount,Currency\n2026-03-02,10.00,USD").converted(with: history)
+        XCTAssertEqual(later.unconverted, ["USD"])
+        let message = CurrencyConversion.problemMessage(for: later.unconverted, unavailable: history.unavailable)
+        XCTAssertTrue(message.contains(tr("Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.")))
+        XCTAssertFalse(message.contains(tr("Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.")))
+    }
+
+    func testImportingWithoutConversionNeverUndoesAConversion() throws {
+        var state = BusinessState()
+        state.merge(try BusinessCSV.parse(csv).converted(with: history))
+        let offline = FXHistory(home: "CAD", unavailable: ["USD": .unreachable])
+        let result = state.merge(try BusinessCSV.parse(csv).converted(with: offline))
+        XCTAssertEqual(result.unchanged, 4, "The same file without its rates changes nothing")
+        XCTAssertEqual(state.sales.map(\.amount), [137.33, 27.45, 40])
+        XCTAssertEqual(state.sales[0].original?.amount, 100)
+        XCTAssertEqual(state.expenses.first?.amount ?? 0, 17.24, accuracy: 0.000_1)
+        XCTAssertEqual(state.expenses.first?.original?.currency, "USD")
+        XCTAssertEqual(state.merge(try BusinessCSV.parse(csv)).updated, 3, "Not left unconverted for lack of a rate: updated as it comes")
+    }
+
     // MARK: Stripe
 
     func testStripeConvertsEachTransactionAndItsFees() {
@@ -116,6 +159,22 @@ final class CurrencyConversionTests: XCTestCase {
         var state = BusinessState()
         state.merge(batch)
         XCTAssertEqual(state.merge(StripeTransactions.batch(from: transactions, history: history)).added, 0, "A second sync adds nothing")
+    }
+
+    func testASyncWithoutConversionNeverUndoesAConversion() {
+        let transactions = [
+            StripeTransactions.Transaction(id: "txn_1", amount: 10_000, fee: 320, created: january(2).timeIntervalSince1970,
+                                           currency: "usd", type: "charge", description: "Atelier"),
+        ]
+        var state = BusinessState()
+        state.merge(StripeTransactions.batch(from: transactions, history: history))
+        let asIs = StripeTransactions.batch(from: transactions, history: FXHistory(home: "CAD"))
+        XCTAssertEqual(asIs.unconverted, ["USD"])
+        XCTAssertEqual(state.merge(asIs).unchanged, 2, "The sale and the day's fees stay converted")
+        XCTAssertEqual(state.sales.first?.amount, 137.33)
+        XCTAssertEqual(state.sales.first?.original?.amount, 100)
+        XCTAssertEqual(state.expenses.first?.amount ?? 0, 4.39, accuracy: 0.000_1)
+        XCTAssertEqual(state.expenses.first?.original?.currency, "USD")
     }
 
     // MARK: Data saved before

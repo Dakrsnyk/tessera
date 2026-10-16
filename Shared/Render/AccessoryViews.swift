@@ -234,6 +234,7 @@ struct AccessoryWidgetView: View {
                 .font(.system(.title3, design: .rounded).monospacedDigit())
                 .minimumScaleFactor(0.6)
             Text(PriceChange.text(coin.change24h, .day24h)).font(.caption)
+                .accessibilityLabel(Text(PriceChange.text(coin.change24h, .day24h, arrow: false)))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

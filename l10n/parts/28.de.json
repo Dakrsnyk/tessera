@@ -1,0 +1,15 @@
+{
+ "Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.": "Kein EZB-Kurs für das Datum einiger Buchungen: Datum in der Zukunft oder falsch gelesen.",
+ "Conversion en %@…": "Umrechnung in %@ …",
+ "Converti depuis %@ au taux de référence de la BCE du jour de chaque opération (%@).": "Aus %@ zum EZB-Referenzkurs des jeweiligen Buchungstags umgerechnet (%@).",
+ "Heure, météo, tâches, habitudes et dates.": "Uhrzeit, Wetter, Aufgaben, Gewohnheiten und Termine.",
+ "Importer sans conversion": "Ohne Umrechnung importieren",
+ "Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.": "Die EZB-Kurse konnten nicht abgerufen werden. Prüfe deine Verbindung und versuche es erneut.",
+ "Index alphabétique": "Alphabetischer Index",
+ "La BCE ne publie pas de taux pour %@.": "Die EZB veröffentlicht keinen Kurs für %@.",
+ "La version gratuite garde %@ widgets, et autant de photos et de citations que tu veux. Avec Premium, enregistre tous les widgets que tu veux, et garde tes variantes.": "Die kostenlose Version behält %@ Widgets und so viele Fotos und Zitate, wie du willst. Mit Premium speicherst du alle Widgets, die du willst, samt Varianten.",
+ "Montants en %@ gardés tels quels, sans conversion.": "Beträge in %@ unverändert übernommen, ohne Umrechnung.",
+ "Photos et citations illimitées": "Unbegrenzt Fotos & Zitate",
+ "Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.": "Ohne Premium werden die mit einem Schloss markierten Widgets nicht gespeichert.",
+ "Synchroniser sans conversion": "Ohne Umrechnung synchronisieren"
+}

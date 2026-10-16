@@ -1,0 +1,15 @@
+{
+ "Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.": "一部の取引の日付に欧州中央銀行(ECB)のレートがありません:未来の日付か、読み取りの誤りです。",
+ "Conversion en %@…": "%@に換算中…",
+ "Converti depuis %@ au taux de référence de la BCE du jour de chaque opération (%@).": "%@から、各取引日の欧州中央銀行(ECB)基準レートで換算しました(%@)。",
+ "Heure, météo, tâches, habitudes et dates.": "時刻、天気、タスク、習慣、日付。",
+ "Importer sans conversion": "換算せずに取り込む",
+ "Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.": "欧州中央銀行(ECB)のレートを取得できませんでした。接続を確認して、もう一度お試しください。",
+ "Index alphabétique": "索引",
+ "La BCE ne publie pas de taux pour %@.": "欧州中央銀行(ECB)は%@のレートを公表していません。",
+ "La version gratuite garde %@ widgets, et autant de photos et de citations que tu veux. Avec Premium, enregistre tous les widgets que tu veux, et garde tes variantes.": "無料版で保存できるウィジェットは%@個で、写真と引用は無制限です。Premiumなら、バリエーションも含めて好きなだけウィジェットを保存できます。",
+ "Montants en %@ gardés tels quels, sans conversion.": "%@建ての金額は換算せずそのまま保存しています。",
+ "Photos et citations illimitées": "写真と引用は無制限",
+ "Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.": "Premiumがない場合、鍵マークの付いたウィジェットは保存されません。",
+ "Synchroniser sans conversion": "換算せずに同期"
+}

@@ -120,7 +120,9 @@ enum TimelinePlanner {
         case .weather:
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(WeatherService.refreshInterval)))
         case .crypto:
-            return Plan(dates: [now], policy: .after(now.addingTimeInterval(LivePrices.reloadInterval)))
+            // When iOS puts off the reload, a second frame drawn once the price is old says when it was read.
+            let old = now.addingTimeInterval(2 * LivePrices.reloadInterval + 60)
+            return Plan(dates: [now, old], policy: .after(now.addingTimeInterval(LivePrices.reloadInterval)))
         case .tasks, .habits:
             return Plan(dates: [now, midnight], policy: .after(midnight.addingTimeInterval(60)))
         case .calendar, .countdown, .yearDots, .note:

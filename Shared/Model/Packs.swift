@@ -71,7 +71,7 @@ enum PackCatalog {
                    themeID: .futuristic, accentHex: "3366FF", kinds: [.portfolio, .allocation, .watchlist, .marketOverview, .companySnapshot, .companyCompare]),
         WidgetPack(id: "calm", name: tr("Minimal"), tagline: tr("L'essentiel en noir et blanc, sans rien de plus."), symbol: "circle.lefthalf.filled",
                    themeID: .monochrome, accentHex: "6B7280", kinds: [.clock, .calendar, .progress, .weekView, .moonPhase, .note]),
-        WidgetPack(id: "essentials", name: tr("L'essentiel"), tagline: tr("Heure, météo, tâches, habitudes et dates, gratuitement."), symbol: "star.fill",
+        WidgetPack(id: "essentials", name: tr("L'essentiel"), tagline: tr("Heure, météo, tâches, habitudes et dates."), symbol: "star.fill",
                    themeID: .minimal, accentHex: "2F8F7A", kinds: [.clock, .weather, .tasks, .habits, .calendar, .countdown]),
         WidgetPack(id: "nutrition", name: tr("Nutrition complète"), tagline: tr("Calories, macros, protéines, repas et semaine."), symbol: "fork.knife",
                    themeID: .glass, accentHex: "2F8F7A", kinds: [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nutritionWeek, .nextMeal]),

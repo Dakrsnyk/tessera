@@ -111,17 +111,29 @@ struct HabitsWidgetView: View {
         .frame(maxHeight: .infinity)
     }
 
+    /// The habit's color; without colors (« Clair », « Teinté »), the style's.
+    private func habitColor(_ habit: Habit) -> Color {
+        context.style.isAccented ? context.style.accent : Color(hex: habit.colorHex)
+    }
+
     private func toggleButton(_ habit: Habit, size: CGFloat) -> some View {
         let s = context.style
         let done = habit.isDone(on: context.date)
-        let color = Color(hex: habit.colorHex)
+        let color = habitColor(habit)
         return IntentButton(intent: ToggleHabitIntent(habitID: habit.id), isEnabled: context.isInteractive) {
             ZStack {
-                Circle().fill(done ? color : s.panel)
-                Circle().strokeBorder(done ? Color.clear : color.opacity(0.7), lineWidth: 2)
+                // Without colors: done is a lit, outlined disc under a full symbol; to do, a faint thin ring
+                // around a dimmed one.
+                if done {
+                    Circle().textBackdrop(color, isAccented: s.isAccented, isProminent: true)
+                } else {
+                    Circle().fill(s.panel)
+                    Circle().strokeBorder(color.opacity(AccentedStyle.pendingRingOpacity(isMonochrome: s.isAccented)),
+                                          lineWidth: AccentedStyle.pendingRingWidth(isMonochrome: s.isAccented))
+                }
                 Image(systemName: habit.symbol)
                     .font(.system(size: size * 0.38, weight: .semibold))
-                    .foregroundStyle(done ? .white : color)
+                    .foregroundStyle(done ? .white : color.opacity(s.isAccented ? AccentedStyle.secondaryOpacity : 1))
             }
             .frame(width: size, height: size)
         }
@@ -131,7 +143,7 @@ struct HabitsWidgetView: View {
     private func habitRow(_ habit: Habit) -> some View {
         let s = context.style
         let week = DateMath.week(containing: context.date)
-        let color = Color(hex: habit.colorHex)
+        let color = habitColor(habit)
         let streak = habit.streak(asOf: context.date)
         return HStack(spacing: 10) {
             toggleButton(habit, size: context.isLarge ? 34 : 30)
@@ -192,6 +204,7 @@ struct FocusWidgetView: View {
                     .multilineTextAlignment(s.textAlignment)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .widgetAccentable()
                 ProgressView(timerInterval: range, countsDown: true, label: { EmptyView() }, currentValueLabel: { EmptyView() })
                     .progressViewStyle(.linear)
                     .tint(s.accent)
@@ -226,7 +239,7 @@ struct FocusWidgetView: View {
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.8)
                                 .frame(maxWidth: .infinity, minHeight: 32)
-                                .background(s.accent, in: Capsule())
+                                .background { Capsule().textBackdrop(s.accent, isAccented: s.isAccented, isProminent: true) }
                         }
                     }
                 }
@@ -347,7 +360,7 @@ struct UpNextWidgetView: View {
                             .foregroundStyle(s.onAccent)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
-                            .background(s.accent, in: Capsule())
+                            .background { Capsule().textBackdrop(s.accent, isAccented: s.isAccented, isProminent: true) }
                     }
                 }
             }

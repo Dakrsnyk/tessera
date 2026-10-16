@@ -58,6 +58,10 @@ struct StyledIcon: View {
     var color: Color?
 
     var body: some View {
+        icon.widgetAccentable()
+    }
+
+    @ViewBuilder private var icon: some View {
         let points = size * CGFloat(style.options.iconScale)
         let name = style.symbol(symbol)
         let tint = color ?? style.icon
@@ -718,15 +722,20 @@ struct ProgressPieChart: View {
     var body: some View {
         GeometryReader { geo in
             let side = min(geo.size.width, geo.size.height)
+            let slice = PieSlice(start: 0, end: min(1, max(0.001, progress)))
             ZStack {
                 Circle().fill(style.options.chartFill ? style.track : Color.clear)
                 Circle().strokeBorder(style.chart.opacity(0.35), lineWidth: 1)
-                PieSlice(start: 0, end: min(1, max(0.001, progress))).fill(style.chart)
+                // Without colors, the value written on the slice needs a light slice, drawn by its outline.
+                slice.fill(style.chart.opacity(AccentedStyle.fillOpacity(isMonochrome: style.isAccented, carriesText: showsValue, isProminent: true)))
+                if AccentedStyle.outlines(isMonochrome: style.isAccented, carriesText: showsValue) {
+                    slice.stroke(style.chart, lineWidth: 1.5)
+                }
                 if showsValue {
                     Text(Fmt.percent(progress))
                         .font(style.number(max(10, side * 0.2)))
                         .foregroundStyle(style.onAccent)
-                        .shadow(color: .black.opacity(0.25), radius: 2)
+                        .shadow(color: .black.opacity(style.isAccented ? 0 : 0.25), radius: 2)
                 }
             }
             .frame(width: side, height: side)
@@ -754,7 +763,7 @@ struct SegmentsRoundChart: View {
                 ZStack {
                     ForEach(Array(segments.enumerated()), id: \.offset) { pair in
                         PieSlice(start: bounds[pair.offset].0, end: bounds[pair.offset].1, hole: hole)
-                            .fill(Color(hex: pair.element.colorHex))
+                            .fill(style.partColor(pair.element.colorHex, at: pair.offset))
                     }
                 }
                 .frame(width: side, height: side)
@@ -765,7 +774,7 @@ struct SegmentsRoundChart: View {
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(Array(segments.prefix(5).enumerated()), id: \.offset) { pair in
                         HStack(spacing: 5) {
-                            Circle().fill(Color(hex: pair.element.colorHex)).frame(width: 7, height: 7)
+                            Circle().fill(style.partColor(pair.element.colorHex, at: pair.offset)).frame(width: 7, height: 7)
                             Text(pair.element.label)
                                 .font(style.text(10))
                                 .foregroundStyle(style.primary)
@@ -802,7 +811,7 @@ struct SegmentsBarsChart: View {
                                 .fixedSize()
                         }
                         RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
-                            .fill(Color(hex: pair.element.colorHex))
+                            .fill(style.partColor(pair.element.colorHex, at: pair.offset))
                             .frame(height: max(3, (geo.size.height - (style.options.chartValues ? 14 : 0)) * CGFloat(max(0, pair.element.value) / top)))
                     }
                     .frame(maxWidth: .infinity)

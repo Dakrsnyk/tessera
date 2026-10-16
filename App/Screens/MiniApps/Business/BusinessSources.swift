@@ -44,7 +44,7 @@ struct BusinessSourcesCard: View {
                             }
                             .disabled(isSyncing)
                             .accessibilityIdentifier("stripe-sync-unconverted")
-                        } else if let note = convertedNote(stripe) {
+                        } else if let note = conversionNote(stripe) {
                             Text(note)
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -122,11 +122,22 @@ struct BusinessSourcesCard: View {
         return tr("Synchronisé \(when)\(added)")
     }
 
-    /// « Montants en USD convertis au taux de référence de la BCE. »
-    private func convertedNote(_ link: BusinessConnections.StripeLink) -> String? {
-        guard let codes = link.convertedCurrencies, !codes.isEmpty else { return nil }
-        let list = codes.joined(separator: ", ")
-        return tr("Montants en \(list) convertis au taux de référence de la BCE.")
+    /// « Montants en USD convertis au taux de référence de la BCE. », and the currencies the ECB doesn't
+    /// publish that are kept as Stripe gives them. Never the app's currency (it may have changed since).
+    private func conversionNote(_ link: BusinessConnections.StripeLink) -> String? {
+        let home = model.settings.currencyCode.uppercased()
+        var sentences: [String] = []
+        let converted = (link.convertedCurrencies ?? []).filter { $0 != home }
+        if !converted.isEmpty {
+            let list = converted.joined(separator: ", ")
+            sentences.append(tr("Montants en \(list) convertis au taux de référence de la BCE."))
+        }
+        let kept = (link.keptCurrencies ?? []).filter { $0 != home }
+        if !kept.isEmpty {
+            let list = kept.joined(separator: ", ")
+            sentences.append(tr("Montants en \(list) gardés tels quels, sans conversion."))
+        }
+        return sentences.isEmpty ? nil : sentences.joined(separator: " ")
     }
 
     private func read(_ result: Result<URL, Error>) {
@@ -219,34 +230,30 @@ struct BusinessImportSheet: View {
                         Button(tr("Réessayer")) { attempt += 1 }
                     }
                     Button(tr("Importer sans conversion")) {
-                        save(preview.batch)
+                        // Only the currencies without a rate stay as they came; the others are converted.
+                        save(converted ?? preview.batch)
                         dismiss()
                     }
                     .accessibilityIdentifier("business-import-unconverted")
                 } footer: {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(tr("Non converti (taux indisponible) : \(unconvertedList)."))
-                        Text(tr("Les taux de la BCE n'ont pas pu être obtenus : hors ligne, ou devise non publiée. Réessaie, ou garde les montants tels quels, sans conversion."))
-                    }
-                    .foregroundStyle(Color(hex: BusinessFormat.badHex))
+                    Text(CurrencyConversion.problemMessage(for: converted?.unconverted ?? [], unavailable: history?.unavailable ?? [:]))
+                        .foregroundStyle(Color(hex: BusinessFormat.badHex))
                 }
             }
         }
         .task(id: attempt) { await convert() }
     }
 
-    /// The currency of the totals: the app's once converted; the file's when the rates are missing and it
-    /// has a single one; nil otherwise (while converting, or a file in several currencies).
+    /// The currency of the totals: the app's once converted; the file's when the rates are missing, it has a
+    /// single one and no line of it was converted; nil otherwise (while converting, a file in several
+    /// currencies, or converted in part).
     private var totalsCurrency: String? {
         if ready != nil { return home }
         let batch = preview.batch
         let codes = Set(batch.entryCurrencies.values)
-        guard failed, codes.count == 1, batch.entryCurrencies.count == batch.sales.count + batch.expenses.count else { return nil }
+        guard failed, converted?.convertedCurrencies.isEmpty ?? false, codes.count == 1,
+              batch.entryCurrencies.count == batch.sales.count + batch.expenses.count else { return nil }
         return codes.first
-    }
-
-    private var unconvertedList: String {
-        (converted?.unconverted ?? []).sorted().joined(separator: ", ")
     }
 
     /// « Converti depuis USD au taux de référence de la BCE du jour de chaque opération (2 janv. – 31 mars). »

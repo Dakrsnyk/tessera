@@ -73,6 +73,7 @@ struct ClockWidgetView: View {
         }
         .lineLimit(1)
         .minimumScaleFactor(0.5)
+        .widgetAccentable()
     }
 }
 
@@ -116,7 +117,7 @@ struct MonthGridView: View {
                 .foregroundStyle(isToday ? style.onAccent : (day < DateMath.startOfDay(date) ? style.secondary : style.primary))
                 .frame(width: fontSize * 1.9, height: fontSize * 1.9)
                 .background {
-                    if isToday { Circle().fill(style.accent) }
+                    if isToday { Circle().textBackdrop(style.accent, isAccented: style.isAccented, isProminent: true) }
                 }
         } else {
             Text(" ")
@@ -141,6 +142,7 @@ struct CalendarWidgetView: View {
                         .font(s.number(58))
                         .foregroundStyle(s.numberColor)
                         .minimumScaleFactor(0.6)
+                        .widgetAccentable()
                     Spacer(minLength: 0)
                     Text(Fmt.monthYear(date))
                         .font(s.text(13, .medium))
@@ -341,6 +343,7 @@ struct SegmentedProgressView: View {
                         RoundedRectangle(cornerRadius: 2, style: .continuous)
                             .fill(style.accent)
                             .frame(height: geo.size.height * fill)
+                            .widgetAccentable()
                     }
                 }
             }
@@ -366,6 +369,7 @@ struct ProgressWidgetView: View {
                     .foregroundStyle(s.numberColor)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
+                    .widgetAccentable()
                 BarView(progress: value, color: s.chart, track: s.track, height: 6)
                 if s.showsDetails {
                     Text(ProgressText.remaining(unit, at: context.date))
@@ -387,6 +391,7 @@ struct ProgressWidgetView: View {
                             .font(s.number(46))
                             .foregroundStyle(s.numberColor)
                             .lineLimit(1)
+                            .widgetAccentable()
                     }
                     Spacer()
                     if s.showsDetails {
@@ -530,12 +535,14 @@ struct CountdownWidgetView: View {
             Image(systemName: "sparkles")
                 .font(.system(size: size * 0.7, weight: .semibold))
                 .foregroundStyle(s.icon)
+                .widgetAccentable()
         } else {
             Text(Fmt.number(info.days))
                 .font(s.number(size))
                 .foregroundStyle(s.numberColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
+                .widgetAccentable()
         }
     }
 }
@@ -553,8 +560,10 @@ struct YearDotsView: View {
             let columns = Self.bestColumns(total: total, size: geo.size)
             ZStack {
                 DotGridShape(total: total, columns: columns, range: (today + 1)..<total).fill(style.track)
-                DotGridShape(total: total, columns: columns, range: 0..<today).fill(style.primary.opacity(0.85))
+                // Today is told by its color; without colors, by being the only full dot.
+                DotGridShape(total: total, columns: columns, range: 0..<today).fill(style.primary.opacity(AccentedStyle.elapsedOpacity(isMonochrome: style.isAccented)))
                 DotGridShape(total: total, columns: columns, range: today..<(today + 1)).fill(style.accent)
+                    .widgetAccentable()
             }
         }
     }

@@ -12,6 +12,7 @@ struct PhotoCollageView: View {
     let date: Date
     /// In the app, while choosing: a cell can be touched to frame its photo.
     var onSelect: ((PhotoSlot) -> Void)?
+    @Environment(\.widgetRenderingMode) private var renderingMode
 
     var body: some View {
         let shown = PhotoLayout.visible(photos, at: date)
@@ -36,7 +37,8 @@ struct PhotoCollageView: View {
                 }
             }
         }
-        .background(Color.black)
+        // Without colors, black would turn into white lines between the photos: the system's glass shows instead.
+        .background(AccentedStyle.isMonochrome(renderingMode) ? Color.clear : Color.black)
     }
 }
 
@@ -69,24 +71,37 @@ struct FramedPhoto: View {
     let image: UIImage
     let slot: PhotoSlot
     let size: CGSize
+    /// Behind text (a quote): without colors, it is desaturated rather than kept in its colors.
+    var isBackdrop = false
 
     var body: some View {
         let frame = PhotoLayout.frame(image: image.size, cell: size, slot: slot)
-        Image(uiImage: image)
-            .resizable()
+        picture
             .frame(width: frame.size.width, height: frame.size.height)
             .offset(x: frame.offset.x, y: frame.offset.y)
             .frame(width: size.width, height: size.height, alignment: .topLeading)
+    }
+
+    /// Without colors, iOS would draw an image as one white shape: the photo keeps its colors (or, behind
+    /// text, its light and shade).
+    @ViewBuilder private var picture: some View {
+        let photo = Image(uiImage: image).resizable()
+        if #available(iOS 18.0, *) {
+            photo.widgetAccentedRenderingMode(isBackdrop ? WidgetAccentedRenderingMode.accentedDesaturated : WidgetAccentedRenderingMode.fullColor)
+        } else {
+            photo
+        }
     }
 }
 
 private struct PhotoPlaceholder: View {
     let symbol: String
     let text: String
+    @Environment(\.widgetRenderingMode) private var renderingMode
 
     var body: some View {
         ZStack {
-            Color(white: 0.16)
+            AccentedStyle.isMonochrome(renderingMode) ? Color.white.opacity(AccentedStyle.panelOpacity) : Color(white: 0.16)
             VStack(spacing: 6) {
                 Image(systemName: symbol)
                     .font(.system(size: 22, weight: .medium))
@@ -110,6 +125,11 @@ struct QuoteWidgetView: View {
     let family: WidgetFamily
     /// The photo behind the quote (`WidgetDesign.quoteBackground`).
     var background: PhotoSlot?
+    @Environment(\.widgetRenderingMode) private var renderingMode
+
+    /// Without colors, only opacity remains: the quote's background and the veil would turn into white
+    /// layers over which its text disappears. The text then sits on the system's glass, on a faint photo.
+    private var isMonochrome: Bool { AccentedStyle.isMonochrome(renderingMode) }
 
     private var size: CGFloat {
         let length = quote.text.count
@@ -135,17 +155,22 @@ struct QuoteWidgetView: View {
             GeometryReader { geo in
                 if let image = Self.backgroundImage(background, size: geo.size) {
                     layers(isOnPhoto: true) {
-                        FramedPhoto(image: image, slot: background, size: geo.size)
+                        FramedPhoto(image: image, slot: background, size: geo.size, isBackdrop: true)
                             .clipped()
-                        veil
+                            .opacity(isMonochrome ? AccentedStyle.backdropPhotoOpacity : 1)
+                        if !isMonochrome { veil }
                     }
                 } else {
-                    layers(isOnPhoto: false) { Color(hex: quote.backgroundHex) }
+                    layers(isOnPhoto: false) { ownBackground }
                 }
             }
         } else {
-            layers(isOnPhoto: false) { Color(hex: quote.backgroundHex) }
+            layers(isOnPhoto: false) { ownBackground }
         }
+    }
+
+    private var ownBackground: Color {
+        isMonochrome ? Color.clear : Color(hex: quote.backgroundHex)
     }
 
     /// The photo behind a quote at the size it is drawn, or nil without one or when its file is gone (the
@@ -163,7 +188,7 @@ struct QuoteWidgetView: View {
     }
 
     private func layers<Backdrop: View>(isOnPhoto: Bool, @ViewBuilder backdrop: () -> Backdrop) -> some View {
-        let ink = Color(hex: isOnPhoto ? quote.inkOnPhotoHex : quote.textHex)
+        let ink = isMonochrome ? Color.white : Color(hex: isOnPhoto ? quote.inkOnPhotoHex : quote.textHex)
         let alignment: HorizontalAlignment = quote.isCentered ? .center : .leading
         return ZStack {
             backdrop()
@@ -191,7 +216,8 @@ struct QuoteWidgetView: View {
             }
             .frame(maxWidth: .infinity, alignment: quote.isCentered ? .center : .leading)
             .padding(family == .systemSmall ? 14 : 20)
-            .shadow(color: .black.opacity(isOnPhoto ? 0.45 : 0), radius: isOnPhoto ? 4 : 0, y: isOnPhoto ? 1 : 0)
+            // Without colors, the shadow would be a white halo.
+            .shadow(color: .black.opacity(isOnPhoto && !isMonochrome ? 0.45 : 0), radius: isOnPhoto ? 4 : 0, y: isOnPhoto ? 1 : 0)
         }
     }
 }

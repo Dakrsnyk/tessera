@@ -17,7 +17,8 @@ struct WidgetCanvas: View {
     }
 
     var body: some View {
-        let style = ResolvedStyle(design: design)
+        // In « Clair » and « Teinté », iOS keeps only the opacity of each element: the style follows.
+        let style = ResolvedStyle(design: design).rendered(for: renderingMode)
         let context = RenderContext(
             design: design, style: style, family: family, date: date,
             payload: payload, isInteractive: isInteractive
@@ -92,6 +93,7 @@ struct WidgetCanvas: View {
     }
 
     @Environment(\.colorScheme) private var currentScheme
+    @Environment(\.widgetRenderingMode) private var renderingMode
 }
 
 struct KindContentView: View {
@@ -142,7 +144,7 @@ struct PremiumLockedView: View {
                     .foregroundStyle(s.onAccent)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
-                    .background(s.accent, in: Capsule())
+                    .background { Capsule().textBackdrop(s.accent, isAccented: s.isAccented, isProminent: true) }
                 if !context.isSmall {
                     Text(tr("Touche pour débloquer ce widget"))
                         .font(s.text(11))

@@ -49,7 +49,8 @@ enum PriceChange {
         var label: String {
             switch self {
             case .day24h: tr("24 h")
-            case .session: tr("jour", context: "change")
+            // The same word as « 1 jour »: « day », « Tag », « día »… fit both.
+            case .session: tr("jour")
             }
         }
     }

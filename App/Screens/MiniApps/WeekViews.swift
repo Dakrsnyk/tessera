@@ -386,23 +386,23 @@ struct WeekTimetable: View {
             shape.fill(Color(hex: block.item.colorHex))
                 .opacity(block.item.isDone == true ? 0.45 : 1)
         } else {
-            let lines = Self.lines(height: height, minutes: block.end - block.start, hasPlace: block.item.place != nil)
-            VStack(alignment: .leading, spacing: 0) {
-                Text(block.item.title)
-                    .font(.system(size: 9, weight: .semibold))
-                    .lineLimit(3)
-                    .minimumScaleFactor(0.8)
+            let minutes = block.end - block.start
+            let lines = Self.lines(height: height, minutes: minutes, hasPlace: block.item.place != nil)
+            // Without its place, the block as before the places.
+            let plainTime = Self.lines(height: height, minutes: minutes, hasPlace: false).time
+            Group {
                 if lines.place, let place = block.item.place {
-                    Text(place)
-                        .font(.system(size: 8, weight: .medium))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                }
-                if lines.time, let start = block.item.start {
-                    Text(Fmt.time(start, uses24Hour: true))
-                        .font(.system(size: 8, weight: .medium))
-                        .monospacedDigit()
-                        .opacity(0.85)
+                    // A name on two lines takes the room of the time, then of the place, rather than
+                    // being cut to its first line.
+                    ViewThatFits(in: .vertical) {
+                        if lines.time {
+                            blockText(block.item, place: place, time: true)
+                        }
+                        blockText(block.item, place: place, time: false)
+                        blockText(block.item, place: nil, time: plainTime)
+                    }
+                } else {
+                    blockText(block.item, place: nil, time: lines.time)
                 }
             }
             .foregroundStyle(Color.white)
@@ -416,10 +416,35 @@ struct WeekTimetable: View {
         }
     }
 
-    /// What a block of the full table writes under its title (15 points for the padding and the title's
-    /// first line, 10 for each line under it): where it takes place when there is room for it, then its
-    /// start time (from 50 minutes) when there is room for that too. A block without a place, or too
-    /// short for it, keeps its start time from 50 minutes.
+    /// The text of a block of the full table: its name, then `place` and its start time when given.
+    private func blockText(_ item: AgendaItem, place: String?, time: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(item.title)
+                .font(.system(size: 9, weight: .semibold))
+                .lineLimit(3)
+                .minimumScaleFactor(0.8)
+            if let place {
+                Text(place)
+                    .font(.system(size: 8, weight: .medium))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            if time, let start = item.start {
+                Text(Fmt.time(start, uses24Hour: true))
+                    .font(.system(size: 8, weight: .medium))
+                    .monospacedDigit()
+                    .opacity(0.85)
+            }
+        }
+    }
+
+    /// What a block of the full table may write under its title (15 points for the padding and the
+    /// title's first line, 10 for each line under it): where it takes place when there is room for it,
+    /// then its start time (from 50 minutes) when there is room for that too. A block without a place,
+    /// or too short for it, keeps its start time from 50 minutes. An upper bound: a name on several lines
+    /// first drops the time, then the place (the block as before). With a place, the start time is thus
+    /// left to the hours down the side on Planning's classes of 50 to 56 minutes (38 points an hour) and
+    /// on those of 71 to 98 minutes of Mon Quotidien's full-width card (22 points an hour).
     static func lines(height: CGFloat, minutes: Int, hasPlace: Bool) -> (place: Bool, time: Bool) {
         let showsTime = minutes >= 50
         let below = height - 15

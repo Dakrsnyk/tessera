@@ -84,6 +84,7 @@ struct WeatherWidgetView: View {
                 .foregroundStyle(s.numberColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
+                .widgetAccentable()
             if s.showsDetails {
                 Text(WeatherCode.description(w.code))
                     .font(s.text(12, .medium))
@@ -199,6 +200,7 @@ struct CryptoWidgetView: View {
                     .foregroundStyle(s.numberColor)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .widgetAccentable()
                 changeLabel(coin)
                 if s.showsDetails {
                     sparkline(coin.sparkline, color: lineColor)
@@ -220,6 +222,7 @@ struct CryptoWidgetView: View {
                         .foregroundStyle(s.numberColor)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
+                        .widgetAccentable()
                     changeLabel(coin)
                     timeLabel(coin)
                 }
@@ -262,6 +265,8 @@ struct CryptoWidgetView: View {
             .foregroundStyle(trend == true ? s.positive : (trend == false ? s.negative : s.secondary))
             .lineLimit(1)
             .minimumScaleFactor(0.8)
+            // VoiceOver reads the sign; the arrow's name would only add noise.
+            .accessibilityLabel(Text(PriceChange.text(coin.change24h, .day24h, arrow: false)))
     }
 
     private func sparkline(_ values: [Double], color: Color) -> some View {
@@ -308,6 +313,7 @@ struct MoneyFlowWidgetView: View {
                     .foregroundStyle(mode == .net ? color : s.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .widgetAccentable()
                 if context.isSmall {
                     Spacer(minLength: 0)
                     Text(todayText(today, mode: mode, currency: currency))

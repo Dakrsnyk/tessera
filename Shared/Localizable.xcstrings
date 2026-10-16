@@ -518,53 +518,6 @@
         }
       }
     },
-    " sur 24 h": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " in 24 Std."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " in 24 h"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " en 24 h"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " sur 24 h"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " in 24 h"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " / 24時間"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " em 24 h"
-          }
-        }
-      }
-    },
     " · %@": {
       "extractionState": "manual",
       "localizations": {
@@ -7004,53 +6957,6 @@
         }
       }
     },
-    "%@ sur 24 h": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ in 24 h"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ over 24 h"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ en 24 h"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ sur 24 h"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ in 24 h"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "24時間で%@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ em 24 h"
-          }
-        }
-      }
-    },
     "%@ sur 30 jours": {
       "extractionState": "manual",
       "localizations": {
@@ -7705,53 +7611,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ · no máximo %@"
-          }
-        }
-      }
-    },
-    "%@ · %@ aujourd'hui": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ heute"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ today"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ hoy"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ aujourd'hui"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ oggi"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · 今日 %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ hoje"
           }
         }
       }
@@ -28765,53 +28624,6 @@
         }
       }
     },
-    "Attention : le fichier est en %@, Ardane en %@. Les montants sont gardés tels quels, sans conversion.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Achtung: Die Datei ist in %@, Ardane in %@. Die Beträge bleiben unverändert, ohne Umrechnung."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Note: the file is in %@, Ardane in %@. Amounts are kept as they are, without conversion."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atención: el archivo está en %@ y Ardane en %@. Los importes se guardan tal cual, sin conversión."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attention : le fichier est en %@, Ardane en %@. Les montants sont gardés tels quels, sans conversion."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attenzione: il file è in %@, Ardane in %@. Gli importi restano così come sono, senza conversione."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "注意：ファイルは%@、Ardaneは%@です。金額は換算せずそのまま保存されます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atenção: o arquivo está em %@ e o Ardane em %@. Os valores ficam como estão, sem conversão."
-          }
-        }
-      }
-    },
     "Atterrir jambes tendues.": {
       "extractionState": "manual",
       "localizations": {
@@ -30171,6 +29983,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhum resultado"
+          }
+        }
+      }
+    },
+    "Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein EZB-Kurs für das Datum einiger Buchungen: Datum in der Zukunft oder falsch gelesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No ECB rate for the date of some transactions: a future date, or misread."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay tipo de cambio del BCE para la fecha de algunas operaciones: fecha futura o mal leída."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun tasso BCE per la data di alcune operazioni: data futura o letta male."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一部の取引の日付に欧州中央銀行(ECB)のレートがありません:未来の日付か、読み取りの誤りです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma taxa do BCE para a data de algumas operações: data futura ou lida errado."
           }
         }
       }
@@ -54944,53 +54803,6 @@
         }
       }
     },
-    "CoinGecko · %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CoinGecko · %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CoinGecko · %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CoinGecko · %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CoinGecko · %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CoinGecko · %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CoinGecko · %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CoinGecko · %@"
-          }
-        }
-      }
-    },
     "Coins arrondis classiques.": {
       "extractionState": "manual",
       "localizations": {
@@ -58328,6 +58140,100 @@
         }
       }
     },
+    "Conversion en %@…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umrechnung in %@ …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Converting to %@…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Convirtiendo a %@…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversion en %@…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversione in %@…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@に換算中…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Convertendo para %@…"
+          }
+        }
+      }
+    },
+    "Converti depuis %@ au taux de référence de la BCE du jour de chaque opération (%@).": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus %@ zum EZB-Referenzkurs des jeweiligen Buchungstags umgerechnet (%@)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Converted from %@ at the ECB reference rate of each transaction's day (%@)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Convertido desde %@ al tipo de cambio de referencia del BCE del día de cada operación (%@)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Converti depuis %@ au taux de référence de la BCE du jour de chaque opération (%@)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Convertito da %@ al tasso di riferimento BCE del giorno di ogni operazione (%@)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@から、各取引日の欧州中央銀行(ECB)基準レートで換算しました(%@)。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Convertido de %@ pela taxa de referência do BCE do dia de cada operação (%@)."
+          }
+        }
+      }
+    },
     "Copie la clé (elle commence par rk_live_) et colle-la ici.": {
       "extractionState": "manual",
       "localizations": {
@@ -61003,53 +60909,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cotações: CoinGecko"
-          }
-        }
-      }
-    },
-    "Cours : Finnhub · %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurs: Finnhub · %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Price: Finnhub · %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cotización: Finnhub · %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cours : Finnhub · %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quotazione: Finnhub · %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "相場：Finnhub · %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cotação: Finnhub · %@"
           }
         }
       }
@@ -101004,49 +100863,49 @@
         }
       }
     },
-    "Heure, météo, tâches, habitudes et dates, gratuitement.": {
+    "Heure, météo, tâches, habitudes et dates.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Uhrzeit, Wetter, Aufgaben, Gewohnheiten und Termine, kostenlos."
+            "value": "Uhrzeit, Wetter, Aufgaben, Gewohnheiten und Termine."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Time, weather, tasks, habits and dates, for free."
+            "value": "Time, weather, tasks, habits and dates."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hora, clima, tareas, hábitos y fechas, gratis."
+            "value": "Hora, clima, tareas, hábitos y fechas."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Heure, météo, tâches, habitudes et dates, gratuitement."
+            "value": "Heure, météo, tâches, habitudes et dates."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ora, meteo, attività, abitudini e date, gratis."
+            "value": "Ora, meteo, attività, abitudini e date."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "時刻、天気、タスク、習慣、日付。すべて無料。"
+            "value": "時刻、天気、タスク、習慣、日付。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hora, clima, tarefas, hábitos e datas, de graça."
+            "value": "Hora, clima, tarefas, hábitos e datas."
           }
         }
       }
@@ -103683,6 +103542,53 @@
         }
       }
     },
+    "Importer sans conversion": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Umrechnung importieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import without conversion"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar sin conversión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer sans conversion"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa senza conversione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "換算せずに取り込む"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar sem conversão"
+          }
+        }
+      }
+    },
     "Importer un fichier CSV": {
       "extractionState": "manual",
       "localizations": {
@@ -103726,6 +103632,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importar um arquivo CSV"
+          }
+        }
+      }
+    },
+    "Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die EZB-Kurse konnten nicht abgerufen werden. Prüfe deine Verbindung und versuche es erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't get the ECB rates. Check your connection, then try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudieron obtener los tipos de cambio del BCE. Revisa tu conexión y vuelve a intentarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile ottenere i tassi della BCE. Controlla la connessione, poi riprova."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "欧州中央銀行(ECB)のレートを取得できませんでした。接続を確認して、もう一度お試しください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível obter as taxas do BCE. Verifique sua conexão e tente de novo."
           }
         }
       }
@@ -104055,6 +104008,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dia da Independência"
+          }
+        }
+      }
+    },
+    "Index alphabétique": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alphabetischer Index"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alphabetical index"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Índice alfabético"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Index alphabétique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indice alfabetico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "索引"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Índice alfabético"
           }
         }
       }
@@ -110639,6 +110639,53 @@
         }
       }
     },
+    "La BCE ne publie pas de taux pour %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die EZB veröffentlicht keinen Kurs für %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The ECB doesn't publish a rate for %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El BCE no publica tipo de cambio para %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La BCE ne publie pas de taux pour %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La BCE non pubblica un tasso per %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "欧州中央銀行(ECB)は%@のレートを公表していません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O BCE não publica taxa para %@."
+          }
+        }
+      }
+    },
     "La Réunion": {
       "extractionState": "manual",
       "localizations": {
@@ -113318,49 +113365,49 @@
         }
       }
     },
-    "La version gratuite garde %@ widgets. Avec Premium, enregistre-en autant que tu veux, et garde tes variantes.": {
+    "La version gratuite garde %@ widgets, et autant de photos et de citations que tu veux. Avec Premium, enregistre tous les widgets que tu veux, et garde tes variantes.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die kostenlose Version behält %@ Widgets. Mit Premium speicherst du so viele du willst, samt Varianten."
+            "value": "Die kostenlose Version behält %@ Widgets und so viele Fotos und Zitate, wie du willst. Mit Premium speicherst du alle Widgets, die du willst, samt Varianten."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The free version keeps %@ widgets. With Premium, save as many as you like, variants included."
+            "value": "The free version keeps %@ widgets, plus as many photos and quotes as you like. With Premium, save all the widgets you want, variants included."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La versión gratuita guarda %@ widgets. Con Premium, guarda todos los que quieras, con sus variantes."
+            "value": "La versión gratuita guarda %@ widgets, y todas las fotos y citas que quieras. Con Premium, guarda todos los widgets que quieras, con sus variantes."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La version gratuite garde %@ widgets. Avec Premium, enregistre-en autant que tu veux, et garde tes variantes."
+            "value": "La version gratuite garde %@ widgets, et autant de photos et de citations que tu veux. Avec Premium, enregistre tous les widgets que tu veux, et garde tes variantes."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La versione gratuita conserva %@ widget. Con Premium salvane quanti vuoi, varianti comprese."
+            "value": "La versione gratuita conserva %@ widget, e tutte le foto e citazioni che vuoi. Con Premium salva tutti i widget che vuoi, varianti comprese."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "無料版で保存できるウィジェットは%@個です。Premiumならバリエーションも含めて好きなだけ保存できます。"
+            "value": "無料版で保存できるウィジェットは%@個で、写真と引用は無制限です。Premiumなら、バリエーションも含めて好きなだけウィジェットを保存できます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A versão gratuita guarda %@ widgets. Com o Premium, salve quantos quiser, com suas variações."
+            "value": "A versão gratuita guarda %@ widgets, e quantas fotos e citações você quiser. Com o Premium, salve todos os widgets que quiser, com suas variações."
           }
         }
       }
@@ -134280,6 +134327,53 @@
         }
       }
     },
+    "Montants en %@ gardés tels quels, sans conversion.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beträge in %@ unverändert übernommen, ohne Umrechnung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amounts in %@ kept as they are, without conversion."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importes en %@ guardados tal cual, sin conversión."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Montants en %@ gardés tels quels, sans conversion."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importi in %@ lasciati così come sono, senza conversione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@建ての金額は換算せずそのまま保存しています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valores em %@ mantidos como estão, sem conversão."
+          }
+        }
+      }
+    },
     "Monte jusqu'au menton au-dessus de la barre (ou la barre au haut de la poitrine).": {
       "extractionState": "manual",
       "localizations": {
@@ -154157,6 +154251,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fotos e citações"
+          }
+        }
+      }
+    },
+    "Photos et citations illimitées": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unbegrenzt Fotos & Zitate"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited photos & quotes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotos y citas ilimitadas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photos et citations illimitées"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foto e citazioni illimitate"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真と引用は無制限"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotos e citações ilimitadas"
           }
         }
       }
@@ -185463,6 +185604,53 @@
         }
       }
     },
+    "Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Premium werden die mit einem Schloss markierten Widgets nicht gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without Premium, the widgets marked with a lock won't be saved."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin Premium, los widgets marcados con un candado no se guardarán."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza Premium, i widget con il lucchetto non verranno salvati."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumがない場合、鍵マークの付いたウィジェットは保存されません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem o Premium, os widgets marcados com um cadeado não serão salvos."
+          }
+        }
+      }
+    },
     "Sans Premium, tu ne pourras plus revenir à « %@ ».": {
       "extractionState": "manual",
       "localizations": {
@@ -196786,6 +196974,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sincronizar"
+          }
+        }
+      }
+    },
+    "Synchroniser sans conversion": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Umrechnung synchronisieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sync without conversion"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronizar sin conversión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchroniser sans conversion"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronizza senza conversione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "換算せずに同期"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sincronizar sem conversão"
           }
         }
       }

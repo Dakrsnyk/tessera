@@ -211,11 +211,13 @@ struct SaleEditor: View {
     @Environment(\.dismiss) private var dismiss
     @State private var sale: SalesEntry
     private let isNew: Bool
+    private let initialAmount: Double
 
     /// A new sale, or an existing one to change or delete.
     init(sale: SalesEntry? = nil) {
         _sale = State(initialValue: sale ?? SalesEntry(amount: 0))
         isNew = sale == nil
+        initialAmount = sale?.amount ?? 0
     }
 
     var body: some View {
@@ -241,7 +243,9 @@ struct SaleEditor: View {
     }
 
     private func save() {
-        let saved = sale
+        var saved = sale
+        // An amount typed by hand is no longer the conversion of the foreign one.
+        if saved.amount != initialAmount { saved.original = nil }
         model.update(\.business) { $0.save(saved) }
         Haptics.success()
     }
@@ -252,10 +256,12 @@ struct BusinessCostEditor: View {
     @Environment(\.dismiss) private var dismiss
     @State private var cost: BusinessExpense
     private let isNew: Bool
+    private let initialAmount: Double
 
     init(cost: BusinessExpense? = nil) {
         _cost = State(initialValue: cost ?? BusinessExpense(amount: 0, label: ""))
         isNew = cost == nil
+        initialAmount = cost?.amount ?? 0
     }
 
     var body: some View {
@@ -280,6 +286,7 @@ struct BusinessCostEditor: View {
     private func save() {
         var saved = cost
         saved.label = saved.label.trimmed.isEmpty ? tr("Dépense") : saved.label.trimmed
+        if saved.amount != initialAmount { saved.original = nil }
         model.update(\.business) { $0.save(saved) }
     }
 }

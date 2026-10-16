@@ -81,8 +81,11 @@ struct WidgetStudio: View {
     private var edited: Binding<WidgetDesign> { $designs[index] }
     private var hasChanges: Bool { isNew || designs != originals }
     private var needsPremium: Bool { !model.isPremium && designs.contains(where: \.usesPremiumFeatures) }
-    /// New widgets beyond the free limit (photos and quotes never count).
-    private var exceedsFreeLimit: Bool { isNew && !model.canSave(adding: designs) }
+    /// The widgets this save keeps: every new one in order within the free limit (photos and quotes always),
+    /// all of them with Premium or once saved.
+    private var savedDesigns: [WidgetDesign] { isNew ? model.fitting(designs) : designs }
+    /// New widgets beyond the free limit (photos and quotes never count): the Studio says so from the start.
+    private var exceedsFreeLimit: Bool { isNew && savedDesigns.count < designs.count }
 
     private var title: String {
         if !isNew { return tr("Studio") }
@@ -119,7 +122,11 @@ struct WidgetStudio: View {
     private func settings(_ input: StudioInput) -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                if needsPremium { premiumNotice }
+                if needsPremium {
+                    premiumNotice
+                } else if exceedsFreeLimit {
+                    limitNotice
+                }
                 sectionContent(input)
             }
             .padding(.horizontal, 20)
@@ -230,15 +237,20 @@ struct WidgetStudio: View {
     }
 
     private var switcherChips: some View {
-        HStack(spacing: 8) {
+        // Beyond the free limit, a widget carries a lock: it isn't saved without Premium.
+        let savedIDs = Set(savedDesigns.map(\.id))
+        let premium = tr("Premium")
+        return HStack(spacing: 8) {
             ForEach(Array(designs.enumerated()), id: \.element.id) { pair in
-                FilterChip(title: "\(pair.offset + 1) · \(pair.element.name)", isSelected: pair.offset == index) {
+                let isLocked = !savedIDs.contains(pair.element.id)
+                FilterChip(title: "\(pair.offset + 1) · \(pair.element.name)", symbol: isLocked ? "lock.fill" : nil, isSelected: pair.offset == index) {
                     Haptics.tap()
                     withAnimation(.easeInOut(duration: 0.2)) { index = pair.offset }
                 }
                 .id(pair.element.id)
                 .accessibilityIdentifier("studio-widget-\(pair.offset + 1)")
                 .accessibilityLabel(Text(tr("Widget \(pair.offset + 1) sur \(designs.count) : \(pair.element.name)")))
+                .accessibilityValue(isLocked ? premium : "")
             }
             Rectangle().fill(Color.secondary.opacity(0.3)).frame(width: 1, height: 24)
             FilterChip(title: tr("Même style"), symbol: sharesLook ? "link" : "link.badge.plus", isSelected: sharesLook) {
@@ -329,6 +341,31 @@ struct WidgetStudio: View {
             }
             Spacer(minLength: 0)
             Button { paywall = .designs(designs.filter(\.usesPremiumFeatures)) } label: {
+                Text(tr("Débloquer")).foregroundStyle(.onAccent)
+            }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.small)
+        }
+        .padding(14)
+        .background(Color.premiumFill.opacity(0.55), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+    }
+
+    /// More new widgets than the free plan keeps: the ones beyond the limit are locked, or none fits.
+    private var limitNotice: some View {
+        let context = PaywallContext.designLimit
+        return HStack(alignment: .top, spacing: 12) {
+            Image(systemName: context.symbol)
+                .foregroundStyle(Color.premiumInk)
+                .font(.headline)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(context.title)
+                    .font(.subheadline.weight(.semibold))
+                Text(savedDesigns.isEmpty ? context.detail : tr("Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+            Button { paywall = context } label: {
                 Text(tr("Débloquer")).foregroundStyle(.onAccent)
             }
                 .buttonStyle(.borderedProminent)
@@ -564,9 +601,11 @@ struct WidgetStudio: View {
     }
 
     private var saveTitle: String {
-        if needsPremium { return tr("Débloquer et enregistrer") }
+        let count = savedDesigns.count
+        if needsPremium || count == 0 { return tr("Débloquer et enregistrer") }
         if !isNew { return tr("Enregistrer") }
-        return designs.count > 1 ? tr("Enregistrer les \(designs.count) widgets") : tr("Enregistrer le widget")
+        // Beyond the free limit, only the widgets without a lock.
+        return count > 1 ? tr("Enregistrer les \(count) widgets") : tr("Enregistrer le widget")
     }
 
     // MARK: Undo and redo
@@ -616,17 +655,17 @@ struct WidgetStudio: View {
     // MARK: Actions
 
     private func save() {
-        if needsPremium || exceedsFreeLimit {
+        // In the free plan, the new widgets within the limit (the Studio showed the others locked).
+        let saved = savedDesigns
+        if needsPremium || saved.isEmpty {
             // The paywall says what this save needs: the Premium settings used, or more room.
             paywall = needsPremium ? PaywallContext.designs(designs.filter(\.usesPremiumFeatures)) : PaywallContext.designLimit
             return
         }
-        var saved = designs
         if isNew {
-            let added = model.install(designs: designs)
-            saved = Array(designs.prefix(added))
+            model.install(designs: saved)
             // A widget made: a good moment (a rating may be asked once the Studio has closed).
-            if added > 0 { model.celebrate() }
+            model.celebrate()
             // The new widgets glide into « Mes widgets » as the Studio closes.
             router.saveFlight = SaveFlight(designs: saved, source: previewFrame)
             if !isPushed && designs.count == 1 {

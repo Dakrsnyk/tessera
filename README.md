@@ -166,7 +166,7 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 Tout est enregistré avec le widget : on peut le modifier plus tard, le dupliquer ou « Créer une variante » (Mes widgets), changer ses données sans perdre le design et l'inverse. Ce qu'iOS ne permet pas n'est pas promis : un widget ne peut pas être vraiment transparent (le Verre et les dégradés sont dessinés), iOS dessine lui-même le contour du widget (bordures et ombres s'appliquent à l'intérieur), l'écran verrouillé est d'une seule teinte, et seules les polices système s'affichent dans les widgets. Les dispositions et graphiques s'appliquent aux widgets de données ; l'horloge, le calendrier, la météo et les autres widgets d'origine gardent leur mise en page et prennent tout le reste du look.
 
-**Gratuit** : 30 widgets, 8 styles, 8 couleurs principales (qui repeignent tout le widget), densité, 5 widgets enregistrés, 3 habitudes. Les palettes, couleurs une à une, dégradés personnels, textures et bordures sont Premium (on peut les essayer dans le Studio).
+**Gratuit** : 30 widgets, 8 styles, 8 couleurs principales (qui repeignent tout le widget), densité, 3 widgets enregistrés (photos et citations illimitées), 5 habitudes. Les palettes, couleurs une à une, dégradés personnels, textures et bordures sont Premium (on peut les essayer dans le Studio).
 **Premium** : tout, sans limite. Mensuel, annuel (essai 7 jours) ou à vie.
 
 ### Architecture

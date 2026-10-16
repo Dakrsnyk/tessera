@@ -232,9 +232,9 @@ final class AppModel {
     // MARK: Designs
 
     /// Photo and quote widgets (« Photos et citations ») are unlimited in the free plan; every other widget
-    /// counts, a combined widget too (whatever its first part).
+    /// counts. A combined widget counts when one of its parts does (photos and quotes merged together don't).
     static func countsTowardFreeLimit(_ design: WidgetDesign) -> Bool {
-        design.isCombo || !design.kind.isMadeInItsMiniApp
+        design.isCombo ? design.options.parts.contains(where: { !$0.kind.isMadeInItsMiniApp }) : !design.kind.isMadeInItsMiniApp
     }
 
     /// The one rule for every new widget in the free plan (Studio, Store, duplicate, merge): the widgets that
@@ -257,6 +257,16 @@ final class AppModel {
     /// Whether these new widgets can be saved, the ones replaced by them (a merge) taken off first.
     func canSave(adding added: [WidgetDesign], removing removed: [WidgetDesign] = []) -> Bool {
         isPremium || Self.fitsFreePlan(saved: designs, adding: added, removing: removed)
+    }
+
+    /// The new widgets that can be saved together, in order: in the free plan, each one that counts while
+    /// there is room, and photos and quotes always. All of them with Premium.
+    func fitting(_ added: [WidgetDesign]) -> [WidgetDesign] {
+        var kept: [WidgetDesign] = []
+        for design in added where canSave(adding: kept + [design]) {
+            kept.append(design)
+        }
+        return kept
     }
 
     var recentDesigns: [WidgetDesign] {
@@ -339,17 +349,13 @@ final class AppModel {
         install(designs: pack.designs())
     }
 
-    /// Saves each design as a new widget, within the free limit (photos and quotes always fit): the first
-    /// ones that fit, in order. Returns how many were added.
+    /// Saves each design as a new widget, within the free limit (photos and quotes always fit): every one
+    /// that fits, in order (`fitting`). Returns how many were added.
     @discardableResult
     func install(designs: [WidgetDesign]) -> Int {
-        var added = 0
-        for design in designs {
-            guard canSave(adding: [design]) else { break }
-            save(design)
-            added += 1
-        }
-        return added
+        let kept = fitting(designs)
+        for design in kept { save(design) }
+        return kept.count
     }
 
     /// A widget about to be placed: the most recently used of its size, so the Home Screen gallery previews it.
@@ -477,6 +483,8 @@ final class AppModel {
 
     func refreshCrypto(_ coinID: String) async {
         crypto[coinID] = await CryptoService.load(coinID: coinID, allowNetwork: true)
+        // The widgets show at once the price the app just read (in the foreground, this costs no widget budget).
+        scheduleWidgetReload()
     }
 
     /// The calendar's events of the coming week (Mon Quotidien's Planning, the « À venir » widget).
@@ -541,6 +549,7 @@ final class AppModel {
         quotes = await MarketService.coinQuotes(portfolio.watchlist, allowNetwork: true)
         global = await MarketService.global(allowNetwork: true)
         stocks = MarketService.cache.stocks
+        scheduleWidgetReload()
     }
 
     func refreshCompany(_ ref: CompanyRef) async {

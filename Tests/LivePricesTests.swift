@@ -165,8 +165,14 @@ final class LivePricesTests: XCTestCase {
         XCTAssertEqual(watchlist.trend, true)
         XCTAssertEqual(watchlist.rows.map(\.detail), [PriceChange.text(1.45, .day24h, arrow: false), PriceChange.text(-0.32, .day24h, arrow: false)])
         XCTAssertEqual(watchlist.footnote, "\(clock.asOf(now.addingTimeInterval(-60))) · CoinGecko", "The oldest price sets the time")
+        // Small: the price stays, the change follows the symbol (the details are hidden there), three lines at most.
         let small = MoneyTiles.watchlist(data, currency: "USD", clock: clock, isSmall: true)
-        XCTAssertEqual(small.rows.map(\.value), [PriceChange.percent(1.45), PriceChange.percent(-0.32)])
+        XCTAssertEqual(small.rows.map(\.value), [Fmt.price(64_210, currency: "USD"), Fmt.price(3_180, currency: "USD")])
+        XCTAssertEqual(small.rows.map(\.title), ["BTC \(PriceChange.percent(1.45))", "ETH \(PriceChange.percent(-0.32))"])
+        var many = data
+        many.quotes = (0..<6).map { CoinQuote(id: "coin\($0)", symbol: "C\($0)", name: "Coin", price: 1, change24h: 0, fetchedAt: now) }
+        XCTAssertEqual(MoneyTiles.watchlist(many, currency: "USD", clock: clock, isSmall: true).rows.count, 3)
+        XCTAssertEqual(MoneyTiles.watchlist(many, currency: "USD", clock: clock).rows.count, 6)
 
         // Quotes from an older cache have no time: the source alone, never a made-up time.
         data.quotes = data.quotes.map { quote in
@@ -262,5 +268,8 @@ final class LivePricesTests: XCTestCase {
         state.expenses.append(Expense(amount: 50, date: before))
         let difference = TF.money(200, "USD")
         XCTAssertEqual(MoneyTiles.monthComparison(state, now: now, currency: "USD"), tr("\(difference) de plus que le mois dernier à la même date"))
+        // The sentence needs a large widget's width: cut short in a medium one, it would mislead.
+        XCTAssertEqual(MoneyTiles.byCategory(state, now: now, currency: "USD").detail, MoneyTiles.monthComparison(state, now: now, currency: "USD"))
+        XCTAssertNil(MoneyTiles.byCategory(state, now: now, currency: "USD", isLarge: false).detail)
     }
 }

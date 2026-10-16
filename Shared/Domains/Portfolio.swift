@@ -57,7 +57,7 @@ struct PortfolioState: Codable, Hashable {
 struct PriceBook: Hashable {
     var prices: [String: Double] = [:]
     var changes: [String: Double] = [:]
-    /// When the oldest of these prices was read; nil without a live price.
+    /// The time of the oldest of these prices (a coin's reading, a stock's last trade); nil without a live price.
     var fetchedAt: Date? = nil
 }
 
@@ -249,7 +249,8 @@ enum MarketService {
         for (symbol, quote) in await stockQuotes(tickers, allowNetwork: allowNetwork, now: now) {
             book.prices[symbol] = quote.price
             book.changes[symbol] = quote.changePercent
-            times.append(quote.fetchedAt)
+            // The time of the price: Friday's close stays Friday's on a Sunday.
+            times.append(quote.priceTime)
         }
         book.fetchedAt = LivePrices.oldest(times)
         return book

@@ -1,0 +1,15 @@
+{
+ "Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.": "No ECB rate for the date of some transactions: a future date, or misread.",
+ "Conversion en %@…": "Converting to %@…",
+ "Converti depuis %@ au taux de référence de la BCE du jour de chaque opération (%@).": "Converted from %@ at the ECB reference rate of each transaction's day (%@).",
+ "Heure, météo, tâches, habitudes et dates.": "Time, weather, tasks, habits and dates.",
+ "Importer sans conversion": "Import without conversion",
+ "Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.": "Couldn't get the ECB rates. Check your connection, then try again.",
+ "Index alphabétique": "Alphabetical index",
+ "La BCE ne publie pas de taux pour %@.": "The ECB doesn't publish a rate for %@.",
+ "La version gratuite garde %@ widgets, et autant de photos et de citations que tu veux. Avec Premium, enregistre tous les widgets que tu veux, et garde tes variantes.": "The free version keeps %@ widgets, plus as many photos and quotes as you like. With Premium, save all the widgets you want, variants included.",
+ "Montants en %@ gardés tels quels, sans conversion.": "Amounts in %@ kept as they are, without conversion.",
+ "Photos et citations illimitées": "Unlimited photos & quotes",
+ "Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.": "Without Premium, the widgets marked with a lock won't be saved.",
+ "Synchroniser sans conversion": "Sync without conversion"
+}

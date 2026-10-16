@@ -745,6 +745,8 @@ struct ResolvedStyle {
     /// Colors given in turn to lines and parts of a whole (a palette's, or the main color's shades).
     /// Empty: each line keeps its own color.
     var series: [String]
+    /// iOS draws the widget without its colors (« Clair », « Teinté »): see `AccentedStyle` and `rendered(for:)`.
+    var isAccented = false
 
     init(design: WidgetDesign) {
         let theme = design.theme

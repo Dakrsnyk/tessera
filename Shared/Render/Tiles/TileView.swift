@@ -142,6 +142,7 @@ struct TileView: View {
             }
         }
         .styleDepth(s)
+        .widgetAccentable()
     }
 
     @ViewBuilder private func captionText(lines: Int) -> some View {
@@ -151,6 +152,8 @@ struct TileView: View {
                 .foregroundStyle(s.secondary)
                 .lineLimit(lines)
                 .multilineTextAlignment(s.textAlignment)
+                // The sign already says it: VoiceOver doesn't read the arrow's name before the figure.
+                .accessibilityLabel(Text(caption.replacingOccurrences(of: "▲ ", with: "").replacingOccurrences(of: "▼ ", with: "")))
         }
     }
 
@@ -171,6 +174,11 @@ struct TileView: View {
                 .lineLimit(2)
                 .minimumScaleFactor(0.9)
         }
+    }
+
+    /// The note at the bottom, in large; in medium too for a price that moves (« Cours de 14:05 »).
+    private var showsFootnote: Bool {
+        context.isLarge || (context.isMedium && LivePrices.follows(context.design.kind))
     }
 
     private var isRing: Bool {
@@ -392,7 +400,7 @@ struct TileView: View {
             }
             Spacer(minLength: 0)
             buttonsRow(context.isSmall ? 2 : 3)
-            if context.isLarge { footnoteText }
+            if showsFootnote { footnoteText }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: s.alignment == .center ? .top : .topLeading)
     }
@@ -593,7 +601,7 @@ struct TileView: View {
             }
             Spacer(minLength: 0)
             if context.isLarge { buttonsRow(3) }
-            if context.isLarge { footnoteText }
+            if showsFootnote { footnoteText }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
@@ -789,7 +797,8 @@ struct TileRowsView: View {
     }
 
     private func rowContent(_ row: TileRow) -> some View {
-        let rowColor = row.colorHex.map { Color(hex: $0) }
+        // Without colors, only opacity remains of the line's own color: the style's white is used instead.
+        let rowColor = s.isAccented ? nil : row.colorHex.map { Color(hex: $0) }
         let color = rowColor ?? s.icon
         return VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 7) {
@@ -903,7 +912,14 @@ struct TileButtonLabel: View {
         .padding(.horizontal, iconOnly ? 11 : 8)
         .frame(maxWidth: expands ? .infinity : nil, minHeight: 30)
         .accessibilityLabel(Text(button.title))
-        .background(button.isProminent ? style.accent : style.panel, in: RoundedRectangle(cornerRadius: style.radius(15), style: .continuous))
+        .background {
+            let shape = RoundedRectangle(cornerRadius: style.radius(15), style: .continuous)
+            if button.isProminent {
+                shape.textBackdrop(style.accent, isAccented: style.isAccented, isProminent: true)
+            } else {
+                shape.fill(style.panel)
+            }
+        }
     }
 }
 
@@ -926,7 +942,10 @@ struct TileHeaderButtonLabel: View {
         .foregroundStyle(style.onAccent)
         .padding(.horizontal, iconOnly ? 7 : 9)
         .frame(minHeight: 24)
-        .background(style.accent, in: RoundedRectangle(cornerRadius: style.radius(12), style: .continuous))
+        .background {
+            RoundedRectangle(cornerRadius: style.radius(12), style: .continuous)
+                .textBackdrop(style.accent, isAccented: style.isAccented, isProminent: true)
+        }
         .accessibilityLabel(Text(button.title))
     }
 }
@@ -1023,6 +1042,7 @@ struct TileVisualView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(s.primary)
+                .widgetAccentable()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         case let .sun(progress, sunrise, sunset):
             SunArc(progress: progress, sunrise: sunrise, sunset: sunset, compact: compact, style: s)
@@ -1215,7 +1235,7 @@ struct SegmentsChart: View {
                 HStack(spacing: 2) {
                     ForEach(Array(segments.enumerated()), id: \.offset) { pair in
                         Rectangle()
-                            .fill(Color(hex: pair.element.colorHex))
+                            .fill(style.partColor(pair.element.colorHex, at: pair.offset))
                             .frame(width: max(2, (geo.size.width - CGFloat(segments.count) * 2) * CGFloat(max(0, pair.element.value) / total)))
                     }
                     Spacer(minLength: 0)
@@ -1227,7 +1247,7 @@ struct SegmentsChart: View {
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(Array(segments.prefix(5).enumerated()), id: \.offset) { pair in
                         HStack(spacing: 6) {
-                            Circle().fill(Color(hex: pair.element.colorHex)).frame(width: 7, height: 7)
+                            Circle().fill(style.partColor(pair.element.colorHex, at: pair.offset)).frame(width: 7, height: 7)
                             Text(pair.element.label)
                                 .font(style.text(11))
                                 .foregroundStyle(style.primary)
@@ -1256,12 +1276,14 @@ struct WeekStrip: View {
             ForEach(Array(days.prefix(7).enumerated()), id: \.offset) { pair in
                 VStack(spacing: 3) {
                     ZStack {
-                        RoundedRectangle(cornerRadius: style.options.shape == .square ? 3 : 999, style: .continuous)
-                            .fill(pair.element == true ? style.chart : style.track.opacity(pair.element == nil ? 0.5 : 1))
+                        let shape = RoundedRectangle(cornerRadius: style.options.shape == .square ? 3 : 999, style: .continuous)
                         if pair.element == true {
+                            shape.textBackdrop(style.chart, isAccented: style.isAccented, isProminent: true)
                             Image(systemName: "checkmark")
                                 .font(.system(size: 8, weight: .heavy))
                                 .foregroundStyle(style.onAccent)
+                        } else {
+                            shape.fill(style.track.opacity(pair.element == nil ? 0.5 : 1))
                         }
                     }
                     .aspectRatio(1, contentMode: .fit)
@@ -1349,6 +1371,7 @@ struct ScheduleWeek: View {
                                 .foregroundStyle(day == today ? style.chart : style.primary)
                         }
                     }
+                    .widgetAccentable(day == today)
                     .frame(maxWidth: .infinity)
                 }
             }
@@ -1389,8 +1412,9 @@ struct ScheduleWeek: View {
                 let block = item.element
                 let blockHeight = max(4, (block.end - block.start) * height)
                 let lines = Self.lines(height: blockHeight, hasRoom: block.room != nil)
+                // Without colors, a block in its color would be a solid white shape hiding its white text.
                 RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
-                    .fill(Color(hex: block.colorHex))
+                    .textBackdrop(Color(hex: block.colorHex), isAccented: style.isAccented)
                     .frame(height: blockHeight)
                     .overlay(alignment: .topLeading) {
                         if lines.title > 0 {
@@ -1459,7 +1483,7 @@ struct HabitGrid: View {
                 }
             }
             ForEach(Array(rows.prefix(6).enumerated()), id: \.offset) { pair in
-                let color = Color(hex: colors[safe: pair.offset] ?? "7FA33A")
+                let color = style.isAccented ? style.chart : Color(hex: colors[safe: pair.offset] ?? "7FA33A")
                 HStack(spacing: 3) {
                     Text(names[safe: pair.offset] ?? "")
                         .font(style.text(11))

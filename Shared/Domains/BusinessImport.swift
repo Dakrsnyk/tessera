@@ -59,7 +59,7 @@ struct BusinessConnections: Codable, Hashable {
         /// The last sync stopped for lack of exchange rates for these currencies: the card offers to sync
         /// without conversion.
         var unconvertedCurrencies: [String]?
-        /// The currencies Stripe's amounts were converted from, at the ECB rate of their day.
+        /// The currencies Stripe's amounts were converted from by the last sync, at the ECB rate of their day.
         var convertedCurrencies: [String]?
         /// Currencies the ECB doesn't publish that the person chose to keep as Stripe gives them: the next
         /// syncs keep them too.
@@ -78,7 +78,8 @@ extension BusinessMergeResult: Codable {}
 
 extension BusinessState {
     /// Adds the entries of a batch, or updates the ones already there (same source, same id). Entries typed
-    /// by hand are never touched.
+    /// by hand are never touched, and an entry converted before keeps its conversion when it comes back
+    /// unconverted for lack of a rate (`keepsConversion`).
     @discardableResult
     mutating func merge(_ batch: BusinessBatch) -> BusinessMergeResult {
         var result = BusinessMergeResult()
@@ -89,6 +90,10 @@ extension BusinessState {
             if let index = saleIndex[key] {
                 var updated = sale
                 updated.id = sales[index].id
+                if batch.keepsConversion(sales[index].original, comingBack: sale.amount, sale.original) {
+                    updated.amount = sales[index].amount
+                    updated.original = sales[index].original
+                }
                 if sales[index] == updated { result.unchanged += 1 } else { sales[index] = updated; result.updated += 1 }
             } else {
                 saleIndex[key] = sales.count
@@ -103,6 +108,10 @@ extension BusinessState {
             if let index = costIndex[key] {
                 var updated = cost
                 updated.id = expenses[index].id
+                if batch.keepsConversion(expenses[index].original, comingBack: cost.amount, cost.original) {
+                    updated.amount = expenses[index].amount
+                    updated.original = expenses[index].original
+                }
                 if expenses[index] == updated { result.unchanged += 1 } else { expenses[index] = updated; result.updated += 1 }
             } else {
                 costIndex[key] = expenses.count
@@ -465,6 +474,27 @@ enum CurrencyConversion {
         return (rounded(amount * rate.value, in: history.home), ForeignAmount(amount: amount, currency: code, rate: rate.value, rateDay: rate.day))
     }
 
+    /// Why some currencies couldn't be converted, said as it is: « Non converti (taux indisponible) : AED. La
+    /// BCE ne publie pas de taux pour AED. » Offline (`unreachable`): try again. Not published
+    /// (`unsupported`): never a rate. Rates fetched but none for some days (a date to come, or misread): no
+    /// rate for that date, nothing guessed.
+    static func problemMessage(for codes: Set<String>, unavailable: [String: FXHistory.Problem]) -> String {
+        let list = codes.sorted().joined(separator: ", ")
+        var sentences = [tr("Non converti (taux indisponible) : \(list).")]
+        let unsupported = codes.filter { unavailable[$0] == .unsupported }.sorted()
+        if !unsupported.isEmpty {
+            let unpublished = unsupported.joined(separator: ", ")
+            sentences.append(tr("La BCE ne publie pas de taux pour \(unpublished)."))
+        }
+        if codes.contains(where: { unavailable[$0] == .unreachable }) {
+            sentences.append(tr("Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie."))
+        }
+        if codes.contains(where: { unavailable[$0] == nil }) {
+            sentences.append(tr("Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue."))
+        }
+        return sentences.joined(separator: " ")
+    }
+
     /// The rates a file needs, for its whole period: one request per currency.
     static func rates(for batch: BusinessBatch, home: String, now: Date = Date()) async -> FXHistory {
         let foreign = batch.foreignCurrencies(home: home)
@@ -512,6 +542,14 @@ extension BusinessBatch {
             }
         }
         return result
+    }
+
+    /// True when an entry comes back as it was for lack of a rate (its currency is in `unconverted`), while
+    /// the one already there was converted from that same amount: the conversion is kept, never undone by an
+    /// import or a sync without conversion.
+    func keepsConversion(_ stored: ForeignAmount?, comingBack amount: Double, _ incoming: ForeignAmount?) -> Bool {
+        guard incoming == nil, let stored, unconverted.contains(stored.currency.uppercased()) else { return false }
+        return abs(stored.amount - amount) < 0.000_1
     }
 
     /// The currencies converted (« USD »).

@@ -38,13 +38,25 @@ final class FreeWidgetLimitTests: XCTestCase {
         for design in widgets(9) {
             XCTAssertTrue(AppModel.countsTowardFreeLimit(design), "\(design.kind)")
         }
-        // A combined widget counts, whatever its first part.
+        // A combined widget counts when one of its parts does: photos and quotes merged together don't.
         var combo = WidgetDesign(kind: .photos, format: .medium)
         combo.options.parts = [
             ComboPart(kind: .photos, options: DesignOptions(), name: "A", size: .small),
             ComboPart(kind: .quote, options: DesignOptions(), name: "B", size: .small),
         ]
-        XCTAssertTrue(AppModel.countsTowardFreeLimit(combo))
+        XCTAssertFalse(AppModel.countsTowardFreeLimit(combo))
+        var mixed = WidgetDesign(kind: .photos, format: .medium)
+        mixed.options.parts = [
+            ComboPart(kind: .photos, options: DesignOptions(), name: "A", size: .small),
+            ComboPart(kind: .clock, options: DesignOptions(), name: "B", size: .small),
+        ]
+        XCTAssertTrue(AppModel.countsTowardFreeLimit(mixed))
+        var clocks = WidgetDesign(kind: .clock, format: .medium)
+        clocks.options.parts = [
+            ComboPart(kind: .clock, options: DesignOptions(), name: "A", size: .small),
+            ComboPart(kind: .worldClock, options: DesignOptions(), name: "B", size: .small),
+        ]
+        XCTAssertTrue(AppModel.countsTowardFreeLimit(clocks))
     }
 
     func testNewWidgetsFitWithinThreeAndPhotosAlwaysFit() {
@@ -67,11 +79,12 @@ final class FreeWidgetLimitTests: XCTestCase {
         let merged = widgets(1)
         XCTAssertTrue(AppModel.fitsFreePlan(saved: saved, adding: merged, removing: Array(saved.prefix(2))), "Two merged into one")
         XCTAssertFalse(AppModel.fitsFreePlan(saved: saved, adding: merged), "Keeping the originals makes one more")
-        // Two photo widgets merged into a combined one: one more that counts.
+        // A photo and a quote merged into a combined widget: still unlimited, originals kept or not.
         let photoWidgets = [WidgetDesign(kind: .photos, format: .small), WidgetDesign(kind: .quote, format: .small)]
         var combo = WidgetDesign(kind: .photos, format: .medium)
         combo.options.parts = photoWidgets.map { ComboPart(kind: $0.kind, options: $0.options, name: $0.name, size: .small) }
-        XCTAssertFalse(AppModel.fitsFreePlan(saved: widgets(3) + photoWidgets, adding: [combo], removing: photoWidgets))
+        XCTAssertTrue(AppModel.fitsFreePlan(saved: saved + photoWidgets, adding: [combo], removing: photoWidgets))
+        XCTAssertTrue(AppModel.fitsFreePlan(saved: saved + photoWidgets, adding: [combo]))
     }
 
     func testAFreeModelKeepsEveryWidgetAndAppliesTheSameRuleEverywhere() {
@@ -106,12 +119,29 @@ final class FreeWidgetLimitTests: XCTestCase {
         }
     }
 
+    /// A pack or a setup in the Studio: the free plan keeps every widget that fits, in order, photos and
+    /// quotes wherever they are in the list.
+    func testAFreeModelKeepsEveryWidgetThatFitsInOrder() {
+        asFreeUser {
+            let model = temporaryModel()
+            model.save(widgets(1)[0])
+            let pack = widgets(4) + [photos, quote]
+            let kept = model.fitting(pack)
+            XCTAssertEqual(kept.map(\.id), [pack[0].id, pack[1].id, pack[4].id, pack[5].id])
+            XCTAssertEqual(model.install(designs: pack), 4)
+            XCTAssertEqual(model.limitedDesignCount, 3)
+            XCTAssertEqual(model.designs.count, 5)
+            XCTAssertTrue(model.fitting(widgets(2)).isEmpty, "No room left for a widget that counts")
+        }
+    }
+
     func testPremiumHasNoLimit() {
         #if DEBUG
         let previous = DebugPremium.isUnlocked
         DebugPremium.setUnlocked(true)
         defer { DebugPremium.setUnlocked(previous) }
         let model = temporaryModel()
+        XCTAssertEqual(model.fitting(widgets(9)).count, 9)
         XCTAssertEqual(model.install(designs: widgets(9)), 9)
         XCTAssertTrue(model.canCreateDesign)
         XCTAssertNotNil(model.duplicate(model.designs[0]))

@@ -11,7 +11,7 @@ enum MoneyTiles {
         let clock = PriceClock(now: now, uses24Hour: context.settings.uses24HourClock)
         switch context.design.kind {
         case .budgetLeft: return budgetLeft(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget))
-        case .spendingByCategory: return byCategory(data.budget, now: now, currency: currency)
+        case .spendingByCategory: return byCategory(data.budget, now: now, currency: currency, isLarge: context.isLarge)
         case .billsUpcoming: return bills(data.budget, now: now, currency: currency)
         case .savingsGoal: return savings(data.budget, target: target, now: now, currency: currency)
         case .netWorth: return netWorth(data.budget, now: now, currency: currency)
@@ -60,14 +60,15 @@ enum MoneyTiles {
         return tile
     }
 
-    static func byCategory(_ state: BudgetState, now: Date, currency: String) -> Tile {
+    static func byCategory(_ state: BudgetState, now: Date, currency: String, isLarge: Bool = true) -> Tile {
         let items = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now)
         guard !items.isEmpty else { return .empty(tr("Dépenses"), symbol: "chart.bar.doc.horizontal", message: tr("Note tes dépenses dans Ardane, espace Budget.")) }
         let total = items.reduce(0) { $0 + $1.amount }
         var tile = Tile(title: tr("Dépenses du mois"), symbol: "chart.bar.doc.horizontal")
         tile.value = TF.money(total, currency)
         tile.caption = tr("\(Fmt.month(now)) · \(items.count) catégories")
-        tile.detail = monthComparison(state, now: now, currency: currency)
+        // Only a large widget has the width for the whole sentence; cut short, it would compare with the whole month.
+        if isLarge { tile.detail = monthComparison(state, now: now, currency: currency) }
         tile.visual = .segments(items.prefix(6).map { TileSegment(label: $0.name, value: $0.amount, colorHex: $0.colorHex) })
         tile.rows = items.prefix(6).map { item -> TileRow in
             let limit = item.category?.monthlyLimit ?? 0
@@ -290,12 +291,14 @@ enum MoneyTiles {
         tile.value = Fmt.price(first.price, currency: currency)
         tile.caption = "\(first.symbol) · \(PriceChange.text(first.change24h, .day24h))"
         tile.trend = PriceChange.trend(first.change24h)
-        tile.rows = data.quotes.prefix(6).map { quote in
-            // A small widget shows one line per coin, without room for both: the change, which tells how it goes.
-            TileRow(
+        // A small widget hides the lines' details: the change goes after the symbol, the price stays on the right.
+        // Three lines leave the title two lines (« BTC » over « +1,45 % »).
+        tile.rows = data.quotes.prefix(isSmall ? 3 : 6).map { quote -> TileRow in
+            let change = PriceChange.percent(quote.change24h)
+            return TileRow(
                 id: quote.id,
-                title: quote.symbol,
-                value: isSmall ? PriceChange.percent(quote.change24h) : Fmt.price(quote.price, currency: currency),
+                title: isSmall ? "\(quote.symbol) \(change)" : quote.symbol,
+                value: Fmt.price(quote.price, currency: currency),
                 detail: PriceChange.text(quote.change24h, .day24h, arrow: false),
                 colorHex: PriceChange.colorHex(quote.change24h)
             )
