@@ -56,6 +56,13 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - 2026-10-16 : version interne Premium débloqué (build 200, tag `[interne]`, « Internal Only » vérifié par l'API). L'utilisateur veut un nom de vendeur différent et une entreprise : plan dans `docs/entreprise-et-nom-vendeur.md` (société par actions, D-U-N-S, migration du compte). Ne pas envoyer les formulaires fiscaux ni la banque du compte individuel en attendant.
 - Guide pas à pas : `docs/guide-premium-testflight.md` (contrat Paid Apps, impôts, banque, création des 3 produits, test perso, testeurs externes, message pour les amis). En attente de l'utilisateur.
 
+## Série du 2026-10-16 : devises, cours, 3 widgets gratuits, alphabet, salle, mode Clair
+
+- Fait (détail dans [[Demandes]]) : run 201 compile la vague 1 ; corrections après relecture et mode Clair/Teinté dans le commit suivant, puis tests et TestFlight.
+- À vérifier sur l'iPhone : widgets en Clair (clair et sombre) et Teinté (grand « Horaire de la semaine », Habitudes, Focus, Photos, Citation) ; import d'un CSV en USD (aperçu converti ; en mode avion : erreur et « Importer sans conversion ») ; widget Crypto qui avance seul ; Liste de suivi en petit sur un petit iPhone.
+- Hypothèse annoncée à l'utilisateur : les citations sont illimitées comme les photos.
+- Connu, à traiter à part : en mode En veille de jour (fond retiré, en couleur), les palettes à texte foncé (Jade, Sable…) s'affichent en texte foncé sur noir.
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.

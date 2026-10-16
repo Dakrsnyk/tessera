@@ -11,16 +11,18 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
-- [ ] Business : conversion automatique de devise à l'import d'un fichier (et Stripe).
-- [ ] Widgets finances, cryptos, actions : actualisés le plus souvent possible, avec l'évolution du cours (ex. +1,45 % / 24 h).
-- [ ] Gratuit : 3 widgets seulement, widgets photos illimités.
-- [ ] Fitness, Progression : alphabet à gauche, de haut en bas, pour se repérer dans les exercices.
-- [ ] Planning : la salle du cours visible sur le grand horaire de la semaine.
-- [ ] Mode « Clair » de l'écran d'accueil (iOS 26, et « Teinté ») : dans les widgets, des éléments deviennent invisibles (ex. blocs de l'horaire de la semaine tout blancs, titres cachés). À corriger pour tous les widgets.
 
 ## Idées pour plus tard
 
 ## Fait
+
+Série du 2026-10-16 (à vérifier sur l'iPhone par TestFlight) :
+- [x] Business : conversion automatique dans la devise de l'app à l'import d'un fichier et à la synchro Stripe, au taux de référence de la BCE du jour de chaque opération ; montant d'origine gardé ; sans taux, rien n'est importé sans ton choix (« Importer / Synchroniser sans conversion ») (fait le 2026-10-16).
+- [x] Widgets cryptos, actions, Liste de suivi, Portefeuille : variation « ▲ +1,45 % · 24 h » (cryptos) ou « · jour » (actions, depuis la clôture), heure du cours, rechargement toutes les 15 min environ (le rythme réel est décidé par iOS) (fait le 2026-10-16).
+- [x] Gratuit : 3 widgets ; photos et citations illimitées (elles ne comptent pas) ; un pack de plus de 3 widgets enregistre ceux qui rentrent, les autres portent un cadenas (fait le 2026-10-16).
+- [x] Fitness, Progression : exercices de A à Z avec un alphabet à gauche, à toucher ou glisser (fait le 2026-10-16).
+- [x] Planning : la salle du cours sur le grand horaire de la semaine (app, Mon Quotidien et widget) quand le bloc a la place (fait le 2026-10-16).
+- [x] Mode Clair (iOS 26) et Teinté : tous les widgets dessinés sans couleurs par opacités, formes sous le texte légères et contournées (fini les blocs blancs), photos en couleur. À vérifier sur l'iPhone en Clair clair/sombre et en Teinté (fait le 2026-10-16).
 
 - [x] Fitness : toute la bibliothèque d'exercices et les données de chaque exercice en Premium ; gratuit : séances, exercices écrits à la main, séries notées ; Records retirés de l'accueil (dans Progression) ; « Choisir dans la bibliothèque » et « Ajouter un exercice » sous le nom et les jours de la séance ; logos Premium (fait le 2026-10-15).
 - [x] Nutrition : 18 nutriments de plus (gras trans, oméga-3 et 6, zinc, phosphore, sélénium, cuivre, manganèse, vitamines E, K, B1, B2, B3, B5, B6, choline, caféine, alcool) ; tout sauf calories, protéines, glucides et lipides est Premium (fait le 2026-10-15).
