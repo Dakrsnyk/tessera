@@ -11,6 +11,12 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
+- [ ] Business : conversion automatique de devise à l'import d'un fichier (et Stripe).
+- [ ] Widgets finances, cryptos, actions : actualisés le plus souvent possible, avec l'évolution du cours (ex. +1,45 % / 24 h).
+- [ ] Gratuit : 3 widgets seulement, widgets photos illimités.
+- [ ] Fitness, Progression : alphabet à gauche, de haut en bas, pour se repérer dans les exercices.
+- [ ] Planning : la salle du cours visible sur le grand horaire de la semaine.
+- [ ] Mode clair : des éléments ne sont plus visibles, à corriger.
 
 ## Idées pour plus tard
 
