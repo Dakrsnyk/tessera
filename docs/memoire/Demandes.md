@@ -16,7 +16,7 @@ Retour : [[Memoire]]
 - [ ] Gratuit : 3 widgets seulement, widgets photos illimités.
 - [ ] Fitness, Progression : alphabet à gauche, de haut en bas, pour se repérer dans les exercices.
 - [ ] Planning : la salle du cours visible sur le grand horaire de la semaine.
-- [ ] Mode clair : des éléments ne sont plus visibles, à corriger.
+- [ ] Mode « Clair » de l'écran d'accueil (iOS 26, et « Teinté ») : dans les widgets, des éléments deviennent invisibles (ex. blocs de l'horaire de la semaine tout blancs, titres cachés). À corriger pour tous les widgets.
 
 ## Idées pour plus tard
 
