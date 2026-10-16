@@ -266,9 +266,16 @@ def check_internal_premium():
     workflow = open(os.path.join(ROOT, ".github", "workflows", "build.yml"), encoding="utf8").read()
     if "INTERNAL_PREMIUM" in workflow and "testFlightInternalTestingOnly" not in workflow:
         problems.append("build.yml: INTERNAL_PREMIUM without the « TestFlight Internal Only » export option")
+    # Outside comments, the condition is passed on one line only: the [interne] EXTRA=(…) of the archive step.
+    passing = [line.strip() for line in workflow.splitlines()
+               if "INTERNAL_PREMIUM" in line and not line.strip().startswith("#") and "SWIFT_ACTIVE_COMPILATION_CONDITIONS" in line]
+    if any(not line.startswith("EXTRA=(") for line in passing) or len(passing) > 1:
+        problems.append("build.yml: INTERNAL_PREMIUM may only be passed by the [interne] EXTRA=(…) line")
+    allowed = {"Shared/Model/Settings.swift", "App/Screens/Profile/ProfileView.swift"}
     for path, text in FILES.items():
-        if "INTERNAL_PREMIUM" in text and not path.endswith(("Shared/Model/Settings.swift", "App/Screens/Profile/ProfileView.swift")):
-            problems.append(f"{os.path.relpath(path, ROOT)}: INTERNAL_PREMIUM is only allowed in Settings.swift and ProfileView.swift")
+        relative = os.path.relpath(path, ROOT).replace(os.sep, "/")
+        if "INTERNAL_PREMIUM" in text and relative not in allowed:
+            problems.append(f"{relative}: INTERNAL_PREMIUM is only allowed in Settings.swift and ProfileView.swift")
 
 
 def check_privacy_manifest():
