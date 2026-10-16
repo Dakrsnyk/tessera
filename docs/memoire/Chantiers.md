@@ -53,6 +53,7 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 
 ## Premium en test — 2026-10-16
 
+- 2026-10-16 : version interne Premium débloqué (build 200, tag `[interne]`, « Internal Only » vérifié par l'API). L'utilisateur veut un nom de vendeur différent et une entreprise : plan dans `docs/entreprise-et-nom-vendeur.md` (société par actions, D-U-N-S, migration du compte). Ne pas envoyer les formulaires fiscaux ni la banque du compte individuel en attendant.
 - Guide pas à pas : `docs/guide-premium-testflight.md` (contrat Paid Apps, impôts, banque, création des 3 produits, test perso, testeurs externes, message pour les amis). En attente de l'utilisateur.
 
 ## À ne pas oublier
