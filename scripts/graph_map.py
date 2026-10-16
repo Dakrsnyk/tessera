@@ -77,7 +77,8 @@ MODULES = [
      "role": "L'onglet Accueil : « Mon Quotidien » rassemble ce qui compte aujourd'hui, construit seulement à partir de ce que la personne a saisi, puis « Mes informations ».",
      "features": [
          "Cartes du jour (nutrition, séance, habitudes, À ne pas oublier, planning, budget, Top 3…), classées selon le moment de la journée.",
-         "Cartes à plusieurs vues (balayage), disposition à la main (ordre, demi ou large, masquer).",
+         "Cartes à plusieurs vues (balayage), disposition à la main par le petit « + » de l'en-tête (ordre, demi ou large, masquer) ; « Mes données » n'est plus en haut (« Mes informations » est en bas).",
+         "La carte Planning ouvre la mini-app Planning (création d'événement en touchant une heure libre).",
          "« Mes informations » : complétude du profil et chaque domaine suivi d'un coup d'œil.",
          "`MiniAppsRow.swift` est présent mais le type `MiniAppsRow` n'est instancié nulle part.",
      ],
