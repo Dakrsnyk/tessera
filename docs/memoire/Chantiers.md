@@ -51,6 +51,10 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - Reste à faire par l'utilisateur : produits in-app dans App Store Connect (`com.dakrsnyk.tessera.premium.monthly/yearly/lifetime`) et contrat « Paid Applications » pour tester Premium par TestFlight ; la politique v2.1 (Photos et Stripe) est republiée sur l'artifact de `PremiumConfiguration.privacyURL`, mais cette page est privée : la partager « toute personne disposant du lien » (menu Partager) avant la soumission à l'App Store.
 - Plus tard : Shopify, QuickBooks, Stripe Connect par un petit serveur OAuth (architecture dans `docs/integrations-business.md`).
 
+## Premium en test — 2026-10-16
+
+- Guide pas à pas : `docs/guide-premium-testflight.md` (contrat Paid Apps, impôts, banque, création des 3 produits, test perso, testeurs externes, message pour les amis). En attente de l'utilisateur.
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
