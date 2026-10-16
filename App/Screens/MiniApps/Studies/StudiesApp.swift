@@ -445,13 +445,28 @@ struct StudyTimerCard: View {
                             .monospacedDigit()
                     }
                 }
-                MiniActionButton(title: tr("Terminer et noter"), symbol: "stop.fill", colorHex: accentHex) {
-                    var minutes = 0
-                    model.update(\.student) { minutes = $0.stopTimer() }
-                    Haptics.success()
-                    logged = minutes
+                HStack(spacing: 8) {
+                    // A timer started by mistake: cleared, nothing is logged.
+                    MiniActionButton(title: tr("Annuler"), symbol: "xmark", colorHex: accentHex, isProminent: false) {
+                        model.update(\.student) {
+                            $0.timerStart = nil
+                            $0.timerCourseID = nil
+                        }
+                        Haptics.tap()
+                        logged = nil
+                        syncLiveActivity()
+                    }
+                    .frame(maxWidth: 130)
+                    .accessibilityIdentifier("studies-timer-cancel")
+                    MiniActionButton(title: tr("Terminer et noter"), symbol: "stop.fill", colorHex: accentHex) {
+                        var minutes = 0
+                        model.update(\.student) { minutes = $0.stopTimer() }
+                        Haptics.success()
+                        logged = minutes
+                        syncLiveActivity()
+                    }
+                    .accessibilityIdentifier("studies-timer-stop")
                 }
-                .accessibilityIdentifier("studies-timer-stop")
             } else {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
@@ -493,6 +508,13 @@ struct StudyTimerCard: View {
         Haptics.tap()
         logged = nil
         model.update(\.student) { $0.startTimer(courseID: course) }
+        syncLiveActivity()
+    }
+
+    /// The timer on the Lock Screen and in the Dynamic Island follows the card (started, stopped, cancelled).
+    private func syncLiveActivity() {
+        let state = model.student
+        Task { await StudyLiveActivity.sync(state) }
     }
 
     private func elapsed(from start: Date, to now: Date) -> String {

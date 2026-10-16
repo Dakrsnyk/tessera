@@ -14,12 +14,13 @@ struct TesseraWidgetsBundle: WidgetBundle {
 
     /// The Home Screen gallery offers « Mes widgets » only: the person's own widgets, made in Ardane.
     /// The Lock Screen offers the essentials of each mini-app, with the food scanner after Nutrition.
-    /// Then the workout in progress, and the scanner among the controls (iOS 18).
+    /// Then the workout and the study timer in progress, and the scanner among the controls (iOS 18).
     var body: some Widget {
         QuickWidget()
         LockScreenEssentials().body
         LockScreenMore().body
         WorkoutLiveActivityWidget()
+        StudyLiveActivityWidget()
         if #available(iOS 18.0, *) {
             ScanFoodControl()
         }

@@ -51,6 +51,7 @@ final class AppModel {
     @ObservationIgnored private var reloadTask: Task<Void, Never>?
     @ObservationIgnored private var remindersTask: Task<Void, Never>?
     @ObservationIgnored private var workoutObserver: NSObjectProtocol?
+    @ObservationIgnored private var studyObserver: NSObjectProtocol?
 
     init(store: SharedStore = .shared) {
         self.store = store
@@ -62,6 +63,13 @@ final class AppModel {
             MainActor.assumeIsolated {
                 guard let self else { return }
                 self.fitness = self.store.state(FitnessState.self)
+            }
+        }
+        // The study timer stopped or cancelled from the Lock Screen while the app is open.
+        studyObserver = NotificationCenter.default.addObserver(forName: .studySavedOutside, object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                self.student = self.store.state(StudentState.self)
             }
         }
     }
@@ -144,6 +152,10 @@ final class AppModel {
         // The workout on the Lock Screen follows the session (started, set done, rest, finished).
         if let fitness = value as? FitnessState {
             Task { await WorkoutLiveActivity.sync(fitness) }
+        }
+        // The study timer on the Lock Screen follows the studies (started, stopped, cancelled).
+        if let student = value as? StudentState {
+            Task { await StudyLiveActivity.sync(student) }
         }
         // The smart reminders follow what is done (a workout begun, a meal noted, a new bill).
         if T.self == FitnessState.self || T.self == NutritionState.self || T.self == BudgetState.self {
