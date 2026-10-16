@@ -11,6 +11,10 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
+- [ ] Fitness : flèche retour sur le widget et l'activité en direct (série validée par erreur, séance lancée par erreur) ; une séance annulée ne compte ni comme faite ni à moitié.
+- [ ] Études : lancer le chrono d'étude crée une activité en direct du même style que Fitness, avec le temps d'étude.
+- [ ] Notifications intelligentes d'encouragement (reste de calories, glucides élevés / protéines à compléter, séance terminée, belle progression, longue étude, objectifs atteints), sans abus (pas à chaque repas).
+- [ ] Business : un CSV dont les dépenses ont été lues comme des revenus (fichier à recevoir de l'utilisateur).
 
 ## Idées pour plus tard
 
