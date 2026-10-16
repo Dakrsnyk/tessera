@@ -221,6 +221,7 @@ enum DashboardTiles {
             return day > now ? nil : false
         })
         tile.buttons = active == nil ? [] : [TileButton(title: tr("Série faite"), symbol: "checkmark", action: .completeSet, isProminent: true)]
+        if active != nil, let back = FitnessTiles.backButton(state, now: now) { tile.buttons.append(back) }
         return tile
     }
 

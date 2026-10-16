@@ -178,7 +178,7 @@ final class AppModel {
     /// A workout recorded, the calorie goal of the day reached, a savings goal reached.
     private func noteGoodMoment<T>(from before: T, to after: T) {
         if let old = before as? FitnessState, let new = after as? FitnessState,
-           let last = new.history.last, last.id != old.history.last?.id {
+           let last = new.history.last, !old.history.contains(where: { $0.id == last.id }) {
             celebrate()
         }
         if let old = before as? NutritionState, let new = after as? NutritionState {

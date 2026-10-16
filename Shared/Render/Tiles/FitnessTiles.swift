@@ -36,6 +36,18 @@ enum FitnessTiles {
         exercise.weight > 0 ? tr("\(exercise.reps) × \(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg") : tr("\(exercise.reps) répétitions")
     }
 
+    /// The small back arrow next to « Série faite »: takes back the last set (also just after the set
+    /// that finished the session), or cancels a session started by mistake, before any set.
+    static func backButton(_ state: FitnessState, now: Date) -> TileButton? {
+        if state.canUndoLastSet(at: now) {
+            return TileButton(title: tr("Annuler la dernière série"), symbol: "arrow.uturn.backward", action: .undoSet, isIconOnly: true)
+        }
+        if state.activeHasNoSets {
+            return TileButton(title: tr("Annuler la séance"), symbol: "xmark", action: .cancelWorkout, isIconOnly: true)
+        }
+        return nil
+    }
+
     static func todaysWorkout(_ state: FitnessState, now: Date) -> Tile {
         guard let routine = state.routine(for: now) else { return .empty(tr("Séance du jour"), symbol: "figure.strengthtraining.traditional", message: hint) }
         let doneToday = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, now) && $0.isFinished }
@@ -60,6 +72,7 @@ enum FitnessTiles {
             return TileRow(id: "\(pair.offset)", title: pair.element.name, value: setsText(pair.element), isDone: isDone, isHighlighted: isCurrent)
         }
         tile.buttons = doneToday ? [] : [TileButton(title: active == nil ? tr("Commencer") : tr("Série faite"), symbol: active == nil ? "play.fill" : "checkmark", action: .completeSet, isProminent: true)]
+        if let back = backButton(state, now: now) { tile.buttons.append(back) }
         tile.inline = tr("\(tile.value) · \(totalSets) séries")
         return tile
     }
@@ -81,6 +94,7 @@ enum FitnessTiles {
             tile.detail = tr("Touche pour démarrer « \(state.routine(for: now)?.name ?? tr("ta séance")) »")
         }
         tile.buttons = [TileButton(title: tr("Série faite"), symbol: "checkmark", action: .completeSet, isProminent: true)]
+        if let back = backButton(state, now: now) { tile.buttons.append(back) }
         tile.inline = "\(exercise.name) : \(setText(exercise))"
         tile.shortValue = "\(setNumber)/\(exercise.sets)"
         return tile
@@ -101,6 +115,8 @@ enum FitnessTiles {
                 TileButton(title: tr("Passer"), symbol: "forward.fill", action: .skipRest),
                 TileButton(title: tr("Fait"), symbol: "checkmark", action: .completeSet, isProminent: true),
             ]
+            // Third: dropped where only two buttons fit, « Fait » stays.
+            if let back = backButton(state, now: now) { tile.buttons.append(back) }
             tile.inline = tr("Repos jusqu'à \(Fmt.time(rest, uses24Hour: true))")
         } else {
             tile.value = tr("Prêt")
@@ -110,6 +126,7 @@ enum FitnessTiles {
                 tile.caption = tr("Valide une série pour lancer le repos")
             }
             tile.buttons = [TileButton(title: tr("Série faite"), symbol: "checkmark", action: .completeSet, isProminent: true)]
+            if let back = backButton(state, now: now) { tile.buttons.append(back) }
             tile.inline = tr("Repos : prêt")
         }
         tile.shortValue = tile.value

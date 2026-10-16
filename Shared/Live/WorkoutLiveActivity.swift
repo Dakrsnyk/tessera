@@ -26,6 +26,12 @@ struct WorkoutActivityAttributes: Codable, Hashable {
             guard let restEnd else { return false }
             return restEnd > date
         }
+
+        /// The small back button: takes back the last set, or cancels a session without any set
+        /// (started by mistake), which then counts for nothing.
+        var undoesSet: Bool { doneSets > 0 }
+        var backSymbol: String { undoesSet ? "arrow.uturn.backward" : "xmark" }
+        var backTitle: String { undoesSet ? tr("Annuler la dernière série") : tr("Annuler la séance") }
     }
 
     var routineName: String
@@ -134,6 +140,7 @@ struct WorkoutActivityView: View {
             ProgressView(value: Double(state.doneSets), total: Double(max(1, state.totalSets)))
                 .tint(accent)
             HStack(spacing: 8) {
+                backButton
                 if state.restPaused != nil {
                     actionButton(tr("Reprendre"), symbol: "play.fill", prominent: false, intent: ResumeRestIntent())
                 } else if state.isResting(at: now) {
@@ -189,6 +196,25 @@ struct WorkoutActivityView: View {
                     .font(.system(.title2, design: .rounded).weight(.semibold))
                     .foregroundStyle(accent)
             }
+        }
+    }
+
+    /// Icon only, so « Série faite » stays the main button on a narrow Lock Screen.
+    @ViewBuilder private var backButton: some View {
+        let label = Image(systemName: state.backSymbol)
+            .font(.subheadline.weight(.bold))
+            .foregroundStyle(accent)
+            .frame(width: 38, height: 38)
+            .background(accent.opacity(0.18), in: Circle())
+            .accessibilityLabel(Text(state.backTitle))
+        if !isLive {
+            label
+        } else if state.undoesSet {
+            Button(intent: UndoSetIntent()) { label }
+                .buttonStyle(.plain)
+        } else {
+            Button(intent: CancelWorkoutIntent()) { label }
+                .buttonStyle(.plain)
         }
     }
 

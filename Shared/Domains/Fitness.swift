@@ -156,6 +156,34 @@ extension WorkoutSession {
         if end != nil, exerciseIndex >= exercises.count - 1 { end = nil }
     }
 
+    /// Takes back the last set logged (a « Série faite » touched by mistake): the session goes back to
+    /// that set, without rest, and is no longer finished. Returns the set removed, nil when there is none.
+    @discardableResult
+    mutating func undoLastSet() -> SetLog? {
+        guard let last = sets.popLast() else { return nil }
+        func isSame(_ exercise: ExerciseTemplate) -> Bool {
+            exercise.name == last.exercise && exercise.exerciseID == last.exerciseID
+        }
+        if setIndex > 0, let current = currentExercise, isSame(current) {
+            setIndex -= 1
+        } else if !exercises.isEmpty {
+            // The set ended an exercise: back to the closest one before (an exercise skipped in between is skipped again).
+            let before = min(exerciseIndex, exercises.count) - 1
+            if let index = stride(from: before, through: 0, by: -1).first(where: { isSame(exercises[$0]) }) {
+                exerciseIndex = index
+            } else {
+                exerciseIndex = min(exerciseIndex, exercises.count - 1)
+            }
+            // The sets of this exercise still logged, just before the one removed.
+            let logged = sets.reversed().prefix(while: { $0.exercise == last.exercise && $0.exerciseID == last.exerciseID }).count
+            setIndex = min(logged, max(0, exercises[exerciseIndex].sets - 1))
+        }
+        end = nil
+        restEndsAt = nil
+        restPausedRemaining = nil
+        return last
+    }
+
     var duration: TimeInterval {
         let last = end ?? sets.last?.date ?? start
         return max(0, last.timeIntervalSince(start))
@@ -239,6 +267,52 @@ struct FitnessState: Codable, Hashable {
             history.append(session)
             if history.count > 300 { history.removeFirst(history.count - 300) }
         }
+        active = nil
+    }
+
+    /// How long after its last set a session finished by that set can still be taken back.
+    static let undoWindow: TimeInterval = 3600
+
+    /// The session just finished by its last set (`completeSet` then `finishActive`), still in the
+    /// window to take that set back. A session finished by « Terminer la séance » is not reopened.
+    func justFinishedSession(at date: Date) -> WorkoutSession? {
+        guard active == nil, let last = history.last, let lastSet = last.sets.last, last.end == lastSet.date,
+              last.exerciseIndex >= last.exercises.count else { return nil }
+        let elapsed = date.timeIntervalSince(lastSet.date)
+        guard elapsed >= 0, elapsed < Self.undoWindow, DateMath.isSameDay(lastSet.date, date) else { return nil }
+        return last
+    }
+
+    /// True when « Annuler la dernière série » has a set to take back.
+    func canUndoLastSet(at date: Date) -> Bool {
+        if let active { return !active.sets.isEmpty }
+        return justFinishedSession(at: date) != nil
+    }
+
+    /// The session in progress without any set yet (started by mistake): « Annuler la séance » is offered instead.
+    var activeHasNoSets: Bool {
+        guard let active else { return false }
+        return !active.isFinished && active.sets.isEmpty
+    }
+
+    /// Takes back the last « Série faite » (Lock Screen, Dynamic Island, widget or app). When that set had
+    /// finished the session, the session leaves the history and is in progress again. A session left
+    /// without any set stays in progress: « Annuler la séance » then removes it. Returns false when
+    /// there was nothing to take back.
+    @discardableResult
+    mutating func undoLastSet(at date: Date) -> Bool {
+        if active == nil, let finished = justFinishedSession(at: date) {
+            history.removeLast()
+            active = finished
+        }
+        guard var session = active, session.undoLastSet() != nil else { return false }
+        active = session
+        return true
+    }
+
+    /// Drops the session in progress (started by mistake, or not to keep): it never goes to the
+    /// history, so it counts neither as done nor as half done (week, streak, records, calories, reminders).
+    mutating func cancelActive() {
         active = nil
     }
 

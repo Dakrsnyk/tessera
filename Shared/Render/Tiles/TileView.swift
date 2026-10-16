@@ -861,6 +861,10 @@ struct TileActionButton<Label: View>: View {
             IntentButton(intent: CompleteSetIntent(), isEnabled: isEnabled, label: label)
         case .skipRest:
             IntentButton(intent: SkipRestIntent(), isEnabled: isEnabled, label: label)
+        case .undoSet:
+            IntentButton(intent: UndoSetIntent(), isEnabled: isEnabled, label: label)
+        case .cancelWorkout:
+            IntentButton(intent: CancelWorkoutIntent(), isEnabled: isEnabled, label: label)
         case let .logFood(id):
             IntentButton(intent: LogFoodIntent(foodID: id), isEnabled: isEnabled, label: label)
         case let .quickExpense(id):
@@ -957,10 +961,13 @@ struct TileButtonsRow: View {
     /// Two buttons don't fit side by side with text in a small widget.
     private var isTight: Bool { context.isSmall && buttons.count > 1 }
 
+    /// The small icon-only buttons (the fitness back arrow) come first, the main action last.
+    private var ordered: [TileButton] { buttons.filter(\.isIconOnly) + buttons.filter { !$0.isIconOnly } }
+
     var body: some View {
         HStack(spacing: 6) {
-            ForEach(Array(buttons.enumerated()), id: \.offset) { pair in
-                let iconOnly = isTight && !pair.element.isProminent
+            ForEach(Array(ordered.enumerated()), id: \.offset) { pair in
+                let iconOnly = pair.element.isIconOnly || (isTight && !pair.element.isProminent)
                 TileActionButton(action: pair.element.action, isEnabled: context.isInteractive) {
                     TileButtonLabel(button: pair.element, style: context.style, expands: !iconOnly, iconOnly: iconOnly)
                 }
@@ -977,7 +984,7 @@ struct TileButtonsColumn: View {
         VStack(spacing: 6) {
             ForEach(Array(buttons.enumerated()), id: \.offset) { pair in
                 TileActionButton(action: pair.element.action, isEnabled: context.isInteractive) {
-                    TileButtonLabel(button: pair.element, style: context.style)
+                    TileButtonLabel(button: pair.element, style: context.style, iconOnly: pair.element.isIconOnly)
                 }
             }
         }
@@ -1604,7 +1611,8 @@ struct TileAccessoryView: View {
 
     /// The main action (« Série faite »…), usable right from the Lock Screen (iOS 17 interactive widgets).
     private var lockAction: TileButton? {
-        tile.buttons.first(where: \.isProminent) ?? tile.buttons.first
+        // The small back arrow is never the Lock Screen's one action.
+        tile.buttons.first(where: \.isProminent) ?? tile.buttons.first(where: { !$0.isIconOnly })
     }
 
     @ViewBuilder private var rectangular: some View {

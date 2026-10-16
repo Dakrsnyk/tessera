@@ -4,6 +4,10 @@ import Foundation
 enum TileAction: Hashable {
     case completeSet
     case skipRest
+    /// Takes back the last « Série faite » (see `FitnessState.undoLastSet`).
+    case undoSet
+    /// Drops a session started by mistake, before any set (see `FitnessState.cancelActive`).
+    case cancelWorkout
     case logFood(String)
     case quickExpense(String)
     case counter(String, Int)
@@ -24,6 +28,8 @@ struct TileButton: Hashable {
     var symbol: String
     var action: TileAction
     var isProminent = false
+    /// A small icon-only button (the fitness back arrow), drawn before the others.
+    var isIconOnly = false
 }
 
 struct TileRow: Hashable, Identifiable {

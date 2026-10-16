@@ -47,6 +47,39 @@ struct CompleteSetIntent: LiveActivityIntent {
     }
 }
 
+/// The small back arrow: takes back the last « Série faite » touched by mistake.
+struct UndoSetIntent: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Annuler la dernière série"
+    static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
+
+    init() {}
+
+    func perform() async throws -> some IntentResult {
+        await changeWorkout { _ = $0.undoLastSet(at: Date()) }
+        return .result()
+    }
+}
+
+/// The small cross of a session without any set (started by mistake): it is dropped, never counted,
+/// and its Live Activity ends (`WorkoutLiveActivity.sync` ends it when no session is in progress).
+struct CancelWorkoutIntent: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Annuler la séance"
+    static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
+
+    init() {}
+
+    func perform() async throws -> some IntentResult {
+        await changeWorkout { $0.cancelActive() }
+        return .result()
+    }
+}
+
 struct PauseRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Mettre le repos en pause"
     static var isDiscoverable = false

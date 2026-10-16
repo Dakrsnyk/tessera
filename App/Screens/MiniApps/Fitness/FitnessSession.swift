@@ -16,6 +16,8 @@ struct FitnessSessionPage: View {
     @State private var writing = false
     @State private var paywall: PaywallContext?
     @State private var confirmFinish = false
+    /// « Annuler la séance » once sets were logged: asked first, they would be lost.
+    @State private var confirmCancel = false
 
     private var accentHex: String { MiniApp.fitness.colorHex }
 
@@ -193,6 +195,18 @@ struct FitnessSessionPage: View {
                     completeSet()
                 }
                 .accessibilityIdentifier("session-set-done")
+                if !session.sets.isEmpty {
+                    // A « Série faite » touched by mistake (here, on the Lock Screen or a widget).
+                    Button {
+                        Haptics.tap()
+                        model.update(\.fitness) { _ = $0.undoLastSet(at: Date()) }
+                    } label: {
+                        Label(tr("Annuler la dernière série"), systemImage: "arrow.uturn.backward")
+                    }
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityIdentifier("session-undo-set")
+                }
                 Button(tr("Passer cet exercice")) {
                     model.update(\.fitness) { $0.active?.skipExercise(at: Date()) }
                 }
@@ -243,11 +257,31 @@ struct FitnessSessionPage: View {
             } message: {
                 Text(tr("Les séries faites sont enregistrées dans l'historique."))
             }
+
+            // Started by mistake: the session goes away and counts for nothing.
+            Button(role: .destructive) {
+                if session.sets.isEmpty { cancelSession() } else { confirmCancel = true }
+            } label: {
+                Label(tr("Annuler la séance"), systemImage: "xmark")
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, minHeight: 36)
+            }
+            .accessibilityIdentifier("session-cancel")
+            .confirmationDialog(tr("Annuler la séance ? Elle ne sera pas comptée."), isPresented: $confirmCancel, titleVisibility: .visible) {
+                Button(tr("Annuler la séance"), role: .destructive) { cancelSession() }
+            }
         }
         .onAppear { load(exercise) }
         .onChange(of: "\(session.exerciseIndex)-\(session.setIndex)") { _, _ in
             if let current = model.fitness.active?.currentExercise { load(current) }
         }
+    }
+
+    /// Drops the session in progress: never in the history, nor in the week, streak or records.
+    private func cancelSession() {
+        Haptics.tap()
+        model.update(\.fitness) { $0.cancelActive() }
+        dismiss()
     }
 
     private func load(_ exercise: ExerciseTemplate) {
@@ -344,6 +378,17 @@ struct FitnessSessionPage: View {
 
     private func chooser(state: FitnessState) -> some View {
         MiniAppScroll {
+            if state.justFinishedSession(at: Date()) != nil {
+                // The last « Série faite » finished the session by mistake: it comes back in progress.
+                Button {
+                    Haptics.tap()
+                    model.update(\.fitness) { _ = $0.undoLastSet(at: Date()) }
+                } label: {
+                    Label(tr("Annuler la dernière série"), systemImage: "arrow.uturn.backward")
+                        .font(.subheadline.weight(.semibold))
+                }
+                .accessibilityIdentifier("session-undo-finish")
+            }
             Text(tr("Choisis la séance à faire."))
                 .font(.headline)
             if state.routines.isEmpty {

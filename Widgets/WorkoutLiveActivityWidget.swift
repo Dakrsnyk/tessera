@@ -31,6 +31,7 @@ struct WorkoutLiveActivityWidget: Widget {
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     HStack(spacing: 8) {
+                        backButton(state)
                         if state.restPaused != nil {
                             Button(intent: ResumeRestIntent()) {
                                 Label(tr("Reprendre"), systemImage: "play.fill")
@@ -69,6 +70,23 @@ struct WorkoutLiveActivityWidget: Widget {
                 Image(systemName: state.isResting(at: Date()) ? "timer" : "figure.strengthtraining.traditional")
                     .foregroundStyle(accent)
             }
+        }
+    }
+
+    /// The small back arrow (or the cross of a session without any set): icon only, so « Série faite » keeps its room.
+    @ViewBuilder
+    private func backButton(_ state: WorkoutActivityAttributes.ContentState) -> some View {
+        let label = Image(systemName: state.backSymbol)
+            .frame(width: 22)
+            .accessibilityLabel(Text(state.backTitle))
+        if state.undoesSet {
+            Button(intent: UndoSetIntent()) { label }
+                .buttonBorderShape(.circle)
+                .tint(accent.opacity(0.4))
+        } else {
+            Button(intent: CancelWorkoutIntent()) { label }
+                .buttonBorderShape(.circle)
+                .tint(accent.opacity(0.4))
         }
     }
 
