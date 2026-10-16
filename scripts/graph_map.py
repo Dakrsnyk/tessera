@@ -212,7 +212,7 @@ MODULES = [
     {"file": "Widgets-extension", "title": "Widgets : extension et rendu", "zone": "ios",
      "role": "L'extension WidgetKit (cible TesseraWidgets) et le rendu partagé : un même code dessine les vrais widgets et tous les aperçus de l'app.",
      "features": [
-         "103 types de widgets (`WidgetKind`), tailles petite, moyenne, grande et écran verrouillé (circulaire, rectangulaire, en ligne).",
+         "105 types de widgets (`WidgetKind`), tailles petite, moyenne, grande et écran verrouillé (circulaire, rectangulaire, en ligne).",
          "Un fournisseur pour tous les types (`DesignProvider`), configuration « Modifier le widget » (`DesignWidgetIntent`).",
          "Rendu : `WidgetCanvas`, tuiles par domaine (`Tile`, `TileFactory`, `TileView`), widgets d'écran verrouillé (`AccessoryViews`).",
          "Galerie de l'écran d'accueil : un seul widget « Mes widgets » (`QuickWidget.swift`, `MyWidgetsProvider`) qui ne propose que les widgets créés par la personne ; écran verrouillé : l'essentiel de chaque mini-app (`DesignWidgets.swift`).",
