@@ -114,19 +114,25 @@ struct SpacesView: View {
     /// « Photos et citations »: photos or a quote, then the same editor as in its mini-app (size first).
     private var photosCard: some View {
         Button {
-            if model.canCreateDesign {
-                choosesPhotoQuote = true
-            } else {
-                router.showPaywall(.designLimit)
-            }
+            choosesPhotoQuote = true
         } label: {
             PhotoQuotesCard()
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("space-card-photos")
         .confirmationDialog(tr("Créer un widget"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {
-            Button(tr("Photos")) { router.photoQuoteDraft = PhotoQuoteDraft.blank(.photos) }
-            Button(tr("Citation")) { router.photoQuoteDraft = PhotoQuoteDraft.blank(.quote) }
+            Button(tr("Photos")) { startPhotoQuote(.photos) }
+            Button(tr("Citation")) { startPhotoQuote(.quote) }
+        }
+    }
+
+    /// The rule of every new widget: photos and quotes don't count toward the free limit.
+    private func startPhotoQuote(_ kind: WidgetKind) {
+        let draft = PhotoQuoteDraft.blank(kind)
+        if model.canSave(adding: [draft.design]) {
+            router.photoQuoteDraft = draft
+        } else {
+            router.showPaywall(.designLimit)
         }
     }
 

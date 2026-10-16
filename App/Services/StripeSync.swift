@@ -53,6 +53,8 @@ enum StripeSync {
 
     enum Failure: Error, Equatable {
         case notRestrictedKey, refused, missingPermission, network, server(Int), unreadable
+        /// No exchange rate for these currencies (offline, or not published by the ECB): nothing was added.
+        case rates([String])
 
         var message: String {
             switch self {
@@ -62,7 +64,14 @@ enum StripeSync {
             case .network: tr("Impossible de joindre Stripe. Vérifie ta connexion.")
             case let .server(code): tr("Stripe ne répond pas correctement (erreur \(code)). Réessaie plus tard.")
             case .unreadable: tr("La réponse de Stripe n'a pas pu être lue.")
+            case let .rates(codes): Failure.ratesMessage(codes)
             }
+        }
+
+        private static func ratesMessage(_ codes: [String]) -> String {
+            let list = codes.joined(separator: ", ")
+            return tr("Non converti (taux indisponible) : \(list).") + " "
+                + tr("Les taux de la BCE n'ont pas pu être obtenus : hors ligne, ou devise non publiée. Réessaie, ou garde les montants tels quels, sans conversion.")
         }
     }
 
@@ -83,12 +92,18 @@ enum StripeSync {
         model.update(\.business) { state in
             state.connections.stripe = BusinessConnections.StripeLink(keyHint: "…" + String(key.suffix(4)), isTestMode: key.hasPrefix("rk_test_"), connectedAt: Date())
         }
-        return await sync(model: model)
+        let failure = await sync(model: model)
+        // Connected all the same: the card tells about the missing rates and offers to sync without conversion.
+        if case .rates? = failure { return nil }
+        return failure
     }
 
-    /// Reads the transactions since the last sync and merges them (no double: same id, same entry).
+    /// Reads the transactions since the last sync and merges them (no double: same id, same entry). The
+    /// amounts in another currency than the app's are converted at the ECB rate of their day; when a rate
+    /// is missing nothing is merged (never a wrong amount in silence), unless `convertsCurrencies` is false:
+    /// the person chose to keep them as Stripe gives them.
     @discardableResult
-    static func sync(model: AppModel, now: Date = Date()) async -> Failure? {
+    static func sync(model: AppModel, now: Date = Date(), convertsCurrencies: Bool = true) async -> Failure? {
         guard let key = SecretStore.read(keychainAccount), let link = model.business.connections.stripe else { return nil }
         let calendar = DateMath.calendar
         // Whole days from the day before the last transaction read: each day's fees are counted in full.
@@ -105,17 +120,47 @@ enum StripeSync {
             }
         } catch {
             let failure = (error as? Failure) ?? .network
-            model.update(\.business) { $0.connections.stripe?.lastError = failure.message }
+            model.update(\.business) { state in
+                state.connections.stripe?.lastError = failure.message
+                state.connections.stripe?.unconvertedCurrencies = nil
+            }
             return failure
         }
-        let batch = StripeTransactions.batch(from: transactions)
-        let newest = transactions.map { Date(timeIntervalSince1970: $0.created) }.max()
+        let home = model.settings.currencyCode.uppercased()
+        let dates = transactions.map { Date(timeIntervalSince1970: $0.created) }
+        let kept = Set(link.keptCurrencies ?? [])
+        let foreign = Set(transactions.map { $0.currency.uppercased() }).subtracting([home]).subtracting(kept)
+        var history: FXHistory?
+        if convertsCurrencies, !foreign.isEmpty, let first = dates.min(), let last = dates.max() {
+            history = await FXService.history(of: foreign, in: home, from: first, to: last, now: now)
+        }
+        let batch = StripeTransactions.batch(from: transactions, history: history)
+        let missing = batch.unconverted.subtracting(kept)
+        if !missing.isEmpty {
+            let codes = missing.sorted()
+            let failure = Failure.rates(codes)
+            model.update(\.business) { state in
+                state.connections.stripe?.lastError = failure.message
+                state.connections.stripe?.unconvertedCurrencies = codes
+            }
+            return failure
+        }
+        let newest = dates.max()
         model.update(\.business) { state in
             let result = state.merge(batch)
             guard var link = state.connections.stripe else { return }
             link.lastSync = now
             link.lastError = nil
             link.lastResult = result
+            if !convertsCurrencies {
+                // A currency the ECB doesn't publish will never have a rate: kept as Stripe gives it from now on.
+                let unpublished = (link.unconvertedCurrencies ?? []).filter { !FXService.currencies.contains($0) }
+                let keeps = kept.union(unpublished)
+                link.keptCurrencies = keeps.isEmpty ? nil : keeps.sorted()
+            }
+            link.unconvertedCurrencies = nil
+            let converted = batch.convertedCurrencies.union(link.convertedCurrencies ?? [])
+            link.convertedCurrencies = converted.isEmpty ? nil : converted.sorted()
             if let newest { link.syncedUntil = max(newest, link.syncedUntil ?? newest) }
             state.connections.stripe = link
         }

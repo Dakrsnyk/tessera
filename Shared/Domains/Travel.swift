@@ -341,6 +341,113 @@ enum FXService {
     }
 }
 
+/// ECB reference rates day by day, to convert the amounts of a period at the rate of their own day
+/// (sales imported in Business, `CurrencyConversion`).
+struct FXHistory: Hashable {
+    /// The currency amounts are converted into (« CAD »).
+    var home: String
+    /// Currency (« USD ») → day (yyyy-MM-dd) → what one unit of it is worth in `home`.
+    var rates: [String: [String: Double]] = [:]
+    /// The currencies without rates, and why.
+    var unavailable: [String: Problem] = [:]
+
+    enum Problem: Error, Hashable {
+        /// Not published by the ECB (or not a currency code).
+        case unsupported
+        /// Frankfurter couldn't be reached (offline) or answered badly: worth trying again.
+        case unreachable
+    }
+
+    /// No rate on weekends and holidays: the closest business day before is taken, up to a week back.
+    static let maxDaysBack = 7
+
+    /// The rate of `currency` on a day (yyyy-MM-dd), or of the closest business day before it.
+    func rate(_ currency: String, on day: String) -> (value: Double, day: String)? {
+        guard let table = rates[currency.uppercased()] else { return nil }
+        var key = day
+        for _ in 0...Self.maxDaysBack {
+            if let value = table[key], value > 0 { return (value, key) }
+            guard let previous = Self.dayBefore(key) else { return nil }
+            key = previous
+        }
+        return nil
+    }
+
+    private static let keyFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
+    static func dayBefore(_ key: String) -> String? {
+        guard let date = keyFormatter.date(from: key) else { return nil }
+        return keyFormatter.string(from: date.addingTimeInterval(-86_400))
+    }
+}
+
+extension FXService {
+    /// The ECB rates of each day of a period for some currencies, in `home`: one Frankfurter request per
+    /// currency for the whole period (/v1/2026-01-01..2026-03-31?base=USD&symbols=CAD), starting a week
+    /// earlier for the business day before a weekend. Nothing is cached: past rates are only needed once.
+    static func history(of codes: Set<String>, in home: String, from start: Date, to end: Date, now: Date = Date()) async -> FXHistory {
+        let home = home.uppercased()
+        var history = FXHistory(home: home)
+        let last = min(max(start, end), now)
+        let first = min(start, last)
+        let from = DateMath.dayKey(DateMath.calendar.date(byAdding: .day, value: -FXHistory.maxDaysBack, to: first) ?? first)
+        let to = DateMath.dayKey(last)
+        var reachable = true
+        for code in codes.map({ $0.uppercased() }).sorted() where code != home {
+            guard currencies.contains(code), currencies.contains(home) else {
+                history.unavailable[code] = .unsupported
+                continue
+            }
+            // Offline: one timeout is enough.
+            guard reachable else {
+                history.unavailable[code] = .unreachable
+                continue
+            }
+            do {
+                history.rates[code] = try await fetchHistory(code, in: home, from: from, to: to)
+            } catch {
+                let problem = (error as? FXHistory.Problem) ?? .unreachable
+                history.unavailable[code] = problem
+                if problem == .unreachable { reachable = false }
+            }
+        }
+        return history
+    }
+
+    /// Day (yyyy-MM-dd) → what one `code` is worth in `home`, the ECB's business days between two days.
+    static func fetchHistory(_ code: String, in home: String, from: String, to: String) async throws -> [String: Double] {
+        guard let url = URL(string: "https://api.frankfurter.dev/v1/\(from)..\(to)?base=\(code)&symbols=\(home)") else {
+            throw FXHistory.Problem.unsupported
+        }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 15
+        let data: Data
+        let response: URLResponse
+        do {
+            (data, response) = try await URLSession.shared.data(for: request)
+        } catch {
+            throw FXHistory.Problem.unreachable
+        }
+        switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
+        case 200: break
+        case 404, 422: throw FXHistory.Problem.unsupported
+        default: throw FXHistory.Problem.unreachable
+        }
+        struct Payload: Decodable {
+            let rates: [String: [String: Double]]
+        }
+        guard let payload = try? JSONDecoder().decode(Payload.self, from: data) else { throw FXHistory.Problem.unreachable }
+        return payload.rates.compactMapValues { $0[home] }
+    }
+}
+
 /// Weather at the trip's destination, cached apart from the home weather.
 enum TripWeatherService {
     static let refreshInterval: TimeInterval = 60 * 60

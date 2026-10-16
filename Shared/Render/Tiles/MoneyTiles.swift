@@ -8,6 +8,7 @@ enum MoneyTiles {
         let data = context.payload.domains
         let currency = context.settings.currencyCode
         let target = context.options.targetID
+        let clock = PriceClock(now: now, uses24Hour: context.settings.uses24HourClock)
         switch context.design.kind {
         case .budgetLeft: return budgetLeft(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget))
         case .spendingByCategory: return byCategory(data.budget, now: now, currency: currency)
@@ -16,11 +17,11 @@ enum MoneyTiles {
         case .netWorth: return netWorth(data.budget, now: now, currency: currency)
         case .subscriptions: return subscriptions(data.budget, currency: currency)
         case .quickExpense: return quickExpense(data.budget, now: now, currency: currency)
-        case .portfolio: return portfolio(data, currency: currency)
+        case .portfolio: return portfolio(data, currency: currency, clock: clock, isLarge: context.isLarge)
         case .allocation: return allocation(data, currency: currency)
-        case .topMover: return topMover(data, currency: currency)
-        case .watchlist: return watchlist(data, currency: context.settings.cryptoCurrency.uppercased())
-        case .marketOverview: return market(data, currency: context.settings.cryptoCurrency.uppercased())
+        case .topMover: return topMover(data, currency: currency, clock: clock, isLarge: context.isLarge)
+        case .watchlist: return watchlist(data, currency: context.settings.cryptoCurrency.uppercased(), clock: clock, isSmall: context.isSmall)
+        case .marketOverview: return market(data, currency: context.settings.cryptoCurrency.uppercased(), clock: clock, isLarge: context.isLarge)
         default: return TileFactory.placeholder(context.design.kind)
         }
     }
@@ -66,6 +67,7 @@ enum MoneyTiles {
         var tile = Tile(title: tr("Dépenses du mois"), symbol: "chart.bar.doc.horizontal")
         tile.value = TF.money(total, currency)
         tile.caption = tr("\(Fmt.month(now)) · \(items.count) catégories")
+        tile.detail = monthComparison(state, now: now, currency: currency)
         tile.visual = .segments(items.prefix(6).map { TileSegment(label: $0.name, value: $0.amount, colorHex: $0.colorHex) })
         tile.rows = items.prefix(6).map { item -> TileRow in
             let limit = item.category?.monthlyLimit ?? 0
@@ -127,10 +129,9 @@ enum MoneyTiles {
         var tile = Tile(title: tr("Valeur nette"), symbol: "building.columns")
         tile.value = TF.money(worth, currency)
         let history = state.netWorthHistory.map(\.value)
-        if let first = state.netWorthHistory.first(where: { now.timeIntervalSince($0.date) <= 31 * 86_400 }) {
-            let change = worth - first.value
-            tile.caption = tr("\(Fmt.signedMoney(change, currency: currency, decimals: 0)) sur 30 jours")
-            tile.trend = change >= 0
+        if let evolution = netWorthEvolution(state, worth: worth, now: now, currency: currency) {
+            tile.caption = evolution.text
+            tile.trend = evolution.trend
         } else {
             tile.caption = tr("actifs moins dettes")
         }
@@ -140,6 +141,37 @@ enum MoneyTiles {
         if history.count >= 2 { tile.visual = .line(Array(history.suffix(60))) }
         tile.inline = tr("Valeur nette \(TF.money(worth, currency))")
         return tile
+    }
+
+    /// The month's spending against last month's up to the same day (« 45 $ de plus que le mois dernier
+    /// à la même date »). Only when expenses were already noted when last month began: a month noted
+    /// from its middle on, or holding only the bills, would make the comparison lie.
+    static func monthComparison(_ state: BudgetState, now: Date, currency: String) -> String? {
+        let monthStart = BudgetMath.monthInterval(now).start
+        guard let lastMonth = DateMath.calendar.date(byAdding: .month, value: -1, to: monthStart),
+              let firstDayEnd = DateMath.calendar.date(byAdding: .day, value: 1, to: lastMonth),
+              state.expenses.contains(where: { $0.date < firstDayEnd }) else { return nil }
+        let comparison = BudgetMath.monthToDate(state, at: now)
+        let difference = comparison.current - comparison.previous
+        guard comparison.previous > 0, abs(difference) >= 1 else { return nil }
+        let amount = TF.money(abs(difference), currency)
+        return difference > 0 ? tr("\(amount) de plus que le mois dernier à la même date") : tr("\(amount) de moins que le mois dernier à la même date")
+    }
+
+    /// The net worth's move since the oldest value of the last 31 days. « sur 30 jours » only when the
+    /// history goes back that far; a younger history gives its first day; nothing before a day has passed.
+    static func netWorthEvolution(_ state: BudgetState, worth: Double, now: Date, currency: String) -> (text: String, trend: Bool?)? {
+        guard let first = state.netWorthHistory.first(where: { now.timeIntervalSince($0.date) <= 31 * 86_400 }),
+              !DateMath.isSameDay(first.date, now), first.date < now else { return nil }
+        let change = worth - first.value
+        let amount = Fmt.signedMoney(change, currency: currency, decimals: 0)
+        let trend: Bool? = abs(change) < 0.5 ? nil : change > 0
+        if now.timeIntervalSince(first.date) >= 27 * 86_400 {
+            return (tr("\(amount) sur 30 jours"), trend)
+        }
+        let day = Fmt.format(first.date, template: "dMMM")
+        let since = tr("Depuis le \(day)")
+        return ("\(since) · \(amount)", trend)
     }
 
     static func subscriptions(_ state: BudgetState, currency: String) -> Tile {
@@ -177,17 +209,31 @@ enum MoneyTiles {
 
     // MARK: Investing
 
-    static func portfolio(_ data: DomainData, currency: String) -> Tile {
+    /// The small print of a widget showing prices: when they were read (« Cours de 14:05 ») and where
+    /// from, then the disclaimer where there is room for it (a medium widget keeps two short lines).
+    static func priceNote(_ date: Date?, source: String? = nil, clock: PriceClock, isLarge: Bool) -> String {
+        var parts = [date.map(clock.asOf), source].compactMap { $0 }
+        if isLarge || date == nil { parts.append(disclaimer) }
+        return parts.joined(separator: " · ")
+    }
+
+    static func portfolio(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = true) -> Tile {
         let positions = PortfolioMath.positions(data.portfolio, prices: data.prices)
         guard !positions.isEmpty else { return .empty(tr("Portefeuille"), symbol: "chart.line.uptrend.xyaxis", message: tr("Ajoute tes placements dans Ardane, espace Placements.")) }
         let summary = PortfolioMath.summary(positions)
         var tile = Tile(title: tr("Portefeuille"), symbol: "chart.line.uptrend.xyaxis")
         tile.value = TF.money(summary.value, currency)
         let percent = summary.gainPercent.map { " (\(Fmt.signedPercent($0 * 100)))" } ?? ""
-        tile.caption = tr("\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0))\(percent) au total")
-        tile.trend = summary.gain >= 0
-        if summary.dayChange != 0 {
-            tile.detail = tr("Aujourd'hui : \(Fmt.signedMoney(summary.dayChange, currency: currency, decimals: 0))")
+        let total = tr("\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0))\(percent) au total")
+        if let dayPercent = summary.dayChangePercent {
+            // The day's move first, as the prices go; the total gain below it.
+            let amount = Fmt.signedMoney(summary.dayChange, currency: currency, decimals: 0)
+            tile.caption = PriceChange.text(dayPercent, PortfolioMath.period(positions), amount: amount)
+            tile.detail = total
+            tile.trend = PriceChange.trend(dayPercent)
+        } else {
+            tile.caption = total
+            tile.trend = summary.gain >= 0
         }
         let history = data.portfolio.history.map(\.value)
         if history.count >= 2 { tile.visual = .line(Array(history.suffix(60))) }
@@ -196,11 +242,11 @@ enum MoneyTiles {
                 id: position.holding.id.uuidString,
                 title: position.holding.name,
                 value: TF.money(position.value, currency),
-                detail: position.change24h.map { Fmt.signedPercent($0) + tr(" sur 24 h") },
+                detail: position.change24h.map { PriceChange.text($0, position.period, arrow: false) },
                 colorHex: position.holding.kind.colorHex
             )
         }
-        tile.footnote = disclaimer
+        tile.footnote = priceNote(data.prices.fetchedAt, clock: clock, isLarge: isLarge)
         tile.inline = tr("Portefeuille \(TF.money(summary.value, currency))")
         return tile
     }
@@ -220,56 +266,70 @@ enum MoneyTiles {
         return tile
     }
 
-    static func topMover(_ data: DomainData, currency: String) -> Tile {
+    static func topMover(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = true) -> Tile {
         let positions = PortfolioMath.positions(data.portfolio, prices: data.prices)
         guard let mover = PortfolioMath.topMover(positions), let change = mover.change24h else {
             return .empty(tr("Plus forte variation"), symbol: "arrow.up.arrow.down", message: tr("Les variations apparaissent pour les placements cotés en direct."))
         }
-        var tile = Tile(title: tr("Plus forte variation"), symbol: change >= 0 ? "arrow.up.right" : "arrow.down.right")
-        tile.value = Fmt.signedPercent(change)
-        tile.trend = change >= 0
-        tile.caption = tr("\(mover.holding.name) sur 24 h")
+        let trend = PriceChange.trend(change)
+        var tile = Tile(title: tr("Plus forte variation"), symbol: trend == false ? "arrow.down.right" : "arrow.up.right")
+        tile.value = PriceChange.percent(change)
+        tile.trend = trend
+        tile.caption = "\(mover.holding.name) · \(mover.period.label)"
         tile.detail = tr("Ta position : \(TF.money(mover.value, currency))")
-        tile.footnote = disclaimer
+        tile.footnote = priceNote(data.prices.fetchedAt, clock: clock, isLarge: isLarge)
         return tile
     }
 
-    static func watchlist(_ data: DomainData, currency: String) -> Tile {
+    static func watchlist(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isSmall: Bool = false) -> Tile {
         guard !data.quotes.isEmpty else {
             return .empty(tr("Liste de suivi"), symbol: "list.star", message: tr("Les cours s'affichent dès que la connexion est disponible."), emptySymbol: "wifi.slash")
         }
         var tile = Tile(title: tr("Liste de suivi"), symbol: "list.star")
         let first = data.quotes[0]
         tile.value = Fmt.price(first.price, currency: currency)
-        tile.caption = "\(first.symbol) · \(Fmt.signedPercent(first.change24h))"
-        tile.trend = first.change24h >= 0
+        tile.caption = "\(first.symbol) · \(PriceChange.text(first.change24h, .day24h))"
+        tile.trend = PriceChange.trend(first.change24h)
         tile.rows = data.quotes.prefix(6).map { quote in
-            TileRow(id: quote.id, title: quote.symbol, value: Fmt.price(quote.price, currency: currency), detail: quote.name, colorHex: quote.change24h >= 0 ? "1E9E57" : "D6364B", isHighlighted: false)
+            // A small widget shows one line per coin, without room for both: the change, which tells how it goes.
+            TileRow(
+                id: quote.id,
+                title: quote.symbol,
+                value: isSmall ? PriceChange.percent(quote.change24h) : Fmt.price(quote.price, currency: currency),
+                detail: PriceChange.text(quote.change24h, .day24h, arrow: false),
+                colorHex: PriceChange.colorHex(quote.change24h)
+            )
         }
         tile.compactRows = true
-        tile.footnote = tr("Cours : CoinGecko")
-        tile.inline = "\(first.symbol) \(Fmt.price(first.price, currency: currency))"
+        if let fetched = LivePrices.oldest(data.quotes.map(\.fetchedAt)) {
+            tile.footnote = "\(clock.asOf(fetched)) · CoinGecko"
+        } else {
+            tile.footnote = tr("Cours : CoinGecko")
+        }
+        tile.inline = "\(first.symbol) \(Fmt.price(first.price, currency: currency)) \(PriceChange.percent(first.change24h))"
         return tile
     }
 
-    static func market(_ data: DomainData, currency: String) -> Tile {
+    static func market(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = true) -> Tile {
         guard let global = data.global else {
             return .empty(tr("Marché crypto"), symbol: "globe.americas", message: tr("Les données du marché s'affichent dès que la connexion est disponible."), emptySymbol: "wifi.slash")
         }
         var tile = Tile(title: tr("Marché crypto"), symbol: "globe.americas")
         tile.value = BigNumber.compact(global.totalMarketCap, currency: currency)
-        tile.caption = tr("capitalisation · \(Fmt.signedPercent(global.change24h)) sur 24 h")
-        tile.trend = global.change24h >= 0
+        let arrow = PriceChange.arrow(global.change24h)
+        let move = [arrow, PriceChange.percent(global.change24h)].filter { !$0.isEmpty }.joined(separator: " ")
+        tile.caption = tr("capitalisation · \(move) sur 24 h")
+        tile.trend = PriceChange.trend(global.change24h)
         var rows = [
             TileRow(id: "btc", title: tr("Dominance BTC"), value: Fmt.percent(global.bitcoinDominance / 100, decimals: 1), progress: global.bitcoinDominance / 100),
             TileRow(id: "eth", title: tr("Dominance ETH"), value: Fmt.percent(global.ethereumDominance / 100, decimals: 1), progress: global.ethereumDominance / 100),
         ]
         for quote in data.quotes.prefix(3) {
-            rows.append(TileRow(id: quote.id, title: quote.symbol, value: Fmt.price(quote.price, currency: currency), detail: Fmt.signedPercent(quote.change24h)))
+            rows.append(TileRow(id: quote.id, title: quote.symbol, value: Fmt.price(quote.price, currency: currency), detail: PriceChange.text(quote.change24h, .day24h, arrow: false)))
         }
         tile.rows = rows
-        tile.footnote = tr("CoinGecko · \(disclaimer)")
-        tile.inline = tr("Marché \(Fmt.signedPercent(global.change24h))")
+        tile.footnote = priceNote(global.fetchedAt, source: "CoinGecko", clock: clock, isLarge: isLarge)
+        tile.inline = tr("Marché \(PriceChange.percent(global.change24h))")
         return tile
     }
 }

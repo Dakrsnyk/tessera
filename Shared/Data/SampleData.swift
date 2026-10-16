@@ -93,11 +93,11 @@ enum SampleData {
         data.budget = budget(now: now)
         data.business = business(now: now)
         data.portfolio = portfolio(now: now)
-        data.prices = PriceBook(prices: ["bitcoin": 64_210, "ethereum": 3_180], changes: ["bitcoin": 2.4, "ethereum": -1.2, "XEQT": 0.6, "AAPL": 1.1])
+        data.prices = PriceBook(prices: ["bitcoin": 64_210, "ethereum": 3_180], changes: ["bitcoin": 2.4, "ethereum": -1.2, "XEQT": 0.6, "AAPL": 1.1], fetchedAt: now)
         data.quotes = [
-            CoinQuote(id: "bitcoin", symbol: "BTC", name: tr("Bitcoin"), price: 64_210, change24h: 2.4),
-            CoinQuote(id: "ethereum", symbol: "ETH", name: tr("Ethereum"), price: 3_180, change24h: -1.2),
-            CoinQuote(id: "solana", symbol: "SOL", name: tr("Solana"), price: 148, change24h: 5.6),
+            CoinQuote(id: "bitcoin", symbol: "BTC", name: tr("Bitcoin"), price: 64_210, change24h: 2.4, fetchedAt: now),
+            CoinQuote(id: "ethereum", symbol: "ETH", name: tr("Ethereum"), price: 3_180, change24h: -1.2, fetchedAt: now),
+            CoinQuote(id: "solana", symbol: "SOL", name: tr("Solana"), price: 148, change24h: 5.6, fetchedAt: now),
         ]
         data.global = MarketGlobal(totalMarketCap: 2.35e12, change24h: 1.8, bitcoinDominance: 54.2, ethereumDominance: 12.1, fetchedAt: now)
         let example = CompanyRef(cik: 1, ticker: "EXMP", name: tr("Exemple Inc."))

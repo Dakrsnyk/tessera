@@ -194,6 +194,7 @@ struct PaywallView: View {
             comparisonRow(tr("Widgets"), free: "\(WidgetKind.freeKinds.count)", premium: "\(WidgetKind.offered.count)")
             comparisonRow(tr("Styles"), free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
             comparisonRow(tr("Widgets enregistrés"), free: "\(AppModel.freeDesignLimit)", premium: "∞")
+            comparisonRow(tr("Photos et citations"), free: "∞", premium: "∞")
             comparisonRow(tr("Habitudes"), free: "\(AppModel.freeHabitLimit)", premium: "∞")
             comparisonRow(tr("Exercices"), free: "—", premium: "\(ExerciseLibrary.all.count)")
             comparisonRow(tr("Statistiques détaillées"), free: "—", premium: "✓")

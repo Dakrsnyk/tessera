@@ -125,7 +125,7 @@ extension PayloadLoader {
         }
         if needs.contains(.portfolio) || needs.contains(.quotes) {
             data.portfolio = store.state(PortfolioState.self)
-            data.prices = await MarketService.priceBook(for: data.portfolio, allowNetwork: allowNetwork)
+            data.prices = await MarketService.priceBook(for: data.portfolio, allowNetwork: allowNetwork, now: now)
         }
         if needs.contains(.quotes) {
             data.quotes = await MarketService.coinQuotes(data.portfolio.watchlist, allowNetwork: allowNetwork, now: now)

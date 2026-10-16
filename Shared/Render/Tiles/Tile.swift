@@ -82,6 +82,8 @@ struct ScheduleBlock: Hashable {
     var title: String
     /// Its start time, written in the block when there is room.
     var time: String?
+    /// Where it takes place (a classroom, an address), written under the title when there is room.
+    var room: String? = nil
 }
 
 struct TileEmpty: Hashable {

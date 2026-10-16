@@ -41,7 +41,8 @@ enum StudentTiles {
                           end: Double(entry.slot.endMinute - first) / span,
                           colorHex: state.colorHex(of: entry.slot),
                           title: state.title(of: entry.slot),
-                          time: hour(entry.slot.startMinute))
+                          time: hour(entry.slot.startMinute),
+                          room: entry.slot.room.trimmed.nonEmpty)
         }, today: FitnessMath.isoWeekday(now) - 1,
            dates: week.map { DateMath.calendar.component(.day, from: $0) }, firstMinute: first, lastMinute: last)
         tile.inline = tr("Horaire de la semaine")

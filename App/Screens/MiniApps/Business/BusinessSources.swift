@@ -31,6 +31,25 @@ struct BusinessSourcesCard: View {
                                 .fixedSize(horizontal: false, vertical: true)
                                 .accessibilityIdentifier("stripe-error")
                         }
+                        if let codes = stripe.unconvertedCurrencies, !codes.isEmpty {
+                            Button {
+                                Task {
+                                    isSyncing = true
+                                    await StripeSync.sync(model: model, convertsCurrencies: false)
+                                    isSyncing = false
+                                }
+                            } label: {
+                                Label(tr("Synchroniser sans conversion"), systemImage: "arrow.triangle.2.circlepath")
+                                    .font(.subheadline)
+                            }
+                            .disabled(isSyncing)
+                            .accessibilityIdentifier("stripe-sync-unconverted")
+                        } else if let note = convertedNote(stripe) {
+                            Text(note)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                         HStack(spacing: 10) {
                             Button {
                                 Task {
@@ -103,6 +122,13 @@ struct BusinessSourcesCard: View {
         return tr("Synchronisé \(when)\(added)")
     }
 
+    /// « Montants en USD convertis au taux de référence de la BCE. »
+    private func convertedNote(_ link: BusinessConnections.StripeLink) -> String? {
+        guard let codes = link.convertedCurrencies, !codes.isEmpty else { return nil }
+        let list = codes.joined(separator: ", ")
+        return tr("Montants en \(list) convertis au taux de référence de la BCE.")
+    }
+
     private func read(_ result: Result<URL, Error>) {
         guard case let .success(url) = result else { return }
         let scoped = url.startAccessingSecurityScopedResource()
@@ -130,47 +156,124 @@ struct BusinessImportPreview: Identifiable {
     let batch: BusinessBatch
 }
 
-/// What the file holds, then « Importer ».
+/// What the file holds, then « Importer ». Amounts in another currency than the app's are converted first,
+/// at the ECB rate of their day (one request per currency for the whole period); without the rates, the
+/// person tries again or imports them as they are: never a wrong amount in silence.
 struct BusinessImportSheet: View {
     let preview: BusinessImportPreview
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    /// The file in the app's currency (nil while the rates are being fetched).
+    @State private var converted: BusinessBatch?
+    @State private var history: FXHistory?
+    @State private var attempt = 0
+
+    private var home: String { model.settings.currencyCode }
+    private var foreign: [String] { preview.batch.foreignCurrencies(home: home).sorted() }
+
+    /// What « Enregistrer » imports: the file in the app's currency, nil until it is.
+    private var ready: BusinessBatch? {
+        if foreign.isEmpty { return preview.batch }
+        guard let converted, converted.unconverted.isEmpty else { return nil }
+        return converted
+    }
+
+    private var failed: Bool { !(converted?.unconverted.isEmpty ?? true) }
 
     var body: some View {
-        let batch = preview.batch
-        let currency = model.settings.currencyCode.lowercased()
+        let batch = ready ?? preview.batch
         let revenue = batch.sales.reduce(0) { $0 + $1.amount }
         let costs = batch.expenses.reduce(0) { $0 + $1.amount }
-        let fileCurrencies = batch.currencies.sorted().map { $0.uppercased() }.joined(separator: ", ")
-        SheetForm(title: tr("Importer"), canSave: !batch.sales.isEmpty || !batch.expenses.isEmpty, onSave: save) {
+        SheetForm(title: tr("Importer"), canSave: ready.map { !$0.sales.isEmpty || !$0.expenses.isEmpty } ?? false, onSave: importReady) {
             Section {
                 LabeledContent(tr("Ventes et remboursements"), value: "\(batch.sales.count)")
                 LabeledContent(tr("Dépenses et frais"), value: "\(batch.expenses.count)")
-                LabeledContent(tr("Chiffre d'affaires"), value: TF.money(revenue, model.settings.currencyCode))
-                LabeledContent(tr("Dépenses"), value: TF.money(costs, model.settings.currencyCode))
+                if let currency = totalsCurrency {
+                    LabeledContent(tr("Chiffre d'affaires"), value: TF.money(revenue, currency))
+                    LabeledContent(tr("Dépenses"), value: TF.money(costs, currency))
+                } else if !failed {
+                    HStack(spacing: 10) {
+                        ProgressView()
+                        Text(tr("Conversion en \(home)…")).foregroundStyle(.secondary)
+                    }
+                }
                 if batch.skipped > 0 {
                     LabeledContent(tr("Lignes ignorées"), value: "\(batch.skipped)")
                 }
-                if let first = (batch.sales.map(\.date) + batch.expenses.map(\.date)).min(),
-                   let last = (batch.sales.map(\.date) + batch.expenses.map(\.date)).max() {
-                    LabeledContent(tr("Période"), value: "\(Fmt.shortDay(first)) – \(Fmt.shortDay(last))")
+                if let period = batch.period {
+                    LabeledContent(tr("Période"), value: "\(Fmt.shortDay(period.lowerBound)) – \(Fmt.shortDay(period.upperBound))")
                 }
             } header: {
                 Text(preview.fileName)
             } footer: {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(tr("Lignes ignorées : paiements échoués ou annulés, virements vers ta banque, lignes sans date ou sans montant. Une ligne déjà importée est mise à jour, jamais ajoutée deux fois."))
-                    if !batch.currencies.isEmpty, batch.currencies != [currency] {
-                        Text(tr("Attention : le fichier est en \(fileCurrencies), Ardane en \(currency.uppercased()). Les montants sont gardés tels quels, sans conversion."))
-                            .foregroundStyle(Color(hex: BusinessFormat.badHex))
+                    if let note = conversionNote {
+                        Text(note)
                     }
                 }
             }
+            if failed {
+                Section {
+                    if history?.unavailable.values.contains(.unreachable) ?? false {
+                        Button(tr("Réessayer")) { attempt += 1 }
+                    }
+                    Button(tr("Importer sans conversion")) {
+                        save(preview.batch)
+                        dismiss()
+                    }
+                    .accessibilityIdentifier("business-import-unconverted")
+                } footer: {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(tr("Non converti (taux indisponible) : \(unconvertedList)."))
+                        Text(tr("Les taux de la BCE n'ont pas pu être obtenus : hors ligne, ou devise non publiée. Réessaie, ou garde les montants tels quels, sans conversion."))
+                    }
+                    .foregroundStyle(Color(hex: BusinessFormat.badHex))
+                }
+            }
         }
+        .task(id: attempt) { await convert() }
     }
 
-    private func save() {
+    /// The currency of the totals: the app's once converted; the file's when the rates are missing and it
+    /// has a single one; nil otherwise (while converting, or a file in several currencies).
+    private var totalsCurrency: String? {
+        if ready != nil { return home }
         let batch = preview.batch
+        let codes = Set(batch.entryCurrencies.values)
+        guard failed, codes.count == 1, batch.entryCurrencies.count == batch.sales.count + batch.expenses.count else { return nil }
+        return codes.first
+    }
+
+    private var unconvertedList: String {
+        (converted?.unconverted ?? []).sorted().joined(separator: ", ")
+    }
+
+    /// « Converti depuis USD au taux de référence de la BCE du jour de chaque opération (2 janv. – 31 mars). »
+    private var conversionNote: String? {
+        guard !foreign.isEmpty, let ready, let days = ready.rateDays else { return nil }
+        let codes = ready.convertedCurrencies.sorted().joined(separator: ", ")
+        let first = DateMath.date(fromKey: days.lowerBound).map(Fmt.shortDay) ?? days.lowerBound
+        let last = DateMath.date(fromKey: days.upperBound).map(Fmt.shortDay) ?? days.upperBound
+        let span = first == last ? first : "\(first) – \(last)"
+        return tr("Converti depuis \(codes) au taux de référence de la BCE du jour de chaque opération (\(span)).")
+    }
+
+    /// The rates of the file's period, then the file converted with them.
+    private func convert() async {
+        guard !foreign.isEmpty else { return }
+        converted = nil
+        let rates = await CurrencyConversion.rates(for: preview.batch, home: home)
+        history = rates
+        converted = preview.batch.converted(with: rates)
+    }
+
+    private func importReady() {
+        guard let ready else { return }
+        save(ready)
+    }
+
+    private func save(_ batch: BusinessBatch) {
         let name = preview.fileName
         model.update(\.business) { state in
             let result = state.merge(batch)

@@ -74,11 +74,13 @@ struct PhotoQuotesAppView: View {
     }
 
     private func start(_ kind: WidgetKind) {
-        guard model.canCreateDesign else {
+        let draft = PhotoQuoteDraft.blank(kind)
+        // The rule of every new widget: photos and quotes don't count toward the free limit.
+        guard model.canSave(adding: [draft.design]) else {
             paywall = .designLimit
             return
         }
-        editing = PhotoQuoteDraft.blank(kind)
+        editing = draft
     }
 }
 

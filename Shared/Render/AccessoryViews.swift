@@ -233,7 +233,7 @@ struct AccessoryWidgetView: View {
             Text(Fmt.price(coin.price, currency: coin.currency))
                 .font(.system(.title3, design: .rounded).monospacedDigit())
                 .minimumScaleFactor(0.6)
-            Text(Fmt.signedPercent(coin.change24h) + tr(" sur 24 h")).font(.caption)
+            Text(PriceChange.text(coin.change24h, .day24h)).font(.caption)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

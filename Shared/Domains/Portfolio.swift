@@ -57,6 +57,8 @@ struct PortfolioState: Codable, Hashable {
 struct PriceBook: Hashable {
     var prices: [String: Double] = [:]
     var changes: [String: Double] = [:]
+    /// When the oldest of these prices was read; nil without a live price.
+    var fetchedAt: Date? = nil
 }
 
 enum PortfolioMath {
@@ -65,7 +67,10 @@ enum PortfolioMath {
         let price: Double
         let value: Double
         let gain: Double
+        /// The live change in percent: over 24 hours for crypto, since the previous close for stocks and ETFs.
         let change24h: Double?
+
+        var period: PriceChange.Period { holding.kind == .crypto ? .day24h : .session }
     }
 
     static func positions(_ state: PortfolioState, prices: PriceBook) -> [Position] {
@@ -85,19 +90,32 @@ enum PortfolioMath {
         let value: Double
         let cost: Double
         let dayChange: Double
+        /// At least one position has a live change; otherwise `dayChange` says nothing.
+        var hasDayChange = false
         var gain: Double { value - cost }
         var gainPercent: Double? { cost > 0 ? gain / cost : nil }
+
+        /// The day's move against the value before it, in percent; nil without a live change.
+        var dayChangePercent: Double? {
+            let previous = value - dayChange
+            return hasDayChange && previous > 0 ? dayChange / previous * 100 : nil
+        }
     }
 
     static func summary(_ positions: [Position]) -> Summary {
         let value = positions.reduce(0) { $0 + $1.value }
         let cost = positions.reduce(0) { $0 + ($1.holding.kind == .cash ? $1.value : $1.holding.costBasis) }
-        let dayChange = positions.reduce(0.0) { total, position in
-            guard let change = position.change24h else { return total }
-            let previous = position.value / (1 + change / 100)
+        let moving = positions.filter { ($0.change24h ?? -100) > -100 }
+        let dayChange = moving.reduce(0.0) { total, position in
+            let previous = position.value / (1 + (position.change24h ?? 0) / 100)
             return total + (position.value - previous)
         }
-        return Summary(value: value, cost: cost, dayChange: dayChange)
+        return Summary(value: value, cost: cost, dayChange: dayChange, hasDayChange: !moving.isEmpty)
+    }
+
+    /// The period of the day's move: 24 hours when only crypto moved, otherwise the stock market's day.
+    static func period(_ positions: [Position]) -> PriceChange.Period {
+        positions.contains { $0.change24h != nil && $0.holding.kind != .crypto } ? .session : .day24h
     }
 
     static func allocation(_ positions: [Position]) -> [(kind: AssetKind, value: Double)] {
@@ -119,6 +137,8 @@ struct CoinQuote: Codable, Hashable {
     var name: String
     var price: Double
     var change24h: Double
+    /// When the price was read. Absent from caches written before it existed.
+    var fetchedAt: Date? = nil
 }
 
 struct MarketGlobal: Codable, Hashable {
@@ -140,12 +160,19 @@ struct MarketCache: Codable {
 struct StockQuote: Codable, Hashable {
     var symbol: String
     var price: Double
+    /// Since the previous close.
     var changePercent: Double
     var fetchedAt: Date
+    /// When the market set this price (its last trade, the previous close while it is shut).
+    /// Absent from caches written before it existed.
+    var quotedAt: Date? = nil
+
+    /// The time to show with the price.
+    var priceTime: Date { quotedAt ?? fetchedAt }
 }
 
 enum MarketService {
-    static let refreshInterval: TimeInterval = 15 * 60
+    static let refreshInterval: TimeInterval = LivePrices.reloadInterval
 
     static var cache: MarketCache {
         SharedStore.shared.read(MarketCache.self, from: .markets) ?? MarketCache()
@@ -157,22 +184,28 @@ enum MarketService {
         guard !wanted.isEmpty else { return [] }
         var stored = cache
         let currency = SharedStore.shared.settings.cryptoCurrency
+        // Each quote has its own reading time (older caches only kept one for all).
         let fresh = stored.currency == currency
-            && (stored.quotesFetchedAt.map { now.timeIntervalSince($0) < refreshInterval } ?? false)
-            && wanted.allSatisfy { stored.quotes[$0] != nil }
-        if !fresh, allowNetwork, let fetched = try? await fetchQuotes(wanted, currency: currency) {
+            && wanted.allSatisfy { id in
+                stored.quotes[id].map { LivePrices.isFresh($0.fetchedAt ?? stored.quotesFetchedAt, now: now) } ?? false
+            }
+        if !fresh, allowNetwork, let fetched = try? await fetchQuotes(wanted, currency: currency, now: now) {
             if stored.currency != currency { stored.quotes = [:] }
             for quote in fetched { stored.quotes[quote.id] = quote }
             stored.currency = currency
             stored.quotesFetchedAt = now
             SharedStore.shared.write(stored, to: .markets)
         }
-        return ids.compactMap { stored.quotes[$0] }
+        return ids.compactMap { id -> CoinQuote? in
+            guard var quote = stored.quotes[id] else { return nil }
+            if quote.fetchedAt == nil { quote.fetchedAt = stored.quotesFetchedAt }
+            return quote
+        }
     }
 
     static func global(allowNetwork: Bool, now: Date = Date()) async -> MarketGlobal? {
         var stored = cache
-        if let global = stored.global, now.timeIntervalSince(global.fetchedAt) < refreshInterval { return global }
+        if let global = stored.global, LivePrices.isFresh(global.fetchedAt, now: now) { return global }
         guard allowNetwork, let fetched = try? await fetchGlobal(now: now) else { return stored.global }
         stored.global = fetched
         SharedStore.shared.write(stored, to: .markets)
@@ -188,7 +221,7 @@ enum MarketService {
         var stored = cache
         var result: [String: StockQuote] = [:]
         for symbol in Set(symbols) {
-            if let quote = stored.stocks[symbol], now.timeIntervalSince(quote.fetchedAt) < refreshInterval {
+            if let quote = stored.stocks[symbol], LivePrices.isFresh(quote.fetchedAt, now: now) {
                 result[symbol] = quote
                 continue
             }
@@ -203,18 +236,22 @@ enum MarketService {
         return result
     }
 
-    static func priceBook(for state: PortfolioState, allowNetwork: Bool) async -> PriceBook {
+    static func priceBook(for state: PortfolioState, allowNetwork: Bool, now: Date = Date()) async -> PriceBook {
         var book = PriceBook()
+        var times: [Date?] = []
         let coinIDs = state.holdings.filter { $0.kind == .crypto }.map(\.symbol)
-        for quote in await coinQuotes(coinIDs, allowNetwork: allowNetwork) {
+        for quote in await coinQuotes(coinIDs, allowNetwork: allowNetwork, now: now) {
             book.prices[quote.id] = quote.price
             book.changes[quote.id] = quote.change24h
+            times.append(quote.fetchedAt)
         }
         let tickers = state.holdings.filter { $0.kind == .stock || $0.kind == .etf }.map(\.symbol)
-        for (symbol, quote) in await stockQuotes(tickers, allowNetwork: allowNetwork) {
+        for (symbol, quote) in await stockQuotes(tickers, allowNetwork: allowNetwork, now: now) {
             book.prices[symbol] = quote.price
             book.changes[symbol] = quote.changePercent
+            times.append(quote.fetchedAt)
         }
+        book.fetchedAt = LivePrices.oldest(times)
         return book
     }
 
@@ -230,7 +267,7 @@ enum MarketService {
         return request
     }
 
-    private static func fetchQuotes(_ ids: [String], currency: String) async throws -> [CoinQuote] {
+    private static func fetchQuotes(_ ids: [String], currency: String, now: Date) async throws -> [CoinQuote] {
         var components = URLComponents(string: "https://api.coingecko.com/api/v3/coins/markets")!
         components.queryItems = [
             URLQueryItem(name: "vs_currency", value: currency),
@@ -247,7 +284,7 @@ enum MarketService {
             let price_change_percentage_24h: Double?
         }
         return try JSONDecoder().decode([Row].self, from: data).map {
-            CoinQuote(id: $0.id, symbol: $0.symbol.uppercased(), name: $0.name, price: $0.current_price ?? 0, change24h: $0.price_change_percentage_24h ?? 0)
+            CoinQuote(id: $0.id, symbol: $0.symbol.uppercased(), name: $0.name, price: $0.current_price ?? 0, change24h: $0.price_change_percentage_24h ?? 0, fetchedAt: now)
         }
     }
 
@@ -280,9 +317,28 @@ enum MarketService {
         req.timeoutInterval = 12
         let (data, response) = try await URLSession.shared.data(for: req)
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WeatherError.badResponse }
-        struct Quote: Decodable { let c: Double; let dp: Double? }
-        let quote = try JSONDecoder().decode(Quote.self, from: data)
-        guard quote.c > 0 else { throw WeatherError.decoding }
-        return StockQuote(symbol: symbol, price: quote.c, changePercent: quote.dp ?? 0, fetchedAt: now)
+        let quote = try JSONDecoder().decode(FinnhubQuote.self, from: data)
+        guard let parsed = quote.stockQuote(symbol, fetchedAt: now) else { throw WeatherError.decoding }
+        return parsed
+    }
+}
+
+/// Finnhub's /quote: c = current price, dp = change since the previous close in percent,
+/// pc = previous close, t = time of the price (Unix seconds).
+struct FinnhubQuote: Decodable {
+    let c: Double
+    let dp: Double?
+    let pc: Double?
+    let t: Double?
+
+    /// Nil for an unknown symbol (Finnhub answers zeros). Without dp, the change comes from pc.
+    func stockQuote(_ symbol: String, fetchedAt: Date) -> StockQuote? {
+        guard c > 0 else { return nil }
+        let price = c
+        var fromClose: Double?
+        if let close = pc, close > 0 { fromClose = (price - close) / close * 100 }
+        var quotedAt: Date?
+        if let time = t, time > 0 { quotedAt = Date(timeIntervalSince1970: time) }
+        return StockQuote(symbol: symbol, price: price, changePercent: dp ?? fromClose ?? 0, fetchedAt: fetchedAt, quotedAt: quotedAt)
     }
 }

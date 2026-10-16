@@ -18,6 +18,8 @@ struct AgendaItem: Identifiable, Hashable {
     var symbol: String
     /// For what can be checked off here (tasks, homework).
     var isDone: Bool?
+    /// Where it takes place, as entered (a classroom, an address): written in its block of the week's table.
+    var place: String? = nil
 
     var taskID: UUID? { kind == .task ? UUID(uuidString: String(id.dropFirst(5))) : nil }
     var assignmentID: UUID? { kind == .assignment ? UUID(uuidString: String(id.dropFirst(11))) : nil }
@@ -42,7 +44,7 @@ enum Agenda {
             items.append(AgendaItem(
                 id: "event-\(event.id)", kind: .event, title: event.title, detail: event.location,
                 start: event.isAllDay ? nil : event.start, end: event.isAllDay ? nil : event.end,
-                colorHex: event.colorHex, symbol: "calendar"
+                colorHex: event.colorHex, symbol: "calendar", place: event.location?.trimmed.nonEmpty
             ))
         }
         let student = model.student
@@ -51,13 +53,14 @@ enum Agenda {
             items.append(AgendaItem(
                 id: "class-\(slot.id)-\(DateMath.dayKey(day))", kind: .classSlot, title: student.title(of: slot),
                 detail: slot.room.isEmpty ? nil : (slot.kind == .course ? tr("Salle \(slot.room)") : slot.room),
-                start: occurrence.start, end: occurrence.end, colorHex: student.colorHex(of: slot), symbol: slot.kind.symbol
+                start: occurrence.start, end: occurrence.end, colorHex: student.colorHex(of: slot), symbol: slot.kind.symbol,
+                place: slot.room.trimmed.nonEmpty
             ))
         }
         for exam in student.exams where DateMath.isSameDay(exam.date, day) {
             items.append(AgendaItem(
                 id: "exam-\(exam.id)", kind: .exam, title: tr("Examen : \(exam.title)"), detail: exam.room.isEmpty ? nil : tr("Salle \(exam.room)"),
-                start: exam.date, colorHex: "E5484D", symbol: "exclamationmark.circle.fill"
+                start: exam.date, colorHex: "E5484D", symbol: "exclamationmark.circle.fill", place: exam.room.trimmed.nonEmpty
             ))
         }
         for assignment in student.assignments where DateMath.isSameDay(assignment.due, day) && (includeDone || !assignment.isDone) {

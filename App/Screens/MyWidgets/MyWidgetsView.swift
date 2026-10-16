@@ -353,13 +353,17 @@ struct MyWidgetsView: View {
     }
 
     private var limitBanner: some View {
-        let used = model.designs.count
+        // Photo and quote widgets don't count: they are unlimited.
+        let used = model.limitedDesignCount
         let limit = AppModel.freeDesignLimit
         return HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
                 Text(tr("\(min(used, limit)) sur \(limit) widgets gratuits"))
                     .font(.subheadline.weight(.semibold))
                 BarView(progress: Double(used) / Double(limit), color: .accentColor, track: Color.secondary.opacity(0.2), height: 5)
+                Text(tr("Photos et citations illimitées"))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
             Button(tr("Illimité")) { router.showPaywall(.designLimit) }
                 .buttonStyle(.bordered)
@@ -428,7 +432,9 @@ struct MyWidgetsView: View {
     // MARK: Merge
 
     private func startFusion(merged: WidgetDesign, keepsOriginals: Bool) {
-        let needsPaywall = (merged.usesPremiumFeatures && !model.isPremium) || (keepsOriginals && !model.canCreateDesign)
+        // Merging never makes more widgets that count, unless the originals are kept.
+        let hasRoom = model.canSave(adding: [merged], removing: keepsOriginals ? [] : orderedSelection)
+        let needsPaywall = (merged.usesPremiumFeatures && !model.isPremium) || !hasRoom
         let sources = orderedSelection.map { design in
             FusionRun.Source(design: design, payload: model.payload(for: design), frame: cardFrames[design.id] ?? .zero)
         }

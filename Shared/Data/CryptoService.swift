@@ -29,7 +29,7 @@ enum CryptoResult: Hashable {
 
 /// Market data from CoinGecko's public API. An optional demo key (COINGECKO_API_KEY) raises the rate limit.
 enum CryptoService {
-    static let refreshInterval: TimeInterval = 15 * 60
+    static let refreshInterval: TimeInterval = LivePrices.reloadInterval
 
     static let coins: [CoinInfo] = [
         CoinInfo(id: "bitcoin", symbol: "BTC", name: tr("Bitcoin")),
@@ -55,7 +55,7 @@ enum CryptoService {
     static func load(coinID: String, allowNetwork: Bool, now: Date = Date()) async -> CryptoResult {
         let currency = SharedStore.shared.settings.cryptoCurrency
         let cache = cached(coinID, currency: currency)
-        if let cache, now.timeIntervalSince(cache.fetchedAt) < refreshInterval {
+        if let cache, LivePrices.isFresh(cache.fetchedAt, now: now) {
             return .ready(cache)
         }
         guard allowNetwork else {

@@ -76,9 +76,12 @@ enum TimelinePlanner {
     static func plan(for design: WidgetDesign, payload: WidgetPayload, now: Date) -> Plan {
         let midnight = DateMath.nextMidnight(after: now)
         if design.isCombo {
-            // Every moment one of the widgets inside changes, and a refresh within half an hour.
+            // Every moment one of the widgets inside changes, and a refresh within half an hour,
+            // or as often as a price widget when one of them follows prices.
             let dates = Array(Set(design.partDesigns.flatMap { plan(for: $0, payload: payload, now: now).dates })).sorted().prefix(60)
-            return Plan(dates: dates.isEmpty ? [now] : Array(dates), policy: .after(min(now.addingTimeInterval(30 * 60), midnight.addingTimeInterval(60))))
+            let followsPrices = design.partDesigns.contains { LivePrices.follows($0.kind) }
+            let refresh = followsPrices ? LivePrices.reloadInterval : 30 * 60
+            return Plan(dates: dates.isEmpty ? [now] : Array(dates), policy: .after(min(now.addingTimeInterval(refresh), midnight.addingTimeInterval(60))))
         }
         switch design.kind {
         case .photos:
@@ -117,7 +120,7 @@ enum TimelinePlanner {
         case .weather:
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(WeatherService.refreshInterval)))
         case .crypto:
-            return Plan(dates: [now], policy: .after(now.addingTimeInterval(CryptoService.refreshInterval)))
+            return Plan(dates: [now], policy: .after(now.addingTimeInterval(LivePrices.reloadInterval)))
         case .tasks, .habits:
             return Plan(dates: [now, midnight], policy: .after(midnight.addingTimeInterval(60)))
         case .calendar, .countdown, .yearDots, .note:
@@ -146,9 +149,10 @@ enum TimelinePlanner {
             return Plan(dates: every(15, count: 4), policy: .after(now.addingTimeInterval(60 * 60)))
         case .rainNext, .windUV, .weatherDetails, .weeklyForecast, .destinationWeather:
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(WeatherService.refreshInterval)))
-        case .portfolio, .allocation, .topMover, .watchlist, .marketOverview:
-            return Plan(dates: [now], policy: .after(now.addingTimeInterval(MarketService.refreshInterval)))
-        case .companySnapshot, .companyRevenue, .companyStock, .companyCompare:
+        case .portfolio, .allocation, .topMover, .watchlist, .marketOverview, .companyStock:
+            // Prices: as often as iOS allows (see `LivePrices.reloadInterval`).
+            return Plan(dates: [now], policy: .after(now.addingTimeInterval(LivePrices.reloadInterval)))
+        case .companySnapshot, .companyRevenue, .companyCompare:
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(3 * 3600)))
         case .currency:
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(FXService.refreshInterval)))

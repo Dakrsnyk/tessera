@@ -173,7 +173,8 @@ struct WeekCard<Content: View>: View {
 // MARK: - The week as a table
 
 /// The week as a table, in the style of the app: a column a day (Monday first), the hours down the
-/// side, each thing of the day a colored block at its time (side by side when they overlap), and what
+/// side, each thing of the day a colored block at its time (side by side when they overlap, with its
+/// name, then where it takes place and its start time when there is room), and what
 /// has no time (a workout, a task of the day) in a band above the hours. A tap on a day's header picks
 /// that day. `compact`: the small version of « Mon Quotidien », blocks without text.
 struct WeekTimetable: View {
@@ -351,10 +352,10 @@ struct WeekTimetable: View {
                     let top: CGFloat = CGFloat(max(block.start, first) - first) / 60 * hourHeight
                     Group {
                         if let onOpen {
-                            Button { onOpen(block.item) } label: { blockView(block) }
+                            Button { onOpen(block.item) } label: { blockView(block, height: length) }
                                 .buttonStyle(.plain)
                         } else {
-                            blockView(block)
+                            blockView(block, height: length)
                         }
                     }
                     .frame(width: max(4, width - 1), height: length)
@@ -377,19 +378,27 @@ struct WeekTimetable: View {
         .frame(height: height)
     }
 
+    /// `height`: the block's height on screen, which says what fits under its title.
     @ViewBuilder
-    private func blockView(_ block: Placed) -> some View {
+    private func blockView(_ block: Placed, height: CGFloat) -> some View {
         let shape = RoundedRectangle(cornerRadius: compact ? 2.5 : 5, style: .continuous)
         if compact {
             shape.fill(Color(hex: block.item.colorHex))
                 .opacity(block.item.isDone == true ? 0.45 : 1)
         } else {
+            let lines = Self.lines(height: height, minutes: block.end - block.start, hasPlace: block.item.place != nil)
             VStack(alignment: .leading, spacing: 0) {
                 Text(block.item.title)
                     .font(.system(size: 9, weight: .semibold))
                     .lineLimit(3)
                     .minimumScaleFactor(0.8)
-                if block.end - block.start >= 50, let start = block.item.start {
+                if lines.place, let place = block.item.place {
+                    Text(place)
+                        .font(.system(size: 8, weight: .medium))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+                if lines.time, let start = block.item.start {
                     Text(Fmt.time(start, uses24Hour: true))
                         .font(.system(size: 8, weight: .medium))
                         .monospacedDigit()
@@ -402,8 +411,26 @@ struct WeekTimetable: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .background(Color(hex: block.item.colorHex), in: shape)
             .opacity(block.item.isDone == true ? 0.45 : 1)
-            .accessibilityElement(children: .combine)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(Self.spoken(block.item)))
         }
+    }
+
+    /// What a block of the full table writes under its title (15 points for the padding and the title's
+    /// first line, 10 for each line under it): where it takes place when there is room for it, then its
+    /// start time (from 50 minutes) when there is room for that too. A block without a place, or too
+    /// short for it, keeps its start time from 50 minutes.
+    static func lines(height: CGFloat, minutes: Int, hasPlace: Bool) -> (place: Bool, time: Bool) {
+        let showsTime = minutes >= 50
+        let below = height - 15
+        guard hasPlace, below >= 10 else { return (false, showsTime) }
+        return (true, showsTime && below >= 20)
+    }
+
+    /// What VoiceOver says of a block: its name, its time and its detail (the room of a class, the
+    /// place of an event), even when the block is too short to show them.
+    static func spoken(_ item: AgendaItem) -> String {
+        [item.title, item.timeText, item.detail ?? item.place].compactMap { $0 }.joined(separator: ", ")
     }
 
     // MARK: Layout

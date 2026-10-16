@@ -188,6 +188,8 @@ struct CryptoWidgetView: View {
         let s = context.style
         let trendUp = (coin.sparkline.last ?? 0) >= (coin.sparkline.first ?? 0)
         let lineColor = trendUp ? s.positive : s.negative
+        // An old price says when it was read, so it never passes for a fresh one.
+        let showsTime = isStale || LivePrices.isOld(coin.fetchedAt, now: context.date)
         if context.isSmall {
             VStack(alignment: .leading, spacing: 3) {
                 header(coin)
@@ -197,12 +199,13 @@ struct CryptoWidgetView: View {
                     .foregroundStyle(s.numberColor)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                changeLabel(coin)
                 if s.showsDetails {
                     sparkline(coin.sparkline, color: lineColor)
-                        .frame(height: 36)
-                        .padding(.top, 4)
+                        .frame(height: showsTime ? 26 : 32)
+                        .padding(.top, 3)
                 }
-                if isStale { staleLabel(coin) }
+                if showsTime { timeLabel(coin) }
             }
         } else {
             HStack(spacing: 14) {
@@ -217,7 +220,8 @@ struct CryptoWidgetView: View {
                         .foregroundStyle(s.numberColor)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                    if isStale { staleLabel(coin) }
+                    changeLabel(coin)
+                    timeLabel(coin)
                 }
                 .frame(width: 140, alignment: .leading)
                 VStack(alignment: .trailing, spacing: 4) {
@@ -246,11 +250,18 @@ struct CryptoWidgetView: View {
         return HStack(spacing: 6) {
             WLabel(text: coin.symbol, style: s, color: s.primary)
             Spacer(minLength: 0)
-            Text(Fmt.signedPercent(coin.change24h))
-                .font(s.text(11, .semibold).monospacedDigit())
-                .foregroundStyle(coin.change24h >= 0 ? s.positive : s.negative)
-                .lineLimit(1)
         }
+    }
+
+    /// « ▲ +1,45 % · 24 h »: the arrow and the sign still tell the way once iOS removes the colors.
+    private func changeLabel(_ coin: CoinSnapshot) -> some View {
+        let s = context.style
+        let trend = PriceChange.trend(coin.change24h)
+        return Text(PriceChange.text(coin.change24h, .day24h))
+            .font(s.text(11, .semibold).monospacedDigit())
+            .foregroundStyle(trend == true ? s.positive : (trend == false ? s.negative : s.secondary))
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
     }
 
     private func sparkline(_ values: [Double], color: Color) -> some View {
@@ -262,10 +273,13 @@ struct CryptoWidgetView: View {
         }
     }
 
-    private func staleLabel(_ coin: CoinSnapshot) -> some View {
-        Text(tr("Cours de \(Fmt.time(coin.fetchedAt, uses24Hour: context.settings.uses24HourClock))"))
+    /// « Cours de 14:05 », with the day when the price is from another one.
+    private func timeLabel(_ coin: CoinSnapshot) -> some View {
+        let clock = PriceClock(now: context.date, uses24Hour: context.settings.uses24HourClock)
+        return Text(clock.asOf(coin.fetchedAt))
             .font(context.style.text(9))
             .foregroundStyle(context.style.secondary)
+            .lineLimit(1)
     }
 }
 

@@ -17,7 +17,7 @@ enum BusinessTiles {
         case .businessDashboard: return dashboard(data.business, now: now, currency: currency)
         case .companySnapshot: return company(data)
         case .companyRevenue: return quarterly(data)
-        case .companyStock: return stock(data)
+        case .companyStock: return stock(data, clock: PriceClock(now: now, uses24Hour: context.settings.uses24HourClock), isLarge: context.isLarge)
         case .companyCompare: return compare(data)
         default: return TileFactory.placeholder(context.design.kind)
         }
@@ -210,7 +210,7 @@ enum BusinessTiles {
         return tile
     }
 
-    static func stock(_ data: DomainData) -> Tile {
+    static func stock(_ data: DomainData, clock: PriceClock = PriceClock(), isLarge: Bool = true) -> Tile {
         guard let company = data.companies.first ?? data.following.followed.first.map({ ref in
             CompanyFinancials(ref: ref, annualRevenue: [], quarterlyRevenue: [], annualNetIncome: [], sharesOutstanding: nil, fetchedAt: Date())
         }) else {
@@ -219,19 +219,21 @@ enum BusinessTiles {
         var tile = Tile(title: company.ref.name, symbol: "chart.line.uptrend.xyaxis.circle")
         if let quote = data.stocks[company.ref.ticker] {
             tile.value = Fmt.money(quote.price, currency: "USD", decimals: 2)
-            tile.caption = tr("\(company.ref.ticker) · \(Fmt.signedPercent(quote.changePercent)) aujourd'hui")
-            tile.trend = quote.changePercent >= 0
+            // Since the previous close, which is the last session's move while the market is shut.
+            tile.caption = "\(company.ref.ticker) · \(PriceChange.text(quote.changePercent, .session))"
+            tile.trend = PriceChange.trend(quote.changePercent)
             if let shares = company.sharesOutstanding {
                 tile.detail = tr("Capitalisation ≈ \(BigNumber.compact(quote.price * shares))")
             }
-            tile.footnote = tr("Cours : Finnhub · \(MoneyTiles.disclaimer)")
+            tile.footnote = MoneyTiles.priceNote(quote.priceTime, source: "Finnhub", clock: clock, isLarge: isLarge)
+            tile.inline = "\(company.ref.ticker) \(tile.value) \(PriceChange.percent(quote.changePercent))"
         } else {
             tile.value = company.ref.ticker
             tile.caption = tr("Cours non disponible pour le moment")
             tile.detail = company.latestRevenue.map { tr("Revenus \($0.label) : \(BigNumber.compact($0.value))") }
             tile.footnote = source
+            tile.inline = "\(company.ref.ticker) \(tile.value)"
         }
-        tile.inline = "\(company.ref.ticker) \(tile.value)"
         return tile
     }
 

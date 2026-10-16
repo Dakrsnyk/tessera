@@ -11,6 +11,9 @@ struct SalesEntry: Codable, Hashable, Identifiable {
     /// Where it came from when it wasn't typed (`BusinessSource`), and its id there.
     var source: String?
     var externalID: String?
+    /// The amount as the file or Stripe gave it, when it was in another currency than the app's
+    /// (`amount` is then the converted one). Nil when typed by hand or already in the app's currency.
+    var original: ForeignAmount?
 }
 
 struct BusinessExpense: Codable, Hashable, Identifiable {
@@ -20,6 +23,18 @@ struct BusinessExpense: Codable, Hashable, Identifiable {
     var label: String
     var source: String?
     var externalID: String?
+    var original: ForeignAmount?
+}
+
+/// An amount that came in another currency, before it was converted into the app's (`CurrencyConversion`).
+struct ForeignAmount: Codable, Hashable {
+    var amount: Double
+    /// ISO code (« USD »).
+    var currency: String
+    /// What one unit of `currency` was worth in the app's currency (reference rate of the European Central Bank).
+    var rate: Double
+    /// The day of that rate (yyyy-MM-dd): the day of the operation, or the business day before it.
+    var rateDay: String
 }
 
 struct SubscriptionSnapshot: Codable, Hashable, Identifiable {

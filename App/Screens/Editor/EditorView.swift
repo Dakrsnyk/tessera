@@ -81,9 +81,8 @@ struct WidgetStudio: View {
     private var edited: Binding<WidgetDesign> { $designs[index] }
     private var hasChanges: Bool { isNew || designs != originals }
     private var needsPremium: Bool { !model.isPremium && designs.contains(where: \.usesPremiumFeatures) }
-    private var exceedsFreeLimit: Bool {
-        isNew && !model.isPremium && model.designs.count + designs.count > AppModel.freeDesignLimit
-    }
+    /// New widgets beyond the free limit (photos and quotes never count).
+    private var exceedsFreeLimit: Bool { isNew && !model.canSave(adding: designs) }
 
     private var title: String {
         if !isNew { return tr("Studio") }
@@ -617,7 +616,7 @@ struct WidgetStudio: View {
     // MARK: Actions
 
     private func save() {
-        if needsPremium || (isNew && !model.canCreateDesign) || exceedsFreeLimit {
+        if needsPremium || exceedsFreeLimit {
             // The paywall says what this save needs: the Premium settings used, or more room.
             paywall = needsPremium ? PaywallContext.designs(designs.filter(\.usesPremiumFeatures)) : PaywallContext.designLimit
             return

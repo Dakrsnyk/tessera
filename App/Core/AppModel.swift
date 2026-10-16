@@ -8,7 +8,8 @@ import WidgetKit
 @MainActor
 @Observable
 final class AppModel {
-    static let freeDesignLimit = 8
+    /// Widgets the free plan keeps. Photo and quote widgets don't count: they are unlimited.
+    static let freeDesignLimit = 3
     static let freeHabitLimit = 5
 
     private(set) var designs: [WidgetDesign] = []
@@ -230,7 +231,33 @@ final class AppModel {
 
     // MARK: Designs
 
-    var canCreateDesign: Bool { isPremium || designs.count < Self.freeDesignLimit }
+    /// Photo and quote widgets (« Photos et citations ») are unlimited in the free plan; every other widget
+    /// counts, a combined widget too (whatever its first part).
+    static func countsTowardFreeLimit(_ design: WidgetDesign) -> Bool {
+        design.isCombo || !design.kind.isMadeInItsMiniApp
+    }
+
+    /// The one rule for every new widget in the free plan (Studio, Store, duplicate, merge): the widgets that
+    /// count stay within the limit, or at least don't grow. Whoever already has more keeps them all, working,
+    /// and can still merge them, delete them or add photos and quotes.
+    static func fitsFreePlan(saved: [WidgetDesign], adding added: [WidgetDesign], removing removed: [WidgetDesign] = []) -> Bool {
+        let removedIDs = Set(removed.map(\.id))
+        let now = saved.filter { countsTowardFreeLimit($0) }.count
+        let after = now - saved.filter { removedIDs.contains($0.id) && countsTowardFreeLimit($0) }.count
+            + added.filter { countsTowardFreeLimit($0) }.count
+        return after <= freeDesignLimit || after <= now
+    }
+
+    /// The saved widgets that count toward the free limit.
+    var limitedDesignCount: Int { designs.filter { Self.countsTowardFreeLimit($0) }.count }
+
+    /// Room for one more widget that counts (photo and quote widgets always have room).
+    var canCreateDesign: Bool { isPremium || limitedDesignCount < Self.freeDesignLimit }
+
+    /// Whether these new widgets can be saved, the ones replaced by them (a merge) taken off first.
+    func canSave(adding added: [WidgetDesign], removing removed: [WidgetDesign] = []) -> Bool {
+        isPremium || Self.fitsFreePlan(saved: designs, adding: added, removing: removed)
+    }
 
     var recentDesigns: [WidgetDesign] {
         designs.sorted { ($0.lastUsedAt ?? $0.updatedAt) > ($1.lastUsedAt ?? $1.updatedAt) }
@@ -286,7 +313,7 @@ final class AppModel {
 
     /// A copy with the same content and look. A variant is the same copy, meant to be restyled.
     func duplicate(_ design: WidgetDesign, asVariant: Bool = false) -> WidgetDesign? {
-        guard canCreateDesign else { return nil }
+        guard canSave(adding: [design]) else { return nil }
         var copy = design
         copy.id = UUID()
         copy.name = asVariant ? tr("\(design.name) (variante)") : tr("\(design.name) (copie)")
@@ -312,12 +339,13 @@ final class AppModel {
         install(designs: pack.designs())
     }
 
-    /// Saves each design as a new widget, within the free limit. Returns how many were added.
+    /// Saves each design as a new widget, within the free limit (photos and quotes always fit): the first
+    /// ones that fit, in order. Returns how many were added.
     @discardableResult
     func install(designs: [WidgetDesign]) -> Int {
         var added = 0
         for design in designs {
-            guard canCreateDesign else { break }
+            guard canSave(adding: [design]) else { break }
             save(design)
             added += 1
         }

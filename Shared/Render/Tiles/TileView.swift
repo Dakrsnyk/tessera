@@ -1319,7 +1319,7 @@ struct MonthDots: View {
 /// The week's schedule in a large widget: a column a day, each entry a block in its color, with its
 /// name when the block is tall enough.
 /// A week at a glance: each day with its letter and its date, the hours down the side with a line
-/// across, each entry a block with its name and its start time when there is room.
+/// across, each entry a block with its name, its room and its start time when there is room.
 struct ScheduleWeek: View {
     let blocks: [ScheduleBlock]
     let today: Int?
@@ -1388,16 +1388,22 @@ struct ScheduleWeek: View {
             ForEach(Array(blocks.filter { $0.day == day }.enumerated()), id: \.offset) { item in
                 let block = item.element
                 let blockHeight = max(4, (block.end - block.start) * height)
+                let lines = Self.lines(height: blockHeight, hasRoom: block.room != nil)
                 RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
                     .fill(Color(hex: block.colorHex))
                     .frame(height: blockHeight)
                     .overlay(alignment: .topLeading) {
-                        if blockHeight > 14 {
+                        if lines.title > 0 {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text(block.title)
                                     .font(.system(size: 7, weight: .bold))
-                                    .lineLimit(blockHeight > 34 ? 2 : 1)
-                                if blockHeight > 24, let time = block.time {
+                                    .lineLimit(lines.title)
+                                if lines.room, let room = block.room {
+                                    Text(room)
+                                        .font(.system(size: 6, weight: .semibold))
+                                        .lineLimit(1)
+                                }
+                                if lines.time, let time = block.time {
                                     Text(time)
                                         .font(.system(size: 6, weight: .semibold))
                                         .opacity(0.85)
@@ -1409,11 +1415,28 @@ struct ScheduleWeek: View {
                             .padding(2)
                         }
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Text(Self.spoken(block)))
                     .offset(y: block.start * height)
             }
         }
         .frame(maxWidth: .infinity)
         .frame(height: height, alignment: .top)
+    }
+
+    /// What a block writes, by its height in points (lines of 8 points for the name, 7 under it,
+    /// padding included): its name from 14 (on two lines from 34, from 38 with its room), its room
+    /// under the name from 24, its start time from 24 (from 30 under its room). Too short, it says nothing.
+    static func lines(height: CGFloat, hasRoom: Bool) -> (title: Int, room: Bool, time: Bool) {
+        guard height > 14 else { return (0, false, false) }
+        guard hasRoom, height > 24 else { return (height > 34 ? 2 : 1, false, height > 24) }
+        return (height > 38 ? 2 : 1, true, height > 30)
+    }
+
+    /// What VoiceOver says of a block: its name, its start time and its room, even when the block is
+    /// too short to show them.
+    static func spoken(_ block: ScheduleBlock) -> String {
+        [block.title, block.time, block.room].compactMap { $0 }.joined(separator: ", ")
     }
 }
 

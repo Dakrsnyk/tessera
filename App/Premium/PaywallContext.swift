@@ -34,12 +34,12 @@ extension PaywallContext {
         )
     }
 
-    /// More widgets than the free plan keeps.
+    /// More widgets than the free plan keeps (photo and quote widgets are unlimited).
     static var designLimit: PaywallContext {
         PaywallContext(
             symbol: "square.stack.3d.up.fill",
             title: tr("Plus de \(AppModel.freeDesignLimit) widgets"),
-            detail: tr("La version gratuite garde \(AppModel.freeDesignLimit) widgets. Avec Premium, enregistre-en autant que tu veux, et garde tes variantes.")
+            detail: tr("La version gratuite garde \(AppModel.freeDesignLimit) widgets, et autant de photos et de citations que tu veux. Avec Premium, enregistre tous les widgets que tu veux, et garde tes variantes.")
         )
     }
 

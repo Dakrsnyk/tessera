@@ -25,6 +25,12 @@ struct BusinessBatch: Hashable {
     var skipped = 0
     /// The currencies met (lowercase ISO codes), to warn when they differ from the app's.
     var currencies: Set<String> = []
+    /// The currency of each entry whose line said it (`importKey` → « USD »), to convert it
+    /// (`converted(with:)`). An entry without one is in the app's currency.
+    var entryCurrencies: [String: String] = [:]
+    /// Currencies whose amounts couldn't be converted for lack of a rate: they are still as they came, so
+    /// the batch is merged only if the person chooses to keep them that way.
+    var unconverted: Set<String> = []
 }
 
 /// What a merge did.
@@ -50,6 +56,14 @@ struct BusinessConnections: Codable, Hashable {
         var syncedUntil: Date?
         var lastError: String?
         var lastResult: BusinessMergeResult?
+        /// The last sync stopped for lack of exchange rates for these currencies: the card offers to sync
+        /// without conversion.
+        var unconvertedCurrencies: [String]?
+        /// The currencies Stripe's amounts were converted from, at the ECB rate of their day.
+        var convertedCurrencies: [String]?
+        /// Currencies the ECB doesn't publish that the person chose to keep as Stripe gives them: the next
+        /// syncs keep them too.
+        var keptCurrencies: [String]?
     }
 
     struct ImportRecord: Codable, Hashable {
@@ -183,16 +197,26 @@ enum BusinessCSV {
             guard seen.insert(id).inserted else { continue }
             let currency = value(currencyColumn).lowercased()
             if !currency.isEmpty { batch.currencies.insert(currency) }
+            // Kept as the file gives them; converted afterwards with the rates of their days.
+            let code = currency.uppercased()
+            func addSale(_ sale: SalesEntry) {
+                batch.sales.append(sale)
+                if !code.isEmpty, let key = sale.importKey { batch.entryCurrencies[key] = code }
+            }
+            func addCost(_ cost: BusinessExpense) {
+                batch.expenses.append(cost)
+                if !code.isEmpty, let key = cost.importKey { batch.entryCurrencies[key] = code }
+            }
 
             let isRefund = type.contains("refund") || type.contains("rembours") || (status == "refunded" && total < 0)
             if type.contains("fee") || type.contains("frais") || (total < 0 && !isRefund && type.isEmpty) {
-                batch.expenses.append(BusinessExpense(date: when, amount: abs(total), label: label.isEmpty ? tr("Dépense importée") : label,
-                                                      source: BusinessSource.csv.rawValue, externalID: id))
+                addCost(BusinessExpense(date: when, amount: abs(total), label: label.isEmpty ? tr("Dépense importée") : label,
+                                        source: BusinessSource.csv.rawValue, externalID: id))
                 continue
             }
             if isRefund {
-                batch.sales.append(SalesEntry(date: when, amount: -abs(total), orders: 0, note: label.isEmpty ? tr("Remboursement") : label,
-                                              source: BusinessSource.csv.rawValue, externalID: id))
+                addSale(SalesEntry(date: when, amount: -abs(total), orders: 0, note: label.isEmpty ? tr("Remboursement") : label,
+                                   source: BusinessSource.csv.rawValue, externalID: id))
                 continue
             }
             // Refunded in full, without the refunded amount in the file (Shopify): no sale left.
@@ -201,11 +225,11 @@ enum BusinessCSV {
                 continue
             }
             let refunded = amount(value(refundedColumn)) ?? 0
-            batch.sales.append(SalesEntry(date: when, amount: total - abs(refunded), orders: 1, note: label,
-                                          source: BusinessSource.csv.rawValue, externalID: id))
+            addSale(SalesEntry(date: when, amount: total - abs(refunded), orders: 1, note: label,
+                               source: BusinessSource.csv.rawValue, externalID: id))
             if let fee = amount(value(feeColumn)), fee != 0 {
-                batch.expenses.append(BusinessExpense(date: when, amount: abs(fee), label: tr("Frais de paiement"),
-                                                      source: BusinessSource.csv.rawValue, externalID: "\(id)-fee"))
+                addCost(BusinessExpense(date: when, amount: abs(fee), label: tr("Frais de paiement"),
+                                        source: BusinessSource.csv.rawValue, externalID: "\(id)-fee"))
             }
         }
         return batch
@@ -354,37 +378,151 @@ enum StripeTransactions {
         zeroDecimal.contains(currency.lowercased()) ? Double(amount) : Double(amount) / 100
     }
 
-    static func batch(from transactions: [Transaction]) -> BusinessBatch {
+    /// The transactions as sales and costs. With `history`, an amount in another currency than the app's is
+    /// converted at the rate of its day (each payment, refund and fee, before the fees are added up by day);
+    /// without a rate it stays as it was and its currency goes in `unconverted`.
+    static func batch(from transactions: [Transaction], history: FXHistory? = nil) -> BusinessBatch {
         var batch = BusinessBatch()
-        var feesByDay: [String: (date: Date, amount: Double)] = [:]
+        var feesByDay: [String: (date: Date, byCurrency: [String: Double])] = [:]
+        var unconverted = Set<String>()
         let source = BusinessSource.stripe.rawValue
+        func money(_ value: Double, _ currency: String, on date: Date) -> (amount: Double, original: ForeignAmount?) {
+            guard let history else { return (value, nil) }
+            if let converted = CurrencyConversion.convert(value, currency, on: date, with: history) { return converted }
+            unconverted.insert(currency.uppercased())
+            return (value, nil)
+        }
+        func addFee(_ value: Double, _ currency: String, on date: Date) {
+            let key = DateMath.dayKey(date)
+            var day = feesByDay[key] ?? (date: date, byCurrency: [:])
+            day.byCurrency[currency, default: 0] += value
+            feesByDay[key] = day
+        }
         for transaction in transactions {
             let date = Date(timeIntervalSince1970: transaction.created)
-            let value = units(transaction.amount, transaction.currency)
-            batch.currencies.insert(transaction.currency.lowercased())
+            let currency = transaction.currency.lowercased()
+            let value = units(transaction.amount, currency)
+            batch.currencies.insert(currency)
             switch transaction.type {
             case "charge", "payment":
-                batch.sales.append(SalesEntry(date: date, amount: value, orders: 1, note: transaction.description ?? "",
-                                              source: source, externalID: transaction.id))
+                let sale = money(value, currency, on: date)
+                batch.sales.append(SalesEntry(date: date, amount: sale.amount, orders: 1, note: transaction.description ?? "",
+                                              source: source, externalID: transaction.id, original: sale.original))
             case "refund", "payment_refund", "payment_failure_refund":
-                batch.sales.append(SalesEntry(date: date, amount: -abs(value), orders: 0, note: transaction.description ?? tr("Remboursement"),
-                                              source: source, externalID: transaction.id))
+                let refund = money(-abs(value), currency, on: date)
+                batch.sales.append(SalesEntry(date: date, amount: refund.amount, orders: 0, note: transaction.description ?? tr("Remboursement"),
+                                              source: source, externalID: transaction.id, original: refund.original))
             case "stripe_fee", "tax_fee", "application_fee":
-                let key = DateMath.dayKey(date)
-                feesByDay[key] = (feesByDay[key]?.date ?? date, (feesByDay[key]?.amount ?? 0) + abs(value))
+                addFee(abs(value), currency, on: date)
                 continue
             default:
                 batch.skipped += 1
             }
             // The fee taken on a payment or a refund.
             if transaction.fee != 0 {
-                let key = DateMath.dayKey(date)
-                feesByDay[key] = (feesByDay[key]?.date ?? date, (feesByDay[key]?.amount ?? 0) + units(transaction.fee, transaction.currency))
+                addFee(units(transaction.fee, currency), currency, on: date)
             }
         }
-        for (key, fee) in feesByDay where fee.amount != 0 {
-            batch.expenses.append(BusinessExpense(date: fee.date, amount: fee.amount, label: tr("Frais Stripe"), source: source, externalID: "fees-\(key)"))
+        for (key, fee) in feesByDay {
+            // One cost a day, whatever the currencies: its original amount is kept when there is a single one.
+            let parts = fee.byCurrency.filter { $0.value != 0 }.sorted { $0.key < $1.key }
+            var total = 0.0
+            var originals: [ForeignAmount] = []
+            for part in parts {
+                let converted = money(part.value, part.key, on: fee.date)
+                total += converted.amount
+                if let original = converted.original { originals.append(original) }
+            }
+            guard total != 0 else { continue }
+            let amount = history.map { CurrencyConversion.rounded(total, in: $0.home) } ?? total
+            batch.expenses.append(BusinessExpense(date: fee.date, amount: amount, label: tr("Frais Stripe"), source: source, externalID: "fees-\(key)",
+                                                  original: parts.count == 1 ? originals.first : nil))
         }
+        batch.unconverted = unconverted
         return batch
+    }
+}
+
+// MARK: - Currencies
+
+/// Amounts in another currency than the app's, brought into it at the reference rate of the European
+/// Central Bank of their own day (or of the business day before: no rate on weekends and holidays), rounded
+/// to the cent. What the file or Stripe said is kept on the entry (`ForeignAmount`). Without a rate nothing
+/// is guessed: the amount stays as it came and the person is told.
+enum CurrencyConversion {
+    /// To the cent; to the unit for currencies without cents (yen, won).
+    static func rounded(_ value: Double, in currency: String) -> Double {
+        let factor = StripeTransactions.zeroDecimal.contains(currency.lowercased()) ? 1.0 : 100.0
+        return (value * factor).rounded() / factor
+    }
+
+    /// `amount` of `currency` on `date` in the history's currency, with what it was (nil when it was
+    /// already in it). Nil without a rate for that day or the week before.
+    static func convert(_ amount: Double, _ currency: String, on date: Date, with history: FXHistory) -> (amount: Double, original: ForeignAmount?)? {
+        let code = currency.uppercased()
+        if code.isEmpty || code == history.home.uppercased() { return (amount, nil) }
+        guard let rate = history.rate(code, on: DateMath.dayKey(date)) else { return nil }
+        return (rounded(amount * rate.value, in: history.home), ForeignAmount(amount: amount, currency: code, rate: rate.value, rateDay: rate.day))
+    }
+
+    /// The rates a file needs, for its whole period: one request per currency.
+    static func rates(for batch: BusinessBatch, home: String, now: Date = Date()) async -> FXHistory {
+        let foreign = batch.foreignCurrencies(home: home)
+        guard !foreign.isEmpty, let period = batch.period else { return FXHistory(home: home.uppercased()) }
+        return await FXService.history(of: foreign, in: home, from: period.lowerBound, to: period.upperBound, now: now)
+    }
+}
+
+extension BusinessBatch {
+    /// The currencies other than `home` some entries are in (« USD »).
+    func foreignCurrencies(home: String) -> Set<String> {
+        Set(entryCurrencies.values).subtracting([home.uppercased()])
+    }
+
+    /// From the first entry to the last.
+    var period: ClosedRange<Date>? {
+        let dates = sales.map(\.date) + expenses.map(\.date)
+        guard let first = dates.min(), let last = dates.max() else { return nil }
+        return first...last
+    }
+
+    /// The batch in the history's currency, each entry at the rate of its day, its original amount kept.
+    /// An entry without a rate stays as it was and its currency goes in `unconverted`. Ids don't change:
+    /// importing the same file again still adds nothing.
+    func converted(with history: FXHistory) -> BusinessBatch {
+        var result = self
+        for index in result.sales.indices {
+            let sale = result.sales[index]
+            guard sale.original == nil, let key = sale.importKey, let currency = entryCurrencies[key] else { continue }
+            if let value = CurrencyConversion.convert(sale.amount, currency, on: sale.date, with: history) {
+                result.sales[index].amount = value.amount
+                result.sales[index].original = value.original
+            } else {
+                result.unconverted.insert(currency)
+            }
+        }
+        for index in result.expenses.indices {
+            let cost = result.expenses[index]
+            guard cost.original == nil, let key = cost.importKey, let currency = entryCurrencies[key] else { continue }
+            if let value = CurrencyConversion.convert(cost.amount, currency, on: cost.date, with: history) {
+                result.expenses[index].amount = value.amount
+                result.expenses[index].original = value.original
+            } else {
+                result.unconverted.insert(currency)
+            }
+        }
+        return result
+    }
+
+    /// The currencies converted (« USD »).
+    var convertedCurrencies: Set<String> {
+        Set(sales.compactMap { $0.original?.currency } + expenses.compactMap { $0.original?.currency })
+    }
+
+    /// The first and last days of the rates used (yyyy-MM-dd).
+    var rateDays: ClosedRange<String>? {
+        let days = sales.compactMap { $0.original?.rateDay } + expenses.compactMap { $0.original?.rateDay }
+        guard let first = days.min(), let last = days.max() else { return nil }
+        return first...last
     }
 }
