@@ -257,6 +257,20 @@ def check_release_safety():
                     problems.append(f"{os.path.relpath(path, ROOT)}:{number}: {name} used outside #if DEBUG")
 
 
+def check_internal_premium():
+    """INTERNAL_PREMIUM (Premium unlocked) comes only from the CI tag [interne], whose upload is « TestFlight
+    Internal Only » (never the App Store): never in the project, and only with that export option."""
+    pbx = open(os.path.join(ROOT, "Tessera.xcodeproj", "project.pbxproj"), encoding="utf8").read()
+    if "INTERNAL_PREMIUM" in pbx:
+        problems.append("Tessera.xcodeproj: INTERNAL_PREMIUM must never be set in the project (CI tag [interne] only)")
+    workflow = open(os.path.join(ROOT, ".github", "workflows", "build.yml"), encoding="utf8").read()
+    if "INTERNAL_PREMIUM" in workflow and "testFlightInternalTestingOnly" not in workflow:
+        problems.append("build.yml: INTERNAL_PREMIUM without the « TestFlight Internal Only » export option")
+    for path, text in FILES.items():
+        if "INTERNAL_PREMIUM" in text and not path.endswith(("Shared/Model/Settings.swift", "App/Screens/Profile/ProfileView.swift")):
+            problems.append(f"{os.path.relpath(path, ROOT)}: INTERNAL_PREMIUM is only allowed in Settings.swift and ProfileView.swift")
+
+
 def check_privacy_manifest():
     """Apple refuses an upload whose code calls these APIs without a reason in the manifest
     (Shared/ is compiled into the app and the widget extension: the manifest goes into both)."""
@@ -300,10 +314,11 @@ def check_app_icons():
 checked = check_memberwise()
 kinds = check_kinds()
 check_release_safety()
+check_internal_premium()
 check_privacy_manifest()
 icons = check_app_icons()
 if problems:
     print("\n".join(problems))
     print(f"\n{len(problems)} problem(s)")
     sys.exit(1)
-print(f"OK: {checked} memberwise calls checked, {kinds} widget kinds, {icons} app icons, Release safety and privacy manifest verified")
+print(f"OK: {checked} memberwise calls checked, {kinds} widget kinds, {icons} app icons, Release safety, internal Premium build and privacy manifest verified")

@@ -58,7 +58,10 @@ jobs:
       ADKIT: ${{ contains(github.event.head_commit.message, '[adkit]') }}
       # [testflight] signs a Release build with the Apple Developer account and uploads it to TestFlight
       # (no simulator build, no tests, no test IPA). Secrets: see scripts/signing/README.md.
-      TESTFLIGHT: ${{ contains(github.event.head_commit.message, '[testflight]') }}
+      # [interne] does the same with Premium unlocked (INTERNAL_PREMIUM), uploaded « TestFlight Internal
+      # Only »: Apple never lets that build reach the App Store or external testers.
+      TESTFLIGHT: ${{ contains(github.event.head_commit.message, '[testflight]') || contains(github.event.head_commit.message, '[interne]') }}
+      INTERNE: ${{ contains(github.event.head_commit.message, '[interne]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -144,8 +147,18 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
         run: |
           set -o pipefail
-          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Release             -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/Ardane.xcarchive             DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CURRENT_PROJECT_VERSION=${{ github.run_number }} archive 2>&1 | tee archive.log | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
+          # [interne]: Premium unlocked, and the upload is restricted to internal testers.
+          EXTRA=()
+          INTERNAL_ONLY=""
+          KIND="version 1.0"
+          if [ "$INTERNE" = "true" ]; then
+            EXTRA=('SWIFT_ACTIVE_COMPILATION_CONDITIONS=$(inherited) INTERNAL_PREMIUM')
+            INTERNAL_ONLY="<key>testFlightInternalTestingOnly</key><true/>"
+            KIND="version 1.0, interne seulement, Premium débloqué"
+          fi
+          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Release             -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/Ardane.xcarchive             DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CURRENT_PROJECT_VERSION=${{ github.run_number }} "${EXTRA[@]}" archive 2>&1 | tee archive.log | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
           grep -q "ARCHIVE SUCCEEDED" archive.log
+          if [ "$INTERNE" = "true" ]; then grep -q "INTERNAL_PREMIUM" archive.log || { echo "::error::Premium non débloqué dans la version interne" | tee -a testflight.txt; exit 1; }; fi
           cat > build/ExportOptions.plist <<PLIST
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -161,11 +174,12 @@ jobs:
             </dict>
             <key>manageAppVersionAndBuildNumber</key><false/>
             <key>uploadSymbols</key><true/>
+            $INTERNAL_ONLY
           </dict></plist>
           PLIST
           xcodebuild -exportArchive -archivePath build/Ardane.xcarchive -exportOptionsPlist build/ExportOptions.plist             -exportPath build/export -authenticationKeyPath "$RUNNER_TEMP/AuthKey_$ASC_KEY_ID.p8"             -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" 2>&1 | tee export.log | tail -30
           grep -q "EXPORT SUCCEEDED" export.log
-          echo "uploaded: build ${{ github.run_number }} (version 1.0)" | tee -a testflight.txt
+          echo "uploaded: build ${{ github.run_number }} ($KIND)" | tee -a testflight.txt
 
       - name: Build for the simulator
         id: sim

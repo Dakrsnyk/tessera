@@ -170,6 +170,12 @@ struct PremiumState: Codable, Hashable {
         #if DEBUG
         if DebugPremium.isUnlocked { return true }
         #endif
+        #if INTERNAL_PREMIUM
+        // Internal TestFlight build only (CI tag [interne], uploaded « TestFlight Internal Only »: Apple keeps
+        // it from the App Store and from external testers). Never set in the project.
+        return true
+        #else
         return hasPurchase(at: date)
+        #endif
     }
 }

@@ -438,6 +438,9 @@ struct ProfileView: View {
         #if DEBUG
         if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr("Débloqué en mode test") }
         #endif
+        #if INTERNAL_PREMIUM
+        if !model.premium.hasPurchase() { return tr("Débloqué en mode test") }
+        #endif
         switch model.premium.productID ?? "" {
         case PremiumConfiguration.lifetimeID: return tr("Accès à vie")
         case PremiumConfiguration.yearlyID, PremiumConfiguration.monthlyID:
