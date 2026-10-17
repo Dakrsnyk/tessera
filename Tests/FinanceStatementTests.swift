@@ -21,7 +21,7 @@ final class FinanceStatementTests: XCTestCase {
         let lines = BudgetMath.statement(state, from: september(1), now: september(10))
         XCTAssertEqual(lines.count, 3, "August is before the start")
         XCTAssertEqual(lines.map(\.amount), [-45, -80, 1_500], "Newest first, expenses negative")
-        XCTAssertEqual(lines.map(\.balance), [1_375, 1_455, 1_500], "The balance after each line")
+        XCTAssertEqual(lines.map(\.balance), [1_375, 1_420, 1_500], "The balance after each line (−80 at noon, then −45 at 18:00)")
         XCTAssertEqual(lines.first?.balance, BudgetMath.balanceHistory(state, from: september(1), now: september(10)).last?.balance)
         XCTAssertTrue(lines.allSatisfy { $0.kind != .opening })
         XCTAssertTrue(BudgetMath.statement(state, from: september(12), now: september(10)).isEmpty)
