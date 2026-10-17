@@ -70,7 +70,7 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 
 ## Suite du 2026-10-17 : relevé Finances, suppression d'une séance
 
-- Run 214 compile ; run 216 : 331 tests réussis, 0 échec (le run 215 avait perdu le réseau à l'envoi du rapport, puis un test du relevé attendait un mauvais solde) ; build 217 sur TestFlight (normal), puis version interne Premium.
+- Run 214 compile ; run 216 : 331 tests réussis, 0 échec (le run 215 avait perdu le réseau à l'envoi du rapport, puis un test du relevé attendait un mauvais solde) ; build 217 sur TestFlight (normal), puis build 218 interne Premium (« Internal Only » vérifié).
 - À vérifier sur l'iPhone : toucher le solde (relevé), ligne « Dépenses fixes », Mes infos de Finances allégé, suppression d'une séance puis la refaire.
 
 ## À ne pas oublier
