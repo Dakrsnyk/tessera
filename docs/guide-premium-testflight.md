@@ -67,3 +67,13 @@ Préférer des **testeurs externes** (lien ou courriel). Des testeurs internes d
 - Un ami qui a déjà utilisé l'offre de lancement ne peut pas la reprendre.
 - Les achats de test ne passent pas à la version App Store.
 - Il est interdit de faire payer l'accès à la bêta (directive 2.2).
+
+## En attendant le contrat payant : des amis en testeurs internes, Premium débloqué (2026-10-17)
+
+La version `[interne]` (Premium débloqué, « Internal Only ») ne va qu'aux testeurs internes, c'est-à-dire des utilisateurs de ton compte App Store Connect (100 au plus). Inviter seulement des personnes de confiance.
+
+1. App Store Connect › **Utilisateurs et accès** › (+) : prénom, nom, courriel de l'identifiant Apple de l'ami ; rôle **Marketing** ; accès aux apps limité à **Ardane** › **Inviter**. L'ami accepte l'invitation reçue par courriel.
+2. **Apps › Ardane › TestFlight** › (+) à côté de **Tests internes** › groupe « Amis » › cocher **Distribution automatique** › ajouter les amis (une fois l'invitation acceptée).
+3. Le groupe reçoit la dernière version interne (la plus récente marquée « Interne ») ; avec la distribution automatique, chaque nouvelle version lui parvient seule. Une version normale `[testflight]` arrive aussi et n'a pas Premium : Claude envoie une version interne après chaque série.
+4. L'ami installe **TestFlight** (iPhone en iOS 17 ou plus), ouvre l'invitation reçue par courriel › **Accepter** › **Installer**. Vérifier dans Ardane › Profil › Premium : « Débloqué en mode test ».
+5. Une version TestFlight expire après 90 jours.
