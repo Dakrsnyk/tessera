@@ -65,7 +65,7 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 
 ## Série du 2026-10-17 : retour en arrière Fitness, chrono d'étude en direct, encouragements, CSV
 
-- Fait (détail dans [[Demandes]]) : run 208 compile ; run 209 : 323 tests logiques réussis, 0 échec (dont `WorkoutUndoTests`, `StudyLiveActivityTests`, `EncouragementsTests`, `BusinessCSVTests` avec le fichier de l'utilisateur) ; build 210 envoyé sur TestFlight (version normale), puis version interne Premium débloqué.
+- Fait (détail dans [[Demandes]]) : run 208 compile ; run 209 : 323 tests logiques réussis, 0 échec (dont `WorkoutUndoTests`, `StudyLiveActivityTests`, `EncouragementsTests`, `BusinessCSVTests` avec le fichier de l'utilisateur) ; build 210 envoyé sur TestFlight (version normale), puis build 211 interne Premium débloqué (« Internal Only » vérifié).
 - À vérifier sur l'iPhone : flèche retour et croix sur l'écran verrouillé et la Dynamic Island ; activité en direct du chrono d'étude ; encouragements (réglage dans Profil › Rappels, notifications autorisées) ; réimport du CSV de test (7 dépenses, 5 revenus).
 
 ## À ne pas oublier
