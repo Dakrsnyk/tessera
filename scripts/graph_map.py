@@ -247,7 +247,7 @@ MODULES = [
          "Limites gratuites (3 widgets, photos et citations illimitées, 5 habitudes), accents gratuits (`Palette`), cadenas Premium (`PremiumLock`).",
          "Premium depuis le 2026-10-15 : statistiques détaillées de chaque mini-app, toute la bibliothèque d'exercices et leurs données, tous les nutriments sauf calories, protéines, glucides et lipides, l'icône de l'app (l'icône en place est gardée) ; les données ne sont jamais effacées.",
          "Builds DEBUG : déverrouillage de test (`DebugPremium`), jamais en Release (vérifié par `scripts/check_swift.py` et la CI).",
-         "Version TestFlight interne : condition `INTERNAL_PREMIUM` passée seulement par la CI (jamais dans le projet), Premium débloqué, envoi « Internal Only » vérifié par l'API (`scripts/signing/check_internal_build.py`).",
+         "Version TestFlight interne (à envoyer après chaque série tant que le contrat payant n.est pas actif) : condition `INTERNAL_PREMIUM` passée seulement par la CI (jamais dans le projet), Premium débloqué, envoi « Internal Only » vérifié par l'API (`scripts/signing/check_internal_build.py`).",
      ],
      "sources": ["App/Premium/PremiumStore.swift", "App/Premium/PaywallView.swift", "App/Premium/PaywallContext.swift", "App/Premium/PremiumLock.swift",
                  "App/Premium/PremiumConfiguration.swift", "Shared/Theme/Palette.swift", "Shared/Support/DebugPremium.swift", "Config/Tessera.storekit"],
