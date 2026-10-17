@@ -68,6 +68,11 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - Fait (détail dans [[Demandes]]) : run 208 compile ; run 209 : 323 tests logiques réussis, 0 échec (dont `WorkoutUndoTests`, `StudyLiveActivityTests`, `EncouragementsTests`, `BusinessCSVTests` avec le fichier de l'utilisateur) ; build 210 envoyé sur TestFlight (version normale), puis build 211 interne Premium débloqué (« Internal Only » vérifié).
 - À vérifier sur l'iPhone : flèche retour et croix sur l'écran verrouillé et la Dynamic Island ; activité en direct du chrono d'étude ; encouragements (réglage dans Profil › Rappels, notifications autorisées) ; réimport du CSV de test (7 dépenses, 5 revenus).
 
+## Suite du 2026-10-17 : relevé Finances, suppression d'une séance
+
+- Run 214 compile ; run 216 : 331 tests réussis, 0 échec (le run 215 avait perdu le réseau à l'envoi du rapport, puis un test du relevé attendait un mauvais solde) ; envoi TestFlight normal puis interne Premium.
+- À vérifier sur l'iPhone : toucher le solde (relevé), ligne « Dépenses fixes », Mes infos de Finances allégé, suppression d'une séance puis la refaire.
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
