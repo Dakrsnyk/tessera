@@ -144,8 +144,11 @@ struct BusinessSourcesCard: View {
         guard case let .success(url) = result else { return }
         let scoped = url.startAccessingSecurityScopedResource()
         defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        // Excel's « Texte Unicode » is UTF-16 (it starts with its byte order mark).
+        let isUTF16 = { (data: Data) in data.starts(with: [0xFF, 0xFE]) || data.starts(with: [0xFE, 0xFF]) }
         guard let data = try? Data(contentsOf: url),
-              let text = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .windowsCP1252) else {
+              let text = (isUTF16(data) ? String(data: data, encoding: .utf16) : nil)
+                ?? String(data: data, encoding: .utf8) ?? String(data: data, encoding: .windowsCP1252) else {
             importError = tr("Le fichier n'a pas pu être lu.")
             return
         }
@@ -178,6 +181,9 @@ struct BusinessImportSheet: View {
     @State private var converted: BusinessBatch?
     @State private var history: FXHistory?
     @State private var attempt = 0
+    /// What the file holds, when nothing in it says (`directionGuessed`): sales unless the person says costs.
+    @State private var holdsExpenses = false
+    @State private var includesPending = true
 
     private var home: String { model.settings.currencyCode }
     private var foreign: [String] { preview.batch.foreignCurrencies(home: home).sorted() }
@@ -191,11 +197,20 @@ struct BusinessImportSheet: View {
 
     private var failed: Bool { !(converted?.unconverted.isEmpty ?? true) }
 
+    /// The batch as the person chose: costs rather than sales, and with or without what isn't paid yet.
+    private func chosen(_ batch: BusinessBatch) -> BusinessBatch {
+        var result = batch
+        if preview.batch.directionGuessed && holdsExpenses { result = result.asExpenses() }
+        if !includesPending { result = result.withoutPending() }
+        return result
+    }
+
     var body: some View {
-        let batch = ready ?? preview.batch
+        let batch = chosen(ready ?? preview.batch)
+        let pending = preview.batch.pendingCount
         let revenue = batch.sales.reduce(0) { $0 + $1.amount }
         let costs = batch.expenses.reduce(0) { $0 + $1.amount }
-        SheetForm(title: tr("Importer"), canSave: ready.map { !$0.sales.isEmpty || !$0.expenses.isEmpty } ?? false, onSave: importReady) {
+        SheetForm(title: tr("Importer"), canSave: ready.map(chosen).map { !$0.sales.isEmpty || !$0.expenses.isEmpty } ?? false, onSave: importReady) {
             Section {
                 LabeledContent(tr("Ventes et remboursements"), value: "\(batch.sales.count)")
                 LabeledContent(tr("Dépenses et frais"), value: "\(batch.expenses.count)")
@@ -224,6 +239,28 @@ struct BusinessImportSheet: View {
                     }
                 }
             }
+            if preview.batch.directionGuessed {
+                Section {
+                    Picker(tr("Ce fichier contient"), selection: $holdsExpenses) {
+                        Text(tr("Des ventes")).tag(false)
+                        Text(tr("Des dépenses")).tag(true)
+                    }
+                    .pickerStyle(.segmented)
+                    .accessibilityIdentifier("business-import-contents")
+                } header: {
+                    Text(tr("Ce fichier contient"))
+                } footer: {
+                    Text(tr("Rien dans le fichier n'indique si ce sont des ventes ou des dépenses : tous les montants sont positifs, sans colonne de type. Vérifie ce qu'il contient avant d'importer."))
+                }
+            }
+            if pending > 0 {
+                Section {
+                    Toggle(tr("Inclure les opérations non payées (\(pending))"), isOn: $includesPending)
+                        .accessibilityIdentifier("business-import-pending")
+                } footer: {
+                    Text(tr("Statut « à payer », « prévu » ou « en attente » dans le fichier."))
+                }
+            }
             if failed {
                 Section {
                     if history?.unavailable.values.contains(.unreachable) ?? false {
@@ -231,7 +268,7 @@ struct BusinessImportSheet: View {
                     }
                     Button(tr("Importer sans conversion")) {
                         // Only the currencies without a rate stay as they came; the others are converted.
-                        save(converted ?? preview.batch)
+                        save(chosen(converted ?? preview.batch))
                         dismiss()
                     }
                     .accessibilityIdentifier("business-import-unconverted")
@@ -277,7 +314,7 @@ struct BusinessImportSheet: View {
 
     private func importReady() {
         guard let ready else { return }
-        save(ready)
+        save(chosen(ready))
     }
 
     private func save(_ batch: BusinessBatch) {

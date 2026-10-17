@@ -2351,6 +2351,53 @@
         }
       }
     },
+    "%@ cette semaine, comme prévu. Bravo !": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ diese Woche, wie geplant. Bravo!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ this week, as planned. Well done!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ esta semana, como estaba previsto. ¡Bravo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cette semaine, comme prévu. Bravo !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ questa settimana, come previsto. Bravo!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週は%@、予定どおりです。お見事！"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ nesta semana, como planejado. Parabéns!"
+          }
+        }
+      }
+    },
     "%@ chacun": {
       "extractionState": "manual",
       "localizations": {
@@ -2535,6 +2582,147 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ créditos"
+          }
+        }
+      }
+    },
+    "%@ d'affilée pour « %@ ». Continue comme ça !": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ am Stück für „%@“. Weiter so!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in a row for “%@”. Keep it up!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ seguidos en «%@». ¡Sigue así!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ d'affilée pour « %@ ». Continue comme ça !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ di fila per «%@». Continua così!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%2$@」が%1$@連続。この調子で！"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ seguidos em “%@”. Continue assim!"
+          }
+        }
+      }
+    },
+    "%@ d'étude aujourd'hui. Pense à faire une pause.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gelernt heute. Denk an eine Pause."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of studying today. Remember to take a break."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de estudio hoy. Acuérdate de hacer una pausa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ d'étude aujourd'hui. Pense à faire une pause."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ di studio oggi. Ricordati di fare una pausa."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日は%@勉強しました。休憩も忘れずに。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de estudo hoje. Lembre de fazer uma pausa."
+          }
+        }
+      }
+    },
+    "%@ d'étude cette semaine : ton objectif est atteint. Bravo !": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gelernt diese Woche: Ziel erreicht. Bravo!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of studying this week: you reached your goal. Well done!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de estudio esta semana: alcanzaste tu objetivo. ¡Bravo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ d'étude cette semaine : ton objectif est atteint. Bravo !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ di studio questa settimana: obiettivo raggiunto. Bravo!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週は%@勉強し、目標を達成しました。お見事！"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de estudo nesta semana: meta atingida. Parabéns!"
           }
         }
       }
@@ -3381,6 +3569,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ gastos · último dia do mês"
+          }
+        }
+      }
+    },
+    "%@ en %@. Bien joué !": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in %@. Gut gemacht!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in %@. Nice work!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en %@. ¡Bien hecho!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ en %@. Bien joué !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in %@. Ben fatto!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@を%@で。よくできました！"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ em %@. Mandou bem!"
           }
         }
       }
@@ -4791,6 +5026,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Restam %@ kcal"
+          }
+        }
+      }
+    },
+    "%@ kcal sur %@ : pile dans ta cible aujourd'hui. Bien joué !": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal von %@: heute genau im Ziel. Gut gemacht!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal of %@: right on target today. Nice work!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal de %@: justo en tu objetivo hoy. ¡Bien hecho!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal sur %@ : pile dans ta cible aujourd'hui. Bien joué !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal su %@: oggi sei perfettamente nell'obiettivo. Ben fatto!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ / %@ kcal：今日はぴったり目標どおり。よくできました！"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal de %@: bem na meta hoje. Mandou bem!"
           }
         }
       }
@@ -6671,6 +6953,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ de %@"
+          }
+        }
+      }
+    },
+    "%@ sur %@ cette semaine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ von %@ diese Woche"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ of %@ this week"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de %@ esta semana"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sur %@ cette semaine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ su %@ questa settimana"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週 %@ / %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ de %@ nesta semana"
           }
         }
       }
@@ -24488,6 +24817,194 @@
         }
       }
     },
+    "Annuler la dernière série": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letzten Satz rückgängig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Undo last set"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deshacer la última serie"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler la dernière série"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla l'ultima serie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最後のセットを取り消す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desfazer a última série"
+          }
+        }
+      }
+    },
+    "Annuler la séance": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Training abbrechen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar el entrenamiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler la séance"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla l'allenamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウトを取り消す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar o treino"
+          }
+        }
+      }
+    },
+    "Annuler la séance ? Elle ne sera pas comptée.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Training abbrechen? Es wird nicht gezählt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel the workout? It won't be counted."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cancelar el entrenamiento? No se contará."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler la séance ? Elle ne sera pas comptée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annullare l'allenamento? Non verrà conteggiato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウトを取り消しますか？記録には残りません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar o treino? Ele não será contado."
+          }
+        }
+      }
+    },
+    "Annuler le temps d'étude": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lernzeit abbrechen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel study time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar el tiempo de estudio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler le temps d'étude"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulla il tempo di studio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "勉強時間を取り消す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelar o tempo de estudo"
+          }
+        }
+      }
+    },
     "Annulé cette fois-ci": {
       "extractionState": "manual",
       "localizations": {
@@ -35674,6 +36191,53 @@
         }
       }
     },
+    "Beau travail": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gute Arbeit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great work"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buen trabajo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beau travail"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bel lavoro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "よく頑張りました"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bom trabalho"
+          }
+        }
+      }
+    },
     "Beige chaud, serif élégant": {
       "extractionState": "manual",
       "localizations": {
@@ -35858,6 +36422,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tenha um ótimo dia."
+          }
+        }
+      }
+    },
+    "Belle progression": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toller Fortschritt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nice progress"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buen progreso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belle progression"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei progressi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いい伸び"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belo progresso"
+          }
+        }
+      }
+    },
+    "Belle série": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schöne Serie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nice streak"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buena racha"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belle série"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bella serie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いい連続記録"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bela sequência"
           }
         }
       }
@@ -36328,6 +36986,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bom começo"
+          }
+        }
+      }
+    },
+    "Bien noté ! Encore %@ kcal et ta journée est complète.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eingetragen! Noch %@ kcal und dein Tag ist komplett."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logged! %@ more kcal and your day is complete."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Anotado! %@ kcal más y tu día está completo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bien noté ! Encore %@ kcal et ta journée est complète."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annotato! Ancora %@ kcal e la tua giornata è completa."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録しました！あと%@ kcalで今日は完了です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anotado! Mais %@ kcal e seu dia está completo."
           }
         }
       }
@@ -39712,6 +40417,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Muito bem!"
+          }
+        }
+      }
+    },
+    "Bravo ! Belle régularité, continue comme ça.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bravo! Tolle Regelmäßigkeit, weiter so."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Well done! Great consistency, keep it up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Bravo! Gran constancia, sigue así."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bravo ! Belle régularité, continue comme ça."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bravo! Bella costanza, continua così."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お見事！いいペースです、この調子で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parabéns! Ótima constância, continue assim."
           }
         }
       }
@@ -46104,6 +46856,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categorias"
+          }
+        }
+      }
+    },
+    "Ce fichier contient": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Datei enthält"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file contains"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este archivo contiene"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce fichier contient"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo file contiene"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルの内容"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este arquivo contém"
           }
         }
       }
@@ -70313,6 +71112,53 @@
         }
       }
     },
+    "Des dépenses": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgaben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gastos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des dépenses"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Despesas"
+          }
+        }
+      }
+    },
     "Des ensembles de widgets pour un usage : études, sport, voyage…": {
       "extractionState": "manual",
       "localizations": {
@@ -70920,6 +71766,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tons quentes e o essencial do dia, sem ruído."
+          }
+        }
+      }
+    },
+    "Des ventes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkäufe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sales"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ventas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des ventes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vendite"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "売上"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vendas"
           }
         }
       }
@@ -83046,6 +83939,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mais %@"
+          }
+        }
+      }
+    },
+    "Encouragements": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ermutigungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encouragement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ánimos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encouragements"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incoraggiamenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "応援メッセージ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incentivos"
           }
         }
       }
@@ -103867,6 +104807,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Inativo (nenhum grupo)"
+          }
+        }
+      }
+    },
+    "Inclure les opérations non payées (%@)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unbezahlte Buchungen einbeziehen (%@)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Include unpaid transactions (%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incluir las operaciones no pagadas (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inclure les opérations non payées (%@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Includi le operazioni non pagate (%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未払いの取引を含める（%@）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incluir operações não pagas (%@)"
           }
         }
       }
@@ -142364,6 +143351,53 @@
         }
       }
     },
+    "Nouveau record sur %@ : %@ kg × %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuer Rekord bei %@: %@ kg × %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New record on %@: %@ kg × %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo récord en %@: %@ kg × %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau record sur %@ : %@ kg × %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuovo record su %@: %@ kg × %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@で自己ベスト更新：%@ kg × %@。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novo recorde em %@: %@ kg × %@."
+          }
+        }
+      }
+    },
     "Nouveau revenu": {
       "extractionState": "manual",
       "localizations": {
@@ -145137,6 +146171,53 @@
         }
       }
     },
+    "Objectif calorique atteint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalorienziel erreicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorie goal reached"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo de calorías alcanzado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif calorique atteint"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo calorico raggiunto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カロリー目標を達成"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta de calorias atingida"
+          }
+        }
+      }
+    },
     "Objectif d'épargne": {
       "extractionState": "manual",
       "localizations": {
@@ -145180,6 +146261,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Meta de economia"
+          }
+        }
+      }
+    },
+    "Objectif d'étude atteint": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lernziel erreicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Study goal reached"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo de estudio alcanzado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif d'étude atteint"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo di studio raggiunto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "勉強の目標を達成"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta de estudo atingida"
           }
         }
       }
@@ -151059,6 +152187,53 @@
         }
       }
     },
+    "Pas mal de glucides aujourd'hui : mise sur les protéines à ton prochain repas (encore %@ g).": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziemlich viele Kohlenhydrate heute: setz bei der nächsten Mahlzeit auf Eiweiß (noch %@ g)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quite a few carbs today: go for protein at your next meal (%@ g to go)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bastantes carbohidratos hoy: apuesta por las proteínas en tu próxima comida (faltan %@ g)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas mal de glucides aujourd'hui : mise sur les protéines à ton prochain repas (encore %@ g)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parecchi carboidrati oggi: punta sulle proteine al prossimo pasto (mancano %@ g)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日は炭水化物が多めです。次の食事はたんぱく質を意識して（あと%@ g）。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bastante carboidrato hoje: aposte nas proteínas na próxima refeição (faltam %@ g)."
+          }
+        }
+      }
+    },
     "Pas plus haut.": {
       "extractionState": "manual",
       "localizations": {
@@ -153499,6 +154674,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pequeno"
+          }
+        }
+      }
+    },
+    "Petit conseil": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kleiner Tipp"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick tip"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pequeño consejo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Petit conseil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piccolo consiglio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ひとことアドバイス"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dica rápida"
           }
         }
       }
@@ -174042,6 +175264,53 @@
         }
       }
     },
+    "Repas noté": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahlzeit eingetragen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal logged"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comida anotada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repas noté"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasto annotato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食事を記録しました"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refeição anotada"
+          }
+        }
+      }
+    },
     "Repas, calories et macros": {
       "extractionState": "manual",
       "localizations": {
@@ -179725,6 +180994,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nada urgente, aproveite"
+          }
+        }
+      }
+    },
+    "Rien dans le fichier n'indique si ce sont des ventes ou des dépenses : tous les montants sont positifs, sans colonne de type. Vérifie ce qu'il contient avant d'importer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nichts in der Datei zeigt, ob es Verkäufe oder Ausgaben sind: Alle Beträge sind positiv, ohne Typ-Spalte. Prüfe den Inhalt vor dem Import."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing in the file says whether these are sales or expenses: all amounts are positive and there's no type column. Check what it contains before importing."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada en el archivo indica si son ventas o gastos: todos los importes son positivos y no hay columna de tipo. Revisa lo que contiene antes de importar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien dans le fichier n'indique si ce sont des ventes ou des dépenses : tous les montants sont positifs, sans colonne de type. Vérifie ce qu'il contient avant d'importer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente nel file indica se sono vendite o spese: tutti gli importi sono positivi, senza colonna del tipo. Controlla il contenuto prima di importare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "売上か支出かを示す情報がファイルにありません。金額はすべてプラスで、種類の列もありません。取り込む前に内容を確認してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada no arquivo indica se são vendas ou despesas: todos os valores são positivos e não há coluna de tipo. Confira o conteúdo antes de importar."
           }
         }
       }
@@ -193453,6 +194769,53 @@
         }
       }
     },
+    "Statut « à payer », « prévu » ou « en attente » dans le fichier.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status „zu zahlen“, „geplant“ oder „ausstehend“ in der Datei."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status “to pay”, “planned” or “pending” in the file."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado «por pagar», «previsto» o «pendiente» en el archivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statut « à payer », « prévu » ou « en attente » dans le fichier."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stato «da pagare», «previsto» o «in sospeso» nel file."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル内のステータスが「未払い」「予定」「保留中」です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status “a pagar”, “previsto” ou “pendente” no arquivo."
+          }
+        }
+      }
+    },
     "Steak de surlonge cuit": {
       "extractionState": "manual",
       "localizations": {
@@ -194671,6 +196034,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sunset"
+          }
+        }
+      }
+    },
+    "Super, il te reste %@ kcal pour compléter ta journée.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super, dir bleiben %@ kcal, um deinen Tag zu vervollständigen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great, you have %@ kcal left to complete your day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genial, te quedan %@ kcal para completar tu día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super, il te reste %@ kcal pour compléter ta journée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ottimo, ti restano %@ kcal per completare la giornata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いいですね。今日はあと%@ kcalで完了です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ótimo, faltam %@ kcal para completar seu dia."
           }
         }
       }
@@ -197773,6 +199183,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Treino recuperado"
+          }
+        }
+      }
+    },
+    "Séance terminée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Training beendet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workout done"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrenamiento terminado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Séance terminée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allenamento terminato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウト完了"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treino concluído"
           }
         }
       }
@@ -203789,6 +205246,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Encerrar o treino?"
+          }
+        }
+      }
+    },
+    "Terminer le temps d'étude": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lernzeit beenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish study time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminar el tiempo de estudio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminer le temps d'étude"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termina il tempo di studio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "勉強時間を終了"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encerrar o tempo de estudo"
           }
         }
       }
@@ -218880,6 +220384,53 @@
         }
       }
     },
+    "Un mot après une séance, un record, une longue période d'étude ou un objectif atteint, et un conseil après tes repas. Deux au plus par jour, jamais la nuit.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Wort nach einem Training, einem Rekord, einer langen Lernzeit oder einem erreichten Ziel, und ein Tipp nach deinen Mahlzeiten. Höchstens zwei pro Tag, nie nachts."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A word after a workout, a record, a long study stretch or a goal reached, and a tip after your meals. Two a day at most, never at night."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unas palabras tras un entrenamiento, un récord, un largo rato de estudio o un objetivo alcanzado, y un consejo después de tus comidas. Dos al día como máximo, nunca de noche."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un mot après une séance, un record, une longue période d'étude ou un objectif atteint, et un conseil après tes repas. Deux au plus par jour, jamais la nuit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due parole dopo un allenamento, un record, un lungo studio o un obiettivo raggiunto, e un consiglio dopo i pasti. Al massimo due al giorno, mai di notte."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウト、自己ベスト、長時間の勉強、目標達成のあとにひとこと。食事のあとにはアドバイスも。1日2回まで、夜間は送りません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma palavra depois de um treino, um recorde, um longo período de estudo ou uma meta atingida, e uma dica depois das refeições. No máximo duas por dia, nunca à noite."
+          }
+        }
+      }
+    },
     "Un mot, un rappel ou une citation, toujours sous les yeux.": {
       "extractionState": "manual",
       "localizations": {
@@ -220568,6 +222119,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uma sessão de foco e o próximo prazo."
+          }
+        }
+      }
+    },
+    "Une séance de plus au compteur. Ton futur toi te dit merci !": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Training mehr auf dem Zähler. Dein zukünftiges Ich sagt danke!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One more workout on the board. Future you says thanks!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un entrenamiento más en el contador. ¡Tu yo del futuro te lo agradece!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une séance de plus au compteur. Ton futur toi te dit merci !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un allenamento in più nel contatore. Il te del futuro ti ringrazia!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ワークアウトがまたひとつ積み上がりました。未来のあなたが感謝しています！"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais um treino no contador. Seu eu do futuro agradece!"
           }
         }
       }

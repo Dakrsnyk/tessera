@@ -11,14 +11,16 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
-- [ ] Fitness : flèche retour sur le widget et l'activité en direct (série validée par erreur, séance lancée par erreur) ; une séance annulée ne compte ni comme faite ni à moitié.
-- [ ] Études : lancer le chrono d'étude crée une activité en direct du même style que Fitness, avec le temps d'étude.
-- [ ] Notifications intelligentes d'encouragement (reste de calories, glucides élevés / protéines à compléter, séance terminée, belle progression, longue étude, objectifs atteints), sans abus (pas à chaque repas).
-- [ ] Business : un CSV dont les dépenses ont été lues comme des revenus (fichier à recevoir de l'utilisateur).
 
 ## Idées pour plus tard
 
 ## Fait
+
+Série du 2026-10-17 (à vérifier sur l'iPhone par TestFlight) :
+- [x] Fitness : petite flèche retour (écran verrouillé, Dynamic Island, widgets, app) pour annuler la dernière série ; sans série, une croix annule la séance lancée par erreur ; une séance annulée n'est jamais comptée (fait le 2026-10-17).
+- [x] Études : le chrono d'étude crée une activité en direct du même style que Fitness (temps qui défile, total de la semaine, Terminer, Annuler) (fait le 2026-10-17).
+- [x] Encouragements : repas (reste de calories, glucides/protéines), séance terminée, record, longue étude, objectifs de la semaine, séries d'habitudes ; 2 par jour au plus, 3 h d'écart, jamais entre 22 h et 8 h ; réglable dans Profil › Rappels (fait le 2026-10-17).
+- [x] Business : le CSV de l'utilisateur (colonne « type » revenu/depense, montants positifs) est lu correctement : 7 dépenses, 5 revenus ; débit/crédit, retrait/dépôt, DR/CR, signes et exports de banques, PayPal, Stripe… ; réimporter le fichier corrige l'import erroné ; opérations « à payer »/« prévu » incluses par défaut avec un interrupteur (fait le 2026-10-17).
 
 Série du 2026-10-16 (à vérifier sur l'iPhone par TestFlight) :
 - [x] Business : conversion automatique dans la devise de l'app à l'import d'un fichier et à la synchro Stripe, au taux de référence de la BCE du jour de chaque opération ; montant d'origine gardé ; sans taux, rien n'est importé sans ton choix (« Importer / Synchroniser sans conversion ») (fait le 2026-10-16).
