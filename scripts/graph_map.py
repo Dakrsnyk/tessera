@@ -37,7 +37,7 @@ MODULES = [
          "État : designs (widgets), contenu (tâches, habitudes, argent ; l'eau est retirée depuis le 2026-10-15, `removeRetiredFeatures`), réglages, Premium, 11 domaines métier, profil, « Mes styles ».",
          "Caches réseau : météo, crypto, marchés, entreprises, taux de change, météo de voyage, analyses.",
          "Limites gratuites : `freeDesignLimit = 3` widgets (photos et citations illimitées, `countsTowardFreeLimit` ; le Studio enregistre ceux qui rentrent, `fitting`), `freeHabitLimit = 5` habitudes.",
-         "Rappels intelligents (SmartReminders), encouragements (`Encouragements` : repas, séance, record, étude, objectifs, séries d'habitudes ; 2 par jour au plus, 3 h d'écart, 8 h–22 h, journal dans l'App Group ; bannière app ouverte par `NotificationPresenter`), activité en direct de la séance, « bons moments » pour la demande de note.",
+         "Rappels intelligents (SmartReminders, Profil › Rappels), encouragements (`Encouragements` : repas, séance, record, étude, objectifs, séries d'habitudes ; 2 par jour au plus, 3 h d'écart, 8 h–22 h, journal dans l'App Group ; bannière app ouverte par `NotificationPresenter`), activité en direct de la séance, « bons moments » pour la demande de note.",
          "Router : onglets `home`, `spaces` (Créer), `explore` (Store), `mine` (Mes widgets) ; `openEditor`, `openApp`, `showPaywall`, `handle(DeepLink)`.",
      ],
      "sources": ["App/Core/AppModel.swift", "App/Core/Router.swift", "App/TesseraApp.swift", "App/Core/AppModel+Debug.swift", "Shared/Support/Encouragements.swift", "App/Services/NotificationPresenter.swift"],

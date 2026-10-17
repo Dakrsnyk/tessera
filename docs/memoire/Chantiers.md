@@ -63,6 +63,11 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - Hypothèse annoncée à l'utilisateur : les citations sont illimitées comme les photos.
 - Connu, à traiter à part : en mode En veille de jour (fond retiré, en couleur), les palettes à texte foncé (Jade, Sable…) s'affichent en texte foncé sur noir.
 
+## Série du 2026-10-17 : retour en arrière Fitness, chrono d'étude en direct, encouragements, CSV
+
+- Fait (détail dans [[Demandes]]) : run 208 compile ; run 209 : 323 tests logiques réussis, 0 échec (dont `WorkoutUndoTests`, `StudyLiveActivityTests`, `EncouragementsTests`, `BusinessCSVTests` avec le fichier de l'utilisateur) ; puis envoi TestFlight normal, suivi d'une version interne Premium débloqué.
+- À vérifier sur l'iPhone : flèche retour et croix sur l'écran verrouillé et la Dynamic Island ; activité en direct du chrono d'étude ; encouragements (réglage dans Profil › Rappels, notifications autorisées) ; réimport du CSV de test (7 dépenses, 5 revenus).
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
