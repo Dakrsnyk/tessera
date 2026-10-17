@@ -316,6 +316,23 @@ struct FitnessState: Codable, Hashable {
         active = nil
     }
 
+    /// « Supprimer la séance »: a session recorded by mistake leaves the history, as if it had never
+    /// been done. Everything derives from the history (week, streak, records, calories, volume, « Séance
+    /// faite », the catch-up, the reminders), so the day's routine can be started again. The session in
+    /// progress (listed once it has a set) is dropped like `cancelActive`. Unknown id: nothing changes.
+    /// Returns true when a session was removed.
+    @discardableResult
+    mutating func deleteSession(id: UUID) -> Bool {
+        if active?.id == id {
+            cancelActive()
+            history.removeAll { $0.id == id }
+            return true
+        }
+        let count = history.count
+        history.removeAll { $0.id == id }
+        return history.count != count
+    }
+
     mutating func skipRest() {
         active?.restEndsAt = nil
         active?.restPausedRemaining = nil

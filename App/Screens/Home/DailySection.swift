@@ -431,6 +431,15 @@ private struct NutritionDayTile: View {
 private struct WorkoutDayTile: View {
     let workout: DailyBrief.Workout
     @Environment(AppModel.self) private var model
+    /// Today's session recorded by mistake, to delete once confirmed (it can then be done again).
+    @State private var deleting: UUID?
+
+    /// Today's finished session (the « Faite » card), the one « Supprimer la séance » removes.
+    private var doneTodayID: UUID? {
+        guard case .done = workout.stage else { return nil }
+        let now = Date()
+        return FitnessMath.sessions(model.fitness).last { DateMath.isSameDay($0.start, now) && $0.isFinished }?.id
+    }
 
     var body: some View {
         DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", route: .space(.fitness)) {
@@ -492,6 +501,16 @@ private struct WorkoutDayTile: View {
                 }
             }
         }
+        .contextMenu {
+            if let id = doneTodayID {
+                Button(role: .destructive) {
+                    deleting = id
+                } label: {
+                    Label(tr("Supprimer la séance"), systemImage: "trash")
+                }
+            }
+        }
+        .confirmsWorkoutDeletion($deleting)
         .accessibilityIdentifier("daily-workout")
     }
 

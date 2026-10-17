@@ -9,6 +9,8 @@ struct FitnessAppView: View {
     @State private var editing: Routine?
     /// The day the first card shows: today's session, or what was done or planned another day.
     @State private var day = Date()
+    /// A session recorded by mistake, to delete once confirmed (it can then be done again).
+    @State private var deleting: UUID?
     private var steps: StepCounter { .shared }
 
     private var accentHex: String { MiniApp.fitness.colorHex }
@@ -39,6 +41,7 @@ struct FitnessAppView: View {
         .sheet(item: $editing) { routine in
             RoutineEditor(routine: routine)
         }
+        .confirmsWorkoutDeletion($deleting)
     }
 
     // MARK: Today
@@ -70,10 +73,14 @@ struct FitnessAppView: View {
                 Text(tr("\(Fmt.plural(doneToday.sets.count, tr("série"), tr("séries"))) · \(TF.int(doneToday.duration / 60)) min · \(TF.int(doneToday.volume)) kg soulevés"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                NavigationLink(value: HomeRoute.page(.fitnessSessionDetail(doneToday.id))) {
-                    Text(tr("Voir le détail"))
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: accentHex))
+                HStack {
+                    NavigationLink(value: HomeRoute.page(.fitnessSessionDetail(doneToday.id))) {
+                        Text(tr("Voir le détail"))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Color(hex: accentHex))
+                    }
+                    Spacer()
+                    deleteMenu(doneToday.id)
                 }
             } else if let routine = state.routines.first(where: { $0.weekdays.contains(FitnessMath.isoWeekday(now)) }) {
                 header(tr("Aujourd'hui"), symbol: "calendar")
@@ -144,6 +151,13 @@ struct FitnessAppView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .buttonStyle(.plain)
+                    .contextMenu {
+                        Button(role: .destructive) {
+                            deleting = session.id
+                        } label: {
+                            Label(tr("Supprimer la séance"), systemImage: "trash")
+                        }
+                    }
                 }
             } else if let planned, let caughtUp = FitnessMath.catchUp(of: day, state) {
                 // Missed that day, done another day.
@@ -183,6 +197,25 @@ struct FitnessAppView: View {
         .card()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("fitness-day")
+    }
+
+    /// The small « … » of a session done: « Supprimer la séance » (confirmed), to do it again.
+    private func deleteMenu(_ id: UUID) -> some View {
+        Menu {
+            Button(role: .destructive) {
+                deleting = id
+            } label: {
+                Label(tr("Supprimer la séance"), systemImage: "trash")
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+                .font(.title3)
+                .foregroundStyle(.secondary)
+                .frame(width: 36, height: 30)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel(Text(tr("Supprimer la séance")))
+        .accessibilityIdentifier("fitness-delete-session")
     }
 
     /// The routine planned yesterday, when no session was done that day nor caught up since.

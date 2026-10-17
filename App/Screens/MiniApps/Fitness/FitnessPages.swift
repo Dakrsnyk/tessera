@@ -116,6 +116,8 @@ struct FitnessProgramPage: View {
 
 struct FitnessHistoryPage: View {
     @Environment(AppModel.self) private var model
+    /// The session to delete, once confirmed.
+    @State private var deleting: UUID?
 
     var body: some View {
         let sessions = FitnessMath.sessions(model.fitness).sorted { $0.start > $1.start }
@@ -146,6 +148,20 @@ struct FitnessHistoryPage: View {
                                     .foregroundStyle(Color.secondary)
                             }
                         }
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                deleting = session.id
+                            } label: {
+                                Label(tr("Supprimer"), systemImage: "trash")
+                            }
+                        }
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                deleting = session.id
+                            } label: {
+                                Label(tr("Supprimer la séance"), systemImage: "trash")
+                            }
+                        }
                     }
                 }
             }
@@ -153,6 +169,7 @@ struct FitnessHistoryPage: View {
         .styledList()
         .navigationTitle(tr("Historique"))
         .navigationBarTitleDisplayMode(.large)
+        .confirmsWorkoutDeletion($deleting)
     }
 }
 
@@ -162,6 +179,8 @@ struct FitnessSessionDetailPage: View {
     @State private var editingSet: SetLog?
     @State private var info: ExerciseInfo?
     @State private var paywall: PaywallContext?
+    @State private var deleting: UUID?
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         let session = FitnessMath.sessions(model.fitness).first { $0.id == sessionID }
@@ -213,6 +232,15 @@ struct FitnessSessionDetailPage: View {
                         }
                     }
                 }
+                // Recorded by mistake: it goes away as if never done.
+                Section {
+                    Button(role: .destructive) {
+                        deleting = session.id
+                    } label: {
+                        Label(tr("Supprimer la séance"), systemImage: "trash")
+                    }
+                    .accessibilityIdentifier("session-delete")
+                }
             } else {
                 Text(tr("Séance introuvable.")).foregroundStyle(Color.secondary)
             }
@@ -220,6 +248,7 @@ struct FitnessSessionDetailPage: View {
         .styledList()
         .navigationTitle(session?.routineName ?? tr("Séance"))
         .navigationBarTitleDisplayMode(.inline)
+        .confirmsWorkoutDeletion($deleting) { dismiss() }
         .sheet(item: $editingSet) { SetEditor(set: $0) }
         .sheet(item: $info) { ExerciseInfoSheet(exercise: $0) }
         .sheet(item: $paywall) { PaywallView(context: $0) }
@@ -420,5 +449,35 @@ struct FitnessActivityPage: View {
                 dayData = await steps.day(day)
             }
         }
+    }
+}
+
+// MARK: - Deleting a session
+
+/// « Supprimer la séance »: a session recorded by mistake goes away as if never done (week, streak,
+/// records, calories, « Séance faite »), so the day's routine can be started again. Always confirmed.
+private struct WorkoutDeletion: ViewModifier {
+    @Binding var sessionID: UUID?
+    let onDeleted: () -> Void
+    @Environment(AppModel.self) private var model
+
+    func body(content: Content) -> some View {
+        content.confirmationDialog(tr("Supprimer cette séance ? Elle ne sera plus comptée et tu pourras la refaire."),
+                                   isPresented: Binding(get: { sessionID != nil }, set: { if !$0 { sessionID = nil } }),
+                                   titleVisibility: .visible, presenting: sessionID) { id in
+            Button(tr("Supprimer la séance"), role: .destructive) {
+                model.update(\.fitness) { _ = $0.deleteSession(id: id) }
+                Haptics.tap()
+                sessionID = nil
+                onDeleted()
+            }
+        }
+    }
+}
+
+extension View {
+    /// Asks before deleting the session whose id is set, then calls `onDeleted`.
+    func confirmsWorkoutDeletion(_ sessionID: Binding<UUID?>, onDeleted: @escaping () -> Void = {}) -> some View {
+        modifier(WorkoutDeletion(sessionID: sessionID, onDeleted: onDeleted))
     }
 }
