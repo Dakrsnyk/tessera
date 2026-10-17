@@ -16,6 +16,10 @@ Retour : [[Memoire]]
 
 ## Fait
 
+Suite du 2026-10-17 :
+- [x] Finances : toucher le solde ouvre un relevé façon compte bancaire (tous les mouvements par date, solde après chacun) ; « Chaque mois » et « Tes principales dépenses » retirés de Mes infos de Finances ; ligne « Dépenses fixes » sous « Évolution » (fait le 2026-10-17).
+- [x] Fitness : supprimer une séance enregistrée (historique, détail, carte du jour, Mon Quotidien) ; elle ne compte plus et peut être refaite (fait le 2026-10-17).
+
 Série du 2026-10-17 (à vérifier sur l'iPhone par TestFlight) :
 - [x] Fitness : petite flèche retour (écran verrouillé, Dynamic Island, widgets, app) pour annuler la dernière série ; sans série, une croix annule la séance lancée par erreur ; une séance annulée n'est jamais comptée (fait le 2026-10-17).
 - [x] Études : le chrono d'étude crée une activité en direct du même style que Fitness (temps qui défile, total de la semaine, Terminer, Annuler) (fait le 2026-10-17).

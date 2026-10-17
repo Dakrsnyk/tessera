@@ -195,13 +195,188 @@ struct FinancesTransactionsPage: View {
 
     /// The bill or the fixed income or expense a payment comes from.
     private func fixedSheet(_ id: UUID, state: BudgetState) -> FinanceSheet? {
-        if let bill = state.bills.first(where: { $0.id == id }) { return .bill(bill) }
-        return model.content.money.items.first { $0.id == id }.map { FinanceSheet.flow($0) }
+        FinanceSheet.fixed(id, state: state, items: model.content.money.items)
     }
 
     /// The distinct days, most recent first.
     private func days(_ dates: [Date]) -> [Date] {
         Array(Set(dates.map(DateMath.startOfDay))).sorted(by: >)
+    }
+}
+
+// MARK: - Statement
+
+/// The account like a bank statement, opened from the balance: every movement the balance counts
+/// (expenses, incomes, bills and fixed amounts on their dates), newest first, day by day, with the
+/// balance after each one; the « Solde de départ » as its first line. Its last balance is the one shown.
+struct FinancesStatementPage: View {
+    /// Where the balance counts from without a « Solde de départ » (the period of the chart).
+    let start: Date
+
+    @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
+    @State private var sheet: FinanceSheet?
+
+    private var currency: String { model.settings.currencyCode }
+
+    /// The lines of one day, newest first.
+    private struct Day: Identifiable {
+        let date: Date
+        var lines: [BudgetMath.StatementLine]
+        var id: Date { date }
+    }
+
+    var body: some View {
+        let state = model.budget
+        let now = Date()
+        let lines = BudgetMath.statement(state, from: start, now: now)
+        // The free plan shows the last seven days with their whole month, like « Opérations ».
+        let earliest: Date? = model.isPremium ? nil : BudgetMath.monthInterval(PremiumHistory.earliestFreeDay(now: now)).start
+        let shown = earliest.map { limit in lines.filter { $0.date >= limit } } ?? lines
+        List {
+            Section { header(state: state, lines: lines) }
+            if lines.isEmpty {
+                Section {
+                    Text(tr("Aucune opération pour l'instant. Note une dépense ou un revenu : il s'affichera ici, avec ton solde après chaque opération."))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            ForEach(Self.days(shown)) { day in
+                Section(dayTitle(day.date, now: now)) {
+                    ForEach(day.lines) { line in
+                        Button { open(line, state: state) } label: { row(line, state: state) }
+                            .accessibilityIdentifier("statement-row")
+                    }
+                }
+            }
+            if shown.count < lines.count {
+                Section {
+                    Button { router.showPaywall(.financesHistory) } label: {
+                        Label(tr("Opérations plus anciennes avec Premium"), systemImage: "lock.fill")
+                    }
+                }
+            }
+        }
+        .styledList()
+        .tint(Color(hex: Finances.accentHex))
+        .navigationTitle(tr("Relevé"))
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button { sheet = .expense(nil) } label: { Label(tr("Nouvelle dépense"), systemImage: "minus") }
+                    Button { sheet = .income(nil) } label: { Label(tr("Nouveau revenu"), systemImage: "plus") }
+                } label: { Image(systemName: "plus") }
+                    .accessibilityIdentifier("statement-add")
+            }
+        }
+        .sheet(item: $sheet) { $0.editor }
+    }
+
+    /// The balance today and what it counts from.
+    private func header(state: BudgetState, lines: [BudgetMath.StatementLine]) -> some View {
+        let balance = lines.first?.balance ?? 0
+        return VStack(alignment: .leading, spacing: 6) {
+            Text(state.openingBalance == nil ? tr("Solde") : tr("Solde du compte"))
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
+            Text(TF.money(balance, currency, decimals: 2))
+                .font(.system(size: 34, weight: .bold, design: .rounded))
+                .foregroundStyle(balance < 0 ? Color(hex: Finances.overHex) : Color.primary)
+                .monospacedDigit()
+            Text(caption(state: state))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("statement-balance")
+    }
+
+    private func caption(state: BudgetState) -> String {
+        if let amount = state.openingBalance, let date = state.openingDate {
+            return tr("À partir de \(TF.money(amount, currency)) le \(Fmt.format(date, template: "dMMM")), puis tes revenus et tes dépenses, factures et montants fixes compris.")
+        }
+        return tr("Revenus moins dépenses depuis le \(Fmt.format(start, template: "dMMM")), factures et montants fixes compris.")
+    }
+
+    private func row(_ line: BudgetMath.StatementLine, state: BudgetState) -> some View {
+        let look = appearance(line, state: state)
+        let isOpening = line.kind == .opening
+        return HStack(spacing: 12) {
+            Image(systemName: look.symbol)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(Color(hex: look.hex))
+                .frame(width: 32, height: 32)
+                .background(Color(hex: look.hex).opacity(0.14), in: Circle())
+            VStack(alignment: .leading, spacing: 2) {
+                Text(look.title).foregroundStyle(.primary).lineLimit(1)
+                Text(look.detail).font(.caption).foregroundStyle(.secondary).lineLimit(1)
+            }
+            Spacer(minLength: 8)
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(isOpening ? TF.money(line.amount, currency, decimals: 2) : Fmt.signedMoney(line.amount, currency: currency))
+                    .font(.body.weight(.semibold))
+                    .monospacedDigit()
+                    .foregroundStyle(!isOpening && line.amount > 0 ? Color(hex: Finances.incomeHex) : Color.primary)
+                // The balance once this line is counted, as on a bank statement.
+                Text(TF.money(line.balance, currency, decimals: 2))
+                    .font(.caption)
+                    .monospacedDigit()
+                    .foregroundStyle(line.balance < 0 ? Color(hex: Finances.overHex) : Color.secondary)
+            }
+        }
+        .contentShape(Rectangle())
+    }
+
+    private func appearance(_ line: BudgetMath.StatementLine, state: BudgetState) -> (symbol: String, hex: String, title: String, detail: String) {
+        switch line.kind {
+        case .opening:
+            return ("flag.fill", Finances.accentHex, tr("Solde de départ"), tr("Ce que ton compte affichait"))
+        case let .expense(expense):
+            let category = state.category(expense.categoryID)
+            let name = category?.name ?? tr("Sans catégorie")
+            return (category?.symbol ?? "square.grid.2x2", category?.colorHex ?? "64748B",
+                    expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note,
+                    expense.fixedID == nil ? name : tr("Dépense fixe · \(name)"))
+        case let .income(income):
+            return ("arrow.down.left", Finances.incomeHex, income.label.isEmpty ? tr("Revenu") : income.label,
+                    income.fixedID == nil ? tr("Revenu") : tr("Revenu fixe"))
+        }
+    }
+
+    /// Opens what the line comes from: the expense or the income, the bill or the fixed amount, or the
+    /// « Solde de départ ».
+    private func open(_ line: BudgetMath.StatementLine, state: BudgetState) {
+        switch line.kind {
+        case .opening:
+            sheet = .opening
+        case let .expense(expense):
+            sheet = expense.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .expense(expense)
+        case let .income(income):
+            sheet = income.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .income(income)
+        }
+    }
+
+    private func dayTitle(_ day: Date, now: Date) -> String {
+        if DateMath.isSameDay(day, now) { return tr("Aujourd'hui") }
+        if let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: now), DateMath.isSameDay(day, yesterday) { return tr("Hier") }
+        return Fmt.longDay(day)
+    }
+
+    /// The lines grouped by day (they come newest first, so each day's lines follow each other).
+    private static func days(_ lines: [BudgetMath.StatementLine]) -> [Day] {
+        var result: [Day] = []
+        for line in lines {
+            let day = DateMath.startOfDay(line.date)
+            if let last = result.last, last.date == day {
+                result[result.count - 1].lines.append(line)
+            } else {
+                result.append(Day(date: day, lines: [line]))
+            }
+        }
+        return result
     }
 }
 

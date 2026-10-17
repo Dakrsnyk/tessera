@@ -43,6 +43,12 @@ enum FinanceSheet: Identifiable {
         case .opening: OpeningBalanceEditor()
         }
     }
+
+    /// The bill or the fixed income or expense a payment comes from: it is changed or removed there.
+    static func fixed(_ id: UUID, state: BudgetState, items: [MoneyItem]) -> FinanceSheet? {
+        if let bill = state.bills.first(where: { $0.id == id }) { return .bill(bill) }
+        return items.first { $0.id == id }.map { FinanceSheet.flow($0) }
+    }
 }
 
 enum Finances {
@@ -210,20 +216,30 @@ struct FinancesAppView: View {
         let expected = model.profile.monthlyIncome
         let spent = BudgetMath.spentThisMonth(state, at: now)
         if earned > 0 || expected != nil {
-            NavigationLink(value: HomeRoute.page(.financesTrends)) {
-                HStack(spacing: 10) {
+            // Three links of the same width: what came in and went out open the evolution, the
+            // balance opens the statement (every movement, day by day).
+            HStack(spacing: 10) {
+                NavigationLink(value: HomeRoute.page(.financesTrends)) {
                     if earned > 0 {
                         MiniStat(title: tr("Revenus"), value: TF.money(earned, currency), detail: tr("ce mois-ci"), colorHex: Finances.incomeHex)
                     } else if let expected {
                         MiniStat(title: tr("Revenus"), value: TF.money(expected, currency), detail: tr("prévus (Mes informations)"))
                     }
+                }
+                .buttonStyle(.plain)
+                NavigationLink(value: HomeRoute.page(.financesTrends)) {
                     MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency), detail: tr("ce mois-ci"))
+                }
+                .buttonStyle(.plain)
+                NavigationLink(value: HomeRoute.page(.financesStatement(interval.start))) {
                     let balance = (earned > 0 ? earned : (expected ?? 0)) - spent
                     MiniStat(title: tr("Solde"), value: TF.money(balance, currency), detail: earned > 0 ? tr("jusqu'ici") : tr("estimé"),
                              colorHex: balance < 0 ? Finances.overHex : Finances.incomeHex)
                 }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("finances-month-balance")
             }
-            .buttonStyle(.plain)
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("finances-month")
         }
     }
@@ -337,6 +353,15 @@ struct FinancesAppView: View {
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("finances-trends")
+            MiniDivider()
+            // The fixed expenses of « Revenus et dépenses fixes » (rent, insurance, phone…), counted on their dates.
+            NavigationLink { MoneyView() } label: {
+                let monthly = BudgetMath.fixedExpensesMonthly(state)
+                MiniRow(symbol: "repeat", colorHex: "D6409F", title: tr("Dépenses fixes"),
+                        detail: monthly > 0 ? tr("\(TF.money(monthly, currency)) par mois") : tr("Loyer, assurances, forfaits…"))
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("finances-fixed")
         }
     }
 }
@@ -446,18 +471,30 @@ private struct BalanceChartCard: View {
         let balance = points.last?.balance ?? 0
         let color = Color(hex: balance < 0 ? Finances.overHex : Finances.incomeHex)
         let dayFormat: Date.FormatStyle = period == .month ? .dateTime.day().month(.abbreviated) : .dateTime.month(.abbreviated)
+        let statement = HomeRoute.page(.financesStatement(period.start(now)))
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(state.openingBalance == nil ? tr("Solde") : tr("Solde du compte"))
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                    Text(TF.money(balance, currency))
-                        .font(.system(size: 34, weight: .bold, design: .rounded))
-                        .foregroundStyle(balance < 0 ? color : Color.primary)
-                        .monospacedDigit()
-                        .contentTransition(.numericText())
+                // The balance opens the statement: every movement, day by day, like a bank account.
+                NavigationLink(value: statement) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(spacing: 4) {
+                            Text(state.openingBalance == nil ? tr("Solde") : tr("Solde du compte"))
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption2.weight(.bold))
+                                .foregroundStyle(.tertiary)
+                        }
+                        Text(TF.money(balance, currency))
+                            .font(.system(size: 34, weight: .bold, design: .rounded))
+                            .foregroundStyle(balance < 0 ? color : Color.primary)
+                            .monospacedDigit()
+                            .contentTransition(.numericText())
+                    }
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("finances-statement")
                 Spacer(minLength: 8)
                 Picker(tr("Période"), selection: Binding(get: { period }, set: { choice in
                     if choice == .month || isPremium {
@@ -471,43 +508,10 @@ private struct BalanceChartCard: View {
                 .pickerStyle(.segmented)
                 .frame(maxWidth: 190)
             }
-            Chart {
-                ForEach(points) { point in
-                    AreaMark(x: .value("Jour", point.date), y: .value("Solde", point.balance))
-                        .foregroundStyle(LinearGradient(colors: [color.opacity(0.28), color.opacity(0.02)], startPoint: .top, endPoint: .bottom))
-                        .interpolationMethod(.monotone)
-                    LineMark(x: .value("Jour", point.date), y: .value("Solde", point.balance))
-                        .foregroundStyle(color)
-                        .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
-                        .interpolationMethod(.monotone)
-                }
-                RuleMark(y: .value("Zéro", 0.0))
-                    .foregroundStyle(Color.secondary.opacity(0.4))
-                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
-                if let last = points.last {
-                    PointMark(x: .value("Jour", last.date), y: .value("Solde", last.balance))
-                        .foregroundStyle(color)
-                        .symbolSize(70)
-                }
+            NavigationLink(value: statement) {
+                chart(points, color: color, dayFormat: dayFormat)
             }
-            .chartXAxis {
-                AxisMarks(values: .automatic(desiredCount: 4)) { _ in
-                    AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
-                    AxisValueLabel(format: dayFormat)
-                }
-            }
-            .chartYAxis {
-                AxisMarks(position: .trailing, values: .automatic(desiredCount: 4)) { value in
-                    AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
-                    AxisValueLabel {
-                        if let amount = value.as(Double.self) {
-                            Text(TF.money(amount, currency))
-                        }
-                    }
-                }
-            }
-            .frame(height: 170)
-            .accessibilityLabel(Text(tr("Évolution du solde")))
+            .buttonStyle(.plain)
             Text(caption(points))
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -525,6 +529,46 @@ private struct BalanceChartCard: View {
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("finances-balance")
         .sheet(item: $paywall) { PaywallView(context: $0) }
+    }
+
+    private func chart(_ points: [BudgetMath.BalancePoint], color: Color, dayFormat: Date.FormatStyle) -> some View {
+        Chart {
+            ForEach(points) { point in
+                AreaMark(x: .value("Jour", point.date), y: .value("Solde", point.balance))
+                    .foregroundStyle(LinearGradient(colors: [color.opacity(0.28), color.opacity(0.02)], startPoint: .top, endPoint: .bottom))
+                    .interpolationMethod(.monotone)
+                LineMark(x: .value("Jour", point.date), y: .value("Solde", point.balance))
+                    .foregroundStyle(color)
+                    .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
+                    .interpolationMethod(.monotone)
+            }
+            RuleMark(y: .value("Zéro", 0.0))
+                .foregroundStyle(Color.secondary.opacity(0.4))
+                .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
+            if let last = points.last {
+                PointMark(x: .value("Jour", last.date), y: .value("Solde", last.balance))
+                    .foregroundStyle(color)
+                    .symbolSize(70)
+            }
+        }
+        .chartXAxis {
+            AxisMarks(values: .automatic(desiredCount: 4)) { _ in
+                AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
+                AxisValueLabel(format: dayFormat)
+            }
+        }
+        .chartYAxis {
+            AxisMarks(position: .trailing, values: .automatic(desiredCount: 4)) { value in
+                AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
+                AxisValueLabel {
+                    if let amount = value.as(Double.self) {
+                        Text(TF.money(amount, currency))
+                    }
+                }
+            }
+        }
+        .frame(height: 170)
+        .accessibilityLabel(Text(tr("Évolution du solde")))
     }
 
     /// Where the balance starts from, and what it counts.

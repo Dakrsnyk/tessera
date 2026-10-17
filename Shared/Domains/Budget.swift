@@ -614,4 +614,72 @@ enum BudgetMath {
     static func billsMonthly(_ state: BudgetState) -> Double {
         state.bills.reduce(0) { $0 + $1.monthlyCost }
     }
+
+    /// The fixed expenses of « Revenus et dépenses fixes », for a month.
+    static func fixedExpensesMonthly(_ state: BudgetState) -> Double {
+        state.fixedFlows.filter { !$0.isIncome }.reduce(0) { $0 + $1.perDay * 365 / 12 }
+    }
+
+    // MARK: Statement
+
+    /// One line of the account statement: a movement, or the « Solde de départ », with the balance
+    /// once it is counted.
+    struct StatementLine: Hashable, Identifiable {
+        enum Kind: Hashable {
+            case opening
+            case expense(Expense)
+            case income(IncomeEntry)
+        }
+
+        let kind: Kind
+        let date: Date
+        /// Signed: what came in is positive, what went out negative.
+        let amount: Double
+        /// The balance after this line.
+        let balance: Double
+
+        var id: String {
+            switch kind {
+            case .opening: "opening"
+            case let .expense(expense): "e-\(expense.id.uuidString)"
+            case let .income(income): "i-\(income.id.uuidString)"
+            }
+        }
+    }
+
+    /// The account statement, like a bank's, newest first: every movement the balance counts (the
+    /// expenses and incomes noted, the bills and the fixed amounts on their dates) with the balance
+    /// after each. From the « Solde de départ » when there is one (its line comes first), otherwise
+    /// from zero at `start`; the last balance is the one of `balanceHistory` today.
+    static func statement(_ state: BudgetState, from start: Date, now: Date = Date()) -> [StatementLine] {
+        let calendar = DateMath.calendar
+        let today = DateMath.startOfDay(now)
+        let first = DateMath.startOfDay(state.openingBalance == nil ? start : (state.openingDate ?? start))
+        guard first <= today, let stop = calendar.date(byAdding: .day, value: 1, to: today) else { return [] }
+        let interval = DateInterval(start: first, end: stop.addingTimeInterval(-1))
+        // Oldest first to add up; on the same day, in the order of the hour, incomes first.
+        var movements: [(kind: StatementLine.Kind, date: Date, amount: Double, order: Int)] = []
+        for income in incomes(state, in: interval, now: now) {
+            movements.append((kind: StatementLine.Kind.income(income), date: income.date, amount: income.amount, order: 0))
+        }
+        for expense in expenses(state, in: interval, now: now) {
+            movements.append((kind: StatementLine.Kind.expense(expense), date: expense.date, amount: -expense.amount, order: 1))
+        }
+        movements.sort { a, b in
+            if a.date != b.date { return a.date < b.date }
+            return a.order < b.order
+        }
+        var lines: [StatementLine] = []
+        lines.reserveCapacity(movements.count + 1)
+        var balance = 0.0
+        if let opening = state.openingBalance {
+            balance = opening
+            lines.append(StatementLine(kind: .opening, date: first, amount: opening, balance: balance))
+        }
+        for movement in movements {
+            balance += movement.amount
+            lines.append(StatementLine(kind: movement.kind, date: movement.date, amount: movement.amount, balance: balance))
+        }
+        return lines.reversed()
+    }
 }
