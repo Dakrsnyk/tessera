@@ -301,7 +301,7 @@ MODULES = [
     {"file": "Tests-CI-et-outils", "title": "Tests, CI et outils", "zone": "outils",
      "role": "Pas de Mac : tout se compile et se teste sur GitHub Actions, piloté par des tags dans le message de commit. Outils DEBUG de captures.",
      "features": [
-         "Cibles : Tessera (app), TesseraWidgets (extension), TesseraTests (37 fichiers), TesseraUITests (7 fichiers).",
+         "Cibles : Tessera (app), TesseraWidgets (extension), TesseraTests (39 fichiers), TesseraUITests (7 fichiers).",
          "Workflow `.github/workflows/build.yml` : `[check]`, `[unit]`, `[daily]`, `[studio]`, `[apps]`, `[shots]`, `[langs]`, `[store]`, `[marketing]`, `[video]`, `[adkit]`, `[testflight]`, `[interne]` (Premium débloqué, testeurs internes seulement)…",
          "`scripts/check_swift.py` : ordre des labels d'init, catalogue de kinds, sécurité Release, manifeste de confidentialité.",
          "Outils DEBUG : `ScreenshotMode` (-screenshotScreen), `MarketingShots`, `StudioGallery`, `DemoGallery`, `AdExport` ; pubs dans `scripts/ads/`.",
