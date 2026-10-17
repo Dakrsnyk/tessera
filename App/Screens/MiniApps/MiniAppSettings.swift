@@ -13,7 +13,9 @@ extension MiniApp {
         case .nutrition: [.nutrition]
         case .fitness: [.sport]
         case .planning: [.productivity, .studies]
-        case .finances: [.money]
+        // Finances: no « Chaque mois » nor « Tes principales dépenses » here (2026-10-17): the budget is set on
+        // the page, the fixed expenses have their own row; they stay in « Mes informations ».
+        case .finances: []
         case .business: [.business]
         case .travel: []
         case .car: [.car]
@@ -165,9 +167,7 @@ struct MiniAppInfoSection: View {
             if profile.knows(.focusGoal) { add(tr("Concentration"), tr("\(Fmt.hours(model.productivity.weeklyFocusGoalHours)) / sem.")) }
             add(tr("Études"), profile.studyField.trimmed.nonEmpty)
         case .finances:
-            add(tr("Revenu"), profile.monthlyIncome.map { TF.money($0, model.settings.currencyCode) })
-            if profile.knows(.monthlyBudget) { add(tr("Budget"), TF.money(model.budget.monthlyBudget, model.settings.currencyCode)) }
-            add(tr("Épargne visée"), profile.monthlySavingsGoal.map { TF.money($0, model.settings.currencyCode) })
+            break
         case .business:
             if profile.knows(.businessName) { add(tr("Activité"), model.business.name) }
             if profile.knows(.businessGoal) { add(tr("Objectif de CA"), TF.money(model.business.monthlyGoal, model.settings.currencyCode)) }
