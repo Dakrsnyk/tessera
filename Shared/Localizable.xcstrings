@@ -71958,53 +71958,6 @@
         }
       }
     },
-    "Des idées pour la suite de ta journée.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ideen für den Rest deines Tages."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ideas for the rest of your day."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ideas para el resto de tu día."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Des idées pour la suite de ta journée."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Idee per il resto della tua giornata."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日の残りの時間に役立つアイデア。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ideias para o resto do seu dia."
-          }
-        }
-      }
-    },
     "Des jambes jusqu'à la position de rack.": {
       "extractionState": "manual",
       "localizations": {
@@ -86477,53 +86430,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estimado pela foto, analisada no seu iPhone e não salva."
-          }
-        }
-      }
-    },
-    "Et %@ g de protéines pour atteindre ton objectif.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Und %@ g Eiweiß, um dein Ziel zu erreichen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "And %@ g of protein to reach your goal."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Y %@ g de proteínas para alcanzar tu objetivo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Et %@ g de protéines pour atteindre ton objectif."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "E %@ g di proteine per raggiungere il tuo obiettivo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目標達成まで、あとタンパク質 %@ g。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "E %@ g de proteínas para atingir sua meta."
           }
         }
       }
@@ -148380,53 +148286,6 @@
         }
       }
     },
-    "Objectif dépassé de %@ kcal": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ziel um %@ kcal überschritten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Goal exceeded by %@ kcal"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Objetivo superado por %@ kcal"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Objectif dépassé de %@ kcal"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Obiettivo superato di %@ kcal"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目標を%@ kcal超過"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meta ultrapassada em %@ kcal"
-          }
-        }
-      }
-    },
     "Objectif mensuel à définir dans Ardane": {
       "extractionState": "manual",
       "localizations": {
@@ -184335,6 +184194,53 @@
         }
       }
     },
+    "Rien noté ce jour-là.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An diesem Tag nichts eingetragen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing logged that day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada registrado ese día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien noté ce jour-là."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente registrato quel giorno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その日の記録はありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada registrado nesse dia."
+          }
+        }
+      }
+    },
     "Rien noté cette semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -209993,53 +209899,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seus próprios indicadores"
-          }
-        }
-      }
-    },
-    "Tes protéines sont presque atteintes.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dein Eiweißziel ist fast erreicht."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You're almost at your protein goal."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus proteínas están casi completas."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes protéines sont presque atteintes."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le tue proteine sono quasi raggiunte."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "タンパク質の目標まであと少しです。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suas proteínas estão quase atingidas."
           }
         }
       }
@@ -237539,53 +237398,6 @@
         }
       }
     },
-    "estimé": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "geschätzt"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "estimated"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "estimado"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "estimé"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "stimato"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "推定"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "estimado"
-          }
-        }
-      }
-    },
     "estimées aujourd'hui": {
       "extractionState": "manual",
       "localizations": {
@@ -239979,53 +239791,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "dias restantes"
-          }
-        }
-      }
-    },
-    "jusqu'ici": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "bisher"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "so far"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "hasta ahora"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "jusqu'ici"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "finora"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ここまで"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "até agora"
           }
         }
       }

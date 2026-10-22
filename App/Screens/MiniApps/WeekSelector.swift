@@ -18,7 +18,7 @@ enum WeekDayKind: Equatable {
 /// something has a ring (or a filled circle when done), the others a dotted gray ring; the dates of the days to
 /// come are dimmed. A tap picks a day, the arrows or a swipe go to the week before or after, and the dates come
 /// from the real calendar. A mini-app has one selector: the screen below it tells about the day picked. `mark`
-/// tells what a day holds (planned, done, how far it got).
+/// tells what a day holds (planned, done, how far it got). A day caught up shows a tinted circle.
 struct WeekSelector: View {
     @Binding var day: Date
     let colorHex: String
@@ -54,7 +54,7 @@ struct WeekSelector: View {
     private func header(week: [Date], now: Date, canGoForward: Bool) -> some View {
         HStack(spacing: 2) {
             Button { shift(-1) } label: {
-                Image(systemName: "chevron.left").font(.subheadline.weight(.bold)).frame(width: 40, height: 44).contentShape(Rectangle())
+                Image(systemName: "chevron.left").font(.subheadline.weight(.bold)).frame(width: 44, height: 44).contentShape(Rectangle())
             }
             .accessibilityLabel(Text(tr("Semaine précédente")))
             Text(WeekTitle.of(week, now: now))
@@ -64,7 +64,7 @@ struct WeekSelector: View {
                 .contentTransition(.numericText())
                 .accessibilityAddTraits(.isHeader)
             Button { shift(1) } label: {
-                Image(systemName: "chevron.right").font(.subheadline.weight(.bold)).frame(width: 40, height: 44).contentShape(Rectangle())
+                Image(systemName: "chevron.right").font(.subheadline.weight(.bold)).frame(width: 44, height: 44).contentShape(Rectangle())
             }
             .disabled(!canGoForward)
             .accessibilityLabel(Text(tr("Semaine suivante")))

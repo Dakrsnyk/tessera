@@ -84,6 +84,12 @@ struct TravelAppView: View {
         }
         .navigationTitle(tr("Voyage"))
         .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            // A trip still to come: the selector opens on its first day, not on a week with nothing in it.
+            if let trip = TravelMath.currentTrip(model.travel, at: Date()), trip.start > Date(), DateMath.isSameDay(day, Date()) {
+                day = trip.start
+            }
+        }
         .task {
             await model.refreshTripWeather()
             await model.refreshFX()

@@ -113,8 +113,8 @@ struct PlanningCalendarCard: View {
                           onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex))
                 .card(padding: 10)
         case .week:
+            // The day headers are the table's columns: the day is picked in the selector at the top of the screen.
             WeekTimetable(days: Agenda.week(containing: day, model: model, events: events), selected: day,
-                          onSelect: { picked in withAnimation(.snappy) { day = picked } },
                           onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex))
                 .card(padding: 10)
         case .month:

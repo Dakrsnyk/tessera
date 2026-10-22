@@ -110,7 +110,7 @@ final class PromoVideoUITests: XCTestCase {
         pause(2)
         scroll(distance: 0.18)
         pause(0.8)
-        let rounds = topButtons(of: week, within: 90)
+        let rounds = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "week-day-")).allElementsBoundByIndex
         let todayIndex = rounds.firstIndex { $0.isSelected } ?? (rounds.count - 1)
         for index in [0, 1, 2] where rounds.indices.contains(index) && index != todayIndex {
             rounds[index].tap()
