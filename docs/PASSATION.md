@@ -3,10 +3,10 @@
 À lire en premier, avec `CLAUDE.md` et `docs/memoire/` (Demandes, Chantiers, Decisions, Pieges-connus). Lancer `git status` avant de se fier à cette note.
 
 ## État du dépôt
-- Dernier code compilé en CI : commit `8fd9d01` (run 221, `[check]`). Derniers builds sur TestFlight avant cette série : 217 (normal) et 218 (interne, Premium débloqué).
+- Dernier code envoyé : commit `4057baa` (run 223, build 223 TestFlight). Derniers builds sur TestFlight avant cette série : 217 (normal) et 218 (interne, Premium débloqué).
 - Chantier Skip (série passée, doubles appuis, haptique, ajout rapide Nutrition) : terminé, relu par `code-reviewer`, run 220 (`[unit]`) : 350 tests réussis, 0 échec.
 - Accueil, maquette D choisie le 2026-10-22 : codé et compilé (run 221) ; ses tests (`DailyBriefTests`) passent par le prochain `[unit]`. Détail et écarts avec la maquette : `docs/memoire/Chantiers.md` (section du 2026-10-22).
-- Reste à envoyer sur l'iPhone : `[testflight]` (Skip + accueil), puis `[interne]` seulement si l'utilisateur le demande.
+- Build 223 (normal) envoyé sur TestFlight le 2026-10-22 avec Skip et l'accueil D (run 222 : 352 tests réussis). Pas de version interne : `[interne]` seulement si l'utilisateur le demande (sinon ses amis testeurs gardent le build 218).
 - L'utilisateur fait tester des amis comme testeurs internes avec la version interne : `docs/guide-premium-testflight.md`, dernière section. Après chaque série : `[unit]`, puis `[testflight]`, puis `[interne]` (sinon les amis reçoivent une version sans Premium).
 
 ## Choix laissés à l'utilisateur (Skip)

@@ -82,7 +82,8 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - Améliorations : trois maquettes de l'accueil (A évolution fidèle, B minimaliste premium, C dashboard dynamique) puis une quatrième, D (mixte A + C), clair et sombre, dans `pub/maquettes-accueil/` (non versionné, source `maquettes.html`, rendu `render.js`). L'utilisateur a choisi D. `docs/memoire/Brief-ameliorations.md` (cité par Demandes) n'existe pas ; le § 11 n'apparaît nulle part ; le scanner intelligent est reporté (`docs/references/README.md`).
 - Tests : run 220 (`[unit]`) : 350 tests réussis, 0 échec, dont les 19 de `WorkoutSkipTests`.
 - Accueil D codé (`App/Screens/Home/DailySection.swift`, `App/Core/DailyBrief.swift`, `Tests/DailyBriefTests.swift`) : run 221 compile. Ce qui diffère de la maquette, faute de donnée : pas de « dans 18 min » (une séance n'a pas d'heure), la pastille « Maintenant » suit le moment de la journée ; la carte s'appelle « Budget » (pas « Finances ») ; la courbe n'apparaît qu'avec des dépenses ; la série de jours n'apparaît qu'avec une série.
-- Pas encore fait de l'accueil : tuiles Pas/Budget et le reste des lots (voir `docs/PASSATION.md`).
+- Run 222 (`[unit]`) : 352 tests réussis, 0 échec (dont les 2 de l'accueil). Build 223 (version 1.0, normale, Premium non débloqué) envoyé sur TestFlight (run 223) avec Skip et l'accueil D. Pas de version interne envoyée : à lancer seulement sur demande de l'utilisateur.
+- Pas encore fait de l'accueil : le reste des lots (voir `docs/PASSATION.md`).
 - À vérifier sur l'iPhone : l'accueil en clair et en sombre (dégradés, pastille, anneaux, courbe) ; « Passer » sur l'écran verrouillé, la Dynamic Island et un widget ; double appui rapide sur « Série faite » (une seule série) ; la vibration dans l'app ; ajout rapide Nutrition touché deux fois.
 - Limites iOS : un bouton de widget ou d'activité en direct ne fait vibrer l'iPhone que si l'app est au premier plan.
 
