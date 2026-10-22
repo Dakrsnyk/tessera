@@ -32,21 +32,23 @@ Retour : [[Memoire]]
 
 ## À faire
 
-- [ ] Mini-apps : même organisation partout (sélecteur de jours en haut, bloc principal, bloc secondaire, paramètres et infos en bas), composants harmonisés, doublons retirés (§2).
-- [ ] Planning : présentation façon Calendrier Apple, vues semaine / mois / année (pincement si fiable, sinon contrôle explicite) ; widget Planning qui remplit toute sa surface (§3).
-- [ ] Store : grande collection de fonds d'écran originaux (gratuits, les meilleurs en Premium), sous les écrans d'accueil personnalisés ; nouveaux packs et styles ; droits vérifiés (§4).
-- [ ] Nutrition : sources USDA, FCÉN, BEDCA, UniTools World Recipes, ForkRecipe (licences d'abord, provenance gardée, pas de doublons, recettes calculées sans inventer) (§5).
-- [ ] Nutrition : scanner alimentaire intelligent, lot 8 (§5) : étape A complète (code-barres et plat estimé sur l'appareil, récapitulatif modifiable, sans doublon) ; étape B (IA en ligne) préparée mais désactivée.
 - [ ] Premium Nutrition : « Faire mes repas » sous le compteur calorique (questionnaire de goûts, budget, magasin, liste de courses d'un seul magasin, provenance et date des prix) (§6).
-- [ ] Fitness : revoir le calcul des calories (MET, durée, poids, intensité, repos), éviter les doubles comptes avec Santé, tests (§7).
-- [ ] Permissions iOS : seulement le nécessaire, explication avant la demande système, refus respectés (§8).
-- [ ] Réactivité : retour immédiat sur chaque bouton, pas de double action, haptique là où iOS le permet (§9).
-- [ ] Habitudes : refonte visuelle d'après les images jointes, sans toucher aux autres sections (§10).
-- [ ] Mon Quotidien : ajouter Productivité (prendre l'habitude d'une tâche rapide) (§12).
 
 ## Idées pour plus tard
 
 ## Fait
+
+Programme des 8 lots du 2026-10-22 (code écrit et relu, jamais compilé : CI bloquée par la facturation GitHub) :
+- [x] Mini-apps : même organisation partout (sélecteur de jours en haut, bloc principal, bloc secondaire, paramètres et infos en bas), composants harmonisés, doublons retirés (§2). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Planning : présentation façon Calendrier Apple, vues semaine / mois / année (pincement si fiable, sinon contrôle explicite) ; widget Planning qui remplit toute sa surface (§3). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Store : grande collection de fonds d'écran originaux (gratuits, les meilleurs en Premium), sous les écrans d'accueil personnalisés ; nouveaux packs et styles ; droits vérifiés (§4). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Nutrition : sources USDA, FCÉN, BEDCA, UniTools World Recipes, ForkRecipe (licences d'abord, provenance gardée, pas de doublons, recettes calculées sans inventer) (§5). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Nutrition : scanner alimentaire intelligent, lot 8 (§5) : étape A complète (code-barres et plat estimé sur l'appareil, récapitulatif modifiable, sans doublon) ; étape B (IA en ligne) préparée mais désactivée. (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Fitness : revoir le calcul des calories (MET, durée, poids, intensité, repos), éviter les doubles comptes avec Santé, tests (§7). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Permissions iOS : seulement le nécessaire, explication avant la demande système, refus respectés (§8). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Réactivité : retour immédiat sur chaque bouton, pas de double action, haptique là où iOS le permet (§9). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Habitudes : refonte visuelle d'après les images jointes, sans toucher aux autres sections (§10). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
+- [x] Mon Quotidien : ajouter Productivité (prendre l'habitude d'une tâche rapide) (§12). (écrit le 2026-10-22 ; compilation et tests non vérifiés : CI bloquée)
 
 Accueil, maquette D choisie le 2026-10-22 (compilée en CI, run 221 ; à vérifier sur l'iPhone par TestFlight) :
 - [x] Accueil : mixte des maquettes A et C (dégradé léger par catégorie d'après « Séance du jour », sans image de fond ; séance « Maintenant » en tête l'après-midi ; habitudes en anneaux avec la série de jours ; courbe des 7 derniers jours dans Budget). Barre du bas, date et personnalisation de Mon Quotidien inchangées (fait le 2026-10-22).

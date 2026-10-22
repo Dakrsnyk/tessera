@@ -90,6 +90,7 @@ MODULES = [
     {"file": "Mini-apps", "title": "Mini-apps", "zone": "interface",
      "role": "Chaque mini-app est une partie entière d'Ardane : un tableau de bord, puis ses pages. Elles sont atteintes depuis l'Accueil.",
      "features": [
+         "Permissions (lot 7a) : `PermissionExplainer` explique avant la demande système (notifications, calendrier, position, mouvement), une seule fois, refus respecté avec « Ouvrir Réglages » ; rien n'est demandé au lancement. Réactivité (lot 7b) : `.buttonStyle(.pressable)` partout dans `App/` (retour visuel immédiat), `TapGuard` dans `MiniActionButton` (un double appui n'agit qu'une fois).",
          "Composants communs (`MiniApp.swift`) : `MiniStyle` (rayons et couleurs d'alerte, de succès et de pas), `.miniCard()`, `.miniTile()`, `MiniFootnote`, `MiniSectionTitle`, `MiniRowsCard` ; ordre commun d'un écran : sélecteur, bloc principal, actions, sections, liste secondaire, mention, « Mes infos » (lot 1, 2026-10-22). Une ligne de liste n'apparaît que si la section ou la tuile de la même page est cachée.",
          "`MiniApp` : nutrition, fitness, planning, finances, business, travel, car, weather, photos.",
          "`MiniAppPage` : les pages de chaque mini-app (repas, séance, bibliothèque, historique…).",
@@ -102,6 +103,7 @@ MODULES = [
     {"file": "Nutrition", "title": "Nutrition", "zone": "interface",
      "role": "Calories et macros du jour, repas, recherche d'aliments, scanner de code-barres, idées, historique.",
      "features": [
+         "Scanner intelligent (lot 8, 2026-10-22) : un seul écran de caméra (`FoodScanView`) lit un code-barres tout seul (VisionKit) ou photographie un plat (`capturePhoto`) ; code-barres cherché d'abord dans les aliments de l'utilisateur puis Open Food Facts (une requête par scan) ; plat analysé sur l'appareil (`OnDeviceMealAnalyzer`, Vision `VNClassifyImageRequest`) puis proposé en ESTIMATIONS (`FoodLabelMatcher`) ; récapitulatif modifiable (`ScanRecapView`, `ScanRecap` : ajouter, supprimer, remplacer, grammes, « Vérifié » / « Estimation ») ; enregistrement atomique et sans doublon ; permission caméra expliquée avant (`CameraAccessGate`) ; étape B (IA en ligne) préparée mais désactivée (`OnlineMealAnalyzer`, `MealAnalysisConfig.onlineEnabled = false`).",
          "Besoins calculés (Mifflin-St Jeor × activité, objectif, protéines en g/kg, fibres, sucres, gras saturés, sodium, minéraux et vitamines DRI) ; chaque valeur « Calculé » ou « Personnalisé » (`NutritionTargetsCard`), jamais écrasée.",
          "Nutriments détaillés (`Micronutrients`) quand l'aliment les donne (CNF, Open Food Facts) ; historique et analyses détaillées en Premium.",
          "Anneau des calories restantes, protéines, glucides, lipides, repas du jour, idée, semaine.",
@@ -116,6 +118,7 @@ MODULES = [
     {"file": "Fitness", "title": "Fitness", "zone": "interface",
      "role": "Programme de la semaine, séance en direct, repos, bibliothèque d'exercices avec démonstrations animées, progression.",
      "features": [
+         "Calories actives (lot 6, 2026-10-22) : `CalorieModel` sépare le temps de travail (série chargée MET 5,0, au poids du corps 3,8) du repos (MET 2,0), retire 1 MET de repos, plafonne les intervalles à 10 minutes et ignore les séries passées ; sans poids du profil, pas de chiffre ; les pas ne recomptent pas les minutes de séance (aucune lecture ni écriture d'Apple Santé).",
          "Séance en direct : série en cours, répétitions et charge, repos minuté (pause, passer), « Série faite ».",
          "Activité en direct sur l'écran verrouillé et dans la Dynamic Island, boutons actifs sans ouvrir l'app.",
          "Page dans l'ordre : aperçu, semaine, programme et séances, exercices, progression et statistiques, records en bas.",
