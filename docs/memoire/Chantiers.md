@@ -73,6 +73,16 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - Run 214 compile ; run 216 : 331 tests réussis, 0 échec (le run 215 avait perdu le réseau à l'envoi du rapport, puis un test du relevé attendait un mauvais solde) ; build 217 sur TestFlight (normal), puis build 218 interne Premium (« Internal Only » vérifié).
 - À vérifier sur l'iPhone : toucher le solde (relevé), ligne « Dépenses fixes », Mes infos de Finances allégé, suppression d'une séance puis la refaire.
 
+## Série du 2026-10-22 : « Passer » une série, doubles appuis, haptique, ajout rapide Nutrition
+
+- Fait (détail dans [[Demandes]] et [[Decisions]]) : « Passer » saute la série en cours (`WorkoutSession.skipped`), doubles appuis ignorés par la position attendue (`WorkoutPosition`), vibration légère seulement app au premier plan (`ButtonFeedback`), pas de doublon à l'ajout rapide Nutrition (`NutritionState.quickLog`). Tests : `Tests/WorkoutSkipTests.swift` (18). Run 219 : compile (statique et simulateur), l10n à jour, 5 400 textes.
+- La passation du 2026-10-22 disait ce chantier « non commencé, arbre propre » alors que le code existait déjà dans l'arbre : un agent s'était arrêté sur la limite d'usage après avoir tout écrit. Toujours lancer `git status` avant de croire une passation.
+- Relecture indépendante (`code-reviewer`) : aucun bloquant ; un défaut mineur corrigé (`quickLog` cherchait le dernier élément du tableau, pas la date). Deux choix laissés à l'utilisateur : « Passer » ne passe plus le repos (l'intent `SkipRestIntent` n'est plus câblé) ; dans un petit widget à 2 boutons, la flèche « Annuler » prend la place de « Passer » une fois une série faite.
+- Équipe multi-agents : `CLAUDE.md` (section « Équipe multi-agents ») et `.claude/agents/` (7 agents) sont versionnés depuis ce jour.
+- Améliorations : trois maquettes de l'accueil (A évolution fidèle, B minimaliste premium, C dashboard dynamique), clair et sombre, dans `pub/maquettes-accueil/` (non versionné, source `maquettes.html`, rendu `render.js`). En attente du choix de l'utilisateur ; rien n'est codé. `docs/memoire/Brief-ameliorations.md` (cité par Demandes) n'existe pas ; le § 11 n'apparaît nulle part ; le scanner intelligent est reporté (`docs/references/README.md`).
+- À vérifier sur l'iPhone : « Passer » sur l'écran verrouillé, la Dynamic Island et un widget ; double appui rapide sur « Série faite » (une seule série) ; la vibration dans l'app ; ajout rapide Nutrition touché deux fois.
+- Limites iOS : un bouton de widget ou d'activité en direct ne fait vibrer l'iPhone que si l'app est au premier plan.
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.

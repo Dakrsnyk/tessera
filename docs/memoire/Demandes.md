@@ -10,12 +10,25 @@ Retour : [[Memoire]]
 
 ## À faire
 
-- [ ] (exemple) Nutrition : …
-- [ ] Fitness : vrai « Skip » de la série en cours (ignorée, pas comptée), sans double incrément ; retour haptique là où iOS le permet ; ajout rapide Nutrition sans doublon (détail : docs/PASSATION.md).
+- [ ] Accueil (VALIDATION OBLIGATOIRE) : présenter 3 maquettes (A évolution fidèle, B minimaliste premium façon Apple, C dashboard dynamique), chacune en clair et sombre, livrées en PNG. Dégradé léger par catégorie, d'après « Séance du jour » de Fitness, sans image de fond. Barre du bas, date et personnalisation de Mon Quotidien inchangées. NE RIEN CODER avant mon choix. (détail : docs/memoire/Brief-ameliorations.md §1)
+- [ ] Mini-apps : même organisation partout (sélecteur de jours en haut, bloc principal, bloc secondaire, paramètres et infos en bas), composants harmonisés, doublons retirés (§2).
+- [ ] Planning : présentation façon Calendrier Apple, vues semaine / mois / année (pincement si fiable, sinon contrôle explicite) ; widget Planning qui remplit toute sa surface (§3).
+- [ ] Store : grande collection de fonds d'écran originaux (gratuits, les meilleurs en Premium), sous les écrans d'accueil personnalisés ; nouveaux packs et styles ; droits vérifiés (§4).
+- [ ] Nutrition : sources USDA, FCÉN, BEDCA, UniTools World Recipes, ForkRecipe (licences d'abord, provenance gardée, pas de doublons, recettes calculées sans inventer) (§5).
+- [ ] Nutrition : scanner intelligent automatique (code-barres ou plat photographié), valeurs vérifiées distinguées des estimations, récapitulatif modifiable avant validation, solution de secours (§5).
+- [ ] Premium Nutrition : « Faire mes repas » sous le compteur calorique (questionnaire de goûts, budget, magasin, liste de courses d'un seul magasin, provenance et date des prix) (§6).
+- [ ] Fitness : revoir le calcul des calories (MET, durée, poids, intensité, repos), éviter les doubles comptes avec Santé, tests (§7).
+- [ ] Permissions iOS : seulement le nécessaire, explication avant la demande système, refus respectés (§8).
+- [ ] Réactivité : retour immédiat sur chaque bouton, pas de double action, haptique là où iOS le permet (§9).
+- [ ] Habitudes : refonte visuelle d'après les images jointes, sans toucher aux autres sections (§10).
+- [ ] Mon Quotidien : ajouter Productivité (prendre l'habitude d'une tâche rapide) (§12).
 
 ## Idées pour plus tard
 
 ## Fait
+
+Série du 2026-10-22 (compilée en CI, run 219 ; à vérifier sur l'iPhone par TestFlight) :
+- [x] Fitness : vrai « Skip » de la série en cours (ignorée, jamais comptée, sans repos), sans double incrément ; « Annuler » défait aussi un « Passer » ; boutons de l'écran verrouillé, de la Dynamic Island, des widgets et de l'app ; retour haptique léger seulement si le bouton est accepté et l'app au premier plan (un widget ne peut pas faire vibrer l'iPhone seul) ; ajout rapide Nutrition sans doublon (fait le 2026-10-22).
 
 Suite du 2026-10-17 :
 - [x] Finances : toucher le solde ouvre un relevé façon compte bancaire (tous les mouvements par date, solde après chacun) ; « Chaque mois » et « Tes principales dépenses » retirés de Mes infos de Finances ; ligne « Dépenses fixes » sous « Évolution » (fait le 2026-10-17).

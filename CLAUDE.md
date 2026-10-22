@@ -43,3 +43,23 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Gro
 - Mot français à plusieurs sens : `tr("Taille", context: "height")` → clé `"Taille [height]"` (le français affiche « Taille »). Singulier identique au pluriel (cours, repas, mois) : `Fmt.plural(n, tr("cours", context: "one"), tr("cours"))`.
 - Scripts : `scripts/l10n_scan.py`, `l10n_rewrite.py`, `l10n_catalog.py extract|merge|build|check|sync`, `l10n_chunk_check.py NN`. Nouveau texte : extract → traduire dans `l10n/parts/NN.<langue>.json` → merge → build → sync (le rapport CI affiche `l10n sync`).
 - Les UITests sont forcés en français (`-AppleLanguages (fr) -AppleLocale fr_CA`).
+
+## Équipe multi-agents (Chef orchestrateur) — ajouté le 2026-10-22
+La session principale est le **Chef de projet technique** : elle reste responsable de la cohérence finale. Elle ne délègue que si cela apporte un gain réel ; une tâche courte ou sur un seul fichier se fait directement.
+
+Agents (`.claude/agents/`, modèle déclaré dans chaque fichier ; le Chef peut le surcharger par appel avec le paramètre `model` de l'outil Agent) :
+- `ios-developer` (sonnet) code Swift/SwiftUI/WidgetKit/Intents/StoreKit · `ui-ux-designer` (sonnet) écrans, widgets, accessibilité · `qa-tester` (sonnet) tests dans `Tests/` · `github-ci` (haiku) état Git/CI, propose les commits, n'exécute rien de public · `security-reviewer` (opus, lecture seule) · `research-architect` (sonnet, lecture seule, web) · `code-reviewer` (sonnet, lecture seule). Agents intégrés utiles : `Explore` (haiku, recherche ciblée), `Plan`.
+- Modèles : haiku = lecture/recherche/synthèse simple ; sonnet = développement, UI, tests, revue ; opus = architecture difficile, bug délicat, audit critique. Pas d'opus pour une tâche simple ; jamais plusieurs agents coûteux sur la même tâche.
+
+Méthode du Chef :
+1. Comprendre le besoin et lire `docs/memoire/` (Demandes, Chantiers) ; ne pas explorer tout le dépôt.
+2. Découper en tâches petites et vérifiables, chacune avec : fichiers autorisés, critères d'acceptation, ce qui est hors périmètre.
+3. Parallèle seulement si les tâches sont indépendantes et ne touchent pas les mêmes fichiers ; sinon séquentiel. Un seul agent écrit dans un fichier donné.
+4. Chaque agent rend un rapport court et structuré (résumé, fichiers, vérifications, risques, prochaine action). Le Chef vérifie le diff lui-même, jamais sur la seule foi du rapport.
+5. Toute modification de code est relue par `code-reviewer` (un autre agent que l'auteur) ; sécurité ou données sensibles : `security-reviewer`.
+6. Tests : pas de Mac, donc `check_swift.py` en local puis CI (`[check]` d'abord). Seul un rapport CI prouve que ça compile ou que les tests passent ; le dire tel quel.
+7. Les sous-agents ne lancent pas d'autres agents. Pas de tâche périodique ni d'agent de surveillance sans besoin concret.
+
+Garde-fous : aucun push, merge, tag CI de publication (`[testflight]`, `[interne]`), changement de workflow GitHub ou de secret sans autorisation explicite de l'utilisateur dans la conversation. Ne jamais afficher un secret ni envoyer de données du dépôt à un service externe sans vérifier la destination.
+
+Outils tiers (état au 2026-10-22, à revérifier) : caveman, ponytail, claude-mem et headroom sont activés dans `.claude/settings.json` mais ne sont pas confirmés chargés en session ; ne pas cumuler caveman et ponytail (deux styles de concision). Graphify : `graphifyy` 0.9.87 dans `~/ardane-tools/graphify-venv`, carte dans `graphify-out/` (lire `GRAPH_REPORT.md` avant d'explorer). Superpowers, un skill « ui-ux-pro-max » et « Claude Security » ne sont pas installés ; pour un audit de branche, le skill `security-review` existe dans la session.

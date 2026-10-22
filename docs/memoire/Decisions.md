@@ -17,6 +17,10 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-15 : galerie de l'écran d'accueil réduite au widget « Mes widgets » (`tessera.quick`, ne propose que les widgets créés) ; écran verrouillé : l'essentiel de chaque mini-app.
 - 2026-10-15 : l'heure suit toujours le fuseau de l'appareil (`Fmt.timeZone = .autoupdatingCurrent`), jamais la langue ; une heure d'emploi du temps est en minutes depuis minuit, recalculée pour chaque jour.
 - Le déverrouillage premium DEBUG n'est jamais actif en Release ([[Premium-et-abonnements]], vérifié par `scripts/check_swift.py`).
+- 2026-10-22 : « Passer » passe la série, pas le repos : elle va dans `WorkoutSession.skipped` (jamais dans `sets`, donc ni volume, ni calories, ni historique) ; une séance sans aucune série faite n'entre pas dans l'historique ; « Annuler » défait le dernier pas, fait ou passé (`undoLastStep`). Le geste « passer le repos » reste dans l'app seulement.
+- 2026-10-22 : doubles appuis : chaque bouton (intent) porte la position attendue (`WorkoutPosition.token`, `@Parameter` texte) et est ignoré si la séance a avancé ; sans position (ancienne version) pas de contrôle. `SharedStore.update` est atomique dans un processus (`NSRecursiveLock`) ; pas de verrou de fichier entre processus (iOS tue une app suspendue qui en tient un).
+- 2026-10-22 : retour haptique : un `ButtonFeedback.play` fixé par l'app (UIKit hors de `Shared/`), un seul tap léger, seulement si le bouton a changé quelque chose et que l'app est au premier plan.
+- 2026-10-22 : ajout rapide Nutrition : le même aliment ignoré s'il existe déjà une entrée de cet aliment à moins de 2 s (`NutritionState.quickAddWindow`).
 
 ## Publicité
 - Une seule publicité exceptionnelle plutôt que plusieurs ordinaires ; seulement des fonctionnalités qui existent vraiment, montrées avec de vrais éléments de l'app.
