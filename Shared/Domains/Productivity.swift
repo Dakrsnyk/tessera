@@ -5,6 +5,8 @@ struct PriorityItem: Codable, Hashable, Identifiable {
     var id = UUID()
     var title: String
     var doneDayKey: String?
+    /// When it was added (nil for those saved before this field existed): lets a double tap on « Ajouter » be recognised.
+    var createdAt: Date?
 
     func isDone(on date: Date) -> Bool {
         doneDayKey == DateMath.dayKey(date)
@@ -93,6 +95,24 @@ struct ProductivityState: Codable, Hashable {
         counters = c.value(.counters, [])
         focusLog = c.value(.focusLog, [])
         weeklyFocusGoalHours = c.value(.weeklyFocusGoalHours, 10)
+    }
+
+    /// The Top 3 holds at most this many tasks.
+    static let maxPriorities = 3
+
+    /// Quick add from Mon Quotidien: trims the title, ignores an empty one, a full Top 3, and the same
+    /// title added less than a second before (double tap). Returns whether a task was added.
+    @discardableResult
+    mutating func addQuickTask(_ title: String, on date: Date) -> Bool {
+        let clean = String(title.trimmingCharacters(in: .whitespacesAndNewlines).prefix(120))
+        guard !clean.isEmpty, priorities.count < Self.maxPriorities else { return false }
+        let repeated = priorities.contains { item in
+            guard let created = item.createdAt else { return false }
+            return item.title.lowercased() == clean.lowercased() && abs(date.timeIntervalSince(created)) < 1
+        }
+        guard !repeated else { return false }
+        priorities.append(PriorityItem(title: clean, createdAt: date))
+        return true
     }
 
     mutating func togglePriority(_ id: UUID, on date: Date = Date()) {

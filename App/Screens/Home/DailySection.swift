@@ -28,6 +28,7 @@ struct DailySection: View {
         let hasData = automatic.contains { tile in
             switch tile {
             case .invite, .miniApp(_, caption: nil): false
+            case let .priorities(items) where items.isEmpty: false
             default: true
             }
         }
@@ -931,9 +932,14 @@ private struct RemindersDayTile: View {
 private struct PrioritiesDayTile: View {
     let items: [DailyBrief.Check]
     @Environment(AppModel.self) private var model
+    @State private var draft = ""
+
+    /// Added from « + » as Productivité: the card gets its quick add (and no longer is one big link).
+    private var hasQuickAdd: Bool { model.settings.dailyAdded.contains(DailyCategories.productivityKey) }
+    private var canAdd: Bool { model.productivity.priorities.count < ProductivityState.maxPriorities }
 
     var body: some View {
-        DayCard(title: tr("Top 3"), symbol: "3.circle.fill", colorHex: "6B7280", route: .space(.productivity)) {
+        DayCard(title: tr("Top 3"), symbol: "3.circle.fill", colorHex: "6B7280", route: hasQuickAdd ? nil : .space(.productivity)) {
             VStack(alignment: .leading, spacing: 6) {
                 ForEach(items) { item in
                     Button {
@@ -954,9 +960,56 @@ private struct PrioritiesDayTile: View {
                     }
                     .buttonStyle(.plain)
                 }
+                if hasQuickAdd {
+                    quickAdd
+                }
             }
         }
         .accessibilityIdentifier("daily-priorities")
+    }
+
+    /// The field to add a task in one gesture, and the way to the whole Top 3.
+    private var quickAdd: some View {
+        HStack(spacing: 8) {
+            if canAdd {
+                TextField(tr("Ajouter une tâche"), text: $draft)
+                    .font(.subheadline)
+                    .submitLabel(.done)
+                    .onSubmit(add)
+                    .accessibilityIdentifier("daily-quick-task-field")
+                Button(action: add) {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(draft.trimmed.isEmpty ? Color.secondary : Color.accentColor)
+                }
+                .buttonStyle(.plain)
+                .disabled(draft.trimmed.isEmpty)
+                .accessibilityLabel(Text(tr("Ajouter une tâche")))
+                .accessibilityIdentifier("daily-quick-task-add")
+            } else {
+                Spacer(minLength: 0)
+            }
+            NavigationLink(value: HomeRoute.space(.productivity)) {
+                Image(systemName: "chevron.right")
+                    .font(.caption2.weight(.bold))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 28, height: 28)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(tr("Top 3")))
+        }
+        .padding(.top, items.isEmpty ? 0 : 2)
+    }
+
+    /// Adds the task for today; the haptic only when it was accepted (not empty, not a double tap, room left).
+    private func add() {
+        var accepted = false
+        model.update(\.productivity) { accepted = $0.addQuickTask(draft, on: Date()) }
+        if accepted {
+            Haptics.tap()
+            draft = ""
+        }
     }
 }
 

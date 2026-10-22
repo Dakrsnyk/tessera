@@ -189,9 +189,9 @@ enum DailyBrief {
             add(.reminders(reminders), urgent ? 102 : (moment == .evening ? 72 : 84))
         }
 
-        let priorities = input.productivity.priorities.prefix(3).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
+        let priorities = priorityChecks(input.productivity, now: now)
         if !priorities.isEmpty {
-            add(.priorities(Array(priorities)), moment == .evening ? 45 : 83)
+            add(.priorities(priorities), moment == .evening ? 45 : 83)
         }
 
         let habits = input.content.habits.map { Check(id: $0.id.uuidString, title: $0.name, isDone: $0.isDone(on: now), colorHex: $0.colorHex, streak: $0.streak(asOf: now)) }
@@ -219,6 +219,11 @@ enum DailyBrief {
         let room = tiles.count >= 4 ? 0 : (tiles.count >= 2 ? 1 : 2)
         tiles += invitations(input, shown: tiles).prefix(room).map(Tile.invite)
         return tiles
+    }
+
+    /// The Top 3 as checks, done or not today (empty without any task).
+    static func priorityChecks(_ state: ProductivityState, now: Date) -> [Check] {
+        state.priorities.prefix(ProductivityState.maxPriorities).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
     }
 
     /// The cards as the person arranged them: hidden ones left out, the chosen order first (the

@@ -58,6 +58,21 @@ struct DailyLayoutEditor: View {
                         }
                         .accessibilityIdentifier("daily-category-\(app.rawValue)")
                     }
+                    // Productivité: the Top 3 card with a quick add, even without any task yet.
+                    Toggle(isOn: Binding(
+                        get: { DailyCategories.isProductivityShown(settings: settings) },
+                        set: { on in
+                            let hasTasks = !model.productivity.priorities.isEmpty
+                            model.updateSettings { DailyCategories.setProductivity(shown: on, hasTasks: hasTasks, in: &$0) }
+                        }
+                    )) {
+                        Label {
+                            Text(tr("Productivité"))
+                        } icon: {
+                            Image(systemName: "checklist").foregroundStyle(Color(hex: "F5A524"))
+                        }
+                    }
+                    .accessibilityIdentifier("daily-category-productivity")
                 } header: {
                     Text(tr("Catégories"))
                 } footer: {
