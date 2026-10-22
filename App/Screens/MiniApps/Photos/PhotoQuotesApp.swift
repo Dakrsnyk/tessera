@@ -54,7 +54,7 @@ struct PhotoQuotesAppView: View {
                                         .foregroundStyle(.secondary)
                                 }
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                             .accessibilityIdentifier("photos-widget")
                         }
                     }
@@ -251,7 +251,7 @@ struct PhotoQuoteEditor: View {
                             .strokeBorder(format == option ? Color(hex: accentHex) : .clear, lineWidth: 2)
                     }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("photos-size-\(option.rawValue)")
                 .accessibilityAddTraits(format == option ? .isSelected : [])
             }
@@ -317,7 +317,7 @@ struct PhotoQuoteEditor: View {
                         .padding(4)
                 }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .contextMenu {
             Button { framing = slot } label: { Label(tr("Recadrer"), systemImage: "crop") }
             if index > 0 {
@@ -416,7 +416,7 @@ struct PhotoQuoteEditor: View {
                                 Text(palette.name).font(.caption2).foregroundStyle(.secondary)
                             }
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .accessibilityLabel(Text(palette.name))
                         .accessibilityAddTraits(isOn ? .isSelected : [])
                     }
@@ -469,7 +469,7 @@ struct PhotoQuoteEditor: View {
                             .frame(width: thumbnail.width, height: thumbnail.height)
                             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityLabel(Text(tr("Recadrer")))
                     .accessibilityIdentifier("quote-background-frame")
                     VStack(alignment: .leading, spacing: 8) {
@@ -508,7 +508,7 @@ struct PhotoQuoteEditor: View {
                     .padding(12)
                     .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .disabled(isLoading)
                 .accessibilityIdentifier("quote-background-pick")
             }

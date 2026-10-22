@@ -76,7 +76,7 @@ struct BusinessSourcesCard: View {
                         MiniRow(symbol: "creditcard.and.123", colorHex: "635BFF", title: tr("Connecter Stripe"),
                                 detail: tr("Ventes, remboursements et frais, en lecture seule"))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("stripe-connect")
                 }
                 MiniDivider()
@@ -87,7 +87,7 @@ struct BusinessSourcesCard: View {
                             detail: connections.lastImport.map { tr("Dernier : \($0.fileName), \(Fmt.shortDay($0.date))") }
                                 ?? tr("Export de Stripe, Shopify, ta banque ou un tableur"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("business-import")
             }
             MiniFootnote(text: tr("Les données vont directement de ton iPhone à Stripe, sans passer par Ardane. Une vente déjà importée n'est jamais ajoutée deux fois."))

@@ -88,7 +88,7 @@ struct MiniAppInfoSection: View {
                     }
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("miniapp-reminder")
             }
             Button {

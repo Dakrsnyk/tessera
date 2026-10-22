@@ -109,7 +109,7 @@ struct HabitRow: View {
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(done ? tr("Marquer \(habit.name) comme non fait") : tr("Valider \(habit.name)")))
 
                 Button(action: onEdit) {
@@ -138,7 +138,7 @@ struct HabitRow: View {
                     .frame(minHeight: 44)
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
             .padding(.leading, 2)
             .padding(.trailing, 12)
@@ -193,7 +193,7 @@ struct HabitEditor: View {
                                     .frame(width: 46, height: 46)
                                     .background(Circle().fill(habit.symbol == symbol ? Color(hex: habit.colorHex) : Color(hex: habit.colorHex).opacity(0.12)))
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                     }
                     .padding(.vertical, 6)

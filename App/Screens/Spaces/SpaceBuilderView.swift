@@ -358,7 +358,7 @@ struct SpaceBuilderView: View {
             }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .disabled(!isAvailable)
         .opacity(isAvailable ? 1 : 0.35)
         .animation(.spring(response: 0.3, dampingFraction: 0.75), value: isSelected)

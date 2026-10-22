@@ -648,7 +648,7 @@ struct NutritionHistoryPage: View {
                     NavigationLink(value: HomeRoute.page(.nutritionDay(pair.0))) {
                         MiniRow(symbol: "calendar", colorHex: accentHex, title: Fmt.shortDay(pair.0), detail: pair.1 > 0 ? nil : tr("Rien de noté"), value: pair.1 > 0 ? tr("\(TF.int(pair.1)) kcal") : nil)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     if index < days.count - 1 { MiniDivider() }
                 }
             }

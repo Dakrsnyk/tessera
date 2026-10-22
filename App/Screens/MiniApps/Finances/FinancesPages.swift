@@ -428,7 +428,7 @@ struct FinancesCategoriesPage: View {
                         .padding(.vertical, 10)
                         .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
                 Divider()
                 Button { sheet = .category(BudgetCategory(name: "", symbol: "tag", colorHex: "3366FF")) } label: {
@@ -438,7 +438,7 @@ struct FinancesCategoriesPage: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 12)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
             .padding(.horizontal, 14)
             .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
@@ -539,7 +539,7 @@ struct FinancesSavingsPage: View {
                                 .padding(.vertical, 12)
                                 .contentShape(Rectangle())
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .contextMenu {
                             Button(role: .destructive) {
                                 model.update(\.budget) { $0.goals.removeAll { $0.id == goal.id } }
@@ -556,7 +556,7 @@ struct FinancesSavingsPage: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.vertical, 12)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("goals-new")
                 }
                 .padding(.horizontal, 14)
@@ -597,7 +597,7 @@ struct FinancesSavingsPage: View {
                                 title: account.name, detail: account.isLiability ? tr("Dette") : nil,
                                 value: (account.isLiability ? "−" : "") + TF.money(account.balance, currency), showsChevron: false)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .contextMenu {
                         Button(role: .destructive) {
                             model.update(\.budget) { $0.removeAccount(account.id) }
@@ -614,7 +614,7 @@ struct FinancesSavingsPage: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 12)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
             Text(tr("Saisis tes soldes à la main : Ardane ne se connecte à aucune banque. Touche un compte pour le modifier ou le supprimer.")).font(.footnote).foregroundStyle(.secondary)
         }

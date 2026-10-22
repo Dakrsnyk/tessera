@@ -69,7 +69,7 @@ struct StudioSectionBar: View {
                             .frame(minHeight: 36)
                             .background(isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.cardFill), in: Capsule())
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .accessibilityIdentifier("studio-\(section.rawValue)")
                         .accessibilityAddTraits(isSelected ? .isSelected : [])
                         .id(section)
@@ -184,7 +184,7 @@ struct StudioColorRow: View {
                         .font(.title3)
                         .foregroundStyle(.secondary)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Revenir à la couleur du style")))
             }
             ColorPicker(title, selection: Binding(

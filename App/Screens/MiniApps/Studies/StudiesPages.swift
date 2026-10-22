@@ -62,7 +62,7 @@ struct StudiesTimetablePage: View {
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.primary)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("timetable-week")
             Spacer(minLength: 8)
             Button {
@@ -108,7 +108,7 @@ struct StudiesTimetablePage: View {
                 .strikethrough(entry.isCancelled)
                 .opacity(entry.isCancelled ? 0.5 : 1)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .contextMenu {
             if slot.date == nil {
                 Button {
@@ -167,7 +167,7 @@ struct TimetableGrid: View {
                         .frame(maxWidth: .infinity, minHeight: 38)
                         .background(day == selected ? Color(hex: Studies.accentHex) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
             }
             HStack(alignment: .top, spacing: 4) {
@@ -219,7 +219,7 @@ struct TimetableGrid: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .background(Color(hex: hex), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .opacity(entry.isCancelled ? 0.35 : 1)
                 .frame(height: max(14, CGFloat(slot.endMinute - slot.startMinute) * perMinute - 2))
                 .offset(y: CGFloat(slot.startMinute - first) * perMinute)
@@ -413,7 +413,7 @@ struct StudiesCoursePage: View {
                             detail: slot.room.isEmpty ? nil : tr("Salle \(slot.room)"),
                             value: "\(Studies.minuteText(slot.startMinute))–\(Studies.minuteText(slot.endMinute))", showsChevron: false)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }
@@ -424,7 +424,7 @@ struct StudiesCoursePage: View {
             ForEach(Array(exams.enumerated()), id: \.element.id) { index, exam in
                 if index > 0 { Divider() }
                 Button { sheet = .exam(exam) } label: { ExamRow(exam: exam, state: state, now: now) }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .opacity(exam.date < now ? 0.55 : 1)
             }
         }
@@ -450,7 +450,7 @@ struct StudiesCoursePage: View {
                             detail: tr("\(TF.decimal(grade.score, 1))/\(TF.decimal(grade.maxScore, 0)) · compte pour \(TF.int(grade.weight)) %"),
                             value: "\(TF.int(grade.ratio * 100)) %", showsChevron: false)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }
@@ -470,7 +470,7 @@ struct StudiesCoursePage: View {
                         .padding(.vertical, 12)
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
             .padding(.horizontal, 14)
             .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
@@ -525,7 +525,7 @@ struct StudiesExamsPage: View {
                 ForEach(Array(exams.enumerated()), id: \.element.id) { index, exam in
                     if index > 0 { Divider() }
                     Button { sheet = .exam(exam) } label: { ExamRow(exam: exam, state: state, now: now) }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .contextMenu {
                             Button(role: .destructive) {
                                 model.update(\.student) { $0.exams.removeAll { $0.id == exam.id } }
@@ -628,7 +628,7 @@ struct StudiesGradesPage: View {
                             NavigationLink(value: HomeRoute.page(.studiesCourse(course.id))) {
                                 courseBar(course, state: state)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                     }
                     .padding(.horizontal, 14)
@@ -646,7 +646,7 @@ struct StudiesGradesPage: View {
                                         title: grade.title, detail: gradeDetail(grade, state: state),
                                         value: "\(TF.int(grade.ratio * 100)) %", showsChevron: false)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                     }
                 }
@@ -788,7 +788,7 @@ struct StudiesRevisionPage: View {
                         MiniRow(symbol: "rectangle.stack.fill", colorHex: "8C6CFF", title: deck.name,
                                 detail: deck.due > 0 ? tr("\(deck.due) à réviser") : tr("à jour"), value: "\(deck.total)", showsChevron: false)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     if openDeck == deck.name {
                         ForEach(state.cards.filter { $0.deck == deck.name }) { card in
                             Button { sheet = .card(card) } label: {
@@ -801,7 +801,7 @@ struct StudiesRevisionPage: View {
                                 .padding(.vertical, 8)
                                 .contentShape(Rectangle())
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                     }
                     MiniDivider()
@@ -814,7 +814,7 @@ struct StudiesRevisionPage: View {
                         .padding(.vertical, 12)
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("cards-new")
             }
             Text(tr("Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes."))

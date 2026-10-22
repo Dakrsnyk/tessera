@@ -94,7 +94,7 @@ struct NutritionAppView: View {
                                 value: items.isEmpty ? nil : tr("\(TF.int(kcal)) kcal")
                             )
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .accessibilityIdentifier("meal-\(meal.rawValue)")
                         Button {
                             sheet = .search(meal, day)
@@ -104,7 +104,7 @@ struct NutritionAppView: View {
                                 .foregroundStyle(Color(hex: accentHex))
                                 .frame(width: 44, height: 44)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .accessibilityLabel(Text(tr("Ajouter au \(meal.title.lowercased())")))
                     }
                     if index < MealType.allCases.count - 1 { MiniDivider() }
@@ -123,7 +123,7 @@ struct NutritionAppView: View {
             } label: {
                 insightCard(symbol: "target", title: tr("Calcule tes besoins du jour"), message: tr("Ton âge, ta taille, ton poids et ton objectif suffisent : Ardane calcule tes calories et tes nutriments, puis te dit ce qu'il te reste."), action: tr("Calculer"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
         } else if hasEntries {
             let left = state.goals.kcal - totals.kcal
             let proteinLeft = known.protein ? state.goals.protein - totals.protein : nil
@@ -136,7 +136,7 @@ struct NutritionAppView: View {
                         action: tr("Voir des idées")
                     )
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("nutrition-insight")
             } else if left < -50 {
                 insightCard(symbol: "info.circle.fill", title: tr("Objectif dépassé de \(TF.int(-left)) kcal"), message: tr("Rien de grave : c'est la moyenne sur plusieurs jours qui compte. L'historique te la montre."), action: nil)
@@ -224,13 +224,13 @@ struct NutritionAppView: View {
             NavigationLink(value: HomeRoute.page(.nutritionSavedMeals)) {
                 MiniRow(symbol: "bookmark.fill", colorHex: accentHex, title: tr("Mes repas"), detail: tr("Des repas enregistrés, à reprendre d'une touche"), value: state.savedMeals.isEmpty ? nil : "\(state.savedMeals.count)")
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("nutrition-saved")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
                 MiniRow(symbol: "chart.bar.xaxis", colorHex: accentHex, title: tr("Historique"), detail: tr("Moyennes, tendances et poids"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("nutrition-history")
         }
     }
@@ -309,7 +309,7 @@ struct CalorieHero: View {
                         .foregroundStyle(.tertiary)
                 }
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("nutrition-nutrients")
         }
         .card()

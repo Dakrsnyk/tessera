@@ -49,7 +49,7 @@ struct TravelProgramPage: View {
             .frame(maxWidth: .infinity, minHeight: 56)
             .background(Color(hex: Travel.accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityLabel(Text(tr("Ajouter : \(title)")))
     }
 
@@ -70,7 +70,7 @@ struct TravelProgramPage: View {
                         MiniRow(symbol: item.symbol, colorHex: hex(item.kind), title: item.title, detail: item.detail,
                                 value: Fmt.time(item.date, uses24Hour: true), showsChevron: false)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
             }
         }
@@ -137,7 +137,7 @@ struct TravelBudgetPage: View {
                                                 title: expense.label.isEmpty ? expense.kind.title : expense.label, detail: Fmt.shortDay(expense.date),
                                                 value: Fmt.money(expense.amount, currency: expense.currencyCode), showsChevron: false)
                                     }
-                                    .buttonStyle(.plain)
+                                    .buttonStyle(.pressable)
                                 }
                             }
                         }

@@ -325,7 +325,7 @@ struct BusinessMetricsPage: View {
         let values = metric.sortedValues
         return VStack(alignment: .leading, spacing: 10) {
             Button { sheet = .metric(metric) } label: { MetricRow(metric: metric) }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             if values.count >= 2 {
                 Chart(values, id: \.date) { point in
                     LineMark(x: .value("Date", point.date), y: .value(metric.name, point.value))
@@ -345,7 +345,7 @@ struct BusinessMetricsPage: View {
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color(hex: BusinessFormat.accentHex))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("metric-add-value")
         }
         .card(padding: 14)

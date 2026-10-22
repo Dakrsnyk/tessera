@@ -454,7 +454,7 @@ struct SetupCard: View {
                         .frame(width: 34, height: 34)
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(isFavorite ? tr("Retirer des favoris") : tr("Ajouter aux favoris")))
             }
         }

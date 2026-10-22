@@ -242,7 +242,7 @@ struct BusinessAppView: View {
                     .padding(.vertical, 4)
                     .miniCard()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("business-metrics")
             }
         }
@@ -295,20 +295,20 @@ struct BusinessAppView: View {
             NavigationLink(value: HomeRoute.page(.businessSales)) {
                 MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Ventes et dépenses"), detail: tr("Tout ce que tu as noté, modifiable"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("business-sales")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessResults)) {
                 MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Résultats"), detail: tr("Chiffre d'affaires, dépenses et bénéfice par mois"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("business-results")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessRecurring)) {
                 MiniRow(symbol: "arrow.triangle.2.circlepath", colorHex: MiniStyle.goodHex, title: tr("Revenu récurrent"),
                         detail: BusinessMath.recurring(state).map { tr("MRR \(TF.money($0.mrr, currency))") } ?? tr("MRR, abonnés, ARR"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             // « Suivis à la main » is a section once there is one metric; the row stays for the first one.
             if state.metrics.isEmpty {
                 MiniDivider()
@@ -316,7 +316,7 @@ struct BusinessAppView: View {
                     MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: "F2A33A", title: tr("Suivis à la main"),
                             detail: tr("Tes propres indicateurs"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("business-metrics")
             }
         }

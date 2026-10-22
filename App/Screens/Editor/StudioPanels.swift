@@ -44,7 +44,7 @@ struct StudioPreviewGrid<Option: Identifiable>: View {
                         showsLock: showsLock(option), width: input.previewWidth(in: width)
                     )
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(Text(title(option)))
                 .accessibilityAddTraits(isSelected(option) ? [.isButton, .isSelected] : .isButton)
@@ -293,7 +293,7 @@ struct StudioColorsPanel: View {
                         .background(isOn ? AnyShapeStyle(Color.accentColor.opacity(0.18)) : AnyShapeStyle(.screenFill), in: Capsule())
                         .overlay { Capsule().strokeBorder(isOn ? Color.accentColor : .clear, lineWidth: 1.5) }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("palette-\(palette.id)")
                     .accessibilityAddTraits(isOn ? [.isButton, .isSelected] : .isButton)
                 }
@@ -566,7 +566,7 @@ struct ApplyStyleSheet: View {
                             }
                             .contentShape(Rectangle())
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                     }
                 } footer: {
                     Text(tr("Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée."))

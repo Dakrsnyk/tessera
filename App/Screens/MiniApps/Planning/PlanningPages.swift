@@ -450,7 +450,7 @@ struct PlanningFocusPage: View {
                                     .background(Color(hex: "8C6CFF").opacity(minutes == focus.lastDurationMinutes ? 1 : 0.14), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                                     .foregroundStyle(minutes == focus.lastDurationMinutes ? Color.white : Color(hex: "8C6CFF"))
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                     }
                     Text(tr("minutes")).font(.caption).foregroundStyle(.secondary)

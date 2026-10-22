@@ -508,7 +508,7 @@ struct MyWidgetsView: View {
                             .padding(8)
                     }
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { cardFrames[design.id] = $0 }
             .accessibilityLabel(Text(design.name))
             .accessibilityAddTraits(isSelected ? .isSelected : [])
@@ -523,7 +523,7 @@ struct MyWidgetsView: View {
         } label: {
             DesignCard(design: design, payload: model.payload(for: design), width: nil, isPremiumUser: model.isPremium)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .contextMenu { menuItems(design) }
     }
 

@@ -429,7 +429,7 @@ private struct PlanCard: View {
                     .strokeBorder(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

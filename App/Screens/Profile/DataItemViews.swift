@@ -333,7 +333,7 @@ struct DataItemRow: View {
                 .frame(maxWidth: .infinity, minHeight: 42)
                 .background(prominent ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(Color.accentColor.opacity(0.12)), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 
     /// Add one more, and see everything in the space once there is something.
@@ -350,7 +350,7 @@ struct DataItemRow: View {
                         .frame(maxWidth: .infinity, minHeight: 42)
                         .background(Color.accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }
@@ -373,7 +373,7 @@ struct DataItemRow: View {
             .background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 
     private func chip(_ title: String, isOn: Bool, action: @escaping () -> Void) -> some View {
@@ -386,7 +386,7 @@ struct DataItemRow: View {
                 .frame(maxWidth: .infinity, minHeight: 40)
                 .background(isOn ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(AppFill.screenFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 
@@ -409,7 +409,7 @@ struct DataItemRow: View {
                     .frame(width: 44, height: 44)
                     .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .disabled(newText.trimmed.isEmpty)
             .accessibilityLabel(Text(tr("Ajouter")))
         }

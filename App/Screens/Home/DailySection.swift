@@ -102,7 +102,7 @@ struct DailySection: View {
                     .frame(maxWidth: .infinity, minHeight: 44)
                     .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("daily-empty-add")
         }
         .card()
@@ -222,7 +222,7 @@ private struct DayCard<Content: View>: View {
 
         if let route {
             NavigationLink(value: route) { themed(card) }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
         } else {
             themed(card)
                 .accessibilityElement(children: .contain)
@@ -311,7 +311,7 @@ private struct NutritionDayTile: View {
                 }
                 .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("daily-nutrition-open")
             HStack(spacing: 6) {
                 Button {
@@ -323,7 +323,7 @@ private struct NutritionDayTile: View {
                         .frame(width: 44, height: 34)
                         .background(accent, in: Capsule())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Scanner")))
                 .accessibilityIdentifier("daily-scan")
                 NavigationLink(value: HomeRoute.app(.nutrition)) {
@@ -336,7 +336,7 @@ private struct NutritionDayTile: View {
                         .frame(maxWidth: .infinity, minHeight: 34)
                         .background(accent.opacity(0.14), in: Capsule())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
         .padding(14)
@@ -416,7 +416,7 @@ private struct NutritionDayTile: View {
             }
             .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("daily-nutrition-open")
             HStack(spacing: 8) {
                 Button {
@@ -428,7 +428,7 @@ private struct NutritionDayTile: View {
                         .frame(maxWidth: .infinity, minHeight: 38)
                         .background(accent, in: Capsule())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("daily-scan")
                 NavigationLink(value: HomeRoute.app(.nutrition)) {
                     Text(mealsText)
@@ -439,7 +439,7 @@ private struct NutritionDayTile: View {
                         .frame(maxWidth: .infinity, minHeight: 38)
                         .background(accent.opacity(0.14), in: Capsule())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
             if let meal = nutrition.nextMeal, let kcal = nutrition.nextMealKcal, kcal > 0 {
                 Text(tr("Prochain repas : \(meal.lowercased()), environ \(TF.int(kcal)) kcal"))
@@ -602,7 +602,7 @@ private struct WorkoutDayTile: View {
                     .frame(width: 28, height: 24)
                     .background(Color(hex: "E5484D").opacity(0.14), in: Capsule())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityLabel(Text(label))
         }
     }
@@ -615,7 +615,7 @@ private struct WorkoutDayTile: View {
                 .frame(maxWidth: .infinity, minHeight: 36)
                 .background(Color(hex: "E5484D"), in: Capsule())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 }
 
@@ -641,7 +641,7 @@ private struct PlanningDayTile: View {
                     NavigationLink(value: HomeRoute.app(.planning)) {
                         table(week, isEmpty: isEmpty)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityLabel(Text(tr("Planning")))
                     .accessibilityValue(Text(isEmpty ? tr("Rien de prévu cette semaine.") : ""))
                     .accessibilityIdentifier("daily-planning-week")
@@ -707,7 +707,7 @@ private struct PlanningDayTile: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityIdentifier("daily-planning-calendar")
     }
 
@@ -906,7 +906,7 @@ private struct RemindersDayTile: View {
                 ForEach(items) { item in
                     if let route = item.route {
                         NavigationLink(value: route) { row(item) }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                     } else {
                         row(item)
                     }
@@ -968,7 +968,7 @@ private struct PrioritiesDayTile: View {
                                 .lineLimit(1)
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
                 if hasQuickAdd {
                     quickAdd
@@ -992,7 +992,7 @@ private struct PrioritiesDayTile: View {
                         .font(.title3)
                         .foregroundStyle(draft.trimmed.isEmpty ? Color.secondary : Color.accentColor)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .disabled(draft.trimmed.isEmpty)
                 .accessibilityLabel(Text(tr("Ajouter une tâche")))
                 .accessibilityIdentifier("daily-quick-task-add")
@@ -1006,7 +1006,7 @@ private struct PrioritiesDayTile: View {
                     .frame(width: 28, height: 28)
                     .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityLabel(Text(tr("Top 3")))
         }
         .padding(.top, items.isEmpty ? 0 : 2)
@@ -1056,7 +1056,7 @@ private struct InviteDayTile: View {
             }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityIdentifier("daily-invite-\(area.rawValue)")
     }
 

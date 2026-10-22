@@ -86,7 +86,7 @@ struct TasksView: View {
             }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(task.isDone ? .isSelected : [])
     }
 

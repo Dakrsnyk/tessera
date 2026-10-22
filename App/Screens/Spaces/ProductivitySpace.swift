@@ -102,7 +102,7 @@ struct ProductivitySpaceSections: View {
                         Label(counter.name, systemImage: counter.symbol)
                             .foregroundStyle(Color.primary)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     Spacer()
                     Text("\(counter.value(on: Date()))\(counter.goal.map { " / \($0)" } ?? "")")
                         .monospacedDigit()
@@ -113,7 +113,7 @@ struct ProductivitySpaceSections: View {
                     } label: {
                         Image(systemName: "plus.circle.fill").font(.title3)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .foregroundStyle(Color(hex: counter.colorHex))
                     .accessibilityLabel(Text(tr("Ajouter à \(counter.name)")))
                 }
@@ -186,7 +186,7 @@ struct ProjectEditor: View {
                         } label: {
                             Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         TextField(tr("Tâche"), text: $task.title)
                     }
                 }

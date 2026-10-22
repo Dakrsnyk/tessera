@@ -448,7 +448,7 @@ struct WidgetStudio: View {
                         .padding(12)
                         .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     if case .photo = design.background {
                         StudioSlider(title: tr("Voile pour la lisibilité"), value: Binding(
                             get: { design.style.veil ?? 0.28 },
@@ -503,7 +503,7 @@ struct WidgetStudio: View {
                             .frame(width: 44, height: 30)
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityLabel(Text(tr("Dégradé")))
                 }
             }
@@ -565,7 +565,7 @@ struct WidgetStudio: View {
                         .frame(minHeight: 48)
                         .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("part-\(pair.element.kind.rawValue)")
                 }
             }
@@ -817,7 +817,7 @@ struct ColorDot: View {
                 }
                 .frame(minWidth: 44, minHeight: 44)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

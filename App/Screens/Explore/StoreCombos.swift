@@ -343,7 +343,7 @@ struct StoreCombosView: View {
                             } label: {
                                 ComboRow(combo: combo, isPremiumUser: model.isPremium)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                     }
                 }

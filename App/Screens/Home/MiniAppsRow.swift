@@ -152,7 +152,7 @@ struct MiniAppsRow: View {
                         NavigationLink(value: HomeRoute.app(app)) {
                             chip(app, caption: MiniAppSummary.caption(app, model, now: now))
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .accessibilityIdentifier("mini-app-\(app.rawValue)")
                         .contextMenu {
                             Button {

@@ -107,7 +107,7 @@ struct WeeklySetupHero: View {
             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             .contentShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .padding(.horizontal, 20)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(Text(tr("Écran d'accueil de la semaine : \(setup.name). \(setup.tagline)")))
@@ -271,7 +271,7 @@ struct ShowcaseGrid: View {
                         } label: {
                             ShowcaseTile(item: item, isPremiumUser: isPremiumUser)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     if pair.element.count == 1 && pair.element[0].widget.family == .systemSmall {
@@ -394,7 +394,7 @@ struct StoreCollectionsView: View {
                         } label: {
                             CollectionTile(collection: collection)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                     }
                 }
             }
@@ -442,7 +442,7 @@ struct StorePacksView: View {
                         } label: {
                             PackCard(pack: pack, isPremiumUser: model.isPremium, width: nil)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                     }
                 }
             }
@@ -631,7 +631,7 @@ struct EssentialsList: View {
                     .padding(.vertical, 10)
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityElement(children: .combine)
                 .accessibilityHint(Text(tr("Ouvre l'éditeur")))
                 if pair.offset < shown.count - 1 {
@@ -678,7 +678,7 @@ struct CategoryIndex: View {
                     .padding(.vertical, 10)
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("store-category-\(category.rawValue)")
                 if pair.offset < categories.count - 1 {
                     Divider().padding(.leading, 44)
@@ -768,7 +768,7 @@ struct SeasonalCollection: View {
                         } label: {
                             PackCard(pack: pack, isPremiumUser: isPremiumUser, width: 230)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                     }
                 }
                 .padding(.horizontal, 18)
@@ -833,7 +833,7 @@ struct WeeklyStyleFeature: View {
             .padding(16)
             .background(.cardFill, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .padding(.horizontal, 20)
         .accessibilityIdentifier("store-weekly-style")
     }

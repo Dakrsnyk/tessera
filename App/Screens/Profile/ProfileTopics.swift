@@ -82,7 +82,7 @@ struct ChoiceChip: View {
             .frame(minHeight: 40)
             .background(isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(AppFill.screenFill), in: Capsule())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .animation(.snappy(duration: 0.2), value: isSelected)
     }
@@ -328,7 +328,7 @@ struct TopicForm: View {
                             .frame(maxWidth: .infinity, minHeight: 40)
                             .background(isOn ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(AppFill.screenFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityLabel(Text(Fmt.plural(count, tr("séance"), tr("séances"))))
                     .accessibilityAddTraits(isOn ? .isSelected : [])
                 }
@@ -490,7 +490,7 @@ struct TopicForm: View {
                     .frame(width: 44, height: 44)
                     .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .disabled(text.wrappedValue.trimmed.isEmpty)
             .accessibilityLabel(Text(tr("Ajouter")))
         }
@@ -558,7 +558,7 @@ struct TopicForm: View {
                 .frame(minHeight: 44)
                 .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .sheet(isPresented: $showsCityPicker) {
                 NavigationStack {
                     WeatherLocationView()
@@ -628,7 +628,7 @@ struct InterestGrid: View {
                         }
                     }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(interest.title))
                 .accessibilityAddTraits(isOn ? .isSelected : [])
                 .accessibilityIdentifier("interest-\(interest.rawValue)")

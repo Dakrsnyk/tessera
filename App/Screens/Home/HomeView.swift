@@ -123,6 +123,6 @@ struct PremiumBanner: View {
             }
             .card()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 }

@@ -246,7 +246,7 @@ private struct WallpaperCard: View {
                     .multilineTextAlignment(.leading)
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(wallpaper.spokenName))
         .accessibilityAddTraits(.isButton)

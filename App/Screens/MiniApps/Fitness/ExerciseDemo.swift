@@ -146,7 +146,7 @@ private struct ViewPicker: View {
                         .foregroundStyle(selection == index ? Color(uiColor: .systemBackground) : .primary)
                         .background(selection == index ? Color.primary : Color.secondary.opacity(0.12), in: Capsule())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Vue \(name)")))
                 .accessibilityAddTraits(selection == index ? .isSelected : [])
                 .accessibilityIdentifier("exercise-demo-view-\(index)")

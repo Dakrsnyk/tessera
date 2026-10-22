@@ -345,7 +345,7 @@ struct FitnessProgressPage: View {
                 row(record, state: state, chevron: false)
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 
     private func row(_ record: FitnessMath.Record, state: FitnessState, chevron: Bool = true) -> some View {

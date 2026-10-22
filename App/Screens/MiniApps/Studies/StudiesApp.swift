@@ -136,18 +136,18 @@ struct StudiesAppView: View {
                 MiniStat(title: tr("Moyenne"), value: StudentMath.overallAverage(state).map { "\(TF.decimal($0, 1)) %" } ?? "–",
                          detail: state.grades.isEmpty ? tr("aucune note") : Fmt.plural(state.grades.count, tr("note"), tr("notes")))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("studies-average")
             NavigationLink(value: HomeRoute.page(.studiesRevision)) {
                 MiniStat(title: tr("Étude"), value: Fmt.minutes(studied), detail: tr("sur \(Fmt.hours(state.weeklyStudyGoalHours))"),
                          colorHex: studied >= state.weeklyStudyGoalHours * 60 ? "1E9E75" : nil)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             if !state.cards.isEmpty {
                 NavigationLink(value: HomeRoute.page(.studiesRevision)) {
                     MiniStat(title: tr("Fiches"), value: "\(due)", detail: due == 0 ? tr("à jour") : tr("à réviser"), colorHex: due > 0 ? accentHex : nil)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }
@@ -176,7 +176,7 @@ struct StudiesAppView: View {
                         .padding(.vertical, 12)
                         .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("studies-assignments")
                 }
                 .padding(.horizontal, 14)
@@ -203,7 +203,7 @@ struct StudiesAppView: View {
                     .padding(.horizontal, 14)
                     .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("studies-exams")
             }
         }
@@ -238,14 +238,14 @@ struct StudiesAppView: View {
                 MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Horaire"),
                         detail: weekly.isEmpty ? tr("Tes cours de la semaine") : tr("\(Fmt.plural(weekly.count, tr("cours", context: "one"), tr("cours"))) par semaine"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("studies-timetable")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.studiesCourses)) {
                 MiniRow(symbol: "books.vertical.fill", colorHex: accentHex, title: tr("Cours"), detail: tr("Moyennes, horaire et devoirs par cours"),
                         value: state.courses.isEmpty ? nil : "\(state.courses.count)")
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("studies-courses")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.studiesAssignments)) {
@@ -253,24 +253,24 @@ struct StudiesAppView: View {
                         detail: groups.late.isEmpty ? tr("À rendre, rendus") : tr("\(groups.late.count) en retard"),
                         value: groups.isEmpty ? nil : "\(groups.late.count + groups.thisWeek.count + groups.later.count)")
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.studiesExams)) {
                 MiniRow(symbol: "pencil.and.list.clipboard", colorHex: "E5484D", title: tr("Examens"), detail: tr("Compte à rebours et préparation"),
                         value: StudentMath.upcomingExams(state, at: now).isEmpty ? nil : "\(StudentMath.upcomingExams(state, at: now).count)")
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.studiesGrades)) {
                 MiniRow(symbol: "chart.bar.fill", colorHex: "3366FF", title: tr("Notes"), detail: tr("Moyennes et ce qu'il te faut pour ton objectif"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("studies-grades")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.studiesRevision)) {
                 MiniRow(symbol: "rectangle.on.rectangle.angled", colorHex: "8C6CFF", title: tr("Révisions"), detail: tr("Temps d'étude et fiches"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("studies-revision")
         }
     }
@@ -308,7 +308,7 @@ struct NextClassCard: View {
                 .padding(16)
                 .background(Color(hex: hex).opacity(0.12), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("studies-next-class")
         }

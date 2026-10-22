@@ -155,7 +155,7 @@ struct WeekCard<Content: View>: View {
             .background(isSelected ? accent.opacity(0.14) : Color.clear, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityLabel(Text(Fmt.longDay(date)))
         .accessibilityValue(Text(state.isCaughtUp ? tr("Séance rattrapée") : ""))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
@@ -279,7 +279,7 @@ struct WeekTimetable: View {
                     } label: {
                         label
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityLabel(Text(Fmt.longDay(entry.day)))
                     .accessibilityAddTraits(isSelected ? .isSelected : [])
                 } else {
@@ -405,7 +405,7 @@ struct WeekTimetable: View {
                     Group {
                         if let onOpen {
                             Button { onOpen(block.item) } label: { blockView(block, height: length) }
-                                .buttonStyle(.plain)
+                                .buttonStyle(.pressable)
                         } else {
                             blockView(block, height: length)
                         }

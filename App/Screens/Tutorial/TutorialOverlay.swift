@@ -145,7 +145,7 @@ struct TutorialOverlay: View {
                     .frame(width: 30, height: 30)
                     .background(Color.primary.opacity(0.07), in: Circle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .frame(minWidth: 44, minHeight: 44)
             .accessibilityLabel(Text(tr("Quitter le tutoriel")))
             .accessibilityIdentifier("tutorial-close")
@@ -180,7 +180,7 @@ struct TutorialOverlay: View {
                         .frame(maxWidth: .infinity, minHeight: 22)
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Aller à l'étape \(item.number) : \(item.title(name: firstName))")))
             }
         }
@@ -316,7 +316,7 @@ struct TutorialStudioDemo: View {
                                 }
                                 .frame(minWidth: 28, minHeight: 32)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .accessibilityLabel(Text(Palette.name(for: hex)))
                         .accessibilityIdentifier("tutorial-color-\(hex)")
                     }
@@ -335,7 +335,7 @@ struct TutorialStudioDemo: View {
                                     .background(Color(hex: palette.background[0]), in: Capsule())
                                     .overlay { Capsule().strokeBorder(Color(hex: palette.accent).opacity(0.8), lineWidth: 1.5) }
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                             .accessibilityLabel(Text(tr("Palette \(palette.name)")))
                         }
                     }
@@ -352,7 +352,7 @@ struct TutorialStudioDemo: View {
                 .frame(width: 34, height: 30)
                 .background(Color.primary.opacity(0.07), in: Capsule())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .foregroundStyle(enabled ? Color.primary : Color.secondary.opacity(0.5))
         .disabled(!enabled)
         .accessibilityLabel(Text(label))

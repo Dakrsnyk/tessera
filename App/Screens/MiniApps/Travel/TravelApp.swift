@@ -128,7 +128,7 @@ struct TravelAppView: View {
                     .padding(.vertical, 4)
                     .miniCard()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 // It opens the program: the « Programme » row of the list below is only there when this card is not.
                 .accessibilityIdentifier("travel-program")
             }
@@ -154,7 +154,7 @@ struct TravelAppView: View {
             .padding(14)
             .miniTile()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityIdentifier("travel-budget")
     }
 
@@ -176,7 +176,7 @@ struct TravelAppView: View {
             .padding(14)
             .miniTile()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityIdentifier("travel-checklist")
     }
 
@@ -221,14 +221,14 @@ struct TravelAppView: View {
                             detail: tr("Vols, hébergements et activités, jour par jour"),
                             value: "\(TravelMath.program(state, for: trip).count) j")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("travel-program")
                 MiniDivider()
             }
             Button { sheet = .trip(trip) } label: {
                 MiniRow(symbol: "pencil", colorHex: "8A8A8E", title: tr("Modifier le voyage"), detail: "\(trip.destination) · \(Travel.dates(trip))", showsChevron: false)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
         }
     }
 
@@ -248,14 +248,14 @@ struct TravelAppView: View {
                         MiniRow(symbol: trip.end < now ? "clock.arrow.circlepath" : "airplane", colorHex: trip.end < now ? "8A8A8E" : accentHex,
                                 title: trip.destination, detail: Travel.dates(trip), showsChevron: false)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
                 if !rest.isEmpty { MiniDivider() }
                 if current != nil {
                     Button { sheet = .trip(Travel.newTrip()) } label: {
                         MiniRow(symbol: "plus", colorHex: accentHex, title: tr("Nouveau voyage"), showsChevron: false)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("travel-add-trip")
                 }
             }

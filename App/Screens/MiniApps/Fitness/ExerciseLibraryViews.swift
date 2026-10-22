@@ -68,7 +68,7 @@ struct ExerciseLibraryPage: View {
                             }
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("library-premium")
                 }
             }
@@ -407,7 +407,7 @@ struct ExerciseDetailView: View {
                                     }
                                 }
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                             if index < alternatives.count - 1 { MiniDivider() }
                         }
                     }

@@ -266,7 +266,7 @@ struct WeatherAppView: View {
                     .padding(.horizontal, 14)
                     .miniCard()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }

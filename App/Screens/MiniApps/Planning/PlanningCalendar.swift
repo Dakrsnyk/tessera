@@ -184,7 +184,7 @@ struct PlanningCalendarCard: View {
                     MiniMonth(month: month, marked: marked, accentHex: accentHex,
                               isCurrent: calendar.isDate(month, equalTo: Date(), toGranularity: .month))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(Fmt.monthYear(month)))
             }
         }
@@ -375,7 +375,7 @@ struct PlanningMonthGrid: View {
             .frame(maxWidth: .infinity, minHeight: 50)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityLabel(Text(Fmt.longDay(date)))
         .accessibilityValue(Text(list.isEmpty ? tr("Libre") : Fmt.plural(list.count, tr("élément"), tr("éléments"))))
         .accessibilityAddTraits(isSelected ? .isSelected : [])

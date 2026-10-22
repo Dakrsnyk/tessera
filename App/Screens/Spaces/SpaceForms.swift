@@ -181,7 +181,7 @@ struct WeekdayPicker: View {
                         .foregroundStyle(isOn ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
                         .background(isOn ? Color.accentColor : Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityAddTraits(isOn ? .isSelected : [])
             }
         }

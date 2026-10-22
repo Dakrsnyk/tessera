@@ -363,7 +363,7 @@ struct FitnessSessionPage: View {
                     } label: {
                         infoLabel(exerciseInfo, font: .body)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityLabel(Text(tr("Fiche de \(item.name)")))
                 }
             }
@@ -381,7 +381,7 @@ struct FitnessSessionPage: View {
                                     .padding(.vertical, 5)
                                     .background(Color(hex: accentHex).opacity(0.12), in: Capsule())
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                         }
                         // The sets passed: shown apart, neither done nor left to do.
                         ForEach(0..<passed, id: \.self) { _ in
@@ -430,7 +430,7 @@ struct FitnessSessionPage: View {
                         MiniRow(symbol: "play.fill", colorHex: accentHex, title: routine.name,
                                 detail: tr("\(Fmt.plural(routine.exercises.count, tr("exercice"), tr("exercices"))) · environ \(FitnessPlan.minutes(routine)) min"))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     if index < state.routines.count - 1 { MiniDivider() }
                 }
                 if !state.routines.isEmpty { MiniDivider() }
@@ -443,7 +443,7 @@ struct FitnessSessionPage: View {
                 } label: {
                     MiniRow(symbol: "sparkles", colorHex: accentHex, title: tr("Séance libre"), detail: tr("Ajoute les exercices au fur et à mesure"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }

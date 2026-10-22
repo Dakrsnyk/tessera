@@ -134,7 +134,7 @@ struct CarAppView: View {
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(Color(hex: Car.fuelHex))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
         .card()
@@ -155,7 +155,7 @@ struct CarAppView: View {
                         MiniStat(title: tr("Consommation"), value: TF.decimal(consumption, 1), unit: "L/100",
                                  detail: CarMath.fuelCostPerKm(state).map { tr("\(TF.money($0 * 100, currency, decimals: 2)) / 100 km") })
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     // The « Carburant » row of the list below is only there when this figure is not.
                     .accessibilityIdentifier("car-fuel")
                 }
@@ -163,7 +163,7 @@ struct CarAppView: View {
                     NavigationLink(value: HomeRoute.page(.carCosts)) {
                         MiniStat(title: tr("Coût réel"), value: TF.money(cost.total, currency), detail: tr("par mois, tout compris"))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("car-cost")
                 }
             }
@@ -186,7 +186,7 @@ struct CarAppView: View {
                     }
                     .card(padding: 14)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("car-maintenance")
             }
         }
@@ -211,7 +211,7 @@ struct CarAppView: View {
                     .padding(.vertical, 4)
                     .miniCard()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("car-deadlines")
             }
         }
@@ -234,14 +234,14 @@ struct CarAppView: View {
                     MiniRow(symbol: "fuelpump.fill", colorHex: Car.fuelHex, title: tr("Carburant"), detail: tr("Pleins, prix et consommation"),
                             value: state.fills.isEmpty ? nil : "\(state.fills.count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("car-fuel")
                 MiniDivider()
             }
             NavigationLink(value: HomeRoute.page(.carMileage)) {
                 MiniRow(symbol: "speedometer", colorHex: accentHex, title: tr("Kilométrage"), detail: tr("Kilomètres par mois"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("car-mileage")
             if !showsMaintenance {
                 MiniDivider()
@@ -249,7 +249,7 @@ struct CarAppView: View {
                     MiniRow(symbol: "wrench.and.screwdriver.fill", colorHex: "3366FF", title: tr("Entretien"), detail: tr("Vidange, pneus, freins…"),
                             value: state.services.isEmpty ? nil : "\(state.services.count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("car-maintenance")
             }
             if !showsDeadlines {
@@ -257,7 +257,7 @@ struct CarAppView: View {
                 NavigationLink(value: HomeRoute.page(.carDeadlines)) {
                     MiniRow(symbol: "calendar.badge.exclamationmark", colorHex: Car.alertHex, title: tr("Échéances"), detail: tr("Assurance, immatriculation, pneus d'hiver…"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("car-deadlines")
             }
             if !showsCost {
@@ -265,7 +265,7 @@ struct CarAppView: View {
                 NavigationLink(value: HomeRoute.page(.carCosts)) {
                     MiniRow(symbol: "creditcard.fill", colorHex: "2F8F7A", title: tr("Coûts"), detail: tr("Ce que la voiture coûte vraiment chaque mois"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("car-cost")
             }
         }

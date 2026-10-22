@@ -170,7 +170,7 @@ struct FinancesAppView: View {
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(Color(hex: accentHex))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-budget")
             }
             Text(TF.money(abs(remaining), currency))
@@ -223,11 +223,11 @@ struct FinancesAppView: View {
                         MiniStat(title: tr("Revenus"), value: TF.money(expected, currency), detail: tr("prévus (Mes informations)"))
                     }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 NavigationLink(value: HomeRoute.page(.financesTrends)) {
                     MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency), detail: tr("ce mois-ci"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 // The « Évolution » row of the list below is only there when these tiles are not.
                 .accessibilityIdentifier("finances-trends")
                 NavigationLink(value: HomeRoute.page(.financesStatement(interval.start))) {
@@ -235,7 +235,7 @@ struct FinancesAppView: View {
                     MiniStat(title: tr("Solde"), value: TF.money(balance, currency), detail: earned > 0 ? tr("jusqu'ici") : tr("estimé"),
                              colorHex: balance < 0 ? Finances.overHex : Finances.incomeHex)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-month-balance")
             }
             .accessibilityElement(children: .contain)
@@ -266,7 +266,7 @@ struct FinancesAppView: View {
                     }
                     .card(padding: 14)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-categories")
             }
         }
@@ -293,7 +293,7 @@ struct FinancesAppView: View {
                     .padding(.vertical, 4)
                     .miniCard()
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-bills")
             }
         }
@@ -314,7 +314,7 @@ struct FinancesAppView: View {
                     }
                     .card(padding: 14)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-savings")
             }
         }
@@ -335,14 +335,14 @@ struct FinancesAppView: View {
             NavigationLink(value: HomeRoute.page(.financesTransactions)) {
                 MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Opérations"), detail: tr("Dépenses et revenus, mois par mois"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("finances-transactions")
             if !showsCategories {
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.financesCategories)) {
                     MiniRow(symbol: "chart.pie.fill", colorHex: "8C6CFF", title: tr("Catégories"), detail: tr("Répartition et limites"), value: "\(state.categories.count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-categories")
             }
             if !showsBills {
@@ -351,7 +351,7 @@ struct FinancesAppView: View {
                     MiniRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: tr("Factures et abonnements"),
                             detail: state.bills.isEmpty ? tr("Loyer, Internet, abonnements…") : tr("\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-bills")
             }
             if !showsSavings {
@@ -360,7 +360,7 @@ struct FinancesAppView: View {
                     MiniRow(symbol: "banknote.fill", colorHex: Finances.incomeHex, title: tr("Épargne et comptes"),
                             detail: state.accounts.isEmpty ? tr("Objectifs et valeur nette") : tr("Valeur nette \(TF.money(BudgetMath.netWorth(state), currency))"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-savings")
             }
             if !showsMonth {
@@ -368,7 +368,7 @@ struct FinancesAppView: View {
                 NavigationLink(value: HomeRoute.page(.financesTrends)) {
                     MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Évolution"), detail: tr("Six mois, moyennes et comparaisons"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-trends")
             }
             MiniDivider()
@@ -378,7 +378,7 @@ struct FinancesAppView: View {
                 MiniRow(symbol: "repeat", colorHex: "D6409F", title: tr("Dépenses fixes"),
                         detail: monthly > 0 ? tr("\(TF.money(monthly, currency)) par mois") : tr("Loyer, assurances, forfaits…"))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("finances-fixed")
         }
     }
@@ -511,7 +511,7 @@ private struct BalanceChartCard: View {
                     }
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-statement")
                 Spacer(minLength: 8)
                 Picker(tr("Période"), selection: Binding(get: { period }, set: { choice in
@@ -529,7 +529,7 @@ private struct BalanceChartCard: View {
             NavigationLink(value: statement) {
                 chart(points, color: color, dayFormat: dayFormat)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             Text(caption(points))
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -540,7 +540,7 @@ private struct BalanceChartCard: View {
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color(hex: Finances.accentHex))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("finances-opening")
         }
         .card()

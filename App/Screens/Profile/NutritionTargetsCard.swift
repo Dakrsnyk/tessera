@@ -97,7 +97,7 @@ struct NutritionTargetsCard: View {
                         row(target, recommended: recommended, auto: auto)
                     }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("target-row-\(target.rawValue)")
                 if index < targets.count - 1 { Divider() }
             }

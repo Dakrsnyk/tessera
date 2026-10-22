@@ -79,7 +79,7 @@ struct PlanningAppView: View {
                         countTile(tr("À faire"), tasks.filter { !$0.isDone }.count, nil)
                     }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-tasks")
             }
 
@@ -90,46 +90,46 @@ struct PlanningAppView: View {
                             detail: tr("Cours, travail, rendez-vous et autres événements"),
                             value: model.student.slots.isEmpty ? nil : "\(model.student.slots.count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-schedule")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.studiesHome)) {
                     MiniRow(symbol: "graduationcap.fill", colorHex: ScheduleKind.course.colorHex, title: tr("Études"),
                             detail: tr("Cours, examens, devoirs, notes et fiches"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-studies")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningWeek)) {
                     MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Semaine"), detail: tr("Tout ce qui t'attend, jour par jour"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-week")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningMonth)) {
                     MiniRow(symbol: "calendar", colorHex: accentHex, title: tr("Mois"), detail: tr("Le calendrier du mois"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-month")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningProjects)) {
                     MiniRow(symbol: "folder.fill", colorHex: accentHex, title: tr("Projets"), detail: tr("Tâches regroupées par projet"),
                             value: model.productivity.projects.isEmpty ? nil : "\(model.productivity.projects.count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningHabits)) {
                     MiniRow(symbol: "repeat", colorHex: "7FA33A", title: tr("Habitudes"), detail: tr("Séries et régularité"),
                             value: model.content.habits.isEmpty ? nil : "\(model.content.habits.filter { $0.isDone(on: now) }.count)/\(model.content.habits.count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-habits")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.planningFocus)) {
                     MiniRow(symbol: "timer", colorHex: "8C6CFF", title: tr("Concentration"),
                             detail: tr("\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
             MiniAppInfoSection(app: .planning)
         }
@@ -198,7 +198,7 @@ struct PlanningAppView: View {
                         .padding(.vertical, 10)
                         .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .contextMenu {
                         Button(role: .destructive) {
                             model.update(\.productivity) { $0.priorities.removeAll { $0.id == item.id } }
@@ -317,7 +317,7 @@ struct AgendaRow: View {
                         .font(.title3)
                         .foregroundStyle(done ? Color(hex: item.colorHex) : .secondary)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel(Text(done ? tr("Marquer comme à faire") : tr("Marquer comme fait")))
             } else {
                 Image(systemName: item.symbol)

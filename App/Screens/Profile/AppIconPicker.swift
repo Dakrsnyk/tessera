@@ -33,7 +33,7 @@ struct AppIconPicker: View {
                         } label: {
                             cell(choice)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                         .accessibilityIdentifier("icon-\(choice.asset)")
                     }
                 }

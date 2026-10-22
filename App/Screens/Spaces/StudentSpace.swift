@@ -82,14 +82,14 @@ struct StudentSpaceSections: View {
                     } label: {
                         Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle").foregroundStyle(.tint)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     Button { sheets?.open { AssignmentEditor(assignment: item) } } label: {
                         VStack(alignment: .leading, spacing: 1) {
                             Text(item.title).strikethrough(item.isDone).foregroundStyle(item.isDone ? .secondary : .primary)
                             Text(TF.relativeDay(item.due, from: now).capitalizedFirst).font(.caption).foregroundStyle(Color.secondary)
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
             }
             .onDelete { offsets in

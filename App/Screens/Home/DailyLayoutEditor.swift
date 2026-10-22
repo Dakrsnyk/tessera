@@ -145,7 +145,7 @@ struct DailyLayoutEditor: View {
                     .foregroundStyle(isHidden ? Color.secondary : Color.accentColor)
                     .frame(width: 32, height: 32)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityLabel(Text(isHidden ? tr("Afficher \(info.title)") : tr("Masquer \(info.title)")))
         }
     }

@@ -57,7 +57,7 @@ struct LockScreenCreator: View {
                                 } label: {
                                     LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(.pressable)
                                 .accessibilityIdentifier("lock-\(pair.element.widget.kind.rawValue)")
                             }
                         }

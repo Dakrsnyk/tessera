@@ -45,7 +45,7 @@ struct MyInfoCard: View {
                         }
                         .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityElement(children: .combine)
                     .accessibilityIdentifier("home-info")
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -54,7 +54,7 @@ struct MyInfoCard: View {
                                 NavigationLink(value: HomeRoute.infoArea(area)) {
                                     AreaBadge(area: area, missing: model.missingItems(area.keyItems).count)
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(.pressable)
                                 .accessibilityIdentifier("info-\(area.rawValue)")
                             }
                         }
@@ -199,7 +199,7 @@ struct MyInfoView: View {
                     NavigationLink(value: HomeRoute.infoArea(pair.element)) {
                         AreaRow(area: pair.element)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("area-\(pair.element.rawValue)")
                     if pair.offset < areas.count - 1 {
                         Divider().padding(.leading, 56)
@@ -297,7 +297,7 @@ struct InfoAreaView: View {
                         }
                         .card(padding: 14)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("area-more")
                 }
                 if let space = area.space {

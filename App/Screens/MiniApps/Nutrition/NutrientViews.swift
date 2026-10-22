@@ -35,7 +35,7 @@ struct NutrientLockRow: View {
             }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityIdentifier("nutrients-premium")
         .sheet(item: $paywall) { PaywallView(context: $0) }
     }

@@ -49,7 +49,7 @@ struct SpacesView: View {
                                     } label: {
                                         ImmersiveSpaceCard(space: space, summary: summary(for: space))
                                     }
-                                    .buttonStyle(.plain)
+                                    .buttonStyle(.pressable)
                                     .accessibilityIdentifier("space-card-\(space.rawValue)")
                                     .tutorialTarget(.createSpace, when: space == shownSpaces.first)
                                 case .photos:
@@ -118,7 +118,7 @@ struct SpacesView: View {
         } label: {
             PhotoQuotesCard()
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityIdentifier("space-card-photos")
         .confirmationDialog(tr("Créer un widget"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {
             Button(tr("Photos")) { startPhotoQuote(.photos) }
@@ -176,7 +176,7 @@ struct SpacesView: View {
                 .foregroundStyle(isOn ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(Color.primary))
                 .background(isOn ? AnyShapeStyle(Color.primary) : AnyShapeStyle(AppFill.cardFill), in: Capsule())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 
@@ -589,7 +589,7 @@ struct SpaceView: View {
                             .frame(width: 128, alignment: .leading)
                         }
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
             }
             .padding(.horizontal, 20)

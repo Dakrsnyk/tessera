@@ -69,7 +69,7 @@ struct SpaceOptionsSection: View {
                         .frame(minHeight: 44)
                         .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityIdentifier("space-data")
                 }
                 if let note = note(for: kind) {

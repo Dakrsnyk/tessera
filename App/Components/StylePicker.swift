@@ -70,7 +70,7 @@ struct AppStyleGrid: View {
                 } label: {
                     AppStyleSwatch(style: style, isSelected: model.settings.appStyle == style.id, size: swatchSize)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }

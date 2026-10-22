@@ -51,7 +51,7 @@ struct KindOptionsSection: View {
                                 Image(systemName: "minus.circle.fill")
                                     .foregroundStyle(.red)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                             .accessibilityLabel(Text(tr("Retirer \(WorldCities.name(for: id))")))
                         }
                         .font(.subheadline)
@@ -229,7 +229,7 @@ struct KindOptionsSection: View {
             .frame(minHeight: 44)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 }
 

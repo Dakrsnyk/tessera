@@ -338,7 +338,7 @@ struct ExploreView: View {
                 } label: {
                     LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }
@@ -359,7 +359,7 @@ struct ExploreView: View {
                     } label: {
                         ComboCard(combo: combo, height: height, isPremiumUser: model.isPremium)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
             }
             .padding(.horizontal, 20)
@@ -392,7 +392,7 @@ struct ExploreView: View {
             } label: {
                 PackCard(pack: pack, isPremiumUser: model.isPremium)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
         }
     }
 
@@ -413,7 +413,7 @@ struct ExploreView: View {
                         } label: {
                             ThemeSwatch(theme: theme, accentHex: Palette.defaultAccent, isSelected: false, showsLock: theme.isPremium && !model.isPremium)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.pressable)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -578,7 +578,7 @@ struct ExploreView: View {
                                     } label: {
                                         PackCard(pack: pack, isPremiumUser: model.isPremium)
                                     }
-                                    .buttonStyle(.plain)
+                                    .buttonStyle(.pressable)
                                 }
                             }
                             .padding(.horizontal, 20)
@@ -606,7 +606,7 @@ struct ExploreView: View {
         } label: {
             TemplateCard(template: template, width: width, isPremiumUser: model.isPremium, family: family)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 }
 
@@ -628,7 +628,7 @@ struct FilterChip: View {
             .frame(minHeight: 36)
             .background(isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.cardFill), in: Capsule())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

@@ -82,7 +82,7 @@ struct WidgetCarousel<Menu: View>: View {
                 }
                 .shadow(color: .black.opacity(isCentered ? 0.24 : 0.12), radius: isCentered ? 20 : 10, y: isCentered ? 12 : 6)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .contextMenu { menu(design) }
         .accessibilityLabel(Text("\(design.name), \(design.kindTitle), \(design.displayFormat.title)"))
         .accessibilityHint(Text(isCentered ? tr("Ouvre l'éditeur") : tr("Amène ce widget au centre")))
@@ -115,7 +115,7 @@ struct CarouselAction: View {
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
         .accessibilityIdentifier(identifier ?? "")
     }
 }
@@ -183,7 +183,7 @@ struct CategoryStrip: View {
                         .frame(minWidth: 62)
                         .contentShape(Rectangle())
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .accessibilityLabel(Text("\(option.title), \(Fmt.plural(option.count, tr("widget"), tr("widgets")))"))
                     .accessibilityAddTraits(isSelected ? .isSelected : [])
                     .accessibilityIdentifier("shelf-\(option.title)")

@@ -155,7 +155,7 @@ struct FitnessAppView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                     .contextMenu {
                         Button(role: .destructive) {
                             deleting = session.id
@@ -343,7 +343,7 @@ struct FitnessAppView: View {
                 }
                 .card()
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
             .accessibilityIdentifier("fitness-activity")
         case .notAsked:
             Button {
@@ -353,7 +353,7 @@ struct FitnessAppView: View {
                 MiniRow(symbol: "figure.walk", colorHex: MiniStyle.stepsHex, title: tr("Afficher mes pas"), detail: tr("Pas, distance et étages, depuis le capteur de ton iPhone"))
                     .card(padding: 12)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
         default:
             EmptyView()
         }
@@ -376,13 +376,13 @@ struct FitnessAppView: View {
                 NavigationLink(value: HomeRoute.page(.fitnessProgram)) {
                     MiniRow(symbol: "calendar.badge.clock", colorHex: accentHex, title: tr("Programme"), detail: tr("Tes séances de la semaine"), value: state.routines.isEmpty ? nil : "\(state.routines.count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("fitness-program")
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.fitnessHistory)) {
                     MiniRow(symbol: "clock.arrow.circlepath", colorHex: accentHex, title: tr("Séances faites"), detail: tr("Toutes tes séances"), value: FitnessMath.sessions(state).isEmpty ? nil : "\(FitnessMath.sessions(state).count)")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("fitness-history")
             }
         }
@@ -401,14 +401,14 @@ struct FitnessAppView: View {
                     premiumRow(symbol: "books.vertical.fill", title: tr("Bibliothèque d'exercices"),
                                detail: tr("\(ExerciseLibrary.all.count) exercices, fiches et démonstrations"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("fitness-library")
                 ForEach(Array(quick)) { exercise in
                     MiniDivider()
                     NavigationLink(value: HomeRoute.page(.fitnessExercise(exercise.id))) {
                         premiumRow(symbol: "star.fill", title: exercise.name, detail: exercise.summary)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
             }
         }
@@ -438,7 +438,7 @@ struct FitnessAppView: View {
                 NavigationLink(value: HomeRoute.page(.fitnessProgress)) {
                     premiumRow(symbol: "chart.line.uptrend.xyaxis", title: tr("Progression"), detail: tr("Charges, volume, records et évolution"))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityIdentifier("fitness-progress")
             }
         }

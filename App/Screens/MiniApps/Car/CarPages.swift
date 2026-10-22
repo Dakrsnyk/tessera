@@ -60,7 +60,7 @@ struct CarFuelPage: View {
                                         detail: tr("\(TF.decimal(fill.liters, 1)) L · \(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \(Fmt.number(Int(fill.odometer))) km\(fill.isFull ? "" : tr(" · partiel"))"),
                                         value: TF.money(fill.total, currency, decimals: 2), showsChevron: false)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.pressable)
                             .accessibilityIdentifier("fuel-row")
                         }
                     }
