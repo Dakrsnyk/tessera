@@ -118,6 +118,30 @@ final class DailyBriefTests: XCTestCase {
         XCTAssertEqual(rest.stage, .rest(nextName: "Haut du corps", nextDay: "Demain"))
     }
 
+    func testASessionStillToDoComesBeforeTheMealsFromTheAfternoon() {
+        func input(at date: Date) -> DailyBrief.Input {
+            var input = DailyBrief.Input(now: date)
+            input.profile.provided = [.kcalTarget]
+            input.nutrition.goals.kcal = 2_400
+            input.fitness.routines = [Routine(name: "Jambes", exercises: [ExerciseTemplate(name: "Squat", sets: 2, reps: 8, weight: 80)], weekdays: [3])]
+            return input
+        }
+        XCTAssertEqual(ids(DailyBrief.tiles(input(at: wednesday(8)))).prefix(2), ["nutrition", "workout"], "In the morning the meals stay first")
+        XCTAssertEqual(ids(DailyBrief.tiles(input(at: wednesday(15)))).prefix(2), ["workout", "nutrition"])
+        XCTAssertEqual(ids(DailyBrief.tiles(input(at: wednesday(20)))).prefix(2), ["workout", "nutrition"])
+    }
+
+    func testHabitCardsCarryTheirOwnColorAndStreak() {
+        var input = DailyBrief.Input(now: wednesday(12))
+        var habit = Habit(name: "Lire", symbol: "book", colorHex: "7FA33A")
+        habit.completedDays = [0, 1, 2].map { DateMath.dayKey(wednesday(12).addingTimeInterval(-Double($0) * 86_400)) }
+        input.content.habits = [habit]
+        guard case let .habits(done, items)? = DailyBrief.tiles(input).first(where: { $0.id == "habits" }) else { return XCTFail("The habits card is there") }
+        XCTAssertEqual(done, 1)
+        XCTAssertEqual(items.first?.colorHex, "7FA33A")
+        XCTAssertEqual(items.first?.streak, 3)
+    }
+
     func testRowsPairHalfTiles() {
         let tiles: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .invite(.budget), .habits(done: 0, items: []), .budget(spentToday: 3, perDayLeft: nil)]
         let rows = DailyBrief.rows(tiles).map { $0.map(\.id) }

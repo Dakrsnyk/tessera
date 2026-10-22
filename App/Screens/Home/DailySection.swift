@@ -177,9 +177,15 @@ private struct DayCard<Content: View>: View {
     let colorHex: String
     var isDark = false
     var route: HomeRoute?
+    /// A small tag next to the title (« Maintenant »), and the glow of the card to do right now.
+    var badge: String? = nil
+    var glows = false
+    @Environment(\.colorScheme) private var scheme
     @ViewBuilder let content: () -> Content
 
     var body: some View {
+        let tint = Color(hex: colorHex)
+        let shape = RoundedRectangle(cornerRadius: 22, style: .continuous)
         let card = VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
                 Image(systemName: symbol)
@@ -190,18 +196,37 @@ private struct DayCard<Content: View>: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
                 Spacer(minLength: 0)
-                if route != nil {
+                if let badge {
+                    HStack(spacing: 5) {
+                        Circle().fill(tint).frame(width: 6, height: 6)
+                        Text(badge.uppercased())
+                            .font(.caption2.weight(.heavy))
+                            .tracking(0.6)
+                    }
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 8)
+                    .background(tint.opacity(0.2), in: Capsule())
+                } else if route != nil {
                     Image(systemName: "chevron.right")
                         .font(.caption2.weight(.bold))
                         .opacity(0.5)
                 }
             }
-            .foregroundStyle(isDark ? Color(hex: "FF8A8D") : Color(hex: colorHex))
+            .foregroundStyle(isDark ? Color(hex: "FF8A8D") : tint)
             content()
         }
         .padding(14)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(isDark ? AnyShapeStyle(Color(hex: "141416")) : AnyShapeStyle(.cardFill), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .background(isDark ? AnyShapeStyle(Color(hex: "141416")) : AnyShapeStyle(.cardFill), in: shape)
+        // A light gradient of the category's color, from the top left (no image behind the card).
+        .overlay {
+            shape
+                .fill(LinearGradient(colors: [tint.opacity(scheme == .dark ? 0.30 : 0.18), tint.opacity(scheme == .dark ? 0.11 : 0.07), .clear],
+                                     startPoint: .topLeading, endPoint: .bottomTrailing))
+                .allowsHitTesting(false)
+        }
+        .overlay { shape.strokeBorder(tint.opacity(glows ? 0.55 : 0.22), lineWidth: glows ? 1.5 : 1).allowsHitTesting(false) }
+        .shadow(color: glows ? tint.opacity(0.28) : .clear, radius: glows ? 12 : 0, y: 4)
 
         if let route {
             NavigationLink(value: route) { themed(card) }
@@ -442,7 +467,7 @@ private struct WorkoutDayTile: View {
     }
 
     var body: some View {
-        DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", route: .space(.fitness)) {
+        DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", route: .space(.fitness), badge: nowBadge, glows: isNow) {
             switch workout.stage {
             case .planned:
                 Text(workout.name)
@@ -513,6 +538,21 @@ private struct WorkoutDayTile: View {
         }
         .confirmsWorkoutDeletion($deleting)
         .accessibilityIdentifier("daily-workout")
+    }
+
+    /// The session to do right now: in progress, or still planned from the afternoon on (the moment
+    /// where Mon Quotidien puts it first).
+    private var isNow: Bool {
+        switch workout.stage {
+        case .inProgress: true
+        case .planned: DailyBrief.Moment(Date()) != .morning
+        default: false
+        }
+    }
+
+    private var nowBadge: String? {
+        if case .planned = workout.stage, isNow { return tr("Maintenant") }
+        return nil
     }
 
     private var title: String {
@@ -666,8 +706,36 @@ private struct HabitsDayTile: View {
     let items: [DailyBrief.Check]
     @Environment(AppModel.self) private var model
 
+    /// The longest run of days in a row among the habits (nothing shown without one).
+    private var streak: Int { items.map(\.streak).max() ?? 0 }
+
+    private var names: String { items.map { $0.isDone ? "\($0.title) ✓" : $0.title }.joined(separator: ", ") }
+
     var body: some View {
         DayCard(title: tr("Habitudes"), symbol: "repeat", colorHex: "5C8424", route: .page(.planningHabits)) {
+            // One ring a habit, in its own color: full with a check when done today.
+            HStack(spacing: 6) {
+                ForEach(items.prefix(5)) { item in
+                    let color = Color(hex: item.colorHex ?? "7FA33A")
+                    ZStack {
+                        Circle().strokeBorder(color, lineWidth: 2.5)
+                        if item.isDone {
+                            Circle().fill(color)
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 10, weight: .heavy))
+                                .foregroundStyle(.white)
+                        }
+                    }
+                    .frame(width: 22, height: 22)
+                }
+                if items.count > 5 {
+                    Text("+\(items.count - 5)")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(names))
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text("\(done)")
                     .font(.title.weight(.bold))
@@ -675,17 +743,17 @@ private struct HabitsDayTile: View {
                     .font(.headline)
                     .foregroundStyle(.secondary)
             }
-            HStack(spacing: 4) {
-                ForEach(items) { item in
-                    Capsule()
-                        .fill(item.isDone ? Color(hex: "7FA33A") : Color.secondary.opacity(0.2))
-                        .frame(height: 6)
-                }
+            if streak > 0 {
+                Text(tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))"))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            } else {
+                Text(names)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
             }
-            Text(items.map { $0.isDone ? "\($0.title) ✓" : $0.title }.joined(separator: " · "))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(2)
         }
         .accessibilityIdentifier("daily-habits")
     }
@@ -741,8 +809,24 @@ private struct BudgetDayTile: View {
                 .font(perDayLeft == nil ? .headline : .caption.weight(.semibold))
                 .foregroundStyle(perDayLeft == nil ? .primary : .secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            // What was really spent the last seven days: no curve while nothing was spent.
+            let week = lastSevenDays
+            if week.contains(where: { $0 > 0 }) {
+                SparklineShape(values: week)
+                    .stroke(Color(hex: "2F8F7A"), style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
+                    .frame(height: 26)
+                    .accessibilityHidden(true)
+            }
         }
         .accessibilityIdentifier("daily-budget")
+    }
+
+    /// The spending of each of the last seven days, today last.
+    private var lastSevenDays: [Double] {
+        let now = Date()
+        return (0..<7).reversed().map { back in
+            DateMath.calendar.date(byAdding: .day, value: -back, to: now).map { BudgetMath.spentToday(model.budget, at: $0) } ?? 0
+        }
     }
 }
 

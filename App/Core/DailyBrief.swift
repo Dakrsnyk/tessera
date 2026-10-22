@@ -104,6 +104,9 @@ enum DailyBrief {
         var id: String
         var title: String
         var isDone: Bool
+        /// A habit's own color, and its days in a row (priorities have neither).
+        var colorHex: String? = nil
+        var streak = 0
     }
 
     enum Tile: Equatable, Identifiable {
@@ -166,7 +169,8 @@ enum DailyBrief {
             let score: Int
             switch workout.stage {
             case .inProgress: score = 110
-            case .planned: score = 95
+            // From the afternoon on, a session still to do goes before the meals: it is the moment for it.
+            case .planned: score = moment == .morning ? 95 : 100
             case .done: score = moment == .evening ? 78 : 60
             case .rest: score = 30
             }
@@ -176,13 +180,13 @@ enum DailyBrief {
         if let planning = planningTile(input) {
             // Something within two hours, or an exam today, goes first.
             let soon = planning.contains { $0.date < now.addingTimeInterval(2 * 3_600) || ($0.isHighlighted && DateMath.isSameDay($0.date, now)) }
-            add(.planning(items: planning), planning.isEmpty ? 40 : (soon ? 100 : (moment == .morning ? 90 : (moment == .day ? 86 : 70))))
+            add(.planning(items: planning), planning.isEmpty ? 40 : (soon ? 102 : (moment == .morning ? 90 : (moment == .day ? 86 : 70))))
         }
 
         let reminders = remindersTile(input)
         if !reminders.isEmpty {
             let urgent = reminders.contains { DateMath.isSameDay($0.date, now) && $0.date >= now }
-            add(.reminders(reminders), urgent ? 100 : (moment == .evening ? 72 : 84))
+            add(.reminders(reminders), urgent ? 102 : (moment == .evening ? 72 : 84))
         }
 
         let priorities = input.productivity.priorities.prefix(3).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
@@ -190,7 +194,7 @@ enum DailyBrief {
             add(.priorities(Array(priorities)), moment == .evening ? 45 : 83)
         }
 
-        let habits = input.content.habits.map { Check(id: $0.id.uuidString, title: $0.name, isDone: $0.isDone(on: now)) }
+        let habits = input.content.habits.map { Check(id: $0.id.uuidString, title: $0.name, isDone: $0.isDone(on: now), colorHex: $0.colorHex, streak: $0.streak(asOf: now)) }
         if !habits.isEmpty {
             add(.habits(done: habits.filter(\.isDone).count, items: habits), moment == .evening ? 92 : 50)
         }
