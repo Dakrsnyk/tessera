@@ -41,10 +41,16 @@ final class StepCounter {
         }
     }
 
+    /// Whether the pedometer may be queried. Querying it while access was never asked shows the system
+    /// prompt, so that only happens when the person chose to see their steps (`asking`, after the explanation
+    /// of `PermissionExplainer`); a plain refresh, such as the home screen's, stays silent until then.
+    static func canQuery(_ status: Status, asking: Bool) -> Bool {
+        status == .allowed || (asking && status == .notAsked)
+    }
+
     /// Reads today's steps when access is granted; asking for them the first time shows the prompt.
     func refresh(asking: Bool = false) async {
-        let current = status
-        guard current == .allowed || (asking && current == .notAsked) else { return }
+        guard Self.canQuery(status, asking: asking) else { return }
         let start = DateMath.startOfDay(Date())
         let steps: Int? = await withCheckedContinuation { continuation in
             pedometer.queryPedometerData(from: start, to: Date()) { data, _ in
@@ -120,7 +126,9 @@ final class StepCounter {
     }
 
     /// Active calories estimated from the steps (about 0,04 kcal per step for 70 kg), clearly an estimate.
-    static func estimatedCalories(steps: Int, weightKg: Double?) -> Double {
-        Double(steps) * 0.04 * ((weightKg ?? 70) / 70)
+    /// Nil without a known weight (no number made up). `minutesInSessions` are the minutes of workouts
+    /// of the day: their steps are not counted again, the workout counts them (see `CalorieModel`).
+    static func estimatedCalories(steps: Int, weightKg: Double?, minutesInSessions: Double = 0) -> Double? {
+        CalorieModel.stepsCalories(steps: steps, weightKg: weightKg, minutesInSessions: minutesInSessions)
     }
 }

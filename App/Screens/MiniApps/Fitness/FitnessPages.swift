@@ -376,8 +376,16 @@ struct FitnessActivityPage: View {
     /// The day shown: today, or any day before (each day read is kept with its date).
     @State private var day = Date()
     @State private var dayData: StepCounter.Day?
+    @State private var asksMotion = false
+    @Environment(\.openURL) private var openURL
 
     private let tint = "12A4B5"
+
+    /// The first read of the steps: the only moment the Motion prompt of the system can appear.
+    private func readSteps() async {
+        await steps.refresh(asking: true)
+        await steps.refreshWeek()
+    }
 
     var body: some View {
         let isToday = DateMath.isSameDay(day, Date())
@@ -399,7 +407,13 @@ struct FitnessActivityPage: View {
                 }
                 HStack(spacing: 10) {
                     MiniStat(title: tr("Étages"), value: today?.floors.map { "\($0)" } ?? "—")
-                    MiniStat(title: tr("Calories actives"), value: "~\(TF.int(StepCounter.estimatedCalories(steps: count, weightKg: model.profile.weightKg)))", unit: "kcal", detail: tr("estimées d'après les pas"))
+                    // The minutes of the day's workouts are counted by the workout, not again by the steps.
+                    let sessionMinutes = CalorieModel.minutes(of: FitnessMath.sessions(model.fitness), on: day)
+                    if let kcal = StepCounter.estimatedCalories(steps: count, weightKg: model.profile.weightKg, minutesInSessions: sessionMinutes) {
+                        MiniStat(title: tr("Calories actives"), value: "~\(TF.int(kcal))", unit: "kcal", detail: sessionMinutes > 0 ? tr("estimées d'après les pas, hors séance") : tr("estimées d'après les pas"))
+                    } else {
+                        MiniStat(title: tr("Calories actives"), value: "—", detail: tr("ajoute ton poids dans « Mes informations »"))
+                    }
                 }
                 if !steps.week.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
@@ -425,15 +439,15 @@ struct FitnessActivityPage: View {
                     .foregroundStyle(.secondary)
             case .notAsked:
                 EmptyStateView(symbol: "figure.walk", title: tr("Tes pas"), message: tr("Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone."), actionTitle: tr("Autoriser")) {
-                    Task {
-                        await steps.refresh(asking: true)
-                        await steps.refreshWeek()
-                    }
+                    // The explanation sheet comes first (once); the system prompt follows « Continuer ».
+                    Task { _ = await AppPermission.motion.requestOrExplain(isPresented: $asksMotion, request: readSteps) }
                 }
                 .card()
             case .denied:
-                EmptyStateView(symbol: "figure.walk", title: tr("Accès refusé"), message: tr("Autorise « Mouvements et forme » pour Ardane dans les Réglages de l'iPhone pour voir tes pas."))
-                    .card()
+                EmptyStateView(symbol: "figure.walk", title: tr("Accès refusé"), message: tr("Autorise « Mouvements et forme » pour Ardane dans les Réglages de l'iPhone pour voir tes pas."), actionTitle: tr("Ouvrir Réglages")) {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                }
+                .card()
             case .unavailable:
                 EmptyStateView(symbol: "figure.walk", title: tr("Pas disponible"), message: tr("Cet appareil ne compte pas les pas."))
                     .card()
@@ -441,6 +455,7 @@ struct FitnessActivityPage: View {
         }
         .navigationTitle(tr("Activité"))
         .navigationBarTitleDisplayMode(.large)
+        .permissionSheet(.motion, isPresented: $asksMotion, request: readSteps)
         .task { await steps.refreshWeek() }
         .task(id: day) {
             if DateMath.isSameDay(day, Date()) {

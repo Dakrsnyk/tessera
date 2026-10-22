@@ -208,7 +208,10 @@ enum DashboardTiles {
             rows.append(TileRow(id: "routine", title: routine.name, value: state.isScheduled(now) ? tr("Aujourd'hui") : tr("Prochaine"), symbol: "figure.strengthtraining.traditional"))
         }
         rows.append(TileRow(id: "volume", title: tr("Volume"), value: tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"), symbol: "scalemass"))
-        rows.append(TileRow(id: "burned", title: tr("Calories brûlées"), value: tr("\(TF.int(FitnessMath.caloriesBurned(state, on: now))) kcal"), symbol: "flame"))
+        // No calories without the person's weight (the state's 70 kg default is not theirs).
+        if context.payload.domains.knowsWeight {
+            rows.append(TileRow(id: "burned", title: tr("Calories brûlées"), value: tr("\(TF.int(FitnessMath.caloriesBurned(state, on: now))) kcal"), symbol: "flame"))
+        }
         let nutrition = context.payload.domains.nutrition
         if !nutrition.entries.isEmpty {
             let protein = NutritionMath.totals(nutrition, on: now).protein

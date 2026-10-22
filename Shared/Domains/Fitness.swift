@@ -584,13 +584,13 @@ enum FitnessMath {
         return best.values.sorted { $0.oneRepMax > $1.oneRepMax }
     }
 
-    /// Rough estimate from a moderate-intensity strength MET value (5), clearly labelled in the UI.
+    /// Active kcal of the day's sessions (work apart from rest, capped), clearly labelled as an estimate
+    /// in the UI. The weight is `state.bodyWeightKg` (the profile weight when known, else 70 kg): the
+    /// tile of the widget asks for a known weight before drawing it. A deleted or cancelled session
+    /// is not in `sessions(_:)`, so it counts for 0. See `CalorieModel`.
     static func caloriesBurned(_ state: FitnessState, on day: Date) -> Double {
-        let minutes = sessions(state).filter { DateMath.isSameDay($0.start, day) }.reduce(0.0) { total, session in
-            let end = session.end ?? session.sets.last?.date ?? session.start
-            return total + max(0, end.timeIntervalSince(session.start) / 60)
-        }
-        return 5 * state.bodyWeightKg * minutes / 60
+        let ofDay = sessions(state).filter { DateMath.isSameDay($0.start, day) }
+        return CalorieModel.dayCalories(sessions: ofDay, weightKg: state.bodyWeightKg) ?? 0
     }
 
     /// The sets done for an exercise, by session (most recent last). Sets are matched by library id
