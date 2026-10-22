@@ -58,7 +58,7 @@ struct PlanningCalendarCard: View {
     private var accentHex: String { MiniApp.planning.colorHex }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             header
             Picker(tr("Échelle"), selection: Binding(get: { scale }, set: { change(to: $0) })) {
                 ForEach(CalendarScale.allCases) { Text($0.title).tag($0) }
@@ -72,10 +72,7 @@ struct PlanningCalendarCard: View {
                 .transition(.asymmetric(insertion: .opacity.combined(with: .scale(scale: 0.96)), removal: .opacity))
                 .simultaneousGesture(magnify)
                 .simultaneousGesture(swipe)
-            Text(hint)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            MiniFootnote(text: hint)
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("planning-calendar")
@@ -83,42 +80,48 @@ struct PlanningCalendarCard: View {
 
     // MARK: Header
 
+    /// Calendar's head: the period big and bold on the left, « Aujourd'hui » and the arrows discreet on the right.
     private var header: some View {
         let now = Date()
         let isCurrent = scale.interval(containing: day).contains(now)
-        return HStack(alignment: .firstTextBaseline, spacing: 4) {
-            Button { shift(-1) } label: {
-                Image(systemName: "chevron.left").font(.subheadline.weight(.bold)).frame(width: 30, height: 30)
-            }
-            .accessibilityLabel(Text(tr("Période précédente")))
+        return HStack(alignment: .center, spacing: 0) {
             Text(title)
-                .font(.title3.weight(.semibold))
+                .font(.title2.weight(.bold))
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
+                .minimumScaleFactor(0.6)
                 .contentTransition(.numericText())
                 .accessibilityAddTraits(.isHeader)
+            Spacer(minLength: 8)
+            if !isCurrent {
+                Button {
+                    Haptics.tap()
+                    withAnimation(.snappy) { day = now }
+                } label: {
+                    Text(tr("Aujourd'hui"))
+                        .font(.subheadline.weight(.semibold))
+                        .padding(.horizontal, 6)
+                        .frame(minHeight: 44)
+                        .contentShape(Rectangle())
+                }
+            }
+            Button { shift(-1) } label: {
+                Image(systemName: "chevron.left").font(.body.weight(.semibold)).frame(width: 40, height: 44).contentShape(Rectangle())
+            }
+            .accessibilityLabel(Text(tr("Période précédente")))
             Button { shift(1) } label: {
-                Image(systemName: "chevron.right").font(.subheadline.weight(.bold)).frame(width: 30, height: 30)
+                Image(systemName: "chevron.right").font(.body.weight(.semibold)).frame(width: 40, height: 44).contentShape(Rectangle())
             }
             .accessibilityLabel(Text(tr("Période suivante")))
             .accessibilityIdentifier("planning-next")
-            Spacer(minLength: 6)
-            if !isCurrent {
-                Button(tr("Aujourd'hui")) {
-                    Haptics.tap()
-                    withAnimation(.snappy) { day = now }
-                }
-                .font(.subheadline.weight(.semibold))
-            }
         }
         .tint(Color(hex: accentHex))
     }
 
+    /// The period, big: the month and year for the week and the month (as in Calendar), the day in full for the day.
     private var title: String {
         switch scale {
         case .day: Fmt.longDay(day)
-        case .week: WeekTitle.of(DateMath.week(containing: day))
-        case .month: Fmt.monthYear(day)
+        case .week, .month: Fmt.monthYear(day)
         case .year: "\(DateMath.calendar.component(.year, from: day))"
         }
     }
@@ -137,13 +140,13 @@ struct PlanningCalendarCard: View {
         switch scale {
         case .day:
             WeekTimetable(days: [(day: day, items: Agenda.items(on: day, model: model, events: events))], selected: day, hourHeight: 52, hours: 6...22,
-                          onCreate: create, onOpen: onOpen)
-                .card(padding: 12)
+                          onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex))
+                .card(padding: 10)
         case .week:
             WeekTimetable(days: Agenda.week(containing: day, model: model, events: events), selected: day,
                           onSelect: { picked in withAnimation(.snappy) { day = picked } },
-                          onCreate: create, onOpen: onOpen)
-                .card(padding: 12)
+                          onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex))
+                .card(padding: 10)
         case .month:
             monthGrid
         case .year:
@@ -152,52 +155,16 @@ struct PlanningCalendarCard: View {
     }
 
     private var monthGrid: some View {
-        let cells = DateMath.monthGrid(for: day)
-        let now = Date()
-        return VStack(spacing: 6) {
-            HStack(spacing: 0) {
-                ForEach(Array(DateMath.weekdaySymbols().enumerated()), id: \.offset) { _, symbol in
-                    Text(symbol).font(.caption2.weight(.bold)).foregroundStyle(.secondary).frame(maxWidth: .infinity)
-                }
-            }
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 7), spacing: 4) {
-                ForEach(Array(cells.enumerated()), id: \.offset) { _, date in
-                    if let date {
-                        let items = Agenda.items(on: date, model: model, events: events)
-                        let isSelected = DateMath.isSameDay(date, day)
-                        let isToday = DateMath.isSameDay(date, now)
-                        Button {
-                            guard !isPinching else { return }
-                            Haptics.tap()
-                            day = date
-                            change(to: .day)
-                        } label: {
-                            VStack(spacing: 3) {
-                                Text("\(DateMath.calendar.component(.day, from: date))")
-                                    .font(.subheadline.weight(isToday ? .bold : .medium))
-                                    .monospacedDigit()
-                                    .foregroundStyle(isSelected ? Color.white : (isToday ? Color(hex: accentHex) : Color.primary))
-                                HStack(spacing: 2) {
-                                    ForEach(Array(items.prefix(3).enumerated()), id: \.offset) { _, item in
-                                        Circle().fill(isSelected ? Color.white : Color(hex: item.colorHex)).frame(width: 5, height: 5)
-                                    }
-                                }
-                                .frame(height: 5)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 46)
-                            .background(isSelected ? Color(hex: accentHex) : Color.primary.opacity(0.03), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(Text(Fmt.longDay(date)))
-                        .accessibilityValue(Text(items.isEmpty ? tr("Libre") : Fmt.plural(items.count, tr("élément"), tr("éléments"))))
-                    } else {
-                        Color.clear.frame(minHeight: 46)
-                    }
-                }
-            }
-        }
-        .card(padding: 12)
-        .accessibilityIdentifier("planning-month-grid")
+        PlanningMonthGrid(month: day, selected: day, accent: Color(hex: accentHex),
+                          items: { Agenda.items(on: $0, model: model, events: events) },
+                          onPick: { date in
+                              guard !isPinching else { return }
+                              Haptics.tap()
+                              day = date
+                              change(to: .day)
+                          })
+            .card(padding: 12)
+            .accessibilityIdentifier("planning-month-grid")
     }
 
     private var yearGrid: some View {
@@ -290,30 +257,128 @@ private struct MiniMonth: View {
 
     var body: some View {
         let cells = DateMath.monthGrid(for: month)
+        let accent = Color(hex: accentHex)
         VStack(alignment: .leading, spacing: 4) {
+            // The month's name in the accent for the current one, as in Calendar's year.
             Text(Fmt.month(month))
-                .font(.caption.weight(.bold))
-                .foregroundStyle(isCurrent ? Color(hex: accentHex) : Color.primary)
+                .font(.subheadline.weight(.bold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+                .foregroundStyle(isCurrent ? accent : Color.primary)
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 1), count: 7), spacing: 2) {
                 ForEach(Array(cells.enumerated()), id: \.offset) { _, date in
                     if let date {
                         let isMarked = marked.contains(DateMath.dayKey(date))
                         let isToday = DateMath.isSameDay(date, Date())
+                        // Very small on purpose: the whole month is one touch, read by its name.
                         Text("\(DateMath.calendar.component(.day, from: date))")
-                            .font(.system(size: 7, weight: isMarked || isToday ? .bold : .regular))
+                            .font(.system(size: 8, weight: isMarked || isToday ? .bold : .regular))
                             .monospacedDigit()
-                            .foregroundStyle(isToday ? Color.white : (isMarked ? Color(hex: accentHex) : Color.secondary))
-                            .frame(maxWidth: .infinity, minHeight: 10)
-                            .background(isToday ? Color(hex: accentHex) : Color.clear, in: Circle())
+                            .foregroundStyle(isToday ? Color.white : (isMarked ? accent : Color.secondary))
+                            .frame(maxWidth: .infinity, minHeight: 11)
+                            .background(isToday ? accent : Color.clear, in: Circle())
                     } else {
-                        Color.clear.frame(minHeight: 10)
+                        Color.clear.frame(minHeight: 11)
                     }
                 }
             }
+            .accessibilityHidden(true)
         }
         .padding(6)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(Color.primary.opacity(0.03), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(isCurrent ? Color(hex: accentHex).opacity(0.1) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .contentShape(Rectangle())
+    }
+}
+
+/// A month as a grid, Calendar's way: the days' numbers, today in a filled circle of the accent, the day
+/// picked ringed, up to three small dots under a number (the colors of what that day holds), the days of the
+/// neighbouring months in grey. A touch on a day goes to `onPick`.
+struct PlanningMonthGrid: View {
+    /// Any date of the month shown.
+    let month: Date
+    let selected: Date
+    let accent: Color
+    let items: (Date) -> [AgendaItem]
+    let onPick: (Date) -> Void
+
+    /// A cell of the grid; `inMonth` is false for the days of the weeks that straddle the month.
+    struct MonthDay: Identifiable {
+        let date: Date
+        let inMonth: Bool
+        var id: Date { date }
+    }
+
+    var body: some View {
+        let now = Date()
+        VStack(spacing: 6) {
+            HStack(spacing: 0) {
+                ForEach(Array(DateMath.weekdaySymbols().enumerated()), id: \.offset) { _, symbol in
+                    Text(symbol)
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity)
+                        .accessibilityHidden(true)
+                }
+            }
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 7), spacing: 2) {
+                ForEach(Self.days(for: month)) { entry in
+                    cell(entry, now: now)
+                }
+            }
+        }
+    }
+
+    /// The month's days with the days of the neighbouring months that fill its first and last weeks.
+    static func days(for month: Date) -> [MonthDay] {
+        let calendar = DateMath.calendar
+        let cells = DateMath.monthGrid(for: month)
+        guard let anchorIndex = cells.firstIndex(where: { $0 != nil }), let anchor = cells[anchorIndex] else { return [] }
+        return cells.indices.compactMap { index -> MonthDay? in
+            if let date = cells[index] { return MonthDay(date: date, inMonth: true) }
+            guard let date = calendar.date(byAdding: .day, value: index - anchorIndex, to: anchor) else { return nil }
+            return MonthDay(date: date, inMonth: false)
+        }
+    }
+
+    private func cell(_ entry: MonthDay, now: Date) -> some View {
+        let date = entry.date
+        let list = items(date)
+        let isSelected = DateMath.isSameDay(date, selected)
+        let isToday = DateMath.isSameDay(date, now)
+        let ink: Color = isToday ? Color.white : (entry.inMonth ? Color.primary : Color.secondary.opacity(0.7))
+        return Button {
+            onPick(date)
+        } label: {
+            VStack(spacing: 2) {
+                Text("\(DateMath.calendar.component(.day, from: date))")
+                    .font(.callout.weight(isToday || isSelected ? .bold : .regular))
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                    .foregroundStyle(ink)
+                    .frame(width: 32, height: 32)
+                    .background(isToday ? accent : Color.clear, in: Circle())
+                    .overlay {
+                        if isSelected {
+                            Circle().strokeBorder(accent, lineWidth: 2).frame(width: 36, height: 36)
+                        }
+                    }
+                HStack(spacing: 2) {
+                    ForEach(Array(list.prefix(3).enumerated()), id: \.offset) { _, item in
+                        Circle().fill(Color(hex: item.colorHex)).frame(width: 5, height: 5)
+                    }
+                }
+                .frame(height: 5)
+                .opacity(entry.inMonth ? 1 : 0.45)
+            }
+            .frame(maxWidth: .infinity, minHeight: 50)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(Fmt.longDay(date)))
+        .accessibilityValue(Text(list.isEmpty ? tr("Libre") : Fmt.plural(list.count, tr("élément"), tr("éléments"))))
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
 

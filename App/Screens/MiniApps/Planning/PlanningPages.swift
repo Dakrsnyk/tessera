@@ -181,7 +181,7 @@ struct PlanningWeekPage: View {
                 editors.create(on: date, at: minute)
             }, onOpen: { item in
                 editors.open(item, on: day, model: model, openURL: openURL) { day = $0 }
-            })
+            }, accent: Color(hex: MiniApp.planning.colorHex))
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: Fmt.longDay(day), detail: items.isEmpty ? nil : Fmt.plural(items.count, tr("élément"), tr("éléments")))
                 if items.isEmpty {
@@ -191,7 +191,7 @@ struct PlanningWeekPage: View {
                         ForEach(items) { item in AgendaRow(item: item) }
                     }
                     .padding(.horizontal, 14)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .miniCard()
                 }
             }
         }
@@ -217,47 +217,30 @@ struct PlanningMonthPage: View {
     private var accentHex: String { MiniApp.planning.colorHex }
 
     var body: some View {
-        let days = monthDays
-        let offset = firstWeekdayOffset
         let items = Agenda.items(on: selected, model: model, events: events)
         MiniAppScroll {
-            HStack {
-                Button { move(-1) } label: { Image(systemName: "chevron.left").frame(width: 44, height: 44) }
-                Spacer()
-                Text(Fmt.monthYear(month)).font(.headline)
-                Spacer()
-                Button { move(1) } label: { Image(systemName: "chevron.right").frame(width: 44, height: 44) }
+            // Calendar's head: the month big and bold, the arrows on the right.
+            HStack(spacing: 0) {
+                Text(Fmt.monthYear(month))
+                    .font(.title2.weight(.bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .accessibilityAddTraits(.isHeader)
+                Spacer(minLength: 8)
+                Button { move(-1) } label: {
+                    Image(systemName: "chevron.left").font(.body.weight(.semibold)).frame(width: 44, height: 44).contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text(tr("Période précédente")))
+                Button { move(1) } label: {
+                    Image(systemName: "chevron.right").font(.body.weight(.semibold)).frame(width: 44, height: 44).contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text(tr("Période suivante")))
             }
             .tint(Color(hex: accentHex))
-            VStack(spacing: 8) {
-                HStack {
-                    ForEach(["L", "M", "M", "J", "V", "S", "D"].indices, id: \.self) { index in
-                        Text(["L", "M", "M", "J", "V", "S", "D"][index]).font(.caption.weight(.semibold)).foregroundStyle(.secondary).frame(maxWidth: .infinity)
-                    }
-                }
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 7), spacing: 6) {
-                    ForEach(0..<offset, id: \.self) { _ in Color.clear.frame(height: 40) }
-                    ForEach(days, id: \.self) { day in
-                        let count = Agenda.items(on: day, model: model, events: events).count
-                        Button {
-                            selected = day
-                        } label: {
-                            VStack(spacing: 3) {
-                                Text("\(DateMath.calendar.component(.day, from: day))")
-                                    .font(.subheadline.weight(DateMath.isSameDay(day, Date()) ? .bold : .regular))
-                                    .foregroundStyle(DateMath.isSameDay(day, selected) ? .white : (DateMath.isSameDay(day, Date()) ? Color(hex: accentHex) : .primary))
-                                Circle()
-                                    .fill(count > 0 ? (DateMath.isSameDay(day, selected) ? Color.white : Color(hex: accentHex)) : Color.clear)
-                                    .frame(width: 5, height: 5)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 40)
-                            .background(DateMath.isSameDay(day, selected) ? Color(hex: accentHex) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-            }
-            .card(padding: 12)
+            PlanningMonthGrid(month: month, selected: selected, accent: Color(hex: accentHex),
+                              items: { Agenda.items(on: $0, model: model, events: events) },
+                              onPick: { selected = $0 })
+                .card(padding: 12)
             VStack(alignment: .leading, spacing: 8) {
                 MiniSectionTitle(title: Fmt.longDay(selected))
                 if items.isEmpty {
@@ -267,7 +250,7 @@ struct PlanningMonthPage: View {
                         ForEach(items) { item in AgendaRow(item: item) }
                     }
                     .padding(.horizontal, 14)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .miniCard()
                 }
             }
         }
@@ -279,22 +262,6 @@ struct PlanningMonthPage: View {
 
     private var monthInterval: DateInterval? { DateMath.calendar.dateInterval(of: .month, for: month) }
 
-    private var monthDays: [Date] {
-        guard let interval = monthInterval else { return [] }
-        var days: [Date] = []
-        var cursor = interval.start
-        while cursor < interval.end {
-            days.append(cursor)
-            cursor = DateMath.calendar.date(byAdding: .day, value: 1, to: cursor) ?? interval.end
-        }
-        return days
-    }
-
-    private var firstWeekdayOffset: Int {
-        guard let start = monthInterval?.start else { return 0 }
-        return FitnessMath.isoWeekday(start) - 1
-    }
-
     private func move(_ months: Int) {
         month = DateMath.calendar.date(byAdding: .month, value: months, to: month) ?? month
         if let start = monthInterval?.start { selected = start }
@@ -302,7 +269,10 @@ struct PlanningMonthPage: View {
 
     private func load() {
         guard let interval = monthInterval else { return }
-        events = CalendarService.events(from: interval.start, to: interval.end)
+        // A week more on each side: the grey days of the neighbouring months show their dots too.
+        let start = DateMath.calendar.date(byAdding: .day, value: -7, to: interval.start) ?? interval.start
+        let end = DateMath.calendar.date(byAdding: .day, value: 7, to: interval.end) ?? interval.end
+        events = CalendarService.events(from: start, to: end)
     }
 }
 
@@ -388,39 +358,17 @@ struct PlanningHabitsPage: View {
                 }
                 .card()
             } else {
-                MiniRowsCard {
-                    ForEach(Array(habits.enumerated()), id: \.element.id) { index, habit in
-                        HStack(spacing: 12) {
-                            Button {
-                                Haptics.tap()
-                                model.updateContent { $0.toggleHabit(habit.id, on: now) }
-                            } label: {
-                                Image(systemName: habit.isDone(on: now) ? "checkmark.circle.fill" : "circle")
-                                    .font(.title2)
-                                    .foregroundStyle(Color(hex: habit.colorHex))
-                            }
-                            .buttonStyle(.plain)
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(habit.name).font(.body.weight(.medium))
-                                HStack(spacing: 3) {
-                                    ForEach(DateMath.week(containing: now), id: \.self) { day in
-                                        RoundedRectangle(cornerRadius: 3)
-                                            .fill(habit.isDone(on: day) ? Color(hex: habit.colorHex) : Color.secondary.opacity(0.15))
-                                            .frame(width: 14, height: 14)
-                                    }
-                                }
-                            }
-                            Spacer()
-                            VStack(alignment: .trailing, spacing: 1) {
-                                Text("\(habit.streak(asOf: now))").font(.headline).monospacedDigit()
-                                Text(tr("série")).font(.caption2).foregroundStyle(.secondary)
-                            }
-                        }
-                        .padding(.vertical, 10)
-                        .contentShape(Rectangle())
-                        .onTapGesture { editing = habit }
-                        if index < habits.count - 1 { Divider() }
+                // One card per habit: the same band and grid of weeks as the Habits screen.
+                ForEach(habits) { habit in
+                    HabitRow(habit: habit, day: now) {
+                        Haptics.tap()
+                        model.updateContent { $0.toggleHabit(habit.id, on: now) }
+                    } onEdit: {
+                        editing = habit
                     }
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .miniCard()
                 }
                 Button {
                     creating = true

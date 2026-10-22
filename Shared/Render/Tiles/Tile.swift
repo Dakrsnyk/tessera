@@ -78,6 +78,12 @@ enum TileVisual: Hashable {
     /// and today's column (0 = Monday).
     /// A week (Monday first): its blocks, today's column, the day numbers, the hours shown (minutes).
     case schedule([ScheduleBlock], today: Int?, dates: [Int], firstMinute: Int, lastMinute: Int)
+
+    /// The week's schedule is the one chart that takes all the height a large widget leaves.
+    var isSchedule: Bool {
+        if case .schedule = self { return true }
+        return false
+    }
 }
 
 /// One entry of the week's schedule, placed in its day's column (0 = Monday). `start` and `end` are

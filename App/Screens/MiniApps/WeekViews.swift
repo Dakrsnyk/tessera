@@ -190,10 +190,13 @@ struct WeekTimetable: View {
     let onOpen: ((AgendaItem) -> Void)?
     /// The hours shown at least (more when something falls outside).
     let hours: ClosedRange<Int>
+    /// The color of today's mark and of the selected day (the app's accent unless the screen has its own).
+    let accent: Color
+    @Environment(\.colorScheme) private var scheme
 
     init(days: [(day: Date, items: [AgendaItem])], selected: Date? = nil, compact: Bool = false, hourHeight: CGFloat? = nil,
          hours: ClosedRange<Int> = 8...18, onSelect: ((Date) -> Void)? = nil, onCreate: ((Date, Int) -> Void)? = nil,
-         onOpen: ((AgendaItem) -> Void)? = nil) {
+         onOpen: ((AgendaItem) -> Void)? = nil, accent: Color = Color.accentColor) {
         self.days = days
         self.selected = selected
         self.compact = compact
@@ -202,7 +205,11 @@ struct WeekTimetable: View {
         self.onSelect = onSelect
         self.onCreate = onCreate
         self.onOpen = onOpen
+        self.accent = accent
     }
+
+    /// A color written over its own translucent tint (Calendar's blocks): darker on a light screen, lighter on a dark one.
+    private var inkShift: Double { scheme == .dark ? 0.12 : -0.28 }
 
     private var gutter: CGFloat { compact ? 16 : 28 }
     private var spacing: CGFloat { compact ? 2 : 3 }
@@ -232,7 +239,7 @@ struct WeekTimetable: View {
                         Text("\(minute / 60)")
                             .font(.system(size: compact ? 8 : 10, weight: .medium))
                             .monospacedDigit()
-                            .foregroundStyle(.tertiary)
+                            .foregroundStyle(.secondary)
                             .offset(y: CGFloat(minute - first) / 60 * hourHeight - 6)
                     }
                 }
@@ -246,7 +253,7 @@ struct WeekTimetable: View {
                 ZStack(alignment: .topLeading) {
                     ForEach(Array(stride(from: first, through: last, by: 60)), id: \.self) { minute in
                         Rectangle()
-                            .fill(Color.primary.opacity(0.07))
+                            .fill(Color.primary.opacity(compact ? 0.07 : 0.12))
                             .frame(height: 0.5)
                             .offset(y: CGFloat(minute - first) / 60 * hourHeight)
                     }
@@ -264,19 +271,7 @@ struct WeekTimetable: View {
             ForEach(Array(days.enumerated()), id: \.offset) { _, entry in
                 let isSelected = selected.map { DateMath.isSameDay($0, entry.day) } ?? false
                 let isToday = DateMath.isSameDay(entry.day, now)
-                let label = VStack(spacing: 0) {
-                        Text(String(Fmt.weekday(entry.day).prefix(compact ? 1 : 3)).uppercased())
-                            .font(.system(size: compact ? 8 : 10, weight: .bold))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
-                        Text("\(DateMath.calendar.component(.day, from: entry.day))")
-                            .font(compact ? .caption.weight(.bold) : .subheadline.weight(.bold))
-                            .monospacedDigit()
-                    }
-                    .foregroundStyle(isSelected ? Color.white : (isToday ? Color.accentColor : Color.primary))
-                    .frame(maxWidth: .infinity, minHeight: compact ? 28 : 40)
-                    .background(isSelected ? Color.accentColor : (isToday ? Color.accentColor.opacity(0.12) : Color.clear),
-                                in: RoundedRectangle(cornerRadius: compact ? 7 : 10, style: .continuous))
+                let label = dayLabel(entry.day, isSelected: isSelected, isToday: isToday)
                 if let onSelect {
                     Button {
                         Haptics.tap()
@@ -294,6 +289,46 @@ struct WeekTimetable: View {
         }
     }
 
+    /// A day's head: Calendar's way (a letter, then the number, in a filled circle for today and a soft one
+    /// for the day picked) in the full table; the small colored block in the compact one.
+    @ViewBuilder
+    private func dayLabel(_ date: Date, isSelected: Bool, isToday: Bool) -> some View {
+        if compact {
+            VStack(spacing: 0) {
+                Text(String(Fmt.weekday(date).prefix(1)).uppercased())
+                    .font(.system(size: 8, weight: .bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                Text("\(DateMath.calendar.component(.day, from: date))")
+                    .font(.caption.weight(.bold))
+                    .monospacedDigit()
+            }
+            .foregroundStyle(isSelected ? Color.white : (isToday ? accent : Color.primary))
+            .frame(maxWidth: .infinity, minHeight: 28)
+            .background(isSelected ? accent : (isToday ? accent.opacity(0.12) : Color.clear),
+                        in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+        } else {
+            let circle: Color = isToday ? accent : (isSelected ? Color.primary.opacity(0.14) : Color.clear)
+            VStack(spacing: 2) {
+                Text(String(Fmt.weekday(date).prefix(days.count > 1 ? 1 : 3)).uppercased())
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(isToday ? accent : Color.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                Text("\(DateMath.calendar.component(.day, from: date))")
+                    .font(.callout.weight(.semibold))
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .foregroundStyle(isToday ? Color.white : Color.primary)
+                    .frame(width: 30, height: 30)
+                    .background(circle, in: Circle())
+            }
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .contentShape(Rectangle())
+        }
+    }
+
     /// What has no time: a few chips, then « +2 ».
     private func allDay(_ items: [AgendaItem]) -> some View {
         let shown = Array(items.prefix(compact ? 2 : 3))
@@ -303,13 +338,19 @@ struct WeekTimetable: View {
                     if compact {
                         Capsule().fill(Color(hex: item.colorHex)).frame(height: 4)
                     } else {
+                        let color = Color(hex: item.colorHex)
+                        let shape = RoundedRectangle(cornerRadius: 4, style: .continuous)
                         Text(item.title)
                             .font(.system(size: 9, weight: .semibold))
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(color)
+                            .brightness(inkShift)
                             .lineLimit(1)
-                            .padding(.horizontal, 3)
-                            .frame(maxWidth: .infinity, minHeight: 15, alignment: .leading)
-                            .background(Color(hex: item.colorHex), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                            .padding(.leading, 5)
+                            .padding(.trailing, 2)
+                            .frame(maxWidth: .infinity, minHeight: 16, alignment: .leading)
+                            .background(color.opacity(0.2), in: shape)
+                            .overlay(alignment: .leading) { Rectangle().fill(color).frame(width: 2) }
+                            .clipShape(shape)
                     }
                 }
                 .opacity(item.isDone == true ? 0.45 : 1)
@@ -326,8 +367,12 @@ struct WeekTimetable: View {
     private func column(_ items: [AgendaItem], day: Date, first: Int, last: Int, height: CGFloat, now: Date) -> some View {
         let isSelected = selected.map { DateMath.isSameDay($0, day) } ?? false
         let placed = Self.layout(items)
-        let background = RoundedRectangle(cornerRadius: compact ? 4 : 8, style: .continuous)
-            .fill(isSelected ? Color.accentColor.opacity(0.08) : Color.primary.opacity(0.025))
+        // The compact table keeps a soft tile a day; the full one, like Calendar, only a hairline between
+        // the days and a faint tint on the day picked.
+        let tint: Color = compact
+            ? (isSelected ? accent.opacity(0.08) : Color.primary.opacity(0.025))
+            : (isSelected && days.count > 1 ? accent.opacity(0.06) : Color.clear)
+        let background = RoundedRectangle(cornerRadius: compact ? 4 : 8, style: .continuous).fill(tint)
         return GeometryReader { geo in
             ZStack(alignment: .topLeading) {
                 // Without `onCreate`, no gesture: a touch reaches the link the table may sit in.
@@ -344,6 +389,13 @@ struct WeekTimetable: View {
                         }
                 } else {
                     background
+                }
+                if !compact, days.count > 1 {
+                    Rectangle()
+                        .fill(Color.primary.opacity(0.1))
+                        .frame(width: 0.5)
+                        .frame(maxHeight: .infinity)
+                        .allowsHitTesting(false)
                 }
                 ForEach(placed, id: \.item.id) { block in
                     let width: CGFloat = geo.size.width / CGFloat(block.lanes)
@@ -365,11 +417,23 @@ struct WeekTimetable: View {
                 if DateMath.isSameDay(day, now) {
                     let minute = Self.minute(now)
                     if minute >= first, minute <= last {
-                        Rectangle()
-                            .fill(Color.red)
-                            .frame(height: compact ? 1 : 1.5)
-                            .offset(y: CGFloat(minute - first) / 60 * hourHeight)
+                        let y: CGFloat = CGFloat(minute - first) / 60 * hourHeight
+                        if compact {
+                            Rectangle()
+                                .fill(Color.red)
+                                .frame(height: 1)
+                                .offset(y: y)
+                                .allowsHitTesting(false)
+                        } else {
+                            // A dot at the start of the line, as in Calendar.
+                            HStack(spacing: 0) {
+                                Circle().fill(Color.red).frame(width: 7, height: 7)
+                                Rectangle().fill(Color.red).frame(height: 1.5)
+                            }
+                            .frame(height: 7)
+                            .offset(y: y - 3.5)
                             .allowsHitTesting(false)
+                        }
                     }
                 }
             }
@@ -386,6 +450,7 @@ struct WeekTimetable: View {
             shape.fill(Color(hex: block.item.colorHex))
                 .opacity(block.item.isDone == true ? 0.45 : 1)
         } else {
+            let color = Color(hex: block.item.colorHex)
             let minutes = block.end - block.start
             let lines = Self.lines(height: height, minutes: minutes, hasPlace: block.item.place != nil)
             // Without its place, the block as before the places.
@@ -405,11 +470,16 @@ struct WeekTimetable: View {
                     blockText(block.item, place: nil, time: lines.time)
                 }
             }
-            .foregroundStyle(Color.white)
-            .padding(.horizontal, 3)
+            // Calendar's block: a soft tint of the color, a thin solid bar on the left, the text in the color.
+            .foregroundStyle(color)
+            .brightness(inkShift)
+            .padding(.leading, 6)
+            .padding(.trailing, 2)
             .padding(.vertical, 2)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .background(Color(hex: block.item.colorHex), in: shape)
+            .background(color.opacity(0.2), in: shape)
+            .overlay(alignment: .leading) { Rectangle().fill(color).frame(width: 3) }
+            .clipShape(shape)
             .opacity(block.item.isDone == true ? 0.45 : 1)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(Text(Self.spoken(block.item)))
@@ -530,48 +600,59 @@ struct WeekTableCard: View {
     let days: [(day: Date, items: [AgendaItem])]
     let onCreate: ((Date, Int) -> Void)?
     let onOpen: ((AgendaItem) -> Void)?
+    let accent: Color
     @State private var forward = true
 
     init(day: Binding<Date>, days: [(day: Date, items: [AgendaItem])], onCreate: ((Date, Int) -> Void)? = nil,
-         onOpen: ((AgendaItem) -> Void)? = nil) {
+         onOpen: ((AgendaItem) -> Void)? = nil, accent: Color = Color.accentColor) {
         _day = day
         self.days = days
         self.onCreate = onCreate
         self.onOpen = onOpen
+        self.accent = accent
     }
 
     var body: some View {
         let now = Date()
         let week = days.map { $0.day }
         let isThisWeek = week.contains { DateMath.isSameDay($0, now) }
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Button { shift(-1) } label: {
-                    Image(systemName: "chevron.left").font(.subheadline.weight(.bold)).frame(width: 26, height: 26)
-                }
-                .accessibilityLabel(Text(tr("Semaine précédente")))
-                Text(WeekTitle.of(week, now: now))
-                    .font(.title3.weight(.semibold))
+        VStack(alignment: .leading, spacing: 6) {
+            // Calendar's head: the month and year big and bold, the arrows and « Aujourd'hui » discreet.
+            HStack(alignment: .center, spacing: 0) {
+                Text(Fmt.monthYear(day))
+                    .font(.title2.weight(.bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
                     .accessibilityAddTraits(.isHeader)
-                Button { shift(1) } label: {
-                    Image(systemName: "chevron.right").font(.subheadline.weight(.bold)).frame(width: 26, height: 26)
-                }
-                .accessibilityLabel(Text(tr("Semaine suivante")))
-                .accessibilityIdentifier("week-next")
                 Spacer(minLength: 8)
                 if !isThisWeek {
-                    Button(tr("Aujourd'hui")) {
+                    Button {
                         Haptics.tap()
                         forward = now > day
                         withAnimation(.snappy) { day = now }
+                    } label: {
+                        Text(tr("Aujourd'hui"))
+                            .font(.subheadline.weight(.semibold))
+                            .padding(.horizontal, 6)
+                            .frame(minHeight: 44)
+                            .contentShape(Rectangle())
                     }
-                    .font(.subheadline.weight(.semibold))
                 }
+                Button { shift(-1) } label: {
+                    Image(systemName: "chevron.left").font(.body.weight(.semibold)).frame(width: 40, height: 44).contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text(tr("Semaine précédente")))
+                Button { shift(1) } label: {
+                    Image(systemName: "chevron.right").font(.body.weight(.semibold)).frame(width: 40, height: 44).contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text(tr("Semaine suivante")))
+                .accessibilityIdentifier("week-next")
             }
+            .tint(accent)
             WeekTimetable(days: days, selected: day, onSelect: { picked in
                 withAnimation(.snappy) { day = picked }
-            }, onCreate: onCreate, onOpen: onOpen)
-            .card(padding: 12)
+            }, onCreate: onCreate, onOpen: onOpen, accent: accent)
+            .card(padding: 10)
             .id(DateMath.dayKey(week.first ?? day))
             .transition(.push(from: forward ? .trailing : .leading))
             .simultaneousGesture(

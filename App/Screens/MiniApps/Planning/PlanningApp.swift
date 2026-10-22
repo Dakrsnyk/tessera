@@ -44,7 +44,7 @@ struct PlanningAppView: View {
                     }
                 }
                 .padding(.horizontal, 14)
-                .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .miniCard()
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("planning-today")
                 if !CalendarService.hasAccess {
@@ -72,7 +72,7 @@ struct PlanningAppView: View {
                 MiniSectionTitle(title: tr("Tâches"))
                 NavigationLink(value: HomeRoute.page(.planningTasks)) {
                     HStack(spacing: 10) {
-                        countTile(tr("En retard"), overdue.count, overdue.isEmpty ? nil : "E5484D")
+                        countTile(tr("En retard"), overdue.count, overdue.isEmpty ? nil : MiniStyle.alertHex)
                         countTile(tr("Aujourd'hui"), tasks.filter { !$0.isDone && $0.isDue(on: now) }.count, nil)
                         countTile(tr("À faire"), tasks.filter { !$0.isDone }.count, nil)
                     }
@@ -160,7 +160,7 @@ struct PlanningAppView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .miniTile()
     }
 
     // MARK: Priorities
@@ -169,8 +169,10 @@ struct PlanningAppView: View {
         let items = model.productivity.priorities
         return VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Top 3 du jour"), detail: items.isEmpty ? nil : "\(items.filter { $0.isDone(on: now) }.count)/\(items.count)")
-            VStack(spacing: 0) {
-                ForEach(items) { item in
+            // Rows like the other lists of the mini-apps: a 34-point mark, the title, hairlines between.
+            MiniRowsCard {
+                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                    if index > 0 { MiniDivider() }
                     Button {
                         Haptics.tap()
                         model.update(\.productivity) { $0.togglePriority(item.id, on: now) }
@@ -179,12 +181,15 @@ struct PlanningAppView: View {
                             Image(systemName: item.isDone(on: now) ? "checkmark.circle.fill" : "circle")
                                 .font(.title3)
                                 .foregroundStyle(item.isDone(on: now) ? Color(hex: accentHex) : .secondary)
+                                .frame(width: 34, height: 34)
                             Text(item.title)
+                                .font(.body.weight(.medium))
                                 .strikethrough(item.isDone(on: now))
                                 .foregroundStyle(item.isDone(on: now) ? .secondary : .primary)
-                            Spacer()
+                            Spacer(minLength: 8)
                         }
                         .padding(.vertical, 10)
+                        .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
                     .contextMenu {
@@ -194,11 +199,14 @@ struct PlanningAppView: View {
                             Label(tr("Retirer"), systemImage: "trash")
                         }
                     }
-                    Divider()
                 }
                 if items.count < 3 {
+                    if !items.isEmpty { MiniDivider() }
                     HStack(spacing: 12) {
-                        Image(systemName: "plus.circle").font(.title3).foregroundStyle(Color(hex: accentHex))
+                        Image(systemName: "plus.circle")
+                            .font(.title3)
+                            .foregroundStyle(Color(hex: accentHex))
+                            .frame(width: 34, height: 34)
                         TextField(tr("Ajouter une priorité"), text: $newPriority)
                             .submitLabel(.done)
                             .onSubmit(addPriority)
@@ -206,8 +214,6 @@ struct PlanningAppView: View {
                     .padding(.vertical, 10)
                 }
             }
-            .padding(.horizontal, 14)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         }
     }
 

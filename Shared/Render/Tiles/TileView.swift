@@ -191,6 +191,9 @@ struct TileView: View {
         return false
     }
 
+    /// The week's schedule fills the height the widget leaves (no empty half below it); the other charts keep their own.
+    private var fillsHeight: Bool { tile.visual.isSchedule }
+
     private var hasVisual: Bool {
         if case .none = tile.visual { return false }
         return true
@@ -363,7 +366,7 @@ struct TileView: View {
             }
             if hasVisual {
                 visual(compact: !tile.rows.isEmpty && isSegments && s.options.chart == .auto)
-                    .frame(height: tile.rows.isEmpty ? 150 : (isSegments && s.options.chart == .auto ? 14 : 86))
+                    .chartHeight(tile.rows.isEmpty ? 150 : (isSegments && s.options.chart == .auto ? 14 : 86), fills: fillsHeight)
                     .clipped()
             }
             if !tile.rows.isEmpty {
@@ -390,7 +393,7 @@ struct TileView: View {
             if !context.isSmall { detailText }
             if hasVisual && (tile.buttons.isEmpty || !context.isSmall) {
                 visual(compact: context.isSmall)
-                    .frame(height: chartHeight)
+                    .chartHeight(chartHeight, fills: fillsHeight)
                     .frame(maxWidth: .infinity)
             }
             if context.isLarge && !tile.rows.isEmpty {
@@ -431,7 +434,7 @@ struct TileView: View {
             }
             if context.isLarge {
                 if hasVisual && progressFraction == nil && tile.visual.seriesValues == nil {
-                    visual(compact: false).frame(height: 110)
+                    visual(compact: false).chartHeight(110, fills: fillsHeight)
                 }
                 if !tile.rows.isEmpty {
                     TileRowsView(rows: rows(5), context: context, compact: false)
@@ -597,7 +600,8 @@ struct TileView: View {
             }
             if !context.isSmall, hasVisual {
                 visual(compact: context.isMedium)
-                    .frame(maxHeight: context.isLarge ? 110 : 30)
+                    .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight ? .infinity : (context.isLarge ? 110 : 30))
+                    .layoutPriority(fillsHeight ? 1 : 0)
             }
             Spacer(minLength: 0)
             if context.isLarge { buttonsRow(3) }
@@ -717,7 +721,8 @@ struct TileView: View {
                 mainCard
                 if context.isLarge && hasVisual {
                     card { visual(compact: false) }
-                        .frame(maxHeight: 110)
+                        .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight ? .infinity : 110)
+                        .layoutPriority(fillsHeight ? 1 : 0)
                 }
                 if !others.isEmpty {
                     let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
@@ -1341,6 +1346,17 @@ struct MonthDots: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+}
+
+private extension View {
+    /// A chart at `height`; the week's schedule (`fills`) is at least that tall and takes all the height left.
+    @ViewBuilder func chartHeight(_ height: CGFloat, fills: Bool) -> some View {
+        if fills {
+            frame(minHeight: height, maxHeight: .infinity).layoutPriority(1)
+        } else {
+            frame(height: height)
         }
     }
 }
