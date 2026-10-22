@@ -27,6 +27,7 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-22 : lot 3 : le pourcentage de régularité sur 30 jours est gratuit (grille des habitudes) ; la section « Régularité » 90 jours et la meilleure série restent Premium.
 - 2026-10-22 : lot 8 : un produit scanné passe par le récapitulatif (plus par la feuille de quantité) ; « Vérifié » = valeur d'une base (code-barres, table intégrée, FCÉN, aliment perso) ; « Estimation » = portion devinée d'après la photo, toujours indiquée ; l'IA en ligne (étape B) reste désactivée tant que l'utilisateur n'a pas décidé du service, du coût, du serveur et de la politique de confidentialité.
 - 2026-10-22 : lot 7 : une demande de permission iOS ne part que sur une action de l'utilisateur et après une explication affichée une fois ; un refus est respecté (jamais de relance en boucle).
+- 2026-10-22 : processus de livraison voulu par l'utilisateur : après chaque série de modifications, UNE version interne Premium débloqué (`[interne]`) pour qu'il teste ; la version sans Premium (`[testflight]`) n'est PAS envoyée tant que tout n'est pas prêt pour la publication ; l'assistant vérifie lui-même le fonctionnement sans Premium (tests logiques, tests d'interface `[apps]`/`[daily]` du simulateur) sans rien publier sur TestFlight.
 
 ## Publicité
 - Une seule publicité exceptionnelle plutôt que plusieurs ordinaires ; seulement des fonctionnalités qui existent vraiment, montrées avec de vrais éléments de l'app.
