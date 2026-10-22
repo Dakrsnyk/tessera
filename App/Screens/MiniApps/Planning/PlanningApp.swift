@@ -50,8 +50,10 @@ struct PlanningAppView: View {
                 if !CalendarService.hasAccess {
                     Button {
                         Task {
-                            _ = await CalendarService.requestAccess()
-                            loadEvents()
+                            // Explanation first (once); refused, the sheet offers the settings and Planning works without.
+                            if await AppPermission.calendar.requestOrExplain(isPresented: $askingCalendar, request: requestCalendar) != nil {
+                                loadEvents()
+                            }
                         }
                     } label: {
                         Label(tr("Ajouter les événements de mon calendrier"), systemImage: "calendar.badge.plus")
@@ -137,6 +139,11 @@ struct PlanningAppView: View {
         .onChange(of: day) { _, _ in loadEvents() }
         .onChange(of: scale) { _, _ in loadEvents() }
         .planningEditors($editors)
+        .permissionSheet(.calendar, isPresented: $askingCalendar, request: requestCalendar) { _ in loadEvents() }
+    }
+
+    private func requestCalendar() async {
+        _ = await CalendarService.requestAccess()
     }
 
     /// The calendar events of what the calendar shows (the month around the day, or the whole year).

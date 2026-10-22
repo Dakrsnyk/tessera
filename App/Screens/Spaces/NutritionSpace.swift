@@ -140,6 +140,9 @@ struct FoodSearchView: View {
     var presetMeal: MealType? = nil
     /// The day the food is added to (today, or a day browsed in the mini-app).
     var day: Date = Date()
+    /// Selection mode (from the recap of a scan): the food touched is handed back instead of being logged,
+    /// and the search closes. No scanner and no saved meals then.
+    var onPick: ((FoodItem) -> Void)? = nil
     @Environment(AppModel.self) private var model
     @State private var category: FoodCategory?
     @Environment(\.dismiss) private var dismiss
@@ -150,19 +153,12 @@ struct FoodSearchView: View {
     @State private var selected: FoodItem?
     @State private var showsScanner = false
     @State private var showsCustom = false
-    @State private var scannedCode: String?
+    /// How the scanner closed, handled once its sheet is gone.
+    @State private var scanOutcome: FoodScanOutcome?
     @State private var createdFood: FoodItem?
     @State private var didOfferScanner = false
-    /// What became of the last barcode scanned, shown at the top of the list.
-    @State private var scan: ScanState?
     /// A custom food prefilled from a barcode (and the product's name when Open Food Facts has it).
     @State private var customDraft: FoodItem?
-
-    private enum ScanState: Equatable {
-        case looking(String)
-        case notFound(String)
-        case offline(String)
-    }
 
     private var local: [FoodItem] {
         if let category, query.trimmed.isEmpty {
@@ -193,7 +189,7 @@ struct FoodSearchView: View {
                 Section {
                     ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
-                        if DataScannerViewController.isSupported {
+                        if DataScannerViewController.isSupported, onPick == nil {
                             Button {
                                 showsScanner = true
                             } label: {
@@ -209,11 +205,6 @@ struct FoodSearchView: View {
                         }
                         .buttonStyle(.bordered)
                     }
-                    }
-                }
-                if let scan {
-                    Section {
-                        scanRow(scan)
                     }
                 }
                 if query.trimmed.isEmpty {
@@ -233,7 +224,7 @@ struct FoodSearchView: View {
                     }
                     .listRowBackground(Color.clear)
                 }
-                if category == nil, !savedMeals.isEmpty {
+                if category == nil, onPick == nil, !savedMeals.isEmpty {
                     Section(tr("Mes repas")) {
                         ForEach(savedMeals) { saved in
                             Button {
@@ -283,7 +274,13 @@ struct FoodSearchView: View {
                     } header: {
                         Text(tr("Produits emballés"))
                     } footer: {
-                        Text(tr("Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette."))
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(tr("Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette."))
+                            HStack(spacing: 12) {
+                                Link(destination: FoodSourceLinks.openFoodFacts) { Text(verbatim: "openfoodfacts.org") }
+                                Link(destination: FoodSourceLinks.odbl) { Text(verbatim: "ODbL") }
+                            }
+                        }
                     }
                 }
             }
@@ -294,11 +291,12 @@ struct FoodSearchView: View {
                 online = []
                 searchError = nil
             }
-            // Few foods found here: the packaged products are looked up by themselves, once typing pauses.
+            // Few foods found here: the packaged products are looked up by themselves, once typing has paused
+            // for a while (Open Food Facts asks apps not to search at every keystroke: 4 letters, 1.2 s).
             .task(id: query) {
                 let text = query.trimmed
-                guard text.count >= 3, local.count < 8 else { return }
-                try? await Task.sleep(for: .milliseconds(700))
+                guard text.count >= 4, local.count < 8 else { return }
+                try? await Task.sleep(for: .milliseconds(1_200))
                 guard !Task.isCancelled, online.isEmpty, searchError == nil else { return }
                 await searchOnline()
             }
@@ -307,7 +305,9 @@ struct FoodSearchView: View {
             .onAppear {
                 if startsWithScanner && !didOfferScanner {
                     didOfferScanner = true
-                    showsScanner = DataScannerViewController.isSupported && DataScannerViewController.isAvailable
+                    // Not `isAvailable`: it is false until the camera is allowed, and the scanner screen
+                    // explains the permission first.
+                    showsScanner = onPick == nil && DataScannerViewController.isSupported
                 }
             }
             .toolbar {
@@ -321,35 +321,16 @@ struct FoodSearchView: View {
             .sheet(item: $loggedMeal) { saved in
                 SavedMealLogSheet(saved: saved, presetMeal: presetMeal, day: day) { dismiss() }
             }
-            // The quantity sheet opens once the scanner or the new food has closed:
-            // a sheet asked for while another one is still closing would not open.
-            .sheet(isPresented: $showsScanner, onDismiss: lookupScanned) {
-                NavigationStack {
-                    BarcodeScannerView { code in
-                        scannedCode = code
+            // The scanner (barcode or dish, then the recap) is one screen. A food to create opens once it has
+            // closed: a sheet asked for while another one is still closing would not open.
+            .sheet(isPresented: $showsScanner, onDismiss: afterScan) {
+                FoodScanView(presetMeal: presetMeal, day: day) { outcome in
+                    if case .logged = outcome {
+                        // The foods are in the journal: this search closes with the scanner, in one motion.
+                        dismiss()
+                    } else {
+                        scanOutcome = outcome
                         showsScanner = false
-                    }
-                    .ignoresSafeArea(edges: .bottom)
-                    .overlay { ScanFrame() }
-                    .navigationTitle(tr("Scanner un aliment"))
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button(tr("Annuler")) { showsScanner = false }
-                        }
-                    }
-                    .safeAreaInset(edge: .bottom) {
-                        // No barcode, or a product the database doesn't know: the search is one tap away.
-                        Button {
-                            showsScanner = false
-                        } label: {
-                            Label(tr("Chercher ou créer l'aliment"), systemImage: "magnifyingglass")
-                                .font(.subheadline.weight(.semibold))
-                                .padding(.horizontal, 16)
-                                .frame(minHeight: 44)
-                                .background(.regularMaterial, in: Capsule())
-                        }
-                        .padding(.bottom, 12)
                     }
                 }
             }
@@ -363,7 +344,12 @@ struct FoodSearchView: View {
 
     private func foodRow(_ food: FoodItem) -> some View {
         Button {
-            selected = food
+            if let onPick {
+                onPick(food)
+                dismiss()
+            } else {
+                selected = food
+            }
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
@@ -393,84 +379,26 @@ struct FoodSearchView: View {
         }
     }
 
-    private func lookupScanned() {
-        guard let code = scannedCode else { return }
-        scannedCode = nil
-        Task { await lookup(code) }
+    /// The scanner closed without logging: a food to create opens now (a product the database doesn't know,
+    /// with its barcode). Back to the search otherwise.
+    private func afterScan() {
+        guard let outcome = scanOutcome else { return }
+        scanOutcome = nil
+        if case .create(let draft) = outcome {
+            customDraft = draft
+            showsCustom = true
+        }
     }
 
     private func logCreatedFood() {
         customDraft = nil
         guard let food = createdFood else { return }
         createdFood = nil
-        selected = food
-    }
-
-    /// A scanned barcode: a food already saved with it (no connection needed), else Open Food Facts.
-    /// Every outcome shows something: the food, a custom food to complete, or what to do next.
-    private func lookup(_ code: String) async {
-        let mine = model.nutrition.customFoods + model.nutrition.favorites + model.nutrition.recentFoods
-        if let known = mine.first(where: { $0.barcode.map(OpenFoodFacts.barcodeForms)?.contains(code) == true }) {
-            scan = nil
-            selected = known
-            return
-        }
-        scan = .looking(code)
-        do {
-            switch try await OpenFoodFacts.lookup(barcode: code) {
-            case .food(let food):
-                scan = nil
-                selected = food
-            case .partial(let draft):
-                scan = nil
-                customDraft = draft
-                showsCustom = true
-            case .unknown:
-                scan = .notFound(code)
-            }
-        } catch {
-            scan = .offline(code)
-        }
-    }
-
-    @ViewBuilder
-    private func scanRow(_ state: ScanState) -> some View {
-        switch state {
-        case .looking(let code):
-            HStack(spacing: 10) {
-                ProgressView()
-                Text(tr("Recherche du produit \(code)…")).foregroundStyle(Color.secondary)
-            }
-        case .notFound(let code), .offline(let code):
-            let offline = state == .offline(code)
-            VStack(alignment: .leading, spacing: 10) {
-                Label(offline ? tr("Pas de connexion : le produit \(code) n'a pas pu être cherché.")
-                              : tr("Le produit \(code) n'est pas encore dans Open Food Facts."),
-                      systemImage: offline ? "wifi.slash" : "barcode")
-                    .font(.subheadline)
-                Text(tr("Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera."))
-                    .font(.caption)
-                    .foregroundStyle(Color.secondary)
-                HStack(spacing: 10) {
-                    Button(tr("Créer cet aliment")) {
-                        customDraft = FoodItem(id: "custom.draft", name: "", brand: nil, kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0,
-                                               servingGrams: 100, servingName: "100 g", source: .custom, barcode: code)
-                        showsCustom = true
-                    }
-                    .buttonStyle(.borderedProminent)
-                    if offline {
-                        Button(tr("Réessayer")) { Task { await lookup(code) } }
-                            .buttonStyle(.bordered)
-                    } else {
-                        Button(tr("Scanner à nouveau")) {
-                            scan = nil
-                            showsScanner = true
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                }
-            }
-            .padding(.vertical, 4)
+        if let onPick {
+            onPick(food)
+            dismiss()
+        } else {
+            selected = food
         }
     }
 }
@@ -698,8 +626,8 @@ struct CustomFoodEditor: View {
 
 // MARK: - Barcode scanner
 
-/// The small square the barcode goes in, the camera dimmed around it.
-private struct ScanFrame: View {
+/// The small square the barcode goes in, the camera dimmed around it (also used by `FoodScanView`).
+struct ScanFrame: View {
     var body: some View {
         GeometryReader { geo in
             let side = min(geo.size.width * 0.6, 240)
@@ -809,50 +737,5 @@ private struct ScanCorners: Shape {
             path.addLine(to: CGPoint(x: corner.x + dx * arm, y: corner.y))
         }
         return path
-    }
-}
-
-/// Live barcode scanning with VisionKit (devices with a camera and iOS 16+).
-struct BarcodeScannerView: UIViewControllerRepresentable {
-    let onScan: (String) -> Void
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(onScan: onScan)
-    }
-
-    func makeUIViewController(context: Context) -> DataScannerViewController {
-        let scanner = DataScannerViewController(
-            recognizedDataTypes: [.barcode(symbologies: [.ean13, .ean8, .upce])],
-            qualityLevel: .balanced,
-            recognizesMultipleItems: false,
-            isHighFrameRateTrackingEnabled: false,
-            isHighlightingEnabled: true
-        )
-        scanner.delegate = context.coordinator
-        try? scanner.startScanning()
-        return scanner
-    }
-
-    func updateUIViewController(_ controller: DataScannerViewController, context: Context) {}
-
-    final class Coordinator: NSObject, DataScannerViewControllerDelegate {
-        let onScan: (String) -> Void
-        private var didScan = false
-
-        init(onScan: @escaping (String) -> Void) {
-            self.onScan = onScan
-        }
-
-        func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {
-            guard !didScan else { return }
-            for item in addedItems {
-                if case let .barcode(barcode) = item, let value = barcode.payloadStringValue {
-                    didScan = true
-                    dataScanner.stopScanning()
-                    onScan(value)
-                    return
-                }
-            }
-        }
     }
 }

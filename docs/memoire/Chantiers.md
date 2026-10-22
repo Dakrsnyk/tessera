@@ -94,18 +94,19 @@ Consigne de l'utilisateur (haut de [[Demandes]]) : réaliser les lots dans l'ord
 
 Règle CI : un push annule le run en cours (concurrency) : ne pousser qu'une fois le run précédent fini.
 
-| Lot | Sujet | État |
+| Lot | Sujet | État (2026-10-22, limite d'usage atteinte) |
 |---|---|---|
-| 1 | Harmonisation des mini-apps (§ 2) | en cours |
-| 2 | Planning et widget Planning (§ 3) | à faire |
-| 3 | Habitudes puis Productivité dans Mon Quotidien (§ 10, § 12) | à faire |
-| 4 | Store : fonds d'écran originaux (§ 4) | à faire |
-| 5 | Nutrition : sources de données (§ 5), rapport de licences d'abord | à faire |
-| 6 | Fitness : calcul des calories (§ 7) | à faire |
-| 7 | Permissions iOS et réactivité (§ 8, § 9) | à faire |
-| 8 | Scanner alimentaire intelligent (§ 5), étape A ; étape B préparée et désactivée | à faire |
+| 1 | Harmonisation des mini-apps (§ 2) | code relu, commité et poussé (`b952d59`), jamais compilé : CI bloquée |
+| 2 | Planning façon Calendrier Apple et widget Horaire plein (§ 3) | relu, corrigé, commité en local (`7139e43`) |
+| 3 | Habitudes (grille) et Productivité dans Mon Quotidien (§ 10, § 12) | relus, corrigés, commités en local |
+| 4 | Store : 43 fonds d'écran originaux (§ 4) | relu, commité en local (`e07ffe0`) ; reste : traduire 11 textes |
+| 5 | Nutrition : licences et attributions (§ 5) | relu, corrigé, commité en local (`5e0179c`) ; `NutritionSpace.swift` (pied de page OFF, recherche 1,2 s) part avec le lot 8 ; reste : traduire 6 textes |
+| 6 | Fitness : calories (§ 7) (`CalorieModel`) | relu et corrigé ; commité en local avec le lot 7 ; reste : traduire 2 textes |
+| 7a | Permissions expliquées avant la demande (`PermissionExplainer`) | relu, 2 corrections faites ; commité en local ; reste : traduire 11 textes |
+| 7b | Réactivité (§ 9) | commencé : `App/Components/Pressable.swift` (`.pressable`, `TapGuard`), `MiniActionButton` branché, `Tests/ReactivityTests.swift`. RESTE : remplacer les ~220 `.buttonStyle(.plain)` de `App/` par `.buttonStyle(.pressable)` (script), protéger les boutons d'enregistrement des feuilles contre le double appui |
+| 8 | Scanner alimentaire étape A, étape B désactivée | écrit (6 fichiers + 2 tests), NON RELU (relecture coupée) ; à relire d'abord : `DataScannerViewController.capturePhoto()`, `FoodScanView.swift`, doublons de mots du `Set` de `FoodLabelMatcher` ; reste : traduire 27 textes |
 
-**BLOCAGE CI (2026-10-22, 17 h 25 UTC)** : le dépôt est passé en privé ; le run 39822617200 (`[check]` du lot 1, commit `b952d59`) a échoué en 14 s : « The job was not started because recent account payments have failed or your spending limit needs to be increased ». Les runners macOS ne démarrent plus : ni compilation, ni tests, ni TestFlight. Décision à prendre par l'utilisateur : repasser le dépôt en public (CI gratuite) ou régler la facturation GitHub (limite de dépense). Tant que c'est bloqué : les lots se font en local (commits locaux, pas de push), sans aucune vérification de compilation ; au déblocage, lancer un `[check]` sur l'ensemble et corriger.
+**Reste à faire pour finir (dans l'ordre)** : 1) débloquer la CI (repasser le dépôt en public, ou régler la facturation GitHub) ; 2) relire le lot 8 avec `code-reviewer` ; 3) lot 7b (remplacement des `.buttonStyle(.plain)`) ; 4) traductions : `python3 scripts/l10n_catalog.py extract`, écrire `l10n/parts/32.<langue>.json` pour les ~57 nouveaux textes (voir les rapports des lots), `merge`, `build`, `check`, `sync` ; `l10n/infoplist.json` et `project.pbxproj` sont déjà à jour (caméra, calendrier, mouvement) ; 5) miroir `docs/legal/privacy.html` de `PRIVACY.md` ; 6) `scripts/graph_map.py` (scanner, permissions, calories, réactivité) ; 7) cocher les lignes de `Demandes.md` ; 8) push, `[check]` puis `[unit]`, corriger ce que la CI trouve ; 9) un seul `[testflight]` puis `[interne]` si tous les `[unit]` sont verts. Le § 6 (« Faire mes repas ») n'est pas dans les 8 lots.
 
 À mettre à jour après chaque lot : cette table, le reste à faire, les captures à vérifier sur l'iPhone.
 

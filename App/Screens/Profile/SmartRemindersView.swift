@@ -9,6 +9,7 @@ struct SmartRemindersView: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.scenePhase) private var scenePhase
     @State private var status: UNAuthorizationStatus?
+    @State private var showsExplainer = false
 
     var body: some View {
         let settings = model.settings
@@ -86,6 +87,12 @@ struct SmartRemindersView: View {
         .navigationTitle(tr("Rappels intelligents"))
         .navigationBarTitleDisplayMode(.inline)
         .task(id: scenePhase) { await refreshStatus() }
+        .permissionSheet(.notifications, isPresented: $showsExplainer, request: requestNotifications) { _ in
+            Task {
+                await refreshStatus()
+                model.syncReminders()
+            }
+        }
     }
 
     private func hourPicker(_ hour: Binding<Int>) -> some View {
@@ -124,10 +131,16 @@ struct SmartRemindersView: View {
         )
     }
 
+    /// Explains first (once), then the system prompt. When the sheet is shown, the outcome is handled when it closes.
     private func allow() async {
+        if await AppPermission.notifications.requestOrExplain(isPresented: $showsExplainer, request: requestNotifications) != nil {
+            await refreshStatus()
+            model.syncReminders()
+        }
+    }
+
+    private func requestNotifications() async {
         _ = await NotificationScheduler.requestAuthorization()
-        await refreshStatus()
-        model.syncReminders()
     }
 
     private func refreshStatus() async {

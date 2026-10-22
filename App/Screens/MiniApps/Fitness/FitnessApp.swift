@@ -12,8 +12,15 @@ struct FitnessAppView: View {
     /// A session recorded by mistake, to delete once confirmed (it can then be done again).
     @State private var deleting: UUID?
     private var steps: StepCounter { .shared }
+    /// The explanation before the Motion prompt of the system.
+    @State private var asksMotion = false
 
     private var accentHex: String { MiniApp.fitness.colorHex }
+
+    private func readSteps() async {
+        await steps.refresh(asking: true)
+        await steps.refreshWeek()
+    }
 
     var body: some View {
         let now = Date()
@@ -39,6 +46,7 @@ struct FitnessAppView: View {
             RoutineEditor(routine: routine)
         }
         .confirmsWorkoutDeletion($deleting)
+        .permissionSheet(.motion, isPresented: $asksMotion, request: readSteps)
     }
 
     // MARK: Today
@@ -286,9 +294,18 @@ struct FitnessAppView: View {
             HStack(spacing: 10) {
                 miniFigure(tr("Durée"), tr("\(TF.int(FitnessMath.minutes(inWeekOf: week[0], state))) min"))
                 miniFigure(tr("Volume"), tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: week[0]).reduce(0, +))) kg"))
-                miniFigure(tr("Calories"), "~\(TF.int(FitnessMath.caloriesThisWeek(state, weekOf: week[0])))")
+                miniFigure(tr("Calories"), weekCalories(state, weekOf: week[0]))
             }
         }
+    }
+
+    /// The week's active calories, with the weight of « Mes informations »; without it, no number (the screen
+    /// keeps no weight of its own: the 70 kg default of the state is not the person's weight).
+    private func weekCalories(_ state: FitnessState, weekOf day: Date) -> String {
+        guard let weight = model.profile.weightKg else { return "—" }
+        var weighed = state
+        weighed.bodyWeightKg = weight
+        return "~\(TF.int(FitnessMath.caloriesThisWeek(weighed, weekOf: day)))"
     }
 
     private func miniFigure(_ title: String, _ value: String) -> some View {
@@ -330,10 +347,8 @@ struct FitnessAppView: View {
             .accessibilityIdentifier("fitness-activity")
         case .notAsked:
             Button {
-                Task {
-                    await steps.refresh(asking: true)
-                    await steps.refreshWeek()
-                }
+                // Explanation first (once); the system prompt follows « Continuer ».
+                Task { _ = await AppPermission.motion.requestOrExplain(isPresented: $asksMotion, request: readSteps) }
             } label: {
                 MiniRow(symbol: "figure.walk", colorHex: MiniStyle.stepsHex, title: tr("Afficher mes pas"), detail: tr("Pas, distance et étages, depuis le capteur de ton iPhone"))
                     .card(padding: 12)

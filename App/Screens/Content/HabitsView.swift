@@ -157,6 +157,7 @@ struct HabitEditor: View {
     @State private var hasReminder: Bool
     @State private var reminderTime: Date
     @State private var notificationsDenied = false
+    @State private var showsNotificationExplainer = false
     let isNew: Bool
 
     static let symbols = [
@@ -247,12 +248,23 @@ struct HabitEditor: View {
             .onChange(of: hasReminder) { _, enabled in
                 guard enabled else { return }
                 Task {
-                    let granted = await NotificationScheduler.requestAuthorization()
-                    notificationsDenied = !granted
-                    if !granted { hasReminder = false }
+                    // Explanation first (once), then the system prompt; a refusal leaves the habit without reminder.
+                    if let state = await AppPermission.notifications.requestOrExplain(isPresented: $showsNotificationExplainer, request: requestNotifications) {
+                        applyNotificationState(state)
+                    }
                 }
             }
+            .permissionSheet(.notifications, isPresented: $showsNotificationExplainer, request: requestNotifications, onDismiss: applyNotificationState)
         }
+    }
+
+    private func requestNotifications() async {
+        _ = await NotificationScheduler.requestAuthorization()
+    }
+
+    private func applyNotificationState(_ state: PermissionState) {
+        notificationsDenied = state == .denied
+        if state != .granted { hasReminder = false }
     }
 
     private func save() {

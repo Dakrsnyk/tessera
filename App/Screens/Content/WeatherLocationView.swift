@@ -8,6 +8,7 @@ struct WeatherLocationView: View {
     @State private var isSearching = false
     @State private var isLocating = false
     @State private var errorMessage: String?
+    @State private var showsLocationExplainer = false
     @State private var locationService = LocationService()
 
     var body: some View {
@@ -68,6 +69,7 @@ struct WeatherLocationView: View {
         .overlay {
             if isSearching { ProgressView() }
         }
+        .permissionSheet(.location, isPresented: $showsLocationExplainer, request: locateNow)
     }
 
     private func search() {
@@ -86,15 +88,26 @@ struct WeatherLocationView: View {
 
     private func locate() {
         errorMessage = nil
-        isLocating = true
+        // At once, not in the task: a second tap right behind the first finds the search already running.
+        guard !isLocating else { return }
         Task {
-            defer { isLocating = false }
-            do {
-                let location = try await locationService.currentLocation()
-                select(location)
-            } catch {
-                errorMessage = (error as? LocalizedError)?.errorDescription ?? LocationError.unavailable.errorDescription
+            if await AppPermission.location.currentState() == .granted {
+                await locateNow()
+            } else {
+                // Explanation first (once); refused, the sheet offers the settings and the city search stays.
+                _ = await AppPermission.location.requestOrExplain(isPresented: $showsLocationExplainer, request: locateNow)
             }
+        }
+    }
+
+    private func locateNow() async {
+        isLocating = true
+        defer { isLocating = false }
+        do {
+            let location = try await locationService.currentLocation()
+            select(location)
+        } catch {
+            errorMessage = (error as? LocalizedError)?.errorDescription ?? LocationError.unavailable.errorDescription
         }
     }
 

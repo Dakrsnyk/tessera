@@ -370,9 +370,11 @@ struct MiniActionButton: View {
     let colorHex: String
     var isProminent = true
     let action: () -> Void
+    /// A double tap runs the action once (adding an expense, a meal or a set twice is never wanted).
+    @State private var tapGuard = TapGuard()
 
     var body: some View {
-        Button(action: action) {
+        Button { tapGuard.run(action) } label: {
             Label(title, systemImage: symbol)
                 .font(.headline)
                 .foregroundStyle(isProminent ? Color.white : Color(hex: colorHex))
@@ -381,7 +383,7 @@ struct MiniActionButton: View {
                 .frame(maxWidth: .infinity, minHeight: 50)
                 .background(isProminent ? Color(hex: colorHex) : Color(hex: colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 }
 

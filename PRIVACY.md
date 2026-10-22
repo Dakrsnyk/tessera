@@ -27,7 +27,7 @@ Les résumés rédigés par Apple Intelligence (sur les iPhone compatibles) sont
 
 Chaque accès est demandé par iOS au moment où une fonction en a besoin. Tu peux le refuser ou le retirer à tout moment dans Réglages > Ardane ; l'app continue de fonctionner sans la fonction concernée.
 
-- **Caméra** — Uniquement pour scanner le code-barres d'un aliment. L'image n'est ni enregistrée ni envoyée : seul le numéro du code-barres est lu.
+- **Caméra** — Uniquement pour scanner le code-barres d'un aliment ou photographier un plat. Ardane t'explique pourquoi avant que iOS te demande l'accès. L'image est analysée sur ton iPhone (Vision, d'Apple) : elle n'est ni enregistrée ni envoyée, et l'estimation des aliments d'un plat se fait aussi sur ton iPhone. Seul le numéro du code-barres lu est envoyé à Open Food Facts (section 4) pour trouver le produit.
 - **Position** — Seulement quand tu touches « Utiliser ma position », pour trouver ta ville et la météo. Seules les coordonnées de la ville choisie sont gardées sur ton iPhone.
 - **Calendrier** — Lecture seule de tes prochains événements, pour le widget « À venir » et ton planning. Ils ne quittent pas ton iPhone.
 - **Mouvements (podomètre)** — Lecture de tes pas du jour pour « Mon Quotidien ». Ils ne quittent pas ton iPhone.

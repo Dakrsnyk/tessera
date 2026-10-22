@@ -5,6 +5,22 @@ import WidgetKit
 struct KindOptionsSection: View {
     @Binding var design: WidgetDesign
     @Environment(AppModel.self) private var model
+    @State private var showsNotificationExplainer = false
+
+    /// The « jour J » reminder needs notifications: explained first, and turned off again when they stay refused.
+    private func askForNotifications() async {
+        if let state = await AppPermission.notifications.requestOrExplain(isPresented: $showsNotificationExplainer, request: requestNotifications) {
+            applyNotificationState(state)
+        }
+    }
+
+    private func requestNotifications() async {
+        _ = await NotificationScheduler.requestAuthorization()
+    }
+
+    private func applyNotificationState(_ state: PermissionState) {
+        if state != .granted { design.options.countdownReminder = false }
+    }
 
     var body: some View {
         switch design.kind {
@@ -77,12 +93,13 @@ struct KindOptionsSection: View {
                             get: { design.options.countdownReminder },
                             set: { newValue in
                                 design.options.countdownReminder = newValue
-                                if newValue { Task { _ = await NotificationScheduler.requestAuthorization() } }
+                                if newValue { Task { await askForNotifications() } }
                             }
                         ))
                     }
                 }
                 .font(.subheadline)
+                .permissionSheet(.notifications, isPresented: $showsNotificationExplainer, request: requestNotifications, onDismiss: applyNotificationState)
             }
         case .tasks:
             EditorSection(title: tr("Contenu")) {
@@ -221,8 +238,18 @@ struct CalendarAccessRow: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openURL) private var openURL
     @State private var isRequesting = false
+    @State private var showsExplainer = false
+    /// Bumped after the access changed, so the row reads the new state.
+    @State private var revision = 0
 
     var body: some View {
+        let _ = revision
+        Group { content }
+            .permissionSheet(.calendar, isPresented: $showsExplainer, request: requestAccess) { _ in reload() }
+    }
+
+    @ViewBuilder
+    private var content: some View {
         if CalendarService.hasAccess {
             Label(tr("Accès autorisé. Tes 48 prochaines heures s'affichent dans le widget."), systemImage: "checkmark.circle.fill")
                 .font(.footnote)
@@ -245,9 +272,10 @@ struct CalendarAccessRow: View {
                 Button {
                     isRequesting = true
                     Task {
-                        _ = await CalendarService.requestAccess()
-                        model.refreshEvents()
-                        model.scheduleWidgetReload()
+                        // The explanation comes first (once); the system prompt follows the person's « Continuer ».
+                        if await AppPermission.calendar.requestOrExplain(isPresented: $showsExplainer, request: requestAccess) != nil {
+                            reload()
+                        }
                         isRequesting = false
                     }
                 } label: {
@@ -261,6 +289,16 @@ struct CalendarAccessRow: View {
                 .disabled(isRequesting)
             }
         }
+    }
+
+    private func requestAccess() async {
+        _ = await CalendarService.requestAccess()
+    }
+
+    private func reload() {
+        model.refreshEvents()
+        model.scheduleWidgetReload()
+        revision += 1
     }
 }
 

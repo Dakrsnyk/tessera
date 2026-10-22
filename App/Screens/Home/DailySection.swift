@@ -628,6 +628,7 @@ private struct PlanningDayTile: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dailyCompact) private var compact
     @State private var events: [EventSnapshot] = []
+    @State private var askingCalendar = false
 
     private let colorHex = "3366FF"
 
@@ -659,6 +660,14 @@ private struct PlanningDayTile: View {
         .accessibilityIdentifier("daily-planning")
         .onAppear(perform: loadEvents)
         .onChange(of: model.events) { _, _ in loadEvents() }
+        .permissionSheet(.calendar, isPresented: $askingCalendar, request: requestCalendar) { _ in
+            model.refreshEvents()
+            loadEvents()
+        }
+    }
+
+    private func requestCalendar() async {
+        _ = await CalendarService.requestAccess()
     }
 
     private func table(_ week: [(day: Date, items: [AgendaItem])], isEmpty: Bool) -> some View {
@@ -685,7 +694,8 @@ private struct PlanningDayTile: View {
     private var calendarButton: some View {
         Button {
             Task {
-                if await CalendarService.requestAccess() {
+                // Explanation first (once); refused, the sheet offers the settings and the card keeps working.
+                if let state = await AppPermission.calendar.requestOrExplain(isPresented: $askingCalendar, request: requestCalendar), state == .granted {
                     model.refreshEvents()
                     loadEvents()
                 }

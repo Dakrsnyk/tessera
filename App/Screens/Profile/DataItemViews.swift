@@ -49,7 +49,12 @@ struct DataItemRow: View {
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
     @State private var newText = ""
     @State private var showsCityPicker = false
+    @State private var asksMotion = false
     private var stepCounter: StepCounter { .shared }
+
+    private func readSteps() async {
+        await stepCounter.refresh(asking: true)
+    }
 
     var body: some View {
         let isFilled = model.isFilled(item)
@@ -99,6 +104,7 @@ struct DataItemRow: View {
                     }
             }
         }
+        .permissionSheet(.motion, isPresented: $asksMotion, request: readSteps)
     }
 
     // MARK: Editors
@@ -301,7 +307,8 @@ struct DataItemRow: View {
                 .foregroundStyle(.secondary)
         case .notAsked:
             action(tr("Afficher mes pas"), symbol: "figure.walk") {
-                Task { await stepCounter.refresh(asking: true) }
+                // Explanation first (once); the system prompt follows « Continuer ».
+                Task { _ = await AppPermission.motion.requestOrExplain(isPresented: $asksMotion, request: readSteps) }
             }
         case .denied:
             Text(tr("L'accès aux mouvements est désactivé : Réglages › Ardane › Mouvements et forme."))
