@@ -4,7 +4,7 @@
 
 ## État du dépôt
 - Les 8 lots de `docs/memoire/Demandes.md` sont écrits, relus, compilés (run 228) et testés (run 229 : 400 tests réussis, 0 échec). Détail, limites et liste « à vérifier sur l'iPhone » : `docs/memoire/Chantiers.md` (section « Exécution autonome des 8 lots »).
-- Envoyé sur TestFlight le 2026-10-22 : une version normale (`[testflight]`) puis une version interne (`[interne]`, Premium débloqué, c'est la dernière) : numéros dans `Chantiers.md`. Avant : builds 217/218, puis 223 (normal), 224 et 226 (internes).
+- Envoyé sur TestFlight le 2026-10-22 : une version normale (`[testflight]`) puis une version interne (`[interne]`, Premium débloqué, c'est la dernière) : build 230 (normal) puis build 231 (interne, « Internal Only » vérifié, c'est le dernier). Avant : builds 217/218, puis 223 (normal), 224 et 226 (internes).
 - L'utilisateur fait tester des amis comme testeurs internes avec la version interne : `docs/guide-premium-testflight.md`. Après chaque série : `[unit]`, puis `[testflight]`, puis `[interne]` (sinon les amis reçoivent une version sans Premium).
 - Le dépôt est PUBLIC pour la CI (privé : les runners macOS ne démarrent pas, facturation) : à repasser en privé après la livraison.
 
