@@ -10,7 +10,6 @@ Retour : [[Memoire]]
 
 ## À faire
 
-- [ ] Accueil (VALIDATION OBLIGATOIRE) : présenter 3 maquettes (A évolution fidèle, B minimaliste premium façon Apple, C dashboard dynamique), chacune en clair et sombre, livrées en PNG. Dégradé léger par catégorie, d'après « Séance du jour » de Fitness, sans image de fond. Barre du bas, date et personnalisation de Mon Quotidien inchangées. NE RIEN CODER avant mon choix. (détail : docs/memoire/Brief-ameliorations.md §1)
 - [ ] Mini-apps : même organisation partout (sélecteur de jours en haut, bloc principal, bloc secondaire, paramètres et infos en bas), composants harmonisés, doublons retirés (§2).
 - [ ] Planning : présentation façon Calendrier Apple, vues semaine / mois / année (pincement si fiable, sinon contrôle explicite) ; widget Planning qui remplit toute sa surface (§3).
 - [ ] Store : grande collection de fonds d'écran originaux (gratuits, les meilleurs en Premium), sous les écrans d'accueil personnalisés ; nouveaux packs et styles ; droits vérifiés (§4).
@@ -26,6 +25,9 @@ Retour : [[Memoire]]
 ## Idées pour plus tard
 
 ## Fait
+
+Accueil, maquette D choisie le 2026-10-22 (compilée en CI, run 221 ; à vérifier sur l'iPhone par TestFlight) :
+- [x] Accueil : mixte des maquettes A et C (dégradé léger par catégorie d'après « Séance du jour », sans image de fond ; séance « Maintenant » en tête l'après-midi ; habitudes en anneaux avec la série de jours ; courbe des 7 derniers jours dans Budget). Barre du bas, date et personnalisation de Mon Quotidien inchangées (fait le 2026-10-22).
 
 Série du 2026-10-22 (compilée en CI, run 219 ; à vérifier sur l'iPhone par TestFlight) :
 - [x] Fitness : vrai « Skip » de la série en cours (ignorée, jamais comptée, sans repos), sans double incrément ; « Annuler » défait aussi un « Passer » ; boutons de l'écran verrouillé, de la Dynamic Island, des widgets et de l'app ; retour haptique léger seulement si le bouton est accepté et l'app au premier plan (un widget ne peut pas faire vibrer l'iPhone seul) ; ajout rapide Nutrition sans doublon (fait le 2026-10-22).

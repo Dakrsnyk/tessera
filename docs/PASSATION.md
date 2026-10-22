@@ -3,8 +3,10 @@
 À lire en premier, avec `CLAUDE.md` et `docs/memoire/` (Demandes, Chantiers, Decisions, Pieges-connus). Lancer `git status` avant de se fier à cette note.
 
 ## État du dépôt
-- Dernier code compilé en CI : commit `c15702f` (run 219, `[check]` : statique et simulateur réussis, 5 400 textes traduits). Derniers builds sur TestFlight avant cette série : 217 (normal) et 218 (interne, Premium débloqué).
-- Le chantier Skip (série passée, doubles appuis, haptique, ajout rapide Nutrition) est écrit, relu par `code-reviewer` (aucun bloquant) et compilé. Les 331 tests logiques du run 216 + les 18 de `Tests/WorkoutSkipTests.swift` doivent passer par `[unit]` ; la suite est dans `docs/memoire/Chantiers.md` (section du 2026-10-22).
+- Dernier code compilé en CI : commit `8fd9d01` (run 221, `[check]`). Derniers builds sur TestFlight avant cette série : 217 (normal) et 218 (interne, Premium débloqué).
+- Chantier Skip (série passée, doubles appuis, haptique, ajout rapide Nutrition) : terminé, relu par `code-reviewer`, run 220 (`[unit]`) : 350 tests réussis, 0 échec.
+- Accueil, maquette D choisie le 2026-10-22 : codé et compilé (run 221) ; ses tests (`DailyBriefTests`) passent par le prochain `[unit]`. Détail et écarts avec la maquette : `docs/memoire/Chantiers.md` (section du 2026-10-22).
+- Reste à envoyer sur l'iPhone : `[testflight]` (Skip + accueil), puis `[interne]` seulement si l'utilisateur le demande.
 - L'utilisateur fait tester des amis comme testeurs internes avec la version interne : `docs/guide-premium-testflight.md`, dernière section. Après chaque série : `[unit]`, puis `[testflight]`, puis `[interne]` (sinon les amis reçoivent une version sans Premium).
 
 ## Choix laissés à l'utilisateur (Skip)
@@ -14,9 +16,9 @@
 - Vibration : seulement app au premier plan (limite d'iOS, pas un défaut du code). À vérifier sur l'iPhone.
 
 ## Prochaine demande : améliorations (`docs/memoire/Demandes.md`, « À faire »)
-- **Accueil : validation obligatoire avant de coder.** Trois maquettes (A évolution fidèle, B minimaliste premium, C dashboard dynamique), clair et sombre, sont dans `pub/maquettes-accueil/` (non versionné ; source `maquettes.html`, rendu `node render.js` avec le Chromium de `~/ardane-tools/render`). Ne rien coder avant le choix de l'utilisateur.
+- **Accueil : fait** (maquette D, mixte A + C, choisie par l'utilisateur). Maquettes dans `pub/maquettes-accueil/` (non versionné ; source `maquettes.html`, rendu `node render.js` avec le Chromium de `~/ardane-tools/render`).
 - `docs/memoire/Brief-ameliorations.md` (cité par Demandes pour les § 1 à 12) n'existe pas ; le § 11 n'apparaît nulle part. Le demander à l'utilisateur avant les lots autres que l'accueil.
-- Découpage proposé en lots (aucun n'est lancé sans l'accord de l'utilisateur) : 0 Skip (fait) · 1 Accueil + Productivité · 2 Habitudes · 3 Planning · 4 Mini-apps harmonisées · 5 Store (fonds d'écran) · 6 Nutrition (sources de données) · 7 « Faire mes repas » · 8 Fitness (calories) · 9 Permissions · 10 Réactivité. Les lots 2, 3, 5 et 9 sont indépendants ; 6, 7 et 8 touchent `Nutrition.swift` et `Fitness.swift` : en séquence ; 4 et 10 en dernier.
+- Découpage proposé en lots (aucun n'est lancé sans l'accord de l'utilisateur) : 0 Skip (fait) · 1 Accueil (fait ; reste Productivité, § 12) · 2 Habitudes · 3 Planning · 4 Mini-apps harmonisées · 5 Store (fonds d'écran) · 6 Nutrition (sources de données) · 7 « Faire mes repas » · 8 Fitness (calories) · 9 Permissions · 10 Réactivité. Les lots 2, 3, 5 et 9 sont indépendants ; 6, 7 et 8 touchent `Nutrition.swift` et `Fitness.swift` : en séquence ; 4 et 10 en dernier.
 - Images de référence : `docs/references/` (non versionnées, voir son `README.md`).
 
 ## Rappels

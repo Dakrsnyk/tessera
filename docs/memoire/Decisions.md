@@ -21,6 +21,7 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-22 : doubles appuis : chaque bouton (intent) porte la position attendue (`WorkoutPosition.token`, `@Parameter` texte) et est ignoré si la séance a avancé ; sans position (ancienne version) pas de contrôle. `SharedStore.update` est atomique dans un processus (`NSRecursiveLock`) ; pas de verrou de fichier entre processus (iOS tue une app suspendue qui en tient un).
 - 2026-10-22 : retour haptique : un `ButtonFeedback.play` fixé par l'app (UIKit hors de `Shared/`), un seul tap léger, seulement si le bouton a changé quelque chose et que l'app est au premier plan.
 - 2026-10-22 : ajout rapide Nutrition : le même aliment ignoré s'il existe déjà une entrée de cet aliment à moins de 2 s (`NutritionState.quickAddWindow`).
+- 2026-10-22 : accueil, maquette D (mixte des maquettes A et C) : dégradé léger de la couleur de la catégorie sur chaque carte de Mon Quotidien (`DayCard`), sans image de fond ; à partir de 11 h, une séance prévue et pas faite passe avant les repas (score 100, repas 99) ; un cours ou un examen dans les 2 h reste avant elle (102) ; pastille « Maintenant » sur la séance prévue, halo seul quand elle est en cours. Rien d'inventé : pas d'heure de séance dans l'app, donc pas de compte à rebours.
 
 ## Publicité
 - Une seule publicité exceptionnelle plutôt que plusieurs ordinaires ; seulement des fonctionnalités qui existent vraiment, montrées avec de vrais éléments de l'app.
