@@ -40,7 +40,8 @@ Quand tu utilises certaines fonctions, l'app interroge directement un service ex
 
 - **Apple** — Retrouve une ville à partir du nom que tu tapes ou de ta position (géocodage), et traite les achats et abonnements Premium. Ardane ne voit jamais tes informations de paiement. Politique : apple.com/legal/privacy
 - **Open-Meteo (météo)** — Reçoit les coordonnées de la ville choisie. Politique : open-meteo.com
-- **Open Food Facts (produits emballés)** — Reçoit le code-barres scanné ou le texte que tu cherches. Association établie en France. Politique : world.openfoodfacts.org
+- **Open Food Facts (produits emballés)** — Reçoit le code-barres scanné ou le texte que tu cherches. Association établie en France. Les données de ces produits sont saisies par la communauté et disponibles sous la licence ODbL. Politique : world.openfoodfacts.org
+- **Sources des valeurs nutritives intégrées à l'app** — Les aliments génériques viennent du Fichier canadien sur les éléments nutritifs (Santé Canada, licence du gouvernement ouvert – Canada) et, pour une partie des valeurs de la table intégrée, de USDA FoodData Central (domaine public, CC0). Ils sont lus sur ton iPhone : aucune requête n'est envoyée. Ardane n'est pas affilié à Santé Canada. Détails dans « Profil › À propos ».
 - **CoinGecko (cours des cryptomonnaies)** — Reçoit le nom de la cryptomonnaie et de la devise demandées. Politique : coingecko.com
 - **Frankfurter (taux de change)** — Reçoit les devises demandées. Site : frankfurter.dev
 - **SEC EDGAR (données publiques d'entreprises américaines)** — Reçoit l'identifiant de l'entreprise consultée. Service du gouvernement des États-Unis : sec.gov

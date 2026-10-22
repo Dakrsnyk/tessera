@@ -200,6 +200,22 @@ struct ProfileView: View {
                 }
 
                 Section {
+                    foodSource(name: "Open Food Facts", url: FoodSourceLinks.openFoodFacts,
+                               text: tr("Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL). Contenu sous Database Contents License. Données saisies par la communauté : vérifie l'étiquette."))
+                    HStack(spacing: 16) {
+                        Link(destination: FoodSourceLinks.odbl) { Text(verbatim: "ODbL") }
+                        Link(destination: FoodSourceLinks.dbcl) { Text(verbatim: "DbCL") }
+                    }
+                    .buttonStyle(.borderless)
+                    foodSource(name: tr("Fichier canadien sur les éléments nutritifs"), url: FoodSourceLinks.openGovernmentLicence,
+                               text: tr("Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuvé par lui."))
+                    foodSource(name: "USDA FoodData Central", url: FoodSourceLinks.usda,
+                               text: tr("Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service."))
+                } header: {
+                    Text(tr("Sources des données alimentaires"))
+                }
+
+                Section {
                     Button {
                         exportBackup()
                     } label: {
@@ -297,6 +313,17 @@ struct ProfileView: View {
                 Text(tr("Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché."))
             }
         }
+    }
+
+    /// A food data source of the credits: its name as a link to the official page, then the required credit text.
+    private func foodSource(name: String, url: URL, text: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Link(destination: url) { Text(verbatim: name).font(.subheadline.weight(.semibold)) }
+            Text(text)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical, 2)
     }
 
     private func exportBackup() {

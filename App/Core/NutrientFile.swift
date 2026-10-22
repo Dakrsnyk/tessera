@@ -1,12 +1,21 @@
 import Foundation
 
+/// Official pages of the food data sources, linked from the credits (licence conditions).
+enum FoodSourceLinks {
+    static let openFoodFacts = URL(string: "https://world.openfoodfacts.org")!
+    static let odbl = URL(string: "https://opendatacommons.org/licenses/odbl/1-0/")!
+    static let dbcl = URL(string: "https://opendatacommons.org/licenses/dbcl/1-0/")!
+    static let usda = URL(string: "https://fdc.nal.usda.gov")!
+    static let openGovernmentLicence = URL(string: "https://open.canada.ca/en/open-government-licence-canada")!
+}
+
 /// About 5,600 generic foods from the Canadian Nutrient File (Health Canada, CNF 2015, Open
 /// Government Licence – Canada), with their French and English names and values per 100 g.
 /// Bundled with the app (`cnf-foods.json`, built by `scripts/cnf_build.py`, with fats, minerals, vitamins,
 /// caffeine and alcohol added by `scripts/cnf_extend.py`), so the search finds
 /// them offline; read once, the first time someone searches.
 enum NutrientFile {
-    static let attribution = tr("Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.")
+    static let attribution = tr("Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé Canada.")
 
     private struct Entry {
         let food: FoodItem

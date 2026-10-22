@@ -3,7 +3,8 @@ import Foundation
 /// App-wide identity used for API etiquette (the SEC asks for a contact in the User-Agent).
 enum AppInfo {
     static let supportEmail = "support.ardane@gmail.com"
-    static var userAgent: String { tr("Ardane/1.0 (\(supportEmail))") }
+    /// An identifier, not a text to translate: it must not change with the language.
+    static var userAgent: String { "Ardane/1.0 (\(supportEmail))" }
 }
 
 struct CompanyRef: Codable, Hashable, Identifiable {
