@@ -113,6 +113,15 @@ Consigne de l'utilisateur (haut de [[Demandes]]) : réaliser les lots dans l'ord
 
 **À vérifier sur l'iPhone** : accueil (dégradés, pastille « Maintenant », anneaux, courbe) ; Planning (jour, semaine, mois, année, widget plein) ; habitudes (widget S/M/L, Teinté, écran) ; carte Productivité (« + » de Mon Quotidien) ; Store › Fonds d'écran (défilement, aperçu, enregistrement) ; « À propos » (sources) ; calories de Fitness ; explications avant chaque permission (notifications, calendrier, position, pas, caméra) ; scanner (code-barres, produit inconnu, mode avion, photo d'un plat, récapitulatif, un seul ajout au double appui) ; retour visuel au toucher.
 
+## Mini-apps : sélecteur de semaine et même structure — 2026-10-22
+
+Demande (2026-10-22) : sélecteur de semaine en tête, puis essentiel, complémentaire, réglages en dernier ; aucun doublon. Composant `WeekSelector` (`App/Screens/MiniApps/WeekSelector.swift`, dessin de l'image de référence), appliqué à Nutrition, Fitness, Planning, Finances, Business, Voyage, Auto, Météo (Photos et citations : rien de daté, pas de sélecteur). `DaySwitcher` et `WeekCard` ne sont plus utilisés sur les écrans principaux (le `DaySwitcher` reste dans quelques sous-pages : habitudes, activité, semaine/mois du Planning). Run 232 compile, run 233 : 445 tests réussis (dont 6 `WeekSelectorTests`).
+
+- Le jour choisi pilote l'essentiel : repas et macros (Nutrition), séance (Fitness), agenda (Planning), opérations du jour (Finances), chiffre d'affaires de la période (Business), programme du jour (Voyage), journal du jour (Auto), prévision du jour (Météo).
+- Doublons retirés : second sélecteur de dates partout ; Planning : navigation propre du calendrier (la période suit le jour choisi) ; Finances : tuiles « Dépenses » et « Solde » (déjà dans le hero et le graphique) ; Nutrition : chiffres répétés dans la carte conseil ; Voyage : « Programme » une seule fois ; Auto : ligne « Kilométrage » ; Météo : « Mis à jour » une seule fois.
+- Choix à connaître : Business garde son sélecteur « Période » (granularité du chiffre d'affaires, dans le hero) ; Planning garde les lignes « Semaine » et « Mois » (sous-pages avec leur propre navigation) ; le Top 3 reste lié à aujourd'hui ; Voyage s'ouvre sur le premier jour d'un voyage à venir ; la Météo n'a pas de prévision pour les jours passés de la semaine (« Météo indisponible », rien d'inventé).
+- Piège : le rapport CI coupe la liste des tests à 400 lignes ; le journal complet se lit avec `gh run view <id> --log` (chercher `Test Case .* failed` et `TEST SUCCEEDED`).
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
