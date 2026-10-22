@@ -34,7 +34,7 @@ enum CarSheet: Identifiable {
 enum Car {
     static var accentHex: String { MiniApp.car.colorHex }
     static let fuelHex = "F08A24"
-    static let alertHex = "E5484D"
+    static let alertHex = MiniStyle.alertHex
 
     static func remaining(_ status: CarMath.ServiceStatus) -> String {
         var parts: [String] = []
@@ -156,6 +156,8 @@ struct CarAppView: View {
                                  detail: CarMath.fuelCostPerKm(state).map { tr("\(TF.money($0 * 100, currency, decimals: 2)) / 100 km") })
                     }
                     .buttonStyle(.plain)
+                    // The « Carburant » row of the list below is only there when this figure is not.
+                    .accessibilityIdentifier("car-fuel")
                 }
                 if cost.total > 0 {
                     NavigationLink(value: HomeRoute.page(.carCosts)) {
@@ -207,7 +209,7 @@ struct CarAppView: View {
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 4)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .miniCard()
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("car-deadlines")
@@ -217,36 +219,55 @@ struct CarAppView: View {
 
     // MARK: More
 
+    /// The list under the sections. A destination already shown above (a figure or a section) is not
+    /// repeated; its row comes back only when that figure or section is hidden (nothing to show yet), so
+    /// every page stays reachable. The identifiers move with the link. « Kilométrage » stays: the action
+    /// above adds a reading, this row opens the page.
     private func more(state: CarState, now: Date) -> some View {
-        MiniRowsCard {
-            NavigationLink(value: HomeRoute.page(.carFuel)) {
-                MiniRow(symbol: "fuelpump.fill", colorHex: Car.fuelHex, title: tr("Carburant"), detail: tr("Pleins, prix et consommation"),
-                        value: state.fills.isEmpty ? nil : "\(state.fills.count)")
+        let showsConsumption = CarMath.consumption(state) != nil
+        let showsCost = CarMath.monthlyCost(state, at: now).total > 0
+        let showsMaintenance = !CarMath.serviceStatus(state, at: now).isEmpty
+        let showsDeadlines = !CarMath.upcomingDeadlines(state, at: now).isEmpty
+        return MiniRowsCard {
+            if !showsConsumption {
+                NavigationLink(value: HomeRoute.page(.carFuel)) {
+                    MiniRow(symbol: "fuelpump.fill", colorHex: Car.fuelHex, title: tr("Carburant"), detail: tr("Pleins, prix et consommation"),
+                            value: state.fills.isEmpty ? nil : "\(state.fills.count)")
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("car-fuel")
+                MiniDivider()
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("car-fuel")
-            MiniDivider()
             NavigationLink(value: HomeRoute.page(.carMileage)) {
                 MiniRow(symbol: "speedometer", colorHex: accentHex, title: tr("Kilométrage"), detail: tr("Kilomètres par mois"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("car-mileage")
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.carMaintenance)) {
-                MiniRow(symbol: "wrench.and.screwdriver.fill", colorHex: "3366FF", title: tr("Entretien"), detail: tr("Vidange, pneus, freins…"),
-                        value: state.services.isEmpty ? nil : "\(state.services.count)")
+            if !showsMaintenance {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.carMaintenance)) {
+                    MiniRow(symbol: "wrench.and.screwdriver.fill", colorHex: "3366FF", title: tr("Entretien"), detail: tr("Vidange, pneus, freins…"),
+                            value: state.services.isEmpty ? nil : "\(state.services.count)")
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("car-maintenance")
             }
-            .buttonStyle(.plain)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.carDeadlines)) {
-                MiniRow(symbol: "calendar.badge.exclamationmark", colorHex: Car.alertHex, title: tr("Échéances"), detail: tr("Assurance, immatriculation, pneus d'hiver…"))
+            if !showsDeadlines {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.carDeadlines)) {
+                    MiniRow(symbol: "calendar.badge.exclamationmark", colorHex: Car.alertHex, title: tr("Échéances"), detail: tr("Assurance, immatriculation, pneus d'hiver…"))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("car-deadlines")
             }
-            .buttonStyle(.plain)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.carCosts)) {
-                MiniRow(symbol: "creditcard.fill", colorHex: "2F8F7A", title: tr("Coûts"), detail: tr("Ce que la voiture coûte vraiment chaque mois"))
+            if !showsCost {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.carCosts)) {
+                    MiniRow(symbol: "creditcard.fill", colorHex: "2F8F7A", title: tr("Coûts"), detail: tr("Ce que la voiture coûte vraiment chaque mois"))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("car-cost")
             }
-            .buttonStyle(.plain)
         }
     }
 }

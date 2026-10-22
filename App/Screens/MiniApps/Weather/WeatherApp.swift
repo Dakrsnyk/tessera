@@ -10,6 +10,15 @@ struct WeatherAppView: View {
     private var accentHex: String { MiniApp.weather.colorHex }
     private var unit: TemperatureUnit { model.settings.temperatureUnit }
 
+    /// The forecast on screen (fresh or the last one received), if any.
+    private var lastSnapshot: WeatherSnapshot? {
+        switch model.weather {
+        case let .ready(snapshot): snapshot
+        case let .unavailable(snapshot): snapshot
+        case .needsLocation: nil
+        }
+    }
+
     var body: some View {
         MiniAppScroll {
             switch model.weather {
@@ -34,9 +43,10 @@ struct WeatherAppView: View {
                 .card()
             }
             trip
-            Text(tr("Données météo : Open-Meteo.com (CC BY 4.0)."))
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            if let snapshot = lastSnapshot {
+                MiniFootnote(text: tr("Mis à jour \(updatedText(snapshot.fetchedAt))."))
+            }
+            MiniFootnote(text: tr("Données météo : Open-Meteo.com (CC BY 4.0)."))
             MiniAppInfoSection(app: .weather)
         }
         .navigationTitle(tr("Météo"))
@@ -185,7 +195,7 @@ struct WeatherAppView: View {
                     }
                 }
                 .padding(.horizontal, 14)
-                .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .miniCard()
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("weather-days")
             }
@@ -217,7 +227,6 @@ struct WeatherAppView: View {
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("weather-details")
-            Text(tr("Mis à jour \(updatedText(weather.fetchedAt)).")).font(.caption).foregroundStyle(.secondary)
         }
     }
 
@@ -255,7 +264,7 @@ struct WeatherAppView: View {
                         }
                     }
                     .padding(.horizontal, 14)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .miniCard()
                 }
                 .buttonStyle(.plain)
             }

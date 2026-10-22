@@ -90,10 +90,7 @@ struct BusinessSourcesCard: View {
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("business-import")
             }
-            Text(tr("Les données vont directement de ton iPhone à Stripe, sans passer par Ardane. Une vente déjà importée n'est jamais ajoutée deux fois."))
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            MiniFootnote(text: tr("Les données vont directement de ton iPhone à Stripe, sans passer par Ardane. Une vente déjà importée n'est jamais ajoutée deux fois."))
         }
         .task { await StripeSync.syncIfDue(model: model) }
         .sheet(isPresented: $connecting) { StripeConnectSheet() }

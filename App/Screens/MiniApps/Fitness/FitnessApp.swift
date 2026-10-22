@@ -29,10 +29,7 @@ struct FitnessAppView: View {
             program(state: state)
             exercises(state: state)
             progress(state: state)
-            Text(tr("Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures."))
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            MiniFootnote(text: tr("Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures."))
             MiniAppInfoSection(app: .fitness)
         }
         .navigationTitle(tr("Fitness"))
@@ -313,8 +310,8 @@ struct FitnessAppView: View {
             NavigationLink(value: HomeRoute.page(.fitnessActivity)) {
                 HStack(spacing: 16) {
                     ZStack {
-                        RingView(progress: goal.map { Double(count) / Double(max(1, $0)) } ?? 0, lineWidth: 8, color: Color(hex: "12A4B5"), track: Color(hex: "12A4B5").opacity(0.15))
-                        Image(systemName: "figure.walk").font(.title3).foregroundStyle(Color(hex: "12A4B5"))
+                        RingView(progress: goal.map { Double(count) / Double(max(1, $0)) } ?? 0, lineWidth: 8, color: Color(hex: MiniStyle.stepsHex), track: Color(hex: MiniStyle.stepsHex).opacity(0.15))
+                        Image(systemName: "figure.walk").font(.title3).foregroundStyle(Color(hex: MiniStyle.stepsHex))
                     }
                     .frame(width: 64, height: 64)
                     VStack(alignment: .leading, spacing: 3) {
@@ -338,7 +335,7 @@ struct FitnessAppView: View {
                     await steps.refreshWeek()
                 }
             } label: {
-                MiniRow(symbol: "figure.walk", colorHex: "12A4B5", title: tr("Afficher mes pas"), detail: tr("Pas, distance et étages, depuis le capteur de ton iPhone"))
+                MiniRow(symbol: "figure.walk", colorHex: MiniStyle.stepsHex, title: tr("Afficher mes pas"), detail: tr("Pas, distance et étages, depuis le capteur de ton iPhone"))
                     .card(padding: 12)
             }
             .buttonStyle(.plain)
@@ -372,14 +369,6 @@ struct FitnessAppView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("fitness-history")
-                MiniDivider()
-                Button {
-                    editing = Routine(name: "", exercises: [])
-                } label: {
-                    MiniRow(symbol: "plus", colorHex: accentHex, title: tr("Créer une séance"), showsChevron: false)
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("fitness-new-routine")
             }
         }
     }

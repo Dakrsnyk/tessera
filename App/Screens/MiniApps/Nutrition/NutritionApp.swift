@@ -44,10 +44,7 @@ struct NutritionAppView: View {
             if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
             weekTrend(state: state, known: known)
             more(state: state, known: known)
-            Text(tr("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL)."))
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            MiniFootnote(text: tr("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL)."))
             MiniAppInfoSection(app: .nutrition)
         }
         .navigationTitle(tr("Nutrition"))
@@ -171,7 +168,7 @@ struct NutritionAppView: View {
             Spacer(minLength: 0)
         }
         .padding(16)
-        .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: MiniStyle.cardRadius, style: .continuous))
     }
 
     // MARK: Trend
@@ -201,20 +198,6 @@ struct NutritionAppView: View {
                 Text(trendText(stats, known: known, empty: tr("Rien de noté cette semaine.")))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
-                    HStack {
-                        Text(tr("Historique"))
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(Color(hex: accentHex))
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.caption.weight(.bold))
-                            .foregroundStyle(.tertiary)
-                    }
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("nutrition-trend")
             }
         }
     }
@@ -271,7 +254,7 @@ struct CalorieHero: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 18) {
                 ZStack {
-                    RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 14, color: left < 0 && known.kcal ? Color(hex: "E5484D") : accent, track: accent.opacity(0.15))
+                    RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 14, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : accent, track: accent.opacity(0.15))
                     VStack(spacing: 0) {
                         Text(TF.int(known.kcal ? abs(left) : totals.kcal))
                             .font(.system(size: 30, weight: .bold, design: .rounded))
@@ -289,7 +272,7 @@ struct CalorieHero: View {
                     figure(tr("Mangé"), tr("\(TF.int(totals.kcal)) kcal"))
                     if known.kcal {
                         figure(tr("Objectif"), tr("\(TF.int(goals.kcal)) kcal"))
-                        figure(left >= 0 ? tr("Restant") : tr("Dépassé"), tr("\(TF.int(abs(left))) kcal"), color: left >= 0 ? nil : Color(hex: "E5484D"))
+                        figure(left >= 0 ? tr("Restant") : tr("Dépassé"), tr("\(TF.int(abs(left))) kcal"), color: left >= 0 ? nil : Color(hex: MiniStyle.alertHex))
                     } else {
                         Text(tr("Pas encore d'objectif : calcule tes besoins dans « Mes infos »."))
                             .font(.caption)

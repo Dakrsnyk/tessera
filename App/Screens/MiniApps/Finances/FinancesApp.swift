@@ -53,8 +53,8 @@ enum FinanceSheet: Identifiable {
 
 enum Finances {
     static var accentHex: String { MiniApp.finances.colorHex }
-    static let overHex = "E5484D"
-    static let incomeHex = "1E9E75"
+    static let overHex = MiniStyle.alertHex
+    static let incomeHex = MiniStyle.goodHex
 }
 
 /// The monthly budget, on its own.
@@ -143,11 +143,8 @@ struct FinancesAppView: View {
             categories(state: state, now: now)
             bills(state: state, now: now)
             savings(state: state)
-            more(state: state)
-            Text(tr("Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers."))
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            more(state: state, now: now)
+            MiniFootnote(text: tr("Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers."))
             MiniAppInfoSection(app: .finances)
         }
         .navigationTitle(tr("Finances"))
@@ -231,6 +228,8 @@ struct FinancesAppView: View {
                     MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency), detail: tr("ce mois-ci"))
                 }
                 .buttonStyle(.plain)
+                // The « Évolution » row of the list below is only there when these tiles are not.
+                .accessibilityIdentifier("finances-trends")
                 NavigationLink(value: HomeRoute.page(.financesStatement(interval.start))) {
                     let balance = (earned > 0 ? earned : (expected ?? 0)) - spent
                     MiniStat(title: tr("Solde"), value: TF.money(balance, currency), detail: earned > 0 ? tr("jusqu'ici") : tr("estimé"),
@@ -292,7 +291,7 @@ struct FinancesAppView: View {
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 4)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .miniCard()
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("finances-bills")
@@ -323,36 +322,55 @@ struct FinancesAppView: View {
 
     // MARK: More
 
-    private func more(state: BudgetState) -> some View {
-        MiniRowsCard {
+    /// The list under the sections. A destination already shown above (a section or the month tiles) is not
+    /// repeated; its row comes back only when that section or those tiles are hidden (nothing to show yet),
+    /// so every page stays reachable. The identifiers move with the link.
+    private func more(state: BudgetState, now: Date) -> some View {
+        let showsCategories = BudgetMath.categoryStatus(state, at: now).contains { $0.spent > 0 }
+        let showsBills = !BudgetMath.upcomingBills(state, at: now, within: 14).isEmpty
+        let showsSavings = !state.goals.isEmpty
+        let earned = BudgetMath.earned(state, in: BudgetMath.monthInterval(now))
+        let showsMonth = earned > 0 || model.profile.monthlyIncome != nil
+        return MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.financesTransactions)) {
                 MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Opérations"), detail: tr("Dépenses et revenus, mois par mois"))
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("finances-transactions")
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.financesCategories)) {
-                MiniRow(symbol: "chart.pie.fill", colorHex: "8C6CFF", title: tr("Catégories"), detail: tr("Répartition et limites"), value: "\(state.categories.count)")
+            if !showsCategories {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.financesCategories)) {
+                    MiniRow(symbol: "chart.pie.fill", colorHex: "8C6CFF", title: tr("Catégories"), detail: tr("Répartition et limites"), value: "\(state.categories.count)")
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("finances-categories")
             }
-            .buttonStyle(.plain)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.financesBills)) {
-                MiniRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: tr("Factures et abonnements"),
-                        detail: state.bills.isEmpty ? tr("Loyer, Internet, abonnements…") : tr("\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois"))
+            if !showsBills {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.financesBills)) {
+                    MiniRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: tr("Factures et abonnements"),
+                            detail: state.bills.isEmpty ? tr("Loyer, Internet, abonnements…") : tr("\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois"))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("finances-bills")
             }
-            .buttonStyle(.plain)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.financesSavings)) {
-                MiniRow(symbol: "banknote.fill", colorHex: Finances.incomeHex, title: tr("Épargne et comptes"),
-                        detail: state.accounts.isEmpty ? tr("Objectifs et valeur nette") : tr("Valeur nette \(TF.money(BudgetMath.netWorth(state), currency))"))
+            if !showsSavings {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.financesSavings)) {
+                    MiniRow(symbol: "banknote.fill", colorHex: Finances.incomeHex, title: tr("Épargne et comptes"),
+                            detail: state.accounts.isEmpty ? tr("Objectifs et valeur nette") : tr("Valeur nette \(TF.money(BudgetMath.netWorth(state), currency))"))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("finances-savings")
             }
-            .buttonStyle(.plain)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.financesTrends)) {
-                MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Évolution"), detail: tr("Six mois, moyennes et comparaisons"))
+            if !showsMonth {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.financesTrends)) {
+                    MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Évolution"), detail: tr("Six mois, moyennes et comparaisons"))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("finances-trends")
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("finances-trends")
             MiniDivider()
             // The fixed expenses of « Revenus et dépenses fixes » (rent, insurance, phone…), counted on their dates.
             NavigationLink { MoneyView() } label: {

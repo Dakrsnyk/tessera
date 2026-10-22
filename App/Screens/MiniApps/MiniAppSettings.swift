@@ -68,13 +68,7 @@ struct MiniAppInfoSection: View {
 
     private var content: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .firstTextBaseline) {
-                Label(tr("Mes infos"), systemImage: "person.text.rectangle")
-                    .font(.headline)
-                    .foregroundStyle(.primary)
-                    .accessibilityAddTraits(.isHeader)
-                Spacer()
-            }
+            MiniSectionTitle(title: tr("Mes infos"))
             summary
             if let reminder {
                 NavigationLink {
@@ -111,10 +105,7 @@ struct MiniAppInfoSection: View {
                 MiniAppInfoEditors(app: app)
                     .transition(.opacity.combined(with: .move(edge: .top)))
             }
-            Text(tr("Les mêmes infos partout : modifiées ici, elles le sont dans « Mes informations », tes autres mini-apps et tes widgets."))
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            MiniFootnote(text: tr("Les mêmes infos partout : modifiées ici, elles le sont dans « Mes informations », tes autres mini-apps et tes widgets."))
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("miniapp-settings")
@@ -218,7 +209,7 @@ struct MiniAppInfoSection: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 4)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .miniCard()
         }
     }
 }

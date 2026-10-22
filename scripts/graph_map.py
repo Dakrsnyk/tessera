@@ -90,6 +90,7 @@ MODULES = [
     {"file": "Mini-apps", "title": "Mini-apps", "zone": "interface",
      "role": "Chaque mini-app est une partie entière d'Ardane : un tableau de bord, puis ses pages. Elles sont atteintes depuis l'Accueil.",
      "features": [
+         "Composants communs (`MiniApp.swift`) : `MiniStyle` (rayons et couleurs d'alerte, de succès et de pas), `.miniCard()`, `.miniTile()`, `MiniFootnote`, `MiniSectionTitle`, `MiniRowsCard` ; ordre commun d'un écran : sélecteur, bloc principal, actions, sections, liste secondaire, mention, « Mes infos » (lot 1, 2026-10-22). Une ligne de liste n'apparaît que si la section ou la tuile de la même page est cachée.
          "`MiniApp` : nutrition, fitness, planning, finances, business, travel, car, weather, photos.",
          "`MiniAppPage` : les pages de chaque mini-app (repas, séance, bibliothèque, historique…).",
          "« Mes infos » en tête de chaque mini-app (`MiniAppInfoSection`, `MiniAppSettings.swift`) : les infos de la personne, les mêmes que « Mes informations » ; plus de « Mes paramètres » ni de doublons.",

@@ -64,11 +64,13 @@ struct TravelAppView: View {
                     checklistTile(trip: trip, state: state)
                 }
                 converter(trip: trip, state: state)
-                tripRows(trip: trip, state: state)
             } else {
                 start
             }
             others(state: state, now: now)
+            if let trip = TravelMath.currentTrip(state, at: now) {
+                tripRows(trip: trip, state: state, now: now)
+            }
             MiniAppInfoSection(app: .travel)
         }
         .navigationTitle(tr("Voyage"))
@@ -124,10 +126,11 @@ struct TravelAppView: View {
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 4)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .miniCard()
                 }
                 .buttonStyle(.plain)
-                .accessibilityIdentifier("travel-next")
+                // It opens the program: the « Programme » row of the list below is only there when this card is not.
+                .accessibilityIdentifier("travel-program")
             }
         }
     }
@@ -141,7 +144,7 @@ struct TravelAppView: View {
                 Label(tr("Budget"), systemImage: "creditcard.fill").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
                 Text(TF.money(spending.total, currency)).font(.title3.weight(.bold)).monospacedDigit().lineLimit(1).minimumScaleFactor(0.7)
                 if let budget = trip.budget, budget > 0 {
-                    ProgressView(value: min(1, spending.total / budget)).tint(spending.total > budget ? Color(hex: "E5484D") : Color(hex: accentHex))
+                    ProgressView(value: min(1, spending.total / budget)).tint(spending.total > budget ? Color(hex: MiniStyle.alertHex) : Color(hex: accentHex))
                     Text(tr("sur \(TF.money(budget, currency))")).font(.caption).foregroundStyle(.secondary)
                 } else {
                     Text(tr("dépensés")).font(.caption).foregroundStyle(.secondary)
@@ -149,7 +152,7 @@ struct TravelAppView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .miniTile()
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("travel-budget")
@@ -165,13 +168,13 @@ struct TravelAppView: View {
                 if items.isEmpty {
                     Text(tr("liste à préparer")).font(.caption).foregroundStyle(.secondary)
                 } else {
-                    ProgressView(value: Double(done), total: Double(items.count)).tint(Color(hex: "1E9E75"))
+                    ProgressView(value: Double(done), total: Double(items.count)).tint(Color(hex: MiniStyle.goodHex))
                     Text(done == items.count ? tr("tout est prêt") : tr("\(items.count - done) à préparer")).font(.caption).foregroundStyle(.secondary)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .miniTile()
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("travel-checklist")
@@ -182,41 +185,46 @@ struct TravelAppView: View {
     @ViewBuilder
     private func converter(trip: Trip, state: TravelState) -> some View {
         if trip.currencyCode != currency, let rates = model.fx, rates.base == currency, let rate = rates.rates[trip.currencyCode] {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Text(tr("Devise")).font(.subheadline.weight(.semibold))
-                    Spacer()
-                    Text("1 \(currency) = \(TF.decimal(rate, 3)) \(trip.currencyCode)").font(.caption).foregroundStyle(.secondary).monospacedDigit()
-                }
-                HStack(spacing: 8) {
-                    ForEach([10.0, 50.0, 100.0], id: \.self) { amount in
-                        VStack(spacing: 2) {
-                            Text("\(TF.int(amount)) \(trip.currencyCode)").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-                            Text(TF.money(amount / rate, currency, decimals: 2)).font(.subheadline.weight(.bold)).monospacedDigit()
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("Devise"), detail: "1 \(currency) = \(TF.decimal(rate, 3)) \(trip.currencyCode)")
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 8) {
+                        ForEach([10.0, 50.0, 100.0], id: \.self) { amount in
+                            VStack(spacing: 2) {
+                                Text("\(TF.int(amount)) \(trip.currencyCode)").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                                Text(TF.money(amount / rate, currency, decimals: 2)).font(.subheadline.weight(.bold)).monospacedDigit()
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                            .background(Color(hex: accentHex).opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                        .background(Color(hex: accentHex).opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     }
+                    Text(tr("Taux de référence de la BCE du \(rates.day) (Frankfurter).")).font(.caption2).foregroundStyle(.tertiary)
                 }
-                Text(tr("Taux de référence de la BCE du \(rates.day) (Frankfurter).")).font(.caption2).foregroundStyle(.tertiary)
+                .card(padding: 14)
             }
-            .card(padding: 14)
         }
     }
 
     // MARK: Rows
 
-    private func tripRows(trip: Trip, state: TravelState) -> some View {
-        MiniRowsCard {
-            NavigationLink(value: HomeRoute.page(.travelProgram(trip.id))) {
-                MiniRow(symbol: "list.bullet.below.rectangle", colorHex: accentHex, title: tr("Programme"),
-                        detail: tr("Vols, hébergements et activités, jour par jour"),
-                        value: "\(TravelMath.program(state, for: trip).count) j")
+    /// The « À venir » card opens the program when it is shown; otherwise this list has the row.
+    private func tripRows(trip: Trip, state: TravelState, now: Date) -> some View {
+        let flight = TravelMath.flights(state, for: trip).first { $0.departure.addingTimeInterval(3_600) > now }
+        let stay = TravelMath.stays(state, for: trip).first { $0.checkOut > now }
+        let activity = TravelMath.activities(state, for: trip).first { $0.date.addingTimeInterval(1_800) > now }
+        let showsNext = flight != nil || stay != nil || activity != nil
+        return MiniRowsCard {
+            if !showsNext {
+                NavigationLink(value: HomeRoute.page(.travelProgram(trip.id))) {
+                    MiniRow(symbol: "list.bullet.below.rectangle", colorHex: accentHex, title: tr("Programme"),
+                            detail: tr("Vols, hébergements et activités, jour par jour"),
+                            value: "\(TravelMath.program(state, for: trip).count) j")
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("travel-program")
+                MiniDivider()
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("travel-program")
-            MiniDivider()
             Button { sheet = .trip(trip) } label: {
                 MiniRow(symbol: "pencil", colorHex: "8A8A8E", title: tr("Modifier le voyage"), detail: "\(trip.destination) · \(Travel.dates(trip))", showsChevron: false)
             }

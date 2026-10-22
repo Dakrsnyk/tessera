@@ -79,8 +79,8 @@ enum BusinessPeriod: String, CaseIterable, Identifiable {
 
 enum BusinessFormat {
     static var accentHex: String { MiniApp.business.colorHex }
-    static let goodHex = "1E9E75"
-    static let badHex = "E5484D"
+    static let goodHex = MiniStyle.goodHex
+    static let badHex = MiniStyle.alertHex
 
     static func value(_ value: Double?, _ kpi: BusinessKPI, currency: String) -> String {
         guard let value else { return "–" }
@@ -240,7 +240,7 @@ struct BusinessAppView: View {
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 4)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .miniCard()
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("business-metrics")
@@ -305,16 +305,20 @@ struct BusinessAppView: View {
             .accessibilityIdentifier("business-results")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessRecurring)) {
-                MiniRow(symbol: "arrow.triangle.2.circlepath", colorHex: "1E9E75", title: tr("Revenu récurrent"),
+                MiniRow(symbol: "arrow.triangle.2.circlepath", colorHex: MiniStyle.goodHex, title: tr("Revenu récurrent"),
                         detail: BusinessMath.recurring(state).map { tr("MRR \(TF.money($0.mrr, currency))") } ?? tr("MRR, abonnés, ARR"))
             }
             .buttonStyle(.plain)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.businessMetrics)) {
-                MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: "F2A33A", title: tr("Suivis à la main"),
-                        detail: tr("Tes propres indicateurs"), value: state.metrics.isEmpty ? nil : "\(state.metrics.count)")
+            // « Suivis à la main » is a section once there is one metric; the row stays for the first one.
+            if state.metrics.isEmpty {
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.businessMetrics)) {
+                    MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: "F2A33A", title: tr("Suivis à la main"),
+                            detail: tr("Tes propres indicateurs"))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("business-metrics")
             }
-            .buttonStyle(.plain)
         }
     }
 }
@@ -348,7 +352,7 @@ struct KPITile: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .miniTile()
     }
 }
 

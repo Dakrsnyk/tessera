@@ -322,7 +322,44 @@ struct MiniRowsCard<Content: View>: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 4)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .miniCard()
+    }
+}
+
+/// The colors and corner radii the mini-apps share, so a card or a state looks the same in all of them.
+enum MiniStyle {
+    /// A card (a list of rows, a hero, a chart) and a smaller tile (a figure).
+    static let cardRadius: CGFloat = 20
+    static let tileRadius: CGFloat = 18
+    /// Over a budget, a late or dangerous state.
+    static let alertHex = "E5484D"
+    /// Income, on track, done.
+    static let goodHex = "1E9E75"
+    /// Steps and walking.
+    static let stepsHex = "12A4B5"
+}
+
+extension View {
+    /// The card of the mini-apps: the style's card fill with the shared corner radius.
+    func miniCard() -> some View {
+        background(.cardFill, in: RoundedRectangle(cornerRadius: MiniStyle.cardRadius, style: .continuous))
+    }
+
+    /// A smaller tile (a figure, a count) with the shared tile radius.
+    func miniTile() -> some View {
+        background(.cardFill, in: RoundedRectangle(cornerRadius: MiniStyle.tileRadius, style: .continuous))
+    }
+}
+
+/// The small grey note closing a mini-app screen (a source, a reminder that values are indicative).
+struct MiniFootnote: View {
+    let text: String
+
+    var body: some View {
+        Text(text)
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 
@@ -384,7 +421,7 @@ struct MiniStat: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .miniTile()
     }
 }
 

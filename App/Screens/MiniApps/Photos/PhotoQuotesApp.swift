@@ -60,10 +60,7 @@ struct PhotoQuotesAppView: View {
                     }
                 }
             }
-            Label(tr("Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget »."), systemImage: "plus.rectangle.on.rectangle")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            MiniFootnote(text: tr("Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget »."))
         }
         .navigationTitle(tr("Photos et citations"))
         .navigationBarTitleDisplayMode(.large)
