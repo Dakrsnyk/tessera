@@ -5171,6 +5171,53 @@
         }
       }
     },
+    "%@ kcal · P %@ · G %@ · L %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal · E %@ · K %@ · F %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal · P %@ · C %@ · F %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal · P %@ · C %@ · G %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal · P %@ · G %@ · L %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal · P %@ · C %@ · G %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal · P %@ · C %@ · F %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal · P %@ · C %@ · G %@"
+          }
+        }
+      }
+    },
     "%@ kcal · calculés": {
       "extractionState": "manual",
       "localizations": {
@@ -20070,6 +20117,53 @@
         }
       }
     },
+    "Ajouter au journal": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Tagebuch hinzufügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to log"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir al diario"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter au journal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi al diario"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録に追加"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar ao diário"
+          }
+        }
+      }
+    },
     "Ajouter au montant épargné": {
       "extractionState": "manual",
       "localizations": {
@@ -22420,49 +22514,49 @@
         }
       }
     },
-    "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada.": {
+    "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé Canada.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Allgemeine Lebensmittel: Canadian Nutrient File, Health Canada."
+            "value": "Allgemeine Lebensmittel: Canadian Nutrient File, Health Canada (Open Government Licence – Canada). Ardane steht in keiner Verbindung zu Health Canada."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Generic foods: Canadian Nutrient File, Health Canada."
+            "value": "Generic foods: Canadian Nutrient File, Health Canada (Open Government Licence – Canada). Ardane is not affiliated with Health Canada."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alimentos genéricos: Canadian Nutrient File, Health Canada."
+            "value": "Alimentos genéricos: Canadian Nutrient File, Health Canada (Open Government Licence – Canada). Ardane no está afiliada a Health Canada."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada."
+            "value": "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé Canada."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alimenti generici: Canadian Nutrient File, Health Canada."
+            "value": "Alimenti generici: Canadian Nutrient File, Health Canada (Open Government Licence – Canada). Ardane non è affiliata a Health Canada."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "一般食品：Canadian Nutrient File（カナダ保健省）"
+            "value": "一般的な食品：カナダ栄養成分データベース（Health Canada、Open Government Licence – Canada）。ArdaneはHealth Canadaとは提携していません。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alimentos genéricos: Canadian Nutrient File, Health Canada."
+            "value": "Alimentos genéricos: Canadian Nutrient File, Health Canada (Open Government Licence – Canada). O Ardane não é afiliado à Health Canada."
           }
         }
       }
@@ -24061,6 +24155,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Análise de gastos"
+          }
+        }
+      }
+    },
+    "Analyse du plat sur ton iPhone…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahlzeit wird auf deinem iPhone analysiert…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyzing your meal on your iPhone…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analizando tu plato en tu iPhone…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyse du plat sur ton iPhone…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisi del piatto sul tuo iPhone…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhoneで料理を解析中…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisando seu prato no seu iPhone…"
           }
         }
       }
@@ -26650,6 +26791,53 @@
         }
       }
     },
+    "Ardane ne s'en sert que pour la météo, une seule fois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane nutzt ihn nur für das Wetter, einmalig."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane only uses it for the weather, once."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane solo la usa para el tiempo, una sola vez."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane ne s'en sert que pour la météo, une seule fois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane la usa solo per il meteo, una sola volta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "天気を調べるためだけに、1回だけ使います。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ardane a usa só para o clima, uma única vez."
+          }
+        }
+      }
+    },
     "Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.": {
       "extractionState": "manual",
       "localizations": {
@@ -26693,53 +26881,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ardane não se conecta a nenhum banco: tudo vem do que você anota. São referências, não conselhos financeiros."
-          }
-        }
-      }
-    },
-    "Ardane/1.0 (%@)": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardane/1.0 (%@)"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardane/1.0 (%@)"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardane/1.0 (%@)"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardane/1.0 (%@)"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardane/1.0 (%@)"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardane/1.0 (%@)"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardane/1.0 (%@)"
           }
         }
       }
@@ -45685,6 +45826,100 @@
         }
       }
     },
+    "Caméra désactivée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera deaktiviert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera turned off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cámara desactivada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caméra désactivée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotocamera disattivata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラがオフです"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Câmera desativada"
+          }
+        }
+      }
+    },
+    "Caméra indisponible": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera nicht verfügbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera unavailable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cámara no disponible"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caméra indisponible"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotocamera non disponibile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラを利用できません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Câmera indisponível"
+          }
+        }
+      }
+    },
     "Canada": {
       "extractionState": "manual",
       "localizations": {
@@ -47001,6 +47236,53 @@
         }
       }
     },
+    "Ce fond fait partie de Premium.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser Hintergrund gehört zu Premium."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This wallpaper is part of Premium."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este fondo forma parte de Premium."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce fond fait partie de Premium."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo sfondo fa parte di Premium."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この壁紙はPremiumに含まれています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este papel de parede faz parte do Premium."
+          }
+        }
+      }
+    },
     "Ce matin": {
       "extractionState": "manual",
       "localizations": {
@@ -48313,6 +48595,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O que entra e sai, seu patrimônio líquido e um gasto rápido."
+          }
+        }
+      }
+    },
+    "Ce qui reste sur ton iPhone": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was auf deinem iPhone bleibt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What stays on your iPhone"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que se queda en tu iPhone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui reste sur ton iPhone"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa resta sul tuo iPhone"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhoneに残るもの"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que fica no seu iPhone"
           }
         }
       }
@@ -51462,6 +51791,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buscar"
+          }
+        }
+      }
+    },
+    "Chercher dans la liste": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In der Liste suchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search the list"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar en la lista"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chercher dans la liste"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca nell'elenco"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リストから探す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar na lista"
           }
         }
       }
@@ -58704,6 +59080,100 @@
         }
       }
     },
+    "Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL). Contenu sous Database Contents License. Données saisies par la communauté : vérifie l'étiquette.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enthält Daten von Open Food Facts, verfügbar unter der Open Database License (ODbL). Inhalte unter der Database Contents License. Von der Community erfasste Daten: Prüfe das Etikett."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contains data from Open Food Facts, available under the Open Database License (ODbL). Content under the Database Contents License. Community-entered data: check the label."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contiene datos de Open Food Facts, disponibles bajo la Open Database License (ODbL). Contenido bajo la Database Contents License. Datos introducidos por la comunidad: revisa la etiqueta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL). Contenu sous Database Contents License. Données saisies par la communauté : vérifie l'étiquette."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contiene dati di Open Food Facts, disponibili con licenza Open Database License (ODbL). Contenuti con licenza Database Contents License. Dati inseriti dalla community: controlla l'etichetta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Factsのデータを含みます（Open Database License〈ODbL〉）。コンテンツはDatabase Contents Licenseに基づきます。コミュニティが入力したデータです。ラベルをご確認ください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contém dados do Open Food Facts, disponíveis sob a Open Database License (ODbL). Conteúdo sob a Database Contents License. Dados inseridos pela comunidade: confira o rótulo."
+          }
+        }
+      }
+    },
+    "Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuvé par lui.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enthält Informationen unter der Open Government Licence – Canada. Quelle: Canadian Nutrient File, Health Canada. Ardane steht in keiner Verbindung zu Health Canada und wird von dieser nicht unterstützt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contains information licensed under the Open Government Licence – Canada. Source: Canadian Nutrient File, Health Canada. Ardane is not affiliated with or endorsed by Health Canada."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contiene información con licencia Open Government Licence – Canada. Fuente: Canadian Nutrient File, Health Canada. Ardane no está afiliada a Health Canada ni cuenta con su aval."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuvé par lui."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contiene informazioni con licenza Open Government Licence – Canada. Fonte: Canadian Nutrient File, Health Canada. Ardane non è affiliata a Health Canada né approvata da essa."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Government Licence – Canada に基づくライセンス情報を含みます。出典：カナダ栄養成分データベース（Health Canada）。ArdaneはHealth Canadaと提携しておらず、承認も受けていません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contém informações licenciadas sob a Open Government Licence – Canada. Fonte: Canadian Nutrient File, Health Canada. O Ardane não é afiliado nem endossado pela Health Canada."
+          }
+        }
+      }
+    },
     "Continue jusque derrière le dos.": {
       "extractionState": "manual",
       "localizations": {
@@ -59640,6 +60110,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coreia do Sul"
+          }
+        }
+      }
+    },
+    "Cosmos": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kosmos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosmos"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosmos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosmos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosmo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "宇宙"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosmos"
           }
         }
       }
@@ -71347,6 +71864,53 @@
         }
       }
     },
+    "Des fonds d'écran dessinés pour Ardane : mer, noir et blanc, dégradés, nuit, forêt et cosmos.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für Ardane gezeichnete Hintergrundbilder: Meer, Schwarz-Weiß, Verläufe, Nacht, Wald und Kosmos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallpapers drawn for Ardane: sea, black and white, gradients, night, forest and cosmos."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fondos de pantalla dibujados para Ardane: mar, blanco y negro, degradados, noche, bosque y cosmos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des fonds d'écran dessinés pour Ardane : mer, noir et blanc, dégradés, nuit, forêt et cosmos."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sfondi disegnati per Ardane: mare, bianco e nero, sfumature, notte, foresta e cosmo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardaneのために描いた壁紙：海、モノクロ、グラデーション、夜、森、宇宙。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Papéis de parede desenhados para o Ardane: mar, preto e branco, degradês, noite, floresta e cosmos."
+          }
+        }
+      }
+    },
     "Des idées pour la suite de ta journée": {
       "extractionState": "manual",
       "localizations": {
@@ -78491,6 +79055,53 @@
         }
       }
     },
+    "Dégradés doux": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sanfte Verläufe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soft gradients"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Degradados suaves"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dégradés doux"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sfumature morbide"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "やわらかなグラデーション"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Degradês suaves"
+          }
+        }
+      }
+    },
     "Déjeuner": {
       "extractionState": "manual",
       "localizations": {
@@ -82439,6 +83050,53 @@
         }
       }
     },
+    "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie liest den Barcode eines Lebensmittels oder fotografiert deine Mahlzeit, um den Inhalt zu schätzen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It reads a food's barcode, or photographs your meal to estimate what is in it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lee el código de barras de un alimento o fotografía tu plato para estimar su contenido."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legge il codice a barre di un alimento o fotografa il tuo piatto per stimarne il contenuto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食品のバーコードを読み取るか、料理を撮影して中身を推定します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ela lê o código de barras de um alimento ou fotografa seu prato para estimar o conteúdo."
+          }
+        }
+      }
+    },
     "Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.": {
       "extractionState": "manual",
       "localizations": {
@@ -85682,6 +86340,53 @@
         }
       }
     },
+    "Estimation": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schätzung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimation"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stima"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "推定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimativa"
+          }
+        }
+      }
+    },
     "Estimation selon la durée des séances et ton poids": {
       "extractionState": "manual",
       "localizations": {
@@ -85725,6 +86430,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estimativa com base na duração dos treinos e no seu peso"
+          }
+        }
+      }
+    },
+    "Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus dem Foto geschätzt, auf deinem iPhone analysiert und nicht gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated from the photo, analyzed on your iPhone and not saved."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimado a partir de la foto, analizada en tu iPhone sin guardarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stimato dalla foto, analizzata sul tuo iPhone senza essere salvata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真から推定。解析はiPhone上で行い、写真は保存しません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimado pela foto, analisada no seu iPhone e não salva."
           }
         }
       }
@@ -91181,6 +91933,53 @@
         }
       }
     },
+    "Fichier canadien sur les éléments nutritifs": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier canadien sur les éléments nutritifs"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カナダ栄養成分データベース"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File"
+          }
+        }
+      }
+    },
     "Fichier importé": {
       "extractionState": "manual",
       "localizations": {
@@ -92685,6 +93484,53 @@
         }
       }
     },
+    "Fonds d'écran": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrundbilder"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallpapers"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fondos de pantalla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fonds d'écran"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sfondi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "壁紙"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Papéis de parede"
+          }
+        }
+      }
+    },
     "Fonds et polices": {
       "extractionState": "manual",
       "localizations": {
@@ -93574,6 +94420,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Floresta de pinheiros"
+          }
+        }
+      }
+    },
+    "Forêt et brume": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wald und Nebel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forest and mist"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bosque y niebla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forêt et brume"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foresta e nebbia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "森と霧"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Floresta e neblina"
           }
         }
       }
@@ -106973,6 +107866,53 @@
         }
       }
     },
+    "Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ich habe auf diesem Foto kein Lebensmittel erkannt. Geh näher an die Mahlzeit heran oder suche das Lebensmittel in der Liste."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I didn't recognize any food in this photo. Move closer to the meal, or search for the food in the list."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No he reconocido ningún alimento en esta foto. Acércate al plato o busca el alimento en la lista."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non ho riconosciuto nessun alimento in questa foto. Avvicinati al piatto o cerca l'alimento nell'elenco."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この写真から食品を認識できませんでした。料理に近づくか、リストから食品を探してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não reconheci nenhum alimento nesta foto. Chegue mais perto do prato ou procure o alimento na lista."
+          }
+        }
+      }
+    },
     "Je préfère ne pas répondre": {
       "extractionState": "manual",
       "localizations": {
@@ -110028,6 +110968,100 @@
         }
       }
     },
+    "L'accès est refusé dans Réglages. Tu peux l'activer, ou continuer sans.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Zugriff ist in den Einstellungen deaktiviert. Du kannst ihn aktivieren oder ohne fortfahren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Access is turned off in Settings. You can turn it on, or continue without."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El acceso está desactivado en Ajustes. Puedes activarlo o continuar sin él."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accès est refusé dans Réglages. Tu peux l'activer, ou continuer sans."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accesso è disattivato in Impostazioni. Puoi attivarlo o continuare senza."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「設定」でアクセスがオフになっています。オンにするか、そのまま続けられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acesso está desativado em Ajustes. Você pode ativá-lo ou continuar sem."
+          }
+        }
+      }
+    },
+    "L'accès à la caméra est refusé pour Ardane. Tu peux l'autoriser dans Réglages › Ardane, ou continuer sans la caméra.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Kamerazugriff ist für Ardane verweigert. Du kannst ihn unter Einstellungen › Ardane erlauben oder ohne Kamera fortfahren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera access is denied for Ardane. You can allow it in Settings › Ardane, or continue without the camera."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El acceso a la cámara está denegado para Ardane. Puedes permitirlo en Ajustes › Ardane o continuar sin la cámara."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accès à la caméra est refusé pour Ardane. Tu peux l'autoriser dans Réglages › Ardane, ou continuer sans la caméra."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accesso alla fotocamera è negato per Ardane. Puoi consentirlo in Impostazioni › Ardane o continuare senza fotocamera."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardaneのカメラへのアクセスが拒否されています。「設定」›「Ardane」で許可するか、カメラなしで続けられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acesso à câmera está negado para o Ardane. Você pode permitir em Ajustes › Ardane ou continuar sem a câmera."
+          }
+        }
+      }
+    },
     "L'accès à la position est refusé. Tu peux l'autoriser dans Réglages, ou chercher ta ville.": {
       "extractionState": "manual",
       "localizations": {
@@ -110122,6 +111156,53 @@
         }
       }
     },
+    "L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Analyse des Fotos ist fehlgeschlagen. Versuche es erneut oder suche das Lebensmittel in der Liste."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The photo analysis failed. Try again, or search for the food in the list."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El análisis de la foto ha fallado. Inténtalo de nuevo o busca el alimento en la lista."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'analisi della foto non è riuscita. Riprova o cerca l'alimento nell'elenco."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真の解析に失敗しました。もう一度試すか、リストから食品を探してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A análise da foto falhou. Tente de novo ou procure o alimento na lista."
+          }
+        }
+      }
+    },
     "L'analyse mois par mois est dans Premium": {
       "extractionState": "manual",
       "localizations": {
@@ -110165,6 +111246,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "A análise mês a mês está no Premium"
+          }
+        }
+      }
+    },
+    "L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Analyse erfolgt auf deinem iPhone. Es wird kein Foto gespeichert oder gesendet; nur die Nummer eines Barcodes geht an Open Food Facts, um das Produkt zu finden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The analysis happens on your iPhone. No photo is saved or sent; only a barcode's number is sent to Open Food Facts to find the product."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El análisis se hace en tu iPhone. Ninguna foto se guarda ni se envía; solo el número de un código de barras se envía a Open Food Facts para encontrar el producto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'analisi avviene sul tuo iPhone. Nessuna foto viene salvata o inviata; solo il numero di un codice a barre viene inviato a Open Food Facts per trovare il prodotto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "解析はiPhone上で行われます。写真は保存も送信もされず、商品を探すためにバーコードの番号だけがOpen Food Factsに送られます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A análise é feita no seu iPhone. Nenhuma foto é salva ou enviada; apenas o número de um código de barras é enviado ao Open Food Facts para encontrar o produto."
           }
         }
       }
@@ -111998,6 +113126,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "A borda segue exatamente o contorno do widget, que o próprio iOS desenha."
+          }
+        }
+      }
+    },
+    "La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Kamera ist im Moment nicht verfügbar. Du kannst das Lebensmittel in der Liste suchen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The camera isn't available right now. You can search for the food in the list."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cámara no está disponible por ahora. Puedes buscar el alimento en la lista."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fotocamera non è disponibile al momento. Puoi cercare l'alimento nell'elenco."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在カメラを利用できません。リストから食品を探せます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A câmera não está disponível no momento. Você pode procurar o alimento na lista."
           }
         }
       }
@@ -120979,6 +122154,53 @@
         }
       }
     },
+    "Les fonds d'écran Premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium-Hintergrundbilder"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium wallpapers"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fondos de pantalla Premium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les fonds d'écran Premium"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sfondi Premium"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium壁紙"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Papéis de parede Premium"
+          }
+        }
+      }
+    },
     "Les formes prévues par le style.": {
       "extractionState": "manual",
       "localizations": {
@@ -122295,6 +123517,53 @@
         }
       }
     },
+    "Les plus beaux fonds d'écran du Store sont dans Premium : enregistre-les dans Photos, à la taille de ton iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die schönsten Hintergrundbilder im Store sind in Premium: sichere sie in Fotos, in der Größe deines iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The best wallpapers in the Store are in Premium: save them to Photos, at your iPhone's size."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los mejores fondos de pantalla de la Tienda están en Premium: guárdalos en Fotos, al tamaño de tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les plus beaux fonds d'écran du Store sont dans Premium : enregistre-les dans Photos, à la taille de ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I più bei sfondi dello Store sono in Premium: salvali in Foto, alle dimensioni del tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ストアの特に美しい壁紙はPremiumに含まれます。iPhoneのサイズで写真に保存できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os papéis de parede mais bonitos da Loja estão no Premium: salve-os em Fotos, no tamanho do seu iPhone."
+          }
+        }
+      }
+    },
     "Les plus faits": {
       "extractionState": "manual",
       "localizations": {
@@ -122338,6 +123607,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mais feitos"
+          }
+        }
+      }
+    },
+    "Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus einem Foto geschätzte Portionen sind keine Messwerte: Passe sie an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Portions estimated from a photo are not measurements: adjust them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las porciones estimadas a partir de una foto no son mediciones: ajústalas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le porzioni stimate da una foto non sono misure: modificale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真から推定した分量は測定値ではありません。調整してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As porções estimadas por foto não são medidas: ajuste-as."
           }
         }
       }
@@ -122432,6 +123748,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Os lembretes abaixo são enviados quando as notificações estiverem permitidas."
+          }
+        }
+      }
+    },
+    "Les rappels sont créés sur ton iPhone, sans compte ni serveur.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erinnerungen werden auf deinem iPhone erstellt, ohne Konto und ohne Server."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminders are created on your iPhone, with no account or server."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los recordatorios se crean en tu iPhone, sin cuenta ni servidor."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les rappels sont créés sur ton iPhone, sans compte ni serveur."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I promemoria vengono creati sul tuo iPhone, senza account né server."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リマインダーはiPhone上で作成され、アカウントもサーバーも不要です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os lembretes são criados no seu iPhone, sem conta nem servidor."
           }
         }
       }
@@ -131084,6 +132447,53 @@
         }
       }
     },
+    "Mer et vagues": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meer und Wellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sea and waves"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mar y olas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mer et vagues"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mare e onde"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "海と波"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mar e ondas"
+          }
+        }
+      }
+    },
     "Merci ! Tous les widgets et tous les styles sont débloqués.": {
       "extractionState": "manual",
       "localizations": {
@@ -136724,6 +138134,53 @@
         }
       }
     },
+    "Mouvement et pas": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bewegung und Schritte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motion and steps"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimiento y pasos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mouvement et pas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimento e passi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モーションと歩数"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimento e passos"
+          }
+        }
+      }
+    },
     "Mouvement lent.": {
       "extractionState": "manual",
       "localizations": {
@@ -140010,6 +141467,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Preto"
+          }
+        }
+      }
+    },
+    "Noir et blanc": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schwarz-Weiß"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Black and white"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blanco y negro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noir et blanc"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bianco e nero"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モノクロ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preto e branco"
           }
         }
       }
@@ -145180,6 +146684,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Noite das abóboras"
+          }
+        }
+      }
+    },
+    "Nuit et orage": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nacht und Gewitter"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night and storm"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noche y tormenta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuit et orage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notte e temporale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夜と嵐"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noite e tempestade"
           }
         }
       }
@@ -155712,6 +157263,53 @@
         }
       }
     },
+    "Photographier le plat": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahlzeit fotografieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photograph the meal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografiar el plato"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photographier le plat"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografa il piatto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "料理を撮影"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografar o prato"
+          }
+        }
+      }
+    },
     "Photos": {
       "extractionState": "manual",
       "localizations": {
@@ -156695,6 +158293,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pastilhas de freio"
+          }
+        }
+      }
+    },
+    "Plat non reconnu": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahlzeit nicht erkannt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal not recognized"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plato no reconocido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plat non reconnu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piatto non riconosciuto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "料理を認識できません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prato não reconhecido"
           }
         }
       }
@@ -161493,6 +163138,53 @@
         }
       }
     },
+    "Position": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standort"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Location"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ubicación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Position"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posizione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Localização"
+          }
+        }
+      }
+    },
     "Position de départ": {
       "extractionState": "manual",
       "localizations": {
@@ -162151,6 +163843,53 @@
         }
       }
     },
+    "Pour afficher tes prochains rendez-vous dans Ardane et ses widgets.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um deine nächsten Termine in Ardane und seinen Widgets anzuzeigen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To show your upcoming events in Ardane and its widgets."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para mostrar tus próximas citas en Ardane y sus widgets."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour afficher tes prochains rendez-vous dans Ardane et ses widgets."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per mostrare i tuoi prossimi appuntamenti in Ardane e nei suoi widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今後の予定をArdaneとそのウィジェットに表示するため。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para mostrar seus próximos compromissos no Ardane e nos widgets."
+          }
+        }
+      }
+    },
     "Pour afficher tes événements.": {
       "extractionState": "manual",
       "localizations": {
@@ -162288,6 +164027,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para mudar o conteúdo de um widget já adicionado: toque e segure o widget e depois toque em “Editar widget”."
+          }
+        }
+      }
+    },
+    "Pour compter tes pas, ta distance et tes étages avec le capteur de ton iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um deine Schritte, Distanz und Stockwerke mit dem Bewegungssensor deines iPhone zu zählen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To count your steps, distance and floors with your iPhone's motion sensor."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para contar tus pasos, distancia y pisos con el sensor de movimiento de tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour compter tes pas, ta distance et tes étages avec le capteur de ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per contare i tuoi passi, la distanza e i piani con il sensore di movimento del tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhoneの動きセンサーで歩数・距離・階数を数えるため。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para contar seus passos, distância e andares com o sensor de movimento do seu iPhone."
           }
         }
       }
@@ -163091,6 +164877,53 @@
         }
       }
     },
+    "Pour t'envoyer les rappels que tu actives, à l'heure choisie.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um dir die aktivierten Erinnerungen zur gewählten Zeit zu senden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To send you the reminders you turn on, at the time you choose."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para enviarte los recordatorios que activas, a la hora que elijas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour t'envoyer les rappels que tu actives, à l'heure choisie."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per inviarti i promemoria che attivi, all'ora scelta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにしたリマインダーを、選んだ時間にお届けするため。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para enviar os lembretes que você ativa, no horário escolhido."
+          }
+        }
+      }
+    },
     "Pour ta valeur nette.": {
       "extractionState": "manual",
       "localizations": {
@@ -163279,6 +165112,53 @@
         }
       }
     },
+    "Pour trouver la météo là où tu es.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um das Wetter dort zu finden, wo du bist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To find the weather where you are."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para encontrar el tiempo donde estás."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour trouver la météo là où tu es."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per trovare il meteo dove ti trovi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今いる場所の天気を調べるため。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para encontrar o clima onde você está."
+          }
+        }
+      }
+    },
     "Pour voir ce qui arrive bientôt.": {
       "extractionState": "manual",
       "localizations": {
@@ -163369,6 +165249,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para estudar"
+          }
+        }
+      }
+    },
+    "Pourquoi la caméra": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warum die Kamera"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Why the camera"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por qué la cámara"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pourquoi la caméra"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perché la fotocamera"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラを使う理由"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por que a câmera"
           }
         }
       }
@@ -167223,6 +169150,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Produtividade"
+          }
+        }
+      }
+    },
+    "Produit introuvable": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Produkt nicht gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Product not found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Producto no encontrado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Produit introuvable"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prodotto non trovato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "商品が見つかりません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Produto não encontrado"
           }
         }
       }
@@ -174978,6 +176952,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suba devagar."
+          }
+        }
+      }
+    },
+    "Remplacer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ersetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replace"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reemplazar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remplacer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sostituisci"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "置き換え"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Substituir"
           }
         }
       }
@@ -184284,6 +186305,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Regule o assento para que as alças fiquem na altura do meio do peito."
+          }
+        }
+      }
+    },
+    "Récapitulatif": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zusammenfassung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récapitulatif"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riepilogo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まとめ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumo"
           }
         }
       }
@@ -193970,6 +196038,53 @@
         }
       }
     },
+    "Sources des données alimentaires": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quellen der Lebensmitteldaten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Food data sources"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuentes de datos alimentarios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sources des données alimentaires"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fonti dei dati alimentari"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食品データの出典"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fontes dos dados alimentares"
+          }
+        }
+      }
+    },
     "Sous l'heure, sans déverrouiller": {
       "extractionState": "manual",
       "localizations": {
@@ -201020,53 +203135,6 @@
         }
       }
     },
-    "Série de %@ j": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serie: %@ T."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@-day streak"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Racha de %@ d"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Série de %@ j"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serie di %@ g"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@日連続"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sequência de %@ d"
-          }
-        }
-      }
-    },
     "Série de suivi": {
       "extractionState": "manual",
       "localizations": {
@@ -207506,6 +209574,53 @@
         }
       }
     },
+    "Tes pas restent sur ton iPhone, sans Santé ni compte.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Schritte bleiben auf deinem iPhone, ohne Health und ohne Konto."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your steps stay on your iPhone, with no Health app or account."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus pasos se quedan en tu iPhone, sin Salud ni cuenta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes pas restent sur ton iPhone, sans Santé ni compte."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi passi restano sul tuo iPhone, senza Salute né account."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "歩数はiPhoneの中にとどまり、ヘルスケアやアカウントは使いません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus passos ficam no seu iPhone, sem Saúde nem conta."
+          }
+        }
+      }
+    },
     "Tes photos et les phrases qui t'inspirent, sur ton écran d'accueil.": {
       "extractionState": "manual",
       "localizations": {
@@ -209147,6 +211262,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seus prazos, seu consumo e sua quilometragem."
+          }
+        }
+      }
+    },
+    "Tes événements restent sur ton iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Termine bleiben auf deinem iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your events stay on your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus eventos se quedan en tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes événements restent sur ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi eventi restano sul tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予定はiPhoneの中にとどまります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus eventos ficam no seu iPhone."
           }
         }
       }
@@ -222358,6 +224520,53 @@
         }
       }
     },
+    "Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Teil der Werte der integrierten Lebensmitteltabelle stammt aus USDA FoodData Central (gemeinfrei, CC0). U.S. Department of Agriculture, Agricultural Research Service."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some of the values in the built-in food table come from USDA FoodData Central (public domain, CC0). U.S. Department of Agriculture, Agricultural Research Service."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte de los valores de la tabla de alimentos integrada procede de USDA FoodData Central (dominio público, CC0). U.S. Department of Agriculture, Agricultural Research Service."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una parte dei valori della tabella alimenti integrata proviene da USDA FoodData Central (pubblico dominio, CC0). U.S. Department of Agriculture, Agricultural Research Service."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内蔵の食品表の値の一部は、USDA FoodData Central（パブリックドメイン、CC0）に基づきます。U.S. Department of Agriculture, Agricultural Research Service。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parte dos valores da tabela de alimentos integrada vem do USDA FoodData Central (domínio público, CC0). U.S. Department of Agriculture, Agricultural Research Service."
+          }
+        }
+      }
+    },
     "Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes.": {
       "extractionState": "manual",
       "localizations": {
@@ -223012,6 +225221,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Use uma chave restrita (começa com rk_): o Ardane nunca guarda uma chave secreta."
+          }
+        }
+      }
+    },
+    "Utiliser la caméra": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera verwenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use the camera"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar la cámara"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser la caméra"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa la fotocamera"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラを使う"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar a câmera"
           }
         }
       }
@@ -229079,6 +231335,53 @@
         }
       }
     },
+    "Vérifié": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geprüft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verified"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifié"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認済み"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificado"
+          }
+        }
+      }
+    },
     "Vérité et réconciliation": {
       "extractionState": "manual",
       "localizations": {
@@ -230583,6 +232886,53 @@
         }
       }
     },
+    "ajoute ton poids dans « Mes informations »": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "trage dein Gewicht unter „Meine Infos“ ein"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "add your weight in “My info”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "añade tu peso en «Mis datos»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ajoute ton poids dans « Mes informations »"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aggiungi il tuo peso in «Le mie info»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「マイ情報」で体重を追加してください"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "adicione seu peso em “Minhas informações”"
+          }
+        }
+      }
+    },
     "aliment": {
       "extractionState": "manual",
       "localizations": {
@@ -231002,6 +233352,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "anos"
+          }
+        }
+      }
+    },
+    "assez sûr": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ziemlich sicher"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fairly sure"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bastante seguro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "assez sûr"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "abbastanza sicuro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほぼ確実"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bastante certo"
           }
         }
       }
@@ -235283,6 +237680,53 @@
         }
       }
     },
+    "estimées d'après les pas, hors séance": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aus Schritten geschätzt, ohne Training"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "estimated from steps, outside workouts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "estimadas a partir de los pasos, fuera de los entrenamientos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "estimées d'après les pas, hors séance"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "stimate dai passi, esclusi gli allenamenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "歩数からの推定（ワークアウトを除く）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "estimadas pelos passos, fora dos treinos"
+          }
+        }
+      }
+    },
     "examen à venir": {
       "extractionState": "manual",
       "localizations": {
@@ -236830,6 +239274,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O iOS não deixa um widget mostrar o papel de parede através dele, então uma transparência real não é possível. O Ardane oferece Vidro (gelo e reflexos desenhados), gradientes suaves e sua foto. Os visuais “Colorido” ou transparentes do iOS (Personalizar a Tela de Início) também valem para os widgets do Ardane."
+          }
+        }
+      }
+    },
+    "iOS te demandera ensuite ton accord.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS fragt anschließend nach deiner Erlaubnis."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS will then ask for your permission."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS te pedirá tu permiso a continuación."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS te demandera ensuite ton accord."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS ti chiederà poi il consenso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このあとiOSが許可を求めます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O iOS vai pedir sua permissão em seguida."
           }
         }
       }
@@ -241201,6 +243692,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "personalizado"
+          }
+        }
+      }
+    },
+    "peu sûr": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "eher unsicher"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "not very sure"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "poco seguro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "peu sûr"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "poco sicuro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不確か"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pouco certo"
           }
         }
       }

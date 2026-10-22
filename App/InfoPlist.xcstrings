@@ -54,43 +54,43 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane zeigt deine nächsten Termine im Widget „Als Nächstes“. Nichts verlässt dein iPhone."
+            "value": "Ardane zeigt deine nächsten Termine im Widget „Als Nächstes“ und in der Planung. Nichts verlässt dein iPhone."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane shows your upcoming events in the Up Next widget. Nothing leaves your iPhone."
+            "value": "Ardane shows your upcoming events in the Up Next widget and in Planning. Nothing leaves your iPhone."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane muestra tus próximas citas en el widget Próximo. Nada sale de tu iPhone."
+            "value": "Ardane muestra tus próximas citas en el widget Próximo y en Planificación. Nada sale de tu iPhone."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane affiche tes prochains rendez-vous dans le widget À venir. Rien ne quitte ton iPhone."
+            "value": "Ardane affiche tes prochains rendez-vous dans le widget À venir et dans Planning. Rien ne quitte ton iPhone."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane mostra i tuoi prossimi appuntamenti nel widget In arrivo. Nulla lascia il tuo iPhone."
+            "value": "Ardane mostra i tuoi prossimi appuntamenti nel widget In arrivo e in Pianificazione. Nulla lascia il tuo iPhone."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardaneは「次の予定」ウィジェットに今後の予定を表示します。データがiPhoneの外に出ることはありません。"
+            "value": "Ardaneは「次の予定」ウィジェットと「プランニング」に今後の予定を表示します。データがiPhoneの外に出ることはありません。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Ardane mostra seus próximos compromissos no widget A seguir. Nada sai do seu iPhone."
+            "value": "O Ardane mostra seus próximos compromissos no widget A seguir e no Planejamento. Nada sai do seu iPhone."
           }
         }
       }
@@ -101,43 +101,43 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Kamera wird nur zum Scannen eines Lebensmittel-Barcodes verwendet."
+            "value": "Die Kamera wird nur zum Scannen eines Lebensmittel-Barcodes oder zum Fotografieren deiner Mahlzeit verwendet. Die Analyse erfolgt auf deinem iPhone: Es wird kein Foto gespeichert oder gesendet."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The camera is only used to scan a food's barcode."
+            "value": "The camera is only used to scan a food's barcode or photograph your meal. The analysis happens on your iPhone: no photo is saved or sent."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La cámara solo se usa para escanear el código de barras de un alimento."
+            "value": "La cámara solo se usa para escanear el código de barras de un alimento o fotografiar tu plato. El análisis se hace en tu iPhone: ninguna foto se guarda ni se envía."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La caméra sert uniquement à scanner le code-barres d'un aliment."
+            "value": "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier ton plat. L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "La fotocamera serve solo a scansionare il codice a barre di un alimento."
+            "value": "La fotocamera serve solo a scansionare il codice a barre di un alimento o a fotografare il tuo piatto. L'analisi avviene sul tuo iPhone: nessuna foto viene salvata o inviata."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "カメラは食品のバーコードを読み取るためだけに使用します。"
+            "value": "カメラは食品のバーコードの読み取りと、料理の撮影のためだけに使用します。解析はiPhone上で行われ、写真が保存または送信されることはありません。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A câmera é usada apenas para ler o código de barras de um alimento."
+            "value": "A câmera é usada apenas para ler o código de barras de um alimento ou fotografar seu prato. A análise é feita no seu iPhone: nenhuma foto é salva ou enviada."
           }
         }
       }
@@ -195,43 +195,43 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane liest deine heutigen Schritte für „Mein Tag“. Nichts verlässt dein iPhone."
+            "value": "Ardane liest deine Schritte, Distanz und Stockwerke mit dem Bewegungssensor deines iPhone, für „Mein Tag“ und Fitness. Nichts verlässt dein iPhone."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane reads today's steps for “My Day”. Nothing leaves your iPhone."
+            "value": "Ardane reads your steps, distance and floors with your iPhone's motion sensor, for “My Day” and Fitness. Nothing leaves your iPhone."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane lee tus pasos del día para «Mi día». Nada sale de tu iPhone."
+            "value": "Ardane lee tus pasos, distancia y pisos con el sensor de movimiento de tu iPhone, para «Mi día» y Fitness. Nada sale de tu iPhone."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane lit tes pas du jour pour « Mon Quotidien ». Rien ne quitte ton iPhone."
+            "value": "Ardane lit tes pas, ta distance et tes étages avec le capteur de ton iPhone, pour Mon Quotidien et Fitness. Rien ne quitte ton iPhone."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardane legge i tuoi passi di oggi per «La mia giornata». Nulla lascia il tuo iPhone."
+            "value": "Ardane legge i tuoi passi, la distanza e i piani con il sensore di movimento del tuo iPhone, per «La mia giornata» e Fitness. Nulla lascia il tuo iPhone."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardaneは「マイデイ」のために今日の歩数を読み取ります。データがiPhoneの外に出ることはありません。"
+            "value": "ArdaneはiPhoneの動きセンサーで歩数・距離・階数を読み取り、「マイデイ」とフィットネスに使います。データがiPhoneの外に出ることはありません。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Ardane lê seus passos do dia para “Meu dia”. Nada sai do seu iPhone."
+            "value": "O Ardane lê seus passos, distância e andares com o sensor de movimento do seu iPhone, para “Meu dia” e Fitness. Nada sai do seu iPhone."
           }
         }
       }
