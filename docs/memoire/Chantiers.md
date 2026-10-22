@@ -92,6 +92,7 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 
 Consigne de l'utilisateur (haut de [[Demandes]]) : réaliser les lots dans l'ordre, sans accord entre deux lots ; par lot : agents, relecture `code-reviewer`, `check_swift.py`, `[check]` puis `[unit]` ; `[testflight]` puis `[interne]` une seule fois après le dernier lot, seulement si tous les `[unit]` sont verts. Le § 6 (« Faire mes repas ») n'est pas dans les 8 lots : laissé. `Brief-ameliorations.md` n'existe pas : les lignes de Demandes ont fait office de cahier des charges.
 
+- TestFlight : build 230 (version 1.0, normale, Premium non débloqué, run 230) envoyé le 2026-10-22 avec les 8 lots ; la version interne (Premium débloqué) suit pour remplacer le 230 sur l'iPhone (le 230 reste dans TestFlight › Versions précédentes).
 - Blocage rencontré : le dépôt était privé (le run 39822617200 a échoué en 14 s : facturation macOS). L'utilisateur l'a repassé en public le 2026-10-22 ; les lots 2 à 8 ont été écrits et relus sans compilation, puis compilés d'un coup.
 - Run 228 (`[check]`, lots 1 à 8) : compilation réussie du premier coup, 0 erreur. Run 229 (`[unit]`) : 400 tests réussis, 0 échec (dont 15 `CalorieModelTests`, 19 `ScanRecapTests`, 11 `FoodLabelMatcherTests`, 11 `PermissionTests`, 12 `QuickTaskTests`, 8 `HabitHeatmapTests`, 4 `WallpaperCatalogTests`, 4 `ReactivityTests`, 3 `PlanningLayoutTests`).
 
