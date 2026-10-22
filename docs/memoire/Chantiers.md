@@ -105,6 +105,8 @@ Règle CI : un push annule le run en cours (concurrency) : ne pousser qu'une foi
 | 7 | Permissions iOS et réactivité (§ 8, § 9) | à faire |
 | 8 | Scanner alimentaire intelligent (§ 5), étape A ; étape B préparée et désactivée | à faire |
 
+**BLOCAGE CI (2026-10-22, 17 h 25 UTC)** : le dépôt est passé en privé ; le run 39822617200 (`[check]` du lot 1, commit `b952d59`) a échoué en 14 s : « The job was not started because recent account payments have failed or your spending limit needs to be increased ». Les runners macOS ne démarrent plus : ni compilation, ni tests, ni TestFlight. Décision à prendre par l'utilisateur : repasser le dépôt en public (CI gratuite) ou régler la facturation GitHub (limite de dépense). Tant que c'est bloqué : les lots se font en local (commits locaux, pas de push), sans aucune vérification de compilation ; au déblocage, lancer un `[check]` sur l'ensemble et corriger.
+
 À mettre à jour après chaque lot : cette table, le reste à faire, les captures à vérifier sur l'iPhone.
 
 ## À ne pas oublier
