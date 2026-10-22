@@ -79,48 +79,72 @@ struct HabitsView: View {
     }
 }
 
-private struct HabitRow: View {
+/// A habit as a card: a header band (the check of the day shown, its icon and name, its streak, its regularity
+/// over 30 days) over the grid of its last weeks, a square per day, full in its color when done.
+/// Shared by the Habits list and the Planning's Habits page.
+struct HabitRow: View {
     let habit: Habit
     var day = Date()
     let onToggle: () -> Void
     let onEdit: () -> Void
+    @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
         let color = Color(hex: habit.colorHex)
         let done = habit.isDone(on: day)
-        HStack(spacing: 12) {
-            Button(action: onToggle) {
-                Image(systemName: habit.symbol)
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(done ? .white : color)
-                    .frame(width: 40, height: 40)
-                    .background(Circle().fill(done ? color : color.opacity(0.14)))
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text(done ? tr("Marquer \(habit.name) comme non fait") : tr("Valider \(habit.name)")))
-
-            Button(action: onEdit) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(habit.name).foregroundStyle(.primary)
-                        let streak = habit.streak()
-                        Text(streak > 0 ? tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))") : tr("Pas encore de série"))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+        let streak = habit.streak()
+        let rate = HabitHeatmap.rate(of: habit)
+        let weeks = HabitHeatmap.weeks(for: habit, columns: sizeClass == .regular ? 52 : 26)
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 2) {
+                Button(action: onToggle) {
+                    ZStack {
+                        Circle().fill(done ? color : color.opacity(0.14))
+                        Circle().strokeBorder(color.opacity(done ? 0 : 0.7), lineWidth: 1.5)
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 13, weight: .heavy))
+                            .foregroundStyle(done ? Color.white : color.opacity(0.5))
                     }
-                    Spacer()
-                    HStack(spacing: 4) {
-                        ForEach(DateMath.week(containing: day), id: \.self) { weekday in
-                            Circle()
-                                .fill(habit.isDone(on: weekday) ? color : Color.secondary.opacity(0.2))
-                                .frame(width: 8, height: 8)
+                    .frame(width: 30, height: 30)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(done ? tr("Marquer \(habit.name) comme non fait") : tr("Valider \(habit.name)")))
+
+                Button(action: onEdit) {
+                    HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack(spacing: 6) {
+                                Image(systemName: habit.symbol)
+                                    .font(.footnote.weight(.semibold))
+                                    .foregroundStyle(color)
+                                    .accessibilityHidden(true)
+                                Text(habit.name).foregroundStyle(.primary)
+                            }
+                            Text(streak > 0 ? tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))") : tr("Pas encore de série"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer(minLength: 8)
+                        if let rate {
+                            Text(Fmt.percent(rate))
+                                .font(.subheadline.weight(.semibold))
+                                .monospacedDigit()
+                                .foregroundStyle(.secondary)
+                                .accessibilityLabel(Text("\(tr("Régularité")) : \(Fmt.percent(rate))"))
                         }
                     }
-                    .accessibilityHidden(true)
+                    .frame(minHeight: 44)
+                    .contentShape(Rectangle())
                 }
-                .contentShape(Rectangle())
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
+            .padding(.leading, 2)
+            .padding(.trailing, 12)
+            .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+            HabitHeatmapGrid(columns: weeks, doneColor: color, emptyColor: color.opacity(0.16))
         }
         .padding(.vertical, 4)
     }

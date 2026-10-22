@@ -64,8 +64,16 @@ struct TasksWidgetView: View {
 
 // MARK: - Habits
 
+/// One band per habit: a header (the check of today, the name, the streak and the regularity over 30 days)
+/// over a grid of its last weeks, like a contribution chart. When the room is too short for seven rows per
+/// week, the grid becomes one row of the recent days.
 struct HabitsWidgetView: View {
     let context: RenderContext
+
+    private static let headerHeight: CGFloat = 18
+    private static let headerGap: CGFloat = 4
+
+    private var limit: Int { context.isLarge ? 7 : 3 }
 
     var body: some View {
         let s = context.style
@@ -86,29 +94,27 @@ struct HabitsWidgetView: View {
             }
             if habits.isEmpty {
                 WidgetMessage(symbol: "repeat", title: tr("Aucune habitude"), message: tr("Crée-les dans Ardane"), style: s)
-            } else if context.isSmall {
-                smallGrid(Array(habits.prefix(4)))
             } else {
-                let limit = context.isMedium ? 3 : 7
-                VStack(spacing: context.isLarge ? 12 : 8) {
-                    ForEach(habits.prefix(limit)) { habit in
-                        habitRow(habit)
-                    }
-                }
-                Spacer(minLength: 0)
+                bands(Array(habits.prefix(limit)))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
-    private func smallGrid(_ habits: [Habit]) -> some View {
-        let columns = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)]
-        return LazyVGrid(columns: columns, spacing: 10) {
-            ForEach(habits) { habit in
-                toggleButton(habit, size: 50)
+    private func bands(_ habits: [Habit]) -> some View {
+        GeometryReader { proxy in
+            let spacing: CGFloat = context.isLarge ? 10 : 7
+            let count = CGFloat(max(1, habits.count))
+            let bandHeight = (proxy.size.height - (count - 1) * spacing) / count
+            let gridHeight = bandHeight - Self.headerHeight - Self.headerGap
+            let layout = HabitHeatmap.layout(width: proxy.size.width, height: gridHeight)
+            VStack(alignment: .leading, spacing: spacing) {
+                ForEach(habits) { habit in
+                    band(habit, layout: layout)
+                }
             }
+            .frame(width: proxy.size.width, height: proxy.size.height, alignment: .topLeading)
         }
-        .frame(maxHeight: .infinity)
     }
 
     /// The habit's color; without colors (« Clair », « Teinté »), the style's.
@@ -116,62 +122,84 @@ struct HabitsWidgetView: View {
         context.style.isAccented ? context.style.accent : Color(hex: habit.colorHex)
     }
 
-    private func toggleButton(_ habit: Habit, size: CGFloat) -> some View {
+    private var roundness: CGFloat {
+        switch context.style.options.shape {
+        case .square: 0.08
+        case .capsule: 0.5
+        default: 0.26
+        }
+    }
+
+    private func band(_ habit: Habit, layout: (rows: Int, columns: Int)) -> some View {
+        let s = context.style
+        let color = habitColor(habit)
+        let cells = HabitHeatmap.cells(for: habit, layout: layout, asOf: context.date)
+        // Done in full, not done faint: no text sits on a cell, so without colors the style's track does.
+        return VStack(alignment: .leading, spacing: Self.headerGap) {
+            header(habit)
+            HabitHeatmapGrid(columns: cells, doneColor: color, emptyColor: s.isAccented ? s.track : color.opacity(0.16), roundness: roundness)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    private func header(_ habit: Habit) -> some View {
+        let s = context.style
+        let streak = habit.streak(asOf: context.date)
+        let rate = HabitHeatmap.rate(of: habit, asOf: context.date)
+        return HStack(spacing: 4) {
+            checkButton(habit)
+            Text(habit.name)
+                .font(s.text(12, .semibold))
+                .foregroundStyle(s.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+            Spacer(minLength: 4)
+            if s.showsDetails, streak > 0, !context.isSmall {
+                HStack(spacing: 2) {
+                    Image(systemName: "flame.fill").font(.system(size: 8, weight: .semibold))
+                    Text(Fmt.number(streak)).font(s.text(11, .semibold).monospacedDigit())
+                }
+                .foregroundStyle(s.isAccented ? s.secondary : habitColor(habit))
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text(tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))")))
+            }
+            if s.showsDetails, let rate {
+                Text(Fmt.percent(rate))
+                    .font(s.text(11, .semibold).monospacedDigit())
+                    .foregroundStyle(s.secondary)
+                    .lineLimit(1)
+                    .accessibilityLabel(Text("\(tr("Régularité")) : \(Fmt.percent(rate))"))
+            }
+        }
+        .padding(.trailing, 6)
+        .frame(height: Self.headerHeight)
+        .background { RoundedRectangle(cornerRadius: s.radius(6), style: .continuous).fill(s.panel) }
+    }
+
+    /// The check of today: a filled disc when done, a ring when to do. It is the widget's button (its intent
+    /// toggles today); the touch area is wider than the disc.
+    private func checkButton(_ habit: Habit) -> some View {
         let s = context.style
         let done = habit.isDone(on: context.date)
         let color = habitColor(habit)
         return IntentButton(intent: ToggleHabitIntent(habitID: habit.id), isEnabled: context.isInteractive) {
             ZStack {
-                // Without colors: done is a lit, outlined disc under a full symbol; to do, a faint thin ring
-                // around a dimmed one.
+                // Without colors a filled disc would be a solid white shape hiding its check: lit and outlined instead.
                 if done {
                     Circle().textBackdrop(color, isAccented: s.isAccented, isProminent: true)
                 } else {
-                    Circle().fill(s.panel)
                     Circle().strokeBorder(color.opacity(AccentedStyle.pendingRingOpacity(isMonochrome: s.isAccented)),
                                           lineWidth: AccentedStyle.pendingRingWidth(isMonochrome: s.isAccented))
                 }
-                Image(systemName: habit.symbol)
-                    .font(.system(size: size * 0.38, weight: .semibold))
-                    .foregroundStyle(done ? .white : color.opacity(s.isAccented ? AccentedStyle.secondaryOpacity : 1))
+                Image(systemName: "checkmark")
+                    .font(.system(size: 8, weight: .heavy))
+                    .foregroundStyle(done ? Color.white : color.opacity(s.isAccented ? AccentedStyle.secondaryOpacity : 0.45))
             }
-            .frame(width: size, height: size)
+            .frame(width: 15, height: 15)
+            .frame(width: 26, height: Self.headerHeight)
+            .contentShape(Rectangle())
         }
         .accessibilityLabel(Text("\(habit.name), \(done ? tr("fait") : tr("à faire"))"))
-    }
-
-    private func habitRow(_ habit: Habit) -> some View {
-        let s = context.style
-        let week = DateMath.week(containing: context.date)
-        let color = habitColor(habit)
-        let streak = habit.streak(asOf: context.date)
-        return HStack(spacing: 10) {
-            toggleButton(habit, size: context.isLarge ? 34 : 30)
-            VStack(alignment: .leading, spacing: 1) {
-                Text(habit.name)
-                    .font(s.text(14, .semibold))
-                    .foregroundStyle(s.primary)
-                    .lineLimit(1)
-                if s.showsDetails {
-                    Text(streak > 0 ? tr("Série de \(streak) j") : tr("Pas encore de série"))
-                        .font(s.text(11))
-                        .foregroundStyle(s.secondary)
-                }
-            }
-            Spacer(minLength: 4)
-            HStack(spacing: 4) {
-                ForEach(week, id: \.self) { day in
-                    let done = habit.isDone(on: day)
-                    let isToday = DateMath.isSameDay(day, context.date)
-                    Circle()
-                        .fill(done ? color : s.track)
-                        .overlay {
-                            if isToday { Circle().strokeBorder(s.primary.opacity(0.6), lineWidth: 1.2) }
-                        }
-                        .frame(width: 9, height: 9)
-                }
-            }
-        }
     }
 }
 
