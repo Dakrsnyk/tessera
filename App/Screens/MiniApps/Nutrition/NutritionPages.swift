@@ -91,7 +91,7 @@ struct NutritionMealPage: View {
                 Section {
                     ForEach(previous) { past in
                         Button {
-                            Haptics.success()
+                            Haptics.tap()
                             let items = past.items
                             model.update(\.nutrition) { $0.log(items, meal: meal, on: day) }
                         } label: {

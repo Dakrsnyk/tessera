@@ -2,10 +2,12 @@ import Foundation
 
 /// A button inside a widget. Each case maps to one App Intent (see `TileActionButton`).
 enum TileAction: Hashable {
-    case completeSet
-    case skipRest
-    /// Takes back the last « Série faite » (see `FitnessState.undoLastSet`).
-    case undoSet
+    // The set buttons carry the position they are drawn for: a double tap counts once (`WorkoutPosition`).
+    case completeSet(WorkoutPosition?)
+    /// « Passer »: the set is passed, not counted (see `FitnessState.skipSet`).
+    case skipSet(WorkoutPosition?)
+    /// Takes back the last « Série faite » or « Passer » (see `FitnessState.undoLastSet`).
+    case undoSet(WorkoutPosition?)
     /// Drops a session started by mistake, before any set (see `FitnessState.cancelActive`).
     case cancelWorkout
     case logFood(String)

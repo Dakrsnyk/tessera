@@ -567,7 +567,7 @@ struct FoodLogSheet: View {
         let chosen = meal
         let date = NutritionMath.entryDate(for: chosen, on: day)
         model.update(\.nutrition) { $0.log(food, grams: amount, meal: chosen, at: date) }
-        Haptics.success()
+        Haptics.tap()
         onDone?()
     }
 }
@@ -609,7 +609,7 @@ struct SavedMealLogSheet: View {
         let items = saved.items
         let target = day
         model.update(\.nutrition) { $0.log(items, meal: chosen, on: target) }
-        Haptics.success()
+        Haptics.tap()
         onDone?()
     }
 }

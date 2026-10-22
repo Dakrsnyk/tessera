@@ -6,7 +6,7 @@ import ActivityKit
 #endif
 
 /// The workout in progress on the Lock Screen and in the Dynamic Island: the current exercise and
-/// set, the rest counting down between sets, and buttons to validate a set or skip the rest without
+/// set, the rest counting down between sets, and buttons to validate or pass a set without
 /// unlocking. It starts with the session and ends with it.
 struct WorkoutActivityAttributes: Codable, Hashable {
     struct ContentState: Codable, Hashable {
@@ -21,15 +21,20 @@ struct WorkoutActivityAttributes: Codable, Hashable {
         var restEnd: Date?
         /// Seconds left of a rest on pause.
         var restPaused: Double?
+        /// Where the session stands: the set buttons carry it, so a double tap counts once.
+        /// Optional, like what follows: a Live Activity started by an older version still reads.
+        var position: WorkoutPosition? = nil
+        /// The sets passed with « Passer » (not counted in `doneSets`).
+        var skippedSets: Int? = nil
 
         func isResting(at date: Date) -> Bool {
             guard let restEnd else { return false }
             return restEnd > date
         }
 
-        /// The small back button: takes back the last set, or cancels a session without any set
-        /// (started by mistake), which then counts for nothing.
-        var undoesSet: Bool { doneSets > 0 }
+        /// The small back button: takes back the last set done or passed, or cancels a session without
+        /// any (started by mistake), which then counts for nothing.
+        var undoesSet: Bool { doneSets > 0 || (skippedSets ?? 0) > 0 }
         var backSymbol: String { undoesSet ? "arrow.uturn.backward" : "xmark" }
         var backTitle: String { undoesSet ? tr("Annuler la dernière série") : tr("Annuler la séance") }
     }
@@ -61,6 +66,8 @@ enum WorkoutLiveActivity {
             content.restEnd = end
         }
         content.restPaused = session.restPausedRemaining
+        content.position = state.position
+        content.skippedSets = session.skipped.count
         return (WorkoutActivityAttributes(routineName: session.routineName), content)
     }
 
@@ -146,10 +153,9 @@ struct WorkoutActivityView: View {
                 } else if state.isResting(at: now) {
                     actionButton(tr("Pause"), symbol: "pause.fill", prominent: false, intent: PauseRestIntent())
                 }
-                if state.isResting(at: now) || state.restPaused != nil {
-                    actionButton(tr("Passer"), symbol: "forward.fill", prominent: false, intent: SkipRestIntent())
-                }
-                actionButton(tr("Série faite"), symbol: "checkmark", prominent: true, intent: CompleteSetIntent())
+                // Passes the set shown (not counted), at any time: during the rest or not.
+                actionButton(tr("Passer"), symbol: "forward.fill", prominent: false, intent: SkipSetIntent(expecting: state.position))
+                actionButton(tr("Série faite"), symbol: "checkmark", prominent: true, intent: CompleteSetIntent(expecting: state.position))
             }
         }
         .padding(16)
@@ -210,7 +216,7 @@ struct WorkoutActivityView: View {
         if !isLive {
             label
         } else if state.undoesSet {
-            Button(intent: UndoSetIntent()) { label }
+            Button(intent: UndoSetIntent(expecting: state.position)) { label }
                 .buttonStyle(.plain)
         } else {
             Button(intent: CancelWorkoutIntent()) { label }

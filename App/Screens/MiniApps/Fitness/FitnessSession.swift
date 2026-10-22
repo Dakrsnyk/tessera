@@ -195,11 +195,23 @@ struct FitnessSessionPage: View {
                     completeSet()
                 }
                 .accessibilityIdentifier("session-set-done")
-                if !session.sets.isEmpty {
-                    // A « Série faite » touched by mistake (here, on the Lock Screen or a widget).
+                // The set shown is passed: not done, not counted; the session moves to the next one.
+                Button {
+                    var accepted = false
+                    model.update(\.fitness) { accepted = $0.skipSet(at: Date()) }
+                    if accepted { Haptics.tap() }
+                } label: {
+                    Label(tr("Passer la série"), systemImage: "forward.fill")
+                }
+                .font(.subheadline.weight(.semibold))
+                .frame(maxWidth: .infinity)
+                .accessibilityIdentifier("session-skip-set")
+                if session.hasSteps {
+                    // A « Série faite » or « Passer » touched by mistake (here, on the Lock Screen or a widget).
                     Button {
-                        Haptics.tap()
-                        model.update(\.fitness) { _ = $0.undoLastSet(at: Date()) }
+                        var accepted = false
+                        model.update(\.fitness) { accepted = $0.undoLastSet(at: Date()) }
+                        if accepted { Haptics.tap() }
                     } label: {
                         Label(tr("Annuler la dernière série"), systemImage: "arrow.uturn.backward")
                     }
@@ -292,10 +304,11 @@ struct FitnessSessionPage: View {
     private func completeSet() {
         let doneReps = reps
         let doneWeight = weight
-        Haptics.success()
+        var accepted = false
         model.update(\.fitness) { state in
-            guard var session = state.active else { return }
+            guard var session = state.active, session.currentExercise != nil else { return }
             _ = session.completeSet(at: Date(), reps: doneReps, weight: doneWeight)
+            accepted = true
             // What was really lifted becomes the plan for the next sets of this exercise.
             if session.setIndex > 0, session.exercises.indices.contains(session.exerciseIndex) {
                 session.exercises[session.exerciseIndex].reps = doneReps
@@ -305,6 +318,8 @@ struct FitnessSessionPage: View {
             if let id = session.sets.last?.exerciseID { state.noteUsed(id) }
             if session.isFinished { state.finishActive(at: Date()) }
         }
+        // Light and once, for a set really logged.
+        if accepted { Haptics.tap() }
     }
 
     private func adjuster(title: String, value: String, minus: @escaping () -> Void, plus: @escaping () -> Void) -> some View {
@@ -333,6 +348,7 @@ struct FitnessSessionPage: View {
 
     private func exerciseRow(_ item: ExerciseTemplate, index: Int, session: WorkoutSession) -> some View {
         let done = session.sets.filter { $0.exercise == item.name && (item.exerciseID == nil || $0.exerciseID == nil || $0.exerciseID == item.exerciseID) }
+        let passed = session.skipped.filter { $0.exerciseIndex == index }.count
         let isCurrent = index == session.exerciseIndex
         return VStack(alignment: .leading, spacing: 6) {
             HStack {
@@ -351,7 +367,7 @@ struct FitnessSessionPage: View {
                     .accessibilityLabel(Text(tr("Fiche de \(item.name)")))
                 }
             }
-            if !done.isEmpty {
+            if !done.isEmpty || passed > 0 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 6) {
                         ForEach(done) { set in
@@ -367,6 +383,15 @@ struct FitnessSessionPage: View {
                             }
                             .buttonStyle(.plain)
                         }
+                        // The sets passed: shown apart, neither done nor left to do.
+                        ForEach(0..<passed, id: \.self) { _ in
+                            Label(tr("Passée"), systemImage: "forward.fill")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 5)
+                                .overlay(Capsule().strokeBorder(Color.secondary.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [3, 2])))
+                        }
                     }
                 }
             }
@@ -379,10 +404,11 @@ struct FitnessSessionPage: View {
     private func chooser(state: FitnessState) -> some View {
         MiniAppScroll {
             if state.justFinishedSession(at: Date()) != nil {
-                // The last « Série faite » finished the session by mistake: it comes back in progress.
+                // The last « Série faite » or « Passer » finished the session by mistake: it comes back in progress.
                 Button {
-                    Haptics.tap()
-                    model.update(\.fitness) { _ = $0.undoLastSet(at: Date()) }
+                    var accepted = false
+                    model.update(\.fitness) { accepted = $0.undoLastSet(at: Date()) }
+                    if accepted { Haptics.tap() }
                 } label: {
                     Label(tr("Annuler la dernière série"), systemImage: "arrow.uturn.backward")
                         .font(.subheadline.weight(.semibold))

@@ -857,12 +857,12 @@ struct TileActionButton<Label: View>: View {
 
     var body: some View {
         switch action {
-        case .completeSet:
-            IntentButton(intent: CompleteSetIntent(), isEnabled: isEnabled, label: label)
-        case .skipRest:
-            IntentButton(intent: SkipRestIntent(), isEnabled: isEnabled, label: label)
-        case .undoSet:
-            IntentButton(intent: UndoSetIntent(), isEnabled: isEnabled, label: label)
+        case let .completeSet(position):
+            IntentButton(intent: CompleteSetIntent(expecting: position), isEnabled: isEnabled, label: label)
+        case let .skipSet(position):
+            IntentButton(intent: SkipSetIntent(expecting: position), isEnabled: isEnabled, label: label)
+        case let .undoSet(position):
+            IntentButton(intent: UndoSetIntent(expecting: position), isEnabled: isEnabled, label: label)
         case .cancelWorkout:
             IntentButton(intent: CancelWorkoutIntent(), isEnabled: isEnabled, label: label)
         case let .logFood(id):

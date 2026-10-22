@@ -475,8 +475,9 @@ private struct WorkoutDayTile: View {
                 }
                 Spacer(minLength: 4)
                 actionButton(tr("Série faite")) {
-                    model.update(\.fitness) { $0.completeNextSet(at: Date()) }
-                    Haptics.tap()
+                    var accepted = false
+                    model.update(\.fitness) { accepted = $0.completeNextSet(at: Date()) }
+                    if accepted { Haptics.tap() }
                 }
             case let .done(sets, volume):
                 Text(workout.name)

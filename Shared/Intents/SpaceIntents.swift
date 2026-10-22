@@ -33,6 +33,61 @@ private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
     await Encouragements.considerAndDeliver(from: before, to: SharedStore.shared.state(FitnessState.self))
 }
 
+/// The light tap of a button accepted outside the app's screens. A widget or Live Activity button can't
+/// make the iPhone vibrate by itself: iOS draws it from a snapshot, and a haptic plays only for the app
+/// on screen. The app sets `play`, which taps only while it is on screen; the widget extension leaves it
+/// nil. So the Lock Screen, the Dynamic Island and the widgets stay silent unless the app is open.
+enum ButtonFeedback {
+    /// Set by the app (see `TesseraApp`): a light tap, once, if the app is on screen.
+    static var play: (() -> Void)?
+
+    /// The rule: only a tap that changed something, and only while the app is on screen.
+    static func shouldPlay(accepted: Bool, appIsActive: Bool) -> Bool {
+        accepted && appIsActive
+    }
+
+    /// Called once for each button handled.
+    static func handled(accepted: Bool) {
+        guard accepted else { return }
+        play?()
+    }
+}
+
+/// What a workout button outside the app does to the saved session (the intents below run it).
+enum WorkoutButtons {
+    /// Applies the button in one atomic read-modify-write of the session file. True when it was
+    /// accepted; false for a tap on a drawing already out of date (`WorkoutPosition`), nothing to
+    /// do, or a file that can't be read right now. The light tap follows only an accepted button.
+    @discardableResult
+    static func apply(_ button: WorkoutButton, expecting expected: WorkoutPosition?, store: SharedStore = .shared, at date: Date = Date()) -> Bool {
+        var accepted = false
+        let saved = store.update(FitnessState.self) { accepted = $0.press(button, expecting: expected, at: date) }
+        if !saved {
+            Logger(subsystem: "com.dakrsnyk.tessera.widgets", category: "intents").error("workout button: the session file can't be read right now")
+        }
+        ButtonFeedback.handled(accepted: saved && accepted)
+        return saved && accepted
+    }
+}
+
+/// A set button (« Série faite », « Passer », the back arrow): applied only if the workout is still
+/// where the button was drawn, then the widgets, the app and the Live Activity follow. An ignored tap
+/// still redraws them, so the next one acts on what is really there.
+private func pressWorkout(_ button: WorkoutButton, expected token: String?) async {
+    let before = SharedStore.shared.state(FitnessState.self)
+    let accepted = WorkoutButtons.apply(button, expecting: token.flatMap(WorkoutPosition.init(token:)))
+    refreshWidgets()
+    let after = SharedStore.shared.state(FitnessState.self)
+    guard accepted else {
+        await WorkoutLiveActivity.sync(after)
+        return
+    }
+    await MainActor.run { NotificationCenter.default.post(name: .workoutSavedOutside, object: nil) }
+    await WorkoutLiveActivity.sync(after)
+    await SmartReminders.refresh()
+    await Encouragements.considerAndDeliver(from: before, to: after)
+}
+
 /// A Live Activity intent: from a widget, the Lock Screen or the Live Activity, it runs in the app's
 /// process, so it can start the workout's Live Activity and update its rest countdown.
 struct CompleteSetIntent: LiveActivityIntent {
@@ -42,15 +97,47 @@ struct CompleteSetIntent: LiveActivityIntent {
     static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
     static var openAppWhenRun: Bool { false }
 
+    /// The position the button was drawn for (`WorkoutPosition.token`); nil: no check.
+    @Parameter(title: "Série attendue")
+    var expected: String?
+
     init() {}
 
+    init(expecting position: WorkoutPosition?) {
+        expected = position?.token
+    }
+
     func perform() async throws -> some IntentResult {
-        await changeWorkout { $0.completeNextSet(at: Date()) }
+        await pressWorkout(.completeSet, expected: expected)
         return .result()
     }
 }
 
-/// The small back arrow: takes back the last « Série faite » touched by mistake.
+/// « Passer »: the set now is passed (not done, not counted) and the session moves to the next one.
+struct SkipSetIntent: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Passer la série"
+    static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
+
+    /// The position the button was drawn for (`WorkoutPosition.token`); nil: no check.
+    @Parameter(title: "Série attendue")
+    var expected: String?
+
+    init() {}
+
+    init(expecting position: WorkoutPosition?) {
+        expected = position?.token
+    }
+
+    func perform() async throws -> some IntentResult {
+        await pressWorkout(.skipSet, expected: expected)
+        return .result()
+    }
+}
+
+/// The small back arrow: takes back the last « Série faite » or « Passer » touched by mistake.
 struct UndoSetIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Annuler la dernière série"
     static var isDiscoverable = false
@@ -58,10 +145,18 @@ struct UndoSetIntent: LiveActivityIntent {
     static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
     static var openAppWhenRun: Bool { false }
 
+    /// The position the button was drawn for (`WorkoutPosition.token`); nil: no check.
+    @Parameter(title: "Série attendue")
+    var expected: String?
+
     init() {}
 
+    init(expecting position: WorkoutPosition?) {
+        expected = position?.token
+    }
+
     func perform() async throws -> some IntentResult {
-        await changeWorkout { _ = $0.undoLastSet(at: Date()) }
+        await pressWorkout(.undoSet, expected: expected)
         return .result()
     }
 }
@@ -113,6 +208,8 @@ struct ResumeRestIntent: LiveActivityIntent {
     }
 }
 
+/// Only ends the rest. Kept for a Live Activity drawn by an older version: « Passer » now passes the
+/// set (`SkipSetIntent`); « Passer le repos » stays in the app.
 struct SkipRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Passer le repos"
     static var isDiscoverable = false
@@ -142,17 +239,29 @@ struct LogFoodIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult {
-        let id = foodID
-        SharedStore.shared.update(NutritionState.self) { state in
-            let known = state.favorites + state.customFoods + state.recentFoods
-            guard let food = known.first(where: { $0.id == id }) ?? FoodDatabase.item(id) else { return }
-            let now = Date()
-            state.log(food, grams: food.servingGrams, meal: MealType.current(at: now), at: now)
-        }
+        let logged = QuickFood.log(foodID: foodID)
         refreshWidgets()
         // A meal noted: no « Rien de noté aujourd'hui » this evening.
-        await SmartReminders.refresh()
+        if logged { await SmartReminders.refresh() }
         return .result()
+    }
+}
+
+/// The quick add of the Nutrition widgets (`LogFoodIntent`).
+enum QuickFood {
+    /// Logs one serving of a food the person knows (favorites, own foods, recent) or of the food base,
+    /// in one atomic read-modify-write. True when it was logged; false for an unknown food, a double tap
+    /// (`NutritionState.quickAddWindow`) or a file that can't be read right now.
+    @discardableResult
+    static func log(foodID: String, store: SharedStore = .shared, at date: Date = Date()) -> Bool {
+        var logged = false
+        let saved = store.update(NutritionState.self) { state in
+            let known = state.favorites + state.customFoods + state.recentFoods
+            guard let food = known.first(where: { $0.id == foodID }) ?? FoodDatabase.item(foodID) else { return }
+            logged = state.quickLog(food, at: date)
+        }
+        ButtonFeedback.handled(accepted: saved && logged)
+        return saved && logged
     }
 }
 

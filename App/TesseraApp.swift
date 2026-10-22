@@ -1,5 +1,6 @@
 import StoreKit
 import SwiftUI
+import UIKit
 import WidgetKit
 
 @main
@@ -15,6 +16,14 @@ struct TesseraApp: App {
     init() {
         // The encouragements show as a banner while the app is open too.
         NotificationPresenter.install()
+        // A workout or food button accepted outside the app's screens (its intent runs here): a light
+        // tap, once, only while the app is on screen. iOS plays no haptic for an app in the background.
+        ButtonFeedback.play = {
+            DispatchQueue.main.async {
+                guard ButtonFeedback.shouldPlay(accepted: true, appIsActive: UIApplication.shared.applicationState == .active) else { return }
+                Haptics.tap()
+            }
+        }
     }
 
     var body: some Scene {

@@ -97,6 +97,12 @@ final class SharedStore {
         return decoder
     }()
     private let lock = NSLock()
+    /// Held from the read to the write of `update`: two buttons handled at the same time (a double tap
+    /// on the Lock Screen) never both start from the same saved state. Recursive, so a change that
+    /// itself updates the store can't block. It covers one process: the workout buttons all run in the
+    /// app's (Live Activity intents). A lock between processes is left out: iOS ends an app suspended
+    /// while it holds a file lock in the shared container.
+    private let updateLock = NSRecursiveLock()
 
     /// Every file stays readable while the iPhone is locked (after its first unlock since it started):
     /// the buttons of the workout's Live Activity and of the widgets run on the Lock Screen.
@@ -197,6 +203,7 @@ final class SharedStore {
 
     /// Read-modify-write for small changes made from widget intents.
     func updateContent(_ change: (inout ContentState) -> Void) {
+        updateLock.lock(); defer { updateLock.unlock() }
         guard !isUnreadable(.content) else { return }
         var value = content
         change(&value)
@@ -211,10 +218,12 @@ final class SharedStore {
         write(value, to: T.file)
     }
 
-    /// Read-modify-write of a mini-app's data (used by widget buttons and the app). Returns false, and
-    /// changes nothing, when the saved file can't be read: an empty state never replaces the person's data.
+    /// Read-modify-write of a mini-app's data (used by widget buttons and the app), atomic within the
+    /// process (see `updateLock`). Returns false, and changes nothing, when the saved file can't be
+    /// read: an empty state never replaces the person's data.
     @discardableResult
     func update<T: StoredState>(_ type: T.Type, _ change: (inout T) -> Void) -> Bool {
+        updateLock.lock(); defer { updateLock.unlock() }
         guard !isUnreadable(T.file) else { return false }
         var value = state(T.self)
         change(&value)

@@ -96,6 +96,54 @@ struct SetLog: Codable, Hashable, Identifiable {
     var volume: Double { Double(reps) * weight }
 }
 
+/// A set passed with « Passer »: neither done (no reps, no load, not counted anywhere) nor left to do.
+struct SkippedSet: Codable, Hashable {
+    var exerciseIndex: Int
+    var setIndex: Int
+    /// The sets logged when it was passed: it is the session's last step while none came after.
+    var afterSets: Int
+    var date: Date
+}
+
+/// Where the workout stands, as a button drawn for it saw it: the session in progress (nil: none)
+/// and its exercise and set. A button carries it, so a second tap on a drawing already out of date
+/// (a double tap before the widget or the Lock Screen is drawn again) is ignored.
+struct WorkoutPosition: Codable, Hashable {
+    var sessionID: UUID?
+    var exerciseIndex: Int
+    var setIndex: Int
+
+    static let noSession = WorkoutPosition(sessionID: nil, exerciseIndex: 0, setIndex: 0)
+
+    /// "UUID:2:1" (or ":0:0" without a session): how an intent parameter carries it.
+    var token: String { "\(sessionID?.uuidString ?? ""):\(exerciseIndex):\(setIndex)" }
+
+    init(sessionID: UUID?, exerciseIndex: Int, setIndex: Int) {
+        self.sessionID = sessionID
+        self.exerciseIndex = exerciseIndex
+        self.setIndex = setIndex
+    }
+
+    init?(token: String) {
+        let parts = token.split(separator: ":", omittingEmptySubsequences: false)
+        guard parts.count == 3, let exercise = Int(parts[1]), let set = Int(parts[2]) else { return nil }
+        if parts[0].isEmpty {
+            sessionID = nil
+        } else if let id = UUID(uuidString: String(parts[0])) {
+            sessionID = id
+        } else {
+            return nil
+        }
+        exerciseIndex = exercise
+        setIndex = set
+    }
+}
+
+/// The workout buttons outside the app's screens (widget, Lock Screen, Dynamic Island).
+enum WorkoutButton: String {
+    case completeSet, skipSet, undoSet
+}
+
 struct WorkoutSession: Codable, Hashable, Identifiable {
     var id = UUID()
     var routineID: UUID?
@@ -111,6 +159,8 @@ struct WorkoutSession: Codable, Hashable, Identifiable {
     var restPausedRemaining: TimeInterval?
     /// A session caught up: the day it was planned for (« Séance rattrapée »).
     var catchUpFor: Date?
+    /// The sets passed with « Passer » (kept apart from `sets`, which only holds the sets done).
+    var skipped: [SkippedSet] = []
 
     var isFinished: Bool { end != nil }
     var isCatchUp: Bool { catchUpFor != nil }
@@ -140,6 +190,74 @@ struct WorkoutSession: Codable, Hashable, Identifiable {
 }
 
 extension WorkoutSession {
+    enum CodingKeys: String, CodingKey {
+        case id, routineID, routineName, exercises, start, end, sets, exerciseIndex, setIndex, restEndsAt,
+             restPausedRemaining, catchUpFor, skipped
+    }
+
+    /// Sessions saved by an older version (without `skipped`) still read, like every other field.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        routineID = c.optional(.routineID)
+        routineName = c.value(.routineName, "")
+        exercises = c.value(.exercises, [])
+        start = c.value(.start, Date())
+        end = c.optional(.end)
+        sets = c.value(.sets, [])
+        exerciseIndex = c.value(.exerciseIndex, 0)
+        setIndex = c.value(.setIndex, 0)
+        restEndsAt = c.optional(.restEndsAt)
+        restPausedRemaining = c.optional(.restPausedRemaining)
+        catchUpFor = c.optional(.catchUpFor)
+        skipped = c.value(.skipped, [])
+    }
+
+    /// The last « Passer » is the session's last step: no set was logged after it.
+    private var lastStepIsSkip: Bool {
+        guard let skip = skipped.last else { return false }
+        return skip.afterSets >= sets.count
+    }
+
+    /// When the last step (a set done or passed) was taken.
+    var lastStepDate: Date? {
+        lastStepIsSkip ? skipped.last?.date : sets.last?.date
+    }
+
+    /// A set done or passed that « Annuler la dernière série » can take back.
+    var hasSteps: Bool { !sets.isEmpty || !skipped.isEmpty }
+
+    /// « Passer »: the set now is passed (not done: no reps, no load, never counted) and the session
+    /// moves on, without rest: the next set, the next exercise after the last set of one, the end
+    /// after the last set of the session. Returns false when there is no set to pass.
+    @discardableResult
+    mutating func skipSet(at date: Date) -> Bool {
+        guard !isFinished, let exercise = currentExercise else { return false }
+        skipped.append(SkippedSet(exerciseIndex: exerciseIndex, setIndex: setIndex, afterSets: sets.count, date: date))
+        setIndex += 1
+        if setIndex >= exercise.sets {
+            setIndex = 0
+            exerciseIndex += 1
+        }
+        restEndsAt = nil
+        restPausedRemaining = nil
+        if exerciseIndex >= exercises.count { end = date }
+        return true
+    }
+
+    /// Takes back the last step, a set done or a set passed: the session goes back to that set,
+    /// without rest, and is no longer finished. Returns false when there is nothing to take back.
+    @discardableResult
+    mutating func undoLastStep() -> Bool {
+        guard lastStepIsSkip, let skip = skipped.popLast() else { return undoLastSet() != nil }
+        exerciseIndex = min(skip.exerciseIndex, max(0, exercises.count - 1))
+        setIndex = min(skip.setIndex, max(0, (exercises[safe: exerciseIndex]?.sets ?? 1) - 1))
+        end = nil
+        restEndsAt = nil
+        restPausedRemaining = nil
+        return true
+    }
+
     /// Moves to the next exercise without logging the sets left.
     mutating func skipExercise(at date: Date) {
         guard currentExercise != nil else { return }
@@ -174,9 +292,10 @@ extension WorkoutSession {
             } else {
                 exerciseIndex = min(exerciseIndex, exercises.count - 1)
             }
-            // The sets of this exercise still logged, just before the one removed.
+            // The sets of this exercise still logged, just before the one removed, and those passed in it.
             let logged = sets.reversed().prefix(while: { $0.exercise == last.exercise && $0.exerciseID == last.exerciseID }).count
-            setIndex = min(logged, max(0, exercises[exerciseIndex].sets - 1))
+            let passed = skipped.filter { $0.exerciseIndex == exerciseIndex }.count
+            setIndex = min(logged + passed, max(0, exercises[exerciseIndex].sets - 1))
         }
         end = nil
         restEndsAt = nil
@@ -273,39 +392,72 @@ struct FitnessState: Codable, Hashable {
     /// How long after its last set a session finished by that set can still be taken back.
     static let undoWindow: TimeInterval = 3600
 
-    /// The session just finished by its last set (`completeSet` then `finishActive`), still in the
-    /// window to take that set back. A session finished by « Terminer la séance » is not reopened.
+    /// The session just finished by its last set, done or passed (`completeSet` or `skipSet`, then
+    /// `finishActive`), still in the window to take that set back. A session finished by « Terminer la
+    /// séance » is not reopened.
     func justFinishedSession(at date: Date) -> WorkoutSession? {
-        guard active == nil, let last = history.last, let lastSet = last.sets.last, last.end == lastSet.date,
+        guard active == nil, let last = history.last, let lastStep = last.lastStepDate, last.end == lastStep,
               last.exerciseIndex >= last.exercises.count else { return nil }
-        let elapsed = date.timeIntervalSince(lastSet.date)
-        guard elapsed >= 0, elapsed < Self.undoWindow, DateMath.isSameDay(lastSet.date, date) else { return nil }
+        let elapsed = date.timeIntervalSince(lastStep)
+        guard elapsed >= 0, elapsed < Self.undoWindow, DateMath.isSameDay(lastStep, date) else { return nil }
         return last
     }
 
-    /// True when « Annuler la dernière série » has a set to take back.
+    /// True when « Annuler la dernière série » has a set, done or passed, to take back.
     func canUndoLastSet(at date: Date) -> Bool {
-        if let active { return !active.sets.isEmpty }
+        if let active { return active.hasSteps }
         return justFinishedSession(at: date) != nil
     }
 
-    /// The session in progress without any set yet (started by mistake): « Annuler la séance » is offered instead.
+    /// The session in progress without any set done or passed yet (started by mistake): « Annuler la
+    /// séance » is offered instead.
     var activeHasNoSets: Bool {
         guard let active else { return false }
-        return !active.isFinished && active.sets.isEmpty
+        return !active.isFinished && !active.hasSteps
     }
 
-    /// Takes back the last « Série faite » (Lock Screen, Dynamic Island, widget or app). When that set had
-    /// finished the session, the session leaves the history and is in progress again. A session left
-    /// without any set stays in progress: « Annuler la séance » then removes it. Returns false when
-    /// there was nothing to take back.
+    /// Where the workout stands now (see `WorkoutPosition`).
+    var position: WorkoutPosition {
+        guard let active else { return .noSession }
+        return WorkoutPosition(sessionID: active.id, exerciseIndex: active.exerciseIndex, setIndex: active.setIndex)
+    }
+
+    /// A workout button from a widget, the Lock Screen or the Dynamic Island. `expected`: the position it
+    /// was drawn for; when the workout is no longer there (the first tap of a double tap already moved
+    /// it), the tap is ignored rather than logging, passing or taking back one set more. nil (a button
+    /// of an older version): no check. Returns true when the button changed the workout.
+    @discardableResult
+    mutating func press(_ button: WorkoutButton, expecting expected: WorkoutPosition?, at date: Date) -> Bool {
+        if let expected, expected != position { return false }
+        switch button {
+        case .completeSet: return completeNextSet(at: date)
+        case .skipSet: return skipSet(at: date)
+        case .undoSet: return undoLastSet(at: date)
+        }
+    }
+
+    /// « Passer » from the app, a widget, the Lock Screen or the Dynamic Island: the set now is passed,
+    /// not counted. The session it ends goes to the history when a set was done in it; without any set
+    /// done it counts for nothing. Returns false when there is no set to pass.
+    @discardableResult
+    mutating func skipSet(at date: Date) -> Bool {
+        guard var session = active, session.skipSet(at: date) else { return false }
+        active = session
+        if session.isFinished { finishActive(at: date) }
+        return true
+    }
+
+    /// Takes back the last « Série faite » or « Passer » (Lock Screen, Dynamic Island, widget or app).
+    /// When that set had finished the session, the session leaves the history and is in progress again.
+    /// A session left without any set stays in progress: « Annuler la séance » then removes it. Returns
+    /// false when there was nothing to take back.
     @discardableResult
     mutating func undoLastSet(at date: Date) -> Bool {
         if active == nil, let finished = justFinishedSession(at: date) {
             history.removeLast()
             active = finished
         }
-        guard var session = active, session.undoLastSet() != nil else { return false }
+        guard var session = active, session.undoLastStep() else { return false }
         active = session
         return true
     }
@@ -352,15 +504,18 @@ struct FitnessState: Codable, Hashable {
         active?.restPausedRemaining = nil
     }
 
-    /// Logs one set from a widget or the app, starting today's routine if needed.
-    mutating func completeNextSet(at date: Date) {
+    /// Logs one set from a widget or the app, starting today's routine if needed. Returns true when a set was logged.
+    @discardableResult
+    mutating func completeNextSet(at date: Date) -> Bool {
         if active == nil || active?.isFinished == true, let planned = routine(for: date) {
             startSession(planned, at: date)
         }
-        guard var session = active else { return }
+        guard var session = active else { return false }
+        let logged = session.sets.count
         _ = session.completeSet(at: date)
         active = session
         if session.isFinished { finishActive(at: date) }
+        return session.sets.count > logged
     }
 }
 

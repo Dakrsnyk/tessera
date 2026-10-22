@@ -29,8 +29,9 @@ struct FitnessSpaceSections: View {
                 }
                 .padding(.vertical, 4)
                 Button {
-                    Haptics.success()
-                    model.update(\.fitness) { $0.completeNextSet(at: Date()) }
+                    var accepted = false
+                    model.update(\.fitness) { accepted = $0.completeNextSet(at: Date()) }
+                    if accepted { Haptics.tap() }
                 } label: {
                     Label(tr("Série faite"), systemImage: "checkmark.circle.fill").font(.headline)
                 }

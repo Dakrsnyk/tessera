@@ -45,14 +45,13 @@ struct WorkoutLiveActivityWidget: Widget {
                             }
                             .tint(accent.opacity(0.4))
                         }
-                        if state.isResting(at: Date()) {
-                            Button(intent: SkipRestIntent()) {
-                                Label(tr("Passer"), systemImage: "forward.fill")
-                                    .frame(maxWidth: .infinity)
-                            }
-                            .tint(accent.opacity(0.4))
+                        // Passes the set shown (not counted), during the rest or not.
+                        Button(intent: SkipSetIntent(expecting: state.position)) {
+                            Label(tr("Passer"), systemImage: "forward.fill")
+                                .frame(maxWidth: .infinity)
                         }
-                        Button(intent: CompleteSetIntent()) {
+                        .tint(accent.opacity(0.4))
+                        Button(intent: CompleteSetIntent(expecting: state.position)) {
                             Label(tr("Série faite"), systemImage: "checkmark")
                                 .frame(maxWidth: .infinity)
                         }
@@ -80,7 +79,7 @@ struct WorkoutLiveActivityWidget: Widget {
             .frame(width: 22)
             .accessibilityLabel(Text(state.backTitle))
         if state.undoesSet {
-            Button(intent: UndoSetIntent()) { label }
+            Button(intent: UndoSetIntent(expecting: state.position)) { label }
                 .buttonBorderShape(.circle)
                 .tint(accent.opacity(0.4))
         } else {

@@ -683,6 +683,21 @@ struct NutritionState: Codable, Hashable {
         entries.removeAll { $0.date < cutoff }
     }
 
+    /// Two taps on the same food of the widget closer than this are one double tap.
+    static let quickAddWindow: TimeInterval = 2
+
+    /// The quick add of a widget: one serving of a food, in the meal of the hour. The same food tapped
+    /// again within `quickAddWindow` is a double tap and is ignored. Returns true when the food was logged.
+    @discardableResult
+    mutating func quickLog(_ food: FoodItem, at date: Date) -> Bool {
+        // Any entry of this food (the array isn't in date order after a backdated entry) within the window.
+        if entries.contains(where: { $0.food.id == food.id && abs(date.timeIntervalSince($0.date)) < Self.quickAddWindow }) {
+            return false
+        }
+        log(food, grams: food.servingGrams, meal: MealType.current(at: date), at: date)
+        return true
+    }
+
     /// The same food, another quantity or another meal.
     mutating func updateEntry(_ id: UUID, grams: Double? = nil, meal: MealType? = nil) {
         guard let index = entries.firstIndex(where: { $0.id == id }) else { return }
