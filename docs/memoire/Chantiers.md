@@ -88,6 +88,25 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - À vérifier sur l'iPhone : l'accueil en clair et en sombre (dégradés, pastille, anneaux, courbe) ; « Passer » sur l'écran verrouillé, la Dynamic Island et un widget ; double appui rapide sur « Série faite » (une seule série) ; la vibration dans l'app ; ajout rapide Nutrition touché deux fois.
 - Limites iOS : un bouton de widget ou d'activité en direct ne fait vibrer l'iPhone que si l'app est au premier plan.
 
+## Exécution autonome des 8 lots — démarrée le 2026-10-22
+
+Consigne de l'utilisateur (haut de [[Demandes]]) : réaliser les lots dans l'ordre, sans accord entre deux lots ; par lot : agents, relecture `code-reviewer`, `check_swift.py`, commit `[check]` puis `[unit]` (commits et pushes autorisés) ; `[testflight]` puis `[interne]` une seule fois après le dernier lot, seulement si tous les `[unit]` sont verts. Le § 6 (« Faire mes repas ») n'est pas dans les 8 lots : laissé. `Brief-ameliorations.md` n'existe pas : les lignes de Demandes font office de cahier des charges.
+
+Règle CI : un push annule le run en cours (concurrency) : ne pousser qu'une fois le run précédent fini.
+
+| Lot | Sujet | État |
+|---|---|---|
+| 1 | Harmonisation des mini-apps (§ 2) | en cours |
+| 2 | Planning et widget Planning (§ 3) | à faire |
+| 3 | Habitudes puis Productivité dans Mon Quotidien (§ 10, § 12) | à faire |
+| 4 | Store : fonds d'écran originaux (§ 4) | à faire |
+| 5 | Nutrition : sources de données (§ 5), rapport de licences d'abord | à faire |
+| 6 | Fitness : calcul des calories (§ 7) | à faire |
+| 7 | Permissions iOS et réactivité (§ 8, § 9) | à faire |
+| 8 | Scanner alimentaire intelligent (§ 5), étape A ; étape B préparée et désactivée | à faire |
+
+À mettre à jour après chaque lot : cette table, le reste à faire, les captures à vérifier sur l'iPhone.
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.
