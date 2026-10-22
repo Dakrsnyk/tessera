@@ -76,7 +76,7 @@ MODULES = [
     {"file": "Accueil-Mon-Quotidien", "title": "Accueil : Mon Quotidien", "zone": "interface",
      "role": "L'onglet Accueil : « Mon Quotidien » rassemble ce qui compte aujourd'hui, construit seulement à partir de ce que la personne a saisi, puis « Mes informations ».",
      "features": [
-         "Cartes de Mon Quotidien : dégradé léger de la couleur de la catégorie, sans image de fond (`DayCard`) ; à partir de 11 h une séance prévue passe avant les repas avec la pastille « Maintenant » ; habitudes en anneaux avec la série de jours ; courbe des dépenses des 7 derniers jours dans Budget (maquette D, 2026-10-22).",
+         "Cartes de Mon Quotidien : dégradé léger de la couleur de la catégorie, sans image de fond (`DayCard`) ; à partir de 11 h une séance prévue passe avant les repas avec la pastille « Maintenant » ; habitudes en anneaux avec la série de jours ; courbe des dépenses des 7 derniers jours dans Budget (maquette D, 2026-10-22). Le même dégradé léger (`CategoryTint`) sur toutes les cartes, Nutrition comprise, sans halo (le pager le rognerait).",
          "Cartes du jour (nutrition, séance, habitudes, À ne pas oublier, planning, budget, Top 3…), classées selon le moment de la journée.",
          "Cartes à plusieurs vues (balayage), disposition à la main par le petit « + » de l'en-tête (ordre, demi ou large, masquer) ; « Mes données » n'est plus en haut (« Mes informations » est en bas).",
          "La carte Planning ouvre la mini-app Planning (création d'événement en touchant une heure libre).",

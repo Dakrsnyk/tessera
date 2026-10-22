@@ -4,7 +4,29 @@ tags: [ardane, memoire]
 
 # Demandes
 
-Écris ici (Obsidian, VS Code ou Bloc-notes) ce que tu veux que Claude fasse ou garde en tête, puis pousse avec GitHub Desktop. Une ligne par demande ; Claude coche ce qui est fait et ajoute la date.
+Exécution autonome : réaliser TOUS les lots ci-dessous, dans cet ordre, sans attendre mon accord entre deux lots :
+1. Harmonisation des mini-apps (§2)
+2. Planning et widget Planning (§3)
+3. Habitudes, puis Productivité dans Mon Quotidien (§10, §12)
+4. Store : fonds d'écran (§4)
+5. Nutrition : sources de données (§5) : rapport de licences d'abord, puis intégrer seulement les sources dont la licence commerciale est claire ; les autres sont laissées de côté et signalées
+6. Fitness : calcul des calories (§7)
+7. Permissions iOS et réactivité (§8, §9)
+8. Nutrition : scanner alimentaire intelligent (§5), en deux étapes décrites plus bas
+
+Pour chaque lot : découper en tâches pour les agents, relire avec code-reviewer, corriger les bloquants, lancer python3 scripts/check_swift.py, puis commit local avec [check], puis [unit] pour les tests. Autorisé sans me redemander : commits et push de [check] et de [unit]. Après chaque lot : cocher la ligne dans « À faire » avec la date, mettre à jour docs/memoire/Chantiers.md (état et reste à faire, pour pouvoir reprendre après une interruption), et noter les captures à vérifier.
+
+Règles :
+- Fonctionnalités existantes préservées ; accueil, barre du bas, date et personnalisation de Mon Quotidien inchangés.
+- Références visuelles dans docs/references/ (voir son README) ; les fonds sont des créations originales, jamais une copie de Pinterest.
+- Si un lot est bloqué (licence, service externe, test qui échoue sans cause trouvée) : le noter, passer au lot suivant, et ouvrir le rapport final par ce blocage.
+- Ne jamais effacer de données de l'utilisateur ni casser les anciennes données sauvegardées.
+- [testflight] puis [interne] : une seule fois, après le dernier lot, seulement si tous les [unit] sont verts.
+- Rapport final : changements par lot, tests, blocages, services externes nécessaires, ce qui reste à vérifier sur l'iPhone.
+
+Scanner (lot 8) :
+- Étape A, à réaliser entièrement : détection automatique code-barres ou plat sans choix du mode ; code-barres lu sur l'appareil, produit cherché dans Open Food Facts (licence et attribution vérifiées) et dans les bases locales de l'app ; photo d'un plat analysée sur l'appareil (Vision d'Apple), avec ingrédients et quantités proposés comme ESTIMATIONS ; récapitulatif modifiable (ajouter, supprimer, remplacer un aliment, ajuster les portions) avant validation ; valeurs vérifiées distinguées des estimations, incertitudes signalées, jamais de donnée inventée présentée comme exacte ; enregistrement dans le journal sans doublon, calories, macros et objectifs mis à jour ; solution de secours quand le produit est introuvable ou l'analyse échoue ; permission caméra expliquée avant la demande système.
+- Étape B, préparée mais DÉSACTIVÉE : analyse de photo par une IA en ligne. Prévoir l'interface (un fournisseur d'analyse remplaçable) et ne rien envoyer hors de l'appareil. Elle ne s'active qu'après ma décision sur le service, le coût, le serveur et la politique de confidentialité. Aucune clé ni secret dans l'app ou sur GitHub.
 
 Retour : [[Memoire]]
 
@@ -14,7 +36,7 @@ Retour : [[Memoire]]
 - [ ] Planning : présentation façon Calendrier Apple, vues semaine / mois / année (pincement si fiable, sinon contrôle explicite) ; widget Planning qui remplit toute sa surface (§3).
 - [ ] Store : grande collection de fonds d'écran originaux (gratuits, les meilleurs en Premium), sous les écrans d'accueil personnalisés ; nouveaux packs et styles ; droits vérifiés (§4).
 - [ ] Nutrition : sources USDA, FCÉN, BEDCA, UniTools World Recipes, ForkRecipe (licences d'abord, provenance gardée, pas de doublons, recettes calculées sans inventer) (§5).
-- [ ] Nutrition : scanner intelligent automatique (code-barres ou plat photographié), valeurs vérifiées distinguées des estimations, récapitulatif modifiable avant validation, solution de secours (§5).
+- [ ] Nutrition : scanner alimentaire intelligent, lot 8 (§5) : étape A complète (code-barres et plat estimé sur l'appareil, récapitulatif modifiable, sans doublon) ; étape B (IA en ligne) préparée mais désactivée.
 - [ ] Premium Nutrition : « Faire mes repas » sous le compteur calorique (questionnaire de goûts, budget, magasin, liste de courses d'un seul magasin, provenance et date des prix) (§6).
 - [ ] Fitness : revoir le calcul des calories (MET, durée, poids, intensité, repos), éviter les doubles comptes avec Santé, tests (§7).
 - [ ] Permissions iOS : seulement le nécessaire, explication avant la demande système, refus respectés (§8).
