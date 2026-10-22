@@ -177,10 +177,9 @@ private struct DayCard<Content: View>: View {
     let colorHex: String
     var isDark = false
     var route: HomeRoute?
-    /// A small tag next to the title (« Maintenant »), and the glow of the card to do right now.
+    /// A small tag next to the title (« Maintenant »), and a slightly firmer outline for the card to do right now.
     var badge: String? = nil
     var glows = false
-    @Environment(\.colorScheme) private var scheme
     @ViewBuilder let content: () -> Content
 
     var body: some View {
@@ -218,15 +217,7 @@ private struct DayCard<Content: View>: View {
         .padding(14)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(isDark ? AnyShapeStyle(Color(hex: "141416")) : AnyShapeStyle(.cardFill), in: shape)
-        // A light gradient of the category's color, from the top left (no image behind the card).
-        .overlay {
-            shape
-                .fill(LinearGradient(colors: [tint.opacity(scheme == .dark ? 0.30 : 0.18), tint.opacity(scheme == .dark ? 0.11 : 0.07), .clear],
-                                     startPoint: .topLeading, endPoint: .bottomTrailing))
-                .allowsHitTesting(false)
-        }
-        .overlay { shape.strokeBorder(tint.opacity(glows ? 0.55 : 0.22), lineWidth: glows ? 1.5 : 1).allowsHitTesting(false) }
-        .shadow(color: glows ? tint.opacity(0.28) : .clear, radius: glows ? 12 : 0, y: 4)
+        .categoryTint(colorHex, emphasized: glows)
 
         if let route {
             NavigationLink(value: route) { themed(card) }
@@ -244,6 +235,34 @@ private struct DayCard<Content: View>: View {
         } else {
             view
         }
+    }
+}
+
+/// The light gradient of a category's color over a card, from the top left, and its thin outline: the
+/// same on every card of Mon Quotidien (no image behind). `emphasized`: a slightly firmer outline.
+private struct CategoryTint: ViewModifier {
+    let colorHex: String
+    var emphasized = false
+    @Environment(\.colorScheme) private var scheme
+
+    func body(content: Content) -> some View {
+        let tint = Color(hex: colorHex)
+        let shape = RoundedRectangle(cornerRadius: 22, style: .continuous)
+        let dark = scheme == .dark
+        content
+            .overlay {
+                shape
+                    .fill(LinearGradient(colors: [tint.opacity(dark ? 0.24 : 0.15), tint.opacity(dark ? 0.08 : 0.05), .clear],
+                                         startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .allowsHitTesting(false)
+            }
+            .overlay { shape.strokeBorder(tint.opacity(emphasized ? 0.4 : 0.2), lineWidth: 1).allowsHitTesting(false) }
+    }
+}
+
+private extension View {
+    func categoryTint(_ colorHex: String, emphasized: Bool = false) -> some View {
+        modifier(CategoryTint(colorHex: colorHex, emphasized: emphasized))
     }
 }
 
@@ -322,6 +341,7 @@ private struct NutritionDayTile: View {
         .padding(14)
         .frame(maxHeight: .infinity, alignment: .top)
         .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .categoryTint("F08A24")
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("daily-nutrition")
     }
@@ -428,6 +448,7 @@ private struct NutritionDayTile: View {
         }
         .padding(14)
         .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .categoryTint("F08A24")
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("daily-nutrition")
     }
