@@ -11,6 +11,7 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] (exemple) Nutrition : …
+- [ ] Fitness : vrai « Skip » de la série en cours (ignorée, pas comptée), sans double incrément ; retour haptique là où iOS le permet ; ajout rapide Nutrition sans doublon (détail : docs/PASSATION.md).
 
 ## Idées pour plus tard
 
