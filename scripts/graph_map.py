@@ -90,7 +90,7 @@ MODULES = [
     {"file": "Mini-apps", "title": "Mini-apps", "zone": "interface",
      "role": "Chaque mini-app est une partie entière d'Ardane : un tableau de bord, puis ses pages. Elles sont atteintes depuis l'Accueil.",
      "features": [
-         "Composants communs (`MiniApp.swift`) : `MiniStyle` (rayons et couleurs d'alerte, de succès et de pas), `.miniCard()`, `.miniTile()`, `MiniFootnote`, `MiniSectionTitle`, `MiniRowsCard` ; ordre commun d'un écran : sélecteur, bloc principal, actions, sections, liste secondaire, mention, « Mes infos » (lot 1, 2026-10-22). Une ligne de liste n'apparaît que si la section ou la tuile de la même page est cachée.
+         "Composants communs (`MiniApp.swift`) : `MiniStyle` (rayons et couleurs d'alerte, de succès et de pas), `.miniCard()`, `.miniTile()`, `MiniFootnote`, `MiniSectionTitle`, `MiniRowsCard` ; ordre commun d'un écran : sélecteur, bloc principal, actions, sections, liste secondaire, mention, « Mes infos » (lot 1, 2026-10-22). Une ligne de liste n'apparaît que si la section ou la tuile de la même page est cachée.",
          "`MiniApp` : nutrition, fitness, planning, finances, business, travel, car, weather, photos.",
          "`MiniAppPage` : les pages de chaque mini-app (repas, séance, bibliothèque, historique…).",
          "« Mes infos » en tête de chaque mini-app (`MiniAppInfoSection`, `MiniAppSettings.swift`) : les infos de la personne, les mêmes que « Mes informations » ; plus de « Mes paramètres » ni de doublons.",
@@ -190,6 +190,7 @@ MODULES = [
     {"file": "Store", "title": "Store", "zone": "interface",
      "role": "L'onglet Store (Explore) : la sélection de la semaine, des écrans d'accueil complets, des widgets seuls, des packs et des combinés.",
      "features": [
+         "Étape « Fonds d'écran » sous les écrans d'accueil : 43 fonds originaux dessinés en code (`WallpaperCollection.swift`, 6 ambiances : mer, noir et blanc, dégradés, nuit et orage, forêt et brume, cosmos), environ un tiers gratuits, le reste Premium ; aperçu plein écran et enregistrement dans Photos (ajout seul), paywall pour les fonds Premium ; aucune image ni ressource tierce (lot 4, 2026-10-22).",
          "23 écrans d'accueil prêts (fond, widgets, icônes et écran verrouillé assortis), 18 fonds d'écran dessinés en code.",
          "34 packs, saisons du Store (Halloween en octobre, Noël en décembre), widgets combinés, modèles.",
          "Un modèle ouvre le Studio sur une copie (`router.openEditor`).",

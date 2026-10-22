@@ -17,13 +17,14 @@ struct ExploreView: View {
 
     /// The aisles of the Store, from the week's picks to the styles.
     enum StoreAisle: String, CaseIterable, Identifiable {
-        case featured, screens, widgets, combos, packs, themes, styles
+        case featured, screens, wallpapers, widgets, combos, packs, themes, styles
         var id: String { rawValue }
 
         var title: String {
             switch self {
             case .featured: tr("À la une")
             case .screens: tr("Écrans d'accueil")
+            case .wallpapers: tr("Fonds d'écran")
             case .widgets: tr("Widgets")
             case .combos: tr("Combinés")
             case .packs: tr("Packs")
@@ -36,6 +37,7 @@ struct ExploreView: View {
             switch self {
             case .featured: "star.fill"
             case .screens: "iphone"
+            case .wallpapers: "photo.fill"
             case .widgets: "square.grid.2x2.fill"
             case .combos: "square.split.2x2.fill"
             case .packs: "shippingbox.fill"
@@ -49,6 +51,7 @@ struct ExploreView: View {
             switch self {
             case .featured: "F2A33A"
             case .screens: "3366FF"
+            case .wallpapers: "0F9BB0"
             case .widgets: "2F8F7A"
             case .combos: "6D4AE8"
             case .packs: "E5484D"
@@ -62,6 +65,7 @@ struct ExploreView: View {
             switch self {
             case .featured: tr("La sélection de la semaine : un écran, un style et des widgets à découvrir.")
             case .screens: tr("Des écrans d'accueil complets : widgets et fond d'écran assortis.")
+            case .wallpapers: tr("Des fonds d'écran dessinés pour Ardane : mer, noir et blanc, dégradés, nuit, forêt et cosmos.")
             case .widgets: tr("Un widget à la fois, rangé par thème : temps, santé, argent…")
             case .combos: tr("Plusieurs widgets réunis en un seul, prêts à poser.")
             case .packs: tr("Des ensembles de widgets pour un usage : études, sport, voyage…")
@@ -220,7 +224,7 @@ struct ExploreView: View {
         case .screens: return { router.storePath.append(.setups) }
         case .combos: return { router.storePath.append(.combos) }
         case .packs: return { router.storePath.append(.packs) }
-        case .featured, .widgets, .themes, .styles: return nil
+        case .featured, .wallpapers, .widgets, .themes, .styles: return nil
         }
     }
 
@@ -228,6 +232,7 @@ struct ExploreView: View {
         switch item {
         case .featured: featuredRows
         case .screens: setupsRow
+        case .wallpapers: WallpaperStoreSection()
         case .widgets: widgetRows
         case .combos: comboRows
         case .packs: packRows
