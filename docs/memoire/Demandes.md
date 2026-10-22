@@ -32,6 +32,13 @@ Retour : [[Memoire]]
 
 ## À faire
 
+- [ ] **Toutes les mini-apps : même structure, avec le sélecteur de semaine** (demandé le 2026-10-22). Pour les agents : appliquer à CHAQUE mini-app (Nutrition, Fitness, Planning, Finances, Business, Voyage, Auto, Météo ; Photos et citations n'a aucun contenu daté : sans sélecteur, ses blocs suivent le même ordre) l'ordre suivant, de haut en bas :
+  1. **Sélecteur de semaine** (composant partagé `WeekSelector`) : les 7 jours côte à côte, initiale du jour et date dans un cercle ; jour sélectionné sur un fond arrondi de la couleur d'accent de la mini-app ; jours passés, jour sélectionné, aujourd'hui et jours à venir visuellement différents ; toucher un jour le sélectionne ; navigation entre les semaines (flèches et balayage) ; dates calculées d'après le vrai calendrier. UN SEUL sélecteur de dates par écran.
+  2. **Informations essentielles** tout de suite après : le contenu prioritaire du jour sélectionné (Fitness : la séance ; Nutrition : calories et macros ; Finances : solde et dépenses…).
+  3. **Contenu complémentaire** : statistiques, historiques, objectifs, fonctions secondaires, par ordre d'importance.
+  4. **Autres catégories et réglages en dernier** : options avancées, « Mes infos », paramètres.
+  **Règle impérative : aucun doublon.** Chaque information, carte, indicateur, bouton ou section n'apparaît qu'une fois par écran (sauf si la répétition est indispensable au fonctionnement) : pas de double sélecteur de dates, pas de résumé répété, pas la même information dans plusieurs cartes. Réutiliser les composants existants (`MiniStyle`, `.miniCard()`, `MiniSectionTitle`, `MiniRowsCard`, `MiniStat`, `MiniFootnote`, `MiniActionButton`) plutôt que d'en recréer. Conserver les fonctionnalités, le style d'Ardane et les `accessibilityIdentifier` des UITests ; aucun texte visible nouveau sans traduction (`l10n`). L'image de référence du sélecteur n'était pas jointe à la demande : le dessin suit la description ci-dessus ; l'ajuster si l'utilisateur renvoie l'image.
+
 - [ ] Premium Nutrition : « Faire mes repas » sous le compteur calorique (questionnaire de goûts, budget, magasin, liste de courses d'un seul magasin, provenance et date des prix) (§6).
 
 ## Idées pour plus tard
