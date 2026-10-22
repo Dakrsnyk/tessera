@@ -90,7 +90,7 @@ footer{color:var(--muted);font-size:15px;border-top:1px solid var(--line);paddin
       <h2>3. Les accès que tu autorises</h2>
       <p>Chaque accès est demandé par iOS au moment où une fonction en a besoin. Tu peux le refuser ou le retirer à tout moment dans Réglages &gt; Ardane ; l'app continue de fonctionner sans la fonction concernée.</p>
       <ul class="list">
-        <li><b>Caméra</b><span>Uniquement pour scanner le code-barres d'un aliment. L'image n'est ni enregistrée ni envoyée : seul le numéro du code-barres est lu.</span></li>
+        <li><b>Caméra</b><span>Uniquement pour scanner le code-barres d'un aliment ou photographier un plat. Ardane t'explique pourquoi avant que iOS te demande l'accès. L'image est analysée sur ton iPhone (Vision, d'Apple) : elle n'est ni enregistrée ni envoyée, et l'estimation des aliments d'un plat se fait aussi sur ton iPhone. Seul le numéro du code-barres lu est envoyé à Open Food Facts (section 4) pour trouver le produit.</span></li>
         <li><b>Position</b><span>Seulement quand tu touches « Utiliser ma position », pour trouver ta ville et la météo. Seules les coordonnées de la ville choisie sont gardées sur ton iPhone.</span></li>
         <li><b>Calendrier</b><span>Lecture seule de tes prochains événements, pour le widget « À venir » et ton planning. Ils ne quittent pas ton iPhone.</span></li>
         <li><b>Mouvements (podomètre)</b><span>Lecture de tes pas du jour pour « Mon Quotidien ». Ils ne quittent pas ton iPhone.</span></li>
@@ -105,7 +105,8 @@ footer{color:var(--muted);font-size:15px;border-top:1px solid var(--line);paddin
       <ul class="list">
         <li><b>Apple</b><span>Retrouve une ville à partir du nom que tu tapes ou de ta position (géocodage), et traite les achats et abonnements Premium. Ardane ne voit jamais tes informations de paiement. Politique : apple.com/legal/privacy</span></li>
         <li><b>Open-Meteo (météo)</b><span>Reçoit les coordonnées de la ville choisie. Politique : open-meteo.com</span></li>
-        <li><b>Open Food Facts (produits emballés)</b><span>Reçoit le code-barres scanné ou le texte que tu cherches. Association établie en France. Politique : world.openfoodfacts.org</span></li>
+        <li><b>Open Food Facts (produits emballés)</b><span>Reçoit le code-barres scanné ou le texte que tu cherches. Association établie en France. Les données de ces produits sont saisies par la communauté et disponibles sous la licence ODbL. Politique : world.openfoodfacts.org</span></li>
+        <li><b>Sources des valeurs nutritives intégrées à l'app</b><span>Les aliments génériques viennent du Fichier canadien sur les éléments nutritifs (Santé Canada, licence du gouvernement ouvert – Canada) et, pour une partie des valeurs de la table intégrée, de USDA FoodData Central (domaine public, CC0). Ils sont lus sur ton iPhone : aucune requête n'est envoyée. Ardane n'est pas affilié à Santé Canada. Détails dans « Profil › À propos ».</span></li>
         <li><b>CoinGecko (cours des cryptomonnaies)</b><span>Reçoit le nom de la cryptomonnaie et de la devise demandées. Politique : coingecko.com</span></li>
         <li><b>Frankfurter (taux de change)</b><span>Reçoit les devises demandées. Site : frankfurter.dev</span></li>
         <li><b>SEC EDGAR (données publiques d'entreprises américaines)</b><span>Reçoit l'identifiant de l'entreprise consultée. Service du gouvernement des États-Unis : sec.gov</span></li>
@@ -206,7 +207,7 @@ footer{color:var(--muted);font-size:15px;border-top:1px solid var(--line);paddin
       <h2>3. Access you allow</h2>
       <p>iOS asks for each permission when a feature needs it. You can refuse it or withdraw it at any time in Settings &gt; Ardane; the app keeps working without that feature.</p>
       <ul class="list">
-        <li><b>Camera</b><span>Only to scan a food barcode. The image is neither saved nor sent: only the barcode number is read.</span></li>
+        <li><b>Camera</b><span>Only to scan a food barcode or photograph a meal. Ardane explains why before iOS asks for access. The image is analyzed on your iPhone (Apple's Vision): it is neither saved nor sent, and the estimate of a meal's foods also happens on your iPhone. Only the number of the scanned barcode is sent to Open Food Facts (section 4) to find the product.</span></li>
         <li><b>Location</b><span>Only when you tap “Use my location”, to find your city and its weather. Only the coordinates of the chosen city are kept on your iPhone.</span></li>
         <li><b>Calendar</b><span>Read-only access to your upcoming events, for the “Up next” widget and your schedule. They never leave your iPhone.</span></li>
         <li><b>Motion (pedometer)</b><span>Reads today's steps for “My Day”. They never leave your iPhone.</span></li>
@@ -221,7 +222,8 @@ footer{color:var(--muted);font-size:15px;border-top:1px solid var(--line);paddin
       <ul class="list">
         <li><b>Apple</b><span>Finds a city from the name you type or from your location (geocoding), and processes Premium purchases and subscriptions. Ardane never sees your payment details. Policy: apple.com/legal/privacy</span></li>
         <li><b>Open-Meteo (weather)</b><span>Receives the coordinates of the chosen city. Policy: open-meteo.com</span></li>
-        <li><b>Open Food Facts (packaged foods)</b><span>Receives the scanned barcode or the text you search for. Non-profit based in France. Policy: world.openfoodfacts.org</span></li>
+        <li><b>Open Food Facts (packaged foods)</b><span>Receives the scanned barcode or the text you search for. Non-profit based in France. The data of these products is entered by the community and available under the ODbL license. Policy: world.openfoodfacts.org</span></li>
+        <li><b>Nutrition values built into the app</b><span>Generic foods come from the Canadian Nutrient File (Health Canada, Open Government Licence – Canada) and, for part of the values of the built-in table, from USDA FoodData Central (public domain, CC0). They are read on your iPhone: no request is sent. Ardane is not affiliated with Health Canada. Details in “Profile › About”.</span></li>
         <li><b>CoinGecko (crypto prices)</b><span>Receives the name of the crypto and currency requested. Policy: coingecko.com</span></li>
         <li><b>Frankfurter (exchange rates)</b><span>Receives the currencies requested. Site: frankfurter.dev</span></li>
         <li><b>SEC EDGAR (public data on US companies)</b><span>Receives the identifier of the company looked up. A US government service: sec.gov</span></li>
