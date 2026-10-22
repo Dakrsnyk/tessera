@@ -88,27 +88,29 @@ Demande : une publicité de niveau Apple / Nike en motion design sur la vraie in
 - À vérifier sur l'iPhone : l'accueil en clair et en sombre (dégradés, pastille, anneaux, courbe) ; « Passer » sur l'écran verrouillé, la Dynamic Island et un widget ; double appui rapide sur « Série faite » (une seule série) ; la vibration dans l'app ; ajout rapide Nutrition touché deux fois.
 - Limites iOS : un bouton de widget ou d'activité en direct ne fait vibrer l'iPhone que si l'app est au premier plan.
 
-## Exécution autonome des 8 lots — démarrée le 2026-10-22
+## Exécution autonome des 8 lots — 2026-10-22 (terminée, à vérifier sur l'iPhone)
 
-Consigne de l'utilisateur (haut de [[Demandes]]) : réaliser les lots dans l'ordre, sans accord entre deux lots ; par lot : agents, relecture `code-reviewer`, `check_swift.py`, commit `[check]` puis `[unit]` (commits et pushes autorisés) ; `[testflight]` puis `[interne]` une seule fois après le dernier lot, seulement si tous les `[unit]` sont verts. Le § 6 (« Faire mes repas ») n'est pas dans les 8 lots : laissé. `Brief-ameliorations.md` n'existe pas : les lignes de Demandes font office de cahier des charges.
+Consigne de l'utilisateur (haut de [[Demandes]]) : réaliser les lots dans l'ordre, sans accord entre deux lots ; par lot : agents, relecture `code-reviewer`, `check_swift.py`, `[check]` puis `[unit]` ; `[testflight]` puis `[interne]` une seule fois après le dernier lot, seulement si tous les `[unit]` sont verts. Le § 6 (« Faire mes repas ») n'est pas dans les 8 lots : laissé. `Brief-ameliorations.md` n'existe pas : les lignes de Demandes ont fait office de cahier des charges.
 
-Règle CI : un push annule le run en cours (concurrency) : ne pousser qu'une fois le run précédent fini.
+- Blocage rencontré : le dépôt était privé (le run 39822617200 a échoué en 14 s : facturation macOS). L'utilisateur l'a repassé en public le 2026-10-22 ; les lots 2 à 8 ont été écrits et relus sans compilation, puis compilés d'un coup.
+- Run 228 (`[check]`, lots 1 à 8) : compilation réussie du premier coup, 0 erreur. Run 229 (`[unit]`) : 400 tests réussis, 0 échec (dont 15 `CalorieModelTests`, 19 `ScanRecapTests`, 11 `FoodLabelMatcherTests`, 11 `PermissionTests`, 12 `QuickTaskTests`, 8 `HabitHeatmapTests`, 4 `WallpaperCatalogTests`, 4 `ReactivityTests`, 3 `PlanningLayoutTests`).
 
-| Lot | Sujet | État (2026-10-22, limite d'usage atteinte) |
+| Lot | Sujet | Fait |
 |---|---|---|
-| 1 | Harmonisation des mini-apps (§ 2) | code relu, commité et poussé (`b952d59`), jamais compilé : CI bloquée |
-| 2 | Planning façon Calendrier Apple et widget Horaire plein (§ 3) | relu, corrigé, commité en local (`7139e43`) |
-| 3 | Habitudes (grille) et Productivité dans Mon Quotidien (§ 10, § 12) | relus, corrigés, commités en local |
-| 4 | Store : 43 fonds d'écran originaux (§ 4) | relu, commité en local (`e07ffe0`) ; reste : traduire 11 textes |
-| 5 | Nutrition : licences et attributions (§ 5) | relu, corrigé, commité en local (`5e0179c`) ; `NutritionSpace.swift` (pied de page OFF, recherche 1,2 s) part avec le lot 8 ; reste : traduire 6 textes |
-| 6 | Fitness : calories (§ 7) (`CalorieModel`) | relu et corrigé ; commité en local avec le lot 7 ; reste : traduire 2 textes |
-| 7a | Permissions expliquées avant la demande (`PermissionExplainer`) | relu, 2 corrections faites ; commité en local ; reste : traduire 11 textes |
-| 7b | Réactivité (§ 9) | commencé : `App/Components/Pressable.swift` (`.pressable`, `TapGuard`), `MiniActionButton` branché, `Tests/ReactivityTests.swift`. RESTE : remplacer les ~220 `.buttonStyle(.plain)` de `App/` par `.buttonStyle(.pressable)` (script), protéger les boutons d'enregistrement des feuilles contre le double appui |
-| 8 | Scanner alimentaire étape A, étape B désactivée | écrit (6 fichiers + 2 tests), NON RELU (relecture coupée) ; à relire d'abord : `DataScannerViewController.capturePhoto()`, `FoodScanView.swift`, doublons de mots du `Set` de `FoodLabelMatcher` ; reste : traduire 27 textes |
+| 1 | Harmonisation des mini-apps (§ 2) | `MiniStyle`, `.miniCard()`, `.miniTile()`, `MiniFootnote`, doublons retirés, identifiants des UITests conservés |
+| 2 | Planning façon Calendrier Apple, widget plein (§ 3) | en-tête, bande des jours, blocs translucides, mois (`PlanningMonthGrid`), année, widget `fillsHeight` |
+| 3 | Habitudes et Productivité (§ 10, § 12) | `HabitHeatmap` (widget, écran, page Planning) ; réglage « Productivité » (Top 3 avec ajout rapide) |
+| 4 | Store : fonds d'écran (§ 4) | 43 fonds originaux en code (14 gratuits, 29 Premium), enregistrement dans Photos |
+| 5 | Nutrition : licences (§ 5) | `docs/licences-nutrition.md`, écran « À propos », attributions ; USDA et FCÉN déjà intégrées, OFF en ligne, BEDCA et ForkRecipe écartés, UniTools laissé de côté |
+| 6 | Fitness : calories (§ 7) | `CalorieModel` (calories actives, travail et repos), poids du profil requis |
+| 7 | Permissions et réactivité (§ 8, § 9) | `PermissionExplainer` ; `.pressable` sur les 221 boutons de `App/`, `TapGuard` dans `MiniActionButton` |
+| 8 | Scanner alimentaire (§ 5) | étape A complète ; étape B (IA en ligne) préparée et désactivée |
 
-**Reste à faire pour finir (dans l'ordre)** : 1) débloquer la CI (repasser le dépôt en public, ou régler la facturation GitHub) ; 2) relire le lot 8 avec `code-reviewer` ; 3) lot 7b (remplacement des `.buttonStyle(.plain)`) ; 4) traductions : `python3 scripts/l10n_catalog.py extract`, écrire `l10n/parts/32.<langue>.json` pour les ~57 nouveaux textes (voir les rapports des lots), `merge`, `build`, `check`, `sync` ; `l10n/infoplist.json` et `project.pbxproj` sont déjà à jour (caméra, calendrier, mouvement) ; 5) miroir `docs/legal/privacy.html` de `PRIVACY.md` ; 6) `scripts/graph_map.py` (scanner, permissions, calories, réactivité) ; 7) cocher les lignes de `Demandes.md` ; 8) push, `[check]` puis `[unit]`, corriger ce que la CI trouve ; 9) un seul `[testflight]` puis `[interne]` si tous les `[unit]` sont verts. Le § 6 (« Faire mes repas ») n'est pas dans les 8 lots.
+**Limites connues** : la protection du double appui n'est branchée que sur `MiniActionButton` (les boutons « Enregistrer » des feuilles ne sont pas tous gardés) ; la recherche automatique Open Food Facts part 1,2 s après la frappe (4 lettres) ; le scanner : « Scanner à nouveau » efface le récapitulatif sans confirmation, le préfixe de 3 lettres du `FoodLabelMatcher` est large (« pen » → pâtes), la maquette DEBUG `ScanFrameScreenshot` imite l'ancien scanner ; `capturePhoto()` (VisionKit) et le rendu réel des fonds (performance du Store) ne se vérifient que sur l'iPhone.
 
-À mettre à jour après chaque lot : cette table, le reste à faire, les captures à vérifier sur l'iPhone.
+**À faire par l'utilisateur** : republier la politique de confidentialité (`docs/legal/privacy.html`, caméra et sources nutritives mises à jour) sur l'artifact de `PremiumConfiguration.privacyURL` ; décider de l'étape B du scanner (service, coût, serveur, politique) ; repasser le dépôt en privé après la livraison (la CI macOS n'est gratuite que s'il est public).
+
+**À vérifier sur l'iPhone** : accueil (dégradés, pastille « Maintenant », anneaux, courbe) ; Planning (jour, semaine, mois, année, widget plein) ; habitudes (widget S/M/L, Teinté, écran) ; carte Productivité (« + » de Mon Quotidien) ; Store › Fonds d'écran (défilement, aperçu, enregistrement) ; « À propos » (sources) ; calories de Fitness ; explications avant chaque permission (notifications, calendrier, position, pas, caméra) ; scanner (code-barres, produit inconnu, mode avion, photo d'un plat, récapitulatif, un seul ajout au double appui) ; retour visuel au toucher.
 
 ## À ne pas oublier
 
