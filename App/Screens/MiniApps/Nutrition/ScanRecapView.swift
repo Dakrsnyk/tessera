@@ -170,7 +170,9 @@ struct ScanRecapView: View {
 
     private var confirmBar: some View {
         Button {
-            confirm()
+            // Ends the editing of a quantity first: a value typed in the field only counts once the field is done.
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            Task { @MainActor in confirm() }
         } label: {
             Text(tr("Ajouter au journal"))
                 .font(.headline)
@@ -221,7 +223,7 @@ private struct ScanLineRow: View {
                         .font(.body.weight(.semibold))
                         .fixedSize(horizontal: false, vertical: true)
                     HStack(spacing: 8) {
-                        ScanBadge(isEstimate: line.isEstimate)
+                        ScanBadge(isEstimate: line.isEstimate, source: line.food.source)
                         if let word = line.confidenceWord {
                             Text(word)
                                 .font(.caption)
@@ -269,14 +271,41 @@ private struct ScanLineRow: View {
     }
 }
 
-/// « Vérifié » (the values of a table, of a product or of the person) or « Estimation » (a guess from a
-/// photo). A word and a symbol, never only a colour.
+/// What a line is worth: « Estimation » (a guess from a photo), « Vérifié » (the values of an official table),
+/// the name of the source for products typed in by the community (Open Food Facts), or « Aliment perso » (typed
+/// by the person). A word and a symbol, never only a colour; community and personal data are never « Vérifié ».
 private struct ScanBadge: View {
     let isEstimate: Bool
+    let source: FoodSource
+
+    private var label: String {
+        if isEstimate { return tr("Estimation") }
+        switch source {
+        case .builtin, .nutrientFile: return tr("Vérifié")
+        case .openFoodFacts: return "Open Food Facts"
+        case .custom: return tr("Aliment perso")
+        }
+    }
+
+    private var symbol: String {
+        if isEstimate { return "questionmark.circle" }
+        switch source {
+        case .builtin, .nutrientFile: return "checkmark.seal.fill"
+        case .openFoodFacts: return "person.2.fill"
+        case .custom: return "pencil"
+        }
+    }
+
+    private var tint: Color {
+        if isEstimate { return .orange }
+        switch source {
+        case .builtin, .nutrientFile: return .green
+        case .openFoodFacts, .custom: return .blue
+        }
+    }
 
     var body: some View {
-        let tint: Color = isEstimate ? .orange : .green
-        Label(isEstimate ? tr("Estimation") : tr("Vérifié"), systemImage: isEstimate ? "questionmark.circle" : "checkmark.seal.fill")
+        Label(label, systemImage: symbol)
             .font(.caption.weight(.semibold))
             .foregroundStyle(tint)
             .padding(.horizontal, 8)
