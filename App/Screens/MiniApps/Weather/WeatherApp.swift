@@ -6,18 +6,11 @@ import SwiftUI
 struct WeatherAppView: View {
     @Environment(AppModel.self) private var model
     @State private var choosingCity = false
+    /// The day the screen tells about: today is the weather now, another day of the forecast is its forecast.
+    @State private var day = Date()
 
     private var accentHex: String { MiniApp.weather.colorHex }
     private var unit: TemperatureUnit { model.settings.temperatureUnit }
-
-    /// The forecast on screen (fresh or the last one received), if any.
-    private var lastSnapshot: WeatherSnapshot? {
-        switch model.weather {
-        case let .ready(snapshot): snapshot
-        case let .unavailable(snapshot): snapshot
-        case .needsLocation: nil
-        }
-    }
 
     var body: some View {
         MiniAppScroll {
@@ -26,9 +19,6 @@ struct WeatherAppView: View {
                 content(snapshot)
             case let .unavailable(snapshot):
                 if let snapshot {
-                    Label(tr("Pas de connexion : dernière météo reçue \(updatedText(snapshot.fetchedAt))."), systemImage: "wifi.slash")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
                     content(snapshot)
                 } else {
                     EmptyStateView(symbol: "cloud.sun", title: tr("Météo indisponible"), message: tr("Le service météo ne répond pas pour l'instant. Réessaie dans un moment."), actionTitle: tr("Réessayer")) {
@@ -43,9 +33,7 @@ struct WeatherAppView: View {
                 .card()
             }
             trip
-            if let snapshot = lastSnapshot {
-                MiniFootnote(text: tr("Mis à jour \(updatedText(snapshot.fetchedAt))."))
-            }
+            updateNote
             MiniFootnote(text: tr("Données météo : Open-Meteo.com (CC BY 4.0)."))
             MiniAppInfoSection(app: .weather)
         }
@@ -74,10 +62,43 @@ struct WeatherAppView: View {
     @ViewBuilder
     private func content(_ weather: WeatherSnapshot) -> some View {
         let now = Date()
-        hero(weather, now: now)
+        let isToday = DateMath.isSameDay(day, now)
+        let forecast = weather.daily.first { DateMath.isSameDay($0.date, day) }
+        WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: { date in
+            WeekDayMark(isPlanned: weather.daily.contains { DateMath.isSameDay($0.date, date) })
+        })
+        if isToday {
+            hero(weather, now: now)
+        } else if let forecast {
+            dayHero(weather, forecast)
+        } else {
+            noForecast
+        }
         hours(weather, now: now)
         days(weather, now: now)
-        details(weather, now: now)
+        if isToday {
+            details(weather, now: now)
+        } else if let forecast {
+            forecastDetails(forecast)
+        }
+    }
+
+    /// The offline note when the forecast shown is the last one received, otherwise when it was updated:
+    /// one of the two, never both.
+    @ViewBuilder
+    private var updateNote: some View {
+        switch model.weather {
+        case let .ready(snapshot):
+            MiniFootnote(text: tr("Mis à jour \(updatedText(snapshot.fetchedAt))."))
+        case let .unavailable(snapshot):
+            if let snapshot {
+                Label(tr("Pas de connexion : dernière météo reçue \(updatedText(snapshot.fetchedAt))."), systemImage: "wifi.slash")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+        case .needsLocation:
+            EmptyView()
+        }
     }
 
     // MARK: Now
@@ -110,14 +131,58 @@ struct WeatherAppView: View {
         .accessibilityIdentifier("weather-hero")
     }
 
+    /// Another day of the forecast: its sky, its range of temperatures and the chance of rain.
+    private func dayHero(_ weather: WeatherSnapshot, _ forecast: DayForecast) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label(weather.locationName, systemImage: "location.fill")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color(hex: accentHex))
+            HStack(alignment: .center, spacing: 14) {
+                Text(Fmt.temperature(forecast.high, unit: unit))
+                    .font(.system(size: 64, weight: .semibold, design: .rounded))
+                    .monospacedDigit()
+                Text(Fmt.temperature(forecast.low, unit: unit))
+                    .font(.system(size: 30, weight: .medium, design: .rounded))
+                    .foregroundStyle(.secondary)
+                    .monospacedDigit()
+                WeatherGlyph(code: forecast.code)
+                    .font(.system(size: 44))
+            }
+            Text(WeatherCode.description(forecast.code)).font(.title3.weight(.semibold))
+            if let rain = forecast.precipitationProbability, rain >= 20 {
+                Label("\(rain) %", systemImage: "umbrella.fill")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(Color(hex: accentHex))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .card()
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("weather-hero")
+    }
+
+    /// A day the forecast does not cover: nothing is made up.
+    private var noForecast: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(Fmt.longDay(day)).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+            Text(tr("Météo indisponible")).font(.title3.weight(.semibold))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .card()
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("weather-hero")
+    }
+
     // MARK: Hours
 
+    /// The next 24 hours for today, the hours of the day picked for another day of the forecast.
     @ViewBuilder
     private func hours(_ weather: WeatherSnapshot, now: Date) -> some View {
-        let hours = weather.upcomingHours(from: now, count: 24)
+        let isToday = DateMath.isSameDay(day, now)
+        let hours = isToday ? weather.upcomingHours(from: now, count: 24) : weather.hourly.filter { DateMath.isSameDay($0.date, day) }
         if !hours.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Prochaines heures"))
+                MiniSectionTitle(title: isToday ? tr("Prochaines heures") : Fmt.longDay(day))
                 VStack(spacing: 12) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 16) {
@@ -182,7 +247,8 @@ struct WeatherAppView: View {
 
     @ViewBuilder
     private func days(_ weather: WeatherSnapshot, now: Date) -> some View {
-        let days = weather.daily.filter { DateMath.startOfDay($0.date) >= DateMath.startOfDay(now) }
+        // The day picked is told above (the hero), so the list is the other days.
+        let days = weather.daily.filter { DateMath.startOfDay($0.date) >= DateMath.startOfDay(now) && !DateMath.isSameDay($0.date, day) }
         if !days.isEmpty {
             let lowest = days.map(\.low).min() ?? 0
             let highest = days.map(\.high).max() ?? 1
@@ -227,6 +293,32 @@ struct WeatherAppView: View {
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("weather-details")
+        }
+    }
+
+    /// Another day of the forecast: only what the forecast holds (UV at its peak, sunrise and sunset).
+    @ViewBuilder
+    private func forecastDetails(_ forecast: DayForecast) -> some View {
+        let sunrise = forecast.sunrise
+        let sunset = forecast.sunset
+        if forecast.uvMax != nil || (sunrise != nil && sunset != nil) {
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("Détails"))
+                VStack(spacing: 10) {
+                    if let uv = forecast.uvMax {
+                        MiniStat(title: tr("Indice UV"), value: TF.int(uv), detail: TF.uvLevel(uv))
+                    }
+                    if let sunrise, let sunset {
+                        HStack(spacing: 10) {
+                            MiniStat(title: tr("Lever du soleil"), value: Fmt.time(sunrise, uses24Hour: true))
+                            MiniStat(title: tr("Coucher du soleil"), value: Fmt.time(sunset, uses24Hour: true),
+                                     detail: tr("\(Fmt.hours(sunset.timeIntervalSince(sunrise) / 3_600)) de jour"))
+                        }
+                    }
+                }
+                .accessibilityElement(children: .contain)
+                .accessibilityIdentifier("weather-details")
+            }
         }
     }
 

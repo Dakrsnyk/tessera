@@ -117,12 +117,14 @@ struct OpeningBalanceEditor: View {
     }
 }
 
-/// The Finances mini-app: the balance as it went (a chart), what is left this month, what came in and
-/// went out, the categories, the bills coming and the savings; then every operation, the evolution
-/// and the accounts.
+/// The Finances mini-app, top to bottom: the week selector; the essentials (the balance as it went, what is
+/// left this month, what came in and went out on the chosen day, the two actions); then the income of the
+/// month, the categories, the bills coming and the savings; then every operation, the evolution and the
+/// fixed expenses; a note and « Mes infos » last.
 struct FinancesAppView: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: FinanceSheet?
+    @State private var day = Date()
 
     private var currency: String { model.settings.currencyCode }
     private var accentHex: String { Finances.accentHex }
@@ -131,14 +133,19 @@ struct FinancesAppView: View {
         let now = Date()
         let state = model.budget
         MiniAppScroll {
+            // 1. The only date selector: spending is logged, so it stops at today.
+            WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { dayMark($0, state: state) })
+            // 2. The essentials.
             BalanceChartCard(state: state, currency: currency, isPremium: model.isPremium) { sheet = .opening }
             hero(state: state, now: now)
+            dayCard(state: state, now: now)
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex) { sheet = .expense(nil) }
                     .accessibilityIdentifier("finances-add-expense")
                 MiniActionButton(title: tr("Revenu"), symbol: "plus", colorHex: Finances.incomeHex, isProminent: false) { sheet = .income(nil) }
                     .accessibilityIdentifier("finances-add-income")
             }
+            // 3. The rest, by importance.
             month(state: state, now: now)
             categories(state: state, now: now)
             bills(state: state, now: now)
@@ -204,42 +211,96 @@ struct FinancesAppView: View {
         return tr("\(TF.money(spent, currency)) dépensés · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour pendant \(dayText)")
     }
 
-    // MARK: The month
+    // MARK: The day
 
+    /// What came in and went out on the chosen day (the fixed payments of that day included), with the
+    /// operations themselves; a tap opens one to change it.
     @ViewBuilder
-    private func month(state: BudgetState, now: Date) -> some View {
-        let interval = BudgetMath.monthInterval(now)
-        let earned = BudgetMath.earned(state, in: interval)
-        let expected = model.profile.monthlyIncome
-        let spent = BudgetMath.spentThisMonth(state, at: now)
-        if earned > 0 || expected != nil {
-            // Three links of the same width: what came in and went out open the evolution, the
-            // balance opens the statement (every movement, day by day).
+    private func dayCard(state: BudgetState, now: Date) -> some View {
+        let interval = DateInterval(start: DateMath.startOfDay(day), end: DateMath.nextMidnight(after: day))
+        let expenses = BudgetMath.expenses(state, in: interval, now: now).sorted { $0.date > $1.date }
+        let incomes = BudgetMath.incomes(state, in: interval, now: now).sorted { $0.date > $1.date }
+        let spent = expenses.reduce(0) { $0 + $1.amount }
+        let earned = incomes.reduce(0) { $0 + $1.amount }
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: DateMath.isSameDay(day, now) ? tr("Aujourd'hui") : Fmt.longDay(day).capitalizedFirst)
             HStack(spacing: 10) {
-                NavigationLink(value: HomeRoute.page(.financesTrends)) {
-                    if earned > 0 {
-                        MiniStat(title: tr("Revenus"), value: TF.money(earned, currency), detail: tr("ce mois-ci"), colorHex: Finances.incomeHex)
-                    } else if let expected {
-                        MiniStat(title: tr("Revenus"), value: TF.money(expected, currency), detail: tr("prévus (Mes informations)"))
+                MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency, decimals: 2))
+                MiniStat(title: tr("Revenus"), value: TF.money(earned, currency, decimals: 2), colorHex: earned > 0 ? Finances.incomeHex : nil)
+            }
+            if !expenses.isEmpty || !incomes.isEmpty {
+                MiniRowsCard {
+                    ForEach(Array(expenses.enumerated()), id: \.element.id) { index, expense in
+                        if index > 0 { MiniDivider() }
+                        Button { open(expense, state: state) } label: { expenseRow(expense, state: state) }
+                            .buttonStyle(.pressable)
+                            .accessibilityIdentifier("finances-day-row")
+                    }
+                    ForEach(Array(incomes.enumerated()), id: \.element.id) { index, income in
+                        if index > 0 || !expenses.isEmpty { MiniDivider() }
+                        Button { open(income, state: state) } label: { incomeRow(income) }
+                            .buttonStyle(.pressable)
+                            .accessibilityIdentifier("finances-day-row")
                     }
                 }
-                .buttonStyle(.pressable)
-                NavigationLink(value: HomeRoute.page(.financesTrends)) {
-                    MiniStat(title: tr("Dépenses"), value: TF.money(spent, currency), detail: tr("ce mois-ci"))
-                }
-                .buttonStyle(.pressable)
-                // The « Évolution » row of the list below is only there when these tiles are not.
-                .accessibilityIdentifier("finances-trends")
-                NavigationLink(value: HomeRoute.page(.financesStatement(interval.start))) {
-                    let balance = (earned > 0 ? earned : (expected ?? 0)) - spent
-                    MiniStat(title: tr("Solde"), value: TF.money(balance, currency), detail: earned > 0 ? tr("jusqu'ici") : tr("estimé"),
-                             colorHex: balance < 0 ? Finances.overHex : Finances.incomeHex)
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("finances-month-balance")
             }
-            .accessibilityElement(children: .contain)
-            .accessibilityIdentifier("finances-month")
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("finances-day")
+    }
+
+    private func expenseRow(_ expense: Expense, state: BudgetState) -> some View {
+        let category = state.category(expense.categoryID)
+        let name = category?.name ?? tr("Sans catégorie")
+        return MiniRow(symbol: category?.symbol ?? "square.grid.2x2", colorHex: category?.colorHex ?? "64748B",
+                       title: expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note,
+                       detail: expense.fixedID == nil ? name : tr("Dépense fixe · \(name)"),
+                       value: Fmt.signedMoney(-expense.amount, currency: currency), showsChevron: false)
+    }
+
+    private func incomeRow(_ income: IncomeEntry) -> some View {
+        MiniRow(symbol: "arrow.down.left", colorHex: Finances.incomeHex, title: income.label.isEmpty ? tr("Revenu") : income.label,
+                detail: income.fixedID == nil ? tr("Revenu") : tr("Revenu fixe"),
+                value: Fmt.signedMoney(income.amount, currency: currency), showsChevron: false)
+    }
+
+    /// An expense or an income opens where it comes from: itself, or the bill or fixed amount behind it.
+    private func open(_ expense: Expense, state: BudgetState) {
+        sheet = expense.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .expense(expense)
+    }
+
+    private func open(_ income: IncomeEntry, state: BudgetState) {
+        sheet = income.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .income(income)
+    }
+
+    /// A day with at least one operation (noted or fixed) is marked on the selector.
+    private func dayMark(_ date: Date, state: BudgetState) -> WeekDayMark {
+        let interval = DateInterval(start: DateMath.startOfDay(date), end: DateMath.nextMidnight(after: date))
+        let now = Date()
+        let holdsSomething = !BudgetMath.expenses(state, in: interval, now: now).isEmpty
+            || !BudgetMath.incomes(state, in: interval, now: now).isEmpty
+        return WeekDayMark(isPlanned: holdsSomething)
+    }
+
+    // MARK: The month
+
+    /// What came in this month (the expenses are in the budget above and the balance in the chart: neither is
+    /// repeated); it opens the evolution.
+    @ViewBuilder
+    private func month(state: BudgetState, now: Date) -> some View {
+        let earned = BudgetMath.earned(state, in: BudgetMath.monthInterval(now))
+        let expected = model.profile.monthlyIncome
+        if earned > 0 || expected != nil {
+            NavigationLink(value: HomeRoute.page(.financesTrends)) {
+                if earned > 0 {
+                    MiniStat(title: tr("Revenus"), value: TF.money(earned, currency), detail: tr("ce mois-ci"), colorHex: Finances.incomeHex)
+                } else if let expected {
+                    MiniStat(title: tr("Revenus"), value: TF.money(expected, currency), detail: tr("prévus (Mes informations)"))
+                }
+            }
+            .buttonStyle(.pressable)
+            // The « Évolution » row of the list below is only there when this tile is not.
+            .accessibilityIdentifier("finances-trends")
         }
     }
 

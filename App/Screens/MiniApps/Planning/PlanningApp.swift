@@ -1,9 +1,10 @@
 import SwiftUI
 
-/// The Planning mini-app: the calendar (a day, the week, the month or the year, changed with a pinch or the
-/// buttons above it; a touch on a free time creates an event there) and the chosen day in one timeline
-/// (calendar, classes, tasks, deadlines, workouts), the three priorities, the tasks to do, then the
-/// schedule, the studies, the projects, the habits and focus.
+/// The Planning mini-app, top to bottom: the week selector (the one date selector, `day` is the truth of the
+/// screen), the chosen day in one timeline (calendar, classes, tasks, deadlines, workouts), the new-task action
+/// and the three priorities, the calendar (a day, the week, the month or the year around that day, changed with
+/// the scale picker or a pinch; a touch on a free time creates an event there), the task counters, then the
+/// schedule, the studies, the projects, the habits and focus, and « Mes infos » last.
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
@@ -26,10 +27,14 @@ struct PlanningAppView: View {
         let tasks = model.content.tasks
         let overdue = tasks.filter { $0.isOverdue(at: now) }
         MiniAppScroll {
+            // 1. The only date selector of the screen: the week of the day picked (the rest of the screen follows it).
+            WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: mark)
+
+            // 2. The essentials: the agenda of that day, then the main action and the three priorities.
             VStack(alignment: .leading, spacing: 10) {
-                PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
-                    .padding(.bottom, 6)
-                MiniSectionTitle(title: Fmt.longDay(day), detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
+                // The selector shows the initial and the number; today is named, any other day in full.
+                MiniSectionTitle(title: isToday ? tr("Aujourd'hui") : Fmt.longDay(day),
+                                 detail: today.isEmpty ? nil : Fmt.plural(today.count, tr("élément"), tr("éléments")))
                 VStack(alignment: .leading, spacing: 0) {
                     if today.isEmpty {
                         Text(isToday ? tr("Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier.")
@@ -69,6 +74,9 @@ struct PlanningAppView: View {
             .accessibilityIdentifier("planning-new-task")
 
             priorities(now: now)
+
+            // 3. The rest by importance: the calendar (its period follows the day), the task counters, the pages.
+            PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
 
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: tr("Tâches"))
@@ -131,6 +139,7 @@ struct PlanningAppView: View {
                 }
                 .buttonStyle(.pressable)
             }
+            // 4. Last: « Mes infos ».
             MiniAppInfoSection(app: .planning)
         }
         .navigationTitle(tr("Planning"))
@@ -140,6 +149,11 @@ struct PlanningAppView: View {
         .onChange(of: scale) { _, _ in loadEvents() }
         .planningEditors($editors)
         .permissionSheet(.calendar, isPresented: $askingCalendar, request: requestCalendar) { _ in loadEvents() }
+    }
+
+    /// A day of the selector holds something when the agenda has an element that day.
+    private func mark(_ date: Date) -> WeekDayMark {
+        WeekDayMark(isPlanned: !Agenda.items(on: date, model: model, events: events).isEmpty)
     }
 
     private func requestCalendar() async {

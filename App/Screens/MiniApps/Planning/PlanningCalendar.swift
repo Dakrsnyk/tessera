@@ -41,10 +41,11 @@ enum CalendarScale: Int, CaseIterable, Identifiable {
     }
 }
 
-/// The Planning's calendar: a day, the week, the month or the year, at the chosen day. A pinch with two
-/// fingers goes from one scale to the next (spread: closer, pinch: wider) and keeps the day looked at;
-/// the buttons above do the same for whoever prefers them. A touch on a free time of a day or of the week
-/// creates an event there; a touch on a day of the month or a month of the year goes to it.
+/// The Planning's calendar: a day, the week, the month or the year, at the chosen day (it follows the week
+/// selector of the screen and has no date navigation of its own). A pinch with two fingers goes from one scale
+/// to the next (spread: closer, pinch: wider) and keeps the day looked at; the scale picker does the same for
+/// whoever prefers it. A touch on a free time of a day or of the week creates an event there; a touch on a day of
+/// the month or a month of the year goes to it; a swipe moves the day by the period shown.
 struct PlanningCalendarCard: View {
     @Binding var day: Date
     @Binding var scale: CalendarScale
@@ -80,47 +81,16 @@ struct PlanningCalendarCard: View {
 
     // MARK: Header
 
-    /// Calendar's head: the period big and bold on the left, « Aujourd'hui » and the arrows discreet on the right.
+    /// A plain section title, no navigation (the week selector above moves the day, the calendar follows it): the
+    /// period on the right, the month and year for the week and the month (as in Calendar), the year for the
+    /// year; none for the day, which the agenda above already names.
     private var header: some View {
-        let now = Date()
-        let isCurrent = scale.interval(containing: day).contains(now)
-        return HStack(alignment: .center, spacing: 0) {
-            Text(title)
-                .font(.title2.weight(.bold))
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
-                .contentTransition(.numericText())
-                .accessibilityAddTraits(.isHeader)
-            Spacer(minLength: 8)
-            if !isCurrent {
-                Button {
-                    Haptics.tap()
-                    withAnimation(.snappy) { day = now }
-                } label: {
-                    Text(tr("Aujourd'hui"))
-                        .font(.subheadline.weight(.semibold))
-                        .padding(.horizontal, 6)
-                        .frame(minHeight: 44)
-                        .contentShape(Rectangle())
-                }
-            }
-            Button { shift(-1) } label: {
-                Image(systemName: "chevron.left").font(.body.weight(.semibold)).frame(width: 40, height: 44).contentShape(Rectangle())
-            }
-            .accessibilityLabel(Text(tr("Période précédente")))
-            Button { shift(1) } label: {
-                Image(systemName: "chevron.right").font(.body.weight(.semibold)).frame(width: 40, height: 44).contentShape(Rectangle())
-            }
-            .accessibilityLabel(Text(tr("Période suivante")))
-            .accessibilityIdentifier("planning-next")
-        }
-        .tint(Color(hex: accentHex))
+        MiniSectionTitle(title: tr("Calendrier"), detail: period)
     }
 
-    /// The period, big: the month and year for the week and the month (as in Calendar), the day in full for the day.
-    private var title: String {
+    private var period: String? {
         switch scale {
-        case .day: Fmt.longDay(day)
+        case .day: nil
         case .week, .month: Fmt.monthYear(day)
         case .year: "\(DateMath.calendar.component(.year, from: day))"
         }

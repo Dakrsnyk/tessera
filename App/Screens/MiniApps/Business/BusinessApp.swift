@@ -104,29 +104,37 @@ enum BusinessFormat {
     }
 }
 
-/// The Business mini-app: the period's revenue against the previous one, the indicators the person
-/// chose, their own metrics and the revenue curve; then sales and costs, results, recurring revenue.
+/// The Business mini-app, top to bottom: the week selector; the essentials (the revenue of the period around
+/// the chosen day against the previous one, with the period choice, and the two actions); then the sources,
+/// the indicators the person chose, their own metrics and the revenue curve; then sales and costs, results,
+/// recurring revenue; « Mes infos » last.
 struct BusinessAppView: View {
     @Environment(AppModel.self) private var model
     @State private var period: BusinessPeriod = .month
     @State private var sheet: BusinessSheet?
+    @State private var day = Date()
 
     private var currency: String { model.settings.currencyCode }
     private var accentHex: String { BusinessFormat.accentHex }
 
+    /// The moment the figures are read at: now for today, the end of the chosen day otherwise, so the period
+    /// around that day is counted up to it.
+    private func reference(now: Date) -> Date {
+        DateMath.isSameDay(day, now) ? now : DateMath.nextMidnight(after: day).addingTimeInterval(-1)
+    }
+
     var body: some View {
         let now = Date()
+        let at = reference(now: now)
         let state = model.business
         MiniAppScroll {
-            Picker(tr("Période"), selection: $period) {
-                ForEach(BusinessPeriod.allCases) { Text($0.title).tag($0) }
-            }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("business-period")
+            // 1. The only date selector: sales and costs are real, so it stops at today.
+            WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { dayMark($0, state: state) })
+            // 2. The essentials: the revenue (its period is a granularity, not a date) and the actions.
             if state.sales.isEmpty && state.expenses.isEmpty && state.subscriptions.isEmpty {
                 start
             } else {
-                hero(state: state, now: now)
+                hero(state: state, now: at)
             }
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Vente"), symbol: "plus", colorHex: accentHex) { sheet = .sale(nil) }
@@ -134,11 +142,13 @@ struct BusinessAppView: View {
                 MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }
                     .accessibilityIdentifier("business-add-cost")
             }
+            // 3. The rest, by importance.
             BusinessSourcesCard()
-            kpis(state: state, now: now)
+            kpis(state: state, now: at)
             metrics(state: state)
-            curve(state: state, now: now)
+            curve(state: state, now: at)
             more(state: state)
+            // 4. Last.
             MiniAppInfoSection(app: .business)
         }
         .navigationTitle(state.name.isEmpty ? tr("Business") : state.name)
@@ -161,10 +171,24 @@ struct BusinessAppView: View {
 
     // MARK: Revenue
 
+    /// A day holding at least one sale or one cost is marked on the selector.
+    private func dayMark(_ date: Date, state: BusinessState) -> WeekDayMark {
+        let holdsSomething = state.sales.contains { DateMath.isSameDay($0.date, date) }
+            || state.expenses.contains { DateMath.isSameDay($0.date, date) }
+        return WeekDayMark(isPlanned: holdsSomething)
+    }
+
     private func hero(state: BusinessState, now: Date) -> some View {
         let comparison = BusinessMath.compare(.revenue, state, period.math, at: now)
         let change = BusinessFormat.change(comparison.change, higherIsBetter: true)
         return VStack(alignment: .leading, spacing: 8) {
+            // The period is how far the revenue reaches (a day, a week…) around the chosen day.
+            Picker(tr("Période"), selection: $period) {
+                ForEach(BusinessPeriod.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .padding(.bottom, 4)
+            .accessibilityIdentifier("business-period")
             Text(tr("Chiffre d'affaires")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
             Text(TF.money(comparison.current ?? 0, currency))
                 .font(.system(size: 40, weight: .bold, design: .rounded))

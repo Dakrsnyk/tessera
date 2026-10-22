@@ -37,10 +37,13 @@ struct NutritionAppView: View {
         let totals = NutritionMath.totals(state, on: day)
         let entries = NutritionMath.entries(state, on: day)
         MiniAppScroll {
-            DaySwitcher(day: $day, colorHex: accentHex)
+            // The week selector: the only day picker of the screen.
+            WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { weekMark($0, state: state, known: known) })
+            // The essentials of the chosen day: calories left and macros, the main actions, the meals.
             CalorieHero(totals: totals, goals: state.goals, known: known, day: day, isPremium: model.isPremium)
             actions
             meals(entries: entries)
+            // Then, by importance: the idea of the moment, the week's calories, history and saved meals.
             if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
             weekTrend(state: state, known: known)
             more(state: state, known: known)
@@ -126,27 +129,27 @@ struct NutritionAppView: View {
             .buttonStyle(.pressable)
         } else if hasEntries {
             let left = state.goals.kcal - totals.kcal
-            let proteinLeft = known.protein ? state.goals.protein - totals.protein : nil
+            // The figures (left, over, macros) are in the hero above: the card only says what to do.
             if left > 150 {
                 NavigationLink(value: HomeRoute.page(.nutritionIdeas)) {
                     insightCard(
                         symbol: "lightbulb.fill",
-                        title: tr("Il te reste environ \(TF.int(left)) kcal"),
-                        message: proteinLeft.map { $0 > 10 ? tr("Et \(TF.int($0)) g de protéines pour atteindre ton objectif.") : tr("Tes protéines sont presque atteintes.") } ?? tr("Des idées pour la suite de ta journée."),
+                        title: tr("Des idées pour la suite de ta journée"),
+                        message: nil,
                         action: tr("Voir des idées")
                     )
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("nutrition-insight")
             } else if left < -50 {
-                insightCard(symbol: "info.circle.fill", title: tr("Objectif dépassé de \(TF.int(-left)) kcal"), message: tr("Rien de grave : c'est la moyenne sur plusieurs jours qui compte. L'historique te la montre."), action: nil)
+                insightCard(symbol: "info.circle.fill", title: tr("Objectif dépassé"), message: tr("Rien de grave : c'est la moyenne sur plusieurs jours qui compte. L'historique te la montre."), action: nil)
             } else {
                 insightCard(symbol: "checkmark.seal.fill", title: tr("Objectif atteint"), message: tr("Tu es dans ta cible de calories aujourd'hui."), action: nil)
             }
         }
     }
 
-    private func insightCard(symbol: String, title: String, message: String, action: String?) -> some View {
+    private func insightCard(symbol: String, title: String, message: String?, action: String?) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: symbol)
                 .font(.title3)
@@ -154,10 +157,12 @@ struct NutritionAppView: View {
                 .frame(width: 30)
             VStack(alignment: .leading, spacing: 4) {
                 Text(title).font(.headline)
-                Text(message)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                if let message {
+                    Text(message)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 if let action {
                     Text(action)
                         .font(.subheadline.weight(.semibold))
@@ -173,32 +178,35 @@ struct NutritionAppView: View {
 
     // MARK: Trend
 
-    /// The week of the chosen day: a round a day (on target: checked; otherwise how far it got), a tap
-    /// shows that day above, a swipe changes week; the calories of each day below.
-    private func weekTrend(state: NutritionState, known: NutritionTiles.Targets) -> some View {
+    /// What a day of the selector holds: nothing when no meal is noted, a ring of how far it got toward the
+    /// calorie goal, a check when it is on target (within 10 %).
+    private func weekMark(_ date: Date, state: NutritionState, known: NutritionTiles.Targets) -> WeekDayMark {
+        guard !NutritionMath.entries(state, on: date).isEmpty else { return WeekDayMark() }
         let goal = state.goals.kcal
-        return WeekCard(day: $day, colorHex: accentHex, allowsFuture: false,
-                        detail: { week in
-                            let stats = weekStats(state, week)
-                            return stats.trackedDays == 0 ? nil : tr("Moyenne \(TF.int(stats.averages.kcal)) kcal")
-                        },
-                        mark: { date in
-                            let entries = NutritionMath.entries(state, on: date)
-                            guard !entries.isEmpty else { return WeekDayMark() }
-                            let kcal = NutritionMath.totals(state, on: date).kcal
-                            guard known.kcal, goal > 0 else { return WeekDayMark(progress: 1) }
-                            return WeekDayMark(progress: kcal / goal, isDone: abs(kcal - goal) <= goal * 0.1)
-                        }) { week in
-            let stats = weekStats(state, week)
-            let values = week.map { NutritionMath.totals(state, on: $0).kcal }
+        let kcal = NutritionMath.totals(state, on: date).kcal
+        guard known.kcal, goal > 0 else { return WeekDayMark(progress: 1) }
+        return WeekDayMark(progress: kcal / goal, isDone: abs(kcal - goal) <= goal * 0.1)
+    }
+
+    /// The calories of the week of the chosen day, one bar a day (the chosen one in full color), then the
+    /// average and the days on target.
+    private func weekTrend(state: NutritionState, known: NutritionTiles.Targets) -> some View {
+        let week = DateMath.week(containing: day)
+        let stats = weekStats(state, week)
+        let values = week.map { NutritionMath.totals(state, on: $0).kcal }
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Calories de la semaine"))
             VStack(alignment: .leading, spacing: 12) {
-                WeekBars(values: values, days: week, goal: known.kcal ? goal : nil, colorHex: accentHex,
+                WeekBars(values: values, days: week, goal: known.kcal ? state.goals.kcal : nil, colorHex: accentHex,
                          highlighted: week.firstIndex { DateMath.isSameDay($0, day) })
                     .frame(height: 70)
                 Text(trendText(stats, known: known, empty: tr("Rien de noté cette semaine.")))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .miniCard()
         }
     }
 
@@ -221,17 +229,17 @@ struct NutritionAppView: View {
 
     private func more(state: NutritionState, known: NutritionTiles.Targets) -> some View {
         MiniRowsCard {
-            NavigationLink(value: HomeRoute.page(.nutritionSavedMeals)) {
-                MiniRow(symbol: "bookmark.fill", colorHex: accentHex, title: tr("Mes repas"), detail: tr("Des repas enregistrés, à reprendre d'une touche"), value: state.savedMeals.isEmpty ? nil : "\(state.savedMeals.count)")
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("nutrition-saved")
-            MiniDivider()
             NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
                 MiniRow(symbol: "chart.bar.xaxis", colorHex: accentHex, title: tr("Historique"), detail: tr("Moyennes, tendances et poids"))
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("nutrition-history")
+            MiniDivider()
+            NavigationLink(value: HomeRoute.page(.nutritionSavedMeals)) {
+                MiniRow(symbol: "bookmark.fill", colorHex: accentHex, title: tr("Mes repas"), detail: tr("Des repas enregistrés, à reprendre d'une touche"), value: state.savedMeals.isEmpty ? nil : "\(state.savedMeals.count)")
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("nutrition-saved")
         }
     }
 }

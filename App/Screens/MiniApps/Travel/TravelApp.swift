@@ -43,11 +43,14 @@ enum Travel {
     }
 }
 
-/// The Travel mini-app: the trip under way or coming (countdown, local time, weather), what comes
-/// next (flight, stay, activity), the budget, the checklist and the currency; then the program.
+/// The Travel mini-app: the week selector, the trip under way or coming (countdown, local time, weather) and
+/// the program of the day picked; then what comes next (flight, stay, activity), the budget, the checklist,
+/// the currency and the other trips.
 struct TravelAppView: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: TravelSheet?
+    /// The day of the trip the program tells about.
+    @State private var day = Date()
 
     private var currency: String { model.settings.currencyCode }
     private var accentHex: String { Travel.accentHex }
@@ -57,8 +60,14 @@ struct TravelAppView: View {
         let state = model.travel
         MiniAppScroll {
             if let trip = TravelMath.currentTrip(state, at: now) {
+                let program = TravelMath.program(state, for: trip)
+                let dayItems = program.first { DateMath.isSameDay($0.day, day) }?.items ?? []
+                WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: { date in
+                    WeekDayMark(isPlanned: program.contains { DateMath.isSameDay($0.day, date) })
+                })
                 TripHero(trip: trip, weather: model.tripWeather, now: now)
-                next(trip: trip, state: state, now: now)
+                dayProgram(trip: trip, items: dayItems, days: program.count)
+                next(trip: trip, state: state, now: now, shown: Set(dayItems.map(\.id)))
                 HStack(spacing: 10) {
                     budgetTile(trip: trip, state: state)
                     checklistTile(trip: trip, state: state)
@@ -69,7 +78,7 @@ struct TravelAppView: View {
             }
             others(state: state, now: now)
             if let trip = TravelMath.currentTrip(state, at: now) {
-                tripRows(trip: trip, state: state, now: now)
+                editRow(trip: trip)
             }
             MiniAppInfoSection(app: .travel)
         }
@@ -96,13 +105,49 @@ struct TravelAppView: View {
         .card()
     }
 
+    // MARK: Program of the day
+
+    /// The program of the day picked: the card opens the whole program, the only « Programme » of the screen.
+    private func dayProgram(trip: Trip, items: [TravelMath.ProgramItem], days: Int) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Programme"), detail: Fmt.shortDay(day))
+            NavigationLink(value: HomeRoute.page(.travelProgram(trip.id))) {
+                MiniRowsCard {
+                    if items.isEmpty {
+                        MiniRow(symbol: "list.bullet.below.rectangle", colorHex: accentHex, title: tr("Rien de prévu ce jour-là."),
+                                detail: tr("Vols, hébergements et activités, jour par jour"), value: "\(days) j")
+                    } else {
+                        ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                            if index > 0 { MiniDivider() }
+                            MiniRow(symbol: item.symbol, colorHex: itemHex(item.kind), title: item.title, detail: item.detail,
+                                    value: Fmt.time(item.date, uses24Hour: true), showsChevron: false)
+                        }
+                    }
+                }
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("travel-program")
+        }
+    }
+
+    private func itemHex(_ kind: TravelMath.ProgramItem.Kind) -> String {
+        switch kind {
+        case .flight: accentHex
+        case .checkIn, .checkOut: "8C6CFF"
+        case .activity: "F08A24"
+        }
+    }
+
     // MARK: Next
 
+    /// What comes next, without what the program of the day picked already tells (`shown`: its item ids).
     @ViewBuilder
-    private func next(trip: Trip, state: TravelState, now: Date) -> some View {
-        let flight = TravelMath.flights(state, for: trip).first { $0.departure.addingTimeInterval(3_600) > now }
-        let stay = TravelMath.stays(state, for: trip).first { $0.checkOut > now }
-        let activity = TravelMath.activities(state, for: trip).first { $0.date.addingTimeInterval(1_800) > now }
+    private func next(trip: Trip, state: TravelState, now: Date, shown: Set<String>) -> some View {
+        let flight = TravelMath.flights(state, for: trip).first { $0.departure.addingTimeInterval(3_600) > now && !shown.contains("flight-\($0.id)") }
+        let stay = TravelMath.stays(state, for: trip).first { candidate in
+            candidate.checkOut > now && !shown.contains((candidate.checkIn > now ? "in-" : "out-") + candidate.id.uuidString)
+        }
+        let activity = TravelMath.activities(state, for: trip).first { $0.date.addingTimeInterval(1_800) > now && !shown.contains("activity-\($0.id)") }
         if flight != nil || stay != nil || activity != nil {
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: tr("À venir"))
@@ -129,8 +174,6 @@ struct TravelAppView: View {
                     .miniCard()
                 }
                 .buttonStyle(.pressable)
-                // It opens the program: the « Programme » row of the list below is only there when this card is not.
-                .accessibilityIdentifier("travel-program")
             }
         }
     }
@@ -208,23 +251,8 @@ struct TravelAppView: View {
 
     // MARK: Rows
 
-    /// The « À venir » card opens the program when it is shown; otherwise this list has the row.
-    private func tripRows(trip: Trip, state: TravelState, now: Date) -> some View {
-        let flight = TravelMath.flights(state, for: trip).first { $0.departure.addingTimeInterval(3_600) > now }
-        let stay = TravelMath.stays(state, for: trip).first { $0.checkOut > now }
-        let activity = TravelMath.activities(state, for: trip).first { $0.date.addingTimeInterval(1_800) > now }
-        let showsNext = flight != nil || stay != nil || activity != nil
-        return MiniRowsCard {
-            if !showsNext {
-                NavigationLink(value: HomeRoute.page(.travelProgram(trip.id))) {
-                    MiniRow(symbol: "list.bullet.below.rectangle", colorHex: accentHex, title: tr("Programme"),
-                            detail: tr("Vols, hébergements et activités, jour par jour"),
-                            value: "\(TravelMath.program(state, for: trip).count) j")
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("travel-program")
-                MiniDivider()
-            }
+    private func editRow(trip: Trip) -> some View {
+        MiniRowsCard {
             Button { sheet = .trip(trip) } label: {
                 MiniRow(symbol: "pencil", colorHex: "8A8A8E", title: tr("Modifier le voyage"), detail: "\(trip.destination) · \(Travel.dates(trip))", showsChevron: false)
             }

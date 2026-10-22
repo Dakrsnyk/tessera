@@ -1,8 +1,9 @@
 import SwiftUI
 
-/// The Fitness mini-app, in the order a workout is prepared and done: the overview of the day (today's
-/// session or the next one, one main action), the week, the program and its sessions, the exercises and
-/// their library, and the progress and statistics (the personal records are in « Progression »).
+/// The Fitness mini-app, in the order a workout is prepared and done: the week selector (the only one of the
+/// screen), the session of the day picked (today's or the next one, one main action), then the week's totals,
+/// the program and its sessions, the exercises and their library, the progress and statistics (the personal
+/// records are in « Progression ») and the steps, and last the footnote and « Mes infos ».
 struct FitnessAppView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -26,13 +27,13 @@ struct FitnessAppView: View {
         let now = Date()
         let state = model.fitness
         MiniAppScroll {
-            DaySwitcher(day: $day, colorHex: accentHex, allowsFuture: true)
+            weekSelector(state: state)
             if DateMath.isSameDay(day, now) {
                 today(state: state, now: now)
             } else {
                 otherDay(state: state, now: now)
             }
-            week(state: state, now: now)
+            weekSummary(state: state, now: now)
             program(state: state)
             exercises(state: state)
             progress(state: state)
@@ -281,20 +282,28 @@ struct FitnessAppView: View {
 
     // MARK: Week
 
-    /// The week of the chosen day: a tap on a round shows that day above, a swipe changes week.
-    private func week(state: FitnessState, now: Date) -> some View {
-        WeekCard(day: $day, colorHex: accentHex, allowsFuture: true,
-                 detail: { week in tr("\(FitnessMath.workouts(inWeekOf: week[0], state)) / \(state.weeklyGoal) séances") },
-                 mark: { date in
-                     let trained = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, date) && $0.isFinished }
-                     let planned = state.routines.contains { $0.weekdays.contains(FitnessMath.isoWeekday(date)) }
-                     let caughtUp = !trained && FitnessMath.catchUp(of: date, state)?.isFinished == true
-                     return WeekDayMark(isDone: trained, isPlanned: planned, isCaughtUp: caughtUp)
-                 }) { week in
+    /// The week selector at the top: a tap on a day shows that day just below, a swipe changes week. A day
+    /// is done (session finished), planned by the program, or caught up (missed, done another day).
+    private func weekSelector(state: FitnessState) -> some View {
+        WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true,
+                     mark: { date in
+                         let trained = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, date) && $0.isFinished }
+                         let planned = state.routines.contains { $0.weekdays.contains(FitnessMath.isoWeekday(date)) }
+                         let caughtUp = !trained && FitnessMath.catchUp(of: date, state)?.isFinished == true
+                         return WeekDayMark(isDone: trained, isPlanned: planned, isCaughtUp: caughtUp)
+                     })
+    }
+
+    /// The totals of the week of the day picked (« Cette semaine », « Semaine du … »), without a second selector.
+    private func weekSummary(state: FitnessState, now: Date) -> some View {
+        let first = DateMath.week(containing: day).first ?? day
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: WeekTitle.of(DateMath.week(containing: day), now: now),
+                             detail: tr("\(FitnessMath.workouts(inWeekOf: first, state)) / \(state.weeklyGoal) séances"))
             HStack(spacing: 10) {
-                miniFigure(tr("Durée"), tr("\(TF.int(FitnessMath.minutes(inWeekOf: week[0], state))) min"))
-                miniFigure(tr("Volume"), tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: week[0]).reduce(0, +))) kg"))
-                miniFigure(tr("Calories"), weekCalories(state, weekOf: week[0]))
+                MiniStat(title: tr("Durée"), value: tr("\(TF.int(FitnessMath.minutes(inWeekOf: first, state))) min"))
+                MiniStat(title: tr("Volume"), value: tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: first).reduce(0, +))) kg"))
+                MiniStat(title: tr("Calories"), value: weekCalories(state, weekOf: first))
             }
         }
     }
@@ -306,14 +315,6 @@ struct FitnessAppView: View {
         var weighed = state
         weighed.bodyWeightKg = weight
         return "~\(TF.int(FitnessMath.caloriesThisWeek(weighed, weekOf: day)))"
-    }
-
-    private func miniFigure(_ title: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(title).font(.caption).foregroundStyle(.secondary)
-            Text(value).font(.headline).monospacedDigit().lineLimit(1).minimumScaleFactor(0.7)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     // MARK: Activity
@@ -433,7 +434,6 @@ struct FitnessAppView: View {
     private func progress(state: FitnessState) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Progression et statistiques"))
-            activity
             MiniRowsCard {
                 NavigationLink(value: HomeRoute.page(.fitnessProgress)) {
                     premiumRow(symbol: "chart.line.uptrend.xyaxis", title: tr("Progression"), detail: tr("Charges, volume, records et évolution"))
@@ -441,6 +441,8 @@ struct FitnessAppView: View {
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("fitness-progress")
             }
+            // The steps come last (nothing shown while Motion is denied or unavailable).
+            activity
         }
     }
 }
