@@ -12,20 +12,23 @@ enum WeekDayKind: Equatable {
     }
 }
 
-/// The week selector at the top of every mini-app (the look of the reference image, the one of `WeekCard`): the
-/// seven days of a week side by side, each with its initial and its date in a circle. The selected day sits on a
-/// rounded background tinted with the app's accent, its initial and today's in the accent; a day that holds
-/// something has a ring (or a filled circle when done), the others a dotted gray ring; the dates of the days to
-/// come are dimmed. A tap picks a day, the arrows or a swipe go to the week before or after, and the dates come
-/// from the real calendar. A mini-app has one selector: the screen below it tells about the day picked. `mark`
-/// tells what a day holds (planned, done, how far it got). A day caught up shows a tinted circle.
+/// The week selector at the top of every mini-app (the « Signature » style): the seven days of a week side by
+/// side, each with its initial, its date and a dot when it holds something. It sits on the colored band of the
+/// screen: the selected day is a rounded pill (white on a dark screen, the app's color on a light one), today
+/// is outlined, the days gone by are plain and the days to come are dimmed. A tap picks a day, the arrows or a
+/// swipe go to the week before or after, and the dates come from the real calendar. A mini-app has one
+/// selector: the screen below it tells about the day picked. `mark` tells what a day holds (planned, done,
+/// how far it got). `leadingInset` leaves room on the left for the hours column of a week table placed
+/// right below, so that its columns sit under the days.
 struct WeekSelector: View {
     @Binding var day: Date
     let colorHex: String
     /// Logs (meals, spending) stop at today; plans look ahead too.
     var allowsFuture = true
     var mark: (Date) -> WeekDayMark = { _ in WeekDayMark() }
+    var leadingInset: CGFloat = 0
     @State private var forward = true
+    @Environment(\.colorScheme) private var scheme
 
     private var accent: Color { Color(hex: colorHex) }
 
@@ -34,13 +37,14 @@ struct WeekSelector: View {
         let week = DateMath.week(containing: day)
         let isCurrentWeek = week.contains { DateMath.isSameDay($0, now) }
         let canGoForward = allowsFuture || !isCurrentWeek
-        VStack(spacing: 6) {
+        VStack(spacing: 2) {
             header(week: week, now: now, canGoForward: canGoForward)
-            HStack(spacing: 2) {
+            HStack(spacing: 3) {
                 ForEach(week, id: \.self) { date in
                     dayButton(date, now: now)
                 }
             }
+            .padding(.leading, leadingInset)
             .id(DateMath.dayKey(week.first ?? day))
             .transition(.push(from: forward ? .trailing : .leading))
             .simultaneousGesture(swipe(canGoForward: canGoForward))
@@ -89,26 +93,43 @@ struct WeekSelector: View {
 
     // MARK: A day
 
+    private var selectedFill: Color { scheme == .dark ? Color.white : accent }
+    private var selectedInk: Color { scheme == .dark ? accent : Color.white }
+
     private func dayButton(_ date: Date, now: Date) -> some View {
         let kind = WeekDayKind.of(date, selected: day, now: now)
         let state = mark(date)
         let isBlocked = !allowsFuture && DateMath.startOfDay(date) > DateMath.startOfDay(now)
+        let holdsSomething = state.isDone || state.isPlanned || state.isCaughtUp || state.progress > 0
         return Button {
             guard !isBlocked else { return }
             Haptics.tap()
             withAnimation(.snappy) { day = date }
         } label: {
-            VStack(spacing: 8) {
+            VStack(spacing: 5) {
                 Text(String(Fmt.weekday(date).prefix(1)).uppercased())
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(kind == .selected || kind == .today ? accent : Color.secondary)
-                dateCircle(date, kind: kind, state: state)
+                    .font(.caption.weight(.bold))
+                    .opacity(0.75)
+                Text("\(DateMath.calendar.component(.day, from: date))")
+                    .font(.title3.weight(.bold))
+                    .monospacedDigit()
+                Circle()
+                    .fill(holdsSomething ? Color.primary : Color.clear)
+                    .frame(width: 5, height: 5)
+                    .opacity(0.85)
             }
+            .foregroundStyle(kind == .selected ? selectedInk : Color.primary)
             .padding(.vertical, 8)
-            .frame(maxWidth: .infinity, minHeight: 44)
-            // The selected day sits on a rounded background tinted with the accent.
-            .background(kind == .selected ? accent.opacity(0.16) : Color.clear, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .opacity(isBlocked ? 0.4 : 1)
+            .frame(maxWidth: .infinity, minHeight: 64)
+            .background {
+                if kind == .selected {
+                    RoundedRectangle(cornerRadius: 16, style: .continuous).fill(selectedFill)
+                        .shadow(color: Color.black.opacity(0.18), radius: 10, y: 5)
+                } else if kind == .today {
+                    RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(Color.primary.opacity(0.35), lineWidth: 1.5)
+                }
+            }
+            .opacity(isBlocked ? 0.3 : (kind == .future ? 0.55 : 1))
             .contentShape(Rectangle())
         }
         .buttonStyle(.pressable)
@@ -117,40 +138,6 @@ struct WeekSelector: View {
         .accessibilityValue(Text(state.isCaughtUp ? tr("Séance rattrapée") : ""))
         .accessibilityAddTraits(kind == .selected ? .isSelected : [])
         .accessibilityIdentifier("week-day-\(DateMath.dayKey(date))")
-    }
-
-    /// The date in a circle: filled with a check when done, tinted with a return arrow when caught up, a ring of
-    /// the accent when the day holds something (planned, or how far it got), a dotted gray ring when it holds
-    /// nothing. The dates of the days to come are dimmed.
-    private func dateCircle(_ date: Date, kind: WeekDayKind, state: WeekDayMark) -> some View {
-        ZStack {
-            if state.isDone {
-                Circle().fill(accent)
-                Image(systemName: "checkmark").font(.callout.weight(.bold)).foregroundStyle(Color.white)
-            } else {
-                if state.isCaughtUp {
-                    Circle().fill(accent.opacity(0.16))
-                    Circle().strokeBorder(accent.opacity(0.7), lineWidth: 2)
-                } else {
-                    let holdsSomething = state.isPlanned || state.progress > 0
-                    Circle()
-                        .strokeBorder(holdsSomething ? accent.opacity(0.7) : Color.secondary.opacity(0.28),
-                                      style: StrokeStyle(lineWidth: 2.5, dash: holdsSomething ? [] : [3, 3]))
-                    if state.progress > 0 {
-                        Circle()
-                            .trim(from: 0, to: min(1, state.progress))
-                            .stroke(accent, style: StrokeStyle(lineWidth: 3.5, lineCap: .round))
-                            .rotationEffect(.degrees(-90))
-                            .padding(1)
-                    }
-                }
-                Text("\(DateMath.calendar.component(.day, from: date))")
-                    .font(.body.weight(kind == .future ? .medium : .semibold))
-                    .monospacedDigit()
-                    .foregroundStyle(kind == .future ? Color.secondary : Color.primary)
-            }
-        }
-        .frame(width: 38, height: 38)
     }
 
     // MARK: Moving

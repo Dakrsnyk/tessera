@@ -249,11 +249,16 @@ struct MiniAppScroll<Content: View>: View {
 struct MiniSectionTitle: View {
     let title: String
     var detail: String?
+    /// On a mini-app screen the title starts with a small bar in the app's color.
+    @Environment(\.miniAccent) private var accent
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            if let accent {
+                Capsule().fill(accent).frame(width: 4, height: 16).alignmentGuide(.firstTextBaseline) { $0[.bottom] - 3 }
+            }
             Text(title)
-                .font(.title3.weight(.semibold))
+                .font(.title3.weight(.bold))
                 .accessibilityAddTraits(.isHeader)
             Spacer()
             if let detail {
