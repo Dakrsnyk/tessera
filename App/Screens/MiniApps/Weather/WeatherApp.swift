@@ -13,7 +13,19 @@ struct WeatherAppView: View {
     private var unit: TemperatureUnit { model.settings.temperatureUnit }
 
     var body: some View {
-        MiniAppScroll {
+        MiniAppScaffold(colorHex: accentHex) {
+            // The band: the week selector and the weather of the day picked (nothing without a forecast to tell).
+            switch model.weather {
+            case let .ready(snapshot):
+                bandContent(snapshot)
+            case let .unavailable(snapshot):
+                if let snapshot {
+                    bandContent(snapshot)
+                }
+            case .needsLocation:
+                EmptyView()
+            }
+        } sheet: {
             switch model.weather {
             case let .ready(snapshot):
                 content(snapshot)
@@ -38,7 +50,6 @@ struct WeatherAppView: View {
             MiniAppInfoSection(app: .weather)
         }
         .navigationTitle(tr("Météo"))
-        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { choosingCity = true } label: { Image(systemName: "mappin.and.ellipse") }
@@ -59,8 +70,9 @@ struct WeatherAppView: View {
         }
     }
 
+    /// The band: the week selector, then the weather of the day picked (now, or its forecast).
     @ViewBuilder
-    private func content(_ weather: WeatherSnapshot) -> some View {
+    private func bandContent(_ weather: WeatherSnapshot) -> some View {
         let now = Date()
         let isToday = DateMath.isSameDay(day, now)
         let forecast = weather.daily.first { DateMath.isSameDay($0.date, day) }
@@ -74,6 +86,14 @@ struct WeatherAppView: View {
         } else {
             noForecast
         }
+    }
+
+    /// The sheet: the hours, the days to come and the details.
+    @ViewBuilder
+    private func content(_ weather: WeatherSnapshot) -> some View {
+        let now = Date()
+        let isToday = DateMath.isSameDay(day, now)
+        let forecast = weather.daily.first { DateMath.isSameDay($0.date, day) }
         hours(weather, now: now)
         days(weather, now: now)
         if isToday {
@@ -103,74 +123,46 @@ struct WeatherAppView: View {
 
     // MARK: Now
 
+    /// The weather now, on the band: the city and the day, the big temperature, then the sky, the feels-like,
+    /// the high and the low and, when it is coming, the rain.
     private func hero(_ weather: WeatherSnapshot, now: Date) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Label(weather.locationName, systemImage: "location.fill")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(Color(hex: accentHex))
-            HStack(alignment: .center, spacing: 14) {
-                Text(Fmt.temperature(weather.temperature, unit: unit))
-                    .font(.system(size: 64, weight: .semibold, design: .rounded))
-                    .monospacedDigit()
-                WeatherGlyph(code: weather.code, isDay: weather.isDay)
-                    .font(.system(size: 44))
-            }
-            Text(WeatherCode.description(weather.code)).font(.title3.weight(.semibold))
-            Text(tr("Ressenti \(Fmt.temperature(weather.apparentTemperature, unit: unit)) · Max \(Fmt.temperature(weather.high, unit: unit)) · Min \(Fmt.temperature(weather.low, unit: unit))"))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            if let rain = weather.hourly.first(where: { $0.date > now && $0.date < now.addingTimeInterval(12 * 3_600) && ($0.precipitationProbability ?? 0) >= 50 }) {
-                Label(tr("Pluie probable vers \(Fmt.time(rain.date, uses24Hour: true)) (\(rain.precipitationProbability ?? 0) %)"), systemImage: "umbrella.fill")
-                    .font(.subheadline.weight(.medium))
-                    .foregroundStyle(Color(hex: accentHex))
-            }
+        var lines = [
+            WeatherCode.description(weather.code),
+            tr("Ressenti \(Fmt.temperature(weather.apparentTemperature, unit: unit)) · Max \(Fmt.temperature(weather.high, unit: unit)) · Min \(Fmt.temperature(weather.low, unit: unit))"),
+        ]
+        if let rain = weather.hourly.first(where: { $0.date > now && $0.date < now.addingTimeInterval(12 * 3_600) && ($0.precipitationProbability ?? 0) >= 50 }) {
+            lines.append(tr("Pluie probable vers \(Fmt.time(rain.date, uses24Hour: true)) (\(rain.precipitationProbability ?? 0) %)"))
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .card()
+        return HStack(alignment: .center, spacing: 10) {
+            MiniHero(label: "\(weather.locationName) · \(tr("Aujourd'hui"))", value: Fmt.temperature(weather.temperature, unit: unit),
+                     caption: lines.joined(separator: "\n"))
+            WeatherGlyph(code: weather.code, isDay: weather.isDay)
+                .font(.system(size: 44))
+        }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("weather-hero")
     }
 
-    /// Another day of the forecast: its sky, its range of temperatures and the chance of rain.
+    /// Another day of the forecast: its high, then its sky, its low and the chance of rain.
     private func dayHero(_ weather: WeatherSnapshot, _ forecast: DayForecast) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Label(weather.locationName, systemImage: "location.fill")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(Color(hex: accentHex))
-            HStack(alignment: .center, spacing: 14) {
-                Text(Fmt.temperature(forecast.high, unit: unit))
-                    .font(.system(size: 64, weight: .semibold, design: .rounded))
-                    .monospacedDigit()
-                Text(Fmt.temperature(forecast.low, unit: unit))
-                    .font(.system(size: 30, weight: .medium, design: .rounded))
-                    .foregroundStyle(.secondary)
-                    .monospacedDigit()
-                WeatherGlyph(code: forecast.code)
-                    .font(.system(size: 44))
-            }
-            Text(WeatherCode.description(forecast.code)).font(.title3.weight(.semibold))
-            if let rain = forecast.precipitationProbability, rain >= 20 {
-                Label("\(rain) %", systemImage: "umbrella.fill")
-                    .font(.subheadline.weight(.medium))
-                    .foregroundStyle(Color(hex: accentHex))
-            }
+        var parts = [WeatherCode.description(forecast.code), Fmt.temperature(forecast.low, unit: unit)]
+        if let rain = forecast.precipitationProbability, rain >= 20 {
+            parts.append("\(rain) %")
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .card()
+        return HStack(alignment: .center, spacing: 10) {
+            MiniHero(label: "\(weather.locationName) · \(Fmt.shortDay(day))", value: Fmt.temperature(forecast.high, unit: unit),
+                     caption: parts.joined(separator: " · "))
+            WeatherGlyph(code: forecast.code)
+                .font(.system(size: 44))
+        }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("weather-hero")
     }
 
     /// A day the forecast does not cover: nothing is made up.
     private var noForecast: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(Fmt.longDay(day)).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
-            Text(tr("Météo indisponible")).font(.title3.weight(.semibold))
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .card()
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("weather-hero")
+        MiniHero(label: Fmt.longDay(day), value: tr("Météo indisponible"), valueSize: 30)
+            .accessibilityIdentifier("weather-hero")
     }
 
     // MARK: Hours

@@ -36,14 +36,16 @@ struct NutritionAppView: View {
         let known = NutritionTiles.Targets(model.profile)
         let totals = NutritionMath.totals(state, on: day)
         let entries = NutritionMath.entries(state, on: day)
-        MiniAppScroll {
-            // The week selector: the only day picker of the screen.
+        MiniAppScaffold(colorHex: accentHex) {
+            // The band: the week selector (the only day picker of the screen), then the essential figure of the
+            // chosen day, calories left and macros, straight on the band.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { weekMark($0, state: state, known: known) })
-            // The essentials of the chosen day: calories left and macros, the main actions, the meals.
             CalorieHero(totals: totals, goals: state.goals, known: known, day: day, isPremium: model.isPremium)
+        } sheet: {
+            // The sheet, by importance: the two actions, the meals, the idea of the moment, the week's
+            // calories, history and saved meals, the note, the settings last.
             actions
             meals(entries: entries)
-            // Then, by importance: the idea of the moment, the week's calories, history and saved meals.
             if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
             weekTrend(state: state, known: known)
             more(state: state, known: known)
@@ -51,7 +53,6 @@ struct NutritionAppView: View {
             MiniAppInfoSection(app: .nutrition)
         }
         .navigationTitle(tr("Nutrition"))
-        .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { sheet in
             switch sheet {
             case let .search(meal, day): FoodSearchView(presetMeal: meal, day: day)
@@ -246,8 +247,9 @@ struct NutritionAppView: View {
 
 // MARK: - Calories and macros
 
-/// The day in one card: the calorie ring, what is eaten, left or over, then the three macros. The other
-/// nutrients (Premium) are one touch below.
+/// The day at a glance, drawn straight on the colored band of the screen (no card): the calorie ring, what is
+/// eaten, left or over, then the three macros. The other nutrients (Premium) are one touch below. The text
+/// takes the screen's own color, so it reads on the band.
 struct CalorieHero: View {
     let totals: NutritionTotals
     let goals: NutritionGoals
@@ -255,14 +257,12 @@ struct CalorieHero: View {
     let day: Date
     let isPremium: Bool
 
-    private let accent = Color(hex: MiniApp.nutrition.colorHex)
-
     var body: some View {
         let left = goals.kcal - totals.kcal
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 18) {
                 ZStack {
-                    RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 14, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : accent, track: accent.opacity(0.15))
+                    RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 14, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : Color.primary, track: Color.primary.opacity(0.18))
                     VStack(spacing: 0) {
                         Text(TF.int(known.kcal ? abs(left) : totals.kcal))
                             .font(.system(size: 30, weight: .bold, design: .rounded))
@@ -275,7 +275,7 @@ struct CalorieHero: View {
                     .minimumScaleFactor(0.7)
                     .padding(18)
                 }
-                .frame(width: 150, height: 150)
+                .frame(width: 136, height: 136)
                 VStack(alignment: .leading, spacing: 12) {
                     figure(tr("Mangé"), tr("\(TF.int(totals.kcal)) kcal"))
                     if known.kcal {
@@ -307,7 +307,7 @@ struct CalorieHero: View {
                     }
                     Text(tr("Tous les nutriments"))
                         .font(.footnote.weight(.semibold))
-                        .foregroundStyle(accent)
+                        .foregroundStyle(Color.primary)
                     if !isPremium {
                         PremiumBadge(compact: true)
                         Spacer(minLength: 4)
@@ -320,7 +320,7 @@ struct CalorieHero: View {
             .buttonStyle(.pressable)
             .accessibilityIdentifier("nutrition-nutrients")
         }
-        .card()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("nutrition-hero")
     }

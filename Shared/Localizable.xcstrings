@@ -183771,53 +183771,6 @@
         }
       }
     },
-    "Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Heute nichts geplant. Füge eine Aufgabe oder einen Termin in deinem Kalender hinzu."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing planned today. Add a task or an appointment to your calendar."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada previsto para hoy. Agrega una tarea o una cita en tu calendario."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rien de prévu aujourd'hui. Ajoute une tâche ou un rendez-vous dans ton calendrier."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Niente in programma oggi. Aggiungi un'attività o un appuntamento al tuo calendario."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日の予定はありません。カレンダーにタスクや予定を追加しましょう。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada previsto para hoje. Adicione uma tarefa ou um compromisso ao seu calendário."
-          }
-        }
-      }
-    },
     "Rien de prévu ce jour-là.": {
       "extractionState": "manual",
       "localizations": {
@@ -210980,6 +210933,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seus widgets e o “Meu dia” usam seus dados reais."
+          }
+        }
+      }
+    },
+    "Tes widgets photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Foto-Widgets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your photo widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus widgets de fotos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes widgets photo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi widget foto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真ウィジェット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus widgets de fotos"
           }
         }
       }

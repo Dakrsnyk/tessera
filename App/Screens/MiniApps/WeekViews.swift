@@ -192,11 +192,14 @@ struct WeekTimetable: View {
     let hours: ClosedRange<Int>
     /// The color of today's mark and of the selected day (the app's accent unless the screen has its own).
     let accent: Color
+    /// False: no strip of days above the table, because a week selector right above it plays that part (see
+    /// `fullLeadingInset`). The band of what has no time stays, and a touch on a column picks its day (`onSelect`).
+    let showsHeader: Bool
     @Environment(\.colorScheme) private var scheme
 
     init(days: [(day: Date, items: [AgendaItem])], selected: Date? = nil, compact: Bool = false, hourHeight: CGFloat? = nil,
          hours: ClosedRange<Int> = 8...18, onSelect: ((Date) -> Void)? = nil, onCreate: ((Date, Int) -> Void)? = nil,
-         onOpen: ((AgendaItem) -> Void)? = nil, accent: Color = Color.accentColor) {
+         onOpen: ((AgendaItem) -> Void)? = nil, accent: Color = Color.accentColor, showsHeader: Bool = true) {
         self.days = days
         self.selected = selected
         self.compact = compact
@@ -206,13 +209,21 @@ struct WeekTimetable: View {
         self.onCreate = onCreate
         self.onOpen = onOpen
         self.accent = accent
+        self.showsHeader = showsHeader
     }
 
     /// A color written over its own translucent tint (Calendar's blocks): darker on a light screen, lighter on a dark one.
     private var inkShift: Double { scheme == .dark ? 0.12 : -0.28 }
 
-    private var gutter: CGFloat { compact ? 16 : 28 }
-    private var spacing: CGFloat { compact ? 2 : 3 }
+    /// The hours column and the gap between columns of the full table.
+    private static let fullGutter: CGFloat = 28
+    private static let fullSpacing: CGFloat = 3
+    /// Where the first day column of the full table starts: the `leadingInset` a week selector placed right
+    /// above it needs, so that its seven days sit exactly over the seven columns (same side margins).
+    static let fullLeadingInset: CGFloat = fullGutter + fullSpacing
+
+    private var gutter: CGFloat { compact ? 16 : Self.fullGutter }
+    private var spacing: CGFloat { compact ? 2 : Self.fullSpacing }
 
     var body: some View {
         let now = Date()
@@ -224,7 +235,9 @@ struct WeekTimetable: View {
         let last = max(hours.upperBound * 60, ((ends.max() ?? (hours.upperBound - 1) * 60) + 59) / 60 * 60)
         let height = CGFloat(last - first) / 60 * hourHeight
         VStack(spacing: compact ? 4 : 8) {
-            header(now: now)
+            if showsHeader {
+                header(now: now)
+            }
             if untimed.contains(where: { !$0.isEmpty }) {
                 HStack(alignment: .top, spacing: spacing) {
                     Color.clear.frame(width: gutter, height: 1)
@@ -373,6 +386,8 @@ struct WeekTimetable: View {
             ? (isSelected ? accent.opacity(0.08) : Color.primary.opacity(0.025))
             : (isSelected && days.count > 1 ? accent.opacity(0.06) : Color.clear)
         let background = RoundedRectangle(cornerRadius: compact ? 4 : 8, style: .continuous).fill(tint)
+        // Without a strip of days, a touch on a column picks its day.
+        let picksDay = !showsHeader && onSelect != nil
         return GeometryReader { geo in
             ZStack(alignment: .topLeading) {
                 // Without `onCreate`, no gesture: a touch reaches the link the table may sit in.
@@ -380,6 +395,7 @@ struct WeekTimetable: View {
                     background
                         .contentShape(Rectangle())
                         .onTapGesture(coordinateSpace: .local) { location in
+                            if picksDay { onSelect?(day) }
                             // Down to the half-hour touched, never past the last one of the day.
                             let touched = first + Int(location.y / hourHeight * 60)
                             onCreate(day, min(23 * 60 + 30, max(0, touched / 30 * 30)))
@@ -387,6 +403,10 @@ struct WeekTimetable: View {
                         .accessibilityAction(named: Text(tr("Créer un événement ce jour-là"))) {
                             onCreate(day, 9 * 60)
                         }
+                } else if picksDay {
+                    background
+                        .contentShape(Rectangle())
+                        .onTapGesture { onSelect?(day) }
                 } else {
                     background
                 }

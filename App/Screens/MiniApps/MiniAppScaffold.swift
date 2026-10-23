@@ -17,6 +17,8 @@ struct MiniFloatingAction {
     let title: String
     let symbol: String
     let colorHex: String
+    /// The accessibility identifier the UI tests look for (the screen's own, not a generic one).
+    var identifier: String? = nil
     let action: () -> Void
 }
 
@@ -103,7 +105,7 @@ private struct MiniFloatingButton: View {
                 .shadow(color: Color(hex: action.colorHex).opacity(0.45), radius: 12, y: 6)
         }
         .buttonStyle(.pressable)
-        .accessibilityIdentifier("mini-floating-action")
+        .accessibilityIdentifier(action.identifier ?? "mini-floating-action")
     }
 }
 

@@ -104,10 +104,10 @@ enum BusinessFormat {
     }
 }
 
-/// The Business mini-app, top to bottom: the week selector; the essentials (the revenue of the period around
-/// the chosen day against the previous one, with the period choice, and the two actions); then the sources,
-/// the indicators the person chose, their own metrics and the revenue curve; then sales and costs, results,
-/// recurring revenue; « Mes infos » last.
+/// The Business mini-app, top to bottom. On the band: the week selector, then the revenue of the period around
+/// the chosen day against the previous one, with the period choice just above it. On the sheet: the two
+/// actions, the sources, the indicators the person chose, their own metrics and the revenue curve; then sales
+/// and costs, results, recurring revenue; « Mes infos » last.
 struct BusinessAppView: View {
     @Environment(AppModel.self) private var model
     @State private var period: BusinessPeriod = .month
@@ -127,46 +127,49 @@ struct BusinessAppView: View {
         let now = Date()
         let at = reference(now: now)
         let state = model.business
-        MiniAppScroll {
-            // 1. The only date selector: sales and costs are real, so it stops at today.
+        MiniAppScaffold(colorHex: accentHex) {
+            // The band: the only date selector (sales and costs are real, so it stops at today), then the
+            // revenue (its period is a granularity, not a date), straight on the band.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { dayMark($0, state: state) })
-            // 2. The essentials: the revenue (its period is a granularity, not a date) and the actions.
             if state.sales.isEmpty && state.expenses.isEmpty && state.subscriptions.isEmpty {
                 start
             } else {
                 hero(state: state, now: at)
             }
-            HStack(spacing: 10) {
-                MiniActionButton(title: tr("Vente"), symbol: "plus", colorHex: accentHex) { sheet = .sale(nil) }
-                    .accessibilityIdentifier("business-add-sale")
-                MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }
-                    .accessibilityIdentifier("business-add-cost")
-            }
-            // 3. The rest, by importance.
+        } sheet: {
+            // The sheet, by importance: the two actions, the sources, the indicators, the metrics by hand,
+            // the curve, the pages, the settings last.
+            actions
             BusinessSourcesCard()
             kpis(state: state, now: at)
             metrics(state: state)
             curve(state: state, now: at)
             more(state: state)
-            // 4. Last.
             MiniAppInfoSection(app: .business)
         }
         .navigationTitle(state.name.isEmpty ? tr("Business") : state.name)
-        .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
+    }
+
+    private var actions: some View {
+        HStack(spacing: 10) {
+            MiniActionButton(title: tr("Vente"), symbol: "plus", colorHex: accentHex) { sheet = .sale(nil) }
+                .accessibilityIdentifier("business-add-sale")
+            MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }
+                .accessibilityIdentifier("business-add-cost")
+        }
     }
 
     private var start: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Image(systemName: "briefcase.fill").font(.system(size: 28)).foregroundStyle(Color(hex: accentHex))
+            Image(systemName: "briefcase.fill").font(.system(size: 28))
             Text(tr("Ton activité, chiffres à l'appui")).font(.title3.weight(.bold))
             Text(tr("Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls."))
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .opacity(0.8)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .card()
     }
 
     // MARK: Revenue
@@ -181,36 +184,32 @@ struct BusinessAppView: View {
     private func hero(state: BusinessState, now: Date) -> some View {
         let comparison = BusinessMath.compare(.revenue, state, period.math, at: now)
         let change = BusinessFormat.change(comparison.change, higherIsBetter: true)
-        return VStack(alignment: .leading, spacing: 8) {
+        // The variation against the previous period (or its absence), then the progress to the month's goal.
+        var lines: [String] = []
+        if let change {
+            lines.append("\(change.text) \(period.comparisonText)")
+        } else if let previous = comparison.previous, previous == 0 {
+            lines.append(tr("Rien \(period.previousText)"))
+        }
+        let progress = BusinessMath.goalProgress(state, at: now)
+        let hasGoal = period == .month && state.monthlyGoal > 0
+        if hasGoal {
+            lines.append(tr("\(Fmt.percent(progress)) de l'objectif de \(TF.money(state.monthlyGoal, currency))"))
+        }
+        let caption: String? = lines.isEmpty ? nil : lines.joined(separator: "\n")
+        return VStack(alignment: .leading, spacing: 10) {
             // The period is how far the revenue reaches (a day, a week…) around the chosen day.
             Picker(tr("Période"), selection: $period) {
                 ForEach(BusinessPeriod.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
-            .padding(.bottom, 4)
             .accessibilityIdentifier("business-period")
-            Text(tr("Chiffre d'affaires")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
-            Text(TF.money(comparison.current ?? 0, currency))
-                .font(.system(size: 40, weight: .bold, design: .rounded))
-                .monospacedDigit()
-                .contentTransition(.numericText())
-            if let change {
-                Label("\(change.text) \(period.comparisonText)", systemImage: (comparison.change ?? 0) >= 0 ? "arrow.up.right" : "arrow.down.right")
-                    .font(.subheadline.weight(.medium))
-                    .foregroundStyle(Color(hex: change.hex))
-            } else if let previous = comparison.previous, previous == 0 {
-                Text(tr("Rien \(period.previousText)")).font(.subheadline).foregroundStyle(.secondary)
-            }
-            if period == .month && state.monthlyGoal > 0 {
-                let progress = BusinessMath.goalProgress(state, at: now)
-                ProgressView(value: min(1, progress)).tint(Color(hex: progress >= 1 ? BusinessFormat.goodHex : accentHex))
-                Text(tr("\(Fmt.percent(progress)) de l'objectif de \(TF.money(state.monthlyGoal, currency))"))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+            MiniHero(label: tr("Chiffre d'affaires"), value: TF.money(comparison.current ?? 0, currency),
+                     caption: caption)
+            if hasGoal {
+                ProgressView(value: min(1, progress)).tint(progress >= 1 ? Color(hex: BusinessFormat.goodHex) : Color.primary)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .card()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("business-hero")
     }

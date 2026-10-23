@@ -15,11 +15,12 @@ struct PhotoQuotesAppView: View {
 
     var body: some View {
         let made = model.photoQuoteDesigns
-        MiniAppScroll {
-            Text(tr("Tes photos et les phrases qui t'inspirent, sur ton écran d'accueil."))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+        MiniAppScaffold(colorHex: accentHex) {
+            // No selector: nothing here is dated. The band tells how many widgets exist and what is shared.
+            MiniHero(label: tr("Tes widgets photo"), value: "\(made.count)",
+                     caption: tr("Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé."))
+        } sheet: {
+            // Two actions: a row at the head of the sheet.
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Photos"), symbol: "photo.on.rectangle.angled", colorHex: accentHex) {
                     start(.photos)
@@ -31,7 +32,7 @@ struct PhotoQuotesAppView: View {
                 .accessibilityIdentifier("quote-new")
             }
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Mes widgets"), detail: made.isEmpty ? nil : "\(made.count)")
+                MiniSectionTitle(title: tr("Mes widgets"))
                 if made.isEmpty {
                     Text(tr("Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes."))
                         .font(.subheadline)
@@ -63,7 +64,6 @@ struct PhotoQuotesAppView: View {
             MiniFootnote(text: tr("Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget »."))
         }
         .navigationTitle(tr("Photos et citations"))
-        .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { draft in
             PhotoQuoteEditor(draft: draft)
         }

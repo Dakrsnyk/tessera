@@ -45,7 +45,9 @@ enum CalendarScale: Int, CaseIterable, Identifiable {
 /// selector of the screen and has no date navigation of its own). A pinch with two fingers goes from one scale
 /// to the next (spread: closer, pinch: wider) and keeps the day looked at; the scale picker does the same for
 /// whoever prefers it. A touch on a free time of a day or of the week creates an event there; a touch on a day of
-/// the month or a month of the year goes to it; a swipe moves the day by the period shown.
+/// the month or a month of the year goes to it; a swipe moves the day by the period shown. The day and the week
+/// tables have no frame and no strip of days: the week selector right above is their header, so the screen
+/// puts it with `leadingInset: WeekTimetable.fullLeadingInset` and the columns fall under the days.
 struct PlanningCalendarCard: View {
     @Binding var day: Date
     @Binding var scale: CalendarScale
@@ -60,12 +62,15 @@ struct PlanningCalendarCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            header
             Picker(tr("Échelle"), selection: Binding(get: { scale }, set: { change(to: $0) })) {
                 ForEach(CalendarScale.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
             .accessibilityIdentifier("planning-scale")
+            // The month and the year have no strip of days above: their period is named here.
+            if let period {
+                Text(period).font(.headline)
+            }
             content
                 .scaleEffect(isPinching ? min(1.12, max(0.88, pinch)) : 1, anchor: .center)
                 .opacity(isPinching ? 0.85 : 1)
@@ -81,17 +86,12 @@ struct PlanningCalendarCard: View {
 
     // MARK: Header
 
-    /// A plain section title, no navigation (the week selector above moves the day, the calendar follows it): the
-    /// period on the right, the month and year for the week and the month (as in Calendar), the year for the
-    /// year; none for the day, which the agenda above already names.
-    private var header: some View {
-        MiniSectionTitle(title: tr("Calendrier"), detail: period)
-    }
-
+    /// The period of the month (month and year, as in Calendar) or of the year; none for the day and the week,
+    /// which the week selector at the top of the screen names.
     private var period: String? {
         switch scale {
-        case .day: nil
-        case .week, .month: Fmt.monthYear(day)
+        case .day, .week: nil
+        case .month: Fmt.monthYear(day)
         case .year: "\(DateMath.calendar.component(.year, from: day))"
         }
     }
@@ -110,13 +110,11 @@ struct PlanningCalendarCard: View {
         switch scale {
         case .day:
             WeekTimetable(days: [(day: day, items: Agenda.items(on: day, model: model, events: events))], selected: day, hourHeight: 52, hours: 6...22,
-                          onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex))
-                .card(padding: 10)
+                          onSelect: select, onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex), showsHeader: false)
         case .week:
-            // The day headers are the table's columns: the day is picked in the selector at the top of the screen.
+            // Without a frame or strip of days: the selector at the top of the screen is the header of the columns.
             WeekTimetable(days: Agenda.week(containing: day, model: model, events: events), selected: day,
-                          onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex))
-                .card(padding: 10)
+                          onSelect: select, onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex), showsHeader: false)
         case .month:
             monthGrid
         case .year:
@@ -163,6 +161,12 @@ struct PlanningCalendarCard: View {
     }
 
     // MARK: Actions
+
+    /// A touch on a column of the table picks its day (not while two fingers zoom).
+    private func select(_ date: Date) {
+        guard !isPinching, !DateMath.isSameDay(date, day) else { return }
+        withAnimation(.snappy) { day = date }
+    }
 
     private func create(_ date: Date, _ minute: Int) {
         // Never while two fingers zoom.

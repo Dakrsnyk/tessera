@@ -212,6 +212,7 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(app.otherElements["planning-today"].waitForExistence(timeout: 12), "Mini-app Planning absente")
         snapshot("planning")
 
+        // The new-task action floats above the tab bar (the scaffold's own identifier).
         tap(app.buttons["planning-new-task"], "Nouvelle tâche")
         let title = app.textFields["task-title"]
         XCTAssertTrue(title.waitForExistence(timeout: 8), "Formulaire de tâche absent")

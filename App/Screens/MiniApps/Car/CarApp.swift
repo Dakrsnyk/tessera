@@ -59,8 +59,8 @@ private enum CarJournalEntry: Identifiable {
     }
 }
 
-/// The Auto mini-app: the week selector, the odometer and the range left with the actions, the log of the day
-/// picked; then the consumption and the cost, what maintenance comes, the deadlines and the pages.
+/// The Auto mini-app: on the band the week selector, the odometer and the range left; in the sheet the two
+/// actions, the log of the day picked, the consumption and the cost, what maintenance comes, the deadlines and the pages.
 struct CarAppView: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: CarSheet?
@@ -74,7 +74,7 @@ struct CarAppView: View {
         let now = Date()
         let state = model.car
         let hasData = !(state.fills.isEmpty && state.readings.isEmpty && state.services.isEmpty && state.deadlines.isEmpty)
-        MiniAppScroll {
+        MiniAppScaffold(colorHex: accentHex) {
             if hasData {
                 WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { date in
                     WeekDayMark(isPlanned: hasRecord(state, on: date))
@@ -83,6 +83,8 @@ struct CarAppView: View {
             } else {
                 start
             }
+        } sheet: {
+            // Two actions: a row at the head of the sheet.
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Plein"), symbol: "fuelpump.fill", colorHex: Car.fuelHex) { sheet = .fuel(nil) }
                     .accessibilityIdentifier("car-add-fuel")
@@ -99,7 +101,6 @@ struct CarAppView: View {
             MiniAppInfoSection(app: .car)
         }
         .navigationTitle(state.name.isEmpty ? tr("Auto") : state.name)
-        .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
 
@@ -120,15 +121,11 @@ struct CarAppView: View {
 
     private func hero(state: CarState, now: Date) -> some View {
         let range = CarMath.range(state)
+        let odometer = CarMath.odometer(state).map { tr("\(Fmt.number(Int($0))) km") } ?? "–"
+        let rangeText = range.map { tr("≈ \(Fmt.number(Int($0.km))) km") }
         return VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(tr("Compteur")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
-                    Text(CarMath.odometer(state).map { tr("\(Fmt.number(Int($0))) km") } ?? "–")
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
-                        .monospacedDigit()
-                }
-                Spacer()
+            HStack(alignment: .top) {
+                MiniHero(label: tr("Compteur"), value: odometer, caption: rangeText.map { "\(tr("Autonomie estimée")) \($0)" }, valueSize: 44)
                 if let month = CarMath.kmThisMonth(state, at: now) {
                     // It opens the mileage page: the « Kilométrage » row of the list below is only there when this figure is not.
                     NavigationLink(value: HomeRoute.page(.carMileage)) {
@@ -144,12 +141,8 @@ struct CarAppView: View {
                 }
             }
             if let range {
+                // The range itself is the legend of the figure above; here, how full the tank is and where it comes from.
                 VStack(alignment: .leading, spacing: 6) {
-                    HStack {
-                        Label(tr("Autonomie estimée"), systemImage: "fuelpump.fill").font(.subheadline.weight(.semibold))
-                        Spacer()
-                        Text(tr("≈ \(Fmt.number(Int(range.km))) km")).font(.headline).monospacedDigit()
-                    }
                     ProgressView(value: range.share)
                         .tint(range.share < 0.2 ? Color(hex: Car.alertHex) : Color(hex: Car.fuelHex))
                     Text(tr("Environ \(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \(Fmt.format(range.since.date, template: "dMMMM"))"))
@@ -157,8 +150,6 @@ struct CarAppView: View {
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                .padding(12)
-                .background(Color(hex: Car.fuelHex).opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
             } else if state.tankLiters == nil && CarMath.consumption(state) != nil {
                 Button { sheet = .settings } label: {
                     Label(tr("Indique la taille du réservoir pour voir l'autonomie"), systemImage: "fuelpump")
@@ -168,7 +159,7 @@ struct CarAppView: View {
                 .buttonStyle(.pressable)
             }
         }
-        .card()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("car-hero")
     }

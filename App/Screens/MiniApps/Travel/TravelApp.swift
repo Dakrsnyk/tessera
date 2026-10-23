@@ -58,14 +58,22 @@ struct TravelAppView: View {
     var body: some View {
         let now = Date()
         let state = model.travel
-        MiniAppScroll {
-            if let trip = TravelMath.currentTrip(state, at: now) {
+        let current = TravelMath.currentTrip(state, at: now)
+        // With no trip, « Nouveau voyage » is the one main action: it floats. With one, it is a row of « Mes voyages ».
+        MiniAppScaffold(colorHex: accentHex, action: current == nil ? newTripAction : nil) {
+            if let trip = current {
                 let program = TravelMath.program(state, for: trip)
-                let dayItems = program.first { DateMath.isSameDay($0.day, day) }?.items ?? []
                 WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: { date in
                     WeekDayMark(isPlanned: program.contains { DateMath.isSameDay($0.day, date) })
                 })
                 TripHero(trip: trip, weather: model.tripWeather, now: now)
+            } else {
+                start
+            }
+        } sheet: {
+            if let trip = current {
+                let program = TravelMath.program(state, for: trip)
+                let dayItems = program.first { DateMath.isSameDay($0.day, day) }?.items ?? []
                 dayProgram(trip: trip, items: dayItems, days: program.count)
                 next(trip: trip, state: state, now: now, shown: Set(dayItems.map(\.id)))
                 HStack(spacing: 10) {
@@ -73,17 +81,14 @@ struct TravelAppView: View {
                     checklistTile(trip: trip, state: state)
                 }
                 converter(trip: trip, state: state)
-            } else {
-                start
             }
             others(state: state, now: now)
-            if let trip = TravelMath.currentTrip(state, at: now) {
+            if let trip = current {
                 editRow(trip: trip)
             }
             MiniAppInfoSection(app: .travel)
         }
         .navigationTitle(tr("Voyage"))
-        .navigationBarTitleDisplayMode(.large)
         .onAppear {
             // A trip still to come: the selector opens on its first day, not on a week with nothing in it.
             if let trip = TravelMath.currentTrip(model.travel, at: Date()), trip.start > Date(), DateMath.isSameDay(day, Date()) {
@@ -97,6 +102,12 @@ struct TravelAppView: View {
         .sheet(item: $sheet) { $0.editor }
     }
 
+    /// The floating action of a screen with no trip yet.
+    private var newTripAction: MiniFloatingAction {
+        MiniFloatingAction(title: tr("Nouveau voyage"), symbol: "plus", colorHex: accentHex, identifier: "travel-new-trip") { sheet = .trip(Travel.newTrip()) }
+    }
+
+    /// The start card on the band, with no trip yet (its action is the floating « Nouveau voyage »).
     private var start: some View {
         VStack(alignment: .leading, spacing: 12) {
             Image(systemName: "airplane.departure").font(.system(size: 28)).foregroundStyle(Color(hex: accentHex))
@@ -105,9 +116,8 @@ struct TravelAppView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            MiniActionButton(title: tr("Nouveau voyage"), symbol: "plus", colorHex: accentHex) { sheet = .trip(Travel.newTrip()) }
-                .accessibilityIdentifier("travel-new-trip")
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .card()
     }
 
@@ -298,7 +308,7 @@ struct TravelAppView: View {
     }
 }
 
-/// The trip at a glance: where, when, the local time and the weather there.
+/// The trip at a glance, on the band (no card): where, which day, when, the local time and the weather there.
 struct TripHero: View {
     let trip: Trip
     let weather: WeatherSnapshot?
@@ -309,13 +319,8 @@ struct TripHero: View {
         let ongoing = TravelMath.isOngoing(trip, at: now)
         let offset = TravelMath.offsetHours(trip.timeZone, at: now)
         VStack(alignment: .leading, spacing: 8) {
-            Text(ongoing ? tr("EN VOYAGE") : tr("PROCHAIN VOYAGE"))
-                .font(.caption.weight(.bold))
-                .tracking(0.5)
-                .foregroundStyle(Color(hex: Travel.accentHex))
-            Text(trip.destination).font(.largeTitle.weight(.bold))
-            Text(countdown(ongoing: ongoing)).font(.headline)
-            Text(Travel.dates(trip)).font(.subheadline).foregroundStyle(.secondary)
+            MiniHero(label: ongoing ? tr("EN VOYAGE") : tr("PROCHAIN VOYAGE"), value: trip.destination,
+                     caption: "\(countdown(ongoing: ongoing))\n\(Travel.dates(trip))", valueSize: 44)
             HStack(spacing: 18) {
                 if offset != 0 {
                     VStack(alignment: .leading, spacing: 2) {
@@ -340,8 +345,6 @@ struct TripHero: View {
             .padding(.top, 4)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(18)
-        .background(Color(hex: Travel.accentHex).opacity(0.12), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("travel-hero")
     }

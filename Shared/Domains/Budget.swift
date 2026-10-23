@@ -408,6 +408,53 @@ enum BudgetMath {
         max(0, remaining(state, at: date)) / Double(daysLeftInMonth(date))
     }
 
+    // MARK: Through a chosen day
+
+    /// The month of `day` from its first instant to the end of that day: what the figures « of the month »
+    /// cover once a day is chosen, so nothing noted after it counts. For today (or a day to come) it is the
+    /// whole month, exactly as `spentThisMonth(_:at:)` counts it.
+    static func monthThroughDay(_ day: Date, now: Date = Date()) -> DateInterval {
+        let month = monthInterval(day)
+        guard DateMath.startOfDay(day) < DateMath.startOfDay(now) else { return month }
+        return DateInterval(start: month.start, end: DateMath.nextMidnight(after: day).addingTimeInterval(-1))
+    }
+
+    /// What was spent from the start of the month of `day` to the end of `day` (fixed payments included).
+    /// For today it is `spentThisMonth(_:at: now)`.
+    static func spentThisMonth(_ state: BudgetState, throughDay day: Date, now: Date = Date()) -> Double {
+        let interval = monthThroughDay(day, now: now)
+        return expenses(state, in: interval, now: min(now, interval.end)).reduce(0) { $0 + $1.amount }
+    }
+
+    /// The budget left at the end of `day`: the monthly budget minus what was spent up to that day.
+    static func remaining(_ state: BudgetState, throughDay day: Date, now: Date = Date()) -> Double {
+        state.monthlyBudget - spentThisMonth(state, throughDay: day, now: now)
+    }
+
+    /// The days the budget left at the end of `day` has to cover: from today included when `day` is today (as
+    /// `daysLeftInMonth`), the days after `day` otherwise (at least 1).
+    static func daysToCover(throughDay day: Date, now: Date = Date()) -> Int {
+        guard DateMath.startOfDay(day) < DateMath.startOfDay(now) else { return daysLeftInMonth(day) }
+        return max(1, daysLeftInMonth(day) - 1)
+    }
+
+    /// What can be spent each remaining day with the budget left at the end of `day`.
+    static func perDayLeft(_ state: BudgetState, throughDay day: Date, now: Date = Date()) -> Double {
+        max(0, remaining(state, throughDay: day, now: now)) / Double(daysToCover(throughDay: day, now: now))
+    }
+
+    /// What came in from the start of the month of `day` to the end of `day`.
+    static func earned(_ state: BudgetState, throughDay day: Date, now: Date = Date()) -> Double {
+        let interval = monthThroughDay(day, now: now)
+        return earned(state, in: interval, now: min(now, interval.end))
+    }
+
+    /// The categories of the month of `day`, counting what was spent up to the end of `day`.
+    static func categoryStatus(_ state: BudgetState, throughDay day: Date, now: Date = Date()) -> [CategoryStatus] {
+        let interval = monthThroughDay(day, now: now)
+        return categoryStatus(state, spending: expenses(state, in: interval, now: min(now, interval.end)))
+    }
+
     static func spentToday(_ state: BudgetState, at date: Date) -> Double {
         let day = DateInterval(start: DateMath.startOfDay(date), end: DateMath.nextMidnight(after: date))
         return expenses(state, in: day, now: date).reduce(0) { $0 + $1.amount }
@@ -591,8 +638,11 @@ enum BudgetMath {
 
     /// Every category with a limit or some spending this month, the biggest spending first.
     static func categoryStatus(_ state: BudgetState, at date: Date) -> [CategoryStatus] {
-        let spending = expenses(state, in: monthInterval(date), now: date)
-        return state.categories.map { category in
+        categoryStatus(state, spending: expenses(state, in: monthInterval(date), now: date))
+    }
+
+    private static func categoryStatus(_ state: BudgetState, spending: [Expense]) -> [CategoryStatus] {
+        state.categories.map { category in
             CategoryStatus(category: category, spent: spending.filter { $0.categoryID == category.id }.reduce(0) { $0 + $1.amount })
         }
         .filter { $0.spent > 0 || $0.limit > 0 }
