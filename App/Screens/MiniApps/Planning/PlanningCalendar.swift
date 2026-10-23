@@ -62,15 +62,11 @@ struct PlanningCalendarCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Picker(tr("Échelle"), selection: Binding(get: { scale }, set: { change(to: $0) })) {
-                ForEach(CalendarScale.allCases) { Text($0.title).tag($0) }
-            }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("planning-scale")
             // The month and the year have no strip of days above: their period is named here.
             if let period {
                 Text(period).font(.headline)
             }
+            // The week itself comes first, right under the selector at the top of the screen.
             content
                 .scaleEffect(isPinching ? min(1.12, max(0.88, pinch)) : 1, anchor: .center)
                 .opacity(isPinching ? 0.85 : 1)
@@ -78,6 +74,11 @@ struct PlanningCalendarCard: View {
                 .transition(.asymmetric(insertion: .opacity.combined(with: .scale(scale: 0.96)), removal: .opacity))
                 .simultaneousGesture(magnify)
                 .simultaneousGesture(swipe)
+            Picker(tr("Échelle"), selection: Binding(get: { scale }, set: { change(to: $0) })) {
+                ForEach(CalendarScale.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("planning-scale")
             MiniFootnote(text: hint)
         }
         .accessibilityElement(children: .contain)

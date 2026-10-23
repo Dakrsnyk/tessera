@@ -353,17 +353,22 @@ struct WeekTimetable: View {
                     } else {
                         let color = Color(hex: item.colorHex)
                         let shape = RoundedRectangle(cornerRadius: 4, style: .continuous)
-                        Text(item.title)
-                            .font(.system(size: 9, weight: .semibold))
-                            .foregroundStyle(color)
-                            .brightness(inkShift)
-                            .lineLimit(1)
-                            .padding(.leading, 5)
-                            .padding(.trailing, 2)
-                            .frame(maxWidth: .infinity, minHeight: 16, alignment: .leading)
-                            .background(color.opacity(0.2), in: shape)
-                            .overlay(alignment: .leading) { Rectangle().fill(color).frame(width: 2) }
-                            .clipShape(shape)
+                        // A touch opens it (a task, a workout of the day) like a block with a time.
+                        Button { onOpen?(item) } label: {
+                            Text(item.title)
+                                .font(.system(size: 9, weight: .semibold))
+                                .foregroundStyle(color)
+                                .brightness(inkShift)
+                                .lineLimit(1)
+                                .padding(.leading, 5)
+                                .padding(.trailing, 2)
+                                .frame(maxWidth: .infinity, minHeight: 16, alignment: .leading)
+                                .background(color.opacity(0.2), in: shape)
+                                .overlay(alignment: .leading) { Rectangle().fill(color).frame(width: 2) }
+                                .clipShape(shape)
+                        }
+                        .buttonStyle(.pressable)
+                        .disabled(onOpen == nil)
                     }
                 }
                 .opacity(item.isDone == true ? 0.45 : 1)

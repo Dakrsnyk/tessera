@@ -29,6 +29,8 @@ struct MiniFloatingAction {
 struct MiniAppScaffold<Header: View, Sheet: View>: View {
     let colorHex: String
     var action: MiniFloatingAction?
+    /// Less room between the header and the sheet, for a screen whose first block must sit right under the selector.
+    var compact = false
     @ViewBuilder let header: () -> Header
     @ViewBuilder let sheet: () -> Sheet
     @Environment(\.colorScheme) private var scheme
@@ -43,14 +45,14 @@ struct MiniAppScaffold<Header: View, Sheet: View>: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 4)
-                .padding(.bottom, 22)
+                .padding(.bottom, compact ? 4 : 22)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(alignment: .top) { band }
                 VStack(alignment: .leading, spacing: 22) {
                     sheet()
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 26)
+                .padding(.top, compact ? 18 : 26)
                 .padding(.bottom, action == nil ? 40 : 130)
                 .frame(maxWidth: .infinity, minHeight: 520, alignment: .topLeading)
                 .background(alignment: .top) { sheetShape }

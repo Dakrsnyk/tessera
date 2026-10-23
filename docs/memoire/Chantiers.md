@@ -123,6 +123,10 @@ Demande (2026-10-22) : sélecteur de semaine en tête, puis essentiel, compléme
 - Choix à connaître : Business garde son sélecteur « Période » (granularité du chiffre d'affaires, dans le hero) ; Planning garde les lignes « Semaine » et « Mois » (sous-pages avec leur propre navigation) ; le Top 3 reste lié à aujourd'hui ; Voyage s'ouvre sur le premier jour d'un voyage à venir ; la Météo n'a pas de prévision pour les jours passés de la semaine (« Météo indisponible », rien d'inventé).
 - Piège : le rapport CI coupe la liste des tests à 400 lignes ; le journal complet se lit avec `gh run view <id> --log` (chercher `Test Case .* failed` et `TEST SUCCEEDED`).
 
+## Style « Signature » des mini-apps, budget Finances par jour, Planning réorganisé — 2026-10-22
+
+Demande (2026-10-22) : choix du style C (planche de trois styles dans `pub/styles-mini-apps/`), budget de Finances qui suit le jour choisi, Planning avec la semaine du planning juste sous le sélecteur du haut. `MiniAppScaffold` (`App/Screens/MiniApps/MiniAppScaffold.swift`) : bandeau coloré (sélecteur + chiffre essentiel `MiniHero`), feuille arrondie pour le reste, « Mes infos » en dernier, action principale flottante (`MiniFloatingAction`, deux actions = rangée de boutons en haut de la feuille). Appliqué à toutes les mini-apps (run 236 compile). Finances : `Budget.remaining(_:throughDay:)` etc. (7 `FinancesDayBudgetTests`). Planning : plus de ligne « jour choisi », le tableau de la semaine (`PlanningCalendarCard`) vient juste sous le sélecteur (`compact: true`), le choix d'échelle passe dessous, le mois et l'année listent le jour choisi (`AgendaRow` cochable), les pastilles de jours en trois états (plein = fait, creux = prévu). Reste : `[interne]` puis vérification sans Premium (`[apps]`), rien sur TestFlight public.
+
 ## À ne pas oublier
 
 - Le dépôt est public pour la CI : le repasser en privé.

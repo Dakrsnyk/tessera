@@ -88,7 +88,7 @@ struct WeekSelector: View {
                 }
             }
         }
-        .tint(accent)
+        .foregroundStyle(Color.primary)
     }
 
     // MARK: A day
@@ -113,10 +113,16 @@ struct WeekSelector: View {
                 Text("\(DateMath.calendar.component(.day, from: date))")
                     .font(.title3.weight(.bold))
                     .monospacedDigit()
-                Circle()
-                    .fill(holdsSomething ? Color.primary : Color.clear)
-                    .frame(width: 5, height: 5)
-                    .opacity(0.85)
+                // A filled dot: done, caught up or under way; a hollow one: planned.
+                ZStack {
+                    if state.isDone || state.isCaughtUp || state.progress > 0 {
+                        Circle().fill(Color.primary)
+                    } else if holdsSomething {
+                        Circle().strokeBorder(Color.primary, lineWidth: 1.5)
+                    }
+                }
+                .frame(width: 6, height: 6)
+                .opacity(0.85)
             }
             .foregroundStyle(kind == .selected ? selectedInk : Color.primary)
             .padding(.vertical, 8)

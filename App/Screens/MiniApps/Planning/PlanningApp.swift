@@ -29,6 +29,7 @@ struct PlanningAppView: View {
         let overdue = tasks.filter { $0.isOverdue(at: now) }
         MiniAppScaffold(
             colorHex: accentHex,
+            compact: true,
             // The one main action, floating above the tab bar (a task due the day picked).
             action: MiniFloatingAction(title: tr("Nouvelle tâche"), symbol: "plus", colorHex: accentHex, identifier: "planning-new-task") {
                 editors.task = TaskItem(title: "", due: DateMath.startOfDay(day))
@@ -36,18 +37,17 @@ struct PlanningAppView: View {
         ) {
             // 1. The only date selector of the screen, with room on the left for the hours of the table below it.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: mark, leadingInset: WeekTimetable.fullLeadingInset)
-            // The day picked in a line, without a card: its name, how much it holds, what comes next.
-            VStack(alignment: .leading, spacing: 0) {
-                MiniHero(label: Fmt.longDay(day),
-                         value: items.isEmpty ? tr("Libre") : Fmt.plural(items.count, tr("élément"), tr("éléments")),
-                         caption: nextItem(in: items, now: now, isToday: isToday).map { "\($0.timeText) · \($0.title)" },
-                         valueSize: 30)
+        } sheet: {
+            // 2. The planning right under the selector: the week as a table (or the day, the month, the year).
+            VStack(alignment: .leading, spacing: 18) {
+                PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
+                // The month and the year show no hours: the day picked is listed under them, to open and check off.
+                if scale == .month || scale == .year {
+                    dayAgenda(items: items, now: now, isToday: isToday)
+                }
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("planning-today")
-        } sheet: {
-            // 2. The planning right under the selector: the week as a table (or the day, the month, the year).
-            PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
 
             if !CalendarService.hasAccess {
                 Button {
@@ -142,17 +142,11 @@ struct PlanningAppView: View {
 
     /// A day of the selector holds something when the agenda has an element that day.
     private func mark(_ date: Date) -> WeekDayMark {
-        WeekDayMark(isPlanned: !Agenda.items(on: date, model: model, events: events).isEmpty)
-    }
-
-    /// What comes next in the day: for today the first thing not over yet, for another day the first thing
-    /// with a time, else the first thing there is (the items are in the order of the day).
-    private func nextItem(in items: [AgendaItem], now: Date, isToday: Bool) -> AgendaItem? {
-        let upcoming = items.first { item in
-            guard let start = item.start else { return false }
-            return !isToday || (item.end ?? start) > now
-        }
-        return upcoming ?? items.first
+        let items = Agenda.items(on: date, model: model, events: events)
+        // Done when everything that can be checked off is, planned when something is still to do.
+        let checkable = items.compactMap(\.isDone)
+        let allDone = !checkable.isEmpty && checkable.allSatisfy { $0 }
+        return WeekDayMark(isDone: allDone, isPlanned: !items.isEmpty)
     }
 
     private func requestCalendar() async {
@@ -184,6 +178,28 @@ struct PlanningAppView: View {
     }
 
     // MARK: Priorities
+
+    /// The day picked, line by line: what it holds, with the tasks to check off right here.
+    private func dayAgenda(items: [AgendaItem], now: Date, isToday: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: isToday ? tr("Aujourd'hui") : Fmt.longDay(day),
+                             detail: items.isEmpty ? nil : Fmt.plural(items.count, tr("élément"), tr("éléments")))
+            VStack(alignment: .leading, spacing: 0) {
+                if items.isEmpty {
+                    Text(tr("Rien de prévu ce jour-là."))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .padding(.vertical, 12)
+                }
+                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                    AgendaRow(item: item, isNow: isToday && (item.start.map { $0 <= now && (item.end ?? $0) > now } ?? false))
+                    if index < items.count - 1 { Divider().padding(.leading, 62) }
+                }
+            }
+            .padding(.horizontal, 14)
+            .miniCard()
+        }
+    }
 
     private func priorities(now: Date) -> some View {
         let items = model.productivity.priorities
