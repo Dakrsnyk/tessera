@@ -91,7 +91,8 @@ enum ScheduleReader {
         let turned = page.rotation % 180 != 0
         let width = turned ? bounds.height : bounds.width
         let height = turned ? bounds.width : bounds.height
-        let scale = 2400 / max(width, height)
+        // `thumbnail` works in points and the image comes back at the screen scale: ask for fewer points.
+        let scale = 2400 / max(width, height) / max(1, UIScreen.main.scale)
         let size = CGSize(width: width * scale, height: height * scale)
         let thumbnail = page.thumbnail(of: size, for: .mediaBox)
         return upright(thumbnail)

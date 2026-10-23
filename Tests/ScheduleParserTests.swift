@@ -29,6 +29,19 @@ final class ScheduleParserTests: XCTestCase {
 
     // MARK: Grid with the days as columns
 
+    func testARoomWrittenWithItsWordKeepsItsWholeCode() {
+        let centers = [0.15, 0.33, 0.51, 0.69, 0.87]
+        var lines: [RecognizedLine] = []
+        for (index, name) in ["Lun", "Mar", "Mer", "Jeu", "Ven"].enumerated() {
+            lines.append(cell(name, center: centers[index], y: 0.05))
+        }
+        lines += [cell("9h-10h", center: 0.15, y: 0.20), cell("Chimie", center: 0.15, y: 0.225), cell("Salle B-204", center: 0.15, y: 0.25)]
+        let slots = ScheduleParser.slots(from: lines)
+        XCTAssertEqual(slots.count, 1)
+        XCTAssertEqual(slots.first?.title, "Chimie")
+        XCTAssertEqual(slots.first?.room, "Salle B-204")
+    }
+
     func testGridWithTimesInsideTheCells() {
         let centers = [0.15, 0.33, 0.51, 0.69, 0.87]
         var lines: [RecognizedLine] = []
@@ -285,7 +298,7 @@ final class ScheduleParserTests: XCTestCase {
         XCTAssertTrue(ScheduleParser.slots(from: []).isEmpty)
         XCTAssertTrue(ScheduleParser.slots(from: [line("   ", x: 0.1, y: 0.1)]).isEmpty)
         XCTAssertTrue(ScheduleParser.slots(from: list(["Lorem ipsum dolor sit amet", "consectetur 2026", "8h"])).isEmpty)
-        let odd = RecognizedLine(text: "Lundi 8h-10h Maths", box: CGRect(x: .nan, y: .infinity, width: -1, height: .nan))
+        let odd = RecognizedLine(text: "Lundi 8h-10h Maths", box: CGRect(x: CGFloat.nan, y: CGFloat.infinity, width: -1, height: CGFloat.nan))
         XCTAssertTrue(ScheduleParser.slots(from: [odd]).isEmpty, "A box that is not a number is skipped, never a crash")
     }
 

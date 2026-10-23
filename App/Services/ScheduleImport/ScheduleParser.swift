@@ -149,7 +149,7 @@ enum ScheduleParser {
 
     // MARK: Regular expressions
 
-    static let markerPattern = #"(\s?(?:[hH](?![A-Za-z])|[:時])\s?(\d{2})?|\s?Uhr\b)"#
+    static let markerPattern = #"(\s?(?:[hH](?![A-Za-z])|[:時])\s?(\d{2})?分?|\s?Uhr\b)"#
     static let meridiemPattern = #"(?:\s?([aApP])\.?[mM]\.?(?![A-Za-z]))"#
 
     /// "8h30-10h", "08:30 - 10:00", "8:30 AM to 10 PM", "8-10 Uhr". Groups: 1 hour, 2 marker, 3 minutes,
@@ -157,7 +157,7 @@ enum ScheduleParser {
     static let rangeRegex: NSRegularExpression? = {
         let unit1 = #"(\d{1,2})"# + markerPattern + "?" + meridiemPattern + "?"
         let unit2 = #"(\d{1,2})"# + markerPattern + "?" + meridiemPattern + "?"
-        let separator = #"(?:\s*(?:[-~→〜]|から)\s*|\s+(?:to|a|à|au|al|bis|até|ate|until|till)\s+)"#
+        let separator = #"(?:\s*(?:[-~→〜～]|から)\s*|\s+(?:to|a|à|au|al|bis|até|ate|until|till)\s+)"#
         return try? NSRegularExpression(pattern: #"(?<![\d:.,/])(?<![A-Za-z])"# + unit1 + separator + unit2 + #"(?!\d)"#,
                                         options: [.caseInsensitive])
     }()
@@ -176,7 +176,7 @@ enum ScheduleParser {
 
     /// "Salle B-204", "Local 3.12", "Room 5", "Amphi A". The word alone is not enough: a number or one capital letter must follow.
     static let prefixedRoomRegex: NSRegularExpression? = try? NSRegularExpression(
-        pattern: #"(?:^|[\s(@,;|-])((?:salle|local|room|raum|aula|sala|stanza|labo|lab|amphi|amphitheatre|amphithéâtre|classe|class|pièce|piece)\.?\s*[:#]?\s*(?:(?-i:[A-Z])(?![A-Za-z])|[A-Za-z0-9.\-/]*\d[A-Za-z0-9.\-/]*)(?:\s\d{1,4}[A-Za-z]?)?)"#,
+        pattern: #"(?:^|[\s(@,;|-])((?:salle|local|room|raum|aula|sala|stanza|labo|lab|amphi|amphitheatre|amphithéâtre|classe|class|pièce|piece)\.?\s*[:#]?\s*(?:[A-Za-z0-9.\-/]*\d[A-Za-z0-9.\-/]*|(?-i:[A-Z])(?![A-Za-z]))(?:\s\d{1,4}[A-Za-z]?)?)"#,
         options: [.caseInsensitive])
 
     /// "B-204", "B204", "AB 12" (one or two capitals then two to four digits).
