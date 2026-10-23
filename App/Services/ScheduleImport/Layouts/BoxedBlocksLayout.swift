@@ -167,12 +167,15 @@ struct BoxedBlocksLayout: ScheduleLayout {
 
     // MARK: Hours from the text alone
 
-    /// A block of 60, 90 or 120 minutes (150, 180 and 240 when the text is taller than that) that begins on the hour and is
+    /// A block of 60, 90 or 120 minutes (150, 180 and 240 when the text is taller than 2 h) that begins on the hour and is
     /// centred on `centerMinute`: the centre of such a block is at :30, :45 or :00 (:15, :30, :00). The nearest of these
     /// centres wins; nothing within 12 minutes of any of them gives nil.
     static func fit(centerMinute: Double, textMinutes: Double) -> (start: Int, end: Int)? {
         var best: (error: Double, length: Int, center: Double)? = nil
-        for (length, offset) in [(60, 30), (90, 45), (120, 0), (150, 15), (180, 30), (240, 0)] {
+        // 1 h, 1 h 30 and 2 h; longer blocks only for a text too tall for these.
+        let usual = [(60, 30), (90, 45), (120, 0)]
+        let longer = [(150, 15), (180, 30), (240, 0)]
+        for (length, offset) in textMinutes > 120 * 1.2 ? usual + longer : usual {
             // The text may be a little taller than its block (five lines in an hour): a fifth of leeway.
             if Double(length) * 1.2 < textMinutes { continue }
             let hours = ((centerMinute - Double(offset)) / 60).rounded()

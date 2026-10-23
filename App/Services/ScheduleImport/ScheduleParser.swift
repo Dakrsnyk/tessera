@@ -200,9 +200,10 @@ enum ScheduleParser {
     static let dotRangeRegex: NSRegularExpression? = try? NSRegularExpression(
         pattern: #"(?<![\d:.,/])(?<![A-Za-z])(\d{1,2})\.(\d{2})\s?-\s?(\d{1,2})\.(\d{2})(?![\d.:])"#, options: [])
 
-    /// "08:00 10:00": the start and the end in two columns of a table, side by side. Groups as above.
+    /// "08:00 10:00": the start and the end in two columns of a table, side by side. Groups as above. (Written `[hH:]`,
+    /// not `[:hH]`: ICU reads "[:" ... ":]" as a POSIX class when the pattern holds a ":]" further on.)
     static let pairRegex: NSRegularExpression? = try? NSRegularExpression(
-        pattern: #"(?<![\d:.,/])(?<![A-Za-z])(\d{1,2})\s?[:hH]\s?(\d{2})\s+(\d{1,2})\s?[:hH]\s?(\d{2})(?![\d:])"#, options: [])
+        pattern: #"(?<![\d:.,/])(?<![A-Za-z])(\d{1,2})\s?[hH:]\s?(\d{2})\s+(\d{1,2})\s?[hH:]\s?(\d{2})(?![:\d])"#, options: [])
 
     /// "8h 10h", "8h30 10h": the same with the "h" form, minutes optional. Groups: 1 hour, 2 minutes, 3 hour, 4 minutes.
     static let pairHourRegex: NSRegularExpression? = try? NSRegularExpression(
