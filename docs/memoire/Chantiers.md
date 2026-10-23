@@ -129,7 +129,7 @@ Demande (2026-10-22) : choix du style C (planche de trois styles dans `pub/style
 
 ## Signature : bandeau jusqu'en haut, disposition de la maquette C, « Mes paramètres » — 2026-10-23
 
-Demande (2026-10-22 soir) : plus de bandeau noir en haut des mini-apps (le dégradé monte jusqu'au bord de l'écran : `MiniAppScaffold.band` déborde de 400 pt vers le haut), chaque écran reprend la disposition de la maquette C (sauf Planning, qui garde la sienne), « Mes infos » supprimé et remplacé par un seul bouton « Mes paramètres » (feuille `MiniAppInfoSheet`, id `miniapp-settings-edit`). Rangées `MiniRow` en carré arrondi teinté. À vérifier sur capture : contraste des jauges de Nutrition, hauteur du bandeau.
+Demande (2026-10-22 soir) : plus de bandeau noir en haut des mini-apps (le dégradé monte jusqu'au bord de l'écran : `MiniAppScaffold.band` déborde de 400 pt vers le haut), chaque écran reprend la disposition de la maquette C (sauf Planning, qui garde la sienne), « Mes infos » supprimé et remplacé par un seul bouton « Mes paramètres » (feuille `MiniAppInfoSheet`, id `miniapp-settings-edit`). Rangées `MiniRow` en carré arrondi teinté. À vérifier sur capture : contraste des jauges de Nutrition, hauteur du bandeau. Version interne : build 244 (run 39905034107). Sans Premium : run 39906481973, 472 tests réussis, 0 échec. Planning : liste des tâches sans heure sous le tableau de la semaine (le tableau n'affiche que quelques puces). Piège : la démo de Fitness a une séance en cours à certaines heures (l'ajout d'un exercice va alors directement dans la séance, sans feuille).
 
 
 - Le dépôt est public pour la CI : le repasser en privé.
