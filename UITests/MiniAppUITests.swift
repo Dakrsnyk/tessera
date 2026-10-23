@@ -54,6 +54,12 @@ final class MiniAppUITests: XCTestCase {
             drags += 1
             _ = element.waitForExistence(timeout: 1)
         }
+        // Just under the navigation bar a touch would land on the bar: bring the element down a little first.
+        var nudges = 0
+        while isReachable(element), element.frame.minY < 125, nudges < 2 {
+            scrollUpOnce()
+            nudges += 1
+        }
         XCTAssertTrue(isReachable(element), "\(what) introuvable", file: file, line: line)
         return element
     }
@@ -185,9 +191,14 @@ final class MiniAppUITests: XCTestCase {
         // The exercise page: add it to a session of the program.
         app.buttons.matching(identifier: "exercise-row").firstMatch.tap()
         tap(app.buttons["exercise-add"], "Ajouter à ma séance")
-        XCTAssertTrue(saveButton.waitForExistence(timeout: 8), "Feuille d'ajout absente")
-        saveButton.tap()
-        XCTAssertTrue(app.buttons["exercise-add"].waitForExistence(timeout: 8))
+        // With a session in progress (the demo has one at some hours) the exercise goes straight into it;
+        // otherwise a sheet asks which session.
+        if saveButton.waitForExistence(timeout: 6) {
+            saveButton.tap()
+            XCTAssertTrue(app.buttons["exercise-add"].waitForExistence(timeout: 8))
+        } else {
+            XCTAssertTrue(app.descendants(matching: .any)["exercise-added"].waitForExistence(timeout: 8), "Feuille d'ajout absente")
+        }
         XCTAssertEqual(app.state, .runningForeground)
     }
 
