@@ -809,7 +809,20 @@ enum ScheduleParser {
         init?(margin: [RecognizedLine]) {
             var labels: [(y: CGFloat, minute: Int)] = []
             for line in margin.sorted(by: { $0.box.midY < $1.box.midY }) {
-                if let minute = ScheduleParser.clockMinute(line.text) { labels.append((y: line.box.midY, minute: minute)) }
+                if let minute = ScheduleParser.clockMinute(line.text) {
+                    labels.append((y: line.box.midY, minute: minute))
+                } else if let pair = ScheduleParser.clockPair(line.text) {
+                    // Both hours of a row in one box. Stacked (a tall box): the start is in the upper half and the end
+                    // in the lower one. Side by side: the same height, the start first.
+                    let box = line.box
+                    if box.height > 0.010 {
+                        labels.append((y: box.minY + box.height * 0.25, minute: pair.first))
+                        labels.append((y: box.minY + box.height * 0.75, minute: pair.second))
+                    } else {
+                        labels.append((y: box.midY, minute: pair.first))
+                        labels.append((y: box.midY + 0.0001, minute: pair.second))
+                    }
+                }
             }
             var found: [Row] = []
             var index = 0
@@ -896,13 +909,18 @@ enum ScheduleParser {
         var code: String?
     }
 
-    /// Offsets (0...1 of the page width) from the left edge of a column where the probe looks: inside the cell but
-    /// left of the centred text.
-    static let probeOffsets: [Double] = [0.003, 0.005]
+    /// Offsets (0...1 of the page width) from the left edge of a column where the probe looks: just inside the cell
+    /// (the edge itself is only known to a few pixels), left of the centred text. On the real captures the cell
+    /// border is 0 to 3 pixels from the estimated edge and the widest text starts about 5 pixels after it.
+    static let probeOffsets: [Double] = [0.003, 0.0045, 0.006, 0.0075, 0.009]
 
-    /// "08:10", "8h10": a clock time and nothing else.
+    /// "08:10", "08.10", "8h10": a clock time and nothing else.
     static let clockRegex: NSRegularExpression? = try? NSRegularExpression(
-        pattern: #"^(\d{1,2})\s?[:hH]\s?(\d{2})$"#, options: [])
+        pattern: #"^(\d{1,2})\s?(?:[:hH]|\.)\s?(\d{2})$"#, options: [])
+
+    /// Two clock times in one line ("08:10 09:00"): the start and the end of a row read as one text.
+    static let clockPairRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"^(\d{1,2}\s?(?:[:hH]|\.)\s?\d{2})\s+(\d{1,2}\s?(?:[:hH]|\.)\s?\d{2})$"#, options: [])
 
     static func clockMinute(_ text: String) -> Int? {
         guard let regex = clockRegex else { return nil }
@@ -911,6 +929,16 @@ enum ScheduleParser {
               let hour = Int(group(match, 1, in: ns) ?? ""), let minute = Int(group(match, 2, in: ns) ?? ""),
               hour < 24, minute < 60 else { return nil }
         return hour * 60 + minute
+    }
+
+    /// The two times of a line that holds both, in reading order.
+    static func clockPair(_ text: String) -> (first: Int, second: Int)? {
+        guard let regex = clockPairRegex else { return nil }
+        let ns = text as NSString
+        guard let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: ns.length)),
+              let first = clockMinute(group(match, 1, in: ns) ?? ""),
+              let second = clockMinute(group(match, 2, in: ns) ?? "") else { return nil }
+        return (first, second)
     }
 
     /// "410-343-CH", "203-NYB-05": the code of a course, as written in a block and in the list of courses.
@@ -1075,23 +1103,24 @@ enum ScheduleParser {
         return result
     }
 
-    /// The stretches that the probe agrees on along the left edge of a column, or nil when it cannot tell.
+    /// Holes shorter than this (0...1 of the page height) inside a stretch are closed: a line of text, or a letter
+    /// the probe hit. An empty row is at least about 0.02 high, so two blocks are never joined by this.
+    static let closedHole = 0.010
+
+    /// The stretches that most of the probes agree on along the left edge of a column, or nil when none can tell.
+    /// The probes are a few pixels apart: the border of the cell, a letter or the neighbour column spoil a few of
+    /// them, not most.
     static func columnRuns(_ probe: BlockProbe, left: CGFloat, from: Double, to: Double) -> [ClosedRange<Double>]? {
-        var common: [ClosedRange<Double>]? = nil
+        var lists: [[ClosedRange<Double>]] = []
         for offset in probeOffsets {
             let x = Double(left) + offset
             guard x >= 0, x < 1, let runs = probe.blockRuns(atX: x, fromY: from, toY: to) else { continue }
-            if let known = common {
-                common = intersection(known, runs)
-            } else {
-                common = runs
-            }
+            lists.append(runs)
         }
-        guard let result = common else { return nil }
-        // A letter of the text can cut a run on one of the lines: small holes are closed.
+        guard !lists.isEmpty else { return nil }
         var merged: [ClosedRange<Double>] = []
-        for run in result.sorted(by: { $0.lowerBound < $1.lowerBound }) {
-            if let last = merged.last, run.lowerBound - last.upperBound <= 0.003 {
+        for run in majorityRuns(lists) {
+            if let last = merged.last, run.lowerBound - last.upperBound <= closedHole {
                 merged[merged.count - 1] = last.lowerBound...max(last.upperBound, run.upperBound)
             } else {
                 merged.append(run)
@@ -1100,13 +1129,27 @@ enum ScheduleParser {
         return merged
     }
 
-    static func intersection(_ a: [ClosedRange<Double>], _ b: [ClosedRange<Double>]) -> [ClosedRange<Double>] {
+    /// The stretches covered by more than half of the lists.
+    static func majorityRuns(_ lists: [[ClosedRange<Double>]]) -> [ClosedRange<Double>] {
+        let needed = lists.count / 2 + 1
+        var events: [(y: Double, change: Int)] = []
+        for list in lists {
+            for run in list {
+                events.append((y: run.lowerBound, change: 1))
+                events.append((y: run.upperBound, change: -1))
+            }
+        }
+        events.sort { a, b in a.y != b.y ? a.y < b.y : a.change > b.change }
         var result: [ClosedRange<Double>] = []
-        for first in a {
-            for second in b {
-                let low = max(first.lowerBound, second.lowerBound)
-                let high = min(first.upperBound, second.upperBound)
-                if low <= high { result.append(low...high) }
+        var count = 0
+        var start: Double? = nil
+        for event in events {
+            count += event.change
+            if count >= needed, start == nil {
+                start = event.y
+            } else if count < needed, let begin = start {
+                if event.y > begin { result.append(begin...event.y) }
+                start = nil
             }
         }
         return result

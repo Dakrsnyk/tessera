@@ -334,17 +334,31 @@ final class ScheduleParserTests: XCTestCase {
         var runs: [[ClosedRange<Double>]]
         var edges: [Double]
         var available: Bool
+        /// Stretches of a column (index) where the colour is wrong, like a letter or a line of text under the probe.
+        var holes: [Int: [ClosedRange<Double>]] = [:]
 
         func blockRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
             guard available else { return nil }
             guard let column = (0..<runs.count).first(where: { x >= edges[$0] && x < edges[$0 + 1] }) else { return [] }
-            var result: [ClosedRange<Double>] = []
+            var pieces: [ClosedRange<Double>] = []
             for run in runs[column] {
                 let low = max(run.lowerBound, fromY)
                 let high = min(run.upperBound, toY)
-                if low < high { result.append(low...high) }
+                if low < high { pieces.append(low...high) }
             }
-            return result
+            for hole in holes[column] ?? [] {
+                var cut: [ClosedRange<Double>] = []
+                for piece in pieces {
+                    if hole.upperBound <= piece.lowerBound || hole.lowerBound >= piece.upperBound {
+                        cut.append(piece)
+                        continue
+                    }
+                    if hole.lowerBound > piece.lowerBound { cut.append(piece.lowerBound...hole.lowerBound) }
+                    if hole.upperBound < piece.upperBound { cut.append(hole.upperBound...piece.upperBound) }
+                }
+                pieces = cut
+            }
+            return pieces
         }
     }
 
@@ -365,6 +379,8 @@ final class ScheduleParserTests: XCTestCase {
         var listY: Double
         var courses: [ShotCourse]
         var blocks: [ShotBlock]
+        /// The two hours of a row come as one text ("08:10 09:00") instead of two.
+        var mergedHours = false
 
         func line(_ text: String, x: Double, y: Double, width: Double? = nil) -> RecognizedLine {
             let w = width ?? min(100, Double(text.count) * 4.6)
@@ -405,8 +421,14 @@ final class ScheduleParserTests: XCTestCase {
             }
             for (index, pair) in Shot.hours.enumerated() {
                 let middle = (rows[index] + rows[index + 1]) / 2
-                result.append(line(pair.0, x: 194, y: middle - 13, width: 28))
-                result.append(line(pair.1, x: 194, y: middle + 13, width: 28))
+                if mergedHours {
+                    // One box over the two stacked labels (36 points high).
+                    result.append(RecognizedLine(text: "\(pair.0) \(pair.1)", box: CGRect(
+                        x: (194 - 14) / Shot.width, y: (middle - 18) / Shot.height, width: 28 / Shot.width, height: 36 / Shot.height)))
+                } else {
+                    result.append(line(pair.0, x: 194, y: middle - 13, width: 28))
+                    result.append(line(pair.1, x: 194, y: middle + 13, width: 28))
+                }
             }
             for block in blocks {
                 let middle = (rows[block.first] + rows[block.last + 1]) / 2
@@ -423,7 +445,7 @@ final class ScheduleParserTests: XCTestCase {
             return result
         }
 
-        func probe(available: Bool = true) -> FakeProbe {
+        func probe(available: Bool = true, holes: [Int: [ClosedRange<Double>]] = [:]) -> FakeProbe {
             var columns = [[ClosedRange<Double>]](repeating: [], count: 5)
             for block in blocks.sorted(by: { $0.first < $1.first }) {
                 let low = rows[block.first] / Shot.height
@@ -435,7 +457,7 @@ final class ScheduleParserTests: XCTestCase {
                 }
             }
             let edges = [223.0, 331.0, 439.0, 547.0, 655.0, 763.0].map { $0 / Shot.width }
-            return FakeProbe(runs: columns, edges: edges, available: available)
+            return FakeProbe(runs: columns, edges: edges, available: available, holes: holes)
         }
     }
 
@@ -606,6 +628,37 @@ final class ScheduleParserTests: XCTestCase {
         XCTAssertEqual(slots.first?.title, "Gestion informatisée")
         XCTAssertEqual(slot(slots, day: 2, start: 490)?.title, "Marketing et communication")
         XCTAssertEqual(slot(slots, day: 2, start: 605)?.title, "Mathématiques appliq")
+    }
+
+    func testOmnivoxProbeWithAHoleInsideABlockDoesNotCutTheBlock() {
+        // A letter under the probe, or a line of text: 0.0036 of the page height (7 points) of the wrong colour
+        // inside the Tuesday and Friday blocks (Marketing 08:10-09:55 and Mathématiques 10:05-11:50 stuck together).
+        let shot = winterShot()
+        let hole = (884.0 / Shot.height)...(891.0 / Shot.height)
+        let holes: [Int: [ClosedRange<Double>]] = [1: [hole], 4: [hole], 0: [(900.0 / Shot.height)...(907.0 / Shot.height)]]
+        XCTAssertEqual(summary(ScheduleParser.slots(from: shot.lines(), probe: shot.probe(holes: holes))), winterExpected)
+        let autumn = autumnShot()
+        let autumnHoles: [Int: [ClosedRange<Double>]] = [0: [(870.0 / Shot.height)...(877.0 / Shot.height)]]
+        XCTAssertEqual(summary(ScheduleParser.slots(from: autumn.lines(), probe: autumn.probe(holes: autumnHoles))), autumnExpected)
+    }
+
+    func testOmnivoxHoursOfARowReadAsOneTextAreSplit() {
+        var shot = winterShot()
+        shot.mergedHours = true
+        XCTAssertEqual(summary(ScheduleParser.slots(from: shot.lines(), probe: shot.probe())), winterExpected)
+        XCTAssertEqual(summary(ScheduleParser.slots(from: shot.lines())), winterExpected)
+    }
+
+    func testClockLabelsInTheMargin() {
+        XCTAssertEqual(ScheduleParser.clockMinute("08:10"), 490)
+        XCTAssertEqual(ScheduleParser.clockMinute("08.10"), 490)
+        XCTAssertEqual(ScheduleParser.clockMinute("8h10"), 490)
+        XCTAssertNil(ScheduleParser.clockMinute("8h"))
+        XCTAssertNil(ScheduleParser.clockMinute("12/10/2026"))
+        XCTAssertNil(ScheduleParser.clockMinute("25:00"))
+        XCTAssertEqual(ScheduleParser.clockPair("08:10 09:00")?.first, 490)
+        XCTAssertEqual(ScheduleParser.clockPair("08:10 09:00")?.second, 540)
+        XCTAssertNil(ScheduleParser.clockPair("08:10"))
     }
 
     func testOmnivoxGridWithNoClassGivesNothing() {

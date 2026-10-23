@@ -37,6 +37,8 @@ enum ScheduleReader {
     /// Pixels of the longest side given to Vision: enough for small print, not so much that memory blows up.
     static let longestSide: CGFloat = 3000
     static let smallestSide: CGFloat = 1000
+    /// An image narrower than this (and not too long) is enlarged before it is read.
+    static let narrowSide: CGFloat = 1500
 
     /// The lines (and the colour probe) of each page (one page for a photo).
     static func pages(from source: ScheduleSource) async throws -> [SchedulePage] {
@@ -76,6 +78,9 @@ enum ScheduleReader {
             factor = longestSide / longest
         } else if longest < smallestSide {
             factor = min(3, smallestSide / longest)
+        } else if min(pixelWidth, pixelHeight) < narrowSide {
+            // A screenshot (1020 px wide) has text only 8 px high: it is read better enlarged.
+            factor = min(2, longestSide / longest)
         }
         let target = CGSize(width: max(1, (pixelWidth * factor).rounded()), height: max(1, (pixelHeight * factor).rounded()))
         let format = UIGraphicsImageRendererFormat.default()
@@ -83,6 +88,7 @@ enum ScheduleReader {
         format.opaque = true
         let renderer = UIGraphicsImageRenderer(size: target, format: format)
         let rendered = renderer.image { context in
+            context.cgContext.interpolationQuality = .high
             UIColor.white.setFill()
             context.fill(CGRect(origin: .zero, size: target))
             image.draw(in: CGRect(origin: .zero, size: target))
@@ -125,7 +131,8 @@ enum ScheduleReader {
         request.recognitionLevel = .accurate
         request.usesLanguageCorrection = true
         request.automaticallyDetectsLanguage = true
-        request.minimumTextHeight = 0.007
+        // Small print (hour labels, the text of a block) is about 0.004 of the page height.
+        request.minimumTextHeight = 0.002
         let languages = recognitionLanguages(for: request)
         if !languages.isEmpty { request.recognitionLanguages = languages }
         // The image was already drawn upright, so Vision reads it as it is.
@@ -168,8 +175,9 @@ struct LuminanceProbe: BlockProbe {
 
     /// Below this level a sample is text or a border, not a cell.
     private static let darkest = 150
-    /// The two kinds of cell must differ by at least this many levels (of 255).
-    private static let minimumSeparation = 12.0
+    /// The two kinds of cell must differ by at least this many levels (of 255): white against light grey is about 16,
+    /// a column of empty cells (noise only) gives about 12.
+    private static let minimumSeparation = 14.0
     /// Each kind must be at least this share of the samples (and the other at most one minus this).
     private static let minimumLightShare = 0.05
     private static let minimumRun = 10
