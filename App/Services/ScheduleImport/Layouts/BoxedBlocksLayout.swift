@@ -63,7 +63,10 @@ struct BoxedBlocksLayout: ScheduleLayout {
             guard y > grid.bandBottom, y >= gridTop, y <= gridBottom, x >= edges[0], x < edges[count] else { continue }
             columns[ScheduleParser.columnIndex(of: x, edges: edges)].append(line)
         }
+        let shortest = Double(0.5 * stepY)
+        let longest = Double(12 * stepY)
         var drafts: [ScheduleParser.Draft] = []
+        var fromOutline = 0
         for (column, columnLines) in columns.enumerated() {
             let clusters = ScheduleParser.textClusters(columnLines)
             guard !clusters.isEmpty else { continue }
@@ -76,12 +79,19 @@ struct BoxedBlocksLayout: ScheduleLayout {
                 guard let content = BoxedBlocksLayout.content(of: cluster.lines), !content.title.isEmpty else { continue }
                 let center = Double(cluster.center)
                 var span: (start: Int, end: Int)? = nil
-                if let outlines = outlines,
-                   let block = outlines.first(where: { $0.lowerBound <= center && center <= $0.upperBound
-                        && Double(0.5 * stepY) <= $0.upperBound - $0.lowerBound && $0.upperBound - $0.lowerBound <= Double(12 * stepY) }) {
-                    let start = WeekViewLayout.snapped(minute(at: CGFloat(block.lowerBound)), to: snapStep)
-                    let end = WeekViewLayout.snapped(minute(at: CGFloat(block.upperBound)), to: snapStep)
-                    if end - start >= snapStep { span = (start: start, end: end) }
+                if let outlines = outlines {
+                    let enclosing = outlines.first { block in
+                        let length = block.upperBound - block.lowerBound
+                        return block.lowerBound <= center && center <= block.upperBound && length >= shortest && length <= longest
+                    }
+                    if let block = enclosing {
+                        let start = WeekViewLayout.snapped(minute(at: CGFloat(block.lowerBound)), to: snapStep)
+                        let end = WeekViewLayout.snapped(minute(at: CGFloat(block.upperBound)), to: snapStep)
+                        if end - start >= snapStep {
+                            span = (start: start, end: end)
+                            fromOutline += 1
+                        }
+                    }
                 }
                 if span == nil {
                     let heightMinutes = Double((cluster.bottom - cluster.top) / stepY) * Double(stepMinutes)
@@ -93,6 +103,10 @@ struct BoxedBlocksLayout: ScheduleLayout {
                 }
             }
         }
+        // Not a calendar whose titles happen to hold the code of a course: the printed group ("g.00001") must be there, or
+        // the outlines must have given the hours of most of the blocks.
+        let printedGroup = lines.contains { BoxedBlocksLayout.matches(BoxedBlocksLayout.printedGroupRegex, $0.text) }
+        guard printedGroup || fromOutline * 2 >= drafts.count else { return [] }
         return drafts
     }
 
@@ -106,13 +120,16 @@ struct BoxedBlocksLayout: ScheduleLayout {
     /// "g.00001", "gr.41070": the group of a course.
     static let groupCodeRegex: NSRegularExpression? = try? NSRegularExpression(
         pattern: #"(?<![A-Za-z0-9])gr?\.?\s?\d{3,6}(?![0-9A-Za-z])"#, options: [.caseInsensitive])
+    /// "g.00001" as printed by the college report (not "gr.41070", the Omnivox group): the mark of this layout.
+    static let printedGroupRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9])g\.\d{3,6}(?![0-9A-Za-z])"#, options: [])
     /// "2.547", "1.105": a room written alone.
     static let dottedRoomRegex: NSRegularExpression? = try? NSRegularExpression(pattern: #"^\d{1,2}\.\d{2,3}$"#, options: [])
     /// "Chavant, L", "Berteau-Lord, G": a teacher, family name then initial.
     static let teacherRegex: NSRegularExpression? = try? NSRegularExpression(
         pattern: #"^\p{L}[\p{L}'’ -]*,\s?\p{L}\.?$"#, options: [])
 
-    private static func matches(_ regex: NSRegularExpression?, _ text: String) -> Bool {
+    static func matches(_ regex: NSRegularExpression?, _ text: String) -> Bool {
         guard let regex = regex else { return false }
         return regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: (text as NSString).length)) != nil
     }
@@ -156,7 +173,8 @@ struct BoxedBlocksLayout: ScheduleLayout {
     static func fit(centerMinute: Double, textMinutes: Double) -> (start: Int, end: Int)? {
         var best: (error: Double, length: Int, center: Double)? = nil
         for (length, offset) in [(60, 30), (90, 45), (120, 0), (150, 15), (180, 30), (240, 0)] {
-            if Double(length) < textMinutes { continue }
+            // The text may be a little taller than its block (five lines in an hour): a fifth of leeway.
+            if Double(length) * 1.2 < textMinutes { continue }
             let hours = ((centerMinute - Double(offset)) / 60).rounded()
             let center = hours * 60 + Double(offset)
             let error = abs(centerMinute - center)

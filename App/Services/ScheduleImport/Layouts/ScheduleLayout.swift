@@ -103,19 +103,14 @@ enum ScheduleLayouts {
 
     /// One band of the page (the whole page, or one grid of several).
     static func readBand(_ lines: [RecognizedLine], probe: BlockProbe?, aspect: Double) -> [ImportedSlot] {
-        for layout in all where layout.role == .claim {
-            let drafts = layout.drafts(lines: lines, probe: probe)
-            if layout.claimsPage(lines: lines, probe: probe, drafts: drafts) {
-                let slots = ScheduleParser.finalize(drafts)
-                let score = ScheduleScoring.evaluate(slots, lines: lines)
-                return flagged(slots, score, wholePage: false)
-            }
-        }
         var variants: [(lines: [RecognizedLine], probe: BlockProbe?, weight: Double)] = [(lines, probe, 1.0)]
         if let straight = PageSkew.straightened(lines, aspect: aspect) {
-            // The probe looks at the photo as it is: it does not fit the straightened lines.
+            // A tilted photo may be of a page a claiming layout knows. Tilted columns would be cut at the wrong places, so
+            // the straightened lines are offered first (the probe looks at the photo as it is: it does not fit them).
+            if let claimed = claimedReading(straight, probe: nil) { return claimed }
             variants.append((straight, nil, 0.97))
         }
+        if let claimed = claimedReading(lines, probe: probe) { return claimed }
         var candidates: [ScheduleCandidate] = []
         for variant in variants {
             var found: [ScheduleCandidate] = []
@@ -135,6 +130,19 @@ enum ScheduleLayouts {
             best = candidate
         }
         return flagged(best.slots, best.score, wholePage: true)
+    }
+
+    /// The reading of the layout that claims the page, if one does.
+    private static func claimedReading(_ lines: [RecognizedLine], probe: BlockProbe?) -> [ImportedSlot]? {
+        for layout in all where layout.role == .claim {
+            let drafts = layout.drafts(lines: lines, probe: probe)
+            if layout.claimsPage(lines: lines, probe: probe, drafts: drafts) {
+                let slots = ScheduleParser.finalize(drafts)
+                let score = ScheduleScoring.evaluate(slots, lines: lines)
+                return flagged(slots, score, wholePage: false)
+            }
+        }
+        return nil
     }
 
     /// The readings of the layouts of one role that find at least one class, in priority order.

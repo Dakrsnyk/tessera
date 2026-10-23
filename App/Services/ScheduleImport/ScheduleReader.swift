@@ -255,7 +255,8 @@ struct LuminanceProbe: BlockProbe {
     /// Two outlines closer than this (a share of the page height) do not make a block.
     private static let outlineGap = 15.0 / 1023.0
 
-    /// The stretches between two consecutive thick black horizontal lines, along the line at `x`. A line one or two
+    /// The stretches between two consecutive thick black horizontal lines (from the middle of one to the middle of the
+    /// next), along the line at `x`. A line one or two
     /// pixels thick counts (a photo or a small screenshot); the text of a cell never fills 85% of a row, and the thin
     /// grey lines of the grid are not black.
     func framedRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
@@ -286,8 +287,9 @@ struct LuminanceProbe: BlockProbe {
         guard centers.count >= 2 else { return nil }
         var result: [ClosedRange<Double>] = []
         for index in 0..<(centers.count - 1) {
-            let low = Double(centers[index]) / Double(height)
-            let high = (Double(centers[index + 1]) + 1) / Double(height)
+            // Two blocks that share an outline touch exactly: the end of one is the start of the next.
+            let low = centers[index] / Double(height)
+            let high = centers[index + 1] / Double(height)
             if high - low >= LuminanceProbe.outlineGap { result.append(low...high) }
         }
         return result

@@ -1341,12 +1341,12 @@ enum ScheduleParser {
     /// the probe hit. An empty row is at least about 0.02 high, so two blocks are never joined by this.
     static let closedHole = 0.010
 
-    /// The stretches that most of the probes agree on along the left edge of a column, or nil when none can tell.
-    /// The probes are a few pixels apart: the border of the cell, a letter or the neighbour column spoil a few of
-    /// them, not most.
     /// Which stretches a probe is asked for.
     enum RunKind { case lighter, darker, framed }
 
+    /// The stretches that most of the probes agree on along the left edge of a column, or nil when none can tell.
+    /// The probes are a few pixels apart: the border of the cell, a letter or the neighbour column spoil a few of
+    /// them, not most. For the outlines of boxed blocks the vote is on the places of the lines (see `outlineStretches`).
     static func columnRuns(_ probe: BlockProbe, left: CGFloat, from: Double, to: Double, kind: RunKind = .lighter) -> [ClosedRange<Double>]? {
         var lists: [[ClosedRange<Double>]] = []
         for offset in probeOffsets {
@@ -1362,17 +1362,55 @@ enum ScheduleParser {
             lists.append(runs)
         }
         guard !lists.isEmpty else { return nil }
-        // Blocks stuck together by a shared outline stay apart: the stretches touch, and are not joined.
-        let touching = kind == .framed
+        if kind == .framed { return outlineStretches(lists) }
         var merged: [ClosedRange<Double>] = []
-        for run in majorityRuns(lists, endsFirst: touching) {
-            if !touching, let last = merged.last, run.lowerBound - last.upperBound <= closedHole {
+        for run in majorityRuns(lists) {
+            if let last = merged.last, run.lowerBound - last.upperBound <= closedHole {
                 merged[merged.count - 1] = last.lowerBound...max(last.upperBound, run.upperBound)
             } else {
                 merged.append(run)
             }
         }
         return merged
+    }
+
+    /// Two outlines seen by different probes are the same line when they are this close (0...1 of the page height).
+    static let outlineTolerance = 0.0025
+    /// Two lines closer than this are not a block.
+    static let shortestStretch = 0.01
+
+    /// The stretches between the outlines that most probes saw. Each list holds stretches that touch (the end of one is
+    /// the start of the next), so the lines are the bounds of the stretches; a line seen by most lists, within a couple
+    /// of pixels, is kept (its place is the mean of the places seen), and the stretches run from one kept line to the next.
+    /// Voting on the stretches themselves would join blocks that share a line.
+    static func outlineStretches(_ lists: [[ClosedRange<Double>]]) -> [ClosedRange<Double>] {
+        var seen: [(place: Double, list: Int)] = []
+        for (index, list) in lists.enumerated() {
+            for run in list {
+                seen.append((place: run.lowerBound, list: index))
+                seen.append((place: run.upperBound, list: index))
+            }
+        }
+        seen.sort { $0.place < $1.place }
+        let needed = lists.count / 2 + 1
+        var lines: [Double] = []
+        var group: [(place: Double, list: Int)] = []
+        func close() {
+            if Set(group.map { $0.list }).count >= needed {
+                lines.append(group.map { $0.place }.reduce(0, +) / Double(group.count))
+            }
+            group = []
+        }
+        for item in seen {
+            if let first = group.first, item.place - first.place > outlineTolerance { close() }
+            group.append(item)
+        }
+        if !group.isEmpty { close() }
+        var result: [ClosedRange<Double>] = []
+        for index in 0..<max(0, lines.count - 1) where lines[index + 1] - lines[index] >= shortestStretch {
+            result.append(lines[index]...lines[index + 1])
+        }
+        return result
     }
 
     /// The stretches of the kind of cell that holds the text: the lighter ones (Omnivox: white blocks on grey cells) or the
@@ -1391,8 +1429,7 @@ enum ScheduleParser {
     }
 
     /// The stretches covered by more than half of the lists.
-    /// With `endsFirst`, a stretch that ends where the next one begins ends before it: they stay two stretches.
-    static func majorityRuns(_ lists: [[ClosedRange<Double>]], endsFirst: Bool = false) -> [ClosedRange<Double>] {
+    static func majorityRuns(_ lists: [[ClosedRange<Double>]]) -> [ClosedRange<Double>] {
         let needed = lists.count / 2 + 1
         var events: [(y: Double, change: Int)] = []
         for list in lists {
@@ -1401,7 +1438,7 @@ enum ScheduleParser {
                 events.append((y: run.upperBound, change: -1))
             }
         }
-        events.sort { a, b in a.y != b.y ? a.y < b.y : (endsFirst ? a.change < b.change : a.change > b.change) }
+        events.sort { a, b in a.y != b.y ? a.y < b.y : a.change > b.change }
         var result: [ClosedRange<Double>] = []
         var count = 0
         var start: Double? = nil

@@ -358,6 +358,29 @@ final class ScheduleParserMoreLayoutsTests: XCTestCase {
         XCTAssertEqual(read(lines), ["1|09:00-10:30|Calculus|2.547"])
     }
 
+    func testBoxedPageTiltedByAPhotoIsReadOnStraightenedLines() {
+        let aspect = Self.pageHeight / Self.pageWidth
+        for degrees in [1.0, 2.0, 3.0] {
+            let photo = Fx.rotated(boxedPage(noise: true), degrees: degrees, aspect: aspect)
+            XCTAssertEqual(read(photo, aspect: aspect), Self.boxedExpected, "tilt of \(degrees) degrees")
+        }
+    }
+
+    func testACalendarWhoseTitlesHoldTheCodeOfACourseIsNotABoxedPage() {
+        // Course codes alone do not make the page of the college report: no printed group "g.00001", no outlines.
+        var lines = Fx.weekHeader(["Mon 21", "Tue 22", "Wed 23", "Thu 24", "Fri 25"], hourLabels: (8..<14).map { "\($0):00" })
+        lines += Fx.event(0, startMinute: 540, "Algèbre", hours: "9:00 - 10:30")
+        lines += [Fx.line("201-NYA-05", Fx.weekX[0], Fx.hourY(9) + 0.056)]
+        XCTAssertEqual(read(lines), ["1|09:00-10:30|Algèbre 201-NYA-05|-"])
+        XCTAssertFalse(BoxedBlocksLayout.matches(BoxedBlocksLayout.printedGroupRegex, "gr.41070"))
+        XCTAssertTrue(BoxedBlocksLayout.matches(BoxedBlocksLayout.printedGroupRegex, "609-C01-HU g.00001"))
+    }
+
+    func testBoxedBlockWithFiveLinesOfTextInOneHourStaysOneHour() {
+        // Text 1.2 times as tall as the block at most: still the hour, not an hour and a half.
+        XCTAssertEqual(BoxedBlocksLayout.fit(centerMinute: 630, textMinutes: 70)?.end, 660)
+    }
+
     // MARK: Colours of the image (the probe)
 
     /// A grey page with rectangles of other levels: `fills` are (x range, y range, level).
@@ -438,6 +461,59 @@ final class ScheduleParserMoreLayoutsTests: XCTestCase {
         if let dark = LuminanceProbe(width: 400, height: 800, pixels: canvas(width: 400, height: 800, level: 30, fills: [])) {
             XCTAssertNil(dark.framedRuns(atX: 0.1, fromY: 0.05, toY: 0.9))
         }
+    }
+
+    /// A grey image as the reader would hand it to the probe.
+    private func image(width: Int, height: Int, pixels: [UInt8]) -> CGImage? {
+        var data = pixels
+        return data.withUnsafeMutableBytes { (buffer: UnsafeMutableRawBufferPointer) -> CGImage? in
+            guard let base = buffer.baseAddress,
+                  let context = CGContext(data: base, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width,
+                                          space: CGColorSpaceCreateDeviceGray(), bitmapInfo: CGImageAlphaInfo.none.rawValue)
+            else { return nil }
+            return context.makeImage()
+        }
+    }
+
+    func testOutlinesOfBlocksThatShareALineGiveSeparateStretchesThroughTheRealProbe() {
+        // One column of a 790 x 1023 page: thick black lines (2 pixels) at 287, 376, 422, 513, 603 and 694, so the blocks
+        // 287-376, 376-422 (stuck to it), 513-603 and 603-694 (stuck to it) and the empty cells between; thin grey lines
+        // and dashes of text inside. Each stretch must stay on its own, and be where the lines are.
+        let width = 790
+        let height = 1023
+        var fills: [(x: Range<Int>, y: Range<Int>, level: UInt8)] = []
+        var y = 287
+        while y < 940 {
+            fills.append((x: 84..<219, y: y..<(y + 1), level: 225))
+            y += 22
+        }
+        for edge in [287, 376, 422, 513, 603, 694] { fills.append((x: 84..<219, y: edge..<(edge + 2), level: 20)) }
+        for row in stride(from: 300, to: 360, by: 11) {
+            for x in stride(from: 110, to: 190, by: 4) { fills.append((x: x..<(x + 2), y: row..<(row + 7), level: 40)) }
+        }
+        let pixels = canvas(width: width, height: height, level: 255, fills: fills)
+        guard let picture = image(width: width, height: height, pixels: pixels), let probe = LuminanceProbe(picture) else {
+            return XCTFail("no probe")
+        }
+        let stretches = ScheduleParser.columnRuns(probe, left: CGFloat(84.0 / 790), from: 280.0 / 1023, to: 740.0 / 1023, kind: .framed)
+        assertRuns(stretches, [(287, 376), (376, 422), (422, 513), (513, 603), (603, 694)], height: height, tolerance: 2)
+        // The voting by places of the lines, from probes that disagree by a pixel or two.
+        let voted = ScheduleParser.outlineStretches([
+            [0.280...0.368, 0.368...0.412], [0.2803...0.3683, 0.3683...0.4123], [0.2797...0.3677, 0.3677...0.4117]
+        ])
+        XCTAssertEqual(voted.count, 2)
+        let lone = ScheduleParser.outlineStretches([[0.28...0.37], [0.5...0.6], [0.7...0.8]])
+        XCTAssertTrue(lone.isEmpty, "A line that only one probe saw is not kept")
+    }
+
+    func testProbeSecondLimitSeparatesBlocksDarkerThan150OnALightPage() {
+        // Blocks at grey 140 (darker than the first limit) on white, with thin black lines across: the first pass, which
+        // keeps what is above 150, sees one kind of cell only; the second one, above 60, finds the blocks.
+        var fills: [(x: Range<Int>, y: Range<Int>, level: UInt8)] = [(0..<200, 100..<260, 140), (0..<200, 400..<520, 140)]
+        for row in stride(from: 40, to: 720, by: 30) { fills.append((x: 0..<400, y: row..<(row + 1), level: 10)) }
+        if let probe = LuminanceProbe(width: 400, height: 800, pixels: canvas(width: 400, height: 800, level: 255, fills: fills)) {
+            assertRuns(probe.darkRuns(atX: 0.1, fromY: 0.05, toY: 0.9), [(101, 260), (401, 520)], height: 800)
+        } else { XCTFail("no probe") }
     }
 
     // MARK: What is marked "to check"
