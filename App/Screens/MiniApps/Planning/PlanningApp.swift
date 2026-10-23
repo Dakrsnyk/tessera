@@ -29,11 +29,11 @@ struct PlanningAppView: View {
         let overdue = tasks.filter { $0.isOverdue(at: now) }
         MiniAppScaffold(
             colorHex: accentHex,
-            compact: true,
             // The one main action, floating above the tab bar (a task due the day picked).
             action: MiniFloatingAction(title: tr("Nouvelle tâche"), symbol: "plus", colorHex: accentHex, identifier: "planning-new-task") {
                 editors.task = TaskItem(title: "", due: DateMath.startOfDay(day))
-            }
+            },
+            compact: true
         ) {
             // 1. The only date selector of the screen, with room on the left for the hours of the table below it.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: mark, leadingInset: WeekTimetable.fullLeadingInset)
