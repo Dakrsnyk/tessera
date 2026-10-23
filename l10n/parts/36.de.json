@@ -1,0 +1,9 @@
+{
+ "%@ depuis %@ j": "%@ seit %@ T.",
+ "Chaque année": "Jedes Jahr",
+ "Décompte": "Tageszähler",
+ "Le décompte repart chaque année à la date choisie, comme un anniversaire.": "Der Zähler beginnt jedes Jahr am gewählten Datum neu, wie bei einem Geburtstag.",
+ "Le décompte va jusqu'à la date choisie, puis compte les jours depuis.": "Der Zähler läuft bis zum gewählten Datum und zählt danach die Tage seitdem.",
+ "Un décompte vers la date et le nom de ton choix, anniversaire compris.": "Ein Zähler bis zum Datum und mit dem Namen deiner Wahl, Geburtstage inklusive.",
+ "avant les %@ ans": "bis zum %@. Jahrestag"
+}

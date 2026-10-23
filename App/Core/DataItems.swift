@@ -264,7 +264,9 @@ extension WidgetKind {
         case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .weekView, .moonPhase, .note, .holiday, .focus, .crypto, .marketOverview, .studyHours, .semesterProgress,
              .photos, .quote:
             []
-        case .ageProgress, .birthday: [.birthday]
+        case .ageProgress: [.birthday]
+        // The « Décompte » takes the birthday of « Ma vie » when it is known, but works without it.
+        case .birthday: []
         case .weather, .sunCycle, .rainNext, .windUV, .weatherDetails, .weeklyForecast: [.city]
         case .upNext: [.calendar]
         case .tasks: [.tasks]

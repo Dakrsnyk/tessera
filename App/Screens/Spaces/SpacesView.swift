@@ -573,11 +573,14 @@ struct SpaceView: View {
             HStack(alignment: .top, spacing: 12) {
                 ForEach(SpaceCatalog.kinds(in: space)) { kind in
                     let design = TemplateCatalog.template(for: kind)?.makeDesign() ?? WidgetDesign.starter(for: kind)
+                    // A widget with no small size is shown medium, as the editor opens it.
+                    let hasSmall = kind.families.contains(.systemSmall)
+                    let width: CGFloat = hasSmall ? 128 : 270
                     Button {
                         router.openEditor(design, isNew: true)
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
-                            WidgetPreview(design: design, family: .systemSmall, payload: model.payload(for: design), width: 128)
+                            WidgetPreview(design: design, family: hasSmall ? .systemSmall : .systemMedium, payload: model.payload(for: design), width: width)
                             HStack(spacing: 4) {
                                 Text(kind.title)
                                     .font(.caption.weight(.semibold))
@@ -586,7 +589,7 @@ struct SpaceView: View {
                                     PremiumBadge(compact: true)
                                 }
                             }
-                            .frame(width: 128, alignment: .leading)
+                            .frame(width: width, alignment: .leading)
                         }
                     }
                     .buttonStyle(.pressable)

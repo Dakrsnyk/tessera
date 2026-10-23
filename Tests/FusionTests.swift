@@ -73,6 +73,39 @@ final class FusionTests: XCTestCase {
         }
     }
 
+    func testWidgetWithoutSmallSizeComposesAlone() {
+        XCTAssertEqual(Composer.plan([.habitWeek], format: .medium), .single(.habitWeek))
+        XCTAssertEqual(Composer.plan([.habitWeek], format: .large), .single(.habitWeek))
+        if case .invalid = Composer.plan([.habitStreak, .habitWeek], format: .medium) {} else {
+            XCTFail("Semaine d'habitudes has no small size: it can't be merged")
+        }
+    }
+
+    func testPickingAWidgetChangesSizeAndSelection() {
+        typealias Choice = BuilderSelection.Choice
+        // Small: a widget with no small size switches to the size that has it and becomes the selection.
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .small, selection: [.habitStreak]), .habitWeek),
+                       Choice(format: .medium, selection: [.habitWeek]))
+        // Medium: a widget with no small size replaces the selection; one with a small size replaces it too.
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .medium, selection: [.caloriesLeft]), .habitWeek),
+                       Choice(format: .medium, selection: [.habitWeek]))
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .medium, selection: [.habitWeek]), .habitStreak),
+                       Choice(format: .medium, selection: [.habitStreak]))
+        // Medium: two widgets with a small size are picked together, the oldest leaving when full.
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .medium, selection: [.caloriesLeft]), .macros),
+                       Choice(format: .medium, selection: [.caloriesLeft, .macros]))
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .medium, selection: [.caloriesLeft, .macros]), .proteinLeft),
+                       Choice(format: .medium, selection: [.macros, .proteinLeft]))
+        // Picking again removes, except the last one.
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .medium, selection: [.caloriesLeft, .macros]), .macros),
+                       Choice(format: .medium, selection: [.caloriesLeft]))
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .medium, selection: [.habitWeek]), .habitWeek),
+                       Choice(format: .medium, selection: [.habitWeek]))
+        // Small keeps picking several widgets.
+        XCTAssertEqual(BuilderSelection.toggled(Choice(format: .small, selection: [.caloriesLeft]), .macros),
+                       Choice(format: .small, selection: [.caloriesLeft, .macros]))
+    }
+
     func testEverySpacePresetComposes() {
         for space in Space.allCases {
             for format in [WidgetFormat.medium, .large] {

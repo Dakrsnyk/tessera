@@ -151,6 +151,10 @@ enum Fusion {
         case .worldClock: detail = options.cities.joined(separator: ",")
         case .progress: detail = options.progressUnit.rawValue
         case .countdown: detail = "\(options.countdownTitle)|\(DateMath.dayKey(options.countdownDate))|\(options.countdownMode.rawValue)"
+        case .birthday:
+            let title = options.dayTitle ?? ""
+            let day = options.dayDate.map { DateMath.dayKey($0) } ?? ""
+            detail = "\(title)|\(day)|\(options.dayRepeatsYearly)"
         case .tasks: detail = "\(options.showsCompletedTasks)"
         case .note: detail = "\(options.noteTitle)|\(options.noteText)"
         case .crypto: detail = options.coinID

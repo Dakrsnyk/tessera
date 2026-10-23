@@ -3197,6 +3197,53 @@
         }
       }
     },
+    "%@ depuis %@ j": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ seit %@ T."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ for %@ d"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ desde hace %@ d"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ depuis %@ j"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ da %@ g"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@から%@日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ há %@ d"
+          }
+        }
+      }
+    },
     "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.": {
       "extractionState": "manual",
       "localizations": {
@@ -49962,6 +50009,53 @@
         }
       }
     },
+    "Chaque année": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jedes Jahr"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every year"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada año"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque année"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogni anno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎年"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo ano"
+          }
+        }
+      }
+    },
     "Chaque couleur": {
       "extractionState": "manual",
       "localizations": {
@@ -78252,6 +78346,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Levantar os calcanhares."
+          }
+        }
+      }
+    },
+    "Décompte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tageszähler"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day counter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contador de días"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décompte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conta giorni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日数カウンター"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contador de dias"
           }
         }
       }
@@ -118018,6 +118159,100 @@
         }
       }
     },
+    "Le décompte repart chaque année à la date choisie, comme un anniversaire.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Zähler beginnt jedes Jahr am gewählten Datum neu, wie bei einem Geburtstag."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The count starts over each year on the chosen date, like a birthday."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cuenta se reinicia cada año en la fecha elegida, como un cumpleaños."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le décompte repart chaque année à la date choisie, comme un anniversaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il conteggio riparte ogni anno alla data scelta, come un compleanno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選んだ日付から毎年カウントをやり直します。誕生日と同じです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A contagem recomeça todo ano na data escolhida, como um aniversário."
+          }
+        }
+      }
+    },
+    "Le décompte va jusqu'à la date choisie, puis compte les jours depuis.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Zähler läuft bis zum gewählten Datum und zählt danach die Tage seitdem."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The count runs to the chosen date, then counts the days since."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cuenta llega hasta la fecha elegida y después cuenta los días transcurridos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le décompte va jusqu'à la date choisie, puis compte les jours depuis."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il conteggio arriva fino alla data scelta, poi conta i giorni trascorsi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選んだ日付までカウントし、その後は経過日数を数えます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A contagem vai até a data escolhida e depois conta os dias desde então."
+          }
+        }
+      }
+    },
     "Le dégradé suit la couleur principale.": {
       "extractionState": "manual",
       "localizations": {
@@ -122244,53 +122479,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Os dias antes da partida, e seu voo."
-          }
-        }
-      }
-    },
-    "Les jours avant ton prochain anniversaire, chaque année.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Tage bis zu deinem nächsten Geburtstag, jedes Jahr."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Days until your next birthday, every year."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los días que faltan para tu próximo cumpleaños, cada año."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les jours avant ton prochain anniversaire, chaque année."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I giorni che mancano al tuo prossimo compleanno, ogni anno."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "次の誕生日までの日数を毎年表示します。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os dias até o seu próximo aniversário, todo ano."
           }
         }
       }
@@ -222029,6 +222217,53 @@
         }
       }
     },
+    "Un décompte vers la date et le nom de ton choix, anniversaire compris.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Zähler bis zum Datum und mit dem Namen deiner Wahl, Geburtstage inklusive."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A count to the date and the name of your choice, birthdays included."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una cuenta hacia la fecha y el nombre que elijas, cumpleaños incluidos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un décompte vers la date et le nom de ton choix, anniversaire compris."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un conteggio verso la data e il nome che scegli, compleanni compresi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好きな日付と名前までのカウント。誕生日も使えます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma contagem até a data e o nome que você escolher, aniversários incluídos."
+          }
+        }
+      }
+    },
     "Un dégradé bleu nuit vers turquoise": {
       "extractionState": "manual",
       "localizations": {
@@ -233399,6 +233634,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "até a próxima revisão"
+          }
+        }
+      }
+    },
+    "avant les %@ ans": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bis zum %@. Jahrestag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "before the %@ years"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "antes de los %@ años"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "avant les %@ ans"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ai %@ anni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@年まで"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "para os %@ anos"
           }
         }
       }

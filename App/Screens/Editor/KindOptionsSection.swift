@@ -101,6 +101,30 @@ struct KindOptionsSection: View {
                 .font(.subheadline)
                 .permissionSheet(.notifications, isPresented: $showsNotificationExplainer, request: requestNotifications, onDismiss: applyNotificationState)
             }
+        case .birthday:
+            // The « Décompte »: the name and the date are the person's; « Anniversaire » and the birthday of « Ma vie » start it.
+            EditorSection(title: tr("Événement")) {
+                VStack(alignment: .leading, spacing: 12) {
+                    TextField(tr("Nom de l'événement"), text: Binding(
+                        get: { design.options.dayTitle ?? DayCountdown.defaultTitle },
+                        set: { design.options.dayTitle = $0 }
+                    ))
+                    .padding(12)
+                    .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    DatePicker(tr("Date"), selection: Binding(
+                        get: { DayCountdown.date(for: design, birthday: model.life.birthday) },
+                        set: { design.options.dayDate = $0 }
+                    ), displayedComponents: .date)
+                        .environment(\.locale, Fmt.locale)
+                    Toggle(tr("Chaque année"), isOn: $design.options.dayRepeatsYearly)
+                    Text(design.options.dayRepeatsYearly
+                         ? tr("Le décompte repart chaque année à la date choisie, comme un anniversaire.")
+                         : tr("Le décompte va jusqu'à la date choisie, puis compte les jours depuis."))
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                .font(.subheadline)
+            }
         case .tasks:
             EditorSection(title: tr("Contenu")) {
                 VStack(spacing: 0) {

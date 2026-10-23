@@ -1,12 +1,45 @@
 import Foundation
 
+/// What the « Décompte » widget (kind `birthday`) counts to: the name and the date its options give,
+/// else « Anniversaire » and the birthday of « Ma vie », else a day a month after the widget was made.
+enum DayCountdown {
+    static var defaultTitle: String { tr("Anniversaire") }
+
+    /// The name drawn: the chosen one, « Anniversaire » while none is chosen, « Événement » when it was emptied.
+    static func title(_ options: DesignOptions) -> String {
+        guard let chosen = options.dayTitle else { return defaultTitle }
+        let trimmed = chosen.trimmed
+        return trimmed.isEmpty ? tr("Événement") : trimmed
+    }
+
+    /// True for the default name: the birthday wording (« Joyeux anniversaire ! ») stays.
+    static func usesBirthdayWording(_ options: DesignOptions) -> Bool {
+        title(options).caseInsensitiveCompare(defaultTitle) == .orderedSame
+    }
+
+    /// The date counted to, at the start of its day.
+    static func date(for design: WidgetDesign, birthday: Date?) -> Date {
+        if let chosen = design.options.dayDate { return DateMath.startOfDay(chosen) }
+        if let birthday { return DateMath.startOfDay(birthday) }
+        let created = DateMath.startOfDay(design.createdAt)
+        return DateMath.calendar.date(byAdding: .day, value: 30, to: created) ?? created
+    }
+
+    /// True when the widget counts to the person's own birthday (« avant tes N ans »).
+    static func followsBirthday(_ options: DesignOptions, birthday: Date?) -> Bool {
+        guard let birthday, usesBirthdayWording(options) else { return false }
+        guard let chosen = options.dayDate else { return true }
+        return DateMath.calendar.isDate(chosen, inSameDayAs: birthday)
+    }
+}
+
 enum TimeTiles {
     static func make(_ context: RenderContext) -> Tile {
         let now = context.date
         let life = context.payload.domains.life
         switch context.design.kind {
         case .ageProgress: return age(life, now: now)
-        case .birthday: return birthday(life, now: now)
+        case .birthday: return birthday(context.design, life: life, now: now)
         case .weekView: return week(now: now)
         case .holiday: return holiday(life, now: now)
         case .moonPhase: return moon(now: now)
@@ -36,30 +69,79 @@ enum TimeTiles {
         return tile
     }
 
-    static func birthday(_ life: LifeState, now: Date) -> Tile {
-        guard let birthday = life.birthday else {
-            return .empty(tr("Anniversaire"), symbol: "gift", message: lifeHint)
+    /// The « Décompte » widget (kind `birthday`): the days to a date and a name chosen by the person, each
+    /// year or once. Left at its defaults it is the birthday widget it used to be, word for word.
+    static func birthday(_ design: WidgetDesign, life: LifeState, now: Date) -> Tile {
+        let options = design.options
+        let title = DayCountdown.title(options)
+        let usesBirthdayWording = DayCountdown.usesBirthdayWording(options)
+        let target = DayCountdown.date(for: design, birthday: life.birthday)
+        var tile = Tile(title: title, symbol: usesBirthdayWording ? "gift" : "hourglass")
+        if options.dayRepeatsYearly {
+            let today = DateMath.startOfDay(now)
+            // A date still ahead is its own first occurrence; one behind comes back each year.
+            let next = target > today ? (date: target, age: 0) : LifeMath.nextBirthday(birthday: target, after: now)
+            let days = DateMath.daysBetween(now, next.date)
+            if days == 0 {
+                if next.age > 0 {
+                    tile.value = "\(next.age)"
+                    tile.unit = tr("ans")
+                } else {
+                    tile.value = tr("Aujourd'hui")
+                }
+                tile.caption = usesBirthdayWording ? tr("Joyeux anniversaire !") : tr("C'est aujourd'hui")
+                tile.visual = .ring(1)
+                tile.gauge = 1
+                tile.inline = usesBirthdayWording ? tr("Joyeux anniversaire !") : tr("\(title) aujourd'hui")
+            } else {
+                tile.value = Fmt.number(days)
+                tile.unit = TF.days(days)
+                if DayCountdown.followsBirthday(options, birthday: life.birthday) {
+                    tile.caption = tr("avant tes \(next.age) ans")
+                } else if next.age > 0 {
+                    tile.caption = tr("avant les \(next.age) ans")
+                }
+                tile.detail = Fmt.longDay(next.date)
+                tile.visual = .ring(max(0.02, 1 - Double(days) / 365))
+                tile.gauge = max(0, 1 - Double(days) / 365)
+                tile.inline = usesBirthdayWording ? tr("Anniversaire dans \(days) j") : tr("\(title) dans \(days) j")
+            }
+            tile.shortValue = days == 0 ? (usesBirthdayWording ? "🎂" : "🎉") : Fmt.number(days)
+            return tile
         }
-        let next = LifeMath.nextBirthday(birthday: birthday, after: now)
-        let days = DateMath.daysBetween(now, next.date)
-        var tile = Tile(title: tr("Anniversaire"), symbol: "gift")
-        if days == 0 {
-            tile.value = "\(next.age)"
-            tile.unit = tr("ans")
-            tile.caption = tr("Joyeux anniversaire !")
+        // Once: the days until the date, then the days since it.
+        let delta = DateMath.daysBetween(now, target)
+        let days = abs(delta)
+        let fullDate = Fmt.longDay(target) + " " + Fmt.format(target, template: "yyyy")
+        if delta == 0 {
+            tile.value = tr("Aujourd'hui")
+            tile.detail = fullDate
             tile.visual = .ring(1)
             tile.gauge = 1
-            tile.inline = tr("Joyeux anniversaire !")
+            tile.inline = tr("\(title) aujourd'hui")
+            tile.shortValue = "🎉"
+        } else if delta > 0 {
+            tile.value = Fmt.number(days)
+            tile.caption = days > 1 ? tr("jours restants") : tr("jour restant")
+            tile.detail = fullDate
+            // Share of the wait already behind us, from the day the widget was made.
+            let start = DateMath.startOfDay(design.createdAt)
+            let span = target.timeIntervalSince(start)
+            let elapsed = span > 0 ? min(1, max(0, now.timeIntervalSince(start) / span)) : 0
+            tile.visual = .ring(max(0.02, elapsed))
+            tile.gauge = elapsed
+            tile.inline = tr("\(title) dans \(days) j")
+            tile.shortValue = Fmt.number(days)
         } else {
             tile.value = Fmt.number(days)
-            tile.unit = TF.days(days)
-            tile.caption = tr("avant tes \(next.age) ans")
-            tile.detail = Fmt.longDay(next.date)
-            tile.visual = .ring(max(0.02, 1 - Double(days) / 365))
-            tile.gauge = 1 - Double(days) / 365
-            tile.inline = tr("Anniversaire dans \(days) j")
+            tile.caption = days > 1 ? tr("jours depuis") : tr("jour depuis")
+            tile.detail = fullDate
+            let fraction = min(1, Double(days) / 365)
+            tile.visual = .ring(max(0.02, fraction))
+            tile.gauge = fraction
+            tile.inline = tr("\(title) depuis \(days) j")
+            tile.shortValue = Fmt.number(days)
         }
-        tile.shortValue = days == 0 ? "🎂" : Fmt.number(days)
         return tile
     }
 

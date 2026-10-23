@@ -1,0 +1,9 @@
+{
+ "%@ depuis %@ j": "%@ da %@ g",
+ "Chaque année": "Ogni anno",
+ "Décompte": "Conta giorni",
+ "Le décompte repart chaque année à la date choisie, comme un anniversaire.": "Il conteggio riparte ogni anno alla data scelta, come un compleanno.",
+ "Le décompte va jusqu'à la date choisie, puis compte les jours depuis.": "Il conteggio arriva fino alla data scelta, poi conta i giorni trascorsi.",
+ "Un décompte vers la date et le nom de ton choix, anniversaire compris.": "Un conteggio verso la data e il nome che scegli, compleanni compresi.",
+ "avant les %@ ans": "ai %@ anni"
+}

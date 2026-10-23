@@ -47,6 +47,13 @@ struct DesignOptions: Codable, Hashable {
     var countdownDate: Date = Calendar.current.date(byAdding: .day, value: 42, to: Date()) ?? Date()
     var countdownMode: CountdownMode = .until
     var countdownReminder: Bool = false
+    /// The « Décompte » widget (kind `birthday`): its name and date, nil while the person kept the defaults
+    /// (« Anniversaire », and the birthday of « Ma vie »). See `DayCountdown`.
+    var dayTitle: String?
+    var dayDate: Date?
+    /// Counts to the next anniversary of the date each year. True when absent, so widgets made when this
+    /// was only the birthday widget draw exactly as before.
+    var dayRepeatsYearly: Bool = true
     var cities: [String] = ["America/Toronto", "Europe/Paris", "Asia/Tokyo"]
     var noteTitle: String = ""
     var noteText: String = tr("Fais une chose aujourd'hui dont tu seras fier demain.")
@@ -66,7 +73,7 @@ struct DesignOptions: Codable, Hashable {
     init() {}
 
     enum CodingKeys: String, CodingKey {
-        case progressUnit, countdownTitle, countdownDate, countdownMode, countdownReminder
+        case progressUnit, countdownTitle, countdownDate, countdownMode, countdownReminder, dayTitle, dayDate, dayRepeatsYearly
         case cities, noteTitle, noteText, coinID, moneyMode, showsCompletedTasks, clockShowsDate, targetID, parts, photos, quote
     }
 
@@ -78,6 +85,9 @@ struct DesignOptions: Codable, Hashable {
         countdownDate = (try? c.decodeIfPresent(Date.self, forKey: .countdownDate)) ?? d.countdownDate
         countdownMode = (try? c.decodeIfPresent(CountdownMode.self, forKey: .countdownMode)) ?? d.countdownMode
         countdownReminder = (try? c.decodeIfPresent(Bool.self, forKey: .countdownReminder)) ?? d.countdownReminder
+        dayTitle = (try? c.decodeIfPresent(String.self, forKey: .dayTitle)) ?? nil
+        dayDate = (try? c.decodeIfPresent(Date.self, forKey: .dayDate)) ?? nil
+        dayRepeatsYearly = (try? c.decodeIfPresent(Bool.self, forKey: .dayRepeatsYearly)) ?? d.dayRepeatsYearly
         cities = (try? c.decodeIfPresent([String].self, forKey: .cities)) ?? d.cities
         noteTitle = (try? c.decodeIfPresent(String.self, forKey: .noteTitle)) ?? d.noteTitle
         noteText = (try? c.decodeIfPresent(String.self, forKey: .noteText)) ?? d.noteText

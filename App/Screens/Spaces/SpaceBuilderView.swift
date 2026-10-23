@@ -301,15 +301,6 @@ struct SpaceBuilderView: View {
         }
     }
 
-    /// Whether a widget can take part in a widget of this size (on its own, or combined).
-    private static func fits(_ kind: WidgetKind, _ format: WidgetFormat) -> Bool {
-        switch format {
-        case .small: kind.families.contains(.systemSmall)
-        case .medium: kind.families.contains(.systemSmall) || kind.families.contains(.systemMedium)
-        case .large: kind.homeFamilies.isEmpty == false
-        }
-    }
-
     private var widgetsDetail: String {
         let count = Fmt.plural(selection.count, tr("sélectionné"), tr("sélectionnés"))
         return format == .small ? count : tr("\(count) · \(Composer.maxCount(for: format)) au plus")
@@ -318,7 +309,9 @@ struct SpaceBuilderView: View {
     private func kindCell(_ kind: WidgetKind) -> some View {
         let isSelected = selection.contains(kind)
         let order = (selection.firstIndex(of: kind) ?? 0) + 1
-        let isAvailable = Self.fits(kind, format)
+        let isAvailable = BuilderSelection.fits(kind, format)
+        // Widgets with no small size say where they exist (« Moyen · Grand »).
+        let sizes = kind.families.compactMap { WidgetFormat($0) }.map(\.title).joined(separator: " · ")
         let design = styled(kind)
         let family: WidgetFamily = kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium
         return Button {
@@ -355,12 +348,18 @@ struct SpaceBuilderView: View {
                             .foregroundStyle(Color.premiumInk)
                     }
                 }
+                if !BuilderSelection.hasSmall(kind) && !sizes.isEmpty {
+                    Text(sizes)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
             }
             .contentShape(Rectangle())
         }
         .buttonStyle(.pressable)
-        .disabled(!isAvailable)
-        .opacity(isAvailable ? 1 : 0.35)
+        // Never disabled for its size: picking a widget the current size doesn't have switches to a size that has it.
+        .opacity(isAvailable ? 1 : 0.6)
         .animation(.spring(response: 0.3, dampingFraction: 0.75), value: isSelected)
         .accessibilityLabel(Text(kind.title))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
@@ -398,14 +397,9 @@ struct SpaceBuilderView: View {
     private func toggle(_ kind: WidgetKind) {
         Haptics.tap()
         withAnimation(.spring(response: 0.32, dampingFraction: 0.82)) {
-            if let index = selection.firstIndex(of: kind) {
-                guard selection.count > 1 else { return }
-                selection.remove(at: index)
-            } else {
-                // Full: the oldest choice makes room for the new one.
-                if selection.count >= Composer.maxCount(for: format) { selection.removeFirst() }
-                selection.append(kind)
-            }
+            let next = BuilderSelection.toggled(.init(format: format, selection: selection), kind)
+            format = next.format
+            selection = next.selection
         }
     }
 
@@ -417,5 +411,50 @@ struct SpaceBuilderView: View {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
             format = newFormat
         }
+    }
+}
+
+/// How picking a widget changes the space creator's size and selection. Pure, so it can be tested.
+enum BuilderSelection {
+    struct Choice: Equatable {
+        var format: WidgetFormat
+        /// Selected widgets, in the order they were picked.
+        var selection: [WidgetKind]
+    }
+
+    /// Whether a widget can take part in a widget of this size (on its own, or combined).
+    static func fits(_ kind: WidgetKind, _ format: WidgetFormat) -> Bool {
+        switch format {
+        case .small: kind.families.contains(.systemSmall)
+        case .medium: kind.families.contains(.systemSmall) || kind.families.contains(.systemMedium)
+        case .large: kind.homeFamilies.isEmpty == false
+        }
+    }
+
+    static func hasSmall(_ kind: WidgetKind) -> Bool { kind.families.contains(.systemSmall) }
+
+    static func toggled(_ choice: Choice, _ kind: WidgetKind) -> Choice {
+        var next = choice
+        if let index = next.selection.firstIndex(of: kind) {
+            guard next.selection.count > 1 else { return next }
+            next.selection.remove(at: index)
+            return next
+        }
+        if !fits(kind, next.format) {
+            // The current size doesn't have this widget: go to the smallest size that does, and start from it.
+            let sizes: [WidgetFormat] = [.medium, .large]
+            guard let size = sizes.first(where: { kind.families.contains($0.family) }) else { return next }
+            return Choice(format: size, selection: [kind])
+        }
+        if next.format == .medium, !hasSmall(kind) || next.selection.contains(where: { !hasSmall($0) }) {
+            // A widget with no small size can't be merged with another: it stands alone, and so does the
+            // selection it would have to share the row with.
+            next.selection = [kind]
+            return next
+        }
+        // Full: the oldest choice makes room for the new one.
+        if next.selection.count >= Composer.maxCount(for: next.format) { next.selection.removeFirst() }
+        next.selection.append(kind)
+        return next
     }
 }

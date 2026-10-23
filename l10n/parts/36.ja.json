@@ -1,0 +1,9 @@
+{
+ "%@ depuis %@ j": "%@から%@日",
+ "Chaque année": "毎年",
+ "Décompte": "日数カウンター",
+ "Le décompte repart chaque année à la date choisie, comme un anniversaire.": "選んだ日付から毎年カウントをやり直します。誕生日と同じです。",
+ "Le décompte va jusqu'à la date choisie, puis compte les jours depuis.": "選んだ日付までカウントし、その後は経過日数を数えます。",
+ "Un décompte vers la date et le nom de ton choix, anniversaire compris.": "好きな日付と名前までのカウント。誕生日も使えます。",
+ "avant les %@ ans": "%@年まで"
+}
