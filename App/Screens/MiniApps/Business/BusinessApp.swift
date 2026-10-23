@@ -139,6 +139,7 @@ struct BusinessAppView: View {
         } sheet: {
             // The sheet, by importance: the two actions, the indicators, the sources, the metrics by hand,
             // the curve, the pages, the settings last.
+            MiniAppToFillSection(app: .business)
             actions
             kpis(state: state, now: at)
             BusinessSourcesCard()

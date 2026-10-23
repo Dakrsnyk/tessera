@@ -84,6 +84,7 @@ struct CarAppView: View {
                 start
             }
         } sheet: {
+            MiniAppToFillSection(app: .car)
             // Two actions: a row at the head of the sheet.
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Plein"), symbol: "plus", colorHex: accentHex) { sheet = .fuel(nil) }

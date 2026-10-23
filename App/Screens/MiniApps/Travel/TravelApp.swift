@@ -73,6 +73,7 @@ struct TravelAppView: View {
                 start
             }
         } sheet: {
+            MiniAppToFillSection(app: .travel)
             if let trip = current {
                 let program = TravelMath.program(state, for: trip)
                 let dayItems = program.first { DateMath.isSameDay($0.day, day) }?.items ?? []

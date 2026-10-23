@@ -29,7 +29,15 @@ struct HomeView: View {
                         SpaceView(space: space, isEmbedded: true)
                     }
                 case .info: MyInfoView()
-                case let .infoArea(area): InfoAreaView(area: area)
+                case let .infoArea(area):
+                    // Old links only: the page per category is gone, its mini-app (or space) takes over.
+                    if let app = area.miniApp {
+                        MiniAppView(app: app)
+                    } else if let space = area.space {
+                        SpaceView(space: space, isEmbedded: true)
+                    } else {
+                        MyInfoView()
+                    }
                 case let .app(app): MiniAppView(app: app)
                 case let .page(page): MiniAppPageView(page: page)
                 }

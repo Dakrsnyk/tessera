@@ -4,7 +4,7 @@ import SwiftUI
 /// full width) and which ones show. Every change is saved at once; « Disposition automatique » gives
 /// the order back to Ardane (what matters at this moment of the day first).
 struct DailyLayoutEditor: View {
-    /// The cards Home can show now (only those with real data), in the automatic order.
+    /// Every card of Home, with data or empty (a dotted « Ajouter » card), in the automatic order.
     let available: [DailyBrief.Tile]
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -136,7 +136,7 @@ struct DailyLayoutEditor: View {
                 model.updateSettings { settings in
                     if isHidden {
                         settings.dailyHidden.removeAll { $0 == tile.id }
-                    } else {
+                    } else if !settings.dailyHidden.contains(tile.id) {
                         settings.dailyHidden.append(tile.id)
                     }
                 }
@@ -170,6 +170,7 @@ struct DailyLayoutEditor: View {
         case .reminders: (tr("À ne pas oublier"), "bell.fill", "E5484D")
         case .priorities: (tr("Top 3"), "star.fill", "F5A524")
         case .invite: (tr("Mes données"), "plus", "8E8E93")
+        case let .empty(category): (category.title, category.symbol, category.colorHex)
         case let .miniApp(raw, _):
             MiniApp(rawValue: raw).map { ($0.title, $0.symbol, $0.colorHex) } ?? (raw, "square", "8E8E93")
         }

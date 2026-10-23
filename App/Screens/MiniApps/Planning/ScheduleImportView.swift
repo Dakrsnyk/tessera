@@ -72,6 +72,9 @@ struct ScheduleImportView: View {
 
     @State private var stage: Stage = .pick
     @State private var slots: [ImportedSlot] = []
+    /// The classes marked "to check" at the reading without any precise field (a page explained poorly as a whole): they
+    /// stay marked when the person corrects fields. For the others, the mark goes when the last uncertain field is corrected.
+    @State private var inheritedDoubt: Set<UUID> = []
     @State private var photoItem: PhotosPickerItem?
     @State private var choosesFile = false
     @State private var readTask: Task<Void, Never>?
@@ -198,7 +201,9 @@ struct ScheduleImportView: View {
     /// from the reading can be added by hand.
     private var reviewStep: some View {
         let count = ScheduleImportMerge.importable(slots).count
-        let doubtful = slots.filter { $0.needsCheck }.count
+        let doubtful = slots.filter { $0.needsCheck || !$0.uncertain.isEmpty }.count
+        let hasUnticked = slots.contains { !$0.isSelected }
+        let hasUncertainTicked = slots.contains { $0.isSelected && !$0.uncertain.isEmpty }
         return ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
@@ -213,6 +218,23 @@ struct ScheduleImportView: View {
                             .foregroundStyle(Color(hex: MiniStyle.alertHex))
                             .fixedSize(horizontal: false, vertical: true)
                             .accessibilityIdentifier("schedule-import-doubt-note")
+                    }
+                    if hasUncertainTicked || hasUnticked {
+                        VStack(spacing: 10) {
+                            if hasUncertainTicked {
+                                MiniActionButton(title: tr("Décocher les cours incertains"), symbol: "exclamationmark.triangle",
+                                                 colorHex: MiniStyle.alertHex, isProminent: false) {
+                                    untickUncertain()
+                                }
+                                .accessibilityIdentifier("schedule-import-untick-uncertain")
+                            }
+                            if hasUnticked {
+                                MiniActionButton(title: tr("Tout cocher"), symbol: "checkmark.circle", colorHex: accentHex, isProminent: false) {
+                                    tickAll()
+                                }
+                                .accessibilityIdentifier("schedule-import-tick-all")
+                            }
+                        }
                     }
                     ForEach(1...7, id: \.self) { day in
                         if slots.contains(where: { $0.weekday == day }) {
@@ -250,6 +272,21 @@ struct ScheduleImportView: View {
         }
     }
 
+    /// Unticks every class that has a field read with a doubt (they stay in the list, to be checked and ticked again).
+    private func untickUncertain() {
+        Haptics.tap()
+        withAnimation {
+            for index in slots.indices where !slots[index].uncertain.isEmpty { slots[index].isSelected = false }
+        }
+    }
+
+    private func tickAll() {
+        Haptics.tap()
+        withAnimation {
+            for index in slots.indices { slots[index].isSelected = true }
+        }
+    }
+
     /// An empty class to fill in (the same day as the last one, 8:00 to 9:00): the card is scrolled into view.
     private func addBlankSlot(scrollingWith proxy: ScrollViewProxy) {
         let blank = ImportedSlot(weekday: slots.last?.weekday ?? 1, startMinute: 8 * 60, endMinute: 9 * 60, title: "")
@@ -265,8 +302,12 @@ struct ScheduleImportView: View {
     private func slotCard(_ slot: Binding<ImportedSlot>) -> some View {
         let value = slot.wrappedValue
         let invalidTime = value.endMinute <= value.startMinute
+        let uncertain = value.uncertain
+        let flagged = value.needsCheck || !uncertain.isEmpty
+        // A ticked class without a name cannot be added: the field is shown as one to fix, with a hint.
+        let missingTitle = value.isSelected && value.title.trimmed.isEmpty
         return VStack(alignment: .leading, spacing: 8) {
-            if value.needsCheck {
+            if flagged {
                 Label(tr("À vérifier"), systemImage: "exclamationmark.triangle")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(Color(hex: MiniStyle.alertHex))
@@ -285,8 +326,10 @@ struct ScheduleImportView: View {
                 .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Inclure ce cours")))
                 .accessibilityValue(Text(value.isSelected ? tr("Oui") : tr("Non")))
-                TextField(tr("Titre"), text: slot.title)
+                TextField(tr("Titre"), text: clearing(.title, of: slot, slot.title))
                     .font(.body.weight(.semibold))
+                    .uncertainHighlight(uncertain.contains(.title) || missingTitle)
+                    .accessibilityIdentifier("schedule-import-title")
                 Button {
                     Haptics.tap()
                     let id = value.id
@@ -301,21 +344,34 @@ struct ScheduleImportView: View {
                 .accessibilityLabel(Text(tr("Supprimer ce cours")))
                 .accessibilityIdentifier("schedule-import-delete")
             }
+            if missingTitle {
+                Label(tr("Donne un nom à ce cours pour pouvoir l'ajouter."), systemImage: "exclamationmark.triangle.fill")
+                    .font(.caption)
+                    .foregroundStyle(Color(hex: MiniStyle.alertHex))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("schedule-import-title-missing")
+            }
             if value.isSelected {
-                Picker(tr("Jour"), selection: slot.weekday) {
+                // Each field read with a doubt is highlighted; changing it clears the mark (see `clearing`).
+                Picker(tr("Jour"), selection: clearing(.day, of: slot, slot.weekday)) {
                     ForEach(1...7, id: \.self) { day in
                         Text(Studies.weekdayNames[day - 1]).tag(day)
                     }
                 }
-                MinuteTimePicker(title: tr("Début"), minutes: slot.startMinute)
-                MinuteTimePicker(title: tr("Fin"), minutes: slot.endMinute)
+                .uncertainHighlight(uncertain.contains(.day))
+                MinuteTimePicker(title: tr("Début"), minutes: clearing(.start, of: slot, slot.startMinute))
+                    .uncertainHighlight(uncertain.contains(.start))
+                MinuteTimePicker(title: tr("Fin"), minutes: clearing(.end, of: slot, slot.endMinute))
+                    .uncertainHighlight(uncertain.contains(.end))
                 if invalidTime {
                     Label(tr("La fin doit venir après le début."), systemImage: "exclamationmark.triangle.fill")
                         .font(.caption)
                         .foregroundStyle(Color(hex: MiniStyle.alertHex))
                 }
-                TextField(tr("Salle (facultatif)"), text: Binding(get: { slot.room.wrappedValue ?? "" }, set: { slot.room.wrappedValue = $0 }))
+                TextField(tr("Salle (facultatif)"), text: clearing(.room, of: slot, Binding(get: { slot.room.wrappedValue ?? "" },
+                                                                                          set: { slot.room.wrappedValue = $0 })))
                     .font(.subheadline)
+                    .uncertainHighlight(uncertain.contains(.room))
             }
         }
         .padding(14)
@@ -323,9 +379,24 @@ struct ScheduleImportView: View {
         .miniCard()
         .overlay(
             RoundedRectangle(cornerRadius: MiniStyle.cardRadius, style: .continuous)
-                .stroke(Color(hex: MiniStyle.alertHex).opacity(value.needsCheck ? 0.7 : 0), lineWidth: 1.5)
+                .stroke(Color(hex: MiniStyle.alertHex).opacity(flagged ? 0.7 : 0), lineWidth: 1.5)
         )
         .opacity(value.isSelected ? 1 : 0.6)
+    }
+
+    /// A binding that, when the person changes the value, also removes `field` from the uncertain fields of the class:
+    /// what was corrected by hand is no longer in doubt.
+    private func clearing<Value>(_ field: SlotField, of slot: Binding<ImportedSlot>, _ binding: Binding<Value>) -> Binding<Value> {
+        Binding(
+            get: { binding.wrappedValue },
+            set: { newValue in
+                binding.wrappedValue = newValue
+                slot.wrappedValue.uncertain.remove(field)
+                if slot.wrappedValue.uncertain.isEmpty, !inheritedDoubt.contains(slot.wrappedValue.id) {
+                    slot.wrappedValue.needsCheck = false
+                }
+            }
+        )
     }
 
     /// 4. The confirmation, before the sheet closes by itself.
@@ -402,6 +473,7 @@ struct ScheduleImportView: View {
             switch outcome {
             case .found(let found):
                 // By day, then by hour; the order stays as is while the person edits.
+                inheritedDoubt = Set(found.filter { $0.needsCheck && $0.uncertain.isEmpty }.map { $0.id })
                 slots = found.sorted { ($0.weekday, $0.startMinute, $0.endMinute) < ($1.weekday, $1.startMinute, $1.endMinute) }
                 stage = .review
             case .unreadable:
@@ -428,5 +500,38 @@ struct ScheduleImportView: View {
             try? await Task.sleep(nanoseconds: 1_600_000_000)
             if case .done = stage { dismiss() }
         }
+    }
+}
+
+/// The look of a field read with a doubt: a soft alert background, a thin outline and a small warning mark in the corner.
+/// The structure is the same whether the field is flagged or not (only the colours change), so that a text field keeps
+/// its focus while the person types and the mark goes away.
+private struct UncertainHighlight: ViewModifier {
+    let active: Bool
+
+    func body(content: Content) -> some View {
+        let alert = Color(hex: MiniStyle.alertHex)
+        let shape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+        return content
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(shape.fill(alert.opacity(active ? 0.12 : 0)))
+            .overlay(shape.stroke(alert.opacity(active ? 0.6 : 0), lineWidth: 1))
+            .overlay(alignment: .topTrailing) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.caption2)
+                    .foregroundStyle(alert)
+                    .padding(2)
+                    .opacity(active ? 1 : 0)
+                    .accessibilityHidden(true)
+            }
+            .accessibilityHint(active ? tr("À vérifier") : "")
+    }
+}
+
+private extension View {
+    /// Highlights a field of the check screen when its reading is in doubt.
+    func uncertainHighlight(_ active: Bool) -> some View {
+        modifier(UncertainHighlight(active: active))
     }
 }

@@ -35,13 +35,19 @@ extension ScheduleParser {
     static func cellDraft(_ lines: [RecognizedLine], weekday: Int, start: Int, end: Int) -> Draft? {
         var titles: [String] = []
         var room: String? = nil
+        var roomRepaired = false
         for line in lines {
             let info = analyze(line.text)
-            if room == nil { room = info.room }
+            if room == nil, let found = info.room {
+                room = found
+                roomRepaired = info.roomRepaired
+            }
             if !info.title.isEmpty { titles.append(info.title) }
         }
         let title = titles.prefix(2).joined(separator: " ")
         guard !title.isEmpty else { return nil }
-        return Draft(weekday: weekday, start: start, end: end, title: title, room: room)
+        var uncertain: Set<SlotField> = []
+        if room != nil, roomRepaired { uncertain.insert(.room) }
+        return Draft(weekday: weekday, start: start, end: end, title: title, room: room, uncertain: uncertain)
     }
 }

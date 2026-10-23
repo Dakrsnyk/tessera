@@ -145,8 +145,12 @@ struct FinancesAppView: View {
             hero(state: state, now: now, at: at)
         } sheet: {
             // The sheet, by importance: the two actions, the chosen day, the month, then the balance and the rest.
-            actions
-            dayCard(state: state, now: now)
+            MiniAppToFillSection(app: .finances)
+            // Grouped: a builder takes ten views at most.
+            Group {
+                actions
+                dayCard(state: state, now: now)
+            }
             month(state: state, now: now)
             BalanceChartCard(state: state, currency: currency, isPremium: model.isPremium) { sheet = .opening }
             categories(state: state, now: now)

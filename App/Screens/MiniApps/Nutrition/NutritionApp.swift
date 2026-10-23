@@ -44,6 +44,7 @@ struct NutritionAppView: View {
         } sheet: {
             // The sheet, by importance: the two actions, the meals, the idea of the moment, the week's
             // calories, history and saved meals, the note, the settings last.
+            MiniAppToFillSection(app: .nutrition)
             actions
             meals(entries: entries)
             nutrientsRow(totals: totals)

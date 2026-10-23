@@ -78,12 +78,13 @@ final class QuickTaskTests: XCTestCase {
         let tiles = DailyCategories.adding(settings.dailyAdded, to: [], model: temporaryModel(), now: now)
         XCTAssertEqual(tiles.map(\.id), ["priorities"])
         XCTAssertTrue(DailyCategories.isProductivityShown(settings: settings))
-        // Added twice: still one entry; taken off with no task: back to the settings of before.
+        // Added twice: still one entry; taken off with no task: the (empty) Top 3 card is hidden for real.
         DailyCategories.setProductivity(shown: true, hasTasks: false, in: &settings)
         XCTAssertEqual(settings.dailyAdded.count, 1)
+        XCTAssertEqual(settings.dailyHidden, before, "Shown: nothing hidden")
         DailyCategories.setProductivity(shown: false, hasTasks: false, in: &settings)
         XCTAssertTrue(settings.dailyAdded.isEmpty)
-        XCTAssertEqual(settings.dailyHidden, before, "Nothing stays hidden: a Top 3 filled later still shows")
+        XCTAssertEqual(settings.dailyHidden, before + ["priorities"], "The empty card must not stay behind an « off » switch")
         XCTAssertFalse(DailyCategories.isProductivityShown(settings: settings))
     }
 

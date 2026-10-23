@@ -51,7 +51,7 @@ struct MyInfoCard: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .top, spacing: 8) {
                             ForEach(areas) { area in
-                                NavigationLink(value: HomeRoute.infoArea(area)) {
+                                NavigationLink(value: area.homeRoute) {
                                     AreaBadge(area: area, missing: model.missingItems(area.keyItems).count)
                                 }
                                 .buttonStyle(.pressable)
@@ -144,8 +144,8 @@ private struct AreaBadge: View {
 
 // MARK: - The center
 
-/// Every piece of data Ardane can use, grouped by area: given once here (or while making a widget),
-/// used everywhere. The person's areas first, the others below.
+/// Every piece of data Ardane can use, grouped by area: a tap on an area opens its mini-app, where what is
+/// missing is filled in (the general settings are given here). The person's areas first, the others below.
 struct MyInfoView: View {
     @Environment(AppModel.self) private var model
     @State private var editsInterests = false
@@ -176,11 +176,13 @@ struct MyInfoView: View {
                     areaList(tr("Tes thèmes"), followed)
                 }
                 areaList(followed.isEmpty ? tr("Catégories") : tr("Autres catégories"), others)
-                areaList(tr("Général"), [.general])
+                // The general settings (city, calendar) belong to no mini-app: they are given right here.
+                WidgetDataSection(items: InfoArea.general.items, title: tr("Général"))
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 32)
         }
+        .scrollDismissesKeyboard(.interactively)
         .background(.screenGradient)
         .screenshotScroll()
         .navigationTitle(tr("Mes informations"))
@@ -196,7 +198,7 @@ struct MyInfoView: View {
                 .foregroundStyle(.secondary)
             VStack(spacing: 0) {
                 ForEach(Array(areas.enumerated()), id: \.element) { pair in
-                    NavigationLink(value: HomeRoute.infoArea(pair.element)) {
+                    NavigationLink(value: pair.element.homeRoute) {
                         AreaRow(area: pair.element)
                     }
                     .buttonStyle(.pressable)
@@ -250,78 +252,6 @@ private struct AreaRow: View {
         .padding(.vertical, 11)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-    }
-}
-
-/// One area of « Mes informations »: every piece of data it holds, the widgets that use them,
-/// and the finer questions of the first launch.
-struct InfoAreaView: View {
-    let area: InfoArea
-    @Environment(AppModel.self) private var model
-    @State private var editsTopic = false
-
-    var body: some View {
-        let users = model.designs.filter { design in !Set(design.dataItems).isDisjoint(with: area.items) }
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                HStack(spacing: 12) {
-                    Image(systemName: area.symbol)
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(.white)
-                        .frame(width: 44, height: 44)
-                        .background(Color(hex: area.colorHex), in: RoundedRectangle(cornerRadius: 13, style: .continuous))
-                    Text(users.isEmpty ? tr("Ce que tu renseignes ici servira à tes widgets \(area.title.lowercasedFirst) et à « Mon Quotidien ».") : tr("Utilisé par \(Fmt.plural(users.count, tr("de tes widgets"), tr("de tes widgets"))) : \(users.prefix(3).map(\.name).joined(separator: ", "))."))
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                WidgetDataSection(items: area.items, title: tr("Tes données"))
-                if let topic = area.topic {
-                    Button {
-                        editsTopic = true
-                    } label: {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(tr("Plus de précisions"))
-                                    .font(.subheadline.weight(.semibold))
-                                    .foregroundStyle(.primary)
-                                Text(topic.purpose)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                    .multilineTextAlignment(.leading)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.caption.weight(.bold))
-                                .foregroundStyle(.tertiary)
-                        }
-                        .card(padding: 14)
-                    }
-                    .buttonStyle(.pressable)
-                    .accessibilityIdentifier("area-more")
-                }
-                if let space = area.space {
-                    NavigationLink {
-                        SpaceView(space: space, isEmbedded: true)
-                    } label: {
-                        Label(tr("Toutes les données \(space.title)"), systemImage: "square.and.pencil")
-                            .font(.subheadline.weight(.semibold))
-                            .frame(maxWidth: .infinity, minHeight: 44)
-                    }
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.roundedRectangle(radius: 12))
-                }
-            }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 32)
-        }
-        .scrollDismissesKeyboard(.interactively)
-        .background(.screenGradient)
-        .navigationTitle(area.title)
-        .navigationBarTitleDisplayMode(.large)
-        .sheet(isPresented: $editsTopic) {
-            if let topic = area.topic { TopicEditorSheet(topic: topic) }
-        }
     }
 }
 

@@ -82,6 +82,8 @@ enum ScheduleScoring {
             if ScheduleParser.timeOnly(line.text) != nil { continue }
             if !ScheduleParser.dayCandidates(line: line, index: index).isEmpty { continue }
             if ScheduleParser.isNoise(line.text) { continue }
+            // A break or a free period is on the page but is no class: it is not text left unexplained.
+            if ScheduleParser.isBreak(line.text) || ScheduleParser.isFreePeriod(line.text) { continue }
             result.append(line)
         }
         return result

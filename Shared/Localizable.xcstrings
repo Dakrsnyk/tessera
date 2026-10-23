@@ -19600,6 +19600,53 @@
         }
       }
     },
+    "Ajoute un voyage : son compte à rebours apparaîtra ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge eine Reise hinzu: Ihr Countdown erscheint hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a trip: its countdown will show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agrega un viaje: su cuenta regresiva aparecerá aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute un voyage : son compte à rebours apparaîtra ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi un viaggio: il suo conto alla rovescia apparirà qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "旅行を追加すると、そのカウントダウンがここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione uma viagem: a contagem regressiva dela vai aparecer aqui."
+          }
+        }
+      }
+    },
     "Ajoute une habitude à suivre chaque jour.": {
       "extractionState": "manual",
       "localizations": {
@@ -32850,6 +32897,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autorização"
+          }
+        }
+      }
+    },
+    "Autorise le compteur de pas : tes pas du jour apparaîtront ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlaube den Schrittzähler: Deine Schritte des Tages erscheinen hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow the step counter: your steps for the day will show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permite el contador de pasos: tus pasos del día aparecerán aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorise le compteur de pas : tes pas du jour apparaîtront ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consenti il contapassi: i tuoi passi del giorno appariranno qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "歩数計を許可すると、今日の歩数がここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permita o contador de passos: seus passos do dia vão aparecer aqui."
           }
         }
       }
@@ -48129,53 +48223,6 @@
         }
       }
     },
-    "Ce que tu renseignes ici servira à tes widgets %@ et à « Mon Quotidien ».": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Angaben hier werden für deine %@-Widgets und „Mein Tag“ verwendet."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What you enter here will be used for your %@ widgets and “My Day”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lo que indiques aquí se usará en tus widgets de %@ y en «Mi día»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce que tu renseignes ici servira à tes widgets %@ et à « Mon Quotidien »."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quello che inserisci qui servirà ai tuoi widget %@ e a «La mia giornata»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ここで入力した内容は、%@のウィジェットや「マイデイ」に使われます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que você preencher aqui será usado nos seus widgets de %@ e em “Meu dia”."
-          }
-        }
-      }
-    },
     "Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Ardane compte ce que tu notes.": {
       "extractionState": "manual",
       "localizations": {
@@ -54000,6 +54047,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha sua cidade (ou sua localização) para ver o clima aqui, no Início e nos widgets."
+          }
+        }
+      }
+    },
+    "Choisis ta ville : la météo du moment apparaîtra ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle deine Stadt: Das aktuelle Wetter erscheint hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose your city: the current weather will show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige tu ciudad: el clima actual aparecerá aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis ta ville : la météo du moment apparaîtra ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli la tua città: il meteo attuale apparirà qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "都市を選ぶと、現在の天気がここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha sua cidade: o clima de agora vai aparecer aqui."
           }
         }
       }
@@ -75295,6 +75389,53 @@
         }
       }
     },
+    "Donne un nom à ce cours pour pouvoir l'ajouter.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gib diesem Kurs einen Namen, damit er hinzugefügt werden kann."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give this class a name so it can be added."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ponle un nombre a esta clase para poder añadirla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Donne un nom à ce cours pour pouvoir l'ajouter."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dai un nome a questo corso per poterlo aggiungere."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加するには、この授業に名前を付けてください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dê um nome a esta aula para poder adicioná-la."
+          }
+        }
+      }
+    },
     "Donne-lui un nom : « Déjeuner du dimanche », « Bol protéiné »…": {
       "extractionState": "manual",
       "localizations": {
@@ -78064,6 +78205,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Iniciante"
+          }
+        }
+      }
+    },
+    "Décocher les cours incertains": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unsichere Kurse abwählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Untick uncertain classes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desmarcar las clases dudosas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décocher les cours incertains"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deseleziona i corsi incerti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不確かな授業のチェックを外す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desmarcar as aulas incertas"
           }
         }
       }
@@ -87041,6 +87229,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Provas"
+          }
+        }
+      }
+    },
+    "Examens, devoirs, factures, échéances : ce qui approche apparaîtra ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfungen, Hausaufgaben, Rechnungen, Fristen: Was ansteht, erscheint hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exams, homework, bills, deadlines: what's coming up will show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exámenes, tareas, facturas, vencimientos: lo que se acerca aparecerá aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examens, devoirs, factures, échéances : ce qui approche apparaîtra ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esami, compiti, bollette, scadenze: ciò che si avvicina apparirà qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "試験、課題、請求、期限など、近づいている予定がここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provas, tarefas, contas, prazos: o que está chegando vai aparecer aqui."
           }
         }
       }
@@ -144197,6 +144432,53 @@
         }
       }
     },
+    "Note tes ventes : ton chiffre d'affaires du mois apparaîtra ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfasse deine Verkäufe: Dein Umsatz des Monats erscheint hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log your sales: your revenue for the month will show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anota tus ventas: tus ingresos del mes aparecerán aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note tes ventes : ton chiffre d'affaires du mois apparaîtra ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra le tue vendite: il tuo fatturato del mese apparirà qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "売上を記録すると、今月の売上高がここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registre suas vendas: seu faturamento do mês vai aparecer aqui."
+          }
+        }
+      }
+    },
     "Note tes ventes dans Ardane, espace Mon entreprise.": {
       "extractionState": "manual",
       "localizations": {
@@ -144428,6 +144710,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Registre sua primeira refeição no Ardane, no espaço Nutrição."
+          }
+        }
+      }
+    },
+    "Note un plein ou le kilométrage : ta voiture apparaîtra ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfasse eine Tankfüllung oder den Kilometerstand: Dein Auto erscheint hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log a fill-up or the mileage: your car will show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anota una carga de combustible o el kilometraje: tu auto aparecerá aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note un plein ou le kilométrage : ta voiture apparaîtra ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra un pieno o i chilometri: la tua auto apparirà qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "給油や走行距離を記録すると、あなたの車がここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registre um abastecimento ou a quilometragem: seu carro vai aparecer aqui."
           }
         }
       }
@@ -160690,53 +161019,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mais de 100\nwidgets."
-          }
-        }
-      }
-    },
-    "Plus de précisions": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mehr Details"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "More details"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Más detalles"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus de précisions"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Più dettagli"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "さらに詳しく"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mais detalhes"
           }
         }
       }
@@ -219491,6 +219773,53 @@
         }
       }
     },
+    "Tout cocher": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle auswählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tick all"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marcar todo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout cocher"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seleziona tutto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてチェック"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marcar tudo"
+          }
+        }
+      }
+    },
     "Tout désélectionner": {
       "extractionState": "manual",
       "localizations": {
@@ -220615,53 +220944,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todas as cores"
-          }
-        }
-      }
-    },
-    "Toutes les données %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alle %@-Daten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All %@ data"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos los datos de %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toutes les données %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutti i dati di %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@のすべてのデータ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos os dados de %@"
           }
         }
       }
@@ -225785,53 +226067,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Usar minha localização"
-          }
-        }
-      }
-    },
-    "Utilisé par %@ : %@.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verwendet von %@: %@."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Used by %@: %@."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usado por %@: %@."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utilisé par %@ : %@."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usato da %@: %@."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@で使用中：%2$@。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usado por %@: %@."
           }
         }
       }
@@ -236783,53 +237018,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "da nota final"
-          }
-        }
-      }
-    },
-    "de tes widgets": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "deiner Widgets"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "of your widgets"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "de tus widgets"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "de tes widgets"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dei tuoi widget"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "個のウィジェット"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dos seus widgets"
           }
         }
       }
@@ -251212,6 +251400,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "De quatro apoios, uma mão atrás da cabeça."
+          }
+        }
+      }
+    },
+    "À remplir": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auszufüllen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To fill in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por completar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À remplir"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da compilare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未入力"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para preencher"
           }
         }
       }

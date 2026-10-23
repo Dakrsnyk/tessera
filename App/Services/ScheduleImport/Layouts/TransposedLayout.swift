@@ -93,7 +93,7 @@ struct TransposedLayout: ScheduleLayout {
         for k in 1..<labels.count { bounds[k] = (ys[k - 1] + ys[k]) / 2 }
         bounds[0] = ys[0] - spacing / 2
         bounds[labels.count] = ys[labels.count - 1] + spacing / 2
-        var cells: [(day: Int, cluster: Cluster)] = []
+        var cells: [(day: Int, fuzzy: Bool, cluster: Cluster)] = []
         for (rowIndex, label) in labels.enumerated() {
             var body: [RecognizedLine] = []
             for (index, line) in lines.enumerated() {
@@ -112,7 +112,7 @@ struct TransposedLayout: ScheduleLayout {
                     clusters.append(Cluster(lines: [line], minX: line.box.minX, maxX: line.box.maxX))
                 }
             }
-            for cluster in clusters { cells.append((day: label.day, cluster: cluster)) }
+            for cluster in clusters { cells.append((day: label.day, fuzzy: label.fuzzy, cluster: cluster)) }
         }
 
         // Hour labels at the left edge of their column: the cells then sit between two labels.
@@ -155,7 +155,8 @@ struct TransposedLayout: ScheduleLayout {
                 }
             }
             let ordered = cluster.lines.sorted { $0.box.minY < $1.box.minY }
-            if let draft = ScheduleParser.cellDraft(ordered, weekday: cell.day, start: hours[first].start, end: hours[last].end) {
+            if var draft = ScheduleParser.cellDraft(ordered, weekday: cell.day, start: hours[first].start, end: hours[last].end) {
+                if cell.fuzzy { draft.uncertain.insert(.day) }
                 drafts.append(draft)
             }
         }

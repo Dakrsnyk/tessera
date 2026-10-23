@@ -26,6 +26,7 @@ struct WeatherAppView: View {
                 EmptyView()
             }
         } sheet: {
+            MiniAppToFillSection(app: .weather)
             switch model.weather {
             case let .ready(snapshot):
                 content(snapshot)

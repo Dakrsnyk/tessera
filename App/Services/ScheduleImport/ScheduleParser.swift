@@ -1,6 +1,11 @@
 import Foundation
 import CoreGraphics
 
+/// A field of an `ImportedSlot` whose value may be wrong (see `ImportedSlot.uncertain`).
+enum SlotField: String, Hashable {
+    case day, start, end, title, room
+}
+
 /// A class found in a photo or a PDF of a timetable, before the person checks it.
 struct ImportedSlot: Identifiable, Hashable {
     var id = UUID()
@@ -15,6 +20,10 @@ struct ImportedSlot: Identifiable, Hashable {
     /// The reading of this class is doubtful (odd hours, overlap, noisy name, or a page read with little confidence):
     /// the check screen highlights it. Kept last so every memberwise call that does not know it still compiles.
     var needsCheck = false
+    /// The fields whose value comes from an OCR correction ("8h3O" read as 8:30), from a guess (end from the usual length
+    /// or from the next class, start from the centre of the text) or from an ambiguous reading. The check screen
+    /// highlights exactly these fields. Kept after `needsCheck`, empty by default, so older memberwise calls still compile.
+    var uncertain: Set<SlotField> = []
 }
 
 /// Looks at the colours of the image along a vertical line, to tell the blocks that hold a class (lighter)
@@ -85,7 +94,12 @@ enum ScheduleParser {
         for slot in slots {
             let key = "\(slot.weekday)|\(slot.startMinute)|\(slot.endMinute)|\(fold(slot.title))"
             if let existing = indexOfKey[key] {
-                if result[existing].room == nil, slot.room != nil { result[existing].room = slot.room }
+                // The same class read twice: a field is in doubt only if both readings doubt it.
+                result[existing].uncertain.formIntersection(slot.uncertain)
+                if result[existing].room == nil, slot.room != nil {
+                    result[existing].room = slot.room
+                    if slot.uncertain.contains(.room) { result[existing].uncertain.insert(.room) }
+                }
             } else {
                 indexOfKey[key] = result.count
                 result.append(slot)
@@ -107,12 +121,18 @@ enum ScheduleParser {
         var end: Int?
         var title: String
         var room: String?
+        /// The fields read with a doubt (see `ImportedSlot.uncertain`); `finalize` adds the ones it guesses itself.
+        var uncertain: Set<SlotField> = []
+        /// The class has the code of a course (Omnivox, boxed blocks): "Study hall" or "Dîner" is then a course, not a break.
+        var coded = false
     }
 
     struct TimeFound {
         var start: Int
         var end: Int?
         var range: NSRange
+        /// A look-alike letter was read as a digit ("8h3O" as 8:30) inside this time.
+        var repaired = false
     }
 
     struct Placement {
@@ -126,6 +146,8 @@ enum ScheduleParser {
         var room: String?
         /// The other ranges of the same text ("9h-12h / 13h-17h"): the class is repeated at each of them.
         var extraTimes: [TimeFound] = []
+        /// The room holds a look-alike letter that was read as a digit ("B-2O4" as "B-204").
+        var roomRepaired = false
     }
 
     struct DayCandidate {
@@ -136,6 +158,10 @@ enum ScheduleParser {
         var y: CGFloat
         var bottom: CGFloat
         var line: Int
+        /// The name was read with one wrong letter ("Mardl") and matched to a day by its resemblance.
+        var fuzzy = false
+        /// Other days the same misread name could be (used when the first one is already taken by a clear name).
+        var alternates: [Int] = []
     }
 
     struct Grid {
@@ -261,8 +287,123 @@ enum ScheduleParser {
         return hour % 12 + (pm ? 12 : 0)
     }
 
-    /// The first time or range of times in the text.
+    // MARK: Look-alike letters in hours
+
+    /// Letters that OCR reads in place of a digit.
+    static let lookalikeDigits: [Character: Character] = ["O": "0", "o": "0", "I": "1", "l": "1", "|": "1", "S": "5", "B": "8"]
+
+    /// "8h3O", "l0:30", "O9:00", "1O h": an hour (one or two characters), "h" or ":", then maybe two characters of minutes.
+    /// The look-alikes of digits only count in a place that looks like an hour (the checks are in `repairedHours`).
+    /// (A plain `[0-9OoIl|SB]` set: no "[:" inside, which ICU would read as a POSIX class.)
+    static let repairMarkerRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9])([0-9OoIl|SB]{1,2})(\s?[hH:])([0-9OoIl|SB]{2})?(?![A-Za-z0-9])"#, options: [])
+
+    /// "1O PM", "l0 AM".
+    static let repairMeridiemRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9:.,/])([0-9OoIl|SB]{1,2})\s?[aApP]\.?[mM]\.?(?![A-Za-z])"#, options: [])
+
+    /// "O8-1O": two bare hours joined by a dash.
+    static let repairBareRangeRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9:.,/])([0-9OoIl|]{1,2})(\s*[-~]\s*)([0-9OoIl|]{1,2})(?![A-Za-z0-9])"#, options: [])
+
+    /// A piece of an hour with its look-alikes turned into digits; nil when a character is neither. `S` and `B` count only
+    /// next to a real digit of the same piece ("1S" is 15, a lone "S" is a letter).
+    static func lookalikeValue(_ part: String) -> (digits: String, changed: Bool, anchored: Bool)? {
+        var digits = ""
+        var changed = false
+        var anchored = false
+        var weak = false
+        for character in part {
+            if character.isASCII && character.isNumber {
+                digits.append(character)
+                anchored = true
+            } else if let digit = lookalikeDigits[character] {
+                digits.append(digit)
+                changed = true
+                if character == "S" || character == "B" { weak = true }
+            } else {
+                return nil
+            }
+        }
+        if weak, !anchored { return nil }
+        return (digits, changed, anchored)
+    }
+
+    /// The text with the look-alikes turned back into digits, in the places that read as an hour (a digit near, then "h",
+    /// ":" or a dash). One character is replaced by one character, so every position of the text stays valid; `changed`
+    /// lists the positions (UTF-16) that were replaced. nil when nothing was repaired. Titles are not touched: "Bob",
+    /// "Sb", "Oh" hold no real digit, and "B-2O4" has no "h" nor ":".
+    static func repairedHours(_ text: String) -> (text: String, changed: Set<Int>)? {
+        guard text.contains(where: { lookalikeDigits[$0] != nil }) else { return nil }
+        let ns = text as NSString
+        let full = NSRange(location: 0, length: ns.length)
+        let result = NSMutableString(string: text)
+        var changed = Set<Int>()
+        func put(_ range: NSRange, _ digits: String) {
+            guard range.length == (digits as NSString).length else { return }
+            let new = digits as NSString
+            for offset in 0..<range.length where ns.character(at: range.location + offset) != new.character(at: offset) {
+                changed.insert(range.location + offset)
+            }
+            result.replaceCharacters(in: range, with: digits)
+        }
+        if let regex = repairMarkerRegex {
+            for match in regex.matches(in: text, options: [], range: full) {
+                let hourRange = match.range(at: 1)
+                let minuteRange = match.range(at: 3)
+                guard let hour = lookalikeValue(ns.substring(with: hourRange)), let hourNumber = Int(hour.digits) else { continue }
+                var minute: (digits: String, changed: Bool, anchored: Bool)? = nil
+                if minuteRange.location != NSNotFound {
+                    guard let found = lookalikeValue(ns.substring(with: minuteRange)), let minuteNumber = Int(found.digits),
+                          minuteNumber < 60 else { continue }
+                    minute = found
+                }
+                guard hourNumber <= 24, hour.changed || (minute?.changed ?? false) else { continue }
+                // Some real digit must anchor it; an hour made only of look-alikes is one letter ("l:45") with minutes.
+                guard hour.anchored || (minute?.anchored ?? false) else { continue }
+                if !hour.anchored { guard hourRange.length == 1, minute != nil else { continue } }
+                put(hourRange, hour.digits)
+                if let found = minute { put(minuteRange, found.digits) }
+            }
+        }
+        if let regex = repairMeridiemRegex {
+            for match in regex.matches(in: text, options: [], range: full) {
+                let hourRange = match.range(at: 1)
+                guard let hour = lookalikeValue(ns.substring(with: hourRange)), hour.changed, hour.anchored,
+                      let number = Int(hour.digits), number <= 24 else { continue }
+                put(hourRange, hour.digits)
+            }
+        }
+        if let regex = repairBareRangeRegex {
+            for match in regex.matches(in: text, options: [], range: full) {
+                let leftRange = match.range(at: 1)
+                let rightRange = match.range(at: 3)
+                guard let left = lookalikeValue(ns.substring(with: leftRange)), let right = lookalikeValue(ns.substring(with: rightRange)),
+                      left.anchored, right.anchored, left.changed || right.changed,
+                      let leftNumber = Int(left.digits), let rightNumber = Int(right.digits),
+                      leftNumber <= 24, rightNumber <= 24 else { continue }
+                put(leftRange, left.digits)
+                put(rightRange, right.digits)
+            }
+        }
+        guard !changed.isEmpty else { return nil }
+        return (result as String, changed)
+    }
+
+    /// The first time or range of times in the text. A look-alike letter in an hour ("8h3O-1Oh") is read as the digit it
+    /// stands for, and the time is then marked `repaired`.
     static func findTime(in text: String) -> TimeFound? {
+        guard let fixed = repairedHours(text) else { return findTimeExact(in: text) }
+        if var found = findTimeExact(in: fixed.text) {
+            let first = found.range.location
+            let end = first + found.range.length
+            found.repaired = fixed.changed.contains { $0 >= first && $0 < end }
+            return found
+        }
+        return findTimeExact(in: text)
+    }
+
+    static func findTimeExact(in text: String) -> TimeFound? {
         let ns = text as NSString
         let full = NSRange(location: 0, length: ns.length)
         if let regex = rangeRegex {
@@ -414,8 +555,31 @@ enum ScheduleParser {
     static let breakWords: Set<String> = [
         "pause", "dejeuner", "diner", "lunch", "break", "recreation", "recre", "repas", "midi", "almuerzo", "recreo",
         "descanso", "comida", "mittagspause", "mittag", "mittagessen", "pranzo", "intervallo", "pausa", "almoco",
-        "intervalo", "cafe", "coffee", "昼休み", "休憩", "昼食"
+        "intervalo", "cafe", "coffee", "昼休み", "休憩", "昼食", "recess", "snack", "collation", "gouter", "ricreazione",
+        "merienda", "pausenzeit"
     ]
+
+    /// Words of a free period or an empty cell ("Libre", "Free", "Aucun", "Annulé"): the cell holds no class.
+    static let freeWords: Set<String> = [
+        "libre", "libres", "free", "frei", "libero", "libera", "livre", "vacant", "vacante", "vide", "empty", "aucun", "aucune",
+        "none", "nada", "kein", "keine", "nessuno", "tbd", "tba", "rien", "trou", "spare", "gap", "blank", "annule", "annulee",
+        "cancelled", "canceled", "cancelado", "abgesagt", "annullato", "空き", "空"
+    ]
+
+    /// Small words that may stand next to a free word ("Période libre", "Free time", "Temps libre", "Heure libre").
+    static let freeFillers: Set<String> = [
+        "periode", "period", "temps", "time", "heure", "hour", "creneau", "slot", "block", "bloc", "cours", "class", "sans", "pas",
+        "de", "du", "d", "en", "stunde", "hora", "ora", "ore", "tiempo", "tempo", "zeit", "periodo", "no", "sin", "ohne", "nessun"
+    ]
+
+    /// Whole titles that name a study period or a hole ("Study hall"); a course code makes them a course again.
+    static let studyPhrases: Set<String> = [
+        "study hall", "salle d etude", "etude", "etude libre", "etude surveillee", "permanence", "free study", "self study",
+        "studienzeit", "no class", "no classes", "pas de cours", "aucun cours", "kein unterricht", "sin clase", "nessuna lezione"
+    ]
+
+    /// Texts that stand for nothing at all.
+    static let emptyMarks: Set<String> = ["n/a", "n.a.", "n.d.", "...", "???", "--", "---", "tbc"]
 
     static let teacherWords: Set<String> = [
         "prof", "professeur", "professeure", "professor", "professora", "dr", "mr", "mme", "mrs", "ms", "mlle", "herr",
@@ -439,10 +603,56 @@ enum ScheduleParser {
         return breakWords.contains(first)
     }
 
+    /// A free period, a hole, an empty cell ("Libre", "Période libre", "Free", "N/A", "Study hall").
+    static func isFreePeriod(_ title: String) -> Bool {
+        let list = words(of: title)
+        if list.isEmpty { return true }
+        let joined = list.joined(separator: " ")
+        if studyPhrases.contains(joined) || emptyMarks.contains(fold(title).trimmingCharacters(in: .whitespaces)) { return true }
+        guard list.count <= 3, list.contains(where: { freeWords.contains($0) }) else { return false }
+        return list.allSatisfy { freeWords.contains($0) || freeFillers.contains($0) }
+    }
+
+    /// What a cell is that holds no class: a break, a free period, an empty mark. A class that has the code of a course
+    /// is a course whatever its name ("Dîner", "Study hall" with a code), except an empty mark.
+    static func isNonCourse(_ title: String, coded: Bool) -> Bool {
+        if coded {
+            let list = words(of: title)
+            return list.isEmpty || emptyMarks.contains(fold(title).trimmingCharacters(in: .whitespaces))
+        }
+        return isBreak(title) || isFreePeriod(title)
+    }
+
+    /// A name that is mostly digits and symbols is not read: no class is made of it.
+    static func isUnreadableTitle(_ title: String) -> Bool {
+        let characters = title.filter { !$0.isWhitespace }
+        guard !characters.isEmpty else { return true }
+        return characters.filter { $0.isLetter }.count * 2 < characters.count
+    }
+
     static func isTeacher(_ title: String) -> Bool {
         if title.contains("先生") { return true }
         guard let first = words(of: title).first else { return false }
         return teacherWords.contains(first)
+    }
+
+    /// Another room right after a first one: "/ C-110", "; H3040", "& 2.711".
+    static let moreRoomRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"^\s*[/;&]\s*([A-Z]{1,2}\s?-?\s?\d{2,4}[A-Za-z]?(?![A-Za-z\d])|\d{1,2}\.\d{1,3}(?![A-Za-z\d]))"#, options: [])
+
+    /// The rooms that follow a first one (up to three), and where the last one ends in the text.
+    static func moreRooms(after first: NSRange, in ns: NSString) -> (rooms: [String], end: Int) {
+        var end = first.location + first.length
+        var rooms: [String] = []
+        guard let regex = moreRoomRegex else { return (rooms, end) }
+        while rooms.count < 3, end < ns.length {
+            let rest = ns.substring(from: end)
+            guard let match = regex.firstMatch(in: rest, options: [], range: NSRange(location: 0, length: (rest as NSString).length)),
+                  let room = group(match, 1, in: rest as NSString) else { break }
+            rooms.append(room.trimmingCharacters(in: .whitespaces))
+            end += match.range.location + match.range.length
+        }
+        return (rooms, end)
     }
 
     /// Splits the room out of a text: (text without the room, room).
@@ -454,14 +664,20 @@ enum ScheduleParser {
            let room = group(match, 1, in: ns) {
             let cleanRoom = room.trimmingCharacters(in: .whitespaces)
             if !cleanRoom.isEmpty {
-                return (ns.replacingCharacters(in: match.range(at: 1), with: " "), cleanRoom)
+                let more = moreRooms(after: match.range(at: 1), in: ns)
+                let span = NSRange(location: match.range(at: 1).location, length: more.end - match.range(at: 1).location)
+                return (ns.replacingCharacters(in: span, with: " "), ([cleanRoom] + more.rooms).joined(separator: " / "))
             }
         }
         if let regex = codeRoomRegex {
             for match in regex.matches(in: text, options: [], range: full) {
                 guard let room = group(match, 1, in: ns), let letters = group(match, 2, in: ns) else { continue }
                 if notRoomCodes.contains(letters.uppercased()) { continue }
-                return (ns.replacingCharacters(in: match.range(at: 1), with: " "), room.trimmingCharacters(in: .whitespaces))
+                // "B-204 / C-110": a class that moves, or two rooms in one cell, keeps both.
+                let more = moreRooms(after: match.range(at: 1), in: ns)
+                let span = NSRange(location: match.range(at: 1).location, length: more.end - match.range(at: 1).location)
+                let rooms = [room.trimmingCharacters(in: .whitespaces)] + more.rooms
+                return (ns.replacingCharacters(in: span, with: " "), rooms.joined(separator: " / "))
             }
         }
         let trimmed = text.trimmingCharacters(in: .whitespaces)
@@ -537,10 +753,59 @@ enum ScheduleParser {
         let split = findTimes(in: text)
         let found = split.times.first
         if isNoise(split.rest) { return Analysis(time: nil, title: "", room: nil) }
-        let placed = extractRoom(from: split.rest)
+        var placed = extractRoom(from: split.rest)
+        var roomRepaired = false
+        // "B-2O4" holds no room for the patterns above: read it with the O as a zero, and say the room is in doubt.
+        let fixed = repairedRoomWords(in: split.rest)
+        if !fixed.tokens.isEmpty {
+            let attempt = extractRoom(from: fixed.text)
+            if let room = attempt.room, fixed.tokens.contains(where: { room.contains($0) }) {
+                placed = attempt
+                roomRepaired = true
+            }
+        }
         var title = cleanTitle(dropTeacherParts(placed.text))
         if isTeacher(title) { title = "" }
-        return Analysis(time: found, title: title, room: placed.room, extraTimes: Array(split.times.dropFirst()))
+        return Analysis(time: found, title: title, room: placed.room, extraTimes: Array(split.times.dropFirst()),
+                        roomRepaired: roomRepaired)
+    }
+
+    // MARK: Look-alike letters in rooms
+
+    /// A code of a room: one or two capitals, maybe a dash, then two to four characters that are digits or look-alikes.
+    static let roomLookalikeRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9])([A-Z]{1,2}-?)([0-9OoIl|]{2,4})(?![A-Za-z0-9])"#, options: [])
+
+    /// "B-2O4" -> "B-204", "H3O46" -> "H3046": a letter that stands for a zero or a one INSIDE the number of a room (it
+    /// starts with a digit, or follows a dash, and ends with a digit). Nothing else of the text changes (a word such as
+    /// "BIO" or "Local" holds no real digit). `tokens` are the repaired codes, to find them again in a room.
+    static func repairedRoomWords(in text: String) -> (text: String, tokens: [String]) {
+        guard text.contains(where: { lookalikeDigits[$0] != nil }), let regex = roomLookalikeRegex else { return (text, []) }
+        let ns = text as NSString
+        let result = NSMutableString(string: text)
+        var tokens: [String] = []
+        func isDigit(_ character: Character) -> Bool { character.isASCII && character.isNumber }
+        for match in regex.matches(in: text, options: [], range: NSRange(location: 0, length: ns.length)) {
+            let prefix = ns.substring(with: match.range(at: 1))
+            let partRange = match.range(at: 2)
+            let part = ns.substring(with: partRange)
+            guard let first = part.first, let last = part.last, isDigit(last), isDigit(first) || prefix.hasSuffix("-") else { continue }
+            var digits = ""
+            for character in part {
+                if isDigit(character) {
+                    digits.append(character)
+                } else if let digit = lookalikeDigits[character] {
+                    digits.append(digit)
+                } else {
+                    digits = ""
+                    break
+                }
+            }
+            guard digits.count == part.count, digits != part else { continue }
+            result.replaceCharacters(in: partRange, with: digits)
+            tokens.append(prefix + digits)
+        }
+        return (result as String, tokens)
     }
 
     // MARK: Day names
@@ -621,6 +886,80 @@ enum ScheduleParser {
         strongDays[dayKey(word)]
     }
 
+    /// The day a word names: exactly ("Mardi"), or by resemblance when it holds one wrong letter ("Mardl"), and then `fuzzy`.
+    static func dayMatch(_ word: String) -> (day: Int, fuzzy: Bool)? {
+        if let day = strongDay(word) { return (day, false) }
+        if let near = fuzzyDay(word) { return (near.day, true) }
+        return nil
+    }
+
+    // MARK: Day names read with a wrong letter
+
+    /// Pairs of characters (sorted) that OCR swaps often, and ones it swaps sometimes.
+    static let strongConfusions: Set<String> = ["ao", "il", "1i", "1l", "0o", "ce", "uv", "ij"]
+    static let weakConfusions: Set<String> = ["hn", "nr", "mn", "ae", "bh", "co", "gq", "5s", "8b", "vy", "nu", "ft"]
+
+    /// 1 when the two characters are swapped often, 2 sometimes, nil when never.
+    static func confusionTier(_ a: Character, _ b: Character) -> Int? {
+        let pair = String([min(a, b), max(a, b)])
+        if strongConfusions.contains(pair) { return 1 }
+        if weakConfusions.contains(pair) { return 2 }
+        return nil
+    }
+
+    /// The day names made of plain letters, as arrays of characters.
+    static let asciiDayKeys: [(key: [Character], day: Int)] = {
+        var keys: [(key: [Character], day: Int)] = []
+        for (name, day) in strongDays {
+            let letters = Array(name)
+            if letters.allSatisfy({ $0.isASCII && $0.isLetter }) { keys.append((key: letters, day: day)) }
+        }
+        return keys
+    }()
+
+    /// Whether `short` is `long` without one letter.
+    static func isOneLetterShorter(_ short: [Character], than long: [Character]) -> Bool {
+        guard long.count == short.count + 1 else { return false }
+        var index = 0
+        while index < short.count, short[index] == long[index] { index += 1 }
+        return Array(short[index...]) == Array(long[(index + 1)...])
+    }
+
+    /// A day name read with ONE wrong character: "Lur" (Lun), "Mardl", "Mercredl", "Jeud1", "Vendred1", "Man" (Mon). Only
+    /// where the wrong character is one OCR confuses with the right one, or a name cut short ("Vendred"); never for two
+    /// letters; nil when two different days are as near. `alternates` are the other days a three-letter name could be.
+    static func fuzzyDay(_ raw: String) -> (day: Int, alternates: [Int])? {
+        let token = Array(normalizedToken(raw))
+        guard token.count >= 3, token.count <= 10, token.allSatisfy({ $0.isASCII && ($0.isLetter || $0.isNumber) }),
+              token.contains(where: { $0.isLetter }) else { return nil }
+        let word = String(token)
+        guard strongDays[word] == nil, weakDays[word] == nil, !(token.count == 3 && monthPrefixes.contains(word)) else { return nil }
+        var strong = Set<Int>()
+        var pool = Set<Int>()
+        for entry in asciiDayKeys {
+            let key = entry.key
+            if key.count == token.count {
+                var differences: [Int] = []
+                for index in 0..<key.count where key[index] != token[index] {
+                    differences.append(index)
+                    if differences.count > 1 { break }
+                }
+                guard differences.count == 1, let tier = confusionTier(token[differences[0]], key[differences[0]]) else { continue }
+                if key.count == 3, tier == 1 { strong.insert(entry.day) } else { pool.insert(entry.day) }
+            } else if key.count >= 5, key.count == token.count + 1 {
+                // A name cut short ("Vendred") or with one letter lost inside a long one ("Vendedi").
+                if token.count >= 4, Array(key.prefix(token.count)) == token { pool.insert(entry.day) }
+                else if token.count >= 6, isOneLetterShorter(token, than: key) { pool.insert(entry.day) }
+            }
+        }
+        if !strong.isEmpty {
+            guard strong.count == 1, let day = strong.first else { return nil }
+            return (day, Array(pool.subtracting([day])).sorted())
+        }
+        guard pool.count == 1, let day = pool.first else { return nil }
+        return (day, [])
+    }
+
     /// Whether what follows a day name is only a date ("12 octobre", "Oct 12th") and not a course.
     static func isDateish(_ text: String) -> Bool {
         let tokens = headerTokens(text).map { normalizedToken($0.token) }
@@ -637,16 +976,19 @@ enum ScheduleParser {
     }
 
     /// Days named at the start of a text (one, a list "Lun/Mer", a range "Lun-Ven" or "Lun à Ven") and the rest.
-    static func leadingDays(in text: String) -> (days: [Int], rest: String)? {
+    static func leadingDays(in text: String) -> (days: [Int], rest: String, fuzzy: Bool)? {
         let source = text.replacingOccurrences(of: "-feira", with: "", options: .caseInsensitive)
         let tokens = source.split(separator: " ").map { String($0) }
         var days: [Int] = []
         var consumed = 0
         var pendingRange = false
+        var anyFuzzy = false
         var index = 0
         while index < tokens.count {
             let token = tokens[index]
-            if let list = gluedDays(token) {
+            if let glued = gluedDays(token) {
+                let list = glued.days
+                if glued.fuzzy { anyFuzzy = true }
                 if pendingRange, let last = days.last, list.count == 1 {
                     if last < list[0] { for day in (last + 1)...list[0] { days.append(day) } } else { days.append(list[0]) }
                     pendingRange = false
@@ -668,11 +1010,12 @@ enum ScheduleParser {
         var unique: [Int] = []
         for day in days where !unique.contains(day) { unique.append(day) }
         let rest = tokens[consumed...].joined(separator: " ")
-        return (unique, rest)
+        return (unique, rest, anyFuzzy)
     }
 
-    /// "Lun", "Lun/Mer/Ven", "Lun,", "Lun-Ven" (a range) or "月・水": the days, or nil if a word is not a day.
-    static func gluedDays(_ token: String) -> [Int]? {
+    /// "Lun", "Lun/Mer/Ven", "Lun,", "Lun-Ven" (a range) or "月・水": the days, or nil if a word is not a day. `fuzzy` when
+    /// a name was matched by its resemblance ("Mardl").
+    static func gluedDays(_ token: String) -> (days: [Int], fuzzy: Bool)? {
         let separators: Set<Character> = ["/", ",", "&", "+", "・", "、", "-"]
         var parts: [String] = []
         var seps: [Character] = []
@@ -688,14 +1031,16 @@ enum ScheduleParser {
         if !current.isEmpty { parts.append(current) }
         guard !parts.isEmpty else { return nil }
         var found: [Int] = []
+        var fuzzy = false
         for part in parts {
-            guard let day = strongDay(part) else { return nil }
-            found.append(day)
+            guard let match = dayMatch(part) else { return nil }
+            found.append(match.day)
+            if match.fuzzy { fuzzy = true }
         }
         if found.count == 2, seps.count == 1, seps[0] == "-", found[0] < found[1] {
-            return Array(found[0]...found[1])
+            return (Array(found[0]...found[1]), fuzzy)
         }
-        return found
+        return (found, fuzzy)
     }
 
     // MARK: Layout: grid with the days as columns
@@ -707,9 +1052,10 @@ enum ScheduleParser {
         let tokens = headerTokens(text).filter { !isMonthWord($0.token) }
         guard !tokens.isEmpty, tokens.count <= 8 else { return [] }
         var found: [DayCandidate] = []
-        func candidate(_ day: Int, _ key: String, _ strong: Bool, _ fraction: Double) -> DayCandidate {
+        func candidate(_ day: Int, _ key: String, _ strong: Bool, _ fraction: Double, fuzzy: Bool = false,
+                       alternates: [Int] = []) -> DayCandidate {
             DayCandidate(day: day, key: key, strong: strong, x: line.box.minX + CGFloat(fraction) * line.box.width,
-                         y: line.box.midY, bottom: line.box.maxY, line: index)
+                         y: line.box.midY, bottom: line.box.maxY, line: index, fuzzy: fuzzy, alternates: alternates)
         }
         // "L M M J V" (the initials of a week): five to seven single letters in a known order.
         if (5...7).contains(tokens.count), tokens.allSatisfy({ $0.token.count == 1 && ($0.token.first?.isLetter ?? false) }),
@@ -738,6 +1084,9 @@ enum ScheduleParser {
                     let fraction = token.from + (token.to - token.from) * (item.from + item.to) / 2
                     found.append(candidate(item.day, "cjk", false, fraction))
                 }
+            } else if let near = fuzzyDay(token.token) {
+                // "Mardl", "Lur": a name with one wrong letter. Never a clear name (not strong) and always in doubt.
+                found.append(candidate(near.day, key, false, middle, fuzzy: true, alternates: near.alternates))
             } else {
                 return []
             }
@@ -749,7 +1098,8 @@ enum ScheduleParser {
     static func isMonthWord(_ token: String) -> Bool {
         let key = normalizedToken(token)
         guard key.count >= 3, key.allSatisfy({ $0.isLetter }), monthPrefixes.contains(String(key.prefix(3))) else { return false }
-        return strongDays[key] == nil && weakDays[key] == nil
+        // "Mardl" starts like a month ("mar") but is a day read with a wrong letter.
+        return strongDays[key] == nil && weakDays[key] == nil && fuzzyDay(token) == nil
     }
 
     /// The key of a header word in the day tables: folded ("Lundi" -> "lundi"), or as written for the scripts that
@@ -867,6 +1217,11 @@ enum ScheduleParser {
                 if copy.key == "do", german { copy.day = 4 }
                 return copy
             }
+            // A name read with a wrong letter ("Man") that lands on a day a clear name already holds ("Lun") is another day.
+            let clearDays = Set(members.filter { !$0.fuzzy }.map { $0.day })
+            for index in members.indices where members[index].fuzzy && clearDays.contains(members[index].day) {
+                if let other = members[index].alternates.first(where: { !clearDays.contains($0) }) { members[index].day = other }
+            }
             members.sort { $0.x < $1.x }
             var kept: [DayCandidate] = []
             for member in members {
@@ -967,7 +1322,8 @@ enum ScheduleParser {
         for (column, columnLines) in columns.enumerated() {
             let sorted = columnLines.sorted { $0.box.minY < $1.box.minY }
             for block in blocks(of: sorted) {
-                if let draft = blockDraft(block, weekday: headers[column].day, axis: axis) {
+                if var draft = blockDraft(block, weekday: headers[column].day, axis: axis) {
+                    if headers[column].fuzzy { draft.uncertain.insert(.day) }
                     drafts.append(draft)
                 }
             }
@@ -1001,22 +1357,44 @@ enum ScheduleParser {
     static func blockDraft(_ lines: [RecognizedLine], weekday: Int, axis: TimeAxis) -> Draft? {
         var time: TimeFound? = nil
         var room: String? = nil
+        var roomRepaired = false
         var titles: [String] = []
         for line in lines {
             let info = analyze(line.text)
             if time == nil { time = info.time }
-            if room == nil { room = info.room }
+            if room == nil, let found = info.room {
+                room = found
+                roomRepaired = info.roomRepaired
+            }
             if !info.title.isEmpty { titles.append(info.title) }
         }
         let title = titles.prefix(2).joined(separator: " ")
         guard !title.isEmpty else { return nil }
+        let roomFlag: Set<SlotField> = room != nil && roomRepaired ? [.room] : []
         if let time = time {
-            return Draft(weekday: weekday, start: time.start, end: time.end, title: title, room: room)
+            return Draft(weekday: weekday, start: time.start, end: time.end, title: title, room: room,
+                         uncertain: timeFlags(time).union(roomFlag))
         }
         let top = lines.map { $0.box.minY }.min() ?? 0
         let bottom = lines.map { $0.box.maxY }.max() ?? top
         guard let placed = axis.lookup(top: top, center: (top + bottom) / 2) else { return nil }
-        return Draft(weekday: weekday, start: placed.start, end: placed.end, title: title, room: room)
+        return Draft(weekday: weekday, start: placed.start, end: placed.end, title: title, room: room, uncertain: roomFlag)
+    }
+
+    /// The fields in doubt because a look-alike letter was read as a digit in a time.
+    static func timeFlags(_ time: TimeFound) -> Set<SlotField> {
+        guard time.repaired else { return [] }
+        return time.end == nil ? [.start] : [.start, .end]
+    }
+
+    /// The drafts of a column whose day name was read with a wrong letter: their day is in doubt.
+    static func marked(_ drafts: [Draft], dayInDoubt: Bool) -> [Draft] {
+        guard dayInDoubt else { return drafts }
+        return drafts.map { draft in
+            var copy = draft
+            copy.uncertain.insert(.day)
+            return copy
+        }
     }
 
     // MARK: Layout: timetable grid where the height of a block gives the hours
@@ -1142,6 +1520,8 @@ enum ScheduleParser {
         var title: String
         var room: String?
         var code: String?
+        /// The room holds a look-alike letter that was read as a digit.
+        var roomRepaired = false
     }
 
     /// Offsets (0...1 of the page width) from the left edge of a column where the probe looks: just inside the cell
@@ -1157,8 +1537,10 @@ enum ScheduleParser {
     static let clockPairRegex: NSRegularExpression? = try? NSRegularExpression(
         pattern: #"^(\d{1,2}\s?(?:[:hH]|\.)\s?\d{2})\s+(\d{1,2}\s?(?:[:hH]|\.)\s?\d{2})$"#, options: [])
 
-    static func clockMinute(_ text: String) -> Int? {
+    static func clockMinute(_ raw: String) -> Int? {
         guard let regex = clockRegex else { return nil }
+        // "O8:1O" in the margin is 08:10 (the labels of a row are not marked one by one).
+        let text = repairedHours(raw)?.text ?? raw
         let ns = text as NSString
         guard let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: ns.length)),
               let hour = Int(group(match, 1, in: ns) ?? ""), let minute = Int(group(match, 2, in: ns) ?? ""),
@@ -1167,8 +1549,9 @@ enum ScheduleParser {
     }
 
     /// The two times of a line that holds both, in reading order.
-    static func clockPair(_ text: String) -> (first: Int, second: Int)? {
+    static func clockPair(_ raw: String) -> (first: Int, second: Int)? {
         guard let regex = clockPairRegex else { return nil }
+        let text = repairedHours(raw)?.text ?? raw
         let ns = text as NSString
         guard let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: ns.length)),
               let first = clockMinute(group(match, 1, in: ns) ?? ""),
@@ -1184,10 +1567,26 @@ enum ScheduleParser {
     static func courseCode(in text: String) -> (code: String, before: String, after: String)? {
         guard let regex = courseCodeRegex else { return nil }
         let ns = text as NSString
-        guard let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: ns.length)) else { return nil }
-        let end = match.range.location + match.range.length
-        return (ns.substring(with: match.range).uppercased(), ns.substring(to: match.range.location), ns.substring(from: end))
+        let full = NSRange(location: 0, length: ns.length)
+        var match = regex.firstMatch(in: text, options: [], range: full)
+        var repaired: String? = nil
+        // "41O-343-CH": a look-alike in the three digits of the code is read as the digit it stands for.
+        if match == nil, let near = courseCodeLookalikeRegex?.firstMatch(in: text, options: [], range: full) {
+            let raw = ns.substring(with: near.range)
+            if let digits = lookalikeValue(String(raw.prefix(3))), digits.anchored {
+                match = near
+                repaired = digits.digits + String(raw.dropFirst(3))
+            }
+        }
+        guard let found = match else { return nil }
+        let end = found.range.location + found.range.length
+        let code = (repaired ?? ns.substring(with: found.range)).uppercased()
+        return (code, ns.substring(to: found.range.location), ns.substring(from: end))
     }
+
+    /// The same with a look-alike letter among the three digits.
+    static let courseCodeLookalikeRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9])[0-9OoIl]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{2}(?![0-9])"#, options: [])
 
     static let roomWords: Set<String> = ["local", "salle", "room", "classe", "amphi", "labo", "aula", "raum", "sala"]
 
@@ -1235,8 +1634,17 @@ enum ScheduleParser {
             let before = found.before.trimmingCharacters(in: .whitespaces)
             if !before.isEmpty { parts.append(before) }
         }
-        let room = roomIndex.map { texts[$0].trimmingCharacters(in: .whitespaces) }
-        return BlockContent(title: parts.joined(separator: " "), room: room, code: code)
+        var room = roomIndex.map { texts[$0].trimmingCharacters(in: .whitespaces) }
+        var roomRepaired = false
+        // "Local H3O46": the room is read with the O as a zero, and said to be in doubt.
+        if let line = room {
+            let fixed = repairedRoomWords(in: line)
+            if !fixed.tokens.isEmpty {
+                room = fixed.text
+                roomRepaired = true
+            }
+        }
+        return BlockContent(title: parts.joined(separator: " "), room: room, code: code, roomRepaired: roomRepaired)
     }
 
     /// Code to full title, from the "Liste des cours" above the grid (one row per course: date, code, group, title,
@@ -1498,17 +1906,23 @@ enum ScheduleParser {
                 let span = blockRows(clusters, index, runs: runs, timeline: timeline)
                 let title = fullTitle(content.title, code: content.code, catalog: catalog)
                 guard !title.isEmpty else { continue }
+                var uncertain: Set<SlotField> = []
+                // The hours come from the middle of the text, not from the colours of the block: a guess.
+                if span.estimated { uncertain.formUnion([.start, .end]) }
+                if content.roomRepaired, content.room != nil { uncertain.insert(.room) }
+                if headers[column].fuzzy { uncertain.insert(.day) }
                 drafts.append(Draft(weekday: headers[column].day, start: timeline.rows[span.first].start,
-                                    end: timeline.rows[span.last].end, title: title, room: content.room))
+                                    end: timeline.rows[span.last].end, title: title, room: content.room,
+                                    uncertain: uncertain, coded: content.code != nil))
             }
         }
         return drafts
     }
 
     /// The rows covered by the block of a cluster: from the colours when the probe sees the block, else from the
-    /// place of the text.
+    /// place of the text (`estimated`).
     static func blockRows(_ clusters: [TextCluster], _ index: Int, runs: [ClosedRange<Double>]?,
-                          timeline: Timeline) -> (first: Int, last: Int) {
+                          timeline: Timeline) -> (first: Int, last: Int, estimated: Bool) {
         let cluster = clusters[index]
         if let runs = runs, let found = runs.first(where: { $0.contains(Double(cluster.center)) }) {
             // Two blocks stuck together make one stretch: cut halfway between their texts.
@@ -1518,10 +1932,11 @@ enum ScheduleParser {
             let top = sameRun(index - 1) ? (clusters[index - 1].bottom + cluster.top) / 2 : CGFloat(found.lowerBound)
             let bottom = sameRun(index + 1) ? (cluster.bottom + clusters[index + 1].top) / 2 : CGFloat(found.upperBound)
             let snapped = timeline.snap(top: top, bottom: bottom)
-            if snapped.last - snapped.first < Timeline.maxSpan { return snapped }
+            if snapped.last - snapped.first < Timeline.maxSpan { return (snapped.first, snapped.last, false) }
         }
-        return timeline.fit(top: cluster.top, bottom: cluster.bottom)
+        let guess = timeline.fit(top: cluster.top, bottom: cluster.bottom)
             ?? timeline.snap(top: cluster.top, bottom: cluster.bottom)
+        return (guess.first, guess.last, true)
     }
 
     // MARK: Layout: list day by day
@@ -1555,11 +1970,16 @@ enum ScheduleParser {
         var pendingRoom: String? = nil
         var recent: [Int] = []
         var awaiting = false
+        // The day was matched by its resemblance ("Mardl"), and the room waiting for its class was repaired ("B-2O4").
+        var dayFuzzy = false
+        var pendingRoomRepaired = false
 
-        func startDay(_ newDays: [Int]) {
+        func startDay(_ newDays: [Int], fuzzy: Bool = false) {
             days = newDays
+            dayFuzzy = fuzzy
             pendingTitle = nil
             pendingRoom = nil
+            pendingRoomRepaired = false
             recent = []
             awaiting = false
         }
@@ -1568,8 +1988,10 @@ enum ScheduleParser {
             var text = row
             if let lead = leadingDays(in: text) {
                 let hasTime = analyze(lead.rest).time != nil
-                if hasTime || isDateish(lead.rest) {
-                    startDay(lead.days)
+                // A short word that only looks like a day ("Don") alone on a line does not start a day: it needs a time with it.
+                let shortGuess = lead.fuzzy && !hasTime && (text.split(separator: " ").first.map { $0.count < 4 } ?? true)
+                if (hasTime || isDateish(lead.rest)) && !shortGuess {
+                    startDay(lead.days, fuzzy: lead.fuzzy)
                     if !hasTime { continue }
                     text = lead.rest
                 }
@@ -1582,32 +2004,42 @@ enum ScheduleParser {
                 guard !days.isEmpty else { continue }
                 let title = info.title.isEmpty ? (pendingTitle ?? "") : info.title
                 let room = info.room ?? (info.title.isEmpty ? pendingRoom : nil)
+                let roomRepaired = info.room != nil ? info.roomRepaired : (room != nil && pendingRoomRepaired)
                 recent = []
                 for day in days {
                     // "9h-12h / 13h-17h": the same class at each range of the row.
                     for each in [time] + info.extraTimes {
                         recent.append(drafts.count)
-                        drafts.append(Draft(weekday: day, start: each.start, end: each.end, title: title, room: room))
+                        var flags = timeFlags(each)
+                        if dayFuzzy { flags.insert(.day) }
+                        if roomRepaired { flags.insert(.room) }
+                        drafts.append(Draft(weekday: day, start: each.start, end: each.end, title: title, room: room, uncertain: flags))
                     }
                 }
                 awaiting = title.isEmpty
                 pendingTitle = nil
                 pendingRoom = nil
+                pendingRoomRepaired = false
             } else if awaiting, !info.title.isEmpty {
                 for index in recent where index < drafts.count {
                     drafts[index].title = info.title
-                    if drafts[index].room == nil { drafts[index].room = info.room }
+                    if drafts[index].room == nil, let found = info.room {
+                        drafts[index].room = found
+                        if info.roomRepaired { drafts[index].uncertain.insert(.room) }
+                    }
                 }
                 awaiting = false
             } else if info.title.isEmpty {
                 if let room = info.room {
                     for index in recent where index < drafts.count && drafts[index].room == nil {
                         drafts[index].room = room
+                        if info.roomRepaired { drafts[index].uncertain.insert(.room) }
                     }
                 }
             } else {
                 pendingTitle = info.title
                 pendingRoom = info.room
+                pendingRoomRepaired = info.roomRepaired
             }
         }
         return drafts
@@ -1633,25 +2065,39 @@ enum ScheduleParser {
         for draft in drafts {
             guard (1...7).contains(draft.weekday), (0..<1440).contains(draft.start) else { continue }
             let title = cleanTitle(draft.title)
-            guard !title.isEmpty, !isBreak(title) else { continue }
+            // No class without a name that was read: nothing is invented to fill it.
+            guard !title.isEmpty else { continue }
+            if isNonCourse(title, coded: draft.coded) {
+                // A break or a free period is no class, but a class before it ends where it begins.
+                startsOfDay[draft.weekday, default: []].append(draft.start)
+                continue
+            }
+            guard !isUnreadableTitle(title) else { continue }
             kept.append((draft: draft, title: title))
             startsOfDay[draft.weekday, default: []].append(draft.start)
         }
         var slots: [ImportedSlot] = []
         for item in kept {
             let draft = item.draft
+            var uncertain = draft.uncertain
             var end = draft.end ?? (draft.start + usual)
-            if draft.end == nil,
-               let next = (startsOfDay[draft.weekday] ?? []).filter({ $0 > draft.start }).min(),
-               next < end, next - draft.start >= 20 {
-                // Only a start is written ("8h30 Maths", "10h Physique"): the class ends when the next one begins,
-                // when that comes before the usual length.
-                end = next
+            if draft.end == nil {
+                // The end is a guess (the usual length of the page), or the start of the next class.
+                uncertain.insert(.end)
+                if let next = (startsOfDay[draft.weekday] ?? []).filter({ $0 > draft.start }).min(),
+                   next < end, next - draft.start >= 20 {
+                    // Only a start is written ("8h30 Maths", "10h Physique"): the class ends when the next one begins,
+                    // when that comes before the usual length.
+                    end = next
+                }
             }
             end = min(end, 1440)
             guard end > draft.start else { continue }
+            if draft.room == nil { uncertain.remove(.room) }
+            // A name of two letters ("TP", "Ed") may be what is left of a longer one.
+            if !ScheduleScoring.hasCJK(item.title), item.title.filter({ $0.isLetter }).count <= 2 { uncertain.insert(.title) }
             slots.append(ImportedSlot(weekday: draft.weekday, startMinute: draft.start, endMinute: end,
-                                      title: item.title, room: draft.room))
+                                      title: item.title, room: draft.room, uncertain: uncertain))
         }
         return deduplicated(slots)
     }

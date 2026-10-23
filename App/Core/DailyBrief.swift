@@ -109,6 +109,110 @@ enum DailyBrief {
         var streak = 0
     }
 
+    /// The sections Mon Quotidien always offers. Each one's id is the id of its card with data, so a
+    /// category keeps its place, its size and its hidden state when it goes from empty to filled.
+    enum Category: String, CaseIterable, Identifiable, Hashable {
+        case nutrition, workout, planning, habits, budget, priorities, reminders, steps, weather, business, travel, car
+
+        /// The order of the empty cards (after the cards with data).
+        static let defaultOrder: [Category] = allCases
+
+        var tileID: String {
+            switch self {
+            case .business: "app-business"
+            case .travel: "app-travel"
+            case .car: "app-car"
+            default: rawValue
+            }
+        }
+
+        var id: String { tileID }
+
+        /// The part of « Mes informations » that holds its data, where there is one.
+        var area: InfoArea? {
+            switch self {
+            case .nutrition: .nutrition
+            case .workout: .fitness
+            case .planning: .student
+            case .habits: .habits
+            case .budget: .budget
+            case .priorities: .productivity
+            default: nil
+            }
+        }
+
+        /// The mini-app a category without its own card shows through (a card with one figure).
+        var app: MiniApp? {
+            switch self {
+            case .business: .business
+            case .travel: .travel
+            case .car: .car
+            default: nil
+            }
+        }
+
+        var title: String {
+            if let area { return area.title }
+            switch self {
+            case .reminders: return tr("À ne pas oublier")
+            case .steps: return tr("Pas")
+            case .weather: return tr("Météo")
+            default: return app?.title ?? rawValue
+            }
+        }
+
+        var symbol: String {
+            if let area { return area.symbol }
+            switch self {
+            case .reminders: return "bell.fill"
+            case .steps: return "figure.walk"
+            case .weather: return "cloud.sun.fill"
+            default: return app?.symbol ?? "square"
+            }
+        }
+
+        var colorHex: String {
+            if let area { return area.colorHex }
+            switch self {
+            case .reminders: return "4B5563"
+            case .steps: return "12A4B5"
+            case .weather: return "3A8DDE"
+            default: return app?.colorHex ?? "8E8E93"
+            }
+        }
+
+        /// What the empty card says: what to give, and what will appear here once it is given.
+        var invitation: String {
+            switch self {
+            case .nutrition: tr("Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici.")
+            case .workout: tr("Crée ton programme : ta séance du jour apparaîtra ici.")
+            case .planning: tr("Ajoute tes cours : ton horaire du jour apparaîtra ici.")
+            case .budget: tr("Donne ton budget du mois pour voir ce qu'il te reste chaque jour.")
+            case .habits: tr("Ajoute une habitude à suivre chaque jour.")
+            case .priorities: tr("Ajoute tes tâches ou ton top 3 du jour.")
+            case .reminders: tr("Examens, devoirs, factures, échéances : ce qui approche apparaîtra ici.")
+            case .steps: tr("Autorise le compteur de pas : tes pas du jour apparaîtront ici.")
+            case .weather: tr("Choisis ta ville : la météo du moment apparaîtra ici.")
+            case .business: tr("Note tes ventes : ton chiffre d'affaires du mois apparaîtra ici.")
+            case .travel: tr("Ajoute un voyage : son compte à rebours apparaîtra ici.")
+            case .car: tr("Note un plein ou le kilométrage : ta voiture apparaîtra ici.")
+            }
+        }
+
+        /// Where a tap on the empty card leads: always the mini-app, which shows what is left to fill in.
+        var route: HomeRoute {
+            if let area { return area.homeRoute }
+            switch self {
+            case .reminders: return .app(.planning)
+            case .steps: return .page(.fitnessActivity)
+            case .weather: return .app(.weather)
+            case .business: return .app(.business)
+            case .travel: return .app(.travel)
+            default: return .app(.car)
+            }
+        }
+    }
+
     enum Tile: Equatable, Identifiable {
         case nutrition(Nutrition)
         case workout(Workout)
@@ -121,6 +225,9 @@ enum DailyBrief {
         case reminders([Reminder])
         case priorities([Check])
         case invite(InfoArea)
+        /// A category with nothing entered yet: a dotted card inviting to fill it, never a made-up figure.
+        /// Same id as the card with data, so hiding it keeps it hidden when data comes.
+        case empty(Category)
         /// A mini-app added to Mon Quotidien by the person: its name and one figure from its data (nil: nothing yet).
         case miniApp(String, caption: String?)
 
@@ -136,6 +243,7 @@ enum DailyBrief {
             case .reminders: "reminders"
             case .priorities: "priorities"
             case let .invite(area): "invite-\(area.rawValue)"
+            case let .empty(category): category.tileID
             case let .miniApp(app, _): "app-\(app)"
             }
         }
@@ -144,7 +252,7 @@ enum DailyBrief {
         var isWide: Bool {
             switch self {
             // Planning: the week as a table, readable across the dashboard (half of it on demand).
-            case .nutrition, .reminders, .invite, .planning: true
+            case .nutrition, .reminders, .invite, .empty, .planning: true
             default: false
             }
         }
@@ -219,6 +327,25 @@ enum DailyBrief {
         let room = tiles.count >= 4 ? 0 : (tiles.count >= 2 ? 1 : 2)
         tiles += invitations(input, shown: tiles).prefix(room).map(Tile.invite)
         return tiles
+    }
+
+    /// Mon Quotidien complete from the first launch: the cards with data (`tiles`), then the weather
+    /// and the figure of the mini-apps without their own card when there is something to show, then
+    /// one empty dotted card for each category still without data, in the default order. Legacy
+    /// invitations are dropped: the empty cards replace them. Never a made-up figure.
+    static func completing(_ tiles: [Tile], weather: WeatherSnapshot?, appCaptions: [Category: String] = [:]) -> [Tile] {
+        var result = tiles.filter { if case .invite = $0 { false } else { true } }
+        var ids = Set(result.map(\.id))
+        func append(_ tile: Tile) {
+            guard ids.insert(tile.id).inserted else { return }
+            result.append(tile)
+        }
+        if let weather { append(.weather(weather)) }
+        for category in Category.defaultOrder {
+            if let app = category.app, let caption = appCaptions[category] { append(.miniApp(app.rawValue, caption: caption)) }
+        }
+        for category in Category.defaultOrder { append(.empty(category)) }
+        return result
     }
 
     /// The Top 3 as checks, done or not today (empty without any task).

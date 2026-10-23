@@ -36,6 +36,23 @@ enum DailyCategories {
         return cards + extra + productivity + invites
     }
 
+    /// Every card Mon Quotidien can show, complete from the first launch: the person's own cards, then
+    /// an empty dotted card for each category without data (see `DailyBrief.completing`). Whatever
+    /// is hidden or ordered is applied afterwards (`DailyBrief.arranged`), by the same ids, so a
+    /// hidden category stays hidden whether it is empty or filled, and a new one shows.
+    static func home(model: AppModel, now: Date, steps: Int?) -> [DailyBrief.Tile] {
+        let input = DailyBrief.Input(model: model, now: now, steps: steps)
+        let brief = DailyBrief.tiles(input)
+        // Only the Productivité quick add still adds a card by hand: the mini-apps are all there already.
+        let quick = model.settings.dailyAdded.filter { $0 == productivityKey }
+        let base = adding(quick, to: brief, model: model, now: now)
+        var captions: [DailyBrief.Category: String] = [:]
+        for category in DailyBrief.Category.allCases {
+            if let app = category.app, let caption = MiniAppSummary.caption(app, model, now: now) { captions[category] = caption }
+        }
+        return DailyBrief.completing(base, weather: input.weather, appCaptions: captions)
+    }
+
     /// Reserved entry of `dailyAdded` for the Productivité card (not a mini-app: ignored when reading the mini-apps).
     static let productivityKey = "quick-productivity"
 
@@ -44,16 +61,17 @@ enum DailyCategories {
         settings.dailyAdded.contains(productivityKey) && !settings.dailyHidden.contains("priorities")
     }
 
-    /// Adds the Productivité card (back if it was hidden), or takes it off Mon Quotidien. Taken off, the
-    /// settings go back to what they were: the Top 3 is hidden for real only if it would still show
-    /// without the entry (`hasTasks`), so a Top 3 filled later in Planning isn't hidden without a word.
+    /// Adds the Productivité card (back if it was hidden), or takes it off Mon Quotidien. Taken off, the Top 3
+    /// card is always hidden for real: it is never missing any more (an empty dotted card is its default), so
+    /// without this the switch would read off while the empty card stayed. `hasTasks` is kept for callers
+    /// but no longer changes the result.
     static func setProductivity(shown: Bool, hasTasks: Bool, in settings: inout AppSettings) {
         if shown {
             if !settings.dailyAdded.contains(productivityKey) { settings.dailyAdded.append(productivityKey) }
             settings.dailyHidden.removeAll { $0 == "priorities" }
         } else {
             settings.dailyAdded.removeAll { $0 == productivityKey }
-            if hasTasks, !settings.dailyHidden.contains("priorities") { settings.dailyHidden.append("priorities") }
+            if !settings.dailyHidden.contains("priorities") { settings.dailyHidden.append("priorities") }
         }
     }
 

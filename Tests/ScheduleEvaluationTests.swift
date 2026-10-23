@@ -200,21 +200,58 @@ final class ScheduleEvaluationTests: XCTestCase {
     /// Prints the table of one noise level and returns the mean.
     private func scoreTable(level: Int) -> ReadingScoreCard {
         var cards: [ReadingScoreCard] = []
+        var table: [String] = []
         for schedule in ScheduleCorpus.scored {
             let card = measure(schedule, level: level)
             cards.append(card)
-            print("SCORE \(schedule.name) bruit=\(level) \(fields(card)) attendus=\(fixed(card.expectedCount)) lus=\(fixed(card.foundCount))")
+            let row = "SCORE \(schedule.name) bruit=\(level) \(fields(card)) attendus=\(fixed(card.expectedCount)) lus=\(fixed(card.foundCount))"
+            print(row)
+            table.append(row)
         }
         let mean = ReadingScoreCard.average(cards)
         let runs = level == 0 ? 1 : ScheduleEvaluationTests.noisyRuns
-        print("SCORE-MOYENNE bruit=\(level) \(fields(mean)) pages=\(cards.count) graines=\(runs)")
+        let meanRow = "SCORE-MOYENNE bruit=\(level) \(fields(mean)) pages=\(cards.count) graines=\(runs)"
+        print(meanRow)
+        table.append(meanRow)
+        // The CI log keeps no print: the table travels as an attachment, exported in the report.
+        attach(table.joined(separator: "\n"), name: "SCORES-bruit\(level)")
         return mean
+    }
+
+    private func attach(_ text: String, name: String) {
+        let attachment = XCTAttachment(string: text)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+
+    /// Without noise, for each page: the classes expected and not found, and the classes found that are not real
+    /// ("day|start-end|title|room"), to see what to fix.
+    private func failureReport() -> String {
+        var out: [String] = []
+        for schedule in ScheduleCorpus.scored {
+            let found = ScheduleParser.slots(from: schedule.lines, probe: schedule.probe)
+            let pairs = ScheduleScorer.match(schedule.expected, found)
+            let matchedExpected = Set(pairs.map { $0.expected })
+            let matchedFound = Set(pairs.map { $0.found })
+            var rows: [String] = []
+            for (index, slot) in schedule.expected.enumerated() where !matchedExpected.contains(index) {
+                rows.append("  MANQUE \(slot.day)|\(LayoutFixtures.hm(slot.start))-\(LayoutFixtures.hm(slot.end))|\(slot.title)|\(slot.room ?? "-")")
+            }
+            for (index, slot) in found.enumerated() where !matchedFound.contains(index) {
+                rows.append("  INVENTE \(slot.weekday)|\(LayoutFixtures.hm(slot.startMinute))-\(LayoutFixtures.hm(slot.endMinute))|\(slot.title)|\(slot.room ?? "-")")
+            }
+            out.append("ECHEC \(schedule.name) attendus=\(schedule.expected.count) lus=\(found.count) manques+inventes=\(rows.count)")
+            out.append(contentsOf: rows)
+        }
+        return out.joined(separator: "\n")
     }
 
     // MARK: Scores against the reference pages
 
     func testScoresWithoutNoise() {
         let mean = scoreTable(level: 0)
+        attach(failureReport(), name: "SCORES-ECHECS")
         XCTAssertGreaterThanOrEqual(mean.exactness, ScheduleEvaluationTests.floorExactnessClean, "exactness")
         XCTAssertGreaterThanOrEqual(mean.precision, ScheduleEvaluationTests.floorPrecisionClean, "precision: classes invented")
         XCTAssertGreaterThanOrEqual(mean.recall, ScheduleEvaluationTests.floorRecallClean, "recall: classes missed")

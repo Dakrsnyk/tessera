@@ -33,6 +33,7 @@ struct FitnessAppView: View {
             weekSelector(state: state)
             dayHeader(content, state: state, now: now)
         } sheet: {
+            MiniAppToFillSection(app: .fitness)
             weekSummary(state: state, now: now)
             if content.hasExtras {
                 daySection(content, state: state, now: now)

@@ -44,8 +44,8 @@ struct PeriodGridLayout: ScheduleLayout {
         }
         var drafts: [ScheduleParser.Draft] = []
         for (column, columnLines) in columns.enumerated() {
-            drafts.append(contentsOf: PeriodGridLayout.draftsOfColumn(columnLines, weekday: headers[column].day,
-                                                                      rows: rows, centers: centers))
+            let found = PeriodGridLayout.draftsOfColumn(columnLines, weekday: headers[column].day, rows: rows, centers: centers)
+            drafts.append(contentsOf: ScheduleParser.marked(found, dayInDoubt: headers[column].fuzzy))
         }
         return drafts
     }

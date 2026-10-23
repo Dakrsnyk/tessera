@@ -1,6 +1,7 @@
 import UIKit
 import Vision
 import PDFKit
+import CoreImage
 
 /// Where the timetable comes from.
 enum ScheduleSource { case image(UIImage), pdf(URL) }
@@ -41,13 +42,15 @@ enum ScheduleReader {
     static let smallestSide: CGFloat = 1000
     /// An image narrower than this (and not too long) is enlarged before it is read.
     static let narrowSide: CGFloat = 1500
+    /// Seconds an import may spend in extra OCR passes (the first pass of each page always runs).
+    static let timeBudget: TimeInterval = 25
 
     /// The lines (and the colour probe) of each page (one page for a photo).
     static func pages(from source: ScheduleSource) async throws -> [SchedulePage] {
         switch source {
         case .image(let image):
             guard let cgImage = upright(image) else { throw ScheduleImportError.unreadable }
-            return [try await recognize(cgImage)]
+            return [try await recognize(cgImage, deadline: Date().addingTimeInterval(timeBudget))]
         case .pdf(let url):
             // A file chosen in the Files picker may need this access; it is harmless for any other file.
             let scoped = url.startAccessingSecurityScopedResource()
@@ -56,10 +59,12 @@ enum ScheduleReader {
                 throw ScheduleImportError.unreadable
             }
             var pages: [SchedulePage] = []
+            // One budget for the whole file: the extra passes of the last pages are skipped once it is spent.
+            let deadline = Date().addingTimeInterval(timeBudget)
             for index in 0..<min(document.pageCount, maxPages) {
                 try Task.checkCancellation()
                 guard let page = document.page(at: index), let cgImage = render(page) else { continue }
-                pages.append(try await recognize(cgImage))
+                pages.append(try await recognize(cgImage, deadline: deadline))
             }
             guard !pages.isEmpty else { throw ScheduleImportError.unreadable }
             return pages
@@ -114,41 +119,306 @@ enum ScheduleReader {
 
     // MARK: Vision
 
-    private static func recognize(_ cgImage: CGImage) async throws -> SchedulePage {
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<SchedulePage, Error>) in
+    /// One way of looking at the image.
+    private enum Pass: String {
+        /// The image as it is (language correction on: names are better read with it).
+        case original
+        /// Enlarged (up to x2, within `longestSide`), grey, with more contrast and a light sharpening; language correction on.
+        case enlarged
+        /// Local contrast pushed to black on white (shadows of a photo and tinted cells vanish); language correction off,
+        /// so that "08:10" stays a time and does not become a word.
+        case binarized
+
+        var usesLanguageCorrection: Bool { self != .binarized }
+    }
+
+    /// A line with the confidence Vision gives to its text.
+    private struct ReadLine {
+        var line: RecognizedLine
+        var confidence: Float
+    }
+
+    /// What one pass (or a fusion of passes) gives once the parser has read it: the lines, and how well they explain the page.
+    private struct Reading {
+        var pass: Pass
+        var lines: [ReadLine]
+        var score: ScheduleScore
+        var slotCount: Int
+        /// Share (0...1) of the classes found that the parser marks "to check".
+        var doubtfulShare: Double
+    }
+
+    /// A first reading is enough when it has this many lines at least, a quality of this or more, and at most this share
+    /// of classes in doubt. Anything less starts another pass (at most `maximumPasses` in all: a few seconds).
+    private static let solidLines = 15
+    private static let solidQuality = 0.75
+    private static let solidDoubtShare = 0.25
+    private static let maximumPasses = 3
+    /// A later pass replaces the best one so far only if it beats it by this share (as the layouts do).
+    private static let switchMargin = 1.05
+    /// When fusing, a line of another pass replaces one of the chosen pass at the same place if Vision is this much surer
+    /// of it; a line only the other pass saw is added at this confidence at least.
+    private static let confidenceGain: Float = 0.2
+    private static let addedConfidence: Float = 0.6
+    private static let samePlaceOverlap: CGFloat = 0.5
+
+    /// Reads the image with one pass, then more passes only while the reading is not solid. The colour probe is built once,
+    /// from the image as it was given: every pass keeps the aspect of the page, so the normalised places of the lines
+    /// (0...1) are the same for all of them and the probe fits whichever lines are kept.
+    private static func recognize(_ cgImage: CGImage, deadline: Date) async throws -> SchedulePage {
+        let aspect = Double(cgImage.height) / Double(max(1, cgImage.width))
+        let probe: LuminanceProbe? = try await background { LuminanceProbe(cgImage) }
+        guard let first = try await read(.original, of: cgImage, probe: probe, aspect: aspect) else {
+            throw ScheduleImportError.unreadable
+        }
+        var readings = [first]
+        // A page with no class found and little text (a cover page) is not worth another look.
+        let worthAnotherLook = first.slotCount > 0 || first.lines.count >= solidLines
+        for pass in [Pass.enlarged, .binarized].prefix(maximumPasses - 1) {
+            guard worthAnotherLook, !isSolid(best(of: readings)), Date() < deadline else { break }
+            try Task.checkCancellation()
+            if let more = try await read(pass, of: cgImage, probe: probe, aspect: aspect) { readings.append(more) }
+        }
+        var chosen = best(of: readings)
+        // The lines the chosen pass is surer of elsewhere are replaced by the other pass's, and lines only another pass
+        // saw are added; the fusion is kept only if the parser explains the page better with it.
+        let others = readings.filter { $0.pass != chosen.pass }
+        if !others.isEmpty {
+            let base = chosen
+            let merged: Reading? = try await background { fused(base, with: others, probe: probe, aspect: aspect) }
+            if let merged { chosen = merged }
+        }
+        return SchedulePage(lines: chosen.lines.map { $0.line }, probe: probe, aspect: aspect)
+    }
+
+    /// The reading with the best score: a later one must beat the best so far by `switchMargin`.
+    private static func best(of readings: [Reading]) -> Reading {
+        var chosen = readings[0]
+        for reading in readings.dropFirst() where reading.score.value > chosen.score.value * switchMargin + 0.01 {
+            chosen = reading
+        }
+        return chosen
+    }
+
+    private static func isSolid(_ reading: Reading) -> Bool {
+        reading.slotCount > 0
+            && reading.lines.count >= solidLines
+            && reading.score.quality >= solidQuality
+            && reading.doubtfulShare <= solidDoubtShare
+    }
+
+    /// One pass: image prepared, text recognised, classes parsed and scored. nil when the pass cannot run (the first
+    /// pass failing makes the page unreadable; a later one failing is just left out).
+    private static func read(_ pass: Pass, of cgImage: CGImage, probe: LuminanceProbe?, aspect: Double) async throws -> Reading? {
+        try await background { () -> Reading? in
+            guard let image = prepared(cgImage, for: pass),
+                  let lines = try? performRecognition(on: image, languageCorrection: pass.usesLanguageCorrection)
+            else { return nil }
+            return assess(pass, lines: lines, probe: probe, aspect: aspect)
+        }
+    }
+
+    /// Parses and scores a set of lines.
+    private static func assess(_ pass: Pass, lines: [ReadLine], probe: BlockProbe?, aspect: Double) -> Reading {
+        let plain = lines.map { $0.line }
+        let slots = ScheduleParser.slots(from: plain, probe: probe, aspect: aspect)
+        let score = ScheduleScoring.evaluate(slots, lines: plain)
+        let doubtful = slots.filter { $0.needsCheck }.count
+        return Reading(pass: pass, lines: lines, score: score, slotCount: slots.count,
+                       doubtfulShare: slots.isEmpty ? 1 : Double(doubtful) / Double(slots.count))
+    }
+
+    /// Runs a piece of work off the main thread.
+    private static func background<T>(_ work: @escaping () throws -> T) async throws -> T {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<T, Error>) in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
-                    // The probe reads the same image Vision reads, so its coordinates are the ones of the lines.
-                    let lines = try performRecognition(on: cgImage)
-                    continuation.resume(returning: SchedulePage(lines: lines, probe: LuminanceProbe(cgImage),
-                                                                aspect: Double(cgImage.height) / Double(max(1, cgImage.width))))
+                    continuation.resume(returning: try work())
                 } catch {
-                    continuation.resume(throwing: ScheduleImportError.unreadable)
+                    continuation.resume(throwing: error)
                 }
             }
         }
     }
 
-    private static func performRecognition(on cgImage: CGImage) throws -> [RecognizedLine] {
+    // MARK: Fusion
+
+    /// The chosen reading with, place by place, the text Vision is surer of in the other passes. nil when nothing changes
+    /// or when the fused lines do not score better than the chosen reading.
+    private static func fused(_ base: Reading, with others: [Reading], probe: BlockProbe?, aspect: Double) -> Reading? {
+        var lines = base.lines
+        var changed = false
+        for other in others {
+            var matched = Set<Int>()
+            for index in lines.indices {
+                guard let match = counterpart(of: lines[index], in: other.lines) else { continue }
+                matched.insert(match)
+                let theirs = other.lines[match]
+                if theirs.confidence >= lines[index].confidence + confidenceGain, theirs.line.text != lines[index].line.text {
+                    // The place stays the one of the chosen pass.
+                    lines[index] = ReadLine(line: RecognizedLine(text: theirs.line.text, box: lines[index].line.box),
+                                            confidence: theirs.confidence)
+                    changed = true
+                }
+            }
+            for (index, theirs) in other.lines.enumerated() where !matched.contains(index) && theirs.confidence >= addedConfidence {
+                guard theirs.line.text.contains(where: { $0.isLetter || $0.isNumber }) else { continue }
+                // A line that overlaps one already read is another cut of the same text: not added.
+                if lines.contains(where: { overlap($0.line.box, theirs.line.box) > 0.2 }) { continue }
+                lines.append(theirs)
+                changed = true
+            }
+        }
+        guard changed else { return nil }
+        let result = assess(base.pass, lines: lines, probe: probe, aspect: aspect)
+        return result.score.value > base.score.value ? result : nil
+    }
+
+    /// The line of `others` at the same place as `line` (most overlapping, at least `samePlaceOverlap`).
+    private static func counterpart(of line: ReadLine, in others: [ReadLine]) -> Int? {
+        var found: Int?
+        var bestOverlap = samePlaceOverlap
+        for (index, other) in others.enumerated() {
+            let shared = overlap(line.line.box, other.line.box)
+            if shared >= bestOverlap {
+                bestOverlap = shared
+                found = index
+            }
+        }
+        return found
+    }
+
+    /// Intersection over union of two boxes (0...1).
+    private static func overlap(_ a: CGRect, _ b: CGRect) -> CGFloat {
+        let shared = a.intersection(b)
+        guard !shared.isNull, shared.width > 0, shared.height > 0 else { return 0 }
+        let sharedArea = shared.width * shared.height
+        let total = a.width * a.height + b.width * b.height - sharedArea
+        return total > 0 ? sharedArea / total : 0
+    }
+
+    // MARK: Image passes
+
+    private static let imageContext = CIContext(options: [.useSoftwareRenderer: false])
+
+    /// The image for a pass: the original for `.original`, otherwise a processed copy with the same proportions.
+    private static func prepared(_ cgImage: CGImage, for pass: Pass) -> CGImage? {
+        switch pass {
+        case .original: return cgImage
+        case .enlarged: return enhanced(cgImage)
+        case .binarized: return binarized(cgImage)
+        }
+    }
+
+    /// One Core Image filter by name (a missing filter gives nil and the pass is skipped).
+    private static func apply(_ name: String, to image: CIImage, _ values: [String: Any] = [:]) -> CIImage? {
+        guard let filter = CIFilter(name: name) else { return nil }
+        filter.setValue(image, forKey: kCIInputImageKey)
+        for (key, value) in values { filter.setValue(value, forKey: key) }
+        return filter.outputImage
+    }
+
+    /// The image enlarged by min(2, longestSide / longest side), so that small print has more pixels.
+    private static func enlarged(_ cgImage: CGImage) -> CIImage? {
+        let image = CIImage(cgImage: cgImage)
+        let longest = CGFloat(max(cgImage.width, cgImage.height))
+        let factor = max(1, min(2, longestSide / max(1, longest)))
+        guard factor > 1.05 else { return image }
+        return apply("CILanczosScaleTransform", to: image, [kCIInputScaleKey: Double(factor), kCIInputAspectRatioKey: 1.0])
+    }
+
+    private static func renderImage(_ image: CIImage) -> CGImage? {
+        let rect = image.extent.integral
+        guard rect.width > 8, rect.height > 8, rect.width.isFinite, rect.height.isFinite else { return nil }
+        return imageContext.createCGImage(image, from: rect)
+    }
+
+    /// Enlarged, grey, more contrast, light sharpening.
+    private static func enhanced(_ cgImage: CGImage) -> CGImage? {
+        guard let big = enlarged(cgImage),
+              let grey = apply("CIColorControls", to: big, [kCIInputSaturationKey: 0.0, kCIInputContrastKey: 1.4]),
+              let sharp = apply("CIUnsharpMask", to: grey, [kCIInputRadiusKey: 2.0, kCIInputIntensityKey: 0.7])
+        else { return nil }
+        return renderImage(sharp.cropped(to: big.extent))
+    }
+
+    /// Black text on a white page whatever the light: the grey image is compared with a strongly blurred copy of itself
+    /// (the local background); what differs from it is ink, what does not is paper. A shadow or a tinted cell is part of
+    /// the local background, so it turns white.
+    private static func binarized(_ cgImage: CGImage) -> CGImage? {
+        guard let big = enlarged(cgImage),
+              let grey = apply("CIColorControls", to: big, [kCIInputSaturationKey: 0.0, kCIInputContrastKey: 1.0])
+        else { return nil }
+        let extent = big.extent
+        let sigma = max(8.0, Double(max(extent.width, extent.height)) / 80)
+        let localBackground = grey.clampedToExtent().applyingGaussianBlur(sigma: sigma).cropped(to: extent)
+        // |grey - background|: 0 on paper, up to 1 on ink (dark on light or light on dark).
+        guard let difference = apply("CIDifferenceBlendMode", to: grey, [kCIInputBackgroundImageKey: localBackground]) else { return nil }
+        // out = 1 + gain * noiseFloor - gain * difference, clamped to 0...1: a difference under `noiseFloor` (noise) is paper.
+        let gain = 4.0
+        let noiseFloor = 0.08
+        let bias = 1 + gain * noiseFloor
+        guard let stretched = apply("CIColorMatrix", to: difference, [
+            "inputRVector": CIVector(x: -gain, y: 0, z: 0, w: 0),
+            "inputGVector": CIVector(x: 0, y: -gain, z: 0, w: 0),
+            "inputBVector": CIVector(x: 0, y: 0, z: -gain, w: 0),
+            "inputAVector": CIVector(x: 0, y: 0, z: 0, w: 1),
+            "inputBiasVector": CIVector(x: bias, y: bias, z: bias, w: 0)
+        ]) else { return nil }
+        return renderImage(stretched.cropped(to: extent))
+    }
+
+    // MARK: Vision
+
+    /// Words Vision should expect: the days and months of the six languages (and Japanese), their short forms, and the words
+    /// of a school or college timetable. Used with language correction only.
+    private static let customWords: [String] = {
+        var words = Set<String>()
+        func add(_ raw: String) {
+            let word = raw.trimmingCharacters(in: CharacterSet(charactersIn: ". ")).trimmingCharacters(in: .whitespacesAndNewlines)
+            guard word.count >= 2 || ScheduleScoring.hasCJK(word) else { return }
+            words.insert(word)
+            words.insert(word.lowercased())
+        }
+        for identifier in ["fr_CA", "fr_FR", "en_US", "en_GB", "es_ES", "de_DE", "it_IT", "pt_BR", "ja_JP"] {
+            var calendar = Calendar(identifier: .gregorian)
+            calendar.locale = Locale(identifier: identifier)
+            let groups: [[String]] = [calendar.weekdaySymbols, calendar.shortWeekdaySymbols, calendar.veryShortWeekdaySymbols,
+                                      calendar.monthSymbols, calendar.shortMonthSymbols]
+            for symbol in groups.flatMap({ $0 }) { add(symbol) }
+        }
+        let extras = ["Horaire", "Local", "Salle", "Présentiel", "Distance", "Hybride", "En ligne", "Laboratoire", "Cours", "Pavillon",
+                      "Pause", "Dîner", "Période", "Session", "Semaine", "Automne", "Hiver", "Été", "Printemps",
+                      "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche",
+                      "Schedule", "Timetable", "Room", "Classroom", "Lecture", "Lab", "Online", "Break", "Lunch", "Week",
+                      "Horario", "Aula", "Sala", "Clase", "Stundenplan", "Raum", "Vorlesung", "Pause", "Woche",
+                      "Orario", "Lezione", "Settimana", "Horário", "Semana", "時間割", "教室", "授業", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日"]
+        for extra in extras { add(extra) }
+        return Array(words)
+    }()
+
+    private static func performRecognition(on cgImage: CGImage, languageCorrection: Bool) throws -> [ReadLine] {
         let request = VNRecognizeTextRequest()
         request.recognitionLevel = .accurate
-        request.usesLanguageCorrection = true
+        request.usesLanguageCorrection = languageCorrection
         request.automaticallyDetectsLanguage = true
         // Small print (hour labels, the text of a block) is about 0.004 of the page height.
         request.minimumTextHeight = 0.002
+        request.customWords = customWords
         let languages = recognitionLanguages(for: request)
         if !languages.isEmpty { request.recognitionLanguages = languages }
         // The image was already drawn upright, so Vision reads it as it is.
         let handler = VNImageRequestHandler(cgImage: cgImage, orientation: .up, options: [:])
         try handler.perform([request])
-        var lines: [RecognizedLine] = []
+        var lines: [ReadLine] = []
         for observation in request.results ?? [] {
             guard let candidate = observation.topCandidates(1).first, candidate.confidence >= 0.15 else { continue }
             let text = candidate.string.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !text.isEmpty else { continue }
             let box = observation.boundingBox
             // Vision's origin is the bottom left; the parser reads from the top left.
-            lines.append(RecognizedLine(text: text, box: CGRect(x: box.minX, y: 1 - box.maxY, width: box.width, height: box.height)))
+            lines.append(ReadLine(line: RecognizedLine(text: text, box: CGRect(x: box.minX, y: 1 - box.maxY, width: box.width, height: box.height)),
+                                  confidence: candidate.confidence))
         }
         return lines
     }

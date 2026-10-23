@@ -4,10 +4,50 @@ import SwiftUI
 enum HomeRoute: Hashable {
     case space(Space)
     case info
+    /// Kept for old links only (screenshot mode, saved paths): there is no page per category any more,
+    /// it opens the mini-app of the area (see `InfoArea.homeRoute`). New code uses `homeRoute`.
     case infoArea(InfoArea)
     /// A mini-app (Nutrition, Fitness…), and one of its detailed pages.
     case app(MiniApp)
     case page(MiniAppPage)
+}
+
+extension InfoArea {
+    /// The mini-app where this area's information is filled in (Studies and Habits live in Planning).
+    /// Nil for the areas without a mini-app: investments, listed companies, « Ma vie » and the general settings.
+    var miniApp: MiniApp? {
+        switch self {
+        case .nutrition: .nutrition
+        case .fitness: .fitness
+        case .habits, .productivity, .student: .planning
+        case .budget: .finances
+        case .business: .business
+        case .travel: .travel
+        case .car: .car
+        case .investing, .markets, .life, .general: nil
+        }
+    }
+
+    /// Where a tap on this area leads: its mini-app, else the data of its space, else « Mes informations »
+    /// (the general settings: city, calendar).
+    var homeRoute: HomeRoute {
+        if let miniApp { return .app(miniApp) }
+        if let space { return .space(space) }
+        return .info
+    }
+}
+
+extension AppModel {
+    /// Where « Complète tes informations » leads: the mini-app of the first area that still misses something
+    /// its « À remplir » block asks for (the person's interests come first), else « Mes informations » for
+    /// the general ones. A missing item no block shows (tasks, bills…) never picks a mini-app.
+    var firstMissingInfoRoute: HomeRoute {
+        let app = completion.missing.lazy.compactMap { item -> MiniApp? in
+            guard let app = item.area.miniApp, app.toFillItems.contains(item) else { return nil }
+            return app
+        }.first
+        return app.map { HomeRoute.app($0) } ?? .info
+    }
 }
 
 /// « Mon Quotidien »: the figures of the day as a dashboard of tiles, only for what the person
@@ -21,13 +61,13 @@ struct DailySection: View {
     var body: some View {
         let now = Date()
         let settings = model.settings
-        let brief = DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil))
-        let automatic = DailyCategories.adding(settings.dailyAdded, to: brief, model: model, now: now)
+        // Complete from the first launch: every category shows, as a dotted « Ajouter » card while it is empty.
+        let automatic = DailyCategories.home(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil)
         let tiles = DailyBrief.arranged(automatic, order: settings.dailyOrder, hidden: settings.dailyHidden)
         // Real figures entered by the person (invitations to fill in a category don't count).
         let hasData = automatic.contains { tile in
             switch tile {
-            case .invite, .miniApp(_, caption: nil): false
+            case .invite, .empty, .weather, .miniApp(_, caption: nil): false
             case let .priorities(items) where items.isEmpty: false
             default: true
             }
@@ -81,7 +121,7 @@ struct DailySection: View {
         .accessibilityIdentifier("daily-section")
         .task { await steps.refresh() }
         .sheet(isPresented: $editingLayout) {
-            DailyLayoutEditor(available: automatic.filter { if case .invite = $0 { false } else { true } })
+            DailyLayoutEditor(available: automatic)
         }
     }
 
@@ -95,7 +135,8 @@ struct DailySection: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            NavigationLink(value: HomeRoute.info) {
+            // The mini-app with something left to fill in (its « À remplir » block), else « Mes informations ».
+            NavigationLink(value: model.firstMissingInfoRoute) {
                 Text(tr("Ajouter mes informations"))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.onAccent)
@@ -157,6 +198,9 @@ private struct DailyTileView: View {
         case let .reminders(items): RemindersDayTile(items: items)
         case let .priorities(items): PrioritiesDayTile(items: items)
         case let .invite(area): InviteDayTile(area: area)
+        case let .empty(category):
+            InviteCard(title: category.title, symbol: category.symbol, colorHex: category.colorHex, text: category.invitation,
+                       route: category.route, identifier: "daily-empty-\(category.rawValue)")
         case let .miniApp(raw, caption):
             if let app = MiniApp(rawValue: raw) {
                 DayCard(title: app.title, symbol: app.symbol, colorHex: app.colorHex, route: .app(app)) {
@@ -1028,18 +1072,46 @@ private struct InviteDayTile: View {
     let area: InfoArea
 
     var body: some View {
-        NavigationLink(value: HomeRoute.infoArea(area)) {
+        InviteCard(title: area.title, symbol: area.symbol, colorHex: area.colorHex, text: invitation,
+                   route: area.homeRoute, identifier: "daily-invite-\(area.rawValue)")
+    }
+
+    private var invitation: String {
+        switch area {
+        case .nutrition: tr("Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici.")
+        case .fitness: tr("Crée ton programme : ta séance du jour apparaîtra ici.")
+        case .student: tr("Ajoute tes cours : ton horaire du jour apparaîtra ici.")
+        case .budget: tr("Donne ton budget du mois pour voir ce qu'il te reste chaque jour.")
+        case .habits: tr("Ajoute une habitude à suivre chaque jour.")
+        case .productivity: tr("Ajoute tes tâches ou ton top 3 du jour.")
+        default: area.items.first?.purpose ?? ""
+        }
+    }
+}
+
+/// The dotted card of a category with nothing entered yet: its icon, name and what will show here,
+/// « Ajouter » on the right; a tap opens the mini-app, where the missing information is filled in.
+private struct InviteCard: View {
+    let title: String
+    let symbol: String
+    let colorHex: String
+    let text: String
+    let route: HomeRoute
+    let identifier: String
+
+    var body: some View {
+        NavigationLink(value: route) {
             HStack(spacing: 12) {
-                Image(systemName: area.symbol)
+                Image(systemName: symbol)
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Color(hex: area.colorHex))
+                    .foregroundStyle(Color(hex: colorHex))
                     .frame(width: 34, height: 34)
-                    .background(Color(hex: area.colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .background(Color(hex: colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(area.title)
+                    Text(title)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.primary)
-                    Text(invitation)
+                    Text(text)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -1057,19 +1129,7 @@ private struct InviteDayTile: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.pressable)
-        .accessibilityIdentifier("daily-invite-\(area.rawValue)")
-    }
-
-    private var invitation: String {
-        switch area {
-        case .nutrition: tr("Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici.")
-        case .fitness: tr("Crée ton programme : ta séance du jour apparaîtra ici.")
-        case .student: tr("Ajoute tes cours : ton horaire du jour apparaîtra ici.")
-        case .budget: tr("Donne ton budget du mois pour voir ce qu'il te reste chaque jour.")
-        case .habits: tr("Ajoute une habitude à suivre chaque jour.")
-        case .productivity: tr("Ajoute tes tâches ou ton top 3 du jour.")
-        default: area.items.first?.purpose ?? ""
-        }
+        .accessibilityIdentifier(identifier)
     }
 }
 

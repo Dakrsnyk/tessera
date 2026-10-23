@@ -79,6 +79,7 @@ struct BoxedBlocksLayout: ScheduleLayout {
                 guard let content = BoxedBlocksLayout.content(of: cluster.lines), !content.title.isEmpty else { continue }
                 let center = Double(cluster.center)
                 var span: (start: Int, end: Int)? = nil
+                var estimated = false
                 if let outlines = outlines {
                     let enclosing = outlines.first { block in
                         let length = block.upperBound - block.lowerBound
@@ -96,10 +97,15 @@ struct BoxedBlocksLayout: ScheduleLayout {
                 if span == nil {
                     let heightMinutes = Double((cluster.bottom - cluster.top) / stepY) * Double(stepMinutes)
                     span = BoxedBlocksLayout.fit(centerMinute: minute(at: cluster.center), textMinutes: heightMinutes)
+                    estimated = true
                 }
                 if let found = span {
+                    // Hours from the middle of the text, not from the outline of the block: a guess.
+                    var uncertain: Set<SlotField> = []
+                    if estimated { uncertain.formUnion([.start, .end]) }
+                    if headers[column].fuzzy { uncertain.insert(.day) }
                     drafts.append(ScheduleParser.Draft(weekday: headers[column].day, start: found.start, end: found.end,
-                                                       title: content.title, room: content.room))
+                                                       title: content.title, room: content.room, uncertain: uncertain, coded: true))
                 }
             }
         }

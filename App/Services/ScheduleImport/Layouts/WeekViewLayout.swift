@@ -45,8 +45,9 @@ struct WeekViewLayout: ScheduleLayout {
                                                to: min(1, Double(points[points.count - 1].y + step)), marks: marks)
             }
             for (position, block) in blocks.enumerated() {
-                if let draft = WeekViewLayout.draft(block, top: tops[position], weekday: headers[column].day, points: points,
+                if var draft = WeekViewLayout.draft(block, top: tops[position], weekday: headers[column].day, points: points,
                                                     nextTop: position + 1 < tops.count ? tops[position + 1] : nil, runs: runs) {
+                    if headers[column].fuzzy { draft.uncertain.insert(.day) }
                     drafts.append(draft)
                 }
             }
@@ -59,17 +60,24 @@ struct WeekViewLayout: ScheduleLayout {
                               nextTop: CGFloat?, runs: [ClosedRange<Double>]?) -> ScheduleParser.Draft? {
         var time: ScheduleParser.TimeFound? = nil
         var room: String? = nil
+        var roomRepaired = false
         var titles: [String] = []
         for line in block {
             let info = ScheduleParser.analyze(line.text)
             if time == nil { time = info.time }
-            if room == nil { room = info.room }
+            if room == nil, let found = info.room {
+                room = found
+                roomRepaired = info.roomRepaired
+            }
             if !info.title.isEmpty { titles.append(info.title) }
         }
         let title = titles.prefix(2).joined(separator: " ")
         guard !title.isEmpty else { return nil }
+        var flags: Set<SlotField> = []
+        if room != nil, roomRepaired { flags.insert(.room) }
         if let time = time {
-            return ScheduleParser.Draft(weekday: weekday, start: time.start, end: time.end, title: title, room: room)
+            flags.formUnion(ScheduleParser.timeFlags(time))
+            return ScheduleParser.Draft(weekday: weekday, start: time.start, end: time.end, title: title, room: room, uncertain: flags)
         }
         guard let raw = minute(at: top, points: points) else { return nil }
         let start = snapped(raw, to: 15)
@@ -84,7 +92,7 @@ struct WeekViewLayout: ScheduleLayout {
                 if candidate - start >= 20, candidate - start <= 360 { end = candidate }
             }
         }
-        return ScheduleParser.Draft(weekday: weekday, start: start, end: end, title: title, room: room)
+        return ScheduleParser.Draft(weekday: weekday, start: start, end: end, title: title, room: room, uncertain: flags)
     }
 
     /// The minute at a height, interpolated (or extended) from the hour labels, which increase with the height.

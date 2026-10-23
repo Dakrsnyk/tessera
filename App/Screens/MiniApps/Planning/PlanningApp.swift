@@ -40,6 +40,7 @@ struct PlanningAppView: View {
             // 1. The only date selector of the screen, with room on the left for the hours of the table below it.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: mark, leadingInset: WeekTimetable.fullLeadingInset)
         } sheet: {
+            MiniAppToFillSection(app: .planning)
             // 2. The planning right under the selector: the week as a table (or the day, the month, the year).
             VStack(alignment: .leading, spacing: 18) {
                 PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)

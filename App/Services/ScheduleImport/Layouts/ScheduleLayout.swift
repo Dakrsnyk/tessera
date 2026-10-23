@@ -158,12 +158,14 @@ enum ScheduleLayouts {
         return found
     }
 
-    /// The slots with their "to check" mark: doubtful on their own, or all of them when the whole reading is poor.
+    /// The slots with their "to check" mark: doubtful on their own, with a field in doubt (a letter read as a digit, a guessed
+    /// end, a day matched by resemblance), or all of them when the whole reading is poor.
     private static func flagged(_ slots: [ImportedSlot], _ score: ScheduleScore, wholePage: Bool) -> [ImportedSlot] {
         var result = slots
         let poor = wholePage && score.quality < doubtfulQuality
         for index in result.indices {
-            result[index].needsCheck = poor || (index < score.doubtful.count && score.doubtful[index])
+            result[index].needsCheck = poor || !result[index].uncertain.isEmpty
+                || (index < score.doubtful.count && score.doubtful[index])
         }
         return result
     }

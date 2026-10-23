@@ -125,16 +125,20 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(label(of: "area-nutrition").contains("kcal"), "Objectif calorique absent")
         snapshot("info-after-onboarding")
 
-        // Changed once, changed everywhere.
+        // A theme opens its mini-app directly (no page « Tes données » per category any more).
         fitness.tap()
-        let weight = app.textFields["data-weight"]
-        XCTAssertTrue(weight.waitForExistence(timeout: 8))
-        weight.tap()
-        weight.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 4) + "78")
+        let settings = app.buttons["miniapp-settings-edit"]
+        var swipes = 0
+        while !settings.exists && swipes < 8 {
+            app.swipeUp()
+            swipes += 1
+        }
+        XCTAssertTrue(settings.waitForExistence(timeout: 8), "Fitness doit ouvrir directement la page de la mini-app")
+        XCTAssertFalse(app.buttons["area-more"].exists, "La page « Tes données » par catégorie n'existe plus")
         let back = app.navigationBars.buttons.allElementsBoundByIndex.first { $0.isHittable && $0.frame.minX < 60 }
         XCTAssertNotNil(back)
         back?.tap()
-        XCTAssertTrue(label(of: "area-fitness").contains("78 kg"))
+        XCTAssertTrue(label(of: "area-fitness").contains("80 kg"), "Revenir à Mes informations garde les valeurs")
     }
 
     func testSkippingEverythingShowsNothingMadeUp() {

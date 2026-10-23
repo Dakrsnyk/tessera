@@ -12,10 +12,13 @@ extension MiniApp {
         switch self {
         case .nutrition: [.nutrition]
         case .fitness: [.sport]
+        // Planning: no `.wellbeing`: its only question is « Une habitude à suivre » (a first habit to add), which the
+        // Habitudes page and the « À remplir » card already offer.
         case .planning: [.productivity, .studies]
-        // Finances: no « Chaque mois » nor « Tes principales dépenses » here (2026-10-17): the budget is set on
-        // the page, the fixed expenses have their own row; they stay in « Mes informations ».
-        case .finances: []
+        // Finances: the money questions (income, budget, savings aim, main expenses) have no other home since the
+        // « Tes données » page by category was removed (2026-10-23). The fixed expenses keep their own row on the page
+        // (`settingsItems`), not repeated here.
+        case .finances: [.money]
         case .business: [.business]
         case .travel: []
         case .car: [.car]
