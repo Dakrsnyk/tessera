@@ -12,14 +12,31 @@ struct ImportedSlot: Identifiable, Hashable {
     var title: String
     var room: String? = nil
     var isSelected = true
+    /// The reading of this class is doubtful (odd hours, overlap, noisy name, or a page read with little confidence):
+    /// the check screen highlights it. Kept last so every memberwise call that does not know it still compiles.
+    var needsCheck = false
 }
 
 /// Looks at the colours of the image along a vertical line, to tell the blocks that hold a class (lighter)
 /// from the empty cells of a timetable grid. Kept as a protocol so the parser stays pure and testable.
 protocol BlockProbe {
-    /// The vertical stretches (0...1, origin at the top) of "block" colour along the line at `x`, between
-    /// `fromY` and `toY`; nil when blocks cannot be told from empty cells.
+    /// The vertical stretches (0...1, origin at the top) of the LIGHTER kind of cell along the line at `x`, between
+    /// `fromY` and `toY` (the white blocks of Omnivox, a block lighter than a dark background); nil when the two kinds
+    /// of cell cannot be told apart.
     func blockRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]?
+    /// The stretches of the DARKER kind of cell (a coloured block on a white page, a block darker than its background).
+    /// Which of the two kinds holds the text is decided by the parser, from where the text is.
+    func darkRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]?
+    /// For timetables whose blocks are white rectangles drawn with a thick black outline on a white page (the colours of
+    /// the cells tell nothing): the stretches between two consecutive thick horizontal lines. The empty stretches between
+    /// blocks are included; the parser keeps the ones that hold the text of a class.
+    func framedRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]?
+}
+
+extension BlockProbe {
+    /// A probe that only knows the lighter kind (the default) gives nothing for the darker one, nor for outlines.
+    func darkRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? { nil }
+    func framedRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? { nil }
 }
 
 /// One line of text read from an image, with its place on the page.
@@ -31,7 +48,9 @@ struct RecognizedLine: Equatable {
 
 /// Turns the lines of text read from a timetable into classes. Pure logic (no Vision, no UIKit), so it is
 /// tested without an image. Everything is approximate on purpose: the person checks the result before it
-/// is saved. Two layouts are understood: a grid with the days as columns, and a day-by-day list.
+/// is saved. Many layouts are understood (see `Layouts/`): the grids with the days as columns (a school grid with
+/// periods, a calendar week view, an Omnivox page), the transposed grid with the days as rows, and the lists
+/// (day by day, tables, university exports). `ScheduleLayouts` tries them and keeps the best reading.
 enum ScheduleParser {
 
     // MARK: Entry points
@@ -44,23 +63,18 @@ enum ScheduleParser {
     /// The classes found on ONE page. Never fails: unreadable input gives an empty list. The probe (when the
     /// image is known) tells where the blocks of a timetable start and stop; without it their height is guessed.
     static func slots(from lines: [RecognizedLine], probe: BlockProbe?) -> [ImportedSlot] {
+        slots(from: lines, probe: probe, aspect: ScheduleLayouts.defaultAspect)
+    }
+
+    /// Same, with the height over the width of the page (the photo may be slightly tilted: the tilt is measured
+    /// on the row of day names and the lines are straightened with this ratio).
+    static func slots(from lines: [RecognizedLine], probe: BlockProbe?, aspect: Double) -> [ImportedSlot] {
         var cleaned: [RecognizedLine] = []
         for line in lines {
             if let kept = cleanedLine(line) { cleaned.append(kept) }
         }
         guard !cleaned.isEmpty else { return [] }
-        var drafts: [Draft] = []
-        if let grid = detectGrid(in: cleaned) {
-            // A grid with a pair of hours per row (Omnivox...): the classes come from the grid only, never from the list.
-            if let timetable = timetableDrafts(cleaned, grid, probe: probe) {
-                return finalize(timetable)
-            }
-            drafts = gridDrafts(cleaned, grid)
-        }
-        if drafts.isEmpty {
-            drafts = listDrafts(cleaned)
-        }
-        return finalize(drafts)
+        return ScheduleLayouts.read(cleaned, probe: probe, aspect: aspect)
     }
 
     /// Removes identical classes (same day, hours and title), keeping a room when one copy has it, and sorts
@@ -110,6 +124,8 @@ enum ScheduleParser {
         var time: TimeFound?
         var title: String
         var room: String?
+        /// The other ranges of the same text ("9h-12h / 13h-17h"): the class is repeated at each of them.
+        var extraTimes: [TimeFound] = []
     }
 
     struct DayCandidate {
@@ -180,6 +196,18 @@ enum ScheduleParser {
                                         options: [.caseInsensitive])
     }()
 
+    /// "8.30-10.00" (the Italian way): two hours with two-digit minutes. Groups: 1 and 2 the start, 3 and 4 the end.
+    static let dotRangeRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![\d:.,/])(?<![A-Za-z])(\d{1,2})\.(\d{2})\s?-\s?(\d{1,2})\.(\d{2})(?![\d.:])"#, options: [])
+
+    /// "08:00 10:00": the start and the end in two columns of a table, side by side. Groups as above.
+    static let pairRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![\d:.,/])(?<![A-Za-z])(\d{1,2})\s?[:hH]\s?(\d{2})\s+(\d{1,2})\s?[:hH]\s?(\d{2})(?![\d:])"#, options: [])
+
+    /// "8h 10h", "8h30 10h": the same with the "h" form, minutes optional. Groups: 1 hour, 2 minutes, 3 hour, 4 minutes.
+    static let pairHourRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![\d:.,/])(?<![A-Za-z])(\d{1,2})\s?[hH]\s?(\d{2})?\s+(\d{1,2})\s?[hH]\s?(\d{2})?(?![\d:A-Za-z])"#, options: [])
+
     /// A single time with a marker or am/pm: "8h30", "8 h", "08:30", "8:30 AM", "10 PM". Groups: 1 hour,
     /// 2 marker, 3 minutes, 4 am/pm after a marker, 5 am/pm alone.
     static let singleRegex: NSRegularExpression? = {
@@ -194,7 +222,7 @@ enum ScheduleParser {
 
     /// "Salle B-204", "Local 3.12", "Room 5", "Amphi A". The word alone is not enough: a number or one capital letter must follow.
     static let prefixedRoomRegex: NSRegularExpression? = try? NSRegularExpression(
-        pattern: #"(?:^|[\s(@,;|-])((?:salle|local|room|raum|aula|sala|stanza|labo|lab|amphi|amphitheatre|amphithéâtre|classe|class|pièce|piece)\.?\s*[:#]?\s*(?:[A-Za-z0-9.\-/]*\d[A-Za-z0-9.\-/]*|(?-i:[A-Z])(?![A-Za-z]))(?:\s\d{1,4}[A-Za-z]?)?)"#,
+        pattern: #"(?:^|[\s(@,;|-])((?:salle|local|room|rm|raum|aula|sala|stanza|labo|lab|amphi|amphitheatre|amphithéâtre|classe|class|pièce|piece)\.?\s*[:#]?\s*(?:[A-Za-z0-9.\-/]*\d[A-Za-z0-9.\-/]*|(?-i:[A-Z])(?![A-Za-z]))(?:\s\d{1,4}[A-Za-z]?)?)"#,
         options: [.caseInsensitive])
 
     /// "B-204", "B204", "AB 12" (one or two capitals then two to four digits).
@@ -248,6 +276,29 @@ enum ScheduleParser {
                                                atStart: atStart) {
                     return TimeFound(start: resolved.start, end: resolved.end, range: match.range)
                 }
+            }
+        }
+        if let regex = dotRangeRegex {
+            for match in regex.matches(in: text, options: [], range: full) {
+                guard let h1 = Int(group(match, 1, in: ns) ?? ""), let m1 = Int(group(match, 2, in: ns) ?? ""),
+                      let h2 = Int(group(match, 3, in: ns) ?? ""), let m2 = Int(group(match, 4, in: ns) ?? "") else { continue }
+                // "8.30-10.00" only: a morning or afternoon hour, minutes that exist, a lesson of at most 6 hours.
+                guard (6...22).contains(h1), h2 <= 23, m1 < 60, m2 < 60 else { continue }
+                let start = h1 * 60 + m1
+                let end = h2 * 60 + m2
+                if end > start, end - start <= 360 { return TimeFound(start: start, end: end, range: match.range) }
+            }
+        }
+        for pairs in [pairRegex, pairHourRegex] {
+            guard let regex = pairs else { continue }
+            for match in regex.matches(in: text, options: [], range: full) {
+                guard let h1 = Int(group(match, 1, in: ns) ?? ""), let h2 = Int(group(match, 3, in: ns) ?? "") else { continue }
+                let m1 = Int(group(match, 2, in: ns) ?? "0") ?? 0
+                let m2 = Int(group(match, 4, in: ns) ?? "0") ?? 0
+                guard h1 < 24, h2 < 24, m1 < 60, m2 < 60 else { continue }
+                let start = h1 * 60 + m1
+                let end = h2 * 60 + m2
+                if end > start, end - start <= 720, start >= 300 { return TimeFound(start: start, end: end, range: match.range) }
             }
         }
         if let regex = singleRegex {
@@ -320,12 +371,34 @@ enum ScheduleParser {
         return ns.replacingCharacters(in: removal, with: " ")
     }
 
-    /// The time when the text holds nothing else (a row label of a grid: "8h", "8h-9h", "8:00 AM").
+    /// The time when the text holds nothing else (a row label of a grid: "8h", "8h-9h", "8:00 AM") or only the name of
+    /// the period it belongs to ("Période 1 8:15-9:05", "1re heure 8h-9h", "3. Stunde 9:55-10:40", "1限 9:00-10:30").
     static func timeOnly(_ text: String) -> TimeFound? {
         guard let found = findTime(in: text) else { return nil }
         let rest = removing(found.range, from: text)
-        if rest.contains(where: { $0.isLetter }) { return nil }
+        if rest.contains(where: { $0.isLetter }) {
+            let list = words(of: rest)
+            guard !list.isEmpty, list.allSatisfy({ isLabelToken($0) }) else { return nil }
+        }
         return found
+    }
+
+    /// Words that name a period in the margin of a grid (together with its number).
+    static let labelWords: Set<String> = [
+        "periode", "period", "per", "p", "heure", "heures", "hour", "hours", "stunde", "std", "lesson", "cours", "class",
+        "clase", "hora", "ora", "lecon", "limit", "tranche", "creneau", "slot", "h"
+    ]
+
+    static let labelTokenRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"^(?:\d{1,2}(?:re|er|e|eme|ere|st|nd|rd|th|a|o|ª|º|°)|[a-z]{1,2}\d{1,2})$"#, options: [])
+
+    /// "1", "p1", "1re", "heure", "1限": a piece of a period label.
+    static func isLabelToken(_ token: String) -> Bool {
+        if !token.isEmpty, token.allSatisfy({ $0.isNumber }) { return true }
+        if labelWords.contains(token) { return true }
+        if token.contains("限") || token.contains("時間目") || token.contains("第") { return true }
+        guard let regex = labelTokenRegex else { return false }
+        return regex.firstMatch(in: token, options: [], range: NSRange(location: 0, length: (token as NSString).length)) != nil
     }
 
     // MARK: Text of a class
@@ -413,29 +486,73 @@ enum ScheduleParser {
         return String(text.prefix(60))
     }
 
+    /// All the ranges of a text ("9h-12h / 13h-17h" gives two) and the text without them. A start alone is only
+    /// taken when the text holds no range.
+    static func findTimes(in text: String) -> (times: [TimeFound], rest: String) {
+        guard let first = findTime(in: text) else { return ([], text) }
+        var times = [first]
+        var rest = removing(first.range, from: text)
+        if first.end != nil {
+            while let next = findTime(in: rest), next.end != nil {
+                times.append(next)
+                rest = removing(next.range, from: rest)
+            }
+        }
+        return (times, rest)
+    }
+
+    /// "Dupont J.", "Durand M. A.", "J. Dupont": a person written without a title (the initial ends with a full stop,
+    /// so "Groupe A" is not one).
+    static let personTailRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"^\p{L}[\p{L}'’-]+(?:\s\p{L}\.){1,2}$"#, options: [])
+    static let personHeadRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"^\p{L}\.\s?\p{L}[\p{L}'’-]+$"#, options: [])
+
+    static func isPersonName(_ part: String) -> Bool {
+        guard let first = part.first, first.isUppercase else { return false }
+        let range = NSRange(location: 0, length: (part as NSString).length)
+        if let regex = personTailRegex, regex.firstMatch(in: part, options: [], range: range) != nil { return true }
+        if let regex = personHeadRegex, regex.firstMatch(in: part, options: [], range: range) != nil { return true }
+        return false
+    }
+
+    /// "CM Analyse - Dupont J." keeps "CM Analyse": the pieces cut by " - ", " / " or " | " that name a teacher are dropped
+    /// (a title word like "Prof." or a bare name after the first piece). A text of a single piece is left alone.
+    static func dropTeacherParts(_ raw: String) -> String {
+        let title = raw.split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
+        let parts = title.components(separatedBy: " - ").flatMap { $0.components(separatedBy: " / ") }
+            .flatMap { $0.components(separatedBy: " | ") }
+        guard parts.count >= 2 else { return title }
+        var kept: [String] = []
+        for (index, part) in parts.enumerated() {
+            if isTeacher(part) || (index > 0 && isPersonName(part)) { continue }
+            kept.append(part)
+        }
+        return kept.isEmpty ? title : kept.joined(separator: " ")
+    }
+
     /// Time, room and title of a piece of text. Noise (page numbers, "generated on ...") gives nothing.
     static func analyze(_ text: String) -> Analysis {
-        var rest = text
-        let found = findTime(in: rest)
-        if let found = found { rest = removing(found.range, from: rest) }
-        if isNoise(rest) { return Analysis(time: nil, title: "", room: nil) }
-        let split = extractRoom(from: rest)
-        var title = cleanTitle(split.text)
+        let split = findTimes(in: text)
+        let found = split.times.first
+        if isNoise(split.rest) { return Analysis(time: nil, title: "", room: nil) }
+        let placed = extractRoom(from: split.rest)
+        var title = cleanTitle(dropTeacherParts(placed.text))
         if isTeacher(title) { title = "" }
-        return Analysis(time: found, title: title, room: split.room)
+        return Analysis(time: found, title: title, room: placed.room, extraTimes: Array(split.times.dropFirst()))
     }
 
     // MARK: Day names
 
     static let strongDays: [String: Int] = {
         let table: [(Int, [String])] = [
-            (1, ["lun", "lundi", "lunedi", "lunes", "montag", "mon", "monday", "segunda", "seg", "月曜日", "月曜"]),
-            (2, ["mar", "mardi", "martedi", "martes", "dienstag", "tue", "tues", "tuesday", "terca", "ter", "火曜日", "火曜"]),
-            (3, ["mer", "mercredi", "mercoledi", "miercoles", "mie", "mittwoch", "wed", "weds", "wednesday", "quarta", "qua", "水曜日", "水曜"]),
-            (4, ["jeu", "jeudi", "giovedi", "jueves", "jue", "donnerstag", "thu", "thur", "thurs", "thursday", "gio", "quinta", "qui", "木曜日", "木曜"]),
-            (5, ["ven", "vendredi", "venerdi", "viernes", "vie", "freitag", "fri", "friday", "sexta", "sex", "金曜日", "金曜"]),
-            (6, ["sam", "samedi", "sabato", "sabado", "sab", "samstag", "sonnabend", "sat", "saturday", "土曜日", "土曜"]),
-            (7, ["dim", "dimanche", "domenica", "domingo", "dom", "sonntag", "sun", "sunday", "日曜日", "日曜"])
+            (1, ["lun", "lundi", "lunedi", "lunes", "montag", "mon", "monday", "segunda", "seg", "月曜日", "月曜", "星期一", "周一", "週一", "礼拜一", "월요일"]),
+            (2, ["mar", "mardi", "martedi", "martes", "dienstag", "tue", "tues", "tuesday", "terca", "ter", "火曜日", "火曜", "星期二", "周二", "週二", "礼拜二", "화요일"]),
+            (3, ["mer", "mercredi", "mercoledi", "miercoles", "mie", "mittwoch", "wed", "weds", "wednesday", "quarta", "qua", "水曜日", "水曜", "星期三", "周三", "週三", "礼拜三", "수요일"]),
+            (4, ["jeu", "jeudi", "giovedi", "jueves", "jue", "donnerstag", "thu", "thur", "thurs", "thursday", "gio", "quinta", "qui", "木曜日", "木曜", "星期四", "周四", "週四", "礼拜四", "목요일"]),
+            (5, ["ven", "vendredi", "venerdi", "viernes", "vie", "freitag", "fri", "friday", "sexta", "sex", "金曜日", "金曜", "星期五", "周五", "週五", "礼拜五", "금요일"]),
+            (6, ["sam", "samedi", "sabato", "sabado", "sab", "samstag", "sonnabend", "sat", "saturday", "土曜日", "土曜", "星期六", "周六", "週六", "礼拜六", "토요일"]),
+            (7, ["dim", "dimanche", "domenica", "domingo", "dom", "sonntag", "sun", "sunday", "日曜日", "日曜", "星期日", "星期天", "周日", "周天", "週日", "礼拜日", "일요일"])
         ]
         var map: [String: Int] = [:]
         for (day, names) in table {
@@ -447,13 +564,13 @@ enum ScheduleParser {
     /// Two-letter forms and single kanji: only trusted in a header row with several days.
     static let weakDays: [String: Int] = {
         let table: [(Int, [String])] = [
-            (1, ["mo", "lu", "月"]),
-            (2, ["di", "ma", "tu", "火"]),
-            (3, ["mi", "me", "we", "水"]),
-            (4, ["th", "je", "gi", "ju", "木"]),
-            (5, ["fr", "ve", "vi", "金"]),
-            (6, ["sa", "土"]),
-            (7, ["so", "su", "日"])
+            (1, ["mo", "lu", "月", "월"]),
+            (2, ["di", "ma", "tu", "火", "화"]),
+            (3, ["mi", "me", "we", "水", "수"]),
+            (4, ["th", "je", "gi", "ju", "木", "목"]),
+            (5, ["fr", "ve", "vi", "金", "금"]),
+            (6, ["sa", "土", "토"]),
+            (7, ["so", "su", "日", "일"])
         ]
         var map: [String: Int] = [:]
         for (day, names) in table {
@@ -462,7 +579,7 @@ enum ScheduleParser {
         return map
     }()
 
-    static let cjkDayCharacters: String = "月火水木金土日"
+    static let cjkDayCharacters: String = "月火水木金土日월화수목금토일"
 
     static let germanOnlyKeys: Set<String> = ["di", "fr", "so"]
 
@@ -500,7 +617,7 @@ enum ScheduleParser {
     }
 
     static func strongDay(_ word: String) -> Int? {
-        strongDays[normalizedToken(word)]
+        strongDays[dayKey(word)]
     }
 
     /// Whether what follows a day name is only a date ("12 octobre", "Oct 12th") and not a course.
@@ -586,28 +703,39 @@ enum ScheduleParser {
     static func dayCandidates(line: RecognizedLine, index: Int) -> [DayCandidate] {
         var text = line.text.replacingOccurrences(of: #"\d{1,2}\s?[月日]"#, with: " ", options: .regularExpression)
         text = text.replacingOccurrences(of: "-feira", with: "", options: .caseInsensitive)
-        let tokens = headerTokens(text)
+        let tokens = headerTokens(text).filter { !isMonthWord($0.token) }
         guard !tokens.isEmpty, tokens.count <= 8 else { return [] }
         var found: [DayCandidate] = []
         func candidate(_ day: Int, _ key: String, _ strong: Bool, _ fraction: Double) -> DayCandidate {
             DayCandidate(day: day, key: key, strong: strong, x: line.box.minX + CGFloat(fraction) * line.box.width,
                          y: line.box.midY, bottom: line.box.maxY, line: index)
         }
-        for token in tokens {
-            let key = normalizedToken(token.token)
-            let middle = (token.from + token.to) / 2
+        // "L M M J V" (the initials of a week): five to seven single letters in a known order.
+        if (5...7).contains(tokens.count), tokens.allSatisfy({ $0.token.count == 1 && ($0.token.first?.isLetter ?? false) }),
+           let days = initialsDays(tokens.map { $0.token }) {
+            return zip(days, tokens).map { pair in
+                candidate(pair.0, pair.1.token.lowercased(), false, (pair.1.from + pair.1.to) / 2)
+            }
+        }
+        let hasDigits = text.contains(where: { $0.isNumber })
+        for (position, token) in tokens.enumerated() {
+            let key = dayKey(token.token)
+            var middle = (token.from + token.to) / 2
+            if hasDigits {
+                // "lun. 21 mar. 22": a cell is the day name with its date, up to the next day name.
+                let next = position + 1 < tokens.count ? tokens[position + 1].from : 1.0
+                middle = tokens.count > 1 ? (token.from + next) / 2 : 0.5
+            }
             if let day = strongDays[key] {
                 found.append(candidate(day, key, true, middle))
             } else if key == "do" {
                 found.append(candidate(7, key, false, middle))
             } else if let day = weakDays[key] {
                 found.append(candidate(day, key, false, middle))
-            } else if key.count >= 2, key.allSatisfy({ cjkDayCharacters.contains($0) }) {
-                let characters = Array(key)
-                for (position, character) in characters.enumerated() {
-                    guard let day = weakDays[String(character)] else { return [] }
-                    let fraction = token.from + (token.to - token.from) * (Double(position) + 0.5) / Double(characters.count)
-                    found.append(candidate(day, String(character), false, fraction))
+            } else if key.count >= 2, let sequence = cjkSequence(key) {
+                for item in sequence {
+                    let fraction = token.from + (token.to - token.from) * (item.from + item.to) / 2
+                    found.append(candidate(item.day, "cjk", false, fraction))
                 }
             } else {
                 return []
@@ -616,13 +744,110 @@ enum ScheduleParser {
         return found
     }
 
-    /// The row of day names that heads the columns, if the page is a grid.
-    static func detectGrid(in lines: [RecognizedLine]) -> Grid? {
+    /// A month written after a day and its date ("Lun. 26 août"): not a word that cancels the header.
+    static func isMonthWord(_ token: String) -> Bool {
+        let key = normalizedToken(token)
+        guard key.count >= 3, key.allSatisfy({ $0.isLetter }), monthPrefixes.contains(String(key.prefix(3))) else { return false }
+        return strongDays[key] == nil && weakDays[key] == nil
+    }
+
+    /// The key of a header word in the day tables: folded ("Lundi" -> "lundi"), or as written for the scripts that
+    /// folding could change.
+    static func dayKey(_ raw: String) -> String {
+        let folded = normalizedToken(raw)
+        if strongDays[folded] != nil || weakDays[folded] != nil { return folded }
+        let plain = raw.trimmingCharacters(in: CharacterSet(charactersIn: ".,:;()[]{}\"'"))
+        if strongDays[plain] != nil || weakDays[plain] != nil { return plain }
+        return folded
+    }
+
+    static let zhDigits: [Character: Int] = ["一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "日": 7, "天": 7]
+    static let cjkPrefixes: [String] = ["星期", "礼拜", "禮拜", "周", "週"]
+
+    /// A run of day characters without spaces ("月火水木金", "周一周二周三", "월화수목금"): each day with its place (0...1)
+    /// in the word. nil when a character is not a day.
+    static func cjkSequence(_ key: String) -> [(day: Int, from: Double, to: Double)]? {
+        let characters = Array(key)
+        let count = characters.count
+        var result: [(day: Int, from: Double, to: Double)] = []
+        var index = 0
+        while index < count {
+            var day: Int? = nil
+            var next = index + 1
+            for prefix in cjkPrefixes {
+                let length = prefix.count
+                if index + length < count, String(characters[index..<(index + length)]) == prefix,
+                   let digit = zhDigits[characters[index + length]] {
+                    day = digit
+                    next = index + length + 1
+                    break
+                }
+            }
+            if day == nil {
+                guard cjkDayCharacters.contains(characters[index]), let single = weakDays[String(characters[index])] else { return nil }
+                day = single
+            }
+            guard let found = day else { return nil }
+            result.append((day: found, from: Double(index) / Double(count), to: Double(next) / Double(count)))
+            index = next
+        }
+        return result.isEmpty ? nil : result
+    }
+
+    /// Initials of the days in a week header, with the days they stand for (Monday first, or Sunday first for "S M T W T F S").
+    static let initialsSequences: [(letters: String, days: [Int])] = [
+        ("MTWTFSS", [1, 2, 3, 4, 5, 6, 7]), ("LMMJVSD", [1, 2, 3, 4, 5, 6, 7]), ("LMXJVSD", [1, 2, 3, 4, 5, 6, 7]),
+        ("MDMDFSS", [1, 2, 3, 4, 5, 6, 7]), ("LMMGVSD", [1, 2, 3, 4, 5, 6, 7]),
+        ("SMTWTFS", [7, 1, 2, 3, 4, 5, 6]), ("DLMMJVS", [7, 1, 2, 3, 4, 5, 6])
+    ]
+
+    static func initialsDays(_ letters: [String]) -> [Int]? {
+        let joined = letters.joined().uppercased()
+        let count = letters.count
+        for sequence in initialsSequences {
+            if count == 7, joined == sequence.letters { return sequence.days }
+            if (5...6).contains(count), sequence.days[0] == 1, sequence.letters.hasPrefix(joined) {
+                return Array(sequence.days.prefix(count))
+            }
+        }
+        return nil
+    }
+
+    /// The initials of a week when each letter is a line of its own, side by side ("L" "M" "M" "J" "V").
+    static func initialsFromSeparateLines(_ lines: [RecognizedLine]) -> [DayCandidate] {
+        var singles: [(index: Int, line: RecognizedLine)] = []
+        for (index, line) in lines.enumerated() where line.text.count == 1 && (line.text.first?.isLetter ?? false) {
+            singles.append((index: index, line: line))
+        }
+        singles.sort { $0.line.box.midY < $1.line.box.midY }
+        var groups: [[(index: Int, line: RecognizedLine)]] = []
+        for single in singles {
+            if let first = groups.last?.first, abs(single.line.box.midY - first.line.box.midY) <= 0.02 {
+                groups[groups.count - 1].append(single)
+            } else {
+                groups.append([single])
+            }
+        }
+        var result: [DayCandidate] = []
+        for group in groups where (5...7).contains(group.count) {
+            let ordered = group.sorted { $0.line.box.midX < $1.line.box.midX }
+            guard let days = initialsDays(ordered.map { $0.line.text }) else { continue }
+            for (day, single) in zip(days, ordered) {
+                result.append(DayCandidate(day: day, key: single.line.text.lowercased(), strong: false, x: single.line.box.midX,
+                                           y: single.line.box.midY, bottom: single.line.box.maxY, line: single.index))
+            }
+        }
+        return result
+    }
+
+    /// Every row of day names of the page (at least two days, three unless one is unmistakable), top to bottom.
+    static func allGrids(in lines: [RecognizedLine]) -> [Grid] {
         var all: [DayCandidate] = []
         for (index, line) in lines.enumerated() {
             all.append(contentsOf: dayCandidates(line: line, index: index))
         }
-        guard all.count >= 2 else { return nil }
+        all.append(contentsOf: initialsFromSeparateLines(lines))
+        guard all.count >= 2 else { return [] }
         all.sort { $0.y < $1.y }
         var groups: [[DayCandidate]] = []
         for candidate in all {
@@ -632,7 +857,7 @@ enum ScheduleParser {
                 groups.append([candidate])
             }
         }
-        var best: Grid? = nil
+        var result: [Grid] = []
         for group in groups where group.count >= 2 {
             // "Do" is Thursday in German, Sunday in the other languages.
             let german = group.contains { germanOnlyKeys.contains($0.key) }
@@ -650,10 +875,19 @@ enum ScheduleParser {
             }
             let strongCount = kept.filter { $0.strong }.count
             guard kept.count >= 3 || (kept.count == 2 && strongCount >= 1) else { continue }
-            if let current = best, current.headers.count >= kept.count { continue }
-            best = Grid(headers: kept,
-                        lineIndexes: Set(group.map { $0.line }),
-                        bandBottom: group.map { $0.bottom }.max() ?? 0)
+            result.append(Grid(headers: kept,
+                               lineIndexes: Set(group.map { $0.line }),
+                               bandBottom: group.map { $0.bottom }.max() ?? 0))
+        }
+        return result
+    }
+
+    /// The row of day names that heads the columns, if the page is a grid (the one with the most days).
+    static func detectGrid(in lines: [RecognizedLine]) -> Grid? {
+        var best: Grid? = nil
+        for candidate in allGrids(in: lines) {
+            if let current = best, current.headers.count >= candidate.headers.count { continue }
+            best = candidate
         }
         return best
     }
@@ -1110,17 +1344,29 @@ enum ScheduleParser {
     /// The stretches that most of the probes agree on along the left edge of a column, or nil when none can tell.
     /// The probes are a few pixels apart: the border of the cell, a letter or the neighbour column spoil a few of
     /// them, not most.
-    static func columnRuns(_ probe: BlockProbe, left: CGFloat, from: Double, to: Double) -> [ClosedRange<Double>]? {
+    /// Which stretches a probe is asked for.
+    enum RunKind { case lighter, darker, framed }
+
+    static func columnRuns(_ probe: BlockProbe, left: CGFloat, from: Double, to: Double, kind: RunKind = .lighter) -> [ClosedRange<Double>]? {
         var lists: [[ClosedRange<Double>]] = []
         for offset in probeOffsets {
             let x = Double(left) + offset
-            guard x >= 0, x < 1, let runs = probe.blockRuns(atX: x, fromY: from, toY: to) else { continue }
+            guard x >= 0, x < 1 else { continue }
+            let found: [ClosedRange<Double>]?
+            switch kind {
+            case .lighter: found = probe.blockRuns(atX: x, fromY: from, toY: to)
+            case .darker: found = probe.darkRuns(atX: x, fromY: from, toY: to)
+            case .framed: found = probe.framedRuns(atX: x, fromY: from, toY: to)
+            }
+            guard let runs = found else { continue }
             lists.append(runs)
         }
         guard !lists.isEmpty else { return nil }
+        // Blocks stuck together by a shared outline stay apart: the stretches touch, and are not joined.
+        let touching = kind == .framed
         var merged: [ClosedRange<Double>] = []
-        for run in majorityRuns(lists) {
-            if let last = merged.last, run.lowerBound - last.upperBound <= closedHole {
+        for run in majorityRuns(lists, endsFirst: touching) {
+            if !touching, let last = merged.last, run.lowerBound - last.upperBound <= closedHole {
                 merged[merged.count - 1] = last.lowerBound...max(last.upperBound, run.upperBound)
             } else {
                 merged.append(run)
@@ -1129,8 +1375,24 @@ enum ScheduleParser {
         return merged
     }
 
+    /// The stretches of the kind of cell that holds the text: the lighter ones (Omnivox: white blocks on grey cells) or the
+    /// darker ones (a coloured block on a white page, a dark-mode screenshot), whichever contains more of the `marks`
+    /// (heights where text sits, 0...1). The lighter ones win a tie; nil when the probe tells nothing.
+    static func bestRuns(_ probe: BlockProbe, left: CGFloat, from: Double, to: Double, marks: [Double]) -> [ClosedRange<Double>]? {
+        let light = columnRuns(probe, left: left, from: from, to: to)
+        let dark = columnRuns(probe, left: left, from: from, to: to, kind: .darker)
+        func covered(_ runs: [ClosedRange<Double>]?) -> Int {
+            guard let runs = runs else { return 0 }
+            return marks.filter { mark in runs.contains { $0.contains(mark) } }.count
+        }
+        let darkCount = covered(dark)
+        if darkCount > covered(light), darkCount * 10 >= marks.count * 6 { return dark }
+        return light
+    }
+
     /// The stretches covered by more than half of the lists.
-    static func majorityRuns(_ lists: [[ClosedRange<Double>]]) -> [ClosedRange<Double>] {
+    /// With `endsFirst`, a stretch that ends where the next one begins ends before it: they stay two stretches.
+    static func majorityRuns(_ lists: [[ClosedRange<Double>]], endsFirst: Bool = false) -> [ClosedRange<Double>] {
         let needed = lists.count / 2 + 1
         var events: [(y: Double, change: Int)] = []
         for list in lists {
@@ -1139,7 +1401,7 @@ enum ScheduleParser {
                 events.append((y: run.upperBound, change: -1))
             }
         }
-        events.sort { a, b in a.y != b.y ? a.y < b.y : a.change > b.change }
+        events.sort { a, b in a.y != b.y ? a.y < b.y : (endsFirst ? a.change < b.change : a.change > b.change) }
         var result: [ClosedRange<Double>] = []
         var count = 0
         var start: Double? = nil
@@ -1191,7 +1453,8 @@ enum ScheduleParser {
         var drafts: [Draft] = []
         for (column, columnLines) in columns.enumerated() where !columnLines.isEmpty {
             let clusters = textClusters(columnLines)
-            let runs = probe.flatMap { columnRuns($0, left: edges[column], from: fromY, to: toY) }
+            let marks = clusters.map { Double($0.center) }
+            let runs = probe.flatMap { bestRuns($0, left: edges[column], from: fromY, to: toY, marks: marks) }
             for (index, cluster) in clusters.enumerated() {
                 guard let content = blockContent(cluster.lines) else { continue }
                 let span = blockRows(clusters, index, runs: runs, timeline: timeline)
@@ -1283,8 +1546,11 @@ enum ScheduleParser {
                 let room = info.room ?? (info.title.isEmpty ? pendingRoom : nil)
                 recent = []
                 for day in days {
-                    recent.append(drafts.count)
-                    drafts.append(Draft(weekday: day, start: time.start, end: time.end, title: title, room: room))
+                    // "9h-12h / 13h-17h": the same class at each range of the row.
+                    for each in [time] + info.extraTimes {
+                        recent.append(drafts.count)
+                        drafts.append(Draft(weekday: day, start: each.start, end: each.end, title: title, room: room))
+                    }
                 }
                 awaiting = title.isEmpty
                 pendingTitle = nil
@@ -1324,15 +1590,30 @@ enum ScheduleParser {
             let middle = lengths[lengths.count / 2]
             usual = min(max(((middle + 2) / 5) * 5, 30), 180)
         }
-        var slots: [ImportedSlot] = []
+        var kept: [(draft: Draft, title: String)] = []
+        var startsOfDay: [Int: [Int]] = [:]
         for draft in drafts {
             guard (1...7).contains(draft.weekday), (0..<1440).contains(draft.start) else { continue }
             let title = cleanTitle(draft.title)
             guard !title.isEmpty, !isBreak(title) else { continue }
-            let end = min(draft.end ?? (draft.start + usual), 1440)
+            kept.append((draft: draft, title: title))
+            startsOfDay[draft.weekday, default: []].append(draft.start)
+        }
+        var slots: [ImportedSlot] = []
+        for item in kept {
+            let draft = item.draft
+            var end = draft.end ?? (draft.start + usual)
+            if draft.end == nil,
+               let next = (startsOfDay[draft.weekday] ?? []).filter({ $0 > draft.start }).min(),
+               next < end, next - draft.start >= 20 {
+                // Only a start is written ("8h30 Maths", "10h Physique"): the class ends when the next one begins,
+                // when that comes before the usual length.
+                end = next
+            }
+            end = min(end, 1440)
             guard end > draft.start else { continue }
             slots.append(ImportedSlot(weekday: draft.weekday, startMinute: draft.start, endMinute: end,
-                                      title: title, room: draft.room))
+                                      title: item.title, room: draft.room))
         }
         return deduplicated(slots)
     }

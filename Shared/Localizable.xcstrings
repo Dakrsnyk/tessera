@@ -122295,6 +122295,53 @@
         }
       }
     },
+    "Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit „Prüfen“ markierte Kurse wurden unsicher gelesen: sieh sie dir genau an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classes marked “To check” were read with some doubt: look at them closely."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las clases marcadas como «Revisar» se leyeron con dudas: míralas con atención."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le lezioni segnate «Da controllare» sono state lette con qualche dubbio: guardale con attenzione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「要確認」と表示された授業は、読み取りに自信がありません。よく確認してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As aulas marcadas como “Verificar” foram lidas com dúvida: confira-as com atenção."
+          }
+        }
+      }
+    },
     "Les cours s'affichent dès que la connexion est disponible.": {
       "extractionState": "manual",
       "localizations": {
@@ -199046,6 +199093,53 @@
         }
       }
     },
+    "Supprimer ce cours": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diesen Kurs löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this class"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar esta clase"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer ce cours"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina questa lezione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この授業を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir esta aula"
+          }
+        }
+      }
+    },
     "Supprimer ce repas": {
       "extractionState": "manual",
       "localizations": {
@@ -251635,6 +251729,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Próximas"
+          }
+        }
+      }
+    },
+    "À vérifier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To check"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À vérifier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da controllare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要確認"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar"
           }
         }
       }

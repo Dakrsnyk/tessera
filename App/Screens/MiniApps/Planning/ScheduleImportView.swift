@@ -194,30 +194,47 @@ struct ScheduleImportView: View {
         .padding(24)
     }
 
-    /// 3. The check: the classes found by day, all ticked, each one to correct or to untick.
+    /// 3. The check: the classes found by day, all ticked, each one to correct, to untick or to delete; a class missing
+    /// from the reading can be added by hand.
     private var reviewStep: some View {
         let count = ScheduleImportMerge.importable(slots).count
-        return ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(tr("Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire."))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-                ForEach(1...7, id: \.self) { day in
-                    if slots.contains(where: { $0.weekday == day }) {
-                        VStack(alignment: .leading, spacing: 10) {
-                            MiniSectionTitle(title: Studies.weekdayNames[day - 1])
-                            ForEach($slots) { $slot in
-                                if slot.weekday == day {
-                                    slotCard($slot)
+        let doubtful = slots.filter { $0.needsCheck }.count
+        return ScrollViewReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(tr("Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire."))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if doubtful > 0 {
+                        Label(tr("Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près."),
+                              systemImage: "exclamationmark.triangle")
+                            .font(.footnote)
+                            .foregroundStyle(Color(hex: MiniStyle.alertHex))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityIdentifier("schedule-import-doubt-note")
+                    }
+                    ForEach(1...7, id: \.self) { day in
+                        if slots.contains(where: { $0.weekday == day }) {
+                            VStack(alignment: .leading, spacing: 10) {
+                                MiniSectionTitle(title: Studies.weekdayNames[day - 1])
+                                ForEach($slots) { $slot in
+                                    if slot.weekday == day {
+                                        slotCard($slot)
+                                            .id(slot.id)
+                                    }
                                 }
                             }
                         }
                     }
+                    MiniActionButton(title: tr("Ajouter un cours"), symbol: "plus.circle", colorHex: accentHex, isProminent: false) {
+                        addBlankSlot(scrollingWith: proxy)
+                    }
+                    .accessibilityIdentifier("schedule-import-add-course")
                 }
+                .padding(16)
+                .padding(.bottom, 70)
             }
-            .padding(16)
-            .padding(.bottom, 70)
         }
         .scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom) {
@@ -233,11 +250,28 @@ struct ScheduleImportView: View {
         }
     }
 
-    /// One class found: tick, name, day, hours and room.
+    /// An empty class to fill in (the same day as the last one, 8:00 to 9:00): the card is scrolled into view.
+    private func addBlankSlot(scrollingWith proxy: ScrollViewProxy) {
+        let blank = ImportedSlot(weekday: slots.last?.weekday ?? 1, startMinute: 8 * 60, endMinute: 9 * 60, title: "")
+        Haptics.tap()
+        withAnimation { slots.append(blank) }
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 150_000_000)
+            withAnimation { proxy.scrollTo(blank.id, anchor: .center) }
+        }
+    }
+
+    /// One class found: tick, name, day, hours and room; a mark when the reading was in doubt; a button to delete it.
     private func slotCard(_ slot: Binding<ImportedSlot>) -> some View {
         let value = slot.wrappedValue
         let invalidTime = value.endMinute <= value.startMinute
         return VStack(alignment: .leading, spacing: 8) {
+            if value.needsCheck {
+                Label(tr("À vérifier"), systemImage: "exclamationmark.triangle")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Color(hex: MiniStyle.alertHex))
+                    .accessibilityIdentifier("schedule-import-doubt")
+            }
             HStack(spacing: 10) {
                 Button {
                     Haptics.tap()
@@ -253,6 +287,19 @@ struct ScheduleImportView: View {
                 .accessibilityValue(Text(value.isSelected ? tr("Oui") : tr("Non")))
                 TextField(tr("Titre"), text: slot.title)
                     .font(.body.weight(.semibold))
+                Button {
+                    Haptics.tap()
+                    let id = value.id
+                    withAnimation { slots.removeAll { $0.id == id } }
+                } label: {
+                    Image(systemName: "trash")
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                        .frame(width: 34, height: 34)
+                }
+                .buttonStyle(.pressable)
+                .accessibilityLabel(Text(tr("Supprimer ce cours")))
+                .accessibilityIdentifier("schedule-import-delete")
             }
             if value.isSelected {
                 Picker(tr("Jour"), selection: slot.weekday) {
@@ -274,6 +321,10 @@ struct ScheduleImportView: View {
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
         .miniCard()
+        .overlay(
+            RoundedRectangle(cornerRadius: MiniStyle.cardRadius, style: .continuous)
+                .stroke(Color(hex: MiniStyle.alertHex).opacity(value.needsCheck ? 0.7 : 0), lineWidth: 1.5)
+        )
         .opacity(value.isSelected ? 1 : 0.6)
     }
 

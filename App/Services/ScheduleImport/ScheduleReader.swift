@@ -11,6 +11,8 @@ enum ScheduleImportError: Error { case unreadable, nothingFound }
 struct SchedulePage {
     var lines: [RecognizedLine]
     var probe: BlockProbe?
+    /// Height over width of the image: the tilt of a photo is turned back with it.
+    var aspect = ScheduleLayouts.defaultAspect
 }
 
 enum ScheduleImporter {
@@ -20,7 +22,7 @@ enum ScheduleImporter {
         var found: [ImportedSlot] = []
         for page in pages {
             try Task.checkCancellation()
-            found.append(contentsOf: ScheduleParser.slots(from: page.lines, probe: page.probe))
+            found.append(contentsOf: ScheduleParser.slots(from: page.lines, probe: page.probe, aspect: page.aspect))
         }
         let slots = ScheduleParser.deduplicated(found)
         guard !slots.isEmpty else { throw ScheduleImportError.nothingFound }
@@ -118,7 +120,8 @@ enum ScheduleReader {
                 do {
                     // The probe reads the same image Vision reads, so its coordinates are the ones of the lines.
                     let lines = try performRecognition(on: cgImage)
-                    continuation.resume(returning: SchedulePage(lines: lines, probe: LuminanceProbe(cgImage)))
+                    continuation.resume(returning: SchedulePage(lines: lines, probe: LuminanceProbe(cgImage),
+                                                                aspect: Double(cgImage.height) / Double(max(1, cgImage.width))))
                 } catch {
                     continuation.resume(throwing: ScheduleImportError.unreadable)
                 }
@@ -167,14 +170,24 @@ enum ScheduleReader {
 }
 
 /// The colours of the page along vertical lines, from a grey copy of the image (the one Vision reads).
+///
+/// Along a line there are two kinds of cell, told apart by Otsu's threshold on the grey levels: the lighter and the
+/// darker one. The parser decides which of the two holds the text (Omnivox: white blocks on grey cells, so the lighter;
+/// a calendar: coloured blocks on a white page, so the darker; a dark-mode screenshot: blocks lighter than the
+/// background). Text and borders are left out first, whatever the theme of the page:
+/// - a light page (most samples above 110): samples below 150 are text or borders; if the two kinds of cell cannot be
+///   told apart that way, samples above 60 are tried (saturated blocks are darker than 150);
+/// - a dark page: samples above 105 are text or borders, then above 195.
 struct LuminanceProbe: BlockProbe {
     let width: Int
     let height: Int
     /// Grey levels, row by row from the top.
     let pixels: [UInt8]
+    /// Dark text on a light page (the outlines of `framedRuns` are dark lines on it).
+    private var lightPage = true
 
-    /// Below this level a sample is text or a border, not a cell.
-    private static let darkest = 150
+    /// A page whose middle sample is below this is a dark page.
+    private static let darkPageBelow = 110
     /// The two kinds of cell must differ by at least this many levels (of 255): white against light grey is about 16,
     /// a column of empty cells (noise only) gives about 12.
     private static let minimumSeparation = 14.0
@@ -200,9 +213,90 @@ struct LuminanceProbe: BlockProbe {
         self.width = w
         self.height = h
         self.pixels = data
+        self.lightPage = LuminanceProbe.isLight(data, width: w, height: h)
+    }
+
+    /// For tests: a probe over grey levels already known (row by row from the top).
+    init?(width: Int, height: Int, pixels: [UInt8]) {
+        guard width > 8, height > 8, pixels.count == width * height else { return nil }
+        self.width = width
+        self.height = height
+        self.pixels = pixels
+        self.lightPage = LuminanceProbe.isLight(pixels, width: width, height: height)
+    }
+
+    /// Whether the middle grey level of the page (looked at on a coarse grid of points) is a light one.
+    private static func isLight(_ pixels: [UInt8], width: Int, height: Int) -> Bool {
+        var levels: [UInt8] = []
+        let rowStep = max(1, height / 200)
+        let columnStep = max(1, width / 200)
+        for row in stride(from: 0, to: height, by: rowStep) {
+            for column in stride(from: 0, to: width, by: columnStep) { levels.append(pixels[row * width + column]) }
+        }
+        levels.sort()
+        return Int(levels[levels.count / 2]) >= darkPageBelow
     }
 
     func blockRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
+        analysis(atX: x, fromY: fromY, toY: toY)?.lighter
+    }
+
+    func darkRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
+        analysis(atX: x, fromY: fromY, toY: toY)?.darker
+    }
+
+    /// A row of the window is part of an outline when this share of it is black.
+    private static let outlineShare = 0.85
+    private static let outlineBelow = 120
+    /// The window starts this far (a share of the page width) right of the asked x, inside the cell, clear of its left
+    /// outline and of the text, and is this wide.
+    private static let outlineShift = 0.012
+    private static let outlineWidth = 0.07
+    /// Two outlines closer than this (a share of the page height) do not make a block.
+    private static let outlineGap = 15.0 / 1023.0
+
+    /// The stretches between two consecutive thick black horizontal lines, along the line at `x`. A line one or two
+    /// pixels thick counts (a photo or a small screenshot); the text of a cell never fills 85% of a row, and the thin
+    /// grey lines of the grid are not black.
+    func framedRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
+        guard lightPage, x.isFinite, fromY.isFinite, toY.isFinite else { return nil }
+        let first = Int((x + LuminanceProbe.outlineShift) * Double(width))
+        let last = min(width, Int((x + LuminanceProbe.outlineShift + LuminanceProbe.outlineWidth) * Double(width)))
+        guard first >= 0, last - first >= 8 else { return nil }
+        let top = max(0, Int((fromY * Double(height)).rounded(.down)))
+        let bottom = min(height - 1, Int((toY * Double(height)).rounded(.up)))
+        guard bottom - top >= 20 else { return nil }
+        let needed = Int((Double(last - first) * LuminanceProbe.outlineShare).rounded(.up))
+        var centers: [Double] = []
+        var start: Int? = nil
+        var lastDark = 0
+        for row in top...bottom {
+            var dark = 0
+            for column in first..<last where Int(pixels[row * width + column]) < LuminanceProbe.outlineBelow { dark += 1 }
+            guard dark >= needed else { continue }
+            if let begin = start, row - lastDark - 1 > 1 {
+                centers.append(Double(begin + lastDark) / 2)
+                start = row
+            } else if start == nil {
+                start = row
+            }
+            lastDark = row
+        }
+        if let begin = start { centers.append(Double(begin + lastDark) / 2) }
+        guard centers.count >= 2 else { return nil }
+        var result: [ClosedRange<Double>] = []
+        for index in 0..<(centers.count - 1) {
+            let low = Double(centers[index]) / Double(height)
+            let high = (Double(centers[index + 1]) + 1) / Double(height)
+            if high - low >= LuminanceProbe.outlineGap { result.append(low...high) }
+        }
+        return result
+    }
+
+    /// The stretches of the lighter and of the darker kind of cell along one vertical line, or nil when the line holds
+    /// no two kinds of cell.
+    private func analysis(atX x: Double, fromY: Double, toY: Double)
+        -> (lighter: [ClosedRange<Double>], darker: [ClosedRange<Double>])? {
         guard x.isFinite, fromY.isFinite, toY.isFinite, x >= 0, x < 1 else { return nil }
         let column = min(width - 1, Int(x * Double(width)))
         let top = max(0, Int((fromY * Double(height)).rounded(.down)))
@@ -219,11 +313,22 @@ struct LuminanceProbe: BlockProbe {
             neighbours.sort()
             samples.append(neighbours[neighbours.count / 2])
         }
-        // Otsu's threshold between the empty cells (a little grey) and the blocks (white), on the samples that
-        // are not text or borders.
+        let ordered = samples.sorted()
+        let darkPage = ordered[ordered.count / 2] < LuminanceProbe.darkPageBelow
+        let limits = darkPage ? [105, 195] : [150, 60]
+        for limit in limits {
+            let kept = samples.map { darkPage ? $0 <= limit : $0 >= limit }
+            if let found = split(samples, kept: kept, top: top) { return found }
+        }
+        return nil
+    }
+
+    /// Otsu's threshold on the kept samples, then the stretches of each side.
+    private func split(_ samples: [Int], kept: [Bool], top: Int)
+        -> (lighter: [ClosedRange<Double>], darker: [ClosedRange<Double>])? {
         var histogram = [Int](repeating: 0, count: 256)
         var total = 0
-        for sample in samples where sample >= LuminanceProbe.darkest {
+        for (index, sample) in samples.enumerated() where kept[index] {
             histogram[sample] += 1
             total += 1
         }
@@ -250,27 +355,41 @@ struct LuminanceProbe: BlockProbe {
             }
         }
         guard threshold >= 0, separation >= LuminanceProbe.minimumSeparation else { return nil }
-        let lightCount = samples.filter { $0 >= LuminanceProbe.darkest && $0 > threshold }.count
-        let share = Double(lightCount) / Double(total)
+        var upper = [Bool](repeating: false, count: samples.count)
+        var lower = [Bool](repeating: false, count: samples.count)
+        var upperCount = 0
+        for (index, sample) in samples.enumerated() where kept[index] {
+            if sample > threshold {
+                upper[index] = true
+                upperCount += 1
+            } else {
+                lower[index] = true
+            }
+        }
+        let share = Double(upperCount) / Double(total)
         guard share >= LuminanceProbe.minimumLightShare, share <= 1 - LuminanceProbe.minimumLightShare else { return nil }
-        // Stretches of light samples; a hole of one or two pixels (the border between two blocks) is closed.
-        var runs: [(from: Int, to: Int)] = []
+        return (lighter: runs(of: upper, top: top), darker: runs(of: lower, top: top))
+    }
+
+    /// Stretches of true flags; a hole of one or two pixels (the border between two blocks) is closed.
+    private func runs(of flags: [Bool], top: Int) -> [ClosedRange<Double>] {
+        var stretches: [(from: Int, to: Int)] = []
         var start: Int? = nil
-        var lastLight = 0
-        for (offset, sample) in samples.enumerated() where sample >= LuminanceProbe.darkest && sample > threshold {
-            if let begin = start, offset - lastLight - 1 > LuminanceProbe.closedGap {
-                runs.append((from: begin, to: lastLight))
+        var last = 0
+        for (offset, flag) in flags.enumerated() where flag {
+            if let begin = start, offset - last - 1 > LuminanceProbe.closedGap {
+                stretches.append((from: begin, to: last))
                 start = offset
             } else if start == nil {
                 start = offset
             }
-            lastLight = offset
+            last = offset
         }
-        if let begin = start { runs.append((from: begin, to: lastLight)) }
+        if let begin = start { stretches.append((from: begin, to: last)) }
         var result: [ClosedRange<Double>] = []
-        for run in runs where run.to - run.from + 1 >= LuminanceProbe.minimumRun {
-            let low = Double(top + run.from) / Double(height)
-            let high = Double(top + run.to + 1) / Double(height)
+        for stretch in stretches where stretch.to - stretch.from + 1 >= LuminanceProbe.minimumRun {
+            let low = Double(top + stretch.from) / Double(height)
+            let high = Double(top + stretch.to + 1) / Double(height)
             result.append(low...high)
         }
         return result

@@ -331,7 +331,7 @@
  "%@ cours étaient déjà dans ton horaire.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:290: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:341: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
   ]
  },
  "%@ crédits": {
@@ -1563,7 +1563,7 @@
  "1 cours était déjà dans ton horaire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:290: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:341: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
   ]
  },
  "1 croissant": {
@@ -2798,6 +2798,7 @@
  "Ajouter un cours": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:230: MiniActionButton(title: tr(\"Ajouter un cours\"), symbol: \"plus.circle\", colorHex: accentHex, isProminent: false) {",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:121: MiniActionButton(title: tr(\"Ajouter un cours\"), symbol: \"plus\", colorHex: accentHex) {"
   ]
  },
@@ -2958,7 +2959,7 @@
  "Ajouter à mon horaire (%@)": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:224: MiniActionButton(title: tr(\"Ajouter à mon horaire (\\(count))\"), symbol: \"calendar.badge.plus\", colorHex: accentHex) {"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:241: MiniActionButton(title: tr(\"Ajouter à mon horaire (\\(count))\"), symbol: \"calendar.badge.plus\", colorHex: accentHex) {"
   ]
  },
  "Ajouter à une séance": {
@@ -10441,7 +10442,7 @@
  "Début": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:263: MinuteTimePicker(title: tr(\"Début\"), minutes: slot.startMinute)",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:310: MinuteTimePicker(title: tr(\"Début\"), minutes: slot.startMinute)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:262: DatePicker(tr(\"Début\"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\\.student) { $0.semesterStart = date } }), displayedComponents: .date)",
    "App/Screens/Spaces/StudentSpace.swift:155: DatePicker(tr(\"Début\"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\\.student) { $0.semesterStart = date } }), displayedComponents: .date)",
    "App/Screens/Spaces/StudentSpace.swift:249: MinuteTimePicker(title: tr(\"Début\"), minutes: Binding(get: { slot.startMinute }, set: { start in"
@@ -12395,7 +12396,7 @@
  "Fin": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:264: MinuteTimePicker(title: tr(\"Fin\"), minutes: slot.endMinute)",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:311: MinuteTimePicker(title: tr(\"Fin\"), minutes: slot.endMinute)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:263: DatePicker(tr(\"Fin\"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\\.student) { $0.semesterEnd = date } }), displayedComponents: .",
    "App/Screens/Spaces/StudentSpace.swift:157: DatePicker(tr(\"Fin\"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\\.student) { $0.semesterEnd = date } }), displayedComponents: .",
    "App/Screens/Spaces/StudentSpace.swift:255: MinuteTimePicker(title: tr(\"Fin\"), minutes: $slot.endMinute)"
@@ -14247,7 +14248,7 @@
  "Inclure ce cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:252: .accessibilityLabel(Text(tr(\"Inclure ce cours\")))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:286: .accessibilityLabel(Text(tr(\"Inclure ce cours\")))"
   ]
  },
  "Inclure les opérations non payées (%@)": {
@@ -15279,7 +15280,7 @@
  "La fin doit venir après le début.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:266: Label(tr(\"La fin doit venir après le début.\"), systemImage: \"exclamationmark.triangle.fill\")"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:313: Label(tr(\"La fin doit venir après le début.\"), systemImage: \"exclamationmark.triangle.fill\")"
   ]
  },
  "La force du vent, sa direction et l'indice UV.": {
@@ -16380,6 +16381,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:516: case .newCustomers: tr(\"Les clients arrivés sur la période\")"
+  ]
+ },
+ "Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:210: Label(tr(\"Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.\"),"
   ]
  },
  "Les cours s'affichent dès que la connexion est disponible.": {
@@ -19222,7 +19229,7 @@
  "Non": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:253: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:287: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
   ]
  },
  "Non binaire": {
@@ -20238,7 +20245,7 @@
  "Oui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:253: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:287: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
   ]
  },
  "Ouverture sans forcer.": {
@@ -24745,7 +24752,7 @@
  "Rien de nouveau à ajouter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:286: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:337: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
   ]
  },
  "Rien de prévu": {
@@ -25457,7 +25464,7 @@
  "Salle (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:270: TextField(tr(\"Salle (facultatif)\"), text: Binding(get: { slot.room.wrappedValue ?? \"\" }, set: { slot.room.wrappedValue = $0 }))",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:317: TextField(tr(\"Salle (facultatif)\"), text: Binding(get: { slot.room.wrappedValue ?? \"\" }, set: { slot.room.wrappedValue = $0 }))",
    "App/Screens/Spaces/StudentSpace.swift:257: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)",
    "App/Screens/Spaces/StudentSpace.swift:356: TextField(tr(\"Salle (facultatif)\"), text: $exam.room)"
   ]
@@ -26775,6 +26782,12 @@
    "App/Screens/Spaces/StudentSpace.swift:277: Label(slot.date == nil ? tr(\"Supprimer (toutes les semaines)\") : tr(\"Supprimer l'événement\"), systemImage: \"trash\")"
   ]
  },
+ "Supprimer ce cours": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:301: .accessibilityLabel(Text(tr(\"Supprimer ce cours\")))"
+  ]
+ },
  "Supprimer ce repas": {
   "placeholders": 0,
   "uses": [
@@ -28018,7 +28031,7 @@
  "Terminé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:295: MiniActionButton(title: tr(\"Terminé\"), symbol: \"checkmark\", colorHex: accentHex) { dismiss() }",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:346: MiniActionButton(title: tr(\"Terminé\"), symbol: \"checkmark\", colorHex: accentHex) { dismiss() }",
    "Shared/Render/Kinds/ProductivityWidgets.swift:23: Text(openCount == 0 ? tr(\"Terminé\") : tr(\"\\(openCount) à faire\"))",
    "Shared/Render/Tiles/ProductivityTiles.swift:49: var caption = remaining == 0 ? tr(\"Terminé\") : Fmt.plural(remaining, tr(\"tâche restante\"), tr(\"tâches restantes\"))"
   ]
@@ -28739,7 +28752,7 @@
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:68: Toggle(tr(\"Titre\"), isOn: $design.showsTitle)",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:400: TextField(tr(\"Titre\"), text: $task.title)",
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:254: TextField(tr(\"Titre\"), text: slot.title)",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:288: TextField(tr(\"Titre\"), text: slot.title)",
    "App/Screens/Spaces/StudentSpace.swift:375: TextField(tr(\"Titre\"), text: $assignment.title)"
   ]
  },
@@ -31139,7 +31152,7 @@
  "Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:202: Text(tr(\"Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:205: Text(tr(\"Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire.\"))"
   ]
  },
  "Vérifié": {
@@ -31734,13 +31747,13 @@
  "créneau ajouté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:286: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:337: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
   ]
  },
  "créneaux ajoutés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:286: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:337: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
   ]
  },
  "d'ici %@ j": {
@@ -33840,6 +33853,12 @@
    "App/Screens/MiniApps/Planning/PlanningPages.swift:71: section(tr(\"À venir\"), upcoming)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:504: list(tr(\"À venir\"), upcoming, state: state, now: now)",
    "App/Screens/MiniApps/Travel/TravelApp.swift:186: MiniSectionTitle(title: tr(\"À venir\"))"
+  ]
+ },
+ "À vérifier": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:270: Label(tr(\"À vérifier\"), systemImage: \"exclamationmark.triangle\")"
   ]
  },
  "À éviter": {
