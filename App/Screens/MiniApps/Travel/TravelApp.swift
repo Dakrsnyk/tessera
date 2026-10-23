@@ -51,6 +51,8 @@ struct TravelAppView: View {
     @State private var sheet: TravelSheet?
     /// The day of the trip the program tells about.
     @State private var day = Date()
+    /// The choices of the floating « Ajouter » (a trip under way).
+    @State private var adding = false
 
     private var currency: String { model.settings.currencyCode }
     private var accentHex: String { Travel.accentHex }
@@ -59,8 +61,8 @@ struct TravelAppView: View {
         let now = Date()
         let state = model.travel
         let current = TravelMath.currentTrip(state, at: now)
-        // With no trip, « Nouveau voyage » is the one main action: it floats. With one, it is a row of « Mes voyages ».
-        MiniAppScaffold(colorHex: accentHex, action: current == nil ? newTripAction : nil) {
+        // The one main action floats: « Nouveau voyage » with no trip, « Ajouter » (a flight, a stay, an activity, an expense) with one.
+        MiniAppScaffold(colorHex: accentHex, action: current == nil ? newTripAction : addAction) {
             if let trip = current {
                 let program = TravelMath.program(state, for: trip)
                 WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: { date in
@@ -76,16 +78,14 @@ struct TravelAppView: View {
                 let dayItems = program.first { DateMath.isSameDay($0.day, day) }?.items ?? []
                 dayProgram(trip: trip, items: dayItems, days: program.count)
                 next(trip: trip, state: state, now: now, shown: Set(dayItems.map(\.id)))
+                // Two tiles side by side: the budget and the checklist.
                 HStack(spacing: 10) {
                     budgetTile(trip: trip, state: state)
                     checklistTile(trip: trip, state: state)
                 }
                 converter(trip: trip, state: state)
             }
-            others(state: state, now: now)
-            if let trip = current {
-                editRow(trip: trip)
-            }
+            others(state: state, now: now, current: current)
             MiniAppInfoSection(app: .travel)
         }
         .navigationTitle(tr("Voyage"))
@@ -100,6 +100,23 @@ struct TravelAppView: View {
             await model.refreshFX()
         }
         .sheet(item: $sheet) { $0.editor }
+        .confirmationDialog(tr("Ajouter"), isPresented: $adding, titleVisibility: .visible) {
+            if let trip = TravelMath.currentTrip(model.travel, at: Date()) {
+                Button(tr("Vol")) { sheet = .flight(Flight(number: "", from: "", to: "", departure: trip.start)) }
+                Button(tr("Hébergement")) { sheet = .stay(Stay(name: "", checkIn: trip.start, checkOut: trip.end)) }
+                Button(tr("Activité")) { sheet = .activity(TripActivity(title: "", date: max(trip.start, Date()))) }
+                Button(tr("Dépense")) {
+                    sheet = .expense(TripExpense(tripID: trip.id, amount: 0, currencyCode: TravelMath.isOngoing(trip, at: Date()) ? trip.currencyCode : currency))
+                }
+            }
+            Button(tr("Nouveau voyage")) { sheet = .trip(Travel.newTrip()) }
+            Button(tr("Annuler"), role: .cancel) {}
+        }
+    }
+
+    /// The floating action of a trip under way: what to add to it.
+    private var addAction: MiniFloatingAction {
+        MiniFloatingAction(title: tr("Ajouter"), symbol: "plus", colorHex: accentHex, identifier: "travel-add") { adding = true }
     }
 
     /// The floating action of a screen with no trip yet.
@@ -136,7 +153,7 @@ struct TravelAppView: View {
                         ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                             if index > 0 { MiniDivider() }
                             MiniRow(symbol: item.symbol, colorHex: itemHex(item.kind), title: item.title, detail: item.detail,
-                                    value: Fmt.time(item.date, uses24Hour: true), showsChevron: false)
+                                    value: Fmt.time(item.date, uses24Hour: true))
                         }
                     }
                 }
@@ -198,20 +215,12 @@ struct TravelAppView: View {
 
     private func budgetTile(trip: Trip, state: TravelState) -> some View {
         let spending = TravelMath.spending(state, for: trip, home: currency, rates: model.fx)
+        let budget = trip.budget ?? 0
         return NavigationLink(value: HomeRoute.page(.travelBudget(trip.id))) {
-            VStack(alignment: .leading, spacing: 6) {
-                Label(tr("Budget"), systemImage: "creditcard.fill").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-                Text(TF.money(spending.total, currency)).font(.title3.weight(.bold)).monospacedDigit().lineLimit(1).minimumScaleFactor(0.7)
-                if let budget = trip.budget, budget > 0 {
-                    ProgressView(value: min(1, spending.total / budget)).tint(spending.total > budget ? Color(hex: MiniStyle.alertHex) : Color(hex: accentHex))
-                    Text(tr("sur \(TF.money(budget, currency))")).font(.caption).foregroundStyle(.secondary)
-                } else {
-                    Text(tr("dépensés")).font(.caption).foregroundStyle(.secondary)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(14)
-            .miniTile()
+            // The figure spent, the budget beside it in small; red over the budget.
+            MiniStat(title: tr("Budget"), value: TF.money(spending.total, currency),
+                     unit: budget > 0 ? "/ \(TF.money(budget, currency))" : tr("dépensés"),
+                     colorHex: budget > 0 && spending.total > budget ? MiniStyle.alertHex : nil)
         }
         .buttonStyle(.pressable)
         .accessibilityIdentifier("travel-budget")
@@ -221,19 +230,11 @@ struct TravelAppView: View {
         let items = state.checklist.filter { $0.tripID == trip.id }
         let done = items.filter(\.isDone).count
         return NavigationLink(value: HomeRoute.page(.travelChecklist(trip.id))) {
-            VStack(alignment: .leading, spacing: 6) {
-                Label(tr("À ne pas oublier"), systemImage: "checklist").font(.caption.weight(.semibold)).foregroundStyle(.secondary).lineLimit(1)
-                Text(items.isEmpty ? "–" : "\(done)/\(items.count)").font(.title3.weight(.bold)).monospacedDigit()
-                if items.isEmpty {
-                    Text(tr("liste à préparer")).font(.caption).foregroundStyle(.secondary)
-                } else {
-                    ProgressView(value: Double(done), total: Double(items.count)).tint(Color(hex: MiniStyle.goodHex))
-                    Text(done == items.count ? tr("tout est prêt") : tr("\(items.count - done) à préparer")).font(.caption).foregroundStyle(.secondary)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(14)
-            .miniTile()
+            // « 3 / 9 »: done over the total; green once everything is ready.
+            MiniStat(title: tr("À ne pas oublier"), value: items.isEmpty ? "–" : "\(done)",
+                     unit: items.isEmpty ? nil : "/ \(items.count)",
+                     detail: items.isEmpty ? tr("liste à préparer") : (done == items.count ? tr("tout est prêt") : tr("\(items.count - done) à préparer")),
+                     colorHex: !items.isEmpty && done == items.count ? MiniStyle.goodHex : nil)
         }
         .buttonStyle(.pressable)
         .accessibilityIdentifier("travel-checklist")
@@ -265,50 +266,48 @@ struct TravelAppView: View {
         }
     }
 
-    // MARK: Rows
-
-    private func editRow(trip: Trip) -> some View {
-        MiniRowsCard {
-            Button { sheet = .trip(trip) } label: {
-                MiniRow(symbol: "pencil", colorHex: "8A8A8E", title: tr("Modifier le voyage"), detail: "\(trip.destination) · \(Travel.dates(trip))", showsChevron: false)
-            }
-            .buttonStyle(.pressable)
-        }
-    }
-
     // MARK: Other trips
 
+    /// The last block, the mockup's « Plus »: with a trip under way, its edit row, the other trips and
+    /// « Nouveau voyage »; with none, the trips already made.
     @ViewBuilder
-    private func others(state: TravelState, now: Date) -> some View {
-        let current = TravelMath.currentTrip(state, at: now)
+    private func others(state: TravelState, now: Date, current: Trip?) -> some View {
         let rest = state.trips.filter { $0.id != current?.id }.sorted { $0.start > $1.start }
         if !rest.isEmpty || current != nil {
-          VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Mes voyages"))
-            MiniRowsCard {
-                ForEach(Array(rest.prefix(4).enumerated()), id: \.element.id) { index, trip in
-                    if index > 0 { MiniDivider() }
-                    Button { sheet = .trip(trip) } label: {
-                        MiniRow(symbol: trip.end < now ? "clock.arrow.circlepath" : "airplane", colorHex: trip.end < now ? "8A8A8E" : accentHex,
-                                title: trip.destination, detail: Travel.dates(trip), showsChevron: false)
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("Mes voyages"))
+                MiniRowsCard {
+                    if let current {
+                        Button { sheet = .trip(current) } label: {
+                            MiniRow(symbol: "pencil", colorHex: "8A8A8E", title: tr("Modifier le voyage"), detail: "\(current.destination) · \(Travel.dates(current))")
+                        }
+                        .buttonStyle(.pressable)
+                        MiniDivider()
                     }
-                    .buttonStyle(.pressable)
-                }
-                if !rest.isEmpty { MiniDivider() }
-                if current != nil {
-                    Button { sheet = .trip(Travel.newTrip()) } label: {
-                        MiniRow(symbol: "plus", colorHex: accentHex, title: tr("Nouveau voyage"), showsChevron: false)
+                    ForEach(Array(rest.prefix(4).enumerated()), id: \.element.id) { index, trip in
+                        if index > 0 { MiniDivider() }
+                        Button { sheet = .trip(trip) } label: {
+                            MiniRow(symbol: trip.end < now ? "clock.arrow.circlepath" : "airplane", colorHex: trip.end < now ? "8A8A8E" : accentHex,
+                                    title: trip.destination, detail: Travel.dates(trip))
+                        }
+                        .buttonStyle(.pressable)
                     }
-                    .buttonStyle(.pressable)
-                    .accessibilityIdentifier("travel-add-trip")
+                    if !rest.isEmpty && current != nil { MiniDivider() }
+                    if current != nil {
+                        Button { sheet = .trip(Travel.newTrip()) } label: {
+                            MiniRow(symbol: "plus", colorHex: accentHex, title: tr("Nouveau voyage"), showsChevron: false)
+                        }
+                        .buttonStyle(.pressable)
+                        .accessibilityIdentifier("travel-add-trip")
+                    }
                 }
             }
-          }
         }
     }
 }
 
-/// The trip at a glance, on the band (no card): where, which day, when, the local time and the weather there.
+/// The trip at a glance, on the band (no card): the place and « EN VOYAGE » in small caps, the day of the trip (or
+/// the countdown) in big, then one line with the local time and the weather there.
 struct TripHero: View {
     let trip: Trip
     let weather: WeatherSnapshot?
@@ -317,42 +316,23 @@ struct TripHero: View {
 
     var body: some View {
         let ongoing = TravelMath.isOngoing(trip, at: now)
-        let offset = TravelMath.offsetHours(trip.timeZone, at: now)
-        VStack(alignment: .leading, spacing: 8) {
-            MiniHero(label: ongoing ? tr("EN VOYAGE") : tr("PROCHAIN VOYAGE"), value: trip.destination,
-                     caption: "\(countdown(ongoing: ongoing))\n\(Travel.dates(trip))", valueSize: 44)
-            HStack(spacing: 18) {
-                if offset != 0 {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(tr("Heure locale")).font(.caption).foregroundStyle(.secondary)
-                        TimelineView(.everyMinute) { context in
-                            Text(Fmt.time(context.date, uses24Hour: true, timeZone: trip.timeZone)).font(.title3.weight(.semibold)).monospacedDigit()
-                        }
-                        Text(offsetText(offset)).font(.caption).foregroundStyle(.secondary)
-                    }
-                }
-                if let weather {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(tr("Météo")).font(.caption).foregroundStyle(.secondary)
-                        HStack(spacing: 6) {
-                            WeatherGlyph(code: weather.code, isDay: weather.isDay)
-                            Text(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit)).font(.title3.weight(.semibold))
-                        }
-                        Text(WeatherCode.description(weather.code)).font(.caption).foregroundStyle(.secondary).lineLimit(1)
-                    }
-                }
-            }
-            .padding(.top, 4)
+        // The local time moves on by itself: the line is redrawn every minute.
+        TimelineView(.everyMinute) { context in
+            MiniHero(label: "\(trip.destination) · \(ongoing ? tr("EN VOYAGE") : tr("PROCHAIN VOYAGE"))",
+                     value: headline(ongoing: ongoing),
+                     caption: caption(ongoing: ongoing, at: context.date),
+                     valueSize: ongoing ? 54 : 40)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("travel-hero")
     }
 
-    private func countdown(ongoing: Bool) -> String {
+    /// « Jour 2 / 6 » under way, the countdown before.
+    private func headline(ongoing: Bool) -> String {
         if ongoing {
             let day = TravelMath.tripDay(trip, at: now)
-            return tr("Jour \(day.day) sur \(day.total)")
+            return "\(tr("Jour")) \(day.day) / \(day.total)"
         }
         let days = DateMath.daysBetween(now, trip.start)
         switch days {
@@ -362,9 +342,17 @@ struct TripHero: View {
         }
     }
 
-    private func offsetText(_ hours: Double) -> String {
-        let value = hours.rounded() == hours ? TF.int(abs(hours)) : TF.decimal(abs(hours), 1)
-        return hours > 0 ? tr("\(value) h de plus qu'ici") : tr("\(value) h de moins qu'ici")
+    /// The dates (before the trip), the local time (when it differs from here) and the weather there.
+    private func caption(ongoing: Bool, at date: Date) -> String? {
+        var parts: [String] = []
+        if !ongoing { parts.append(Travel.dates(trip)) }
+        if TravelMath.offsetHours(trip.timeZone, at: now) != 0 {
+            parts.append("\(tr("Heure locale")) \(Fmt.time(date, uses24Hour: true, timeZone: trip.timeZone))")
+        }
+        if let weather {
+            parts.append("\(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit)), \(WeatherCode.description(weather.code))")
+        }
+        return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }
 }
 

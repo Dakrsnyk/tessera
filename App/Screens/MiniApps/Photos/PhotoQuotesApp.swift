@@ -10,6 +10,8 @@ struct PhotoQuotesAppView: View {
     @Environment(AppModel.self) private var model
     @State private var editing: PhotoQuoteDraft?
     @State private var paywall: PaywallContext?
+    /// The choice behind the « + » tile of the grid: a photo widget or a quote.
+    @State private var choosingKind = false
 
     private var accentHex: String { MiniApp.photos.colorHex }
 
@@ -17,7 +19,7 @@ struct PhotoQuotesAppView: View {
         let made = model.photoQuoteDesigns
         MiniAppScaffold(colorHex: accentHex) {
             // No selector: nothing here is dated. The band tells how many widgets exist and what is shared.
-            MiniHero(label: tr("Tes widgets photo"), value: "\(made.count)",
+            MiniHero(label: tr("Tes widgets photo"), value: Fmt.plural(made.count, tr("widget"), tr("widgets")),
                      caption: tr("Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé."))
         } sheet: {
             // Two actions: a row at the head of the sheet.
@@ -58,6 +60,19 @@ struct PhotoQuotesAppView: View {
                             .buttonStyle(.pressable)
                             .accessibilityIdentifier("photos-widget")
                         }
+                        // The last tile of the grid: one more widget.
+                        Button {
+                            choosingKind = true
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.title2.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                                .frame(maxWidth: .infinity, minHeight: 130)
+                                .background(.cardFill, in: RoundedRectangle(cornerRadius: MiniStyle.tileRadius, style: .continuous))
+                        }
+                        .buttonStyle(.pressable)
+                        .accessibilityLabel(Text(tr("Nouveau widget")))
+                        .accessibilityIdentifier("photos-add")
                     }
                 }
             }
@@ -68,6 +83,11 @@ struct PhotoQuotesAppView: View {
             PhotoQuoteEditor(draft: draft)
         }
         .sheet(item: $paywall) { PaywallView(context: $0) }
+        .confirmationDialog(tr("Nouveau widget"), isPresented: $choosingKind, titleVisibility: .visible) {
+            Button(tr("Photos")) { start(.photos) }
+            Button(tr("Citation")) { start(.quote) }
+            Button(tr("Annuler"), role: .cancel) {}
+        }
     }
 
     private func start(_ kind: WidgetKind) {

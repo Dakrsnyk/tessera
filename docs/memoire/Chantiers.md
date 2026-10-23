@@ -127,6 +127,9 @@ Demande (2026-10-22) : sélecteur de semaine en tête, puis essentiel, compléme
 
 Demande (2026-10-22) : choix du style C (planche de trois styles dans `pub/styles-mini-apps/`), budget de Finances qui suit le jour choisi, Planning avec la semaine du planning juste sous le sélecteur du haut. `MiniAppScaffold` (`App/Screens/MiniApps/MiniAppScaffold.swift`) : bandeau coloré (sélecteur + chiffre essentiel `MiniHero`), feuille arrondie pour le reste, « Mes infos » en dernier, action principale flottante (`MiniFloatingAction`, deux actions = rangée de boutons en haut de la feuille). Appliqué à toutes les mini-apps (run 236 compile). Finances : `Budget.remaining(_:throughDay:)` etc. (7 `FinancesDayBudgetTests`). Planning : plus de ligne « jour choisi », le tableau de la semaine (`PlanningCalendarCard`) vient juste sous le sélecteur (`compact: true`), le choix d'échelle passe dessous, le mois et l'année listent le jour choisi (`AgendaRow` cochable), les pastilles de jours en trois états (plein = fait, creux = prévu). Reste : `[interne]` puis vérification sans Premium (`[apps]`), rien sur TestFlight public.
 
-## À ne pas oublier
+## Signature : bandeau jusqu'en haut, disposition de la maquette C, « Mes paramètres » — 2026-10-23
+
+Demande (2026-10-22 soir) : plus de bandeau noir en haut des mini-apps (le dégradé monte jusqu'au bord de l'écran : `MiniAppScaffold.band` déborde de 400 pt vers le haut), chaque écran reprend la disposition de la maquette C (sauf Planning, qui garde la sienne), « Mes infos » supprimé et remplacé par un seul bouton « Mes paramètres » (feuille `MiniAppInfoSheet`, id `miniapp-settings-edit`). Rangées `MiniRow` en carré arrondi teinté. À vérifier sur capture : contraste des jauges de Nutrition, hauteur du bandeau.
+
 
 - Le dépôt est public pour la CI : le repasser en privé.

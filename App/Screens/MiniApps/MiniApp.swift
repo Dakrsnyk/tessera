@@ -284,8 +284,8 @@ struct MiniRow: View {
             Image(systemName: symbol)
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundStyle(Color(hex: colorHex))
-                .frame(width: 34, height: 34)
-                .background(Color(hex: colorHex).opacity(0.14), in: Circle())
+                .frame(width: 36, height: 36)
+                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.body.weight(.medium))

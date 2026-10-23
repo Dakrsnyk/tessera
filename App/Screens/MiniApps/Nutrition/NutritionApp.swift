@@ -40,12 +40,13 @@ struct NutritionAppView: View {
             // The band: the week selector (the only day picker of the screen), then the essential figure of the
             // chosen day, calories left and macros, straight on the band.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { weekMark($0, state: state, known: known) })
-            CalorieHero(totals: totals, goals: state.goals, known: known, day: day, isPremium: model.isPremium)
+            CalorieHero(totals: totals, goals: state.goals, known: known, accentHex: accentHex)
         } sheet: {
             // The sheet, by importance: the two actions, the meals, the idea of the moment, the week's
             // calories, history and saved meals, the note, the settings last.
             actions
             meals(entries: entries)
+            nutrientsRow(totals: totals)
             if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
             weekTrend(state: state, known: known)
             more(state: state, known: known)
@@ -85,28 +86,29 @@ struct NutritionAppView: View {
 
     private func meals(entries: [FoodEntry]) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Repas"), detail: entries.isEmpty ? nil : Fmt.plural(entries.count, tr("aliment"), tr("aliments")))
+            MiniSectionTitle(title: tr("Repas"))
             MiniRowsCard {
                 ForEach(Array(MealType.allCases.enumerated()), id: \.element) { index, meal in
                     let items = entries.filter { $0.meal == meal }
                     let kcal = items.reduce(0) { $0 + $1.totals.kcal }
                     HStack(spacing: 0) {
                         NavigationLink(value: HomeRoute.page(.nutritionMeal(meal, day))) {
-                            MiniRow(
+                            MealRow(
                                 symbol: meal.symbol, colorHex: accentHex, title: meal.title,
-                                detail: items.isEmpty ? tr("Rien noté") : items.map(\.food.name).joined(separator: ", "),
+                                detail: items.isEmpty ? tr("Rien noté") : Fmt.plural(items.count, tr("aliment"), tr("aliments")),
                                 value: items.isEmpty ? nil : tr("\(TF.int(kcal)) kcal")
                             )
                         }
                         .buttonStyle(.pressable)
                         .accessibilityIdentifier("meal-\(meal.rawValue)")
+                        // A discreet « + » beside the row: adds a food straight to this meal.
                         Button {
                             sheet = .search(meal, day)
                         } label: {
                             Image(systemName: "plus.circle.fill")
-                                .font(.title3)
-                                .foregroundStyle(Color(hex: accentHex))
-                                .frame(width: 44, height: 44)
+                                .font(.body)
+                                .foregroundStyle(Color(hex: accentHex).opacity(0.85))
+                                .frame(width: 40, height: 44)
                         }
                         .buttonStyle(.pressable)
                         .accessibilityLabel(Text(tr("Ajouter au \(meal.title.lowercased())")))
@@ -114,6 +116,33 @@ struct NutritionAppView: View {
                     if index < MealType.allCases.count - 1 { MiniDivider() }
                 }
             }
+        }
+    }
+
+    // MARK: Nutrients
+
+    /// The fibres and the way to every nutrient, moved off the band into the sheet (the figures are Premium).
+    private func nutrientsRow(totals: NutritionTotals) -> some View {
+        let sugars = totals.sugars.map { tr(" · sucres \(TF.int($0)) g") } ?? ""
+        let sodium = totals.sodiumMg.map { tr(" · sodium \(TF.int($0)) mg") } ?? ""
+        let fibres = tr("Fibres \(TF.int(totals.fiber)) g\(sugars)\(sodium)")
+        let detail: String? = model.isPremium ? fibres : nil
+        return MiniRowsCard {
+            NavigationLink(value: HomeRoute.page(.nutritionNutrients(day))) {
+                HStack(spacing: 8) {
+                    MiniRow(
+                        symbol: "leaf.fill", colorHex: accentHex, title: tr("Tous les nutriments"),
+                        detail: detail,
+                        showsChevron: false
+                    )
+                    if !model.isPremium { PremiumBadge(compact: true) }
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("nutrition-nutrients")
         }
     }
 
@@ -247,97 +276,47 @@ struct NutritionAppView: View {
 
 // MARK: - Calories and macros
 
-/// The day at a glance, drawn straight on the colored band of the screen (no card): the calorie ring, what is
-/// eaten, left or over, then the three macros. The other nutrients (Premium) are one touch below. The text
-/// takes the screen's own color, so it reads on the band.
+/// The day at a glance, drawn straight on the colored band of the screen (no card): the calorie ring on the left
+/// (calories left or over at its center), the three macros as thin gauges on the right. The fibres and the other
+/// nutrients (Premium) are in the sheet. The text takes the screen's own color, so it reads on the band.
 struct CalorieHero: View {
     let totals: NutritionTotals
     let goals: NutritionGoals
     let known: NutritionTiles.Targets
-    let day: Date
-    let isPremium: Bool
+    let accentHex: String
 
     var body: some View {
         let left = goals.kcal - totals.kcal
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(spacing: 18) {
-                ZStack {
-                    RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 14, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : Color.primary, track: Color.primary.opacity(0.18))
-                    VStack(spacing: 0) {
-                        Text(TF.int(known.kcal ? abs(left) : totals.kcal))
-                            .font(.system(size: 30, weight: .bold, design: .rounded))
-                            .monospacedDigit()
-                            .contentTransition(.numericText())
-                        Text(known.kcal ? (left >= 0 ? tr("kcal restantes") : tr("kcal en trop")) : tr("kcal mangées"))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                    .minimumScaleFactor(0.7)
-                    .padding(18)
+        HStack(spacing: 20) {
+            ZStack {
+                RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 10, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : Color.primary, track: Color.primary.opacity(0.18))
+                VStack(spacing: 0) {
+                    Text(TF.int(known.kcal ? abs(left) : totals.kcal))
+                        .font(.system(size: 26, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .contentTransition(.numericText())
+                    Text(known.kcal ? (left >= 0 ? tr("kcal restantes") : tr("kcal en trop")) : tr("kcal mangées"))
+                        .font(.system(size: 10))
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
                 }
-                .frame(width: 136, height: 136)
-                VStack(alignment: .leading, spacing: 12) {
-                    figure(tr("Mangé"), tr("\(TF.int(totals.kcal)) kcal"))
-                    if known.kcal {
-                        figure(tr("Objectif"), tr("\(TF.int(goals.kcal)) kcal"))
-                        figure(left >= 0 ? tr("Restant") : tr("Dépassé"), tr("\(TF.int(abs(left))) kcal"), color: left >= 0 ? nil : Color(hex: MiniStyle.alertHex))
-                    } else {
-                        Text(tr("Pas encore d'objectif : calcule tes besoins dans « Mes infos »."))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                }
-                Spacer(minLength: 0)
+                .minimumScaleFactor(0.7)
+                .padding(14)
             }
-            HStack(spacing: 12) {
-                MacroGauge(name: tr("Protéines"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: "E5484D")
-                MacroGauge(name: tr("Glucides"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: "F2A33A")
-                MacroGauge(name: tr("Lipides"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: "3366FF")
+            .frame(width: 112, height: 112)
+            VStack(spacing: 12) {
+                MacroGauge(name: tr("Protéines"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: accentHex)
+                MacroGauge(name: tr("Glucides"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: accentHex)
+                MacroGauge(name: tr("Lipides"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: accentHex)
             }
-            NavigationLink(value: HomeRoute.page(.nutritionNutrients(day))) {
-                HStack {
-                    if isPremium {
-                        Text(tr("Fibres \(TF.int(totals.fiber)) g\(totals.sugars.map { tr(" · sucres \(TF.int($0)) g") } ?? "")\(totals.sodiumMg.map { tr(" · sodium \(TF.int($0)) mg") } ?? "")"))
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                        Spacer(minLength: 4)
-                    }
-                    Text(tr("Tous les nutriments"))
-                        .font(.footnote.weight(.semibold))
-                        .foregroundStyle(Color.primary)
-                    if !isPremium {
-                        PremiumBadge(compact: true)
-                        Spacer(minLength: 4)
-                    }
-                    Image(systemName: "chevron.right")
-                        .font(.caption2.weight(.bold))
-                        .foregroundStyle(.tertiary)
-                }
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("nutrition-nutrients")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("nutrition-hero")
     }
-
-    private func figure(_ title: String, _ value: String, color: Color? = nil) -> some View {
-        VStack(alignment: .leading, spacing: 1) {
-            Text(title)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Text(value)
-                .font(.headline)
-                .foregroundStyle(color ?? .primary)
-                .monospacedDigit()
-        }
-    }
 }
 
+/// One macro on the band: its name on the left, « eaten / goal g » on the right, a thin gauge under them.
 struct MacroGauge: View {
     let name: String
     let eaten: Double
@@ -345,18 +324,66 @@ struct MacroGauge: View {
     let hex: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(name)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
-            Text(goal.map { "\(TF.int(eaten))/\(TF.int($0)) g" } ?? "\(TF.int(eaten)) g")
-                .font(.subheadline.weight(.semibold))
-                .monospacedDigit()
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-            BarView(progress: goal.map { eaten / max(1, $0) } ?? 0, color: Color(hex: hex), track: Color(hex: hex).opacity(0.15), height: 6)
+        VStack(alignment: .leading, spacing: 5) {
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Text(name)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                Spacer(minLength: 4)
+                Text(goal.map { "\(TF.int(eaten)) / \(TF.int($0)) g" } ?? "\(TF.int(eaten)) g")
+                    .font(.caption.weight(.semibold))
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
+            BarView(progress: goal.map { eaten / max(1, $0) } ?? 0, color: Color(hex: hex), track: Color.primary.opacity(0.15), height: 4)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+/// A meal row of the sheet: its icon in a tinted rounded square, the name, how much is noted, the calories and a chevron.
+private struct MealRow: View {
+    let symbol: String
+    let colorHex: String
+    let title: String
+    var detail: String?
+    var value: String?
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: symbol)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(Color(hex: colorHex))
+                .frame(width: 36, height: 36)
+                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                if let detail {
+                    Text(detail)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+            Spacer(minLength: 8)
+            if let value {
+                Text(value)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .monospacedDigit()
+                    .lineLimit(1)
+            }
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.vertical, 8)
+        .contentShape(Rectangle())
     }
 }
 

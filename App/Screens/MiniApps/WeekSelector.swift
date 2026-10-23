@@ -37,7 +37,7 @@ struct WeekSelector: View {
         let week = DateMath.week(containing: day)
         let isCurrentWeek = week.contains { DateMath.isSameDay($0, now) }
         let canGoForward = allowsFuture || !isCurrentWeek
-        VStack(spacing: 2) {
+        VStack(spacing: 0) {
             header(week: week, now: now, canGoForward: canGoForward)
             HStack(spacing: 3) {
                 ForEach(week, id: \.self) { date in
@@ -58,17 +58,17 @@ struct WeekSelector: View {
     private func header(week: [Date], now: Date, canGoForward: Bool) -> some View {
         HStack(spacing: 2) {
             Button { shift(-1) } label: {
-                Image(systemName: "chevron.left").font(.subheadline.weight(.bold)).frame(width: 44, height: 44).contentShape(Rectangle())
+                Image(systemName: "chevron.left").font(.footnote.weight(.bold)).frame(width: 40, height: 36).contentShape(Rectangle())
             }
             .accessibilityLabel(Text(tr("Semaine précédente")))
             Text(WeekTitle.of(week, now: now))
-                .font(.headline)
+                .font(.subheadline.weight(.semibold))
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
                 .contentTransition(.numericText())
                 .accessibilityAddTraits(.isHeader)
             Button { shift(1) } label: {
-                Image(systemName: "chevron.right").font(.subheadline.weight(.bold)).frame(width: 44, height: 44).contentShape(Rectangle())
+                Image(systemName: "chevron.right").font(.footnote.weight(.bold)).frame(width: 40, height: 36).contentShape(Rectangle())
             }
             .disabled(!canGoForward)
             .accessibilityLabel(Text(tr("Semaine suivante")))
@@ -81,9 +81,9 @@ struct WeekSelector: View {
                     withAnimation(.snappy) { day = now }
                 } label: {
                     Text(tr("Aujourd'hui"))
-                        .font(.subheadline.weight(.semibold))
+                        .font(.footnote.weight(.semibold))
                         .padding(.horizontal, 6)
-                        .frame(minHeight: 44)
+                        .frame(minHeight: 36)
                         .contentShape(Rectangle())
                 }
             }

@@ -104,10 +104,10 @@ enum BusinessFormat {
     }
 }
 
-/// The Business mini-app, top to bottom. On the band: the week selector, then the revenue of the period around
-/// the chosen day against the previous one, with the period choice just above it. On the sheet: the two
-/// actions, the sources, the indicators the person chose, their own metrics and the revenue curve; then sales
-/// and costs, results, recurring revenue; « Mes infos » last.
+/// The Business mini-app, top to bottom, as in the « Signature » mock-up. On the band: the week selector, then
+/// the revenue of the period around the chosen day against the previous one, with the period choice just above
+/// it. On the sheet: the two actions, the indicators the person chose (tiles), the sources, their own metrics
+/// and the revenue curve; then sales and costs, results, recurring revenue; the settings last.
 struct BusinessAppView: View {
     @Environment(AppModel.self) private var model
     @State private var period: BusinessPeriod = .month
@@ -137,11 +137,11 @@ struct BusinessAppView: View {
                 hero(state: state, now: at)
             }
         } sheet: {
-            // The sheet, by importance: the two actions, the sources, the indicators, the metrics by hand,
+            // The sheet, by importance: the two actions, the indicators, the sources, the metrics by hand,
             // the curve, the pages, the settings last.
             actions
-            BusinessSourcesCard()
             kpis(state: state, now: at)
+            BusinessSourcesCard()
             metrics(state: state)
             curve(state: state, now: at)
             more(state: state)
@@ -196,7 +196,7 @@ struct BusinessAppView: View {
         if hasGoal {
             lines.append(tr("\(Fmt.percent(progress)) de l'objectif de \(TF.money(state.monthlyGoal, currency))"))
         }
-        let caption: String? = lines.isEmpty ? nil : lines.joined(separator: "\n")
+        let caption: String? = lines.isEmpty ? nil : lines.joined(separator: " · ")
         return VStack(alignment: .leading, spacing: 10) {
             // The period is how far the revenue reaches (a day, a week…) around the chosen day.
             Picker(tr("Période"), selection: $period) {
@@ -206,9 +206,6 @@ struct BusinessAppView: View {
             .accessibilityIdentifier("business-period")
             MiniHero(label: tr("Chiffre d'affaires"), value: TF.money(comparison.current ?? 0, currency),
                      caption: caption)
-            if hasGoal {
-                ProgressView(value: min(1, progress)).tint(progress >= 1 ? Color(hex: BusinessFormat.goodHex) : Color.primary)
-            }
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("business-hero")
@@ -220,7 +217,7 @@ struct BusinessAppView: View {
         let shown = state.pinnedKPIs.filter { $0 != .revenue }
         return VStack(alignment: .leading, spacing: 10) {
             HStack {
-                MiniSectionTitle(title: tr("Mes indicateurs"))
+                MiniSectionTitle(title: tr("Indicateurs"))
                 Button { sheet = .kpis } label: {
                     Text(tr("Choisir")).font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: accentHex))
                 }
@@ -316,19 +313,19 @@ struct BusinessAppView: View {
     private func more(state: BusinessState) -> some View {
         MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.businessSales)) {
-                MiniRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Ventes et dépenses"), detail: tr("Tout ce que tu as noté, modifiable"))
+                BusinessRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Ventes et dépenses"), detail: tr("Tout ce que tu as noté, modifiable"))
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("business-sales")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessResults)) {
-                MiniRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Résultats"), detail: tr("Chiffre d'affaires, dépenses et bénéfice par mois"))
+                BusinessRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Résultats"), detail: tr("Chiffre d'affaires, dépenses et bénéfice par mois"))
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("business-results")
             MiniDivider()
             NavigationLink(value: HomeRoute.page(.businessRecurring)) {
-                MiniRow(symbol: "arrow.triangle.2.circlepath", colorHex: MiniStyle.goodHex, title: tr("Revenu récurrent"),
+                BusinessRow(symbol: "arrow.triangle.2.circlepath", colorHex: MiniStyle.goodHex, title: tr("Revenu récurrent"),
                         detail: BusinessMath.recurring(state).map { tr("MRR \(TF.money($0.mrr, currency))") } ?? tr("MRR, abonnés, ARR"))
             }
             .buttonStyle(.pressable)
@@ -336,7 +333,7 @@ struct BusinessAppView: View {
             if state.metrics.isEmpty {
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.businessMetrics)) {
-                    MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: "F2A33A", title: tr("Suivis à la main"),
+                    BusinessRow(symbol: "gauge.with.dots.needle.33percent", colorHex: "F2A33A", title: tr("Suivis à la main"),
                             detail: tr("Tes propres indicateurs"))
                 }
                 .buttonStyle(.pressable)
@@ -348,6 +345,53 @@ struct BusinessAppView: View {
 
 // MARK: - Shared pieces
 
+/// A row of the Signature style: an icon in a tinted rounded square, a title, a detail, a value and a chevron.
+private struct BusinessRow: View {
+    let symbol: String
+    let colorHex: String
+    let title: String
+    var detail: String?
+    var value: String?
+    var showsChevron = true
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: symbol)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(Color(hex: colorHex))
+                .frame(width: 36, height: 36)
+                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                if let detail, !detail.isEmpty {
+                    Text(detail)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+            Spacer(minLength: 8)
+            if let value {
+                Text(value)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .monospacedDigit()
+                    .lineLimit(1)
+            }
+            if showsChevron {
+                Image(systemName: "chevron.right")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(.tertiary)
+            }
+        }
+        .padding(.vertical, 10)
+        .contentShape(Rectangle())
+    }
+}
+
 /// An indicator: its value for the period and how it moved.
 struct KPITile: View {
     let kpi: BusinessKPI
@@ -358,12 +402,12 @@ struct KPITile: View {
     var body: some View {
         let change = BusinessFormat.change(comparison.change, higherIsBetter: kpi.higherIsBetter)
         VStack(alignment: .leading, spacing: 5) {
-            Label(kpi.title, systemImage: kpi.symbol)
+            Text(kpi.title)
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
             Text(BusinessFormat.value(comparison.current, kpi, currency: currency))
-                .font(.title3.weight(.bold))
+                .font(.title2.weight(.heavy))
                 .monospacedDigit()
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
@@ -388,8 +432,8 @@ struct MetricRow: View {
             Image(systemName: "gauge.with.dots.needle.33percent")
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundStyle(Color(hex: "F2A33A"))
-                .frame(width: 34, height: 34)
-                .background(Color(hex: "F2A33A").opacity(0.14), in: Circle())
+                .frame(width: 36, height: 36)
+                .background(Color(hex: "F2A33A").opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
             VStack(alignment: .leading, spacing: 2) {
                 Text(metric.name).font(.body.weight(.medium)).foregroundStyle(.primary).lineLimit(1)
                 Text(detail).font(.caption).foregroundStyle(.secondary).lineLimit(1)

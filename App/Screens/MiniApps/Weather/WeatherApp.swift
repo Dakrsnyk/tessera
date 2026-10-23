@@ -136,8 +136,6 @@ struct WeatherAppView: View {
         return HStack(alignment: .center, spacing: 10) {
             MiniHero(label: "\(weather.locationName) · \(tr("Aujourd'hui"))", value: Fmt.temperature(weather.temperature, unit: unit),
                      caption: lines.joined(separator: "\n"))
-            WeatherGlyph(code: weather.code, isDay: weather.isDay)
-                .font(.system(size: 44))
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("weather-hero")
@@ -152,8 +150,6 @@ struct WeatherAppView: View {
         return HStack(alignment: .center, spacing: 10) {
             MiniHero(label: "\(weather.locationName) · \(Fmt.shortDay(day))", value: Fmt.temperature(forecast.high, unit: unit),
                      caption: parts.joined(separator: " · "))
-            WeatherGlyph(code: forecast.code)
-                .font(.system(size: 44))
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("weather-hero")
@@ -176,24 +172,22 @@ struct WeatherAppView: View {
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: isToday ? tr("Prochaines heures") : Fmt.longDay(day))
                 VStack(spacing: 12) {
+                    // Five columns fill the card (hour, temperature, chance of rain); the other hours are a swipe away.
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
+                        HStack(spacing: 0) {
                             ForEach(hours, id: \.date) { hour in
-                                VStack(spacing: 6) {
-                                    Text(DateMath.calendar.isDate(hour.date, equalTo: now, toGranularity: .hour) ? "Maint." : Fmt.format(hour.date, template: "HH"))
+                                VStack(spacing: 4) {
+                                    Text(DateMath.calendar.isDate(hour.date, equalTo: now, toGranularity: .hour) ? "Maint." : "\(Fmt.format(hour.date, template: "HH")) h")
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(.secondary)
-                                    WeatherGlyph(code: hour.code, isDay: hour.isDay)
-                                        .font(.title3)
-                                        .frame(height: 24)
-                                    Text(Fmt.temperature(hour.temperature, unit: unit)).font(.subheadline.weight(.semibold)).monospacedDigit()
+                                    Text(Fmt.temperature(hour.temperature, unit: unit)).font(.subheadline.weight(.bold)).monospacedDigit()
                                     Text((hour.precipitationProbability ?? 0) >= 20 ? "\(hour.precipitationProbability ?? 0) %" : " ")
                                         .font(.caption2.weight(.semibold))
                                         .foregroundStyle(Color(hex: accentHex))
                                 }
+                                .containerRelativeFrame(.horizontal, count: 5, spacing: 0)
                             }
                         }
-                        .padding(.horizontal, 2)
                     }
                     Chart {
                         ForEach(hours, id: \.date) { hour in
@@ -242,22 +236,29 @@ struct WeatherAppView: View {
         // The day picked is told above (the hero), so the list is the other days.
         let days = weather.daily.filter { DateMath.startOfDay($0.date) >= DateMath.startOfDay(now) && !DateMath.isSameDay($0.date, day) }
         if !days.isEmpty {
-            let lowest = days.map(\.low).min() ?? 0
-            let highest = days.map(\.high).max() ?? 1
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: tr("\(days.count) prochains jours"))
-                VStack(spacing: 0) {
-                    ForEach(Array(days.enumerated()), id: \.element.date) { index, day in
-                        if index > 0 { Divider() }
-                        DayRow(day: day, isToday: DateMath.isSameDay(day.date, now), lowest: lowest, highest: highest, unit: unit)
+                MiniRowsCard {
+                    ForEach(Array(days.enumerated()), id: \.element.date) { index, forecast in
+                        if index > 0 { MiniDivider() }
+                        MiniRow(symbol: WeatherCode.symbol(forecast.code), colorHex: "3A8DDE",
+                                title: DateMath.isSameDay(forecast.date, now) ? tr("Aujourd'hui") : Fmt.format(forecast.date, template: "EEEE").capitalizedFirst,
+                                detail: dayDetail(forecast),
+                                value: "\(Fmt.temperature(forecast.high, unit: unit)) / \(Fmt.temperature(forecast.low, unit: unit))",
+                                showsChevron: false)
                     }
                 }
-                .padding(.horizontal, 14)
-                .miniCard()
                 .accessibilityElement(children: .contain)
                 .accessibilityIdentifier("weather-days")
             }
         }
+    }
+
+    /// The sky of a day, with the chance of rain when it is worth knowing.
+    private func dayDetail(_ forecast: DayForecast) -> String {
+        let sky = WeatherCode.description(forecast.code)
+        if let rain = forecast.precipitationProbability, rain >= 20 { return "\(sky) · \(rain) %" }
+        return sky
     }
 
     // MARK: Details

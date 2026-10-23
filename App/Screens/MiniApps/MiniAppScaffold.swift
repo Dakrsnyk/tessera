@@ -75,11 +75,24 @@ struct MiniAppScaffold<Header: View, Sheet: View>: View {
 
     /// The color of the app, fading into the sheet: stronger on a dark screen than on a light one.
     private var band: some View {
-        let colors: [Color] = scheme == .dark
-            ? [accent.opacity(0.55), accent.opacity(0.22), Color.clear]
-            : [accent.opacity(0.34), accent.opacity(0.12), Color.clear]
-        return LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom)
-            .ignoresSafeArea(edges: .top)
+        let top = accent.opacity(scheme == .dark ? 0.55 : 0.34)
+        let middle = accent.opacity(scheme == .dark ? 0.22 : 0.12)
+        return GeometryReader { proxy in
+            // The scroll content starts under the navigation bar: the band reaches up past it (and past a pull
+            // down), in the color of its top, so that the gradient runs to the top edge of the screen.
+            let extra: CGFloat = 400
+            let total = proxy.size.height + extra
+            let join = extra / total
+            LinearGradient(stops: [
+                .init(color: top, location: 0),
+                .init(color: top, location: join),
+                .init(color: middle, location: join + (1 - join) * 0.6),
+                .init(color: Color.clear, location: 1)
+            ], startPoint: .top, endPoint: .bottom)
+                .frame(width: proxy.size.width, height: total)
+                .offset(y: -extra)
+                .allowsHitTesting(false)
+        }
     }
 
     private var sheetShape: some View {

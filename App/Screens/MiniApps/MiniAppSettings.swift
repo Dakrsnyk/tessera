@@ -55,65 +55,62 @@ enum CommonSetting: Hashable {
     case currency, temperature, clock
 }
 
+/// The end of a mini-app screen: one button, « Mes paramètres », that opens what the mini-app uses (the same
+/// answers as « Mes informations », the settings it depends on, its smart reminder) in a sheet.
 struct MiniAppInfoSection: View {
     let app: MiniApp
-    @Environment(AppModel.self) private var model
-    @State private var isEditing = false
+    @State private var isShowing = false
 
     var body: some View {
         if app.hasInfo {
-            content
-        }
-    }
-
-    private var content: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            MiniSectionTitle(title: tr("Mes infos"))
-            summary
-            if let reminder {
-                NavigationLink {
-                    SmartRemindersView()
-                } label: {
-                    HStack(spacing: 8) {
-                        Label(reminder.title, systemImage: "bell.badge")
-                            .font(.subheadline)
-                            .foregroundStyle(.primary)
-                        Spacer(minLength: 8)
-                        Text(reminder.value)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                        Image(systemName: "chevron.right")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.tertiary)
-                    }
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("miniapp-reminder")
-            }
             Button {
-                withAnimation(.snappy) { isEditing.toggle() }
+                isShowing = true
             } label: {
-                Label(isEditing ? tr("Terminé") : tr("Modifier mes infos"), systemImage: isEditing ? "checkmark" : "pencil")
+                Label(tr("Mes paramètres"), systemImage: "gearshape")
                     .font(.subheadline.weight(.semibold))
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
             .buttonStyle(.bordered)
             .tint(app.color)
             .accessibilityIdentifier("miniapp-settings-edit")
-            if isEditing {
-                MiniAppInfoEditors(app: app)
-                    .transition(.opacity.combined(with: .move(edge: .top)))
+            .sheet(isPresented: $isShowing) {
+                MiniAppInfoSheet(app: app)
             }
-            MiniFootnote(text: tr("Les mêmes infos partout : modifiées ici, elles le sont dans « Mes informations », tes autres mini-apps et tes widgets."))
         }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("miniapp-settings")
+    }
+}
+
+/// The smart reminder that goes with a mini-app, and when it comes: a row that opens its settings.
+private struct MiniAppReminderRow: View {
+    let app: MiniApp
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if let reminder {
+            NavigationLink {
+                SmartRemindersView()
+            } label: {
+                HStack(spacing: 8) {
+                    Label(reminder.title, systemImage: "bell.badge")
+                        .font(.subheadline)
+                        .foregroundStyle(.primary)
+                    Spacer(minLength: 8)
+                    Text(reminder.value)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.tertiary)
+                }
+                .padding(14)
+                .contentShape(Rectangle())
+                .miniCard()
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("miniapp-reminder")
+        }
     }
 
-    // MARK: Reminder
-
-    /// The smart reminder that goes with this mini-app, and when it comes.
     private var reminder: (title: String, value: String)? {
         let settings = model.settings
         func hour(_ value: Int) -> String {
@@ -125,91 +122,6 @@ struct MiniAppInfoSection: View {
         case .nutrition: return (tr("Rappel des repas"), settings.remindsMeals ? hour(settings.mealReminderHour) : tr("Désactivé"))
         case .finances: return (tr("Rappel des factures"), settings.remindsBills ? tr("La veille") : tr("Désactivé"))
         default: return nil
-        }
-    }
-
-    // MARK: Current values
-
-    private var rows: [(String, String)] {
-        var rows: [(String, String)] = []
-        let profile = model.profile
-        func add(_ title: String, _ value: String?) {
-            if let value, !rows.contains(where: { $0.0 == title }) { rows.append((title, value)) }
-        }
-        switch app {
-        case .nutrition, .fitness:
-            add(tr("Âge"), model.age.map { tr("\($0) ans") })
-            add(tr("Taille", context: "height"), profile.heightCm.map { tr("\(TF.int($0)) cm") })
-            add(tr("Poids"), profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") })
-            if app == .nutrition {
-                add(tr("Objectif"), profile.nutritionAim?.title)
-                if profile.followsNutritionCalculation, model.recommendedNutritionGoals() != nil {
-                    add(tr("Besoins"), tr("\(TF.int(model.nutrition.goals.kcal)) kcal · calculés"))
-                } else if profile.knows(.kcalTarget) {
-                    add(tr("Besoins"), tr("\(TF.int(model.nutrition.goals.kcal)) kcal par jour"))
-                }
-            } else {
-                add(tr("Objectif"), profile.fitnessGoal?.title)
-                add(tr("Niveau"), profile.fitnessLevel?.title)
-                if profile.knows(.weeklyWorkouts) { add(tr("Séances par semaine"), "\(model.fitness.weeklyGoal)") }
-            }
-        case .planning:
-            add(tr("Objectif"), profile.mainGoal.trimmed.nonEmpty)
-            if profile.knows(.focusGoal) { add(tr("Concentration"), tr("\(Fmt.hours(model.productivity.weeklyFocusGoalHours)) / sem.")) }
-            add(tr("Études"), profile.studyField.trimmed.nonEmpty)
-        case .finances:
-            break
-        case .business:
-            if profile.knows(.businessName) { add(tr("Activité"), model.business.name) }
-            if profile.knows(.businessGoal) { add(tr("Objectif de CA"), TF.money(model.business.monthlyGoal, model.settings.currencyCode)) }
-        case .car:
-            if profile.knows(.carName) { add(tr("Voiture"), model.car.name) }
-            add(tr("Compteur"), model.odometer.map { tr("\(TF.int($0)) km") })
-            add(tr("Réservoir"), model.car.tankLiters.map { "\(TF.int($0)) L" })
-        case .weather:
-            add(tr("Ville"), model.settings.weatherLocation?.name)
-        case .travel, .photos:
-            break
-        }
-        for setting in app.commonSettings {
-            switch setting {
-            case .currency: add(tr("Devise"), UnitText.display(model.settings.currencyCode) + " · " + model.settings.currencyCode)
-            case .temperature: add(tr("Unité"), model.settings.temperatureUnit.title)
-            case .clock: add(tr("Heure"), model.settings.uses24HourClock ? tr("24 h") : tr("12 h"))
-            }
-        }
-        for item in app.settingsItems {
-            if let value = model.summary(item) { add(item.title, value) }
-        }
-        return rows
-    }
-
-    @ViewBuilder private var summary: some View {
-        let rows = rows
-        if rows.isEmpty {
-            Text(tr("Rien de renseigné pour l'instant."))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-        } else {
-            VStack(spacing: 0) {
-                ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
-                    HStack(alignment: .firstTextBaseline, spacing: 12) {
-                        Text(row.0)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                        Spacer(minLength: 8)
-                        Text(row.1)
-                            .font(.subheadline.weight(.semibold))
-                            .multilineTextAlignment(.trailing)
-                    }
-                    .padding(.vertical, 9)
-                    .accessibilityElement(children: .combine)
-                    if index < rows.count - 1 { Divider() }
-                }
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 4)
-            .miniCard()
         }
     }
 }
@@ -273,7 +185,7 @@ struct MiniAppInfoEditors: View {
     }
 }
 
-/// « Mes infos » of a mini-app in a sheet, opened from one of its screens (« Définis ton objectif du jour »…).
+/// « Mes paramètres » of a mini-app in a sheet, opened by its last button or from one of its screens (« Définis ton objectif du jour »…).
 struct MiniAppInfoSheet: View {
     let app: MiniApp
     @Environment(\.dismiss) private var dismiss
@@ -281,12 +193,16 @@ struct MiniAppInfoSheet: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                MiniAppInfoEditors(app: app)
-                    .padding(20)
+                VStack(alignment: .leading, spacing: 16) {
+                    MiniAppReminderRow(app: app)
+                    MiniAppInfoEditors(app: app)
+                    MiniFootnote(text: tr("Les mêmes infos partout : modifiées ici, elles le sont dans « Mes informations », tes autres mini-apps et tes widgets."))
+                }
+                .padding(20)
             }
             .scrollDismissesKeyboard(.interactively)
             .background(.screenGradient)
-            .navigationTitle(tr("Mes infos"))
+            .navigationTitle(tr("Mes paramètres"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
