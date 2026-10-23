@@ -42,8 +42,12 @@ struct PlanningAppView: View {
             VStack(alignment: .leading, spacing: 18) {
                 PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
                 // The month and the year show no hours: the day picked is listed under them, to open and check off.
+                // The day and the week show the hours: only what has no hour (a task, a homework) is listed, as the
+                // table keeps just a few chips for them.
                 if scale == .month || scale == .year {
                     dayAgenda(items: items, now: now, isToday: isToday)
+                } else if items.contains(where: { $0.start == nil }) {
+                    dayAgenda(items: items.filter { $0.start == nil }, now: now, isToday: isToday)
                 }
             }
             .accessibilityElement(children: .contain)

@@ -32,6 +32,12 @@ final class MiniAppUITests: XCTestCase {
         element.exists && element.isHittable
     }
 
+    private func scrollUpOnce() {
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.62))
+        start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
+    }
+
     private func scrollDownOnce() {
         let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.62))
         let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4))
@@ -43,7 +49,8 @@ final class MiniAppUITests: XCTestCase {
         _ = element.waitForExistence(timeout: 8)
         var drags = 0
         while !isReachable(element) && drags < 16 {
-            scrollDownOnce()
+            // An element scrolled out above the screen (after a page was opened and closed) is brought back by scrolling up.
+            if element.exists && element.frame.maxY < 80 { scrollUpOnce() } else { scrollDownOnce() }
             drags += 1
             _ = element.waitForExistence(timeout: 1)
         }
