@@ -2445,6 +2445,53 @@
         }
       }
     },
+    "%@ cours étaient déjà dans ton horaire.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Kurse standen schon in deinem Stundenplan."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ classes were already in your schedule."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ clases ya estaban en tu horario."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ cours étaient déjà dans ton horaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lezioni erano già nel tuo orario."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@件の授業はすでに時間割に入っています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ aulas já estavam no seu horário."
+          }
+        }
+      }
+    },
     "%@ crédits": {
       "extractionState": "manual",
       "localizations": {
@@ -11418,6 +11465,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 tigelinha"
+          }
+        }
+      }
+    },
+    "1 cours était déjà dans ton horaire.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Kurs stand schon in deinem Stundenplan."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 class was already in your schedule."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 clase ya estaba en tu horario."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 cours était déjà dans ton horaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 lezione era già nel tuo orario."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1件の授業はすでに時間割に入っています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 aula já estava no seu horário."
           }
         }
       }
@@ -21668,6 +21762,53 @@
         }
       }
     },
+    "Ajouter à mon horaire (%@)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu meinem Stundenplan hinzufügen (%@)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to my schedule (%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir a mi horario (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter à mon horaire (%@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi al mio orario (%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間割に追加（%@）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar ao meu horário (%@)"
+          }
+        }
+      }
+    },
     "Ajouter à une séance": {
       "extractionState": "manual",
       "localizations": {
@@ -29842,6 +29983,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhuma conta para criar"
+          }
+        }
+      }
+    },
+    "Aucun cours trouvé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Kurse gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No classes found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron clases"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun cours trouvé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna lezione trovata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業が見つかりません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma aula encontrada"
           }
         }
       }
@@ -48646,6 +48834,53 @@
         }
       }
     },
+    "Cela peut prendre quelques secondes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das kann einige Sekunden dauern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This may take a few seconds."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esto puede tardar unos segundos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela peut prendre quelques secondes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrebbe richiedere qualche secondo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "数秒かかることがあります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isso pode levar alguns segundos."
+          }
+        }
+      }
+    },
     "Celle du style": {
       "extractionState": "manual",
       "localizations": {
@@ -53064,6 +53299,53 @@
         }
       }
     },
+    "Choisir un PDF": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PDF auswählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a PDF"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir un PDF"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir un PDF"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli un PDF"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PDFを選ぶ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher um PDF"
+          }
+        }
+      }
+    },
     "Choisir un widget": {
       "extractionState": "manual",
       "localizations": {
@@ -54141,6 +54423,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha um widget, ajuste e adicione pela Tela Bloqueada do seu iPhone. Os marcados com %@ funcionam direto: concluir uma série, marcar um hábito, adicionar um copo…"
+          }
+        }
+      }
+    },
+    "Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle ein gut lesbares Foto oder ein PDF deines Stundenplans. Es wird auf deinem iPhone gelesen: Nichts wird gesendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a clear photo or a PDF of your class schedule. It is read on your iPhone: nothing is sent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige una foto nítida o un PDF de tu horario de clases. Se lee en tu iPhone: no se envía nada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli una foto nitida o un PDF del tuo orario delle lezioni. Viene letto sul tuo iPhone: non viene inviato nulla."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鮮明な写真または授業の時間割のPDFを選んでください。読み取りはiPhone上で行われ、何も送信されません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha uma foto nítida ou um PDF do seu horário de aulas. A leitura é feita no seu iPhone: nada é enviado."
           }
         }
       }
@@ -86058,6 +86387,53 @@
         }
       }
     },
+    "Essayer avec une autre photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anderes Foto versuchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try another photo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Probar con otra foto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essayer avec une autre photo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prova con un'altra foto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別の写真を試す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tentar com outra foto"
+          }
+        }
+      }
+    },
     "Estimation": {
       "extractionState": "manual",
       "localizations": {
@@ -105187,6 +105563,53 @@
         }
       }
     },
+    "Importer mon horaire": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meinen Stundenplan importieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import my schedule"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar mi horario"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer mon horaire"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa il mio orario"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間割を読み込む"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar meu horário"
+          }
+        }
+      }
+    },
     "Importer sans conversion": {
       "extractionState": "manual",
       "localizations": {
@@ -105422,6 +105845,53 @@
         }
       }
     },
+    "Impossible de lire ce fichier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Datei kann nicht gelesen werden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file can't be read"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se puede leer este archivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire ce fichier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere questo file"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルは読み取れません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler este arquivo"
+          }
+        }
+      }
+    },
     "Inactif": {
       "extractionState": "manual",
       "localizations": {
@@ -105512,6 +105982,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Inativo (nenhum grupo)"
+          }
+        }
+      }
+    },
+    "Inclure ce cours": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diesen Kurs einbeziehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Include this class"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incluir esta clase"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inclure ce cours"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Includi questa lezione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この授業を含める"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incluir esta aula"
           }
         }
       }
@@ -107533,6 +108050,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Medidor"
+          }
+        }
+      }
+    },
+    "Je n'ai pas trouvé de cours dans ce document. Essaie avec une photo plus nette, bien cadrée et sans reflet, ou avec le PDF.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ich habe in diesem Dokument keine Kurse gefunden. Versuche es mit einem schärferen, gut ausgerichteten Foto ohne Spiegelungen oder mit dem PDF."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I didn't find any classes in this document. Try a sharper photo, well framed and without glare, or the PDF."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No encontré ninguna clase en este documento. Prueba con una foto más nítida, bien encuadrada y sin reflejos, o con el PDF."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je n'ai pas trouvé de cours dans ce document. Essaie avec une photo plus nette, bien cadrée et sans reflet, ou avec le PDF."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non ho trovato lezioni in questo documento. Prova con una foto più nitida, ben inquadrata e senza riflessi, oppure con il PDF."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この書類から授業が見つかりませんでした。より鮮明で、きちんと収まり、反射のない写真か、PDFでお試しください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não encontrei nenhuma aula neste documento. Tente uma foto mais nítida, bem enquadrada e sem reflexos, ou o PDF."
           }
         }
       }
@@ -113130,6 +113694,53 @@
         }
       }
     },
+    "La fin doit venir après le début.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Ende muss nach dem Beginn liegen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The end must come after the start."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El final debe ser posterior al inicio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fin doit venir après le début."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fine deve essere dopo l'inizio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "終了は開始より後にしてください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O fim deve vir depois do início."
+          }
+        }
+      }
+    },
     "La force du vent, sa direction et l'indice UV.": {
       "extractionState": "manual",
       "localizations": {
@@ -118488,6 +119099,53 @@
         }
       }
     },
+    "Le fichier n'a pas pu être ouvert. Essaie avec une autre photo ou un autre PDF.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Datei konnte nicht geöffnet werden. Versuche es mit einem anderen Foto oder einem anderen PDF."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file couldn't be opened. Try another photo or another PDF."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo abrir el archivo. Prueba con otra foto u otro PDF."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fichier n'a pas pu être ouvert. Essaie avec une autre photo ou un autre PDF."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile aprire il file. Prova con un'altra foto o un altro PDF."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルを開けませんでした。別の写真かPDFでお試しください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível abrir o arquivo. Tente outra foto ou outro PDF."
+          }
+        }
+      }
+    },
     "Le fil des ans": {
       "extractionState": "manual",
       "localizations": {
@@ -120881,6 +121539,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Leitura"
+          }
+        }
+      }
+    },
+    "Lecture de ton horaire…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Stundenplan wird gelesen …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading your schedule…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leyendo tu horario…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lecture de ton horaire…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lettura del tuo orario…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間割を読み取り中…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lendo o seu horário…"
           }
         }
       }
@@ -142693,6 +143398,53 @@
         }
       }
     },
+    "Non": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nein"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いいえ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não"
+          }
+        }
+      }
+    },
     "Non binaire": {
       "extractionState": "manual",
       "localizations": {
@@ -149786,6 +150538,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Organela que produz a energia da célula (ATP)."
+          }
+        }
+      }
+    },
+    "Oui": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ja"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sí"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oui"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sì"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "はい"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sim"
           }
         }
       }
@@ -183344,6 +184143,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nada anotado ainda: os meses aparecerão aqui a partir da primeira operação."
+          }
+        }
+      }
+    },
+    "Rien de nouveau à ajouter": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nichts Neues hinzuzufügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing new to add"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada nuevo que añadir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de nouveau à ajouter"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente di nuovo da aggiungere"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加するものはありません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada de novo para adicionar"
           }
         }
       }
@@ -220948,6 +221794,53 @@
         }
       }
     },
+    "Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est supprimé de ton horaire actuel.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du kannst jeden Kurs prüfen und korrigieren, bevor du ihn hinzufügst. Aus deinem aktuellen Stundenplan wird nichts entfernt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can check and correct each class before adding it. Nothing is removed from your current schedule."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podrás revisar y corregir cada clase antes de añadirla. No se elimina nada de tu horario actual."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est supprimé de ton horaire actuel."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrai controllare e correggere ogni lezione prima di aggiungerla. Non viene eliminato nulla dal tuo orario attuale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追加する前に、授業ごとに確認・修正できます。現在の時間割からは何も削除されません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você poderá conferir e corrigir cada aula antes de adicioná-la. Nada é removido do seu horário atual."
+          }
+        }
+      }
+    },
     "Tu profites de Premium": {
       "extractionState": "manual",
       "localizations": {
@@ -230818,6 +231711,53 @@
         }
       }
     },
+    "Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfe, was gelesen wurde, korrigiere bei Bedarf und füge die Kurse dann deinem Stundenplan hinzu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check what was read, fix anything that's wrong, then add the classes to your schedule."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisa lo que se ha leído, corrige lo que haga falta y añade las clases a tu horario."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controlla ciò che è stato letto, correggi se serve e aggiungi le lezioni al tuo orario."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み取った内容を確認し、必要なら修正して、授業を時間割に追加してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confira o que foi lido, corrija se necessário e adicione as aulas ao seu horário."
+          }
+        }
+      }
+    },
     "Vérifié": {
       "extractionState": "manual",
       "localizations": {
@@ -235232,6 +236172,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "custo estimado, tudo incluído"
+          }
+        }
+      }
+    },
+    "créneau ajouté": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termin hinzugefügt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "slot added"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "franja añadida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "créneau ajouté"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fascia aggiunta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件を追加"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "horário adicionado"
+          }
+        }
+      }
+    },
+    "créneaux ajoutés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termine hinzugefügt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "slots added"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "franjas añadidas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "créneaux ajoutés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fasce aggiunte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件を追加"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "horários adicionados"
           }
         }
       }
@@ -249520,6 +250554,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Não esqueça"
+          }
+        }
+      }
+    },
+    "À partir d'une photo ou d'un PDF": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus einem Foto oder einem PDF"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From a photo or a PDF"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A partir de una foto o un PDF"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À partir d'une photo ou d'un PDF"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da una foto o da un PDF"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真またはPDFから"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A partir de uma foto ou de um PDF"
           }
         }
       }

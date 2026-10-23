@@ -17,6 +17,8 @@ struct PlanningAppView: View {
     @State private var scale: CalendarScale = .week
     /// A task, or an event of the schedule, made or changed from the calendar.
     @State private var editors = PlanningEditors()
+    /// The sheet that reads a photo or a PDF of the timetable.
+    @State private var importingSchedule = false
     @Environment(\.openURL) private var openURL
 
     private var accentHex: String { MiniApp.planning.colorHex }
@@ -66,6 +68,18 @@ struct PlanningAppView: View {
                         .font(.subheadline.weight(.semibold))
                 }
                 .tint(Color(hex: accentHex))
+            }
+
+            // Between the planning and the tasks: a photo or a PDF of the timetable becomes classes of the schedule.
+            MiniRowsCard {
+                Button {
+                    importingSchedule = true
+                } label: {
+                    MiniRow(symbol: "doc.viewfinder", colorHex: accentHex, title: tr("Importer mon horaire"),
+                            detail: tr("À partir d'une photo ou d'un PDF"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("planning-import-schedule")
             }
 
             // 3. The tasks: the three priorities, then the counters.
@@ -141,6 +155,7 @@ struct PlanningAppView: View {
         .onChange(of: day) { _, _ in loadEvents() }
         .onChange(of: scale) { _, _ in loadEvents() }
         .planningEditors($editors)
+        .sheet(isPresented: $importingSchedule) { ScheduleImportView() }
         .permissionSheet(.calendar, isPresented: $askingCalendar, request: requestCalendar) { _ in loadEvents() }
     }
 
