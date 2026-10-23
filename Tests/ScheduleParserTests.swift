@@ -310,4 +310,322 @@ final class ScheduleParserTests: XCTestCase {
         XCTAssertEqual(ScheduleParser.findTime(in: "de 8h à 10h")?.start, 480)
         XCTAssertEqual(ScheduleParser.findTime(in: "de 8h à 10h")?.end, 600)
     }
+
+    // MARK: Omnivox timetables (three real screenshots)
+
+    /// A block of the grid: its column (0 = Monday), the rows it covers (0 = 08:10, 9 = 16:50) and its lines of text.
+    private struct ShotBlock {
+        var column: Int
+        var first: Int
+        var last: Int
+        var lines: [String]
+    }
+
+    /// A line of the "Liste des cours" of the page.
+    private struct ShotCourse {
+        var code: String
+        var group: String
+        var title: String
+        var teacher: String
+    }
+
+    /// Plays the probe over a screenshot: the white stretches of each column, in 0...1 of the page height.
+    private struct FakeProbe: BlockProbe {
+        var runs: [[ClosedRange<Double>]]
+        var edges: [Double]
+        var available: Bool
+
+        func blockRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
+            guard available else { return nil }
+            guard let column = (0..<runs.count).first(where: { x >= edges[$0] && x < edges[$0 + 1] }) else { return [] }
+            var result: [ClosedRange<Double>] = []
+            for run in runs[column] {
+                let low = max(run.lowerBound, fromY)
+                let high = min(run.upperBound, toY)
+                if low < high { result.append(low...high) }
+            }
+            return result
+        }
+    }
+
+    /// An Omnivox screenshot as the iPhone showed it (924 x 2000 points), written from the picture: the lines of
+    /// text with their real height on the page, as Vision would return them. The two hours of a row are centred in
+    /// it, a block is white and holds 5 or 6 centred lines, the empty cells are grey.
+    private struct Shot {
+        static let width = 924.0
+        static let height = 2000.0
+        static let centers = [277.0, 386.0, 494.0, 602.0, 710.0]
+        static let days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"]
+        static let hours = [("08:10", "09:00"), ("09:05", "09:55"), ("10:05", "10:55"), ("11:00", "11:50"), ("12:00", "12:50"),
+                            ("13:00", "13:50"), ("14:00", "14:50"), ("15:00", "15:50"), ("15:55", "16:45"), ("16:50", "17:40")]
+
+        var headerY: Double
+        /// The 11 edges of the 10 rows, in points from the top of the screenshot.
+        var rows: [Double]
+        var listY: Double
+        var courses: [ShotCourse]
+        var blocks: [ShotBlock]
+
+        func line(_ text: String, x: Double, y: Double, width: Double? = nil) -> RecognizedLine {
+            let w = width ?? min(100, Double(text.count) * 4.6)
+            return RecognizedLine(text: text, box: CGRect(x: (x - w / 2) / Shot.width, y: (y - 5) / Shot.height,
+                                                          width: w / Shot.width, height: 10 / Shot.height))
+        }
+
+        func lines() -> [RecognizedLine] {
+            var result: [RecognizedLine] = []
+            result.append(line("Horaire de cours", x: 462, y: 237))
+            result.append(line("Cliquez ici pour une", x: 233, y: 312, width: 140))
+            result.append(line("Informations personnelles", x: 288, y: 395, width: 260))
+            result.append(line("Nom, Prénom", x: 198, y: 419))
+            result.append(line("Cugnet, Léa", x: 415, y: 419))
+            result.append(line("No étudiant", x: 198, y: 438))
+            result.append(line("2230667", x: 426, y: 438))
+            result.append(line("Programme", x: 193, y: 457))
+            result.append(line("410.B0", x: 428, y: 457))
+            result.append(line("Généré le", x: 500, y: 457))
+            result.append(line("11-jan-2023 16:26", x: 712, y: 457))
+            result.append(line("Liste des cours", x: 234, y: listY - 20, width: 150))
+            result.append(line("Date d' annulation maximum", x: 229, y: listY, width: 140))
+            result.append(line("Numéro", x: 333, y: listY, width: 40))
+            result.append(line("Titre du cours", x: 442, y: listY, width: 70))
+            for (index, course) in courses.enumerated() {
+                let y = listY + 15.5 * Double(index + 1)
+                result.append(line("19-sep", x: 172, y: y, width: 30))
+                result.append(line(course.code, x: 338, y: y, width: 50))
+                result.append(line(course.group, x: 387, y: y, width: 26))
+                let titleWidth = Double(course.title.count) * 4.2
+                result.append(line(course.title, x: 408 + titleWidth / 2, y: y, width: titleWidth))
+                result.append(line(course.teacher, x: 700, y: y, width: 70))
+            }
+            result.append(line("Horaire de cours pour la session", x: 320, y: headerY - 77, width: 320))
+            result.append(line("Afficher mon horaire par semaine", x: 283, y: headerY - 39, width: 200))
+            for (index, name) in Shot.days.enumerated() {
+                result.append(line(name, x: Shot.centers[index], y: headerY, width: 40))
+            }
+            for (index, pair) in Shot.hours.enumerated() {
+                let middle = (rows[index] + rows[index + 1]) / 2
+                result.append(line(pair.0, x: 194, y: middle - 13, width: 28))
+                result.append(line(pair.1, x: 194, y: middle + 13, width: 28))
+            }
+            for block in blocks {
+                let middle = (rows[block.first] + rows[block.last + 1]) / 2
+                for (index, text) in block.lines.enumerated() {
+                    let y = middle + (Double(index) - Double(block.lines.count - 1) / 2) * 13
+                    result.append(line(text, x: Shot.centers[block.column], y: y))
+                }
+            }
+            let bottom = rows[rows.count - 1]
+            result.append(line("Accès à Omnivox", x: 244, y: bottom + 64, width: 170))
+            result.append(line("Tout au long de la session, vous pouvez accéder à Omnivox à l'adresse https://cchic.omnivox.ca",
+                               x: 360, y: bottom + 82, width: 400))
+            result.append(line("Retourner au choix de la session", x: 200, y: bottom + 146, width: 190))
+            return result
+        }
+
+        func probe(available: Bool = true) -> FakeProbe {
+            var columns = [[ClosedRange<Double>]](repeating: [], count: 5)
+            for block in blocks.sorted(by: { $0.first < $1.first }) {
+                let low = rows[block.first] / Shot.height
+                let high = rows[block.last + 1] / Shot.height
+                if let previous = columns[block.column].last, low - previous.upperBound <= 1 / Shot.height {
+                    columns[block.column][columns[block.column].count - 1] = previous.lowerBound...high
+                } else {
+                    columns[block.column].append(low...high)
+                }
+            }
+            let edges = [223.0, 331.0, 439.0, 547.0, 655.0, 763.0].map { $0 / Shot.width }
+            return FakeProbe(runs: columns, edges: edges, available: available)
+        }
+    }
+
+    /// A block as written in the grid: the (cut) title, the code with its group, the room, the teacher and the mode.
+    private func block(_ column: Int, _ first: Int, _ last: Int, _ title: [String], _ code: String, _ room: String,
+                       _ teacher: String) -> ShotBlock {
+        ShotBlock(column: column, first: first, last: last, lines: title + [code, room, teacher, "Présentiel"])
+    }
+
+    /// Capture 1: winter 2023.
+    private func winterShot(withCourses: Bool = true) -> Shot {
+        let courses = [
+            ShotCourse(code: "201-253-CH", group: "21050", title: "Mathématiques appliquées à la comptabilité et à la gestion", teacher: "Michaël Harvey"),
+            ShotCourse(code: "410-242-CH", group: "41040", title: "Comptabilité II", teacher: "Manon Lapointe"),
+            ShotCourse(code: "410-243-CH", group: "41060", title: "Gestion informatisée: Access et Powerpoint", teacher: "Annie L'heureux"),
+            ShotCourse(code: "410-343-CH", group: "41070", title: "Marketing et communication", teacher: "Benoît Rochefort")
+        ]
+        let maths = ["Mathématiques appliq"]
+        let marketing = ["Marketing et", "communication"]
+        let management = ["Gestion informatisée"]
+        let accounting = ["Comptabilité II"]
+        let blocks = [
+            block(0, 2, 3, management, "410-243-CH gr.41060", "Local F5101", "Annie L'heureux"),
+            block(1, 0, 1, marketing, "410-343-CH gr.41070", "Local F5107", "Benoît Rochefort"),
+            block(1, 2, 3, maths, "201-253-CH gr.21050", "Local H3046", "Michaël Harvey"),
+            block(2, 5, 6, accounting, "410-242-CH gr.41040", "Local F5111", "Manon Lapointe"),
+            block(3, 3, 3, maths, "201-253-CH gr.21050", "Local H3040", "Michaël Harvey"),
+            block(3, 6, 7, management, "410-243-CH gr.41060", "Local F5101", "Annie L'heureux"),
+            block(4, 0, 1, accounting, "410-242-CH gr.41040", "Local F5111", "Manon Lapointe"),
+            block(4, 2, 3, maths, "201-253-CH gr.21050", "Local H3036", "Michaël Harvey"),
+            block(4, 7, 8, marketing, "410-343-CH gr.41070", "Local F5111", "Benoît Rochefort")
+        ]
+        return Shot(headerY: 763, rows: [773, 815, 858, 900, 969, 1011, 1054, 1096, 1139, 1181, 1223], listY: 570,
+                    courses: withCourses ? courses : [], blocks: blocks)
+    }
+
+    private let winterExpected = [
+        "1|10:05-11:50|Gestion informatisée: Access et Powerpoint|Local F5101",
+        "2|08:10-09:55|Marketing et communication|Local F5107",
+        "2|10:05-11:50|Mathématiques appliquées à la comptabilité et à la gestion|Local H3046",
+        "3|13:00-14:50|Comptabilité II|Local F5111",
+        "4|11:00-11:50|Mathématiques appliquées à la comptabilité et à la gestion|Local H3040",
+        "4|14:00-15:50|Gestion informatisée: Access et Powerpoint|Local F5101",
+        "5|08:10-09:55|Comptabilité II|Local F5111",
+        "5|10:05-11:50|Mathématiques appliquées à la comptabilité et à la gestion|Local H3036",
+        "5|15:00-16:45|Marketing et communication|Local F5111"
+    ]
+
+    /// Capture 2: autumn 2023, three courses.
+    private func autumnShot() -> Shot {
+        let courses = [
+            ShotCourse(code: "201-BSB-05", group: "21210", title: "Complément de calcul différentiel et intégral", teacher: "Michaël Harvey"),
+            ShotCourse(code: "203-NYB-05", group: "03090", title: "Électricité et magnétisme", teacher: "Josiane Moisan"),
+            ShotCourse(code: "604-BTF-CH", group: "64100", title: "Anglais du préuniversitaire, ensemble transitoire", teacher: "Suzie Simard")
+        ]
+        let calculus = ["Complément de calcul"]
+        let electricity = ["Électricité et magné"]
+        let blocks = [
+            block(0, 1, 3, ["Anglais du préuniver"], "604-BTF-CH gr.64100", "Local C3021", "Suzie Simard"),
+            block(1, 2, 3, electricity, "203-NYB-05 gr.03090", "Local H3077", "Josiane Moisan"),
+            block(1, 5, 5, calculus, "201-BSB-05 gr.21210", "Local H3026", "Michaël Harvey"),
+            block(2, 1, 1, electricity, "203-NYB-05 gr.03090", "Local H3077", "Josiane Moisan"),
+            block(2, 7, 8, calculus, "201-BSB-05 gr.21210", "Local H3034", "Michaël Harvey"),
+            block(4, 2, 3, calculus, "201-BSB-05 gr.21210", "Local H3018;H3040", "Michaël Harvey"),
+            block(4, 5, 6, electricity, "203-NYB-05 gr.03090", "Local H3077", "Josiane Moisan")
+        ]
+        return Shot(headerY: 749, rows: [759, 802, 870, 914, 955, 998, 1066, 1110, 1151, 1194, 1237], listY: 572,
+                    courses: courses, blocks: blocks)
+    }
+
+    private let autumnExpected = [
+        "1|09:05-11:50|Anglais du préuniversitaire, ensemble transitoire|Local C3021",
+        "2|10:05-11:50|Électricité et magnétisme|Local H3077",
+        "2|13:00-13:50|Complément de calcul différentiel et intégral|Local H3026",
+        "3|09:05-09:55|Électricité et magnétisme|Local H3077",
+        "3|15:00-16:45|Complément de calcul différentiel et intégral|Local H3034",
+        "5|10:05-11:50|Complément de calcul différentiel et intégral|Local H3018;H3040",
+        "5|13:00-14:50|Électricité et magnétisme|Local H3077"
+    ]
+
+    /// Capture 3: autumn 2023, six courses, blocks stuck together in Wednesday.
+    private func businessShot() -> Shot {
+        let courses = [
+            ShotCourse(code: "410-234-CH", group: "41070", title: "Initiation au droit des affaires", teacher: "Marie-Eve Tremblay"),
+            ShotCourse(code: "410-342-CH", group: "41190", title: "Comptabilité III", teacher: "Manon Lapointe"),
+            ShotCourse(code: "410-344-CH", group: "41200", title: "Finance I", teacher: "Annie L'heureux"),
+            ShotCourse(code: "410-345-CH", group: "41060", title: "Gestion des ressources humaines", teacher: "Marc Privé"),
+            ShotCourse(code: "410-435-CH", group: "41080", title: "La gestion de l'information", teacher: "Rémi Côté"),
+            ShotCourse(code: "604-101-MQ", group: "64000", title: "Langue anglaise et communication", teacher: "Guillaume Rousseau")
+        ]
+        let resources = ["Gestion des ressourc"]
+        let information = ["La gestion de l'info"]
+        let finance = ["Finance I"]
+        let law = ["Initiation au droit"]
+        let accounting = ["Comptabilité III"]
+        let blocks = [
+            block(0, 0, 1, resources, "410-345-CH gr.41060", "Local F5107", "Marc Privé"),
+            block(0, 5, 7, ["Langue anglaise et c"], "604-101-MQ gr.64000", "Local C3017", "Guillaume Rousseau"),
+            block(1, 0, 1, information, "410-435-CH gr.41080", "Local F5111", "Rémi Côté"),
+            block(1, 5, 6, finance, "410-344-CH gr.41200", "Local C3017", "Annie L'heureux"),
+            block(2, 1, 1, law, "410-234-CH gr.41070", "Local F5107", "Marie-Eve Tremblay"),
+            block(2, 2, 3, accounting, "410-342-CH gr.41190", "Local F5109", "Manon Lapointe"),
+            block(2, 5, 6, resources, "410-345-CH gr.41060", "Local F5107", "Marc Privé"),
+            block(3, 0, 1, finance, "410-344-CH gr.41200", "Local C3017", "Annie L'heureux"),
+            block(3, 8, 8, information, "410-435-CH gr.41080", "Local F5111", "Rémi Côté"),
+            block(4, 2, 3, accounting, "410-342-CH gr.41190", "Local F5111", "Manon Lapointe"),
+            block(4, 5, 6, law, "410-234-CH gr.41070", "Local F5107", "Marie-Eve Tremblay")
+        ]
+        return Shot(headerY: 793, rows: [803, 845, 915, 956, 1000, 1043, 1083, 1126, 1168, 1238, 1280], listY: 570,
+                    courses: courses, blocks: blocks)
+    }
+
+    private let businessExpected = [
+        "1|08:10-09:55|Gestion des ressources humaines|Local F5107",
+        "1|13:00-15:50|Langue anglaise et communication|Local C3017",
+        "2|08:10-09:55|La gestion de l'information|Local F5111",
+        "2|13:00-14:50|Finance I|Local C3017",
+        "3|09:05-09:55|Initiation au droit des affaires|Local F5107",
+        "3|10:05-11:50|Comptabilité III|Local F5109",
+        "3|13:00-14:50|Gestion des ressources humaines|Local F5107",
+        "4|08:10-09:55|Finance I|Local C3017",
+        "4|15:55-16:45|La gestion de l'information|Local F5111",
+        "5|10:05-11:50|Comptabilité III|Local F5111",
+        "5|13:00-14:50|Initiation au droit des affaires|Local F5107"
+    ]
+
+    private func hm(_ minute: Int) -> String {
+        String(format: "%02d:%02d", minute / 60, minute % 60)
+    }
+
+    /// Day, hours, title and room of each class, one line each.
+    private func summary(_ slots: [ImportedSlot]) -> [String] {
+        slots.map { "\($0.weekday)|\(hm($0.startMinute))-\(hm($0.endMinute))|\($0.title)|\($0.room ?? "-")" }
+    }
+
+    func testOmnivoxWinterCaptureTakesTheHoursFromTheBlocks() {
+        let shot = winterShot()
+        XCTAssertEqual(summary(ScheduleParser.slots(from: shot.lines(), probe: shot.probe())), winterExpected)
+    }
+
+    func testOmnivoxAutumnCaptureWithABlockOverThreeRows() {
+        let shot = autumnShot()
+        XCTAssertEqual(summary(ScheduleParser.slots(from: shot.lines(), probe: shot.probe())), autumnExpected)
+    }
+
+    func testOmnivoxBusinessCaptureWithBlocksStuckTogether() {
+        let shot = businessShot()
+        XCTAssertEqual(summary(ScheduleParser.slots(from: shot.lines(), probe: shot.probe())), businessExpected)
+    }
+
+    func testOmnivoxWithoutAProbeTheTextCentreFitsTheRows() {
+        XCTAssertEqual(summary(ScheduleParser.slots(from: winterShot().lines())), winterExpected)
+        XCTAssertEqual(summary(ScheduleParser.slots(from: autumnShot().lines())), autumnExpected)
+        XCTAssertEqual(summary(ScheduleParser.slots(from: businessShot().lines())), businessExpected)
+    }
+
+    func testOmnivoxProbeThatCannotTellBlocksFromEmptyCellsFallsBackToTheText() {
+        let shots = [(winterShot(), winterExpected), (autumnShot(), autumnExpected), (businessShot(), businessExpected)]
+        for (shot, expected) in shots {
+            XCTAssertEqual(summary(ScheduleParser.slots(from: shot.lines(), probe: shot.probe(available: false))), expected)
+        }
+    }
+
+    func testOmnivoxWithoutTheListOfCoursesTheCutTitleIsKept() {
+        let shot = winterShot(withCourses: false)
+        let slots = ScheduleParser.slots(from: shot.lines(), probe: shot.probe())
+        XCTAssertEqual(slots.count, 9)
+        XCTAssertEqual(slots.first?.title, "Gestion informatisée")
+        XCTAssertEqual(slot(slots, day: 2, start: 490)?.title, "Marketing et communication")
+        XCTAssertEqual(slot(slots, day: 2, start: 605)?.title, "Mathématiques appliq")
+    }
+
+    func testOmnivoxGridWithNoClassGivesNothing() {
+        // The list of courses, the personal data and "Accès à Omnivox" must never become classes.
+        var shot = winterShot()
+        shot.blocks = []
+        XCTAssertTrue(ScheduleParser.slots(from: shot.lines(), probe: shot.probe()).isEmpty)
+        XCTAssertTrue(ScheduleParser.slots(from: shot.lines()).isEmpty)
+    }
+
+    func testAListOfHoursInTheMarginIsNotTakenForPairsOfRows() {
+        var lines: [RecognizedLine] = []
+        for (index, name) in ["Mon", "Tue", "Wed"].enumerated() {
+            lines.append(cell(name, center: [0.3, 0.5, 0.7][index], y: 0.05))
+        }
+        lines += [line("8:00", x: 0.02, y: 0.29, width: 0.06), line("9:00", x: 0.02, y: 0.39, width: 0.06),
+                  line("10:00", x: 0.02, y: 0.49, width: 0.06), line("11:00", x: 0.02, y: 0.59, width: 0.06)]
+        lines += [cell("Maths", center: 0.3, y: 0.305)]
+        let slots = ScheduleParser.slots(from: lines)
+        XCTAssertEqual(slots.count, 1)
+        XCTAssertEqual(slot(slots, day: 1, start: 480)?.title, "Maths")
+    }
 }

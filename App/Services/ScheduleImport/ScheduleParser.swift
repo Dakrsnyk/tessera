@@ -14,6 +14,14 @@ struct ImportedSlot: Identifiable, Hashable {
     var isSelected = true
 }
 
+/// Looks at the colours of the image along a vertical line, to tell the blocks that hold a class (lighter)
+/// from the empty cells of a timetable grid. Kept as a protocol so the parser stays pure and testable.
+protocol BlockProbe {
+    /// The vertical stretches (0...1, origin at the top) of "block" colour along the line at `x`, between
+    /// `fromY` and `toY`; nil when blocks cannot be told from empty cells.
+    func blockRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]?
+}
+
 /// One line of text read from an image, with its place on the page.
 struct RecognizedLine: Equatable {
     var text: String
@@ -28,8 +36,14 @@ enum ScheduleParser {
 
     // MARK: Entry points
 
-    /// The classes found on ONE page. Never fails: unreadable input gives an empty list.
+    /// The classes found on ONE page, without looking at the colours of the image.
     static func slots(from lines: [RecognizedLine]) -> [ImportedSlot] {
+        slots(from: lines, probe: nil)
+    }
+
+    /// The classes found on ONE page. Never fails: unreadable input gives an empty list. The probe (when the
+    /// image is known) tells where the blocks of a timetable start and stop; without it their height is guessed.
+    static func slots(from lines: [RecognizedLine], probe: BlockProbe?) -> [ImportedSlot] {
         var cleaned: [RecognizedLine] = []
         for line in lines {
             if let kept = cleanedLine(line) { cleaned.append(kept) }
@@ -37,6 +51,10 @@ enum ScheduleParser {
         guard !cleaned.isEmpty else { return [] }
         var drafts: [Draft] = []
         if let grid = detectGrid(in: cleaned) {
+            // A grid with a pair of hours per row (Omnivox...): the classes come from the grid only, never from the list.
+            if let timetable = timetableDrafts(cleaned, grid, probe: probe) {
+                return finalize(timetable)
+            }
             drafts = gridDrafts(cleaned, grid)
         }
         if drafts.isEmpty {
@@ -764,6 +782,402 @@ enum ScheduleParser {
         let bottom = lines.map { $0.box.maxY }.max() ?? top
         guard let placed = axis.lookup(top: top, center: (top + bottom) / 2) else { return nil }
         return Draft(weekday: weekday, start: placed.start, end: placed.end, title: title, room: room)
+    }
+
+    // MARK: Layout: timetable grid where the height of a block gives the hours
+
+    /// The rows of a grid whose left margin writes two hours per row ("08:10" then "09:00", "09:05" then "09:55"...).
+    /// The text of a block does not say when it starts or ends: the rows it covers do.
+    struct Timeline {
+        struct Row {
+            var start: Int
+            var end: Int
+            var startY: CGFloat
+            var endY: CGFloat
+        }
+
+        /// A block never covers more rows than this.
+        static let maxSpan = 4
+
+        var rows: [Row]
+        /// Estimated edges of the rows on the page: `bounds[i]` is the top of row i, `bounds[rows.count]` the bottom
+        /// of the last one. The two hours of a row are centred in it, so an edge is halfway between the end label of
+        /// a row and the start label of the next.
+        var bounds: [CGFloat]
+
+        /// Pairs the hour labels of the margin (top to bottom) into rows; a label with no partner is ignored.
+        init?(margin: [RecognizedLine]) {
+            var labels: [(y: CGFloat, minute: Int)] = []
+            for line in margin.sorted(by: { $0.box.midY < $1.box.midY }) {
+                if let minute = ScheduleParser.clockMinute(line.text) { labels.append((y: line.box.midY, minute: minute)) }
+            }
+            var found: [Row] = []
+            var index = 0
+            while index + 1 < labels.count {
+                let first = labels[index]
+                let second = labels[index + 1]
+                let length = second.minute - first.minute
+                if length >= 30, length <= 180, second.y > first.y, first.minute >= (found.last?.end ?? 0) {
+                    found.append(Row(start: first.minute, end: second.minute, startY: first.y, endY: second.y))
+                    index += 2
+                } else {
+                    index += 1
+                }
+            }
+            guard found.count >= 2 else { return nil }
+            // Rows follow each other closely (a break of 5 to 10 minutes). A plain list of hours (8:00, 9:00, 10:00...)
+            // would pair up wrongly, and the gaps between its pairs are as long as the pairs themselves.
+            var tight = 0
+            for k in 1..<found.count where found[k].start - found[k - 1].end < found[k - 1].end - found[k - 1].start {
+                tight += 1
+            }
+            guard tight * 2 >= found.count - 1 else { return nil }
+            let count = found.count
+            var edges = [CGFloat](repeating: 0, count: count + 1)
+            for k in 1..<count { edges[k] = (found[k - 1].endY + found[k].startY) / 2 }
+            edges[0] = found[0].startY - (found[1].startY - found[0].endY) / 2
+            edges[count] = found[count - 1].endY + (found[count - 1].startY - found[count - 2].endY) / 2
+            for k in 1...count where edges[k] <= edges[k - 1] { return nil }
+            self.rows = found
+            self.bounds = edges
+        }
+
+        /// The rows whose top is the nearest to `top` and whose bottom is the nearest to `bottom`.
+        func snap(top: CGFloat, bottom: CGFloat) -> (first: Int, last: Int) {
+            var first = 0
+            for k in 0..<rows.count where abs(bounds[k] - top) < abs(bounds[first] - top) { first = k }
+            var last = rows.count - 1
+            for k in 0..<rows.count where abs(bounds[k + 1] - bottom) < abs(bounds[last + 1] - bottom) { last = k }
+            if last < first { last = first }
+            return (first, last)
+        }
+
+        /// The rows of a block seen only by its text, which is centred in the block: the rows that hold the text and
+        /// whose middle is the nearest to the middle of the text, the smallest range when several are about as good.
+        func fit(top: CGFloat, bottom: CGFloat) -> (first: Int, last: Int)? {
+            let center = (top + bottom) / 2
+            var candidates: [(first: Int, last: Int, error: CGFloat)] = []
+            for first in 0..<rows.count {
+                for last in first..<min(rows.count, first + Timeline.maxSpan) {
+                    let blockTop = bounds[first]
+                    let blockBottom = bounds[last + 1]
+                    guard blockTop <= top + 0.005, blockBottom >= bottom - 0.005 else { continue }
+                    candidates.append((first: first, last: last, error: abs((blockTop + blockBottom) / 2 - center)))
+                }
+            }
+            guard let best = candidates.map({ $0.error }).min() else { return nil }
+            var chosen: (first: Int, last: Int, error: CGFloat)? = nil
+            for candidate in candidates where candidate.error <= best + 0.004 {
+                if let current = chosen {
+                    let size = candidate.last - candidate.first
+                    let currentSize = current.last - current.first
+                    if size < currentSize || (size == currentSize && candidate.error < current.error) { chosen = candidate }
+                } else {
+                    chosen = candidate
+                }
+            }
+            guard let picked = chosen else { return nil }
+            return (picked.first, picked.last)
+        }
+    }
+
+    /// The lines of a block of text in one column of the grid.
+    struct TextCluster {
+        var lines: [RecognizedLine]
+        var top: CGFloat
+        var bottom: CGFloat
+        var center: CGFloat { (top + bottom) / 2 }
+    }
+
+    /// What the text of a block says: a title (maybe cut by the cell), a room and the code of the course.
+    struct BlockContent {
+        var title: String
+        var room: String?
+        var code: String?
+    }
+
+    /// Offsets (0...1 of the page width) from the left edge of a column where the probe looks: inside the cell but
+    /// left of the centred text.
+    static let probeOffsets: [Double] = [0.003, 0.005]
+
+    /// "08:10", "8h10": a clock time and nothing else.
+    static let clockRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"^(\d{1,2})\s?[:hH]\s?(\d{2})$"#, options: [])
+
+    static func clockMinute(_ text: String) -> Int? {
+        guard let regex = clockRegex else { return nil }
+        let ns = text as NSString
+        guard let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: ns.length)),
+              let hour = Int(group(match, 1, in: ns) ?? ""), let minute = Int(group(match, 2, in: ns) ?? ""),
+              hour < 24, minute < 60 else { return nil }
+        return hour * 60 + minute
+    }
+
+    /// "410-343-CH", "203-NYB-05": the code of a course, as written in a block and in the list of courses.
+    static let courseCodeRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"(?<![A-Za-z0-9])\d{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{2}(?![0-9])"#, options: [])
+
+    /// The first course code of a text, with what comes before and after it.
+    static func courseCode(in text: String) -> (code: String, before: String, after: String)? {
+        guard let regex = courseCodeRegex else { return nil }
+        let ns = text as NSString
+        guard let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: ns.length)) else { return nil }
+        let end = match.range.location + match.range.length
+        return (ns.substring(with: match.range).uppercased(), ns.substring(to: match.range.location), ns.substring(from: end))
+    }
+
+    static let roomWords: Set<String> = ["local", "salle", "room", "classe", "amphi", "labo", "aula", "raum", "sala"]
+
+    /// "Local F5107", "Salle B-204": a line that is a room.
+    static func isRoomLine(_ text: String) -> Bool {
+        let list = words(of: text)
+        guard list.count >= 2, let first = list.first else { return false }
+        return roomWords.contains(first)
+    }
+
+    static let modeLines: Set<String> = ["presentiel", "en ligne", "a distance", "distance", "hybride", "comodal", "online"]
+
+    /// "Présentiel", "En ligne": how the class is given (a line of its own in the block).
+    static func isModeLine(_ text: String) -> Bool {
+        modeLines.contains(words(of: text).joined(separator: " "))
+    }
+
+    /// "gr.41070" written alone or after a code that was not read.
+    static func isGroupLine(_ text: String) -> Bool {
+        text.range(of: #"(?i)\bgr\.?\s?\d{3,}"#, options: .regularExpression) != nil
+    }
+
+    /// The text of a list entry without the number of its group ("21050 Titre" or "gr.21050 Titre").
+    static func withoutGroupNumber(_ text: String) -> String {
+        let stripped = text.replacingOccurrences(of: #"^\s*(?:gr\.?\s*)?\d{3,6}(?![A-Za-z0-9])\s*"#, with: "",
+                                                  options: [.regularExpression, .caseInsensitive])
+        return stripped.trimmingCharacters(in: .whitespaces)
+    }
+
+    /// Title, room and code of a block. The title is what comes before the code line; the teacher, the mode and
+    /// the code line itself are dropped. A block with no code, no room and no mode is not a class.
+    static func blockContent(_ lines: [RecognizedLine]) -> BlockContent? {
+        let texts = lines.map { $0.text }
+        let codeIndex = texts.firstIndex { courseCode(in: $0) != nil }
+        let roomIndex = texts.firstIndex { isRoomLine($0) }
+        let modeIndex = texts.firstIndex { isModeLine($0) }
+        guard let end = codeIndex ?? roomIndex ?? modeIndex else { return nil }
+        var parts: [String] = []
+        for text in texts[0..<end] where !isModeLine(text) && !isRoomLine(text) && !isGroupLine(text) {
+            parts.append(text)
+        }
+        var code: String? = nil
+        if let at = codeIndex, let found = courseCode(in: texts[at]) {
+            code = found.code
+            let before = found.before.trimmingCharacters(in: .whitespaces)
+            if !before.isEmpty { parts.append(before) }
+        }
+        let room = roomIndex.map { texts[$0].trimmingCharacters(in: .whitespaces) }
+        return BlockContent(title: parts.joined(separator: " "), room: room, code: code)
+    }
+
+    /// Code to full title, from the "Liste des cours" above the grid (one row per course: date, code, group, title,
+    /// teacher; Vision may return the whole row or each column on its own, so lines at the same height are one row).
+    static func courseCatalog(_ lines: [RecognizedLine], aboveY limit: CGFloat) -> [String: String] {
+        let candidates = lines.filter { $0.box.midY < limit }.sorted { $0.box.midY < $1.box.midY }
+        var rows: [[RecognizedLine]] = []
+        for line in candidates {
+            if let first = rows.last?.first, abs(line.box.midY - first.box.midY) <= 0.0035 {
+                rows[rows.count - 1].append(line)
+            } else {
+                rows.append([line])
+            }
+        }
+        var catalog: [String: String] = [:]
+        for row in rows {
+            let items = row.sorted { $0.box.minX < $1.box.minX }
+            guard let at = items.firstIndex(where: { courseCode(in: $0.text) != nil }),
+                  let found = courseCode(in: items[at].text) else { continue }
+            var pieces = [found.after]
+            for item in items[(at + 1)...] { pieces.append(item.text) }
+            for piece in pieces {
+                let title = withoutGroupNumber(piece)
+                if title.filter({ $0.isLetter }).count >= 3 {
+                    if catalog[found.code] == nil { catalog[found.code] = title }
+                    break
+                }
+            }
+        }
+        return catalog
+    }
+
+    /// The full title of a class: the one of the list (by code), else the one the cut title starts.
+    static func fullTitle(_ cut: String, code: String?, catalog: [String: String]) -> String {
+        if let code = code, let full = catalog[code] { return full }
+        let key = fold(cut)
+        guard key.count >= 4 else { return cut }
+        let matches = Set(catalog.values.filter { fold($0).hasPrefix(key) })
+        if matches.count == 1, let only = matches.first { return only }
+        return cut
+    }
+
+    /// Lines of one column cut into blocks of text: a gap, or two course codes, starts a new one.
+    static func textClusters(_ lines: [RecognizedLine]) -> [TextCluster] {
+        let sorted = lines.sorted { $0.box.minY < $1.box.minY }
+        var groups: [[RecognizedLine]] = []
+        var current: [RecognizedLine] = []
+        var currentBottom: CGFloat = 0
+        var currentHeight: CGFloat = 0
+        for line in sorted {
+            if !current.isEmpty {
+                let limit = max(0.006, 0.9 * max(line.box.height, currentHeight))
+                if line.box.minY - currentBottom > limit {
+                    groups.append(current)
+                    current = []
+                    currentBottom = 0
+                    currentHeight = 0
+                }
+            }
+            current.append(line)
+            currentBottom = max(currentBottom, line.box.maxY)
+            currentHeight = max(currentHeight, line.box.height)
+        }
+        if !current.isEmpty { groups.append(current) }
+        var clusters: [TextCluster] = []
+        for group in groups {
+            for part in splitByCourseCodes(group) where !part.isEmpty {
+                let top = part.map { $0.box.minY }.min() ?? 0
+                let bottom = part.map { $0.box.maxY }.max() ?? top
+                clusters.append(TextCluster(lines: part, top: top, bottom: bottom))
+            }
+        }
+        return clusters
+    }
+
+    /// Two blocks stuck together (no gap) hold two course codes: cut at the biggest gap between the two codes.
+    static func splitByCourseCodes(_ lines: [RecognizedLine]) -> [[RecognizedLine]] {
+        let codes = lines.indices.filter { courseCode(in: lines[$0].text) != nil }
+        guard codes.count >= 2 else { return [lines] }
+        var cuts: [Int] = []
+        for pair in 0..<(codes.count - 1) {
+            var bestCut = codes[pair] + 1
+            var bestGap = -CGFloat.infinity
+            for cut in (codes[pair] + 1)...codes[pair + 1] {
+                let gap = lines[cut].box.minY - lines[cut - 1].box.maxY
+                if gap > bestGap {
+                    bestGap = gap
+                    bestCut = cut
+                }
+            }
+            cuts.append(bestCut)
+        }
+        var result: [[RecognizedLine]] = []
+        var start = 0
+        for cut in cuts + [lines.count] {
+            result.append(Array(lines[start..<cut]))
+            start = cut
+        }
+        return result
+    }
+
+    /// The stretches that the probe agrees on along the left edge of a column, or nil when it cannot tell.
+    static func columnRuns(_ probe: BlockProbe, left: CGFloat, from: Double, to: Double) -> [ClosedRange<Double>]? {
+        var common: [ClosedRange<Double>]? = nil
+        for offset in probeOffsets {
+            let x = Double(left) + offset
+            guard x >= 0, x < 1, let runs = probe.blockRuns(atX: x, fromY: from, toY: to) else { continue }
+            if let known = common {
+                common = intersection(known, runs)
+            } else {
+                common = runs
+            }
+        }
+        guard let result = common else { return nil }
+        // A letter of the text can cut a run on one of the lines: small holes are closed.
+        var merged: [ClosedRange<Double>] = []
+        for run in result.sorted(by: { $0.lowerBound < $1.lowerBound }) {
+            if let last = merged.last, run.lowerBound - last.upperBound <= 0.003 {
+                merged[merged.count - 1] = last.lowerBound...max(last.upperBound, run.upperBound)
+            } else {
+                merged.append(run)
+            }
+        }
+        return merged
+    }
+
+    static func intersection(_ a: [ClosedRange<Double>], _ b: [ClosedRange<Double>]) -> [ClosedRange<Double>] {
+        var result: [ClosedRange<Double>] = []
+        for first in a {
+            for second in b {
+                let low = max(first.lowerBound, second.lowerBound)
+                let high = min(first.upperBound, second.upperBound)
+                if low <= high { result.append(low...high) }
+            }
+        }
+        return result
+    }
+
+    /// The classes of a grid whose rows are named by two hours in the left margin. nil when the page is not such a
+    /// grid (the other readings then apply); an empty list when it is one but holds no class.
+    static func timetableDrafts(_ lines: [RecognizedLine], _ grid: Grid, probe: BlockProbe?) -> [Draft]? {
+        let headers = grid.headers
+        let count = headers.count
+        guard count >= 2 else { return nil }
+        // Column edges: halfway between the centres of the day names (half a column at the two ends).
+        var edges: [CGFloat] = [headers[0].x - (headers[1].x - headers[0].x) / 2]
+        for index in 1..<count { edges.append((headers[index - 1].x + headers[index].x) / 2) }
+        edges.append(headers[count - 1].x + (headers[count - 1].x - headers[count - 2].x) / 2)
+        var margin: [RecognizedLine] = []
+        for (index, line) in lines.enumerated() {
+            if grid.lineIndexes.contains(index) || line.box.midY <= grid.bandBottom { continue }
+            if line.box.midX < edges[0] { margin.append(line) }
+        }
+        guard let timeline = Timeline(margin: margin), let lastRow = timeline.rows.last,
+              let gridBottom = timeline.bounds.last else { return nil }
+        let gridTop = timeline.bounds[0]
+        // Only the grid: not the list of courses above it, nor what is written under it ("Accès à Omnivox").
+        let lowest = lastRow.endY + 0.008
+        var columns = [[RecognizedLine]](repeating: [], count: count)
+        for (index, line) in lines.enumerated() {
+            if grid.lineIndexes.contains(index) { continue }
+            let y = line.box.midY
+            let x = line.box.midX
+            guard y > grid.bandBottom, y >= gridTop - 0.004, y <= lowest, x >= edges[0], x < edges[count] else { continue }
+            var column = 0
+            while column < count - 1, x >= edges[column + 1] { column += 1 }
+            columns[column].append(line)
+        }
+        let catalog = courseCatalog(lines, aboveY: headers.map { $0.y }.min() ?? 0)
+        let fromY = max(0, Double(gridTop) - 0.002)
+        let toY = min(1, Double(gridBottom) + 0.002)
+        var drafts: [Draft] = []
+        for (column, columnLines) in columns.enumerated() where !columnLines.isEmpty {
+            let clusters = textClusters(columnLines)
+            let runs = probe.flatMap { columnRuns($0, left: edges[column], from: fromY, to: toY) }
+            for (index, cluster) in clusters.enumerated() {
+                guard let content = blockContent(cluster.lines) else { continue }
+                let span = blockRows(clusters, index, runs: runs, timeline: timeline)
+                let title = fullTitle(content.title, code: content.code, catalog: catalog)
+                guard !title.isEmpty else { continue }
+                drafts.append(Draft(weekday: headers[column].day, start: timeline.rows[span.first].start,
+                                    end: timeline.rows[span.last].end, title: title, room: content.room))
+            }
+        }
+        return drafts
+    }
+
+    /// The rows covered by the block of a cluster: from the colours when the probe sees the block, else from the
+    /// place of the text.
+    static func blockRows(_ clusters: [TextCluster], _ index: Int, runs: [ClosedRange<Double>]?,
+                          timeline: Timeline) -> (first: Int, last: Int) {
+        let cluster = clusters[index]
+        if let runs = runs, let found = runs.first(where: { $0.contains(Double(cluster.center)) }) {
+            // Two blocks stuck together make one stretch: cut halfway between their texts.
+            func sameRun(_ k: Int) -> Bool {
+                clusters.indices.contains(k) && found.contains(Double(clusters[k].center))
+            }
+            let top = sameRun(index - 1) ? (clusters[index - 1].bottom + cluster.top) / 2 : CGFloat(found.lowerBound)
+            let bottom = sameRun(index + 1) ? (cluster.bottom + clusters[index + 1].top) / 2 : CGFloat(found.upperBound)
+            let snapped = timeline.snap(top: top, bottom: bottom)
+            if snapped.last - snapped.first < Timeline.maxSpan { return snapped }
+        }
+        return timeline.fit(top: cluster.top, bottom: cluster.bottom)
+            ?? timeline.snap(top: cluster.top, bottom: cluster.bottom)
     }
 
     // MARK: Layout: list day by day
