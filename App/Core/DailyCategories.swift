@@ -65,17 +65,14 @@ enum DailyCategories {
     /// The categories the person added: with the « + » (`cat-…`), or before it existed (a mini-app
     /// added from the editor, the Productivité quick add). Unknown entries are ignored.
     static func added(_ settings: AppSettings) -> Set<DailyBrief.Category> {
-        var result = Set<DailyBrief.Category>()
-        for entry in settings.dailyAdded {
-            if entry == productivityKey {
-                result.insert(.priorities)
-            } else if entry.hasPrefix(categoryPrefix), let category = DailyBrief.Category(rawValue: String(entry.dropFirst(categoryPrefix.count))) {
-                result.insert(category)
-            } else if let app = MiniApp(rawValue: entry), let category = DailyBrief.Category(app: app) {
-                result.insert(category)
-            }
-        }
-        return result
+        Set(settings.dailyAdded.compactMap(category(ofEntry:)))
+    }
+
+    /// The category a `dailyAdded` entry stands for, in any of its forms (nil for an unknown entry).
+    static func category(ofEntry entry: String) -> DailyBrief.Category? {
+        if entry == productivityKey { return .priorities }
+        if entry.hasPrefix(categoryPrefix) { return DailyBrief.Category(rawValue: String(entry.dropFirst(categoryPrefix.count))) }
+        return MiniApp(rawValue: entry).flatMap { DailyBrief.Category(app: $0) }
     }
 
     /// The categories shown even without data: the interests chosen in the first form (no cap), the weather
@@ -106,8 +103,10 @@ enum DailyCategories {
     /// the « + ». Nothing is deleted from the mini-app. `tileID` is the id of the card.
     static func remove(tileID: String, in settings: inout AppSettings) {
         if !settings.dailyHidden.contains(tileID) { settings.dailyHidden.append(tileID) }
+        // Every form of the entry that stands for this category (`cat-…`, an old mini-app, the Productivité
+        // quick add), so that no door brings it back.
         if let category = DailyBrief.Category(tileID: tileID) {
-            settings.dailyAdded.removeAll { $0 == addedKey(category) }
+            settings.dailyAdded.removeAll { Self.category(ofEntry: $0) == category }
         }
     }
 

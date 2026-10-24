@@ -75,14 +75,16 @@ final class ScheduleRealWorldTests: XCTestCase {
         XCTAssertEqual(ScheduleParser.clockMinute("09 00"), 540, "a space instead of the colon")
         XCTAssertEqual(ScheduleParser.clockMinute("09 55"), 595)
         XCTAssertEqual(ScheduleParser.clockMinute("10.05"), 605)
-        XCTAssertEqual(ScheduleParser.clockMinute("1300"), 780, "no separator at all")
-        XCTAssertEqual(ScheduleParser.clockMinute("1640"), 1000)
+        XCTAssertEqual(ScheduleParser.clockMinute("1300", compact: true), 780, "no separator at all, in the margin of a grid")
+        XCTAssertNil(ScheduleParser.clockMinute("1300"), "four digits are a time only in the margin")
+        XCTAssertEqual(ScheduleParser.clockMinute("1640", compact: true), 1000)
         XCTAssertEqual(ScheduleParser.clockMinute("11,50"), 710)
         XCTAssertEqual(ScheduleParser.clockMinute("08:10"), 490)
-        XCTAssertNil(ScheduleParser.clockMinute("2026"), "a year is not 20:26")
-        XCTAssertEqual(ScheduleParser.clockMinute("0830"), 510)
-        XCTAssertNil(ScheduleParser.clockMinute("0430"), "before 05:00")
-        XCTAssertNil(ScheduleParser.clockMinute("1337"), "not on the five minutes")
+        XCTAssertNil(ScheduleParser.clockMinute("2026", compact: true), "a year is not 20:26")
+        XCTAssertNil(ScheduleParser.clockMinute("2025"), "not outside the margin")
+        XCTAssertEqual(ScheduleParser.clockMinute("0830", compact: true), 510)
+        XCTAssertNil(ScheduleParser.clockMinute("0430", compact: true), "before 05:00")
+        XCTAssertNil(ScheduleParser.clockMinute("1337", compact: true), "not on the five minutes")
         XCTAssertNil(ScheduleParser.clockMinute("12/10/2026"))
         XCTAssertNil(ScheduleParser.clockMinute("25:00"))
         XCTAssertNil(ScheduleParser.clockMinute("8h"))
@@ -130,8 +132,20 @@ final class ScheduleRealWorldTests: XCTestCase {
         // A code that resembles no other, or a title that is not near any: nothing is invented.
         XCTAssertEqual(ScheduleParser.fullTitle("Danse", code: "999-XYZ-99", catalog: catalog), "Danse")
         XCTAssertTrue(ScheduleParser.isRoomLine("Loca A2203"), "a room word read with a letter lost")
+        XCTAssertTrue(ScheduleParser.isRoomLine("Sale 101"))
         XCTAssertFalse(ScheduleParser.isRoomLine("Rome 1914"))
+        XCTAssertFalse(ScheduleParser.isRoomLine("Labor 2"), "a word near \"labo\" before a lone digit")
+        XCTAssertFalse(ScheduleParser.isRoomLine("Classes 2"))
+        XCTAssertFalse(ScheduleParser.isRoomLine("Salad 3"))
         XCTAssertFalse(ScheduleParser.isRoomLine("Local"))
+    }
+
+    func testARoomAloneWhoseHoursAreOnlyGuessedIsNoClass() {
+        // Without the image the hours of the Monday block, whose title and code were lost, come from the middle of its text: a
+        // guess. The title of its room is then not borrowed, and no class is made of "Local F5107" alone.
+        let slots = ScheduleParser.slots(from: RealLines.lines(RealLines.omnivoxBlurred))
+        XCTAssertNil(slots.first { $0.weekday == 1 && $0.startMinute < 600 }, describe(slots))
+        XCTAssertNotNil(slots.first { $0.weekday == 5 && $0.title.lowercased().contains("physique") }, "the Friday block is a class")
     }
 
     // MARK: Omnivox, tilted by 2 degrees: the probe follows the straightened columns
@@ -239,6 +253,39 @@ final class ScheduleRealWorldTests: XCTestCase {
             guard let probe = LuminanceProbe(width: width, height: height, pixels: pixels) else { return XCTFail("no probe") }
             assertRuns(probe.framedRuns(atX: 0.1, fromY: 0.05, toY: 0.9), [(101, 201), (201, 401)], height: height)
         }
+    }
+
+    func testLightBlocksOnADarkPageAreNotOutlines() {
+        // A dark page with pastel-light blocks: each row of a block is light on most of its width, but a block is hundreds of
+        // pixels tall and an outline is a thin line.
+        let width = 400
+        let height = 800
+        var pixels = [UInt8](repeating: 30, count: width * height)
+        for row in 100..<300 { for column in 0..<width { pixels[row * width + column] = 220 } }
+        for row in 400..<560 { for column in 0..<width { pixels[row * width + column] = 220 } }
+        guard let probe = LuminanceProbe(width: width, height: height, pixels: pixels) else { return XCTFail("no probe") }
+        XCTAssertNil(probe.framedRuns(atX: 0.1, fromY: 0.05, toY: 0.9))
+    }
+
+    func testAThinLineSurvivesTheTurnOfTheImage() throws {
+        // A line of one pixel on a tilted photo: turning the image must not blur it into two grey lines.
+        let width = 600
+        let height = 800
+        var pixels = [UInt8](repeating: 255, count: width * height)
+        for row in 0..<height {
+            for column in 0..<width {
+                let x = (Double(column) + 0.5) / Double(width)
+                let y = (Double(row) + 0.5) / Double(height)
+                let straightY = y - 0.04 * (x - 0.5)
+                for line in [0.30, 0.55, 0.80] where abs(straightY * Double(height) - line * Double(height)) < 0.6 {
+                    pixels[row * width + column] = 0
+                }
+            }
+        }
+        let photo = try XCTUnwrap(LuminanceProbe(width: width, height: height, pixels: pixels))
+        let straight = try XCTUnwrap(photo.straightened(slope: 0.04, pivotX: 0.5, pivotY: 0.4, aspect: Double(height) / Double(width)))
+        let runs = try XCTUnwrap(straight.framedRuns(atX: 0.2, fromY: 0.2, toY: 0.9))
+        XCTAssertEqual(runs.count, 2, "\(runs)")
     }
 
     // MARK: Boxed blocks, read from the real lines

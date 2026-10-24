@@ -455,6 +455,10 @@ struct LuminanceProbe: BlockProbe {
     let pixels: [UInt8]
     /// A light page (the outlines of `framedRuns` are dark lines on it; on a dark page they are light lines).
     private var lightPage = true
+    /// The median grey level of the page (looked at on a coarse grid): a dark page is one whose median is far below the middle.
+    private var medianLevel = 255
+    /// For `framedRuns` only, a copy of the grey levels in which a thin line keeps its darkness (see `straightened`); nil: `pixels`.
+    private var framePixels: [UInt8]? = nil
 
     /// A page whose middle sample is below this is a dark page.
     private static let darkPageBelow = 110
@@ -484,6 +488,7 @@ struct LuminanceProbe: BlockProbe {
         self.height = h
         self.pixels = data
         self.lightPage = LuminanceProbe.isLight(data, width: w, height: h)
+        self.medianLevel = LuminanceProbe.median(data, width: w, height: h)
     }
 
     /// For tests: a probe over grey levels already known (row by row from the top).
@@ -493,10 +498,11 @@ struct LuminanceProbe: BlockProbe {
         self.height = height
         self.pixels = pixels
         self.lightPage = LuminanceProbe.isLight(pixels, width: width, height: height)
+        self.medianLevel = LuminanceProbe.median(pixels, width: width, height: height)
     }
 
-    /// Whether the middle grey level of the page (looked at on a coarse grid of points) is a light one.
-    private static func isLight(_ pixels: [UInt8], width: Int, height: Int) -> Bool {
+    /// The middle grey level of the page, looked at on a coarse grid of points.
+    private static func median(_ pixels: [UInt8], width: Int, height: Int) -> Int {
         var levels: [UInt8] = []
         let rowStep = max(1, height / 200)
         let columnStep = max(1, width / 200)
@@ -504,7 +510,12 @@ struct LuminanceProbe: BlockProbe {
             for column in stride(from: 0, to: width, by: columnStep) { levels.append(pixels[row * width + column]) }
         }
         levels.sort()
-        return Int(levels[levels.count / 2]) >= darkPageBelow
+        return Int(levels[levels.count / 2])
+    }
+
+    /// Whether the middle grey level of the page is a light one.
+    private static func isLight(_ pixels: [UInt8], width: Int, height: Int) -> Bool {
+        median(pixels, width: width, height: height) >= darkPageBelow
     }
 
     func blockRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
@@ -524,6 +535,11 @@ struct LuminanceProbe: BlockProbe {
         let h = height
         let source = pixels
         var turned = [UInt8](repeating: 255, count: w * h)
+        // For the outlines: the darkest (on a light page) or the lightest of the four pixels around the place, so that a line of one
+        // or two pixels is not blurred into two grey ones that the outline test would no longer see. The colours use `turned`.
+        var sharp = [UInt8](repeating: lightPage ? 255 : 0, count: w * h)
+        let keepsDarkest = lightPage
+        sharp.withUnsafeMutableBufferPointer { ink in
         turned.withUnsafeMutableBufferPointer { target in
             source.withUnsafeBufferPointer { from in
                 for row in 0..<h {
@@ -547,16 +563,26 @@ struct LuminanceProbe: BlockProbe {
                         let lower = Double(from[yb * w + xa]) * (1 - tx) + Double(from[yb * w + xb]) * tx
                         let level = (upper * (1 - ty) + lower * ty).rounded()
                         target[row * w + column] = UInt8(min(255, max(0, level)))
+                        let p1 = from[ya * w + xa]
+                        let p2 = from[ya * w + xb]
+                        let p3 = from[yb * w + xa]
+                        let p4 = from[yb * w + xb]
+                        ink[row * w + column] = keepsDarkest ? min(min(p1, p2), min(p3, p4)) : max(max(p1, p2), max(p3, p4))
                     }
                 }
             }
         }
-        return LuminanceProbe(width: w, height: h, pixels: turned)
+        }
+        var result = LuminanceProbe(width: w, height: h, pixels: turned)
+        result?.framePixels = sharp
+        return result
     }
 
     /// A row of the window is part of an outline when this share of it is black.
     private static let outlineShare = 0.85
     private static let outlineBelow = 120
+    /// A page whose median level is under this is dark enough to look for light outlines on it.
+    private static let darkPageMedian = 100
     /// The window starts this far (a share of the page width) right of the asked x, inside the cell, clear of its left
     /// outline and of the text, and is this wide.
     private static let outlineShift = 0.012
@@ -567,7 +593,7 @@ struct LuminanceProbe: BlockProbe {
     /// The stretches between two consecutive thick black horizontal lines (from the middle of one to the middle of the
     /// next), along the line at `x`. A line one or two
     /// pixels thick counts (a photo or a small screenshot); the text of a cell never fills 85% of a row, and the thin
-    /// grey lines of the grid are not black. On a dark page (dark mode) the outlines are the thick LIGHT lines.
+    /// grey lines of the grid are not black. On a dark page (dark mode) the outlines are thin LIGHT lines.
     func framedRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? {
         guard x.isFinite, fromY.isFinite, toY.isFinite else { return nil }
         let first = Int((x + LuminanceProbe.outlineShift) * Double(width))
@@ -576,6 +602,11 @@ struct LuminanceProbe: BlockProbe {
         let top = max(0, Int((fromY * Double(height)).rounded(.down)))
         let bottom = min(height - 1, Int((toY * Double(height)).rounded(.up)))
         guard bottom - top >= 20 else { return nil }
+        // On a dark page the outlines are thin light lines; a page that is not clearly dark (median under 100) or a light stretch
+        // that is thick (a pastel block on a dark page) is not an outline.
+        let onLightPage = lightPage
+        guard onLightPage || medianLevel < LuminanceProbe.darkPageMedian else { return nil }
+        let thickest = onLightPage ? Int.max : max(6, height / 120)
         let needed = Int((Double(last - first) * LuminanceProbe.outlineShare).rounded(.up))
         var centers: [Double] = []
         var start: Int? = nil
@@ -583,24 +614,27 @@ struct LuminanceProbe: BlockProbe {
         // The ink of an outline: below the limit on a light page, above its mirror on a dark one.
         let darkLimit = LuminanceProbe.outlineBelow
         let lightLimit = 255 - LuminanceProbe.outlineBelow
-        let onLightPage = lightPage
+        let levels = framePixels ?? pixels
+        func close(_ begin: Int, _ end: Int) {
+            if end - begin + 1 <= thickest { centers.append(Double(begin + end) / 2) }
+        }
         for row in top...bottom {
             var dark = 0
             for column in first..<last {
-                let level = Int(pixels[row * width + column])
+                let level = Int(levels[row * width + column])
                 let isInk = onLightPage ? (level < darkLimit) : (level > lightLimit)
                 if isInk { dark += 1 }
             }
             guard dark >= needed else { continue }
             if let begin = start, row - lastDark - 1 > 1 {
-                centers.append(Double(begin + lastDark) / 2)
+                close(begin, lastDark)
                 start = row
             } else if start == nil {
                 start = row
             }
             lastDark = row
         }
-        if let begin = start { centers.append(Double(begin + lastDark) / 2) }
+        if let begin = start { close(begin, lastDark) }
         guard centers.count >= 2 else { return nil }
         var result: [ClosedRange<Double>] = []
         for index in 0..<(centers.count - 1) {

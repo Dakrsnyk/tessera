@@ -236,6 +236,32 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertFalse(ids(onScreen(emptyInput(), settings: settings)).contains("app-car"))
     }
 
+    func testRemovingAlsoDropsTheOldFormsOfTheSameCategory() {
+        var settings = AppSettings()
+        settings.dailyAdded = ["business", "cat-business", "quick-productivity", "fitness", "cat-car"]
+        DailyCategories.remove(tileID: "app-business", in: &settings)
+        XCTAssertEqual(settings.dailyAdded, ["quick-productivity", "fitness", "cat-car"], "Both forms of Business gone, the others kept")
+        DailyCategories.remove(tileID: "priorities", in: &settings)
+        DailyCategories.remove(tileID: "workout", in: &settings)
+        XCTAssertEqual(settings.dailyAdded, ["cat-car"])
+        XCTAssertEqual(DailyCategories.added(settings), [.car])
+        XCTAssertEqual(Set(settings.dailyHidden), ["app-business", "priorities", "workout"])
+    }
+
+    func testTheAutomaticLayoutNeverBringsBackARemovedCategory() {
+        // What the editor's « Disposition automatique » does: only the order and the sizes are reset.
+        var settings = AppSettings()
+        var input = emptyInput()
+        input.interests = [.nutrition]
+        DailyCategories.remove(tileID: "nutrition", in: &settings)
+        settings.dailyOrder = ["nutrition"]
+        settings.dailyWide = ["nutrition": true]
+        settings.dailyOrder = []
+        settings.dailyWide = [:]
+        XCTAssertEqual(settings.dailyHidden, ["nutrition"])
+        XCTAssertTrue(onScreen(input, settings: settings).isEmpty)
+    }
+
     func testRemovingNeverTouchesTheMiniAppData() {
         let model = temporaryModel()
         model.setNutritionTargets(kcal: 2_200)

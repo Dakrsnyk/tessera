@@ -21,7 +21,7 @@ struct DailyLayoutEditor: View {
     }
 
     private var isAutomatic: Bool {
-        settings.dailyOrder.isEmpty && settings.dailyHidden.isEmpty && settings.dailyWide.isEmpty
+        settings.dailyOrder.isEmpty && settings.dailyWide.isEmpty
     }
 
     var body: some View {
@@ -81,8 +81,8 @@ struct DailyLayoutEditor: View {
                 Section {
                     Button {
                         model.updateSettings {
+                            // Only the order and the sizes: what was removed stays removed, what was added stays.
                             $0.dailyOrder = []
-                            $0.dailyHidden = []
                             $0.dailyWide = [:]
                         }
                     } label: {

@@ -1428,7 +1428,7 @@ enum ScheduleParser {
         init?(margin: [RecognizedLine]) {
             var labels: [(y: CGFloat, minute: Int)] = []
             for line in margin.sorted(by: { $0.box.midY < $1.box.midY }) {
-                if let minute = ScheduleParser.clockMinute(line.text) {
+                if let minute = ScheduleParser.clockMinute(line.text, compact: true) {
                     labels.append((y: line.box.midY, minute: minute))
                 } else if let pair = ScheduleParser.clockPair(line.text) {
                     // Both hours of a row in one box. Stacked (a tall box): the start is in the upper half and the end
@@ -1548,7 +1548,9 @@ enum ScheduleParser {
     static let clockPairRegex: NSRegularExpression? = try? NSRegularExpression(
         pattern: #"^(\d{1,2}\s?(?:[:hH]|\.)\s?\d{2})\s+(\d{1,2}\s?(?:[:hH]|\.)\s?\d{2})$"#, options: [])
 
-    static func clockMinute(_ raw: String) -> Int? {
+    /// `compact` also accepts the four digits without separator ("1300"): only for the labels of the margin of a grid, where a
+    /// year ("2025") or any other number does not appear.
+    static func clockMinute(_ raw: String, compact allowCompact: Bool = false) -> Int? {
         guard let regex = clockRegex else { return nil }
         // "O8:1O" in the margin is 08:10 (the labels of a row are not marked one by one).
         let text = repairedHours(raw)?.text ?? raw
@@ -1560,7 +1562,7 @@ enum ScheduleParser {
             return hour * 60 + minute
         }
         // "1300": no separator at all. Only a plausible school hour on the five minutes ("2026" is a year, not 20:26).
-        if let compact = compactClockRegex,
+        if allowCompact, let compact = compactClockRegex,
            let match = compact.firstMatch(in: text, options: [], range: whole),
            let hour = Int(group(match, 1, in: ns) ?? ""), let minute = Int(group(match, 2, in: ns) ?? ""),
            (5...23).contains(hour), minute % 5 == 0 {
@@ -1618,9 +1620,15 @@ enum ScheduleParser {
         let list = words(of: text)
         guard list.count >= 2, let first = list.first else { return false }
         if roomWords.contains(first) { return true }
-        let numberFollows = list.dropFirst().contains { word in word.contains { $0.isNumber } }
-        guard first.count >= 4, first.allSatisfy({ $0.isLetter }), numberFollows else { return false }
-        return roomWords.contains { normalizedDistance(first, $0) <= 0.2 }
+        // A word one edit away from a room word ("Loca", "Sale") only counts before a plausible code of room: letters and digits
+        // ("A2203"), or at least two digits ("101"). "Labor 2", "Classes 2", "Salad 3" are not rooms.
+        guard first.count >= 4, first.count <= 6, first.allSatisfy({ $0.isLetter }), let code = list.dropFirst().first else { return false }
+        let digits = code.filter { $0.isNumber }.count
+        let letters = code.filter { $0.isLetter }.count
+        guard digits >= 2 || (digits >= 1 && letters >= 1) else { return false }
+        return roomWords.contains { room in
+            Int((normalizedDistance(first, room) * Double(max(first.count, room.count))).rounded()) <= 1
+        }
     }
 
     static let modeLines: Set<String> = ["presentiel", "en ligne", "a distance", "distance", "hybride", "comodal", "online"]
@@ -1985,6 +1993,7 @@ enum ScheduleParser {
             }
         }
         var drafts: [Draft] = []
+        var borrowedDrafts = Set<Int>()
         for (column, clusters) in clustersOf.enumerated() where !clusters.isEmpty {
             let marks = clusters.map { Double($0.center) }
             let runs = probe.flatMap { bestRuns($0, left: edges[column], from: fromY, to: toY, marks: marks) }
@@ -1995,12 +2004,17 @@ enum ScheduleParser {
                 var uncertain: Set<SlotField> = []
                 // A code that the list does not hold (read with a wrong character) was matched to the nearest course: to check.
                 if let code = content.code, catalog[code] == nil, !title.isEmpty, title != content.title { uncertain.insert(.title) }
-                if title.isEmpty, let room = content.room, let known = titleOfRoom[roomKey(room)], known.count == 1,
+                // No code and a title replaced by the nearest or the full one of the list: to check.
+                if content.code == nil, !title.isEmpty, title != content.title { uncertain.insert(.title) }
+                var borrowed = false
+                if title.isEmpty, !span.estimated, let room = content.room, let known = titleOfRoom[roomKey(room)], known.count == 1,
                    let only = known.first {
                     // Vision lost the title and the code of this block (a blurred or merged line) but read its room, and no other
-                    // course meets in that room on this page: the title is the one of the blocks of the room, to check.
+                    // course meets in that room on this page: the title is the one of the blocks of the room, to check. Only
+                    // when the hours are sure (the colours of the block or the rows): a room alone in the middle of nowhere is no class.
                     title = only
                     uncertain.insert(.title)
+                    borrowed = true
                 }
                 guard !title.isEmpty else { continue }
                 // The hours come from the middle of the text, not from the colours of the block: a guess.
@@ -2010,7 +2024,22 @@ enum ScheduleParser {
                 drafts.append(Draft(weekday: headers[column].day, start: timeline.rows[span.first].start,
                                     end: timeline.rows[span.last].end, title: title, room: content.room,
                                     uncertain: uncertain, coded: content.code != nil))
+                if borrowed { borrowedDrafts.insert(drafts.count - 1) }
             }
+        }
+        // A block whose title was borrowed that overlaps another class of its column is the same block cut in two clusters
+        // (its room apart from its titled text): the titled one stays.
+        if !borrowedDrafts.isEmpty {
+            var kept: [Draft] = []
+            for (index, draft) in drafts.enumerated() {
+                let overlaps = drafts.enumerated().contains { other in
+                    other.offset != index && other.element.weekday == draft.weekday
+                        && draft.start < (other.element.end ?? other.element.start) && other.element.start < (draft.end ?? draft.start)
+                }
+                if borrowedDrafts.contains(index) && overlaps { continue }
+                kept.append(draft)
+            }
+            return kept
         }
         return drafts
     }
