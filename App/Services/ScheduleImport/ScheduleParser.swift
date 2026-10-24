@@ -40,12 +40,18 @@ protocol BlockProbe {
     /// the cells tell nothing): the stretches between two consecutive thick horizontal lines. The empty stretches between
     /// blocks are included; the parser keeps the ones that hold the text of a class.
     func framedRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]?
+    /// The same probe over the page as `PageSkew` straightens it (see there): a photo taken a little crooked has its
+    /// columns and its rows tilted, and the stretches of a column must be read along the straightened column, not along
+    /// the vertical of the photo. nil when the probe cannot turn its image (the default): the straightened lines are
+    /// then read without the colours.
+    func straightened(slope: Double, pivotX: Double, pivotY: Double, aspect: Double) -> BlockProbe?
 }
 
 extension BlockProbe {
     /// A probe that only knows the lighter kind (the default) gives nothing for the darker one, nor for outlines.
     func darkRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? { nil }
     func framedRuns(atX x: Double, fromY: Double, toY: Double) -> [ClosedRange<Double>]? { nil }
+    func straightened(slope: Double, pivotX: Double, pivotY: Double, aspect: Double) -> BlockProbe? { nil }
 }
 
 /// One line of text read from an image, with its place on the page.
@@ -1529,9 +1535,14 @@ enum ScheduleParser {
     /// border is 0 to 3 pixels from the estimated edge and the widest text starts about 5 pixels after it.
     static let probeOffsets: [Double] = [0.003, 0.0045, 0.006, 0.0075, 0.009]
 
-    /// "08:10", "08.10", "8h10": a clock time and nothing else.
+    /// "08:10", "08.10", "8h10": a clock time and nothing else. Vision also gives a margin label of a blurred page with a space
+    /// ("09 00") or a comma instead of the colon. (Written `[hH:.,;]`, not `[:hH.,;]`: ICU reads "[:" as a POSIX class.)
     static let clockRegex: NSRegularExpression? = try? NSRegularExpression(
-        pattern: #"^(\d{1,2})\s?(?:[:hH]|\.)\s?(\d{2})$"#, options: [])
+        pattern: #"^(\d{1,2})(?:\s?[hH:.,;]\s?|\s)(\d{2})$"#, options: [])
+
+    /// "1300", "1640": the four digits of a clock time that lost its separator (a blurred margin label).
+    static let compactClockRegex: NSRegularExpression? = try? NSRegularExpression(
+        pattern: #"^([01]\d|2[0-3])([0-5]\d)$"#, options: [])
 
     /// Two clock times in one line ("08:10 09:00"): the start and the end of a row read as one text.
     static let clockPairRegex: NSRegularExpression? = try? NSRegularExpression(
@@ -1542,10 +1553,20 @@ enum ScheduleParser {
         // "O8:1O" in the margin is 08:10 (the labels of a row are not marked one by one).
         let text = repairedHours(raw)?.text ?? raw
         let ns = text as NSString
-        guard let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: ns.length)),
-              let hour = Int(group(match, 1, in: ns) ?? ""), let minute = Int(group(match, 2, in: ns) ?? ""),
-              hour < 24, minute < 60 else { return nil }
-        return hour * 60 + minute
+        let whole = NSRange(location: 0, length: ns.length)
+        if let match = regex.firstMatch(in: text, options: [], range: whole),
+           let hour = Int(group(match, 1, in: ns) ?? ""), let minute = Int(group(match, 2, in: ns) ?? ""),
+           hour < 24, minute < 60 {
+            return hour * 60 + minute
+        }
+        // "1300": no separator at all. Only a plausible school hour on the five minutes ("2026" is a year, not 20:26).
+        if let compact = compactClockRegex,
+           let match = compact.firstMatch(in: text, options: [], range: whole),
+           let hour = Int(group(match, 1, in: ns) ?? ""), let minute = Int(group(match, 2, in: ns) ?? ""),
+           (5...23).contains(hour), minute % 5 == 0 {
+            return hour * 60 + minute
+        }
+        return nil
     }
 
     /// The two times of a line that holds both, in reading order.
@@ -1559,9 +1580,10 @@ enum ScheduleParser {
         return (first, second)
     }
 
-    /// "410-343-CH", "203-NYB-05": the code of a course, as written in a block and in the list of courses.
+    /// "410-343-CH", "203-NYB-05": the code of a course, as written in a block and in the list of courses. Vision may leave a
+    /// space next to a dash on a blurred page ("604- ANG-03").
     static let courseCodeRegex: NSRegularExpression? = try? NSRegularExpression(
-        pattern: #"(?<![A-Za-z0-9])\d{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{2}(?![0-9])"#, options: [])
+        pattern: #"(?<![A-Za-z0-9])\d{3}\s?-\s?[A-Za-z0-9]{3}\s?-\s?[A-Za-z0-9]{2}(?![0-9])"#, options: [])
 
     /// The first course code of a text, with what comes before and after it.
     static func courseCode(in text: String) -> (code: String, before: String, after: String)? {
@@ -1580,21 +1602,25 @@ enum ScheduleParser {
         }
         guard let found = match else { return nil }
         let end = found.range.location + found.range.length
-        let code = (repaired ?? ns.substring(with: found.range)).uppercased()
+        let code = (repaired ?? ns.substring(with: found.range)).uppercased().replacingOccurrences(of: " ", with: "")
         return (code, ns.substring(to: found.range.location), ns.substring(from: end))
     }
 
     /// The same with a look-alike letter among the three digits.
     static let courseCodeLookalikeRegex: NSRegularExpression? = try? NSRegularExpression(
-        pattern: #"(?<![A-Za-z0-9])[0-9OoIl]{3}-[A-Za-z0-9]{3}-[A-Za-z0-9]{2}(?![0-9])"#, options: [])
+        pattern: #"(?<![A-Za-z0-9])[0-9OoIl]{3}\s?-\s?[A-Za-z0-9]{3}\s?-\s?[A-Za-z0-9]{2}(?![0-9])"#, options: [])
 
     static let roomWords: Set<String> = ["local", "salle", "room", "classe", "amphi", "labo", "aula", "raum", "sala"]
 
-    /// "Local F5107", "Salle B-204": a line that is a room.
+    /// "Local F5107", "Salle B-204": a line that is a room. The word may be read with a letter lost or changed ("Loca A2203" on
+    /// a blurred page) when a number follows it.
     static func isRoomLine(_ text: String) -> Bool {
         let list = words(of: text)
         guard list.count >= 2, let first = list.first else { return false }
-        return roomWords.contains(first)
+        if roomWords.contains(first) { return true }
+        let numberFollows = list.dropFirst().contains { word in word.contains { $0.isNumber } }
+        guard first.count >= 4, first.allSatisfy({ $0.isLetter }), numberFollows else { return false }
+        return roomWords.contains { normalizedDistance(first, $0) <= 0.2 }
     }
 
     static let modeLines: Set<String> = ["presentiel", "en ligne", "a distance", "distance", "hybride", "comodal", "online"]
@@ -1611,7 +1637,7 @@ enum ScheduleParser {
 
     /// The text of a list entry without the number of its group ("21050 Titre" or "gr.21050 Titre").
     static func withoutGroupNumber(_ text: String) -> String {
-        let stripped = text.replacingOccurrences(of: #"^\s*(?:gr\.?\s*)?\d{3,6}(?![A-Za-z0-9])\s*"#, with: "",
+        let stripped = text.replacingOccurrences(of: #"^\s*(?:gr?\s*[.:]?\s*)?\d{3,6}(?![A-Za-z0-9])\s*"#, with: "",
                                                   options: [.regularExpression, .caseInsensitive])
         return stripped.trimmingCharacters(in: .whitespaces)
     }
@@ -1677,14 +1703,62 @@ enum ScheduleParser {
         return catalog
     }
 
-    /// The full title of a class: the one of the list (by code), else the one the cut title starts.
+    /// The full title of a class: the one of the list (by code), else the one the cut title starts, else the one a blurred
+    /// title looks like.
     static func fullTitle(_ cut: String, code: String?, catalog: [String: String]) -> String {
         if let code = code, let full = catalog[code] { return full }
         let key = fold(cut)
+        // A code read with one wrong character ("604-ANC-03" for "604-ANG-03") that no other code of the list resembles.
+        if let code = code, let near = nearestCatalogTitle(code, catalog: catalog),
+           key.isEmpty || normalizedDistance(key, fold(near)) <= 0.4 {
+            return near
+        }
         guard key.count >= 4 else { return cut }
         let matches = Set(catalog.values.filter { fold($0).hasPrefix(key) })
         if matches.count == 1, let only = matches.first { return only }
+        // A title with a few letters misread ("Calcul ditterential") and no code to tell which course it is: the one title of
+        // the list that is clearly the nearest. (With a code that the list does not hold, the title is kept: the list may be
+        // incomplete, and "Comptabilité III" is not "Comptabilité II".)
+        guard code == nil else { return cut }
+        var ranked: [(title: String, distance: Double)] = []
+        for title in Set(catalog.values) { ranked.append((title: title, distance: normalizedDistance(key, fold(title)))) }
+        ranked.sort { $0.distance < $1.distance }
+        if let best = ranked.first, best.distance <= 0.25, ranked.count == 1 || ranked[1].distance - best.distance >= 0.15 {
+            return best.title
+        }
         return cut
+    }
+
+    /// The title of the only code of the list that differs from `code` by one character (same length), else nil.
+    static func nearestCatalogTitle(_ code: String, catalog: [String: String]) -> String? {
+        let wanted = Array(code)
+        var found: [String] = []
+        for (other, title) in catalog {
+            let letters = Array(other)
+            guard letters.count == wanted.count else { continue }
+            var differences = 0
+            for index in 0..<letters.count where letters[index] != wanted[index] { differences += 1 }
+            if differences == 1 { found.append(title) }
+        }
+        return found.count == 1 ? found[0] : nil
+    }
+
+    /// Edit distance (insertions, deletions, substitutions) over the length of the longer text, 0 (same) to 1.
+    static func normalizedDistance(_ a: String, _ b: String) -> Double {
+        let left = Array(a)
+        let right = Array(b)
+        guard !left.isEmpty || !right.isEmpty else { return 0 }
+        if left.isEmpty || right.isEmpty { return 1 }
+        var previous = Array(0...right.count)
+        for i in 1...left.count {
+            var row = [i] + [Int](repeating: 0, count: right.count)
+            for j in 1...right.count {
+                let cost = left[i - 1] == right[j - 1] ? 0 : 1
+                row[j] = min(previous[j] + 1, row[j - 1] + 1, previous[j - 1] + cost)
+            }
+            previous = row
+        }
+        return Double(previous[right.count]) / Double(max(left.count, right.count))
     }
 
     /// Lines of one column cut into blocks of text: a gap, or two course codes, starts a new one.
@@ -1896,17 +1970,39 @@ enum ScheduleParser {
         let catalog = courseCatalog(lines, aboveY: headers.map { $0.y }.min() ?? 0)
         let fromY = max(0, Double(gridTop) - 0.002)
         let toY = min(1, Double(gridBottom) + 0.002)
-        var drafts: [Draft] = []
+        // What every block says first: the room of a block whose title was lost is looked up among the blocks that have a
+        // code (the same room holds the same course).
+        var clustersOf = [[TextCluster]](repeating: [], count: count)
+        var contentsOf = [[BlockContent?]](repeating: [], count: count)
+        var titleOfRoom: [String: Set<String>] = [:]
         for (column, columnLines) in columns.enumerated() where !columnLines.isEmpty {
-            let clusters = textClusters(columnLines)
+            clustersOf[column] = textClusters(columnLines)
+            contentsOf[column] = clustersOf[column].map { blockContent($0.lines) }
+            for content in contentsOf[column] {
+                guard let content = content, content.code != nil, let room = content.room, !roomKey(room).isEmpty else { continue }
+                let title = fullTitle(content.title, code: content.code, catalog: catalog)
+                if !title.isEmpty { titleOfRoom[roomKey(room), default: []].insert(title) }
+            }
+        }
+        var drafts: [Draft] = []
+        for (column, clusters) in clustersOf.enumerated() where !clusters.isEmpty {
             let marks = clusters.map { Double($0.center) }
             let runs = probe.flatMap { bestRuns($0, left: edges[column], from: fromY, to: toY, marks: marks) }
             for (index, cluster) in clusters.enumerated() {
-                guard let content = blockContent(cluster.lines) else { continue }
+                guard let content = contentsOf[column][index] else { continue }
                 let span = blockRows(clusters, index, runs: runs, timeline: timeline)
-                let title = fullTitle(content.title, code: content.code, catalog: catalog)
-                guard !title.isEmpty else { continue }
+                var title = fullTitle(content.title, code: content.code, catalog: catalog)
                 var uncertain: Set<SlotField> = []
+                // A code that the list does not hold (read with a wrong character) was matched to the nearest course: to check.
+                if let code = content.code, catalog[code] == nil, !title.isEmpty, title != content.title { uncertain.insert(.title) }
+                if title.isEmpty, let room = content.room, let known = titleOfRoom[roomKey(room)], known.count == 1,
+                   let only = known.first {
+                    // Vision lost the title and the code of this block (a blurred or merged line) but read its room, and no other
+                    // course meets in that room on this page: the title is the one of the blocks of the room, to check.
+                    title = only
+                    uncertain.insert(.title)
+                }
+                guard !title.isEmpty else { continue }
                 // The hours come from the middle of the text, not from the colours of the block: a guess.
                 if span.estimated { uncertain.formUnion([.start, .end]) }
                 if content.roomRepaired, content.room != nil { uncertain.insert(.room) }
@@ -1917,6 +2013,13 @@ enum ScheduleParser {
             }
         }
         return drafts
+    }
+
+    /// The room of a "Local F5107" line without its word and its spaces, folded ("f5107"): the same room read twice.
+    static func roomKey(_ line: String) -> String {
+        var list = words(of: line)
+        if let first = list.first, roomWords.contains(first) { list.removeFirst() }
+        return list.joined()
     }
 
     /// The rows covered by the block of a cluster: from the colours when the probe sees the block, else from the

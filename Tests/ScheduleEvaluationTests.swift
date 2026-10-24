@@ -155,21 +155,22 @@ final class ScheduleEvaluationTests: XCTestCase {
 
     // MARK: Thresholds
     //
-    // PRUDENT FLOORS, written without running the code (no Mac): the Chef will tighten them with the real scores read in the
-    // CI log ("SCORE-MOYENNE bruit=<n> ..."). They are meant to catch a collapse of the importer, not to measure it.
+    // Floors set from the scores MEASURED in the CI report (journal of the unit run of commit d9dfb39, "SCORE-MOYENNE", 20 pages),
+    // less a margin of 0.05 so that a change that costs one class on one page does not trip them but a real loss does:
+    //   noise 0: P=1.00 R=1.00 E=1.00 · noise 1: P=0.98 R=0.97 E=0.96 · noise 2: P=0.93 R=0.85 E=0.88.
 
     /// Without noise: the mean exactness of the five fields, the mean precision (never invent a class) and the mean recall.
-    static let floorExactnessClean = 0.75
-    static let floorPrecisionClean = 0.70
-    static let floorRecallClean = 0.60
+    static let floorExactnessClean = 0.95
+    static let floorPrecisionClean = 0.95
+    static let floorRecallClean = 0.95
     /// Mild noise.
-    static let floorExactnessMild = 0.50
-    static let floorPrecisionMild = 0.50
-    static let floorRecallMild = 0.40
+    static let floorExactnessMild = 0.91
+    static let floorPrecisionMild = 0.93
+    static let floorRecallMild = 0.92
     /// Heavy noise.
-    static let floorExactnessHeavy = 0.25
-    static let floorPrecisionHeavy = 0.30
-    static let floorRecallHeavy = 0.20
+    static let floorExactnessHeavy = 0.83
+    static let floorPrecisionHeavy = 0.88
+    static let floorRecallHeavy = 0.80
 
     /// With noise each page is read this many times with other seeds, and the scores are averaged.
     static let noisyRuns = 3

@@ -41,8 +41,10 @@ enum DailyBrief {
         var weather: WeatherSnapshot?
         var events: [EventSnapshot] = []
         var steps: Int?
-        /// The spaces of the person's interests, for the invitations.
+        /// The spaces of the person's interests, for the invitations and the empty cards.
         var interests: [Space] = []
+        /// The weather was one of the interests (it has no space): its empty card shows from the start.
+        var interestedInWeather = false
         var currency = "CAD"
     }
 
@@ -127,6 +129,44 @@ enum DailyBrief {
         }
 
         var id: String { tileID }
+
+        /// The category whose card has this id (`tileID`), nil for any other.
+        init?(tileID: String) {
+            guard let found = Category.allCases.first(where: { $0.tileID == tileID }) else { return nil }
+            self = found
+        }
+
+        /// The category an interest of the first form leads to (the same link the invitations used), nil
+        /// for the spaces without a card (investments, markets, « Ma vie »).
+        init?(space: Space) {
+            switch space {
+            case .nutrition: self = .nutrition
+            case .fitness: self = .workout
+            case .student: self = .planning
+            case .budget: self = .budget
+            case .habits: self = .habits
+            case .productivity: self = .priorities
+            case .business: self = .business
+            case .travel: self = .travel
+            case .car: self = .car
+            case .investing, .markets, .life: return nil
+            }
+        }
+
+        /// The category a mini-app added by hand (an old `dailyAdded` entry) stands for, nil without one.
+        init?(app: MiniApp) {
+            switch app {
+            case .nutrition: self = .nutrition
+            case .fitness: self = .workout
+            case .planning: self = .planning
+            case .finances: self = .budget
+            case .business: self = .business
+            case .travel: self = .travel
+            case .car: self = .car
+            case .weather: self = .weather
+            case .photos: return nil
+            }
+        }
 
         /// The part of « Mes informations » that holds its data, where there is one.
         var area: InfoArea? {
@@ -248,6 +288,9 @@ enum DailyBrief {
             }
         }
 
+        /// The category this card stands for (every card of Mon Quotidien has one, except an old invitation).
+        var category: Category? { Category(tileID: id) }
+
         /// Across the dashboard, or half of it.
         var isWide: Bool {
             switch self {
@@ -329,11 +372,13 @@ enum DailyBrief {
         return tiles
     }
 
-    /// Mon Quotidien complete from the first launch: the cards with data (`tiles`), then the weather
-    /// and the figure of the mini-apps without their own card when there is something to show, then
-    /// one empty dotted card for each category still without data, in the default order. Legacy
+    /// What Mon Quotidien holds: the cards with data (`tiles`), then the weather and the figure of the
+    /// mini-apps without their own card when there is something to show, then an empty dotted card for
+    /// each category of `empty` still without data, in the default order. `empty` is what the person
+    /// chose (their interests and the categories they added); by default every category. Legacy
     /// invitations are dropped: the empty cards replace them. Never a made-up figure.
-    static func completing(_ tiles: [Tile], weather: WeatherSnapshot?, appCaptions: [Category: String] = [:]) -> [Tile] {
+    static func completing(_ tiles: [Tile], weather: WeatherSnapshot?, appCaptions: [Category: String] = [:],
+                           empty: [Category] = Category.defaultOrder) -> [Tile] {
         var result = tiles.filter { if case .invite = $0 { false } else { true } }
         var ids = Set(result.map(\.id))
         func append(_ tile: Tile) {
@@ -344,7 +389,7 @@ enum DailyBrief {
         for category in Category.defaultOrder {
             if let app = category.app, let caption = appCaptions[category] { append(.miniApp(app.rawValue, caption: caption)) }
         }
-        for category in Category.defaultOrder { append(.empty(category)) }
+        for category in Category.defaultOrder where empty.contains(category) { append(.empty(category)) }
         return result
     }
 
@@ -566,6 +611,7 @@ extension DailyBrief.Input {
         if case let .ready(list) = model.events { events = list }
         self.steps = steps
         interests = model.profile.preferredSpaces
+        interestedInWeather = model.profile.interests.contains(.weather)
         currency = model.settings.currencyCode
     }
 }

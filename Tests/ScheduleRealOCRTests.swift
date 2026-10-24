@@ -11,7 +11,8 @@ import Vision
 ///   OCR-LINES <layout> <variant> [y=… x=… w=… h=… « text »]   (one line per observation, centres, top-left origin)
 /// A class is « correct » when its weekday matches and its start and end are within 10 minutes of the drawn ones.
 /// When Vision fails or reads nothing on the clean page, the test is skipped with the exact reason (printed too).
-/// The assertions are cautious on purpose; tighten them with the numbers read in the CI report.
+/// The assertions are cautious on purpose; tighten them with the numbers read in the CI report. The lines Vision returned on the
+/// first real run are kept in Tests/Support/ScheduleRealLines.swift and replayed by ScheduleRealWorldTests.
 final class ScheduleRealOCRTests: XCTestCase {
 
     func testRendererIsConsistent() {
@@ -123,7 +124,8 @@ final class ScheduleRealOCRTests: XCTestCase {
 
             XCTAssertLessThanOrEqual(slots.count, rendered.expected.count + 2, "trop de cours pour \(label)")
             if variant == .clean {
-                XCTAssertGreaterThanOrEqual(result.correct, 1, "aucun cours juste sur l'image propre « \(label) »")
+                // First real run: every clean page was read at 6/10 at worst (boxed blocks), the others perfectly. Two classes of slack.
+                XCTAssertGreaterThanOrEqual(result.correct, rendered.expected.count - 2, "image propre « \(label) » mal lue : \(slots.map { summary($0) })")
             }
         }
     }

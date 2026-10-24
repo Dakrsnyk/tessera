@@ -56,14 +56,17 @@ struct DailySection: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     @State private var editingLayout = false
+    @State private var addingCategory = false
     private var steps: StepCounter { .shared }
 
     var body: some View {
         let now = Date()
         let settings = model.settings
-        // Complete from the first launch: every category shows, as a dotted « Ajouter » card while it is empty.
+        // The categories of the person's interests (a dotted « Ajouter » card while empty), the ones with data
+        // and the ones they added; the others are offered by the « + » at the bottom.
         let automatic = DailyCategories.home(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil)
         let tiles = DailyBrief.arranged(automatic, order: settings.dailyOrder, hidden: settings.dailyHidden)
+        let addable = DailyCategories.addable(shown: tiles)
         // Real figures entered by the person (invitations to fill in a category don't count).
         let hasData = automatic.contains { tile in
             switch tile {
@@ -73,29 +76,14 @@ struct DailySection: View {
             }
         }
         VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .firstTextBaseline) {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(tr("Mon Quotidien").uppercased())
-                        .font(.caption.weight(.bold))
-                        .tracking(1.1)
-                        .foregroundStyle(Color.accentColor)
-                    Text(DailyBrief.Moment(now).title)
-                        .font(.title2.weight(.bold))
-                        .accessibilityAddTraits(.isHeader)
-                }
-                Spacer()
-                // A small « + »: add, order and size the cards, right here on Home (« Mes informations »
-                // is at the bottom of the page). Always there: categories can be added before any data.
-                Button {
-                    editingLayout = true
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.subheadline.weight(.bold))
-                        .frame(width: 32, height: 32)
-                        .background(.cardFill, in: Circle())
-                }
-                .accessibilityLabel(Text(tr("Modifier la disposition")))
-                .accessibilityIdentifier("daily-layout")
+            VStack(alignment: .leading, spacing: 3) {
+                Text(tr("Mon Quotidien").uppercased())
+                    .font(.caption.weight(.bold))
+                    .tracking(1.1)
+                    .foregroundStyle(Color.accentColor)
+                Text(DailyBrief.Moment(now).title)
+                    .font(.title2.weight(.bold))
+                    .accessibilityAddTraits(.isHeader)
             }
             // Nothing entered yet: Mon Quotidien asks for the information, the invitations follow.
             if !hasData {
@@ -107,14 +95,22 @@ struct DailySection: View {
                         HStack(alignment: .top, spacing: 12) {
                             ForEach(pair.element) { tile in
                                 // Two cards side by side: each lays itself out for half the width.
+                                let actions = cardActions(tile)
                                 DailyTileView(tile: tile)
                                     .frame(maxWidth: .infinity)
                                     .environment(\.dailyCompact, pair.element.count > 1)
+                                    .environment(\.dailyCardActions, actions)
+                                    // Long press: take the card off Mon Quotidien, or arrange the cards.
+                                    .contextMenu { DailyCardMenuItems(actions: actions) }
                             }
                         }
                         .fixedSize(horizontal: false, vertical: true)
                     }
                 }
+            }
+            // The categories not on Mon Quotidien (never chosen, or removed): one dotted « + », gone once all are there.
+            if !addable.isEmpty {
+                AddCategoryCard { addingCategory = true }
             }
         }
         .accessibilityElement(children: .contain)
@@ -123,6 +119,21 @@ struct DailySection: View {
         .sheet(isPresented: $editingLayout) {
             DailyLayoutEditor(available: automatic)
         }
+        .sheet(isPresented: $addingCategory) {
+            AddCategorySheet(categories: addable)
+        }
+    }
+
+    /// What the long-press menu of a card does. Removing hides the card for good (even once it holds data) and
+    /// puts it back in the list of the « + »: the mini-app's data is never touched.
+    private func cardActions(_ tile: DailyBrief.Tile) -> DailyCardActions {
+        DailyCardActions(
+            remove: {
+                Haptics.tap()
+                model.updateSettings { DailyCategories.remove(tileID: tile.id, in: &$0) }
+            },
+            organize: { editingLayout = true }
+        )
     }
 
     /// Nothing entered yet: « Mon Quotidien » asks for the person's information. No fake figure.
@@ -162,6 +173,39 @@ extension EnvironmentValues {
     var dailyCompact: Bool {
         get { self[DailyCompactKey.self] }
         set { self[DailyCompactKey.self] = newValue }
+    }
+}
+
+/// What the long-press menu of a card of Mon Quotidien does (set by `DailySection` on each card).
+struct DailyCardActions {
+    var remove: () -> Void
+    var organize: () -> Void
+}
+
+private struct DailyCardActionsKey: EnvironmentKey {
+    static let defaultValue: DailyCardActions? = nil
+}
+
+extension EnvironmentValues {
+    /// The long-press actions of the card (nil outside Mon Quotidien).
+    var dailyCardActions: DailyCardActions? {
+        get { self[DailyCardActionsKey.self] }
+        set { self[DailyCardActionsKey.self] = newValue }
+    }
+}
+
+/// The entries of a card's long-press menu: take it off Mon Quotidien (its data stays in the mini-app),
+/// or open the editor to order and size the cards.
+struct DailyCardMenuItems: View {
+    let actions: DailyCardActions
+
+    var body: some View {
+        Button(role: .destructive, action: actions.remove) {
+            Label(tr("Retirer de Mon Quotidien"), systemImage: "minus.circle")
+        }
+        Button(action: actions.organize) {
+            Label(tr("Organiser…"), systemImage: "arrow.up.arrow.down")
+        }
     }
 }
 
@@ -522,6 +566,7 @@ private struct NutritionDayTile: View {
 private struct WorkoutDayTile: View {
     let workout: DailyBrief.Workout
     @Environment(AppModel.self) private var model
+    @Environment(\.dailyCardActions) private var cardActions
     /// Today's session recorded by mistake, to delete once confirmed (it can then be done again).
     @State private var deleting: UUID?
 
@@ -593,6 +638,7 @@ private struct WorkoutDayTile: View {
                 }
             }
         }
+        // This menu is the deepest one: it carries the card's own entries too.
         .contextMenu {
             if let id = doneTodayID {
                 Button(role: .destructive) {
@@ -600,6 +646,9 @@ private struct WorkoutDayTile: View {
                 } label: {
                     Label(tr("Supprimer la séance"), systemImage: "trash")
                 }
+            }
+            if let cardActions {
+                DailyCardMenuItems(actions: cardActions)
             }
         }
         .confirmsWorkoutDeletion($deleting)
@@ -1130,6 +1179,83 @@ private struct InviteCard: View {
         }
         .buttonStyle(.pressable)
         .accessibilityIdentifier(identifier)
+    }
+}
+
+/// The grey dotted « + » at the bottom of Mon Quotidien: it opens the list of the categories not on it yet.
+/// Same shape and dashes as the invitation cards, but compact and neutral.
+private struct AddCategoryCard: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button {
+            Haptics.tap()
+            action()
+        } label: {
+            Image(systemName: "plus")
+                .font(.system(size: 24, weight: .medium))
+                .foregroundStyle(Color.secondary)
+                .frame(maxWidth: .infinity, minHeight: 64)
+                .background {
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .strokeBorder(Color.secondary.opacity(0.35), style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
+                }
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.pressable)
+        .accessibilityLabel(Text(tr("Ajouter une catégorie")))
+        .accessibilityIdentifier("daily-add-category")
+    }
+}
+
+/// The categories missing from Mon Quotidien, one row each (its symbol and color, its name): a touch adds
+/// it (an empty card if nothing is filled yet, never a made-up figure) and closes the list.
+private struct AddCategorySheet: View {
+    let categories: [DailyBrief.Category]
+    @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section {
+                    ForEach(categories) { category in
+                        Button {
+                            Haptics.tap()
+                            model.updateSettings { DailyCategories.add(category, in: &$0) }
+                            dismiss()
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: category.symbol)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(Color(hex: category.colorHex))
+                                    .frame(width: 30, height: 30)
+                                    .background(Color(hex: category.colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                Text(category.title)
+                                    .foregroundStyle(.primary)
+                                    .lineLimit(1)
+                                Spacer(minLength: 8)
+                                Image(systemName: "plus.circle")
+                                    .foregroundStyle(Color.accentColor)
+                            }
+                            .contentShape(Rectangle())
+                        }
+                        .accessibilityIdentifier("daily-add-\(category.rawValue)")
+                    }
+                } footer: {
+                    Text(tr("Une carte vide s'affiche tant que tu n'as rien rempli : aucune donnée n'est inventée."))
+                }
+            }
+            .styledList()
+            .navigationTitle(tr("Ajouter une catégorie"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(tr("Fermer")) { dismiss() }
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
     }
 }
 

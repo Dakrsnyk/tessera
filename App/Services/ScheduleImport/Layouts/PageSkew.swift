@@ -15,6 +15,13 @@ enum PageSkew {
 
     /// The lines turned back, or nil when the row of day names is level, absent, or not a straight line.
     static func straightened(_ lines: [RecognizedLine], aspect: Double) -> [RecognizedLine]? {
+        straighten(lines, aspect: aspect)?.lines
+    }
+
+    /// The lines turned back with the measure of the tilt (slope of the row of day names and the point the page is turned
+    /// about), so that the image can be turned back the same way (`BlockProbe.straightened`).
+    static func straighten(_ lines: [RecognizedLine], aspect: Double)
+        -> (lines: [RecognizedLine], fit: (slope: Double, x: Double, y: Double))? {
         guard aspect.isFinite, aspect > 0.2, aspect < 5, let fit = slope(of: lines) else { return nil }
         var result: [RecognizedLine] = []
         for line in lines {
@@ -26,7 +33,16 @@ enum PageSkew {
                              width: Double(line.box.width), height: Double(line.box.height))
             result.append(RecognizedLine(text: line.text, box: box))
         }
-        return result
+        return (lines: result, fit: fit)
+    }
+
+    /// Where a point of the straightened page lies on the photo, the inverse of the turn done to the lines: the column of a
+    /// straightened page is the line `x = x' - s * aspect² * (y' - fit.y)` of the photo, and its rows are `y = y' + s * (x - fit.x)`.
+    static func photoPoint(x straightX: Double, y straightY: Double, slope: Double, pivotX: Double, pivotY: Double,
+                           aspect: Double) -> (x: Double, y: Double) {
+        let x = straightX - slope * aspect * aspect * (straightY - pivotY)
+        let y = straightY + slope * (x - pivotX)
+        return (x, y)
     }
 
     /// The line through the day names: the slope (y per x) and the mean place of the names it goes through. At least

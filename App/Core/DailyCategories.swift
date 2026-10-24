@@ -36,10 +36,11 @@ enum DailyCategories {
         return cards + extra + productivity + invites
     }
 
-    /// Every card Mon Quotidien can show, complete from the first launch: the person's own cards, then
-    /// an empty dotted card for each category without data (see `DailyBrief.completing`). Whatever
-    /// is hidden or ordered is applied afterwards (`DailyBrief.arranged`), by the same ids, so a
-    /// hidden category stays hidden whether it is empty or filled, and a new one shows.
+    /// The cards of Mon Quotidien before what the person hid or ordered: the cards with data (always), and
+    /// an empty dotted card for each category they chose without data yet (see `wanted` and
+    /// `DailyBrief.completing`). A category neither chosen nor filled is not here: the « + » at the bottom
+    /// of Home offers it. Whatever is hidden or ordered is applied afterwards (`DailyBrief.arranged`), by
+    /// the same ids, so a removed category stays removed whether it is empty or filled.
     static func home(model: AppModel, now: Date, steps: Int?) -> [DailyBrief.Tile] {
         let input = DailyBrief.Input(model: model, now: now, steps: steps)
         let brief = DailyBrief.tiles(input)
@@ -50,7 +51,64 @@ enum DailyCategories {
         for category in DailyBrief.Category.allCases {
             if let app = category.app, let caption = MiniAppSummary.caption(app, model, now: now) { captions[category] = caption }
         }
-        return DailyBrief.completing(base, weather: input.weather, appCaptions: captions)
+        return DailyBrief.completing(base, weather: input.weather, appCaptions: captions,
+                                     empty: wanted(input: input, settings: model.settings))
+    }
+
+    // MARK: Which categories show
+
+    /// Entry of `dailyAdded` for a category added with the « + » of Home (`cat-` and its name).
+    static let categoryPrefix = "cat-"
+
+    static func addedKey(_ category: DailyBrief.Category) -> String { categoryPrefix + category.rawValue }
+
+    /// The categories the person added: with the « + » (`cat-…`), or before it existed (a mini-app
+    /// added from the editor, the Productivité quick add). Unknown entries are ignored.
+    static func added(_ settings: AppSettings) -> Set<DailyBrief.Category> {
+        var result = Set<DailyBrief.Category>()
+        for entry in settings.dailyAdded {
+            if entry == productivityKey {
+                result.insert(.priorities)
+            } else if entry.hasPrefix(categoryPrefix), let category = DailyBrief.Category(rawValue: String(entry.dropFirst(categoryPrefix.count))) {
+                result.insert(category)
+            } else if let app = MiniApp(rawValue: entry), let category = DailyBrief.Category(app: app) {
+                result.insert(category)
+            }
+        }
+        return result
+    }
+
+    /// The categories shown even without data: the interests chosen in the first form (no cap), the weather
+    /// when it was one of them, and the categories added by hand, in the default order. A category the
+    /// person removed is left out of the display later (`DailyBrief.arranged`), whatever it holds.
+    static func wanted(input: DailyBrief.Input, settings: AppSettings) -> [DailyBrief.Category] {
+        var chosen = Set(input.interests.compactMap(DailyBrief.Category.init(space:)))
+        if input.interestedInWeather { chosen.insert(.weather) }
+        chosen.formUnion(added(settings))
+        return DailyBrief.Category.defaultOrder.filter(chosen.contains)
+    }
+
+    /// The categories missing from Mon Quotidien (never chosen, or removed): what the « + » offers. `shown`
+    /// are the cards on screen, hidden ones already left out. Empty once everything is there.
+    static func addable(shown: [DailyBrief.Tile]) -> [DailyBrief.Category] {
+        let ids = Set(shown.map(\.id))
+        return DailyBrief.Category.defaultOrder.filter { !ids.contains($0.tileID) }
+    }
+
+    /// Puts the category on Mon Quotidien (empty if nothing is filled): remembered as added, and no longer hidden.
+    static func add(_ category: DailyBrief.Category, in settings: inout AppSettings) {
+        let key = addedKey(category)
+        if !settings.dailyAdded.contains(key) { settings.dailyAdded.append(key) }
+        settings.dailyHidden.removeAll { $0 == category.tileID }
+    }
+
+    /// Takes the card off Mon Quotidien: it stays off even when it receives data, and goes back to the list of
+    /// the « + ». Nothing is deleted from the mini-app. `tileID` is the id of the card.
+    static func remove(tileID: String, in settings: inout AppSettings) {
+        if !settings.dailyHidden.contains(tileID) { settings.dailyHidden.append(tileID) }
+        if let category = DailyBrief.Category(tileID: tileID) {
+            settings.dailyAdded.removeAll { $0 == addedKey(category) }
+        }
     }
 
     /// Reserved entry of `dailyAdded` for the Productivité card (not a mini-app: ignored when reading the mini-apps).

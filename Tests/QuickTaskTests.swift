@@ -117,6 +117,17 @@ final class QuickTaskTests: XCTestCase {
         XCTAssertEqual(tiles.map(\.id), ["priorities"])
     }
 
+    func testTheQuickAddEntryKeepsTheTopThreeOnMonQuotidienWithoutInterest() {
+        var settings = AppSettings()
+        DailyCategories.setProductivity(shown: true, hasTasks: false, in: &settings)
+        XCTAssertEqual(DailyCategories.added(settings), [.priorities], "The Productivité entry counts as an added category")
+        // No interest, no task: the card still shows (empty Top 3 with its quick add), until it is taken off.
+        let input = DailyBrief.Input(now: now)
+        XCTAssertEqual(DailyCategories.wanted(input: input, settings: settings), [.priorities])
+        DailyCategories.setProductivity(shown: false, hasTasks: false, in: &settings)
+        XCTAssertTrue(DailyCategories.added(settings).isEmpty)
+    }
+
     func testTheReservedEntryIsNotAMiniApp() {
         XCTAssertNil(MiniApp(rawValue: DailyCategories.productivityKey))
     }

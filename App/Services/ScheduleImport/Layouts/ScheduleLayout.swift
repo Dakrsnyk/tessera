@@ -104,11 +104,14 @@ enum ScheduleLayouts {
     /// One band of the page (the whole page, or one grid of several).
     static func readBand(_ lines: [RecognizedLine], probe: BlockProbe?, aspect: Double) -> [ImportedSlot] {
         var variants: [(lines: [RecognizedLine], probe: BlockProbe?, weight: Double)] = [(lines, probe, 1.0)]
-        if let straight = PageSkew.straightened(lines, aspect: aspect) {
+        if let straight = PageSkew.straighten(lines, aspect: aspect) {
             // A tilted photo may be of a page a claiming layout knows. Tilted columns would be cut at the wrong places, so
-            // the straightened lines are offered first (the probe looks at the photo as it is: it does not fit them).
-            if let claimed = claimedReading(straight, probe: nil) { return claimed }
-            variants.append((straight, nil, 0.97))
+            // the straightened lines are offered first. The probe looks at the photo as it is: it is turned back the same
+            // way as the lines (nil when it cannot, and the lines are then read without the colours).
+            let straightProbe = probe?.straightened(slope: straight.fit.slope, pivotX: straight.fit.x,
+                                                    pivotY: straight.fit.y, aspect: aspect)
+            if let claimed = claimedReading(straight.lines, probe: straightProbe) { return claimed }
+            variants.append((straight.lines, straightProbe, 0.97))
         }
         if let claimed = claimedReading(lines, probe: probe) { return claimed }
         var candidates: [ScheduleCandidate] = []
