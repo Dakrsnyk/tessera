@@ -39,9 +39,14 @@ enum ScreenshotMode {
         // Every other capture shows « Mes informations » filled in, whatever an earlier capture left.
         if !screen.hasPrefix("onboarding"), !screen.hasSuffix("-fresh"), model.profile != .sample {
             model.update(\.profile) { $0 = .sample }
+            // The demo « Ma vie » too, if a first launch (no birthday) came before.
+            if model.life.birthday == nil { model.update(\.life) { $0 = SampleData.domains(now: Date()).life } }
         }
         if screen.hasPrefix("onboarding") {
             let topic = ProfileTopic(rawValue: String(screen.dropFirst("onboarding-".count)))
+            // Nothing about the person: the demo birthday of « Ma vie » (set by the demo data) would otherwise
+            // give an age and lock the age field of « Mes informations ».
+            model.update(\.life) { $0 = LifeState() }
             model.update(\.profile) { profile in
                 profile = UserProfile()
                 profile.migrated = true
@@ -216,6 +221,8 @@ enum ScreenshotMode {
                 model.update(\.productivity) { $0 = ProductivityState() }
                 model.update(\.travel) { $0 = TravelState() }
                 model.update(\.car) { $0 = CarState() }
+                // No birthday either: it would give an age and lock the age field of « Mes informations ».
+                model.update(\.life) { $0 = LifeState() }
                 model.updateContent { $0 = ContentState() }
                 if screen == "home-fresh" { router.tab = .home }
                 if screen == "editor-fresh" { router.openEditor(TemplateCatalog.design("calories-glass"), isNew: true) }

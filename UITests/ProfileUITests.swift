@@ -309,6 +309,11 @@ final class ProfileUITests: XCTestCase {
             swipes += 1
         }
         part.tap()
+        // The name of the whole widget (« widget-name ») is on the Studio page; the part's own page has its
+        // own « Nom du widget » field. Typing before the page is open would rename the whole widget.
+        let studioName = app.textFields["widget-name"]
+        if !waitForDisappearance(studioName, timeout: 4) { part.tap() }
+        XCTAssertTrue(waitForDisappearance(studioName), "La page de réglages du widget ne s'ouvre pas")
         let name = app.textFields["Nom du widget"].firstMatch
         XCTAssertTrue(name.waitForExistence(timeout: 8))
         name.tap()
