@@ -84,6 +84,7 @@ struct DailySection: View {
                 Text(DailyBrief.Moment(now).title)
                     .font(.title2.weight(.bold))
                     .accessibilityAddTraits(.isHeader)
+                    .accessibilityIdentifier("daily-title")
             }
             // Nothing entered yet: Mon Quotidien asks for the information, the invitations follow.
             if !hasData {
@@ -482,6 +483,7 @@ private struct NutritionDayTile: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+                    .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .padding(8)
                 }
@@ -491,11 +493,13 @@ private struct NutritionDayTile: View {
                         Label(tr("Nutrition"), systemImage: "fork.knife")
                             .font(.caption.weight(.bold))
                             .foregroundStyle(accent)
-                        Spacer()
+                            .lineLimit(1)
+                        Spacer(minLength: 4)
                         Text(nutrition.knowsKcal ? "\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal))" : tr("Objectif à définir"))
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
+                            .minimumScaleFactor(0.7)
                     }
                     macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, "E5484D")
                     macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, "F2A33A")
@@ -513,6 +517,9 @@ private struct NutritionDayTile: View {
                     Label(tr("Scanner"), systemImage: "barcode.viewfinder")
                         .font(.subheadline.weight(.bold))
                         .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .padding(.horizontal, 8)
                         .frame(maxWidth: .infinity, minHeight: 38)
                         .background(accent, in: Capsule())
                 }
@@ -523,7 +530,8 @@ private struct NutritionDayTile: View {
                         .font(.subheadline.weight(.bold))
                         .foregroundStyle(Color(hex: "CF6414"))
                         .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+                        .minimumScaleFactor(0.7)
+                        .padding(.horizontal, 8)
                         .frame(maxWidth: .infinity, minHeight: 38)
                         .background(accent.opacity(0.14), in: Capsule())
                 }
@@ -1147,6 +1155,7 @@ private struct InviteCard: View {
     let text: String
     let route: HomeRoute
     let identifier: String
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
         NavigationLink(value: route) {
@@ -1166,9 +1175,15 @@ private struct InviteCard: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 Spacer(minLength: 6)
-                Text(tr("Ajouter"))
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.accentColor)
+                // At the biggest text sizes « Ajouter » would squeeze the invitation: the whole card is the button.
+                if !typeSize.isAccessibilitySize {
+                    Text(tr("Ajouter"))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .layoutPriority(1)
+                }
             }
             .padding(14)
             .background {

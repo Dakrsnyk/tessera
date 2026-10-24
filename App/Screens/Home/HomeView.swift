@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 import WidgetKit
 
 /// Home: the person's own figures and information only, « Mon Quotidien » (which leads to every
@@ -71,7 +72,7 @@ struct HomeView: View {
     }
 
     private var scrollContent: some View {
-        ScrollView {
+        ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading, spacing: 30) {
                 DailySection()
                     .id(TutorialTarget.daily.rawValue)
@@ -86,7 +87,12 @@ struct HomeView: View {
             .padding(.horizontal, 20)
             .padding(.top, 4)
             .padding(.bottom, 32)
+            // Never wider than the screen, whatever a card asks for (long English or German texts, big text).
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .clipped()
             .background(alignment: .top) { Color.clear.frame(height: 1).id("home-top") }
+            // Last safety net: the scroll view under Home can never move sideways.
+            .background { HorizontalScrollLock().frame(width: 1, height: 1).allowsHitTesting(false) }
         }
         // Home scrolls up and down only: never sideways, never a sideways bounce.
         .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
@@ -103,6 +109,59 @@ struct HomeView: View {
         }
     }
 
+}
+
+/// Finds the UIScrollView that holds Home and forbids any sideways movement: no horizontal bounce,
+/// directional lock, and the horizontal offset is put back at once if anything ever moves it
+/// (a card wider than the screen used to let the whole page slide left or right).
+private struct HorizontalScrollLock: UIViewRepresentable {
+    func makeUIView(context: Context) -> LockView { LockView() }
+    func updateUIView(_ view: LockView, context: Context) { view.lock() }
+
+    final class LockView: UIView {
+        private var observation: NSKeyValueObservation?
+        private weak var locked: UIScrollView?
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            isUserInteractionEnabled = false
+            isAccessibilityElement = false
+        }
+
+        required init?(coder: NSCoder) { nil }
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            lock()
+        }
+
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            lock()
+        }
+
+        func lock() {
+            var candidate = superview
+            while let view = candidate, !(view is UIScrollView) { candidate = view.superview }
+            guard let scroll = candidate as? UIScrollView else { return }
+            scroll.alwaysBounceHorizontal = false
+            scroll.isDirectionalLockEnabled = true
+            scroll.showsHorizontalScrollIndicator = false
+            guard scroll !== locked else { return }
+            locked = scroll
+            Self.pin(scroll)
+            observation = scroll.observe(\.contentOffset, options: []) { scroll, _ in
+                MainActor.assumeIsolated { Self.pin(scroll) }
+            }
+        }
+
+        /// The only horizontal offset allowed: the one of the safe area (zero in portrait).
+        private static func pin(_ scroll: UIScrollView) {
+            let x = -scroll.adjustedContentInset.left
+            guard abs(scroll.contentOffset.x - x) > 0.01 else { return }
+            scroll.contentOffset = CGPoint(x: x, y: scroll.contentOffset.y)
+        }
+    }
 }
 
 struct PremiumBanner: View {
