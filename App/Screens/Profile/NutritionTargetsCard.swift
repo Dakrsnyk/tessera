@@ -67,6 +67,8 @@ struct NutritionTargetsCard: View {
             }
         }
         .tint(Color(hex: MiniApp.nutrition.colorHex))
+        // A container only shows up under its own identifier when it is an element (as « daily-section »).
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("nutrition-targets")
         .sheet(item: $editing) { target in
             NutritionTargetEditor(target: target)

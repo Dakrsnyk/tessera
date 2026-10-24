@@ -58,6 +58,8 @@ struct WidgetStudio: View {
     @State private var lastChange = Date.distantPast
     @State private var restored: [WidgetDesign]?
     @State private var photos = StudioPhotoSession()
+    /// The widget inside a combined widget whose settings page is open.
+    @State private var openedPart: Int?
 
     private let isNew: Bool
     private let originals: [WidgetDesign]
@@ -537,8 +539,8 @@ struct WidgetStudio: View {
             VStack(spacing: 0) {
                 ForEach(Array(design.options.parts.enumerated()), id: \.offset) { pair in
                     if pair.offset > 0 { Divider() }
-                    NavigationLink {
-                        ComboPartSettingsView(design: edited, index: pair.offset)
+                    Button {
+                        openedPart = pair.offset
                     } label: {
                         HStack(spacing: 10) {
                             Image(systemName: pair.element.kind.symbol)
@@ -568,6 +570,11 @@ struct WidgetStudio: View {
                     .buttonStyle(.pressable)
                     .accessibilityIdentifier("part-\(pair.element.kind.rawValue)")
                 }
+            }
+            // A plain button and a destination bound to the index, like the Studio itself is pushed by the
+            // creator: a destination-style NavigationLink with a custom button style didn't open the page in the UI tests.
+            .navigationDestination(item: $openedPart) { index in
+                ComboPartSettingsView(design: edited, index: index)
             }
         }
     }
