@@ -87,7 +87,9 @@ final class ProfileUITests: XCTestCase {
         type("30", into: "profile-age")
         type("180", into: "profile-height")
         tapButton("gender-male")
-        XCTAssertTrue(app.descendants(matching: .any)["nutrition-targets"].waitForExistence(timeout: 5), "Les besoins calculés doivent s'afficher")
+        let targetsShown = app.descendants(matching: .any)["nutrition-targets"].waitForExistence(timeout: 5)
+        if !targetsShown { attachHierarchy("diagnostic-nutrition-targets") }
+        XCTAssertTrue(targetsShown, "Les besoins calculés doivent s'afficher")
         snapshot("nutrition-needs")
         // Everything else can be skipped: the last page ends the first launch.
         tapButton("onboarding-skip")
@@ -285,6 +287,18 @@ final class ProfileUITests: XCTestCase {
         XCTAssertEqual(app.state, .runningForeground)
     }
 
+    /// The whole accessibility tree and a screenshot, kept in the report to see what the screen held when a step failed.
+    private func attachHierarchy(_ name: String) {
+        let tree = XCTAttachment(string: app.debugDescription)
+        tree.name = name
+        tree.lifetime = .keepAlways
+        add(tree)
+        let shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = name + "-ecran"
+        shot.lifetime = .keepAlways
+        add(shot)
+    }
+
     private func waitForDisappearance(_ element: XCUIElement, timeout: TimeInterval = 8) -> Bool {
         let gone = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: element)
         return XCTWaiter.wait(for: [gone], timeout: timeout) == .completed
@@ -313,7 +327,9 @@ final class ProfileUITests: XCTestCase {
         // own « Nom du widget » field. Typing before the page is open would rename the whole widget.
         let studioName = app.textFields["widget-name"]
         if !waitForDisappearance(studioName, timeout: 4) { part.tap() }
-        XCTAssertTrue(waitForDisappearance(studioName), "La page de réglages du widget ne s'ouvre pas")
+        let partPageOpened = waitForDisappearance(studioName)
+        if !partPageOpened { attachHierarchy("diagnostic-part-settings") }
+        XCTAssertTrue(partPageOpened, "La page de réglages du widget ne s'ouvre pas")
         let name = app.textFields["Nom du widget"].firstMatch
         XCTAssertTrue(name.waitForExistence(timeout: 8))
         name.tap()
