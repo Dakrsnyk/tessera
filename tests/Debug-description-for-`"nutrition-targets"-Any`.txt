@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  ↪︎Find: Descendants matching type Any
+    ↪︎Find: Elements matching predicate '"nutrition-targets" IN identifiers'

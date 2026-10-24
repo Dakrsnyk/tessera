@@ -1,0 +1,3 @@
+tableau | propre | lignes 40 | créneaux 7 | attendus 7 | corrects 7
+tableau | flou | lignes 40 | créneaux 7 | attendus 7 | corrects 7
+tableau | incline | lignes 40 | créneaux 7 | attendus 7 | corrects 7

@@ -1,0 +1,5 @@
+omnivox | propre | lignes 76 | créneaux 10 | attendus 10 | corrects 10
+omnivox | flou | lignes 76 | créneaux 10 | attendus 10 | corrects 10
+omnivox | incline | lignes 76 | créneaux 10 | attendus 10 | corrects 10
+omnivox | jpeg | lignes 76 | créneaux 10 | attendus 10 | corrects 10
+omnivox | sombre | lignes 77 | créneaux 10 | attendus 10 | corrects 10

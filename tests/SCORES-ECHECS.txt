@@ -1,0 +1,22 @@
+ECHEC omnivox-session attendus=7 lus=7 manques+inventes=0
+ECHEC omnivox-bloc-3-rangees attendus=7 lus=7 manques+inventes=0
+ECHEC outaouais-encadre attendus=15 lus=15 manques+inventes=2
+  MANQUE 3|14:00-15:00|Chimie org (T)|1.105
+  INVENTE 3|11:00-14:00|mercredis midi|1.105
+ECHEC semaine-calendrier attendus=6 lus=6 manques+inventes=0
+ECHEC grille-ecole-periodes attendus=6 lus=6 manques+inventes=0
+ECHEC grille-transposee attendus=7 lus=7 manques+inventes=0
+ECHEC liste-jour-par-jour attendus=5 lus=5 manques+inventes=0
+ECHEC tableau-jour-debut-fin attendus=5 lus=5 manques+inventes=0
+ECHEC universite-cm-td-tp attendus=5 lus=5 manques+inventes=0
+ECHEC japonais-1限 attendus=5 lus=5 manques+inventes=0
+ECHEC allemand-24h attendus=6 lus=6 manques+inventes=0
+ECHEC anglais-12h attendus=6 lus=6 manques+inventes=0
+ECHEC deux-salles attendus=5 lus=5 manques+inventes=0
+ECHEC pauses-grille-ecole attendus=7 lus=7 manques+inventes=0
+ECHEC creneaux-libres-fr attendus=5 lus=5 manques+inventes=0
+ECHEC creneaux-libres-en attendus=3 lus=3 manques+inventes=0
+ECHEC week-end attendus=5 lus=5 manques+inventes=0
+ECHEC omnivox-session-sans-sonde attendus=7 lus=7 manques+inventes=0
+ECHEC omnivox-bloc-3-rangees-sans-sonde attendus=7 lus=7 manques+inventes=0
+ECHEC outaouais-encadre-sans-sonde attendus=15 lus=15 manques+inventes=0

@@ -1,0 +1,357 @@
+Optional(Attributes: Application, 0x1039a2c50, pid: 21615, label: 'Ardane'
+Element subtree:
+ →Application, 0x1039a2c50, pid: 21615, label: 'Ardane'
+    Window (Main), 0x1039a5170, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x1039a5530, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x1039a5650, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x1039a5290, {{-402.0, -874.0}, {1206.0, 2622.0}}
+          Other, 0x1039a53b0, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x1039a5770, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x1039a5890, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x1039a59b0, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x1039a5ad0, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x1039a5bf0, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x1039a5d10, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x1039a5e30, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x1039a5f50, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x1039a6070, {{0.0, 62.0}, {402.0, 106.0}}, identifier: 'Créer'
+                              StaticText, 0x1039a6190, {{16.0, 119.7}, {88.3, 40.7}}, label: 'Créer'
+                            Other, 0x1039a62b0, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x1039a63d0, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x10399be10, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x10399bf30, {{0.0, 0.0}, {402.0, 874.0}}
+                                    ScrollView, 0x10399c050, {{0.0, 0.0}, {402.0, 874.0}}
+                                      Other, 0x10399c170, {{0.0, 0.0}, {402.0, 874.0}}
+                                        Other, 0x10399c290, {{0.0, 0.0}, {402.0, 170.8}}
+                                        Other, 0x10399c3b0, {{0.0, 726.2}, {402.0, 147.8}}
+                                      Other, 0x10399c4d0, {{0.0, 0.0}, {402.0, 874.0}}
+                                        Other, 0x10399c5f0, {{0.0, 726.2}, {402.0, 147.8}}
+                                          Image, 0x10399c710, {{-120.0, 731.0}, {642.0, 286.0}}, identifier: 'AdditionalDimmingOverlay'
+                                          Other, 0x10399c830, {{0.0, 726.2}, {402.0, 147.8}}
+                                            Other, 0x10399c950, {{0.0, 726.2}, {402.0, 147.8}}
+                                          Other, 0x1039aa8a0, {{0.0, 726.2}, {402.0, 147.8}}
+                                            Other, 0x1039aa9c0, {{0.0, 726.2}, {402.0, 147.8}}
+                                            Other, 0x1039aaae0, {{0.0, 726.2}, {402.0, 147.8}}
+                                      Other, 0x1039aac00, {{0.0, 168.0}, {402.0, 3909.0}}
+                                        StaticText, 0x1039aad20, {{20.0, 168.0}, {315.0, 18.0}}, label: 'Choisis un univers, puis la taille de ton widget.'
+                                        ScrollView, 0x1039aae40, {{0.0, 200.0}, {402.0, 36.0}}
+                                          Other, 0x1039aaf60, {{0.0, 200.0}, {613.0, 36.0}}
+                                            Button, 0x1039ab080, {{20.0, 200.0}, {59.7, 36.0}}, label: 'Tout', Selected
+                                            Button, 0x1039ab1a0, {{87.7, 200.0}, {156.3, 36.0}}, identifier: 'create-lockscreen', label: 'Écran verrouillé'
+                                              Image, 0x1039ab2c0, {{103.3, 212.0}, {8.7, 12.0}}, identifier: 'lock.fill', label: 'Verrouiller'
+                                              StaticText, 0x1039ab3e0, {{118.7, 209.0}, {111.3, 18.0}}, label: 'Écran verrouillé'
+                                            Button, 0x1039ab500, {{252.0, 200.0}, {69.3, 36.0}}, label: 'Santé'
+                                            Button, 0x1039ab620, {{329.3, 200.0}, {77.0, 36.0}}, label: 'Argent'
+                                            Button, 0x1039ab740, {{414.3, 200.0}, {119.7, 36.0}}, label: 'Organisation'
+                                            Button, 0x1039ab860, {{542.0, 200.0}, {51.0, 36.0}}, label: 'Vie'
+                                        Other, 0x1039ab980, {{20.0, 250.0}, {362.0, 1364.7}}
+                                          Button, 0x1039abaa0, {{20.0, 250.0}, {362.0, 250.3}}, identifier: 'space-card-fitness', label: 'Fitness, 5/3 séances', Selected
+                                            Image, 0x1039abbc0, {{44.0, 279.3}, {20.3, 11.7}}, identifier: 'dumbbell.fill', label: 'dumbbell.fill'
+                                            StaticText, 0x1039abce0, {{78.0, 277.8}, {58.0, 14.3}}, label: '8 widgets'
+                                            Image, 0x1039abe00, {{344.3, 278.7}, {7.7, 12.7}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x1039abf20, {{38.0, 314.0}, {95.3, 33.7}}, label: 'Fitness'
+                                            StaticText, 0x1039ac040, {{38.0, 347.7}, {83.3, 18.0}}, label: '5/3 séances'
+                                            StaticText, 0x1039ac160, {{38.0, 381.7}, {215.4, 100.7}}, label: 'Aperçu du widget Séance du jour'
+                                              Image, 0x1039ac280, {{48.3, 391.7}, {7.9, 8.1}}, identifier: 'figure.strengthtraining.traditional', label: 'figure.strengthtraining.traditional'
+                                              StaticText, 0x1039ac3a0, {{59.9, 391.8}, {63.5, 7.9}}, label: 'SÉANCE DU JOUR'
+                                              StaticText, 0x1039ac4c0, {{47.5, 447.7}, {79.1, 14.8}}, label: 'Haut du corps'
+                                              StaticText, 0x1039ac5e0, {{47.5, 464.3}, {71.2, 8.5}}, label: 'En cours · 3/17 séries'
+                                              Image, 0x1039ac700, {{135.8, 407.5}, {9.1, 9.1}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039ac820, {{149.7, 402.8}, {40.0, 18.5}}, label: 'Développé couché'
+                                              StaticText, 0x1039ac940, {{200.4, 407.8}, {43.6, 8.5}}, label: '4 × 8 · 60 kg'
+                                              Image, 0x1039aca60, {{135.8, 426.2}, {9.1, 9.1}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039acb80, {{149.7, 426.1}, {33.3, 9.3}}, label: 'Tractions'
+                                              StaticText, 0x1039acca0, {{225.9, 426.5}, {18.0, 8.5}}, label: '4 × 8'
+                                              Image, 0x1039acdc0, {{142.3, 460.8}, {6.3, 6.3}}, identifier: 'arrow.uturn.backward', label: 'Annuler la dernière série'
+                                            StaticText, 0x1039acee0, {{263.3, 381.7}, {100.7, 100.7}}, label: 'Aperçu du widget Régularité', Selected
+                                              Image, 0x1039ad000, {{273.4, 391.7}, {5.5, 7.1}}, identifier: 'flame.fill', label: 'Flamme'
+                                              StaticText, 0x1039ad120, {{282.5, 391.3}, {45.4, 7.9}}, label: 'RÉGULARITÉ'
+                                              StaticText, 0x1039ad240, {{272.8, 417.8}, {32.2, 24.1}}, label: '5/3'
+                                              StaticText, 0x1039ad360, {{272.8, 443.6}, {76.7, 8.5}}, label: 'séances cette semaine'
+                                              Image, 0x1039ad480, {{275.4, 462.9}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039ad5a0, {{287.4, 462.9}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039ad6c0, {{311.5, 462.9}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039ad7e0, {{323.3, 462.9}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039ad900, {{335.3, 462.9}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                          Button, 0x1039ada20, {{20.0, 514.3}, {362.0, 307.7}}, identifier: 'space-card-nutrition', label: 'Nutrition, 1 676 kcal restantes'
+                                            Image, 0x1039adb40, {{48.7, 540.7}, {10.7, 17.7}}, identifier: 'fork.knife', label: 'Nourriture'
+                                            StaticText, 0x1039adc60, {{78.0, 542.2}, {58.0, 14.3}}, label: '9 widgets'
+                                            Image, 0x1039add80, {{344.3, 543.0}, {7.7, 12.7}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x1039adea0, {{38.0, 578.3}, {115.3, 33.7}}, label: 'Nutrition'
+                                            StaticText, 0x1039adfc0, {{38.0, 612.0}, {137.0, 18.0}}, label: '1 676 kcal restantes'
+                                            StaticText, 0x1039ae0e0, {{38.0, 646.0}, {158.0, 158.0}}, label: 'Aperçu du widget Calories'
+                                              Image, 0x1039ae200, {{53.8, 661.8}, {8.7, 11.2}}, identifier: 'flame', label: 'Flamme'
+                                              StaticText, 0x1039ae320, {{68.1, 661.2}, {41.5, 12.4}}, label: 'Calories'
+                                              StaticText, 0x1039ae440, {{89.3, 708.4}, {55.5, 23.9}}, label: '1 676'
+                                              StaticText, 0x1039ae560, {{107.9, 732.3}, {18.3, 11.2}}, label: 'kcal'
+                                              StaticText, 0x1039ae680, {{74.1, 772.4}, {85.8, 11.2}}, label: 'restantes sur 2 630'
+                                            StaticText, 0x1039ae7a0, {{206.0, 646.0}, {158.0, 158.0}}, label: 'Aperçu du widget Macros'
+                                              Image, 0x1039ae8c0, {{222.1, 662.4}, {11.8, 9.6}}, identifier: 'chart.bar.xaxis', label: 'chart.bar.xaxis'
+                                              StaticText, 0x1039ae9e0, {{239.8, 660.9}, {49.3, 12.4}}, label: 'MACROS'
+                                              StaticText, 0x1039aeb00, {{233.9, 678.8}, {49.9, 13.3}}, label: 'Protéines'
+                                              StaticText, 0x1039aec20, {{311.6, 679.3}, {37.5, 12.4}}, label: '99/156'
+                                              StaticText, 0x1039aed40, {{233.9, 702.4}, {45.9, 13.3}}, label: 'Glucides'
+                                              StaticText, 0x1039aee60, {{305.1, 702.8}, {44.0, 12.4}}, label: '110/317'
+                                              StaticText, 0x1039aef80, {{233.9, 725.9}, {37.8, 13.3}}, label: 'Lipides'
+                                              StaticText, 0x1039af0a0, {{318.5, 726.4}, {30.7, 12.4}}, label: '13/82'
+                                          Button, 0x1039af1c0, {{20.0, 836.0}, {362.0, 250.3}}, identifier: 'space-card-budget', label: 'Budget, Reste 1 421 $'
+                                            Image, 0x1039af2e0, {{45.3, 864.7}, {17.7, 13.0}}, identifier: 'creditcard.fill', label: 'Carte'
+                                            StaticText, 0x1039af400, {{78.0, 863.8}, {58.0, 14.3}}, label: '9 widgets'
+                                            Image, 0x1039af520, {{344.3, 864.7}, {7.7, 12.7}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x1039af640, {{38.0, 900.0}, {95.3, 33.7}}, label: 'Budget'
+                                            StaticText, 0x1039af760, {{38.0, 933.7}, {91.7, 18.0}}, label: 'Reste 1 421 $'
+                                            StaticText, 0x1039af880, {{38.0, 967.7}, {100.7, 100.7}}, label: 'Aperçu du widget Reste du mois'
+                                              Image, 0x1039af9a0, {{48.3, 978.3}, {7.7, 5.7}}, identifier: 'creditcard', label: 'Carte'
+                                              StaticText, 0x1039afac0, {{59.7, 977.1}, {56.4, 7.9}}, label: 'RESTE DU MOIS'
+                                              StaticText, 0x1039afbe0, {{47.5, 1003.8}, {72.2, 24.1}}, label: '1 421 $'
+                                              StaticText, 0x1039afd00, {{47.5, 1029.6}, {60.4, 8.5}}, label: 'soit 178 $ par jour'
+                                            StaticText, 0x1039afe20, {{148.7, 967.7}, {215.4, 100.7}}, label: 'Aperçu du widget Dépenses par catégorie'
+                                              Image, 0x1039aff40, {{158.9, 977.7}, {5.7, 7.1}}, identifier: 'chart.bar.doc.horizontal', label: 'chart.bar.doc.horizontal'
+                                              StaticText, 0x1039b0200, {{168.4, 977.3}, {71.4, 7.9}}, label: 'DÉPENSES DU MOIS'
+                                              StaticText, 0x1039b0320, {{158.1, 1023.1}, {58.4, 25.4}}, label: '979 $'
+                                              StaticText, 0x1039b0440, {{158.1, 1050.3}, {75.2, 8.5}}, label: 'Octobre · 6 catégories'
+                                              StaticText, 0x1039b0560, {{254.0, 987.8}, {28.8, 9.3}}, label: 'Épicerie'
+                                              StaticText, 0x1039b0680, {{254.0, 997.1}, {27.6, 7.1}}, label: 'sur 500 $'
+                                              StaticText, 0x1039b07a0, {{333.9, 991.7}, {20.7, 8.5}}, label: '395 $'
+                                              StaticText, 0x1039b08c0, {{254.0, 1012.4}, {19.3, 9.3}}, label: 'Autre'
+                                              StaticText, 0x1039b09e0, {{333.9, 1012.8}, {20.7, 8.5}}, label: '255 $'
+                                              StaticText, 0x1039b0b00, {{254.0, 1025.9}, {34.7, 9.3}}, label: 'Transport'
+                                              StaticText, 0x1039b0c20, {{254.0, 1035.1}, {26.6, 7.1}}, label: 'sur 150 $'
+                                              StaticText, 0x1039b0d40, {{333.9, 1029.8}, {20.7, 8.5}}, label: '102 $'
+                                          Button, 0x1039b0e60, {{20.0, 1100.3}, {362.0, 250.0}}, identifier: 'space-card-productivity', label: 'Productivité, 7 tâches à faire', Selected
+                                            Image, 0x1039b0f80, {{45.3, 1127.7}, {17.3, 15.3}}, identifier: 'checklist', label: 'checklist'
+                                            StaticText, 0x1039b10a0, {{78.0, 1128.2}, {58.0, 14.3}}, label: '8 widgets'
+                                            Image, 0x1039b11c0, {{344.3, 1129.0}, {7.7, 12.7}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x1039b12e0, {{38.0, 1164.3}, {159.3, 33.7}}, label: 'Productivité'
+                                            StaticText, 0x1039b1400, {{38.0, 1198.0}, {104.7, 18.0}}, label: '7 tâches à faire'
+                                            StaticText, 0x1039b1520, {{38.0, 1232.0}, {100.7, 100.7}}, label: 'Aperçu du widget Top 3 du jour', Selected
+                                              Image, 0x1039b1640, {{48.1, 1242.1}, {6.7, 6.7}}, identifier: '3.circle', label: '3.circle'
+                                              StaticText, 0x1039b1760, {{58.3, 1241.5}, {56.0, 7.9}}, label: 'TOP 3 DU JOUR'
+                                              Image, 0x1039b1880, {{48.1, 1257.4}, {7.9, 7.9}}, identifier: 'checkmark.circle.fill', label: 'Coché', Selected
+                                              StaticText, 0x1039b19a0, {{60.7, 1252.9}, {42.2, 17.0}}, label: 'Finir la présentation'
+                                              Image, 0x1039b1ac0, {{48.1, 1277.4}, {7.9, 7.9}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039b1be0, {{60.7, 1272.8}, {36.1, 17.0}}, label: 'Appeler le comptable'
+                                              Image, 0x1039b1d00, {{48.1, 1297.3}, {7.9, 7.9}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039b1e20, {{60.7, 1292.8}, {39.5, 17.0}}, label: '30 minutes de sport'
+                                            StaticText, 0x1039b1f40, {{148.7, 1232.0}, {215.4, 100.7}}, label: 'Aperçu du widget Aujourd'hui'
+                                              StaticText, 0x1039b2060, {{158.1, 1238.3}, {50.9, 7.9}}, label: 'AUJOURD'HUI'
+                                              StaticText, 0x1039b2180, {{328.8, 1238.3}, {25.8, 7.9}}, label: '7 à faire'
+                                              Image, 0x1039b22a0, {{158.9, 1251.1}, {10.3, 10.3}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039b23c0, {{174.7, 1251.6}, {64.9, 9.3}}, label: 'Appeler le garage'
+                                              Image, 0x1039b24e0, {{158.9, 1267.1}, {10.3, 10.3}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039b5020, {{174.7, 1267.6}, {65.9, 9.3}}, label: 'Envoyer la facture'
+                                              Image, 0x1039b5140, {{158.9, 1283.1}, {10.3, 10.3}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039b5260, {{174.7, 1283.6}, {49.9, 9.3}}, label: 'Lire 20 pages'
+                                              Image, 0x1039b5380, {{158.9, 1299.1}, {10.3, 10.3}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x1039b54a0, {{174.7, 1299.6}, {49.3, 9.3}}, label: 'Payer le loyer'
+                                              StaticText, 0x1039b55c0, {{158.1, 1314.3}, {31.4, 7.9}}, label: '+ 3 à faire'
+                                          Button, 0x1039b56e0, {{20.0, 1364.3}, {362.0, 250.3}}, identifier: 'space-card-habits', label: 'Habitudes, 3/4 aujourd'hui', Selected
+                                            Image, 0x1039b5800, {{45.7, 1392.3}, {16.7, 14.3}}, identifier: 'repeat', label: 'Récurrence 1'
+                                            StaticText, 0x1039b5920, {{78.0, 1392.2}, {58.0, 14.3}}, label: '4 widgets'
+                                            Image, 0x1039b5a40, {{344.3, 1393.0}, {7.7, 12.7}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x1039b5b60, {{38.0, 1428.3}, {135.3, 33.7}}, label: 'Habitudes'
+                                            StaticText, 0x1039b5c80, {{38.0, 1462.0}, {103.0, 18.0}}, label: '3/4 aujourd'hui'
+                                            Other, 0x1039b5da0, {{38.0, 1496.0}, {215.4, 100.7}}, label: 'Aperçu du widget Mes habitudes', Selected
+                                              StaticText, 0x1039b5ec0, {{47.5, 1505.5}, {59.4, 7.9}}, label: 'MES HABITUDES'
+                                              StaticText, 0x1039b5fe0, {{233.1, 1505.5}, {10.8, 7.9}}, label: '3/4'
+                                              Image, 0x1039b6100, {{47.5, 1518.1}, {15.4, 10.7}}, identifier: 'checkmark', label: 'Méditer, fait', Selected
+                                              StaticText, 0x1039b6220, {{65.2, 1519.2}, {27.0, 8.5}}, label: 'Méditer'
+                                              Other, 0x1039b6340, {{206.7, 1519.5}, {14.4, 7.9}}, label: 'Série de 12 jours'
+                                                Image, 0x1039b6460, {{206.7, 1520.9}, {4.1, 5.1}}, identifier: 'flame.fill', label: 'Flamme'
+                                                StaticText, 0x1039b6580, {{212.4, 1519.5}, {8.7, 7.9}}, label: '12'
+                                              StaticText, 0x1039b66a0, {{223.4, 1519.5}, {17.0, 7.9}}, label: 'Régularité : 81 %'
+                                              Other, 0x1039b67c0, {{47.5, 1531.1}, {196.5, 6.9}}
+                                              Image, 0x1039b68e0, {{47.5, 1542.2}, {15.4, 10.7}}, identifier: 'checkmark', label: 'Sport, à faire', Selected
+                                              StaticText, 0x1039b6a00, {{65.2, 1543.2}, {19.5, 8.5}}, label: 'Sport'
+                                              Other, 0x1039b6b20, {{211.0, 1543.5}, {10.1, 7.9}}, label: 'Série de 2 jours'
+                                                Image, 0x1039b6c40, {{211.0, 1544.9}, {4.1, 5.1}}, identifier: 'flame.fill', label: 'Flamme'
+                                                StaticText, 0x1039b6d60, {{216.7, 1543.5}, {4.3, 7.9}}, label: '2'
+                                              StaticText, 0x1039b6e80, {{223.4, 1543.5}, {17.0, 7.9}}, label: 'Régularité : 54 %'
+                                              Other, 0x1039b6fa0, {{47.5, 1555.2}, {196.5, 6.9}}
+                                              Image, 0x1039b70c0, {{47.5, 1566.2}, {15.4, 10.7}}, identifier: 'checkmark', label: 'Lecture, fait', Selected
+                                              StaticText, 0x1039b71e0, {{65.2, 1567.2}, {26.6, 8.5}}, label: 'Lecture'
+                                              Other, 0x1039b7300, {{211.0, 1567.5}, {10.1, 7.9}}, label: 'Série de 4 jours'
+                                                Image, 0x1039b7420, {{211.0, 1569.0}, {4.1, 5.1}}, identifier: 'flame.fill', label: 'Flamme'
+                                                StaticText, 0x1039b7540, {{216.7, 1567.5}, {4.3, 7.9}}, label: '4'
+                                              StaticText, 0x1039b7660, {{223.4, 1567.5}, {17.0, 7.9}}, label: 'Régularité : 66 %'
+                                              Other, 0x1039b7780, {{47.5, 1579.2}, {191.8, 6.7}}
+                                            StaticText, 0x1039b78a0, {{263.3, 1496.0}, {100.7, 100.7}}, label: 'Aperçu du widget Série', Selected
+                                              Image, 0x1039b79c0, {{273.4, 1506.1}, {5.5, 7.1}}, identifier: 'flame.fill', label: 'Flamme'
+                                              StaticText, 0x1039b7ae0, {{282.5, 1505.7}, {32.2, 7.9}}, label: 'MÉDITER'
+                                              StaticText, 0x1039b7c00, {{272.8, 1532.1}, {26.0, 24.1}}, label: '12'
+                                              StaticText, 0x1039b7d20, {{300.6, 1543.9}, {18.1, 9.3}}, label: 'jours'
+                                              StaticText, 0x1039b7e40, {{272.8, 1557.9}, {50.1, 8.5}}, label: 'fait aujourd'hui'
+                                              Image, 0x1039b7f60, {{275.4, 1577.3}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039b8080, {{287.4, 1577.3}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039b81a0, {{299.4, 1577.3}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039b82c0, {{311.5, 1577.3}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039b83e0, {{323.3, 1577.3}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x1039b8500, {{335.3, 1577.3}, {4.5, 4.3}}, identifier: 'checkmark', label: 'Coché', Selected
+                                      Other, 0x1039b2cd0, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 7 pages', value: 0 %
+                                        Other, 0x1039b2df0, {{396.0, 119.0}, {3.0, 140.7}}
+                                      Other, 0x1039b2f10, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 7 pages', value: 0 %
+                                        Other, 0x1039b3030, {{396.0, 119.0}, {3.0, 140.7}}
+                            Other, 0x1039b3150, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x1039b3270, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x1039b3390, {{0.0, 791.0}, {402.0, 83.0}}
+                  Other, 0x1039b34b0, {{0.0, 0.0}, {402.0, 874.0}}
+                    TabBar, 0x1039b35d0, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Barre d’onglets'
+                      Other, 0x1039b36f0, {{21.0, 791.0}, {360.0, 62.0}}
+                        Other, 0x1039b3810, {{21.0, 791.0}, {102.3, 54.0}}
+                        Other, 0x1039b3930, {{21.0, 791.0}, {360.0, 62.0}}
+                          Button, 0x1039b3a50, {{25.0, 795.0}, {102.3, 54.0}}, label: 'Accueil'
+                            Image, 0x1039b3b70, {{63.0, 802.3}, {27.0, 25.0}}, identifier: 'square.grid.2x2.fill', label: 'grille 2x2'
+                          Button, 0x1039b3c90, {{108.2, 795.0}, {102.3, 54.0}}, label: 'Créer', Selected
+                            Image, 0x1039b3db0, {{144.2, 800.7}, {30.3, 29.7}}, identifier: 'plus.square.fill.on.square.fill', label: 'dupliquer'
+                          Button, 0x1039b3ed0, {{191.4, 795.0}, {102.3, 54.0}}, label: 'Store'
+                            Image, 0x1039b3ff0, {{229.4, 801.3}, {26.3, 27.0}}, identifier: 'bag.fill', label: 'cabas'
+                          Button, 0x1039b4110, {{274.7, 795.0}, {102.3, 54.0}}, label: 'Mes widgets'
+                            Image, 0x1039b4230, {{310.7, 800.0}, {30.0, 31.3}}, identifier: 'rectangle.stack.fill', label: 'Album'
+                        Other, 0x1039b4350, {{108.2, 795.0}, {102.3, 54.0}}
+                          Other, 0x1039b4470, {{108.2, 795.0}, {102.3, 54.0}}
+                            Other, 0x1039b4590, {{108.2, 795.0}, {102.3, 54.0}}
+                            Other, 0x1039b46b0, {{108.2, 795.0}, {102.3, 54.0}}
+                              Other, 0x1039b47d0, {{108.2, 795.0}, {102.3, 54.0}}
+                                Other, 0x1039b48f0, {{108.2, 795.0}, {102.3, 54.0}}
+                                  Other, 0x1039b4a10, {{108.2, 795.0}, {102.3, 54.0}}
+                                Other, 0x1039b4b30, {{108.2, 795.0}, {102.3, 54.0}}
+                              Other, 0x1039b4c50, {{108.2, 795.0}, {102.3, 54.0}}
+                  Other, 0x1039b4d70, {{0.0, 791.0}, {402.0, 83.0}}
+                    Other, 0x1039b8810, {{0.0, 791.0}, {402.0, 83.0}}
+                      Other, 0x1039b8930, {{0.0, 791.0}, {402.0, 83.0}}
+                        Other, 0x1039b8a50, {{0.0, 791.0}, {402.0, 83.0}}
+                          Other, 0x1039b8b70, {{0.0, 791.0}, {402.0, 83.0}}
+                            Other, 0x1039b8c90, {{0.0, 791.0}, {402.0, 83.0}}
+      Other, 0x1039b8db0, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x1039bb190, {{-402.0, -874.0}, {1206.0, 2622.0}}
+        Other, 0x1039bb2b0, {{0.0, 62.0}, {402.0, 812.0}}
+          Other, 0x1039bb3d0, {{0.0, 62.0}, {402.0, 812.0}}
+            Other, 0x1039bb4f0, {{0.0, 62.0}, {402.0, 812.0}}
+              Other, 0x1039bb610, {{0.0, 62.0}, {402.0, 812.0}}
+                Other, 0x1039bb730, {{0.0, 62.0}, {402.0, 812.0}}
+                  Other, 0x1039bb850, {{0.0, 62.0}, {402.0, 812.0}}
+                    NavigationBar, 0x1039bb970, {{0.0, 78.0}, {402.0, 54.0}}, identifier: 'Nouveau widget'
+                      Button, 0x1039bba90, {{16.0, 78.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Nutrition'
+                      StaticText, 0x1039bbbb0, {{136.7, 89.7}, {128.7, 20.7}}, label: 'Nouveau widget'
+                      Other, 0x1039bbdf0, {{286.0, 82.0}, {40.0, 36.0}}, identifier: 'studio-undo', label: 'Retour en arrière'
+                        Other, 0x1039bbf10, {{286.0, 82.0}, {40.0, 36.0}}
+                          Button, 0x1039bc030, {{286.0, 82.0}, {40.0, 36.0}}, identifier: 'studio-undo', label: 'Retour en arrière', Disabled
+                      Other, 0x1039bc150, {{342.0, 82.0}, {40.0, 36.0}}, identifier: 'studio-redo', label: 'Retour en avant'
+                        Other, 0x1039bc270, {{342.0, 82.0}, {40.0, 36.0}}
+                          Button, 0x1039bc390, {{342.0, 82.0}, {40.0, 36.0}}, identifier: 'studio-redo', label: 'Retour en avant', Disabled
+                    Other, 0x1039bc4b0, {{0.0, 62.0}, {402.0, 812.0}}
+                      Other, 0x1039bc5d0, {{0.0, 62.0}, {402.0, 812.0}}
+                        Other, 0x1039bc6f0, {{0.0, 62.0}, {402.0, 812.0}}
+                          Other, 0x1039bc810, {{0.0, 62.0}, {402.0, 812.0}}
+                            StaticText, 0x1039bc930, {{42.0, 150.0}, {318.0, 148.5}}, label: 'Aperçu du widget Calories restantes + Macros'
+                              Image, 0x1039bca50, {{55.1, 165.1}, {8.2, 10.5}}, identifier: 'flame', label: 'Flamme'
+                              StaticText, 0x1039bcb70, {{68.5, 164.6}, {39.0, 11.6}}, label: 'Calories'
+                              Image, 0x1039bcc90, {{165.2, 159.9}, {23.3, 21.0}}, identifier: 'barcode.viewfinder', label: 'Scanner'
+                              StaticText, 0x1039bcdb0, {{95.2, 213.3}, {52.1, 22.4}}, label: '1 676'
+                              StaticText, 0x1039bced0, {{112.7, 235.8}, {17.2, 10.5}}, label: 'kcal'
+                              StaticText, 0x1039bcff0, {{83.7, 273.5}, {75.1, 9.9}}, label: 'restantes sur 2 630'
+                              Image, 0x1039bd110, {{215.0, 161.1}, {11.1, 9.0}}, identifier: 'chart.bar.xaxis', label: 'chart.bar.xaxis'
+                              StaticText, 0x1039bd230, {{231.4, 159.9}, {34.7, 11.6}}, label: 'Macros'
+                              StaticText, 0x1039bd350, {{225.9, 176.8}, {45.1, 12.5}}, label: 'Protéines'
+                              StaticText, 0x1039bd470, {{310.8, 177.2}, {37.0, 11.6}}, label: '99/156'
+                              StaticText, 0x1039bd590, {{225.9, 198.9}, {42.5, 12.5}}, label: 'Glucides'
+                              StaticText, 0x1039bd6b0, {{304.4, 199.4}, {43.4, 11.6}}, label: '110/317'
+                              StaticText, 0x1039bd7d0, {{225.9, 221.1}, {34.9, 12.5}}, label: 'Lipides'
+                              StaticText, 0x1039bd8f0, {{317.5, 221.5}, {30.3, 11.6}}, label: '13/82'
+                            ScrollView, 0x1039bda10, {{0.0, 310.7}, {402.0, 52.0}}
+                              Other, 0x1039bdb30, {{0.0, 310.7}, {863.3, 52.0}}
+                                Button, 0x1039bdc50, {{20.0, 318.7}, {102.7, 36.0}}, identifier: 'studio-content', label: 'Contenu', Selected
+                                  Image, 0x1039bdd70, {{33.3, 331.0}, {11.3, 11.3}}, identifier: 'square.text.square', label: 'square.text.square'
+                                  StaticText, 0x1039bde90, {{51.0, 327.7}, {59.7, 18.0}}, label: 'Contenu'
+                                Button, 0x1039bdfb0, {{128.7, 318.7}, {91.7, 36.0}}, identifier: 'studio-theme', label: 'Thème'
+                                  Image, 0x1039be0d0, {{142.0, 330.0}, {11.3, 13.7}}, identifier: 'sparkles', label: 'Scintillement'
+                                  StaticText, 0x1039be1f0, {{159.7, 327.7}, {48.7, 18.0}}, label: 'Thème'
+                                Button, 0x1039be310, {{226.3, 318.7}, {81.3, 36.0}}, identifier: 'studio-style', label: 'Style'
+                                  Image, 0x1039be430, {{239.7, 329.7}, {14.0, 14.0}}, identifier: 'swatchpalette', label: 'swatchpalette'
+                                  StaticText, 0x1039be550, {{260.0, 327.7}, {35.7, 18.0}}, label: 'Style'
+                                Button, 0x1039be670, {{313.7, 318.7}, {109.0, 36.0}}, identifier: 'studio-colors', label: 'Couleurs'
+                                  Image, 0x1039be790, {{326.7, 330.3}, {15.0, 12.7}}, identifier: 'paintpalette', label: 'paintpalette'
+                                  StaticText, 0x1039be8b0, {{347.7, 327.7}, {63.0, 18.0}}, label: 'Couleurs'
+                                Button, 0x1039be9d0, {{428.7, 318.7}, {81.0, 36.0}}, identifier: 'studio-background', label: 'Fond'
+                                  Image, 0x1039beaf0, {{442.0, 331.0}, {14.0, 11.3}}, identifier: 'photo', label: 'Photo'
+                                  StaticText, 0x1039bec10, {{462.3, 327.7}, {35.3, 18.0}}, label: 'Fond'
+                                Button, 0x1039bed30, {{515.7, 318.7}, {99.3, 36.0}}, identifier: 'studio-border', label: 'Bordure'
+                                  Image, 0x1039bee50, {{529.0, 331.0}, {11.3, 11.3}}, identifier: 'square.dashed', label: 'Sélection Rectangulaire'
+                                  StaticText, 0x1039bef70, {{546.7, 327.7}, {56.3, 18.0}}, label: 'Bordure'
+                                Button, 0x1039bf090, {{621.0, 318.7}, {99.0, 36.0}}, identifier: 'studio-density', label: 'Densité'
+                                  Image, 0x1039bf1b0, {{634.3, 329.3}, {13.7, 15.0}}, identifier: 'rectangle.compress.vertical', label: 'Ignorer La Diapositive'
+                                  StaticText, 0x1039bf2d0, {{654.3, 327.7}, {53.7, 18.0}}, label: 'Densité'
+                                Button, 0x1039bf3f0, {{726.0, 318.7}, {117.3, 36.0}}, identifier: 'studio-myStyles', label: 'Mes styles'
+                                  Image, 0x1039bf510, {{740.3, 330.0}, {8.7, 13.3}}, identifier: 'bookmark', label: 'Signet'
+                                  StaticText, 0x1039bf630, {{756.3, 327.7}, {75.0, 18.0}}, label: 'Mes styles'
+                            ScrollView, 0x1039bf750, {{0.0, 363.0}, {402.0, 511.0}}
+                              Other, 0x1039bf870, {{0.0, 198.3}, {402.0, 920.3}}
+                                StaticText, 0x1039bf990, {{20.0, 212.3}, {37.7, 20.3}}, label: 'Nom'
+                                TextField, 0x1039bfab0, {{46.0, 268.7}, {310.0, 22.0}}, identifier: 'widget-name', placeholderValue: 'Nom du widget', value: Calories restantes...
+                                Other, 0x1039bfbd0, {{20.0, 334.7}, {362.0, 443.0}}, identifier: 'widget-data'
+                                  StaticText, 0x1039bfcf0, {{20.0, 334.7}, {100.3, 20.3}}, label: 'Tes données'
+                                  StaticText, 0x1039bfe10, {{270.0, 338.7}, {112.0, 15.7}}, label: 'Tout est renseigné'
+                                  StaticText, 0x1039bff30, {{20.0, 365.0}, {356.3, 33.7}}, label: 'Renseignées une fois, elles servent à tous tes widgets et à « Mon Quotidien ».'
+                                  Other, 0x1039c0050, {{20.0, 408.7}, {362.0, 116.3}}, identifier: 'data-kcalTarget'
+                                    Image, 0x1039c0170, {{43.7, 430.7}, {11.0, 14.3}}, identifier: 'flame', label: 'Flamme'
+                                    StaticText, 0x1039c0290, {{74.0, 422.7}, {127.3, 18.0}}, label: 'Objectif calorique'
+                                    StaticText, 0x1039c03b0, {{74.0, 442.7}, {106.3, 14.3}}, label: '2 630 kcal par jour'
+                                    Image, 0x1039c04d0, {{349.7, 423.7}, {17.0, 17.0}}, identifier: 'checkmark.circle.fill', label: 'Renseigné', Selected
+                                    Button, 0x1039c05f0, {{34.0, 469.0}, {334.0, 42.0}}, identifier: 'data-kcal', label: 'Voir mes besoins'
+                                      Image, 0x1039c0710, {{128.3, 482.0}, {15.3, 15.3}}, identifier: 'wand.and.stars', label: 'wand.and.stars'
+                                      StaticText, 0x1039c0830, {{128.3, 481.3}, {146.8, 18.0}}, label: 'Voir mes besoins'
+                                  Other, 0x1039c0950, {{20.0, 535.0}, {362.0, 116.3}}, identifier: 'data-meals'
+                                    Image, 0x1039c0a70, {{44.3, 556.3}, {9.3, 15.3}}, identifier: 'fork.knife', label: 'Nourriture'
+                                    StaticText, 0x1039c0b90, {{74.0, 549.0}, {44.3, 18.0}}, label: 'Repas'
+                                    StaticText, 0x1039c0cb0, {{74.0, 569.0}, {159.0, 14.3}}, label: '7 aliments notés aujourd'hui'
+                                    Image, 0x1039c0dd0, {{349.7, 550.0}, {17.0, 17.0}}, identifier: 'checkmark.circle.fill', label: 'Renseigné', Selected
+                                    Button, 0x1039c0ef0, {{34.0, 595.3}, {163.0, 42.0}}, label: 'Scanner'
+                                      Image, 0x1039c1010, {{74.7, 609.0}, {14.7, 14.7}}, identifier: 'barcode.viewfinder', label: 'Balayer Le Code-Barres'
+                                      StaticText, 0x1039c1130, {{74.7, 607.3}, {83.7, 18.0}}, label: 'Scanner'
+                                    Button, 0x1039c1250, {{205.0, 595.3}, {163.0, 42.0}}, label: 'Chercher'
+                                      Image, 0x1039c1370, {{242.0, 608.7}, {14.7, 15.0}}, identifier: 'magnifyingglass', label: 'Rechercher'
+                                      StaticText, 0x1039c1490, {{242.0, 607.3}, {90.7, 18.0}}, label: 'Chercher'
+                                  Other, 0x1039c15b0, {{20.0, 661.3}, {362.0, 116.3}}, identifier: 'data-macroTargets'
+                                    Image, 0x1039c16d0, {{42.3, 683.7}, {13.3, 13.3}}, identifier: 'chart.pie', label: 'Secteur Du Graphique'
+                                    StaticText, 0x1039c17f0, {{74.0, 675.3}, {143.3, 18.0}}, label: 'Objectifs de macros'
+                                    StaticText, 0x1039c1910, {{74.0, 695.3}, {141.7, 14.3}}, label: 'P 156 g · G 317 g · L 82 g'
+                                    Image, 0x1039cbde0, {{349.7, 676.3}, {17.0, 17.0}}, identifier: 'checkmark.circle.fill', label: 'Renseigné', Selected
+                                    Button, 0x1039cbf00, {{34.0, 721.7}, {334.0, 42.0}}, identifier: 'data-macros', label: 'Voir mes besoins'
+                                      Image, 0x1039cc020, {{128.3, 734.7}, {15.3, 15.3}}, identifier: 'wand.and.stars', label: 'wand.and.stars'
+                                      StaticText, 0x1039cc140, {{128.3, 734.0}, {146.8, 18.0}}, label: 'Voir mes besoins'
+                                StaticText, 0x1039cc260, {{20.0, 795.7}, {119.3, 20.3}}, label: 'Widgets réunis'
+                                StaticText, 0x1039cc5a0, {{300.3, 798.0}, {81.7, 15.7}}, label: 'Règle chacun'
+                                Button, 0x1039cc6c0, {{34.0, 840.0}, {334.0, 48.0}}, identifier: 'part-caloriesLeft', label: 'Calories restantes, Calories restantes, Régler'
+                                  Image, 0x1039cc7e0, {{40.7, 857.0}, {11.0, 14.3}}, identifier: 'flame', label: 'Flamme'
+                                  StaticText, 0x1039cc900, {{68.0, 847.3}, {130.0, 18.0}}, label: 'Calories restantes'
+                                  StaticText, 0x1039cca20, {{68.0, 866.3}, {102.3, 14.3}}, label: 'Calories restantes'
+                                  StaticText, 0x1039ccb40, {{309.7, 856.2}, {39.0, 15.7}}, label: 'Régler'
+                                  Image, 0x1039ccc60, {{361.0, 858.7}, {6.3, 10.7}}, identifier: 'chevron.right', label: 'Suivant'
+                                Button, 0x1039ccd80, {{34.0, 888.3}, {334.0, 48.0}}, identifier: 'part-macros', label: 'Macros, Macros, Régler'
+                                  Image, 0x103762650, {{38.7, 906.3}, {15.0, 12.0}}, identifier: 'chart.bar.xaxis', label: 'chart.bar.xaxis'
+                                  StaticText, 0x103790e40, {{68.0, 895.7}, {53.0, 18.0}}, label: 'Macros'
+                                  StaticText, 0x103760e40, {{68.0, 914.7}, {41.7, 14.3}}, label: 'Macros'
+                                  StaticText, 0x103773c10, {{309.7, 904.5}, {39.0, 15.7}}, label: 'Régler'
+                                  Image, 0x103791190, {{361.0, 907.0}, {6.3, 10.7}}, identifier: 'chevron.right', label: 'Suivant'
+                                StaticText, 0x10377cc10, {{20.0, 968.3}, {141.7, 20.3}}, label: 'Éléments affichés'
+                                Switch, 0x103792940, {{34.0, 1012.7}, {334.0, 28.0}}, label: 'Titre', value: 1
+                                  StaticText, 0x10378d120, {{34.0, 1017.7}, {31.7, 18.0}}, label: 'Titre'
+                                  Switch, 0x103762d80, {{307.0, 1012.7}, {63.0, 28.0}}, value: 1
+                                Switch, 0x103765ea0, {{34.0, 1052.7}, {334.0, 28.0}}, label: 'Détails', value: 1
+                                  StaticText, 0x103779510, {{34.0, 1057.7}, {47.0, 18.0}}, label: 'Détails'
+                                  Switch, 0x103760400, {{307.0, 1052.7}, {63.0, 28.0}}, value: 1
+                              Other, 0x1037a1280, {{369.0, 391.0}, {30.0, 356.7}}, label: 'Barre de défilement verticale, 3 pages', value: 31 %
+                                Other, 0x1037569c0, {{396.0, 449.0}, {3.0, 171.3}}
+                              Other, 0x10378f350, {{369.0, 391.0}, {30.0, 356.7}}, label: 'Barre de défilement verticale, 3 pages', value: 31 %
+                                Other, 0x10376aa20, {{396.0, 449.0}, {3.0, 171.3}}
+                            Button, 0x103774660, {{20.0, 766.0}, {362.0, 64.0}}, label: 'Enregistrer le widget'
+                    Other, 0x1037a0f30, {{0.0, 62.0}, {402.0, 812.0}}
+                      Other, 0x1037824d0, {{0.0, 62.0}, {402.0, 812.0}}
+Path to element:
+ →Application, 0x1039a2c50, pid: 21615, label: 'Ardane'
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  Output: {
+    Application, 0x10376bba0, pid: 21615, label: 'Ardane'
+  }
+)

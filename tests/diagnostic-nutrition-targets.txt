@@ -1,0 +1,424 @@
+Optional(Attributes: Application, 0x103abf6c0, pid: 23151, label: 'Ardane'
+Element subtree:
+ →Application, 0x103abf6c0, pid: 23151, label: 'Ardane'
+    Window (Main), 0x103ab8140, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x103a7ab00, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x103a7ac20, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x103a7a860, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x103a7a980, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x103a7ad40, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x103a7ae60, {{0.0, 0.0}, {402.0, 874.0}}
+                  Other, 0x103a7af80, {{0.0, 0.0}, {402.0, 874.0}}
+                    Other, 0x103a7b0a0, {{0.0, 0.0}, {402.0, 874.0}}
+                      Other, 0x103a7b1c0, {{0.0, 0.0}, {402.0, 874.0}}
+                        Other, 0x103a7b2e0, {{0.0, 0.0}, {402.0, 874.0}}
+                          Other, 0x103a7b400, {{0.0, 0.0}, {402.0, 874.0}}
+                            NavigationBar, 0x103a79f10, {{0.0, 62.0}, {402.0, 54.0}}, identifier: '_TtGC7SwiftUI32NavigationStackHosting'
+                              Other, 0x103a7a030, {{20.0, 75.0}, {135.3, 18.0}}, identifier: 'home-date', label: 'Samedi 24 octobre'
+                                Other, 0x103a7a150, {{20.0, 75.0}, {135.3, 18.0}}
+                                  StaticText, 0x103a7a270, {{20.0, 75.0}, {135.3, 18.0}}, identifier: 'home-date', label: 'Samedi 24 octobre'
+                              Other, 0x103adb600, {{338.0, 66.0}, {44.0, 36.0}}, label: 'Profil et réglages'
+                                Other, 0x103adb720, {{338.0, 66.0}, {44.0, 36.0}}
+                                  Button, 0x103adb840, {{338.0, 66.0}, {44.0, 36.0}}, label: 'Profil et réglages'
+                                    StaticText, 0x1039f6ae0, {{338.0, 66.0}, {44.0, 36.0}}, label: 'M'
+                            Other, 0x1039f8aa0, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x1039f8bc0, {{0.0, 0.0}, {402.0, 874.0}}
+                                Other, 0x1039f8ce0, {{0.0, 0.0}, {402.0, 874.0}}
+                                  Other, 0x1039f8e00, {{0.0, 0.0}, {402.0, 874.0}}
+                                    ScrollView, 0x1039f8f20, {{0.0, 0.0}, {402.0, 874.0}}
+                                      Other, 0x1039f9040, {{0.0, 0.0}, {402.0, 874.0}}
+                                        Other, 0x1039f9160, {{0.0, 0.0}, {402.0, 170.8}}
+                                        Other, 0x1039f9280, {{0.0, 726.2}, {402.0, 147.8}}
+                                      Other, 0x1039f93a0, {{0.0, 0.0}, {402.0, 874.0}}
+                                        Other, 0x1039f94c0, {{0.0, 726.2}, {402.0, 147.8}}
+                                          Image, 0x1039f95e0, {{-120.0, 731.0}, {642.0, 286.0}}, identifier: 'AdditionalDimmingOverlay'
+                                          Other, 0x1039f9700, {{0.0, 726.2}, {402.0, 147.8}}
+                                            Other, 0x1039f9820, {{0.0, 726.2}, {402.0, 147.8}}
+                                          Other, 0x1039f9940, {{0.0, 726.2}, {402.0, 147.8}}
+                                            Other, 0x1039f9a60, {{0.0, 726.2}, {402.0, 147.8}}
+                                            Other, 0x1039f9b80, {{0.0, 726.2}, {402.0, 147.8}}
+                                      Other, 0x1039f9ca0, {{0.0, 116.0}, {402.0, 1808.0}}
+                                        Other, 0x1039f9dc0, {{20.0, 120.0}, {362.0, 1526.6}}, identifier: 'daily-section'
+                                          StaticText, 0x1039f9ee0, {{20.0, 120.0}, {116.0, 14.3}}, label: 'MON QUOTIDIEN'
+                                          StaticText, 0x1039fa000, {{20.0, 137.4}, {106.0, 26.3}}, identifier: 'daily-title', label: 'Ta journée'
+                                          Other, 0x1039fa120, {{20.0, 175.7}, {362.0, 187.0}}
+                                            Other, 0x1039fa240, {{20.0, 175.7}, {362.0, 174.0}}
+                                            ScrollView, 0x1039fa360, {{20.0, 175.7}, {362.0, 174.0}}, identifier: 'daily-pager-nutrition'
+                                              Other, 0x1039fa480, {{20.0, 175.7}, {1086.0, 174.0}}
+                                                Other, 0x1039fa5a0, {{20.0, 175.7}, {362.0, 174.0}}, identifier: 'daily-nutrition'
+                                                  Button, 0x1039fa6c0, {{34.0, 189.7}, {334.0, 96.0}}, identifier: 'daily-nutrition-open', label: '954, kcal mangées, Nutrition, Objectif à définir, Protéines, 99 g, Glucides, 110 g, Lipides, 13 g'
+                                                    StaticText, 0x1039fa7e0, {{62.7, 219.7}, {38.7, 24.0}}, label: '954'
+                                                    StaticText, 0x1039fa900, {{49.0, 243.7}, {66.0, 12.0}}, label: 'kcal mangées'
+                                                    Image, 0x1039faa20, {{145.3, 198.7}, {9.0, 14.3}}, identifier: 'fork.knife', label: 'Nourriture'
+                                                    StaticText, 0x1039fab40, {{145.3, 198.7}, {72.3, 14.9}}, label: 'Nutrition'
+                                                    StaticText, 0x1039fac60, {{287.0, 199.8}, {81.0, 11.7}}, label: 'Objectif à définir'
+                                                    StaticText, 0x1039fad80, {{144.0, 220.8}, {56.3, 14.3}}, label: 'Protéines'
+                                                    StaticText, 0x1039faea0, {{342.0, 220.8}, {26.0, 14.3}}, label: '99 g'
+                                                    StaticText, 0x1039fafc0, {{144.0, 242.2}, {51.3, 14.3}}, label: 'Glucides'
+                                                    StaticText, 0x1039fb0e0, {{334.3, 242.2}, {33.7, 14.3}}, label: '110 g'
+                                                    StaticText, 0x1039fb200, {{144.0, 263.5}, {42.7, 14.3}}, label: 'Lipides'
+                                                    StaticText, 0x1039fb320, {{342.0, 263.5}, {26.0, 14.3}}, label: '13 g'
+                                                  Button, 0x1039fb440, {{34.0, 297.7}, {163.0, 38.0}}, identifier: 'daily-scan', label: 'Scanner'
+                                                    Image, 0x1039fb560, {{73.7, 309.0}, {15.0, 15.0}}, identifier: 'barcode.viewfinder', label: 'Balayer Le Code-Barres'
+                                                    StaticText, 0x1039fb680, {{73.7, 307.7}, {85.7, 18.0}}, label: 'Scanner'
+                                                  Button, 0x1039fb7a0, {{205.0, 297.7}, {163.0, 38.0}}, label: '3 repas'
+                                                Button, 0x1039fb8c0, {{382.0, 175.7}, {362.0, 174.0}}, identifier: 'daily-nutrition-meals', label: 'REPAS DU JOUR, Déjeuner, 335 kcal, Dîner, 516 kcal, Souper, —, Collation, 103 kcal, Total, 954 kcal'
+                                                  Image, 0x1039fb9e0, {{397.3, 190.7}, {9.0, 14.3}}, identifier: 'fork.knife', label: 'Nourriture'
+                                                  StaticText, 0x1039fbb00, {{413.7, 190.7}, {104.0, 14.3}}, label: 'REPAS DU JOUR'
+                                                  Image, 0x1039fbc20, {{723.3, 193.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                                  StaticText, 0x1039fbd40, {{396.0, 216.3}, {56.0, 15.3}}, label: 'Déjeuner'
+                                                  StaticText, 0x1039fbe60, {{671.0, 214.0}, {59.0, 18.0}}, label: '335 kcal'
+                                                  StaticText, 0x1039fbf80, {{396.0, 240.7}, {32.3, 14.7}}, label: 'Dîner'
+                                                  StaticText, 0x1039fc0a0, {{671.0, 238.0}, {59.0, 18.0}}, label: '516 kcal'
+                                                  StaticText, 0x1039fc1c0, {{396.0, 265.0}, {40.7, 14.3}}, label: 'Souper'
+                                                  StaticText, 0x1039fc2e0, {{717.0, 262.0}, {13.0, 18.0}}, label: '—'
+                                                  StaticText, 0x1039fc400, {{396.0, 289.0}, {52.7, 14.3}}, label: 'Collation'
+                                                  StaticText, 0x1039fc520, {{671.0, 286.0}, {59.0, 18.0}}, label: '103 kcal'
+                                                  StaticText, 0x1039fc640, {{396.0, 316.3}, {36.3, 18.0}}, label: 'Total'
+                                                  StaticText, 0x1039fc760, {{667.0, 316.3}, {63.0, 18.0}}, label: '954 kcal'
+                                                Button, 0x1039fc880, {{744.0, 175.7}, {362.0, 174.0}}, identifier: 'daily-nutrition-week', label: 'CALORIES · 7 JOURS, Moyenne : 1 665 kcal par jour noté'
+                                                  Image, 0x1039fc9a0, {{759.3, 191.3}, {16.0, 11.3}}, identifier: 'chart.bar.fill', label: 'Barre Du Graphique'
+                                                  StaticText, 0x1039fcac0, {{782.7, 189.7}, {131.7, 14.3}}, label: 'CALORIES · 7 JOURS'
+                                                  Image, 0x1039fcbe0, {{1085.3, 192.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                                  StaticText, 0x1039fcd00, {{776.2, 272.0}, {7.0, 11.0}}, label: 'D'
+                                                  StaticText, 0x1039fce20, {{825.3, 272.0}, {5.7, 11.0}}, label: 'L'
+                                                  StaticText, 0x1039fcf40, {{872.4, 272.0}, {8.3, 11.0}}, label: 'M'
+                                                  StaticText, 0x1039fd060, {{920.8, 272.0}, {8.3, 11.0}}, label: 'M'
+                                                  StaticText, 0x1039fd180, {{970.6, 272.0}, {5.7, 11.0}}, label: 'J'
+                                                  StaticText, 0x1039fd2a0, {{1018.5, 272.0}, {6.7, 11.0}}, label: 'V'
+                                                  StaticText, 0x1039fd3c0, {{1067.1, 272.0}, {6.3, 11.0}}, label: 'S'
+                                                  StaticText, 0x1039fd4e0, {{758.0, 291.0}, {195.0, 14.3}}, label: 'Moyenne : 1 665 kcal par jour noté'
+                                            Other, 0x1039fd600, {{181.0, 356.7}, {40.0, 6.0}}, identifier: 'daily-pager-nutrition-dots', label: 'Vue 1 sur 3 : Aujourd'hui'
+                                          Other, 0x1039fd720, {{20.0, 374.7}, {362.0, 456.3}}, identifier: 'daily-planning'
+                                            Image, 0x1039fd840, {{35.3, 390.0}, {17.3, 11.7}}, identifier: 'calendar.day.timeline.left', label: 'calendar.day.timeline.left'
+                                            StaticText, 0x1039fd960, {{58.0, 388.7}, {68.0, 14.3}}, label: 'PLANNING'
+                                            Button, 0x1039fda80, {{34.0, 411.0}, {334.0, 382.3}}, identifier: 'daily-planning-week', label: 'Planning'
+                                              Other, 0x1039fdba0, {{34.0, 411.0}, {334.0, 352.3}}, identifier: 'week-timetable'
+                                                StaticText, 0x1039fdcc0, {{82.0, 411.0}, {6.7, 13.3}}, label: 'L'
+                                                StaticText, 0x1039fdde0, {{75.0, 431.7}, {20.7, 19.3}}, label: '19'
+                                                StaticText, 0x1039fdf00, {{124.1, 411.0}, {10.0, 13.3}}, label: 'M'
+                                                StaticText, 0x1039fe020, {{118.7, 431.7}, {20.7, 19.3}}, label: '20'
+                                                StaticText, 0x1039fe140, {{167.8, 411.0}, {10.0, 13.3}}, label: 'M'
+                                                StaticText, 0x1039fe260, {{162.5, 431.7}, {20.7, 19.3}}, label: '21'
+                                                StaticText, 0x1039fe380, {{213.2, 411.0}, {6.7, 13.3}}, label: 'J'
+                                                StaticText, 0x1039fe4a0, {{206.2, 431.7}, {20.7, 19.3}}, label: '22'
+                                                StaticText, 0x1039fe5c0, {{256.2, 411.0}, {8.0, 13.3}}, label: 'V'
+                                                StaticText, 0x1039fe6e0, {{249.9, 431.7}, {20.7, 19.3}}, label: '23'
+                                                StaticText, 0x1039fe800, {{300.1, 411.0}, {7.7, 13.3}}, label: 'S'
+                                                StaticText, 0x1039fe920, {{293.6, 431.7}, {20.7, 19.3}}, label: '24'
+                                                StaticText, 0x1039fea40, {{343.5, 411.0}, {8.3, 13.3}}, label: 'D'
+                                                StaticText, 0x1039feb60, {{337.3, 431.7}, {20.7, 19.3}}, label: '25'
+                                                Button, 0x1039fec80, {{65.0, 464.3}, {40.7, 16.0}}, label: 'Haut du corps', Disabled
+                                                Button, 0x1039feda0, {{108.7, 464.3}, {40.7, 16.0}}, label: 'Bas du corps', Disabled
+                                                Button, 0x1039feec0, {{152.3, 464.3}, {40.7, 16.0}}, label: 'Full body', Disabled
+                                                Button, 0x1039fefe0, {{196.0, 464.3}, {41.0, 16.0}}, label: 'Haut du corps', Disabled
+                                                Button, 0x1039ff100, {{240.0, 464.3}, {40.7, 16.0}}, label: 'Payer le loyer', Disabled
+                                                Button, 0x1039ff220, {{240.0, 482.3}, {40.7, 16.0}}, label: 'Bas du corps', Disabled
+                                                Button, 0x1039ff340, {{283.7, 464.3}, {40.7, 16.0}}, label: 'Appeler le garage', Disabled
+                                                Button, 0x1039ff460, {{283.7, 482.3}, {40.7, 16.0}}, label: 'Courir 5 km', Disabled
+                                                Button, 0x1039ff580, {{283.7, 500.3}, {40.7, 16.0}}, label: 'Lire 20 pages', Disabled
+                                                StaticText, 0x1039ff6a0, {{283.6, 518.3}, {12.0, 11.0}}, label: '+2'
+                                                Button, 0x1039ff7c0, {{327.3, 464.3}, {40.7, 16.0}}, label: 'Exercices ch. 4', Disabled
+                                                Button, 0x1039ff8e0, {{327.3, 482.3}, {40.7, 16.0}}, label: 'Full body', Disabled
+                                                StaticText, 0x1039ffa00, {{51.3, 531.3}, {6.7, 12.0}}, label: '8'
+                                                StaticText, 0x1039ffc70, {{51.3, 553.3}, {6.7, 12.0}}, label: '9'
+                                                StaticText, 0x1039ffd90, {{44.7, 575.3}, {13.3, 12.0}}, label: '10'
+                                                StaticText, 0x1039ffeb0, {{44.7, 597.3}, {13.3, 12.0}}, label: '11'
+                                                StaticText, 0x108b04080, {{44.7, 619.3}, {13.3, 12.0}}, label: '12'
+                                                StaticText, 0x108b041a0, {{44.7, 641.3}, {13.3, 12.0}}, label: '13'
+                                                StaticText, 0x108b042c0, {{44.7, 663.3}, {13.3, 12.0}}, label: '14'
+                                                StaticText, 0x108b043e0, {{44.7, 685.3}, {13.3, 12.0}}, label: '15'
+                                                StaticText, 0x108b04500, {{44.7, 707.3}, {13.3, 12.0}}, label: '16'
+                                                StaticText, 0x108b04620, {{44.7, 729.3}, {13.3, 12.0}}, label: '17'
+                                                StaticText, 0x108b04740, {{44.7, 751.3}, {13.3, 12.0}}, label: '18'
+                                                Other, 0x108b04860, {{65.0, 548.3}, {39.7, 39.3}}, label: 'Mathématiques, 08:30, Salle B-204'
+                                                  StaticText, 0x108b04980, {{71.0, 550.3}, {30.3, 17.3}}, label: 'Mathématiques'
+                                                  StaticText, 0x108b04aa0, {{71.0, 567.7}, {25.7, 9.7}}, label: 'B-204'
+                                                Other, 0x108b04bc0, {{65.0, 647.3}, {39.7, 39.3}}, label: 'Biologie, 13:00, Salle Labo 3'
+                                                  StaticText, 0x108b04ce0, {{71.0, 649.3}, {31.7, 9.0}}, label: 'Biologie'
+                                                  StaticText, 0x108b04e00, {{71.0, 658.3}, {27.7, 9.7}}, label: 'Labo 3'
+                                                  StaticText, 0x108b04f20, {{71.0, 668.0}, {24.3, 9.7}}, label: '13:00'
+                                                Other, 0x108b05040, {{65.0, 691.3}, {39.7, 28.3}}, label: 'Histoire, 15:00, Salle A-110'
+                                                  StaticText, 0x108b05160, {{71.0, 693.3}, {31.7, 9.3}}, label: 'Histoire'
+                                                  StaticText, 0x108b05280, {{71.0, 702.7}, {23.3, 9.7}}, label: 'A-110'
+                                                Other, 0x108b053a0, {{108.7, 548.3}, {39.7, 39.3}}, label: 'Biologie, 08:30, Salle Labo 3'
+                                                  StaticText, 0x108b054c0, {{114.7, 550.3}, {31.7, 9.0}}, label: 'Biologie'
+                                                  StaticText, 0x108b055e0, {{114.7, 559.3}, {27.7, 9.7}}, label: 'Labo 3'
+                                                  StaticText, 0x108b05700, {{114.7, 569.0}, {24.3, 9.7}}, label: '08:30'
+                                                Other, 0x108b05820, {{108.7, 647.3}, {39.7, 39.3}}, label: 'Anglais, 13:00, Salle C-015'
+                                                  StaticText, 0x108b05940, {{114.7, 649.3}, {31.7, 10.0}}, label: 'Anglais'
+                                                  StaticText, 0x108b05a60, {{114.7, 659.3}, {25.0, 9.7}}, label: 'C-015'
+                                                  StaticText, 0x108b05b80, {{114.7, 669.0}, {24.3, 9.7}}, label: '13:00'
+                                                Other, 0x108b05ca0, {{108.7, 691.3}, {39.7, 28.3}}, label: 'Mathématiques, 15:00, Salle B-204'
+                                                  StaticText, 0x108b05dc0, {{114.7, 693.3}, {30.3, 8.7}}, label: 'Mathématiques'
+                                                  StaticText, 0x108b05ee0, {{114.7, 702.0}, {24.3, 9.7}}, label: '15:00'
+                                                Other, 0x1039ffb20, {{152.3, 548.3}, {39.7, 39.3}}, label: 'Histoire, 08:30, Salle A-110'
+                                                  StaticText, 0x108b06220, {{158.4, 550.3}, {31.7, 9.3}}, label: 'Histoire'
+                                                  StaticText, 0x108b06340, {{158.4, 559.7}, {23.3, 9.7}}, label: 'A-110'
+                                                  StaticText, 0x108b06460, {{158.4, 569.3}, {24.3, 9.7}}, label: '08:30'
+                                                Other, 0x108b06580, {{152.3, 647.3}, {39.7, 39.3}}, label: 'Mathématiques, 13:00, Salle B-204'
+                                                  StaticText, 0x108b066a0, {{158.4, 649.3}, {30.3, 17.3}}, label: 'Mathématiques'
+                                                  StaticText, 0x108b067c0, {{158.4, 666.7}, {25.7, 9.7}}, label: 'B-204'
+                                                Other, 0x108b068e0, {{152.3, 691.3}, {39.7, 28.3}}, label: 'Anglais, 15:00, Salle C-015'
+                                                  StaticText, 0x108b06a00, {{158.4, 693.3}, {31.7, 10.0}}, label: 'Anglais'
+                                                  StaticText, 0x108b06b20, {{158.4, 703.3}, {25.0, 9.7}}, label: 'C-015'
+                                                Other, 0x108b06c40, {{196.0, 548.3}, {40.0, 39.3}}, label: 'Anglais, 08:30, Salle C-015'
+                                                  StaticText, 0x108b06d60, {{202.1, 550.3}, {31.7, 10.0}}, label: 'Anglais'
+                                                  StaticText, 0x108b06e80, {{202.1, 560.3}, {25.0, 9.7}}, label: 'C-015'
+                                                  StaticText, 0x108b06fa0, {{202.1, 570.0}, {24.3, 9.7}}, label: '08:30'
+                                                Other, 0x108b070c0, {{196.0, 647.3}, {40.0, 39.3}}, label: 'Histoire, 13:00, Salle A-110'
+                                                  StaticText, 0x108b071e0, {{202.1, 649.3}, {31.7, 9.3}}, label: 'Histoire'
+                                                  StaticText, 0x108b07300, {{202.1, 658.7}, {23.3, 9.7}}, label: 'A-110'
+                                                  StaticText, 0x108b07420, {{202.1, 668.3}, {24.3, 9.7}}, label: '13:00'
+                                                Other, 0x108b07540, {{196.0, 691.3}, {40.0, 28.3}}, label: 'Biologie, 15:00, Salle Labo 3'
+                                                  StaticText, 0x108b07660, {{202.1, 693.3}, {31.7, 9.0}}, label: 'Biologie'
+                                                  StaticText, 0x108b07780, {{202.1, 702.3}, {27.7, 9.7}}, label: 'Labo 3'
+                                                Other, 0x108b078a0, {{240.0, 548.3}, {39.7, 39.3}}, label: 'Mathématiques, 08:30, Salle B-204'
+                                                  StaticText, 0x108b079c0, {{245.9, 550.3}, {30.3, 17.3}}, label: 'Mathématiques'
+                                                  StaticText, 0x108b07ae0, {{245.9, 567.7}, {25.7, 9.7}}, label: 'B-204'
+                                                Other, 0x108b07c00, {{240.0, 647.3}, {39.7, 39.3}}, label: 'Biologie, 13:00, Salle Labo 1'
+                                                  StaticText, 0x108b07d20, {{245.9, 649.3}, {31.7, 9.0}}, label: 'Biologie'
+                                                  StaticText, 0x108b07e40, {{245.9, 658.3}, {26.3, 9.7}}, label: 'Labo 1'
+                                                  StaticText, 0x108b07f60, {{245.9, 668.0}, {24.3, 9.7}}, label: '13:00'
+                                                Other, 0x108b08080, {{240.0, 691.3}, {39.7, 28.3}}, label: 'Anglais, 15:00, Salle C-015'
+                                                  StaticText, 0x108b081a0, {{245.9, 693.3}, {31.7, 10.0}}, label: 'Anglais'
+                                                  StaticText, 0x108b082c0, {{245.9, 703.3}, {25.0, 9.7}}, label: 'C-015'
+                                                Other, 0x108b083e0, {{283.7, 603.3}, {39.7, 16.0}}, label: 'Envoyer la facture, 11:00, Priorité haute'
+                                                  StaticText, 0x108b08500, {{289.6, 605.3}, {29.0, 8.7}}, label: 'Envoyer la facture'
+                                              StaticText, 0x108b08620, {{34.0, 772.2}, {99.0, 14.3}}, label: 'Toute la semaine'
+                                              Image, 0x108b08740, {{138.0, 774.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            Button, 0x108b08860, {{35.3, 801.3}, {169.3, 14.7}}, identifier: 'daily-planning-calendar', label: 'Relier le calendrier Apple'
+                                              Image, 0x108b08980, {{35.3, 803.0}, {15.3, 13.0}}, identifier: 'calendar.badge.plus', label: 'Ajouter Au Calendrier'
+                                              StaticText, 0x108b08aa0, {{35.3, 801.3}, {169.3, 14.7}}, label: 'Relier le calendrier Apple'
+                                          Other, 0x108b08bc0, {{20.0, 843.0}, {362.0, 144.0}}, identifier: 'daily-reminders'
+                                            Image, 0x108b08ce0, {{35.3, 858.0}, {12.0, 13.0}}, identifier: 'bell.fill', label: 'Notifications'
+                                            StaticText, 0x108b08e00, {{54.7, 857.3}, {119.3, 14.3}}, label: 'À NE PAS OUBLIER'
+                                            Button, 0x108b08f20, {{34.0, 880.0}, {334.0, 18.0}}, label: 'iCloud+, Demain · 4 $'
+                                              Image, 0x108b09040, {{38.7, 882.7}, {10.3, 13.0}}, identifier: 'doc.text.fill', label: 'Document Format Texte'
+                                              StaticText, 0x108b09160, {{64.0, 880.0}, {55.3, 18.0}}, label: 'iCloud+'
+                                              StaticText, 0x108b09280, {{277.7, 881.8}, {71.7, 14.3}}, label: 'Demain · 4 $'
+                                              Image, 0x108b093a0, {{361.3, 884.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            Button, 0x108b094c0, {{34.0, 905.0}, {334.0, 18.0}}, label: 'Rendu du rapport, Lundi'
+                                              Image, 0x108b095e0, {{39.0, 908.0}, {10.7, 12.0}}, identifier: 'flag.fill', label: 'Drapeau'
+                                              StaticText, 0x108b09700, {{64.0, 905.0}, {125.0, 18.0}}, label: 'Rendu du rapport'
+                                              StaticText, 0x108b09820, {{318.0, 906.8}, {31.3, 14.3}}, label: 'Lundi'
+                                              Image, 0x108b09940, {{361.3, 909.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            Button, 0x108b09a60, {{34.0, 930.0}, {334.0, 18.0}}, label: 'Loyer, Mardi · 1 250 $'
+                                              Image, 0x108b09b80, {{38.7, 932.7}, {10.3, 13.0}}, identifier: 'doc.text.fill', label: 'Document Format Texte'
+                                              StaticText, 0x108b09ca0, {{64.0, 930.0}, {39.7, 18.0}}, label: 'Loyer'
+                                              StaticText, 0x108b09dc0, {{265.0, 931.8}, {84.3, 14.3}}, label: 'Mardi · 1 250 $'
+                                              Image, 0x108b09ee0, {{361.3, 934.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            Button, 0x108b0a000, {{34.0, 955.0}, {334.0, 18.0}}, label: '7 tâches à faire, Appeler le garage, Envoyer la facture'
+                                              Image, 0x108b0a120, {{37.3, 958.0}, {13.7, 12.3}}, identifier: 'checklist', label: 'checklist'
+                                              StaticText, 0x108b0a240, {{64.0, 955.0}, {108.7, 18.0}}, label: '7 tâches à faire'
+                                              StaticText, 0x108b0a360, {{205.7, 956.8}, {143.7, 14.3}}, label: 'Appeler le garage, Envoyer la facture'
+                                              Image, 0x108b0a480, {{361.3, 959.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                          Other, 0x108b0a5a0, {{20.0, 999.0}, {175.0, 164.7}}
+                                            Other, 0x108b0a6c0, {{20.0, 999.0}, {175.0, 151.7}}
+                                            ScrollView, 0x108b0a7e0, {{20.0, 999.0}, {175.0, 151.7}}, identifier: 'daily-pager-workout'
+                                              Other, 0x108b0a900, {{20.0, 999.0}, {350.0, 151.7}}
+                                                Button, 0x108b0aa20, {{20.0, 999.0}, {175.0, 151.7}}, identifier: 'daily-workout', label: 'SÉANCE EN COURS, Développé couché, Série 4/4 · 8 × 60 kg'
+                                                  Image, 0x108b0ab40, {{35.3, 1014.0}, {14.7, 15.0}}, identifier: 'figure.strengthtraining.traditional', label: 'figure.strengthtraining.traditional'
+                                                  StaticText, 0x108b0ac60, {{57.3, 1015.7}, {103.0, 11.7}}, label: 'SÉANCE EN COURS'
+                                                  Image, 0x108b0ad80, {{174.3, 1016.7}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                                  StaticText, 0x108b0aea0, {{34.0, 1038.0}, {142.3, 20.3}}, label: 'Développé couché'
+                                                  StaticText, 0x108b0afc0, {{34.0, 1066.3}, {115.7, 14.3}}, label: 'Série 4/4 · 8 × 60 kg'
+                                                  Button, 0x108b0b0e0, {{34.0, 1100.7}, {147.0, 36.0}}, label: 'Série faite'
+                                                Button, 0x108b0b200, {{195.0, 999.0}, {175.0, 151.7}}, identifier: 'daily-workout-week', label: 'CETTE SEMAINE, 5, /3 séances, Objectif de la semaine atteint'
+                                                  Image, 0x108b0b320, {{210.3, 1014.7}, {12.3, 11.3}}, identifier: 'calendar', label: 'Calendrier'
+                                                  StaticText, 0x108b0b440, {{230.0, 1013.0}, {104.0, 14.3}}, label: 'CETTE SEMAINE'
+                                                  Image, 0x108b0b560, {{349.3, 1015.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                                  StaticText, 0x108b0b680, {{209.0, 1035.3}, {18.0, 33.7}}, label: '5'
+                                                  StaticText, 0x108b0b7a0, {{229.0, 1047.7}, {77.0, 18.0}}, label: '/3 séances'
+                                                  StaticText, 0x108b0b8c0, {{209.0, 1097.0}, {87.0, 30.3}}, label: 'Objectif de la semaine atteint'
+                                            Other, 0x108b0b9e0, {{93.7, 1157.7}, {28.0, 6.0}}, identifier: 'daily-pager-workout-dots', label: 'Vue 1 sur 2 : Séance'
+                                          Button, 0x108b0bb00, {{207.0, 999.0}, {175.0, 164.7}}, identifier: 'daily-priorities', label: 'TOP 3', Selected
+                                            Image, 0x108b0bc20, {{222.0, 1014.0}, {12.7, 12.7}}, identifier: '3.circle.fill', label: '3.circle.fill'
+                                            StaticText, 0x108b0bd40, {{241.7, 1013.2}, {38.3, 14.3}}, label: 'TOP 3'
+                                            Image, 0x108b0be60, {{361.3, 1015.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            Button, 0x108b0bf80, {{222.3, 1036.2}, {139.3, 18.0}}, label: 'Finir la présentation', Selected
+                                              Image, 0x108b0c0a0, {{222.3, 1036.7}, {17.0, 17.0}}, identifier: 'checkmark.circle.fill', label: 'Coché', Selected
+                                              StaticText, 0x108b0c1c0, {{248.7, 1036.2}, {113.0, 18.0}}, label: 'Finir la présentation'
+                                            Button, 0x108b0c2e0, {{222.3, 1061.2}, {141.3, 18.0}}, label: 'Appeler le comptable'
+                                              Image, 0x108b0c400, {{222.3, 1061.7}, {17.0, 17.0}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x108b0c520, {{248.7, 1061.2}, {115.0, 18.0}}, label: 'Appeler le comptable'
+                                            Button, 0x108b0c640, {{222.3, 1086.2}, {136.3, 18.0}}, label: '30 minutes de sport'
+                                              Image, 0x108b0c760, {{222.3, 1086.7}, {17.0, 17.0}}, identifier: 'circle', label: 'circle'
+                                              StaticText, 0x108b0c880, {{248.7, 1086.2}, {110.0, 18.0}}, label: '30 minutes de sport'
+                                          Button, 0x108b0c9a0, {{20.0, 1175.7}, {175.0, 136.3}}, identifier: 'daily-budget', label: 'BUDGET, Dépensé aujourd'hui : 57 $'
+                                            Image, 0x108b0cac0, {{35.3, 1191.7}, {14.3, 10.7}}, identifier: 'creditcard.fill', label: 'Carte'
+                                            StaticText, 0x108b0cbe0, {{57.0, 1189.7}, {53.3, 14.3}}, label: 'BUDGET'
+                                            Image, 0x108b0cd00, {{174.3, 1192.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x108b0ce20, {{34.0, 1212.0}, {138.0, 42.3}}, label: 'Dépensé aujourd'hui : 57 $'
+                                            Other, 0x108b0cf40, {{32.8, 1261.1}, {149.4, 28.4}}
+                                          Button, 0x108b0d060, {{207.0, 1175.7}, {175.0, 136.3}}, identifier: 'daily-habits', label: 'HABITUDES, Méditer ✓, Sport, Lecture ✓, Pas d'écran au lit ✓, 3, /4, Série de 12 jours'
+                                            Image, 0x108b0d180, {{222.3, 1191.0}, {13.7, 12.0}}, identifier: 'repeat', label: 'Récurrence 1'
+                                            StaticText, 0x108b0d2a0, {{243.3, 1189.7}, {75.7, 14.3}}, label: 'HABITUDES'
+                                            Image, 0x108b0d3c0, {{361.3, 1192.0}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            Other, 0x108b0d4e0, {{221.0, 1212.0}, {106.0, 22.0}}, label: 'Méditer ✓, Sport, Lecture ✓, Pas d'écran au lit ✓'
+                                              Image, 0x108b0d600, {{227.3, 1218.3}, {9.3, 9.0}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x108b0d720, {{283.3, 1218.3}, {9.3, 9.0}}, identifier: 'checkmark', label: 'Coché', Selected
+                                              Image, 0x108b0d840, {{311.3, 1218.3}, {9.3, 9.0}}, identifier: 'checkmark', label: 'Coché', Selected
+                                            StaticText, 0x108b0d960, {{221.0, 1242.0}, {18.3, 33.7}}, label: '3'
+                                            StaticText, 0x108b0da80, {{241.3, 1252.3}, {16.0, 20.3}}, label: '/4'
+                                            StaticText, 0x108b0dba0, {{221.0, 1283.7}, {94.0, 14.3}}, label: 'Série de 12 jours'
+                                          Other, 0x108b0dcc0, {{20.0, 1324.0}, {175.0, 142.0}}
+                                            Other, 0x108b0dde0, {{20.0, 1324.0}, {175.0, 129.0}}
+                                            ScrollView, 0x108b0df00, {{20.0, 1324.0}, {175.0, 129.0}}, identifier: 'daily-pager-weather'
+                                              Other, 0x108b0e020, {{20.0, 1324.0}, {350.0, 129.0}}
+                                                Button, 0x108b0e140, {{20.0, 1324.0}, {175.0, 129.0}}, identifier: 'daily-weather', label: 'MONTRÉAL, 1°, Plutôt dégagé, Max 10° · Min 0°'
+                                                  Image, 0x108b0e260, {{34.7, 1339.0}, {12.7, 12.7}}, identifier: 'location.fill', label: 'Service De Localisation'
+                                                  StaticText, 0x108b0e380, {{54.7, 1338.2}, {72.7, 14.3}}, label: 'MONTRÉAL'
+                                                  Image, 0x108b0e4a0, {{174.3, 1340.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                                  Image, 0x108b0e5c0, {{34.0, 1366.0}, {32.7, 23.0}}, identifier: 'cloud.sun.fill', label: 'En Partie Nuageux'
+                                                  StaticText, 0x108b0e6e0, {{73.7, 1360.7}, {25.7, 33.7}}, label: '1°'
+                                                  StaticText, 0x108b0e800, {{34.0, 1402.3}, {82.7, 14.3}}, label: 'Plutôt dégagé'
+                                                  StaticText, 0x108b0e920, {{34.0, 1424.7}, {93.0, 14.3}}, label: 'Max 10° · Min 0°'
+                                                Button, 0x108b0ea40, {{195.0, 1324.0}, {175.0, 129.0}}, identifier: 'daily-weather-hours', label: 'PROCHAINES HEURES, 14:00, 3°, 15:00, 6°, 16:00, 8°'
+                                                  Image, 0x108b0eb60, {{210.0, 1339.0}, {12.7, 12.7}}, identifier: 'clock', label: 'Horloge'
+                                                  StaticText, 0x108b0ec80, {{229.7, 1339.5}, {105.0, 11.7}}, label: 'PROCHAINES HEURES'
+                                                  Image, 0x108b0eda0, {{349.3, 1340.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                                  StaticText, 0x108b0eec0, {{217.7, 1360.7}, {29.0, 12.0}}, label: '14:00'
+                                                  Image, 0x108b0efe0, {{223.7, 1377.7}, {17.0, 17.0}}, identifier: 'sun.max.fill', label: 'Ensoleillé'
+                                                  StaticText, 0x108b0f100, {{225.3, 1399.7}, {13.7, 14.3}}, label: '3°'
+                                                  StaticText, 0x108b0f220, {{268.2, 1360.7}, {28.7, 12.0}}, label: '15:00'
+                                                  Image, 0x108b0f340, {{274.0, 1377.7}, {17.0, 17.0}}, identifier: 'sun.max.fill', label: 'Ensoleillé'
+                                                  StaticText, 0x108b0f460, {{275.5, 1399.7}, {14.0, 14.3}}, label: '6°'
+                                                  StaticText, 0x108b0f580, {{318.3, 1360.7}, {29.0, 12.0}}, label: '16:00'
+                                                  Image, 0x108b0f6a0, {{324.3, 1377.7}, {17.0, 17.0}}, identifier: 'sun.max.fill', label: 'Ensoleillé'
+                                                  StaticText, 0x108b0f7c0, {{325.8, 1399.7}, {14.0, 14.3}}, label: '8°'
+                                            Other, 0x108b0f8e0, {{93.7, 1460.0}, {28.0, 6.0}}, identifier: 'daily-pager-weather-dots', label: 'Vue 1 sur 2 : Maintenant'
+                                          Button, 0x108b0fa00, {{207.0, 1324.0}, {175.0, 142.0}}, identifier: 'daily-app-business', label: 'BUSINESS, 11 526 $ ce mois'
+                                            Image, 0x108b0fb20, {{222.3, 1339.0}, {14.7, 12.3}}, identifier: 'briefcase.fill', label: 'Porte-Documents'
+                                            StaticText, 0x108b0fc40, {{244.3, 1338.0}, {65.7, 14.3}}, label: 'BUSINESS'
+                                            Image, 0x108b0fd60, {{361.3, 1340.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x108b0fe80, {{221.0, 1360.3}, {132.0, 20.3}}, label: '11 526 $ ce mois'
+                                          Button, 0x108b0ffa0, {{20.0, 1478.0}, {175.0, 92.7}}, identifier: 'daily-app-travel', label: 'VOYAGE, Lisbonne · jour 4'
+                                            Image, 0x108b100c0, {{35.3, 1493.0}, {14.0, 12.3}}, identifier: 'airplane', label: 'Mode Avion'
+                                            StaticText, 0x108b101e0, {{55.7, 1492.0}, {52.3, 14.3}}, label: 'VOYAGE'
+                                            Image, 0x108b10300, {{174.3, 1494.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x108b10420, {{34.0, 1514.3}, {131.7, 20.3}}, label: 'Lisbonne · jour 4'
+                                          Button, 0x108b10540, {{207.0, 1478.0}, {175.0, 92.7}}, identifier: 'daily-app-car', label: 'AUTO, ≈ 410 km d'autonomie'
+                                            Image, 0x108b10660, {{222.3, 1493.3}, {14.7, 11.7}}, identifier: 'car.fill', label: 'Voiture'
+                                            StaticText, 0x108b10780, {{244.3, 1492.0}, {36.7, 14.3}}, label: 'AUTO'
+                                            Image, 0x108b108a0, {{361.3, 1494.3}, {6.0, 10.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                            StaticText, 0x108b109c0, {{221.0, 1514.3}, {100.0, 42.3}}, label: '≈ 410 km d'autonomie'
+                                          Button, 0x108b10ae0, {{20.0, 1582.7}, {362.0, 64.0}}, identifier: 'daily-add-category', label: 'Ajouter une catégorie'
+                                        Other, 0x108b10c00, {{200.3, 1019.7}, {1.0, 1.0}}
+                                        StaticText, 0x108b10d20, {{20.0, 1676.6}, {159.0, 24.0}}, label: 'Mes informations'
+                                        Button, 0x108b10e40, {{321.0, 1681.3}, {61.0, 18.0}}, label: 'Tout voir : Mes informations'
+                                        Button, 0x108b10f60, {{36.0, 1728.7}, {330.0, 56.0}}, identifier: 'home-info', label: '10 sur 17 renseignées, Complète ton profil, Il manque : séances par semaine, objectif de pas…'
+                                          Other, 0x108b11080, {{36.0, 1728.7}, {56.0, 56.0}}, label: '10 sur 17 renseignées'
+                                            StaticText, 0x108b111a0, {{45.8, 1749.5}, {36.3, 14.3}}, label: '10/17'
+                                          StaticText, 0x108b112c0, {{106.0, 1731.0}, {137.7, 18.0}}, label: 'Complète ton profil'
+                                          StaticText, 0x108b113e0, {{106.0, 1752.0}, {191.3, 30.3}}, label: 'Il manque : séances par semaine, objectif de pas…'
+                                          Image, 0x108b11500, {{358.7, 1751.3}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant'
+                                        ScrollView, 0x108b11620, {{36.0, 1798.7}, {330.0, 77.3}}
+                                          Other, 0x108b11740, {{36.0, 1798.7}, {832.0, 77.3}}
+                                            Button, 0x108b11860, {{43.5, 1798.7}, {61.0, 77.3}}, identifier: 'info-fitness', label: 'Fitness, À compléter'
+                                              Image, 0x108b11980, {{63.3, 1813.7}, {21.7, 12.3}}, identifier: 'dumbbell.fill', label: 'dumbbell.fill'
+                                              StaticText, 0x108b11aa0, {{54.2, 1845.7}, {39.7, 13.3}}, label: 'Fitness'
+                                              StaticText, 0x108b11bc0, {{43.5, 1864.0}, {61.0, 12.0}}, label: 'À compléter'
+                                            Button, 0x103791ba0, {{127.5, 1798.7}, {61.0, 77.3}}, identifier: 'info-nutrition', label: 'Nutrition, À compléter'
+                                              Image, 0x10379d3e0, {{152.3, 1810.3}, {11.7, 19.0}}, identifier: 'fork.knife', label: 'Nourriture'
+                                              StaticText, 0x1037a0b90, {{133.8, 1845.7}, {48.3, 13.3}}, label: 'Nutrition'
+                                              StaticText, 0x10377c530, {{127.5, 1864.0}, {61.0, 12.0}}, label: 'À compléter'
+                                            Button, 0x10379ab80, {{214.0, 1798.7}, {56.0, 77.3}}, identifier: 'info-habits', label: 'Habitudes, ✓'
+                                              Image, 0x10378a470, {{233.3, 1812.0}, {17.7, 15.3}}, identifier: 'repeat', label: 'Récurrence 1'
+                                              StaticText, 0x10377a2a0, {{214.0, 1845.7}, {56.0, 13.3}}, label: 'Habitudes'
+                                              StaticText, 0x10378ca20, {{237.3, 1864.0}, {9.3, 12.0}}, label: '✓'
+                                            Button, 0x103793e00, {{292.7, 1798.7}, {66.7, 77.3}}, identifier: 'info-productivity', label: 'Productivité, ✓'
+                                              Image, 0x103775e20, {{317.0, 1811.7}, {18.3, 16.3}}, identifier: 'checklist', label: 'checklist'
+                                              StaticText, 0x10379c6a0, {{292.7, 1845.7}, {66.7, 13.3}}, label: 'Productivité'
+                                              StaticText, 0x103775420, {{321.3, 1864.0}, {9.3, 12.0}}, label: '✓'
+                                            Button, 0x1037750c0, {{373.2, 1798.7}, {73.7, 77.3}}, identifier: 'info-student', label: 'Planning · études, ✓'
+                                              Image, 0x103793700, {{399.3, 1810.0}, {21.7, 19.3}}, identifier: 'graduationcap.fill', label: 'Itunes U'
+                                              StaticText, 0x103789310, {{373.2, 1845.7}, {73.7, 13.3}}, label: 'Planning · études'
+                                              StaticText, 0x103766c10, {{405.3, 1864.0}, {9.3, 12.0}}, label: '✓'
+                                            Button, 0x103788fb0, {{463.5, 1798.7}, {61.0, 77.3}}, identifier: 'info-budget', label: 'Budget, À compléter'
+                                              Image, 0x1037a8790, {{484.7, 1813.0}, {18.7, 13.7}}, identifier: 'creditcard.fill', label: 'Carte'
+                                              StaticText, 0x103778ae0, {{474.2, 1845.7}, {39.7, 13.3}}, label: 'Budget'
+                                              StaticText, 0x10377f4d0, {{463.5, 1864.0}, {61.0, 12.0}}, label: 'À compléter'
+                                            Button, 0x103788580, {{541.8, 1798.7}, {72.3, 77.3}}, identifier: 'info-business', label: 'Mon entreprise, À compléter'
+                                              Image, 0x1037a9570, {{568.7, 1811.7}, {19.0, 16.0}}, identifier: 'briefcase.fill', label: 'Porte-Documents'
+                                              StaticText, 0x1037a91d0, {{541.8, 1845.7}, {72.3, 13.3}}, label: 'Mon entreprise'
+                                              StaticText, 0x1037a7d30, {{547.5, 1864.0}, {61.0, 12.0}}, label: 'À compléter'
+                                            Button, 0x10377ea90, {{630.0, 1798.7}, {64.0, 77.3}}, identifier: 'info-investing', label: 'Placements, ✓'
+                                              Image, 0x1037a98f0, {{654.0, 1811.7}, {16.3, 16.3}}, identifier: 'chart.pie.fill', label: 'Secteur Du Graphique'
+                                              StaticText, 0x1037abf10, {{630.0, 1845.7}, {64.0, 13.3}}, label: 'Placements'
+                                              StaticText, 0x1037ac2a0, {{657.3, 1864.0}, {9.3, 12.0}}, label: '✓'
+                                            Button, 0x10377e080, {{725.0, 1798.7}, {42.0, 77.3}}, identifier: 'info-travel', label: 'Voyage, ✓'
+                                              Image, 0x1037a8420, {{737.7, 1811.7}, {18.3, 16.3}}, identifier: 'airplane', label: 'Mode Avion'
+                                              StaticText, 0x1037ac610, {{726.0, 1845.7}, {40.0, 13.3}}, label: 'Voyage'
+                                              StaticText, 0x1037a7280, {{741.3, 1864.0}, {9.3, 12.0}}, label: '✓'
+                                            Button, 0x10376cce0, {{799.5, 1798.7}, {61.0, 77.3}}, identifier: 'info-car', label: 'Auto, À compléter'
+                                              Image, 0x103793370, {{820.3, 1812.0}, {19.3, 15.3}}, identifier: 'car.fill', label: 'Voiture'
+                                              StaticText, 0x1037ac970, {{817.2, 1845.7}, {25.7, 13.3}}, label: 'Auto'
+                                              StaticText, 0x103793010, {{799.5, 1864.0}, {61.0, 12.0}}, label: 'À compléter'
+                                      Other, 0x1037851c0, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 3 pages', value: 0 %
+                                        Other, 0x103770400, {{396.0, 119.0}, {3.0, 291.3}}
+                                      Other, 0x10378e5a0, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 3 pages', value: 0 %
+                                        Other, 0x1037700a0, {{396.0, 119.0}, {3.0, 291.3}}
+                            Other, 0x1037a55e0, {{0.0, 0.0}, {402.0, 874.0}}
+                              Other, 0x103770770, {{0.0, 0.0}, {402.0, 874.0}}
+                Other, 0x1037a5270, {{0.0, 791.0}, {402.0, 83.0}}
+                  Other, 0x103796de0, {{0.0, 0.0}, {402.0, 874.0}}
+                    TabBar, 0x1037a9c50, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Barre d’onglets'
+                      Other, 0x103781de0, {{21.0, 791.0}, {360.0, 62.0}}
+                        Other, 0x103797170, {{21.0, 791.0}, {102.3, 54.0}}
+                        Other, 0x103780600, {{21.0, 791.0}, {360.0, 62.0}}
+                          Button, 0x103770ae0, {{25.0, 795.0}, {102.3, 54.0}}, identifier: 'square.grid.2x2', label: 'Accueil', Selected
+                            Image, 0x10378fa20, {{63.0, 802.3}, {27.0, 25.0}}, identifier: 'square.grid.2x2.fill', label: 'grille 2x2'
+                          Button, 0x1037a7600, {{108.2, 795.0}, {102.3, 54.0}}, identifier: 'plus.square.on.square', label: 'Créer'
+                            Image, 0x1037ab840, {{144.2, 800.7}, {30.3, 29.7}}, identifier: 'plus.square.fill.on.square.fill', label: 'dupliquer'
+                          Button, 0x1037a3470, {{191.4, 795.0}, {102.3, 54.0}}, identifier: 'bag', label: 'Store'
+                            Image, 0x1037a37e0, {{229.4, 801.3}, {26.3, 27.0}}, identifier: 'bag.fill', label: 'cabas'
+                          Button, 0x10377b3e0, {{274.7, 795.0}, {102.3, 54.0}}, identifier: 'rectangle.stack', label: 'Mes widgets'
+                            Image, 0x10376da90, {{310.7, 800.0}, {30.0, 31.3}}, identifier: 'rectangle.stack.fill', label: 'Album'
+                        Other, 0x1037839a0, {{25.0, 795.0}, {102.3, 54.0}}
+                          Other, 0x103764990, {{25.0, 795.0}, {102.3, 54.0}}
+                            Other, 0x103765040, {{25.0, 795.0}, {102.3, 54.0}}
+                            Other, 0x1037a5cd0, {{25.0, 795.0}, {102.3, 54.0}}
+                              Other, 0x1037a30f0, {{25.0, 795.0}, {102.3, 54.0}}
+                                Other, 0x1037a80b0, {{25.0, 795.0}, {102.3, 54.0}}
+                                  Other, 0x1037a7990, {{25.0, 795.0}, {102.3, 54.0}}
+                                Other, 0x1037abbb0, {{25.0, 795.0}, {102.3, 54.0}}
+                              Other, 0x1037a2da0, {{25.0, 795.0}, {102.3, 54.0}}
+                  Other, 0x10377edf0, {{0.0, 791.0}, {402.0, 83.0}}
+                    Other, 0x1037a2690, {{0.0, 791.0}, {402.0, 83.0}}
+                      Other, 0x1037a3b40, {{0.0, 791.0}, {402.0, 83.0}}
+                        Other, 0x103787b30, {{0.0, 791.0}, {402.0, 83.0}}
+                          Other, 0x103788220, {{0.0, 791.0}, {402.0, 83.0}}
+                            Other, 0x1037a6ef0, {{0.0, 791.0}, {402.0, 83.0}}
+                        Other, 0x10376e820, {{0.0, 791.0}, {402.0, 83.0}}
+                          Other, 0x103766f80, {{0.0, 791.0}, {402.0, 83.0}}
+              Other, 0x10377e730, {{0.0, 0.0}, {402.0, 874.0}}
+              Other, 0x1037900d0, {{14.0, 284.0}, {374.0, 306.0}}, identifier: 'tutorial-card'
+                Image, 0x1037a2a30, {{43.0, 317.7}, {12.0, 12.3}}, identifier: 'hand.wave.fill', label: 'hand.wave.fill'
+                StaticText, 0x1037a2340, {{43.0, 316.9}, {63.3, 14.3}}, label: 'Ardane'
+                StaticText, 0x1037a2000, {{290.0, 316.8}, {26.0, 14.3}}, identifier: 'tutorial-step', label: 'Étape 1 sur 9'
+                Button, 0x1037a1c90, {{333.0, 309.0}, {30.0, 30.0}}, identifier: 'tutorial-close', label: 'Quitter le tutoriel'
+                StaticText, 0x1037a5950, {{32.0, 358.0}, {188.7, 24.0}}, label: 'Bienvenue, Mathys !'
+                StaticText, 0x10378b5b0, {{32.0, 394.0}, {333.3, 78.0}}, label: 'Petit tour d'Ardane en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.'
+                Button, 0x10378f6a0, {{32.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 1 : Bienvenue, Mathys !'
+                Button, 0x103790ad0, {{70.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 2 : Mon Quotidien'
+                Button, 0x10379aee0, {{108.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 3 : Mes informations'
+                Button, 0x103791840, {{146.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 4 : Créer un widget'
+                Button, 0x1037764c0, {{184.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 5 : Le Studio'
+                Button, 0x10377d9a0, {{222.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 6 : Le Store'
+                Button, 0x103786da0, {{260.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 7 : Mes widgets'
+                Button, 0x103787120, {{298.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 8 : Sur ton écran d'accueil'
+                Button, 0x10376fd50, {{336.0, 484.0}, {34.0, 22.0}}, label: 'Aller à l'étape 9 : À toi de jouer !'
+                Button, 0x10376eed0, {{32.0, 533.0}, {120.0, 18.0}}, identifier: 'tutorial-skip-all', label: 'Passer le tutoriel'
+                Button, 0x10378fd70, {{204.7, 512.0}, {165.3, 60.0}}, identifier: 'tutorial-next', label: 'Commencer'
+    Window, 0x103763f00, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x1037888f0, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x1037832c0, {{0.0, 0.0}, {402.0, 874.0}}
+Path to element:
+ →Application, 0x103abf6c0, pid: 23151, label: 'Ardane'
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  Output: {
+    Application, 0x1039d0b00, pid: 23151, label: 'Ardane'
+  }
+)

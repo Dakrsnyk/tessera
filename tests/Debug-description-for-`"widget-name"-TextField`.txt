@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  ↪︎Find: Descendants matching type TextField
+    ↪︎Find: Elements matching predicate '"widget-name" IN identifiers'

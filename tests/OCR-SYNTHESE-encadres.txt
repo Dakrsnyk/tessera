@@ -1,0 +1,5 @@
+encadres | propre | lignes 69 | créneaux 10 | attendus 10 | corrects 10
+encadres | flou | lignes 74 | créneaux 10 | attendus 10 | corrects 10
+encadres | incline | lignes 71 | créneaux 8 | attendus 10 | corrects 8
+encadres | jpeg | lignes 69 | créneaux 10 | attendus 10 | corrects 10
+encadres | sombre | lignes 75 | créneaux 10 | attendus 10 | corrects 10

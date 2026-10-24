@@ -1,0 +1,478 @@
+run: 268
+commit: 88bccdcc4a305b2da2929e1cee4bcdcd49b737a1
+static: success
+simulator: success
+device: success
+tests: failure
+ipa: not published
+screenshots: success
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 3149 memberwise calls checked, 105 widget kinds, 19 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 5476 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+---- tests ----
+Test Case '-[TesseraTests.AccentedRenderingTests testADoneHabitStaysTheStrongerStateWithoutColors]' passed (0.004 seconds).
+Test Case '-[TesseraTests.AccentedRenderingTests testFullColorStaysExactlyAsDesigned]' passed (0.465 seconds).
+Test Case '-[TesseraTests.AccentedRenderingTests testOnlyTheAppearancesWithoutColorsChangeTheWidget]' passed (0.001 seconds).
+Test Case '-[TesseraTests.AccentedRenderingTests testPartsOfAWholeStayApartWithoutColors]' passed (0.001 seconds).
+Test Case '-[TesseraTests.AccentedRenderingTests testTextOnAFilledShapeStaysReadableWithoutColors]' passed (0.001 seconds).
+Test Case '-[TesseraTests.AccentedRenderingTests testTheStyleBecomesAnOpacityHierarchyWithoutColors]' passed (0.008 seconds).
+Test Case '-[TesseraTests.AccentedRenderingTests testTodayStandsOutOfTheYearWithoutColors]' passed (0.002 seconds).
+Test Case '-[TesseraTests.AppIconPremiumTests testAnIconAlreadyInPlaceIsKeptAndTheMainOneCanComeBack]' passed (0.017 seconds).
+Test Case '-[TesseraTests.AppIconPremiumTests testPremiumChangesTheIconFreely]' passed (0.001 seconds).
+Test Case '-[TesseraTests.AppIconPremiumTests testWithoutPremiumOnlyAnotherIconIsLocked]' passed (0.001 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testAppIconsComeWithTheirPictureAndTheLogoFirst]' passed (0.008 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testCollectionsAreDistinctAndFilled]' passed (0.024 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testCombinationSampleShowsEveryPart]' passed (0.363 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testCombinationsFollowTheMergeRules]' passed (0.019 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testEveryStyleIsDefinedOnce]' passed (0.001 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testPacksAreDistinctAndShowable]' passed (0.047 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testSettingsFromBeforeStylesDecodeWithDefaults]' passed (0.008 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testSetupsFitOnAPhone]' passed (0.041 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testSpaceExamplesUseSupportedSizes]' passed (0.002 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testStoreShelvesUseSupportedSizes]' passed (0.001 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testStyleAndProfileAreSaved]' passed (0.006 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testTheWeekTablePutsWhatOverlapsSideBySide]' passed (0.027 seconds).
+Test Case '-[TesseraTests.AppearanceAndStoreTests testThisWeeksEditionIsStableAllWeek]' passed (0.001 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testABalanceIsNeverAnAmount]' passed (0.019 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAccountLinesAboveTheHeaderAndExcelSeparator]' passed (0.005 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testADebitWrittenNegativeIsStillACost]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAFileImportedTheWrongWayRoundBeforeIsSetRight]' passed (0.011 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAFileThatDoesntSayIsAskedAbout]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testANegativeAmountWithAnUnknownTypeIsACost]' passed (0.001 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAPayPalExport]' passed (0.004 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAQuickBooksTransactionList]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testASensColumnWithLetters]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAShopifyExportIsStillSales]' passed (0.004 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAStripeBalanceExport]' passed (0.035 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testATabFileWithSignsAndCurrencies]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testAWaveExportCountsEachEntryOnce]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testBNCMontantDebitCreditWithFrenchNumbers]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testDebitAndCreditColumnsOfEveryName]' passed (0.010 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testDesjardinsRetraitDepotSolde]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testNegativeAmountsInEveryForm]' passed (0.001 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testRBCWithItsCurrencyColumns]' passed (0.002 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testTDWithoutAHeader]' passed (0.003 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testTheCurrencyOfACell]' passed (0.001 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testTheReportedFileReadsItsExpensesAsExpenses]' passed (0.005 seconds).
+Test Case '-[TesseraTests.BusinessCSVTests testTypeValuesSayTheDirection]' passed (0.009 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testBodyWeightOfTheStateIsUsed]' passed (0.002 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testDayIsTheSumOfItsSessions]' passed (0.002 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testDeletedOrUnstartedSessionIsZero]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testHeavierWeightOfThePersonBurnsMore]' passed (0.000 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testLoadedSetsBurnMoreThanBodyweightSets]' passed (0.000 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testLongerSessionBurnsMore]' passed (0.005 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testMinutesOfTheDayCountOnlyThatDay]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testPassedSetsAddNothing]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testRestCountsLessThanWork]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testSessionLeftOpenDoesNotCountHoursOfInactivity]' passed (0.000 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testSessionWithoutSetIsZero]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testStepsOfTheWorkoutAreNotCountedTwice]' passed (0.000 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testTypicalHourIsPlausible]' passed (0.000 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testUnknownWeightGivesNoNumber]' passed (0.002 seconds).
+Test Case '-[TesseraTests.CalorieModelTests testWorkSecondsOfASet]' passed (0.045 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testCountdownUntilAndSince]' passed (0.006 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testDaysBetweenIgnoresTimeOfDay]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testDeepLinkRoundTrip]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testDesignDecodingToleratesMissingFields]' passed (0.009 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testFreeDesignIsNotDowngraded]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testHabitStreakCountsConsecutiveDays]' passed (1.002 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testHydrationNeverGoesNegative]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testMoneyAccrual]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testMonthGridStartsOnMonday]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testPremiumStylingIsDowngradedForFreeUsers]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testTemplatesAreConsistent]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CoreLogicTests testYearProgressIsBounded]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testAFileIsConvertedLineByLineAtTheRateOfItsDay]' passed (0.011 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testAmountsAreRoundedToTheCent]' passed (0.354 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testASyncWithoutConversionNeverUndoesAConversion]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testAWeekendTakesTheRateOfTheBusinessDayBefore]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testEntriesSavedBeforeTheConversionStillRead]' passed (0.026 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testImportingWithoutConversionNeverUndoesAConversion]' passed (0.020 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testOnlyTheCurrenciesWithoutARateStayAsTheyCame]' passed (0.004 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testStripeConvertsEachTransactionAndItsFees]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testTheMessageSaysWhyARateIsMissing]' passed (0.001 seconds).
+Test Case '-[TesseraTests.CurrencyConversionTests testWithoutARateNothingIsGuessed]' passed (0.049 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testAnExamTodayComesFirst]' passed (0.014 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testASessionStillToDoComesBeforeTheMealsFromTheAfternoon]' passed (0.003 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testAValueGivenForOneWidgetServesTheOthers]' passed (0.167 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testBudgetNeverUsesADefaultGoalAndWaterIsGone]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testCaloriesLeftOnlyWithTheUsersTarget]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testDefaultsNeverCountAsGiven]' passed (0.014 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testEveningStartsWithWhatIsLeftToEatAndTheHabits]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testEveryWidgetKnowsWhatItNeeds]' passed (0.003 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testHabitCardsCarryTheirOwnColorAndStreak]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testMealsComeFirstThenClassesAndTheWeatherInTheMorning]' passed (0.002 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testNothingEnteredShowsNoFigure]' passed (0.003 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testPreviewsShowExamplesUntilTheDataIsGiven]' passed (0.034 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testRowsPairHalfTiles]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyBriefTests testTheWorkoutFollowsTheSession]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testAddingACategoryWithThePlusShowsItEmptyAndLeavesTheList]' passed (0.064 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testAddingBringsBackARemovedCategory]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testAHiddenCategoryStaysHiddenWhenItReceivesData]' passed (0.002 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testAnAddedCategoryWithDataShowsItsDataAndTheListShrinksUntilThePlusIsGone]' passed (0.002 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testAnEmptyCardKeepsTheIdOfItsCardWithData]' passed (0.035 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testANewCategoryShowsAndAHiddenOneStaysHidden]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testAppModelPersonalizesAfterTheFirstEntry]' passed (0.014 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testAppModelStartsWithNothingAndFollowsTheInterests]' passed (0.014 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testCompleteProfileHasNoInvitationAndEveryCategory]' passed (0.200 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testEveryEmptyCardOpensAMiniAppAndNeverAPagePerCategory]' passed (0.002 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testEveryInfoAreaHasADestinationOutsideTheOldPage]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testHidingAnEmptyCategoryAndShowingItAgain]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testLayoutSettingsRoundTrip]' passed (0.009 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testNoInterestAndNoDataShowsNothingButThePlus]' passed (0.014 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testOldOrBrokenSettingsStillDecode]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testRemovingACardKeepsItOffEvenWhenItReceivesData]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testRemovingAlsoDropsTheOldFormsOfTheSameCategory]' passed (0.000 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testRemovingNeverTouchesTheMiniAppData]' passed (0.014 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testRemovingTakesAnAddedCategoryOffTheAddedList]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testReorderingMovesEmptyAndFilledCardsAlike]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testSettingsFromBeforeThePlusKeepWhatTheyHad]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTakingProductiviteOffHidesTheEmptyTopThree]' passed (0.000 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheAutomaticLayoutNeverBringsBackARemovedCategory]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheCardsWithDataAreAlwaysThereAndTheInterestsComeAfterThem]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheCategoryTogglesOfTheEditorFollowTheCards]' passed (0.000 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheChoicesSurviveARelaunch]' passed (0.036 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheFillInCardOpensTheFirstMiniAppWithSomethingMissing]' passed (0.027 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheFillInCardSkipsMiniAppsWhoseMissingItemsNoBlockShows]' passed (0.033 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheInterestsOfTheFirstFormShowTheirEmptyCardsWithoutAnyCap]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheWeatherInterestShowsItsEmptyCardAndNothingElseDoes]' passed (0.000 seconds).
+Test Case '-[TesseraTests.DailyHomeTests testTheWeatherOnlyShowsWithRealWeatherOrTheInterest]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DataBackupTests testABackupBringsEverythingBack]' passed (0.140 seconds).
+Test Case '-[TesseraTests.DataBackupTests testADamagedBackupIsRefused]' passed (0.003 seconds).
+Test Case '-[TesseraTests.DataBackupTests testOnlyNamesOfThePhotoStoreAreAccepted]' passed (0.000 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testAgeAndNextBirthday]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testBudgetRemainingAndBills]' passed (0.089 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testBusinessGoalProfitAndKPIs]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testCalculatorGivesPlausibleGoals]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testCompletingSetsMovesThroughTheRoutineAndStartsRest]' passed (0.002 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testCountersResetDailyAndFocusStopsEarly]' passed (0.006 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testEnteredExtremesNeverStopTheApp]' passed (0.013 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testEveryNewWidgetBelongsToOneGalleryGroup]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testEveryWidgetRendersItsSampleContent]' passed (1.419 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testFuelConsumptionFullToFull]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testHolidays]' passed (0.004 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testMoonPhaseAroundAKnownFullMoon]' passed (0.004 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testNextClassFindsTheOngoingThenTheNextOne]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testNutritionTotalsAndStreak]' passed (0.079 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testOldSavedDataStillDecodes]' passed (0.009 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testPhrasingsMayNotInventNumbers]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testPurchaseStateWithoutDebugUnlock]' passed (0.010 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testSpaceDeepLinkRoundTrip]' passed (0.001 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testTripDayAndOffsets]' passed (0.002 seconds).
+Test Case '-[TesseraTests.DomainLogicTests testWeightedAverageAndSpacedRepetition]' passed (0.003 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testACancelledWorkoutSaysNothing]' passed (0.001 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testALongStudyDay]' passed (0.094 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testARecordReplacesTheWorkoutMessage]' passed (0.015 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testNothingAtNight]' passed (0.001 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testOlderSettingsTurnTheEncouragementsOn]' passed (0.001 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testTheCalorieGoalReached]' passed (0.002 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testTheMealTipComesOnceADayFromTheSecondMeal]' passed (0.004 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testTheWeeklyStudyGoalReached]' passed (0.002 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testTooManyCarbsForTooLittleProteinGivesATip]' passed (0.002 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testTurnedOffSendsNothing]' passed (0.001 seconds).
+Test Case '-[TesseraTests.EncouragementsTests testTwoADayAtMostAndThreeHoursApart]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ExerciseDemoTests testEveryExerciseHasACompleteDemonstration]' passed (0.309 seconds).
+Test Case '-[TesseraTests.ExerciseDemoTests testThePhasesFollowTheRepetition]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ExerciseDemoTests testVariantsAreReallyDifferent]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinanceStatementTests testFixedAmountsAndBillsOnTheirDates]' passed (0.003 seconds).
+Test Case '-[TesseraTests.FinanceStatementTests testNewestFirstWithTheRunningBalance]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinanceStatementTests testTheOpeningBalanceComesFirst]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testCategoriesComparedWithTheirLimits]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testChosenIndicatorsAndMetricsFollowedByHand]' passed (0.037 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testEditingAndSavingsGoals]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testIndicatorsComparePeriodsFairly]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testMonthsAddUpWhatCameInAndWentOut]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testOlderBudgetsOpenWithoutIncomes]' passed (0.055 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testTheBalanceGoesDayByDayFromZero]' passed (0.003 seconds).
+Test Case '-[TesseraTests.FinancesBusinessTests testTheBalanceStartsFromTheOpeningBalance]' passed (0.014 seconds).
+Test Case '-[TesseraTests.FinancesDayBudgetTests testAFixedBillCountsFromItsDate]' passed (0.037 seconds).
+Test Case '-[TesseraTests.FinancesDayBudgetTests testAnotherMonthUsesItsOwnSpending]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesDayBudgetTests testAPastDayStopsTheSpendingAtItsEnd]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesDayBudgetTests testNoSpendingLeavesTheWholeBudget]' passed (0.002 seconds).
+Test Case '-[TesseraTests.FinancesDayBudgetTests testPerDayLeftSpreadsWhatIsLeftOverTheDaysAfterThatDay]' passed (0.018 seconds).
+Test Case '-[TesseraTests.FinancesDayBudgetTests testTheOtherMonthFiguresFollowTheDayToo]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesDayBudgetTests testTodayKeepsTheCurrentValue]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesSyncTests testABillCountsOnItsDatesInItsCategory]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesSyncTests testAFixedExpenseFindsItsCategory]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesSyncTests testDeletingAnAccountUpdatesTheNetWorth]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FinancesSyncTests testFixedIncomesAndExpensesCountInFinances]' passed (0.025 seconds).
+Test Case '-[TesseraTests.FinancesSyncTests testOperationsKeepTheirDates]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testACaughtUpSessionRemembersTheDayItWasPlannedFor]' passed (0.062 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testNamesInRoutinesFindTheirExercise]' passed (0.005 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testOlderSavedWorkoutsStillOpen]' passed (0.025 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testSessionsCanSkipAndGrow]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testSetsAreLoggedAsReallyDoneAndLinkedToTheExercise]' passed (0.002 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testTheLibraryIsLargeAndConsistent]' passed (0.719 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testTheNextSessionIsAnnounced]' passed (0.002 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testTheProgramGrowsFromTheLibrary]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FitnessAppTests testTheSearchUnderstandsWhatPeopleType]' passed (0.038 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testAFoodIsProposedOnceWithItsBestConfidence]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testALongLabelFallsBackToItsLastWordWithLessConfidence]' passed (0.000 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testAnUnknownLabelProposesNothing]' passed (0.006 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testAtMostFiveProposalsTheMostConfidentFirst]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testCommonDishesFindAFoodOfTheTable]' passed (0.050 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testLabelCleaningAndIgnoredWords]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testLabelsOfThingsAroundTheFoodAreIgnored]' passed (0.000 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testProposalsAreEstimatesInTheUsualPortion]' passed (0.004 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testThePortionIsTheUsualServingOrOneHundredGrams]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testTheValuesForTheEstimatedQuantityComeFromTheFood]' passed (0.002 seconds).
+Test Case '-[TesseraTests.FoodLabelMatcherTests testUnderTheThresholdNothingIsProposed]' passed (0.000 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testAFreeModelFillsUpToThree]' passed (0.165 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testAFreeModelKeepsEveryWidgetAndAppliesTheSameRuleEverywhere]' passed (0.162 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testAFreeModelKeepsEveryWidgetThatFitsInOrder]' passed (0.019 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testNewWidgetsFitWithinThreeAndPhotosAlwaysFit]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testPhotoAndQuoteWidgetsDoNotCount]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testPremiumHasNoLimit]' passed (0.026 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testTheFreePlanKeepsThreeWidgets]' passed (0.000 seconds).
+Test Case '-[TesseraTests.FreeWidgetLimitTests testWhoeverHasMoreKeepsThemAndCanStillMerge]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testCombinedWidgetLoadsWhatEachPartNeeds]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testCombinedWidgetsSurviveSavingAndOldDesignsStillDecode]' passed (0.042 seconds).
+Test Case '-[TesseraTests.FusionTests testComposerFollowsTheRealSizes]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testEverySpacePresetComposes]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testFourSmallWidgetsMergeIntoALargeOne]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testIncompatibleSelectionsDontMerge]' passed (0.013 seconds).
+Test Case '-[TesseraTests.FusionTests testMediumWidgetsMergeIntoALargeOne]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testPickingAWidgetChangesSizeAndSelection]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testTwoSmallWidgetsMergeIntoAMediumOne]' passed (0.001 seconds).
+Test Case '-[TesseraTests.FusionTests testWidgetWithoutSmallSizeComposesAlone]' passed (0.002 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testDaysStillToComeAreNotDrawnAndTodayIsTheLastDrawnCell]' passed (0.001 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testOnlyTheDaysDoneAreCountedAndNothingIsMadeUp]' passed (0.001 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testTheAspectRatioFollowsTheGrid]' passed (0.001 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testTheCellsFollowTheLayout]' passed (0.002 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testTheGridHasTheRequestedWeeksOfSevenDays]' passed (0.001 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testTheLayoutUsesSevenRowsOnlyWhenTheHeightAllowsIt]' passed (0.000 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testThePercentageExistsOnlyOnceTheHabitWasDone]' passed (0.001 seconds).
+Test Case '-[TesseraTests.HabitHeatmapTests testTheRecentRowEndsTodayOldestFirst]' passed (0.005 seconds).
+Test Case '-[TesseraTests.LanguageTimeZoneTests testEveryOccurrenceOfTheYearStartsAtItsTime]' passed (0.012 seconds).
+Test Case '-[TesseraTests.LanguageTimeZoneTests testScheduleTimesFollowTheClockAcrossDaylightSavingTime]' passed (0.004 seconds).
+Test Case '-[TesseraTests.LanguageTimeZoneTests testSwitchingFrenchToEnglishAndBackKeepsTheSavedTimes]' passed (0.012 seconds).
+Test Case '-[TesseraTests.LanguageTimeZoneTests testTheLanguageChangesTheWritingNotTheHour]' passed (0.001 seconds).
+Test Case '-[TesseraTests.LanguageTimeZoneTests testTheTimeZoneIsTheIPhonesWhateverTheLanguage]' passed (0.004 seconds).
+Test Case '-[TesseraTests.LivePricesTests testCachesFromEarlierVersionsDecode]' passed (0.027 seconds).
+Test Case '-[TesseraTests.LivePricesTests testChangeSignFollowsTheRoundedFigure]' passed (0.001 seconds).
+Test Case '-[TesseraTests.LivePricesTests testChangeTextCarriesItsPeriod]' passed (0.001 seconds).
+Test Case '-[TesseraTests.LivePricesTests testFinnhubQuoteGivesTheChangeSinceTheClose]' passed (0.007 seconds).
+Test Case '-[TesseraTests.LivePricesTests testMarketWidgetsShowTheChangeAndTheTime]' passed (0.011 seconds).
+Test Case '-[TesseraTests.LivePricesTests testNetWorthSaysTheRealPeriod]' passed (0.004 seconds).
+Test Case '-[TesseraTests.LivePricesTests testPortfolioDayChange]' passed (0.001 seconds).
+Test Case '-[TesseraTests.LivePricesTests testPortfolioWidgetsShowTheDayMove]' passed (0.002 seconds).
+Test Case '-[TesseraTests.LivePricesTests testPricesAreReusedOnlyWhileFresh]' passed (0.001 seconds).
+Test Case '-[TesseraTests.LivePricesTests testPriceTimeNamesTheDayWhenItIsNotToday]' passed (0.003 seconds).
+Test Case '-[TesseraTests.LivePricesTests testPriceWidgetsAreTheOnesFollowed]' passed (0.001 seconds).
+Test Case '-[TesseraTests.LivePricesTests testSpendingComparesWithLastMonthOnlyWhenItHasData]' passed (0.003 seconds).
+Test Case '-[TesseraTests.LivePricesTests testStockWidgetShowsTheMoveSinceTheClose]' passed (0.002 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testADefaultIsNotAnAnswer]' passed (0.013 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testCompleteProfileHasNothingLeftToFill]' passed (0.063 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testEmptyProfileEveryAskingMiniAppHasCardsToFill]' passed (0.017 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testEveryItemOfABlockCountsAsMissingWhenEmpty]' passed (0.001 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testFinancesSettingsKeepTheMoneyQuestionsWithoutRepeats]' passed (0.002 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testFitnessAsksTheProgramTheSessionsPerWeekTheWeightAndTheStepGoal]' passed (0.011 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testGivingAnAnswerRemovesItsCardOnly]' passed (0.094 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testPartialProfileAsksLessAndOnlyForWhatIsMissing]' passed (0.027 seconds).
+Test Case '-[TesseraTests.MiniAppToFillTests testTheSessionsPerWeekCardLeavesWithAnAnswerAndComesBackWhenForgotten]' passed (0.021 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testAMealIsChangedAndEmptiedInPlace]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testAveragesCountOnlyTheDaysNoted]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testGoalsSavedBeforeTheLimitsKeepTheirValues]' passed (0.046 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testIdeasFitWhatIsLeft]' passed (0.002 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testMealsAreKeptAndTakenBack]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testNutrientsAreNeverMadeUp]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testOneWeightHistory]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionAppTests testTheFoodTableIsRichAndFindsWhatPeopleType]' passed (0.015 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testAFoodShowsItsCaffeineAndAlcoholOnlyWhenItHasSome]' passed (0.002 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testAPremiumTargetShowsOnlyOnceItIsThePersonsOwn]' passed (0.038 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testAPremiumTargetTypedByHandIsKeptAndTheOthersFollow]' passed (0.022 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testEveryTargetIsTheTargetOfItsNutrientWithItsOwnValue]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testFoodsAndGoalsSavedBeforeStillRead]' passed (0.033 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testNewNutrientsAddUpAndAnUnknownValueStaysUnknown]' passed (0.002 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testOnlyTheCaloriesAndTheThreeMacronutrientsAreFree]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testTargetsSavedBeforeThePremiumNutrientsFollowTheCalculationWithoutLosingTypedOnes]' passed (0.020 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testTheCalculatorGivesThePremiumTargetsByAgeAndGender]' passed (0.001 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testTheMacrosWidgetShowsTheFibreOnlyWithPremium]' passed (0.003 seconds).
+Test Case '-[TesseraTests.NutritionPremiumTests testTheNutrientFileGivesTheNewNutrientsOnlyWhereItHasThem]' passed (0.271 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testABankStyleFileWithSemicolonsAndCommas]' passed (0.005 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAButtonNeverWritesAnEmptyStateOverAFileItCantRead]' passed (0.002 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAFramedPhotoNeverShowsAnEmptyEdge]' passed (0.002 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAmountsOfEveryRegion]' passed (0.001 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAnEventOverlappingAnotherIsFound]' passed (0.052 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testANewPersonGetsCalculatedNeedsWithoutTypingAnything]' passed (0.047 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAnExerciseAddedDuringASessionTakesWhatWasLiftedLastTime]' passed (0.003 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAPinchMovesOneScaleAtATime]' passed (0.004 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAShopifyOrderOnSeveralLinesCountsOnce]' passed (0.008 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testAStripeExportIsImportedOnceEvenTwice]' passed (0.005 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testATargetTypedByHandIsNeverReplacedSilently]' passed (0.053 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testBusinessSavedBeforeStillReads]' passed (0.001 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testEveryLibraryExerciseIsPremiumWithItsData]' passed (0.001 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testFoodsAndGoalsSavedBeforeStillRead]' passed (0.001 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testHabitRegularityCountsFromTheFirstDayDone]' passed (0.002 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testMineralsAndVitaminsAddUpWithoutMakingUpZeros]' passed (0.001 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testPhotoAndQuoteWidgetsKeepTheirContentWhenSavedAndRead]' passed (0.022 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testPhotosAreLaidOutByTheirNumber]' passed (0.001 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testStripeTransactionsBecomeSalesRefundsAndDailyFees]' passed (0.008 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testTargetsOfAnEarlierVersionTypedByHandStayAsTheyAre]' passed (0.019 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testTheCalculatorGivesEveryTargetFromRecognizedReferences]' passed (0.008 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testTheWaterWidgetsLeaveButTheDataStays]' passed (0.030 seconds).
+Test Case '-[TesseraTests.OctoberRequestsTests testWithoutPremiumASessionStillRunsAndItsDataIsKept]' passed (0.004 seconds).
+Test Case '-[TesseraTests.PermissionTests testAlreadyExplainedAndNotAskedAsksTheSystemDirectly]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PermissionTests testEveryPermissionHasItsExplanation]' passed (0.014 seconds).
+Test Case '-[TesseraTests.PermissionTests testExplanationIsRememberedPerPermission]' passed (0.004 seconds).
+Test Case '-[TesseraTests.PermissionTests testFullFlowAsksOnceThenDirectly]' passed (0.004 seconds).
+Test Case '-[TesseraTests.PermissionTests testGrantedDoesNothing]' passed (0.002 seconds).
+Test Case '-[TesseraTests.PermissionTests testMarkingTwiceKeepsOneEntry]' passed (0.006 seconds).
+Test Case '-[TesseraTests.PermissionTests testNeverExplainedAndNotAskedExplainsFirst]' passed (0.000 seconds).
+Test Case '-[TesseraTests.PermissionTests testNoStateEverGoesStraightToThePromptWithoutExplanation]' passed (0.000 seconds).
+Test Case '-[TesseraTests.PermissionTests testRefusedOffersTheSettingsWhateverWasExplained]' passed (0.000 seconds).
+Test Case '-[TesseraTests.PermissionTests testStepsAreNotReadBeforeThePersonChooses]' passed (0.002 seconds).
+Test Case '-[TesseraTests.PermissionTests testStepsAreReadWhenAllowedAndNeverWhenRefusedOrMissing]' passed (0.002 seconds).
+Test Case '-[TesseraTests.PhotoQuoteBackgroundTests testAQuoteKeepsItsBackgroundPhotoWhenSavedAndRead]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PhotoQuoteBackgroundTests testAQuoteSavedBeforeBackgroundPhotosReadsAsBefore]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PhotoQuoteBackgroundTests testDuplicatingOrDeletingAQuoteHandlesItsBackgroundFile]' passed (0.357 seconds).
+Test Case '-[TesseraTests.PhotoQuoteBackgroundTests testOnlyAQuoteTakesItsFirstPhotoAsBackground]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PhotoQuoteBackgroundTests testTextOnAPhotoStaysLight]' passed (0.004 seconds).
+Test Case '-[TesseraTests.PhotoQuoteBackgroundTests testTheQuoteFallsBackToItsColorsWhenThePhotoIsGone]' passed (0.008 seconds).
+Test Case '-[TesseraTests.PlanningLayoutTests testAPinchOnlyZoomsWhenItIsClear]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PlanningLayoutTests testOnlyTheWeekScheduleTakesAllTheHeightOfAWidget]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PlanningLayoutTests testTheScalesGoFromTheDayToTheYear]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PlanningStudiesTests testADayGathersEveryPartInOrder]' passed (0.182 seconds).
+Test Case '-[TesseraTests.PlanningStudiesTests testARepeatingTaskComesBackAndGoesAwayIfUnchecked]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PlanningStudiesTests testDeletingACourseKeepsItsGrades]' passed (0.002 seconds).
+Test Case '-[TesseraTests.PlanningStudiesTests testHomeworkIsSortedByWhenItIsDue]' passed (0.001 seconds).
+Test Case '-[TesseraTests.PlanningStudiesTests testOverdueAndOlderTasksStillOpen]' passed (0.011 seconds).
+Test Case '-[TesseraTests.PlanningStudiesTests testTheStudyTimerAddsItsTimeToTheWeek]' passed (0.034 seconds).
+Test Case '-[TesseraTests.PlanningStudiesTests testWhatItTakesToReachAGoal]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ProfileTests testAgeFromTheBirthYearOrTheBirthday]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ProfileTests testOneValueUsedEverywhere]' passed (0.091 seconds).
+Test Case '-[TesseraTests.ProfileTests testProfilesFromOtherVersionsDecode]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ProfileTests testProfileSurvivesSaving]' passed (0.020 seconds).
+Test Case '-[TesseraTests.ProfileTests testQuestionsFollowTheInterestsWithoutRepeats]' passed (0.004 seconds).
+Test Case '-[TesseraTests.ProfileTests testTargetsAreCalculatedOnlyFromTheUsersBody]' passed (0.030 seconds).
+Test Case '-[TesseraTests.ProfileTests testTheScanLinkOpensTheScanner]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ProfileTests testValuesChangedInSpacesBeforeTheUpdateAreKept]' passed (0.036 seconds).
+Test Case '-[TesseraTests.ProfileTests testWidgetDataTakesTheWeightFromTheProfile]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ProfileTests testWidgetsNeverShowATargetTheUserDidNotGive]' passed (0.018 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testAddedProductiviteShowsEvenWithoutTasks]' passed (0.017 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testAQuickTaskCanBeCheckedAndUnchecked]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testEmptyOrBlankTitleAddsNothing]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testExistingTopThreeIsNotDuplicated]' passed (0.014 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testProductiviteAndPlanningDoNotMoveEachOther]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testQuickAddKeepsTheTrimmedTitle]' passed (0.049 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testSameTitleWithinASecondIsIgnoredButNotLater]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testSavedTasksWithoutCreationDateStillDecode]' passed (0.008 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testSettingsWithoutTheProductivityEntryStayUntouched]' passed (0.021 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testTakingProductiviteOffHidesTheTopThreeOnlyWhileItHoldsTasks]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testTheQuickAddEntryKeepsTheTopThreeOnMonQuotidienWithoutInterest]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testTheReservedEntryIsNotAMiniApp]' passed (0.000 seconds).
+Test Case '-[TesseraTests.QuickTaskTests testTopThreeIsNeverExceeded]' passed (0.000 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testCalculatedTargetsFollowTheWeightUntilTypedByHand]' passed (0.025 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testEveryGenderCanBeChosenAndKeptAfterSaving]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testEveryMiniAppHasItsInfoWithoutRepeats]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testGoodMomentsAreAWorkoutFinishedAndAGoalReached]' passed (0.089 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testInteractiveWidgetsAreMarked]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testNonBinaryAnswersUseTheAverageOrTheChosenReference]' passed (0.048 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testTheLiveActivityShowsTheSetAndTheRest]' passed (0.004 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testTheRatingWaitsForAFewOpeningsThenIsAskedOnce]' passed (0.001 seconds).
+Test Case '-[TesseraTests.QuotidienAndLockScreenTests testTheViewChosenOnACardIsKept]' passed (0.027 seconds).
+Test Case '-[TesseraTests.ReactivityTests testASecondTapRightAfterTheFirstIsIgnored]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ReactivityTests testATapAfterThePauseRunsAgain]' passed (0.000 seconds).
+Test Case '-[TesseraTests.ReactivityTests testTheIgnoredTapDoesNotExtendThePause]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ReactivityTests testTheIntervalCanBeChosen]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testAddingAHugeQuantityIsClamped]' passed (0.002 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testAddUsesTheUsualPortionAndIsNotAnEstimate]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testAnotherFoodIsNotADoubleTap]' passed (0.000 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testASecondQuickCommitAddsNothing]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testCanConfirmNeedsALine]' passed (0.011 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testCommitMergesAFoodOnTwoLines]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testCommitOfAnEmptyRecapAddsNothing]' passed (0.000 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testCommitWritesEveryLineOnceInTheJournal]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testEditingKeepsTheEstimateFlag]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testGramsStayBetweenOneAndFiveThousand]' passed (0.002 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testMergedKeepsTheFirstLineAndTheLowestConfidence]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testProposalsBecomeEstimatesAndAProductStaysVerified]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testRemoveAndReplace]' passed (0.000 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testReplaceByAFoodAlreadyThereMergesTheLines]' passed (0.000 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testReplaceKeepsTheQuantityAndDropsTheOldConfidence]' passed (0.010 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testTheJournalTotalsFollowTheRecap]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testTheSameFoodTwiceIsOneLine]' passed (0.002 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testTotalsFollowTheQuantities]' passed (0.002 seconds).
+Test Case '-[TesseraTests.ScanRecapTests testWithoutTheWindowTheSameFoodCanBeLoggedAgain]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testACodeMakesAStudyHallOrADinnerACourse]' passed (0.007 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testAFreeWordInsideARealTitleKeepsTheClass]' passed (0.006 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testAHoleBetweenTwoClassesIsNeverAClassAndStopsTheClassBefore]' passed (0.008 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testAMisreadNameThatLooksLikeADayAlreadyTakenIsTheOtherDay]' passed (0.006 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testAnEndGuessedFromTheUsualLengthIsMarkedAndAWrittenEndIsNot]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testAnHourWithTheMarkerAfterALookalikeStart]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testCleanHoursAreNotMarked]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testCourseCodeWithALookalikeInItsDigits]' passed (0.000 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testDayNamesWithOneWrongLetterAreMatchedAndMarked]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testFreePeriodsBreaksAndEmptyCellsAreNotClasses]' passed (0.004 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testFreeSlotsWrittenAsListLinesAreNotClasses]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testGridWhoseHeaderIsMisreadStillGivesEveryClassOnItsDay]' passed (0.006 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testListWithAMisreadDayKeepsItsClassesAndMarksTheDay]' passed (0.017 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testLookalikesInTwelveHourAndBareRanges]' passed (0.001 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testLowerCaseLForOneBeforeTheMinutes]' passed (0.002 seconds).
+Test Case '-[TesseraTests.ScheduleAmbiguityTests testMarginLabelsWithLookalikesStillMakeTheRows]' passed (0.001 seconds).
+privacy manifest: app yes, widget yes
+alternate app icons in the app: 18
+---- widget extension bundle ----
+de.lproj
+en.lproj
+es.lproj
+fr.lproj
+Info.plist
+it.lproj
+ja.lproj
+Metadata.appintents
+PrivacyInfo.xcprivacy
+pt-BR.lproj
+TesseraWidgets
+extract.actionsdata
+version.json
+ExtractAppIntentsMetadata (in target 'TesseraWidgets' from project 'Tessera')
+ExtractAppIntentsMetadata (in target 'Tessera' from project 'Tessera')
+ExtractAppIntentsMetadata (in target 'TesseraTests' from project 'Tessera')
+ExtractAppIntentsMetadata (in target 'TesseraUITests' from project 'Tessera')
+---- last lines ----
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks/XCUnit.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks/XCUIAutomation.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks/XCTest.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks/Testing.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/PlugIns/TesseraUITests.xctest (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    builtin-RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/PlugIns/TesseraUITests.xctest
+
+Touch /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/PlugIns/TesseraUITests.xctest (in target 'TesseraUITests' from project 'Tessera')
+    cd /Users/runner/work/tessera/tessera
+    /usr/bin/touch -c /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/TesseraUITests-Runner.app/PlugIns/TesseraUITests.xctest
+
+** TEST BUILD SUCCEEDED **
+
