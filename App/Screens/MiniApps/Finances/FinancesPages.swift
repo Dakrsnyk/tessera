@@ -180,7 +180,12 @@ struct FinancesTransactionsPage: View {
                 .foregroundStyle(Color(hex: category?.colorHex ?? "64748B"))
                 .frame(width: 24)
             VStack(alignment: .leading, spacing: 2) {
-                Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note).foregroundStyle(.primary)
+                HStack(spacing: 6) {
+                    Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note).foregroundStyle(.primary)
+                    // Received through the Apple Pay automation, and its category still to check.
+                    if expense.source == .applePay { ApplePayMark() }
+                    if expense.needsReview == true { ReviewBadge() }
+                }
                 if expense.fixedID != nil {
                     Label(tr("Dépense fixe · \(category?.name ?? tr("Sans catégorie"))"), systemImage: "repeat")
                         .font(.caption).foregroundStyle(.secondary)

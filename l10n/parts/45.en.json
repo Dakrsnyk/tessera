@@ -1,0 +1,10 @@
+{
+ "%@ · %@ ajoutés": "%@ · %@ added",
+ "Déjà noté : %@ · %@": "Already noted: %@ · %@",
+ "Remboursement ignoré : rien n'a été ajouté": "Refund ignored: nothing was added",
+ "Montant nul : rien n'a été ajouté": "Zero amount: nothing was added",
+ "Budget illisible pour le moment : rien n'a été ajouté": "Budget unreadable for now: nothing was added",
+ "Montant illisible : rien n'a été ajouté": "Unreadable amount: nothing was added",
+ "Apple Pay": "Apple Pay",
+ "Ajouter une dépense Apple Pay": "Add an Apple Pay expense"
+}

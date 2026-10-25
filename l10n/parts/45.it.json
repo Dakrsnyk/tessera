@@ -1,0 +1,10 @@
+{
+ "%@ · %@ ajoutés": "%@ · %@ aggiunto",
+ "Déjà noté : %@ · %@": "Già registrato: %@ · %@",
+ "Remboursement ignoré : rien n'a été ajouté": "Rimborso ignorato: non è stato aggiunto nulla",
+ "Montant nul : rien n'a été ajouté": "Importo zero: non è stato aggiunto nulla",
+ "Budget illisible pour le moment : rien n'a été ajouté": "Budget al momento illeggibile: non è stato aggiunto nulla",
+ "Montant illisible : rien n'a été ajouté": "Importo illeggibile: non è stato aggiunto nulla",
+ "Apple Pay": "Apple Pay",
+ "Ajouter une dépense Apple Pay": "Aggiungi una spesa Apple Pay"
+}

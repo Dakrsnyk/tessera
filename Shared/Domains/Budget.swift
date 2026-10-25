@@ -8,6 +8,19 @@ struct BudgetCategory: Codable, Hashable, Identifiable {
     var monthlyLimit: Double = 0
 }
 
+/// Where an expense came from. Absent on expenses saved before this field existed (= `manual`).
+enum ExpenseSource: String, Codable, Hashable {
+    case manual
+    /// Received from the « Transaction » automation of Shortcuts (see `ApplePayExpense`).
+    case applePay
+
+    /// An unknown value (written by a later version) reads as `manual` instead of failing the whole budget.
+    init(from decoder: Decoder) throws {
+        let raw = try decoder.singleValueContainer().decode(String.self)
+        self = ExpenseSource(rawValue: raw) ?? .manual
+    }
+}
+
 struct Expense: Codable, Hashable, Identifiable {
     var id = UUID()
     var amount: Double
@@ -17,6 +30,12 @@ struct Expense: Codable, Hashable, Identifiable {
     /// Set on an expense that comes from a fixed expense (a bill, a fixed cost): computed on its
     /// date, never saved, so it is counted once and follows any change to the fixed expense.
     var fixedID: UUID?
+    /// nil on an expense noted by hand or saved by an older version.
+    var source: ExpenseSource?
+    /// The shop as received (Apple Pay expenses); the learned category rules are keyed by it.
+    var merchant: String?
+    /// True while the category was guessed or is missing and the person hasn't checked it.
+    var needsReview: Bool?
 }
 
 /// A one-tap expense (coffee, bus ticket…) offered by the "Dépense rapide" widget.
@@ -211,10 +230,13 @@ struct BudgetState: Codable, Hashable {
     /// chart shows the real balance (nil: the chart starts from zero).
     var openingBalance: Double?
     var openingDate: Date?
+    /// What the person taught the Apple Pay expenses: normalized shop name (`ApplePayExpense.normalizedMerchant`)
+    /// → the category chosen for it.
+    var merchantRules: [String: UUID] = [:]
 
     enum CodingKeys: String, CodingKey {
         case monthlyBudget, categories, expenses, quickExpenses, bills, goals, accounts, netWorthHistory, incomes, fixedFlows, fixedFlowsStart
-        case openingBalance, openingDate
+        case openingBalance, openingDate, merchantRules
     }
 
     init() {}
@@ -234,6 +256,7 @@ struct BudgetState: Codable, Hashable {
         fixedFlowsStart = try? c.decodeIfPresent(Date.self, forKey: .fixedFlowsStart)
         openingBalance = try? c.decodeIfPresent(Double.self, forKey: .openingBalance)
         openingDate = try? c.decodeIfPresent(Date.self, forKey: .openingDate)
+        merchantRules = c.value(.merchantRules, [:])
     }
 
     static let defaultCategories: [BudgetCategory] = [

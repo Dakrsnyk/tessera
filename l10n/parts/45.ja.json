@@ -1,0 +1,10 @@
+{
+ "%@ · %@ ajoutés": "%@ · %@ を追加しました",
+ "Déjà noté : %@ · %@": "記録済み：%@ · %@",
+ "Remboursement ignoré : rien n'a été ajouté": "返金は無視しました：何も追加していません",
+ "Montant nul : rien n'a été ajouté": "金額がゼロです：何も追加していません",
+ "Budget illisible pour le moment : rien n'a été ajouté": "現在、予算を読み込めません：何も追加していません",
+ "Montant illisible : rien n'a été ajouté": "金額を読み取れません：何も追加していません",
+ "Apple Pay": "Apple Pay",
+ "Ajouter une dépense Apple Pay": "Apple Pay の支出を追加"
+}

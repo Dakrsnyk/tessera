@@ -14,6 +14,8 @@ enum FinanceSheet: Identifiable {
     case budget
     /// « Solde de départ », for the balance chart.
     case opening
+    /// The guide of the automatic Apple Pay expenses (the Shortcuts automation).
+    case applePay
 
     var id: String {
         switch self {
@@ -26,13 +28,20 @@ enum FinanceSheet: Identifiable {
         case let .flow(item): "flow-\(item.id)"
         case .budget: "budget"
         case .opening: "opening"
+        case .applePay: "applepay"
         }
     }
 
     @ViewBuilder
     var editor: some View {
         switch self {
-        case let .expense(expense): ExpenseEditor(expense: expense)
+        case let .expense(expense):
+            // An expense received from Apple Pay (or with a merchant) teaches Ardane its category when changed.
+            if let expense, expense.source == .applePay || expense.merchant != nil || expense.needsReview == true {
+                MerchantExpenseEditor(expense: expense)
+            } else {
+                ExpenseEditor(expense: expense)
+            }
         case let .income(income): IncomeEditor(income: income)
         case let .bill(bill): BillEditor(bill: bill)
         case let .goal(goal): GoalEditor(goal: goal)
@@ -41,6 +50,7 @@ enum FinanceSheet: Identifiable {
         case let .flow(item): MoneyItemEditor(item: item, isNew: false)
         case .budget: MonthlyBudgetEditor()
         case .opening: OpeningBalanceEditor()
+        case .applePay: ApplePayGuideView()
         }
     }
 
@@ -150,6 +160,7 @@ struct FinancesAppView: View {
             Group {
                 actions
                 dayCard(state: state, now: now)
+                applePayRow(state: state)
             }
             month(state: state, now: now)
             BalanceChartCard(state: state, currency: currency, isPremium: model.isPremium) { sheet = .opening }
@@ -170,6 +181,19 @@ struct FinancesAppView: View {
                 .accessibilityIdentifier("finances-add-expense")
             MiniActionButton(title: tr("Revenu"), symbol: "plus", colorHex: Finances.incomeHex, isProminent: false) { sheet = .income(nil) }
                 .accessibilityIdentifier("finances-add-income")
+        }
+    }
+
+    /// « Dépenses Apple Pay automatiques »: opens the guide of the Shortcuts automation; the line says whether
+    /// a payment has already arrived through it.
+    private func applePayRow(state: BudgetState) -> some View {
+        MiniRowsCard {
+            Button { sheet = .applePay } label: {
+                FinancesRow(symbol: "wave.3.right.circle", colorHex: ApplePayStatus.hex, title: tr("Dépenses Apple Pay automatiques"),
+                            detail: ApplePayStatus.subtitle(state))
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("finances-applepay")
         }
     }
 
@@ -309,7 +333,8 @@ struct FinancesAppView: View {
         return FinancesRow(symbol: category?.symbol ?? "square.grid.2x2", colorHex: category?.colorHex ?? "64748B",
                        title: expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note,
                        detail: expense.fixedID == nil ? name : tr("Dépense fixe · \(name)"),
-                       value: Fmt.signedMoney(-expense.amount, currency: currency))
+                       value: Fmt.signedMoney(-expense.amount, currency: currency),
+                       isApplePay: expense.source == .applePay, needsReview: expense.needsReview == true)
     }
 
     private func incomeRow(_ income: IncomeEntry) -> some View {
@@ -518,6 +543,9 @@ private struct FinancesRow: View {
     var detail: String?
     var value: String?
     var showsChevron = true
+    /// An expense received through the Apple Pay automation, and one whose category is still to check.
+    var isApplePay = false
+    var needsReview = false
 
     var body: some View {
         HStack(spacing: 12) {
@@ -527,10 +555,14 @@ private struct FinancesRow: View {
                 .frame(width: 36, height: 36)
                 .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
             VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.body.weight(.semibold))
-                    .foregroundStyle(.primary)
-                    .lineLimit(1)
+                HStack(spacing: 6) {
+                    Text(title)
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                    if isApplePay { ApplePayMark() }
+                    if needsReview { ReviewBadge() }
+                }
                 if let detail, !detail.isEmpty {
                     Text(detail)
                         .font(.caption)
