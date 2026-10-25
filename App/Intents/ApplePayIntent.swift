@@ -15,7 +15,7 @@ extension Notification.Name {
 struct AddApplePayExpenseIntent: AppIntent {
     static var title: LocalizedStringResource = "Ajouter une dépense Apple Pay"
     static var description = IntentDescription(
-        "Note dans le budget d'Ardane un paiement Apple Pay. À brancher sur l'automatisation « Transaction » de Raccourcis, avec les variables Montant, Commerçant et Carte.",
+        "Note dans le budget d'Ardane un paiement mobile. À brancher sur l'automatisation « Transaction » de Raccourcis, avec les variables Montant, Commerçant et Carte.",
         categoryName: "Finances"
     )
     static var isDiscoverable: Bool { true }

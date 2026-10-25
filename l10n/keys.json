@@ -130,7 +130,7 @@
  "%@ (copie)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:343: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:351: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ (limite de la version gratuite)": {
@@ -150,7 +150,7 @@
  "%@ (variante)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:343: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:351: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ / %@ kcal": {
@@ -1065,7 +1065,7 @@
  "%@ · %@ ajoutés": {
   "placeholders": 2,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:61: return tr(\"\\(money) · \\(merchant) ajoutés\")"
+   "App/Intents/ApplePayIntent.swift:69: return tr(\"\\(money) · \\(merchant) ajoutés\")"
   ]
  },
  "%@ · %@ au plus": {
@@ -2930,7 +2930,7 @@
  "Ajouter une dépense Apple Pay": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:11: static var title: LocalizedStringResource = \"Ajouter une dépense Apple Pay\""
+   "App/Intents/ApplePayIntent.swift:16: static var title: LocalizedStringResource = \"Ajouter une dépense Apple Pay\""
   ]
  },
  "Ajouter une entreprise": {
@@ -5672,7 +5672,7 @@
  "Budget illisible pour le moment : rien n'a été ajouté": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:68: case ApplePayExpense.Reason.storeUnreadable: return tr(\"Budget illisible pour le moment : rien n'a été ajouté\")"
+   "App/Intents/ApplePayIntent.swift:76: case ApplePayExpense.Reason.storeUnreadable: return tr(\"Budget illisible pour le moment : rien n'a été ajouté\")"
   ]
  },
  "Budget mensuel à définir dans Ardane": {
@@ -6363,7 +6363,7 @@
  "Carte": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:29: @Parameter(title: \"Carte\")",
+   "App/Intents/ApplePayIntent.swift:34: @Parameter(title: \"Carte\")",
    "Shared/Theme/Theme.swift:223: id: .card, name: tr(\"Carte\"), tagline: tr(\"Le contenu posé sur une carte\"), isPremium: false,"
   ]
  },
@@ -7847,8 +7847,8 @@
  "Commerçant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesApplePay.swift:337: Text(tr(\"Commerçant\"))",
-   "Shared/Intents/ApplePayIntent.swift:26: @Parameter(title: \"Commerçant\")"
+   "App/Intents/ApplePayIntent.swift:31: @Parameter(title: \"Commerçant\")",
+   "App/Screens/MiniApps/Finances/FinancesApplePay.swift:337: Text(tr(\"Commerçant\"))"
   ]
  },
  "Commerçant → « Commerçant »": {
@@ -10795,7 +10795,7 @@
  "Déjà noté : %@ · %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:63: return tr(\"Déjà noté : \\(money) · \\(merchant)\")"
+   "App/Intents/ApplePayIntent.swift:71: return tr(\"Déjà noté : \\(money) · \\(merchant)\")"
   ]
  },
  "Déjà épargné": {
@@ -18553,7 +18553,7 @@
  "Mon thème": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:395: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
+   "App/Core/AppModel.swift:403: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
    "App/Screens/Editor/StudioPanels.swift:448: TextField(tr(\"Mon thème\"), text: $newName)",
    "Shared/Model/WidgetStyle.swift:764: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
   ]
@@ -18583,22 +18583,22 @@
  "Montant": {
   "placeholders": 0,
   "uses": [
+   "App/Intents/ApplePayIntent.swift:27: @Parameter(title: \"Montant\", description: \"Le montant de la transaction, tel que Raccourcis le donne (12,50 $).\")",
    "App/Screens/Content/MoneyView.swift:131: TextField(tr(\"Montant\"), text: $amountText)",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:99: Text(tr(\"Montant\"))",
-   "App/Screens/MiniApps/Finances/FinancesApplePay.swift:355: NumberRow(title: tr(\"Montant\"), value: $expense.amount, unit: model.settings.currencyCode)",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:373: NumberRow(title: tr(\"Montant\"), value: $expense.amount, unit: expense.currencyCode)"
+   "App/Screens/MiniApps/Finances/FinancesApplePay.swift:355: NumberRow(title: tr(\"Montant\"), value: $expense.amount, unit: model.settings.currencyCode)"
   ]
  },
  "Montant illisible : rien n'a été ajouté": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:69: default: return tr(\"Montant illisible : rien n'a été ajouté\")"
+   "App/Intents/ApplePayIntent.swift:77: default: return tr(\"Montant illisible : rien n'a été ajouté\")"
   ]
  },
  "Montant nul : rien n'a été ajouté": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:67: case ApplePayExpense.Reason.zero: return tr(\"Montant nul : rien n'a été ajouté\")"
+   "App/Intents/ApplePayIntent.swift:75: case ApplePayExpense.Reason.zero: return tr(\"Montant nul : rien n'a été ajouté\")"
   ]
  },
  "Montant à convertir": {
@@ -23977,7 +23977,7 @@
  "Remboursement ignoré : rien n'a été ajouté": {
   "placeholders": 0,
   "uses": [
-   "Shared/Intents/ApplePayIntent.swift:66: case ApplePayExpense.Reason.refund: return tr(\"Remboursement ignoré : rien n'a été ajouté\")"
+   "App/Intents/ApplePayIntent.swift:74: case ApplePayExpense.Reason.refund: return tr(\"Remboursement ignoré : rien n'a été ajouté\")"
   ]
  },
  "Remettre à zéro chaque jour": {
@@ -33599,7 +33599,7 @@
  "ta taille": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:918: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
+   "App/Core/AppModel.swift:926: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
   ]
  },
  "terminée": {
@@ -33617,19 +33617,19 @@
  "ton genre": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:920: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
+   "App/Core/AppModel.swift:928: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
   ]
  },
  "ton poids": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:919: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
+   "App/Core/AppModel.swift:927: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
   ]
  },
  "ton âge": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:917: if age == nil { missing.append(tr(\"ton âge\")) }"
+   "App/Core/AppModel.swift:925: if age == nil { missing.append(tr(\"ton âge\")) }"
   ]
  },
  "tout est prêt": {
