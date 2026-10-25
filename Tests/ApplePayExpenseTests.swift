@@ -425,6 +425,95 @@ final class ApplePayExpenseTests: XCTestCase {
         XCTAssertEqual(store.state(BudgetState.self).expenses.count, 1)
     }
 
+    // MARK: - Nom affiché
+
+    func testAShoutedNameIsShownInProperCaseWithItsDigits() throws {
+        XCTAssertEqual(ApplePayExpense.noteName("7-ELEVEN #123"), "7-Eleven")
+        XCTAssertEqual(ApplePayExpense.noteName("MCDONALD'S"), "Mcdonald's")
+        XCTAssertEqual(ApplePayExpense.noteName("TIM HORTONS #1234 MONTREAL QC"), "Tim Hortons")
+        XCTAssertEqual(ApplePayExpense.noteName("Tim Hortons #88"), "Tim Hortons")
+        XCTAssertEqual(ApplePayExpense.noteName("McDonald's"), "McDonald's", "Un nom déjà bien écrit ne change pas")
+        XCTAssertEqual(ApplePayExpense.noteName("#123"), "#123", "Rien à garder : le nom reçu reste")
+
+        var state = BudgetState()
+        let expense = try XCTUnwrap(added(state.addApplePay(amount: 4, merchant: "7-ELEVEN #123", card: nil, date: now)))
+        XCTAssertEqual(expense.note, "7-Eleven")
+        XCTAssertEqual(expense.merchant, "7-ELEVEN #123", "Le nom reçu est gardé tel quel pour les règles")
+    }
+
+    // MARK: - Action Raccourcis (enregistreur)
+
+    private func temporaryStore() -> SharedStore {
+        SharedStore(directory: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true))
+    }
+
+    func testTheRecorderWritesTheExpenseInTheSettingsCurrency() throws {
+        let store = temporaryStore()
+        let outcome = ApplePayRecorder.record(amountText: "12,50 $", merchant: "Tim Hortons", card: "Visa", store: store, at: now)
+        let expense = try XCTUnwrap(added(outcome.result))
+        XCTAssertEqual(expense.amount, 12.5)
+        XCTAssertEqual(outcome.currencyCode, store.settings.currencyCode)
+        XCTAssertEqual(store.state(BudgetState.self).expenses.map(\.id), [expense.id])
+    }
+
+    func testARecorderRunTwiceRecordsOnce() {
+        let store = temporaryStore()
+        _ = ApplePayRecorder.record(amountText: "12,50 $", merchant: "Tim Hortons", card: nil, store: store, at: now)
+        let second = ApplePayRecorder.record(amountText: "12,50 $", merchant: "Tim Hortons", card: nil, store: store, at: now.addingTimeInterval(3))
+        XCTAssertTrue(isDuplicate(second.result))
+        XCTAssertEqual(store.state(BudgetState.self).expenses.count, 1)
+    }
+
+    func testAnExplicitForeignCurrencyIsKeptToBeChecked() throws {
+        let store = temporaryStore()
+        XCTAssertEqual(store.settings.currencyCode, "CAD")
+        let outcome = ApplePayRecorder.record(amountText: "US$ 5.00", merchant: "Boutique Zorglub", card: nil, store: store, at: now)
+        let expense = try XCTUnwrap(added(outcome.result))
+        XCTAssertEqual(expense.amount, 5, "Le montant n'est jamais converti")
+        XCTAssertEqual(expense.needsReview, true)
+        XCTAssertEqual(expense.note, "Boutique Zorglub (USD)")
+        let saved = try XCTUnwrap(store.state(BudgetState.self).expenses.first)
+        XCTAssertEqual(saved, expense, "La dépense enregistrée est celle qui est renvoyée")
+    }
+
+    func testTheCurrencyOfTheSettingsAddsNothingToTheNote() throws {
+        let store = temporaryStore()
+        let outcome = ApplePayRecorder.record(amountText: "CA$ 5.00", merchant: "Boutique Zorglub", card: nil, store: store, at: now)
+        XCTAssertEqual(try XCTUnwrap(added(outcome.result)).note, "Boutique Zorglub")
+    }
+
+    func testRefundZeroAndUnreadableAmountsWriteNothing() {
+        let store = temporaryStore()
+        let refund = ApplePayRecorder.record(amountText: "-12,50 $", merchant: "Amazon", card: nil, store: store, at: now)
+        let zero = ApplePayRecorder.record(amountText: "0,00 $", merchant: "Amazon", card: nil, store: store, at: now)
+        let unreadable = ApplePayRecorder.record(amountText: "abc", merchant: "Amazon", card: nil, store: store, at: now)
+        let empty = ApplePayRecorder.record(amountText: "", merchant: "Amazon", card: nil, store: store, at: now)
+        XCTAssertEqual(refund.result, .ignored(ApplePayExpense.Reason.refund))
+        XCTAssertEqual(zero.result, .ignored(ApplePayExpense.Reason.zero))
+        XCTAssertEqual(unreadable.result, .ignored(ApplePayExpense.Reason.unreadable))
+        XCTAssertEqual(empty.result, .ignored(ApplePayExpense.Reason.unreadable))
+        XCTAssertTrue(store.state(BudgetState.self).expenses.isEmpty)
+        // Chaque cas répond par sa propre phrase.
+        let messages = Set([refund, zero, unreadable].map(\.message))
+        XCTAssertEqual(messages.count, 3)
+        XCTAssertFalse(messages.contains(""))
+    }
+
+    func testTheOutcomeMessagesNameTheAmountAndTheShop() throws {
+        let store = temporaryStore()
+        let first = ApplePayRecorder.record(amountText: "12,50 $", merchant: "Tim Hortons", card: nil, store: store, at: now)
+        let money = Fmt.money(12.5, currency: first.currencyCode)
+        XCTAssertTrue(first.message.contains(money), first.message)
+        XCTAssertTrue(first.message.contains("Tim Hortons"), first.message)
+        let second = ApplePayRecorder.record(amountText: "12,50 $", merchant: "Tim Hortons", card: nil, store: store, at: now.addingTimeInterval(2))
+        XCTAssertTrue(second.message.contains(money), second.message)
+        XCTAssertTrue(second.message.contains("Tim Hortons"), second.message)
+        XCTAssertNotEqual(first.message, second.message)
+        // Remboursement : le montant est affiché sans signe.
+        let refund = ApplePayRecorder.record(amountText: "-12,50 $", merchant: "Tim Hortons", card: nil, store: store, at: now)
+        XCTAssertEqual(refund.amount, -12.5)
+    }
+
     // MARK: - Non-régression
 
     func testAManualExpenseIsUnchanged() {

@@ -158,6 +158,7 @@ MODULES = [
          "Graphique du solde (mois, 3 mois, année), solde de départ facultatif.",
          "Reste ce mois-ci, revenus / dépenses / solde, catégories avec limites, factures à venir, objectifs d'épargne, valeur nette.",
          "Évolution (Premium), dépense rapide depuis un widget (`QuickExpenseIntent`).",
+         "Dépenses Apple Pay automatiques (2026-10-25) : action Raccourcis `AddApplePayExpenseIntent` (App/Intents), `ApplePayExpense` (Shared/Domains : montant, commerçant, catégorie, doublons, règles apprises), guide `ApplePayGuideView` et `MerchantRulesView` (Finances), repère « Apple Pay » et « À vérifier » sur les dépenses.",
          "Relevé (`FinancesStatementPage`, `BudgetMath.statement`, testé par `FinanceStatementTests`, build 217) : toucher le solde ouvre tous les mouvements par date avec le solde après chacun ; ligne « Dépenses fixes » sous Évolution (`MoneyView`) ; Mes infos sans « Chaque mois » ni « Tes principales dépenses » (2026-10-17).",
      ],
      "sources": ["App/Screens/MiniApps/Finances/FinancesApp.swift", "App/Screens/MiniApps/Finances/FinancesPages.swift", "App/Screens/Spaces/BudgetSpace.swift",

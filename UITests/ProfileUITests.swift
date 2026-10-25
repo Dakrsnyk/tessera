@@ -32,14 +32,25 @@ final class ProfileUITests: XCTestCase {
         add(shot)
     }
 
-    private func type(_ text: String, into identifier: String, file: StaticString = #filePath, line: UInt = #line) {
-        let field = app.textFields[identifier]
-        XCTAssertTrue(field.waitForExistence(timeout: 8), "Champ \(identifier) introuvable", file: file, line: line)
+    /// Scrolls until the element can be touched and sits above the fixed bar at the bottom of the page
+    /// (« Continuer » of the first launch, « Enregistrer le widget » of the Studio). The page scrolls under that
+    /// bar: an element behind it still reports « hittable », and the touch would land on the bar.
+    private func scrollClear(of element: XCUIElement, aboveBar bar: XCUIElement? = nil, maxSwipes: Int = 8) {
         var swipes = 0
-        while !field.isHittable && swipes < 6 {
+        func isCovered() -> Bool {
+            guard let bar, bar.exists, bar.frame.minY > 0 else { return false }
+            return element.frame.maxY > bar.frame.minY - 4
+        }
+        while (!element.isHittable || isCovered()) && swipes < maxSwipes {
             app.swipeUp()
             swipes += 1
         }
+    }
+
+    private func type(_ text: String, into identifier: String, file: StaticString = #filePath, line: UInt = #line) {
+        let field = app.textFields[identifier]
+        XCTAssertTrue(field.waitForExistence(timeout: 8), "Champ \(identifier) introuvable", file: file, line: line)
+        scrollClear(of: field, aboveBar: app.buttons["onboarding-continue"])
         field.tap()
         field.typeText(text)
     }
@@ -47,11 +58,9 @@ final class ProfileUITests: XCTestCase {
     private func tapButton(_ label: String, file: StaticString = #filePath, line: UInt = #line) {
         let button = app.buttons[label].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(label) » introuvable", file: file, line: line)
-        var swipes = 0
-        while !button.isHittable && swipes < 6 {
-            app.swipeUp()
-            swipes += 1
-        }
+        // The bar's own button is the bar: only the others must stay clear of it.
+        let isBar = label == "onboarding-continue" || label == "onboarding-skip"
+        scrollClear(of: button, aboveBar: isBar ? nil : app.buttons["onboarding-continue"])
         button.tap()
     }
 
@@ -82,7 +91,9 @@ final class ProfileUITests: XCTestCase {
         type("80", into: "profile-weight")
         snapshot("sport")
         tapButton("onboarding-continue")
-        XCTAssertTrue(app.staticTexts["Nutrition"].waitForExistence(timeout: 8))
+        // The Nutrition page itself (its aim chips), not a « Nutrition » text that the Home screen would also show.
+        let aim = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "nutrition-aim-")).firstMatch
+        XCTAssertTrue(aim.waitForExistence(timeout: 8), "La page Nutrition du premier lancement ne s'est pas ouverte")
         // No number to type: the needs are calculated from the body (the weight was given for sport).
         type("30", into: "profile-age")
         type("180", into: "profile-height")
@@ -315,10 +326,13 @@ final class ProfileUITests: XCTestCase {
         next.tap()
         let part = app.buttons["part-caloriesLeft"]
         XCTAssertTrue(part.waitForExistence(timeout: 10), "Réglages par widget absents du Studio")
+        // The page scrolls under « Enregistrer le widget »: the button must be above that bar, not just « hittable »
+        // (a touch behind the bar lands on it and opens nothing).
+        let saveBar = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Enregistrer")).firstMatch
         var swipes = 0
-        while !part.isHittable && swipes < 8 {
-            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.78))
-            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.58))
+        while swipes < 10 && (!part.isHittable || (saveBar.exists && part.frame.maxY > saveBar.frame.minY - 4)) {
+            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.7))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
             start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
             swipes += 1
         }

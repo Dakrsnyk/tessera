@@ -52,6 +52,7 @@ final class AppModel {
     @ObservationIgnored private var remindersTask: Task<Void, Never>?
     @ObservationIgnored private var workoutObserver: NSObjectProtocol?
     @ObservationIgnored private var studyObserver: NSObjectProtocol?
+    @ObservationIgnored private var budgetObserver: NSObjectProtocol?
 
     init(store: SharedStore = .shared) {
         self.store = store
@@ -70,6 +71,13 @@ final class AppModel {
             MainActor.assumeIsolated {
                 guard let self else { return }
                 self.student = self.store.state(StudentState.self)
+            }
+        }
+        // An Apple Pay expense received from Shortcuts while the app is open.
+        budgetObserver = NotificationCenter.default.addObserver(forName: .budgetSavedOutside, object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                self.budget = self.store.state(BudgetState.self)
             }
         }
     }

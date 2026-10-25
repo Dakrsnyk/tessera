@@ -21,6 +21,8 @@ Tes widgets et leurs réglages, tâches, habitudes, horaires, études, repas et 
 
 Certaines de ces données peuvent révéler des informations sensibles, comme ta santé (alimentation, poids, entraînement) ou ta situation financière. Elles ne quittent jamais ton iPhone du fait d'Ardane : nous n'y avons pas accès.
 
+Les paiements Apple Pay que l'app Raccourcis transmet à Ardane (montant, commerçant, carte) restent sur ton iPhone : ils ne sont envoyés nulle part ailleurs et se suppriment comme n'importe quelle dépense.
+
 Les résumés rédigés par Apple Intelligence (sur les iPhone compatibles) sont produits sur ton iPhone par le modèle d'Apple intégré à l'appareil. Aucun texte n'est envoyé ailleurs pour les produire.
 
 ## 3. Les accès que tu autorises

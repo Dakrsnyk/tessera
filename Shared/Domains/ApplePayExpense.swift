@@ -113,6 +113,28 @@ enum ApplePayExpense {
         return name.isEmpty ? genericMerchant : name
     }
 
+    /// The name shown in the list of operations: the shop without its terminal reference (« #123 … »), and
+    /// a name written in capitals set in proper case (« 7-ELEVEN #123 » → « 7-Eleven »). Digits stay.
+    static func noteName(_ shown: String) -> String {
+        var name = shown
+        if let hash = name.firstIndex(of: "#") { name = String(name[..<hash]).trimmed }
+        if name.isEmpty { name = shown }
+        guard name.contains(where: \.isLetter), name == name.uppercased() else { return name }
+        var result = ""
+        var insideWord = false
+        for character in name.lowercased() {
+            if character.isLetter {
+                result += insideWord ? String(character) : String(character).uppercased()
+                insideWord = true
+            } else {
+                result.append(character)
+                // An apostrophe doesn't start a new word: « McDonald's ».
+                insideWord = insideWord && (character == "'" || character == "\u{2019}")
+            }
+        }
+        return result
+    }
+
     private static let cardProcessors: Set<String> = ["sq", "tst", "sp", "pp", "paypal", "pos", "sumup", "izettle", "stripe", "toast", "clover"]
     private static let regionWords: Set<String> = ["qc", "on", "bc", "ab", "mb", "nb", "ns", "pe", "pei", "nl", "sk", "nt", "yt", "nu", "ca", "can", "usa", "us"]
     private static let cityWords: Set<String> = ["montreal", "mtl", "laval", "quebec", "longueuil", "gatineau", "sherbrooke", "toronto", "ottawa", "vancouver",
@@ -329,10 +351,7 @@ extension BudgetState {
 
         let learned = ApplePayExpense.learnedCategoryID(forKey: key, in: self)
         let category = learned ?? ApplePayExpense.keywordCategoryID(forKey: key, in: self)
-        // A shop written in capitals on the statement reads better as « Tim Hortons ».
-        let isShouting = shown.contains { $0.isLetter } && shown == shown.uppercased()
-        let note = isShouting && !key.isEmpty ? key.capitalized : shown
-        let expense = Expense(amount: cents, categoryID: category, note: note, date: date,
+        let expense = Expense(amount: cents, categoryID: category, note: ApplePayExpense.noteName(shown), date: date,
                               source: .applePay, merchant: shown, needsReview: learned == nil)
         add(expense)
         return .added(expense)

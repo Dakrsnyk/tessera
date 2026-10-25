@@ -2,6 +2,11 @@ import AppIntents
 import Foundation
 import WidgetKit
 
+extension Notification.Name {
+    /// The budget was changed outside the app's screens (the Apple Pay action of Shortcuts): the app reads it back.
+    static let budgetSavedOutside = Notification.Name("tessera.budgetSavedOutside")
+}
+
 /// « Ajouter une dépense Apple Pay »: the action the « Transaction » personal automation of Shortcuts calls
 /// at each Apple Pay payment, with the amount, the shop and the card as text. It is offered in the
 /// Shortcuts app like any discoverable AppIntent (the app has no `AppShortcutsProvider`, and none is added
@@ -41,6 +46,9 @@ struct AddApplePayExpenseIntent: AppIntent {
         let outcome = ApplePayRecorder.record(amountText: amount, merchant: merchant ?? "", card: card)
         if case .added = outcome.result {
             WidgetCenter.shared.reloadAllTimelines()
+            // The action runs in the app's process: when the app is open, its budget in memory follows,
+            // so the next change made there doesn't write an older state over this expense.
+            await MainActor.run { NotificationCenter.default.post(name: .budgetSavedOutside, object: nil) }
         }
         return .result(dialog: "\(outcome.message)")
     }
