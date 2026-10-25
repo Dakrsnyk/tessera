@@ -47,11 +47,60 @@ final class ProfileUITests: XCTestCase {
         }
     }
 
+    /// Touches an element of a page that scrolls under the fixed bar (« Continuer » / « C'est parti » of the first
+    /// launch), without ever landing on that bar. With the number pad open the bar sits right above the keyboard and
+    /// the row of fields is partly behind it: the touch goes to the CENTER of the element, which must be on the
+    /// visible part of the page. Short, slow drags (no flick, started in the side margin so no field or chip takes
+    /// the drag) bring it there, in either direction; if it cannot be brought there, the test stops with the
+    /// hierarchy attached instead of touching the bar (which, on the last page, ends the first launch).
+    /// Without such a bar (the editor, the Studio), the element is scrolled into reach and tapped as usual.
+    private func tapClear(_ element: XCUIElement, aboveBar bar: XCUIElement?, name: String, maxSwipes: Int = 10) {
+        guard let bar, bar.exists, bar.frame.minY > 0 else {
+            scrollClear(of: element)
+            element.tap()
+            return
+        }
+        let height = app.frame.height > 100 ? app.frame.height : 874
+        let width = app.frame.width > 100 ? app.frame.width : 402
+        // Under the top bar (back arrow, progress, « Passer ») the page is clipped: nothing to touch there.
+        let top = height * 0.15
+        func isClear() -> Bool {
+            guard bar.exists else { return false }
+            let y = element.frame.midY
+            return y > top && y < bar.frame.minY - 12
+        }
+        var swipes = 0
+        while !isClear() && swipes < maxSwipes {
+            let bottom = bar.frame.minY - 12
+            let goesUp = element.frame.midY >= bottom
+            let from = goesUp ? bottom - 20 : top + 20
+            let to = goesUp ? max(top + 20, from - 160) : min(bottom - 20, from + 160)
+            let origin = app.coordinate(withNormalizedOffset: .zero)
+            let start = origin.withOffset(CGVector(dx: width * 0.02, dy: from))
+            let end = origin.withOffset(CGVector(dx: width * 0.02, dy: to))
+            start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.2)
+            swipes += 1
+        }
+        if !isClear() {
+            attachHierarchy("diagnostic-covered-\(name)")
+            XCTFail("« \(name) » reste sous la barre fixe (centre \(element.frame.midY), barre \(bar.frame.minY)) : aucun toucher pour ne pas la déclencher")
+            return
+        }
+        element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+    }
+
+    /// The first launch must still be on the Nutrition page after each touch: otherwise the test says which one ended it.
+    private func assertStillOnNutritionPage(after step: String, file: StaticString = #filePath, line: UInt = #line) {
+        let aim = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "nutrition-aim-")).firstMatch
+        let stays = aim.exists
+        if !stays { attachHierarchy("diagnostic-onboarding-ended-after-\(step)") }
+        XCTAssertTrue(stays, "Le premier lancement s'est terminé pendant : \(step)", file: file, line: line)
+    }
+
     private func type(_ text: String, into identifier: String, file: StaticString = #filePath, line: UInt = #line) {
         let field = app.textFields[identifier]
         XCTAssertTrue(field.waitForExistence(timeout: 8), "Champ \(identifier) introuvable", file: file, line: line)
-        scrollClear(of: field, aboveBar: app.buttons["onboarding-continue"])
-        field.tap()
+        tapClear(field, aboveBar: app.buttons["onboarding-continue"], name: identifier)
         field.typeText(text)
     }
 
@@ -59,9 +108,11 @@ final class ProfileUITests: XCTestCase {
         let button = app.buttons[label].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(label) » introuvable", file: file, line: line)
         // The bar's own button is the bar: only the others must stay clear of it.
-        let isBar = label == "onboarding-continue" || label == "onboarding-skip"
-        scrollClear(of: button, aboveBar: isBar ? nil : app.buttons["onboarding-continue"])
-        button.tap()
+        if label == "onboarding-continue" || label == "onboarding-skip" {
+            button.tap()
+        } else {
+            tapClear(button, aboveBar: app.buttons["onboarding-continue"], name: label)
+        }
     }
 
     private func label(of identifier: String) -> String {
@@ -95,9 +146,13 @@ final class ProfileUITests: XCTestCase {
         let aim = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "nutrition-aim-")).firstMatch
         XCTAssertTrue(aim.waitForExistence(timeout: 8), "La page Nutrition du premier lancement ne s'est pas ouverte")
         // No number to type: the needs are calculated from the body (the weight was given for sport).
+        // Nothing here may reach « C'est parti » (the bar of the last page, right above the number pad).
         type("30", into: "profile-age")
+        assertStillOnNutritionPage(after: "saisie de l'âge")
         type("180", into: "profile-height")
+        assertStillOnNutritionPage(after: "saisie de la taille")
         tapButton("gender-male")
+        assertStillOnNutritionPage(after: "choix du genre")
         let targetsShown = app.descendants(matching: .any)["nutrition-targets"].waitForExistence(timeout: 5)
         if !targetsShown { attachHierarchy("diagnostic-nutrition-targets") }
         XCTAssertTrue(targetsShown, "Les besoins calculés doivent s'afficher")

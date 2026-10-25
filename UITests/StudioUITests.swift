@@ -28,6 +28,13 @@ final class StudioUITests: XCTestCase {
 
     /// Taps a button by identifier, scrolling the Studio's settings (below the preview) until it's reachable.
     private func tapButton(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) {
+        reveal(identifier, file: file, line: line).tap()
+    }
+
+    /// Scrolls the Studio's settings until the button is on screen (the settings go back to the top each time
+    /// another widget is chosen) and returns it. A choice below the fold keeps its old accessibility state.
+    @discardableResult
+    private func reveal(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
         let button = app.buttons[identifier].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(identifier) » introuvable", file: file, line: line)
         let height = app.frame.height > 200 ? app.frame.height : 874
@@ -45,7 +52,7 @@ final class StudioUITests: XCTestCase {
             start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
             swipes += 1
         }
-        button.tap()
+        return button
     }
 
     private static let sections = ["content", "theme", "style", "colors", "background", "border", "chart", "density", "myStyles"]
@@ -161,9 +168,20 @@ final class StudioUITests: XCTestCase {
         snapshot("multi")
         // Undone for all of them at once.
         tapButton("studio-undo")
+        // The settings are back at the top after choosing the second widget: the palette is below the fold,
+        // so it is brought on screen before its state is read.
+        reveal("palette-neon")
+        if !waitForSelection("palette-neon", selected: false) {
+            let diagnostic = XCTAttachment(string: app.debugDescription)
+            diagnostic.name = "diagnostic-undo-palette"
+            diagnostic.lifetime = .keepAlways
+            add(diagnostic)
+            snapshot("undo-palette-failed")
+        }
         XCTAssertTrue(waitForSelection("palette-neon", selected: false), "Retour en arrière n'a pas annulé la palette")
         first.tap()
         XCTAssertTrue(waitForSelection("studio-widget-1"))
+        reveal("palette-neon")
         XCTAssertTrue(waitForSelection("palette-neon", selected: false), "Retour en arrière vaut pour tous les widgets")
         XCTAssertTrue(app.buttons["Enregistrer les 3 widgets"].exists, "Les widgets s'enregistrent ensemble")
     }
