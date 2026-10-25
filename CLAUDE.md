@@ -22,6 +22,7 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Gro
 - Ne pas casser l'existant. Pas d'image_search. Livrer des PNG/GIF (l'utilisateur ne peut pas ouvrir les artifacts Design).
 - Compte Apple Developer acheté le 2026-10-15 : installer par TestFlight (`[testflight]`) ; le sideload de l'IPA de test reste possible mais limite widgets écran verrouillé / Live Activities.
 - Le dépôt est public pour la CI : rappeler de le repasser en privé.
+- Depuis le 2026-10-25 : à CHAQUE modification terminée, lancer un commit `[interne]` (build Premium sur TestFlight, l'utilisateur le teste sur son iPhone) sans attendre qu'il le redemande ; la vérification sans Premium (`[unit]`/`[daily]`/`[apps]`) vient après ; `[testflight]` (version publique) seulement sur son accord explicite.
 - Commits terminés par :
   `Co-Authored-By: Claude <noreply@anthropic.com>`
   `Claude-Session: https://claude.ai/code/session_011SGgP6YLhofhVhTasQukEx`
