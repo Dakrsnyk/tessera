@@ -1,5 +1,7 @@
 # Nom de vendeur et entreprise (recherche du 2026-10-16)
 
+> **Décision du 2026-10-26 (chantier 12) :** l'utilisateur démarre en **entreprise individuelle**, société à étudier plus tard. Le vendeur affiché est donc son nom légal, et le conseil « ne pas envoyer les formulaires fiscaux maintenant » ci-dessous ne vaut que pour le scénario société : en individuel, suivre `docs/guide-premium-testflight.md` (W-8BEN, TPS/TVQ selon la décision sur l'inscription). Feuille de route : `docs/lancement/feuille-de-route.md`.
+
 ## Ce qu'Apple permet
 - Compte **individuel** (le compte actuel) : le vendeur affiché est toujours le nom légal de la personne. Une entreprise individuelle avec un nom déclaré ne change rien (Apple refuse les noms commerciaux et les entreprises individuelles comme « organisation »).
 - Pour un autre nom, il faut une **personne morale** : une société par actions (« inc. »), un numéro **D-U-N-S** (gratuit), un **site web public** sur un domaine à soi et un **courriel sur ce domaine**. Ensuite, demander à Apple de faire passer le compte individuel en organisation (formulaire « migrate individual account »). Le Team ID, la fiche Ardane, le bundle ID et les builds sont, d'après les témoignages, conservés ; certificats et profils peuvent devoir être refaits.
