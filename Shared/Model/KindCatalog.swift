@@ -99,7 +99,7 @@ private let inline: WidgetFamily = .accessoryInline
 
 enum KindCatalog {
     static let all: [KindInfo] = [
-        time, weather, productivity, wellbeing, nutrition, fitness, finance,
+        time, productivity, wellbeing, nutrition, fitness, finance,
         investing, business, markets, student, travel, car, dashboards,
     ].flatMap { $0 }
 
@@ -123,17 +123,6 @@ enum KindCatalog {
         KindInfo(kind: .weekView, title: tr("Ma semaine"), summary: tr("Les sept jours de la semaine, aujourd'hui en avant, avec ta progression."), category: .time, symbol: "calendar.day.timeline.left", isPremium: false, families: SM, keywords: ["semaine", "jours", "numéro de semaine"], isNew: true),
         KindInfo(kind: .holiday, title: tr("Prochain jour férié"), summary: tr("Le prochain jour férié au Québec, au Canada ou en France."), category: .time, symbol: "sun.max", isPremium: false, families: SM + [rect, inline], keywords: ["férié", "congé", "vacances", "holiday"], space: .life, isNew: true),
         KindInfo(kind: .moonPhase, title: tr("Phase de lune"), summary: tr("La lune ce soir, son éclairage et la prochaine pleine lune."), category: .time, symbol: "moon.stars", isPremium: false, families: SM + [circ], keywords: ["lune", "pleine lune", "nouvelle lune", "moon"], isNew: true),
-    ]
-
-    // MARK: Météo
-
-    static let weather: [KindInfo] = [
-        KindInfo(kind: .weather, title: tr("Météo"), summary: tr("La température et les prévisions de ta ville."), category: .weather, symbol: "cloud.sun.fill", isPremium: false, families: SML + [circ, rect, inline], keywords: ["température", "pluie", "prévisions", "soleil"]),
-        KindInfo(kind: .sunCycle, title: tr("Soleil"), summary: tr("Lever, coucher et durée du jour, avec la course du soleil."), category: .weather, symbol: "sunrise.fill", isPremium: false, families: SM + [rect], keywords: ["lever", "coucher", "sunrise", "sunset", "jour"], isNew: true),
-        KindInfo(kind: .rainNext, title: tr("Pluie"), summary: tr("Le risque de pluie heure par heure pour les 12 prochaines heures."), category: .weather, symbol: "cloud.rain.fill", isPremium: true, families: SM + [rect], keywords: ["pluie", "parapluie", "précipitations"], isNew: true),
-        KindInfo(kind: .windUV, title: tr("Vent et UV"), summary: tr("La force du vent, sa direction et l'indice UV."), category: .weather, symbol: "wind", isPremium: true, families: SM, keywords: ["vent", "uv", "soleil", "rafales"], isNew: true),
-        KindInfo(kind: .weatherDetails, title: tr("Météo détaillée"), summary: tr("Ressenti, humidité, vent, UV et pression, réunis."), category: .weather, symbol: "thermometer.medium", isPremium: true, families: SML, keywords: ["ressenti", "humidité", "pression"], isNew: true),
-        KindInfo(kind: .weeklyForecast, title: tr("Semaine météo"), summary: tr("Les prévisions des sept prochains jours."), category: .weather, symbol: "calendar.badge.clock", isPremium: true, families: ML, keywords: ["semaine", "prévisions", "7 jours"], isNew: true),
     ]
 
     // MARK: Productivité
@@ -250,7 +239,6 @@ enum KindCatalog {
         KindInfo(kind: .tripCountdown, title: tr("Départ en voyage"), summary: tr("Les jours avant ton prochain voyage."), category: .travel, symbol: "airplane.departure", isPremium: false, families: SM + [circ, rect, inline], keywords: ["voyage", "vacances", "départ", "trip"], space: .travel, isNew: true),
         KindInfo(kind: .flight, title: tr("Vol"), summary: tr("Ton vol : heure de départ, terminal, porte et compte à rebours."), category: .travel, symbol: "airplane", isPremium: true, families: SM + [rect], keywords: ["vol", "avion", "porte", "terminal", "flight"], space: .travel, isNew: true),
         KindInfo(kind: .hotel, title: tr("Hôtel"), summary: tr("Ton hôtel, son adresse et les dates d'arrivée et de départ."), category: .travel, symbol: "bed.double.fill", isPremium: true, families: SM, keywords: ["hôtel", "logement", "airbnb"], space: .travel, isNew: true),
-        KindInfo(kind: .destinationWeather, title: tr("Météo à destination"), summary: tr("La météo de ta destination pendant ton voyage."), category: .travel, symbol: "cloud.sun.rain", isPremium: true, families: SM, keywords: ["météo", "destination"], space: .travel, isNew: true),
         KindInfo(kind: .localTime, title: tr("Heure sur place"), summary: tr("L'heure à destination et le décalage avec chez toi."), category: .travel, symbol: "clock.arrow.2.circlepath", isPremium: false, families: SM + [inline], keywords: ["heure", "décalage", "fuseau"], space: .travel, isNew: true),
         KindInfo(kind: .currency, title: tr("Devise"), summary: tr("Le taux de change et une conversion rapide."), category: .travel, symbol: "coloncurrencysign.circle", isPremium: true, families: SM, keywords: ["devise", "taux de change", "euro", "dollar"], space: .travel, isNew: true),
         KindInfo(kind: .tripProgress, title: tr("Avancement du voyage"), summary: tr("Le jour du voyage où tu es et les jours restants."), category: .travel, symbol: "map", isPremium: true, families: SM + [circ], keywords: ["jour", "voyage", "restants"], space: .travel, isNew: true),
@@ -270,9 +258,9 @@ enum KindCatalog {
     // MARK: Tableaux de bord
 
     static let dashboards: [KindInfo] = [
-        KindInfo(kind: .myDay, title: tr("Ma journée"), summary: tr("L'heure, la météo, ton prochain rendez-vous, tes tâches et tes calories en un seul widget."), category: .dashboards, symbol: "sun.horizon", isPremium: true, families: ML, keywords: ["journée", "dashboard", "résumé", "my day"], isNew: true),
-        KindInfo(kind: .now, title: tr("Maintenant"), summary: tr("Un widget qui change selon le moment : météo et agenda le matin, tâches et focus la journée, bilan le soir."), category: .dashboards, symbol: "wand.and.stars", isPremium: true, families: SML, keywords: ["contextuel", "intelligent", "matin", "soir"], isNew: true),
-        KindInfo(kind: .morning, title: tr("Ce matin"), summary: tr("Météo, premier rendez-vous, priorités et objectif du jour pour bien démarrer."), category: .dashboards, symbol: "sunrise", isPremium: true, families: ML, keywords: ["matin", "morning", "réveil"], isNew: true),
+        KindInfo(kind: .myDay, title: tr("Ma journée"), summary: tr("L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget."), category: .dashboards, symbol: "sun.horizon", isPremium: true, families: ML, keywords: ["journée", "dashboard", "résumé", "my day"], isNew: true),
+        KindInfo(kind: .now, title: tr("Maintenant"), summary: tr("Un widget qui change selon le moment : agenda le matin, tâches et focus la journée, bilan le soir."), category: .dashboards, symbol: "wand.and.stars", isPremium: true, families: SML, keywords: ["contextuel", "intelligent", "matin", "soir"], isNew: true),
+        KindInfo(kind: .morning, title: tr("Ce matin"), summary: tr("Premier rendez-vous, priorités et objectif du jour pour bien démarrer."), category: .dashboards, symbol: "sunrise", isPremium: true, families: ML, keywords: ["matin", "morning", "réveil"], isNew: true),
         KindInfo(kind: .fitnessDashboard, title: tr("Tableau fitness"), summary: tr("Séance, régularité, calories et protéines réunies."), category: .dashboards, symbol: "figure.run", isPremium: true, families: ML, keywords: ["fitness", "sport", "dashboard"], isNew: true),
         KindInfo(kind: .moneyDashboard, title: tr("Tableau argent"), summary: tr("Reste du mois, dépenses, épargne et factures réunies."), category: .dashboards, symbol: "dollarsign.circle", isPremium: true, families: ML, keywords: ["argent", "budget", "dashboard"], isNew: true),
         KindInfo(kind: .studentDashboard, title: tr("Tableau études"), summary: tr("Prochain cours, examen, devoirs et heures d'étude réunis."), category: .dashboards, symbol: "graduationcap.circle", isPremium: true, families: ML, keywords: ["études", "étudiant", "dashboard"], isNew: true),

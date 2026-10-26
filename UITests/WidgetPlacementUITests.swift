@@ -240,7 +240,7 @@ final class WidgetPlacementUITests: XCTestCase {
         snapshot("lock-6-tessera-widgets", tree: true)
 
         // An original widget first (the sheet stays open after a tap)…
-        let names = ["Progression", "Compte à rebours", "Météo", "Tâches", "Focus", "Hydratation", "À venir", "Crypto"]
+        let names = ["Progression", "Compte à rebours", "Tâches", "Focus", "Hydratation", "À venir", "Crypto"]
         tap(names, types: [.button, .cell, .other], timeout: 3, fallback: CGVector(dx: 0.3, dy: 0.72))
         pause(2.5)
         snapshot("lock-7-added", tree: true)

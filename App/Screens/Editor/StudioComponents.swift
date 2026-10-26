@@ -314,11 +314,11 @@ struct StudioStage: View {
 
 extension WidgetKind {
     /// Widgets drawn from a tile, whose layout, chart and lines the Studio can rearrange.
-    /// The others (clock, calendar, weather…) have their own arrangement and take the rest of the look.
+    /// The others (clock, calendar…) have their own arrangement and take the rest of the look.
     var usesTileLayout: Bool {
         switch self {
         case .clock, .calendar, .worldClock, .progress, .countdown, .yearDots, .tasks, .habits, .focus,
-             .upNext, .note, .weather, .crypto, .moneyFlow, .hydration, .photos, .quote:
+             .upNext, .note, .crypto, .moneyFlow, .hydration, .photos, .quote:
             false
         default:
             true

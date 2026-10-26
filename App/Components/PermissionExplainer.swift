@@ -1,4 +1,3 @@
-import CoreLocation
 import CoreMotion
 import EventKit
 import SwiftUI
@@ -60,7 +59,7 @@ enum PermissionMemory {
 
 /// The permissions Ardane may ask for. The camera (food scanner) and Photos (wallpapers) have their own flows.
 enum AppPermission: String, CaseIterable, Identifiable {
-    case notifications, calendar, location, motion
+    case notifications, calendar, motion
 
     var id: String { rawValue }
 
@@ -68,7 +67,6 @@ enum AppPermission: String, CaseIterable, Identifiable {
         switch self {
         case .notifications: tr("Notifications")
         case .calendar: tr("Calendrier")
-        case .location: tr("Position")
         case .motion: tr("Mouvement et pas")
         }
     }
@@ -77,7 +75,6 @@ enum AppPermission: String, CaseIterable, Identifiable {
         switch self {
         case .notifications: "bell.badge.fill"
         case .calendar: "calendar"
-        case .location: "location.fill"
         case .motion: "figure.walk"
         }
     }
@@ -87,7 +84,6 @@ enum AppPermission: String, CaseIterable, Identifiable {
         switch self {
         case .notifications: tr("Pour t'envoyer les rappels que tu actives, à l'heure choisie.")
         case .calendar: tr("Pour afficher tes prochains rendez-vous dans Ardane et ses widgets.")
-        case .location: tr("Pour trouver la météo là où tu es.")
         case .motion: tr("Pour compter tes pas, ta distance et tes étages avec le capteur de ton iPhone.")
         }
     }
@@ -97,7 +93,6 @@ enum AppPermission: String, CaseIterable, Identifiable {
         switch self {
         case .notifications: tr("Les rappels sont créés sur ton iPhone, sans compte ni serveur.")
         case .calendar: tr("Tes événements restent sur ton iPhone.")
-        case .location: tr("Ardane ne s'en sert que pour la météo, une seule fois.")
         case .motion: tr("Tes pas restent sur ton iPhone, sans Santé ni compte.")
         }
     }
@@ -117,12 +112,6 @@ enum AppPermission: String, CaseIterable, Identifiable {
             case .fullAccess: return .granted
             case .notDetermined: return .notDetermined
             // Write-only access cannot read events: the settings are the way to widen it.
-            default: return .denied
-            }
-        case .location:
-            switch CLLocationManager().authorizationStatus {
-            case .authorizedWhenInUse, .authorizedAlways: return .granted
-            case .notDetermined: return .notDetermined
             default: return .denied
             }
         case .motion:

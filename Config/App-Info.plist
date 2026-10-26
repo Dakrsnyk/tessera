@@ -4,8 +4,6 @@
 <dict>
 	<key>AppGroupIdentifier</key>
 	<string>$(APP_GROUP_ID)</string>
-	<key>OpenMeteoAPIKey</key>
-	<string>$(OPEN_METEO_API_KEY)</string>
 	<key>CoinGeckoAPIKey</key>
 	<string>$(COINGECKO_API_KEY)</string>
 	<key>FinnhubAPIKey</key>

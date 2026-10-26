@@ -302,7 +302,7 @@ struct MainTabView: View {
     }
 }
 
-/// Sheets for the data behind widgets (tasks, habits, water, money, location, calendar access).
+/// Sheets for the data behind widgets (tasks, habits, money, calendar access).
 struct ContentScreenView: View {
     let screen: ContentScreen
     @Environment(\.dismiss) private var dismiss
@@ -314,7 +314,6 @@ struct ContentScreenView: View {
                 case .tasks: TasksView()
                 case .habits: HabitsView()
                 case .money: MoneyView()
-                case .weather: WeatherLocationView()
                 case .calendar: CalendarAccessView()
                 case .reminders: SmartRemindersView()
                 }

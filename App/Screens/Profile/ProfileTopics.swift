@@ -241,7 +241,6 @@ struct TopicForm: View {
     @Environment(AppModel.self) private var model
     @State private var newTask = ""
     @State private var newHabit = ""
-    @State private var showsCityPicker = false
     @State private var asksBody = false
 
     var body: some View {
@@ -254,7 +253,6 @@ struct TopicForm: View {
             case .productivity: productivity
             case .studies: studies
             case .car: car
-            case .weather: weather
             case .wellbeing: wellbeing
             }
         }
@@ -536,38 +534,6 @@ struct TopicForm: View {
                     value: Binding(get: { model.car.tankLiters }, set: { liters in model.update(\.car) { $0.tankLiters = liters } }),
                     identifier: "car-tank"
                 )
-            }
-        }
-    }
-
-    // MARK: Weather
-
-    private var weather: some View {
-        QuestionCard(title: tr("Ta ville"), detail: tr("Pour la météo de tes widgets. Tu peux la changer quand tu veux.")) {
-            Button {
-                showsCityPicker = true
-            } label: {
-                HStack {
-                    Image(systemName: "location.fill")
-                    Text(model.settings.weatherLocation?.name ?? tr("Choisir ma ville"))
-                        .fontWeight(.semibold)
-                    Spacer()
-                    Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(.tertiary)
-                }
-                .padding(12)
-                .frame(minHeight: 44)
-                .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-            }
-            .buttonStyle(.pressable)
-            .sheet(isPresented: $showsCityPicker) {
-                NavigationStack {
-                    WeatherLocationView()
-                        .toolbar {
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button(tr("OK")) { showsCityPicker = false }
-                            }
-                        }
-                }
             }
         }
     }

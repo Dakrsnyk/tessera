@@ -77,7 +77,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         case .welcome:
             tr("Petit tour d'Ardane en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.")
         case .daily:
-            tr("Ta journée en un coup d'œil : météo, agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.")
+            tr("Ta journée en un coup d'œil : agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.")
         case .info:
             tr("Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps et à tous tes widgets.")
         case .create:

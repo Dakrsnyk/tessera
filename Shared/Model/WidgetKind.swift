@@ -5,7 +5,6 @@ import WidgetKit
 enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
     case dashboards
     case time
-    case weather
     case productivity
     case wellbeing
     case nutrition
@@ -25,7 +24,6 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
         switch self {
         case .dashboards: tr("Tableaux de bord")
         case .time: tr("Temps")
-        case .weather: tr("Météo")
         case .productivity: tr("Productivité")
         case .wellbeing: tr("Habitudes")
         case .nutrition: tr("Nutrition")
@@ -45,7 +43,6 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
         switch self {
         case .dashboards: "rectangle.3.group"
         case .time: "clock"
-        case .weather: "cloud.sun"
         case .productivity: "checklist"
         case .wellbeing: "leaf"
         case .nutrition: "fork.knife"
@@ -65,7 +62,6 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
         switch self {
         case .dashboards: "5B6CFF"
         case .time: "2F8F7A"
-        case .weather: "3A8DDE"
         case .productivity: "6B7280"
         case .wellbeing: "7FA33A"
         case .nutrition: "F08A24"
@@ -87,8 +83,6 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
     // Temps
     case clock, calendar, worldClock, progress, countdown, yearDots
     case ageProgress, birthday, weekView, holiday, moonPhase
-    // Météo
-    case weather, sunCycle, rainNext, windUV, weatherDetails, weeklyForecast
     // Productivité
     case tasks, habits, focus, upNext, note
     case priorities, project, deadline, deepWork, counter
@@ -109,7 +103,7 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
     // Études
     case nextClass, nextExam, assignments, gradeAverage, semesterProgress, flashcard, studyHours, timetable
     // Voyage
-    case tripCountdown, flight, hotel, destinationWeather, localTime, currency, tripProgress, nextActivity
+    case tripCountdown, flight, hotel, localTime, currency, tripProgress, nextActivity
     // Auto
     case carCost, nextService, mileage, fuelStats, carDeadlines
     // Tableaux de bord

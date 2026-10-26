@@ -170,28 +170,6 @@ struct KindOptionsSection: View {
                     }
                 }
             }
-        case .weather:
-            EditorSection(title: tr("Lieu")) {
-                VStack(spacing: 0) {
-                    contentLink(model.settings.weatherLocation?.name ?? tr("Choisir une ville"), detail: nil) { WeatherLocationView() }
-                    Divider()
-                    HStack {
-                        Text(tr("Unité"))
-                        Spacer()
-                        Picker(tr("Unité"), selection: Binding(
-                            get: { model.settings.temperatureUnit },
-                            set: { unit in model.updateSettings { $0.temperatureUnit = unit } }
-                        )) {
-                            Text("°C").tag(TemperatureUnit.celsius)
-                            Text("°F").tag(TemperatureUnit.fahrenheit)
-                        }
-                        .pickerStyle(.segmented)
-                        .frame(width: 120)
-                    }
-                    .frame(minHeight: 44)
-                }
-                .font(.subheadline)
-            }
         case .crypto:
             EditorSection(title: tr("Actif")) {
                 VStack(spacing: 0) {

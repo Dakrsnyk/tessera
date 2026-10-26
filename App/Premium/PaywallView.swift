@@ -191,7 +191,7 @@ struct PaywallView: View {
             .font(.caption.weight(.semibold))
             .foregroundStyle(.secondary)
             .padding(.bottom, 8)
-            comparisonRow(tr("Widgets"), free: "\(WidgetKind.freeKinds.count)", premium: "\(WidgetKind.offered.count)")
+            comparisonRow(tr("Types de widgets"), free: "\(WidgetKind.freeKinds.count)", premium: "\(WidgetKind.offered.count)")
             comparisonRow(tr("Styles"), free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
             comparisonRow(tr("Widgets enregistrés"), free: "\(AppModel.freeDesignLimit)", premium: "∞")
             comparisonRow(tr("Photos et citations"), free: "∞", premium: "∞")
@@ -256,7 +256,7 @@ struct PaywallView: View {
     }
 
     private func badge(for product: Product) -> String? {
-        if store.introDescription(for: product) != nil { return tr("Offre de bienvenue") }
+        if store.introDescription(for: product) != nil { return tr("Essai gratuit") }
         if product.id == PremiumConfiguration.yearlyID, let savings = store.yearlySavingsPercent { return "−\(savings) %" }
         if product.id == PremiumConfiguration.lifetimeID { return tr("Paiement unique") }
         return nil
@@ -278,7 +278,8 @@ struct PaywallView: View {
     /// What will be charged, and when, before the purchase is confirmed.
     private func terms(for product: Product) -> String {
         if let intro = store.introDescription(for: product) {
-            return tr("\(intro). Renouvellement automatique chaque mois, annulable à tout moment. L'offre de bienvenue ne vaut qu'une fois par compte Apple.")
+            let period = product.id == PremiumConfiguration.yearlyID ? tr("chaque année") : tr("chaque mois")
+            return tr("\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.")
         }
         switch product.id {
         case PremiumConfiguration.yearlyID:
@@ -308,7 +309,7 @@ struct PaywallView: View {
 
     private var purchaseBar: some View {
         let product = store.products.first { $0.id == selectedID }
-        let isIntro = product.flatMap { store.introDescription(for: $0) } != nil
+        let trialDays = product.flatMap { store.trialDays(for: $0) }
         return VStack(spacing: 8) {
             if store.loadState == .loaded {
                 if let product {
@@ -319,7 +320,7 @@ struct PaywallView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("paywall-terms")
                 }
-                purchaseButton(product: product, isIntro: isIntro)
+                purchaseButton(product: product, trialDays: trialDays)
             }
             Button {
                 Task {
@@ -341,14 +342,14 @@ struct PaywallView: View {
         .background(.bar)
     }
 
-    private func purchaseButton(product: Product?, isIntro: Bool) -> some View {
+    private func purchaseButton(product: Product?, trialDays: Int?) -> some View {
         Button {
             guard let product else { return }
             Task { await buy(product) }
         } label: {
             HStack {
                 if store.purchasingID != nil { ProgressView().tint(AppFill.onAccent) }
-                Text(isIntro ? tr("Profiter de l'offre de bienvenue") : tr("Continuer"))
+                Text(trialDays.map { tr("Essayer \($0) jours gratuits") } ?? tr("Continuer"))
                     .font(.headline)
                     .foregroundStyle(.onAccent)
             }
@@ -361,7 +362,7 @@ struct PaywallView: View {
 
     private var legal: some View {
         VStack(spacing: 10) {
-            Text(tr("Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'offre de bienvenue s'applique une seule fois par compte ; à sa fin, le prix normal s'applique. L'achat à vie est un paiement unique, sans renouvellement."))
+            Text(tr("Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement."))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

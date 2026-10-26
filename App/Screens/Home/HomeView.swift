@@ -44,9 +44,8 @@ struct HomeView: View {
                 }
             }
             .task {
-                // « Mon Quotidien » shows the weather and today's events when they are available.
+                // « Mon Quotidien » shows today's events when they are available.
                 model.refreshEvents()
-                await model.refreshWeather()
             }
             .toolbar {
                 // The date, on the same line as the profile, in the app style's color.

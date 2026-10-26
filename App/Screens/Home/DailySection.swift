@@ -70,7 +70,7 @@ struct DailySection: View {
         // Real figures entered by the person (invitations to fill in a category don't count).
         let hasData = automatic.contains { tile in
             switch tile {
-            case .invite, .empty, .weather, .miniApp(_, caption: nil): false
+            case .invite, .empty, .miniApp(_, caption: nil): false
             case let .priorities(items) where items.isEmpty: false
             default: true
             }
@@ -236,10 +236,6 @@ private struct DailyTileView: View {
                 if page == 1 { StepsWeekTile(goal: goal) } else { StepsDayTile(steps: steps, goal: goal) }
             }
         case let .budget(spent, perDay): BudgetDayTile(spent: spent, perDayLeft: perDay)
-        case let .weather(snapshot):
-            DailyPager(id: "weather", titles: [tr("Maintenant"), tr("Prochaines heures")], accentHex: "3A8DDE") { page in
-                if page == 1 { WeatherHoursTile(weather: snapshot) } else { WeatherDayTile(weather: snapshot) }
-            }
         case let .reminders(items): RemindersDayTile(items: items)
         case let .priorities(items): PrioritiesDayTile(items: items)
         case let .invite(area): InviteDayTile(area: area)
@@ -963,41 +959,6 @@ private struct BudgetDayTile: View {
     }
 }
 
-private struct WeatherDayTile: View {
-    let weather: WeatherSnapshot
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        DayCard(title: weather.locationName, symbol: "location.fill", colorHex: "3A8DDE", route: .app(.weather)) {
-            HStack(spacing: 8) {
-                WeatherGlyph(code: weather.code, isDay: weather.isDay)
-                    .font(.title2)
-                Text(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit))
-                    .font(.title.weight(.semibold))
-            }
-            Text(WeatherCode.description(weather.code))
-                .font(.caption.weight(.semibold))
-            Text(tr("Max \(Fmt.temperature(weather.high, unit: model.settings.temperatureUnit)) · Min \(Fmt.temperature(weather.low, unit: model.settings.temperatureUnit))"))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            if let rain = rainHint {
-                Text(rain)
-                    .font(.caption)
-                    .foregroundStyle(Color(hex: "3A8DDE"))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityIdentifier("daily-weather")
-    }
-
-    /// The first hour today with a good chance of rain.
-    private var rainHint: String? {
-        let now = Date()
-        guard let hour = weather.hourly.first(where: { $0.date > now && DateMath.isSameDay($0.date, now) && ($0.precipitationProbability ?? 0) >= 50 }) else { return nil }
-        return tr("Pluie probable vers \(Fmt.time(hour.date, uses24Hour: true))")
-    }
-}
-
 private struct RemindersDayTile: View {
     let items: [DailyBrief.Reminder]
 
@@ -1402,37 +1363,5 @@ private struct StepsWeekTile: View {
         }
         .task { await counter.refreshWeek() }
         .accessibilityIdentifier("daily-steps-week")
-    }
-}
-
-private struct WeatherHoursTile: View {
-    let weather: WeatherSnapshot
-    @Environment(AppModel.self) private var model
-    @Environment(\.dailyCompact) private var compact
-
-    var body: some View {
-        let now = Date()
-        let hours = weather.hourly.filter { $0.date > now }.prefix(compact ? 3 : 5)
-        DayCard(title: tr("Prochaines heures"), symbol: "clock", colorHex: "3A8DDE", route: .app(.weather)) {
-            HStack(alignment: .top, spacing: 4) {
-                ForEach(Array(hours), id: \.date) { hour in
-                    VStack(spacing: 4) {
-                        Text(Fmt.time(hour.date, uses24Hour: model.settings.uses24HourClock))
-                            .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
-                        WeatherGlyph(code: hour.code, isDay: hour.isDay)
-                            .font(.callout)
-                        Text(Fmt.temperature(hour.temperature, unit: model.settings.temperatureUnit))
-                            .font(.caption.weight(.semibold))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-            }
-        }
-        .accessibilityIdentifier("daily-weather-hours")
     }
 }

@@ -48,7 +48,6 @@ struct DataItemRow: View {
     @Environment(AppModel.self) private var model
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
     @State private var newText = ""
-    @State private var showsCityPicker = false
     @State private var asksMotion = false
     private var stepCounter: StepCounter { .shared }
 
@@ -94,16 +93,6 @@ struct DataItemRow: View {
         .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("data-\(item.rawValue)")
-        .sheet(isPresented: $showsCityPicker) {
-            NavigationStack {
-                WeatherLocationView()
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button(tr("OK")) { showsCityPicker = false }
-                        }
-                    }
-            }
-        }
         .permissionSheet(.motion, isPresented: $asksMotion, request: readSteps)
     }
 
@@ -289,10 +278,6 @@ struct DataItemRow: View {
                 action(tr("Ajouter ma date de naissance"), symbol: "plus") {
                     model.update(\.life) { $0.birthday = Holidays.make(2000, 1, 1) }
                 }
-            }
-        case .city:
-            action(model.settings.weatherLocation?.name ?? tr("Choisir ma ville"), symbol: "location.fill", prominent: !model.isFilled(.city)) {
-                showsCityPicker = true
             }
         case .calendar:
             CalendarAccessRow()

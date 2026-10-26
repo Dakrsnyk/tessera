@@ -13,11 +13,6 @@ struct Trip: Codable, Hashable, Identifiable {
     var budget: Double?
 
     var timeZone: TimeZone { TimeZone(identifier: timeZoneID) ?? .current }
-
-    var location: WeatherLocation? {
-        guard let latitude, let longitude else { return nil }
-        return WeatherLocation(name: destination, latitude: latitude, longitude: longitude)
-    }
 }
 
 struct Flight: Codable, Hashable, Identifiable {
@@ -326,11 +321,11 @@ enum FXService {
     }
 
     static func fetch(base: String, now: Date) async throws -> FXRates {
-        guard let url = URL(string: "https://api.frankfurter.dev/v1/latest?base=\(base)") else { throw WeatherError.badResponse }
+        guard let url = URL(string: "https://api.frankfurter.dev/v1/latest?base=\(base)") else { throw ServiceError.badResponse }
         var request = URLRequest(url: url)
         request.timeoutInterval = 12
         let (data, response) = try await URLSession.shared.data(for: request)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WeatherError.badResponse }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ServiceError.badResponse }
         struct Payload: Decodable {
             let base: String
             let date: String
@@ -445,20 +440,5 @@ extension FXService {
         }
         guard let payload = try? JSONDecoder().decode(Payload.self, from: data) else { throw FXHistory.Problem.unreachable }
         return payload.rates.compactMapValues { $0[home] }
-    }
-}
-
-/// Weather at the trip's destination, cached apart from the home weather.
-enum TripWeatherService {
-    static let refreshInterval: TimeInterval = 60 * 60
-
-    static func load(for trip: Trip, allowNetwork: Bool, now: Date = Date()) async -> WeatherSnapshot? {
-        guard let location = trip.location else { return nil }
-        let stored = SharedStore.shared.read(WeatherSnapshot.self, from: .tripWeather)
-        let cache = (stored?.matches(location) ?? false) ? stored : nil
-        if let cache, now.timeIntervalSince(cache.fetchedAt) < refreshInterval { return cache }
-        guard allowNetwork, let fresh = try? await WeatherService.fetch(location) else { return cache }
-        SharedStore.shared.write(fresh, to: .tripWeather)
-        return fresh
     }
 }

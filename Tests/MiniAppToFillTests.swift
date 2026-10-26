@@ -26,8 +26,8 @@ final class MiniAppToFillTests: XCTestCase {
         model.setStepGoal(8_000)
     }
 
-    /// Everything but the weather city (setting it starts a network refresh, which a logic test must not do).
-    private func fillEverythingButTheCity(_ model: AppModel) {
+    /// Everything the mini-apps ask for.
+    private func fillEverything(_ model: AppModel) {
         model.update(\.profile) { $0.provided.formUnion([.kcalTarget, .proteinTarget]) }
         fillFitness(model)
         model.updateContent { $0.habits = [Habit(name: "Lire", symbol: "book", colorHex: "7FA33A")] }
@@ -101,13 +101,12 @@ final class MiniAppToFillTests: XCTestCase {
 
     func testCompleteProfileHasNothingLeftToFill() {
         let model = temporaryModel()
-        fillEverythingButTheCity(model)
-        for app in asking where app != .weather {
+        fillEverything(model)
+        for app in asking {
             XCTAssertTrue(model.toFillItems(in: app).isEmpty, "\(app.rawValue) has nothing left: \(model.toFillItems(in: app))")
             let progress = model.toFillProgress(in: app)
             XCTAssertEqual(progress.filled, progress.total, app.rawValue)
         }
-        XCTAssertEqual(toFill(model, .weather), [.city], "The weather still asks for the city")
     }
 
     /// The money questions had no home but the page by category that was removed: Finances keeps them in « Mes paramètres ».

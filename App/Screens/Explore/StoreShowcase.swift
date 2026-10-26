@@ -36,7 +36,6 @@ enum StoreShowcase {
     }
 
     static let lockScreen: [ShowcaseItem] = [
-        item(.weather, .accessoryRectangular, .minimal, "3366FF"),
         item(.progress, .accessoryCircular, .minimal, "2F8F7A", "progress-year"),
         item(.caloriesLeft, .accessoryCircular, .minimal, "2F8F7A"),
         item(.tasks, .accessoryRectangular, .minimal, "2F8F7A"),
@@ -129,16 +128,14 @@ enum StoreShowcase {
             item(.localTime, .systemSmall, .minimal, "2F8F7A"),
             item(.currency, .systemSmall, .glass, "8C6CFF"),
             item(.hotel, .systemSmall, .retro, "F2A33A"),
-            item(.destinationWeather, .systemSmall, .aurora, "3366FF"),
             item(.nextActivity, .systemMedium, .light, "F2A33A"),
             item(.tripProgress, .systemSmall, .colorful, "3366FF"),
         ]),
-        StoreCollection(id: "calm", title: tr("Bien-être"), subtitle: tr("Habitudes, soleil et lune."),
-                        symbol: "leaf.fill", colorHex: "7FA33A", categories: [.wellbeing, .weather], items: [
+        StoreCollection(id: "calm", title: tr("Bien-être"), subtitle: tr("Habitudes et lune."),
+                        symbol: "leaf.fill", colorHex: "7FA33A", categories: [.wellbeing], items: [
             item(.habits, .systemMedium, .glass, "8C6CFF"),
             item(.habitRate, .systemSmall, .glass, "F2588F"),
             item(.moonPhase, .systemSmall, .elegant, "F2A33A"),
-            item(.sunCycle, .systemMedium, .light, "F2A33A"),
             item(.habitStreak, .systemSmall, .colorful, "7FA33A"),
             item(.habitWeek, .systemLarge, .light, "8C6CFF"),
         ]),
@@ -155,7 +152,7 @@ enum StoreShowcase {
         ]),
         StoreCollection(id: "vivid", title: tr("Couleurs vives"), subtitle: tr("Ta couleur en plein fond."),
                         symbol: "sparkles", colorHex: "F2588F", items: [
-            item(.weather, .systemSmall, .colorful, "3366FF"),
+            item(.moonPhase, .systemSmall, .colorful, "3366FF"),
             item(.now, .systemMedium, .colorful, "FF6B57"),
             item(.habitStreak, .systemSmall, .colorful, "F2588F"),
             item(.budgetLeft, .systemMedium, .colorful, "F2A33A"),
@@ -165,7 +162,6 @@ enum StoreShowcase {
         StoreCollection(id: "mediums", title: tr("Widgets moyens"), subtitle: tr("Deux fois plus de place, pour tout voir d'un coup d'œil."),
                         symbol: "rectangle.fill", colorHex: "3366FF", items: [
             item(.now, .systemMedium, .colorful, "8C6CFF"),
-            item(.weather, .systemMedium, .aurora, "3366FF"),
             item(.calendar, .systemMedium, .elegant, "F2A33A"),
             item(.tasks, .systemMedium, .light, "2F8F7A"),
             item(.spendingByCategory, .systemMedium, .light, "FF6B57"),
@@ -173,7 +169,6 @@ enum StoreShowcase {
             item(.todaysWorkout, .systemMedium, .dark, "F2A33A"),
             item(.worldClock, .systemMedium, .minimal, "3366FF", "world-minimal"),
             item(.progress, .systemMedium, .retro, "F2A33A", "progress-month-retro"),
-            item(.weeklyForecast, .systemMedium, .glass, "8C6CFF"),
             item(.mealsToday, .systemMedium, .light, "F2A33A"),
             item(.timetable, .systemMedium, .typography, "F2588F"),
             item(.businessKPIs, .systemMedium, .elegant, "F2A33A"),
@@ -183,7 +178,6 @@ enum StoreShowcase {
                         symbol: "square.fill", colorHex: "5B6CFF", items: [
             item(.calendar, .systemLarge, .typography, "FF6B57"),
             item(.myDay, .systemLarge, .glass, "8C6CFF"),
-            item(.weeklyForecast, .systemLarge, .aurora, "3366FF"),
             item(.habitWeek, .systemLarge, .light, "8C6CFF"),
             item(.spendingByCategory, .systemLarge, .dark, "F2A33A"),
             item(.yearDots, .systemLarge, .monochrome, "6B7280"),

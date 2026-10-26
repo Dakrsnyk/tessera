@@ -135,7 +135,7 @@ struct ExploreView: View {
             .sheet(item: $openedPack) { pack in
                 PackSheet(pack: pack)
             }
-            .searchable(text: $query, isPresented: $isSearchPresented, prompt: tr("Écrans, packs, météo, bitcoin…"))
+            .searchable(text: $query, isPresented: $isSearchPresented, prompt: tr("Écrans, packs, lune, bitcoin…"))
             .onAppear(perform: consumeRequests)
             .onChange(of: router.exploreSearchRequested) { _, _ in consumeRequests() }
             .onChange(of: router.openedSetupID) { _, _ in consumeRequests() }

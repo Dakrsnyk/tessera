@@ -22,7 +22,6 @@ extension MiniApp {
         case .business: [.business]
         case .travel: []
         case .car: [.car]
-        case .weather: [.weather]
         case .photos: []
         }
     }
@@ -42,8 +41,7 @@ extension MiniApp {
     var commonSettings: [CommonSetting] {
         switch self {
         case .finances, .business: [.currency]
-        case .travel: [.currency, .temperature]
-        case .weather: [.temperature]
+        case .travel: [.currency]
         case .planning: [.clock]
         default: []
         }
@@ -55,7 +53,7 @@ extension MiniApp {
 
 /// A setting of the whole app shown in the « Mes infos » of the mini-apps that use it.
 enum CommonSetting: Hashable {
-    case currency, temperature, clock
+    case currency, clock
 }
 
 /// The end of a mini-app screen: one button, « Mes paramètres », that opens what the mini-app uses (the same
@@ -169,15 +167,6 @@ struct MiniAppInfoEditors: View {
             }
             .pickerStyle(.segmented)
             .accessibilityIdentifier("info-currency")
-        case .temperature:
-            Picker(tr("Unité de température"), selection: Binding(
-                get: { model.settings.temperatureUnit },
-                set: { unit in model.updateSettings { $0.temperatureUnit = unit } }
-            )) {
-                ForEach(TemperatureUnit.allCases) { Text($0.title).tag($0) }
-            }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("weather-unit")
         case .clock:
             Toggle(tr("Heure sur 24 h"), isOn: Binding(
                 get: { model.settings.uses24HourClock },

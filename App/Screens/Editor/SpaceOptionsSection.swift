@@ -101,8 +101,6 @@ struct SpaceOptionsSection: View {
                     : tr("Calculé sur ton iPhone à partir de tes données, sans jamais inventer de chiffre. Avec Apple Intelligence (iOS 26), le texte est reformulé plus naturellement.")
             }
             return tr("Ce tableau réunit plusieurs espaces et change selon ce que tu y notes.")
-        case .weather:
-            return tr("Données Open-Meteo pour la ville choisie dans Réglages.")
         case .investing, .markets:
             return tr("À titre informatif, pas un conseil financier.")
         case .nutrition:

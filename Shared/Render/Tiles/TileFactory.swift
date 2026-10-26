@@ -7,7 +7,6 @@ enum TileFactory {
         let kind = context.design.kind
         switch kind.category {
         case .time: return TimeTiles.make(context)
-        case .weather: return WeatherTiles.make(context)
         case .productivity, .wellbeing: return ProductivityTiles.make(context)
         case .nutrition: return NutritionTiles.make(context)
         case .fitness: return FitnessTiles.make(context)
@@ -108,29 +107,5 @@ enum TF {
 
     static func shortName(_ name: String, words: Int = 2) -> String {
         name.split(separator: " ").prefix(words).joined(separator: " ")
-    }
-
-    static func weather(_ payload: WidgetPayload) -> WeatherSnapshot? {
-        switch payload.weather {
-        case let .ready(snapshot): return snapshot
-        case let .unavailable(snapshot): return snapshot
-        case .needsLocation: return nil
-        }
-    }
-
-    static func compass(_ degrees: Double) -> String {
-        let names = [tr("N"), tr("NE"), tr("E"), tr("SE"), tr("S"), tr("SO"), tr("O"), tr("NO")]
-        let index = Int(((degrees.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360) / 45).rounded()) % 8
-        return names[index]
-    }
-
-    static func uvLevel(_ uv: Double) -> String {
-        switch uv {
-        case ..<3: return tr("faible")
-        case 3..<6: return tr("modéré")
-        case 6..<8: return tr("élevé")
-        case 8..<11: return tr("très élevé")
-        default: return tr("extrême")
-        }
     }
 }

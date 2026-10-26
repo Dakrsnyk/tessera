@@ -464,7 +464,7 @@ struct StudioMyStylesPanel: View {
             }
         }
         if model.savedStyles.isEmpty {
-            StudioNote(text: tr("Tes styles apparaîtront ici. Un même style sur la météo, la nutrition et le budget donne un écran d'accueil cohérent."), symbol: "bookmark")
+            StudioNote(text: tr("Tes styles apparaîtront ici. Un même style sur la nutrition, le budget et la forme donne un écran d'accueil cohérent."), symbol: "bookmark")
         } else {
             StudioGroup(title: tr("Mes styles"), detail: "\(model.savedStyles.count)") {
                 VStack(spacing: 0) {

@@ -56,7 +56,6 @@ final class DailyBriefTests: XCTestCase {
 
     private func dayInput(at date: Date) -> DailyBrief.Input {
         var input = DailyBrief.Input(now: date)
-        input.weather = SampleData.weather(now: date)
         let course = Course(name: "Mathématiques")
         input.student.courses = [course]
         input.student.slots = [ClassSlot(courseID: course.id, weekday: 3, startMinute: 14 * 60, endMinute: 15 * 60 + 30, room: "B-204")]
@@ -66,10 +65,9 @@ final class DailyBriefTests: XCTestCase {
         return input
     }
 
-    func testMealsComeFirstThenClassesAndTheWeatherInTheMorning() {
+    func testMealsComeFirstThenClassesInTheMorning() {
         let tiles = DailyBrief.tiles(dayInput(at: wednesday(8)))
         XCTAssertEqual(ids(tiles).prefix(2), ["nutrition", "planning"])
-        XCTAssertFalse(ids(tiles).contains("weather"), "The weather is no longer in Mon Quotidien")
         guard case let .planning(items)? = tiles.first(where: { $0.id == "planning" }) else { return XCTFail() }
         XCTAssertEqual(items.first?.title, "Mathématiques")
         XCTAssertEqual(items.first?.time, "14:00")

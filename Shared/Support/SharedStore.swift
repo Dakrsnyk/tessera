@@ -63,7 +63,7 @@ enum ProvisioningProfile {
 }
 
 enum StoreFile: String {
-    case designs, content, settings, premium, weather, crypto
+    case designs, content, settings, premium, crypto
     // Mini-apps (V2), one file each so a widget writing one domain never touches another.
     case nutrition, fitness, budget, business, portfolio, following, student, travel, car, productivity, life
     // « Mes informations »: what the user said about themselves.
@@ -71,7 +71,7 @@ enum StoreFile: String {
     // « Mes styles »: looks saved by the user to reuse on several widgets.
     case styles
     // Caches filled from the network.
-    case markets, companies, fx, tripWeather, insights
+    case markets, companies, fx, insights
 }
 
 /// A mini-app's saved data. Each type lives in its own file of the shared container.
@@ -182,7 +182,7 @@ final class SharedStore {
     // MARK: Typed access
 
     var designs: [WidgetDesign] {
-        get { read([WidgetDesign].self, from: .designs) ?? [] }
+        get { read(LossyList<WidgetDesign>.self, from: .designs)?.elements ?? [] }
         set { write(newValue, to: .designs) }
     }
 

@@ -145,7 +145,7 @@ enum CompanyService {
                 bestQuarterly = periods(facts, quarterly: true)
             }
         }
-        guard !bestAnnual.isEmpty else { throw WeatherError.decoding }
+        guard !bestAnnual.isEmpty else { throw ServiceError.decoding }
         let income = periods(await concept(cik, taxonomy: "us-gaap", tag: "NetIncomeLoss"), quarterly: false)
         let shares = await concept(cik, taxonomy: "dei", tag: "EntityCommonStockSharesOutstanding")
             .sorted { $0.end < $1.end }.last?.val
@@ -181,7 +181,7 @@ enum CompanyService {
             data = cached
         } else {
             let (fresh, response) = try await URLSession.shared.data(for: request(URL(string: "https://www.sec.gov/files/company_tickers.json")!))
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WeatherError.badResponse }
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ServiceError.badResponse }
             try? fresh.write(to: tickerFile)
             data = fresh
         }

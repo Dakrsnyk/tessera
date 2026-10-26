@@ -41,7 +41,6 @@ enum MiniAppSummary {
         case .business: !model.business.sales.isEmpty
         case .travel: !model.travel.trips.isEmpty
         case .car: !model.car.fills.isEmpty || !model.car.readings.isEmpty
-        case .weather: model.settings.weatherLocation != nil
         case .photos: model.designs.contains { $0.kind.isMadeInItsMiniApp }
         }
     }
@@ -55,7 +54,6 @@ enum MiniAppSummary {
         case .business: [.business]
         case .travel: [.travel]
         case .car: [.car]
-        case .weather: [.weather]
         case .photos: [.design]
         }
     }
@@ -93,9 +91,6 @@ enum MiniAppSummary {
         case .car:
             if let range = CarMath.range(model.car) { return tr("≈ \(Fmt.number(Int(range.km))) km d'autonomie") }
             return CarMath.odometer(model.car).map { tr("\(Fmt.number(Int($0))) km") }
-        case .weather:
-            guard case let .ready(weather) = model.weather else { return nil }
-            return "\(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit)) · \(WeatherCode.description(weather.code))"
         case .photos:
             let count = model.designs.filter { $0.kind.isMadeInItsMiniApp }.count
             return count == 0 ? nil : Fmt.plural(count, tr("widget photo ou citation"), tr("widgets photo ou citation"))
@@ -148,7 +143,7 @@ struct MiniAppsRow: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
-                    ForEach(order.shown.isEmpty ? [MiniApp.planning, .weather] : order.shown) { app in
+                    ForEach(order.shown.isEmpty ? [MiniApp.planning, .nutrition] : order.shown) { app in
                         NavigationLink(value: HomeRoute.app(app)) {
                             chip(app, caption: MiniAppSummary.caption(app, model, now: now))
                         }

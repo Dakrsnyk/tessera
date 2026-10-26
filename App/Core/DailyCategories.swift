@@ -5,8 +5,8 @@ import Foundation
 /// card with one figure from their data, or an invitation to fill them in. Nothing is made up.
 @MainActor
 enum DailyCategories {
-    /// The mini-apps that can be put in Mon Quotidien (the weather and the photos stay out of it).
-    static var choices: [MiniApp] { MiniApp.allCases.filter { $0 != .weather && $0 != .photos } }
+    /// The mini-apps that can be put in Mon Quotidien (the photos stay out of it).
+    static var choices: [MiniApp] { MiniApp.allCases.filter { $0 != .photos } }
 
     /// The cards of Mon Quotidien that already stand for a mini-app.
     static func cardIDs(_ app: MiniApp) -> [String] {
@@ -51,7 +51,7 @@ enum DailyCategories {
         for category in DailyBrief.Category.allCases {
             if let app = category.app, let caption = MiniAppSummary.caption(app, model, now: now) { captions[category] = caption }
         }
-        return DailyBrief.completing(base, weather: input.weather, appCaptions: captions,
+        return DailyBrief.completing(base, appCaptions: captions,
                                      empty: wanted(input: input, settings: model.settings))
     }
 
@@ -75,12 +75,11 @@ enum DailyCategories {
         return MiniApp(rawValue: entry).flatMap { DailyBrief.Category(app: $0) }
     }
 
-    /// The categories shown even without data: the interests chosen in the first form (no cap), the weather
-    /// when it was one of them, and the categories added by hand, in the default order. A category the
+    /// The categories shown even without data: the interests chosen in the first form (no cap)
+    /// and the categories added by hand, in the default order. A category the
     /// person removed is left out of the display later (`DailyBrief.arranged`), whatever it holds.
     static func wanted(input: DailyBrief.Input, settings: AppSettings) -> [DailyBrief.Category] {
         var chosen = Set(input.interests.compactMap(DailyBrief.Category.init(space:)))
-        if input.interestedInWeather { chosen.insert(.weather) }
         chosen.formUnion(added(settings))
         return DailyBrief.Category.defaultOrder.filter(chosen.contains)
     }

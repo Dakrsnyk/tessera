@@ -43,7 +43,7 @@ enum Travel {
     }
 }
 
-/// The Travel mini-app: the week selector, the trip under way or coming (countdown, local time, weather) and
+/// The Travel mini-app: the week selector, the trip under way or coming (countdown, local time) and
 /// the program of the day picked; then what comes next (flight, stay, activity), the budget, the checklist,
 /// the currency and the other trips.
 struct TravelAppView: View {
@@ -68,7 +68,7 @@ struct TravelAppView: View {
                 WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: { date in
                     WeekDayMark(isPlanned: program.contains { DateMath.isSameDay($0.day, date) })
                 })
-                TripHero(trip: trip, weather: model.tripWeather, now: now)
+                TripHero(trip: trip, now: now)
             } else {
                 start
             }
@@ -97,7 +97,6 @@ struct TravelAppView: View {
             }
         }
         .task {
-            await model.refreshTripWeather()
             await model.refreshFX()
         }
         .sheet(item: $sheet) { $0.editor }
@@ -130,7 +129,7 @@ struct TravelAppView: View {
         VStack(alignment: .leading, spacing: 12) {
             Image(systemName: "airplane.departure").font(.system(size: 28)).foregroundStyle(Color(hex: accentHex))
             Text(tr("Ton prochain voyage")).font(.title3.weight(.bold))
-            Text(tr("Ajoute un voyage : compte à rebours, heure et météo sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit."))
+            Text(tr("Ajoute un voyage : compte à rebours, heure sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -308,12 +307,10 @@ struct TravelAppView: View {
 }
 
 /// The trip at a glance, on the band (no card): the place and « EN VOYAGE » in small caps, the day of the trip (or
-/// the countdown) in big, then one line with the local time and the weather there.
+/// the countdown) in big, then one line with the local time there.
 struct TripHero: View {
     let trip: Trip
-    let weather: WeatherSnapshot?
     let now: Date
-    @Environment(AppModel.self) private var model
 
     var body: some View {
         let ongoing = TravelMath.isOngoing(trip, at: now)
@@ -343,15 +340,12 @@ struct TripHero: View {
         }
     }
 
-    /// The dates (before the trip), the local time (when it differs from here) and the weather there.
+    /// The dates (before the trip), the local time (when it differs from here).
     private func caption(ongoing: Bool, at date: Date) -> String? {
         var parts: [String] = []
         if !ongoing { parts.append(Travel.dates(trip)) }
         if TravelMath.offsetHours(trip.timeZone, at: now) != 0 {
             parts.append("\(tr("Heure locale")) \(Fmt.time(date, uses24Hour: true, timeZone: trip.timeZone))")
-        }
-        if let weather {
-            parts.append("\(Fmt.temperature(weather.temperature, unit: model.settings.temperatureUnit)), \(WeatherCode.description(weather.code))")
         }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }

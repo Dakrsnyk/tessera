@@ -73,11 +73,6 @@ struct ProfileView: View {
                     )) {
                         ForEach(HolidayRegion.allCases) { Text($0.title).tag($0) }
                     }
-                    NavigationLink {
-                        WeatherLocationView()
-                    } label: {
-                        LabeledContent(tr("Ville (météo)"), value: model.settings.weatherLocation?.name ?? tr("Aucune"))
-                    }
                 } header: {
                     Text(tr("Mon profil"))
                 } footer: {
@@ -111,9 +106,6 @@ struct ProfileView: View {
                         }
                     }
                     .accessibilityIdentifier("settings-app-icon")
-                    Picker(tr("Température"), selection: settingBinding(\.temperatureUnit)) {
-                        ForEach(TemperatureUnit.allCases) { Text($0.title).tag($0) }
-                    }
                     Toggle(tr("Heure sur 24 h"), isOn: settingBinding(\.uses24HourClock))
                     Picker(tr("Devise (flux d'argent)"), selection: settingBinding(\.currencyCode)) {
                         ForEach(AppSettings.currencies, id: \.self) { Text($0).tag($0) }
@@ -193,7 +185,7 @@ struct ProfileView: View {
                 } footer: {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(tr("Ardane \(appVersion)"))
-                        Text(tr("Météo : Open-Meteo.com (CC BY 4.0). Cours crypto : CoinGecko."))
+                        Text(tr("Cours crypto : CoinGecko."))
                         Text(tr("Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire."))
                     }
                     .padding(.top, 6)

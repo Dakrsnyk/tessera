@@ -146,10 +146,6 @@ enum Fmt {
         return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
     }
 
-    static func temperature(_ celsius: Double, unit: TemperatureUnit) -> String {
-        "\(Int(unit.convert(celsius).rounded()))°"
-    }
-
     static func plural(_ count: Int, _ singular: String, _ plural: String) -> String {
         // French counts 0 and 1 as singular, the other languages only 1.
         let isSingular = Localization.isFrench ? abs(count) <= 1 : abs(count) == 1

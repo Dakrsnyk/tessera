@@ -1,7 +1,7 @@
 import Foundation
 
 /// A part of Ardane where the person keeps their data: one per space, plus the general settings
-/// (city, calendar) the widgets share.
+/// (calendar) the widgets share.
 enum InfoArea: String, CaseIterable, Identifiable {
     case nutrition, fitness, habits, productivity, student, budget, business, investing, markets, travel, car, life, general
 
@@ -36,7 +36,7 @@ enum DataItem: String, CaseIterable, Identifiable {
     case trip
     case carName, carFills, carDeadlines
     case birthday
-    case city, calendar
+    case calendar
 
     var id: String { rawValue }
 
@@ -49,7 +49,7 @@ enum DataItem: String, CaseIterable, Identifiable {
     var style: Style {
         switch self {
         case .kcalTarget, .macroTargets, .weeklyWorkouts, .weight, .stepGoal, .focusGoal,
-             .monthlyBudget, .businessGoal, .carName, .birthday, .city:
+             .monthlyBudget, .businessGoal, .carName, .birthday:
             .value
         case .meals, .expenses, .sales, .carFills:
             .log
@@ -74,7 +74,7 @@ enum DataItem: String, CaseIterable, Identifiable {
         case .trip: .travel
         case .carName, .carFills, .carDeadlines: .car
         case .birthday: .life
-        case .city, .calendar: .general
+        case .calendar: .general
         }
     }
 
@@ -114,7 +114,6 @@ enum DataItem: String, CaseIterable, Identifiable {
         case .carFills: tr("Pleins")
         case .carDeadlines: tr("Échéances auto")
         case .birthday: tr("Anniversaire")
-        case .city: tr("Ville")
         case .calendar: tr("Calendrier")
         }
     }
@@ -155,7 +154,6 @@ enum DataItem: String, CaseIterable, Identifiable {
         case .carFills: "fuelpump"
         case .carDeadlines: "calendar.badge.exclamationmark"
         case .birthday: "gift"
-        case .city: "location"
         case .calendar: "calendar"
         }
     }
@@ -197,7 +195,6 @@ enum DataItem: String, CaseIterable, Identifiable {
         case .carFills: tr("Tes pleins, pour le coût et la consommation.")
         case .carDeadlines: tr("Contrôle technique, assurance, pneus…")
         case .birthday: tr("Pour ton âge et le compte à rebours.")
-        case .city: tr("Pour la météo de tes widgets.")
         case .calendar: tr("Pour afficher tes événements.")
         }
     }
@@ -210,7 +207,7 @@ enum DataItem: String, CaseIterable, Identifiable {
     var isKey: Bool {
         switch self {
         case .kcalTarget, .macroTargets, .routines, .weeklyWorkouts, .weight, .stepGoal, .habits,
-             .tasks, .timetable, .exams, .monthlyBudget, .bills, .businessGoal, .holdings, .trip, .carName, .birthday, .city:
+             .tasks, .timetable, .exams, .monthlyBudget, .bills, .businessGoal, .holdings, .trip, .carName, .birthday:
             true
         default:
             false
@@ -249,7 +246,7 @@ extension AppModel {
 
     /// Key items given, over the key items of the followed areas and the general ones.
     var completion: (filled: Int, total: Int, missing: [DataItem]) {
-        let items = (followedAreas + [.general]).flatMap(\.keyItems).filter { $0 != .city || !followedAreas.isEmpty }
+        let items = (followedAreas + [.general]).flatMap(\.keyItems)
         let missing = items.filter { !isFilled($0) }
         return (items.count - missing.count, items.count, missing)
     }
@@ -267,7 +264,6 @@ extension WidgetKind {
         case .ageProgress: [.birthday]
         // The « Décompte » takes the birthday of « Ma vie » when it is known, but works without it.
         case .birthday: []
-        case .weather, .sunCycle, .rainNext, .windUV, .weatherDetails, .weeklyForecast: [.city]
         case .upNext: [.calendar]
         case .tasks: [.tasks]
         case .habits, .habitStreak, .habitWeek, .habitRate: [.habits]
@@ -298,12 +294,12 @@ extension WidgetKind {
         case .assignments: [.assignments]
         case .gradeAverage: [.grades]
         case .flashcard: [.flashcards]
-        case .tripCountdown, .flight, .hotel, .destinationWeather, .localTime, .currency, .tripProgress, .nextActivity: [.trip]
+        case .tripCountdown, .flight, .hotel, .localTime, .currency, .tripProgress, .nextActivity: [.trip]
         case .carCost, .mileage, .fuelStats, .nextService: [.carName, .carFills]
         case .carDeadlines: [.carDeadlines]
-        case .myDay: [.city, .calendar, .tasks, .kcalTarget]
-        case .now: [.city, .tasks, .kcalTarget, .routines, .monthlyBudget]
-        case .morning: [.city, .calendar, .priorities]
+        case .myDay: [.calendar, .tasks, .kcalTarget]
+        case .now: [.tasks, .kcalTarget, .routines, .monthlyBudget]
+        case .morning: [.calendar, .priorities]
         case .fitnessDashboard: [.routines, .kcalTarget]
         case .moneyDashboard: [.monthlyBudget, .expenses]
         case .studentDashboard: [.timetable, .exams]
@@ -376,7 +372,6 @@ extension AppModel {
         case .carFills: !car.fills.isEmpty
         case .carDeadlines: !car.deadlines.isEmpty
         case .birthday: life.birthday != nil
-        case .city: settings.weatherLocation != nil
         case .calendar: CalendarService.hasAccess
         }
     }
@@ -435,7 +430,6 @@ extension AppModel {
         case .carFills: return Fmt.plural(car.fills.count, tr("plein"), tr("pleins"))
         case .carDeadlines: return Fmt.plural(car.deadlines.count, tr("échéance"), tr("échéances"))
         case .birthday: return life.birthday.map { Fmt.format($0, template: "dMMMM") }
-        case .city: return settings.weatherLocation?.name
         case .calendar: return tr("Accès autorisé")
         }
     }

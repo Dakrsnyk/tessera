@@ -98,11 +98,6 @@ enum TemplateCatalog {
         WidgetTemplate(id: "note-reminder", name: tr("Pense-bête"), kind: .note, themeID: .minimal, accentHex: "F2A33A",
                        configure: .note(title: tr("À ne pas oublier"), text: tr("Rappeler maman dimanche."))),
 
-        // Météo
-        WidgetTemplate(id: "weather-minimal", name: tr("Météo"), kind: .weather, themeID: .minimal, accentHex: "3366FF", isFeatured: true),
-        WidgetTemplate(id: "weather-aurora", name: tr("Ciel aurore"), kind: .weather, themeID: .aurora, accentHex: "3366FF"),
-        WidgetTemplate(id: "weather-glass", name: tr("Météo verre"), kind: .weather, themeID: .glass, accentHex: "8C6CFF"),
-
         // Finances
         WidgetTemplate(id: "crypto-dark", name: tr("Bitcoin"), kind: .crypto, themeID: .dark, accentHex: "F2A33A", isFeatured: true,
                        configure: .coin("bitcoin")),
@@ -153,7 +148,7 @@ enum TemplateCatalog {
     private static func autoAccent(_ category: WidgetCategory) -> String {
         switch category {
         case .time, .finance: "2F8F7A"
-        case .weather, .productivity, .markets, .travel: "3366FF"
+        case .productivity, .markets, .travel: "3366FF"
         case .wellbeing: "7FA33A"
         case .nutrition, .fitness: "FF6B57"
         case .investing, .dashboards: "8C6CFF"

@@ -759,7 +759,7 @@ struct MarketingFitness: View {
 /// Mon Quotidien: the whole day on one screen.
 struct MarketingDaily: View {
     var body: some View {
-        MarketingShowcase(eyebrow: tr("Mon Quotidien"), title: tr("Ta journée,\nen un écran."), subtitle: tr("Repas, séance, eau, pas, météo.")) {
+        MarketingShowcase(eyebrow: tr("Mon Quotidien"), title: tr("Ta journée,\nen un écran."), subtitle: tr("Repas, séance, eau, pas, budget.")) {
             MarketingFloating(kind: .habitStreak, theme: .aurora, accent: "3366FF", width: 140)
                 .rotationEffect(.degrees(-6))
                 .at(10, 690)
@@ -847,7 +847,7 @@ struct MarketingApps: View {
         (.business, tr("Ventes, objectifs, MRR")),
         (.travel, tr("Programme, budget, valise")),
         (.car, tr("Plein, entretien, échéances")),
-        (.weather, tr("Prévisions, pluie, soleil")),
+        (.photos, tr("Photos, collages, citations")),
     ]
 
     var body: some View {
@@ -905,7 +905,7 @@ struct MarketingWall: View {
             MarketingHeadline(eyebrow: tr("Widgets"), title: tr("Plus de 100\nwidgets."), subtitle: tr("Écran d'accueil et écran verrouillé."))
                 .padding(.top, 58)
             VStack(spacing: 12) {
-                MarketingFloating(kind: .weather, family: .systemMedium, theme: .aurora, width: wide)
+                MarketingFloating(kind: .upNext, family: .systemMedium, theme: .aurora, width: wide)
                 HStack(spacing: 12) {
                     MarketingFloating(kind: .caloriesLeft, theme: .glass, accent: "8C6CFF", width: small)
                     MarketingFloating(kind: .nextClass, theme: .retro, accent: "F2588F", width: small)

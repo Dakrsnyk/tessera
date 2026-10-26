@@ -6,53 +6,18 @@ enum SampleData {
     static func fill(_ payload: inout WidgetPayload, for kind: WidgetKind, now: Date) {
         let needs = DataNeeds.needs(for: kind)
         payload.domains = domains(now: now, ongoingTrip: ongoingTripKinds.contains(kind))
-        if needs.contains(.weather) { payload.weather = .ready(weather(now: now)) }
         if needs.contains(.events) { payload.events = events(now: now) }
         if needs.contains(.content) { payload.content = content(now: now) }
     }
 
-    private static let ongoingTripKinds: Set<WidgetKind> = [.tripProgress, .nextActivity, .hotel, .localTime, .destinationWeather, .currency]
+    private static let ongoingTripKinds: Set<WidgetKind> = [.tripProgress, .nextActivity, .hotel, .localTime, .currency]
 
     private static func day(_ offset: Int, _ hour: Int = 12, _ minute: Int = 0, from now: Date) -> Date {
         let start = DateMath.calendar.date(byAdding: .day, value: offset, to: DateMath.startOfDay(now)) ?? now
         return start.addingTimeInterval(TimeInterval(hour * 3600 + minute * 60))
     }
 
-    // MARK: Weather, events, content
-
-    static func weather(now: Date, name: String = tr("Montréal"), shift: Double = 0) -> WeatherSnapshot {
-        let startHour = DateMath.calendar.dateInterval(of: .hour, for: now)?.start ?? now
-        let rain = [0, 0, 5, 10, 20, 45, 70, 60, 35, 15, 5, 0, 0, 0, 10, 20, 30, 20, 10, 5, 0, 0, 0, 0]
-        let hours = (0..<24).map { (offset: Int) -> HourForecast in
-            let date = startHour.addingTimeInterval(Double(offset) * 3600)
-            let hour = DateMath.calendar.component(.hour, from: date)
-            let isDay = hour >= 7 && hour < 19
-            let temperature = 14 + shift + 5 * sin(Double(hour - 9) / 24 * 2 * Double.pi)
-            var forecast = HourForecast(date: date, temperature: temperature, code: rain[offset] > 40 ? 61 : (offset < 4 ? 1 : 3), isDay: isDay)
-            forecast.precipitationProbability = rain[offset]
-            forecast.uvIndex = isDay ? max(0, 6 - abs(Double(hour - 13))) : 0
-            return forecast
-        }
-        let codes = [1, 3, 61, 0, 2, 80, 1]
-        let days = (0..<7).map { (offset: Int) -> DayForecast in
-            var forecast = DayForecast(date: day(offset, 0, from: now), code: codes[offset], high: 20 + shift + Double(offset % 3), low: 10 + shift + Double(offset % 2))
-            forecast.sunrise = day(offset, 6, 52 + offset, from: now)
-            forecast.sunset = day(offset, 18, 41 - 2 * offset, from: now)
-            forecast.precipitationProbability = [10, 30, 80, 5, 20, 60, 10][offset]
-            forecast.uvMax = [5.0, 4, 2, 6, 5, 3, 5][offset]
-            return forecast
-        }
-        var snapshot = WeatherSnapshot(
-            locationName: name, latitude: 45.5, longitude: -73.57, fetchedAt: now,
-            temperature: 15 + shift, apparentTemperature: 14 + shift, code: 1, isDay: true, windSpeed: 14,
-            high: 20 + shift, low: 10 + shift, hourly: hours, daily: days
-        )
-        snapshot.humidity = 62
-        snapshot.pressure = 1016
-        snapshot.windDirection = 250
-        snapshot.windGusts = 31
-        return snapshot
-    }
+    // MARK: Events, content
 
     static func events(now: Date) -> EventsResult {
         .ready([
@@ -111,7 +76,6 @@ enum SampleData {
         data.stocks = ["EXMP": StockQuote(symbol: "EXMP", price: 186.40, changePercent: 1.3, fetchedAt: now)]
         data.student = student(now: now)
         data.travel = travel(now: now, ongoing: ongoingTrip)
-        data.tripWeather = weather(now: now, name: tr("Lisbonne"), shift: 6)
         data.fx = FXRates(base: "CAD", rates: ["EUR": 0.66, "USD": 0.73, "GBP": 0.55, "JPY": 106.2, "CHF": 0.62, "MXN": 13.4], day: DateMath.dayKey(now), fetchedAt: now)
         data.car = car(now: now)
         data.productivity = productivity(now: now)

@@ -45,6 +45,5 @@ struct LockScreenMore: WidgetBundle {
         BusinessLockWidget()
         TravelLockWidget()
         CarLockWidget()
-        WeatherLockWidget()
     }
 }

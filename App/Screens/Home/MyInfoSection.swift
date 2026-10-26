@@ -55,8 +55,6 @@ extension AppModel {
         case .car:
             add("name", "car", tr("Voiture"), profile.knows(.carName) ? car.name : nil)
             add("km", "gauge.with.dots.needle.33percent", tr("Compteur"), CarMath.odometer(car).map { tr("\(TF.int($0)) km") })
-        case .weather:
-            add("city", "location", tr("Ville"), settings.weatherLocation?.name)
         case .wellbeing:
             add("habits", "repeat", tr("Habitudes"), content.habits.isEmpty ? nil : Fmt.number(content.habits.count))
         }
@@ -81,8 +79,6 @@ extension AppModel {
             answered = [!profile.studyField.trimmed.isEmpty, profile.weeklyStudyHours != nil]
         case .car:
             answered = [profile.knows(.carName), CarMath.odometer(car) != nil]
-        case .weather:
-            answered = [settings.weatherLocation != nil]
         case .wellbeing:
             answered = [!content.habits.isEmpty]
         }
@@ -92,7 +88,7 @@ extension AppModel {
     /// The topics « Mes informations » shows: the user's interests first, then any topic they gave values for.
     var infoTopics: [ProfileTopic] {
         let chosen = profile.topics
-        let others = ProfileTopic.allCases.filter { !chosen.contains($0) && !facts(for: $0).isEmpty && $0 != .weather }
+        let others = ProfileTopic.allCases.filter { !chosen.contains($0) && !facts(for: $0).isEmpty }
         return chosen + others
     }
 

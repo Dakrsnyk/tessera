@@ -15,7 +15,6 @@ struct DomainData: Hashable {
     var stocks: [String: StockQuote] = [:]
     var student = StudentState()
     var travel = TravelState()
-    var tripWeather: WeatherSnapshot?
     var fx: FXRates?
     var car = CarState()
     var productivity = ProductivityState()
@@ -32,9 +31,9 @@ struct DomainData: Hashable {
 }
 
 enum DataNeed: Hashable {
-    case content, weather, crypto, events
+    case content, crypto, events
     case nutrition, fitness, budget, business, portfolio, quotes, global, companies
-    case student, travel, tripWeather, fx, car, productivity, life, insights
+    case student, travel, fx, car, productivity, life, insights
 }
 
 enum DataNeeds {
@@ -46,8 +45,6 @@ enum DataNeeds {
             return [.life]
         case .tasks, .habits, .focus, .hydration, .moneyFlow, .habitStreak, .habitWeek, .habitRate:
             return [.content]
-        case .weather, .sunCycle, .rainNext, .windUV, .weatherDetails, .weeklyForecast:
-            return [.weather]
         case .crypto:
             return [.crypto]
         case .upNext:
@@ -76,18 +73,16 @@ enum DataNeeds {
             return [.student]
         case .tripCountdown, .flight, .hotel, .localTime, .tripProgress, .nextActivity:
             return [.travel]
-        case .destinationWeather:
-            return [.travel, .tripWeather]
         case .currency:
             return [.travel, .fx]
         case .carCost, .nextService, .mileage, .fuelStats, .carDeadlines:
             return [.car]
         case .myDay:
-            return [.weather, .events, .content, .nutrition, .productivity]
+            return [.events, .content, .nutrition, .productivity]
         case .now:
-            return [.weather, .events, .content, .productivity, .nutrition, .fitness, .budget]
+            return [.events, .content, .productivity, .nutrition, .fitness, .budget]
         case .morning:
-            return [.weather, .events, .productivity, .content, .budget]
+            return [.events, .productivity, .content, .budget]
         case .fitnessDashboard:
             return [.fitness, .nutrition]
         case .moneyDashboard:
@@ -95,7 +90,7 @@ enum DataNeeds {
         case .studentDashboard:
             return [.student]
         case .aiSummary:
-            return [.weather, .events, .content, .productivity, .nutrition, .budget, .fitness, .insights]
+            return [.events, .content, .productivity, .nutrition, .budget, .fitness, .insights]
         case .aiNutrition:
             return [.nutrition, .insights]
         case .aiFinance:
@@ -148,11 +143,8 @@ extension PayloadLoader {
                 data.stocks = await MarketService.stockQuotes(refs.map(\.ticker), allowNetwork: allowNetwork, now: now)
             }
         }
-        if needs.contains(.travel) || needs.contains(.tripWeather) || needs.contains(.fx) {
+        if needs.contains(.travel) || needs.contains(.fx) {
             data.travel = store.state(TravelState.self)
-        }
-        if needs.contains(.tripWeather), let trip = TravelMath.currentTrip(data.travel, at: now) {
-            data.tripWeather = await TripWeatherService.load(for: trip, allowNetwork: allowNetwork, now: now)
         }
         if needs.contains(.fx) {
             data.fx = await FXService.rates(base: payload.settings.currencyCode, allowNetwork: allowNetwork, now: now)

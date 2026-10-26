@@ -70,7 +70,7 @@ Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS
 | Identifiants (si tu changes de préfixe) | `PRODUCT_BUNDLE_IDENTIFIER` des 2 cibles, `APP_GROUP_ID`, fichiers `Config/*.entitlements` | Si `com.dakrsnyk.ardane` est déjà pris (App Group : `group.com.dakrsnyk.tessera`) |
 | Fiche de l'app | App Store Connect > Mes apps | Avant la soumission |
 | Contrats, banque, fiscalité | App Store Connect > Accords | Obligatoire pour vendre |
-| **Abonnements** : groupe « Ardane Premium » avec `com.dakrsnyk.tessera.premium.monthly` (1 mois) et `…premium.yearly` (1 an, essai gratuit 1 semaine) | App Store Connect > Abonnements | Avant la soumission |
+| **Abonnements** : groupe « Ardane Premium » avec `com.dakrsnyk.tessera.premium.monthly` (1 mois) et `…premium.yearly` (1 an), tous deux avec un essai gratuit de 7 jours | App Store Connect > Abonnements | Avant la soumission |
 | **Achat unique** : `com.dakrsnyk.tessera.premium.lifetime` (non consommable) | App Store Connect > Achats intégrés | Avant la soumission |
 | Adresse de support | `App/Premium/PremiumConfiguration.swift` (`supportEmail`) | Avant la soumission |
 | Politique de confidentialité | Page « Confidentialité Ardane » (lien déjà dans l'app) : la rendre publique via son menu Partager | Avant la soumission |
@@ -102,7 +102,7 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 « Mes mini-apps » sur l'accueil propose celles qui ont des données ou touchent un centre d'intérêt, les plus ouvertes d'abord, avec un chiffre du moment ; les autres sont dans « Toutes ».
 
-**103 widgets** (30 gratuits, 73 Premium), chacun en plusieurs tailles, beaucoup aussi sur l'écran verrouillé. Dans la galerie d'iOS, ils apparaissent sous forme de 15 widgets d'origine et de 15 widgets thématiques (Nutrition, Fitness, Budget…). On choisit ensuite le widget précis avec « Modifier le widget ».
+**103 widgets**, chacun en plusieurs tailles, beaucoup aussi sur l'écran verrouillé. Dans la galerie d'iOS, ils apparaissent sous forme de 15 widgets d'origine et de 15 widgets thématiques (Nutrition, Fitness, Budget…). On choisit ensuite le widget précis avec « Modifier le widget ».
 
 | Catégorie | Gratuits | Premium |
 |---|---|---|
@@ -166,8 +166,8 @@ Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfigu
 
 Tout est enregistré avec le widget : on peut le modifier plus tard, le dupliquer ou « Créer une variante » (Mes widgets), changer ses données sans perdre le design et l'inverse. Ce qu'iOS ne permet pas n'est pas promis : un widget ne peut pas être vraiment transparent (le Verre et les dégradés sont dessinés), iOS dessine lui-même le contour du widget (bordures et ombres s'appliquent à l'intérieur), l'écran verrouillé est d'une seule teinte, et seules les polices système s'affichent dans les widgets. Les dispositions et graphiques s'appliquent aux widgets de données ; l'horloge, le calendrier, la météo et les autres widgets d'origine gardent leur mise en page et prennent tout le reste du look.
 
-**Gratuit** : 30 widgets, 8 styles, 8 couleurs principales (qui repeignent tout le widget), densité, 3 widgets enregistrés (photos et citations illimitées), 5 habitudes. Les palettes, couleurs une à une, dégradés personnels, textures et bordures sont Premium (on peut les essayer dans le Studio).
-**Premium** : tout, sans limite. Mensuel, annuel (essai 7 jours) ou à vie.
+**Gratuit** : 3 widgets créés au plus (plusieurs types possibles tant que le total reste 3 ; photos et citations illimitées), 5 habitudes.
+**Premium** : tout, sans limite. Mensuel ou annuel (essai gratuit de 7 jours), ou à vie.
 
 ### Architecture
 
@@ -226,8 +226,7 @@ Config/    Info.plist, entitlements, configuration StoreKit locale
 - [ ] Toucher un widget ouvre le bon écran de l'app
 
 **Gratuit / Premium**
-- [ ] En gratuit : un style Premium s'essaie dans l'éditeur, l'enregistrement ouvre l'offre
-- [ ] En gratuit : limite de 5 widgets et 3 habitudes
+- [ ] En gratuit : limite de 3 widgets et 5 habitudes
 - [ ] Un widget Premium posé en gratuit affiche « Premium, touche pour débloquer »
 - [ ] Achat mensuel, annuel (essai), à vie (Mac + fichier StoreKit, ou TestFlight)
 - [ ] « Restaurer les achats » dans Réglages et dans l'offre

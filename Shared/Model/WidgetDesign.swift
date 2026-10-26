@@ -122,7 +122,14 @@ struct WidgetDesign: Codable, Identifiable, Hashable {
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = try c.decode(UUID.self, forKey: .id)
-        kind = try c.decode(WidgetKind.self, forKey: .kind)
+        if let decoded = try? c.decode(WidgetKind.self, forKey: .kind) {
+            kind = decoded
+        } else if let first = (try? c.decodeIfPresent(DesignOptions.self, forKey: .options))?.parts.first {
+            // A combination led by a widget of a removed kind (the weather) takes its first remaining widget's kind.
+            kind = first.kind
+        } else {
+            kind = try c.decode(WidgetKind.self, forKey: .kind)
+        }
         name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? kind.title
         themeID = (try? c.decodeIfPresent(ThemeID.self, forKey: .themeID)) ?? .minimal
         accentHex = (try? c.decodeIfPresent(String.self, forKey: .accentHex)) ?? Palette.defaultAccent

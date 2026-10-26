@@ -35,7 +35,6 @@ final class AppModel {
     private(set) var savedStyles: [SavedStyle] = []
 
     // Live data used by previews, refreshed on demand.
-    private(set) var weather: WeatherResult = .needsLocation
     private(set) var crypto: [String: CryptoResult] = [:]
     private(set) var events: EventsResult = .needsAccess
     private(set) var prices = PriceBook()
@@ -44,7 +43,6 @@ final class AppModel {
     private(set) var companies: [Int: CompanyFinancials] = [:]
     private(set) var stocks: [String: StockQuote] = [:]
     private(set) var fx: FXRates?
-    private(set) var tripWeather: WeatherSnapshot?
     private(set) var insights = InsightCache()
 
     @ObservationIgnored private let store: SharedStore
@@ -89,10 +87,6 @@ final class AppModel {
         settings = store.settings
         AppStyle.current = AppStyle.style(settings.appStyle)
         premium = store.premium
-        weather = WeatherService.cached.map { cache -> WeatherResult in
-            guard let location = settings.weatherLocation, cache.matches(location) else { return .needsLocation }
-            return .ready(cache)
-        } ?? (settings.weatherLocation == nil ? .needsLocation : .unavailable(nil))
         events = CalendarService.upcoming(hours: 7 * 24, limit: 12)
         nutrition = store.state(NutritionState.self)
         fitness = store.state(FitnessState.self)
@@ -114,10 +108,6 @@ final class AppModel {
         global = cache.global
         stocks = cache.stocks
         fx = FXService.cached(base: settings.currencyCode)
-        if let trip = TravelMath.currentTrip(travel, at: Date()), let location = trip.location {
-            let stored = store.read(WeatherSnapshot.self, from: .tripWeather)
-            tripWeather = (stored?.matches(location) ?? false) ? stored : nil
-        }
         for ref in following.followed {
             if let cached = CompanyService.cached(ref.cik) { companies[ref.cik] = cached }
         }
@@ -214,7 +204,6 @@ final class AppModel {
         companies = Dictionary(data.companies.map { ($0.ref.cik, $0) }, uniquingKeysWith: { first, _ in first })
         stocks = data.stocks
         fx = data.fx
-        tripWeather = data.tripWeather
     }
     #endif
 
@@ -233,7 +222,6 @@ final class AppModel {
         data.stocks = stocks
         data.student = student
         data.travel = travel
-        data.tripWeather = tripWeather
         data.fx = fx
         data.car = car
         data.productivity = productivity
@@ -467,10 +455,6 @@ final class AppModel {
         store.settings = settings
         // Before any view reads the new settings, so rebuilt screens draw with the new style.
         AppStyle.current = AppStyle.style(settings.appStyle)
-        if before.weatherLocation != settings.weatherLocation {
-            weather = settings.weatherLocation == nil ? .needsLocation : .unavailable(nil)
-            Task { await refreshWeather(force: true) }
-        }
         if before.cryptoCurrency != settings.cryptoCurrency {
             crypto = [:]
         }
@@ -492,19 +476,6 @@ final class AppModel {
     }
 
     // MARK: Live data
-
-    func refreshWeather(force: Bool = false) async {
-        guard let location = settings.weatherLocation else {
-            weather = .needsLocation
-            return
-        }
-        if !force, case let .ready(snapshot) = weather, snapshot.matches(location),
-           Date().timeIntervalSince(snapshot.fetchedAt) < WeatherService.refreshInterval {
-            return
-        }
-        weather = await WeatherService.load(allowNetwork: true)
-        scheduleWidgetReload()
-    }
 
     func refreshCrypto(_ coinID: String) async {
         crypto[coinID] = await CryptoService.load(coinID: coinID, allowNetwork: true)
@@ -535,7 +506,6 @@ final class AppModel {
         var payload = WidgetPayload()
         payload.settings = settings
         payload.content = content
-        payload.weather = weather
         payload.crypto = crypto[design.options.coinID] ?? CryptoService.cached(design.options.coinID, currency: settings.cryptoCurrency).map { CryptoResult.ready($0) } ?? .unavailable(nil)
         payload.events = events
         var data = domains
@@ -556,7 +526,6 @@ final class AppModel {
             return
         }
         let needs = DataNeeds.needs(for: design.kind)
-        if needs.contains(.weather) { await refreshWeather() }
         if needs.contains(.crypto) { await refreshCrypto(design.options.coinID) }
         if needs.contains(.events) { refreshEvents() }
         if needs.contains(.portfolio) || needs.contains(.quotes) || needs.contains(.global) { await refreshMarkets() }
@@ -566,7 +535,6 @@ final class AppModel {
             }
         }
         if needs.contains(.fx) { await refreshFX() }
-        if needs.contains(.tripWeather) { await refreshTripWeather() }
     }
 
     func refreshMarkets() async {
@@ -587,17 +555,11 @@ final class AppModel {
         fx = await FXService.rates(base: settings.currencyCode, allowNetwork: true)
     }
 
-    func refreshTripWeather() async {
-        guard let trip = TravelMath.currentTrip(travel, at: Date()) else { return }
-        tripWeather = await TripWeatherService.load(for: trip, allowNetwork: true)
-    }
-
     /// Asks the on-device model (when available) to phrase the analysis widgets.
     func refreshInsights() async {
         var payload = WidgetPayload()
         payload.settings = settings
         payload.content = content
-        payload.weather = weather
         payload.events = events
         payload.domains = domains
         if await AIPhraser.refresh(payload: payload) {
@@ -685,9 +647,8 @@ final class AppModel {
         store.designs = designs
         store.content = content
         store.settings = settings
-        store.remove(.weather)
         store.remove(.crypto)
-        for file in [StoreFile.nutrition, .fitness, .budget, .business, .portfolio, .following, .student, .travel, .car, .productivity, .life, .markets, .companies, .fx, .tripWeather, .insights] {
+        for file in [StoreFile.nutrition, .fitness, .budget, .business, .portfolio, .following, .student, .travel, .car, .productivity, .life, .markets, .companies, .fx, .insights] {
             store.remove(file)
         }
         // « Mes informations » start over too; the name stays, like the first name.
@@ -708,7 +669,6 @@ final class AppModel {
         productivity = ProductivityState()
         life = LifeState()
         insights = InsightCache()
-        weather = .needsLocation
         crypto = [:]
         NotificationScheduler.cancelAll()
         scheduleWidgetReload()

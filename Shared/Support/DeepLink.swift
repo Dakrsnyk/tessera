@@ -8,7 +8,6 @@ enum DeepLink: Equatable {
     case habits
     case hydration
     case money
-    case weatherLocation
     case calendarAccess
     case explore
     /// A mini-app space (Nutrition, Fitness, Budget…), by its raw value.
@@ -31,7 +30,6 @@ enum DeepLink: Equatable {
         case .habits: components.host = "habits"
         case .hydration: components.host = "hydration"
         case .money: components.host = "money"
-        case .weatherLocation: components.host = "weather"
         case .calendarAccess: components.host = "calendar"
         case .explore: components.host = "explore"
         case let .space(id):
@@ -54,7 +52,6 @@ enum DeepLink: Equatable {
         case "habits": self = .habits
         case "hydration": self = .hydration
         case "money": self = .money
-        case "weather": self = .weatherLocation
         case "calendar": self = .calendarAccess
         case "explore": self = .explore
         case "space":

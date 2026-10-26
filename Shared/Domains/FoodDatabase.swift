@@ -496,7 +496,7 @@ enum OpenFoodFacts {
             URLQueryItem(name: "fields", value: fields),
         ]
         let (data, response) = try await URLSession.shared.data(for: request(components.url!))
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WeatherError.badResponse }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ServiceError.badResponse }
         struct Page: Decodable { let products: [Product]? }
         let page = try JSONDecoder().decode(Page.self, from: data)
         return (page.products ?? []).compactMap { $0.item() }
@@ -523,7 +523,7 @@ enum OpenFoodFacts {
             let (data, response) = try await URLSession.shared.data(for: request(url))
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
             if status == 404 { continue }
-            guard status == 200 else { throw WeatherError.badResponse }
+            guard status == 200 else { throw ServiceError.badResponse }
             guard let product = (try? JSONDecoder().decode(Envelope.self, from: data))?.product else { continue }
             if let food = product.item(barcode: barcode) { return .food(food) }
             if partial == nil, let name = product.name {

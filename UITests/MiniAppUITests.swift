@@ -366,7 +366,7 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertEqual(app.state, .runningForeground)
     }
 
-    // MARK: Travel, Auto, Weather
+    // MARK: Travel, Auto
 
     func testTravelChecksTheListAndOpensTheProgram() {
         launch(["-screenshotScreen", "app-travel"])
@@ -469,14 +469,14 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["lock-workout-preview"].waitForExistence(timeout: 4), "La séance en direct est présentée")
         snapshot("lock-creator")
         turnOn(app.switches["lock-interactive-filter"], "Filtre interactifs")
-        XCTAssertTrue(app.buttons["lock-weather"].waitForNonExistence(timeout: 4), "Le filtre ne garde que les widgets interactifs")
+        XCTAssertTrue(app.buttons["lock-progress"].waitForNonExistence(timeout: 4), "Le filtre ne garde que les widgets interactifs")
         var drags = 0
         while !app.buttons["lock-nextSet"].exists && drags < 10 {
             scrollDownOnce()
             drags += 1
         }
         XCTAssertTrue(app.buttons["lock-nextSet"].exists, "Prochaine série (écran verrouillé) absente")
-        XCTAssertFalse(app.buttons["lock-weather"].exists, "Le filtre ne garde que les widgets interactifs")
+        XCTAssertFalse(app.buttons["lock-progress"].exists, "Le filtre ne garde que les widgets interactifs")
     }
 
     /// Home leads to the mini-apps through « Mon Quotidien »: its Nutrition card opens Nutrition.

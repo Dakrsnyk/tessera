@@ -166,7 +166,6 @@ struct DailyLayoutEditor: View {
         case .habits: (tr("Habitudes"), "repeat", "7FA33A")
         case .steps: (tr("Pas"), "figure.walk", "12A4B5")
         case .budget: (tr("Budget"), "creditcard.fill", "2B9A66")
-        case .weather: (tr("Météo"), "cloud.sun.fill", "3A8DDE")
         case .reminders: (tr("À ne pas oublier"), "bell.fill", "E5484D")
         case .priorities: (tr("Top 3"), "star.fill", "F5A524")
         case .invite: (tr("Mes données"), "plus", "8E8E93")

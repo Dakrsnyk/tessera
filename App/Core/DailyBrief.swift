@@ -3,7 +3,7 @@ import Foundation
 /// « Mon Quotidien »: what matters today, built only from what the person entered. Nothing is
 /// shown for a part of their life they haven't told Ardane about, and never a made-up number:
 /// at most a discreet invitation for one of their interests. The order follows the moment of the
-/// day: the weather and the first class in the morning, tasks and the workout during the day,
+/// day: the first class in the morning, tasks and the workout during the day,
 /// what's left to eat and the habits in the evening.
 enum DailyBrief {
     enum Moment: Equatable {
@@ -38,13 +38,10 @@ enum DailyBrief {
         var productivity = ProductivityState()
         var travel = TravelState()
         var car = CarState()
-        var weather: WeatherSnapshot?
         var events: [EventSnapshot] = []
         var steps: Int?
         /// The spaces of the person's interests, for the invitations and the empty cards.
         var interests: [Space] = []
-        /// The weather was one of the interests (it has no space): its empty card shows from the start.
-        var interestedInWeather = false
         var currency = "CAD"
     }
 
@@ -114,7 +111,7 @@ enum DailyBrief {
     /// The sections Mon Quotidien always offers. Each one's id is the id of its card with data, so a
     /// category keeps its place, its size and its hidden state when it goes from empty to filled.
     enum Category: String, CaseIterable, Identifiable, Hashable {
-        case nutrition, workout, planning, habits, budget, priorities, reminders, steps, weather, business, travel, car
+        case nutrition, workout, planning, habits, budget, priorities, reminders, steps, business, travel, car
 
         /// The order of the empty cards (after the cards with data).
         static let defaultOrder: [Category] = allCases
@@ -163,7 +160,6 @@ enum DailyBrief {
             case .business: self = .business
             case .travel: self = .travel
             case .car: self = .car
-            case .weather: self = .weather
             case .photos: return nil
             }
         }
@@ -196,7 +192,6 @@ enum DailyBrief {
             switch self {
             case .reminders: return tr("À ne pas oublier")
             case .steps: return tr("Pas")
-            case .weather: return tr("Météo")
             default: return app?.title ?? rawValue
             }
         }
@@ -206,7 +201,6 @@ enum DailyBrief {
             switch self {
             case .reminders: return "bell.fill"
             case .steps: return "figure.walk"
-            case .weather: return "cloud.sun.fill"
             default: return app?.symbol ?? "square"
             }
         }
@@ -216,7 +210,6 @@ enum DailyBrief {
             switch self {
             case .reminders: return "4B5563"
             case .steps: return "12A4B5"
-            case .weather: return "3A8DDE"
             default: return app?.colorHex ?? "8E8E93"
             }
         }
@@ -232,7 +225,6 @@ enum DailyBrief {
             case .priorities: tr("Ajoute tes tâches ou ton top 3 du jour.")
             case .reminders: tr("Examens, devoirs, factures, échéances : ce qui approche apparaîtra ici.")
             case .steps: tr("Autorise le compteur de pas : tes pas du jour apparaîtront ici.")
-            case .weather: tr("Choisis ta ville : la météo du moment apparaîtra ici.")
             case .business: tr("Note tes ventes : ton chiffre d'affaires du mois apparaîtra ici.")
             case .travel: tr("Ajoute un voyage : son compte à rebours apparaîtra ici.")
             case .car: tr("Note un plein ou le kilométrage : ta voiture apparaîtra ici.")
@@ -245,7 +237,6 @@ enum DailyBrief {
             switch self {
             case .reminders: return .app(.planning)
             case .steps: return .page(.fitnessActivity)
-            case .weather: return .app(.weather)
             case .business: return .app(.business)
             case .travel: return .app(.travel)
             default: return .app(.car)
@@ -261,7 +252,6 @@ enum DailyBrief {
         case habits(done: Int, items: [Check])
         case steps(steps: Int, goal: Int?)
         case budget(spentToday: Double, perDayLeft: Double?)
-        case weather(WeatherSnapshot)
         case reminders([Reminder])
         case priorities([Check])
         case invite(InfoArea)
@@ -279,7 +269,6 @@ enum DailyBrief {
             case .habits: "habits"
             case .steps: "steps"
             case .budget: "budget"
-            case .weather: "weather"
             case .reminders: "reminders"
             case .priorities: "priorities"
             case let .invite(area): "invite-\(area.rawValue)"
@@ -372,12 +361,12 @@ enum DailyBrief {
         return tiles
     }
 
-    /// What Mon Quotidien holds: the cards with data (`tiles`), then the weather and the figure of the
+    /// What Mon Quotidien holds: the cards with data (`tiles`), then the figure of the
     /// mini-apps without their own card when there is something to show, then an empty dotted card for
     /// each category of `empty` still without data, in the default order. `empty` is what the person
     /// chose (their interests and the categories they added); by default every category. Legacy
     /// invitations are dropped: the empty cards replace them. Never a made-up figure.
-    static func completing(_ tiles: [Tile], weather: WeatherSnapshot?, appCaptions: [Category: String] = [:],
+    static func completing(_ tiles: [Tile], appCaptions: [Category: String] = [:],
                            empty: [Category] = Category.defaultOrder) -> [Tile] {
         var result = tiles.filter { if case .invite = $0 { false } else { true } }
         var ids = Set(result.map(\.id))
@@ -385,7 +374,6 @@ enum DailyBrief {
             guard ids.insert(tile.id).inserted else { return }
             result.append(tile)
         }
-        if let weather { append(.weather(weather)) }
         for category in Category.defaultOrder {
             if let app = category.app, let caption = appCaptions[category] { append(.miniApp(app.rawValue, caption: caption)) }
         }
@@ -607,11 +595,9 @@ extension DailyBrief.Input {
         productivity = model.productivity
         travel = model.travel
         car = model.car
-        if case let .ready(snapshot) = model.weather { weather = snapshot }
         if case let .ready(list) = model.events { events = list }
         self.steps = steps
         interests = model.profile.preferredSpaces
-        interestedInWeather = model.profile.interests.contains(.weather)
         currency = model.settings.currencyCode
     }
 }

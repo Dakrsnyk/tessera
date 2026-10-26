@@ -1,22 +1,5 @@
 import Foundation
 
-enum TemperatureUnit: String, Codable, CaseIterable, Identifiable {
-    case celsius, fahrenheit
-    var id: String { rawValue }
-
-    var title: String { self == .celsius ? tr("Celsius (°C)") : tr("Fahrenheit (°F)") }
-
-    func convert(_ celsius: Double) -> Double {
-        self == .celsius ? celsius : celsius * 9 / 5 + 32
-    }
-}
-
-struct WeatherLocation: Codable, Hashable {
-    var name: String
-    var latitude: Double
-    var longitude: Double
-}
-
 /// The look of the app itself (not of the widgets): an accent and matching backgrounds.
 enum AppStyleID: String, Codable, CaseIterable, Identifiable {
     case tessera, ocean, coral, lavender, sand, graphite, forest, rose, midnight, neon
@@ -61,11 +44,9 @@ enum AppearanceMode: String, Codable, CaseIterable, Identifiable {
 }
 
 struct AppSettings: Codable, Hashable {
-    var temperatureUnit: TemperatureUnit = .celsius
     var uses24HourClock = true
     var currencyCode = "CAD"
     var cryptoCurrency = "usd"
-    var weatherLocation: WeatherLocation?
     var hasCompletedOnboarding = false
     var hydrationReminders = false
     var appStyle: AppStyleID = .tessera
@@ -106,7 +87,7 @@ struct AppSettings: Codable, Hashable {
     var encourages = true
 
     enum CodingKeys: String, CodingKey {
-        case temperatureUnit, uses24HourClock, currencyCode, cryptoCurrency, weatherLocation
+        case uses24HourClock, currencyCode, cryptoCurrency
         case hasCompletedOnboarding, hydrationReminders
         case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
@@ -119,11 +100,9 @@ struct AppSettings: Codable, Hashable {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        temperatureUnit = (try? c.decodeIfPresent(TemperatureUnit.self, forKey: .temperatureUnit)) ?? .celsius
         uses24HourClock = (try? c.decodeIfPresent(Bool.self, forKey: .uses24HourClock)) ?? true
         currencyCode = (try? c.decodeIfPresent(String.self, forKey: .currencyCode)) ?? "CAD"
         cryptoCurrency = (try? c.decodeIfPresent(String.self, forKey: .cryptoCurrency)) ?? "usd"
-        weatherLocation = try? c.decodeIfPresent(WeatherLocation.self, forKey: .weatherLocation)
         hasCompletedOnboarding = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedOnboarding)) ?? false
         hydrationReminders = (try? c.decodeIfPresent(Bool.self, forKey: .hydrationReminders)) ?? false
         appStyle = (try? c.decodeIfPresent(AppStyleID.self, forKey: .appStyle)) ?? .tessera

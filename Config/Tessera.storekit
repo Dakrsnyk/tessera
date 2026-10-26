@@ -38,15 +38,13 @@
           "groupNumber": 2,
           "internalID": "6740000001",
           "introductoryOffer": {
-            "displayPrice": "4.99",
             "internalID": "6740000011",
-            "numberOfPeriods": 3,
-            "paymentMode": "payAsYouGo",
-            "subscriptionPeriod": "P1M"
+            "paymentMode": "free",
+            "subscriptionPeriod": "P1W"
           },
           "localizations": [
             {
-              "description": "Tout Tessera Premium. Offre de bienvenue : 4,99 $ par mois les 3 premiers mois, puis 6,99 $ par mois.",
+              "description": "Tout Tessera Premium, chaque mois. 7 jours gratuits pour commencer.",
               "displayName": "Premium mensuel",
               "locale": "fr_CA"
             }
@@ -64,10 +62,14 @@
           "familyShareable": true,
           "groupNumber": 1,
           "internalID": "6740000002",
-          "introductoryOffer": null,
+          "introductoryOffer": {
+            "internalID": "6740000012",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P1W"
+          },
           "localizations": [
             {
-              "description": "Tout Tessera Premium pendant un an.",
+              "description": "Tout Tessera Premium pendant un an. 7 jours gratuits pour commencer.",
               "displayName": "Premium annuel",
               "locale": "fr_CA"
             }

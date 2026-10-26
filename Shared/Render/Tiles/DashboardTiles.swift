@@ -17,12 +17,6 @@ enum DashboardTiles {
 
     // MARK: Building blocks
 
-    static func weatherRow(_ context: RenderContext) -> TileRow? {
-        guard let weather = TF.weather(context.payload) else { return nil }
-        let unit = context.settings.temperatureUnit
-        return TileRow(id: "weather", title: "\(Fmt.temperature(weather.temperature, unit: unit)) · \(WeatherCode.description(weather.code))", value: "↑\(Fmt.temperature(weather.high, unit: unit)) ↓\(Fmt.temperature(weather.low, unit: unit))", symbol: WeatherCode.symbol(weather.code, isDay: weather.isDay))
-    }
-
     static func eventRow(_ context: RenderContext) -> TileRow? {
         guard case let .ready(events) = context.payload.events, let next = events.first(where: { $0.end > context.date }) else { return nil }
         let time = next.isAllDay ? tr("Journée") : TF.time(next.start, context)
@@ -87,7 +81,7 @@ enum DashboardTiles {
         let now = context.date
         var tile = Tile(title: tr("Ma journée"), symbol: "sun.horizon")
         tile.value = Fmt.format(now, template: "EEEEd").capitalizedFirst
-        tile.caption = TF.weather(context.payload).map { "\(Fmt.temperature($0.temperature, unit: context.settings.temperatureUnit)) · \(WeatherCode.description($0.code).lowercased()) à \($0.locationName)" } ?? Fmt.monthYear(now)
+        tile.caption = Fmt.monthYear(now)
         tile.detail = tr("\(Fmt.percent(DateMath.progress(of: .day, at: now))) de la journée écoulée")
         tile.rows = [eventRow(context), tasksRow(context), caloriesRow(context), habitsRow(context)].compactMap { $0 }
         return tile
@@ -112,13 +106,8 @@ enum DashboardTiles {
         switch Moment(date) {
         case .morning:
             var tile = Tile(title: tr("Ce matin"), symbol: "sunrise")
-            if let weather = TF.weather(context.payload) {
-                tile.value = Fmt.temperature(weather.temperature, unit: context.settings.temperatureUnit)
-                tile.caption = WeatherCode.description(weather.code)
-            } else {
-                tile.value = TF.time(date, context)
-                tile.caption = Fmt.longDay(date)
-            }
+            tile.value = TF.time(date, context)
+            tile.caption = Fmt.longDay(date)
             let priorities = prioritiesRows(context)
             var rows: [TileRow] = []
             if let event = eventRow(context) { rows.append(event) }
@@ -172,17 +161,8 @@ enum DashboardTiles {
     static func morning(_ context: RenderContext) -> Tile {
         let now = context.date
         var tile = Tile(title: tr("Ce matin"), symbol: "sunrise")
-        if let weather = TF.weather(context.payload) {
-            let unit = context.settings.temperatureUnit
-            tile.value = Fmt.temperature(weather.temperature, unit: unit)
-            tile.caption = "\(WeatherCode.description(weather.code)) · ↑\(Fmt.temperature(weather.high, unit: unit))"
-            if let rain = weather.day(for: now)?.precipitationProbability, rain >= 40 {
-                tile.detail = tr("Prends un parapluie (\(rain) % de pluie)")
-            }
-        } else {
-            tile.value = Fmt.format(now, template: "EEEEd").capitalizedFirst
-            tile.caption = tr("Bonne journée")
-        }
+        tile.value = Fmt.format(now, template: "EEEEd").capitalizedFirst
+        tile.caption = tr("Bonne journée")
         var rows: [TileRow] = []
         if let event = eventRow(context) { rows.append(event) }
         rows.append(contentsOf: prioritiesRows(context))

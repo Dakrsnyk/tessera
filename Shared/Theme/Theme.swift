@@ -735,7 +735,7 @@ struct ResolvedStyle {
     var showsDetails: Bool
     /// Text color readable on top of `accent`.
     var onAccent: Color
-    /// Multicolor SF Symbols (weather) only look right on neutral backgrounds.
+    /// Multicolor SF Symbols only look right on neutral backgrounds.
     var prefersMulticolorSymbols: Bool
     /// Every Studio setting, the style's own values under the person's.
     var options: StyleOptions

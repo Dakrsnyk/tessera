@@ -95,7 +95,3 @@ struct TravelLockWidget: Widget {
 struct CarLockWidget: Widget {
     var body: some WidgetConfiguration { lockConfiguration(.car, title: tr("Auto")) }
 }
-
-struct WeatherLockWidget: Widget {
-    var body: some WidgetConfiguration { lockConfiguration(.weather) }
-}

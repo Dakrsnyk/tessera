@@ -112,7 +112,6 @@ struct KindContentView: View {
         case .focus: FocusWidgetView(context: context)
         case .upNext: UpNextWidgetView(context: context)
         case .note: NoteWidgetView(context: context)
-        case .weather: WeatherWidgetView(context: context)
         case .crypto: CryptoWidgetView(context: context)
         case .moneyFlow: MoneyFlowWidgetView(context: context)
         default: TileView(tile: TileFactory.make(context), context: context)
@@ -165,12 +164,8 @@ enum WidgetLinks {
         case .tasks: return DeepLink.tasks.url
         case .habits: return DeepLink.habits.url
         case .moneyFlow: return DeepLink.money.url
-        case .weather:
-            if case .needsLocation = payload.weather { return DeepLink.weatherLocation.url }
         case .upNext:
             if case .needsAccess = payload.events { return DeepLink.calendarAccess.url }
-        case .sunCycle, .rainNext, .windUV, .weatherDetails, .weeklyForecast, .myDay, .morning, .now:
-            if case .needsLocation = payload.weather { return DeepLink.weatherLocation.url }
         default:
             break
         }

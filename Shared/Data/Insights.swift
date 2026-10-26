@@ -201,11 +201,6 @@ enum InsightEngine {
         var facts: [String] = []
         var parts: [String] = []
         let settings = payload.settings
-        if case let .ready(weather) = payload.weather {
-            let line = "\(weather.locationName) : \(Fmt.temperature(weather.temperature, unit: settings.temperatureUnit)), \(WeatherCode.description(weather.code).lowercased())"
-            facts.append(line)
-            parts.append(tr("\(Fmt.temperature(weather.temperature, unit: settings.temperatureUnit)) et \(WeatherCode.description(weather.code).lowercased()) à \(weather.locationName)"))
-        }
         if case let .ready(events) = payload.events, let next = events.first(where: { $0.end > now }) {
             let time = next.isAllDay ? tr("toute la journée") : "à \(Fmt.time(next.start, uses24Hour: settings.uses24HourClock))"
             facts.append(tr("Prochain : \(next.title) \(time)"))
@@ -230,7 +225,7 @@ enum InsightEngine {
         }
         let text: String
         if parts.isEmpty {
-            text = tr("Ajoute ta ville, tes tâches ou tes repas dans Ardane pour voir ta journée résumée ici.")
+            text = tr("Ajoute tes tâches ou tes repas dans Ardane pour voir ta journée résumée ici.")
         } else {
             let first = parts[0].capitalizedFirst
             let rest = parts.dropFirst().joined(separator: ", ")

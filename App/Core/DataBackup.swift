@@ -82,7 +82,7 @@ enum DataBackup {
 
     private static func decodes(_ file: StoreFile, _ data: Data, store: SharedStore) -> Bool {
         switch file {
-        case .designs: store.decodes([WidgetDesign].self, data)
+        case .designs: store.decodes(LossyList<WidgetDesign>.self, data)
         case .content: store.decodes(ContentState.self, data)
         case .settings: store.decodes(AppSettings.self, data)
         case .nutrition: store.decodes(NutritionState.self, data)

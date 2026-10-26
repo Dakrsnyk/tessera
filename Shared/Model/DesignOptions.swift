@@ -96,7 +96,8 @@ struct DesignOptions: Codable, Hashable {
         showsCompletedTasks = (try? c.decodeIfPresent(Bool.self, forKey: .showsCompletedTasks)) ?? d.showsCompletedTasks
         clockShowsDate = (try? c.decodeIfPresent(Bool.self, forKey: .clockShowsDate)) ?? d.clockShowsDate
         targetID = (try? c.decodeIfPresent(String.self, forKey: .targetID)) ?? nil
-        parts = (try? c.decodeIfPresent([ComboPart].self, forKey: .parts)) ?? []
+        // A widget of a removed kind is left out of the combination, the others stay.
+        parts = (try? c.decodeIfPresent(LossyList<ComboPart>.self, forKey: .parts))?.elements ?? []
         photos = (try? c.decodeIfPresent([PhotoSlot].self, forKey: .photos)) ?? []
         quote = (try? c.decodeIfPresent(QuoteContent.self, forKey: .quote)) ?? nil
     }

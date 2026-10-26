@@ -71,7 +71,7 @@ enum ScreenshotMode {
             // « Mon Quotidien » with every card swiped to its second view.
             router.tab = .home
             model.updateSettings { settings in
-                for card in ["nutrition", "workout", "steps", "weather"] { settings.dailyCardPages[card] = 1 }
+                for card in ["nutrition", "workout", "steps"] { settings.dailyCardPages[card] = 1 }
             }
         case "spaces-lock":
             router.tab = .spaces
@@ -296,9 +296,8 @@ enum ScreenshotMode {
         guard model.designs.isEmpty else { return }
         model.updateSettings {
             $0.hasCompletedOnboarding = true
-            $0.weatherLocation = WeatherLocation(name: tr("Montréal"), latitude: 45.5019, longitude: -73.5674)
         }
-        for id in ["progress-year", "tasks-minimal", "weather-aurora", "habits-dark", "countdown-holidays", "money-net"] {
+        for id in ["progress-year", "tasks-minimal", "upnext-elegant", "habits-dark", "countdown-holidays", "money-net"] {
             model.save(TemplateCatalog.design(id))
         }
         // Widgets made in a space at each size, and merged ones.

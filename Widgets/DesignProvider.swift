@@ -117,8 +117,6 @@ enum TimelinePlanner {
             }
             let unique = Array(Set(dates)).sorted().filter { $0 < midnight.addingTimeInterval(86_400) }
             return Plan(dates: unique, policy: .after(min(midnight, now.addingTimeInterval(60 * 60))))
-        case .weather:
-            return Plan(dates: [now], policy: .after(now.addingTimeInterval(WeatherService.refreshInterval)))
         case .crypto:
             // When iOS puts off the reload, a second frame drawn once the price is old says when it was read.
             let old = now.addingTimeInterval(2 * LivePrices.reloadInterval + 60)
@@ -147,10 +145,8 @@ enum TimelinePlanner {
             var dates = [now]
             if let rest = payload.domains.fitness.active?.restEndsAt, rest > now { dates.append(rest) }
             return Plan(dates: dates, policy: .after(min(halfHour, midnight)))
-        case .deadline, .nextClass, .timetable, .studentDashboard, .flight, .nextActivity, .now, .myDay, .morning, .sunCycle:
+        case .deadline, .nextClass, .timetable, .studentDashboard, .flight, .nextActivity, .now, .myDay, .morning:
             return Plan(dates: every(15, count: 4), policy: .after(now.addingTimeInterval(60 * 60)))
-        case .rainNext, .windUV, .weatherDetails, .weeklyForecast, .destinationWeather:
-            return Plan(dates: [now], policy: .after(now.addingTimeInterval(WeatherService.refreshInterval)))
         case .portfolio, .allocation, .topMover, .watchlist, .marketOverview, .companyStock:
             // Prices: as often as iOS allows (see `LivePrices.reloadInterval`).
             return Plan(dates: [now], policy: .after(now.addingTimeInterval(LivePrices.reloadInterval)))

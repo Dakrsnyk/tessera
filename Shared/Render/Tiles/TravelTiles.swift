@@ -10,7 +10,6 @@ enum TravelTiles {
         case .tripCountdown: return countdown(data.travel, now: now)
         case .flight: return flight(data.travel, context: context)
         case .hotel: return hotel(data.travel, context: context)
-        case .destinationWeather: return destinationWeather(data, context: context)
         case .localTime: return localTime(data.travel, context: context)
         case .currency: return currency(data, context: context)
         case .tripProgress: return progress(data.travel, now: now)
@@ -103,30 +102,6 @@ enum TravelTiles {
         }
         tile.rows = rows
         tile.inline = stay.name
-        return tile
-    }
-
-    static func destinationWeather(_ data: DomainData, context: RenderContext) -> Tile {
-        let now = context.date
-        let unit = context.settings.temperatureUnit
-        guard let trip = TravelMath.currentTrip(data.travel, at: now) else {
-            return .empty(tr("Météo à destination"), symbol: "cloud.sun.rain", message: hint)
-        }
-        guard let weather = data.tripWeather else {
-            let message = trip.location == nil ? tr("Choisis la ville de destination dans l'espace Voyage.") : tr("La météo s'affiche dès que la connexion est disponible.")
-            return .empty(trip.destination, symbol: "cloud.sun.rain", message: message)
-        }
-        var tile = Tile(title: trip.destination, symbol: WeatherCode.symbol(weather.code, isDay: weather.isDay))
-        tile.value = Fmt.temperature(weather.temperature, unit: unit)
-        tile.caption = WeatherCode.description(weather.code)
-        let tripDays = weather.daily.filter { $0.date >= DateMath.startOfDay(trip.start) && $0.date <= trip.end }
-        let shown = tripDays.isEmpty ? Array(weather.daily.prefix(5)) : Array(tripDays.prefix(6))
-        tile.detail = tripDays.isEmpty ? tr("Maintenant sur place · prévisions du séjour 7 jours avant") : tr("Prévisions pendant ton séjour")
-        tile.rows = shown.map { day in
-            TileRow(id: DateMath.dayKey(day.date), title: Fmt.format(day.date, template: "EEEd").capitalizedFirst, value: "\(Fmt.temperature(day.high, unit: unit)) / \(Fmt.temperature(day.low, unit: unit))", symbol: WeatherCode.symbol(day.code))
-        }
-        tile.footnote = "Open-Meteo.com"
-        tile.inline = "\(trip.destination) \(Fmt.temperature(weather.temperature, unit: unit))"
         return tile
     }
 

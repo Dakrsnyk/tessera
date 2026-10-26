@@ -53,9 +53,9 @@ final class PermissionTests: XCTestCase {
 
     func testMarkingTwiceKeepsOneEntry() {
         let defaults = temporaryDefaults()
-        PermissionMemory.markExplained(.location, defaults: defaults)
-        PermissionMemory.markExplained(.location, defaults: defaults)
-        XCTAssertEqual(defaults.stringArray(forKey: PermissionMemory.key), [AppPermission.location.rawValue])
+        PermissionMemory.markExplained(.motion, defaults: defaults)
+        PermissionMemory.markExplained(.motion, defaults: defaults)
+        XCTAssertEqual(defaults.stringArray(forKey: PermissionMemory.key), [AppPermission.motion.rawValue])
     }
 
     func testFullFlowAsksOnceThenDirectly() {

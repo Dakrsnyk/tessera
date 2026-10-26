@@ -8,7 +8,7 @@ import Foundation
 /// What the user is interested in, picked at the first launch. It decides which questions are asked and
 /// what Ardane puts forward first, never what it hides.
 enum Interest: String, Codable, CaseIterable, Identifiable {
-    case sport, nutrition, finance, budget, business, studies, productivity, travel, car, weather, design, wellbeing
+    case sport, nutrition, finance, budget, business, studies, productivity, travel, car, design, wellbeing
 
     var id: String { rawValue }
 
@@ -23,7 +23,6 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .productivity: tr("Productivité")
         case .travel: tr("Voyage")
         case .car: tr("Automobile")
-        case .weather: tr("Météo")
         case .design: tr("Design")
         case .wellbeing: tr("Bien-être")
         }
@@ -40,7 +39,6 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .productivity: "checklist"
         case .travel: "airplane"
         case .car: "car.fill"
-        case .weather: "cloud.sun.fill"
         case .design: "paintpalette.fill"
         case .wellbeing: "heart.fill"
         }
@@ -57,7 +55,6 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .productivity: "6B7280"
         case .travel: "12A4B5"
         case .car: "4B5563"
-        case .weather: "3B82F6"
         case .design: "E0567A"
         case .wellbeing: "7FA33A"
         }
@@ -75,7 +72,6 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .productivity: [.productivity]
         case .travel: [.travel]
         case .car: [.car]
-        case .weather: []
         case .design: []
         case .wellbeing: [.habits, .life]
         }
@@ -93,7 +89,6 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .productivity: [.productivity]
         case .travel: [.travel]
         case .car: [.car]
-        case .weather: [.weather]
         case .design: [.time]
         case .wellbeing: [.wellbeing]
         }
@@ -109,7 +104,6 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .studies: .studies
         case .productivity: .productivity
         case .car: .car
-        case .weather: .weather
         case .wellbeing: .wellbeing
         case .travel, .design: nil
         }
@@ -118,7 +112,7 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
 
 /// A group of personal information: one page of questions, one card of « Mes informations ».
 enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
-    case sport, nutrition, money, business, productivity, studies, car, weather, wellbeing
+    case sport, nutrition, money, business, productivity, studies, car, wellbeing
 
     var id: String { rawValue }
 
@@ -131,7 +125,6 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
         case .productivity: tr("Productivité")
         case .studies: tr("Études")
         case .car: tr("Automobile")
-        case .weather: tr("Météo")
         case .wellbeing: tr("Bien-être")
         }
     }
@@ -145,7 +138,6 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
         case .productivity: "checklist"
         case .studies: "graduationcap.fill"
         case .car: "car.fill"
-        case .weather: "cloud.sun.fill"
         case .wellbeing: "heart.fill"
         }
     }
@@ -159,7 +151,6 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
         case .productivity: "6B7280"
         case .studies: "D6409F"
         case .car: "4B5563"
-        case .weather: "3B82F6"
         case .wellbeing: "7FA33A"
         }
     }
@@ -174,7 +165,6 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
         case .productivity: tr("Ce que tu veux accomplir, pour des widgets qui t'y ramènent.")
         case .studies: tr("Ton programme et ton rythme de travail.")
         case .car: tr("Ta voiture et son kilométrage, pour suivre pleins et entretiens.")
-        case .weather: tr("Ta ville, pour la météo de tes widgets.")
         case .wellbeing: tr("Une première habitude à suivre.")
         }
     }

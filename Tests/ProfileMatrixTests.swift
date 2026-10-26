@@ -86,8 +86,7 @@ final class ProfileMatrixTests: XCTestCase {
         model.update(\.budget) { $0.add(Expense(amount: 12, categoryID: nil, date: now)) }
     }
 
-    /// Every interest and every answer the « À remplir » blocks ask for, except the weather city (setting it
-    /// starts a network refresh, which a logic test must not do).
+    /// Every interest and every answer the « À remplir » blocks ask for.
     private func fillComplete(_ model: AppModel) {
         let now = self.now
         model.update(\.profile) {
@@ -178,7 +177,7 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertEqual(emptyCategories(shown), [.workout], "The sport interest waits for a program")
         XCTAssertTrue(shown.prefix(3).allSatisfy { !isEmptyCard($0) }, "Cards with data first")
         XCTAssertEqual(DailyCategories.addable(shown: shown),
-                       [.planning, .priorities, .reminders, .steps, .weather, .business, .travel, .car],
+                       [.planning, .priorities, .reminders, .steps, .business, .travel, .car],
                        "Everything not shown is in the « + », in the default order")
         guard case let .nutrition(nutrition)? = shown.first else { return XCTFail("The calorie target gives the nutrition card") }
         XCTAssertTrue(nutrition.knowsKcal)
@@ -192,13 +191,12 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertNil(perDay, "No monthly budget given: no « per day » figure")
     }
 
-    func testCompleteProfileShowsEveryCategoryWithItsDataAndOnlyTheWeatherWaitsForACity() throws {
+    func testCompleteProfileShowsEveryCategoryWithItsData() throws {
         let model = makeModel(.complete)
         let shown = tiles(model, steps: 4_000)
         XCTAssertEqual(Set(ids(shown)), Set(DailyBrief.Category.allCases.map(\.tileID)))
         XCTAssertEqual(shown.count, DailyBrief.Category.allCases.count, "Each category once")
-        XCTAssertEqual(emptyCategories(shown), [.weather], "The weather is an interest and has no city: its card stays empty")
-        XCTAssertEqual(ids(shown).last, "weather", "The empty card comes after the cards with data")
+        XCTAssertTrue(emptyCategories(shown).isEmpty, "Everything is given: no dotted card")
         XCTAssertTrue(DailyCategories.addable(shown: shown).isEmpty, "Everything is there: no « + »")
         // The most pressing first: the class and the exam of the day, then the rest by what matters at this hour.
         XCTAssertEqual(Array(ids(shown).prefix(2)), ["planning", "reminders"])
@@ -225,7 +223,7 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertEqual(counts[0], DailyBrief.Category.allCases.count, "Empty: every category is a dotted card")
         XCTAssertLessThan(counts[1], counts[0])
         XCTAssertLessThan(counts[2], counts[1])
-        XCTAssertEqual(counts[2], 1, "Complete: only the weather, which needs a city")
+        XCTAssertEqual(counts[2], 0, "Complete: no dotted card left")
     }
 
     // MARK: - (b) « À remplir »
@@ -249,7 +247,6 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertEqual(model.toFillItems(in: .business), [.businessGoal])
         XCTAssertEqual(model.toFillItems(in: .travel), [.trip])
         XCTAssertEqual(model.toFillItems(in: .car), [.carName])
-        XCTAssertEqual(model.toFillItems(in: .weather), [.city])
         XCTAssertEqual(model.toFillProgress(in: .nutrition).filled, 1)
         XCTAssertEqual(model.toFillProgress(in: .nutrition).total, 2)
         XCTAssertEqual(model.toFillProgress(in: .fitness).filled, 1)
@@ -258,14 +255,13 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertEqual(model.toFillProgress(in: .finances).filled, 0)
     }
 
-    func testCompleteProfileHasNothingLeftToFillButTheWeatherCity() {
+    func testCompleteProfileHasNothingLeftToFill() {
         let model = makeModel(.complete)
-        for app in asking where app != .weather {
+        for app in asking {
             XCTAssertTrue(model.toFillItems(in: app).isEmpty, "\(app.rawValue) has \(model.toFillItems(in: app)) left")
             let progress = model.toFillProgress(in: app)
             XCTAssertEqual(progress.filled, progress.total, app.rawValue)
         }
-        XCTAssertEqual(model.toFillItems(in: .weather), [.city])
     }
 
     func testTheCardsToFillShrinkFromEmptyToPartialToComplete() {
@@ -276,7 +272,7 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertEqual(counts[0], MiniApp.allCases.reduce(0) { $0 + $1.toFillItems.count })
         XCTAssertLessThan(counts[1], counts[0])
         XCTAssertLessThan(counts[2], counts[1])
-        XCTAssertEqual(counts[2], 1, "Only the weather city")
+        XCTAssertEqual(counts[2], 0, "Nothing left to fill")
         // A mini-app never has more given than it has cards, and a profile never loses an answer going up.
         for app in asking {
             let filled = Level.allCases.map { makeModel($0).toFillProgress(in: app).filled }
@@ -291,7 +287,7 @@ final class ProfileMatrixTests: XCTestCase {
         let expected: [DailyBrief.Category: HomeRoute] = [
             .nutrition: .app(.nutrition), .workout: .app(.fitness), .planning: .app(.planning),
             .habits: .app(.planning), .budget: .app(.finances), .priorities: .app(.planning),
-            .reminders: .app(.planning), .steps: .page(.fitnessActivity), .weather: .app(.weather),
+            .reminders: .app(.planning), .steps: .page(.fitnessActivity),
             .business: .app(.business), .travel: .app(.travel), .car: .app(.car)
         ]
         XCTAssertEqual(Set(expected.keys), Set(DailyBrief.Category.allCases))
@@ -343,7 +339,7 @@ final class ProfileMatrixTests: XCTestCase {
         // Complete: what no mini-app block shows never picks a mini-app, and never the old page.
         let complete = makeModel(.complete)
         XCTAssertEqual(complete.firstMissingInfoRoute, .info)
-        let outside: Set<DataItem> = [.holdings, .tasks, .bills, .city]
+        let outside: Set<DataItem> = [.holdings, .tasks, .bills]
         XCTAssertTrue(Set(complete.completion.missing).isSubset(of: outside), "Missing: \(complete.completion.missing)")
         for level in Level.allCases {
             if case .infoArea = makeModel(level).firstMissingInfoRoute { XCTFail("\(level) opens the old page") }
@@ -616,7 +612,7 @@ final class ProfileMatrixTests: XCTestCase {
             addEveryCategory(model)
             model.updateSettings {
                 $0.profileName = "Léa"
-                DailyCategories.remove(tileID: "weather", in: &$0)
+                DailyCategories.remove(tileID: "steps", in: &$0)
             }
             let settings = try JSONDecoder().decode(AppSettings.self, from: JSONEncoder().encode(model.settings))
             XCTAssertEqual(settings, model.settings, "\(level): AppSettings")
@@ -633,17 +629,15 @@ final class ProfileMatrixTests: XCTestCase {
         var settings = AppSettings()
         settings.profileName = "Léa"
         settings.currencyCode = "EUR"
-        settings.temperatureUnit = .fahrenheit
         settings.uses24HourClock = false
         settings.appearance = .dark
         settings.hasCompletedOnboarding = true
         settings.hasCompletedProfileSetup = true
         settings.hasSeenTutorial = true
-        settings.weatherLocation = WeatherLocation(name: "Montréal", latitude: 45.5, longitude: -73.6)
         settings.dailyOrder = ["budget", "nutrition"]
         settings.dailyHidden = ["habits", "app-car"]
         settings.dailyWide = ["nutrition": true, "steps": false]
-        settings.dailyAdded = ["cat-weather", "quick-productivity"]
+        settings.dailyAdded = ["cat-steps", "quick-productivity"]
         settings.dailyCardPages = ["nutrition": 1]
         settings.remindsWorkout = false
         settings.workoutReminderHour = 7
@@ -665,7 +659,10 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertTrue(settings.dailyAdded.isEmpty)
         XCTAssertTrue(settings.encourages)
         XCTAssertTrue(settings.remindsWorkout)
-        XCTAssertNil(settings.weatherLocation)
+        // Settings saved while the weather existed: its city and unit are ignored, everything else is kept.
+        let weather = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"profileName":"Léa","temperatureUnit":"fahrenheit","weatherLocation":{"name":"Montréal","latitude":45.5,"longitude":-73.6},"currencyCode":"EUR"}"#.utf8))
+        XCTAssertEqual(weather.profileName, "Léa")
+        XCTAssertEqual(weather.currencyCode, "EUR")
         let fresh = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"profileName":"Léa"}"#.utf8))
         XCTAssertFalse(fresh.hasSeenTutorial)
         // A value out of shape (a style a newer version added) doesn't lose the rest.

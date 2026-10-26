@@ -144,7 +144,7 @@ struct TripEditor: View {
             Section {
                 TextField(tr("Destination"), text: $trip.destination)
                 HStack {
-                    TextField(tr("Chercher la ville (météo et fuseau)"), text: $query)
+                    TextField(tr("Chercher la ville (fuseau et devise)"), text: $query)
                         .onSubmit { Task { results = await DestinationSearch.search(query) } }
                     Button(tr("Chercher")) { Task { results = await DestinationSearch.search(query) } }
                         .disabled(query.trimmed.count < 2)
@@ -160,7 +160,7 @@ struct TripEditor: View {
                     }
                 }
                 if trip.latitude != nil {
-                    Label(tr("Ville trouvée : météo et heure locale activées"), systemImage: "checkmark.circle.fill")
+                    Label(tr("Ville trouvée : heure locale activée"), systemImage: "checkmark.circle.fill")
                         .font(.footnote)
                         .foregroundStyle(.green)
                 }
@@ -193,7 +193,6 @@ struct TripEditor: View {
         model.update(\.travel) { state in
             if let index = state.trips.firstIndex(where: { $0.id == saved.id }) { state.trips[index] = saved } else { state.trips.append(saved) }
         }
-        Task { await model.refreshTripWeather() }
     }
 }
 

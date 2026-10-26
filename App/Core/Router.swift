@@ -31,7 +31,7 @@ enum StorePage: Hashable {
 }
 
 enum ContentScreen: String, Identifiable {
-    case tasks, habits, money, weather, calendar, reminders
+    case tasks, habits, money, calendar, reminders
     var id: String { rawValue }
 }
 
@@ -158,7 +158,6 @@ final class Router {
         // The water mini-app was removed: an old water widget opens Home.
         case .hydration: tab = .home
         case .money: content = .money
-        case .weatherLocation: content = .weather
         case .calendarAccess: content = .calendar
         case .explore, .store: tab = .explore
         case .scanFood: isFoodScanPresented = true

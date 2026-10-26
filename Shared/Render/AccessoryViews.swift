@@ -10,7 +10,6 @@ struct AccessoryWidgetView: View {
         switch context.design.kind {
         case .progress: progress
         case .countdown: countdown
-        case .weather: weather
         case .tasks: tasks
         case .focus: focus
         case .upNext: upNext
@@ -96,46 +95,6 @@ struct AccessoryWidgetView: View {
             }
         default:
             Text(info.isToday ? tr("\(title) · aujourd'hui") : "\(title) · \(Fmt.number(info.days)) j")
-        }
-    }
-
-    // MARK: Weather
-
-    @ViewBuilder private var weather: some View {
-        switch context.payload.weather {
-        case let .ready(w): weatherContent(w)
-        case let .unavailable(.some(w)): weatherContent(w)
-        default: Label(tr("Météo"), systemImage: "location.slash")
-        }
-    }
-
-    @ViewBuilder private func weatherContent(_ w: WeatherSnapshot) -> some View {
-        let unit = context.settings.temperatureUnit
-        switch family {
-        case .accessoryCircular:
-            ZStack {
-                AccessoryWidgetBackground()
-                VStack(spacing: 0) {
-                    Image(systemName: WeatherCode.symbol(w.code, isDay: w.isDay))
-                        .font(.system(size: 16))
-                    Text(Fmt.temperature(w.temperature, unit: unit))
-                        .font(.system(size: 17, weight: .semibold, design: .rounded))
-                }
-                .widgetAccentable()
-            }
-        case .accessoryRectangular:
-            VStack(alignment: .leading, spacing: 1) {
-                Text(w.locationName)
-                    .font(.headline)
-                    .lineLimit(1)
-                    .widgetAccentable()
-                Label(Fmt.temperature(w.temperature, unit: unit) + " " + WeatherCode.description(w.code), systemImage: WeatherCode.symbol(w.code, isDay: w.isDay))
-                    .lineLimit(1)
-                Text("↑\(Fmt.temperature(w.high, unit: unit)) ↓\(Fmt.temperature(w.low, unit: unit))")
-                    .font(.caption)
-            }
-        default:
-            Label(Fmt.temperature(w.temperature, unit: unit) + " " + WeatherCode.description(w.code), systemImage: WeatherCode.symbol(w.code, isDay: w.isDay))
         }
     }
 

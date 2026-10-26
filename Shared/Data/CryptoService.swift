@@ -89,10 +89,10 @@ enum CryptoService {
         }
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
-            throw WeatherError.badResponse
+            throw ServiceError.badResponse
         }
         let markets = try JSONDecoder().decode([Market].self, from: data)
-        guard let market = markets.first else { throw WeatherError.decoding }
+        guard let market = markets.first else { throw ServiceError.decoding }
         let coin = Self.info(coinID)
         return CoinSnapshot(
             id: coinID,

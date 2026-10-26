@@ -276,7 +276,7 @@ enum MarketService {
             URLQueryItem(name: "price_change_percentage", value: "24h"),
         ]
         let (data, response) = try await URLSession.shared.data(for: request(components.url!))
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WeatherError.badResponse }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ServiceError.badResponse }
         struct Row: Decodable {
             let id: String
             let symbol: String
@@ -291,7 +291,7 @@ enum MarketService {
 
     private static func fetchGlobal(now: Date) async throws -> MarketGlobal {
         let (data, response) = try await URLSession.shared.data(for: request(URL(string: "https://api.coingecko.com/api/v3/global")!))
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WeatherError.badResponse }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ServiceError.badResponse }
         struct Payload: Decodable {
             struct Inner: Decodable {
                 let total_market_cap: [String: Double]
@@ -317,9 +317,9 @@ enum MarketService {
         var req = URLRequest(url: components.url!)
         req.timeoutInterval = 12
         let (data, response) = try await URLSession.shared.data(for: req)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WeatherError.badResponse }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ServiceError.badResponse }
         let quote = try JSONDecoder().decode(FinnhubQuote.self, from: data)
-        guard let parsed = quote.stockQuote(symbol, fetchedAt: now) else { throw WeatherError.decoding }
+        guard let parsed = quote.stockQuote(symbol, fetchedAt: now) else { throw ServiceError.decoding }
         return parsed
     }
 }

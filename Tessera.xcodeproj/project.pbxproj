@@ -406,7 +406,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OPEN_METEO_API_KEY = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -443,7 +442,6 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OPEN_METEO_API_KEY = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
@@ -474,7 +472,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Ardane affiche tes prochains rendez-vous dans le widget À venir et dans Planning. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier ton plat. L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Ardane lit tes pas, ta distance et tes étages avec le capteur de ton iPhone, pour Mon Quotidien et Fitness. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ardane enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -520,7 +517,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Ardane affiche tes prochains rendez-vous dans le widget À venir et dans Planning. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier ton plat. L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Ta position sert uniquement à trouver la météo de ta ville.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Ardane lit tes pas, ta distance et tes étages avec le capteur de ton iPhone, pour Mon Quotidien et Fitness. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ardane enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

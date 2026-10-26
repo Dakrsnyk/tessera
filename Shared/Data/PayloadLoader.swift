@@ -4,7 +4,6 @@ import Foundation
 struct WidgetPayload: Hashable {
     var settings = AppSettings()
     var content = ContentState()
-    var weather: WeatherResult = .needsLocation
     var crypto: CryptoResult = .unavailable(nil)
     var events: EventsResult = .ready([])
     var domains = DomainData()
@@ -21,9 +20,6 @@ enum PayloadLoader {
         let parts = design.partDesigns
         if needs.contains(.content) {
             payload.content = store.content
-        }
-        if needs.contains(.weather) {
-            payload.weather = await WeatherService.load(allowNetwork: allowNetwork, now: now)
         }
         if needs.contains(.crypto) {
             let coinID = (parts.first { DataNeeds.needs(for: $0.kind).contains(.crypto) } ?? design).options.coinID
@@ -50,7 +46,6 @@ enum SamplePayload {
         var hasDomains = !ownSamples.contains(lead.kind)
         for part in design.partDesigns.dropFirst() {
             let other = make(for: part.kind, coinID: part.options.coinID, now: now)
-            if case .ready = other.weather { payload.weather = other.weather }
             if case let .ready(events) = other.events, !events.isEmpty { payload.events = other.events }
             if case .ready = other.crypto { payload.crypto = other.crypto }
             if !hasDomains, !ownSamples.contains(part.kind) {
@@ -67,7 +62,7 @@ enum SamplePayload {
     }
 
     /// Kinds with a sample of their own below; every other kind gets the full sample data of the spaces.
-    private static let ownSamples: Set<WidgetKind> = [.tasks, .habits, .hydration, .focus, .moneyFlow, .weather, .crypto, .upNext]
+    private static let ownSamples: Set<WidgetKind> = [.tasks, .habits, .hydration, .focus, .moneyFlow, .crypto, .upNext]
 
     static func make(for kind: WidgetKind, coinID: String = "bitcoin", now: Date = Date()) -> WidgetPayload {
         var payload = WidgetPayload()
@@ -102,8 +97,6 @@ enum SamplePayload {
                 ],
                 startDate: DateMath.calendar.date(byAdding: .day, value: -12, to: now) ?? now
             )
-        case .weather:
-            payload.weather = .ready(SampleData.weather(now: now))
         case .crypto:
             let coin = CryptoService.info(coinID)
             let base: Double = samplePrices[coin.id] ?? 100

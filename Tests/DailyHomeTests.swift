@@ -30,7 +30,7 @@ final class DailyHomeTests: XCTestCase {
     /// What Home builds from an input and the settings (the pure part of `DailyCategories.home`).
     private func home(_ input: DailyBrief.Input, settings: AppSettings = AppSettings(),
                       captions: [DailyBrief.Category: String] = [:]) -> [DailyBrief.Tile] {
-        DailyBrief.completing(DailyBrief.tiles(input), weather: input.weather, appCaptions: captions,
+        DailyBrief.completing(DailyBrief.tiles(input), appCaptions: captions,
                               empty: DailyCategories.wanted(input: input, settings: settings))
     }
 
@@ -76,7 +76,6 @@ final class DailyHomeTests: XCTestCase {
         input.budget.expenses = [Expense(amount: 12, categoryID: nil, date: input.now)]
         input.productivity.addQuickTask("Appeler", on: input.now)
         input.steps = 4_000
-        input.weather = SampleData.weather(now: input.now)
         return input
     }
 
@@ -91,7 +90,7 @@ final class DailyHomeTests: XCTestCase {
             XCTAssertFalse(category.invitation.isEmpty, "\(category) says what to give")
         }
         XCTAssertEqual(Set(DailyBrief.Category.allCases), [.nutrition, .workout, .planning, .habits, .budget, .priorities,
-                                                           .reminders, .steps, .weather, .business, .travel, .car])
+                                                           .reminders, .steps, .business, .travel, .car])
     }
 
     func testTheInterestsOfTheFirstFormShowTheirEmptyCardsWithoutAnyCap() {
@@ -104,14 +103,6 @@ final class DailyHomeTests: XCTestCase {
         input.interests = [.student, .habits, .productivity, .business, .travel, .car, .investing, .markets, .life]
         XCTAssertEqual(ids(home(input)), ["planning", "habits", "priorities", "app-business", "app-travel", "app-car"],
                        "More than two at once; the spaces without a card add none")
-    }
-
-    func testTheWeatherInterestShowsItsEmptyCardAndNothingElseDoes() {
-        var input = emptyInput()
-        XCTAssertTrue(home(input).isEmpty)
-        input.interestedInWeather = true
-        XCTAssertEqual(ids(home(input)), ["weather"])
-        XCTAssertTrue(isInvitation(home(input)[0]))
     }
 
     func testTheCardsWithDataAreAlwaysThereAndTheInterestsComeAfterThem() {
@@ -133,7 +124,6 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertEqual(Set(ids(tiles)), Set(allIDs))
         XCTAssertEqual(tiles.count, allIDs.count)
         XCTAssertTrue(tiles.contains(.miniApp("travel", caption: "Rome · J-12")), "Voyage, Auto and Business show their figure")
-        XCTAssertTrue(ids(tiles).contains("weather"))
         XCTAssertTrue(DailyCategories.addable(shown: tiles).isEmpty, "Everything is there: no « + »")
     }
 
@@ -143,12 +133,15 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertEqual(empty, Set(allIDs))
     }
 
-    func testTheWeatherOnlyShowsWithRealWeatherOrTheInterest() {
-        XCTAssertFalse(ids(home(emptyInput())).contains("weather"))
-        XCTAssertTrue(isInvitation(home(emptyInput(), settings: everything).first { $0.id == "weather" }!))
-        var input = emptyInput()
-        input.weather = SampleData.weather(now: input.now)
-        guard case .weather? = home(input).first(where: { $0.id == "weather" }) else { return XCTFail("The weather card") }
+    func testTheRemovedWeatherLeavesNoCardAndOldEntriesAreIgnored() throws {
+        XCTAssertFalse(allIDs.contains("weather"), "The weather is no longer a category of Mon Quotidien")
+        // Saved by a version that still had the weather: its card, its « + » entry and its interest are ignored.
+        let json = #"{"dailyOrder":["weather","nutrition"],"dailyHidden":["weather"],"dailyAdded":["cat-weather","weather","cat-steps"],"dailyCardPages":{"weather":1}}"#
+        let old = try JSONDecoder().decode(AppSettings.self, from: Data(json.utf8))
+        XCTAssertEqual(DailyCategories.added(old), [.steps], "Only the categories that still exist")
+        let tiles = onScreen(emptyInput(), settings: old)
+        XCTAssertFalse(ids(tiles).contains("weather"))
+        XCTAssertEqual(ids(tiles), ["steps"])
     }
 
     func testAppModelStartsWithNothingAndFollowsTheInterests() {
@@ -280,7 +273,7 @@ final class DailyHomeTests: XCTestCase {
         let expected: [DailyBrief.Category: HomeRoute] = [
             .nutrition: .app(.nutrition), .workout: .app(.fitness), .planning: .app(.planning),
             .habits: .app(.planning), .budget: .app(.finances), .priorities: .app(.planning),
-            .reminders: .app(.planning), .steps: .page(.fitnessActivity), .weather: .app(.weather),
+            .reminders: .app(.planning), .steps: .page(.fitnessActivity),
             .business: .app(.business), .travel: .app(.travel), .car: .app(.car)
         ]
         XCTAssertEqual(Set(expected.keys), Set(DailyBrief.Category.allCases), "Every category has a destination")
@@ -362,7 +355,6 @@ final class DailyHomeTests: XCTestCase {
         let arranged = DailyBrief.arranged(home(emptyInput(), settings: everything), order: order, hidden: ["budget"])
         XCTAssertEqual(ids(arranged).prefix(2), ["workout", "nutrition"])
         XCTAssertTrue(ids(arranged).contains("app-car"), "A category the settings never heard of shows")
-        XCTAssertTrue(ids(arranged).contains("weather"))
         XCTAssertFalse(ids(arranged).contains("budget"), "A hidden one stays hidden")
         XCTAssertEqual(arranged.count, allIDs.count - 1)
     }
@@ -404,15 +396,15 @@ final class DailyHomeTests: XCTestCase {
         settings.dailyOrder = ["car", "nutrition"]
         settings.dailyHidden = ["budget", "app-travel"]
         settings.dailyWide = ["habits": true, "steps": false]
-        DailyCategories.add(.weather, in: &settings)
+        DailyCategories.add(.workout, in: &settings)
         DailyCategories.add(.steps, in: &settings)
         let data = try JSONEncoder().encode(settings)
         let back = try JSONDecoder().decode(AppSettings.self, from: data)
         XCTAssertEqual(back.dailyOrder, ["car", "nutrition"])
         XCTAssertEqual(back.dailyHidden, ["budget", "app-travel"])
         XCTAssertEqual(back.dailyWide, ["habits": true, "steps": false])
-        XCTAssertEqual(back.dailyAdded, ["cat-weather", "cat-steps"])
-        XCTAssertEqual(DailyCategories.added(back), [.weather, .steps])
+        XCTAssertEqual(back.dailyAdded, ["cat-workout", "cat-steps"])
+        XCTAssertEqual(DailyCategories.added(back), [.workout, .steps])
     }
 
     func testOldOrBrokenSettingsStillDecode() throws {

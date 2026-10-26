@@ -19,7 +19,7 @@ final class PremiumStore {
     private(set) var loadState: LoadState = .idle
     private(set) var purchasingID: String?
     private(set) var isRestoring = false
-    /// Whether the user can still claim the welcome offer (once per Apple account, for the whole group).
+    /// Whether the user can still claim the free trial (once per Apple account, for the whole group).
     private(set) var isIntroEligible = false
 
     @ObservationIgnored private weak var model: AppModel?
@@ -146,23 +146,32 @@ final class PremiumStore {
         return percent > 0 ? percent : nil
     }
 
-    /// The welcome offer of a plan when the person can still claim it: its price, for how long, then
-    /// the price that follows (« 4,99 $ par mois les 3 premiers mois, puis 6,99 $ par mois »).
-    func introDescription(for product: Product) -> String? {
-        guard isIntroEligible, let subscription = product.subscription, let offer = subscription.introductoryOffer else { return nil }
-        let regular = Self.periodText(product.displayPrice, subscription.subscriptionPeriod)
-        switch offer.paymentMode {
-        case .payAsYouGo:
-            let months = offer.period.unit == .month ? offer.period.value * offer.periodCount : offer.periodCount
-            let first = Self.periodText(offer.displayPrice, offer.period)
-            return tr("\(first) les \(Fmt.plural(months, tr("premier mois"), tr("premiers mois"))), puis \(regular)")
-        case .payUpFront:
-            return tr("\(offer.displayPrice) pour commencer, puis \(regular)")
-        case .freeTrial:
-            return tr("Essai gratuit, puis \(regular)")
-        default:
-            return nil
+    /// The only introductory offer: a free trial (7 days, on the monthly and the yearly plan). Days of the
+    /// trial of a plan when the person can still claim it (once per Apple account, for the whole group).
+    func trialDays(for product: Product) -> Int? {
+        guard isIntroEligible, let subscription = product.subscription, let offer = subscription.introductoryOffer,
+              offer.paymentMode == .freeTrial else { return nil }
+        return Self.trialDays(unit: offer.period.unit, value: offer.period.value, periods: offer.periodCount)
+    }
+
+    /// Length of a free trial in days (1 week = 7 days); nil when it is not a day, week or month count.
+    static func trialDays(unit: Product.SubscriptionPeriod.Unit, value: Int, periods: Int = 1) -> Int? {
+        let perUnit: Int
+        switch unit {
+        case .day: perUnit = 1
+        case .week: perUnit = 7
+        case .month: perUnit = 30
+        default: return nil
         }
+        let days = perUnit * value * max(periods, 1)
+        return days > 0 ? days : nil
+    }
+
+    /// « 7 jours gratuits, puis 6,99 $ par mois » when the trial can still be claimed, else nil.
+    func introDescription(for product: Product) -> String? {
+        guard let days = trialDays(for: product), let subscription = product.subscription else { return nil }
+        let regular = Self.periodText(product.displayPrice, subscription.subscriptionPeriod)
+        return tr("\(days) \(Fmt.plural(days, tr("jour gratuit"), tr("jours gratuits"))), puis \(regular)")
     }
 
     /// « 6,99 $ par mois », « 59,99 $ par an ».

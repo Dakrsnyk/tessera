@@ -14,7 +14,6 @@ extension MiniApp {
         case .business: [.businessGoal]
         case .travel: [.trip]
         case .car: [.carName]
-        case .weather: [.city]
         case .photos: []
         }
     }

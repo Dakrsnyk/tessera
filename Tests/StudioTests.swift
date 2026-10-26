@@ -175,24 +175,24 @@ final class StudioTests: XCTestCase {
         let saved = model.saveStyle(named: "Mon thème", from: source)
         XCTAssertEqual(saved.style.hidden, [], "Hidden lines aren't part of a look")
 
-        var weather = WidgetDesign(kind: .weeklyForecast)
-        weather.style.hidden = ["footnote"]
+        var service = WidgetDesign(kind: .nextService)
+        service.style.hidden = ["footnote"]
         let budget = WidgetDesign(kind: .budgetLeft, themeID: .aurora)
         var withPhoto = WidgetDesign(kind: .caloriesLeft)
         withPhoto.background = .photo("mine.jpg")
-        for design in [weather, budget, withPhoto] { model.save(design) }
+        for design in [service, budget, withPhoto] { model.save(design) }
 
-        XCTAssertEqual(model.apply(saved, to: [weather.id, budget.id, withPhoto.id]), 3)
+        XCTAssertEqual(model.apply(saved, to: [service.id, budget.id, withPhoto.id]), 3)
         let reopened = AppModel(store: store)
         XCTAssertEqual(reopened.savedStyles.map(\.name), ["Mon thème"])
-        for id in [weather.id, budget.id, withPhoto.id] {
+        for id in [service.id, budget.id, withPhoto.id] {
             let design = reopened.design(id: id)!
             XCTAssertEqual(design.themeID, .luxury)
             XCTAssertEqual(design.style.border, .double)
             XCTAssertTrue(saved.matches(design))
         }
-        XCTAssertEqual(reopened.design(id: weather.id)?.kind, .weeklyForecast, "The content stays")
-        XCTAssertEqual(reopened.design(id: weather.id)?.style.hidden, ["footnote"])
+        XCTAssertEqual(reopened.design(id: service.id)?.kind, .nextService, "The content stays")
+        XCTAssertEqual(reopened.design(id: service.id)?.style.hidden, ["footnote"])
         XCTAssertEqual(reopened.design(id: withPhoto.id)?.background, .photo("mine.jpg"), "A widget's own photo is kept")
 
         reopened.renameStyle(saved.id, to: "Doré")
@@ -248,7 +248,7 @@ final class StudioTests: XCTestCase {
     }
 
     func testEveryStyleRenders() {
-        let kinds: [WidgetKind] = [.caloriesLeft, .nutritionWeek, .macros, .clock, .weather]
+        let kinds: [WidgetKind] = [.caloriesLeft, .nutritionWeek, .macros, .clock, .moonPhase]
         for (index, theme) in ThemeCatalog.all.enumerated() {
             let design = WidgetDesign(kind: kinds[index % kinds.count], themeID: theme.id)
             render(design, .systemSmall)
