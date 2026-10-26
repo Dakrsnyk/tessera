@@ -30,7 +30,6 @@ Les résumés rédigés par Apple Intelligence (sur les iPhone compatibles) sont
 Chaque accès est demandé par iOS au moment où une fonction en a besoin. Tu peux le refuser ou le retirer à tout moment dans Réglages > Ardane ; l'app continue de fonctionner sans la fonction concernée.
 
 - **Caméra** — Uniquement pour scanner le code-barres d'un aliment ou photographier un plat. Ardane t'explique pourquoi avant que iOS te demande l'accès. L'image est analysée sur ton iPhone (Vision, d'Apple) : elle n'est ni enregistrée ni envoyée, et l'estimation des aliments d'un plat se fait aussi sur ton iPhone. Pour reconnaître plus tard un plat semblable, Ardane garde sur ton iPhone une empreinte visuelle (une suite de nombres) avec les aliments que tu as validés, jamais la photo ; elle s'efface avec « Effacer toutes mes données ». Seul le numéro du code-barres lu est envoyé à Open Food Facts (section 4) pour trouver le produit.
-- **Position** — Seulement quand tu touches « Utiliser ma position », pour trouver ta ville et la météo. Seules les coordonnées de la ville choisie sont gardées sur ton iPhone.
 - **Calendrier** — Lecture seule de tes prochains événements, pour le widget « À venir » et ton planning. Ils ne quittent pas ton iPhone.
 - **Mouvements (podomètre)** — Lecture de tes pas du jour pour « Mon Quotidien ». Ils ne quittent pas ton iPhone.
 - **Photos** — Ardane n'accède qu'aux photos que tu choisis (fond d'un widget, widgets de « Photos et citations »), par le sélecteur d'Apple, sans accès à ta photothèque ; une copie réduite est gardée sur ton iPhone. Un fond d'écran du Store que tu enregistres est ajouté à ta photothèque sans qu'Ardane puisse la lire.
@@ -40,8 +39,7 @@ Chaque accès est demandé par iOS au moment où une fonction en a besoin. Tu pe
 
 Quand tu utilises certaines fonctions, l'app interroge directement un service externe. Il reçoit seulement ce qui est nécessaire à la réponse, sans ton nom, ton adresse courriel ni aucun identifiant de compte ou d'appareil. Comme pour toute connexion Internet, il voit aussi l'adresse IP de ta connexion, qu'il traite selon sa propre politique.
 
-- **Apple** — Retrouve une ville à partir du nom que tu tapes ou de ta position (géocodage), et traite les achats et abonnements Premium. Ardane ne voit jamais tes informations de paiement. Politique : apple.com/legal/privacy
-- **Open-Meteo (météo)** — Reçoit les coordonnées de la ville choisie. Politique : open-meteo.com
+- **Apple** — Retrouve une ville à partir du nom que tu tapes (géocodage), et traite les achats et abonnements Premium. Ardane ne voit jamais tes informations de paiement. Politique : apple.com/legal/privacy
 - **Open Food Facts (produits emballés)** — Reçoit le code-barres scanné ou le texte que tu cherches. Association établie en France. Les données de ces produits sont saisies par la communauté et disponibles sous la licence ODbL. Politique : world.openfoodfacts.org
 - **Sources des valeurs nutritives intégrées à l'app** — Les aliments génériques viennent du Fichier canadien sur les éléments nutritifs (Santé Canada, licence du gouvernement ouvert – Canada) et, pour une partie des valeurs de la table intégrée, de USDA FoodData Central (domaine public, CC0). Ils sont lus sur ton iPhone : aucune requête n'est envoyée. Ardane n'est pas affilié à Santé Canada. Détails dans « Profil › À propos ».
 - **CoinGecko (cours des cryptomonnaies)** — Reçoit le nom de la cryptomonnaie et de la devise demandées. Politique : coingecko.com

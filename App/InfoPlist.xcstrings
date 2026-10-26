@@ -142,6 +142,53 @@
         }
       }
     },
+    "NSLocationWhenInUseUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Standort wird nur verwendet, um das Wetter in deiner Stadt zu finden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your location is only used to find the weather in your city."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu ubicación solo se usa para encontrar el clima de tu ciudad."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta position sert uniquement à trouver la météo de ta ville."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua posizione serve solo a trovare il meteo della tua città."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置情報はあなたの街の天気を調べるためだけに使用します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua localização é usada apenas para encontrar o clima da sua cidade."
+          }
+        }
+      }
+    },
     "NSMotionUsageDescription": {
       "extractionState": "manual",
       "localizations": {

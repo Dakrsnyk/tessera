@@ -4,6 +4,7 @@ import XCTest
 /// The only introductory offer (decision of 2026-10-26): a free trial of 7 days on the monthly and the yearly
 /// plan (same subscription group: Apple grants one introductory offer per group and per person), none on the
 /// lifetime purchase. Reads Config/Tessera.storekit, the local StoreKit configuration.
+@MainActor
 final class PremiumTrialOfferTests: XCTestCase {
     private func configuration() throws -> [String: Any] {
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
