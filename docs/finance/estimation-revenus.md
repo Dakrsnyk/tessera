@@ -23,58 +23,116 @@ Hypothèse retenue : **X = versements nets d'Apple, en CAD, par mois** (après l
 
 ## 3. Résultats par an (CAD)
 
-Règle de retrait du modèle : on retire 80 % de ce qui reste après impôts, cotisations et réserve minimale (≈ 1 739 $) ; le reste demeure dans l'entreprise. « Perso » = impôts fédéral et Québec + cotisations (RRQ/RQAP) à la charge de la personne. Pour l'entreprise individuelle, l'impôt porte sur tout le bénéfice, retiré ou non.
+Bénéfice avant impôt B = revenus annuels − dépenses de l'individuelle (3 478 $) : 8 522 / 56 522 / 116 522 / 596 522 $. Pour la société, le moteur retire en plus son surcoût (1 315 $). Correction du 2026-10-25 : la première version déduisait ce surcoût deux fois.
 
-### 1 000 $/mois (12 000 $/an)
-| Cas | Bénéfice | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
-|---|---|---|---|---|---|
-| Individuelle | 8 522 | – | 698 | **4 869** | 2 956 |
-| Société, DPE-hyp., salaire | 7 207 | 706 | 12 | 2 345 | 2 738 |
-| Société, DPE-hyp., dividendes | 7 207 | 1 208 | 0 | 2 357 | 2 328 |
-| Société, petite ent., salaire | 7 207 | 335 | 14 | 2 781 | 2 654 |
-| Société, petite ent., dividendes | 7 207 | 660 | 0 | 2 795 | 2 438 |
+#### A. Règle du modèle : retrait de 80 % du distribuable
 
-### 5 000 $/mois (60 000 $/an)
-| Cas | Bénéfice | Impôt société | Impôt + cotis. perso | Net retiré | Laissé |
-|---|---|---|---|---|---|
-| Individuelle | 56 522 | – | 15 229 | **31 643** | 9 650 |
-| Société, DPE-hyp., salaire | 55 207 | 3 665 | 5 368 | 27 517 | 14 215 |
-| Société, DPE-hyp., dividendes | 55 207 | 11 048 | 1 154 | 31 731 | 9 960 |
-| Société, DPE-hyp., mixte | 55 207 | 7 379 | 3 002 | 29 883 | 12 175 |
-| Société, petite ent., salaire | 55 207 | 1 508 | 6 600 | 30 294 | 11 954 |
-| Société, petite ent., dividendes | 55 207 | 6 036 | 1 618 | **35 276** | 10 962 |
-| Société, petite ent., mixte | 55 207 | 3 784 | 3 946 | 32 948 | 11 556 |
+**1 000 $/mois (12 000 $/an)**
 
-### 10 000 $/mois (120 000 $/an)
-| Cas | Bénéfice | Impôt société | Impôt + cotis. perso | Net retiré | Laissé |
-|---|---|---|---|---|---|
-| Individuelle | 116 522 | – | 39 112 | 60 537 | 16 873 |
-| Société, DPE-hyp., salaire | 115 207 | 7 346 | 18 612 | 52 432 | 28 489 |
-| Société, DPE-hyp., dividendes | 115 207 | 23 348 | 9 665 | 61 380 | 19 500 |
-| Société, DPE-hyp., mixte | 115 207 | 15 370 | 14 057 | 56 988 | 24 082 |
-| Société, petite ent., salaire | 115 207 | 2 980 | 22 017 | 57 502 | 23 631 |
-| Société, petite ent., dividendes | 115 207 | 12 756 | 12 066 | **67 452** | 21 618 |
-| Société, petite ent., mixte | 115 207 | 7 874 | 17 001 | 62 517 | 22 672 |
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 698 | 4 869 | 2 956 |
+| Société  taux prudent 20 5 %  salaire | 798 | 16 | 3 177 | 3 093 |
+| Société  taux prudent 20 5 %  dividendes | 1 478 | 0 | 3 193 | 2 537 |
+| Société  taux prudent 20 5 %  mixte | 1 138 | 8 | 3 185 | 2 815 |
+| Société  petite entreprise 11 2 %  salaire | 372 | 33 | 3 696 | 2 947 |
+| Société  petite entreprise 11 2 %  dividendes | 807 | 0 | 3 729 | 2 671 |
+| Société  petite entreprise 11 2 %  mixte | 590 | 9 | 3 720 | 2 816 |
 
-### 50 000 $/mois (600 000 $/an)
-| Cas | Bénéfice | Impôt société | Impôt + cotis. perso | Net retiré | Laissé |
-|---|---|---|---|---|---|
-| Individuelle | 596 522 | – | 287 713 | 245 657 | 63 153 |
-| Société, DPE-hyp., salaire | 595 207 | 40 991 | 167 844 | 208 481 | 158 964 |
-| Société, DPE-hyp., dividendes | 595 207 | 121 748 | 144 265 | 232 059 | 95 820 |
-| Société, DPE-hyp., mixte | 595 207 | 80 795 | 158 062 | 218 262 | 125 163 |
-| Société, petite ent., salaire | 595 207 | 17 288 | 191 397 | 229 113 | 137 072 |
-| Société, petite ent., dividendes | 595 207 | 66 516 | 165 521 | **254 989** | 106 866 |
-| Société, petite ent., mixte | 595 207 | 41 588 | 180 467 | 240 043 | 119 479 |
+**5 000 $/mois (60 000 $/an)**
 
-## 4. Lecture
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 15 229 | 31 643 | 9 650 |
+| Société  taux prudent 20 5 %  salaire | 3 746 | 5 625 | 28 096 | 14 527 |
+| Société  taux prudent 20 5 %  dividendes | 11 318 | 1 251 | 32 470 | 10 169 |
+| Société  taux prudent 20 5 %  mixte | 7 554 | 3 199 | 30 522 | 12 436 |
+| Société  petite entreprise 11 2 %  salaire | 1 540 | 6 888 | 30 941 | 12 208 |
+| Société  petite entreprise 11 2 %  dividendes | 6 183 | 1 726 | 36 102 | 11 196 |
+| Société  petite entreprise 11 2 %  mixte | 3 874 | 4 166 | 33 662 | 11 800 |
 
-- **1 000 $/mois** : l'entreprise individuelle gagne nettement (≈ 4 900 $ retirés contre ≈ 2 800 $ en société) : une société coûte plus cher en comptable et en frais fixes pour un si petit bénéfice. Pas de raison de s'incorporer.
-- **5 000 $/mois** : écart faible. La société avec le taux de petite entreprise (dividendes) donne ≈ 35 300 $ contre ≈ 31 600 $ en individuelle, mais seulement si le taux de petite entreprise s'applique (voir réserves). Avec le taux « DPE hypothèse », l'avantage disparaît. Zone de transition : on peut commencer en individuelle et s'incorporer plus tard.
-- **10 000 $/mois** : la société devient plus avantageuse (≈ 67 500 $ contre ≈ 60 500 $ avec la petite entreprise), et surtout elle garde ≈ 20 000 $ de plus dans l'entreprise, imposés à taux réduit (report d'impôt).
-- **50 000 $/mois** : écart marqué sur le net retiré (≈ 255 000 $ contre ≈ 246 000 $) et très marqué sur le report : ≈ 107 000 $ restent dans la société, imposés bien moins qu'à 53 % marginal. À ce niveau, un comptable et une structure (parfois holding) sont indispensables, et ce modèle ne les couvre pas.
-- Le mode **dividendes** retire plus d'argent net à court terme, mais n'ajoute pas de droits RRQ/RQAP ; le mode **salaire** coûte plus d'impôt immédiat mais crée des droits (retraite, congé parental) et de l'espace REER. Le mixte est un compromis.
-- Seuil de rentabilité indicatif de la société : autour de 5 000–8 000 $/mois net Apple (≈ 800 à 1 300 abonnés), à confirmer.
+**10 000 $/mois (120 000 $/an)**
+
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 39 112 | 60 537 | 16 873 |
+| Société  taux prudent 20 5 %  salaire | 7 427 | 18 957 | 52 924 | 28 801 |
+| Société  taux prudent 20 5 %  dividendes | 23 618 | 9 902 | 61 979 | 19 709 |
+| Société  taux prudent 20 5 %  mixte | 15 545 | 14 347 | 57 534 | 24 343 |
+| Société  petite entreprise 11 2 %  salaire | 3 015 | 22 385 | 58 067 | 23 904 |
+| Société  petite entreprise 11 2 %  dividendes | 12 903 | 12 331 | 68 121 | 21 852 |
+| Société  petite entreprise 11 2 %  mixte | 7 964 | 17 326 | 63 126 | 22 916 |
+
+**50 000 $/mois (600 000 $/an)**
+
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 287 713 | 245 657 | 63 153 |
+| Société  taux prudent 20 5 %  salaire | 41 083 | 168 289 | 208 872 | 159 324 |
+| Société  taux prudent 20 5 %  dividendes | 122 018 | 144 667 | 232 493 | 96 029 |
+| Société  taux prudent 20 5 %  mixte | 80 976 | 158 486 | 218 675 | 125 447 |
+| Société  petite entreprise 11 2 %  salaire | 17 328 | 191 895 | 229 550 | 137 383 |
+| Société  petite entreprise 11 2 %  dividendes | 66 663 | 165 971 | 255 474 | 107 100 |
+| Société  petite entreprise 11 2 %  mixte | 41 681 | 180 941 | 240 504 | 119 752 |
+
+#### B. Retrait de 100 % du distribuable (reste la réserve minimale ≈ 1 739 $)
+
+**1 000 $/mois (12 000 $/an)**
+
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 698 | 6 086 | 1 739 |
+| Société  taux prudent 20 5 %  salaire | 621 | 51 | 3 940 | 2 409 |
+| Société  taux prudent 20 5 %  dividendes | 1 478 | 0 | 3 991 | 1 739 |
+| Société  taux prudent 20 5 %  mixte | 1 053 | 10 | 3 981 | 2 086 |
+| Société  petite entreprise 11 2 %  salaire | 257 | 96 | 4 565 | 2 035 |
+| Société  petite entreprise 11 2 %  dividendes | 807 | 0 | 4 661 | 1 739 |
+| Société  petite entreprise 11 2 %  mixte | 536 | 12 | 4 650 | 1 920 |
+
+**5 000 $/mois (60 000 $/an)**
+
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 15 229 | 39 554 | 1 739 |
+| Société  taux prudent 20 5 %  salaire | 1 842 | 8 216 | 33 935 | 7 143 |
+| Société  taux prudent 20 5 %  dividendes | 11 318 | 2 315 | 39 836 | 1 739 |
+| Société  taux prudent 20 5 %  mixte | 6 602 | 5 184 | 36 967 | 4 529 |
+| Société  petite entreprise 11 2 %  salaire | 373 | 9 794 | 37 491 | 2 955 |
+| Société  petite entreprise 11 2 %  dividendes | 6 183 | 3 156 | 44 129 | 1 739 |
+| Société  petite entreprise 11 2 %  mixte | 3 290 | 6 392 | 40 893 | 2 445 |
+
+**10 000 $/mois (120 000 $/an)**
+
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 39 112 | 75 672 | 1 739 |
+| Société  taux prudent 20 5 %  salaire | 3 479 | 25 949 | 63 902 | 13 494 |
+| Société  taux prudent 20 5 %  dividendes | 23 618 | 14 995 | 74 856 | 1 739 |
+| Société  taux prudent 20 5 %  mixte | 13 515 | 20 592 | 69 259 | 7 487 |
+| Société  petite entreprise 11 2 %  salaire | 654 | 29 858 | 70 707 | 5 188 |
+| Société  petite entreprise 11 2 %  dividendes | 12 903 | 18 380 | 82 186 | 1 739 |
+| Société  petite entreprise 11 2 %  mixte | 6 723 | 24 316 | 76 249 | 3 020 |
+
+**50 000 $/mois (600 000 $/an)**
+
+| Cas | Impôt société | Impôt + cotis. perso | Net retiré | Laissé dans l'entreprise |
+|---|---|---|---|---|
+| Individuelle | 0 | 287 713 | 307 071 | 1 739 |
+| Société  taux prudent 20 5 %  salaire | 21 137 | 218 551 | 252 900 | 81 972 |
+| Société  taux prudent 20 5 %  dividendes | 122 018 | 190 027 | 281 424 | 1 739 |
+| Société  taux prudent 20 5 %  mixte | 71 003 | 206 297 | 265 154 | 39 626 |
+| Société  petite entreprise 11 2 %  salaire | 5 151 | 248 057 | 278 748 | 40 838 |
+| Société  petite entreprise 11 2 %  dividendes | 66 663 | 216 656 | 310 149 | 1 739 |
+| Société  petite entreprise 11 2 %  mixte | 35 593 | 234 365 | 292 441 | 18 798 |
+
+## 4. Lecture (chiffres corrigés)
+
+- **1 000 $/mois** : individuelle gagnante (≈ 6 086 $ retirés à 100 % contre ≈ 4 661 $ en société, meilleur cas).
+- **5 000 $/mois** : société petite entreprise en dividendes ≈ 44 129 $ contre ≈ 39 554 $ en individuelle ; avec le taux prudent, ≈ 39 836 $ : quasi égalité.
+- **10 000 $/mois** : société petite entreprise ≈ 82 186 $ contre ≈ 75 672 $ ; taux prudent ≈ 74 856 $ (un peu en dessous de l'individuelle).
+- **50 000 $/mois** : ≈ 310 149 $ (petite entreprise) contre ≈ 307 071 $ en individuelle ; le vrai gain est ailleurs : à 80 % de retrait, la société garde ≈ 107 000 $ imposés à taux réduit.
+- Meilleure répartition du modèle : 0 % salaire / 100 % dividendes ; chaque tranche de 10 % de salaire coûte du net en année 1 (charges RRQ/RQAP/FSS/CNESST), mais crée des droits (retraite, RQAP, REER) que le modèle ne valorise pas.
+- Le taux de petite entreprise est la clé : sans lui (taux prudent), la société ne bat l'individuelle que d'un cheveu ou perd.
 
 ## 5. Réserves : à confirmer avec un CPA du Québec
 

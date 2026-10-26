@@ -20,8 +20,9 @@ def calcul(P):
         revenu = 12 * m
         ligne = {"mensuel": m, "revenu_annuel": revenu, "cas": []}
         for struct, var, mode in CAS:
+            # Le bénéfice B passé au moteur est celui de l'individuelle : societe() retire lui-même le surcoût de la société.
             depenses = model.recurring_expenses_annual(P, struct, "central")
-            B = revenu - depenses
+            B = revenu - model.recurring_expenses_annual(P, "individuelle", "central")
             r = w.individual(P, B) if struct == "individuelle" else w.societe(P, B, var, mode)
             perso = r["impot_fed"] + r["impot_qc"] + r["cotisations_perso"]
             ligne["cas"].append({"structure": struct, "variante": var, "mode": mode, "depenses": depenses, "benefice": B,
