@@ -113,8 +113,8 @@ enum WeatherService {
             ? "https://api.open-meteo.com/v1/forecast"
             : "https://customer-api.open-meteo.com/v1/forecast")!
         var items = [
-            URLQueryItem(name: "latitude", value: String(format: "%.4f", location.latitude)),
-            URLQueryItem(name: "longitude", value: String(format: "%.4f", location.longitude)),
+            URLQueryItem(name: "latitude", value: String(format: "%.2f", location.latitude)),
+            URLQueryItem(name: "longitude", value: String(format: "%.2f", location.longitude)),
             URLQueryItem(name: "current", value: "temperature_2m,apparent_temperature,is_day,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,relative_humidity_2m,pressure_msl"),
             URLQueryItem(name: "hourly", value: "temperature_2m,weather_code,is_day,precipitation_probability,uv_index"),
             URLQueryItem(name: "daily", value: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max,uv_index_max"),
