@@ -1,0 +1,13 @@
+﻿scenario;objectif_benefice_avant_impot_cad;abonnes_necessaires_commission_15;abonnes_necessaires_commission_30
+prudent;12000;179;220
+prudent;30000;415;508
+prudent;60000;807;988
+prudent;100000;1331;1629
+central;12000;207;252
+central;30000;446;545
+central;60000;846;1032
+central;100000;1378;1682
+optimiste;12000;248;302
+optimiste;30000;489;597
+optimiste;60000;892;1087
+optimiste;100000;1428;1740
