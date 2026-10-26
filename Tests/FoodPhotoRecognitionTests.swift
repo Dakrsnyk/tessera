@@ -39,18 +39,57 @@ final class FoodPhotoRecognitionTests: XCTestCase {
             .lowercased()
     }
 
-    private func classify(_ url: URL) throws -> [FoodLabelMatcher.LabelScore] {
+    /// Draws the file into an 8-bit RGB bitmap (white background), `width` pixels wide, and measures it.
+    private func renderedImage(_ url: URL, width: Int) throws -> (CGImage, String) {
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
-              let image = CGImageSourceCreateImageAtIndex(source, 0, nil) else {
+              let original = CGImageSourceCreateImageAtIndex(source, 0, nil) else {
             throw NSError(domain: "FoodPhoto", code: 1, userInfo: [NSLocalizedDescriptionKey: "image illisible \(url.lastPathComponent)"])
         }
+        let height = max(1, Int((Double(original.height) * Double(width) / Double(original.width)).rounded()))
+        let space = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4,
+                                      space: space, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+            throw NSError(domain: "FoodPhoto", code: 2, userInfo: [NSLocalizedDescriptionKey: "CGContext impossible"])
+        }
+        context.setFillColor(CGColor(red: 1, green: 1, blue: 1, alpha: 1))
+        context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+        context.interpolationQuality = .high
+        context.draw(original, in: CGRect(x: 0, y: 0, width: width, height: height))
+        guard let image = context.makeImage(), let data = context.data else {
+            throw NSError(domain: "FoodPhoto", code: 3, userInfo: [NSLocalizedDescriptionKey: "bitmap vide"])
+        }
+        let bytes = data.bindMemory(to: UInt8.self, capacity: width * height * 4)
+        var sum = 0.0
+        var count = 0
+        var index = 0
+        while index < width * height * 4 {
+            sum += 0.299 * Double(bytes[index]) + 0.587 * Double(bytes[index + 1]) + 0.114 * Double(bytes[index + 2])
+            count += 1
+            index += 4 * 7
+        }
+        func pixel(_ fx: Double, _ fy: Double) -> String {
+            let o = (Int(Double(height - 1) * fy) * width + Int(Double(width - 1) * fx)) * 4
+            return "(\(bytes[o]),\(bytes[o + 1]),\(bytes[o + 2]))"
+        }
+        let diag = "source \(original.width)x\(original.height) bits \(original.bitsPerComponent) espace \(original.colorSpace?.name.map { String(describing: $0) } ?? "?") ; "
+            + "dessinée \(width)x\(height) ; luminance moyenne \(String(format: "%.1f", sum / Double(max(count, 1)))) ; "
+            + "pixels \(pixel(0.25, 0.25)) \(pixel(0.75, 0.25)) \(pixel(0.25, 0.75)) \(pixel(0.5, 0.5))"
+        return (image, diag)
+    }
+
+    private enum Variant: String, CaseIterable { case cpu800, revision2, small299 }
+
+    private func classify(_ image: CGImage, variant: Variant) throws -> [FoodLabelMatcher.LabelScore] {
         let request = VNClassifyImageRequest()
-        #if targetEnvironment(simulator)
         request.usesCPUOnly = true
-        #endif
+        if variant == .revision2 { request.revision = VNClassifyImageRequestRevision2 }
         try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
-        let observations = request.results ?? []
-        return observations.map { FoodLabelMatcher.LabelScore(label: $0.identifier, confidence: Double($0.confidence)) }
+        return (request.results ?? []).map { FoodLabelMatcher.LabelScore(label: $0.identifier, confidence: Double($0.confidence)) }
+    }
+
+    private func signature(_ scores: [FoodLabelMatcher.LabelScore]) -> String {
+        scores.sorted { $0.confidence > $1.confidence }.prefix(8)
+            .map { "\($0.label) \(String(format: "%.2f", $0.confidence))" }.joined(separator: ", ")
     }
 
     func testManifestAndFilesAreConsistent() throws {
@@ -72,19 +111,42 @@ final class FoodPhotoRecognitionTests: XCTestCase {
         var classified = 0
         var firstFailure: String?
 
+        // Step 1: every photo, three ways (CPU only on 800 px, revision 2, 299x299), plus a diagnostic of the bitmap.
+        var results: [String: [Variant: [FoodLabelMatcher.LabelScore]]] = [:]
         for entry in entries {
             let url = folder.appendingPathComponent(entry.file)
-            let scores: [FoodLabelMatcher.LabelScore]
             do {
-                scores = try classify(url)
+                let (image800, diag) = try renderedImage(url, width: 800)
+                let (image299, _) = try renderedImage(url, width: 299)
+                lines.append("RECO-DIAG \(entry.file): \(diag)")
+                var byVariant: [Variant: [FoodLabelMatcher.LabelScore]] = [:]
+                for variant in Variant.allCases {
+                    byVariant[variant] = try classify(variant == .small299 ? image299 : image800, variant: variant)
+                }
+                results[entry.file] = byVariant
             } catch {
                 if firstFailure == nil { firstFailure = "\(entry.file): \(error.localizedDescription)" }
-                lines.append("RECO-PHOTO \(entry.file) [\(entry.category)]: ERREUR Vision \(error.localizedDescription)")
-                continue
+                lines.append("RECO-PHOTO \(entry.file) [\(entry.category)]: ERREUR \(error.localizedDescription)")
             }
-            classified += 1
-            let top = scores.sorted { $0.confidence > $1.confidence }.prefix(8)
-                .map { "\($0.label) \(String(format: "%.2f", $0.confidence))" }
+        }
+        classified = results.count
+        // Step 2: does Vision vary from one photo to another? Keep the first way that does.
+        var chosen: Variant?
+        for variant in Variant.allCases {
+            let distinct = Set(results.values.compactMap { $0[variant].map(signature) })
+            lines.append("RECO-ESSAI \(variant.rawValue) (usesCPUOnly" + (variant == .revision2 ? ", révision 2" : "")
+                + (variant == .small299 ? ", 299x299" : ", 800 px") + "): \(distinct.count) jeu(x) d'étiquettes distinct(s) sur \(results.count) photos")
+            if chosen == nil && distinct.count > 1 { chosen = variant }
+        }
+        if classified == 0 || chosen == nil {
+            let reason = classified == 0 ? (firstFailure ?? "aucune image classée")
+                : "mêmes étiquettes pour toutes les images (\(signature(results.values.first?[.cpu800] ?? [])))"
+            attach(lines + ["Vision inutilisable : \(reason)"])
+            throw XCTSkip("Vision classification inutilisable sur ce simulateur : \(reason)")
+        }
+        lines.append("RECO-CHOIX: \(chosen!.rawValue)")
+        for entry in entries {
+            guard let scores = results[entry.file]?[chosen!] else { continue }
             let proposals = FoodLabelMatcher.proposals(from: scores)
             let names = proposals.map { $0.food.name }
             let wanted = (entry.expected + entry.alternatives).map(normalized)
@@ -97,14 +159,8 @@ final class FoodPhotoRecognitionTests: XCTestCase {
             tally.total += 1
             if ok { tally.ok += 1 }
             perCategory[entry.category] = tally
-            lines.append("RECO-PHOTO \(entry.file) [\(entry.category)]: étiquettes [\(top.joined(separator: ", "))] ; "
+            lines.append("RECO-PHOTO \(entry.file) [\(entry.category)]: étiquettes [\(signature(scores))] ; "
                 + "propositions [\(names.joined(separator: ", "))] ; attendu \(entry.expected) ; \(ok ? "OK" : "RATÉ")")
-        }
-
-        if classified == 0 {
-            let reason = firstFailure ?? "aucune image classée"
-            attach(lines + ["Vision indisponible : \(reason)"])
-            throw XCTSkip("Vision ne classe aucune image sur ce simulateur : \(reason)")
         }
 
         func percent(_ ok: Int, _ total: Int) -> String {

@@ -26,7 +26,7 @@ final class FoodLabelMatcherTests: XCTestCase {
     }
 
     func testProposalsAreEstimatesInTheUsualPortion() {
-        let proposals = FoodLabelMatcher.proposals(from: [score("pizza", 0.7), score("salad", 0.5)])
+        let proposals = FoodLabelMatcher.proposals(from: [score("pizza", 0.7), score("salad", 0.5)], useDishKnowledge: false)
         XCTAssertFalse(proposals.isEmpty)
         for proposal in proposals {
             XCTAssertTrue(proposal.isEstimate)
@@ -35,6 +35,21 @@ final class FoodLabelMatcherTests: XCTestCase {
             XCTAssertGreaterThanOrEqual(proposal.confidence, FoodLabelMatcher.minimumConfidence)
             XCTAssertLessThanOrEqual(proposal.confidence, 1)
         }
+    }
+
+    /// With the dish templates, the portions are those of the dish (2 slices of pizza, a garnish of 40 g):
+    /// plausible, always estimates, never above a big plate.
+    func testDishPortionsAreEstimatesAndPlausible() {
+        let proposals = FoodLabelMatcher.proposals(from: [score("pizza", 0.7), score("salad", 0.5)])
+        XCTAssertFalse(proposals.isEmpty)
+        for proposal in proposals {
+            XCTAssertTrue(proposal.isEstimate)
+            XCTAssertGreaterThan(proposal.grams, 0)
+            XCTAssertLessThanOrEqual(proposal.grams, 400, proposal.food.id)
+            XCTAssertGreaterThanOrEqual(proposal.confidence, FoodLabelMatcher.minimumConfidence)
+            XCTAssertLessThanOrEqual(proposal.confidence, 1)
+        }
+        XCTAssertEqual(proposals.first { $0.food.id == "builtin.pizza" }?.grams, 220)
     }
 
     func testTheValuesForTheEstimatedQuantityComeFromTheFood() {
