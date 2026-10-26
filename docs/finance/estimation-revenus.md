@@ -150,3 +150,7 @@ cd finance && python3 estimation_revenus.py
 ```
 
 Prochaine étape suggérée (rien n'est fait sans ton accord) : rencontre avec un CPA pour trancher individuelle ou société selon le palier visé à 12 mois.
+
+## 7. Toutes les combinaisons salaire + dividendes (2026-10-25)
+
+`python3 finance/optimisation.py [paliers]` calcule 376 combinaisons (structure × part du distribuable retirée de 50 à 100 % × salaire de 0 $ à « tout en salaire »), le reste du retrait étant versé en dividendes. Sorties : `finance/out/optimisation.csv` (toutes les lignes) et `finance/out/optimisation_resume.md` (meilleurs cas par critère). L'agent `comptable` (`.claude/agents/comptable.md`, lecture seule) les lit, compare et liste ce qu'un CPA doit confirmer.
