@@ -682,12 +682,6 @@
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:712: Text(tr(\"\\(TF.int(meal.totals.kcal)) kcal · P \\(TF.int(meal.totals.protein)) g\"))"
   ]
  },
- "%@ kcal · P %@ · G %@ · L %@": {
-  "placeholders": 4,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:252: Text(tr(\"\\(TF.int(totals.kcal)) kcal · P \\(TF.decimal(totals.protein, 1)) · G \\(TF.decimal(totals.carbs, 1)) · L \\(TF.decimal(totals.fat, 1))\"))"
-  ]
- },
  "%@ kg": {
   "placeholders": 1,
   "uses": [
@@ -1086,6 +1080,12 @@
    "Shared/Render/Tiles/TimeTiles.swift:154: tile.caption = tr(\"\\(Fmt.format(now, template: \"dMMMM\")) · \\(Fmt.percent(progress)) de la semaine\")"
   ]
  },
+ "%@ · %@ g · ≈ %@ kcal": {
+  "placeholders": 3,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:179: Text(tr(\"\\(suggestion.food.name) · \\(TF.int(suggestion.grams)) g · ≈ \\(TF.int(suggestion.totals.kcal)) kcal\"))"
+  ]
+ },
  "%@ · %@ kg": {
   "placeholders": 2,
   "uses": [
@@ -1146,6 +1146,12 @@
   "placeholders": 3,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:438: ? tr(\"\\(idea.food.servingName) · P \\(TF.int(idea.totals.protein)) g · fibres \\(TF.int(idea.totals.fiber)) g\")"
+  ]
+ },
+ "%@ · P %@ · G %@ · L %@": {
+  "placeholders": 4,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:292: return tr(\"\\(kcal) · P \\(protein) · G \\(carbs) · L \\(fat)\")"
   ]
  },
  "%@ · aujourd'hui": {
@@ -2249,13 +2255,13 @@
  "Acide pantothénique (B5)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:201: case .pantothenicAcid: tr(\"Acide pantothénique (B5)\")"
+   "Shared/Domains/Nutrition.swift:219: case .pantothenicAcid: tr(\"Acide pantothénique (B5)\")"
   ]
  },
  "Acides gras": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:139: case .fats: tr(\"Acides gras\")"
+   "Shared/Domains/Nutrition.swift:157: case .fats: tr(\"Acides gras\")"
   ]
  },
  "Acides gras, minéraux et vitamines": {
@@ -2729,7 +2735,7 @@
    "App/Components/StylePicker.swift:139: Text(tr(\"Ajouter\"))",
    "App/Screens/Explore/StoreMagazine.swift:565: Text(tr(\"Ajouter\"))",
    "App/Screens/Home/DailySection.swift:1180: Text(tr(\"Ajouter\"))",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:104: .confirmationDialog(tr(\"Ajouter\"), isPresented: $adding, titleVisibility: .visible) {"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:184: Button(tr(\"Ajouter\")) {"
   ]
  },
  "Ajouter (maillot, cadeaux…)": {
@@ -2753,7 +2759,7 @@
  "Ajouter au journal": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:177: Text(tr(\"Ajouter au journal\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:244: Text(tr(\"Ajouter au journal\"))"
   ]
  },
  "Ajouter au montant épargné": {
@@ -2831,7 +2837,7 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:79: MiniActionButton(title: canScan ? tr(\"Rechercher\") : tr(\"Ajouter un aliment\"), symbol: canScan ? \"magnifyingglass\" : \"plus\", colorHex: accentHex, isProminent: !canScan) {",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:78: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:73: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:77: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
    "App/Screens/Spaces/NutritionSpace.swift:53: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")"
   ]
  },
@@ -3054,7 +3060,7 @@
  "Alcool": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:179: case .alcohol: tr(\"Alcool\")"
+   "Shared/Domains/Nutrition.swift:197: case .alcohol: tr(\"Alcool\")"
   ]
  },
  "Alfama": {
@@ -3084,7 +3090,7 @@
  "Aliment perso": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:286: case .custom: return tr(\"Aliment perso\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:370: case .custom: return tr(\"Aliment perso\")",
    "App/Screens/Spaces/NutritionSpace.swift:204: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
    "App/Screens/Spaces/NutritionSpace.swift:580: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
   ]
@@ -3093,7 +3099,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:83: Text(tr(\"Aliments\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:77: Text(tr(\"Aliments\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:81: Text(tr(\"Aliments\"))",
    "App/Screens/Spaces/NutritionSpace.swift:520: Section(tr(\"Aliments\")) {"
   ]
  },
@@ -3594,14 +3600,14 @@
  "Après ajout, il te restera %@ kcal.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:97: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:120: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
    "App/Screens/Spaces/NutritionSpace.swift:450: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
  "Après ajout, tu dépasseras ton objectif de %@ kcal.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:97: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:120: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
    "App/Screens/Spaces/NutritionSpace.swift:450: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
@@ -4139,6 +4145,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:181: Text(unreadable ? tr(\"Impossible de lire ce fichier\") : tr(\"Aucun cours trouvé\"))"
+  ]
+ },
+ "Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:139: Text(tr(\"Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans.\"))"
   ]
  },
  "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
@@ -5059,6 +5071,12 @@
    "Shared/Domains/FoodDatabase.swift:172: f(\"butter\", tr(\"Beurre\"), 717, 0.9, 0.1, 81, 0, 10, tr(\"1 c. à thé\"), s: 0.1, sf: 51, na: 643, chol: 215),"
   ]
  },
+ "Beurre ?": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ScanRecap.swift:302: case .butter: tr(\"Beurre ?\")"
+  ]
+ },
  "Beurre d'amande": {
   "placeholders": 0,
   "uses": [
@@ -5317,6 +5335,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/FoodDatabase.swift:18: case .drinks: tr(\"Boissons\")"
+  ]
+ },
+ "Bol de riz": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:319: DishTemplate(name: tr(\"Bol de riz\"),"
   ]
  },
  "Bol poké au saumon": {
@@ -5990,7 +6014,7 @@
  "Caféine": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:178: case .caffeine: tr(\"Caféine\")"
+   "Shared/Domains/Nutrition.swift:196: case .caffeine: tr(\"Caféine\")"
   ]
  },
  "Cafés": {
@@ -6008,7 +6032,7 @@
  "Calcium": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:185: case .calcium: tr(\"Calcium\")"
+   "Shared/Domains/Nutrition.swift:203: case .calcium: tr(\"Calcium\")"
   ]
  },
  "Calcul automatique": {
@@ -7483,13 +7507,13 @@
  "Cholestérol": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:176: case .cholesterol: tr(\"Cholestérol\")"
+   "Shared/Domains/Nutrition.swift:194: case .cholesterol: tr(\"Cholestérol\")"
   ]
  },
  "Choline": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:205: case .choline: tr(\"Choline\")"
+   "Shared/Domains/Nutrition.swift:223: case .choline: tr(\"Choline\")"
   ]
  },
  "Chou": {
@@ -7612,6 +7636,7 @@
  "Club sandwich": {
   "placeholders": 0,
   "uses": [
+   "Shared/Domains/DishTemplates.swift:285: DishTemplate(name: tr(\"Club sandwich\"),",
    "Shared/Domains/FoodDatabase.swift:205: f(\"club\", tr(\"Club sandwich\"), 225, 12, 19, 11, 1.5, 250, tr(\"1 sandwich\"), s: 2.6, sf: 3, na: 560),"
   ]
  },
@@ -7696,7 +7721,7 @@
  "Collation": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:347: case .snack: tr(\"Collation\")"
+   "Shared/Domains/Nutrition.swift:365: case .snack: tr(\"Collation\")"
   ]
  },
  "Collations": {
@@ -7779,6 +7804,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:219: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremium: true, famili"
+  ]
+ },
+ "Comme ton repas du %@": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ScanRecap.swift:107: return String(format: tr(\"Comme ton repas du %@\"), locale: Fmt.locale, day)"
   ]
  },
  "Commence avec une boîte basse.": {
@@ -8147,6 +8178,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseLibrary.swift:659: aka: [\"hspu\", \"handstand\"], cues: [tr(\"Contre un mur, descends la tête vers le sol sous contrôle.\")]),"
+  ]
+ },
+ "Contribuer à l'amélioration": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:133: Toggle(tr(\"Contribuer à l'amélioration\"), isOn: Binding("
   ]
  },
  "Contrôle technique, assurance, pneus…": {
@@ -9021,6 +9058,12 @@
    "Shared/Domains/FoodDatabase.swift:121: f(\"pancake\", tr(\"Crêpe épaisse (pancake)\"), 227, 6.4, 28, 9.7, 0.9, 77, tr(\"1 crêpe\"), s: 5, sf: 2.1, na: 439),"
   ]
  },
+ "Crêpes": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:333: DishTemplate(name: tr(\"Crêpes\"),"
+  ]
+ },
  "Cuisse de poulet cuite": {
   "placeholders": 0,
   "uses": [
@@ -9036,7 +9079,7 @@
  "Cuivre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:191: case .copper: tr(\"Cuivre\")"
+   "Shared/Domains/Nutrition.swift:209: case .copper: tr(\"Cuivre\")"
   ]
  },
  "Curl au pupitre": {
@@ -10292,7 +10335,7 @@
  "Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:159: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:226: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))",
    "App/Screens/Spaces/NutritionSpace.swift:278: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
   ]
  },
@@ -10783,13 +10826,19 @@
  "Déjeuner": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:344: case .breakfast: tr(\"Déjeuner\")"
+   "Shared/Domains/Nutrition.swift:362: case .breakfast: tr(\"Déjeuner\")"
   ]
  },
  "Déjeuner protéiné": {
   "placeholders": 0,
   "uses": [
    "Shared/Data/SampleData.swift:160: state.savedMeals = [SavedMeal(name: tr(\"Déjeuner protéiné\"), items: ["
+  ]
+ },
+ "Déjeuner œufs et bacon": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:329: DishTemplate(name: tr(\"Déjeuner œufs et bacon\"),"
   ]
  },
  "Déjà noté : %@ · %@": {
@@ -11264,7 +11313,7 @@
  "Dîner": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:345: case .lunch: tr(\"Dîner\")"
+   "Shared/Domains/Nutrition.swift:363: case .lunch: tr(\"Dîner\")"
   ]
  },
  "Dîner avec Léa": {
@@ -11779,7 +11828,7 @@
  "Estimation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:282: if isEstimate { return tr(\"Estimation\") }"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:366: if isEstimate { return tr(\"Estimation\") }"
   ]
  },
  "Estimation selon la durée des séances et ton poids": {
@@ -11791,7 +11840,7 @@
  "Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:153: Text(tr(\"Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:220: Text(tr(\"Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.\"))"
   ]
  },
  "Et avec Premium, tout le reste :": {
@@ -12372,7 +12421,7 @@
  "Femme": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:957: case .female: tr(\"Femme\")",
+   "Shared/Domains/Nutrition.swift:987: case .female: tr(\"Femme\")",
    "Shared/Domains/Profile.swift:250: case .female: tr(\"Femme\")"
   ]
  },
@@ -12409,7 +12458,7 @@
  "Fer": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:186: case .iron: tr(\"Fer\")"
+   "Shared/Domains/Nutrition.swift:204: case .iron: tr(\"Fer\")"
   ]
  },
  "Fermer": {
@@ -12732,7 +12781,7 @@
  "Folates (B9)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:203: case .folate: tr(\"Folates (B9)\")"
+   "Shared/Domains/Nutrition.swift:221: case .folate: tr(\"Folates (B9)\")"
   ]
  },
  "Fond": {
@@ -13579,25 +13628,25 @@
  "Gras monoinsaturés": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:180: case .monounsaturatedFat: tr(\"Gras monoinsaturés\")"
+   "Shared/Domains/Nutrition.swift:198: case .monounsaturatedFat: tr(\"Gras monoinsaturés\")"
   ]
  },
  "Gras polyinsaturés": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:181: case .polyunsaturatedFat: tr(\"Gras polyinsaturés\")"
+   "Shared/Domains/Nutrition.swift:199: case .polyunsaturatedFat: tr(\"Gras polyinsaturés\")"
   ]
  },
  "Gras saturés": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:174: case .saturatedFat: tr(\"Gras saturés\")"
+   "Shared/Domains/Nutrition.swift:192: case .saturatedFat: tr(\"Gras saturés\")"
   ]
  },
  "Gras trans": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:175: case .transFat: tr(\"Gras trans\")"
+   "Shared/Domains/Nutrition.swift:193: case .transFat: tr(\"Gras trans\")"
   ]
  },
  "Gras trans : moins de 1 % des calories (OMS). Caféine : 400 mg au plus (Santé Canada). Oméga-3 et oméga-6 : apports suffisants (National Academies).": {
@@ -13801,6 +13850,7 @@
  "Hamburger": {
   "placeholders": 0,
   "uses": [
+   "Shared/Domains/DishTemplates.swift:293: DishTemplate(name: tr(\"Hamburger\"),",
    "Shared/Domains/FoodDatabase.swift:194: f(\"burger\", tr(\"Hamburger\"), 254, 13, 30, 9, 1.5, 200, tr(\"1 hamburger\"), s: 5.8, sf: 3.5, na: 490),"
   ]
  },
@@ -14083,7 +14133,7 @@
  "Homme": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:958: case .male: tr(\"Homme\")",
+   "Shared/Domains/Nutrition.swift:988: case .male: tr(\"Homme\")",
    "Shared/Domains/Profile.swift:251: case .male: tr(\"Homme\")"
   ]
  },
@@ -14171,6 +14221,12 @@
    "App/Screens/MiniApps/Studies/StudiesPages.swift:393: Text(tr(\"Hors d'atteinte : il faudrait \\(TF.int(needed)) % sur les \\(TF.int(left)) % qui restent.\"))"
   ]
  },
+ "Hot-dog": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:298: DishTemplate(name: tr(\"Hot-dog\"),"
+  ]
+ },
  "Hot-dog (pain et saucisse)": {
   "placeholders": 0,
   "uses": [
@@ -14193,6 +14249,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/FoodDatabase.swift:188: f(\"canolaoil\", tr(\"Huile de canola\"), 884, 0, 0, 100, 0, 14, tr(\"1 c. à soupe\"), s: 0, sf: 7.4, na: 0),"
+  ]
+ },
+ "Huile de cuisson ?": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ScanRecap.swift:301: case .oil: tr(\"Huile de cuisson ?\")"
   ]
  },
  "Humidité": {
@@ -14283,6 +14345,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:409: Text(tr(\"Idées générales tirées de la table d'aliments d'Ardane, à adapter à tes goûts. Ce n'est pas un avis médical.\"))"
+  ]
+ },
+ "Ignorer": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:189: Button(tr(\"Ignorer\")) {"
   ]
  },
  "Il affiche tes événements des 48 prochaines heures, directement depuis le calendrier de ton iPhone.": {
@@ -15940,6 +16008,12 @@
    "App/Screens/Home/DailyLayoutEditor.swift:128: Text(tr(\"Large\")).tag(true)"
   ]
  },
+ "Lasagne": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:309: DishTemplate(name: tr(\"Lasagne\"),"
+  ]
+ },
  "Lasagne à la viande": {
   "placeholders": 0,
   "uses": [
@@ -16817,7 +16891,7 @@
  "Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:156: Text(tr(\"Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:223: Text(tr(\"Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.\"))"
   ]
  },
  "Les prévisions des sept prochains jours.": {
@@ -17390,7 +17464,7 @@
  "Légère (1–3 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:969: case .light: tr(\"Légère (1–3 séances)\")"
+   "Shared/Domains/Nutrition.swift:999: case .light: tr(\"Légère (1–3 séances)\")"
   ]
  },
  "M. Gagnon": {
@@ -17539,7 +17613,7 @@
  "Magnésium": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:187: case .magnesium: tr(\"Magnésium\")"
+   "Shared/Domains/Nutrition.swift:205: case .magnesium: tr(\"Magnésium\")"
   ]
  },
  "Mail": {
@@ -17632,7 +17706,7 @@
  "Maintenir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:981: case .maintain: tr(\"Maintenir\")",
+   "Shared/Domains/Nutrition.swift:1011: case .maintain: tr(\"Maintenir\")",
    "Shared/Domains/Profile.swift:229: case .maintain: tr(\"Maintenir\")"
   ]
  },
@@ -17652,7 +17726,7 @@
  "Manganèse": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:192: case .manganese: tr(\"Manganèse\")"
+   "Shared/Domains/Nutrition.swift:210: case .manganese: tr(\"Manganèse\")"
   ]
  },
  "Mangue": {
@@ -18262,7 +18336,7 @@
  "Minéraux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:140: case .minerals: tr(\"Minéraux\")"
+   "Shared/Domains/Nutrition.swift:158: case .minerals: tr(\"Minéraux\")"
   ]
  },
  "Minéraux et vitamines : apports de référence pour les adultes (National Academies), selon ton âge et ton genre.": {
@@ -18411,7 +18485,7 @@
  "Modérée (3–5 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:970: case .moderate: tr(\"Modérée (3–5 séances)\")"
+   "Shared/Domains/Nutrition.swift:1000: case .moderate: tr(\"Modérée (3–5 séances)\")"
   ]
  },
  "Moins d'une minute : rien n'a été noté": {
@@ -18547,7 +18621,7 @@
  "Mon repas": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:649: name = c.value(.name, tr(\"Mon repas\"))"
+   "Shared/Domains/Nutrition.swift:673: name = c.value(.name, tr(\"Mon repas\"))"
   ]
  },
  "Mon thème": {
@@ -18869,7 +18943,7 @@
  "Moyenne des deux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:959: case .neutral: tr(\"Moyenne des deux\")"
+   "Shared/Domains/Nutrition.swift:989: case .neutral: tr(\"Moyenne des deux\")"
   ]
  },
  "Moyenne générale": {
@@ -19212,7 +19286,7 @@
  "Niacine (B3)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:200: case .niacin: tr(\"Niacine (B3)\")"
+   "Shared/Domains/Nutrition.swift:218: case .niacin: tr(\"Niacine (B3)\")"
   ]
  },
  "Niveau": {
@@ -20261,9 +20335,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:267: Text(tr(\"Objectifs\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:102: Section(tr(\"Objectifs\")) {",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:126: Section(tr(\"Objectifs\")) {",
    "App/Screens/Spaces/NutritionSpace.swift:117: Text(tr(\"Objectifs\"))",
-   "Shared/Domains/Nutrition.swift:137: case .energy: tr(\"Objectifs\")"
+   "Shared/Domains/Nutrition.swift:155: case .energy: tr(\"Objectifs\")"
   ]
  },
  "Objectifs d'épargne": {
@@ -20369,13 +20443,13 @@
  "Oméga-3": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:182: case .omega3: tr(\"Oméga-3\")"
+   "Shared/Domains/Nutrition.swift:200: case .omega3: tr(\"Oméga-3\")"
   ]
  },
  "Oméga-6": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:183: case .omega6: tr(\"Oméga-6\")"
+   "Shared/Domains/Nutrition.swift:201: case .omega6: tr(\"Oméga-6\")"
   ]
  },
  "Opacité": {
@@ -20401,7 +20475,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:509: .accessibilityLabel(Text(tr(\"Options de \\(saved.name)\")))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:250: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:334: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
   ]
  },
  "Opérations": {
@@ -21255,7 +21329,7 @@
  "Perdre doucement": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:980: case .lose: tr(\"Perdre doucement\")"
+   "Shared/Domains/Nutrition.swift:1010: case .lose: tr(\"Perdre doucement\")"
   ]
  },
  "Perdre du poids": {
@@ -21395,7 +21469,7 @@
  "Phosphore": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:189: case .phosphorus: tr(\"Phosphore\")"
+   "Shared/Domains/Nutrition.swift:207: case .phosphorus: tr(\"Phosphore\")"
   ]
  },
  "Photo": {
@@ -21488,7 +21562,8 @@
   "placeholders": 0,
   "uses": [
    "Shared/Data/SampleData.swift:222: (18.90, 2, tr(\"Lunch\")), (64.20, 5, tr(\"Quincaillerie\")), (41.30, 1, tr(\"Marché\")), (27.00, 2, tr(\"Pizza\")), (90.00, 3, tr(\"Passe mensuelle\")),",
-   "Shared/Data/SampleData.swift:241: (24 + Double(back * 4), 2, tr(\"Resto\"), 5), (46 - Double(back * 2), 2, tr(\"Brunch\"), 13), (31, 2, tr(\"Pizza\"), 21),"
+   "Shared/Data/SampleData.swift:241: (24 + Double(back * 4), 2, tr(\"Resto\"), 5), (46 - Double(back * 2), 2, tr(\"Brunch\"), 13), (31, 2, tr(\"Pizza\"), 21),",
+   "Shared/Domains/DishTemplates.swift:290: DishTemplate(name: tr(\"Pizza\"),"
   ]
  },
  "Pizza fromage": {
@@ -21993,6 +22068,12 @@
    "Shared/Domains/FoodDatabase.swift:149: f(\"chickpeas\", tr(\"Pois chiches cuits\"), 164, 8.9, 27, 2.6, 7.6, 165, tr(\"1 tasse\"), s: 4.8, sf: 0.3, na: 7, chol: 0),"
   ]
  },
+ "Poisson-frites": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:346: DishTemplate(name: tr(\"Poisson-frites\"),"
+  ]
+ },
  "Poitrine de dinde cuite": {
   "placeholders": 0,
   "uses": [
@@ -22247,7 +22328,7 @@
  "Potassium": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:184: case .potassium: tr(\"Potassium\")"
+   "Shared/Domains/Nutrition.swift:202: case .potassium: tr(\"Potassium\")"
   ]
  },
  "Pouces et index se touchent sous la poitrine.": {
@@ -22687,6 +22768,7 @@
  "Poutine": {
   "placeholders": 0,
   "uses": [
+   "Shared/Domains/DishTemplates.swift:326: DishTemplate(name: tr(\"Poutine\"),",
    "Shared/Domains/FoodDatabase.swift:196: f(\"poutine\", tr(\"Poutine\"), 227, 7, 22, 12, 2, 400, tr(\"1 portion moyenne\"), s: 1, sf: 5, na: 500),"
   ]
  },
@@ -22732,7 +22814,7 @@
  "Prendre du muscle": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:982: case .gain: tr(\"Prendre du muscle\")",
+   "Shared/Domains/Nutrition.swift:1012: case .gain: tr(\"Prendre du muscle\")",
    "Shared/Domains/Profile.swift:230: case .gain: tr(\"Prendre du muscle\")"
   ]
  },
@@ -23327,9 +23409,16 @@
    "Shared/Domains/FoodDatabase.swift:107: f(\"wholepasta\", tr(\"Pâtes de blé entier cuites\"), 149, 6, 30, 1.7, 3.9, 140, tr(\"1 tasse\"), s: 0.8, sf: 0.3, na: 4),"
   ]
  },
+ "Pâtes à la sauce": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:302: DishTemplate(name: tr(\"Pâtes à la sauce\"),"
+  ]
+ },
  "Pâté chinois": {
   "placeholders": 0,
   "uses": [
+   "Shared/Domains/DishTemplates.swift:340: DishTemplate(name: tr(\"Pâté chinois\"),",
    "Shared/Domains/FoodDatabase.swift:213: f(\"shepherd\", tr(\"Pâté chinois\"), 128, 7, 13, 5.5, 1.5, 300, tr(\"1 portion\"), s: 2.5, sf: 2.5, na: 280),"
   ]
  },
@@ -23409,8 +23498,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:193: NumberRow(title: tr(\"Quantité\"), value: $grams, unit: \"g\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:263: .accessibilityLabel(tr(\"Quantité\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:266: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:347: .accessibilityLabel(tr(\"Quantité\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:350: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
    "App/Screens/Spaces/MoneySpaces.swift:111: NumberRow(title: holding.kind == .cash ? tr(\"Montant\") : tr(\"Quantité\"), value: $holding.quantity)"
   ]
  },
@@ -24056,8 +24145,8 @@
  "Remplacer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:65: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:238: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:69: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:322: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")"
   ]
  },
  "Remplacer tes données par cette sauvegarde ?": {
@@ -24924,7 +25013,7 @@
  "Riboflavine (B2)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:199: case .riboflavin: tr(\"Riboflavine (B2)\")"
+   "Shared/Domains/Nutrition.swift:217: case .riboflavin: tr(\"Riboflavine (B2)\")"
   ]
  },
  "Riches en fibres": {
@@ -25701,7 +25790,14 @@
  "Salade César": {
   "placeholders": 0,
   "uses": [
+   "Shared/Domains/DishTemplates.swift:316: DishTemplate(name: tr(\"Salade César\"),",
    "Shared/Domains/FoodDatabase.swift:200: f(\"caesar\", tr(\"Salade César\"), 190, 4.7, 7.5, 16, 1.5, 150, tr(\"1 portion\"), s: 1.5, sf: 3, na: 430),"
+  ]
+ },
+ "Salade composée": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:312: DishTemplate(name: tr(\"Salade composée\"),"
   ]
  },
  "Salade du jardin (sans vinaigrette)": {
@@ -25762,6 +25858,12 @@
    "App/Screens/MiniApps/Studies/StudiesApp.swift:42: static let weekdayNames = [tr(\"Lundi\"), tr(\"Mardi\"), tr(\"Mercredi\"), tr(\"Jeudi\"), tr(\"Vendredi\"), tr(\"Samedi\"), tr(\"Dimanche\")]",
    "App/Screens/Spaces/StudentSpace.swift:7: private let weekdayNames = [tr(\"Lundi\"), tr(\"Mardi\"), tr(\"Mercredi\"), tr(\"Jeudi\"), tr(\"Vendredi\"), tr(\"Samedi\"), tr(\"Dimanche\")]",
    "App/Screens/Spaces/StudentSpace.swift:245: Text([tr(\"Lundi\"), tr(\"Mardi\"), tr(\"Mercredi\"), tr(\"Jeudi\"), tr(\"Vendredi\"), tr(\"Samedi\"), tr(\"Dimanche\")][day - 1]).tag(day)"
+  ]
+ },
+ "Sandwich": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:280: DishTemplate(name: tr(\"Sandwich\"),"
   ]
  },
  "Sandwich au fromage fondant": {
@@ -25865,6 +25967,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/FoodDatabase.swift:143: f(\"sardines\", tr(\"Sardines en conserve\"), 208, 25, 0, 11, 0, 90, tr(\"1 boîte\"), s: 0, sf: 1.5, na: 307, chol: 142),"
+  ]
+ },
+ "Sauce ?": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/ScanRecap.swift:303: case .sauce: tr(\"Sauce ?\")"
   ]
  },
  "Sauce BBQ": {
@@ -26481,7 +26589,7 @@
  "Sodium": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:177: case .sodium: tr(\"Sodium\")"
+   "Shared/Domains/Nutrition.swift:195: case .sodium: tr(\"Sodium\")"
   ]
  },
  "Soit %@ g de sel": {
@@ -26629,6 +26737,12 @@
    "Shared/Domains/ExerciseLibrary.swift:734: x(\"single-leg-rdl\", tr(\"Soulevé de terre sur une jambe\"), [.hamstrings], [.glutes], [.dumbbells, .kettlebell], .strength, .intermediate, .hinge,"
   ]
  },
+ "Soupe": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:337: DishTemplate(name: tr(\"Soupe\"),"
+  ]
+ },
  "Soupe aux légumes": {
   "placeholders": 0,
   "uses": [
@@ -26644,7 +26758,7 @@
  "Souper": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:346: case .dinner: tr(\"Souper\")"
+   "Shared/Domains/Nutrition.swift:364: case .dinner: tr(\"Souper\")"
   ]
  },
  "Souper avec Léa": {
@@ -26711,6 +26825,18 @@
   "placeholders": 0,
   "uses": [
    "Shared/Data/SampleData.swift:310: BusinessExpense(date: day(-15, from: now), amount: 1_450, label: tr(\"Sous-traitance\")),"
+  ]
+ },
+ "Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:94: Text(tr(\"Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord.\"))"
+  ]
+ },
+ "Spaghetti": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:305: DishTemplate(name: tr(\"Spaghetti\"),"
   ]
  },
  "Spaghetti sauce à la viande": {
@@ -26949,7 +27075,7 @@
  "Sucres": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:173: case .sugars: tr(\"Sucres\")"
+   "Shared/Domains/Nutrition.swift:191: case .sugars: tr(\"Sucres\")"
   ]
  },
  "Suggestions": {
@@ -27316,6 +27442,12 @@
    "Shared/Data/SampleData.swift:394: Flashcard(deck: tr(\"Anglais\"), front: tr(\"To overcome\"), back: tr(\"Surmonter\"), box: 1, due: now.addingTimeInterval(-60)),"
   ]
  },
+ "Sushis": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:323: DishTemplate(name: tr(\"Sushis\"),"
+  ]
+ },
  "Sushis (maki)": {
   "placeholders": 0,
   "uses": [
@@ -27568,7 +27700,7 @@
  "Sédentaire": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:968: case .sedentary: tr(\"Sédentaire\")"
+   "Shared/Domains/Nutrition.swift:998: case .sedentary: tr(\"Sédentaire\")"
   ]
  },
  "Sélection": {
@@ -27586,7 +27718,7 @@
  "Sélénium": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:190: case .selenium: tr(\"Sélénium\")"
+   "Shared/Domains/Nutrition.swift:208: case .selenium: tr(\"Sélénium\")"
   ]
  },
  "Sénégal": {
@@ -28807,7 +28939,7 @@
  "Thiamine (B1)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:198: case .thiamin: tr(\"Thiamine (B1)\")"
+   "Shared/Domains/Nutrition.swift:216: case .thiamin: tr(\"Thiamine (B1)\")"
   ]
  },
  "Thon en conserve (eau)": {
@@ -29188,6 +29320,12 @@
    "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .mileage, title: tr(\"Kilométrage\"), summary: tr(\"Ton compteur et les kilomètres parcourus ce mois-ci.\"), category: .car, symbol: \"gauge.with.dots.needle.33percent\", isPremium: true, fam"
   ]
  },
+ "Ton habitude": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:307: Text(tr(\"Ton habitude\"))"
+  ]
+ },
  "Ton horaire": {
   "placeholders": 0,
   "uses": [
@@ -29448,7 +29586,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:1307: Text(tr(\"Total\")).font(.caption.weight(.bold))",
    "App/Screens/Home/DailySection.swift:1317: Text(tr(\"Total\")).font(.subheadline.weight(.bold))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:94: Text(tr(\"Total\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:110: Text(tr(\"Total\"))"
   ]
  },
  "Total du mois": {
@@ -29467,6 +29605,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:365: case .income: tr(\"Total gagné\")"
+  ]
+ },
+ "Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:117: Text(tr(\"Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum.\"))"
   ]
  },
  "Total payé": {
@@ -29667,6 +29811,12 @@
    "Shared/Domains/ExerciseLibrary.swift:325: mistakes: [tr(\"Cambrer le dos pour monter plus haut.\"), tr(\"Tourner le bassin.\")]",
    "Shared/Domains/ExerciseTechniques.swift:138: [tr(\"Cambrer pour monter plus haut.\"), tr(\"Tourner le bassin.\")]),",
    "Shared/Domains/ExerciseTechniques.swift:336: [tr(\"Tourner le bassin.\"), tr(\"Aller trop vite.\")]),"
+  ]
+ },
+ "Tourtière": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Domains/DishTemplates.swift:343: DishTemplate(name: tr(\"Tourtière\"),"
   ]
  },
  "Tous": {
@@ -31182,49 +31332,49 @@
  "Vitamine A": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:193: case .vitaminA: tr(\"Vitamine A\")"
+   "Shared/Domains/Nutrition.swift:211: case .vitaminA: tr(\"Vitamine A\")"
   ]
  },
  "Vitamine B12": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:204: case .vitaminB12: tr(\"Vitamine B12\")"
+   "Shared/Domains/Nutrition.swift:222: case .vitaminB12: tr(\"Vitamine B12\")"
   ]
  },
  "Vitamine B6": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:202: case .vitaminB6: tr(\"Vitamine B6\")"
+   "Shared/Domains/Nutrition.swift:220: case .vitaminB6: tr(\"Vitamine B6\")"
   ]
  },
  "Vitamine C": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:194: case .vitaminC: tr(\"Vitamine C\")"
+   "Shared/Domains/Nutrition.swift:212: case .vitaminC: tr(\"Vitamine C\")"
   ]
  },
  "Vitamine D": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:195: case .vitaminD: tr(\"Vitamine D\")"
+   "Shared/Domains/Nutrition.swift:213: case .vitaminD: tr(\"Vitamine D\")"
   ]
  },
  "Vitamine E": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:196: case .vitaminE: tr(\"Vitamine E\")"
+   "Shared/Domains/Nutrition.swift:214: case .vitaminE: tr(\"Vitamine E\")"
   ]
  },
  "Vitamine K": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:197: case .vitaminK: tr(\"Vitamine K\")"
+   "Shared/Domains/Nutrition.swift:215: case .vitaminK: tr(\"Vitamine K\")"
   ]
  },
  "Vitamines": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:141: case .vitamins: tr(\"Vitamines\")"
+   "Shared/Domains/Nutrition.swift:159: case .vitamins: tr(\"Vitamines\")"
   ]
  },
  "Voile pour la lisibilité": {
@@ -31436,7 +31586,7 @@
  "Vérifié": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:284: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:368: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
   ]
  },
  "Vérité et réconciliation": {
@@ -31584,7 +31734,7 @@
  "Zinc": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:188: case .zinc: tr(\"Zinc\")"
+   "Shared/Domains/Nutrition.swift:206: case .zinc: tr(\"Zinc\")"
   ]
  },
  "Zoom": {
@@ -31702,7 +31852,7 @@
  "assez sûr": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:36: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
+   "Shared/Domains/ScanRecap.swift:68: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
   ]
  },
  "atteint": {
@@ -33111,7 +33261,7 @@
  "peu sûr": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:36: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
+   "Shared/Domains/ScanRecap.swift:68: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
   ]
  },
  "photo illisible": {
@@ -33905,6 +34055,12 @@
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:118: title: last == nil ? tr(\"À configurer\") : tr(\"Active\"),"
   ]
  },
+ "À confirmer": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:92: Text(tr(\"À confirmer\"))"
+  ]
+ },
  "À droite": {
   "placeholders": 0,
   "uses": [
@@ -34009,7 +34165,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:275: Text(tr(\"À limiter\"))",
-   "Shared/Domains/Nutrition.swift:138: case .limits: tr(\"À limiter\")"
+   "Shared/Domains/Nutrition.swift:156: case .limits: tr(\"À limiter\")"
   ]
  },
  "À ne pas oublier": {
@@ -34402,7 +34558,7 @@
  "Élevée (6–7 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:971: case .active: tr(\"Élevée (6–7 séances)\")"
+   "Shared/Domains/Nutrition.swift:1001: case .active: tr(\"Élevée (6–7 séances)\")"
   ]
  },
  "Élégance": {
@@ -34916,6 +35072,12 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:94: if let range = CarMath.range(model.car) { return tr(\"≈ \\(Fmt.number(Int(range.km))) km d'autonomie\") }"
+  ]
+ },
+ "≈ %@–%@ kcal": {
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:171: return tr(\"≈ \\(TF.int(rounded.low))–\\(TF.int(rounded.high)) kcal\")"
   ]
  }
 }

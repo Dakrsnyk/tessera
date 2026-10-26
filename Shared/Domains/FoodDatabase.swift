@@ -426,6 +426,11 @@ enum OpenFoodFacts {
                     ?? per100("energy").map({ $0 / 4.184 }) ?? fromMacros else { return nil }
             let code = barcode ?? self.code ?? UUID().uuidString
             let serving = servingGrams > 0 ? servingGrams : 100
+            // A macronutrient the product does not give is unknown, not zero: 0 is stored but flagged.
+            var unknown = Set<MacroField>()
+            if protein == nil { unknown.insert(.protein) }
+            if carbs == nil { unknown.insert(.carbs) }
+            if fat == nil { unknown.insert(.fat) }
             return FoodItem(
                 id: "off.\(code)",
                 name: name,
@@ -444,9 +449,16 @@ enum OpenFoodFacts {
                 // Open Food Facts gives sodium and cholesterol in grams.
                 sodiumMg: per100("sodium").map { $0 * 1_000 } ?? per100("salt").map { $0 * 400 },
                 cholesterolMg: per100("cholesterol").map { $0 * 1_000 },
-                micros: OpenFoodFacts.micros(per100)
+                micros: OpenFoodFacts.micros(per100),
+                unknownMacros: unknown.isEmpty ? nil : unknown
             )
         }
+    }
+
+    /// The food of one product as Open Food Facts sends it (`{"code": …, "product_name": …, "nutriments": {…}}`),
+    /// or nil when it has no name or no energy. Same parsing as a search or a barcode; also what the tests use.
+    static func food(fromProductJSON data: Data, barcode: String? = nil) -> FoodItem? {
+        (try? JSONDecoder().decode(Product.self, from: data))?.item(barcode: barcode)
     }
 
     /// Open Food Facts keeps minerals and vitamins in grams per 100 g, and alcohol in % vol: only those on the

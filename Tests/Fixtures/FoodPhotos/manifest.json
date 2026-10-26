@@ -1,0 +1,478 @@
+[
+  {
+    "file": "01-pomme.jpg",
+    "category": "single",
+    "expected": [
+      "pomme"
+    ],
+    "alternatives": [
+      "fruit"
+    ]
+  },
+  {
+    "file": "02-oeuf-au-plat.jpg",
+    "category": "single",
+    "expected": [
+      "oeuf"
+    ],
+    "alternatives": [
+      "oeufs"
+    ]
+  },
+  {
+    "file": "03-pain.jpg",
+    "category": "single",
+    "expected": [
+      "pain"
+    ],
+    "alternatives": [
+      "baguette"
+    ]
+  },
+  {
+    "file": "04-riz.jpg",
+    "category": "single",
+    "expected": [
+      "riz"
+    ],
+    "alternatives": []
+  },
+  {
+    "file": "05-poulet-roti.jpg",
+    "category": "single",
+    "expected": [
+      "poulet"
+    ],
+    "alternatives": [
+      "volaille"
+    ]
+  },
+  {
+    "file": "06-frites.jpg",
+    "category": "single",
+    "expected": [
+      "frites"
+    ],
+    "alternatives": [
+      "pomme de terre"
+    ]
+  },
+  {
+    "file": "07-orange.jpg",
+    "category": "single",
+    "expected": [
+      "orange"
+    ],
+    "alternatives": [
+      "fruit"
+    ]
+  },
+  {
+    "file": "08-fraises.jpg",
+    "category": "single",
+    "expected": [
+      "fraise"
+    ],
+    "alternatives": [
+      "fruit"
+    ]
+  },
+  {
+    "file": "09-pizza.jpg",
+    "category": "composite",
+    "expected": [
+      "pizza"
+    ],
+    "alternatives": []
+  },
+  {
+    "file": "10-hamburger.jpg",
+    "category": "composite",
+    "expected": [
+      "hamburger"
+    ],
+    "alternatives": [
+      "burger",
+      "sandwich"
+    ]
+  },
+  {
+    "file": "11-cheeseburger-frites.jpg",
+    "category": "composite",
+    "expected": [
+      "hamburger"
+    ],
+    "alternatives": [
+      "burger",
+      "frites",
+      "sandwich"
+    ]
+  },
+  {
+    "file": "12-sandwich.jpg",
+    "category": "composite",
+    "expected": [
+      "sandwich"
+    ],
+    "alternatives": [
+      "pain"
+    ]
+  },
+  {
+    "file": "13-spaghetti-sauce.jpg",
+    "category": "composite",
+    "expected": [
+      "spaghetti"
+    ],
+    "alternatives": [
+      "pates",
+      "pâtes"
+    ]
+  },
+  {
+    "file": "14-pates-bolognaise.jpg",
+    "category": "composite",
+    "expected": [
+      "pates",
+      "pâtes",
+      "spaghetti"
+    ],
+    "alternatives": [
+      "viande",
+      "sauce"
+    ]
+  },
+  {
+    "file": "15-salade-jardin.jpg",
+    "category": "composite",
+    "expected": [
+      "salade"
+    ],
+    "alternatives": [
+      "laitue",
+      "tomate"
+    ]
+  },
+  {
+    "file": "16-salade-cesar.jpg",
+    "category": "composite",
+    "expected": [
+      "salade"
+    ],
+    "alternatives": [
+      "laitue",
+      "poulet"
+    ]
+  },
+  {
+    "file": "17-poutine.jpg",
+    "category": "composite",
+    "expected": [
+      "poutine"
+    ],
+    "alternatives": [
+      "frites"
+    ]
+  },
+  {
+    "file": "18-soupe.jpg",
+    "category": "composite",
+    "expected": [
+      "soupe"
+    ],
+    "alternatives": [
+      "potage"
+    ]
+  },
+  {
+    "file": "19-sushi.jpg",
+    "category": "composite",
+    "expected": [
+      "sushi"
+    ],
+    "alternatives": [
+      "riz",
+      "poisson"
+    ]
+  },
+  {
+    "file": "20-pancakes.jpg",
+    "category": "composite",
+    "expected": [
+      "pancake",
+      "crepe",
+      "crêpe"
+    ],
+    "alternatives": [
+      "crepes"
+    ]
+  },
+  {
+    "file": "21-fish-and-chips.jpg",
+    "category": "composite",
+    "expected": [
+      "poisson",
+      "fish"
+    ],
+    "alternatives": [
+      "frites"
+    ]
+  },
+  {
+    "file": "22-omelette.jpg",
+    "category": "composite",
+    "expected": [
+      "omelette"
+    ],
+    "alternatives": [
+      "oeuf"
+    ]
+  },
+  {
+    "file": "23-tacos.jpg",
+    "category": "composite",
+    "expected": [
+      "taco",
+      "tacos"
+    ],
+    "alternatives": []
+  },
+  {
+    "file": "24-curry-riz.jpg",
+    "category": "composite",
+    "expected": [
+      "curry"
+    ],
+    "alternatives": [
+      "riz"
+    ]
+  },
+  {
+    "file": "25-ramen.jpg",
+    "category": "composite",
+    "expected": [
+      "ramen",
+      "nouilles"
+    ],
+    "alternatives": [
+      "soupe"
+    ]
+  },
+  {
+    "file": "26-tourtiere.jpg",
+    "category": "composite",
+    "expected": [
+      "tourtiere",
+      "tourtière"
+    ],
+    "alternatives": [
+      "tarte",
+      "pate"
+    ]
+  },
+  {
+    "file": "27-pate-chinois.jpg",
+    "category": "composite",
+    "expected": [
+      "pate chinois",
+      "pâté chinois"
+    ],
+    "alternatives": [
+      "viande",
+      "puree",
+      "purée"
+    ]
+  },
+  {
+    "file": "28-lasagne.jpg",
+    "category": "composite",
+    "expected": [
+      "lasagne"
+    ],
+    "alternatives": [
+      "pates",
+      "pâtes"
+    ]
+  },
+  {
+    "file": "29-steak-frites.jpg",
+    "category": "plate",
+    "expected": [
+      "steak",
+      "boeuf"
+    ],
+    "alternatives": [
+      "frites",
+      "viande"
+    ]
+  },
+  {
+    "file": "30-saumon-asperges-riz.jpg",
+    "category": "plate",
+    "expected": [
+      "saumon"
+    ],
+    "alternatives": [
+      "poisson",
+      "riz",
+      "asperge"
+    ]
+  },
+  {
+    "file": "31-poulet-legumes.jpg",
+    "category": "plate",
+    "expected": [
+      "poulet"
+    ],
+    "alternatives": [
+      "legumes",
+      "légumes"
+    ]
+  },
+  {
+    "file": "32-assiette-repas.jpg",
+    "category": "plate",
+    "expected": [
+      "viande",
+      "boeuf",
+      "poulet"
+    ],
+    "alternatives": [
+      "legumes",
+      "pomme de terre"
+    ]
+  },
+  {
+    "file": "33-porc-patate-douce.jpg",
+    "category": "plate",
+    "expected": [
+      "porc"
+    ],
+    "alternatives": [
+      "patate douce",
+      "puree",
+      "purée"
+    ]
+  },
+  {
+    "file": "34-petit-dej-oeufs.jpg",
+    "category": "breakfast",
+    "expected": [
+      "oeuf"
+    ],
+    "alternatives": [
+      "bacon",
+      "pain",
+      "toast"
+    ]
+  },
+  {
+    "file": "35-petit-dej-cereales.jpg",
+    "category": "breakfast",
+    "expected": [
+      "cereales",
+      "céréales"
+    ],
+    "alternatives": [
+      "lait"
+    ]
+  },
+  {
+    "file": "36-petit-dej-croissant.jpg",
+    "category": "breakfast",
+    "expected": [
+      "croissant"
+    ],
+    "alternatives": [
+      "cafe",
+      "café"
+    ]
+  },
+  {
+    "file": "37-petit-dej-yogourt.jpg",
+    "category": "breakfast",
+    "expected": [
+      "yogourt",
+      "yaourt"
+    ],
+    "alternatives": [
+      "granola",
+      "fruits"
+    ]
+  },
+  {
+    "file": "38-gateau-chocolat.jpg",
+    "category": "dessert",
+    "expected": [
+      "gateau",
+      "gâteau"
+    ],
+    "alternatives": [
+      "chocolat"
+    ]
+  },
+  {
+    "file": "39-creme-glacee.jpg",
+    "category": "dessert",
+    "expected": [
+      "creme glacee",
+      "crème glacée",
+      "glace"
+    ],
+    "alternatives": []
+  },
+  {
+    "file": "40-tarte-pommes.jpg",
+    "category": "dessert",
+    "expected": [
+      "tarte"
+    ],
+    "alternatives": [
+      "pomme"
+    ]
+  },
+  {
+    "file": "41-brownie.jpg",
+    "category": "dessert",
+    "expected": [
+      "brownie"
+    ],
+    "alternatives": [
+      "chocolat",
+      "gateau"
+    ]
+  },
+  {
+    "file": "42-beigne.jpg",
+    "category": "dessert",
+    "expected": [
+      "beigne",
+      "donut"
+    ],
+    "alternatives": [
+      "chocolat"
+    ]
+  },
+  {
+    "file": "43-biscuits.jpg",
+    "category": "dessert",
+    "expected": [
+      "biscuit",
+      "cookie"
+    ],
+    "alternatives": [
+      "chocolat"
+    ]
+  },
+  {
+    "file": "44-cheesecake.jpg",
+    "category": "dessert",
+    "expected": [
+      "cheesecake",
+      "gateau"
+    ],
+    "alternatives": [
+      "fromage"
+    ]
+  }
+]

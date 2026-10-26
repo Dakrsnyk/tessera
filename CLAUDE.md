@@ -19,7 +19,7 @@ Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Gro
 
 ## Règles impératives
 - Le déverrouillage premium DEBUG ne doit JAMAIS être actif en Release (check_swift.py le vérifie).
-- Ne pas casser l'existant. Pas d'image_search. Livrer des PNG/GIF (l'utilisateur ne peut pas ouvrir les artifacts Design).
+- Ne pas casser l'existant. Pas d'image_search (sauf autorisation du 2026-10-26 : photos de plats LIBRES DE DROITS seulement, CC0, domaine public ou CC BY, jamais CC BY-SA ni photos protégées, pour les tests de reconnaissance ; licence et auteur notés dans Tests/Fixtures/FoodPhotos/ATTRIBUTIONS.md). Livrer des PNG/GIF (l'utilisateur ne peut pas ouvrir les artifacts Design).
 - Compte Apple Developer acheté le 2026-10-15 : installer par TestFlight (`[testflight]`) ; le sideload de l'IPA de test reste possible mais limite widgets écran verrouillé / Live Activities.
 - Le dépôt est public pour la CI : rappeler de le repasser en privé.
 - Depuis le 2026-10-25 : à CHAQUE modification terminée, lancer un commit `[interne]` (build Premium sur TestFlight, l'utilisateur le teste sur son iPhone) sans attendre qu'il le redemande ; la vérification sans Premium (`[unit]`/`[daily]`/`[apps]`) vient après ; `[testflight]` (version publique) seulement sur son accord explicite.

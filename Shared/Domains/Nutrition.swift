@@ -29,11 +29,23 @@ struct FoodItem: Codable, Hashable, Identifiable {
     /// Fats, minerals and vitamins per 100 g, when the source gives them (Canadian Nutrient File, Open
     /// Food Facts). Nil for foods saved before they were read.
     var micros: Micronutrients?
+    /// Macronutrients the source did not give (Open Food Facts leaves some out). Their value above is a 0
+    /// that means « unknown », never « none »: the totals that include this food are marked incomplete.
+    /// Nil (or empty): everything is known, which is also the case of every food saved before this existed.
+    var unknownMacros: Set<MacroField>? = nil
 
     var displayName: String {
         guard let brand, !brand.isEmpty else { return name }
         return "\(name) · \(brand)"
     }
+
+    /// True when at least one macronutrient is unknown.
+    var hasUnknownMacros: Bool { !(unknownMacros ?? []).isEmpty }
+
+    /// The macronutrients per 100 g, or nil when the source did not give them.
+    var knownProtein: Double? { unknownMacros?.contains(.protein) == true ? nil : protein }
+    var knownCarbs: Double? { unknownMacros?.contains(.carbs) == true ? nil : carbs }
+    var knownFat: Double? { unknownMacros?.contains(.fat) == true ? nil : fat }
 
     func nutrients(grams: Double) -> NutritionTotals {
         let factor = grams / 100
@@ -41,9 +53,15 @@ struct FoodItem: Codable, Hashable, Identifiable {
             kcal: kcal * factor, protein: protein * factor, carbs: carbs * factor, fat: fat * factor, fiber: fiber * factor,
             sugars: sugars.map { $0 * factor }, saturatedFat: saturatedFat.map { $0 * factor },
             sodiumMg: sodiumMg.map { $0 * factor }, cholesterolMg: cholesterolMg.map { $0 * factor },
-            micros: micros.map { $0.scaled(factor) } ?? Micronutrients()
+            micros: micros.map { $0.scaled(factor) } ?? Micronutrients(),
+            isIncomplete: hasUnknownMacros
         )
     }
+}
+
+/// The macronutrients a source may leave out.
+enum MacroField: String, Codable, Hashable {
+    case protein, carbs, fat
 }
 
 /// Fats, minerals, vitamins and a few more (caffeine, alcohol): per 100 g on a food, per day on totals. A
@@ -386,6 +404,8 @@ struct FoodEntry: Codable, Hashable, Identifiable {
     var meal: MealType
     var food: FoodItem
     var grams: Double
+    /// How the entry was created. Nil on the entries saved before this was recorded.
+    var origin: EntryOrigin? = nil
 
     var totals: NutritionTotals { food.nutrients(grams: grams) }
 }
@@ -402,6 +422,9 @@ struct NutritionTotals: Hashable {
     var sodiumMg: Double? = nil
     var cholesterolMg: Double? = nil
     var micros = Micronutrients()
+    /// True when a food in the sum has a macronutrient the source did not give: the macros are then a
+    /// minimum, not the real total.
+    var isIncomplete = false
 
     /// Salt from sodium (1 g of sodium is 2.5 g of salt, the conversion on nutrition labels).
     var saltG: Double? { sodiumMg.map { $0 * 2.5 / 1_000 } }
@@ -418,7 +441,8 @@ struct NutritionTotals: Hashable {
             kcal: lhs.kcal + rhs.kcal, protein: lhs.protein + rhs.protein, carbs: lhs.carbs + rhs.carbs, fat: lhs.fat + rhs.fat, fiber: lhs.fiber + rhs.fiber,
             sugars: add(lhs.sugars, rhs.sugars), saturatedFat: add(lhs.saturatedFat, rhs.saturatedFat),
             sodiumMg: add(lhs.sodiumMg, rhs.sodiumMg), cholesterolMg: add(lhs.cholesterolMg, rhs.cholesterolMg),
-            micros: lhs.micros + rhs.micros
+            micros: lhs.micros + rhs.micros,
+            isIncomplete: lhs.isIncomplete || rhs.isIncomplete
         )
     }
 }
@@ -659,8 +683,12 @@ struct NutritionState: Codable, Hashable {
     var customFoods: [FoodItem] = []
     var recentFoods: [FoodItem] = []
     var savedMeals: [SavedMeal] = []
+    /// What the corrections after scans taught the app, on this iPhone only.
+    var scanLearning = ScanLearning()
+    /// Visual fingerprints (never photos) of the meals validated from a photo, on this iPhone only.
+    var mealMemory = MealMemory()
 
-    enum CodingKeys: String, CodingKey { case goals, entries, favorites, customFoods, recentFoods, savedMeals }
+    enum CodingKeys: String, CodingKey { case goals, entries, favorites, customFoods, recentFoods, savedMeals, scanLearning, mealMemory }
 
     init() {}
 
@@ -672,10 +700,12 @@ struct NutritionState: Codable, Hashable {
         customFoods = c.value(.customFoods, [])
         recentFoods = c.value(.recentFoods, [])
         savedMeals = c.value(.savedMeals, [])
+        scanLearning = c.value(.scanLearning, ScanLearning())
+        mealMemory = c.value(.mealMemory, MealMemory())
     }
 
-    mutating func log(_ food: FoodItem, grams: Double, meal: MealType, at date: Date = Date()) {
-        entries.append(FoodEntry(date: date, meal: meal, food: food, grams: grams))
+    mutating func log(_ food: FoodItem, grams: Double, meal: MealType, at date: Date = Date(), origin: EntryOrigin? = nil) {
+        entries.append(FoodEntry(date: date, meal: meal, food: food, grams: grams, origin: origin))
         recentFoods.removeAll { $0.id == food.id }
         recentFoods.insert(food, at: 0)
         if recentFoods.count > 20 { recentFoods.removeLast(recentFoods.count - 20) }

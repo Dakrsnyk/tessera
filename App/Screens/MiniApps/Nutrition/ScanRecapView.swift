@@ -24,6 +24,8 @@ struct ScanRecapView: View {
     @State private var meal: MealType = .current()
     @State private var picker: FoodPickPurpose?
     @State private var isSaving = false
+    /// Suggested lines the person turned down for this recap.
+    @State private var dismissedSuggestions: Set<String> = []
 
     /// Why the food search is opened: one more food, or another food for a line.
     private enum FoodPickPurpose: Identifiable {
@@ -42,7 +44,9 @@ struct ScanRecapView: View {
         let state = model.nutrition
         let known = NutritionTiles.Targets(model.profile)
         let totals = recap.totals
-        let approximate = recap.hasEstimate ? "≈ " : ""
+        // « ≈ » for a guess, « ≥ » when a food lacks a macronutrient (the total is then a minimum).
+        let approximate = recap.isIncomplete ? "≥ " : (recap.showsRange ? "≈ " : "")
+        let suggestions = recap.suggestions().filter { !dismissedSuggestions.contains($0.id) }
         let left = state.goals.kcal - NutritionMath.totals(state, on: day).kcal - totals.kcal
         List {
             Section {
@@ -79,6 +83,18 @@ struct ScanRecapView: View {
                 linesFooter
             }
 
+            if !suggestions.isEmpty {
+                Section {
+                    ForEach(suggestions) { suggestion in
+                        suggestionRow(suggestion)
+                    }
+                } header: {
+                    Text(tr("À confirmer"))
+                } footer: {
+                    Text(tr("Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord."))
+                }
+            }
+
             Section {
                 Picker(tr("Repas"), selection: $meal) {
                     ForEach(MealType.allCases) { Text($0.title).tag($0) }
@@ -86,21 +102,41 @@ struct ScanRecapView: View {
             }
 
             Section {
-                ValueRow(title: tr("Calories"), value: approximate + tr("\(TF.int(totals.kcal)) kcal"))
+                ValueRow(title: tr("Calories"), value: recap.showsRange ? Self.kcalRangeText(recap.kcalRange) : approximate + tr("\(TF.int(totals.kcal)) kcal"))
                 ValueRow(title: tr("Protéines"), value: "\(approximate)\(TF.decimal(totals.protein, 1)) g")
                 ValueRow(title: tr("Glucides"), value: "\(approximate)\(TF.decimal(totals.carbs, 1)) g")
                 ValueRow(title: tr("Lipides"), value: "\(approximate)\(TF.decimal(totals.fat, 1)) g")
             } header: {
                 Text(tr("Total"))
             } footer: {
-                if known.kcal {
-                    Text(left >= 0 ? tr("Après ajout, il te restera \(TF.int(left)) kcal.") : tr("Après ajout, tu dépasseras ton objectif de \(TF.int(-left)) kcal."))
+                VStack(alignment: .leading, spacing: 6) {
+                    if let note = recap.memoryNote {
+                        Text(note)
+                    }
+                    if recap.isIncomplete {
+                        Text(tr("Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum."))
+                    }
+                    if known.kcal {
+                        Text(left >= 0 ? tr("Après ajout, il te restera \(TF.int(left)) kcal.") : tr("Après ajout, tu dépasseras ton objectif de \(TF.int(-left)) kcal."))
+                    }
                 }
             }
 
             if known.kcal || known.protein || known.carbs || known.fat {
                 Section(tr("Objectifs")) {
                     goalRows(state: state, known: known, added: totals)
+                }
+            }
+
+            if source == .photo {
+                Section {
+                    Toggle(tr("Contribuer à l'amélioration"), isOn: Binding(
+                        get: { model.nutrition.scanLearning.contributionEnabled },
+                        set: { value in model.update(\.nutrition) { $0.scanLearning.contributionEnabled = value } }
+                    ))
+                    .frame(minHeight: 44)
+                } footer: {
+                    Text(tr("Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans."))
                 }
             }
         }
@@ -127,6 +163,37 @@ struct ScanRecapView: View {
     }
 
     // MARK: Pieces
+
+    /// « ≈ 420–560 kcal »: the bounds rounded outwards, so the range never looks more exact than it is.
+    static func kcalRangeText(_ range: NutrientRange) -> String {
+        let step: Double = range.high < 100 ? 5 : 10
+        let rounded = range.rounded(to: step)
+        return tr("≈ \(TF.int(rounded.low))–\(TF.int(rounded.high)) kcal")
+    }
+
+    /// A line the photo cannot show (oil, butter, sauce), to add or ignore.
+    private func suggestionRow(_ suggestion: ScanSuggestion) -> some View {
+        HStack(spacing: 8) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(suggestion.title).font(.body.weight(.semibold))
+                Text(tr("\(suggestion.food.name) · \(TF.int(suggestion.grams)) g · ≈ \(TF.int(suggestion.totals.kcal)) kcal"))
+                    .font(.footnote)
+                    .foregroundStyle(Color.secondary)
+            }
+            Spacer(minLength: 0)
+            Button(tr("Ajouter")) {
+                recap.accept(suggestion)
+            }
+            .buttonStyle(.borderless)
+            .frame(minHeight: 44)
+            Button(tr("Ignorer")) {
+                dismissedSuggestions.insert(suggestion.id)
+            }
+            .buttonStyle(.borderless)
+            .foregroundStyle(Color.secondary)
+            .frame(minHeight: 44)
+        }
+    }
 
     /// The day's calories and macros once the recap is added, against the targets the person gave.
     @ViewBuilder
@@ -213,6 +280,18 @@ private struct ScanLineRow: View {
     let onReplace: () -> Void
     let onRemove: () -> Void
 
+    /// Calories and macros of the line: a range for a guess (« ≈ 420–560 kcal »), « ? » for a macronutrient
+    /// the source did not give (never a zero made up).
+    private func macroSummary(_ totals: NutritionTotals) -> String {
+        let mark = line.showsRange ? "≈ " : ""
+        func macro(_ value: Double, known: Bool) -> String { known ? mark + TF.decimal(value, 1) : "?" }
+        let protein = macro(totals.protein, known: line.food.knownProtein != nil)
+        let carbs = macro(totals.carbs, known: line.food.knownCarbs != nil)
+        let fat = macro(totals.fat, known: line.food.knownFat != nil)
+        let kcal = line.showsRange ? ScanRecapView.kcalRangeText(line.kcalRange) : tr("\(TF.int(totals.kcal)) kcal")
+        return tr("\(kcal) · P \(protein) · G \(carbs) · L \(fat)")
+    }
+
     var body: some View {
         let totals = line.totals
         let grams = Binding<Double>(get: { line.grams }, set: { onGrams($0) })
@@ -224,6 +303,11 @@ private struct ScanLineRow: View {
                         .fixedSize(horizontal: false, vertical: true)
                     HStack(spacing: 8) {
                         ScanBadge(isEstimate: line.isEstimate, source: line.food.source)
+                        if line.usesHabit {
+                            Text(tr("Ton habitude"))
+                                .font(.caption)
+                                .foregroundStyle(Color.secondary)
+                        }
                         if let word = line.confidenceWord {
                             Text(word)
                                 .font(.caption)
@@ -249,7 +333,7 @@ private struct ScanLineRow: View {
                 .buttonStyle(.borderless)
                 .accessibilityLabel(tr("Options de \(line.food.name)"))
             }
-            Text(tr("\(TF.int(totals.kcal)) kcal · P \(TF.decimal(totals.protein, 1)) · G \(TF.decimal(totals.carbs, 1)) · L \(TF.decimal(totals.fat, 1))"))
+            Text(macroSummary(totals))
                 .font(.footnote)
                 .foregroundStyle(Color.secondary)
                 .monospacedDigit()

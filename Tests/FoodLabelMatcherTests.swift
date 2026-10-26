@@ -76,17 +76,18 @@ final class FoodLabelMatcherTests: XCTestCase {
 
     func testAFoodIsProposedOnceWithItsBestConfidence() {
         let search: (String) -> [FoodItem] = { _ in [self.food("same")] }
-        let proposals = FoodLabelMatcher.proposals(from: [score("margherita", 0.3), score("pizza", 0.8), score("flatbread", 0.4)], search: search)
+        let proposals = FoodLabelMatcher.proposals(from: [score("margherita", 0.3), score("pizza", 0.8), score("flatbread", 0.4)], search: search, useDishKnowledge: false)
         XCTAssertEqual(proposals.count, 1)
         XCTAssertEqual(proposals[0].confidence, 0.8, accuracy: 0.0001)
     }
 
-    func testAtMostFiveProposalsTheMostConfidentFirst() {
+    func testAtMostTenProposalsTheMostConfidentFirst() {
         let search: (String) -> [FoodItem] = { [self.food($0)] }
-        let labels = (1...9).map { score("item\($0)", 0.2 + Double($0) / 20) }
+        let labels = (1...14).map { score("item\($0)", 0.2 + Double($0) / 20) }
         let proposals = FoodLabelMatcher.proposals(from: labels, search: search)
+        XCTAssertEqual(FoodLabelMatcher.maximumProposals, 10)
         XCTAssertEqual(proposals.count, FoodLabelMatcher.maximumProposals)
-        XCTAssertEqual(proposals.map(\.food.id), ["item9", "item8", "item7", "item6", "item5"])
+        XCTAssertEqual(proposals.map(\.food.id), (5...14).reversed().map { "item\($0)" })
         XCTAssertEqual(proposals.map(\.confidence), proposals.map(\.confidence).sorted(by: >))
         XCTAssertEqual(FoodLabelMatcher.proposals(from: labels, limit: 2, search: search).count, 2)
         XCTAssertTrue(FoodLabelMatcher.proposals(from: labels, limit: 0, search: search).isEmpty)
@@ -107,7 +108,7 @@ final class FoodLabelMatcherTests: XCTestCase {
             asked.append(query)
             return query == "rice" ? [self.food("rice")] : []
         }
-        let proposals = FoodLabelMatcher.proposals(from: [score("fried_rice", 0.8)], search: search)
+        let proposals = FoodLabelMatcher.proposals(from: [score("fried_rice", 0.8)], search: search, useDishKnowledge: false)
         XCTAssertEqual(asked, ["fried rice", "rice"])
         XCTAssertEqual(proposals.count, 1)
         XCTAssertEqual(proposals[0].confidence, 0.8 * FoodLabelMatcher.partialMatchFactor, accuracy: 0.0001)

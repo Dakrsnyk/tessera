@@ -5077,53 +5077,6 @@
         }
       }
     },
-    "%@ kcal · P %@ · G %@ · L %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kcal · E %@ · K %@ · F %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kcal · P %@ · C %@ · F %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kcal · P %@ · C %@ · G %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kcal · P %@ · G %@ · L %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kcal · P %@ · C %@ · G %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kcal · P %@ · C %@ · F %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kcal · P %@ · C %@ · G %@"
-          }
-        }
-      }
-    },
     "%@ kg": {
       "extractionState": "manual",
       "localizations": {
@@ -7991,6 +7944,53 @@
         }
       }
     },
+    "%@ · %@ g · ≈ %@ kcal": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ g · ≈ %@ kcal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ g · ≈ %@ kcal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ g · ≈ %@ kcal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ g · ≈ %@ kcal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ g · ≈ %@ kcal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ g · ≈ %@ kcal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ g · ≈ %@ kcal"
+          }
+        }
+      }
+    },
     "%@ · %@ kg": {
       "extractionState": "manual",
       "localizations": {
@@ -8457,6 +8457,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ · P %2$@ g · fibras %3$@ g"
+          }
+        }
+      }
+    },
+    "%@ · P %@ · G %@ · L %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · E %@ · K %@ · F %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ · C %@ · F %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ · C %@ · G %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ · G %@ · L %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ · C %@ · G %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ · C %@ · F %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · P %@ · C %@ · G %@"
           }
         }
       }
@@ -30598,6 +30645,53 @@
         }
       }
     },
+    "Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorerst wird nichts gesendet: Diese Option bewirkt nichts, solange es keinen Dienst gibt. Deine Korrekturen bleiben auf diesem iPhone und helfen nur, deine nächsten Scans besser zu erraten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing is sent for now: this option does nothing until a service exists. Your corrections stay on this iPhone and only help guess your next scans better."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por ahora no se envía nada: esta opción no hace nada hasta que exista un servicio. Tus correcciones se quedan en este iPhone y solo sirven para adivinar mejor tus próximos escaneos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per ora non viene inviato nulla: questa opzione non fa nulla finché non esiste un servizio. Le tue correzioni restano su questo iPhone e servono solo a indovinare meglio le prossime scansioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今のところ何も送信されません。サービスができるまで、このオプションは何もしません。修正内容はこのiPhoneにとどまり、次回以降のスキャンの推定を改善するためだけに使われます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada é enviado por enquanto: esta opção não faz nada até existir um serviço. Suas correções ficam neste iPhone e servem apenas para adivinhar melhor seus próximos scans."
+          }
+        }
+      }
+    },
     "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
       "extractionState": "manual",
       "localizations": {
@@ -37601,6 +37695,53 @@
         }
       }
     },
+    "Beurre ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Butter?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Butter?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Mantequilla?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beurre ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burro?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バター?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manteiga?"
+          }
+        }
+      }
+    },
     "Beurre d'amande": {
       "extractionState": "manual",
       "localizations": {
@@ -39571,6 +39712,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bebidas"
+          }
+        }
+      }
+    },
+    "Bol de riz": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reisschüssel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rice bowl"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bol de arroz"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bol de riz"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bowl di riso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライスボウル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bowl de arroz"
           }
         }
       }
@@ -56625,7 +56813,7 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "クラブハウスサンド"
+            "value": "クラブサンドイッチ"
           }
         },
         "pt-BR": {
@@ -57901,6 +58089,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pedidos, ticket médio, novos clientes e conversão."
+          }
+        }
+      }
+    },
+    "Comme ton repas du %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie deine Mahlzeit vom %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Like your meal of %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como tu comida del %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comme ton repas du %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Come il tuo pasto del %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の食事と同じ内容"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como a sua refeição de %@"
           }
         }
       }
@@ -60580,6 +60815,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contra a parede, desça a cabeça em direção ao chão com controle."
+          }
+        }
+      }
+    },
+    "Contribuer à l'amélioration": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zur Verbesserung beitragen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contribute to improvement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contribuir a la mejora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contribuer à l'amélioration"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contribuisci al miglioramento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改善に協力する"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contribuir para a melhoria"
           }
         }
       }
@@ -67113,6 +67395,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Panqueca americana (pancake)"
+          }
+        }
+      }
+    },
+    "Crêpes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pfannkuchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pancakes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tortitas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crêpes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pancake"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パンケーキ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panquecas"
           }
         }
       }
@@ -80555,6 +80884,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Café da manhã proteico"
+          }
+        }
+      }
+    },
+    "Déjeuner œufs et bacon": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frühstück mit Eiern und Speck"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eggs and bacon breakfast"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desayuno de huevos y beicon"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjeuner œufs et bacon"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colazione con uova e pancetta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卵とベーコンの朝食"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Café da manhã com ovos e bacon"
           }
         }
       }
@@ -105422,6 +105798,53 @@
         }
       }
     },
+    "Hot-dog": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hotdog"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hot dog"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perrito caliente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hot-dog"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hot dog"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホットドッグ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cachorro-quente"
+          }
+        }
+      }
+    },
     "Hot-dog (pain et saucisse)": {
       "extractionState": "manual",
       "localizations": {
@@ -105606,6 +106029,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Óleo de canola"
+          }
+        }
+      }
+    },
+    "Huile de cuisson ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speiseöl?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cooking oil?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Aceite de cocina?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Huile de cuisson ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olio di cottura?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "調理油?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Óleo de cozinha?"
           }
         }
       }
@@ -106217,6 +106687,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ideias gerais tiradas da tabela de alimentos do Ardane, para adaptar ao seu gosto. Não são aconselhamento médico."
+          }
+        }
+      }
+    },
+    "Ignorer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignore"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignora"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無視"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorar"
           }
         }
       }
@@ -118766,6 +119283,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Largo"
+          }
+        }
+      }
+    },
+    "Lasagne": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasagne"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasagna"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasaña"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasagne"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasagne"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ラザニア"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lasanha"
           }
         }
       }
@@ -163655,6 +164219,53 @@
         }
       }
     },
+    "Poisson-frites": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fish and Chips"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fish and chips"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pescado con patatas fritas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poisson-frites"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fish and chips"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フィッシュ・アンド・チップス"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peixe com batata frita"
+          }
+        }
+      }
+    },
     "Poitrine de dinde cuite": {
       "extractionState": "manual",
       "localizations": {
@@ -173713,25 +174324,72 @@
         }
       }
     },
+    "Pâtes à la sauce": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasta mit Sauce"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasta with sauce"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasta con salsa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pâtes à la sauce"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasta al sugo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソースのパスタ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Macarrão ao molho"
+          }
+        }
+      }
+    },
     "Pâté chinois": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Shepherd's Pie"
+            "value": "Shepherd's Pie (Pâté chinois)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Shepherd's pie"
+            "value": "Shepherd's pie (pâté chinois)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pastel de carne y puré"
+            "value": "Pastel de carne y puré (pâté chinois)"
           }
         },
         "fr": {
@@ -173743,19 +174401,19 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pâté chinois"
+            "value": "Shepherd's pie (pâté chinois)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "シェパーズパイ"
+            "value": "シェパーズパイ（パテ・シノワ）"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Torta de carne com purê"
+            "value": "Torta de carne com purê (pâté chinois)"
           }
         }
       }
@@ -191291,6 +191949,53 @@
         }
       }
     },
+    "Salade composée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gemischter Salat"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mixed salad"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ensalada mixta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salade composée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insalata mista"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ミックスサラダ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salada mista"
+          }
+        }
+      }
+    },
     "Salade du jardin (sans vinaigrette)": {
       "extractionState": "manual",
       "localizations": {
@@ -191663,6 +192368,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sábado"
+          }
+        }
+      }
+    },
+    "Sandwich": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sandwich"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sandwich"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sándwich"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sandwich"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panino"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サンドイッチ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sanduíche"
           }
         }
       }
@@ -192415,6 +193167,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sardinha em lata"
+          }
+        }
+      }
+    },
+    "Sauce ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soße?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sauce?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Salsa?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sauce ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salsa?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソース?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Molho?"
           }
         }
       }
@@ -197965,6 +198764,53 @@
         }
       }
     },
+    "Soupe": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suppe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soup"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sopa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soupe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuppa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スープ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sopa"
+          }
+        }
+      }
+    },
     "Soupe aux légumes": {
       "extractionState": "manual",
       "localizations": {
@@ -198619,6 +199465,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terceirização"
+          }
+        }
+      }
+    },
+    "Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf einem Foto oft nicht zu sehen. Ohne dein Einverständnis wird nichts hinzugefügt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Often invisible in a photo. Nothing is added without your approval."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A menudo invisible en una foto. No se añade nada sin tu permiso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spesso invisibile in una foto. Non viene aggiunto nulla senza il tuo consenso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真では見えないことがよくあります。承認なしに追加されることはありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muitas vezes invisível em uma foto. Nada é adicionado sem a sua aprovação."
+          }
+        }
+      }
+    },
+    "Spaghetti": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spaghetti"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spaghetti"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espaguetis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spaghetti"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spaghetti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スパゲッティ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espaguete"
           }
         }
       }
@@ -203037,6 +203977,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Superar"
+          }
+        }
+      }
+    },
+    "Sushis": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sushi"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sushi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sushi"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sushis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sushi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "寿司"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sushi"
           }
         }
       }
@@ -217094,6 +218081,53 @@
         }
       }
     },
+    "Ton habitude": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Gewohnheit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your habit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu costumbre"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton habitude"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua abitudine"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの習慣"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu hábito"
+          }
+        }
+      }
+    },
     "Ton horaire": {
       "extractionState": "manual",
       "localizations": {
@@ -219209,6 +220243,53 @@
         }
       }
     },
+    "Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unvollständige Summe: Die Quelle liefert nicht alle Werte einiger Lebensmittel. Die Zahlen sind ein Mindestwert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incomplete total: the source does not give every value for some foods. The figures are a minimum."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total incompleto: la fuente no da todos los valores de algunos alimentos. Las cifras son un mínimo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totale incompleto: la fonte non fornisce tutti i valori di alcuni alimenti. Le cifre sono un minimo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "合計は不完全です：一部の食品について、情報源がすべての値を提供していません。数値は最小値です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total incompleto: a fonte não fornece todos os valores de alguns alimentos. Os números são um mínimo."
+          }
+        }
+      }
+    },
     "Total payé": {
       "extractionState": "manual",
       "localizations": {
@@ -220756,6 +221837,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Girar a pelve."
+          }
+        }
+      }
+    },
+    "Tourtière": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tourtière (Fleischpastete)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tourtière (meat pie)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tourtière (pastel de carne)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tourtière"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tourtière (torta di carne)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トゥルティエール（ミートパイ）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tourtière (torta de carne)"
           }
         }
       }
@@ -252156,6 +253284,53 @@
         }
       }
     },
+    "À confirmer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu bestätigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To confirm"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por confirmar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À confirmer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da confermare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要確認"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A confirmar"
+          }
+        }
+      }
+    },
     "À droite": {
       "extractionState": "manual",
       "localizations": {
@@ -259437,6 +260612,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "≈ %@ km de autonomia"
+          }
+        }
+      }
+    },
+    "≈ %@–%@ kcal": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@–%@ kcal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@–%@ kcal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@–%@ kcal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@–%@ kcal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@–%@ kcal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@～%@ kcal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %@–%@ kcal"
           }
         }
       }

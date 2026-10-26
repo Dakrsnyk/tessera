@@ -301,12 +301,12 @@ struct FoodScanView: View {
     private func analyze(_ image: UIImage) async {
         stage = .analyzing
         do {
-            let proposals = try await MealAnalysisConfig.makeAnalyzer().analyze(image)
-            guard !proposals.isEmpty else {
+            let analysis = try await MealAnalysisConfig.makeAnalyzer().analyzeMeal(image)
+            guard !analysis.proposals.isEmpty else {
                 stage = .photoFailed(.nothingFound)
                 return
             }
-            recap = ScanRecap(proposals: proposals)
+            recap = analysis.recap
             source = .photo
             stage = .recap
         } catch {
