@@ -8,12 +8,12 @@
       "internalID": "6740000003",
       "localizations": [
         {
-          "description": "Tout Tessera Premium, pour toujours : un seul paiement, sans renouvellement.",
+          "description": "Tout Ardane Premium, pour toujours : un seul paiement, sans renouvellement.",
           "displayName": "Premium à vie",
           "locale": "fr_CA"
         }
       ],
-      "productID": "com.dakrsnyk.tessera.premium.lifetime",
+      "productID": "com.dakrsnyk.ardane.premium.lifetime",
       "referenceName": "Premium à vie",
       "type": "NonConsumable"
     }
@@ -28,7 +28,7 @@
     {
       "id": "21500001",
       "localizations": [],
-      "name": "Tessera Premium",
+      "name": "Ardane Premium",
       "subscriptions": [
         {
           "adHocOffers": [],
@@ -44,12 +44,12 @@
           },
           "localizations": [
             {
-              "description": "Tout Tessera Premium, chaque mois. 7 jours gratuits pour commencer.",
+              "description": "Tout Ardane Premium, chaque mois. 7 jours gratuits pour commencer.",
               "displayName": "Premium mensuel",
               "locale": "fr_CA"
             }
           ],
-          "productID": "com.dakrsnyk.tessera.premium.monthly",
+          "productID": "com.dakrsnyk.ardane.premium.monthly",
           "recurringSubscriptionPeriod": "P1M",
           "referenceName": "Premium mensuel",
           "subscriptionGroupID": "21500001",
@@ -69,12 +69,12 @@
           },
           "localizations": [
             {
-              "description": "Tout Tessera Premium pendant un an. 7 jours gratuits pour commencer.",
+              "description": "Tout Ardane Premium pendant un an. 7 jours gratuits pour commencer.",
               "displayName": "Premium annuel",
               "locale": "fr_CA"
             }
           ],
-          "productID": "com.dakrsnyk.tessera.premium.yearly",
+          "productID": "com.dakrsnyk.ardane.premium.yearly",
           "recurringSubscriptionPeriod": "P1Y",
           "referenceName": "Premium annuel",
           "subscriptionGroupID": "21500001",

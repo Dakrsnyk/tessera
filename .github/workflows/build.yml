@@ -158,7 +158,7 @@ jobs:
             INTERNAL_ONLY="<key>testFlightInternalTestingOnly</key><true/>"
             KIND="version 1.0, interne seulement, Premium débloqué"
           fi
-          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Release             -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/Ardane.xcarchive             DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CURRENT_PROJECT_VERSION=${{ github.run_number }} "${EXTRA[@]}" archive 2>&1 | tee archive.log | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
+          xcodebuild -project Ardane.xcodeproj -scheme Ardane -configuration Release             -sdk iphoneos -destination 'generic/platform=iOS' -archivePath build/Ardane.xcarchive             DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CURRENT_PROJECT_VERSION=${{ github.run_number }} "${EXTRA[@]}" archive 2>&1 | tee archive.log | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
           grep -q "ARCHIVE SUCCEEDED" archive.log
           # Proof from the binary itself: « … en mode test » is compiled only with DEBUG or INTERNAL_PREMIUM.
           APP=$(find build/Ardane.xcarchive/Products/Applications -maxdepth 1 -name "*.app" | head -1)
@@ -202,7 +202,7 @@ jobs:
           set -o pipefail
           # Keep compiling the other files and targets after an error, so one run lists every error.
           defaults write com.apple.dt.Xcode IDEBuildingContinueBuildingAfterErrors -bool YES
-          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+          xcodebuild -project Ardane.xcodeproj -scheme Ardane -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build/sim ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build-for-testing 2>&1 | tee sim.log | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" sim.log
@@ -214,7 +214,7 @@ jobs:
           set -o pipefail
           # Optimized (-O) like an App Store build: an unoptimized SwiftUI app can overflow the iPhone's
           # 1 MB main-thread stack (the simulator has 8 MB), and crash at launch on the device only.
-          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+          xcodebuild -project Ardane.xcodeproj -scheme Ardane -configuration Debug \
             -sdk iphoneos -destination 'generic/platform=iOS' \
             -derivedDataPath build/device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" ENABLE_DEBUG_DYLIB=NO SWIFT_OPTIMIZATION_LEVEL=-O \
             CURRENT_PROJECT_VERSION=${{ github.run_number }} build 2>&1 | tee device.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
@@ -223,10 +223,10 @@ jobs:
       - name: Package IPA
         if: steps.device.outcome == 'success'
         run: |
-          APP=build/device/Build/Products/Debug-iphoneos/Tessera.app
+          APP=build/device/Build/Products/Debug-iphoneos/Ardane.app
           # Signed without the App Group: a free Apple ID can't be granted ours, and a signature that
           # still claims it can keep iOS from starting the widget extension after Sideloadly re-signs.
-          codesign --force --sign - "$APP/PlugIns/TesseraWidgets.appex"
+          codesign --force --sign - "$APP/PlugIns/ArdaneWidgets.appex"
           codesign --force --sign - "$APP"
           mkdir -p Payload
           cp -R "$APP" Payload/
@@ -236,9 +236,9 @@ jobs:
           # the system rejects the metadata; if neither shows up, the extension isn't started.
           mkdir -p diagnostic/Payload
           cp -R "$APP" diagnostic/Payload/
-          rm -rf diagnostic/Payload/Tessera.app/PlugIns/TesseraWidgets.appex/Metadata.appintents
-          codesign --force --sign - diagnostic/Payload/Tessera.app/PlugIns/TesseraWidgets.appex
-          codesign --force --sign - diagnostic/Payload/Tessera.app
+          rm -rf diagnostic/Payload/Ardane.app/PlugIns/ArdaneWidgets.appex/Metadata.appintents
+          codesign --force --sign - diagnostic/Payload/Ardane.app/PlugIns/ArdaneWidgets.appex
+          codesign --force --sign - diagnostic/Payload/Ardane.app
           (cd diagnostic && zip -qry ../Ardane-diagnostic.ipa Payload)
           ls -lh Ardane.ipa Ardane-diagnostic.ipa
 
@@ -251,14 +251,14 @@ jobs:
           set -o pipefail
           xcrun simctl bootstatus "$DEVICE" -b
           ONLY=""
-          if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraUITests"; fi
-          if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:TesseraTests"; fi
-          if [ "$STORE" = "true" ]; then ONLY="-only-testing:TesseraTests"; fi
-          if [ "$APPS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/DataEntryUITests -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
-          if [ "$DAILY" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/ProfileUITests"; fi
-          if [ "$DEMOS" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/MiniAppUITests/testTheLibraryFindsExercisesAndShowsTheirSheet -only-testing:TesseraUITests/MiniAppUITests/testASessionKeepsItsPlaceWhenTheSheetOpens -only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
-          if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:TesseraTests -only-testing:TesseraUITests/StudioUITests -only-testing:TesseraUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:TesseraUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:TesseraUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:TesseraUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood -only-testing:TesseraUITests/ProfileUITests/testFirstLaunchAsksOnlyWhatMattersAndFillsMesInformations -only-testing:TesseraUITests/ProfileUITests/testSkippingEverythingShowsNothingMadeUp -only-testing:TesseraUITests/ProfileUITests/testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped"; fi
-          xcodebuild test -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+          if [ "$PLACE" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:ArdaneUITests"; fi
+          if [ "$UNIT" = "true" ] && [ "$QA" != "true" ]; then ONLY="-only-testing:ArdaneTests"; fi
+          if [ "$STORE" = "true" ]; then ONLY="-only-testing:ArdaneTests"; fi
+          if [ "$APPS" = "true" ]; then ONLY="-only-testing:ArdaneTests -only-testing:ArdaneUITests/MiniAppUITests -only-testing:ArdaneUITests/DataEntryUITests -only-testing:ArdaneUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
+          if [ "$DAILY" = "true" ]; then ONLY="-only-testing:ArdaneTests -only-testing:ArdaneUITests/MiniAppUITests -only-testing:ArdaneUITests/StudioUITests -only-testing:ArdaneUITests/ProfileUITests"; fi
+          if [ "$DEMOS" = "true" ]; then ONLY="-only-testing:ArdaneTests -only-testing:ArdaneUITests/MiniAppUITests/testTheLibraryFindsExercisesAndShowsTheirSheet -only-testing:ArdaneUITests/MiniAppUITests/testASessionKeepsItsPlaceWhenTheSheetOpens -only-testing:ArdaneUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData"; fi
+          if [ "$STUDIO" = "true" ]; then ONLY="-only-testing:ArdaneTests -only-testing:ArdaneUITests/StudioUITests -only-testing:ArdaneUITests/DataEntryUITests/testEditorKeepsItsChangesWhileLoggingFood -only-testing:ArdaneUITests/ProfileUITests/testTheEditorAsksForWhatTheWidgetNeeds -only-testing:ArdaneUITests/ProfileUITests/testAPackOpensInTheStudio -only-testing:ArdaneUITests/ProfileUITests/testEachWidgetOfACombinedWidgetCanBeSet -only-testing:ArdaneUITests/DataEntryUITests/testCreatorKeepsItsWidgetWhileLoggingFood -only-testing:ArdaneUITests/ProfileUITests/testFirstLaunchAsksOnlyWhatMattersAndFillsMesInformations -only-testing:ArdaneUITests/ProfileUITests/testSkippingEverythingShowsNothingMadeUp -only-testing:ArdaneUITests/ProfileUITests/testTheTutorialReplaysFromSettingsAndEachStepCanBeSkipped"; fi
+          xcodebuild test -project Ardane.xcodeproj -scheme Ardane -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath TestResults.xcresult \
             -testLanguage fr -testRegion CA $ONLY ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO 2>&1 | tee test.log | grep -E "Test Case .*(passed|failed)|error:|TEST (SUCCEEDED|FAILED)" || true
           mkdir -p testexport testshots
@@ -279,10 +279,10 @@ jobs:
           PY
           # What the widget extension logged while the system rendered it, and any crash report.
           xcrun simctl spawn "$DEVICE" log show --last 25m --style compact --info --debug \
-            --predicate 'process == "TesseraWidgets" OR (process == "chronod" AND messageType == error) OR eventMessage CONTAINS[c] "Returned view collection"' \
+            --predicate 'process == "ArdaneWidgets" OR (process == "chronod" AND messageType == error) OR eventMessage CONTAINS[c] "Returned view collection"' \
             2>&1 | tail -6000 > testshots/widget-log.txt || true
           grep -E "com.dakrsnyk.tessera.widgets:timeline|watchdog|rror" testshots/widget-log.txt | tail -300 > testshots/widget-summary.txt || true
-          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -40 -exec cp {} testshots/ \; 2>/dev/null || true
+          find ~/Library/Logs/DiagnosticReports -iname "*Ardane*" -mmin -40 -exec cp {} testshots/ \; 2>/dev/null || true
           ls testshots
           grep -q "TEST SUCCEEDED" test.log
 
@@ -293,24 +293,24 @@ jobs:
         timeout-minutes: 45
         run: |
           xcrun simctl bootstatus "$DEVICE" -b
-          TESTS="-only-testing:TesseraUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData -only-testing:TesseraUITests/MiniAppUITests/testHomeListsTheMiniAppsAndTheWeatherOpens -only-testing:TesseraUITests/MiniAppUITests/testNutritionOpensFromHomeAndManagesAMeal -only-testing:TesseraUITests/MiniAppUITests/testFinancesEditsAnExpenseAndOpensItsPages"
+          TESTS="-only-testing:ArdaneUITests/ProfileUITests/testMonQuotidienShowsTheDayFromTheUsersData -only-testing:ArdaneUITests/MiniAppUITests/testHomeListsTheMiniAppsAndTheWeatherOpens -only-testing:ArdaneUITests/MiniAppUITests/testNutritionOpensFromHomeAndManagesAMeal -only-testing:ArdaneUITests/MiniAppUITests/testFinancesEditsAnExpenseAndOpensItsPages"
           # 1) Unoptimized (-Onone), with the app's 1 MB main-thread stack: what the old test IPA did.
-          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+          xcodebuild -project Ardane.xcodeproj -scheme Ardane -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build/simOnone ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO SWIFT_OPTIMIZATION_LEVEL=-Onone build-for-testing > stack-build-onone.log 2>&1 || true
-          xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+          xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/simOnone -resultBundlePath StackOnone.xcresult $TESTS \
             ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > stack-onone.log 2>&1 || true
           mkdir -p stackreports
-          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -exec cp {} stackreports/ \; 2>/dev/null || true
-          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -delete 2>/dev/null || true
+          find ~/Library/Logs/DiagnosticReports -iname "*Ardane*" -mmin -30 -exec cp {} stackreports/ \; 2>/dev/null || true
+          find ~/Library/Logs/DiagnosticReports -iname "*Ardane*" -mmin -30 -delete 2>/dev/null || true
           # 2) The build the tests and the IPA use (optimized by the project), same 1 MB stack.
           echo "BUILD SUCCEEDED (build/sim)" > stack-build-o.log
-          xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+          xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug \
             -destination "id=$DEVICE" -derivedDataPath build/sim -resultBundlePath StackO.xcresult $TESTS \
             ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > stack-o.log 2>&1 || true
           mkdir -p stackreports/optimized
-          find ~/Library/Logs/DiagnosticReports -iname "*Tessera*" -mmin -30 -exec cp {} stackreports/optimized/ \; 2>/dev/null || true
+          find ~/Library/Logs/DiagnosticReports -iname "*Ardane*" -mmin -30 -exec cp {} stackreports/optimized/ \; 2>/dev/null || true
           ls -R stackreports
 
       - name: Screenshots
@@ -319,7 +319,7 @@ jobs:
         continue-on-error: true
         timeout-minutes: 45
         run: |
-          APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          APP=build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
           xcrun simctl bootstatus "$DEVICE" -b
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
           xcrun simctl install "$DEVICE" "$APP"
@@ -478,7 +478,7 @@ jobs:
             # The exercise sheet, animated, on the three exercises reported.
             for id in incline-bench pec-deck leg-extension; do WAIT=8 shoot app-fitness-exercise-$id app-fitness-exercise-$id top light; done
             WAIT=8 shoot app-fitness-exercise-pec-deck app-fitness-exercise-pec-deck top dark
-            # The Home header: search on the left, Tessera in the middle, the profile on the right.
+            # The Home header: search on the left, Ardane in the middle, the profile on the right.
             WAIT=8 shoot home home top light
             WAIT=8 shoot home home top dark
             exit 0
@@ -573,9 +573,9 @@ jobs:
           # One scene: the test starts, the recording starts with it and stops when it ends.
           record() {
             LOG="videos/$1.log"
-            xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug \
+            xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug \
               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage fr -testRegion CA \
-              -only-testing:TesseraUITests/PromoVideoUITests/$1 ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > "$LOG" 2>&1 &
+              -only-testing:ArdaneUITests/PromoVideoUITests/$1 ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO > "$LOG" 2>&1 &
             XPID=$!
             until grep -q "$1\]' started" "$LOG" || ! kill -0 $XPID 2>/dev/null; do sleep 0.2; done
             xcrun simctl io "$DEVICE" recordVideo --codec=h264 --force "videos/$1.mp4" > "videos/$1.rec.log" 2>&1 &
@@ -592,7 +592,7 @@ jobs:
           ls -lh videos
           # The pieces of the videos drawn by the app (scripts/ad_assets.txt): screens, and elements
           # rendered on white then black for difference matting.
-          xcrun simctl install "$DEVICE" build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          xcrun simctl install "$DEVICE" build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
           mkdir -p videos/assets
           ARGS=(-AppleLanguages "(fr)" -AppleLocale fr_CA)
           xcrun simctl launch "$DEVICE" com.dakrsnyk.ardane "${ARGS[@]}" -screenshotScreen home < /dev/null > /dev/null || true
@@ -626,7 +626,7 @@ jobs:
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
           xcrun simctl ui "$DEVICE" appearance light || true
           mkdir -p adkit/shots adkit/screens adkit/export adkit/logs
-          APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          APP=build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
           # The launch arguments of every capture: French (Canada), the Corail style of Ardane's icon.
           ARGS=(-AppleLanguages "(fr)" -AppleLocale fr_CA -screenshotStyle coral)
 
@@ -661,7 +661,7 @@ jobs:
             : > "$LOG"
             watch_shots "$LOG" &
             WPID=$!
-            TEST_RUNNER_AD_APPEARANCE="$look" xcodebuild test-without-building -project Tessera.xcodeproj -scheme Tessera -configuration Debug               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage fr -testRegion CA               -resultBundlePath "adkit-results/$tag.xcresult"               -only-testing:TesseraUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
+            TEST_RUNNER_AD_APPEARANCE="$look" xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage fr -testRegion CA               -resultBundlePath "adkit-results/$tag.xcresult"               -only-testing:ArdaneUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
             touch "$LOG.end"
             wait $WPID 2>/dev/null || true
             rm -f "$LOG.end"
@@ -751,7 +751,7 @@ jobs:
           mkdir -p marketing
           exec > >(tee marketing/log.txt) 2>&1
           set -x
-          APP=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
+          APP=build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
           xcrun simctl list devices | grep -E "Booted|$DEVICE"
           # A simulator sometimes never finishes booting: give up after 4 minutes and boot it again.
           if ! perl -e 'alarm 240; exec @ARGV' xcrun simctl bootstatus "$DEVICE" -b; then
@@ -804,14 +804,14 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          xcodebuild -project Tessera.xcodeproj -scheme Tessera -configuration Release \
+          xcodebuild -project Ardane.xcodeproj -scheme Ardane -configuration Release \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build/release ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO build 2>&1 | tee release.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" release.log
           # Proof that the test unlock is not in the App Store build: neither its code nor its settings key.
-          APP=build/release/Build/Products/Release-iphonesimulator/Tessera.app
+          APP=build/release/Build/Products/Release-iphonesimulator/Ardane.app
           FOUND=0
-          for bin in "$APP/Tessera" "$APP/PlugIns/TesseraWidgets.appex/TesseraWidgets"; do
+          for bin in "$APP/Ardane" "$APP/PlugIns/ArdaneWidgets.appex/ArdaneWidgets"; do
             if strings -a "$bin" | grep -E "DebugPremium|debugPremiumDisabled|ScreenshotMode|WidgetGalleryView|SetupGalleryView|MarketingView|AdExport"; then FOUND=1; fi
           done
           echo "test unlock found in Release binaries: $FOUND" | tee release-check.txt
@@ -859,12 +859,12 @@ jobs:
               grep -hE "BUILD (SUCCEEDED|FAILED)|error:" stack-build-o.log | head -10 || true
               grep -hE "Test Case .*(passed|failed)|crash|Crash|TEST (SUCCEEDED|FAILED)|EXC_|stack" stack-o.log | head -40 || true
             fi
-            APPDIR=build/sim/Build/Products/Debug-iphonesimulator/Tessera.app
-            echo "privacy manifest: app $([ -f $APPDIR/PrivacyInfo.xcprivacy ] && echo yes || echo MISSING), widget $([ -f $APPDIR/PlugIns/TesseraWidgets.appex/PrivacyInfo.xcprivacy ] && echo yes || echo MISSING)"
+            APPDIR=build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
+            echo "privacy manifest: app $([ -f $APPDIR/PrivacyInfo.xcprivacy ] && echo yes || echo MISSING), widget $([ -f $APPDIR/PlugIns/ArdaneWidgets.appex/PrivacyInfo.xcprivacy ] && echo yes || echo MISSING)"
             echo "alternate app icons in the app: $(/usr/libexec/PlistBuddy -c 'Print :CFBundleIcons:CFBundleAlternateIcons' $APPDIR/Info.plist 2>/dev/null | grep -c '= Dict')"
             echo "---- widget extension bundle ----"
-            ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex 2>/dev/null || true
-            ls build/sim/Build/Products/Debug-iphonesimulator/Tessera.app/PlugIns/TesseraWidgets.appex/Metadata.appintents 2>/dev/null || true
+            ls build/sim/Build/Products/Debug-iphonesimulator/Ardane.app/PlugIns/ArdaneWidgets.appex 2>/dev/null || true
+            ls build/sim/Build/Products/Debug-iphonesimulator/Ardane.app/PlugIns/ArdaneWidgets.appex/Metadata.appintents 2>/dev/null || true
             grep -E "ExtractAppIntentsMetadata \(in target" sim.log 2>/dev/null | head -5 || true
             echo "---- last lines ----"
             tail -40 sim.log 2>/dev/null || true
@@ -895,7 +895,7 @@ jobs:
           name: Version de test ${{ github.run_number }}
           make_latest: true
           body: |
-            Version de test de Tessera (build ${{ github.run_number }}).
+            Version de test de Ardane (build ${{ github.run_number }}).
             Installe `Ardane.ipa` sur ton iPhone avec Sideloadly (voir le README).
           files: |
             Ardane.ipa

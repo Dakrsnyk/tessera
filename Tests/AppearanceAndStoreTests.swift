@@ -1,7 +1,7 @@
 import UIKit
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// App styles, profile settings, Home Screen setups and Store shelves.
 final class AppearanceAndStoreTests: XCTestCase {

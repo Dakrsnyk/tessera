@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Planning widget and calendar: the week's schedule fills its widget, the calendar zooms by clear gestures only.
 final class PlanningLayoutTests: XCTestCase {

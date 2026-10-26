@@ -33,4 +33,4 @@ Garder `ardane-signing` en lieu sûr (sauvegarde) : `dist.key` va avec le certif
 - `Secrets manquants` dans le rapport : refaire l'étape 10.
 - « Le profil s'appelle … » : renommer le profil (Profiles → le profil → Edit → Name) ou le recréer avec le nom exact, puis refaire l'étape 10.
 - Profils et certificat expirent après un an : refaire 5, 6 et 10.
-- Achats Premium : dans une version TestFlight (Release), le déverrouillage de test n'existe pas. Pour tester les achats (gratuits en TestFlight), il faut l'accord « Paid Apps » (Business) et les produits `com.dakrsnyk.tessera.premium.monthly`, `.yearly` et `.lifetime` créés dans App Store Connect.
+- Achats Premium : dans une version TestFlight (Release), le déverrouillage de test n'existe pas. Pour tester les achats (gratuits en TestFlight), il faut l'accord « Paid Apps » (Business) et les produits `com.dakrsnyk.ardane.premium.monthly`, `.yearly` et `.lifetime` créés dans App Store Connect.

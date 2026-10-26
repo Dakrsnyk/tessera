@@ -14,9 +14,9 @@ Lecture seule du dépôt (agent 11.3, Haiku), consolidé par le Chef. Statuts : 
 
 ## 3. StoreKit 2
 - Statut : À VÉRIFIER (code RÉALISÉ, sandbox non testé).
-- Produits : App/Premium/PremiumConfiguration.swift ; Config/Tessera.storekit (à vie 99,99 ; mensuel 6,99 avec 4,99 x 3 mois ; annuel 59,99 sans offre).
+- Produits : App/Premium/PremiumConfiguration.swift ; Config/Ardane.storekit (à vie 99,99 ; mensuel 6,99 avec 4,99 x 3 mois ; annuel 59,99 sans offre).
 - Restauration : PaywallView.swift et ProfileView.swift : RÉALISÉ. Transaction.updates : PremiumStore.swift : RÉALISÉ. Seules les transactions « verified » comptent ; pas de vérification serveur (par conception).
-- Reste : trancher l'essai annuel (README.md:73 et :170 annoncent 7 jours, absent de Tessera.storekit) ; localisation fr_CA seule ; familyShareable à true partout (décision à prendre) ; commentaire PremiumConfiguration.swift:4 cite Config/Ardane.storekit, inexistant.
+- Reste : trancher l'essai annuel (README.md:73 et :170 annoncent 7 jours, absent de Ardane.storekit) ; localisation fr_CA seule ; familyShareable à true partout (décision à prendre) ; commentaire PremiumConfiguration.swift:4 cite Config/Ardane.storekit, inexistant.
 
 ## 4. Apple Developer
 - Statut : compte RÉALISÉ ; accords, fiscalité, banque À FAIRE.
@@ -39,7 +39,7 @@ Lecture seule du dépôt (agent 11.3, Haiku), consolidé par le Chef. Statuts : 
 - À FAIRE : textes, mots-clés, classification, sous-titre, captures (pub/kit* ignorées par Git), fiche FR et EN, capture de la page Premium pour la revue.
 
 ## 9. Prix, commissions, Small Business Program
-- Prix fixés (voir Tessera.storekit). Commissions et éligibilité : voir docs/finance/apple.md (à confirmer sur les pages Apple).
+- Prix fixés (voir Ardane.storekit). Commissions et éligibilité : voir docs/finance/apple.md (à confirmer sur les pages Apple).
 
 ## 10. TestFlight, soumission, refus
 - TestFlight RÉALISÉ en partie (builds internes jusqu'au 277) ; soumission À FAIRE.
@@ -56,7 +56,7 @@ Lecture seule du dépôt (agent 11.3, Haiku), consolidé par le Chef. Statuts : 
 1. Trancher la personne vendeuse (individu ou société) : elle conditionne contrat, banque et fiscalité.
 2. Signer le contrat Paid Apps, les formulaires fiscaux et le compte bancaire jusqu'au statut « Active ».
 3. Créer les 3 produits aux identifiants exacts, avec localisations FR et EN ; décider familyShareable.
-4. Trancher l'essai annuel : aligner README.md sur Tessera.storekit ou ajouter l'offre.
+4. Trancher l'essai annuel : aligner README.md sur Ardane.storekit ou ajouter l'offre.
 5. Tester en sandbox TestFlight : achat, offre, restauration, annulation, mode avion.
 6. Rendre la politique publique sur une URL stable et la reporter dans la fiche.
 7. Décider des CGU propres ou de l'EULA Apple, et le lier.

@@ -113,7 +113,7 @@ final class WidgetPlacementUITests: XCTestCase {
     }
 
     /// Launching the app once registers its widget extension with the system.
-    private func launchTesseraOnce() {
+    private func launchArdaneOnce() {
         let app = XCUIApplication()
         app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA"] + ["-screenshotScreen", "home"]
         app.launch()
@@ -123,8 +123,8 @@ final class WidgetPlacementUITests: XCTestCase {
     }
 
     /// From the Home Screen to the Ardane page of the widget gallery.
-    private func openTesseraGallery(_ prefix: String) {
-        launchTesseraOnce()
+    private func openArdaneGallery(_ prefix: String) {
+        launchArdaneOnce()
         // A second press brings back the first page; its lower part is empty on a fresh simulator.
         XCUIDevice.shared.press(.home)
         pause(1.5)
@@ -181,14 +181,14 @@ final class WidgetPlacementUITests: XCTestCase {
 
     /// The first widget of the gallery (Horloge, one of the original widgets).
     func testAddWidgetToHomeScreen() throws {
-        openTesseraGallery("home")
+        openArdaneGallery("home")
         addShownWidget("home")
     }
 
     /// A V2 widget: the gallery is paged until the Nutrition widget is shown.
     /// Runs after the test above (alphabetical order), so the Home Screen ends with both widgets.
     func testAddWidgetToHomeScreenV2() throws {
-        openTesseraGallery("home-v2")
+        openArdaneGallery("home-v2")
         let found = swipeToWidget(["Nutrition"], height: 0.58, maxSwipes: 75, prefix: "home-v2")
         snapshot("home-v2-6b-nutrition", tree: true)
         XCTAssertNotNil(found, "The Nutrition widget was not found in the Ardane gallery")
@@ -200,7 +200,7 @@ final class WidgetPlacementUITests: XCTestCase {
 
     func testAddWidgetToLockScreen() throws {
         searchesPosterBoard = true
-        launchTesseraOnce()
+        launchArdaneOnce()
         let lock = NSSelectorFromString("pressLockButton")
         guard XCUIDevice.shared.responds(to: lock) else {
             throw XCTSkip("This simulator cannot lock the screen from a test")

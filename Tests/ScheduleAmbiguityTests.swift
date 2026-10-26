@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// What the reading of a timetable does with the confusions of the OCR (O for 0, l for 1, "Mardl" for "Mardi"), with the
 /// free periods and the breaks, and with what it cannot know: every value that was corrected or guessed is listed in

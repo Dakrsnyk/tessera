@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Market widgets: the change with its sign and period, prices reread as often as iOS allows, their
 /// reading time shown, and caches written by earlier versions still read.

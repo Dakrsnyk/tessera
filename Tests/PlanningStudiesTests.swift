@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Planning and Studies mini-apps: tasks with a priority, a date and a repeat; one day gathered
 /// from every part of Ardane; homework, exams, grades and study time that add up.

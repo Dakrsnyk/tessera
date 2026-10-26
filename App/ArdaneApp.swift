@@ -4,8 +4,8 @@ import UIKit
 import WidgetKit
 
 @main
-struct TesseraApp: App {
-    @UIApplicationDelegateAdaptor(TesseraAppDelegate.self) private var appDelegate
+struct ArdaneApp: App {
+    @UIApplicationDelegateAdaptor(ArdaneAppDelegate.self) private var appDelegate
     @State private var quickActions = QuickActions.shared
     @State private var openRequests = AppOpenRequests.shared
     @State private var model = AppModel()

@@ -1,7 +1,7 @@
 import SwiftUI
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Widget Studio: every setting is saved with the widget, survives edits, duplicates and new
 /// versions, never touches the widget's data, and every style, layout and chart renders.

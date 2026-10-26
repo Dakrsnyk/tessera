@@ -1,6 +1,6 @@
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Logic of the V2 mini-apps and of the widgets they feed.
 final class DomainLogicTests: XCTestCase {

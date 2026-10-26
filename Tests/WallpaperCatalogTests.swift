@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Store's wallpapers: every one is distinct, each mood has its share, a third are free.
 final class WallpaperCatalogTests: XCTestCase {

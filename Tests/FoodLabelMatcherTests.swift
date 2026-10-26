@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Labels of a photo (what an image classifier sees) turned into foods of the tables: the real food
 /// table for common words, a stand-in search for the exact rules (threshold, limit, duplicates).

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Mémoire visuelle locale : distance entre empreintes, voisins, seuil, 2 repas concordants contre 1,
 /// limite de 200 repas, anciennes données (sans la clé) et aller-retour d'encodage.

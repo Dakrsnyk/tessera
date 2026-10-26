@@ -1,7 +1,7 @@
 import SwiftUI
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The « Clair » (iOS 26) and « Teinté » (iOS 18) Home Screen appearances (request of 2026-10-16): iOS keeps
 /// only the opacity of each element and replaces the widget's background. What carries text is then filled

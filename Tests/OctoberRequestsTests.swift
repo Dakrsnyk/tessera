@@ -1,6 +1,6 @@
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The requests of 2026-10-15: nutrition needs calculated from the body (and kept when typed by hand),
 /// more nutrients, the water mini-app removed without losing data, photo widgets laid out by their number

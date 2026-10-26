@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Nutrition mini-app: meals changed in place, meals kept and taken back, nutrients never made up,
 /// averages over the days actually noted, ideas that fit what is left, one weight history.

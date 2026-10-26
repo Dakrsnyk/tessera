@@ -47,11 +47,11 @@ Les widgets lisent les données de l'app dans un espace partagé (App Group). Av
 
 ## 2. Ouvrir le projet sur un Mac
 
-1. Ouvre `Tessera.xcodeproj` avec **Xcode 16** ou plus récent.
-2. Sélectionne le projet, puis pour **chaque cible** (`Tessera` et `TesseraWidgets`) : onglet *Signing & Capabilities* > **Team** = ton compte.
-3. Choisis la cible **Tessera** et un iPhone (réel ou simulateur), puis **Run** (⌘R).
+1. Ouvre `Ardane.xcodeproj` avec **Xcode 16** ou plus récent.
+2. Sélectionne le projet, puis pour **chaque cible** (`Ardane` et `ArdaneWidgets`) : onglet *Signing & Capabilities* > **Team** = ton compte.
+3. Choisis la cible **Ardane** et un iPhone (réel ou simulateur), puis **Run** (⌘R).
 
-Les achats fonctionnent en local grâce à `Config/Tessera.storekit` (déjà relié au schéma : *Product > Scheme > Edit Scheme > Run > Options > StoreKit Configuration*).
+Les achats fonctionnent en local grâce à `Config/Ardane.storekit` (déjà relié au schéma : *Product > Scheme > Edit Scheme > Run > Options > StoreKit Configuration*).
 
 Dans les versions de test (Debug), le Premium est débloqué d'office ; Réglages > **Développeur** > « Premium débloqué (mode test) » le coupe. En Release (Archive pour l'App Store), seul StoreKit décide.
 
@@ -70,8 +70,8 @@ Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS
 | Identifiants (si tu changes de préfixe) | `PRODUCT_BUNDLE_IDENTIFIER` des 2 cibles, `APP_GROUP_ID`, fichiers `Config/*.entitlements` | Si `com.dakrsnyk.ardane` est déjà pris (App Group : `group.com.dakrsnyk.tessera`) |
 | Fiche de l'app | App Store Connect > Mes apps | Avant la soumission |
 | Contrats, banque, fiscalité | App Store Connect > Accords | Obligatoire pour vendre |
-| **Abonnements** : groupe « Ardane Premium » avec `com.dakrsnyk.tessera.premium.monthly` (1 mois) et `…premium.yearly` (1 an), tous deux avec un essai gratuit de 7 jours | App Store Connect > Abonnements | Avant la soumission |
-| **Achat unique** : `com.dakrsnyk.tessera.premium.lifetime` (non consommable) | App Store Connect > Achats intégrés | Avant la soumission |
+| **Abonnements** : groupe « Ardane Premium » avec `com.dakrsnyk.ardane.premium.monthly` (1 mois) et `…premium.yearly` (1 an), tous deux avec un essai gratuit de 7 jours | App Store Connect > Abonnements | Avant la soumission |
+| **Achat unique** : `com.dakrsnyk.ardane.premium.lifetime` (non consommable) | App Store Connect > Achats intégrés | Avant la soumission |
 | Adresse de support | `App/Premium/PremiumConfiguration.swift` (`supportEmail`) | Avant la soumission |
 | Politique de confidentialité | Page « Confidentialité Ardane » (lien déjà dans l'app) : la rendre publique via son menu Partager | Avant la soumission |
 | Clé CoinGecko (facultative) | Réglage `COINGECKO_API_KEY` | Si la limite gratuite est atteinte |
@@ -80,7 +80,7 @@ Les résumés rédigés par Apple Intelligence utilisent `FoundationModels` (iOS
 | Licences des données | Page « À propos » / fiche App Store | Mentionner Open Food Facts (ODbL), CoinGecko, SEC EDGAR, Frankfurter (BCE) |
 | Captures d'écran App Store | App Store Connect | Avant la soumission |
 
-Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfiguration.swift`. S'ils changent, mets aussi à jour `Config/Tessera.storekit`.
+Les identifiants d'abonnement sont centralisés dans `App/Premium/PremiumConfiguration.swift`. S'ils changent, mets aussi à jour `Config/Ardane.storekit`.
 
 ---
 

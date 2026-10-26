@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// A double tap runs an action once; a tap after a pause runs it again.
 @MainActor

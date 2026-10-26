@@ -264,13 +264,13 @@
   "prix_usd": {
     "monthly": {
       "value": 6.99,
-      "source": "Config/Tessera.storekit (consigne)",
+      "source": "Config/Ardane.storekit (consigne)",
       "status": "à confirmer CPA",
       "note": "À confirmer dans le sélecteur de prix App Store Connect (docs/finance/apple.md §4)"
     },
     "welcome_monthly": {
       "value": 4.99,
-      "source": "Config/Tessera.storekit (consigne)",
+      "source": "Config/Ardane.storekit (consigne)",
       "status": "à confirmer CPA",
       "note": "Offre pay as you go 4,99 $ x 3 mois (docs/finance/apple.md §4 : palier à confirmer)"
     },
@@ -281,12 +281,12 @@
     },
     "annual": {
       "value": 59.99,
-      "source": "Config/Tessera.storekit (consigne)",
+      "source": "Config/Ardane.storekit (consigne)",
       "status": "à confirmer CPA"
     },
     "lifetime": {
       "value": 99.99,
-      "source": "Config/Tessera.storekit (consigne)",
+      "source": "Config/Ardane.storekit (consigne)",
       "status": "à confirmer CPA"
     }
   },

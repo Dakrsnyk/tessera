@@ -1,4 +1,4 @@
-"""Original music and sound effects for the Tessera campaign (synthesized, royalty free).
+"""Original music and sound effects for the Ardane campaign (synthesized, royalty free).
 
     python3 synth.py <out dir>
 

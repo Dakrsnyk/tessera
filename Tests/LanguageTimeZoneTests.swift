@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The language and the time zone are two settings: switching Ardane from French to English, then
 /// back, changes how dates are written, never the hours saved nor the time zone they are read in.

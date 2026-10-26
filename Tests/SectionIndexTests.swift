@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The alphabetical index of the Fitness progression (2026-10-16): each exercise under its first letter
 /// without accent or case, a kana under its row, anything else under « # », sorted for the language.

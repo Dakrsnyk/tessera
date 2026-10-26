@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 final class CoreLogicTests: XCTestCase {
     private var cal: Calendar { DateMath.calendar }

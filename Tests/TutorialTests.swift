@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The tutorial after the first questions: shown once to a new person, never pushed on someone who
 /// already knew the app, every step in order with what it shows, and replayable.

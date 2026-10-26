@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Apprentissage local du scan : une correction ne suffit pas, deux concordantes oui, une correction aberrante
 /// est mise en quarantaine, la quantité habituelle est la médiane, le journal est borné, et les anciennes

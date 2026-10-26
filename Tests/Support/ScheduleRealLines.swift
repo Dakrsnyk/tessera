@@ -1,6 +1,6 @@
 import Foundation
 import CoreGraphics
-@testable import Tessera
+@testable import Ardane
 
 // The lines the REAL Vision returned on the CI simulator for the synthetic timetables of ScheduleRenderer (journal of the CI
 // report, files tests/OCR-<layout>-<variant>.txt, commit d9dfb39): exact texts and places, copied as they were printed

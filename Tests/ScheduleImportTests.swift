@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « Importer mon horaire »: the classes read from a photo or a PDF become classes of the schedule, with
 /// their course made when missing, and what is already there is never erased or doubled.

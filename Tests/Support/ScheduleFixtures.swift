@@ -1,6 +1,6 @@
 import Foundation
 import CoreGraphics
-@testable import Tessera
+@testable import Ardane
 
 // Reference timetables at the level of `RecognizedLine` (what Vision would give: one observation per line of text, a
 // place on the page normalised 0...1 with the origin at the top left), each with the answer checked by hand, and a

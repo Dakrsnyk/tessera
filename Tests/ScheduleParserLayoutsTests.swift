@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Pages of text laid out in other ways than the Omnivox screenshots: calendar week views, school grids with periods,
 /// transposed grids, lists and tables, university exports. The lines are written by hand with a place on the page

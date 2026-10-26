@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The week selector: each day reads as selected, today, gone by or to come, on the real calendar.
 final class WeekSelectorTests: XCTestCase {

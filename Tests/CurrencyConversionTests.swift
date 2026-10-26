@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Business: sales in another currency than the app's, converted at the ECB rate of their own day (the
 /// business day before on weekends and holidays), rounded to the cent, their original amount kept; never

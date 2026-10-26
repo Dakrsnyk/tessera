@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The small back arrow of the workout (Lock Screen, Dynamic Island, widget, app): a « Série faite »
 /// touched by mistake is taken back, and a session started by mistake is cancelled without counting.

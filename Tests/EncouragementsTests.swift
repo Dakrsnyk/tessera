@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 final class EncouragementsTests: XCTestCase {
     private let calendar = DateMath.calendar

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The account statement opened from the balance: every movement newest first, the balance after
 /// each, the « Solde de départ » first, and a last balance equal to the one the chart shows.

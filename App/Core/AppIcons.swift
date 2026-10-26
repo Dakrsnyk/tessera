@@ -94,20 +94,20 @@ final class QuickActions {
 
 /// Receives the menu's action when it launches the app…
 @MainActor
-final class TesseraAppDelegate: NSObject, UIApplicationDelegate {
+final class ArdaneAppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         if let item = options.shortcutItem {
             QuickActions.shared.pending = item.type
         }
         let configuration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
-        configuration.delegateClass = TesseraSceneDelegate.self
+        configuration.delegateClass = ArdaneSceneDelegate.self
         return configuration
     }
 }
 
 /// …and when the app was already open in the background.
 @MainActor
-final class TesseraSceneDelegate: NSObject, UIWindowSceneDelegate {
+final class ArdaneSceneDelegate: NSObject, UIWindowSceneDelegate {
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         QuickActions.shared.pending = shortcutItem.type
         completionHandler(true)

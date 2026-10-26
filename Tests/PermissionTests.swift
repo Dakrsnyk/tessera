@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Permissions iOS: an explanation before the system prompt, a refusal respected. Pure logic only: the real
 /// services (notifications, calendar, position, motion) are never touched, the states are injected.

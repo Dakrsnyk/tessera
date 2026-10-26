@@ -7,7 +7,7 @@
 //   python3 scripts/app_icons_install.py <output folder>   (asset catalog + previews)
 //
 // The mark: an A in two halves split by a narrow gap (left half and right half of two tones).
-// The glass icons keep the colors of the former Tessera icons: a clear half and a smoked half on a
+// The glass icons keep the colors of the former Ardane icons: a clear half and a smoked half on a
 // colored mesh, with the same sheen.
 const fs = require("fs");
 const path = require("path");

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « À remplir » in the mini-apps: what each one still asks for follows the same « filled » rule as
 /// « Mes informations », a card leaves once its answer is given, and nothing is left to show when all is given.

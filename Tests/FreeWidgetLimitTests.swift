@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The free plan (request of 2026-10-16): 3 saved widgets, and photo and quote widgets unlimited. Every new
 /// widget follows the same rule (Studio, Store, duplicate, merge, « Photos et citations »), and whoever

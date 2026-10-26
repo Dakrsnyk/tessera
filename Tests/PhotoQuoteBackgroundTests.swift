@@ -1,7 +1,7 @@
 import UIKit
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// A photo behind a quote (request of 2026-10-15): kept as the widget's only photo, read back unchanged,
 /// older quotes read as before, light text on the darkened photo, and the quote's own colors when the

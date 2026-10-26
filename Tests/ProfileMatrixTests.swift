@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The same checks for three kinds of person: nobody (no interest, no data), a partial profile (three interests and a
 /// few answers) and a complete one (everything given). Pure logic on an `AppModel` over a temporary store: « Mon

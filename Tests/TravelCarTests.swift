@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Travel and Auto mini-apps: a trip's program and budget in any currency, its checklist, and a
 /// car's range, distance and consumption, all from what the person noted.

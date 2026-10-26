@@ -1,6 +1,6 @@
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « Mes widgets » on the Home Screen: a placed widget keeps the widget it was added with (or the one
 /// chosen in « Modifier le widget »), whatever is made afterwards; the gallery offers the latest widget

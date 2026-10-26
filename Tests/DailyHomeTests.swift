@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « Mon Quotidien » limited to what the person chose: the categories of their interests (empty dotted
 /// cards until they give data, never a made-up figure), the ones with data and the ones they added with

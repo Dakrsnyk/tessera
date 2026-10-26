@@ -16,16 +16,16 @@ App Store Connect, compte titulaire (Account Holder) :
 Dans **Apps › Ardane** (Bundle ID `com.dakrsnyk.ardane`) › barre latérale **Monetization**. Un identifiant de produit ne se modifie ni ne se réutilise jamais : vérifier lettre par lettre avant **Create**.
 
 **Achat à vie** — **In-App Purchases** › (+) › **Non-Consumable**
-- Reference Name : `Premium à vie` · Product ID : `com.dakrsnyk.tessera.premium.lifetime` › **Create**.
+- Reference Name : `Premium à vie` · Product ID : `com.dakrsnyk.ardane.premium.lifetime` › **Create**.
 - **Availability** : tous les pays · **Price Schedule** › **Add Pricing** › Canada › 99,99 $.
 - **Localization** › français (Canada) puis anglais : nom (2 à 30 caractères) et description (45 au plus).
 - **Review Information** : une capture de la page Premium de l'app › **Save**.
 - **Family Sharing** : ne l'activer que si tu le veux vraiment (irréversible).
 
-**Abonnements** — **Subscriptions** › (+) › nom du groupe `Tessera Premium` › **Create**
+**Abonnements** — **Subscriptions** › (+) › nom du groupe `Ardane Premium` › **Create**
 - Dans le groupe : **Display Name and Description** › **Add** › langues, nom visible (ex. « Ardane Premium »). Oubli le plus fréquent : sans cela, les abonnements restent bloqués.
-- **Mensuel** : **Create** › Product ID `com.dakrsnyk.tessera.premium.monthly` › durée **1 month** › prix 6,99 $ › pays › nom et description › capture › **Save**.
-- **Annuel** : Product ID `com.dakrsnyk.tessera.premium.yearly` › durée **1 year** › 59,99 $ › même chose.
+- **Mensuel** : **Create** › Product ID `com.dakrsnyk.ardane.premium.monthly` › durée **1 month** › prix 6,99 $ › pays › nom et description › capture › **Save**.
+- **Annuel** : Product ID `com.dakrsnyk.ardane.premium.yearly` › durée **1 year** › 59,99 $ › même chose.
 - **Offre de lancement du mensuel** : abonnement mensuel › **Subscription Prices** › **View all Subscription Pricing** › **Set up Introductory Offer** › pays › date de début › **Pay as you go**, **3 months**, 4,99 $ › **Confirm** (non modifiable ensuite).
 
 **Ne pas cliquer « Add for Review »** : ce n'est utile que pour la sortie sur l'App Store. Attendre jusqu'à 1 h.

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The themed packs, the style of the week and the seasons' collections.
 @MainActor

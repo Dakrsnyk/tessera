@@ -1,4 +1,4 @@
-"""Tessera's translations.
+"""Ardane's translations.
 
     python3 scripts/l10n_catalog.py extract   # l10n/keys.json: every French text and where it is used
     python3 scripts/l10n_catalog.py merge     # l10n/<language>.json from the batches l10n/parts/NN.<language>.json

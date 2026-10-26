@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Non-regression tests built on what the REAL Vision returned on the CI simulator for the synthetic timetables of
 /// `ScheduleRenderer` (the lines are copied as they were printed in Tests/Support/ScheduleRealLines.swift). Each test feeds

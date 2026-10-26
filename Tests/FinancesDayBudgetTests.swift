@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The budget of Finances follows the chosen day: what is left of the month's budget at the end of that day
 /// (the spending from the 1st to that day), the days it has to cover, and the same figures for today.

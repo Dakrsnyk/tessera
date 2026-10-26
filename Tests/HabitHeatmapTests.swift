@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The habits' contribution grid: the data of the cells, the layout that fills a widget, the percentage.
 final class HabitHeatmapTests: XCTestCase {

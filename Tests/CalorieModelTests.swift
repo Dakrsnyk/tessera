@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The estimate of the active calories: work apart from rest, capped, no number without a weight,
 /// no passed or deleted set counted, and no step counted again during a workout.

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « Supprimer la séance »: a session recorded by mistake leaves the history, as if it had never been
 /// done: the day's routine can be started again and everything derived from the history is recomputed.

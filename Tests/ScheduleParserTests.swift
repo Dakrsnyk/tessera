@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The text read from a photo or a PDF of a timetable, turned into classes. Pure logic: the lines are written
 /// by hand with a place on the page (0...1, origin at the top left), so no image and no Vision are involved.

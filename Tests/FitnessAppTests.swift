@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Fitness mini-app: a large, consistent exercise library, a search that understands what people
 /// type, sessions logged as really done, and performances linked to each exercise.

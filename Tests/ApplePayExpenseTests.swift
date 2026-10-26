@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Dépenses Apple Pay reçues par l'automatisation Raccourcis « Transaction » : lecture du montant,
 /// nom du commerçant, catégorie devinée ou apprise, doublons, anciennes données sauvegardées.

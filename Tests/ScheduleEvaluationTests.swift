@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Precision, recall and exactness of the timetable importer against the reference pages of `ScheduleCorpus`
 /// (Tests/Support/ScheduleFixtures.swift), at three levels of OCR noise. The scores are printed in the log, one line per

@@ -1,6 +1,6 @@
 import XCTest
 import Vision
-@testable import Tessera
+@testable import Ardane
 
 /// The import end to end with the REAL Vision: synthetic timetables (Tests/Support/ScheduleRenderer.swift) are drawn,
 /// degraded (blur, tilt, JPEG, dark mode), read by `ScheduleImporter` and compared with what was drawn.

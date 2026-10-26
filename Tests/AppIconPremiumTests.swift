@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Changing the app icon is Premium (2026-10-15): without it, only another icon is locked; the icon already
 /// on the Home Screen is kept and the main one can always come back.

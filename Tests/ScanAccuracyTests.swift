@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Précision du scan : cohérence de la table intégrée, parsing Open Food Facts, fourchettes d'incertitude,
 /// et jeu de repas « pesés » synthétiques pour mesurer l'erreur d'un scan estimé avant/après personnalisation.

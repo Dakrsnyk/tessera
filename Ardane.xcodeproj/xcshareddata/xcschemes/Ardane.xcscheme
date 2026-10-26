@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A10000000000000000000070"
-               BuildableName = "Tessera.app"
-               BlueprintName = "Tessera"
-               ReferencedContainer = "container:Tessera.xcodeproj">
+               BuildableName = "Ardane.app"
+               BlueprintName = "Ardane"
+               ReferencedContainer = "container:Ardane.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A10000000000000000000072"
-               BuildableName = "TesseraTests.xctest"
-               BlueprintName = "TesseraTests"
-               ReferencedContainer = "container:Tessera.xcodeproj">
+               BuildableName = "ArdaneTests.xctest"
+               BlueprintName = "ArdaneTests"
+               ReferencedContainer = "container:Ardane.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A10000000000000000000073"
-               BuildableName = "TesseraUITests.xctest"
-               BlueprintName = "TesseraUITests"
-               ReferencedContainer = "container:Tessera.xcodeproj">
+               BuildableName = "ArdaneUITests.xctest"
+               BlueprintName = "ArdaneUITests"
+               ReferencedContainer = "container:Ardane.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -69,13 +69,13 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A10000000000000000000070"
-            BuildableName = "Tessera.app"
-            BlueprintName = "Tessera"
-            ReferencedContainer = "container:Tessera.xcodeproj">
+            BuildableName = "Ardane.app"
+            BlueprintName = "Ardane"
+            ReferencedContainer = "container:Ardane.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
-         identifier = "../../Config/Tessera.storekit">
+         identifier = "../../Config/Ardane.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
@@ -89,9 +89,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A10000000000000000000070"
-            BuildableName = "Tessera.app"
-            BlueprintName = "Tessera"
-            ReferencedContainer = "container:Tessera.xcodeproj">
+            BuildableName = "Ardane.app"
+            BlueprintName = "Ardane"
+            ReferencedContainer = "container:Ardane.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

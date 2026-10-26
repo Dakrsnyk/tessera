@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The weather was removed from Ardane: what an earlier version saved about it (widgets, merged widgets,
 /// settings) is left out when read, and everything else stays.

@@ -1,6 +1,6 @@
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Sizes, the space creator's compositions and merging widgets.
 final class FusionTests: XCTestCase {

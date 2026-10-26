@@ -1,6 +1,6 @@
 # Ardane — notes pour Claude Code
 
-Ardane (anciennement Tessera : le projet Xcode, les cibles, le module, l'App Group, les produits in-app, le schéma d'URL et le dossier de données gardent « Tessera » ; l'identifiant de l'app est `com.dakrsnyk.ardane` depuis le 2026-10-12). App iOS (SwiftUI, iOS 17, Swift 5) de widgets/mini-apps. Actif de revenu passif visé (50–100 $/jour). Répondre en français.
+Ardane (anciennement Tessera : depuis le 2026-10-26 le projet Xcode `Ardane.xcodeproj`, le schéma, les cibles, le module, les fichiers et les produits in-app `com.dakrsnyk.ardane.premium…` s'appellent Ardane ; seuls l'App Group `group.com.dakrsnyk.tessera`, le schéma d'URL `tessera://`, les clés internes `tessera.*` et le dossier de données `Tessera/` gardent l'ancien nom, car ils portent les données et la signature ; l'identifiant de l'app est `com.dakrsnyk.ardane` depuis le 2026-10-12). App iOS (SwiftUI, iOS 17, Swift 5) de widgets/mini-apps. Actif de revenu passif visé (50–100 $/jour). Répondre en français.
 
 ## Architecture
 - `App/` (app), `Shared/` (compilé dans l'app ET l'extension widget), `UITests/`, `scripts/`, `l10n/`.

@@ -27,7 +27,7 @@ enum WidgetDiagnostics {
 
     static var isExtensionInstalled: Bool {
         guard let plugins = Bundle.main.builtInPlugInsURL else { return false }
-        return FileManager.default.fileExists(atPath: plugins.appendingPathComponent("TesseraWidgets.appex").path)
+        return FileManager.default.fileExists(atPath: plugins.appendingPathComponent("ArdaneWidgets.appex").path)
     }
 
     static var lastLaunch: Date? {

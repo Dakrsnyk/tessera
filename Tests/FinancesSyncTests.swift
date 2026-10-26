@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Finances in step: fixed expenses in their category and on their dates, operations at their
 /// dates, deletions that follow everywhere.

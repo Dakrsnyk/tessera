@@ -1,6 +1,6 @@
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The room of a class (and the place of an appointment or an event) on the week's tables: in the
 /// app's full table and in the large « Horaire de la semaine » widget, written under the name when the

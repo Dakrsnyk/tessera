@@ -1,7 +1,7 @@
 # État d'Ardane, anciennement Tessera (mis à jour le 2026-10-11)
 
 ## Nom et icônes (2026-10-11)
-- L'app s'appelle Ardane : nom affiché, textes (6 langues), autorisations, sauvegardes (les anciennes « Tessera » s'importent toujours). Restent « Tessera » : projet, cibles, schéma, module `Tessera`, produits in-app `com.dakrsnyk.tessera.premium…`, schéma d'URL `tessera://`, App Group et dossier de données `Tessera/` (rien n'est perdu). L'identifiant de l'app est `com.dakrsnyk.ardane` (widgets : `com.dakrsnyk.ardane.widgets`) depuis le 2026-10-12, pour l'icône des notifications (voir Pieges-connus).
+- L'app s'appelle Ardane : nom affiché, textes (6 langues), autorisations, sauvegardes (les anciennes « Tessera » s'importent toujours). Depuis le 2026-10-26, projet, cibles, schéma, module et produits in-app (`com.dakrsnyk.ardane.premium…`) s'appellent Ardane ; restent « Tessera » seulement le schéma d'URL `tessera://`, l'App Group, les clés internes `tessera.*` et le dossier de données `Tessera/` (rien n'est perdu). L'identifiant de l'app est `com.dakrsnyk.ardane` (widgets : `com.dakrsnyk.ardane.widgets`) depuis le 2026-10-12, pour l'icône des notifications (voir Pieges-connus).
 - Logo : un A en deux moitiés séparées par une fente, blanc et pêche sur dégradé corail (`ArdaneMark`, icône principale « Corail »). Icônes au choix : Classique (crème), Verre classique (blanc, noir et cyan) et les 16 verres aux couleurs des anciennes icônes. `scripts/app_icons.js` puis `app_icons_install.py`.
 
 ## Localisation — terminée

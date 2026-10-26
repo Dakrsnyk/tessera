@@ -38,7 +38,7 @@ private func changeWorkout(_ change: (inout FitnessState) -> Void) async {
 /// on screen. The app sets `play`, which taps only while it is on screen; the widget extension leaves it
 /// nil. So the Lock Screen, the Dynamic Island and the widgets stay silent unless the app is open.
 enum ButtonFeedback {
-    /// Set by the app (see `TesseraApp`): a light tap, once, if the app is on screen.
+    /// Set by the app (see `ArdaneApp`): a light tap, once, if the app is on screen.
     static var play: (() -> Void)?
 
     /// The rule: only a tap that changed something, and only while the app is on screen.

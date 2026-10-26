@@ -260,9 +260,9 @@ def check_release_safety():
 def check_internal_premium():
     """INTERNAL_PREMIUM (Premium unlocked) comes only from the CI tag [interne], whose upload is « TestFlight
     Internal Only » (never the App Store): never in the project, and only with that export option."""
-    pbx = open(os.path.join(ROOT, "Tessera.xcodeproj", "project.pbxproj"), encoding="utf8").read()
+    pbx = open(os.path.join(ROOT, "Ardane.xcodeproj", "project.pbxproj"), encoding="utf8").read()
     if "INTERNAL_PREMIUM" in pbx:
-        problems.append("Tessera.xcodeproj: INTERNAL_PREMIUM must never be set in the project (CI tag [interne] only)")
+        problems.append("Ardane.xcodeproj: INTERNAL_PREMIUM must never be set in the project (CI tag [interne] only)")
     workflow = open(os.path.join(ROOT, ".github", "workflows", "build.yml"), encoding="utf8").read()
     if "INTERNAL_PREMIUM" in workflow and "testFlightInternalTestingOnly" not in workflow:
         problems.append("build.yml: INTERNAL_PREMIUM without the « TestFlight Internal Only » export option")

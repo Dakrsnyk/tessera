@@ -1,11 +1,11 @@
 import Foundation
 
 /// Everything to fill in when the app is set up in App Store Connect.
-/// Product IDs must match the ones created there (and in Config/Tessera.storekit for local testing).
+/// Product IDs must match the ones created there (and in Config/Ardane.storekit for local testing).
 enum PremiumConfiguration {
-    static let monthlyID = "com.dakrsnyk.tessera.premium.monthly"
-    static let yearlyID = "com.dakrsnyk.tessera.premium.yearly"
-    static let lifetimeID = "com.dakrsnyk.tessera.premium.lifetime"
+    static let monthlyID = "com.dakrsnyk.ardane.premium.monthly"
+    static let yearlyID = "com.dakrsnyk.ardane.premium.yearly"
+    static let lifetimeID = "com.dakrsnyk.ardane.premium.lifetime"
 
     static var allProductIDs: [String] { [yearlyID, monthlyID, lifetimeID] }
 

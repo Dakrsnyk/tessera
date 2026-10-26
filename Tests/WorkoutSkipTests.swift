@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « Passer » passes the set shown (neither done nor left to do), the workout buttons ignore a tap on a
 /// drawing already out of date, the quick food add ignores a double tap, and the light tap plays only

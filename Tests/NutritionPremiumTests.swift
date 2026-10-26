@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The nutrients of Premium: many more nutrients (fats, minerals, vitamins, caffeine, alcohol), read from
 /// the Canadian Nutrient File, added up without made-up zeros, with targets from recognized references

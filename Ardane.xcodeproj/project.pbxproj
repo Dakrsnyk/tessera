@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10000000000000000000010 /* TesseraWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* TesseraWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A10000000000000000000010 /* ArdaneWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* ArdaneWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -16,21 +16,21 @@
 			containerPortal = A10000000000000000000090 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A10000000000000000000071;
-			remoteInfo = TesseraWidgets;
+			remoteInfo = ArdaneWidgets;
 		};
 		A10000000000000000000021 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A10000000000000000000090 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A10000000000000000000070;
-			remoteInfo = Tessera;
+			remoteInfo = Ardane;
 		};
 		A10000000000000000000022 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A10000000000000000000090 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A10000000000000000000070;
-			remoteInfo = Tessera;
+			remoteInfo = Ardane;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -41,7 +41,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				A10000000000000000000010 /* TesseraWidgets.appex in Embed Foundation Extensions */,
+				A10000000000000000000010 /* ArdaneWidgets.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,10 +49,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A10000000000000000000001 /* Tessera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tessera.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A10000000000000000000002 /* TesseraWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TesseraWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		A10000000000000000000003 /* TesseraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesseraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A10000000000000000000004 /* TesseraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesseraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000001 /* Ardane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ardane.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000002 /* ArdaneWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ArdaneWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000003 /* ArdaneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArdaneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000004 /* ArdaneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArdaneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -130,10 +130,10 @@
 		A10000000000000000000061 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A10000000000000000000001 /* Tessera.app */,
-				A10000000000000000000002 /* TesseraWidgets.appex */,
-				A10000000000000000000003 /* TesseraTests.xctest */,
-				A10000000000000000000004 /* TesseraUITests.xctest */,
+				A10000000000000000000001 /* Ardane.app */,
+				A10000000000000000000002 /* ArdaneWidgets.appex */,
+				A10000000000000000000003 /* ArdaneTests.xctest */,
+				A10000000000000000000004 /* ArdaneUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A10000000000000000000070 /* Tessera */ = {
+		A10000000000000000000070 /* Ardane */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A100000000000000000000B0 /* Build configuration list for PBXNativeTarget "Tessera" */;
+			buildConfigurationList = A100000000000000000000B0 /* Build configuration list for PBXNativeTarget "Ardane" */;
 			buildPhases = (
 				A10000000000000000000080 /* Sources */,
 				A10000000000000000000050 /* Frameworks */,
@@ -159,16 +159,16 @@
 				A10000000000000000000040 /* App */,
 				A10000000000000000000041 /* Shared */,
 			);
-			name = Tessera;
+			name = Ardane;
 			packageProductDependencies = (
 			);
-			productName = Tessera;
-			productReference = A10000000000000000000001 /* Tessera.app */;
+			productName = Ardane;
+			productReference = A10000000000000000000001 /* Ardane.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A10000000000000000000071 /* TesseraWidgets */ = {
+		A10000000000000000000071 /* ArdaneWidgets */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A100000000000000000000B1 /* Build configuration list for PBXNativeTarget "TesseraWidgets" */;
+			buildConfigurationList = A100000000000000000000B1 /* Build configuration list for PBXNativeTarget "ArdaneWidgets" */;
 			buildPhases = (
 				A10000000000000000000081 /* Sources */,
 				A10000000000000000000051 /* Frameworks */,
@@ -182,16 +182,16 @@
 				A10000000000000000000042 /* Widgets */,
 				A10000000000000000000041 /* Shared */,
 			);
-			name = TesseraWidgets;
+			name = ArdaneWidgets;
 			packageProductDependencies = (
 			);
-			productName = TesseraWidgets;
-			productReference = A10000000000000000000002 /* TesseraWidgets.appex */;
+			productName = ArdaneWidgets;
+			productReference = A10000000000000000000002 /* ArdaneWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		A10000000000000000000072 /* TesseraTests */ = {
+		A10000000000000000000072 /* ArdaneTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A100000000000000000000B3 /* Build configuration list for PBXNativeTarget "TesseraTests" */;
+			buildConfigurationList = A100000000000000000000B3 /* Build configuration list for PBXNativeTarget "ArdaneTests" */;
 			buildPhases = (
 				A10000000000000000000084 /* Sources */,
 				A10000000000000000000052 /* Frameworks */,
@@ -205,16 +205,16 @@
 			fileSystemSynchronizedGroups = (
 				A10000000000000000000043 /* Tests */,
 			);
-			name = TesseraTests;
+			name = ArdaneTests;
 			packageProductDependencies = (
 			);
-			productName = TesseraTests;
-			productReference = A10000000000000000000003 /* TesseraTests.xctest */;
+			productName = ArdaneTests;
+			productReference = A10000000000000000000003 /* ArdaneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A10000000000000000000073 /* TesseraUITests */ = {
+		A10000000000000000000073 /* ArdaneUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A100000000000000000000B4 /* Build configuration list for PBXNativeTarget "TesseraUITests" */;
+			buildConfigurationList = A100000000000000000000B4 /* Build configuration list for PBXNativeTarget "ArdaneUITests" */;
 			buildPhases = (
 				A10000000000000000000085 /* Sources */,
 				A10000000000000000000053 /* Frameworks */,
@@ -228,11 +228,11 @@
 			fileSystemSynchronizedGroups = (
 				A10000000000000000000044 /* UITests */,
 			);
-			name = TesseraUITests;
+			name = ArdaneUITests;
 			packageProductDependencies = (
 			);
-			productName = TesseraUITests;
-			productReference = A10000000000000000000004 /* TesseraUITests.xctest */;
+			productName = ArdaneUITests;
+			productReference = A10000000000000000000004 /* ArdaneUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -261,7 +261,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A100000000000000000000B2 /* Build configuration list for PBXProject "Tessera" */;
+			buildConfigurationList = A100000000000000000000B2 /* Build configuration list for PBXProject "Ardane" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -281,10 +281,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A10000000000000000000070 /* Tessera */,
-				A10000000000000000000071 /* TesseraWidgets */,
-				A10000000000000000000072 /* TesseraTests */,
-				A10000000000000000000073 /* TesseraUITests */,
+				A10000000000000000000070 /* Ardane */,
+				A10000000000000000000071 /* ArdaneWidgets */,
+				A10000000000000000000072 /* ArdaneTests */,
+				A10000000000000000000073 /* ArdaneUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -354,17 +354,17 @@
 /* Begin PBXTargetDependency section */
 		A100000000000000000000A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A10000000000000000000071 /* TesseraWidgets */;
+			target = A10000000000000000000071 /* ArdaneWidgets */;
 			targetProxy = A10000000000000000000020 /* PBXContainerItemProxy */;
 		};
 		A100000000000000000000A1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A10000000000000000000070 /* Tessera */;
+			target = A10000000000000000000070 /* Ardane */;
 			targetProxy = A10000000000000000000021 /* PBXContainerItemProxy */;
 		};
 		A100000000000000000000A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A10000000000000000000070 /* Tessera */;
+			target = A10000000000000000000070 /* Ardane */;
 			targetProxy = A10000000000000000000022 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -462,7 +462,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = ArdaneIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Config/Tessera.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Config/Ardane.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
@@ -505,7 +505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = ArdaneIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Config/Tessera.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Config/Ardane.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Ardane App Store";
@@ -542,7 +542,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_DEBUG_DYLIB = NO;
-				CODE_SIGN_ENTITLEMENTS = Config/TesseraWidgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Config/ArdaneWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -570,7 +570,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_DEBUG_DYLIB = NO;
-				CODE_SIGN_ENTITLEMENTS = Config/TesseraWidgets.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Config/ArdaneWidgets.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Ardane Widgets App Store";
@@ -600,7 +600,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tessera.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tessera";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ardane.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ardane";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -618,7 +618,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tessera.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tessera";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ardane.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ardane";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -635,7 +635,7 @@
 		A100000000000000000000C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				TEST_TARGET_NAME = Tessera;
+				TEST_TARGET_NAME = Ardane;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -652,7 +652,7 @@
 		A100000000000000000000C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				TEST_TARGET_NAME = Tessera;
+				TEST_TARGET_NAME = Ardane;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -669,7 +669,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A100000000000000000000B0 /* Build configuration list for PBXNativeTarget "Tessera" */ = {
+		A100000000000000000000B0 /* Build configuration list for PBXNativeTarget "Ardane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A100000000000000000000C2 /* Debug */,
@@ -678,7 +678,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A100000000000000000000B1 /* Build configuration list for PBXNativeTarget "TesseraWidgets" */ = {
+		A100000000000000000000B1 /* Build configuration list for PBXNativeTarget "ArdaneWidgets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A100000000000000000000C4 /* Debug */,
@@ -687,7 +687,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A100000000000000000000B2 /* Build configuration list for PBXProject "Tessera" */ = {
+		A100000000000000000000B2 /* Build configuration list for PBXProject "Ardane" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A100000000000000000000C0 /* Debug */,
@@ -696,7 +696,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A100000000000000000000B3 /* Build configuration list for PBXNativeTarget "TesseraTests" */ = {
+		A100000000000000000000B3 /* Build configuration list for PBXNativeTarget "ArdaneTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A100000000000000000000C6 /* Debug */,
@@ -705,7 +705,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A100000000000000000000B4 /* Build configuration list for PBXNativeTarget "TesseraUITests" */ = {
+		A100000000000000000000B4 /* Build configuration list for PBXNativeTarget "ArdaneUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A100000000000000000000C8 /* Debug */,

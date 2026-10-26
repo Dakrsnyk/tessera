@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Planning schedule: entries every week or once on a date, and a weekly entry cancelled one day only.
 final class ScheduleTests: XCTestCase {

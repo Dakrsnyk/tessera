@@ -1,15 +1,15 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The only introductory offer (decision of 2026-10-26): a free trial of 7 days on the monthly and the yearly
 /// plan (same subscription group: Apple grants one introductory offer per group and per person), none on the
-/// lifetime purchase. Reads Config/Tessera.storekit, the local StoreKit configuration.
+/// lifetime purchase. Reads Config/Ardane.storekit, the local StoreKit configuration.
 @MainActor
 final class PremiumTrialOfferTests: XCTestCase {
     private func configuration() throws -> [String: Any] {
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent("Config/Tessera.storekit")
-        guard let data = try? Data(contentsOf: url) else { throw XCTSkip("Config/Tessera.storekit is not readable from here") }
+            .appendingPathComponent("Config/Ardane.storekit")
+        guard let data = try? Data(contentsOf: url) else { throw XCTSkip("Config/Ardane.storekit is not readable from here") }
         return try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
     }
 
@@ -45,8 +45,8 @@ final class PremiumTrialOfferTests: XCTestCase {
 
     func testNoOldWelcomeOfferLeftInTheConfiguration() throws {
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent("Config/Tessera.storekit")
-        guard let text = try? String(contentsOf: url, encoding: .utf8) else { throw XCTSkip("Config/Tessera.storekit is not readable from here") }
+            .appendingPathComponent("Config/Ardane.storekit")
+        guard let text = try? String(contentsOf: url, encoding: .utf8) else { throw XCTSkip("Config/Ardane.storekit is not readable from here") }
         XCTAssertFalse(text.contains("payAsYouGo"))
         XCTAssertFalse(text.contains("4,99") || text.contains("4.99"))
     }

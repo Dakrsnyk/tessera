@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// More layouts of timetables (see ScheduleParserLayoutsTests for the first ones): periods named by a legend, hours
 /// written as starts only or as several ranges on a row, two weeks on a page, other languages, a tilted photo, a

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The study timer on the Lock Screen: what its Live Activity shows.
 final class StudyLiveActivityTests: XCTestCase {

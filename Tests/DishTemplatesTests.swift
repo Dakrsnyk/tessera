@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Synonyms of the labels of the classifier, dishes cut into editable lines, several labels per photo,
 /// no food found by the first letters of a word, cooked rather than raw. Realistic lists of labels, as

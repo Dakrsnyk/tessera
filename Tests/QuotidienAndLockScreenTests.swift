@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Mon Quotidien editing (one source of truth, recalculations), the gender options, the rating
 /// request, the Lock Screen workout and the interactive widgets.

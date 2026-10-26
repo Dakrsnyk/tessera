@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The recap of a scan: add, remove, replace, quantities kept in range, totals, a food on two lines
 /// merged, the journal written once (a double tap or the same barcode again adds nothing), and

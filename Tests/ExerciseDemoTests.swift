@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The exercise demonstrations: one per exercise, complete, with named phases, and variants that
 /// are really different (their own equipment, position and path).

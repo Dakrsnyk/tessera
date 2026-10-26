@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « Mon Quotidien » and the data widgets ask for: only what the person entered, the right thing at
 /// the right moment, one place for each value, example data only where nothing was given.

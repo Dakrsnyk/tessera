@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// « Mes informations »: one home per value, reused everywhere, and nothing shown that wasn't given.
 @MainActor

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Finances and Business mini-apps: money in and out that adds up month by month, categories
 /// against their limits, savings goals, and indicators compared fairly with the previous period.

@@ -1,7 +1,7 @@
 import XCTest
 import Vision
 import ImageIO
-@testable import Tessera
+@testable import Ardane
 
 /// Real photos (free licences, see Tests/Fixtures/FoodPhotos/ATTRIBUTIONS.md) read by the REAL Vision classifier, then turned
 /// into foods by `FoodLabelMatcher`. The goal is to MEASURE what the scan recognises on the CI simulator. One line per photo:

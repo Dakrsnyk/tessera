@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Productivité card of Mon Quotidien: quick add of a task for today, and its reserved entry in the settings.
 @MainActor

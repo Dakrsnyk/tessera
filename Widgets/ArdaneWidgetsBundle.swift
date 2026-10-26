@@ -5,7 +5,7 @@ import WidgetKit
 // so the widgets are grouped by category and composed here.
 
 @main
-struct TesseraWidgetsBundle: WidgetBundle {
+struct ArdaneWidgetsBundle: WidgetBundle {
     init() {
         WidgetLog.logger.log("extension launched")
         // Lets the app's Réglages > Développeur show that iOS really runs the widgets.

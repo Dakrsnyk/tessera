@@ -1,7 +1,7 @@
 import SwiftUI
 import WidgetKit
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// The Studio's colors: the main color repaints the whole style and stays readable, a palette changes
 /// every color, both survive a save, and several widgets made together can share one look.

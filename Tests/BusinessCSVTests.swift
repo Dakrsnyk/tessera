@@ -1,5 +1,5 @@
 import XCTest
-@testable import Tessera
+@testable import Ardane
 
 /// Business: files read the right way round. An expense is never counted as income, whatever the export:
 /// a type column (« depense » / « revenu »), debit and credit columns, a direction column, a sign in any
