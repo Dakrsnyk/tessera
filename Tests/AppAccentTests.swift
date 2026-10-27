@@ -72,22 +72,39 @@ final class AppAccentTests: XCTestCase {
         }
     }
 
-    func testBackgroundsDoNotDependOnAccent() {
+    func testTheWholeThemeFollowsTheAccent() {
         var a = AppSettings()
-        a.appStyle = .coral
         a.accent = .red
         var b = a
         b.accent = .blue
         let styleA = AppStyle.style(a), styleB = AppStyle.style(b)
         XCTAssertEqual(styleA.chosenAccent, .red)
         XCTAssertEqual(styleB.chosenAccent, .blue)
-        XCTAssertEqual(styleA.screenLight, styleB.screenLight)
-        XCTAssertEqual(styleA.screenDark, styleB.screenDark)
-        XCTAssertEqual(styleA.cardDark, styleB.cardDark)
-        XCTAssertEqual(styleA.accentLight, styleB.accentLight)
-        XCTAssertEqual(styleA.accentDark, styleB.accentDark)
-        XCTAssertEqual(styleA.screen.hexString, styleB.screen.hexString)
-        XCTAssertEqual(styleA.card.hexString, styleB.card.hexString)
-        // The background gradient (AppFill.depth) reads only the fields compared above.
+        // Backgrounds change with the accent...
+        XCTAssertNotEqual(styleA.screenLight, styleB.screenLight)
+        XCTAssertNotEqual(styleA.screenDark, styleB.screenDark)
+        XCTAssertNotEqual(styleA.cardDark, styleB.cardDark)
+        // ... and are tints of its own light and dark values (the light gradient reads accentLight).
+        XCTAssertEqual(styleB.accentLight, "007AFF")
+        XCTAssertEqual(styleB.accentDark, "0A84FF")
+        XCTAssertEqual(styleB.screenLight, AppStyle.mixHex("FFFFFF", "007AFF", 0.08))
+        XCTAssertEqual(styleB.screenDark, AppStyle.mixHex("000000", "0A84FF", 0.08))
+        // The same accent gives the same theme whatever the former style was.
+        a.accent = .blue
+        a.appStyle = .coral
+        XCTAssertEqual(AppStyle.style(a).screenLight, styleB.screenLight)
+        XCTAssertEqual(AppStyle.style(a).fontDesign, .default)
+    }
+
+    func testMixHexMovesTowardsTheTint() {
+        XCTAssertEqual(AppStyle.mixHex("FFFFFF", "007AFF", 0.08), "EBF4FF")
+        XCTAssertEqual(AppStyle.mixHex("000000", "FFFFFF", 0), "000000")
+        XCTAssertEqual(AppStyle.mixHex("000000", "FFFFFF", 1), "FFFFFF")
+        // Every accent gives a light screen and a dark screen that stay light and dark.
+        for accent in AppAccentID.allCases {
+            let style = AppStyle.themed(accent)
+            XCTAssertGreaterThan(UInt64(style.screenLight, radix: 16) ?? 0, 0xE0E0E0 - 0x101010, accent.rawValue)
+            XCTAssertLessThan(UInt64(style.screenDark, radix: 16) ?? .max, 0x202020, accent.rawValue)
+        }
     }
 }

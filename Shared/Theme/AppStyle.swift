@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The colors of one app style, in light and dark. Widgets keep their own themes.
+/// The colors of the app theme, in light and dark. Widgets keep their own themes.
 struct AppStyle: Identifiable {
     let id: AppStyleID
     let tagline: String
@@ -50,11 +50,30 @@ struct AppStyle: Identifiable {
         all.first { $0.id == id } ?? all[0]
     }
 
-    /// The background style of the settings, with the accent color they chose.
+    /// The theme of the app for the settings: the accent color they chose drives everything (accent, screen
+    /// background and its gradient, dark cards). Widgets, categories and mini-apps keep their own colors.
     static func style(_ settings: AppSettings) -> AppStyle {
-        var result = style(settings.appStyle)
-        result.chosenAccent = settings.accent
-        return result
+        themed(settings.accent, id: settings.appStyle)
+    }
+
+    /// A whole theme built from one accent: a very light tint of it for the light screen, a very dark one for the
+    /// dark screen and the dark cards (the same proportions as the former hand-made styles).
+    static func themed(_ accent: AppAccentID, id: AppStyleID = .tessera) -> AppStyle {
+        AppStyle(id: id, tagline: accent.title, accentLight: accent.lightHex, accentDark: accent.darkHex,
+                 screenLight: mixHex("FFFFFF", accent.lightHex, 0.08),
+                 screenDark: mixHex("000000", accent.darkHex, 0.08),
+                 cardDark: mixHex("000000", accent.darkHex, 0.17),
+                 inkOnDarkAccent: accent.inkHex, chosenAccent: accent)
+    }
+
+    /// `base` moved towards `tint` by `amount` (0 to 1), as a hex string.
+    static func mixHex(_ base: String, _ tint: String, _ amount: Double) -> String {
+        func channels(_ hex: String) -> [Double] {
+            let value = UInt64(hex, radix: 16) ?? 0
+            return [Double((value >> 16) & 0xFF), Double((value >> 8) & 0xFF), Double(value & 0xFF)]
+        }
+        let mixed = zip(channels(base), channels(tint)).map { Int(($0 + ($1 - $0) * amount).rounded()) }
+        return String(format: "%02X%02X%02X", mixed[0], mixed[1], mixed[2])
     }
 
     /// The saved style, used before the first view applies the settings (launch screen).
