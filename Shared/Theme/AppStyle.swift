@@ -14,12 +14,14 @@ struct AppStyle: Identifiable {
     /// Text on an accent-colored fill, when the accent is too light for white.
     var inkOnDarkAccent = "FFFFFF"
     var fontDesign: Font.Design = .default
+    /// The accent color picked by the person; the style's own accent only tints the light background.
+    var chosenAccent: AppAccentID = .teal
 
     var name: String { id.title }
-    var accent: Color { Color(light: accentLight, dark: accentDark) }
+    var accent: Color { chosenAccent.color }
     var screen: Color { Color(light: screenLight, dark: screenDark) }
     var card: Color { Color(light: "FFFFFF", dark: cardDark) }
-    var onAccent: Color { Color(light: "FFFFFF", dark: inkOnDarkAccent) }
+    var onAccent: Color { chosenAccent.ink }
 
     static let all: [AppStyle] = [
         AppStyle(id: .tessera, tagline: tr("Jade et crème, l'original"), accentLight: "2F8F7A", accentDark: "3FA58D",
@@ -48,8 +50,15 @@ struct AppStyle: Identifiable {
         all.first { $0.id == id } ?? all[0]
     }
 
+    /// The background style of the settings, with the accent color they chose.
+    static func style(_ settings: AppSettings) -> AppStyle {
+        var result = style(settings.appStyle)
+        result.chosenAccent = settings.accent
+        return result
+    }
+
     /// The saved style, used before the first view applies the settings (launch screen).
-    static var current: AppStyle = style(SharedStore.shared.settings.appStyle)
+    static var current: AppStyle = style(SharedStore.shared.settings)
 }
 
 extension AppearanceMode {
@@ -63,7 +72,7 @@ extension AppearanceMode {
 }
 
 extension AppStyle: Equatable {
-    static func == (lhs: AppStyle, rhs: AppStyle) -> Bool { lhs.id == rhs.id }
+    static func == (lhs: AppStyle, rhs: AppStyle) -> Bool { lhs.id == rhs.id && lhs.chosenAccent == rhs.chosenAccent }
 }
 
 private struct AppStyleKey: EnvironmentKey {
@@ -94,7 +103,7 @@ struct AppFill: ShapeStyle {
         case .screen: return AnyShapeStyle(Color(hex: dark ? style.screenDark : style.screenLight))
         case .screenGradient: return AnyShapeStyle(Self.depth(style, dark: dark))
         case .card: return AnyShapeStyle(Color(hex: dark ? style.cardDark : "FFFFFF"))
-        case .onAccent: return AnyShapeStyle(Color(hex: dark ? style.inkOnDarkAccent : "FFFFFF"))
+        case .onAccent: return AnyShapeStyle(style.chosenAccent.ink)
         }
     }
 
@@ -132,7 +141,7 @@ extension ShapeStyle where Self == AppFill {
 extension View {
     /// Applies the chosen style: accent, backgrounds, font and light or dark mode.
     func appStyle(_ settings: AppSettings) -> some View {
-        let style = AppStyle.style(settings.appStyle)
+        let style = AppStyle.style(settings)
         return self
             .environment(\.appStyle, style)
             .tint(style.accent)

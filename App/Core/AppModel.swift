@@ -85,7 +85,7 @@ final class AppModel {
         designs = store.designs
         content = store.content
         settings = store.settings
-        AppStyle.current = AppStyle.style(settings.appStyle)
+        AppStyle.current = AppStyle.style(settings)
         premium = store.premium
         events = CalendarService.upcoming(hours: 7 * 24, limit: 12)
         nutrition = store.state(NutritionState.self)
@@ -454,7 +454,7 @@ final class AppModel {
         change(&settings)
         store.settings = settings
         // Before any view reads the new settings, so rebuilt screens draw with the new style.
-        AppStyle.current = AppStyle.style(settings.appStyle)
+        AppStyle.current = AppStyle.style(settings)
         if before.cryptoCurrency != settings.cryptoCurrency {
             crypto = [:]
         }
@@ -608,6 +608,14 @@ final class AppModel {
         updateSettings { $0.appStyle = style }
     }
 
+    func setAccent(_ accent: AppAccentID) {
+        guard accent != settings.accent else { return }
+        // updateSettings saves the choice and refreshes AppStyle.current before views redraw.
+        withAnimation(.easeInOut(duration: 0.35)) {
+            updateSettings { $0.accent = accent }
+        }
+    }
+
     func setAppearance(_ mode: AppearanceMode) {
         guard mode != settings.appearance else { return }
         updateSettings { $0.appearance = mode }
@@ -638,6 +646,7 @@ final class AppModel {
         fresh.hasCompletedOnboarding = true
         // The look of the app is a preference, not data: it stays.
         fresh.appStyle = settings.appStyle
+        fresh.accent = settings.accent
         fresh.appearance = settings.appearance
         fresh.hasChosenStyle = settings.hasChosenStyle
         fresh.profileName = settings.profileName

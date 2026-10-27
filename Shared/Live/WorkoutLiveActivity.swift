@@ -122,7 +122,7 @@ struct WorkoutActivityView: View {
     var now = Date()
 
     /// The app style chosen in Ardane: the Lock Screen follows its colors and its font.
-    private var style: AppStyle { AppStyle.style(SharedStore.shared.settings.appStyle) }
+    private var style: AppStyle { AppStyle.style(SharedStore.shared.settings) }
     private var accent: Color { style.accent }
 
     var body: some View {
@@ -164,7 +164,7 @@ struct WorkoutActivityView: View {
 
     /// The Lock Screen background: the style's screen color, or its card color at night.
     static var background: Color {
-        let style = AppStyle.style(SharedStore.shared.settings.appStyle)
+        let style = AppStyle.style(SharedStore.shared.settings)
         return Color(light: style.screenLight, dark: style.cardDark)
     }
 

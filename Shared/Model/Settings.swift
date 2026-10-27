@@ -50,6 +50,8 @@ struct AppSettings: Codable, Hashable {
     var hasCompletedOnboarding = false
     var hydrationReminders = false
     var appStyle: AppStyleID = .tessera
+    /// The accent color of the app (buttons, selection). Backgrounds follow `appStyle`, not this.
+    var accent: AppAccentID = .teal
     var appearance: AppearanceMode = .system
     /// Set once the style has been picked (at the first launch, or once after an update).
     var hasChosenStyle = false
@@ -89,7 +91,7 @@ struct AppSettings: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case uses24HourClock, currencyCode, cryptoCurrency
         case hasCompletedOnboarding, hydrationReminders
-        case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
+        case appStyle, accent, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
         case dailyOrder, dailyHidden, dailyWide, dailyAdded
         case remindsWorkout, remindsMeals, remindsBills, workoutReminderHour, mealReminderHour
@@ -106,6 +108,8 @@ struct AppSettings: Codable, Hashable {
         hasCompletedOnboarding = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedOnboarding)) ?? false
         hydrationReminders = (try? c.decodeIfPresent(Bool.self, forKey: .hydrationReminders)) ?? false
         appStyle = (try? c.decodeIfPresent(AppStyleID.self, forKey: .appStyle)) ?? .tessera
+        // Saved before accents existed (or unreadable): the accent that matches the old style.
+        accent = (try? c.decodeIfPresent(AppAccentID.self, forKey: .accent)) ?? AppAccentID.migrated(from: appStyle)
         appearance = (try? c.decodeIfPresent(AppearanceMode.self, forKey: .appearance)) ?? .system
         hasChosenStyle = (try? c.decodeIfPresent(Bool.self, forKey: .hasChosenStyle)) ?? false
         profileName = (try? c.decodeIfPresent(String.self, forKey: .profileName)) ?? ""

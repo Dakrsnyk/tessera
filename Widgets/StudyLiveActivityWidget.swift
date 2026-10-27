@@ -6,7 +6,7 @@ import WidgetKit
 /// The study timer on the Lock Screen and in the Dynamic Island (see `StudyLiveActivity`).
 struct StudyLiveActivityWidget: Widget {
     /// The app style chosen in Ardane, like the workout's Live Activity.
-    private var accent: Color { AppStyle.style(SharedStore.shared.settings.appStyle).accent }
+    private var accent: Color { AppStyle.style(SharedStore.shared.settings).accent }
 
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: StudyActivityAttributes.self) { context in

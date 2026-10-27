@@ -391,7 +391,7 @@ struct MarketingIsland: View {
     var body: some View {
         HStack {
             Image(systemName: "figure.strengthtraining.traditional")
-                .foregroundStyle(AppStyle.style(SharedStore.shared.settings.appStyle).accent)
+                .foregroundStyle(AppStyle.style(SharedStore.shared.settings).accent)
             Spacer()
             Text("1:24")
                 .monospacedDigit()

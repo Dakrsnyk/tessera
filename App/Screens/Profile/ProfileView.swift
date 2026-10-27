@@ -83,15 +83,14 @@ struct ProfileView: View {
 
                 Section {
                     VStack(alignment: .leading, spacing: 16) {
-                        AppStyleGrid(swatchSize: 48)
+                        AppAccentGrid(swatchSize: 40)
                         AppearancePicker()
                     }
                     .padding(.vertical, 8)
                 } header: {
                     Text(tr("Apparence"))
                 } footer: {
-                    let style = AppStyle.style(model.settings.appStyle)
-                    Text(tr("\(style.name) — \(style.tagline). Tes widgets gardent chacun leur propre style."))
+                    Text(tr("\(model.settings.accent.title). Tes widgets gardent chacun leur propre style."))
                 }
 
                 Section(tr("Préférences")) {
