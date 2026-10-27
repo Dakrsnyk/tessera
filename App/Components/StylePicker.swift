@@ -1,68 +1,76 @@
 import SwiftUI
 
-/// One accent color: a round, softly lit swatch with its name, a ring and a check when selected.
-struct AppAccentSwatch: View {
-    let accent: AppAccentID
+/// A style's thumbnail: its background in light (left) and dark (right), its accent in both.
+struct AppStyleSwatch: View {
+    let style: AppStyle
     let isSelected: Bool
-    var size: CGFloat = 44
-    @Environment(\.colorScheme) private var colorScheme
-
-    private var fill: Color { Color(hex: colorScheme == .dark ? accent.darkHex : accent.lightHex) }
+    var size: CGFloat = 58
 
     var body: some View {
         VStack(spacing: 6) {
-            Circle()
-                .fill(fill)
-                .overlay {
-                    // A soft highlight at the top, for depth without a gimmick.
-                    Circle().fill(LinearGradient(colors: [.white.opacity(0.28), .white.opacity(0)],
-                                                 startPoint: .top, endPoint: .center))
+            ZStack {
+                HStack(spacing: 0) {
+                    Color(hex: style.screenLight)
+                    Color(hex: style.screenDark)
                 }
+                HStack(spacing: 0) {
+                    Color(hex: style.accentLight)
+                    Color(hex: style.accentDark)
+                }
+                .frame(width: size * 0.46, height: size * 0.46)
+                .clipShape(Circle())
                 .overlay { Circle().strokeBorder(Color.black.opacity(0.08), lineWidth: 1) }
-                .overlay {
-                    if isSelected {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: size * 0.36, weight: .bold))
-                            .foregroundStyle(accent.ink)
-                    }
+            }
+            .frame(width: size, height: size)
+            .clipShape(RoundedRectangle(cornerRadius: size * 0.26, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: size * 0.26, style: .continuous)
+                    .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
+            }
+            .padding(3)
+            .overlay {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: size * 0.26 + 3, style: .continuous)
+                        .strokeBorder(Color.accentColor, lineWidth: 2.5)
                 }
-                .frame(width: size, height: size)
-                .padding(4)
-                .overlay {
-                    if isSelected {
-                        Circle().strokeBorder(fill, lineWidth: 2.5)
-                    }
+            }
+            .overlay(alignment: .topTrailing) {
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 17, weight: .semibold))
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.onAccent, Color.accentColor)
+                        .background(Circle().fill(.screenFill).padding(1))
+                        .offset(x: 5, y: -5)
                 }
-            Text(accent.title)
+            }
+            Text(style.name)
                 .font(.caption.weight(isSelected ? .semibold : .regular))
                 .foregroundStyle(isSelected ? .primary : .secondary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }
-        .frame(minWidth: 44, minHeight: 44)
-        .contentShape(Rectangle())
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(isSelected ? tr("\(accent.title), sélectionné") : accent.title))
+        .accessibilityLabel(Text(tr("Style \(style.name)")))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
 
-/// The ten accent colors, five per row. Picking one applies it right away.
-struct AppAccentGrid: View {
+/// The twelve colors, four per row. Picking one applies it right away.
+struct AppStyleGrid: View {
     @Environment(AppModel.self) private var model
-    var swatchSize: CGFloat = 44
+    var swatchSize: CGFloat = 54
 
     var body: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 5), spacing: 14) {
-            ForEach(AppAccentID.allCases) { accent in
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 4), spacing: 14) {
+            ForEach(AppStyle.all) { style in
                 Button {
                     Haptics.tap()
-                    model.setAccent(accent)
+                    withAnimation(.easeInOut(duration: 0.35)) { model.setStyle(style.id) }
                 } label: {
-                    AppAccentSwatch(accent: accent, isSelected: model.settings.accent == accent, size: swatchSize)
+                    AppStyleSwatch(style: style, isSelected: model.settings.appStyle == style.id, size: swatchSize)
                 }
                 .buttonStyle(.pressable)
-                .accessibilityIdentifier("accent-\(accent.rawValue)")
             }
         }
     }
@@ -84,15 +92,15 @@ struct AppearancePicker: View {
     }
 }
 
-/// A miniature of the app in one style, light or dark, drawn with that style's backgrounds and the chosen accent.
+/// A miniature of the app in one style, light or dark, drawn with that style's own colors.
 struct MiniAppScreen: View {
     let style: AppStyle
     let dark: Bool
 
     private var screen: Color { Color(hex: dark ? style.screenDark : style.screenLight) }
     private var card: Color { Color(hex: dark ? style.cardDark : "FFFFFF") }
-    private var accent: Color { Color(hex: dark ? style.chosenAccent.darkHex : style.chosenAccent.lightHex) }
-    private var onAccent: Color { style.chosenAccent.ink }
+    private var accent: Color { Color(hex: dark ? style.accentDark : style.accentLight) }
+    private var onAccent: Color { Color(hex: dark ? style.inkOnDarkAccent : "FFFFFF") }
     private var ink: Color { Color(hex: dark ? "F2F2F4" : "1C1C1E") }
     private var muted: Color { Color(hex: dark ? "8E8E93" : "8A8A8E") }
 

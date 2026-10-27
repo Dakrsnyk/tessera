@@ -9166,6 +9166,53 @@
         }
       }
     },
+    "%@ — %@. Tes widgets gardent chacun leur propre style.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — %@. Jedes deiner Widgets behält seinen eigenen Stil."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — %@. Each of your widgets keeps its own style."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — %@. Cada uno de tus widgets conserva su propio estilo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — %@. Tes widgets gardent chacun leur propre style."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — %@. Ogni tuo widget mantiene il proprio stile."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — %@。ウィジェットはそれぞれ独自のスタイルを保ちます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — %@. Cada um dos seus widgets mantém seu próprio estilo."
+          }
+        }
+      }
+    },
     "%@%@ au total": {
       "extractionState": "manual",
       "localizations": {
@@ -9354,53 +9401,6 @@
         }
       }
     },
-    "%@, sélectionné": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, ausgewählt"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, selected"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, seleccionado"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, sélectionné"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, selezionato"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@、選択中"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, selecionado"
-          }
-        }
-      }
-    },
     "%@, une seule fois, sans abonnement": {
       "extractionState": "manual",
       "localizations": {
@@ -9491,53 +9491,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@. Nada é cobrado durante o teste. Renovação automática %2$@, cancelável a qualquer momento. O teste grátis vale uma única vez por conta Apple."
-          }
-        }
-      }
-    },
-    "%@. Tes widgets gardent chacun leur propre style.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@. Jedes deiner Widgets behält seinen eigenen Stil."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@. Each of your widgets keeps its own style."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@. Cada uno de tus widgets conserva su propio estilo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@. Tes widgets gardent chacun leur propre style."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@. Ognuno dei tuoi widget mantiene il proprio stile."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@。ウィジェットはそれぞれ独自のスタイルを保ちます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@. Cada um dos seus widgets mantém seu próprio estilo."
           }
         }
       }
@@ -24112,6 +24065,53 @@
         }
       }
     },
+    "Améthyste": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amethyst"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amethyst"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amatista"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Améthyste"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ametista"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アメジスト"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ametista"
+          }
+        }
+      }
+    },
     "Analyse des dépenses": {
       "extractionState": "manual",
       "localizations": {
@@ -26270,6 +26270,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Depois de adicionar, você vai passar da meta em %@ kcal."
+          }
+        }
+      }
+    },
+    "Aqua": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqua"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqua"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqua"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqua"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acqua"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクア"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqua"
           }
         }
       }
@@ -32901,6 +32948,53 @@
         }
       }
     },
+    "Auto [mode]": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        }
+      }
+    },
     "Automatique": {
       "extractionState": "manual",
       "localizations": {
@@ -38306,53 +38400,6 @@
         }
       }
     },
-    "Bleu": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blau"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blue"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Azul"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bleu"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blu"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブルー"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Azul"
-          }
-        }
-      }
-    },
     "Bleu abyssal et vagues : les habitudes, le calendrier et la lune.": {
       "extractionState": "manual",
       "localizations": {
@@ -38443,6 +38490,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Azul abissal e ondas luminosas"
+          }
+        }
+      }
+    },
+    "Bleu acier, sobre et élégant": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stahlblau, schlicht und elegant"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steel blue, sober and elegant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul acero, sobrio y elegante"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu acier, sobre et élégant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blu acciaio, sobrio ed elegante"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "落ち着いたエレガントなスチールブルー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul-aço, sóbrio e elegante"
           }
         }
       }
@@ -38588,49 +38682,49 @@
         }
       }
     },
-    "Bleu franc, net et calme": {
+    "Bleu glacier": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Klares Blau, ruhig und sauber"
+            "value": "Eisblau"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bold blue, crisp and calm"
+            "value": "Ice Blue"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Azul franco, nítido y tranquilo"
+            "value": "Azul hielo"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bleu franc, net et calme"
+            "value": "Bleu glacier"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blu deciso, pulito e calmo"
+            "value": "Azzurro ghiaccio"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "くっきりした青、すっきり落ち着く"
+            "value": "アイスブルー"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Azul franco, nítido e calmo"
+            "value": "Azul-gelo"
           }
         }
       }
@@ -38772,6 +38866,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Azul-noite, números finos, brilho discreto"
+          }
+        }
+      }
+    },
+    "Bleu profond, net et franc": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiefblau, klar und kräftig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deep blue, crisp and bold"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul profundo, nítido y franco"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu profond, net et franc"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blu profondo, nitido e deciso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深く澄んだ、はっきりした青"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azul profundo, nítido e firme"
           }
         }
       }
@@ -50056,53 +50197,6 @@
         }
       }
     },
-    "Chaleureux et vivant": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Warm und lebendig"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Warm and lively"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cálido y vivo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chaleureux et vivant"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Caldo e vivace"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "あたたかく、いきいき"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Caloroso e vibrante"
-          }
-        }
-      }
-    },
     "Champignons": {
       "extractionState": "manual",
       "localizations": {
@@ -51791,6 +51885,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gato-vaca"
+          }
+        }
+      }
+    },
+    "Chaud, comme un soir d'été": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm wie ein Sommerabend"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm, like a summer evening"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cálido, como una tarde de verano"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaud, comme un soir d'été"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caldo, come una sera d'estate"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夏の夕暮れのような温かさ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quente, como uma noite de verão"
           }
         }
       }
@@ -54051,53 +54192,6 @@
         }
       }
     },
-    "Choisis ta couleur": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wähle deine Farbe"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choose your color"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elige tu color"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisis ta couleur"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scegli il tuo colore"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カラーを選ぶ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha sua cor"
-          }
-        }
-      }
-    },
     "Choisis tes cartes et « Tout paiement ».": {
       "extractionState": "manual",
       "localizations": {
@@ -54282,6 +54376,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha suas cidades no Ardane"
+          }
+        }
+      }
+    },
+    "Choisis ton style": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle deinen Stil"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose your style"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige tu estilo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis ton style"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli il tuo stile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタイルを選ぶ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha seu estilo"
           }
         }
       }
@@ -66741,53 +66882,6 @@
         }
       }
     },
-    "Cyan électrique sur fond nuit": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elektrisches Cyan auf nachtdunklem Grund"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Electric cyan on a night backdrop"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cian eléctrico sobre fondo nocturno"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cyan électrique sur fond nuit"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ciano elettrico su sfondo notte"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "夜の背景に映えるエレクトリックシアン"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ciano elétrico em fundo noturno"
-          }
-        }
-      }
-    },
     "Cyber": {
       "extractionState": "manual",
       "localizations": {
@@ -75107,49 +75201,49 @@
         }
       }
     },
-    "Dix couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
+    "Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zehn Farben, jeweils für hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
+            "value": "Zehn Stimmungen, jeweils hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ten colors, each in light and dark. You can change it anytime in Settings."
+            "value": "Ten moods, each in light and dark. You can switch anytime in Settings."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diez colores, cada uno en claro y oscuro. Puedes cambiarlo en cualquier momento en Ajustes."
+            "value": "Diez ambientes, cada uno en claro y oscuro. Puedes cambiar en cualquier momento en Ajustes."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dix couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
+            "value": "Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dieci colori, ciascuno per chiaro e scuro. Puoi cambiarlo in qualsiasi momento nelle Impostazioni."
+            "value": "Dieci atmosfere, ciascuna in chiaro e in scuro. Puoi cambiare in qualsiasi momento in Impostazioni."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "10色から選べます。それぞれライトとダークに対応。設定でいつでも変更できます。"
+            "value": "10種類の雰囲気を、ライトとダークで。いつでも設定で変更できます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dez cores, cada uma em claro e escuro. Você pode mudar a qualquer momento nos Ajustes."
+            "value": "Dez ambientes, cada um no claro e no escuro. Você pode trocar a qualquer momento em Ajustes."
           }
         }
       }
@@ -75855,53 +75949,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dados do espaço %@"
-          }
-        }
-      }
-    },
-    "Doré, comme un soir d'été": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Golden wie ein Sommerabend"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Golden, like a summer evening"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dorado, como un atardecer de verano"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Doré, comme un soir d'été"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dorato, come una sera d'estate"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "夏の夕暮れのような黄金色"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dourado, como uma noite de verão"
           }
         }
       }
@@ -76752,49 +76799,49 @@
         }
       }
     },
-    "Doux et rêveur": {
+    "Doux et raffiné": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sanft und verträumt"
+            "value": "Sanft und edel"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Soft and dreamy"
+            "value": "Soft and refined"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suave y soñador"
+            "value": "Suave y refinado"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Doux et rêveur"
+            "value": "Doux et raffiné"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dolce e sognante"
+            "value": "Dolce e raffinato"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "やさしく、夢見心地"
+            "value": "やさしく上品"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suave e sonhador"
+            "value": "Suave e refinado"
           }
         }
       }
@@ -94753,6 +94800,53 @@
         }
       }
     },
+    "Frais et lumineux": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frisch und leuchtend"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fresh and bright"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fresco y luminoso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frais et lumineux"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fresco e luminoso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "爽やかで明るい"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fresco e luminoso"
+          }
+        }
+      }
+    },
     "Frais fixes": {
       "extractionState": "manual",
       "localizations": {
@@ -100060,53 +100154,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Grade, mono e curvas"
-          }
-        }
-      }
-    },
-    "Gris": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grau"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gray"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gris"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gris"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Grigio"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "グレー"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cinza"
           }
         }
       }
@@ -106644,100 +106691,6 @@
         }
       }
     },
-    "Indigo": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indigo"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indigo"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Índigo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indigo"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indaco"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "インディゴ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Índigo"
-          }
-        }
-      }
-    },
-    "Indigo, pour les couche-tard": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indigo, für Nachteulen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indigo, for night owls"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Índigo, para los noctámbulos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indigo, pour les couche-tard"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indaco, per i nottambuli"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "夜更かしさんのためのインディゴ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Índigo, para os notívagos"
-          }
-        }
-      }
-    },
     "Indique la taille du réservoir pour voir l'autonomie": {
       "extractionState": "manual",
       "localizations": {
@@ -107960,53 +107913,6 @@
         }
       }
     },
-    "Jade et crème, l'original": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jade und Creme, das Original"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jade and cream, the original"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jade y crema, el original"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jade et crème, l'original"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Giada e crema, l'originale"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ジェイドとクリーム、オリジナル"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jade e creme, o original"
-          }
-        }
-      }
-    },
     "Jamais": {
       "extractionState": "manual",
       "localizations": {
@@ -108332,53 +108238,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Medidor"
-          }
-        }
-      }
-    },
-    "Jaune": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gelb"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yellow"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amarillo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jaune"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Giallo"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "イエロー"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amarelo"
           }
         }
       }
@@ -140437,53 +140296,6 @@
         }
       }
     },
-    "Noir et blanc, sans détour": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schwarz und Weiß, ohne Umwege"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Black and white, no frills"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blanco y negro, sin rodeos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Noir et blanc, sans détour"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bianco e nero, senza fronzoli"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "白と黒、まっすぐに"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preto e branco, sem rodeios"
-          }
-        }
-      }
-    },
     "Noir et jaune fluo, gros chiffres": {
       "extractionState": "manual",
       "localizations": {
@@ -143727,49 +143539,49 @@
         }
       }
     },
-    "Nouveau : les couleurs": {
+    "Nouveau : les styles": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Neu: die Farben"
+            "value": "Neu: Stile"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "New: colors"
+            "value": "New: styles"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Novedad: los colores"
+            "value": "Novedad: los estilos"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nouveau : les couleurs"
+            "value": "Nouveau : les styles"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Novità: i colori"
+            "value": "Novità: gli stili"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "新機能：カラー"
+            "value": "新機能: スタイル"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Novo: as cores"
+            "value": "Novidade: os estilos"
           }
         }
       }
@@ -148940,6 +148752,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Laranja, rosa e violeta do entardecer"
+          }
+        }
+      }
+    },
+    "Orchidée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orchidee"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orchid"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orquídea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orchidée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orchidea"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オーキッド"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orquídea"
           }
         }
       }
@@ -156460,6 +156319,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pés bem afastados, mãos entre as pernas."
+          }
+        }
+      }
+    },
+    "Pistache": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pistazie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pistachio"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pistacho"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pistache"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pistacchio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ピスタチオ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pistache"
           }
         }
       }
@@ -182737,53 +182643,6 @@
         }
       }
     },
-    "Rose [color]": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pink"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pink"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rosa"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rose"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rosa"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ピンク"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rosa"
-          }
-        }
-      }
-    },
     "Rose et bleu rétro-futur": {
       "extractionState": "manual",
       "localizations": {
@@ -183113,49 +182972,49 @@
         }
       }
     },
-    "Rouge": {
+    "Rouge intense, plein de vie": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rot"
+            "value": "Intensives Rot voller Leben"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Red"
+            "value": "Intense red, full of life"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rojo"
+            "value": "Rojo intenso, lleno de vida"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rouge"
+            "value": "Rouge intense, plein de vie"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rosso"
+            "value": "Rosso intenso, pieno di vita"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "レッド"
+            "value": "生命力あふれる深い赤"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vermelho"
+            "value": "Vermelho intenso, cheio de vida"
           }
         }
       }
@@ -184096,6 +183955,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rua de São Miguel 12, Lisboa"
+          }
+        }
+      }
+    },
+    "Rubis": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rubin"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ruby"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rubí"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rubis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rubino"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ルビー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rubi"
           }
         }
       }
@@ -188048,6 +187954,53 @@
         }
       }
     },
+    "Saphir": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saphir"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sapphire"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zafiro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saphir"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaffiro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サファイア"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safira"
+          }
+        }
+      }
+    },
     "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.": {
       "extractionState": "manual",
       "localizations": {
@@ -188091,53 +188044,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pinheiros, flocos e fios de ouro para seus widgets, durante todo o mês de dezembro."
-          }
-        }
-      }
-    },
-    "Sarcelle": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Türkis"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teal"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verde azulado"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sarcelle"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verde acqua"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ティール"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verde-azulado"
           }
         }
       }
@@ -219914,6 +219820,53 @@
         }
       }
     },
+    "Turquoise vif, comme l'eau claire": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leuchtendes Türkis wie klares Wasser"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivid turquoise, like clear water"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turquesa vivo, como el agua clara"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turquoise vif, comme l'eau claire"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turchese vivo, come acqua limpida"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "澄んだ水のような鮮やかなターコイズ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turquesa vivo, como água cristalina"
+          }
+        }
+      }
+    },
     "Type": {
       "extractionState": "manual",
       "localizations": {
@@ -226259,49 +226212,49 @@
         }
       }
     },
-    "Vert": {
+    "Vert doré, terreux et calme": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Grün"
+            "value": "Goldgrün, erdig und ruhig"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Green"
+            "value": "Golden green, earthy and calm"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde"
+            "value": "Verde dorado, terroso y sereno"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vert"
+            "value": "Vert doré, terreux et calme"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde"
+            "value": "Verde dorato, terroso e calmo"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "グリーン"
+            "value": "黄金がかった落ち着いた土の緑"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde"
+            "value": "Verde dourado, terroso e calmo"
           }
         }
       }
@@ -226353,49 +226306,49 @@
         }
       }
     },
-    "Vert profond et naturel": {
+    "Vert jade, l'original": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tiefes, natürliches Grün"
+            "value": "Jadegrün, das Original"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deep, natural green"
+            "value": "Jade green, the original"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde profundo y natural"
+            "value": "Verde jade, el original"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vert profond et naturel"
+            "value": "Vert jade, l'original"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde profondo e naturale"
+            "value": "Verde giada, l'originale"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "深く自然なグリーン"
+            "value": "ジェイドグリーン、オリジナル"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde profundo e natural"
+            "value": "Verde-jade, o original"
           }
         }
       }
@@ -226490,6 +226443,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verde sobre preto, linhas de varredura"
+          }
+        }
+      }
+    },
+    "Vert tendre et naturel": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zartes, natürliches Grün"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soft and natural green"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde tierno y natural"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vert tendre et naturel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde tenero e naturale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "やわらかで自然なグリーン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verde suave e natural"
           }
         }
       }
@@ -227011,53 +227011,6 @@
         }
       }
     },
-    "Violet": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Violett"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Purple"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Morado"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Violet"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Viola"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パープル"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Roxo"
-          }
-        }
-      }
-    },
     "Violet inquiétant et vert acide": {
       "extractionState": "manual",
       "localizations": {
@@ -227101,6 +227054,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Roxo inquietante e verde ácido"
+          }
+        }
+      }
+    },
+    "Violet profond, pour les couche-tard": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiefviolett für Nachtmenschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deep violet, for night owls"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violeta profundo, para los noctámbulos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violet profond, pour les couche-tard"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viola profondo, per i nottambuli"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夜型のための深いバイオレット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violeta profundo, para quem vive à noite"
           }
         }
       }

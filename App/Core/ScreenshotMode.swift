@@ -28,9 +28,7 @@ enum ScreenshotMode {
         // `-screenshotStyle ocean -screenshotAppearance dark`: the app style to capture with (default otherwise).
         let defaults = UserDefaults.standard
         model.updateSettings {
-            $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(rawValue:)) ?? .tessera
-            // `-screenshotAccent red`: the accent color (default: the one matching the style).
-            $0.accent = defaults.string(forKey: "screenshotAccent").flatMap(AppAccentID.init(rawValue:)) ?? AppAccentID.migrated(from: $0.appStyle)
+            $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(named:)) ?? .jade
             $0.appearance = defaults.string(forKey: "screenshotAppearance").flatMap(AppearanceMode.init(rawValue:)) ?? .system
             $0.hasChosenStyle = true
             $0.hasCompletedProfileSetup = true

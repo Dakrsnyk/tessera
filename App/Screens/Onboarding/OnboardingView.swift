@@ -297,17 +297,17 @@ private struct StyleStep: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        let style = AppStyle.style(model.settings)
+        let style = AppStyle.style(model.settings.appStyle)
         ScrollView {
             VStack(spacing: 22) {
                 VStack(spacing: 10) {
                     ArdaneMark(size: 40)
-                    Text(isLast ? tr("Nouveau : les couleurs") : tr("Bienvenue dans Ardane"))
+                    Text(isLast ? tr("Nouveau : les styles") : tr("Bienvenue dans Ardane"))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.secondary)
-                    Text(tr("Choisis ta couleur"))
+                    Text(tr("Choisis ton style"))
                         .font(.largeTitle.weight(.bold))
-                    Text(tr("Dix couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."))
+                    Text(tr("Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -316,8 +316,8 @@ private struct StyleStep: View {
                 .padding(.top, 20)
                 StylePreviewPair(style: style, height: 206)
                     .padding(.horizontal, 30)
-                    .animation(.easeInOut(duration: 0.2), value: style.chosenAccent)
-                AppAccentGrid()
+                    .animation(.easeInOut(duration: 0.2), value: style.id)
+                AppStyleGrid()
                 AppearancePicker()
             }
             .padding(.horizontal, 20)

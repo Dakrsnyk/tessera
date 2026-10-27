@@ -667,7 +667,7 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertFalse(fresh.hasSeenTutorial)
         // A value out of shape (a style a newer version added) doesn't lose the rest.
         let odd = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"appStyle":"nope","currencyCode":"GBP","dailyHidden":["budget"]}"#.utf8))
-        XCTAssertEqual(odd.appStyle, .tessera)
+        XCTAssertEqual(odd.appStyle, .jade)
         XCTAssertEqual(odd.currencyCode, "GBP")
         XCTAssertEqual(odd.dailyHidden, ["budget"])
 

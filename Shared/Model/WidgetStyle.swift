@@ -9,7 +9,7 @@ enum LayoutKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .auto: tr("Auto")
+        case .auto: tr("Auto", context: "mode")
         case .vertical: tr("Vertical")
         case .horizontal: tr("Horizontal")
         case .minimal: tr("Minimal")
@@ -74,7 +74,7 @@ enum ChartKind: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .auto: tr("Auto")
+        case .auto: tr("Auto", context: "mode")
         case .line: tr("Ligne")
         case .area: tr("Aire")
         case .bars: tr("Barres")

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The colors of the app theme, in light and dark. Widgets keep their own themes.
+/// The colors of one app style, in light and dark. Widgets keep their own themes.
 struct AppStyle: Identifiable {
     let id: AppStyleID
     let tagline: String
@@ -14,70 +14,90 @@ struct AppStyle: Identifiable {
     /// Text on an accent-colored fill, when the accent is too light for white.
     var inkOnDarkAccent = "FFFFFF"
     var fontDesign: Font.Design = .default
-    /// The accent color picked by the person; the style's own accent only tints the light background.
-    var chosenAccent: AppAccentID = .teal
 
     var name: String { id.title }
-    var accent: Color { chosenAccent.color }
+    var accent: Color { Color(light: accentLight, dark: accentDark) }
     var screen: Color { Color(light: screenLight, dark: screenDark) }
     var card: Color { Color(light: "FFFFFF", dark: cardDark) }
-    var onAccent: Color { chosenAccent.ink }
+    var onAccent: Color { Color(light: "FFFFFF", dark: inkOnDarkAccent) }
 
+    /// The twelve colors of the app: each gives an accent (light and dark) and, from its hue, the backgrounds
+    /// around it, in the proportions of the former hand-made styles.
     static let all: [AppStyle] = [
-        AppStyle(id: .tessera, tagline: tr("Jade et crème, l'original"), accentLight: "2F8F7A", accentDark: "3FA58D",
-                 screenLight: "F3F1EC", screenDark: "0A0F0D", cardDark: "17201D"),
-        AppStyle(id: .ocean, tagline: tr("Bleu franc, net et calme"), accentLight: "2563EB", accentDark: "4F80FF",
-                 screenLight: "EEF2F9", screenDark: "070B16", cardDark: "141B2B"),
-        AppStyle(id: .coral, tagline: tr("Chaleureux et vivant"), accentLight: "E4533D", accentDark: "F26A55",
-                 screenLight: "FBF0EC", screenDark: "110A08", cardDark: "231815", fontDesign: .rounded),
-        AppStyle(id: .lavender, tagline: tr("Doux et rêveur"), accentLight: "6D4AE8", accentDark: "8B6DFF",
-                 screenLight: "F2F0FA", screenDark: "0B0914", cardDark: "1A1727", fontDesign: .rounded),
-        AppStyle(id: .sand, tagline: tr("Doré, comme un soir d'été"), accentLight: "A26A18", accentDark: "E3AC4F",
-                 screenLight: "F6F0E5", screenDark: "0F0C07", cardDark: "221D14", inkOnDarkAccent: "1A1408"),
-        AppStyle(id: .graphite, tagline: tr("Noir et blanc, sans détour"), accentLight: "1C1C1E", accentDark: "D1D1D6",
-                 screenLight: "F2F2F4", screenDark: "000000", cardDark: "1C1C1E", inkOnDarkAccent: "000000"),
-        AppStyle(id: .forest, tagline: tr("Vert profond et naturel"), accentLight: "2B7A4B", accentDark: "3F9A63",
-                 screenLight: "EEF3EE", screenDark: "070D09", cardDark: "16201A"),
-        AppStyle(id: .rose, tagline: tr("Tendre et affirmé"), accentLight: "D13F72", accentDark: "E8588B",
-                 screenLight: "FBEFF3", screenDark: "12080C", cardDark: "24161C", fontDesign: .rounded),
-        AppStyle(id: .midnight, tagline: tr("Indigo, pour les couche-tard"), accentLight: "4B46C8", accentDark: "7571F2",
-                 screenLight: "EFEFF8", screenDark: "06061A", cardDark: "15152E"),
-        AppStyle(id: .neon, tagline: tr("Cyan électrique sur fond nuit"), accentLight: "0086A8", accentDark: "22D3EE",
-                 screenLight: "EDF6F8", screenDark: "04080F", cardDark: "111C24", inkOnDarkAccent: "03161C"),
+        palette(.cobalt, tr("Bleu profond, net et franc"), light: "244FC1", dark: "7094FF"),
+        palette(.sapphire, tr("Bleu acier, sobre et élégant"), light: "245B8F", dark: "68B5F5"),
+        palette(.iceBlue, tr("Frais et lumineux"), light: "398FA8", dark: "75DDF5"),
+        palette(.aqua, tr("Turquoise vif, comme l'eau claire"), light: "008C95", dark: "45DDE0"),
+        palette(.jade, tr("Vert jade, l'original"), light: "268577", dark: "65D5BC"),
+        palette(.pistachio, tr("Vert tendre et naturel"), light: "718C42", dark: "B8D987"),
+        palette(.olive, tr("Vert doré, terreux et calme"), light: "77752B", dark: "C7C36A"),
+        palette(.amber, tr("Chaud, comme un soir d'été"), light: "B86A13", dark: "FFB454"),
+        palette(.ruby, tr("Rouge intense, plein de vie"), light: "C62845", dark: "FF6B81", fontDesign: .rounded),
+        palette(.rose, tr("Tendre et affirmé"), light: "C04472", dark: "FF83B2", fontDesign: .rounded),
+        palette(.orchid, tr("Doux et raffiné"), light: "9854B8", dark: "D5A0F5", fontDesign: .rounded),
+        palette(.amethyst, tr("Violet profond, pour les couche-tard"), light: "6841A5", dark: "B69AFF"),
     ]
+
+    private static func palette(_ id: AppStyleID, _ tagline: String, light: String, dark: String,
+                                fontDesign: Font.Design = .default) -> AppStyle {
+        let hue = hsl(light).h
+        return AppStyle(id: id, tagline: tagline, accentLight: light, accentDark: dark,
+                        screenLight: hex(h: hue, s: 0.42, l: 0.945),
+                        screenDark: hex(h: hue, s: 0.45, l: 0.055),
+                        cardDark: hex(h: hue, s: 0.35, l: 0.115),
+                        // A light accent in dark mode (pastel) carries dark text, a deep one carries white.
+                        inkOnDarkAccent: luminance(dark) > 0.35 ? hex(h: hue, s: 0.5, l: 0.07) : "FFFFFF",
+                        fontDesign: fontDesign)
+    }
+
+    private static func hsl(_ hex: String) -> (h: Double, s: Double, l: Double) {
+        let value = UInt64(hex, radix: 16) ?? 0
+        let r = Double((value >> 16) & 0xFF) / 255, g = Double((value >> 8) & 0xFF) / 255, b = Double(value & 0xFF) / 255
+        let high = max(r, g, b), low = min(r, g, b), l = (high + low) / 2, delta = high - low
+        guard delta > 0 else { return (0, 0, l) }
+        let s = delta / (1 - abs(2 * l - 1))
+        var h: Double
+        if high == r { h = ((g - b) / delta).truncatingRemainder(dividingBy: 6) }
+        else if high == g { h = (b - r) / delta + 2 }
+        else { h = (r - g) / delta + 4 }
+        h *= 60
+        if h < 0 { h += 360 }
+        return (h, s, l)
+    }
+
+    private static func hex(h: Double, s: Double, l: Double) -> String {
+        let c = (1 - abs(2 * l - 1)) * s
+        let x = c * (1 - abs((h / 60).truncatingRemainder(dividingBy: 2) - 1))
+        let m = l - c / 2
+        let parts: (Double, Double, Double)
+        switch Int(h / 60) % 6 {
+        case 0: parts = (c, x, 0)
+        case 1: parts = (x, c, 0)
+        case 2: parts = (0, c, x)
+        case 3: parts = (0, x, c)
+        case 4: parts = (x, 0, c)
+        default: parts = (c, 0, x)
+        }
+        func byte(_ v: Double) -> Int { min(255, max(0, Int(((v + m) * 255).rounded()))) }
+        return String(format: "%02X%02X%02X", byte(parts.0), byte(parts.1), byte(parts.2))
+    }
+
+    /// Relative luminance (0 black, 1 white) of an sRGB hex color.
+    static func luminance(_ hex: String) -> Double {
+        let value = UInt64(hex, radix: 16) ?? 0
+        func linear(_ shift: UInt64) -> Double {
+            let c = Double((value >> shift) & 0xFF) / 255
+            return c <= 0.03928 ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4)
+        }
+        return 0.2126 * linear(16) + 0.7152 * linear(8) + 0.0722 * linear(0)
+    }
 
     static func style(_ id: AppStyleID) -> AppStyle {
         all.first { $0.id == id } ?? all[0]
     }
 
-    /// The theme of the app for the settings: the accent color they chose drives everything (accent, screen
-    /// background and its gradient, dark cards). Widgets, categories and mini-apps keep their own colors.
-    static func style(_ settings: AppSettings) -> AppStyle {
-        themed(settings.accent, id: settings.appStyle)
-    }
-
-    /// A whole theme built from one accent: a very light tint of it for the light screen, a very dark one for the
-    /// dark screen and the dark cards (the same proportions as the former hand-made styles).
-    static func themed(_ accent: AppAccentID, id: AppStyleID = .tessera) -> AppStyle {
-        AppStyle(id: id, tagline: accent.title, accentLight: accent.lightHex, accentDark: accent.darkHex,
-                 screenLight: mixHex("FFFFFF", accent.lightHex, 0.08),
-                 screenDark: mixHex("000000", accent.darkHex, 0.08),
-                 cardDark: mixHex("000000", accent.darkHex, 0.17),
-                 inkOnDarkAccent: accent.inkHex, chosenAccent: accent)
-    }
-
-    /// `base` moved towards `tint` by `amount` (0 to 1), as a hex string.
-    static func mixHex(_ base: String, _ tint: String, _ amount: Double) -> String {
-        func channels(_ hex: String) -> [Double] {
-            let value = UInt64(hex, radix: 16) ?? 0
-            return [Double((value >> 16) & 0xFF), Double((value >> 8) & 0xFF), Double(value & 0xFF)]
-        }
-        let mixed = zip(channels(base), channels(tint)).map { Int(($0 + ($1 - $0) * amount).rounded()) }
-        return String(format: "%02X%02X%02X", mixed[0], mixed[1], mixed[2])
-    }
-
     /// The saved style, used before the first view applies the settings (launch screen).
-    static var current: AppStyle = style(SharedStore.shared.settings)
+    static var current: AppStyle = style(SharedStore.shared.settings.appStyle)
 }
 
 extension AppearanceMode {
@@ -91,7 +111,7 @@ extension AppearanceMode {
 }
 
 extension AppStyle: Equatable {
-    static func == (lhs: AppStyle, rhs: AppStyle) -> Bool { lhs.id == rhs.id && lhs.chosenAccent == rhs.chosenAccent }
+    static func == (lhs: AppStyle, rhs: AppStyle) -> Bool { lhs.id == rhs.id }
 }
 
 private struct AppStyleKey: EnvironmentKey {
@@ -122,7 +142,7 @@ struct AppFill: ShapeStyle {
         case .screen: return AnyShapeStyle(Color(hex: dark ? style.screenDark : style.screenLight))
         case .screenGradient: return AnyShapeStyle(Self.depth(style, dark: dark))
         case .card: return AnyShapeStyle(Color(hex: dark ? style.cardDark : "FFFFFF"))
-        case .onAccent: return AnyShapeStyle(style.chosenAccent.ink)
+        case .onAccent: return AnyShapeStyle(Color(hex: dark ? style.inkOnDarkAccent : "FFFFFF"))
         }
     }
 
@@ -160,7 +180,7 @@ extension ShapeStyle where Self == AppFill {
 extension View {
     /// Applies the chosen style: accent, backgrounds, font and light or dark mode.
     func appStyle(_ settings: AppSettings) -> some View {
-        let style = AppStyle.style(settings)
+        let style = AppStyle.style(settings.appStyle)
         return self
             .environment(\.appStyle, style)
             .tint(style.accent)
