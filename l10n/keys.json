@@ -9499,6 +9499,12 @@
    "App/Core/DailyBrief.swift:494: case 1: return tr(\"Demain \\(time)\")"
   ]
  },
+ "Demain : %@": {
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:230: case .tomorrow: line = tr(\"Demain : \\(name)\")"
+  ]
+ },
  "Demain à %@": {
   "placeholders": 1,
   "uses": [
@@ -11259,7 +11265,7 @@
  "En cours : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:227: let line = glance.phase == .current ? tr(\"En cours : \\(name)\") : tr(\"Prochain : \\(name)\")"
+   "Shared/Render/Tiles/StudentTiles.swift:229: case .current: line = tr(\"En cours : \\(name)\")"
   ]
  },
  "En cours · %@/%@ séries": {
@@ -13997,13 +14003,13 @@
  "Horaire du jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:251: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
+   "Shared/Render/Tiles/StudentTiles.swift:256: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
   ]
  },
  "Horaire · %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:251: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
+   "Shared/Render/Tiles/StudentTiles.swift:256: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
   ]
  },
  "Horaire, tâches, habitudes": {
@@ -22363,7 +22369,7 @@
  "Prochain : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:227: let line = glance.phase == .current ? tr(\"En cours : \\(name)\") : tr(\"Prochain : \\(name)\")"
+   "Shared/Render/Tiles/StudentTiles.swift:231: default: line = tr(\"Prochain : \\(name)\")"
   ]
  },
  "Prochain : %@ %@": {

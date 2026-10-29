@@ -79,6 +79,8 @@ enum WidgetGroup: String, CaseIterable, Identifiable {
 
     /// The widget shown for a size when no design is chosen.
     func defaultKind(for family: WidgetFamily) -> WidgetKind {
+        // On the Lock Screen the schedule (the day's events, then tomorrow's) comes before « Prochain cours ».
+        if self == .student, family == .accessoryRectangular || family == .accessoryInline, kinds.contains(.timetable) { return .timetable }
         kinds.first { $0.families.contains(family) } ?? flagship
     }
 

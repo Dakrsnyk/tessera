@@ -9,17 +9,19 @@ enum ScheduleGlance {
         case current
         /// Nothing in progress; `event` starts later today.
         case upcoming
-        /// The day had events and they are all over.
+        /// The day had events and they are all over, and tomorrow has none.
         case finished
-        /// No event today.
+        /// No event today, and tomorrow has none.
         case empty
+        /// Nothing more today (all over, or no event at all); `event` is the first one of tomorrow.
+        case tomorrow
     }
 
     struct Result: Equatable {
         /// The weekday, written in the language of the app (« Lundi »).
         let dayName: String
         let phase: Phase
-        /// The event to show (nil when `finished` or `empty`).
+        /// The event to show (nil when `finished` or `empty`; tomorrow's first for `tomorrow`).
         let event: StudentMath.ClassOccurrence?
         /// When the answer changes: the next start or end of today, else the next midnight.
         let nextChange: Date
@@ -40,6 +42,9 @@ enum ScheduleGlance {
         }
         if let next = today.first(where: { $0.start > now }) {
             return Result(dayName: name, phase: .upcoming, event: next, nextChange: change)
+        }
+        if let tomorrow = events(state, on: midnight).first {
+            return Result(dayName: name, phase: .tomorrow, event: tomorrow, nextChange: change)
         }
         return Result(dayName: name, phase: today.isEmpty ? .empty : .finished, event: nil, nextChange: change)
     }

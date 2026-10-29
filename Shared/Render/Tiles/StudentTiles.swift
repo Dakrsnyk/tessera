@@ -224,7 +224,12 @@ enum StudentTiles {
         }
         let name = state.title(of: event.slot)
         let hours = "\(Fmt.time(event.start, uses24Hour: context.settings.uses24HourClock)) – \(Fmt.time(event.end, uses24Hour: context.settings.uses24HourClock))"
-        let line = glance.phase == .current ? tr("En cours : \(name)") : tr("Prochain : \(name)")
+        let line: String
+        switch glance.phase {
+        case .current: line = tr("En cours : \(name)")
+        case .tomorrow: line = tr("Demain : \(name)")
+        default: line = tr("Prochain : \(name)")
+        }
         var tile = Tile(title: title, symbol: symbol)
         tile.value = line
         tile.caption = hours

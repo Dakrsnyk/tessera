@@ -186,4 +186,20 @@ final class ScheduleGlanceTests: XCTestCase {
         XCTAssertEqual(next.map { f.state.title(of: $0.slot) }, "Déménagement")
         XCTAssertEqual(StudentMath.nextClass(f.state, at: thursday)?.slot.weekday, 1, "nextClass still means classes only")
     }
+
+    /// All over for today (or nothing today): « Demain » shows tomorrow's first event; none tomorrow keeps the old messages.
+    func testWhenTodayIsOverTomorrowsFirstEventShows() {
+        var f = Fixture()
+        f.state.slots.append(ClassSlot(courseID: nil, weekday: 2, startMinute: 7 * 60 + 30, endMinute: 16 * 60, kind: .work, title: "Déménagement"))
+        let afterClass = ScheduleGlance.compute(f.state, now: monday(16))
+        XCTAssertEqual(afterClass.phase, .tomorrow)
+        XCTAssertEqual(name(afterClass, f.state), "Déménagement")
+        // Sunday evening: nothing today, Monday's first class tomorrow.
+        let sunday = monday(20, day: 27)
+        let eve = ScheduleGlance.compute(f.state, now: sunday)
+        XCTAssertEqual(eve.phase, .tomorrow)
+        XCTAssertEqual(name(eve, f.state), "Maths")
+        // Wednesday evening: nothing today and nothing tomorrow.
+        XCTAssertEqual(ScheduleGlance.compute(f.state, now: monday(20, day: 30)).phase, .empty)
+    }
 }
