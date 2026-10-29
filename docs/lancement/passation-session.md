@@ -55,3 +55,10 @@
 - Données financières : tout est hypothèse ou estimation tant qu'un CPA du Québec n'a pas validé ; ne jamais appliquer de règle américaine ou britannique au Québec.
 - Prix : mensuel 6,99 $, annuel 59,99 $, à vie 99,99 $ (USD, à confirmer dans le sélecteur d'App Store Connect) ; commission Apple 30 % la 1re année d'un abonné puis 15 %, ou 15 % avec le Small Business Program.
 - Cartes du projet : `docs/PASSATION.md` (ancienne), `HANDOFF.md` (état de la localisation), `graphify-out/` (non versionné).
+
+## 7. Décisions de l'utilisateur du 2026-10-29
+- **Partage familial : NON** sur les 3 produits (`familyShareable: false` dans `Config/Ardane.storekit` ; à ne pas activer dans App Store Connect à la création des produits).
+- **Conditions d'utilisation : l'EULA standard d'Apple** (lien déjà dans le paywall, `PremiumConfiguration.termsURL`). Des mentions « pas un avis médical » / « pas un conseil financier » existent déjà dans l'app.
+- **Nom du groupe d'abonnement : « Ardane Premium »** (aligné avec le paywall).
+- **Domaine acheté : `ardane.app`** (expire le 2027-10-29). Sert à héberger la politique de confidentialité, l'adresse de support et plus tard un courriel au domaine. Le TLD `.app` exige HTTPS (GitHub Pages le fournit). Plan : petit dépôt public séparé + GitHub Pages + domaine personnalisé (enregistrements DNS à créer par l'utilisateur chez son registraire). Création du dépôt public = publication : accord explicite de l'utilisateur requis.
+- **Entreprise individuelle** : déclaration au Registraire remplie (nom « Ardane », CAE 2851, établissement au domicile) ; l'utilisateur paie le vendredi 2026-10-30 (délai de 10 jours après transmission) ; NEQ à noter après paiement.
