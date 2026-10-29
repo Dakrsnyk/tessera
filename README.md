@@ -12,7 +12,7 @@ Chaque modification poussée sur `main` est compilée automatiquement sur un Mac
 
 | Dans le message | Ce qui est fait |
 |---|---|
-| (rien) | Vérifications statiques, compilation simulateur et iPhone, publication de `Ardane.ipa` |
+| (rien) | Vérifications statiques, compilation simulateur et iPhone |
 | `[check]` | Vérifications statiques et compilation simulateur seulement (le plus rapide) |
 | `[place]` | Compilation simulateur et test d'ajout des widgets à l'écran d'accueil et à l'écran verrouillé |
 | `[qa]` | Tous les tests automatiques, puis les captures d'écran de toutes les pages et de la galerie de widgets |
@@ -21,23 +21,7 @@ Chaque modification poussée sur `main` est compilée automatiquement sur un Mac
 | `[marketing]` | Rend les 10 captures App Store (iPhone 6,9 pouces, 1320 × 2868) : scènes dessinées par l'app, vrais écrans capturés à part |
 
 Le rapport (erreurs, résultats des tests, captures) est publié sur la branche `ci-report`.
-Le fichier à installer est publié dans **Releases** (colonne de droite du dépôt) : `Ardane.ipa`.
-
-### Première installation (PC Windows)
-
-1. Installe **iTunes** et **iCloud** depuis le site d'Apple (pas la version Microsoft Store).
-2. Installe **Sideloadly** depuis sideloadly.io.
-3. Télécharge le dernier `Ardane.ipa` dans *Releases*.
-4. Branche ton iPhone en USB et touche **Se fier à cet ordinateur**.
-5. Ouvre Sideloadly, glisse `Ardane.ipa` dans la fenêtre, entre ton identifiant Apple et clique sur **Start**.
-6. Sur l'iPhone :
-   - Réglages > Confidentialité et sécurité > **Mode développeur** : active-le (l'iPhone redémarre).
-   - Réglages > Général > **VPN et gestion de l'appareil** : touche ton identifiant et **Faire confiance**.
-7. Ouvre Ardane.
-
-Avec un identifiant Apple gratuit, l'app expire au bout de **7 jours** : relance simplement Sideloadly avec le même fichier. Un compte gratuit est aussi limité à 3 apps installées de cette façon.
-
-Cette version de test débloque automatiquement tout le Premium, sans achat. Réglages > **Développeur** > « Premium débloqué (mode test) » permet de le couper pour vérifier la version gratuite. Ce code est compilé uniquement dans les versions de test (`#if DEBUG`) : il n'existe pas dans la version App Store, qui passe toujours par StoreKit. La vérification statique du dépôt refuse toute référence à ce mode hors d'un bloc `#if DEBUG`.
+L'installation se fait par **TestFlight** : tu es invité par TestFlight, installe l'app depuis l'app TestFlight sur ton iPhone. Les fichiers de test (`Ardane.ipa`) ne sont plus publiés.
 
 ### Si les widgets n'affichent pas tes données
 

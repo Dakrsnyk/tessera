@@ -876,7 +876,6 @@ jobs:
           [ -d adkit ] && mkdir -p report/adkit && cp -R adkit/. report/adkit/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
-          [ -f Ardane.ipa ] && cp Ardane.ipa report/ || true
           cd report
           git init -q
           git checkout -q -b ci-report
@@ -885,18 +884,3 @@ jobs:
           git add -A
           git commit -qm "Build ${{ github.run_number }}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-report
-
-      - name: Publish test build
-        # No IPA when a test failed: a version with a known bug isn't handed out.
-        if: steps.device.outcome == 'success' && steps.tests.outcome != 'failure'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: build-${{ github.run_number }}
-          name: Version de test ${{ github.run_number }}
-          make_latest: true
-          body: |
-            Version de test de Ardane (build ${{ github.run_number }}).
-            Installe `Ardane.ipa` sur ton iPhone avec Sideloadly (voir le README).
-          files: |
-            Ardane.ipa
-            Ardane-diagnostic.ipa
