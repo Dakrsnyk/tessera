@@ -271,7 +271,7 @@ struct FitnessAppView: View {
         let sets = sessions.reduce(0) { $0 + $1.sets.count }
         let minutes = sessions.reduce(0.0) { $0 + $1.duration } / 60
         let volume = sessions.reduce(0.0) { $0 + $1.volume }
-        return tr("\(Fmt.plural(sets, tr("série"), tr("séries"))) · \(TF.int(minutes)) min · \(TF.int(volume)) kg soulevés")
+        return tr("\(Fmt.plural(sets, tr("série"), tr("séries"))) · \(TF.int(minutes)) min · \(Units.loadText(kilograms: volume, in: model.settings.unitSystem, digits: 0)) soulevés")
     }
 
     /// « 5 exercices · 18 séries · environ 45 min » for a session planned.
@@ -292,7 +292,7 @@ struct FitnessAppView: View {
                 HStack {
                     Text(exercise.name).font(.subheadline)
                     Spacer()
-                    Text(FitnessPlan.setText(exercise))
+                    Text(FitnessPlan.setText(exercise, system: model.settings.unitSystem))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .monospacedDigit()
@@ -356,7 +356,7 @@ struct FitnessAppView: View {
             MiniSectionTitle(title: WeekTitle.of(DateMath.week(containing: day), now: now))
             HStack(spacing: 10) {
                 MiniStat(title: tr("Durée"), value: Fmt.minutes(FitnessMath.minutes(inWeekOf: first, state)))
-                MiniStat(title: tr("Volume"), value: TF.int(FitnessMath.weeklyVolume(state, weekOf: first).reduce(0, +)), unit: "kg")
+                MiniStat(title: tr("Volume"), value: Units.loadNumber(kilograms: FitnessMath.weeklyVolume(state, weekOf: first).reduce(0, +), in: model.settings.unitSystem, digits: 0), unit: model.settings.unitSystem.weightUnit)
             }
             HStack(spacing: 10) {
                 MiniStat(title: tr("Calories"), value: weekCalories(state, weekOf: first))
@@ -502,8 +502,8 @@ struct FitnessAppView: View {
 /// How a routine reads and lasts.
 enum FitnessPlan {
     /// "4 × 8 · 80 kg"
-    static func setText(_ exercise: ExerciseTemplate) -> String {
-        let load = exercise.weight > 0 ? tr(" · \(ProfileNumberField.format(exercise.weight)) kg") : ""
+    static func setText(_ exercise: ExerciseTemplate, system: UnitSystem = .metric) -> String {
+        let load = exercise.weight > 0 ? tr(" · \(Units.loadText(kilograms: exercise.weight, in: system))") : ""
         return "\(exercise.sets) × \(exercise.reps)\(load)"
     }
 

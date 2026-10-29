@@ -143,7 +143,7 @@ struct FitnessHistoryPage: View {
                                     Spacer()
                                     Text(Fmt.shortDay(session.start)).font(.subheadline).foregroundStyle(Color.secondary)
                                 }
-                                Text(tr("\(TF.int(session.duration / 60)) min · \(Fmt.plural(session.sets.count, tr("série"), tr("séries"))) · \(TF.int(session.volume)) kg"))
+                                Text(tr("\(TF.int(session.duration / 60)) min · \(Fmt.plural(session.sets.count, tr("série"), tr("séries"))) · \(Units.loadText(kilograms: session.volume, in: model.settings.unitSystem, digits: 0))"))
                                     .font(.caption)
                                     .foregroundStyle(Color.secondary)
                             }
@@ -192,7 +192,7 @@ struct FitnessSessionDetailPage: View {
                         ValueRow(title: tr("Séance rattrapée"), value: tr("Prévue le \(Fmt.format(missed, template: "EEEEdMMMM"))"))
                     }
                     ValueRow(title: tr("Durée"), value: tr("\(TF.int(session.duration / 60)) min"))
-                    ValueRow(title: tr("Volume"), value: tr("\(TF.int(session.volume)) kg"))
+                    ValueRow(title: tr("Volume"), value: Units.loadText(kilograms: session.volume, in: model.settings.unitSystem, digits: 0))
                 }
                 let names = session.sets.map(\.exercise).reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
                 ForEach(names, id: \.self) { name in
@@ -202,7 +202,7 @@ struct FitnessSessionDetailPage: View {
                                 editingSet = set
                             } label: {
                                 HStack {
-                                    Text(set.weight > 0 ? tr("\(ProfileNumberField.format(set.weight)) kg × \(set.reps)") : tr("\(set.reps) répétitions"))
+                                    Text(set.weight > 0 ? tr("\(Units.loadText(kilograms: set.weight, in: model.settings.unitSystem)) × \(set.reps)") : tr("\(set.reps) répétitions"))
                                         .foregroundStyle(Color.primary)
                                         .monospacedDigit()
                                     Spacer()
@@ -286,7 +286,7 @@ struct FitnessProgressPage: View {
                             MiniSectionTitle(title: tr("Volume par semaine"))
                             Chart {
                                 ForEach(volumes) { item in
-                                    BarMark(x: .value("Semaine", item.date, unit: .weekOfYear), y: .value("kg", item.value))
+                                    BarMark(x: .value("Semaine", item.date, unit: .weekOfYear), y: .value(model.settings.unitSystem.weightUnit, Units.weightValue(kilograms: item.value, in: model.settings.unitSystem)))
                                         .foregroundStyle(Color(hex: accentHex).gradient)
                                         .cornerRadius(3)
                                 }
@@ -353,8 +353,8 @@ struct FitnessProgressPage: View {
         let first = sessions.first?.topWeight ?? record.weight
         let change = record.weight - first
         return MiniRow(symbol: "trophy.fill", colorHex: "F2A33A", title: record.exercise,
-                       detail: sessions.count > 1 && change > 0 ? tr("+\(ProfileNumberField.format(change)) kg depuis le début · \(sessions.count) séances") : Fmt.plural(sessions.count, tr("séance"), tr("séances")),
-                       value: "\(ProfileNumberField.format(record.weight)) × \(record.reps)", showsChevron: chevron)
+                       detail: sessions.count > 1 && change > 0 ? tr("+\(Units.loadText(kilograms: change, in: model.settings.unitSystem)) depuis le début · \(sessions.count) séances") : Fmt.plural(sessions.count, tr("séance"), tr("séances")),
+                       value: "\(Units.loadNumber(kilograms: record.weight, in: model.settings.unitSystem)) × \(record.reps)", showsChevron: chevron)
     }
 
     /// Volume of the last eight weeks, oldest first.

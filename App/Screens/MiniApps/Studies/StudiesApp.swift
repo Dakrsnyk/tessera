@@ -286,14 +286,14 @@ struct NextClassCard: View {
     var body: some View {
         if let next = StudentMath.nextClass(state, at: now) {
             let course = state.course(next.slot.courseID)
-            let hex = course?.colorHex ?? Studies.accentHex
+            let hex = next.slot.colorHex ?? course?.colorHex ?? Studies.accentHex
             let isNow = next.start <= now
             NavigationLink(value: course.map { HomeRoute.page(.studiesCourse($0.id)) } ?? HomeRoute.page(.studiesTimetable)) {
                 VStack(alignment: .leading, spacing: 8) {
                     Label(isNow ? tr("En cours") : tr("Prochain cours"), systemImage: isNow ? "dot.radiowaves.left.and.right" : "clock")
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(Color(hex: hex))
-                    Text(course?.name ?? tr("Cours"))
+                    Text(state.title(of: next.slot))
                         .font(.title2.weight(.bold))
                         .foregroundStyle(.primary)
                     Text(detail(next))

@@ -222,9 +222,9 @@ struct PlanningAppView: View {
     }
 
     private func priorities(now: Date) -> some View {
-        let items = model.productivity.priorities
+        let items = model.productivity.activePriorities
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Top 3 du jour"), detail: items.isEmpty ? nil : "\(items.filter { $0.isDone(on: now) }.count)/\(items.count)")
+            MiniSectionTitle(title: tr("Top 3 du jour"), detail: items.isEmpty ? nil : "\(items.count)/\(ProductivityState.maxPriorities)")
             // Rows like the other lists of the mini-apps: a 34-point mark, the title, hairlines between.
             MiniRowsCard {
                 ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
@@ -234,14 +234,13 @@ struct PlanningAppView: View {
                         model.update(\.productivity) { $0.togglePriority(item.id, on: now) }
                     } label: {
                         HStack(spacing: 12) {
-                            Image(systemName: item.isDone(on: now) ? "checkmark.circle.fill" : "circle")
+                            Image(systemName: "circle")
                                 .font(.title3)
-                                .foregroundStyle(item.isDone(on: now) ? Color(hex: accentHex) : .secondary)
+                                .foregroundStyle(.secondary)
                                 .frame(width: 34, height: 34)
                             Text(item.title)
                                 .font(.body.weight(.medium))
-                                .strikethrough(item.isDone(on: now))
-                                .foregroundStyle(item.isDone(on: now) ? .secondary : .primary)
+                                .foregroundStyle(.primary)
                             Spacer(minLength: 8)
                         }
                         .padding(.vertical, 10)
@@ -256,7 +255,7 @@ struct PlanningAppView: View {
                         }
                     }
                 }
-                if items.count < 3 {
+                if items.count < ProductivityState.maxPriorities {
                     if !items.isEmpty { MiniDivider() }
                     HStack(spacing: 12) {
                         Image(systemName: "plus.circle")
@@ -276,7 +275,7 @@ struct PlanningAppView: View {
     private func addPriority() {
         let title = newPriority.trimmed
         guard !title.isEmpty else { return }
-        model.update(\.productivity) { $0.priorities.append(PriorityItem(title: title)) }
+        model.update(\.productivity) { _ = $0.addQuickTask(title, on: Date()) }
         newPriority = ""
     }
 }

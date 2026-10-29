@@ -125,7 +125,7 @@ struct RootView: View {
                 }
                 .sheet(isPresented: $router.isProfilePresented) {
                     ProfileView()
-                        .appStyle(model.settings)
+                        .appStyle(model.settings, isPremium: model.isPremium)
                 }
                 .sheet(isPresented: $router.isIconPickerPresented) {
                     NavigationStack {
@@ -136,7 +136,7 @@ struct RootView: View {
                                 }
                             }
                     }
-                    .appStyle(model.settings)
+                    .appStyle(model.settings, isPremium: model.isPremium)
                 }
                 .fullScreenCover(isPresented: $showsOnboarding) {
                     OnboardingView {
@@ -145,14 +145,14 @@ struct RootView: View {
                         // Then the tour of the app, once the questions have slid away.
                         startTutorialIfNeeded(after: 0.75)
                     }
-                    .appStyle(model.settings)
+                    .appStyle(model.settings, isPremium: model.isPremium)
                 }
                 .fullScreenCover(isPresented: $showsPersonalization) {
                     OnboardingView(personalizationOnly: true) {
                         model.updateSettings { $0.hasCompletedProfileSetup = true }
                         showsPersonalization = false
                     }
-                    .appStyle(model.settings)
+                    .appStyle(model.settings, isPremium: model.isPremium)
                 }
                 // Installs from before the styles existed: the style picker alone, once.
                 .fullScreenCover(isPresented: $showsStylePicker) {
@@ -160,7 +160,7 @@ struct RootView: View {
                         model.updateSettings { $0.hasChosenStyle = true }
                         showsStylePicker = false
                     }
-                    .appStyle(model.settings)
+                    .appStyle(model.settings, isPremium: model.isPremium)
                 }
 
             #if DEBUG
@@ -202,7 +202,7 @@ struct RootView: View {
                     .zIndex(1)
             }
         }
-        .appStyle(model.settings)
+        .appStyle(model.settings, isPremium: model.isPremium)
         .onChange(of: model.settings.hasCompletedOnboarding) { _, done in
             if !done && !showsLaunch { showsOnboarding = true }
         }

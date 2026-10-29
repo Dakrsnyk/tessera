@@ -7,12 +7,13 @@ enum FitnessTiles {
         let now = context.date
         let state = context.payload.domains.fitness
         let domains = context.payload.domains
+        let system = context.settings.unitSystem
         switch context.design.kind {
-        case .todaysWorkout: return todaysWorkout(state, now: now)
-        case .nextSet: return nextSet(state, now: now)
-        case .restTimer: return restTimer(state, now: now)
-        case .weeklyVolume: return weeklyVolume(state, now: now)
-        case .personalRecords: return records(state)
+        case .todaysWorkout: return todaysWorkout(state, now: now, system: system)
+        case .nextSet: return nextSet(state, now: now, system: system)
+        case .restTimer: return restTimer(state, now: now, system: system)
+        case .weeklyVolume: return weeklyVolume(state, now: now, system: system)
+        case .personalRecords: return records(state, system: system)
         case .trainingStreak: return streak(state, now: now, knowsGoal: domains.knows(.weeklyWorkouts))
         case .caloriesBurned:
             // The estimate needs the user's weight: without it, no number is made up.
@@ -26,14 +27,15 @@ enum FitnessTiles {
     }
 
     /// "4 × 8 · 60 kg" or "3 × 12".
-    static func setsText(_ exercise: ExerciseTemplate) -> String {
+    /// The load is saved in kg and shown in the chosen unit ("60 kg" / "132,3 lb").
+    static func setsText(_ exercise: ExerciseTemplate, system: UnitSystem = .metric) -> String {
         let base = "\(exercise.sets) × \(exercise.reps)"
         guard exercise.weight > 0 else { return base }
-        return tr("\(base) · \(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg")
+        return tr("\(base) · \(Units.loadText(kilograms: exercise.weight, in: system))")
     }
 
-    static func setText(_ exercise: ExerciseTemplate) -> String {
-        exercise.weight > 0 ? tr("\(exercise.reps) × \(TF.decimal(exercise.weight, exercise.weight.rounded() == exercise.weight ? 0 : 1)) kg") : tr("\(exercise.reps) répétitions")
+    static func setText(_ exercise: ExerciseTemplate, system: UnitSystem = .metric) -> String {
+        exercise.weight > 0 ? tr("\(exercise.reps) × \(Units.loadText(kilograms: exercise.weight, in: system))") : tr("\(exercise.reps) répétitions")
     }
 
     /// The small back arrow next to « Série faite »: takes back the last set (also just after the set
@@ -63,7 +65,7 @@ enum FitnessTiles {
         return buttons
     }
 
-    static func todaysWorkout(_ state: FitnessState, now: Date) -> Tile {
+    static func todaysWorkout(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
         guard let routine = state.routine(for: now) else { return .empty(tr("Séance du jour"), symbol: "figure.strengthtraining.traditional", message: hint) }
         let doneToday = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, now) && $0.isFinished }
         let active = state.active.flatMap { $0.isFinished ? nil : $0 }
@@ -84,7 +86,7 @@ enum FitnessTiles {
         tile.rows = exercises.enumerated().map { pair -> TileRow in
             let isCurrent = active.map { $0.exerciseIndex == pair.offset } ?? false
             let isDone = active.map { $0.exerciseIndex > pair.offset } ?? doneToday
-            return TileRow(id: "\(pair.offset)", title: pair.element.name, value: setsText(pair.element), isDone: isDone, isHighlighted: isCurrent)
+            return TileRow(id: "\(pair.offset)", title: pair.element.name, value: setsText(pair.element, system: system), isDone: isDone, isHighlighted: isCurrent)
         }
         if doneToday {
             tile.buttons = []
@@ -96,13 +98,13 @@ enum FitnessTiles {
         return tile
     }
 
-    static func nextSet(_ state: FitnessState, now: Date) -> Tile {
+    static func nextSet(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
         let active = state.active.flatMap { $0.isFinished ? nil : $0 }
         guard let exercise = active?.currentExercise ?? state.routine(for: now)?.exercises.first else {
             return .empty(tr("Prochaine série"), symbol: "arrow.forward.circle.fill", message: hint)
         }
         var tile = Tile(title: tr("Prochaine série"), symbol: "arrow.forward.circle.fill")
-        tile.value = setText(exercise)
+        tile.value = setText(exercise, system: system)
         let setNumber = (active?.setIndex ?? 0) + 1
         tile.caption = tr("\(exercise.name) · série \(setNumber)/\(exercise.sets)")
         if let rest = active?.restEndsAt, rest > now {
@@ -113,12 +115,12 @@ enum FitnessTiles {
             tile.detail = tr("Touche pour démarrer « \(state.routine(for: now)?.name ?? tr("ta séance")) »")
         }
         tile.buttons = setButtons(state, now: now)
-        tile.inline = "\(exercise.name) : \(setText(exercise))"
+        tile.inline = "\(exercise.name) : \(setText(exercise, system: system))"
         tile.shortValue = "\(setNumber)/\(exercise.sets)"
         return tile
     }
 
-    static func restTimer(_ state: FitnessState, now: Date) -> Tile {
+    static func restTimer(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
         let active = state.active.flatMap { $0.isFinished ? nil : $0 }
         var tile = Tile(title: tr("Repos"), symbol: "timer")
         if let active, let rest = active.restEndsAt, rest > now {
@@ -127,7 +129,7 @@ enum FitnessTiles {
             tile.visual = .timer(start, rest)
             if let next = active.currentExercise {
                 tile.caption = tr("Ensuite : \(next.name)")
-                tile.detail = setText(next)
+                tile.detail = setText(next, system: system)
             }
             // « Passer » passes the set coming (not counted), like on the Lock Screen.
             tile.buttons = [
@@ -140,7 +142,7 @@ enum FitnessTiles {
         } else {
             tile.value = tr("Prêt")
             if let exercise = active?.currentExercise ?? state.routine(for: now)?.exercises.first {
-                tile.caption = "\(exercise.name) · \(setText(exercise))"
+                tile.caption = "\(exercise.name) · \(setText(exercise, system: system))"
             } else {
                 tile.caption = tr("Valide une série pour lancer le repos")
             }
@@ -151,35 +153,35 @@ enum FitnessTiles {
         return tile
     }
 
-    static func weeklyVolume(_ state: FitnessState, now: Date) -> Tile {
+    static func weeklyVolume(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
         let days = FitnessMath.weeklyVolume(state, weekOf: now)
         let total = days.reduce(0, +)
         let lastWeekDate = DateMath.calendar.date(byAdding: .day, value: -7, to: now) ?? now
         // Same days of last week, so a Monday isn't compared with a whole week.
         let lastWeek = FitnessMath.weeklyVolume(state, weekOf: lastWeekDate).prefix(TF.todayIndex(now) + 1).reduce(0, +)
         var tile = Tile(title: tr("Volume"), symbol: "scalemass")
-        tile.value = TF.int(total)
-        tile.unit = tr("kg")
+        tile.value = Units.loadNumber(kilograms: total, in: system, digits: 0)
+        tile.unit = system.weightUnit
         tile.caption = tr("soulevés cette semaine")
         if let change = Stats.change(from: lastWeek, to: total) {
-            tile.detail = tr("Sem. dernière : \(TF.int(lastWeek)) kg (\(Fmt.signedPercent(change * 100, decimals: 0)))")
+            tile.detail = tr("Sem. dernière : \(Units.loadText(kilograms: lastWeek, in: system, digits: 0)) (\(Fmt.signedPercent(change * 100, decimals: 0)))")
         }
         tile.visual = .bars(days, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now))
-        tile.inline = tr("\(TF.int(total)) kg cette semaine")
+        tile.inline = tr("\(Units.loadText(kilograms: total, in: system, digits: 0)) cette semaine")
         return tile
     }
 
-    static func records(_ state: FitnessState) -> Tile {
+    static func records(_ state: FitnessState, system: UnitSystem = .metric) -> Tile {
         let records = FitnessMath.records(state)
         guard let best = records.first else { return .empty(tr("Records"), symbol: "trophy.fill", message: tr("Tes records apparaîtront après ta première séance.")) }
         var tile = Tile(title: tr("Records"), symbol: "trophy.fill")
-        tile.value = tr("\(TF.int(best.weight)) kg")
+        tile.value = Units.loadText(kilograms: best.weight, in: system, digits: 0)
         tile.caption = tr("\(best.exercise) · \(best.reps) rép.")
-        tile.detail = tr("1RM estimé : \(TF.int(best.oneRepMax)) kg")
+        tile.detail = tr("1RM estimé : \(Units.loadText(kilograms: best.oneRepMax, in: system, digits: 0))")
         tile.rows = records.prefix(6).map { record in
-            TileRow(id: record.exercise, title: record.exercise, value: tr("\(TF.int(record.weight)) kg × \(record.reps)"), detail: tr("1RM ≈ \(TF.int(record.oneRepMax)) kg"), symbol: "trophy")
+            TileRow(id: record.exercise, title: record.exercise, value: tr("\(Units.loadText(kilograms: record.weight, in: system, digits: 0)) × \(record.reps)"), detail: tr("1RM ≈ \(Units.loadText(kilograms: record.oneRepMax, in: system, digits: 0))"), symbol: "trophy")
         }
-        tile.inline = tr("\(best.exercise) : \(TF.int(best.weight)) kg")
+        tile.inline = tr("\(best.exercise) : \(Units.loadText(kilograms: best.weight, in: system, digits: 0))")
         return tile
     }
 

@@ -5,6 +5,8 @@ struct AppStyleSwatch: View {
     let style: AppStyle
     let isSelected: Bool
     var size: CGFloat = 58
+    /// A Premium color for a free plan: a padlock on the corner.
+    var isLocked = false
 
     var body: some View {
         VStack(spacing: 6) {
@@ -42,6 +44,13 @@ struct AppStyleSwatch: View {
                         .foregroundStyle(.onAccent, Color.accentColor)
                         .background(Circle().fill(.screenFill).padding(1))
                         .offset(x: 5, y: -5)
+                } else if isLocked {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundStyle(Color.premiumInk)
+                        .frame(width: 18, height: 18)
+                        .background(Color.premiumFill, in: Circle())
+                        .offset(x: 5, y: -5)
                 }
             }
             Text(style.name)
@@ -51,28 +60,47 @@ struct AppStyleSwatch: View {
                 .minimumScaleFactor(0.8)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(tr("Style \(style.name)")))
+        .accessibilityLabel(Text(isLocked ? tr("Style \(style.name), Premium") : tr("Style \(style.name)")))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
 
-/// The twelve colors, four per row. Picking one applies it right away.
+/// The twelve colors, four per row. Picking one applies it right away; only Saphir is free, the others
+/// carry a padlock and open the paywall for a free plan.
 struct AppStyleGrid: View {
     @Environment(AppModel.self) private var model
+    @State private var paywall: PaywallContext?
     var swatchSize: CGFloat = 54
 
     var body: some View {
+        // What is drawn: a free plan is on Saphir whatever is saved.
+        let shown = model.settings.appStyle.effective(isPremium: model.isPremium)
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 4), spacing: 14) {
             ForEach(AppStyle.all) { style in
+                let locked = style.id.isPremium && !model.isPremium
                 Button {
+                    if locked {
+                        paywall = Self.paywallContext
+                        return
+                    }
                     Haptics.tap()
                     withAnimation(.easeInOut(duration: 0.35)) { model.setStyle(style.id) }
                 } label: {
-                    AppStyleSwatch(style: style, isSelected: model.settings.appStyle == style.id, size: swatchSize)
+                    AppStyleSwatch(style: style, isSelected: shown == style.id, size: swatchSize, isLocked: locked)
                 }
                 .buttonStyle(.pressable)
             }
         }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
+    }
+
+    private static var paywallContext: PaywallContext {
+        PaywallContext(
+            symbol: "paintpalette.fill",
+            title: tr("Toutes les couleurs de l'app"),
+            detail: tr("Avec Premium, choisis la couleur d'Ardane parmi 12 et change-la quand tu veux. Saphir reste gratuit."),
+            perk: .styles
+        )
     }
 }
 

@@ -440,7 +440,7 @@ enum SampleData {
         var state = ProductivityState()
         let today = DateMath.dayKey(now)
         state.priorities = [
-            PriorityItem(title: tr("Finir la présentation"), doneDayKey: today),
+            PriorityItem(title: tr("Finir la présentation")),
             PriorityItem(title: tr("Appeler le comptable")),
             PriorityItem(title: tr("30 minutes de sport")),
         ]

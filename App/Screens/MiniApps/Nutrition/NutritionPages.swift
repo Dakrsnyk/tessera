@@ -614,18 +614,21 @@ struct NutritionHistoryPage: View {
     }
 
     private func weightChart(_ weights: [ValuePoint]) -> some View {
+        // Saved in kg; shown in the chosen unit.
+        let system = model.settings.unitSystem
+        let weights = weights.map { ValuePoint(date: $0.date, value: Units.weightValue(kilograms: $0.value, in: system)) }
         let values = weights.map(\.value)
         let low = (values.min() ?? 0) - 1
         let high = (values.max() ?? 0) + 1
         let change = (values.last ?? 0) - (values.first ?? 0)
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Poids"), detail: tr("\(change >= 0 ? "+" : "")\(TF.decimal(change, 1)) kg"))
+            MiniSectionTitle(title: tr("Poids"), detail: "\(change >= 0 ? "+" : "−")\(TF.decimal(abs(change), 1)) \(system.weightUnit)")
             Chart {
                 ForEach(weights, id: \.date) { point in
-                    LineMark(x: .value("Date", point.date), y: .value("kg", point.value))
+                    LineMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value))
                         .foregroundStyle(Color(hex: accentHex))
                         .interpolationMethod(.catmullRom)
-                    PointMark(x: .value("Date", point.date), y: .value("kg", point.value))
+                    PointMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value))
                         .foregroundStyle(Color(hex: accentHex))
                         .symbolSize(20)
                 }

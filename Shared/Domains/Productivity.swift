@@ -1,15 +1,37 @@
 import Foundation
 
-/// One of the three priorities of the day. Done flags only count for the day they were set.
+/// One of the three priorities of the day. A validated task leaves the active Top 3 but is never deleted:
+/// it stays stored with its completion date (« Mes tâches réalisées »).
 struct PriorityItem: Codable, Hashable, Identifiable {
     var id = UUID()
     var title: String
+    /// Day it was validated. Older saves only had this; it still marks the task as done (without a date).
     var doneDayKey: String?
     /// When it was added (nil for those saved before this field existed): lets a double tap on « Ajouter » be recognised.
     var createdAt: Date?
+    /// When it was validated (nil while active, and for tasks validated before this field existed).
+    var completedAt: Date?
 
+    /// Validated: out of the active Top 3, kept in the history.
+    var isCompleted: Bool { completedAt != nil || doneDayKey != nil }
+
+    /// Kept with its old signature: a validated task is done whatever the day.
     func isDone(on date: Date) -> Bool {
-        doneDayKey == DateMath.dayKey(date)
+        isCompleted
+    }
+
+    enum CodingKeys: String, CodingKey { case id, title, doneDayKey, createdAt, completedAt }
+}
+
+extension PriorityItem {
+    /// Tolerant decoding: a missing or unreadable field never loses the task (`completedAt` is absent in old saves).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        title = c.value(.title, "")
+        doneDayKey = c.optional(.doneDayKey)
+        createdAt = c.optional(.createdAt)
+        completedAt = c.optional(.completedAt)
     }
 }
 
@@ -105,7 +127,7 @@ struct ProductivityState: Codable, Hashable {
     @discardableResult
     mutating func addQuickTask(_ title: String, on date: Date) -> Bool {
         let clean = String(title.trimmingCharacters(in: .whitespacesAndNewlines).prefix(120))
-        guard !clean.isEmpty, priorities.count < Self.maxPriorities else { return false }
+        guard !clean.isEmpty, activePriorities.count < Self.maxPriorities else { return false }
         let repeated = priorities.contains { item in
             guard let created = item.createdAt else { return false }
             return item.title.lowercased() == clean.lowercased() && abs(date.timeIntervalSince(created)) < 1
@@ -115,10 +137,37 @@ struct ProductivityState: Codable, Hashable {
         return true
     }
 
+    /// The Top 3 still to do (validated tasks are not here).
+    var activePriorities: [PriorityItem] { priorities.filter { !$0.isCompleted } }
+
+    /// The validated tasks, the most recent first; those without a date (older saves) come last.
+    var completedPriorities: [PriorityItem] {
+        priorities.enumerated()
+            .filter { $0.element.isCompleted }
+            .sorted { left, right in
+                switch (left.element.completedAt, right.element.completedAt) {
+                case let (a?, b?): return a != b ? a > b : left.offset > right.offset
+                case (.some, .none): return true
+                case (.none, .some): return false
+                case (.none, .none): return left.offset > right.offset
+                }
+            }
+            .map(\.element)
+    }
+
+    /// Validates an active task (it leaves the Top 3, stays stored with its date) or puts a validated one back
+    /// among the active ones. Never removes anything, never duplicates.
     mutating func togglePriority(_ id: UUID, on date: Date = Date()) {
         guard let index = priorities.firstIndex(where: { $0.id == id }) else { return }
-        let key = DateMath.dayKey(date)
-        priorities[index].doneDayKey = priorities[index].doneDayKey == key ? nil : key
+        if priorities[index].isCompleted {
+            // Back to active, unless the Top 3 is already full of others.
+            guard activePriorities.count < Self.maxPriorities else { return }
+            priorities[index].completedAt = nil
+            priorities[index].doneDayKey = nil
+        } else {
+            priorities[index].completedAt = date
+            priorities[index].doneDayKey = DateMath.dayKey(date)
+        }
     }
 
     mutating func toggleProjectTask(project: UUID, task: UUID, at date: Date = Date()) {

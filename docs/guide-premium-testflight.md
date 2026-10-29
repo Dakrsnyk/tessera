@@ -44,7 +44,7 @@ Préférer des **testeurs externes** (lien ou courriel). Des testeurs internes d
 1. **Test Information** : onglet **TestFlight** › **Additional** › **Test Information** :
    - **Beta App Description** (obligatoire) ;
    - **Feedback Email** : `support.ardane@gmail.com` ;
-   - **Privacy Policy URL** : `https://claude.ai/artifact/M2hUyRzRz9zxoSMJ4PJ5X8`, après l'avoir rendue publique (menu Partager › « toute personne disposant du lien ») ;
+   - **Privacy Policy URL** : `https://ardane.app/privacy.html` ;
    - **Beta App Review Information** : tes coordonnées ; **Sign-in required** : non.
 2. **Groupe** : (+) à côté de **External Testing** › nom « Amis » › **Create**.
 3. **Build** : dans « Amis » › **Add Builds** › la dernière version › **What to Test** › cocher **Automatically notify testers** › **Submit Review**. La première version passe par la vérification d'Apple (de 1 à plusieurs jours en 2026). Les versions suivantes de la même version (1.0) passent souvent sans nouvelle vérification.

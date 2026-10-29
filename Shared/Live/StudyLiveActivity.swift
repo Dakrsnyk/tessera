@@ -95,7 +95,7 @@ struct StudyActivityView: View {
     var now = Date()
 
     /// The app style chosen in Ardane: the Lock Screen follows its colors and its font.
-    private var style: AppStyle { AppStyle.style(SharedStore.shared.settings.appStyle) }
+    private var style: AppStyle { AppStyle.stored() }
     private var accent: Color { style.accent }
 
     var body: some View {

@@ -1008,10 +1008,11 @@ private struct PrioritiesDayTile: View {
 
     /// Added from « + » as Productivité: the card gets its quick add (and no longer is one big link).
     private var hasQuickAdd: Bool { model.settings.dailyAdded.contains(DailyCategories.productivityKey) }
-    private var canAdd: Bool { model.productivity.priorities.count < ProductivityState.maxPriorities }
+    private var canAdd: Bool { model.productivity.activePriorities.count < ProductivityState.maxPriorities }
 
     var body: some View {
-        DayCard(title: tr("Top 3"), symbol: "3.circle.fill", colorHex: "6B7280", route: hasQuickAdd ? nil : .space(.productivity)) {
+        // No whole-card link: the footer holds the two ways out (« Mes tâches réalisées » and the whole Top 3).
+        DayCard(title: tr("Top 3"), symbol: "3.circle.fill", colorHex: "6B7280", route: nil) {
             VStack(alignment: .leading, spacing: 6) {
                 ForEach(items) { item in
                     Button {
@@ -1032,18 +1033,16 @@ private struct PrioritiesDayTile: View {
                     }
                     .buttonStyle(.pressable)
                 }
-                if hasQuickAdd {
-                    quickAdd
-                }
+                quickAdd
             }
         }
         .accessibilityIdentifier("daily-priorities")
     }
 
-    /// The field to add a task in one gesture, and the way to the whole Top 3.
+    /// The field to add a task in one gesture (when added as Productivité), « Mes tâches réalisées » and the way to the whole Top 3.
     private var quickAdd: some View {
         HStack(spacing: 8) {
-            if canAdd {
+            if hasQuickAdd && canAdd {
                 TextField(tr("Ajouter une tâche"), text: $draft)
                     .font(.subheadline)
                     .submitLabel(.done)
@@ -1058,7 +1057,29 @@ private struct PrioritiesDayTile: View {
                 .disabled(draft.trimmed.isEmpty)
                 .accessibilityLabel(Text(tr("Ajouter une tâche")))
                 .accessibilityIdentifier("daily-quick-task-add")
-            } else {
+            }
+            NavigationLink {
+                CompletedPrioritiesView()
+            } label: {
+                if hasQuickAdd && canAdd {
+                    Image(systemName: "checkmark.circle")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .frame(width: 28, height: 28)
+                        .contentShape(Rectangle())
+                } else {
+                    Label(tr("Mes tâches réalisées"), systemImage: "checkmark.circle")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .frame(minHeight: 28)
+                        .contentShape(Rectangle())
+                }
+            }
+            .buttonStyle(.pressable)
+            .accessibilityLabel(Text(tr("Mes tâches réalisées")))
+            .accessibilityIdentifier("daily-completed-tasks")
+            if !(hasQuickAdd && canAdd) {
                 Spacer(minLength: 0)
             }
             NavigationLink(value: HomeRoute.space(.productivity)) {

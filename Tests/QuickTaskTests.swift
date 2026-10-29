@@ -49,8 +49,9 @@ final class QuickTaskTests: XCTestCase {
         let id = try XCTUnwrap(state.priorities.first?.id)
         state.togglePriority(id, on: now)
         XCTAssertTrue(state.priorities[0].isDone(on: now))
-        XCTAssertEqual(DailyBrief.priorityChecks(state, now: now).map(\.isDone), [true])
+        XCTAssertTrue(DailyBrief.priorityChecks(state, now: now).isEmpty, "A validated task leaves the active Top 3")
         state.togglePriority(id, on: now)
+        XCTAssertEqual(DailyBrief.priorityChecks(state, now: now).count, 1)
         XCTAssertFalse(state.priorities[0].isDone(on: now))
     }
 

@@ -121,7 +121,7 @@ struct FitnessSessionPage: View {
                             .foregroundStyle(Color(hex: accentHex))
                         Text(exercise.name).font(.title2.weight(.bold))
                         if let last, let best = last.best {
-                            Text(tr("La dernière fois : \(ProfileNumberField.format(best.weight)) kg × \(best.reps)"))
+                            Text(tr("La dernière fois : \(Units.loadText(kilograms: best.weight, in: model.settings.unitSystem)) × \(best.reps)"))
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                         }
@@ -144,10 +144,10 @@ struct FitnessSessionPage: View {
                     } plus: {
                         reps = min(100, reps + 1)
                     }
-                    adjuster(title: tr("Charge"), value: weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("Corps")) {
-                        weight = max(0, weight - 2.5)
+                    adjuster(title: tr("Charge"), value: weight > 0 ? Units.loadText(kilograms: weight, in: model.settings.unitSystem) : tr("Corps")) {
+                        weight = Units.steppedLoad(kilograms: weight, direction: -1, in: model.settings.unitSystem)
                     } plus: {
-                        weight += 2.5
+                        weight = Units.steppedLoad(kilograms: weight, direction: 1, in: model.settings.unitSystem)
                     }
                 }
                 if let rest = session.restEndsAt, rest > now {
@@ -356,7 +356,7 @@ struct FitnessSessionPage: View {
                     .foregroundStyle(index <= session.exerciseIndex ? Color(hex: accentHex) : .secondary)
                 Text(item.name).font(.subheadline.weight(isCurrent ? .semibold : .regular))
                 Spacer()
-                Text(FitnessPlan.setText(item)).font(.caption).foregroundStyle(.secondary).monospacedDigit()
+                Text(FitnessPlan.setText(item, system: model.settings.unitSystem)).font(.caption).foregroundStyle(.secondary).monospacedDigit()
                 if let exerciseInfo = item.info {
                     Button {
                         openInfo(exerciseInfo)
@@ -374,7 +374,7 @@ struct FitnessSessionPage: View {
                             Button {
                                 editingSet = set
                             } label: {
-                                Text(set.weight > 0 ? "\(ProfileNumberField.format(set.weight)) × \(set.reps)" : tr("\(set.reps) reps"))
+                                Text(set.weight > 0 ? "\(Units.loadNumber(kilograms: set.weight, in: model.settings.unitSystem)) × \(set.reps)" : tr("\(set.reps) reps"))
                                     .font(.caption.weight(.semibold))
                                     .monospacedDigit()
                                     .padding(.horizontal, 10)
@@ -487,7 +487,7 @@ struct SessionExerciseForm: View {
             Section(tr("Séries")) {
                 Stepper(tr("Séries : \(sets)"), value: $sets, in: 1...12)
                 Stepper(tr("Répétitions : \(reps)"), value: $reps, in: 1...100)
-                NumberRow(title: tr("Charge"), value: $weight, unit: tr("kg"))
+                NumberRow(title: tr("Charge"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)
                 Stepper(tr("Repos : \(rest) s"), value: $rest, in: 15...600, step: 15)
             }
         }
@@ -519,7 +519,7 @@ struct SetEditor: View {
         SheetForm(title: set.exercise, canSave: reps > 0, onSave: save) {
             Section {
                 Stepper(tr("Répétitions : \(reps)"), value: $reps, in: 1...100)
-                NumberRow(title: tr("Charge"), value: $weight, unit: tr("kg"))
+                NumberRow(title: tr("Charge"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)
             }
             Section {
                 Button(role: .destructive) {

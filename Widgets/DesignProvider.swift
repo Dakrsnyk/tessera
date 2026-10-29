@@ -145,7 +145,12 @@ enum TimelinePlanner {
             var dates = [now]
             if let rest = payload.domains.fitness.active?.restEndsAt, rest > now { dates.append(rest) }
             return Plan(dates: dates, policy: .after(min(halfHour, midnight)))
-        case .deadline, .nextClass, .timetable, .studentDashboard, .flight, .nextActivity, .now, .myDay, .morning:
+        case .timetable:
+            // One frame at each start and end of an event (and at midnight), as the day's answer changes then.
+            // iOS may run a frame a little late: the system doesn't promise the exact second.
+            let dates = Array(ScheduleGlance.transitions(payload.domains.student, from: now).prefix(48))
+            return Plan(dates: dates, policy: .after(midnight.addingTimeInterval(60)))
+        case .deadline, .nextClass, .studentDashboard, .flight, .nextActivity, .now, .myDay, .morning:
             return Plan(dates: every(15, count: 4), policy: .after(now.addingTimeInterval(60 * 60)))
         case .portfolio, .allocation, .topMover, .watchlist, .marketOverview, .companyStock:
             // Prices: as often as iOS allows (see `LivePrices.reloadInterval`).

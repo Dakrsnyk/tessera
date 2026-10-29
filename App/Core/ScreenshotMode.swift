@@ -28,7 +28,7 @@ enum ScreenshotMode {
         // `-screenshotStyle ocean -screenshotAppearance dark`: the app style to capture with (default otherwise).
         let defaults = UserDefaults.standard
         model.updateSettings {
-            $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(named:)) ?? .jade
+            $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(named:)) ?? .sapphire
             $0.appearance = defaults.string(forKey: "screenshotAppearance").flatMap(AppearanceMode.init(rawValue:)) ?? .system
             $0.hasChosenStyle = true
             $0.hasCompletedProfileSetup = true

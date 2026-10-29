@@ -85,8 +85,8 @@ final class AppModel {
         designs = store.designs
         content = store.content
         settings = store.settings
-        AppStyle.current = AppStyle.style(settings.appStyle)
         premium = store.premium
+        AppStyle.current = AppStyle.style(settings.appStyle, isPremium: isPremium)
         events = CalendarService.upcoming(hours: 7 * 24, limit: 12)
         nutrition = store.state(NutritionState.self)
         fitness = store.state(FitnessState.self)
@@ -454,7 +454,7 @@ final class AppModel {
         change(&settings)
         store.settings = settings
         // Before any view reads the new settings, so rebuilt screens draw with the new style.
-        AppStyle.current = AppStyle.style(settings.appStyle)
+        AppStyle.current = AppStyle.style(settings.appStyle, isPremium: isPremium)
         if before.cryptoCurrency != settings.cryptoCurrency {
             crypto = [:]
         }
@@ -472,6 +472,7 @@ final class AppModel {
         guard state != premium else { return }
         premium = state
         store.premium = state
+        AppStyle.current = AppStyle.style(settings.appStyle, isPremium: isPremium)
         scheduleWidgetReload()
     }
 
@@ -604,7 +605,8 @@ final class AppModel {
     }
 
     func setStyle(_ style: AppStyleID) {
-        guard style != settings.appStyle else { return }
+        // Only Saphir is free: the same lock as everywhere (a free person never saves a Premium color).
+        guard style != settings.appStyle, isPremium || !style.isPremium else { return }
         updateSettings { $0.appStyle = style }
     }
 
@@ -628,6 +630,8 @@ final class AppModel {
 
     /// Erases everything the user created. Premium status is kept (it belongs to the App Store account).
     func resetAllData() {
+        // The Stripe key lives in the keychain, outside the shared files: it goes with the data.
+        SecretStore.delete(StripeSync.keychainAccount)
         for design in designs {
             if case let .photo(name) = design.background { ImageStore.delete(named: name) }
             for photo in design.options.photos { ImageStore.delete(named: photo.file) }
@@ -639,6 +643,7 @@ final class AppModel {
         // The look of the app is a preference, not data: it stays.
         fresh.appStyle = settings.appStyle
         fresh.appearance = settings.appearance
+        fresh.unitSystem = settings.unitSystem
         fresh.hasChosenStyle = settings.hasChosenStyle
         fresh.profileName = settings.profileName
         fresh.hasCompletedProfileSetup = settings.hasCompletedProfileSetup

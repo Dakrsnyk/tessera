@@ -127,7 +127,7 @@ struct DataItemRow: View {
                 }
             }
         case .weight:
-            ProfileNumberField(title: tr("Poids"), unit: tr("kg"), value: Binding(get: { model.profile.weightKg }, set: { model.setWeight($0) }), identifier: "data-weight")
+            ProfileNumberField(title: tr("Poids"), unit: model.settings.unitSystem.weightUnit, value: Binding<Double?>(get: { model.profile.weightKg }, set: { model.setWeight($0) }).weight(in: model.settings.unitSystem), identifier: "data-weight")
         case .stepGoal:
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 6) {

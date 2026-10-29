@@ -211,10 +211,14 @@ enum InsightEngine {
             facts.append(tr("Tâches : \(open)"))
             parts.append(open == 0 ? tr("toutes tes tâches sont faites") : tr("\(Fmt.plural(open, tr("tâche"), tr("tâches"))) à faire"))
         }
-        let priorities = payload.domains.productivity.priorities
-        if !priorities.isEmpty {
-            let done = priorities.filter { $0.isDone(on: now) }.count
-            facts.append(tr("Priorités : \(done) sur \(priorities.count)"))
+        // Active Top 3 plus what was validated today (older validated tasks live in « Mes tâches réalisées »).
+        let productivity = payload.domains.productivity
+        let doneToday = productivity.completedPriorities.filter { item in
+            item.completedAt.map { DateMath.isSameDay($0, now) } ?? false
+        }.count
+        let totalPriorities = productivity.activePriorities.count + doneToday
+        if totalPriorities > 0 {
+            facts.append(tr("Priorités : \(doneToday) sur \(totalPriorities)"))
         }
         let nutrition = payload.domains.nutrition
         let eaten = NutritionMath.totals(nutrition, on: now).kcal

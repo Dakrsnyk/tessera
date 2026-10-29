@@ -2,7 +2,7 @@
 
 En vigueur le 15 octobre 2026 · version 2.1
 
-Version en ligne, en français et en anglais : https://claude.ai/artifact/M2hUyRzRz9zxoSMJ4PJ5X8 (source : `docs/legal/privacy.html`). Ce fichier reprend le texte français ; les deux doivent rester identiques.
+La version de référence, à jour (3.0 du 29 octobre 2026), est publiée en français et en anglais : https://ardane.app/privacy.html. Ce fichier est une copie ancienne (2.1) : le site fait foi.
 
 **En bref**
 

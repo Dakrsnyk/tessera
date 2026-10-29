@@ -13,7 +13,7 @@ struct WorkoutActivityAttributes: Codable, Hashable {
         var exercise: String
         var setNumber: Int
         var sets: Int
-        /// « 10 × 60 kg ».
+        /// « 10 × 60 kg » (or « 10 × 132,3 lb »).
         var load: String
         var doneSets: Int
         var totalSets: Int
@@ -48,10 +48,10 @@ extension WorkoutActivityAttributes: ActivityAttributes {}
 
 enum WorkoutLiveActivity {
     /// What the Live Activity shows for this state, or nil when no session is in progress.
-    static func content(for state: FitnessState, now: Date = Date()) -> (WorkoutActivityAttributes, WorkoutActivityAttributes.ContentState)? {
+    static func content(for state: FitnessState, now: Date = Date(), unitSystem: UnitSystem = .metric) -> (WorkoutActivityAttributes, WorkoutActivityAttributes.ContentState)? {
         guard let session = state.active, !session.isFinished, let exercise = session.currentExercise else { return nil }
         let load = exercise.weight > 0
-            ? tr("\(exercise.reps) × \(Self.kilograms(exercise.weight)) kg")
+            ? tr("\(exercise.reps) × \(Units.loadText(kilograms: exercise.weight, in: unitSystem))")
             : tr("\(exercise.reps) répétitions")
         var content = WorkoutActivityAttributes.ContentState(
             exercise: exercise.name,
@@ -71,10 +71,6 @@ enum WorkoutLiveActivity {
         return (WorkoutActivityAttributes(routineName: session.routineName), content)
     }
 
-    private static func kilograms(_ value: Double) -> String {
-        value.rounded() == value ? String(Int(value)) : String(format: "%.1f", value).replacingOccurrences(of: ".", with: ",")
-    }
-
     /// Starts, updates or ends the Live Activity to match the workout. Safe to call often.
     static func sync(_ state: FitnessState, now: Date = Date()) async {
         #if canImport(ActivityKit) && os(iOS)
@@ -88,7 +84,7 @@ enum WorkoutLiveActivity {
             return
         }
         #endif
-        guard let (attributes, content) = Self.content(for: state, now: now) else {
+        guard let (attributes, content) = Self.content(for: state, now: now, unitSystem: SharedStore.shared.settings.unitSystem) else {
             for activity in running {
                 await activity.end(nil, dismissalPolicy: .immediate)
             }
@@ -122,7 +118,7 @@ struct WorkoutActivityView: View {
     var now = Date()
 
     /// The app style chosen in Ardane: the Lock Screen follows its colors and its font.
-    private var style: AppStyle { AppStyle.style(SharedStore.shared.settings.appStyle) }
+    private var style: AppStyle { AppStyle.stored() }
     private var accent: Color { style.accent }
 
     var body: some View {
@@ -164,7 +160,7 @@ struct WorkoutActivityView: View {
 
     /// The Lock Screen background: the style's screen color, or its card color at night.
     static var background: Color {
-        let style = AppStyle.style(SharedStore.shared.settings.appStyle)
+        let style = AppStyle.stored()
         return Color(light: style.screenLight, dark: style.cardDark)
     }
 

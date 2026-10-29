@@ -107,7 +107,7 @@ enum Encouragements {
             return afterMeal(old: old, new: new, now: now, log: log)
         }
         if let old = before as? FitnessState, let new = after as? FitnessState {
-            return afterWorkout(old: old, new: new, now: now, log: log).map { Outcome(message: $0) }
+            return afterWorkout(old: old, new: new, now: now, log: log, unitSystem: settings.unitSystem).map { Outcome(message: $0) }
         }
         if let old = before as? StudentState, let new = after as? StudentState {
             return afterStudy(old: old, new: new, now: now, log: log).map { Outcome(message: $0) }
@@ -187,7 +187,7 @@ enum Encouragements {
 
     /// After a session that reached the history (a cancelled one never does): a new record first,
     /// then the weekly goal reached, then a plain « bravo ». One message, never several.
-    static func afterWorkout(old: FitnessState, new: FitnessState, now: Date, log: EncouragementLog) -> Message? {
+    static func afterWorkout(old: FitnessState, new: FitnessState, now: Date, log: EncouragementLog, unitSystem: UnitSystem = .metric) -> Message? {
         guard let session = new.history.last, !session.sets.isEmpty,
               !old.history.contains(where: { $0.id == session.id }) else { return nil }
         // Finished now, not an old session put back.
@@ -210,9 +210,9 @@ enum Encouragements {
             if gain > 0.001, gain > (best?.gain ?? 0) { best = (record, gain) }
         }
         if let record = best?.record, allows(.progress, at: date, now: now, log: log) {
-            let weight = TF.decimal(record.weight, record.weight.rounded() == record.weight ? 0 : 1)
+            let weight = Units.loadText(kilograms: record.weight, in: unitSystem)
             return Message(kind: .progress, title: tr("Belle progression"),
-                           body: tr("Nouveau record sur \(record.exercise) : \(weight) kg × \(Fmt.number(record.reps))."), date: date)
+                           body: tr("Nouveau record sur \(record.exercise) : \(weight) × \(Fmt.number(record.reps))."), date: date)
         }
 
         // The weekly goal reached with this session.

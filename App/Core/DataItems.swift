@@ -393,13 +393,13 @@ extension AppModel {
             return today == 0 ? tr("Rien noté aujourd'hui") : Fmt.plural(today, tr("aliment noté aujourd'hui"), tr("aliments notés aujourd'hui"))
         case .routines: return Fmt.plural(fitness.routines.count, tr("séance"), tr("séances"))
         case .weeklyWorkouts: return tr("\(fitness.weeklyGoal) par semaine")
-        case .weight: return profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") }
+        case .weight: return profile.weightKg.map { Units.weightText(kilograms: $0, in: settings.unitSystem) }
         case .stepGoal: return profile.stepGoal.map { tr("\(Fmt.number($0)) pas") }
         case .habits: return Fmt.plural(content.habits.count, tr("habitude"), tr("habitudes"))
         case .tasks:
             let open = content.tasks.filter { !$0.isDone }.count
             return Fmt.plural(open, tr("tâche à faire"), tr("tâches à faire"))
-        case .priorities: return Fmt.plural(productivity.priorities.count, tr("priorité"), tr("priorités"))
+        case .priorities: return Fmt.plural(productivity.activePriorities.count, tr("priorité"), tr("priorités"))
         case .projects: return Fmt.plural(productivity.projects.count, tr("projet"), tr("projets"))
         case .deadlines: return Fmt.plural(productivity.deadlines.count, tr("échéance"), tr("échéances"))
         case .counters: return Fmt.plural(productivity.counters.count, tr("compteur"), tr("compteurs"))

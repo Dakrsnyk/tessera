@@ -283,7 +283,7 @@ struct TopicForm: View {
     }
 
     private var weightBinding: Binding<Double?> {
-        Binding(get: { model.profile.weightKg }, set: { model.setWeight($0) })
+        Binding<Double?>(get: { model.profile.weightKg }, set: { model.setWeight($0) }).weight(in: model.settings.unitSystem)
     }
 
     /// Age, height and weight side by side (also used by the nutrition calculation).
@@ -291,8 +291,13 @@ struct TopicForm: View {
         HStack(spacing: 8) {
             ProfileNumberField(title: tr("Âge"), unit: tr("ans"), value: ageBinding, decimals: false, identifier: "profile-age")
                 .disabled(model.life.birthday != nil)
-            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
-            ProfileNumberField(title: tr("Poids"), unit: tr("kg"), value: weightBinding, identifier: "profile-weight")
+            if model.settings.unitSystem == .imperial {
+                ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("ft"), value: heightBinding.heightFeet(), decimals: false, identifier: "profile-height-feet")
+                ProfileNumberField(title: tr("Pouces"), unit: tr("in"), value: heightBinding.heightInches(), decimals: false, identifier: "profile-height-inches")
+            } else {
+                ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
+            }
+            ProfileNumberField(title: tr("Poids"), unit: model.settings.unitSystem.weightUnit, value: weightBinding, identifier: "profile-weight")
         }
     }
 

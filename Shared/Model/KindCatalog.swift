@@ -230,7 +230,7 @@ enum KindCatalog {
         KindInfo(kind: .semesterProgress, title: tr("Session"), summary: tr("L'avancement de ta session ou de ton semestre."), category: .student, symbol: "calendar.badge.clock", isPremium: false, families: SM + [circ, inline], keywords: ["semestre", "session", "progression"], space: .student, isNew: true),
         KindInfo(kind: .flashcard, title: tr("Fiche de révision"), summary: tr("Une fiche à retourner depuis l'écran d'accueil, avec répétition espacée."), category: .student, symbol: "rectangle.on.rectangle.angled", isPremium: true, families: SM, keywords: ["flashcards", "fiches", "révision", "mémoriser"], space: .student, isNew: true, isInteractive: true),
         KindInfo(kind: .studyHours, title: tr("Heures d'étude"), summary: tr("Tes heures d'étude de la semaine face à ton objectif."), category: .student, symbol: "clock.badge.checkmark", isPremium: true, families: SML, keywords: ["étude", "heures", "révisions"], space: .student, isNew: true),
-        KindInfo(kind: .timetable, title: tr("Horaire"), summary: tr("Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous."), category: .student, symbol: "list.bullet.rectangle.portrait", isPremium: false, families: SML, keywords: ["horaire", "emploi du temps", "cours"], space: .student, isNew: true),
+        KindInfo(kind: .timetable, title: tr("Horaire"), summary: tr("Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous."), category: .student, symbol: "list.bullet.rectangle.portrait", isPremium: false, families: SML + [rect, inline], keywords: ["horaire", "emploi du temps", "cours"], space: .student, isNew: true),
     ]
 
     // MARK: Voyage

@@ -381,9 +381,9 @@ enum DailyBrief {
         return result
     }
 
-    /// The Top 3 as checks, done or not today (empty without any task).
+    /// The active Top 3 as checks (empty without any task; a validated task is no longer here).
     static func priorityChecks(_ state: ProductivityState, now: Date) -> [Check] {
-        state.priorities.prefix(ProductivityState.maxPriorities).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
+        state.activePriorities.prefix(ProductivityState.maxPriorities).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
     }
 
     /// The cards as the person arranged them: hidden ones left out, the chosen order first (the

@@ -20,21 +20,20 @@ enum ProductivityTiles {
     }
 
     static func priorities(_ state: ProductivityState, now: Date) -> Tile {
-        let items = Array(state.priorities.prefix(3))
+        // Validated tasks leave the widget (they stay stored in « Mes tâches réalisées »).
+        let items = Array(state.activePriorities.prefix(3))
         guard !items.isEmpty else {
             return .empty(tr("Top 3 du jour"), symbol: "3.circle", message: tr("Choisis tes trois priorités dans Ardane, espace Productivité."))
         }
-        let done = items.filter { $0.isDone(on: now) }.count
         var tile = Tile(title: tr("Top 3 du jour"), symbol: "3.circle")
-        tile.value = "\(done)/\(items.count)"
-        tile.caption = done == items.count ? tr("Journée gagnée") : tr("priorités faites")
+        tile.value = "\(items.count)"
+        tile.caption = tr("priorités à faire")
         tile.rows = items.map { item in
-            TileRow(id: item.id.uuidString, title: item.title, isDone: item.isDone(on: now), action: .togglePriority(item.id.uuidString))
+            TileRow(id: item.id.uuidString, title: item.title, isDone: false, action: .togglePriority(item.id.uuidString))
         }
         tile.compactRows = true
-        tile.gauge = Double(done) / Double(items.count)
-        tile.shortValue = "\(done)/\(items.count)"
-        tile.inline = tr("Priorités \(done)/\(items.count)")
+        tile.shortValue = "\(items.count)"
+        tile.inline = tr("Priorités à faire : \(items.count)")
         return tile
     }
 

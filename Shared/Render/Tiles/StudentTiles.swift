@@ -58,18 +58,19 @@ enum StudentTiles {
         guard let next = StudentMath.nextClass(state, at: now) else {
             return .empty(tr("Prochain cours"), symbol: "book.closed", message: hint)
         }
-        let course = state.course(next.slot.courseID)
+        // The title of that day (an exception such as « Examen » included).
+        let courseTitle = state.title(of: next.slot)
         let ongoing = next.start <= now
         var tile = Tile(title: ongoing ? tr("Cours actuel") : tr("Prochain cours"), symbol: "book.closed")
         var detail: [String] = []
         if !next.slot.room.isEmpty { detail.append(tr("Salle \(next.slot.room)")) }
         if ongoing {
             // The course in progress is the headline; when it ends is the caption.
-            tile.value = course?.name ?? tr("Cours")
+            tile.value = courseTitle
             tile.caption = tr("En cours · fin à \(TF.time(next.end, context))")
         } else {
             tile.value = TF.time(next.start, context)
-            tile.caption = course?.name ?? tr("Cours")
+            tile.caption = courseTitle
             detail.append(TF.relativeTime(next.start, from: now))
         }
         tile.detail = detail.isEmpty ? nil : detail.joined(separator: " · ")
@@ -78,9 +79,9 @@ enum StudentTiles {
         }
         let later = StudentMath.occurrences(state, on: next.start).filter { $0.start > next.start }
         tile.rows = later.prefix(3).map { item in
-            TileRow(id: item.slot.id.uuidString, title: courseName(state, item.slot.courseID), value: TF.time(item.start, context), detail: item.slot.room.isEmpty ? nil : tr("Salle \(item.slot.room)"), colorHex: state.course(item.slot.courseID)?.colorHex)
+            TileRow(id: item.slot.id.uuidString, title: state.title(of: item.slot), value: TF.time(item.start, context), detail: item.slot.room.isEmpty ? nil : tr("Salle \(item.slot.room)"), colorHex: state.colorHex(of: item.slot))
         }
-        tile.inline = ongoing ? tr("\(course?.name ?? tr("Cours")) en cours") : "\(course?.name ?? tr("Cours")) à \(TF.time(next.start, context))"
+        tile.inline = ongoing ? tr("\(courseTitle) en cours") : "\(courseTitle) à \(TF.time(next.start, context))"
         tile.shortValue = TF.time(next.start, context)
         return tile
     }
@@ -212,7 +213,27 @@ enum StudentTiles {
         return tile
     }
 
+    /// The Lock Screen: « Horaire Lundi », then the event in progress or the next one with its hours.
+    static func lockGlance(_ state: StudentState, context: RenderContext) -> Tile {
+        let glance = ScheduleGlance.compute(state, now: context.date)
+        let title = tr("Horaire \(glance.dayName)")
+        let symbol = "list.bullet.rectangle.portrait"
+        guard let event = glance.event else {
+            return .empty(title, symbol: symbol, message: glance.phase == .finished ? tr("Terminé pour aujourd'hui") : tr("Rien de prévu aujourd'hui"))
+        }
+        let name = state.title(of: event.slot)
+        let hours = "\(Fmt.time(event.start, uses24Hour: context.settings.uses24HourClock)) – \(Fmt.time(event.end, uses24Hour: context.settings.uses24HourClock))"
+        let line = glance.phase == .current ? tr("En cours : \(name)") : tr("Prochain : \(name)")
+        var tile = Tile(title: title, symbol: symbol)
+        tile.value = line
+        tile.caption = hours
+        tile.shortValue = Fmt.time(event.start, uses24Hour: context.settings.uses24HourClock)
+        tile.inline = "\(line) \(hours)"
+        return tile
+    }
+
     static func timetable(_ state: StudentState, context: RenderContext) -> Tile {
+        if context.family.isAccessory { return lockGlance(state, context: context) }
         if context.family == .systemLarge, !state.slots.isEmpty { return weekSchedule(state, context: context) }
         let now = context.date
         var day = now

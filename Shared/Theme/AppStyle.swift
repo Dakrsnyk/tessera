@@ -96,8 +96,19 @@ struct AppStyle: Identifiable {
         all.first { $0.id == id } ?? all[0]
     }
 
+    /// The style drawn for a saved choice: Saphir for a free plan whatever is saved.
+    static func style(_ id: AppStyleID, isPremium: Bool) -> AppStyle {
+        style(id.effective(isPremium: isPremium))
+    }
+
+    /// The style drawn now from the stored settings and Premium status (Live Activities, launch screen).
+    static func stored() -> AppStyle {
+        let store = SharedStore.shared
+        return style(store.settings.appStyle, isPremium: store.premium.isPremium())
+    }
+
     /// The saved style, used before the first view applies the settings (launch screen).
-    static var current: AppStyle = style(SharedStore.shared.settings.appStyle)
+    static var current: AppStyle = stored()
 }
 
 extension AppearanceMode {
@@ -179,8 +190,8 @@ extension ShapeStyle where Self == AppFill {
 
 extension View {
     /// Applies the chosen style: accent, backgrounds, font and light or dark mode.
-    func appStyle(_ settings: AppSettings) -> some View {
-        let style = AppStyle.style(settings.appStyle)
+    func appStyle(_ settings: AppSettings, isPremium: Bool = SharedStore.shared.premium.isPremium()) -> some View {
+        let style = AppStyle.style(settings.appStyle, isPremium: isPremium)
         return self
             .environment(\.appStyle, style)
             .tint(style.accent)

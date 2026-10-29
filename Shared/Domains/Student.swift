@@ -60,8 +60,14 @@ struct ClassSlot: Codable, Hashable, Identifiable {
     var date: Date?
     /// The days (« yyyy-MM-dd ») a weekly entry doesn't take place: a class cancelled once.
     var skippedDays: [String] = []
+    /// A color chosen for this entry (« RRGGBB »); nil = the color of its course or of its kind.
+    var colorHex: String?
+    /// What changes on one day of a weekly entry (« yyyy-MM-dd » → exception): « Examen » this Monday only.
+    var overrides: [String: ClassOverride] = [:]
+    /// Never saved: the title of the exception applied by `resolved(on:)`, shown instead of the course's name.
+    var titleOverride: String = ""
 
-    enum CodingKeys: String, CodingKey { case id, courseID, weekday, startMinute, endMinute, room, kind, title, date, skippedDays }
+    enum CodingKeys: String, CodingKey { case id, courseID, weekday, startMinute, endMinute, room, kind, title, date, skippedDays, colorHex, overrides }
 
     init(courseID: UUID?, weekday: Int, startMinute: Int, endMinute: Int, room: String = "", kind: ScheduleKind = .course, title: String = "", date: Date? = nil) {
         self.courseID = courseID
@@ -87,6 +93,8 @@ struct ClassSlot: Codable, Hashable, Identifiable {
         title = try c.decodeIfPresent(String.self, forKey: .title) ?? ""
         date = try c.decodeIfPresent(Date.self, forKey: .date)
         skippedDays = try c.decodeIfPresent([String].self, forKey: .skippedDays) ?? []
+        colorHex = (try? c.decodeIfPresent(String.self, forKey: .colorHex)) ?? nil
+        overrides = (try? c.decodeIfPresent([String: ClassOverride].self, forKey: .overrides)) ?? [:]
     }
 
     /// Whether the entry falls on the day: on its date when it happens once, on its weekday otherwise
@@ -95,6 +103,75 @@ struct ClassSlot: Codable, Hashable, Identifiable {
         if let date { return DateMath.isSameDay(date, day) }
         return weekday == FitnessMath.isoWeekday(day)
     }
+
+    /// Whether a weekly entry is cancelled on that day.
+    func isCancelled(on day: Date) -> Bool {
+        date == nil && skippedDays.contains(DateMath.dayKey(day))
+    }
+
+    /// THE function every display uses: the entry as it really is on that day. nil when it doesn't fall
+    /// on it or is cancelled that day; otherwise a copy with the day's exception applied (title, times,
+    /// place, color). The other days and the stored entry are untouched.
+    func resolved(on day: Date) -> ClassSlot? {
+        guard falls(on: day), !isCancelled(on: day) else { return nil }
+        return applyingOverride(on: day)
+    }
+
+    /// Same as `resolved(on:)` but a cancelled day still gives its entry (to show it crossed out).
+    func applyingOverride(on day: Date) -> ClassSlot? {
+        guard falls(on: day) else { return nil }
+        var result = self
+        guard date == nil, let exception = overrides[DateMath.dayKey(day)] else { return result }
+        if let newTitle = exception.title?.trimmed, !newTitle.isEmpty {
+            result.title = newTitle
+            result.titleOverride = newTitle
+        }
+        let start = exception.startMinute ?? startMinute
+        let end = exception.endMinute ?? endMinute
+        if start >= 0, end <= 24 * 60, end > start {
+            result.startMinute = start
+            result.endMinute = end
+        }
+        if let room = exception.room { result.room = room }
+        if let hex = exception.colorHex, !hex.isEmpty { result.colorHex = hex }
+        return result
+    }
+
+    /// The exception that turns `self` into `edited` on one day (only what differs); nil when nothing differs.
+    func override(making edited: ClassSlot) -> ClassOverride? {
+        var exception = ClassOverride()
+        let newTitle = edited.title.trimmed
+        if newTitle != title.trimmed, !(kind == .course && newTitle.isEmpty) { exception.title = newTitle }
+        if edited.startMinute != startMinute { exception.startMinute = edited.startMinute }
+        if edited.endMinute != endMinute { exception.endMinute = edited.endMinute }
+        if edited.room != room { exception.room = edited.room }
+        if edited.colorHex != colorHex { exception.colorHex = edited.colorHex }
+        return exception.isEmpty ? nil : exception
+    }
+}
+
+/// What changes on one day of a weekly entry. A field left nil stays as the series has it.
+struct ClassOverride: Codable, Hashable {
+    var title: String?
+    var startMinute: Int?
+    var endMinute: Int?
+    var room: String?
+    var colorHex: String?
+
+    enum CodingKeys: String, CodingKey { case title, startMinute, endMinute, room, colorHex }
+
+    init() {}
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        title = (try? c.decodeIfPresent(String.self, forKey: .title)) ?? nil
+        startMinute = (try? c.decodeIfPresent(Int.self, forKey: .startMinute)) ?? nil
+        endMinute = (try? c.decodeIfPresent(Int.self, forKey: .endMinute)) ?? nil
+        room = (try? c.decodeIfPresent(String.self, forKey: .room)) ?? nil
+        colorHex = (try? c.decodeIfPresent(String.self, forKey: .colorHex)) ?? nil
+    }
+
+    var isEmpty: Bool { title == nil && startMinute == nil && endMinute == nil && room == nil && colorHex == nil }
 }
 
 struct Exam: Codable, Hashable, Identifiable {
@@ -183,13 +260,15 @@ struct StudentState: Codable, Hashable {
 
     /// What a schedule entry is called: its course for a class, its own name for another event.
     func title(of slot: ClassSlot) -> String {
+        if !slot.titleOverride.isEmpty { return slot.titleOverride }
         if slot.kind == .course { return course(slot.courseID)?.name ?? tr("Cours") }
         return slot.title.trimmed.isEmpty ? slot.kind.title : slot.title
     }
 
     /// Its color: the course's for a class, the kind's for another event.
     func colorHex(of slot: ClassSlot) -> String {
-        slot.kind == .course ? (course(slot.courseID)?.colorHex ?? ScheduleKind.course.colorHex) : slot.kind.colorHex
+        if let chosen = slot.colorHex, !chosen.isEmpty { return chosen }
+        return slot.kind == .course ? (course(slot.courseID)?.colorHex ?? ScheduleKind.course.colorHex) : slot.kind.colorHex
     }
 
     func course(_ id: UUID?) -> Course? {
@@ -256,27 +335,60 @@ struct StudentState: Codable, Hashable {
         slots[index].skippedDays.removeAll { $0 == key }
         if cancelled { slots[index].skippedDays.append(key) }
     }
+
+    /// Deletes one occurrence of a weekly entry (its other days stay); a one-off event is removed.
+    mutating func deleteOccurrence(slot id: UUID, on day: Date) {
+        guard let index = slots.firstIndex(where: { $0.id == id }) else { return }
+        guard slots[index].date == nil else { slots.remove(at: index); return }
+        let key = DateMath.dayKey(day)
+        slots[index].overrides[key] = nil
+        if !slots[index].skippedDays.contains(key) { slots[index].skippedDays.append(key) }
+    }
+
+    /// Deletes the whole series (or the one-off event).
+    mutating func deleteSeries(slot id: UUID) {
+        slots.removeAll { $0.id == id }
+    }
+
+    /// Sets (or clears, with nil) the exception of one day of a weekly entry.
+    mutating func setOverride(_ exception: ClassOverride?, slot id: UUID, on day: Date) {
+        guard let index = slots.firstIndex(where: { $0.id == id }), slots[index].date == nil else { return }
+        let key = DateMath.dayKey(day)
+        if let exception, !exception.isEmpty { slots[index].overrides[key] = exception } else { slots[index].overrides[key] = nil }
+    }
 }
 
 enum StudentMath {
     struct ClassOccurrence: Hashable {
+        /// The entry as it is that day (exception applied): what every display reads.
         let slot: ClassSlot
         let start: Date
         let end: Date
+        /// The stored entry (without the day's exception): what an editor opens.
+        let base: ClassSlot
+
+        init(slot: ClassSlot, start: Date, end: Date, base: ClassSlot? = nil) {
+            self.slot = slot
+            self.start = start
+            self.end = end
+            self.base = base ?? slot
+        }
 
         /// A weekly entry that doesn't take place this time.
-        var isCancelled: Bool { slot.skippedDays.contains(DateMath.dayKey(start)) }
+        var isCancelled: Bool { base.skippedDays.contains(DateMath.dayKey(start)) }
     }
 
     /// What the day holds: the weekly entries of its weekday and the events of its date. A weekly
     /// entry cancelled that day is left out, unless asked for (to show it crossed out and bring it back).
     static func occurrences(_ state: StudentState, on day: Date, includingCancelled: Bool = false) -> [ClassOccurrence] {
         // Wall-clock times of that day: 9:00 stays 9:00 on the days the clocks change.
-        state.slots.filter { $0.falls(on: day) }.map { slot in
-            ClassOccurrence(
+        state.slots.compactMap { base -> ClassOccurrence? in
+            guard let slot = base.applyingOverride(on: day) else { return nil }
+            return ClassOccurrence(
                 slot: slot,
                 start: DateMath.date(on: day, minute: slot.startMinute),
-                end: DateMath.date(on: day, minute: slot.endMinute)
+                end: DateMath.date(on: day, minute: slot.endMinute),
+                base: base
             )
         }
         .filter { includingCancelled || !$0.isCancelled }

@@ -10,7 +10,7 @@ final class AppearanceAndStoreTests: XCTestCase {
         let settings = try JSONDecoder().decode(AppSettings.self, from: old)
         XCTAssertTrue(settings.hasCompletedOnboarding)
         XCTAssertEqual(settings.currencyCode, "EUR")
-        XCTAssertEqual(settings.appStyle, .jade)
+        XCTAssertEqual(settings.appStyle, .sapphire)
         XCTAssertEqual(settings.appearance, .system)
         XCTAssertFalse(settings.hasChosenStyle, "Existing installs are asked for a style once")
         XCTAssertEqual(settings.profileName, "")

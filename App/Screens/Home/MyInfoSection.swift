@@ -21,8 +21,8 @@ extension AppModel {
         switch topic {
         case .sport:
             add("goal", "target", tr("Objectif"), profile.fitnessGoal?.title)
-            add("weight", "scalemass", tr("Poids"), profile.weightKg.map { tr("\(ProfileNumberField.format($0)) kg") })
-            add("height", "ruler", tr("Taille", context: "height"), profile.heightCm.map(Self.heightText))
+            add("weight", "scalemass", tr("Poids"), profile.weightKg.map { Units.weightText(kilograms: $0, in: settings.unitSystem) })
+            add("height", "ruler", tr("Taille", context: "height"), profile.heightCm.map { Units.heightText(centimetres: $0, in: settings.unitSystem) })
             add("age", "person", tr("Âge"), age.map { tr("\($0) ans") })
             add("workouts", "calendar", tr("Séances"), profile.knows(.weeklyWorkouts) ? tr("\(fitness.weeklyGoal) par semaine") : nil)
             add("level", "chart.bar.fill", tr("Niveau"), profile.fitnessLevel?.title)
@@ -90,10 +90,5 @@ extension AppModel {
         let chosen = profile.topics
         let others = ProfileTopic.allCases.filter { !chosen.contains($0) && !facts(for: $0).isEmpty }
         return chosen + others
-    }
-
-    static func heightText(_ centimetres: Double) -> String {
-        let metres = centimetres / 100
-        return String(format: "%.2f m", metres).replacingOccurrences(of: ".", with: ",")
     }
 }

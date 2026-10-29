@@ -547,15 +547,15 @@ struct ExerciseDetailView: View {
                         Text(DateMath.isSameDay(last.date, Date()) ? tr("Aujourd'hui") : tr("Dernière séance · \(Fmt.shortDay(last.date))"))
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(.secondary)
-                        Text(last.sets.map { $0.weight > 0 ? tr("\(ProfileNumberField.format($0.weight)) kg × \($0.reps)") : tr("\($0.reps) reps") }.joined(separator: " · "))
+                        Text(last.sets.map { $0.weight > 0 ? tr("\(Units.loadText(kilograms: $0.weight, in: model.settings.unitSystem)) × \($0.reps)") : tr("\($0.reps) reps") }.joined(separator: " · "))
                             .font(.subheadline.weight(.medium))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     HStack(spacing: 10) {
                         if let best, best.weight > 0 {
-                            MiniStat(title: tr("Record"), value: "\(ProfileNumberField.format(best.weight))", unit: tr("kg × \(best.reps)"), detail: tr("1RM ≈ \(TF.int(FitnessMath.oneRepMax(best))) kg"))
+                            MiniStat(title: tr("Record"), value: Units.loadNumber(kilograms: best.weight, in: model.settings.unitSystem), unit: tr("\(model.settings.unitSystem.weightUnit) × \(best.reps)"), detail: tr("1RM ≈ \(Units.loadText(kilograms: FitnessMath.oneRepMax(best), in: model.settings.unitSystem, digits: 0))"))
                         }
-                        MiniStat(title: tr("Volume"), value: TF.int(last.volume), unit: tr("kg"), detail: tr("dernière séance"))
+                        MiniStat(title: tr("Volume"), value: Units.loadNumber(kilograms: last.volume, in: model.settings.unitSystem, digits: 0), unit: model.settings.unitSystem.weightUnit, detail: tr("dernière séance"))
                         MiniStat(title: tr("Fréquence"), value: "\(recent)", unit: "×", detail: tr("en 30 jours"))
                     }
                     if history.count >= 3, !model.isPremium {
@@ -618,7 +618,7 @@ struct AddToRoutineSheet: View {
             Section(tr("Séries")) {
                 Stepper(tr("Séries : \(sets)"), value: $sets, in: 1...12)
                 Stepper(tr("Répétitions : \(reps)"), value: $reps, in: 1...100)
-                NumberRow(title: tr("Charge"), value: $weight, unit: tr("kg"))
+                NumberRow(title: tr("Charge"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)
                 Stepper(tr("Repos : \(rest) s"), value: $rest, in: 15...600, step: 15)
             }
             Section {

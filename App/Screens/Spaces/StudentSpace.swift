@@ -205,9 +205,38 @@ struct SlotEditor: View {
     /// The day it was opened from: a weekly entry can be cancelled that day only.
     var day: Date?
     @State private var confirmsDelete = false
+    @State private var asksScope = false
+    /// The entry as stored (without the day's exception), and as it read when opened (that day's exception applied).
+    private let base: ClassSlot
+    private let opening: ClassSlot
+
+    init(slot: ClassSlot, day: Date? = nil) {
+        base = slot
+        let effective = day.flatMap { slot.applyingOverride(on: $0) } ?? slot
+        opening = effective
+        _slot = State(initialValue: effective)
+        self.day = day
+    }
 
     /// Already saved (opened to change it), rather than being made.
     private var isSaved: Bool { model.student.slots.contains { $0.id == slot.id } }
+
+    /// An occurrence of a saved weekly series, opened from its day: it can change or go alone.
+    private var isOccurrence: Bool {
+        guard isSaved, base.date == nil, slot.date == nil, let day else { return false }
+        return FitnessMath.isoWeekday(day) == base.weekday
+    }
+
+    /// Only what an exception can hold changed (title, times, place, color), not the type, the course or the day.
+    private var changesOnlyThisKind: Bool {
+        guard isOccurrence, slot.kind == opening.kind, slot.courseID == opening.courseID, slot.weekday == opening.weekday else { return false }
+        return slot.title != opening.title || slot.startMinute != opening.startMinute || slot.endMinute != opening.endMinute
+            || slot.room != opening.room || slot.colorHex != opening.colorHex
+    }
+
+    private var defaultColorHex: String {
+        slot.kind == .course ? (model.student.course(slot.courseID)?.colorHex ?? ScheduleKind.course.colorHex) : slot.kind.colorHex
+    }
 
     /// What else happens at that time, that day (the schedule and the calendar), shown as a warning: two
     /// things at once stay possible, side by side in the calendar.
@@ -218,7 +247,7 @@ struct SlotEditor: View {
     }
 
     var body: some View {
-        SheetForm(title: isSaved ? tr("Événement") : tr("Nouvel événement"), canSave: slot.endMinute > slot.startMinute, closesWithBackArrow: isSaved, onSave: save) {
+        SheetForm(title: isSaved ? tr("Événement") : tr("Nouvel événement"), canSave: slot.endMinute > slot.startMinute, dismissesOnSave: !changesOnlyThisKind, closesWithBackArrow: isSaved, onSave: save) {
             // The kind of entry, chosen by the person: a class, work, an appointment or another event.
             Picker(tr("Type"), selection: $slot.kind) {
                 ForEach(ScheduleKind.allCases) { kind in
@@ -229,6 +258,11 @@ struct SlotEditor: View {
                 CoursePicker(selection: $slot.courseID, courses: model.student.courses)
             } else {
                 TextField(tr("Nom de l'événement"), text: $slot.title)
+            }
+            // One day of a series can carry its own title (« Examen » instead of the course's name).
+            if slot.kind == .course, isOccurrence {
+                TextField(tr("Titre de cette occurrence (facultatif)"), text: $slot.title)
+                    .accessibilityIdentifier("slot-occurrence-title")
             }
             Picker(tr("Quand"), selection: isOnce) {
                 Text(tr("Chaque semaine")).tag(false)
@@ -255,6 +289,7 @@ struct SlotEditor: View {
             MinuteTimePicker(title: tr("Fin"), minutes: $slot.endMinute)
             durationChips
             TextField(slot.kind == .course ? tr("Salle (facultatif)") : tr("Lieu (facultatif)"), text: $slot.room)
+            SlotColorRow(hex: $slot.colorHex, defaultHex: defaultColorHex)
             if !conflicts.isEmpty {
                 let list = conflicts.map { item in item.title + " (" + item.timeText + ")" }.joined(separator: ", ")
                 Label {
@@ -274,17 +309,38 @@ struct SlotEditor: View {
                 Button(role: .destructive) {
                     confirmsDelete = true
                 } label: {
-                    Label(slot.date == nil ? tr("Supprimer (toutes les semaines)") : tr("Supprimer l'événement"), systemImage: "trash")
+                    Label(isOccurrence ? tr("Supprimer") : (slot.date == nil ? tr("Supprimer (toutes les semaines)") : tr("Supprimer l'événement")), systemImage: "trash")
                 }
                 .accessibilityIdentifier("slot-delete")
             }
         }
         .confirmationDialog(tr("Supprimer cet événement ?"), isPresented: $confirmsDelete, titleVisibility: .visible) {
-            Button(tr("Supprimer"), role: .destructive) {
+            if isOccurrence, let day {
+                Button(tr("Supprimer uniquement cette occurrence"), role: .destructive) {
+                    let id = slot.id
+                    model.update(\.student) { $0.deleteOccurrence(slot: id, on: day) }
+                    dismiss()
+                }
+                .accessibilityIdentifier("slot-delete-occurrence")
+            }
+            Button(isOccurrence ? tr("Supprimer toute la série") : tr("Supprimer"), role: .destructive) {
                 let id = slot.id
-                model.update(\.student) { $0.slots.removeAll { $0.id == id } }
+                model.update(\.student) { $0.deleteSeries(slot: id) }
                 dismiss()
             }
+            .accessibilityIdentifier("slot-delete-series")
+        }
+        .confirmationDialog(tr("Modifier la série ?"), isPresented: $asksScope, titleVisibility: .visible) {
+            Button(tr("Cette occurrence seulement")) {
+                store(occurrenceOnly: true)
+                dismiss()
+            }
+            .accessibilityIdentifier("slot-scope-occurrence")
+            Button(tr("Toute la série")) {
+                store(occurrenceOnly: false)
+                dismiss()
+            }
+            .accessibilityIdentifier("slot-scope-series")
         }
     }
 
@@ -332,15 +388,91 @@ struct SlotEditor: View {
     }
 
     private func save() {
-        var saved = slot
-        // An event that happens once: its weekday follows its date, and it has no week to skip.
-        if let date = saved.date {
-            saved.weekday = FitnessMath.isoWeekday(date)
-            saved.skippedDays = []
+        // A change that one day can carry: ask whether it is that day only or the whole series.
+        if changesOnlyThisKind {
+            asksScope = true
+            return
+        }
+        store(occurrenceOnly: false)
+    }
+
+    /// Writes the entry: either the day's exception alone (the series stays as it was), or the series.
+    private func store(occurrenceOnly: Bool) {
+        var saved = base
+        saved.titleOverride = ""
+        saved.skippedDays = slot.skippedDays
+        if occurrenceOnly, let day {
+            let key = DateMath.dayKey(day)
+            saved.overrides[key] = base.override(making: slot)
+        } else {
+            // Only what was changed goes to the series: another day's exception or this day's stay out of it.
+            saved.kind = slot.kind
+            saved.courseID = slot.courseID
+            saved.weekday = slot.weekday
+            saved.date = slot.date
+            if slot.title != opening.title { saved.title = slot.title }
+            if slot.startMinute != opening.startMinute { saved.startMinute = slot.startMinute }
+            if slot.endMinute != opening.endMinute { saved.endMinute = slot.endMinute }
+            if slot.room != opening.room { saved.room = slot.room }
+            if slot.colorHex != opening.colorHex { saved.colorHex = slot.colorHex }
+            // An event that happens once: its weekday follows its date, and it has no week to skip.
+            if let date = saved.date {
+                saved.weekday = FitnessMath.isoWeekday(date)
+                saved.skippedDays = []
+                saved.overrides = [:]
+            }
         }
         model.update(\.student) { state in
             if let index = state.slots.firstIndex(where: { $0.id == saved.id }) { state.slots[index] = saved } else { state.slots.append(saved) }
         }
+    }
+}
+
+/// The color of an entry: the usual one (its course's or its type's), a few colors, or any color.
+private struct SlotColorRow: View {
+    @Binding var hex: String?
+    let defaultHex: String
+
+    private let palette = ["E5484D", "F2A33A", "F5D90A", "7FA33A", "30A46C", "12A594", "3366FF", "6E56CF", "D6409F", "8B8D98"]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(tr("Couleur")).font(.subheadline)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    swatch(defaultHex, isOn: hex == nil, label: tr("Couleur habituelle")) { hex = nil }
+                        .overlay {
+                            if hex != nil { Image(systemName: "arrow.uturn.backward").font(.caption2.weight(.bold)).foregroundStyle(.white) }
+                        }
+                    ForEach(palette, id: \.self) { value in
+                        swatch(value, isOn: hex?.uppercased() == value, label: tr("Couleur")) { hex = value }
+                    }
+                    ColorPicker(tr("Autre couleur"), selection: Binding(
+                        get: { Color(hex: hex ?? defaultHex) },
+                        set: { hex = $0.hexString }
+                    ), supportsOpacity: false)
+                    .labelsHidden()
+                    .frame(minWidth: 44, minHeight: 44)
+                }
+            }
+        }
+        .accessibilityIdentifier("slot-color")
+    }
+
+    private func swatch(_ value: String, isOn: Bool, label: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Circle()
+                .fill(Color(hex: value))
+                .frame(width: 28, height: 28)
+                .overlay {
+                    if isOn { Image(systemName: "checkmark").font(.caption.weight(.bold)).foregroundStyle(.white) }
+                }
+                .overlay { Circle().strokeBorder(Color.primary.opacity(isOn ? 0.6 : 0.12), lineWidth: isOn ? 2 : 1) }
+                .frame(minWidth: 44, minHeight: 44)
+        }
+        .buttonStyle(.borderless)
+        .accessibilityLabel(Text(label))
+        .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 }
 

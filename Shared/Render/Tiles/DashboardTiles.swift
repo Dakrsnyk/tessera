@@ -32,7 +32,7 @@ enum DashboardTiles {
 
     static func prioritiesRows(_ context: RenderContext) -> [TileRow] {
         let now = context.date
-        return context.payload.domains.productivity.priorities.prefix(3).map { item in
+        return context.payload.domains.productivity.activePriorities.prefix(3).map { item in
             TileRow(id: item.id.uuidString, title: item.title, isDone: item.isDone(on: now), action: .togglePriority(item.id.uuidString))
         }
     }
@@ -183,11 +183,11 @@ enum DashboardTiles {
         var rows: [TileRow] = []
         let active = state.active.flatMap { $0.isFinished ? nil : $0 }
         if let exercise = active?.currentExercise {
-            rows.append(TileRow(id: "set", title: exercise.name, value: FitnessTiles.setText(exercise), symbol: "arrow.forward.circle.fill", isHighlighted: true))
+            rows.append(TileRow(id: "set", title: exercise.name, value: FitnessTiles.setText(exercise, system: context.settings.unitSystem), symbol: "arrow.forward.circle.fill", isHighlighted: true))
         } else if let routine = state.routine(for: now) {
             rows.append(TileRow(id: "routine", title: routine.name, value: state.isScheduled(now) ? tr("Aujourd'hui") : tr("Prochaine"), symbol: "figure.strengthtraining.traditional"))
         }
-        rows.append(TileRow(id: "volume", title: tr("Volume"), value: tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"), symbol: "scalemass"))
+        rows.append(TileRow(id: "volume", title: tr("Volume"), value: Units.loadText(kilograms: FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +), in: context.settings.unitSystem, digits: 0), symbol: "scalemass"))
         // No calories without the person's weight (the state's 70 kg default is not theirs).
         if context.payload.domains.knowsWeight {
             rows.append(TileRow(id: "burned", title: tr("Calories brûlées"), value: tr("\(TF.int(FitnessMath.caloriesBurned(state, on: now))) kcal"), symbol: "flame"))
@@ -239,7 +239,7 @@ enum DashboardTiles {
         var tile = Tile(title: tr("Études"), symbol: "graduationcap.circle")
         if let next = StudentMath.nextClass(state, at: now) {
             tile.value = next.start <= now ? tr("En cours") : TF.time(next.start, context)
-            tile.caption = StudentTiles.courseName(state, next.slot.courseID) + (next.slot.room.isEmpty ? "" : " · \(next.slot.room)")
+            tile.caption = state.title(of: next.slot) + (next.slot.room.isEmpty ? "" : " · \(next.slot.room)")
         } else {
             tile.value = tr("Libre")
             tile.caption = tr("Pas de cours prévu")

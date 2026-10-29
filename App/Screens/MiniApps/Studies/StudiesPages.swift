@@ -30,7 +30,7 @@ struct StudiesTimetablePage: View {
                 .tint(Color(hex: Studies.accentHex))
             } else {
                 weekSwitcher(week)
-                TimetableGrid(state: state, week: week, selected: $weekday) { sheet = .slotOn($0.slot, $0.start) }
+                TimetableGrid(state: state, week: week, selected: $weekday) { sheet = .slotOn($0.base, $0.start) }
                 dayList(state: state, day: day)
                 MiniActionButton(title: tr("Ajouter un événement"), symbol: "plus", colorHex: Studies.accentHex, isProminent: false) {
                     var slot = Studies.newSlot(state)
@@ -100,7 +100,7 @@ struct StudiesTimetablePage: View {
         let slot = entry.slot
         let place = slot.room.isEmpty ? nil : (slot.kind == .course ? tr("Salle \(slot.room)") : slot.room)
         let detail = entry.isCancelled ? tr("Annulé cette fois-ci") : [slot.date == nil ? nil : tr("Une seule fois"), place].compactMap { $0 }.joined(separator: " · ")
-        return Button { sheet = .slotOn(slot, entry.start) } label: {
+        return Button { sheet = .slotOn(entry.base, entry.start) } label: {
             MiniRow(symbol: slot.kind.symbol, colorHex: state.colorHex(of: slot),
                     title: state.title(of: slot),
                     detail: detail.isEmpty ? nil : detail,
@@ -118,10 +118,23 @@ struct StudiesTimetablePage: View {
                           systemImage: entry.isCancelled ? "arrow.uturn.backward" : "calendar.badge.minus")
                 }
             }
-            Button(role: .destructive) {
-                model.update(\.student) { $0.slots.removeAll { $0.id == slot.id } }
-            } label: {
-                Label(tr("Supprimer"), systemImage: "trash")
+            if slot.date == nil {
+                Button(role: .destructive) {
+                    model.update(\.student) { $0.deleteOccurrence(slot: slot.id, on: entry.start) }
+                } label: {
+                    Label(tr("Supprimer uniquement cette occurrence"), systemImage: "trash")
+                }
+                Button(role: .destructive) {
+                    model.update(\.student) { $0.deleteSeries(slot: slot.id) }
+                } label: {
+                    Label(tr("Supprimer toute la série"), systemImage: "trash.fill")
+                }
+            } else {
+                Button(role: .destructive) {
+                    model.update(\.student) { $0.deleteSeries(slot: slot.id) }
+                } label: {
+                    Label(tr("Supprimer"), systemImage: "trash")
+                }
             }
         }
     }

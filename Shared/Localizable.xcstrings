@@ -612,53 +612,6 @@
         }
       }
     },
-    " · %@ kg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · %@ kg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · %@ kg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · %@ kg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · %@ kg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · %@ kg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · %@ kg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · %@ kg"
-          }
-        }
-      }
-    },
     " · partiel": {
       "extractionState": "manual",
       "localizations": {
@@ -1505,6 +1458,53 @@
         }
       }
     },
+    "%@ : %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@"
+          }
+        }
+      }
+    },
     "%@ : %@ cette semaine contre %@ la semaine dernière": {
       "extractionState": "manual",
       "localizations": {
@@ -1642,53 +1642,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@: %@ kcal"
-          }
-        }
-      }
-    },
-    "%@ : %@ kg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ kg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ kg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ kg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ : %@ kg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ kg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@：%@ kg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ kg"
           }
         }
       }
@@ -3949,6 +3902,53 @@
         }
       }
     },
+    "%@ ft %@ in": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ft %@ in"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ft %@ in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ft %@ in"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ft %@ in"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ft %@ in"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ft %@ in"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ft %@ in"
+          }
+        }
+      }
+    },
     "%@ g de fibres": {
       "extractionState": "manual",
       "localizations": {
@@ -4983,53 +4983,6 @@
         }
       }
     },
-    "%@ kg cette semaine": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg diese Woche"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg this week"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg esta semana"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg cette semaine"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg questa settimana"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今週 %@ kg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg esta semana"
-          }
-        }
-      }
-    },
     "%@ kg soulevés": {
       "extractionState": "manual",
       "localizations": {
@@ -5073,53 +5026,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ kg levantados"
-          }
-        }
-      }
-    },
-    "%@ kg × %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg × %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg × %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg × %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg × %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg × %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg × %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg × %@"
           }
         }
       }
@@ -5214,6 +5120,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ km em %@"
+          }
+        }
+      }
+    },
+    "%@ lb": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lb"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lb"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lb"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lb"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lb"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lb"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lb"
+          }
+        }
+      }
+    },
+    "%@ m": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ m"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ m"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ m"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ m"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ m"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ m"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ m"
           }
         }
       }
@@ -5359,49 +5359,49 @@
         }
       }
     },
-    "%@ min · %@ · %@ kg": {
+    "%@ min · %@ · %@": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ Min. · %2$@ · %3$@ kg"
+            "value": "%@ Min · %@ · %@"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ min · %2$@ · %3$@ kg"
+            "value": "%@ min · %@ · %@"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ min · %2$@ · %3$@ kg"
+            "value": "%@ min · %@ · %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ min · %@ · %@ kg"
+            "value": "%@ min · %@ · %@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ min · %2$@ · %3$@ kg"
+            "value": "%@ min · %@ · %@"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@分 · %2$@ · %3$@ kg"
+            "value": "%@分 · %@ · %@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ min · %2$@ · %3$@ kg"
+            "value": "%@ min · %@ · %@"
           }
         }
       }
@@ -7380,6 +7380,53 @@
         }
       }
     },
+    "%@ · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        }
+      }
+    },
     "%@ · %@ ajoutés": {
       "extractionState": "manual",
       "localizations": {
@@ -7615,53 +7662,6 @@
         }
       }
     },
-    "%@ · %@ kg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ kg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ kg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ kg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ kg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ kg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ kg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · %@ kg"
-          }
-        }
-      }
-    },
     "%@ · %@ km": {
       "extractionState": "manual",
       "localizations": {
@@ -7709,49 +7709,49 @@
         }
       }
     },
-    "%@ · %@ min · %@ kg soulevés": {
+    "%@ · %@ min · %@ soulevés": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · %2$@ Min. · %3$@ kg gestemmt"
+            "value": "%@ · %@ Min · %@ gehoben"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · %2$@ min · %3$@ kg lifted"
+            "value": "%@ · %@ min · %@ lifted"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · %2$@ min · %3$@ kg levantados"
+            "value": "%@ · %@ min · %@ levantados"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ · %@ min · %@ kg soulevés"
+            "value": "%@ · %@ min · %@ soulevés"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · %2$@ min · %3$@ kg sollevati"
+            "value": "%@ · %@ min · %@ sollevati"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · %2$@分 · %3$@ kgを挙上"
+            "value": "%@ · %@分 · %@ 挙上"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ · %2$@ min · %3$@ kg levantados"
+            "value": "%@ · %@ min · %@ levantados"
           }
         }
       }
@@ -8696,6 +8696,53 @@
         }
       }
     },
+    "%@ × %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ × %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ × %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ × %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ × %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ × %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ × %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ × %@"
+          }
+        }
+      }
+    },
     "%@ × %@ kg": {
       "extractionState": "manual",
       "localizations": {
@@ -9307,53 +9354,6 @@
         }
       }
     },
-    "%@%@ kg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@%2$@ kg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@%2$@ kg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@%2$@ kg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@%@ kg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@%2$@ kg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@%2$@ kg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@%2$@ kg"
-          }
-        }
-      }
-    },
     "%@, Premium": {
       "extractionState": "manual",
       "localizations": {
@@ -9824,6 +9824,53 @@
         }
       }
     },
+    "+%@ depuis le début · %@ séances": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ seit dem Start · %@ Einheiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ since the start · %@ sessions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ desde el inicio · %@ sesiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ depuis le début · %@ séances"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ dall'inizio · %@ sessioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始から+%@ · %@回のセッション"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%@ desde o início · %@ sessões"
+          }
+        }
+      }
+    },
     "+%@ kcal": {
       "extractionState": "manual",
       "localizations": {
@@ -9867,53 +9914,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "+%@ kcal"
-          }
-        }
-      }
-    },
-    "+%@ kg depuis le début · %@ séances": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "+%1$@ kg seit dem Start · %2$@ Trainings"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "+%1$@ kg since the start · %2$@ workouts"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "+%1$@ kg desde el inicio · %2$@ entrenamientos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "+%@ kg depuis le début · %@ séances"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "+%1$@ kg dall'inizio · %2$@ allenamenti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "開始から+%1$@ kg · %2$@回のワークアウト"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "+%1$@ kg desde o início · %2$@ treinos"
           }
         }
       }
@@ -13302,96 +13302,96 @@
         }
       }
     },
-    "1RM estimé : %@ kg": {
+    "1RM estimé : %@": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geschätztes 1RM: %@ kg"
+            "value": "Geschätztes 1RM: %@"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Est. 1RM: %@ kg"
+            "value": "Estimated 1RM: %@"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM estimado: %@ kg"
+            "value": "1RM estimado: %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM estimé : %@ kg"
+            "value": "1RM estimé : %@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM stimato: %@ kg"
+            "value": "1RM stimato: %@"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "推定1RM：%@ kg"
+            "value": "推定1RM：%@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM estimado: %@ kg"
+            "value": "1RM estimado: %@"
           }
         }
       }
     },
-    "1RM ≈ %@ kg": {
+    "1RM ≈ %@": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM ≈ %@ kg"
+            "value": "1RM ≈ %@"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM ≈ %@ kg"
+            "value": "1RM ≈ %@"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM ≈ %@ kg"
+            "value": "1RM ≈ %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM ≈ %@ kg"
+            "value": "1RM ≈ %@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM ≈ %@ kg"
+            "value": "1RM ≈ %@"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM ≈ %@ kg"
+            "value": "1RM ≈ %@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "1RM ≈ %@ kg"
+            "value": "1RM ≈ %@"
           }
         }
       }
@@ -34405,6 +34405,53 @@
         }
       }
     },
+    "Avec Premium, choisis la couleur d'Ardane parmi 12 et change-la quand tu veux. Saphir reste gratuit.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit Premium wählst du die Farbe von Ardane aus 12 und änderst sie jederzeit. Saphir bleibt kostenlos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With Premium, pick Ardane's color from 12 and change it whenever you like. Sapphire stays free."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium, elige el color de Ardane entre 12 y cámbialo cuando quieras. Zafiro sigue siendo gratis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec Premium, choisis la couleur d'Ardane parmi 12 et change-la quand tu veux. Saphir reste gratuit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium scegli il colore di Ardane tra 12 e lo cambi quando vuoi. Zaffiro resta gratuito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumなら、Ardaneのカラーを12色から選んで、いつでも変更できます。サファイアは無料のままです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o Premium, escolha a cor do Ardane entre 12 e troque quando quiser. Safira continua grátis."
+          }
+        }
+      }
+    },
     "Avocat": {
       "extractionState": "manual",
       "localizations": {
@@ -50009,6 +50056,53 @@
         }
       }
     },
+    "Cette occurrence seulement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur dieser Termin"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This occurrence only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo esta repetición"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette occurrence seulement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo questa occorrenza"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この回のみ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só esta ocorrência"
+          }
+        }
+      }
+    },
     "Cette période": {
       "extractionState": "manual",
       "localizations": {
@@ -62041,6 +62135,53 @@
         }
       }
     },
+    "Couleur habituelle": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Übliche Farbe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usual color"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color habitual"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleur habituelle"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colore abituale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いつもの色"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cor habitual"
+          }
+        }
+      }
+    },
     "Couleur personnalisée": {
       "extractionState": "manual",
       "localizations": {
@@ -62225,6 +62366,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cores de confeito"
+          }
+        }
+      }
+    },
+    "Couleurs de l'app": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App-Farben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App colors"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colores de la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleurs de l'app"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colori dell'app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリのカラー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cores do app"
           }
         }
       }
@@ -75201,53 +75389,6 @@
         }
       }
     },
-    "Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zehn Stimmungen, jeweils hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ten moods, each in light and dark. You can switch anytime in Settings."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diez ambientes, cada uno en claro y oscuro. Puedes cambiar en cualquier momento en Ajustes."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dieci atmosfere, ciascuna in chiaro e in scuro. Puoi cambiare in qualsiasi momento in Impostazioni."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "10種類の雰囲気を、ライトとダークで。いつでも設定で変更できます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dez ambientes, cada um no claro e no escuro. Você pode trocar a qualquer momento em Ajustes."
-          }
-        }
-      }
-    },
     "Dogecoin": {
       "extractionState": "manual",
       "localizations": {
@@ -83802,6 +83943,53 @@
         }
       }
     },
+    "En cours : %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Läuft: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In progress: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En curso: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En cours : %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In corso: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "進行中：%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em andamento: %@"
+          }
+        }
+      }
+    },
     "En cours · %@/%@ séries": {
       "extractionState": "manual",
       "localizations": {
@@ -86289,53 +86477,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Espaço compartilhado"
-          }
-        }
-      }
-    },
-    "Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weltall, Mars, Ozean, Aurora, Elegant, Synthwave…"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Space, Mars, Ocean, Aurora, Elegant, Synthwave…"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Espacio, Marte, Océano, Aurora, Elegante, Synthwave…"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Espace, Mars, Océan, Aurore, Élégant, Synthwave…"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spazio, Marte, Oceano, Aurora, Elegante, Synthwave…"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "宇宙、火星、海、オーロラ、エレガント、シンセウェーブ…"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Espaço, Marte, Oceano, Aurora, Elegante, Synthwave…"
           }
         }
       }
@@ -103730,6 +103871,53 @@
         }
       }
     },
+    "Horaire %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stundenplan %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horario %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horaire %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orario %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間割 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário %@"
+          }
+        }
+      }
+    },
     "Horaire de la semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -106217,6 +106405,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Não foi possível ler este arquivo"
+          }
+        }
+      }
+    },
+    "Impérial": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imperial"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imperial"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imperial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impérial"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imperiale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヤード・ポンド法"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imperial"
           }
         }
       }
@@ -109037,53 +109272,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dia todo"
-          }
-        }
-      }
-    },
-    "Journée gagnée": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tag gewonnen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Day won"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Día ganado"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Journée gagnée"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Giornata vinta"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日は達成！"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dia ganho"
           }
         }
       }
@@ -113788,49 +113976,49 @@
         }
       }
     },
-    "La dernière fois : %@ kg × %@": {
+    "La dernière fois : %@ × %@": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Letztes Mal: %1$@ kg × %2$@"
+            "value": "Letztes Mal: %@ × %@"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Last time: %1$@ kg × %2$@"
+            "value": "Last time: %@ × %@"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La última vez: %1$@ kg × %2$@"
+            "value": "La última vez: %@ × %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La dernière fois : %@ kg × %@"
+            "value": "La dernière fois : %@ × %@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "L'ultima volta: %1$@ kg × %2$@"
+            "value": "L'ultima volta: %@ × %@"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "前回：%1$@ kg × %2$@"
+            "value": "前回：%@ × %@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Última vez: %1$@ kg × %2$@"
+            "value": "Da última vez: %@ × %@"
           }
         }
       }
@@ -121449,6 +121637,53 @@
         }
       }
     },
+    "Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die anderen 11 App-Farben, Weltraum, Mars, Ozean, Aurora, Elegant, Synthwave…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The other 11 app colors, Space, Mars, Ocean, Aurora, Elegant, Synthwave…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los otros 11 colores de la app, Espacio, Marte, Océano, Aurora, Elegante, Synthwave…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli altri 11 colori dell'app, Spazio, Marte, Oceano, Aurora, Elegante, Synthwave…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかの11色のアプリカラー、スペース、マーズ、オーシャン、オーロラ、エレガント、シンセウェイブ…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As outras 11 cores do app, Espaço, Marte, Oceano, Aurora, Elegante, Synthwave…"
+          }
+        }
+      }
+    },
     "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement.": {
       "extractionState": "manual",
       "localizations": {
@@ -121633,53 +121868,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Os braços ficam levemente inclinados em direção à cabeça."
-          }
-        }
-      }
-    },
-    "Les cases se décochent chaque matin. Coche-les depuis le widget.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Häkchen verschwinden jeden Morgen. Hak sie im Widget ab."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boxes uncheck every morning. Check them off from the widget."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las casillas se desmarcan cada mañana. Márcalas desde el widget."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les cases se décochent chaque matin. Coche-les depuis le widget."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le caselle si deselezionano ogni mattina. Spuntale dal widget."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "チェックは毎朝リセットされます。ウィジェットからチェックしましょう。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As caixas são desmarcadas toda manhã. Marque-as pelo widget."
           }
         }
       }
@@ -124124,6 +124312,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "As três coisas mais importantes do dia."
+          }
+        }
+      }
+    },
+    "Les tâches que tu valides dans ton Top 3 apparaîtront ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aufgaben, die du in deinem Top 3 erledigst, erscheinen hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasks you complete from your Top 3 will appear here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las tareas que completes en tu Top 3 aparecerán aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les tâches que tu valides dans ton Top 3 apparaîtront ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le attività che completi nel tuo Top 3 appariranno qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Top 3で完了したタスクはここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As tarefas que você concluir no seu Top 3 aparecerão aqui."
           }
         }
       }
@@ -133105,6 +133340,53 @@
         }
       }
     },
+    "Mes tâches réalisées": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine erledigten Aufgaben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My completed tasks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis tareas completadas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes tâches réalisées"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie attività completate"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了したタスク"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas tarefas concluídas"
+          }
+        }
+      }
+    },
     "Mes villes": {
       "extractionState": "manual",
       "localizations": {
@@ -134605,6 +134887,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Editar despesa"
+          }
+        }
+      }
+    },
+    "Modifier la série ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie ändern?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit the series?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Modificar la serie?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier la série ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modificare la serie?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シリーズを変更しますか？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alterar a série?"
           }
         }
       }
@@ -139544,6 +139873,53 @@
         }
       }
     },
+    "Métrique": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metrisch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metric"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Métrico"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Métrique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metrico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メートル法"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Métrico"
+          }
+        }
+      }
+    },
     "Météo": {
       "extractionState": "manual",
       "localizations": {
@@ -143915,49 +144291,49 @@
         }
       }
     },
-    "Nouveau record sur %@ : %@ kg × %@.": {
+    "Nouveau record sur %@ : %@ × %@.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Neuer Rekord bei %@: %@ kg × %@."
+            "value": "Neuer Rekord bei %@: %@ × %@."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "New record on %@: %@ kg × %@."
+            "value": "New record on %@: %@ × %@."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nuevo récord en %@: %@ kg × %@."
+            "value": "Nuevo récord en %@: %@ × %@."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nouveau record sur %@ : %@ kg × %@."
+            "value": "Nouveau record sur %@ : %@ × %@."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nuovo record su %@: %@ kg × %@."
+            "value": "Nuovo record su %@: %@ × %@."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@で自己ベスト更新：%@ kg × %@。"
+            "value": "%@の新記録：%@ × %@。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Novo recorde em %@: %@ kg × %@."
+            "value": "Novo recorde em %@: %@ × %@."
           }
         }
       }
@@ -161822,6 +162198,53 @@
         }
       }
     },
+    "Pouces": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoll"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inches"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulgadas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pouces"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pollici"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "インチ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polegadas"
+          }
+        }
+      }
+    },
     "Pouces et index se touchent sous la poitrine.": {
       "extractionState": "manual",
       "localizations": {
@@ -165770,53 +166193,6 @@
         }
       }
     },
-    "Priorités %@/%@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prioritäten %@/%@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Priorities %@/%@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prioridades %@/%@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Priorités %@/%@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Priorità %@/%@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "優先事項 %@/%@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prioridades %@/%@"
-          }
-        }
-      }
-    },
     "Priorités : %@ sur %@": {
       "extractionState": "manual",
       "localizations": {
@@ -165907,6 +166283,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prioridades e projetos"
+          }
+        }
+      }
+    },
+    "Priorités à faire : %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offene Prioritäten: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Priorities to do: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prioridades pendientes: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Priorités à faire : %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Priorità da fare: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残りの優先事項：%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prioridades a fazer: %@"
           }
         }
       }
@@ -166142,6 +166565,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Preço total pago"
+          }
+        }
+      }
+    },
+    "Prochain : %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als Nächstes: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siguiente: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prochain : %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prossimo: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次：%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo: %@"
           }
         }
       }
@@ -181844,6 +182314,53 @@
         }
       }
     },
+    "Rien de prévu aujourd'hui": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute nichts geplant"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing planned today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada previsto hoy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien de prévu aujourd'hui"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente in programma oggi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日の予定はありません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada previsto para hoje"
+          }
+        }
+      }
+    },
     "Rien de prévu ce jour-là.": {
       "extractionState": "manual",
       "localizations": {
@@ -188001,6 +188518,53 @@
         }
       }
     },
+    "Saphir est offert. Avec Premium, choisis parmi 12 couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saphir ist kostenlos. Mit Premium wählst du aus 12 Farben, jeweils hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sapphire is free. With Premium, choose from 12 colors, each in light and dark. You can change it anytime in Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zafiro es gratis. Con Premium, elige entre 12 colores, cada uno en claro y oscuro. Podrás cambiarlo en cualquier momento en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saphir est offert. Avec Premium, choisis parmi 12 couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaffiro è gratuito. Con Premium scegli tra 12 colori, ciascuno in chiaro e scuro. Potrai cambiarlo in qualsiasi momento in Impostazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サファイアは無料です。Premiumなら12色から選べ、それぞれライトとダークに対応。設定でいつでも変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safira é grátis. Com o Premium, escolha entre 12 cores, cada uma em claro e escuro. Você pode trocar a qualquer momento em Ajustes."
+          }
+        }
+      }
+    },
     "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.": {
       "extractionState": "manual",
       "localizations": {
@@ -189787,49 +190351,49 @@
         }
       }
     },
-    "Sem. dernière : %@ kg (%@)": {
+    "Sem. dernière : %@ (%@)": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Letzte Woche: %@ kg (%@)"
+            "value": "Letzte Woche: %@ (%@)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Last week: %@ kg (%@)"
+            "value": "Last wk: %@ (%@)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Semana pasada: %@ kg (%@)"
+            "value": "Sem. pasada: %@ (%@)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sem. dernière : %@ kg (%@)"
+            "value": "Sem. dernière : %@ (%@)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sett. scorsa: %@ kg (%@)"
+            "value": "Sett. scorsa: %@ (%@)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "先週：%@ kg（%@）"
+            "value": "先週：%@（%@）"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Semana passada: %@ kg (%@)"
+            "value": "Sem. passada: %@ (%@)"
           }
         }
       }
@@ -195803,6 +196367,53 @@
         }
       }
     },
+    "Style %@, Premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stil %@, Premium"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ style, Premium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estilo %@, Premium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Style %@, Premium"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stile %@, Premium"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@スタイル、Premium"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estilo %@, Premium"
+          }
+        }
+      }
+    },
     "Style de la semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -197871,6 +198482,53 @@
         }
       }
     },
+    "Supprimer toute la série": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganze Serie löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete the whole series"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar toda la serie"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toute la série"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina tutta la serie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シリーズ全体を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir a série inteira"
+          }
+        }
+      }
+    },
     "Supprimer un cours retire aussi ses plages de l'horaire ; ses notes, examens et devoirs restent.": {
       "extractionState": "manual",
       "localizations": {
@@ -197914,6 +198572,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Excluir uma disciplina também remove os horários dela; as notas, provas e trabalhos continuam."
+          }
+        }
+      }
+    },
+    "Supprimer uniquement cette occurrence": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur diesen Termin löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this occurrence only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar solo esta repetición"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer uniquement cette occurrence"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina solo questa occorrenza"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この回のみ削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir só esta ocorrência"
           }
         }
       }
@@ -205908,6 +206613,100 @@
         }
       }
     },
+    "Terminé pour aujourd'hui": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für heute erledigt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done for today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminado por hoy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé pour aujourd'hui"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finito per oggi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日は完了"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Concluído por hoje"
+          }
+        }
+      }
+    },
+    "Terminée le %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erledigt am %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed on %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completada el %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminée le %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completata il %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@に完了"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Concluída em %@"
+          }
+        }
+      }
+    },
     "Terminées": {
       "extractionState": "manual",
       "localizations": {
@@ -211595,6 +212394,53 @@
         }
       }
     },
+    "Titre de cette occurrence (facultatif)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titel dieses Termins (optional)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Title of this occurrence (optional)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Título de esta repetición (opcional)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titre de cette occurrence (facultatif)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titolo di questa occorrenza (facoltativo)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この回のタイトル（任意）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Título desta ocorrência (opcional)"
+          }
+        }
+      }
+    },
     "Titre, valeur, puis le graphique en dessous.": {
       "extractionState": "manual",
       "localizations": {
@@ -215637,6 +216483,53 @@
         }
       }
     },
+    "Touche une tâche pour la remettre dans ton Top 3.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe auf eine Aufgabe, um sie wieder in dein Top 3 zu legen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a task to put it back in your Top 3."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca una tarea para devolverla a tu Top 3."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touche une tâche pour la remettre dans ton Top 3."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca un'attività per rimetterla nel tuo Top 3."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクをタップすると、Top 3に戻します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque em uma tarefa para colocá-la de volta no seu Top 3."
+          }
+        }
+      }
+    },
     "Touche « Modifier » en haut, puis « Ajouter un widget »": {
       "extractionState": "manual",
       "localizations": {
@@ -218128,6 +219021,53 @@
         }
       }
     },
+    "Toute la série": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganze Serie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whole series"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toda la serie"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toute la série"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutta la serie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シリーズ全体"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Série inteira"
+          }
+        }
+      }
+    },
     "Toutes": {
       "extractionState": "manual",
       "localizations": {
@@ -218265,6 +219205,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todas as cores"
+          }
+        }
+      }
+    },
+    "Toutes les couleurs de l'app": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle App-Farben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All app colors"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los colores de la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les couleurs de l'app"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutti i colori dell'app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのアプリカラー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas as cores do app"
           }
         }
       }
@@ -223110,6 +224097,53 @@
         }
       }
     },
+    "Une tâche validée quitte le Top 3 et reste dans « Mes tâches réalisées ».": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine erledigte Aufgabe verlässt das Top 3 und bleibt in „Meine erledigten Aufgaben“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A completed task leaves the Top 3 and stays in \"My completed tasks\"."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una tarea completada sale del Top 3 y se queda en «Mis tareas completadas»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche validée quitte le Top 3 et reste dans « Mes tâches réalisées »."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un'attività completata esce dal Top 3 e resta in «Le mie attività completate»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了したタスクはTop 3から外れ、「完了したタスク」に残ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma tarefa concluída sai do Top 3 e fica em “Minhas tarefas concluídas”."
+          }
+        }
+      }
+    },
     "Une à quatre de tes photos, cadrées comme tu veux.": {
       "extractionState": "manual",
       "localizations": {
@@ -223200,6 +224234,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Unidade (opcional)"
+          }
+        }
+      }
+    },
+    "Unités": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einheiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Units"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unidades"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unités"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unità"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "単位"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unidades"
           }
         }
       }
@@ -236411,6 +237492,53 @@
         }
       }
     },
+    "ft": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ft"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ft"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ft"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ft"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ft"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ft"
+          }
+        }
+      }
+    },
     "ground beef": {
       "extractionState": "manual",
       "localizations": {
@@ -237304,6 +238432,53 @@
         }
       }
     },
+    "in": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in"
+          }
+        }
+      }
+    },
     "information à compléter": {
       "extractionState": "manual",
       "localizations": {
@@ -238150,53 +239325,6 @@
         }
       }
     },
-    "kg × %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kg × %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kg × %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kg × %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kg × %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kg × %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kg × %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "kg × %@"
-          }
-        }
-      }
-    },
     "km": {
       "extractionState": "manual",
       "localizations": {
@@ -238616,6 +239744,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "leite integral"
+          }
+        }
+      }
+    },
+    "lb": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lb"
           }
         }
       }
@@ -242427,49 +243602,49 @@
         }
       }
     },
-    "priorités faites": {
+    "priorités à faire": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Prioritäten erledigt"
+            "value": "offene Prioritäten"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "priorities done"
+            "value": "priorities to do"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "prioridades hechas"
+            "value": "prioridades pendientes"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "priorités faites"
+            "value": "priorités à faire"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "priorità completate"
+            "value": "priorità da fare"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "件の優先事項を完了"
+            "value": "残りの優先事項"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "prioridades concluídas"
+            "value": "prioridades a fazer"
           }
         }
       }

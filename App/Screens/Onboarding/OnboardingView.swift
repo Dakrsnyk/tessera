@@ -297,7 +297,7 @@ private struct StyleStep: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        let style = AppStyle.style(model.settings.appStyle)
+        let style = AppStyle.style(model.settings.appStyle, isPremium: model.isPremium)
         ScrollView {
             VStack(spacing: 22) {
                 VStack(spacing: 10) {
@@ -307,7 +307,7 @@ private struct StyleStep: View {
                         .foregroundStyle(.secondary)
                     Text(tr("Choisis ton style"))
                         .font(.largeTitle.weight(.bold))
-                    Text(tr("Dix ambiances, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."))
+                    Text(tr("Saphir est offert. Avec Premium, choisis parmi 12 couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)

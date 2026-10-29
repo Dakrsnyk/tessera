@@ -90,7 +90,7 @@ struct ProfileView: View {
                 } header: {
                     Text(tr("Apparence"))
                 } footer: {
-                    let style = AppStyle.style(model.settings.appStyle)
+                    let style = AppStyle.style(model.settings.appStyle, isPremium: model.isPremium)
                     Text(tr("\(style.name) — \(style.tagline). Tes widgets gardent chacun leur propre style."))
                 }
 
@@ -107,6 +107,10 @@ struct ProfileView: View {
                     }
                     .accessibilityIdentifier("settings-app-icon")
                     Toggle(tr("Heure sur 24 h"), isOn: settingBinding(\.uses24HourClock))
+                    Picker(tr("Unités"), selection: settingBinding(\.unitSystem)) {
+                        ForEach(UnitSystem.allCases) { Text($0.title).tag($0) }
+                    }
+                    .accessibilityIdentifier("settings-units")
                     Picker(tr("Devise (flux d'argent)"), selection: settingBinding(\.currencyCode)) {
                         ForEach(AppSettings.currencies, id: \.self) { Text($0).tag($0) }
                     }

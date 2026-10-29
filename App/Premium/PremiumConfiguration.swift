@@ -9,9 +9,9 @@ enum PremiumConfiguration {
 
     static var allProductIDs: [String] { [yearlyID, monthlyID, lifetimeID] }
 
-    /// Required by Apple on the paywall. Replace with your hosted pages before submitting.
+    /// Required by Apple on the paywall. The hosted pages of ardane.app.
     static let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
-    static let privacyURL = URL(string: "https://claude.ai/artifact/M2hUyRzRz9zxoSMJ4PJ5X8")!
+    static let privacyURL = URL(string: "https://ardane.app/privacy.html")!
     static var supportEmail: String { AppInfo.supportEmail }
     /// The app's numeric App Store ID, once published (« Noter Ardane » then opens the review page).
     static let appStoreID: String? = nil

@@ -13,7 +13,7 @@ struct FitnessSpaceSections: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(active.routineName).font(.caption.weight(.semibold)).foregroundStyle(Color.secondary)
                     Text(exercise.name).font(.title3.weight(.semibold))
-                    Text(tr("Série \(active.setIndex + 1)/\(exercise.sets) · \(FitnessTiles.setText(exercise))"))
+                    Text(tr("Série \(active.setIndex + 1)/\(exercise.sets) · \(FitnessTiles.setText(exercise, system: model.settings.unitSystem))"))
                         .foregroundStyle(Color.secondary)
                     if let rest = active.restEndsAt, rest > now {
                         HStack {
@@ -80,13 +80,13 @@ struct FitnessSpaceSections: View {
                 ValueRow(title: tr("Objectif"), value: tr("\(state.weeklyGoal) séances / semaine"))
             }
             // The weight lives in « Mes informations »: changing it here changes it everywhere.
-            OptionalNumberRow(title: tr("Poids"), value: Binding(get: { model.profile.weightKg }, set: { model.setWeight($0) }), unit: tr("kg"))
+            OptionalNumberRow(title: tr("Poids"), value: Binding<Double?>(get: { model.profile.weightKg }, set: { model.setWeight($0) }).weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)
             ValueRow(title: tr("Cette semaine"), value: tr("\(FitnessMath.workouts(inWeekOf: now, state)) séances"), symbol: "flame.fill")
-            ValueRow(title: tr("Volume"), value: tr("\(TF.int(FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +))) kg"), symbol: "scalemass")
+            ValueRow(title: tr("Volume"), value: Units.loadText(kilograms: FitnessMath.weeklyVolume(state, weekOf: now).reduce(0, +), in: model.settings.unitSystem, digits: 0), symbol: "scalemass")
             if let best = FitnessMath.records(state).first {
                 // The records are part of the progress: Premium (kept, shown again with Premium).
                 if model.isPremium {
-                    ValueRow(title: tr("Meilleur record"), value: tr("\(best.exercise) · \(TF.int(best.weight)) kg"), symbol: "trophy.fill")
+                    ValueRow(title: tr("Meilleur record"), value: "\(best.exercise) · \(Units.loadText(kilograms: best.weight, in: model.settings.unitSystem, digits: 0))", symbol: "trophy.fill")
                 } else {
                     Button {
                         sheets?.open { PaywallView(context: .fitnessProgress) }
@@ -217,7 +217,7 @@ struct RoutineEditor: View {
                     }
                     Stepper(tr("Séries : \(exercise.sets)"), value: $exercise.sets, in: 1...12)
                     Stepper(tr("Répétitions : \(exercise.reps)"), value: $exercise.reps, in: 1...50)
-                    NumberRow(title: tr("Charge"), value: $exercise.weight, unit: tr("kg"))
+                    NumberRow(title: tr("Charge"), value: $exercise.weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)
                     Stepper(tr("Repos : \(exercise.restSeconds) s"), value: $exercise.restSeconds, in: 15...600, step: 15)
                     TextField(tr("Tempo (ex. 3-1-1-0)"), text: $exercise.tempo)
                     TextField(tr("Notes", context: "text"), text: $exercise.notes)

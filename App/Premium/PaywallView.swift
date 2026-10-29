@@ -153,7 +153,7 @@ struct PaywallView: View {
             (.widgets, "square.stack.3d.up.fill", tr("Tous les widgets des espaces"), tr("Records, volume, bénéfice, MRR, devoirs, vol, carburant…")),
             (.smart, "wand.and.stars", tr("Widgets intelligents"), tr("« Maintenant » change selon le moment, et les analyses résument ta journée")),
             (.packs, "bag.fill", tr("Tous les packs"), tr("Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…")),
-            (.styles, "paintpalette", tr("\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus"), tr("Espace, Mars, Océan, Aurore, Élégant, Synthwave…")),
+            (.styles, "paintpalette", tr("\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus"), tr("Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…")),
             (.history, "chart.bar.xaxis", tr("Statistiques détaillées"), tr("Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes habitudes")),
             (.exercises, "books.vertical.fill", tr("Toute la bibliothèque d'exercices"), tr("\(ExerciseLibrary.all.count) exercices avec démonstration, technique et alternatives")),
             (.photo, "photo", tr("Fonds photo, couleurs libres"), tr("Et les polices Serif et Mono")),
@@ -192,6 +192,7 @@ struct PaywallView: View {
             .foregroundStyle(.secondary)
             .padding(.bottom, 8)
             comparisonRow(tr("Types de widgets"), free: "\(WidgetKind.freeKinds.count)", premium: "\(WidgetKind.offered.count)")
+            comparisonRow(tr("Couleurs de l'app"), free: "1", premium: "\(AppStyleID.allCases.count)")
             comparisonRow(tr("Styles"), free: "\(ThemeCatalog.free.count)", premium: "\(ThemeCatalog.all.count)")
             comparisonRow(tr("Widgets enregistrés"), free: "\(AppModel.freeDesignLimit)", premium: "∞")
             comparisonRow(tr("Photos et citations"), free: "∞", premium: "∞")
