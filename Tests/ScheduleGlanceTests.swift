@@ -156,4 +156,34 @@ final class ScheduleGlanceTests: XCTestCase {
             XCTAssertEqual(glance.nextChange, event.start)
         }
     }
+
+    /// The widget shows the next event whatever its kind: work, appointment, other, or one that happens once.
+    func testAnyKindOfEventCountsNotOnlyClasses() {
+        var f = Fixture()
+        f.state.slots = [
+            ClassSlot(courseID: nil, weekday: 1, startMinute: 8 * 60, endMinute: 9 * 60, kind: .work, title: "Quart de travail"),
+            ClassSlot(courseID: nil, weekday: 1, startMinute: 16 * 60, endMinute: 17 * 60, kind: .appointment, title: "Dentiste", date: monday(0)),
+            ClassSlot(courseID: nil, weekday: 1, startMinute: 18 * 60, endMinute: 19 * 60, kind: .other, title: "Yoga"),
+        ]
+        XCTAssertEqual(name(ScheduleGlance.compute(f.state, now: monday(7)), f.state), "Quart de travail")
+        XCTAssertEqual(name(ScheduleGlance.compute(f.state, now: monday(10)), f.state), "Dentiste")
+        XCTAssertEqual(name(ScheduleGlance.compute(f.state, now: monday(17, 30)), f.state), "Yoga")
+        XCTAssertEqual(ScheduleGlance.compute(f.state, now: monday(19, 30)).phase, .finished)
+        // The one-time appointment is not there the next Monday.
+        XCTAssertEqual(name(ScheduleGlance.compute(f.state, now: monday(10, day: 21)), f.state), "Yoga")
+    }
+
+    /// The « Prochain cours » widget also shows another kind of event when it comes first (moving, work…).
+    func testNextEventIsNotLimitedToClasses() {
+        var f = Fixture()
+        f.state.slots = [
+            ClassSlot(courseID: nil, weekday: 5, startMinute: 7 * 60 + 30, endMinute: 16 * 60, kind: .work, title: "Déménagement"),
+            f.math,
+        ]
+        // Thursday 16:17: the next thing is Friday's move, not Monday's class.
+        let thursday = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 29, hour: 16, minute: 17))!
+        let next = StudentMath.nextEvent(f.state, at: thursday)
+        XCTAssertEqual(next.map { f.state.title(of: $0.slot) }, "Déménagement")
+        XCTAssertEqual(StudentMath.nextClass(f.state, at: thursday)?.slot.weekday, 1, "nextClass still means classes only")
+    }
 }

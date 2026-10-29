@@ -405,6 +405,15 @@ enum StudentMath {
         return nil
     }
 
+    /// The event in progress or the next one of ANY kind (class, work, appointment, other), looking up to a week ahead.
+    static func nextEvent(_ state: StudentState, at date: Date) -> ClassOccurrence? {
+        for offset in 0..<8 {
+            guard let day = DateMath.calendar.date(byAdding: .day, value: offset, to: date) else { continue }
+            if let next = occurrences(state, on: day).first(where: { $0.end > date && $0.end > $0.start }) { return next }
+        }
+        return nil
+    }
+
     static func nextExam(_ state: StudentState, at date: Date) -> Exam? {
         state.exams.filter { $0.date > date }.min { $0.date < $1.date }
     }

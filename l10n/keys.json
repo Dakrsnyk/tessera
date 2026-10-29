@@ -112,7 +112,7 @@
  "%@ %@ restants": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:163: tile.caption = tr(\"\\(left) \\(TF.days(left)) restants\")",
+   "Shared/Render/Tiles/StudentTiles.swift:164: tile.caption = tr(\"\\(left) \\(TF.days(left)) restants\")",
    "Shared/Render/Tiles/TravelTiles.swift:160: tile.caption = left == 0 ? tr(\"dernier jour\") : tr(\"\\(left) \\(TF.days(left)) restants\")"
   ]
  },
@@ -359,7 +359,7 @@
   "uses": [
    "App/Screens/Spaces/SpacesView.swift:223: return TravelMath.isOngoing(trip, at: now) ? tr(\"En voyage à \\(trip.destination)\") : tr(\"\\(trip.destination) dans \\(DateMath.daysBetween(now, trip.start)) j\")",
    "Shared/Render/Tiles/CarTiles.swift:142: tile.inline = tr(\"\\(next.title) dans \\(days) j\")",
-   "Shared/Render/Tiles/StudentTiles.swift:106: tile.inline = days == 0 ? tr(\"\\(exam.title) aujourd'hui\") : tr(\"\\(exam.title) dans \\(days) j\")",
+   "Shared/Render/Tiles/StudentTiles.swift:107: tile.inline = days == 0 ? tr(\"\\(exam.title) aujourd'hui\") : tr(\"\\(exam.title) dans \\(days) j\")",
    "Shared/Render/Tiles/TimeTiles.swift:107: tile.inline = usesBirthdayWording ? tr(\"Anniversaire dans \\(days) j\") : tr(\"\\(title) dans \\(days) j\")"
   ]
  },
@@ -384,7 +384,7 @@
  "%@ de l'objectif": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:211: tile.detail = tr(\"\\(Fmt.percent(min(9.99, minutes / 60 / goal))) de l'objectif\")"
+   "Shared/Render/Tiles/StudentTiles.swift:212: tile.detail = tr(\"\\(Fmt.percent(min(9.99, minutes / 60 / goal))) de l'objectif\")"
   ]
  },
  "%@ de l'objectif de %@": {
@@ -482,7 +482,7 @@
  "%@ en cours": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:84: tile.inline = ongoing ? tr(\"\\(courseTitle) en cours\") : \"\\(courseTitle) à \\(TF.time(next.start, context))\""
+   "Shared/Render/Tiles/StudentTiles.swift:85: tile.inline = ongoing ? tr(\"\\(courseTitle) en cours\") : \"\\(courseTitle) à \\(TF.time(next.start, context))\""
   ]
  },
  "%@ en retard": {
@@ -520,7 +520,7 @@
  "%@ fiches à réviser": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:199: tile.inline = tr(\"\\(due) fiches à réviser\")"
+   "Shared/Render/Tiles/StudentTiles.swift:200: tile.inline = tr(\"\\(due) fiches à réviser\")"
   ]
  },
  "%@ ft %@ in": {
@@ -2546,7 +2546,7 @@
  "Ajoute tes examens dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:92: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Ardane, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:93: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Ardane, espace Études.\"))"
   ]
  },
  "Ajoute tes factures dans Ardane, espace Budget.": {
@@ -2558,7 +2558,7 @@
  "Ajoute tes notes dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:140: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Ardane, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:141: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Ardane, espace Études.\"))"
   ]
  },
  "Ajoute tes placements": {
@@ -2589,7 +2589,7 @@
  "Ajoute tes travaux à rendre dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:113: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Ardane, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:114: return .empty(tr(\"Devoirs\"), symbol: \"doc.text\", message: tr(\"Ajoute tes travaux à rendre dans Ardane, espace Études.\"))"
   ]
  },
  "Ajoute tes tâches ou tes repas dans Ardane pour voir ta journée résumée ici.": {
@@ -4247,7 +4247,7 @@
  "Aucune fiche à réviser pour l'instant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:179: tile.caption = tr(\"Aucune fiche à réviser pour l'instant\")"
+   "Shared/Render/Tiles/StudentTiles.swift:180: tile.caption = tr(\"Aucune fiche à réviser pour l'instant\")"
   ]
  },
  "Aucune habitude": {
@@ -8452,7 +8452,7 @@
  "Cours actuel": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:64: var tile = Tile(title: ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\"), symbol: \"book.closed\")"
+   "Shared/Render/Tiles/StudentTiles.swift:65: var tile = Tile(title: isClass ? (ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\")) : (ongoing ? tr(\"Événement en cours\") : tr(\"Prochain événement\")), symbol: isClass ? \"book.closed\" : \"calendar\")"
   ]
  },
  "Cours avec une foulée souple, sous le corps.": {
@@ -8772,7 +8772,7 @@
  "Crée tes fiches de révision dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:174: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Ardane, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:175: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Ardane, espace Études.\"))"
   ]
  },
  "Crée tes habitudes dans Ardane.": {
@@ -11259,7 +11259,7 @@
  "En cours : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:226: let line = glance.phase == .current ? tr(\"En cours : \\(name)\") : tr(\"Prochain : \\(name)\")"
+   "Shared/Render/Tiles/StudentTiles.swift:227: let line = glance.phase == .current ? tr(\"En cours : \\(name)\") : tr(\"Prochain : \\(name)\")"
   ]
  },
  "En cours · %@/%@ séries": {
@@ -11271,7 +11271,7 @@
  "En cours · fin à %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:70: tile.caption = tr(\"En cours · fin à \\(TF.time(next.end, context))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:71: tile.caption = tr(\"En cours · fin à \\(TF.time(next.end, context))\")"
   ]
  },
  "En diagonale": {
@@ -12403,8 +12403,8 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:148: MiniStat(title: tr(\"Fiches\"), value: \"\\(due)\", detail: due == 0 ? tr(\"à jour\") : tr(\"à réviser\"), colorHex: due > 0 ? accentHex : nil)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:787: MiniSectionTitle(title: tr(\"Fiches\"), detail: state.cards.isEmpty ? nil : tr(\"\\(StudentMath.dueCount(state, at: now)) à réviser\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:174: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Ardane, espace Études.\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:177: var tile = Tile(title: tr(\"Fiches\"), symbol: \"checkmark.seal\")"
+   "Shared/Render/Tiles/StudentTiles.swift:175: return .empty(tr(\"Fiches\"), symbol: \"rectangle.on.rectangle.angled\", message: tr(\"Crée tes fiches de révision dans Ardane, espace Études.\"))",
+   "Shared/Render/Tiles/StudentTiles.swift:178: var tile = Tile(title: tr(\"Fiches\"), symbol: \"checkmark.seal\")"
   ]
  },
  "Fiches de révision": {
@@ -12462,7 +12462,7 @@
  "Fin le %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:164: tile.detail = tr(\"Fin le \\(Fmt.format(end, template: \"dMMMM\"))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:165: tile.detail = tr(\"Fin le \\(Fmt.format(end, template: \"dMMMM\"))\")"
   ]
  },
  "Fin à %@": {
@@ -13889,7 +13889,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:232: KindInfo(kind: .studyHours, title: tr(\"Heures d'étude\"), summary: tr(\"Tes heures d'étude de la semaine face à ton objectif.\"), category: .student, symbol: \"clock.badge.checkmark\", isPremium: true, fam",
-   "Shared/Render/Tiles/StudentTiles.swift:206: var tile = Tile(title: tr(\"Heures d'étude\"), symbol: \"clock.badge.checkmark\")"
+   "Shared/Render/Tiles/StudentTiles.swift:207: var tile = Tile(title: tr(\"Heures d'étude\"), symbol: \"clock.badge.checkmark\")"
   ]
  },
  "Hier": {
@@ -13971,7 +13971,7 @@
  "Horaire %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:219: let title = tr(\"Horaire \\(glance.dayName)\")"
+   "Shared/Render/Tiles/StudentTiles.swift:220: let title = tr(\"Horaire \\(glance.dayName)\")"
   ]
  },
  "Horaire de la semaine": {
@@ -13997,13 +13997,13 @@
  "Horaire du jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:250: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
+   "Shared/Render/Tiles/StudentTiles.swift:251: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
   ]
  },
  "Horaire · %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:250: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
+   "Shared/Render/Tiles/StudentTiles.swift:251: var tile = Tile(title: isToday ? tr(\"Horaire du jour\") : tr(\"Horaire · \\(Fmt.weekday(day))\"), symbol: \"list.bullet.rectangle.portrait\")"
   ]
  },
  "Horaire, tâches, habitudes": {
@@ -14384,7 +14384,7 @@
  "Indique les dates de ta session dans Ardane, espace Études.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:158: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Ardane, espace Études.\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:159: return .empty(tr(\"Session\"), symbol: \"calendar.badge.clock\", message: tr(\"Indique les dates de ta session dans Ardane, espace Études.\"))"
   ]
  },
  "Inspire avant de descendre, expire en remontant.": {
@@ -14613,7 +14613,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:847: MiniActionButton(title: tr(\"Je savais\"), symbol: \"checkmark\", colorHex: \"1E9E75\") { grade(true) }",
    "Shared/Intents/SpaceIntents.swift:383: @Parameter(title: \"Je savais\")",
-   "Shared/Render/Tiles/StudentTiles.swift:192: TileButton(title: tr(\"Je savais\"), symbol: \"checkmark\", action: .gradeCard(true), isProminent: true),"
+   "Shared/Render/Tiles/StudentTiles.swift:193: TileButton(title: tr(\"Je savais\"), symbol: \"checkmark\", action: .gradeCard(true), isProminent: true),"
   ]
  },
  "Jeudi": {
@@ -18566,7 +18566,7 @@
  "Moyenne %@ %%": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:152: tile.inline = tr(\"Moyenne \\(TF.decimal(overall, 1)) %\")"
+   "Shared/Render/Tiles/StudentTiles.swift:153: tile.inline = tr(\"Moyenne \\(TF.decimal(overall, 1)) %\")"
   ]
  },
  "Moyenne %@ kcal": {
@@ -22363,7 +22363,7 @@
  "Prochain : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:226: let line = glance.phase == .current ? tr(\"En cours : \\(name)\") : tr(\"Prochain : \\(name)\")"
+   "Shared/Render/Tiles/StudentTiles.swift:227: let line = glance.phase == .current ? tr(\"En cours : \\(name)\") : tr(\"Prochain : \\(name)\")"
   ]
  },
  "Prochain : %@ %@": {
@@ -22382,9 +22382,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:293: Label(isNow ? tr(\"En cours\") : tr(\"Prochain cours\"), systemImage: isNow ? \"dot.radiowaves.left.and.right\" : \"clock\")",
-   "Shared/Model/KindCatalog.swift:226: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM + [rect, inli",
+   "Shared/Model/KindCatalog.swift:226: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours ou événement, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM ",
    "Shared/Render/Tiles/StudentTiles.swift:59: return .empty(tr(\"Prochain cours\"), symbol: \"book.closed\", message: hint)",
-   "Shared/Render/Tiles/StudentTiles.swift:64: var tile = Tile(title: ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\"), symbol: \"book.closed\")"
+   "Shared/Render/Tiles/StudentTiles.swift:65: var tile = Tile(title: isClass ? (ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\")) : (ongoing ? tr(\"Événement en cours\") : tr(\"Prochain événement\")), symbol: isClass ? \"book.closed\" : \"calendar\")"
   ]
  },
  "Prochain cours, examen, devoirs et heures d'étude réunis.": {
@@ -22403,8 +22403,8 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:227: KindInfo(kind: .nextExam, title: tr(\"Prochain examen\"), summary: tr(\"Les jours avant ton prochain examen.\"), category: .student, symbol: \"pencil.and.list.clipboard\", isPremium: false, families: SM + [",
-   "Shared/Render/Tiles/StudentTiles.swift:92: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Ardane, espace Études.\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:95: var tile = Tile(title: tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\")"
+   "Shared/Render/Tiles/StudentTiles.swift:93: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Ardane, espace Études.\"))",
+   "Shared/Render/Tiles/StudentTiles.swift:96: var tile = Tile(title: tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\")"
   ]
  },
  "Prochain examen %@ : lance le chrono d'étude dans « Révisions » pour suivre le temps passé sur ce cours.": {
@@ -22451,6 +22451,12 @@
    "App/Screens/Home/DailySection.swift:537: Text(tr(\"Prochain repas : \\(meal.lowercased()), environ \\(TF.int(kcal)) kcal\"))"
   ]
  },
+ "Prochain événement": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:65: var tile = Tile(title: isClass ? (ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\")) : (ongoing ? tr(\"Événement en cours\") : tr(\"Prochain événement\")), symbol: isClass ? \"book.closed\" : \"calendar\")"
+  ]
+ },
  "Prochaine": {
   "placeholders": 0,
   "uses": [
@@ -22468,7 +22474,7 @@
  "Prochaine révision %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:181: tile.detail = tr(\"Prochaine révision \\(TF.relativeTime(next, from: now))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:182: tile.detail = tr(\"Prochaine révision \\(TF.relativeTime(next, from: now))\")"
   ]
  },
  "Prochaine séance": {
@@ -24507,7 +24513,7 @@
  "Rien de prévu aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:222: return .empty(title, symbol: symbol, message: glance.phase == .finished ? tr(\"Terminé pour aujourd'hui\") : tr(\"Rien de prévu aujourd'hui\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:223: return .empty(title, symbol: symbol, message: glance.phase == .finished ? tr(\"Terminé pour aujourd'hui\") : tr(\"Rien de prévu aujourd'hui\"))"
   ]
  },
  "Rien de prévu ce jour-là.": {
@@ -24953,7 +24959,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/StudentSpace.swift:554: TextField(tr(\"Réponse\"), text: $card.back, axis: .vertical)",
-   "Shared/Render/Tiles/StudentTiles.swift:196: tile.buttons = [TileButton(title: tr(\"Réponse\"), symbol: \"eye\", action: .revealCard, isProminent: true)]"
+   "Shared/Render/Tiles/StudentTiles.swift:197: tile.buttons = [TileButton(title: tr(\"Réponse\"), symbol: \"eye\", action: .revealCard, isProminent: true)]"
   ]
  },
  "Réponse inattendue de l'App Store.": {
@@ -25835,7 +25841,7 @@
  "Session %@ · %@ j": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:168: tile.inline = tr(\"Session \\(Fmt.percent(progress)) · \\(left) j\")"
+   "Shared/Render/Tiles/StudentTiles.swift:169: tile.inline = tr(\"Session \\(Fmt.percent(progress)) · \\(left) j\")"
   ]
  },
  "Session en cours": {
@@ -27812,7 +27818,7 @@
  "Terminé pour aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:222: return .empty(title, symbol: symbol, message: glance.phase == .finished ? tr(\"Terminé pour aujourd'hui\") : tr(\"Rien de prévu aujourd'hui\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:223: return .empty(title, symbol: symbol, message: glance.phase == .finished ? tr(\"Terminé pour aujourd'hui\") : tr(\"Rien de prévu aujourd'hui\"))"
   ]
  },
  "Terminée le %@": {
@@ -28792,10 +28798,10 @@
    "App/Screens/Explore/StoreCombos.swift:121: combo(\"compte-anniv\", tr(\"Bientôt\"), tr(\"Ton prochain anniversaire et le prochain jour férié.\"), .blossom, \"D13F72\","
   ]
  },
- "Ton prochain cours, l'heure et la salle.": {
+ "Ton prochain cours ou événement, l'heure et la salle.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:226: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM + [rect, inli"
+   "Shared/Model/KindCatalog.swift:226: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours ou événement, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM "
   ]
  },
  "Ton prochain voyage": {
@@ -29122,7 +29128,7 @@
  "Touche « Réponse » pour vérifier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:195: tile.caption = tr(\"Touche « Réponse » pour vérifier\")"
+   "Shared/Render/Tiles/StudentTiles.swift:196: tile.caption = tr(\"Touche « Réponse » pour vérifier\")"
   ]
  },
  "Touche-le pour choisir ton design": {
@@ -29348,7 +29354,7 @@
  "Tout est rendu": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:121: tile.caption = tr(\"Tout est rendu\")"
+   "Shared/Render/Tiles/StudentTiles.swift:122: tile.caption = tr(\"Tout est rendu\")"
   ]
  },
  "Tout est renseigné": {
@@ -31663,7 +31669,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:413: return Fmt.plural(open, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:134: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:135: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
   ]
  },
  "devoirs": {
@@ -31677,7 +31683,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:413: return Fmt.plural(open, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))",
-   "Shared/Render/Tiles/StudentTiles.swift:134: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:135: tile.inline = Fmt.plural(open.count, tr(\"devoir à rendre\"), tr(\"devoirs à rendre\"))"
   ]
  },
  "dont %@ g de protéines": {
@@ -31884,7 +31890,7 @@
  "fiche à réviser": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:198: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:199: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
   ]
  },
  "fiches": {
@@ -31896,7 +31902,7 @@
  "fiches à réviser": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:198: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
+   "Shared/Render/Tiles/StudentTiles.swift:199: tile.detail = Fmt.plural(due, tr(\"fiche à réviser\"), tr(\"fiches à réviser\"))"
   ]
  },
  "finances": {
@@ -32349,7 +32355,7 @@
  "moyenne générale pondérée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:145: tile.caption = tr(\"moyenne générale pondérée\")"
+   "Shared/Render/Tiles/StudentTiles.swift:146: tile.caption = tr(\"moyenne générale pondérée\")"
   ]
  },
  "moyenne par jour": {
@@ -32956,7 +32962,7 @@
  "sur %@ cette semaine": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:208: tile.caption = tr(\"sur \\(Fmt.hours(goal)) cette semaine\")"
+   "Shared/Render/Tiles/StudentTiles.swift:209: tile.caption = tr(\"sur \\(Fmt.hours(goal)) cette semaine\")"
   ]
  },
  "sur %@ · %@": {
@@ -33462,7 +33468,7 @@
  "À jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:178: tile.value = tr(\"À jour\")"
+   "Shared/Render/Tiles/StudentTiles.swift:179: tile.value = tr(\"À jour\")"
   ]
  },
  "À la bonne taille pour ton iPhone. Ensuite, dans Photos : Partager › « Utiliser en fond d'écran ».": {
@@ -33606,7 +33612,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:846: MiniActionButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", colorHex: \"E5484D\", isProminent: false) { grade(false) }",
-   "Shared/Render/Tiles/StudentTiles.swift:191: TileButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", action: .gradeCard(false)),"
+   "Shared/Render/Tiles/StudentTiles.swift:192: TileButton(title: tr(\"À revoir\"), symbol: \"arrow.counterclockwise\", action: .gradeCard(false)),"
   ]
  },
  "À réviser maintenant": {
@@ -34158,7 +34164,7 @@
  "Étude %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:212: tile.inline = tr(\"Étude \\(Fmt.minutes(minutes))\")"
+   "Shared/Render/Tiles/StudentTiles.swift:213: tile.inline = tr(\"Étude \\(Fmt.minutes(minutes))\")"
   ]
  },
  "Étude cette semaine": {
@@ -34230,6 +34236,12 @@
    "Shared/Render/AccessoryViews.swift:67: let title = options.countdownTitle.trimmed.isEmpty ? tr(\"Événement\") : options.countdownTitle"
   ]
  },
+ "Événement en cours": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/StudentTiles.swift:65: var tile = Tile(title: isClass ? (ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\")) : (ongoing ? tr(\"Événement en cours\") : tr(\"Prochain événement\")), symbol: isClass ? \"book.closed\" : \"calendar\")"
+  ]
+ },
  "× activité « %@ » (%@) : %@ kcal dépensées par jour.": {
   "placeholders": 3,
   "uses": [
@@ -34276,8 +34288,8 @@
  "à rendre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/StudentTiles.swift:117: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")",
-   "Shared/Render/Tiles/StudentTiles.swift:117: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")"
+   "Shared/Render/Tiles/StudentTiles.swift:118: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")",
+   "Shared/Render/Tiles/StudentTiles.swift:118: tile.unit = open.count > 1 ? tr(\"à rendre\") : tr(\"à rendre\")"
   ]
  },
  "à renseigner": {

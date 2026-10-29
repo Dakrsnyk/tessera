@@ -55,13 +55,14 @@ enum StudentTiles {
 
     static func nextClass(_ state: StudentState, context: RenderContext) -> Tile {
         let now = context.date
-        guard let next = StudentMath.nextClass(state, at: now) else {
+        guard let next = StudentMath.nextEvent(state, at: now) else {
             return .empty(tr("Prochain cours"), symbol: "book.closed", message: hint)
         }
         // The title of that day (an exception such as « Examen » included).
         let courseTitle = state.title(of: next.slot)
         let ongoing = next.start <= now
-        var tile = Tile(title: ongoing ? tr("Cours actuel") : tr("Prochain cours"), symbol: "book.closed")
+        let isClass = next.slot.kind == .course
+        var tile = Tile(title: isClass ? (ongoing ? tr("Cours actuel") : tr("Prochain cours")) : (ongoing ? tr("Événement en cours") : tr("Prochain événement")), symbol: isClass ? "book.closed" : "calendar")
         var detail: [String] = []
         if !next.slot.room.isEmpty { detail.append(tr("Salle \(next.slot.room)")) }
         if ongoing {

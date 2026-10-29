@@ -223,7 +223,7 @@ enum KindCatalog {
     // MARK: Études
 
     static let student: [KindInfo] = [
-        KindInfo(kind: .nextClass, title: tr("Prochain cours"), summary: tr("Ton prochain cours, l'heure et la salle."), category: .student, symbol: "book.closed", isPremium: false, families: SM + [rect, inline], keywords: ["cours", "horaire", "salle", "école", "université"], space: .student, isNew: true),
+        KindInfo(kind: .nextClass, title: tr("Prochain cours"), summary: tr("Ton prochain cours ou événement, l'heure et la salle."), category: .student, symbol: "book.closed", isPremium: false, families: SM + [rect, inline], keywords: ["cours", "horaire", "salle", "école", "université"], space: .student, isNew: true),
         KindInfo(kind: .nextExam, title: tr("Prochain examen"), summary: tr("Les jours avant ton prochain examen."), category: .student, symbol: "pencil.and.list.clipboard", isPremium: false, families: SM + [circ, rect, inline], keywords: ["examen", "partiel", "contrôle", "révisions"], space: .student, isNew: true),
         KindInfo(kind: .assignments, title: tr("Devoirs"), summary: tr("Tes devoirs à rendre, par échéance."), category: .student, symbol: "doc.text", isPremium: true, families: SML + [rect], keywords: ["devoirs", "travaux", "rendu"], space: .student, isNew: true, isInteractive: true),
         KindInfo(kind: .gradeAverage, title: tr("Moyenne"), summary: tr("Ta moyenne générale pondérée et celle de chaque cours."), category: .student, symbol: "graduationcap", isPremium: true, families: SML, keywords: ["moyenne", "notes", "gpa", "bulletin"], space: .student, isNew: true),

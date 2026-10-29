@@ -167227,6 +167227,53 @@
         }
       }
     },
+    "Prochain événement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächster Termin"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next event"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo evento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prochain événement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prossimo evento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次の予定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo evento"
+          }
+        }
+      }
+    },
     "Prochaine": {
       "extractionState": "manual",
       "localizations": {
@@ -214133,49 +214180,49 @@
         }
       }
     },
-    "Ton prochain cours, l'heure et la salle.": {
+    "Ton prochain cours ou événement, l'heure et la salle.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dein nächster Kurs, die Uhrzeit und der Raum."
+            "value": "Dein nächster Kurs oder Termin, die Uhrzeit und der Raum."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your next class, the time and the room."
+            "value": "Your next class or event, the time and the room."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tu próxima clase, la hora y el salón."
+            "value": "Tu próxima clase o evento, la hora y el aula."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ton prochain cours, l'heure et la salle."
+            "value": "Ton prochain cours ou événement, l'heure et la salle."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il tuo prossimo corso, l'ora e l'aula."
+            "value": "La tua prossima lezione o il tuo prossimo evento, l'orario e l'aula."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "次の授業、時間、教室。"
+            "value": "次の授業や予定、時間、教室。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sua próxima aula, o horário e a sala."
+            "value": "Sua próxima aula ou evento, o horário e a sala."
           }
         }
       }
@@ -254361,6 +254408,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Evento"
+          }
+        }
+      }
+    },
+    "Événement en cours": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termin läuft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Event in progress"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evento en curso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Événement en cours"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evento in corso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "進行中の予定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evento em andamento"
           }
         }
       }
