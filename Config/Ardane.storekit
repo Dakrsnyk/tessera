@@ -4,7 +4,7 @@
   "products": [
     {
       "displayPrice": "99.99",
-      "familyShareable": true,
+      "familyShareable": false,
       "internalID": "6740000003",
       "localizations": [
         {
@@ -34,7 +34,7 @@
           "adHocOffers": [],
           "codeOffers": [],
           "displayPrice": "6.99",
-          "familyShareable": true,
+          "familyShareable": false,
           "groupNumber": 2,
           "internalID": "6740000001",
           "introductoryOffer": {
@@ -59,7 +59,7 @@
           "adHocOffers": [],
           "codeOffers": [],
           "displayPrice": "59.99",
-          "familyShareable": true,
+          "familyShareable": false,
           "groupNumber": 1,
           "internalID": "6740000002",
           "introductoryOffer": {
