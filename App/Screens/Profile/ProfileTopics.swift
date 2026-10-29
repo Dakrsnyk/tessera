@@ -358,6 +358,7 @@ struct TopicForm: View {
                 }
             }
         }
+        WeightPlanQuestions()
         QuestionCard(title: tr("Toi"), detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Pour calculer tes besoins. Le poids sert aussi à Fitness.")) {
             VStack(alignment: .leading, spacing: 10) {
                 bodyFields()
@@ -377,6 +378,7 @@ struct TopicForm: View {
                 }
             }
         }
+        WeightPlanRecap()
         NutritionTargetsCard()
     }
 
@@ -663,6 +665,131 @@ struct InterestsEditorSheet: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(tr("OK")) { dismiss() }
                 }
+            }
+        }
+    }
+}
+
+// MARK: - Weight goal (chantier 15)
+
+/// The weight to reach and when, and the situation that makes the calculation more careful. Shown under
+/// « Ton objectif » when the aim is to lose or to gain; the answers already asked above are not asked again.
+struct WeightPlanQuestions: View {
+    @Environment(AppModel.self) private var model
+    @State private var mode: DurationMode = .weeks
+
+    enum DurationMode: String, CaseIterable, Identifiable {
+        case weeks, months, date
+        var id: String { rawValue }
+
+        var title: String {
+            switch self {
+            case .weeks: tr("Semaines")
+            case .months: tr("Mois")
+            case .date: tr("Date")
+            }
+        }
+    }
+
+    private var system: UnitSystem { model.settings.unitSystem }
+    private var profile: UserProfile { model.profile }
+
+    var body: some View {
+        if profile.nutritionAim == .lose || profile.nutritionAim == .gain {
+            VStack(spacing: 12) {
+                QuestionCard(title: tr("Ton poids cible"), detail: tr("Facultatif. Ardane calcule des calories d'après ce poids et la durée choisie, et te les montre avant de les appliquer.")) {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ProfileNumberField(title: tr("Poids cible"), unit: system.weightUnit, value: targetBinding, identifier: "weightplan-target")
+                        if let plan = profile.weightPlan {
+                            duration(plan)
+                        }
+                    }
+                }
+                if profile.sex != .male {
+                    QuestionCard(title: tr("Es-tu enceinte ou allaitante ?"), detail: tr("Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids.")) {
+                        FlowLayout {
+                            ForEach([LifeStage.adult, .pregnant, .breastfeeding, .preferNotToSay]) { stage in
+                                // None is preselected: an unanswered question gives no weight plan.
+                                ChoiceChip(title: stage.title, isSelected: profile.lifeStage == stage) {
+                                    model.update(\.profile) { $0.lifeStage = $0.lifeStage == stage ? nil : stage }
+                                }
+                                .accessibilityIdentifier("lifestage-\(stage.rawValue)")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /// The target in kilograms, typed and shown in the chosen unit. Clearing the field keeps the goal.
+    private var targetBinding: Binding<Double?> {
+        Binding<Double?>(
+            get: { model.profile.weightPlan?.targetKg },
+            set: { model.setWeightPlan(targetKg: $0) }
+        ).weight(in: system)
+    }
+
+    private func duration(_ plan: WeightPlan) -> some View {
+        let days = WeightPlanCalculator.days(until: plan.targetDate)
+        let weeks = min(max(Int((Double(days) / 7).rounded()), 1), 104)
+        let months = min(max(Int((Double(days) / 30.44).rounded()), 1), 24)
+        let tomorrow = DateMath.calendar.date(byAdding: .day, value: 1, to: DateMath.startOfDay(Date())) ?? Date()
+        return VStack(alignment: .leading, spacing: 8) {
+            Text(tr("Durée"))
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.secondary)
+            Picker(tr("Durée"), selection: $mode) {
+                ForEach(DurationMode.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("weightplan-duration-mode")
+            switch mode {
+            case .weeks:
+                Stepper(value: Binding(get: { weeks }, set: { setDate(daysFromToday: $0 * 7) }), in: 1...104) {
+                    Text(tr("En \(Fmt.plural(weeks, tr("semaine"), tr("semaines")))"))
+                        .font(.subheadline.weight(.semibold))
+                }
+                .accessibilityIdentifier("weightplan-weeks")
+            case .months:
+                Stepper(value: Binding(get: { months }, set: { setDate(monthsFromToday: $0) }), in: 1...24) {
+                    Text(tr("En \(String(months)) mois"))
+                        .font(.subheadline.weight(.semibold))
+                }
+                .accessibilityIdentifier("weightplan-months")
+            case .date:
+                DatePicker(tr("Date cible"), selection: Binding(get: { max(plan.targetDate, tomorrow) }, set: { model.setWeightPlanDate($0) }),
+                           in: tomorrow..., displayedComponents: .date)
+                    .accessibilityIdentifier("weightplan-date")
+            }
+        }
+    }
+
+    private func setDate(daysFromToday days: Int) {
+        let date = DateMath.calendar.date(byAdding: .day, value: days, to: DateMath.startOfDay(Date())) ?? Date()
+        model.setWeightPlanDate(date)
+    }
+
+    private func setDate(monthsFromToday months: Int) {
+        let date = DateMath.calendar.date(byAdding: .month, value: months, to: DateMath.startOfDay(Date())) ?? Date()
+        model.setWeightPlanDate(date)
+    }
+}
+
+/// The recap of the weight goal (before the calories are applied) and the way to take the goal away.
+struct WeightPlanRecap: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if model.activeWeightPlan != nil {
+            VStack(spacing: 8) {
+                WeightPlanSummaryView()
+                Button(tr("Retirer cet objectif de poids"), role: .destructive) {
+                    model.removeWeightPlan()
+                }
+                .font(.footnote.weight(.semibold))
+                .frame(minHeight: 44)
+                .accessibilityIdentifier("weightplan-remove")
             }
         }
     }

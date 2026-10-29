@@ -298,6 +298,11 @@ struct UserProfile: Codable, Hashable {
     var nutritionAuto: Bool?
     /// Targets typed by hand while the others follow the calculation: never replaced by it.
     var customTargets: Set<NutritionTarget> = []
+    /// The weight goal (target, dates, accepted calories), nil until the user sets one.
+    var weightPlan: WeightPlan?
+    /// The situation that makes the weight calculation more careful. Nil = never asked: read as « préfère
+    /// ne pas répondre » (no loss or gain calculated, maintenance only) until the user answers.
+    var lifeStage: LifeStage?
 
     // Money (the monthly budget is `BudgetState.monthlyBudget`).
     var monthlyIncome: Double?
@@ -324,6 +329,7 @@ struct UserProfile: Codable, Hashable {
         case fitnessGoal, fitnessLevel, stepGoal
         case nutritionAim, calculatedActivity, nutritionAuto, customTargets, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
         case businessClients, studyField, weeklyStudyHours, provided, migrated
+        case weightPlan, lifeStage
     }
 
     init() {}
@@ -358,7 +364,19 @@ struct UserProfile: Codable, Hashable {
         weeklyStudyHours = c.optional(.weeklyStudyHours)
         provided = Set(c.value(.provided, [String]()).compactMap(ProvidedFact.init(rawValue:)))
         migrated = c.value(.migrated, false)
+        weightPlan = c.optional(.weightPlan)
+        lifeStage = c.optional(.lifeStage)
     }
+
+    /// Under 18, from the birthday (exact) or the birth year (one year is taken off the age, which can be
+    /// one too high) or the situation chosen.
+    func isMinor(birthday: Date? = nil, now: Date = Date()) -> Bool {
+        if lifeStage == .minor { return true }
+        guard let years = age(birthday: birthday, now: now) else { return false }
+        return (birthday == nil ? years - 1 : years) < 18
+    }
+
+    var isMinor: Bool { isMinor(birthday: nil, now: Date()) }
 
     func knows(_ fact: ProvidedFact) -> Bool { provided.contains(fact) }
 

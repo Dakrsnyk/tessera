@@ -616,23 +616,53 @@ struct NutritionHistoryPage: View {
     private func weightChart(_ weights: [ValuePoint]) -> some View {
         // Saved in kg; shown in the chosen unit.
         let system = model.settings.unitSystem
+        let kilograms = weights
         let weights = weights.map { ValuePoint(date: $0.date, value: Units.weightValue(kilograms: $0.value, in: system)) }
-        let values = weights.map(\.value)
-        let low = (values.min() ?? 0) - 1
-        let high = (values.max() ?? 0) + 1
-        let change = (values.last ?? 0) - (values.first ?? 0)
+        // With a weight goal: its target as a line, and the 7-day average as a smoother curve.
+        var plannedTarget: Double?
+        if let plan = model.activeWeightPlan {
+            plannedTarget = Units.weightValue(kilograms: plan.targetKg, in: system)
+        }
+        let target: Double? = plannedTarget
+        var smoothedPoints: [ValuePoint] = []
+        if target != nil && kilograms.count >= 3 {
+            for point in WeightPlanCalculator.movingAverage(kilograms) {
+                smoothedPoints.append(ValuePoint(date: point.date, value: Units.weightValue(kilograms: point.value, in: system)))
+            }
+        }
+        let smoothed: [ValuePoint] = smoothedPoints
+        var values: [Double] = weights.map(\.value)
+        if let target { values.append(target) }
+        let low: Double = (values.min() ?? 0) - 1
+        let high: Double = (values.max() ?? 0) + 1
+        let change = (weights.last?.value ?? 0) - (weights.first?.value ?? 0)
         return VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Poids"), detail: "\(change >= 0 ? "+" : "−")\(TF.decimal(abs(change), 1)) \(system.weightUnit)")
             Chart {
                 ForEach(weights, id: \.date) { point in
-                    LineMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value))
+                    LineMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value), series: .value("Série", "poids"))
                         .foregroundStyle(Color(hex: accentHex))
                         .interpolationMethod(.catmullRom)
                     PointMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value))
                         .foregroundStyle(Color(hex: accentHex))
                         .symbolSize(20)
                 }
+                ForEach(smoothed, id: \.date) { point in
+                    LineMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value), series: .value("Série", "lissé"))
+                        .foregroundStyle(Color.primary.opacity(0.55))
+                        .lineStyle(StrokeStyle(lineWidth: 2))
+                        .interpolationMethod(.catmullRom)
+                }
+                if let target {
+                    RuleMark(y: .value(tr("Cible"), target))
+                        .foregroundStyle(Color.secondary)
+                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
+                        .annotation(position: .top, alignment: .leading) {
+                            Text(tr("Cible")).font(.caption2).foregroundStyle(.secondary)
+                        }
+                }
             }
+            .accessibilityIdentifier("nutrition-weight-chart")
             .chartYScale(domain: low...high)
             .frame(height: 160)
             .card()

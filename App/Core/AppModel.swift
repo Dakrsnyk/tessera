@@ -873,9 +873,164 @@ extension AppModel {
     /// (`followingTypedCalories`). Nil until the age, the height, the weight and the gender are known.
     func recommendedNutritionGoals(followingTypedCalories: Bool = true) -> NutritionGoals? {
         guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.calculatorSex else { return nil }
-        let typed = followingTypedCalories && profile.customTargets.contains(.kcal) ? nutrition.goals.kcal : nil
+        var typed = followingTypedCalories && profile.customTargets.contains(.kcal) ? nutrition.goals.kcal : nil
+        // The calories the user accepted for a weight goal lead the macronutrients too (no plan: unchanged).
+        var goal = nutritionGoal
+        if let accepted = inForceWeightPlanKcal, let aim = profile.nutritionAim {
+            typed = typed ?? accepted
+            goal = aim.calculatorGoal
+        }
         return NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight,
-                                         activity: nutritionActivity, goal: nutritionGoal, kcal: typed)
+                                         activity: nutritionActivity, goal: goal, kcal: typed)
+    }
+
+    // MARK: Weight plan (chantier 15)
+
+    /// The weight goal, while the aim chosen is to lose or to gain (another aim sets it aside, unchanged).
+    var activeWeightPlan: WeightPlan? {
+        guard let plan = profile.weightPlan, let aim = profile.nutritionAim, aim != .maintain else { return nil }
+        return plan
+    }
+
+    /// The calories accepted for the plan, only while the plan still holds: same aim as the one chosen and a
+    /// calculation that is still safe (never a deficit that outlives an unsafe plan, a pregnancy answer, a
+    /// minor, or another aim). Otherwise nil, and the calculation of before applies.
+    var inForceWeightPlanKcal: Double? {
+        guard let plan = activeWeightPlan, let accepted = plan.acceptedKcal, plan.aim == profile.nutritionAim else { return nil }
+        switch evaluateWeightPlan() {
+        case .ok?, .adjusted?: return accepted
+        default: return nil
+        }
+    }
+
+    /// The profile as the nutrition calculation reads it: the activity is the one of the rest of Nutrition.
+    private var weightPlanProfile: UserProfile {
+        var copy = profile
+        copy.calculatedActivity = nutritionActivity
+        return copy
+    }
+
+    /// A reasonable number of weeks for a goal: the middle of the advised pace (0,6 % of the weight a week
+    /// to lose, 0,35 % to gain), between 4 weeks and two years.
+    func defaultWeightPlanWeeks(targetKg: Double) -> Int {
+        guard let weight = WeightPlanCalculator.smoothedWeight(profile.weightLog) ?? profile.weightKg, weight > 0 else { return 12 }
+        let percent = targetKg < weight ? 0.6 : 0.35
+        let weeks = (abs(targetKg - weight) / (percent / 100 * weight)).rounded(.up)
+        guard weeks.isFinite else { return 12 }
+        return min(max(Int(weeks), 4), WeightPlanCalculator.maxSuggestedWeeks)
+    }
+
+    /// Sets (or changes) the weight to reach and the day. The calories already accepted stay in force until
+    /// the user accepts the new calculation: nothing changes by itself. A missing target changes nothing
+    /// (`removeWeightPlan` takes the goal away).
+    func setWeightPlan(targetKg: Double?, targetDate: Date? = nil, now: Date = Date()) {
+        guard let targetKg, targetKg.isFinite, targetKg > 0 else { return }
+        let minor = profile.isMinor(birthday: life.birthday, now: now)
+        update(\.profile) { profile in
+            // The calculation reads an unanswered situation as « préfère ne pas répondre » (no loss, no gain).
+            // The question is not asked of a man: for him only, an adult is written. Anyone else answers
+            // it herself (or themselves); a minor is left to the calculation.
+            if profile.lifeStage == nil && !minor && profile.sex == .male { profile.lifeStage = .adult }
+            if var plan = profile.weightPlan {
+                // A day never chosen (still the default of the previous weight) follows the new weight.
+                let untouched = targetDate == nil && plan.acceptedKcal == nil
+                    && plan.targetDate == defaultWeightPlanDate(from: plan.startDate, targetKg: plan.targetKg)
+                plan.targetKg = targetKg
+                if let targetDate {
+                    plan.targetDate = targetDate
+                } else if untouched {
+                    plan.targetDate = defaultWeightPlanDate(from: plan.startDate, targetKg: targetKg)
+                }
+                profile.weightPlan = plan
+            } else {
+                let start = WeightPlanCalculator.smoothedWeight(profile.weightLog, now: now) ?? profile.weightKg ?? targetKg
+                let date = targetDate ?? defaultWeightPlanDate(from: now, targetKg: targetKg)
+                profile.weightPlan = WeightPlan(targetKg: targetKg, startKg: start, startDate: now, targetDate: date)
+            }
+        }
+    }
+
+    private func defaultWeightPlanDate(from start: Date, targetKg: Double) -> Date {
+        let days = defaultWeightPlanWeeks(targetKg: targetKg) * 7
+        return DateMath.calendar.date(byAdding: .day, value: days, to: start) ?? start.addingTimeInterval(Double(days) * 86_400)
+    }
+
+    /// The date alone (the weight stays); nothing without a goal.
+    func setWeightPlanDate(_ date: Date) {
+        guard let plan = profile.weightPlan else { return }
+        setWeightPlan(targetKg: plan.targetKg, targetDate: date)
+    }
+
+    /// The calculation of the goal now, without saving anything (nil: no goal for the aim chosen).
+    func evaluateWeightPlan(now: Date = Date()) -> WeightPlanCalculator.Outcome? {
+        guard let plan = activeWeightPlan, let aim = profile.nutritionAim else { return nil }
+        let days = WeightPlanCalculator.days(until: plan.targetDate, from: now)
+        let input = WeightPlanCalculator.input(profile: weightPlanProfile, birthday: life.birthday, aim: aim,
+                                               targetKg: plan.targetKg, days: days, now: now)
+        return WeightPlanCalculator.evaluate(input)
+    }
+
+    /// The user accepts the calculation: its calories and macronutrients become the targets, as calculated
+    /// targets (typed targets stay theirs). Nothing is applied for an unsafe or uncalculable goal (false).
+    @discardableResult
+    func acceptWeightPlan(now: Date = Date()) -> Bool {
+        guard let outcome = evaluateWeightPlan(now: now) else { return false }
+        switch outcome {
+        case .ok(let plan), .adjusted(let plan, _):
+            applyWeightPlan(kcal: plan.targetKcal, goals: plan.goals, startKg: plan.startKg, now: now)
+            return true
+        case .unsafe, .referToProfessional:
+            return false
+        }
+    }
+
+    /// A change of calories the weigh-ins call for, to accept or not (nil: nothing to propose now).
+    func proposedAdjustment(now: Date = Date()) -> WeightPlanCalculator.Proposal? {
+        guard let plan = activeWeightPlan, plan.acceptedKcal != nil else { return nil }
+        return WeightPlanCalculator.proposeAdjustment(plan: plan, profile: weightPlanProfile, birthday: life.birthday,
+                                                      currentKcal: nutrition.goals.kcal, now: now)
+    }
+
+    func acceptAdjustment(_ proposal: WeightPlanCalculator.Proposal, now: Date = Date()) {
+        guard let plan = activeWeightPlan, plan.acceptedKcal != nil else { return }
+        let smoothed = WeightPlanCalculator.smoothedWeight(profile.weightLog, now: now) ?? profile.weightKg ?? plan.startKg
+        applyWeightPlan(kcal: proposal.newKcal, goals: proposal.goals, startKg: smoothed, now: now)
+    }
+
+    /// « Plus tard »: no new proposal for two weeks.
+    func dismissAdjustment(now: Date = Date()) {
+        guard profile.weightPlan != nil else { return }
+        update(\.profile) { $0.weightPlan?.dismissedProposalDate = now }
+    }
+
+    /// Takes the goal away. Targets that follow the calculation go back to it; typed ones stay.
+    func removeWeightPlan() {
+        guard profile.weightPlan != nil else { return }
+        update(\.profile) { $0.weightPlan = nil }
+    }
+
+    /// Keeps the accepted calories in the plan (a new start for the tracking) and puts them in force. While
+    /// the targets follow the calculation, the calculation reads them (`recommendedNutritionGoals`); for
+    /// targets kept by hand, the four main values are written (the mode stays manual).
+    private func applyWeightPlan(kcal: Double, goals: NutritionGoals, startKg: Double, now: Date) {
+        let manual = !profile.followsNutritionCalculation
+        update(\.profile) { profile in
+            guard var plan = profile.weightPlan else { return }
+            plan.acceptedKcal = kcal
+            plan.startKg = startKg
+            plan.startDate = now
+            plan.dismissedProposalDate = nil
+            profile.weightPlan = plan
+        }
+        if manual {
+            update(\.nutrition) {
+                $0.goals.kcal = goals.kcal
+                $0.goals.protein = goals.protein
+                $0.goals.carbs = goals.carbs
+                $0.goals.fat = goals.fat
+            }
+            markProvided(.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget)
+        }
     }
 
     /// The steps of the calculation, for « Comment c'est calculé ».

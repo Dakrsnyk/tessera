@@ -81,9 +81,9 @@ final class UnitsTests: XCTestCase {
         settings.unitSystem = .imperial
         let imperial = goals()
         XCTAssertEqual(before, imperial)
-        XCTAssertEqual(
-            NutritionCalculator.breakdown(sex: .male, age: 30, heightCm: 180, weightKg: 80, activity: .moderate, goal: .maintain).restingKcal,
-            10 * 80 + 6.25 * 180 - 5 * 30 + 5, accuracy: 0.001)
+        let resting: Double = NutritionCalculator.breakdown(sex: .male, age: 30, heightCm: 180, weightKg: 80, activity: .moderate, goal: .maintain).restingKcal
+        let expectedResting: Double = 800.0 + 1125.0 - 150.0 + 5.0
+        XCTAssertEqual(resting, expectedResting, accuracy: 0.001)
         // Going through the displayed pounds and back stays within a fraction of a kilogram.
         let typed = Units.weightValue(kilograms: 80, in: .imperial)
         let kg = Units.kilograms(fromTyped: typed, in: .imperial)

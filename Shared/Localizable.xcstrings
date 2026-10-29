@@ -3949,6 +3949,53 @@
         }
       }
     },
+    "%@ g": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g"
+          }
+        }
+      }
+    },
     "%@ g de fibres": {
       "extractionState": "manual",
       "localizations": {
@@ -9260,6 +9307,53 @@
         }
       }
     },
+    "%@ → %@ kcal par jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kcal pro Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kcal per day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kcal al día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kcal par jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kcal al giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kcal/日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ → %@ kcal por dia"
+          }
+        }
+      }
+    },
     "%@%@ au total": {
       "extractionState": "manual",
       "localizations": {
@@ -9354,6 +9448,53 @@
         }
       }
     },
+    "%@%@ par semaine (%@%@ %%)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ pro Woche (%@%@ %%)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ per week (%@%@ %%)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ por semana (%@%@ %%)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ par semaine (%@%@ %%)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ a settimana (%@%@ %%)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週%@%@（%@%@ %%）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ por semana (%@%@ %%)"
+          }
+        }
+      }
+    },
     "%@, Premium": {
       "extractionState": "manual",
       "localizations": {
@@ -9444,6 +9585,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@, uma única vez, sem assinatura"
+          }
+        }
+      }
+    },
+    "%@, vers le %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, etwa am %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, around %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, hacia el %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, vers le %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, verso il %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@、%@ごろ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, por volta de %@"
           }
         }
       }
@@ -15605,6 +15793,53 @@
         }
       }
     },
+    "Accepter": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annehmen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accept"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accepter"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accetta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受け入れる"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceitar"
+          }
+        }
+      }
+    },
     "Accroupis-toi et pose les mains au sol.": {
       "extractionState": "manual",
       "localizations": {
@@ -17246,6 +17481,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Endereço"
+          }
+        }
+      }
+    },
+    "Adulte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erwachsen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adult"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adulta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adulte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adulto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "成人"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adulto"
           }
         }
       }
@@ -22091,6 +22373,53 @@
         }
       }
     },
+    "Ajustement proposé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorgeschlagene Anpassung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggested adjustment"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajuste propuesto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustement proposé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifica proposta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提案された調整"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajuste sugerido"
+          }
+        }
+      }
+    },
     "Ajuster de 10 g": {
       "extractionState": "manual",
       "localizations": {
@@ -22510,6 +22839,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alimentos genéricos: Canadian Nutrient File, Health Canada (Open Government Licence – Canada). O Ardane não é afiliado à Health Canada."
+          }
+        }
+      }
+    },
+    "Allaitante": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stillend"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breastfeeding"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En lactancia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allaitante"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In allattamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授乳中"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lactante"
           }
         }
       }
@@ -25945,6 +26321,100 @@
         }
       }
     },
+    "Appliquer ce plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diesen Plan anwenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apply this plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplicar este plan"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appliquer ce plan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applica questo piano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプランを適用"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplicar este plano"
+          }
+        }
+      }
+    },
+    "Appliquer remplace tes valeurs saisies.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Übernehmen ersetzt deine eingegebenen Werte."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applying replaces the values you typed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplicar sustituye los valores que introdujiste."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appliquer remplace tes valeurs saisies."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Applicare sostituisce i valori che hai inserito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "適用すると、入力した値が置き換えられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplicar substitui os valores que você digitou."
+          }
+        }
+      }
+    },
     "Appliquer « %@ »": {
       "extractionState": "manual",
       "localizations": {
@@ -26975,6 +27445,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O Ardane só pede autorização quando você ativa um lembrete. As contagens regressivas têm seu próprio lembrete no editor."
+          }
+        }
+      }
+    },
+    "Ardane ne propose pas de calories pour cet objectif.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane schlägt für dieses Ziel keine Kalorien vor."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane doesn't suggest calories for this goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane no propone calorías para este objetivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane ne propose pas de calories pour cet objectif."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane non propone calorie per questo obiettivo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardaneはこの目標のカロリーを提案しません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ardane não sugere calorias para esta meta."
           }
         }
       }
@@ -31205,6 +31722,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhuma"
+          }
+        }
+      }
+    },
+    "Aucune calorie n'est proposée pour le rythme demandé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für das gewünschte Tempo werden keine Kalorien vorgeschlagen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No calories are suggested for the requested pace."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se propone ninguna caloría para el ritmo solicitado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune calorie n'est proposée pour le rythme demandé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna caloria è proposta per il ritmo richiesto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "希望のペースに対するカロリーは提案されません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma caloria é sugerida para o ritmo pedido."
           }
         }
       }
@@ -44698,6 +45262,53 @@
         }
       }
     },
+    "Calculé d'après ton plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach deinem Plan berechnet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calculated from your plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calculado según tu plan"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calculé d'après ton plan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calcolato in base al tuo piano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたのプランに基づいて計算"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calculado com base no seu plano"
+          }
+        }
+      }
+    },
     "Calculé sur ton iPhone à partir de tes données, sans jamais inventer de chiffre. Avec Apple Intelligence (iOS 26), le texte est reformulé plus naturellement.": {
       "extractionState": "manual",
       "localizations": {
@@ -50005,6 +50616,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Este exercício está no Premium"
+          }
+        }
+      }
+    },
+    "Cet objectif demanderait plus de deux ans en restant prudent : parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Ziel würde in vorsichtigem Tempo mehr als zwei Jahre dauern: Sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This goal would take more than two years at a cautious pace: talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este objetivo requeriría más de dos años con un ritmo prudente: habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cet objectif demanderait plus de deux ans en restant prudent : parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo obiettivo richiederebbe più di due anni con un ritmo prudente: parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この目標は、無理のないペースだと2年以上かかります。医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta meta levaria mais de dois anos em ritmo prudente: fale com um profissional de saúde."
           }
         }
       }
@@ -55410,6 +56068,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Castelo de São Jorge"
+          }
+        }
+      }
+    },
+    "Cible": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cible"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alvo"
           }
         }
       }
@@ -67775,6 +68480,53 @@
         }
       }
     },
+    "Date cible": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zieldatum"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha objetivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date cible"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data obiettivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data-alvo"
+          }
+        }
+      }
+    },
     "Date d'un paiement": {
       "extractionState": "manual",
       "localizations": {
@@ -67865,6 +68617,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Data de nascimento"
+          }
+        }
+      }
+    },
+    "Date estimée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geschätztes Datum"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fecha estimada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date estimée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data stimata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "推定日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data estimada"
           }
         }
       }
@@ -77927,6 +78726,53 @@
         }
       }
     },
+    "Durée plus prudente": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorsichtigere Dauer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More cautious timeline"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plazo más prudente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée plus prudente"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durata più prudente"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "より無理のない期間"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prazo mais prudente"
+          }
+        }
+      }
+    },
     "Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans déverrouiller.": {
       "extractionState": "manual",
       "localizations": {
@@ -83755,6 +84601,100 @@
         }
       }
     },
+    "En %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tra %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@後"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em %@"
+          }
+        }
+      }
+    },
+    "En %@ mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In %@ Monaten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In %@ months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En %@ meses"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En %@ mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tra %@ mesi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@か月後"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em %@ meses"
+          }
+        }
+      }
+    },
     "En alterné ou les deux bras ensemble, paumes vers le haut.": {
       "extractionState": "manual",
       "localizations": {
@@ -84879,6 +85819,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Viajando em %@"
+          }
+        }
+      }
+    },
+    "Enceinte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schwanger"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregnant"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Embarazada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enceinte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In gravidanza"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "妊娠中"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestante"
           }
         }
       }
@@ -86387,6 +87374,53 @@
         }
       }
     },
+    "Es-tu enceinte ou allaitante ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bist du schwanger oder stillst du?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Are you pregnant or breastfeeding?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Estás embarazada o en lactancia?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es-tu enceinte ou allaitante ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sei in gravidanza o in allattamento?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "妊娠中または授乳中ですか？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você está grávida ou amamentando?"
+          }
+        }
+      }
+    },
     "Escaliers (stepper)": {
       "extractionState": "manual",
       "localizations": {
@@ -86994,6 +88028,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estimativa com base na duração dos treinos e no seu peso"
+          }
+        }
+      }
+    },
+    "Estimation, pas une garantie : ton corps réagit à son propre rythme. Ce n'est pas un avis médical.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schätzung, keine Garantie: Dein Körper reagiert in seinem eigenen Tempo. Das ist keine medizinische Beratung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimate, not a guarantee: your body responds at its own pace. This is not medical advice."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimación, no una garantía: tu cuerpo responde a su propio ritmo. Esto no es un consejo médico."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimation, pas une garantie : ton corps réagit à son propre rythme. Ce n'est pas un avis médical."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stima, non una garanzia: il tuo corpo reagisce con i suoi tempi. Non è un parere medico."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "推定であり、保証ではありません。体の反応には個人差があります。医学的なアドバイスではありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimativa, não uma garantia: seu corpo reage no próprio ritmo. Isto não é aconselhamento médico."
           }
         }
       }
@@ -90002,6 +91083,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opcional"
+          }
+        }
+      }
+    },
+    "Facultatif. Ardane calcule des calories d'après ce poids et la durée choisie, et te les montre avant de les appliquer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. Ardane berechnet Kalorien anhand dieses Gewichts und der gewählten Dauer und zeigt sie dir an, bevor du sie anwendest."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. Ardane calculates calories from this weight and the chosen duration, and shows them to you before applying them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. Ardane calcula las calorías según este peso y la duración elegida, y te las muestra antes de aplicarlas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facultatif. Ardane calcule des calories d'après ce poids et la durée choisie, et te les montre avant de les appliquer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facoltativo. Ardane calcola le calorie in base a questo peso e alla durata scelta, e te le mostra prima di applicarle."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任意。Ardaneはこの体重と選んだ期間からカロリーを計算し、適用する前に表示します。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. O Ardane calcula as calorias com base neste peso e na duração escolhida, e mostra a você antes de aplicá-las."
           }
         }
       }
@@ -105516,6 +106644,53 @@
         }
       }
     },
+    "Il manque des informations (âge, taille, poids ou sexe de calcul) ou elles semblent erronées : Ardane ne peut pas calculer un objectif fiable.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es fehlen Angaben (Alter, Größe, Gewicht oder Geschlecht für die Berechnung) oder sie wirken fehlerhaft: Ardane kann kein verlässliches Ziel berechnen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some information is missing (age, height, weight or calculation sex) or looks wrong: Ardane can't calculate a reliable goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falta información (edad, estatura, peso o sexo de cálculo) o parece incorrecta: Ardane no puede calcular un objetivo fiable."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il manque des informations (âge, taille, poids ou sexe de calcul) ou elles semblent erronées : Ardane ne peut pas calculer un objectif fiable."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mancano delle informazioni (età, altezza, peso o sesso per il calcolo) o sembrano errate: Ardane non può calcolare un obiettivo affidabile."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "情報（年齢、身長、体重、計算用の性別）が不足しているか、正しくない可能性があります。Ardaneは信頼できる目標を計算できません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faltam informações (idade, altura, peso ou sexo para o cálculo) ou elas parecem erradas: o Ardane não consegue calcular uma meta confiável."
+          }
+        }
+      }
+    },
     "Il manque à la clé l'autorisation « Balance transactions : lecture ».": {
       "extractionState": "manual",
       "localizations": {
@@ -118018,6 +119193,53 @@
         }
       }
     },
+    "Le changement est limité par les bornes de sécurité d'Ardane.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Änderung wird durch die Sicherheitsgrenzen von Ardane begrenzt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The change is limited by Ardane's safety bounds."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El cambio está limitado por los límites de seguridad de Ardane."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le changement est limité par les bornes de sécurité d'Ardane."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La variazione è limitata dai limiti di sicurezza di Ardane."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変化はArdaneの安全範囲によって制限されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A mudança é limitada pelos limites de segurança do Ardane."
+          }
+        }
+      }
+    },
     "Le chiffre d'affaires du jour comparé au même jour la semaine dernière.": {
       "extractionState": "manual",
       "localizations": {
@@ -120176,6 +121398,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "O mais alto possível, sem dobrar os braços."
+          }
+        }
+      }
+    },
+    "Le poids cible est trop bas pour ta taille : parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Zielgewicht ist für deine Größe zu niedrig: Sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The target weight is too low for your height: talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El peso objetivo es demasiado bajo para tu estatura: habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le poids cible est trop bas pour ta taille : parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il peso obiettivo è troppo basso per la tua altezza: parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標体重が身長に対して低すぎます。医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O peso-alvo está baixo demais para a sua altura: fale com um profissional de saúde."
+          }
+        }
+      }
+    },
+    "Le poids cible ou la date ne correspond pas à l'objectif choisi.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zielgewicht oder Datum passt nicht zum gewählten Ziel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The target weight or date doesn't match the chosen goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El peso objetivo o la fecha no coincide con el objetivo elegido."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le poids cible ou la date ne correspond pas à l'objectif choisi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il peso obiettivo o la data non corrisponde all'obiettivo scelto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標体重または日付が、選んだ目標と合っていません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O peso-alvo ou a data não corresponde à meta escolhida."
           }
         }
       }
@@ -134891,6 +136207,53 @@
         }
       }
     },
+    "Modifier l'objectif": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel ändern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modificar el objetivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier l'objectif"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifica obiettivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標を編集"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar meta"
+          }
+        }
+      }
+    },
     "Modifier la dépense": {
       "extractionState": "manual",
       "localizations": {
@@ -135451,6 +136814,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menos de um minuto: nada foi registrado"
+          }
+        }
+      }
+    },
+    "Moins de 18 ans": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unter 18 Jahren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Under 18"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menos de 18 años"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moins de 18 ans"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meno di 18 anni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "18歳未満"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menos de 18 anos"
           }
         }
       }
@@ -147628,6 +149038,147 @@
         }
       }
     },
+    "Objectif impossible à atteindre de manière sûre": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel nicht sicher erreichbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal not safely achievable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo imposible de alcanzar de forma segura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif impossible à atteindre de manière sûre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo non raggiungibile in sicurezza"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全に達成できない目標"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta impossível de atingir com segurança"
+          }
+        }
+      }
+    },
+    "Objectif impossible à atteindre de manière sûre : perdre autant de poids aussi vite dépasse un rythme prudent.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel nicht sicher erreichbar: So viel Gewicht so schnell abzunehmen übersteigt ein vorsichtiges Tempo."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal not safely achievable: losing that much weight that fast exceeds a cautious pace."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo imposible de alcanzar de forma segura: perder tanto peso tan rápido supera un ritmo prudente."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif impossible à atteindre de manière sûre : perdre autant de poids aussi vite dépasse un rythme prudent."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo non raggiungibile in sicurezza: perdere così tanto peso così in fretta supera un ritmo prudente."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全に達成できない目標：これだけの体重をこれほど速く減らすのは、無理のないペースを超えています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta impossível de atingir com segurança: perder tanto peso tão rápido passa de um ritmo prudente."
+          }
+        }
+      }
+    },
+    "Objectif impossible à atteindre de manière sûre : prendre autant de poids aussi vite dépasse un rythme prudent.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel nicht sicher erreichbar: So viel Gewicht so schnell zuzunehmen übersteigt ein vorsichtiges Tempo."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal not safely achievable: gaining that much weight that fast exceeds a cautious pace."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo imposible de alcanzar de forma segura: ganar tanto peso tan rápido supera un ritmo prudente."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif impossible à atteindre de manière sûre : prendre autant de poids aussi vite dépasse un rythme prudent."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo non raggiungibile in sicurezza: aumentare così tanto di peso così in fretta supera un ritmo prudente."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全に達成できない目標：これだけの体重をこれほど速く増やすのは、無理のないペースを超えています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta impossível de atingir com segurança: ganhar tanto peso tão rápido passa de um ritmo prudente."
+          }
+        }
+      }
+    },
     "Objectif mensuel à définir dans Ardane": {
       "extractionState": "manual",
       "localizations": {
@@ -149739,6 +151290,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abra o cotovelo em direção ao teto, girando a parte de cima das costas."
+          }
+        }
+      }
+    },
+    "Ouvre le récapitulatif de ton objectif de poids": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnet die Übersicht deines Gewichtsziels"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens your weight goal summary"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre el resumen de tu objetivo de peso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvre le récapitulatif de ton objectif de poids"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apre il riepilogo del tuo obiettivo di peso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "体重目標のまとめを開きます"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre o resumo da sua meta de peso"
           }
         }
       }
@@ -152281,6 +153879,53 @@
         }
       }
     },
+    "Parle à un professionnel de santé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprich mit einer Fachperson im Gesundheitswesen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talk to a healthcare professional"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Habla con un profesional de la salud"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parle à un professionnel de santé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parla con un professionista della salute"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "医療の専門家に相談してください"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fale com um profissional de saúde"
+          }
+        }
+      }
+    },
     "Parmesan": {
       "extractionState": "manual",
       "localizations": {
@@ -154819,6 +156464,100 @@
         }
       }
     },
+    "Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Schwangerschaft und Stillzeit berechnet Ardane kein Gewichtsziel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "During pregnancy or breastfeeding, Ardane doesn't calculate a weight goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durante el embarazo o la lactancia, Ardane no calcula un objetivo de peso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In gravidanza o allattamento, Ardane non calcola un obiettivo di peso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "妊娠中・授乳中は、Ardaneは体重目標を計算しません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durante a gravidez ou a amamentação, o Ardane não calcula uma meta de peso."
+          }
+        }
+      }
+    },
+    "Pendant la grossesse ou l'allaitement, les besoins changent : parle à un professionnel de santé avant tout objectif de poids.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Schwangerschaft und Stillzeit ändert sich dein Bedarf: Sprich mit einer Fachperson im Gesundheitswesen, bevor du ein Gewichtsziel festlegst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "During pregnancy or breastfeeding, your needs change: talk to a healthcare professional before setting any weight goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durante el embarazo o la lactancia, las necesidades cambian: habla con un profesional de la salud antes de fijar cualquier objetivo de peso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pendant la grossesse ou l'allaitement, les besoins changent : parle à un professionnel de santé avant tout objectif de poids."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In gravidanza o allattamento le esigenze cambiano: parla con un professionista della salute prima di fissare un obiettivo di peso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "妊娠中・授乳中は必要量が変わります。体重目標を決める前に、医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durante a gravidez ou a amamentação, as necessidades mudam: fale com um profissional de saúde antes de definir qualquer meta de peso."
+          }
+        }
+      }
+    },
     "Pendant une séance": {
       "extractionState": "manual",
       "localizations": {
@@ -157118,6 +158857,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Planta"
+          }
+        }
+      }
+    },
+    "Plan appliqué à tes besoins": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan auf deinen Bedarf angewendet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan applied to your needs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan aplicado a tus necesidades"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan appliqué à tes besoins"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piano applicato alle tue esigenze"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの必要量に合わせたプラン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plano aplicado às suas necessidades"
           }
         }
       }
@@ -159797,6 +161583,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peso"
+          }
+        }
+      }
+    },
+    "Poids actuel": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktuelles Gewicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current weight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso actual"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poids actuel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso attuale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在の体重"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso atual"
+          }
+        }
+      }
+    },
+    "Poids cible": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zielgewicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target weight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso objetivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poids cible"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso obiettivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標体重"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peso-alvo"
           }
         }
       }
@@ -163792,6 +165672,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para a sua idade e a contagem regressiva."
+          }
+        }
+      }
+    },
+    "Pour ton âge, Ardane ne calcule pas d'objectif de poids : parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für dein Alter berechnet Ardane kein Gewichtsziel: Sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For your age, Ardane doesn't calculate a weight goal: talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para tu edad, Ardane no calcula un objetivo de peso: habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour ton âge, Ardane ne calcule pas d'objectif de poids : parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per la tua età, Ardane non calcola un obiettivo di peso: parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの年齢では、Ardaneは体重目標を計算しません。医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para a sua idade, o Ardane não calcula uma meta de peso: fale com um profissional de saúde."
+          }
+        }
+      }
+    },
+    "Pour ton âge, seul le maintien est calculé, à titre indicatif. Parle à un professionnel de santé de ton alimentation.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für dein Alter wird nur das Halten berechnet, als Richtwert. Sprich mit einer Fachperson im Gesundheitswesen über deine Ernährung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For your age, only maintenance is calculated, as a guide. Talk to a healthcare professional about your diet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para tu edad, solo se calcula el mantenimiento, a modo indicativo. Habla con un profesional de la salud sobre tu alimentación."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour ton âge, seul le maintien est calculé, à titre indicatif. Parle à un professionnel de santé de ton alimentation."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per la tua età viene calcolato solo il mantenimento, a titolo indicativo. Parla della tua alimentazione con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの年齢では、目安として体重維持のみ計算します。食事について医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para a sua idade, só a manutenção é calculada, como referência. Fale com um profissional de saúde sobre a sua alimentação."
           }
         }
       }
@@ -178883,6 +180857,53 @@
         }
       }
     },
+    "Retirer cet objectif de poids": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Gewichtsziel entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove this weight goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar este objetivo de peso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer cet objectif de poids"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi questo obiettivo di peso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この体重目標を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover esta meta de peso"
+          }
+        }
+      }
+    },
     "Retirer de Mon Quotidien": {
       "extractionState": "manual",
       "localizations": {
@@ -184711,6 +186732,100 @@
         }
       }
     },
+    "Rythme": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pace"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rythme"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペース"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo"
+          }
+        }
+      }
+    },
+    "Rythme soutenu mais dans les limites : plus de 0,75 % du poids par semaine demande de la rigueur.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zügiges Tempo, aber im Rahmen: Mehr als 0,75 % des Gewichts pro Woche erfordert Disziplin."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fast pace but within limits: more than 0.75% of your weight per week takes discipline."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo exigente pero dentro de los límites: más del 0,75 % del peso por semana requiere rigor."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rythme soutenu mais dans les limites : plus de 0,75 % du poids par semaine demande de la rigueur."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo sostenuto ma nei limiti: più dello 0,75 % del peso a settimana richiede rigore."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "速めですが範囲内です。週に体重の0.75 %を超える場合は、しっかり管理が必要です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo acelerado, mas dentro dos limites: mais de 0,75 % do peso por semana exige rigor."
+          }
+        }
+      }
+    },
     "Règle chacun": {
       "extractionState": "manual",
       "localizations": {
@@ -185741,6 +187856,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Distribuição e limites"
+          }
+        }
+      }
+    },
+    "Réponds à la question ci-dessus pour obtenir ton plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beantworte die Frage oben, um deinen Plan zu erhalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answer the question above to get your plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responde a la pregunta anterior para obtener tu plan"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réponds à la question ci-dessus pour obtenir ton plan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rispondi alla domanda qui sopra per ottenere il tuo piano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上の質問に答えると、プランが表示されます"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responda à pergunta acima para obter seu plano"
           }
         }
       }
@@ -188138,6 +190300,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sem categoria"
+          }
+        }
+      }
+    },
+    "Sans cette information, Ardane ne propose pas de perte ni de prise de poids. Précise ta situation ou parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne diese Angabe schlägt Ardane weder Ab- noch Zunahme vor. Gib deine Situation an oder sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without this information, Ardane doesn't suggest weight loss or gain. Specify your situation or talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin esta información, Ardane no propone pérdida ni aumento de peso. Indica tu situación o habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans cette information, Ardane ne propose pas de perte ni de prise de poids. Précise ta situation ou parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza questa informazione, Ardane non propone perdita né aumento di peso. Indica la tua situazione o parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この情報がないと、Ardaneは減量も増量も提案しません。状況を入力するか、医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem esta informação, o Ardane não sugere perda nem ganho de peso. Informe a sua situação ou fale com um profissional de saúde."
           }
         }
       }
@@ -191146,6 +193355,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Próxima semana"
+          }
+        }
+      }
+    },
+    "Semaines": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wochen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weeks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semanas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semaines"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settimane"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semanas"
           }
         }
       }
@@ -206989,6 +209245,100 @@
         }
       }
     },
+    "Tes besoins estimés laissent trop peu de marge pour changer de poids en sécurité : parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein geschätzter Bedarf lässt zu wenig Spielraum, um sicher Gewicht zu ändern: Sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your estimated needs leave too little room to change weight safely: talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus necesidades estimadas dejan muy poco margen para cambiar de peso de forma segura: habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes besoins estimés laissent trop peu de marge pour changer de poids en sécurité : parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo fabbisogno stimato lascia troppo poco margine per cambiare peso in sicurezza: parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "推定された必要量では、安全に体重を変える余裕がほとんどありません。医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas necessidades estimadas deixam pouca margem para mudar de peso com segurança: fale com um profissional de saúde."
+          }
+        }
+      }
+    },
+    "Tes besoins estimés sont sous le minimum de calories d'Ardane : parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein geschätzter Bedarf liegt unter dem Kalorienminimum von Ardane: Sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your estimated needs are below Ardane's minimum calories: talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus necesidades estimadas están por debajo del mínimo de calorías de Ardane: habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes besoins estimés sont sous le minimum de calories d'Ardane : parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo fabbisogno stimato è sotto il minimo di calorie di Ardane: parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "推定された必要量がArdaneの最低カロリーを下回っています。医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas necessidades estimadas estão abaixo do mínimo de calorias do Ardane: fale com um profissional de saúde."
+          }
+        }
+      }
+    },
     "Tes besoins par jour": {
       "extractionState": "manual",
       "localizations": {
@@ -207126,6 +209476,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suas calorias dos últimos sete dias e a sua média."
+          }
+        }
+      }
+    },
+    "Tes calories saisies restent prioritaires : reviens au calcul pour les remplacer par celles du plan.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine eingegebenen Kalorien haben Vorrang: Wechsle zurück zur Berechnung, um sie durch die des Plans zu ersetzen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your typed calories take priority: switch back to the calculation to replace them with the plan's."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus calorías introducidas tienen prioridad: vuelve al cálculo para sustituirlas por las del plan."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes calories saisies restent prioritaires : reviens au calcul pour les remplacer par celles du plan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le calorie che hai inserito hanno la priorità: torna al calcolo per sostituirle con quelle del piano."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入力したカロリーが優先されます。プランの値に置き換えるには、計算に戻してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas calorias digitadas têm prioridade: volte ao cálculo para substituí-las pelas do plano."
           }
         }
       }
@@ -213945,6 +216342,53 @@
         }
       }
     },
+    "Ton objectif de poids": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Gewichtsziel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your weight goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu objetivo de peso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton objectif de poids"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo obiettivo di peso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの体重目標"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua meta de peso"
+          }
+        }
+      }
+    },
     "Ton objectif de protéines et ce qui vient.": {
       "extractionState": "manual",
       "localizations": {
@@ -214082,6 +216526,288 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua meta “%@”: %@%%."
+          }
+        }
+      }
+    },
+    "Ton poids actuel est déjà bas pour ta taille : Ardane ne propose pas de perte de poids. Parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein aktuelles Gewicht ist für deine Größe schon niedrig: Ardane schlägt keine Gewichtsabnahme vor. Sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your current weight is already low for your height: Ardane doesn't suggest weight loss. Talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu peso actual ya es bajo para tu estatura: Ardane no propone pérdida de peso. Habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton poids actuel est déjà bas pour ta taille : Ardane ne propose pas de perte de poids. Parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo peso attuale è già basso per la tua altezza: Ardane non propone perdita di peso. Parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在の体重は、身長に対してすでに低めです。Ardaneは減量を提案しません。医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu peso atual já está baixo para a sua altura: o Ardane não sugere perda de peso. Fale com um profissional de saúde."
+          }
+        }
+      }
+    },
+    "Ton poids actuel est déjà élevé pour ta taille : Ardane ne propose pas de prise de poids. Parle à un professionnel de santé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein aktuelles Gewicht ist für deine Größe schon hoch: Ardane schlägt keine Gewichtszunahme vor. Sprich mit einer Fachperson im Gesundheitswesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your current weight is already high for your height: Ardane doesn't suggest weight gain. Talk to a healthcare professional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu peso actual ya es alto para tu estatura: Ardane no propone aumento de peso. Habla con un profesional de la salud."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton poids actuel est déjà élevé pour ta taille : Ardane ne propose pas de prise de poids. Parle à un professionnel de santé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo peso attuale è già alto per la tua altezza: Ardane non propone aumento di peso. Parla con un professionista della salute."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在の体重は、身長に対してすでに高めです。Ardaneは増量を提案しません。医療の専門家に相談してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu peso atual já está alto para a sua altura: o Ardane não sugere ganho de peso. Fale com um profissional de saúde."
+          }
+        }
+      }
+    },
+    "Ton poids cible": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Zielgewicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your target weight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu peso objetivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton poids cible"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo peso obiettivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの目標体重"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu peso-alvo"
+          }
+        }
+      }
+    },
+    "Ton poids s'écarte de ton poids stable depuis au moins deux semaines. Voici un ajustement progressif, à accepter si tu le souhaites.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Gewicht weicht seit mindestens zwei Wochen von deinem stabilen Gewicht ab. Hier ist eine schrittweise Anpassung, die du annehmen kannst, wenn du möchtest."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your weight has been drifting from your stable weight for at least two weeks. Here's a gradual adjustment, to accept if you'd like."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu peso se aleja de tu peso estable desde hace al menos dos semanas. Aquí tienes un ajuste progresivo, para aceptar si quieres."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton poids s'écarte de ton poids stable depuis au moins deux semaines. Voici un ajustement progressif, à accepter si tu le souhaites."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo peso si discosta dal tuo peso stabile da almeno due settimane. Ecco una modifica graduale, da accettare se vuoi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "体重が安定時の体重から、少なくとも2週間離れています。段階的な調整案です。よければ受け入れてください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu peso se afasta do seu peso estável há pelo menos duas semanas. Aqui está um ajuste gradual, para aceitar se quiser."
+          }
+        }
+      }
+    },
+    "Ton poids évolue plus lentement que prévu depuis au moins deux semaines. Voici un ajustement progressif, à accepter si tu le souhaites.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Gewicht verändert sich seit mindestens zwei Wochen langsamer als erwartet. Hier ist eine schrittweise Anpassung, die du annehmen kannst, wenn du möchtest."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your weight has been changing more slowly than expected for at least two weeks. Here's a gradual adjustment, to accept if you'd like."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu peso evoluciona más lento de lo previsto desde hace al menos dos semanas. Aquí tienes un ajuste progresivo, para aceptar si quieres."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton poids évolue plus lentement que prévu depuis au moins deux semaines. Voici un ajustement progressif, à accepter si tu le souhaites."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo peso cambia più lentamente del previsto da almeno due settimane. Ecco una modifica graduale, da accettare se vuoi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "体重の変化が、少なくとも2週間、予想よりゆっくりです。段階的な調整案です。よければ受け入れてください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu peso está mudando mais devagar do que o previsto há pelo menos duas semanas. Aqui está um ajuste gradual, para aceitar se quiser."
+          }
+        }
+      }
+    },
+    "Ton poids évolue plus vite que prévu depuis au moins deux semaines. Voici un ajustement progressif, à accepter si tu le souhaites.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Gewicht verändert sich seit mindestens zwei Wochen schneller als erwartet. Hier ist eine schrittweise Anpassung, die du annehmen kannst, wenn du möchtest."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your weight has been changing faster than expected for at least two weeks. Here's a gradual adjustment, to accept if you'd like."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu peso evoluciona más rápido de lo previsto desde hace al menos dos semanas. Aquí tienes un ajuste progresivo, para aceptar si quieres."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton poids évolue plus vite que prévu depuis au moins deux semaines. Voici un ajustement progressif, à accepter si tu le souhaites."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo peso cambia più velocemente del previsto da almeno due settimane. Ecco una modifica graduale, da accettare se vuoi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "体重の変化が、少なくとも2週間、予想より速いです。段階的な調整案です。よければ受け入れてください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu peso está mudando mais rápido do que o previsto há pelo menos duas semanas. Aqui está um ajuste gradual, para aceitar se quiser."
           }
         }
       }
@@ -224426,6 +227152,53 @@
         }
       }
     },
+    "Utiliser cette durée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Dauer verwenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use this duration"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar esta duración"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser cette durée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa questa durata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この期間を使う"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar esta duração"
+          }
+        }
+      }
+    },
     "Utiliser la caméra": {
       "extractionState": "manual",
       "localizations": {
@@ -229028,6 +231801,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ver detalhes"
+          }
+        }
+      }
+    },
+    "Voir le récapitulatif": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Übersicht ansehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View summary"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver resumen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir le récapitulatif"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vedi riepilogo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まとめを見る"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver resumo"
           }
         }
       }

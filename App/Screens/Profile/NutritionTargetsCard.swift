@@ -11,11 +11,16 @@ struct NutritionTargetsCard: View {
     @State private var paywall: PaywallContext?
     @State private var showsMicronutrients = false
     @State private var showsMethod = false
+    @State private var showsPlan = false
 
     var body: some View {
         let profile = model.profile
         let auto = profile.followsNutritionCalculation
         let recommended = model.recommendedNutritionGoals()
+        let followsPlan = auto && model.activeWeightPlan?.acceptedKcal != nil
+        VStack(spacing: 12) {
+        // An adjustment the weigh-ins call for: proposed, never applied without a touch.
+        WeightPlanAdjustmentCard()
         QuestionCard(title: tr("Tes besoins par jour"), detail: auto
                      ? tr("Calculés à partir de ton corps, de ton objectif et de ton activité. Touche une valeur pour la personnaliser.")
                      : tr("Tes valeurs, gardées telles quelles. Le calcul reste proposé à côté.")) {
@@ -25,6 +30,28 @@ struct NutritionTargetsCard: View {
                 }
                 .tint(Color(hex: MiniApp.nutrition.colorHex))
                 .accessibilityIdentifier("nutrition-auto")
+                if followsPlan {
+                    Button { showsPlan = true } label: {
+                        HStack(spacing: 6) {
+                            Label(tr("Calculé d'après ton plan"), systemImage: "scalemass")
+                                .font(.footnote.weight(.semibold))
+                            Spacer(minLength: 4)
+                            Text(tr("Voir le récapitulatif"))
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption2.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                                .accessibilityHidden(true)
+                        }
+                        .frame(minHeight: 36)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.pressable)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityHint(tr("Ouvre le récapitulatif de ton objectif de poids"))
+                    .accessibilityIdentifier("weightplan-link")
+                }
                 if auto, recommended == nil {
                     Label(tr("Ajoute \(Self.list(model.nutritionCalculationMissing)) : Ardane calcule tes besoins."), systemImage: "info.circle")
                         .font(.footnote)
@@ -75,8 +102,26 @@ struct NutritionTargetsCard: View {
                 .presentationDetents([.medium])
         }
         .sheet(item: $paywall) { PaywallView(context: $0) }
+        .sheet(isPresented: $showsPlan) {
+            NavigationStack {
+                ScrollView {
+                    WeightPlanSummaryView(onEdit: { showsPlan = false })
+                        .padding(20)
+                }
+                .background(.screenGradient)
+                .navigationTitle(tr("Ton objectif de poids"))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button(tr("OK")) { showsPlan = false }
+                    }
+                }
+            }
+            .presentationDetents([.large])
+        }
         // Targets added by an update follow the calculation at once.
         .onAppear { model.followCalculatedNutritionGoals() }
+        }
     }
 
     /// « À LIMITER », « MINÉRAUX »…
