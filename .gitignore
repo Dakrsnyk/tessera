@@ -21,3 +21,14 @@ graphify-out/
 # Production de la publicité (rendus locaux, gros fichiers)
 pub/
 scripts/tools/
+
+# Secrets : ne jamais versionner (dépôt public pour la CI)
+.env
+.env.*
+*.p8
+*.p12
+*.pem
+*.key
+*.cer
+*.mobileprovision
+secrets*.json
