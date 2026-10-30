@@ -78,7 +78,10 @@ enum Encouragements {
     static func allows(_ kind: Kind, at date: Date, now: Date, log: EncouragementLog) -> Bool {
         guard isAwake(now), isAwake(date) else { return false }
         let sent = log.entries
-        if sent.filter({ DateMath.isSameDay($0.date, date) }).count >= maxPerDay { return false }
+        let today = sent.filter { DateMath.isSameDay($0.date, date) }.count
+        if today >= maxPerDay { return false }
+        // The person's own ceiling counts every notification of the day: the engine's and these.
+        if today + log.others.filter({ DateMath.isSameDay($0, date) }).count >= max(1, log.dailyCap) { return false }
         if sent.contains(where: { abs($0.date.timeIntervalSince(date)) < minSpacing }) { return false }
         let family = sent.filter { $0.kind?.family == kind.family }
         if family.contains(where: { abs($0.date.timeIntervalSince(date)) < kind.cooldown }) { return false }
@@ -101,7 +104,21 @@ enum Encouragements {
     /// The encouragement a change calls for (nil: nothing to do). Works on any saved state, like
     /// `AppModel.update(_:_:)` does: nutrition, fitness, studies and habits are looked at.
     static func evaluate<T>(from before: T, to after: T, settings: AppSettings, now: Date = Date(),
-                            log: EncouragementLog) -> Outcome? {
+                            log: EncouragementLog, notifications: NotificationLog = NotificationLog()) -> Outcome? {
+        // The ceiling set in Profil › Rappels counts the engine's notifications too (not saved with the log).
+        var log = log
+        log.dailyCap = settings.dailyNotificationCap
+        log.others = notifications.entries.map(\.date)
+        guard var outcome = evaluateUnfiltered(from: before, to: after, settings: settings, now: now, log: log) else { return nil }
+        // The person's own quiet hours (Profil › Rappels) come on top of the fixed 8:00 to 22:00.
+        if let message = outcome.message, NotificationEngine.isQuiet(message.date, settings: settings) || NotificationEngine.isQuiet(now, settings: settings) {
+            outcome.message = nil
+        }
+        return outcome.message == nil && outcome.cancelled.isEmpty ? nil : outcome
+    }
+
+    private static func evaluateUnfiltered<T>(from before: T, to after: T, settings: AppSettings, now: Date,
+                                              log: EncouragementLog) -> Outcome? {
         guard settings.encourages else { return nil }
         if let old = before as? NutritionState, let new = after as? NutritionState {
             return afterMeal(old: old, new: new, now: now, log: log)
@@ -303,14 +320,16 @@ enum Encouragements {
         await deliver(outcome, defaults: defaults)
     }
 
-    /// Evaluates the change against the shared log and records the outcome in it, under a lock.
+    /// Evaluates the change against the shared log and records the outcome in it. The lock only protects
+    /// the current process (the app and the intents may be separate processes: a rare double is possible).
     private static func decide<T>(from before: T, to after: T, settings: AppSettings?, now: Date,
                                   defaults: UserDefaults) -> Outcome? {
         guard before is NutritionState || before is FitnessState || before is StudentState || before is ContentState else { return nil }
         let settings = settings ?? SharedStore.shared.settings
         return lock.withLock {
             var log = EncouragementLog.load(defaults)
-            guard let outcome = evaluate(from: before, to: after, settings: settings, now: now, log: log) else { return nil }
+            guard let outcome = evaluate(from: before, to: after, settings: settings, now: now, log: log,
+                                         notifications: NotificationLog.load(defaults)) else { return nil }
             log.entries.removeAll { outcome.cancelled.contains($0.id) }
             if let message = outcome.message { log.record(message, now: now) }
             log.save(defaults)
@@ -358,6 +377,13 @@ struct EncouragementLog: Codable, Hashable {
     }
 
     var entries: [Entry] = []
+
+    /// Set by `Encouragements.evaluate` for the rules, never saved: the person's ceiling per day and the
+    /// dates of the engine's notifications (they share that ceiling).
+    var dailyCap = Int.max
+    var others: [Date] = []
+
+    enum CodingKeys: String, CodingKey { case entries }
 
     static let key = "tessera.encouragements.log"
 

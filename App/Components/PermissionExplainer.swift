@@ -1,3 +1,4 @@
+import AVFoundation
 import CoreMotion
 import EventKit
 import SwiftUI
@@ -57,9 +58,10 @@ enum PermissionMemory {
     }
 }
 
-/// The permissions Ardane may ask for. The camera (food scanner) and Photos (wallpapers) have their own flows.
+/// The permissions Ardane may ask for. The camera is asked by the food scanner's own gate (`CameraAccessGate`)
+/// and by the setup step; Photos (wallpapers) has its own flow.
 enum AppPermission: String, CaseIterable, Identifiable {
-    case notifications, calendar, motion
+    case notifications, calendar, motion, camera
 
     var id: String { rawValue }
 
@@ -68,6 +70,7 @@ enum AppPermission: String, CaseIterable, Identifiable {
         case .notifications: tr("Notifications")
         case .calendar: tr("Calendrier")
         case .motion: tr("Mouvement et pas")
+        case .camera: tr("Caméra")
         }
     }
 
@@ -76,6 +79,7 @@ enum AppPermission: String, CaseIterable, Identifiable {
         case .notifications: "bell.badge.fill"
         case .calendar: "calendar"
         case .motion: "figure.walk"
+        case .camera: "camera.fill"
         }
     }
 
@@ -85,6 +89,7 @@ enum AppPermission: String, CaseIterable, Identifiable {
         case .notifications: tr("Pour t'envoyer les rappels que tu actives, à l'heure choisie.")
         case .calendar: tr("Pour afficher tes prochains rendez-vous dans Ardane et ses widgets.")
         case .motion: tr("Pour compter tes pas, ta distance et tes étages avec le capteur de ton iPhone.")
+        case .camera: tr("Pour scanner le code-barres d'un aliment ou photographier ton plat.")
         }
     }
 
@@ -94,6 +99,7 @@ enum AppPermission: String, CaseIterable, Identifiable {
         case .notifications: tr("Les rappels sont créés sur ton iPhone, sans compte ni serveur.")
         case .calendar: tr("Tes événements restent sur ton iPhone.")
         case .motion: tr("Tes pas restent sur ton iPhone, sans Santé ni compte.")
+        case .camera: tr("L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.")
         }
     }
 
@@ -118,6 +124,12 @@ enum AppPermission: String, CaseIterable, Identifiable {
             // Without a step sensor there is nothing to ask for: the screens show their own message.
             guard CMPedometer.isStepCountingAvailable() else { return .denied }
             switch CMPedometer.authorizationStatus() {
+            case .authorized: return .granted
+            case .notDetermined: return .notDetermined
+            default: return .denied
+            }
+        case .camera:
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized: return .granted
             case .notDetermined: return .notDetermined
             default: return .denied

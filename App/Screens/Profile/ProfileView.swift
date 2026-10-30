@@ -22,6 +22,7 @@ struct ProfileView: View {
     @State private var pendingRestore: DataBackup.Archive?
     @State private var backupMessage: String?
     @State private var copiedEmail = false
+    @State private var reviewOptedOut = ReviewLog.load().optedOut
     @State private var notificationStatus = "—"
     @Environment(\.openURL) private var openURL
     @Environment(\.scenePhase) private var scenePhase
@@ -132,7 +133,7 @@ struct ProfileView: View {
                 } header: {
                     Text(tr("Notifications"))
                 } footer: {
-                    Text(tr("Ardane ne demande l'autorisation qu'au moment où tu actives un rappel. Les comptes à rebours ont leur propre rappel dans l'éditeur."))
+                    Text(tr("Ardane te propose les autorisations après tes premières questions ; tu peux les retrouver dans Autorisations. Les comptes à rebours ont leur propre rappel dans l'éditeur."))
                 }
 
                 Section(tr("Tes données")) {
@@ -140,6 +141,8 @@ struct ProfileView: View {
                     NavigationLink { HabitsView() } label: { Label(tr("Habitudes"), systemImage: "repeat") }
                     NavigationLink { MoneyView() } label: { Label(tr("Revenus et dépenses"), systemImage: "dollarsign.circle") }
                     NavigationLink { CalendarAccessView() } label: { Label(tr("Calendrier"), systemImage: "calendar") }
+                    NavigationLink { PermissionsSettingsView() } label: { Label(tr("Autorisations"), systemImage: "hand.raised") }
+                        .accessibilityIdentifier("settings-permissions")
                 }
 
                 Section(tr("Aide")) {
@@ -165,6 +168,18 @@ struct ProfileView: View {
                         Label(tr("Noter Ardane"), systemImage: "star")
                     }
                     .accessibilityIdentifier("settings-rate")
+                    Toggle(isOn: Binding(
+                        get: { !reviewOptedOut },
+                        set: { allowed in
+                            var log = ReviewLog.load()
+                            log.optedOut = !allowed
+                            log.save()
+                            reviewOptedOut = !allowed
+                        }
+                    )) {
+                        Label(tr("Me proposer de noter Ardane"), systemImage: "star.bubble")
+                    }
+                    .accessibilityIdentifier("settings-review-optin")
                     Button {
                         UIPasteboard.general.string = PremiumConfiguration.supportEmail
                         copiedEmail = true

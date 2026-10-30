@@ -4,7 +4,7 @@
 
 Each icon becomes an icon set (1024 px; its light picture also fills the dark slot, so the icon stays
 light when the iPhone is in Dark Mode; plus the tinted one) and a small picture `IconPreview-<name>`
-shown in « Icône de l'app ». The main icon is ArdaneIcon (Corail); every other icon set is built as
+shown in « Icône de l'app ». The main icon is ArdaneIcon (Saphir); every other icon set is built as
 an alternate icon (ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS).
 """
 import json

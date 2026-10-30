@@ -75,23 +75,23 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     var message: String {
         switch self {
         case .welcome:
-            tr("Petit tour d'Ardane en quelques étapes : ta journée, tes mini-apps, la création de widgets et le Studio. Passe une étape quand tu veux, ou quitte le tutoriel.")
+            tr("Un petit tour d'Ardane : ta journée, tes mini-apps, tes widgets et le Studio. Passe une étape ou quitte le tutoriel quand tu veux.")
         case .daily:
-            tr("Ta journée en un coup d'œil : agenda, rappels et chiffres du jour, tirés de tes données. Touche un élément pour l'ouvrir.")
+            tr("Ta journée en un coup d'œil : repas, séance, habitudes, budget… selon tes centres d'intérêt. Touche une carte pour ouvrir sa mini-app, ou « + » pour en ajouter.")
         case .info:
-            tr("Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps et à tous tes widgets.")
+            tr("Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps, à tes widgets et à Mon Quotidien.")
         case .create:
-            tr("Choisis un univers, la taille et tes widgets, puis « Personnaliser » les ouvre dans le Studio.")
+            tr("Choisis un univers, un widget et sa taille, puis « Personnaliser » l'ouvre dans le Studio. Photos, citations et écran verrouillé y sont aussi.")
         case .studio:
-            tr("Thème, style, couleur principale, palettes, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :")
+            tr("Contenu, thème, style, couleurs, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :")
         case .store:
-            tr("Des widgets prêts à l'emploi, des packs et des écrans d'accueil complets. Tout s'ouvre dans le Studio pour être personnalisé.")
+            tr("Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé.")
         case .mine:
-            tr("Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les ou réunis-en plusieurs en un seul.")
+            tr("Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les, ajoute-les à ton écran ou réunis-en plusieurs en un seul.")
         case .homeScreen:
             tr("Tes widgets t'attendent dans la galerie de widgets d'iOS :")
         case .finish:
-            tr("Ton profil et les Réglages sont ici, en haut à droite. Tu pourras y revoir ce tutoriel quand tu veux.")
+            tr("Ton profil et les Réglages sont ici, en haut à droite : rappels, Premium, sauvegarde. Tu pourras y revoir ce tutoriel quand tu veux.")
         }
     }
 

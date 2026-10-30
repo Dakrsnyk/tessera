@@ -157,7 +157,8 @@ final class ProfileUITests: XCTestCase {
         if !targetsShown { attachHierarchy("diagnostic-nutrition-targets") }
         XCTAssertTrue(targetsShown, "Les besoins calculés doivent s'afficher")
         snapshot("nutrition-needs")
-        // Everything else can be skipped: the last page ends the first launch.
+        // Everything else can be skipped; the permissions page, now last, ends the first launch.
+        tapButton("onboarding-skip")
         tapButton("onboarding-skip")
 
         // Then the tour of the app, step by step, on the app itself.
@@ -213,7 +214,8 @@ final class ProfileUITests: XCTestCase {
         launch(["-screenshotScreen", "onboarding"])
         tapButton("Continuer")
         tapButton("onboarding-skip")
-        // No interest chosen: the interests step ends the first launch.
+        // No interest chosen: the interests step, then the permissions page, end the first launch.
+        tapButton("onboarding-skip")
         tapButton("onboarding-skip")
         // The tour can be skipped as a whole, from its first step.
         let skipAll = app.buttons["tutorial-skip-all"]

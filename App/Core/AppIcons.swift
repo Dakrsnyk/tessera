@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-/// The icons Ardane can take on the Home Screen: « Corail » (the logo) by default, the others picked in
+/// The icons Ardane can take on the Home Screen: « Saphir » (the logo) by default, the others picked in
 /// « Icône de l'app » (Profil, or a long press on the icon, then « Changer d'icône »), with Premium.
 /// Each one is an icon set of the asset catalog, built as an alternate icon, with its picture
 /// `IconPreview-<asset>`. They stay light in Dark Mode. They are drawn by scripts/app_icons.js
@@ -27,7 +27,8 @@ struct AppIconChoice: Identifiable, Hashable {
     static let main = "ArdaneIcon"
 
     static let all: [AppIconChoice] = [
-        AppIconChoice(asset: main, title: tr("Corail")),
+        AppIconChoice(asset: main, title: tr("Saphir")),
+        AppIconChoice(asset: "ArdaneIcon-Corail", title: tr("Corail")),
         AppIconChoice(asset: "ArdaneIcon-Classic", title: tr("Classique")),
         AppIconChoice(asset: "ArdaneIcon-GlassBlack", title: tr("Verre classique")),
         AppIconChoice(asset: "ArdaneIcon-RedGlass", title: tr("Verre rouge")),

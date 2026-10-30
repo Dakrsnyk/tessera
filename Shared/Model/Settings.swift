@@ -118,6 +118,30 @@ struct AppSettings: Codable, Hashable {
     var encourages = true
     /// Units shown for the body weight and height. What is saved stays in kg and cm.
     var unitSystem: UnitSystem = .metric
+    /// « Notifications intelligentes » (`NotificationEngine`): one switch per category, quiet hours,
+    /// a daily ceiling, a least spacing and the hour of the evening summaries. Installs from before
+    /// them get these defaults; `remindsWorkout`, `remindsMeals` and `remindsBills` keep their meaning.
+    var remindsNutrition = true
+    var remindsHabits = true
+    var remindsFitness = true
+    var remindsPlanning = true
+    var remindsGoals = true
+    var remindsGeneral = true
+    /// Nothing is sent from this hour (included) to the end hour (excluded); equal hours: no quiet time.
+    var quietStartHour = 22
+    var quietEndHour = 8
+    /// The most notifications of a day, all kinds together (encouragements included).
+    var dailyNotificationCap = 4
+    /// The least time between two notifications, in minutes.
+    var minNotificationSpacingMinutes = 90
+    /// The hour of the evening summaries (habits left, calories, tomorrow's agenda…).
+    var summaryReminderHour = 19
+
+    /// Everything that changes what the engine plans, to plan again when one of them changes.
+    var smartPreferences: [Int] {
+        [remindsNutrition, remindsHabits, remindsFitness, remindsPlanning, remindsGoals, remindsGeneral, encourages].map { $0 ? 1 : 0 }
+            + [quietStartHour, quietEndHour, dailyNotificationCap, minNotificationSpacingMinutes, summaryReminderHour]
+    }
 
     enum CodingKeys: String, CodingKey {
         case uses24HourClock, currencyCode, cryptoCurrency
@@ -127,6 +151,8 @@ struct AppSettings: Codable, Hashable {
         case dailyOrder, dailyHidden, dailyWide, dailyAdded
         case remindsWorkout, remindsMeals, remindsBills, workoutReminderHour, mealReminderHour
         case encourages, unitSystem
+        case remindsNutrition, remindsHabits, remindsFitness, remindsPlanning, remindsGoals, remindsGeneral
+        case quietStartHour, quietEndHour, dailyNotificationCap, minNotificationSpacingMinutes, summaryReminderHour
     }
 
     init() {}
@@ -160,6 +186,17 @@ struct AppSettings: Codable, Hashable {
         mealReminderHour = (try? c.decodeIfPresent(Int.self, forKey: .mealReminderHour)) ?? 20
         encourages = (try? c.decodeIfPresent(Bool.self, forKey: .encourages)) ?? true
         unitSystem = (try? c.decodeIfPresent(UnitSystem.self, forKey: .unitSystem)) ?? .metric
+        remindsNutrition = c.value(.remindsNutrition, true)
+        remindsHabits = c.value(.remindsHabits, true)
+        remindsFitness = c.value(.remindsFitness, true)
+        remindsPlanning = c.value(.remindsPlanning, true)
+        remindsGoals = c.value(.remindsGoals, true)
+        remindsGeneral = c.value(.remindsGeneral, true)
+        quietStartHour = min(23, max(0, c.value(.quietStartHour, 22)))
+        quietEndHour = min(23, max(0, c.value(.quietEndHour, 8)))
+        dailyNotificationCap = min(10, max(1, c.value(.dailyNotificationCap, 4)))
+        minNotificationSpacingMinutes = min(360, max(0, c.value(.minNotificationSpacingMinutes, 90)))
+        summaryReminderHour = min(23, max(0, c.value(.summaryReminderHour, 19)))
     }
 
     static let currencies = ["CAD", "USD", "EUR", "GBP", "CHF"]

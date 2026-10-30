@@ -59,6 +59,11 @@ struct ArdaneApp: App {
                         Task.detached(priority: .utility) { SharedStore.shared.relaxFileProtection() }
                         model.reloadFromDisk()
                         model.countOpen()
+                        #if DEBUG
+                        if !ScreenshotMode.isActive { ReviewPrompt.recordOpen() }
+                        #else
+                        ReviewPrompt.recordOpen()
+                        #endif
                         // A set validated from the Lock Screen while the app was closed.
                         Task { await WorkoutLiveActivity.sync(model.fitness) }
                         // A study timer stopped or cancelled from the Lock Screen while the app was closed.
@@ -239,20 +244,25 @@ struct RootView: View {
         .animation(.easeInOut(duration: 0.25), value: router.tutorialStep == nil)
         // A good moment (a workout finished, a goal reached, a widget made): perhaps a rating.
         .onChange(of: model.goodMoments) { _, _ in
+            #if DEBUG
+            if ScreenshotMode.isActive { return }
+            #endif
+            ReviewPrompt.noteGoodMoment()
             Task { await askForReviewAfterGoodMoment() }
         }
     }
 
-    /// Right after a good moment, never at the opening: once the app has been opened a few times,
-    /// once per major version, and when the screen is calm (nothing sliding, no tour, no workout
-    /// under way). It waits a little for a sheet to close, then lets the moment go.
+    /// Right after a good moment, never at the opening, and only if `ReviewPrompt` agrees (enough use,
+    /// a real positive experience, spaced attempts, not opted out), when the screen is calm (nothing
+    /// sliding, no tour, no form, no workout under way). It waits a little for a sheet to close, then
+    /// lets the moment go. The attempt is saved BEFORE the single system call.
     private func askForReviewAfterGoodMoment() async {
-        guard ReviewPrompt.shouldAsk(model.settings) else { return }
+        guard ReviewPrompt.isWorthWaitingFor(settings: model.settings) else { return }
         for _ in 0..<12 {
             try? await Task.sleep(for: .seconds(1.5))
-            guard ReviewPrompt.shouldAsk(model.settings) else { return }
+            guard ReviewPrompt.isWorthWaitingFor(settings: model.settings) else { return }
             if isCalmForReview {
-                model.updateSettings { ReviewPrompt.markAsked(&$0) }
+                guard ReviewPrompt.claimRequest(settings: model.settings) else { return }
                 requestReview()
                 return
             }

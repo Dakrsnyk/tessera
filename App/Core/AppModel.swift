@@ -156,7 +156,8 @@ final class AppModel {
             Task { await StudyLiveActivity.sync(student) }
         }
         // The smart reminders follow what is done (a workout begun, a meal noted, a new bill).
-        if T.self == FitnessState.self || T.self == NutritionState.self || T.self == BudgetState.self {
+        if T.self == FitnessState.self || T.self == NutritionState.self || T.self == BudgetState.self
+            || T.self == StudentState.self || T.self == UserProfile.self {
             syncReminders()
         }
         noteGoodMoment(from: before, to: value)
@@ -432,6 +433,8 @@ final class AppModel {
         store.content = content
         // A habit streak milestone (7, 21, 30… days).
         Encouragements.consider(from: before, to: content, settings: settings)
+        // Habits left, tasks due: the smart notifications follow what is done.
+        syncReminders()
         // « Revenus et dépenses fixes » count in Finances too.
         if content.money != money { syncFinances() }
         scheduleWidgetReload()
@@ -460,7 +463,8 @@ final class AppModel {
         }
         if before.remindsWorkout != settings.remindsWorkout || before.remindsMeals != settings.remindsMeals
             || before.remindsBills != settings.remindsBills || before.workoutReminderHour != settings.workoutReminderHour
-            || before.mealReminderHour != settings.mealReminderHour || before.currencyCode != settings.currencyCode {
+            || before.mealReminderHour != settings.mealReminderHour || before.currencyCode != settings.currencyCode
+            || before.smartPreferences != settings.smartPreferences || before.uses24HourClock != settings.uses24HourClock {
             syncReminders()
         }
         scheduleWidgetReload()
@@ -581,8 +585,26 @@ final class AppModel {
         remindersTask = Task {
             try? await Task.sleep(for: .seconds(1))
             guard !Task.isCancelled else { return }
-            await SmartReminders.sync(fitness: fitness, nutrition: nutrition, budget: budget, settings: settings)
+            await SmartReminders.sync(smartInputs())
         }
+    }
+
+    /// Everything the notification engine reads, from the data in memory. The steps only when the motion
+    /// access is allowed and the iPhone gives them (nothing asked here).
+    func smartInputs() -> NotificationEngine.Inputs {
+        var inputs = NotificationEngine.Inputs()
+        inputs.settings = settings
+        inputs.fitness = fitness
+        inputs.nutrition = nutrition
+        inputs.budget = budget
+        inputs.content = content
+        inputs.student = student
+        inputs.profile = profile
+        let counter = StepCounter.shared
+        if counter.status == .allowed, let steps = counter.stepsToday, let goal = profile.stepGoal, goal > 0 {
+            inputs.steps = NotificationEngine.Steps(today: steps, goal: goal)
+        }
+        return inputs
     }
 
     func scheduleWidgetReload() {
@@ -625,6 +647,7 @@ final class AppModel {
         for id in previousHabits where !habits.contains(id) { NotificationScheduler.cancelHabitReminder(id) }
         for habit in content.habits { NotificationScheduler.syncHabitReminder(habit) }
         for design in designs { NotificationScheduler.syncCountdownReminder(for: design) }
+        syncReminders()
         scheduleWidgetReload()
     }
 
@@ -676,6 +699,11 @@ final class AppModel {
         insights = InsightCache()
         crypto = [:]
         NotificationScheduler.cancelAll()
+        NotificationLog().save()
+        // The encouragements sent are data about the person's activity: they start over too. The review
+        // log (Apple limits the prompt per year, whatever the data) and the permission explanations (the
+        // system answers stay as they are in iOS) are not data and are kept on purpose.
+        EncouragementLog().save()
         scheduleWidgetReload()
     }
 }

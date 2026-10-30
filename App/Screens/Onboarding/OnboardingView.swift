@@ -17,13 +17,20 @@ struct OnboardingView: View {
     enum Step: Hashable {
         case style, identity, interests
         case topic(ProfileTopic)
+        /// Last page of the first setup: the useful permissions, each explained before iOS asks.
+        case permissions
     }
 
-    /// The steps, recomputed as interests are picked: a page per topic they lead to.
+    /// The steps, recomputed as interests are picked: a page per topic they lead to. The permissions come
+    /// last and only in the first setup (existing installs find them in Profil › Autorisations).
     private var steps: [Step] {
+        Self.orderedSteps(styleOnly: styleOnly, personalizationOnly: personalizationOnly, topics: model.profile.topics)
+    }
+
+    static func orderedSteps(styleOnly: Bool, personalizationOnly: Bool, topics: [ProfileTopic]) -> [Step] {
         if styleOnly { return [.style] }
-        let personal: [Step] = [.identity, .interests] + model.profile.topics.map(Step.topic)
-        return personalizationOnly ? personal : [.style] + personal
+        let personal: [Step] = [.identity, .interests] + topics.map(Step.topic)
+        return personalizationOnly ? personal : [.style] + personal + [.permissions]
     }
 
     private var current: Step { step ?? steps[0] }
@@ -53,6 +60,7 @@ struct OnboardingView: View {
 
     private func advance() {
         Haptics.tap()
+        if current == .permissions { PermissionsSetup.markSeen() }
         if isLast {
             onFinish()
             return
@@ -86,6 +94,7 @@ struct OnboardingView: View {
                     case .identity: IdentityStep()
                     case .interests: InterestsStep()
                     case let .topic(topic): TopicStep(topic: topic)
+                    case .permissions: PermissionsStep()
                     case .style: EmptyView()
                     }
                 }
@@ -152,6 +161,7 @@ struct OnboardingView: View {
         switch name {
         case "identity": step = .identity
         case "interests": step = .interests
+        case "permissions": step = .permissions
         default: if let topic = ProfileTopic(rawValue: name) { step = .topic(topic) }
         }
     }
@@ -265,7 +275,7 @@ private struct TopicStep: View {
     }
 }
 
-private struct StepTitle: View {
+struct StepTitle: View {
     let symbol: String
     let colorHex: String
     let title: String

@@ -267,7 +267,7 @@ MODULES = [
      "features": [
          "Informations de la personne et données demandées là où un widget les utilise.",
          "Rappels intelligents (séance, repas, factures), notifications locales.",
-         "Icône de l'app (19 icônes, Premium ; Corail et l'icône en place restent), style de l'app (10 styles `AppStyleID`, clair/sombre).",
+         "Icône de l'app (20 icônes, Premium ; Corail et l'icône en place restent), style de l'app (10 styles `AppStyleID`, clair/sombre).",
          "Sauvegarde et import, aide (tutoriel), note de l'app.",
      ],
      "sources": ["App/Screens/Profile/ProfileView.swift", "App/Screens/Profile/ProfileTopics.swift", "App/Screens/Profile/DataItemViews.swift",
