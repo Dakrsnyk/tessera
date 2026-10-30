@@ -7,12 +7,16 @@ final class ReviewPromptSmartTests: XCTestCase {
     private let day: TimeInterval = 86_400
     private let start = Date(timeIntervalSince1970: 1_800_000_000)
 
-    /// A log of a person who opened the app on `days` different days, starting at `start`.
+    /// A log of a person who opened the app on `days` different days, starting the day of `start`.
+    /// The openings of a day stay within that local day (from 1:00, 4 h 15 apart, at most 5), whatever
+    /// the time zone of the machine running the tests.
     private func usedLog(days: Int, opensPerDay: Int = 2) -> ReviewLog {
         var log = ReviewLog()
+        let firstDay = DateMath.startOfDay(start)
         for d in 0..<days {
-            for o in 0..<opensPerDay {
-                log.recordOpen(at: start.addingTimeInterval(Double(d) * day + Double(o) * 5 * 3600))
+            guard let dayStart = DateMath.calendar.date(byAdding: .day, value: d, to: firstDay) else { continue }
+            for o in 0..<min(opensPerDay, 5) {
+                log.recordOpen(at: dayStart.addingTimeInterval(3600 + Double(o) * 4.25 * 3600))
             }
         }
         return log
