@@ -114,6 +114,15 @@ Décision : la meilleure configuration compatible avec la politique actuelle (ri
 - [ ] Passe de tests d'interface en MODE GRATUIT : parcourir chaque mini-app sans Premium (paywall, cadenas, badge Premium, limites gratuites, widgets Premium verrouillés, états vides) pour qu'aucun chemin verrouillé ne plante ni ne bloque ; vérifier aussi que `isPremium` suit bien l'achat dans une compilation Release non signée. Toutes les versions envoyées jusqu'ici sur le téléphone de l'utilisateur sont des versions internes avec Premium : le mode gratuit n'a jamais été vu sur un binaire Release signé.
 
 
+### Chantier 19 : campagne publicitaire officielle 2026, 8 publicités multiformats FR/EN (demandé le 2026-10-30)
+Message : « Ardane — Your whole life. One place. Your widgets. Your way. » ; les widgets personnalisables sont un sujet essentiel ; thème Saphir seul (#245B8F, #68B5F5) ; logo et icône Saphir actuels ; interfaces fidèles à l'app réelle (rien d'inventé, formules gratuit/Premium respectées) ; voix féminine anglaise + version française ; musique originale ou licenciée. Existant à réutiliser (campagne v2 du 2026-10-11, voir Chantiers.md) : moteur Remotion `scripts/ad2/film`, kit d'éléments réels `[adkit]` (AdExport), voix Kokoro, partition et mixage `scripts/ad2`, rendus dans `pub/film/` (ANCIENS : avant Saphir, nouvelle icône, 3 widgets gratuits, etc.).
+- [ ] 19.1 Audit de l'existant : ce qui est réutilisable, ce qui est périmé (identité, faits, fonctionnalités), faits vérifiés à jour, plan de production et temps de rendu.
+- [ ] 19.2 Kit d'éléments réels à jour (CI `[adkit]`) en thème Saphir, nouvelle icône, écrans et widgets actuels.
+- [ ] 19.3 Écriture : concept, storyboard, script, voix off EN/FR, textes d'écran pour les 8 publicités (principale 30–45 s, Nutrition, Fitness, Organisation, Widgets, Finance, Lifestyle 30–45 s, courtes 6–10 s).
+- [ ] 19.4 Production vidéo (Remotion) : 9:16, 1:1, 4:5, 16:9 adaptés par format (pas de simple recadrage), FR et EN, voix, musique, mixage, contrôle qualité.
+- [ ] 19.5 Visuels statiques, miniatures, légendes, CTA, classement en dossiers `01_Ad_Main` … `10_Source_Files`.
+Dossier de livraison local (hors Git, comme `pub/`). Blocages à noter ici ; la validation d'écoute et d'image revient à l'utilisateur.
+
 ### Chantier 18 : transformer le siège 3D en centre de commande complet + quartier extérieur (demandé le 2026-10-30)
 Projet `ardane-hq` (local, privé). Règle absolue : le DESIGN ACTUEL (bâtiment, pièces, couleurs, matériaux, meubles, personnages, caméra, panneaux) n'est jamais modifié ; seules sont permises de NOUVELLES pièces dans le même style quand les postes manquent, et l'environnement extérieur autour. Les 5 phases de la demande sont testées une à une ; aucun test déclaré réussi sans preuve d'exécution.
 - [ ] 18.1 Phase 1 : audit complet de l'existant (ce qui marche, partiel, simulé, à corriger, à développer, technologies à garder/remplacer) ; rapport `ardane-hq/docs/AUDIT.md`.
