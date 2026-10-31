@@ -1,0 +1,65 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02 -derivedDataPath build/sim -testLanguage fr -testRegion CA -resultBundlePath adkit-results/testAdPlanning-dark.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdPlanning" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdPlanning-dark.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+2026-10-31 09:06:27.478275+0000 ArdaneUITests-Runner[88491:218568] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-31 09:06:31.987.
+Test Suite 'ArdaneUITests.xctest' started at 2026-10-31 09:06:31.990.
+Test Suite 'AdShotsUITests' started at 2026-10-31 09:06:31.990.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdPlanning]' started.
+    t =     0.00s Start Test at 2026-10-31 09:06:31.992
+    t =     0.22s Set Up
+    t =     0.25s Open com.dakrsnyk.ardane
+    t =     0.26s     Launch com.dakrsnyk.ardane
+    t =     8.17s         Setting up automation session
+    t =    11.02s         Wait for com.dakrsnyk.ardane to idle
+    t =    16.86s Waiting 12.0s for "week-timetable" Other to exist
+    t =    17.87s     Checking `Expect predicate `existsNoRetry == 1` for object "week-timetable" Other`
+    t =    17.88s         Checking existence of `"week-timetable" Other`
+    t =    21.12s ADSHOT plan-0-dark
+ADSHOT plan-0-dark
+    t =    21.46s Added attachment named 'ADSHOT plan-0-dark'
+    t =    23.32s Press "week-timetable" Other[0.85, 0.50] for 0.1 seconds, then drag to "week-timetable" Other[0.15, 0.50] with velocity of 500.00 pixels per second, and then hold for 0.1 seconds 
+    t =    23.33s     Wait for com.dakrsnyk.ardane to idle
+    t =    23.34s     Find the "week-timetable" Other
+    t =    23.52s     Check for interrupting elements affecting "week-timetable" Other
+    t =    23.77s     Synthesize event
+    t =    23.77s         Find the "week-timetable" Other
+    t =    23.95s         Find the "week-timetable" Other
+    t =    24.33s         Find the "week-timetable" Other
+    t =    24.76s         Find the "week-timetable" Other
+    t =    25.01s         Find the "week-timetable" Other
+    t =    26.11s     Wait for com.dakrsnyk.ardane to idle
+    t =    27.73s ADSHOT plan-1-dark
+ADSHOT plan-1-dark
+    t =    28.08s Added attachment named 'ADSHOT plan-1-dark'
+    t =    29.95s Tear Down
+    t =    29.95s     Terminate com.dakrsnyk.ardane:89405
+Test Case '-[ArdaneUITests.AdShotsUITests testAdPlanning]' passed (31.146 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-10-31 09:07:03.137.
+	 Executed 1 test, with 0 failures (0 unexpected) in 31.146 (31.147) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-10-31 09:07:03.138.
+	 Executed 1 test, with 0 failures (0 unexpected) in 31.146 (31.148) seconds
+Test Suite 'Selected tests' passed at 2026-10-31 09:07:03.138.
+	 Executed 1 test, with 0 failures (0 unexpected) in 31.146 (31.151) seconds
+2026-10-31 09:07:03.623 xcodebuild[87454:216021] [MT] IDETestOperationsObserverDebug: 45.994 elapsed -- Testing started completed.
+2026-10-31 09:07:03.623 xcodebuild[87454:216021] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-31 09:07:03.623 xcodebuild[87454:216021] [MT] IDETestOperationsObserverDebug: 45.994 sec, +45.994 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdPlanning-dark.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

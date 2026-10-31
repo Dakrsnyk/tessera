@@ -1,0 +1,2084 @@
+{
+  "background" : "clear",
+  "duration" : 4.2999999999999998,
+  "exercise" : "pull-up",
+  "fps" : 60,
+  "frame" : [
+    {
+      "file" : "demo-pull-up-dark-0000.png",
+      "index" : 0,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0
+    },
+    {
+      "file" : "demo-pull-up-dark-0001.png",
+      "index" : 1,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.016666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0002.png",
+      "index" : 2,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.033333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0003.png",
+      "index" : 3,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.050000000000000003
+    },
+    {
+      "file" : "demo-pull-up-dark-0004.png",
+      "index" : 4,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.066666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0005.png",
+      "index" : 5,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.083333333333333329
+    },
+    {
+      "file" : "demo-pull-up-dark-0006.png",
+      "index" : 6,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.10000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0007.png",
+      "index" : 7,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.11666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0008.png",
+      "index" : 8,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.13333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0009.png",
+      "index" : 9,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.14999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0010.png",
+      "index" : 10,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.16666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0011.png",
+      "index" : 11,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.18333333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0012.png",
+      "index" : 12,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.20000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0013.png",
+      "index" : 13,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.21666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0014.png",
+      "index" : 14,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.23333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0015.png",
+      "index" : 15,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.25
+    },
+    {
+      "file" : "demo-pull-up-dark-0016.png",
+      "index" : 16,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.26666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0017.png",
+      "index" : 17,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.28333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0018.png",
+      "index" : 18,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.29999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0019.png",
+      "index" : 19,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.31666666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0020.png",
+      "index" : 20,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.33333333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0021.png",
+      "index" : 21,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.34999999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0022.png",
+      "index" : 22,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.36666666666666664
+    },
+    {
+      "file" : "demo-pull-up-dark-0023.png",
+      "index" : 23,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.38333333333333336
+    },
+    {
+      "file" : "demo-pull-up-dark-0024.png",
+      "index" : 24,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.40000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0025.png",
+      "index" : 25,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.41666666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0026.png",
+      "index" : 26,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.43333333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0027.png",
+      "index" : 27,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.45000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0028.png",
+      "index" : 28,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.46666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0029.png",
+      "index" : 29,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.48333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0030.png",
+      "index" : 30,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.5
+    },
+    {
+      "file" : "demo-pull-up-dark-0031.png",
+      "index" : 31,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.51666666666666672
+    },
+    {
+      "file" : "demo-pull-up-dark-0032.png",
+      "index" : 32,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.53333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0033.png",
+      "index" : 33,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.55000000000000004
+    },
+    {
+      "file" : "demo-pull-up-dark-0034.png",
+      "index" : 34,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.56666666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0035.png",
+      "index" : 35,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.58333333333333337
+    },
+    {
+      "file" : "demo-pull-up-dark-0036.png",
+      "index" : 36,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.59999999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0037.png",
+      "index" : 37,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.6166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0038.png",
+      "index" : 38,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.6333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0039.png",
+      "index" : 39,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.65000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0040.png",
+      "index" : 40,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.66666666666666663
+    },
+    {
+      "file" : "demo-pull-up-dark-0041.png",
+      "index" : 41,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.68333333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0042.png",
+      "index" : 42,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Suspendu, bras tendus",
+      "t" : 0.69999999999999996
+    },
+    {
+      "file" : "demo-pull-up-dark-0043.png",
+      "index" : 43,
+      "label" : 1,
+      "p" : 0.00042179570240794998,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.71666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0044.png",
+      "index" : 44,
+      "label" : 1,
+      "p" : 0.0016736853471547345,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.73333333333333328
+    },
+    {
+      "file" : "demo-pull-up-dark-0045.png",
+      "index" : 45,
+      "label" : 1,
+      "p" : 0.0037354227405247877,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.75
+    },
+    {
+      "file" : "demo-pull-up-dark-0046.png",
+      "index" : 46,
+      "label" : 1,
+      "p" : 0.0065867616888025254,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.76666666666666672
+    },
+    {
+      "file" : "demo-pull-up-dark-0047.png",
+      "index" : 47,
+      "label" : 1,
+      "p" : 0.010207455998272335,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.78333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0048.png",
+      "index" : 48,
+      "label" : 1,
+      "p" : 0.014577259475218686,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.80000000000000004
+    },
+    {
+      "file" : "demo-pull-up-dark-0049.png",
+      "index" : 49,
+      "label" : 1,
+      "p" : 0.019675925925925937,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.81666666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0050.png",
+      "index" : 50,
+      "label" : 1,
+      "p" : 0.025483209156678576,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.83333333333333337
+    },
+    {
+      "file" : "demo-pull-up-dark-0051.png",
+      "index" : 51,
+      "label" : 1,
+      "p" : 0.031978862973760944,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.84999999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0052.png",
+      "index" : 52,
+      "label" : 1,
+      "p" : 0.039142641183457547,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.8666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0053.png",
+      "index" : 53,
+      "label" : 1,
+      "p" : 0.046954297592052698,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.8833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0054.png",
+      "index" : 54,
+      "label" : 1,
+      "p" : 0.055393586005830941,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.90000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0055.png",
+      "index" : 55,
+      "label" : 1,
+      "p" : 0.06444026023107656,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.91666666666666663
+    },
+    {
+      "file" : "demo-pull-up-dark-0056.png",
+      "index" : 56,
+      "label" : 1,
+      "p" : 0.074074074074074112,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.93333333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0057.png",
+      "index" : 57,
+      "label" : 1,
+      "p" : 0.084274781341107871,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.94999999999999996
+    },
+    {
+      "file" : "demo-pull-up-dark-0058.png",
+      "index" : 58,
+      "label" : 1,
+      "p" : 0.095022135838462404,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.96666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0059.png",
+      "index" : 59,
+      "label" : 1,
+      "p" : 0.10629589137242199,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 0.98333333333333328
+    },
+    {
+      "file" : "demo-pull-up-dark-0060.png",
+      "index" : 60,
+      "label" : 1,
+      "p" : 0.11807580174927117,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1
+    },
+    {
+      "file" : "demo-pull-up-dark-0061.png",
+      "index" : 61,
+      "label" : 1,
+      "p" : 0.13034162077529424,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.0166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0062.png",
+      "index" : 62,
+      "label" : 1,
+      "p" : 0.14307310225677586,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.0333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0063.png",
+      "index" : 63,
+      "label" : 1,
+      "p" : 0.15625000000000006,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.05
+    },
+    {
+      "file" : "demo-pull-up-dark-0064.png",
+      "index" : 64,
+      "label" : 1,
+      "p" : 0.16985206781125151,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.0666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0065.png",
+      "index" : 65,
+      "label" : 1,
+      "p" : 0.18385905949681455,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.0833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0066.png",
+      "index" : 66,
+      "label" : 1,
+      "p" : 0.19825072886297387,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.1000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0067.png",
+      "index" : 67,
+      "label" : 1,
+      "p" : 0.21300682971601348,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.1166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0068.png",
+      "index" : 68,
+      "label" : 1,
+      "p" : 0.22810711586221791,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.1333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0069.png",
+      "index" : 69,
+      "label" : 1,
+      "p" : 0.24353134110787167,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.1499999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0070.png",
+      "index" : 70,
+      "label" : 1,
+      "p" : 0.25925925925925936,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.1666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0071.png",
+      "index" : 71,
+      "label" : 1,
+      "p" : 0.27527062412266501,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.1833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0072.png",
+      "index" : 72,
+      "label" : 1,
+      "p" : 0.29154518950437319,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.2
+    },
+    {
+      "file" : "demo-pull-up-dark-0073.png",
+      "index" : 73,
+      "label" : 1,
+      "p" : 0.30806270921066836,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.2166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0074.png",
+      "index" : 74,
+      "label" : 1,
+      "p" : 0.32480293704783514,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.2333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0075.png",
+      "index" : 75,
+      "label" : 1,
+      "p" : 0.34174562682215753,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.25
+    },
+    {
+      "file" : "demo-pull-up-dark-0076.png",
+      "index" : 76,
+      "label" : 1,
+      "p" : 0.35887053233992011,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.2666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0077.png",
+      "index" : 77,
+      "label" : 1,
+      "p" : 0.37615740740740761,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.2833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0078.png",
+      "index" : 78,
+      "label" : 1,
+      "p" : 0.39358600583090392,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.3
+    },
+    {
+      "file" : "demo-pull-up-dark-0079.png",
+      "index" : 79,
+      "label" : 1,
+      "p" : 0.41113608141669378,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.3166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0080.png",
+      "index" : 80,
+      "label" : 1,
+      "p" : 0.42878738797106147,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.3333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0081.png",
+      "index" : 81,
+      "label" : 1,
+      "p" : 0.44651967930029174,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.3500000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0082.png",
+      "index" : 82,
+      "label" : 1,
+      "p" : 0.46431270921066847,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.3666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0083.png",
+      "index" : 83,
+      "label" : 1,
+      "p" : 0.48214623150847646,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.3833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0084.png",
+      "index" : 84,
+      "label" : 1,
+      "p" : 0.5,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.3999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0085.png",
+      "index" : 85,
+      "label" : 1,
+      "p" : 0.51785376849152376,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.4166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0086.png",
+      "index" : 86,
+      "label" : 1,
+      "p" : 0.53568729078933164,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.4333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0087.png",
+      "index" : 87,
+      "label" : 1,
+      "p" : 0.55348032069970843,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.45
+    },
+    {
+      "file" : "demo-pull-up-dark-0088.png",
+      "index" : 88,
+      "label" : 1,
+      "p" : 0.57121261202893847,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.4666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0089.png",
+      "index" : 89,
+      "label" : 1,
+      "p" : 0.58886391858330656,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.4833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0090.png",
+      "index" : 90,
+      "label" : 1,
+      "p" : 0.60641399416909636,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.5
+    },
+    {
+      "file" : "demo-pull-up-dark-0091.png",
+      "index" : 91,
+      "label" : 1,
+      "p" : 0.62384259259259267,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.5166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0092.png",
+      "index" : 92,
+      "label" : 1,
+      "p" : 0.64112946766008005,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.5333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0093.png",
+      "index" : 93,
+      "label" : 1,
+      "p" : 0.65825437317784263,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.55
+    },
+    {
+      "file" : "demo-pull-up-dark-0094.png",
+      "index" : 94,
+      "label" : 1,
+      "p" : 0.67519706295216497,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.5666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0095.png",
+      "index" : 95,
+      "label" : 1,
+      "p" : 0.69193729078933153,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.5833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0096.png",
+      "index" : 96,
+      "label" : 1,
+      "p" : 0.70845481049562697,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.6000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0097.png",
+      "index" : 97,
+      "label" : 1,
+      "p" : 0.72472937587733521,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.6166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0098.png",
+      "index" : 98,
+      "label" : 1,
+      "p" : 0.74074074074074081,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.6333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0099.png",
+      "index" : 99,
+      "label" : 1,
+      "p" : 0.75646865889212833,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.6499999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0100.png",
+      "index" : 100,
+      "label" : 1,
+      "p" : 0.77189288413778223,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.6666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0101.png",
+      "index" : 101,
+      "label" : 1,
+      "p" : 0.78699317028398663,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.6833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0102.png",
+      "index" : 102,
+      "label" : 1,
+      "p" : 0.80174927113702621,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.7
+    },
+    {
+      "file" : "demo-pull-up-dark-0103.png",
+      "index" : 103,
+      "label" : 1,
+      "p" : 0.81614094050318542,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.7166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0104.png",
+      "index" : 104,
+      "label" : 1,
+      "p" : 0.83014793218874872,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.7333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0105.png",
+      "index" : 105,
+      "label" : 1,
+      "p" : 0.84375000000000022,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.75
+    },
+    {
+      "file" : "demo-pull-up-dark-0106.png",
+      "index" : 106,
+      "label" : 1,
+      "p" : 0.85692689774322439,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.7666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0107.png",
+      "index" : 107,
+      "label" : 1,
+      "p" : 0.8696583792247059,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.7833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0108.png",
+      "index" : 108,
+      "label" : 1,
+      "p" : 0.88192419825072899,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.8
+    },
+    {
+      "file" : "demo-pull-up-dark-0109.png",
+      "index" : 109,
+      "label" : 1,
+      "p" : 0.8937041086275781,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.8166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0110.png",
+      "index" : 110,
+      "label" : 1,
+      "p" : 0.90497786416153758,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.8333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0111.png",
+      "index" : 111,
+      "label" : 1,
+      "p" : 0.91572521865889234,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.8500000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0112.png",
+      "index" : 112,
+      "label" : 1,
+      "p" : 0.92592592592592593,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.8666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0113.png",
+      "index" : 113,
+      "label" : 1,
+      "p" : 0.93555973976892359,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.8833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0114.png",
+      "index" : 114,
+      "label" : 1,
+      "p" : 0.94460641399416923,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.8999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0115.png",
+      "index" : 115,
+      "label" : 1,
+      "p" : 0.95304570240794739,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.9166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0116.png",
+      "index" : 116,
+      "label" : 1,
+      "p" : 0.96085735881654255,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.9333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0117.png",
+      "index" : 117,
+      "label" : 1,
+      "p" : 0.96802113702623904,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.95
+    },
+    {
+      "file" : "demo-pull-up-dark-0118.png",
+      "index" : 118,
+      "label" : 1,
+      "p" : 0.97451679084332155,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.9666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0119.png",
+      "index" : 119,
+      "label" : 1,
+      "p" : 0.98032407407407418,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 1.9833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0120.png",
+      "index" : 120,
+      "label" : 1,
+      "p" : 0.9854227405247814,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 2
+    },
+    {
+      "file" : "demo-pull-up-dark-0121.png",
+      "index" : 121,
+      "label" : 1,
+      "p" : 0.98979254400172767,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 2.0166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0122.png",
+      "index" : 122,
+      "label" : 1,
+      "p" : 0.99341323831119754,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 2.0333333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0123.png",
+      "index" : 123,
+      "label" : 1,
+      "p" : 0.99626457725947526,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 2.0499999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0124.png",
+      "index" : 124,
+      "label" : 1,
+      "p" : 0.99832631465284527,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 2.0666666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0125.png",
+      "index" : 125,
+      "label" : 1,
+      "p" : 0.99957820429759203,
+      "phase" : "Tirage, coudes vers le bas",
+      "t" : 2.0833333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0126.png",
+      "index" : 126,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.1000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0127.png",
+      "index" : 127,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.1166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0128.png",
+      "index" : 128,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.1333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0129.png",
+      "index" : 129,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.1499999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0130.png",
+      "index" : 130,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.1666666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0131.png",
+      "index" : 131,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.1833333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0132.png",
+      "index" : 132,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.2000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0133.png",
+      "index" : 133,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.2166666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0134.png",
+      "index" : 134,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.2333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0135.png",
+      "index" : 135,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.25
+    },
+    {
+      "file" : "demo-pull-up-dark-0136.png",
+      "index" : 136,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.2666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0137.png",
+      "index" : 137,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.2833333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0138.png",
+      "index" : 138,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.2999999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0139.png",
+      "index" : 139,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.3166666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0140.png",
+      "index" : 140,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.3333333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0141.png",
+      "index" : 141,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.3500000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0142.png",
+      "index" : 142,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.3666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0143.png",
+      "index" : 143,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.3833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0144.png",
+      "index" : 144,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.3999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0145.png",
+      "index" : 145,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.4166666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0146.png",
+      "index" : 146,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.4333333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0147.png",
+      "index" : 147,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.4500000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0148.png",
+      "index" : 148,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.4666666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0149.png",
+      "index" : 149,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.4833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0150.png",
+      "index" : 150,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.5
+    },
+    {
+      "file" : "demo-pull-up-dark-0151.png",
+      "index" : 151,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.5166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0152.png",
+      "index" : 152,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.5333333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0153.png",
+      "index" : 153,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.5499999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0154.png",
+      "index" : 154,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.5666666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0155.png",
+      "index" : 155,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Menton au-dessus de la barre",
+      "t" : 2.5833333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0156.png",
+      "index" : 156,
+      "label" : 3,
+      "p" : 1,
+      "phase" : "Descente contrôlée",
+      "t" : 2.6000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0157.png",
+      "index" : 157,
+      "label" : 3,
+      "p" : 0.99971353401029772,
+      "phase" : "Descente contrôlée",
+      "t" : 2.6166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0158.png",
+      "index" : 158,
+      "label" : 3,
+      "p" : 0.99886167461986719,
+      "phase" : "Descente contrôlée",
+      "t" : 2.6333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0159.png",
+      "index" : 159,
+      "label" : 3,
+      "p" : 0.99745572969672303,
+      "phase" : "Descente contrôlée",
+      "t" : 2.6499999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0160.png",
+      "index" : 160,
+      "label" : 3,
+      "p" : 0.99550700710887974,
+      "phase" : "Descente contrôlée",
+      "t" : 2.6666666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0161.png",
+      "index" : 161,
+      "label" : 3,
+      "p" : 0.99302681472435184,
+      "phase" : "Descente contrôlée",
+      "t" : 2.6833333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0162.png",
+      "index" : 162,
+      "label" : 3,
+      "p" : 0.99002646041115405,
+      "phase" : "Descente contrôlée",
+      "t" : 2.7000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0163.png",
+      "index" : 163,
+      "label" : 3,
+      "p" : 0.9865172520373009,
+      "phase" : "Descente contrôlée",
+      "t" : 2.7166666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0164.png",
+      "index" : 164,
+      "label" : 3,
+      "p" : 0.98251049747080688,
+      "phase" : "Descente contrôlée",
+      "t" : 2.7333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0165.png",
+      "index" : 165,
+      "label" : 3,
+      "p" : 0.97801750457968661,
+      "phase" : "Descente contrôlée",
+      "t" : 2.75
+    },
+    {
+      "file" : "demo-pull-up-dark-0166.png",
+      "index" : 166,
+      "label" : 3,
+      "p" : 0.97304958123195462,
+      "phase" : "Descente contrôlée",
+      "t" : 2.7666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0167.png",
+      "index" : 167,
+      "label" : 3,
+      "p" : 0.9676180352956254,
+      "phase" : "Descente contrôlée",
+      "t" : 2.7833333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0168.png",
+      "index" : 168,
+      "label" : 3,
+      "p" : 0.96173417463871369,
+      "phase" : "Descente contrôlée",
+      "t" : 2.7999999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0169.png",
+      "index" : 169,
+      "label" : 3,
+      "p" : 0.95540930712923366,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8166666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0170.png",
+      "index" : 170,
+      "label" : 3,
+      "p" : 0.94865474063520039,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8333333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0171.png",
+      "index" : 171,
+      "label" : 3,
+      "p" : 0.94148178302462837,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8500000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0172.png",
+      "index" : 172,
+      "label" : 3,
+      "p" : 0.9339017421655319,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0173.png",
+      "index" : 173,
+      "label" : 3,
+      "p" : 0.92592592592592582,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0174.png",
+      "index" : 174,
+      "label" : 3,
+      "p" : 0.91756564217382441,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0175.png",
+      "index" : 175,
+      "label" : 3,
+      "p" : 0.90883219877724242,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9166666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0176.png",
+      "index" : 176,
+      "label" : 3,
+      "p" : 0.89973690360419445,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9333333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0177.png",
+      "index" : 177,
+      "label" : 3,
+      "p" : 0.89029106452269491,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9500000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0178.png",
+      "index" : 178,
+      "label" : 3,
+      "p" : 0.88050598940075842,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9666666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0179.png",
+      "index" : 179,
+      "label" : 3,
+      "p" : 0.87039298610639948,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0180.png",
+      "index" : 180,
+      "label" : 3,
+      "p" : 0.85996336250763283,
+      "phase" : "Descente contrôlée",
+      "t" : 3
+    },
+    {
+      "file" : "demo-pull-up-dark-0181.png",
+      "index" : 181,
+      "label" : 3,
+      "p" : 0.84922842647247299,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0182.png",
+      "index" : 182,
+      "label" : 3,
+      "p" : 0.83819948586893445,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0333333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0183.png",
+      "index" : 183,
+      "label" : 3,
+      "p" : 0.82688784856503172,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0499999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0184.png",
+      "index" : 184,
+      "label" : 3,
+      "p" : 0.81530482242877889,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0666666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0185.png",
+      "index" : 185,
+      "label" : 3,
+      "p" : 0.80346171532819166,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0833333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0186.png",
+      "index" : 186,
+      "label" : 3,
+      "p" : 0.79136983513128401,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0187.png",
+      "index" : 187,
+      "label" : 3,
+      "p" : 0.77904048970607054,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0188.png",
+      "index" : 188,
+      "label" : 3,
+      "p" : 0.76648498692056566,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0189.png",
+      "index" : 189,
+      "label" : 3,
+      "p" : 0.75371463464278421,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1499999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0190.png",
+      "index" : 190,
+      "label" : 3,
+      "p" : 0.74074074074074048,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1666666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0191.png",
+      "index" : 191,
+      "label" : 3,
+      "p" : 0.72757461308244931,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1833333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0192.png",
+      "index" : 192,
+      "label" : 3,
+      "p" : 0.71422755953592498,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0193.png",
+      "index" : 193,
+      "label" : 3,
+      "p" : 0.70071088796918224,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2166666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0194.png",
+      "index" : 194,
+      "label" : 3,
+      "p" : 0.68703590625023558,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0195.png",
+      "index" : 195,
+      "label" : 3,
+      "p" : 0.67321392224709953,
+      "phase" : "Descente contrôlée",
+      "t" : 3.25
+    },
+    {
+      "file" : "demo-pull-up-dark-0196.png",
+      "index" : 196,
+      "label" : 3,
+      "p" : 0.65925624382778869,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0197.png",
+      "index" : 197,
+      "label" : 3,
+      "p" : 0.6451741788603178,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2833333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0198.png",
+      "index" : 198,
+      "label" : 3,
+      "p" : 0.63097903521270116,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2999999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0199.png",
+      "index" : 199,
+      "label" : 3,
+      "p" : 0.6166821207529527,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3166666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0200.png",
+      "index" : 200,
+      "label" : 3,
+      "p" : 0.60229474334908861,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3333333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0201.png",
+      "index" : 201,
+      "label" : 3,
+      "p" : 0.5878282108691224,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3500000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0202.png",
+      "index" : 202,
+      "label" : 3,
+      "p" : 0.57329383118106869,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0203.png",
+      "index" : 203,
+      "label" : 3,
+      "p" : 0.55870291215294232,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0204.png",
+      "index" : 204,
+      "label" : 3,
+      "p" : 0.54406676165275769,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0205.png",
+      "index" : 205,
+      "label" : 3,
+      "p" : 0.52939668754852942,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4166666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0206.png",
+      "index" : 206,
+      "label" : 3,
+      "p" : 0.51470399770827191,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4333333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0207.png",
+      "index" : 207,
+      "label" : 3,
+      "p" : 0.49999999999999989,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4500000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0208.png",
+      "index" : 208,
+      "label" : 3,
+      "p" : 0.48529600229172787,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4666666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0209.png",
+      "index" : 209,
+      "label" : 3,
+      "p" : 0.47060331245147036,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0210.png",
+      "index" : 210,
+      "label" : 3,
+      "p" : 0.45593323834724198,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5
+    },
+    {
+      "file" : "demo-pull-up-dark-0211.png",
+      "index" : 211,
+      "label" : 3,
+      "p" : 0.44129708784705735,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0212.png",
+      "index" : 212,
+      "label" : 3,
+      "p" : 0.42670616881893098,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5333333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0213.png",
+      "index" : 213,
+      "label" : 3,
+      "p" : 0.41217178913087738,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5499999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0214.png",
+      "index" : 214,
+      "label" : 3,
+      "p" : 0.39770525665091061,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5666666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0215.png",
+      "index" : 215,
+      "label" : 3,
+      "p" : 0.3833178792470463,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5833333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0216.png",
+      "index" : 216,
+      "label" : 3,
+      "p" : 0.36902096478729862,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6000000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0217.png",
+      "index" : 217,
+      "label" : 3,
+      "p" : 0.35482582113968197,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0218.png",
+      "index" : 218,
+      "label" : 3,
+      "p" : 0.34074375617221109,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6333333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0219.png",
+      "index" : 219,
+      "label" : 3,
+      "p" : 0.32678607775290025,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6499999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0220.png",
+      "index" : 220,
+      "label" : 3,
+      "p" : 0.3129640937497643,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6666666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0221.png",
+      "index" : 221,
+      "label" : 3,
+      "p" : 0.29928911203081765,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6833333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0222.png",
+      "index" : 222,
+      "label" : 3,
+      "p" : 0.28577244046407491,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0223.png",
+      "index" : 223,
+      "label" : 3,
+      "p" : 0.27242538691755058,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7166666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0224.png",
+      "index" : 224,
+      "label" : 3,
+      "p" : 0.2592592592592593,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0225.png",
+      "index" : 225,
+      "label" : 3,
+      "p" : 0.24628536535721568,
+      "phase" : "Descente contrôlée",
+      "t" : 3.75
+    },
+    {
+      "file" : "demo-pull-up-dark-0226.png",
+      "index" : 226,
+      "label" : 3,
+      "p" : 0.23351501307943412,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0227.png",
+      "index" : 227,
+      "label" : 3,
+      "p" : 0.22095951029392935,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7833333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0228.png",
+      "index" : 228,
+      "label" : 3,
+      "p" : 0.20863016486871588,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7999999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0229.png",
+      "index" : 229,
+      "label" : 3,
+      "p" : 0.19653828467180767,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8166666666666669
+    },
+    {
+      "file" : "demo-pull-up-dark-0230.png",
+      "index" : 230,
+      "label" : 3,
+      "p" : 0.18469517757122045,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8333333333333335
+    },
+    {
+      "file" : "demo-pull-up-dark-0231.png",
+      "index" : 231,
+      "label" : 3,
+      "p" : 0.17311215143496805,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8500000000000001
+    },
+    {
+      "file" : "demo-pull-up-dark-0232.png",
+      "index" : 232,
+      "label" : 3,
+      "p" : 0.16180051413106544,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8666666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0233.png",
+      "index" : 233,
+      "label" : 3,
+      "p" : 0.1507715735275269,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8833333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0234.png",
+      "index" : 234,
+      "label" : 3,
+      "p" : 0.14003663749236694,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8999999999999999
+    },
+    {
+      "file" : "demo-pull-up-dark-0235.png",
+      "index" : 235,
+      "label" : 3,
+      "p" : 0.12960701389360041,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9166666666666665
+    },
+    {
+      "file" : "demo-pull-up-dark-0236.png",
+      "index" : 236,
+      "label" : 3,
+      "p" : 0.11949401059924147,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9333333333333331
+    },
+    {
+      "file" : "demo-pull-up-dark-0237.png",
+      "index" : 237,
+      "label" : 3,
+      "p" : 0.10970893547730509,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9500000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0238.png",
+      "index" : 238,
+      "label" : 3,
+      "p" : 0.10026309639580555,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9666666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0239.png",
+      "index" : 239,
+      "label" : 3,
+      "p" : 0.091167801222757472,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9833333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0240.png",
+      "index" : 240,
+      "label" : 3,
+      "p" : 0.082434357826175475,
+      "phase" : "Descente contrôlée",
+      "t" : 4
+    },
+    {
+      "file" : "demo-pull-up-dark-0241.png",
+      "index" : 241,
+      "label" : 3,
+      "p" : 0.074074074074074181,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0166666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0242.png",
+      "index" : 242,
+      "label" : 3,
+      "p" : 0.066098257834467988,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0333333333333332
+    },
+    {
+      "file" : "demo-pull-up-dark-0243.png",
+      "index" : 243,
+      "label" : 3,
+      "p" : 0.058518216975371518,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0499999999999998
+    },
+    {
+      "file" : "demo-pull-up-dark-0244.png",
+      "index" : 244,
+      "label" : 3,
+      "p" : 0.0513452593647995,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0666666666666664
+    },
+    {
+      "file" : "demo-pull-up-dark-0245.png",
+      "index" : 245,
+      "label" : 3,
+      "p" : 0.044590692870766335,
+      "phase" : "Descente contrôlée",
+      "t" : 4.083333333333333
+    },
+    {
+      "file" : "demo-pull-up-dark-0246.png",
+      "index" : 246,
+      "label" : 3,
+      "p" : 0.038265825361286532,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0999999999999996
+    },
+    {
+      "file" : "demo-pull-up-dark-0247.png",
+      "index" : 247,
+      "label" : 3,
+      "p" : 0.032381964704374822,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1166666666666663
+    },
+    {
+      "file" : "demo-pull-up-dark-0248.png",
+      "index" : 248,
+      "label" : 3,
+      "p" : 0.026950418768045381,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1333333333333337
+    },
+    {
+      "file" : "demo-pull-up-dark-0249.png",
+      "index" : 249,
+      "label" : 3,
+      "p" : 0.021982495420313386,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1500000000000004
+    },
+    {
+      "file" : "demo-pull-up-dark-0250.png",
+      "index" : 250,
+      "label" : 3,
+      "p" : 0.017489502529193124,
+      "phase" : "Descente contrôlée",
+      "t" : 4.166666666666667
+    },
+    {
+      "file" : "demo-pull-up-dark-0251.png",
+      "index" : 251,
+      "label" : 3,
+      "p" : 0.013482747962698993,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1833333333333336
+    },
+    {
+      "file" : "demo-pull-up-dark-0252.png",
+      "index" : 252,
+      "label" : 3,
+      "p" : 0.0099735395888459477,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2000000000000002
+    },
+    {
+      "file" : "demo-pull-up-dark-0253.png",
+      "index" : 253,
+      "label" : 3,
+      "p" : 0.0069731852756480528,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2166666666666668
+    },
+    {
+      "file" : "demo-pull-up-dark-0254.png",
+      "index" : 254,
+      "label" : 3,
+      "p" : 0.0044929928911203731,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2333333333333334
+    },
+    {
+      "file" : "demo-pull-up-dark-0255.png",
+      "index" : 255,
+      "label" : 3,
+      "p" : 0.0025442703032770853,
+      "phase" : "Descente contrôlée",
+      "t" : 4.25
+    },
+    {
+      "file" : "demo-pull-up-dark-0256.png",
+      "index" : 256,
+      "label" : 3,
+      "p" : 0.0011383253801328097,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2666666666666666
+    },
+    {
+      "file" : "demo-pull-up-dark-0257.png",
+      "index" : 257,
+      "label" : 3,
+      "p" : 0.0002864659897022781,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2833333333333332
+    }
+  ],
+  "frames" : 258,
+  "height" : 708,
+  "labels" : [
+    "Suspendu, bras tendus",
+    "Tirage, coudes vers le bas",
+    "Menton au-dessus de la barre",
+    "Descente contrôlée"
+  ],
+  "loop" : false,
+  "scheme" : "dark",
+  "view" : "3\/4",
+  "width" : 1206
+}

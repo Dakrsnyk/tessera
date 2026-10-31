@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-minuit-0.png",
+      "index" : 0,
+      "name" : "Notes",
+      "place" : "row-2",
+      "symbol" : "note.text"
+    },
+    {
+      "file" : "icons-minuit-1.png",
+      "index" : 1,
+      "name" : "Livres",
+      "place" : "row-2",
+      "symbol" : "book.fill"
+    },
+    {
+      "file" : "icons-minuit-2.png",
+      "index" : 2,
+      "name" : "Podcasts",
+      "place" : "row-2",
+      "symbol" : "mic.fill"
+    },
+    {
+      "file" : "icons-minuit-3.png",
+      "index" : 3,
+      "name" : "Réglages",
+      "place" : "row-2",
+      "symbol" : "gearshape.fill"
+    },
+    {
+      "file" : "icons-minuit-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-minuit-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-minuit-6.png",
+      "index" : 6,
+      "name" : "Web",
+      "place" : "dock",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-minuit-7.png",
+      "index" : 7,
+      "name" : "Musique",
+      "place" : "dock",
+      "symbol" : "music.note"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "minuit"
+}

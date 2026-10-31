@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-aurore-0.png",
+      "index" : 0,
+      "name" : "Santé",
+      "place" : "row-2",
+      "symbol" : "heart.fill"
+    },
+    {
+      "file" : "icons-aurore-1.png",
+      "index" : 1,
+      "name" : "Forme",
+      "place" : "row-2",
+      "symbol" : "figure.run"
+    },
+    {
+      "file" : "icons-aurore-2.png",
+      "index" : 2,
+      "name" : "Musique",
+      "place" : "row-2",
+      "symbol" : "music.note"
+    },
+    {
+      "file" : "icons-aurore-3.png",
+      "index" : 3,
+      "name" : "Podcasts",
+      "place" : "row-2",
+      "symbol" : "mic.fill"
+    },
+    {
+      "file" : "icons-aurore-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-aurore-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-aurore-6.png",
+      "index" : 6,
+      "name" : "Web",
+      "place" : "dock",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-aurore-7.png",
+      "index" : 7,
+      "name" : "Caméra",
+      "place" : "dock",
+      "symbol" : "camera.fill"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "aurore"
+}

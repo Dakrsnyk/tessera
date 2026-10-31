@@ -1,0 +1,91 @@
+{
+  "setup" : "nebuleuse",
+  "shadow" : "Home Screen widgets: black 20 %, radius 8 pt, y 3 pt (not in the PNG)",
+  "wallpaper" : "nebula",
+  "widgets" : [
+    {
+      "accent" : "8C6CFF",
+      "family" : "small",
+      "file" : "setup-nebuleuse-0.png",
+      "height" : 680,
+      "index" : 0,
+      "kind" : "crypto",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "futuristic",
+      "width" : 680
+    },
+    {
+      "accent" : "8C6CFF",
+      "family" : "small",
+      "file" : "setup-nebuleuse-1.png",
+      "height" : 680,
+      "index" : 1,
+      "kind" : "topMover",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "futuristic",
+      "width" : 680
+    },
+    {
+      "accent" : "8C6CFF",
+      "family" : "medium",
+      "file" : "setup-nebuleuse-2.png",
+      "height" : 510,
+      "index" : 2,
+      "kind" : "portfolio",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 3,
+      "template" : "",
+      "theme" : "futuristic",
+      "width" : 1092
+    },
+    {
+      "accent" : "8C6CFF",
+      "family" : "small",
+      "file" : "setup-nebuleuse-3.png",
+      "height" : 680,
+      "index" : 3,
+      "kind" : "marketOverview",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "futuristic",
+      "width" : 680
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "rect",
+      "file" : "setup-nebuleuse-4.png",
+      "height" : 304,
+      "index" : 4,
+      "kind" : "portfolio",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "minimal",
+      "width" : 688
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "rect",
+      "file" : "setup-nebuleuse-5.png",
+      "height" : 304,
+      "index" : 5,
+      "kind" : "crypto",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "minimal",
+      "width" : 688
+    }
+  ]
+}

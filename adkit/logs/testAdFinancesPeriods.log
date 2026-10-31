@@ -1,0 +1,76 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02 -derivedDataPath build/sim -testLanguage fr -testRegion CA -resultBundlePath adkit-results/testAdFinancesPeriods.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdFinancesPeriods" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdFinancesPeriods.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+2026-10-31 08:53:36.944417+0000 ArdaneUITests-Runner[45901:117684] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-31 08:53:41.453.
+Test Suite 'ArdaneUITests.xctest' started at 2026-10-31 08:53:41.456.
+Test Suite 'AdShotsUITests' started at 2026-10-31 08:53:41.456.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdFinancesPeriods]' started.
+    t =     0.00s Start Test at 2026-10-31 08:53:41.457
+    t =     0.13s Set Up
+    t =     0.15s Open com.dakrsnyk.ardane
+    t =     0.15s     Launch com.dakrsnyk.ardane
+    t =     9.50s         Setting up automation session
+    t =    12.88s         Wait for com.dakrsnyk.ardane to idle
+    t =    18.89s Waiting 12.0s for "finances-balance" Other to exist
+    t =    19.95s     Checking `Expect predicate `existsNoRetry == 1` for object "finances-balance" Other`
+    t =    19.95s         Checking existence of `"finances-balance" Other`
+    t =    23.57s ADSHOT fin-mois
+ADSHOT fin-mois
+    t =    23.84s Added attachment named 'ADSHOT fin-mois'
+    t =    25.78s Get number of matches for: Descendants matching type Button
+    t =    26.28s Checking existence of `Button (Element at index 1)`
+    t =    27.25s Tap Button (Element at index 1)
+    t =    27.25s     Wait for com.dakrsnyk.ardane to idle
+    t =    27.26s     Find the Button (Element at index 1)
+    t =    27.61s     Check for interrupting elements affecting "3 mois" Button
+    t =    27.83s     Synthesize event
+    t =    27.86s         Scroll element to visible
+    t =    27.87s         Find the "3 mois" Button
+    t =    28.28s         Computed hit point {270.5, 655} after scrolling to visible
+    t =    28.61s     Wait for com.dakrsnyk.ardane to idle
+    t =    31.37s ADSHOT fin-3mois
+ADSHOT fin-3mois
+    t =    31.59s Added attachment named 'ADSHOT fin-3mois'
+    t =    33.57s Get number of matches for: Descendants matching type Button
+    t =    33.81s Checking existence of `Button (Element at index 2)`
+    t =    33.96s Tap Button (Element at index 2)
+    t =    33.96s     Wait for com.dakrsnyk.ardane to idle
+    t =    33.96s     Find the Button (Element at index 2)
+    t =    34.12s     Check for interrupting elements affecting "Année" Button
+    t =    34.23s     Synthesize event
+    t =    34.56s     Wait for com.dakrsnyk.ardane to idle
+    t =    36.79s ADSHOT fin-annee
+ADSHOT fin-annee
+    t =    37.00s Added attachment named 'ADSHOT fin-annee'
+    t =    39.01s Tear Down
+    t =    39.01s     Terminate com.dakrsnyk.ardane:46942
+Test Case '-[ArdaneUITests.AdShotsUITests testAdFinancesPeriods]' passed (40.908 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-10-31 08:54:22.365.
+	 Executed 1 test, with 0 failures (0 unexpected) in 40.908 (40.909) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-10-31 08:54:22.366.
+	 Executed 1 test, with 0 failures (0 unexpected) in 40.908 (40.910) seconds
+Test Suite 'Selected tests' passed at 2026-10-31 08:54:22.367.
+	 Executed 1 test, with 0 failures (0 unexpected) in 40.908 (40.914) seconds
+2026-10-31 08:54:23.106 xcodebuild[44875:115160] [MT] IDETestOperationsObserverDebug: 56.608 elapsed -- Testing started completed.
+2026-10-31 08:54:23.106 xcodebuild[44875:115160] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-31 08:54:23.106 xcodebuild[44875:115160] [MT] IDETestOperationsObserverDebug: 56.608 sec, +56.608 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdFinancesPeriods.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

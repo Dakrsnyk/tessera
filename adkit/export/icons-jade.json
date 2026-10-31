@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-jade-0.png",
+      "index" : 0,
+      "name" : "Santé",
+      "place" : "row-2",
+      "symbol" : "heart.fill"
+    },
+    {
+      "file" : "icons-jade-1.png",
+      "index" : 1,
+      "name" : "Forme",
+      "place" : "row-2",
+      "symbol" : "figure.run"
+    },
+    {
+      "file" : "icons-jade-2.png",
+      "index" : 2,
+      "name" : "Musique",
+      "place" : "row-2",
+      "symbol" : "music.note"
+    },
+    {
+      "file" : "icons-jade-3.png",
+      "index" : 3,
+      "name" : "Ardane",
+      "place" : "row-2",
+      "symbol" : ""
+    },
+    {
+      "file" : "icons-jade-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-jade-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-jade-6.png",
+      "index" : 6,
+      "name" : "Web",
+      "place" : "dock",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-jade-7.png",
+      "index" : 7,
+      "name" : "Caméra",
+      "place" : "dock",
+      "symbol" : "camera.fill"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "jade"
+}

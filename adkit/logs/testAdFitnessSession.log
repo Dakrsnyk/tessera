@@ -1,0 +1,107 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02 -derivedDataPath build/sim -testLanguage fr -testRegion CA -resultBundlePath adkit-results/testAdFitnessSession.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdFitnessSession" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdFitnessSession.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+2026-10-31 08:50:27.046010+0000 ArdaneUITests-Runner[34748:94285] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-31 08:50:34.878.
+Test Suite 'ArdaneUITests.xctest' started at 2026-10-31 08:50:34.879.
+Test Suite 'AdShotsUITests' started at 2026-10-31 08:50:34.879.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdFitnessSession]' started.
+    t =     0.00s Start Test at 2026-10-31 08:50:34.881
+    t =     0.72s Set Up
+    t =     0.73s Open com.dakrsnyk.ardane
+    t =     0.73s     Launch com.dakrsnyk.ardane
+    t =    20.23s         Setting up automation session
+    t =    23.20s         Wait for com.dakrsnyk.ardane to idle
+    t =    32.61s Waiting 15.0s for "session-set-done" Button to exist
+    t =    33.66s     Checking `Expect predicate `existsNoRetry == 1` for object "session-set-done" Button`
+    t =    33.66s         Checking existence of `"session-set-done" Button`
+    t =    35.55s ADSHOT session-0
+ADSHOT session-0
+    t =    35.83s Added attachment named 'ADSHOT session-0'
+    t =    37.75s Waiting 3.0s for "session-set-done" Button to exist
+    t =    38.76s     Checking `Expect predicate `existsNoRetry == 1` for object "session-set-done" Button`
+    t =    38.76s         Checking existence of `"session-set-done" Button`
+    t =    38.89s Find the "session-set-done" Button
+    t =    39.03s Find the "session-set-done" Button
+    t =    39.16s Tap "session-set-done" Button
+    t =    39.16s     Wait for com.dakrsnyk.ardane to idle
+    t =    39.16s     Find the "session-set-done" Button
+    t =    39.29s     Check for interrupting elements affecting "session-set-done" Button
+    t =    39.44s     Synthesize event
+    t =    39.92s     Wait for com.dakrsnyk.ardane to idle
+    t =    41.37s ADSHOT session-1
+ADSHOT session-1
+    t =    41.56s Added attachment named 'ADSHOT session-1'
+    t =    43.57s Waiting 3.0s for "session-set-done" Button to exist
+    t =    44.63s     Checking `Expect predicate `existsNoRetry == 1` for object "session-set-done" Button`
+    t =    44.63s         Checking existence of `"session-set-done" Button`
+    t =    44.83s Find the "session-set-done" Button
+    t =    44.95s Find the "session-set-done" Button
+    t =    45.05s Tap "session-set-done" Button
+    t =    45.05s     Wait for com.dakrsnyk.ardane to idle
+    t =    45.05s     Find the "session-set-done" Button
+    t =    45.15s     Check for interrupting elements affecting "session-set-done" Button
+    t =    45.22s     Synthesize event
+    t =    45.53s     Wait for com.dakrsnyk.ardane to idle
+    t =    46.94s ADSHOT session-2
+ADSHOT session-2
+    t =    47.16s Added attachment named 'ADSHOT session-2'
+    t =    49.14s Waiting 3.0s for "session-set-done" Button to exist
+    t =    50.16s     Checking `Expect predicate `existsNoRetry == 1` for object "session-set-done" Button`
+    t =    50.16s         Checking existence of `"session-set-done" Button`
+    t =    50.28s Find the "session-set-done" Button
+    t =    50.36s Find the "session-set-done" Button
+    t =    50.45s Tap "session-set-done" Button
+    t =    50.45s     Wait for com.dakrsnyk.ardane to idle
+    t =    50.46s     Find the "session-set-done" Button
+    t =    50.57s     Check for interrupting elements affecting "session-set-done" Button
+    t =    50.63s     Synthesize event
+    t =    50.96s     Wait for com.dakrsnyk.ardane to idle
+    t =    52.21s ADSHOT session-3
+ADSHOT session-3
+    t =    52.43s Added attachment named 'ADSHOT session-3'
+    t =    54.42s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.35] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    54.42s     Wait for com.dakrsnyk.ardane to idle
+    t =    54.42s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    54.52s     Check for interrupting elements affecting "Ardane" Application
+    t =    54.62s     Synthesize event
+    t =    54.62s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    54.68s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    54.73s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    54.79s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    54.86s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    56.63s     Wait for com.dakrsnyk.ardane to idle
+    t =    57.97s ADSHOT session-list
+ADSHOT session-list
+    t =    58.15s Added attachment named 'ADSHOT session-list'
+    t =    60.18s Tear Down
+    t =    60.19s     Terminate com.dakrsnyk.ardane:38079
+Test Case '-[ArdaneUITests.AdShotsUITests testAdFitnessSession]' passed (61.520 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-10-31 08:51:36.401.
+	 Executed 1 test, with 0 failures (0 unexpected) in 61.520 (61.522) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-10-31 08:51:36.403.
+	 Executed 1 test, with 0 failures (0 unexpected) in 61.520 (61.524) seconds
+Test Suite 'Selected tests' passed at 2026-10-31 08:51:36.403.
+	 Executed 1 test, with 0 failures (0 unexpected) in 61.520 (61.525) seconds
+2026-10-31 08:51:38.116 xcodebuild[33109:85591] [MT] IDETestOperationsObserverDebug: 120.425 elapsed -- Testing started completed.
+2026-10-31 08:51:38.116 xcodebuild[33109:85591] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-31 08:51:38.116 xcodebuild[33109:85591] [MT] IDETestOperationsObserverDebug: 120.425 sec, +120.425 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdFitnessSession.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

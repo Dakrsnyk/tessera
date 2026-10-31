@@ -1,0 +1,91 @@
+{
+  "setup" : "graphite",
+  "shadow" : "Home Screen widgets: black 20 %, radius 8 pt, y 3 pt (not in the PNG)",
+  "wallpaper" : "graphite",
+  "widgets" : [
+    {
+      "accent" : "6B7280",
+      "family" : "medium",
+      "file" : "setup-profile-minimal-0.png",
+      "height" : 510,
+      "index" : 0,
+      "kind" : "clock",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 3,
+      "template" : "",
+      "theme" : "minimal",
+      "width" : 1092
+    },
+    {
+      "accent" : "6B7280",
+      "family" : "small",
+      "file" : "setup-profile-minimal-1.png",
+      "height" : 680,
+      "index" : 1,
+      "kind" : "priorities",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "minimal",
+      "width" : 680
+    },
+    {
+      "accent" : "6B7280",
+      "family" : "small",
+      "file" : "setup-profile-minimal-2.png",
+      "height" : 680,
+      "index" : 2,
+      "kind" : "budgetLeft",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "minimal",
+      "width" : 680
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "circular",
+      "file" : "setup-profile-minimal-3.png",
+      "height" : 288,
+      "index" : 3,
+      "kind" : "progress",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "progress-day",
+      "theme" : "minimal",
+      "width" : 288
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "circular",
+      "file" : "setup-profile-minimal-4.png",
+      "height" : 288,
+      "index" : 4,
+      "kind" : "counter",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "minimal",
+      "width" : 288
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "circular",
+      "file" : "setup-profile-minimal-5.png",
+      "height" : 288,
+      "index" : 5,
+      "kind" : "countdown",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "minimal",
+      "width" : 288
+    }
+  ]
+}

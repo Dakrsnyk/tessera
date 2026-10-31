@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-ocean-0.png",
+      "index" : 0,
+      "name" : "Santé",
+      "place" : "row-2",
+      "symbol" : "heart.fill"
+    },
+    {
+      "file" : "icons-ocean-1.png",
+      "index" : 1,
+      "name" : "Musique",
+      "place" : "row-2",
+      "symbol" : "music.note"
+    },
+    {
+      "file" : "icons-ocean-2.png",
+      "index" : 2,
+      "name" : "Podcasts",
+      "place" : "row-2",
+      "symbol" : "mic.fill"
+    },
+    {
+      "file" : "icons-ocean-3.png",
+      "index" : 3,
+      "name" : "Météo",
+      "place" : "row-2",
+      "symbol" : "cloud.sun.fill"
+    },
+    {
+      "file" : "icons-ocean-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-ocean-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-ocean-6.png",
+      "index" : 6,
+      "name" : "Web",
+      "place" : "dock",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-ocean-7.png",
+      "index" : 7,
+      "name" : "Caméra",
+      "place" : "dock",
+      "symbol" : "camera.fill"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "ocean"
+}

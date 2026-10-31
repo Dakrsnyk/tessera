@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-etudes-0.png",
+      "index" : 0,
+      "name" : "Livres",
+      "place" : "row-2",
+      "symbol" : "book.fill"
+    },
+    {
+      "file" : "icons-etudes-1.png",
+      "index" : 1,
+      "name" : "Notes",
+      "place" : "row-2",
+      "symbol" : "note.text"
+    },
+    {
+      "file" : "icons-etudes-2.png",
+      "index" : 2,
+      "name" : "Calendrier",
+      "place" : "row-2",
+      "symbol" : "calendar"
+    },
+    {
+      "file" : "icons-etudes-3.png",
+      "index" : 3,
+      "name" : "Rappels",
+      "place" : "row-2",
+      "symbol" : "checklist"
+    },
+    {
+      "file" : "icons-etudes-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-etudes-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-etudes-6.png",
+      "index" : 6,
+      "name" : "Web",
+      "place" : "dock",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-etudes-7.png",
+      "index" : 7,
+      "name" : "Fichiers",
+      "place" : "dock",
+      "symbol" : "folder.fill"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "etudes"
+}

@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-nebuleuse-0.png",
+      "index" : 0,
+      "name" : "Web",
+      "place" : "row-2",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-nebuleuse-1.png",
+      "index" : 1,
+      "name" : "Cartes",
+      "place" : "row-2",
+      "symbol" : "creditcard.fill"
+    },
+    {
+      "file" : "icons-nebuleuse-2.png",
+      "index" : 2,
+      "name" : "Notes",
+      "place" : "row-2",
+      "symbol" : "note.text"
+    },
+    {
+      "file" : "icons-nebuleuse-3.png",
+      "index" : 3,
+      "name" : "Réglages",
+      "place" : "row-2",
+      "symbol" : "gearshape.fill"
+    },
+    {
+      "file" : "icons-nebuleuse-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-nebuleuse-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-nebuleuse-6.png",
+      "index" : 6,
+      "name" : "Mail",
+      "place" : "dock",
+      "symbol" : "envelope.fill"
+    },
+    {
+      "file" : "icons-nebuleuse-7.png",
+      "index" : 7,
+      "name" : "Musique",
+      "place" : "dock",
+      "symbol" : "music.note"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "nebuleuse"
+}

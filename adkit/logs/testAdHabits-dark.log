@@ -1,0 +1,111 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02 -derivedDataPath build/sim -testLanguage fr -testRegion CA -resultBundlePath adkit-results/testAdHabits-dark.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdHabits" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdHabits-dark.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02, OS:26.2, name:iPhone 16 Pro }
+2026-10-31 09:07:23.803575+0000 ArdaneUITests-Runner[92009:227022] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-31 09:07:27.076.
+Test Suite 'ArdaneUITests.xctest' started at 2026-10-31 09:07:27.077.
+Test Suite 'AdShotsUITests' started at 2026-10-31 09:07:27.077.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdHabits]' started.
+    t =     0.00s Start Test at 2026-10-31 09:07:27.078
+    t =     0.12s Set Up
+    t =     0.12s Open com.dakrsnyk.ardane
+    t =     0.13s     Launch com.dakrsnyk.ardane
+    t =     6.57s         Setting up automation session
+    t =     8.67s         Wait for com.dakrsnyk.ardane to idle
+    t =    12.97s Waiting 12.0s for "day-switcher" Other to exist
+    t =    14.07s     Checking `Expect predicate `existsNoRetry == 1` for object "day-switcher" Other`
+    t =    14.07s         Checking existence of `"day-switcher" Other`
+    t =    15.95s ADSHOT hab-0-dark
+ADSHOT hab-0-dark
+    t =    16.19s Added attachment named 'ADSHOT hab-0-dark'
+    t =    18.16s Find the "day-switcher" Other
+    t =    18.38s Find the Target Application 'com.dakrsnyk.ardane'
+    t =    18.50s Get all elements bound by index for: Descendants matching type Button
+    t =    18.56s Find the Button (Element at index 0)
+    t =    18.69s Checking existence of `"square.grid.2x2" Button`
+    t =    18.80s Find the Button (Element at index 1)
+    t =    18.96s Checking existence of `"plus.square.on.square" Button`
+    t =    19.03s Find the Button (Element at index 2)
+    t =    19.10s Checking existence of `"bag" Button`
+    t =    19.17s Find the Button (Element at index 3)
+    t =    19.27s Checking existence of `"rectangle.stack" Button`
+    t =    19.39s Find the Button (Element at index 4)
+    t =    19.46s Checking existence of `"BackButton" Button`
+    t =    19.51s Find the Button (Element at index 5)
+    t =    19.63s Checking existence of `"checkmark" Button`
+    t =    19.69s Find the Target Application 'com.dakrsnyk.ardane'
+    t =    19.76s Find the Button (Element at index 6)
+    t =    19.87s Checking existence of `"Méditer, Série de 12 jours, Régularité : 81 %" Button`
+    t =    19.96s Find the Button (Element at index 7)
+    t =    20.07s Checking existence of `"checkmark" Button`
+    t =    20.16s Find the Target Application 'com.dakrsnyk.ardane'
+    t =    20.21s Find the Button (Element at index 8)
+    t =    20.32s Checking existence of `"Sport, Série de 2 jours, Régularité : 54 %" Button`
+    t =    20.39s Find the Button (Element at index 9)
+    t =    20.58s Checking existence of `"checkmark" Button`
+    t =    20.72s Find the Target Application 'com.dakrsnyk.ardane'
+    t =    20.79s Find the Button (Element at index 10)
+    t =    20.97s Checking existence of `"Lecture, Série de 4 jours, Régularité : 66 %" Button`
+    t =    21.05s Find the Button (Element at index 11)
+    t =    21.14s Checking existence of `"checkmark" Button`
+    t =    21.22s Find the Button (Element at index 12)
+    t =    21.29s Checking existence of `"Pas d'écran au lit, Série de 1 jour, Régularité : 40 %" Button`
+    t =    21.34s Find the Button (Element at index 13)
+    t =    21.40s Checking existence of `"Ajouter une habitude" Button`
+    t =    21.44s Find the Button (Element at index 14)
+    t =    21.51s Checking existence of `"chevron.left" Button`
+    t =    21.58s Find the Button (Element at index 15)
+    t =    21.86s Checking existence of `"Choisir une date" Button`
+    t =    21.95s Find the Button (Element at index 16)
+    t =    22.04s Checking existence of `"chevron.right" Button`
+    t =    22.13s Find the "checkmark" Button
+    t =    22.20s Find the "checkmark" Button
+    t =    22.30s Find the "checkmark" Button
+    t =    22.41s Find the "checkmark" Button
+    t =    22.49s Checking existence of `"checkmark" Button`
+    t =    22.59s Find the "checkmark" Button
+    t =    22.77s Checking existence of `"checkmark" Button`
+    t =    22.83s Find the "checkmark" Button
+    t =    22.93s Checking existence of `"checkmark" Button`
+    t =    22.99s Find the "checkmark" Button
+    t =    23.07s Find the "checkmark" Button
+    t =    23.18s Tap "checkmark" Button
+    t =    23.18s     Wait for com.dakrsnyk.ardane to idle
+    t =    23.18s     Find the "checkmark" Button
+    t =    23.25s     Check for interrupting elements affecting "checkmark" Button
+    t =    23.38s     Synthesize event
+    t =    23.72s     Wait for com.dakrsnyk.ardane to idle
+    t =    24.74s ADSHOT hab-1-dark
+ADSHOT hab-1-dark
+    t =    24.93s Added attachment named 'ADSHOT hab-1-dark'
+    t =    26.95s Tear Down
+    t =    26.95s     Terminate com.dakrsnyk.ardane:92291
+Test Case '-[ArdaneUITests.AdShotsUITests testAdHabits]' passed (28.128 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-10-31 09:07:55.206.
+	 Executed 1 test, with 0 failures (0 unexpected) in 28.128 (28.129) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-10-31 09:07:55.207.
+	 Executed 1 test, with 0 failures (0 unexpected) in 28.128 (28.130) seconds
+Test Suite 'Selected tests' passed at 2026-10-31 09:07:55.207.
+	 Executed 1 test, with 0 failures (0 unexpected) in 28.128 (28.131) seconds
+2026-10-31 09:07:55.932 xcodebuild[90830:224296] [MT] IDETestOperationsObserverDebug: 37.976 elapsed -- Testing started completed.
+2026-10-31 09:07:55.932 xcodebuild[90830:224296] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-31 09:07:55.932 xcodebuild[90830:224296] [MT] IDETestOperationsObserverDebug: 37.976 sec, +37.976 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdHabits-dark.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

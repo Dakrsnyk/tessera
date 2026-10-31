@@ -1,0 +1,2132 @@
+{
+  "background" : "clear",
+  "duration" : 4.4000000000000004,
+  "exercise" : "deadlift",
+  "fps" : 60,
+  "frame" : [
+    {
+      "file" : "demo-deadlift-0000.png",
+      "index" : 0,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0
+    },
+    {
+      "file" : "demo-deadlift-0001.png",
+      "index" : 1,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.016666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0002.png",
+      "index" : 2,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.033333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0003.png",
+      "index" : 3,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.050000000000000003
+    },
+    {
+      "file" : "demo-deadlift-0004.png",
+      "index" : 4,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.066666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0005.png",
+      "index" : 5,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.083333333333333329
+    },
+    {
+      "file" : "demo-deadlift-0006.png",
+      "index" : 6,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.10000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0007.png",
+      "index" : 7,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.11666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0008.png",
+      "index" : 8,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.13333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0009.png",
+      "index" : 9,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.14999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0010.png",
+      "index" : 10,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.16666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0011.png",
+      "index" : 11,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.18333333333333332
+    },
+    {
+      "file" : "demo-deadlift-0012.png",
+      "index" : 12,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.20000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0013.png",
+      "index" : 13,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.21666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0014.png",
+      "index" : 14,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.23333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0015.png",
+      "index" : 15,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.25
+    },
+    {
+      "file" : "demo-deadlift-0016.png",
+      "index" : 16,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.26666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0017.png",
+      "index" : 17,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.28333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0018.png",
+      "index" : 18,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.29999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0019.png",
+      "index" : 19,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.31666666666666665
+    },
+    {
+      "file" : "demo-deadlift-0020.png",
+      "index" : 20,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.33333333333333331
+    },
+    {
+      "file" : "demo-deadlift-0021.png",
+      "index" : 21,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.34999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0022.png",
+      "index" : 22,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.36666666666666664
+    },
+    {
+      "file" : "demo-deadlift-0023.png",
+      "index" : 23,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.38333333333333336
+    },
+    {
+      "file" : "demo-deadlift-0024.png",
+      "index" : 24,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.40000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0025.png",
+      "index" : 25,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.41666666666666669
+    },
+    {
+      "file" : "demo-deadlift-0026.png",
+      "index" : 26,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.43333333333333335
+    },
+    {
+      "file" : "demo-deadlift-0027.png",
+      "index" : 27,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.45000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0028.png",
+      "index" : 28,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.46666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0029.png",
+      "index" : 29,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.48333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0030.png",
+      "index" : 30,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.5
+    },
+    {
+      "file" : "demo-deadlift-0031.png",
+      "index" : 31,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.51666666666666672
+    },
+    {
+      "file" : "demo-deadlift-0032.png",
+      "index" : 32,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.53333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0033.png",
+      "index" : 33,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.55000000000000004
+    },
+    {
+      "file" : "demo-deadlift-0034.png",
+      "index" : 34,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.56666666666666665
+    },
+    {
+      "file" : "demo-deadlift-0035.png",
+      "index" : 35,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.58333333333333337
+    },
+    {
+      "file" : "demo-deadlift-0036.png",
+      "index" : 36,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.59999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0037.png",
+      "index" : 37,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.6166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0038.png",
+      "index" : 38,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.6333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0039.png",
+      "index" : 39,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.65000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0040.png",
+      "index" : 40,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.66666666666666663
+    },
+    {
+      "file" : "demo-deadlift-0041.png",
+      "index" : 41,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.68333333333333335
+    },
+    {
+      "file" : "demo-deadlift-0042.png",
+      "index" : 42,
+      "label" : 0,
+      "p" : 0,
+      "phase" : "Barre au sol, dos plat",
+      "t" : 0.69999999999999996
+    },
+    {
+      "file" : "demo-deadlift-0043.png",
+      "index" : 43,
+      "label" : 1,
+      "p" : 0.00036762688614540702,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.71666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0044.png",
+      "index" : 44,
+      "label" : 1,
+      "p" : 0.001459533607681755,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.73333333333333328
+    },
+    {
+      "file" : "demo-deadlift-0045.png",
+      "index" : 45,
+      "label" : 1,
+      "p" : 0.0032592592592592643,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.75
+    },
+    {
+      "file" : "demo-deadlift-0046.png",
+      "index" : 46,
+      "label" : 1,
+      "p" : 0.005750342935528137,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.76666666666666672
+    },
+    {
+      "file" : "demo-deadlift-0047.png",
+      "index" : 47,
+      "label" : 1,
+      "p" : 0.0089163237311385545,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.78333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0048.png",
+      "index" : 48,
+      "label" : 1,
+      "p" : 0.012740740740740761,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.80000000000000004
+    },
+    {
+      "file" : "demo-deadlift-0049.png",
+      "index" : 49,
+      "label" : 1,
+      "p" : 0.017207133058984921,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.81666666666666665
+    },
+    {
+      "file" : "demo-deadlift-0050.png",
+      "index" : 50,
+      "label" : 1,
+      "p" : 0.02229903978052129,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.83333333333333337
+    },
+    {
+      "file" : "demo-deadlift-0051.png",
+      "index" : 51,
+      "label" : 1,
+      "p" : 0.028000000000000008,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.84999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0052.png",
+      "index" : 52,
+      "label" : 1,
+      "p" : 0.03429355281207136,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.8666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0053.png",
+      "index" : 53,
+      "label" : 1,
+      "p" : 0.041163237311385464,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.8833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0054.png",
+      "index" : 54,
+      "label" : 1,
+      "p" : 0.048592592592592632,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.90000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0055.png",
+      "index" : 55,
+      "label" : 1,
+      "p" : 0.056565157750342945,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.91666666666666663
+    },
+    {
+      "file" : "demo-deadlift-0056.png",
+      "index" : 56,
+      "label" : 1,
+      "p" : 0.065064471879286712,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.93333333333333335
+    },
+    {
+      "file" : "demo-deadlift-0057.png",
+      "index" : 57,
+      "label" : 1,
+      "p" : 0.07407407407407407,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.94999999999999996
+    },
+    {
+      "file" : "demo-deadlift-0058.png",
+      "index" : 58,
+      "label" : 1,
+      "p" : 0.083577503429355313,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.96666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0059.png",
+      "index" : 59,
+      "label" : 1,
+      "p" : 0.09355829903978051,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 0.98333333333333328
+    },
+    {
+      "file" : "demo-deadlift-0060.png",
+      "index" : 60,
+      "label" : 1,
+      "p" : 0.10400000000000004,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1
+    },
+    {
+      "file" : "demo-deadlift-0061.png",
+      "index" : 61,
+      "label" : 1,
+      "p" : 0.11488614540466392,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.0166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0062.png",
+      "index" : 62,
+      "label" : 1,
+      "p" : 0.1262002743484226,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.0333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0063.png",
+      "index" : 63,
+      "label" : 1,
+      "p" : 0.13792592592592598,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.05
+    },
+    {
+      "file" : "demo-deadlift-0064.png",
+      "index" : 64,
+      "label" : 1,
+      "p" : 0.15004663923182443,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.0666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0065.png",
+      "index" : 65,
+      "label" : 1,
+      "p" : 0.16254595336076813,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.0833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0066.png",
+      "index" : 66,
+      "label" : 1,
+      "p" : 0.17540740740740751,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.1000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0067.png",
+      "index" : 67,
+      "label" : 1,
+      "p" : 0.18861454046639239,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.1166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0068.png",
+      "index" : 68,
+      "label" : 1,
+      "p" : 0.20215089163237313,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.1333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0069.png",
+      "index" : 69,
+      "label" : 1,
+      "p" : 0.216,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.1499999999999999
+    },
+    {
+      "file" : "demo-deadlift-0070.png",
+      "index" : 70,
+      "label" : 1,
+      "p" : 0.23014540466392328,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.1666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0071.png",
+      "index" : 71,
+      "label" : 1,
+      "p" : 0.24457064471879292,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.1833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0072.png",
+      "index" : 72,
+      "label" : 1,
+      "p" : 0.25925925925925924,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.2
+    },
+    {
+      "file" : "demo-deadlift-0073.png",
+      "index" : 73,
+      "label" : 1,
+      "p" : 0.27419478737997249,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.2166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0074.png",
+      "index" : 74,
+      "label" : 1,
+      "p" : 0.28936076817558309,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.2333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0075.png",
+      "index" : 75,
+      "label" : 1,
+      "p" : 0.30474074074074081,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.25
+    },
+    {
+      "file" : "demo-deadlift-0076.png",
+      "index" : 76,
+      "label" : 1,
+      "p" : 0.32031824417009602,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.2666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0077.png",
+      "index" : 77,
+      "label" : 1,
+      "p" : 0.33607681755829921,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.2833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0078.png",
+      "index" : 78,
+      "label" : 1,
+      "p" : 0.35200000000000009,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.3
+    },
+    {
+      "file" : "demo-deadlift-0079.png",
+      "index" : 79,
+      "label" : 1,
+      "p" : 0.36807133058984914,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.3166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0080.png",
+      "index" : 80,
+      "label" : 1,
+      "p" : 0.38427434842249653,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.3333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0081.png",
+      "index" : 81,
+      "label" : 1,
+      "p" : 0.40059259259259272,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.3500000000000001
+    },
+    {
+      "file" : "demo-deadlift-0082.png",
+      "index" : 82,
+      "label" : 1,
+      "p" : 0.41700960219478744,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.3666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0083.png",
+      "index" : 83,
+      "label" : 1,
+      "p" : 0.43350891632373117,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.3833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0084.png",
+      "index" : 84,
+      "label" : 1,
+      "p" : 0.45007407407407402,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.3999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0085.png",
+      "index" : 85,
+      "label" : 1,
+      "p" : 0.46668861454046651,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.4166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0086.png",
+      "index" : 86,
+      "label" : 1,
+      "p" : 0.48333607681755836,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.4333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0087.png",
+      "index" : 87,
+      "label" : 1,
+      "p" : 0.5,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.45
+    },
+    {
+      "file" : "demo-deadlift-0088.png",
+      "index" : 88,
+      "label" : 1,
+      "p" : 0.51666392318244159,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.4666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0089.png",
+      "index" : 89,
+      "label" : 1,
+      "p" : 0.53331138545953372,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.4833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0090.png",
+      "index" : 90,
+      "label" : 1,
+      "p" : 0.54992592592592593,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.5
+    },
+    {
+      "file" : "demo-deadlift-0091.png",
+      "index" : 91,
+      "label" : 1,
+      "p" : 0.56649108367626877,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.5166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0092.png",
+      "index" : 92,
+      "label" : 1,
+      "p" : 0.58299039780521278,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.5333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0093.png",
+      "index" : 93,
+      "label" : 1,
+      "p" : 0.59940740740740761,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.55
+    },
+    {
+      "file" : "demo-deadlift-0094.png",
+      "index" : 94,
+      "label" : 1,
+      "p" : 0.61572565157750347,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.5666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0095.png",
+      "index" : 95,
+      "label" : 1,
+      "p" : 0.63192866941015091,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.5833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0096.png",
+      "index" : 96,
+      "label" : 1,
+      "p" : 0.64800000000000013,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.6000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0097.png",
+      "index" : 97,
+      "label" : 1,
+      "p" : 0.66392318244170101,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.6166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0098.png",
+      "index" : 98,
+      "label" : 1,
+      "p" : 0.67968175582990398,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.6333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0099.png",
+      "index" : 99,
+      "label" : 1,
+      "p" : 0.69525925925925924,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.6499999999999999
+    },
+    {
+      "file" : "demo-deadlift-0100.png",
+      "index" : 100,
+      "label" : 1,
+      "p" : 0.71063923182441713,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.6666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0101.png",
+      "index" : 101,
+      "label" : 1,
+      "p" : 0.7258052126200274,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.6833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0102.png",
+      "index" : 102,
+      "label" : 1,
+      "p" : 0.7407407407407407,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.7
+    },
+    {
+      "file" : "demo-deadlift-0103.png",
+      "index" : 103,
+      "label" : 1,
+      "p" : 0.75542935528120703,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.7166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0104.png",
+      "index" : 104,
+      "label" : 1,
+      "p" : 0.76985459533607692,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.7333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0105.png",
+      "index" : 105,
+      "label" : 1,
+      "p" : 0.78400000000000014,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.75
+    },
+    {
+      "file" : "demo-deadlift-0106.png",
+      "index" : 106,
+      "label" : 1,
+      "p" : 0.7978491083676269,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.7666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0107.png",
+      "index" : 107,
+      "label" : 1,
+      "p" : 0.81138545953360774,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.7833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0108.png",
+      "index" : 108,
+      "label" : 1,
+      "p" : 0.82459259259259277,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.8
+    },
+    {
+      "file" : "demo-deadlift-0109.png",
+      "index" : 109,
+      "label" : 1,
+      "p" : 0.83745404663923184,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.8166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0110.png",
+      "index" : 110,
+      "label" : 1,
+      "p" : 0.84995336076817551,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.8333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0111.png",
+      "index" : 111,
+      "label" : 1,
+      "p" : 0.8620740740740741,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.8500000000000001
+    },
+    {
+      "file" : "demo-deadlift-0112.png",
+      "index" : 112,
+      "label" : 1,
+      "p" : 0.87379972565157749,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.8666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0113.png",
+      "index" : 113,
+      "label" : 1,
+      "p" : 0.88511385459533598,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.8833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0114.png",
+      "index" : 114,
+      "label" : 1,
+      "p" : 0.89599999999999991,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.8999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0115.png",
+      "index" : 115,
+      "label" : 1,
+      "p" : 0.90644170096021959,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.9166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0116.png",
+      "index" : 116,
+      "label" : 1,
+      "p" : 0.91642249657064478,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.9333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0117.png",
+      "index" : 117,
+      "label" : 1,
+      "p" : 0.92592592592592604,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.95
+    },
+    {
+      "file" : "demo-deadlift-0118.png",
+      "index" : 118,
+      "label" : 1,
+      "p" : 0.93493552812071323,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.9666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0119.png",
+      "index" : 119,
+      "label" : 1,
+      "p" : 0.94343484224965712,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 1.9833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0120.png",
+      "index" : 120,
+      "label" : 1,
+      "p" : 0.95140740740740748,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2
+    },
+    {
+      "file" : "demo-deadlift-0121.png",
+      "index" : 121,
+      "label" : 1,
+      "p" : 0.95883676268861462,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.0166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0122.png",
+      "index" : 122,
+      "label" : 1,
+      "p" : 0.96570644718792864,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.0333333333333332
+    },
+    {
+      "file" : "demo-deadlift-0123.png",
+      "index" : 123,
+      "label" : 1,
+      "p" : 0.97199999999999998,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.0499999999999998
+    },
+    {
+      "file" : "demo-deadlift-0124.png",
+      "index" : 124,
+      "label" : 1,
+      "p" : 0.97770096021947883,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.0666666666666669
+    },
+    {
+      "file" : "demo-deadlift-0125.png",
+      "index" : 125,
+      "label" : 1,
+      "p" : 0.9827928669410152,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.0833333333333335
+    },
+    {
+      "file" : "demo-deadlift-0126.png",
+      "index" : 126,
+      "label" : 1,
+      "p" : 0.98725925925925939,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.1000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0127.png",
+      "index" : 127,
+      "label" : 1,
+      "p" : 0.99108367626886151,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.1166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0128.png",
+      "index" : 128,
+      "label" : 1,
+      "p" : 0.99424965706447188,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.1333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0129.png",
+      "index" : 129,
+      "label" : 1,
+      "p" : 0.9967407407407407,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.1499999999999999
+    },
+    {
+      "file" : "demo-deadlift-0130.png",
+      "index" : 130,
+      "label" : 1,
+      "p" : 0.9985404663923183,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.1666666666666665
+    },
+    {
+      "file" : "demo-deadlift-0131.png",
+      "index" : 131,
+      "label" : 1,
+      "p" : 0.99963237311385467,
+      "phase" : "Poussée des jambes, barre collée",
+      "t" : 2.1833333333333331
+    },
+    {
+      "file" : "demo-deadlift-0132.png",
+      "index" : 132,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.2000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0133.png",
+      "index" : 133,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.2166666666666668
+    },
+    {
+      "file" : "demo-deadlift-0134.png",
+      "index" : 134,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.2333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0135.png",
+      "index" : 135,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.25
+    },
+    {
+      "file" : "demo-deadlift-0136.png",
+      "index" : 136,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.2666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0137.png",
+      "index" : 137,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.2833333333333332
+    },
+    {
+      "file" : "demo-deadlift-0138.png",
+      "index" : 138,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.2999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0139.png",
+      "index" : 139,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.3166666666666669
+    },
+    {
+      "file" : "demo-deadlift-0140.png",
+      "index" : 140,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.3333333333333335
+    },
+    {
+      "file" : "demo-deadlift-0141.png",
+      "index" : 141,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.3500000000000001
+    },
+    {
+      "file" : "demo-deadlift-0142.png",
+      "index" : 142,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.3666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0143.png",
+      "index" : 143,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.3833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0144.png",
+      "index" : 144,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.3999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0145.png",
+      "index" : 145,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.4166666666666665
+    },
+    {
+      "file" : "demo-deadlift-0146.png",
+      "index" : 146,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.4333333333333331
+    },
+    {
+      "file" : "demo-deadlift-0147.png",
+      "index" : 147,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.4500000000000002
+    },
+    {
+      "file" : "demo-deadlift-0148.png",
+      "index" : 148,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.4666666666666668
+    },
+    {
+      "file" : "demo-deadlift-0149.png",
+      "index" : 149,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.4833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0150.png",
+      "index" : 150,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.5
+    },
+    {
+      "file" : "demo-deadlift-0151.png",
+      "index" : 151,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.5166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0152.png",
+      "index" : 152,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.5333333333333332
+    },
+    {
+      "file" : "demo-deadlift-0153.png",
+      "index" : 153,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.5499999999999998
+    },
+    {
+      "file" : "demo-deadlift-0154.png",
+      "index" : 154,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.5666666666666669
+    },
+    {
+      "file" : "demo-deadlift-0155.png",
+      "index" : 155,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.5833333333333335
+    },
+    {
+      "file" : "demo-deadlift-0156.png",
+      "index" : 156,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.6000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0157.png",
+      "index" : 157,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.6166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0158.png",
+      "index" : 158,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.6333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0159.png",
+      "index" : 159,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.6499999999999999
+    },
+    {
+      "file" : "demo-deadlift-0160.png",
+      "index" : 160,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.6666666666666665
+    },
+    {
+      "file" : "demo-deadlift-0161.png",
+      "index" : 161,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.6833333333333331
+    },
+    {
+      "file" : "demo-deadlift-0162.png",
+      "index" : 162,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.7000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0163.png",
+      "index" : 163,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.7166666666666668
+    },
+    {
+      "file" : "demo-deadlift-0164.png",
+      "index" : 164,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.7333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0165.png",
+      "index" : 165,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.75
+    },
+    {
+      "file" : "demo-deadlift-0166.png",
+      "index" : 166,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.7666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0167.png",
+      "index" : 167,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.7833333333333332
+    },
+    {
+      "file" : "demo-deadlift-0168.png",
+      "index" : 168,
+      "label" : 2,
+      "p" : 1,
+      "phase" : "Debout, hanches tendues",
+      "t" : 2.7999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0169.png",
+      "index" : 169,
+      "label" : 3,
+      "p" : 0.99967673972800919,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8166666666666669
+    },
+    {
+      "file" : "demo-deadlift-0170.png",
+      "index" : 170,
+      "label" : 3,
+      "p" : 0.99871600115740733,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8333333333333335
+    },
+    {
+      "file" : "demo-deadlift-0171.png",
+      "index" : 171,
+      "label" : 3,
+      "p" : 0.99713134765625,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8500000000000001
+    },
+    {
+      "file" : "demo-deadlift-0172.png",
+      "index" : 172,
+      "label" : 3,
+      "p" : 0.99493634259259256,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0173.png",
+      "index" : 173,
+      "label" : 3,
+      "p" : 0.9921445493344907,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0174.png",
+      "index" : 174,
+      "label" : 3,
+      "p" : 0.98876953125,
+      "phase" : "Descente contrôlée",
+      "t" : 2.8999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0175.png",
+      "index" : 175,
+      "label" : 3,
+      "p" : 0.98482485170717593,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9166666666666665
+    },
+    {
+      "file" : "demo-deadlift-0176.png",
+      "index" : 176,
+      "label" : 3,
+      "p" : 0.98032407407407407,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9333333333333331
+    },
+    {
+      "file" : "demo-deadlift-0177.png",
+      "index" : 177,
+      "label" : 3,
+      "p" : 0.97528076171875,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9500000000000002
+    },
+    {
+      "file" : "demo-deadlift-0178.png",
+      "index" : 178,
+      "label" : 3,
+      "p" : 0.9697084780092593,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9666666666666668
+    },
+    {
+      "file" : "demo-deadlift-0179.png",
+      "index" : 179,
+      "label" : 3,
+      "p" : 0.96362078631365744,
+      "phase" : "Descente contrôlée",
+      "t" : 2.9833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0180.png",
+      "index" : 180,
+      "label" : 3,
+      "p" : 0.95703125000000011,
+      "phase" : "Descente contrôlée",
+      "t" : 3
+    },
+    {
+      "file" : "demo-deadlift-0181.png",
+      "index" : 181,
+      "label" : 3,
+      "p" : 0.94995343243634267,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0182.png",
+      "index" : 182,
+      "label" : 3,
+      "p" : 0.94240089699074092,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0333333333333332
+    },
+    {
+      "file" : "demo-deadlift-0183.png",
+      "index" : 183,
+      "label" : 3,
+      "p" : 0.93438720703125022,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0499999999999998
+    },
+    {
+      "file" : "demo-deadlift-0184.png",
+      "index" : 184,
+      "label" : 3,
+      "p" : 0.92592592592592571,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0666666666666669
+    },
+    {
+      "file" : "demo-deadlift-0185.png",
+      "index" : 185,
+      "label" : 3,
+      "p" : 0.91703061704282385,
+      "phase" : "Descente contrôlée",
+      "t" : 3.0833333333333335
+    },
+    {
+      "file" : "demo-deadlift-0186.png",
+      "index" : 186,
+      "label" : 3,
+      "p" : 0.90771484374999978,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0187.png",
+      "index" : 187,
+      "label" : 3,
+      "p" : 0.89799216941550908,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0188.png",
+      "index" : 188,
+      "label" : 3,
+      "p" : 0.88787615740740722,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0189.png",
+      "index" : 189,
+      "label" : 3,
+      "p" : 0.87738037109374989,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1499999999999999
+    },
+    {
+      "file" : "demo-deadlift-0190.png",
+      "index" : 190,
+      "label" : 3,
+      "p" : 0.86651837384259256,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1666666666666665
+    },
+    {
+      "file" : "demo-deadlift-0191.png",
+      "index" : 191,
+      "label" : 3,
+      "p" : 0.8553037290219907,
+      "phase" : "Descente contrôlée",
+      "t" : 3.1833333333333331
+    },
+    {
+      "file" : "demo-deadlift-0192.png",
+      "index" : 192,
+      "label" : 3,
+      "p" : 0.84375,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0193.png",
+      "index" : 193,
+      "label" : 3,
+      "p" : 0.83187075014467593,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2166666666666668
+    },
+    {
+      "file" : "demo-deadlift-0194.png",
+      "index" : 194,
+      "label" : 3,
+      "p" : 0.81967954282407418,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0195.png",
+      "index" : 195,
+      "label" : 3,
+      "p" : 0.80718994140625011,
+      "phase" : "Descente contrôlée",
+      "t" : 3.25
+    },
+    {
+      "file" : "demo-deadlift-0196.png",
+      "index" : 196,
+      "label" : 3,
+      "p" : 0.79441550925925941,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0197.png",
+      "index" : 197,
+      "label" : 3,
+      "p" : 0.78136980975115766,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2833333333333332
+    },
+    {
+      "file" : "demo-deadlift-0198.png",
+      "index" : 198,
+      "label" : 3,
+      "p" : 0.76806640625000022,
+      "phase" : "Descente contrôlée",
+      "t" : 3.2999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0199.png",
+      "index" : 199,
+      "label" : 3,
+      "p" : 0.75451886212384223,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3166666666666669
+    },
+    {
+      "file" : "demo-deadlift-0200.png",
+      "index" : 200,
+      "label" : 3,
+      "p" : 0.74074074074074037,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3333333333333335
+    },
+    {
+      "file" : "demo-deadlift-0201.png",
+      "index" : 201,
+      "label" : 3,
+      "p" : 0.72674560546874978,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3500000000000001
+    },
+    {
+      "file" : "demo-deadlift-0202.png",
+      "index" : 202,
+      "label" : 3,
+      "p" : 0.71254701967592571,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0203.png",
+      "index" : 203,
+      "label" : 3,
+      "p" : 0.69815854673032385,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0204.png",
+      "index" : 204,
+      "label" : 3,
+      "p" : 0.68359374999999978,
+      "phase" : "Descente contrôlée",
+      "t" : 3.3999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0205.png",
+      "index" : 205,
+      "label" : 3,
+      "p" : 0.66886619285300908,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4166666666666665
+    },
+    {
+      "file" : "demo-deadlift-0206.png",
+      "index" : 206,
+      "label" : 3,
+      "p" : 0.65398943865740744,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4333333333333331
+    },
+    {
+      "file" : "demo-deadlift-0207.png",
+      "index" : 207,
+      "label" : 3,
+      "p" : 0.63897705078125,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4500000000000002
+    },
+    {
+      "file" : "demo-deadlift-0208.png",
+      "index" : 208,
+      "label" : 3,
+      "p" : 0.62384259259259256,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4666666666666668
+    },
+    {
+      "file" : "demo-deadlift-0209.png",
+      "index" : 209,
+      "label" : 3,
+      "p" : 0.60859962745949092,
+      "phase" : "Descente contrôlée",
+      "t" : 3.4833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0210.png",
+      "index" : 210,
+      "label" : 3,
+      "p" : 0.59326171875000022,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5
+    },
+    {
+      "file" : "demo-deadlift-0211.png",
+      "index" : 211,
+      "label" : 3,
+      "p" : 0.57784242983217615,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0212.png",
+      "index" : 212,
+      "label" : 3,
+      "p" : 0.56235532407407429,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5333333333333332
+    },
+    {
+      "file" : "demo-deadlift-0213.png",
+      "index" : 213,
+      "label" : 3,
+      "p" : 0.54681396484375022,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5499999999999998
+    },
+    {
+      "file" : "demo-deadlift-0214.png",
+      "index" : 214,
+      "label" : 3,
+      "p" : 0.53123191550925886,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5666666666666669
+    },
+    {
+      "file" : "demo-deadlift-0215.png",
+      "index" : 215,
+      "label" : 3,
+      "p" : 0.515622739438657,
+      "phase" : "Descente contrôlée",
+      "t" : 3.5833333333333335
+    },
+    {
+      "file" : "demo-deadlift-0216.png",
+      "index" : 216,
+      "label" : 3,
+      "p" : 0.49999999999999967,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6000000000000001
+    },
+    {
+      "file" : "demo-deadlift-0217.png",
+      "index" : 217,
+      "label" : 3,
+      "p" : 0.48437726056134223,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0218.png",
+      "index" : 218,
+      "label" : 3,
+      "p" : 0.46876808449074048,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0219.png",
+      "index" : 219,
+      "label" : 3,
+      "p" : 0.45318603515624989,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6499999999999999
+    },
+    {
+      "file" : "demo-deadlift-0220.png",
+      "index" : 220,
+      "label" : 3,
+      "p" : 0.43764467592592582,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6666666666666665
+    },
+    {
+      "file" : "demo-deadlift-0221.png",
+      "index" : 221,
+      "label" : 3,
+      "p" : 0.42215757016782407,
+      "phase" : "Descente contrôlée",
+      "t" : 3.6833333333333331
+    },
+    {
+      "file" : "demo-deadlift-0222.png",
+      "index" : 222,
+      "label" : 3,
+      "p" : 0.40673828125,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0223.png",
+      "index" : 223,
+      "label" : 3,
+      "p" : 0.3914003725405093,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7166666666666668
+    },
+    {
+      "file" : "demo-deadlift-0224.png",
+      "index" : 224,
+      "label" : 3,
+      "p" : 0.37615740740740755,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0225.png",
+      "index" : 225,
+      "label" : 3,
+      "p" : 0.36102294921875011,
+      "phase" : "Descente contrôlée",
+      "t" : 3.75
+    },
+    {
+      "file" : "demo-deadlift-0226.png",
+      "index" : 226,
+      "label" : 3,
+      "p" : 0.34601056134259278,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0227.png",
+      "index" : 227,
+      "label" : 3,
+      "p" : 0.33113380714699103,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7833333333333332
+    },
+    {
+      "file" : "demo-deadlift-0228.png",
+      "index" : 228,
+      "label" : 3,
+      "p" : 0.31640625000000033,
+      "phase" : "Descente contrôlée",
+      "t" : 3.7999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0229.png",
+      "index" : 229,
+      "label" : 3,
+      "p" : 0.30184145326967571,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8166666666666669
+    },
+    {
+      "file" : "demo-deadlift-0230.png",
+      "index" : 230,
+      "label" : 3,
+      "p" : 0.28745298032407385,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8333333333333335
+    },
+    {
+      "file" : "demo-deadlift-0231.png",
+      "index" : 231,
+      "label" : 3,
+      "p" : 0.27325439453124978,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8500000000000001
+    },
+    {
+      "file" : "demo-deadlift-0232.png",
+      "index" : 232,
+      "label" : 3,
+      "p" : 0.25925925925925919,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8666666666666667
+    },
+    {
+      "file" : "demo-deadlift-0233.png",
+      "index" : 233,
+      "label" : 3,
+      "p" : 0.24548113787615733,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8833333333333333
+    },
+    {
+      "file" : "demo-deadlift-0234.png",
+      "index" : 234,
+      "label" : 3,
+      "p" : 0.23193359375,
+      "phase" : "Descente contrôlée",
+      "t" : 3.8999999999999999
+    },
+    {
+      "file" : "demo-deadlift-0235.png",
+      "index" : 235,
+      "label" : 3,
+      "p" : 0.21863019024884267,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9166666666666665
+    },
+    {
+      "file" : "demo-deadlift-0236.png",
+      "index" : 236,
+      "label" : 3,
+      "p" : 0.20558449074074081,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9333333333333331
+    },
+    {
+      "file" : "demo-deadlift-0237.png",
+      "index" : 237,
+      "label" : 3,
+      "p" : 0.19281005859375011,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9500000000000002
+    },
+    {
+      "file" : "demo-deadlift-0238.png",
+      "index" : 238,
+      "label" : 3,
+      "p" : 0.18032045717592604,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9666666666666668
+    },
+    {
+      "file" : "demo-deadlift-0239.png",
+      "index" : 239,
+      "label" : 3,
+      "p" : 0.16812924985532429,
+      "phase" : "Descente contrôlée",
+      "t" : 3.9833333333333334
+    },
+    {
+      "file" : "demo-deadlift-0240.png",
+      "index" : 240,
+      "label" : 3,
+      "p" : 0.15625000000000022,
+      "phase" : "Descente contrôlée",
+      "t" : 4
+    },
+    {
+      "file" : "demo-deadlift-0241.png",
+      "index" : 241,
+      "label" : 3,
+      "p" : 0.14469627097800952,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0166666666666666
+    },
+    {
+      "file" : "demo-deadlift-0242.png",
+      "index" : 242,
+      "label" : 3,
+      "p" : 0.13348162615740766,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0333333333333332
+    },
+    {
+      "file" : "demo-deadlift-0243.png",
+      "index" : 243,
+      "label" : 3,
+      "p" : 0.12261962890625044,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0499999999999998
+    },
+    {
+      "file" : "demo-deadlift-0244.png",
+      "index" : 244,
+      "label" : 3,
+      "p" : 0.112123842592593,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0666666666666664
+    },
+    {
+      "file" : "demo-deadlift-0245.png",
+      "index" : 245,
+      "label" : 3,
+      "p" : 0.10200783058449103,
+      "phase" : "Descente contrôlée",
+      "t" : 4.083333333333333
+    },
+    {
+      "file" : "demo-deadlift-0246.png",
+      "index" : 246,
+      "label" : 3,
+      "p" : 0.092285156250000333,
+      "phase" : "Descente contrôlée",
+      "t" : 4.0999999999999996
+    },
+    {
+      "file" : "demo-deadlift-0247.png",
+      "index" : 247,
+      "label" : 3,
+      "p" : 0.082969382957176263,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1166666666666663
+    },
+    {
+      "file" : "demo-deadlift-0248.png",
+      "index" : 248,
+      "label" : 3,
+      "p" : 0.074074074074073959,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1333333333333337
+    },
+    {
+      "file" : "demo-deadlift-0249.png",
+      "index" : 249,
+      "label" : 3,
+      "p" : 0.06561279296875,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1500000000000004
+    },
+    {
+      "file" : "demo-deadlift-0250.png",
+      "index" : 250,
+      "label" : 3,
+      "p" : 0.057599103009259189,
+      "phase" : "Descente contrôlée",
+      "t" : 4.166666666666667
+    },
+    {
+      "file" : "demo-deadlift-0251.png",
+      "index" : 251,
+      "label" : 3,
+      "p" : 0.05004656756365744,
+      "phase" : "Descente contrôlée",
+      "t" : 4.1833333333333336
+    },
+    {
+      "file" : "demo-deadlift-0252.png",
+      "index" : 252,
+      "label" : 3,
+      "p" : 0.042968750000000111,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2000000000000002
+    },
+    {
+      "file" : "demo-deadlift-0253.png",
+      "index" : 253,
+      "label" : 3,
+      "p" : 0.036379213686342671,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2166666666666668
+    },
+    {
+      "file" : "demo-deadlift-0254.png",
+      "index" : 254,
+      "label" : 3,
+      "p" : 0.030291521990740811,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2333333333333334
+    },
+    {
+      "file" : "demo-deadlift-0255.png",
+      "index" : 255,
+      "label" : 3,
+      "p" : 0.024719238281250111,
+      "phase" : "Descente contrôlée",
+      "t" : 4.25
+    },
+    {
+      "file" : "demo-deadlift-0256.png",
+      "index" : 256,
+      "label" : 3,
+      "p" : 0.019675925925926041,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2666666666666666
+    },
+    {
+      "file" : "demo-deadlift-0257.png",
+      "index" : 257,
+      "label" : 3,
+      "p" : 0.015175148292824181,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2833333333333332
+    },
+    {
+      "file" : "demo-deadlift-0258.png",
+      "index" : 258,
+      "label" : 3,
+      "p" : 0.011230468750000111,
+      "phase" : "Descente contrôlée",
+      "t" : 4.2999999999999998
+    },
+    {
+      "file" : "demo-deadlift-0259.png",
+      "index" : 259,
+      "label" : 3,
+      "p" : 0.0078554506655094114,
+      "phase" : "Descente contrôlée",
+      "t" : 4.3166666666666664
+    },
+    {
+      "file" : "demo-deadlift-0260.png",
+      "index" : 260,
+      "label" : 3,
+      "p" : 0.0050636574074074403,
+      "phase" : "Descente contrôlée",
+      "t" : 4.333333333333333
+    },
+    {
+      "file" : "demo-deadlift-0261.png",
+      "index" : 261,
+      "label" : 3,
+      "p" : 0.002868652343750111,
+      "phase" : "Descente contrôlée",
+      "t" : 4.3499999999999996
+    },
+    {
+      "file" : "demo-deadlift-0262.png",
+      "index" : 262,
+      "label" : 3,
+      "p" : 0.0012839988425926707,
+      "phase" : "Descente contrôlée",
+      "t" : 4.3666666666666663
+    },
+    {
+      "file" : "demo-deadlift-0263.png",
+      "index" : 263,
+      "label" : 3,
+      "p" : 0.00032326027199081064,
+      "phase" : "Descente contrôlée",
+      "t" : 4.3833333333333337
+    }
+  ],
+  "frames" : 264,
+  "height" : 708,
+  "labels" : [
+    "Barre au sol, dos plat",
+    "Poussée des jambes, barre collée",
+    "Debout, hanches tendues",
+    "Descente contrôlée"
+  ],
+  "loop" : false,
+  "scheme" : "light",
+  "view" : "3\/4",
+  "width" : 1206
+}

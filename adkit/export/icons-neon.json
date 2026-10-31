@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-neon-0.png",
+      "index" : 0,
+      "name" : "Web",
+      "place" : "row-2",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-neon-1.png",
+      "index" : 1,
+      "name" : "Réglages",
+      "place" : "row-2",
+      "symbol" : "gearshape.fill"
+    },
+    {
+      "file" : "icons-neon-2.png",
+      "index" : 2,
+      "name" : "Calendrier",
+      "place" : "row-2",
+      "symbol" : "calendar"
+    },
+    {
+      "file" : "icons-neon-3.png",
+      "index" : 3,
+      "name" : "Horloge",
+      "place" : "row-2",
+      "symbol" : "clock.fill"
+    },
+    {
+      "file" : "icons-neon-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-neon-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-neon-6.png",
+      "index" : 6,
+      "name" : "Musique",
+      "place" : "dock",
+      "symbol" : "music.note"
+    },
+    {
+      "file" : "icons-neon-7.png",
+      "index" : 7,
+      "name" : "Caméra",
+      "place" : "dock",
+      "symbol" : "camera.fill"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "neon"
+}

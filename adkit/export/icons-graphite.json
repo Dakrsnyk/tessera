@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-graphite-0.png",
+      "index" : 0,
+      "name" : "Téléphone",
+      "place" : "row-2",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-graphite-1.png",
+      "index" : 1,
+      "name" : "Horloge",
+      "place" : "row-2",
+      "symbol" : "clock.fill"
+    },
+    {
+      "file" : "icons-graphite-2.png",
+      "index" : 2,
+      "name" : "Notes",
+      "place" : "row-2",
+      "symbol" : "note.text"
+    },
+    {
+      "file" : "icons-graphite-3.png",
+      "index" : 3,
+      "name" : "Réglages",
+      "place" : "row-2",
+      "symbol" : "gearshape.fill"
+    },
+    {
+      "file" : "icons-graphite-4.png",
+      "index" : 4,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-graphite-5.png",
+      "index" : 5,
+      "name" : "Mail",
+      "place" : "dock",
+      "symbol" : "envelope.fill"
+    },
+    {
+      "file" : "icons-graphite-6.png",
+      "index" : 6,
+      "name" : "Web",
+      "place" : "dock",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-graphite-7.png",
+      "index" : 7,
+      "name" : "Musique",
+      "place" : "dock",
+      "symbol" : "music.note"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "graphite"
+}

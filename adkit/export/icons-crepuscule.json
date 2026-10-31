@@ -1,0 +1,64 @@
+{
+  "icons" : [
+    {
+      "file" : "icons-crepuscule-0.png",
+      "index" : 0,
+      "name" : "Photos",
+      "place" : "row-2",
+      "symbol" : "photo.on.rectangle.angled"
+    },
+    {
+      "file" : "icons-crepuscule-1.png",
+      "index" : 1,
+      "name" : "Caméra",
+      "place" : "row-2",
+      "symbol" : "camera.fill"
+    },
+    {
+      "file" : "icons-crepuscule-2.png",
+      "index" : 2,
+      "name" : "Plans",
+      "place" : "row-2",
+      "symbol" : "map.fill"
+    },
+    {
+      "file" : "icons-crepuscule-3.png",
+      "index" : 3,
+      "name" : "Musique",
+      "place" : "row-2",
+      "symbol" : "music.note"
+    },
+    {
+      "file" : "icons-crepuscule-4.png",
+      "index" : 4,
+      "name" : "Téléphone",
+      "place" : "dock",
+      "symbol" : "phone.fill"
+    },
+    {
+      "file" : "icons-crepuscule-5.png",
+      "index" : 5,
+      "name" : "Messages",
+      "place" : "dock",
+      "symbol" : "message.fill"
+    },
+    {
+      "file" : "icons-crepuscule-6.png",
+      "index" : 6,
+      "name" : "Web",
+      "place" : "dock",
+      "symbol" : "globe"
+    },
+    {
+      "file" : "icons-crepuscule-7.png",
+      "index" : 7,
+      "name" : "Mail",
+      "place" : "dock",
+      "symbol" : "envelope.fill"
+    }
+  ],
+  "iconSize" : 62,
+  "margin" : 6,
+  "scale" : 4,
+  "setup" : "crepuscule"
+}
