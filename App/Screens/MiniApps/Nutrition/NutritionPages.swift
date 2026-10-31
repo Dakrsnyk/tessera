@@ -341,14 +341,14 @@ struct NutritionNutrientsPage: View {
                 Spacer()
                 if let value {
                     Text(goal.map { "\(nutrient.number(value)) / \(nutrient.number($0)) \(nutrient.unit)" } ?? nutrient.format(value))
-                        .foregroundStyle(isOver ? Color(hex: NutritionColors.proteinHex) : Color.secondary)
+                        .foregroundStyle(isOver ? Color(hex: MiniStyle.alertHex) : Color.secondary)
                         .monospacedDigit()
                 } else {
                     Text(tr("Non disponible")).foregroundStyle(Color.secondary)
                 }
             }
             if let value, let goal, goal > 0 {
-                let color = isLimit ? (isOver ? Color(hex: NutritionColors.proteinHex) : Color(hex: "8A8A8E")) : Color(hex: "7FA33A")
+                let color = isLimit ? (isOver ? Color(hex: MiniStyle.alertHex) : Color(hex: "8A8A8E")) : Color(hex: "7FA33A")
                 BarView(progress: value / goal, color: color, track: (isLimit ? Color.secondary : color).opacity(0.15), height: 6)
             }
         }
