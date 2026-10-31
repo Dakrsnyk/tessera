@@ -290,7 +290,7 @@ struct CalorieHero: View {
         let left = goals.kcal - totals.kcal
         HStack(spacing: 20) {
             ZStack {
-                RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 10, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : Color.primary, track: Color.primary.opacity(0.18))
+                RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 10, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : NutritionColors.calories, track: NutritionColors.track)
                 VStack(spacing: 0) {
                     Text(TF.int(known.kcal ? abs(left) : totals.kcal))
                         .font(.system(size: 26, weight: .bold, design: .rounded))
@@ -306,9 +306,9 @@ struct CalorieHero: View {
             }
             .frame(width: 112, height: 112)
             VStack(spacing: 12) {
-                MacroGauge(name: tr("Protéines"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: accentHex)
-                MacroGauge(name: tr("Glucides"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: accentHex)
-                MacroGauge(name: tr("Lipides"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: accentHex)
+                MacroGauge(name: tr("Protéines"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: NutritionColors.proteinHex)
+                MacroGauge(name: tr("Glucides"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: NutritionColors.carbsHex)
+                MacroGauge(name: tr("Lipides"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: NutritionColors.fatHex)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -338,7 +338,7 @@ struct MacroGauge: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }
-            BarView(progress: goal.map { eaten / max(1, $0) } ?? 0, color: Color(hex: hex), track: Color.primary.opacity(0.15), height: 4)
+            BarView(progress: goal.map { eaten / max(1, $0) } ?? 0, color: Color(hex: hex), track: NutritionColors.track, height: 4)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

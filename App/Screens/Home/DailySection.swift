@@ -373,7 +373,7 @@ private struct NutritionDayTile: View {
                         .foregroundStyle(accent)
                         .lineLimit(1)
                     HStack(spacing: 10) {
-                        RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 7, color: accent, track: accent.opacity(0.16))
+                        RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 7, color: NutritionColors.calories, track: NutritionColors.track)
                             .frame(width: 46, height: 46)
                         VStack(alignment: .leading, spacing: 0) {
                             Text(TF.int(abs(nutrition.kcalLeft ?? nutrition.eaten.kcal)))
@@ -389,9 +389,9 @@ private struct NutritionDayTile: View {
                         }
                     }
                     VStack(spacing: 6) {
-                        compactMacro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, "E5484D")
-                        compactMacro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, "F2A33A")
-                        compactMacro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, "3366FF")
+                        compactMacro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex)
+                        compactMacro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex)
+                        compactMacro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex)
                     }
                 }
                 .contentShape(Rectangle())
@@ -461,7 +461,7 @@ private struct NutritionDayTile: View {
             NavigationLink(value: HomeRoute.app(.nutrition)) {
             HStack(alignment: .center, spacing: 14) {
                 ZStack {
-                    RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 10, color: accent, track: accent.opacity(0.16))
+                    RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 10, color: NutritionColors.calories, track: NutritionColors.track)
                     VStack(spacing: 0) {
                         if let left = nutrition.kcalLeft {
                             Text(TF.int(abs(left)))
@@ -497,9 +497,9 @@ private struct NutritionDayTile: View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
                     }
-                    macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, "E5484D")
-                    macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, "F2A33A")
-                    macro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, "3366FF")
+                    macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex)
+                    macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex)
+                    macro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex)
                 }
             }
             .contentShape(Rectangle())

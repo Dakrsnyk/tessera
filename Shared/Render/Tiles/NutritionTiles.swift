@@ -71,9 +71,9 @@ enum NutritionTiles {
             knowsGoal ? eaten / max(1, goal) : nil
         }
         return [
-            TileRow(id: "p", title: tr("Protéines"), value: value(totals.protein, goals.protein, known.protein), colorHex: "E5484D", progress: progress(totals.protein, goals.protein, known.protein)),
-            TileRow(id: "c", title: tr("Glucides"), value: value(totals.carbs, goals.carbs, known.carbs), colorHex: "F2A33A", progress: progress(totals.carbs, goals.carbs, known.carbs)),
-            TileRow(id: "f", title: tr("Lipides"), value: value(totals.fat, goals.fat, known.fat), colorHex: "3366FF", progress: progress(totals.fat, goals.fat, known.fat)),
+            TileRow(id: "p", title: tr("Protéines"), value: value(totals.protein, goals.protein, known.protein), colorHex: NutritionColors.proteinHex, progress: progress(totals.protein, goals.protein, known.protein)),
+            TileRow(id: "c", title: tr("Glucides"), value: value(totals.carbs, goals.carbs, known.carbs), colorHex: NutritionColors.carbsHex, progress: progress(totals.carbs, goals.carbs, known.carbs)),
+            TileRow(id: "f", title: tr("Lipides"), value: value(totals.fat, goals.fat, known.fat), colorHex: NutritionColors.fatHex, progress: progress(totals.fat, goals.fat, known.fat)),
         ]
     }
 
@@ -100,6 +100,7 @@ enum NutritionTiles {
         tile.trend = left >= 0 ? nil : false
         tile.detail = tr("Mangé : \(TF.int(totals.kcal)) kcal")
         tile.visual = .ring(totals.kcal / goal)
+        tile.ringHex = NutritionColors.caloriesHex
         tile.rows = macroRows(totals, goals: state.goals, known: known)
         tile.gauge = totals.kcal / goal
         tile.shortValue = TF.int(left)
@@ -121,9 +122,9 @@ enum NutritionTiles {
         tile.rows = macroRows(totals, goals: state.goals, compact: compact, known: known)
         tile.compactRows = true
         tile.visual = .segments([
-            TileSegment(label: tr("Protéines"), value: totals.protein * 4, colorHex: "E5484D"),
-            TileSegment(label: tr("Glucides"), value: totals.carbs * 4, colorHex: "F2A33A"),
-            TileSegment(label: tr("Lipides"), value: totals.fat * 9, colorHex: "3366FF"),
+            TileSegment(label: tr("Protéines"), value: totals.protein * 4, colorHex: NutritionColors.proteinHex),
+            TileSegment(label: tr("Glucides"), value: totals.carbs * 4, colorHex: NutritionColors.carbsHex),
+            TileSegment(label: tr("Lipides"), value: totals.fat * 9, colorHex: NutritionColors.fatHex),
         ])
         let letters = (tr("P", context: "protein"), tr("G", context: "carbs"), tr("L", context: "fat"))
         tile.inline = "\(letters.0) \(TF.int(totals.protein)) · \(letters.1) \(TF.int(totals.carbs)) · \(letters.2) \(TF.int(totals.fat))"
@@ -155,6 +156,7 @@ enum NutritionTiles {
         tile.unit = "g"
         tile.caption = left == 0 ? tr("Objectif atteint") : tr("à trouver sur \(TF.int(goal)) g")
         tile.visual = .ring(totals.protein / goal)
+        tile.ringHex = NutritionColors.proteinHex
         tile.gauge = totals.protein / goal
         tile.shortValue = TF.int(left)
         tile.inline = tr("\(TF.int(left)) g de protéines restantes")

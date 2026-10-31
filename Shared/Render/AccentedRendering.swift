@@ -88,6 +88,13 @@ extension ResolvedStyle {
         return style
     }
 
+    /// The chart color, or `hex` (a widget's own default) unless the person picked a chart color or recolored the
+    /// widget; without colors it stays white.
+    func chartColor(default hex: String?) -> Color {
+        guard let hex, !isAccented, options.chartHex == nil, !options.recolor else { return chart }
+        return Color(hex: hex)
+    }
+
     /// The color of the n-th part of a whole: its own in color, a step of opacity without colors.
     func partColor(_ hex: String, at index: Int) -> Color {
         isAccented ? Color.white.opacity(AccentedStyle.partOpacity(at: index, isMonochrome: true)) : Color(hex: hex)

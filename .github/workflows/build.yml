@@ -628,7 +628,7 @@ jobs:
           mkdir -p adkit/shots adkit/screens adkit/export adkit/logs
           APP=build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
           # The launch arguments of every capture: French (Canada), the Corail style of Ardane's icon.
-          ARGS=(-AppleLanguages "(fr)" -AppleLocale fr_CA -screenshotStyle coral)
+          ARGS=(-AppleLanguages "(fr)" -AppleLocale fr_CA -screenshotStyle sapphire)
 
           # 1) Real states played by UITests/AdShotsUITests, scene by scene. A loop in the background reads
           # the test log: at each new « ADSHOT <name> » line (the test then holds still about 2 s), it takes

@@ -256,10 +256,10 @@ struct NutritionNutrientsPage: View {
         let premium = model.isPremium
         List {
             Section {
-                row(tr("Calories"), totals.kcal, goal: known.kcal ? goals.kcal : nil, unit: "kcal", hex: "F08A24")
-                row(tr("Protéines"), totals.protein, goal: known.protein ? goals.protein : nil, unit: "g", hex: "E5484D")
-                row(tr("Glucides"), totals.carbs, goal: known.carbs ? goals.carbs : nil, unit: "g", hex: "F2A33A")
-                row(tr("Lipides"), totals.fat, goal: known.fat ? goals.fat : nil, unit: "g", hex: "3366FF")
+                row(tr("Calories"), totals.kcal, goal: known.kcal ? goals.kcal : nil, unit: "kcal", hex: NutritionColors.caloriesHex)
+                row(tr("Protéines"), totals.protein, goal: known.protein ? goals.protein : nil, unit: "g", hex: NutritionColors.proteinHex)
+                row(tr("Glucides"), totals.carbs, goal: known.carbs ? goals.carbs : nil, unit: "g", hex: NutritionColors.carbsHex)
+                row(tr("Lipides"), totals.fat, goal: known.fat ? goals.fat : nil, unit: "g", hex: NutritionColors.fatHex)
                 if premium {
                     row(tr("Fibres"), totals.fiber, goal: model.shownNutritionTarget(.fiber, recommended: recommended), unit: "g", hex: "7FA33A")
                 }
@@ -341,14 +341,14 @@ struct NutritionNutrientsPage: View {
                 Spacer()
                 if let value {
                     Text(goal.map { "\(nutrient.number(value)) / \(nutrient.number($0)) \(nutrient.unit)" } ?? nutrient.format(value))
-                        .foregroundStyle(isOver ? Color(hex: "E5484D") : Color.secondary)
+                        .foregroundStyle(isOver ? Color(hex: NutritionColors.proteinHex) : Color.secondary)
                         .monospacedDigit()
                 } else {
                     Text(tr("Non disponible")).foregroundStyle(Color.secondary)
                 }
             }
             if let value, let goal, goal > 0 {
-                let color = isLimit ? (isOver ? Color(hex: "E5484D") : Color(hex: "8A8A8E")) : Color(hex: "7FA33A")
+                let color = isLimit ? (isOver ? Color(hex: NutritionColors.proteinHex) : Color(hex: "8A8A8E")) : Color(hex: "7FA33A")
                 BarView(progress: value / goal, color: color, track: (isLimit ? Color.secondary : color).opacity(0.15), height: 6)
             }
         }
@@ -579,9 +579,9 @@ struct NutritionHistoryPage: View {
     private func macroSplit(_ averages: NutritionTotals) -> some View {
         let kcal = max(averages.protein * 4 + averages.carbs * 4 + averages.fat * 9, 1)
         let parts = [
-            MacroShare(name: tr("Protéines"), share: averages.protein * 4 / kcal, hex: "E5484D"),
-            MacroShare(name: tr("Glucides"), share: averages.carbs * 4 / kcal, hex: "F2A33A"),
-            MacroShare(name: tr("Lipides"), share: averages.fat * 9 / kcal, hex: "3366FF"),
+            MacroShare(name: tr("Protéines"), share: averages.protein * 4 / kcal, hex: NutritionColors.proteinHex),
+            MacroShare(name: tr("Glucides"), share: averages.carbs * 4 / kcal, hex: NutritionColors.carbsHex),
+            MacroShare(name: tr("Lipides"), share: averages.fat * 9 / kcal, hex: NutritionColors.fatHex),
         ]
         return VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Répartition des calories"))

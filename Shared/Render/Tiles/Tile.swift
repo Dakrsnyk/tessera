@@ -136,6 +136,8 @@ struct Tile: Hashable {
     /// Lock Screen rectangular widget: a few figures side by side under the title, each with its bar
     /// (title = a short label, value, progress).
     var lockColumns: [TileRow] = []
+    /// The ring's own color when the person picked no chart color (the calorie ring is orange). Not used without colors.
+    var ringHex: String? = nil
 
     static func empty(_ title: String, symbol: String, message: String, emptySymbol: String? = nil) -> Tile {
         var tile = Tile(title: title, symbol: symbol)

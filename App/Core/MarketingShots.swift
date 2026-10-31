@@ -727,13 +727,13 @@ struct MarketingNutrition: View {
         let day = MK.nutrition
         let left = max(0, day.goals.kcal - day.totals.kcal)
         MarketingShowcase(eyebrow: tr("Nutrition"), title: tr("Scanne.\nC'est noté."), subtitle: tr("Calories et macros calculées pour toi.")) {
-            MarketingBubble(value: TF.int(left), label: tr("kcal restantes"), colorHex: "F08A24", progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)
+            MarketingBubble(value: TF.int(left), label: tr("kcal restantes"), colorHex: NutritionColors.caloriesHex, progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)
                 .at(10, 330)
-            MarketingBubble(value: "\(TF.int(day.totals.protein)) g", label: tr("Protéines"), colorHex: "E5484D", progress: day.totals.protein / max(1, day.goals.protein))
+            MarketingBubble(value: "\(TF.int(day.totals.protein)) g", label: tr("Protéines"), colorHex: NutritionColors.proteinHex, progress: day.totals.protein / max(1, day.goals.protein))
                 .at(326, 404)
-            MarketingBubble(value: "\(TF.int(day.totals.carbs)) g", label: tr("Glucides"), colorHex: "F2A33A", progress: day.totals.carbs / max(1, day.goals.carbs))
+            MarketingBubble(value: "\(TF.int(day.totals.carbs)) g", label: tr("Glucides"), colorHex: NutritionColors.carbsHex, progress: day.totals.carbs / max(1, day.goals.carbs))
                 .at(332, 560)
-            MarketingBubble(value: "\(TF.int(day.totals.fat)) g", label: tr("Lipides"), colorHex: "3366FF", progress: day.totals.fat / max(1, day.goals.fat))
+            MarketingBubble(value: "\(TF.int(day.totals.fat)) g", label: tr("Lipides"), colorHex: NutritionColors.fatHex, progress: day.totals.fat / max(1, day.goals.fat))
                 .at(8, 600)
             MarketingPill(symbol: "barcode.viewfinder", text: tr("Scanner un aliment"), colorHex: "F08A24")
                 .at(176, 846)

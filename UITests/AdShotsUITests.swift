@@ -10,7 +10,7 @@ final class AdShotsUITests: XCTestCase {
     private var app: XCUIApplication!
 
     /// The app style of the films: Corail, the colors of Ardane's icon.
-    private static let style = "coral"
+    private static let style = "sapphire"
 
     /// `AD_APPEARANCE=dark` (`TEST_RUNNER_AD_APPEARANCE` for xcodebuild): the same scenes in that appearance,
     /// each shot named `<name>-dark`. The main film shows the app in Dark appearance, floating in black.

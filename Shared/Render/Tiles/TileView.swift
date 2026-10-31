@@ -213,7 +213,7 @@ struct TileView: View {
     }
 
     private func visual(compact: Bool) -> some View {
-        TileVisualView(visual: tile.visual, context: context, compact: compact)
+        TileVisualView(visual: tile.visual, context: context, compact: compact, ringHex: tile.ringHex)
             .styleDepth(s)
     }
 
@@ -240,7 +240,7 @@ struct TileView: View {
                 headerBlock
                 Spacer(minLength: 0)
                 ZStack {
-                    RingView(progress: progress, lineWidth: 9 * CGFloat(s.options.chartThickness), color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                    RingView(progress: progress, lineWidth: 9 * CGFloat(s.options.chartThickness), color: s.chartColor(default: tile.ringHex), track: s.options.chartFill ? s.track : .clear)
                         .styleDepth(s)
                     VStack(spacing: 0) {
                         valueText(24, showsUnit: false)
@@ -1002,6 +1002,7 @@ struct TileVisualView: View {
     let visual: TileVisual
     let context: RenderContext
     let compact: Bool
+    var ringHex: String? = nil
 
     private var s: ResolvedStyle { context.style }
     private var thickness: CGFloat { CGFloat(s.options.chartThickness) }
@@ -1023,7 +1024,7 @@ struct TileVisualView: View {
             EmptyView()
         case let .ring(progress):
             ZStack {
-                RingView(progress: progress, lineWidth: (compact ? 5 : 10) * thickness, color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                RingView(progress: progress, lineWidth: (compact ? 5 : 10) * thickness, color: s.chartColor(default: ringHex), track: s.options.chartFill ? s.track : .clear)
                 if s.options.chartValues && !compact {
                     Text(Fmt.percent(progress)).font(s.number(18)).foregroundStyle(s.numberColor)
                 }
@@ -1117,7 +1118,7 @@ struct TileVisualView: View {
         switch kind {
         case .ring:
             ZStack {
-                RingView(progress: value, lineWidth: (compact ? 5 : 10) * thickness, color: s.chart, track: s.options.chartFill ? s.track : .clear)
+                RingView(progress: value, lineWidth: (compact ? 5 : 10) * thickness, color: s.chartColor(default: ringHex), track: s.options.chartFill ? s.track : .clear)
                 if showsValues {
                     Text(Fmt.percent(value)).font(s.number(18)).foregroundStyle(s.numberColor)
                 }
