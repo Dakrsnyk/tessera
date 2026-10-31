@@ -8,9 +8,10 @@
 # live : state=rest|paused|ready rest | from to · paused · routine exercise set sets load done total restTotal
 #        bg=real|night|clear scheme w radius scale
 # demo : exercise view (indice ou nom : Profil, 3/4…) fps w h scale bg=clear|card|fill scheme accent
+# Style de l'app : Saphir (-screenshotStyle sapphire), langue : AD_LANG (fr par défaut, en avec [adkit-en]).
 # Échelles : 4 pour un petit widget (680 px), 3 pour moyen / grand (1 092 px de large), 4 pour l'écran verrouillé.
 
-# --- Macros (moyen) : 14 styles, 4 thèmes complets, 3 palettes, la couleur Corail ---
+# --- Macros (moyen) : 14 styles, 4 thèmes complets, 2 palettes ---
 widget macros-m-light kind=macros family=medium scale=3 theme=light
 widget macros-m-dark kind=macros family=medium scale=3 theme=dark scheme=dark
 widget macros-m-glass kind=macros family=medium scale=3 theme=glass
@@ -29,13 +30,10 @@ widget macros-m-preset-midnight kind=macros family=medium scale=3 preset=midnigh
 widget macros-m-preset-ocean kind=macros family=medium scale=3 preset=ocean
 widget macros-m-preset-sunset kind=macros family=medium scale=3 preset=sunset
 widget macros-m-preset-cyber kind=macros family=medium scale=3 preset=cyber
-widget macros-m-palette-coral kind=macros family=medium scale=3 palette=coral
 widget macros-m-palette-sunset kind=macros family=medium scale=3 palette=sunset
 widget macros-m-palette-gold kind=macros family=medium scale=3 palette=gold
-widget macros-m-light-corail kind=macros family=medium scale=3 theme=light accent=FF6B57
-widget macros-m-modern-corail kind=macros family=medium scale=3 theme=modern recolor=FF6B57
 
-# --- Calories restantes (petit) : 14 styles, 4 thèmes complets, Corail ---
+# --- Calories restantes (petit) : 14 styles, 4 thèmes complets ---
 widget calories-s-light kind=caloriesLeft family=small scale=4 theme=light
 widget calories-s-dark kind=caloriesLeft family=small scale=4 theme=dark scheme=dark
 widget calories-s-glass kind=caloriesLeft family=small scale=4 theme=glass
@@ -54,7 +52,6 @@ widget calories-s-preset-midnight kind=caloriesLeft family=small scale=4 preset=
 widget calories-s-preset-ocean kind=caloriesLeft family=small scale=4 preset=ocean
 widget calories-s-preset-sunset kind=caloriesLeft family=small scale=4 preset=sunset
 widget calories-s-preset-cyber kind=caloriesLeft family=small scale=4 preset=cyber
-widget calories-s-light-corail kind=caloriesLeft family=small scale=4 theme=light accent=FF6B57
 widget calories-m-light kind=caloriesLeft family=medium scale=3 theme=light
 widget calories-m-aurora kind=caloriesLeft family=medium scale=3 theme=aurora
 
@@ -92,7 +89,8 @@ widget habits-m-neon kind=habits family=medium scale=3 theme=neon scheme=dark
 widget habitStreak-s-light kind=habitStreak family=small scale=4 theme=light
 widget habitStreak-s-aurora kind=habitStreak family=small scale=4 theme=aurora
 widget habitStreak-s-neon kind=habitStreak family=small scale=4 theme=neon scheme=dark
-widget hydration-s-light kind=hydration family=small scale=4 theme=light
+# Hydratation : widget retiré de l'app. Gardées seulement parce que scripts/ad2/film/src/scenes/Gather.tsx cite encore
+# hydration-s-ocean et hydration-s-glass : à supprimer d'ici quand Gather.tsx ne les cite plus.
 widget hydration-s-ocean kind=hydration family=small scale=4 theme=ocean
 widget hydration-s-glass kind=hydration family=small scale=4 theme=glass
 widget priorities-s-light kind=priorities family=small scale=4 theme=light
@@ -120,7 +118,6 @@ widget lock-restTimer-rect kind=restTimer family=rect scale=4
 widget lock-trainingStreak-circular kind=trainingStreak family=circular scale=4
 widget lock-budgetLeft-rect kind=budgetLeft family=rect scale=4
 widget lock-habitStreak-circular kind=habitStreak family=circular scale=4
-widget lock-hydration-circular kind=hydration family=circular scale=4
 widget lock-macros-rect-darkink kind=macros family=rect scale=4 ink=1C1C1E
 
 # --- 8 écrans du Store mis en avant : chaque widget à part, l'écran verrouillé, les icônes ---
@@ -255,3 +252,47 @@ widget quickFood-m-neon kind=quickFood family=medium scale=3 theme=neon scheme=d
 widget quickFood-m-glass kind=quickFood family=medium scale=3 theme=glass
 widget quickFood-m-luxury kind=quickFood family=medium scale=3 theme=luxury
 widget quickFood-m-space kind=quickFood family=medium scale=3 theme=space scheme=dark
+
+# ============================================================================================================
+# Campagne 2026 (docs/memoire/campagne-2026/Ressources-a-capturer.md, section 2)
+# ============================================================================================================
+
+# Écran d'accueil de 3 widgets, tous gratuits (publicité Widgets, plan d'ouverture)
+home home-free3 setup=graphite rows=macros.medium|nextSet.small+priorities.small theme=minimal
+setupwidgets setup-free3 setup=graphite rows=macros.medium|nextSet.small+priorities.small theme=minimal
+# Trois profils (publicité Widgets, plan P5) et écran complet (principale P7, Lifestyle P8, Courte 3)
+home home-profile-athlete setup=neon rows=nextSet.medium|todaysWorkout.medium|macros.small+trainingStreak.small theme=neon
+setupwidgets setup-profile-athlete setup=neon rows=nextSet.medium|todaysWorkout.medium|macros.small+trainingStreak.small theme=neon
+home home-profile-student setup=etudes rows=timetable.large|upNext.small+priorities.small theme=paper
+setupwidgets setup-profile-student setup=etudes rows=timetable.large|upNext.small+priorities.small theme=paper
+home home-profile-minimal setup=graphite rows=clock.medium|priorities.small+budgetLeft.small theme=minimal
+setupwidgets setup-profile-minimal setup=graphite rows=clock.medium|priorities.small+budgetLeft.small theme=minimal
+# Les accueils « complete » sont Premium : mention « Avec Premium ».
+home home-complete-aurore setup=aurore rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=aurora
+setupwidgets setup-complete-aurore setup=aurore rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=aurora
+home home-complete-espace setup=espace rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=space
+setupwidgets setup-complete-espace setup=espace rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=space
+# Écrans verrouillés assortis aux profils
+lock lock-graphite setup=graphite scale=3
+lock lock-espace setup=espace scale=3
+
+# Widgets isolés (pour les faire « sortir » du téléphone)
+widget tasks-s-light kind=tasks family=small scale=4 theme=light
+widget tasks-m-light kind=tasks family=medium scale=3 theme=light
+widget counter-s-light kind=counter family=small scale=4 theme=light
+widget quickExpense-s-light kind=quickExpense family=small scale=4 theme=light
+widget savingsGoal-s-light kind=savingsGoal family=small scale=4 theme=light
+widget savingsGoal-m-light kind=savingsGoal family=medium scale=3 theme=light
+widget habits-m-dark kind=habits family=medium scale=3 theme=dark scheme=dark
+widget timetable-m-light kind=timetable family=medium scale=3 theme=light
+widget upNext-m-light kind=upNext family=medium scale=3 theme=light
+widget clock-m-minimal kind=clock family=medium scale=3 theme=minimal
+widget weekView-m-dark kind=weekView family=medium scale=3 theme=dark scheme=dark
+widget lock-priorities-rect kind=priorities family=rect scale=4
+widget lock-upNext-rect kind=upNext family=rect scale=4
+widget lock-timetable-rect kind=timetable family=rect scale=4
+widget lock-tasks-rect kind=tasks family=rect scale=4
+# Variantes sombres de la publicité principale (fond noir)
+widget calories-m-dark kind=caloriesLeft family=medium scale=3 theme=dark scheme=dark
+widget nextSet-m-dark kind=nextSet family=medium scale=3 theme=dark scheme=dark
+widget budgetLeft-m-dark kind=budgetLeft family=medium scale=3 theme=dark scheme=dark

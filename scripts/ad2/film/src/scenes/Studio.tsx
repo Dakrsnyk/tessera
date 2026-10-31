@@ -11,6 +11,7 @@ import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect } from "../lib/kit";
 import { useFilmFrame } from "../lib/time";
 import { roundRectPath, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
+import { Tr } from "../lib/i18n";
 
 /**
  * Design your widget (added 2026-10-11 at the user's request: designing widgets to one's taste is the
@@ -58,10 +59,10 @@ export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]
       ctx.fillStyle = "rgba(10,6,12,0.5)";
       ctx.fill();
       ctx.clip();
-      ctx.shadowColor = "rgba(255,224,204,0.9)";
+      ctx.shadowColor = "rgba(214,233,250,0.9)";
       ctx.shadowBlur = 60;
       ctx.lineWidth = 36;
-      ctx.strokeStyle = "rgba(255,224,204,0.18)";
+      ctx.strokeStyle = "rgba(214,233,250,0.18)";
       ctx.stroke();
       ctx.restore();
     }
@@ -148,8 +149,8 @@ export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]
                 width: tapping.tap[2] * PS,
                 height: tapping.tap[3] * PS,
                 borderRadius: 26,
-                border: `3px solid ${C.peach}`,
-                boxShadow: "0 0 24px 4px rgba(255,224,204,0.55)",
+                border: `3px solid ${C.pale}`,
+                boxShadow: "0 0 24px 4px rgba(214,233,250,0.55)",
                 scale: `${1 + 0.1 * ring}`,
                 opacity: 0.95 * (1 - ring),
               }}
@@ -173,7 +174,7 @@ export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]
       })}
       {words && (
         <SplitText from={end - 58} exitAt={end - 12} top={1250} height={160}>
-          <span style={type.hero}>Make it yours.</span>
+          <span style={type.hero}><Tr>Make it yours.</Tr></span>
         </SplitText>
       )}
       <Grain />

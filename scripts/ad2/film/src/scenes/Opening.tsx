@@ -11,6 +11,7 @@ import { HERO_WIDGETS, heroHome, heroWidget } from "../lib/kit";
 import { drawLifted, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
+import { Tr } from "../lib/i18n";
 
 const FILES = [heroHome("aurore"), ...HERO_WIDGETS.map((w) => heroWidget("aurore", w.index))];
 
@@ -93,7 +94,7 @@ export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: 
         }}
       />
       <SplitText from={262} exitAt={340} top={1468} height={110}>
-        <span style={type.super}>Designed around you.</span>
+        <span style={type.super}><Tr>Designed around you.</Tr></span>
       </SplitText>
       <Grain />
 

@@ -13,6 +13,7 @@ import { DOCK, dockIcon, HERO_WIDGETS, heroHome, heroWidget, k, type Rect, wall 
 import { useFilmFrame } from "../lib/time";
 import { roundRectPath, useCanvasTexture } from "../lib/useCanvas";
 import { imageTexture, useImages } from "../lib/useImages";
+import { Tr } from "../lib/i18n";
 
 const distanceFor = (lens: number, fraction: number) => PHONE.h / (2 * Math.tan(THREE.MathUtils.degToRad(lensFov(lens)) / 2) * fraction);
 const Backdrop: React.FC = () => <AbsoluteFill style={{ background: `radial-gradient(circle 900px at ${AXIS}px ${H / 2}px, ${C.lifted}, ${C.void} 70%)` }} />;
@@ -109,10 +110,10 @@ export const StyleCycle: React.FC<{ audio?: boolean }> = () => {
       ctx.fillStyle = "rgba(10,6,12,0.5)";
       ctx.fill();
       ctx.clip();
-      ctx.shadowColor = "rgba(255,224,204,0.9)";
+      ctx.shadowColor = "rgba(214,233,250,0.9)";
       ctx.shadowBlur = 60;
       ctx.lineWidth = 36;
-      ctx.strokeStyle = "rgba(255,224,204,0.18)";
+      ctx.strokeStyle = "rgba(214,233,250,0.18)";
       ctx.stroke();
       ctx.restore();
     }
@@ -154,7 +155,7 @@ export const StyleCycle: React.FC<{ audio?: boolean }> = () => {
       </div>
       {nxt && <Seam x={r[0] + r[2] * wipe} top={r[1]} height={r[3]} spread={0.45} intensity={Math.sin(Math.PI * wipe)} />}
       <SplitText from={62} exitAt={186} top={1250} height={100}>
-        <span style={type.super}>57 styles</span>
+        <span style={type.super}><Tr>57 styles</Tr></span>
       </SplitText>
       <Grain />
     </AbsoluteFill>
@@ -240,10 +241,10 @@ export const FivePhones: React.FC<{ audio?: boolean }> = () => {
       )}
       {merge > 0 && merge < 1 && <Seam x={AXIS} top={H / 2 - (H * fraction) / 2} height={H * fraction} intensity={Math.sin(Math.PI * merge)} />}
       <SplitText from={0} exitAt={90} top={1500} height={100}>
-        <span style={type.super}>23 ready-made</span>
+        <span style={type.super}><Tr>23 ready-made</Tr></span>
       </SplitText>
       <SplitText from={8} exitAt={90} top={1596} height={100}>
-        <span style={{ ...type.super, color: C.type2 }}>Home Screens</span>
+        <span style={{ ...type.super, color: C.type2 }}><Tr>Home Screens</Tr></span>
       </SplitText>
       <Grain />
     </AbsoluteFill>

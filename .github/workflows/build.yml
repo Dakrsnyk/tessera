@@ -56,6 +56,9 @@ jobs:
       # and scroll slices from scripts/ad_screens.txt (screens/), and the pieces the app exports as PNG files
       # with true transparency from scripts/ad_export.txt (export/, see App/Core/AdExport.swift).
       ADKIT: ${{ contains(github.event.head_commit.message, '[adkit]') }}
+      # [adkit-en] is the same kit in English (Canada), written in report/adkit-en so the French kit is kept.
+      # Not together with [adkit]: if both are there, only the English kit is made.
+      ADKIT_EN: ${{ contains(github.event.head_commit.message, '[adkit-en]') }}
       # [testflight] signs a Release build with the Apple Developer account and uploads it to TestFlight
       # (no simulator build, no tests, no test IPA). Secrets: see scripts/signing/README.md.
       # [interne] does the same with Premium unlocked (INTERNAL_PREMIUM), uploaded « TestFlight Internal
@@ -78,7 +81,7 @@ jobs:
         run: python3 scripts/check_swift.py
 
       - name: Boot a simulator early
-        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true' || env.STACK == 'true' || env.VIDEO == 'true' || env.ADKIT == 'true'
+        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true' || env.STACK == 'true' || env.VIDEO == 'true' || env.ADKIT == 'true' || env.ADKIT_EN == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
@@ -209,7 +212,7 @@ jobs:
 
       - name: Build for iPhone (unsigned)
         id: device
-        if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true' && env.MARKETING != 'true' && env.VIDEO != 'true' && env.ADKIT != 'true'
+        if: steps.sim.outcome == 'success' && env.PLACE != 'true' && env.CHECK != 'true' && env.MARKETING != 'true' && env.VIDEO != 'true' && env.ADKIT != 'true' && env.ADKIT_EN != 'true'
         run: |
           set -o pipefail
           # Optimized (-O) like an App Store build: an unoptimized SwiftUI app can overflow the iPhone's
@@ -618,17 +621,21 @@ jobs:
 
       - name: Ad kit
         id: adkit
-        if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.ADKIT == 'true'
+        if: steps.sim.outcome == 'success' && env.DEVICE != '' && (env.ADKIT == 'true' || env.ADKIT_EN == 'true')
         continue-on-error: true
         timeout-minutes: 60
         run: |
           xcrun simctl bootstatus "$DEVICE" -b
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
           xcrun simctl ui "$DEVICE" appearance light || true
-          mkdir -p adkit/shots adkit/screens adkit/export adkit/logs
+          # The French kit goes to adkit/, the English one ([adkit-en]) to adkit-en/. AD_LANG reaches the UITests.
+          KIT=adkit; AD_LANG=fr; AD_LOCALE=fr_CA; AD_REGION=CA
+          if [ "$ADKIT_EN" = "true" ]; then KIT=adkit-en; AD_LANG=en; AD_LOCALE=en_CA; fi
+          export KIT AD_LANG
+          mkdir -p $KIT/shots $KIT/screens $KIT/export $KIT/logs
           APP=build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
-          # The launch arguments of every capture: French (Canada), the Corail style of Ardane's icon.
-          ARGS=(-AppleLanguages "(fr)" -AppleLocale fr_CA -screenshotStyle sapphire)
+          # The launch arguments of every capture: French (Canada) or English (Canada), the Saphir style.
+          ARGS=(-AppleLanguages "($AD_LANG)" -AppleLocale "$AD_LOCALE" -screenshotStyle sapphire)
 
           # 1) Real states played by UITests/AdShotsUITests, scene by scene. A loop in the background reads
           # the test log: at each new « ADSHOT <name> » line (the test then holds still about 2 s), it takes
@@ -642,9 +649,9 @@ jobs:
                 case "$seen" in *" $name "*) continue ;; esac
                 seen="$seen$name "
                 if [ "$ended" = 1 ]; then
-                  echo "missed $name (seen after the scene ended)" >> adkit/missed.txt
+                  echo "missed $name (seen after the scene ended)" >> $KIT/missed.txt
                 else
-                  xcrun simctl io "$DEVICE" screenshot --type=png "adkit/shots/$name.png" < /dev/null > /dev/null 2>&1 || echo "failed $name" >> adkit/missed.txt
+                  xcrun simctl io "$DEVICE" screenshot --type=png "$KIT/shots/$name.png" < /dev/null > /dev/null 2>&1 || echo "failed $name" >> $KIT/missed.txt
                 fi
               done
               [ "$ended" = 1 ] && break
@@ -652,16 +659,16 @@ jobs:
             done
           }
           rm -rf adkit-results
-          mkdir -p adkit-results adkit/attachments
+          mkdir -p adkit-results $KIT/attachments
           run_scene() { # scene [appearance]: AD_APPEARANCE reaches the test as TEST_RUNNER_AD_APPEARANCE
             local scene=$1 look=${2:-}
             local tag=$scene${look:+-$look}
-            LOG="adkit/logs/$tag.log"
+            LOG="$KIT/logs/$tag.log"
             rm -f "$LOG.end"
             : > "$LOG"
             watch_shots "$LOG" &
             WPID=$!
-            TEST_RUNNER_AD_APPEARANCE="$look" xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage fr -testRegion CA               -resultBundlePath "adkit-results/$tag.xcresult"               -only-testing:ArdaneUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
+            TEST_RUNNER_AD_APPEARANCE="$look" TEST_RUNNER_AD_LANG="$AD_LANG" xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage $AD_LANG -testRegion CA               -resultBundlePath "adkit-results/$tag.xcresult"               -only-testing:ArdaneUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
             touch "$LOG.end"
             wait $WPID 2>/dev/null || true
             rm -f "$LOG.end"
@@ -695,9 +702,9 @@ jobs:
                       if not name.startswith("ADSHOT"):
                           continue
                       name = name.split("_0_")[0][len("ADSHOT"):].strip().replace(" ", "-")
-                      shutil.copy(os.path.join(folder, item["exportedFileName"]), os.path.join("adkit/attachments", name + ".png"))
+                      shutil.copy(os.path.join(folder, item["exportedFileName"]), os.path.join(os.environ.get("KIT", "adkit"), "attachments", name + ".png"))
           PY
-          ls adkit/shots adkit/attachments
+          ls $KIT/shots $KIT/attachments
 
           # 2) The scenes changed the data (a set done, a food added): a fresh install, then the demo data.
           fresh_install
@@ -716,11 +723,11 @@ jobs:
               [ -f "$DATA/Documents/export/done.txt" ] && break
               sleep 2
             done
-            [ -f "$DATA/Documents/export/done.txt" ] || echo "export: no done.txt after 20 minutes (progress.txt has what was done)" > adkit/export-timeout.txt
-            cp -R "$DATA/Documents/export/." adkit/export/ 2>/dev/null || true
-            echo "export: $(ls adkit/export | wc -l | tr -d ' ') files"
+            [ -f "$DATA/Documents/export/done.txt" ] || echo "export: no done.txt after 20 minutes (progress.txt has what was done)" > $KIT/export-timeout.txt
+            cp -R "$DATA/Documents/export/." $KIT/export/ 2>/dev/null || true
+            echo "export: $(ls $KIT/export | wc -l | tr -d ' ') files"
           else
-            echo "export: no app data container" > adkit/export-timeout.txt
+            echo "export: no app data container" > $KIT/export-timeout.txt
           fi
 
           # 4) Still screens and scroll slices (scripts/ad_screens.txt: <file> <screen> [launch arguments]):
@@ -730,7 +737,7 @@ jobs:
             xcrun simctl terminate "$DEVICE" com.dakrsnyk.ardane < /dev/null 2>/dev/null || true
             xcrun simctl launch "$DEVICE" com.dakrsnyk.ardane "${ARGS[@]}" -screenshotScreen "$2" "${@:3}" < /dev/null > /dev/null || true
             sleep 6
-            xcrun simctl io "$DEVICE" screenshot --type=png "adkit/screens/$1.png" < /dev/null > /dev/null 2>&1 || true
+            xcrun simctl io "$DEVICE" screenshot --type=png "$KIT/screens/$1.png" < /dev/null > /dev/null 2>&1 || true
           }
           SCREENS=()
           while IFS= read -r line; do SCREENS+=("$line"); done < <(grep -vE '^[[:space:]]*(#|$)' scripts/ad_screens.txt)
@@ -739,7 +746,7 @@ jobs:
             [ "${#PARTS[@]}" -ge 2 ] && screen_shot "${PARTS[@]}"
           done
           xcrun simctl terminate "$DEVICE" com.dakrsnyk.ardane < /dev/null 2>/dev/null || true
-          echo "adkit: $(ls adkit/shots | wc -l | tr -d ' ') shots, $(ls adkit/screens | wc -l | tr -d ' ') screens, $(ls adkit/export | wc -l | tr -d ' ') export files"
+          echo "adkit: $(ls $KIT/shots | wc -l | tr -d ' ') shots, $(ls $KIT/screens | wc -l | tr -d ' ') screens, $(ls $KIT/export | wc -l | tr -d ' ') export files"
 
       - name: App Store screenshots
         id: marketing
@@ -837,13 +844,15 @@ jobs:
             echo "videos: ${{ steps.videos.outcome }}"
             ls -l videos/*.mp4 2>/dev/null || true
             echo "adkit: ${{ steps.adkit.outcome }}"
-            if [ -d adkit ]; then
-              echo "adkit: $(find adkit/shots -name '*.png' 2>/dev/null | wc -l | tr -d ' ') shots ($(find adkit/attachments -name '*.png' 2>/dev/null | wc -l | tr -d ' ') in-test copies), $(find adkit/screens -name '*.png' 2>/dev/null | wc -l | tr -d ' ') screens, $(find adkit/export -type f 2>/dev/null | wc -l | tr -d ' ') export files"
-              grep -hE "Test Case .*(passed|failed)" adkit/logs/*.log 2>/dev/null || true
-              cat adkit/missed.txt 2>/dev/null || true
+            for KITDIR in adkit adkit-en; do
+            if [ -d $KITDIR ]; then
+              echo "$KITDIR: $(find $KITDIR/shots -name '*.png' 2>/dev/null | wc -l | tr -d ' ') shots ($(find $KITDIR/attachments -name '*.png' 2>/dev/null | wc -l | tr -d ' ') in-test copies), $(find $KITDIR/screens -name '*.png' 2>/dev/null | wc -l | tr -d ' ') screens, $(find $KITDIR/export -type f 2>/dev/null | wc -l | tr -d ' ') export files"
+              grep -hE "Test Case .*(passed|failed)" $KITDIR/logs/*.log 2>/dev/null || true
+              cat $KITDIR/missed.txt 2>/dev/null || true
               echo "---- adkit export (done.txt) ----"
-              cat adkit/export/done.txt 2>/dev/null || cat adkit/export-timeout.txt 2>/dev/null || echo "no done.txt"
+              cat $KITDIR/export/done.txt 2>/dev/null || cat $KITDIR/export-timeout.txt 2>/dev/null || echo "no done.txt"
             fi
+            done
             cat release-check.txt 2>/dev/null || true
             echo "---- errors ----"
             python3 scripts/check_swift.py 2>&1 | tail -40 || true
@@ -874,6 +883,7 @@ jobs:
           [ -d videos ] && mkdir -p report/videos && cp videos/*.mp4 videos/*.log report/videos/ 2>/dev/null || true
           [ -d videos/assets ] && cp -R videos/assets report/videos/ 2>/dev/null || true
           [ -d adkit ] && mkdir -p report/adkit && cp -R adkit/. report/adkit/ 2>/dev/null || true
+          [ -d adkit-en ] && mkdir -p report/adkit-en && cp -R adkit-en/. report/adkit-en/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
           cd report

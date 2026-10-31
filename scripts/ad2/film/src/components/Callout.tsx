@@ -1,6 +1,7 @@
 import { interpolate } from "remotion";
 import { C, clamp, ease, type } from "../lib/brand";
 import { useFilmFrame } from "../lib/time";
+import { useT } from "../lib/i18n";
 
 /**
  * Eyebrow callout (§2.6): English caps label hanging off a 1.5 px hairline at 40 % that ends in a 7 px dot
@@ -19,6 +20,7 @@ export const Callout: React.FC<{
   to: number;
 }> = ({ label, at, labelY, labelX, from, to }) => {
   const frame = useFilmFrame();
+  const t = useT();
   if (frame < from || frame > to + 12) return null;
   const draw = interpolate(frame, [from, from + 10], [0, 1], { ...clamp, easing: ease.split });
   const text = interpolate(frame, [from + 4, from + 16], [0, 1], { ...clamp, easing: ease.split });
@@ -62,7 +64,7 @@ export const Callout: React.FC<{
             filter: `blur(${(1 - text) * 6}px)`,
           }}
         >
-          {label}
+          {t(label)}
         </div>
       </div>
     );
@@ -108,7 +110,7 @@ export const Callout: React.FC<{
           filter: `blur(${(1 - text) * 6}px)`,
         }}
       >
-        {label}
+        {t(label)}
       </div>
     </div>
   );

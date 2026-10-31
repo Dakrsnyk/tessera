@@ -1,5 +1,5 @@
 # Écrans fixes de l'app pour les films, rendus par [adkit] dans report/adkit/screens/<fichier>.png
-# (iPhone 16 Pro, 1 206 × 2 622, barre d'état à 9:41, clair, français, style Corail, données démo).
+# (iPhone 16 Pro, 1 206 × 2 622, barre d'état à 9:41, clair, français (anglais avec [adkit-en]), style Saphir, données démo).
 # Format : <fichier> <valeur de -screenshotScreen> [arguments de lancement en plus]
 # Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
@@ -116,7 +116,6 @@ studio-colors studio-colors
 studio-background studio-background
 studio-border studio-border
 studio-style-mid studio-style -screenshotScroll 0.4
-studio-palette-coral studio-palette-coral
 studio-palette-sunset studio-palette-sunset
 icons icons
 spaces-lock spaces-lock
@@ -132,3 +131,39 @@ scan-frame-dark scan-frame -screenshotAppearance dark
 scan-frame-white-dark scan-frame -marketingScreen white -screenshotAppearance dark
 app-planning-week-dark app-planning-week -screenshotAppearance dark
 app-planning-habits-dark app-planning-habits -screenshotAppearance dark
+
+# Campagne 2026 (docs/memoire/campagne-2026/Ressources-a-capturer.md, section 3)
+# Variantes sombres (publicités sur fond noir)
+home-s00-dark home -screenshotScroll 0 -screenshotAppearance dark
+home-s03-dark home -screenshotScroll 0.3 -screenshotAppearance dark
+home-s06-dark home -screenshotScroll 0.6 -screenshotAppearance dark
+app-finances-s00-dark app-finances -screenshotScroll 0 -screenshotAppearance dark
+app-finances-s03-dark app-finances -screenshotScroll 0.3 -screenshotAppearance dark
+app-fitness-progress-dark app-fitness-progress -screenshotAppearance dark
+app-planning-tasks-dark app-planning-tasks -screenshotAppearance dark
+studio-style-dark studio-style -screenshotAppearance dark
+studio-colors-dark studio-colors -screenshotAppearance dark
+studio-background-dark studio-background -screenshotAppearance dark
+store-dark store -screenshotAppearance dark
+# Pages qui avaient déjà un identifiant de scène
+app-nutrition-meal app-nutrition-meal
+app-nutrition-ideas app-nutrition-ideas
+app-nutrition-nutrients app-nutrition-nutrients
+app-nutrition-saved app-nutrition-saved
+app-planning-month app-planning-month
+app-planning-focus app-planning-focus
+app-finances-trends app-finances-trends
+app-fitness-activity app-fitness-activity
+mywidgets mywidgets
+editor-v2 editor-v2
+# Nouveaux identifiants de scène (App/Core/ScreenshotMode.swift, chantiers 14 et 15)
+scan-recap scan-recap
+scan-recap-photo scan-recap-photo
+nutrition-plan nutrition-plan
+# Besoins quotidiens (Mes infos › Nutrition, avec « Calculé d'après ton plan » une fois le plan accepté) et police du Studio
+profile-targets info-nutrition
+studio-font studio-style -screenshotScroll bottom
+# Offre Premium : lecture interne seulement (compter les types gratuits / Premium), jamais dans une publicité
+paywall paywall
+paywall-widget paywall-widget
+paywall-history paywall-history

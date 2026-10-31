@@ -1,0 +1,543 @@
+{
+ "_doc": "Voice-over français (Kokoro ff_siwis, le seul timbre féminin français) of the 2026 campaign. Same structure as scripts/ad2/vo_spec.json: films -> chunks -> lines {id, text, start, max}. start = second of the film where the line begins, max = longest allowed duration (the slot ends before the next line). Lines of one chunk are read in one go and cut at the pauses. Film lengths: see docs/memoire/campagne-2026/*.md.",
+ "voice": "ff_siwis",
+ "speed": 0.95,
+ "brand": {
+  "Ardane": ""
+ },
+ "films": {
+  "main": {
+   "chunks": [
+    [
+     {
+      "id": "M1",
+      "text": "Toute ta vie.",
+      "start": 0.8,
+      "max": 1.83
+     },
+     {
+      "id": "M2",
+      "text": "Un seul endroit.",
+      "start": 3.4,
+      "max": 1.83
+     }
+    ],
+    [
+     {
+      "id": "M3",
+      "text": "Tes repas. Ton entraînement. Ta semaine. Ton budget.",
+      "start": 6.2,
+      "max": 4.42
+     }
+    ],
+    [
+     {
+      "id": "M4",
+      "text": "Tout ce qui compte, au même endroit.",
+      "start": 12.6,
+      "max": 3.47
+     }
+    ],
+    [
+     {
+      "id": "M5",
+      "text": "Et c'est toi qui décides de son allure.",
+      "start": 17.6,
+      "max": 3.7
+     },
+     {
+      "id": "M6",
+      "text": "Tes widgets. À ta façon.",
+      "start": 21.4,
+      "max": 2.83
+     }
+    ],
+    [
+     {
+      "id": "M7",
+      "text": "Sur ton écran d'accueil. Sur ton écran verrouillé.",
+      "start": 25.4,
+      "max": 4.06
+     },
+     {
+      "id": "M8",
+      "text": "Toujours à portée de regard.",
+      "start": 30.0,
+      "max": 2.65
+     }
+    ],
+    [
+     {
+      "id": "M9",
+      "text": "Ton iPhone devient ton tableau de bord personnel.",
+      "start": 33.6,
+      "max": 3.88
+     }
+    ],
+    [
+     {
+      "id": "M10",
+      "text": "Ardane.",
+      "start": 39.25,
+      "max": 0.6
+     },
+     {
+      "id": "M11",
+      "text": "Toute ta vie. Un seul endroit.",
+      "start": 39.95,
+      "max": 2.45
+     },
+     {
+      "id": "M12",
+      "text": "Bientôt sur l'App Store.",
+      "start": 42.5,
+      "max": 2.24
+     }
+    ]
+   ]
+  },
+  "nutrition": {
+   "chunks": [
+    [
+     {
+      "id": "N1",
+      "text": "Sache exactement ce que tu manges.",
+      "start": 0.5,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Scanne un code-barres. Ou photographie ton plat.",
+      "start": 3.6,
+      "max": 3.65
+     }
+    ],
+    [
+     {
+      "id": "N3",
+      "text": "Calories, protéines, glucides, lipides.",
+      "start": 7.6,
+      "max": 2.24
+     }
+    ],
+    [
+     {
+      "id": "N4",
+      "text": "Fixe un objectif. Obtiens tes cibles du jour.",
+      "start": 10.3,
+      "max": 3.4
+     }
+    ],
+    [
+     {
+      "id": "N5",
+      "text": "Tout ça, sur ton écran d'accueil.",
+      "start": 13.8,
+      "max": 3.0
+     },
+     {
+      "id": "N6",
+      "text": "Et à un geste de l'écran verrouillé.",
+      "start": 16.9,
+      "max": 3.3
+     }
+    ],
+    [
+     {
+      "id": "N7",
+      "text": "Ardane. Toute ta vie. Un seul endroit.",
+      "start": 20.3,
+      "max": 3.5
+     }
+    ]
+   ]
+  },
+  "fitness": {
+   "chunks": [
+    [
+     {
+      "id": "F1",
+      "text": "Entraîne-toi. Ardane compte chaque série.",
+      "start": 0.5,
+      "max": 2.83
+     }
+    ],
+    [
+     {
+      "id": "F2",
+      "text": "Le repos, compté à la seconde.",
+      "start": 3.8,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "F3",
+      "text": "Série faite ? Touche-la sur ton écran verrouillé.",
+      "start": 6.9,
+      "max": 3.65
+     }
+    ],
+    [
+     {
+      "id": "F4",
+      "text": "Chaque exercice, mouvement par mouvement.",
+      "start": 10.8,
+      "max": 2.65
+     }
+    ],
+    [
+     {
+      "id": "F5",
+      "text": "Et regarde-toi progresser.",
+      "start": 14.0,
+      "max": 1.83
+     },
+     {
+      "id": "F6",
+      "text": "Sur ton écran d'accueil aussi.",
+      "start": 16.8,
+      "max": 2.65
+     }
+    ],
+    [
+     {
+      "id": "F7",
+      "text": "Ardane. Toute ta vie. Un seul endroit.",
+      "start": 20.1,
+      "max": 3.7
+     }
+    ]
+   ]
+  },
+  "organisation": {
+   "chunks": [
+    [
+     {
+      "id": "O1",
+      "text": "Tes habitudes. Ta semaine. Tes objectifs.",
+      "start": 0.5,
+      "max": 3.42
+     }
+    ],
+    [
+     {
+      "id": "O2",
+      "text": "Coche une habitude et regarde ta série grandir.",
+      "start": 4.2,
+      "max": 3.88
+     }
+    ],
+    [
+     {
+      "id": "O3",
+      "text": "Planifie ta semaine, à ta façon.",
+      "start": 8.6,
+      "max": 3.06
+     }
+    ],
+    [
+     {
+      "id": "O4",
+      "text": "Choisis tes trois priorités du jour.",
+      "start": 12.0,
+      "max": 3.06
+     }
+    ],
+    [
+     {
+      "id": "O5",
+      "text": "Garde-les sous les yeux, partout.",
+      "start": 15.8,
+      "max": 2.65
+     }
+    ],
+    [
+     {
+      "id": "O6",
+      "text": "Ardane. Toute ta vie. Un seul endroit.",
+      "start": 20.2,
+      "max": 3.6
+     }
+    ]
+   ]
+  },
+  "widgets": {
+   "chunks": [
+    [
+     {
+      "id": "W1",
+      "text": "Tes widgets. À ta façon.",
+      "start": 0.6,
+      "max": 2.7
+     }
+    ],
+    [
+     {
+      "id": "W2",
+      "text": "Choisis ce qui compte pour toi.",
+      "start": 3.4,
+      "max": 3.06
+     }
+    ],
+    [
+     {
+      "id": "W3",
+      "text": "Puis choisis son style, ses couleurs, son allure.",
+      "start": 6.6,
+      "max": 3.88
+     }
+    ],
+    [
+     {
+      "id": "W4",
+      "text": "Compose un écran d'accueil qui te ressemble.",
+      "start": 11.2,
+      "max": 3.47
+     }
+    ],
+    [
+     {
+      "id": "W5",
+      "text": "S'entraîner. Étudier. Rester minimaliste.",
+      "start": 15.4,
+      "max": 2.6
+     }
+    ],
+    [
+     {
+      "id": "W6",
+      "text": "Et ton écran verrouillé aussi.",
+      "start": 20.0,
+      "max": 2.65
+     },
+     {
+      "id": "W7",
+      "text": "Ton iPhone, ton tableau de bord.",
+      "start": 22.9,
+      "max": 2.8
+     }
+    ],
+    [
+     {
+      "id": "W8",
+      "text": "Ardane. Toute ta vie. Un seul endroit.",
+      "start": 25.8,
+      "max": 3.83
+     }
+    ]
+   ]
+  },
+  "finance": {
+   "chunks": [
+    [
+     {
+      "id": "Fi1",
+      "text": "Sache où en est ton argent.",
+      "start": 0.4,
+      "max": 2.9
+     }
+    ],
+    [
+     {
+      "id": "Fi2",
+      "text": "Revenus. Dépenses. Solde.",
+      "start": 3.4,
+      "max": 2.19
+     }
+    ],
+    [
+     {
+      "id": "Fi3",
+      "text": "Vois ton mois d'un coup d'œil.",
+      "start": 6.6,
+      "max": 2.9
+     }
+    ],
+    [
+     {
+      "id": "Fi4",
+      "text": "Factures, objectifs d'épargne, catégories.",
+      "start": 9.6,
+      "max": 2.24
+     }
+    ],
+    [
+     {
+      "id": "Fi5",
+      "text": "Directement sur ton écran d'accueil.",
+      "start": 12.4,
+      "max": 2.4
+     }
+    ],
+    [
+     {
+      "id": "Fi6",
+      "text": "Ardane. Toute ta vie. Un seul endroit.",
+      "start": 14.9,
+      "max": 3.83
+     }
+    ]
+   ]
+  },
+  "lifestyle": {
+   "chunks": [
+    [
+     {
+      "id": "L1",
+      "text": "Une journée avec Ardane.",
+      "start": 0.6,
+      "max": 2.24
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Réveille-toi sur ce qui t'attend.",
+      "start": 3.6,
+      "max": 2.65
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Petit-déjeuner ? Scanne, note, c'est fait.",
+      "start": 7.2,
+      "max": 2.83
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Ta semaine, tes priorités, tes habitudes. Ensemble.",
+      "start": 11.4,
+      "max": 3.65
+     }
+    ],
+    [
+     {
+      "id": "L5",
+      "text": "À midi, vois ce qu'il te reste à manger.",
+      "start": 16.6,
+      "max": 4.29
+     }
+    ],
+    [
+     {
+      "id": "L6",
+      "text": "Le soir, c'est l'heure de s'entraîner.",
+      "start": 21.0,
+      "max": 3.06
+     },
+     {
+      "id": "L7",
+      "text": "Chaque série comptée. Chaque repos chronométré.",
+      "start": 24.4,
+      "max": 3.24
+     }
+    ],
+    [
+     {
+      "id": "L8",
+      "text": "Avant de dormir, un regard sur ton budget et tes habitudes.",
+      "start": 28.1,
+      "max": 4.8
+     }
+    ],
+    [
+     {
+      "id": "L9",
+      "text": "Toute ta vie. Un seul endroit. Tes widgets. À ta façon.",
+      "start": 33.0,
+      "max": 5.3
+     }
+    ],
+    [
+     {
+      "id": "L10",
+      "text": "Ardane.",
+      "start": 38.4,
+      "max": 1.0
+     },
+     {
+      "id": "L11",
+      "text": "Bientôt sur l'App Store.",
+      "start": 39.5,
+      "max": 2.24
+     }
+    ]
+   ]
+  },
+  "short1": {
+   "chunks": [
+    [
+     {
+      "id": "S1a",
+      "text": "Toute ta vie. Un seul endroit.",
+      "start": 0.8,
+      "max": 3.24
+     }
+    ],
+    [
+     {
+      "id": "S1b",
+      "text": "Ardane. Bientôt sur l'App Store.",
+      "start": 4.6,
+      "max": 2.83
+     }
+    ]
+   ]
+  },
+  "short2": {
+   "chunks": [
+    [
+     {
+      "id": "S2a",
+      "text": "Compose ton propre Ardane.",
+      "start": 0.7,
+      "max": 2.1
+     }
+    ],
+    [
+     {
+      "id": "S2b",
+      "text": "Choisis tes widgets. Choisis ton style.",
+      "start": 2.9,
+      "max": 2.9
+     }
+    ],
+    [
+     {
+      "id": "S2c",
+      "text": "Ardane. Bientôt.",
+      "start": 5.9,
+      "max": 1.6
+     }
+    ]
+   ]
+  },
+  "short3": {
+   "chunks": [
+    [
+     {
+      "id": "S3a",
+      "text": "Ta vie. Tes widgets. À ta façon.",
+      "start": 0.8,
+      "max": 3.7
+     }
+    ],
+    [
+     {
+      "id": "S3b",
+      "text": "Ardane. Bientôt sur l'App Store.",
+      "start": 4.6,
+      "max": 2.83
+     }
+    ]
+   ]
+  }
+ },
+ "lang": "f"
+}

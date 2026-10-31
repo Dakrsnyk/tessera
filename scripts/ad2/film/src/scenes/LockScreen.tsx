@@ -12,6 +12,7 @@ import { SplitText } from "../components/SplitText";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
 import { imageTexture, useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
+import { Tr } from "../lib/i18n";
 
 const LOCK = "kit/lock-crepuscule.png";
 const REST = [0, 1, 2, 3, 4].map((i) => `kit/live-rest-real-${String(i).padStart(3, "0")}.png`);
@@ -132,8 +133,8 @@ export const LockScreen: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       const edge = interpolate(frame, [90, 96], [0, 1], clamp);
       const bladeX = frame < 96 ? SLOT.x : SLOT.x + SLOT.w * crossing;
       if (frame >= 90 && frame < T.detach) {
-        ctx.fillStyle = "rgba(255,244,236,0.95)";
-        ctx.shadowColor = C.peach;
+        ctx.fillStyle = "rgba(242,248,254,0.95)";
+        ctx.shadowColor = C.pale;
         ctx.shadowBlur = 24;
         ctx.fillRect(bladeX - 3, SLOT.y, 6, SLOT.h * (frame < 96 ? edge : 1));
         ctx.shadowBlur = 0;
@@ -141,31 +142,31 @@ export const LockScreen: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       // Dock: the socket flashes 30 % for 4 frames on contact, then a blade seals it right to left.
       const flash = interpolate(frame, [T.docked, T.docked + 4], [0.3, 0], clamp);
       if (frame >= T.docked && flash > 0) {
-        ctx.fillStyle = `rgba(255,224,204,${flash})`;
+        ctx.fillStyle = `rgba(214,233,250,${flash})`;
         ctx.beginPath();
         ctx.roundRect(SLOT.x, SLOT.y, SLOT.w, SLOT.h, SLOT.r);
         ctx.fill();
       }
       const seal = interpolate(frame, [T.docked + 4, T.docked + 16], [0, 1], { ...clamp, easing: ease.split });
       if (frame >= T.docked + 4 && seal < 1) {
-        ctx.fillStyle = "rgba(255,244,236,0.95)";
-        ctx.shadowColor = C.peach;
+        ctx.fillStyle = "rgba(242,248,254,0.95)";
+        ctx.shadowColor = C.pale;
         ctx.shadowBlur = 24;
         ctx.fillRect(SLOT.x + SLOT.w * (1 - seal) - 3, SLOT.y, 6, SLOT.h);
         ctx.shadowBlur = 0;
       }
     } else {
-      // The empty slot glows as a socket (peach inner glow 18 %).
+      // The empty slot glows as a socket (pale-blue inner glow 18 %).
       ctx.save();
       ctx.beginPath();
       ctx.roundRect(SLOT.x, SLOT.y, SLOT.w, SLOT.h, SLOT.r);
       ctx.fillStyle = "rgba(10,8,8,0.55)";
       ctx.fill();
       ctx.clip();
-      ctx.shadowColor = "rgba(255,224,204,0.9)";
+      ctx.shadowColor = "rgba(214,233,250,0.9)";
       ctx.shadowBlur = 60;
       ctx.lineWidth = 40;
-      ctx.strokeStyle = "rgba(255,224,204,0.18)";
+      ctx.strokeStyle = "rgba(214,233,250,0.18)";
       ctx.stroke();
       ctx.restore();
     }
@@ -255,8 +256,8 @@ export const LockScreen: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
             width: btn.w,
             height: btn.h,
             borderRadius: btn.h / 2,
-            border: `3px solid ${C.peach}`,
-            boxShadow: `0 0 24px 4px rgba(255,224,204,0.5)`,
+            border: `3px solid ${C.pale}`,
+            boxShadow: `0 0 24px 4px rgba(214,233,250,0.5)`,
             scale: `${1 + ring * 0.18}`,
             opacity: 0.95 * (1 - ring),
           }}
@@ -266,7 +267,7 @@ export const LockScreen: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       <Callout label="Rest" at={[RECT.x + COUNTDOWN_X * RECT.w, RECT.y - 8]} labelY={RECT.y - 110} from={140} to={216} />
       <Callout label="Set done" at={[btnX, RECT.y + RECT.h + 8]} labelY={RECT.y + RECT.h + 108} from={234} to={276} />
       <SplitText from={288} exitAt={336} top={1330} height={100}>
-        <span style={type.super}>Without opening the app.</span>
+        <span style={type.super}><Tr>Without opening the app.</Tr></span>
       </SplitText>
       {/* The line from the previous shot becomes the rail the camera glides along (fades over 24 frames). */}
       <Seam x={AXIS} top={300} height={1320} intensity={interpolate(frame, [0, 24], [1, 0], { ...clamp, easing: ease.transfer })} />

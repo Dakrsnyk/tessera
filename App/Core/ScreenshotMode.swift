@@ -99,6 +99,18 @@ enum ScreenshotMode {
                 router.openApp(.nutrition)
             }
             return .gallery(screen)
+        case "scan-recap", "scan-recap-photo":
+            // The recap of a scan before anything is logged (ScanRecapView, over Home): `scan-recap` a product
+            // read from its barcode (« Vérifié »), `scan-recap-photo` a dish guessed from a photo (« Estimation »).
+            router.tab = .home
+            return .gallery(screen)
+        case "nutrition-plan":
+            // The weight goal recap (WeightPlanSummaryView, chantier 15): lose 6 kg, the calculation not yet
+            // accepted. The demo person is back to the sample profile at the next capture (see above).
+            router.tab = .home
+            model.update(\.profile) { $0.nutritionAim = .lose }
+            model.setWeightPlan(targetKg: 72)
+            return .gallery(screen)
         case "export":
             // The pieces of the ad films written as PNG files (AdExport, Documents/ad_export.txt).
             router.tab = .home
@@ -400,7 +412,17 @@ struct WidgetGalleryView: View {
         }
     }
 
+    @ViewBuilder
     var body: some View {
+        // The screens of the ad kit that are not in a mini-app's page list (see `NutritionScreenshotStage`).
+        if mode == "scan-recap" || mode == "scan-recap-photo" || mode == "nutrition-plan" {
+            NutritionScreenshotStage(mode: mode)
+        } else {
+            grid
+        }
+    }
+
+    private var grid: some View {
         GeometryReader { geo in
             let spacing: CGFloat = 8
             let width = (geo.size.width - 16 - spacing * CGFloat(columns - 1)) / CGFloat(columns)
@@ -430,6 +452,59 @@ struct WidgetGalleryView: View {
         let start = (page - 1) * pageSize
         guard start < kinds.count else { return [] }
         return Array(kinds[start..<min(kinds.count, start + pageSize)])
+    }
+}
+
+/// `-screenshotScreen scan-recap | scan-recap-photo | nutrition-plan`: a screen of the Nutrition scan or of the
+/// weight goal shown alone (shown by RootView as the gallery screens are), with demo foods from the food table.
+struct NutritionScreenshotStage: View {
+    let mode: String
+    @State private var recap: ScanRecap
+
+    init(mode: String) {
+        self.mode = mode
+        _recap = State(initialValue: Self.demoRecap(photo: mode == "scan-recap-photo"))
+    }
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if mode == "nutrition-plan" {
+                    ScrollView {
+                        WeightPlanSummaryView()
+                            .padding(20)
+                    }
+                    .background(.screenGradient)
+                } else {
+                    ScanRecapView(recap: $recap, source: mode == "scan-recap-photo" ? .photo : .barcode, onDone: {})
+                }
+            }
+            .navigationTitle(mode == "nutrition-plan" ? tr("Ton objectif de poids") : tr("Récapitulatif"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(tr("Annuler")) {}
+                }
+            }
+        }
+    }
+
+    /// A breakfast read from barcodes (values of the table, « Vérifié »), or a dish guessed from a photo.
+    private static func demoRecap(photo: Bool) -> ScanRecap {
+        if photo {
+            var proposals: [MealProposal] = []
+            for (id, grams, confidence) in [("chicken", 150.0, 0.82), ("rice", 180.0, 0.74), ("gardensalad", 80.0, 0.46)] {
+                if let food = FoodDatabase.item(id) {
+                    proposals.append(MealProposal(food: food, grams: grams, confidence: confidence, label: id))
+                }
+            }
+            return ScanRecap(proposals: proposals)
+        }
+        var recap = ScanRecap()
+        for id in ["greekyogurt", "oats", "blueberries"] {
+            if let food = FoodDatabase.item(id) { _ = recap.add(food) }
+        }
+        return recap
     }
 }
 #endif

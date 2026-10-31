@@ -1,0 +1,15 @@
+{
+ "_doc": "Per-line fixes of the 2026 campaign voice-over, read by vo.py (en) and vo_fr.py (fr): speed (Kokoro pace), pause (read sentence by sentence, joined by this many seconds), solo (the chunk's lines are synthesised one by one: the cut at the pauses failed).",
+ "en": {
+  "main": {"M10": {"solo": true}, "M6": {"pause": 0.3}, "M3": {"pause": 0.42}},
+  "organisation": {"O1": {"pause": 0.35}},
+  "finance": {"Fi2": {"pause": 0.28}},
+  "widgets": {"W5": {"pause": 0.35}}
+ },
+ "fr": {
+  "main": {"M3": {"pause": 0.42}, "M6": {"pause": 0.3}},
+  "organisation": {"O1": {"pause": 0.35}},
+  "finance": {"Fi2": {"pause": 0.28}},
+  "widgets": {"W5": {"pause": 0.35}}
+ }
+}

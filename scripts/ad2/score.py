@@ -343,7 +343,7 @@ SECTION_CHORDS = {
 }
 
 
-def score_cut(length, sections, universes=(), hits=(), risers=(), logo_at=None, ticks=()):
+def score_cut(length, sections, universes=(), hits=(), risers=(), logo_at=None, ticks=(), end_fade=0.6, end_gap=0.12):
     """`sections`: [{type, start, end}] in seconds. `universes`: [(seconds, timbre)] for the strata arp.
     `hits`: seconds of the merge-like peaks (sub drop + noise, a one-beat suck before). `risers`: seconds
     where a riser ends (one beat of suck before when it is a hit). `logo_at`: the D major Picardy."""
@@ -508,8 +508,9 @@ def score_cut(length, sections, universes=(), hits=(), risers=(), logo_at=None, 
         a, b = int((s - 0.06) * SR), int(s * SR)
         if 0 < a < b <= n:
             mixd[a:b] *= np.linspace(1, 0, b - a)[:, None]
-    end = n - int(0.12 * SR)
-    fade = int(0.6 * SR)
-    mixd[end - fade:end] *= np.linspace(1, 0, fade)[:, None]
+    end = n - int(end_gap * SR)
+    fade = int(end_fade * SR)
+    if fade:
+        mixd[end - fade:end] *= np.linspace(1, 0, fade)[:, None]
     mixd[end:] = 0
     return mixd

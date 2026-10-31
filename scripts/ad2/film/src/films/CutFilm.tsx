@@ -19,10 +19,11 @@ import { Studio } from "../scenes/Studio";
 import { Universes } from "../scenes/Universes";
 import { HookCard } from "../components/Hook";
 import { WidgetLift } from "../scenes/WidgetLift";
+import { audioFile, Lang } from "../lib/i18n";
 import cuts from "./cuts.json";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const SCENES: Record<string, React.FC<any>> = { Opening, Universes, Fitness, LockScreen, Nutrition, Essentials, Gather, Close, LineOpen, MyDay, FitnessCold, Build, StyleCycle, LockIcon, FivePhones, WidgetLift, Studio, HookCard };
+export const SCENES: Record<string, React.FC<any>> = { Opening, Universes, Fitness, LockScreen, Nutrition, Essentials, Gather, Close, LineOpen, MyDay, FitnessCold, Build, StyleCycle, LockIcon, FivePhones, WidgetLift, Studio, HookCard };
 
 type Segment = { scene: string; at: number; input: number[]; output: number[]; transition?: string; props?: Record<string, unknown> };
 export type FilmId = keyof typeof cuts.films;
@@ -46,7 +47,7 @@ const LineCut: React.FC = () => {
 };
 
 /** A cut-down film from cuts.json: its segments, transitions, and its own mix (pub/film/mix-<id>.wav). */
-export const CutFilm: React.FC<{ film: FilmId }> = ({ film }) => {
+export const CutFilm: React.FC<{ film: FilmId; audioLang?: Lang }> = ({ film, audioLang = "en" }) => {
   const segs = cuts.films[film].segments as Segment[];
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
@@ -73,7 +74,7 @@ export const CutFilm: React.FC<{ film: FilmId }> = ({ film }) => {
           </Sequence>
         );
       })}
-      <Audio src={staticFile(`audio/mix-${film}.wav`)} />
+      <Audio src={staticFile(audioFile(audioLang, film))} />
     </AbsoluteFill>
   );
 };

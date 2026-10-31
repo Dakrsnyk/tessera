@@ -60,10 +60,10 @@ export const LineOpen: React.FC<{ audio?: boolean; styles?: { at: number; file: 
       ctx.fillStyle = "rgba(10,6,12,0.5)";
       ctx.fill();
       ctx.clip();
-      ctx.shadowColor = "rgba(255,224,204,0.9)";
+      ctx.shadowColor = "rgba(214,233,250,0.9)";
       ctx.shadowBlur = 60;
       ctx.lineWidth = 36;
-      ctx.strokeStyle = "rgba(255,224,204,0.18)";
+      ctx.strokeStyle = "rgba(214,233,250,0.18)";
       ctx.stroke();
       ctx.restore();
     }

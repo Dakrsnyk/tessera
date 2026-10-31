@@ -10,12 +10,14 @@ export const AXIS = 540;
 
 export const C = {
   void: "#000000",
-  lifted: "#07070A",
+  lifted: "#07101C",
   seamCore: "#FFFFFF",
-  seamWarm: "#FFF4EC",
-  peach: "#FFE0CC",
-  coral: "#FF7A59",
-  raspberry: "#D9246A",
+  /** Saphir identity (icon "ArdaneIcon": gradient 160deg #4E9BE0 -> #1B4A7A, halves white / #D6E9FA). */
+  paleWarm: "#F2F8FE",
+  pale: "#D6E9FA",
+  sapphire: "#4E9BE0",
+  sapphireDeep: "#1B4A7A",
+  sapphireBright: "#68B5F5",
   type1: "#F5F5F7",
   type2: "#A1A1A6",
   type3: "#6E6E73",

@@ -9,12 +9,23 @@ import XCTest
 final class AdShotsUITests: XCTestCase {
     private var app: XCUIApplication!
 
-    /// The app style of the films: Corail, the colors of Ardane's icon.
+    /// The app style of the films: Saphir, the default style of the app.
     private static let style = "sapphire"
 
     /// `AD_APPEARANCE=dark` (`TEST_RUNNER_AD_APPEARANCE` for xcodebuild): the same scenes in that appearance,
     /// each shot named `<name>-dark`. The main film shows the app in Dark appearance, floating in black.
     private static let appearance = ProcessInfo.processInfo.environment["AD_APPEARANCE"].flatMap { $0.isEmpty ? nil : $0 }
+
+    /// `AD_LANG=en` (`TEST_RUNNER_AD_LANG` for xcodebuild; `[adkit-en]` in a commit message): the same scenes in
+    /// English (Canada). French (Canada) otherwise. The scenes find their elements by accessibility identifier
+    /// or by position, never by a word of one language, so the same code serves both kits.
+    private static let language: String = {
+        let value = ProcessInfo.processInfo.environment["AD_LANG"] ?? ""
+        return value.isEmpty ? "fr" : value
+    }()
+
+    /// The region that goes with the language (fr_CA, en_CA).
+    private static var locale: String { "\(language)_CA" }
 
     override func setUp() {
         continueAfterFailure = true
@@ -28,7 +39,7 @@ final class AdShotsUITests: XCTestCase {
 
     private func launch(_ screen: String, _ extra: [String] = []) {
         app = XCUIApplication()
-        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA", "-screenshotScreen", screen,
+        app.launchArguments = ["-AppleLanguages", "(\(Self.language))", "-AppleLocale", Self.locale, "-screenshotScreen", screen,
                                "-screenshotStyle", Self.style]
             + (Self.appearance.map { ["-screenshotAppearance", $0] } ?? []) + extra
         app.launch()
@@ -176,7 +187,8 @@ final class AdShotsUITests: XCTestCase {
         guard tap(food, timeout: 8) else { return }
         pause(1.4)
         shot("nut-2")
-        let save = app.navigationBars.buttons.matching(NSPredicate(format: "label == %@", "Enregistrer")).firstMatch
+        // « Enregistrer » (fr) or « Save » (en): the button has no identifier, so both words are accepted.
+        let save = app.navigationBars.buttons.matching(NSPredicate(format: "label IN %@", ["Enregistrer", "Save"])).firstMatch
         guard save.waitForExistence(timeout: 6) else { return }
         save.tap()
         // The sheet closes and the ring turns to the new total.
@@ -190,8 +202,11 @@ final class AdShotsUITests: XCTestCase {
         guard app.otherElements["finances-balance"].waitForExistence(timeout: 12) else { return }
         pause(1.5)
         shot("fin-mois")
-        for (period, name) in [("3 mois", "fin-3mois"), ("Année", "fin-annee")] {
-            let button = app.segmentedControls.buttons[period].firstMatch
+        // The period picker is the page's segmented control: Mois, 3 mois, Année, by position (not by word).
+        let periods = app.segmentedControls.firstMatch.buttons
+        for (index, name) in [(1, "fin-3mois"), (2, "fin-annee")] {
+            guard periods.count > index else { continue }
+            let button = periods.element(boundBy: index)
             guard button.exists else { continue }
             button.tap()
             pause(1.2)

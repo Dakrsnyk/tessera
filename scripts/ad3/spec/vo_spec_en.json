@@ -1,0 +1,542 @@
+{
+ "_doc": "Voice-over English (Kokoro af_heart) of the 2026 campaign. Same structure as scripts/ad2/vo_spec.json: films -> chunks -> lines {id, text, start, max}. start = second of the film where the line begins, max = longest allowed duration (the slot ends before the next line). Lines of one chunk are read in one go and cut at the pauses. Film lengths: see docs/memoire/campagne-2026/*.md.",
+ "voice": "af_heart",
+ "speed": 0.95,
+ "brand": {
+  "Ardane": "ɑɹdˈɑn"
+ },
+ "films": {
+  "main": {
+   "chunks": [
+    [
+     {
+      "id": "M1",
+      "text": "Your whole life.",
+      "start": 0.8,
+      "max": 1.71
+     },
+     {
+      "id": "M2",
+      "text": "One place.",
+      "start": 3.4,
+      "max": 1.34
+     }
+    ],
+    [
+     {
+      "id": "M3",
+      "text": "Your meals. Your training. Your week. Your money.",
+      "start": 6.2,
+      "max": 4.1
+     }
+    ],
+    [
+     {
+      "id": "M4",
+      "text": "Everything that matters, in one place.",
+      "start": 12.6,
+      "max": 2.82
+     }
+    ],
+    [
+     {
+      "id": "M5",
+      "text": "And you decide how it looks.",
+      "start": 17.6,
+      "max": 2.82
+     },
+     {
+      "id": "M6",
+      "text": "Your widgets. Your way.",
+      "start": 21.4,
+      "max": 2.26
+     }
+    ],
+    [
+     {
+      "id": "M7",
+      "text": "On your Home Screen. On your Lock Screen.",
+      "start": 25.4,
+      "max": 3.74
+     },
+     {
+      "id": "M8",
+      "text": "Always one glance away.",
+      "start": 30.0,
+      "max": 2.08
+     }
+    ],
+    [
+     {
+      "id": "M9",
+      "text": "Your iPhone becomes your personal dashboard.",
+      "start": 33.6,
+      "max": 2.82
+     }
+    ],
+    [
+     {
+      "id": "M10",
+      "text": "Ardane.",
+      "start": 39.4,
+      "max": 0.8
+     },
+     {
+      "id": "M11",
+      "text": "Your whole life. One place.",
+      "start": 40.3,
+      "max": 2.2
+     },
+     {
+      "id": "M12",
+      "text": "Coming soon to the App Store.",
+      "start": 42.6,
+      "max": 2.2
+     }
+    ]
+   ]
+  },
+  "nutrition": {
+   "chunks": [
+    [
+     {
+      "id": "N1",
+      "text": "Know exactly what's on your plate.",
+      "start": 0.5,
+      "max": 2.82
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Scan a barcode. Or photograph your dish.",
+      "start": 3.6,
+      "max": 3.37
+     }
+    ],
+    [
+     {
+      "id": "N3",
+      "text": "Calories, protein, carbs, fat.",
+      "start": 7.6,
+      "max": 2.08
+     }
+    ],
+    [
+     {
+      "id": "N4",
+      "text": "Set a goal. Get your daily targets.",
+      "start": 10.6,
+      "max": 3.3
+     }
+    ],
+    [
+     {
+      "id": "N5",
+      "text": "All of it, right on your Home Screen.",
+      "start": 14.0,
+      "max": 3.3
+     },
+     {
+      "id": "N6",
+      "text": "And one tap away on your Lock Screen.",
+      "start": 17.4,
+      "max": 3.2
+     }
+    ],
+    [
+     {
+      "id": "N7",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 20.7,
+      "max": 3.1
+     }
+    ]
+   ]
+  },
+  "fitness": {
+   "chunks": [
+    [
+     {
+      "id": "F1",
+      "text": "Train. Ardane counts every set.",
+      "start": 0.5,
+      "max": 2.63
+     }
+    ],
+    [
+     {
+      "id": "F2",
+      "text": "Rest, counted to the second.",
+      "start": 3.8,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "F3",
+      "text": "Set done? Tap it on your Lock Screen.",
+      "start": 6.9,
+      "max": 3.74
+     }
+    ],
+    [
+     {
+      "id": "F4",
+      "text": "Every exercise, move by move.",
+      "start": 10.8,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "F5",
+      "text": "And watch yourself progress.",
+      "start": 14.0,
+      "max": 2.08
+     },
+     {
+      "id": "F6",
+      "text": "Right on your Home Screen, too.",
+      "start": 16.8,
+      "max": 2.82
+     }
+    ],
+    [
+     {
+      "id": "F7",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 20.4,
+      "max": 3.18
+     }
+    ]
+   ]
+  },
+  "organisation": {
+   "chunks": [
+    [
+     {
+      "id": "O1",
+      "text": "Your habits. Your week. Your goals.",
+      "start": 0.5,
+      "max": 3.18
+     }
+    ],
+    [
+     {
+      "id": "O2",
+      "text": "Check off a habit, and watch the streak grow.",
+      "start": 4.2,
+      "max": 3.93
+     }
+    ],
+    [
+     {
+      "id": "O3",
+      "text": "Plan your week, your way.",
+      "start": 8.6,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "O4",
+      "text": "Pick your three priorities for today.",
+      "start": 12.0,
+      "max": 2.82
+     }
+    ],
+    [
+     {
+      "id": "O5",
+      "text": "Then keep them in sight, everywhere.",
+      "start": 15.8,
+      "max": 2.82
+     }
+    ],
+    [
+     {
+      "id": "O6",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 20.2,
+      "max": 3.18
+     }
+    ]
+   ]
+  },
+  "widgets": {
+   "chunks": [
+    [
+     {
+      "id": "W1",
+      "text": "Your widgets. Your way.",
+      "start": 0.6,
+      "max": 2.26
+     }
+    ],
+    [
+     {
+      "id": "W2",
+      "text": "Pick what matters to you.",
+      "start": 3.4,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "W3",
+      "text": "Then choose its style, its colors, its look.",
+      "start": 6.6,
+      "max": 3.56
+     }
+    ],
+    [
+     {
+      "id": "W4",
+      "text": "Build a Home Screen that feels like you.",
+      "start": 11.2,
+      "max": 3.56
+     }
+    ],
+    [
+     {
+      "id": "W5",
+      "text": "Training. Studying. Keeping it minimal.",
+      "start": 15.4,
+      "max": 2.81
+     }
+    ],
+    [
+     {
+      "id": "W6",
+      "text": "And your Lock Screen, too.",
+      "start": 20.0,
+      "max": 2.45
+     },
+     {
+      "id": "W7",
+      "text": "Your iPhone, your dashboard.",
+      "start": 23.2,
+      "max": 2.08
+     }
+    ],
+    [
+     {
+      "id": "W8",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 26.0,
+      "max": 3.18
+     }
+    ]
+   ]
+  },
+  "finance": {
+   "chunks": [
+    [
+     {
+      "id": "Fi1",
+      "text": "Know where your money stands.",
+      "start": 0.4,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "Fi2",
+      "text": "Income. Expenses. Balance.",
+      "start": 3.4,
+      "max": 2.07
+     }
+    ],
+    [
+     {
+      "id": "Fi3",
+      "text": "See your month at a glance.",
+      "start": 6.6,
+      "max": 2.82
+     }
+    ],
+    [
+     {
+      "id": "Fi4",
+      "text": "Bills, savings goals, categories.",
+      "start": 9.6,
+      "max": 2.08
+     }
+    ],
+    [
+     {
+      "id": "Fi5",
+      "text": "Right on your Home Screen.",
+      "start": 12.4,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "Fi6",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 15.0,
+      "max": 3.18
+     }
+    ]
+   ]
+  },
+  "lifestyle": {
+   "chunks": [
+    [
+     {
+      "id": "L1",
+      "text": "A day with Ardane.",
+      "start": 0.6,
+      "max": 2.08
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Wake up to what's ahead.",
+      "start": 3.6,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Breakfast? Scan it, log it, done.",
+      "start": 7.2,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Your week, your priorities, your habits. Together.",
+      "start": 11.4,
+      "max": 3.37
+     }
+    ],
+    [
+     {
+      "id": "L5",
+      "text": "At noon, see what you have left to eat.",
+      "start": 16.6,
+      "max": 3.93
+     }
+    ],
+    [
+     {
+      "id": "L6",
+      "text": "Evening: time to train.",
+      "start": 21.0,
+      "max": 2.08
+     },
+     {
+      "id": "L7",
+      "text": "Every set counted. Every rest timed.",
+      "start": 24.4,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "L8",
+      "text": "Before bed, a look at your money and your habits.",
+      "start": 28.4,
+      "max": 4.3
+     }
+    ],
+    [
+     {
+      "id": "L9",
+      "text": "Your whole life. One place. Your widgets. Your way.",
+      "start": 33.0,
+      "max": 4.47
+     }
+    ],
+    [
+     {
+      "id": "L10",
+      "text": "Ardane.",
+      "start": 38.4,
+      "max": 1.0
+     },
+     {
+      "id": "L11",
+      "text": "Coming soon to the App Store.",
+      "start": 39.5,
+      "max": 2.3
+     }
+    ]
+   ]
+  },
+  "short1": {
+   "chunks": [
+    [
+     {
+      "id": "S1a",
+      "text": "Your whole life. One place.",
+      "start": 0.8,
+      "max": 2.63
+     }
+    ],
+    [
+     {
+      "id": "S1b",
+      "text": "Ardane. Coming soon to the App Store.",
+      "start": 4.6,
+      "max": 3.2
+     }
+    ]
+   ]
+  },
+  "short2": {
+   "chunks": [
+    [
+     {
+      "id": "S2a",
+      "text": "Build your own Ardane.",
+      "start": 0.7,
+      "max": 2.08
+     }
+    ],
+    [
+     {
+      "id": "S2b",
+      "text": "Pick your widgets. Choose your style.",
+      "start": 3.0,
+      "max": 2.8
+     }
+    ],
+    [
+     {
+      "id": "S2c",
+      "text": "Ardane. Coming soon.",
+      "start": 5.9,
+      "max": 1.89
+     }
+    ]
+   ]
+  },
+  "short3": {
+   "chunks": [
+    [
+     {
+      "id": "S3a",
+      "text": "Your life. Your widgets. Your way.",
+      "start": 0.8,
+      "max": 3.18
+     }
+    ],
+    [
+     {
+      "id": "S3b",
+      "text": "Ardane. Coming soon to the App Store.",
+      "start": 4.7,
+      "max": 3.1
+     }
+    ]
+   ]
+  }
+ }
+}

@@ -54,3 +54,7 @@ git fetch -q origin ci-report && mkdir -p pub/kit && git archive origin/ci-repor
 ```
 
 `shots/` (moments réels des scènes `AdShotsUITests`, copies sans perte dans `attachments/`), `screens/` (écrans et tranches de défilement), `export/` (widgets et pièces en PNG avec vraie transparence).
+
+## Formats et langues (chantier 19.4)
+
+Les films et scènes ont les props `format` (`9x16` | `1x1` | `4x5` | `16x9`) et `lang` (`en` | `fr`) ; la taille de sortie suit `format` (`calculateMetadata`). `FormatFrame` (src/films/) enveloppe la scène 9:16 native dans un cadre propre au format. Textes d'écran : `src/lib/i18n.json` (clé → en/fr), lus par `useT()` / `<Tr>`. Voix : `public/audio/<lang>/mix-<film>.wav` (anglais : `public/audio/mix-<film>.wav`). Rendu : `python -X utf8 scripts/ad2/render_all.py still|video|scene …` (sources d'abord : `film_sync.py import`, jamais `export` avant d'avoir copié ses modifications dans ~/ardane-tools/film).

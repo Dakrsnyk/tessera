@@ -13,8 +13,8 @@ const gaussian = (hex: string, alpha: number) => {
 };
 
 /**
- * The Line: the gap of the « A » as light. 2 px white core, 24 px peach glow, coral bloom (≤ 25 %),
- * far raspberry bloom (≤ 8 %). Its ends taper so it never reads as a drawn bar.
+ * The Line: the gap of the « A » as light. 2 px white core, 24 px pale-blue glow, sapphire bloom (≤ 25 %),
+ * far deep-sapphire bloom (≤ 8 %). Its ends taper so it never reads as a drawn bar.
  */
 export const Seam: React.FC<{
   x: number;
@@ -45,10 +45,10 @@ export const Seam: React.FC<{
   };
   return (
     <>
-      <div style={layer(420 * spread, gaussian(C.raspberry, 0.08), 90 * spread)} />
-      <div style={layer(200 * spread, gaussian(C.coral, 0.25), 50 * spread)} />
-      <div style={layer(40 * spread, gaussian(C.peach, 0.85), 14 * spread)} />
-      <div style={layer(core + 2, gaussian(C.seamWarm, 1), 4)} />
+      <div style={layer(420 * spread, gaussian(C.sapphireDeep, 0.08), 90 * spread)} />
+      <div style={layer(200 * spread, gaussian(C.sapphire, 0.25), 50 * spread)} />
+      <div style={layer(40 * spread, gaussian(C.pale, 0.85), 14 * spread)} />
+      <div style={layer(core + 2, gaussian(C.paleWarm, 1), 4)} />
       <div style={layer(core, C.seamCore, 0)} />
     </>
   );

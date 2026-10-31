@@ -89,16 +89,16 @@ export const Gather: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       ctx.fillStyle = "rgba(10,6,12,0.35)";
       ctx.fill();
       ctx.clip();
-      ctx.shadowColor = "rgba(255,224,204,0.9)";
+      ctx.shadowColor = "rgba(214,233,250,0.9)";
       ctx.shadowBlur = 60;
       ctx.lineWidth = 36;
-      ctx.strokeStyle = `rgba(255,224,204,${0.18 + 0.12 * Math.sin(frame / 12 + i)})`;
+      ctx.strokeStyle = `rgba(214,233,250,${0.18 + 0.12 * Math.sin(frame / 12 + i)})`;
       ctx.stroke();
       ctx.restore();
       // On contact the socket flashes 30 % for 4 frames.
       const flash = interpolate(frame, [DOCK_AT(i) + 30, DOCK_AT(i) + 34], [0.3, 0], clamp);
       if (frame >= DOCK_AT(i) + 26 && flash > 0) {
-        ctx.fillStyle = `rgba(255,224,204,${flash})`;
+        ctx.fillStyle = `rgba(214,233,250,${flash})`;
         ctx.fill();
       }
     });
@@ -191,7 +191,7 @@ export const Gather: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
                   width: 2,
                   height: "100%",
                   background: "#FFF",
-                  boxShadow: "0 0 14px 3px rgba(255,224,204,0.8)",
+                  boxShadow: "0 0 14px 3px rgba(214,233,250,0.8)",
                 }}
               />
             )}

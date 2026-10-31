@@ -12,13 +12,14 @@ import { heroHome } from "../lib/kit";
 import { useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
+import { useT } from "../lib/i18n";
 
 
 /**
  * Shots 24–25 of the main film (f3180–3479, 53.0–58.0 s), as frames 0–299.
  * The phone (the final Home, as the merge left it) turns edge-on and becomes the line (f0–50, dolly in
  * 10 %); the line contracts into the gap of the « A »; the white half grows out
- * of it on D5 (f60 = f3240), the peach half on A5 (f90: the eighth rest is the gap), the coral light
+ * of it on D5 (f60 = f3240), the pale-blue half on A5 (f90: the eighth rest is the gap), the sapphire light
  * blooms in the gap, then the end card: wordmark, CTA (V17 « Coming soon to the App Store »), tagline.
  */
 export const LOGO = { size: 300, cx: AXIS, cy: 700 };
@@ -29,8 +30,9 @@ export const Close: React.FC<{ audio?: boolean; home?: string; screenFile?: stri
   audio = true,
   home = "crepuscule",
   screenFile,
-  tagline = "Life’s essentials, designed around you.",
+  tagline,
 }) => {
+  const t = useT();
   const frame = useFilmFrame();
   // The screen the phone shows as it turns: a hero Home, or any capture (the 15 s film ends on My Day).
   const HOME = screenFile ? `kit/${screenFile}` : heroHome(home);
@@ -97,11 +99,11 @@ export const Close: React.FC<{ audio?: boolean; home?: string; screenFile?: stri
             boxSizing: "border-box",
           }}
         >
-          Coming soon to the App Store
+          {t("close.cta")}
         </div>
       </SplitText>
       <SplitText from={170} top={1062} height={56}>
-        <span style={type.tagline}>{tagline}</span>
+        <span style={type.tagline}>{tagline ?? t("close.tagline")}</span>
       </SplitText>
 
       <Grain />

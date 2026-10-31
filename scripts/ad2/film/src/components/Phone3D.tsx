@@ -73,7 +73,7 @@ export const StudioEnvironment: React.FC<{ variant?: "studio" | "daylight" }> = 
     };
     // A faint grey studio so the metal is never pure black between the strips.
     env.background = new THREE.Color(0.018, 0.018, 0.02);
-    strip(1.8, 16, C.seamWarm, 16, -30);
+    strip(1.8, 16, C.paleWarm, 16, -30);
     strip(0.5, 16, "#FFFFFF", 30, -30);
     strip(1.2, 14, "#FFFFFF", 5, 58);
     strip(1.0, 12, "#FFFFFF", 3, 180 + 30);

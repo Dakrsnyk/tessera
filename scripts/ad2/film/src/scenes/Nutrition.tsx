@@ -152,9 +152,9 @@ export const Nutrition: React.FC<{ audio?: boolean; look?: "dark" | "light" }> =
       const ring = interpolate(frame, [150, 168], [0, 1], { ...clamp, easing: ease.split });
       if (frame >= 150 && ring < 1) {
         ctx.save();
-        ctx.strokeStyle = `rgba(255,224,204,${0.95 * (1 - ring)})`;
+        ctx.strokeStyle = `rgba(214,233,250,${0.95 * (1 - ring)})`;
         ctx.lineWidth = 8;
-        ctx.shadowColor = "rgba(255,224,204,0.8)";
+        ctx.shadowColor = "rgba(214,233,250,0.8)";
         ctx.shadowBlur = 24;
         const g = 1 + 0.25 * ring;
         ctx.beginPath();
@@ -279,8 +279,8 @@ export const Nutrition: React.FC<{ audio?: boolean; look?: "dark" | "light" }> =
             width: SAVE.w * pane.s,
             height: SAVE.h * pane.s,
             borderRadius: (SAVE.h * pane.s) / 2,
-            border: `3px solid ${C.peach}`,
-            boxShadow: "0 0 24px 4px rgba(255,224,204,0.5)",
+            border: `3px solid ${C.pale}`,
+            boxShadow: "0 0 24px 4px rgba(214,233,250,0.5)",
             scale: `${1 + 0.2 * tap}`,
             opacity: 0.95 * (1 - tap),
           }}

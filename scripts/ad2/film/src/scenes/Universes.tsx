@@ -13,6 +13,7 @@ import { DOCK, dockIcon, HERO_WIDGETS, heroHome, heroWidget, project, UNIVERSES,
 import { drawBlade, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
+import { Tr } from "../lib/i18n";
 
 /** Local frame 0 = f360 of the main film (6.0 s). Universe changes on the beats of 9, 10, 11, 12, 13 s. */
 const CHANGES = [180, 240, 300, 360, 420];
@@ -201,7 +202,7 @@ export const Universes: React.FC<{ audio?: boolean; words?: boolean }> = ({ audi
         }}
       />
       <SplitText from={472} exitAt={578} top={1250} height={160}>
-        <span style={type.hero}>Make it yours.</span>
+        <span style={type.hero}><Tr>Make it yours.</Tr></span>
       </SplitText>
         </>
       )}

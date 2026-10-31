@@ -2,6 +2,7 @@
 long still runs (where nothing on screen moves), loudness and true peak, and a contact sheet (1 frame/s).
 
     python -X utf8 qc.py <film.mp4> [<sheet.png>]
+    python -X utf8 qc.py <mix.wav> [<expected seconds>]     audio only (campaign mixes)
 """
 import itertools
 import os
@@ -23,7 +24,26 @@ def tool(name):
     return path if os.path.exists(path) else name
 
 
+def audio_qc(path, expected=None, target=-14.0):
+    """Audio-only control of a mix WAV: exact duration, integrated loudness, peak, trailing silence."""
+    audio, sr = sf.read(path)
+    meter = pyln.Meter(sr)
+    lufs = meter.integrated_loudness(audio)
+    up = np.abs(np.repeat(audio, 4, axis=0)).max()
+    peak = 20 * np.log10(np.abs(audio).max() + 1e-12)
+    loud = np.where(np.abs(audio).max(axis=1) > 1e-3)[0]
+    tail = (len(audio) - 1 - loud[-1]) / sr if len(loud) else float("nan")
+    seconds = len(audio) / sr
+    ok = (expected is None or abs(seconds - expected) < 0.5 / sr + 1e-9) and abs(lufs - target) <= 0.5 and peak <= -1.0
+    print(f"{os.path.basename(path)}: {seconds:.4f} s" + (f" (expected {expected})" if expected else "") +
+          f" · {lufs:.1f} LUFS · peak {peak:.1f} dBFS (~TP {20 * np.log10(up + 1e-12):.1f}) · silent tail {tail:.2f} s · {'OK' if ok else 'CHECK'}")
+    return ok
+
+
 def main():
+    if sys.argv[1].lower().endswith(".wav"):
+        # qc.py <mix.wav> [expected seconds]
+        sys.exit(0 if audio_qc(sys.argv[1], float(sys.argv[2]) if len(sys.argv) > 2 else None) else 1)
     film = sys.argv[1]
     sheet = sys.argv[2] if len(sys.argv) > 2 else os.path.splitext(film)[0] + "-qc.png"
     probe = subprocess.run([tool("ffprobe"), "-v", "error", "-select_streams", "v", "-show_entries", "stream=nb_frames,r_frame_rate,width,height",

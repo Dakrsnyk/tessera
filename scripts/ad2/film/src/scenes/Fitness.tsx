@@ -13,6 +13,7 @@ import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect } from "../lib/kit";
 import { drawBlade, roundRectPath, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
+import { Tr } from "../lib/i18n";
 
 /** Local frame 0 = f960 of the main film (16.0 s, the downbeat where the drums come in). */
 const U = "crepuscule";
@@ -77,16 +78,16 @@ export const Fitness: React.FC<{ audio?: boolean; tapAt?: number; styles?: { at:
       const down = interpolate(frame, [0, 6], [0, 1], clamp);
       drawBlade(ctx, frame < 6 ? x : x + w * across, y, frame < 6 ? h * down : h, 1);
     } else {
-      // The empty slot glows as a socket (peach inner glow 18 %).
+      // The empty slot glows as a socket (pale-blue inner glow 18 %).
       ctx.save();
       roundRectPath(ctx, NEXT.rect, 66);
       ctx.fillStyle = "rgba(8,6,10,0.55)";
       ctx.fill();
       ctx.clip();
-      ctx.shadowColor = "rgba(255,224,204,0.9)";
+      ctx.shadowColor = "rgba(214,233,250,0.9)";
       ctx.shadowBlur = 60;
       ctx.lineWidth = 40;
-      ctx.strokeStyle = "rgba(255,224,204,0.18)";
+      ctx.strokeStyle = "rgba(214,233,250,0.18)";
       ctx.stroke();
       ctx.restore();
     }
@@ -234,8 +235,8 @@ export const Fitness: React.FC<{ audio?: boolean; tapAt?: number; styles?: { at:
                       width: (SET_DONE.x1 - SET_DONE.x0) * PANE_S,
                       height: (SET_DONE.y1 - SET_DONE.y0) * PANE_S,
                       borderRadius: ((SET_DONE.y1 - SET_DONE.y0) * PANE_S) / 2,
-                      border: `3px solid ${C.peach}`,
-                      boxShadow: "0 0 24px 4px rgba(255,224,204,0.5)",
+                      border: `3px solid ${C.pale}`,
+                      boxShadow: "0 0 24px 4px rgba(214,233,250,0.5)",
                       scale: `${1 + 0.12 * tapRing}`,
                       opacity: 0.95 * (1 - tapRing),
                     }}
@@ -306,10 +307,10 @@ export const Fitness: React.FC<{ audio?: boolean; tapAt?: number; styles?: { at:
       )}
       <Callout label="Exercise library" at={toPane(560, 330)} labelX={toPane(560, 330)[0] + 70} from={348} to={420} />
       <SplitText from={508} exitAt={578} top={1236} height={100}>
-        <span style={type.super}>163 exercises.</span>
+        <span style={type.super}><Tr>163 exercises.</Tr></span>
       </SplitText>
       <SplitText from={520} exitAt={578} top={1330} height={100}>
-        <span style={{ ...type.super, color: C.type2 }}>Each one animated.</span>
+        <span style={{ ...type.super, color: C.type2 }}><Tr>Each one animated.</Tr></span>
       </SplitText>
       <Grain />
       {audio && <FilmAudio from={960} />}
@@ -338,7 +339,7 @@ const Plinth: React.FC<{ x: number; y: number; w: number; opacity: number }> = (
         height: w * 0.14,
         borderRadius: "50%",
         background: "radial-gradient(ellipse at 50% 40%, #3A3A3F, #1C1C1F 70%)",
-        boxShadow: "0 -2px 30px rgba(255,244,236,0.08)",
+        boxShadow: "0 -2px 30px rgba(242,248,254,0.08)",
       }}
     />
   </div>

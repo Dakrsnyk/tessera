@@ -38,10 +38,10 @@ export const WidgetLift: React.FC<{ audio?: boolean; home?: string; index?: numb
       ctx.fillStyle = light ? "rgba(255,255,255,0.35)" : "rgba(10,6,12,0.5)";
       ctx.fill();
       ctx.clip();
-      ctx.shadowColor = "rgba(255,224,204,0.9)";
+      ctx.shadowColor = "rgba(214,233,250,0.9)";
       ctx.shadowBlur = 60;
       ctx.lineWidth = 36;
-      ctx.strokeStyle = "rgba(255,190,160,0.25)";
+      ctx.strokeStyle = "rgba(150,200,240,0.25)";
       ctx.stroke();
       ctx.restore();
     }

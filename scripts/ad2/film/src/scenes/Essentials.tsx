@@ -58,7 +58,7 @@ const Money: React.FC<{ f: number }> = ({ f }) => {
           width: W,
           height: 2,
           background: "linear-gradient(to right, transparent, #FFF4EC 15%, #FFFFFF 50%, #FFF4EC 85%, transparent)",
-          boxShadow: "0 0 18px 3px rgba(255,224,204,0.55), 0 0 90px 18px rgba(255,122,89,0.18)",
+          boxShadow: "0 0 18px 3px rgba(214,233,250,0.55), 0 0 90px 18px rgba(78,155,224,0.18)",
           opacity: line,
           scale: `${line} 1`,
         }}
@@ -97,7 +97,7 @@ const Money: React.FC<{ f: number }> = ({ f }) => {
             width: 2,
             height: spendH,
             background: "#FFFFFF",
-            boxShadow: "0 0 14px 3px rgba(255,224,204,0.8), 0 0 60px 10px rgba(255,122,89,0.2)",
+            boxShadow: "0 0 14px 3px rgba(214,233,250,0.8), 0 0 60px 10px rgba(78,155,224,0.2)",
           }}
         />
       )}
@@ -148,7 +148,7 @@ const Week: React.FC<{ f: number }> = ({ f }) => {
               width: 2,
               height: h,
               background: "#FFF",
-              boxShadow: "0 0 14px 3px rgba(255,224,204,0.8)",
+              boxShadow: "0 0 14px 3px rgba(214,233,250,0.8)",
             }}
           />
         )}
@@ -157,7 +157,7 @@ const Week: React.FC<{ f: number }> = ({ f }) => {
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(120deg, rgba(255,244,236,0.10), transparent 45%, rgba(0,0,0,0.25))",
+            background: "linear-gradient(120deg, rgba(242,248,254,0.10), transparent 45%, rgba(0,0,0,0.25))",
           }}
         />
       </div>
@@ -214,7 +214,7 @@ const Habits: React.FC<{ f: number }> = ({ f }) => {
             height: radius * 2,
             borderRadius: "50%",
             border: "2px solid rgba(255,255,255,0.9)",
-            boxShadow: "0 0 18px 4px rgba(255,224,204,0.6)",
+            boxShadow: "0 0 18px 4px rgba(214,233,250,0.6)",
             opacity: 1 - reveal,
           }}
         />

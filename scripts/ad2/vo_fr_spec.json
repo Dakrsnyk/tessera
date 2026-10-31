@@ -1,0 +1,14 @@
+{
+ "voice": "ff_siwis",
+ "speed": 0.95,
+ "lang": "f",
+ "brand": {"Ardane": ""},
+ "films": {
+  "echantillon": {"chunks": [
+   [{"id": "F1", "text": "Toute ta vie. Un seul endroit.", "pause": 0.35, "speed": 1.0}],
+   [{"id": "F2", "text": "Ardane rassemble ta nutrition, ton sport, tes habitudes, ton planning et tes finances."}],
+   [{"id": "F3", "text": "Tes widgets. À ta façon.", "pause": 0.3}],
+   [{"id": "F4", "text": "Organise ta vie à ta façon.", "speed": 0.85}],
+   [{"id": "F5", "text": "Ardane."}]]}
+ }
+}

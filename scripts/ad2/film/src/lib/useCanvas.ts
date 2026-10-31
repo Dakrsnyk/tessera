@@ -23,16 +23,16 @@ export const roundRectPath = (ctx: CanvasRenderingContext2D, [x, y, w, h]: Rect,
   ctx.roundRect(x, y, w, h, r);
 };
 
-/** A vertical blade of light at x across a rectangle (2 px core, peach glow), drawn into a canvas. */
+/** A vertical blade of light at x across a rectangle (2 px core, pale-blue glow), drawn into a canvas. */
 export const drawBlade = (ctx: CanvasRenderingContext2D, x: number, top: number, height: number, strength = 1) => {
   if (strength <= 0) return;
   ctx.save();
   const g = ctx.createLinearGradient(x - 60, 0, x + 60, 0);
-  g.addColorStop(0, "rgba(255,122,89,0)");
-  g.addColorStop(0.4, `rgba(255,122,89,${0.18 * strength})`);
-  g.addColorStop(0.5, `rgba(255,224,204,${0.75 * strength})`);
-  g.addColorStop(0.6, `rgba(255,122,89,${0.18 * strength})`);
-  g.addColorStop(1, "rgba(255,122,89,0)");
+  g.addColorStop(0, "rgba(78,155,224,0)");
+  g.addColorStop(0.4, `rgba(78,155,224,${0.18 * strength})`);
+  g.addColorStop(0.5, `rgba(214,233,250,${0.75 * strength})`);
+  g.addColorStop(0.6, `rgba(78,155,224,${0.18 * strength})`);
+  g.addColorStop(1, "rgba(78,155,224,0)");
   ctx.fillStyle = g;
   ctx.fillRect(x - 60, top, 120, height);
   ctx.fillStyle = `rgba(255,255,255,${0.95 * strength})`;

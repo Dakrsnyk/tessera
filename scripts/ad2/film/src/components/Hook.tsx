@@ -4,6 +4,7 @@ import { useFilmFrame } from "../lib/time";
 import { Grain } from "./Grain";
 import { Seam } from "./Seam";
 import { SplitText } from "./SplitText";
+import { useT } from "../lib/i18n";
 
 /**
  * The hook (the first seconds of every film): a line of type opens from the seam, line by line, while the
@@ -30,11 +31,12 @@ export const hookSeamMask = (lines: number, on: number) => {
 
 export const HookText: React.FC<{ lines: string[]; from: number; to: number; raw?: boolean }> = ({ lines, from, to, raw }) => {
   const { top } = hookBlock(lines.length);
+  const t = useT();
   return (
     <>
       {lines.map((line, i) => (
         <SplitText key={i} raw={raw} from={from + 6 * i} exitAt={to + 3 * i} top={top + i * HOOK_LINE} height={HOOK_LINE}>
-          <span style={{ ...type.super, fontSize: 92, color: i === lines.length - 1 ? C.type1 : C.type1 }}>{line}</span>
+          <span style={{ ...type.super, fontSize: 92, color: i === lines.length - 1 ? C.type1 : C.type1 }}>{t(line)}</span>
         </SplitText>
       ))}
     </>

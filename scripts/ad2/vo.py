@@ -17,6 +17,13 @@ cfg = spec["films"][film]
 voice = cfg.get("voice", spec.get("voice", "af_heart"))
 speed = cfg.get("speed", spec.get("speed", 0.95))
 brand = spec.get("brand", {})
+# Per-line fixes for the 2026 campaign (speed, pause, solo), vo2026_overrides.json: {lang: {film: {id: {...}}}}.
+_ov_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vo2026_overrides.json")
+if os.path.exists(_ov_path):
+    _ov = json.load(open(_ov_path, encoding="utf-8")).get("en", {}).get(film, {})
+    for _chunk in cfg["chunks"]:
+        for _line in _chunk:
+            _line.update(_ov.get(_line["id"], {}))
 os.makedirs(out, exist_ok=True)
 SR = 24000
 
@@ -31,7 +38,7 @@ def tts_text(text):
     return text
 
 
-def synth(text):
+def synth(text, speed=speed):
     parts = [r.audio.numpy() for r in pipe(tts_text(text), voice=voice, speed=speed)]
     return np.concatenate(parts) if parts else np.zeros(1)
 
@@ -89,39 +96,42 @@ def pick_cuts(audio, weights):
     return list(best)
 
 
-def beats(text, pause):
+def beats(text, pause, spd=speed):
     """A line made of short beats (« Your meals. Your workout. What's due. Your week. »): Kokoro reads
     it in one breath, with no pause to lengthen, so each sentence is synthesised alone and the beats
     are joined by `pause` s of silence (one beat per card on screen)."""
     sentences = [t for t in re.split(r"(?<=[.?!])\s+", text) if t]
     gap = np.zeros(int(pause * SR), dtype=np.float32)
-    return np.concatenate([x for t in sentences for x in (trim(synth(t)), gap)][:-1])
+    return np.concatenate([x for t in sentences for x in (trim(synth(t, spd)), gap)][:-1])
 
 
 lines_out = []
 for chunk in cfg["chunks"]:
     ids = [line["id"] for line in chunk]
     text = " ".join(line["text"] for line in chunk)
-    audio = synth(text)
+    audio = synth(text, chunk[0].get("speed", speed))
     pieces = [audio]
-    if len(chunk) > 1:
+    if len(chunk) > 1 and any(line.get("solo") for line in chunk):
+        pieces = [synth(line["text"], line.get("speed", speed)) for line in chunk]
+    elif len(chunk) > 1:
         cuts = pick_cuts(audio, [len(line["text"]) for line in chunk])
         if cuts:
             bounds = [0] + [(a + b) // 2 for a, b in cuts] + [len(audio)]
             pieces = [audio[bounds[i]:bounds[i + 1]] for i in range(len(chunk))]
         else:
             print("chunk", ids, "could not be split: synthesising its lines one by one")
-            pieces = [synth(line["text"]) for line in chunk]
+            pieces = [synth(line["text"], line.get("speed", speed)) for line in chunk]
     for line, piece in zip(chunk, pieces):
-        piece = beats(line["text"], line["pause"]) if line.get("pause") else trim(piece)
+        piece = beats(line["text"], line["pause"], line.get("speed", speed)) if line.get("pause") else trim(piece)
         # Fades of 8 ms: no click at the cut.
         n = int(0.008 * SR)
         piece[:n] *= np.linspace(0, 1, n)
         piece[-n:] *= np.linspace(1, 0, n)
         path = os.path.join(out, f"{film}-{line['id']}.wav")
         sf.write(path, piece.astype(np.float32), SR, subtype="FLOAT")
-        lines_out.append({**line, "file": path, "duration": round(len(piece) / SR, 3)})
-        print(f"{film} {line['id']}: {len(piece) / SR:.2f} s (slot {line.get('max', '?')} s)  {line['text']}")
+        lines_out.append({**line, "file": path, "duration": round(len(piece) / SR, 3), "fits": bool(len(piece) / SR <= line.get("max", 99))})
+        line["fits"] = bool(len(piece) / SR <= line.get("max", 99))
+        print(f"{film} {line['id']}: {len(piece) / SR:.2f} s{'' if line['fits'] else '  ** OVER SLOT **'} (slot {line.get('max', '?')} s)  {line['text']}")
 
 # ASR check and word timings.
 from faster_whisper import WhisperModel

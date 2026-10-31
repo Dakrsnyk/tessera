@@ -1,0 +1,413 @@
+{
+ "_doc": "On-screen texts of the 2026 campaign (scripts/ad3). key -> { en, fr }. Same format as scripts/ad2/film/src/lib/i18n.json (to be merged into it by production 19.4). French uses the informal 'tu' (Toute ta vie, Organise ta vie à ta façon); the v2 file used 'vous'. Numbers shown on screen come from the real app captures, never typed here. Key prefixes: common, main, nutrition, fitness, lifestyle, widgets, finance, organisation, short1-3.",
+ "strings": {
+  "common.wholeLife": {
+   "en": "Your whole life.",
+   "fr": "Toute ta vie."
+  },
+  "common.onePlace": {
+   "en": "One place.",
+   "fr": "Un seul endroit."
+  },
+  "common.wholeLifeOnePlace": {
+   "en": "Your whole life. One place.",
+   "fr": "Toute ta vie. Un seul endroit."
+  },
+  "common.widgetsYourWay": {
+   "en": "Your widgets. Your way.",
+   "fr": "Tes widgets. À ta façon."
+  },
+  "common.lifeWidgetsWay": {
+   "en": "Your life. Your widgets. Your way.",
+   "fr": "Ta vie. Tes widgets. À ta façon."
+  },
+  "common.everythingOnePlace": {
+   "en": "Everything that matters, in one place.",
+   "fr": "Tout ce qui compte, au même endroit."
+  },
+  "common.organizeYourWay": {
+   "en": "Organize your life, your way.",
+   "fr": "Organise ta vie à ta façon."
+  },
+  "common.beautifullyOrganized": {
+   "en": "Your life, beautifully organized.",
+   "fr": "Ta vie, joliment organisée."
+  },
+  "common.oneAppEntireLife": {
+   "en": "One app. Your entire life.",
+   "fr": "Une app. Toute ta vie."
+  },
+  "common.yourIphoneYourArdane": {
+   "en": "Your iPhone. Your life. Your Ardane.",
+   "fr": "Ton iPhone. Ta vie. Ton Ardane."
+  },
+  "common.wordmark": {
+   "en": "ARDANE",
+   "fr": "ARDANE"
+  },
+  "common.comingSoon": {
+   "en": "Coming soon to the App Store",
+   "fr": "Bientôt sur l’App Store"
+  },
+  "common.comingSoonShort": {
+   "en": "Coming soon",
+   "fr": "Bientôt"
+  },
+  "common.withPremium": {
+   "en": "With Premium",
+   "fr": "Avec Premium"
+  },
+  "common.demoData": {
+   "en": "Demo data.",
+   "fr": "Données de démonstration."
+  },
+  "common.estimate": {
+   "en": "Estimate",
+   "fr": "Estimation"
+  },
+  "common.homeScreen": {
+   "en": "Home Screen",
+   "fr": "Écran d’accueil"
+  },
+  "common.lockScreen": {
+   "en": "Lock Screen",
+   "fr": "Écran verrouillé"
+  },
+  "common.hlNutrition": {
+   "en": "Nutrition",
+   "fr": "Nutrition"
+  },
+  "common.hlFitness": {
+   "en": "Fitness",
+   "fr": "Fitness"
+  },
+  "common.hlPlanning": {
+   "en": "Planning",
+   "fr": "Planning"
+  },
+  "common.hlFinances": {
+   "en": "Finances",
+   "fr": "Finances"
+  },
+  "common.hlHabits": {
+   "en": "Habits",
+   "fr": "Habitudes"
+  },
+  "common.hlGoals": {
+   "en": "Goals",
+   "fr": "Objectifs"
+  },
+  "common.hlStudio": {
+   "en": "Studio",
+   "fr": "Studio"
+  },
+  "main.dashboard": {
+   "en": "Your iPhone. Your dashboard.",
+   "fr": "Ton iPhone. Ton tableau de bord."
+  },
+  "main.decide": {
+   "en": "You decide how it looks.",
+   "fr": "Tu décides de son allure."
+  },
+  "main.glance": {
+   "en": "One glance away.",
+   "fr": "À portée de regard."
+  },
+  "nutrition.title": {
+   "en": "Know what you eat.",
+   "fr": "Sache ce que tu manges."
+  },
+  "nutrition.scanBarcode": {
+   "en": "Scan a barcode",
+   "fr": "Scanne un code-barres"
+  },
+  "nutrition.orPhoto": {
+   "en": "or photograph your dish",
+   "fr": "ou photographie ton plat"
+  },
+  "nutrition.verified": {
+   "en": "Verified",
+   "fr": "Vérifié"
+  },
+  "nutrition.calories": {
+   "en": "Calories",
+   "fr": "Calories"
+  },
+  "nutrition.protein": {
+   "en": "Protein",
+   "fr": "Protéines"
+  },
+  "nutrition.carbs": {
+   "en": "Carbs",
+   "fr": "Glucides"
+  },
+  "nutrition.fat": {
+   "en": "Fat",
+   "fr": "Lipides"
+  },
+  "nutrition.goal": {
+   "en": "Set a goal. Get your targets.",
+   "fr": "Fixe un objectif. Obtiens tes cibles."
+  },
+  "nutrition.estimatesNote": {
+   "en": "Estimates, adjustable at any time.",
+   "fr": "Des estimations, modifiables à tout moment."
+  },
+  "nutrition.homeLock": {
+   "en": "Home Screen. Lock Screen.",
+   "fr": "Écran d’accueil. Écran verrouillé."
+  },
+  "nutrition.scanFromLock": {
+   "en": "Scan from your Lock Screen",
+   "fr": "Scanne depuis l’écran verrouillé"
+  },
+  "nutrition.needsUnlock": {
+   "en": "iPhone unlocked.",
+   "fr": "iPhone déverrouillé."
+  },
+  "fitness.title": {
+   "en": "Every set. Counted.",
+   "fr": "Chaque série. Comptée."
+  },
+  "fitness.setCounter": {
+   "en": "Set 3 of 4",
+   "fr": "Série 3 sur 4"
+  },
+  "fitness.rest": {
+   "en": "Rest",
+   "fr": "Repos"
+  },
+  "fitness.setDone": {
+   "en": "Set done",
+   "fr": "Série faite"
+  },
+  "fitness.fromLock": {
+   "en": "Right from your Lock Screen.",
+   "fr": "Directement depuis l’écran verrouillé."
+  },
+  "fitness.exercises": {
+   "en": "Every exercise, move by move.",
+   "fr": "Chaque exercice, mouvement par mouvement."
+  },
+  "fitness.progress": {
+   "en": "Your progress.",
+   "fr": "Ta progression."
+  },
+  "fitness.liveActivity": {
+   "en": "Live Activity",
+   "fr": "Activité en direct"
+  },
+  "lifestyle.title": {
+   "en": "A day with Ardane.",
+   "fr": "Une journée avec Ardane."
+  },
+  "lifestyle.morning": {
+   "en": "Morning",
+   "fr": "Matin"
+  },
+  "lifestyle.noon": {
+   "en": "Midday",
+   "fr": "Midi"
+  },
+  "lifestyle.evening": {
+   "en": "Evening",
+   "fr": "Soir"
+  },
+  "lifestyle.night": {
+   "en": "Night",
+   "fr": "Nuit"
+  },
+  "lifestyle.t0645": {
+   "en": "6:45",
+   "fr": "6 h 45"
+  },
+  "lifestyle.t0815": {
+   "en": "8:15",
+   "fr": "8 h 15"
+  },
+  "lifestyle.t1230": {
+   "en": "12:30",
+   "fr": "12 h 30"
+  },
+  "lifestyle.t1800": {
+   "en": "6:00 PM",
+   "fr": "18 h"
+  },
+  "lifestyle.t2200": {
+   "en": "10:00 PM",
+   "fr": "22 h"
+  },
+  "lifestyle.wake": {
+   "en": "Wake up to what’s ahead.",
+   "fr": "Réveille-toi sur ce qui t’attend."
+  },
+  "lifestyle.breakfast": {
+   "en": "Scan. Log. Done.",
+   "fr": "Scanne. Note. C’est fait."
+  },
+  "lifestyle.left": {
+   "en": "What’s left to eat.",
+   "fr": "Ce qu’il te reste à manger."
+  },
+  "lifestyle.train": {
+   "en": "Time to train.",
+   "fr": "L’heure de s’entraîner."
+  },
+  "lifestyle.bed": {
+   "en": "Money. Habits. Done for today.",
+   "fr": "Budget. Habitudes. Fini pour aujourd’hui."
+  },
+  "widgets.title": {
+   "en": "Your widgets. Your way.",
+   "fr": "Tes widgets. À ta façon."
+  },
+  "widgets.pick": {
+   "en": "Pick what matters.",
+   "fr": "Choisis ce qui compte."
+  },
+  "widgets.style": {
+   "en": "Style",
+   "fr": "Style"
+  },
+  "widgets.colors": {
+   "en": "Colors",
+   "fr": "Couleurs"
+  },
+  "widgets.background": {
+   "en": "Background",
+   "fr": "Fond"
+  },
+  "widgets.font": {
+   "en": "Font",
+   "fr": "Police"
+  },
+  "widgets.profileAthlete": {
+   "en": "The athlete",
+   "fr": "Le sportif"
+  },
+  "widgets.profileStudent": {
+   "en": "The student",
+   "fr": "L’étudiant"
+  },
+  "widgets.profileMinimal": {
+   "en": "The minimalist",
+   "fr": "Le minimaliste"
+  },
+  "widgets.profilePlanner": {
+   "en": "The planner",
+   "fr": "L’organisé"
+  },
+  "widgets.lockToo": {
+   "en": "And your Lock Screen, too.",
+   "fr": "Et ton écran verrouillé aussi."
+  },
+  "widgets.dashboard": {
+   "en": "Your iPhone. Your dashboard.",
+   "fr": "Ton iPhone. Ton tableau de bord."
+  },
+  "widgets.threeFree": {
+   "en": "3 widgets saved, free.",
+   "fr": "3 widgets enregistrés, gratuits."
+  },
+  "finance.title": {
+   "en": "Know where your money stands.",
+   "fr": "Sache où en est ton argent."
+  },
+  "finance.income": {
+   "en": "Income",
+   "fr": "Revenus"
+  },
+  "finance.expenses": {
+   "en": "Expenses",
+   "fr": "Dépenses"
+  },
+  "finance.balance": {
+   "en": "Balance",
+   "fr": "Solde"
+  },
+  "finance.month": {
+   "en": "Month",
+   "fr": "Mois"
+  },
+  "finance.threeMonths": {
+   "en": "3 months",
+   "fr": "3 mois"
+  },
+  "finance.year": {
+   "en": "Year",
+   "fr": "Année"
+  },
+  "finance.bills": {
+   "en": "Upcoming bills",
+   "fr": "Factures à venir"
+  },
+  "finance.savings": {
+   "en": "Savings goals",
+   "fr": "Objectifs d’épargne"
+  },
+  "finance.categories": {
+   "en": "By category",
+   "fr": "Par catégorie"
+  },
+  "finance.manualNote": {
+   "en": "You enter it. You stay in control.",
+   "fr": "Tu la saisis. Tu gardes le contrôle."
+  },
+  "organisation.title": {
+   "en": "Your habits. Your week. Your goals.",
+   "fr": "Tes habitudes. Ta semaine. Tes objectifs."
+  },
+  "organisation.streak": {
+   "en": "Streak",
+   "fr": "Série"
+  },
+  "organisation.week": {
+   "en": "Your week",
+   "fr": "Ta semaine"
+  },
+  "organisation.top3": {
+   "en": "Your top 3",
+   "fr": "Ton top 3"
+  },
+  "organisation.everywhere": {
+   "en": "Home Screen. Lock Screen.",
+   "fr": "Écran d’accueil. Écran verrouillé."
+  },
+  "organisation.goalsRow": {
+   "en": "Goals, in one glance.",
+   "fr": "Tes objectifs, d’un coup d’œil."
+  },
+  "short1.line1": {
+   "en": "Your whole life.",
+   "fr": "Toute ta vie."
+  },
+  "short1.line2": {
+   "en": "One place.",
+   "fr": "Un seul endroit."
+  },
+  "short2.build": {
+   "en": "Build your own Ardane.",
+   "fr": "Compose ton propre Ardane."
+  },
+  "short2.pick": {
+   "en": "Pick your widgets.",
+   "fr": "Choisis tes widgets."
+  },
+  "short2.style": {
+   "en": "Choose your style.",
+   "fr": "Choisis ton style."
+  },
+  "short3.life": {
+   "en": "Your life.",
+   "fr": "Ta vie."
+  },
+  "short3.widgets": {
+   "en": "Your widgets.",
+   "fr": "Tes widgets."
+  },
+  "short3.way": {
+   "en": "Your way.",
+   "fr": "À ta façon."
+  }
+ }
+}
