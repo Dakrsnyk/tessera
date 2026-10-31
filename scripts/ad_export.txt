@@ -302,27 +302,27 @@ widget id-blue-macros-m kind=macros family=medium scale=3 palette=midnight schem
 widget id-blue-nextSet-m kind=nextSet family=medium scale=3 palette=midnight scheme=dark
 widget id-blue-budgetLeft-s kind=budgetLeft family=small scale=4 palette=midnight scheme=dark
 widget id-blue-priorities-s kind=priorities family=small scale=4 palette=midnight scheme=dark
-widget id-blue-calories-s kind=calories family=small scale=4 palette=midnight scheme=dark
+widget id-blue-calories-s kind=caloriesLeft family=small scale=4 palette=midnight scheme=dark
 widget id-blue-habits-m kind=habits family=medium scale=3 palette=midnight scheme=dark
 widget id-blue-weekView-m kind=weekView family=medium scale=3 palette=midnight scheme=dark
 widget id-red-macros-m kind=macros family=medium scale=3 palette=cherry scheme=dark
 widget id-red-nextSet-m kind=nextSet family=medium scale=3 palette=cherry scheme=dark
 widget id-red-budgetLeft-s kind=budgetLeft family=small scale=4 palette=cherry scheme=dark
 widget id-red-priorities-s kind=priorities family=small scale=4 palette=cherry scheme=dark
-widget id-red-calories-s kind=calories family=small scale=4 palette=cherry scheme=dark
+widget id-red-calories-s kind=caloriesLeft family=small scale=4 palette=cherry scheme=dark
 widget id-red-habits-m kind=habits family=medium scale=3 palette=cherry scheme=dark
 widget id-red-weekView-m kind=weekView family=medium scale=3 palette=cherry scheme=dark
 widget id-pink-macros-m kind=macros family=medium scale=3 palette=neon scheme=dark
 widget id-pink-nextSet-m kind=nextSet family=medium scale=3 palette=neon scheme=dark
 widget id-pink-budgetLeft-s kind=budgetLeft family=small scale=4 palette=neon scheme=dark
 widget id-pink-priorities-s kind=priorities family=small scale=4 palette=neon scheme=dark
-widget id-pink-calories-s kind=calories family=small scale=4 palette=neon scheme=dark
+widget id-pink-calories-s kind=caloriesLeft family=small scale=4 palette=neon scheme=dark
 widget id-pink-habits-m kind=habits family=medium scale=3 palette=neon scheme=dark
 widget id-pink-weekView-m kind=weekView family=medium scale=3 palette=neon scheme=dark
 widget id-silver-macros-m kind=macros family=medium scale=3 palette=mono
 widget id-silver-nextSet-m kind=nextSet family=medium scale=3 palette=mono
 widget id-silver-budgetLeft-s kind=budgetLeft family=small scale=4 palette=mono
 widget id-silver-priorities-s kind=priorities family=small scale=4 palette=mono
-widget id-silver-calories-s kind=calories family=small scale=4 palette=mono
+widget id-silver-calories-s kind=caloriesLeft family=small scale=4 palette=mono
 widget id-silver-habits-m kind=habits family=medium scale=3 palette=mono
 widget id-silver-weekView-m kind=weekView family=medium scale=3 palette=mono
