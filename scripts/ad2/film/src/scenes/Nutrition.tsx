@@ -1,6 +1,6 @@
 import { ThreeCanvas } from "@remotion/three";
 import { useMemo } from "react";
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate } from "remotion";
 import * as THREE from "three";
 import { drawEan, BarcodeLabel, LABEL } from "../components/Barcode";
 import { Callout } from "../components/Callout";
@@ -9,7 +9,7 @@ import { Grain } from "../components/Grain";
 import { CameraLook, PHONE, Phone3D, SCREEN, StudioEnvironment } from "../components/Phone3D";
 import { Seam } from "../components/Seam";
 import { AXIS, C, clamp, ease, H, useFontsReady, W } from "../lib/brand";
-import { HERO_WIDGETS, heroHome, k, project, type Rect } from "../lib/kit";
+import { HERO_WIDGETS, heroHome, k, project, type Rect, asset } from "../lib/kit";
 import { useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
@@ -269,7 +269,7 @@ export const Nutrition: React.FC<{ audio?: boolean; look?: "dark" | "light" }> =
         filter: half ? `blur(${12 * split}px)` : undefined,
       }}
     >
-      <Img src={staticFile(SHEET)} style={{ position: "absolute", left: 0, top: -SHEET_TOP * pane.s, width: 1206 * pane.s }} />
+      <Img src={asset(SHEET)} style={{ position: "absolute", left: 0, top: -SHEET_TOP * pane.s, width: 1206 * pane.s }} />
       {frame >= 390 && tap < 1 && (
         <div
           style={{
@@ -371,7 +371,7 @@ const Crop: React.FC<{ file: string; c: (typeof CROPS)[number]; fan: number; flo
         filter: `blur(${c.depth * 0.6}px) brightness(${1 - c.depth * 0.06})`,
       }}
     >
-      <Img src={staticFile(file)} style={{ position: "absolute", left: -sx * c.scale, top: -sy * c.scale, width: 1206 * c.scale }} />
+      <Img src={asset(file)} style={{ position: "absolute", left: -sx * c.scale, top: -sy * c.scale, width: 1206 * c.scale }} />
     </div>
   );
 };

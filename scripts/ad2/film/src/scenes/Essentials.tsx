@@ -1,9 +1,9 @@
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate } from "remotion";
 import { FilmAudio } from "../components/FilmAudio";
 import { Grain } from "../components/Grain";
 import { Seam } from "../components/Seam";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
-import { heroWidget, k } from "../lib/kit";
+import { heroWidget, k, asset } from "../lib/kit";
 import { useFilmFrame } from "../lib/time";
 
 /** Local frame 0 = f2520 of the main film (42.0 s). Money · Week · Habits, one bar each (§5.2 shots 19–21). */
@@ -66,7 +66,7 @@ const Money: React.FC<{ f: number }> = ({ f }) => {
       {/* Rises from behind the line (masked under it). */}
       <div style={{ position: "absolute", left: 0, top: 0, width: W, height: LINE_Y, overflow: "hidden" }}>
         <Img
-          src={staticFile(BUDGET)}
+          src={asset(BUDGET)}
           style={{
             position: "absolute",
             left: AXIS - size / 2,
@@ -78,7 +78,7 @@ const Money: React.FC<{ f: number }> = ({ f }) => {
         />
       </div>
       <Img
-        src={staticFile(SPENDING)}
+        src={asset(SPENDING)}
         style={{
           position: "absolute",
           left: AXIS - spendW / 2,
@@ -115,7 +115,7 @@ const Week: React.FC<{ f: number }> = ({ f }) => {
   const h = TABLE.h * s;
   const page = (src: string, dx: number) => (
     <div style={{ position: "absolute", left: dx, top: 0, width: w, height: h, overflow: "hidden", borderRadius: 36 }}>
-      <Img src={staticFile(src)} style={{ position: "absolute", left: -TABLE.x * s, top: -TABLE.y * s, width: 1206 * s }} />
+      <Img src={asset(src)} style={{ position: "absolute", left: -TABLE.x * s, top: -TABLE.y * s, width: 1206 * s }} />
     </div>
   );
   return (
@@ -178,7 +178,7 @@ const Habits: React.FC<{ f: number }> = ({ f }) => {
   const left = cx - CHECK.x * scale;
   const top = cy - CHECK.y * scale;
   const img = (src: string, extra?: React.CSSProperties) => (
-    <Img src={staticFile(src)} style={{ position: "absolute", left, top, width: 1206 * scale, ...extra }} />
+    <Img src={asset(src)} style={{ position: "absolute", left, top, width: 1206 * scale, ...extra }} />
   );
   const radius = reveal * 1400 * scale;
   return (
@@ -220,7 +220,7 @@ const Habits: React.FC<{ f: number }> = ({ f }) => {
         />
       )}
       <Img
-        src={staticFile(STREAK)}
+        src={asset(STREAK)}
         style={{
           position: "absolute",
           left: 470 + 700 * (1 - streak),

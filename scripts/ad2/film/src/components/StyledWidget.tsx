@@ -1,5 +1,5 @@
-import { Easing, Img, interpolate, staticFile } from "remotion";
-import type { Rect } from "../lib/kit";
+import { Easing, Img, interpolate } from "remotion";
+import { asset, type Rect } from "../lib/kit";
 import { Seam } from "./Seam";
 
 /**
@@ -28,8 +28,8 @@ export const StyledWidget: React.FC<{ base: string; styles: { at: number; file: 
   return (
     <>
       <div style={{ position: "absolute", left: x, top: y, width: w, height: h, filter: `drop-shadow(0 ${30 * lift}px ${70 * lift}px rgba(0,0,0,0.6))` }}>
-        <Img src={staticFile(cur)} style={full} />
-        {nxt && <Img src={staticFile(nxt)} style={{ ...full, clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)` }} />}
+        <Img src={asset(cur)} style={full} />
+        {nxt && <Img src={asset(nxt)} style={{ ...full, clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)` }} />}
       </div>
       {nxt && <Seam x={x + w * wipe} top={y} height={h} spread={0.45} intensity={Math.sin(Math.PI * wipe)} />}
     </>

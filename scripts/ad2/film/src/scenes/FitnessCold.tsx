@@ -1,8 +1,8 @@
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate } from "remotion";
 import { Grain } from "../components/Grain";
 import { Seam } from "../components/Seam";
 import { AXIS, C, clamp, H } from "../lib/brand";
-import { k } from "../lib/kit";
+import { k, asset } from "../lib/kit";
 import { useFilmFrame } from "../lib/time";
 
 /**
@@ -36,7 +36,7 @@ export const FitnessCold: React.FC<{ audio?: boolean }> = () => {
   const appear = interpolate(frame, [0, 14], [0, 1], { ...clamp, easing: Easing.bezier(0.16, 1, 0.3, 1) });
   const figBox = { x: AXIS - 640, y: 760, w: 1280 };
   const figure = (i: number, startAt: number, extra?: React.CSSProperties) => (
-    <Img src={staticFile(fig(i, frame - startAt))} style={{ position: "absolute", left: figBox.x, top: figBox.y, width: figBox.w, ...extra }} />
+    <Img src={asset(fig(i, frame - startAt))} style={{ position: "absolute", left: figBox.x, top: figBox.y, width: figBox.w, ...extra }} />
   );
   const startOf = (i: number) => (i === 0 ? 0 : CHANGE[i - 1]);
   return (
@@ -50,7 +50,7 @@ export const FitnessCold: React.FC<{ audio?: boolean }> = () => {
       </div>
       {changing >= 0 && <Seam x={figBox.x + figBox.w * wipe} top={figBox.y} height={760} spread={0.5} intensity={Math.sin(Math.PI * wipe)} />}
       <Img
-        src={staticFile(REST[second])}
+        src={asset(REST[second])}
         style={{ position: "absolute", left: LA.x, top: LA.y, width: LA.w, height: LA.h, opacity: appear, filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.6))" }}
       />
       <Grain />

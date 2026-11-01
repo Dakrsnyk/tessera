@@ -1,33 +1,91 @@
-"""Renders a film of the campaign in a format and a language (Remotion, 60 fps), from ~/ardane-tools/film.
+"""Renders the 10 films of the 2026 campaign in a format and a language (Remotion, 60 fps), from ~/ardane-tools/film.
 
     python -X utf8 scripts/ad2/render_all.py still  <film|all> [--format 4x5|all] [--lang fr|all] [--out NAME]
     python -X utf8 scripts/ad2/render_all.py video  <film|all> [--format 4x5|all] [--lang fr|all] [--out NAME]
-    python -X utf8 scripts/ad2/render_all.py scene  <Scene>    [--format ...] [--lang ...] [--frame N]
+    python -X utf8 scripts/ad2/render_all.py index      # list the captures of public/kit and public/kit2026 (src/ad26/available.json)
+    python -X utf8 scripts/ad2/render_all.py check      # names of captures the shots ask for and no kit has yet
 
-films: main s30 s15 s8 fitness nutrition perso. Formats: 9x16 1x1 4x5 16x9. Languages: en fr.
-- still: one image per segment of the film (at its middle), to check every scene before a full render.
-- video: the whole film (H.264, CRF 16, BT.709). LONG: measure with `still` first (see the time per image).
-- scene: stills of one scene (a frame, default its last one) for quick checks of layout.
-Output: pub/film2026/<OUT>/ (OUT defaults to "default"; pub/ is ignored by Git):
-  <film>-<format>-<lang>.mp4 and stills/<film>-<format>-<lang>-f<frame>.png.
-The voice-over of a language is public/audio/<lang>/mix-<film>.wav; until it exists the English mix plays (warned).
+films: main nutrition fitness lifestyle widgets finance organisation short1 short2 short3.
+Compositions: FilmMain FilmNutrition2 FilmFitness2 FilmLifestyle FilmWidgets FilmFinance FilmOrganisation FilmShort1/2/3.
+Formats: 9x16 1x1 4x5 16x9. Languages: en fr.
+- still: one image per shot of the storyboard (at its middle), to check every shot before a full render.
+- video: the whole film (H.264, CRF 16, BT.709, 60 fps). LONG: measure with `still` first (time per image).
+Output: pub/film2026/<OUT>/ (OUT defaults to the delivery folder of the film: 01_Ad_Main ... 08_Ad_Short; use
+`--out check` for control renders; pub/ is ignored by Git): <film>-<format>-<lang>.mp4 and stills/<film>-<format>-<lang>-f<frame>.png.
+The voice-over of a language is public/audio/<lang>/mix-<film>.wav (mixed by audio2026.py: pub/film2026/audio/<lang>/);
+until it exists the film renders silent (warned).
 The sources must be synchronised first: python -X utf8 scripts/ad2/film_sync.py import
 """
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 WORK = os.path.join(os.path.expanduser("~"), "ardane-tools", "film")
-CUTS = os.path.join(REPO, "scripts", "ad2", "film", "src", "films", "cuts.json")
-COMP = {"main": "MainFilm", "s30": "Film30", "s15": "Film15", "s8": "Film8", "fitness": "FilmFitness", "nutrition": "FilmNutrition", "perso": "FilmPerso"}
-SCENE_LENGTH = {"Opening": 360, "Universes": 600, "Studio": 360, "Fitness": 600, "LockScreen": 360, "Nutrition": 600, "Daylight": 90, "Essentials": 360, "Gather": 300, "Close": 300}
+SRC = os.path.join(REPO, "scripts", "ad2", "film", "src")
+FILMS_TSX = os.path.join(SRC, "ad26", "films.tsx")
+# film -> (composition, frames, delivery folder); the frames are those of the storyboards (60 fps).
+FILMS = {
+    "main": ("FilmMain", 2700, "01_Ad_Main"),
+    "nutrition": ("FilmNutrition2", 1440, "02_Ad_Nutrition"),
+    "fitness": ("FilmFitness2", 1440, "03_Ad_Fitness"),
+    "lifestyle": ("FilmLifestyle", 2520, "04_Ad_Lifestyle"),
+    "widgets": ("FilmWidgets", 1800, "05_Ad_Widgets"),
+    "finance": ("FilmFinance", 1140, "06_Ad_Finance"),
+    "organisation": ("FilmOrganisation", 1440, "07_Ad_Organization"),
+    "short1": ("FilmShort1", 480, "08_Ad_Short"),
+    "short2": ("FilmShort2", 480, "08_Ad_Short"),
+    "short3": ("FilmShort3", 480, "08_Ad_Short"),
+}
+FUNC = {"widgets": "widgetsFilm"}
 FORMATS = ["9x16", "1x1", "4x5", "16x9"]
 LANGS = ["en", "fr"]
 NPX = "npx.cmd" if os.name == "nt" else "npx"
+
+
+def shots(film):
+    """(start, length) in frames of each shot of a film, read from ad26/films.tsx (the [start s, length s, <element>] rows)."""
+    text = open(FILMS_TSX, encoding="utf8").read()
+    name = FUNC.get(film, film)
+    m = re.search(r"const %s = \(\): Shot\[\] =>(.*?)(?=\nconst \w+ = \(\): Shot\[\]|\nconst SHOTS)" % name, text, re.S)
+    rows = re.findall(r"\[\s*([\d.]+),\s*([\d.]+),\s*(?:<|profile\()", m.group(1))
+    return [(round(float(a) * 60), round(float(b) * 60)) for a, b in rows]
+
+
+def index_kit():
+    """Writes src/ad26/available.json (what exists in public/kit and public/kit2026/<lang>) in the repo and in the work folder."""
+    pub = os.path.join(WORK, "public")
+
+    def names(d):
+        return sorted(f[:-4] for f in os.listdir(d) if f.endswith(".png")) if os.path.isdir(d) else []
+
+    data = {"kit": names(os.path.join(pub, "kit")), "kit2026": {l: names(os.path.join(pub, "kit2026", l)) for l in ("fr", "en")}}
+    for root in (SRC, os.path.join(WORK, "src")):
+        os.makedirs(os.path.join(root, "ad26"), exist_ok=True)
+        json.dump(data, open(os.path.join(root, "ad26", "available.json"), "w"))
+    return data
+
+
+def check_assets():
+    """Capture names asked by ad26/*.tsx (string literals of kit-like names) that no kit has: to capture."""
+    data = index_kit()
+    have = set(data["kit"]) | set(data["kit2026"]["fr"]) | set(data["kit2026"]["en"])
+    asked = set()
+    for fn in os.listdir(os.path.join(SRC, "ad26")):
+        if fn.endswith(".tsx"):
+            t = open(os.path.join(SRC, "ad26", fn), encoding="utf8").read()
+            asked |= set(re.findall(r'(?:name|wall|lock|scr)(?:=|:|\()\s*\{?"([a-zA-Z0-9-]+)"', t))
+            asked |= set(re.findall(r'\bscr\("([a-zA-Z0-9-]+)"\)', t))
+            asked |= set(re.findall(r'name: "([a-zA-Z0-9-]+)"', t))
+    asked = {a for a in asked if re.match(r"^(app|home|lock|scan|studio|macros|calories|nextSet|budgetLeft|priorities|weekView|timetable|habits|habitStreak|todaysWorkout|trainingStreak|upNext|spendingByCategory|quickSpend|quickFood|wall|myday|mywidgets|nutrition|live|icons|setup|demo)", a)}
+    for a in sorted(asked - have):
+        print("missing:", a)
+    new = {l: len(data["kit2026"][l]) for l in ("fr", "en")}
+    print(f"{len(asked)} names asked, {len(asked - have)} missing; kit2026: {new}")
 
 
 def run(args):
@@ -42,53 +100,59 @@ def bundle():
     return out
 
 
-def audio_lang(film, lang):
-    if lang == "en" or os.path.exists(os.path.join(WORK, "public", "audio", lang, f"mix-{film}.wav")):
-        return lang
-    print(f"  ! no voice-over for {lang} ({film}): the English mix plays")
-    return "en"
+def audio_for(film, lang):
+    """audio props of a render: (audioLang, audio?)."""
+    if os.path.exists(os.path.join(WORK, "public", "audio", lang, f"mix-{film}.wav")):
+        return lang, True
+    print(f"  ! no voice-over for {lang} ({film}): silent render")
+    return lang, False
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["still", "video", "scene"])
-    ap.add_argument("target")
+    ap.add_argument("mode", choices=["still", "video", "index", "check"])
+    ap.add_argument("target", nargs="?", default="all")
     ap.add_argument("--format", default="9x16")
     ap.add_argument("--lang", default="en")
-    ap.add_argument("--out", default="default")
-    ap.add_argument("--frame", type=int)
+    ap.add_argument("--out", default=None)
+    ap.add_argument("--shot", type=int, help="still: only this shot (0-based)")
     a = ap.parse_args()
+    if a.mode == "index":
+        d = index_kit()
+        print(f"{len(d['kit'])} old-kit captures, kit2026: " + ", ".join(f"{l} {len(v)}" for l, v in d["kit2026"].items()))
+        return
+    if a.mode == "check":
+        check_assets()
+        return
+    index_kit()
     formats = FORMATS if a.format == "all" else [a.format]
     langs = LANGS if a.lang == "all" else [a.lang]
-    out_dir = os.path.join(REPO, "pub", "film2026", a.out)
-    os.makedirs(os.path.join(out_dir, "stills"), exist_ok=True)
-    cuts = json.load(open(CUTS, encoding="utf8"))["films"]
-    films = list(COMP) if a.target == "all" else [a.target]
+    films = list(FILMS) if a.target == "all" else [a.target]
     serve = bundle()
     t0 = time.time()
     count = 0
-    for fmt in formats:
-        for lang in langs:
-            if a.mode == "scene":
-                frame = a.frame if a.frame is not None else SCENE_LENGTH[a.target] - 1
-                png = os.path.join(out_dir, "stills", f"{a.target}-{fmt}-{lang}-f{frame}.png")
-                run(["still", serve, a.target, png, f"--frame={frame}", f"--props={json.dumps({'format': fmt, 'lang': lang})}"])
-                count += 1
-                continue
-            for film in films:
-                props = json.dumps({"format": fmt, "lang": lang, "audioLang": audio_lang(film, lang)})
+    for film in films:
+        comp, frames, folder = FILMS[film]
+        out_dir = os.path.join(REPO, "pub", "film2026", a.out or folder)
+        os.makedirs(os.path.join(out_dir, "stills"), exist_ok=True)
+        for fmt in formats:
+            for lang in langs:
+                audio_lang, has_audio = audio_for(film, lang)
                 if a.mode == "still":
-                    for seg in cuts[film]["segments"]:
-                        length = seg["input"][-1]
-                        frame = min(cuts[film]["length"] - 1, seg["at"] + length // 2)
+                    props = json.dumps({"format": fmt, "lang": lang, "audioLang": audio_lang, "audio": False})
+                    for i, (start, length) in enumerate(shots(film)):
+                        if a.shot is not None and i != a.shot:
+                            continue
+                        frame = min(frames - 1, start + length // 2)
                         png = os.path.join(out_dir, "stills", f"{film}-{fmt}-{lang}-f{frame}.png")
-                        run(["still", serve, COMP[film], png, f"--frame={frame}", f"--props={props}"])
+                        run(["still", serve, comp, png, f"--frame={frame}", f"--props={props}"])
                         count += 1
                 else:
+                    props = json.dumps({"format": fmt, "lang": lang, "audioLang": audio_lang, "audio": has_audio})
                     mp4 = os.path.join(out_dir, f"{film}-{fmt}-{lang}.mp4")
-                    run(["render", serve, COMP[film], mp4, f"--props={props}", "--image-format=png", "--crf=16", "--color-space=bt709"])
+                    run(["render", serve, comp, mp4, f"--props={props}", "--image-format=png", "--crf=16", "--color-space=bt709"])
                     count += 1
-    print(f"{count} render(s) in {time.time() - t0:.0f} s -> {out_dir}")
+    print(f"{count} render(s) in {time.time() - t0:.0f} s")
 
 
 if __name__ == "__main__":

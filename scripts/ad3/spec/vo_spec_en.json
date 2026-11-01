@@ -537,6 +537,190 @@
      }
     ]
    ]
+  },
+  "v3main": {
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your life isn't one thing.",
+      "start": 0.6,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "H2",
+      "text": "Why manage it in ten different apps?",
+      "start": 2.9,
+      "max": 2.6
+     }
+    ],
+    [
+     {
+      "id": "V3",
+      "text": "Meet Ardane.",
+      "start": 7.6,
+      "max": 1.9
+     }
+    ],
+    [
+     {
+      "id": "V4",
+      "text": "Everything that matters. One place.",
+      "start": 9.6,
+      "max": 4.6
+     }
+    ],
+    [
+     {
+      "id": "V5",
+      "text": "Your widgets. Your way.",
+      "start": 14.4,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "V6",
+      "text": "Nutrition. Fitness. Money. Habits.",
+      "start": 26.6,
+      "max": 2.9
+     }
+    ],
+    [
+     {
+      "id": "V7",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 40.0,
+      "max": 3.3
+     }
+    ]
+   ]
+  },
+  "v4main": {
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your life isn't one thing.",
+      "start": 0.6,
+      "max": 2.9
+     }
+    ],
+    [
+     {
+      "id": "H2",
+      "text": "Why manage it in ten different apps?",
+      "start": 3.6,
+      "max": 3.3
+     }
+    ],
+    [
+     {
+      "id": "MEET",
+      "text": "Meet Ardane.",
+      "start": 9.2,
+      "max": 0.9
+     }
+    ],
+    [
+     {
+      "id": "EVERY",
+      "text": "Everything that matters. One place.",
+      "start": 9.95,
+      "max": 2.3
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Scan what you eat.",
+      "start": 12.33,
+      "max": 1.7
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "See what it adds up to.",
+      "start": 14.83,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "F1",
+      "text": "Every exercise, move by move.",
+      "start": 17.33,
+      "max": 3.5
+     }
+    ],
+    [
+     {
+      "id": "F2",
+      "text": "Every set, counted.",
+      "start": 21.33,
+      "max": 2.4
+     }
+    ],
+    [
+     {
+      "id": "HB",
+      "text": "Build the habits that stick.",
+      "start": 24.33,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "FI",
+      "text": "Know where your money stands.",
+      "start": 28.33,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "PL",
+      "text": "Your week, at a glance.",
+      "start": 32.83,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "P1",
+      "text": "Pick the widgets that matter.",
+      "start": 37.83,
+      "max": 2.4
+     }
+    ],
+    [
+     {
+      "id": "P2",
+      "text": "Make them yours.",
+      "start": 40.33,
+      "max": 2.6
+     }
+    ],
+    [
+     {
+      "id": "HO",
+      "text": "Your iPhone. Your way.",
+      "start": 51.83,
+      "max": 3.0
+     }
+    ],
+    [
+     {
+      "id": "CL",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 63.5,
+      "max": 3.7
+     }
+    ]
+   ]
   }
  }
 }

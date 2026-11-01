@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { continueRender, delayRender, staticFile } from "remotion";
+import { continueRender, delayRender } from "remotion";
 import * as THREE from "three";
+import { asset } from "./kit";
 
 /** Decoded images of public/ (rendering waits for all of them). */
 export const useImages = (files: string[]): Record<string, HTMLImageElement> | null => {
@@ -20,7 +21,7 @@ export const useImages = (files: string[]): Record<string, HTMLImageElement> | n
                 () => resolve([file, img]),
               );
             img.onerror = () => reject(new Error(`cannot load ${file}`));
-            img.src = staticFile(file);
+            img.src = asset(file);
           }),
       ),
     )

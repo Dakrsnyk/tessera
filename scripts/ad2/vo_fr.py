@@ -147,7 +147,8 @@ import unicodedata
 def norm(s):
     s = unicodedata.normalize("NFD", s.lower().replace("’", "'"))
     s = "".join(c for c in s if unicodedata.category(c) != "Mn")
-    return re.sub(r"[^a-z0-9' ]", " ", s).split()
+    # « l'écran » and Whisper's « l 'écran » are the same words: the apostrophe is a separator.
+    return re.sub(r"[^a-z0-9 ]", " ", s).split()
 for line in lines_out:
     # Samples at 16 kHz rather than the path: recent PyAV no longer takes faster-whisper's decode arguments.
     audio, sr = sf.read(line["file"], dtype="float32")

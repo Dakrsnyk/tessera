@@ -1,5 +1,5 @@
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate } from "remotion";
 import * as THREE from "three";
 import { Callout } from "../components/Callout";
 import { FilmAudio } from "../components/FilmAudio";
@@ -9,7 +9,7 @@ import { Seam } from "../components/Seam";
 import { StyledWidget } from "../components/StyledWidget";
 import { SplitText } from "../components/SplitText";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
-import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect } from "../lib/kit";
+import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect, asset } from "../lib/kit";
 import { drawBlade, roundRectPath, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
@@ -146,10 +146,10 @@ export const Fitness: React.FC<{ audio?: boolean; tapAt?: number; styles?: { at:
   const bandY = toPane(0, focusY)[1];
 
   const paneImage = (src: string, extra?: React.CSSProperties) => (
-    <Img src={staticFile(src)} style={{ position: "absolute", left: 0, top: 0, width: 900, height: 2622 * PANE_S, ...extra }} />
+    <Img src={asset(src)} style={{ position: "absolute", left: 0, top: 0, width: 900, height: 2622 * PANE_S, ...extra }} />
   );
 
-  const fig = (count: number, name: string) => staticFile(demo(name, Math.max(0, frame - 450), count));
+  const fig = (count: number, name: string) => asset(demo(name, Math.max(0, frame - 450), count));
   const step = interpolate(frame, [450, 500], [0, 1], { ...clamp, easing: ease.lift });
   const tri = interpolate(frame, [540, 580], [0, 1], { ...clamp, easing: ease.transfer });
   const toLine = interpolate(frame, [578, 600], [0, 1], { ...clamp, easing: Easing.bezier(0.6, 0, 0.9, 1) });
@@ -194,7 +194,7 @@ export const Fitness: React.FC<{ audio?: boolean; tapAt?: number; styles?: { at:
         >
           {frame < 174 && (
             <Img
-              src={staticFile(heroWidget(U, NEXT.index))}
+              src={asset(heroWidget(U, NEXT.index))}
               style={{
                 position: "absolute",
                 left: 0,

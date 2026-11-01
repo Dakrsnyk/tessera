@@ -96,12 +96,18 @@ def pick_cuts(audio, weights):
     return list(best)
 
 
-def beats(text, pause, spd=speed):
+def beats(text, pause, spd=speed, beat=None):
     """A line made of short beats (« Your meals. Your workout. What's due. Your week. »): Kokoro reads
     it in one breath, with no pause to lengthen, so each sentence is synthesised alone and the beats
     are joined by `pause` s of silence (one beat per card on screen)."""
     sentences = [t for t in re.split(r"(?<=[.?!])\s+", text) if t]
     gap = np.zeros(int(pause * SR), dtype=np.float32)
+    if beat:  # "beat": each sentence starts exactly `beat` s after the previous one (one word per beat of the music)
+        parts = []
+        for t in sentences:
+            x = trim(synth(t, spd))[: int(beat * SR)]
+            parts.append(np.concatenate([x, np.zeros(int(beat * SR) - len(x), dtype=np.float32)]))
+        return np.concatenate(parts)
     return np.concatenate([x for t in sentences for x in (trim(synth(t, spd)), gap)][:-1])
 
 
@@ -122,7 +128,7 @@ for chunk in cfg["chunks"]:
             print("chunk", ids, "could not be split: synthesising its lines one by one")
             pieces = [synth(line["text"], line.get("speed", speed)) for line in chunk]
     for line, piece in zip(chunk, pieces):
-        piece = beats(line["text"], line["pause"], line.get("speed", speed)) if line.get("pause") else trim(piece)
+        piece = beats(line["text"], line["pause"], line.get("speed", speed), line.get("beat")) if line.get("pause") else trim(piece)
         # Fades of 8 ms: no click at the cut.
         n = int(0.008 * SR)
         piece[:n] *= np.linspace(0, 1, n)

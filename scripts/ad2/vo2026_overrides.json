@@ -1,15 +1,186 @@
 {
  "_doc": "Per-line fixes of the 2026 campaign voice-over, read by vo.py (en) and vo_fr.py (fr): speed (Kokoro pace), pause (read sentence by sentence, joined by this many seconds), solo (the chunk's lines are synthesised one by one: the cut at the pauses failed).",
  "en": {
-  "main": {"M10": {"solo": true}, "M6": {"pause": 0.3}, "M3": {"pause": 0.42}},
-  "organisation": {"O1": {"pause": 0.35}},
-  "finance": {"Fi2": {"pause": 0.28}},
-  "widgets": {"W5": {"pause": 0.35}}
+  "main": {
+   "M10": {
+    "solo": true
+   },
+   "M6": {
+    "pause": 0.3
+   },
+   "M3": {
+    "pause": 0.3
+   }
+  },
+  "organisation": {
+   "O1": {
+    "pause": 0.35
+   }
+  },
+  "finance": {
+   "Fi2": {
+    "solo": true,
+    "speed": 0.95
+   },
+   "Fi4": {
+    "solo": true,
+    "speed": 1.15
+   }
+  },
+  "widgets": {
+   "W1": {
+    "pause": 0.3
+   },
+   "W5": {
+    "pause": 0.2,
+    "speed": 1.0
+   }
+  },
+  "lifestyle": {
+   "L4": {
+    "pause": 0.3
+   }
+  },
+  "v3main": {
+   "V4": {
+    "pause": 0.3
+   },
+   "V5": {
+    "pause": 0.25
+   },
+   "V6": {
+    "pause": 0.2,
+    "speed": 1.15,
+    "beat": 0.5
+   },
+   "V7": {
+    "pause": 0.3
+   }
+  },
+  "v4main": {
+   "MEET": {
+    "speed": 1.05
+   },
+   "EVERY": {
+    "pause": 0.2,
+    "speed": 1.1
+   },
+   "HO": {
+    "pause": 0.3
+   },
+   "CL": {
+    "pause": 0.3
+   }
+  }
  },
  "fr": {
-  "main": {"M3": {"pause": 0.42}, "M6": {"pause": 0.3}},
-  "organisation": {"O1": {"pause": 0.35}},
-  "finance": {"Fi2": {"pause": 0.28}},
-  "widgets": {"W5": {"pause": 0.35}}
+  "main": {
+   "M3": {
+    "solo": true,
+    "speed": 0.95
+   },
+   "M6": {
+    "pause": 0.3
+   },
+   "M1": {
+    "solo": true,
+    "speed": 0.95
+   },
+   "M5": {
+    "solo": true,
+    "speed": 1.0
+   },
+   "M10": {
+    "solo": true,
+    "speed": 0.95
+   },
+   "M11": {
+    "solo": true,
+    "speed": 0.9
+   },
+   "M12": {
+    "solo": true,
+    "speed": 1.0
+   }
+  },
+  "organisation": {
+   "O1": {
+    "solo": true,
+    "speed": 0.95
+   }
+  },
+  "finance": {
+   "Fi2": {
+    "solo": true,
+    "speed": 0.95,
+    "pause": 0.2
+   },
+   "Fi1": {
+    "solo": true,
+    "speed": 0.85
+   },
+   "Fi3": {
+    "solo": true,
+    "speed": 0.95
+   },
+   "Fi4": {
+    "solo": true,
+    "speed": 1.1
+   }
+  },
+  "widgets": {
+   "W5": {
+    "solo": true,
+    "speed": 0.9
+   },
+   "W3": {
+    "solo": true,
+    "speed": 0.85
+   }
+  },
+  "nutrition": {
+   "N3": {
+    "solo": true,
+    "speed": 1.15
+   }
+  },
+  "lifestyle": {
+   "L3": {
+    "solo": true,
+    "speed": 0.95
+   },
+   "L6": {
+    "solo": true,
+    "speed": 0.95
+   },
+   "L7": {
+    "solo": true,
+    "speed": 0.85
+   },
+   "L11": {
+    "solo": true,
+    "speed": 1.0
+   }
+  },
+  "short1": {
+   "S1a": {
+    "solo": true,
+    "speed": 0.9
+   }
+  },
+  "short2": {
+   "S2b": {
+    "solo": true,
+    "speed": 0.95,
+    "pause": 0.2
+   }
+  },
+  "short3": {
+   "S3a": {
+    "solo": true,
+    "speed": 1.0,
+    "pause": 0.2
+   }
+  }
  }
 }

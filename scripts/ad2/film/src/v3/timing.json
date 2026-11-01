@@ -1,0 +1,283 @@
+{
+  "_doc": "FilmMainV3 (45 s = 2700 frames at 60 fps). Every key event in film frames (f) and seconds (s = f/60). Source of truth for the sound design: the film reads its cues from here. Voice-over line starts: H1 0.6, H2 2.9, meet 7.6, everything 9.6, widgets 14.4, universes 26.6, close 40.0.",
+  "fps": 60,
+  "length": 2700,
+  "voice": {
+    "H1": 36,
+    "H2": 174,
+    "meet": 456,
+    "everything": 576,
+    "widgets": 864,
+    "universes": 1596,
+    "close": 2400
+  },
+  "hook": {
+    "tick": [
+      12,
+      24
+    ],
+    "momentShots": [
+      {
+        "f": 36,
+        "word": "WAKE",
+        "kind": "sunrise",
+        "len": 22
+      },
+      {
+        "f": 58,
+        "word": "EAT",
+        "kind": "meal",
+        "len": 20
+      },
+      {
+        "f": 78,
+        "word": "LIFT",
+        "kind": "weights",
+        "len": 18
+      },
+      {
+        "f": 96,
+        "word": "PAY",
+        "kind": "card",
+        "len": 16
+      },
+      {
+        "f": 112,
+        "word": "PLAN",
+        "kind": "agenda",
+        "len": 16
+      },
+      {
+        "f": 128,
+        "word": "DO",
+        "kind": "checklist",
+        "len": 16
+      },
+      {
+        "f": 144,
+        "word": "DRINK",
+        "kind": "water",
+        "len": 14
+      },
+      {
+        "f": 158,
+        "word": "SLEEP",
+        "kind": "moon",
+        "len": 16
+      }
+    ],
+    "h1Words": [
+      {
+        "w": "Your",
+        "f": 36
+      },
+      {
+        "w": "life",
+        "f": 54
+      },
+      {
+        "w": "isn't",
+        "f": 76
+      },
+      {
+        "w": "one",
+        "f": 96
+      },
+      {
+        "w": "thing.",
+        "f": 112
+      }
+    ],
+    "h2Words": [
+      {
+        "w": "Why",
+        "f": 174
+      },
+      {
+        "w": "manage",
+        "f": 188
+      },
+      {
+        "w": "it",
+        "f": 208
+      },
+      {
+        "w": "in",
+        "f": 218
+      },
+      {
+        "w": "ten",
+        "f": 230
+      },
+      {
+        "w": "different",
+        "f": 254
+      },
+      {
+        "w": "apps?",
+        "f": 278
+      }
+    ],
+    "tilesStart": 174,
+    "tenCounter": {
+      "from": 190,
+      "to": 246,
+      "slam": 246
+    },
+    "tile10": 246,
+    "bannersStart": 206,
+    "shakeRamp": [
+      200,
+      336
+    ],
+    "silence": {
+      "from": 336,
+      "to": 384,
+      "note": "everything frozen, sound cut, glitch frames at glitch[]"
+    },
+    "glitch": [
+      336,
+      337,
+      349,
+      350,
+      351,
+      362,
+      363,
+      372,
+      373,
+      374,
+      379,
+      380,
+      381,
+      382,
+      383
+    ],
+    "impact": 384,
+    "suctionEnd": 398,
+    "flash": 398,
+    "lineOpen": [
+      398,
+      428
+    ],
+    "handoffToPhone": 444,
+    "flashPeak": 410,
+    "impactExact": {
+      "f": 384,
+      "s": 6.4
+    }
+  },
+  "reveal": {
+    "phoneTurn": [
+      444,
+      582
+    ],
+    "wordMeet": 456,
+    "wordEverything": 576,
+    "explodeStart": 582,
+    "explodeFull": 630,
+    "screenWake": [
+      474,
+      502
+    ],
+    "phoneFrontal": 582
+  },
+  "personalise": {
+    "wordWidgets": 864,
+    "wordWay": 900,
+    "universeChanges": [
+      850,
+      910,
+      970,
+      1030,
+      1090,
+      1150
+    ],
+    "studioStart": 1200,
+    "premiumPill": [
+      1346,
+      1422
+    ],
+    "studioEnd": 1560,
+    "premiumPillNote": "top of the frame (y 84), over nothing"
+  },
+  "universes": {
+    "burst": [
+      {
+        "w": "Nutrition.",
+        "f": 1596
+      },
+      {
+        "w": "Fitness.",
+        "f": 1626
+      },
+      {
+        "w": "Money.",
+        "f": 1656
+      },
+      {
+        "w": "Habits.",
+        "f": 1686
+      }
+    ],
+    "scenes": [
+      {
+        "scene": "Nutrition",
+        "f": 1716
+      },
+      {
+        "scene": "Fitness",
+        "f": 1986
+      },
+      {
+        "scene": "LockScreen",
+        "f": 2076
+      },
+      {
+        "scene": "Money",
+        "f": 2146
+      },
+      {
+        "scene": "Habits",
+        "f": 2212
+      }
+    ],
+    "plateArrivals": [
+      1560,
+      1616,
+      1646,
+      1676
+    ],
+    "burstWordsSlam": [
+      1596,
+      1626,
+      1656,
+      1686
+    ]
+  },
+  "close": {
+    "start": 2280,
+    "logoWhiteHalf": 2364,
+    "voice": 2400,
+    "silenceEnd": 2682,
+    "end": 2700,
+    "shimmer": [
+      2400,
+      2682
+    ],
+    "calmFrom": 2664,
+    "calmNote": "push and shimmer fade out over 2664-2682, then 0.3 s of stillness to 2700"
+  },
+  "cuts": [
+    1560,
+    1596,
+    1626,
+    1656,
+    1686,
+    1716,
+    1986,
+    2076,
+    2146,
+    2212,
+    2280
+  ]
+}

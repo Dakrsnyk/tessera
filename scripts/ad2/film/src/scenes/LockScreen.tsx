@@ -1,7 +1,8 @@
 import { useThree } from "@react-three/fiber";
 import { ThreeCanvas } from "@remotion/three";
 import { useMemo } from "react";
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate } from "remotion";
+import { asset } from "../lib/kit";
 import * as THREE from "three";
 import { Callout } from "../components/Callout";
 import { FilmAudio } from "../components/FilmAudio";
@@ -233,7 +234,7 @@ export const LockScreen: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
       {frame >= T.tap && frame < T.bladeEnd && (
         <>
           <Img
-            src={staticFile(AFTER[0])}
+            src={asset(AFTER[0])}
             style={{
               position: "absolute",
               left: RECT.x,

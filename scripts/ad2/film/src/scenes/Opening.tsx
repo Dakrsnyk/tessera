@@ -27,7 +27,7 @@ const TINT = "#43576A";
  * 3 · f240–359: push-in to 1.10×, rising 30 px; « Designed around you. » splits from the seam.
  */
 /** `hook`: the opening line of type, timed in the film's own frames (the opening's turn may be held under it). */
-export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: number } }> = ({ audio = true, hook }) => {
+export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: number }; lit?: boolean; words?: boolean; wake?: number; levitate?: boolean }> = ({ audio = true, hook, lit = false, words = true, wake = 120, levitate = false }) => {
   const outFrame = useCurrentFrame();
   const hookOn = hook ? interpolate(outFrame, [6, 14, hook.to + 6, hook.to + 26], [0, 1, 1, 0], clamp) : 0;
   const frame = useFilmFrame();
@@ -39,7 +39,10 @@ export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: 
     HERO_WIDGETS.forEach((w, i) => {
       const start = 150 + 12 * i;
       const b = interpolate(frame, [start, start + 12, start + 30], [0, 1, 0], { ...clamp, easing: Easing.bezier(0.45, 0, 0.55, 1) });
-      if (b > 0) drawLifted(ctx, images[heroWidget("aurore", w.index)], w.rect, b);
+      // levitate: once the phone faces the camera the widgets keep breathing (a slow, small lift, staggered)
+      const lev = levitate ? interpolate(frame, [236, 270], [0, 1], clamp) * (0.5 + 0.5 * Math.sin((frame - 236) / 24 + i * 1.1)) * 0.55 : 0;
+      const bb = Math.max(b, lev);
+      if (bb > 0) drawLifted(ctx, images[heroWidget("aurore", w.index)], w.rect, bb);
     });
     screen.needsUpdate = true;
   }
@@ -56,12 +59,12 @@ export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: 
 
   // The line: 15 % on the first frame (the thumbnail is never black), ignites on f6, and gives way to the
   // phone as it turns face-on.
-  const ignite = interpolate(frame, [0, 6, 12], [0.15, 0.15, 1], { ...clamp, easing: ease.split });
+  const ignite = lit ? 1 : interpolate(frame, [0, 6, 12], [0.15, 0.15, 1], { ...clamp, easing: ease.split });
   const edgeOn = interpolate(yaw, [62, 86], [0, 1], { ...clamp, easing: Easing.bezier(0.4, 0, 0.6, 1) });
   const pxPerMm = H / (2 * distance * Math.tan(((lensFov(85) / 2) * Math.PI) / 180));
   const phoneHeightPx = PHONE.h * pxPerMm;
 
-  const screenOn = interpolate(frame, [120, 148], [0, 1], { ...clamp, easing: Easing.bezier(0.2, 0, 0.2, 1) });
+  const screenOn = interpolate(frame, [wake, wake + 28], [0, 1], { ...clamp, easing: Easing.bezier(0.2, 0, 0.2, 1) });
   const sweep = frame >= 180 && frame <= 210 ? interpolate(frame, [180, 210], [0, 1], { easing: Easing.bezier(0.45, 0, 0.55, 1) }) : -1;
   // While the super is read, the lower third of the phone falls back (type never sits on UI data).
   const typeVeil = interpolate(frame, [256, 280, 336, 356], [0, 1, 1, 0], clamp);
@@ -90,12 +93,14 @@ export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: 
       <AbsoluteFill
         style={{
           background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.72) 72%, rgba(0,0,0,0.85) 100%)",
-          opacity: typeVeil,
+          opacity: words ? typeVeil : 0,
         }}
       />
-      <SplitText from={262} exitAt={340} top={1468} height={110}>
-        <span style={type.super}><Tr>Designed around you.</Tr></span>
-      </SplitText>
+      {words && (
+        <SplitText from={262} exitAt={340} top={1468} height={110}>
+          <span style={type.super}><Tr>Designed around you.</Tr></span>
+        </SplitText>
+      )}
       <Grain />
 
       {audio && <FilmAudio from={0} />}

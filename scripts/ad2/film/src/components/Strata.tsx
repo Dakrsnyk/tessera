@@ -1,6 +1,6 @@
-import { AbsoluteFill, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, interpolate } from "remotion";
 import { AXIS, clamp, ease, H, W } from "../lib/brand";
-import { k } from "../lib/kit";
+import { k, asset } from "../lib/kit";
 import { useFilmFrame } from "../lib/time";
 
 /** Tall slats of real wallpapers (drawn by the app), on 3 depth rows sliding vertically (§2.8 Strata). */
@@ -47,7 +47,7 @@ const Slat: React.FC<{ file: string; x: number; width: number; y: number; blur: 
       top: 0,
       width: width * (1 - fold * 0.85),
       height: H,
-      backgroundImage: `url(${staticFile(k(file))})`,
+      backgroundImage: `url(${asset(k(file))})`,
       backgroundSize: `${width * 2.2}px auto`,
       backgroundPosition: `${-width * 0.6}px ${y}px`,
       backgroundRepeat: "repeat-y",

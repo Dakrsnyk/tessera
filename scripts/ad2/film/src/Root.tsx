@@ -5,6 +5,9 @@ import { filmLength, FilmId } from "./films/CutFilm";
 import { FilmFormat, FormatProps, SceneFormat } from "./films/Formatted";
 import { SIZE } from "./lib/formats";
 import { PhoneTest } from "./scenes/PhoneTest";
+import { FilmMainV3Format, V3_LENGTH } from "./v3/FilmMainV3";
+import { FilmMainV4Format, V4_LENGTH } from "./v4/FilmMainV4";
+import { Film26, FILM26, Film26Id } from "./ad26/films";
 
 
 const base: FormatProps = { format: "9x16", lang: "en" };
@@ -29,6 +32,17 @@ export const RemotionRoot: React.FC = () => {
     {filmComp("FilmFitness", "fitness")}
     {filmComp("FilmPerso", "perso")}
     {filmComp("FilmNutrition", "nutrition")}
+      <Folder name="Campagne-2026">
+        {(Object.keys(FILM26) as Film26Id[]).map((id) => (
+          <Composition key={FILM26[id].comp} id={FILM26[id].comp} component={Film26} defaultProps={{ ...base, film: id, audio: false }} calculateMetadata={calc} durationInFrames={FILM26[id].frames} fps={FPS} width={W} height={H} />
+        ))}
+      </Folder>
+      <Folder name="V3">
+        <Composition id="FilmMainV3" component={FilmMainV3Format} defaultProps={base} calculateMetadata={calc} durationInFrames={V3_LENGTH} fps={FPS} width={W} height={H} />
+      </Folder>
+      <Folder name="V4">
+        <Composition id="FilmMainV4" component={FilmMainV4Format} defaultProps={base} calculateMetadata={calc} durationInFrames={V4_LENGTH} fps={FPS} width={W} height={H} />
+      </Folder>
       <Folder name="Principal">
         {/* Shots 1–3: f0–359. */}
         {sceneComp("Opening", 360)}

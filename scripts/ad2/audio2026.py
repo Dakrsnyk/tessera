@@ -18,8 +18,10 @@ import pyloudnorm as pyln
 import soundfile as sf
 from scipy.signal import resample_poly
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # python -I does not add the script's folder
 import mix as M
 from score import score_cut
+import synth as S
 from synth import SR, db, fm_glass, note, reverb, sub, thump, noise_band
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -122,6 +124,99 @@ FILMS = {
         sfx=[(0.1, "glassD6", -22, 0), (0.1, "whoosh", -30, 0), (0.8, "swipe", -29, 0), (2.0, "swipe", -29, 0),
              (3.3, "swipe", -29, 0), (3.5, "split", -28, 0), (7.0, "glassA6", -27, 0)]),
 }
+
+# v3main: the 45 s main film of the "v3" cut, English only. 0-5.6 s hook (tension), 5.6-6.4 s total silence,
+# impact at 6.4 s, logo appears 7.6 s, widgets 14 s, four words 26.6 s, scan ~29 s, logo/signature at 40.0 s.
+# Music: custom tension (music_tension) then score_cut resolving D minor -> D major from 6.0 s (zeroed before 6.4).
+_HOOK = [0.6 + 0.5 * k for k in range(10)]  # cuts on every beat of the hook (0.6 .. 5.1)
+TIMING_V3 = os.path.join(HERE, "film", "src", "v3", "timing.json")
+
+
+def v3_sfx():
+    """SFX of v3main from film/src/v3/timing.json (frames at 60 fps)."""
+    T = json.load(open(TIMING_V3, encoding="utf-8"))
+    f = lambda x: x / FPS
+    h, ev = T["hook"], []
+    for k, m in enumerate(h["momentShots"]):  # a cut whoosh on every moment shot of the hook
+        ev.append((f(m["f"]), "cut", -27 + 0.5 * k, 0.5 if k % 2 else -0.5))
+    for k, fr in enumerate(h["tick"] + [36 + 15 * i for i in range(0, 10)]):  # tic-tac, louder as the hook goes
+        ev.append((f(fr), "tic" if k % 2 == 0 else "tac", -29 + 0.5 * k, 0))
+    banners = [206, 224, 240, 262, 280, 296, 308, 318, 326, 332]
+    ev += [(f(b), "notif", -27 + 0.5 * k, (-0.5, 0.4, -0.3, 0.6)[k % 4]) for k, b in enumerate(banners)]
+    ev.append((f(h["tenCounter"]["from"]), "counter", -22, 0))      # 1 -> 10 on "ten"
+    ev.append((f(h["tenCounter"]["slam"]), "tap", -13, 0))          # tile 10 slams
+    for g, gain in zip((336, 349, 362, 372, 379), (-17, -34, -36, -36, -36)):
+        ev.append((f(g), "glitch", gain, 0))
+    ev.append((f(h["impact"]), "impact", -8, 0))                    # exactly 6.4 s
+    ev.append((f(T["reveal"]["wordMeet"]), "logo_in", -17, 0))
+    ev.append((f(T["reveal"]["screenWake"][0]), "light", -24, 0))   # the screen wakes
+    ev.append((f(T["reveal"]["explodeStart"]) - 0.4, "transition", -27, 0))
+    ev.append((f(T["personalise"]["wordWidgets"]) - 0.5, "transition", -26, 0))
+    ev += [(f(u), "swipe", -29, 0.4 if k % 2 else -0.4) for k, u in enumerate(T["personalise"]["universeChanges"])]
+    ev.append((f(T["personalise"]["studioStart"]), "blade", -29, 0))
+    ev.append((f(T["personalise"]["premiumPill"][0]), "notif", -26, 0))
+    U = T["universes"]
+    ev.append((f(U["plateArrivals"][0]) - 0.5, "transition", -25, 0))
+    ev += [(f(a), "cut", -25, 0.5 if k % 2 else -0.5) for k, a in enumerate(U["plateArrivals"][1:])]
+    ev += [(f(w), "tap", -12, 0) for w in U["burstWordsSlam"]]      # a slam on each word
+    ev += [(f(w), "dock", -20, 0) for w in U["burstWordsSlam"]]
+    ev += [(f(c), "cut", -26, 0) for c in T["cuts"][5:-1]]
+    ev += [(29.0, "barcode", -23, 0), (f(2030), "check", -22, 0), (f(2240), "check", -22, 0)]
+    ev.append((f(T["close"]["start"]) - 0.5, "transition", -24, 0))
+    return ev
+
+
+FILMS["v3main"] = dict(length=45.0, logo=40.0, custom="v3", sections=[
+        ("strata", 6.0, 14.0), ("daylight", 14.0, 26.0), ("run", 26.0, 39.6)],
+    universes=[(6.0, "aurora"), (14.0, "space"), (26.0, "sunset")], sfx=v3_sfx())
+TIMING_V4 = os.path.join(HERE, "film", "src", "v4", "timing.json")
+
+
+def v4_sfx():
+    """SFX of v4main from film/src/v4/timing.json (frames at 60 fps)."""
+    T = json.load(open(TIMING_V4, encoding="utf-8"))
+    f = lambda x: x / FPS
+    h, ev = T["hook"], []
+    for k, m in enumerate(h["momentShots"]):
+        ev.append((f(m["f"]), "cut", -27 + 0.6 * k, 0.5 if k % 2 else -0.5))
+    for k, fr in enumerate(h["tick"] + [36 + 22 * i for i in range(0, 14)]):
+        ev.append((f(fr), "tic" if k % 2 == 0 else "tac", -29 + 0.4 * k, 0))
+    b0, gap = h["bannersStart"], h["bannerGap"]
+    banners = [b0 + gap * k for k in range(8)] + [b0 + 160 + 12 * k for k in range(6)]
+    banners = [b for b in banners if b < h["silence"]["from"] - 4]
+    ev += [(f(b), "notif", -27 + 0.4 * k, (-0.5, 0.4, -0.3, 0.6)[k % 4]) for k, b in enumerate(banners)]
+    tc = h["tenCounter"]
+    ev.append((f(tc["from"]), "counter", -22, 0))
+    ev.append((f(tc["slam"]), "tap", -13, 0))
+    for g, gain in zip((432, 445, 458, 468, 475), (-17, -34, -36, -36, -36)):
+        ev.append((f(g), "glitch", gain, 0))
+    ev.append((f(h["impact"]), "impact", -8, 0))
+    R = T["reveal"]
+    ev.append((f(R["wordMeet"]), "logo_in", -17, 0))
+    ev.append((f(R["screenWake"][0]), "light", -24, 0))
+    ev.append((f(R["phoneTurn"][0]), "transition", -27, 0))
+    steps = {"nutrition": [(794, "barcode", -23), (846, "tap", -15), (916, "tap", -15), (958, "swipe", -28)],
+             "fitness": [(1120, "tap", -15), (1146, "swipe", -29), (1260, "dock", -16), (1318, "tick", -25), (1356, "swipe", -28)],
+             "habits": [(1536, "check", -22), (1616, "swipe", -28)],
+             "finances": [(1766, "swipe", -29), (1832, "swipe", -29), (1908, "swipe", -28)],
+             "planning": [(2020, "tap", -17), (2070, "swipe", -29), (2174, "swipe", -28)]}
+    for lst in steps.values():
+        for fr, nm, g in lst:
+            ev.append((f(fr), nm, g, 0))
+    ev += [(f(w), "blade", -29, 0.5 if k % 2 else -0.5) for k, w in enumerate(T["bladeWipes"])]
+    ev += [(f(l) - 0.4, "transition", -26, 0) for l in T["links"]]            # whoosh into every link
+    ev += [(f(PRE) , "swipe", -27, -0.4 if k % 2 else 0.4) for k, PRE in enumerate(range(2250, 3090, 120))]  # Store scroll / layers
+    ev += [(f(2420), "split", -28, 0), (f(2970), "dock", -20, 0)]
+    ev += [(f(3090) - 0.4, "transition", -26, 0)]
+    ev += [(f(fr), "swipe", -29, 0.4 if k % 2 else -0.4) for k, fr in enumerate((3255, 3420, 3585))]   # glide between home screens
+    ev.append((f(3734) - 0.3, "transition", -24, 0))
+    return [e for e in ev if e[0] < 67.5]
+
+
+FILMS["v4main"] = dict(length=67.5, logo=63.5, custom="v3", impact=8.0, silence_from=7.2,
+    sections=[("strata", 8.0, 16.0), ("daylight", 16.0, 38.0), ("pulse", 38.0, 52.0), ("run", 52.0, 63.1)],
+    universes=[(8.0, "aurora"), (16.0, "space"), (38.0, "sunset"), (52.0, "neon")],
+    rise_t=[8.0, 16.0, 38.0, 52.0, 63.1], rise_db=[-7, -5, -3, -1.5, 0], sfx=v4_sfx())
 FILM_ORDER = list(FILMS)
 
 
@@ -130,6 +225,8 @@ def music_stem(film):
     """The score of a film, stereo, exactly `length` s: sections, rise, riser, silence, signature, end silence."""
     cfg = FILMS[film]
     length, logo = cfg["length"], cfg["logo"]
+    if cfg.get("custom") == "v3":
+        return music_v3(cfg)
     pre = logo - PRE_LOGO_SILENCE            # the music before the logo ends here (the riser's peak)
     sections = [{"type": t, "start": a, "end": min(b, pre)} for t, a, b in cfg["sections"]]
     sections[-1]["end"] = pre
@@ -165,6 +262,112 @@ def music_stem(film):
     return track
 
 
+# --- v3main music ----------------------------------------------------------------------------------
+def music_tension(n, until=5.6):
+    """0 .. 5.6 s: heartbeat that speeds up, a dissonant cluster whose filter opens, a high tritone stutter that
+    accelerates, a riser that peaks at 5.6 s; everything cut dead at 5.6 s."""
+    from score import pad_layer, pluck, add
+    tr = np.zeros((n, 2))
+    # Heartbeat: sub thump on a double beat, interval 0.5 s -> 0.24 s.
+    t = 0.0
+    while t < until - 0.1:
+        g = db(-12 + 7 * t / until)
+        place(tr, thump(52, 70), t, g)
+        place(tr, thump(52, 55), t + 0.14, g * 0.6)
+        t += 0.5 - 0.26 * (t / until) ** 1.5
+    # Dissonant cluster (D, Eb, G#, A, Bb) whose low-pass opens with each second.
+    cl = ["D3", "D#3", "G#3", "A3", "A#3"]
+    for i, s in enumerate(np.arange(0.0, until, 1.0)):
+        d = min(1.0, until - s)
+        pad_layer(tr, s, d, cl, db(-22 + 1.4 * i), cutoff=500 + 650 * i, attack=0.4, release=0.5)
+    # Tritone stutter (A5 / Eb6) over the last 3.2 s, 8ths -> 16ths -> 32nds.
+    t0 = until - 3.2
+    t = t0
+    j = 0
+    while t < until - 0.05:
+        f = note("A5") if j % 2 == 0 else note("D#6")
+        add(tr, pluck(f, "minimal", 0.25), t, db(-27 + 5 * (t - t0) / (until - t0)), pan=-0.3 if j % 2 else 0.3)
+        t += 0.25 - 0.17 * ((t - t0) / (until - t0)) ** 1.2
+        j += 1
+    # Riser (noise sweep + saw glide) peaking right at 5.6 s.
+    place(tr, S.riser(until - 0.4), 0.4, db(-17))
+    # Everything dies at 5.6 s (8 ms fade): the glitch SFX is the only sound left.
+    a, b = int((until - 0.008) * SR), int(until * SR)
+    tr[a:b] *= np.linspace(1, 0, b - a)[:, None]
+    tr[b:] = 0
+    return tr
+
+
+def music_v3(cfg):
+    import score
+    from score import pad_layer, CH
+    n = int(round(cfg["length"] * SR))
+    pre = cfg["logo"] - PRE_LOGO_SILENCE
+    logo = cfg["logo"]
+    I = cfg.get("impact", 6.4)
+    SIL = cfg.get("silence_from", 5.6)
+    sections = [{"type": t, "start": a, "end": min(b, pre)} for t, a, b in cfg["sections"]]
+    saved = dict(score.SECTION_CHORDS)
+    score.SECTION_CHORDS.update({"strata": ["Dmaj9", "Bbmaj9", "Fmaj9", "Csus4"],
+                                 "run": ["Bbmaj9", "Gm9", "A7sus4", "Dmaj9"]})
+    try:
+        body = score_cut(pre, sections, universes=cfg["universes"], risers=[(pre, 1.6)], end_fade=0.0, end_gap=0.0)
+    finally:
+        score.SECTION_CHORDS.clear()
+        score.SECTION_CHORDS.update(saved)
+    track = np.zeros((n, 2))
+    k = min(len(body), n)
+    # Rise by sections: -7 dB at the impact to 0 dB at the logo.
+    rise = db(np.interp(np.arange(k) / SR, cfg.get("rise_t", [I, 14.0, 26.0, pre]), cfg.get("rise_db", [-7, -4, -2, 0])))
+    track[:k] = body[:k] * rise[:, None]
+    track[: int(I * SR)] = 0          # the section grid starts at 6.0 s, the music at the impact
+    track += music_tension(n, SIL)
+    # Breath in the silence: a short decaying reverb tail after the cut, then a reversed swell into the impact.
+    burst = np.pad(noise_band(0.05, 500, 6000, seed=33) * 0.8, (0, int(0.6 * SR)))
+    tail = reverb(burst, 1.4, 1.0)
+    tail = tail[: int(0.45 * SR)] * np.linspace(1, 0, int(0.45 * SR))[:, None] ** 2
+    place(track, tail, SIL, db(-30))
+    swell = reverb(np.pad(noise_band(0.5, 300, 5000, seed=34) * np.hanning(int(0.5 * SR)), (0, int(0.5 * SR))), 1.2, 0.8)
+    sw = swell[: int(0.25 * SR)][::-1] * np.linspace(0, 1, int(0.25 * SR))[:, None] ** 2
+    place(track, sw, I - 0.25, db(-34))
+    # Small low boom just before, with a reversed reverb tail leading into the impact.
+    boom = np.pad(thump(46, 140), (0, int(1.0 * SR)))
+    rb = reverb(boom, 1.0, 0.9)[: int(0.34 * SR)][::-1] * np.linspace(0, 1, int(0.34 * SR))[:, None] ** 2
+    place(track, rb, I - 0.34, db(-22))
+    place(track, thump(46, 140), I - 0.08, db(-24))
+    from score import kick
+    place(track, kick(), I, db(-8))          # the first kick IS the impact
+    # Impact on 6.4 s: sub drop, then the D major bloom (the SFX stem carries the crack and the crash).
+    place(track, sub(note("D1"), 3.0, attack=0.004, release=2.6), I, db(-14))
+    pads = np.zeros((n, 2))
+    pad_layer(pads, I, 1.6, CH["Dmaj9"], db(-15), cutoff=3200, attack=0.05, release=1.6)
+    track += reverb(pads.mean(axis=1), 3.0, 0.4)
+    # Silence before the logo, then the signature D5 . rest . A5 on the logo.
+    a, b = int(pre * SR), int(logo * SR)
+    track[a:b] = 0
+    d5 = reverb(fm_glass(note("D5"), seconds=1.0, index=4.0, decay=0.32), 3.0, 0.3)
+    a5 = reverb(fm_glass(note("A5"), index=4.0, decay=1.6), 3.0, 0.3)
+    place(track, d5, logo, db(-13))
+    place(track, a5, logo + 0.5, db(-13))
+    pads = np.zeros((n, 2))
+    tail_s = max(0.5, cfg["length"] - END_SILENCE - (logo + 0.5))
+    pad_layer(pads, logo + 0.5, tail_s, CH["Dmaj9"], db(-15), cutoff=2400, attack=0.08, release=2.6)
+    pads = reverb(pads.mean(axis=1), 4.5, 0.3) * 0.9 + pads * 0.1
+    track += pads
+    place(track, sub(note("D1"), tail_s, attack=0.05, release=2.5), logo, db(-20))
+    place(track, reverb(fm_glass(note("A6"), index=2.0, decay=1.0), 3.0, 0.35), logo + 1.4, db(-27))
+    # Soft shimmer of the close (frames 2400-2682), calm from 2664 (44.4 s).
+    rng = np.random.default_rng(12)
+    for t in np.arange(logo + 0.9, cfg["length"] - 0.6, 0.23):
+        nn = ["D6", "F#6", "A6", "E6", "C#7"][int(rng.integers(0, 5))]
+        place(track, reverb(np.pad(fm_glass(note(nn), 1.0, index=1.5, decay=0.5), (0, SR)), 2.0, 0.4), t, db(-34 - 6 * max(0.0, t - (cfg["length"] - 1.6))))
+    e = int((cfg["length"] - END_SILENCE) * SR)
+    f = int(0.45 * SR)
+    track[e - f:e] *= np.linspace(1, 0, f)[:, None]
+    track[e:] = 0
+    return track
+
+
 def place(track, sound, at, gain=1.0):
     i = int(round(at * SR))
     if sound.ndim == 1:
@@ -185,6 +388,9 @@ def sfx_bank():
         "glassD6": lambda: glass("D6"), "glassA5": lambda: glass("A5", index=2.5, decay=1.2, wet=0.3),
         "glassA6": lambda: glass("A6", index=2.0, decay=1.0, wet=0.35),
         "glassD5": lambda: glass("D5", index=2.0), "glassF5": lambda: glass("F5", index=2.0),
+        "tic": lambda: S.cue_tic(2300), "tac": lambda: S.cue_tic(1500), "cut": S.cue_cut, "notif": S.cue_notif,
+        "counter": S.cue_counter, "glitch": S.cue_glitch, "impact": S.cue_impact, "logo_in": S.cue_logo_in,
+        "transition": S.cue_transition, "check": S.cue_check, "barcode": S.cue_barcode,
     }
 
 
@@ -210,7 +416,7 @@ def sfx_stem(film, lang):
             snd = cache.setdefault(name, bank[name]())
         else:  # a note name
             snd = cache.setdefault(name, M.glass(name, index=2.0, decay=1.0, wet=0.3))
-        snd = snd[:, 0] if snd.ndim == 2 and name not in ("split", "blade") else snd
+        snd = snd[:, 0] if snd.ndim == 2 and name not in ("split", "blade", "impact") else snd
         left, right = (np.cos((pan + 1) * np.pi / 4), np.sin((pan + 1) * np.pi / 4))
         if snd.ndim == 1:
             snd = np.stack([snd * left, snd * right], axis=1) * np.sqrt(2)

@@ -3,6 +3,7 @@ import { ArdaneLogo } from "../components/ArdaneLogo";
 import { Grain } from "../components/Grain";
 import { C, clamp, ease, INTER, type } from "../lib/brand";
 import { Format, LAYOUT, SIZE } from "../lib/formats";
+import { setKitLang } from "../lib/kit";
 import { Lang, LangContext, translate } from "../lib/i18n";
 
 /**
@@ -39,6 +40,7 @@ const Lockup: React.FC<{ size: number; word: number }> = ({ size, word }) => (
 );
 
 export const FormatFrame: React.FC<{ format: Format; lang: Lang; text: FrameText; children: React.ReactNode }> = ({ format, lang, text, children }) => {
+  setKitLang(lang); // the captures of the kit are read in the film's language
   if (format === "9x16") return <LangContext.Provider value={lang}>{children}</LangContext.Provider>;
   const { w, h } = SIZE[format];
   const L = LAYOUT[format];

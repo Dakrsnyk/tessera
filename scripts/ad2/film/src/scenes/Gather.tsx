@@ -1,11 +1,11 @@
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, Img, interpolate, random, staticFile } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, random } from "remotion";
 import * as THREE from "three";
 import { FilmAudio } from "../components/FilmAudio";
 import { Grain } from "../components/Grain";
 import { CameraLook, lensFov, PHONE, Phone3D, SCREEN, StudioEnvironment } from "../components/Phone3D";
 import { AXIS, C, clamp, ease, H, W } from "../lib/brand";
-import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect, wall } from "../lib/kit";
+import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect, wall, asset } from "../lib/kit";
 import { drawBlade, roundRectPath, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
 import { useFilmFrame } from "../lib/time";
@@ -129,7 +129,7 @@ export const Gather: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
           return (
             <Img
               key={src}
-              src={staticFile(src)}
+              src={asset(src)}
               style={{
                 position: "absolute",
                 left: px - w / 2,
@@ -174,12 +174,12 @@ export const Gather: React.FC<{ audio?: boolean }> = ({ audio = true }) => {
             }}
           >
             <Img
-              src={staticFile(heroWidget(fl.from, fl.index))}
+              src={asset(heroWidget(fl.from, fl.index))}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
             />
             {/* As it docks, it blades into the Sunset design. */}
             <Img
-              src={staticFile(heroWidget(U, fl.index))}
+              src={asset(heroWidget(U, fl.index))}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", clipPath: `inset(0 ${(1 - blade) * 100}% 0 0)` }}
             />
             {blade > 0 && blade < 1 && (

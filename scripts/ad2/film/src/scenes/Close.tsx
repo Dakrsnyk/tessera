@@ -26,11 +26,26 @@ export const LOGO = { size: 300, cx: AXIS, cy: 700 };
 const SLOT_TOP = LOGO.cy - LOGO.size / 2 + LOGO_GAP.top * LOGO.size;
 const SLOT_HEIGHT = (LOGO_GAP.bottom - LOGO_GAP.top) * LOGO.size;
 
-export const Close: React.FC<{ audio?: boolean; home?: string; screenFile?: string; tagline?: string }> = ({
+export const Close: React.FC<{
+  audio?: boolean;
+  home?: string;
+  screenFile?: string;
+  tagline?: string;
+  /** A drawn screen (1206 × 2622) instead of a capture: read every frame. */
+  screenCanvas?: () => HTMLCanvasElement | null;
+  /** Framing: lens (mm) and the phone's height as a fraction of the frame at the start and the end of the turn. */
+  lens?: number;
+  fraction0?: number;
+  fraction1?: number;
+}> = ({
   audio = true,
   home = "crepuscule",
   screenFile,
   tagline,
+  screenCanvas,
+  lens = 50,
+  fraction0 = 0.632,
+  fraction1 = 0.695,
 }) => {
   const t = useT();
   const frame = useFilmFrame();
@@ -39,14 +54,15 @@ export const Close: React.FC<{ audio?: boolean; home?: string; screenFile?: stri
   const images = useImages([HOME]);
   const screen = useCanvasTexture();
   if (images) {
-    screen.ctx.drawImage(images[HOME], 0, 0);
+    const drawn = screenCanvas ? screenCanvas() : null;
+    screen.ctx.drawImage(drawn ?? images[HOME], 0, 0, 1206, 2622);
     screen.texture.needsUpdate = true;
   }
 
   // The edge turn: yaw 0 → 90° with a 10 % dolly in, from the merge's framing (50 mm, 63 % of the height).
   const yaw = interpolate(frame, [0, 50], [0, 90], { ...clamp, easing: ease.transfer });
-  const fraction = interpolate(frame, [0, 50], [0.632, 0.695], { ...clamp, easing: ease.transfer });
-  const distance = PHONE.h / (2 * Math.tan(THREE.MathUtils.degToRad(lensFov(50)) / 2) * fraction);
+  const fraction = interpolate(frame, [0, 50], [fraction0, fraction1], { ...clamp, easing: ease.transfer });
+  const distance = PHONE.h / (2 * Math.tan(THREE.MathUtils.degToRad(lensFov(lens)) / 2) * fraction);
   const phoneH = H * fraction;
   const phoneFade = interpolate(frame, [44, 56], [1, 0], clamp);
   // The line: the rail catches the light as the phone goes edge-on, then contracts into the gap of the logo.
@@ -72,7 +88,7 @@ export const Close: React.FC<{ audio?: boolean; home?: string; screenFile?: stri
         <AbsoluteFill style={{ opacity: phoneFade }}>
           <ThreeCanvas width={W} height={H}>
             <StudioEnvironment />
-            <CameraLook lens={50} position={new THREE.Vector3(0, 0, distance)} target={new THREE.Vector3(0, 0, 0)} />
+            <CameraLook lens={lens} position={new THREE.Vector3(0, 0, distance)} target={new THREE.Vector3(0, 0, 0)} />
             <Phone3D yaw={yaw} screen={screen.texture} screenOn={1} />
           </ThreeCanvas>
         </AbsoluteFill>

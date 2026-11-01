@@ -1,5 +1,5 @@
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, Img, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate } from "remotion";
 import * as THREE from "three";
 import { Callout } from "../components/Callout";
 import { Grain } from "../components/Grain";
@@ -7,7 +7,7 @@ import { CameraLook, lensFov, PHONE, Phone3D, SCREEN, StudioEnvironment } from "
 import { Seam } from "../components/Seam";
 import { SplitText } from "../components/SplitText";
 import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
-import { HERO_WIDGETS, heroHome, heroWidget, k, type Rect } from "../lib/kit";
+import { asset, HERO_WIDGETS, heroHome, heroWidget, k, type Rect } from "../lib/kit";
 import { useFilmFrame } from "../lib/time";
 import { roundRectPath, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
@@ -37,12 +37,13 @@ const MACROS = HERO_WIDGETS[0];
 const PS = 900 / 1206;
 const CROP = 2240;
 
-export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]; end?: number; words?: boolean; suffix?: string }> = ({
+export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]; end?: number; words?: boolean; suffix?: string; counts?: boolean }> = ({
   steps = [0, 1, 2, 3, 4, 5, 6],
   at = [90, 120, 150, 180, 210, 240, 270],
   end = 360,
   words = true,
   suffix = "",
+  counts = true,
 }) => {
   const frame = useFilmFrame();
   const plan: Step[] = steps.map((i, j) => ({ ...STEPS_ALL[i], at: at[j] }));
@@ -103,7 +104,7 @@ export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]
     return own.length ? { from: own[0].at - 2, to: own[own.length - 1].at + 26 } : null;
   };
   const pane = (src: string, extra?: React.CSSProperties) => (
-    <Img src={staticFile(src)} style={{ position: "absolute", left: 0, top: 0, width: 900, height: 2622 * PS, ...extra }} />
+    <Img src={asset(src)} style={{ position: "absolute", left: 0, top: 0, width: 900, height: 2622 * PS, ...extra }} />
   );
   const cropH = CROP * PS;
 
@@ -162,14 +163,14 @@ export const Studio: React.FC<{ audio?: boolean; steps?: number[]; at?: number[]
       {/* The lifted widget, until it has become the Studio's preview. */}
       {form < 1 && (
         <Img
-          src={staticFile(heroWidget(U, MACROS.index))}
+          src={asset(heroWidget(U, MACROS.index))}
           style={{ position: "absolute", left: widgetRect[0], top: widgetRect[1], width: widgetRect[2], height: widgetRect[3], opacity: 1 - form * 0.9, filter: `drop-shadow(0 30px 60px rgba(0,0,0,${0.6 * (1 - form)}))` }}
         />
       )}
       {/* What each section holds (Faits vérifiés): 16 complete themes, 57 styles, 14 palettes. */}
       {(["Theme", "Style", "Colours"] as const).map((s) => {
         const r = sectionNow(s);
-        const label = { Theme: "16 themes", Style: "57 styles", Colours: "14 palettes" }[s];
+        const label = counts ? { Theme: "16 themes", Style: "57 styles", Colours: "14 palettes" }[s] : { Theme: "Themes", Style: "Styles", Colours: "Colors" }[s];
         return r ? <Callout key={s} label={label} at={[AXIS, paneY - 6]} labelY={paneY - 70} from={r.from} to={Math.min(r.to, end - 64)} /> : null;
       })}
       {words && (

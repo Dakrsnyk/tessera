@@ -236,9 +236,141 @@ def cue_close():
     return track
 
 
+# --- v3 main film (45 s, 2026): hook cues, impact, logo, scan -----------------------------------------
+def _norm(x, peak=1.0):
+    m = np.abs(x).max()
+    return x * (peak / m) if m > 0 else x
+
+
+def cue_tic(freq=2300):
+    """Clock tick of the hook: a dry wood click (tic = high, tac = low)."""
+    return _norm(fm_wood(freq, 0.09, ratio=1.4, index=2.0))
+
+
+def cue_cut(seed=41):
+    """Cut whoosh on a beat of the hook: 0.3 s of air that peaks early, with a dry click on the cut."""
+    n = int(0.3 * SR)
+    air = noise_band(0.3, 900, 7500, seed) * envelope(0.3, [(0, 0), (0.04, 1), (0.3, 0)])
+    out = np.zeros(n)
+    out += air
+    c = click(3200, 3)
+    out[: len(c)] += c * 0.8
+    return _norm(out)
+
+
+def cue_notif(freq="E6"):
+    """Notification pastille: two glass notes a fifth apart, 0.35 s."""
+    a = fm_glass(note(freq), 0.4, index=2.0, decay=0.09)
+    b = np.zeros_like(a)
+    g = fm_glass(note("B6"), 0.32, index=1.5, decay=0.08)
+    k = int(0.07 * SR)
+    b[k:k + len(g)] = g[: len(b) - k]
+    return _norm(reverb(a + 0.7 * b, 0.8, 0.2).mean(axis=1))
+
+
+def cue_counter(seconds=1.4, steps=10):
+    """Counter 1 -> 10 on « ten »: ten ticks whose pitch and level climb, spacing tightening a little."""
+    out = np.zeros(int((seconds + 0.2) * SR))
+    for k in range(steps):
+        pos = seconds * (k / steps) ** 0.92 if k else 0.0
+        f = 700 * (2600 / 700) ** (k / (steps - 1))
+        tk = fm_wood(f, 0.08, ratio=1.4, index=2.0) * db(-12 + 12 * k / (steps - 1))
+        i = int(pos * SR)
+        out[i:i + len(tk)] += tk
+    return _norm(out)
+
+
+def cue_glitch():
+    """Digital glitch at the end of the hook: stuttering sample-and-hold noise, 0.14 s, cut dead."""
+    rng = np.random.default_rng(77)
+    n = int(0.14 * SR)
+    out = np.zeros(n)
+    pos = 0
+    while pos < n:
+        ln = int(rng.integers(120, 1100))
+        held = np.repeat(rng.standard_normal(max(1, ln // int(rng.integers(8, 40)) + 1)), int(rng.integers(8, 40)))[:ln]
+        out[pos:pos + len(held)] += held[: n - pos] * (0.5 + rng.random() * 0.5)
+        pos += ln + int(rng.integers(0, 1500)) * int(rng.random() < 0.6)
+    buzz = np.sign(np.sin(2 * np.pi * 95 * t_axis(0.14))) * 0.4
+    out = out + buzz[:n]
+    out[-int(0.004 * SR):] *= np.linspace(1, 0, int(0.004 * SR))
+    return _norm(out)
+
+
+def cue_impact():
+    """The suck-in flash: sub drop 110 -> 36 Hz, a noise crash that closes, a sharp crack and a D major shimmer;
+    stereo, 3.6 s."""
+    seconds = 3.6
+    t = t_axis(seconds)
+    f = 36 + 74 * np.exp(-t / 0.10)
+    boom = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 1.0) * (1 - np.exp(-t / 0.002))
+    boom += 0.5 * np.sin(2 * np.pi * np.cumsum(2 * f) / SR) * np.exp(-t / 0.3)
+    crash = noise_band(seconds, 250, 9000, seed=88) * np.exp(-t / 0.28)
+    low = noise_band(seconds, 40, 700, seed=89) * np.exp(-t / 0.7)
+    crack = click(2800, 5)
+    out = boom * 1.0 + crash * 0.55 + low * 0.6
+    out[: len(crack)] += crack * 1.3
+    out = np.tanh(out * 1.4)
+    shim = np.zeros(len(t))
+    for nn, g in (("D5", 1.0), ("F#5", 0.7), ("A5", 0.8), ("D6", 0.5)):
+        s = fm_glass(note(nn), seconds - 0.06, index=2.5, decay=1.6)
+        shim[0:0 + len(s)] += s * g
+    shim = reverb(shim, 3.0, 0.45)
+    stereo = np.stack([out, out], axis=1) + shim * 0.22
+    return _norm(stereo)
+
+
+def cue_logo_in():
+    """The logo appears (« Meet Ardane »): bright glass sweep up, a D6 and A6 sparkle, a soft low thump; 1.8 s."""
+    seconds = 1.8
+    t = t_axis(seconds)
+    sweep = noise_band(0.5, 2500, 11000, seed=91) * envelope(0.5, [(0, 0), (0.12, 1), (0.5, 0)])
+    out = np.zeros(len(t))
+    out[: len(sweep)] += sweep * 0.5
+    out += thump(65, 60)[: len(t)] if len(thump(65, 60)) >= len(t) else np.pad(thump(65, 60), (0, len(t) - len(thump(65, 60))))
+    g = fm_glass(note("D6"), seconds, index=2.5, decay=0.9) * 0.7
+    g2 = np.zeros_like(g)
+    k = int(0.09 * SR)
+    g2[k:] = fm_glass(note("A6"), seconds, index=2.0, decay=0.8)[: len(g) - k] * 0.5
+    return _norm(reverb(out + g + g2, 2.5, 0.35).mean(axis=1))
+
+
+def cue_transition(seconds=1.0):
+    """Transition whoosh: air that swells to 55 % of its length then falls away, with a low swell under it."""
+    air = noise_band(seconds, 400, 9000, seed=95) * envelope(seconds, [(0, 0), (seconds * 0.55, 1), (seconds, 0)]) ** 1.5
+    low = noise_band(seconds, 60, 500, seed=96) * envelope(seconds, [(0, 0), (seconds * 0.5, 1), (seconds, 0)])
+    return _norm(air + 0.6 * low)
+
+
+def cue_check():
+    """Check mark: two rising glass notes, quick."""
+    a = fm_glass(note("A5"), 0.5, index=2.0, decay=0.12)
+    b = np.zeros_like(a)
+    g = fm_glass(note("E6"), 0.4, index=2.0, decay=0.25)
+    k = int(0.08 * SR)
+    b[k:k + len(g)] = g[: len(b) - k]
+    return _norm(reverb(a + b, 1.2, 0.25).mean(axis=1))
+
+
+def cue_barcode():
+    """Barcode scan: a burst of dry clicks (the laser line) then a clean 1.9 kHz beep of 90 ms; 0.45 s."""
+    out = np.zeros(int(0.45 * SR))
+    rng = np.random.default_rng(5)
+    for k in range(9):
+        c = click(3600 + 200 * k, 2) * (0.5 + rng.random() * 0.4)
+        i = int(k * 0.018 * SR)
+        out[i:i + len(c)] += c
+    t = t_axis(0.09)
+    beep = np.sin(2 * np.pi * 1900 * t) * np.hanning(len(t)) ** 0.5
+    i = int(0.2 * SR)
+    out[i:i + len(beep)] += beep * 0.9
+    return _norm(out)
+
+
 if __name__ == "__main__":
     cue, out = sys.argv[1:3]
-    audio = {"opening": cue_opening, "lock": cue_lock, "close": cue_close}[cue]()
+    audio = {"opening": cue_opening, "lock": cue_lock, "close": cue_close, "impact": cue_impact, "logo_in": cue_logo_in,
+             "glitch": cue_glitch, "barcode": cue_barcode, "check": cue_check}[cue]()
     peak = np.abs(audio).max()
     if peak > db(-1):
         audio *= db(-1) / peak
