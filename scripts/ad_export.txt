@@ -326,3 +326,13 @@ widget id-silver-priorities-s kind=priorities family=small scale=4 palette=mono
 widget id-silver-calories-s kind=caloriesLeft family=small scale=4 palette=mono
 widget id-silver-habits-m kind=habits family=medium scale=3 palette=mono
 widget id-silver-weekView-m kind=weekView family=medium scale=3 palette=mono
+
+# --- Partie 2 de la pub principale (config « Glass », d'après l'image de référence : grand widget solde/budget en haut, grand widget semaine en dessous,
+# fond d'écran photo monochrome, dock de verre). Le kit n'a que macros-m / calories-s en liquidGlass : à exporter (EN, mêmes échelles) :
+widget moneyDashboard-m-liquidGlass kind=moneyDashboard family=medium scale=3 theme=liquidGlass scheme=dark
+widget budgetLeft-m-liquidGlass kind=budgetLeft family=medium scale=3 theme=liquidGlass scheme=dark
+widget timetable-l-liquidGlass kind=timetable family=large scale=3 theme=liquidGlass scheme=dark
+widget weekView-m-liquidGlass kind=weekView family=medium scale=3 theme=liquidGlass scheme=dark
+widget todaysWorkout-m-liquidGlass kind=todaysWorkout family=medium scale=3 theme=liquidGlass scheme=dark
+widget habits-m-liquidGlass kind=habits family=medium scale=3 theme=liquidGlass scheme=dark
+# fond d'écran : un wall monochrome « photo » (noir et blanc, texture douce) pour la config Glass : wall-mono-photo (à créer/exporter, 1206 x 2622)
