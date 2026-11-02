@@ -29,25 +29,25 @@ struct LaunchView: View {
     }
 }
 
-/// The app mark, as on the icon: an A in two halves split by a narrow gap, white and peach on the
-/// coral gradient. With `settled` false the halves wait outside the frame, and slide in from each side
+/// The app mark, as on the icon: an A in two halves split by a narrow gap, white and pale ice blue on the
+/// Saphir gradient (the light blue 68B5F5 of the dark theme down to the Saphir blue 245B8F). With `settled` false the halves wait outside the frame, and slide in from each side
 /// when it turns true. With a `tint` (tinted Home Screens), the halves take that color, without ground.
 struct ArdaneMark: View {
     var size: CGFloat
     var settled = true
     var tint: Color?
 
-    static let coral = Color(hex: "FF7A59")
-    static let raspberry = Color(hex: "D9246A")
-    static let peach = Color(hex: "FFE0CC")
+    static let sapphireLight = Color(hex: "68B5F5")
+    static let sapphireDeep = Color(hex: "245B8F")
+    static let ice = Color(hex: "D6E9FA")
 
     var body: some View {
         ZStack {
             if tint == nil {
-                LinearGradient(colors: [Self.coral, Self.raspberry], startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(colors: [Self.sapphireLight, Self.sapphireDeep], startPoint: .topLeading, endPoint: .bottomTrailing)
             }
             half(.left, tint ?? .white, order: 0)
-            half(.right, tint?.opacity(0.6) ?? Self.peach, order: 1)
+            half(.right, tint?.opacity(0.6) ?? Self.ice, order: 1)
         }
         .frame(width: size, height: size)
         .clipShape(RoundedRectangle(cornerRadius: size * 0.2237, style: .continuous))
