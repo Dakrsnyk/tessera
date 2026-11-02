@@ -282,6 +282,44 @@ final class AdShotsUITests: XCTestCase {
         shot("hab-1")
     }
 
+    /// Business: the dashboard, the indicators chosen, then the sales and expenses page.
+    func testAdBusiness() {
+        launch("app-business")
+        let hero = app.otherElements["business-hero"]
+        guard hero.waitForExistence(timeout: 12) else { return }
+        pause(1.5)
+        shot("app-business-hero")
+        // Indicators: the list opens, one is picked, « OK » (the button has no other identifier) closes it.
+        if tap(app.buttons["business-choose-kpis"]) {
+            let visitors = app.buttons["kpi-visitors"]
+            if visitors.waitForExistence(timeout: 8) {
+                visitors.tap()
+                pause(0.8)
+                let ok = app.buttons["OK"]
+                if ok.waitForExistence(timeout: 4) { ok.tap() }
+                pause(1.4)
+                shot("app-business-kpis")
+            }
+        }
+        // Sales and expenses: a page of its own (the title is a navigation bar in the app's language).
+        if tap(app.buttons["business-sales"]) {
+            pause(1.6)
+            shot("app-business-sales")
+        }
+    }
+
+    /// Planning: the home of the timetable import. The reading itself needs the system photo picker or the
+    /// Files sheet, which a test cannot drive, and there is no demo fixture: the review step is not captured.
+    func testAdScheduleImport() {
+        launch("app-planning")
+        guard app.otherElements["week-timetable"].waitForExistence(timeout: 12) else { return }
+        pause(1)
+        guard tap(app.buttons["planning-import-schedule"]) else { return }
+        guard app.buttons["schedule-import-photo"].waitForExistence(timeout: 8) else { return }
+        pause(1.5)
+        shot("app-planning-import")
+    }
+
     /// The exercise library read slowly, then two exercise sheets with their demonstration seen at 3/4.
     func testAdExerciseLibrary() {
         launch("app-fitness-library")

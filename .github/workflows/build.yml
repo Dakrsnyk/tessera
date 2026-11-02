@@ -683,7 +683,7 @@ jobs:
             xcrun simctl launch "$DEVICE" com.dakrsnyk.ardane "${ARGS[@]}" -screenshotScreen home < /dev/null > /dev/null || true
             sleep 8
           }
-          for scene in testAdFitnessSession testAdNutritionAdd testAdFinancesPeriods testAdStudio testAdPlanning testAdHabits testAdExerciseLibrary; do
+          for scene in testAdFitnessSession testAdNutritionAdd testAdFinancesPeriods testAdStudio testAdPlanning testAdHabits testAdExerciseLibrary testAdBusiness testAdScheduleImport; do
             run_scene "$scene"
           done
           # The main film shows the app in Dark appearance, floating in black: its scenes again, in dark
