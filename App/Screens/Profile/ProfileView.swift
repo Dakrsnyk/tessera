@@ -219,9 +219,9 @@ struct ProfileView: View {
                     }
                     .buttonStyle(.borderless)
                     foodSource(name: tr("Fichier canadien sur les éléments nutritifs"), url: FoodSourceLinks.openGovernmentLicence,
-                               text: tr("Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuvé par lui."))
+                               text: tr("Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui. Outil de référence, pas un avis médical."))
                     foodSource(name: "USDA FoodData Central", url: FoodSourceLinks.usda,
-                               text: tr("Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service."))
+                               text: tr("U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0). Une partie des valeurs de la table d'aliments intégrée et les aliments que le Fichier canadien n'a pas viennent de l'USDA ; ses valeurs ne sont jamais mélangées à celles du Fichier canadien. fdc.nal.usda.gov"))
                 } header: {
                     Text(tr("Sources des données alimentaires"))
                 }

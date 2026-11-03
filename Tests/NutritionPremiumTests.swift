@@ -242,16 +242,22 @@ final class NutritionPremiumTests: XCTestCase {
     // MARK: Canadian Nutrient File
 
     func testTheNutrientFileGivesTheNewNutrientsOnlyWhereItHasThem() throws {
-        guard !NutrientFile.isEmpty else { return XCTFail("cnf-foods.json missing from the app") }
+        guard NutrientFile.foodRepository != nil else { return XCTFail("ardane-food.sqlite missing from the app") }
         let espresso = try XCTUnwrap(NutrientFile.search("espresso").first { $0.id == "cnf.4779" })
         XCTAssertEqual(espresso.micros?.caffeineMg, 212)
         XCTAssertEqual(espresso.micros?.alcohol, 0)
-        XCTAssertNil(espresso.micros?.omega3Fat, "No value in the file: unknown")
+        XCTAssertNil(espresso.micros?.omega6Fat, "No value in the file for the food: unknown, not zero")
         let spinach = try XCTUnwrap(NutrientFile.search("spinach raw").first { $0.id == "cnf.2213" })
         XCTAssertEqual(try XCTUnwrap(spinach.micros?.vitaminKMcg), 482.9, accuracy: 0.01)
         XCTAssertEqual(spinach.micros?.potassiumMg, 558, "The earlier columns are still read")
-        let napa = try XCTUnwrap(NutrientFile.search("napa").first { $0.id == "cnf.501098" })
-        XCTAssertNil(napa.micros, "A row without any added value")
+        // `cnf.501098` is the identifier of the 2015 edition: it is Food_Code 6304 today, and has all its nutrients (the
+        // earlier base gave the 1,027 foods numbered above 9999 none, which this test used to record).
+        let napa = try XCTUnwrap(NutrientFile.item(id: "cnf.501098"))
+        XCTAssertEqual(napa.id, "cnf.6304")
+        let napaMicros = try XCTUnwrap(napa.micros, "Cabbage, napa, raw has its fats, minerals and vitamins")
+        XCTAssertEqual(napaMicros.potassiumMg, 253)
+        XCTAssertEqual(napaMicros.vitaminKMcg, 80)
+        XCTAssertNotNil(napaMicros.vitaminAMcg)
     }
 
     // MARK: Widgets

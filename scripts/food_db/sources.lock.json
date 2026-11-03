@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "sources": {
+    "fcen2026": {
+      "name": "Fichier canadien sur les éléments nutritifs (FCÉN) 2026, 14e édition, tous les fichiers de données",
+      "url": "https://open.canada.ca/data/dataset/1b6139bd-ed7e-4043-bc28-ff00e10f3109/resource/019f2a90-e3a9-489d-b6e1-f74f4ba1d006/download/cnf_fcen_all-files-data_2026.zip",
+      "page": "https://open.canada.ca/data/dataset/1b6139bd-ed7e-4043-bc28-ff00e10f3109",
+      "file": "cnf_fcen_all-files-data_2026.zip",
+      "downloaded": "2026-11-02",
+      "bytes": 26656195,
+      "sha256": "f5faad8977ee6bbdd9d69c8649077cacd87d8658ad200509a4047db1e29edcdd",
+      "license": "Licence du gouvernement ouvert – Canada 2.0",
+      "license_url": "https://open.canada.ca/en/open-government-licence-canada",
+      "used_for": "pivot : aliments, noms FR/EN, nutriments, mesures, provenance par valeur"
+    },
+    "fcen2015_foods": {
+      "name": "Fichier canadien sur les éléments nutritifs (FCÉN) 2015, liste des aliments (API officielle, food_code et nom anglais)",
+      "url": "https://food-nutrition.canada.ca/api/canadian-nutrient-file/food/?lang=en&type=json",
+      "page": "https://food-nutrition.canada.ca/api/canadian-nutrient-file/",
+      "file": "food2015.json",
+      "downloaded": "2026-11-02",
+      "bytes": 471337,
+      "sha256": "1af146f3b8db61d761edad818a9339c9e5fed07eed1f33c79f2600aaeb66c8e0",
+      "license": "Licence du gouvernement ouvert – Canada 2.0",
+      "license_url": "https://open.canada.ca/en/open-government-licence-canada",
+      "used_for": "table d'alias : FoodCode 2015 de chaque ancien identifiant cnf.<FoodID>"
+    },
+    "usda_sr_legacy": {
+      "name": "USDA FoodData Central, SR Legacy (avril 2018, gelée)",
+      "url": "https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_sr_legacy_food_csv_2018-04.zip",
+      "page": "https://fdc.nal.usda.gov/download-datasets",
+      "file": "FoodData_Central_sr_legacy_food_csv_2018-04.zip",
+      "downloaded": "2026-11-02",
+      "bytes": 6074592,
+      "sha256": "b80817294b8850530aaedf2e515c02593b1824f763a0ff356e5c2081643e6fd0",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "used_for": "aliments sans équivalent FCÉN (lien par NDB), portions"
+    },
+    "usda_fndds": {
+      "name": "USDA FoodData Central, FNDDS 2021-2023 (survey_food, 31 octobre 2024)",
+      "url": "https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_survey_food_csv_2024-10-31.zip",
+      "page": "https://fdc.nal.usda.gov/download-datasets",
+      "file": "FoodData_Central_survey_food_csv_2024-10-31.zip",
+      "downloaded": "2026-11-02",
+      "bytes": 3325692,
+      "sha256": "5ccc25ec2777a8982fbb61378a42f415316173eb11e48c9a8ba4cb19f5a4f29c",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "used_for": "pas utilisé en B1 (plats curatés prévus en B2)"
+    },
+    "usda_foundation": {
+      "name": "USDA FoodData Central, Foundation Foods (30 avril 2026)",
+      "url": "https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_foundation_food_csv_2026-04-30.zip",
+      "page": "https://fdc.nal.usda.gov/download-datasets",
+      "file": "FoodData_Central_foundation_food_csv_2026-04-30.zip",
+      "downloaded": "2026-11-02",
+      "bytes": 3825741,
+      "sha256": "70457ee9d9342f43bda2010318c85f04210c689fdeb9cd2da4c513b0e8dbc655",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "used_for": "pas utilisé en B1"
+    },
+    "usda_yields": {
+      "name": "USDA Table of Cooking Yields for Meat and Poultry, Release 2 (2014, publié 2023-11-30)",
+      "url": "https://ndownloader.figshare.com/files/43365402",
+      "page": "https://catalog.data.gov/dataset/usda-table-of-cooking-yields-for-meat-and-poultry",
+      "file": "USDA_CookingYields_MeatPoultry02_0.csv",
+      "downloaded": "2026-11-02",
+      "bytes": 21559,
+      "sha256": "e6144d36488781c3eab2428bd4fd576d85092a93fc709aa05868d20fe6ba1f4f",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "used_for": "rendements de cuisson des viandes (lien par NDB)"
+    },
+    "usda_yields_dd": {
+      "name": "USDA Table of Cooking Yields, dictionnaire de données",
+      "url": "https://ndownloader.figshare.com/files/43365405",
+      "page": "https://catalog.data.gov/dataset/usda-table-of-cooking-yields-for-meat-and-poultry",
+      "file": "USDA_CookingYields_MeatPoultry02_DD.csv",
+      "downloaded": "2026-11-02",
+      "bytes": 1677,
+      "sha256": "a58e2eaca6ea1ebd2d8f24ef8130f0bc02d6621459b267278ade96e891f18870",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "used_for": "documentation des colonnes des rendements"
+    }
+  }
+}
