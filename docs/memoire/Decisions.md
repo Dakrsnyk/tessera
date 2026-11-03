@@ -29,6 +29,9 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-10-22 : lot 7 : une demande de permission iOS ne part que sur une action de l'utilisateur et après une explication affichée une fois ; un refus est respecté (jamais de relance en boucle).
 - 2026-10-22 : processus de livraison voulu par l'utilisateur : après chaque série de modifications, UNE version interne Premium débloqué (`[interne]`) pour qu'il teste ; la version sans Premium (`[testflight]`) n'est PAS envoyée tant que tout n'est pas prêt pour la publication ; l'assistant vérifie lui-même le fonctionnement sans Premium (tests logiques, tests d'interface `[apps]`/`[daily]` du simulateur) sans rien publier sur TestFlight.
 
+- 2026-10-26 : scanner alimentaire SANS envoi hors de l'appareil (photos analysées sur l'iPhone ; `OnlineMealAnalyzer` désactivé) ; toute option cloud = décision explicite + mise à jour de PRIVACY.md, du libellé caméra et du manifeste (consigné ici le 2026-11-02, la décision n'était que dans Demandes.md).
+- 2026-11-02 (chantier 22, `docs/scanner/Decision-technique.md`) : quantités par assiette de référence + aire du masque + densité (tous iPhone), LiDAR en mode expérimental seulement ; reconnaissance v2 DINOv2 + segmentation RF-DETR-Seg entraînées sur MyFoodRepo (CC BY 4.0) ; base nutritionnelle FCÉN 2026 + USDA, jamais de fusion de valeurs entre sources ; Open Food Facts en ligne seulement (API v3, recherche explicite) ; aucune précision annoncée sans repas pesés ; ancien pipeline gardé en secours.
+
 ## Publicité
 - Une seule publicité exceptionnelle plutôt que plusieurs ordinaires ; seulement des fonctionnalités qui existent vraiment, montrées avec de vrais éléments de l'app.
 - Direction retenue : [[Concept-THE-OPENING]] (la fente du « A » d'Ardane comme lumière et comme transition).
