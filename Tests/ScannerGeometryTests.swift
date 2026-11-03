@@ -26,15 +26,18 @@ final class ScannerGeometryTests: XCTestCase {
         let g = gravity(tilt: tilt)
         let center = ScanVector3(x: offset, y: 0, z: distance / g.z)
         let focalLength = focal
-        return FoodMask(width: width, height: height) { column, row in
-            let ray = ScanVector3(x: (Double(column) + 0.5 - 320) / focalLength, y: (Double(row) + 0.5 - 240) / focalLength, z: 1)
-            let along = ray.dot(g)
+        return FoodMask(width: width, height: height) { (column: Int, row: Int) -> Bool in
+            let px: Double = (Double(column) + 0.5 - 320) / focalLength
+            let py: Double = (Double(row) + 0.5 - 240) / focalLength
+            let ray = ScanVector3(x: px, y: py, z: 1)
+            let along: Double = ray.dot(g)
             guard along > 1e-9 else { return false }
-            let scale = distance / along
-            let dx = ray.x * scale - center.x
-            let dy = ray.y * scale - center.y
-            let dz = ray.z * scale - center.z
-            return dx * dx + dy * dy + dz * dz <= radius * radius
+            let scale: Double = distance / along
+            let dx: Double = ray.x * scale - center.x
+            let dy: Double = ray.y * scale - center.y
+            let dz: Double = ray.z * scale - center.z
+            let squared: Double = dx * dx + dy * dy + dz * dz
+            return squared <= radius * radius
         }
     }
 
@@ -44,12 +47,15 @@ final class ScannerGeometryTests: XCTestCase {
         let a = 90.0
         let b = 50.0
         let angle = 30.0 * Double.pi / 180
-        let mask = FoodMask(width: 400, height: 300) { column, row in
-            let x = Double(column) + 0.5 - 200
-            let y = Double(row) + 0.5 - 150
-            let u = x * cos(angle) + y * sin(angle)
-            let v = -x * sin(angle) + y * cos(angle)
-            return (u / a) * (u / a) + (v / b) * (v / b) <= 1
+        let cosine = cos(angle)
+        let sine = sin(angle)
+        let mask = FoodMask(width: 400, height: 300) { (column: Int, row: Int) -> Bool in
+            let x: Double = Double(column) + 0.5 - 200
+            let y: Double = Double(row) + 0.5 - 150
+            let u: Double = (x * cosine + y * sine) / a
+            let v: Double = (y * cosine - x * sine) / b
+            let r: Double = u * u + v * v
+            return r <= 1
         }
         let fit = try XCTUnwrap(ScanGeometry.fitEllipse(of: mask))
         XCTAssertEqual(fit.centerX, 200, accuracy: 0.5)
