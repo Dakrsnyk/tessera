@@ -886,6 +886,16 @@ jobs:
           [ -d adkit-en ] && mkdir -p report/adkit-en && cp -R adkit-en/. report/adkit-en/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
           [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
+          # Dated history of the text reports: ci-report is rebuilt from scratch at every run, so the previous
+          # history/ folder is fetched alone (partial, sparse clone: never the heavy kits) and this run's
+          # report.txt and text/JSON test reports are added to it. The 60 most recent runs are kept.
+          git clone -q --depth 1 --filter=blob:none --no-checkout --branch ci-report "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" previous-report 2>/dev/null \
+            && (cd previous-report && git sparse-checkout set history >/dev/null 2>&1 && git checkout -q >/dev/null 2>&1) || true
+          if [ -d previous-report/history ]; then mkdir -p report/history && cp -R previous-report/history/. report/history/; fi
+          RUNDIR="report/history/$(date -u +%F)-run$(printf '%06d' ${{ github.run_number }})"
+          mkdir -p "$RUNDIR" && cp report/report.txt "$RUNDIR"/
+          [ -d testshots ] && find testshots -maxdepth 1 -type f \( -name '*.txt' -o -name '*.json' \) -exec cp {} "$RUNDIR"/ \; 2>/dev/null || true
+          ls -1 report/history | sort -r | tail -n +61 | while read -r old; do rm -rf "report/history/$old"; done
           cd report
           git init -q
           git checkout -q -b ci-report

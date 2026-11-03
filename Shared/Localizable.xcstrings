@@ -23548,6 +23548,53 @@
         }
       }
     },
+    "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada, 2026 (licence du gouvernement ouvert – Canada), et USDA FoodData Central. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allgemeine Lebensmittel: Canadian Nutrient File, Health Canada, 2026 (Open Government Licence – Canada), und USDA FoodData Central. Ardane ist keine offizielle Version der CNF und ist weder mit Health Canada verbunden noch von Health Canada gebilligt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generic foods: Canadian Nutrient File, Health Canada, 2026 (Open Government Licence – Canada), and USDA FoodData Central. Ardane is not an official version of the CNF and is not affiliated with or endorsed by Health Canada."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimentos genéricos: Canadian Nutrient File, Health Canada, 2026 (Licencia de Gobierno Abierto – Canadá), y USDA FoodData Central. Ardane no es una versión oficial del CNF, ni está afiliada a Health Canada ni avalada por esta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada, 2026 (licence du gouvernement ouvert – Canada), et USDA FoodData Central. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimenti generici: Canadian Nutrient File, Health Canada, 2026 (Open Government Licence – Canada), e USDA FoodData Central. Ardane non è una versione ufficiale del CNF e non è affiliata a Health Canada né da essa approvata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般的な食品：Canadian Nutrient File（カナダ保健省、2026年、Open Government Licence – Canada）および USDA FoodData Central。Ardane は CNF の公式版ではなく、カナダ保健省と提携も承認もされていません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimentos genéricos: Canadian Nutrient File, Health Canada, 2026 (Licença de Governo Aberto – Canadá), e USDA FoodData Central. O Ardane não é uma versão oficial do CNF, nem é afiliado à Health Canada ou endossado por ela."
+          }
+        }
+      }
+    },
     "Allaitante": {
       "extractionState": "manual",
       "localizations": {
@@ -61383,53 +61430,6 @@
         }
       }
     },
-    "Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuvé par lui.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enthält Informationen unter der Open Government Licence – Canada. Quelle: Canadian Nutrient File, Health Canada. Ardane steht in keiner Verbindung zu Health Canada und wird von dieser nicht unterstützt."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contains information licensed under the Open Government Licence – Canada. Source: Canadian Nutrient File, Health Canada. Ardane is not affiliated with or endorsed by Health Canada."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contiene información con licencia Open Government Licence – Canada. Fuente: Canadian Nutrient File, Health Canada. Ardane no está afiliada a Health Canada ni cuenta con su aval."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuvé par lui."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contiene informazioni con licenza Open Government Licence – Canada. Fonte: Canadian Nutrient File, Health Canada. Ardane non è affiliata a Health Canada né approvata da essa."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open Government Licence – Canada に基づくライセンス情報を含みます。出典：カナダ栄養成分データベース（Health Canada）。ArdaneはHealth Canadaと提携しておらず、承認も受けていません。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contém informações licenciadas sob a Open Government Licence – Canada. Fonte: Canadian Nutrient File, Health Canada. O Ardane não é afiliado nem endossado pela Health Canada."
-          }
-        }
-      }
-    },
     "Continue jusque derrière le dos.": {
       "extractionState": "manual",
       "localizations": {
@@ -94937,6 +94937,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Canadian Nutrient File"
+          }
+        }
+      }
+    },
+    "Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui. Outil de référence, pas un avis médical.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File, Health Canada, 2026. Enthält Informationen, die unter der Open Government Licence – Canada lizenziert sind. Ardane ist keine offizielle Version der CNF und ist weder mit Health Canada verbunden noch von Health Canada gebilligt. Ein Nachschlagewerk, kein medizinischer Rat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File, Health Canada, 2026. Contains information licensed under the Open Government Licence – Canada. Ardane is not an official version of the CNF and is not affiliated with or endorsed by Health Canada. A reference tool, not medical advice."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File, Health Canada, 2026. Contiene información con licencia de Gobierno Abierto – Canadá. Ardane no es una versión oficial del CNF, ni está afiliada a Health Canada ni avalada por esta. Herramienta de referencia, no consejo médico."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui. Outil de référence, pas un avis médical."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File, Health Canada, 2026. Contiene informazioni concesse in licenza con la Open Government Licence – Canada. Ardane non è una versione ufficiale del CNF e non è affiliata a Health Canada né da essa approvata. Strumento di riferimento, non un parere medico."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File（カナダ保健省、2026年）。Open Government Licence – Canada に基づいて提供される情報を含みます。Ardane は CNF の公式版ではなく、カナダ保健省と提携も承認もされていません。参考用のツールであり、医学的な助言ではありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canadian Nutrient File, Health Canada, 2026. Contém informações licenciadas sob a Licença de Governo Aberto – Canadá. O Ardane não é uma versão oficial do CNF, nem é afiliado à Health Canada ou endossado por ela. Ferramenta de referência, não um conselho médico."
           }
         }
       }
@@ -152610,6 +152657,100 @@
         }
       }
     },
+    "Open Food Facts reçoit trop de demandes en ce moment : le produit %@ n'a pas pu être cherché. Réessaie dans un instant.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts erhält gerade zu viele Anfragen: Das Produkt %@ konnte nicht gesucht werden. Versuch es gleich noch einmal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts is getting too many requests right now: product %@ couldn't be looked up. Try again in a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts recibe demasiadas solicitudes en este momento: no se pudo buscar el producto %@. Vuelve a intentarlo en un instante."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts reçoit trop de demandes en ce moment : le produit %@ n'a pas pu être cherché. Réessaie dans un instant."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts sta ricevendo troppe richieste in questo momento: non è stato possibile cercare il prodotto %@. Riprova tra un attimo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts へのリクエストが現在集中しています：商品 %@ を検索できませんでした。少し待ってからもう一度お試しください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Open Food Facts está recebendo pedidos demais no momento: não foi possível buscar o produto %@. Tente de novo em um instante."
+          }
+        }
+      }
+    },
+    "Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts erhält gerade zu viele Anfragen. Versuch es gleich noch einmal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts is getting too many requests right now. Try again in a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts recibe demasiadas solicitudes en este momento. Vuelve a intentarlo en un instante."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts sta ricevendo troppe richieste in questo momento. Riprova tra un attimo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Food Facts へのリクエストが現在集中しています。少し待ってからもう一度お試しください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Open Food Facts está recebendo pedidos demais no momento. Tente de novo em um instante."
+          }
+        }
+      }
+    },
     "Options de %@": {
       "extractionState": "manual",
       "localizations": {
@@ -196978,6 +197119,53 @@
         }
       }
     },
+    "Service occupé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dienst ausgelastet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service busy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servicio ocupado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service occupé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servizio occupato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サービス混雑中"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serviço ocupado"
+          }
+        }
+      }
+    },
     "Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours.": {
       "extractionState": "manual",
       "localizations": {
@@ -227904,6 +228092,53 @@
         }
       }
     },
+    "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0). Une partie des valeurs de la table d'aliments intégrée et les aliments que le Fichier canadien n'a pas viennent de l'USDA ; ses valeurs ne sont jamais mélangées à celles du Fichier canadien. fdc.nal.usda.gov": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (April 2018), und USDA Table of Cooking Yields for Meat and Poultry, Release 2 (gemeinfrei, CC0). Ein Teil der Werte der eingebauten Lebensmitteltabelle und die Lebensmittel, die in der Canadian Nutrient File fehlen, stammen vom USDA; diese Werte werden nie mit denen der Canadian Nutrient File vermischt. fdc.nal.usda.gov"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (April 2018), and USDA Table of Cooking Yields for Meat and Poultry, Release 2 (public domain, CC0). Some values of the built-in food table and the foods the Canadian Nutrient File lacks come from the USDA; its values are never mixed with those of the Canadian Nutrient File. fdc.nal.usda.gov"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (abril de 2018), y USDA Table of Cooking Yields for Meat and Poultry, Release 2 (dominio público, CC0). Algunos valores de la tabla de alimentos integrada y los alimentos que no tiene el Canadian Nutrient File proceden del USDA; sus valores nunca se mezclan con los del Canadian Nutrient File. fdc.nal.usda.gov"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0). Une partie des valeurs de la table d'aliments intégrée et les aliments que le Fichier canadien n'a pas viennent de l'USDA ; ses valeurs ne sont jamais mélangées à celles du Fichier canadien. fdc.nal.usda.gov"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (aprile 2018), e USDA Table of Cooking Yields for Meat and Poultry, Release 2 (pubblico dominio, CC0). Una parte dei valori della tabella degli alimenti integrata e gli alimenti assenti dal Canadian Nutrient File provengono dall'USDA; i suoi valori non vengono mai mescolati con quelli del Canadian Nutrient File. fdc.nal.usda.gov"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U.S. Department of Agriculture, Agricultural Research Service。FoodData Central、SR Legacy（2018年4月）、および USDA Table of Cooking Yields for Meat and Poultry, Release 2（パブリックドメイン、CC0）。内蔵食品表の一部の値と、Canadian Nutrient File にない食品は USDA のものです。その値が Canadian Nutrient File の値と混ぜられることはありません。fdc.nal.usda.gov"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (abril de 2018), e USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domínio público, CC0). Parte dos valores da tabela de alimentos integrada e os alimentos que o Canadian Nutrient File não tem vêm do USDA; seus valores nunca são misturados com os do Canadian Nutrient File. fdc.nal.usda.gov"
+          }
+        }
+      }
+    },
     "Un carnet de serre : habitudes, eau, calendrier et notes.": {
       "extractionState": "manual",
       "localizations": {
@@ -230015,53 +230250,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uma sombra marcada, mais contraste."
-          }
-        }
-      }
-    },
-    "Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Teil der Werte der integrierten Lebensmitteltabelle stammt aus USDA FoodData Central (gemeinfrei, CC0). U.S. Department of Agriculture, Agricultural Research Service."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Some of the values in the built-in food table come from USDA FoodData Central (public domain, CC0). U.S. Department of Agriculture, Agricultural Research Service."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Parte de los valores de la tabla de alimentos integrada procede de USDA FoodData Central (dominio público, CC0). U.S. Department of Agriculture, Agricultural Research Service."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una parte dei valori della tabella alimenti integrata proviene da USDA FoodData Central (pubblico dominio, CC0). U.S. Department of Agriculture, Agricultural Research Service."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "内蔵の食品表の値の一部は、USDA FoodData Central（パブリックドメイン、CC0）に基づきます。U.S. Department of Agriculture, Agricultural Research Service。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Parte dos valores da tabela de alimentos integrada vem do USDA FoodData Central (domínio público, CC0). U.S. Department of Agriculture, Agricultural Research Service."
           }
         }
       }

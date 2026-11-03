@@ -369,13 +369,37 @@ enum FoodDatabase {
 }
 
 /// Packaged products from Open Food Facts (open database, ODbL licence), by name or barcode.
+///
+/// - A barcode is looked up with the product API v3 (`world.openfoodfacts.org/api/v3/product/{code}`), one request
+///   per scan: the API files a UPC-A and an EAN-13 with a leading zero together. Open Food Facts allows 15 of
+///   these a minute per address.
+/// - A name is searched with Search-a-licious (`search.openfoodfacts.org/search`), only when the person asks for
+///   it: Open Food Facts forbids searching at every keystroke.
 enum OpenFoodFacts {
+    /// What stops a request without the person being offline.
+    enum Failure: Error {
+        /// HTTP 429 or 503: the service is overloaded, or is limiting this app. Asking again a moment later works.
+        case busy
+    }
+
     private static func request(_ url: URL) -> URLRequest {
         var request = URLRequest(url: url)
         request.timeoutInterval = 15
         request.setValue(AppInfo.userAgent, forHTTPHeaderField: "User-Agent")
         return request
     }
+
+    /// One answer of the service: the body and the HTTP status (0 when it isn't an HTTP answer).
+    typealias Answer = (data: Data, statusCode: Int)
+
+    /// Asks the service for a URL. The tests give `lookup` another way to answer, so no test reaches the network.
+    static func fetchLive(_ url: URL) async throws -> Answer {
+        let (data, response) = try await URLSession.shared.data(for: request(url))
+        return (data, (response as? HTTPURLResponse)?.statusCode ?? 0)
+    }
+
+    /// 429 (too many requests) and 503 (unavailable): not a lost connection.
+    private static func isBusy(_ statusCode: Int) -> Bool { statusCode == 429 || statusCode == 503 }
 
     /// Numbers in Open Food Facts are sometimes sent as text.
     private struct Flexible: Decodable {
@@ -388,6 +412,41 @@ enum OpenFoodFacts {
                 value = Double(text.replacingOccurrences(of: ",", with: "."))
             } else {
                 value = nil
+            }
+        }
+    }
+
+    /// An element that may be unreadable without spoiling the list around it.
+    private struct Lossy<Value: Decodable>: Decodable {
+        let value: Value?
+        init(from decoder: Decoder) throws { value = try? Value(from: decoder) }
+    }
+
+    /// Text that Search-a-licious sends as a string, or as one string per language (`{"fr": …, "en": …}`).
+    private struct LocalizedText: Decodable {
+        let text: String?
+        init(from decoder: Decoder) throws {
+            let c = try decoder.singleValueContainer()
+            if let plain = try? c.decode(String.self) {
+                text = plain.trimmed.nonEmpty
+            } else if let byLanguage = try? c.decode([String: String].self) {
+                let preferred = ["fr", "en", "main"] + byLanguage.keys.sorted()
+                text = preferred.compactMap { byLanguage[$0]?.trimmed.nonEmpty }.first
+            } else {
+                text = nil
+            }
+        }
+    }
+
+    /// The brands of a Search-a-licious hit: a list (`["Ferrero", "Nutella"]`), or a string. The first one is kept.
+    private struct BrandList: Decodable {
+        let first: String?
+        init(from decoder: Decoder) throws {
+            let c = try decoder.singleValueContainer()
+            if let list = try? c.decode([String].self) {
+                first = list.compactMap { $0.trimmed.nonEmpty }.first
+            } else {
+                first = (try? c.decode(String.self))?.trimmed.nonEmpty
             }
         }
     }
@@ -485,25 +544,76 @@ enum OpenFoodFacts {
 
     static let fields = "code,product_name,product_name_fr,product_name_en,generic_name,brands,serving_quantity,serving_size,nutriments"
 
-    static func search(_ query: String) async throws -> [FoodItem] {
-        var components = URLComponents(string: "https://world.openfoodfacts.org/cgi/search.pl")!
-        components.queryItems = [
-            URLQueryItem(name: "search_terms", value: query),
-            URLQueryItem(name: "search_simple", value: "1"),
-            URLQueryItem(name: "action", value: "process"),
-            URLQueryItem(name: "json", value: "1"),
-            URLQueryItem(name: "page_size", value: "25"),
-            URLQueryItem(name: "fields", value: fields),
-        ]
-        let (data, response) = try await URLSession.shared.data(for: request(components.url!))
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw ServiceError.badResponse }
-        struct Page: Decodable { let products: [Product]? }
-        let page = try JSONDecoder().decode(Page.self, from: data)
-        return (page.products ?? []).compactMap { $0.item() }
+    // MARK: Search by name (Search-a-licious)
+
+    static let searchFields = "code,product_name,product_name_fr,product_name_en,brands,serving_quantity,serving_size,nutriments"
+
+    /// One hit of Search-a-licious: `brands` is a list and the nutrition is `*_100g` only. Read like a product of
+    /// the barcode API, so both go through the same `item()`.
+    private struct SearchHit: Decodable {
+        let code: String?
+        let product_name: LocalizedText?
+        let product_name_fr: LocalizedText?
+        let product_name_en: LocalizedText?
+        let brands: BrandList?
+        let serving_quantity: Flexible?
+        let serving_size: LocalizedText?
+        let nutriments: [String: Flexible]?
+
+        var product: Product {
+            Product(code: code, product_name: product_name?.text, product_name_fr: product_name_fr?.text,
+                    product_name_en: product_name_en?.text, generic_name: nil, brands: brands?.first,
+                    serving_quantity: serving_quantity, serving_size: serving_size?.text, nutriments: nutriments)
+        }
     }
 
+    private struct SearchPage: Decodable {
+        let hits: [Lossy<SearchHit>]?
+    }
+
+    /// The words of a search, as Search-a-licious should read them. It reads `q` as a Lucene query, where a word
+    /// followed by a colon is a field name (« lait:2 » finds nothing) and a lone quote is an error: those
+    /// characters (colon, double quote, backslash) become spaces.
+    static func searchText(_ query: String) -> String {
+        query.components(separatedBy: CharacterSet(charactersIn: ":\"\\"))
+            .joined(separator: " ")
+            .split(whereSeparator: \.isWhitespace)
+            .joined(separator: " ")
+    }
+
+    /// The Search-a-licious request for some words (25 results, names preferably in French).
+    static func searchURL(_ query: String) -> URL? {
+        var components = URLComponents(string: "https://search.openfoodfacts.org/search")
+        components?.queryItems = [
+            URLQueryItem(name: "q", value: searchText(query)),
+            URLQueryItem(name: "langs", value: "fr"),
+            URLQueryItem(name: "page_size", value: "25"),
+            URLQueryItem(name: "fields", value: searchFields),
+        ]
+        return components?.url
+    }
+
+    /// The foods of one Search-a-licious answer (`{"hits": [ … ]}`): those with a name and an energy, in the order
+    /// of the service. Throws `Failure.busy` on 429 and 503, `ServiceError.badResponse` on any other failure.
+    static func searchResults(fromResponse data: Data, statusCode: Int) throws -> [FoodItem] {
+        if isBusy(statusCode) { throw Failure.busy }
+        guard statusCode == 200 else { throw ServiceError.badResponse }
+        let page = try JSONDecoder().decode(SearchPage.self, from: data)
+        return (page.hits ?? []).compactMap { $0.value?.product.item() }
+    }
+
+    /// Searches the packaged products for some words. Called only when the person asks (the button, or the
+    /// keyboard's search key), never while they type.
+    static func search(_ query: String) async throws -> [FoodItem] {
+        guard !searchText(query).isEmpty, let url = searchURL(query) else { return [] }
+        let answer = try await fetchLive(url)
+        return try searchResults(fromResponse: answer.data, statusCode: answer.statusCode)
+    }
+
+    // MARK: Barcode (API v3)
+
     /// What a scanned barcode gives.
-    enum BarcodeResult {
+    enum BarcodeResult: Equatable {
         /// A food ready to log.
         case food(FoodItem)
         /// A product known without its nutrition: its name, brand and barcode prefill a custom food.
@@ -511,30 +621,88 @@ enum OpenFoodFacts {
         case unknown
     }
 
-    /// Looks a barcode up under each of its forms (a UPC-A is also filed as an EAN-13 with a leading 0,
-    /// a UPC-E is the short form of a UPC-A). Throws when Open Food Facts can't be reached.
-    static func lookup(barcode: String) async throws -> BarcodeResult {
-        struct Envelope: Decodable {
-            let product: Product?
+    /// The envelope of API v3, read leniently: what is missing or oddly typed is simply absent.
+    /// `{"status": "success", "result": {"id": "product_found"}, "errors": [{"message": {"id": …}}], "product": {…}}`
+    private struct Envelope: Decodable {
+        /// « success » or « failure ».
+        let status: String?
+        let product: Product?
+        /// `result.id` and the `message.id` of every error: « product_found », « product_not_found », « invalid_code »…
+        let ids: Set<String>
+
+        private enum CodingKeys: String, CodingKey { case status, product, result, errors }
+        private struct Outcome: Decodable { let id: String? }
+        private struct Problem: Decodable {
+            struct Message: Decodable { let id: String? }
+            let message: Message?
         }
-        var partial: FoodItem?
-        for code in barcodeForms(barcode) {
-            guard let url = URL(string: "https://world.openfoodfacts.org/api/v2/product/\(code).json?fields=\(fields)") else { continue }
-            let (data, response) = try await URLSession.shared.data(for: request(url))
-            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
-            if status == 404 { continue }
-            guard status == 200 else { throw ServiceError.badResponse }
-            guard let product = (try? JSONDecoder().decode(Envelope.self, from: data))?.product else { continue }
-            if let food = product.item(barcode: barcode) { return .food(food) }
-            if partial == nil, let name = product.name {
-                partial = FoodItem(id: "off.\(barcode)", name: name, brand: product.brand, kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0,
-                                   servingGrams: 100, servingName: "100 g", source: .custom, barcode: barcode)
+
+        init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: CodingKeys.self)
+            status = try? c.decode(String.self, forKey: .status)
+            product = try? c.decode(Product.self, forKey: .product)
+            var found = Set<String>()
+            if let id = (try? c.decode(Outcome.self, forKey: .result))?.id { found.insert(id) }
+            for problem in (try? c.decode([Lossy<Problem>].self, forKey: .errors)) ?? [] {
+                if let id = problem.value?.message?.id { found.insert(id) }
             }
+            ids = found
         }
-        return partial.map(BarcodeResult.partial) ?? .unknown
     }
 
-    /// The forms a retail barcode may be filed under in Open Food Facts.
+    /// The answers of API v3 that mean « no such product »: a code that is not filed, or not a barcode at all.
+    private static let unknownProductIDs: Set<String> = ["product_not_found", "invalid_code"]
+
+    /// Reads one answer of API v3 for a barcode. 404, `product_not_found` or `invalid_code`: `.unknown`. A product
+    /// with its nutrition: `.food`; with a name only: `.partial`. Throws `Failure.busy` on 429 and 503, and
+    /// `ServiceError.badResponse` for an answer that can't be read or any other HTTP failure.
+    static func barcodeResult(fromResponse data: Data, statusCode: Int, barcode: String) throws -> BarcodeResult {
+        if isBusy(statusCode) { throw Failure.busy }
+        guard let envelope = try? JSONDecoder().decode(Envelope.self, from: data) else {
+            if statusCode == 404 { return .unknown }
+            throw ServiceError.badResponse
+        }
+        if !envelope.ids.isDisjoint(with: unknownProductIDs) { return .unknown }
+        guard statusCode == 200 || statusCode == 404 else { throw ServiceError.badResponse }
+        guard statusCode == 200, envelope.status != "failure", let product = envelope.product else { return .unknown }
+        if let food = product.item(barcode: barcode) { return .food(food) }
+        guard let name = product.name else { return .unknown }
+        return .partial(FoodItem(id: "off.\(barcode)", name: name, brand: product.brand, kcal: 0, protein: 0, carbs: 0, fat: 0,
+                                 fiber: 0, servingGrams: 100, servingName: "100 g", source: .custom, barcode: barcode))
+    }
+
+    /// The URL of a barcode in API v3, or nil when it isn't made of digits.
+    static func productURL(_ code: String) -> URL? {
+        guard !code.isEmpty, code.allSatisfy({ $0.isASCII && $0.isNumber }) else { return nil }
+        return URL(string: "https://world.openfoodfacts.org/api/v3/product/\(code)?fields=\(fields)")
+    }
+
+    /// The forms to ask Open Food Facts for, in order. The API normalises leading zeros (a UPC-A and the EAN-13
+    /// with a 0 in front are one product): an EAN-13 or a UPC-A takes ONE request. Only an 8-digit code is
+    /// ambiguous, being an EAN-8 or a UPC-E: as it is first, then the UPC-A that a UPC-E stands for.
+    static func lookupForms(_ code: String) -> [String] {
+        var forms = [code]
+        if code.count == 8, let upcA = upcEToUPCA(code) { forms.append(upcA) }
+        return forms
+    }
+
+    /// Looks a barcode up on Open Food Facts (see `lookupForms` for the requests). `fetch` is the way to ask the
+    /// service: the network, unless a test gives another. Throws `Failure.busy` when the service is overloaded
+    /// (429, 503), another error when it can't be reached.
+    static func lookup(barcode: String, fetch: (URL) async throws -> Answer = OpenFoodFacts.fetchLive) async throws -> BarcodeResult {
+        var partial: BarcodeResult?
+        for code in lookupForms(barcode) {
+            guard let url = productURL(code) else { continue }
+            let answer = try await fetch(url)
+            let result = try barcodeResult(fromResponse: answer.data, statusCode: answer.statusCode, barcode: barcode)
+            if case .food = result { return result }
+            if case .partial = result, partial == nil { partial = result }
+        }
+        return partial ?? .unknown
+    }
+
+    /// The forms a retail barcode may be filed under (a UPC-A as an EAN-13 with a 0 in front, a UPC-E as a UPC-A…).
+    /// Only to find the person's OWN saved foods without a connection: Open Food Facts is asked with `lookupForms`.
     static func barcodeForms(_ code: String) -> [String] {
         var forms = [code]
         if code.count == 13, code.hasPrefix("0") { forms.append(String(code.dropFirst())) }

@@ -1,0 +1,75 @@
+{
+  "$schema": "./manifest.schema.json",
+  "schemaVersion": 1,
+  "dataset": {
+    "name": "EXEMPLE DE STRUCTURE - jamais mesuré",
+    "createdAt": "2026-11-02",
+    "example": true,
+    "notes": "Un seul repas pour montrer le format. Il n'a AUCUNE photo (le fichier photos/exemple-001.jpg n'existe pas) et ses poids sont des VALEURS FACTICES : ils ne servent à mesurer rien du tout. Le vrai jeu s'appelle meals.json (voir README.md) ; ce fichier-ci est ignoré par la mesure."
+  },
+  "meals": [
+    {
+      "id": "exemple-001",
+      "split": "test",
+      "groupID": "exemple-poulet-riz",
+      "cuisine": "quebecoise",
+      "mealType": "dinner",
+      "notes": "VALEURS FACTICES. Poulet, riz et huile cachée : un exemple de chaque cas (aliment visible, aliment caché).",
+      "photo": {
+        "file": "photos/exemple-001.jpg",
+        "capturedAt": "2026-11-02T18:30:00Z",
+        "widthPx": 4032,
+        "heightPx": 3024
+      },
+      "rights": {
+        "origin": "own-photo",
+        "license": "owner-consent",
+        "consent": true,
+        "consentDate": "2026-11-02",
+        "commercialUseAllowed": true,
+        "containsPeopleOrPersonalData": false,
+        "exifLocationRemoved": true
+      },
+      "device": {
+        "model": "iPhone (exemple)",
+        "iosVersion": "17.5",
+        "lens": "main",
+        "lidar": false
+      },
+      "capture": {
+        "lighting": "daylight-window",
+        "tableware": "flat-plate",
+        "angle": "top-down",
+        "distanceCm": 40,
+        "plateDiameterCm": 26,
+        "referenceObject": "none"
+      },
+      "weighing": {
+        "scaleModel": "balance de cuisine (exemple), pas de 1 g",
+        "resolutionG": 1,
+        "method": "tare-sequence"
+      },
+      "items": [
+        {
+          "foodID": "builtin.rice",
+          "foodName": "Riz blanc cuit",
+          "grams": 100,
+          "state": "cooked"
+        },
+        {
+          "foodID": "builtin.chicken",
+          "foodName": "Poitrine de poulet cuite",
+          "grams": 100,
+          "state": "cooked"
+        },
+        {
+          "foodID": "builtin.oliveoil",
+          "foodName": "Huile d'olive",
+          "grams": 10,
+          "state": "not-applicable",
+          "visible": false
+        }
+      ]
+    }
+  ]
+}

@@ -99,8 +99,8 @@ Correspondance avec l'existant : `OnDeviceMealAnalyzer` (capture, reconnaissance
 |---|---|
 | Recherche et décision (22.1) | fait le 2026-11-02 |
 | Fondations de calcul (22.2) | en cours |
-| Protocole de mesure et métriques | en cours |
-| Migration Open Food Facts v3 | à faire |
+| Protocole de mesure et métriques | écrit le 2026-11-02 (`Protocole-mesure.md`, métriques testées, harnais) ; aucun repas pesé |
+| Migration Open Food Facts v3 | écrite le 2026-11-02 (API v3, une requête par code, recherche explicite Search-a-licious, état « service occupé ») ; compilation à prouver en CI |
 | Socle assiette (expérimental) | à faire |
 | Repas pesés et premiers chiffres | à faire (utilisateur) |
 | Base FCÉN 2026 + USDA | à faire |

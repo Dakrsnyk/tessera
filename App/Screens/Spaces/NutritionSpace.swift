@@ -148,8 +148,17 @@ struct FoodSearchView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var query = ""
     @State private var online: [FoodItem] = []
-    @State private var isSearching = false
+    /// The online search in flight (nil when none): cancelled as soon as the words change, so that a new search is
+    /// never ignored while the old one waits for the service (up to its 15 s timeout).
+    @State private var searchTask: Task<Void, Never>?
+    /// The words of the search in flight (nil when none): a second tap on the same words does not ask again.
+    @State private var searchingText: String?
+    /// The number of the last search started or dropped: an old one that ends late touches nothing on screen.
+    @State private var searchNumber = 0
+    private var isSearching: Bool { searchingText != nil }
     @State private var searchError: String?
+    /// The last online search failed (busy service, no answer): a button offers to ask again.
+    @State private var canRetrySearch = false
     @State private var selected: FoodItem?
     @State private var showsScanner = false
     @State private var showsCustom = false
@@ -263,9 +272,12 @@ struct FoodSearchView: View {
                             HStack { ProgressView(); Text(tr("Recherche sur Open Food Facts…")).foregroundStyle(Color.secondary) }
                         } else if let searchError {
                             HintRow(text: searchError)
+                            if canRetrySearch {
+                                Button(tr("Réessayer")) { startSearch() }
+                            }
                         } else if online.isEmpty {
                             Button(tr("Chercher « \(query.trimmed) » dans les produits emballés")) {
-                                Task { await searchOnline() }
+                                startSearch()
                             }
                         }
                         ForEach(online) { food in
@@ -286,19 +298,17 @@ struct FoodSearchView: View {
             }
             .styledList()
             .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr("Pomme, poulet, yogourt…"))
-            .onSubmit(of: .search) { Task { await searchOnline() } }
+            // The packaged products are searched on Open Food Facts only when the person asks: the button of the
+            // « Produits emballés » section, or the keyboard's search key. Never while typing (Open Food Facts
+            // forbids search-as-you-type and limits searches per address).
+            .onSubmit(of: .search) { startSearch() }
             .onChange(of: query) { _, _ in
+                // Other words: the search in flight is for the old ones. It is dropped now, not at the end of its
+                // timeout, so that the next search leaves at once.
+                if let searchingText, searchingText != query.trimmed { cancelSearch() }
                 online = []
                 searchError = nil
-            }
-            // Few foods found here: the packaged products are looked up by themselves, once typing has paused
-            // for a while (Open Food Facts asks apps not to search at every keystroke: 4 letters, 1.2 s).
-            .task(id: query) {
-                let text = query.trimmed
-                guard text.count >= 4, local.count < 8 else { return }
-                try? await Task.sleep(for: .milliseconds(1_200))
-                guard !Task.isCancelled, online.isEmpty, searchError == nil else { return }
-                await searchOnline()
+                canRetrySearch = false
             }
             .navigationTitle(tr("Ajouter un aliment"))
             .navigationBarTitleDisplayMode(.inline)
@@ -366,16 +376,46 @@ struct FoodSearchView: View {
         .accessibilityIdentifier("food-row")
     }
 
-    private func searchOnline() async {
+    /// Asks Open Food Facts for the words typed. The search in flight is dropped first (it can only be for other
+    /// words: for the same ones, nothing starts again).
+    private func startSearch() {
         let text = query.trimmed
-        guard text.count >= 2 else { return }
-        isSearching = true
-        defer { isSearching = false }
+        guard text.count >= 2, searchingText != text else { return }
+        cancelSearch()
+        let number = searchNumber
+        searchingText = text
+        searchError = nil
+        canRetrySearch = false
+        searchTask = Task { await searchOnline(text, number: number) }
+    }
+
+    /// Drops the search in flight: its answer would be for words that are no longer on screen.
+    private func cancelSearch() {
+        searchTask?.cancel()
+        searchTask = nil
+        searchNumber += 1
+        searchingText = nil
+    }
+
+    @MainActor
+    private func searchOnline(_ text: String, number: Int) async {
+        // Still the search the screen waits for: not cancelled, no newer search, the words did not change.
+        func isCurrent() -> Bool { !Task.isCancelled && searchNumber == number && query.trimmed == text }
+        defer { if searchNumber == number { searchingText = nil } }
         do {
-            online = try await OpenFoodFacts.search(text)
+            let found = try await OpenFoodFacts.search(text)
+            // A stale answer is for other words: it is thrown away.
+            guard isCurrent() else { return }
+            online = found
             if online.isEmpty { searchError = tr("Aucun produit trouvé pour « \(text) ».") }
+        } catch OpenFoodFacts.Failure.busy {
+            guard isCurrent() else { return }
+            searchError = tr("Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant.")
+            canRetrySearch = true
         } catch {
+            guard isCurrent() else { return }
             searchError = tr("Open Food Facts ne répond pas. Réessaie dans un instant.")
+            canRetrySearch = true
         }
     }
 

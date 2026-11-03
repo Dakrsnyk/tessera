@@ -3,8 +3,15 @@ import Foundation
 /// App-wide identity used for API etiquette (the SEC asks for a contact in the User-Agent).
 enum AppInfo {
     static let supportEmail = "support.ardane@gmail.com"
-    /// An identifier, not a text to translate: it must not change with the language.
-    static var userAgent: String { "Ardane/1.0 (\(supportEmail))" }
+    /// The version of the app as the App Store shows it (CFBundleShortVersionString, « 1.4 »); « 1.0 » when the
+    /// bundle doesn't give one.
+    static var appVersion: String {
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String)?.trimmed.nonEmpty ?? "1.0"
+    }
+    /// An identifier, not a text to translate: it must not change with the language. Open Food Facts asks for
+    /// `AppName/Version (contact)`.
+    static var userAgent: String { makeUserAgent(version: appVersion) }
+    static func makeUserAgent(version: String) -> String { "Ardane/\(version) (\(supportEmail))" }
 }
 
 struct CompanyRef: Codable, Hashable, Identifiable {

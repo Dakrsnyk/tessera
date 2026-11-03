@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Repas pesés Ardane (meals.json)",
+  "description": "Jeu de repas PESÉS pour mesurer la précision réelle du scanner alimentaire : une photo, les aliments présents, le poids de chacun lu sur une balance, les conditions de prise de vue, les droits. Les valeurs de référence (kcal, macros) ne sont JAMAIS écrites ici : elles sont calculées à la mesure depuis les tables de l'app. Ce que le schéma ne peut pas dire (identifiants uniques, un groupID dans un seul split, fichiers présents, somme SHA-256, état cru/cuit cohérent avec le nom de l'aliment) est vérifié par Tests/WeighedMealsEvaluationTests.swift. Les listes de valeurs de $defs doivent rester identiques à WeighedMealsVocabulary (un test le compare). Procédure : docs/scanner/Protocole-mesure.md.",
+  "type": "object",
+  "required": ["schemaVersion", "dataset", "meals"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "dataset": { "$ref": "#/$defs/dataset" },
+    "meals": { "type": "array", "items": { "$ref": "#/$defs/meal" } }
+  },
+  "$defs": {
+    "split": {
+      "description": "train = apprentissage d'un modèle ; validation = réglage des seuils et choix de modèle ; test = jamais regardé avant la mesure finale (seul jeu dont les chiffres sont publiables).",
+      "type": "string",
+      "enum": ["train", "validation", "test"]
+    },
+    "cuisine": {
+      "type": "string",
+      "enum": ["quebecoise", "nord-americaine", "francaise", "mediterraneenne", "italienne", "mexicaine", "asiatique-de-lest", "asiatique-du-sud", "moyen-orientale", "africaine", "autre"]
+    },
+    "mealType": {
+      "type": "string",
+      "enum": ["breakfast", "lunch", "dinner", "snack"]
+    },
+    "lens": {
+      "type": "string",
+      "enum": ["main", "ultrawide", "telephoto", "front", "other"]
+    },
+    "lighting": {
+      "type": "string",
+      "enum": ["daylight-window", "daylight-outdoor", "warm-indoor", "cool-indoor", "dim", "flash", "mixed"]
+    },
+    "tableware": {
+      "type": "string",
+      "enum": ["flat-plate", "deep-plate", "bowl", "board", "takeout-box", "tray", "hand-held", "other"]
+    },
+    "angle": {
+      "type": "string",
+      "enum": ["top-down", "oblique-45", "oblique-30", "side"]
+    },
+    "referenceObject": {
+      "description": "Objet de taille connue visible dans la photo (carte bancaire, pièce, main), pour les méthodes qui s'en servent.",
+      "type": "string",
+      "enum": ["none", "card", "coin", "hand", "other"]
+    },
+    "cookingState": {
+      "description": "État de l'aliment AU MOMENT DE LA PESÉE. not-applicable : pain, yaourt, huile, fruit cru mangé tel quel, plat déjà préparé.",
+      "type": "string",
+      "enum": ["raw", "cooked", "not-applicable"]
+    },
+    "weighingMethod": {
+      "description": "tare-sequence : l'assiette est sur la balance, on tare avant chaque aliment ; separate-weighing : chaque aliment est pesé seul avant d'être posé ; recipe-share : portion servie d'un plat maison (voir recipe).",
+      "type": "string",
+      "enum": ["tare-sequence", "separate-weighing", "recipe-share"]
+    },
+    "rightsOrigin": {
+      "description": "own-photo : photo prise par la personne qui donne son accord, pesée par elle ; licensed-dataset : photo d'un jeu sous licence libre qui publie aussi les poids mesurés.",
+      "type": "string",
+      "enum": ["own-photo", "licensed-dataset"]
+    },
+    "license": {
+      "description": "Jamais CC BY-SA ni photo protégée.",
+      "type": "string",
+      "enum": ["owner-consent", "CC0", "public-domain", "CC BY 2.0", "CC BY 3.0", "CC BY 4.0"]
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"
+    },
+    "relativePath": {
+      "description": "Chemin relatif au dossier du jeu, sans espace, sans « .. », en minuscules pour l'extension.",
+      "type": "string",
+      "pattern": "^(?!/)(?!.*\\.\\.)[A-Za-z0-9._/-]+$"
+    },
+    "foodID": {
+      "description": "builtin.<id> : table intégrée (Shared/Domains/FoodDatabase.swift) ; cnf.<numéro> : Fichier canadien sur les éléments nutritifs (App/Resources/cnf-foods.json) ; off.<code-barres> : produit emballé ; custom.<nom> : plat ou aliment maison.",
+      "type": "string",
+      "pattern": "^(builtin|cnf|off|custom)\\.[A-Za-z0-9_-]+$"
+    },
+    "per100": {
+      "description": "Valeurs pour 100 g lues sur l'étiquette d'un produit, ou connues pour un ingrédient hors tables. Obligatoires pour off.* et custom.* (sauf recette).",
+      "type": "object",
+      "required": ["kcal", "protein", "carbs", "fat"],
+      "additionalProperties": false,
+      "properties": {
+        "kcal": { "type": "number", "minimum": 0, "maximum": 900 },
+        "protein": { "type": "number", "minimum": 0, "maximum": 100 },
+        "carbs": { "type": "number", "minimum": 0, "maximum": 100 },
+        "fat": { "type": "number", "minimum": 0, "maximum": 100 },
+        "fiber": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "dataset": {
+      "type": "object",
+      "required": ["name", "createdAt"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date" },
+        "example": {
+          "description": "true : simple exemple de structure (meals.example.json), jamais mesuré.",
+          "type": "boolean"
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "photo": {
+      "type": "object",
+      "required": ["file", "capturedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "description": "Un fichier par repas, jamais partagé entre deux repas. Extensions : jpg, jpeg, png, heic.",
+          "allOf": [
+            { "$ref": "#/$defs/relativePath" },
+            { "pattern": "\\.(jpg|jpeg|png|heic)$" }
+          ]
+        },
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "sha256": {
+          "description": "Somme SHA-256 du fichier (minuscules) : détecte une photo modifiée ou remplacée.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "widthPx": { "type": "integer", "minimum": 1 },
+        "heightPx": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "rights": {
+      "type": "object",
+      "required": ["origin", "license", "consent", "commercialUseAllowed", "containsPeopleOrPersonalData", "exifLocationRemoved"],
+      "additionalProperties": false,
+      "properties": {
+        "origin": { "$ref": "#/$defs/rightsOrigin" },
+        "license": { "$ref": "#/$defs/license" },
+        "consent": {
+          "description": "La personne qui a pris la photo autorise son usage pour mesurer et améliorer le scanner.",
+          "const": true
+        },
+        "consentDate": { "type": "string", "format": "date" },
+        "author": { "type": "string" },
+        "sourceURL": { "type": "string", "format": "uri" },
+        "commercialUseAllowed": { "const": true },
+        "containsPeopleOrPersonalData": {
+          "description": "Visage, écran, courrier, intérieur reconnaissable : la photo est écartée.",
+          "const": false
+        },
+        "exifLocationRemoved": {
+          "description": "Position GPS retirée des métadonnées avant d'ajouter la photo.",
+          "const": true
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "origin": { "const": "own-photo" } }, "required": ["origin"] },
+          "then": {
+            "required": ["consentDate"],
+            "properties": { "license": { "const": "owner-consent" } }
+          }
+        },
+        {
+          "if": { "properties": { "origin": { "const": "licensed-dataset" } }, "required": ["origin"] },
+          "then": {
+            "required": ["author", "sourceURL"],
+            "properties": { "license": { "enum": ["CC0", "public-domain", "CC BY 2.0", "CC BY 3.0", "CC BY 4.0"] } }
+          }
+        }
+      ]
+    },
+    "device": {
+      "description": "Appareil qui a pris la photo (pas celui qui exécute le test).",
+      "type": "object",
+      "required": ["model", "iosVersion", "lens", "lidar"],
+      "additionalProperties": false,
+      "properties": {
+        "model": { "type": "string", "minLength": 1 },
+        "iosVersion": { "type": "string", "pattern": "^[0-9]+(\\.[0-9]+){0,2}$" },
+        "lens": { "$ref": "#/$defs/lens" },
+        "lidar": { "type": "boolean" }
+      }
+    },
+    "capture": {
+      "type": "object",
+      "required": ["lighting", "tableware", "angle", "distanceCm", "referenceObject"],
+      "additionalProperties": false,
+      "properties": {
+        "lighting": { "$ref": "#/$defs/lighting" },
+        "tableware": { "$ref": "#/$defs/tableware" },
+        "angle": { "$ref": "#/$defs/angle" },
+        "distanceCm": { "type": "number", "minimum": 10, "maximum": 200 },
+        "plateDiameterCm": { "type": "number", "minimum": 5, "maximum": 50 },
+        "referenceObject": { "$ref": "#/$defs/referenceObject" }
+      }
+    },
+    "weighing": {
+      "type": "object",
+      "required": ["scaleModel", "resolutionG", "method"],
+      "additionalProperties": false,
+      "properties": {
+        "scaleModel": { "type": "string", "minLength": 1 },
+        "resolutionG": {
+          "description": "Plus petit pas de la balance, en grammes (1 pour une balance de cuisine ordinaire). Tout poids du jeu doit en être un multiple.",
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 5
+        },
+        "method": { "$ref": "#/$defs/weighingMethod" }
+      }
+    },
+    "ingredient": {
+      "type": "object",
+      "required": ["foodID", "foodName", "grams"],
+      "additionalProperties": false,
+      "properties": {
+        "foodID": { "$ref": "#/$defs/foodID" },
+        "foodName": { "type": "string", "minLength": 1 },
+        "grams": { "type": "number", "exclusiveMinimum": 0 },
+        "nutrientsPer100g": { "$ref": "#/$defs/per100" }
+      }
+    },
+    "recipe": {
+      "description": "Plat maison : ingrédients pesés à la préparation et poids total du plat cuit. Les valeurs de référence d'une portion sont celles des ingrédients, multipliées par (poids de la portion / poids total cuit).",
+      "type": "object",
+      "required": ["totalCookedG", "ingredients"],
+      "additionalProperties": false,
+      "properties": {
+        "totalCookedG": { "type": "number", "exclusiveMinimum": 0 },
+        "ingredients": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/ingredient" } }
+      }
+    },
+    "mask": {
+      "description": "Masque de segmentation de référence (PNG, blanc = l'aliment), pour IoU et Dice. Optionnel.",
+      "type": "object",
+      "required": ["file"],
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "allOf": [
+            { "$ref": "#/$defs/relativePath" },
+            { "pattern": "\\.png$" }
+          ]
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "required": ["foodID", "foodName", "grams", "state"],
+      "additionalProperties": false,
+      "properties": {
+        "foodID": { "$ref": "#/$defs/foodID" },
+        "foodName": {
+          "description": "Nom de l'aliment tel qu'écrit dans la table. Pour cnf.*, sert à retrouver l'aliment dans le Fichier canadien.",
+          "type": "string",
+          "minLength": 1
+        },
+        "grams": {
+          "description": "Poids LU SUR LA BALANCE, jamais estimé ni déduit d'une portion usuelle.",
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 5000
+        },
+        "state": { "$ref": "#/$defs/cookingState" },
+        "acceptedFoodIDs": {
+          "description": "Autres identifiants qui comptent comme une bonne reconnaissance (la même chose dans une autre table).",
+          "type": "array",
+          "items": { "$ref": "#/$defs/foodID" }
+        },
+        "visible": {
+          "description": "false pour ce que la photo ne peut pas montrer (huile de cuisson, beurre, sauce sous le fromage) : pesé et compté dans les calories, mais pas dans la reconnaissance. Défaut : true.",
+          "type": "boolean"
+        },
+        "nutrientsPer100g": { "$ref": "#/$defs/per100" },
+        "recipe": { "$ref": "#/$defs/recipe" },
+        "mask": { "$ref": "#/$defs/mask" }
+      },
+      "if": {
+        "properties": { "foodID": { "pattern": "^(off|custom)\\." } },
+        "required": ["foodID"]
+      },
+      "then": {
+        "anyOf": [
+          { "required": ["nutrientsPer100g"] },
+          { "required": ["recipe"] }
+        ]
+      }
+    },
+    "meal": {
+      "type": "object",
+      "required": ["id", "split", "groupID", "cuisine", "mealType", "photo", "rights", "device", "capture", "weighing", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "split": { "$ref": "#/$defs/split" },
+        "groupID": {
+          "description": "Anti-fuite : même assiette (plusieurs photos), même préparation ou même recette = même groupID, donc un seul split.",
+          "$ref": "#/$defs/identifier"
+        },
+        "cuisine": { "$ref": "#/$defs/cuisine" },
+        "mealType": { "$ref": "#/$defs/mealType" },
+        "notes": { "type": "string" },
+        "photo": { "$ref": "#/$defs/photo" },
+        "rights": { "$ref": "#/$defs/rights" },
+        "device": { "$ref": "#/$defs/device" },
+        "capture": { "$ref": "#/$defs/capture" },
+        "weighing": { "$ref": "#/$defs/weighing" },
+        "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/item" } }
+      }
+    }
+  }
+}

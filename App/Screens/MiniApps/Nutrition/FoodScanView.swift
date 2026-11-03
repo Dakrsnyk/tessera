@@ -48,6 +48,8 @@ struct FoodScanView: View {
         case recap
         case notFound(String)
         case offline(String)
+        /// Open Food Facts answered « too many requests » or « unavailable » (429, 503): not a lost connection.
+        case busy(String)
         /// A product Open Food Facts knows without its nutrition: a custom food to complete.
         case partial(FoodItem)
         case photoFailed(PhotoProblem)
@@ -122,6 +124,19 @@ struct FoodScanView: View {
                 symbol: "wifi.slash",
                 title: tr("Produit introuvable"),
                 message: tr("Pas de connexion : le produit \(code) n'a pas pu être cherché.")
+            ) {
+                prominentButton(tr("Réessayer")) {
+                    stage = .looking(code)
+                    Task { await lookup(code) }
+                }
+                plainButton(tr("Créer cet aliment")) { onFinish(.create(draft(for: code))) }
+                plainButton(tr("Chercher dans la liste")) { onFinish(.search) }
+            }
+        case .busy(let code):
+            ScanMessageView(
+                symbol: "hourglass",
+                title: tr("Service occupé"),
+                message: tr("Open Food Facts reçoit trop de demandes en ce moment : le produit \(code) n'a pas pu être cherché. Réessaie dans un instant.")
             ) {
                 prominentButton(tr("Réessayer")) {
                     stage = .looking(code)
@@ -233,8 +248,9 @@ struct FoodScanView: View {
         Task { await lookup(code) }
     }
 
-    /// A food already saved with this barcode (no connection needed), else Open Food Facts. Every outcome
-    /// shows something: the recap, or what to do next.
+    /// A food already saved with this barcode (no connection needed), else Open Food Facts (one request, two for
+    /// an 8-digit code). Every outcome shows something: the recap, or what to do next: product not found, service
+    /// busy (429, 503) or no connection.
     @MainActor
     private func lookup(_ code: String) async {
         let mine = model.nutrition.customFoods + model.nutrition.favorites + model.nutrition.recentFoods
@@ -248,6 +264,8 @@ struct FoodScanView: View {
             case .partial(let found): stage = .partial(found)
             case .unknown: stage = .notFound(code)
             }
+        } catch OpenFoodFacts.Failure.busy {
+            stage = .busy(code)
         } catch {
             stage = .offline(code)
         }

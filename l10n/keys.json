@@ -100,7 +100,7 @@
  "$ US": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Companies.swift:222: let symbol = currency == \"USD\" ? tr(\"$ US\") : currency == \"EUR\" ? \"€\" : \"$\""
+   "Shared/Domains/Companies.swift:229: let symbol = currency == \"USD\" ? tr(\"$ US\") : currency == \"EUR\" ? \"€\" : \"$\""
   ]
  },
  "%@ %% de la note finale évalué": {
@@ -216,7 +216,7 @@
  "%@ : %@ kcal": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:246: tile.inline = tr(\"\\(budget.meal.title) : \\(TF.int(budget.kcal)) kcal\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:248: tile.inline = tr(\"\\(budget.meal.title) : \\(TF.int(budget.kcal)) kcal\")"
   ]
  },
  "%@ : gratuit %@, Premium %@": {
@@ -594,19 +594,19 @@
  "%@ g de protéines aujourd'hui": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:148: tile.inline = tr(\"\\(TF.int(totals.protein)) g de protéines aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:149: tile.inline = tr(\"\\(TF.int(totals.protein)) g de protéines aujourd'hui\")"
   ]
  },
  "%@ g de protéines restantes": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:160: tile.inline = tr(\"\\(TF.int(left)) g de protéines restantes\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:162: tile.inline = tr(\"\\(TF.int(left)) g de protéines restantes\")"
   ]
  },
  "%@ g · %@ kcal": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:553: tr(\"\\(TF.int(grams)) g · \\(TF.int(food.nutrients(grams: grams).kcal)) kcal\")"
+   "App/Screens/Spaces/NutritionSpace.swift:593: tr(\"\\(TF.int(grams)) g · \\(TF.int(food.nutrients(grams: grams).kcal)) kcal\")"
   ]
  },
  "%@ h": {
@@ -663,7 +663,7 @@
  "%@ kcal / 100 g · P %@ · G %@ · L %@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:548: tr(\"\\(TF.int(food.kcal)) kcal / 100 g · P \\(TF.int(food.protein)) · G \\(TF.int(food.carbs)) · L \\(TF.int(food.fat))\")"
+   "App/Screens/Spaces/NutritionSpace.swift:588: tr(\"\\(TF.int(food.kcal)) kcal / 100 g · P \\(TF.int(food.protein)) · G \\(TF.int(food.carbs)) · L \\(TF.int(food.fat))\")"
   ]
  },
  "%@ kcal aujourd'hui": {
@@ -672,7 +672,7 @@
    "App/Screens/Home/MiniAppsRow.swift:67: return totals.kcal > 0 ? tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\") : nil",
    "App/Screens/Spaces/SpacesView.swift:202: return model.profile.knows(.kcalTarget) ? tr(\"\\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes\") : tr(\"\\(TF.int(eaten)) kcal aujourd'hui\")",
    "Shared/Render/Tiles/NutritionTiles.swift:91: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:178: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:180: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")"
   ]
  },
  "%@ kcal brûlées": {
@@ -692,8 +692,8 @@
   "uses": [
    "App/Screens/Spaces/SpacesView.swift:202: return model.profile.knows(.kcalTarget) ? tr(\"\\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes\") : tr(\"\\(TF.int(eaten)) kcal aujourd'hui\")",
    "Shared/Data/Insights.swift:228: parts.append(tr(\"\\(left) kcal restantes\"))",
-   "Shared/Render/Tiles/NutritionTiles.swift:106: tile.inline = left >= 0 ? tr(\"\\(TF.int(left)) kcal restantes\") : tr(\"+\\(TF.int(-left)) kcal\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:252: tile.inline = tr(\"\\(TF.int(left)) kcal restantes\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:107: tile.inline = left >= 0 ? tr(\"\\(TF.int(left)) kcal restantes\") : tr(\"+\\(TF.int(-left)) kcal\")",
+   "Shared/Render/Tiles/NutritionTiles.swift:254: tile.inline = tr(\"\\(TF.int(left)) kcal restantes\")"
   ]
  },
  "%@ kcal sur %@ : pile dans ta cible aujourd'hui. Bien joué !": {
@@ -1435,7 +1435,7 @@
  "+%@ kcal": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:106: tile.inline = left >= 0 ? tr(\"\\(TF.int(left)) kcal restantes\") : tr(\"+\\(TF.int(-left)) kcal\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:107: tile.inline = left >= 0 ? tr(\"\\(TF.int(left)) kcal restantes\") : tr(\"+\\(TF.int(-left)) kcal\")"
   ]
  },
  "+%@ min": {
@@ -1802,7 +1802,7 @@
  "1 portion": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:486: Portion(title: food.servingName.isEmpty ? tr(\"1 portion\") : food.servingName, grams: serving),",
+   "App/Screens/Spaces/NutritionSpace.swift:526: Portion(title: food.servingName.isEmpty ? tr(\"1 portion\") : food.servingName, grams: serving),",
    "Shared/Domains/FoodDatabase.swift:129: f(\"chicken\", tr(\"Poitrine de poulet cuite\"), 165, 31, 0, 3.6, 0, 120, tr(\"1 portion\"), s: 0, sf: 1, na: 74, chol: 85),",
    "Shared/Domains/FoodDatabase.swift:131: f(\"turkey\", tr(\"Poitrine de dinde cuite\"), 135, 30, 0, 1.5, 0, 100, tr(\"1 portion\"), s: 0, sf: 0.4, na: 99, chol: 70),",
    "Shared/Domains/FoodDatabase.swift:132: f(\"beef\", tr(\"Bœuf haché mi-maigre cuit\"), 250, 26, 0, 15, 0, 100, tr(\"1 portion\"), s: 0, sf: 5.9, na: 72, chol: 90),"
@@ -1951,7 +1951,7 @@
  "2 portions": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:487: Portion(title: tr(\"2 portions\"), grams: serving * 2),"
+   "App/Screens/Spaces/NutritionSpace.swift:527: Portion(title: tr(\"2 portions\"), grams: serving * 2),"
   ]
  },
  "2 tacos": {
@@ -2067,7 +2067,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:420: MiniSectionTitle(title: tr(\"7 derniers jours\"), detail: tr(\"moyenne \\(Fmt.number(steps.week.reduce(0) { $0 + $1.steps } / max(1, steps.week.count)))\"))",
-   "Shared/Render/Tiles/NutritionTiles.swift:185: var tile = Tile(title: tr(\"7 derniers jours\"), symbol: \"chart.bar\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:187: var tile = Tile(title: tr(\"7 derniers jours\"), symbol: \"chart.bar\")"
   ]
  },
  "7 jours": {
@@ -2441,7 +2441,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:287: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
-   "Shared/Render/Tiles/TileView.swift:1140: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
+   "Shared/Render/Tiles/TileView.swift:1141: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
   ]
  },
  "Adaptateur de prise": {
@@ -2558,8 +2558,8 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:161: KindInfo(kind: .quickFood, title: tr(\"Ajout rapide\"), summary: tr(\"Tes aliments favoris, ajoutés au journal d'une touche.\"), category: .nutrition, symbol: \"plus.app\", isPremium: true, families: SM, ke",
-   "Shared/Render/Tiles/NutritionTiles.swift:221: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Ardane, espace Nutrition.\"))",
-   "Shared/Render/Tiles/NutritionTiles.swift:224: var tile = Tile(title: tr(\"Ajout rapide\"), symbol: \"plus.app\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:223: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Ardane, espace Nutrition.\"))",
+   "Shared/Render/Tiles/NutritionTiles.swift:226: var tile = Tile(title: tr(\"Ajout rapide\"), symbol: \"plus.app\")"
   ]
  },
  "Ajoute %@ : Ardane calcule tes besoins.": {
@@ -2571,7 +2571,7 @@
  "Ajoute des favoris dans Ardane, espace Nutrition.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:221: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Ardane, espace Nutrition.\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:223: return .empty(tr(\"Ajout rapide\"), symbol: \"plus.app\", message: tr(\"Ajoute des favoris dans Ardane, espace Nutrition.\"))"
   ]
  },
  "Ajoute l'action « Ajouter une dépense Apple Pay » (app Ardane).": {
@@ -3174,8 +3174,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:370: case .custom: return tr(\"Aliment perso\")",
-   "App/Screens/Spaces/NutritionSpace.swift:204: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
-   "App/Screens/Spaces/NutritionSpace.swift:580: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
+   "App/Screens/Spaces/NutritionSpace.swift:213: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
+   "App/Screens/Spaces/NutritionSpace.swift:620: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
   ]
  },
  "Aliments": {
@@ -3183,13 +3183,19 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:83: Text(tr(\"Aliments\"))",
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:81: Text(tr(\"Aliments\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:520: Section(tr(\"Aliments\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:560: Section(tr(\"Aliments\")) {"
   ]
  },
  "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé Canada.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/NutrientFile.swift:18: static let attribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé Canada.\")"
+   "App/Core/NutrientFile.swift:23: private static let legacyAttribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé C"
+  ]
+ },
+ "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada, 2026 (licence du gouvernement ouvert – Canada), et USDA FoodData Central. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/NutrientFile.swift:22: private static let currentAttribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada, 2026 (licence du gouvernement ouvert – Canada), et USDA FoodData Central. A"
   ]
  },
  "Allaitante": {
@@ -3417,7 +3423,7 @@
  "Analyse du plat sur ton iPhone…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:104: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:106: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
   ]
  },
  "Analyse productivité": {
@@ -3512,10 +3518,10 @@
  "Annuler": {
   "placeholders": 0,
   "uses": [
+   "App/Core/ScreenshotMode.swift:486: Button(tr(\"Annuler\")) {}",
    "App/Screens/Content/HabitsView.swift:238: Button(tr(\"Annuler\")) { dismiss() }",
    "App/Screens/Content/MoneyView.swift:171: ToolbarItem(placement: .cancellationAction) { Button(tr(\"Annuler\")) { dismiss() } }",
-   "App/Screens/Editor/EditorView.swift:204: Button(tr(\"Annuler\")) {",
-   "App/Screens/Editor/StudioPanels.swift:433: Button(tr(\"Annuler\"), role: .cancel) { renaming = nil }"
+   "App/Screens/Editor/EditorView.swift:204: Button(tr(\"Annuler\")) {"
   ]
  },
  "Annuler cette fois-ci": {
@@ -3639,7 +3645,7 @@
  "Apple Inc.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Companies.swift:49: CompanyRef(cik: 320193, ticker: \"AAPL\", name: tr(\"Apple Inc.\")),"
+   "Shared/Domains/Companies.swift:56: CompanyRef(cik: 320193, ticker: \"AAPL\", name: tr(\"Apple Inc.\")),"
   ]
  },
  "Apple Pay": {
@@ -3688,8 +3694,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:200: Section(tr(\"Apport\")) {",
-   "App/Screens/Spaces/NutritionSpace.swift:453: Section(tr(\"Apport\")) {",
-   "App/Screens/Spaces/NutritionSpace.swift:525: Section(tr(\"Apport\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:493: Section(tr(\"Apport\")) {",
+   "App/Screens/Spaces/NutritionSpace.swift:565: Section(tr(\"Apport\")) {"
   ]
  },
  "Apprends-le avec un coach, à vide d'abord.": {
@@ -3709,14 +3715,14 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:120: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:450: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:490: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
  "Après ajout, tu dépasseras ton objectif de %@ kcal.": {
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:120: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:450: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:490: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
  "Aqua": {
@@ -4325,7 +4331,7 @@
  "Aucun produit trouvé pour « %@ ».": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:376: if online.isEmpty { searchError = tr(\"Aucun produit trouvé pour « \\(text) ».\") }"
+   "App/Screens/Spaces/NutritionSpace.swift:410: if online.isEmpty { searchError = tr(\"Aucun produit trouvé pour « \\(text) ».\") }"
   ]
  },
  "Aucun repas enregistré. Ouvre un repas de ta journée et touche « Enregistrer ce repas » : il sera ici, prêt à reprendre d'une touche.": {
@@ -6430,7 +6436,7 @@
  "Caméra indisponible": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:169: title: tr(\"Caméra indisponible\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:184: title: tr(\"Caméra indisponible\"),"
   ]
  },
  "Canada": {
@@ -7257,9 +7263,10 @@
  "Chercher dans la liste": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:117: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:131: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:140: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:119: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:133: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:146: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:155: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
   ]
  },
  "Chercher la ville (fuseau et devise)": {
@@ -7271,10 +7278,10 @@
  "Chercher ou créer l'aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:96: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:152: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:172: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:217: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:98: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:167: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:187: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:232: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
   ]
  },
  "Chercher une ville": {
@@ -7286,7 +7293,7 @@
  "Chercher « %@ » dans les produits emballés": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:267: Button(tr(\"Chercher « \\(query.trimmed) » dans les produits emballés\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:279: Button(tr(\"Chercher « \\(query.trimmed) » dans les produits emballés\")) {"
   ]
  },
  "Chevilles bloquées, descends le buste vers l'avant le plus lentement possible.": {
@@ -7481,7 +7488,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:445: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:188: .accessibilityLabel(tr(\"Choisir une photo\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:203: .accessibilityLabel(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:524: Text(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:135: sourceLabel(tr(\"Choisir une photo\"), symbol: \"photo.on.rectangle\", isProminent: true)"
   ]
@@ -8255,12 +8262,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:215: text: tr(\"Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL). Contenu sous Database Contents License. Données saisies par la communauté : vérifie l'étique"
-  ]
- },
- "Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuvé par lui.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Profile/ProfileView.swift:222: text: tr(\"Contient des informations sous licence du gouvernement ouvert – Canada. Source : Fichier canadien sur les éléments nutritifs, Santé Canada. Ardane n'est pas affilié à Santé Canada ni approuv"
   ]
  },
  "Continue jusque derrière le dos.": {
@@ -9102,7 +9103,7 @@
  "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:114: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:116: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
   ]
  },
  "Crée-les dans Ardane": {
@@ -9122,9 +9123,10 @@
  "Créer cet aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:116: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:130: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:139: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:118: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:132: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:145: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:154: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
   ]
  },
  "Créer un exercice": {
@@ -9831,7 +9833,7 @@
  "Dernier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TileView.swift:1109: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
+   "Shared/Render/Tiles/TileView.swift:1110: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
   ]
  },
  "Dernier : %@, %@": {
@@ -10457,7 +10459,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:226: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:278: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:290: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
   ]
  },
  "Données de l'espace %@": {
@@ -11471,7 +11473,7 @@
  "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:94: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:96: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
   ]
  },
  "Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.": {
@@ -12664,8 +12666,8 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:206: ValueRow(title: tr(\"Fibres\"), value: \"\\(TF.decimal(totals.fiber, 1)) g\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:264: row(tr(\"Fibres\"), totals.fiber, goal: model.shownNutritionTarget(.fiber, recommended: recommended), unit: \"g\", hex: \"7FA33A\")",
-   "App/Screens/Spaces/NutritionSpace.swift:459: ValueRow(title: tr(\"Fibres\"), value: \"\\(TF.decimal(totals.fiber, 1)) g\")",
-   "App/Screens/Spaces/NutritionSpace.swift:597: NumberRow(title: tr(\"Fibres\"), value: $fiber, unit: \"g\")"
+   "App/Screens/Spaces/NutritionSpace.swift:499: ValueRow(title: tr(\"Fibres\"), value: \"\\(TF.decimal(totals.fiber, 1)) g\")",
+   "App/Screens/Spaces/NutritionSpace.swift:637: NumberRow(title: tr(\"Fibres\"), value: $fiber, unit: \"g\")"
   ]
  },
  "Fibres %@ g%@%@": {
@@ -12753,6 +12755,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:221: foodSource(name: tr(\"Fichier canadien sur les éléments nutritifs\"), url: FoodSourceLinks.openGovernmentLicence,"
+  ]
+ },
+ "Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui. Outil de référence, pas un avis médical.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:222: text: tr(\"Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version of"
   ]
  },
  "Fichier importé": {
@@ -13268,7 +13276,7 @@
  "G [carbs]": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:128: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:129: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
   ]
  },
  "Gaine le ventre et serre les fessiers.": {
@@ -13663,9 +13671,9 @@
  "Glucides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:734: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: \"F2A33A\", progress: day.totals.carbs / max(1, day.goals.carbs))",
-   "App/Screens/Home/DailySection.swift:393: compactMacro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
-   "App/Screens/Home/DailySection.swift:501: macro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, \"F2A33A\")",
+   "App/Core/MarketingShots.swift:734: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: NutritionColors.carbsHex, progress: day.totals.carbs / max(1, day.goals.carbs))",
+   "App/Screens/Home/DailySection.swift:393: compactMacro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex)",
+   "App/Screens/Home/DailySection.swift:501: macro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex)",
    "App/Screens/Home/MyInfoSection.swift:33: add(\"carbs\", \"leaf\", tr(\"Glucides\"), profile.knows(.carbsTarget) ? \"\\(TF.int(nutrition.goals.carbs)) g\" : nil)"
   ]
  },
@@ -14970,7 +14978,7 @@
  "Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:148: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:163: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "Je préfère ne pas répondre": {
@@ -15362,7 +15370,7 @@
  "L [fat]": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:128: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:129: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
   ]
  },
  "L'accueil « %@ »": {
@@ -15410,7 +15418,7 @@
  "L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:149: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:164: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "L'analyse mois par mois est dans Premium": {
@@ -15428,7 +15436,7 @@
  "L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:95: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:97: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
   ]
  },
  "L'année avance": {
@@ -15671,7 +15679,7 @@
  "La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:170: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:185: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
   ]
  },
  "La capitalisation totale du marché et ses principaux actifs.": {
@@ -16253,7 +16261,7 @@
  "Le code-barres est retenu : le prochain scan retrouvera cet aliment.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:587: ? tr(\"Le code-barres est retenu : le prochain scan retrouvera cet aliment.\")"
+   "App/Screens/Spaces/NutritionSpace.swift:627: ? tr(\"Le code-barres est retenu : le prochain scan retrouvera cet aliment.\")"
   ]
  },
  "Le compte à rebours d'Halloween et la lune du soir.": {
@@ -16589,7 +16597,7 @@
  "Le produit %@ n'est pas encore dans Open Food Facts.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:113: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:115: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
   ]
  },
  "Le repos démarre tout seul.": {
@@ -17243,9 +17251,9 @@
  "Lipides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:736: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: \"3366FF\", progress: day.totals.fat / max(1, day.goals.fat))",
-   "App/Screens/Home/DailySection.swift:394: compactMacro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
-   "App/Screens/Home/DailySection.swift:502: macro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, \"3366FF\")",
+   "App/Core/MarketingShots.swift:736: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: NutritionColors.fatHex, progress: day.totals.fat / max(1, day.goals.fat))",
+   "App/Screens/Home/DailySection.swift:394: compactMacro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex)",
+   "App/Screens/Home/DailySection.swift:502: macro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex)",
    "App/Screens/Home/MyInfoSection.swift:34: add(\"fat\", \"drop\", tr(\"Lipides\"), profile.knows(.fatTarget) ? \"\\(TF.int(nutrition.goals.fat)) g\" : nil)"
   ]
  },
@@ -17681,7 +17689,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:156: KindInfo(kind: .macros, title: tr(\"Macros\"), summary: tr(\"Protéines, glucides et lipides de la journée face à tes objectifs.\"), category: .nutrition, symbol: \"chart.bar.xaxis\", isPremium: false, famil",
-   "Shared/Render/Tiles/NutritionTiles.swift:113: var tile = Tile(title: tr(\"Macros\"), symbol: \"chart.bar.xaxis\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:114: var tile = Tile(title: tr(\"Macros\"), symbol: \"chart.bar.xaxis\")"
   ]
  },
  "Madrid": {
@@ -18271,7 +18279,7 @@
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:270: MiniRow(symbol: \"bookmark.fill\", colorHex: accentHex, title: tr(\"Mes repas\"), detail: tr(\"Des repas enregistrés, à reprendre d'une touche\"), value: state.savedMeals.isEmpty ? nil : \"\\(state.savedMeals",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:115: Section(tr(\"Mes repas\")) {",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:752: .navigationTitle(tr(\"Mes repas\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:228: Section(tr(\"Mes repas\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:237: Section(tr(\"Mes repas\")) {"
   ]
  },
  "Mes revenus et dépenses": {
@@ -19018,7 +19026,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:254: let average = tr(\"Moyenne \\(TF.int(stats.averages.kcal)) kcal\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:198: tile.inline = tr(\"Moyenne \\(TF.int(average)) kcal\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:200: tile.inline = tr(\"Moyenne \\(TF.int(average)) kcal\")"
   ]
  },
  "Moyenne : %@ kcal par jour noté": {
@@ -19232,7 +19240,7 @@
  "NVIDIA Corp": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Companies.swift:50: CompanyRef(cik: 1045810, ticker: \"NVDA\", name: tr(\"NVIDIA Corp\")),"
+   "Shared/Domains/Companies.swift:57: CompanyRef(cik: 1045810, ticker: \"NVDA\", name: tr(\"NVIDIA Corp\")),"
   ]
  },
  "Natation": {
@@ -20236,7 +20244,7 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:178: insightCard(symbol: \"checkmark.seal.fill\", title: tr(\"Objectif atteint\"), message: tr(\"Tu es dans ta cible de calories aujourd'hui.\"), action: nil)",
    "Shared/Render/Tiles/MoneyTiles.swift:115: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:156: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")",
+   "Shared/Render/Tiles/NutritionTiles.swift:157: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")",
    "Shared/Render/Tiles/ProductivityTiles.swift:114: tile.caption = value >= goal ? tr(\"Objectif atteint\") : tr(\"encore \\(Fmt.number(goal - value))\")"
   ]
  },
@@ -20499,14 +20507,26 @@
  "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:137: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
-   "App/Screens/Spaces/NutritionSpace.swift:588: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:152: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
+   "App/Screens/Spaces/NutritionSpace.swift:628: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
   ]
  },
  "Open Food Facts ne répond pas. Réessaie dans un instant.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:378: searchError = tr(\"Open Food Facts ne répond pas. Réessaie dans un instant.\")"
+   "App/Screens/Spaces/NutritionSpace.swift:417: searchError = tr(\"Open Food Facts ne répond pas. Réessaie dans un instant.\")"
+  ]
+ },
+ "Open Food Facts reçoit trop de demandes en ce moment : le produit %@ n'a pas pu être cherché. Réessaie dans un instant.": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:139: message: tr(\"Open Food Facts reçoit trop de demandes en ce moment : le produit \\(code) n'a pas pu être cherché. Réessaie dans un instant.\")"
+  ]
+ },
+ "Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:413: searchError = tr(\"Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant.\")"
   ]
  },
  "Options de %@": {
@@ -20744,7 +20764,7 @@
  "P [protein]": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:128: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:129: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
   ]
  },
  "PROCHAIN VOYAGE": {
@@ -21026,7 +21046,7 @@
  "Pas de connexion : le produit %@ n'a pas pu être cherché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:124: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:126: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
   ]
  },
  "Pas de cours prévu": {
@@ -21528,8 +21548,8 @@
  "Photographier le plat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:203: .accessibilityLabel(tr(\"Photographier le plat\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:208: Text(tr(\"Photographier le plat\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:218: .accessibilityLabel(tr(\"Photographier le plat\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:223: Text(tr(\"Photographier le plat\"))"
   ]
  },
  "Photos": {
@@ -21615,7 +21635,7 @@
  "Place le code-barres dans le carré": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:645: Text(tr(\"Place le code-barres dans le carré\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:685: Text(tr(\"Place le code-barres dans le carré\"))"
   ]
  },
  "Placement": {
@@ -21695,7 +21715,7 @@
  "Plat non reconnu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:146: title: tr(\"Plat non reconnu\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:161: title: tr(\"Plat non reconnu\"),"
   ]
  },
  "Plats": {
@@ -22138,7 +22158,7 @@
  "Pomme, poulet, yogourt…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:288: .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr(\"Pomme, poulet, yogourt…\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:300: .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr(\"Pomme, poulet, yogourt…\"))"
   ]
  },
  "Pomodoro": {
@@ -22263,7 +22283,7 @@
  "Portion": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:583: NumberRow(title: tr(\"Portion\"), value: $serving, unit: \"g\")"
+   "App/Screens/Spaces/NutritionSpace.swift:623: NumberRow(title: tr(\"Portion\"), value: $serving, unit: \"g\")"
   ]
  },
  "Portugal": {
@@ -22371,13 +22391,13 @@
  "Pour 100 g": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:591: Section(tr(\"Pour 100 g\")) {"
+   "App/Screens/Spaces/NutritionSpace.swift:631: Section(tr(\"Pour 100 g\")) {"
   ]
  },
  "Pour 100 g : %@ kcal · protéines %@ g · glucides %@ g · lipides %@ g": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:429: Text(tr(\"Pour 100 g : \\(TF.int(food.kcal)) kcal · protéines \\(TF.decimal(food.protein, 1)) g · glucides \\(TF.decimal(food.carbs, 1)) g · lipides \\(TF.decimal(food.fat, 1)) g\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:469: Text(tr(\"Pour 100 g : \\(TF.int(food.kcal)) kcal · protéines \\(TF.decimal(food.protein, 1)) g · glucides \\(TF.decimal(food.carbs, 1)) g · lipides \\(TF.decimal(food.fat, 1)) g\"))"
   ]
  },
  "Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget.": {
@@ -22539,7 +22559,7 @@
  "Pour toi": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:214: FilterChip(title: tr(\"Pour toi\"), isSelected: category == nil) { category = nil }"
+   "App/Screens/Spaces/NutritionSpace.swift:223: FilterChip(title: tr(\"Pour toi\"), isSelected: category == nil) { category = nil }"
   ]
  },
  "Pour ton âge et le compte à rebours.": {
@@ -23010,7 +23030,7 @@
   "uses": [
    "Shared/Model/KindCatalog.swift:162: KindInfo(kind: .nextMeal, title: tr(\"Prochain repas\"), summary: tr(\"Ce qu'il reste pour ton prochain repas en calories et en protéines.\"), category: .nutrition, symbol: \"clock.badge.checkmark\", isPrem",
    "Shared/Render/Tiles/NutritionTiles.swift:53: case .nextMeal: tile = known.kcal ? nextMeal(state, now: now) : .empty(tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\", message: tr(\"Donne ton objectif calorique dans Ardane pour savoir ce qu'il",
-   "Shared/Render/Tiles/NutritionTiles.swift:239: var tile = Tile(title: tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:241: var tile = Tile(title: tr(\"Prochain repas\"), symbol: \"clock.badge.checkmark\")"
   ]
  },
  "Prochain repas : %@, environ %@ kcal": {
@@ -23097,14 +23117,14 @@
  "Produit introuvable": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:112: title: tr(\"Produit introuvable\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:123: title: tr(\"Produit introuvable\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:114: title: tr(\"Produit introuvable\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:125: title: tr(\"Produit introuvable\"),"
   ]
  },
  "Produits emballés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:275: Text(tr(\"Produits emballés\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:287: Text(tr(\"Produits emballés\"))"
   ]
  },
  "Produits laitiers": {
@@ -23206,9 +23226,9 @@
  "Protéines": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:732: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: \"E5484D\", progress: day.totals.protein / max(1, day.goals.protein))",
-   "App/Screens/Home/DailySection.swift:392: compactMacro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
-   "App/Screens/Home/DailySection.swift:500: macro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, \"E5484D\")",
+   "App/Core/MarketingShots.swift:732: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: NutritionColors.proteinHex, progress: day.totals.protein / max(1, day.goals.protein))",
+   "App/Screens/Home/DailySection.swift:392: compactMacro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex)",
+   "App/Screens/Home/DailySection.swift:500: macro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex)",
    "App/Screens/Home/MyInfoSection.swift:32: add(\"protein\", \"bolt.heart\", tr(\"Protéines\"), profile.knows(.proteinTarget) ? \"\\(TF.int(nutrition.goals.protein)) g\" : nil)"
   ]
  },
@@ -23797,13 +23817,13 @@
  "Recherche du produit %@…": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:102: progress(tr(\"Recherche du produit \\(code)…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:104: progress(tr(\"Recherche du produit \\(code)…\"))"
   ]
  },
  "Recherche sur Open Food Facts…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:263: HStack { ProgressView(); Text(tr(\"Recherche sur Open Food Facts…\")).foregroundStyle(Color.secondary) }"
+   "App/Screens/Spaces/NutritionSpace.swift:272: HStack { ProgressView(); Text(tr(\"Recherche sur Open Food Facts…\")).foregroundStyle(Color.secondary) }"
   ]
  },
  "Rechercher": {
@@ -24247,7 +24267,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:1268: DayCard(title: tr(\"Repas du jour\"), symbol: \"fork.knife\", colorHex: \"F08A24\", route: .app(.nutrition)) {",
    "Shared/Model/KindCatalog.swift:158: KindInfo(kind: .mealsToday, title: tr(\"Repas du jour\"), summary: tr(\"Ce que tu as mangé aujourd'hui, repas par repas.\"), category: .nutrition, symbol: \"list.bullet.rectangle\", isPremium: true, familie",
-   "Shared/Render/Tiles/NutritionTiles.swift:167: var tile = Tile(title: tr(\"Repas du jour\"), symbol: \"list.bullet.rectangle\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:169: var tile = Tile(title: tr(\"Repas du jour\"), symbol: \"list.bullet.rectangle\")"
   ]
  },
  "Repas et calories": {
@@ -24793,7 +24813,7 @@
  "Revenues": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Companies.swift:140: for tag in [\"RevenueFromContractWithCustomerExcludingAssessedTax\", tr(\"Revenues\"), \"SalesRevenueNet\", \"RevenueFromContractWithCustomerIncludingAssessedTax\"] {"
+   "Shared/Domains/Companies.swift:147: for tag in [\"RevenueFromContractWithCustomerExcludingAssessedTax\", tr(\"Revenues\"), \"SalesRevenueNet\", \"RevenueFromContractWithCustomerIncludingAssessedTax\"] {"
   ]
  },
  "Revenus": {
@@ -25092,7 +25112,7 @@
  "Rien de noté pour l'instant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:170: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:172: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
   ]
  },
  "Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.": {
@@ -25468,7 +25488,8 @@
  "Récapitulatif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:85: if case .recap = stage { return tr(\"Récapitulatif\") }"
+   "App/Core/ScreenshotMode.swift:482: .navigationTitle(mode == \"nutrition-plan\" ? tr(\"Ton objectif de poids\") : tr(\"Récapitulatif\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:87: if case .recap = stage { return tr(\"Récapitulatif\") }"
   ]
  },
  "Récents": {
@@ -25513,8 +25534,8 @@
   "uses": [
    "App/Premium/PaywallView.swift:238: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Business/BusinessSources.swift:264: Button(tr(\"Réessayer\")) { attempt += 1 }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:126: prominentButton(tr(\"Réessayer\")) {",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:151: prominentButton(tr(\"Réessayer\")) { rescan() }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:128: prominentButton(tr(\"Réessayer\")) {",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:141: prominentButton(tr(\"Réessayer\")) {"
   ]
  },
  "Région": {
@@ -25678,7 +25699,7 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:323: BusinessRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Résultats\"), detail: tr(\"Chiffre d'affaires, dépenses et bénéfice par mois\"))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:220: .navigationTitle(tr(\"Résultats\"))",
-   "App/Screens/Spaces/NutritionSpace.swift:254: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
+   "App/Screens/Spaces/NutritionSpace.swift:263: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
   ]
  },
  "Résumé du soir": {
@@ -26162,8 +26183,8 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:738: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:86: return tr(\"Scanner un aliment\")",
-   "App/Screens/Spaces/NutritionSpace.swift:670: .navigationTitle(tr(\"Scanner un aliment\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:88: return tr(\"Scanner un aliment\")",
+   "App/Screens/Spaces/NutritionSpace.swift:710: .navigationTitle(tr(\"Scanner un aliment\"))",
    "Shared/Intents/FoodScannerIntent.swift:11: static var title: LocalizedStringResource = \"Scanner un aliment\""
   ]
  },
@@ -26183,9 +26204,9 @@
  "Scanner à nouveau": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:72: .accessibilityLabel(tr(\"Scanner à nouveau\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:118: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:141: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:74: .accessibilityLabel(tr(\"Scanner à nouveau\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:120: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:156: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
   ]
  },
  "Se balancer.": {
@@ -26327,7 +26348,7 @@
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:159: combo(\"nutrition-semaine\", tr(\"Semaine nutrition\"), tr(\"Tes calories de la semaine, tes protéines et le prochain repas.\"), .dune, \"F08A24\",",
    "Shared/Model/KindCatalog.swift:159: KindInfo(kind: .nutritionWeek, title: tr(\"Semaine nutrition\"), summary: tr(\"Tes calories des sept derniers jours et ta moyenne.\"), category: .nutrition, symbol: \"chart.bar\", isPremium: true, families:",
-   "Shared/Render/Tiles/NutritionTiles.swift:184: guard days.contains(where: { $0 > 0 }) else { return .empty(tr(\"Semaine nutrition\"), symbol: \"chart.bar\", message: hint) }"
+   "Shared/Render/Tiles/NutritionTiles.swift:186: guard days.contains(where: { $0 > 0 }) else { return .empty(tr(\"Semaine nutrition\"), symbol: \"chart.bar\", message: hint) }"
   ]
  },
  "Semaine prochaine": {
@@ -26475,6 +26496,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:280: Text(tr(\"Sert à suivre l'avancement de ta session.\"))"
+  ]
+ },
+ "Service occupé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:138: title: tr(\"Service occupé\"),"
   ]
  },
  "Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours.": {
@@ -27125,7 +27152,7 @@
  "Suggestions": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:254: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
+   "App/Screens/Spaces/NutritionSpace.swift:263: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
   ]
  },
  "Suis le coude du regard.": {
@@ -27174,7 +27201,7 @@
  "Suivi : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:214: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:216: tile.inline = tr(\"Suivi : \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\")"
   ]
  },
  "Suivi d'habitudes": {
@@ -27408,7 +27435,7 @@
  "Sur 30 jours : %@ kcal/j": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:191: tile.detail = tr(\"Sur 30 jours : \\(TF.int(month)) kcal/j\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:193: tile.detail = tr(\"Sur 30 jours : \\(TF.int(month)) kcal/j\")"
   ]
  },
  "Sur l'Accueil": {
@@ -27858,7 +27885,7 @@
   "uses": [
    "App/Screens/Spaces/NutritionSpace.swift:115: ValueRow(title: tr(\"Série de suivi\"), value: Fmt.plural(NutritionMath.trackingStreak(state, until: now), tr(\"jour\"), tr(\"jours\")), symbol: \"flame.fill\")",
    "Shared/Model/KindCatalog.swift:160: KindInfo(kind: .nutritionStreak, title: tr(\"Série de suivi\"), summary: tr(\"Les jours d'affilée où tu as noté ce que tu manges.\"), category: .nutrition, symbol: \"flame.fill\", isPremium: true, families:",
-   "Shared/Render/Tiles/NutritionTiles.swift:205: var tile = Tile(title: tr(\"Série de suivi\"), symbol: \"flame.fill\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:207: var tile = Tile(title: tr(\"Série de suivi\"), symbol: \"flame.fill\")"
   ]
  },
  "Série et repos": {
@@ -28999,7 +29026,7 @@
  "Tesla, Inc.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Companies.swift:51: CompanyRef(cik: 1318605, ticker: \"TSLA\", name: tr(\"Tesla, Inc.\")),"
+   "Shared/Domains/Companies.swift:58: CompanyRef(cik: 1318605, ticker: \"TSLA\", name: tr(\"Tesla, Inc.\")),"
   ]
  },
  "Test Industries": {
@@ -29497,6 +29524,7 @@
  "Ton objectif de poids": {
   "placeholders": 0,
   "uses": [
+   "App/Core/ScreenshotMode.swift:482: .navigationTitle(mode == \"nutrition-plan\" ? tr(\"Ton objectif de poids\") : tr(\"Récapitulatif\"))",
    "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:70: Label(tr(\"Ton objectif de poids\"), systemImage: \"scalemass\")",
    "App/Screens/Profile/NutritionTargetsCard.swift:112: .navigationTitle(tr(\"Ton objectif de poids\"))"
   ]
@@ -30619,6 +30647,12 @@
    "Shared/Domains/ExerciseLibrary.swift:199: mistakes: [tr(\"Hanches qui s'affaissent ou montent trop.\"), tr(\"Tête qui avance avant le buste.\"), tr(\"Amplitude trop courte.\")]"
   ]
  },
+ "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0). Une partie des valeurs de la table d'aliments intégrée et les aliments que le Fichier canadien n'a pas viennent de l'USDA ; ses valeurs ne sont jamais mélangées à celles du Fichier canadien. fdc.nal.usda.gov": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:224: text: tr(\"U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0)"
+  ]
+ },
  "Un carnet de serre : habitudes, eau, calendrier et notes.": {
   "placeholders": 0,
   "uses": [
@@ -30887,12 +30921,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetStyle.swift:179: case .strong: tr(\"Une ombre marquée, plus de contraste.\")"
-  ]
- },
- "Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Profile/ProfileView.swift:224: text: tr(\"Une partie des valeurs de la table d'aliments intégrée provient de USDA FoodData Central (domaine public, CC0). U.S. Department of Agriculture, Agricultural Research Service.\"))"
   ]
  },
  "Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes.": {
@@ -31992,7 +32020,7 @@
  "aliment noté": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:170: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:172: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
   ]
  },
  "aliment noté aujourd'hui": {
@@ -32010,7 +32038,7 @@
  "aliments notés": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:170: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
+   "Shared/Render/Tiles/NutritionTiles.swift:172: tile.caption = entries.isEmpty ? tr(\"Rien de noté pour l'instant\") : Fmt.plural(entries.count, tr(\"aliment noté\"), tr(\"aliments notés\"))"
   ]
  },
  "aliments notés aujourd'hui": {
@@ -32108,19 +32136,19 @@
    "App/Screens/MiniApps/Car/CarApp.swift:312: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : \"J-\\(days)\")",
    "App/Screens/MiniApps/Car/CarPages.swift:219: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : \"J-\\(days)\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:52: case 0: return tr(\"aujourd'hui\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:119: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal))\") : tr(\"aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:120: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal))\") : tr(\"aujourd'hui\")"
   ]
  },
  "aujourd'hui · fibres %@ g": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:117: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal)) · fibres \\(TF.int(totals.fiber)) g\") : tr(\"aujourd'hui · fibres \\(TF.int(totals.fiber)) g\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:118: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal)) · fibres \\(TF.int(totals.fiber)) g\") : tr(\"aujourd'hui · fibres \\(TF.int(totals.fiber)) g\")"
   ]
  },
  "aujourd'hui · touche pour ajouter": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:227: tile.caption = tr(\"aujourd'hui · touche pour ajouter\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:229: tile.caption = tr(\"aujourd'hui · touche pour ajouter\")"
   ]
  },
  "aujourd'hui à %@": {
@@ -32530,7 +32558,7 @@
  "dont %@ g de protéines": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:244: tile.detail = tr(\"dont \\(TF.int(budget.protein)) g de protéines\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:246: tile.detail = tr(\"dont \\(TF.int(budget.protein)) g de protéines\")"
   ]
  },
  "dépassé de %@ km": {
@@ -33002,7 +33030,7 @@
  "kcal restantes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:730: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: \"F08A24\", progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
+   "App/Core/MarketingShots.swift:730: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: NutritionColors.caloriesHex, progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
    "App/Screens/Home/DailySection.swift:384: Text(nutrition.kcalLeft.map { $0 >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\") } ?? tr(\"kcal mangées\"))",
    "App/Screens/Home/DailySection.swift:470: Text(left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:299: Text(known.kcal ? (left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\")) : tr(\"kcal mangées\"))"
@@ -33129,7 +33157,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/NutritionTiles.swift:87: tile.caption = tr(\"mangées aujourd'hui\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:145: tile.caption = tr(\"mangées aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:146: tile.caption = tr(\"mangées aujourd'hui\")"
   ]
  },
  "marge %@": {
@@ -33204,13 +33232,13 @@
  "moyenne par jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:189: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:191: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
   ]
  },
  "moyenne · objectif %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:189: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:191: tile.caption = knowsGoal ? tr(\"moyenne · objectif \\(TF.int(state.goals.kcal))\") : tr(\"moyenne par jour\")"
   ]
  },
  "même heure qu'ici": {
@@ -33229,7 +33257,7 @@
  "note un repas pour continuer": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:208: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:210: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
   ]
  },
  "notes": {
@@ -33551,7 +33579,7 @@
  "pour le %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:243: tile.caption = tr(\"pour le \\(budget.meal.title.lowercased())\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:245: tile.caption = tr(\"pour le \\(budget.meal.title.lowercased())\")"
   ]
  },
  "pour les prochaines 48 h": {
@@ -33629,13 +33657,13 @@
  "repas noté aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:208: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:210: tile.caption = keys.contains(DateMath.dayKey(now)) ? tr(\"repas noté aujourd'hui\") : tr(\"note un repas pour continuer\")"
   ]
  },
  "restantes pour la soirée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:251: tile.caption = tr(\"restantes pour la soirée\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:253: tile.caption = tr(\"restantes pour la soirée\")"
   ]
  },
  "restantes sur %@": {
@@ -33801,7 +33829,7 @@
    "App/Screens/MiniApps/Finances/FinancesPages.swift:702: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:142: MiniStat(title: tr(\"Étude\"), value: Fmt.minutes(studied), detail: tr(\"sur \\(Fmt.hours(state.weeklyStudyGoalHours))\"),",
    "Shared/Render/Tiles/MoneyTiles.swift:78: detail: limit > 0 ? tr(\"sur \\(TF.money(limit, currency))\") : nil,",
-   "Shared/Render/Tiles/NutritionTiles.swift:119: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal))\") : tr(\"aujourd'hui\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:120: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal))\") : tr(\"aujourd'hui\")"
   ]
  },
  "sur %@ cette semaine": {
@@ -33826,7 +33854,7 @@
  "sur %@ · fibres %@ g": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:117: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal)) · fibres \\(TF.int(totals.fiber)) g\") : tr(\"aujourd'hui · fibres \\(TF.int(totals.fiber)) g\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:118: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal)) · fibres \\(TF.int(totals.fiber)) g\") : tr(\"aujourd'hui · fibres \\(TF.int(totals.fiber)) g\")"
   ]
  },
  "sweet potato": {
@@ -34215,7 +34243,7 @@
  "½ portion": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:485: Portion(title: tr(\"½ portion\"), grams: (serving / 2).rounded()),"
+   "App/Screens/Spaces/NutritionSpace.swift:525: Portion(title: tr(\"½ portion\"), grams: (serving / 2).rounded()),"
   ]
  },
  "½ tasse": {
@@ -35189,7 +35217,7 @@
  "à trouver sur %@ g": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/NutritionTiles.swift:156: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:157: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
   ]
  },
  "échéance": {
