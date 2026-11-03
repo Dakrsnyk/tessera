@@ -133,3 +133,12 @@ Demande (2026-10-22 soir) : plus de bandeau noir en haut des mini-apps (le dégr
 
 
 - Le dépôt est public pour la CI : le repasser en privé.
+
+## Chantier 22.3 : reconnaissance, premiers entraînements réels — 2026-11-03
+
+- Données : copie Kaggle de MyFoodRepo v2.0 (CC BY 4.0 appliquée), 498 classes fines ; recadrages 68 830 / 7 460 / 1 820 (le val officiel sert de TEST). Code dans `scripts/ml/` (non versionné à ce jour), carnets Kaggle dans `scripts/ml/kaggle/` (générés par `build_notebooks.py`).
+- PC (CPU, DINOv2-S gelé + tête MLP réglée par balayage) : Top-1 45,8 %, Top-3 65,9 % sur le TEST. Rapport : `C:\Users\Etudiant\ardane-tools\ml\reports\classifier-2026-11-03.md`.
+- Kaggle passage 2 (T4, 1,15 h) : A linéaire 41,1 % ; B (6 derniers blocs affinés, 10 époques) **49,0 % Top-1, 71,5 % Top-3**, ECE 0,057. Sortie : `C:\Users\Etudiant\ardane-tools\ml\kaggle-outputs\classifier-v2\`.
+- Kaggle passage 3 (T4, 1,49 h ; 9 blocs affinés, arrêt anticipé à l'époque 11, meilleure 8) : B **49,6 % Top-1, 72,4 % Top-3** ; B-MLP **51,0 % Top-1, 73,3 % Top-3** (Wilson 48,7–53,3 %). La validation départage à peine B et B-MLP (NLL 1,880 contre 1,888) : plateau vers 50 % avec ces données et DINOv2-S. Sortie : `C:\Users\Etudiant\ardane-tools\ml\kaggle-outputs\classifier-v3\` (Core ML A, B, BM en fp16 et int8, 19 à 43 Mo).
+- Segmenteur RF-DETR-Seg Nano lancé sur Kaggle le 2026-11-03 (débit mesuré puis époques selon le budget de 11 h).
+- Rien n'est intégré à l'app : il faut la parité Core ML sur macOS (CI, accord à demander), la relecture de `class_map.csv` (167 classes sans aliment Ardane, 331 à vérifier) et la mesure sur repas pesés.

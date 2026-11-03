@@ -45,7 +45,7 @@ Typologie à ne pas confondre : classifieur de PLAT (une étiquette par photo : 
 **Détection et segmentation d'instances**
 | Modèle | Licence | Précision | Core ML / taille | Verdict |
 |---|---|---|---|---|
-| **RF-DETR-Seg Nano/Small** | Apache 2.0 (Nano–Large et toutes les tailles de segmentation ; Atto/Femto/Pico/XL/2XL sous licence « PML ») | COCO segmentation : Nano 40,3 AP, Small 43,1 AP | export Core ML documenté pour la détection, PAS pour la tête de segmentation ; ~34–67 Mo | **Retenu** (à vérifier : export de la segmentation) |
+| **RF-DETR-Seg Nano/Small** | Apache 2.0 (Nano–Large et toutes les tailles de segmentation ; Atto/Femto/Pico/XL/2XL sous licence « PML ») | COCO segmentation : Nano 40,3 AP, Small 43,1 AP | export Core ML de la segmentation **prouvé le 2026-11-02** (`rfdetr` 1.11.2, `model.export(format="coreml")`, Nano : fp16 58,9 Mo, int8 31,2 Mo ; prédiction et parité à vérifier sur macOS) | **Retenu** |
 | RT-DETR / v2 | Apache 2.0 | R18 46,5 AP | Core ML non mentionné | Repli |
 | DETR segmentation (Core ML d'Apple) | Apache 2.0 | classes COCO | 86 Mo, 40 ms sur iPhone 15 Pro Max (ANE) | Preuve de faisabilité |
 | Mask R-CNN | permissif | — | NMS/RoIAlign difficiles à convertir | Écarté |
@@ -84,7 +84,7 @@ Normalisation : les classes MyFoodRepo ont leur propre ontologie (correspondance
 Attention : tout poids livré dans le dépôt public devient public ; GitHub bloque les fichiers de plus de 100 Mo.
 
 ## Incertitudes
-Aucune latence iPhone publiée pour RF-DETR, DINOv2 ni les têtes de segmentation. Export Core ML de RF-DETR-Seg non documenté. Licences non confirmées : FoodSeg103, UEC-Food256, Recipe1M, ISIA, Food2K, NutritionVerse-Real, EdgeSAM ; poids ImageNet en zone grise (pas d'avis juridique). MyFoodRepo : contrôler le fichier de licence au téléchargement (connexion AIcrowd) et garder une preuve datée. Chiffres EfficientNet B4/B7 et CLIP issus de résumés.
+Aucune latence iPhone publiée pour RF-DETR, DINOv2 ni les têtes de segmentation. Export Core ML de RF-DETR-Seg : non documenté au moment de la recherche, puis prouvé le 2026-11-02 (voir le tableau ; prédiction et parité à vérifier sur macOS). Licences non confirmées : FoodSeg103, UEC-Food256, Recipe1M, ISIA, Food2K, NutritionVerse-Real, EdgeSAM ; poids ImageNet en zone grise (pas d'avis juridique). MyFoodRepo : contrôler le fichier de licence au téléchargement (connexion AIcrowd) et garder une preuve datée. Chiffres EfficientNet B4/B7 et CLIP issus de résumés.
 
 ## Sources principales
 Jeux : data.vision.ee.ethz.ch/cvl/datasets_extra/food-101 ; huggingface.co/datasets/ethz/food101 ; github.com/google-research-datasets/Nutrition5k ; arXiv 2103.03375 ; xiongweiwu.github.io/foodseg103.html ; github.com/LARC-CMU-SMU/FoodSeg103-Benchmark-v1 ; mm.cs.uec.ac.jp/uecfoodpix ; aicrowd.com/challenges/food-recognition-benchmark-2022 ; discourse.aicrowd.com (règles du 1er fév. 2022) ; Frontiers in Nutrition 10.3389/fnut.2022.875143 ; github.com/karansikka1/iFood_2019 ; storage.googleapis.com/openimages (V7, classes de segmentation).
