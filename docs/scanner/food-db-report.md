@@ -24,8 +24,8 @@ Les fichiers bruts restent hors du dépôt (`~/ardane-tools/food-data/`) ; SHA-2
 
 | Mesure | Valeur |
 |---|---|
-| Fichier `App/Resources/ardane-food.sqlite` | 10 825 728 octets (10.32 Mo) |
-| SHA-256 du fichier (SQLite 3.49.1) | `d38d658c320323acddc71b8d33a4b85b84247f8c658990c529ce37d4fddd6aff` |
+| Fichier `App/Resources/ardane-food.sqlite` | 10 846 208 octets (10.34 Mo) |
+| SHA-256 du fichier (SQLite 3.50.4) | `530a84cb9519a4a9e731e74a61345dab94e064f888a701e46c3abc88ac2bdf54` |
 | Aliments FCÉN 2026 dans la base | 5 894 |
 | Aliments USDA SR Legacy sans équivalent FCÉN dans la base | 3 032 |
 | Total d'aliments | 8 926 |
@@ -80,7 +80,7 @@ Chaque ligne de `nutrient_value` garde le code de source (FCÉN `Nutrient_Source
 
 8 703 aliments ont au moins une mesure ménagère ; 8 588 ont une portion proposée par défaut (de 5 à 600 g, hors « 100 g » et « 100 ml » ; une portion « moyenne » d'abord, sinon une mesure en grammes comme « 195 g », sinon la première du fichier). Les autres s'affichent « 100 g ».
 
-**Densités** : 10 606 densités sur 3 617 aliments, dérivées des mesures en volume (grammes ÷ millilitres), gardées entre 0.2 et 2.0 g/ml (605 hors de l'intervalle écartées sur 11 211 mesures en volume). Types : mesure simple 7 382, morceaux (air entre eux) 2 980, compact (purée, haché serré…) 157, contenu d'un contenant 87. Une densité de FCÉN vient d'une mesure en ml (tasse = 250 ml) ou, pour l'USDA, d'une tasse, cuillère ou once liquide américaine ; ce sont des masses volumiques apparentes en vrac, pas celles d'un tas dans une assiette.
+**Densités** : 11 607 densités sur 4 320 aliments, dérivées des mesures en volume (grammes ÷ millilitres), gardées entre 0.2 et 2.0 g/ml (687 hors de l'intervalle écartées sur 12 294 mesures en volume). Types : mesure simple 8 287, morceaux (air entre eux) 3 072, compact (purée, haché serré…) 161, contenu d'un contenant 87. Une densité de FCÉN vient d'une mesure en ml (tasse = 250 ml) ou, pour l'USDA, d'une tasse, cuillère ou once liquide américaine ; ce sont des masses volumiques apparentes en vrac, pas celles d'un tas dans une assiette.
 
 **Rendements de cuisson** (USDA, viandes et volailles, table Release 2) : 173 lignes lues, 175 liens vers des aliments de la base par le code NDB de l'aliment cuit ; 11 lignes sans aliment correspondant dans la base (détail plus bas). Le rendement est en pourcentage du poids cru, tel que publié ; l'aliment cru associé est cherché par le nom (« description du rendement, raw »).
 

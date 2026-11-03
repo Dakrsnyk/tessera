@@ -18,6 +18,12 @@ VOLUME_UNITS_ML = {"cup": 236.5882365, "tablespoon": 14.78676478125, "teaspoon":
                    "fl oz": 29.5735295625, "pint": 473.176473, "quart": 946.352946, "gallon": 3785.411784, "cubic inch": 16.387064,
                    "cubic centimeter": 1.0}
 UNDETERMINED_UNIT = 9999
+# SR Legacy writes EVERY portion with the unit « undetermined » (9999): the unit is the start of `modifier`
+# (« cup, diced », « tbsp », « fl oz »). Weight units (oz, lb) and pieces (slice, piece) are not volumes.
+_SR_VOLUME_RE = re.compile(r"^(fl oz|cubic inch|cups?|tbsps?|tablespoons?|tsps?|teaspoons?|pints?|quarts?|liters?|ml)\b[\s,]*(.*)$", re.I)
+_SR_VOLUME_UNITS = {"fl oz": "fl oz", "cubic inch": "cubic inch", "cup": "cup", "tbsp": "tablespoon", "tablespoon": "tablespoon",
+                    "tsp": "teaspoon", "teaspoon": "teaspoon", "pint": "pint", "quart": "quart", "liter": "liter", "ml": "milliliter"}
+_SR_NOTE_RE = re.compile(r"\([^)]*\b(?:serving|fl oz|oz|cup|tbsp|tsp)\b[^)]*\)|\b\d[\d./]*\s*(?:fl oz|oz)\b", re.I)
 
 
 def _number(text):
@@ -116,9 +122,15 @@ def load_sr(archive, fcen_ndb, fcen_units):
             label += (", " if unit else " ") + description
         if modifier:
             label += (", " if unit and not modifier.startswith("(") else " ") + modifier
+        volume_ml = amount * VOLUME_UNITS_ML[unit] if unit in VOLUME_UNITS_ML else None
+        qualifier = modifier
+        if not unit:
+            in_modifier = sr_volume(modifier)
+            if in_modifier:
+                volume_ml = amount * in_modifier[0]
+                qualifier = in_modifier[1]
         portions.setdefault(r["fdc_id"], []).append({"seq": int(_number(r["seq_num"]) or 0), "label": label, "grams": grams,
-                                                      "volume_ml": amount * VOLUME_UNITS_ML[unit] if unit in VOLUME_UNITS_ML else None,
-                                                      "qualifier": modifier})
+                                                      "volume_ml": volume_ml, "qualifier": qualifier})
     for values in portions.values():
         values.sort(key=lambda p: (p["seq"], p["label"]))
 
@@ -127,8 +139,20 @@ def load_sr(archive, fcen_ndb, fcen_units):
             "ndb_descriptions": {ndb_of[r["fdc_id"]]: clean(r["description"]) for r in rows("food.csv") if ndb_of.get(r["fdc_id"])}}
 
 
+def sr_volume(modifier):
+    """(millilitres per unit, the words after the unit) when an SR Legacy `modifier` starts with a US volume unit, else None."""
+    match = _SR_VOLUME_RE.match(modifier)
+    if not match:
+        return None
+    word = match.group(1).lower()
+    unit = _SR_VOLUME_UNITS.get(word) or _SR_VOLUME_UNITS[word.rstrip("s")]
+    return VOLUME_UNITS_ML[unit], match.group(2).strip()
+
+
 def sr_density_kind(qualifier):
-    tokens = re.findall(r"[a-z]+", qualifier.lower())
+    """The words after the unit decide; a portion note (« (8 fl oz) », « 8 fl oz », « (1 NLEA serving) ») is not a qualifier,
+    a shape in parentheses (« (1" pieces) ») is."""
+    tokens = re.findall(r"[a-z]+", _SR_NOTE_RE.sub(" ", qualifier).lower())
     if not tokens:
         return PLAIN
     return qualifier_kind(tokens)
