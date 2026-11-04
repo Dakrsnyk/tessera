@@ -1,4 +1,5 @@
-# Jamais de données, de poids ni de modèles dans le dépôt : tout vit sous ARDANE_ML_ROOT (hors dépôt).
+# Jamais de données, de poids ni de modèles d'entraînement dans scripts/ml : tout vit sous ARDANE_ML_ROOT (hors dépôt).
+# Seuls les modèles exportés pour l'app vont dans App/Resources/Models (décision du 2026-11-04, docs/memoire/Decisions.md).
 __pycache__/
 *.pyc
 *.npy
