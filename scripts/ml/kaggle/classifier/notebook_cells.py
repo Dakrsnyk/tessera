@@ -32,14 +32,18 @@ import os, sys, time
 T0 = time.time()                                   # début de session : sert au budget de temps (12 h au plus sur Kaggle)
 SMOKE_DIR = os.environ.get("ARDANE_KAGGLE_SMOKE")  # essai local sur un jeu factice (toujours None sur Kaggle)
 
+BACKBONE = "vitb14"           # v4 (2026-11-04) : DINOv2 ViT-B/14 (« vits14 » = passages 1 à 3, plafond vers 50 % Top-1)
+os.environ["ARDANE_DINOV2"] = BACKBONE        # lu par ml_common à l'import : AVANT tout import du code embarqué
+ARDANE_LEVEL = True           # v4 : classes MyFoodRepo fusionnées par aliment d'Ardane (derive_ardane_labels.py)
+QUEBEC_DATASET = "ardane-quebec-crops"        # jeu Kaggle privé des recadrages de plats québécois libres de droits (vide = sans)
 RUN_B = True                  # variante B (affinage de DINOv2) après la voie A
 A_ALSO_MLP = True             # voie A : en plus de la tête linéaire, une tête MLP (rapport seulement, pas exportée)
 B_ALSO_MLP = True             # variante B : en plus de la tête linéaire, une tête MLP sur les vecteurs affinés (exportée aussi)
 # Tête MLP : meilleur réglage du balayage CPU du 2026-11-03 (9 variantes, choix sur la VALIDATION, voir scripts/ml/README.md § 10)
 HEAD_MLP_ARGS = ["--hidden", "2048", "--dropout", "0.5", "--lr", "5e-4", "--wd", "0.05", "--balance-alpha", "0.5", "--label-smoothing", "0.1"]
 B_UNFREEZE_BLOCKS = 9         # derniers blocs de DINOv2 affinés (sur 12) ; passage 2 : 6 blocs progressaient encore à la 10e époque
-B_EPOCHS = 20                 # époques au plus (arrêt anticipé sur la validation)
-B_BATCH = 128
+B_EPOCHS = 12                 # époques au plus (arrêt anticipé sur la validation) ; ViT-B : environ 3,5 fois plus lent par époque que le ViT-S
+B_BATCH = 64 if BACKBONE == "vitb14" else 128   # ViT-B : lot réduit pour tenir dans les 16 Go du T4
 B_BASE_LR = 3e-5              # taux du dernier bloc ; décroît de 0,85 par bloc vers l'entrée
 B_HEAD_LR = 1e-4
 B_PATIENCE = 3                # époques sans amélioration de la perte de validation avant l'arrêt
@@ -48,12 +52,13 @@ B_MAX_VAL = 0
 EXTRACT_BATCH = 256           # lot d'extraction des vecteurs (GPU)
 SESSION_HOURS = 12.0          # plafond Kaggle d'une session : ne pas dépasser
 RESERVE_HOURS = 1.0           # gardé pour les exports, les rapports et l'écriture de la sortie
-B_POST_SECONDS = 2400         # temps à garder après l'affinage B : vecteurs affinés + tête + export (estimation prudente : 40 min)
-VERSION_A, VERSION_B = "0.1.0", "0.2.0"
+B_POST_SECONDS = 4200         # temps à garder après l'affinage B : vecteurs affinés + tête + export (estimation prudente : 40 min)
+VERSION_A, VERSION_B = ("0.3.0", "0.4.0") if ARDANE_LEVEL else ("0.1.0", "0.2.0")
 EXTRACT_EXTRA = []            # arguments supplémentaires de extract_features.py (essai local)
 WORKERS = max(2, min(8, os.cpu_count() or 2))
 
-DS = "fake" if SMOKE_DIR else "myfoodrepo"           # nom du jeu de travail (« fake » : essai local, rapports marqués FACTICES)
+DS_SRC = "fake" if SMOKE_DIR else "myfoodrepo"       # recadrages préparés (« fake » : essai local, rapports marqués FACTICES)
+DS = DS_SRC + "-ardane" if ARDANE_LEVEL else DS_SRC  # jeu d'entraînement (classes fusionnées par aliment d'Ardane + plats québécois)
 DS_B = DS + "-B"
 LICENSE_NOTE = ("CC BY 4.0 (règles du concours AIcrowd 2022, section 1, relevées le 2026-11-02 ; la copie Kaggle awsaf49/food-recognition-2022-dataset "
                 "affiche CC0 : on applique la plus exigeante)")
@@ -109,7 +114,15 @@ PREVIOUS = kc.restore_state(ENV)
 DATA = kc.find_myfoodrepo(ENV.input_root)
 for _k, _v in DATA.items():
     print(f"{_k:13s} {_v}")
+WORK_SRC = ENV.ml_root / "work" / DS_SRC
 WORK = ENV.ml_root / "work" / DS
+QUEBEC_DIR = None
+if QUEBEC_DATASET and not SMOKE_DIR:
+    _hits = sorted(ENV.input_root.rglob("quebec_crops.csv"))
+    if not _hits:
+        raise RuntimeError(f"Jeu {QUEBEC_DATASET} introuvable sous {ENV.input_root} : l'ajouter en entrée (dataset_sources) ou vider QUEBEC_DATASET.")
+    QUEBEC_DIR = _hits[0].parent
+    print("plats québécois :", QUEBEC_DIR)
 # Preuve de licence rangée à côté des données (la preuve datée complète est dans docs/scanner/Licences-donnees-modeles.md du dépôt)
 _lic = ENV.ml_root / "raw" / "myfoodrepo"
 _lic.mkdir(parents=True, exist_ok=True)
@@ -122,24 +135,27 @@ _lic.mkdir(parents=True, exist_ok=True)
 
     ("code", r'''# 1. PRÉPARATION : recadrages carrés, répartition des photos sans fuite (reprenable : relancer refait seulement ce qui manque).
 def crops_present():
-    folder = WORK / "crops" / "train"
+    folder = WORK_SRC / "crops" / "train"
     return folder.exists() and any(folder.glob("*.jpg"))
 
 def run_prepare():
-    kc.run_logged([sys.executable, "prepare_myfoodrepo.py", "--root", ENV.ml_root, "--dataset", DS,
+    kc.run_logged([sys.executable, "prepare_myfoodrepo.py", "--root", ENV.ml_root, "--dataset", DS_SRC,
                    "--train-json", DATA["train_json"], "--train-images", DATA["train_images"],
                    "--val-json", DATA["val_json"], "--val-images", DATA["val_images"],
                    "--dataset-version", "2.0", "--license-note", LICENSE_NOTE, "--skip-class-map", "--workers", WORKERS], "01-prepare", ENV)
 
 def ensure_crops():
     """Les recadrages ne sont pas conservés d'une session à l'autre (3 Go) : on les refait à la demande (déterministe, quelques minutes)."""
-    if not (WORK / "crops.csv").exists() or not crops_present():
+    if not (WORK_SRC / "crops.csv").exists() or not crops_present():
         with kc.timed(ENV, "prepare"):
             run_prepare()
         kc.mark_stage(ENV, "prepare")
         kc.persist(ENV)
+    if ARDANE_LEVEL and (not (WORK / "crops.csv").exists() or not (WORK / "meta.json").exists()):
+        kc.run_logged([sys.executable, "derive_ardane_labels.py", "derive", "--root", ENV.ml_root, "--src", DS_SRC, "--dst", DS,
+                       *(["--quebec", QUEBEC_DIR] if QUEBEC_DIR else [])], "01b-derive", ENV)
 
-if kc.stage_done(ENV, "prepare") and (WORK / "crops.csv").exists() and (WORK / "meta.json").exists():
+if kc.stage_done(ENV, "prepare") and (WORK / "crops.csv").exists() and (WORK / "meta.json").exists() and crops_present():
     print("Étape « prepare » déjà faite (les recadrages seront refaits seulement si une étape suivante en a besoin).")
 else:
     ensure_crops()

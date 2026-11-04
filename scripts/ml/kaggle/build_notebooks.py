@@ -27,7 +27,7 @@ HERE = Path(__file__).resolve().parent
 ML = HERE.parent
 
 PAYLOADS = {
-    "classifier": [ML / n for n in ("ml_common.py", "class_matching.py", "prepare_myfoodrepo.py", "extract_features.py", "train_head.py",
+    "classifier": [ML / n for n in ("ml_common.py", "class_matching.py", "prepare_myfoodrepo.py", "derive_ardane_labels.py", "extract_features.py", "train_head.py",
                                     "export_coreml.py", "coreml_dryrun.py", "class_map.csv")]
     + [HERE / "kaggle_common.py", HERE / "classifier" / "finetune_dinov2.py", HERE / "classifier" / "classifier_report.py"],
     "segmenter": [ML / n for n in ("ml_common.py", "class_matching.py", "prepare_myfoodrepo.py")]

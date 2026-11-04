@@ -331,7 +331,7 @@ def main() -> None:
     w("## Modèle")
     ft_note = (f" ; **AFFINÉ par Ardane** ({fmeta['finetuned']['description']}, fichier `{fmeta['finetuned']['file']}`, SHA-256 `{fmeta['finetuned']['sha256'][:16]}...`)"
                if fmeta.get("finetuned") else "")
-    w(f"- Base : DINOv2 ViT-S/14 {'(poids officiels au départ)' if ft_note else 'gelé'} ({fmeta['backbone']['hub']}, poids SHA-256 `{fmeta['backbone']['weights_sha256'][:16]}...`, Apache 2.0){ft_note}, entrée 224 x 224, normalisation ImageNet, agrégation `{fmeta['pool']}` ({dim} nombres)." )
+    w(f"- Base : DINOv2 {fmeta['backbone'].get('model', 'dinov2_vits14')} {'(poids officiels au départ)' if ft_note else 'gelé'} ({fmeta['backbone']['hub']}, poids SHA-256 `{fmeta['backbone']['weights_sha256'][:16]}...`, Apache 2.0){ft_note}, entrée 224 x 224, normalisation ImageNet, agrégation `{fmeta['pool']}` ({dim} nombres)." )
     w(f"- Tête : {'linéaire' if args.head == 'linear' else f'MLP {dim}-{args.hidden}-{n_classes} (GELU, dropout {args.dropout})'} ; AdamW (lr {args.lr}, décroissance {args.wd}), "
       f"lots de {args.batch}, poids de classe n^-{args.balance_alpha}, arrêt anticipé (patience {args.patience}) sur la perte de validation : meilleure époque {best_epoch}, arrêt à {epoch} ({train_seconds:.0f} s sur CPU).")
     w(f"- Étalonnage : température **T = {temperature:.3f}** ajustée sur la validation (NLL {nll_np(pv_raw, yva):.4f} -> {nll_np(pv, yva):.4f} ; ECE de validation {ece_val_raw:.4f} -> {ece_val:.4f}). "

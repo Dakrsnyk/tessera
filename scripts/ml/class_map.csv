@@ -497,3 +497,6 @@ classe_id,classe,classe_lisible,id_ardane,nom_ardane,methode,score,a_relire,alte
 5641,yaourt-yahourt-yogourt-ou-yoghourt-natural,"Yaourt, yahourt, yogourt ou yoghourt, natural",cnf.6961,"Yogourt, 2-3,9% M.G., nature",manuel,1.0,non,,239
 1070,zucchini,Zucchini,builtin.zucchini,Courgette,manuel,1.0,non,"cnf.6760 (Courgettes, en pâte à frire, frites; jetons-en 0.70)",359
 232,zucchini-stewed-without-addition-of-fat-without-addition-of-salt,"Zucchini, stewed, without addition of fat, without addition of salt",builtin.zucchini,Courgette,manuel,1.0,non,,40
+990000,qc-pate-chinois,Pâté chinois / shepherd's pie (photos libres de droits),builtin.shepherd,Pâté chinois,manuel,1.0,non,,
+990001,qc-poutine,Poutine (photos libres de droits),builtin.poutine,Poutine,manuel,1.0,non,,
+990002,qc-tourtiere,Tourtière / tourte (photos libres de droits),cnf.6883,Tourtière maison,manuel,1.0,non,,

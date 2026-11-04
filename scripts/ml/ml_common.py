@@ -60,16 +60,26 @@ def setup_torch_home(root: Path) -> None:
 # Poids et code officiels de Meta (Apache 2.0), épinglés sur un commit pour que la chaîne soit reproductible.
 HUB_REPO = "facebookresearch/dinov2"
 HUB_COMMIT = "7764ea0f912e53c92e82eb78a2a1631e92725fc8"
-HUB_MODEL = "dinov2_vits14"
-HUB_WEIGHTS_FILE = "dinov2_vits14_pretrain.pth"
-HUB_WEIGHTS_URL = "https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth"
-# SHA-256 mesuré le 2026-11-02 sur le fichier téléchargé de l'URL officielle ci-dessus (84,2 Mo).
-HUB_WEIGHTS_SHA256 = "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9"
+# Variante du modèle de base, choisie par la variable d'environnement ARDANE_DINOV2 (« vits14 » par défaut : chaîne inchangée ;
+# « vitb14 » : modèle plus grand, essayé le 2026-11-04 pour dépasser le plafond d'environ 50 % du ViT-S sur MyFoodRepo).
+# SHA-256 mesurés sur les fichiers téléchargés des URL officielles : vits14 le 2026-11-02 (84,2 Mo), vitb14 le 2026-11-04.
+DINOV2_VARIANTS = {
+    "vits14": {"embed_dim": 384, "sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9"},
+    "vitb14": {"embed_dim": 768, "sha256": "0b8b82f85de91b424aded121c7e1dcc2b7bc6d0adeea651bf73a13307fad8c73"},
+}
+DINOV2_VARIANT = os.environ.get("ARDANE_DINOV2", "vits14")
+if DINOV2_VARIANT not in DINOV2_VARIANTS:
+    raise ValueError(f"ARDANE_DINOV2 inconnu : {DINOV2_VARIANT} (attendu : {', '.join(DINOV2_VARIANTS)})")
+HUB_MODEL = f"dinov2_{DINOV2_VARIANT}"
+HUB_WEIGHTS_FILE = f"dinov2_{DINOV2_VARIANT}_pretrain.pth"
+HUB_WEIGHTS_URL = f"https://dl.fbaipublicfiles.com/dinov2/dinov2_{DINOV2_VARIANT}/dinov2_{DINOV2_VARIANT}_pretrain.pth"
+HUB_WEIGHTS_SHA256 = DINOV2_VARIANTS[DINOV2_VARIANT]["sha256"]
+EMBED_DIM = DINOV2_VARIANTS[DINOV2_VARIANT]["embed_dim"]
 
 IMAGE_SIZE = 224          # 16 x 16 patchs de 14 pixels
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
-POOLS = {"cls_mean": 768, "cls": 384}   # dimension du vecteur selon l'agrégation
+POOLS = {"cls_mean": 2 * EMBED_DIM, "cls": EMBED_DIM}   # dimension du vecteur selon l'agrégation (768 / 384 pour le ViT-S)
 
 ATTRIBUTION_DINOV2 = "DINOv2 (Meta Platforms, Inc.), licence Apache 2.0 : github.com/facebookresearch/dinov2"
 ATTRIBUTION_MYFOODREPO = (

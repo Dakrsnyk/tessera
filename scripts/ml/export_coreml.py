@@ -31,7 +31,7 @@ from pathlib import Path
 import numpy as np
 
 import coreml_dryrun
-from ml_common import (ATTRIBUTION_DINOV2, ATTRIBUTION_MYFOODREPO, HUB_COMMIT, HUB_WEIGHTS_SHA256, IMAGE_SIZE, POOLS, fail, file_sha256,
+from ml_common import (ATTRIBUTION_DINOV2, ATTRIBUTION_MYFOODREPO, HUB_COMMIT, HUB_MODEL, HUB_WEIGHTS_SHA256, IMAGE_SIZE, POOLS, fail, file_sha256,
                        class_label, load_dinov2_backbone, log, make_feature_net, make_full_net, ml_root, models_dir, rebuild_head,
                        write_json)
 
@@ -192,7 +192,7 @@ def main() -> None:
             "ardane.version": args.version, "ardane.variant": variant, "ardane.dataset": ck["dataset"],
             "ardane.dataset_kind": ck["dataset_kind"], "ardane.dataset_license": ck["dataset_license"],
             "ardane.attribution": " | ".join(attribution), "ardane.temperature": f"{temperature:.6f}",
-            "ardane.backbone": f"facebookresearch/dinov2@{HUB_COMMIT} dinov2_vits14 (poids sha256 {HUB_WEIGHTS_SHA256})"
+            "ardane.backbone": f"facebookresearch/dinov2@{HUB_COMMIT} {HUB_MODEL} (poids sha256 {HUB_WEIGHTS_SHA256})"
             + (f" ; AFFINÉ par Ardane (poids sha256 {ft_sha})" if ft_sha else ""),
             "ardane.pool": pool, "ardane.input": "image 224x224 RGB 0..255 ; normalisation ImageNet dans le graphe",
             "ardane.class_labels": "mfr:<nom de classe MyFoodRepo> ; voir ardane.classes",
