@@ -148,12 +148,14 @@ def call_arguments(text, open_index):
 def check_memberwise():
     structs, custom = struct_definitions()
     checked = 0
+    # Compiled once: with a thousand structs the `re` cache (512 patterns) would recompile every pattern for every file.
+    patterns = {name: re.compile(r"(?<![\w.])" + name + r"\(") for name, props in structs.items() if name not in custom and props}
     for path, text in FILES.items():
         clean = strip_comments(text)
         for name, props in structs.items():
-            if name in custom or not props:
+            if name in custom or not props or name + "(" not in clean:
                 continue
-            for match in re.finditer(r"(?<![\w.])" + name + r"\(", clean):
+            for match in patterns[name].finditer(clean):
                 before = clean[max(0, match.start() - 12):match.start()]
                 if re.search(r"(struct|enum|func|extension|case)\s*$", before):
                     continue
