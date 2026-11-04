@@ -198,27 +198,32 @@ def collect(only: list[str] | None = None):
         print(f"{cls}: {sum(1 for r in rows.values() if r['class'] == cls)} photos gardées")
 
 
-def sheets(per_sheet: int = 48, cell: int = 150):
-    """Planches numérotées (6 x 8) pour la relecture : le numéro = rang dans attributions.csv pour la classe."""
+def sheets(per_sheet: int = 48, cell: int = 150, unreviewed: bool = False):
+    """Planches numérotées (6 x 8) pour la relecture : le numéro = rang dans attributions.csv pour la classe.
+    `unreviewed` : seulement les photos pas encore relues (colonne keep vide), avec leur numéro d'origine."""
     from PIL import Image, ImageDraw
     with (OUT / "attributions.csv").open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
     out = OUT / "_sheets"
     out.mkdir(exist_ok=True)
+    for old in out.glob("*.jpg"):
+        old.unlink()
     for cls in CLASSES:
-        items = [r for r in rows if r["class"] == cls]
+        items = [(i, r) for i, r in enumerate(r for r in rows if r["class"] == cls)]
+        if unreviewed:
+            items = [(i, r) for i, r in items if not r.get("keep", "").strip()]
         for s in range(0, len(items), per_sheet):
             chunk = items[s:s + per_sheet]
             sheet = Image.new("RGB", (8 * cell, 6 * cell), "white")
             d = ImageDraw.Draw(sheet)
-            for i, r in enumerate(chunk):
+            for i, (number, r) in enumerate(chunk):
                 with Image.open(OUT / r["file"]) as im:
                     im = im.convert("RGB")
                     im.thumbnail((cell - 4, cell - 4))
                     x, y = (i % 8) * cell, (i // 8) * cell
                     sheet.paste(im, (x + 2, y + 2))
                     d.rectangle([x + 2, y + 2, x + 34, y + 20], fill="black")
-                    d.text((x + 5, y + 5), str(s + i), fill="yellow")
+                    d.text((x + 5, y + 5), str(number), fill="yellow")
             sheet.save(out / f"{cls}_{s // per_sheet:02d}.jpg", quality=80)
     print(f"planches dans {out}")
 
@@ -227,5 +232,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--sheets", action="store_true")
     ap.add_argument("--classes", nargs="*", help="classes à collecter (défaut : toutes)")
+    ap.add_argument("--unreviewed", action="store_true", help="planches : seulement les photos pas encore relues")
     a = ap.parse_args()
-    sheets() if a.sheets else collect(a.classes)
+    sheets(unreviewed=a.unreviewed) if a.sheets else collect(a.classes)

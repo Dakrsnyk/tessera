@@ -61,9 +61,15 @@ def zones(args) -> None:
         if dest.exists():
             continue
         folder = Path(args.n5k) / "overhead" / dish
-        with Image.open(folder / "rgb.png") as im:
-            image = im.convert("RGB")
-        depth_mm = np.asarray(Image.open(folder / "depth_raw.png"), dtype=np.float32)
+        try:
+            with Image.open(folder / "rgb.png") as im:
+                image = im.convert("RGB")
+            raw = np.asarray(Image.open(folder / "depth_raw.png"), dtype=np.float32)
+        except Exception as e:                       # fichier tronqué ou absent à la source : plat ignoré
+            print(f"{dish} ignoré : {e}", flush=True)
+            continue
+        # unité : 1e-4 m (article) pour presque tous les plats (valeurs ~3 500), mm pour quelques-uns (~350) ; vérifié le 2026-11-04
+        depth_mm = raw / 10.0 if np.median(raw[raw > 0]) > 1500 else raw
         w, h = image.size
         det = seg.predict(str(folder / "rgb.png"), threshold=args.threshold)
         masks = det.mask if det.mask is not None else np.zeros((0, h, w), dtype=bool)
@@ -110,7 +116,8 @@ def zones(args) -> None:
         if crops:
             with torch.no_grad():
                 emb = feat(torch.from_numpy(np.stack(crops)).permute(0, 3, 1, 2).contiguous()).numpy().astype(np.float32)
-        np.savez_compressed(dest, zones=np.asarray(rows, dtype=np.float32).reshape(-1, 4), emb=emb, plate_mm=np.float32(plate_mm))
+        np.savez_compressed(dest, zones=np.asarray(rows, dtype=np.float32).reshape(-1, 4), emb=emb, plate_mm=np.float32(plate_mm),
+                            units_ok=np.int8(1))
         if n % 50 == 0:
             print(f"{n}/{len(dishes)} {dish} zones={len(rows)} plaque={plate_mm:.0f} mm  {time.time() - t0:.0f} s", flush=True)
 
@@ -226,10 +233,15 @@ def fit(args) -> None:
     train, val = [d for d in train_all if not is_val(d)], [d for d in train_all if is_val(d)]
     truth = np.array([d["mass"] for d in test])
     results = {}
+    ok_vol = lambda items: [d for d in items if len(d["zones"]) and np.isfinite(d["zones"][:, 2]).all()]  # noqa: E731
     for name, column, use_emb in (("M0_surface_constante", 1, False), ("M1_surface_x_densite_apprise", 1, True),
                                   ("M2_volume_profondeur_x_densite_apprise", 2, True), ("M2b_volume_constante", 2, False)):
-        predict, info = fit_density(train, val, column, use_emb)
-        results[name] = {**evaluate(predict(test), truth), **{k: v for k, v in info.items() if isinstance(v, (int, float))}}
+        tr, va, te = (train, val, test) if column == 1 else (ok_vol(train), ok_vol(val), ok_vol(test))
+        if not tr or not te:
+            continue
+        predict, info = fit_density(tr, va, column, use_emb)
+        results[name] = {**evaluate(predict(te), np.array([d["mass"] for d in te])),
+                         **{k: v for k, v in info.items() if isinstance(v, (int, float))}}
         if name.startswith("M1") and "net" in info:
             import torch
             torch.save({"format": "ardane-grams-head-v1", "state_dict": info["net"].state_dict(), "mean": info["mean"], "std": info["std"],
