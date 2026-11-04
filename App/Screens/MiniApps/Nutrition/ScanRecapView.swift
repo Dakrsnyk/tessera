@@ -18,6 +18,8 @@ struct ScanRecapView: View {
     var presetMeal: MealType? = nil
     /// The day the food is added to (today, or a day browsed in the mini-app).
     var day: Date = Date()
+    /// What the models found zone by zone (other foods, embedding); empty for a barcode or when the models gave nothing.
+    var zoneHints: [ScanZoneHint] = []
     /// Called once the foods are in the journal.
     let onDone: () -> Void
     @Environment(AppModel.self) private var model
@@ -53,6 +55,8 @@ struct ScanRecapView: View {
                 ForEach(recap.lines) { line in
                     ScanLineRow(
                         line: line,
+                        alternatives: alternatives(for: line),
+                        onPick: { pick($0, for: line) },
                         onGrams: { recap.setGrams(line.id, $0) },
                         onReplace: { picker = .replace(line.id) },
                         onRemove: { recap.remove(line.id) }
@@ -162,6 +166,50 @@ struct ScanRecapView: View {
         }
     }
 
+    // MARK: One-tap replacements
+
+    /// The other foods the models thought of for the zone(s) of a line (at most three), none of them already a line.
+    private func alternatives(for line: ScanLine) -> [FoodItem] {
+        guard source == .photo, line.isEstimate, let detected = line.detectedFoodID else { return [] }
+        var result: [FoodItem] = []
+        for hint in zoneHints where hint.detectedFoodID == detected {
+            for food in hint.alternatives where food.id != line.food.id
+                && !recap.lines.contains(where: { $0.food.id == food.id })
+                && !result.contains(where: { $0.id == food.id }) {
+                result.append(food)
+            }
+        }
+        return Array(result.prefix(OnDeviceMealAnalyzer.maximumAlternatives))
+    }
+
+    /// Replaces the food of a line by one of the proposals, as a manual replacement does (the correction is recorded when the
+    /// recap is validated). A quantity that was only the usual portion of the old food becomes the usual portion of the new one.
+    private func pick(_ food: FoodItem, for line: ScanLine) {
+        let wasUsual = line.quantityIsUsual
+        recap.replace(line.id, with: food)
+        if wasUsual, let current = recap.lines.first(where: { $0.id == line.id }), current.food.id == food.id,
+           current.grams == line.grams {
+            recap.setGrams(line.id, food.servingGrams > 0 ? food.servingGrams : 100)
+            if let index = recap.lines.firstIndex(where: { $0.id == line.id }) { recap.lines[index].quantityIsUsual = true }
+        }
+        Haptics.tap()
+    }
+
+    /// Remembers, on this iPhone, what each zone of the photo looked like and the food finally kept for it.
+    private func rememberZones(of snapshot: ScanRecap, at date: Date) {
+        guard source == .photo, snapshot.isPhoto else { return }
+        let lines = snapshot.merged.lines
+        var items: [(foodKey: String, embedding: [Float])] = []
+        for hint in zoneHints {
+            guard let embedding = hint.embedding,
+                  let line = lines.first(where: { $0.detectedFoodID == hint.detectedFoodID }) else { continue }
+            items.append((foodKey: line.food.id, embedding: embedding))
+        }
+        guard !items.isEmpty else { return }
+        let captured = items
+        Task.detached(priority: .utility) { PersonalFoodMemoryStore.record(captured, date: date) }
+    }
+
     // MARK: Pieces
 
     /// « ≈ 420–560 kcal »: the bounds rounded outwards, so the range never looks more exact than it is.
@@ -267,7 +315,10 @@ struct ScanRecapView: View {
         let snapshot = recap
         var logged = 0
         model.update(\.nutrition) { logged = snapshot.commit(into: &$0, meal: chosen, at: date, window: window) }
-        if logged > 0 { Haptics.tap() }
+        if logged > 0 {
+            Haptics.tap()
+            rememberZones(of: snapshot, at: Date())
+        }
         onDone()
     }
 }
@@ -276,6 +327,9 @@ struct ScanRecapView: View {
 
 private struct ScanLineRow: View {
     let line: ScanLine
+    /// Other foods the models thought of for this line: one tap replaces the food.
+    let alternatives: [FoodItem]
+    let onPick: (FoodItem) -> Void
     let onGrams: (Double) -> Void
     let onReplace: () -> Void
     let onRemove: () -> Void
@@ -337,6 +391,28 @@ private struct ScanLineRow: View {
                 .font(.footnote)
                 .foregroundStyle(Color.secondary)
                 .monospacedDigit()
+            if !alternatives.isEmpty {
+                FlowLayout(spacing: 8) {
+                    ForEach(alternatives, id: \.id) { food in
+                        Button {
+                            onPick(food)
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "arrow.triangle.2.circlepath").imageScale(.small)
+                                Text(food.displayName).lineLimit(2).truncationMode(.tail)
+                            }
+                            .font(.footnote.weight(.medium))
+                            .padding(.horizontal, 12)
+                            .frame(maxWidth: 240, minHeight: 44)
+                            .background(Color.secondary.opacity(0.12), in: Capsule())
+                            .contentShape(Capsule())
+                        }
+                        .buttonStyle(.borderless)
+                        .accessibilityLabel(food.displayName)
+                        .accessibilityHint(tr("Remplacer"))
+                    }
+                }
+            }
             HStack(spacing: 8) {
                 TextField("0", value: grams, format: .number.locale(Fmt.locale))
                     .keyboardType(.decimalPad)

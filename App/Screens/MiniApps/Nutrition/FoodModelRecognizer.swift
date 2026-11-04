@@ -32,6 +32,9 @@ struct FoodModelClassification: Hashable, Sendable {
     /// The class with the highest probability (`mfr:…`) and its probability.
     var topLabel: String
     var topProbability: Double
+    /// What the classifier "saw" in the square (its embedding), scaled to length 1; nil when the model gives none.
+    /// Used by the personal memory (`PersonalFoodMemory`); never the picture itself.
+    var embedding: [Float]? = nil
 }
 
 /// One zone of the photo where the segmenter found a food, and what the classifier says it is.
@@ -312,8 +315,25 @@ final class FoodModelRecognizer: @unchecked Sendable {
         let foods = ScannerModelLogic.mergedByFood(probabilities: probabilities, foods: loaded.foods, labels: loaded.labels)
         return FoodModelClassification(
             foods: foods.map { FoodModelCandidate(key: $0.key, probability: $0.probability) },
-            topLabel: loaded.labels[best], topProbability: probabilities[best]
+            topLabel: loaded.labels[best], topProbability: probabilities[best],
+            embedding: Self.embeddingVector(in: output, classCount: loaded.labels.count)
         )
+    }
+
+    /// The embedding of the square: the other array of the output (not the one with a value per class), preferring a name that
+    /// says "embed". Scaled to length 1; nil when there is none, so a model without it still works.
+    private static func embeddingVector(in output: MLFeatureProvider, classCount: Int) -> [Float]? {
+        var chosen: MLMultiArray?
+        for name in output.featureNames.sorted() {
+            guard let array = output.featureValue(for: name)?.multiArrayValue, array.count > 0, array.count != classCount else { continue }
+            if name.lowercased().contains("embed") {
+                chosen = array
+                break
+            }
+            if chosen == nil { chosen = array }
+        }
+        guard let chosen else { return nil }
+        return PersonalFoodMemory.normalized(MLShapedArray<Float>(converting: chosen).scalars)
     }
 
     /// The array of class probabilities: the output named `probabilities`, else the one array that has one value per class

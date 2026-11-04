@@ -31,6 +31,8 @@ struct FoodScanView: View {
     @Environment(AppModel.self) private var model
     @State private var stage: Stage = .camera
     @State private var recap = ScanRecap()
+    /// The zones the models found in the last photo (other foods, embedding), for the recap.
+    @State private var zoneHints: [ScanZoneHint] = []
     @State private var source: ScanRecapSource = .barcode
     @State private var camera = ScanCameraHandle()
     @State private var pickedPhoto: PhotosPickerItem?
@@ -106,7 +108,7 @@ struct FoodScanView: View {
         case .analyzing:
             progress(tr("Analyse du plat sur ton iPhone…"))
         case .recap:
-            ScanRecapView(recap: $recap, source: source, presetMeal: presetMeal, day: day) {
+            ScanRecapView(recap: $recap, source: source, presetMeal: presetMeal, day: day, zoneHints: zoneHints) {
                 onFinish(.logged)
             }
         case .notFound(let code):
@@ -326,6 +328,7 @@ struct FoodScanView: View {
                 return
             }
             recap = analysis.recap
+            zoneHints = analysis.zoneHints
             source = .photo
             stage = .recap
         } catch {
@@ -335,6 +338,7 @@ struct FoodScanView: View {
 
     private func rescan() {
         recap = ScanRecap()
+        zoneHints = []
         stage = .camera
     }
 

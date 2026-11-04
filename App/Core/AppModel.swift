@@ -679,6 +679,8 @@ final class AppModel {
         for file in [StoreFile.nutrition, .fitness, .budget, .business, .portfolio, .following, .student, .travel, .car, .productivity, .life, .markets, .companies, .fx, .insights] {
             store.remove(file)
         }
+        // What the scanner learned of the person's own plates (visual memory of validated zones) goes too.
+        PersonalFoodMemoryStore.clear()
         // « Mes informations » start over too; the name stays, like the first name.
         var freshProfile = UserProfile()
         freshProfile.lastName = profile.lastName

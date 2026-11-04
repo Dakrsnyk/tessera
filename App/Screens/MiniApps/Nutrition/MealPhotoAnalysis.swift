@@ -36,11 +36,14 @@ struct MealAnalysis {
     var proposals: [MealProposal]
     var featurePrint: [Float]?
     var memoryDate: Date?
+    /// One entry per zone the Core ML models found: its other foods and its embedding (see `ScanZoneHint`).
+    var zoneHints: [ScanZoneHint]
 
-    init(proposals: [MealProposal], featurePrint: [Float]? = nil, memoryDate: Date? = nil) {
+    init(proposals: [MealProposal], featurePrint: [Float]? = nil, memoryDate: Date? = nil, zoneHints: [ScanZoneHint] = []) {
         self.proposals = proposals
         self.featurePrint = featurePrint
         self.memoryDate = memoryDate
+        self.zoneHints = zoneHints
     }
 
     /// The recap to show; `ScanRecap.commit` stores the fingerprint with the foods the person keeps.
@@ -136,7 +139,13 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
         }
 
         // The models first: one proposal per zone. Vision only when they found no food of the tables.
-        var fromLabels = Self.modelProposals(from: photo.zones, learning: state.scanLearning, resolve: resolveModelFood)
+        // The personal memory (zones the person validated) and the foods logged lately refine the models' answer.
+        let personal = PersonalFoodMemoryStore.load()
+        let context = ScannerContextPriors(entries: state.entries.map { (foodID: $0.food.id, date: $0.date) }, now: Date())
+        let reading = Self.modelReading(
+            from: photo.zones, learning: state.scanLearning, memory: personal, context: context, resolve: resolveModelFood
+        )
+        var fromLabels = reading.proposals
         if fromLabels.isEmpty {
             // The whole photo and each crop give their own proposals; one food is kept once, at its best confidence.
             let labelSets = try await Self.runVision(photo.upright)
@@ -172,7 +181,8 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
         let merged = memoryProposals + fromLabels.filter { !memoryIDs.contains($0.food.id) }
         let analysis = MealAnalysis(
             proposals: Array(merged.prefix(Self.maximumProposals)),
-            featurePrint: photo.featurePrint, memoryDate: memoryDate
+            featurePrint: photo.featurePrint, memoryDate: memoryDate,
+            zoneHints: reading.hints
         )
         return (analysis, photo.zones)
     }
@@ -186,12 +196,39 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
     /// before the habits. A food is proposed once, at its best confidence, the most confident first. Empty when no zone
     /// gives a food of the tables (Vision is used then).
     static func modelProposals(
-        from zones: [FoodModelZone], learning: ScanLearning, resolve: (String) -> FoodItem?
+        from zones: [FoodModelZone], learning: ScanLearning,
+        memory: PersonalFoodMemory = PersonalFoodMemory(), context: ScannerContextPriors = ScannerContextPriors(),
+        resolve: (String) -> FoodItem?
     ) -> [MealProposal] {
+        modelReading(from: zones, learning: learning, memory: memory, context: context, resolve: resolve).proposals
+    }
+
+    /// A food that is not a proposal of the recap but is shown as a one-tap replacement must reach at least this probability.
+    static let alternativeMinimumConfidence = 0.05
+    /// At most this many one-tap replacements per zone.
+    static let maximumAlternatives = 3
+
+    /// `modelProposals`, with what the recap needs for each zone that gave a proposal: the other foods and the embedding.
+    /// Before a zone's foods are looked at, the personal memory (`PersonalFoodMemory.fused`) then the context of the last
+    /// days (`ScannerContextPriors`) refine the probabilities; with an empty memory and no history they change nothing.
+    static func modelReading(
+        from zones: [FoodModelZone], learning: ScanLearning,
+        memory: PersonalFoodMemory = PersonalFoodMemory(), context: ScannerContextPriors = ScannerContextPriors(),
+        resolve: (String) -> FoodItem?
+    ) -> (proposals: [MealProposal], hints: [ScanZoneHint]) {
         var byFood: [String: MealProposal] = [:]
+        var hints: [ScanZoneHint] = []
         for zone in zones {
             let label = FoodLabelMatcher.cleaned(zone.classification.topLabel)
-            for candidate in zone.classification.foods where candidate.isFood {
+            var candidates: [(key: String, probability: Double)] = zone.classification.foods.map {
+                (key: $0.key, probability: $0.probability)
+            }
+            if let embedding = zone.classification.embedding {
+                candidates = memory.fused(model: candidates, embedding: embedding)
+            }
+            candidates = context.reweighted(candidates)
+            var made: MealProposal?
+            for candidate in candidates where !candidate.key.hasPrefix(FoodModelRecognizer.labelPrefix) {
                 // The foods come from the most to the least likely: under the floor, nothing after is better.
                 guard candidate.probability.isFinite, candidate.probability >= modelMinimumConfidence else { break }
                 guard let detected = resolve(candidate.key) else { continue }
@@ -208,18 +245,33 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
                     grams = usual
                     usesHabit = true
                 }
-                let proposal = MealProposal(
+                made = MealProposal(
                     food: food, grams: grams, confidence: candidate.probability,
                     label: label, detectedFoodID: detected.id, usesHabit: usesHabit
                 )
-                if let existing = byFood[food.id], existing.confidence >= proposal.confidence { break }
-                byFood[food.id] = proposal
                 break
             }
+            guard let proposal = made else { continue }
+            // The other foods of the zone, for a replacement in one tap.
+            var alternatives: [FoodItem] = []
+            for candidate in candidates where !candidate.key.hasPrefix(FoodModelRecognizer.labelPrefix) {
+                guard candidate.probability.isFinite, candidate.probability >= alternativeMinimumConfidence,
+                      let item = resolve(candidate.key), item.id != proposal.food.id,
+                      !alternatives.contains(where: { $0.id == item.id }) else { continue }
+                alternatives.append(item)
+                if alternatives.count >= maximumAlternatives { break }
+            }
+            hints.append(ScanZoneHint(
+                detectedFoodID: proposal.detectedFoodID ?? proposal.food.id,
+                embedding: zone.classification.embedding, alternatives: alternatives
+            ))
+            if let existing = byFood[proposal.food.id], existing.confidence >= proposal.confidence { continue }
+            byFood[proposal.food.id] = proposal
         }
-        return byFood.values.sorted {
+        let proposals = byFood.values.sorted {
             $0.confidence != $1.confidence ? $0.confidence > $1.confidence : $0.food.id < $1.food.id
         }
+        return (proposals, hints)
     }
 
     /// The photo straightened and ready: the upright copy that every request and crop reads, what the models found on it
