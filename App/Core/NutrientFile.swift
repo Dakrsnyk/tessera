@@ -7,6 +7,7 @@ enum FoodSourceLinks {
     static let dbcl = URL(string: "https://opendatacommons.org/licenses/dbcl/1-0/")!
     static let usda = URL(string: "https://fdc.nal.usda.gov")!
     static let openGovernmentLicence = URL(string: "https://open.canada.ca/en/open-government-licence-canada")!
+    static let ccBy4 = URL(string: "https://creativecommons.org/licenses/by/4.0/")!
 }
 
 /// The generic foods of the app: about 5,900 foods of the Canadian Nutrient File 2026 (Health Canada, Open Government

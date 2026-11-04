@@ -1,6 +1,7 @@
 import UIKit
 import Vision
 import ImageIO
+import os
 
 /// Why a photo of a dish could not be analysed.
 enum MealAnalysisError: Error {
@@ -57,6 +58,15 @@ struct MealAnalysis {
 /// anywhere). Until then `OnlineMealAnalyzer` only throws `notEnabled`.
 enum MealAnalysisConfig {
     static let onlineEnabled = false
+    /// The Core ML food models of the app (`FoodModelRecognizer`: a segmenter, then a classifier), run on the iPhone.
+    /// A constant of the code: while it is false, or when the models fail, Vision alone looks at the photo.
+    static let modelsEnabled = true
+
+    /// Reads the models before the first photo (the first reading can take a few seconds), off the main thread.
+    static func warmUpModels() async {
+        guard modelsEnabled else { return }
+        _ = await Task.detached(priority: .utility) { try? FoodModelRecognizer.shared.prepare() }.value
+    }
 
     static func makeAnalyzer() -> MealPhotoAnalyzing {
         if onlineEnabled { return OnlineMealAnalyzer() }
@@ -72,10 +82,15 @@ struct OnlineMealAnalyzer: MealPhotoAnalyzing {
     }
 }
 
-/// Step A: the photo is looked at on the iPhone by Vision (`VNClassifyImageRequest`, available since
-/// iOS 13), which gives labels with a confidence, for the whole photo and for each object (or crop) of it. `FoodLabelMatcher` turns them into foods of the tables
-/// of the app. The photo is not kept and nothing leaves the device.
+/// Step A: the photo is looked at on the iPhone. First by the Core ML food models (`FoodModelRecognizer`: where the foods
+/// are, then which food each zone is), which give foods of the tables directly. When they are off, fail or find no food
+/// of the tables, Vision (`VNClassifyImageRequest`, available since iOS 13) gives labels with a confidence, for the whole
+/// photo and for each object (or crop) of it, and `FoodLabelMatcher` turns them into foods of the tables of the app. The
+/// photo is not kept and nothing leaves the device.
 struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
+    /// The Core ML engine; nil means Vision only (the models switched off).
+    var recognizer: FoodModelRecognizer? = MealAnalysisConfig.modelsEnabled ? FoodModelRecognizer.shared : nil
+
     /// The foods of the built-in table first (everyday foods, in French and English), then the Canadian
     /// Nutrient File.
     static func localSearch(_ query: String) -> [FoodItem] {
@@ -93,38 +108,58 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
     static let maximumInstanceArea = 0.90
     /// How sure a food remembered from similar meals is shown (it is only a proposal, the person confirms).
     static let memoryConfidence = 0.8
+    /// A food the models propose under this probability is not used (the same floor as a label of Vision).
+    static let modelMinimumConfidence = FoodLabelMatcher.minimumConfidence
+    private static let log = Logger(subsystem: "com.dakrsnyk.ardane", category: "scanner")
 
     func analyze(_ image: UIImage) async throws -> [MealProposal] {
         try await analyzeMeal(image).proposals
     }
 
     func analyzeMeal(_ image: UIImage) async throws -> MealAnalysis {
-        let vision = try await Self.runVision(image)
+        try await analyzeMealDetailed(image).analysis
+    }
+
+    /// The same, with the zones the Core ML models found (empty when they are off or failed), which are what the
+    /// measure of the recognition (`FoodModelRecognitionTests`) prints.
+    func analyzeMealDetailed(_ image: UIImage) async throws -> (analysis: MealAnalysis, zones: [FoodModelZone]) {
+        // The photo is straightened once; the models and Vision read the same copy.
+        let photo = try await Self.preparePhoto(image, recognizer: recognizer)
         // What the person usually keeps for a label, learned from their corrections (read on the iPhone).
         let state = SharedStore.shared.state(NutritionState.self)
         let known = state.customFoods + state.favorites + state.recentFoods
         let resolve: (String) -> FoodItem? = { id in known.first { $0.id == id } ?? FoodDatabase.all.first { $0.id == id } }
-
-        // The whole photo and each crop give their own proposals; one food is kept once, at its best confidence.
-        var byFood: [String: MealProposal] = [:]
-        for scores in vision.labelSets {
-            let found = FoodLabelMatcher.proposals(
-                from: scores, limit: Self.maximumProposals, learning: state.scanLearning,
-                resolve: resolve, search: Self.localSearch
-            )
-            for proposal in found {
-                if let existing = byFood[proposal.food.id], existing.confidence >= proposal.confidence { continue }
-                byFood[proposal.food.id] = proposal
-            }
+        // A food of the models: the person's own foods first, then the built-in table (`builtin.…`), else the Nutrient File.
+        let resolveModelFood: (String) -> FoodItem? = { id in
+            if let own = known.first(where: { $0.id == id }) { return own }
+            return id.hasPrefix("builtin.") ? FoodDatabase.item(id) : NutrientFile.item(id: id)
         }
-        let fromLabels = byFood.values.sorted {
-            $0.confidence != $1.confidence ? $0.confidence > $1.confidence : $0.food.id < $1.food.id
+
+        // The models first: one proposal per zone. Vision only when they found no food of the tables.
+        var fromLabels = Self.modelProposals(from: photo.zones, learning: state.scanLearning, resolve: resolveModelFood)
+        if fromLabels.isEmpty {
+            // The whole photo and each crop give their own proposals; one food is kept once, at its best confidence.
+            let labelSets = try await Self.runVision(photo.upright)
+            var byFood: [String: MealProposal] = [:]
+            for scores in labelSets {
+                let found = FoodLabelMatcher.proposals(
+                    from: scores, limit: Self.maximumProposals, learning: state.scanLearning,
+                    resolve: resolve, search: Self.localSearch
+                )
+                for proposal in found {
+                    if let existing = byFood[proposal.food.id], existing.confidence >= proposal.confidence { continue }
+                    byFood[proposal.food.id] = proposal
+                }
+            }
+            fromLabels = byFood.values.sorted {
+                $0.confidence != $1.confidence ? $0.confidence > $1.confidence : $0.food.id < $1.food.id
+            }
         }
 
         // Meals the person validated for a similar plate come first (only when at least two agree).
         var memoryProposals: [MealProposal] = []
         var memoryDate: Date?
-        if let fingerprint = vision.featurePrint, let remembered = state.mealMemory.suggestionWithDate(for: fingerprint) {
+        if let fingerprint = photo.featurePrint, let remembered = state.mealMemory.suggestionWithDate(for: fingerprint) {
             for item in remembered.items {
                 guard let food = resolve(item.foodID) else { continue }
                 memoryProposals.append(MealProposal(
@@ -135,28 +170,96 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
         }
         let memoryIDs = Set(memoryProposals.map { $0.food.id })
         let merged = memoryProposals + fromLabels.filter { !memoryIDs.contains($0.food.id) }
-        return MealAnalysis(
+        let analysis = MealAnalysis(
             proposals: Array(merged.prefix(Self.maximumProposals)),
-            featurePrint: vision.featurePrint, memoryDate: memoryDate
+            featurePrint: photo.featurePrint, memoryDate: memoryDate
         )
+        return (analysis, photo.zones)
     }
 
-    // MARK: Vision
+    // MARK: Models
 
-    /// What Vision saw: the labels of the whole photo then of each crop, and the fingerprint of the photo.
-    private struct VisionResult {
-        var labelSets: [[FoodLabelMatcher.LabelScore]]
+    /// One proposal per zone the models found: the first of the foods of the classifier that is a food of the tables and
+    /// reaches `modelMinimumConfidence`. The confidence is its probability (added up over the classes that give that food);
+    /// the quantity and what the person usually keeps (`ScanLearning`) are applied as `FoodLabelMatcher` does for a food
+    /// found by a label. `label` is the best class of the zone (`mfr:…`), `detectedFoodID` the food the models gave
+    /// before the habits. A food is proposed once, at its best confidence, the most confident first. Empty when no zone
+    /// gives a food of the tables (Vision is used then).
+    static func modelProposals(
+        from zones: [FoodModelZone], learning: ScanLearning, resolve: (String) -> FoodItem?
+    ) -> [MealProposal] {
+        var byFood: [String: MealProposal] = [:]
+        for zone in zones {
+            let label = FoodLabelMatcher.cleaned(zone.classification.topLabel)
+            for candidate in zone.classification.foods where candidate.isFood {
+                // The foods come from the most to the least likely: under the floor, nothing after is better.
+                guard candidate.probability.isFinite, candidate.probability >= modelMinimumConfidence else { break }
+                guard let detected = resolve(candidate.key) else { continue }
+                var food = detected
+                var usesHabit = false
+                // The food the person usually keeps for this label wins, but only once it is reliable.
+                if let preferred = learning.preferredFoodID(forLabel: label).flatMap(resolve) {
+                    if preferred.id != detected.id { usesHabit = true }
+                    food = preferred
+                }
+                // The usual quantity of the person for this food, once it is reliable, else the usual portion.
+                var grams = food.servingGrams > 0 ? food.servingGrams : 100
+                if let usual = learning.usualGrams(forFoodID: food.id), usual.isFinite, usual > 0 {
+                    grams = usual
+                    usesHabit = true
+                }
+                let proposal = MealProposal(
+                    food: food, grams: grams, confidence: candidate.probability,
+                    label: label, detectedFoodID: detected.id, usesHabit: usesHabit
+                )
+                if let existing = byFood[food.id], existing.confidence >= proposal.confidence { break }
+                byFood[food.id] = proposal
+                break
+            }
+        }
+        return byFood.values.sorted {
+            $0.confidence != $1.confidence ? $0.confidence > $1.confidence : $0.food.id < $1.food.id
+        }
+    }
+
+    /// The photo straightened and ready: the upright copy that every request and crop reads, what the models found on it
+    /// (nothing when they are off or fail: Vision is then used), and its visual fingerprint.
+    private struct PreparedPhoto {
+        var upright: CGImage
+        var zones: [FoodModelZone]
         var featurePrint: [Float]?
     }
 
-    /// Runs Vision off the main thread.
-    private static func runVision(_ image: UIImage) async throws -> VisionResult {
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<VisionResult, Error>) in
+    /// Straightens the photo once, runs the models and takes the fingerprint, off the main thread.
+    private static func preparePhoto(_ image: UIImage, recognizer: FoodModelRecognizer?) async throws -> PreparedPhoto {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<PreparedPhoto, Error>) in
             DispatchQueue.global(qos: .userInitiated).async {
                 guard let upright = Self.uprightCopy(of: image) else {
                     continuation.resume(throwing: MealAnalysisError.unreadableImage)
                     return
                 }
+                // A model that is missing or fails is not an error of the analysis: the zones stay empty (Vision answers),
+                // and the reason is written to the system log to tell the two apart on a test build.
+                var zones: [FoodModelZone] = []
+                if let recognizer {
+                    do {
+                        zones = try recognizer.recognize(upright)
+                        Self.log.info("food models: \(zones.count, privacy: .public) zone(s)")
+                    } catch {
+                        Self.log.error("food models unavailable, Vision is used: \(String(describing: error), privacy: .public)")
+                    }
+                }
+                continuation.resume(returning: PreparedPhoto(upright: upright, zones: zones, featurePrint: Self.featurePrint(of: upright)))
+            }
+        }
+    }
+
+    // MARK: Vision
+
+    /// The labels Vision gives to the whole photo then to each crop of it, off the main thread.
+    private static func runVision(_ upright: CGImage) async throws -> [[FoodLabelMatcher.LabelScore]] {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[[FoodLabelMatcher.LabelScore]], Error>) in
+            DispatchQueue.global(qos: .userInitiated).async {
                 do {
                     var sets = [try Self.classify(upright)]
                     // The foods one by one: the objects Vision cuts out, else a grid of overlapping crops.
@@ -165,7 +268,7 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
                     for crop in crops {
                         if let scores = try? Self.classify(crop) { sets.append(scores) }
                     }
-                    continuation.resume(returning: VisionResult(labelSets: sets, featurePrint: Self.featurePrint(of: upright)))
+                    continuation.resume(returning: sets)
                 } catch {
                     continuation.resume(throwing: error)
                 }

@@ -123893,6 +123893,53 @@
         }
       }
     },
+    "Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à partir de DINOv2 (Meta, licence Apache 2.0) et de RF-DETR (Roboflow, licence Apache 2.0). Les photos restent sur ton iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Scanner erkennt Lebensmittel mit Modellen, die Ardane mit dem Datensatz MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, Lizenz CC BY 4.0) trainiert hat, auf Basis von DINOv2 (Meta, Lizenz Apache 2.0) und RF-DETR (Roboflow, Lizenz Apache 2.0). Deine Fotos bleiben auf deinem iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The scanner recognizes foods with models Ardane trained on the MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 dataset (myfoodrepo.org, CC BY 4.0 license), based on DINOv2 (Meta, Apache 2.0 license) and RF-DETR (Roboflow, Apache 2.0 license). Your photos stay on your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El escáner reconoce los alimentos con modelos que Ardane entrenó con el conjunto de datos MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licencia CC BY 4.0), a partir de DINOv2 (Meta, licencia Apache 2.0) y RF-DETR (Roboflow, licencia Apache 2.0). Tus fotos se quedan en tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à partir de DINOv2 (Meta, licence Apache 2.0) et de RF-DETR (Roboflow, licence Apache 2.0). Les photos restent sur ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo scanner riconosce gli alimenti con modelli che Ardane ha addestrato sul set di dati MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licenza CC BY 4.0), a partire da DINOv2 (Meta, licenza Apache 2.0) e RF-DETR (Roboflow, licenza Apache 2.0). Le tue foto restano sul tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキャナーは、Ardane が MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 データセット（myfoodrepo.org、CC BY 4.0 ライセンス）で学習させたモデルで食品を認識します。ベースは DINOv2（Meta、Apache 2.0 ライセンス）と RF-DETR（Roboflow、Apache 2.0 ライセンス）です。写真は iPhone の外に出ません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O scanner reconhece os alimentos com modelos que a Ardane treinou com o conjunto de dados MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licença CC BY 4.0), a partir do DINOv2 (Meta, licença Apache 2.0) e do RF-DETR (Roboflow, licença Apache 2.0). Suas fotos ficam no seu iPhone."
+          }
+        }
+      }
+    },
     "Le service n'a pas répondu.": {
       "extractionState": "manual",
       "localizations": {
@@ -177657,6 +177704,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recomendado para você: %@."
+          }
+        }
+      }
+    },
+    "Reconnaissance des aliments": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lebensmittelerkennung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Food recognition"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconocimiento de alimentos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconnaissance des aliments"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riconoscimento degli alimenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食品の認識"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconhecimento de alimentos"
           }
         }
       }

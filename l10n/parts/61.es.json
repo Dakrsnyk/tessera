@@ -1,0 +1,4 @@
+{
+ "Reconnaissance des aliments": "Reconocimiento de alimentos",
+ "Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à partir de DINOv2 (Meta, licence Apache 2.0) et de RF-DETR (Roboflow, licence Apache 2.0). Les photos restent sur ton iPhone.": "El escáner reconoce los alimentos con modelos que Ardane entrenó con el conjunto de datos MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licencia CC BY 4.0), a partir de DINOv2 (Meta, licencia Apache 2.0) y RF-DETR (Roboflow, licencia Apache 2.0). Tus fotos se quedan en tu iPhone."
+}

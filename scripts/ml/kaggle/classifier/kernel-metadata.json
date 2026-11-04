@@ -1,0 +1,19 @@
+{
+  "id": "darksnyk/ardane-food-classifier",
+  "title": "Ardane food classifier",
+  "code_file": "ardane-classifier.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "docker_image_pinning_type": "original",
+  "dataset_sources": [
+    "awsaf49/food-recognition-2022-dataset"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

@@ -1,0 +1,5 @@
+# Environnement d'entraînement (préparation, vecteurs, tête). Python 3.12.
+# Le venv C:\Users\Etudiant\ardane-tools\venv les a déjà (torch CPU 2.14, numpy 2.5, pillow 12).
+torch>=2.7      # version CPU : pip install torch --index-url https://download.pytorch.org/whl/cpu
+numpy>=2.0
+pillow>=10

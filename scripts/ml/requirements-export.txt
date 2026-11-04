@@ -1,0 +1,7 @@
+# Environnement d'export Core ML (Linux, WSL ou macOS). Installer torch AVANT, en version CPU :
+#   pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
+# coremltools 9.0 est testé jusqu'à torch 2.7.0 ; torch 2.7.1 convertit aussi (vérifié le 2026-11-02 en conversion à blanc).
+coremltools==9.0
+numpy<2.3
+pillow>=10
+protobuf

@@ -2180,7 +2180,7 @@
  "Abonnement actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:488: return tr(\"Abonnement actif\")"
+   "App/Screens/Profile/ProfileView.swift:490: return tr(\"Abonnement actif\")"
   ]
  },
  "Abonnement · ": {
@@ -2228,7 +2228,7 @@
  "Absent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:269: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:271: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Accepter": {
@@ -2284,7 +2284,7 @@
  "Accès à vie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:483: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
+   "App/Screens/Profile/ProfileView.swift:485: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
   ]
  },
  "Accélère progressivement si tu veux.": {
@@ -2894,7 +2894,7 @@
  "Ajouter mon anniversaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:411: Label(tr(\"Ajouter mon anniversaire\"), systemImage: \"gift\")"
+   "App/Screens/Profile/ProfileView.swift:413: Label(tr(\"Ajouter mon anniversaire\"), systemImage: \"gift\")"
   ]
  },
  "Ajouter mon salaire et mes dépenses fixes": {
@@ -3189,13 +3189,13 @@
  "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé Canada.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/NutrientFile.swift:23: private static let legacyAttribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé C"
+   "App/Core/NutrientFile.swift:24: private static let legacyAttribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada (licence du gouvernement ouvert – Canada). Ardane n'est pas affilié à Santé C"
   ]
  },
  "Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada, 2026 (licence du gouvernement ouvert – Canada), et USDA FoodData Central. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/NutrientFile.swift:22: private static let currentAttribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada, 2026 (licence du gouvernement ouvert – Canada), et USDA FoodData Central. A"
+   "App/Core/NutrientFile.swift:23: private static let currentAttribution = tr(\"Aliments génériques : Fichier canadien sur les éléments nutritifs, Santé Canada, 2026 (licence du gouvernement ouvert – Canada), et USDA FoodData Central. A"
   ]
  },
  "Allaitante": {
@@ -3461,7 +3461,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:116: case .birthday: tr(\"Anniversaire\")",
-   "App/Screens/Profile/ProfileView.swift:403: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
+   "App/Screens/Profile/ProfileView.swift:405: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:523: Text(tr(\"Anniversaire\"))",
    "Shared/Model/Templates.swift:80: WidgetTemplate(id: \"countdown-birthday\", name: tr(\"Anniversaire\"), kind: .countdown, themeID: .minimal, accentHex: \"F2588F\","
   ]
@@ -3770,7 +3770,7 @@
    "App/Premium/PaywallView.swift:72: Text(tr(\"Ardane Premium\"))",
    "App/Premium/PaywallView.swift:103: Text(tr(\"Ardane Premium\"))",
    "App/Screens/Home/HomeView.swift:178: Text(tr(\"Ardane Premium\"))",
-   "App/Screens/Profile/ProfileView.swift:370: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+   "App/Screens/Profile/ProfileView.swift:372: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
  },
  "Ardane apprend quand tu changes une catégorie": {
@@ -4265,7 +4265,7 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:330: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
-   "App/Screens/Profile/ProfileView.swift:462: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
+   "App/Screens/Profile/ProfileView.swift:464: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Aucun compte à créer": {
@@ -4723,7 +4723,7 @@
  "Autorisée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:496: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
+   "App/Screens/Profile/ProfileView.swift:498: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
   ]
  },
  "Autre": {
@@ -6632,7 +6632,7 @@
  "Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:358: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.\")"
+   "App/Screens/Profile/ProfileView.swift:360: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.\")"
   ]
  },
  "Ce fond fait partie de Premium.": {
@@ -6977,7 +6977,7 @@
  "Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:356: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.\")"
+   "App/Screens/Profile/ProfileView.swift:358: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.\")"
   ]
  },
  "Cette semaine": {
@@ -10757,8 +10757,8 @@
  "Débloqué en mode test": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:477: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }",
-   "App/Screens/Profile/ProfileView.swift:480: if !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
+   "App/Screens/Profile/ProfileView.swift:479: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }",
+   "App/Screens/Profile/ProfileView.swift:482: if !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
   ]
  },
  "Début": {
@@ -11302,7 +11302,7 @@
  "Développeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:280: Text(tr(\"Développeur\"))"
+   "App/Screens/Profile/ProfileView.swift:282: Text(tr(\"Développeur\"))"
   ]
  },
  "Développé Arnold": {
@@ -11461,13 +11461,13 @@
  "Effacer toutes mes données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:258: Button(tr(\"Effacer toutes mes données\"), role: .destructive) { confirmReset = true }"
+   "App/Screens/Profile/ProfileView.swift:260: Button(tr(\"Effacer toutes mes données\"), role: .destructive) { confirmReset = true }"
   ]
  },
  "Effacer toutes tes données ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:321: .confirmationDialog(tr(\"Effacer toutes tes données ?\"), isPresented: $confirmReset, titleVisibility: .visible) {"
+   "App/Screens/Profile/ProfileView.swift:323: .confirmationDialog(tr(\"Effacer toutes tes données ?\"), isPresented: $confirmReset, titleVisibility: .visible) {"
   ]
  },
  "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.": {
@@ -11910,7 +11910,7 @@
  "Espace partagé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:270: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
+   "App/Screens/Profile/ProfileView.swift:272: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
   ]
  },
  "Espacement minimal": {
@@ -12318,7 +12318,7 @@
  "Exporter mes données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:233: Label(tr(\"Exporter mes données\"), systemImage: \"square.and.arrow.up\")"
+   "App/Screens/Profile/ProfileView.swift:235: Label(tr(\"Exporter mes données\"), systemImage: \"square.and.arrow.up\")"
   ]
  },
  "Exposé": {
@@ -13831,7 +13831,7 @@
  "Groupes accordés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:272: Text(tr(\"Groupes accordés\"))"
+   "App/Screens/Profile/ProfileView.swift:274: Text(tr(\"Groupes accordés\"))"
   ]
  },
  "Gruau cuit à l'eau": {
@@ -13882,7 +13882,7 @@
  "Gérer l'abonnement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:440: Button(tr(\"Gérer l'abonnement\")) { showsManageSubscriptions = true }"
+   "App/Screens/Profile/ProfileView.swift:442: Button(tr(\"Gérer l'abonnement\")) { showsManageSubscriptions = true }"
   ]
  },
  "Gérer mes habitudes": {
@@ -14850,7 +14850,7 @@
  "Installé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:269: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:271: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Intensité": {
@@ -15860,7 +15860,7 @@
  "La sauvegarde n'a pas pu être créée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:345: backupMessage = tr(\"La sauvegarde n'a pas pu être créée.\")"
+   "App/Screens/Profile/ProfileView.swift:347: backupMessage = tr(\"La sauvegarde n'a pas pu être créée.\")"
   ]
  },
  "La semaine apparaîtra ici.": {
@@ -16606,6 +16606,12 @@
    "App/Core/MarketingShots.swift:664: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
+ "Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à partir de DINOv2 (Meta, licence Apache 2.0) et de RF-DETR (Roboflow, licence Apache 2.0). Les photos restent sur ton iPhone.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:226: text: tr(\"Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à part"
+  ]
+ },
  "Le service n'a pas répondu.": {
   "placeholders": 0,
   "uses": [
@@ -16808,7 +16814,7 @@
  "Les données actuelles de l'app seront remplacées par celles de la sauvegarde du %@. Ton abonnement n'est pas touché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:314: Text(tr(\"Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \\(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché.\"))"
+   "App/Screens/Profile/ProfileView.swift:316: Text(tr(\"Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \\(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché.\"))"
   ]
  },
  "Les données du marché s'affichent dès que la connexion est disponible.": {
@@ -18176,7 +18182,7 @@
  "Merci pour ton soutien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:489: default: return tr(\"Merci pour ton soutien\")"
+   "App/Screens/Profile/ProfileView.swift:491: default: return tr(\"Merci pour ton soutien\")"
   ]
  },
  "Mercredi": {
@@ -18582,7 +18588,7 @@
  "Module des widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:269: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:271: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Modérée (3–5 séances)": {
@@ -21095,7 +21101,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:114: Text(tr(\"Pas encore demandée\"))",
-   "App/Screens/Profile/ProfileView.swift:498: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
+   "App/Screens/Profile/ProfileView.swift:500: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
   ]
  },
  "Pas encore fait": {
@@ -21211,7 +21217,7 @@
  "Passer à Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:452: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
+   "App/Screens/Profile/ProfileView.swift:454: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
   ]
  },
  "Passée": {
@@ -22847,13 +22853,13 @@
  "Premium actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:435: Text(tr(\"Premium actif\")).font(.headline)"
+   "App/Screens/Profile/ProfileView.swift:437: Text(tr(\"Premium actif\")).font(.headline)"
   ]
  },
  "Premium débloqué (mode test)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:263: Toggle(tr(\"Premium débloqué (mode test)\"), isOn: Binding("
+   "App/Screens/Profile/ProfileView.swift:265: Toggle(tr(\"Premium débloqué (mode test)\"), isOn: Binding("
   ]
  },
  "Prendre du muscle": {
@@ -23136,7 +23142,7 @@
  "Profil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:289: .navigationTitle(tr(\"Profil\"))"
+   "App/Screens/Profile/ProfileView.swift:291: .navigationTitle(tr(\"Profil\"))"
   ]
  },
  "Profil et réglages": {
@@ -23811,7 +23817,7 @@
  "Recharger les widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:267: Button(tr(\"Recharger les widgets\")) { WidgetCenter.shared.reloadAllTimelines() }"
+   "App/Screens/Profile/ProfileView.swift:269: Button(tr(\"Recharger les widgets\")) { WidgetCenter.shared.reloadAllTimelines() }"
   ]
  },
  "Recherche du produit %@…": {
@@ -23843,6 +23849,12 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Profile/NutritionTargetsCard.swift:285: Text(tr(\"Recommandé pour toi : \\(NutritionTargetsCard.format(recommended, target)).\"))"
+  ]
+ },
+ "Reconnaissance des aliments": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:225: foodSource(name: tr(\"Reconnaissance des aliments\"), url: FoodSourceLinks.ccBy4,"
   ]
  },
  "Record": {
@@ -23999,7 +24011,7 @@
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:110: Label(tr(\"Refusée\"), systemImage: \"xmark.circle.fill\")",
    "App/Screens/Profile/ProfileView.swift:128: if notificationStatus == tr(\"Refusée\") {",
-   "App/Screens/Profile/ProfileView.swift:497: case .denied: notificationStatus = tr(\"Refusée\")"
+   "App/Screens/Profile/ProfileView.swift:499: case .denied: notificationStatus = tr(\"Refusée\")"
   ]
  },
  "Regard droit devant.": {
@@ -24183,7 +24195,7 @@
  "Remplacer tes données par cette sauvegarde ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:305: .confirmationDialog(tr(\"Remplacer tes données par cette sauvegarde ?\"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {"
+   "App/Screens/Profile/ProfileView.swift:307: .confirmationDialog(tr(\"Remplacer tes données par cette sauvegarde ?\"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {"
   ]
  },
  "Remplissage": {
@@ -24238,7 +24250,7 @@
  "Renouvellement le %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:486: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
+   "App/Screens/Profile/ProfileView.swift:488: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
   ]
  },
  "Renseigné": {
@@ -24490,7 +24502,7 @@
  "Restauration": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:300: .alert(tr(\"Restauration\"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {"
+   "App/Screens/Profile/ProfileView.swift:302: .alert(tr(\"Restauration\"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {"
   ]
  },
  "Restauration…": {
@@ -24502,13 +24514,13 @@
  "Restaurer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:306: Button(tr(\"Restaurer\"), role: .destructive) {"
+   "App/Screens/Profile/ProfileView.swift:308: Button(tr(\"Restaurer\"), role: .destructive) {"
   ]
  },
  "Restaurer les achats": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:466: Text(tr(\"Restaurer les achats\"))"
+   "App/Screens/Profile/ProfileView.swift:468: Text(tr(\"Restaurer les achats\"))"
   ]
  },
  "Restaurer mes achats": {
@@ -24520,7 +24532,7 @@
  "Restaurer une sauvegarde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:244: Label(tr(\"Restaurer une sauvegarde\"), systemImage: \"arrow.counterclockwise\")"
+   "App/Screens/Profile/ProfileView.swift:246: Label(tr(\"Restaurer une sauvegarde\"), systemImage: \"arrow.counterclockwise\")"
   ]
  },
  "Reste %@": {
@@ -26148,14 +26160,14 @@
  "Sauvegarde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:252: Text(tr(\"Sauvegarde\"))",
-   "App/Screens/Profile/ProfileView.swift:316: .alert(tr(\"Sauvegarde\"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {"
+   "App/Screens/Profile/ProfileView.swift:254: Text(tr(\"Sauvegarde\"))",
+   "App/Screens/Profile/ProfileView.swift:318: .alert(tr(\"Sauvegarde\"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {"
   ]
  },
  "Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:238: if case .success = result { backupMessage = tr(\"Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.\") }"
+   "App/Screens/Profile/ProfileView.swift:240: if case .success = result { backupMessage = tr(\"Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.\") }"
   ]
  },
  "Scanne ou cherche un aliment : tes widgets se mettent à jour.": {
@@ -26865,7 +26877,7 @@
  "Sources des données alimentaires": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:226: Text(tr(\"Sources des données alimentaires\"))"
+   "App/Screens/Profile/ProfileView.swift:228: Text(tr(\"Sources des données alimentaires\"))"
   ]
  },
  "Sous l'heure, sans déverrouiller": {
@@ -28666,7 +28678,7 @@
  "Tes données sont de retour.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:309: backupMessage = tr(\"Tes données sont de retour.\")"
+   "App/Screens/Profile/ProfileView.swift:311: backupMessage = tr(\"Tes données sont de retour.\")"
   ]
  },
  "Tes dépenses comparées à la semaine dernière.": {
@@ -29008,7 +29020,7 @@
  "Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:324: Text(tr(\"Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.\"))"
+   "App/Screens/Profile/ProfileView.swift:326: Text(tr(\"Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.\"))"
   ]
  },
  "Tes échéances, ta consommation et ton kilométrage.": {
@@ -29389,7 +29401,7 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:330: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
-   "App/Screens/Profile/ProfileView.swift:462: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
+   "App/Screens/Profile/ProfileView.swift:464: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
@@ -29622,7 +29634,7 @@
  "Ton profil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:367: Text(name.isEmpty ? tr(\"Ton profil\") : name)"
+   "App/Screens/Profile/ProfileView.swift:369: Text(name.isEmpty ? tr(\"Ton profil\") : name)"
   ]
  },
  "Ton profil est complet": {
@@ -30052,7 +30064,7 @@
  "Tous les widgets et tous les styles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:453: Text(tr(\"Tous les widgets et tous les styles\")).font(.caption).foregroundStyle(.secondary)"
+   "App/Screens/Profile/ProfileView.swift:455: Text(tr(\"Tous les widgets et tous les styles\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
  "Tous les widgets, tous les styles, sans limite.": {
@@ -30132,7 +30144,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/TasksView.swift:54: Button(tr(\"Tout effacer\")) {",
-   "App/Screens/Profile/ProfileView.swift:322: Button(tr(\"Tout effacer\"), role: .destructive) { model.resetAllData() }"
+   "App/Screens/Profile/ProfileView.swift:324: Button(tr(\"Tout effacer\"), role: .destructive) { model.resetAllData() }"
   ]
  },
  "Tout est facultatif : laisse vide ce que tu préfères ne pas dire.": {
@@ -30698,7 +30710,7 @@
  "Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:254: Text(tr(\"Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.\"))"
+   "App/Screens/Profile/ProfileView.swift:256: Text(tr(\"Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.\"))"
   ]
  },
  "Un grand chiffre, comme une une": {
@@ -31407,13 +31419,13 @@
  "Version": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:268: LabeledContent(tr(\"Version\"), value: WidgetDiagnostics.appVersion)"
+   "App/Screens/Profile/ProfileView.swift:270: LabeledContent(tr(\"Version\"), value: WidgetDiagnostics.appVersion)"
   ]
  },
  "Version gratuite": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:370: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+   "App/Screens/Profile/ProfileView.swift:372: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
  },
  "Vert doré, terreux et calme": {
@@ -31533,7 +31545,7 @@
  "Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:282: Text(tr(\"Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Prem"
+   "App/Screens/Profile/ProfileView.swift:284: Text(tr(\"Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Prem"
   ]
  },
  "Visiteurs": {
@@ -31900,7 +31912,7 @@
  "Widgets lancés par iOS": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:278: LabeledContent(tr(\"Widgets lancés par iOS\"), value: WidgetDiagnostics.lastLaunchText)"
+   "App/Screens/Profile/ProfileView.swift:280: LabeledContent(tr(\"Widgets lancés par iOS\"), value: WidgetDiagnostics.lastLaunchText)"
   ]
  },
  "Widgets moyens": {
@@ -32643,7 +32655,7 @@
  "espaces actifs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:377: stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr(\"espaces actifs\"))"
+   "App/Screens/Profile/ProfileView.swift:379: stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr(\"espaces actifs\"))"
   ]
  },
  "estimées aujourd'hui": {
@@ -32815,7 +32827,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:398: case .habits: return Fmt.plural(content.habits.count, tr(\"habitude\"), tr(\"habitudes\"))",
-   "App/Screens/Profile/ProfileView.swift:376: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
+   "App/Screens/Profile/ProfileView.swift:378: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
    "Shared/Support/NotificationEngine.swift:456: body: tr(\"Il te reste \\(Fmt.plural(left.count, tr(\"habitude\"), tr(\"habitudes\"))) aujourd'hui. Un petit effort et ta journée est complète !\"),"
   ]
  },
@@ -32829,7 +32841,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:398: case .habits: return Fmt.plural(content.habits.count, tr(\"habitude\"), tr(\"habitudes\"))",
-   "App/Screens/Profile/ProfileView.swift:376: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
+   "App/Screens/Profile/ProfileView.swift:378: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
    "Shared/Support/NotificationEngine.swift:456: body: tr(\"Il te reste \\(Fmt.plural(left.count, tr(\"habitude\"), tr(\"habitudes\"))) aujourd'hui. Un petit effort et ta journée est complète !\"),"
   ]
  },

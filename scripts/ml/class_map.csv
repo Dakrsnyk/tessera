@@ -1,0 +1,499 @@
+classe_id,classe,classe_lisible,id_ardane,nom_ardane,methode,score,a_relire,alternatives,effectif_train
+1126,alfa-sprouts,Alfa sprouts,cnf.1982,"Luzerne, graines germées, crues",manuel,1.0,non,,47
+1210,almonds,Almonds,builtin.almonds,Amandes,manuel,1.0,non,,290
+1975,anchovies,Anchovies,cnf.2985,"Poisson, anchois, européen, conserve avec huile d'olive, égoutté",manuel,1.0,non,,27
+2585,aperitif-with-alcohol-aperol-spritz,"Aperitif, with alcohol, apérol, Spritz",,,manuel,0.0,non,,22
+1151,apple,Apple,builtin.apple,Pomme,manuel,1.0,non,"cnf.1543 (Anone reticulée, anone coeur de boeuf, crue; jetons-en 0.70) | cnf.1602 (Abricots de St-Dominique (des Antilles), crus; jetons-en 0.70) | cnf.1681 (Jambose (pommes de rose), crue; jetons-en 0.70)",860
+2994,apple-crumble,Apple crumble,cnf.6228,"Dessert, croustade aux pommes, faite maison",manuel,1.0,non,"cnf.1490 (Pomme, séchée, sulfurée, non cuite; jetons-en 0.55) | cnf.1696 (Pomme, crue, avec pelure; jetons-en 0.55) | cnf.1697 (Pomme, crue, sans pelure; jetons-en 0.55)",26
+2237,apple-pie,Apple pie,builtin.applepie,Tarte aux pommes,manuel,1.0,non,"builtin.apple (Pomme; synonyme-app 0.75) | cnf.1490 (Pomme, séchée, sulfurée, non cuite; jetons-en 0.55) | cnf.1696 (Pomme, crue, avec pelure; jetons-en 0.55)",116
+727,applesauce-unsweetened-canned,"Applesauce, unsweetened, canned",builtin.applesauce,Compote de pommes non sucrée,manuel,1.0,non,"usda.9401 (Applesauce, canned, unsweetened, with added asco; jetons-en 0.70) | cnf.1701 (Pomme, purée (compote), conserve, sucrée; jetons-en 0.55) | usda.9402 (Applesauce, canned, sweetened, with salt; jetons-en 0.55)",76
+2960,apricot-dried,"Apricot, dried",cnf.1507,"Abricot, séché, sulfuré, non cuit",manuel,1.0,non,"cnf.1507 (Abricot, séché, sulfuré, non cuit; jetons-en 0.70) | cnf.1508 (Abricot, séché, sulfuré, cuit, sans sucre ajouté; jetons-en 0.70) | cnf.1509 (Abricot, séché, sulfuré, cuit, sucre ajouté; jetons-en 0.70)",22
+1153,apricots,Apricots,cnf.1498,"Abricot, cru",manuel,1.0,non,"cnf.1498 (Abricot, cru; jetons-en 0.70) | cnf.1507 (Abricot, séché, sulfuré, non cuit; jetons-en 0.70) | cnf.1510 (Abricot, congélé, sucré; jetons-en 0.70)",138
+1054,artichoke,Artichoke,cnf.2365,"Artichaut, bouilli, égoutté",manuel,1.0,non,"cnf.2364 (Artichaut, cru; jetons-en 0.70) | cnf.2365 (Artichaut, bouilli, égoutté; jetons-en 0.70) | cnf.6298 (Artichaut, mariné; jetons-en 0.70)",50
+1056,avocado,Avocado,builtin.avocado,Avocat,manuel,1.0,non,"cnf.1511 (Avocat, cru, toutes variétés commerciales; jetons-en 0.70) | cnf.1512 (Avocat, cru, californie; jetons-en 0.70) | cnf.1513 (Avocat, cru, Floride; jetons-en 0.70)",444
+1914,bacon,Bacon,builtin.bacon,Bacon cuit,manuel,1.0,non,"usda.10857 (HORMEL Canadian Style Bacon; jetons-en 0.70) | usda.21377 (McDONALD'S Bacon Ranch Salad with Crispy Chicken; jetons-en 0.70) | usda.7254 (Bacon, turkey, unprepared; jetons-en 0.70)",47
+1916,bacon-cooking,"Bacon, cooking",builtin.bacon,Bacon cuit,manuel,1.0,non,"usda.7254 (Bacon, turkey, unprepared; jetons-en 0.55) | usda.10857 (HORMEL Canadian Style Bacon; jetons-en 0.45) | usda.21377 (McDONALD'S Bacon Ranch Salad with Crispy Chicken; jetons-en 0.43)",64
+1915,bacon-frying,"Bacon, frying",builtin.bacon,Bacon cuit,manuel,1.0,non,"usda.7254 (Bacon, turkey, unprepared; jetons-en 0.55) | usda.10857 (HORMEL Canadian Style Bacon; jetons-en 0.45) | usda.21377 (McDONALD'S Bacon Ranch Salad with Crispy Chicken; jetons-en 0.43)",151
+1917,bacon-raw,"Bacon, raw",builtin.bacon,Bacon cuit,manuel,1.0,non,"usda.7254 (Bacon, turkey, unprepared; jetons-en 0.55) | usda.10857 (HORMEL Canadian Style Bacon; jetons-en 0.45) | usda.21377 (McDONALD'S Bacon Ranch Salad with Crispy Chicken; jetons-en 0.43)",37
+1517,bagel-without-filling,Bagel (without filling),builtin.bagel,Bagel,manuel,1.0,non,"cnf.3673 (Bagel, oeufs; jetons-en 0.55) | cnf.3675 (Bagel, cannelle-raisins secs; jetons-en 0.55) | cnf.3677 (Bagel, son d'avoine; jetons-en 0.55)",13
+10626,baked-potato,Baked potato,builtin.potato,Pomme de terre cuite,manuel,1.0,non,,115
+2742,balsamic-salad-dressing,Balsamic salad dressing,cnf.428,"Vinaigrette, huile et vinaigre, faite maison",manuel,1.0,non,,166
+2815,balsamic-vinegar,Balsamic vinegar,cnf.6196,"Vinaigre, balsamique",manuel,1.0,non,,22
+1154,banana,Banana,builtin.banana,Banane,manuel,1.0,non,"cnf.1514 (Banane, déshydratée ou en poudre; jetons-en 0.70) | cnf.1704 (Banane, crue; jetons-en 0.70) | usda.16259 (SILK Banana-Strawberry soy yogurt; jetons-en 0.70)",659
+5748,banana-cake,Banana cake,,,manuel,0.0,non,"cnf.1514 (Banane, déshydratée ou en poudre; jetons-en 0.55) | cnf.1704 (Banane, crue; jetons-en 0.55) | usda.16259 (SILK Banana-Strawberry soy yogurt; jetons-en 0.44)",28
+2760,basil,Basil,cnf.212,"Épices, basilic, frais",manuel,1.0,non,,43
+1134,bean-seeds,bean seeds,,,manuel,0.0,non,"cnf.3267 (Haricots, roses, grains mûrs, secs; jetons-en 0.70) | cnf.3269 (Haricots, pinto, grains mûrs, secs; jetons-en 0.70) | cnf.3295 (Haricots, mat (papillon), grains mûrs, secs; jetons-en 0.70)",25
+1138,beans-kidney,"Beans, kidney",builtin.kidneybeans,Haricots rouges cuits,manuel,1.0,non,"cnf.2001 (Haricots communs, grains immatures, germés, crus; jetons-en 0.70) | cnf.2002 (Haricots communs, grains immatures, germés, boui; jetons-en 0.70) | cnf.3381 (Haricots, rouge foncé, grains mûrs, secs; jetons-en 0.70)",84
+1141,beans-white,"Beans, white",cnf.3276,"Haricots, blancs, conserve, solides et liquide",manuel,1.0,non,"cnf.3272 (Haricots, blancs, petits, grains mûrs, secs; jetons-en 0.70) | cnf.3276 (Haricots, blancs, conserve, solides et liquide; jetons-en 0.70) | cnf.3385 (Haricots, blancs, grains mûrs, secs; jetons-en 0.70)",31
+1724,beef,Beef,builtin.steak,Steak de surlonge cuit,manuel,1.0,non,"cnf.2650 (Boeuf, cervelle, crue; jetons-en 0.70) | cnf.2653 (Boeuf, coeur, cru; jetons-en 0.70) | cnf.2658 (Boeuf, poumon, cru; jetons-en 0.70)",111
+1731,beef-cut-into-stripes-only-meat,"Beef, cut into stripes (only meat)",builtin.steak,Steak de surlonge cuit,manuel,1.0,non,"usda.13365 (Beef, composite of trimmed retail cuts, separabl; jetons-en 0.55) | usda.13366 (Beef, composite of trimmed retail cuts, separabl; jetons-en 0.55) | usda.23495 (Beef, composite of trimmed retail cuts, separabl; jetons-en 0.55)",59
+1728,beef-filet,"Beef, filet",builtin.steak,Steak de surlonge cuit,manuel,1.0,non,"usda.23248 (Beef, top loin filet, boneless, separable lean o; jetons-en 0.70) | usda.23264 (Beef, ribeye  petite roast/filet, boneless, sepa; jetons-en 0.70) | usda.23265 (Beef, ribeye  petite roast/filet, boneless, sepa; jetons-en 0.70)",71
+1730,beef-minced-only-meat,"Beef, minced (only meat)",builtin.beef,Bœuf haché mi-maigre cuit,manuel,1.0,non,"usda.13498 (Beef, ground, 70% lean meat / 30% fat, raw; jetons-en 0.55) | usda.23472 (Beef, ground, 93% lean meat / 7% fat, raw; jetons-en 0.55) | usda.23477 (Beef, ground, 97% lean meat / 3% fat, raw; jetons-en 0.55)",80
+1725,beef-roast,"Beef, roast",builtin.steak,Steak de surlonge cuit,manuel,1.0,non,"builtin.steak (Steak de surlonge cuit; synonyme-app 0.90) | cnf.4935 (Boeuf de type pot-au-feu avec pommes de terre fo; jetons-en 0.70) | cnf.5946 (Boeuf, épaule, rôti de palette, désossé, maigre,; jetons-en 0.70)",37
+1727,beef-sirloin-steak,"Beef, sirloin steak",builtin.steak,Steak de surlonge cuit,manuel,1.0,non,"cnf.6095 (Boeuf, cuisse, bifteck de pointe de surlonge, dé; jetons-en 0.70) | cnf.6098 (Boeuf, cuisse, bifteck de pointe de surlonge, dé; jetons-en 0.70) | cnf.6142 (Boeuf, longe, bifteck de haut de surlonge, désos; jetons-en 0.70)",51
+2634,beer,Beer,builtin.beer,Bière,manuel,1.0,non,,250
+1075,beetroot-raw,"Beetroot, raw",builtin.beet,Betterave,manuel,1.0,non,,56
+50,beetroot-steamed-without-addition-of-salt,"Beetroot, steamed, without addition of salt",builtin.beet,Betterave,manuel,1.0,non,,176
+1068,bell-pepper-red-raw,"Bell pepper, red, raw ",builtin.pepper,Poivron,manuel,1.0,non,,528
+656,bell-pepper-red-stewed-without-addition-of-fat-without-addition-of-salt,"Bell pepper, red, stewed, without addition of fat, without addition of salt",builtin.pepper,Poivron,manuel,1.0,non,,49
+1156,berries,Berries,builtin.blueberries,Bleuets,manuel,1.0,non,"cnf.7596 (Baies de Goji, séchées; jetons-en 0.70) | cnf.7786 (Camerise, crue; jetons-en 0.70) | usda.35133 (Chilchen (Red Berry Beverage) (Navajo); jetons-en 0.70)",82
+3220,birchermuesli-prepared-no-sugar-added,"Birchermüesli, prepared, no sugar added",,,manuel,0.0,non,,140
+2408,biscuit-with-butter,Biscuit with Butter,builtin.cookie,Biscuit aux brisures,manuel,1.0,non,"cnf.3685 (Biscuit, poudre à pâte, nature/babeurre, fait ma; jetons-en 0.55) | cnf.3686 (Biscuit, poudre à pâte, multigrains, pâte réfrig; jetons-en 0.55) | cnf.4061 (Biscuit, poudre à pâte, nature/babeurre, congelé; jetons-en 0.54)",24
+2388,biscuits,Biscuits,builtin.cookie,Biscuit aux brisures,manuel,1.0,non,"cnf.3679 (Biscuit, poudre à pâte, nature/babeurre, mélange; jetons-en 0.70) | cnf.3685 (Biscuit, poudre à pâte, nature/babeurre, fait ma; jetons-en 0.70) | cnf.3686 (Biscuit, poudre à pâte, multigrains, pâte réfrig; jetons-en 0.70)",181
+2340,black-forest-tart,Black Forest Tart,cnf.6626,"Gâteau, chocolat, fait maison, avec glaçage au chocolat",manuel,1.0,non,,17
+1229,black-olives,Black olives,cnf.1613,"Olive, mûre, conserve, petite à extra large",manuel,1.0,non,"cnf.5938 (Camarine noire, autochtone; jetons-en 0.55) | cnf.3280 (Haricots à oeil noir (dolique), kunde, grains mû; jetons-en 0.53) | cnf.3281 (Haricots à oeil noir (dolique), kunde, grains mû; jetons-en 0.53) | cnf.3282 (Haricots à oeil noir (dolique), communs, grains ; jetons-en 0.52)",225
+1158,blackberry,Blackberry,cnf.1515,"Mûre, crue",manuel,1.0,non,"cnf.1515 (Mûre, crue; jetons-en 0.70) | cnf.1516 (Mûre, conserve, sirop épais, solides et liquide; jetons-en 0.70) | cnf.1517 (Mûre, congélée, non sucrée; jetons-en 0.70)",17
+1280,blue-mould-cheese,Blue mould cheese,cnf.18,Fromage bleu,manuel,1.0,non,,76
+1169,blueberries,Blueberries,builtin.blueberries,Bleuets,manuel,1.0,non,"cnf.1519 (Bleuet, congélé, sucré; jetons-en 0.70) | cnf.1705 (Bleuet, cru; jetons-en 0.70) | cnf.6381 (Bleuet sauvage, cru; jetons-en 0.70)",267
+2736,bolognaise-sauce,Bolognaise sauce,,,manuel,0.0,non,,123
+2855,bouillon,Bouillon,cnf.6541,"Soupe, bouillon, poulet, prête-à-servir",manuel,1.0,non,,45
+2859,bouillon-vegetable,"Bouillon, vegetable",,,manuel,0.0,non,,27
+2768,bouquet-garni,Bouquet garni,,,manuel,0.0,non,,30
+1607,braided-white-loaf,Braided white loaf,cnf.3695,"Pain, oeufs (challa)",manuel,1.0,non,,313
+1218,brazil-nut,Brazil nut,cnf.2544,"Noix, noix de Brésil, séchées, non blanchies",manuel,1.0,non,,21
+1522,bread,Bread,builtin.bread,Pain blanc,manuel,1.0,non,"cnf.3700 (Pain, Italien; jetons-en 0.70) | cnf.4065 (Pain, seigle; jetons-en 0.70) | cnf.6785 (Pain de pommes de terre (patates); jetons-en 0.70)",151
+1523,bread-5-grain,"Bread, 5-grain",cnf.3702,"Pain, multigrains (aussi blé entier, sept grains)",manuel,1.0,non,"cnf.7196 (Pain, grains entiers (blé entier), commercial; jetons-en 0.55) | cnf.7198 (Pain, grains entiers (blé entier) avec graines e; jetons-en 0.55) | cnf.7199 (Pain, grains entiers (blé entier), avec fibres a; jetons-en 0.55)",67
+1557,bread-black,"Bread, black",cnf.4065,"Pain, seigle",manuel,1.0,non,"cnf.3700 (Pain, Italien; jetons-en 0.55) | cnf.4065 (Pain, seigle; jetons-en 0.55) | cnf.6785 (Pain de pommes de terre (patates); jetons-en 0.55)",77
+1520,bread-french-white-flour,"Bread, French (white flour)",builtin.baguette,Baguette,manuel,1.0,non,"cnf.3708 (Pain, pita, blanc; jetons-en 0.55) | cnf.3732 (Pain, blanc, commercial, grillé; jetons-en 0.55) | cnf.4066 (Pain, blanc, commercial; jetons-en 0.55)",189
+1533,bread-fruit,"Bread, fruit",cnf.3714,"Pain blanc aux raisins, commercial",manuel,1.0,non,"cnf.7917 (Pain, pita, fruit (inclus pomme cannelle et oran; jetons-en 0.70) | cnf.7918 (Pain, pita, fruit (raisins), avec multigrains et; jetons-en 0.70) | cnf.4065 (Pain, seigle; jetons-en 0.55)",68
+1538,bread-grain,"Bread, grain",cnf.3702,"Pain, multigrains (aussi blé entier, sept grains)",manuel,1.0,non,"cnf.7196 (Pain, grains entiers (blé entier), commercial; jetons-en 0.70) | cnf.7198 (Pain, grains entiers (blé entier) avec graines e; jetons-en 0.70) | cnf.7199 (Pain, grains entiers (blé entier), avec fibres a; jetons-en 0.70)",184
+1536,bread-half-white,"Bread, half white",builtin.bread,Pain blanc,manuel,1.0,non,"cnf.3708 (Pain, pita, blanc; jetons-en 0.55) | cnf.3714 (Pain blanc aux raisins, commercial; jetons-en 0.55) | cnf.3732 (Pain, blanc, commercial, grillé; jetons-en 0.55)",85
+3739,bread-meat-substitute-lettuce-sauce,"(bread, meat substitute, lettuce, sauce)",,,manuel,0.0,non,,24
+1545,bread-nut,"Bread, nut",builtin.wholebread,Pain de blé entier,manuel,1.0,non,"cnf.3700 (Pain, Italien; jetons-en 0.55) | cnf.4065 (Pain, seigle; jetons-en 0.55) | cnf.6785 (Pain de pommes de terre (patates); jetons-en 0.55)",106
+1546,bread-olive,"Bread, olive",builtin.bread,Pain blanc,manuel,1.0,non,"cnf.3700 (Pain, Italien; jetons-en 0.55) | cnf.4065 (Pain, seigle; jetons-en 0.55) | cnf.6785 (Pain de pommes de terre (patates); jetons-en 0.55)",31
+1547,bread-pita,"Bread, pita",builtin.pita,Pain pita,manuel,1.0,non,"builtin.pita (Pain pita; synonyme-app 0.90) | cnf.3708 (Pain, pita, blanc; jetons-en 0.70) | cnf.3709 (Pain, pita, blé entier; jetons-en 0.70)",72
+1551,bread-rye,"Bread, rye",cnf.4065,"Pain, seigle",manuel,1.0,non,"builtin.bread (Pain blanc; synonyme-app 0.90) | cnf.3726 (Pain, seigle, grillé; jetons-en 0.70) | usda.18053 (Bread, reduced-calorie, rye; jetons-en 0.70)",65
+1556,bread-sourdough,"Bread, sourdough",cnf.4063,"Pain, Français ou Viennois (aussi levain)",manuel,1.0,non,"cnf.3697 (Pain, Français ou Viennois (aussi levain), grill; jetons-en 0.70) | cnf.4063 (Pain, Français ou Viennois (aussi levain); jetons-en 0.70) | cnf.4065 (Pain, seigle; jetons-en 0.55)",180
+1528,bread-spelt,"Bread, spelt",builtin.wholebread,Pain de blé entier,manuel,1.0,non,"cnf.7239 (Pain, épeautre, commercial; jetons-en 0.70) | cnf.7309 (Pain, épeautre, commercial, grillé; jetons-en 0.70) | cnf.4065 (Pain, seigle; jetons-en 0.55)",39
+1559,bread-ticino,"Bread, Ticino",builtin.bread,Pain blanc,manuel,1.0,non,"cnf.3700 (Pain, Italien; jetons-en 0.55) | cnf.4065 (Pain, seigle; jetons-en 0.55) | cnf.6785 (Pain de pommes de terre (patates); jetons-en 0.55)",46
+1560,bread-toast,"Bread, toast",builtin.bread,Pain blanc,manuel,1.0,non,"cnf.3700 (Pain, Italien; jetons-en 0.55) | cnf.4065 (Pain, seigle; jetons-en 0.55) | cnf.6785 (Pain de pommes de terre (patates); jetons-en 0.55)",114
+1566,bread-white,"Bread, white",builtin.bread,Pain blanc,manuel,1.0,non,"cnf.3708 (Pain, pita, blanc; jetons-en 0.70) | cnf.3714 (Pain blanc aux raisins, commercial; jetons-en 0.70) | cnf.3732 (Pain, blanc, commercial, grillé; jetons-en 0.70)",1779
+1554,bread-whole-wheat,"Bread, whole wheat",builtin.wholebread,Pain de blé entier,manuel,1.0,non,"builtin.wholebread (Pain de blé entier; synonyme-app 0.90) | cnf.3709 (Pain, pita, blé entier; jetons-en 0.70) | cnf.4067 (Pain, blé entier, commercial; jetons-en 0.70)",467
+1565,bread-wholemeal,"Bread, wholemeal",builtin.wholebread,Pain de blé entier,manuel,1.0,non,"cnf.3709 (Pain, pita, blé entier; jetons-en 0.70) | cnf.4067 (Pain, blé entier, commercial; jetons-en 0.70) | cnf.7193 (Pain, 60% blé entier, commercial; jetons-en 0.70)",1336
+1561,bread-wholemeal-toast,"Bread, wholemeal toast",builtin.wholebread,Pain de blé entier,manuel,1.0,non,"cnf.3709 (Pain, pita, blé entier; jetons-en 0.55) | cnf.3731 (Pain, germe de blé; jetons-en 0.55) | cnf.4017 (Pain, germe de blé, grillé; jetons-en 0.55)",95
+1614,breadcrumbs-unspiced,Breadcrumbs (unspiced),cnf.4069,"Pain, chapelure, séchée, émiettée, nature",manuel,1.0,non,,65
+1282,brie,Brie,cnf.20,Fromage brie,manuel,1.0,non,,27
+1568,brioche,Brioche,cnf.3695,"Pain, oeufs (challa)",manuel,1.0,non,,66
+1085,broccoli,Broccoli,builtin.broccoli,Brocoli,manuel,1.0,non,"cnf.2374 (Brocoli, cru; jetons-en 0.70) | cnf.2375 (Brocoli, bouilli, égoutté; jetons-en 0.70) | cnf.6279 (Brocoli, tiges, crues; jetons-en 0.70)",377
+2254,brownie,Brownie,builtin.brownie,Brownie,manuel,1.0,non,,80
+1091,brussel-sprouts,Brussel sprouts,builtin.brusselssprouts,Choux de Bruxelles,manuel,1.0,non,"cnf.2027 (Choux de Bruxelles, congelés, non préparés; jetons-en 0.70) | cnf.2028 (Choux de Bruxelles, congelés, bouillis, égouttés; jetons-en 0.70) | cnf.2378 (Choux de Bruxelles, crus; jetons-en 0.70)",41
+3181,buckwheat-grain-peeled,"Buckwheat, grain peeled",cnf.4413,"Grains céréaliers, gruau de sarrasin, rôti, cuit",manuel,1.0,non,,27
+7504,buckwheat-pancake,Buckwheat pancake,cnf.6608,"Crêpe, sarrazin, mélange sec imcomplet, préparé (avec oeuf, huile et lait)",manuel,1.0,non,,15
+1454,bulgur,Bulgur,cnf.4489,"Grains céréaliers, bulgur, cuit",manuel,1.0,non,,39
+2053,butter,Butter,builtin.butter,Beurre,manuel,1.0,non,"cnf.118 (Beurre, salé; jetons-en 0.70) | cnf.16 (Beurre, fouetté; jetons-en 0.70) | cnf.17 (Huile de beurre, anhydre; jetons-en 0.70)",1493
+2056,butter-herb,"Butter, herb",builtin.butter,Beurre,manuel,1.0,non,"cnf.118 (Beurre, salé; jetons-en 0.55) | cnf.16 (Beurre, fouetté; jetons-en 0.55) | cnf.17 (Huile de beurre, anhydre; jetons-en 0.55)",29
+3249,butter-spread-puree-almond,"Butter, spread, puree almond",builtin.almondbutter,Beurre d'amande,manuel,1.0,non,"usda.42151 (Vegetable oil-butter spread, reduced calorie; jetons-en 0.47)",53
+2303,cake-chocolate,"Cake, chocolate",cnf.3759,"Gâteau, chocolat, fait maison, sans glaçage",manuel,1.0,non,"cnf.3753 (Gâteau, fudge aux cerises, avec glaçage au choco; jetons-en 0.70) | cnf.3755 (Mélange à gâteau, chocolat, type pouding, sec, n; jetons-en 0.70) | cnf.3759 (Gâteau, chocolat, fait maison, sans glaçage; jetons-en 0.70)",186
+2300,cake-marble,"Cake, marble",cnf.6624,"Gâteau, quatre-quarts, fait maison",manuel,1.0,non,"cnf.3774 (Mélange à gâteau, marbre, type pouding, sec, non; jetons-en 0.70) | cnf.3763 (Gâteau, gâteau pause-café, fruits; jetons-en 0.55) | cnf.3786 (Gâteau, éponge, commercial; jetons-en 0.55)",17
+2259,cake-oblong,Cake (oblong),cnf.6624,"Gâteau, quatre-quarts, fait maison",manuel,1.0,non,"cnf.3761 (Gâteau, gâteau pause-café, fromage; jetons-en 0.55) | cnf.3763 (Gâteau, gâteau pause-café, fruits; jetons-en 0.55) | cnf.3786 (Gâteau, éponge, commercial; jetons-en 0.55)",23
+3337,cake-salted,"Cake, salted",,,manuel,0.0,non,"cnf.3761 (Gâteau, gâteau pause-café, fromage; jetons-en 0.55) | cnf.3763 (Gâteau, gâteau pause-café, fruits; jetons-en 0.55) | cnf.3786 (Gâteau, éponge, commercial; jetons-en 0.55)",16
+5812,cantonese-fried-rice,Cantonese fried rice,builtin.friedrice,Riz frit,manuel,1.0,non,,30
+1062,capers,Capers,cnf.4890,"Câpres, conserve",manuel,1.0,non,,56
+2501,cappuccino,Cappuccino,builtin.latte,Café latte,manuel,1.0,non,,209
+2964,caprese-salad-tomato-mozzarella,Caprese salad (Tomato Mozzarella),,,manuel,0.0,non,,113
+2333,carrot-cake,Carrot cake,cnf.6629,"Gâteau, carottes, fait maison, avec glaçage au fromage à la crème",manuel,1.0,non,"cnf.2312 (Carotte, jus, conserve; jetons-en 0.55) | cnf.2353 (Carotte, petite, crue; jetons-en 0.55) | cnf.2380 (Carotte, crue; jetons-en 0.55)",22
+1078,carrot-raw,"Carrot, raw",cnf.2380,"Carotte, crue",manuel,1.0,non,"builtin.carrot (Carotte; synonyme-app 0.90) | cnf.2353 (Carotte, petite, crue; jetons-en 0.70) | cnf.2312 (Carotte, jus, conserve; jetons-en 0.55)",1345
+143,carrot-steamed-without-addition-of-salt,"Carrot, steamed, without addition of salt",cnf.2381,"Carotte, bouillie, égouttée",manuel,1.0,non,"cnf.6396 (Carotte, bouillie, égouttée, sel ajouté; jetons-en 0.55) | cnf.6397 (Carotte, congelée, bouillie, égouttée, sel ajout; jetons-en 0.55) | cnf.6475 (Pois et carottes, congelés, bouillis, égouttés, ; jetons-en 0.47)",80
+1213,cashew-nut,Cashew nut,builtin.cashews,Noix de cajou,manuel,1.0,non,,134
+1084,cauliflower,Cauliflower,builtin.cauliflower,Chou-fleur,manuel,1.0,non,"cnf.2046 (Chou-fleur, bouilli, égoutté; jetons-en 0.70) | cnf.2047 (Chou-fleur, congelé, non préparé; jetons-en 0.70) | cnf.2358 (Chou-fleur, vert, cru; jetons-en 0.70)",171
+1082,celeriac,Celeriac,cnf.2049,"Céleri-rave, cru",manuel,1.0,non,"cnf.2050 (Céleri-rave, bouilli, égoutté; jetons-en 0.70) | cnf.6402 (Céleri-rave, bouilli, égoutté, with salt; jetons-en 0.70)",78
+1130,celery,Celery,builtin.celery,Céleri,manuel,1.0,non,"cnf.2386 (Céleri, cru; jetons-en 0.70) | cnf.2387 (Céleri, bouilli, égoutté; jetons-en 0.70) | cnf.2481 (Céleri, bouilli, égoutté, sel ajouté; jetons-en 0.70)",32
+2791,cenovis-yeast-spread,"Cenovis, yeast spread",,,manuel,0.0,non,,30
+1835,cervelat,Cervelat,builtin.hotdogsausage,Saucisse fumée (hot-dog),manuel,1.0,non,,54
+2605,champagne,Champagne,cnf.2852,"Boisson alcoolisée, vin de table, blanc (11,5% alcool par volume)",manuel,1.0,non,,19
+1290,cheddar,Cheddar,builtin.cheddar,Cheddar,manuel,1.0,non,,31
+1311,cheese,Cheese,builtin.cheddar,Cheddar,manuel,1.0,non,cnf.108 (Fromage féta; jetons-en 0.70) | cnf.109 (Fromage gouda; jetons-en 0.70) | cnf.18 (Fromage bleu; jetons-en 0.70),584
+1327,cheese-for-raclette,Cheese for raclette,builtin.swiss,Fromage suisse,manuel,1.0,non,cnf.108 (Fromage féta; jetons-en 0.55) | cnf.109 (Fromage gouda; jetons-en 0.55) | cnf.18 (Fromage bleu; jetons-en 0.55),132
+2962,cheesecake,Cheesecake,builtin.cheesecake,Gâteau au fromage,manuel,1.0,non,"cnf.3800 (Gâteau, au fromage, commercial; jetons-en 0.70) | cnf.3801 (Gâteau, au fromage, préparation, type sans cuiss; jetons-en 0.70) | cnf.6628 (Gâteau, au fromage, nature, avec garniture aux c; jetons-en 0.70)",32
+1175,cherries,Cherries,builtin.cherries,Cerises,manuel,1.0,non,"cnf.1526 (Cerise sure, rouge, crue; jetons-en 0.70) | cnf.1531 (Cerise sucrée (guigne), crue; jetons-en 0.70) | cnf.1536 (Cerise sucrée (guigne), congélée, sucrée; jetons-en 0.70)",42
+1204,chestnuts,Chestnuts,cnf.2594,"Noix, châtaignes d'Europe (marrons), rôties",manuel,1.0,non,,37
+4338,chia-grains,Chia grains,builtin.chia,Graines de chia,manuel,1.0,non,,22
+1788,chicken,Chicken,builtin.chicken,Poitrine de poulet cuite,manuel,1.0,non,"cnf.1144 (Poulet, tartinade à sandwich, conserve; jetons-en 0.70) | cnf.5334 (Poulet, pieds, bouillis; jetons-en 0.70) | cnf.5379 (Porc et poulet, en conserve; jetons-en 0.70)",351
+1789,chicken-breast,"Chicken, breast",builtin.chicken,Poitrine de poulet cuite,manuel,1.0,non,"cnf.603 (Poulet à griller, poitrine, viande, frit; jetons-en 0.70) | cnf.6319 (Poulet, tendres de poitrine, panés, cuits; jetons-en 0.70) | cnf.6320 (Poulet, tendres de poitrine, panés, non cuits; jetons-en 0.70)",138
+3100,chicken-curry-cream-coconut-milk-curry-spices-paste,Chicken curry (cream/coconut milk. curry spices/paste)),builtin.butterchicken,Poulet au beurre,manuel,1.0,non,builtin.chicken (Poitrine de poulet cuite; synonyme-app 0.75),111
+1793,chicken-cut-into-stripes-only-meat,"Chicken, cut into stripes (only meat)",builtin.chicken,Poitrine de poulet cuite,manuel,1.0,non,"cnf.565 (Poulet à griller, viande seulement, cru; jetons-en 0.55) | cnf.566 (Poulet à griller, viande seulement, frite; jetons-en 0.55) | cnf.568 (Poulet à griller, viande seulement, à l'étuvée; jetons-en 0.55)",100
+1794,chicken-leg,"Chicken, leg",builtin.chickenthigh,Cuisse de poulet cuite,manuel,1.0,non,"builtin.chickenthigh (Cuisse de poulet cuite; synonyme-app 0.90) | cnf.607 (Poulet à griller, cuisse, viande et peau, cru; jetons-en 0.70) | cnf.612 (Poulet à griller, cuisse, viande, cru; jetons-en 0.70)",83
+1837,chicken-nuggets,Chicken nuggets,builtin.nuggets,Croquettes de poulet,manuel,1.0,non,"builtin.chicken (Poitrine de poulet cuite; synonyme-app 0.75) | cnf.4954 (Croquettes de poulet, macaroni au fromage, maïs ; jetons-en 0.70) | cnf.7034 (Poulet, croquette, viande blanche et brune, préc; jetons-en 0.70)",37
+1791,chicken-wing,"Chicken, wing",cnf.629,"Poulet à griller, aile, viande et peau, rôti",manuel,1.0,non,"builtin.chickenthigh (Cuisse de poulet cuite; synonyme-app 0.90) | cnf.626 (Poulet à griller, aile, viande et peau, cru; jetons-en 0.70) | cnf.631 (Poulet à griller, aile, viande, cru; jetons-en 0.70)",28
+1143,chickpeas,Chickpeas,builtin.chickpeas,Pois chiches cuits,manuel,1.0,non,"cnf.3389 (Pois chiches (garbanzo), grains mûrs, secs; jetons-en 0.70) | cnf.3390 (Pois chiches (garbanzo), grains mûrs, bouillis; jetons-en 0.70) | cnf.4886 (Pois chiches, farine (besan); jetons-en 0.70)",177
+2966,chili-con-carne-prepared,"Chili con carne, prepared",builtin.chili,Chili con carne,manuel,1.0,non,"cnf.7584 (Chili con carne avec haricots, préparation resta; jetons-en 0.70) | cnf.4963 (Chili con carne avec haricots, conserve; jetons-en 0.55)",52
+1086,chinese-cabbage,Chinese cabbage,cnf.2040,"Chou de Chine (pe-tsai), cru",manuel,1.0,non,"cnf.5 (Mets chinois, chow mein, poulet; jetons-en 0.54) | cnf.6930 (Mets chinois, boeuf et légumes, préparation rest; jetons-en 0.53) | cnf.7054 (Mets chinois, crevettes et légumes, préparation ; jetons-en 0.53) | cnf.7280 (Mets chinois, poulet à l'orange, préparation res; jetons-en 0.53)",64
+1013,chips-french-fries,"Chips, french fries",builtin.fries,Frites,manuel,1.0,non,,330
+2778,chives,Chives,cnf.2059,"Ciboulette, crue",manuel,1.0,non,"cnf.2289 (Ciboulette, lyophilisée; jetons-en 0.70)",30
+2134,chocolate,Chocolate,builtin.milkchocolate,Chocolat au lait,manuel,1.0,non,"cnf.2866 (Chocolat, sirop, consistance claire; jetons-en 0.70) | cnf.2867 (Chocolat, sirop, consistance claire, lait entier; jetons-en 0.70) | cnf.2869 (Chocolat chaud, mélange sec; jetons-en 0.70)",129
+2413,chocolate-cookies,Chocolate cookies,builtin.cookie,Biscuit aux brisures,manuel,1.0,non,"cnf.2866 (Chocolat, sirop, consistance claire; jetons-en 0.55) | cnf.6571 (Chocolat, sirop, consistance claire, réduit en C; jetons-en 0.53) | cnf.2867 (Chocolat, sirop, consistance claire, lait entier; jetons-en 0.53)",48
+2194,chocolate-egg-small,"Chocolate egg, small",builtin.milkchocolate,Chocolat au lait,manuel,1.0,non,,25
+2135,chocolate-filled,"Chocolate, filled",builtin.milkchocolate,Chocolat au lait,manuel,1.0,non,"cnf.2866 (Chocolat, sirop, consistance claire; jetons-en 0.55) | cnf.6571 (Chocolat, sirop, consistance claire, réduit en C; jetons-en 0.53) | cnf.2867 (Chocolat, sirop, consistance claire, lait entier; jetons-en 0.53)",17
+3258,chocolate-milk-chocolate-drink,"Chocolate milk, chocolate drink",builtin.chocolatemilk,Lait au chocolat,manuel,1.0,non,"cnf.116 (Chocolat chaud, cacao, fait maison, préparé avec; jetons-en 0.55) | cnf.2867 (Chocolat, sirop, consistance claire, lait entier; jetons-en 0.55) | cnf.5270 (Chocolat, sirop, consistance claire, lait 2% M.G; jetons-en 0.55)",22
+2961,chocolate-mousse,Chocolate mousse,cnf.6227,"Dessert, mousse, chocolat, faite maison",manuel,1.0,non,"cnf.2866 (Chocolat, sirop, consistance claire; jetons-en 0.55) | cnf.6571 (Chocolat, sirop, consistance claire, réduit en C; jetons-en 0.53) | cnf.2867 (Chocolat, sirop, consistance claire, lait entier; jetons-en 0.53)",64
+1838,chorizo,Chorizo,cnf.7324,"Saucisse, chorizo, sèche",manuel,1.0,non,,19
+2467,coca-cola,Coca Cola,builtin.cola,Boisson gazeuse,manuel,1.0,non,,29
+2468,coca-cola-zero,Coca Cola Zero,builtin.dietcola,Boisson gazeuse diète,manuel,1.0,non,,28
+2588,cocktail,Cocktail,,,manuel,0.0,non,"cnf.1551 (Fruits, cocktail (pêches, poires, abricots, anan; jetons-en 0.70) | cnf.2473 (Légumes, jus, cocktail, conserve; jetons-en 0.70) | cnf.5393 (Fruits, cocktail (pêches, poires, abricots, anan; jetons-en 0.70)",30
+2171,cocoa-powder,Cocoa powder,,,manuel,0.0,non,"cnf.7281 (Café et cacao (mocha), poudre, avec colorant à c; jetons-en 0.70) | usda.19171 (Cocoa, dry powder, unsweetened, HERSHEY'S Europe; jetons-en 0.70) | usda.19860 (Cocoa, dry powder, hi-fat or breakfast, processe; jetons-en 0.70)",24
+1216,coconut,Coconut,cnf.2558,"Noix de coco, crue",manuel,1.0,non,"cnf.2559 (Noix de coco, désséchée, non sucrée; jetons-en 0.70) | cnf.2562 (Noix de coco, désséchée, grillée; jetons-en 0.70) | cnf.2566 (Noix de coco, eau (liquide de la noix); jetons-en 0.70)",37
+1253,coconut-milk,Coconut milk,cnf.2565,"Noix de coco, lait (liquide de la noix râpée et eau), conserve",manuel,1.0,non,"cnf.2601 (Noix de coco, lait (liquide de la noix râpée et ; jetons-en 0.70) | cnf.2643 (Noix de coco, lait (liquide de la noix râpée et ; jetons-en 0.70) | cnf.2558 (Noix de coco, crue; jetons-en 0.55)",32
+1958,cod,Cod,builtin.cod,Morue cuite,manuel,1.0,non,,25
+2513,coffee-decaffeinated,"Coffee, decaffeinated",builtin.coffee,Café noir,manuel,1.0,non,"cnf.2876 (Café instantané, décaféiné, poudre; jetons-en 0.70) | cnf.2877 (Café instantané, décaféiné, poudre, eau ajoutée; jetons-en 0.70) | cnf.4981 (Café infusé, préparé avec eau municipale, décafé; jetons-en 0.70)",26
+2512,coffee-with-caffeine,"Coffee, with caffeine",builtin.coffee,Café noir,manuel,1.0,non,"cnf.122 (Colorant à café (non laitier), en poudre; jetons-en 0.70) | cnf.2874 (Café instantané, régulier, poudre; jetons-en 0.70) | cnf.2878 (Café instantané avec chicorée, poudre; jetons-en 0.70)",1818
+1020,coleslaw-chopped-without-sauce,Coleslaw (chopped without sauce),builtin.cabbage,Chou,manuel,1.0,non,,31
+1883,cooked-sausage,Cooked sausage,builtin.hotdogsausage,Saucisse fumée (hot-dog),manuel,1.0,non,,22
+2376,cookies,Cookies,builtin.cookie,Biscuit aux brisures,manuel,1.0,non,"usda.18196 (Cookies, brownies, dry mix, sugar free; jetons-en 0.70) | usda.18528 (Archway Home Style Cookies, Dutch Cocoa; jetons-en 0.70) | usda.18535 (Archway Home Style Cookies, Molasses; jetons-en 0.70)",92
+2932,cordon-bleu-from-pork-schnitzel-fried,"Cordon bleu, from pork schnitzel, fried",,,manuel,0.0,non,,42
+2767,coriander,Coriander,cnf.2067,"Coriandre (cilantro), crue",manuel,1.0,non,,23
+1108,corn,Corn,builtin.corn,Maïs,manuel,1.0,non,"cnf.2313 (Maïs, pouding, fait maison; jetons-en 0.70) | cnf.2388 (Maïs sucré, jaune, cru; jetons-en 0.70) | cnf.6 (Maïs, beignet; jetons-en 0.70)",164
+2898,corn-crisps,Corn crisps,builtin.tortillachips,Chips tortilla,manuel,1.0,non,"cnf.2313 (Maïs, pouding, fait maison; jetons-en 0.55) | cnf.2388 (Maïs sucré, jaune, cru; jetons-en 0.55) | cnf.6 (Maïs, beignet; jetons-en 0.55)",71
+1626,corn-flakes,Corn Flakes,builtin.cereal,Céréales de maïs,manuel,1.0,non,"builtin.corn (Maïs; synonyme-app 0.75) | cnf.2313 (Maïs, pouding, fait maison; jetons-en 0.55) | cnf.2388 (Maïs sucré, jaune, cru; jetons-en 0.55)",21
+1264,cottage-cheese,Cottage cheese,builtin.cottage,Fromage cottage,manuel,1.0,non,"cnf.7730 (Gâteau, pouding chômeur; jetons-en 0.52)",132
+1007,country-fries,Country fries,builtin.fries,Frites,manuel,1.0,non,,73
+1455,couscous,Couscous,builtin.couscous,Couscous cuit,manuel,1.0,non,,108
+2899,crackers,Crackers,builtin.crackers,Craquelins,manuel,1.0,non,"cnf.3859 (Craquelin, fromage; jetons-en 0.70) | cnf.3867 (Craquelin, lait; jetons-en 0.70) | cnf.3875 (Craquelin, blé; jetons-en 0.70)",32
+1376,cream,Cream,builtin.cream35,Crème 35 %,manuel,1.0,non,"cnf.137 (Crème à fouetter, 32% M.G.; jetons-en 0.70) | cnf.138 (Crème à fouetter, 35% M.G.; jetons-en 0.70) | cnf.5299 (Crème sure, légère; jetons-en 0.70)",87
+1328,cream-cheese,Cream cheese,builtin.creamcheese,Fromage à la crème,manuel,1.0,non,"builtin.sourcream (Crème sure; synonyme-app 0.75) | cnf.5299 (Crème sure, légère; jetons-en 0.55) | cnf.5300 (Crème sure, sans gras; jetons-en 0.55)",69
+5792,cream-spinach,Cream spinach,,,manuel,0.0,non,"cnf.5299 (Crème sure, légère; jetons-en 0.55) | cnf.5300 (Crème sure, sans gras; jetons-en 0.55) | cnf.54 (Crème, garniture fouettée, sous pression (bombe); jetons-en 0.55)",39
+2269,crepe-plain,"Crêpe, plain",cnf.7731,"Crêpe, nature, maison",manuel,1.0,non,"cnf.7731 (Crêpe, nature, maison; jetons-en 0.70)",166
+1612,crisp-bread-wasa,"Crisp bread, Wasa",cnf.3861,"Craquelin, pain plat, seigle",manuel,1.0,non,,42
+2905,crisps,Crisps,builtin.chips,Croustilles,manuel,1.0,non,,110
+1588,croissant,Croissant,builtin.croissant,Croissant,manuel,1.0,non,"cnf.3882 (Croissant, beurre, commercial; jetons-en 0.70) | cnf.3883 (Croissant, pommes, commercial; jetons-en 0.70) | cnf.3884 (Croissant, fromage, commercial; jetons-en 0.70)",211
+1592,croissant-wholegrain,"Croissant, wholegrain",builtin.croissant,Croissant,manuel,1.0,non,,32
+2362,croissant-with-chocolate-filling,Croissant with chocolate filling,builtin.croissant,Croissant,manuel,1.0,non,,87
+2913,croque-monsieur,Croque monsieur,builtin.grilledcheese,Sandwich au fromage fondant,manuel,1.0,non,,25
+2900,croutons,Croutons,cnf.3885,"Croutons, nature",manuel,1.0,non,"cnf.3886 (Croutons, assaissonnés; jetons-en 0.70)",39
+1627,crunch-muesli,Crunch Müesli,builtin.granola,Granola,manuel,1.0,non,,107
+1061,cucumber,Cucumber,builtin.cucumber,Concombre,manuel,1.0,non,"cnf.2363 (Concombre, cru; jetons-en 0.70) | cnf.4848 (Concombre, pelé, cru; jetons-en 0.70) | cnf.5940 (Concombre de mer (holothurie), autochtone; jetons-en 0.70)",669
+1060,cucumber-pickled,"Cucumber, pickled ",cnf.2338,"Marinades, cornichons sûrs",manuel,1.0,non,"cnf.2363 (Concombre, cru; jetons-en 0.55) | cnf.4848 (Concombre, pelé, cru; jetons-en 0.55) | cnf.5940 (Concombre de mer (holothurie), autochtone; jetons-en 0.47)",222
+1266,curd,Curd,builtin.greekyogurt,Yogourt grec nature 0 %,manuel,1.0,non,,36
+870,curds-natural-with-at-most-10-fidm,"Curds, natural, with at most 10% fidm",builtin.greekyogurt,Yogourt grec nature 0 %,manuel,1.0,non,,44
+3630,curry-vegetarian,"Curry, vegetarian",,,manuel,0.0,non,,132
+1402,dairy-ice-cream,Dairy ice cream,builtin.icecream,Crème glacée,manuel,1.0,non,,216
+1201,damson-plum,Damson plum,builtin.plum,Prune,manuel,1.0,non,,23
+2131,dark-chocolate,Dark chocolate,builtin.chocolate,Chocolat noir 70 %,manuel,1.0,non,,351
+1162,dates,Dates,builtin.dates,Dattes,manuel,1.0,non,"cnf.1583 (Jujube (datte chinoise), cru; jetons-en 0.70) | cnf.1584 (Jujube (datte chinoise), sec; jetons-en 0.70) | cnf.1710 (Datte, domestique, naturelle et séchée; jetons-en 0.70)",76
+2740,dips,Dips,cnf.6786,"Trempette, base de fromage à la crème",manuel,1.0,non,"cnf.6787 (Trempette, aux épinards, à base de crème sure; jetons-en 0.70) | cnf.6788 (Trempette, soupe à l'oignon déshydratée, à base ; jetons-en 0.70) | cnf.7661 (Trempette, base de haricots; jetons-en 0.70)",26
+1695,dough-puff-pastry-shortcrust-bread-pizza-dough,"Dough (puff pastry, shortcrust, bread, pizza dough)",cnf.3856,"Pâte feuilletée, congelée, prête-à-cuire, cuite",manuel,1.0,non,,35
+1853,dried-meat,Dried meat,cnf.2707,"Boeuf, salé, boeuf déshydraté",manuel,1.0,non,cnf.2108 (Kanpyo (tranches de courge séchées); jetons-en 0.45),178
+1199,dried-raisins,Dried raisins,builtin.raisins,Raisins secs,manuel,1.0,non,cnf.2108 (Kanpyo (tranches de courge séchées); jetons-en 0.45),74
+2959,dumplings,Dumplings,cnf.6607,"Dumpling, nature",manuel,1.0,non,"cnf.7697 (Dumpling, farci aux pommes de terre ou fromage (; jetons-en 0.70)",20
+1456,ebly,Ebly,,,manuel,0.0,non,,30
+2022,egg,Egg,builtin.egg,Œuf,manuel,1.0,non,"cnf.4721 (Oeuf, poule, blanc, déshydraté; jetons-en 0.70) | cnf.6421 (Oeuf, succédané, poudre; jetons-en 0.70) | cnf.6717 (Oeuf à la bénédictine; jetons-en 0.70)",959
+3042,egg-scrambled-prepared,"Egg, scrambled, prepared",cnf.133,"Oeuf, poule, entier, cuit, brouillé ou omelette",manuel,1.0,non,"cnf.133 (Oeuf, poule, entier, cuit, brouillé ou omelette; jetons-en 0.55) | cnf.5569 (Oeuf, poule, brouillé, congelé; jetons-en 0.55) | cnf.6814 (Pâté imperial (egg roll), assortiment, préparati; jetons-en 0.55)",143
+1055,eggplant,Eggplant,builtin.eggplant,Aubergine,manuel,1.0,non,"cnf.2088 (Aubergine, crue; jetons-en 0.70) | cnf.2089 (Aubergine, bouillie, égouttée; jetons-en 0.70) | cnf.5550 (Aubergine, marinée; jetons-en 0.70)",195
+2991,eggplant-caviar,Eggplant caviar,,,manuel,0.0,non,"cnf.2088 (Aubergine, crue; jetons-en 0.55) | cnf.5550 (Aubergine, marinée; jetons-en 0.55) | cnf.2089 (Aubergine, bouillie, égouttée; jetons-en 0.54)",24
+1293,emmental-cheese,Emmental cheese,builtin.swiss,Fromage suisse,manuel,1.0,non,,37
+2504,espresso-with-caffeine,"Espresso, with caffeine",builtin.coffee,Café noir,manuel,1.0,non,,631
+3221,fajita-bread-only,Fajita (bread only),builtin.tortilla,Tortilla de blé,manuel,1.0,non,,93
+2873,falafel-balls,Falafel (balls),cnf.3339,"Falafel, fait maison",manuel,1.0,non,"cnf.3339 (Falafel, fait maison; jetons-en 0.55)",65
+5247,faux-mage-cashew-vegan-chers,"Faux-mage Cashew, vegan chers",,,manuel,0.0,non,,18
+1119,fennel,Fennel,cnf.2350,"Fenouil, bulbe, cru",manuel,1.0,non,,179
+1294,feta,Feta,builtin.feta,Feta,manuel,1.0,non,,191
+3392,fig-dried,"Fig, dried",cnf.1549,"Figue, séchée, non cuite",manuel,1.0,non,"cnf.1550 (Figue, séchée, cuite; jetons-en 0.70) | cnf.1711 (Figue, crue; jetons-en 0.55) | cnf.1545 (Figue, conserve, dans l'eau, solides et liquide; jetons-en 0.53)",23
+1164,figs,Figs,cnf.1711,"Figue, crue",manuel,1.0,non,"cnf.1546 (Figue, conserve, dans du sirop léger, solides et; jetons-en 0.70) | cnf.1549 (Figue, séchée, non cuite; jetons-en 0.70) | cnf.1550 (Figue, séchée, cuite; jetons-en 0.70)",47
+1956,fish,Fish,builtin.cod,Morue cuite,manuel,1.0,non,"cnf.2991 (Poisson, carpe, crue; jetons-en 0.70) | cnf.3019 (Poisson, lingue, cru; jetons-en 0.70) | cnf.3068 (Poisson, tambour croca, cru; jetons-en 0.70)",142
+2002,fish-crunchies-battered,Fish crunchies (battered),cnf.3006,"Poisson, bâtonnets, congelés, préparés",manuel,1.0,non,"cnf.3061 (Poisson, requin (aiguillat), espèces diverses, p; jetons-en 0.55) | cnf.6709 (Poisson, en pâte à frire, frit; jetons-en 0.55)",25
+2003,fish-fingers-breaded,Fish fingers (breaded),cnf.3006,"Poisson, bâtonnets, congelés, préparés",manuel,1.0,non,"cnf.2994 (Poisson, barbue de rivière, sauvage, panée et fr; jetons-en 0.55) | cnf.3001 (Poisson, tambour brésilien, pané et frit; jetons-en 0.55)",35
+1422,flakes-oat,"Flakes, oat",builtin.oats,Flocons d'avoine,manuel,1.0,non,"cnf.5624 (Flocons de céleri, déshydratés; jetons-en 0.47)",134
+1587,focaccia,Focaccia,cnf.7073,"Pain, Focaccia, pain plat Italien, nature",manuel,1.0,non,,55
+1295,fondue,Fondue,cnf.100,"Fondue au fromage, suisse/emmental/gruyère, prête-à-servir",manuel,1.0,non,,31
+1058,french-beans,French beans,builtin.greenbeans,Haricots verts,manuel,1.0,non,"cnf.3910 (Pain doré, congelé, prêt-à-chauffer; jetons-en 0.53) | cnf.3911 (Pain doré, fait maison, avec lait 2% M.G. et mar; jetons-en 0.53) | usda.16261 (SILK French Vanilla Creamer; jetons-en 0.45)",228
+3417,french-pizza-from-alsace-baked,"French pizza from Alsace, baked",,,manuel,0.0,non,,21
+2743,french-salad-dressing,French salad dressing,cnf.533,"Vinaigrette, Française, régulière",manuel,1.0,non,,170
+1300,fresh-cheese,Fresh cheese,builtin.creamcheese,Fromage à la crème,manuel,1.0,non,,101
+3474,fruit-compotes,Fruit compotes,builtin.applesauce,Compote de pommes non sucrée,manuel,1.0,non,"cnf.7623 (Boisson, punch tropical, prêt-à-boire; jetons-en 0.53) | usda.9507 (Fruit juice smoothie, NAKED JUICE, MIGHTY MANGO; jetons-en 0.53) | usda.9508 (Fruit juice smoothie, NAKED JUICE, GREEN MACHINE; jetons-en 0.53) | usda.9511 (Fruit juice smoothie, NAKED JUICE, BLUE MACHINE; jetons-en 0.53)",21
+3308,fruit-coulis,Fruit coulis,,,manuel,0.0,non,"cnf.7623 (Boisson, punch tropical, prêt-à-boire; jetons-en 0.53) | usda.9507 (Fruit juice smoothie, NAKED JUICE, MIGHTY MANGO; jetons-en 0.53) | usda.9508 (Fruit juice smoothie, NAKED JUICE, GREEN MACHINE; jetons-en 0.53) | usda.9511 (Fruit juice smoothie, NAKED JUICE, BLUE MACHINE; jetons-en 0.53)",56
+1166,fruit-salad,Fruit salad,cnf.1557,"Fruits, salade (pêches, poires, abricots, ananas, cerises), conserve, dans l'eau, solides et liquide",manuel,1.0,non,"cnf.1558 (Fruits, salade (pêches, poires, abricots, ananas; jetons-en 0.70) | cnf.1712 (Fruits, salade (pêches, poires, abricots, ananas; jetons-en 0.70) | cnf.1713 (Fruits, salade (pêches, poires, abricots, ananas; jetons-en 0.70)",125
+2278,fruit-tart,Fruit tart,builtin.applepie,Tarte aux pommes,manuel,1.0,non,"cnf.7623 (Boisson, punch tropical, prêt-à-boire; jetons-en 0.53) | usda.9507 (Fruit juice smoothie, NAKED JUICE, MIGHTY MANGO; jetons-en 0.53) | usda.9508 (Fruit juice smoothie, NAKED JUICE, GREEN MACHINE; jetons-en 0.53) | usda.9511 (Fruit juice smoothie, NAKED JUICE, BLUE MACHINE; jetons-en 0.53)",62
+1831,frying-sausage,Frying sausage,builtin.sausage,Saucisse de porc cuite,manuel,1.0,non,"usda.4556 (Shortening frying (heavy duty), palm (hydrogenat; jetons-en 0.43) | usda.4550 (Shortening frying (heavy duty), beef tallow and ; jetons-en 0.43) | usda.4560 (Shortening frying (heavy duty), soybean (hydroge; jetons-en 0.42)",49
+1112,garlic,Garlic,cnf.2394,"Ail, cru",manuel,1.0,non,"cnf.7473 (Margarine, tartinade, molle, non hydrogénée, hui; jetons-en 0.70)",40
+3080,glucose-drink-50g,Glucose drink 50g,,,manuel,0.0,non,,266
+3306,gluten-free-bread,Gluten-free bread,builtin.bread,Pain blanc,manuel,1.0,non,,80
+3082,goat-average-raw,"Goat, (average), raw",,,manuel,0.0,non,,33
+6404,goat-cheese-soft,Goat cheese (soft),cnf.98,"Fromage de chèvre, pâte ferme, (plus de 55% eau, 24% M.G.)",manuel,1.0,non,,87
+1167,grapefruit-pomelo,"Grapefruit, pomelo",builtin.grapefruit,Pamplemousse,manuel,1.0,non,"cnf.1565 (Pamplemousse, blanc, californie, cru; jetons-en 0.55) | cnf.1566 (Pamplemousse, blanc, floride, cru; jetons-en 0.55) | cnf.1570 (Pamplemousse, jus, conserve, sucré; jetons-en 0.55)",28
+1198,grapes,Grapes,builtin.grapes,Raisins,manuel,1.0,non,"cnf.1573 (Raisin, type Nord-Américain, peau non-adhérente,; jetons-en 0.70) | cnf.1574 (Raisin, thompson, sans pépins, conserve, dans l'; jetons-en 0.70) | cnf.1576 (Raisin, jus, conserve ou bouteille, sans vitamin; jetons-en 0.70)",178
+2954,greek-salad,Greek salad,,,manuel,0.0,non,,61
+3332,greek-yaourt-yahourt-yogourt-ou-yoghourt,"Greek Yaourt, yahourt, yogourt ou yoghourt",builtin.greekyogurt2,Yogourt grec nature 2 %,manuel,1.0,non,,78
+1123,green-asparagus,Green asparagus,builtin.asparagus,Asperges,manuel,1.0,non,"cnf.2021 (Betterave, feuilles, crues; jetons-en 0.47) | cnf.2086 (Pissenlit, feuilles, crues; jetons-en 0.47) | cnf.2126 (Moutarde, feuilles, crues; jetons-en 0.47) | cnf.2263 (Navet, feuilles, crues; jetons-en 0.47)",160
+387,green-bean-steamed-without-addition-of-salt,"Green bean, steamed, without addition of salt",builtin.greenbeans,Haricots verts,manuel,1.0,non,,71
+1228,green-olives,Green olives,cnf.5391,"Olive, marinée, conserve ou embouteillées, verte",manuel,1.0,non,"cnf.2021 (Betterave, feuilles, crues; jetons-en 0.47) | cnf.2086 (Pissenlit, feuilles, crues; jetons-en 0.47) | cnf.2126 (Moutarde, feuilles, crues; jetons-en 0.47) | cnf.2263 (Navet, feuilles, crues; jetons-en 0.47)",162
+1616,grissini,Grissini,,,manuel,0.0,non,,22
+1463,grits-polenta-maize-flour,"Grits, polenta, maize flour",,,manuel,0.0,non,,83
+1307,gruyere,Gruyère,cnf.32,Fromage gruyère,manuel,1.0,non,,247
+2749,guacamole,Guacamole,builtin.guacamole,Guacamole,manuel,1.0,non,,132
+2211,gummi-bears-fruit-jellies-jelly-babies-with-fruit-essence,"Gummi bears, fruit jellies, Jelly babies with fruit essence",builtin.candy,Jujubes,manuel,1.0,non,,17
+1309,halloumi,Halloumi,,,manuel,0.0,non,,33
+1886,ham,Ham,builtin.ham,Jambon,manuel,1.0,non,"cnf.1862 (Jambon, maigre, en conserve; jetons-en 0.70) | cnf.1865 (Jambon, régulier (13% de gras), en conserve; jetons-en 0.70) | cnf.1942 (Jambon, extra maigre, en conserve; jetons-en 0.70)",76
+1889,ham-cooked,"Ham, cooked",builtin.ham,Jambon,manuel,1.0,non,"cnf.1862 (Jambon, maigre, en conserve; jetons-en 0.55) | cnf.1942 (Jambon, extra maigre, en conserve; jetons-en 0.55) | cnf.7190 (Jambon, flocons, conserve; jetons-en 0.55)",181
+2920,ham-croissant,Ham croissant,builtin.croissant,Croissant,manuel,1.0,non,"cnf.1862 (Jambon, maigre, en conserve; jetons-en 0.55) | cnf.1942 (Jambon, extra maigre, en conserve; jetons-en 0.55) | cnf.7190 (Jambon, flocons, conserve; jetons-en 0.55)",56
+1893,ham-raw,"Ham, raw",cnf.6306,"Charcuterie, prosciutto, (jambon de Parme), salé à sec",manuel,1.0,non,"cnf.1862 (Jambon, maigre, en conserve; jetons-en 0.55) | cnf.1942 (Jambon, extra maigre, en conserve; jetons-en 0.55) | cnf.7190 (Jambon, flocons, conserve; jetons-en 0.55)",219
+1895,ham-turkey,"Ham, turkey",builtin.ham,Jambon,manuel,1.0,non,"usda.42128 (Ham, turkey, sliced, extra lean, prepackaged or ; jetons-en 0.70) | cnf.1862 (Jambon, maigre, en conserve; jetons-en 0.55) | cnf.1942 (Jambon, extra maigre, en conserve; jetons-en 0.55)",22
+1849,hamburger,Hamburger,builtin.burger,Hamburger,manuel,1.0,non,,41
+2930,hamburger-bread-meat-ketchup,"Hamburger (Bread, meat, ketchup)",builtin.burger,Hamburger,manuel,1.0,non,,144
+1572,hamburger-bun,Hamburger bun,cnf.3985,"Pain, petit pain, à hamburger / à hot-dog, nature",manuel,1.0,non,,27
+1310,hard-cheese,Hard cheese,builtin.swiss,Fromage suisse,manuel,1.0,non,,509
+1215,hazelnut,Hazelnut,cnf.2567,"Noix, noisettes, avelines ou coudres, séchées",manuel,1.0,non,"usda.35233 (Hazelnuts, beaked (Northern Plains Indians); jetons-en 0.70)",60
+2172,hazelnut-chocolate-spread-nutella-ovomaltine-caotina,"Hazelnut-chocolate spread(Nutella, Ovomaltine, Caotina)",builtin.chocospread,Tartinade choco-noisettes,manuel,1.0,non,,111
+2555,herbal-tea,Herbal tea,builtin.tea,Thé sans sucre,manuel,1.0,non,,242
+8730,high-protein-pasta-made-of-lentils-peas,"High protein pasta (made of lentils, peas, ...)",,,manuel,0.0,non,,32
+2103,honey,Honey,builtin.honey,Miel,manuel,1.0,non,"usda.7088 (Honey roll sausage, beef; jetons-en 0.70)",364
+2952,hummus,Hummus,builtin.hummus,Houmous,manuel,1.0,non,"cnf.3338 (Hoummos (hommos, hummus), fait maison; jetons-en 0.70) | cnf.4870 (Hoummos (hommos, hummus), commercial; jetons-en 0.70)",237
+2577,ice-cubes,Ice cubes,cnf.2933,Eau municipale,manuel,1.0,non,"usda.1301 (Ice cream sundae cone; jetons-en 0.55) | cnf.3913 (Crème glacée, cornet, type gâteau ou gaufrette; jetons-en 0.53) | cnf.3914 (Crème glacée, cornet, sucre, type roulé; jetons-en 0.53) | usda.19877 (Ice creams, BREYERS, 98% Fat Free Vanilla; jetons-en 0.53)",24
+2470,ice-tea,Ice tea,cnf.2915,"Thé instantané, sucré, saveur de citron, poudre, eau ajoutée",manuel,1.0,non,"usda.1301 (Ice cream sundae cone; jetons-en 0.55) | cnf.3913 (Crème glacée, cornet, type gâteau ou gaufrette; jetons-en 0.53) | cnf.3914 (Crème glacée, cornet, sucre, type roulé; jetons-en 0.53) | usda.19877 (Ice creams, BREYERS, 98% Fat Free Vanilla; jetons-en 0.53)",63
+2744,italian-salad-dressing,Italian salad dressing,cnf.532,"Vinaigrette, Italienne, régulière",manuel,1.0,non,,17
+2099,jam,Jam,builtin.jam,Confiture,manuel,1.0,non,,764
+2446,juice-apple,"Juice, apple",builtin.applejuice,Jus de pomme,manuel,1.0,non,"builtin.orangejuice (Jus d'orange; synonyme-app 0.90) | cnf.1495 (Pomme, jus, conserve ou bouteille, sans vitamine; jetons-en 0.70) | cnf.1752 (Pomme, jus, conserve ou bouteille, vitamine C aj; jetons-en 0.70)",60
+2452,juice-multifruit,"Juice, multifruit",builtin.orangejuice,Jus d'orange,manuel,1.0,non,"cnf.2464 (Jus, tomates, conserve; jetons-en 0.55) | cnf.6470 (Boisson au jus, orange; jetons-en 0.55) | cnf.6661 (Jus de grenade; jetons-en 0.55)",32
+2454,juice-orange,"Juice, orange",builtin.orangejuice,Jus d'orange,manuel,1.0,non,"cnf.1619 (Orange, jus, frais; jetons-en 0.70) | cnf.1622 (Orange et pamplemousse, jus, conserve; jetons-en 0.70) | cnf.1723 (Orange, jus, conserve; jetons-en 0.70)",244
+1174,kaki,Kaki,cnf.1653,"Kaki (diospyros kaki), cru",manuel,1.0,non,,28
+2947,kebab-in-pita-bread,Kebab in pita bread,builtin.shawarma,Assiette shawarma au poulet,manuel,1.0,non,,19
+1249,kefir-drink,Kefir drink,builtin.kefir,Kéfir nature,manuel,1.0,non,"usda.1289 (Kefir, lowfat, plain, LIFEWAY; jetons-en 0.55) | usda.1290 (Kefir, lowfat, strawberry, LIFEWAY; jetons-en 0.55) | cnf.6291 (Kéfir, 2-3,9% M.G.; jetons-en 0.53) | cnf.6999 (Kéfir, nature, faible en gras (0,5-1,9% M.G.); jetons-en 0.52)",57
+2734,ketchup,Ketchup,builtin.ketchup,Ketchup,manuel,1.0,non,"cnf.2494 (Tomates, ketchup (catsup); jetons-en 0.70) | cnf.2498 (Tomates, ketchup (catsup), faible en sodium; jetons-en 0.70)",121
+1176,kiwi,Kiwi,builtin.kiwi,Kiwi,manuel,1.0,non,"cnf.1585 (Kiwi, cru; jetons-en 0.70) | cnf.6790 (Kiwi doré, cru; jetons-en 0.70)",211
+1089,kolhrabi,Kolhrabi,cnf.2109,"Chou-rave, cru",manuel,1.0,non,,107
+1765,lamb,Lamb,cnf.3494,"Agneau, Nouvelle-Zélande, congelé, gigot, entier, maigre, rôti",manuel,1.0,non,"cnf.3606 (Agneau, coeur, cru; jetons-en 0.70) | cnf.3610 (Agneau, rognon, cru; jetons-en 0.70) | cnf.3614 (Agneau, foie, cru; jetons-en 0.70)",28
+1770,lamb-chop,"Lamb, chop",cnf.3494,"Agneau, Nouvelle-Zélande, congelé, gigot, entier, maigre, rôti",manuel,1.0,non,"cnf.3495 (Agneau, Nouvelle-Zélande, congelé, longe, maigre; jetons-en 0.70) | cnf.3497 (Agneau, Nouvelle-Zélande, congelé, longe, maigre; jetons-en 0.70) | cnf.3498 (Agneau, Nouvelle-Zélande, congelé, longe, maigre; jetons-en 0.70)",29
+2934,lasagne-meat-prepared,"Lasagne, meat, prepared",builtin.lasagna,Lasagne à la viande,manuel,1.0,non,,71
+3415,lasagne-vegetable-prepared,"Lasagne, vegetable, prepared",,,manuel,0.0,non,,22
+2518,latte-macchiato-with-caffeine,"Latte macchiato, with caffeine",builtin.latte,Café latte,manuel,1.0,non,"cnf.6704 (Café au lait, préparé avec lait entier; jetons-en 0.44)",25
+1032,leaf-spinach,Leaf spinach,cnf.2214,"Épinard, bouilli, égoutté",manuel,1.0,non,"cnf.2396 (Poireaux (bulbe et portion inférieure), crus; jetons-en 0.43) | cnf.2297 (Poireaux (bulbe et portion inférieure), lyophili; jetons-en 0.43) | cnf.2397 (Poireaux (bulbe et portion inférieure), bouillis; jetons-en 0.43) | cnf.6451 (Poireaux (bulbe et portion inférieure), bouillis; jetons-en 0.43)",247
+1113,leek,Leek,cnf.2297,"Poireaux (bulbe et portion inférieure), lyophilisés",manuel,1.0,non,"cnf.2396 (Poireaux (bulbe et portion inférieure), crus; jetons-en 0.70) | cnf.2397 (Poireaux (bulbe et portion inférieure), bouillis; jetons-en 0.70) | cnf.6451 (Poireaux (bulbe et portion inférieure), bouillis; jetons-en 0.70)",111
+1200,lemon,Lemon,cnf.1587,"Citron, cru, sans pelure",manuel,1.0,non,"cnf.1587 (Citron, cru, sans pelure; jetons-en 0.70) | cnf.1591 (Citron, jus, congelé; jetons-en 0.70) | cnf.1592 (Citron, zeste, cru; jetons-en 0.70)",119
+2262,lemon-cake,Lemon Cake,cnf.6624,"Gâteau, quatre-quarts, fait maison",manuel,1.0,non,"cnf.1587 (Citron, cru, sans pelure; jetons-en 0.55) | cnf.1591 (Citron, jus, congelé; jetons-en 0.55) | cnf.1592 (Citron, zeste, cru; jetons-en 0.55)",38
+3055,lemon-pie,Lemon pie,cnf.3959,"Tarte, au citron, meringue, faite maison",manuel,1.0,non,"cnf.1587 (Citron, cru, sans pelure; jetons-en 0.55) | cnf.1591 (Citron, jus, congelé; jetons-en 0.55) | cnf.1592 (Citron, zeste, cru; jetons-en 0.55)",29
+1144,lentils,Lentils,builtin.lentils,Lentilles cuites,manuel,1.0,non,"cnf.2113 (Lentilles, germées, crues; jetons-en 0.70) | cnf.3392 (Lentilles, grains mûrs, secs; jetons-en 0.70) | cnf.3393 (Lentilles, grains mûrs, bouillis; jetons-en 0.70)",122
+3230,lentils-green-du-puy-du-berry,"Lentils green (du Puy, du Berry)",builtin.lentils,Lentilles cuites,manuel,1.0,non,,39
+2636,light-beer,Light beer,builtin.beer,Bière,manuel,1.0,non,"usda.16238 (SILK Light Plain, soymilk; jetons-en 0.45) | usda.16239 (SILK Light Vanilla, soymilk; jetons-en 0.45) | usda.16240 (SILK Light Chocolate, soymilk; jetons-en 0.45) | usda.1189 (KRAFT CHEEZ WHIZ LIGHT Pasteurized Process Chees; jetons-en 0.43)",14
+1222,linseeds,Linseeds,builtin.flax,Graines de lin moulues,manuel,1.0,non,,24
+1595,lye-pretzel-soft,Lye pretzel (soft),cnf.5533,"Grignotises, bretzels, tendres",manuel,1.0,non,,55
+2184,m-m-s,M&M's,builtin.milkchocolate,Chocolat au lait,manuel,1.0,non,,13
+2395,macaroon,Macaroon,cnf.3822,"Biscuit, macaron",manuel,1.0,non,,18
+1180,mandarine,Mandarine,builtin.clementine,Clémentine,manuel,1.0,non,,191
+1181,mango,Mango,builtin.mango,Mangue,manuel,1.0,non,"cnf.1603 (Mangue, crue; jetons-en 0.70) | cnf.6205 (Mangue, nectar, en conserve; jetons-en 0.70) | cnf.7597 (Mangue, séchée, sucrée; jetons-en 0.70)",96
+3228,mango-dried,Mango dried,cnf.7597,"Mangue, séchée, sucrée",manuel,1.0,non,"cnf.7597 (Mangue, séchée, sucrée; jetons-en 0.70) | cnf.1603 (Mangue, crue; jetons-en 0.55) | cnf.6205 (Mangue, nectar, en conserve; jetons-en 0.55)",18
+2115,maple-syrup-concentrate,Maple syrup (Concentrate),builtin.maple,Sirop d'érable,manuel,1.0,non,,26
+2062,margarine,Margarine,cnf.7458,"Margarine, dure, huile de canola et/ou soya",manuel,1.0,non,"cnf.7459 (Margarine, dure, huiles de palme et soya; jetons-en 0.70) | cnf.7460 (Margarine, molle, non hydrogénée, huile de soya; jetons-en 0.70) | cnf.7574 (Margarine, molle, hydrogénée, huile de soya; jetons-en 0.70)",21
+2935,mashed-potatoes-prepared-with-full-fat-milk-with-butter,"Mashed potatoes, prepared, with full fat milk, with butter",cnf.7695,"Pomme de terre, purée, prête-à-manger",manuel,1.0,non,,133
+2750,mayonnaise,Mayonnaise,builtin.mayo,Mayonnaise,manuel,1.0,non,,287
+1707,meat,Meat,,,manuel,0.0,non,"cnf.3581 (Gibier, viande, wapiti (élan), cru; jetons-en 0.70) | cnf.3583 (Gibier, viande, chèvre, cru; jetons-en 0.70) | cnf.7164 (Charcuterie, pepperoni; jetons-en 0.70)",29
+8025,meat-balls,Meat balls,,,manuel,0.0,non,"cnf.5679 (Bâtonnet de viande, bacon et boeuf; jetons-en 0.55) | cnf.7345 (Bâtonnet de viande, boeuf, réfrigéré; jetons-en 0.55) | cnf.7346 (Bâtonnet de viande, viandes mélangées, réfrigéré; jetons-en 0.55) | cnf.7348 (Bâtonnet de viande, pepperoni, réfrigéré; jetons-en 0.55)",22
+1919,meat-terrine-pate,"Meat terrine, paté",cnf.1161,"Pâté de foie, non spécifié, conserve",manuel,1.0,non,,54
+1845,meatloaf,Meatloaf,builtin.beef,Bœuf haché mi-maigre cuit,manuel,1.0,non,,36
+2400,meringue,Meringue,,,manuel,0.0,non,,25
+1237,milk,Milk,builtin.milk325,"Lait 3,25 %",manuel,1.0,non,"cnf.114 (Lait, liquide, écrémé, 0.1% M.G.; jetons-en 0.70) | cnf.66 (Lait, poudre, entier; jetons-en 0.70) | cnf.69 (Lait, liquide, chocolat, entier; jetons-en 0.70)",184
+2132,milk-chocolate,Milk chocolate,builtin.milkchocolate,Chocolat au lait,manuel,1.0,non,"cnf.2902 (Lait malté, saveur chocolat, poudre; jetons-en 0.70) | cnf.4711 (Lait, liquide, chocolat, partiellement écrémé, 1; jetons-en 0.70) | cnf.69 (Lait, liquide, chocolat, entier; jetons-en 0.70)",105
+5618,milk-chocolate-with-hazelnuts,Milk Chocolate with hazelnuts,builtin.milkchocolate,Chocolat au lait,manuel,1.0,non,"cnf.2902 (Lait malté, saveur chocolat, poudre; jetons-en 0.55) | cnf.4711 (Lait, liquide, chocolat, partiellement écrémé, 1; jetons-en 0.55) | cnf.69 (Lait, liquide, chocolat, entier; jetons-en 0.55)",21
+1711,minced-meat,Minced meat,builtin.beef,Bœuf haché mi-maigre cuit,manuel,1.0,non,,27
+9594,mix-of-dried-fruits-and-nuts,Mix of dried fruits and nuts,builtin.trailmix,Mélange montagnard,manuel,1.0,non,,20
+1220,mixed-nuts,Mixed nuts,cnf.2577,"Noix, noix mélangées, rôties à sec avec arachides",manuel,1.0,non,,248
+1026,mixed-salad-chopped-without-sauce,Mixed salad (chopped without sauce),builtin.gardensalad,Salade du jardin (sans vinaigrette),manuel,1.0,non,,455
+1209,mixed-seeds,Mixed seeds,builtin.sunflowerseeds,Graines de tournesol,manuel,1.0,non,,56
+1022,mixed-vegetables,Mixed vegetables,cnf.2272,"Légumes, macédoine, congelée, bouillie, égouttée",manuel,1.0,non,,819
+1366,mousse,Mousse,,,manuel,0.0,non,,32
+1321,mozzarella,Mozzarella,builtin.mozzarella,Mozzarella,manuel,1.0,non,"cnf.6813 (Bâtonnets de fromage mozzarella, frits; jetons-en 0.70)",207
+1670,muesli,Müesli,cnf.1230,"Céréale, prête-à-manger, alpen (muesli), Weetabix",manuel,1.0,non,,131
+2312,muffin,Muffin,builtin.muffin,Muffin,manuel,1.0,non,"cnf.3906 (Muffin anglais, blé; jetons-en 0.70) | cnf.3921 (Muffin, semoule de maïs, commercial; jetons-en 0.70) | cnf.3923 (Muffin, semoule de maïs, type grille-pain; jetons-en 0.70)",37
+1121,mungbean-sprouts,Mungbean sprouts,cnf.2008,"Haricots, mungo, grains immatures, germés, germes de haricot, crus",manuel,1.0,non,,31
+1098,mushroom,Mushroom,builtin.mushrooms,Champignons,manuel,1.0,non,"cnf.2343 (Champignon, enoki, cru; jetons-en 0.70) | cnf.2399 (Champignon, blanc, cru; jetons-en 0.70) | cnf.4866 (Champignon, pleurote, cru; jetons-en 0.70)",158
+158,mushroom-average-stewed-without-addition-of-fat-without-addition-of-salt,"Mushroom, (average), stewed, without addition of fat, without addition of salt",builtin.mushrooms,Champignons,manuel,1.0,non,,21
+1102,mushrooms,Mushrooms,builtin.mushrooms,Champignons,manuel,1.0,non,"cnf.2343 (Champignon, enoki, cru; jetons-en 0.70) | cnf.2399 (Champignon, blanc, cru; jetons-en 0.70) | cnf.4866 (Champignon, pleurote, cru; jetons-en 0.70)",161
+2810,mustard,Mustard,builtin.mustard,Moutarde,manuel,1.0,non,"cnf.2126 (Moutarde, feuilles, crues; jetons-en 0.70) | cnf.2127 (Moutarde, feuilles, bouillies, égouttées; jetons-en 0.70) | cnf.2128 (Moutarde, feuilles, congelées, non préparées; jetons-en 0.70)",80
+2811,mustard-dijon,"Mustard, Dijon",builtin.mustard,Moutarde,manuel,1.0,non,"cnf.2126 (Moutarde, feuilles, crues; jetons-en 0.55) | cnf.2127 (Moutarde, feuilles, bouillies, égouttées; jetons-en 0.55) | cnf.2128 (Moutarde, feuilles, congelées, non préparées; jetons-en 0.55)",36
+3248,naan-indien-bread,Naan (indien bread),cnf.6606,"Indien, pain naan",manuel,1.0,non,,26
+1186,nectarine,Nectarine,cnf.1611,"Nectarine, crue",manuel,1.0,non,"cnf.1611 (Nectarine, crue; jetons-en 0.70)",114
+1211,nuts,Nuts,cnf.2577,"Noix, noix mélangées, rôties à sec avec arachides",manuel,1.0,non,"cnf.2531 (Noix, glands, crus; jetons-en 0.70) | cnf.2532 (Noix, glands, séchés; jetons-en 0.70) | cnf.2543 (Noix, faines, séchées; jetons-en 0.70)",29
+3046,oat-milk,Oat milk,cnf.7808,"Boisson à base de plantes, avoine et quinoa, non sucrée, enrichie, longue conservation",manuel,1.0,non,,14
+2031,oil,Oil,builtin.oliveoil,Huile d'olive,manuel,1.0,non,"cnf.456 (Huile végétale, avoine; jetons-en 0.70) | cnf.458 (Huile de poisson, hareng; jetons-en 0.70) | cnf.459 (Huile de poisson, menhaden; jetons-en 0.70)",9
+2747,oil-vinegar-salad-dressing,Oil & vinegar salad dressing,cnf.428,"Vinaigrette, huile et vinaigre, faite maison",manuel,1.0,non,"usda.4034 (Oil, soybean, salad or cooking, (partially hydro; jetons-en 0.55) | usda.4543 (Oil, soybean, salad or cooking, (partially hydro; jetons-en 0.55) | usda.4644 (Oil, industrial, canola for salads, woks and lig; jetons-en 0.55)",60
+2320,omelette-plain,"Omelette, plain",builtin.omelette,Omelette nature,manuel,1.0,non,,90
+1116,onion,Onion,builtin.onion,Oignon,manuel,1.0,non,"cnf.2145 (Oignon vert (ciboule), cru; jetons-en 0.70) | cnf.2401 (Oignon, cru; jetons-en 0.70) | cnf.2402 (Oignon, bouilli, égoutté; jetons-en 0.70)",265
+1187,orange,Orange,builtin.orange,Orange,manuel,1.0,non,"cnf.1617 (Orange, floride, crue; jetons-en 0.70) | cnf.1618 (Orange, avec pelure, crue; jetons-en 0.70) | cnf.1619 (Orange, jus, frais; jetons-en 0.70)",217
+2949,pancakes,Pancakes,builtin.pancake,Crêpe épaisse (pancake),manuel,1.0,non,"cnf.2324 (Pomme de terre, crêpe, faite maison; jetons-en 0.70) | cnf.3935 (Crêpe, nature, faite maison; jetons-en 0.70) | cnf.3936 (Crêpe, bleuets, faite maison; jetons-en 0.70)",100
+1367,panna-cotta,Panna cotta,,,manuel,0.0,non,,32
+5689,paprika-chips,Paprika chips,builtin.chips,Croustilles,manuel,1.0,non,,29
+1323,parmesan,Parmesan,builtin.parmesan,Parmesan,manuel,1.0,non,"usda.1185 (Parmesan cheese topping, fat free; jetons-en 0.70)",344
+2773,parsley,Parsley,cnf.2405,"Persil, frais",manuel,1.0,non,"cnf.2405 (Persil, frais; jetons-en 0.70)",44
+1483,pasta,Pasta,builtin.pasta,Pâtes cuites,manuel,1.0,non,"cnf.4452 (Pâtes, maïs, sèches; jetons-en 0.70) | cnf.4453 (Pâtes, maïs, cuites; jetons-en 0.70) | cnf.4459 (Pâtes, nouilles chinoises, chow mein; jetons-en 0.70)",229
+1487,pasta-hornli,"Pasta, Hörnli",builtin.pasta,Pâtes cuites,manuel,1.0,non,"cnf.4452 (Pâtes, maïs, sèches; jetons-en 0.55) | cnf.4453 (Pâtes, maïs, cuites; jetons-en 0.55) | cnf.4874 (Pâtes, nouilles de riz, cuites; jetons-en 0.55)",83
+1488,pasta-in-butterfly-form-farfalle,"Pasta in butterfly form, farfalle",builtin.pasta,Pâtes cuites,manuel,1.0,non,,45
+1492,pasta-in-conch-form,Pasta in conch form,builtin.pasta,Pâtes cuites,manuel,1.0,non,,41
+1490,pasta-linguini-parpadelle-tagliatelle,"Pasta, linguini, parpadelle, Tagliatelle",builtin.pasta,Pâtes cuites,manuel,1.0,non,,111
+1494,pasta-noodles,"Pasta, noodles",builtin.pasta,Pâtes cuites,manuel,1.0,non,"cnf.4459 (Pâtes, nouilles chinoises, chow mein; jetons-en 0.70) | cnf.4460 (Pâtes, nouilles japonaises, soba, sèches; jetons-en 0.70) | cnf.4512 (Pâtes, nouilles aux oeufs, enrichies, sèches; jetons-en 0.70)",93
+1496,pasta-penne,"Pasta, penne",builtin.pasta,Pâtes cuites,manuel,1.0,non,"cnf.4452 (Pâtes, maïs, sèches; jetons-en 0.55) | cnf.4453 (Pâtes, maïs, cuites; jetons-en 0.55) | cnf.4874 (Pâtes, nouilles de riz, cuites; jetons-en 0.55)",198
+1500,pasta-ravioli-stuffing,"Pasta, ravioli, stuffing",builtin.pasta,Pâtes cuites,manuel,1.0,non,,32
+1505,pasta-spaghetti,"Pasta, spaghetti",builtin.pasta,Pâtes cuites,manuel,1.0,non,"cnf.4464 (Pâtes (macaroni, spaghetti), enrichi, cuit; jetons-en 0.70) | cnf.4515 (Pâtes (spaghetti, macaroni), enrichi, sec; jetons-en 0.70) | cnf.4518 (Pâtes, spaghetti, épinards, enrichi, sec; jetons-en 0.70)",370
+1509,pasta-tortelloni-stuffing,"Pasta, tortelloni, stuffing",builtin.pasta,Pâtes cuites,manuel,1.0,non,,26
+1506,pasta-twist,"Pasta, twist",builtin.pasta,Pâtes cuites,manuel,1.0,non,"cnf.4452 (Pâtes, maïs, sèches; jetons-en 0.55) | cnf.4453 (Pâtes, maïs, cuites; jetons-en 0.55) | cnf.4874 (Pâtes, nouilles de riz, cuites; jetons-en 0.55)",148
+1513,pasta-wholemeal,"Pasta, wholemeal",builtin.wholepasta,Pâtes de blé entier cuites,manuel,1.0,non,"cnf.4516 (Pâtes, (spaghetti, macaroni), blé entier, sec; jetons-en 0.70) | cnf.4517 (Pâtes, (spaghetti macaroni), blé entier, cuit; jetons-en 0.70) | usda.20135 (Pasta, whole grain, 51% whole wheat, remaining u; jetons-en 0.70)",115
+1696,pastry-flaky,"Pastry, flaky",builtin.croissant,Croissant,manuel,1.0,non,"usda.18959 (Pastry, Pastelitos de Guava (guava pastries); jetons-en 0.55) | cnf.3887 (Pâtisserie, Danoise, cannelle; jetons-en 0.47) | cnf.3888 (Pâtisserie, Danoise, fromage; jetons-en 0.47)",20
+1190,peach,Peach,builtin.peach,Pêche,manuel,1.0,non,"cnf.1640 (Pêche, moitié, séchée, sulfurée, non cuite; jetons-en 0.70) | cnf.1643 (Pêche, congelée, tranchée, sucrée; jetons-en 0.70) | cnf.1644 (Pêche, nectar, conserve; jetons-en 0.70)",93
+1214,peanut,Peanut,builtin.peanuts,Arachides grillées,manuel,1.0,non,"cnf.3303 (Arachides, espagnoles, crues; jetons-en 0.70) | cnf.3305 (Arachides, Valencia, crues; jetons-en 0.70) | cnf.3307 (Arachides, Virginia, crues; jetons-en 0.70)",81
+1203,peanut-butter,Peanut butter,builtin.peanutbutter,Beurre d'arachide,manuel,1.0,non,"builtin.peanuts (Arachides grillées; synonyme-app 0.75) | cnf.3366 (Beurre d'arachides, croquant, gras et sucre ajou; jetons-en 0.70) | cnf.5428 (Beurre d'arachides, crémeux, teneur réduite en g; jetons-en 0.70)",101
+1157,pear,Pear,builtin.pear,Poire,manuel,1.0,non,"cnf.1652 (Poire, nectar, conserve; jetons-en 0.70) | cnf.1668 (Figue de Barbarie, crue; jetons-en 0.70) | cnf.1693 (Poire, asiatique, crue; jetons-en 0.70)",220
+1115,pearl-onions,Pearl onions,builtin.onion,Oignon,manuel,1.0,non,,46
+1107,peas,Peas,builtin.peas,Petits pois,manuel,1.0,non,"cnf.2162 (Pois, cajan, crus; jetons-en 0.70) | cnf.2163 (Pois, cajan, bouillis, égouttés; jetons-en 0.70) | cnf.2409 (Pois, petits (verts), crus; jetons-en 0.70)",100
+1219,pecan-nut,Pecan nut,cnf.2582,"Noix, pacanes, séchées",manuel,1.0,non,,28
+2968,perch-fillets-lake,Perch fillets (lake),builtin.cod,Morue cuite,manuel,1.0,non,,25
+1325,philadelphia,Philadelphia,builtin.creamcheese,Fromage à la crème,manuel,1.0,non,,18
+2990,pie-apricot-baked-with-cake-dough,"Pie, apricot, baked, with cake dough",builtin.applepie,Tarte aux pommes,manuel,1.0,non,,24
+3101,pie-plum-baked-with-cake-dough,"Pie, plum, baked, with cake dough",builtin.applepie,Tarte aux pommes,manuel,1.0,non,,33
+3085,pie-rhubarb-baked-with-cake-dough,"Pie, rhubarb, baked, with cake dough",builtin.applepie,Tarte aux pommes,manuel,1.0,non,,24
+1207,pine-nuts,Pine nuts,cnf.2586,"Noix, noix de pins, pignons (pignes), séchées",manuel,1.0,non,,38
+1150,pineapple,Pineapple,builtin.pineapple,Ananas,manuel,1.0,non,"cnf.1656 (Ananas, en morceaux, congelés, sucrés; jetons-en 0.70) | cnf.1734 (Ananas, cru; jetons-en 0.70) | cnf.5403 (Ananas, cru, variétés traditionnelles; jetons-en 0.70)",80
+1221,pistachio,Pistachio,builtin.pistachios,Pistaches,manuel,1.0,non,,81
+2939,pizza-margherita-baked,"Pizza, Margherita, baked",builtin.pizza,Pizza fromage,manuel,1.0,non,"usda.21473 (DIGIORNO Pizza, cheese topping, cheese stuffed c; jetons-en 0.55) | usda.21474 (DIGIORNO Pizza, cheese topping, rising crust, fr; jetons-en 0.55) | usda.21477 (DIGIORNO Pizza, pepperoni topping, rising crust,; jetons-en 0.55)",292
+630,pizza-with-ham-baked,"Pizza, with ham, baked",builtin.pizza,Pizza fromage,manuel,1.0,non,"usda.21473 (DIGIORNO Pizza, cheese topping, cheese stuffed c; jetons-en 0.55) | usda.21474 (DIGIORNO Pizza, cheese topping, rising crust, fr; jetons-en 0.55) | usda.21477 (DIGIORNO Pizza, pepperoni topping, rising crust,; jetons-en 0.55)",65
+629,pizza-with-ham-with-mushrooms-baked,"Pizza, with ham, with mushrooms, baked",builtin.pizza,Pizza fromage,manuel,1.0,non,"cnf.7999 (Pizza, fromage et champignons, croûte mince, con; jetons-en 0.55) | cnf.8000 (Pizza, fromage partiellement écrémé et champigno; jetons-en 0.54) | usda.21474 (DIGIORNO Pizza, cheese topping, rising crust, fr; jetons-en 0.45)",35
+633,pizza-with-vegetables-baked,"Pizza, with vegetables, baked",builtin.pizza,Pizza fromage,manuel,1.0,non,"cnf.5862 (Pizza avec fromage, viande et légumes, croûte ré; jetons-en 0.55) | cnf.5863 (Pizza avec viande et légumes, croûte lève-au-fou; jetons-en 0.55) | cnf.7980 (Pizza, fromage, poulet et légumes, croûte épaiss; jetons-en 0.55)",104
+1191,plums,Plums,builtin.plum,Prune,manuel,1.0,non,"cnf.1582 (Prune de java, crue; jetons-en 0.70) | cnf.1663 (Prune, pourpre, conserve, dans l'eau, solides et; jetons-en 0.70) | cnf.1664 (Prune, pourpre, conserve, dans du jus, solides e; jetons-en 0.70)",81
+1152,pomegranate,Pomegranate,cnf.1667,"Grenade, crue",manuel,1.0,non,,104
+2906,popcorn-salted,Popcorn salted,builtin.popcorn,Maïs soufflé nature,manuel,1.0,non,"usda.25026 (Popcorn, microwave, regular (butter) flavor, mad; jetons-en 0.53)",20
+1748,pork,Pork,builtin.pork,Filet de porc cuit,manuel,1.0,non,"cnf.1838 (Porc, pieds, crus; jetons-en 0.70) | cnf.1839 (Porc, coeur, cru; jetons-en 0.70) | cnf.1841 (Porc, bajoue, crue; jetons-en 0.70)",94
+1757,pork-chop,"Pork, chop",builtin.pork,Filet de porc cuit,manuel,1.0,non,"cnf.1793 (Porc, longe, côtelette bout côte, avec os, maigr; jetons-en 0.70) | cnf.1801 (Porc, longe, côtelette surlonge, avec os, maigre; jetons-en 0.70) | cnf.1802 (Porc, longe, côtelette surlonge, avec os, maigre; jetons-en 0.70)",29
+1760,pork-escalope,"Pork, escalope",builtin.pork,Filet de porc cuit,manuel,1.0,non,"cnf.1838 (Porc, pieds, crus; jetons-en 0.55) | cnf.1839 (Porc, coeur, cru; jetons-en 0.55) | cnf.1841 (Porc, bajoue, crue; jetons-en 0.55)",37
+1749,pork-roast,"Pork, roast",builtin.pork,Filet de porc cuit,manuel,1.0,non,"cnf.1812 (Porc, longe, rôti de surlonge, désossé, maigre, ; jetons-en 0.70) | cnf.1922 (Porc, longe, rôti de surlonge, désossé, maigre, ; jetons-en 0.70) | cnf.6159 (Porc, longe, rôti, bout côte, désossée, maigre e; jetons-en 0.70)",27
+3615,porridge-prepared-with-partially-skimmed-milk,"Porridge, prepared, with partially skimmed milk",builtin.oatmeal,Gruau cuit à l'eau,manuel,1.0,non,,47
+1009,potato-gnocchi,Potato-gnocchi,,,manuel,0.0,non,"cnf.2417 (Pomme de terre, chair, crue; jetons-en 0.55) | cnf.2418 (Pomme de terre, pelure, crue; jetons-en 0.55) | cnf.2419 (Pomme de terre, chair, cuite au four; jetons-en 0.55)",76
+780,potato-salad-with-mayonnaise-yogurt-dressing,"Potato salad, with mayonnaise yogurt dressing",cnf.2187,"Pomme de terre, salade, faite maison",manuel,1.0,non,,29
+3115,potatoes-au-gratin-dauphinois-prepared,"Potatoes au gratin, dauphinois, prepared",cnf.2171,"Pomme de terre, au gratin, faite maison, avec beurre",manuel,1.0,non,"cnf.2171 (Pomme de terre, au gratin, faite maison, avec be; jetons-en 0.55) | cnf.2177 (Pomme de terre, au gratin, mélange sec, non prép; jetons-en 0.55) | cnf.2182 (Pomme de terre, O'brien, congelée, préparée; jetons-en 0.55)",65
+1010,potatoes-steamed,Potatoes steamed,builtin.potato,Pomme de terre cuite,manuel,1.0,non,"cnf.2239 (Patate douce, feuilles, cuites à la vapeur; jetons-en 0.70) | cnf.6566 (Patate douce, feuilles, cuites à la vapeur, sel ; jetons-en 0.70) | cnf.2417 (Pomme de terre, chair, crue; jetons-en 0.55)",606
+2073,praline,Praline,builtin.milkchocolate,Chocolat au lait,manuel,1.0,non,,107
+1337,processed-cheese,Processed cheese,cnf.7007,"Produit de fromage fondu, suisse, tranches",manuel,1.0,non,,26
+1857,processed-meat-charcuterie,"Processed meat, Charcuterie",builtin.ham,Jambon,manuel,1.0,non,,35
+2607,prosecco,Prosecco,cnf.2852,"Boisson alcoolisée, vin de table, blanc (11,5% alcool par volume)",manuel,1.0,non,,17
+1065,pumpkin,Pumpkin,cnf.2442,"Citrouille, bouillie, égouttée",manuel,1.0,non,"cnf.2190 (Citrouille, feuilles, crues; jetons-en 0.70) | cnf.2192 (Citrouille, conserve; jetons-en 0.70) | cnf.2193 (Citrouille, mélange à tarte, conserve; jetons-en 0.70)",81
+1206,pumpkin-seeds,Pumpkin seeds,cnf.2517,"Graines, citrouille et courge, graines, rôties",manuel,1.0,non,"cnf.2188 (Citrouille, fleurs, crues; jetons-en 0.55) | cnf.2190 (Citrouille, feuilles, crues; jetons-en 0.55) | cnf.2192 (Citrouille, conserve; jetons-en 0.55) | cnf.2193 (Citrouille, mélange à tarte, conserve; jetons-en 0.55)",57
+732,quiche-with-cheese-baked-with-puff-pastry,"Quiche, with cheese, baked, with puff pastry",,,manuel,0.0,non,,53
+733,quiche-with-spinach-baked-with-cake-dough,"Quiche, with spinach, baked, with cake dough",,,manuel,0.0,non,,39
+1467,quinoa,Quinoa,builtin.quinoa,Quinoa cuit,manuel,1.0,non,"cnf.7430 (Quinoa, galette de hambourgeois, congelée; jetons-en 0.70)",177
+1170,raspberries,Raspberries,builtin.raspberries,Framboises,manuel,1.0,non,"cnf.1677 (Framboise, congelée, sucrée; jetons-en 0.70) | cnf.1747 (Framboise, crue; jetons-en 0.70) | cnf.6530 (Framboise sauvage, crue; jetons-en 0.70)",175
+1024,ratatouille,Ratatouille,,,manuel,0.0,non,,136
+1092,red-cabbage,Red cabbage,cnf.2034,"Chou rouge, cru",manuel,1.0,non,"cnf.2395 (Chou vert frisé, cru; synonyme-app 0.80) | usda.35133 (Chilchen (Red Berry Beverage) (Navajo); jetons-en 0.44) | cnf.2072 (Maïs avec poivrons rouges ou verts, conserve, so; jetons-en 0.43)",117
+1074,red-radish,Red radish,cnf.2443,"Radis, cru",manuel,1.0,non,"usda.35133 (Chilchen (Red Berry Beverage) (Navajo); jetons-en 0.44) | cnf.2072 (Maïs avec poivrons rouges ou verts, conserve, so; jetons-en 0.43) | usda.9528 (Ruby Red grapefruit juice blend (grapefruit, gra; jetons-en 0.42)",227
+1468,rice,Rice,builtin.rice,Riz blanc cuit,manuel,1.0,non,"cnf.7441 (Riz espagnol, mélange, non préparé; jetons-en 0.70) | cnf.7442 (Riz espagnol, mélange, préparé; jetons-en 0.70) | cnf.7448 (Riz espagnol; jetons-en 0.70)",947
+1469,rice-basmati,"Rice, Basmati",builtin.rice,Riz blanc cuit,manuel,1.0,non,"cnf.7441 (Riz espagnol, mélange, non préparé; jetons-en 0.55) | cnf.7442 (Riz espagnol, mélange, préparé; jetons-en 0.55) | cnf.7448 (Riz espagnol; jetons-en 0.55)",101
+1471,rice-jasmin,"Rice, Jasmin",builtin.rice,Riz blanc cuit,manuel,1.0,non,"cnf.7441 (Riz espagnol, mélange, non préparé; jetons-en 0.55) | cnf.7442 (Riz espagnol, mélange, préparé; jetons-en 0.55) | cnf.7448 (Riz espagnol; jetons-en 0.55)",24
+1453,rice-noodles-vermicelli,Rice noodles/vermicelli,builtin.ricenoodles,Nouilles de riz cuites,manuel,1.0,non,,73
+1615,rice-waffels,Rice waffels,builtin.ricecake,Galette de riz,manuel,1.0,non,"cnf.7441 (Riz espagnol, mélange, non préparé; jetons-en 0.55) | cnf.7442 (Riz espagnol, mélange, préparé; jetons-en 0.55) | cnf.7448 (Riz espagnol; jetons-en 0.55)",26
+1478,rice-whole-grain,"Rice, whole-grain",builtin.brownrice,Riz brun cuit,manuel,1.0,non,"usda.20044 (Rice, white, long-grain, regular, raw, enriched; jetons-en 0.55) | usda.20050 (Rice, white, medium-grain, raw, enriched; jetons-en 0.55) | usda.20051 (Rice, white, medium-grain, enriched, cooked; jetons-en 0.55)",72
+1479,rice-wild,"Rice, wild",cnf.4450,"Grains céréaliers, riz sauvage, cuit",manuel,1.0,non,"builtin.rice (Riz blanc cuit; synonyme-app 0.90) | cnf.7701 (Riz, blanc et sausage, arômatisé, non préparé; jetons-en 0.70) | cnf.7441 (Riz espagnol, mélange, non préparé; jetons-en 0.55)",46
+752,risotto-with-mushrooms-cooked,"Risotto, with mushrooms, cooked",builtin.rice,Riz blanc cuit,manuel,1.0,non,,29
+2970,risotto-without-cheese-cooked,"Risotto, without cheese, cooked",builtin.rice,Riz blanc cuit,manuel,1.0,non,,157
+2524,ristretto-with-caffeine,"Ristretto, with caffeine",builtin.coffee,Café noir,manuel,1.0,non,,138
+1569,roll-of-half-white-or-white-flour-with-large-void,"Roll of half-white or white flour, with large void",builtin.bread,Pain blanc,manuel,1.0,non,"usda.28340 (Rolls, gluten-free, white, made with brown rice ; jetons-en 0.55) | usda.28341 (Rolls, gluten-free, white, made with rice flour,; jetons-en 0.55) | usda.28342 (Rolls, gluten-free, white, made with brown rice ; jetons-en 0.55)",99
+1580,roll-with-pieces-of-chocolate,Roll with pieces of chocolate,,,manuel,0.0,non,,68
+1090,romanesco,Romanesco,builtin.cauliflower,Chou-fleur,manuel,1.0,non,,36
+1014,rosti,Rosti,,,manuel,0.0,non,,76
+1620,rusk-wholemeal,"Rusk, wholemeal",cnf.3868,"Craquelin, biscotte",manuel,1.0,non,,44
+2741,salad-dressing,Salad dressing,cnf.428,"Vinaigrette, huile et vinaigre, faite maison",manuel,1.0,non,"cnf.524 (Vinaigrette, Russe, régulière; jetons-en 0.70) | cnf.5306 (Vinaigrette, Française, sans gras; jetons-en 0.70) | cnf.533 (Vinaigrette, Française, régulière; jetons-en 0.70)",134
+1050,salad-lambs-ear,"Salad, lambs' ear",builtin.lettuce,Laitue,manuel,1.0,non,,149
+1040,salad-leaf-salad-green,"Salad, leaf / salad, green",builtin.lettuce,Laitue,manuel,1.0,non,"cnf.5517 (Vinaigrette, green goddess, régulière; jetons-en 0.55)",1821
+1038,salad-rocket,"Salad, rocket",builtin.lettuce,Laitue,manuel,1.0,non,"cnf.533 (Vinaigrette, Française, régulière; jetons-en 0.55) | cnf.5516 (Vinaigrette, salade de chou; jetons-en 0.55) | cnf.6535 (Vinaigrette, aigre-douce; jetons-en 0.55)",180
+1879,salami,Salami,cnf.7161,"Charcuterie, salami (Genoa), salé à sec",manuel,1.0,non,"usda.7072 (Salami, dry or hard, pork, beef; jetons-en 0.70) | usda.7913 (Salami, pork, beef, less sodium; jetons-en 0.70)",255
+1967,salmon,Salmon,builtin.salmon,Saumon cuit,manuel,1.0,non,"usda.15251 (Salmon nuggets, breaded, frozen, heated; jetons-en 0.70) | usda.15252 (Salmon nuggets, cooked as purchased, unheated; jetons-en 0.70)",248
+2973,salmon-smoked,"Salmon, smoked",cnf.3050,"Poisson, saumon, quinnat, fumé",manuel,1.0,non,"usda.15251 (Salmon nuggets, breaded, frozen, heated; jetons-en 0.54) | usda.15252 (Salmon nuggets, cooked as purchased, unheated; jetons-en 0.53)",214
+2923,salt-cake-vegetables-filled,"Salt cake (vegetables, filled)",,,manuel,0.0,non,,87
+2941,sandwich-ham-cheese-and-butter,"Sandwich (ham, cheese and butter)",builtin.sandwich,Sandwich jambon-fromage,manuel,1.0,non,"cnf.6748 (Sandwich au jambon, fait maison; jetons-en 0.55) | cnf.6754 (Sandwich roulé au poulet, légumes et fromage, vi; jetons-en 0.55) | usda.22537 (HOT POCKETS Ham 'N Cheese Stuffed Sandwich, froz; jetons-en 0.55)",29
+2716,sauce-carbonara,"Sauce, carbonara",,,manuel,0.0,non,"cnf.1028 (Sauce, blanche, consistance épaisse, faite maiso; jetons-en 0.55) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55) | cnf.7715 (Sauce, rosée; jetons-en 0.55)",36
+2718,sauce-cocktail,"Sauce, cocktail",cnf.7084,"Sauce, cocktail, prête-à-servir",manuel,1.0,non,"cnf.1028 (Sauce, blanche, consistance épaisse, faite maiso; jetons-en 0.55) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55)",36
+2730,sauce-cream,"Sauce, cream",cnf.1027,"Sauce, blanche, consistance moyenne, lait 2% M.G., faite maison",manuel,1.0,non,"cnf.7365 (Soupe (sauce), bouillon, crème, prête-à-servir; jetons-en 0.70) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55)",184
+2719,sauce-curry,"Sauce, curry",,,manuel,0.0,non,"cnf.1028 (Sauce, blanche, consistance épaisse, faite maiso; jetons-en 0.55) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55) | cnf.7715 (Sauce, rosée; jetons-en 0.55)",45
+2729,sauce-mushroom,"Sauce, mushroom",cnf.1005,"Sauce, champignons, conserve",manuel,1.0,non,"cnf.1028 (Sauce, blanche, consistance épaisse, faite maiso; jetons-en 0.55) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55)",50
+2728,sauce-pesto,"Sauce, pesto",cnf.7591,"Sauce, pesto, prête-à-servir, réfrigérée",manuel,1.0,non,"cnf.7592 (Sauce, pesto, prête-à-servir, longue conservatio; jetons-en 0.70) | usda.6628 (Sauce, pesto, BUITONI, pesto with basil, ready-t; jetons-en 0.70) | usda.6629 (Sauce, pesto, CLASSICO, basil pesto, ready-to-se; jetons-en 0.70)",118
+2714,sauce-roast,"Sauce, roast",cnf.1001,"Sauce, boeuf, conserve",manuel,1.0,non,"cnf.1028 (Sauce, blanche, consistance épaisse, faite maiso; jetons-en 0.55) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55) | cnf.7715 (Sauce, rosée; jetons-en 0.55)",105
+2711,sauce-savoury,Sauce (savoury),cnf.1001,"Sauce, boeuf, conserve",manuel,1.0,non,"cnf.1028 (Sauce, blanche, consistance épaisse, faite maiso; jetons-en 0.55) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55) | cnf.7715 (Sauce, rosée; jetons-en 0.55)",138
+2807,sauce-soya,"Sauce, soya",builtin.soysauce,Sauce soya,manuel,1.0,non,"cnf.1028 (Sauce, blanche, consistance épaisse, faite maiso; jetons-en 0.55) | cnf.4905 (Sauce, Alfredo, déshydratée; jetons-en 0.55) | cnf.5371 (Sauce, adobo fresco; jetons-en 0.55)",60
+3416,sauce-sweet-salted-asian,"Sauce, sweet-salted (asian)",,,manuel,0.0,non,"cnf.6199 (Sauce, aigre-douce, faite maison; jetons-en 0.55) | cnf.7020 (Sauce, aigre-douce, prête-à-servir; jetons-en 0.55) | usda.27055 (Sauce, barbecue, SWEET BABY RAY'S, original; jetons-en 0.55)",32
+2731,sauce-sweet-sour,"Sauce, sweet & sour",cnf.6199,"Sauce, aigre-douce, faite maison",manuel,1.0,non,"cnf.7020 (Sauce, aigre-douce, prête-à-servir; jetons-en 0.70) | usda.27055 (Sauce, barbecue, SWEET BABY RAY'S, original; jetons-en 0.55)",36
+1093,sauerkraut,Sauerkraut,cnf.2201,"Choucroute, conserve, solides et liquide",manuel,1.0,non,,37
+1924,sausage,Sausage,builtin.sausage,Saucisse de porc cuite,manuel,1.0,non,"cnf.1217 (Saucisse, jambon, pré-cuite; jetons-en 0.70) | cnf.7317 (Saucisse, chorizo, crue; jetons-en 0.70) | cnf.7318 (Saucisse, chorizo, cuite; jetons-en 0.70)",112
+2895,savoury-puff-pastry,Savoury puff pastry,cnf.3856,"Pâte feuilletée, congelée, prête-à-cuire, cuite",manuel,1.0,non,,53
+2896,savoury-puff-pastry-stick,Savoury puff pastry stick,cnf.3856,"Pâte feuilletée, congelée, prête-à-cuire, cuite",manuel,1.0,non,,24
+198,savoy-cabbage-steamed-without-addition-of-salt,"Savoy cabbage, steamed, without addition of salt",builtin.cabbage,Chou,manuel,1.0,non,,29
+1205,seeds,Seeds,builtin.sunflowerseeds,Graines de tournesol,manuel,1.0,non,"cnf.2511 (Graines de chia, déshydratées; jetons-en 0.70) | cnf.2515 (Graines, lotus, graines, déshydratées; jetons-en 0.70) | cnf.2615 (Graines, lotus, graines, crues; jetons-en 0.70)",40
+2610,sekt,Sekt,cnf.2852,"Boisson alcoolisée, vin de table, blanc (11,5% alcool par volume)",manuel,1.0,non,,18
+1308,semi-hard-cheese,Semi-hard cheese,builtin.swiss,Fromage suisse,manuel,1.0,non,,155
+1223,sesame-seeds,Sesame seeds,cnf.2522,"Graines, sésame, graines, grillées, décortiquées",manuel,1.0,non,,72
+1125,shoots,Shoots,cnf.2008,"Haricots, mungo, grains immatures, germés, germes de haricot, crus",manuel,1.0,non,"cnf.2000 (Bambou, pousses, bouillies, égouttées; jetons-en 0.70) | cnf.2165 (Phytolaque d'Amérique, pousses, crues; jetons-en 0.70) | cnf.2251 (Taro, pousses, crues; jetons-en 0.70)",36
+259,shrimp-boiled,"Shrimp, boiled",builtin.shrimp,Crevettes cuites,manuel,1.0,non,,34
+1986,shrimp-prawn-large,Shrimp / prawn (large),builtin.shrimp,Crevettes cuites,manuel,1.0,non,,66
+1985,shrimp-prawn-small,Shrimp / prawn (small),builtin.shrimp,Crevettes cuites,manuel,1.0,non,,59
+1908,smoked-cooked-sausage-of-pork-and-beef-meat-sausag,Smoked cooked sausage of pork and beef meat sausag,builtin.hotdogsausage,Saucisse fumée (hot-dog),manuel,1.0,non,,21
+2461,smoothie,Smoothie,builtin.smoothie,Smoothie aux fruits,manuel,1.0,non,"cnf.7580 (Frappé (smoothie) au jus de fruits, fraises et b; jetons-en 0.70) | usda.9507 (Fruit juice smoothie, NAKED JUICE, MIGHTY MANGO; jetons-en 0.70) | usda.9508 (Fruit juice smoothie, NAKED JUICE, GREEN MACHINE; jetons-en 0.70)",41
+1352,soft-cheese,Soft cheese,cnf.20,Fromage brie,manuel,1.0,non,usda.16279 (HOUSE FOODS Premium Soft Tofu; jetons-en 0.44),253
+1411,sorbet,Sorbet,cnf.4165,"Dessert, congelé, sorbet, orange",manuel,1.0,non,,34
+2837,soup-cream-of-vegetables,"Soup, cream of vegetables",builtin.soup,Soupe aux légumes,manuel,1.0,non,"cnf.1097 (Soupe, crème, légumes, déshydratée, eau ajoutée; jetons-en 0.70) | cnf.6734 (Soupe, crème, aux légumes, préparé avec lait 2% ; jetons-en 0.70) | cnf.988 (Soupe, crème, légumes, déshydratée; jetons-en 0.70)",19
+2846,soup-miso,"Soup, Miso",builtin.soup,Soupe aux légumes,manuel,1.0,non,"cnf.1120 (Soupe, oignon, déshydratée; jetons-en 0.55) | cnf.5356 (Soupe, bouillon, poisson; jetons-en 0.55) | cnf.6730 (Soupe, lentilles, faite maison; jetons-en 0.55)",17
+3358,soup-of-lentils-dahl-dhal,"Soup of lentils, Dahl (Dhal)",cnf.6730,"Soupe, lentilles, faite maison",manuel,1.0,non,"cnf.6730 (Soupe, lentilles, faite maison; jetons-en 0.55) | cnf.7403 (Soupe, lentilles, prête-à-manger; jetons-en 0.55) | cnf.945 (Soupe, lentilles avec bacon, prête-à-servir; jetons-en 0.55)",77
+2840,soup-potato,"Soup, potato",builtin.soup,Soupe aux légumes,manuel,1.0,non,"cnf.1067 (Soupe, crème, pommes de terre, conserve, condens; jetons-en 0.70) | cnf.5263 (Soupe, crème, pommes de terre, conserve, condens; jetons-en 0.70) | cnf.5362 (Soupe, pommes de terre, instantanée, déshydratée; jetons-en 0.70)",20
+2841,soup-pumpkin,"Soup, pumpkin",builtin.soup,Soupe aux légumes,manuel,1.0,non,"cnf.1120 (Soupe, oignon, déshydratée; jetons-en 0.55) | cnf.5356 (Soupe, bouillon, poisson; jetons-en 0.55) | cnf.6730 (Soupe, lentilles, faite maison; jetons-en 0.55)",114
+2852,soup-tomato,"Soup, tomato",builtin.soup,Soupe aux légumes,manuel,1.0,non,"cnf.1121 (Soupe, tomates, conserve, condensée; jetons-en 0.70) | cnf.7407 (Soupe, tomates et nouilles, prête-à-servir; jetons-en 0.70) | cnf.7413 (Soupe, tomates, prête-à-servir; jetons-en 0.70)",22
+2836,soup-vegetable,"Soup, vegetable",builtin.soup,Soupe aux légumes,manuel,1.0,non,"cnf.6732 (Soupe, légumes, faite maison; jetons-en 0.70) | cnf.976 (Soupe, poulet et légumes, déshydratée; jetons-en 0.70) | cnf.986 (Soupe, tomates et légumes, déshydratée; jetons-en 0.70)",129
+1383,sour-cream,Sour cream,builtin.sourcream,Crème sure,manuel,1.0,non,"usda.1058 (Sour dressing, non-butterfat, cultured, filled c; jetons-en 0.70) | usda.1074 (Sour cream, imitation, cultured; jetons-en 0.70) | usda.1193 (KRAFT BREAKSTONE'S Reduced Fat Sour Cream; jetons-en 0.70)",86
+1256,soya-drink-soy-milk,Soya drink (soy milk),builtin.soymilk,Boisson de soya,manuel,1.0,non,,21
+1257,soya-yaourt-yahourt-yogourt-ou-yoghourt,"Soya Yaourt, yahourt, yogourt ou yoghourt",cnf.6987,"Yogourt, soya, nature",manuel,1.0,non,,16
+1482,spaetzle,Spaetzle,cnf.4458,"Pâtes, nouilles aux oeufs, enrichies, cuites",manuel,1.0,non,,92
+282,spinach-raw,"Spinach, raw",cnf.2213,"Épinard, cru",manuel,1.0,non,"builtin.spinach (Épinards; synonyme-app 0.90) | cnf.2130 (Moutarde joncée, crue; jetons-en 0.70) | cnf.2132 (Épinards de la Nouvelle-Zélande, crus; jetons-en 0.70)",44
+281,spinach-steamed-without-addition-of-salt,"Spinach, steamed, without addition of salt",cnf.2214,"Épinard, bouilli, égoutté",manuel,1.0,non,"cnf.6544 (Épinard, bouillis, égoutté, sel ajouté; jetons-en 0.55) | cnf.6545 (Épinard, congelé, bouilli, égoutté, sel ajouté; jetons-en 0.55) | cnf.6463 (Moutarde joncée, bouillie, égouttée, sel ajouté; jetons-en 0.47)",42
+1111,spring-onion-scallion,Spring onion / scallion,cnf.2144,"Oignon, vert (inclus le bout et le bulbe), cru",manuel,1.0,non,,56
+2918,spring-roll-fried,Spring roll (fried),,,manuel,0.0,non,,43
+1163,strawberries,Strawberries,builtin.strawberries,Fraises,manuel,1.0,non,"cnf.1686 (Fraise, congelée, sucrée, entière; jetons-en 0.70) | cnf.1687 (Fraise, congelée, sucrée, tranchée; jetons-en 0.70) | cnf.1749 (Fraise, crue; jetons-en 0.70)",385
+2113,sugar-glazing,"Sugar, glazing",,,manuel,0.0,non,"cnf.1688 (Pomme cannelle, crue; jetons-en 0.55)",20
+1184,sugar-melon,Sugar Melon,builtin.cantaloupe,Cantaloup,manuel,1.0,non,"cnf.1688 (Pomme cannelle, crue; jetons-en 0.55)",161
+3293,sun-dried-tomatoe,Sun-dried tomatoe,cnf.2349,"Tomate, séchée au soleil, empaquetée dans l'huile, égouttée",manuel,1.0,non,,66
+1208,sunflower-seeds,Sunflower seeds,builtin.sunflowerseeds,Graines de tournesol,manuel,1.0,non,,49
+2944,sushi,Sushi,builtin.sushi,Sushis (maki),manuel,1.0,non,"cnf.6763 (Sushi avec légumes, sans poisson; jetons-en 0.70) | cnf.6764 (Sushi avec poisson et légumes; jetons-en 0.70)",101
+483,sweet-corn-canned,"Sweet corn, canned",builtin.corn,Maïs,manuel,1.0,non,"cnf.2243 (Patate douce, conserve, sous vide; jetons-en 0.55) | cnf.2244 (Patate douce, conserve, purée; jetons-en 0.55) | cnf.4303 (Confiseries, garniture à tarte, conserve, pomme; jetons-en 0.55)",104
+1004,sweet-potato,Sweet potato,builtin.sweetpotato,Patate douce cuite,manuel,1.0,non,"cnf.2238 (Patate douce, feuilles, crues; jetons-en 0.70) | cnf.2239 (Patate douce, feuilles, cuites à la vapeur; jetons-en 0.70) | cnf.2240 (Patate douce, crue; jetons-en 0.70)",200
+2203,sweets-candies,Sweets / candies,builtin.candy,Jujubes,manuel,1.0,non,"cnf.2240 (Patate douce, crue; jetons-en 0.55) | cnf.4059 (Brioche, fromage; jetons-en 0.55) | cnf.4325 (Confiseries, sirop de malt; jetons-en 0.55) | cnf.6178 (Confiseries, tire d'érable; jetons-en 0.55)",32
+1120,swiss-chard,Swiss chard,cnf.2053,"Bette à carde, bouillie, égouttée",manuel,1.0,non,,63
+2495,syrup-diluted-ready-to-drink,"Syrup (diluted, ready to drink)",cnf.7070,Boisson au jus de fruits,manuel,1.0,non,,77
+2967,taboule-prepared-with-couscous,"Taboulé, prepared, with couscous",,,manuel,0.0,non,,77
+2350,tart,Tart,builtin.applepie,Tarte aux pommes,manuel,1.0,non,"cnf.5430 (Tartelette de petit déjeuner, faible en gras; jetons-en 0.70) | cnf.6621 (Tartelette au beurre, avec raisins secs, faite m; jetons-en 0.70)",112
+4335,tartar-meat,Tartar (meat),,,manuel,0.0,non,,29
+2751,tartar-sauce,Tartar sauce,cnf.1131,"Sauce, tartare, prête-à-servir",manuel,1.0,non,,34
+2498,tea,Tea,builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.2909 (Thé infusé; jetons-en 0.70) | cnf.2916 (Tisane infusée; jetons-en 0.70) | cnf.7057 (Tisane, hibiscus; jetons-en 0.70)",544
+2534,tea-black,"Tea, black",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.7611 (Thé, noir, prêt-à-boire, citron, sucré; jetons-en 0.70) | cnf.7613 (Thé, noir, prêt-à-boire, citron, avec édulcorant; jetons-en 0.70) | cnf.7616 (Thé, noir, prêt à boire, glacé, non sucré; jetons-en 0.70)",211
+2546,tea-fruit,"Tea, fruit",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.2909 (Thé infusé; jetons-en 0.55) | cnf.2916 (Tisane infusée; jetons-en 0.55) | cnf.7057 (Tisane, hibiscus; jetons-en 0.55)",16
+2553,tea-ginger,"Tea, ginger",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.2909 (Thé infusé; jetons-en 0.55) | cnf.2916 (Tisane infusée; jetons-en 0.55) | cnf.7057 (Tisane, hibiscus; jetons-en 0.55)",12
+2530,tea-green,"Tea, green",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.7610 (Thé, vert, prêt-à-boire, avec édulcorant artific; jetons-en 0.70) | cnf.7612 (Thé, vert, prêt-à-boire, sucré; jetons-en 0.70) | cnf.7620 (Thé, vert, infusé, décaféiné; jetons-en 0.70)",266
+2562,tea-peppermint,"Tea, peppermint",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.2909 (Thé infusé; jetons-en 0.55) | cnf.2916 (Tisane infusée; jetons-en 0.55) | cnf.7057 (Tisane, hibiscus; jetons-en 0.55)",59
+2563,tea-rooibos,"Tea, rooibos",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.2909 (Thé infusé; jetons-en 0.55) | cnf.2916 (Tisane infusée; jetons-en 0.55) | cnf.7057 (Tisane, hibiscus; jetons-en 0.55)",14
+2548,tea-spice,"Tea, spice",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.2909 (Thé infusé; jetons-en 0.55) | cnf.2916 (Tisane infusée; jetons-en 0.55) | cnf.7057 (Tisane, hibiscus; jetons-en 0.55)",15
+2543,tea-verveine,"Tea, verveine",builtin.tea,Thé sans sucre,manuel,1.0,non,"cnf.2909 (Thé infusé; jetons-en 0.55) | cnf.2916 (Tisane infusée; jetons-en 0.55) | cnf.7057 (Tisane, hibiscus; jetons-en 0.55)",46
+1346,tete-de-moine,Tête de Moine,builtin.swiss,Fromage suisse,manuel,1.0,non,,25
+1384,thickened-cream-35,Thickened cream (> 35%),builtin.cream35,Crème 35 %,manuel,1.0,non,,78
+1371,tiramisu,Tiramisu,,,manuel,0.0,non,,66
+1948,tofu,Tofu,builtin.tofu,Tofu ferme,manuel,1.0,non,"cnf.3331 (Tofu, koyadofu, séché et surgelé; jetons-en 0.70) | cnf.4913 (Tofu, soyeux, léger, ferme; jetons-en 0.70) | cnf.6577 (Tofu, frit; jetons-en 0.70)",218
+1069,tomato-raw,"Tomato, raw ",builtin.tomato,Tomate,manuel,1.0,non,"cnf.2255 (Tomate, verte, crue; jetons-en 0.70) | cnf.2460 (Tomate, rouge, mûre, crue, moyenne durant toute ; jetons-en 0.70) | cnf.4849 (Tomate, jaune, crue; jetons-en 0.70)",1707
+2738,tomato-sauce,Tomato sauce,builtin.tomatosauce,Sauce tomate,manuel,1.0,non,"builtin.tomato (Tomate; synonyme-app 0.75) | cnf.2261 (Produits à base de tomates, conserve, sauce, ave; jetons-en 0.70) | cnf.2309 (Produits à base de tomates, conserve, sauce, sty; jetons-en 0.70)",423
+929,tomato-stewed-without-addition-of-fat-without-addition-of-salt,"Tomato, stewed, without addition of fat, without addition of salt",builtin.tomato,Tomate,manuel,1.0,non,,22
+1348,tomme,Tomme,cnf.20,Fromage brie,manuel,1.0,non,,69
+1980,tuna,Tuna,builtin.tuna,Thon en conserve (eau),manuel,1.0,non,"cnf.3086 (Thon, salade; jetons-en 0.70)",113
+922,tuna-in-oil-drained,"Tuna, in oil, drained",cnf.3083,"Poisson, thon, chair blanche, conserve à l'huile, égoutté, sel ajouté",manuel,1.0,non,,30
+3399,turnover-with-meat-small-meat-pie-empanadas,"Turnover with meat (small meat pie, empanadas)",,,manuel,0.0,non,,21
+2752,tzatziki,Tzatziki,,,manuel,0.0,non,,36
+236,vanille-cream-cooked-custard-creme-dessert,"Vanille cream, cooked, Custard, Crème dessert",,,manuel,0.0,non,,30
+1856,veal-sausage,Veal sausage,builtin.sausage,Saucisse de porc cuite,manuel,1.0,non,"cnf.3561 (Veau, haché, cru; jetons-en 0.55) | cnf.3603 (Veau, cervelle, cru; jetons-en 0.55) | cnf.3608 (Veau, coeur, cru; jetons-en 0.55) | cnf.3617 (Veau, foie, cru; jetons-en 0.55)",58
+3532,vegetable-au-gratin-baked,"Vegetable au gratin, baked",,,manuel,0.0,non,,53
+1019,vegetable-mix-peas-and-carrots,"Vegetable mix, peas and carrots",cnf.2156,"Pois et carottes, congelés, bouillis, égouttés",manuel,1.0,non,"cnf.6612 (Légumes, mélange asiatique, congelés, bouillis, ; jetons-en 0.55)",67
+1021,vegetables,Vegetables,cnf.2272,"Légumes, macédoine, congelée, bouillie, égouttée",manuel,1.0,non,"cnf.422 (Huile végétale, olive; jetons-en 0.70) | cnf.423 (Huile végétale, palme; jetons-en 0.70) | cnf.437 (Huile végétale, maïs; jetons-en 0.70)",75
+1942,veggie-burger,Veggie burger,,,manuel,0.0,non,,51
+2355,waffle,Waffle,builtin.waffle,Gaufre,manuel,1.0,non,"cnf.3998 (Gaufre, nature, congelée, prête-à-cuire; jetons-en 0.70) | cnf.4000 (Gaufre, nature, faite maison; jetons-en 0.70) | cnf.4990 (Gaufre, blé entier, faible en gras; jetons-en 0.70)",26
+1212,walnut,Walnut,builtin.walnuts,Noix de Grenoble,manuel,1.0,non,,146
+2578,water,Water,cnf.2933,Eau municipale,manuel,1.0,non,"cnf.2918 (Eau minérale, gazéifiée, bouteille; jetons-en 0.70) | cnf.2919 (Eau de source, POLAND SPRINGS, bouteille; jetons-en 0.70) | cnf.2933 (Eau municipale; jetons-en 0.70)",4864
+2580,water-mineral,"Water, mineral",cnf.2933,Eau municipale,manuel,1.0,non,"cnf.2919 (Eau de source, POLAND SPRINGS, bouteille; jetons-en 0.70) | cnf.2933 (Eau municipale; jetons-en 0.55) | usda.14555 (Water, bottled, generic; jetons-en 0.55)",355
+3262,water-with-lemon-juice,Water with lemon juice,cnf.2933,Eau municipale,manuel,1.0,non,"cnf.7187 (Eau vitaminée, saveur de citron/orange, sucrée; jetons-en 0.55) | cnf.7188 (Eau vitaminée, saveur de citron/orange, hypocalo; jetons-en 0.55) | cnf.7237 (Eau vitaminée, saveurs autres que citron/orange,; jetons-en 0.55) | cnf.7238 (Eau vitaminée, saveurs autres que citron/orange,; jetons-en 0.55)",146
+578,watermelon-fresh,"Watermelon, fresh",builtin.watermelon,Melon d'eau,manuel,1.0,non,"cnf.1691 (Melon d'eau (pasteque), cru; jetons-en 0.55)",86
+1124,white-asparagus,White asparagus,builtin.asparagus,Asperges,manuel,1.0,non,"usda.18615 (Martha White Foods, Martha White's Buttermilk Bi; jetons-en 0.43) | usda.18614 (Martha White Foods, Martha White's Chewy Fudge B; jetons-en 0.42)",72
+1584,white-bread-with-butter-eggs-and-milk,"White bread with butter, eggs and milk",cnf.3695,"Pain, oeufs (challa)",manuel,1.0,non,,37
+1094,white-cabbage,White cabbage,builtin.cabbage,Chou,manuel,1.0,non,"usda.18615 (Martha White Foods, Martha White's Buttermilk Bi; jetons-en 0.43) | usda.18614 (Martha White Foods, Martha White's Chewy Fudge B; jetons-en 0.42)",70
+2133,white-chocolate,White chocolate,cnf.4155,"Confiserie, garniture / grains, chocolat blanc",manuel,1.0,non,"usda.18615 (Martha White Foods, Martha White's Buttermilk Bi; jetons-en 0.43) | usda.18614 (Martha White Foods, Martha White's Chewy Fudge B; jetons-en 0.42)",20
+2521,white-coffee-with-caffeine,"White coffee, with caffeine",builtin.latte,Café latte,manuel,1.0,non,"usda.18615 (Martha White Foods, Martha White's Buttermilk Bi; jetons-en 0.43) | usda.18614 (Martha White Foods, Martha White's Chewy Fudge B; jetons-en 0.42)",471
+1076,white-radish,White radish,cnf.2196,"Radis, orientaux (daikon), crus",manuel,1.0,non,"usda.18615 (Martha White Foods, Martha White's Buttermilk Bi; jetons-en 0.43) | usda.18614 (Martha White Foods, Martha White's Chewy Fudge B; jetons-en 0.42)",23
+843,wienerli-swiss-sausage,Wienerli (Swiss sausage),builtin.hotdogsausage,Saucisse fumée (hot-dog),manuel,1.0,non,,47
+2618,wine-red,"Wine, red",builtin.wine,Vin rouge,manuel,1.0,non,,780
+2616,wine-rose,"Wine, rosé",cnf.7619,"Boisson alcoolisée, vin de table, rosé",manuel,1.0,non,,91
+2620,wine-white,"Wine, white",cnf.2852,"Boisson alcoolisée, vin de table, blanc (11,5% alcool par volume)",manuel,1.0,non,,440
+1033,witloof-chicory,Witloof chicory,cnf.2056,"Endive de Belgique (chicorée de bruxelles ou witloof), crue",manuel,1.0,non,,125
+5641,yaourt-yahourt-yogourt-ou-yoghourt-natural,"Yaourt, yahourt, yogourt ou yoghourt, natural",cnf.6961,"Yogourt, 2-3,9% M.G., nature",manuel,1.0,non,,239
+1070,zucchini,Zucchini,builtin.zucchini,Courgette,manuel,1.0,non,"cnf.6760 (Courgettes, en pâte à frire, frites; jetons-en 0.70)",359
+232,zucchini-stewed-without-addition-of-fat-without-addition-of-salt,"Zucchini, stewed, without addition of fat, without addition of salt",builtin.zucchini,Courgette,manuel,1.0,non,,40

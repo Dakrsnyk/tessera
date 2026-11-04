@@ -106,7 +106,8 @@ MODULES = [
      "features": [
          "Scanner intelligent (lot 8, 2026-10-22) : un seul écran de caméra (`FoodScanView`) lit un code-barres tout seul (VisionKit) ou photographie un plat (`capturePhoto`) ; code-barres cherché d'abord dans les aliments de l'utilisateur puis Open Food Facts (une requête par scan) ; plat analysé sur l'appareil (`OnDeviceMealAnalyzer`, Vision `VNClassifyImageRequest`) puis proposé en ESTIMATIONS (`FoodLabelMatcher`) ; récapitulatif modifiable (`ScanRecapView`, `ScanRecap` : ajouter, supprimer, remplacer, grammes, « Vérifié » / « Estimation ») ; enregistrement atomique et sans doublon ; permission caméra expliquée avant (`CameraAccessGate`) ; étape B (IA en ligne) préparée mais désactivée (`OnlineMealAnalyzer`, `MealAnalysisConfig.onlineEnabled = false`).",
          "Base nutritionnelle (chantier 22, 2026-11-03) : `ardane-food.sqlite` en lecture seule (`SQLiteFoodRepository`, protocole `FoodRepository`), FCÉN 2026 + USDA SR Legacy sourcés valeur par valeur, alias des anciens identifiants `cnf.*`, portions, densités (g/ml) et rendements de cuisson ; construite par `scripts/food_db/build.py`.",
-         "Fondations de calcul du scanner (chantier 22.2, `Shared/Domains/Scanner/`) : ellipse de l'assiette, échelle, surface, volume, masse par densité, incertitude log-normale ; pas encore branchées à l'écran. Modèles de reconnaissance entraînés hors dépôt (Kaggle), pas encore dans l'app.",
+         "Fondations de calcul du scanner (chantier 22.2, `Shared/Domains/Scanner/`) : ellipse de l'assiette, échelle, surface, volume, masse par densité, incertitude log-normale ; pas encore branchées à l'écran.",
+         "Reconnaissance par modèles (chantier 22.3, `FoodModelRecognizer`, `ScannerModelLogic`) : segmenteur Core ML (une zone par aliment) puis classifieur Core ML (3 aliments par zone, probabilités additionnées par aliment d'Ardane via `ArdaneFoodClassMap.json`) ; Vision reste le repli. Entraînement hors dépôt (Kaggle, `scripts/ml/`), parité vérifiée par `FoodModelParityTests`.",
          "Besoins calculés (Mifflin-St Jeor × activité, objectif, protéines en g/kg, fibres, sucres, gras saturés, sodium, minéraux et vitamines DRI) ; chaque valeur « Calculé » ou « Personnalisé » (`NutritionTargetsCard`), jamais écrasée.",
          "Nutriments détaillés (`Micronutrients`) quand l'aliment les donne (CNF, Open Food Facts) ; historique et analyses détaillées en Premium.",
          "Anneau des calories restantes, protéines, glucides, lipides, repas du jour, idée, semaine.",
@@ -357,6 +358,8 @@ EXTERNAL = [  # name, kind, what it is, how a file shows it uses it (regex on it
     ("Base alimentaire CNF", "data", "Fichier canadien sur les éléments nutritifs embarqué, ~5 600 aliments (App/Resources/cnf-foods.json).", r"cnf-foods"),
     ("Base nutritionnelle FCÉN + USDA", "data", "SQLite en lecture seule de 8 926 aliments, FCÉN 2026 (Licence du gouvernement ouvert – Canada) et USDA SR Legacy (CC0), une source par valeur (App/Resources/ardane-food.sqlite).", r"ardane-food\.sqlite"),
     ("SQLite", "framework", "Lecture de la base nutritionnelle embarquée.", r"^import SQLite3"),
+    ("Modèles de reconnaissance des aliments", "data", "Segmenteur RF-DETR-Seg (où sont les aliments) et classifieur DINOv2 affiné (quel aliment), Core ML int8, entraînés sur MyFoodRepo (CC BY 4.0), avec la carte relue classes -> aliments d'Ardane (App/Resources/Models/).", r"ArdaneFood(Segmenter|Classifier|ClassMap)"),
+    ("Core ML", "framework", "Exécute les modèles du scanner sur l'iPhone.", r"^import CoreML"),
     ("Demos des exercices", "data", "Démonstrations animées des 163 exercices (App/Resources/ExerciseDemos.json).", r"\"ExerciseDemos\""),
 ]
 

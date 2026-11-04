@@ -1239,7 +1239,8 @@ final class WeighedMealsEvaluationTests: XCTestCase {
         report.append("Application : Ardane \(version) (build \(build))")
         let revision = VNClassifyImageRequest.currentRevision
         let modelMB = models.bytes / 1_048_576
-        report.append("Classifieur : Vision VNClassifyImageRequest, révision \(revision) ; modèles Core ML dans l'app : \(models.count) (\(modelMB) Mo)")
+        let foodModels = FoodModelRecognizer.shared.isAvailable ? "actifs (segmenteur puis classifieur ; Vision en repli)" : "INDISPONIBLES (Vision seul)"
+        report.append("Classifieur : modèles Core ML du scanner \(foodModels) ; Vision VNClassifyImageRequest, révision \(revision) ; modèles Core ML dans l'app : \(models.count) (\(modelMB) Mo)")
         let cnfState = NutrientFile.isEmpty ? "INDISPONIBLE dans ce paquet" : "disponible"
         let cnfSize = WeighedMealsPipelines.cnfBytes().map { "\($0 / 1_024) Ko" } ?? "taille inconnue"
         report.append("Tables : table intégrée (\(FoodDatabase.all.count) aliments) + Fichier canadien (\(cnfState), \(cnfSize))")

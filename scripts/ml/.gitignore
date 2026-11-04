@@ -1,0 +1,9 @@
+# Jamais de données, de poids ni de modèles dans le dépôt : tout vit sous ARDANE_ML_ROOT (hors dépôt).
+__pycache__/
+*.pyc
+*.npy
+*.npz
+*.pt
+*.pth
+*.mlpackage/
+*.mlmodel

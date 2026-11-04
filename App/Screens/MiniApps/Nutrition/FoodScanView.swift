@@ -58,6 +58,7 @@ struct FoodScanView: View {
     var body: some View {
         NavigationStack {
             content
+                .task { await MealAnalysisConfig.warmUpModels() }
                 .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
