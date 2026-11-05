@@ -48,6 +48,9 @@ struct FoodModelZone: Hashable, Sendable {
     /// The square (margin included, possibly partly outside the photo) given to the classifier.
     var cropRect: CGRect
     var classification: FoodModelClassification
+
+    /// A « maybe » zone: the segmenter is less sure than `ScannerModelLogic.detectionThreshold` that it is a food.
+    var isTentative: Bool { score < ScannerModelLogic.detectionThreshold }
 }
 
 /// The food recognition of the iPhone, in two steps: a segmenter (RF-DETR-Seg, Core ML) says where the foods are, then a
@@ -272,7 +275,7 @@ final class FoodModelRecognizer: @unchecked Sendable {
         var candidates: [(query: Int, score: Double)] = []
         for query in 0..<queries {
             let score = ScannerModelLogic.sigmoid(Double(logits[query * classCount]))
-            if score >= ScannerModelLogic.detectionThreshold { candidates.append((query, score)) }
+            if score >= ScannerModelLogic.tentativeThreshold { candidates.append((query, score)) }
         }
         candidates.sort { $0.score != $1.score ? $0.score > $1.score : $0.query < $1.query }
 

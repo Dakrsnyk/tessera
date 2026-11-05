@@ -65,7 +65,12 @@ struct FoodScanView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button(tr("Annuler")) { onFinish(.search) }
+                        if case .camera = stage {
+                            Button { onFinish(.search) } label: { ScanCloseLabel() }
+                                .accessibilityLabel(tr("Annuler"))
+                        } else {
+                            Button(tr("Annuler")) { onFinish(.search) }
+                        }
                     }
                     if case .recap = stage {
                         ToolbarItem(placement: .primaryAction) {
@@ -88,7 +93,7 @@ struct FoodScanView: View {
 
     private var title: String {
         if case .recap = stage { return tr("Récapitulatif") }
-        return tr("Scanner un aliment")
+        return tr("Code-barres ou aliments")
     }
 
     @ViewBuilder
@@ -323,7 +328,8 @@ struct FoodScanView: View {
         stage = .analyzing
         do {
             let analysis = try await MealAnalysisConfig.makeAnalyzer().analyzeMeal(image)
-            guard !analysis.proposals.isEmpty else {
+            // Only « maybe » zones found: they are shown to confirm, not as « nothing found ».
+            guard !analysis.proposals.isEmpty || !analysis.tentative.isEmpty else {
                 stage = .photoFailed(.nothingFound)
                 return
             }

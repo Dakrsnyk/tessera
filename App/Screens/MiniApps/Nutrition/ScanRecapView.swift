@@ -87,15 +87,33 @@ struct ScanRecapView: View {
                 linesFooter
             }
 
-            if !suggestions.isEmpty {
+            if !recap.pending.isEmpty || !suggestions.isEmpty {
                 Section {
+                    ForEach(recap.pending) { item in
+                        ScanPendingRow(
+                            item: item,
+                            alternatives: alternatives(forPending: item),
+                            onPick: { food in
+                                recap.confirm(item.id, with: food)
+                                Haptics.tap()
+                            },
+                            onDismiss: { recap.dismiss(item.id) }
+                        )
+                    }
                     ForEach(suggestions) { suggestion in
                         suggestionRow(suggestion)
                     }
                 } header: {
                     Text(tr("À confirmer"))
                 } footer: {
-                    Text(tr("Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord."))
+                    VStack(alignment: .leading, spacing: 6) {
+                        if !recap.pending.isEmpty {
+                            Text(tr("Pas assez sûr pour être ajouté seul : touche le bon aliment, ou ignore-le. Rien n'est ajouté sans ton accord."))
+                        }
+                        if !suggestions.isEmpty {
+                            Text(tr("Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord."))
+                        }
+                    }
                 }
             }
 
@@ -175,6 +193,22 @@ struct ScanRecapView: View {
         for hint in zoneHints where hint.detectedFoodID == detected {
             for food in hint.alternatives where food.id != line.food.id
                 && !recap.lines.contains(where: { $0.food.id == food.id })
+                && !result.contains(where: { $0.id == food.id }) {
+                result.append(food)
+            }
+        }
+        return Array(result.prefix(OnDeviceMealAnalyzer.maximumAlternatives))
+    }
+
+    /// The other foods the models thought of for the zone of a food waiting to be confirmed (same hints as a line), none of
+    /// them already a line.
+    private func alternatives(forPending item: ScanPendingFood) -> [FoodItem] {
+        guard source == .photo, let detected = item.detectedFoodID else { return [] }
+        var result: [FoodItem] = []
+        for hint in zoneHints where hint.detectedFoodID == detected {
+            for food in hint.alternatives where food.id != item.food.id
+                && !recap.lines.contains(where: { $0.food.id == food.id })
+                && !recap.pending.contains(where: { $0.id != item.id && $0.food.id == food.id })
                 && !result.contains(where: { $0.id == food.id }) {
                 result.append(food)
             }
@@ -267,6 +301,9 @@ struct ScanRecapView: View {
             if source == .photo {
                 Text(tr("Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée."))
             }
+            if recap.lines.isEmpty && !recap.pending.isEmpty {
+                Text(tr("Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas."))
+            }
             if recap.hasEstimate {
                 Text(tr("Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les."))
             }
@@ -320,6 +357,64 @@ struct ScanRecapView: View {
             rememberZones(of: snapshot, at: Date())
         }
         onDone()
+    }
+}
+
+// MARK: - One food to confirm
+
+/// A food the photo analysis is not sure of: its name, « peu sûr » or « Peut-être sur la photo », a pill for the proposed
+/// food then one for each alternative (a tap adds the line with that food), and « Ignorer ».
+private struct ScanPendingRow: View {
+    let item: ScanPendingFood
+    /// Other foods the models thought of for this zone.
+    let alternatives: [FoodItem]
+    let onPick: (FoodItem) -> Void
+    let onDismiss: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .top, spacing: 8) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(item.food.displayName)
+                        .font(.body.weight(.semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(item.isTentative ? tr("Peut-être sur la photo") : tr("peu sûr"))
+                        .font(.caption)
+                        .foregroundStyle(Color.orange)
+                }
+                Spacer(minLength: 0)
+                Button(tr("Ignorer"), action: onDismiss)
+                    .buttonStyle(.borderless)
+                    .foregroundStyle(Color.secondary)
+                    .frame(minHeight: 44)
+            }
+            FlowLayout(spacing: 8) {
+                ForEach([item.food] + alternatives, id: \.id) { food in
+                    Button {
+                        onPick(food)
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "plus").imageScale(.small)
+                            Text(food.displayName).lineLimit(2).truncationMode(.tail)
+                        }
+                        .font(.footnote.weight(.medium))
+                        .padding(.horizontal, 12)
+                        .frame(maxWidth: 240, minHeight: 44)
+                        .background(Color.secondary.opacity(0.12), in: Capsule())
+                        .overlay {
+                            if item.isTentative {
+                                Capsule().strokeBorder(Color.orange, style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
+                            }
+                        }
+                        .contentShape(Capsule())
+                    }
+                    .buttonStyle(.borderless)
+                    .accessibilityLabel(food.displayName)
+                    .accessibilityHint(tr("Ajouter"))
+                }
+            }
+        }
+        .padding(.vertical, 4)
     }
 }
 

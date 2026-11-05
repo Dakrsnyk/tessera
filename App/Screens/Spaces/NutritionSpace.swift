@@ -666,32 +666,62 @@ struct CustomFoodEditor: View {
 
 // MARK: - Barcode scanner
 
-/// The small square the barcode goes in, the camera dimmed around it (also used by `FoodScanView`).
+/// The aiming rectangle (photo format 3:4, 16 pt margins, under the navigation bar), the camera dimmed
+/// around it; what is inside is what gets analysed (also used by `FoodScanView`). The height is capped
+/// to leave the bottom controls (about 200 pt) free, with 16 pt between.
 struct ScanFrame: View {
+    private let margin: CGFloat = 16
+    private let controlsHeight: CGFloat = 200
+    private let radius: CGFloat = 28
+
     var body: some View {
         GeometryReader { geo in
-            let side = min(geo.size.width * 0.6, 240)
-            let square = CGRect(x: (geo.size.width - side) / 2, y: (geo.size.height - side) / 2 - 40, width: side, height: side)
+            let width = max(geo.size.width - margin * 2, 120)
+            let room = geo.size.height - margin - controlsHeight - margin
+            let height = max(min(width * 4 / 3, room), 160)
+            let rect = CGRect(x: (geo.size.width - width) / 2, y: margin, width: width, height: height)
             ZStack {
                 Path { path in
                     path.addRect(CGRect(origin: .zero, size: geo.size))
-                    path.addRoundedRect(in: square, cornerSize: CGSize(width: 24, height: 24), style: .continuous)
+                    path.addRoundedRect(in: rect, cornerSize: CGSize(width: radius, height: radius), style: .continuous)
                 }
-                .fill(Color.black.opacity(0.42), style: FillStyle(eoFill: true))
-                ScanCorners()
+                .fill(Color.black.opacity(0.30), style: FillStyle(eoFill: true))
+                ScanCorners(radius: radius)
                     .stroke(Color.white, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-                    .frame(width: side, height: side)
-                    .position(x: square.midX, y: square.midY)
-                Text(tr("Place le code-barres dans le carré"))
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.white)
-                    .multilineTextAlignment(.center)
-                    .shadow(color: .black.opacity(0.4), radius: 3, y: 1)
-                    .frame(width: geo.size.width - 48)
-                    .position(x: square.midX, y: square.maxY + 32)
+                    .frame(width: rect.width, height: rect.height)
+                    .position(x: rect.midX, y: rect.midY)
+                HStack(spacing: 8) {
+                    Image(systemName: "barcode")
+                    Image(systemName: "fork.knife")
+                    Text(tr("Vise un code-barres ou ton assiette"))
+                        .font(.subheadline.weight(.semibold))
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color.white)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(Color.black.opacity(0.45), in: Capsule())
+                .frame(maxWidth: rect.width - 40)
+                .position(x: rect.midX, y: rect.minY + 12 + 22)
+                .accessibilityElement(children: .combine)
             }
         }
         .allowsHitTesting(false)
+    }
+}
+
+/// The round grey cross that replaces « Annuler » on the camera step.
+struct ScanCloseLabel: View {
+    var body: some View {
+        Image(systemName: "xmark")
+            .font(.system(size: 14, weight: .bold))
+            .foregroundStyle(Color.secondary)
+            .frame(width: 32, height: 32)
+            .background(Color.secondary.opacity(0.18), in: Circle())
+            .frame(width: 44, height: 44)
+            .contentShape(Rectangle())
     }
 }
 
@@ -707,11 +737,12 @@ struct ScanFrameScreenshot: View {
             cameraArea
                 .ignoresSafeArea(edges: .bottom)
                 .overlay { ScanFrame() }
-                .navigationTitle(tr("Scanner un aliment"))
+                .navigationTitle(tr("Code-barres ou aliments"))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button(tr("Annuler")) {}
+                        Button {} label: { ScanCloseLabel() }
+                            .accessibilityLabel(tr("Annuler"))
                     }
                 }
                 .safeAreaInset(edge: .bottom) {
@@ -760,9 +791,11 @@ struct ScanFrameScreenshotStage: View {
 
 /// The four rounded corners of the scanning square.
 private struct ScanCorners: Shape {
+    var radius: CGFloat = 24
+
     func path(in rect: CGRect) -> Path {
-        let radius: CGFloat = 24
-        let arm: CGFloat = 40
+        let radius = self.radius
+        let arm = min(44, max(radius, min(rect.width, rect.height) / 2 - 4))
         var path = Path()
         let corners: [(CGPoint, CGFloat, CGFloat)] = [
             (CGPoint(x: rect.minX, y: rect.minY), 1, 1),

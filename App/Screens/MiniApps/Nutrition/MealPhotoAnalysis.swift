@@ -34,21 +34,28 @@ extension MealPhotoAnalyzing {
 /// numbers, never the photo) and, when the first proposals come from a similar remembered meal, its date.
 struct MealAnalysis {
     var proposals: [MealProposal]
+    /// Foods of the « maybe » zones (the segmenter was unsure): only ever offered to confirm, never added alone.
+    var tentative: [MealProposal]
     var featurePrint: [Float]?
     var memoryDate: Date?
     /// One entry per zone the Core ML models found: its other foods and its embedding (see `ScanZoneHint`).
     var zoneHints: [ScanZoneHint]
 
-    init(proposals: [MealProposal], featurePrint: [Float]? = nil, memoryDate: Date? = nil, zoneHints: [ScanZoneHint] = []) {
+    init(
+        proposals: [MealProposal], tentative: [MealProposal] = [], featurePrint: [Float]? = nil,
+        memoryDate: Date? = nil, zoneHints: [ScanZoneHint] = []
+    ) {
         self.proposals = proposals
+        self.tentative = tentative
         self.featurePrint = featurePrint
         self.memoryDate = memoryDate
         self.zoneHints = zoneHints
     }
 
-    /// The recap to show; `ScanRecap.commit` stores the fingerprint with the foods the person keeps.
+    /// The recap to show: the sure proposals as lines, the others « À confirmer » (`ScanRecap.pending`);
+    /// `ScanRecap.commit` stores the fingerprint with the foods the person keeps.
     var recap: ScanRecap {
-        ScanRecap(proposals: proposals, featurePrint: featurePrint, memoryDate: memoryDate)
+        ScanRecap(photoProposals: proposals, tentative: tentative, featurePrint: featurePrint, memoryDate: memoryDate)
     }
 }
 
@@ -179,8 +186,12 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
         }
         let memoryIDs = Set(memoryProposals.map { $0.food.id })
         let merged = memoryProposals + fromLabels.filter { !memoryIDs.contains($0.food.id) }
+        let kept = Array(merged.prefix(Self.maximumProposals))
+        // The « maybe » foods: only those no proposal (models, memory or Vision) already gives.
+        let keptIDs = Set(kept.map { $0.food.id })
+        let maybes = reading.tentative.filter { !keptIDs.contains($0.food.id) }
         let analysis = MealAnalysis(
-            proposals: Array(merged.prefix(Self.maximumProposals)),
+            proposals: kept, tentative: Array(maybes.prefix(Self.maximumProposals)),
             featurePrint: photo.featurePrint, memoryDate: memoryDate,
             zoneHints: reading.hints
         )
@@ -215,8 +226,10 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
         from zones: [FoodModelZone], learning: ScanLearning,
         memory: PersonalFoodMemory = PersonalFoodMemory(), context: ScannerContextPriors = ScannerContextPriors(),
         resolve: (String) -> FoodItem?
-    ) -> (proposals: [MealProposal], hints: [ScanZoneHint]) {
+    ) -> (proposals: [MealProposal], hints: [ScanZoneHint], tentative: [MealProposal]) {
         var byFood: [String: MealProposal] = [:]
+        // The same, for the « maybe » zones (`FoodModelZone.isTentative`): kept apart, they are never added alone.
+        var tentativeByFood: [String: MealProposal] = [:]
         var hints: [ScanZoneHint] = []
         for zone in zones {
             let label = FoodLabelMatcher.cleaned(zone.classification.topLabel)
@@ -265,13 +278,21 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
                 detectedFoodID: proposal.detectedFoodID ?? proposal.food.id,
                 embedding: zone.classification.embedding, alternatives: alternatives
             ))
-            if let existing = byFood[proposal.food.id], existing.confidence >= proposal.confidence { continue }
-            byFood[proposal.food.id] = proposal
+            if zone.isTentative {
+                if let existing = tentativeByFood[proposal.food.id], existing.confidence >= proposal.confidence { continue }
+                tentativeByFood[proposal.food.id] = proposal
+            } else {
+                if let existing = byFood[proposal.food.id], existing.confidence >= proposal.confidence { continue }
+                byFood[proposal.food.id] = proposal
+            }
         }
-        let proposals = byFood.values.sorted {
-            $0.confidence != $1.confidence ? $0.confidence > $1.confidence : $0.food.id < $1.food.id
+        func surest(_ a: MealProposal, _ b: MealProposal) -> Bool {
+            a.confidence != b.confidence ? a.confidence > b.confidence : a.food.id < b.food.id
         }
-        return (proposals, hints)
+        let proposals = byFood.values.sorted(by: surest)
+        // A « maybe » food that a sure zone already proposes is not offered again.
+        let tentative = tentativeByFood.values.filter { byFood[$0.food.id] == nil }.sorted(by: surest)
+        return (proposals, hints, tentative)
     }
 
     /// The photo straightened and ready: the upright copy that every request and crop reads, what the models found on it

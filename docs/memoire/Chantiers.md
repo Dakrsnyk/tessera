@@ -159,4 +159,10 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Quantités (Nutrition5k, 3 261 plats, 506 de test officiel, échelle connue) : densité constante 42,5 % à ±25 % ; **voie de l'app (surface × densité apprise de l'empreinte + contexte du plat, 5 modèles) 65,8 % à ±25 %**, erreur moyenne 22,2 %, médiane 16,0 % (validation 74,9 % : le test officiel est plus dur) ; repère publié image seule 18,8 %. Voie profondeur M2 : 50,9 % (seulement ~1 150 plats valides, plan de l'assiette approximatif) : à revoir pour le LiDAR. Rapport `C:\Users\Etudiant\ardane-tools\ml\reports\grams-n5k-2026-11-04.md`, tête `...M1.pt`.
 - Piège : profondeur Nutrition5k en 1e-4 m pour presque tous les plats (mm pour 4) ; un `depth_raw.png` tronqué à la source.
 - **2026-11-04 (soir) : EN PAUSE** à la demande de l'utilisateur (mission « 90 / 80 / 90 » : reconnaissance ≥ 90 %, grammes par aliment ≥ 80 % à ± 20 %, IoU ≥ 0,90 sur un banc indépendant de 10 000 plats). Recherche faite (5 agents, deux passes), plan à valider : `docs/scanner/Plan-scanner-90-80-90-2026-11-04.md` ; état des lieux, sauvegarde et travaux en pause : `docs/memoire/Reprise-scanner-2026-11-04.md`. Aucun changement du scanner avant la validation.
+- **2026-11-05 : plan validé par l'utilisateur, phase 1 en cours** :
+  - écran « Code-barres ou aliments » (cadre 3:4 agrandi, croix) ;
+  - récapitulatif en deux groupes (lignes ≥ 0,80 ou habitude ; « À confirmer » pour le reste et les zones « peut-être » 0,20-0,30, jamais ajoutées seules) ;
+  - outil de banc `scripts/ml/bench_sets.py` ; agent `ml-engineer` ;
+  - vues multiples écartées (aucun gain) ;
+  - segmenteur Small poussé automatiquement sur Kaggle au renouvellement du quota (2026-11-07 0 h 10 UTC, tâche de fond de la session ; si elle n'a pas tourné : `kaggle kernels push -p scripts/ml/kaggle/segmenter --accelerator NvidiaTeslaT4`).
 - Suite : segmenteur Small après le renouvellement du quota GPU (7 novembre) pour la découpe, affinage de bout en bout pour les grammes, intégration des grammes par l'assiette dans l'app (mode expérimental) puis repas pesés (22.6).

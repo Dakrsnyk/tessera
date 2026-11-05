@@ -36,6 +36,9 @@ struct FoodProbability: Hashable, Sendable {
 enum ScannerModelLogic {
     /// A query of the segmenter is a food from this score (sigmoid of its first logit).
     static let detectionThreshold = 0.30
+    /// A query of the segmenter between this score and `detectionThreshold` is kept as a « maybe » zone: its food is
+    /// only ever offered to confirm, never added alone (audit of 2026-11-04: foods found 73.9 % -> 77.9 %).
+    static let tentativeThreshold = 0.20
     /// A mask is a duplicate of an earlier, better one when both its box and its mask overlap that much.
     static let duplicateBoxIoU = 0.5
     static let duplicateMaskIoU = 0.7

@@ -1112,7 +1112,7 @@
  "%@ · %@ g · ≈ %@ kcal": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:179: Text(tr(\"\\(suggestion.food.name) · \\(TF.int(suggestion.grams)) g · ≈ \\(TF.int(suggestion.totals.kcal)) kcal\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:260: Text(tr(\"\\(suggestion.food.name) · \\(TF.int(suggestion.grams)) g · ≈ \\(TF.int(suggestion.totals.kcal)) kcal\"))"
   ]
  },
  "%@ · %@ km": {
@@ -1173,7 +1173,7 @@
  "%@ · P %@ · G %@ · L %@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:292: return tr(\"\\(kcal) · P \\(protein) · G \\(carbs) · L \\(fat)\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:440: return tr(\"\\(kcal) · P \\(protein) · G \\(carbs) · L \\(fat)\")"
   ]
  },
  "%@ · aujourd'hui": {
@@ -2812,7 +2812,7 @@
    "App/Components/StylePicker.swift:167: Text(tr(\"Ajouter\"))",
    "App/Screens/Explore/StoreMagazine.swift:565: Text(tr(\"Ajouter\"))",
    "App/Screens/Home/DailySection.swift:1162: Text(tr(\"Ajouter\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:184: Button(tr(\"Ajouter\")) {"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:265: Button(tr(\"Ajouter\")) {"
   ]
  },
  "Ajouter (maillot, cadeaux…)": {
@@ -2836,7 +2836,7 @@
  "Ajouter au journal": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:244: Text(tr(\"Ajouter au journal\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:328: Text(tr(\"Ajouter au journal\"))"
   ]
  },
  "Ajouter au montant épargné": {
@@ -2914,7 +2914,7 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:79: MiniActionButton(title: canScan ? tr(\"Rechercher\") : tr(\"Ajouter un aliment\"), symbol: canScan ? \"magnifyingglass\" : \"plus\", colorHex: accentHex, isProminent: !canScan) {",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:78: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:77: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:81: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")",
    "App/Screens/Spaces/NutritionSpace.swift:53: Label(tr(\"Ajouter un aliment\"), systemImage: \"plus.circle.fill\")"
   ]
  },
@@ -3173,7 +3173,7 @@
  "Aliment perso": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:370: case .custom: return tr(\"Aliment perso\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:540: case .custom: return tr(\"Aliment perso\")",
    "App/Screens/Spaces/NutritionSpace.swift:213: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
    "App/Screens/Spaces/NutritionSpace.swift:620: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
   ]
@@ -3182,7 +3182,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:83: Text(tr(\"Aliments\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:81: Text(tr(\"Aliments\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:85: Text(tr(\"Aliments\"))",
    "App/Screens/Spaces/NutritionSpace.swift:560: Section(tr(\"Aliments\")) {"
   ]
  },
@@ -3423,7 +3423,7 @@
  "Analyse du plat sur ton iPhone…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:106: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:114: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
   ]
  },
  "Analyse productivité": {
@@ -3714,14 +3714,14 @@
  "Après ajout, il te restera %@ kcal.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:120: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:142: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
    "App/Screens/Spaces/NutritionSpace.swift:490: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
  "Après ajout, tu dépasseras ton objectif de %@ kcal.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:120: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:142: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))",
    "App/Screens/Spaces/NutritionSpace.swift:490: Text(left >= 0 ? tr(\"Après ajout, il te restera \\(TF.int(left)) kcal.\") : tr(\"Après ajout, tu dépasseras ton objectif de \\(TF.int(-left)) kcal.\"))"
   ]
  },
@@ -4268,6 +4268,12 @@
    "App/Screens/Profile/ProfileView.swift:464: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
+ "Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:304: Text(tr(\"Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas.\"))"
+  ]
+ },
  "Aucun compte à créer": {
   "placeholders": 0,
   "uses": [
@@ -4283,7 +4289,7 @@
  "Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:139: Text(tr(\"Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:161: Text(tr(\"Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans.\"))"
   ]
  },
  "Aucun examen noté. Ajoute-les dès que tu connais les dates : le compte à rebours et le temps révisé s'affichent ici.": {
@@ -5219,7 +5225,7 @@
  "Beurre ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:302: case .butter: tr(\"Beurre ?\")"
+   "Shared/Domains/ScanRecap.swift:411: case .butter: tr(\"Beurre ?\")"
   ]
  },
  "Beurre d'amande": {
@@ -6436,7 +6442,7 @@
  "Caméra indisponible": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:184: title: tr(\"Caméra indisponible\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:192: title: tr(\"Caméra indisponible\"),"
   ]
  },
  "Canada": {
@@ -7263,10 +7269,10 @@
  "Chercher dans la liste": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:119: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:133: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:146: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:155: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:127: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:141: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:154: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:163: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
   ]
  },
  "Chercher la ville (fuseau et devise)": {
@@ -7278,10 +7284,10 @@
  "Chercher ou créer l'aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:98: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:167: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:187: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:232: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:106: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:175: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:195: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:240: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
   ]
  },
  "Chercher une ville": {
@@ -7488,7 +7494,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:445: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:203: .accessibilityLabel(tr(\"Choisir une photo\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:211: .accessibilityLabel(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:524: Text(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:135: sourceLabel(tr(\"Choisir une photo\"), symbol: \"photo.on.rectangle\", isProminent: true)"
   ]
@@ -7817,6 +7823,13 @@
    "Shared/Model/WidgetStyle.swift:360: TypePreset(id: \"code\", name: tr(\"Code\"), font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),"
   ]
  },
+ "Code-barres ou aliments": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:96: return tr(\"Code-barres ou aliments\")",
+   "App/Screens/Spaces/NutritionSpace.swift:740: .navigationTitle(tr(\"Code-barres ou aliments\"))"
+  ]
+ },
  "Coins arrondis classiques.": {
   "placeholders": 0,
   "uses": [
@@ -7926,7 +7939,7 @@
  "Comme ton repas du %@": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:107: return String(format: tr(\"Comme ton repas du %@\"), locale: Fmt.locale, day)"
+   "Shared/Domains/ScanRecap.swift:194: return String(format: tr(\"Comme ton repas du %@\"), locale: Fmt.locale, day)"
   ]
  },
  "Commence avec une boîte basse.": {
@@ -8300,7 +8313,7 @@
  "Contribuer à l'amélioration": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:133: Toggle(tr(\"Contribuer à l'amélioration\"), isOn: Binding("
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:155: Toggle(tr(\"Contribuer à l'amélioration\"), isOn: Binding("
   ]
  },
  "Contrôle technique, assurance, pneus…": {
@@ -9103,7 +9116,7 @@
  "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:116: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:124: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
   ]
  },
  "Crée-les dans Ardane": {
@@ -9123,10 +9136,10 @@
  "Créer cet aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:118: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:132: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:145: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:154: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:126: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:140: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:153: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:162: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
   ]
  },
  "Créer un exercice": {
@@ -10458,7 +10471,7 @@
  "Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:226: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:310: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))",
    "App/Screens/Spaces/NutritionSpace.swift:290: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
   ]
  },
@@ -11473,7 +11486,7 @@
  "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:96: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:104: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
   ]
  },
  "Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.": {
@@ -11970,7 +11983,7 @@
  "Estimation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:366: if isEstimate { return tr(\"Estimation\") }"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:536: if isEstimate { return tr(\"Estimation\") }"
   ]
  },
  "Estimation selon la durée des séances et ton poids": {
@@ -11988,7 +12001,7 @@
  "Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:220: Text(tr(\"Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:301: Text(tr(\"Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.\"))"
   ]
  },
  "Et avec Premium, tout le reste :": {
@@ -14419,7 +14432,7 @@
  "Huile de cuisson ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:301: case .oil: tr(\"Huile de cuisson ?\")"
+   "Shared/Domains/ScanRecap.swift:410: case .oil: tr(\"Huile de cuisson ?\")"
   ]
  },
  "Hydratation": {
@@ -14508,7 +14521,8 @@
  "Ignorer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:189: Button(tr(\"Ignorer\")) {"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:270: Button(tr(\"Ignorer\")) {",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:385: Button(tr(\"Ignorer\"), action: onDismiss)"
   ]
  },
  "Il affiche tes événements des 48 prochaines heures, directement depuis le calendrier de ton iPhone.": {
@@ -14978,7 +14992,7 @@
  "Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:163: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:171: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "Je préfère ne pas répondre": {
@@ -15418,7 +15432,7 @@
  "L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:164: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:172: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "L'analyse mois par mois est dans Premium": {
@@ -15436,7 +15450,7 @@
  "L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:97: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:105: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
   ]
  },
  "L'année avance": {
@@ -15679,7 +15693,7 @@
  "La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:185: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:193: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
   ]
  },
  "La capitalisation totale du marché et ses principaux actifs.": {
@@ -16597,7 +16611,7 @@
  "Le produit %@ n'est pas encore dans Open Food Facts.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:115: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:123: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
   ]
  },
  "Le repos démarre tout seul.": {
@@ -17018,7 +17032,7 @@
  "Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:223: Text(tr(\"Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:307: Text(tr(\"Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.\"))"
   ]
  },
  "Les rappels ci-dessous partent une fois les notifications autorisées.": {
@@ -20386,7 +20400,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:267: Text(tr(\"Objectifs\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:126: Section(tr(\"Objectifs\")) {",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:148: Section(tr(\"Objectifs\")) {",
    "App/Screens/Spaces/NutritionSpace.swift:117: Text(tr(\"Objectifs\"))",
    "Shared/Domains/Nutrition.swift:155: case .energy: tr(\"Objectifs\")"
   ]
@@ -20513,7 +20527,7 @@
  "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:152: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:160: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
    "App/Screens/Spaces/NutritionSpace.swift:628: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
   ]
  },
@@ -20526,7 +20540,7 @@
  "Open Food Facts reçoit trop de demandes en ce moment : le produit %@ n'a pas pu être cherché. Réessaie dans un instant.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:139: message: tr(\"Open Food Facts reçoit trop de demandes en ce moment : le produit \\(code) n'a pas pu être cherché. Réessaie dans un instant.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:147: message: tr(\"Open Food Facts reçoit trop de demandes en ce moment : le produit \\(code) n'a pas pu être cherché. Réessaie dans un instant.\")"
   ]
  },
  "Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant.": {
@@ -20539,7 +20553,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:509: .accessibilityLabel(Text(tr(\"Options de \\(saved.name)\")))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:334: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:482: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
   ]
  },
  "Opérations": {
@@ -21043,6 +21057,12 @@
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:405: MiniStat(title: tr(\"Pas\"), value: Fmt.number(count), detail: goal.map { tr(\"objectif \\(Fmt.number($0))\") }, colorHex: tint)"
   ]
  },
+ "Pas assez sûr pour être ajouté seul : touche le bon aliment, ou ignore-le. Rien n'est ajouté sans ton accord.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:111: Text(tr(\"Pas assez sûr pour être ajouté seul : touche le bon aliment, ou ignore-le. Rien n'est ajouté sans ton accord.\"))"
+  ]
+ },
  "Pas d'écran au lit": {
   "placeholders": 0,
   "uses": [
@@ -21052,7 +21072,7 @@
  "Pas de connexion : le produit %@ n'a pas pu être cherché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:126: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:134: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
   ]
  },
  "Pas de cours prévu": {
@@ -21514,6 +21534,12 @@
    "Shared/Model/WidgetStyle.swift:136: case .compact: tr(\"Peu d'informations, très lisible.\")"
   ]
  },
+ "Peut-être sur la photo": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:380: Text(item.isTentative ? tr(\"Peut-être sur la photo\") : tr(\"peu sûr\"))"
+  ]
+ },
  "Phase de lune": {
   "placeholders": 0,
   "uses": [
@@ -21554,8 +21580,8 @@
  "Photographier le plat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:218: .accessibilityLabel(tr(\"Photographier le plat\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:223: Text(tr(\"Photographier le plat\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:226: .accessibilityLabel(tr(\"Photographier le plat\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:231: Text(tr(\"Photographier le plat\"))"
   ]
  },
  "Photos": {
@@ -21638,12 +21664,6 @@
    "Shared/Domains/FoodDatabase.swift:193: f(\"pizza\", tr(\"Pizza fromage\"), 266, 11, 33, 10, 2.3, 110, tr(\"1 pointe\"), s: 3.6, sf: 4.5, na: 598),"
   ]
  },
- "Place le code-barres dans le carré": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:685: Text(tr(\"Place le code-barres dans le carré\"))"
-  ]
- },
  "Placement": {
   "placeholders": 0,
   "uses": [
@@ -21721,7 +21741,7 @@
  "Plat non reconnu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:161: title: tr(\"Plat non reconnu\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:169: title: tr(\"Plat non reconnu\"),"
   ]
  },
  "Plats": {
@@ -23123,8 +23143,8 @@
  "Produit introuvable": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:114: title: tr(\"Produit introuvable\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:125: title: tr(\"Produit introuvable\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:122: title: tr(\"Produit introuvable\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:133: title: tr(\"Produit introuvable\"),"
   ]
  },
  "Produits emballés": {
@@ -23522,8 +23542,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:193: NumberRow(title: tr(\"Quantité\"), value: $grams, unit: \"g\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:347: .accessibilityLabel(tr(\"Quantité\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:350: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:517: .accessibilityLabel(tr(\"Quantité\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:520: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
    "App/Screens/Spaces/MoneySpaces.swift:111: NumberRow(title: holding.kind == .cash ? tr(\"Montant\") : tr(\"Quantité\"), value: $holding.quantity)"
   ]
  },
@@ -23823,7 +23843,7 @@
  "Recherche du produit %@…": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:104: progress(tr(\"Recherche du produit \\(code)…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:112: progress(tr(\"Recherche du produit \\(code)…\"))"
   ]
  },
  "Recherche sur Open Food Facts…": {
@@ -24188,8 +24208,9 @@
  "Remplacer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:69: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:322: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:73: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:470: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:506: .accessibilityHint(tr(\"Remplacer\"))"
   ]
  },
  "Remplacer tes données par cette sauvegarde ?": {
@@ -25501,7 +25522,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/ScreenshotMode.swift:482: .navigationTitle(mode == \"nutrition-plan\" ? tr(\"Ton objectif de poids\") : tr(\"Récapitulatif\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:87: if case .recap = stage { return tr(\"Récapitulatif\") }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:95: if case .recap = stage { return tr(\"Récapitulatif\") }"
   ]
  },
  "Récents": {
@@ -25546,8 +25567,8 @@
   "uses": [
    "App/Premium/PaywallView.swift:238: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Business/BusinessSources.swift:264: Button(tr(\"Réessayer\")) { attempt += 1 }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:128: prominentButton(tr(\"Réessayer\")) {",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:141: prominentButton(tr(\"Réessayer\")) {"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:136: prominentButton(tr(\"Réessayer\")) {",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:149: prominentButton(tr(\"Réessayer\")) {"
   ]
  },
  "Région": {
@@ -26052,7 +26073,7 @@
  "Sauce ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:303: case .sauce: tr(\"Sauce ?\")"
+   "Shared/Domains/ScanRecap.swift:412: case .sauce: tr(\"Sauce ?\")"
   ]
  },
  "Sauce BBQ": {
@@ -26195,9 +26216,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:738: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:88: return tr(\"Scanner un aliment\")",
-   "App/Screens/Spaces/NutritionSpace.swift:710: .navigationTitle(tr(\"Scanner un aliment\"))",
-   "Shared/Intents/FoodScannerIntent.swift:11: static var title: LocalizedStringResource = \"Scanner un aliment\""
+   "Shared/Intents/FoodScannerIntent.swift:11: static var title: LocalizedStringResource = \"Scanner un aliment\"",
+   "Shared/Intents/FoodScannerIntent.swift:32: .foodScanner: DisplayRepresentation(title: \"Scanner un aliment\"),",
+   "Widgets/ScanFoodWidgets.swift:16: .configurationDisplayName(tr(\"Scanner un aliment\"))"
   ]
  },
  "Scanner un code-barres": {
@@ -26216,9 +26237,9 @@
  "Scanner à nouveau": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:74: .accessibilityLabel(tr(\"Scanner à nouveau\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:120: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:156: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:82: .accessibilityLabel(tr(\"Scanner à nouveau\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:128: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:164: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
   ]
  },
  "Se balancer.": {
@@ -26513,7 +26534,7 @@
  "Service occupé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:138: title: tr(\"Service occupé\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:146: title: tr(\"Service occupé\"),"
   ]
  },
  "Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours.": {
@@ -26907,7 +26928,7 @@
  "Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:94: Text(tr(\"Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:114: Text(tr(\"Souvent invisibles sur une photo. Rien n'est ajouté sans ton accord.\"))"
   ]
  },
  "Spaghetti": {
@@ -29480,7 +29501,7 @@
  "Ton habitude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:307: Text(tr(\"Ton habitude\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:455: Text(tr(\"Ton habitude\"))"
   ]
  },
  "Ton horaire": {
@@ -29787,7 +29808,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:1289: Text(tr(\"Total\")).font(.caption.weight(.bold))",
    "App/Screens/Home/DailySection.swift:1299: Text(tr(\"Total\")).font(.subheadline.weight(.bold))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:110: Text(tr(\"Total\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:132: Text(tr(\"Total\"))"
   ]
  },
  "Total du mois": {
@@ -29811,7 +29832,7 @@
  "Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:117: Text(tr(\"Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:139: Text(tr(\"Total incomplet : la source ne donne pas toutes les valeurs de certains aliments. Les chiffres sont un minimum.\"))"
   ]
  },
  "Total payé": {
@@ -31542,6 +31563,12 @@
    "Shared/Theme/AppStyle.swift:38: palette(.amethyst, tr(\"Violet profond, pour les couche-tard\"), light: \"6841A5\", dark: \"B69AFF\"),"
   ]
  },
+ "Vise un code-barres ou ton assiette": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/NutritionSpace.swift:696: Text(tr(\"Vise un code-barres ou ton assiette\"))"
+  ]
+ },
  "Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.": {
   "placeholders": 0,
   "uses": [
@@ -31818,7 +31845,7 @@
  "Vérifié": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:368: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:538: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
   ]
  },
  "Vérité et réconciliation": {
@@ -33503,6 +33530,7 @@
  "peu sûr": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:380: Text(item.isTentative ? tr(\"Peut-être sur la photo\") : tr(\"peu sûr\"))",
    "Shared/Domains/ScanRecap.swift:68: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
   ]
  },
@@ -33969,7 +33997,7 @@
  "ta taille": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1074: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
+   "App/Core/AppModel.swift:1076: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
   ]
  },
  "terminée": {
@@ -33987,19 +34015,19 @@
  "ton genre": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1076: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
+   "App/Core/AppModel.swift:1078: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
   ]
  },
  "ton poids": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1075: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
+   "App/Core/AppModel.swift:1077: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
   ]
  },
  "ton âge": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1073: if age == nil { missing.append(tr(\"ton âge\")) }"
+   "App/Core/AppModel.swift:1075: if age == nil { missing.append(tr(\"ton âge\")) }"
   ]
  },
  "tout est prêt": {
@@ -34302,7 +34330,7 @@
  "À confirmer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:92: Text(tr(\"À confirmer\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:107: Text(tr(\"À confirmer\"))"
   ]
  },
  "À droite": {
@@ -35321,7 +35349,7 @@
  "≈ %@–%@ kcal": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:171: return tr(\"≈ \\(TF.int(rounded.low))–\\(TF.int(rounded.high)) kcal\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:252: return tr(\"≈ \\(TF.int(rounded.low))–\\(TF.int(rounded.high)) kcal\")"
   ]
  }
 }

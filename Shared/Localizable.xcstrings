@@ -31585,6 +31585,53 @@
         }
       }
     },
+    "Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Lebensmittel ist sicher genug, um allein hinzugefügt zu werden: Bestätige sie weiter unten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No food is sure enough to be added on its own: confirm them below."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ningún alimento es lo bastante seguro para añadirse solo: confírmalos más abajo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun alimento è abbastanza sicuro per essere aggiunto da solo: confermali più in basso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動で追加できるほど確かな食品はありません。下で確認してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum alimento tem certeza suficiente para ser adicionado sozinho: confirme-os abaixo."
+          }
+        }
+      }
+    },
     "Aucun compte à créer": {
       "extractionState": "manual",
       "localizations": {
@@ -58136,6 +58183,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Código"
+          }
+        }
+      }
+    },
+    "Code-barres ou aliments": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barcode oder Lebensmittel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barcode or food"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Código de barras o alimentos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code-barres ou aliments"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codice a barre o alimenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バーコードまたは食品"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Código de barras ou alimentos"
           }
         }
       }
@@ -156605,6 +156699,53 @@
         }
       }
     },
+    "Pas assez sûr pour être ajouté seul : touche le bon aliment, ou ignore-le. Rien n'est ajouté sans ton accord.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht sicher genug, um allein hinzugefügt zu werden: Tippe auf das richtige Lebensmittel oder ignoriere es. Ohne dein Einverständnis wird nichts hinzugefügt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not sure enough to be added on its own: tap the right food, or ignore it. Nothing is added without your approval."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No es lo bastante seguro para añadirse solo: toca el alimento correcto o ignóralo. No se añade nada sin tu permiso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas assez sûr pour être ajouté seul : touche le bon aliment, ou ignore-le. Rien n'est ajouté sans ton accord."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non abbastanza sicuro per essere aggiunto da solo: tocca l'alimento giusto o ignoralo. Non viene aggiunto nulla senza il tuo consenso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動で追加するには確かさが足りません。正しい食品をタップするか、無視してください。承認なしに追加されることはありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não há certeza suficiente para adicionar sozinho: toque no alimento certo ou ignore-o. Nada é adicionado sem a sua aprovação."
+          }
+        }
+      }
+    },
     "Pas d'écran au lit": {
       "extractionState": "manual",
       "localizations": {
@@ -160177,6 +160318,53 @@
         }
       }
     },
+    "Peut-être sur la photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vielleicht auf dem Foto"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maybe in the photo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quizá en la foto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peut-être sur la photo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forse nella foto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真に写っているかも"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talvez na foto"
+          }
+        }
+      }
+    },
     "Phase de lune": {
       "extractionState": "manual",
       "localizations": {
@@ -161066,53 +161254,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pizza de queijo"
-          }
-        }
-      }
-    },
-    "Place le code-barres dans le carré": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Halte den Barcode in das Quadrat"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Place the barcode inside the square"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Coloca el código de barras dentro del cuadro"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Place le code-barres dans le carré"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inquadra il codice a barre nel quadrato"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "バーコードを枠の中に合わせてください"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Posicione o código de barras dentro do quadrado"
           }
         }
       }
@@ -234903,6 +235044,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Violeta profundo, para quem vive à noite"
+          }
+        }
+      }
+    },
+    "Vise un code-barres ou ton assiette": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richte die Kamera auf einen Barcode oder deinen Teller"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aim at a barcode or your plate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apunta a un código de barras o a tu plato"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vise un code-barres ou ton assiette"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inquadra un codice a barre o il tuo piatto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バーコードかお皿にカメラを向けてください"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aponte para um código de barras ou para o seu prato"
           }
         }
       }

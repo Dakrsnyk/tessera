@@ -69,6 +69,52 @@ struct ScanLine: Identifiable, Hashable {
     }
 }
 
+/// A food the photo analysis proposes but is not sure enough of to add alone. It is shown « À confirmer » and only becomes
+/// a line (`ScanRecap.confirm`) when the person touches it; until then it is never logged. Not persisted: it lives with
+/// the recap, for the time of the screen.
+struct ScanPendingFood: Identifiable, Hashable {
+    let id: UUID
+    let food: FoodItem
+    /// The quantity the analysis proposed.
+    let grams: Double
+    let confidence: Double
+    let label: String?
+    let detectedFoodID: String?
+    let usesHabit: Bool
+    /// True for a « maybe » zone (the segmenter itself was unsure there was a food): never added alone.
+    let isTentative: Bool
+
+    init(
+        id: UUID = UUID(), food: FoodItem, grams: Double, confidence: Double, label: String? = nil,
+        detectedFoodID: String? = nil, usesHabit: Bool = false, isTentative: Bool = false
+    ) {
+        self.id = id
+        self.food = food
+        self.grams = grams
+        self.confidence = confidence
+        self.label = label
+        self.detectedFoodID = detectedFoodID
+        self.usesHabit = usesHabit
+        self.isTentative = isTentative
+    }
+
+    init(_ proposal: MealProposal, isTentative: Bool) {
+        self.init(
+            food: proposal.food, grams: proposal.grams, confidence: proposal.confidence, label: proposal.label,
+            detectedFoodID: proposal.detectedFoodID ?? proposal.food.id, usesHabit: proposal.usesHabit,
+            isTentative: isTentative
+        )
+    }
+
+    /// The proposal this item stands for, to turn it into a line as an added proposal.
+    var proposal: MealProposal {
+        MealProposal(
+            food: food, grams: grams, confidence: confidence, label: label,
+            detectedFoodID: detectedFoodID, usesHabit: usesHabit
+        )
+    }
+}
+
 /// What a scan found, editable before it is logged: a product read from a barcode, or the foods
 /// guessed from the photo of a dish. Pure logic with no view, so it can be tested; the screen only
 /// shows it.
@@ -77,8 +123,13 @@ struct ScanRecap: Hashable {
     static let maxGrams = 5_000.0
     /// Under this confidence an estimate is shown as « peu sûr ».
     static let lowConfidence = 0.5
+    /// From this confidence a photo proposal is added as a line; under it, it waits in `pending` for the person.
+    /// Audit of 2026-11-04: 87.7 % of the lines are right at 0.80 (50.7 % under it); to recompute with every new model.
+    static let autoAddThreshold = 0.80
 
     var lines: [ScanLine] = []
+    /// Photo proposals the analysis is not sure of, most sure first. Never logged until `confirm` makes them lines.
+    var pending: [ScanPendingFood] = []
     /// True when the foods were proposed from the photo of a dish: validating then records the
     /// corrections of the person (`ScanLearning`).
     var isPhoto = false
@@ -92,12 +143,48 @@ struct ScanRecap: Hashable {
         self.lines = lines
     }
 
-    /// The foods guessed from a photo: each one an estimate, in its usual portion.
+    /// The foods guessed from a photo: each one an estimate, in its usual portion. Every proposal becomes a line
+    /// (no threshold): used to measure and to show demos; the app uses `init(photoProposals:)`.
     init(proposals: [MealProposal], featurePrint: [Float]? = nil, memoryDate: Date? = nil) {
         isPhoto = true
         self.featurePrint = featurePrint
         self.memoryDate = memoryDate
         for proposal in proposals { add(proposal) }
+    }
+
+    /// True when a proposal is added as a line on its own: sure enough, or coming from the person's own habits or
+    /// remembered meals, or with no confidence to judge by.
+    static func isAutoAdded(_ proposal: MealProposal) -> Bool {
+        proposal.usesHabit || !proposal.confidence.isFinite || proposal.confidence >= autoAddThreshold
+    }
+
+    /// The foods guessed from a photo, in two groups. A proposal that is sure enough (or from the person's habits) is a
+    /// line; the others wait in `pending`. `tentative`: proposals of « maybe » zones, always pending, and only for a food
+    /// that is neither a line nor already pending. `pending` is sorted from the surest to the least sure.
+    init(photoProposals: [MealProposal], tentative: [MealProposal] = [], featurePrint: [Float]? = nil, memoryDate: Date? = nil) {
+        isPhoto = true
+        self.featurePrint = featurePrint
+        self.memoryDate = memoryDate
+        var waiting: [ScanPendingFood] = []
+        for proposal in photoProposals {
+            if Self.isAutoAdded(proposal) {
+                add(proposal)
+            } else {
+                waiting.append(ScanPendingFood(proposal, isTentative: false))
+            }
+        }
+        // A food that a sure proposal already gave is not offered again.
+        let taken = Set(lines.map { $0.food.id } + waiting.map { $0.food.id })
+        var seen = taken
+        var maybes: [ScanPendingFood] = []
+        for proposal in tentative where !seen.contains(proposal.food.id) {
+            seen.insert(proposal.food.id)
+            maybes.append(ScanPendingFood(proposal, isTentative: true))
+        }
+        func surest(_ a: ScanPendingFood, _ b: ScanPendingFood) -> Bool {
+            a.confidence != b.confidence ? a.confidence > b.confidence : a.food.id < b.food.id
+        }
+        pending = waiting.sorted(by: surest) + maybes.sorted(by: surest)
     }
 
     /// « Comme ton repas du 12 octobre »: shown when the proposal comes from a similar remembered meal.
@@ -156,6 +243,27 @@ struct ScanRecap: Hashable {
         lines.removeAll { $0.id == id }
     }
 
+    /// The person confirmed a food waiting in `pending`: it becomes a line like an added proposal (estimate, confidence,
+    /// `detectedFoodID`, the quantity proposed). With `food` (one of the alternatives), that food is used instead, in its
+    /// usual portion and with the same `detectedFoodID`, so the correction is learned when the recap is validated. The
+    /// item leaves `pending`. Returns the id of the line, nil if the item is unknown.
+    @discardableResult
+    mutating func confirm(_ id: UUID, with food: FoodItem? = nil) -> UUID? {
+        guard let index = pending.firstIndex(where: { $0.id == id }) else { return nil }
+        let item = pending.remove(at: index)
+        guard let food, food.id != item.food.id else { return add(item.proposal) }
+        return add(
+            food, grams: nil, isEstimate: true, confidence: nil,
+            detectedLabels: item.label.map { [$0] } ?? [], detectedFoodID: item.detectedFoodID ?? item.food.id,
+            initialGrams: Self.clamped(item.grams), usesHabit: false
+        )
+    }
+
+    /// The person does not want a food waiting in `pending`: it is dropped, nothing is added.
+    mutating func dismiss(_ id: UUID) {
+        pending.removeAll { $0.id == id }
+    }
+
     /// Another food for the same line, with the same quantity. The line stays an estimate if it was one
     /// (the quantity still is), but the confidence belonged to the food that was replaced. If the new
     /// food is already in the recap, the two lines become one.
@@ -208,6 +316,7 @@ struct ScanRecap: Hashable {
         result.isPhoto = isPhoto
         result.featurePrint = featurePrint
         result.memoryDate = memoryDate
+        result.pending = pending
         return result
     }
 

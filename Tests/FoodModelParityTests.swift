@@ -98,7 +98,8 @@ final class FoodModelParityTests: XCTestCase {
             let zones: [FoodModelZone]
             let whole: FoodModelClassification
             do {
-                zones = try recognizer.recognize(image)
+                // The references are at the 0.30 threshold: the app's « maybe » zones (0.20 to 0.30) are left out.
+                zones = try recognizer.recognize(image).filter { !$0.isTentative }
                 whole = try recognizer.classifyWholeImage(image)
             } catch {
                 XCTFail("\(photo.file) : le moteur a échoué (\(error))")

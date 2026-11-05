@@ -84,7 +84,9 @@ final class FoodModelRecognitionTests: XCTestCase {
                 continue
             }
             analysed += 1
-            if !result.zones.isEmpty { photosWithZones += 1 }
+            // Sure zones only (score >= 0.30), as in the measures before the « maybe » zones: the figures stay comparable.
+            let sureZones = result.zones.filter { !$0.isTentative }
+            if !sureZones.isEmpty { photosWithZones += 1 }
             let proposals = result.analysis.proposals
             let wanted = (entry.expected + entry.alternatives).map(normalized)
             let ok = proposals.prefix(5).contains { proposal in
@@ -97,9 +99,11 @@ final class FoodModelRecognitionTests: XCTestCase {
             if ok { tally.ok += 1 }
             perCategory[entry.category] = tally
 
-            let zonesText = result.zones.map { describe($0) }.joined(separator: ", ")
+            let zonesText = sureZones.map { describe($0) }.joined(separator: ", ")
             let names = proposals.map { $0.food.name }.joined(separator: ", ")
             var line = "RECO-MODELE \(entry.file) [\(entry.category)]: zones [\(zonesText)] ; propositions [\(names)] ; "
+            let maybes = result.analysis.tentative.map { $0.food.name }.joined(separator: ", ")
+            if !maybes.isEmpty { line += "peut-être [\(maybes)] ; " }
             line += "attendu \(entry.expected) ; \(ok ? "OK" : "RATÉ")"
             lines.append(line)
         }

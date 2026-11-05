@@ -49,7 +49,7 @@ Ardane (anciennement Tessera : depuis le 2026-10-26 le projet Xcode `Ardane.xcod
 La session principale est le **Chef de projet technique** : elle reste responsable de la cohérence finale. Elle ne délègue que si cela apporte un gain réel ; une tâche courte ou sur un seul fichier se fait directement.
 
 Agents (`.claude/agents/`, modèle déclaré dans chaque fichier ; le Chef peut le surcharger par appel avec le paramètre `model` de l'outil Agent) :
-- `ios-developer` (sonnet) code Swift/SwiftUI/WidgetKit/Intents/StoreKit · `ui-ux-designer` (sonnet) écrans, widgets, accessibilité · `qa-tester` (sonnet) tests dans `Tests/` · `github-ci` (haiku) état Git/CI, propose les commits, n'exécute rien de public · `security-reviewer` (opus, lecture seule) · `research-architect` (sonnet, lecture seule, web) · `code-reviewer` (sonnet, lecture seule). Agents intégrés utiles : `Explore` (haiku, recherche ciblée), `Plan`.
+- `ios-developer` (sonnet) code Swift/SwiftUI/WidgetKit/Intents/StoreKit · `ui-ux-designer` (sonnet) écrans, widgets, accessibilité · `qa-tester` (sonnet) tests dans `Tests/` · `github-ci` (haiku) état Git/CI, propose les commits, n'exécute rien de public · `security-reviewer` (opus, lecture seule) · `research-architect` (sonnet, lecture seule, web) · `code-reviewer` (sonnet, lecture seule) · `ml-engineer` (sonnet, ajouté le 2026-11-04) `scripts/ml/`, entraînements Kaggle, banc d'essai du scanner. Agents intégrés utiles : `Explore` (haiku, recherche ciblée), `Plan`.
 - Modèles : haiku = lecture/recherche/synthèse simple ; sonnet = développement, UI, tests, revue ; opus = architecture difficile, bug délicat, audit critique. Pas d'opus pour une tâche simple ; jamais plusieurs agents coûteux sur la même tâche.
 
 Méthode du Chef :
