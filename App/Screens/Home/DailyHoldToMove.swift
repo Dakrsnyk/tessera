@@ -37,14 +37,18 @@ struct DailyHoldToMove: UIViewRepresentable {
         context.coordinator.update(onMove: onMove, onDrop: onDrop)
     }
 
-    /// The card goes away while up (the edit mode ended): Home scrolls again; the drop does nothing once the
+    /// The card goes away while up (the edit mode ended, the card left Mon Quotidien): Home scrolls again at once;
+    /// the drop waits for the end of the view update (no change of state during it), and does nothing once the
     /// mode has ended.
     static func dismantleUIView(_ view: UIView, coordinator: Coordinator) {
-        coordinator.finish(drop: true)
+        coordinator.finish(drop: false, dropLater: true)
     }
 
     @MainActor
     final class Coordinator: NSObject {
+        /// One card up at a time: a second finger holding another card is ignored (weak: a coordinator that goes
+        /// away never blocks the next one).
+        private static weak var lifted: Coordinator?
         private var onMove: (DailyCardDrag) -> Void = { _ in }
         private var onDrop: () -> Void = {}
         private var active = false
@@ -68,13 +72,23 @@ struct DailyHoldToMove: UIViewRepresentable {
             guard let view = press.view else { return }
             switch press.state {
             case .began:
+                guard Self.lifted == nil else {
+                    // Turning the recognizer off and on cancels this press (it was never active: nothing to undo).
+                    press.isEnabled = false
+                    press.isEnabled = true
+                    return
+                }
+                Self.lifted = self
                 active = true
                 grab = press.location(in: view)
                 start = press.location(in: nil)
                 finger = start
                 freezeScrolling(around: view)
                 startOffset = scroll?.contentOffset.y ?? 0
-                let link = CADisplayLink(target: self, selector: #selector(tick))
+                // The link holds its target strongly: a weak relay, so the coordinator never stays alive through it.
+                let relay = LinkRelay()
+                relay.owner = self
+                let link = CADisplayLink(target: relay, selector: #selector(LinkRelay.tick(_:)))
                 link.add(to: .main, forMode: .common)
                 self.link = link
                 send()
@@ -86,16 +100,23 @@ struct DailyHoldToMove: UIViewRepresentable {
             }
         }
 
-        /// The finger leaves (or the card goes away): Home scrolls again, the card is dropped.
-        func finish(drop: Bool) {
+        /// The finger leaves (or the card goes away): Home scrolls again, the card is dropped (now, or once the
+        /// current view update is over).
+        func finish(drop: Bool, dropLater: Bool = false) {
             guard active else { return }
             active = false
+            if Self.lifted === self { Self.lifted = nil }
             link?.invalidate()
             link = nil
             frozen.forEach { $0.isEnabled = true }
             frozen = []
             scroll = nil
-            if drop { onDrop() }
+            if drop {
+                onDrop()
+            } else if dropLater {
+                let onDrop = onDrop
+                DispatchQueue.main.async { onDrop() }
+            }
         }
 
         private func send() {
@@ -120,14 +141,15 @@ struct DailyHoldToMove: UIViewRepresentable {
         }
 
         /// Near the top or the bottom of the visible part of Home, Home scrolls, faster as the finger gets closer
-        /// to the edge; the card stays under the finger.
-        @objc private func tick() {
+        /// to the edge; the card stays under the finger. The speed is per second, the same at 60 and at 120 Hz.
+        fileprivate func tick(_ link: CADisplayLink) {
             guard active, let scroll else { return }
             let visible = scroll.convert(scroll.bounds, to: nil)
             let top = visible.minY + scroll.adjustedContentInset.top
             let bottom = visible.maxY - scroll.adjustedContentInset.bottom
             let edge: CGFloat = 80
-            let fastest: CGFloat = 14
+            let frame = min(max(link.targetTimestamp - link.timestamp, 1.0 / 120), 1.0 / 30)
+            let fastest = 840 * CGFloat(frame)
             var step: CGFloat = 0
             if finger.y < top + edge {
                 step = -min(1, (top + edge - finger.y) / edge) * fastest
@@ -142,5 +164,20 @@ struct DailyHoldToMove: UIViewRepresentable {
             scroll.contentOffset = CGPoint(x: scroll.contentOffset.x, y: next)
             send()
         }
+    }
+}
+
+/// The target of the display link of `DailyHoldToMove`: holds the coordinator weakly (a link holds its target
+/// strongly until it is invalidated).
+@MainActor
+private final class LinkRelay: NSObject {
+    weak var owner: DailyHoldToMove.Coordinator?
+
+    @objc func tick(_ link: CADisplayLink) {
+        guard let owner else {
+            link.invalidate()
+            return
+        }
+        owner.tick(link)
     }
 }
