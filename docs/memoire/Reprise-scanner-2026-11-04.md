@@ -48,7 +48,7 @@ Script `scratchpad/calib/pipeline_sets.py` (copié dans la sauvegarde), sur les 
 ## 6. En pause (à reprendre seulement après validation)
 - **Build `[interne]` du classifieur v4** : `[unit]` est vert (Build 328) ; envoi sur l'iPhone dès que l'utilisateur confirme la reprise.
 - **Option « peut-être »** : en attente de la réponse de l'utilisateur.
-- **Mesure « vues multiples »** (`pipeline_eval.py --tta miroir-marge`) : tourne en arrière-plan sur le PC, log `C:\Users\Etudiant\ardane-tools\ml\eval_v4_tta.log`, rapport `kaggle-outputs\classifier-v4\eval-local\pipeline-v4-tta-test.*`. Elle sert à une décision de la phase 1.
+- **Vues multiples** (`pipeline_eval.py --tta miroir-marge`) : mesure terminée, **aucun gain** (nom du 1er coup 52,0 % → 51,6 % ; 35 gagnés, 41 perdus ; p = 0,57) : écartées, rien à intégrer. Rapport `kaggle-outputs\classifier-v4\eval-local\pipeline-v4-tta-test.*`.
 - **Segmenteur Small** : carnet prêt (`scripts/ml/kaggle/segmenter/notebook_cells.py`, `SIZES = ["small"]`). À pousser sur Kaggle après le 2026-11-07, avec `kaggle kernels push -p scripts/ml/kaggle/segmenter --accelerator NvidiaTeslaT4`.
 - **Grammes** : affinage complet sur GPU, empreintes Nutrition5k à recalculer avec la dorsale v4, intégration expérimentale dans l'app (assiette), repas pesés (22.6).
 - **Plus ancien** : sauce bolognaise seule (pas d'entrée FCÉN pure), interface inspirée de Plategist (question de l'huile, étiquettes « nom · ~g »), mémoire visuelle non incluse dans les sauvegardes de SharedStore.
