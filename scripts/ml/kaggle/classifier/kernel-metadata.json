@@ -11,7 +11,8 @@
   "machine_shape": "NvidiaTeslaT4",
   "docker_image_pinning_type": "original",
   "dataset_sources": [
-    "awsaf49/food-recognition-2022-dataset"
+    "awsaf49/food-recognition-2022-dataset",
+    "darksnyk/ardane-quebec-crops"
   ],
   "competition_sources": [],
   "kernel_sources": [],

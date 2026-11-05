@@ -35,7 +35,7 @@ import os, sys, time
 T0 = time.time()                                   # début de session : sert au budget de temps (12 h au plus sur Kaggle)
 SMOKE_DIR = os.environ.get("ARDANE_KAGGLE_SMOKE")  # essai local (toujours None sur Kaggle)
 
-SIZES = ["nano"]              # ["nano", "small"] : Small seulement si le budget le permet ; sinon une 2e session avec SIZES = ["small"]
+SIZES = ["small"]             # passage 3 (préparé le 2026-11-04) : Small pour dépasser la découpe du Nano (73,9 % retrouvés au seuil 0,30)
 EPOCHS_MAX = 15               # plafond d'époques (le nombre réel dépend du débit MESURÉ et du budget de la session)
 MIN_EPOCHS = 4                # sous ce nombre, la taille est sautée (pas assez de temps pour un affinage utile)
 BATCH = {"nano": 16, "small": 12}   # lot par taille (T4, 16 Go) ; divisé par 2 automatiquement en cas de manque de mémoire
@@ -43,7 +43,7 @@ VALID_MAX = 1500              # images de validation (prélevées dans train) ; 
 BENCH_TRAIN, BENCH_VALID = 320, 64   # taille du sous-ensemble de mesure du débit
 OP_THRESHOLD = 0.30           # seuil de confiance d'exploitation pour IoU / Dice par aliment (fixé d'avance, pas réglé sur le test)
 CLASS_AGNOSTIC = True         # une seule classe « food » : le segmenteur TROUVE les aliments, le classifieur les nomme (passage 2, 2026-11-03)
-WARM_START = "rf-detr-seg-nano-myfoodrepo.pth"   # point de départ cherché sous /kaggle/input (segmenter à 498 classes du passage 1) ; "" = poids COCO
+WARM_START = ""               # Small : poids COCO officiels (le point de départ Nano ne convient pas à l'architecture Small)
 EVAL_EXPORT_RESERVE_S = 45 * 60      # temps gardé après l'entraînement : évaluation + exports (par taille)
 RFDETR_VERSION = "1.11.2"
 SESSION_HOURS = 12.0          # plafond Kaggle d'une session : ne pas dépasser

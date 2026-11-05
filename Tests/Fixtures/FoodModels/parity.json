@@ -17,10 +17,10 @@
   "foodColumn": 0
  },
  "classifier": {
-  "head": "myfoodrepo-B-head-mlp.pt",
+  "head": "myfoodrepo-ardane-B-head-mlp.pt",
   "inputSize": 224,
   "margin": 0.1,
-  "classes": 498
+  "classes": 346
  },
  "photos": [
   {
@@ -46,37 +46,37 @@
      "top5": [
       {
        "label": "mfr:apple",
-       "p": 0.751828
+       "p": 0.878701
       },
       {
        "label": "mfr:nectarine",
-       "p": 0.021974
+       "p": 0.001598
       },
       {
-       "label": "mfr:figs",
-       "p": 0.019023
+       "label": "mfr:cherries",
+       "p": 0.001457
       },
       {
-       "label": "mfr:tomato-raw",
-       "p": 0.00813
+       "label": "mfr:bagel-without-filling",
+       "p": 0.001226
       },
       {
-       "label": "mfr:panna-cotta",
-       "p": 0.005737
+       "label": "mfr:coriander",
+       "p": 0.000975
       }
      ],
      "foods": [
       {
        "id": "builtin.apple",
-       "p": 0.751828
+       "p": 0.878701
       },
       {
        "id": "cnf.1611",
-       "p": 0.021974
+       "p": 0.001598
       },
       {
-       "id": "cnf.1711",
-       "p": 0.019023
+       "id": "builtin.cherries",
+       "p": 0.001457
       }
      ]
     }
@@ -85,37 +85,37 @@
     "top5": [
      {
       "label": "mfr:apple",
-      "p": 0.786598
+      "p": 0.901723
      },
      {
       "label": "mfr:nectarine",
-      "p": 0.021199
+      "p": 0.001281
      },
      {
-      "label": "mfr:figs",
-      "p": 0.020052
+      "label": "mfr:cherries",
+      "p": 0.001263
      },
      {
-      "label": "mfr:tomato-raw",
-      "p": 0.005727
+      "label": "mfr:bagel-without-filling",
+      "p": 0.001033
      },
      {
-      "label": "mfr:panna-cotta",
-      "p": 0.004754
+      "label": "mfr:red-radish",
+      "p": 0.0009
      }
     ],
     "foods": [
      {
       "id": "builtin.apple",
-      "p": 0.786598
+      "p": 0.901723
      },
      {
       "id": "cnf.1611",
-      "p": 0.021199
+      "p": 0.001281
      },
      {
-      "id": "cnf.1711",
-      "p": 0.020052
+      "id": "builtin.cherries",
+      "p": 0.001263
      }
     ]
    }
@@ -143,37 +143,37 @@
      "top5": [
       {
        "label": "mfr:chips-french-fries",
-       "p": 0.992078
+       "p": 0.987824
       },
       {
        "label": "mfr:sweet-potato",
-       "p": 0.002288
+       "p": 0.001436
       },
       {
-       "label": "mfr:hamburger-bread-meat-ketchup",
-       "p": 0.001835
+       "label": "mfr:qc-poutine",
+       "p": 0.00111
       },
       {
-       "label": "mfr:country-fries",
-       "p": 0.001148
+       "label": "mfr:cocktail",
+       "p": 0.000232
       },
       {
-       "label": "mfr:processed-cheese",
-       "p": 0.000142
+       "label": "mfr:kebab-in-pita-bread",
+       "p": 0.000192
       }
      ],
      "foods": [
       {
        "id": "builtin.fries",
-       "p": 0.993226
+       "p": 0.987824
       },
       {
        "id": "builtin.sweetpotato",
-       "p": 0.002288
+       "p": 0.001436
       },
       {
-       "id": "builtin.burger",
-       "p": 0.001858
+       "id": "builtin.poutine",
+       "p": 0.00111
       }
      ]
     },
@@ -194,38 +194,38 @@
      "maskArea": 0.060002,
      "top5": [
       {
-       "label": "mfr:white-bread-with-butter-eggs-and-milk",
-       "p": 0.218909
-      },
-      {
-       "label": "mfr:hamburger-bread-meat-ketchup",
-       "p": 0.174664
+       "label": "mfr:bread-white",
+       "p": 0.522933
       },
       {
        "label": "mfr:hamburger-bun",
-       "p": 0.106579
-      },
-      {
-       "label": "mfr:mustard",
-       "p": 0.054349
+       "p": 0.138741
       },
       {
        "label": "mfr:bread-meat-substitute-lettuce-sauce",
-       "p": 0.051037
+       "p": 0.066529
+      },
+      {
+       "label": "mfr:roll-with-pieces-of-chocolate",
+       "p": 0.030677
+      },
+      {
+       "label": "mfr:peanut-butter",
+       "p": 0.030333
       }
      ],
      "foods": [
       {
-       "id": "cnf.3695",
-       "p": 0.220308
-      },
-      {
-       "id": "builtin.burger",
-       "p": 0.180018
+       "id": "builtin.bread",
+       "p": 0.522933
       },
       {
        "id": "cnf.3985",
-       "p": 0.106579
+       "p": 0.138741
+      },
+      {
+       "id": "mfr:bread-meat-substitute-lettuce-sauce",
+       "p": 0.066529
       }
      ]
     },
@@ -247,37 +247,37 @@
      "top5": [
       {
        "label": "mfr:salad-leaf-salad-green",
-       "p": 0.398024
-      },
-      {
-       "label": "mfr:bread-meat-substitute-lettuce-sauce",
-       "p": 0.150978
+       "p": 0.525866
       },
       {
        "label": "mfr:hamburger-bread-meat-ketchup",
-       "p": 0.111247
+       "p": 0.225632
       },
       {
-       "label": "mfr:hamburger-bun",
-       "p": 0.082479
+       "label": "mfr:faux-mage-cashew-vegan-chers",
+       "p": 0.019517
+      },
+      {
+       "label": "mfr:bread-meat-substitute-lettuce-sauce",
+       "p": 0.017354
       },
       {
        "label": "mfr:processed-cheese",
-       "p": 0.039755
+       "p": 0.014542
       }
      ],
      "foods": [
       {
        "id": "builtin.lettuce",
-       "p": 0.403002
-      },
-      {
-       "id": "mfr:bread-meat-substitute-lettuce-sauce",
-       "p": 0.150978
+       "p": 0.525866
       },
       {
        "id": "builtin.burger",
-       "p": 0.139092
+       "p": 0.225632
+      },
+      {
+       "id": "mfr:faux-mage-cashew-vegan-chers",
+       "p": 0.019517
       }
      ]
     },
@@ -299,37 +299,37 @@
      "top5": [
       {
        "label": "mfr:salad-leaf-salad-green",
-       "p": 0.37174
-      },
-      {
-       "label": "mfr:bread-meat-substitute-lettuce-sauce",
-       "p": 0.174769
-      },
-      {
-       "label": "mfr:hamburger-bun",
-       "p": 0.086436
+       "p": 0.401306
       },
       {
        "label": "mfr:hamburger-bread-meat-ketchup",
-       "p": 0.070414
+       "p": 0.232299
       },
       {
        "label": "mfr:coriander",
-       "p": 0.037418
+       "p": 0.039416
+      },
+      {
+       "label": "mfr:bread-meat-substitute-lettuce-sauce",
+       "p": 0.027708
+      },
+      {
+       "label": "mfr:processed-cheese",
+       "p": 0.027121
       }
      ],
      "foods": [
       {
        "id": "builtin.lettuce",
-       "p": 0.379347
-      },
-      {
-       "id": "mfr:bread-meat-substitute-lettuce-sauce",
-       "p": 0.174769
+       "p": 0.401306
       },
       {
        "id": "builtin.burger",
-       "p": 0.099569
+       "p": 0.232299
+      },
+      {
+       "id": "cnf.2067",
+       "p": 0.039416
       }
      ]
     }
@@ -338,37 +338,37 @@
     "top5": [
      {
       "label": "mfr:chips-french-fries",
-      "p": 0.900541
+      "p": 0.944662
      },
      {
       "label": "mfr:hamburger-bread-meat-ketchup",
-      "p": 0.075824
+      "p": 0.011965
      },
      {
-      "label": "mfr:sweet-potato",
-      "p": 0.004617
+      "label": "mfr:qc-poutine",
+      "p": 0.005122
      },
      {
-      "label": "mfr:bread-meat-substitute-lettuce-sauce",
-      "p": 0.003022
+      "label": "mfr:qc-tourtiere",
+      "p": 0.004123
      },
      {
-      "label": "mfr:country-fries",
-      "p": 0.001672
+      "label": "mfr:kebab-in-pita-bread",
+      "p": 0.002746
      }
     ],
     "foods": [
      {
       "id": "builtin.fries",
-      "p": 0.902213
+      "p": 0.944662
      },
      {
       "id": "builtin.burger",
-      "p": 0.075881
+      "p": 0.011965
      },
      {
-      "id": "builtin.sweetpotato",
-      "p": 0.004617
+      "id": "builtin.poutine",
+      "p": 0.005122
      }
     ]
    }
@@ -395,38 +395,38 @@
      "maskArea": 0.535021,
      "top5": [
       {
-       "label": "mfr:pasta-linguini-parpadelle-tagliatelle",
-       "p": 0.938386
-      },
-      {
-       "label": "mfr:pasta-penne",
-       "p": 0.007267
-      },
-      {
-       "label": "mfr:pasta-noodles",
-       "p": 0.006822
+       "label": "mfr:pasta-spaghetti",
+       "p": 0.773529
       },
       {
        "label": "mfr:bolognaise-sauce",
-       "p": 0.006355
+       "p": 0.043336
       },
       {
-       "label": "mfr:pasta",
-       "p": 0.005545
+       "label": "mfr:sauce-mushroom",
+       "p": 0.023732
+      },
+      {
+       "label": "mfr:sauce-carbonara",
+       "p": 0.016543
+      },
+      {
+       "label": "mfr:sauce-cream",
+       "p": 0.007525
       }
      ],
      "foods": [
       {
        "id": "builtin.pasta",
-       "p": 0.964991
+       "p": 0.773529
       },
       {
        "id": "mfr:bolognaise-sauce",
-       "p": 0.006355
+       "p": 0.043336
       },
       {
-       "id": "builtin.beef",
-       "p": 0.002888
+       "id": "cnf.1005",
+       "p": 0.023732
       }
      ]
     },
@@ -448,37 +448,37 @@
      "top5": [
       {
        "label": "mfr:bolognaise-sauce",
-       "p": 0.709606
-      },
-      {
-       "label": "mfr:cheese",
-       "p": 0.043622
+       "p": 0.750085
       },
       {
        "label": "mfr:beef-minced-only-meat",
-       "p": 0.0339
+       "p": 0.080182
       },
       {
-       "label": "mfr:parmesan",
-       "p": 0.019729
+       "label": "mfr:sauce-mushroom",
+       "p": 0.028127
       },
       {
-       "label": "mfr:sauce-carbonara",
-       "p": 0.012653
+       "label": "mfr:beef",
+       "p": 0.022661
+      },
+      {
+       "label": "mfr:sauce-savoury",
+       "p": 0.016727
       }
      ],
      "foods": [
       {
        "id": "mfr:bolognaise-sauce",
-       "p": 0.709606
+       "p": 0.750085
       },
       {
        "id": "builtin.beef",
-       "p": 0.045746
+       "p": 0.080182
       },
       {
-       "id": "builtin.cheddar",
-       "p": 0.043675
+       "id": "cnf.1005",
+       "p": 0.028127
       }
      ]
     }
@@ -486,38 +486,38 @@
    "wholeImage": {
     "top5": [
      {
-      "label": "mfr:pasta-linguini-parpadelle-tagliatelle",
-      "p": 0.759351
+      "label": "mfr:pasta-spaghetti",
+      "p": 0.468528
      },
      {
       "label": "mfr:bolognaise-sauce",
-      "p": 0.092332
+      "p": 0.149729
      },
      {
-      "label": "mfr:parmesan",
-      "p": 0.026253
-     },
-     {
-      "label": "mfr:cheese",
-      "p": 0.012765
+      "label": "mfr:sauce-mushroom",
+      "p": 0.045862
      },
      {
       "label": "mfr:sauce-carbonara",
-      "p": 0.009169
+      "p": 0.039183
+     },
+     {
+      "label": "mfr:cheese",
+      "p": 0.020914
      }
     ],
     "foods": [
      {
       "id": "builtin.pasta",
-      "p": 0.778666
+      "p": 0.468528
      },
      {
       "id": "mfr:bolognaise-sauce",
-      "p": 0.092332
+      "p": 0.149729
      },
      {
-      "id": "builtin.parmesan",
-      "p": 0.026253
+      "id": "cnf.1005",
+      "p": 0.045862
      }
     ]
    }
@@ -544,38 +544,38 @@
      "maskArea": 0.085987,
      "top5": [
       {
-       "label": "mfr:fennel",
-       "p": 0.972438
-      },
-      {
        "label": "mfr:kolhrabi",
-       "p": 0.018931
+       "p": 0.459985
       },
       {
-       "label": "mfr:witloof-chicory",
-       "p": 0.001366
+       "label": "mfr:fennel",
+       "p": 0.383011
       },
       {
        "label": "mfr:white-radish",
-       "p": 0.001236
+       "p": 0.030614
       },
       {
-       "label": "mfr:salad-leaf-salad-green",
-       "p": 0.000883
+       "label": "mfr:witloof-chicory",
+       "p": 0.021793
+      },
+      {
+       "label": "mfr:celeriac",
+       "p": 0.010195
       }
      ],
      "foods": [
       {
-       "id": "cnf.2350",
-       "p": 0.972438
-      },
-      {
        "id": "cnf.2109",
-       "p": 0.018931
+       "p": 0.459985
       },
       {
-       "id": "cnf.2056",
-       "p": 0.001366
+       "id": "cnf.2350",
+       "p": 0.383011
+      },
+      {
+       "id": "cnf.2196",
+       "p": 0.030614
       }
      ]
     },
@@ -597,37 +597,37 @@
      "top5": [
       {
        "label": "mfr:carrot-raw",
-       "p": 0.891061
+       "p": 0.953311
       },
       {
        "label": "mfr:sweet-potato",
-       "p": 0.074609
+       "p": 0.002588
       },
       {
        "label": "mfr:carrot-steamed-without-addition-of-salt",
-       "p": 0.008668
+       "p": 0.002314
       },
       {
-       "label": "mfr:chips-french-fries",
-       "p": 0.001741
+       "label": "mfr:chia-grains",
+       "p": 0.001557
       },
       {
        "label": "mfr:italian-salad-dressing",
-       "p": 0.0017
+       "p": 0.00144
       }
      ],
      "foods": [
       {
        "id": "cnf.2380",
-       "p": 0.891061
+       "p": 0.953311
       },
       {
        "id": "builtin.sweetpotato",
-       "p": 0.074609
+       "p": 0.002588
       },
       {
        "id": "cnf.2381",
-       "p": 0.008668
+       "p": 0.002314
       }
      ]
     },
@@ -649,37 +649,37 @@
      "top5": [
       {
        "label": "mfr:tomato-raw",
-       "p": 0.846073
-      },
-      {
-       "label": "mfr:tomato-stewed-without-addition-of-fat-without-addition-of-salt",
-       "p": 0.02899
+       "p": 0.868532
       },
       {
        "label": "mfr:caprese-salad-tomato-mozzarella",
-       "p": 0.024378
+       "p": 0.012799
       },
       {
        "label": "mfr:balsamic-salad-dressing",
-       "p": 0.006238
+       "p": 0.00279
       },
       {
-       "label": "mfr:bell-pepper-red-raw",
-       "p": 0.005971
+       "label": "mfr:onion",
+       "p": 0.002602
+      },
+      {
+       "label": "mfr:breadcrumbs-unspiced",
+       "p": 0.002176
       }
      ],
      "foods": [
       {
        "id": "builtin.tomato",
-       "p": 0.875063
+       "p": 0.868532
       },
       {
        "id": "mfr:caprese-salad-tomato-mozzarella",
-       "p": 0.024378
+       "p": 0.012799
       },
       {
-       "id": "builtin.pepper",
-       "p": 0.00996
+       "id": "cnf.428",
+       "p": 0.00279
       }
      ]
     },
@@ -701,37 +701,37 @@
      "top5": [
       {
        "label": "mfr:carrot-raw",
-       "p": 0.850668
+       "p": 0.948358
       },
       {
        "label": "mfr:sweet-potato",
-       "p": 0.114343
+       "p": 0.002881
       },
       {
        "label": "mfr:carrot-steamed-without-addition-of-salt",
-       "p": 0.013054
+       "p": 0.002061
+      },
+      {
+       "label": "mfr:chia-grains",
+       "p": 0.002027
       },
       {
        "label": "mfr:italian-salad-dressing",
-       "p": 0.001749
-      },
-      {
-       "label": "mfr:chips-french-fries",
-       "p": 0.001021
+       "p": 0.001623
       }
      ],
      "foods": [
       {
        "id": "cnf.2380",
-       "p": 0.850668
+       "p": 0.948358
       },
       {
        "id": "builtin.sweetpotato",
-       "p": 0.114343
+       "p": 0.002881
       },
       {
        "id": "cnf.2381",
-       "p": 0.013054
+       "p": 0.002061
       }
      ]
     },
@@ -753,37 +753,37 @@
      "top5": [
       {
        "label": "mfr:fennel",
-       "p": 0.98618
+       "p": 0.619612
       },
       {
        "label": "mfr:kolhrabi",
-       "p": 0.008062
+       "p": 0.289289
       },
       {
        "label": "mfr:witloof-chicory",
-       "p": 0.000971
+       "p": 0.018959
       },
       {
-       "label": "mfr:onion",
-       "p": 0.000584
+       "label": "mfr:white-radish",
+       "p": 0.014577
       },
       {
-       "label": "mfr:salad-leaf-salad-green",
-       "p": 0.000509
+       "label": "mfr:celeriac",
+       "p": 0.005778
       }
      ],
      "foods": [
       {
        "id": "cnf.2350",
-       "p": 0.98618
+       "p": 0.619612
       },
       {
        "id": "cnf.2109",
-       "p": 0.008062
+       "p": 0.289289
       },
       {
        "id": "cnf.2056",
-       "p": 0.000971
+       "p": 0.018959
       }
      ]
     },
@@ -805,37 +805,37 @@
      "top5": [
       {
        "label": "mfr:banana",
-       "p": 0.313078
+       "p": 0.960072
       },
       {
-       "label": "mfr:pasta",
-       "p": 0.182655
+       "label": "mfr:pasta-spaghetti",
+       "p": 0.003125
       },
       {
-       "label": "mfr:artichoke",
-       "p": 0.056401
+       "label": "mfr:swiss-chard",
+       "p": 0.001899
       },
       {
-       "label": "mfr:kiwi",
-       "p": 0.050462
+       "label": "mfr:potato-gnocchi",
+       "p": 0.001564
       },
       {
-       "label": "mfr:pineapple",
-       "p": 0.044413
+       "label": "mfr:leek",
+       "p": 0.001559
       }
      ],
      "foods": [
       {
        "id": "builtin.banana",
-       "p": 0.313078
+       "p": 0.960072
       },
       {
        "id": "builtin.pasta",
-       "p": 0.216711
+       "p": 0.003125
       },
       {
-       "id": "cnf.2365",
-       "p": 0.056401
+       "id": "cnf.2053",
+       "p": 0.001899
       }
      ]
     }
@@ -843,38 +843,38 @@
    "wholeImage": {
     "top5": [
      {
-      "label": "mfr:mixed-vegetables",
-      "p": 0.112085
+      "label": "mfr:balsamic-salad-dressing",
+      "p": 0.275082
      },
      {
-      "label": "mfr:caprese-salad-tomato-mozzarella",
-      "p": 0.106471
+      "label": "mfr:mixed-vegetables",
+      "p": 0.147163
      },
      {
       "label": "mfr:mixed-salad-chopped-without-sauce",
-      "p": 0.081875
+      "p": 0.080779
      },
      {
-      "label": "mfr:salad-leaf-salad-green",
-      "p": 0.052321
+      "label": "mfr:qc-pate-chinois",
+      "p": 0.042392
      },
      {
-      "label": "mfr:carrot-raw",
-      "p": 0.049588
+      "label": "mfr:witloof-chicory",
+      "p": 0.034703
      }
     ],
     "foods": [
      {
-      "id": "cnf.2272",
-      "p": 0.121287
+      "id": "cnf.428",
+      "p": 0.275082
      },
      {
-      "id": "mfr:caprese-salad-tomato-mozzarella",
-      "p": 0.106471
+      "id": "cnf.2272",
+      "p": 0.147163
      },
      {
       "id": "builtin.gardensalad",
-      "p": 0.081875
+      "p": 0.080779
      }
     ]
    }
@@ -902,37 +902,37 @@
      "top5": [
       {
        "label": "mfr:chips-french-fries",
-       "p": 0.899464
+       "p": 0.952214
       },
       {
-       "label": "mfr:country-fries",
-       "p": 0.054945
+       "label": "mfr:kebab-in-pita-bread",
+       "p": 0.005405
       },
       {
-       "label": "mfr:spaetzle",
-       "p": 0.004408
+       "label": "mfr:qc-poutine",
+       "p": 0.003543
       },
       {
-       "label": "mfr:savoury-puff-pastry-stick",
-       "p": 0.003362
+       "label": "mfr:chicken-nuggets",
+       "p": 0.002442
       },
       {
-       "label": "mfr:chicken-breast",
-       "p": 0.001822
+       "label": "mfr:mayonnaise",
+       "p": 0.00203
       }
      ],
      "foods": [
       {
        "id": "builtin.fries",
-       "p": 0.954409
+       "p": 0.952214
       },
       {
-       "id": "cnf.4458",
-       "p": 0.004408
+       "id": "builtin.shawarma",
+       "p": 0.005405
       },
       {
-       "id": "cnf.3856",
-       "p": 0.00341
+       "id": "builtin.poutine",
+       "p": 0.003543
       }
      ]
     },
@@ -954,37 +954,37 @@
      "top5": [
       {
        "label": "mfr:chips-french-fries",
-       "p": 0.796681
+       "p": 0.272556
       },
       {
-       "label": "mfr:country-fries",
-       "p": 0.048896
+       "label": "mfr:kebab-in-pita-bread",
+       "p": 0.082408
       },
       {
-       "label": "mfr:chicken-breast",
-       "p": 0.013725
+       "label": "mfr:fish-fingers-breaded",
+       "p": 0.062453
       },
       {
-       "label": "mfr:savoury-puff-pastry-stick",
-       "p": 0.01189
+       "label": "mfr:chicken-nuggets",
+       "p": 0.060723
       },
       {
-       "label": "mfr:spaetzle",
-       "p": 0.010671
+       "label": "mfr:qc-poutine",
+       "p": 0.046126
       }
      ],
      "foods": [
       {
        "id": "builtin.fries",
-       "p": 0.845577
+       "p": 0.272556
       },
       {
-       "id": "builtin.chicken",
-       "p": 0.016441
+       "id": "builtin.shawarma",
+       "p": 0.082408
       },
       {
-       "id": "cnf.3856",
-       "p": 0.012039
+       "id": "cnf.3006",
+       "p": 0.062453
       }
      ]
     }
@@ -992,38 +992,38 @@
    "wholeImage": {
     "top5": [
      {
+      "label": "mfr:qc-poutine",
+      "p": 0.450192
+     },
+     {
+      "label": "mfr:chicken-nuggets",
+      "p": 0.107096
+     },
+     {
+      "label": "mfr:kebab-in-pita-bread",
+      "p": 0.060652
+     },
+     {
       "label": "mfr:chips-french-fries",
-      "p": 0.721875
+      "p": 0.023233
      },
      {
-      "label": "mfr:savoury-puff-pastry-stick",
-      "p": 0.014763
-     },
-     {
-      "label": "mfr:country-fries",
-      "p": 0.01364
-     },
-     {
-      "label": "mfr:dips",
-      "p": 0.012866
-     },
-     {
-      "label": "mfr:mustard",
-      "p": 0.011268
+      "label": "mfr:chicken",
+      "p": 0.021175
      }
     ],
     "foods": [
      {
-      "id": "builtin.fries",
-      "p": 0.735515
+      "id": "builtin.poutine",
+      "p": 0.450192
      },
      {
-      "id": "cnf.3856",
-      "p": 0.01504
+      "id": "builtin.nuggets",
+      "p": 0.107096
      },
      {
-      "id": "cnf.6786",
-      "p": 0.012866
+      "id": "builtin.shawarma",
+      "p": 0.060652
      }
     ]
    }
@@ -1050,38 +1050,38 @@
      "maskArea": 0.174125,
      "top5": [
       {
-       "label": "mfr:chicken-curry-cream-coconut-milk-curry-spices-paste",
-       "p": 0.337962
-      },
-      {
-       "label": "mfr:sauce-sweet-salted-asian",
-       "p": 0.242723
+       "label": "mfr:sauce-savoury",
+       "p": 0.370008
       },
       {
        "label": "mfr:sauce-curry",
-       "p": 0.134756
+       "p": 0.357107
       },
       {
-       "label": "mfr:curry-vegetarian",
-       "p": 0.074168
+       "label": "mfr:chicken-curry-cream-coconut-milk-curry-spices-paste",
+       "p": 0.196137
       },
       {
-       "label": "mfr:sauce-roast",
-       "p": 0.022343
+       "label": "mfr:sauce-sweet-salted-asian",
+       "p": 0.028973
+      },
+      {
+       "label": "mfr:beef",
+       "p": 0.014783
       }
      ],
      "foods": [
       {
-       "id": "builtin.butterchicken",
-       "p": 0.337962
-      },
-      {
-       "id": "mfr:sauce-sweet-salted-asian",
-       "p": 0.242723
+       "id": "cnf.1001",
+       "p": 0.370008
       },
       {
        "id": "mfr:sauce-curry",
-       "p": 0.134756
+       "p": 0.357107
+      },
+      {
+       "id": "builtin.butterchicken",
+       "p": 0.196137
       }
      ]
     },
@@ -1103,37 +1103,37 @@
      "top5": [
       {
        "label": "mfr:rice",
-       "p": 0.694093
+       "p": 0.992266
       },
       {
-       "label": "mfr:rice-jasmin",
-       "p": 0.15898
+       "label": "mfr:chicken-curry-cream-coconut-milk-curry-spices-paste",
+       "p": 0.000231
       },
       {
-       "label": "mfr:sauce-sweet-salted-asian",
-       "p": 0.029425
+       "label": "mfr:sauce-curry",
+       "p": 0.000216
       },
       {
-       "label": "mfr:rice-basmati",
-       "p": 0.02622
+       "label": "mfr:sauerkraut",
+       "p": 0.000167
       },
       {
-       "label": "mfr:cantonese-fried-rice",
-       "p": 0.019733
+       "label": "mfr:coriander",
+       "p": 0.000163
       }
      ],
      "foods": [
       {
        "id": "builtin.rice",
-       "p": 0.880165
+       "p": 0.992266
       },
       {
-       "id": "mfr:sauce-sweet-salted-asian",
-       "p": 0.029425
+       "id": "builtin.butterchicken",
+       "p": 0.000231
       },
       {
-       "id": "builtin.friedrice",
-       "p": 0.019733
+       "id": "mfr:sauce-curry",
+       "p": 0.000216
       }
      ]
     },
@@ -1154,38 +1154,38 @@
      "maskArea": 0.016471,
      "top5": [
       {
-       "label": "mfr:carrot-raw",
-       "p": 0.598869
-      },
-      {
        "label": "mfr:bell-pepper-red-raw",
-       "p": 0.130735
+       "p": 0.806031
       },
       {
-       "label": "mfr:sauce-sweet-salted-asian",
-       "p": 0.098585
+       "label": "mfr:sun-dried-tomatoe",
+       "p": 0.093937
       },
       {
-       "label": "mfr:bell-pepper-red-stewed-without-addition-of-fat-without-addition-of-salt",
-       "p": 0.021664
+       "label": "mfr:carrot-raw",
+       "p": 0.018124
       },
       {
        "label": "mfr:mixed-vegetables",
-       "p": 0.01156
+       "p": 0.014951
+      },
+      {
+       "label": "mfr:carrot-steamed-without-addition-of-salt",
+       "p": 0.013731
       }
      ],
      "foods": [
       {
-       "id": "cnf.2380",
-       "p": 0.598869
-      },
-      {
        "id": "builtin.pepper",
-       "p": 0.152399
+       "p": 0.806031
       },
       {
-       "id": "mfr:sauce-sweet-salted-asian",
-       "p": 0.098585
+       "id": "cnf.2349",
+       "p": 0.093937
+      },
+      {
+       "id": "cnf.2380",
+       "p": 0.018124
       }
      ]
     }
@@ -1193,38 +1193,38 @@
    "wholeImage": {
     "top5": [
      {
+      "label": "mfr:sauce-curry",
+      "p": 0.308019
+     },
+     {
       "label": "mfr:chicken-curry-cream-coconut-milk-curry-spices-paste",
-      "p": 0.591023
+      "p": 0.241946
+     },
+     {
+      "label": "mfr:sauce-savoury",
+      "p": 0.128346
      },
      {
       "label": "mfr:curry-vegetarian",
-      "p": 0.074971
-     },
-     {
-      "label": "mfr:sauce-sweet-salted-asian",
-      "p": 0.037338
-     },
-     {
-      "label": "mfr:sauce-curry",
-      "p": 0.034599
+      "p": 0.071678
      },
      {
       "label": "mfr:rice",
-      "p": 0.028854
+      "p": 0.012789
      }
     ],
     "foods": [
      {
+      "id": "mfr:sauce-curry",
+      "p": 0.308019
+     },
+     {
       "id": "builtin.butterchicken",
-      "p": 0.591023
+      "p": 0.241946
      },
      {
-      "id": "mfr:curry-vegetarian",
-      "p": 0.074971
-     },
-     {
-      "id": "builtin.rice",
-      "p": 0.042016
+      "id": "cnf.1001",
+      "p": 0.128346
      }
     ]
    }

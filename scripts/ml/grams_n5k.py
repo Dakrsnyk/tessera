@@ -153,74 +153,91 @@ def evaluate(pred: np.ndarray, truth: np.ndarray) -> dict:
             "within_10_pct": float(100 * np.mean(rel <= 0.10)), "no_zone": int(np.sum(pred <= 0))}
 
 
-def fit_density(train, val, column: int, use_emb: bool, epochs: int = 400, seed: int = 0):
-    """log densité de chaque zone = MLP(empreinte) (ou constante) ; grammes du plat = somme(mesure_zone x densité). Perte : écart des log."""
+def zone_features(d: dict, column: int, norm: dict) -> np.ndarray:
+    """Entrée du modèle pour chaque zone d'un plat : empreinte normalisée, log de la mesure de la zone, et le contexte du plat
+    (log de la mesure totale, log du nombre de zones, part de la zone, confiance du segmenteur). Calculable tel quel dans l'app."""
+    z = d["zones"]
+    total = max(float(z[:, column].sum()), 1e-3)
+    rows = []
+    for e, zz in zip(d["emb"], z):
+        rows.append(np.concatenate([(e - norm["mean"]) / norm["std"],
+                                    [(np.log(max(zz[column], 1e-3)) - norm["lm_mean"]) / norm["lm_std"],
+                                     (np.log(total) - norm["lm_mean"]) / norm["lm_std"], np.log(len(z)), zz[column] / total, zz[3]]]))
+    return np.array(rows, dtype=np.float32).reshape(-1, len(norm["mean"]) + 5)    # plat sans zone : (0, D)
+
+
+def fit_density(train, val, column: int, use_emb: bool, seeds: int = 5, hidden: int = 256, dropout: float = 0.3,
+                weight_decay: float = 0.05, lr: float = 1e-3, max_epochs: int = 1500, patience: int = 60):
+    """log densité de chaque zone = MLP(zone_features) (ou constante) ; grammes du plat = somme(mesure_zone x densité).
+    Perte de Huber sur le log (robuste aux plats aberrants), arrêt sur la validation, moyenne géométrique de `seeds` modèles.
+    Réglages choisis le 2026-11-04 sur la VALIDATION seule (balayage de 5 réglages x 5 graines) : 74,9 % à ±25 % en validation."""
     import torch
     from torch import nn
 
-    torch.manual_seed(seed)
-    dim = train[0]["emb"].shape[1] if train[0]["emb"].size else 768
-    mean = np.concatenate([d["emb"] for d in train if len(d["emb"])]).mean(0)
-    std = np.concatenate([d["emb"] for d in train if len(d["emb"])]).std(0) + 1e-6
-    ratios = [d["mass"] / max(1e-6, d["zones"][:, column].sum()) for d in train if len(d["zones"]) and d["zones"][:, column].sum() > 0]
+    train = [d for d in train if len(d["zones"])]
+    val = [d for d in val if len(d["zones"])]
+    emb = np.concatenate([d["emb"] for d in train])
+    logm = np.log(np.maximum(np.concatenate([d["zones"][:, column] for d in train]), 1e-3))
+    norm = {"mean": emb.mean(0), "std": emb.std(0) + 1e-6, "lm_mean": float(logm.mean()), "lm_std": float(logm.std() + 1e-6)}
+    ratios = [d["mass"] / d["zones"][:, column].sum() for d in train if d["zones"][:, column].sum() > 0]
     base = float(np.log(np.median(ratios)))
-    logm = np.log(np.maximum(np.concatenate([d["zones"][:, column] for d in train if len(d["zones"])]), 1e-3))
-    lm_mean, lm_std = float(logm.mean()), float(logm.std() + 1e-6)
-    # entrée : empreinte normalisée + log de la mesure de la zone (un gros tas est aussi plus épais)
-    net = nn.Sequential(nn.Linear(dim + 1, 128), nn.GELU(), nn.Dropout(0.2), nn.Linear(128, 1)) if use_emb else None
-    if net is not None:
-        nn.init.zeros_(net[-1].weight)
-        nn.init.zeros_(net[-1].bias)
 
-    def batch(items):
-        E, M, I, Y = [], [], [], []
+    def tensors(items):
+        F, M, I = [], [], []
         for i, d in enumerate(items):
-            for e, z in zip(d["emb"], d["zones"]):
-                E.append(np.append((e - mean) / std, (np.log(max(z[column], 1e-3)) - lm_mean) / lm_std))
-                M.append(max(z[column], 0.0))
-                I.append(i)
-            Y.append(d["mass"])
-        return (torch.tensor(np.array(E), dtype=torch.float32), torch.tensor(M, dtype=torch.float32),
-                torch.tensor(I, dtype=torch.long), torch.tensor(Y, dtype=torch.float32))
+            F.append(zone_features(d, column, norm))
+            M += [max(float(v), 0.0) for v in d["zones"][:, column]]
+            I += [i] * len(d["zones"])
+        return (torch.tensor(np.concatenate(F)), torch.tensor(M, dtype=torch.float32), torch.tensor(I, dtype=torch.long),
+                torch.tensor([d["mass"] for d in items], dtype=torch.float32))
 
-    def predict(items, model):
+    def run(nets, items):
         if not items:
             return np.zeros(0)
-        E, M, I, _ = batch(items)
+        F, M, I, _ = tensors(items)
+        logs = []
         with torch.no_grad():
-            logd = base + (model(E).squeeze(1) if model is not None else torch.zeros(len(M)))
-            per = M * torch.exp(logd)
-            out = torch.zeros(len(items)).index_add_(0, I, per)
-        return out.numpy()
+            for net in nets or [None]:
+                logd = base + (net(F).squeeze(1) if net is not None else torch.zeros(len(M)))
+                logs.append(torch.log(torch.zeros(len(items)).index_add_(0, I, M * torch.exp(logd)) + 1e-6))
+        return torch.exp(torch.stack(logs).mean(0)).numpy()
 
-    if net is None:
-        return lambda items: predict(items, None), {"base_density": float(np.exp(base))}
-    opt = torch.optim.AdamW(net.parameters(), lr=1e-3, weight_decay=1e-2)
-    tr = [d for d in train if len(d["zones"])]
-    E, M, I, Y = batch(tr)
-    best, best_state, waited = float("inf"), None, 0
-    for epoch in range(epochs):
-        net.train()
-        logd = base + net(E).squeeze(1)
-        pred = torch.zeros(len(tr)).index_add_(0, I, M * torch.exp(logd))
-        loss = torch.nn.functional.huber_loss(torch.log(pred + 1.0), torch.log(Y), delta=0.3)   # robuste aux plats aberrants
-        opt.zero_grad()
-        loss.backward()
-        opt.step()
+    info = {"base_density": float(np.exp(base)), "norm": norm, "base": base, "column": column}
+    if not use_emb:
+        return (lambda items: run([], items)), info
+    Ft, Mt, It, Yt = tensors(train)
+    Fv, Mv, Iv, Yv = tensors(val)
+    nets, best_vals = [], []
+    for seed in range(seeds):
+        torch.manual_seed(seed)
+        net = nn.Sequential(nn.Linear(Ft.shape[1], hidden), nn.GELU(), nn.Dropout(dropout), nn.Linear(hidden, 1))
+        nn.init.zeros_(net[-1].weight)
+        nn.init.zeros_(net[-1].bias)
+        opt = torch.optim.AdamW(net.parameters(), lr=lr, weight_decay=weight_decay)
+        best, state, waited = float("inf"), None, 0
+        for _ in range(max_epochs):
+            net.train()
+            pred = torch.zeros(len(Yt)).index_add_(0, It, Mt * torch.exp(base + net(Ft).squeeze(1)))
+            loss = nn.functional.huber_loss(torch.log(pred + 1.0), torch.log(Yt), delta=0.3)
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
+            net.eval()
+            with torch.no_grad():
+                pv = torch.zeros(len(Yv)).index_add_(0, Iv, Mv * torch.exp(base + net(Fv).squeeze(1)))
+                v = float(torch.mean((torch.log(pv + 1.0) - torch.log(Yv)) ** 2))
+            if v < best - 1e-5:
+                best, state, waited = v, {k: x.clone() for k, x in net.state_dict().items()}, 0
+            else:
+                waited += 1
+                if waited > patience:
+                    break
+        net.load_state_dict(state)
         net.eval()
-        vp = predict([d for d in val if len(d["zones"])], net)
-        vy = np.array([d["mass"] for d in val if len(d["zones"])])
-        vloss = float(np.mean((np.log(vp + 1.0) - np.log(vy)) ** 2))
-        if vloss < best - 1e-5:
-            best, best_state, waited = vloss, {k: v.clone() for k, v in net.state_dict().items()}, 0
-        else:
-            waited += 1
-            if waited > 40:
-                break
-    net.load_state_dict(best_state)
-    net.eval()
-    return (lambda items: predict(items, net)), {"base_density": float(np.exp(base)), "best_val_logmse": best, "epochs": epoch + 1,
-                                                  "net": net, "mean": mean, "std": std, "base": base, "log_measure_mean": lm_mean, "log_measure_std": lm_std}
+        nets.append(net)
+        best_vals.append(best)
+    info.update({"nets": nets, "best_val_logmse": float(np.mean(best_vals)), "seeds": seeds, "hidden": hidden})
+    return (lambda items: run(nets, items)), info
 
 
 def fit(args) -> None:
@@ -242,11 +259,12 @@ def fit(args) -> None:
         predict, info = fit_density(tr, va, column, use_emb)
         results[name] = {**evaluate(predict(te), np.array([d["mass"] for d in te])),
                          **{k: v for k, v in info.items() if isinstance(v, (int, float))}}
-        if name.startswith("M1") and "net" in info:
+        if name.startswith("M1") and "nets" in info:
             import torch
-            torch.save({"format": "ardane-grams-head-v1", "state_dict": info["net"].state_dict(), "mean": info["mean"], "std": info["std"],
-                        "base_log_density": info["base"], "log_area_mean": info["log_measure_mean"], "log_area_std": info["log_measure_std"],
-                        "unit": "g/cm2", "pool": "cls_mean"}, out.with_suffix(".M1.pt"))
+            torch.save({"format": "ardane-grams-head-v2", "state_dicts": [n.state_dict() for n in info["nets"]], "norm": info["norm"],
+                        "base_log_density": info["base"], "hidden": info["hidden"], "unit": "g/cm2", "pool": "cls_mean",
+                        "features": "empreinte normalisée + [log surface zone, log surface plat, log nb zones, part, confiance] (zone_features)"},
+                       out.with_suffix(".M1.pt"))
         print(name, json.dumps(results[name], ensure_ascii=False))
     summary = {"train": len(train), "val": len(val), "test": len(test), "tolerance": TOLERANCE, "results": results,
                "note": "échelle connue (caméra fixe) ; dans l'app l'échelle vient de l'assiette : erreur supplémentaire à mesurer sur repas pesés"}

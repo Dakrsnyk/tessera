@@ -26,7 +26,7 @@ sys.path[:0] = [str(HERE), str(HERE / "segmenter"), str(ML)]
 
 NOTEBOOK = HERE / "segmenter" / "ardane-segmenter.ipynb"
 NOTEBOOK_OVERRIDES = {   # appliqués juste après la cellule de réglages du carnet
-    "SIZES": ["nano"], "EPOCHS_MAX": 2, "MIN_EPOCHS": 1, "BATCH": {"nano": 2, "small": 2}, "VALID_MAX": 6, "BENCH_TRAIN": 8, "BENCH_VALID": 4,
+    "SIZES": [os.environ.get("ARDANE_SMOKE_SIZE", "nano")], "EPOCHS_MAX": 2, "MIN_EPOCHS": 1, "BATCH": {"nano": 2, "small": 2}, "VALID_MAX": 6, "BENCH_TRAIN": 8, "BENCH_VALID": 4,
     "LIMITS": {"train": 16, "valid": 6, "test": 6}, "TRAIN_WORKERS": 0, "EVAL_EXPORT_RESERVE_S": 120,
 }
 

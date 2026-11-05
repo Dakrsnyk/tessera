@@ -358,7 +358,7 @@ EXTERNAL = [  # name, kind, what it is, how a file shows it uses it (regex on it
     ("Base alimentaire CNF", "data", "Fichier canadien sur les éléments nutritifs embarqué, ~5 600 aliments (App/Resources/cnf-foods.json).", r"cnf-foods"),
     ("Base nutritionnelle FCÉN + USDA", "data", "SQLite en lecture seule de 8 926 aliments, FCÉN 2026 (Licence du gouvernement ouvert – Canada) et USDA SR Legacy (CC0), une source par valeur (App/Resources/ardane-food.sqlite).", r"ardane-food\.sqlite"),
     ("SQLite", "framework", "Lecture de la base nutritionnelle embarquée.", r"^import SQLite3"),
-    ("Modèles de reconnaissance des aliments", "data", "Segmenteur RF-DETR-Seg (où sont les aliments) et classifieur DINOv2 affiné (quel aliment), Core ML int8, entraînés sur MyFoodRepo (CC BY 4.0), avec la carte relue classes -> aliments d'Ardane (App/Resources/Models/).", r"ArdaneFood(Segmenter|Classifier|ClassMap)"),
+    ("Modèles de reconnaissance des aliments", "data", "Segmenteur RF-DETR-Seg (où sont les aliments) et classifieur DINOv2 ViT-B affiné (quel aliment ; 346 classes regroupées par aliment d'Ardane, dont poutine, pâté chinois et tourtière), Core ML int8, entraînés sur MyFoodRepo (CC BY 4.0) et des photos libres de droits (CC0, CC BY), avec la carte relue classes -> aliments d'Ardane (App/Resources/Models/).", r"ArdaneFood(Segmenter|Classifier|ClassMap)"),
     ("Core ML", "framework", "Exécute les modèles du scanner sur l'iPhone.", r"^import CoreML"),
     ("Demos des exercices", "data", "Démonstrations animées des 163 exercices (App/Resources/ExerciseDemos.json).", r"\"ExerciseDemos\""),
 ]

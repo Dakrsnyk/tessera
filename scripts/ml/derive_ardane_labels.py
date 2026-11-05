@@ -150,6 +150,10 @@ def derive(root: Path, src: str, dst: str, class_map: Path, quebec: Path | None)
     if quebec is not None:
         with (quebec / "quebec_crops.csv").open(encoding="utf-8") as f:
             qc_rows = list(csv.DictReader(f))
+        missing = [r["crop"] for r in qc_rows if not (quebec / r["crop"]).exists()]
+        if missing:                                  # ex. archive du jeu Kaggle non décompressée : on s'arrête AVANT le GPU
+            listing = sorted(p.name for p in quebec.iterdir())
+            raise SystemExit(f"{len(missing)} recadrages québécois absents sous {quebec} (ex. {missing[:3]}) ; contenu : {listing}")
         for i, (qc, (name, food)) in enumerate(sorted(QUEBEC.items())):
             if food in rep_of_food:                     # l'aliment existe déjà dans MyFoodRepo : les photos rejoignent ce groupe
                 groups[rep_of_food[food]["name"]]["members"].append(name)

@@ -102,8 +102,10 @@ def main() -> None:
     group_of = {name: f"classe:{name}" for name in cls_names}      # sans class_map : chaque classe est son propre groupe
     if args.class_map:
         from class_matching import read_class_map
+        # Toutes les lignes, pas seulement les classes du classifieur : un classifieur aux classes regroupées par aliment (v4) ne
+        # garde qu'un nom par groupe, alors que la vérité terrain garde les 498 classes fines.
         for row in read_class_map(Path(args.class_map)):
-            if row["classe"] in group_of and row["id_ardane"]:
+            if row["id_ardane"]:
                 group_of[row["classe"]] = row["id_ardane"]
     groups = sorted(set(group_of.values()))
     to_group = np.zeros((len(cls_names), len(groups)), dtype=np.float32)
