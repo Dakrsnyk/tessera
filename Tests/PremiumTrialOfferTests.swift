@@ -59,6 +59,35 @@ final class PremiumTrialOfferTests: XCTestCase {
         XCTAssertNil(PremiumStore.trialDays(unit: .day, value: 0))
     }
 
+    func testRestoreSaysWhatHappenedAndStaysQuietWhenCancelled() {
+        XCTAssertNil(PremiumStore.message(for: .cancelled), "La connexion annulée n'affiche rien")
+        let shown = [PremiumStore.RestoreOutcome.restored, .notFound, .failed].map { PremiumStore.message(for: $0) }
+        XCTAssertTrue(shown.allSatisfy { $0?.isEmpty == false })
+        XCTAssertEqual(Set(shown.compactMap { $0 }).count, 3, "« Aucun achat » et « App Store injoignable » ne se confondent plus")
+    }
+
+    func testProductTextsFitTheLimitsOfAppStoreConnect() throws {
+        let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+            .appendingPathComponent("Config/Ardane.storekit")
+        guard let data = try? Data(contentsOf: url) else { throw XCTSkip("Config/Ardane.storekit is not readable from here") }
+        let root = try XCTUnwrap(try JSONSerialization.jsonObject(with: data) as? [String: Any])
+        var products = root["nonRenewingSubscriptions"] as? [[String: Any]] ?? []
+        products += root["products"] as? [[String: Any]] ?? []
+        for group in root["subscriptionGroups"] as? [[String: Any]] ?? [] {
+            products += (group["subscriptions"] as? [[String: Any]] ?? []).map { $0.merging(["isSubscription": true]) { a, _ in a } }
+        }
+        XCTAssertEqual(products.count, 3)
+        for product in products {
+            let limit = product["isSubscription"] as? Bool == true ? 55 : 45
+            for localization in product["localizations"] as? [[String: Any]] ?? [] {
+                let name = localization["displayName"] as? String ?? ""
+                let text = localization["description"] as? String ?? ""
+                XCTAssertTrue((2...30).contains(name.count), "nom « \(name) »")
+                XCTAssertLessThanOrEqual(text.count, limit, "description « \(text) »")
+            }
+        }
+    }
+
     func testTheFreePlanStillKeepsThreeWidgets() {
         XCTAssertEqual(AppModel.freeDesignLimit, 3)
     }

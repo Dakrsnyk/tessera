@@ -36,7 +36,7 @@ final class AppearanceAndStoreTests: XCTestCase {
 
     func testAppIconsComeWithTheirPictureAndTheLogoFirst() {
         let icons = AppIconChoice.all
-        XCTAssertEqual(icons.first?.asset, AppIconChoice.main, "Saphir, the main icon (the logo), comes first")
+        XCTAssertEqual(icons.first?.asset, AppIconChoice.main, "The main icon (the logo, « Turquoise » since 2026-11-05) comes first")
         XCTAssertNil(icons.first?.alternateName)
         XCTAssertEqual(Set(icons.map(\.asset)).count, icons.count)
         for icon in icons.dropFirst() {
