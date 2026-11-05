@@ -21,7 +21,9 @@ aux seuils 0,30 (zones sûres) et 0,20 (avec les « peut-être ») :
   Learn-then-Test choisi sur une moitié des photos et vérifié sur l'autre, nature des erreurs à haute confiance.
 
 Première mesure (2026-11-04, 1 000 photos de test MyFoodRepo, segmenteur passage 2 + classifieur v4) : précision 70,2 %, rappel
-57,1 %, F1 63,0 % ; IoU des retrouvés 0,862. Aucun fichier du dépôt n'est écrit par ce script.
+57,1 %, F1 63,0 % ; IoU des retrouvés 0,862. Le tableau « Seuil 0.80 » correspond à `ScanRecap.autoAddThreshold` de l'app
+(lignes ajoutées seules, build 330) ; « Seuil du segmenteur 0.2 » aux zones « peut-être » (`ScannerModelLogic.tentativeThreshold`).
+Aucun fichier du dépôt n'est écrit par ce script.
 """
 from __future__ import annotations
 
