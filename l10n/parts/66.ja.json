@@ -1,0 +1,11 @@
+{
+ "Glisse une carte pour la déplacer. + et − changent sa taille.": "カードをドラッグして移動します。+ と − でサイズを変えられます。",
+ "Cartes masquées et disposition automatique": "非表示のカードと自動レイアウト",
+ "Déplacer avant": "前へ移動",
+ "Déplacer après": "後ろへ移動",
+ "Agrandir": "拡大",
+ "Rétrécir": "縮小",
+ "Agrandir %@": "%@を拡大",
+ "Rétrécir %@": "%@を縮小",
+ "Retirer %@ de Mon Quotidien": "%@をマイデイから外す"
+}

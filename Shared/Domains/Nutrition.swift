@@ -687,8 +687,10 @@ struct NutritionState: Codable, Hashable {
     var scanLearning = ScanLearning()
     /// Visual fingerprints (never photos) of the meals validated from a photo, on this iPhone only.
     var mealMemory = MealMemory()
+    /// Dish analyses (photos) started on a free plan; see `PhotoScanQuota`. Old data without it counts 0.
+    var photoScansUsed = 0
 
-    enum CodingKeys: String, CodingKey { case goals, entries, favorites, customFoods, recentFoods, savedMeals, scanLearning, mealMemory }
+    enum CodingKeys: String, CodingKey { case goals, entries, favorites, customFoods, recentFoods, savedMeals, scanLearning, mealMemory, photoScansUsed }
 
     init() {}
 
@@ -702,6 +704,7 @@ struct NutritionState: Codable, Hashable {
         savedMeals = c.value(.savedMeals, [])
         scanLearning = c.value(.scanLearning, ScanLearning())
         mealMemory = c.value(.mealMemory, MealMemory())
+        photoScansUsed = max(0, c.value(.photoScansUsed, 0))
     }
 
     mutating func log(_ food: FoodItem, grams: Double, meal: MealType, at date: Date = Date(), origin: EntryOrigin? = nil) {

@@ -9,7 +9,11 @@ struct BusinessSourcesCard: View {
     @State private var connecting = false
     @State private var importing = false
     @State private var preview: BusinessImportPreview?
-    @State private var importError: String?
+    /// What the import has to say: why a file could not be read, or what it added (one alert for both).
+    @State private var notice: ImportNotice?
+    @State private var paywall: PaywallContext?
+    /// When the person chose a file: the import sheet, once closed, says what this import did.
+    @State private var importStartedAt: Date?
     @State private var isSyncing = false
     @State private var confirmsDisconnect = false
 
@@ -81,27 +85,40 @@ struct BusinessSourcesCard: View {
                 }
                 MiniDivider()
                 Button {
-                    importing = true
+                    // Importing a file is Premium (decided on 2026-11-05); Stripe and typing by hand stay free.
+                    if model.isPremium { importing = true } else { paywall = .businessImport }
                 } label: {
                     MiniRow(symbol: "doc.badge.arrow.up", colorHex: accentHex, title: tr("Importer un fichier CSV"),
                             detail: connections.lastImport.map { tr("Dernier : \($0.fileName), \(Fmt.shortDay($0.date))") }
                                 ?? tr("Export de Stripe, Shopify, ta banque ou un tableur"))
+                        .overlay(alignment: .topTrailing) {
+                            if !model.isPremium { PremiumBadge(compact: true).padding(.top, 6) }
+                        }
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("business-import")
+                // On the row itself, apart from the sheets of the card: the picker, the preview sheet and the alert
+                // never share one presenting view.
+                .fileImporter(isPresented: $importing, allowedContentTypes: [.commaSeparatedText, .tabSeparatedText, .plainText]) { result in
+                    importStartedAt = Date()
+                    // The picker is still closing when it answers: a sheet or an alert asked for at that moment is
+                    // dropped by iOS without a word (« nothing happens »). What the file holds is shown once it is gone.
+                    Task { @MainActor in
+                        try? await Task.sleep(for: .milliseconds(600))
+                        read(result)
+                    }
+                }
             }
             MiniFootnote(text: tr("Les données vont directement de ton iPhone à Stripe, sans passer par Ardane. Une vente déjà importée n'est jamais ajoutée deux fois."))
         }
         .task { await StripeSync.syncIfDue(model: model) }
         .sheet(isPresented: $connecting) { StripeConnectSheet() }
-        .sheet(item: $preview) { BusinessImportSheet(preview: $0) }
-        .fileImporter(isPresented: $importing, allowedContentTypes: [.commaSeparatedText, .tabSeparatedText, .plainText]) { result in
-            read(result)
-        }
-        .alert(tr("Import impossible"), isPresented: Binding(get: { importError != nil }, set: { if !$0 { importError = nil } })) {
-            Button(tr("OK")) { importError = nil }
+        .sheet(item: $preview, onDismiss: sayWhatWasImported) { BusinessImportSheet(preview: $0) }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
+        .alert(notice?.title ?? "", isPresented: Binding(get: { notice != nil }, set: { if !$0 { notice = nil } })) {
+            Button(tr("OK")) { notice = nil }
         } message: {
-            Text(importError ?? "")
+            Text(notice?.message ?? "")
         }
         .confirmationDialog(tr("Déconnecter Stripe ?"), isPresented: $confirmsDisconnect, titleVisibility: .visible) {
             Button(tr("Déconnecter et garder les ventes")) { StripeSync.disconnect(model: model, removingEntries: false) }
@@ -137,30 +154,84 @@ struct BusinessSourcesCard: View {
         return sentences.isEmpty ? nil : sentences.joined(separator: " ")
     }
 
+    private func fail(_ message: String) {
+        notice = ImportNotice(title: tr("Import impossible"), message: message)
+    }
+
+    /// After the import sheet: what this import added, so the person sees it worked even when the lines fall in
+    /// another period than the one on screen. Nothing when the sheet was closed without importing.
+    private func sayWhatWasImported() {
+        guard let started = importStartedAt, let record = model.business.connections.lastImport, record.date >= started else { return }
+        importStartedAt = nil
+        notice = ImportNotice(title: tr("Import terminé"), message: BusinessImportSummary.text(record))
+    }
+
     private func read(_ result: Result<URL, Error>) {
-        guard case let .success(url) = result else { return }
+        let url: URL
+        switch result {
+        case let .success(chosen): url = chosen
+        case let .failure(error):
+            // Closing the picker is not an error; anything else is said, never swallowed.
+            if (error as? CocoaError)?.code != .userCancelled { fail(tr("Le fichier n'a pas pu être lu.")) }
+            return
+        }
         let scoped = url.startAccessingSecurityScopedResource()
         defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        // A file far bigger than any statement is not read at all (it could exhaust the memory).
+        if let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize, size > 20_000_000 {
+            fail(tr("Ce fichier est trop gros pour être lu."))
+            return
+        }
         // Excel's « Texte Unicode » is UTF-16 (it starts with its byte order mark).
         let isUTF16 = { (data: Data) in data.starts(with: [0xFF, 0xFE]) || data.starts(with: [0xFE, 0xFF]) }
         guard let data = try? Data(contentsOf: url),
               let text = (isUTF16(data) ? String(data: data, encoding: .utf16) : nil)
                 ?? String(data: data, encoding: .utf8) ?? String(data: data, encoding: .windowsCP1252) else {
-            importError = tr("Le fichier n'a pas pu être lu.")
+            fail(tr("Le fichier n'a pas pu être lu."))
             return
         }
         do {
             let batch = try BusinessCSV.parse(text)
             preview = BusinessImportPreview(fileName: url.lastPathComponent, batch: batch)
         } catch BusinessCSV.ImportError.missingColumns {
-            importError = tr("Aucune colonne de date ou de montant n'a été trouvée. Le fichier doit avoir au moins une date et un montant par ligne.")
+            fail(tr("Aucune colonne de date ou de montant n'a été trouvée. Le fichier doit avoir au moins une date et un montant par ligne."))
         } catch {
-            importError = tr("Le fichier est vide.")
+            fail(tr("Le fichier est vide."))
         }
     }
 }
 
 /// A file read, before its sales are added.
+/// One alert of the import card: an error, or what an import did.
+struct ImportNotice: Equatable {
+    let title: String
+    let message: String
+}
+
+/// « 12 nouvelles opérations · 2 opérations mises à jour · 3 déjà présentes · 1 ligne ignorée ».
+enum BusinessImportSummary {
+    static func text(_ record: BusinessConnections.ImportRecord) -> String {
+        let result = record.result
+        var parts = [Fmt.plural(result.added, tr("nouvelle opération"), tr("nouvelles opérations"))]
+        if result.updated > 0 { parts.append(Fmt.plural(result.updated, tr("opération mise à jour"), tr("opérations mises à jour"))) }
+        if result.unchanged > 0 { parts.append(Fmt.plural(result.unchanged, tr("déjà présente"), tr("déjà présentes"))) }
+        if record.skipped > 0 { parts.append(Fmt.plural(record.skipped, tr("ligne ignorée"), tr("lignes ignorées"))) }
+        return parts.joined(separator: " · ")
+    }
+}
+
+extension PaywallContext {
+    /// Importing a file of sales and costs (Business).
+    static var businessImport: PaywallContext {
+        PaywallContext(
+            symbol: "doc.badge.arrow.up",
+            title: tr("Importer un fichier, avec Premium"),
+            detail: tr("Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La connexion Stripe et la saisie à la main restent gratuites."),
+            perk: .smart
+        )
+    }
+}
+
 struct BusinessImportPreview: Identifiable {
     let id = UUID()
     let fileName: String

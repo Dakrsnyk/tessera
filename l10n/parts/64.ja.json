@@ -1,0 +1,12 @@
+{
+ "Ce fichier est trop gros pour être lu.": "このファイルは大きすぎて読み込めません。",
+ "Import terminé": "読み込み完了",
+ "opération mise à jour": "件の取引を更新",
+ "opérations mises à jour": "件の取引を更新",
+ "déjà présente": "件は登録済み",
+ "déjà présentes": "件は登録済み",
+ "ligne ignorée": "行をスキップ",
+ "lignes ignorées": "行をスキップ",
+ "Importer un fichier, avec Premium": "Premiumでファイルを読み込む",
+ "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La connexion Stripe et la saisie à la main restent gratuites.": "Stripe、Shopify、銀行、表計算のエクスポートから売上と経費をまとめて読み込めます。Stripeとの接続と手入力は引き続き無料です。"
+}

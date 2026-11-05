@@ -52,6 +52,25 @@ enum ScheduleImportMerge {
         }
         return (result, added)
     }
+
+    /// A weekly class: what an import creates (a course slot that comes back every week). Events, work and
+    /// appointments, and one-off entries, are never one.
+    static func isWeeklyClass(_ slot: ClassSlot) -> Bool {
+        slot.kind == .course && slot.date == nil
+    }
+
+    /// Whether the schedule already holds weekly classes (then the person is asked: add or replace).
+    static func hasSchedule(_ state: StudentState) -> Bool {
+        state.slots.contains(where: isWeeklyClass)
+    }
+
+    /// Removes the weekly classes of the schedule, then adds the imported ones. Courses (with their grades, exams and
+    /// assignments), events, work, appointments and one-off entries are kept as they are.
+    static func replace(_ imported: [ImportedSlot], in state: StudentState) -> (state: StudentState, added: Int) {
+        var cleared = state
+        cleared.slots.removeAll(where: isWeeklyClass)
+        return merge(imported, into: cleared)
+    }
 }
 
 /// « Importer mon horaire »: a photo or a PDF of the timetable is read on the iPhone, the classes found are
@@ -78,6 +97,7 @@ struct ScheduleImportView: View {
     @State private var photoItem: PhotosPickerItem?
     @State private var choosesFile = false
     @State private var readTask: Task<Void, Never>?
+    @State private var asksAddOrReplace = false
 
     private var accentHex: String { MiniApp.planning.colorHex }
     private var accent: Color { Color(hex: accentHex) }
@@ -85,12 +105,16 @@ struct ScheduleImportView: View {
     var body: some View {
         NavigationStack {
             Group {
+                if !model.isPremium {
+                    lockedStep
+                } else {
                 switch stage {
                 case .pick: pickStep
                 case .reading: readingStep
                 case .failed(let unreadable): failedStep(unreadable: unreadable)
                 case .review: reviewStep
                 case .done(let added, let skipped): doneStep(added: added, skipped: skipped)
+                }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -120,6 +144,18 @@ struct ScheduleImportView: View {
 
     // MARK: Steps
 
+    /// Without Premium: reading a timetable is locked (typing classes by hand stays free).
+    private var lockedStep: some View {
+        ScrollView {
+            PremiumLockCard(
+                symbol: PaywallContext.scheduleImport.symbol,
+                title: PaywallContext.scheduleImport.title,
+                message: PaywallContext.scheduleImport.detail
+            )
+            .padding(16)
+        }
+    }
+
     /// 1. The source: a photo (system picker) or a PDF (Files).
     private var pickStep: some View {
         ScrollView {
@@ -142,7 +178,7 @@ struct ScheduleImportView: View {
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("schedule-import-pdf")
-                MiniFootnote(text: tr("Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est supprimé de ton horaire actuel."))
+                MiniFootnote(text: tr("Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est changé sans ton accord."))
             }
             .padding(16)
         }
@@ -261,7 +297,11 @@ struct ScheduleImportView: View {
         .scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom) {
             MiniActionButton(title: tr("Ajouter à mon horaire (\(count))"), symbol: "calendar.badge.plus", colorHex: accentHex) {
-                save()
+                if ScheduleImportMerge.hasSchedule(model.student) {
+                    asksAddOrReplace = true
+                } else {
+                    save(replacing: false)
+                }
             }
             .disabled(count == 0)
             .opacity(count == 0 ? 0.5 : 1)
@@ -269,6 +309,13 @@ struct ScheduleImportView: View {
             .padding(.vertical, 10)
             .background(.ultraThinMaterial)
             .accessibilityIdentifier("schedule-import-add")
+        }
+        .confirmationDialog(tr("Un horaire est déjà dans ton planning"), isPresented: $asksAddOrReplace, titleVisibility: .visible) {
+            Button(tr("Ajouter à mon horaire")) { save(replacing: false) }
+            Button(tr("Remplacer l'ancien"), role: .destructive) { save(replacing: true) }
+            Button(tr("Annuler"), role: .cancel) {}
+        } message: {
+            Text(tr("Remplacer retire les anciens cours de l'horaire. Tes tâches et tes événements restent."))
         }
     }
 
@@ -484,12 +531,12 @@ struct ScheduleImportView: View {
         }
     }
 
-    /// Adds the ticked classes to the schedule (courses made when missing, nothing erased, no duplicate).
-    private func save() {
+    /// Adds the ticked classes to the schedule (courses made when missing, no duplicate), or replaces the old weekly classes.
+    private func save(replacing: Bool) {
         let wanted = ScheduleImportMerge.importable(slots).count
         var added = 0
         model.update(\.student) { state in
-            let merged = ScheduleImportMerge.merge(slots, into: state)
+            let merged = replacing ? ScheduleImportMerge.replace(slots, in: state) : ScheduleImportMerge.merge(slots, into: state)
             state = merged.state
             added = merged.added
         }

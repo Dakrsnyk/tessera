@@ -262,11 +262,15 @@ enum ImageStore {
         }
     }
 
+    /// Only a name the store gives itself: a name read from a file (an imported backup) can never reach another
+    /// file of the App Group (« ../designs.json »).
     static func image(named name: String) -> UIImage? {
-        UIImage(contentsOfFile: directory.appendingPathComponent(name).path)
+        guard isStoredName(name) else { return nil }
+        return UIImage(contentsOfFile: directory.appendingPathComponent(name).path)
     }
 
     static func delete(named name: String) {
+        guard isStoredName(name) else { return }
         try? FileManager.default.removeItem(at: directory.appendingPathComponent(name))
     }
 

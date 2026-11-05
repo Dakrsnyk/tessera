@@ -49,6 +49,8 @@ struct ClassSlot: Codable, Hashable, Identifiable {
     var courseID: UUID?
     /// ISO weekday, 1 = lundi … 7 = dimanche.
     var weekday: Int
+    /// Other ISO weekdays of a weekly entry (« tous les lundis et mercredis »): `weekday` plus these. Empty = one day.
+    var extraWeekdays: [Int] = []
     var startMinute: Int
     var endMinute: Int
     /// The place (a classroom for a class).
@@ -67,7 +69,7 @@ struct ClassSlot: Codable, Hashable, Identifiable {
     /// Never saved: the title of the exception applied by `resolved(on:)`, shown instead of the course's name.
     var titleOverride: String = ""
 
-    enum CodingKeys: String, CodingKey { case id, courseID, weekday, startMinute, endMinute, room, kind, title, date, skippedDays, colorHex, overrides }
+    enum CodingKeys: String, CodingKey { case id, courseID, weekday, extraWeekdays, startMinute, endMinute, room, kind, title, date, skippedDays, colorHex, overrides }
 
     init(courseID: UUID?, weekday: Int, startMinute: Int, endMinute: Int, room: String = "", kind: ScheduleKind = .course, title: String = "", date: Date? = nil) {
         self.courseID = courseID
@@ -86,6 +88,7 @@ struct ClassSlot: Codable, Hashable, Identifiable {
         id = try c.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
         courseID = try c.decodeIfPresent(UUID.self, forKey: .courseID)
         weekday = try c.decode(Int.self, forKey: .weekday)
+        extraWeekdays = WeekdayRepeat.normalized((try? c.decodeIfPresent([Int].self, forKey: .extraWeekdays)) ?? [])
         startMinute = try c.decode(Int.self, forKey: .startMinute)
         endMinute = try c.decode(Int.self, forKey: .endMinute)
         room = try c.decodeIfPresent(String.self, forKey: .room) ?? ""
@@ -101,7 +104,7 @@ struct ClassSlot: Codable, Hashable, Identifiable {
     /// (a day it was cancelled included).
     func falls(on day: Date) -> Bool {
         if let date { return DateMath.isSameDay(date, day) }
-        return weekday == FitnessMath.isoWeekday(day)
+        return WeekdayRepeat.occurs(on: day, weekdays: [weekday] + extraWeekdays)
     }
 
     /// Whether a weekly entry is cancelled on that day.

@@ -47,6 +47,9 @@ enum SecretStore {
 /// accepts a secret key (sk_), which could change the account.
 @MainActor
 enum StripeSync {
+    /// No disk cache and no cookies: the sales of the business never stay on the iPhone outside the app's own data.
+    private static let session = URLSession(configuration: .ephemeral)
+
     static let keychainAccount = "stripe.restrictedKey"
     /// The first sync reads a year back; the next ones from the day before the last transaction read.
     static let firstSyncDays = 365
@@ -199,7 +202,7 @@ enum StripeSync {
         let data: Data
         let response: URLResponse
         do {
-            (data, response) = try await URLSession.shared.data(for: request)
+            (data, response) = try await session.data(for: request)
         } catch {
             throw Failure.network
         }

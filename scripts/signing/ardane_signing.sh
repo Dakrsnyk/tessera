@@ -69,14 +69,15 @@ case "${1:-}" in
     [ -n "$WIDGETS_PROFILE" ] || { echo "Profil de com.dakrsnyk.ardane.widgets introuvable dans $DIR"; exit 1; }
 
     b64() { base64 -w0 "$1" 2>/dev/null || base64 "$1" | tr -d '\n'; }
-    gh secret set APPLE_TEAM_ID -R "$REPO" --body "$TEAM_ID"
-    gh secret set DIST_P12_BASE64 -R "$REPO" --body "$(b64 dist.p12)"
-    gh secret set DIST_P12_PASSWORD -R "$REPO" --body "$P12_PASSWORD"
-    gh secret set PROFILE_APP_BASE64 -R "$REPO" --body "$(b64 "$APP_PROFILE")"
-    gh secret set PROFILE_WIDGETS_BASE64 -R "$REPO" --body "$(b64 "$WIDGETS_PROFILE")"
-    gh secret set ASC_KEY_ID -R "$REPO" --body "$KEY_ID"
-    gh secret set ASC_ISSUER_ID -R "$REPO" --body "$ISSUER_ID"
-    gh secret set ASC_KEY_P8_BASE64 -R "$REPO" --body "$(b64 "$P8")"
+    # Values go through standard input (printf is a shell builtin): never on a command line other processes can read.
+    printf '%s' "$TEAM_ID" | gh secret set APPLE_TEAM_ID -R "$REPO"
+    b64 dist.p12 | gh secret set DIST_P12_BASE64 -R "$REPO"
+    printf '%s' "$P12_PASSWORD" | gh secret set DIST_P12_PASSWORD -R "$REPO"
+    b64 "$APP_PROFILE" | gh secret set PROFILE_APP_BASE64 -R "$REPO"
+    b64 "$WIDGETS_PROFILE" | gh secret set PROFILE_WIDGETS_BASE64 -R "$REPO"
+    printf '%s' "$KEY_ID" | gh secret set ASC_KEY_ID -R "$REPO"
+    printf '%s' "$ISSUER_ID" | gh secret set ASC_ISSUER_ID -R "$REPO"
+    b64 "$P8" | gh secret set ASC_KEY_P8_BASE64 -R "$REPO"
     rm -f dist.p12 dist.pem
     echo
     gh secret list -R "$REPO"

@@ -1,0 +1,12 @@
+{
+ "Ce fichier est trop gros pour être lu.": "Diese Datei ist zu groß, um gelesen zu werden.",
+ "Import terminé": "Import abgeschlossen",
+ "opération mise à jour": "Buchung aktualisiert",
+ "opérations mises à jour": "Buchungen aktualisiert",
+ "déjà présente": "bereits vorhanden",
+ "déjà présentes": "bereits vorhanden",
+ "ligne ignorée": "Zeile übersprungen",
+ "lignes ignorées": "Zeilen übersprungen",
+ "Importer un fichier, avec Premium": "Datei importieren, mit Premium",
+ "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La connexion Stripe et la saisie à la main restent gratuites.": "Importiere die Verkäufe und Ausgaben eines Exports von Stripe, Shopify, deiner Bank oder einer Tabelle auf einmal. Die Stripe-Verbindung und die Eingabe von Hand bleiben kostenlos."
+}

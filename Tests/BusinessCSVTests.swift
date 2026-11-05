@@ -57,6 +57,34 @@ final class BusinessCSVTests: XCTestCase {
         XCTAssertEqual(converted.expenses.first?.original?.currency, "EUR")
     }
 
+    /// The test file given to the person (`Tests/Fixtures/Entreprise`): BOM, « , », French types and statuses.
+    func testTheEnterpriseTestFileIsRead() throws {
+        let text = "\u{FEFF}" + """
+        id,Date,Type,Description,Montant,Statut
+        T-001,2026-11-01,Vente,Commande boutique,120.00,Réussi
+        T-002,2026-11-02,Vente,Commande en ligne,80.50,Réussi
+        T-015,2026-10-15,Dépense,Hébergement,45.00,Réussi
+        T-016,2026-10-15,Dépense,Publicité,300.00,Réussi
+        T-018,2026-10-20,Vente,Paiement refusé,75.25,Échoué
+        T-040,,Vente,Ligne sans date,50.00,Réussi
+        """ + "\n"
+        let batch = try BusinessCSV.parse(text)
+        XCTAssertEqual(sum(batch.sales.map(\.amount)), 200.5, accuracy: 0.001, "the two sales, not the failed one")
+        XCTAssertEqual(sum(batch.expenses.map(\.amount)), 345, accuracy: 0.001)
+        XCTAssertEqual(batch.skipped, 2, "the failed payment and the line without a date")
+    }
+
+    /// What the card says once a file is imported, so an import never looks like nothing happened.
+    func testTheImportSummarySaysEachCount() {
+        let record = BusinessConnections.ImportRecord(fileName: "ventes.csv", date: Date(),
+                                                      result: BusinessMergeResult(added: 12, updated: 2, unchanged: 0), skipped: 1)
+        let text = BusinessImportSummary.text(record)
+        XCTAssertTrue(text.hasPrefix("12 "))
+        XCTAssertEqual(text.components(separatedBy: " · ").count, 3, "added, updated, skipped; nothing about the unchanged ones when there are none")
+        let nothing = BusinessConnections.ImportRecord(fileName: "ventes.csv", date: Date(), result: BusinessMergeResult(), skipped: 0)
+        XCTAssertTrue(BusinessImportSummary.text(nothing).hasPrefix("0 "), "an import that added nothing says so")
+    }
+
     func testAFileImportedTheWrongWayRoundBeforeIsSetRight() throws {
         let batch = try BusinessCSV.parse(reported)
         // What an older version did: every line a sale, with the same ids.

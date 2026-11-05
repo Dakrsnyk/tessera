@@ -1,0 +1,12 @@
+{
+ "Ce fichier est trop gros pour être lu.": "This file is too large to be read.",
+ "Import terminé": "Import complete",
+ "opération mise à jour": "transaction updated",
+ "opérations mises à jour": "transactions updated",
+ "déjà présente": "already there",
+ "déjà présentes": "already there",
+ "ligne ignorée": "row skipped",
+ "lignes ignorées": "rows skipped",
+ "Importer un fichier, avec Premium": "Import a file, with Premium",
+ "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La connexion Stripe et la saisie à la main restent gratuites.": "Import all the sales and costs of an export from Stripe, Shopify, your bank or a spreadsheet in one go. Connecting Stripe and typing by hand stay free."
+}

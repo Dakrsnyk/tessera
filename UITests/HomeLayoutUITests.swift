@@ -12,6 +12,31 @@ extension ProfileUITests {
         assertHomeStaysFixed(language: "de", locale: "de_DE")
     }
 
+    /// Edit mode of « Mon Quotidien » (long press, like the Home screen of iOS): the « OK » and the round
+    /// « − » of the wide Nutrition card show, the size button flips to « + » once tapped, « OK » ends the mode.
+    func testDailyEditModeResizesAndEnds() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA", "-screenshotScreen", "home"]
+        app.launch()
+        addTeardownBlock { app.terminate() }
+
+        let card = app.descendants(matching: .any)["daily-nutrition"].firstMatch
+        XCTAssertTrue(card.waitForExistence(timeout: 12), "Carte Nutrition absente")
+        card.press(forDuration: 1.2)
+
+        let done = app.buttons["daily-edit-done"]
+        XCTAssertTrue(done.waitForExistence(timeout: 5), "L'appui long n'ouvre pas le mode édition")
+        let shrink = app.buttons["daily-shrink-nutrition"]
+        XCTAssertTrue(shrink.waitForExistence(timeout: 5), "Pas de « − » sur la carte large")
+        shrink.tap()
+        XCTAssertTrue(app.buttons["daily-grow-nutrition"].waitForExistence(timeout: 5), "Le « + » n'apparaît pas une fois la carte rétrécie")
+
+        done.tap()
+        XCTAssertTrue(done.waitForNonExistence(timeout: 5), "« OK » ne ferme pas le mode édition")
+        XCTAssertFalse(app.buttons["daily-grow-nutrition"].exists, "Le « + » reste hors du mode édition")
+    }
+
     private func assertHomeStaysFixed(language: String, locale: String, file: StaticString = #filePath, line: UInt = #line) {
         continueAfterFailure = false
         let app = XCUIApplication()

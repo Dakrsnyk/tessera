@@ -352,6 +352,11 @@ struct ProfileView: View {
     private func readBackup(at url: URL) {
         let access = url.startAccessingSecurityScopedResource()
         defer { if access { url.stopAccessingSecurityScopedResource() } }
+        // A backup with its photos stays far below this; a bigger file is not read (it could exhaust the memory).
+        if let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize, size > 300_000_000 {
+            backupMessage = tr("Ce fichier est trop gros pour être lu.")
+            return
+        }
         do {
             pendingRestore = try DataBackup.read(Data(contentsOf: url))
         } catch DataBackup.Failure.newerVersion {

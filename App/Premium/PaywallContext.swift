@@ -52,6 +52,24 @@ extension PaywallContext {
         )
     }
 
+    /// Reading a timetable from a photo or a PDF (Planning). Typing classes and events by hand stays free.
+    static var scheduleImport: PaywallContext {
+        PaywallContext(
+            symbol: "calendar.badge.plus",
+            title: tr("Importer mon horaire"),
+            detail: tr("Premium lit ton horaire à partir d'une photo ou d'un PDF, sur ton iPhone. Ajouter tes cours et tes événements à la main reste gratuit.")
+        )
+    }
+
+    /// The free dish analyses are used up (barcodes and the food search stay free).
+    static var photoScanLimit: PaywallContext {
+        PaywallContext(
+            symbol: "camera.viewfinder",
+            title: tr("Analyses de plat illimitées"),
+            detail: tr("Tes \(PhotoScanQuota.freeLimit) analyses de plat gratuites sont utilisées. Les codes-barres et la recherche d'aliments restent toujours gratuits.")
+        )
+    }
+
     /// The months before, in Finances.
     static var financesHistory: PaywallContext {
         PaywallContext(

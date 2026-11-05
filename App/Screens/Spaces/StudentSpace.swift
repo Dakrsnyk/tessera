@@ -224,12 +224,12 @@ struct SlotEditor: View {
     /// An occurrence of a saved weekly series, opened from its day: it can change or go alone.
     private var isOccurrence: Bool {
         guard isSaved, base.date == nil, slot.date == nil, let day else { return false }
-        return FitnessMath.isoWeekday(day) == base.weekday
+        return base.falls(on: day)
     }
 
     /// Only what an exception can hold changed (title, times, place, color), not the type, the course or the day.
     private var changesOnlyThisKind: Bool {
-        guard isOccurrence, slot.kind == opening.kind, slot.courseID == opening.courseID, slot.weekday == opening.weekday else { return false }
+        guard isOccurrence, slot.kind == opening.kind, slot.courseID == opening.courseID, slot.weekday == opening.weekday, slot.extraWeekdays == opening.extraWeekdays else { return false }
         return slot.title != opening.title || slot.startMinute != opening.startMinute || slot.endMinute != opening.endMinute
             || slot.room != opening.room || slot.colorHex != opening.colorHex
     }
@@ -274,10 +274,9 @@ struct SlotEditor: View {
                 DatePicker(tr("Date"), selection: date, displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)
             } else {
-                Picker(tr("Jour"), selection: $slot.weekday) {
-                    ForEach(1...7, id: \.self) { day in
-                        Text([tr("Lundi"), tr("Mardi"), tr("Mercredi"), tr("Jeudi"), tr("Vendredi"), tr("Samedi"), tr("Dimanche")][day - 1]).tag(day)
-                    }
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(tr("Répéter"))
+                    WeekdayPills(days: repeatDays)
                 }
             }
             MinuteTimePicker(title: tr("Début"), minutes: Binding(get: { slot.startMinute }, set: { start in
@@ -301,7 +300,7 @@ struct SlotEditor: View {
                 .accessibilityIdentifier("slot-conflict")
             }
             // A weekly entry opened from one day: that day only, it doesn't take place.
-            if slot.date == nil, let day, FitnessMath.isoWeekday(day) == slot.weekday {
+            if slot.date == nil, let day, slot.falls(on: day) {
                 Toggle(tr("Annulé le \(Fmt.longDay(day))"), isOn: cancelled(on: day))
                     .accessibilityIdentifier("slot-cancel-once")
             }
@@ -375,6 +374,18 @@ struct SlotEditor: View {
         })
     }
 
+    /// The days of a weekly entry as the pills show them; none on = the entry's own day stays (and no extra one).
+    private var repeatDays: Binding<[Int]> {
+        Binding(get: { WeekdayRepeat.normalized([slot.weekday] + slot.extraWeekdays) }, set: { days in
+            let list = WeekdayRepeat.normalized(days)
+            guard let first = list.first else { slot.extraWeekdays = []; return }
+            // The day it was on stays its main day when still chosen.
+            let main = list.contains(slot.weekday) ? slot.weekday : first
+            slot.weekday = main
+            slot.extraWeekdays = list.filter { $0 != main }
+        })
+    }
+
     private var date: Binding<Date> {
         Binding(get: { slot.date ?? day ?? Date() }, set: { slot.date = DateMath.startOfDay($0) })
     }
@@ -409,6 +420,7 @@ struct SlotEditor: View {
             saved.kind = slot.kind
             saved.courseID = slot.courseID
             saved.weekday = slot.weekday
+            saved.extraWeekdays = slot.date == nil ? slot.extraWeekdays : []
             saved.date = slot.date
             if slot.title != opening.title { saved.title = slot.title }
             if slot.startMinute != opening.startMinute { saved.startMinute = slot.startMinute }

@@ -37,6 +37,7 @@ struct FoodScanView: View {
     @State private var camera = ScanCameraHandle()
     @State private var pickedPhoto: PhotosPickerItem?
     @State private var isCapturing = false
+    @State private var paywall: PaywallContext?
 
     private enum PhotoProblem {
         case nothingFound
@@ -88,7 +89,24 @@ struct FoodScanView: View {
                     pickedPhoto = nil
                     Task { await analyze(item) }
                 }
+                .sheet(item: $paywall) { PaywallView(context: $0) }
         }
+    }
+
+    /// Dish analyses are free up to `PhotoScanQuota.freeLimit`, then Premium. Barcodes and the search are never limited.
+    private var canAnalyzeDish: Bool {
+        PhotoScanQuota.canAnalyze(used: model.nutrition.photoScansUsed, isPremium: model.isPremium)
+    }
+
+    /// Free analyses left, shown only to someone without Premium.
+    private var freeAnalysesLeft: Int? {
+        model.isPremium ? nil : PhotoScanQuota.remaining(used: model.nutrition.photoScansUsed)
+    }
+
+    private var freeAnalysesText: String? {
+        guard let left = freeAnalysesLeft else { return nil }
+        if left == 0 { return tr("Analyses de plat gratuites utilisées") }
+        return left == 1 ? tr("Encore 1 analyse de plat gratuite") : tr("Encore \(left) analyses de plat gratuites")
     }
 
     private var title: String {
@@ -201,14 +219,16 @@ struct FoodScanView: View {
     private var controls: some View {
         VStack(spacing: 10) {
             HStack {
-                PhotosPicker(selection: $pickedPhoto, matching: .images) {
-                    Image(systemName: "photo.on.rectangle")
-                        .font(.title3)
-                        .foregroundStyle(Color.primary)
-                        .frame(width: 52, height: 52)
-                        .background(.regularMaterial, in: Circle())
+                if canAnalyzeDish {
+                    PhotosPicker(selection: $pickedPhoto, matching: .images) {
+                        galleryLabel
+                    }
+                    .accessibilityLabel(tr("Choisir une photo"))
+                } else {
+                    // Free analyses used up: the gallery opens the paywall instead of the picker.
+                    Button { paywall = .photoScanLimit } label: { galleryLabel }
+                        .accessibilityLabel(tr("Choisir une photo"))
                 }
-                .accessibilityLabel(tr("Choisir une photo"))
                 Spacer()
                 Button {
                     Task { await shoot() }
@@ -233,6 +253,13 @@ struct FoodScanView: View {
                 .foregroundStyle(Color.white)
                 .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
                 .accessibilityHidden(true)
+            if let text = freeAnalysesText {
+                Text(text)
+                    .font(.caption)
+                    .foregroundStyle(Color.white.opacity(0.85))
+                    .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
+                    .accessibilityIdentifier("scan-free-left")
+            }
             // No barcode, or a product the database doesn't know: the search is one tap away.
             Button {
                 onFinish(.search)
@@ -245,6 +272,14 @@ struct FoodScanView: View {
             }
         }
         .padding(.bottom, 12)
+    }
+
+    private var galleryLabel: some View {
+        Image(systemName: "photo.on.rectangle")
+            .font(.title3)
+            .foregroundStyle(Color.primary)
+            .frame(width: 52, height: 52)
+            .background(.regularMaterial, in: Circle())
     }
 
     // MARK: Barcode
@@ -296,6 +331,10 @@ struct FoodScanView: View {
     @MainActor
     private func shoot() async {
         guard !isCapturing, case .camera = stage else { return }
+        guard canAnalyzeDish else {
+            paywall = .photoScanLimit
+            return
+        }
         isCapturing = true
         defer { isCapturing = false }
         let image: UIImage
@@ -325,6 +364,13 @@ struct FoodScanView: View {
     /// dropped as soon as the analysis is over.
     @MainActor
     private func analyze(_ image: UIImage) async {
+        guard canAnalyzeDish else {
+            stage = .camera
+            paywall = .photoScanLimit
+            return
+        }
+        // One analysis is counted when it starts (a barcode never is).
+        if !model.isPremium { model.update(\.nutrition) { $0.photoScansUsed += 1 } }
         stage = .analyzing
         do {
             let analysis = try await MealAnalysisConfig.makeAnalyzer().analyzeMeal(image)

@@ -57,6 +57,17 @@ struct DailySection: View {
     @Environment(Router.self) private var router
     @State private var editingLayout = false
     @State private var addingCategory = false
+    // Edit mode (long press): the cards wiggle, one is dragged, + and - resize.
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var editing = false
+    /// The order while a card is dragged (saved at the drop); nil otherwise.
+    @State private var liveOrder: [String]?
+    @State private var draggingID: String?
+    @State private var dragOffset: CGSize = .zero
+    /// Where the finger took the dragged card, from its top left corner.
+    @State private var grab: CGPoint = .zero
+    @State private var frames: [String: CGRect] = [:]
+    @State private var lastSwap = Date.distantPast
     private var steps: StepCounter { .shared }
 
     var body: some View {
@@ -65,8 +76,9 @@ struct DailySection: View {
         // The categories of the person's interests (a dotted « Ajouter » card while empty), the ones with data
         // and the ones they added; the others are offered by the « + » at the bottom.
         let automatic = DailyCategories.home(model: model, now: now, steps: steps.status == .allowed ? steps.stepsToday : nil)
-        let tiles = DailyBrief.arranged(automatic, order: settings.dailyOrder, hidden: settings.dailyHidden)
-        let addable = DailyCategories.addable(shown: tiles)
+        let arrangedTiles = DailyBrief.arranged(automatic, order: settings.dailyOrder, hidden: settings.dailyHidden)
+        let tiles = DailyLayoutRules.ordered(arrangedTiles, by: liveOrder)
+        let addable = DailyCategories.addable(shown: arrangedTiles)
         // Real figures entered by the person (invitations to fill in a category don't count).
         let hasData = automatic.contains { tile in
             switch tile {
@@ -76,38 +88,41 @@ struct DailySection: View {
             }
         }
         VStack(alignment: .leading, spacing: 12) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text(tr("Mon Quotidien").uppercased())
-                    .font(.caption.weight(.bold))
-                    .tracking(1.1)
-                    .foregroundStyle(Color.accentColor)
-                Text(DailyBrief.Moment(now).title)
-                    .font(.title2.weight(.bold))
-                    .accessibilityAddTraits(.isHeader)
-                    .accessibilityIdentifier("daily-title")
+            HStack(alignment: .top, spacing: 8) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(tr("Mon Quotidien").uppercased())
+                        .font(.caption.weight(.bold))
+                        .tracking(1.1)
+                        .foregroundStyle(Color.accentColor)
+                    Text(DailyBrief.Moment(now).title)
+                        .font(.title2.weight(.bold))
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityIdentifier("daily-title")
+                }
+                Spacer(minLength: 0)
+                if editing { editBar }
+            }
+            if editing {
+                Text(tr("Glisse une carte pour la déplacer. + et − changent sa taille."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             // Nothing entered yet: Mon Quotidien asks for the information, the invitations follow.
             if !hasData {
                 emptyState
             }
             if !tiles.isEmpty {
-                VStack(spacing: 12) {
-                    ForEach(Array(DailyBrief.rows(tiles, wide: settings.dailyWide).enumerated()), id: \.offset) { pair in
-                        HStack(alignment: .top, spacing: 12) {
-                            ForEach(pair.element) { tile in
-                                // Two cards side by side: each lays itself out for half the width.
-                                let actions = cardActions(tile)
-                                DailyTileView(tile: tile)
-                                    .frame(maxWidth: .infinity)
-                                    .environment(\.dailyCompact, pair.element.count > 1)
-                                    .environment(\.dailyCardActions, actions)
-                                    // Long press: take the card off Mon Quotidien, or arrange the cards.
-                                    .contextMenu { DailyCardMenuItems(actions: actions) }
-                            }
-                        }
-                        .fixedSize(horizontal: false, vertical: true)
+                let wides = tiles.map { DailyLayoutRules.size(of: $0, wide: settings.dailyWide) == .wide }
+                let paired = Set(DailyLayoutRules.rows(wides: wides).filter { $0.count > 1 }.flatMap { $0 }.map { tiles[$0].id })
+                let movable = tiles.filter(DailyLayoutRules.isMovable).map(\.id)
+                DailyGridLayout(wides: wides) {
+                    ForEach(tiles) { tile in
+                        gridCard(tile, compact: paired.contains(tile.id), movable: movable, wide: settings.dailyWide)
                     }
                 }
+                .coordinateSpace(name: "daily-grid")
+                .onPreferenceChange(DailyFramesKey.self) { frames = $0 }
             }
             // The categories not on Mon Quotidien (never chosen, or removed): one dotted « + », gone once all are there.
             if !addable.isEmpty {
@@ -116,6 +131,12 @@ struct DailySection: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("daily-section")
+        // Editing: a tap on an empty zone ends the mode (the cards and buttons take their own taps first).
+        .background {
+            if editing {
+                Color.clear.contentShape(Rectangle()).onTapGesture { finishEditing() }
+            }
+        }
         .task { await steps.refresh() }
         .sheet(isPresented: $editingLayout) {
             DailyLayoutEditor(available: automatic)
@@ -125,15 +146,145 @@ struct DailySection: View {
         }
     }
 
-    /// What the long-press menu of a card does. Removing hides the card for good (even once it holds data) and
-    /// puts it back in the list of the « + »: the mini-app's data is never touched.
+    /// The « OK » (ends the mode) and the way to the full editor (hidden cards, automatic layout).
+    private var editBar: some View {
+        HStack(spacing: 6) {
+            Button {
+                editingLayout = true
+            } label: {
+                Image(systemName: "slider.horizontal.3")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(tr("Cartes masquées et disposition automatique")))
+            .accessibilityIdentifier("daily-edit-more")
+            Button {
+                finishEditing()
+            } label: {
+                Text(tr("OK"))
+                    .font(.subheadline.weight(.bold))
+                    .foregroundStyle(.onAccent)
+                    .padding(.horizontal, 16)
+                    .frame(minHeight: 44)
+                    .background(Color.accentColor, in: Capsule())
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("daily-edit-done")
+        }
+    }
+
+    private var moveAnimation: Animation {
+        reduceMotion ? .easeInOut(duration: 0.2) : .spring(response: 0.35, dampingFraction: 0.82)
+    }
+
+    private func enterEditing() {
+        guard !editing else { return }
+        Haptics.tap()
+        withAnimation(moveAnimation) { editing = true }
+    }
+
+    private func finishEditing() {
+        withAnimation(moveAnimation) {
+            editing = false
+            draggingID = nil
+            dragOffset = .zero
+            liveOrder = nil
+        }
+    }
+
+    /// What a card does in edit mode and for VoiceOver. Every change is saved at once, in the same settings as the
+    /// layout editor.
+    private func gridCard(_ tile: DailyBrief.Tile, compact: Bool, movable: [String], wide: [String: Bool]) -> some View {
+        let actions = cardActions(tile)
+        let dragging = draggingID == tile.id
+        let canMove = DailyLayoutRules.isMovable(tile)
+        let handlers = DailyEditHandlers(
+            grow: { resize(tile, to: .wide) },
+            shrink: { resize(tile, to: .half) },
+            moveBefore: { moveByRank(tile, movable: movable, by: -1) },
+            moveAfter: { moveByRank(tile, movable: movable, by: 1) },
+            remove: actions.remove,
+            organize: actions.organize,
+            drag: { drag in if canMove { dragChanged(tile, drag, movable: movable) } },
+            drop: { dropCard() }
+        )
+        return DailyEditableCard(
+            tile: tile, title: DailyLayoutEditor.info(tile).title, editing: editing, isDragging: dragging,
+            dragOffset: dragging ? dragOffset : .zero,
+            canGrow: DailyLayoutRules.canGrow(tile, wide: wide), canShrink: DailyLayoutRules.canShrink(tile, wide: wide),
+            canMoveBefore: DailyLayoutRules.canMove(movable, id: tile.id, by: -1),
+            canMoveAfter: DailyLayoutRules.canMove(movable, id: tile.id, by: 1),
+            handlers: handlers
+        ) {
+            // Two cards side by side: each lays itself out for half the width.
+            DailyTileView(tile: tile)
+                .frame(maxWidth: .infinity)
+                .environment(\.dailyCompact, compact)
+                .environment(\.dailyCardActions, actions)
+        }
+    }
+
+    private func resize(_ tile: DailyBrief.Tile, to size: DailyLayoutRules.Size) {
+        Haptics.tap()
+        withAnimation(moveAnimation) {
+            model.updateSettings { $0.dailyWide = DailyLayoutRules.resized($0.dailyWide, tile: tile, to: size) }
+        }
+    }
+
+    private func moveByRank(_ tile: DailyBrief.Tile, movable: [String], by delta: Int) {
+        guard DailyLayoutRules.canMove(movable, id: tile.id, by: delta) else { return }
+        Haptics.tap()
+        let ids = DailyLayoutRules.moved(movable, id: tile.id, by: delta)
+        withAnimation(moveAnimation) { model.updateSettings { $0.dailyOrder = ids } }
+    }
+
+    /// The finger moves the card (the long press worked): it follows the finger, and takes the place of the card
+    /// it is over, the others slide aside.
+    private func dragChanged(_ tile: DailyBrief.Tile, _ drag: DragGesture.Value?, movable: [String]) {
+        enterEditing()
+        guard let drag, let layout = frames[tile.id] else { return }
+        if draggingID != tile.id {
+            draggingID = tile.id
+            liveOrder = movable
+            grab = CGPoint(x: drag.startLocation.x - layout.minX, y: drag.startLocation.y - layout.minY)
+            dragOffset = .zero
+            Haptics.tap()
+        }
+        dragOffset = CGSize(width: drag.location.x - grab.x - layout.minX, height: drag.location.y - grab.y - layout.minY)
+        guard Date().timeIntervalSince(lastSwap) > 0.25,
+              let order = liveOrder,
+              let target = DailyLayoutRules.target(at: drag.location, frames: frames, excluding: tile.id),
+              order.contains(target) else { return }
+        let next = DailyLayoutRules.moved(order, id: tile.id, onto: target)
+        guard next != order else { return }
+        lastSwap = Date()
+        withAnimation(moveAnimation) { liveOrder = next }
+    }
+
+    /// The finger leaves: the order is saved, the card settles in its place.
+    private func dropCard() {
+        guard draggingID != nil else { return }
+        let order = liveOrder
+        Haptics.tap()
+        withAnimation(moveAnimation) {
+            if let order { model.updateSettings { $0.dailyOrder = order } }
+            draggingID = nil
+            dragOffset = .zero
+            liveOrder = nil
+        }
+    }
+
+    /// What the card's menu and VoiceOver actions do. Removing hides the card for good (even once it holds data) and
+    /// puts it back in the list of the « + »: the mini-app's data is never touched. Organizing starts the edit mode.
     private func cardActions(_ tile: DailyBrief.Tile) -> DailyCardActions {
         DailyCardActions(
             remove: {
                 Haptics.tap()
                 model.updateSettings { DailyCategories.remove(tileID: tile.id, in: &$0) }
             },
-            organize: { editingLayout = true }
+            organize: { enterEditing() }
         )
     }
 
@@ -177,7 +328,7 @@ extension EnvironmentValues {
     }
 }
 
-/// What the long-press menu of a card of Mon Quotidien does (set by `DailySection` on each card).
+/// What the menu and the VoiceOver actions of a card of Mon Quotidien do (set by `DailySection` on each card).
 struct DailyCardActions {
     var remove: () -> Void
     var organize: () -> Void
@@ -195,8 +346,8 @@ extension EnvironmentValues {
     }
 }
 
-/// The entries of a card's long-press menu: take it off Mon Quotidien (its data stays in the mini-app),
-/// or open the editor to order and size the cards.
+/// The entries of a card's menu (the finished session only): take it off Mon Quotidien (its data stays in
+/// the mini-app), or start the edit mode to order and size the cards.
 struct DailyCardMenuItems: View {
     let actions: DailyCardActions
 
@@ -567,6 +718,31 @@ private struct NutritionDayTile: View {
     }
 }
 
+/// The long-press menu of today's finished session: delete it, or arrange the cards. Without a finished session there
+/// is no menu, so the long press reaches « Mon Quotidien » (edit mode).
+private struct WorkoutMenu: ViewModifier {
+    let doneTodayID: UUID?
+    @Binding var deleting: UUID?
+    let actions: DailyCardActions?
+
+    @ViewBuilder func body(content: Content) -> some View {
+        if let id = doneTodayID {
+            content.contextMenu {
+                Button(role: .destructive) {
+                    deleting = id
+                } label: {
+                    Label(tr("Supprimer la séance"), systemImage: "trash")
+                }
+                if let actions {
+                    DailyCardMenuItems(actions: actions)
+                }
+            }
+        } else {
+            content
+        }
+    }
+}
+
 private struct WorkoutDayTile: View {
     let workout: DailyBrief.Workout
     @Environment(AppModel.self) private var model
@@ -642,19 +818,8 @@ private struct WorkoutDayTile: View {
                 }
             }
         }
-        // This menu is the deepest one: it carries the card's own entries too.
-        .contextMenu {
-            if let id = doneTodayID {
-                Button(role: .destructive) {
-                    deleting = id
-                } label: {
-                    Label(tr("Supprimer la séance"), systemImage: "trash")
-                }
-            }
-            if let cardActions {
-                DailyCardMenuItems(actions: cardActions)
-            }
-        }
+        // A menu only for a session to delete (it takes the long press); otherwise the long press starts the edit mode.
+        .modifier(WorkoutMenu(doneTodayID: doneTodayID, deleting: $deleting, actions: cardActions))
         .confirmsWorkoutDeletion($deleting)
         .accessibilityIdentifier("daily-workout")
     }
