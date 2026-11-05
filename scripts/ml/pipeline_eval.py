@@ -76,6 +76,10 @@ def main() -> None:
                     help="un ou plusieurs seuils (une seule prédiction au plus bas, puis filtrage) ; choisir sur la VALIDATION, pas sur le test")
     ap.add_argument("--margin", type=float, default=0.10)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--tta", choices=("aucune", "miroir", "miroir-marge"), default="aucune",
+                    help="moyenne des probabilités sur plusieurs vues du recadrage : + son miroir horizontal ; + un recadrage plus large "
+                         "(marge --tta-margin). Coûte 2 ou 4 passages du classifieur par zone, à reproduire dans l'app si c'est retenu.")
+    ap.add_argument("--tta-margin", type=float, default=0.20)
     ap.add_argument("--class-map", help="class_map.csv relue : mesure aussi au niveau des aliments d'Ardane (probabilités additionnées)")
     ap.add_argument("--out", required=True, help="rapport JSON ; le Markdown est écrit à côté")
     args = ap.parse_args()
@@ -112,13 +116,22 @@ def main() -> None:
     for k, name in enumerate(cls_names):
         to_group[k, groups.index(group_of[name])] = 1.0
 
-    def classify(crops):
-        """Par recadrage : (3 classes fines, 3 groupes « aliment d'Ardane » après addition des probabilités)."""
+    def run_net(views):
+        batch = torch.from_numpy(np.stack([np.asarray(c, dtype=np.float32) for c in views])).permute(0, 3, 1, 2).contiguous()
+        with torch.no_grad():
+            return net(batch).numpy()
+
+    def classify(crops, wide=None):
+        """Par recadrage : (3 classes fines, 3 groupes « aliment d'Ardane » après addition des probabilités).
+        Avec --tta : probabilités moyennées sur le recadrage, son miroir horizontal et, si `wide` est donné, le recadrage large et son miroir."""
         if not crops:
             return []
-        batch = torch.from_numpy(np.stack([np.asarray(c, dtype=np.float32) for c in crops])).permute(0, 3, 1, 2).contiguous()
-        with torch.no_grad():
-            probs = net(batch).numpy()
+        views = [list(crops)]
+        if args.tta != "aucune":
+            views.append([np.ascontiguousarray(np.asarray(c)[:, ::-1]) for c in crops])
+            if wide is not None:
+                views += [list(wide), [np.ascontiguousarray(np.asarray(c)[:, ::-1]) for c in wide]]
+        probs = np.mean([run_net(v) for v in views], axis=0)
         merged = probs @ to_group
         return [([cls_names[k] for k in np.argsort(-p)[:3]], [groups[k] for k in np.argsort(-q)[:3]]) for p, q in zip(probs, merged)]
 
@@ -151,7 +164,8 @@ def main() -> None:
         gt_masks = [coco.annToMask(a).astype(bool) for a in anns]
         with Image.open(path) as im:
             image = im.convert("RGB")
-            gt_top = classify([crop_square(image, tuple(a["bbox"]), args.margin, IMAGE_SIZE) for a in anns])
+            gt_top = classify([crop_square(image, tuple(a["bbox"]), args.margin, IMAGE_SIZE) for a in anns],
+                              [crop_square(image, tuple(a["bbox"]), args.tta_margin, IMAGE_SIZE) for a in anns] if args.tta == "miroir-marge" else None)
             cache = {}           # masque prédit -> 3 propositions du classifieur (un masque n'est classé qu'une fois pour tous les seuils)
             for t in thresholds:
                 keep = [k for k in range(len(masks)) if scores[k] >= t]
@@ -161,7 +175,8 @@ def main() -> None:
                 todo = [keep[m["pred_index"]] for m in matches if m["matched"] and keep[m["pred_index"]] not in cache]
                 boxes = [(k, mask_bbox(masks[k])) for k in todo]
                 boxes = [(k, b) for k, b in boxes if b is not None]
-                for (k, _), top in zip(boxes, classify([crop_square(image, b, args.margin, IMAGE_SIZE) for _, b in boxes])):
+                wide = [crop_square(image, b, args.tta_margin, IMAGE_SIZE) for _, b in boxes] if args.tta == "miroir-marge" else None
+                for (k, _), top in zip(boxes, classify([crop_square(image, b, args.margin, IMAGE_SIZE) for _, b in boxes], wide)):
                     cache[k] = top
                 for a, m, (top_gt, _) in zip(anns, matches, gt_top):
                     truth = cat_name[a["category_id"]]
@@ -191,7 +206,8 @@ def main() -> None:
         return out
 
     images = len({f["image_id"] for f in foods[thresholds[0]]})
-    report = {"images": images, "test_dir": str(test_dir), "thresholds": thresholds, "margin": args.margin,
+    report = {"images": images, "test_dir": str(test_dir), "thresholds": thresholds, "margin": args.margin, "tta": args.tta,
+              "tta_margin": args.tta_margin if args.tta == "miroir-marge" else None,
               "segmenter": args.segmenter, "head": args.head, "backbone_weights": args.backbone_weights, "class_map": args.class_map,
               "by_threshold": {str(t): {"all": summary(foods[t], sum(n_pred[t].values()), sum(n_matched[t].values())),
                                         "by_items": {b: {"images": len({f["image_id"] for f in foods[t] if f["bucket"] == b}),
