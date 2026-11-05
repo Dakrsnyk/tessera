@@ -229,13 +229,16 @@ struct ScanRecap: Hashable {
         return lines.first { $0.food.id == food.id }?.id ?? line.id
     }
 
-    /// A food proposed from a photo, in the portion proposed, as an estimate.
+    /// A food proposed from a photo, in the portion proposed, as an estimate. The quantity is rounded to the gram:
+    /// a median of habits or a table portion can carry decimals (« 209,95 g ») that mean nothing on a photo. The
+    /// same rounded value is the proposed one (`initialGrams`), so keeping it is not taken for a correction.
     @discardableResult
     mutating func add(_ proposal: MealProposal) -> UUID {
-        add(
-            proposal.food, grams: proposal.grams, isEstimate: proposal.isEstimate, confidence: proposal.confidence,
+        let grams = Self.clamped(proposal.grams.rounded())
+        return add(
+            proposal.food, grams: grams, isEstimate: proposal.isEstimate, confidence: proposal.confidence,
             detectedLabels: proposal.label.map { [$0] } ?? [], detectedFoodID: proposal.detectedFoodID ?? proposal.food.id,
-            initialGrams: Self.clamped(proposal.grams), usesHabit: proposal.usesHabit
+            initialGrams: grams, usesHabit: proposal.usesHabit
         )
     }
 
@@ -255,7 +258,7 @@ struct ScanRecap: Hashable {
         return add(
             food, grams: nil, isEstimate: true, confidence: nil,
             detectedLabels: item.label.map { [$0] } ?? [], detectedFoodID: item.detectedFoodID ?? item.food.id,
-            initialGrams: Self.clamped(item.grams), usesHabit: false
+            initialGrams: Self.clamped(item.grams.rounded()), usesHabit: false
         )
     }
 

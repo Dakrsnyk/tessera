@@ -666,26 +666,25 @@ struct CustomFoodEditor: View {
 
 // MARK: - Barcode scanner
 
-/// The aiming rectangle (photo format 3:4, 16 pt margins, under the navigation bar), the camera dimmed
-/// around it; what is inside is what gets analysed (also used by `FoodScanView`). The height is capped
-/// to leave the bottom controls (about 200 pt) free, with 16 pt between.
+/// The aiming rectangle (photo format 3:4, 16 pt margins), the camera dimmed around it; what is inside is
+/// what gets analysed (also used by `FoodScanView`). It is laid out in the area the overlay gets, which is
+/// already the space between the navigation bar and the bottom controls (`safeAreaInset`): as tall as the
+/// photo format allows there, 16 pt from each edge. The veil alone goes on under the bottom controls, so the
+/// camera is dimmed evenly down to the bottom of the screen.
 struct ScanFrame: View {
     private let margin: CGFloat = 16
-    private let controlsHeight: CGFloat = 200
     private let radius: CGFloat = 28
 
     var body: some View {
         GeometryReader { geo in
             let width = max(geo.size.width - margin * 2, 120)
-            let room = geo.size.height - margin - controlsHeight - margin
-            let height = max(min(width * 4 / 3, room), 160)
+            let height = max(min(width * 4 / 3, geo.size.height - margin * 2), 160)
             let rect = CGRect(x: (geo.size.width - width) / 2, y: margin, width: width, height: height)
             ZStack {
-                Path { path in
-                    path.addRect(CGRect(origin: .zero, size: geo.size))
-                    path.addRoundedRect(in: rect, cornerSize: CGSize(width: radius, height: radius), style: .continuous)
-                }
-                .fill(Color.black.opacity(0.30), style: FillStyle(eoFill: true))
+                // Only the bottom edge goes further: the top-left corner stays the one of `geo`, so `rect` holds.
+                ScanVeil(hole: rect, radius: radius)
+                    .fill(Color.black.opacity(0.30), style: FillStyle(eoFill: true))
+                    .ignoresSafeArea(edges: .bottom)
                 ScanCorners(radius: radius)
                     .stroke(Color.white, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
                     .frame(width: rect.width, height: rect.height)
@@ -788,6 +787,19 @@ struct ScanFrameScreenshotStage: View {
     }
 }
 #endif
+
+/// The dimmed camera around the aiming rectangle: all of its own frame, less `hole` (even-odd fill).
+private struct ScanVeil: Shape {
+    let hole: CGRect
+    let radius: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.addRect(rect)
+        path.addRoundedRect(in: hole, cornerSize: CGSize(width: radius, height: radius), style: .continuous)
+        return path
+    }
+}
 
 /// The four rounded corners of the scanning square.
 private struct ScanCorners: Shape {

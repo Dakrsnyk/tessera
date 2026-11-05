@@ -450,22 +450,27 @@ private struct ScanLineRow: View {
                     Text(line.food.displayName)
                         .font(.body.weight(.semibold))
                         .fixedSize(horizontal: false, vertical: true)
-                    HStack(spacing: 8) {
+                    // Each tag keeps its natural width and goes to the next line when the row is full, instead of
+                    // squeezing « Estimation » letter by letter (long words, large text, « Ton habitude »).
+                    FlowLayout(spacing: 8) {
                         ScanBadge(isEstimate: line.isEstimate, source: line.food.source)
                         if line.usesHabit {
                             Text(tr("Ton habitude"))
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
+                                .padding(.vertical, 3)
                         }
                         if let word = line.confidenceWord {
                             Text(word)
                                 .font(.caption)
                                 .foregroundStyle(line.isLowConfidence ? Color.orange : Color.secondary)
+                                .padding(.vertical, 3)
                         }
                     }
                     .accessibilityElement(children: .combine)
                 }
-                Spacer(minLength: 0)
+                // All the width left of the menu: a Spacer beside it could take half of the row.
+                .frame(maxWidth: .infinity, alignment: .leading)
                 Menu {
                     Button(action: onReplace) {
                         Label(tr("Remplacer"), systemImage: "arrow.triangle.2.circlepath")

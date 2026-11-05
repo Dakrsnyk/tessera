@@ -83,6 +83,19 @@ final class ScanPendingTests: XCTestCase {
         XCTAssertTrue(recap.pending.isEmpty)
     }
 
+    func testAPhotoQuantityIsRoundedToTheGramAndNotTakenForACorrection() throws {
+        // Une médiane d'habitudes donnait « 209,95 g » dans le récapitulatif.
+        let recap = ScanRecap(photoProposals: [proposal("habit", grams: 209.95, confidence: 0.3, habit: true)])
+        let line = try XCTUnwrap(recap.lines.first)
+        XCTAssertEqual(line.grams, 210)
+        XCTAssertEqual(line.initialGrams, 210, "Garder la quantité proposée n'est pas une correction")
+
+        var waiting = ScanRecap(photoProposals: [proposal("weak", grams: 87.4, confidence: 0.6)])
+        let item = try XCTUnwrap(waiting.pending.first)
+        let id = try XCTUnwrap(waiting.confirm(item.id))
+        XCTAssertEqual(waiting.lines.first { $0.id == id }?.grams, 87)
+    }
+
     func testConfirmOfAnUnknownItemChangesNothing() {
         var recap = ScanRecap(photoProposals: [proposal("weak", confidence: 0.6)])
         XCTAssertNil(recap.confirm(UUID()))
